@@ -14,6 +14,7 @@
 
 module Main (main) where
 
+import Gen.AST
 import           Control.Error
 import           Control.Lens              hiding ((<.>))
 import           Control.Monad.State
@@ -158,7 +159,7 @@ main = do
 
             return s
 
-        let libs = mergeLibraries _optVersions svcs
+        libs = mergeLibraries _optVersions <$> renderSchemas svcs
 
         void . counter "library" libs $ \l -> do
             say ("Creating " % stext % " package.") (_libTitle l)

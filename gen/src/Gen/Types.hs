@@ -1,10 +1,16 @@
-{-# LANGUAGE DataKinds         #-}
-{-# LANGUAGE DeriveGeneric     #-}
-{-# LANGUAGE KindSignatures    #-}
-{-# LANGUAGE LambdaCase        #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards   #-}
-{-# LANGUAGE TemplateHaskell   #-}
+{-# LANGUAGE DataKinds                  #-}
+{-# LANGUAGE DeriveFoldable             #-}
+{-# LANGUAGE DeriveFunctor              #-}
+{-# LANGUAGE DeriveGeneric              #-}
+{-# LANGUAGE DeriveTraversable          #-}
+{-# LANGUAGE FlexibleContexts           #-}
+{-# LANGUAGE FlexibleInstances          #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE KindSignatures             #-}
+{-# LANGUAGE LambdaCase                 #-}
+{-# LANGUAGE OverloadedStrings          #-}
+{-# LANGUAGE RecordWildCards            #-}
+{-# LANGUAGE TemplateHaskell            #-}
 
 -- Module      : Gen.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -22,8 +28,10 @@ import           Control.Applicative
 import           Data.Aeson                hiding (String)
 import           Data.Aeson.TH
 import qualified Data.Attoparsec.Text      as A
+import           Data.Bifunctor
 import           Data.Char
 import           Data.Function             (on)
+import           Data.Hashable
 import qualified Data.HashMap.Strict       as Map
 import           Data.List                 (groupBy, nub, sort)
 import           Data.List.NonEmpty        (NonEmpty (..), nonEmpty)
@@ -42,6 +50,8 @@ import           Gen.Types.NS
 import           GHC.Generics
 import           GHC.TypeLits
 import           Text.EDE                  (Template)
+
+newtype Fix f = Fix (f (Fix f))
 
 type Map      = Map.HashMap
 type Error    = LText.Text
@@ -128,6 +138,7 @@ deriveJSON (js "") ''Location
 data Info = Info
     { _infoDescription :: Maybe Text
     , _infoDefault     :: Maybe Text
+    , _infoRequired    :: Maybe Bool
     } deriving (Eq, Show)
 
 deriveJSON (js "_info") ''Info
@@ -135,50 +146,83 @@ deriveJSON (js "_info") ''Info
 data Lit
     = String
     | Boolean
+    | Integer
       deriving (Eq, Show)
 
 deriveToJSON (js "") ''Lit
 
-data Schema
-    = Obj  Info (Map Text Schema)
-    | Arr  Info Schema
+data Ref
+    = Opaque [Text]
+    | Direct Text
+      deriving (Eq, Show, Generic)
+
+instance Semigroup Ref where
+    a <> b = case (a, b) of
+        (Opaque xs, Opaque ys) -> Opaque (xs <> ys)
+        (Opaque xs, Direct y)  -> Opaque (xs <> [y])
+        (Direct x,  Opaque ys) -> Opaque (x : ys)
+        (Direct x,  Direct y)  -> Opaque [x, y]
+
+instance Hashable Ref
+
+instance FromJSON Ref where parseJSON = withText "ref" (pure . Direct)
+instance ToJSON   Ref where toJSON    = toJSON . refToText
+
+instance FromJSON a => FromJSON (Map Ref a) where
+    parseJSON = fmap (Map.fromList . map (first Direct) . Map.toList) . parseJSON
+
+instance ToJSON a => ToJSON (Map Ref a) where
+    toJSON = toJSON . Map.fromList . map (first refToText) . Map.toList
+
+refToText :: Ref -> Text
+refToText = \case
+    Opaque xs -> Text.intercalate "." xs
+    Direct n  -> n
+
+ref :: Format a (Ref -> a)
+ref = later (Build.fromText . refToText)
+
+data Schema a
+    = Obj  Info (Map Ref a)
+    | Arr  Info a
     | Enum Info [Text] [Text]
     | Lit  Info Lit
-    | Ref  Text
+    | Ref  Ref
     | Any' -- String or Number
-      deriving (Eq, Show)
+      deriving (Eq, Show, Functor, Foldable, Traversable)
 
-instance FromJSON Schema where
-    parseJSON = withObject "schema" $ \o -> schema o <|> ref o
+instance FromJSON (Fix Schema) where
+    parseJSON = withObject "schema" $ \o -> Fix <$> (schema o <|> ref o)
       where
         schema o = do
             i <- parseJSON (Object o)
-            t <- o .: "type" -- <|> fail ("Missing 'type' in " ++ show o)
-            case t of
+            o .: "type" >>= \case
                 "object"  -> Obj i <$> o .: "properties"
                 "array"   -> Arr i <$> o .: "items"
                 "string"  -> enum i o <|> pure (Lit i String)
                 "boolean" -> pure (Lit i Boolean)
                 "any"     -> pure Any'
-                _         -> fail $
-                    "Unable to parse Schema from: '" ++ Text.unpack t ++ "'"
+                e         -> fail $
+                    "Unable to parse Schema from: '" ++ Text.unpack e ++ "'"
 
         enum i o = Enum i <$> o .: "enum" <*> o .: "enumDescriptions"
-
-        ref o = Ref <$> o .: "$ref"
+        ref    o = Ref    <$> o .: "$ref"
 
 deriveToJSON (js "") ''Schema
 
-data Param = Param Location Schema
-    deriving (Eq, Show)
+data Param a = Param Location a
+    deriving (Eq, Show, Functor, Foldable, Traversable)
 
-instance FromJSON Param where
+instance FromJSON a => FromJSON (Param a) where
     parseJSON = withObject "parameter" $ \o ->
         Param <$> o .: "location" <*> parseJSON (Object o)
 
 deriveToJSON (js "") ''Param
 
-data Service = Service
+newtype Data = Data Rendered
+    deriving (Eq, Show, ToJSON)
+
+data Service a = Service
     { _svcLibrary           :: Text
     , _svcTitle             :: Text
     , _svcName              :: Text
@@ -196,39 +240,39 @@ data Service = Service
     , _svcServicePath       :: Text
     , _svcBatchPath         :: Text
     , _svcAuth              :: Maybe Object
-    , _svcParameters        :: Map Text Param
-    , _svcSchemas           :: Map Text Schema
+    , _svcParameters        :: Map Text (Param a)
+    , _svcSchemas           :: Map Text a
     , _svcResources         :: Object
-    } deriving (Show, Generic)
+    } deriving (Generic)
 
 deriveFromJSON (js "_svc") ''Service
 
-instance ToJSON Service where
+instance ToJSON (Service Data) where
     toJSON s = Object (x <> y)
       where
         Object x = genericToJSON (js "_svc") s
         Object y = object
-            [ "exposedModules"    .= exposedModules s
+            [ "exposedModules" .= exposedModules s
             ]
 
-svcAbbrev :: Service -> Text
+svcAbbrev :: Service a -> Text
 svcAbbrev = renameAbbrev . _svcTitle
 
-typeImports :: Service -> [NS]
+typeImports :: Service a -> [NS]
 typeImports _ = ["Network.Google.Prelude"]
 
-tocNS, typesNS :: Service -> NS
+tocNS, typesNS :: Service a -> NS
 tocNS s = NS ["Network", "Google", svcAbbrev s]
 typesNS = (<> "Types") . tocNS
 
-exposedModules :: Service -> [NS]
+exposedModules :: Service a -> [NS]
 exposedModules s = [tocNS s, typesNS s]
 
 data Library = Library
     { _libName     :: Text
     , _libTitle    :: Text
     , _libVersions :: Versions
-    , _libServices :: NonEmpty Service
+    , _libServices :: NonEmpty (Service Data)
     }
 
 instance ToJSON Library where
@@ -241,7 +285,7 @@ instance ToJSON Library where
         , "exposedModules"   .= concatMap exposedModules (NE.toList _libServices)
         ]
 
-mergeLibraries :: Versions -> [Service] -> [Library]
+mergeLibraries :: Versions -> [Service Data] -> [Library]
 mergeLibraries v = map go . groupBy (on (==) _svcLibrary)
   where
     go [x]    = mk x

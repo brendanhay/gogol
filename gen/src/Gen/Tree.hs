@@ -86,7 +86,7 @@ populate d Templates{..} l = (encodeString d :/) . dir lib <$> layout
         , file "README.md" readmeTemplate
         ]
 
-    service :: Service -> [DirTree (Either Error Touch)]
+    service :: Service Data -> [DirTree (Either Error Touch)]
     service s =
         [ write $ module' (tocNS s) mempty tocTemplate (pure svc)
         , dir (fromText (svcAbbrev s))
