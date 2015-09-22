@@ -17,47 +17,37 @@ import           Data.Aeson.Types
 import           Data.Bifunctor
 import           Data.ByteString      (ByteString)
 import qualified Data.ByteString.Lazy as LBS
-import           Data.Char
 import qualified Data.HashMap.Strict  as Map
 import           Data.List
 import qualified Data.Text.Lazy       as LText
+import           Gen.Formatting
+import           Gen.IO
+import           Gen.Types
 import qualified Text.EDE             as EDE
 
-decode :: (Monad m, FromJSON a) => ByteString -> ExceptT LText.Text m a
-decode = hoistEither . first LText.pack . eitherDecode' . LBS.fromStrict
+objectErr :: ToJSON a => String -> a -> Either Error Object
+objectErr n =
+      note (format ("Failed to extract JSON object from value " % string) n)
+    . EDE.fromValue
+    . toJSON
 
-js :: String -> Options
-js pre = defaultOptions
-    { constructorTagModifier = map toLower
-    , fieldLabelModifier = \s ->
-        let x:xs = drop (length pre) s
-         in toLower x : xs
-    }
+load :: MonadIO m => Path -> ExceptT Error m Object
+load = readBSFile >=> hoistEither . decode
 
--- optional :: MonadIO m => Path -> ExceptT Error m Object
--- optional f = readBSFile f `catchError` const (return "{}")
---     >>= hoistEither . decode
+decode :: ByteString -> Either Error Object
+decode = first LText.pack . eitherDecode' . LBS.fromStrict
 
--- objectErr :: ToJSON a => String -> a -> Either Error Object
--- objectErr n =
---       note (format ("Failed to extract JSON object from value " % string) n)
---     . EDE.fromValue
---     . toJSON
+parse :: FromJSON a => Object -> Either Error a
+parse = first LText.pack . parseEither parseJSON . Object
 
--- decode :: FromJByteString -> Either Error a
--- decode = first LText.pack . eitherDecode' . LBS.fromStrict
+merge :: [Object] -> Object
+merge = foldl' go mempty
+  where
+    go :: Object -> Object -> Object
+    go = Map.unionWith value
 
--- parse :: FromJSON a => Object -> Either Error a
--- parse = first LText.pack . parseEither parseJSON . Object
-
--- merge :: [Object] -> Object
--- merge = foldl' go mempty
---   where
---     go :: Object -> Object -> Object
---     go = Map.unionWith value
-
---     value :: Value -> Value -> Value
---     value l r =
---         case (l, r) of
---             (Object x, Object y) -> Object (x `go` y)
---             (_,        _)        -> l
+    value :: Value -> Value -> Value
+    value l r =
+        case (l, r) of
+            (Object x, Object y) -> Object (x `go` y)
+            (_,        _)        -> l

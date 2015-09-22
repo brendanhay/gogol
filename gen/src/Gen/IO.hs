@@ -24,6 +24,7 @@ import qualified Filesystem                as FS
 import           Filesystem.Path.CurrentOS
 import           Gen.Formatting
 import           Gen.Types
+import           System.IO
 import qualified Text.EDE                  as EDE
 
 run :: ExceptT Error IO a -> IO a
@@ -44,9 +45,6 @@ done = title ""
 isFile :: MonadIO m => Path -> ExceptT Error m Bool
 isFile = io . FS.isFile
 
--- listDir :: MonadIO m => Path -> ExceptT Error m [Path]
--- listDir = io . FS.listDirectory
-
 readBSFile :: MonadIO m => Path -> ExceptT Error m ByteString
 readBSFile f = do
     p <- isFile f
@@ -54,33 +52,33 @@ readBSFile f = do
         then say ("Reading "  % path) f >> io (FS.readFile f)
         else failure ("Missing " % path) f
 
--- writeLTFile :: MonadIO m => Path -> LText.Text -> ExceptT Error m ()
--- writeLTFile f t = do
---     say ("Writing " % path) f
---     io . FS.withFile f FS.WriteMode $ \h -> do
---         hSetEncoding  h utf8
---         LText.hPutStr h t
+writeLTFile :: MonadIO m => Path -> LText.Text -> ExceptT Error m ()
+writeLTFile f t = do
+    say ("Writing " % path) f
+    io . FS.withFile f FS.WriteMode $ \h -> do
+        hSetEncoding  h utf8
+        LText.hPutStr h t
 
--- touchFile :: MonadIO m => Path -> ExceptT Error m ()
--- touchFile f = do
---     p <- isFile f
---     unless p $
---         writeLTFile f mempty
+touchFile :: MonadIO m => Path -> ExceptT Error m ()
+touchFile f = do
+    p <- isFile f
+    unless p $
+        writeLTFile f mempty
 
--- createDir :: MonadIO m => Path -> ExceptT Error m ()
--- createDir d = do
---     p <- io (FS.isDirectory d)
---     unless p $ do
---         say ("Creating " % path) d
---         io (FS.createTree d)
+createDir :: MonadIO m => Path -> ExceptT Error m ()
+createDir d = do
+    p <- io (FS.isDirectory d)
+    unless p $ do
+        say ("Creating " % path) d
+        io (FS.createTree d)
 
--- copyDir :: MonadIO m => Path -> Path -> ExceptT Error m ()
--- copyDir src dst = io (FS.listDirectory src >>= mapM_ copy)
---   where
---     copy f = do
---         let p = dst </> filename f
---         fprint (" -> Copying " % path % " to " % path % "\n") f (directory p)
---         FS.copyFile f p
+copyDir :: MonadIO m => Path -> Path -> ExceptT Error m ()
+copyDir src dst = io (FS.listDirectory src >>= mapM_ copy)
+  where
+    copy f = do
+        let p = dst </> filename f
+        fprint (" -> Copying " % path % " to " % path % "\n") f (directory p)
+        FS.copyFile f p
 
 readTemplate :: MonadIO m
              => Path

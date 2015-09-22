@@ -14,7 +14,8 @@
 
 module Main (main) where
 
-import           Control.Lens
+import           Control.Error
+import           Control.Lens              hiding ((<.>))
 import           Control.Monad.State
 import           Data.List                 (nub, sort)
 import           Data.String
@@ -25,12 +26,14 @@ import           Filesystem.Path.CurrentOS
 import           Gen.Formatting
 import           Gen.IO
 import qualified Gen.JSON                  as JS
+import qualified Gen.Tree                  as Tree
 import           Gen.Types
 import           Options.Applicative
 
 data Opt = Opt
     { _optOutput    :: Path
     , _optModels    :: [Path]
+    , _optAnnexes   :: Path
     , _optTemplates :: Path
     , _optStatic    :: Path
     , _optVersions  :: Versions
@@ -51,6 +54,12 @@ parser = Opt
         <> metavar "DIR"
         <> help "Directory for a service's botocore models."
          ))
+
+    <*> option isPath
+         ( long "annexes"
+        <> metavar "DIR"
+        <> help "Directory containing botocore model annexes."
+         )
 
     <*> option isPath
          ( long "templates"
@@ -96,6 +105,7 @@ validate :: MonadIO m => Opt -> m Opt
 validate o = flip execStateT o $ do
     sequence_
         [ check optOutput
+        , check optAnnexes
         , check optTemplates
         , check optStatic
         ]
@@ -128,13 +138,18 @@ main = do
             <*> load "types.ede"
             <*  lift done
 
+        title "Selecting new service models..."
         say ("Found "    % int % " model specifications.") (length _optModels)
         say ("Selected " % int % " newest models.")        i
+        done
 
         svcs <- counter "model" ss $ \Spec{..} -> do
             say ("Using version " % stext) _specVersion
 
-            s <- readBSFile _specPath >>= JS.decode
+            s <- sequence
+                [ JS.load (_optAnnexes </> fromText _specName <.> "json")
+                , JS.load _specPath
+                ] >>= hoistEither . JS.parse . JS.merge
 
             say ("Successfully parsed '" % stext % "' API definition.")
                 (_svcTitle s)
@@ -145,33 +160,19 @@ main = do
 
         let libs = mergeLibraries _optVersions svcs
 
-        _    <- counter "library" libs $ \l -> do
+        void . counter "library" libs $ \l -> do
             say ("Creating " % stext % " package.") (_libTitle l)
 
+            dir <- hoistEither (Tree.populate _optOutput tmpl l)
+                >>= Tree.fold createDir (\x -> maybe (touchFile x) (writeLTFile x))
+
+            say ("Successfully rendered " % stext % "-" % semver % " package")
+                (_libName l)
+                (_libraryVersion _optVersions)
+
+            copyDir _optStatic (Tree.root dir)
+
             done
-
---            say ("Service: " % string) (
-
-    --         api <- sequence
-    --             [ JS.optional (_optAnnexes </> (m ^. annexFile))
-    --             , JS.required (m ^. serviceFile)
-    --             , JS.optional (m ^. waitersFile)
-    --             , JS.optional (m ^. pagersFile)
-    --             , pure r
-    --             ] >>= hoistEither . JS.parse . JS.merge
-
-    --         lib <- hoistEither (AST.rewrite _optVersions cfg api)
-
-    --         dir <- hoistEither (Tree.populate _optOutput tmpl lib)
-    --             >>= Tree.fold createDir (\x -> maybe (touchFile x) (writeLTFile x))
-
-    --         say ("Successfully rendered " % stext % "-" % semver % " package")
-    --             (lib ^. libraryName)
-    --             (lib ^. libraryVersion)
-
-    --         copyDir _optStatic (Tree.root dir)
-
-    --         done
 
         title ("Successfully processed " % int % " models.") i
         title ("Successfully created " % int % " library packages.") (length libs)
@@ -180,10 +181,6 @@ class    HasName a       where getName :: a -> Text
 instance HasName Spec    where getName = _specName
 instance HasName Library where getName = _libName
 
--- counter :: (MonadIO n, m ~ ExceptT n Error, HasName a)
---         => [a]
---         -> (a -> m b)
---         -> m [b]
 counter k xs f = forM (zip [1..] xs) $ \(n, x) -> do
     title ("[" % int % "/" % int % "] " % stext % ":" % stext)
           (n :: Int) i k (getName x)

@@ -10,6 +10,8 @@
 module Gen.Types.NS where
 
 import           Data.Aeson
+import           Data.Aeson.Types
+import           Data.Char
 import           Data.Monoid
 import           Data.Semigroup
 import           Data.String
@@ -45,3 +47,12 @@ instance FromJSON NS where
 
 instance ToJSON NS where
     toJSON (NS xs) = toJSON (Text.intercalate "." xs)
+
+-- Wut?
+js :: String -> Options
+js pre = defaultOptions
+    { constructorTagModifier = map toLower
+    , fieldLabelModifier = \s ->
+        let x:xs = drop (length pre) s
+         in toLower x : xs
+    }
