@@ -1,0 +1,43 @@
+name:                  gozen-gen
+version:               0.0.1
+synopsis:              Gozen Code Generator
+homepage:              https://github.com/brendanhay/gozen
+license:               OtherLicense
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
+copyright:             Copyright (c) 2013-2015 Brendan Hay
+category:              Network, Google, Cloud, Distributed Computing
+build-type:            Simple
+extra-source-files:    README.md
+cabal-version:         >= 1.10
+
+description:
+    Compiler and generator for Gozen related Google SDKs
+
+executable gozen-gen
+    default-language:  Haskell2010
+    hs-source-dirs:    src
+    main-is:           Main.hs
+
+    other-modules:
+          Gen.IO
+        , Gen.Types
+
+    ghc-options:       -Wall -threaded
+
+    build-depends:
+          aeson
+        , base       == 4.8.*
+        , bytestring
+        , ede
+        , lens
+        , optparse-applicative
+        , system-fileio
+        , system-filepath
+        , text
+        , mtl
+        , errors
+        , formatting
+        , unordered-containers
+        , attoparsec
