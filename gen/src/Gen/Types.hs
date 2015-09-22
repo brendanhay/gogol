@@ -16,6 +16,7 @@ import           Data.Function             (on)
 import qualified Data.HashMap.Strict       as Map
 import           Data.List                 (nub, sort)
 import           Data.Monoid
+import           Data.Ord
 import           Data.Text                 (Text)
 import qualified Data.Text                 as Text
 import qualified Data.Text.Lazy            as LText
@@ -63,7 +64,9 @@ instance Eq Spec where
     (==) = on (==) _specPrefix
 
 instance Ord Spec where
-    compare a b = on compare _specPrefix a b <> on compare _specVersion a b
+    compare a b =
+           on compare _specPrefix a b
+        <> on compare (Down . _specVersion) a b
 
 specFromPath :: Path -> Spec
 specFromPath x = Spec (n <> v) p v x
