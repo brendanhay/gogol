@@ -23,6 +23,8 @@ executable gozen-gen
     other-modules:
           Gen.IO
         , Gen.Types
+        , Gen.Formatting
+        , Gen.JSON
 
     ghc-options:       -Wall -threaded
 
@@ -41,3 +43,4 @@ executable gozen-gen
         , formatting
         , unordered-containers
         , attoparsec
+        , bifunctors

@@ -23,6 +23,7 @@ import qualified Filesystem                as FS
 import           Filesystem.Path.CurrentOS
 import           Gen.Formatting
 import           Gen.IO
+import qualified Gen.JSON                  as JS
 import           Gen.Types
 import           Options.Applicative
 
@@ -128,16 +129,18 @@ main = do
         say ("Found "    % int % " model specifications.") (length _optModels)
         say ("Selected " % int % " newest models.")        (length ss)
 
-        forM_ (zip [1..] ss) $ \(j, s) -> do
+        forM_ (zip [1..] ss) $ \(j, Spec{..}) -> do
             title ("[" % int % "/" % int % "] model:" % stext)
-                  (j :: Int) (length ss) (_specName s)
+                  (j :: Int) (length ss) _specName
 
-    --         m <- listDir f >>= hoistEither . loadModel f
-
-    --         say ("Using version " % dateDash) (m ^. modelVersion)
+            say ("Using version " % stext) _specVersion
 
     --         cfg <- JS.required (_optConfigs </> (m ^. configFile))
     --             >>= hoistEither . JS.parse
+
+            svc <- readBSFile _specPath >>= JS.decode
+
+            say ("Service: " % string) (show (svc :: Service))
 
     --         api <- sequence
     --             [ JS.optional (_optAnnexes </> (m ^. annexFile))

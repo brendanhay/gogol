@@ -1,6 +1,8 @@
 {-# LANGUAGE DataKinds         #-}
 {-# LANGUAGE KindSignatures    #-}
+{-# LANGUAGE LambdaCase        #-}
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell   #-}
 
 -- Module      : Gen.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -11,7 +13,10 @@
 
 module Gen.Types where
 
+import           Data.Aeson
+import           Data.Aeson.TH
 import qualified Data.Attoparsec.Text      as A
+import           Data.Char
 import           Data.Function             (on)
 import qualified Data.HashMap.Strict       as Map
 import           Data.List                 (nub, sort)
@@ -21,6 +26,7 @@ import           Data.Text                 (Text)
 import qualified Data.Text                 as Text
 import qualified Data.Text.Lazy            as LText
 import qualified Filesystem.Path.CurrentOS as Path
+import           Gen.JSON
 import           GHC.TypeLits
 import           Text.EDE                  (Template)
 
@@ -69,12 +75,50 @@ instance Ord Spec where
         <> on compare (Down . _specVersion) a b
 
 specFromPath :: Path -> Spec
-specFromPath x = Spec (n <> v) p v x
+specFromPath x = Spec n p v x
   where
-   n = Text.intercalate "/"
-     . drop 1
+   -- FIXME:
+   n = Text.init
+     . Text.intercalate "/"
+     . drop 2
      . dropWhile (/= "model")
      $ Text.split (== '/') p
 
    p = toTextIgnore (Path.parent (Path.parent x))
    v = toTextIgnore (Path.dirname x)
+
+data Protocol = REST
+    deriving (Eq, Show)
+
+instance FromJSON Protocol where
+    parseJSON = withText "protocol" $ \case
+        "rest" -> pure REST
+        e      -> fail $ "Unable to parse protocol from " ++ Text.unpack e
+
+data Service = Service
+    { _svcKind              :: Text
+    , _svcEtag              :: Text
+    , _svcDiscoveryVersion  :: Text
+    , _svcId                :: Text
+    , _svcName              :: Text
+    , _svcCanonicalName     :: Maybe Text
+    , _svcTitle             :: Text
+    , _svcVersion           :: Text
+    , _svcRevision          :: Maybe Text
+    , _svcDescription       :: Text
+    , _svcOwnerDomain       :: Text
+    , _svcOwnerName         :: Text
+    , _svcPackagePath       :: Maybe Text
+    , _svcIcons             :: Object
+    , _svcDocumentationLink :: Text
+    , _svcProtocol          :: Protocol
+    , _svcBaseUrl           :: Text
+    , _svcRootUrl           :: Text
+    , _svcServicePath       :: Text
+    , _svcBatchPath         :: Text
+    , _svcParameters        :: Object
+    , _svcAuth              :: Maybe Object
+    , _svcSchemas           :: Object
+    } deriving (Show)
+
+deriveFromJSON (js "_svc") ''Service
