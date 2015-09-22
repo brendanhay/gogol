@@ -18,6 +18,7 @@ import           Control.Lens
 import           Control.Monad.State
 import           Data.List                 (nub, sort)
 import           Data.String
+import           Data.Text                 (Text)
 import qualified Data.Text                 as Text
 import qualified Filesystem                as FS
 import           Filesystem.Path.CurrentOS
@@ -111,6 +112,7 @@ main = do
     Opt{..} <- customExecParser (prefs showHelpOnError) options >>= validate
 
     let ss = nub . sort $ map specFromPath _optModels
+        i  = length ss
 
     run $ do
         title "Initialising..." <* done
@@ -127,20 +129,28 @@ main = do
             <*  lift done
 
         say ("Found "    % int % " model specifications.") (length _optModels)
-        say ("Selected " % int % " newest models.")        (length ss)
+        say ("Selected " % int % " newest models.")        i
 
-        forM_ (zip [1..] ss) $ \(j, Spec{..}) -> do
-            title ("[" % int % "/" % int % "] model:" % stext)
-                  (j :: Int) (length ss) _specName
-
+        svcs <- counter "model" ss $ \Spec{..} -> do
             say ("Using version " % stext) _specVersion
 
-    --         cfg <- JS.required (_optConfigs </> (m ^. configFile))
-    --             >>= hoistEither . JS.parse
+            s <- readBSFile _specPath >>= JS.decode
 
-            svc <- readBSFile _specPath >>= JS.decode
+            say ("Successfully parsed '" % stext % "' API definition.")
+                (_svcTitle s)
 
-            say ("Service: " % string) (show (svc :: Service))
+            done
+
+            return s
+
+        let libs = mergeLibraries _optVersions svcs
+
+        _    <- counter "library" libs $ \l -> do
+            say ("Creating " % stext % " package.") (_libTitle l)
+
+            done
+
+--            say ("Service: " % string) (
 
     --         api <- sequence
     --             [ JS.optional (_optAnnexes </> (m ^. annexFile))
@@ -149,9 +159,6 @@ main = do
     --             , JS.optional (m ^. pagersFile)
     --             , pure r
     --             ] >>= hoistEither . JS.parse . JS.merge
-
-    --         say ("Successfully parsed '" % stext % "' API definition")
-    --             (api ^. serviceFullName)
 
     --         lib <- hoistEither (AST.rewrite _optVersions cfg api)
 
@@ -166,4 +173,20 @@ main = do
 
     --         done
 
-        -- title ("Successfully processed " % int % " models.") i
+        title ("Successfully processed " % int % " models.") i
+        title ("Successfully created " % int % " library packages.") (length libs)
+
+class    HasName a       where getName :: a -> Text
+instance HasName Spec    where getName = _specName
+instance HasName Library where getName = _libName
+
+-- counter :: (MonadIO n, m ~ ExceptT n Error, HasName a)
+--         => [a]
+--         -> (a -> m b)
+--         -> m [b]
+counter k xs f = forM (zip [1..] xs) $ \(n, x) -> do
+    title ("[" % int % "/" % int % "] " % stext % ":" % stext)
+          (n :: Int) i k (getName x)
+    f x
+  where
+    i = length xs

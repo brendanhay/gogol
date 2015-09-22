@@ -21,10 +21,11 @@ executable gozen-gen
     main-is:           Main.hs
 
     other-modules:
-          Gen.IO
-        , Gen.Types
-        , Gen.Formatting
+          Gen.Formatting
+        , Gen.IO
         , Gen.JSON
+        , Gen.Types
+        , Gen.Types.NS
 
     ghc-options:       -Wall -threaded
 
@@ -44,3 +45,5 @@ executable gozen-gen
         , unordered-containers
         , attoparsec
         , bifunctors
+        , semigroups
+        , text-manipulate

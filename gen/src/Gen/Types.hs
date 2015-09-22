@@ -13,20 +13,25 @@
 
 module Gen.Types where
 
+--import           Control.Lens
 import           Data.Aeson
 import           Data.Aeson.TH
 import qualified Data.Attoparsec.Text      as A
 import           Data.Char
 import           Data.Function             (on)
 import qualified Data.HashMap.Strict       as Map
-import           Data.List                 (nub, sort)
-import           Data.Monoid
+import           Data.List                 (groupBy, nub, sort)
+import           Data.List.NonEmpty        (NonEmpty (..), nonEmpty)
+import qualified Data.List.NonEmpty        as NE
 import           Data.Ord
+import           Data.Semigroup
 import           Data.Text                 (Text)
 import qualified Data.Text                 as Text
 import qualified Data.Text.Lazy            as LText
+import           Data.Text.Manipulate
 import qualified Filesystem.Path.CurrentOS as Path
 import           Gen.JSON
+import           Gen.Types.NS
 import           GHC.TypeLits
 import           Text.EDE                  (Template)
 
@@ -57,6 +62,8 @@ data Versions = Versions
     , _clientVersion  :: ClientVer
     , _coreVersion    :: CoreVer
     } deriving (Show)
+
+-- makeClassy ''Versions
 
 -- FIXME: need a more comprehensive 'vm_alpha' vs 'vm1.1' etc check.
 data Spec = Spec
@@ -96,20 +103,15 @@ instance FromJSON Protocol where
         e      -> fail $ "Unable to parse protocol from " ++ Text.unpack e
 
 data Service = Service
-    { _svcKind              :: Text
-    , _svcEtag              :: Text
-    , _svcDiscoveryVersion  :: Text
-    , _svcId                :: Text
+    { _svcTitle             :: Text
     , _svcName              :: Text
     , _svcCanonicalName     :: Maybe Text
-    , _svcTitle             :: Text
-    , _svcVersion           :: Text
-    , _svcRevision          :: Maybe Text
     , _svcDescription       :: Text
-    , _svcOwnerDomain       :: Text
+    , _svcRevision          :: Maybe Text
+    , _svcVersion           :: Text
     , _svcOwnerName         :: Text
+    , _svcOwnerDomain       :: Text
     , _svcPackagePath       :: Maybe Text
-    , _svcIcons             :: Object
     , _svcDocumentationLink :: Text
     , _svcProtocol          :: Protocol
     , _svcBaseUrl           :: Text
@@ -122,3 +124,27 @@ data Service = Service
     } deriving (Show)
 
 deriveFromJSON (js "_svc") ''Service
+
+data Library = Library
+    { _libName         :: Text
+    , _libTitle        :: Text
+    , _libDescriptions :: [Text]
+    , _libNamespace    :: NS
+    , _libVersions     :: Versions
+    , _libServices     :: NonEmpty Service
+    }
+
+mergeLibraries :: Versions -> [Service] -> [Library]
+mergeLibraries v = map go . groupBy (on (==) _svcName)
+  where
+    go [x]    = mk x
+    go (x:xs) = (mk x) { _libServices = x :| xs }
+
+    mk x = Library
+        { _libName      = "gozen-" <> Text.toLower (_svcName x)
+        , _libTitle     = _svcTitle x
+        , _libDescriptions = []
+        , _libNamespace = "Network.Google" <> mkNS (toPascal (_svcName x))
+        , _libVersions  = v
+        , _libServices  = x :| []
+        }
