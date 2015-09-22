@@ -54,18 +54,19 @@ data Versions = Versions
 -- FIXME: need a more comprehensive 'vm_alpha' vs 'vm1.1' etc check.
 data Spec = Spec
     { _specName    :: Text
+    , _specPrefix  :: Text
     , _specVersion :: Text
     , _specPath    :: Path
     }
 
 instance Eq Spec where
-    (==) = on (==) _specName
+    (==) = on (==) _specPrefix
 
 instance Ord Spec where
-    compare a b = on compare _specName a b <> on compare _specVersion a b
+    compare a b = on compare _specPrefix a b <> on compare _specVersion a b
 
 specFromPath :: Path -> Spec
-specFromPath x = Spec (n <> v) v x
+specFromPath x = Spec (n <> v) p v x
   where
    n = Text.intercalate "/"
      . drop 1

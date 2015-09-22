@@ -128,9 +128,9 @@ main = do
         say ("Found "    % int % " model specifications.") (length _optModels)
         say ("Selected " % int % " newest models.")        (length ss)
 
-        forM_ (zip [1..] ss) $ \(j, Spec n _ f) -> do
+        forM_ (zip [1..] ss) $ \(j, s) -> do
             title ("[" % int % "/" % int % "] model:" % stext)
-                  (j :: Int) (length ss) n
+                  (j :: Int) (length ss) (_specName s)
 
     --         m <- listDir f >>= hoistEither . loadModel f
 
