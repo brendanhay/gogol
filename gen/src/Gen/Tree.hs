@@ -36,7 +36,6 @@ import qualified Data.Text                 as Text
 import qualified Data.Text.Lazy            as LText
 import           Filesystem.Path.CurrentOS hiding (FilePath, root)
 import           Gen.Formatting            (failure, shown)
-import           Gen.Import
 import qualified Gen.JSON                  as JS
 import           Gen.Types
 import           Prelude                   hiding (mod)

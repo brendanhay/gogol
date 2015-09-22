@@ -18,7 +18,8 @@ module Gen.Types
     , module Gen.Types.NS
     ) where
 
-import           Data.Aeson
+import           Control.Applicative
+import           Data.Aeson                hiding (String)
 import           Data.Aeson.TH
 import qualified Data.Attoparsec.Text      as A
 import           Data.Char
@@ -117,6 +118,66 @@ instance FromJSON Protocol where
 instance ToJSON Protocol where
     toJSON = toJSON . map toLower . show
 
+data Location
+    = Query
+    | Path
+      deriving (Eq, Show)
+
+deriveJSON (js "") ''Location
+
+data Info = Info
+    { _infoDescription :: Maybe Text
+    , _infoDefault     :: Maybe Text
+    } deriving (Eq, Show)
+
+deriveJSON (js "_info") ''Info
+
+data Lit
+    = String
+    | Boolean
+      deriving (Eq, Show)
+
+deriveToJSON (js "") ''Lit
+
+data Schema
+    = Obj  Info (Map Text Schema)
+    | Arr  Info Schema
+    | Enum Info [Text] [Text]
+    | Lit  Info Lit
+    | Ref  Text
+    | Any' -- String or Number
+      deriving (Eq, Show)
+
+instance FromJSON Schema where
+    parseJSON = withObject "schema" $ \o -> schema o <|> ref o
+      where
+        schema o = do
+            i <- parseJSON (Object o)
+            t <- o .: "type" -- <|> fail ("Missing 'type' in " ++ show o)
+            case t of
+                "object"  -> Obj i <$> o .: "properties"
+                "array"   -> Arr i <$> o .: "items"
+                "string"  -> enum i o <|> pure (Lit i String)
+                "boolean" -> pure (Lit i Boolean)
+                "any"     -> pure Any'
+                _         -> fail $
+                    "Unable to parse Schema from: '" ++ Text.unpack t ++ "'"
+
+        enum i o = Enum i <$> o .: "enum" <*> o .: "enumDescriptions"
+
+        ref o = Ref <$> o .: "$ref"
+
+deriveToJSON (js "") ''Schema
+
+data Param = Param Location Schema
+    deriving (Eq, Show)
+
+instance FromJSON Param where
+    parseJSON = withObject "parameter" $ \o ->
+        Param <$> o .: "location" <*> parseJSON (Object o)
+
+deriveToJSON (js "") ''Param
+
 data Service = Service
     { _svcLibrary           :: Text
     , _svcTitle             :: Text
@@ -134,9 +195,10 @@ data Service = Service
     , _svcRootUrl           :: Text
     , _svcServicePath       :: Text
     , _svcBatchPath         :: Text
-    , _svcParameters        :: Object
     , _svcAuth              :: Maybe Object
-    , _svcSchemas           :: Object
+    , _svcParameters        :: Map Text Param
+    , _svcSchemas           :: Map Text Schema
+    , _svcResources         :: Object
     } deriving (Show, Generic)
 
 deriveFromJSON (js "_svc") ''Service
