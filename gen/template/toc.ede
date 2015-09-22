@@ -1,0 +1,14 @@
+{% include "_include/license.ede" %}
+--
+-- {{ description }}
+--
+-- /See:/ <{{ documentationLink }} {{ title }} Reference>
+module {{ moduleName }}
+    (
+    ) where
+
+{% for module in exposedModules %}
+  {% if module.value != moduleName %}
+import {{ module.value }}
+  {% endif %}
+{% endfor %}

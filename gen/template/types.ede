@@ -1,0 +1,9 @@
+{% include "_include/license.ede" %}
+--
+module {{ moduleName }}
+    (
+    ) where
+
+{% for import in moduleImports %}
+import {{ import.value }}
+{% endfor %}
