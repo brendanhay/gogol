@@ -1,0 +1,5 @@
+resolver:   lts-2.21
+flags:      {}
+extra-deps: []
+packages:
+  - core
