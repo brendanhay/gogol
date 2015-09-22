@@ -2,7 +2,7 @@ SHELL     := /usr/bin/env bash
 TOP       := ..
 BIN       := bin
 MODEL_DIR := model
-OUT_DIR   := ..
+OUT_DIR   := tmp
 
 define version =
 $(shell sed -n 's/^version: *\([0-9]*\.[0-9]*\.[0-9]\).*$$/\1/p' $(1))
@@ -24,6 +24,7 @@ gen: $(BIN)/gozen-gen $(MODEL_DIR)
  --library-version=$(VERSION) \
  --client-version=$(CLIENT_VERSION) \
  --core-version=$(CORE_VERSION) \
+ --annexes=annex \
  --templates=template \
  --static=static \
  $(addprefix --model=,$(MODELS))
