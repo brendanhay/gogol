@@ -25,25 +25,27 @@ executable gozen-gen
         , Gen.IO
         , Gen.JSON
         , Gen.Types
+        , Gen.Tree
         , Gen.Types.NS
 
     ghc-options:       -Wall -threaded
 
     build-depends:
           aeson
+        , attoparsec
         , base       == 4.8.*
+        , bifunctors
         , bytestring
+        , directory-tree
         , ede
+        , errors
+        , formatting
         , lens
+        , mtl
         , optparse-applicative
+        , semigroups
         , system-fileio
         , system-filepath
         , text
-        , mtl
-        , errors
-        , formatting
-        , unordered-containers
-        , attoparsec
-        , bifunctors
-        , semigroups
         , text-manipulate
+        , unordered-containers
