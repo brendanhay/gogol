@@ -1,0 +1,19 @@
+{% case type.type %}
+{% when "prod" %}
+{{ type.decl }}
+
+{{ type.ctor.help }}
+{{ type.ctor.sig }}
+{{ type.ctor.decl }}
+  {% for lens in type.lenses %}
+
+{{ lens.value.help }}
+{{ lens.value.sig }}
+{{ lens.value.decl }}
+  {% endfor %}
+  {% when "sum" %}
+{{ type.help }}
+{{ type.decl }}
+{% else %}
+  Error: Unrecognised type '{{ type.type }}'
+{% endcase %}

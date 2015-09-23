@@ -14,7 +14,6 @@
 
 module Main (main) where
 
-import Gen.AST
 import           Control.Error
 import           Control.Lens              hiding ((<.>))
 import           Control.Monad.State
@@ -24,6 +23,7 @@ import           Data.Text                 (Text)
 import qualified Data.Text                 as Text
 import qualified Filesystem                as FS
 import           Filesystem.Path.CurrentOS
+import           Gen.AST
 import           Gen.Formatting
 import           Gen.IO
 import qualified Gen.JSON                  as JS
@@ -159,7 +159,7 @@ main = do
 
             return s
 
-        libs = mergeLibraries _optVersions <$> renderSchemas svcs
+        libs <- merge _optVersions <$> traverse (hoistEither . render) svcs
 
         void . counter "library" libs $ \l -> do
             say ("Creating " % stext % " package.") (_libTitle l)
@@ -167,7 +167,7 @@ main = do
             dir <- hoistEither (Tree.populate _optOutput tmpl l)
                 >>= Tree.fold createDir (\x -> maybe (touchFile x) (writeLTFile x))
 
-            say ("Successfully rendered " % stext % "-" % semver % " package")
+            say ("Successfully rendered " % stext % "-" % fver % " package")
                 (_libName l)
                 (_libraryVersion _optVersions)
 

@@ -21,11 +21,15 @@ executable gozen-gen
     main-is:           Main.hs
 
     other-modules:
-          Gen.Formatting
+          Gen.AST
+        , Gen.Formatting
         , Gen.IO
         , Gen.JSON
-        , Gen.Types
+        , Gen.Syntax
+        , Gen.Text
         , Gen.Tree
+        , Gen.Types
+        , Gen.Types.Map
         , Gen.Types.NS
 
     ghc-options:       -Wall -threaded
@@ -40,7 +44,11 @@ executable gozen-gen
         , ede
         , errors
         , formatting
+        , hashable
+        , haskell-src-exts
+        , hindent
         , lens
+        , mmorph
         , mtl
         , optparse-applicative
         , semigroups

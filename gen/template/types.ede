@@ -7,3 +7,8 @@ module {{ moduleName }}
 {% for import in moduleImports %}
 import {{ import.value }}
 {% endfor %}
+
+{% for schema in schemas %}
+  {% include "_include/type.ede" with type = schema.value %}
+
+{% endfor %}

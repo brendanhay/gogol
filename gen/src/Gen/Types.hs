@@ -3,6 +3,7 @@
 {-# LANGUAGE DeriveFunctor              #-}
 {-# LANGUAGE DeriveGeneric              #-}
 {-# LANGUAGE DeriveTraversable          #-}
+{-# LANGUAGE ExtendedDefaultRules       #-}
 {-# LANGUAGE FlexibleContexts           #-}
 {-# LANGUAGE FlexibleInstances          #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
@@ -11,6 +12,8 @@
 {-# LANGUAGE OverloadedStrings          #-}
 {-# LANGUAGE RecordWildCards            #-}
 {-# LANGUAGE TemplateHaskell            #-}
+
+{-# OPTIONS_GHC -fno-warn-type-defaults #-}
 
 -- Module      : Gen.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -21,11 +24,12 @@
 
 module Gen.Types
     ( module Gen.Types
+    , module Gen.Types.Map
     , module Gen.Types.NS
     ) where
 
 import           Control.Applicative
-import           Data.Aeson                hiding (String)
+import           Data.Aeson                hiding (Bool, String)
 import           Data.Aeson.TH
 import qualified Data.Attoparsec.Text      as A
 import           Data.Bifunctor
@@ -37,23 +41,27 @@ import           Data.List                 (groupBy, nub, sort)
 import           Data.List.NonEmpty        (NonEmpty (..), nonEmpty)
 import qualified Data.List.NonEmpty        as NE
 import           Data.Ord
-import           Data.Semigroup
+import           Data.Semigroup            hiding (Sum)
+import           Data.String
 import           Data.Text                 (Text)
 import qualified Data.Text                 as Text
 import qualified Data.Text.Lazy            as LText
 import qualified Data.Text.Lazy.Builder    as Build
 import           Data.Text.Manipulate
+import qualified Data.Text.Read            as Read
 import qualified Filesystem.Path.CurrentOS as Path
 import           Formatting
 import           Gen.Text
+import           Gen.Types.Map
 import           Gen.Types.NS
 import           GHC.Generics
 import           GHC.TypeLits
 import           Text.EDE                  (Template)
 
+default (Text)
+
 newtype Fix f = Fix (f (Fix f))
 
-type Map      = Map.HashMap
 type Error    = LText.Text
 type Rendered = LText.Text
 type Path     = Path.FilePath
@@ -75,8 +83,8 @@ newtype Version (v :: Symbol) = Version Text
 instance ToJSON (Version v) where
     toJSON (Version v) = toJSON v
 
-semver :: Format a (Version v -> a)
-semver = later (\(Version v) -> Build.fromText v)
+fver :: Format a (Version v -> a)
+fver = later (\(Version v) -> Build.fromText v)
 
 type LibraryVer = Version "library"
 type ClientVer  = Version "client"
@@ -138,16 +146,53 @@ deriveJSON (js "") ''Location
 data Info = Info
     { _infoDescription :: Maybe Text
     , _infoDefault     :: Maybe Text
-    , _infoRequired    :: Maybe Bool
+    , _infoRequired    :: !Bool
+    , _infoLocation    :: Maybe Location
     } deriving (Eq, Show)
 
-deriveJSON (js "_info") ''Info
+instance FromJSON Info where
+    parseJSON = withObject "info" $ \o -> Info
+        <$> o .:? "description"
+        <*> o .:? "default"
+        <*> o .:? "required" .!= False
+        <*> o .:? "location"
+
+deriveToJSON (js "_info") ''Info
 
 data Lit
-    = String
-    | Boolean
-    | Integer
+    = Text
+    | Bool
+    | Int
+    | Long
+    | Nat
+    | Time
       deriving (Eq, Show)
+
+instance FromJSON Lit where
+    parseJSON = withObject "literal" $ \o -> do
+        n <- min =<< (o .:? "minimum" .!= "0")
+        (o .: "format" <|> o .: "type") >>= \case
+            -- Types
+            "string"    -> pure Text
+            "boolean"   -> pure Bool
+            -- Formats
+            "uint64"    -> pure (nat n Long)
+            "int32"     -> pure (nat n Int)
+            "date-time" -> pure Time
+            e           -> fail $
+                "Unable to parse Lit from " ++ Text.unpack e
+      where
+        min = either fail (pure . fst) . Read.decimal
+
+        nat :: Int -> Lit -> Lit
+        nat n | n > 0     = const Nat
+              | otherwise = id
+
+-- "pattern": "[A-Z]{3}",
+-- "pattern": "[0-9a-zA-Z,]+",
+-- "pattern": "[a-zA-Z]+==[a-zA-Z0-9_+-]+",
+-- "minimum": "1"
+-- "format": "date-time", "uint64", "int32",
 
 deriveToJSON (js "") ''Lit
 
@@ -165,6 +210,9 @@ instance Semigroup Ref where
 
 instance Hashable Ref
 
+instance IsString Ref where
+    fromString = Direct . fromString
+
 instance FromJSON Ref where parseJSON = withText "ref" (pure . Direct)
 instance ToJSON   Ref where toJSON    = toJSON . refToText
 
@@ -176,11 +224,11 @@ instance ToJSON a => ToJSON (Map Ref a) where
 
 refToText :: Ref -> Text
 refToText = \case
-    Opaque xs -> Text.intercalate "." xs
+    Opaque xs -> mconcat (map upperHead xs)
     Direct n  -> n
 
-ref :: Format a (Ref -> a)
-ref = later (Build.fromText . refToText)
+fref :: Format a (Ref -> a)
+fref = later (Build.fromText . refToText)
 
 data Schema a
     = Obj  Info (Map Ref a)
@@ -192,35 +240,56 @@ data Schema a
       deriving (Eq, Show, Functor, Foldable, Traversable)
 
 instance FromJSON (Fix Schema) where
-    parseJSON = withObject "schema" $ \o -> Fix <$> (schema o <|> ref o)
+    parseJSON = withObject "schema" $ \o -> Fix <$> (ref o <|> schema o)
       where
         schema o = do
             i <- parseJSON (Object o)
             o .: "type" >>= \case
-                "object"  -> Obj i <$> o .: "properties"
-                "array"   -> Arr i <$> o .: "items"
-                "string"  -> enum i o <|> pure (Lit i String)
-                "boolean" -> pure (Lit i Boolean)
-                "any"     -> pure Any'
-                e         -> fail $
-                    "Unable to parse Schema from: '" ++ Text.unpack e ++ "'"
+                "object" -> Obj i <$> o .: "properties"
+                "array"  -> Arr i <$> o .: "items"
+                "any"    -> pure Any'
+                _        -> enum i o <|> Lit i <$> parseJSON (Object o)
 
         enum i o = Enum i <$> o .: "enum" <*> o .: "enumDescriptions"
         ref    o = Ref    <$> o .: "$ref"
 
 deriveToJSON (js "") ''Schema
 
-data Param a = Param Location a
-    deriving (Eq, Show, Functor, Foldable, Traversable)
+data Param = Param Location -- (Fix Schema)
 
-instance FromJSON a => FromJSON (Param a) where
+instance FromJSON Param where
     parseJSON = withObject "parameter" $ \o ->
-        Param <$> o .: "location" <*> parseJSON (Object o)
+        Param <$> o .: "location" -- <*> parseJSON (Object o)
 
 deriveToJSON (js "") ''Param
 
-newtype Data = Data Rendered
-    deriving (Eq, Show, ToJSON)
+data Fun = Fun' Text Rendered Rendered
+
+instance ToJSON Fun where
+    toJSON (Fun' h s d) = object
+        [ "help" .= h
+        , "sig"  .= s
+        , "decl" .= d
+        ]
+
+data Data
+    = Sum  Text Rendered
+    | Prod Rendered Fun [Fun]
+
+instance ToJSON Data where
+    toJSON = \case
+        Sum  h d    -> object
+            [ "type" .= "sum"
+            , "decl" .= d
+            , "help" .= h
+            ]
+
+        Prod d c ls -> object
+            [ "type"   .= "prod"
+            , "decl"   .= d
+            , "ctor"   .= c
+            , "lenses" .= ls
+            ]
 
 data Service a = Service
     { _svcLibrary           :: Text
@@ -240,8 +309,8 @@ data Service a = Service
     , _svcServicePath       :: Text
     , _svcBatchPath         :: Text
     , _svcAuth              :: Maybe Object
-    , _svcParameters        :: Map Text (Param a)
-    , _svcSchemas           :: Map Text a
+    , _svcParameters        :: Map Ref Param
+    , _svcSchemas           :: Map Ref a
     , _svcResources         :: Object
     } deriving (Generic)
 
@@ -284,16 +353,3 @@ instance ToJSON Library where
         , "clientVersion"    .= _clientVersion  _libVersions
         , "exposedModules"   .= concatMap exposedModules (NE.toList _libServices)
         ]
-
-mergeLibraries :: Versions -> [Service Data] -> [Library]
-mergeLibraries v = map go . groupBy (on (==) _svcLibrary)
-  where
-    go [x]    = mk x
-    go (x:xs) = (mk x) { _libServices = x :| xs }
-
-    mk x = Library
-        { _libName     = _svcLibrary x
-        , _libTitle    = renameTitle (_svcTitle x)
-        , _libVersions = v
-        , _libServices = x :| []
-        }
