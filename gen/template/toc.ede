@@ -6,7 +6,7 @@
 module {{ moduleName }}
     (
     -- * API Definition
-    {{ name }}
+    {{ name | lowerHead }}
 
     -- * Resources
     -- $resources

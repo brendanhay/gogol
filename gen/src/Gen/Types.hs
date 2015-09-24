@@ -36,6 +36,7 @@ import           Data.Aeson                   hiding (Bool, String)
 import           Data.Aeson.TH
 import           Data.Char
 import           Data.Function                (on)
+import qualified Data.HashMap.Strict          as Map
 import           Data.List.NonEmpty           (NonEmpty (..))
 import qualified Data.List.NonEmpty           as NE
 import           Data.Maybe
@@ -301,6 +302,44 @@ instance ToJSON Data where
             , "lenses" .= ls
             ]
 
+data Method = Method
+    { _mId             :: Text
+    , _mPath           :: Text
+    , _mMethod         :: Text
+    , _mDescription    :: Help
+    , _mParameters     :: Map Id Param
+    , _mParameterOrder :: [Id]
+    , _mScopes         :: [Text]
+    , _mRequest        :: Maybe Id
+    , _mResponse       :: Maybe Id
+    } deriving (Generic)
+
+instance FromJSON Method where
+    parseJSON = withObject "method" $ \o -> Method
+        <$> o .:  "id"
+        <*> o .:  "path"
+        <*> o .:  "httpMethod"
+        <*> o .:  "description"
+        <*> o .:  "parameters"
+        <*> o .:? "parameterOrder" .!= mempty
+        <*> o .:  "scopes"
+        <*> ref o "request"
+        <*> ref o "response"
+      where
+        ref o k = Just <$> (o .: k >>= (.: "$ref"))
+              <|> pure Nothing
+
+deriveToJSON (js "_m") ''Method
+
+newtype Resource = Resource { methods :: Map Id Method }
+    deriving (ToJSON)
+
+deriveFromJSON (js "") ''Resource
+
+-- instance FromJSON Resource where
+--     parseJSON = withObject "resource" $ \o ->
+--         o .: "methods" -- <|> fail (show (Map.lookup "methods" o))
+
 data Service a = Service
     { _svcLibrary           :: Text
     , _svcTitle             :: Text
@@ -321,7 +360,7 @@ data Service a = Service
     , _svcAuth              :: Maybe Object
     , _svcParameters        :: Map Id Param
     , _svcSchemas           :: Map Id a
-    , _svcResources         :: Object
+    , _svcResources         :: Map Id Resource
     } deriving (Generic)
 
 deriveFromJSON (js "_svc") ''Service

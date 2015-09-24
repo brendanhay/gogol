@@ -3,7 +3,8 @@
 module {{ moduleName }}
     (
     -- * API Definition
-      {{ name }}
+      {{ name | lowerHead }}
+
   {% for schema in schemas %}
     {% case schema.value.type %}
     {% when "prod" %}
@@ -26,8 +27,8 @@ module {{ moduleName }}
 import {{ import.value }}
 {% endfor %}
 
-{{ name }} :: a
-{{ name }} = error "{{ name }}"
+{{ name | lowerHead }} :: a
+{{ name | lowerHead }} = error "{{ name }}"
 {% for schema in schemas %}
 
   {% include "_include/type.ede" with type = schema.value %}
