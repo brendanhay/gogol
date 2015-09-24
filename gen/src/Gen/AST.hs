@@ -42,11 +42,43 @@ import           HIndent
 import           Language.Haskell.Exts.Pretty
 import           Prelude                      hiding (sum)
 
--- mapM isn't lazy here and I don't care!
-flatten :: Map Id (Fix Schema) -> Map Id (Schema Id)
-flatten m = execState (mapM_ (uncurry (prop Nothing)) (Map.toList m)) mempty
+runAST :: Versions
+       -> [Service (Fix Schema) (Fix Schema) (Resource (Fix Schema))]
+       -> Either Error [Library]
+runAST v ss = merge v <$> evalState (runExceptT go) initial
   where
-    -- unfold the properties.
+    go = traverse (flatten >=> render) ss
+
+flatten ::      Service (Fix Schema) (Fix Schema) (Resource (Fix Schema))
+        -> AST (Service (Schema  Id) (Schema  Id) (Resource (Schema  Id)))
+flatten svc = do
+     mapM_ (uncurry (prop Nothing)) (Map.toList (_svcSchemas svc))
+     ss <- gets (view schemas)
+     ps <- Map.traverseWithKey global   (_svcParameters svc)
+     rs <- Map.traverseWithKey resource (_svcResources svc)
+     return $! svc { _svcSchemas = ss, _svcParameters = ps, _svcResources = rs }
+  where
+    resource :: Id -> Resource (Fix Schema) -> AST (Resource (Schema Id))
+    resource k (Resource ms) = Resource <$> traverse go ms
+      where
+        go m = do
+            ps <- Map.traverseWithKey (local k) (_mParameters m)
+            return $! m { _mParameters = ps }
+
+    global  = param (Just "param")
+    local k = param (Just k)
+
+    param :: Maybe Id -> Id -> Param (Fix Schema) -> AST (Param (Schema Id))
+    param p k (Param l m f) = do
+        n <- prop p k f
+        s <- schema n
+        return $! Param l m s
+
+    -- unfold a schema property.
+    prop :: Maybe Id
+         -> Id
+         -> Fix Schema
+         -> AST Id
     prop p k (Fix f) = case f of
         Obj i ps -> do
             o <- Obj i <$> Map.traverseWithKey (prop (Just this)) ps
@@ -60,41 +92,26 @@ flatten m = execState (mapM_ (uncurry (prop Nothing)) (Map.toList m)) mempty
         Lit  i l     -> res (Lit  i l)
         Ref  _ r     -> pure r
         Any  i       -> res (Any  i)
-
       where
         res x = do
-            s <- gets (Map.lookup this)
+            s <- gets (Map.lookup this . view schemas)
             case s of
-                Nothing -> modify (Map.insert this x) >> pure this
+                Nothing -> (schemas %= Map.insert this x) >> pure this
                 -- FIXME:
                 Just e  -> error $ "Already exists: " ++ show (this, e, x)
 
         this = maybe k (<> k) p
 
-merge :: Versions -> [Service Data] -> [Library]
-merge v = map go . groupBy (on (==) _svcLibrary)
+render ::      Service (Schema Id) (Schema Id) (Resource (Schema Id))
+       -> AST (Service  Data        Solved      API)
+render svc = do
+    x <-     kvTraverseMaybe typ (_svcSchemas svc)
+    y <- Map.traverseWithKey prm (_svcParameters svc)
+    z <- Map.traverseWithKey (api y) (_svcResources svc)
+    return $! svc { _svcSchemas = x, _svcParameters = y, _svcResources = z }
   where
-    go [x]    = mk x
-    go (x:xs) = (mk x) { _libServices = x :| xs }
-    -- FIXME:
-    go []     = error "Empty merge set!"
-
-    mk x = Library
-        { _libName     = _svcLibrary x
-        , _libTitle    = renameTitle (_svcTitle x)
-        , _libVersions = v
-        , _libServices = x :| []
-        }
-
-render :: Service (Fix Schema) -> Either Error (Service Data)
-render s = runAST (Memo mempty mempty ss) $ do
-    r <- kvTraverseMaybe go ss
-    return $! s { _svcSchemas = r }
-  where
-    ss = flatten (_svcSchemas s)
-
-    go :: Id -> Schema Id -> AST (Maybe Data)
-    go k = \case
+    typ :: Id -> Schema Id -> AST (Maybe Data)
+    typ k = \case
         Arr  {}    -> pure Nothing
         Ref  {}    -> pure Nothing
         Any  {}    -> pure Nothing
@@ -123,6 +140,37 @@ render s = runAST (Memo mempty mempty ss) $ do
                 sformat ("Creates a value of '" % fid %
                          "' with the minimum fields required to make a request.\n")
                          k
+
+Make param types lit only, and fail at json parse time?
+Then avoid any solving/id memo steps.
+
+    prm :: Id -> Param (Schema Id) -> AST (Param Solved)
+    prm r p = do
+        let k = "param" <> r
+        traverse (const (solve k)) p
+
+    api :: Map Id (Param Solved) -> Id -> Resource (Schema Id) -> AST API
+    api cmn k (methods -> Map.toList -> ms) = do
+        z <- Map.traverseWithKey (\n p -> traverse (const $ solve (k <> n)) p) (_mParameters y)
+        API (aname k) <$>
+            traverse (pp None) (apiTypes svc cmn x (y { _mParameters = z }))
+      where
+        (x, y) = head ms
+
+merge :: Versions -> [Service Data Solved API] -> [Library]
+merge v = map go . groupBy (on (==) _svcLibrary)
+  where
+    go [x]    = mk x
+    go (x:xs) = (mk x) { _libServices = x :| xs }
+    -- FIXME:
+    go []     = error "Empty merge set!"
+
+    mk x = Library
+        { _libName     = _svcLibrary x
+        , _libTitle    = renameTitle (_svcTitle x)
+        , _libVersions = v
+        , _libServices = x :| []
+        }
 
 data PP
     = Indent

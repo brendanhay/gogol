@@ -17,6 +17,7 @@ import           Control.Lens                 hiding (iso, mapping, op, strict)
 import           Data.Foldable                (foldr')
 import qualified Data.HashMap.Strict          as Map
 import           Data.Maybe
+import           Data.Semigroup               ((<>))
 import           Data.String
 import           Data.Text                    (Text)
 import qualified Data.Text                    as Text
@@ -28,11 +29,38 @@ import           Language.Haskell.Exts.Build
 import           Language.Haskell.Exts.SrcLoc
 import           Language.Haskell.Exts.Syntax hiding (Int)
 
-instance IsString Name where
-    fromString = name
+instance IsString Name  where fromString = name
+instance IsString QName where fromString = UnQual . name
+instance IsString QOp   where fromString = op . sym
 
-instance IsString QOp where
-    fromString = op . name
+apiTypes :: Service s p r
+         -> Map Id (Param Solved)
+         -> Id
+         -> Method Solved
+         -> [Type]
+apiTypes s qps r m = map sing ps ++ qs ++ [end]
+  where
+    ps = filter (not . Text.null)
+         $ Text.split (== '/') (_svcServicePath s)
+        <> Text.split (== '/') (_mPath m)
+
+    -- FIXME: order by _mParameterOrder
+    qs = map param (Map.toList qps)
+      ++ map param (Map.toList (_mParameters m))
+
+    param (k, Param l _ t) =
+       -- FIXME: types, many/repeated
+        case l of
+            Path  -> TyApp (TyApp (tycon "Capture") (sing (idToText k))) (external (_type t))
+            Query -> TyApp (TyApp (tycon "QueryParam") (sing (idToText k))) (external (_type t))
+
+    end = TyApp (TyApp meth typ) res
+
+    meth = TyCon . unqual . Text.unpack $ Text.toTitle (_mMethod m)
+    typ  = tycon "'[JSON]"
+    res  = maybe (tycon "()") tycon (_mResponse m)
+
+    -- method (titlecase) '[JSON] (responsetype)
 
 objDecl :: Id -> Map Id Solved -> AST Decl
 objDecl r rs = DataDecl noLoc arity [] d [] [conDecl d rs] <$> derivings r
@@ -157,18 +185,11 @@ strict = TyBang BangedTy . \case
     t@TyApp{} -> TyParen t
     t         -> t
 
-dname, cname, fname, lname, pname :: Id -> Name
-dname = name . ref upperHead
-cname = name . ref (renameReserved . lowerHead)
-fname = name . ref (Text.cons '_' . lowerHead)
-lname = name . ref lowerHead
-pname = name . ref (flip Text.snoc '_' . Text.cons 'p' . upperHead)
+sing :: Text -> Type
+sing = TyCon . unqual . Text.unpack . flip mappend "\"" . mappend "\""
 
 tycon :: Id -> Type
 tycon = TyCon . unqual . ref upperHead
-
-ref :: (Text -> Text) -> Id -> String
-ref f = Text.unpack . f . idToText
 
 unqual :: String -> QName
 unqual = UnQual . name

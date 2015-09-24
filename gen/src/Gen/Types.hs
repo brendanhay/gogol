@@ -36,7 +36,6 @@ import           Data.Aeson                   hiding (Bool, String)
 import           Data.Aeson.TH
 import           Data.Char
 import           Data.Function                (on)
-import qualified Data.HashMap.Strict          as Map
 import           Data.List.NonEmpty           (NonEmpty (..))
 import qualified Data.List.NonEmpty           as NE
 import           Data.Maybe
@@ -72,11 +71,10 @@ toTextIgnore :: Path -> Text
 toTextIgnore = either id id . Path.toText
 
 data Templates = Templates
-    { cabalTemplate     :: Template
-    , tocTemplate       :: Template
-    , readmeTemplate    :: Template
-    , operationTemplate :: Template
-    , typesTemplate     :: Template
+    { cabalTemplate  :: Template
+    , tocTemplate    :: Template
+    , readmeTemplate :: Template
+    , typesTemplate  :: Template
     }
 
 newtype Version (v :: Symbol) = Version Text
@@ -126,6 +124,8 @@ specFromPath x = Spec n p v x
 
    p = toTextIgnore (Path.parent (Path.parent x))
    v = toTextIgnore (Path.dirname x)
+
+
 
 data Protocol = REST
     deriving (Eq, Show)
@@ -257,11 +257,14 @@ instance HasInfo (Schema a) where
             Ref  _ r   -> Ref  i r
             Any  {}    -> Any  i
 
-data Param = Param Location -- (Fix Schema)
+data Param a = Param !Location !Bool a
+    deriving (Functor, Foldable, Traversable)
 
-instance FromJSON Param where
-    parseJSON = withObject "parameter" $ \o ->
-        Param <$> o .: "location" -- <*> parseJSON (Object o)
+instance FromJSON a => FromJSON (Param a) where
+    parseJSON = withObject "parameter" $ \o -> Param
+        <$> o .:  "location"
+        <*> o .:? "repeated" .!= False
+        <*> parseJSON (Object o)
 
 deriveToJSON (js "") ''Param
 
@@ -302,27 +305,71 @@ instance ToJSON Data where
             , "lenses" .= ls
             ]
 
-data Method = Method
+
+data TType
+    = TType   Id
+    | TLit    Lit
+    | TMaybe  TType
+    | TEither TType TType
+    | TList   TType
+
+data Derive
+    = DEq
+    | DOrd
+    | DRead
+    | DShow
+    | DEnum
+    | DNum
+    | DIntegral
+    | DReal
+    | DMonoid
+    | DIsString
+    | DData
+    | DTypeable
+    | DGeneric
+      deriving (Eq, Show)
+
+data Solved = Solved
+    { _schema   :: Schema Id
+    , _type     :: TType
+    , _deriving :: [Derive]
+    }
+
+instance HasInfo Solved where
+    info = f . info
+      where
+        f = lens _schema (\s a -> s { _schema = a })
+
+deriveToJSON (js "T") ''TType
+deriveToJSON (js "D") ''Derive
+deriveToJSON (js "_") ''Solved
+
+data API = API Name [Rendered]
+
+instance ToJSON API where
+    toJSON (API n d) = object ["name" .= Syn n, "types" .= d]
+
+data Method a = Method
     { _mId             :: Text
     , _mPath           :: Text
     , _mMethod         :: Text
-    , _mDescription    :: Help
-    , _mParameters     :: Map Id Param
+    , _mDescription    :: Maybe Help
+    , _mParameters     :: Map Id (Param a)
     , _mParameterOrder :: [Id]
     , _mScopes         :: [Text]
     , _mRequest        :: Maybe Id
     , _mResponse       :: Maybe Id
     } deriving (Generic)
 
-instance FromJSON Method where
+instance FromJSON a => FromJSON (Method a) where
     parseJSON = withObject "method" $ \o -> Method
         <$> o .:  "id"
         <*> o .:  "path"
         <*> o .:  "httpMethod"
-        <*> o .:  "description"
+        <*> o .:? "description"
         <*> o .:  "parameters"
         <*> o .:? "parameterOrder" .!= mempty
-        <*> o .:  "scopes"
+        <*> o .:? "scopes"         .!= mempty
         <*> ref o "request"
         <*> ref o "response"
       where
@@ -331,16 +378,11 @@ instance FromJSON Method where
 
 deriveToJSON (js "_m") ''Method
 
-newtype Resource = Resource { methods :: Map Id Method }
-    deriving (ToJSON)
+newtype Resource a = Resource { methods :: Map Id (Method a) }
 
 deriveFromJSON (js "") ''Resource
 
--- instance FromJSON Resource where
---     parseJSON = withObject "resource" $ \o ->
---         o .: "methods" -- <|> fail (show (Map.lookup "methods" o))
-
-data Service a = Service
+data Service s p r = Service
     { _svcLibrary           :: Text
     , _svcTitle             :: Text
     , _svcName              :: Text
@@ -358,39 +400,40 @@ data Service a = Service
     , _svcServicePath       :: Text
     , _svcBatchPath         :: Text
     , _svcAuth              :: Maybe Object
-    , _svcParameters        :: Map Id Param
-    , _svcSchemas           :: Map Id a
-    , _svcResources         :: Map Id Resource
+    , _svcParameters        :: Map Id (Param p)
+    , _svcSchemas           :: Map Id s
+    , _svcResources         :: Map Id r
     } deriving (Generic)
 
 deriveFromJSON (js "_svc") ''Service
 
-instance ToJSON (Service Data) where
+instance ToJSON p => ToJSON (Service Data p API) where
     toJSON s = Object (x <> y)
       where
         Object x = genericToJSON (js "_svc") s
         Object y = object
             [ "exposedModules" .= exposedModules s
+            , "api"            .= Syn (aname (idFromText (_svcName s)))
             ]
 
-svcAbbrev :: Service a -> Text
+svcAbbrev :: Service s p r -> Text
 svcAbbrev = renameAbbrev . _svcTitle
 
-typeImports :: Service a -> [NS]
+typeImports :: Service s p r -> [NS]
 typeImports _ = ["Network.Google.Prelude"]
 
-tocNS, typesNS :: Service a -> NS
+tocNS, typesNS :: Service s p r -> NS
 tocNS s = NS ["Network", "Google", svcAbbrev s]
 typesNS = (<> "Types") . tocNS
 
-exposedModules :: Service a -> [NS]
+exposedModules :: Service s p r -> [NS]
 exposedModules s = [tocNS s, typesNS s]
 
 data Library = Library
     { _libName     :: Text
     , _libTitle    :: Text
     , _libVersions :: Versions
-    , _libServices :: NonEmpty (Service Data)
+    , _libServices :: NonEmpty (Service Data Solved API)
     }
 
 instance ToJSON Library where

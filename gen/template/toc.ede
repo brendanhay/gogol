@@ -6,10 +6,15 @@
 module {{ moduleName }}
     (
     -- * API Definition
-    {{ name | lowerHead }}
+      {{ api }}
+    , {{ api | lowerHead }}API
 
     -- * Resources
     -- $resources
+
+  {% for resource in resources %}
+    , {{ resource.value.name }}
+  {% endfor %}
 
     -- * Types
   {% for schema in schemas %}
@@ -39,3 +44,18 @@ import {{ module.value }}
 {- $resources
 TODO
 -}
+
+type {{ api }} =
+{% for resource in resources %}
+   {% if resource.first %}    {% else %}:<|>{% endif %} {{ resource.value.name }}
+{% endfor %}
+
+{{ api | lowerHead }}API :: Proxy {{ api }}
+{{ api | lowerHead }}API = Proxy
+{% for resource in resources %}
+
+type {{ resource.value.name }} =
+  {% for type in resource.value.types %}
+    {% if type.first %}  {% else %}:>{% endif %} {{ type.value }}
+  {% endfor %}
+{% endfor %}

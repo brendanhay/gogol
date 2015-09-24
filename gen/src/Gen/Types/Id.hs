@@ -11,34 +11,60 @@
 
 module Gen.Types.Id
     ( Id
+
+    -- * Conversion
     , idToText
     , idFromText
+
+    -- * Formatting
     , fid
+    , ref
+
+    -- * Syntax
+    , aname
+    , dname
+    , cname
+    , fname
+    , lname
+    , pname
     ) where
 
 import           Control.Applicative
-import           Control.Lens           hiding ((.=))
-import           Data.Aeson             hiding (Bool, String)
+import           Control.Lens                 hiding ((.=))
+import           Data.Aeson                   hiding (Bool, String)
 import           Data.Aeson.TH
-import qualified Data.Attoparsec.Text   as A
+import qualified Data.Attoparsec.Text         as A
 import           Data.Bifunctor
 import           Data.Char
-import           Data.Function          (on)
+import           Data.Function                (on)
 import           Data.Hashable
-import qualified Data.HashMap.Strict    as Map
+import qualified Data.HashMap.Strict          as Map
 import           Data.Maybe
 import           Data.Ord
-import           Data.Semigroup         hiding (Sum)
+import           Data.Semigroup               hiding (Sum)
 import           Data.String
-import           Data.Text              (Text)
-import qualified Data.Text              as Text
-import qualified Data.Text.Lazy         as LText
-import qualified Data.Text.Lazy.Builder as Build
+import           Data.Text                    (Text)
+import qualified Data.Text                    as Text
+import qualified Data.Text.Lazy               as LText
+import qualified Data.Text.Lazy.Builder       as Build
 import           Data.Text.Manipulate
 import           Formatting
 import           Gen.Text
 import           Gen.Types.Map
 import           GHC.Generics
+import           Language.Haskell.Exts.Build
+import           Language.Haskell.Exts.Syntax (Name)
+
+aname, dname, cname, fname, lname, pname :: Id -> Name
+aname = name . ref upperHead
+dname = name . ref upperHead
+cname = name . ref (renameReserved . lowerHead)
+fname = name . ref (Text.cons '_' . lowerHead)
+lname = name . ref lowerHead
+pname = name . ref (flip Text.snoc '_' . Text.cons 'p' . upperHead)
+
+ref :: (Text -> Text) -> Id -> String
+ref f = Text.unpack . f . idToText
 
 data Id
     = Opaque [Text]

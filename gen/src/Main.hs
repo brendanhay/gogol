@@ -135,7 +135,6 @@ main = do
             <$> load "cabal.ede"
             <*> load "toc.ede"
             <*> load "readme.ede"
-            <*> load "operation.ede"
             <*> load "types.ede"
             <*  lift done
 
@@ -159,7 +158,7 @@ main = do
 
             return s
 
-        libs <- merge _optVersions <$> traverse (hoistEither . render) svcs
+        libs <- hoistEither (runAST _optVersions svcs)
 
         void . counter "library" libs $ \l -> do
             say ("Creating " % stext % " package.") (_libTitle l)

@@ -35,52 +35,21 @@ import           Prelude              hiding (sum)
 -- Just use hashmaps to lookup refs etc, and hide all the mutation
 -- behind a StateT interface.
 
-data TType
-    = TType   Id
-    | TLit    Lit
-    | TMaybe  TType
-    | TEither TType TType
-    | TList   TType
-
-data Derive
-    = DEq
-    | DOrd
-    | DRead
-    | DShow
-    | DEnum
-    | DNum
-    | DIntegral
-    | DReal
-    | DMonoid
-    | DIsString
-    | DData
-    | DTypeable
-    | DGeneric
-      deriving (Eq, Show)
-
 data Memo = Memo
     { _typed   :: Map Id TType
     , _derived :: Map Id [Derive]
     , _schemas :: Map Id (Schema Id)
     }
 
+initial :: Memo
+initial = Memo mempty mempty mempty
+
 makeLenses ''Memo
 
 type AST = ExceptT Error (State Memo)
 
-data Solved = Solved
-    { _schema   :: Schema Id
-    , _type     :: TType
-    , _deriving :: [Derive]
-    }
-
-instance HasInfo Solved where
-    info = f . info
-      where
-        f = lens _schema (\s a -> s { _schema = a })
-
-runAST :: Memo -> AST a -> Either Error a
-runAST s m = evalState (runExceptT m) s
+-- runAST :: AST a -> Either Error a
+-- runAST m = evalState (runExceptT m) initial
 
 schema :: Id -> AST (Schema Id)
 schema k = do
