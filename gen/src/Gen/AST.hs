@@ -9,6 +9,7 @@
 {-# LANGUAGE RankNTypes                 #-}
 {-# LANGUAGE RecordWildCards            #-}
 {-# LANGUAGE TemplateHaskell            #-}
+{-# LANGUAGE ViewPatterns               #-}
 
 -- Module      : Gen.AST
 -- Copyright   : (c) 2015 Brendan Hay
@@ -21,30 +22,17 @@ module Gen.AST where
 
 import           Control.Applicative
 import           Control.Error
-import           Control.Lens
+import           Control.Lens                 hiding (lens)
 import           Control.Monad.Except
-import           Control.Monad.Morph
 import           Control.Monad.State
-import           Data.Aeson                   hiding (String)
-import           Data.Aeson.TH
-import qualified Data.Attoparsec.Text         as A
 import           Data.Char
 import           Data.Function                (on)
 import qualified Data.HashMap.Strict          as Map
-import           Data.List                    (groupBy, intersect, nub, sort)
-import           Data.List.NonEmpty           (NonEmpty (..), nonEmpty)
-import qualified Data.List.NonEmpty           as NE
-import           Data.Ord
-import           Data.Semigroup               hiding (Sum)
-import           Data.Text                    (Text)
-import qualified Data.Text                    as Text
+import           Data.List                    (groupBy)
+import           Data.List.NonEmpty           (NonEmpty (..))
+import           Data.Semigroup               ((<>))
 import qualified Data.Text.Lazy               as LText
 import qualified Data.Text.Lazy.Builder       as Build
-import           Data.Text.Manipulate
-import           Debug.Trace
-import qualified Filesystem.Path.CurrentOS    as Path
-import           Formatting
-import           Gen.Formatting
 import           Gen.Solve
 import           Gen.Syntax
 import           Gen.Text
@@ -52,42 +40,43 @@ import           Gen.Types
 import           HIndent
 import           Language.Haskell.Exts.Pretty
 import           Prelude                      hiding (sum)
-import           Text.EDE                     (Template)
 
 -- mapM isn't lazy here and I don't care!
-flatten :: Map Ref (Fix Schema) -> Map Ref (Schema Ref)
+flatten :: Map Id (Fix Schema) -> Map Id (Schema Id)
 flatten m = execState (mapM_ (uncurry (prop Nothing)) (Map.toList m)) mempty
   where
     -- unfold the properties.
     prop p k (Fix f) = case f of
         Obj i ps -> do
-            o <- Obj i <$> Map.traverseWithKey (prop (Just ref)) ps
+            o <- Obj i <$> Map.traverseWithKey (prop (Just this)) ps
             res o
 
-        Arr i e -> do
-            e' <- prop (Just ref) "item" e
+        Arr i (Fix e) -> do
+            e' <- prop (Just this) "item" (Fix (e & required .~ True))
             res (Arr i e')
 
         Enum i vs ds -> res (Enum i vs ds)
         Lit  i l     -> res (Lit  i l)
-        Ref  r       -> pure r
-        Any'         -> res Any'
+        Ref  _ r     -> pure r
+        Any  i       -> res (Any  i)
 
       where
         res x = do
-            m <- gets (Map.lookup ref)
-            case m of
-                Nothing -> modify (Map.insert ref x) >> pure ref
+            s <- gets (Map.lookup this)
+            case s of
+                Nothing -> modify (Map.insert this x) >> pure this
                 -- FIXME:
-                Just e  -> error $ "Already exists: " ++ show (ref, e, x)
+                Just e  -> error $ "Already exists: " ++ show (this, e, x)
 
-        ref = maybe k (<> k) p
+        this = maybe k (<> k) p
 
 merge :: Versions -> [Service Data] -> [Library]
 merge v = map go . groupBy (on (==) _svcLibrary)
   where
     go [x]    = mk x
     go (x:xs) = (mk x) { _libServices = x :| xs }
+    -- FIXME:
+    go []     = error "Empty merge set!"
 
     mk x = Library
         { _libName     = _svcLibrary x
@@ -103,41 +92,31 @@ render s = runAST (Memo mempty mempty ss) $ do
   where
     ss = flatten (_svcSchemas s)
 
-    go :: Ref -> Schema Ref -> AST (Maybe Data)
+    go :: Id -> Schema Id -> AST (Maybe Data)
     go k = \case
         Arr  {}  -> pure Nothing
         Ref  {}  -> pure Nothing
-        Any' {}  -> pure Nothing
+        Any  {}  -> pure Nothing
         Lit  {}  -> pure Nothing
         Enum {}  -> Just <$> sum
           where
             sum = Sum "sum help"
                 <$> pp Indent enumDecl
 
-        Obj _ rs -> Just <$> prod
+        Obj _ rs -> Just <$> (traverse solve rs >>= prod)
           where
-            prod = Prod
-                <$> (objDecl k rs >>= pp Indent)
-                <*> ctor
-                <*> traverse (uncurry lens) (Map.toList rs)
+            prod ts = Prod
+                <$> (objDecl k ts >>= pp Indent)
+                <*> ctor ts
+                <*> traverse (uncurry lens) (Map.toList ts)
 
-            ctor = Fun' "ctor help"
-                <$> pp None ctorSig
-                <*> pp Indent ctorDecl
+            ctor ts = Fun' "ctor help"
+                <$> (pp None   (ctorSig  k ts) >>= comments ts)
+                <*>  pp Indent (ctorDecl k ts)
 
-            lens n v = Fun' "lens help"
+            lens _ _ = Fun' "lens help"
                 <$> pp None  lensSig
                 <*> pp Print lensDecl
-
-             -- record declaration
-             -- smart constructor
-             --   signature
-             --   declaration
-             --   documentation
-             -- lenses per property
-             --   signature
-             --   declaration
-             --   documentation
 
 data PP
     = Indent
@@ -152,7 +131,7 @@ pp i x
   where
     result = hoistEither . bimap e Build.toLazyText
 
-    e = flip mappend (", when formatting datatype: " <> p) . LText.pack
+    e = flip mappend (", when formatting: " <> p) . LText.pack
 
     p = LText.dropWhile isSpace
       . LText.pack
@@ -170,3 +149,19 @@ pp i x
           { layout  = PPNoLayout
           , spacing = False
           }
+
+-- FIXME: dirty hack to render smart ctor parameter comments.
+comments :: Map Id Solved -> Rendered -> AST Rendered
+comments (Map.toList -> rs) x = do
+    let ks = filter (parameter . _schema . snd) rs
+        ps = map (Just . fst) ks ++ repeat Nothing
+    return
+        . LText.replace     " :: " "\n    :: "
+        . LText.intercalate "\n    -> "
+        . zipWith rel ps
+        . map LText.strip
+        $ LText.splitOn "->" x
+  where
+    rel Nothing  t = t
+    rel (Just k) t =
+        t <> " -- ^ '" <> LText.fromStrict (idToText k) <> "'"

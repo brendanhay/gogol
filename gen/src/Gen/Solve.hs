@@ -21,40 +21,21 @@ module Gen.Solve where
 
 import           Control.Applicative
 import           Control.Error
-import           Control.Lens
+import           Control.Lens         hiding (enum)
 import           Control.Monad.Except
-import           Control.Monad.Morph
 import           Control.Monad.State
-import qualified Data.Attoparsec.Text         as A
-import           Data.Char
-import           Data.Function                (on)
-import qualified Data.HashMap.Strict          as Map
-import           Data.List                    (groupBy, intersect, nub, sort)
-import           Data.List.NonEmpty           (NonEmpty (..), nonEmpty)
-import qualified Data.List.NonEmpty           as NE
-import           Data.Ord
-import           Data.Semigroup               hiding (Sum)
-import           Data.Text                    (Text)
-import qualified Data.Text                    as Text
-import qualified Data.Text.Lazy               as LText
-import qualified Data.Text.Lazy.Builder       as Build
-import           Data.Text.Manipulate
-import           Debug.Trace
-import qualified Filesystem.Path.CurrentOS    as Path
-import           Formatting
+import qualified Data.HashMap.Strict  as Map
+import           Data.List            (intersect)
+import           Data.Semigroup       ((<>))
 import           Gen.Formatting
-import           Gen.Text
 import           Gen.Types
-import           HIndent
-import           Language.Haskell.Exts.Pretty
-import           Prelude                      hiding (sum)
-import           Text.EDE                     (Template)
+import           Prelude              hiding (sum)
 
 -- Just use hashmaps to lookup refs etc, and hide all the mutation
 -- behind a StateT interface.
 
 data TType
-    = TType   Ref
+    = TType   Id
     | TLit    Lit
     | TMaybe  TType
     | TEither TType TType
@@ -77,28 +58,37 @@ data Derive
       deriving (Eq, Show)
 
 data Memo = Memo
-    { _typed   :: Map Ref TType
-    , _derived :: Map Ref [Derive]
-    , _schemas :: Map Ref (Schema Ref)
+    { _typed   :: Map Id TType
+    , _derived :: Map Id [Derive]
+    , _schemas :: Map Id (Schema Id)
     }
 
 makeLenses ''Memo
 
 type AST = ExceptT Error (State Memo)
 
-type Solved = (Schema Ref, TType, [Derive])
+data Solved = Solved
+    { _schema   :: Schema Id
+    , _type     :: TType
+    , _deriving :: [Derive]
+    }
+
+instance HasInfo Solved where
+    info = f . info
+      where
+        f = lens _schema (\s a -> s { _schema = a })
 
 runAST :: Memo -> AST a -> Either Error a
 runAST s m = evalState (runExceptT m) s
 
-schema :: Ref -> AST (Schema Ref)
+schema :: Id -> AST (Schema Id)
 schema k = do
     m <- gets (Map.lookup k . view schemas)
     case m of
-        Nothing -> failure ("Missing Schema: " % fref) k
+        Nothing -> failure ("Missing Schema: " % fid) k
         Just v  -> pure v
 
-memo :: Lens' Memo (Map Ref v) -> Ref -> (Schema Ref -> AST v) -> AST v
+memo :: Lens' Memo (Map Id v) -> Id -> (Schema Id -> AST v) -> AST v
 memo l k f = do
     m <- gets (Map.lookup k . view l)
     case m of
@@ -108,30 +98,33 @@ memo l k f = do
             l %= Map.insert k x
             return x
 
-solve :: Ref -> AST Solved
-solve k = (,,) <$> schema k <*> typeOf k <*> derive k
+solve :: Id -> AST Solved
+solve k = Solved <$> schema k <*> typeOf k <*> derive k
 
-typeOf :: Ref -> AST TType
+typeOf :: Id -> AST TType
 typeOf k = loc "typeOf" k $ memo typed k go
   where
-    go = \case
+    go s = fmap may $ case s of
         Obj  {} -> pure (TType k)
-        Arr _ r -> pure (TList (TType r))
+        Arr _ r -> TList <$> typeOf r
         Enum {} -> pure (TType k)
-        Ref   r -> typeOf r
-        Any'    -> pure (TEither (TLit Text) (TLit Long))
+        Ref _ r -> typeOf r
+        Any  {} -> pure (TEither (TLit Text) (TLit Long))
         Lit _ l -> pure (TLit l)
+      where
+        may | parameter s = id
+            | otherwise   = TMaybe
 
-derive :: Ref -> AST [Derive]
+derive :: Id -> AST [Derive]
 derive k = loc "derive" k $ memo derived k go
   where
     go = \case
-        Obj _ rs -> foldM props base (Map.elems rs)
-        Arr _ r  -> pure [] -- mappend monoid . intersect base <$> derive r
-        Enum {}  -> pure enum
-        Ref   r  -> derive r
-        Any'     -> pure base
-        Lit _ l  -> pure $
+        Obj  _ rs -> foldM props base (Map.elems rs)
+        Arr  _ r  -> mappend monoid . intersect base <$> derive r
+        Enum {}   -> pure enum
+        Ref  _ r  -> derive r
+        Any  _    -> pure base
+        Lit  _ l  -> pure $
             case l of
                 Text -> base <> [DOrd, DIsString]
                 Bool -> base <> enum
@@ -146,5 +139,5 @@ derive k = loc "derive" k $ memo derived k go
     enum   = [DOrd, DEnum]
     base   = [DEq, DRead, DShow, DData, DTypeable, DGeneric]
 
-loc :: String -> Ref -> a -> a
-loc n r = id -- trace (n ++ ": " ++ Text.unpack (refToText r))
+loc :: String -> Id -> a -> a
+loc _ _ = id -- trace (n ++ ": " ++ Text.unpack (refToText r))

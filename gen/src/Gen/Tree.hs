@@ -22,13 +22,10 @@ module Gen.Tree
     ) where
 
 import           Control.Error
-import           Control.Lens              (each, (^.), (^..))
 import           Control.Monad
 import           Control.Monad.Except
 import           Data.Aeson                hiding (json)
 import           Data.Bifunctor
-import           Data.Functor.Identity
-import qualified Data.HashMap.Strict       as Map
 import qualified Data.List.NonEmpty        as NE
 import           Data.Monoid
 import           Data.Text                 (Text)
@@ -99,8 +96,8 @@ populate d Templates{..} l = (encodeString d :/) . dir lib <$> layout
     lib :: Path
     lib = fromText (_libName l)
 
-    mod :: NS -> [NS] -> Template -> DirTree (Either Error Touch)
-    mod n is t = write . module' n is t . pure $ toJSON l
+    -- mod :: NS -> [NS] -> Template -> DirTree (Either Error Touch)
+    -- mod n is t = write . module' n is t . pure $ toJSON l
 
     file :: Path -> Template -> DirTree (Either Error Touch)
     file p t = write $ file' p t (pure env)

@@ -28,7 +28,7 @@ import           Gen.Formatting
 import           Gen.IO
 import qualified Gen.JSON                  as JS
 import qualified Gen.Tree                  as Tree
-import           Gen.Types
+import           Gen.Types                 hiding (info)
 import           Options.Applicative
 
 data Opt = Opt
@@ -182,6 +182,11 @@ class    HasName a       where getName :: a -> Text
 instance HasName Spec    where getName = _specName
 instance HasName Library where getName = _libName
 
+counter :: (MonadIO m, HasName a)
+        => Text
+        -> [a]
+        -> (a -> ExceptT Error m b)
+        -> ExceptT Error m [b]
 counter k xs f = forM (zip [1..] xs) $ \(n, x) -> do
     title ("[" % int % "/" % int % "] " % stext % ":" % stext)
           (n :: Int) i k (getName x)

@@ -27,8 +27,8 @@ import qualified Data.Text            as Text
 -- import           Data.Text.ICU.Replace (Replace)
 -- import qualified Data.Text.ICU.Replace as RE
 import           Data.Text.Manipulate
--- import           Text.Parsec.Language (haskellDef)
--- import           Text.Parsec.Token    (reservedNames)
+import           Text.Parsec.Language (haskellDef)
+import           Text.Parsec.Token    (reservedNames)
 
 -- asText :: (Text -> Text) -> String -> String
 -- asText f = Text.unpack . f . Text.pack
@@ -68,27 +68,22 @@ renameAbbrev = mconcat
     . stripPrefix "Google "
     . stripSuffix " API"
 
--- renameReserved :: Text -> Text
--- renameReserved x
---     | x `Set.member` xs = x <> "'"
---     | otherwise         = x
---   where
---     xs = Set.fromList $
---         [ "head"
---         , "tail"
---         , "delete"
---         , "filter"
---         , "True"
---         , "False"
---         , "map"
---         , "object"
---         , "get"
---         , "group"
---         , "GT"
---         , "LT"
---         , "EQ"
---         , "Error"
---         ] ++ map Text.pack (reservedNames haskellDef)
+renameReserved :: Text -> Text
+renameReserved x
+    | x `Set.member` xs = x <> "'"
+    | otherwise         = x
+  where
+    xs = Set.fromList $
+        [ "head"
+        , "tail"
+        , "delete"
+        , "filter"
+        , "map"
+        , "object"
+        , "get"
+        , "group"
+        , "error"
+        ] ++ map Text.pack (reservedNames haskellDef)
 
 -- camelAcronym :: Text -> Text
 -- camelAcronym x = replaceAll x xs

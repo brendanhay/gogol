@@ -29,6 +29,7 @@ executable gozen-gen
         , Gen.Text
         , Gen.Tree
         , Gen.Types
+        , Gen.Types.Id
         , Gen.Types.Map
         , Gen.Types.NS
 
@@ -38,7 +39,6 @@ executable gozen-gen
           aeson
         , attoparsec
         , base       == 4.8.*
-        , bifunctors
         , bytestring
         , directory-tree
         , ede
@@ -48,9 +48,9 @@ executable gozen-gen
         , haskell-src-exts
         , hindent
         , lens
-        , mmorph
         , mtl
         , optparse-applicative
+        , parsec
         , semigroups
         , system-fileio
         , system-filepath

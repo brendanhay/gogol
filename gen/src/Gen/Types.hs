@@ -26,32 +26,29 @@ module Gen.Types
     ( module Gen.Types
     , module Gen.Types.Map
     , module Gen.Types.NS
+    , module Gen.Types.Id
     ) where
 
 import           Control.Applicative
+import           Control.Lens              hiding ((.=))
 import           Data.Aeson                hiding (Bool, String)
 import           Data.Aeson.TH
-import qualified Data.Attoparsec.Text      as A
-import           Data.Bifunctor
 import           Data.Char
 import           Data.Function             (on)
-import           Data.Hashable
-import qualified Data.HashMap.Strict       as Map
-import           Data.List                 (groupBy, nub, sort)
-import           Data.List.NonEmpty        (NonEmpty (..), nonEmpty)
+import           Data.List.NonEmpty        (NonEmpty (..))
 import qualified Data.List.NonEmpty        as NE
+import           Data.Maybe
 import           Data.Ord
-import           Data.Semigroup            hiding (Sum)
-import           Data.String
+import           Data.Semigroup            ((<>))
 import           Data.Text                 (Text)
 import qualified Data.Text                 as Text
 import qualified Data.Text.Lazy            as LText
 import qualified Data.Text.Lazy.Builder    as Build
-import           Data.Text.Manipulate
 import qualified Data.Text.Read            as Read
 import qualified Filesystem.Path.CurrentOS as Path
 import           Formatting
 import           Gen.Text
+import           Gen.Types.Id
 import           Gen.Types.Map
 import           Gen.Types.NS
 import           GHC.Generics
@@ -144,10 +141,10 @@ data Location
 deriveJSON (js "") ''Location
 
 data Info = Info
-    { _infoDescription :: Maybe Text
-    , _infoDefault     :: Maybe Text
-    , _infoRequired    :: !Bool
-    , _infoLocation    :: Maybe Location
+    { _description :: Maybe Text
+    , _defaulted   :: Maybe Text
+    , _required    :: !Bool
+    , _location    :: Maybe Location
     } deriving (Eq, Show)
 
 instance FromJSON Info where
@@ -158,6 +155,11 @@ instance FromJSON Info where
         <*> o .:? "location"
 
 deriveToJSON (js "_info") ''Info
+
+makeClassy ''Info
+
+parameter :: HasInfo a => a -> Bool
+parameter s = s ^. required && isNothing (s ^. defaulted)
 
 data Lit
     = Text
@@ -170,7 +172,7 @@ data Lit
 
 instance FromJSON Lit where
     parseJSON = withObject "literal" $ \o -> do
-        n <- min =<< (o .:? "minimum" .!= "0")
+        n <- num =<< (o .:? "minimum" .!= "0")
         (o .: "format" <|> o .: "type") >>= \case
             -- Types
             "string"    -> pure Text
@@ -182,7 +184,7 @@ instance FromJSON Lit where
             e           -> fail $
                 "Unable to parse Lit from " ++ Text.unpack e
       where
-        min = either fail (pure . fst) . Read.decimal
+        num = either fail (pure . fst) . Read.decimal
 
         nat :: Int -> Lit -> Lit
         nat n | n > 0     = const Nat
@@ -196,64 +198,49 @@ instance FromJSON Lit where
 
 deriveToJSON (js "") ''Lit
 
-data Ref
-    = Opaque [Text]
-    | Direct Text
-      deriving (Eq, Show, Generic)
-
-instance Semigroup Ref where
-    a <> b = case (a, b) of
-        (Opaque xs, Opaque ys) -> Opaque (xs <> ys)
-        (Opaque xs, Direct y)  -> Opaque (xs <> [y])
-        (Direct x,  Opaque ys) -> Opaque (x : ys)
-        (Direct x,  Direct y)  -> Opaque [x, y]
-
-instance Hashable Ref
-
-instance IsString Ref where
-    fromString = Direct . fromString
-
-instance FromJSON Ref where parseJSON = withText "ref" (pure . Direct)
-instance ToJSON   Ref where toJSON    = toJSON . refToText
-
-instance FromJSON a => FromJSON (Map Ref a) where
-    parseJSON = fmap (Map.fromList . map (first Direct) . Map.toList) . parseJSON
-
-instance ToJSON a => ToJSON (Map Ref a) where
-    toJSON = toJSON . Map.fromList . map (first refToText) . Map.toList
-
-refToText :: Ref -> Text
-refToText = \case
-    Opaque xs -> mconcat (map upperHead xs)
-    Direct n  -> n
-
-fref :: Format a (Ref -> a)
-fref = later (Build.fromText . refToText)
-
 data Schema a
-    = Obj  Info (Map Ref a)
+    = Obj  Info (Map Id a)
     | Arr  Info a
     | Enum Info [Text] [Text]
     | Lit  Info Lit
-    | Ref  Ref
-    | Any' -- String or Number
+    | Ref  Info Id
+    | Any  Info -- String or Number
       deriving (Eq, Show, Functor, Foldable, Traversable)
 
 instance FromJSON (Fix Schema) where
-    parseJSON = withObject "schema" $ \o -> Fix <$> (ref o <|> schema o)
+    parseJSON = withObject "schema" $ \o -> do
+        i <- parseJSON (Object o)
+        Fix <$> (ref i o <|> schema i o)
       where
-        schema o = do
-            i <- parseJSON (Object o)
-            o .: "type" >>= \case
-                "object" -> Obj i <$> o .: "properties"
-                "array"  -> Arr i <$> o .: "items"
-                "any"    -> pure Any'
-                _        -> enum i o <|> Lit i <$> parseJSON (Object o)
+        schema i o = o .: "type" >>= \case
+            "object" -> Obj i <$> o .: "properties"
+            "array"  -> Arr i <$> o .: "items"
+            "any"    -> pure (Any i)
+            _        -> enm i o <|> Lit i <$> parseJSON (Object o)
 
-        enum i o = Enum i <$> o .: "enum" <*> o .: "enumDescriptions"
-        ref    o = Ref    <$> o .: "$ref"
+        enm i o = Enum i <$> o .: "enum" <*> o .: "enumDescriptions"
+        ref i o = Ref  i <$> o .: "$ref"
 
 deriveToJSON (js "") ''Schema
+
+instance HasInfo (Schema a) where
+    info = lens f (flip g)
+      where
+        f = \case
+            Obj  i _   -> i
+            Arr  i _   -> i
+            Enum i _ _ -> i
+            Lit  i _   -> i
+            Ref  i _   -> i
+            Any  i     -> i
+
+        g i = \case
+            Obj  _ p   -> Obj  i p
+            Arr  _ e   -> Arr  i e
+            Enum _ v d -> Enum i v d
+            Lit  _ l   -> Lit  i l
+            Ref  _ r   -> Ref  i r
+            Any  {}    -> Any  i
 
 data Param = Param Location -- (Fix Schema)
 
@@ -309,8 +296,8 @@ data Service a = Service
     , _svcServicePath       :: Text
     , _svcBatchPath         :: Text
     , _svcAuth              :: Maybe Object
-    , _svcParameters        :: Map Ref Param
-    , _svcSchemas           :: Map Ref a
+    , _svcParameters        :: Map Id Param
+    , _svcSchemas           :: Map Id a
     , _svcResources         :: Object
     } deriving (Generic)
 

@@ -17,7 +17,7 @@ module Gen.Formatting
 import           Control.Monad.Except
 import qualified Data.Text.Lazy         as LText
 import qualified Data.Text.Lazy.Builder as Build
-import           Formatting             hiding (left, right)
+import           Formatting             hiding (base, left, right)
 import           Formatting.Internal    (runFormat)
 import           Formatting.Time        hiding (fmt)
 import           Gen.Types
