@@ -24,36 +24,40 @@
 
 module Gen.Types
     ( module Gen.Types
+    , module Gen.Types.Help
+    , module Gen.Types.Id
     , module Gen.Types.Map
     , module Gen.Types.NS
-    , module Gen.Types.Id
     ) where
 
 import           Control.Applicative
-import           Control.Lens              hiding ((.=))
-import           Data.Aeson                hiding (Bool, String)
+import           Control.Lens                 hiding ((.=))
+import           Data.Aeson                   hiding (Bool, String)
 import           Data.Aeson.TH
 import           Data.Char
-import           Data.Function             (on)
-import           Data.List.NonEmpty        (NonEmpty (..))
-import qualified Data.List.NonEmpty        as NE
+import           Data.Function                (on)
+import           Data.List.NonEmpty           (NonEmpty (..))
+import qualified Data.List.NonEmpty           as NE
 import           Data.Maybe
 import           Data.Ord
-import           Data.Semigroup            ((<>))
-import           Data.Text                 (Text)
-import qualified Data.Text                 as Text
-import qualified Data.Text.Lazy            as LText
-import qualified Data.Text.Lazy.Builder    as Build
-import qualified Data.Text.Read            as Read
-import qualified Filesystem.Path.CurrentOS as Path
+import           Data.Semigroup               ((<>))
+import           Data.Text                    (Text)
+import qualified Data.Text                    as Text
+import qualified Data.Text.Lazy               as LText
+import qualified Data.Text.Lazy.Builder       as Build
+import qualified Data.Text.Read               as Read
+import qualified Filesystem.Path.CurrentOS    as Path
 import           Formatting
 import           Gen.Text
+import           Gen.Types.Help
 import           Gen.Types.Id
 import           Gen.Types.Map
 import           Gen.Types.NS
 import           GHC.Generics
 import           GHC.TypeLits
-import           Text.EDE                  (Template)
+import           Language.Haskell.Exts        (Name)
+import           Language.Haskell.Exts.Pretty (Pretty, prettyPrint)
+import           Text.EDE                     (Template)
 
 default (Text)
 
@@ -141,7 +145,7 @@ data Location
 deriveJSON (js "") ''Location
 
 data Info = Info
-    { _description :: Maybe Text
+    { _description :: Maybe Help
     , _defaulted   :: Maybe Text
     , _required    :: !Bool
     , _location    :: Maybe Location
@@ -164,8 +168,13 @@ parameter s = s ^. required && isNothing (s ^. defaulted)
 data Lit
     = Text
     | Bool
-    | Int
-    | Long
+    | Float
+    | Double
+    | Byte
+    | UInt32
+    | UInt64
+    | Int32
+    | Int64
     | Nat
     | Time
       deriving (Eq, Show)
@@ -178,8 +187,13 @@ instance FromJSON Lit where
             "string"    -> pure Text
             "boolean"   -> pure Bool
             -- Formats
-            "uint64"    -> pure (nat n Long)
-            "int32"     -> pure (nat n Int)
+            "float"     -> pure Float
+            "double"    -> pure Double
+            "byte"      -> pure (nat n Byte)
+            "uint32"    -> pure (nat n UInt32)
+            "uint64"    -> pure (nat n UInt64)
+            "int32"     -> pure (nat n Int32)
+            "int64"     -> pure (nat n Int64)
             "date-time" -> pure Time
             e           -> fail $
                 "Unable to parse Lit from " ++ Text.unpack e
@@ -213,8 +227,8 @@ instance FromJSON (Fix Schema) where
         Fix <$> (ref i o <|> schema i o)
       where
         schema i o = o .: "type" >>= \case
-            "object" -> Obj i <$> o .: "properties"
-            "array"  -> Arr i <$> o .: "items"
+            "object" -> Obj i <$> o .:? "properties" .!= mempty
+            "array"  -> Arr i <$> o .:  "items"
             "any"    -> pure (Any i)
             _        -> enm i o <|> Lit i <$> parseJSON (Object o)
 
@@ -250,30 +264,39 @@ instance FromJSON Param where
 
 deriveToJSON (js "") ''Param
 
-data Fun = Fun' Text Rendered Rendered
+data Syn a = Syn { syntax :: a }
+
+instance Pretty a => ToJSON (Syn a) where
+    toJSON = toJSON . prettyPrint . syntax
+
+data Fun = Fun' Name (Maybe Help) Rendered Rendered
 
 instance ToJSON Fun where
-    toJSON (Fun' h s d) = object
-        [ "help" .= h
+    toJSON (Fun' n h s d) = object
+        [ "name" .= Syn n
+        , "help" .= h
         , "sig"  .= s
         , "decl" .= d
         ]
 
 data Data
-    = Sum  Text Rendered
-    | Prod Rendered Fun [Fun]
+    = Sum  Name (Maybe Help) Rendered
+    | Prod Name (Maybe Help) Rendered Fun [Fun]
 
 instance ToJSON Data where
     toJSON = \case
-        Sum  h d    -> object
-            [ "type" .= "sum"
+        Sum n h d -> object
+            [ "name" .= Syn n
+            , "type" .= "sum"
             , "decl" .= d
             , "help" .= h
             ]
 
-        Prod d c ls -> object
-            [ "type"   .= "prod"
+        Prod n h d c ls -> object
+            [ "name"   .= Syn n
+            , "type"   .= "prod"
             , "decl"   .= d
+            , "help"   .= h
             , "ctor"   .= c
             , "lenses" .= ls
             ]

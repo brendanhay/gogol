@@ -1,18 +1,34 @@
+{% if type.help %}
+{{ type.help }}
+{% endif %}
 {% case type.type %}
 {% when "prod" %}
+--
+-- /See:/ '{{ type.ctor.name }}' smart constructor.
 {{ type.decl }}
 
+  {% if type.ctor.help %}
 {{ type.ctor.help }}
+  {% endif %}
+--
+  {% for lens in type.lenses %}
+    {% if lens.first %}
+-- Use one of the following lenses to modify other fields as desired:
+    {% endif %}
+--
+-- * '{{ lens.value.name }}'
+  {% endfor %}
 {{ type.ctor.sig }}
 {{ type.ctor.decl }}
   {% for lens in type.lenses %}
 
+    {% if lens.value.help %}
 {{ lens.value.help }}
+    {% endif %}
 {{ lens.value.sig }}
 {{ lens.value.decl }}
-  {% endfor %}
+    {% endfor %}
   {% when "sum" %}
-{{ type.help }}
 {{ type.decl }}
 {% else %}
   Error: Unrecognised type '{{ type.type }}'

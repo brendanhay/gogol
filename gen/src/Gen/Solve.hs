@@ -26,6 +26,7 @@ import           Control.Monad.Except
 import           Control.Monad.State
 import qualified Data.HashMap.Strict  as Map
 import           Data.List            (intersect)
+import           Data.Maybe
 import           Data.Semigroup       ((<>))
 import           Gen.Formatting
 import           Gen.Types
@@ -109,11 +110,12 @@ typeOf k = loc "typeOf" k $ memo typed k go
         Arr _ r -> TList <$> typeOf r
         Enum {} -> pure (TType k)
         Ref _ r -> typeOf r
-        Any  {} -> pure (TEither (TLit Text) (TLit Long))
+        Any  {} -> pure (TEither (TLit Text) (TLit Int64))
         Lit _ l -> pure (TLit l)
       where
-        may | parameter s = id
-            | otherwise   = TMaybe
+        may | s ^. required           = id
+            | isJust (s ^. defaulted) = id
+            | otherwise               = TMaybe
 
 derive :: Id -> AST [Derive]
 derive k = loc "derive" k $ memo derived k go
@@ -128,10 +130,9 @@ derive k = loc "derive" k $ memo derived k go
             case l of
                 Text -> base <> [DOrd, DIsString]
                 Bool -> base <> enum
-                Int  -> base
-                Long -> base <> [DNum, DIntegral, DReal] <> enum
-                Nat  -> base
                 Time -> base
+                Nat  -> base
+                _    -> base <> [DNum, DIntegral, DReal] <> enum
 
     props ds x = intersect ds <$> derive x
 

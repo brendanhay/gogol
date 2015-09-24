@@ -2,13 +2,33 @@
 --
 module {{ moduleName }}
     (
+    -- * API Definition
+      {{ name }}
+  {% for schema in schemas %}
+    {% case schema.value.type %}
+    {% when "prod" %}
+
+    -- * {{ schema.value.name }}
+    , {{ schema.value.name }}
+    , {{ schema.value.ctor.name }}
+      {% for lens in schema.value.lenses %}
+    , {{ lens.value.name }}
+      {% endfor %}
+    {% when "sum" %}
+
+    -- * {{ schema.value.name }}
+    , {{ schema.value.name }} (..)
+    {% endcase %}
+  {% endfor %}
     ) where
 
 {% for import in moduleImports %}
 import {{ import.value }}
 {% endfor %}
 
+{{ name }} :: a
+{{ name }} = error "{{ name }}"
 {% for schema in schemas %}
-  {% include "_include/type.ede" with type = schema.value %}
 
+  {% include "_include/type.ede" with type = schema.value %}
 {% endfor %}

@@ -2,6 +2,8 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TupleSections     #-}
 
+{-# OPTIONS_GHC -fno-warn-orphans #-}
+
 -- Module      : Gen.Syntax
 -- Copyright   : (c) 2015 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
@@ -11,9 +13,11 @@
 
 module Gen.Syntax where
 
-import           Control.Lens                 hiding (strict)
+import           Control.Lens                 hiding (iso, mapping, op, strict)
 import           Data.Foldable                (foldr')
 import qualified Data.HashMap.Strict          as Map
+import           Data.Maybe
+import           Data.String
 import           Data.Text                    (Text)
 import qualified Data.Text                    as Text
 import           Data.Text.Manipulate
@@ -23,6 +27,12 @@ import           Gen.Types
 import           Language.Haskell.Exts.Build
 import           Language.Haskell.Exts.SrcLoc
 import           Language.Haskell.Exts.Syntax hiding (Int)
+
+instance IsString Name where
+    fromString = name
+
+instance IsString QOp where
+    fromString = op . name
 
 objDecl :: Id -> Map Id Solved -> AST Decl
 objDecl r rs = DataDecl noLoc arity [] d [] [conDecl d rs] <$> derivings r
@@ -66,15 +76,29 @@ ctorDecl r rs = sfun noLoc c ps (UnGuardedRhs rhs) noBinds
 fieldUpdate :: Id -> Solved -> FieldUpdate
 fieldUpdate r s = FieldUpdate (UnQual (fname r)) rhs
   where
-    rhs | Just x <- s ^. defaulted = str x
-        | s ^. required            = var (pname r)
+    rhs | s ^. required            = p
+        | Just x <- s ^. defaulted = str x
+        | Just v <- iso (_type s)  = infixApp v "#" p
         | otherwise                = var (name "Nothing")
 
-lensSig :: Decl
-lensSig = emptyDecl
+    p = var (pname r)
 
-lensDecl :: Decl
-lensDecl = emptyDecl
+lensSig :: Id -> Id -> Solved -> Decl
+lensSig n r s = TypeSig noLoc [lname r] $
+    TyApp (TyApp (tycon "Lens'") (tycon n))
+          (external (_type s))
+
+lensDecl :: Id -> Solved -> Decl
+lensDecl r s = sfun noLoc l [] (UnGuardedRhs rhs) noBinds
+  where
+    l = lname r
+    f = fname r
+    t = _type s
+
+    rhs = mapping t $
+        app (app (var "lens") (var f))
+            (paren (lamE noLoc [pvar "s", pvar "a"]
+                   (RecUpdate (var "s") [FieldUpdate (UnQual f) (var "a")])))
 
 enumDecl :: Decl
 enumDecl = emptyDecl
@@ -100,12 +124,33 @@ internal = go
         TLit    l   -> lit l
 
     lit = \case
-        Text -> tycon "Text"
-        Bool -> tycon "Bool"
-        Int  -> tycon "Int"
-        Long -> tycon "Integer"
-        Nat  -> tycon "Natural"
-        Time -> tycon "UTCTime"
+        Text   -> tycon "Text"
+        Bool   -> tycon "Bool"
+        Time   -> tycon "UTCTime"
+        Nat    -> tycon "Natural"
+        Float  -> tycon "Float"
+        Double -> tycon "Double"
+        Byte   -> tycon "Word8"
+        UInt32 -> tycon "Word32"
+        UInt64 -> tycon "Word64"
+        Int32  -> tycon "Int32"
+        Int64  -> tycon "Int64"
+
+mapping :: TType -> Exp -> Exp
+mapping t e = infixE e "." (go t)
+  where
+    go = \case
+        TMaybe x@(TList {}) -> var "_Default" : go x
+        TMaybe x            -> nest (go x)
+        x                   -> maybeToList (iso x)
+
+    nest []     = []
+    nest (x:xs) = [app (var "mapping") (infixE x "." xs)]
+
+iso :: TType -> Maybe Exp
+iso = \case
+    TList {} -> Just (var "_Coerce")
+    _        -> Nothing
 
 strict :: Type -> Type
 strict = TyBang BangedTy . \case
@@ -127,6 +172,10 @@ ref f = Text.unpack . f . idToText
 
 unqual :: String -> QName
 unqual = UnQual . name
+
+infixE :: Exp -> QOp -> [Exp] -> Exp
+infixE l _ []     = l
+infixE l o (r:rs) = infixE (infixApp l o r) o rs
 
 str :: Text -> Exp
 str = strE . Text.unpack

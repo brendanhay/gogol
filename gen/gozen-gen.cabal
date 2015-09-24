@@ -25,6 +25,7 @@ executable gozen-gen
         , Gen.Formatting
         , Gen.IO
         , Gen.JSON
+        , Gen.Solve
         , Gen.Syntax
         , Gen.Text
         , Gen.Tree
@@ -50,6 +51,7 @@ executable gozen-gen
         , lens
         , mtl
         , optparse-applicative
+        , pandoc
         , parsec
         , semigroups
         , system-fileio

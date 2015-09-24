@@ -33,6 +33,7 @@ import           Data.List.NonEmpty           (NonEmpty (..))
 import           Data.Semigroup               ((<>))
 import qualified Data.Text.Lazy               as LText
 import qualified Data.Text.Lazy.Builder       as Build
+import           Gen.Formatting
 import           Gen.Solve
 import           Gen.Syntax
 import           Gen.Text
@@ -94,29 +95,34 @@ render s = runAST (Memo mempty mempty ss) $ do
 
     go :: Id -> Schema Id -> AST (Maybe Data)
     go k = \case
-        Arr  {}  -> pure Nothing
-        Ref  {}  -> pure Nothing
-        Any  {}  -> pure Nothing
-        Lit  {}  -> pure Nothing
-        Enum {}  -> Just <$> sum
+        Arr  {}    -> pure Nothing
+        Ref  {}    -> pure Nothing
+        Any  {}    -> pure Nothing
+        Lit  {}    -> pure Nothing
+        Enum i _ _ -> Just <$> sum
           where
-            sum = Sum "sum help"
+            sum = Sum (dname k) (i ^. description)
                 <$> pp Indent enumDecl
 
-        Obj _ rs -> Just <$> (traverse solve rs >>= prod)
+        Obj i rs -> Just <$> (traverse solve rs >>= prod)
           where
-            prod ts = Prod
+            prod ts = Prod (dname k) (i ^. description)
                 <$> (objDecl k ts >>= pp Indent)
                 <*> ctor ts
                 <*> traverse (uncurry lens) (Map.toList ts)
 
-            ctor ts = Fun' "ctor help"
+            ctor ts = Fun' (cname k) (Just help)
                 <$> (pp None   (ctorSig  k ts) >>= comments ts)
                 <*>  pp Indent (ctorDecl k ts)
 
-            lens _ _ = Fun' "lens help"
-                <$> pp None  lensSig
-                <*> pp Print lensDecl
+            lens n v = Fun' (lname n) (v ^. description)
+                <$> pp None  (lensSig k n v)
+                <*> pp Print (lensDecl  n v)
+
+            help = rawHelpText $
+                sformat ("Creates a value of '" % fid %
+                         "' with the minimum fields required to make a request.\n")
+                         k
 
 data PP
     = Indent
