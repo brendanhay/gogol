@@ -44,7 +44,7 @@ import           HIndent
 import           Language.Haskell.Exts.Pretty
 import           Prelude                      hiding (sum)
 
---runAST :: Service (Schema Id) Resource -> Either Error a
+runAST :: Service (Fix Schema) Resource -> Either Error (Service Data API)
 runAST svc =  evalState (runExceptT (render ss)) (initial (_svcSchemas ss))
   where
     ss = flatten svc
@@ -57,34 +57,33 @@ render svc = do
   where
     typ :: Id -> Schema Id -> AST (Maybe Data)
     typ k = \case
-        Arr  {}    -> pure Nothing
-        Ref  {}    -> pure Nothing
-        Any  {}    -> pure Nothing
-        Lit  {}    -> pure Nothing
-        Enum i vs ds -> do
-            n <- _prefix <$> solve k
-            return (Just (sum n))
+        Arr  {}      -> pure Nothing
+        Ref  {}      -> pure Nothing
+        Any  {}      -> pure Nothing
+        Lit  {}      -> pure Nothing
+        Enum i vs ds -> Just . sum' <$> prefix k
           where
-            sum n = Sum (dname n) (i ^. description)
-                (Map.fromList $ map (first (dname . Pre . idFromText) . join (,)) vs)
-                (map rawHelpText ds)
+            sum' p = Sum (dname k) (i ^. description) $
+                zipWith (branch p) vs (ds ++ repeat "")
+
+            branch p v = Branch (bname p v) v
 
         Obj i rs -> do
-            n <- _prefix <$> solve k
-            Just <$> (traverse solve rs >>= prod n)
+            p <- prefix k
+            Just <$> (Map.traverseWithKey (const . solve . mkProp k) rs >>= prod p)
           where
-            prod n ts = Prod (dname n) (i ^. description)
-                <$> (objDecl k n ts >>= pp Indent)
-                <*> ctor n ts
-                <*> traverse (lens n) (Map.elems ts)
+            prod p ts = Prod (dname k) (i ^. description)
+                <$> (objDecl k p ts >>= pp Indent)
+                <*> ctor p ts
+                <*> traverse (lens p) (Map.toList ts)
 
-            ctor n ts = Fun' (cname n) (Just help)
-                <$> (pp None   (ctorSig  n ts) >>= comments ts)
-                <*>  pp Indent (ctorDecl n ts)
+            ctor p ts = Fun' (cname k) (Just help)
+                <$> (pp None   (ctorSig  k   ts) <&> comments ts)
+                <*>  pp Indent (ctorDecl k p ts)
 
-            lens n v = Fun' (lname (_prefix v)) (v ^. description)
-                <$> pp None  (lensSig  n v)
-                <*> pp Print (lensDecl n v)
+            lens p (l, v) = Fun' (lname p l) (v ^. description)
+                <$> pp None  (lensSig k p l v)
+                <*> pp Print (lensDecl  p l v)
 
             help = rawHelpText $
                 sformat ("Creates a value of '" % fid %
@@ -97,36 +96,43 @@ render svc = do
         return $! API (aname k) (Map.fromList rs)
 
 flatten :: Service (Fix Schema) Resource -> Service (Schema Id) Resource
-flatten svc = svc
-    { _svcSchemas = execState (mapM_ (uncurry (prop Nothing)) ss) mempty
-    }
+flatten svc = svc { _svcSchemas = execState run mempty }
   where
-    ss = Map.toList (_svcSchemas svc)
+    run = mapM_ (uncurry top) (Map.toList (_svcSchemas svc))
 
-    -- unfold the properties.
-    prop p k (Fix f) = case f of
-        Obj i ps -> do
-            o <- Obj i <$> Map.traverseWithKey (prop (Just this)) ps
-            res o
-
-        Arr i (Fix e) -> do
-            e' <- prop (Just this) "item" (Fix (e & required .~ True))
-            res (Arr i e')
-
-        Enum i vs ds -> res (Enum i vs ds)
-        Lit  i l     -> res (Lit  i l)
-        Ref  i r     -> res (Ref  i r)
-        Any  i       -> res (Any  i)
-
+    top :: Id -> Fix Schema -> State (Map Id (Schema Id)) Id
+    top n (Fix f) = go f >>= ins n
       where
-        res x = do
-            s <- gets (Map.lookup this)
-            case s of
-                Nothing -> modify (Map.insert this x) >> pure this
-                -- FIXME:
-                Just e  -> error $ "Already exists: " ++ show (this, e, x)
+        go = \case
+            Obj i ps      -> Obj i <$> Map.traverseWithKey (prop n) ps
+            Arr i (Fix e) -> Arr i <$> prop n "item" (Fix (e & required .~ True))
 
-        this = maybe k (<> k) p
+            Enum i vs ds  -> pure (Enum i vs ds)
+            Lit  i x      -> pure (Lit  i x)
+            Ref  i r      -> pure (Ref  i r)
+            Any  i        -> pure (Any  i)
+
+    prop :: Id -> Local -> Fix Schema -> State (Map Id (Schema Id)) Id
+    prop n l (Fix f) = go f >>= ins this
+      where
+        go = \case
+            Obj i ps      -> Obj i <$> Map.traverseWithKey (prop this) ps
+            Arr i (Fix e) -> Arr i <$> prop this "item" (Fix (e & required .~ True))
+
+            Enum i vs ds -> pure (Enum i vs ds)
+            Lit  i x     -> pure (Lit  i x)
+            Ref  i r     -> pure (Ref  i r)
+            Any  i       -> pure (Any  i)
+
+        this = mkProp n l
+
+    ins :: Id -> Schema Id -> State (Map Id (Schema Id)) Id
+    ins n x = do
+        s <- gets (Map.lookup n)
+        case s of
+            Nothing -> modify (Map.insert n x) >> pure n
+            -- FIXME:
+            Just e  -> error $ "Already exists: " ++ show (n, e, x)
 
 merge :: Versions -> [Service Data API] -> [Library]
 merge v = map go . groupBy (on (==) _svcLibrary)
@@ -176,17 +182,16 @@ pp i x
           }
 
 -- FIXME: dirty hack to render smart ctor parameter comments.
-comments :: Map Id Solved -> Rendered -> AST Rendered
-comments (Map.toList -> rs) x = do
-    let ks = filter (parameter . _schema . snd) rs
-        ps = map (Just . fst) ks ++ repeat Nothing
-    return
-        . LText.replace     " :: " "\n    :: "
-        . LText.intercalate "\n    -> "
-        . zipWith rel ps
-        . map LText.strip
-        $ LText.splitOn "->" x
+comments :: Map Local Solved -> Rendered -> Rendered
+comments (Map.toList -> rs) =
+      LText.replace     " :: " "\n    :: "
+    . LText.intercalate "\n    -> "
+    . zipWith rel ps
+    . map LText.strip
+    . LText.splitOn     "->"
   where
+    ks = filter (parameter . _schema . snd) rs
+    ps = map (Just . fst) ks ++ repeat Nothing
+
     rel Nothing  t = t
-    rel (Just k) t =
-        t <> " -- ^ '" <> LText.fromStrict (idToText k) <> "'"
+    rel (Just l) t = t <> " -- ^ '" <> LText.fromStrict (local l) <> "'"

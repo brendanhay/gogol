@@ -4,4 +4,5 @@ extra-deps: []
 packages:
   - core
   - gozen
-  - gozen-youtube
+  - gozen-youtube-analytics
+  - gozen-compute

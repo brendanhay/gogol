@@ -32,6 +32,7 @@ executable gozen-gen
         , Gen.Text
         , Gen.Tree
         , Gen.Types
+        , Gen.Types.Help
         , Gen.Types.Id
         , Gen.Types.Map
         , Gen.Types.NS

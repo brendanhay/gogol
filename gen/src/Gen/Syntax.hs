@@ -46,7 +46,7 @@ apiTypes s r m = map sing ps ++ qs ++ [end]
     param (k, p) =
        -- FIXME: types, many/repeated
        let t = literal (_prmLiteral p)
-           n = sing (idToText k)
+           n = sing (local k)
         in case _prmLocation p of
             Path  -> TyApp (TyApp (tycon "Capture")    n) t
             Query -> TyApp (TyApp (tycon "QueryParam") n) t
@@ -55,70 +55,65 @@ apiTypes s r m = map sing ps ++ qs ++ [end]
 
     meth = TyCon . unqual . Text.unpack $ Text.toTitle (_mMethod m)
     typ  = tycon "'[JSON]"
-    res  = maybe (tycon "()") (tycon . Pre) (_mResponse m)
+    res  = maybe (tycon "()") (tycon . Free) (_mResponse m)
 
     -- method (titlecase) '[JSON] (responsetype)
 
-objDecl :: Id -> Pre -> Map Id Solved -> AST Decl
-objDecl r p rs = DataDecl noLoc arity [] d [] [conDecl d rs] <$> derivings r
+objDecl :: Id -> Pre -> Map Local Solved -> AST Decl
+objDecl n p rs = DataDecl noLoc arity [] d [] [conDecl d p rs] <$> derivings n
   where
-    d = dname p
+    d = dname n
 
     arity | Map.size rs == 1 = NewType
           | otherwise        = DataType
 
-conDecl :: Name -> Map Id Solved -> QualConDecl
-conDecl n rs = QualConDecl noLoc [] [] body
+conDecl :: Name -> Pre -> Map Local Solved -> QualConDecl
+conDecl n p rs = QualConDecl noLoc [] [] body
   where
-    body = case Map.elems rs of
+    body = case Map.toList rs of
         []  -> ConDecl n []
         [x] -> RecDecl n [field internal x]
         xs  -> RecDecl n (map (field (strict . internal)) xs)
 
-    field f v = ([fname (_prefix v)], f (_type v))
+    field f (l, v) = ([fname p l], f (_type v))
 
-ctorSig :: Pre -> Map Id Solved -> Decl
-ctorSig r rs = TypeSig noLoc [c] ts
+ctorSig :: Id -> Map Local Solved -> Decl
+ctorSig n rs = TypeSig noLoc [cname n] ts
   where
-    c = cname r
-    d = dname r
-
-    ts = foldr' TyFun (TyCon (UnQual d)) ps
+    ts = foldr' TyFun (TyCon (UnQual (dname n))) ps
     ps = parameters (Map.elems rs)
 
-ctorDecl :: Pre -> Map Id Solved -> Decl
-ctorDecl r rs = sfun noLoc c ps (UnGuardedRhs rhs) noBinds
+ctorDecl :: Id -> Pre -> Map Local Solved -> Decl
+ctorDecl n p rs = sfun noLoc c ps (UnGuardedRhs rhs) noBinds
   where
-    c = cname r
-    d = dname r
+    c = cname n
+    d = dname n
 
     rhs | Map.null rs = var d
         | otherwise   = RecConstr (UnQual d) $
-            map fieldUpdate (Map.elems rs)
+            map (uncurry (fieldUpdate p)) (Map.toList rs)
 
-    ps = map (pname . _prefix) . Map.elems $ Map.filter (view required) rs
+    ps = map (pname p) . Map.keys $ Map.filter (view required) rs
 
-fieldUpdate :: Solved -> FieldUpdate
-fieldUpdate s = FieldUpdate (UnQual (fname n)) rhs
+fieldUpdate :: Pre -> Local -> Solved -> FieldUpdate
+fieldUpdate p l s = FieldUpdate (UnQual (fname p l)) rhs
   where
-    rhs | s ^. required            = p
+    rhs | s ^. required            = v
         | Just x <- s ^. defaulted = str x
-        | Just v <- iso (_type s)  = infixApp v "#" p
+        | Just x <- iso (_type s)  = infixApp x "#" v
         | otherwise                = var (name "Nothing")
 
-    p = var (pname n)
-    n = _prefix s
+    v = var (pname p l)
 
-lensSig :: Pre -> Solved -> Decl
-lensSig n s = TypeSig noLoc [lname (_prefix s)] $
+lensSig :: Id -> Pre -> Local -> Solved -> Decl
+lensSig n p l s = TypeSig noLoc [lname p l] $
     TyApp (TyApp (tycon "Lens'") (tycon n))
           (external (_type s))
 
-lensDecl :: Pre -> Solved -> Decl
-lensDecl r s = sfun noLoc l [] (UnGuardedRhs rhs) noBinds
+lensDecl :: Pre -> Local -> Solved -> Decl
+lensDecl p l s = sfun noLoc (lname p l) [] (UnGuardedRhs rhs) noBinds
   where
-    f = fname r
-    l = lname (_prefix s)
+    f = fname p l
     t = _type s
 
     rhs = mapping t $
@@ -133,9 +128,12 @@ parameters :: [Solved] -> [Type]
 parameters = map (external . _type) . filter (view required)
 
 external, internal :: TType -> Type
-external = internal
+external = internal . \case
+    TMaybe t@TList {} -> t
+    t                 -> t
+
 internal = \case
-    TType   r   -> tycon (Pre r)
+    TType   r   -> tycon r
     TMaybe  t   -> TyApp (tycon "Maybe") (internal t)
     TEither a b -> TyApp (TyApp (tycon "Either") (internal a)) (internal b)
     TList   t   -> TyList (internal t)
@@ -179,8 +177,8 @@ strict = TyBang BangedTy . \case
 sing :: Text -> Type
 sing = TyCon . unqual . Text.unpack . flip mappend "\"" . mappend "\""
 
-tycon :: Pre -> Type
-tycon = TyCon . unqual . pre upperHead
+tycon :: Id -> Type
+tycon = TyCon . unqual . Text.unpack . idToText
 
 unqual :: String -> QName
 unqual = UnQual . name

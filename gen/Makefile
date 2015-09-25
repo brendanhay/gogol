@@ -16,7 +16,7 @@ MODELS ?= $(shell find $(MODEL_DIR) -type f -name '*.json' | sort)
 
 .PHONY: $(BIN)/gozen-gen gen format
 
-release: gen # format
+release: gen format
 
 gen: $(BIN)/gozen-gen $(MODEL_DIR)
 	$(BIN)/gozen-gen \
@@ -31,7 +31,7 @@ gen: $(BIN)/gozen-gen $(MODEL_DIR)
 
 format:
 	@echo -e '\nFormatting...'
-	@find $(wildcard $(OUT_DIR)/gozen-*/gen) $(wildcard $(OUT_DIR)/test/Test/AWS/Gen) \
+	@find $(wildcard $(OUT_DIR)/gozen-*/gen) \
  -type f \
  -name '*.hs' \
  -printf ' -> %p\n' \

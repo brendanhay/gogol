@@ -1,0 +1,15 @@
+{% if type.help %}
+{{ type.help }}
+{% endif %}
+data {{ type.name }}
+  {% for branch in type.branches %}
+    {% if branch.first %}={% else %}|{% endif %} {{ branch.value.name }}
+    {% if branch.value.help == "" %}
+      -- ^ @{{ branch.value.value }}@
+    {% else %}
+      -- ^ @{{ branch.value.value }}@ - {{ branch.value.help }}
+    {% endif %}
+  {% endfor %}
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable {{ type.name }}

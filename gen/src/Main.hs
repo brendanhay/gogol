@@ -27,7 +27,6 @@ import           Gen.AST
 import           Gen.Formatting
 import           Gen.IO
 import qualified Gen.JSON                  as JS
-import           Gen.Solve
 import qualified Gen.Tree                  as Tree
 import           Gen.Types                 hiding (info)
 import           Options.Applicative

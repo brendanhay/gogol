@@ -27,9 +27,7 @@ import           Control.Monad.Except
 import           Control.Monad.State.Strict
 import           Data.CaseInsensitive       (CI)
 import qualified Data.CaseInsensitive       as CI
-import           Data.Char                  (toLower)
 import           Data.Hashable
-import qualified Data.HashMap.Strict        as Map
 import qualified Data.HashMap.Strict        as Map
 import qualified Data.HashSet               as Set
 import           Data.List                  (intersect)
@@ -70,8 +68,7 @@ data Derive
       deriving (Eq, Show)
 
 data Solved = Solved
-    { _prefix   :: Pre
-    , _schema   :: Schema Id
+    { _schema   :: Schema Id
     , _type     :: TType
     , _deriving :: [Derive]
     }
@@ -101,14 +98,14 @@ type AST = ExceptT Error (State Memo)
 
 schema :: Id -> AST (Schema Id)
 schema k = do
-    m <- gets (Map.lookup k . view schemas)
+    m <- uses schemas (Map.lookup k)
     case m of
         Nothing -> failure ("Missing Schema: " % fid) k
         Just v  -> pure v
 
 memo :: Lens' Memo (Map Id v) -> Id -> (Schema Id -> AST v) -> AST v
 memo l k f = do
-    m <- gets (Map.lookup k . view l)
+    m <- uses l (Map.lookup k)
     case m of
         Just x  -> return x
         Nothing -> do
@@ -117,16 +114,16 @@ memo l k f = do
             return x
 
 solve :: Id -> AST Solved
-solve k = Solved <$> prefix k <*> schema k <*> typeOf k <*> derive k
+solve k = Solved <$> schema k <*> typeOf k <*> derive k
 
 typeOf :: Id -> AST TType
-typeOf k = loc "typeOf" k $ memo typed k go
+typeOf k = memo typed k go
   where
     go s = fmap may $ case s of
         Obj  {} -> pure (TType k)
         Arr _ r -> TList <$> typeOf r
         Enum {} -> pure (TType k)
-        Ref _ r -> typeOf r
+        Ref _ r -> typeOf (Free r)
         Any  {} -> pure (TEither (TLit Text) (TLit Int64))
         Lit _ l -> pure (TLit l)
       where
@@ -135,13 +132,13 @@ typeOf k = loc "typeOf" k $ memo typed k go
             | otherwise               = TMaybe
 
 derive :: Id -> AST [Derive]
-derive k = loc "derive" k $ memo derived k go
+derive k = memo derived k go
   where
     go = \case
         Obj  _ rs -> foldM props base (Map.elems rs)
         Arr  _ r  -> mappend monoid . intersect base <$> derive r
         Enum {}   -> pure enum
-        Ref  _ r  -> derive r
+        Ref  _ r  -> derive (Free r)
         Any  _    -> pure base
         Lit  _ l  -> pure $
             case l of
@@ -158,26 +155,24 @@ derive k = loc "derive" k $ memo derived k go
     base   = [DEq, DRead, DShow, DData, DTypeable, DGeneric]
 
 prefix :: Id -> AST Pre
-prefix k = loc "prefix" k $ memo prefixed k typ
+prefix n = memo prefixed n typ
   where
     typ = \case
-        Obj  i rs    -> field rs >> pure (Pre k)
-        Enum i vs ds -> pure (Pre k)
-        _            -> pure (Pre k)
+        Obj  i rs    -> field rs
+        Enum i vs ds -> pure mempty
+        _            -> pure mempty
 
-    field (keys -> ks) = do
-        p <- uniq fields (acronymPrefixes k) ks
-        forM_ ks $ \n ->
-            prefixed %= Map.insert (k <> key n) (Pre (key p <> key n))
-        pure (Pre (key p))
-
-    key = idFromText . CI.foldedCase
+    field rs = do
+        let ls = Map.keys rs
+            ks = Set.fromList (map (CI.mk . local) ls)
+        p <- uniq fields (acronymPrefixes n) ks
+        pure (Pre p)
 
     uniq :: Lens' Memo Seen
          -> [CI Text]
          -> Set (CI Text)
-         -> AST (CI Text)
-    uniq _    []     ks = failure ("Unable to generate unique prefix: " % fid) k
+         -> AST Text
+    uniq _    []     ks = failure ("Unable to generate unique prefix: " % fid) n
     uniq seen (x:xs) ks = do
         m <- uses seen (Map.lookup x)
         case m of
@@ -185,13 +180,10 @@ prefix k = loc "prefix" k $ memo prefixed k typ
                 -> uniq seen xs ks
             _   -> do
                 seen %= Map.insertWith (<>) x ks
-                return x
+                return (CI.foldedCase x)
 
 overlap :: (Eq a, Hashable a) => Set a -> Set a -> Bool
 overlap xs ys = not . Set.null $ Set.intersection xs ys
-
-keys :: Map Id a -> Set (CI Text)
-keys = Set.fromList . map (CI.mk . idToText) . Map.keys
 
 acronymPrefixes :: Id -> [CI Text]
 acronymPrefixes (idToText -> n) = map CI.mk (xs ++ map suffix ys)
@@ -232,6 +224,3 @@ acronymPrefixes (idToText -> n) = map CI.mk (xs ++ map suffix ys)
 
     -- SomeTestTType -> Som
     r6 = Text.take limit <$> listToMaybe (splitWords a)
-
-loc :: String -> Id -> a -> a
-loc _ _ = id -- trace (n ++ ": " ++ Text.unpack (refToText r))

@@ -1,3 +1,7 @@
+{-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
+
 {% include "_include/license.ede" %}
 --
 module {{ moduleName }}
@@ -31,5 +35,14 @@ import {{ import.value }}
 {{ name | lowerHead }} = error "{{ name }}"
 {% for schema in schemas %}
 
-  {% include "_include/type.ede" with type = schema.value %}
+  {% case schema.value.type %}
+  {% when "prod" %}
+  {% include "_include/prod.ede" with type = schema.value %}
+  {% when "sum" %}
+  {% include "_include/sum.ede" with type = schema.value %}
+  {% else %}
+Error: Unrecognised type:
+
+{{ schema.value | show }}
+  {% endcase %}
 {% endfor %}

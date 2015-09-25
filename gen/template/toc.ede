@@ -7,18 +7,18 @@ module {{ moduleName }}
     (
     -- * API Definition
       {{ api }}
-    , {{ api | lowerHead }}
+    {# , {{ api | lowerHead }} #}
 
-    -- * Resources
-    -- $resources
-  {% for resource in resources %}
+  {#   -- * Resources #}
+  {#   -- $resources #}
+  {# {% for resource in resources %} #}
 
-    -- ** {{ resource.value.name }}
-    , {{ resource.value.name }}
-    {% for method in resource.value.methods %}
-    , {{ method.key }}
-    {% endfor %}
-  {% endfor %}
+  {#   -- ** {{ resource.value.name }} #}
+  {#   , {{ resource.value.name }} #}
+  {#   {% for method in resource.value.methods %} #}
+  {#   , {{ method.key }} #}
+  {#   {% endfor %} #}
+  {# {% endfor %} #}
 
     -- * Types
   {% for schema in schemas %}
@@ -49,24 +49,27 @@ import {{ module.value }}
 TODO
 -}
 
-{{ api | lowerHead }} :: Proxy {{ api }}
-{{ api | lowerHead }} = Proxy
-
-type {{ api }} =
-{% for resource in resources %}
-    {% if resource.first %}    {% else %}:<|>{% endif %} {{ resource.value.name }}
-{% endfor %}
-{% for resource in resources %}
-
-type {{ resource.value.name }} =
-  {% for method in resource.value.methods %}
-    {% if !method.first %}:<|>{% else %}    {% endif %} {{ method.key }}
-  {% endfor %}
-  {% for method in resource.value.methods %}
-
-type {{ method.key }} =
-    {% for type in method.value %}
-    {% if !type.first %}:>{% else %}  {% endif %} {{ type.value }}
-    {% endfor %}
-  {% endfor %}
-{% endfor %}
+type {{ api }} = ()
+-- 
+-- {{ api | lowerHead }} :: Proxy {{ api }}
+-- {{ api | lowerHead }} = Proxy
+-- 
+-- type {{ api }} =
+-- {% for resource in resources %}
+--     {% if resource.first %}    {% else %}:<|>{% endif %} {{ resource.value.name }}
+-- {% endfor %}
+-- {% for resource in resources %}
+-- 
+-- type {{ resource.value.name }} =
+--   {% for method in resource.value.methods %}
+--     {% if !method.first %}:<|>{% else %}    {% endif %} {{ method.key }}
+--   {% endfor %}
+--   {% for method in resource.value.methods %}
+-- 
+-- type {{ method.key }} =
+--     {% for type in method.value %}
+--     {% if !type.first %}:>{% else %}  {% endif %} {{ type.value }}
+--     {% endfor %}
+--   {% endfor %}
+-- {% endfor %}
+-- 

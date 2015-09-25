@@ -217,11 +217,11 @@ instance FromJSON Lit where
 deriveToJSON (js "") ''Lit
 
 data Schema a
-    = Obj  Info (Map Id a)
+    = Obj  Info (Map Local a)
     | Arr  Info a
     | Enum Info [Text] [Text]
     | Lit  Info Lit
-    | Ref  Info Id
+    | Ref  Info Global
     | Any  Info -- String or Number
       deriving (Eq, Show, Functor, Foldable, Traversable)
 
@@ -291,18 +291,26 @@ instance ToJSON Fun where
         , "decl" .= d
         ]
 
+data Branch = Branch Name Text Text
+
+instance ToJSON Branch where
+    toJSON (Branch n v h) = object
+        [ "name"  .= Syn n
+        , "value" .= v
+        , "help"  .= h
+        ]
+
 data Data
-    = Sum  Name (Maybe Help) (Map Name Text) [Help]
+    = Sum  Name (Maybe Help) [Branch]
     | Prod Name (Maybe Help) Rendered Fun [Fun]
 
 instance ToJSON Data where
     toJSON = \case
-        Sum n h vs ds -> object
-            [ "name"         .= Syn n
-            , "type"         .= "sum"
-            , "help"         .= h
-            , "ctors"        .= vs
-            , "descriptions" .= ds
+        Sum n h bs -> object
+            [ "name"     .= Syn n
+            , "type"     .= "sum"
+            , "help"     .= h
+            , "branches" .= bs
             ]
 
         Prod n h d c ls -> object
@@ -327,11 +335,11 @@ data Method = Method
     , _mPath           :: Text
     , _mMethod         :: Text
     , _mDescription    :: Maybe Help
-    , _mParameters     :: Map Id Param
-    , _mParameterOrder :: [Id]
+    , _mParameters     :: Map Local Param
+    , _mParameterOrder :: [Local]
     , _mScopes         :: [Text]
-    , _mRequest        :: Maybe Id
-    , _mResponse       :: Maybe Id
+    , _mRequest        :: Maybe Global
+    , _mResponse       :: Maybe Global
     } deriving (Generic)
 
 instance FromJSON Method where
@@ -351,7 +359,7 @@ instance FromJSON Method where
 
 deriveToJSON (js "_m") ''Method
 
-newtype Resource = Resource { methods :: Map Id Method }
+newtype Resource = Resource { methods :: Map Global Method }
 
 deriveFromJSON (js "") ''Resource
 
@@ -373,7 +381,7 @@ data Service s r = Service
     , _svcServicePath       :: Text
     , _svcBatchPath         :: Text
     , _svcAuth              :: Maybe Object
-    , _svcParameters        :: Map Id Param
+    , _svcParameters        :: Map Local Param
     , _svcSchemas           :: Map Id s
     , _svcResources         :: Map Id r
     } deriving (Generic)

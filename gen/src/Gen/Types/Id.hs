@@ -10,29 +10,29 @@
 -- Stability   : provisional
 -- Portability : non-portable (GHC extensions)
 
-module Gen.Types.Id
-    ( Id
-    , Pre (..)
+module Gen.Types.Id where
+    -- ( Id
+    -- , Pre (..)
 
-    -- * Conversion
-    , idToText
-    , idFromText
-    , direct
+    -- -- * Conversion
+    -- , idToText
+    -- , idFromText
+    -- , direct
 
-    -- * Formatting
-    , fid
-    , ref
-    , pre
+    -- -- * Formatting
+    -- , fid
+    -- , ref
+    -- , pre
 
-    -- * Syntax
-    , aname
-    , mname
-    , dname
-    , cname
-    , fname
-    , lname
-    , pname
-    ) where
+    -- -- * Syntax
+    -- , aname
+    -- , mname
+    -- , dname
+    -- , cname
+    -- , fname
+    -- , lname
+    -- , pname
+    -- ) where
 
 import           Control.Applicative
 import           Control.Lens                 hiding (pre, (.=))
@@ -44,6 +44,8 @@ import           Data.Char
 import           Data.Function                (on)
 import           Data.Hashable
 import qualified Data.HashMap.Strict          as Map
+import           Data.List.NonEmpty           (NonEmpty (..))
+import qualified Data.List.NonEmpty           as NE
 import           Data.Maybe
 import           Data.Ord
 import           Data.Semigroup               hiding (Sum)
@@ -60,66 +62,100 @@ import           GHC.Generics
 import           Language.Haskell.Exts.Build
 import           Language.Haskell.Exts.Syntax (Name)
 
-newtype Pre = Pre Id
-    deriving (IsString)
-
 aname :: Id -> Name
-aname = name . ref upperHead
+aname = name . Text.unpack . upperHead . idToText
 
-mname :: Id -> Id -> Name
-mname p k = aname (p <> k)
+mname :: Id -> Global -> Name
+mname x y = name . Text.unpack $
+    upperHead (idToText x) <> upperHead (global y)
 
-dname, cname, fname, lname, pname :: Pre -> Name
-dname = name . pre upperHead
-cname = name . pre (renameReserved . lowerHead)
-fname = name . pre (Text.cons '_' . lowerHead)
-lname = name . pre lowerHead
-pname = name . pre (flip Text.snoc '_' . Text.cons 'p' . upperHead)
+dname, cname :: Id -> Name
+dname = name . Text.unpack . upperHead . idToText
+cname = name . Text.unpack . renameReserved . lowerHead . idToText
 
-pre :: (Text -> Text) -> Pre -> String
-pre f (Pre k) = ref f k
+bname :: Pre -> Text -> Name
+bname (Pre p) = name
+    . Text.unpack
+    . mappend (Text.toUpper p)
+    . upperHead
 
-ref :: (Text -> Text) -> Id -> String
-ref f = Text.unpack . f . idToText
+fname, lname, pname :: Pre -> Local -> Name
+fname = pre (Text.cons '_' . lowerHead)
+lname = pre lowerHead
+pname = pre (flip Text.snoc '_' . Text.cons 'p' . upperHead)
+
+pre :: (Text -> Text) -> Pre -> Local -> Name
+pre f (Pre p) = name . Text.unpack . f . mappend p . upperHead . local
+
+newtype Global = Global { global :: Text }
+    deriving (Eq, Show, Generic, Hashable, FromJSON, ToJSON, IsString)
+
+instance FromJSON a => FromJSON (Map Global a) where
+    parseJSON = fmap (fromMap Global) . parseJSON
+
+instance ToJSON a => ToJSON (Map Global a) where
+    toJSON = toJSON . toMap global
+
+gid :: Format a (Global -> a)
+gid = later (Build.fromText . global)
+
+newtype Local = Local { local :: Text }
+    deriving (Eq, Show, Generic, Hashable, FromJSON, ToJSON, IsString)
+
+instance FromJSON a => FromJSON (Map Local a) where
+    parseJSON = fmap (fromMap Local) . parseJSON
+
+instance ToJSON a => ToJSON (Map Local a) where
+    toJSON = toJSON . toMap local
+
+lid :: Format a (Local -> a)
+lid = later (Build.fromText . local)
 
 data Id
-    = Opaque [Text]
-    | Direct Text
+    = Free  Global
+    | Bound Global (NonEmpty Local)
       deriving (Eq, Show, Generic)
-
-instance Semigroup Id where
-    a <> b = case (a, b) of
-        (Opaque xs, Opaque ys) -> Opaque (xs <> ys)
-        (Opaque xs, Direct y)  -> Opaque (xs <> [y])
-        (Direct x,  Opaque ys) -> Opaque (x : ys)
-        (Direct x,  Direct y)  -> Opaque [x, y]
-
-instance IsString Id where
-    fromString = idFromText . fromString
 
 instance Hashable Id
 
-instance FromJSON Id where parseJSON = withText "id" (pure . idFromText)
-instance ToJSON   Id where toJSON    = toJSON . idToText
+instance IsString Id where
+    fromString = Free . Global . fromString
 
 instance FromJSON a => FromJSON (Map Id a) where
-    parseJSON o = Map.fromList . map (first idFromText) . Map.toList
-        <$> parseJSON o
+    parseJSON = fmap (fromMap (Free . Global)) . parseJSON
 
 instance ToJSON a => ToJSON (Map Id a) where
-    toJSON = toJSON . Map.fromList . map (first idToText) . Map.toList
+    toJSON = toJSON . toMap idToText
+
+newtype Pre = Pre Text
+    deriving (Show, Monoid)
+
+mkId :: Global -> [Local] -> Id
+mkId g = \case
+    []   -> Free  g
+    x:xs -> Bound g (x :| xs)
+
+mkProp :: Id -> Local -> Id
+mkProp n x =
+    case n of
+        Free  g    -> Bound g (x :| [])
+        Bound g xs -> Bound g (NE.cons x xs)
+
+revProp :: Id -> Local
+revProp = \case
+    Free  g    -> Local (global g)
+    Bound _ xs -> let x :| _ = NE.reverse xs in x
 
 idToText :: Id -> Text
-idToText = renameReserved . \case
-    Opaque xs -> mconcat (map upperHead xs)
-    Direct n  -> n
-
-idFromText :: Text -> Id
-idFromText = Direct
+idToText = renameReserved . upperHead . \case
+    Free  g    -> global g
+    Bound g ls -> mconcat (global g : map (upperHead . local) (NE.toList ls))
 
 fid :: Format a (Id -> a)
 fid = later (Build.fromText . idToText)
 
-direct :: Id -> Id
-direct (Direct  x) = Direct x
-direct (Opaque xs) = Direct (last xs)
+fromMap :: (Eq a, Hashable a) => (Text -> a) -> Map Text b -> Map a b
+fromMap f = Map.fromList . map (first f) . Map.toList
+
+toMap :: (a -> Text) -> Map a b -> Map Text b
+toMap f = Map.fromList . map (first f) . Map.toList
