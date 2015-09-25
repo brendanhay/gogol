@@ -1,6 +1,7 @@
-{-# LANGUAGE DeriveGeneric     #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE LambdaCase        #-}
+{-# LANGUAGE DeriveGeneric              #-}
+{-# LANGUAGE FlexibleInstances          #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase                 #-}
 
 -- Module      : Gen.Types.Id
 -- Copyright   : (c) 2015 Brendan Hay
@@ -11,14 +12,17 @@
 
 module Gen.Types.Id
     ( Id
+    , Pre (..)
 
     -- * Conversion
     , idToText
     , idFromText
+    , direct
 
     -- * Formatting
     , fid
     , ref
+    , pre
 
     -- * Syntax
     , aname
@@ -31,7 +35,7 @@ module Gen.Types.Id
     ) where
 
 import           Control.Applicative
-import           Control.Lens                 hiding ((.=))
+import           Control.Lens                 hiding (pre, (.=))
 import           Data.Aeson                   hiding (Bool, String)
 import           Data.Aeson.TH
 import qualified Data.Attoparsec.Text         as A
@@ -56,18 +60,24 @@ import           GHC.Generics
 import           Language.Haskell.Exts.Build
 import           Language.Haskell.Exts.Syntax (Name)
 
+newtype Pre = Pre Id
+    deriving (IsString)
+
 aname :: Id -> Name
 aname = name . ref upperHead
 
 mname :: Id -> Id -> Name
 mname p k = aname (p <> k)
 
-dname, cname, fname, lname, pname :: Id -> Name
-dname = name . ref upperHead
-cname = name . ref (renameReserved . lowerHead)
-fname = name . ref (Text.cons '_' . lowerHead)
-lname = name . ref lowerHead
-pname = name . ref (flip Text.snoc '_' . Text.cons 'p' . upperHead)
+dname, cname, fname, lname, pname :: Pre -> Name
+dname = name . pre upperHead
+cname = name . pre (renameReserved . lowerHead)
+fname = name . pre (Text.cons '_' . lowerHead)
+lname = name . pre lowerHead
+pname = name . pre (flip Text.snoc '_' . Text.cons 'p' . upperHead)
+
+pre :: (Text -> Text) -> Pre -> String
+pre f (Pre k) = ref f k
 
 ref :: (Text -> Text) -> Id -> String
 ref f = Text.unpack . f . idToText
@@ -109,3 +119,7 @@ idFromText = Direct
 
 fid :: Format a (Id -> a)
 fid = later (Build.fromText . idToText)
+
+direct :: Id -> Id
+direct (Direct  x) = Direct x
+direct (Opaque xs) = Direct (last xs)

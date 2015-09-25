@@ -24,10 +24,17 @@ import           Control.Error
 import           Control.Lens               hiding (enum)
 import           Control.Monad.Except
 import           Control.Monad.State.Strict
+import           Data.CaseInsensitive       (CI)
+import qualified Data.CaseInsensitive       as CI
+import           Data.Char                  (toLower)
 import qualified Data.HashMap.Strict        as Map
+import qualified Data.HashSet               as Set
 import           Data.List                  (intersect)
 import           Data.Maybe
 import           Data.Semigroup             ((<>))
+import           Data.Text                  (Text)
+import qualified Data.Text                  as Text
+import           Data.Text.Manipulate
 import           Gen.Formatting
 import           Gen.Types
 import           Prelude                    hiding (sum)
@@ -59,7 +66,8 @@ data Derive
       deriving (Eq, Show)
 
 data Solved = Solved
-    { _schema   :: Schema Id
+    { _prefix   :: Pre
+    , _schema   :: Schema Id
     , _type     :: TType
     , _deriving :: [Derive]
     }
@@ -69,14 +77,19 @@ instance HasInfo Solved where
       where
         f = lens _schema (\s a -> s { _schema = a })
 
+type Seen = Map (CI Text) (Set (CI Text))
+
 data Memo = Memo
-    { _typed   :: Map Id TType
-    , _derived :: Map Id [Derive]
-    , _schemas :: Map Id (Schema Id)
+    { _typed    :: Map Id TType
+    , _derived  :: Map Id [Derive]
+    , _prefixed :: Map Id Pre
+    , _branches :: Seen
+    , _fields   :: Seen
+    , _schemas  :: Map Id (Schema Id)
     }
 
 initial :: Map Id (Schema Id) -> Memo
-initial = Memo mempty mempty
+initial = Memo mempty mempty mempty mempty mempty
 
 makeLenses ''Memo
 
@@ -100,7 +113,7 @@ memo l k f = do
             return x
 
 solve :: Id -> AST Solved
-solve k = Solved <$> schema k <*> typeOf k <*> derive k
+solve k = Solved <$> prefix k <*> schema k <*> typeOf k <*> derive k
 
 typeOf :: Id -> AST TType
 typeOf k = loc "typeOf" k $ memo typed k go
@@ -139,6 +152,19 @@ derive k = loc "derive" k $ memo derived k go
     monoid = [DMonoid]
     enum   = [DOrd, DEnum]
     base   = [DEq, DRead, DShow, DData, DTypeable, DGeneric]
+
+prefix :: Id -> AST Pre
+prefix k = loc "prefix" k $ memo prefixed k go
+  where
+    go (Obj i rs) = Map.traverseWithKey prop rs >> pure (Pre k)
+    go s          = pure (Pre k)
+
+    prop n _ = do
+        let p = Pre (idFromText (acronym $ idToText k) <> n)
+        prefixed %= Map.insert (k <> n) p
+        pure p
+
+    acronym = foldMap (Text.singleton . toLower . Text.head) . splitWords
 
 loc :: String -> Id -> a -> a
 loc _ _ = id -- trace (n ++ ": " ++ Text.unpack (refToText r))

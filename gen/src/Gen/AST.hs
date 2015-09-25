@@ -1,5 +1,4 @@
 {-# LANGUAGE DataKinds                  #-}
-{-# LANGUAGE TupleSections                  #-}
 {-# LANGUAGE DeriveGeneric              #-}
 {-# LANGUAGE FlexibleContexts           #-}
 {-# LANGUAGE FlexibleInstances          #-}
@@ -10,6 +9,7 @@
 {-# LANGUAGE RankNTypes                 #-}
 {-# LANGUAGE RecordWildCards            #-}
 {-# LANGUAGE TemplateHaskell            #-}
+{-# LANGUAGE TupleSections              #-}
 {-# LANGUAGE ViewPatterns               #-}
 
 -- Module      : Gen.AST
@@ -21,6 +21,7 @@
 
 module Gen.AST where
 
+import Data.Bifunctor
 import           Control.Applicative
 import           Control.Error
 import           Control.Lens                 hiding (lens)
@@ -60,25 +61,30 @@ render svc = do
         Ref  {}    -> pure Nothing
         Any  {}    -> pure Nothing
         Lit  {}    -> pure Nothing
-        Enum i _ _ -> Just <$> sum
+        Enum i vs ds -> do
+            n <- _prefix <$> solve k
+            return (Just (sum n))
           where
-            sum = Sum (dname k) (i ^. description)
-                <$> pp Indent enumDecl
+            sum n = Sum (dname n) (i ^. description)
+                (Map.fromList $ map (first (dname . Pre . idFromText) . join (,)) vs)
+                (map rawHelpText ds)
 
-        Obj i rs -> Just <$> (traverse solve rs >>= prod)
+        Obj i rs -> do
+            n <- _prefix <$> solve k
+            Just <$> (traverse solve rs >>= prod n)
           where
-            prod ts = Prod (dname k) (i ^. description)
-                <$> (objDecl k ts >>= pp Indent)
-                <*> ctor ts
-                <*> traverse (uncurry lens) (Map.toList ts)
+            prod n ts = Prod (dname n) (i ^. description)
+                <$> (objDecl k n ts >>= pp Indent)
+                <*> ctor n ts
+                <*> traverse (lens n) (Map.elems ts)
 
-            ctor ts = Fun' (cname k) (Just help)
-                <$> (pp None   (ctorSig  k ts) >>= comments ts)
-                <*>  pp Indent (ctorDecl k ts)
+            ctor n ts = Fun' (cname n) (Just help)
+                <$> (pp None   (ctorSig  n ts) >>= comments ts)
+                <*>  pp Indent (ctorDecl n ts)
 
-            lens n v = Fun' (lname n) (v ^. description)
-                <$> pp None  (lensSig k n v)
-                <*> pp Print (lensDecl  n v)
+            lens n v = Fun' (lname (_prefix v)) (v ^. description)
+                <$> pp None  (lensSig  n v)
+                <*> pp Print (lensDecl n v)
 
             help = rawHelpText $
                 sformat ("Creates a value of '" % fid %
@@ -109,7 +115,7 @@ flatten svc = svc
 
         Enum i vs ds -> res (Enum i vs ds)
         Lit  i l     -> res (Lit  i l)
-        Ref  _ r     -> pure r
+        Ref  i r     -> res (Ref  i r)
         Any  i       -> res (Any  i)
 
       where

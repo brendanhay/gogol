@@ -38,6 +38,7 @@ import           Data.Bifunctor
 import           Data.Char
 import           Data.Function                (on)
 import qualified Data.HashMap.Strict          as Map
+import qualified Data.HashSet                 as Set
 import           Data.List.NonEmpty           (NonEmpty (..))
 import qualified Data.List.NonEmpty           as NE
 import           Data.Maybe
@@ -50,6 +51,7 @@ import qualified Data.Text.Lazy.Builder       as Build
 import qualified Data.Text.Read               as Read
 import qualified Filesystem.Path.CurrentOS    as Path
 import           Formatting
+import           Gen.Orphans
 import           Gen.Text
 import           Gen.Types.Help
 import           Gen.Types.Id
@@ -65,6 +67,7 @@ default (Text)
 
 newtype Fix f = Fix (f (Fix f))
 
+type Set      = Set.HashSet
 type Error    = LText.Text
 type Rendered = LText.Text
 type Path     = Path.FilePath
@@ -289,16 +292,17 @@ instance ToJSON Fun where
         ]
 
 data Data
-    = Sum  Name (Maybe Help) Rendered
+    = Sum  Name (Maybe Help) (Map Name Text) [Help]
     | Prod Name (Maybe Help) Rendered Fun [Fun]
 
 instance ToJSON Data where
     toJSON = \case
-        Sum n h d -> object
-            [ "name" .= Syn n
-            , "type" .= "sum"
-            , "decl" .= d
-            , "help" .= h
+        Sum n h vs ds -> object
+            [ "name"         .= Syn n
+            , "type"         .= "sum"
+            , "help"         .= h
+            , "ctors"        .= vs
+            , "descriptions" .= ds
             ]
 
         Prod n h d c ls -> object
@@ -315,7 +319,7 @@ data API = API Name (Map Name [Rendered])
 instance ToJSON API where
     toJSON (API n ms) = object
         [ "name"    .= Syn n
-        , "methods" .= Map.fromList (map (first prettyPrint) $ Map.toList ms)
+        , "methods" .= ms
         ]
 
 data Method = Method
@@ -382,11 +386,11 @@ instance ToJSON (Service Data API) where
         Object x = genericToJSON (js "_svc") s
         Object y = object
             [ "exposedModules" .= exposedModules s
-            , "api"            .= Syn (aname (idFromText (_svcName s)))
+            , "api"            .= svcAbbrev s
             ]
 
 svcAbbrev :: Service s r -> Text
-svcAbbrev = renameAbbrev . _svcTitle
+svcAbbrev s = renameAbbrev $ fromMaybe (_svcTitle s) (_svcCanonicalName s)
 
 typeImports :: Service s r -> [NS]
 typeImports _ = ["Network.Google.Prelude"]

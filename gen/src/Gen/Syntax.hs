@@ -13,7 +13,8 @@
 
 module Gen.Syntax where
 
-import           Control.Lens                 hiding (iso, mapping, op, strict)
+import           Control.Lens                 hiding (iso, mapping, op, pre,
+                                               strict)
 import           Data.Foldable                (foldr')
 import           Data.Hashable
 import qualified Data.HashMap.Strict          as Map
@@ -23,18 +24,13 @@ import           Data.String
 import           Data.Text                    (Text)
 import qualified Data.Text                    as Text
 import           Data.Text.Manipulate
+import           Gen.Orphans
 import           Gen.Solve
 import           Gen.Text
 import           Gen.Types
 import           Language.Haskell.Exts.Build
 import           Language.Haskell.Exts.SrcLoc
 import           Language.Haskell.Exts.Syntax hiding (Int)
-
-instance Hashable Name
-
-instance IsString Name  where fromString = name
-instance IsString QName where fromString = UnQual . name
-instance IsString QOp   where fromString = op . sym
 
 apiTypes :: Service s r -> Id -> Method -> [Type]
 apiTypes s r m = map sing ps ++ qs ++ [end]
@@ -59,14 +55,14 @@ apiTypes s r m = map sing ps ++ qs ++ [end]
 
     meth = TyCon . unqual . Text.unpack $ Text.toTitle (_mMethod m)
     typ  = tycon "'[JSON]"
-    res  = maybe (tycon "()") tycon (_mResponse m)
+    res  = maybe (tycon "()") (tycon . Pre) (_mResponse m)
 
     -- method (titlecase) '[JSON] (responsetype)
 
-objDecl :: Id -> Map Id Solved -> AST Decl
-objDecl r rs = DataDecl noLoc arity [] d [] [conDecl d rs] <$> derivings r
+objDecl :: Id -> Pre -> Map Id Solved -> AST Decl
+objDecl r p rs = DataDecl noLoc arity [] d [] [conDecl d rs] <$> derivings r
   where
-    d = dname r
+    d = dname p
 
     arity | Map.size rs == 1 = NewType
           | otherwise        = DataType
@@ -74,14 +70,14 @@ objDecl r rs = DataDecl noLoc arity [] d [] [conDecl d rs] <$> derivings r
 conDecl :: Name -> Map Id Solved -> QualConDecl
 conDecl n rs = QualConDecl noLoc [] [] body
   where
-    body = case Map.toList rs of
+    body = case Map.elems rs of
         []  -> ConDecl n []
         [x] -> RecDecl n [field internal x]
         xs  -> RecDecl n (map (field (strict . internal)) xs)
 
-    field f (k, v) = ([fname k], f (_type v))
+    field f v = ([fname (_prefix v)], f (_type v))
 
-ctorSig :: Id -> Map Id Solved -> Decl
+ctorSig :: Pre -> Map Id Solved -> Decl
 ctorSig r rs = TypeSig noLoc [c] ts
   where
     c = cname r
@@ -90,7 +86,7 @@ ctorSig r rs = TypeSig noLoc [c] ts
     ts = foldr' TyFun (TyCon (UnQual d)) ps
     ps = parameters (Map.elems rs)
 
-ctorDecl :: Id -> Map Id Solved -> Decl
+ctorDecl :: Pre -> Map Id Solved -> Decl
 ctorDecl r rs = sfun noLoc c ps (UnGuardedRhs rhs) noBinds
   where
     c = cname r
@@ -98,30 +94,31 @@ ctorDecl r rs = sfun noLoc c ps (UnGuardedRhs rhs) noBinds
 
     rhs | Map.null rs = var d
         | otherwise   = RecConstr (UnQual d) $
-            map (uncurry fieldUpdate) (Map.toList rs)
+            map fieldUpdate (Map.elems rs)
 
-    ps = map pname . Map.keys $ Map.filter (view required) rs
+    ps = map (pname . _prefix) . Map.elems $ Map.filter (view required) rs
 
-fieldUpdate :: Id -> Solved -> FieldUpdate
-fieldUpdate r s = FieldUpdate (UnQual (fname r)) rhs
+fieldUpdate :: Solved -> FieldUpdate
+fieldUpdate s = FieldUpdate (UnQual (fname n)) rhs
   where
     rhs | s ^. required            = p
         | Just x <- s ^. defaulted = str x
         | Just v <- iso (_type s)  = infixApp v "#" p
         | otherwise                = var (name "Nothing")
 
-    p = var (pname r)
+    p = var (pname n)
+    n = _prefix s
 
-lensSig :: Id -> Id -> Solved -> Decl
-lensSig n r s = TypeSig noLoc [lname r] $
+lensSig :: Pre -> Solved -> Decl
+lensSig n s = TypeSig noLoc [lname (_prefix s)] $
     TyApp (TyApp (tycon "Lens'") (tycon n))
           (external (_type s))
 
-lensDecl :: Id -> Solved -> Decl
+lensDecl :: Pre -> Solved -> Decl
 lensDecl r s = sfun noLoc l [] (UnGuardedRhs rhs) noBinds
   where
-    l = lname r
     f = fname r
+    l = lname (_prefix s)
     t = _type s
 
     rhs = mapping t $
@@ -129,14 +126,8 @@ lensDecl r s = sfun noLoc l [] (UnGuardedRhs rhs) noBinds
             (paren (lamE noLoc [pvar "s", pvar "a"]
                    (RecUpdate (var "s") [FieldUpdate (UnQual f) (var "a")])))
 
-enumDecl :: Decl
-enumDecl = emptyDecl
-
-emptyDecl :: Decl
-emptyDecl = DataDecl noLoc DataType [] (name "Empty") [] [] []
-
 derivings :: Id -> AST [Deriving]
-derivings = fmap (map ((,[]) . unqual . drop 1 . show)) . derive
+derivings k = map ((,[]) . unqual . drop 1 . show) <$> derive k
 
 parameters :: [Solved] -> [Type]
 parameters = map (external . _type) . filter (view required)
@@ -144,7 +135,7 @@ parameters = map (external . _type) . filter (view required)
 external, internal :: TType -> Type
 external = internal
 internal = \case
-    TType   r   -> tycon r
+    TType   r   -> tycon (Pre r)
     TMaybe  t   -> TyApp (tycon "Maybe") (internal t)
     TEither a b -> TyApp (TyApp (tycon "Either") (internal a)) (internal b)
     TList   t   -> TyList (internal t)
@@ -188,8 +179,8 @@ strict = TyBang BangedTy . \case
 sing :: Text -> Type
 sing = TyCon . unqual . Text.unpack . flip mappend "\"" . mappend "\""
 
-tycon :: Id -> Type
-tycon = TyCon . unqual . ref upperHead
+tycon :: Pre -> Type
+tycon = TyCon . unqual . pre upperHead
 
 unqual :: String -> QName
 unqual = UnQual . name
