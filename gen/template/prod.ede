@@ -1,0 +1,18 @@
+{-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
+
+{% include "_include/license.ede" %}
+--
+module {{ moduleName }} where
+
+{% for import in moduleImports %}
+import {{ import.value }}
+{% endfor %}
+{% for schema in schemas %}
+  {% case schema.value.type %}
+  {% when "prod" %}
+
+  {% include "_include/prod.ede" with type = schema.value %}
+  {% endcase %}
+{% endfor %}

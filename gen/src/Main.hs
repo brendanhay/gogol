@@ -136,6 +136,8 @@ main = do
             <*> load "toc.ede"
             <*> load "readme.ede"
             <*> load "types.ede"
+            <*> load "prod.ede"
+            <*> load "sum.ede"
             <*  lift done
 
         title "Selecting new service models..."

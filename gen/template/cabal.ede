@@ -31,6 +31,11 @@ library
         {% if module.first %} {% else %},{% endif %} {{ module.value }}
       {% endfor %}
 
+    other-modules:
+      {% for module in otherModules %}
+        {% if module.first %} {% else %},{% endif %} {{ module.value }}
+      {% endfor %}
+
     build-depends:
           gozen-core == {{ coreVersion }}.*
         , base       >= 4.7 && < 5

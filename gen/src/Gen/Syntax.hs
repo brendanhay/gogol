@@ -30,7 +30,7 @@ import           Gen.Text
 import           Gen.Types
 import           Language.Haskell.Exts.Build
 import           Language.Haskell.Exts.SrcLoc
-import           Language.Haskell.Exts.Syntax hiding (Int)
+import           Language.Haskell.Exts.Syntax hiding (Int, Lit)
 
 apiTypes :: Service s r -> Id -> Method -> [Type]
 apiTypes s r m = map sing ps ++ qs ++ [end]
@@ -99,11 +99,17 @@ fieldUpdate :: Pre -> Local -> Solved -> FieldUpdate
 fieldUpdate p l s = FieldUpdate (UnQual (fname p l)) rhs
   where
     rhs | s ^. required            = v
-        | Just x <- s ^. defaulted = str x
+        | Just x <- s ^. defaulted = def x (_schema s)
         | Just x <- iso (_type s)  = infixApp x "#" v
         | otherwise                = var (name "Nothing")
 
     v = var (pname p l)
+
+    def x = \case
+        Enum {}     -> var (bname (_prefix s) x)
+        Lit  _ Text -> str x
+        --- FIXME: lift to AST
+        s           -> error $ "Unmatched fieldUpdate:\n" ++ show s
 
 lensSig :: Id -> Pre -> Local -> Solved -> Decl
 lensSig n p l s = TypeSig noLoc [lname p l] $

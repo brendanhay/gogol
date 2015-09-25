@@ -84,40 +84,26 @@ populate d Templates{..} l = (encodeString d :/) . dir lib <$> layout
         ]
 
     service s =
-        [ write $ module' (tocNS s) mempty tocTemplate (pure svc)
+        [ mod' (tocNS s) mempty tocTemplate (pure svc)
         , dir (fromText (svcAbbrev s))
-            [ write $ module' (typesNS s) (typeImports s) typesTemplate (pure svc)
+            [ mod' (typesNS s) (typeImports s) typesTemplate (pure svc)
+            , dir "Types"
+                [ mod' (prodNS s) (prodImports s) prodTemplate (pure svc)
+                , mod' (sumNS  s) (sumImports  s) sumTemplate  (pure svc)
+                ]
             ]
         ]
       where
         svc = toJSON s
 
-    lib :: Path
     lib = fromText (_libName l)
 
-    -- mod :: NS -> [NS] -> Template -> DirTree (Either Error Touch)
-    -- mod n is t = write . module' n is t . pure $ toJSON l
+    mod' ns is t = write . module' ns is t
 
-    file :: Path -> Template -> DirTree (Either Error Touch)
     file p t = write $ file' p t (pure env)
 
     env :: Value
     env = toJSON l
-
--- operation' :: Library
---            -> Template
---            -> Operation Identity SData a
---            -> DirTree (Either Error Rendered)
--- operation' l t o = module' n is t $ do
---     x <- JS.objectErr (show n) o
---     y <- JS.objectErr "metadata" (toJSON m)
---     return $! Map.insert "operationUrl" (toJSON u) (y <> x)
---   where
---     n  = operationNS (l ^. libraryNS) (o ^. opName)
---     m  = l ^. metadata
---     u  = l ^. operationUrl
-
---     is = operationImports l o
 
 module' :: ToJSON a
         => NS

@@ -80,6 +80,8 @@ data Templates = Templates
     , tocTemplate    :: Template
     , readmeTemplate :: Template
     , typesTemplate  :: Template
+    , prodTemplate   :: Template
+    , sumTemplate    :: Template
     }
 
 newtype Version (v :: Symbol) = Version Text
@@ -400,15 +402,22 @@ instance ToJSON (Service Data API) where
 svcAbbrev :: Service s r -> Text
 svcAbbrev s = renameAbbrev $ fromMaybe (_svcTitle s) (_svcCanonicalName s)
 
-typeImports :: Service s r -> [NS]
-typeImports _ = ["Network.Google.Prelude"]
+typeImports, prodImports, sumImports :: Service s r -> [NS]
+typeImports s = ["Network.Google.Prelude", prodNS s, sumNS s]
+prodImports s = ["Network.Google.Prelude", sumNS s]
+sumImports  _ = ["Network.Google.Prelude"]
 
-tocNS, typesNS :: Service s r -> NS
+tocNS, typesNS, prodNS, sumNS :: Service s r -> NS
 tocNS s = NS ["Network", "Google", svcAbbrev s]
-typesNS = (<> "Types") . tocNS
+typesNS = (<> "Types")  . tocNS
+prodNS  = (<> "Product") . typesNS
+sumNS   = (<> "Sum")     . typesNS
 
 exposedModules :: Service s r -> [NS]
 exposedModules s = [tocNS s, typesNS s]
+
+otherModules :: Service s r -> [NS]
+otherModules s = [prodNS s, sumNS s]
 
 data Library = Library
     { _libName     :: Text
@@ -419,10 +428,11 @@ data Library = Library
 
 instance ToJSON Library where
     toJSON Library{..} = object
-        [ "libraryName"      .= _libName
-        , "libraryTitle"     .= _libTitle
-        , "libraryVersion"   .= _libraryVersion _libVersions
-        , "coreVersion"      .= _coreVersion    _libVersions
-        , "clientVersion"    .= _clientVersion  _libVersions
-        , "exposedModules"   .= concatMap exposedModules (NE.toList _libServices)
+        [ "libraryName"    .= _libName
+        , "libraryTitle"   .= _libTitle
+        , "libraryVersion" .= _libraryVersion _libVersions
+        , "coreVersion"    .= _coreVersion    _libVersions
+        , "clientVersion"  .= _clientVersion  _libVersions
+        , "exposedModules" .= concatMap exposedModules (NE.toList _libServices)
+        , "otherModules"   .= concatMap otherModules   (NE.toList _libServices)
         ]

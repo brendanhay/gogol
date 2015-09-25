@@ -68,7 +68,8 @@ data Derive
       deriving (Eq, Show)
 
 data Solved = Solved
-    { _schema   :: Schema Id
+    { _prefix   :: Pre
+    , _schema   :: Schema Id
     , _type     :: TType
     , _deriving :: [Derive]
     }
@@ -114,7 +115,7 @@ memo l k f = do
             return x
 
 solve :: Id -> AST Solved
-solve k = Solved <$> schema k <*> typeOf k <*> derive k
+solve k = Solved <$> prefix k <*> schema k <*> typeOf k <*> derive k
 
 typeOf :: Id -> AST TType
 typeOf k = memo typed k go
