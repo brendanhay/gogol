@@ -134,21 +134,6 @@ flatten svc = svc { _svcSchemas = execState run mempty }
             -- FIXME:
             Just e  -> error $ "Already exists: " ++ show (n, e, x)
 
-merge :: Versions -> [Service Data API] -> [Library]
-merge v = map go . groupBy (on (==) _svcLibrary)
-  where
-    go [x]    = mk x
-    go (x:xs) = (mk x) { _libServices = x :| xs }
-    -- FIXME:
-    go []     = error "Empty merge set!"
-
-    mk x = Library
-        { _libName     = _svcLibrary x
-        , _libTitle    = renameTitle (_svcTitle x)
-        , _libVersions = v
-        , _libServices = x :| []
-        }
-
 data PP
     = Indent
     | Print

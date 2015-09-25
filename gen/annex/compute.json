@@ -1,4 +1,5 @@
 {
-    "library": "gozen-compute"
+    "library": "compute",
+    "canonicalName": "Compute"
 }
 

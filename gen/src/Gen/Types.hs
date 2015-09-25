@@ -34,11 +34,10 @@ import           Control.Applicative
 import           Control.Lens                 hiding ((.=))
 import           Data.Aeson                   hiding (Bool, String)
 import           Data.Aeson.TH
-import           Data.Bifunctor
 import           Data.Char
 import           Data.Function                (on)
-import qualified Data.HashMap.Strict          as Map
 import qualified Data.HashSet                 as Set
+import           Data.List                    (groupBy)
 import           Data.List.NonEmpty           (NonEmpty (..))
 import qualified Data.List.NonEmpty           as NE
 import           Data.Maybe
@@ -48,10 +47,11 @@ import           Data.Text                    (Text)
 import qualified Data.Text                    as Text
 import qualified Data.Text.Lazy               as LText
 import qualified Data.Text.Lazy.Builder       as Build
+import           Data.Text.Manipulate
 import qualified Data.Text.Read               as Read
 import qualified Filesystem.Path.CurrentOS    as Path
 import           Formatting
-import           Gen.Orphans
+import           Gen.Orphans                  ()
 import           Gen.Text
 import           Gen.Types.Help
 import           Gen.Types.Id
@@ -400,7 +400,9 @@ instance ToJSON (Service Data API) where
             ]
 
 svcAbbrev :: Service s r -> Text
-svcAbbrev s = renameAbbrev $ fromMaybe (_svcTitle s) (_svcCanonicalName s)
+svcAbbrev s = upperHead
+    . renameAbbrev
+    $ fromMaybe (_svcTitle s) (_svcCanonicalName s)
 
 typeImports, prodImports, sumImports :: Service s r -> [NS]
 typeImports s = ["Network.Google.Prelude", prodNS s, sumNS s]
@@ -409,7 +411,7 @@ sumImports  _ = ["Network.Google.Prelude"]
 
 tocNS, typesNS, prodNS, sumNS :: Service s r -> NS
 tocNS s = NS ["Network", "Google", svcAbbrev s]
-typesNS = (<> "Types")  . tocNS
+typesNS = (<> "Types")   . tocNS
 prodNS  = (<> "Product") . typesNS
 sumNS   = (<> "Sum")     . typesNS
 
@@ -436,3 +438,18 @@ instance ToJSON Library where
         , "exposedModules" .= concatMap exposedModules (NE.toList _libServices)
         , "otherModules"   .= concatMap otherModules   (NE.toList _libServices)
         ]
+
+merge :: Versions -> [Service Data API] -> [Library]
+merge v = map go . groupBy (on (==) _svcLibrary)
+  where
+    go [x]    = mk x
+    go (x:xs) = (mk x) { _libServices = x :| xs }
+    -- FIXME:
+    go []     = error "Empty merge set!"
+
+    mk x = Library
+        { _libName     = renameLibrary (_svcLibrary x)
+        , _libTitle    = renameTitle   (_svcTitle   x)
+        , _libVersions = v
+        , _libServices = x :| []
+        }
