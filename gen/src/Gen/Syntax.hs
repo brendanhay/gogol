@@ -15,6 +15,7 @@ module Gen.Syntax where
 
 import           Control.Lens                 hiding (iso, mapping, op, strict)
 import           Data.Foldable                (foldr')
+import           Data.Hashable
 import qualified Data.HashMap.Strict          as Map
 import           Data.Maybe
 import           Data.Semigroup               ((<>))
@@ -29,30 +30,30 @@ import           Language.Haskell.Exts.Build
 import           Language.Haskell.Exts.SrcLoc
 import           Language.Haskell.Exts.Syntax hiding (Int)
 
+instance Hashable Name
+
 instance IsString Name  where fromString = name
 instance IsString QName where fromString = UnQual . name
 instance IsString QOp   where fromString = op . sym
 
-apiTypes :: Service s p r
-         -> Map Id (Param Solved)
-         -> Id
-         -> Method Solved
-         -> [Type]
-apiTypes s qps r m = map sing ps ++ qs ++ [end]
+apiTypes :: Service s r -> Id -> Method -> [Type]
+apiTypes s r m = map sing ps ++ qs ++ [end]
   where
     ps = filter (not . Text.null)
          $ Text.split (== '/') (_svcServicePath s)
         <> Text.split (== '/') (_mPath m)
 
     -- FIXME: order by _mParameterOrder
-    qs = map param (Map.toList qps)
-      ++ map param (Map.toList (_mParameters m))
+    qs = map param (Map.toList (_svcParameters s))
+      ++ map param (Map.toList (_mParameters   m))
 
-    param (k, Param l _ t) =
+    param (k, p) =
        -- FIXME: types, many/repeated
-        case l of
-            Path  -> TyApp (TyApp (tycon "Capture") (sing (idToText k))) (external (_type t))
-            Query -> TyApp (TyApp (tycon "QueryParam") (sing (idToText k))) (external (_type t))
+       let t = literal (_prmLiteral p)
+           n = sing (idToText k)
+        in case _prmLocation p of
+            Path  -> TyApp (TyApp (tycon "Capture")    n) t
+            Query -> TyApp (TyApp (tycon "QueryParam") n) t
 
     end = TyApp (TyApp meth typ) res
 
@@ -142,27 +143,26 @@ parameters = map (external . _type) . filter (view required)
 
 external, internal :: TType -> Type
 external = internal
-internal = go
-  where
-    go = \case
-        TType   r   -> tycon r
-        TMaybe  t   -> TyApp (tycon "Maybe") (go t)
-        TEither a b -> TyApp (TyApp (tycon "Either") (go a)) (go b)
-        TList   t   -> TyList (go t)
-        TLit    l   -> lit l
+internal = \case
+    TType   r   -> tycon r
+    TMaybe  t   -> TyApp (tycon "Maybe") (internal t)
+    TEither a b -> TyApp (TyApp (tycon "Either") (internal a)) (internal b)
+    TList   t   -> TyList (internal t)
+    TLit    l   -> literal l
 
-    lit = \case
-        Text   -> tycon "Text"
-        Bool   -> tycon "Bool"
-        Time   -> tycon "UTCTime"
-        Nat    -> tycon "Natural"
-        Float  -> tycon "Float"
-        Double -> tycon "Double"
-        Byte   -> tycon "Word8"
-        UInt32 -> tycon "Word32"
-        UInt64 -> tycon "Word64"
-        Int32  -> tycon "Int32"
-        Int64  -> tycon "Int64"
+literal :: Lit -> Type
+literal = \case
+    Text   -> tycon "Text"
+    Bool   -> tycon "Bool"
+    Time   -> tycon "UTCTime"
+    Nat    -> tycon "Natural"
+    Float  -> tycon "Float"
+    Double -> tycon "Double"
+    Byte   -> tycon "Word8"
+    UInt32 -> tycon "Word32"
+    UInt64 -> tycon "Word64"
+    Int32  -> tycon "Int32"
+    Int64  -> tycon "Int64"
 
 mapping :: TType -> Exp -> Exp
 mapping t e = infixE e "." (go t)

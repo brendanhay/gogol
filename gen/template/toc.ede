@@ -7,13 +7,17 @@ module {{ moduleName }}
     (
     -- * API Definition
       {{ api }}
-    , {{ api | lowerHead }}API
+    , {{ api | lowerHead }}
 
     -- * Resources
     -- $resources
-
   {% for resource in resources %}
+
+    -- ** {{ resource.value.name }}
     , {{ resource.value.name }}
+    {% for method in resource.value.methods %}
+    , {{ method.key }}
+    {% endfor %}
   {% endfor %}
 
     -- * Types
@@ -45,17 +49,24 @@ import {{ module.value }}
 TODO
 -}
 
+{{ api | lowerHead }} :: Proxy {{ api }}
+{{ api | lowerHead }} = Proxy
+
 type {{ api }} =
 {% for resource in resources %}
-   {% if resource.first %}    {% else %}:<|>{% endif %} {{ resource.value.name }}
+    {% if resource.first %}    {% else %}:<|>{% endif %} {{ resource.value.name }}
 {% endfor %}
-
-{{ api | lowerHead }}API :: Proxy {{ api }}
-{{ api | lowerHead }}API = Proxy
 {% for resource in resources %}
 
 type {{ resource.value.name }} =
-  {% for type in resource.value.types %}
-    {% if type.first %}  {% else %}:>{% endif %} {{ type.value }}
+  {% for method in resource.value.methods %}
+    {% if !method.first %}:<|>{% else %}    {% endif %} {{ method.key }}
+  {% endfor %}
+  {% for method in resource.value.methods %}
+
+type {{ method.key }} =
+    {% for type in method.value %}
+    {% if !type.first %}:>{% else %}  {% endif %} {{ type.value }}
+    {% endfor %}
   {% endfor %}
 {% endfor %}

@@ -22,6 +22,7 @@ module Gen.Types.Id
 
     -- * Syntax
     , aname
+    , mname
     , dname
     , cname
     , fname
@@ -55,8 +56,13 @@ import           GHC.Generics
 import           Language.Haskell.Exts.Build
 import           Language.Haskell.Exts.Syntax (Name)
 
-aname, dname, cname, fname, lname, pname :: Id -> Name
+aname :: Id -> Name
 aname = name . ref upperHead
+
+mname :: Id -> Id -> Name
+mname p k = aname (p <> k)
+
+dname, cname, fname, lname, pname :: Id -> Name
 dname = name . ref upperHead
 cname = name . ref (renameReserved . lowerHead)
 fname = name . ref (Text.cons '_' . lowerHead)
@@ -94,12 +100,12 @@ instance ToJSON a => ToJSON (Map Id a) where
     toJSON = toJSON . Map.fromList . map (first idToText) . Map.toList
 
 idToText :: Id -> Text
-idToText = \case
+idToText = renameReserved . \case
     Opaque xs -> mconcat (map upperHead xs)
     Direct n  -> n
 
 idFromText :: Text -> Id
-idFromText = Direct . renameReserved
+idFromText = Direct
 
 fid :: Format a (Id -> a)
 fid = later (Build.fromText . idToText)

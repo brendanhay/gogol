@@ -27,6 +27,7 @@ import           Gen.AST
 import           Gen.Formatting
 import           Gen.IO
 import qualified Gen.JSON                  as JS
+import           Gen.Solve
 import qualified Gen.Tree                  as Tree
 import           Gen.Types                 hiding (info)
 import           Options.Applicative
@@ -158,7 +159,7 @@ main = do
 
             return s
 
-        libs <- hoistEither (runAST _optVersions svcs)
+        libs <- merge _optVersions <$> traverse (hoistEither . runAST) svcs
 
         void . counter "library" libs $ \l -> do
             say ("Creating " % stext % " package.") (_libTitle l)

@@ -21,19 +21,53 @@ module Gen.Solve where
 
 import           Control.Applicative
 import           Control.Error
-import           Control.Lens         hiding (enum)
+import           Control.Lens               hiding (enum)
 import           Control.Monad.Except
-import           Control.Monad.State
-import qualified Data.HashMap.Strict  as Map
-import           Data.List            (intersect)
+import           Control.Monad.State.Strict
+import qualified Data.HashMap.Strict        as Map
+import           Data.List                  (intersect)
 import           Data.Maybe
-import           Data.Semigroup       ((<>))
+import           Data.Semigroup             ((<>))
 import           Gen.Formatting
 import           Gen.Types
-import           Prelude              hiding (sum)
+import           Prelude                    hiding (sum)
 
 -- Just use hashmaps to lookup refs etc, and hide all the mutation
 -- behind a StateT interface.
+
+data TType
+    = TType   Id
+    | TLit    Lit
+    | TMaybe  TType
+    | TEither TType TType
+    | TList   TType
+
+data Derive
+    = DEq
+    | DOrd
+    | DRead
+    | DShow
+    | DEnum
+    | DNum
+    | DIntegral
+    | DReal
+    | DMonoid
+    | DIsString
+    | DData
+    | DTypeable
+    | DGeneric
+      deriving (Eq, Show)
+
+data Solved = Solved
+    { _schema   :: Schema Id
+    , _type     :: TType
+    , _deriving :: [Derive]
+    }
+
+instance HasInfo Solved where
+    info = f . info
+      where
+        f = lens _schema (\s a -> s { _schema = a })
 
 data Memo = Memo
     { _typed   :: Map Id TType
@@ -41,15 +75,12 @@ data Memo = Memo
     , _schemas :: Map Id (Schema Id)
     }
 
-initial :: Memo
-initial = Memo mempty mempty mempty
+initial :: Map Id (Schema Id) -> Memo
+initial = Memo mempty mempty
 
 makeLenses ''Memo
 
 type AST = ExceptT Error (State Memo)
-
--- runAST :: AST a -> Either Error a
--- runAST m = evalState (runExceptT m) initial
 
 schema :: Id -> AST (Schema Id)
 schema k = do

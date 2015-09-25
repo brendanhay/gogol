@@ -1,4 +1,5 @@
 {-# LANGUAGE DataKinds                  #-}
+{-# LANGUAGE TupleSections                  #-}
 {-# LANGUAGE DeriveGeneric              #-}
 {-# LANGUAGE FlexibleContexts           #-}
 {-# LANGUAGE FlexibleInstances          #-}
@@ -24,7 +25,7 @@ import           Control.Applicative
 import           Control.Error
 import           Control.Lens                 hiding (lens)
 import           Control.Monad.Except
-import           Control.Monad.State
+import           Control.Monad.State.Strict
 import           Data.Char
 import           Data.Function                (on)
 import qualified Data.HashMap.Strict          as Map
@@ -42,73 +43,16 @@ import           HIndent
 import           Language.Haskell.Exts.Pretty
 import           Prelude                      hiding (sum)
 
-runAST :: Versions
-       -> [Service (Fix Schema) (Fix Schema) (Resource (Fix Schema))]
-       -> Either Error [Library]
-runAST v ss = merge v <$> evalState (runExceptT go) initial
+--runAST :: Service (Schema Id) Resource -> Either Error a
+runAST svc =  evalState (runExceptT (render ss)) (initial (_svcSchemas ss))
   where
-    go = traverse (flatten >=> render) ss
+    ss = flatten svc
 
-flatten ::      Service (Fix Schema) (Fix Schema) (Resource (Fix Schema))
-        -> AST (Service (Schema  Id) (Schema  Id) (Resource (Schema  Id)))
-flatten svc = do
-     mapM_ (uncurry (prop Nothing)) (Map.toList (_svcSchemas svc))
-     ss <- gets (view schemas)
-     ps <- Map.traverseWithKey global   (_svcParameters svc)
-     rs <- Map.traverseWithKey resource (_svcResources svc)
-     return $! svc { _svcSchemas = ss, _svcParameters = ps, _svcResources = rs }
-  where
-    resource :: Id -> Resource (Fix Schema) -> AST (Resource (Schema Id))
-    resource k (Resource ms) = Resource <$> traverse go ms
-      where
-        go m = do
-            ps <- Map.traverseWithKey (local k) (_mParameters m)
-            return $! m { _mParameters = ps }
-
-    global  = param (Just "param")
-    local k = param (Just k)
-
-    param :: Maybe Id -> Id -> Param (Fix Schema) -> AST (Param (Schema Id))
-    param p k (Param l m f) = do
-        n <- prop p k f
-        s <- schema n
-        return $! Param l m s
-
-    -- unfold a schema property.
-    prop :: Maybe Id
-         -> Id
-         -> Fix Schema
-         -> AST Id
-    prop p k (Fix f) = case f of
-        Obj i ps -> do
-            o <- Obj i <$> Map.traverseWithKey (prop (Just this)) ps
-            res o
-
-        Arr i (Fix e) -> do
-            e' <- prop (Just this) "item" (Fix (e & required .~ True))
-            res (Arr i e')
-
-        Enum i vs ds -> res (Enum i vs ds)
-        Lit  i l     -> res (Lit  i l)
-        Ref  _ r     -> pure r
-        Any  i       -> res (Any  i)
-      where
-        res x = do
-            s <- gets (Map.lookup this . view schemas)
-            case s of
-                Nothing -> (schemas %= Map.insert this x) >> pure this
-                -- FIXME:
-                Just e  -> error $ "Already exists: " ++ show (this, e, x)
-
-        this = maybe k (<> k) p
-
-render ::      Service (Schema Id) (Schema Id) (Resource (Schema Id))
-       -> AST (Service  Data        Solved      API)
+render :: Service (Schema Id) Resource -> AST (Service Data API)
 render svc = do
-    x <-     kvTraverseMaybe typ (_svcSchemas svc)
-    y <- Map.traverseWithKey prm (_svcParameters svc)
-    z <- Map.traverseWithKey (api y) (_svcResources svc)
-    return $! svc { _svcSchemas = x, _svcParameters = y, _svcResources = z }
+    x <- kvTraverseMaybe     typ (_svcSchemas   svc)
+    y <- Map.traverseWithKey api (_svcResources svc)
+    return $! svc { _svcSchemas = x, _svcResources = y }
   where
     typ :: Id -> Schema Id -> AST (Maybe Data)
     typ k = \case
@@ -140,24 +84,45 @@ render svc = do
                 sformat ("Creates a value of '" % fid %
                          "' with the minimum fields required to make a request.\n")
                          k
+    api :: Id -> Resource -> AST API
+    api k (methods -> Map.toList -> ms) = do
+        let go (n, v) = fmap (mname k n,) . traverse (pp None) $ apiTypes svc k v
+        rs <- traverse go ms
+        return $! API (aname k) (Map.fromList rs)
 
-Make param types lit only, and fail at json parse time?
-Then avoid any solving/id memo steps.
+flatten :: Service (Fix Schema) Resource -> Service (Schema Id) Resource
+flatten svc = svc
+    { _svcSchemas = execState (mapM_ (uncurry (prop Nothing)) ss) mempty
+    }
+  where
+    ss = Map.toList (_svcSchemas svc)
 
-    prm :: Id -> Param (Schema Id) -> AST (Param Solved)
-    prm r p = do
-        let k = "param" <> r
-        traverse (const (solve k)) p
+    -- unfold the properties.
+    prop p k (Fix f) = case f of
+        Obj i ps -> do
+            o <- Obj i <$> Map.traverseWithKey (prop (Just this)) ps
+            res o
 
-    api :: Map Id (Param Solved) -> Id -> Resource (Schema Id) -> AST API
-    api cmn k (methods -> Map.toList -> ms) = do
-        z <- Map.traverseWithKey (\n p -> traverse (const $ solve (k <> n)) p) (_mParameters y)
-        API (aname k) <$>
-            traverse (pp None) (apiTypes svc cmn x (y { _mParameters = z }))
+        Arr i (Fix e) -> do
+            e' <- prop (Just this) "item" (Fix (e & required .~ True))
+            res (Arr i e')
+
+        Enum i vs ds -> res (Enum i vs ds)
+        Lit  i l     -> res (Lit  i l)
+        Ref  _ r     -> pure r
+        Any  i       -> res (Any  i)
+
       where
-        (x, y) = head ms
+        res x = do
+            s <- gets (Map.lookup this)
+            case s of
+                Nothing -> modify (Map.insert this x) >> pure this
+                -- FIXME:
+                Just e  -> error $ "Already exists: " ++ show (this, e, x)
 
-merge :: Versions -> [Service Data Solved API] -> [Library]
+        this = maybe k (<> k) p
+
+merge :: Versions -> [Service Data API] -> [Library]
 merge v = map go . groupBy (on (==) _svcLibrary)
   where
     go [x]    = mk x

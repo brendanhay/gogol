@@ -43,6 +43,7 @@ executable gozen-gen
         , bytestring
         , directory-tree
         , ede
+        , bifunctors
         , errors
         , formatting
         , hashable
