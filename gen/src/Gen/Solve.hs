@@ -9,6 +9,7 @@
 {-# LANGUAGE RankNTypes                 #-}
 {-# LANGUAGE RecordWildCards            #-}
 {-# LANGUAGE TemplateHaskell            #-}
+{-# LANGUAGE ViewPatterns               #-}
 
 -- Module      : Gen.Solve
 -- Copyright   : (c) 2015 Brendan Hay
@@ -27,6 +28,8 @@ import           Control.Monad.State.Strict
 import           Data.CaseInsensitive       (CI)
 import qualified Data.CaseInsensitive       as CI
 import           Data.Char                  (toLower)
+import           Data.Hashable
+import qualified Data.HashMap.Strict        as Map
 import qualified Data.HashMap.Strict        as Map
 import qualified Data.HashSet               as Set
 import           Data.List                  (intersect)
@@ -36,6 +39,7 @@ import           Data.Text                  (Text)
 import qualified Data.Text                  as Text
 import           Data.Text.Manipulate
 import           Gen.Formatting
+import           Gen.Text
 import           Gen.Types
 import           Prelude                    hiding (sum)
 
@@ -154,17 +158,80 @@ derive k = loc "derive" k $ memo derived k go
     base   = [DEq, DRead, DShow, DData, DTypeable, DGeneric]
 
 prefix :: Id -> AST Pre
-prefix k = loc "prefix" k $ memo prefixed k go
+prefix k = loc "prefix" k $ memo prefixed k typ
   where
-    go (Obj i rs) = Map.traverseWithKey prop rs >> pure (Pre k)
-    go s          = pure (Pre k)
+    typ = \case
+        Obj  i rs    -> field rs >> pure (Pre k)
+        Enum i vs ds -> pure (Pre k)
+        _            -> pure (Pre k)
 
-    prop n _ = do
-        let p = Pre (idFromText (acronym $ idToText k) <> n)
-        prefixed %= Map.insert (k <> n) p
-        pure p
+    field (keys -> ks) = do
+        p <- uniq fields (acronymPrefixes k) ks
+        forM_ ks $ \n ->
+            prefixed %= Map.insert (k <> key n) (Pre (key p <> key n))
+        pure (Pre (key p))
 
-    acronym = foldMap (Text.singleton . toLower . Text.head) . splitWords
+    key = idFromText . CI.foldedCase
+
+    uniq :: Lens' Memo Seen
+         -> [CI Text]
+         -> Set (CI Text)
+         -> AST (CI Text)
+    uniq _    []     ks = failure ("Unable to generate unique prefix: " % fid) k
+    uniq seen (x:xs) ks = do
+        m <- uses seen (Map.lookup x)
+        case m of
+            Just ys | overlap ys ks
+                -> uniq seen xs ks
+            _   -> do
+                seen %= Map.insertWith (<>) x ks
+                return x
+
+overlap :: (Eq a, Hashable a) => Set a -> Set a -> Bool
+overlap xs ys = not . Set.null $ Set.intersection xs ys
+
+keys :: Map Id a -> Set (CI Text)
+keys = Set.fromList . map (CI.mk . idToText) . Map.keys
+
+acronymPrefixes :: Id -> [CI Text]
+acronymPrefixes (idToText -> n) = map CI.mk (xs ++ map suffix ys)
+  where
+    -- Take the next char
+    suffix x = Text.snoc x c
+      where
+        c | Text.length x >= 2 = Text.head (Text.drop 1 x)
+          | otherwise          = Text.head x
+
+    xs = catMaybes [r1, r2, r3, r4, r5, r6]
+    ys = catMaybes [r1, r2, r3, r4, r6]
+
+    a  = camelAcronym n
+    a' = upperAcronym n
+
+    limit = 3
+
+    -- Full name if leq limit
+    r1 | Text.length n <= limit = Just n
+       | otherwise              = Nothing
+
+    -- VpcPeeringInfo -> VPI
+    r2 = toAcronym a
+
+    -- VpcPeeringInfo -> VPCPI
+    r3 | x /= r2   = x
+       | otherwise = Nothing
+      where
+        x = toAcronym a'
+
+    -- SomeTestTType -> S
+    r4 = Text.toUpper <$> safeHead n
+
+    -- SomeTypes -> STS (retain pural)
+    r5 | Text.isSuffixOf "s" n = flip Text.snoc 's' <$> (r2 <|> r3)
+       | otherwise             = Nothing
+
+    -- SomeTestTType -> Som
+    r6 = Text.take limit <$> listToMaybe (splitWords a)
 
 loc :: String -> Id -> a -> a
 loc _ _ = id -- trace (n ++ ": " ++ Text.unpack (refToText r))

@@ -17,32 +17,21 @@ import           Control.Error
 import           Control.Monad
 import           Data.Bifunctor
 import           Data.Char
-import qualified Data.Foldable        as Fold
-import qualified Data.HashSet         as Set
+import qualified Data.Foldable         as Fold
+import qualified Data.HashSet          as Set
 import           Data.Monoid
 import           Data.String
-import           Data.Text            (Text)
-import qualified Data.Text            as Text
--- import           Data.Text.ICU         (Regex)
--- import           Data.Text.ICU.Replace (Replace)
--- import qualified Data.Text.ICU.Replace as RE
+import           Data.Text             (Text)
+import qualified Data.Text             as Text
+import           Data.Text.ICU         (Regex)
+import           Data.Text.ICU.Replace (Replace)
+import qualified Data.Text.ICU.Replace as RE
 import           Data.Text.Manipulate
-import           Text.Parsec.Language (haskellDef)
-import           Text.Parsec.Token    (reservedNames)
+import           Text.Parsec.Language  (haskellDef)
+import           Text.Parsec.Token     (reservedNames)
 
--- asText :: (Text -> Text) -> String -> String
--- asText f = Text.unpack . f . Text.pack
-
--- dropLower :: Text -> Text
--- dropLower = Text.dropWhile (not . isUpper)
-
--- safeHead :: Text -> Maybe Text
--- safeHead = fmap (Text.singleton . fst) . Text.uncons
-
--- stripLens :: Text -> Text
--- stripLens t
---     | "_" `Text.isPrefixOf` t = lowerHead (dropLower t)
---     | otherwise               = t
+safeHead :: Text -> Maybe Text
+safeHead = fmap (Text.singleton . fst) . Text.uncons
 
 stripPrefix :: Text -> Text -> Text
 stripPrefix p t = Text.strip . fromMaybe t $ p `Text.stripPrefix` t
@@ -85,30 +74,27 @@ renameReserved x
         , "error"
         ] ++ map Text.pack (reservedNames haskellDef)
 
--- camelAcronym :: Text -> Text
--- camelAcronym x = replaceAll x xs
---   where
---     xs = map (bimap fromString fromString) acronyms
+camelAcronym :: Text -> Text
+camelAcronym x = replaceAll x xs
+  where
+    xs = map (bimap fromString fromString) acronyms
 
--- lowerFirstAcronym :: Text -> Text
--- lowerFirstAcronym x = replaceAll x xs
---   where
---     xs = map (bimap (fromString . ('^':)) (fromString . f)) acronyms
+lowerFirstAcronym :: Text -> Text
+lowerFirstAcronym x = replaceAll x xs
+  where
+    xs = map (bimap (fromString . ('^':)) (fromString . f)) acronyms
 
---     f (c:cs) = toLower c : cs
---     f []     = []
+    f (c:cs) = toLower c : cs
+    f []     = []
 
--- replaceAll :: Text -> [(Regex, Replace)] -> Text
--- replaceAll = Fold.foldl' (flip (uncurry RE.replaceAll))
+replaceAll :: Text -> [(Regex, Replace)] -> Text
+replaceAll = Fold.foldl' (flip (uncurry RE.replaceAll))
 
--- upperAcronym :: Text -> Text
--- upperAcronym x = Fold.foldl' (flip (uncurry RE.replaceAll)) x xs
---   where
---     xs :: [(Regex, Replace)]
---     xs = [ ("Acl", "ACL")
---          ]
+upperAcronym :: Text -> Text
+upperAcronym x = Fold.foldl' (flip (uncurry RE.replaceAll)) x xs
+  where
+    xs :: [(Regex, Replace)]
+    xs = []
 
--- acronyms :: [(String, String)]
--- acronyms =
---     [ ("ACL", "Acl")
---     ]
+acronyms :: [(String, String)]
+acronyms = []
