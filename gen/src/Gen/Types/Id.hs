@@ -65,9 +65,8 @@ import           Language.Haskell.Exts.Syntax (Name)
 aname :: Id -> Name
 aname = name . Text.unpack . upperHead . idToText
 
-mname :: Id -> Global -> Name
-mname x y = name . Text.unpack $
-    upperHead (idToText x) <> upperHead (global y)
+mname :: Id -> Local -> Name
+mname x y = aname $ mkProp x y
 
 dname, cname :: Id -> Name
 dname = name . Text.unpack . upperHead . idToText

@@ -36,13 +36,11 @@ import           Data.Semigroup             ((<>))
 import           Data.Text                  (Text)
 import qualified Data.Text                  as Text
 import           Data.Text.Manipulate
+import           Debug.Trace
 import           Gen.Formatting
 import           Gen.Text
 import           Gen.Types
 import           Prelude                    hiding (sum)
-
--- Just use hashmaps to lookup refs etc, and hide all the mutation
--- behind a StateT interface.
 
 data TType
     = TType   Id
@@ -118,7 +116,7 @@ solve :: Id -> AST Solved
 solve k = Solved <$> prefix k <*> schema k <*> typeOf k <*> derive k
 
 typeOf :: Id -> AST TType
-typeOf k = memo typed k go
+typeOf k = loc "typeof" k $ memo typed k go
   where
     go s = fmap may $ case s of
         Obj  {} -> pure (TType k)
@@ -133,7 +131,7 @@ typeOf k = memo typed k go
             | otherwise               = TMaybe
 
 derive :: Id -> AST [Derive]
-derive k = memo derived k go
+derive k = loc "derive" k $ memo derived k go
   where
     go = \case
         Obj  _ rs -> foldM props base (Map.elems rs)
@@ -146,6 +144,7 @@ derive k = memo derived k go
                 Text -> base <> [DOrd, DIsString]
                 Bool -> base <> enum
                 Time -> base
+                Date -> base
                 Nat  -> base
                 _    -> base <> [DNum, DIntegral, DReal] <> enum
 
@@ -156,7 +155,7 @@ derive k = memo derived k go
     base   = [DEq, DRead, DShow, DData, DTypeable, DGeneric]
 
 prefix :: Id -> AST Pre
-prefix n = memo prefixed n typ
+prefix n = loc "prefix" n $ memo prefixed n typ
   where
     typ = \case
         Obj  _ rs   -> field  rs
@@ -230,3 +229,6 @@ acronymPrefixes (idToText -> n) = map CI.mk (xs ++ map suffix ys)
 
     -- SomeTestTType -> Som
     r6 = Text.take limit <$> listToMaybe (splitWords a)
+
+loc :: String -> Id -> a -> a
+loc n r = trace (n ++ ": " ++ Text.unpack (idToText r))

@@ -21,12 +21,12 @@
 
 module Gen.AST where
 
-import Data.Bifunctor
 import           Control.Applicative
 import           Control.Error
 import           Control.Lens                 hiding (lens)
 import           Control.Monad.Except
 import           Control.Monad.State.Strict
+import           Data.Bifunctor
 import           Data.Char
 import           Data.Function                (on)
 import qualified Data.HashMap.Strict          as Map
@@ -41,6 +41,7 @@ import           Gen.Syntax
 import           Gen.Text
 import           Gen.Types
 import           HIndent
+import           Language.Haskell.Exts        (Name)
 import           Language.Haskell.Exts.Pretty
 import           Prelude                      hiding (sum)
 
@@ -53,7 +54,7 @@ render :: Service (Schema Id) Resource -> AST (Service Data API)
 render svc = do
     x <- kvTraverseMaybe     typ (_svcSchemas   svc)
     y <- Map.traverseWithKey api (_svcResources svc)
-    return $! svc { _svcSchemas = x, _svcResources = y }
+    return $! svc { _svcSchemas = x, _svcResources = mempty }
   where
     typ :: Id -> Schema Id -> AST (Maybe Data)
     typ k = \case
@@ -89,11 +90,20 @@ render svc = do
                 sformat ("Creates a value of '" % fid %
                          "' with the minimum fields required to make a request.\n")
                          k
+
     api :: Id -> Resource -> AST API
-    api k (methods -> Map.toList -> ms) = do
-        let go (n, v) = fmap (mname k n,) . traverse (pp None) $ apiTypes svc k v
-        rs <- traverse go ms
-        return $! API (aname k) (Map.fromList rs)
+    api k = fmap (API (aname k) . Map.fromList) . res k
+      where
+        res :: Id -> Resource -> AST [(Name, [Rendered])]
+        res p = \case
+            Parent rs -> traverse (parent p) (Map.toList rs) <&> concat
+            Sub    ms -> traverse (sub    p) (Map.toList ms)
+
+        parent :: Id -> (Local, Resource) -> AST [(Name, [Rendered])]
+        parent p (n, r) = res (mkProp p n) r
+
+        sub :: Id -> (Local, Method) -> AST (Name, [Rendered])
+        sub p (n, m) = (mname p n,) <$> traverse (pp None) (apiTypes svc p m)
 
 flatten :: Service (Fix Schema) Resource -> Service (Schema Id) Resource
 flatten svc = svc { _svcSchemas = execState run mempty }

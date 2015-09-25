@@ -150,6 +150,7 @@ literal = \case
     Text   -> tycon "Text"
     Bool   -> tycon "Bool"
     Time   -> tycon "UTCTime"
+    Date   -> tycon "UTCTime"
     Nat    -> tycon "Natural"
     Float  -> tycon "Float"
     Double -> tycon "Double"

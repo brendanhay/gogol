@@ -18,6 +18,7 @@ import           Control.Error
 import           Control.Lens              hiding ((<.>))
 import           Control.Monad.State
 import           Data.List                 (nub, sort)
+import           Data.Maybe
 import           Data.String
 import           Data.Text                 (Text)
 import qualified Data.Text                 as Text
@@ -148,19 +149,26 @@ main = do
         svcs <- counter "model" ss $ \Spec{..} -> do
             say ("Using version " % stext) _specVersion
 
-            s <- sequence
-                [ JS.load (_optAnnexes </> fromText _specName <.> "json")
-                , JS.load _specPath
-                ] >>= hoistEither . JS.parse . JS.merge
+            let anx = _optAnnexes </> fromText _specName <.> "json"
+            p <- isFile anx
+            if not p
+               then do
+                   say ("Skipping '" % stext % "' due to missing annex configuration.")
+                       _specName
+                   done *> return Nothing
+               else do
+                    s <- sequence
+                        [ JS.load anx
+                        , JS.load _specPath
+                        ] >>= hoistEither . JS.parse . JS.merge
 
-            say ("Successfully parsed '" % stext % "' API definition.")
-                (_svcTitle s)
+                    say ("Successfully parsed '" % stext % "' API definition.")
+                        (_svcTitle s)
 
-            done
+                    done *> return (Just s)
 
-            return s
-
-        libs <- merge _optVersions <$> traverse (hoistEither . runAST) svcs
+        libs <- merge _optVersions <$>
+            traverse (hoistEither . runAST) (catMaybes svcs)
 
         void . counter "library" libs $ \l -> do
             say ("Creating " % stext % " package.") (_libTitle l)

@@ -182,6 +182,7 @@ data Lit
     | Int32
     | Int64
     | Nat
+    | Date
     | Time
       deriving (Eq, Show)
 
@@ -200,6 +201,7 @@ instance FromJSON Lit where
             "uint64"    -> pure (nat n UInt64)
             "int32"     -> pure (nat n Int32)
             "int64"     -> pure (nat n Int64)
+            "date"      -> pure Date
             "date-time" -> pure Time
             e           -> fail $
                 "Unable to parse Lit from " ++ Text.unpack e
@@ -350,7 +352,7 @@ instance FromJSON Method where
         <*> o .:  "path"
         <*> o .:  "httpMethod"
         <*> o .:? "description"
-        <*> o .:  "parameters"
+        <*> o .:? "parameters"     .!= mempty
         <*> o .:? "parameterOrder" .!= mempty
         <*> o .:? "scopes"         .!= mempty
         <*> ref o "request"
@@ -361,9 +363,14 @@ instance FromJSON Method where
 
 deriveToJSON (js "_m") ''Method
 
-newtype Resource = Resource { methods :: Map Global Method }
+data Resource
+    = Parent (Map Local Resource)
+    | Sub    (Map Local Method)
 
-deriveFromJSON (js "") ''Resource
+instance FromJSON Resource where
+    parseJSON = withObject "resource" $ \o ->
+            Parent <$> o .: "resources"
+        <|> Sub    <$> o .: "methods"
 
 data Service s r = Service
     { _svcLibrary           :: Text
