@@ -77,7 +77,7 @@ bname :: Pre -> Text -> Name
 bname (Pre p) = name
     . Text.unpack
     . mappend (Text.toUpper p)
-    . upperHead
+    . renameBranch
 
 fname, lname, pname :: Pre -> Local -> Name
 fname = pre (Text.cons '_' . lowerHead)

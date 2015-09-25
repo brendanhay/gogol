@@ -158,9 +158,11 @@ prefix :: Id -> AST Pre
 prefix n = memo prefixed n typ
   where
     typ = \case
-        Obj  i rs    -> field rs
-        Enum i vs ds -> pure mempty
+        Obj  i rs    -> field  rs
+        Enum i vs _  -> branch vs
         _            -> pure mempty
+
+    branch vs = pure (Pre "")
 
     field rs = do
         let ls = Map.keys rs

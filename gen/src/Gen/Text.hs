@@ -14,7 +14,6 @@
 module Gen.Text where
 
 import           Control.Error
-import           Control.Monad
 import           Data.Bifunctor
 import           Data.Char
 import qualified Data.Foldable         as Fold
@@ -57,6 +56,35 @@ renameAbbrev = mconcat
     . stripPrefix "Google "
     . stripSuffix " API"
 
+renameBranch :: Text -> Text
+renameBranch = renameReserved . go
+  where
+    go x | Text.length x <= 2 = Text.toUpper x
+         | otherwise          = upperAcronym . cat $ split x
+
+    cat   = Fold.foldMap (Text.intercalate "_" . map component . Text.split dot)
+    split = Text.split seperator
+
+    dot x = x == '.'
+
+    seperator x =
+          x == '\\'
+       || x == '/'
+       || x == '+'
+       || x == ' '
+       || x == '('
+       || x == ')'
+       || x == ':'
+       || x == '-'
+       || x == '_'
+       || x == '*'
+
+    component x
+        | Text.length x <= 1    = x
+        | isDigit (Text.last x) = Text.toUpper x
+        | Text.all isUpper x    = toPascal (Text.toLower x)
+        | otherwise             = toPascal x
+
 renameReserved :: Text -> Text
 renameReserved x
     | x `Set.member` xs = x <> "'"
@@ -94,7 +122,58 @@ upperAcronym :: Text -> Text
 upperAcronym x = Fold.foldl' (flip (uncurry RE.replaceAll)) x xs
   where
     xs :: [(Regex, Replace)]
-    xs = []
+    xs = [ ("Acl",           "ACL")
+         , ("Adm([^i]|$)",   "ADM$1")
+         , ("Aes",           "AES")
+         , ("Api",           "API")
+         , ("Apns",          "APNS")
+         , ("Asn",           "ASN")
+         , ("Bgp",           "BGP")
+         , ("Cidr",          "CIDR")
+         , ("Cors",          "CORS")
+         , ("Csv",           "CSV")
+         , ("Cpu",           "CPU")
+         , ("Db",            "DB")
+         , ("Dhcp",          "DHCP")
+         , ("Dns",           "DNS")
+         , ("Gcm",           "GCM")
+         , ("Html",          "HTML")
+         , ("Https",         "HTTPS")
+         , ("Http([^s]|$)",  "HTTP$1")
+         , ("Hsm",           "HSM")
+         , ("Hvm",           "HVM")
+         , ("Iam",           "IAM")
+         , ("Icmp",          "ICMP")
+         , ("Ip",            "IP")
+         , ("Json",          "JSON")
+         , ("Jvm",           "JVM")
+         , ("Mac([^h]|$)",   "MAC$1")
+         , ("Md5",           "MD5")
+         , ("Raid",          "RAID")
+         , ("Ramdisk",       "RAMDisk")
+         , ("Sgd",           "SGD")
+         , ("Sni",           "SNI")
+         , ("Ssh",           "SSH")
+         , ("Ssl",           "SSL")
+         , ("Svn",           "SVN")
+         , ("Tar([^g]|$)",   "TAR$1")
+         , ("Tcp",           "TCP")
+         , ("Tgz",           "TGZ")
+         , ("Tls",           "TLS")
+         , ("Uri",           "URI")
+         , ("Url",           "URL")
+         , ("Vip",           "VIP")
+         , ("Vlan",          "VLAN")
+         , ("Vm([^d]|$)",    "VM$1")
+         , ("Vpc",           "VPC")
+         , ("Vpn",           "VPN")
+         , ("Xml",           "XML")
+         , ("ID",            "Id")
+         , ("Eq([^u]|$)",    "EQ$1")
+         , ("Lt$",           "LT")
+         , ("Gt$",           "GT")
+         , ("Nat",           "NAT")
+         ]
 
 acronyms :: [(String, String)]
-acronyms = []
+acronyms = [("NAT", "Nat")]

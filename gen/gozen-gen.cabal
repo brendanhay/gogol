@@ -26,7 +26,6 @@ executable gozen-gen
         , Gen.IO
         , Gen.JSON
         , Gen.Orphans
-        , Gen.Prefix
         , Gen.Solve
         , Gen.Syntax
         , Gen.Text
