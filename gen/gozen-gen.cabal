@@ -25,6 +25,8 @@ executable gozen-gen
         , Gen.Formatting
         , Gen.IO
         , Gen.JSON
+        , Gen.Orphans
+        , Gen.Prefix
         , Gen.Solve
         , Gen.Syntax
         , Gen.Text
@@ -41,6 +43,7 @@ executable gozen-gen
         , attoparsec
         , base       == 4.8.*
         , bytestring
+        , case-insensitive
         , directory-tree
         , ede
         , bifunctors

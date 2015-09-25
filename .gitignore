@@ -35,3 +35,6 @@ tags
 
 # Certificates
 *.pem
+
+# Temporary
+/gozen-*

@@ -2,7 +2,7 @@ SHELL     := /usr/bin/env bash
 TOP       := ..
 BIN       := bin
 MODEL_DIR := model
-OUT_DIR   := tmp
+OUT_DIR   := ..
 
 define version =
 $(shell sed -n 's/^version: *\([0-9]*\.[0-9]*\.[0-9]\).*$$/\1/p' $(1))

@@ -28,8 +28,14 @@
 {{ lens.value.sig }}
 {{ lens.value.decl }}
     {% endfor %}
-  {% when "sum" %}
-{{ type.decl }}
+{% when "sum" %}
+data {{ type.name }}
+  {% for ctor in type.ctors %}
+    {% if ctor.first %}={% else %}|{% endif %} {{ ctor.key }} -- ^ @{{ ctor.value }}@
+  {% endfor %}
+      deriving (Eq, Ord, Enum, Show, Read, Data, Typeable, Generic)
+
+instance Hashable {{ type.name }}
 {% else %}
   Error: Unrecognised type '{{ type.type }}'
 {% endcase %}
