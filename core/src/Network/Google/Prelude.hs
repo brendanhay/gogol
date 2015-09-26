@@ -14,16 +14,18 @@ module Network.Google.Prelude
     , _Default
     ) where
 
-import           Control.Lens  as Export (Lens', lens)
-import           Control.Lens  hiding (coerce)
+import           Control.Lens    as Export (Lens', lens)
+import           Control.Lens    hiding (coerce)
 import           Data.Coerce
-import           Data.Data     as Export (Data, Typeable)
-import           Data.Hashable as Export
-import           Data.Int      as Export (Int32, Int64)
-import           Data.Text     as Export (Text)
-import           Data.Time     as Export (UTCTime)
-import           Data.Word     as Export (Word32, Word64, Word8)
-import           GHC.Generics  as Export (Generic)
+import           Data.Data       as Export (Data, Typeable)
+import           Data.Hashable   as Export
+import           Data.Int        as Export (Int32, Int64)
+import           Data.Text       as Export (Text)
+import           Data.Time       as Export (UTCTime)
+import           Data.Word       as Export (Word32, Word64, Word8)
+import           GHC.Generics    as Export (Generic)
+import           Numeric.Natural as Export (Natural)
+import           Servant.API     as Export
 
 _Coerce :: (Coercible a b, Coercible b a) => Iso' a b
 _Coerce = iso coerce coerce

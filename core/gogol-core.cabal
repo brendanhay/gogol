@@ -43,8 +43,9 @@ library
     build-depends:
           base                 >= 4.7 && < 5
         , hashable
-        , text
         , lens
+        , servant
+        , text
 
     if !impl(ghc>=7.9)
         build-depends:
