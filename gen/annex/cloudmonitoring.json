@@ -1,5 +1,5 @@
 {
-    "library": "cloud-monitoring",
-    "canonicalName": "Cloud.Monitoring"
+    "library": "monitoring",
+    "canonicalName": "Monitoring"
 }
 

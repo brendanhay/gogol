@@ -1,4 +1,5 @@
 {
-    "library": "identity-toolkit"
+    "library": "identity-toolkit",
+    "canonicalName": "IdentityToolkit"
 }
 
