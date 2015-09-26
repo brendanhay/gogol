@@ -3,5 +3,4 @@ flags:      {}
 extra-deps: []
 packages:
   - core
-  - gozen
-  - gozen-youtube
+  - gogol

@@ -1,5 +1,5 @@
-SERVICES  ?= $(wildcard gozen-*)
-LIBRARIES ?= core gozen $(SERVICES)
+SERVICES  ?= $(wildcard gogol-*)
+LIBRARIES ?= core gogol $(SERVICES)
 FORWARD   := sdist upload
 
 build:
@@ -21,11 +21,11 @@ $(foreach c,$(FORWARD),$(eval $(call forward, $c)))
 
 .PHONY: $(LIBRARIES)
 
-gozen:
-	stack build gozen
+gogol:
+	stack build gogol
 
 core:
-	stack build gozen-core
+	stack build gogol-core
 
 $(SERVICES):
 	stack build $@

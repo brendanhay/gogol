@@ -40,7 +40,7 @@ stripSuffix s t = Text.strip . fromMaybe t $ s `Text.stripSuffix` t
 
 renameLibrary :: Text -> Text
 renameLibrary =
-      mappend "gozen-"
+      mappend "gogol-"
     . Text.toLower
 
 renameTitle :: Text -> Text

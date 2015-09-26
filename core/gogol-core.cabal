@@ -1,8 +1,8 @@
-name:                  gozen-core
+name:                  gogol-core
 version:               0.0.1
-synopsis:              Core data types and functionality for Gozen libraries.
-homepage:              https://github.com/brendanhay/gozen
-bug-reports:           https://github.com/brendanhay/gozen/issues
+synopsis:              Core data types and functionality for Gogol libraries.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
 license-file:          LICENSE
 author:                Brendan Hay
@@ -15,15 +15,15 @@ cabal-version:         >= 1.10
 
 description:
     Core data types, functionality and serialisation primitives for
-    Gozen related Google Services SDKs.
+    Gogol related Google Services SDKs.
     .
     The external interface of this library is stable with respect to the
-    downstream Gozen libraries, only, and as such is not suitable
-    for use in non-Gozen projects.
+    downstream Gogol libraries, only, and as such is not suitable
+    for use in non-Gogol projects.
 
 source-repository head
     type:              git
-    location:          git://github.com/brendanhay/gozen.git
+    location:          git://github.com/brendanhay/gogol.git
 
 flag old-locale
     description:       Use old-locale and time < 1.5

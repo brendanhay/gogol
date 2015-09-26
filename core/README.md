@@ -1,4 +1,4 @@
-# Gozen Core
+# Gogol Core
 
 * [Description](#description)
 * [Contribute](#contribute)
@@ -12,9 +12,9 @@
 
 ## Contribute
 
-For any problems, comments, or feedback please create an issue [here on GitHub](https://github.com/brendanhay/gozen/issues).
+For any problems, comments, or feedback please create an issue [here on GitHub](https://github.com/brendanhay/gogol/issues).
 
 
 ## Licence
 
-Gozen is released under the [Mozilla Public License Version 2.0](http://www.mozilla.org/MPL/).
+Gogol is released under the [Mozilla Public License Version 2.0](http://www.mozilla.org/MPL/).

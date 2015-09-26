@@ -1,8 +1,8 @@
-name:                  gozen
+name:                  gogol
 version:               0.0.1
 synopsis:              Comprehensive Google Services SDK.
-homepage:              https://github.com/brendanhay/gozen
-bug-reports:           https://github.com/brendanhay/gozen/issues
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
 license-file:          LICENSE
 author:                Brendan Hay
@@ -18,7 +18,7 @@ description:
 
 source-repository head
     type:              git
-    location:          git://github.com/brendanhay/gozen.git
+    location:          git://github.com/brendanhay/gogol.git
 
 library
     default-language:  Haskell2010
@@ -32,4 +32,4 @@ library
 
     build-depends:
          base       >= 4.7 && < 5
-       , gozen-core == 0.0.1.*
+       , gogol-core == 0.0.1.*

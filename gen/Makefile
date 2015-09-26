@@ -8,18 +8,18 @@ define version =
 $(shell sed -n 's/^version: *\([0-9]*\.[0-9]*\.[0-9]\).*$$/\1/p' $(1))
 endef
 
-VERSION        = $(shell sed -n 's/^version: *\(.*\)$$/\1/p' gozen-gen.cabal)
-CORE_VERSION   = $(call version,$(TOP)/core/gozen-core.cabal)
-CLIENT_VERSION = $(call version,$(TOP)/gen/gozen-gen.cabal)
+VERSION        = $(shell sed -n 's/^version: *\(.*\)$$/\1/p' gogol-gen.cabal)
+CORE_VERSION   = $(call version,$(TOP)/core/gogol-core.cabal)
+CLIENT_VERSION = $(call version,$(TOP)/gen/gogol-gen.cabal)
 
 MODELS ?= $(shell find $(MODEL_DIR) -type f -name '*.json' | sort)
 
-.PHONY: $(BIN)/gozen-gen gen format
+.PHONY: $(BIN)/gogol-gen gen format
 
 release: gen format
 
-gen: $(BIN)/gozen-gen $(MODEL_DIR)
-	$(BIN)/gozen-gen \
+gen: $(BIN)/gogol-gen $(MODEL_DIR)
+	$(BIN)/gogol-gen \
  --out=$(OUT_DIR) \
  --library-version=$(VERSION) \
  --client-version=$(CLIENT_VERSION) \
@@ -31,14 +31,14 @@ gen: $(BIN)/gozen-gen $(MODEL_DIR)
 
 format:
 	@echo -e '\nFormatting...'
-	@find $(wildcard $(OUT_DIR)/gozen-*/gen) \
+	@find $(wildcard $(OUT_DIR)/gogol-*/gen) \
  -type f \
  -name '*.hs' \
  -printf ' -> %p\n' \
  -exec stylish-haskell -i {} \;
 
-$(BIN)/gozen-gen: $(BIN)
-	stack build gozen-gen --copy-bins --local-bin-path $(BIN)
+$(BIN)/gogol-gen: $(BIN)
+	stack build gogol-gen --copy-bins --local-bin-path $(BIN)
 
 $(BIN):
 	mkdir $@
