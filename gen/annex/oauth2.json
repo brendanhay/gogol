@@ -1,4 +1,5 @@
 {
-    "library": "oauth2"
+    "library": "oauth2",
+    "canonicalName": "OAuth2"
 }
 

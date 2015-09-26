@@ -215,15 +215,15 @@ TODO
 -}
 
 type Prediction =
-     HostedmodelsAPI :<|> TrainedmodelsAPI
+     TrainedmodelsAPI :<|> HostedmodelsAPI
 
 type TrainedmodelsAPI =
-     TrainedmodelsList :<|>
-       TrainedmodelsGet :<|>
-         TrainedmodelsAnalyze :<|>
-           TrainedmodelsPredict :<|>
-             TrainedmodelsDelete :<|>
-               TrainedmodelsUpdate :<|> TrainedmodelsInsert
+     TrainedmodelsInsert :<|> TrainedmodelsList :<|>
+       TrainedmodelsGet
+       :<|> TrainedmodelsAnalyze
+       :<|> TrainedmodelsPredict
+       :<|> TrainedmodelsDelete
+       :<|> TrainedmodelsUpdate
 
 -- | Train a Prediction API model.
 type TrainedmodelsInsert =

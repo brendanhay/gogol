@@ -71,7 +71,7 @@ TODO
 -}
 
 type Translate =
-     LanguagesAPI :<|> TranslationsAPI :<|> DetectionsAPI
+     DetectionsAPI :<|> LanguagesAPI :<|> TranslationsAPI
 
 type DetectionsAPI = DetectionsList
 

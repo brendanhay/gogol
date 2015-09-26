@@ -1,4 +1,5 @@
 {
-    "library": "maps-coordinate"
+    "library": "maps-coordinate",
+    "canonicalName": "Maps.Coordinate"
 }
 

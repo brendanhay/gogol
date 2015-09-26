@@ -1,4 +1,5 @@
 {
-    "library": "android-enterprise"
+    "library": "play-enterprise",
+    "canonicalName": "Play.Enterprise"
 }
 

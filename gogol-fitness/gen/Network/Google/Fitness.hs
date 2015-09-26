@@ -211,7 +211,7 @@ TODO
 type Fitness = UsersAPI
 
 type UsersAPI =
-     DataSourcesAPI :<|> SessionsAPI :<|> DatasetAPI
+     DatasetAPI :<|> DataSourcesAPI :<|> SessionsAPI
 
 type DatasetAPI = DatasetAggregate
 
@@ -233,7 +233,7 @@ type DatasetAggregate =
 type DataSourcesAPI = DatasetsAPI
 
 type DatasetsAPI =
-     DatasetsGet :<|> DatasetsDelete :<|> DatasetsPatch
+     DatasetsPatch :<|> DatasetsGet :<|> DatasetsDelete
 
 -- | Adds data points to a dataset. The dataset need not be previously
 -- created. All points within the given dataset will be returned with
@@ -299,7 +299,7 @@ type DatasetsDelete =
        :> QueryParam "alt" Text
 
 type SessionsAPI =
-     SessionsDelete :<|> SessionsUpdate :<|> SessionsList
+     SessionsList :<|> SessionsDelete :<|> SessionsUpdate
 
 -- | Lists sessions previously created.
 type SessionsList =

@@ -80,7 +80,7 @@ TODO
 
 type URLShortener = UrlAPI
 
-type UrlAPI = UrlList :<|> UrlGet :<|> UrlInsert
+type UrlAPI = UrlInsert :<|> UrlList :<|> UrlGet
 
 -- | Creates a new short URL.
 type UrlInsert =

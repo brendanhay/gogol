@@ -30,12 +30,12 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.YouTubeAnalytics
-        , Network.Google.YouTubeAnalytics.Types
+          Network.Google.YouTube.Analytics
+        , Network.Google.YouTube.Analytics.Types
 
     other-modules:
-          Network.Google.YouTubeAnalytics.Types.Product
-        , Network.Google.YouTubeAnalytics.Types.Sum
+          Network.Google.YouTube.Analytics.Types.Product
+        , Network.Google.YouTube.Analytics.Types.Sum
 
     build-depends:
           gogol-core == 0.0.1.*

@@ -31,12 +31,12 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.DoubleClickSearch
-        , Network.Google.DoubleClickSearch.Types
+          Network.Google.DoubleClick.Search
+        , Network.Google.DoubleClick.Search.Types
 
     other-modules:
-          Network.Google.DoubleClickSearch.Types.Product
-        , Network.Google.DoubleClickSearch.Types.Sum
+          Network.Google.DoubleClick.Search.Types.Product
+        , Network.Google.DoubleClick.Search.Types.Sum
 
     build-depends:
           gogol-core == 0.0.1.*

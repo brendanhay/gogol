@@ -30,12 +30,12 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.MapsCoordinate
-        , Network.Google.MapsCoordinate.Types
+          Network.Google.Maps.Coordinate
+        , Network.Google.Maps.Coordinate.Types
 
     other-modules:
-          Network.Google.MapsCoordinate.Types.Product
-        , Network.Google.MapsCoordinate.Types.Sum
+          Network.Google.Maps.Coordinate.Types.Product
+        , Network.Google.Maps.Coordinate.Types.Sum
 
     build-depends:
           gogol-core == 0.0.1.*

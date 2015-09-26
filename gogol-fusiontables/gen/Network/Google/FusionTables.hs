@@ -274,16 +274,15 @@ TODO
 -}
 
 type FusionTables =
-     QueryAPI :<|>
-       TaskAPI :<|>
-         TemplateAPI :<|>
-           ColumnAPI :<|> TableAPI :<|> StyleAPI
+     StyleAPI :<|> QueryAPI :<|> TaskAPI :<|> TemplateAPI
+       :<|> ColumnAPI
+       :<|> TableAPI
 
 type StyleAPI =
-     StyleList :<|>
-       StylePatch :<|>
-         StyleGet :<|>
-           StyleDelete :<|> StyleUpdate :<|> StyleInsert
+     StyleInsert :<|> StyleList :<|> StylePatch :<|>
+       StyleGet
+       :<|> StyleDelete
+       :<|> StyleUpdate
 
 -- | Adds a new style for the table.
 type StyleInsert =
@@ -369,7 +368,7 @@ type StyleUpdate =
        :> QueryParam "fields" Text
        :> QueryParam "alt" Text
 
-type QueryAPI = QuerySql :<|> QuerySqlGet
+type QueryAPI = QuerySqlGet :<|> QuerySql
 
 -- | Executes a SQL statement which can be any of - SELECT - SHOW - DESCRIBE
 type QuerySqlGet =
@@ -400,7 +399,7 @@ type QuerySql =
        :> QueryParam "fields" Text
        :> QueryParam "alt" Text
 
-type TaskAPI = TaskGet :<|> TaskDelete :<|> TaskList
+type TaskAPI = TaskList :<|> TaskGet :<|> TaskDelete
 
 -- | Retrieves a list of tasks.
 type TaskList =
@@ -448,11 +447,10 @@ type TaskDelete =
        :> QueryParam "alt" Text
 
 type TemplateAPI =
-     TemplateList :<|>
-       TemplatePatch :<|>
-         TemplateGet :<|>
-           TemplateDelete :<|>
-             TemplateUpdate :<|> TemplateInsert
+     TemplateInsert :<|> TemplateList :<|> TemplatePatch
+       :<|> TemplateGet
+       :<|> TemplateDelete
+       :<|> TemplateUpdate
 
 -- | Creates a new template for the table.
 type TemplateInsert =
@@ -539,10 +537,10 @@ type TemplateUpdate =
        :> QueryParam "alt" Text
 
 type ColumnAPI =
-     ColumnList :<|>
-       ColumnPatch :<|>
-         ColumnGet :<|>
-           ColumnDelete :<|> ColumnUpdate :<|> ColumnInsert
+     ColumnInsert :<|> ColumnList :<|> ColumnPatch :<|>
+       ColumnGet
+       :<|> ColumnDelete
+       :<|> ColumnUpdate
 
 -- | Adds a new column to the table.
 type ColumnInsert =
@@ -630,14 +628,14 @@ type ColumnUpdate =
        :> QueryParam "alt" Text
 
 type TableAPI =
-     TableList :<|>
-       TableCopy :<|>
-         TableReplaceRows :<|>
-           TableImportTable :<|>
-             TablePatch :<|>
-               TableGet :<|>
-                 TableImportRows :<|>
-                   TableDelete :<|> TableUpdate :<|> TableInsert
+     TableInsert :<|> TableList :<|> TableCopy :<|>
+       TableReplaceRows
+       :<|> TableImportTable
+       :<|> TablePatch
+       :<|> TableGet
+       :<|> TableImportRows
+       :<|> TableDelete
+       :<|> TableUpdate
 
 -- | Creates a new table.
 type TableInsert =

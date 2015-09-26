@@ -795,24 +795,24 @@ TODO
 -}
 
 type Genomics =
-     VariantsAPI :<|>
-       ReferencesAPI :<|>
-         VariantsetsAPI :<|>
-           AnnotationSetsAPI :<|>
-             ExperimentalAPI :<|>
-               JobsAPI :<|>
-                 ReadgroupsetsAPI :<|>
-                   ReferencesetsAPI :<|>
-                     CallsetsAPI :<|>
-                       ReadsAPI :<|> DatasetsAPI :<|> AnnotationsAPI
+     AnnotationsAPI :<|> VariantsAPI :<|> ReferencesAPI
+       :<|> VariantsetsAPI
+       :<|> AnnotationSetsAPI
+       :<|> ExperimentalAPI
+       :<|> JobsAPI
+       :<|> ReadgroupsetsAPI
+       :<|> ReferencesetsAPI
+       :<|> CallsetsAPI
+       :<|> ReadsAPI
+       :<|> DatasetsAPI
 
 type AnnotationsAPI =
-     AnnotationsGet :<|>
-       AnnotationsCreate :<|>
-         AnnotationsBatchCreate :<|>
-           AnnotationsSearch :<|>
-             AnnotationsDelete :<|>
-               AnnotationsUpdate :<|> AnnotationsPatch
+     AnnotationsPatch :<|> AnnotationsGet :<|>
+       AnnotationsCreate
+       :<|> AnnotationsBatchCreate
+       :<|> AnnotationsSearch
+       :<|> AnnotationsDelete
+       :<|> AnnotationsUpdate
 
 -- | Updates an annotation. The update must respect all mutability
 -- restrictions and other invariants described on the annotation resource.
@@ -914,9 +914,9 @@ type AnnotationsUpdate =
        :> QueryParam "alt" Text
 
 type VariantsAPI =
-     VariantsCreate :<|>
-       VariantsSearch :<|>
-         VariantsDelete :<|> VariantsUpdate :<|> VariantsGet
+     VariantsGet :<|> VariantsCreate :<|> VariantsSearch
+       :<|> VariantsDelete
+       :<|> VariantsUpdate
 
 -- | Gets a variant by ID.
 type VariantsGet =
@@ -1001,14 +1001,14 @@ type BasesList =
        :> QueryParam "alt" Text
 
 type VariantsetsAPI =
-     VariantsetsPatch :<|>
-       VariantsetsGet :<|>
-         VariantsetsMergeVariants :<|>
-           VariantsetsCreate :<|>
-             VariantsetsSearch :<|>
-               VariantsetsDelete :<|>
-                 VariantsetsUpdate :<|>
-                   VariantsetsImportVariants :<|> VariantsetsExport
+     VariantsetsExport :<|> VariantsetsPatch :<|>
+       VariantsetsGet
+       :<|> VariantsetsMergeVariants
+       :<|> VariantsetsCreate
+       :<|> VariantsetsSearch
+       :<|> VariantsetsDelete
+       :<|> VariantsetsUpdate
+       :<|> VariantsetsImportVariants
 
 -- | Exports variant set data to an external destination.
 type VariantsetsExport =
@@ -1140,11 +1140,11 @@ type VariantsetsImportVariants =
        :> QueryParam "alt" Text
 
 type AnnotationSetsAPI =
-     AnnotationSetsGet :<|>
-       AnnotationSetsCreate :<|>
-         AnnotationSetsSearch :<|>
-           AnnotationSetsDelete :<|>
-             AnnotationSetsUpdate :<|> AnnotationSetsPatch
+     AnnotationSetsPatch :<|> AnnotationSetsGet :<|>
+       AnnotationSetsCreate
+       :<|> AnnotationSetsSearch
+       :<|> AnnotationSetsDelete
+       :<|> AnnotationSetsUpdate
 
 -- | Updates an annotation set. The update must respect all mutability
 -- restrictions and other invariants described on the annotation set
@@ -1245,7 +1245,7 @@ type JobsCreate =
        :> QueryParam "alt" Text
 
 type JobsAPI =
-     JobsCancel :<|> JobsSearch :<|> JobsGet
+     JobsGet :<|> JobsCancel :<|> JobsSearch
 
 -- | Gets a job by ID.
 type JobsGet =
@@ -1315,7 +1315,7 @@ type CoveragebucketsList =
        :> QueryParam "alt" Text
 
 type ReferencesetsAPI =
-     ReferencesetsSearch :<|> ReferencesetsGet
+     ReferencesetsGet :<|> ReferencesetsSearch
 
 -- | Gets a reference set. Implements GlobalAllianceApi.getReferenceSet.
 type ReferencesetsGet =
@@ -1343,10 +1343,10 @@ type ReferencesetsSearch =
        :> QueryParam "alt" Text
 
 type CallsetsAPI =
-     CallsetsGet :<|>
-       CallsetsCreate :<|>
-         CallsetsSearch :<|>
-           CallsetsDelete :<|> CallsetsUpdate :<|> CallsetsPatch
+     CallsetsPatch :<|> CallsetsGet :<|> CallsetsCreate
+       :<|> CallsetsSearch
+       :<|> CallsetsDelete
+       :<|> CallsetsUpdate
 
 -- | Updates a call set. This method supports patch semantics.
 type CallsetsPatch =
@@ -1443,11 +1443,11 @@ type ReadsSearch =
        :> QueryParam "alt" Text
 
 type DatasetsAPI =
-     DatasetsUndelete :<|>
-       DatasetsPatch :<|>
-         DatasetsGet :<|>
-           DatasetsCreate :<|>
-             DatasetsDelete :<|> DatasetsUpdate :<|> DatasetsList
+     DatasetsList :<|> DatasetsUndelete :<|> DatasetsPatch
+       :<|> DatasetsGet
+       :<|> DatasetsCreate
+       :<|> DatasetsDelete
+       :<|> DatasetsUpdate
 
 -- | Lists datasets within a project.
 type DatasetsList =

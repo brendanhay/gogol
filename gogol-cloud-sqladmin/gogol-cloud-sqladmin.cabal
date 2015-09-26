@@ -30,12 +30,12 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.SQLAdmin
-        , Network.Google.SQLAdmin.Types
+          Network.Google.Cloud.SQLAdmin
+        , Network.Google.Cloud.SQLAdmin.Types
 
     other-modules:
-          Network.Google.SQLAdmin.Types.Product
-        , Network.Google.SQLAdmin.Types.Sum
+          Network.Google.Cloud.SQLAdmin.Types.Product
+        , Network.Google.Cloud.SQLAdmin.Types.Sum
 
     build-depends:
           gogol-core == 0.0.1.*

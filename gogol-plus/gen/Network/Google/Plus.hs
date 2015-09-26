@@ -515,12 +515,12 @@ TODO
 -}
 
 type Plus =
-     PeopleAPI :<|>
-       CommentsAPI :<|> MomentsAPI :<|> ActivitiesAPI
+     ActivitiesAPI :<|> PeopleAPI :<|> CommentsAPI :<|>
+       MomentsAPI
 
 type ActivitiesAPI =
-     ActivitiesGet :<|>
-       ActivitiesSearch :<|> ActivitiesList
+     ActivitiesList :<|> ActivitiesGet :<|>
+       ActivitiesSearch
 
 -- | List all of the activities in the specified collection for a particular
 -- user.
@@ -567,9 +567,8 @@ type ActivitiesSearch =
        :> QueryParam "alt" Text
 
 type PeopleAPI =
-     PeopleGet :<|>
-       PeopleListByActivity :<|>
-         PeopleSearch :<|> PeopleList
+     PeopleList :<|> PeopleGet :<|> PeopleListByActivity
+       :<|> PeopleSearch
 
 -- | List all of the people in the specified collection.
 type PeopleList =
@@ -632,7 +631,7 @@ type PeopleSearch =
        :> QueryParam "fields" Text
        :> QueryParam "alt" Text
 
-type CommentsAPI = CommentsGet :<|> CommentsList
+type CommentsAPI = CommentsList :<|> CommentsGet
 
 -- | List all of the comments for an activity.
 type CommentsList =
@@ -662,7 +661,7 @@ type CommentsGet =
        :> QueryParam "fields" Text
        :> QueryParam "alt" Text
 
-type MomentsAPI = MomentsList :<|> MomentsInsert
+type MomentsAPI = MomentsInsert :<|> MomentsList
 
 -- | Record a moment representing a user\'s action such as making a purchase
 -- or commenting on a blog.

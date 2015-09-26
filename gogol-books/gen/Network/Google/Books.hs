@@ -804,17 +804,17 @@ TODO
 -}
 
 type Books =
-     MylibraryAPI :<|>
-       PromoofferAPI :<|>
-         CloudloadingAPI :<|>
-           LayersAPI :<|>
-             DictionaryAPI :<|>
-               VolumesAPI :<|>
-                 BookshelvesAPI :<|> MyconfigAPI :<|> OnboardingAPI
+     OnboardingAPI :<|> MylibraryAPI :<|> PromoofferAPI
+       :<|> CloudloadingAPI
+       :<|> LayersAPI
+       :<|> DictionaryAPI
+       :<|> VolumesAPI
+       :<|> BookshelvesAPI
+       :<|> MyconfigAPI
 
 type OnboardingAPI =
-     OnboardingListCategoryVolumes :<|>
-       OnboardingListCategories
+     OnboardingListCategories :<|>
+       OnboardingListCategoryVolumes
 
 -- | List categories for onboarding experience.
 type OnboardingListCategories =
@@ -846,14 +846,14 @@ type OnboardingListCategoryVolumes =
        :> QueryParam "alt" Text
 
 type MylibraryAPI =
-     ReadingpositionsAPI :<|>
-       BookshelvesAPI :<|> AnnotationsAPI
+     AnnotationsAPI :<|> ReadingpositionsAPI :<|>
+       BookshelvesAPI
 
 type AnnotationsAPI =
-     AnnotationsInsert :<|>
-       AnnotationsList :<|>
-         AnnotationsDelete :<|>
-           AnnotationsUpdate :<|> AnnotationsSummary
+     AnnotationsSummary :<|> AnnotationsInsert :<|>
+       AnnotationsList
+       :<|> AnnotationsDelete
+       :<|> AnnotationsUpdate
 
 -- | Gets the summary of specified layers.
 type AnnotationsSummary =
@@ -931,7 +931,7 @@ type AnnotationsUpdate =
        :> QueryParam "alt" Text
 
 type ReadingpositionsAPI =
-     ReadingpositionsSetPosition :<|> ReadingpositionsGet
+     ReadingpositionsGet :<|> ReadingpositionsSetPosition
 
 -- | Retrieves my reading position information for a volume.
 type ReadingpositionsGet =
@@ -991,8 +991,8 @@ type VolumesList =
        :> QueryParam "alt" Text
 
 type PromoofferAPI =
-     PromoofferGet :<|>
-       PromoofferDismiss :<|> PromoofferAccept
+     PromoofferAccept :<|> PromoofferGet :<|>
+       PromoofferDismiss
 
 -- |
 type PromoofferAccept =
@@ -1049,8 +1049,8 @@ type PromoofferDismiss =
        :> QueryParam "alt" Text
 
 type CloudloadingAPI =
-     CloudloadingUpdateBook :<|>
-       CloudloadingDeleteBook :<|> CloudloadingAddBook
+     CloudloadingAddBook :<|> CloudloadingUpdateBook :<|>
+       CloudloadingDeleteBook
 
 -- |
 type CloudloadingAddBook =
@@ -1091,10 +1091,10 @@ type CloudloadingDeleteBook =
        :> QueryParam "alt" Text
 
 type LayersAPI =
-     AnnotationDataAPI :<|> VolumeAnnotationsAPI
+     VolumeAnnotationsAPI :<|> AnnotationDataAPI
 
 type VolumeAnnotationsAPI =
-     VolumeAnnotationsGet :<|> VolumeAnnotationsList
+     VolumeAnnotationsList :<|> VolumeAnnotationsGet
 
 -- | Gets the volume annotations for a volume and layer.
 type VolumeAnnotationsList =
@@ -1142,7 +1142,7 @@ type VolumeAnnotationsGet =
        :> QueryParam "alt" Text
 
 type AnnotationDataAPI =
-     AnnotationDataGet :<|> AnnotationDataList
+     AnnotationDataList :<|> AnnotationDataGet
 
 -- | Gets the annotation data for a volume and layer.
 type AnnotationDataList =
@@ -1209,8 +1209,9 @@ type DictionaryListOfflineMetadata =
        :> QueryParam "alt" Text
 
 type VolumesAPI =
-     RecommendedAPI :<|>
-       AssociatedAPI :<|> MybooksAPI :<|> UseruploadedAPI
+     UseruploadedAPI :<|> RecommendedAPI :<|>
+       AssociatedAPI
+       :<|> MybooksAPI
 
 type UseruploadedAPI = UseruploadedList
 
@@ -1232,7 +1233,7 @@ type UseruploadedList =
        :> QueryParam "alt" Text
 
 type RecommendedAPI =
-     RecommendedRate :<|> RecommendedList
+     RecommendedList :<|> RecommendedRate
 
 -- | Return a list of recommended books for the current user.
 type RecommendedList =
@@ -1325,11 +1326,11 @@ type VolumesList =
        :> QueryParam "alt" Text
 
 type MyconfigAPI =
-     MyconfigGetUserSettings :<|>
-       MyconfigRequestAccess :<|>
-         MyconfigUpdateUserSettings :<|>
-           MyconfigReleaseDownloadAccess :<|>
-             MyconfigSyncVolumeLicenses
+     MyconfigSyncVolumeLicenses :<|>
+       MyconfigGetUserSettings
+       :<|> MyconfigRequestAccess
+       :<|> MyconfigUpdateUserSettings
+       :<|> MyconfigReleaseDownloadAccess
 
 -- | Request downloaded content access for specified volumes on the My eBooks
 -- shelf.

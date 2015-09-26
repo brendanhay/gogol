@@ -1,4 +1,5 @@
 {
-    "library": "calendar"
+    "library": "apps-calendar",
+    "canonicalName": "Apps.Calendar"
 }
 

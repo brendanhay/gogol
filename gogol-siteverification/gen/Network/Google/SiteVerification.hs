@@ -78,12 +78,12 @@ TODO
 type SiteVerification = WebResourceAPI
 
 type WebResourceAPI =
-     WebResourceList :<|>
-       WebResourcePatch :<|>
-         WebResourceGet :<|>
-           WebResourceGetToken :<|>
-             WebResourceDelete :<|>
-               WebResourceUpdate :<|> WebResourceInsert
+     WebResourceInsert :<|> WebResourceList :<|>
+       WebResourcePatch
+       :<|> WebResourceGet
+       :<|> WebResourceGetToken
+       :<|> WebResourceDelete
+       :<|> WebResourceUpdate
 
 -- | Attempt verification of a website or domain.
 type WebResourceInsert =

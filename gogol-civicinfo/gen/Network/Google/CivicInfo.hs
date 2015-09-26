@@ -252,11 +252,11 @@ TODO
 -}
 
 type CivicInfo =
-     DivisionsAPI :<|>
-       RepresentativesAPI :<|> ElectionsAPI
+     ElectionsAPI :<|> DivisionsAPI :<|>
+       RepresentativesAPI
 
 type ElectionsAPI =
-     ElectionsElectionQuery :<|> ElectionsVoterInfoQuery
+     ElectionsVoterInfoQuery :<|> ElectionsElectionQuery
 
 -- | Looks up information relevant to a voter based on the voter\'s
 -- registered address.
@@ -299,8 +299,8 @@ type DivisionsSearch =
        :> QueryParam "alt" Text
 
 type RepresentativesAPI =
-     RepresentativesRepresentativeInfoByAddress :<|>
-       RepresentativesRepresentativeInfoByDivision
+     RepresentativesRepresentativeInfoByDivision :<|>
+       RepresentativesRepresentativeInfoByAddress
 
 -- | Looks up representative information for a single geographic division.
 type RepresentativesRepresentativeInfoByDivision =

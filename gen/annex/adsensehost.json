@@ -1,4 +1,5 @@
 {
-    "library": "adsense-host"
+    "library": "adsense-host",
+    "canonicalName": "AdSense.Host"
 }
 

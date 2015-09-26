@@ -252,7 +252,7 @@ TODO
 
 type Discovery = ApisAPI
 
-type ApisAPI = ApisGetRest :<|> ApisList
+type ApisAPI = ApisList :<|> ApisGetRest
 
 -- | Retrieve the list of APIs supported at this endpoint.
 type ApisList =

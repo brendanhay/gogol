@@ -31,12 +31,12 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.CloudDebugger
-        , Network.Google.CloudDebugger.Types
+          Network.Google.Cloud.Debugger
+        , Network.Google.Cloud.Debugger.Types
 
     other-modules:
-          Network.Google.CloudDebugger.Types.Product
-        , Network.Google.CloudDebugger.Types.Sum
+          Network.Google.Cloud.Debugger.Types.Product
+        , Network.Google.Cloud.Debugger.Types.Sum
 
     build-depends:
           gogol-core == 0.0.1.*

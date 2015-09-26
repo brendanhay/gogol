@@ -547,14 +547,14 @@ TODO
 -}
 
 type PlusDomains =
-     PeopleAPI :<|>
-       MediaAPI :<|>
-         AudiencesAPI :<|>
-           CommentsAPI :<|> CirclesAPI :<|> ActivitiesAPI
+     ActivitiesAPI :<|> PeopleAPI :<|> MediaAPI :<|>
+       AudiencesAPI
+       :<|> CommentsAPI
+       :<|> CirclesAPI
 
 type ActivitiesAPI =
-     ActivitiesList :<|>
-       ActivitiesGet :<|> ActivitiesInsert
+     ActivitiesInsert :<|> ActivitiesList :<|>
+       ActivitiesGet
 
 -- | Create a new activity for the authenticated user.
 type ActivitiesInsert =
@@ -600,8 +600,8 @@ type ActivitiesGet =
        :> QueryParam "alt" Text
 
 type PeopleAPI =
-     PeopleListByCircle :<|>
-       PeopleGet :<|> PeopleListByActivity :<|> PeopleList
+     PeopleList :<|> PeopleListByCircle :<|> PeopleGet
+       :<|> PeopleListByActivity
 
 -- | List all of the people in the specified collection.
 type PeopleList =
@@ -701,7 +701,7 @@ type AudiencesList =
        :> QueryParam "alt" Text
 
 type CommentsAPI =
-     CommentsList :<|> CommentsGet :<|> CommentsInsert
+     CommentsInsert :<|> CommentsList :<|> CommentsGet
 
 -- | Create a new comment in reply to an activity.
 type CommentsInsert =
@@ -745,13 +745,12 @@ type CommentsGet =
        :> QueryParam "alt" Text
 
 type CirclesAPI =
-     CirclesAddPeople :<|>
-       CirclesList :<|>
-         CirclesPatch :<|>
-           CirclesGet :<|>
-             CirclesRemove :<|>
-               CirclesRemovePeople :<|>
-                 CirclesUpdate :<|> CirclesInsert
+     CirclesInsert :<|> CirclesAddPeople :<|> CirclesList
+       :<|> CirclesPatch
+       :<|> CirclesGet
+       :<|> CirclesRemove
+       :<|> CirclesRemovePeople
+       :<|> CirclesUpdate
 
 -- | Create a new circle for the authenticated user.
 type CirclesInsert =

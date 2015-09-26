@@ -31,12 +31,12 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.AppEngineAdmin
-        , Network.Google.AppEngineAdmin.Types
+          Network.Google.AppEngine
+        , Network.Google.AppEngine.Types
 
     other-modules:
-          Network.Google.AppEngineAdmin.Types.Product
-        , Network.Google.AppEngineAdmin.Types.Sum
+          Network.Google.AppEngine.Types.Product
+        , Network.Google.AppEngine.Types.Sum
 
     build-depends:
           gogol-core == 0.0.1.*

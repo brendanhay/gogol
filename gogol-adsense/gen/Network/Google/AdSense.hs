@@ -338,14 +338,14 @@ TODO
 -}
 
 type AdSense =
-     AccountsAPI :<|>
-       ReportsAPI :<|>
-         AlertsAPI :<|>
-           AdunitsAPI :<|>
-             UrlchannelsAPI :<|>
-               CustomchannelsAPI :<|>
-                 SavedadstylesAPI :<|>
-                   MetadataAPI :<|> PaymentsAPI :<|> AdclientsAPI
+     AdclientsAPI :<|> AccountsAPI :<|> ReportsAPI :<|>
+       AlertsAPI
+       :<|> AdunitsAPI
+       :<|> UrlchannelsAPI
+       :<|> CustomchannelsAPI
+       :<|> SavedadstylesAPI
+       :<|> MetadataAPI
+       :<|> PaymentsAPI
 
 type AdclientsAPI = AdclientsList
 
@@ -363,12 +363,12 @@ type AdclientsList =
        :> QueryParam "alt" Text
 
 type AccountsAPI =
-     ReportsAPI :<|>
-       AlertsAPI :<|>
-         AdunitsAPI :<|>
-           UrlchannelsAPI :<|>
-             CustomchannelsAPI :<|>
-               SavedadstylesAPI :<|> PaymentsAPI :<|> AdclientsAPI
+     AdclientsAPI :<|> ReportsAPI :<|> AlertsAPI :<|>
+       AdunitsAPI
+       :<|> UrlchannelsAPI
+       :<|> CustomchannelsAPI
+       :<|> SavedadstylesAPI
+       :<|> PaymentsAPI
 
 type AdclientsAPI = AdclientsList
 
@@ -389,7 +389,7 @@ type AdclientsList =
 
 type ReportsAPI = SavedAPI
 
-type SavedAPI = SavedGenerate :<|> SavedList
+type SavedAPI = SavedList :<|> SavedGenerate
 
 -- | List all saved reports in the specified AdSense account.
 type SavedList =
@@ -425,7 +425,7 @@ type SavedGenerate =
        :> QueryParam "fields" Text
        :> QueryParam "alt" Text
 
-type AlertsAPI = AlertsDelete :<|> AlertsList
+type AlertsAPI = AlertsList :<|> AlertsDelete
 
 -- | List the alerts for the specified AdSense account.
 type AlertsList =
@@ -524,7 +524,7 @@ type AdunitsList =
        :> QueryParam "alt" Text
 
 type SavedadstylesAPI =
-     SavedadstylesGet :<|> SavedadstylesList
+     SavedadstylesList :<|> SavedadstylesGet
 
 -- | List all saved ad styles in the specified account.
 type SavedadstylesList =
@@ -572,7 +572,7 @@ type PaymentsList =
 
 type ReportsAPI = SavedAPI
 
-type SavedAPI = SavedGenerate :<|> SavedList
+type SavedAPI = SavedList :<|> SavedGenerate
 
 -- | List all saved reports in this AdSense account.
 type SavedList =
@@ -603,7 +603,7 @@ type SavedGenerate =
        :> QueryParam "fields" Text
        :> QueryParam "alt" Text
 
-type AlertsAPI = AlertsDelete :<|> AlertsList
+type AlertsAPI = AlertsList :<|> AlertsDelete
 
 -- | List the alerts for this AdSense account.
 type AlertsList =
@@ -692,7 +692,7 @@ type AdunitsList =
        :> QueryParam "alt" Text
 
 type SavedadstylesAPI =
-     SavedadstylesGet :<|> SavedadstylesList
+     SavedadstylesList :<|> SavedadstylesGet
 
 -- | List all saved ad styles in the user\'s account.
 type SavedadstylesList =
@@ -719,7 +719,7 @@ type SavedadstylesGet =
        :> QueryParam "fields" Text
        :> QueryParam "alt" Text
 
-type MetadataAPI = DimensionsAPI :<|> MetricsAPI
+type MetadataAPI = MetricsAPI :<|> DimensionsAPI
 
 type MetricsAPI = MetricsList
 

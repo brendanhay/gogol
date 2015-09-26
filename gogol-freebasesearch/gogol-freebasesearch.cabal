@@ -30,12 +30,12 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.FreebaseSearch
-        , Network.Google.FreebaseSearch.Types
+          Network.Google.Freebase.Search
+        , Network.Google.Freebase.Search.Types
 
     other-modules:
-          Network.Google.FreebaseSearch.Types.Product
-        , Network.Google.FreebaseSearch.Types.Sum
+          Network.Google.Freebase.Search.Types.Product
+        , Network.Google.Freebase.Search.Types.Sum
 
     build-depends:
           gogol-core == 0.0.1.*

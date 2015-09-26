@@ -30,12 +30,12 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.CloudMonitoring
-        , Network.Google.CloudMonitoring.Types
+          Network.Google.Cloud.Monitoring
+        , Network.Google.Cloud.Monitoring.Types
 
     other-modules:
-          Network.Google.CloudMonitoring.Types.Product
-        , Network.Google.CloudMonitoring.Types.Sum
+          Network.Google.Cloud.Monitoring.Types.Product
+        , Network.Google.Cloud.Monitoring.Types.Sum
 
     build-depends:
           gogol-core == 0.0.1.*

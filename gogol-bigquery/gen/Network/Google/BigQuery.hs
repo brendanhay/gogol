@@ -490,15 +490,14 @@ TODO
 -}
 
 type BigQuery =
-     TablesAPI :<|>
-       TabledataAPI :<|>
-         ProjectsAPI :<|> DatasetsAPI :<|> JobsAPI
+     JobsAPI :<|> TablesAPI :<|> TabledataAPI :<|>
+       ProjectsAPI
+       :<|> DatasetsAPI
 
 type JobsAPI =
-     JobsList :<|>
-       JobsGet :<|>
-         JobsQuery :<|>
-           JobsCancel :<|> JobsGetQueryResults :<|> JobsInsert
+     JobsInsert :<|> JobsList :<|> JobsGet :<|> JobsQuery
+       :<|> JobsCancel
+       :<|> JobsGetQueryResults
 
 -- | Starts a new asynchronous job. Requires the Can View project role.
 type JobsInsert =
@@ -601,10 +600,10 @@ type JobsGetQueryResults =
        :> QueryParam "alt" Text
 
 type TablesAPI =
-     TablesList :<|>
-       TablesPatch :<|>
-         TablesGet :<|>
-           TablesDelete :<|> TablesUpdate :<|> TablesInsert
+     TablesInsert :<|> TablesList :<|> TablesPatch :<|>
+       TablesGet
+       :<|> TablesDelete
+       :<|> TablesUpdate
 
 -- | Creates a new, empty table in the dataset.
 type TablesInsert =
@@ -712,7 +711,7 @@ type TablesUpdate =
        :> QueryParam "alt" Text
 
 type TabledataAPI =
-     TabledataInsertAll :<|> TabledataList
+     TabledataList :<|> TabledataInsertAll
 
 -- | Retrieves table data from a specified set of rows. Requires the READER
 -- dataset role.
@@ -769,11 +768,10 @@ type ProjectsList =
        :> QueryParam "alt" Text
 
 type DatasetsAPI =
-     DatasetsList :<|>
-       DatasetsPatch :<|>
-         DatasetsGet :<|>
-           DatasetsDelete :<|>
-             DatasetsUpdate :<|> DatasetsInsert
+     DatasetsInsert :<|> DatasetsList :<|> DatasetsPatch
+       :<|> DatasetsGet
+       :<|> DatasetsDelete
+       :<|> DatasetsUpdate
 
 -- | Creates a new empty dataset.
 type DatasetsInsert =

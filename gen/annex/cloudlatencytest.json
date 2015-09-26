@@ -1,4 +1,5 @@
 {
-    "library": "cloud-latencytest"
+    "library": "latencytest",
+    "canonicalName": "LatencyTest"
 }
 

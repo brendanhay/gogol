@@ -1,4 +1,5 @@
 {
-    "library": "proximitybeacon"
+    "library": "proximitybeacon",
+    "canonicalName": "ProximityBeacon"
 }
 

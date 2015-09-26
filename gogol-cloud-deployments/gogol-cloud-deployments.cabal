@@ -31,12 +31,12 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.DeploymentManager
-        , Network.Google.DeploymentManager.Types
+          Network.Google.Cloud.Deployment
+        , Network.Google.Cloud.Deployment.Types
 
     other-modules:
-          Network.Google.DeploymentManager.Types.Product
-        , Network.Google.DeploymentManager.Types.Sum
+          Network.Google.Cloud.Deployment.Types.Product
+        , Network.Google.Cloud.Deployment.Types.Sum
 
     build-depends:
           gogol-core == 0.0.1.*

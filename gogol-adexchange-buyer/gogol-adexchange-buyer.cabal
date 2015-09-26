@@ -32,12 +32,12 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.AdExchangeBuyer
-        , Network.Google.AdExchangeBuyer.Types
+          Network.Google.AdExchange.Buyer
+        , Network.Google.AdExchange.Buyer.Types
 
     other-modules:
-          Network.Google.AdExchangeBuyer.Types.Product
-        , Network.Google.AdExchangeBuyer.Types.Sum
+          Network.Google.AdExchange.Buyer.Types.Product
+        , Network.Google.AdExchange.Buyer.Types.Sum
 
     build-depends:
           gogol-core == 0.0.1.*

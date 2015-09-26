@@ -1962,45 +1962,41 @@ TODO
 -}
 
 type Compute =
-     UrlMapsAPI :<|>
-       InstanceTemplatesAPI :<|>
-         RoutesAPI :<|>
-           TargetVpnGatewaysAPI :<|>
-             ZonesAPI :<|>
-               GlobalForwardingRulesAPI :<|>
-                 NetworksAPI :<|>
-                   AddressesAPI :<|>
-                     VpnTunnelsAPI :<|>
-                       RegionsAPI :<|>
-                         GlobalAddressesAPI :<|>
-                           TargetHttpProxiesAPI :<|>
-                             AutoscalersAPI :<|>
-                               DiskTypesAPI :<|>
-                                 RegionOperationsAPI :<|>
-                                   MachineTypesAPI :<|>
-                                     HttpHealthChecksAPI :<|>
-                                       SnapshotsAPI :<|>
-                                         InstancesAPI :<|>
-                                           BackendServicesAPI :<|>
-                                             InstanceGroupsAPI :<|>
-                                               GlobalOperationsAPI :<|>
-                                                 FirewallsAPI :<|>
-                                                   LicensesAPI :<|>
-                                                     ZoneOperationsAPI :<|>
-                                                       TargetInstancesAPI :<|>
-                                                         DisksAPI :<|>
-                                                           TargetPoolsAPI :<|>
-                                                             InstanceGroupManagersAPI
-                                                               :<|>
-                                                               ProjectsAPI :<|>
-                                                                 ForwardingRulesAPI
-                                                                   :<|>
-                                                                   ImagesAPI
+     ImagesAPI :<|> UrlMapsAPI :<|> InstanceTemplatesAPI
+       :<|> RoutesAPI
+       :<|> TargetVpnGatewaysAPI
+       :<|> ZonesAPI
+       :<|> GlobalForwardingRulesAPI
+       :<|> NetworksAPI
+       :<|> AddressesAPI
+       :<|> VpnTunnelsAPI
+       :<|> RegionsAPI
+       :<|> GlobalAddressesAPI
+       :<|> TargetHttpProxiesAPI
+       :<|> AutoscalersAPI
+       :<|> DiskTypesAPI
+       :<|> RegionOperationsAPI
+       :<|> MachineTypesAPI
+       :<|> HttpHealthChecksAPI
+       :<|> SnapshotsAPI
+       :<|> InstancesAPI
+       :<|> BackendServicesAPI
+       :<|> InstanceGroupsAPI
+       :<|> GlobalOperationsAPI
+       :<|> FirewallsAPI
+       :<|> LicensesAPI
+       :<|> ZoneOperationsAPI
+       :<|> TargetInstancesAPI
+       :<|> DisksAPI
+       :<|> TargetPoolsAPI
+       :<|> InstanceGroupManagersAPI
+       :<|> ProjectsAPI
+       :<|> ForwardingRulesAPI
 
 type ImagesAPI =
-     ImagesList :<|>
-       ImagesGet :<|>
-         ImagesDeprecate :<|> ImagesDelete :<|> ImagesInsert
+     ImagesInsert :<|> ImagesList :<|> ImagesGet :<|>
+       ImagesDeprecate
+       :<|> ImagesDelete
 
 -- | Creates an image resource in the specified project using the data
 -- included in the request.
@@ -2083,11 +2079,11 @@ type ImagesDelete =
        :> QueryParam "alt" Text
 
 type UrlMapsAPI =
-     UrlMapsList :<|>
-       UrlMapsPatch :<|>
-         UrlMapsGet :<|>
-           UrlMapsValidate :<|>
-             UrlMapsDelete :<|> UrlMapsUpdate :<|> UrlMapsInsert
+     UrlMapsInsert :<|> UrlMapsList :<|> UrlMapsPatch :<|>
+       UrlMapsGet
+       :<|> UrlMapsValidate
+       :<|> UrlMapsDelete
+       :<|> UrlMapsUpdate
 
 -- | Creates a UrlMap resource in the specified project using the data
 -- included in the request.
@@ -2202,9 +2198,9 @@ type UrlMapsUpdate =
        :> QueryParam "alt" Text
 
 type InstanceTemplatesAPI =
-     InstanceTemplatesList :<|>
-       InstanceTemplatesGet :<|>
-         InstanceTemplatesDelete :<|> InstanceTemplatesInsert
+     InstanceTemplatesInsert :<|> InstanceTemplatesList
+       :<|> InstanceTemplatesGet
+       :<|> InstanceTemplatesDelete
 
 -- | Creates an instance template in the specified project using the data
 -- that is included in the request.
@@ -2270,8 +2266,8 @@ type InstanceTemplatesDelete =
        :> QueryParam "alt" Text
 
 type RoutesAPI =
-     RoutesList :<|>
-       RoutesGet :<|> RoutesDelete :<|> RoutesInsert
+     RoutesInsert :<|> RoutesList :<|> RoutesGet :<|>
+       RoutesDelete
 
 -- | Creates a route resource in the specified project using the data
 -- included in the request.
@@ -2337,11 +2333,11 @@ type RoutesDelete =
        :> QueryParam "alt" Text
 
 type TargetVpnGatewaysAPI =
-     TargetVpnGatewaysInsert :<|>
-       TargetVpnGatewaysList :<|>
-         TargetVpnGatewaysGet :<|>
-           TargetVpnGatewaysDelete :<|>
-             TargetVpnGatewaysAggregatedList
+     TargetVpnGatewaysAggregatedList :<|>
+       TargetVpnGatewaysInsert
+       :<|> TargetVpnGatewaysList
+       :<|> TargetVpnGatewaysGet
+       :<|> TargetVpnGatewaysDelete
 
 -- | Retrieves the list of target VPN gateways grouped by scope.
 type TargetVpnGatewaysAggregatedList =
@@ -2427,7 +2423,7 @@ type TargetVpnGatewaysDelete =
        :> QueryParam "fields" Text
        :> QueryParam "alt" Text
 
-type ZonesAPI = ZonesGet :<|> ZonesList
+type ZonesAPI = ZonesList :<|> ZonesGet
 
 -- | Retrieves the list of zone resources available to the specified project.
 type ZonesList =
@@ -2460,11 +2456,11 @@ type ZonesGet =
        :> QueryParam "alt" Text
 
 type GlobalForwardingRulesAPI =
-     GlobalForwardingRulesList :<|>
-       GlobalForwardingRulesGet :<|>
-         GlobalForwardingRulesSetTarget :<|>
-           GlobalForwardingRulesDelete :<|>
-             GlobalForwardingRulesInsert
+     GlobalForwardingRulesInsert :<|>
+       GlobalForwardingRulesList
+       :<|> GlobalForwardingRulesGet
+       :<|> GlobalForwardingRulesSetTarget
+       :<|> GlobalForwardingRulesDelete
 
 -- | Creates a ForwardingRule resource in the specified project and region
 -- using the data included in the request.
@@ -2546,8 +2542,8 @@ type GlobalForwardingRulesDelete =
        :> QueryParam "alt" Text
 
 type NetworksAPI =
-     NetworksList :<|>
-       NetworksGet :<|> NetworksDelete :<|> NetworksInsert
+     NetworksInsert :<|> NetworksList :<|> NetworksGet
+       :<|> NetworksDelete
 
 -- | Creates a network resource in the specified project using the data
 -- included in the request.
@@ -2613,10 +2609,10 @@ type NetworksDelete =
        :> QueryParam "alt" Text
 
 type AddressesAPI =
-     AddressesInsert :<|>
-       AddressesList :<|>
-         AddressesGet :<|>
-           AddressesDelete :<|> AddressesAggregatedList
+     AddressesAggregatedList :<|> AddressesInsert :<|>
+       AddressesList
+       :<|> AddressesGet
+       :<|> AddressesDelete
 
 -- | Retrieves the list of addresses grouped by scope.
 type AddressesAggregatedList =
@@ -2703,10 +2699,10 @@ type AddressesDelete =
        :> QueryParam "alt" Text
 
 type VpnTunnelsAPI =
-     VpnTunnelsInsert :<|>
-       VpnTunnelsList :<|>
-         VpnTunnelsGet :<|>
-           VpnTunnelsDelete :<|> VpnTunnelsAggregatedList
+     VpnTunnelsAggregatedList :<|> VpnTunnelsInsert :<|>
+       VpnTunnelsList
+       :<|> VpnTunnelsGet
+       :<|> VpnTunnelsDelete
 
 -- | Retrieves the list of VPN tunnels grouped by scope.
 type VpnTunnelsAggregatedList =
@@ -2792,7 +2788,7 @@ type VpnTunnelsDelete =
        :> QueryParam "fields" Text
        :> QueryParam "alt" Text
 
-type RegionsAPI = RegionsGet :<|> RegionsList
+type RegionsAPI = RegionsList :<|> RegionsGet
 
 -- | Retrieves the list of region resources available to the specified
 -- project.
@@ -2826,9 +2822,9 @@ type RegionsGet =
        :> QueryParam "alt" Text
 
 type GlobalAddressesAPI =
-     GlobalAddressesList :<|>
-       GlobalAddressesGet :<|>
-         GlobalAddressesDelete :<|> GlobalAddressesInsert
+     GlobalAddressesInsert :<|> GlobalAddressesList :<|>
+       GlobalAddressesGet
+       :<|> GlobalAddressesDelete
 
 -- | Creates an address resource in the specified project using the data
 -- included in the request.
@@ -2893,10 +2889,10 @@ type GlobalAddressesDelete =
        :> QueryParam "alt" Text
 
 type TargetHttpProxiesAPI =
-     TargetHttpProxiesList :<|>
-       TargetHttpProxiesSetUrlMap :<|>
-         TargetHttpProxiesGet :<|>
-           TargetHttpProxiesDelete :<|> TargetHttpProxiesInsert
+     TargetHttpProxiesInsert :<|> TargetHttpProxiesList
+       :<|> TargetHttpProxiesSetUrlMap
+       :<|> TargetHttpProxiesGet
+       :<|> TargetHttpProxiesDelete
 
 -- | Creates a TargetHttpProxy resource in the specified project using the
 -- data included in the request.
@@ -2977,12 +2973,12 @@ type TargetHttpProxiesDelete =
        :> QueryParam "alt" Text
 
 type AutoscalersAPI =
-     AutoscalersInsert :<|>
-       AutoscalersList :<|>
-         AutoscalersPatch :<|>
-           AutoscalersGet :<|>
-             AutoscalersDelete :<|>
-               AutoscalersUpdate :<|> AutoscalersAggregatedList
+     AutoscalersAggregatedList :<|> AutoscalersInsert :<|>
+       AutoscalersList
+       :<|> AutoscalersPatch
+       :<|> AutoscalersGet
+       :<|> AutoscalersDelete
+       :<|> AutoscalersUpdate
 
 -- | Retrieves the list of autoscalers grouped by scope.
 type AutoscalersAggregatedList =
@@ -3103,8 +3099,8 @@ type AutoscalersUpdate =
        :> QueryParam "alt" Text
 
 type DiskTypesAPI =
-     DiskTypesList :<|>
-       DiskTypesGet :<|> DiskTypesAggregatedList
+     DiskTypesAggregatedList :<|> DiskTypesList :<|>
+       DiskTypesGet
 
 -- | Retrieves the list of disk type resources grouped by scope.
 type DiskTypesAggregatedList =
@@ -3159,8 +3155,8 @@ type DiskTypesGet =
        :> QueryParam "alt" Text
 
 type RegionOperationsAPI =
-     RegionOperationsGet :<|>
-       RegionOperationsDelete :<|> RegionOperationsList
+     RegionOperationsList :<|> RegionOperationsGet :<|>
+       RegionOperationsDelete
 
 -- | Retrieves the list of Operation resources contained within the specified
 -- region.
@@ -3214,8 +3210,8 @@ type RegionOperationsDelete =
        :> QueryParam "alt" Text
 
 type MachineTypesAPI =
-     MachineTypesList :<|>
-       MachineTypesGet :<|> MachineTypesAggregatedList
+     MachineTypesAggregatedList :<|> MachineTypesList :<|>
+       MachineTypesGet
 
 -- | Retrieves the list of machine type resources grouped by scope.
 type MachineTypesAggregatedList =
@@ -3270,11 +3266,11 @@ type MachineTypesGet =
        :> QueryParam "alt" Text
 
 type HttpHealthChecksAPI =
-     HttpHealthChecksList :<|>
-       HttpHealthChecksPatch :<|>
-         HttpHealthChecksGet :<|>
-           HttpHealthChecksDelete :<|>
-             HttpHealthChecksUpdate :<|> HttpHealthChecksInsert
+     HttpHealthChecksInsert :<|> HttpHealthChecksList :<|>
+       HttpHealthChecksPatch
+       :<|> HttpHealthChecksGet
+       :<|> HttpHealthChecksDelete
+       :<|> HttpHealthChecksUpdate
 
 -- | Creates a HttpHealthCheck resource in the specified project using the
 -- data included in the request.
@@ -3372,7 +3368,7 @@ type HttpHealthChecksUpdate =
        :> QueryParam "alt" Text
 
 type SnapshotsAPI =
-     SnapshotsGet :<|> SnapshotsDelete :<|> SnapshotsList
+     SnapshotsList :<|> SnapshotsGet :<|> SnapshotsDelete
 
 -- | Retrieves the list of Snapshot resources contained within the specified
 -- project.
@@ -3427,23 +3423,22 @@ type SnapshotsDelete =
        :> QueryParam "alt" Text
 
 type InstancesAPI =
-     InstancesAggregatedList :<|>
-       InstancesInsert :<|>
-         InstancesDetachDisk :<|>
-           InstancesList :<|>
-             InstancesStart :<|>
-               InstancesGet :<|>
-                 InstancesDeleteAccessConfig :<|>
-                   InstancesSetMetadata :<|>
-                     InstancesSetScheduling :<|>
-                       InstancesReset :<|>
-                         InstancesStop :<|>
-                           InstancesGetSerialPortOutput :<|>
-                             InstancesSetTags :<|>
-                               InstancesAttachDisk :<|>
-                                 InstancesDelete :<|>
-                                   InstancesSetDiskAutoDelete :<|>
-                                     InstancesAddAccessConfig
+     InstancesAddAccessConfig :<|> InstancesAggregatedList
+       :<|> InstancesInsert
+       :<|> InstancesDetachDisk
+       :<|> InstancesList
+       :<|> InstancesStart
+       :<|> InstancesGet
+       :<|> InstancesDeleteAccessConfig
+       :<|> InstancesSetMetadata
+       :<|> InstancesSetScheduling
+       :<|> InstancesReset
+       :<|> InstancesStop
+       :<|> InstancesGetSerialPortOutput
+       :<|> InstancesSetTags
+       :<|> InstancesAttachDisk
+       :<|> InstancesDelete
+       :<|> InstancesSetDiskAutoDelete
 
 -- | Adds an access config to an instance\'s network interface.
 type InstancesAddAccessConfig =
@@ -3749,12 +3744,12 @@ type InstancesSetDiskAutoDelete =
        :> QueryParam "alt" Text
 
 type BackendServicesAPI =
-     BackendServicesList :<|>
-       BackendServicesGetHealth :<|>
-         BackendServicesPatch :<|>
-           BackendServicesGet :<|>
-             BackendServicesDelete :<|>
-               BackendServicesUpdate :<|> BackendServicesInsert
+     BackendServicesInsert :<|> BackendServicesList :<|>
+       BackendServicesGetHealth
+       :<|> BackendServicesPatch
+       :<|> BackendServicesGet
+       :<|> BackendServicesDelete
+       :<|> BackendServicesUpdate
 
 -- | Creates a BackendService resource in the specified project using the
 -- data included in the request.
@@ -3867,15 +3862,15 @@ type BackendServicesUpdate =
        :> QueryParam "alt" Text
 
 type InstanceGroupsAPI =
-     InstanceGroupsAggregatedList :<|>
-       InstanceGroupsInsert :<|>
-         InstanceGroupsList :<|>
-           InstanceGroupsAddInstances :<|>
-             InstanceGroupsGet :<|>
-               InstanceGroupsListInstances :<|>
-                 InstanceGroupsSetNamedPorts :<|>
-                   InstanceGroupsDelete :<|>
-                     InstanceGroupsRemoveInstances
+     InstanceGroupsRemoveInstances :<|>
+       InstanceGroupsAggregatedList
+       :<|> InstanceGroupsInsert
+       :<|> InstanceGroupsList
+       :<|> InstanceGroupsAddInstances
+       :<|> InstanceGroupsGet
+       :<|> InstanceGroupsListInstances
+       :<|> InstanceGroupsSetNamedPorts
+       :<|> InstanceGroupsDelete
 
 -- | Removes a list of instances from an instance group.
 type InstanceGroupsRemoveInstances =
@@ -4036,10 +4031,10 @@ type InstanceGroupsDelete =
        :> QueryParam "alt" Text
 
 type GlobalOperationsAPI =
-     GlobalOperationsList :<|>
-       GlobalOperationsGet :<|>
-         GlobalOperationsDelete :<|>
-           GlobalOperationsAggregatedList
+     GlobalOperationsAggregatedList :<|>
+       GlobalOperationsList
+       :<|> GlobalOperationsGet
+       :<|> GlobalOperationsDelete
 
 -- | Retrieves the list of all operations grouped by scope.
 type GlobalOperationsAggregatedList =
@@ -4107,11 +4102,11 @@ type GlobalOperationsDelete =
        :> QueryParam "alt" Text
 
 type FirewallsAPI =
-     FirewallsList :<|>
-       FirewallsPatch :<|>
-         FirewallsGet :<|>
-           FirewallsDelete :<|>
-             FirewallsUpdate :<|> FirewallsInsert
+     FirewallsInsert :<|> FirewallsList :<|>
+       FirewallsPatch
+       :<|> FirewallsGet
+       :<|> FirewallsDelete
+       :<|> FirewallsUpdate
 
 -- | Creates a firewall resource in the specified project using the data
 -- included in the request.
@@ -4226,8 +4221,8 @@ type LicensesGet =
        :> QueryParam "alt" Text
 
 type ZoneOperationsAPI =
-     ZoneOperationsGet :<|>
-       ZoneOperationsDelete :<|> ZoneOperationsList
+     ZoneOperationsList :<|> ZoneOperationsGet :<|>
+       ZoneOperationsDelete
 
 -- | Retrieves the list of Operation resources contained within the specified
 -- zone.
@@ -4281,11 +4276,11 @@ type ZoneOperationsDelete =
        :> QueryParam "alt" Text
 
 type TargetInstancesAPI =
-     TargetInstancesInsert :<|>
-       TargetInstancesList :<|>
-         TargetInstancesGet :<|>
-           TargetInstancesDelete :<|>
-             TargetInstancesAggregatedList
+     TargetInstancesAggregatedList :<|>
+       TargetInstancesInsert
+       :<|> TargetInstancesList
+       :<|> TargetInstancesGet
+       :<|> TargetInstancesDelete
 
 -- | Retrieves the list of target instances grouped by scope.
 type TargetInstancesAggregatedList =
@@ -4372,11 +4367,10 @@ type TargetInstancesDelete =
        :> QueryParam "alt" Text
 
 type DisksAPI =
-     DisksInsert :<|>
-       DisksList :<|>
-         DisksGet :<|>
-           DisksCreateSnapshot :<|>
-             DisksDelete :<|> DisksAggregatedList
+     DisksAggregatedList :<|> DisksInsert :<|> DisksList
+       :<|> DisksGet
+       :<|> DisksCreateSnapshot
+       :<|> DisksDelete
 
 -- | Retrieves the list of disks grouped by scope.
 type DisksAggregatedList =
@@ -4484,16 +4478,17 @@ type DisksDelete =
        :> QueryParam "alt" Text
 
 type TargetPoolsAPI =
-     TargetPoolsRemoveInstance :<|>
-       TargetPoolsInsert :<|>
-         TargetPoolsList :<|>
-           TargetPoolsGetHealth :<|>
-             TargetPoolsGet :<|>
-               TargetPoolsRemoveHealthCheck :<|>
-                 TargetPoolsSetBackup :<|>
-                   TargetPoolsAddInstance :<|>
-                     TargetPoolsAddHealthCheck :<|>
-                       TargetPoolsDelete :<|> TargetPoolsAggregatedList
+     TargetPoolsAggregatedList :<|>
+       TargetPoolsRemoveInstance
+       :<|> TargetPoolsInsert
+       :<|> TargetPoolsList
+       :<|> TargetPoolsGetHealth
+       :<|> TargetPoolsGet
+       :<|> TargetPoolsRemoveHealthCheck
+       :<|> TargetPoolsSetBackup
+       :<|> TargetPoolsAddInstance
+       :<|> TargetPoolsAddHealthCheck
+       :<|> TargetPoolsDelete
 
 -- | Retrieves the list of target pools grouped by scope.
 type TargetPoolsAggregatedList =
@@ -4684,18 +4679,18 @@ type TargetPoolsDelete =
        :> QueryParam "alt" Text
 
 type InstanceGroupManagersAPI =
-     InstanceGroupManagersAggregatedList :<|>
-       InstanceGroupManagersInsert :<|>
-         InstanceGroupManagersResize :<|>
-           InstanceGroupManagersList :<|>
-             InstanceGroupManagersListManagedInstances :<|>
-               InstanceGroupManagersAbandonInstances :<|>
-                 InstanceGroupManagersSetInstanceTemplate :<|>
-                   InstanceGroupManagersGet :<|>
-                     InstanceGroupManagersDeleteInstances :<|>
-                       InstanceGroupManagersDelete :<|>
-                         InstanceGroupManagersRecreateInstances :<|>
-                           InstanceGroupManagersSetTargetPools
+     InstanceGroupManagersSetTargetPools :<|>
+       InstanceGroupManagersAggregatedList
+       :<|> InstanceGroupManagersInsert
+       :<|> InstanceGroupManagersResize
+       :<|> InstanceGroupManagersList
+       :<|> InstanceGroupManagersListManagedInstances
+       :<|> InstanceGroupManagersAbandonInstances
+       :<|> InstanceGroupManagersSetInstanceTemplate
+       :<|> InstanceGroupManagersGet
+       :<|> InstanceGroupManagersDeleteInstances
+       :<|> InstanceGroupManagersDelete
+       :<|> InstanceGroupManagersRecreateInstances
 
 -- | Modifies the target pools to which all new instances in this group are
 -- assigned. The target pools for existing instances in the group do not
@@ -4917,11 +4912,11 @@ type InstanceGroupManagersRecreateInstances =
        :> QueryParam "alt" Text
 
 type ProjectsAPI =
-     ProjectsMoveInstance :<|>
-       ProjectsGet :<|>
-         ProjectsMoveDisk :<|>
-           ProjectsSetCommonInstanceMetadata :<|>
-             ProjectsSetUsageExportBucket
+     ProjectsSetUsageExportBucket :<|>
+       ProjectsMoveInstance
+       :<|> ProjectsGet
+       :<|> ProjectsMoveDisk
+       :<|> ProjectsSetCommonInstanceMetadata
 
 -- | Enables the usage export feature and sets the usage export bucket where
 -- reports are stored. If you provide an empty request body using this
@@ -4992,12 +4987,12 @@ type ProjectsSetCommonInstanceMetadata =
        :> QueryParam "alt" Text
 
 type ForwardingRulesAPI =
-     ForwardingRulesInsert :<|>
-       ForwardingRulesList :<|>
-         ForwardingRulesGet :<|>
-           ForwardingRulesSetTarget :<|>
-             ForwardingRulesDelete :<|>
-               ForwardingRulesAggregatedList
+     ForwardingRulesAggregatedList :<|>
+       ForwardingRulesInsert
+       :<|> ForwardingRulesList
+       :<|> ForwardingRulesGet
+       :<|> ForwardingRulesSetTarget
+       :<|> ForwardingRulesDelete
 
 -- | Retrieves the list of forwarding rules grouped by scope.
 type ForwardingRulesAggregatedList =

@@ -1,4 +1,5 @@
 {
-    "library": "cloud-billing"
+    "library": "billing",
+    "canonicalName": "Billing"
 }
 

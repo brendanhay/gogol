@@ -53,7 +53,7 @@ renameTitle =
 
 renameAbbrev :: Text -> Text
 renameAbbrev = mconcat
-    . Text.split  separator
+    . Text.split dot
     . stripPrefix "Google "
     . stripSuffix " API"
 
@@ -70,8 +70,6 @@ renameBranch t
 
     cat   = Fold.foldMap (Text.intercalate "_" . map component . Text.split dot)
     split = Text.split separator
-
-    dot x = x == '.'
 
     component x
         | Text.length x <= 1    = x
@@ -101,6 +99,9 @@ separator x =
    || x == '-'
    || x == '_'
    || x == '*'
+
+dot :: Char -> Bool
+dot x = x == '.'
 
 renameReserved :: Text -> Text
 renameReserved x

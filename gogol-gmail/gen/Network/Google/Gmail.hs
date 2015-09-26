@@ -233,9 +233,9 @@ TODO
 type Gmail = UsersAPI
 
 type UsersAPI =
-     DraftsAPI :<|>
-       LabelsAPI :<|>
-         ThreadsAPI :<|> MessagesAPI :<|> HistoryAPI
+     HistoryAPI :<|> DraftsAPI :<|> LabelsAPI :<|>
+       ThreadsAPI
+       :<|> MessagesAPI
 
 type HistoryAPI = HistoryList
 
@@ -257,10 +257,10 @@ type HistoryList =
        :> QueryParam "alt" Text
 
 type DraftsAPI =
-     DraftsGet :<|>
-       DraftsCreate :<|>
-         DraftsSend :<|>
-           DraftsDelete :<|> DraftsUpdate :<|> DraftsList
+     DraftsList :<|> DraftsGet :<|> DraftsCreate :<|>
+       DraftsSend
+       :<|> DraftsDelete
+       :<|> DraftsUpdate
 
 -- | Lists the drafts in the user\'s mailbox.
 type DraftsList =
@@ -344,10 +344,10 @@ type DraftsUpdate =
        :> QueryParam "alt" Text
 
 type LabelsAPI =
-     LabelsPatch :<|>
-       LabelsGet :<|>
-         LabelsCreate :<|>
-           LabelsDelete :<|> LabelsUpdate :<|> LabelsList
+     LabelsList :<|> LabelsPatch :<|> LabelsGet :<|>
+       LabelsCreate
+       :<|> LabelsDelete
+       :<|> LabelsUpdate
 
 -- | Lists all labels in the user\'s mailbox.
 type LabelsList =
@@ -427,10 +427,10 @@ type LabelsUpdate =
        :> QueryParam "alt" Text
 
 type ThreadsAPI =
-     ThreadsGet :<|>
-       ThreadsTrash :<|>
-         ThreadsUntrash :<|>
-           ThreadsModify :<|> ThreadsDelete :<|> ThreadsList
+     ThreadsList :<|> ThreadsGet :<|> ThreadsTrash :<|>
+       ThreadsUntrash
+       :<|> ThreadsModify
+       :<|> ThreadsDelete
 
 -- | Lists the threads in the user\'s mailbox.
 type ThreadsList =

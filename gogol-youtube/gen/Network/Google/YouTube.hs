@@ -1865,27 +1865,26 @@ TODO
 -}
 
 type YouTube =
-     ChannelBannersAPI :<|>
-       I18nLanguagesAPI :<|>
-         VideosAPI :<|>
-           LiveBroadcastsAPI :<|>
-             CaptionsAPI :<|>
-               I18nRegionsAPI :<|>
-                 VideoAbuseReportReasonsAPI :<|>
-                   ChannelsAPI :<|>
-                     ActivitiesAPI :<|>
-                       WatermarksAPI :<|>
-                         CommentThreadsAPI :<|>
-                           ThumbnailsAPI :<|>
-                             VideoCategoriesAPI :<|>
-                               PlaylistsAPI :<|>
-                                 CommentsAPI :<|>
-                                   PlaylistItemsAPI :<|>
-                                     SubscriptionsAPI :<|>
-                                       SearchAPI :<|>
-                                         ChannelSectionsAPI :<|>
-                                           LiveStreamsAPI :<|>
-                                             GuideCategoriesAPI
+     GuideCategoriesAPI :<|> ChannelBannersAPI :<|>
+       I18nLanguagesAPI
+       :<|> VideosAPI
+       :<|> LiveBroadcastsAPI
+       :<|> CaptionsAPI
+       :<|> I18nRegionsAPI
+       :<|> VideoAbuseReportReasonsAPI
+       :<|> ChannelsAPI
+       :<|> ActivitiesAPI
+       :<|> WatermarksAPI
+       :<|> CommentThreadsAPI
+       :<|> ThumbnailsAPI
+       :<|> VideoCategoriesAPI
+       :<|> PlaylistsAPI
+       :<|> CommentsAPI
+       :<|> PlaylistItemsAPI
+       :<|> SubscriptionsAPI
+       :<|> SearchAPI
+       :<|> ChannelSectionsAPI
+       :<|> LiveStreamsAPI
 
 type GuideCategoriesAPI = GuideCategoriesList
 
@@ -1944,11 +1943,11 @@ type I18nLanguagesList =
        :> QueryParam "alt" Text
 
 type VideosAPI =
-     VideosList :<|>
-       VideosRate :<|>
-         VideosReportAbuse :<|>
-           VideosDelete :<|>
-             VideosUpdate :<|> VideosGetRating :<|> VideosInsert
+     VideosInsert :<|> VideosList :<|> VideosRate :<|>
+       VideosReportAbuse
+       :<|> VideosDelete
+       :<|> VideosUpdate
+       :<|> VideosGetRating
 
 -- | Uploads a video to YouTube and optionally sets the video\'s metadata.
 type VideosInsert =
@@ -2055,13 +2054,13 @@ type VideosGetRating =
        :> QueryParam "alt" Text
 
 type LiveBroadcastsAPI =
-     LiveBroadcastsTransition :<|>
-       LiveBroadcastsInsert :<|>
-         LiveBroadcastsList :<|>
-           LiveBroadcastsBind :<|>
-             LiveBroadcastsBind_direct :<|>
-               LiveBroadcastsDelete :<|>
-                 LiveBroadcastsUpdate :<|> LiveBroadcastsControl
+     LiveBroadcastsControl :<|> LiveBroadcastsTransition
+       :<|> LiveBroadcastsInsert
+       :<|> LiveBroadcastsList
+       :<|> LiveBroadcastsBind
+       :<|> LiveBroadcastsBind_direct
+       :<|> LiveBroadcastsDelete
+       :<|> LiveBroadcastsUpdate
 
 -- | Controls the settings for a slate that can be displayed in the broadcast
 -- stream.
@@ -2206,10 +2205,10 @@ type LiveBroadcastsUpdate =
        :> QueryParam "alt" Text
 
 type CaptionsAPI =
-     CaptionsList :<|>
-       CaptionsDownload :<|>
-         CaptionsDelete :<|>
-           CaptionsUpdate :<|> CaptionsInsert
+     CaptionsInsert :<|> CaptionsList :<|>
+       CaptionsDownload
+       :<|> CaptionsDelete
+       :<|> CaptionsUpdate
 
 -- | Uploads a caption track.
 type CaptionsInsert =
@@ -2326,7 +2325,7 @@ type VideoAbuseReportReasonsList =
        :> QueryParam "fields" Text
        :> QueryParam "alt" Text
 
-type ChannelsAPI = ChannelsUpdate :<|> ChannelsList
+type ChannelsAPI = ChannelsList :<|> ChannelsUpdate
 
 -- | Returns a collection of zero or more channel resources that match the
 -- request criteria.
@@ -2367,7 +2366,7 @@ type ChannelsUpdate =
        :> QueryParam "alt" Text
 
 type ActivitiesAPI =
-     ActivitiesList :<|> ActivitiesInsert
+     ActivitiesInsert :<|> ActivitiesList
 
 -- | Posts a bulletin for a specific channel. (The user submitting the
 -- request must be authorized to act on the channel\'s behalf.) Note: Even
@@ -2412,7 +2411,7 @@ type ActivitiesList =
        :> QueryParam "alt" Text
 
 type WatermarksAPI =
-     WatermarksUnset :<|> WatermarksSet
+     WatermarksSet :<|> WatermarksUnset
 
 -- | Uploads a watermark image to YouTube and sets it for a channel.
 type WatermarksSet =
@@ -2441,8 +2440,8 @@ type WatermarksUnset =
        :> QueryParam "alt" Text
 
 type CommentThreadsAPI =
-     CommentThreadsList :<|>
-       CommentThreadsUpdate :<|> CommentThreadsInsert
+     CommentThreadsInsert :<|> CommentThreadsList :<|>
+       CommentThreadsUpdate
 
 -- | Creates a new top-level comment. To add a reply to an existing comment,
 -- use the comments.insert method instead.
@@ -2524,9 +2523,9 @@ type VideoCategoriesList =
        :> QueryParam "alt" Text
 
 type PlaylistsAPI =
-     PlaylistsList :<|>
-       PlaylistsDelete :<|>
-         PlaylistsUpdate :<|> PlaylistsInsert
+     PlaylistsInsert :<|> PlaylistsList :<|>
+       PlaylistsDelete
+       :<|> PlaylistsUpdate
 
 -- | Creates a playlist.
 type PlaylistsInsert =
@@ -2592,11 +2591,11 @@ type PlaylistsUpdate =
        :> QueryParam "alt" Text
 
 type CommentsAPI =
-     CommentsSetModerationStatus :<|>
-       CommentsList :<|>
-         CommentsMarkAsSpam :<|>
-           CommentsDelete :<|>
-             CommentsUpdate :<|> CommentsInsert
+     CommentsInsert :<|> CommentsSetModerationStatus :<|>
+       CommentsList
+       :<|> CommentsMarkAsSpam
+       :<|> CommentsDelete
+       :<|> CommentsUpdate
 
 -- | Creates a reply to an existing comment. Note: To create a top-level
 -- comment, use the commentThreads.insert method.
@@ -2683,9 +2682,9 @@ type CommentsUpdate =
        :> QueryParam "alt" Text
 
 type PlaylistItemsAPI =
-     PlaylistItemsList :<|>
-       PlaylistItemsDelete :<|>
-         PlaylistItemsUpdate :<|> PlaylistItemsInsert
+     PlaylistItemsInsert :<|> PlaylistItemsList :<|>
+       PlaylistItemsDelete
+       :<|> PlaylistItemsUpdate
 
 -- | Adds a resource to a playlist.
 type PlaylistItemsInsert =
@@ -2746,8 +2745,8 @@ type PlaylistItemsUpdate =
        :> QueryParam "alt" Text
 
 type SubscriptionsAPI =
-     SubscriptionsList :<|>
-       SubscriptionsDelete :<|> SubscriptionsInsert
+     SubscriptionsInsert :<|> SubscriptionsList :<|>
+       SubscriptionsDelete
 
 -- | Adds a subscription for the authenticated user\'s channel.
 type SubscriptionsInsert =
@@ -2843,9 +2842,9 @@ type SearchList =
        :> QueryParam "alt" Text
 
 type ChannelSectionsAPI =
-     ChannelSectionsList :<|>
-       ChannelSectionsDelete :<|>
-         ChannelSectionsUpdate :<|> ChannelSectionsInsert
+     ChannelSectionsInsert :<|> ChannelSectionsList :<|>
+       ChannelSectionsDelete
+       :<|> ChannelSectionsUpdate
 
 -- | Adds a channelSection for the authenticated user\'s channel.
 type ChannelSectionsInsert =
@@ -2905,9 +2904,9 @@ type ChannelSectionsUpdate =
        :> QueryParam "alt" Text
 
 type LiveStreamsAPI =
-     LiveStreamsList :<|>
-       LiveStreamsDelete :<|>
-         LiveStreamsUpdate :<|> LiveStreamsInsert
+     LiveStreamsInsert :<|> LiveStreamsList :<|>
+       LiveStreamsDelete
+       :<|> LiveStreamsUpdate
 
 -- | Creates a video stream. The stream enables you to send your video to
 -- YouTube, which can then broadcast the video to your audience.

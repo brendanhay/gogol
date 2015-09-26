@@ -31,12 +31,12 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.CloudLogging
-        , Network.Google.CloudLogging.Types
+          Network.Google.Cloud.Logging
+        , Network.Google.Cloud.Logging.Types
 
     other-modules:
-          Network.Google.CloudLogging.Types.Product
-        , Network.Google.CloudLogging.Types.Sum
+          Network.Google.Cloud.Logging.Types.Product
+        , Network.Google.Cloud.Logging.Types.Sum
 
     build-depends:
           gogol-core == 0.0.1.*

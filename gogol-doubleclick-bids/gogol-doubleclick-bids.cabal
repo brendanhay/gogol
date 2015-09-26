@@ -30,12 +30,12 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.DoubleClickBidManager
-        , Network.Google.DoubleClickBidManager.Types
+          Network.Google.DoubleClick.Bids
+        , Network.Google.DoubleClick.Bids.Types
 
     other-modules:
-          Network.Google.DoubleClickBidManager.Types.Product
-        , Network.Google.DoubleClickBidManager.Types.Sum
+          Network.Google.DoubleClick.Bids.Types.Product
+        , Network.Google.DoubleClick.Bids.Types.Sum
 
     build-depends:
           gogol-core == 0.0.1.*

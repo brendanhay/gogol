@@ -31,12 +31,12 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.PageSpeedInsights
-        , Network.Google.PageSpeedInsights.Types
+          Network.Google.PageSpeed
+        , Network.Google.PageSpeed.Types
 
     other-modules:
-          Network.Google.PageSpeedInsights.Types.Product
-        , Network.Google.PageSpeedInsights.Types.Sum
+          Network.Google.PageSpeed.Types.Product
+        , Network.Google.PageSpeed.Types.Sum
 
     build-depends:
           gogol-core == 0.0.1.*

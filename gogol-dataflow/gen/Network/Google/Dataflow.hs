@@ -696,10 +696,10 @@ type Dataflow = ProjectsAPI
 
 type ProjectsAPI = JobsAPI
 
-type JobsAPI = MessagesAPI :<|> WorkItemsAPI
+type JobsAPI = WorkItemsAPI :<|> MessagesAPI
 
 type WorkItemsAPI =
-     WorkItemsReportStatus :<|> WorkItemsLease
+     WorkItemsLease :<|> WorkItemsReportStatus
 
 -- | Leases a dataflow WorkItem to run.
 type WorkItemsLease =

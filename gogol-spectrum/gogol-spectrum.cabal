@@ -30,12 +30,12 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.Spectrum
-        , Network.Google.Spectrum.Types
+          Network.Google.spectrum
+        , Network.Google.spectrum.Types
 
     other-modules:
-          Network.Google.Spectrum.Types.Product
-        , Network.Google.Spectrum.Types.Sum
+          Network.Google.spectrum.Types.Product
+        , Network.Google.spectrum.Types.Sum
 
     build-depends:
           gogol-core == 0.0.1.*

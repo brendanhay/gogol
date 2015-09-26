@@ -1,4 +1,5 @@
 {
-    "library": "urlshortener"
+    "library": "urlshortener",
+    "canonicalName": "URLShortener"
 }
 

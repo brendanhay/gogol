@@ -237,10 +237,10 @@ TODO
 -}
 
 type Mirror =
-     SettingsAPI :<|>
-       SubscriptionsAPI :<|>
-         TimelineAPI :<|>
-           ContactsAPI :<|> LocationsAPI :<|> AccountsAPI
+     AccountsAPI :<|> SettingsAPI :<|> SubscriptionsAPI
+       :<|> TimelineAPI
+       :<|> ContactsAPI
+       :<|> LocationsAPI
 
 type AccountsAPI = AccountsInsert
 
@@ -272,9 +272,9 @@ type SettingsGet =
        :> QueryParam "alt" Text
 
 type SubscriptionsAPI =
-     SubscriptionsList :<|>
-       SubscriptionsDelete :<|>
-         SubscriptionsUpdate :<|> SubscriptionsInsert
+     SubscriptionsInsert :<|> SubscriptionsList :<|>
+       SubscriptionsDelete
+       :<|> SubscriptionsUpdate
 
 -- | Creates a new subscription.
 type SubscriptionsInsert =
@@ -326,9 +326,9 @@ type SubscriptionsUpdate =
 type TimelineAPI = AttachmentsAPI
 
 type AttachmentsAPI =
-     AttachmentsList :<|>
-       AttachmentsGet :<|>
-         AttachmentsDelete :<|> AttachmentsInsert
+     AttachmentsInsert :<|> AttachmentsList :<|>
+       AttachmentsGet
+       :<|> AttachmentsDelete
 
 -- | Adds a new attachment to a timeline item.
 type AttachmentsInsert =
@@ -385,11 +385,10 @@ type AttachmentsDelete =
        :> QueryParam "alt" Text
 
 type ContactsAPI =
-     ContactsList :<|>
-       ContactsPatch :<|>
-         ContactsGet :<|>
-           ContactsDelete :<|>
-             ContactsUpdate :<|> ContactsInsert
+     ContactsInsert :<|> ContactsList :<|> ContactsPatch
+       :<|> ContactsGet
+       :<|> ContactsDelete
+       :<|> ContactsUpdate
 
 -- | Inserts a new contact.
 type ContactsInsert =
@@ -457,7 +456,7 @@ type ContactsUpdate =
        :> QueryParam "fields" Text
        :> QueryParam "alt" Text
 
-type LocationsAPI = LocationsGet :<|> LocationsList
+type LocationsAPI = LocationsList :<|> LocationsGet
 
 -- | Retrieves a list of locations for the user.
 type LocationsList =

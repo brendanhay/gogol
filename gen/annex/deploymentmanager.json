@@ -1,4 +1,5 @@
 {
-    "library": "cloud-deployments"
+    "library": "cloud-deployments",
+    "canonicalName": "Cloud.Deployment"
 }
 

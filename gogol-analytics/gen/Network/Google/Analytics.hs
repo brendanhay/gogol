@@ -1108,10 +1108,10 @@ TODO
 -}
 
 type Analytics =
-     ManagementAPI :<|>
-       ProvisioningAPI :<|> MetadataAPI :<|> DataAPI
+     DataAPI :<|> ManagementAPI :<|> ProvisioningAPI :<|>
+       MetadataAPI
 
-type DataAPI = GaAPI :<|> RealtimeAPI :<|> McfAPI
+type DataAPI = McfAPI :<|> GaAPI :<|> RealtimeAPI
 
 type McfAPI = McfGet
 
@@ -1181,32 +1181,31 @@ type RealtimeGet =
        :> QueryParam "alt" Text
 
 type ManagementAPI =
-     UnsampledReportsAPI :<|>
-       AccountsAPI :<|>
-         ExperimentsAPI :<|>
-           CustomDataSourcesAPI :<|>
-             WebpropertyUserLinksAPI :<|>
-               ProfilesAPI :<|>
-                 FiltersAPI :<|>
-                   AccountSummariesAPI :<|>
-                     GoalsAPI :<|>
-                       WebpropertiesAPI :<|>
-                         CustomMetricsAPI :<|>
-                           UploadsAPI :<|>
-                             SegmentsAPI :<|>
-                               ProfileFilterLinksAPI :<|>
-                                 CustomDimensionsAPI :<|>
-                                   AccountUserLinksAPI :<|>
-                                     ProfileUserLinksAPI :<|>
-                                       WebPropertyAdWordsLinksAPI
+     WebPropertyAdWordsLinksAPI :<|> UnsampledReportsAPI
+       :<|> AccountsAPI
+       :<|> ExperimentsAPI
+       :<|> CustomDataSourcesAPI
+       :<|> WebpropertyUserLinksAPI
+       :<|> ProfilesAPI
+       :<|> FiltersAPI
+       :<|> AccountSummariesAPI
+       :<|> GoalsAPI
+       :<|> WebpropertiesAPI
+       :<|> CustomMetricsAPI
+       :<|> UploadsAPI
+       :<|> SegmentsAPI
+       :<|> ProfileFilterLinksAPI
+       :<|> CustomDimensionsAPI
+       :<|> AccountUserLinksAPI
+       :<|> ProfileUserLinksAPI
 
 type WebPropertyAdWordsLinksAPI =
-     WebPropertyAdWordsLinksList :<|>
-       WebPropertyAdWordsLinksPatch :<|>
-         WebPropertyAdWordsLinksGet :<|>
-           WebPropertyAdWordsLinksDelete :<|>
-             WebPropertyAdWordsLinksUpdate :<|>
-               WebPropertyAdWordsLinksInsert
+     WebPropertyAdWordsLinksInsert :<|>
+       WebPropertyAdWordsLinksList
+       :<|> WebPropertyAdWordsLinksPatch
+       :<|> WebPropertyAdWordsLinksGet
+       :<|> WebPropertyAdWordsLinksDelete
+       :<|> WebPropertyAdWordsLinksUpdate
 
 -- | Creates a webProperty-AdWords link.
 type WebPropertyAdWordsLinksInsert =
@@ -1306,8 +1305,8 @@ type WebPropertyAdWordsLinksUpdate =
        :> QueryParam "alt" Text
 
 type UnsampledReportsAPI =
-     UnsampledReportsList :<|>
-       UnsampledReportsGet :<|> UnsampledReportsInsert
+     UnsampledReportsInsert :<|> UnsampledReportsList :<|>
+       UnsampledReportsGet
 
 -- | Create a new unsampled report.
 type UnsampledReportsInsert =
@@ -1379,11 +1378,11 @@ type AccountsList =
        :> QueryParam "alt" Text
 
 type ExperimentsAPI =
-     ExperimentsList :<|>
-       ExperimentsPatch :<|>
-         ExperimentsGet :<|>
-           ExperimentsDelete :<|>
-             ExperimentsUpdate :<|> ExperimentsInsert
+     ExperimentsInsert :<|> ExperimentsList :<|>
+       ExperimentsPatch
+       :<|> ExperimentsGet
+       :<|> ExperimentsDelete
+       :<|> ExperimentsUpdate
 
 -- | Create a new experiment.
 type ExperimentsInsert =
@@ -1513,10 +1512,10 @@ type CustomDataSourcesList =
        :> QueryParam "alt" Text
 
 type WebpropertyUserLinksAPI =
-     WebpropertyUserLinksList :<|>
-       WebpropertyUserLinksDelete :<|>
-         WebpropertyUserLinksUpdate :<|>
-           WebpropertyUserLinksInsert
+     WebpropertyUserLinksInsert :<|>
+       WebpropertyUserLinksList
+       :<|> WebpropertyUserLinksDelete
+       :<|> WebpropertyUserLinksUpdate
 
 -- | Adds a new user to the given web property.
 type WebpropertyUserLinksInsert =
@@ -1583,11 +1582,10 @@ type WebpropertyUserLinksUpdate =
        :> QueryParam "alt" Text
 
 type ProfilesAPI =
-     ProfilesList :<|>
-       ProfilesPatch :<|>
-         ProfilesGet :<|>
-           ProfilesDelete :<|>
-             ProfilesUpdate :<|> ProfilesInsert
+     ProfilesInsert :<|> ProfilesList :<|> ProfilesPatch
+       :<|> ProfilesGet
+       :<|> ProfilesDelete
+       :<|> ProfilesUpdate
 
 -- | Create a new view (profile).
 type ProfilesInsert =
@@ -1687,10 +1685,10 @@ type ProfilesUpdate =
        :> QueryParam "alt" Text
 
 type FiltersAPI =
-     FiltersList :<|>
-       FiltersPatch :<|>
-         FiltersGet :<|>
-           FiltersDelete :<|> FiltersUpdate :<|> FiltersInsert
+     FiltersInsert :<|> FiltersList :<|> FiltersPatch :<|>
+       FiltersGet
+       :<|> FiltersDelete
+       :<|> FiltersUpdate
 
 -- | Create a new filter.
 type FiltersInsert =
@@ -1794,9 +1792,9 @@ type AccountSummariesList =
        :> QueryParam "alt" Text
 
 type GoalsAPI =
-     GoalsList :<|>
-       GoalsPatch :<|>
-         GoalsGet :<|> GoalsUpdate :<|> GoalsInsert
+     GoalsInsert :<|> GoalsList :<|> GoalsPatch :<|>
+       GoalsGet
+       :<|> GoalsUpdate
 
 -- | Create a new goal.
 type GoalsInsert =
@@ -1890,10 +1888,10 @@ type GoalsUpdate =
        :> QueryParam "alt" Text
 
 type WebpropertiesAPI =
-     WebpropertiesList :<|>
-       WebpropertiesPatch :<|>
-         WebpropertiesGet :<|>
-           WebpropertiesUpdate :<|> WebpropertiesInsert
+     WebpropertiesInsert :<|> WebpropertiesList :<|>
+       WebpropertiesPatch
+       :<|> WebpropertiesGet
+       :<|> WebpropertiesUpdate
 
 -- | Create a new property if the account has fewer than 20 properties. Web
 -- properties are visible in the Google Analytics interface only if they
@@ -1968,10 +1966,10 @@ type WebpropertiesUpdate =
        :> QueryParam "alt" Text
 
 type CustomMetricsAPI =
-     CustomMetricsList :<|>
-       CustomMetricsPatch :<|>
-         CustomMetricsGet :<|>
-           CustomMetricsUpdate :<|> CustomMetricsInsert
+     CustomMetricsInsert :<|> CustomMetricsList :<|>
+       CustomMetricsPatch
+       :<|> CustomMetricsGet
+       :<|> CustomMetricsUpdate
 
 -- | Create a new custom metric.
 type CustomMetricsInsert =
@@ -2056,8 +2054,9 @@ type CustomMetricsUpdate =
        :> QueryParam "alt" Text
 
 type UploadsAPI =
-     UploadsDeleteUploadData :<|>
-       UploadsGet :<|> UploadsUploadData :<|> UploadsList
+     UploadsList :<|> UploadsDeleteUploadData :<|>
+       UploadsGet
+       :<|> UploadsUploadData
 
 -- | List uploads to which the user has access.
 type UploadsList =
@@ -2146,12 +2145,11 @@ type SegmentsList =
        :> QueryParam "alt" Text
 
 type ProfileFilterLinksAPI =
-     ProfileFilterLinksList :<|>
-       ProfileFilterLinksPatch :<|>
-         ProfileFilterLinksGet :<|>
-           ProfileFilterLinksDelete :<|>
-             ProfileFilterLinksUpdate :<|>
-               ProfileFilterLinksInsert
+     ProfileFilterLinksInsert :<|> ProfileFilterLinksList
+       :<|> ProfileFilterLinksPatch
+       :<|> ProfileFilterLinksGet
+       :<|> ProfileFilterLinksDelete
+       :<|> ProfileFilterLinksUpdate
 
 -- | Create a new profile filter link.
 type ProfileFilterLinksInsert =
@@ -2263,10 +2261,10 @@ type ProfileFilterLinksUpdate =
        :> QueryParam "alt" Text
 
 type CustomDimensionsAPI =
-     CustomDimensionsList :<|>
-       CustomDimensionsPatch :<|>
-         CustomDimensionsGet :<|>
-           CustomDimensionsUpdate :<|> CustomDimensionsInsert
+     CustomDimensionsInsert :<|> CustomDimensionsList :<|>
+       CustomDimensionsPatch
+       :<|> CustomDimensionsGet
+       :<|> CustomDimensionsUpdate
 
 -- | Create a new custom dimension.
 type CustomDimensionsInsert =
@@ -2352,9 +2350,9 @@ type CustomDimensionsUpdate =
        :> QueryParam "alt" Text
 
 type AccountUserLinksAPI =
-     AccountUserLinksList :<|>
-       AccountUserLinksDelete :<|>
-         AccountUserLinksUpdate :<|> AccountUserLinksInsert
+     AccountUserLinksInsert :<|> AccountUserLinksList :<|>
+       AccountUserLinksDelete
+       :<|> AccountUserLinksUpdate
 
 -- | Adds a new user to the given account.
 type AccountUserLinksInsert =
@@ -2413,9 +2411,9 @@ type AccountUserLinksUpdate =
        :> QueryParam "alt" Text
 
 type ProfileUserLinksAPI =
-     ProfileUserLinksList :<|>
-       ProfileUserLinksDelete :<|>
-         ProfileUserLinksUpdate :<|> ProfileUserLinksInsert
+     ProfileUserLinksInsert :<|> ProfileUserLinksList :<|>
+       ProfileUserLinksDelete
+       :<|> ProfileUserLinksUpdate
 
 -- | Adds a new user to the given view (profile).
 type ProfileUserLinksInsert =

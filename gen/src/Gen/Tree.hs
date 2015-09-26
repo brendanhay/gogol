@@ -26,6 +26,7 @@ import           Control.Monad
 import           Control.Monad.Except
 import           Data.Aeson                hiding (json)
 import           Data.Bifunctor
+import           Data.Foldable             (foldr')
 import qualified Data.List.NonEmpty        as NE
 import           Data.Monoid
 import           Data.Text                 (Text)
@@ -72,26 +73,17 @@ populate d Templates{..} l = (encodeString d :/) . dir lib <$> layout
             [ touch ".gitkeep"
             ]
 
-        , dir "gen"
-            [ dir "Network"
-                [ dir "Google" $
-                    concatMap service (NE.toList (_libServices l))
-                ]
-            ]
+        , dir "gen" . concatMap service . NE.toList $ _libServices l
 
         , file (lib <.> "cabal") cabalTemplate
         , file "README.md" readmeTemplate
         ]
 
     service s =
-        [ mod' (tocNS s) mempty tocTemplate (pure svc)
-        , dir (fromText (svcAbbrev s))
-            [ mod' (typesNS s) (typeImports s) typesTemplate (pure svc)
-            , dir "Types"
-                [ mod' (prodNS s) (prodImports s) prodTemplate (pure svc)
-                , mod' (sumNS  s) (sumImports  s) sumTemplate  (pure svc)
-                ]
-            ]
+        [ mod' (tocNS   s) mempty tocTemplate (pure svc)
+        , mod' (typesNS s) (typeImports s) typesTemplate (pure svc)
+        , mod' (prodNS  s) (prodImports s) prodTemplate  (pure svc)
+        , mod' (sumNS   s) (sumImports  s) sumTemplate   (pure svc)
         ]
       where
         svc = toJSON s
@@ -111,12 +103,27 @@ module' :: ToJSON a
         -> Template
         -> Either Error a
         -> DirTree (Either Error Rendered)
-module' ns is t f = file' (filename $ nsToPath ns) t $ do
+module' ns is t f = namespaced ns t $ do
     x <- f >>= JS.objectErr (show ns)
     return $! x <> fromPairs
         [ "moduleName"    .= ns
         , "moduleImports" .= is
         ]
+
+namespaced :: ToJSON a
+           => NS
+           -> Template
+           -> Either Error a
+           -> DirTree (Either Error Rendered)
+namespaced (NS ns) t x =
+    case map fromText ns of
+        []  -> error "Empty namespace."
+        [p] -> f p
+        ps  -> foldr' nest (f (last ps)) (init ps)
+  where
+    f p = file' (p <.> "hs") t x
+
+    nest d c = Dir (encodeString d) [c]
 
 file' :: ToJSON a
       => Path

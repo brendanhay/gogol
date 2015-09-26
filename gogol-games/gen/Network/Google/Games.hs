@@ -961,28 +961,27 @@ TODO
 -}
 
 type Games =
-     LeaderboardsAPI :<|>
-       QuestMilestonesAPI :<|>
-         MetagameAPI :<|>
-           AchievementDefinitionsAPI :<|>
-             AchievementsAPI :<|>
-               SnapshotsAPI :<|>
-                 EventsAPI :<|>
-                   QuestsAPI :<|>
-                     PlayersAPI :<|>
-                       RevisionsAPI :<|>
-                         ScoresAPI :<|>
-                           PushtokensAPI :<|>
-                             TurnBasedMatchesAPI :<|>
-                               ApplicationsAPI :<|> RoomsAPI
+     RoomsAPI :<|> LeaderboardsAPI :<|> QuestMilestonesAPI
+       :<|> MetagameAPI
+       :<|> AchievementDefinitionsAPI
+       :<|> AchievementsAPI
+       :<|> SnapshotsAPI
+       :<|> EventsAPI
+       :<|> QuestsAPI
+       :<|> PlayersAPI
+       :<|> RevisionsAPI
+       :<|> ScoresAPI
+       :<|> PushtokensAPI
+       :<|> TurnBasedMatchesAPI
+       :<|> ApplicationsAPI
 
 type RoomsAPI =
-     RoomsJoin :<|>
-       RoomsGet :<|>
-         RoomsCreate :<|>
-           RoomsDecline :<|>
-             RoomsDismiss :<|>
-               RoomsReportStatus :<|> RoomsLeave :<|> RoomsList
+     RoomsList :<|> RoomsJoin :<|> RoomsGet :<|>
+       RoomsCreate
+       :<|> RoomsDecline
+       :<|> RoomsDismiss
+       :<|> RoomsReportStatus
+       :<|> RoomsLeave
 
 -- | Returns invitations to join rooms.
 type RoomsList =
@@ -1094,7 +1093,7 @@ type RoomsLeave =
        :> QueryParam "alt" Text
 
 type LeaderboardsAPI =
-     LeaderboardsGet :<|> LeaderboardsList
+     LeaderboardsList :<|> LeaderboardsGet
 
 -- | Lists all the leaderboard metadata for your application.
 type LeaderboardsList =
@@ -1143,8 +1142,8 @@ type QuestMilestonesClaim =
        :> QueryParam "alt" Text
 
 type MetagameAPI =
-     MetagameGetMetagameConfig :<|>
-       MetagameListCategoriesByPlayer
+     MetagameListCategoriesByPlayer :<|>
+       MetagameGetMetagameConfig
 
 -- | List play data aggregated per category for the player corresponding to
 -- playerId.
@@ -1193,11 +1192,11 @@ type AchievementDefinitionsList =
        :> QueryParam "alt" Text
 
 type AchievementsAPI =
-     AchievementsUnlock :<|>
-       AchievementsReveal :<|>
-         AchievementsSetStepsAtLeast :<|>
-           AchievementsUpdateMultiple :<|>
-             AchievementsIncrement :<|> AchievementsList
+     AchievementsList :<|> AchievementsUnlock :<|>
+       AchievementsReveal
+       :<|> AchievementsSetStepsAtLeast
+       :<|> AchievementsUpdateMultiple
+       :<|> AchievementsIncrement
 
 -- | Lists the progress for all your application\'s achievements for the
 -- currently authenticated player.
@@ -1288,7 +1287,7 @@ type AchievementsIncrement =
        :> QueryParam "fields" Text
        :> QueryParam "alt" Text
 
-type SnapshotsAPI = SnapshotsGet :<|> SnapshotsList
+type SnapshotsAPI = SnapshotsList :<|> SnapshotsGet
 
 -- | Retrieves a list of snapshots created by your application for the player
 -- corresponding to the player ID.
@@ -1321,8 +1320,8 @@ type SnapshotsGet =
        :> QueryParam "alt" Text
 
 type EventsAPI =
-     EventsListByPlayer :<|>
-       EventsRecord :<|> EventsListDefinitions
+     EventsListDefinitions :<|> EventsListByPlayer :<|>
+       EventsRecord
 
 -- | Returns a list of the event definitions in this application.
 type EventsListDefinitions =
@@ -1366,7 +1365,7 @@ type EventsRecord =
        :> QueryParam "fields" Text
        :> QueryParam "alt" Text
 
-type QuestsAPI = QuestsAccept :<|> QuestsList
+type QuestsAPI = QuestsList :<|> QuestsAccept
 
 -- | Get a list of quests for your application and the currently
 -- authenticated player.
@@ -1399,7 +1398,7 @@ type QuestsAccept =
        :> QueryParam "fields" Text
        :> QueryParam "alt" Text
 
-type PlayersAPI = PlayersGet :<|> PlayersList
+type PlayersAPI = PlayersList :<|> PlayersGet
 
 -- | Get the collection of players for the currently authenticated user.
 type PlayersList =
@@ -1445,10 +1444,9 @@ type RevisionsCheck =
        :> QueryParam "alt" Text
 
 type ScoresAPI =
-     ScoresGet :<|>
-       ScoresSubmit :<|>
-         ScoresSubmitMultiple :<|>
-           ScoresListWindow :<|> ScoresList
+     ScoresList :<|> ScoresGet :<|> ScoresSubmit :<|>
+       ScoresSubmitMultiple
+       :<|> ScoresListWindow
 
 -- | Lists the scores in a leaderboard, starting from the top.
 type ScoresList =
@@ -1542,7 +1540,7 @@ type ScoresListWindow =
        :> QueryParam "alt" Text
 
 type PushtokensAPI =
-     PushtokensUpdate :<|> PushtokensRemove
+     PushtokensRemove :<|> PushtokensUpdate
 
 -- | Removes a push token for the current user and application. Removing a
 -- non-existent push token will report success.
@@ -1568,18 +1566,18 @@ type PushtokensUpdate =
        :> QueryParam "alt" Text
 
 type TurnBasedMatchesAPI =
-     TurnBasedMatchesList :<|>
-       TurnBasedMatchesJoin :<|>
-         TurnBasedMatchesFinish :<|>
-           TurnBasedMatchesTakeTurn :<|>
-             TurnBasedMatchesLeaveTurn :<|>
-               TurnBasedMatchesGet :<|>
-                 TurnBasedMatchesCreate :<|>
-                   TurnBasedMatchesDecline :<|>
-                     TurnBasedMatchesSync :<|>
-                       TurnBasedMatchesDismiss :<|>
-                         TurnBasedMatchesLeave :<|>
-                           TurnBasedMatchesCancel :<|> TurnBasedMatchesRematch
+     TurnBasedMatchesRematch :<|> TurnBasedMatchesList
+       :<|> TurnBasedMatchesJoin
+       :<|> TurnBasedMatchesFinish
+       :<|> TurnBasedMatchesTakeTurn
+       :<|> TurnBasedMatchesLeaveTurn
+       :<|> TurnBasedMatchesGet
+       :<|> TurnBasedMatchesCreate
+       :<|> TurnBasedMatchesDecline
+       :<|> TurnBasedMatchesSync
+       :<|> TurnBasedMatchesDismiss
+       :<|> TurnBasedMatchesLeave
+       :<|> TurnBasedMatchesCancel
 
 -- | Create a rematch of a match that was previously completed, with the same
 -- participants. This can be called by only one player on a match still in
@@ -1778,7 +1776,7 @@ type TurnBasedMatchesCancel =
        :> QueryParam "alt" Text
 
 type ApplicationsAPI =
-     ApplicationsPlayed :<|> ApplicationsGet
+     ApplicationsGet :<|> ApplicationsPlayed
 
 -- | Retrieves the metadata of the application with the given ID. If the
 -- requested application is not available for the specified platformType,

@@ -30,12 +30,12 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.WebmasterTools
-        , Network.Google.WebmasterTools.Types
+          Network.Google.Webmaster.Tools
+        , Network.Google.Webmaster.Tools.Types
 
     other-modules:
-          Network.Google.WebmasterTools.Types.Product
-        , Network.Google.WebmasterTools.Types.Sum
+          Network.Google.Webmaster.Tools.Types.Product
+        , Network.Google.Webmaster.Tools.Types.Sum
 
     build-depends:
           gogol-core == 0.0.1.*

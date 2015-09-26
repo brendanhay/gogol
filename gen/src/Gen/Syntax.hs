@@ -38,7 +38,7 @@ apiAlias n ls = TypeDecl noLoc n [] alias
   where
     alias = case map (TyCon . UnQual) ls of
         []   -> unit_tycon
-        x:xs -> foldr' (\l r -> TyInfix l (UnQual (sym ":<|>")) r) x xs
+        x:xs -> foldl' (\l r -> TyInfix l (UnQual (sym ":<|>")) r) x xs
 
 -- type Method = :> ...
 verbDecl :: Service s r -> Local -> Local -> Method -> Decl

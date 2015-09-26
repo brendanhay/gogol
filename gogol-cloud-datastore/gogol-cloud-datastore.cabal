@@ -30,12 +30,12 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.CloudDatastore
-        , Network.Google.CloudDatastore.Types
+          Network.Google.Cloud.Datastore
+        , Network.Google.Cloud.Datastore.Types
 
     other-modules:
-          Network.Google.CloudDatastore.Types.Product
-        , Network.Google.CloudDatastore.Types.Sum
+          Network.Google.Cloud.Datastore.Types.Product
+        , Network.Google.Cloud.Datastore.Types.Sum
 
     build-depends:
           gogol-core == 0.0.1.*

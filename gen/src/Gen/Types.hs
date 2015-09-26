@@ -386,7 +386,7 @@ data Service s r = Service
     { _svcLibrary           :: Text
     , _svcTitle             :: Text
     , _svcName              :: Text
-    , _svcCanonicalName     :: Maybe Text
+    , _svcCanonicalName     :: Text
     , _svcDescription       :: Help
     , _svcRevision          :: Maybe Text
     , _svcVersion           :: Text
@@ -410,7 +410,7 @@ instance FromJSON s => FromJSON (Service s Resource) where
         <$> o .:  "library"
         <*> o .:  "title"
         <*> o .:  "name"
-        <*> o .:? "canonicalName"
+        <*> o .:  "canonicalName"
         <*> o .:  "description"
         <*> o .:? "revision"
         <*> o .:  "version"
@@ -437,9 +437,7 @@ instance ToJSON (Service Data API) where
             ]
 
 svcAbbrev :: Service s r -> Text
-svcAbbrev s = upperHead
-    . renameAbbrev
-    $ fromMaybe (_svcTitle s) (_svcCanonicalName s)
+svcAbbrev = upperHead . renameAbbrev . _svcCanonicalName
 
 typeImports, prodImports, sumImports :: Service s r -> [NS]
 typeImports s = ["Network.Google.Prelude", prodNS s, sumNS s]
@@ -447,7 +445,7 @@ prodImports s = ["Network.Google.Prelude", sumNS s]
 sumImports  _ = ["Network.Google.Prelude"]
 
 tocNS, typesNS, prodNS, sumNS :: Service s r -> NS
-tocNS s = NS ["Network", "Google", svcAbbrev s]
+tocNS s = NS $ "Network" : "Google" : Text.split (== '.') (_svcCanonicalName s)
 typesNS = (<> "Types")   . tocNS
 prodNS  = (<> "Product") . typesNS
 sumNS   = (<> "Sum")     . typesNS

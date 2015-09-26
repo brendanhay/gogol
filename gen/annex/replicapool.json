@@ -1,4 +1,4 @@
 {
-    "library": "compute-instancegroups",
-    "canonicalName": "Compute.InstanceGroups"
+    "library": "compute-instancegroups-manager",
+    "canonicalName": "Compute.InstanceGroups.Manager"
 }

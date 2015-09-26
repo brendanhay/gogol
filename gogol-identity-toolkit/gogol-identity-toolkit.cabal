@@ -30,12 +30,12 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.IdentityToolkit
-        , Network.Google.IdentityToolkit.Types
+          Network.Google.Identity Toolkit
+        , Network.Google.Identity Toolkit.Types
 
     other-modules:
-          Network.Google.IdentityToolkit.Types.Product
-        , Network.Google.IdentityToolkit.Types.Sum
+          Network.Google.Identity Toolkit.Types.Product
+        , Network.Google.Identity Toolkit.Types.Sum
 
     build-depends:
           gogol-core == 0.0.1.*

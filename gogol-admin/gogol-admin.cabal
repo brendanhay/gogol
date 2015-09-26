@@ -37,24 +37,24 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.DataTransfer
-        , Network.Google.DataTransfer.Types
-        , Network.Google.Directory
-        , Network.Google.Directory.Types
-        , Network.Google.EmailMigration
-        , Network.Google.EmailMigration.Types
-        , Network.Google.Reports
-        , Network.Google.Reports.Types
+          Network.Google.Admin.DataTransfer
+        , Network.Google.Admin.DataTransfer.Types
+        , Network.Google.Admin.Directory
+        , Network.Google.Admin.Directory.Types
+        , Network.Google.Admin.EmailMigration
+        , Network.Google.Admin.EmailMigration.Types
+        , Network.Google.Admin.Reports
+        , Network.Google.Admin.Reports.Types
 
     other-modules:
-          Network.Google.DataTransfer.Types.Product
-        , Network.Google.DataTransfer.Types.Sum
-        , Network.Google.Directory.Types.Product
-        , Network.Google.Directory.Types.Sum
-        , Network.Google.EmailMigration.Types.Product
-        , Network.Google.EmailMigration.Types.Sum
-        , Network.Google.Reports.Types.Product
-        , Network.Google.Reports.Types.Sum
+          Network.Google.Admin.DataTransfer.Types.Product
+        , Network.Google.Admin.DataTransfer.Types.Sum
+        , Network.Google.Admin.Directory.Types.Product
+        , Network.Google.Admin.Directory.Types.Sum
+        , Network.Google.Admin.EmailMigration.Types.Product
+        , Network.Google.Admin.EmailMigration.Types.Sum
+        , Network.Google.Admin.Reports.Types.Product
+        , Network.Google.Admin.Reports.Types.Sum
 
     build-depends:
           gogol-core == 0.0.1.*

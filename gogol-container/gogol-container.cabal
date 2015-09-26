@@ -32,12 +32,12 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.ContainerEngine
-        , Network.Google.ContainerEngine.Types
+          Network.Google.Container
+        , Network.Google.Container.Types
 
     other-modules:
-          Network.Google.ContainerEngine.Types.Product
-        , Network.Google.ContainerEngine.Types.Sum
+          Network.Google.Container.Types.Product
+        , Network.Google.Container.Types.Sum
 
     build-depends:
           gogol-core == 0.0.1.*

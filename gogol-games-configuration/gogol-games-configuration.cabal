@@ -30,12 +30,12 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.GamesConfiguration
-        , Network.Google.GamesConfiguration.Types
+          Network.Google.Games.Configuration
+        , Network.Google.Games.Configuration.Types
 
     other-modules:
-          Network.Google.GamesConfiguration.Types.Product
-        , Network.Google.GamesConfiguration.Types.Sum
+          Network.Google.Games.Configuration.Types.Product
+        , Network.Google.Games.Configuration.Types.Sum
 
     build-depends:
           gogol-core == 0.0.1.*

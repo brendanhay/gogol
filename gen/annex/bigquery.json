@@ -1,4 +1,5 @@
 {
-    "library": "bigquery"
+    "library": "bigquery",
+    "canonicalName": "BigQuery"
 }
 

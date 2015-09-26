@@ -357,15 +357,15 @@ TODO
 -}
 
 type Blogger =
-     UsersAPI :<|>
-       PageViewsAPI :<|>
-         BlogsAPI :<|>
-           PagesAPI :<|>
-             BlogUserInfosAPI :<|>
-               CommentsAPI :<|> PostsAPI :<|> PostUserInfosAPI
+     PostUserInfosAPI :<|> UsersAPI :<|> PageViewsAPI :<|>
+       BlogsAPI
+       :<|> PagesAPI
+       :<|> BlogUserInfosAPI
+       :<|> CommentsAPI
+       :<|> PostsAPI
 
 type PostUserInfosAPI =
-     PostUserInfosGet :<|> PostUserInfosList
+     PostUserInfosList :<|> PostUserInfosGet
 
 -- | Retrieves a list of post and post user info pairs, possibly filtered.
 -- The post user info contains per-user information about the post, such as
@@ -439,7 +439,7 @@ type PageViewsGet =
        :> QueryParam "alt" Text
 
 type BlogsAPI =
-     BlogsGet :<|> BlogsGetByUrl :<|> BlogsListByUser
+     BlogsListByUser :<|> BlogsGet :<|> BlogsGetByUrl
 
 -- | Retrieves a list of blogs, possibly filtered.
 type BlogsListByUser =
@@ -484,12 +484,12 @@ type BlogsGetByUrl =
        :> QueryParam "alt" Text
 
 type PagesAPI =
-     PagesList :<|>
-       PagesPatch :<|>
-         PagesGet :<|>
-           PagesRevert :<|>
-             PagesDelete :<|>
-               PagesUpdate :<|> PagesPublish :<|> PagesInsert
+     PagesInsert :<|> PagesList :<|> PagesPatch :<|>
+       PagesGet
+       :<|> PagesRevert
+       :<|> PagesDelete
+       :<|> PagesUpdate
+       :<|> PagesPublish
 
 -- | Add a page.
 type PagesInsert =
@@ -623,12 +623,11 @@ type BlogUserInfosGet =
        :> QueryParam "alt" Text
 
 type CommentsAPI =
-     CommentsGet :<|>
-       CommentsListByBlog :<|>
-         CommentsRemoveContent :<|>
-           CommentsApprove :<|>
-             CommentsMarkAsSpam :<|>
-               CommentsDelete :<|> CommentsList
+     CommentsList :<|> CommentsGet :<|> CommentsListByBlog
+       :<|> CommentsRemoveContent
+       :<|> CommentsApprove
+       :<|> CommentsMarkAsSpam
+       :<|> CommentsDelete
 
 -- | Retrieves the comments for a post, possibly filtered.
 type CommentsList =
@@ -749,14 +748,14 @@ type CommentsDelete =
        :> QueryParam "alt" Text
 
 type PostsAPI =
-     PostsList :<|>
-       PostsPatch :<|>
-         PostsGet :<|>
-           PostsRevert :<|>
-             PostsGetByPath :<|>
-               PostsSearch :<|>
-                 PostsDelete :<|>
-                   PostsUpdate :<|> PostsPublish :<|> PostsInsert
+     PostsInsert :<|> PostsList :<|> PostsPatch :<|>
+       PostsGet
+       :<|> PostsRevert
+       :<|> PostsGetByPath
+       :<|> PostsSearch
+       :<|> PostsDelete
+       :<|> PostsUpdate
+       :<|> PostsPublish
 
 -- | Add a post.
 type PostsInsert =

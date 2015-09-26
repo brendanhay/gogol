@@ -31,12 +31,12 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.MapsEngine
-        , Network.Google.MapsEngine.Types
+          Network.Google.Map.Engine
+        , Network.Google.Map.Engine.Types
 
     other-modules:
-          Network.Google.MapsEngine.Types.Product
-        , Network.Google.MapsEngine.Types.Sum
+          Network.Google.Map.Engine.Types.Product
+        , Network.Google.Map.Engine.Types.Sum
 
     build-depends:
           gogol-core == 0.0.1.*

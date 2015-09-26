@@ -31,12 +31,12 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.AdSenseHost
-        , Network.Google.AdSenseHost.Types
+          Network.Google.AdSense.Host
+        , Network.Google.AdSense.Host.Types
 
     other-modules:
-          Network.Google.AdSenseHost.Types.Product
-        , Network.Google.AdSenseHost.Types.Sum
+          Network.Google.AdSense.Host.Types.Product
+        , Network.Google.AdSense.Host.Types.Sum
 
     build-depends:
           gogol-core == 0.0.1.*

@@ -592,19 +592,19 @@ TODO
 -}
 
 type Drive =
-     ChangesAPI :<|>
-       ChannelsAPI :<|>
-         ChildrenAPI :<|>
-           RepliesAPI :<|>
-             ParentsAPI :<|>
-               RealtimeAPI :<|>
-                 AboutAPI :<|>
-                   FilesAPI :<|>
-                     PermissionsAPI :<|>
-                       CommentsAPI :<|>
-                         RevisionsAPI :<|> PropertiesAPI :<|> AppsAPI
+     AppsAPI :<|> ChangesAPI :<|> ChannelsAPI :<|>
+       ChildrenAPI
+       :<|> RepliesAPI
+       :<|> ParentsAPI
+       :<|> RealtimeAPI
+       :<|> AboutAPI
+       :<|> FilesAPI
+       :<|> PermissionsAPI
+       :<|> CommentsAPI
+       :<|> RevisionsAPI
+       :<|> PropertiesAPI
 
-type AppsAPI = AppsGet :<|> AppsList
+type AppsAPI = AppsList :<|> AppsGet
 
 -- | Lists a user\'s installed apps.
 type AppsList =
@@ -632,7 +632,7 @@ type AppsGet =
        :> QueryParam "alt" Text
 
 type ChangesAPI =
-     ChangesGet :<|> ChangesWatch :<|> ChangesList
+     ChangesList :<|> ChangesGet :<|> ChangesWatch
 
 -- | Lists the changes for a user.
 type ChangesList =
@@ -694,8 +694,8 @@ type ChannelsStop =
        :> QueryParam "alt" Text
 
 type ChildrenAPI =
-     ChildrenList :<|>
-       ChildrenGet :<|> ChildrenDelete :<|> ChildrenInsert
+     ChildrenInsert :<|> ChildrenList :<|> ChildrenGet
+       :<|> ChildrenDelete
 
 -- | Inserts a file into a folder.
 type ChildrenInsert =
@@ -752,10 +752,10 @@ type ChildrenDelete =
        :> QueryParam "alt" Text
 
 type RepliesAPI =
-     RepliesList :<|>
-       RepliesPatch :<|>
-         RepliesGet :<|>
-           RepliesDelete :<|> RepliesUpdate :<|> RepliesInsert
+     RepliesInsert :<|> RepliesList :<|> RepliesPatch :<|>
+       RepliesGet
+       :<|> RepliesDelete
+       :<|> RepliesUpdate
 
 -- | Creates a new reply to the given comment.
 type RepliesInsert =
@@ -850,8 +850,8 @@ type RepliesUpdate =
        :> QueryParam "alt" Text
 
 type ParentsAPI =
-     ParentsList :<|>
-       ParentsGet :<|> ParentsDelete :<|> ParentsInsert
+     ParentsInsert :<|> ParentsList :<|> ParentsGet :<|>
+       ParentsDelete
 
 -- | Adds a parent folder for a file.
 type ParentsInsert =
@@ -903,7 +903,7 @@ type ParentsDelete =
        :> QueryParam "fields" Text
        :> QueryParam "alt" Text
 
-type RealtimeAPI = RealtimeUpdate :<|> RealtimeGet
+type RealtimeAPI = RealtimeGet :<|> RealtimeUpdate
 
 -- | Exports the contents of the Realtime API data model associated with this
 -- file as JSON.
@@ -951,17 +951,17 @@ type AboutGet =
        :> QueryParam "alt" Text
 
 type FilesAPI =
-     FilesList :<|>
-       FilesCopy :<|>
-         FilesPatch :<|>
-           FilesGet :<|>
-             FilesEmptyTrash :<|>
-               FilesTrash :<|>
-                 FilesUntrash :<|>
-                   FilesTouch :<|>
-                     FilesGenerateIds :<|>
-                       FilesDelete :<|>
-                         FilesUpdate :<|> FilesWatch :<|> FilesInsert
+     FilesInsert :<|> FilesList :<|> FilesCopy :<|>
+       FilesPatch
+       :<|> FilesGet
+       :<|> FilesEmptyTrash
+       :<|> FilesTrash
+       :<|> FilesUntrash
+       :<|> FilesTouch
+       :<|> FilesGenerateIds
+       :<|> FilesDelete
+       :<|> FilesUpdate
+       :<|> FilesWatch
 
 -- | Insert a new file.
 type FilesInsert =
@@ -1173,12 +1173,12 @@ type FilesWatch =
        :> QueryParam "alt" Text
 
 type PermissionsAPI =
-     PermissionsInsert :<|>
-       PermissionsList :<|>
-         PermissionsPatch :<|>
-           PermissionsGet :<|>
-             PermissionsDelete :<|>
-               PermissionsUpdate :<|> PermissionsGetIdForEmail
+     PermissionsGetIdForEmail :<|> PermissionsInsert :<|>
+       PermissionsList
+       :<|> PermissionsPatch
+       :<|> PermissionsGet
+       :<|> PermissionsDelete
+       :<|> PermissionsUpdate
 
 -- | Returns the permission ID for an email address.
 type PermissionsGetIdForEmail =
@@ -1273,11 +1273,10 @@ type PermissionsUpdate =
        :> QueryParam "alt" Text
 
 type CommentsAPI =
-     CommentsList :<|>
-       CommentsPatch :<|>
-         CommentsGet :<|>
-           CommentsDelete :<|>
-             CommentsUpdate :<|> CommentsInsert
+     CommentsInsert :<|> CommentsList :<|> CommentsPatch
+       :<|> CommentsGet
+       :<|> CommentsDelete
+       :<|> CommentsUpdate
 
 -- | Creates a new comment on the given file.
 type CommentsInsert =
@@ -1361,10 +1360,9 @@ type CommentsUpdate =
        :> QueryParam "alt" Text
 
 type RevisionsAPI =
-     RevisionsPatch :<|>
-       RevisionsGet :<|>
-         RevisionsDelete :<|>
-           RevisionsUpdate :<|> RevisionsList
+     RevisionsList :<|> RevisionsPatch :<|> RevisionsGet
+       :<|> RevisionsDelete
+       :<|> RevisionsUpdate
 
 -- | Lists a file\'s revisions.
 type RevisionsList =
@@ -1431,11 +1429,11 @@ type RevisionsUpdate =
        :> QueryParam "alt" Text
 
 type PropertiesAPI =
-     PropertiesList :<|>
-       PropertiesPatch :<|>
-         PropertiesGet :<|>
-           PropertiesDelete :<|>
-             PropertiesUpdate :<|> PropertiesInsert
+     PropertiesInsert :<|> PropertiesList :<|>
+       PropertiesPatch
+       :<|> PropertiesGet
+       :<|> PropertiesDelete
+       :<|> PropertiesUpdate
 
 -- | Adds a property to a file.
 type PropertiesInsert =

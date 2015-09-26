@@ -152,13 +152,13 @@ TODO
 -}
 
 type Classroom =
-     CoursesAPI :<|> UserProfilesAPI :<|> InvitationsAPI
+     InvitationsAPI :<|> CoursesAPI :<|> UserProfilesAPI
 
 type InvitationsAPI =
-     InvitationsAccept :<|>
-       InvitationsGet :<|>
-         InvitationsCreate :<|>
-           InvitationsDelete :<|> InvitationsList
+     InvitationsList :<|> InvitationsAccept :<|>
+       InvitationsGet
+       :<|> InvitationsCreate
+       :<|> InvitationsDelete
 
 -- | Returns a list of invitations that the requesting user is permitted to
 -- view, restricted to those that match the list request. *Note:* At least
@@ -276,11 +276,11 @@ type InvitationsDelete =
        :> QueryParam "alt" Text
 
 type CoursesAPI =
-     AliasesAPI :<|> StudentsAPI :<|> TeachersAPI
+     TeachersAPI :<|> AliasesAPI :<|> StudentsAPI
 
 type TeachersAPI =
-     TeachersGet :<|>
-       TeachersCreate :<|> TeachersDelete :<|> TeachersList
+     TeachersList :<|> TeachersGet :<|> TeachersCreate
+       :<|> TeachersDelete
 
 -- | Returns a list of teachers of this course that the requester is
 -- permitted to view. This method returns the following error codes: *
@@ -378,7 +378,7 @@ type TeachersDelete =
        :> QueryParam "alt" Text
 
 type AliasesAPI =
-     AliasesCreate :<|> AliasesDelete :<|> AliasesList
+     AliasesList :<|> AliasesCreate :<|> AliasesDelete
 
 -- | Returns a list of aliases for a course. This method returns the
 -- following error codes: * \`PERMISSION_DENIED\` if the requesting user is
@@ -449,8 +449,8 @@ type AliasesDelete =
        :> QueryParam "alt" Text
 
 type StudentsAPI =
-     StudentsGet :<|>
-       StudentsCreate :<|> StudentsDelete :<|> StudentsList
+     StudentsList :<|> StudentsGet :<|> StudentsCreate
+       :<|> StudentsDelete
 
 -- | Returns a list of students of this course that the requester is
 -- permitted to view. This method returns the following error codes: *

@@ -169,14 +169,14 @@ TODO
 -}
 
 type ProximityBeacon =
-     NamespacesAPI :<|> BeaconinfoAPI :<|> BeaconsAPI
+     BeaconsAPI :<|> NamespacesAPI :<|> BeaconinfoAPI
 
-type BeaconsAPI = DiagnosticsAPI :<|> AttachmentsAPI
+type BeaconsAPI = AttachmentsAPI :<|> DiagnosticsAPI
 
 type AttachmentsAPI =
-     AttachmentsCreate :<|>
-       AttachmentsBatchDelete :<|>
-         AttachmentsDelete :<|> AttachmentsList
+     AttachmentsList :<|> AttachmentsCreate :<|>
+       AttachmentsBatchDelete
+       :<|> AttachmentsDelete
 
 -- | Returns the attachments for the specified beacon that match the
 -- specified namespaced-type pattern. To control which namespaced types are

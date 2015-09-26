@@ -1,4 +1,5 @@
 {
-    "library": "adexchange-buyer"
+    "library": "adexchange-buyer",
+    "canonicalName": "AdExchange.Buyer"
 }
 

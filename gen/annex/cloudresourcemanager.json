@@ -1,4 +1,5 @@
 {
-    "library": "cloud-resources"
+    "library": "cloud-resourcemanager",
+    "canonicalName": "Cloud.ResourceManager"
 }
 

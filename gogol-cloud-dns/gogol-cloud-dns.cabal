@@ -31,12 +31,12 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.CloudDNS
-        , Network.Google.CloudDNS.Types
+          Network.Google.Cloud.DNS
+        , Network.Google.Cloud.DNS.Types
 
     other-modules:
-          Network.Google.CloudDNS.Types.Product
-        , Network.Google.CloudDNS.Types.Sum
+          Network.Google.Cloud.DNS.Types.Product
+        , Network.Google.Cloud.DNS.Types.Sum
 
     build-depends:
           gogol-core == 0.0.1.*

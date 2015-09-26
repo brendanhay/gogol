@@ -31,12 +31,12 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.PlayMoviesPartner
-        , Network.Google.PlayMoviesPartner.Types
+          Network.Google.Play.Movies.Partner
+        , Network.Google.Play.Movies.Partner.Types
 
     other-modules:
-          Network.Google.PlayMoviesPartner.Types.Product
-        , Network.Google.PlayMoviesPartner.Types.Sum
+          Network.Google.Play.Movies.Partner.Types.Product
+        , Network.Google.Play.Movies.Partner.Types.Sum
 
     build-depends:
           gogol-core == 0.0.1.*

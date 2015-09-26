@@ -236,9 +236,9 @@ TODO
 -}
 
 type Partners =
-     UserEventsAPI :<|>
-       ClientMessagesAPI :<|>
-         CompaniesAPI :<|> UserStatesAPI
+     UserStatesAPI :<|> UserEventsAPI :<|>
+       ClientMessagesAPI
+       :<|> CompaniesAPI
 
 type UserStatesAPI = UserStatesList
 

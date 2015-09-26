@@ -2524,92 +2524,63 @@ TODO
 -}
 
 type DFAReporting =
-     PlacementStrategiesAPI :<|>
-       CampaignCreativeAssociationsAPI :<|>
-         CreativeGroupsAPI :<|>
-           MobileCarriersAPI :<|>
-             LandingPagesAPI :<|>
-               RemarketingListSharesAPI :<|>
-                 AccountActiveAdSummariesAPI :<|>
-                   UserRolePermissionGroupsAPI :<|>
-                     RemarketingListsAPI :<|>
-                       AccountsAPI :<|>
-                         ReportsAPI :<|>
-                           CampaignsAPI :<|>
-                             AccountUserProfilesAPI :<|>
-                               CreativesAPI :<|>
-                                 DimensionValuesAPI :<|>
-                                   FloodlightConfigurationsAPI :<|>
-                                     RegionsAPI :<|>
-                                       FloodlightActivitiesAPI :<|>
-                                         AccountPermissionGroupsAPI :<|>
-                                           AdvertisersAPI :<|>
-                                             CountriesAPI :<|>
-                                               UserRolesAPI :<|>
-                                                 UserProfilesAPI :<|>
-                                                   OperatingSystemVersionsAPI
-                                                     :<|>
-                                                     AccountPermissionsAPI :<|>
-                                                       CitiesAPI :<|>
-                                                         ChangeLogsAPI :<|>
-                                                           TargetableRemarketingListsAPI
-                                                             :<|>
-                                                             PlatformTypesAPI
-                                                               :<|>
-                                                               ContentCategoriesAPI
-                                                                 :<|>
-                                                                 BrowsersAPI
-                                                                   :<|>
-                                                                   PlacementsAPI
-                                                                     :<|>
-                                                                     MetrosAPI
-                                                                       :<|>
-                                                                       CreativeFieldsAPI
-                                                                         :<|>
-                                                                         OrderDocumentsAPI
-                                                                           :<|>
-                                                                           FilesAPI
-                                                                             :<|>
-                                                                             ConnectionTypesAPI
-                                                                               :<|>
-                                                                               PlacementGroupsAPI
-                                                                                 :<|>
-                                                                                 EventTagsAPI
-                                                                                   :<|>
-                                                                                   OrdersAPI
-                                                                                     :<|>
-                                                                                     UserRolePermissionsAPI
-                                                                                       :<|>
-                                                                                       CreativeAssetsAPI
-                                                                                         :<|>
-                                                                                         SitesAPI
-                                                                                           :<|>
-                                                                                           OperatingSystemsAPI
-                                                                                             :<|>
-                                                                                             PostalCodesAPI
-                                                                                               :<|>
-                                                                                               SizesAPI
-                                                                                                 :<|>
-                                                                                                 AdsAPI
-                                                                                                   :<|>
-                                                                                                   ProjectsAPI
-                                                                                                     :<|>
-                                                                                                     SubaccountsAPI
-                                                                                                       :<|>
-                                                                                                       AdvertiserGroupsAPI
-                                                                                                         :<|>
-                                                                                                         CreativeFieldValuesAPI
-                                                                                                           :<|>
-                                                                                                           DirectorySiteContactsAPI
-                                                                                                             :<|>
-                                                                                                             DirectorySitesAPI
-                                                                                                               :<|>
-                                                                                                               FloodlightActivityGroupsAPI
-                                                                                                                 :<|>
-                                                                                                                 InventoryItemsAPI
+     InventoryItemsAPI :<|> PlacementStrategiesAPI :<|>
+       CampaignCreativeAssociationsAPI
+       :<|> CreativeGroupsAPI
+       :<|> MobileCarriersAPI
+       :<|> LandingPagesAPI
+       :<|> RemarketingListSharesAPI
+       :<|> AccountActiveAdSummariesAPI
+       :<|> UserRolePermissionGroupsAPI
+       :<|> RemarketingListsAPI
+       :<|> AccountsAPI
+       :<|> ReportsAPI
+       :<|> CampaignsAPI
+       :<|> AccountUserProfilesAPI
+       :<|> CreativesAPI
+       :<|> DimensionValuesAPI
+       :<|> FloodlightConfigurationsAPI
+       :<|> RegionsAPI
+       :<|> FloodlightActivitiesAPI
+       :<|> AccountPermissionGroupsAPI
+       :<|> AdvertisersAPI
+       :<|> CountriesAPI
+       :<|> UserRolesAPI
+       :<|> UserProfilesAPI
+       :<|> OperatingSystemVersionsAPI
+       :<|> AccountPermissionsAPI
+       :<|> CitiesAPI
+       :<|> ChangeLogsAPI
+       :<|> TargetableRemarketingListsAPI
+       :<|> PlatformTypesAPI
+       :<|> ContentCategoriesAPI
+       :<|> BrowsersAPI
+       :<|> PlacementsAPI
+       :<|> MetrosAPI
+       :<|> CreativeFieldsAPI
+       :<|> OrderDocumentsAPI
+       :<|> FilesAPI
+       :<|> ConnectionTypesAPI
+       :<|> PlacementGroupsAPI
+       :<|> EventTagsAPI
+       :<|> OrdersAPI
+       :<|> UserRolePermissionsAPI
+       :<|> CreativeAssetsAPI
+       :<|> SitesAPI
+       :<|> OperatingSystemsAPI
+       :<|> PostalCodesAPI
+       :<|> SizesAPI
+       :<|> AdsAPI
+       :<|> ProjectsAPI
+       :<|> SubaccountsAPI
+       :<|> AdvertiserGroupsAPI
+       :<|> CreativeFieldValuesAPI
+       :<|> DirectorySiteContactsAPI
+       :<|> DirectorySitesAPI
+       :<|> FloodlightActivityGroupsAPI
 
 type InventoryItemsAPI =
-     InventoryItemsGet :<|> InventoryItemsList
+     InventoryItemsList :<|> InventoryItemsGet
 
 -- | Retrieves a list of inventory items, possibly filtered.
 type InventoryItemsList =
@@ -2651,12 +2622,12 @@ type InventoryItemsGet =
        :> QueryParam "alt" Text
 
 type PlacementStrategiesAPI =
-     PlacementStrategiesList :<|>
-       PlacementStrategiesPatch :<|>
-         PlacementStrategiesGet :<|>
-           PlacementStrategiesDelete :<|>
-             PlacementStrategiesUpdate :<|>
-               PlacementStrategiesInsert
+     PlacementStrategiesInsert :<|>
+       PlacementStrategiesList
+       :<|> PlacementStrategiesPatch
+       :<|> PlacementStrategiesGet
+       :<|> PlacementStrategiesDelete
+       :<|> PlacementStrategiesUpdate
 
 -- | Inserts a new placement strategy.
 type PlacementStrategiesInsert =
@@ -2747,8 +2718,8 @@ type PlacementStrategiesUpdate =
        :> QueryParam "alt" Text
 
 type CampaignCreativeAssociationsAPI =
-     CampaignCreativeAssociationsList :<|>
-       CampaignCreativeAssociationsInsert
+     CampaignCreativeAssociationsInsert :<|>
+       CampaignCreativeAssociationsList
 
 -- | Associates a creative with the specified campaign. This method creates a
 -- default ad with dimensions matching the creative in the campaign if such
@@ -2787,10 +2758,10 @@ type CampaignCreativeAssociationsList =
        :> QueryParam "alt" Text
 
 type CreativeGroupsAPI =
-     CreativeGroupsList :<|>
-       CreativeGroupsPatch :<|>
-         CreativeGroupsGet :<|>
-           CreativeGroupsUpdate :<|> CreativeGroupsInsert
+     CreativeGroupsInsert :<|> CreativeGroupsList :<|>
+       CreativeGroupsPatch
+       :<|> CreativeGroupsGet
+       :<|> CreativeGroupsUpdate
 
 -- | Inserts a new creative group.
 type CreativeGroupsInsert =
@@ -2869,7 +2840,7 @@ type CreativeGroupsUpdate =
        :> QueryParam "alt" Text
 
 type MobileCarriersAPI =
-     MobileCarriersGet :<|> MobileCarriersList
+     MobileCarriersList :<|> MobileCarriersGet
 
 -- | Retrieves a list of mobile carriers.
 type MobileCarriersList =
@@ -2899,11 +2870,11 @@ type MobileCarriersGet =
        :> QueryParam "alt" Text
 
 type LandingPagesAPI =
-     LandingPagesList :<|>
-       LandingPagesPatch :<|>
-         LandingPagesGet :<|>
-           LandingPagesDelete :<|>
-             LandingPagesUpdate :<|> LandingPagesInsert
+     LandingPagesInsert :<|> LandingPagesList :<|>
+       LandingPagesPatch
+       :<|> LandingPagesGet
+       :<|> LandingPagesDelete
+       :<|> LandingPagesUpdate
 
 -- | Inserts a new landing page for the specified campaign.
 type LandingPagesInsert =
@@ -3000,9 +2971,9 @@ type LandingPagesUpdate =
        :> QueryParam "alt" Text
 
 type RemarketingListSharesAPI =
-     RemarketingListSharesGet :<|>
-       RemarketingListSharesUpdate :<|>
-         RemarketingListSharesPatch
+     RemarketingListSharesPatch :<|>
+       RemarketingListSharesGet
+       :<|> RemarketingListSharesUpdate
 
 -- | Updates an existing remarketing list share. This method supports patch
 -- semantics.
@@ -3064,8 +3035,8 @@ type AccountActiveAdSummariesGet =
        :> QueryParam "alt" Text
 
 type UserRolePermissionGroupsAPI =
-     UserRolePermissionGroupsGet :<|>
-       UserRolePermissionGroupsList
+     UserRolePermissionGroupsList :<|>
+       UserRolePermissionGroupsGet
 
 -- | Gets a list of all supported user role permission groups.
 type UserRolePermissionGroupsList =
@@ -3095,10 +3066,10 @@ type UserRolePermissionGroupsGet =
        :> QueryParam "alt" Text
 
 type RemarketingListsAPI =
-     RemarketingListsList :<|>
-       RemarketingListsPatch :<|>
-         RemarketingListsGet :<|>
-           RemarketingListsUpdate :<|> RemarketingListsInsert
+     RemarketingListsInsert :<|> RemarketingListsList :<|>
+       RemarketingListsPatch
+       :<|> RemarketingListsGet
+       :<|> RemarketingListsUpdate
 
 -- | Inserts a new remarketing list.
 type RemarketingListsInsert =
@@ -3177,8 +3148,8 @@ type RemarketingListsUpdate =
        :> QueryParam "alt" Text
 
 type AccountsAPI =
-     AccountsPatch :<|>
-       AccountsGet :<|> AccountsUpdate :<|> AccountsList
+     AccountsList :<|> AccountsPatch :<|> AccountsGet :<|>
+       AccountsUpdate
 
 -- | Retrieves the list of accounts, possibly filtered.
 type AccountsList =
@@ -3241,7 +3212,7 @@ type AccountsUpdate =
        :> QueryParam "fields" Text
        :> QueryParam "alt" Text
 
-type ReportsAPI = FilesAPI :<|> CompatibleFieldsAPI
+type ReportsAPI = CompatibleFieldsAPI :<|> FilesAPI
 
 type CompatibleFieldsAPI = CompatibleFieldsQuery
 
@@ -3262,7 +3233,7 @@ type CompatibleFieldsQuery =
        :> QueryParam "fields" Text
        :> QueryParam "alt" Text
 
-type FilesAPI = FilesGet :<|> FilesList
+type FilesAPI = FilesList :<|> FilesGet
 
 -- | Lists files for a report.
 type FilesList =
@@ -3300,10 +3271,10 @@ type FilesGet =
        :> QueryParam "alt" Text
 
 type CampaignsAPI =
-     CampaignsList :<|>
-       CampaignsPatch :<|>
-         CampaignsGet :<|>
-           CampaignsUpdate :<|> CampaignsInsert
+     CampaignsInsert :<|> CampaignsList :<|>
+       CampaignsPatch
+       :<|> CampaignsGet
+       :<|> CampaignsUpdate
 
 -- | Inserts a new campaign.
 type CampaignsInsert =
@@ -3388,11 +3359,11 @@ type CampaignsUpdate =
        :> QueryParam "alt" Text
 
 type AccountUserProfilesAPI =
-     AccountUserProfilesList :<|>
-       AccountUserProfilesPatch :<|>
-         AccountUserProfilesGet :<|>
-           AccountUserProfilesUpdate :<|>
-             AccountUserProfilesInsert
+     AccountUserProfilesInsert :<|>
+       AccountUserProfilesList
+       :<|> AccountUserProfilesPatch
+       :<|> AccountUserProfilesGet
+       :<|> AccountUserProfilesUpdate
 
 -- | Inserts a new account user profile.
 type AccountUserProfilesInsert =
@@ -3472,10 +3443,10 @@ type AccountUserProfilesUpdate =
        :> QueryParam "alt" Text
 
 type CreativesAPI =
-     CreativesList :<|>
-       CreativesPatch :<|>
-         CreativesGet :<|>
-           CreativesUpdate :<|> CreativesInsert
+     CreativesInsert :<|> CreativesList :<|>
+       CreativesPatch
+       :<|> CreativesGet
+       :<|> CreativesUpdate
 
 -- | Inserts a new creative.
 type CreativesInsert =
@@ -3579,10 +3550,10 @@ type DimensionValuesQuery =
        :> QueryParam "alt" Text
 
 type FloodlightConfigurationsAPI =
-     FloodlightConfigurationsPatch :<|>
-       FloodlightConfigurationsGet :<|>
-         FloodlightConfigurationsUpdate :<|>
-           FloodlightConfigurationsList
+     FloodlightConfigurationsList :<|>
+       FloodlightConfigurationsPatch
+       :<|> FloodlightConfigurationsGet
+       :<|> FloodlightConfigurationsUpdate
 
 -- | Retrieves a list of floodlight configurations, possibly filtered.
 type FloodlightConfigurationsList =
@@ -3656,13 +3627,13 @@ type RegionsList =
        :> QueryParam "alt" Text
 
 type FloodlightActivitiesAPI =
-     FloodlightActivitiesList :<|>
-       FloodlightActivitiesPatch :<|>
-         FloodlightActivitiesGet :<|>
-           FloodlightActivitiesGeneratetag :<|>
-             FloodlightActivitiesDelete :<|>
-               FloodlightActivitiesUpdate :<|>
-                 FloodlightActivitiesInsert
+     FloodlightActivitiesInsert :<|>
+       FloodlightActivitiesList
+       :<|> FloodlightActivitiesPatch
+       :<|> FloodlightActivitiesGet
+       :<|> FloodlightActivitiesGeneratetag
+       :<|> FloodlightActivitiesDelete
+       :<|> FloodlightActivitiesUpdate
 
 -- | Inserts a new floodlight activity.
 type FloodlightActivitiesInsert =
@@ -3775,8 +3746,8 @@ type FloodlightActivitiesUpdate =
        :> QueryParam "alt" Text
 
 type AccountPermissionGroupsAPI =
-     AccountPermissionGroupsGet :<|>
-       AccountPermissionGroupsList
+     AccountPermissionGroupsList :<|>
+       AccountPermissionGroupsGet
 
 -- | Retrieves the list of account permission groups.
 type AccountPermissionGroupsList =
@@ -3806,10 +3777,10 @@ type AccountPermissionGroupsGet =
        :> QueryParam "alt" Text
 
 type AdvertisersAPI =
-     AdvertisersList :<|>
-       AdvertisersPatch :<|>
-         AdvertisersGet :<|>
-           AdvertisersUpdate :<|> AdvertisersInsert
+     AdvertisersInsert :<|> AdvertisersList :<|>
+       AdvertisersPatch
+       :<|> AdvertisersGet
+       :<|> AdvertisersUpdate
 
 -- | Inserts a new advertiser.
 type AdvertisersInsert =
@@ -3891,7 +3862,7 @@ type AdvertisersUpdate =
        :> QueryParam "fields" Text
        :> QueryParam "alt" Text
 
-type CountriesAPI = CountriesGet :<|> CountriesList
+type CountriesAPI = CountriesList :<|> CountriesGet
 
 -- | Retrieves a list of countries.
 type CountriesList =
@@ -3921,11 +3892,11 @@ type CountriesGet =
        :> QueryParam "alt" Text
 
 type UserRolesAPI =
-     UserRolesList :<|>
-       UserRolesPatch :<|>
-         UserRolesGet :<|>
-           UserRolesDelete :<|>
-             UserRolesUpdate :<|> UserRolesInsert
+     UserRolesInsert :<|> UserRolesList :<|>
+       UserRolesPatch
+       :<|> UserRolesGet
+       :<|> UserRolesDelete
+       :<|> UserRolesUpdate
 
 -- | Inserts a new user role.
 type UserRolesInsert =
@@ -4017,7 +3988,7 @@ type UserRolesUpdate =
        :> QueryParam "alt" Text
 
 type UserProfilesAPI =
-     UserProfilesGet :<|> UserProfilesList
+     UserProfilesList :<|> UserProfilesGet
 
 -- | Retrieves list of user profiles for a user.
 type UserProfilesList =
@@ -4043,8 +4014,8 @@ type UserProfilesGet =
        :> QueryParam "alt" Text
 
 type OperatingSystemVersionsAPI =
-     OperatingSystemVersionsGet :<|>
-       OperatingSystemVersionsList
+     OperatingSystemVersionsList :<|>
+       OperatingSystemVersionsGet
 
 -- | Retrieves a list of operating system versions.
 type OperatingSystemVersionsList =
@@ -4074,7 +4045,7 @@ type OperatingSystemVersionsGet =
        :> QueryParam "alt" Text
 
 type AccountPermissionsAPI =
-     AccountPermissionsGet :<|> AccountPermissionsList
+     AccountPermissionsList :<|> AccountPermissionsGet
 
 -- | Retrieves the list of account permissions.
 type AccountPermissionsList =
@@ -4123,7 +4094,7 @@ type CitiesList =
        :> QueryParam "alt" Text
 
 type ChangeLogsAPI =
-     ChangeLogsGet :<|> ChangeLogsList
+     ChangeLogsList :<|> ChangeLogsGet
 
 -- | Retrieves a list of change logs.
 type ChangeLogsList =
@@ -4163,8 +4134,8 @@ type ChangeLogsGet =
        :> QueryParam "alt" Text
 
 type TargetableRemarketingListsAPI =
-     TargetableRemarketingListsGet :<|>
-       TargetableRemarketingListsList
+     TargetableRemarketingListsList :<|>
+       TargetableRemarketingListsGet
 
 -- | Retrieves a list of targetable remarketing lists, possibly filtered.
 type TargetableRemarketingListsList =
@@ -4201,7 +4172,7 @@ type TargetableRemarketingListsGet =
        :> QueryParam "alt" Text
 
 type PlatformTypesAPI =
-     PlatformTypesGet :<|> PlatformTypesList
+     PlatformTypesList :<|> PlatformTypesGet
 
 -- | Retrieves a list of platform types.
 type PlatformTypesList =
@@ -4231,11 +4202,11 @@ type PlatformTypesGet =
        :> QueryParam "alt" Text
 
 type ContentCategoriesAPI =
-     ContentCategoriesList :<|>
-       ContentCategoriesPatch :<|>
-         ContentCategoriesGet :<|>
-           ContentCategoriesDelete :<|>
-             ContentCategoriesUpdate :<|> ContentCategoriesInsert
+     ContentCategoriesInsert :<|> ContentCategoriesList
+       :<|> ContentCategoriesPatch
+       :<|> ContentCategoriesGet
+       :<|> ContentCategoriesDelete
+       :<|> ContentCategoriesUpdate
 
 -- | Inserts a new content category.
 type ContentCategoriesInsert =
@@ -4341,11 +4312,11 @@ type BrowsersList =
        :> QueryParam "alt" Text
 
 type PlacementsAPI =
-     PlacementsGeneratetags :<|>
-       PlacementsList :<|>
-         PlacementsPatch :<|>
-           PlacementsGet :<|>
-             PlacementsUpdate :<|> PlacementsInsert
+     PlacementsInsert :<|> PlacementsGeneratetags :<|>
+       PlacementsList
+       :<|> PlacementsPatch
+       :<|> PlacementsGet
+       :<|> PlacementsUpdate
 
 -- | Inserts a new placement.
 type PlacementsInsert =
@@ -4469,11 +4440,11 @@ type MetrosList =
        :> QueryParam "alt" Text
 
 type CreativeFieldsAPI =
-     CreativeFieldsList :<|>
-       CreativeFieldsPatch :<|>
-         CreativeFieldsGet :<|>
-           CreativeFieldsDelete :<|>
-             CreativeFieldsUpdate :<|> CreativeFieldsInsert
+     CreativeFieldsInsert :<|> CreativeFieldsList :<|>
+       CreativeFieldsPatch
+       :<|> CreativeFieldsGet
+       :<|> CreativeFieldsDelete
+       :<|> CreativeFieldsUpdate
 
 -- | Inserts a new creative field.
 type CreativeFieldsInsert =
@@ -4565,7 +4536,7 @@ type CreativeFieldsUpdate =
        :> QueryParam "alt" Text
 
 type OrderDocumentsAPI =
-     OrderDocumentsGet :<|> OrderDocumentsList
+     OrderDocumentsList :<|> OrderDocumentsGet
 
 -- | Retrieves a list of order documents, possibly filtered.
 type OrderDocumentsList =
@@ -4607,7 +4578,7 @@ type OrderDocumentsGet =
        :> QueryParam "fields" Text
        :> QueryParam "alt" Text
 
-type FilesAPI = FilesGet :<|> FilesList
+type FilesAPI = FilesList :<|> FilesGet
 
 -- | Lists files for a user profile.
 type FilesList =
@@ -4642,7 +4613,7 @@ type FilesGet =
        :> QueryParam "alt" Text
 
 type ConnectionTypesAPI =
-     ConnectionTypesGet :<|> ConnectionTypesList
+     ConnectionTypesList :<|> ConnectionTypesGet
 
 -- | Retrieves a list of connection types.
 type ConnectionTypesList =
@@ -4672,10 +4643,10 @@ type ConnectionTypesGet =
        :> QueryParam "alt" Text
 
 type PlacementGroupsAPI =
-     PlacementGroupsList :<|>
-       PlacementGroupsPatch :<|>
-         PlacementGroupsGet :<|>
-           PlacementGroupsUpdate :<|> PlacementGroupsInsert
+     PlacementGroupsInsert :<|> PlacementGroupsList :<|>
+       PlacementGroupsPatch
+       :<|> PlacementGroupsGet
+       :<|> PlacementGroupsUpdate
 
 -- | Inserts a new placement group.
 type PlacementGroupsInsert =
@@ -4765,11 +4736,11 @@ type PlacementGroupsUpdate =
        :> QueryParam "alt" Text
 
 type EventTagsAPI =
-     EventTagsList :<|>
-       EventTagsPatch :<|>
-         EventTagsGet :<|>
-           EventTagsDelete :<|>
-             EventTagsUpdate :<|> EventTagsInsert
+     EventTagsInsert :<|> EventTagsList :<|>
+       EventTagsPatch
+       :<|> EventTagsGet
+       :<|> EventTagsDelete
+       :<|> EventTagsUpdate
 
 -- | Inserts a new event tag.
 type EventTagsInsert =
@@ -4862,7 +4833,7 @@ type EventTagsUpdate =
        :> QueryParam "fields" Text
        :> QueryParam "alt" Text
 
-type OrdersAPI = OrdersGet :<|> OrdersList
+type OrdersAPI = OrdersList :<|> OrdersGet
 
 -- | Retrieves a list of orders, possibly filtered.
 type OrdersList =
@@ -4903,7 +4874,7 @@ type OrdersGet =
        :> QueryParam "alt" Text
 
 type UserRolePermissionsAPI =
-     UserRolePermissionsGet :<|> UserRolePermissionsList
+     UserRolePermissionsList :<|> UserRolePermissionsGet
 
 -- | Gets a list of user role permissions, possibly filtered.
 type UserRolePermissionsList =
@@ -4951,9 +4922,9 @@ type CreativeAssetsInsert =
        :> QueryParam "alt" Text
 
 type SitesAPI =
-     SitesList :<|>
-       SitesPatch :<|>
-         SitesGet :<|> SitesUpdate :<|> SitesInsert
+     SitesInsert :<|> SitesList :<|> SitesPatch :<|>
+       SitesGet
+       :<|> SitesUpdate
 
 -- | Inserts a new site.
 type SitesInsert =
@@ -5038,7 +5009,7 @@ type SitesUpdate =
        :> QueryParam "alt" Text
 
 type OperatingSystemsAPI =
-     OperatingSystemsGet :<|> OperatingSystemsList
+     OperatingSystemsList :<|> OperatingSystemsGet
 
 -- | Retrieves a list of operating systems.
 type OperatingSystemsList =
@@ -5068,7 +5039,7 @@ type OperatingSystemsGet =
        :> QueryParam "alt" Text
 
 type PostalCodesAPI =
-     PostalCodesGet :<|> PostalCodesList
+     PostalCodesList :<|> PostalCodesGet
 
 -- | Retrieves a list of postal codes.
 type PostalCodesList =
@@ -5098,7 +5069,7 @@ type PostalCodesGet =
        :> QueryParam "alt" Text
 
 type SizesAPI =
-     SizesList :<|> SizesGet :<|> SizesInsert
+     SizesInsert :<|> SizesList :<|> SizesGet
 
 -- | Inserts a new size.
 type SizesInsert =
@@ -5145,8 +5116,8 @@ type SizesGet =
        :> QueryParam "alt" Text
 
 type AdsAPI =
-     AdsList :<|>
-       AdsPatch :<|> AdsGet :<|> AdsUpdate :<|> AdsInsert
+     AdsInsert :<|> AdsList :<|> AdsPatch :<|> AdsGet :<|>
+       AdsUpdate
 
 -- | Inserts a new ad.
 type AdsInsert =
@@ -5241,7 +5212,7 @@ type AdsUpdate =
        :> QueryParam "fields" Text
        :> QueryParam "alt" Text
 
-type ProjectsAPI = ProjectsGet :<|> ProjectsList
+type ProjectsAPI = ProjectsList :<|> ProjectsGet
 
 -- | Retrieves a list of projects, possibly filtered.
 type ProjectsList =
@@ -5278,10 +5249,10 @@ type ProjectsGet =
        :> QueryParam "alt" Text
 
 type SubaccountsAPI =
-     SubaccountsList :<|>
-       SubaccountsPatch :<|>
-         SubaccountsGet :<|>
-           SubaccountsUpdate :<|> SubaccountsInsert
+     SubaccountsInsert :<|> SubaccountsList :<|>
+       SubaccountsPatch
+       :<|> SubaccountsGet
+       :<|> SubaccountsUpdate
 
 -- | Inserts a new subaccount.
 type SubaccountsInsert =
@@ -5357,11 +5328,11 @@ type SubaccountsUpdate =
        :> QueryParam "alt" Text
 
 type AdvertiserGroupsAPI =
-     AdvertiserGroupsList :<|>
-       AdvertiserGroupsPatch :<|>
-         AdvertiserGroupsGet :<|>
-           AdvertiserGroupsDelete :<|>
-             AdvertiserGroupsUpdate :<|> AdvertiserGroupsInsert
+     AdvertiserGroupsInsert :<|> AdvertiserGroupsList :<|>
+       AdvertiserGroupsPatch
+       :<|> AdvertiserGroupsGet
+       :<|> AdvertiserGroupsDelete
+       :<|> AdvertiserGroupsUpdate
 
 -- | Inserts a new advertiser group.
 type AdvertiserGroupsInsert =
@@ -5452,12 +5423,12 @@ type AdvertiserGroupsUpdate =
        :> QueryParam "alt" Text
 
 type CreativeFieldValuesAPI =
-     CreativeFieldValuesList :<|>
-       CreativeFieldValuesPatch :<|>
-         CreativeFieldValuesGet :<|>
-           CreativeFieldValuesDelete :<|>
-             CreativeFieldValuesUpdate :<|>
-               CreativeFieldValuesInsert
+     CreativeFieldValuesInsert :<|>
+       CreativeFieldValuesList
+       :<|> CreativeFieldValuesPatch
+       :<|> CreativeFieldValuesGet
+       :<|> CreativeFieldValuesDelete
+       :<|> CreativeFieldValuesUpdate
 
 -- | Inserts a new creative field value.
 type CreativeFieldValuesInsert =
@@ -5560,8 +5531,8 @@ type CreativeFieldValuesUpdate =
        :> QueryParam "alt" Text
 
 type DirectorySiteContactsAPI =
-     DirectorySiteContactsGet :<|>
-       DirectorySiteContactsList
+     DirectorySiteContactsList :<|>
+       DirectorySiteContactsGet
 
 -- | Retrieves a list of directory site contacts, possibly filtered.
 type DirectorySiteContactsList =
@@ -5598,8 +5569,8 @@ type DirectorySiteContactsGet =
        :> QueryParam "alt" Text
 
 type DirectorySitesAPI =
-     DirectorySitesList :<|>
-       DirectorySitesGet :<|> DirectorySitesInsert
+     DirectorySitesInsert :<|> DirectorySitesList :<|>
+       DirectorySitesGet
 
 -- | Inserts a new directory site.
 type DirectorySitesInsert =
@@ -5655,12 +5626,12 @@ type DirectorySitesGet =
        :> QueryParam "alt" Text
 
 type FloodlightActivityGroupsAPI =
-     FloodlightActivityGroupsList :<|>
-       FloodlightActivityGroupsPatch :<|>
-         FloodlightActivityGroupsGet :<|>
-           FloodlightActivityGroupsDelete :<|>
-             FloodlightActivityGroupsUpdate :<|>
-               FloodlightActivityGroupsInsert
+     FloodlightActivityGroupsInsert :<|>
+       FloodlightActivityGroupsList
+       :<|> FloodlightActivityGroupsPatch
+       :<|> FloodlightActivityGroupsGet
+       :<|> FloodlightActivityGroupsDelete
+       :<|> FloodlightActivityGroupsUpdate
 
 -- | Inserts a new floodlight activity group.
 type FloodlightActivityGroupsInsert =

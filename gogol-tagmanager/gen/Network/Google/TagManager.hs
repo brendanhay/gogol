@@ -388,20 +388,20 @@ TODO
 
 type TagManager = AccountsAPI
 
-type AccountsAPI = PermissionsAPI :<|> ContainersAPI
+type AccountsAPI = ContainersAPI :<|> PermissionsAPI
 
 type ContainersAPI =
-     VariablesAPI :<|>
-       FoldersAPI :<|>
-         TriggersAPI :<|>
-           VersionsAPI :<|>
-             Move_foldersAPI :<|>
-               MacrosAPI :<|> TagsAPI :<|> RulesAPI
+     RulesAPI :<|> VariablesAPI :<|> FoldersAPI :<|>
+       TriggersAPI
+       :<|> VersionsAPI
+       :<|> Move_foldersAPI
+       :<|> MacrosAPI
+       :<|> TagsAPI
 
 type RulesAPI =
-     RulesGet :<|>
-       RulesCreate :<|>
-         RulesDelete :<|> RulesUpdate :<|> RulesList
+     RulesList :<|> RulesGet :<|> RulesCreate :<|>
+       RulesDelete
+       :<|> RulesUpdate
 
 -- | Lists all GTM Rules of a Container.
 type RulesList =
@@ -483,10 +483,9 @@ type RulesUpdate =
        :> QueryParam "alt" Text
 
 type VariablesAPI =
-     VariablesGet :<|>
-       VariablesCreate :<|>
-         VariablesDelete :<|>
-           VariablesUpdate :<|> VariablesList
+     VariablesList :<|> VariablesGet :<|> VariablesCreate
+       :<|> VariablesDelete
+       :<|> VariablesUpdate
 
 -- | Lists all GTM Variables of a Container.
 type VariablesList =
@@ -589,9 +588,9 @@ type EntitiesList =
        :> QueryParam "alt" Text
 
 type TriggersAPI =
-     TriggersGet :<|>
-       TriggersCreate :<|>
-         TriggersDelete :<|> TriggersUpdate :<|> TriggersList
+     TriggersList :<|> TriggersGet :<|> TriggersCreate
+       :<|> TriggersDelete
+       :<|> TriggersUpdate
 
 -- | Lists all GTM Triggers of a Container.
 type TriggersList =
@@ -673,12 +672,13 @@ type TriggersUpdate =
        :> QueryParam "alt" Text
 
 type VersionsAPI =
-     VersionsUndelete :<|>
-       VersionsRestore :<|>
-         VersionsGet :<|>
-           VersionsCreate :<|>
-             VersionsDelete :<|>
-               VersionsUpdate :<|> VersionsPublish :<|> VersionsList
+     VersionsList :<|> VersionsUndelete :<|>
+       VersionsRestore
+       :<|> VersionsGet
+       :<|> VersionsCreate
+       :<|> VersionsDelete
+       :<|> VersionsUpdate
+       :<|> VersionsPublish
 
 -- | Lists all Container Versions of a GTM Container.
 type VersionsList =
@@ -837,9 +837,9 @@ type Move_foldersUpdate =
        :> QueryParam "alt" Text
 
 type MacrosAPI =
-     MacrosGet :<|>
-       MacrosCreate :<|>
-         MacrosDelete :<|> MacrosUpdate :<|> MacrosList
+     MacrosList :<|> MacrosGet :<|> MacrosCreate :<|>
+       MacrosDelete
+       :<|> MacrosUpdate
 
 -- | Lists all GTM Macros of a Container.
 type MacrosList =
@@ -921,9 +921,8 @@ type MacrosUpdate =
        :> QueryParam "alt" Text
 
 type TagsAPI =
-     TagsGet :<|>
-       TagsCreate :<|>
-         TagsDelete :<|> TagsUpdate :<|> TagsList
+     TagsList :<|> TagsGet :<|> TagsCreate :<|> TagsDelete
+       :<|> TagsUpdate
 
 -- | Lists all GTM Tags of a Container.
 type TagsList =
@@ -1005,10 +1004,10 @@ type TagsUpdate =
        :> QueryParam "alt" Text
 
 type PermissionsAPI =
-     PermissionsGet :<|>
-       PermissionsCreate :<|>
-         PermissionsDelete :<|>
-           PermissionsUpdate :<|> PermissionsList
+     PermissionsList :<|> PermissionsGet :<|>
+       PermissionsCreate
+       :<|> PermissionsDelete
+       :<|> PermissionsUpdate
 
 -- | List all users that have access to the account along with Account and
 -- Container Permissions granted to each of them.

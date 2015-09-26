@@ -1,4 +1,5 @@
 {
-    "library": "games-configuration"
+    "library": "games-configuration",
+    "canonicalName": "Games.Configuration"
 }
 

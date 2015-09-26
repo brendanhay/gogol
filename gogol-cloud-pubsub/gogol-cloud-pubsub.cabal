@@ -31,12 +31,12 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.CloudPubSub
-        , Network.Google.CloudPubSub.Types
+          Network.Google.Cloud.PubSub
+        , Network.Google.Cloud.PubSub.Types
 
     other-modules:
-          Network.Google.CloudPubSub.Types.Product
-        , Network.Google.CloudPubSub.Types.Sum
+          Network.Google.Cloud.PubSub.Types.Product
+        , Network.Google.Cloud.PubSub.Types.Sum
 
     build-depends:
           gogol-core == 0.0.1.*

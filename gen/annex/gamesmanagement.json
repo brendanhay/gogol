@@ -1,4 +1,5 @@
 {
-    "library": "games-management"
+    "library": "games-management",
+    "canonicalName": "Games.Management"
 }
 

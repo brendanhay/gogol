@@ -1,4 +1,5 @@
 {
-    "library": "taskqueue"
+    "library": "appengine-taskqueue",
+    "canonicalName": "AppEngine.TaskQueue"
 }
 

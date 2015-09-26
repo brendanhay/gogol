@@ -1,4 +1,5 @@
 {
-    "library": "cloud-dns"
+    "library": "cloud-dns",
+    "canonicalName": "Cloud.DNS"
 }
 
