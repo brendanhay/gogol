@@ -136,8 +136,8 @@ derive k = loc "derive" k $ memo derived k go
     go = \case
         Obj  _ rs -> foldM props base (Map.elems rs)
         Arr  _ r  -> mappend monoid . intersect base <$> derive r
-        Enum {}   -> pure enum
-        Ref  _ r  -> pure base -- derive (Free r)
+        Enum {}   -> pure (base <> enum)
+        Ref  _ r  -> pure base
         Any  _    -> pure base
         Lit  _ l  -> pure $
             case l of

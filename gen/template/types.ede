@@ -2,19 +2,18 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 {% include "_include/license.ede" %}
 --
 module {{ moduleName }}
     (
-    -- * API Definition
-      {{ name | lowerHead }}
-
   {% for schema in schemas %}
     {% case schema.value.type %}
     {% when "prod" %}
 
     -- * {{ schema.value.name }}
-    , {{ schema.value.name }}
+    {% if schema.first %} {% else %},{% endif %} {{ schema.value.name }}
     , {{ schema.value.ctor.name }}
       {% for lens in schema.value.lenses %}
     , {{ lens.value.name }}
@@ -30,6 +29,3 @@ module {{ moduleName }}
 {% for import in moduleImports %}
 import {{ import.value }}
 {% endfor %}
-
-{{ name | lowerHead }} :: a
-{{ name | lowerHead }} = error "{{ name }}"
