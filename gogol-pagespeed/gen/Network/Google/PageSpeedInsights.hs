@@ -1,3 +1,9 @@
+{-# LANGUAGE DataKinds     #-}
+{-# LANGUAGE TypeOperators #-}
+
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+
 -- |
 -- Module      : Network.Google.PageSpeedInsights
 -- Copyright   : (c) 2015 Brendan Hay
@@ -6,15 +12,16 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lets you analyze the performance of a web page and get tailored suggestions to make that page faster.
+-- -- | Lets you analyze the performance of a web page and get tailored
+-- suggestions to make that page faster.
 --
 -- /See:/ <https://developers.google.com/speed/docs/insights/v2/getting-started PageSpeed Insights API Reference>
 module Network.Google.PageSpeedInsights
     (
-    -- * API Definition
+    -- * Resources
       PageSpeedInsights
-
-
+    , PagespeedapiAPI
+    , PagespeedapiRunpagespeed
 
     -- * Types
 
@@ -125,11 +132,25 @@ import           Network.Google.PageSpeedInsights.Types
 TODO
 -}
 
-type PageSpeedInsights = ()
+type PageSpeedInsights = PagespeedapiAPI
 
-pageSpeedInsights :: Proxy PageSpeedInsights
-pageSpeedInsights = Proxy
+type PagespeedapiAPI = PagespeedapiRunpagespeed
 
-
-
-
+-- | Runs PageSpeed analysis on the page at the specified URL, and returns
+-- PageSpeed scores, a list of suggestions to make that page faster, and
+-- other information.
+type PagespeedapiRunpagespeed =
+     "pagespeedonline" :> "v2" :> "runPagespeed" :>
+       QueryParam "screenshot" Bool
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "locale" Text
+       :> QueryParam "url" Text
+       :> QueryParam "filter_third_party_resources" Bool
+       :> QueryParam "strategy" Text
+       :> QueryParam "rule" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text

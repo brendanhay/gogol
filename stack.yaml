@@ -4,3 +4,4 @@ extra-deps: []
 packages:
   - core
   - gogol
+  - gogol-youtube-analytics

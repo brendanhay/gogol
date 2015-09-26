@@ -1,3 +1,9 @@
+{-# LANGUAGE DataKinds     #-}
+{-# LANGUAGE TypeOperators #-}
+
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+
 -- |
 -- Module      : Network.Google.QPXExpress
 -- Copyright   : (c) 2015 Brendan Hay
@@ -6,15 +12,16 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lets you find the least expensive flights between an origin and a destination.
+-- -- | Lets you find the least expensive flights between an origin and a
+-- destination.
 --
 -- /See:/ <http://developers.google.com/qpx-express QPX Express API Reference>
 module Network.Google.QPXExpress
     (
-    -- * API Definition
+    -- * Resources
       QPXExpress
-
-
+    , TripsAPI
+    , TripsSearch
 
     -- * Types
 
@@ -256,11 +263,17 @@ import           Network.Google.QPXExpress.Types
 TODO
 -}
 
-type QPXExpress = ()
+type QPXExpress = TripsAPI
 
-qPXExpress :: Proxy QPXExpress
-qPXExpress = Proxy
+type TripsAPI = TripsSearch
 
-
-
-
+-- | Returns a list of flights.
+type TripsSearch =
+     "qpxExpress" :> "v1" :> "trips" :> "search" :>
+       QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text

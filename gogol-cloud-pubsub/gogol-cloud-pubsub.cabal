@@ -14,7 +14,11 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    Pending
+    Provides reliable, many-to-many, asynchronous messaging between
+    applications.
+    .
+    /Warning:/ This is an experimental preview release which is still under
+    heavy development and not intended for public consumption, caveat emptor!
 
 source-repository head
     type:     git
@@ -27,12 +31,12 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.CloudPub/Sub
-        , Network.Google.CloudPub/Sub.Types
+          Network.Google.CloudPubSub
+        , Network.Google.CloudPubSub.Types
 
     other-modules:
-          Network.Google.CloudPub/Sub.Types.Product
-        , Network.Google.CloudPub/Sub.Types.Sum
+          Network.Google.CloudPubSub.Types.Product
+        , Network.Google.CloudPubSub.Types.Sum
 
     build-depends:
           gogol-core == 0.0.1.*

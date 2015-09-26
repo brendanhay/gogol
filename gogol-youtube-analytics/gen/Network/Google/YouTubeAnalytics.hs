@@ -1,3 +1,9 @@
+{-# LANGUAGE DataKinds     #-}
+{-# LANGUAGE TypeOperators #-}
+
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+
 -- |
 -- Module      : Network.Google.YouTubeAnalytics
 -- Copyright   : (c) 2015 Brendan Hay
@@ -6,15 +12,28 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieve your YouTube Analytics reports.
+-- -- | Retrieve your YouTube Analytics reports.
 --
 -- /See:/ <http://developers.google.com/youtube/analytics/ YouTube Analytics API Reference>
 module Network.Google.YouTubeAnalytics
     (
-    -- * API Definition
+    -- * Resources
       YouTubeAnalytics
-
-
+    , GroupsAPI
+    , GroupsInsert
+    , GroupsList
+    , GroupsDelete
+    , GroupsUpdate
+    , ReportsAPI
+    , ReportsQuery
+    , GroupItemsAPI
+    , GroupItemsInsert
+    , GroupItemsList
+    , GroupItemsDelete
+    , BatchReportsAPI
+    , BatchReportsList
+    , BatchReportDefinitionsAPI
+    , BatchReportDefinitionsList
 
     -- * Types
 
@@ -133,11 +152,163 @@ import           Network.Google.YouTubeAnalytics.Types
 TODO
 -}
 
-type YouTubeAnalytics = ()
+type YouTubeAnalytics =
+     ReportsAPI :<|>
+       GroupItemsAPI :<|>
+         BatchReportsAPI :<|>
+           BatchReportDefinitionsAPI :<|> GroupsAPI
 
-youTubeAnalytics :: Proxy YouTubeAnalytics
-youTubeAnalytics = Proxy
+type GroupsAPI =
+     GroupsList :<|>
+       GroupsDelete :<|> GroupsUpdate :<|> GroupsInsert
 
+-- | Creates a group.
+type GroupsInsert =
+     "youtube" :> "analytics" :> "v1beta1" :> "groups" :>
+       QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "onBehalfOfContentOwner" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
+-- | Returns a collection of groups that match the API request parameters.
+-- For example, you can retrieve all groups that the authenticated user
+-- owns, or you can retrieve one or more groups by their unique IDs.
+type GroupsList =
+     "youtube" :> "analytics" :> "v1beta1" :> "groups" :>
+       QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "mine" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "onBehalfOfContentOwner" Text
+       :> QueryParam "key" Text
+       :> QueryParam "id" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
+-- | Deletes a group.
+type GroupsDelete =
+     "youtube" :> "analytics" :> "v1beta1" :> "groups" :>
+       QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "onBehalfOfContentOwner" Text
+       :> QueryParam "key" Text
+       :> QueryParam "id" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
+-- | Modifies a group. For example, you could change a group\'s title.
+type GroupsUpdate =
+     "youtube" :> "analytics" :> "v1beta1" :> "groups" :>
+       QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "onBehalfOfContentOwner" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type ReportsAPI = ReportsQuery
+
+-- | Retrieve your YouTube Analytics reports.
+type ReportsQuery =
+     "youtube" :> "analytics" :> "v1beta1" :> "reports" :>
+       QueryParam "quotaUser" Text
+       :> QueryParam "metrics" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "filters" Text
+       :> QueryParam "ids" Text
+       :> QueryParam "end-date" Text
+       :> QueryParam "key" Text
+       :> QueryParam "currency" Text
+       :> QueryParam "sort" Text
+       :> QueryParam "dimensions" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "start-index" Natural
+       :> QueryParam "max-results" Natural
+       :> QueryParam "start-date" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type GroupItemsAPI =
+     GroupItemsList :<|>
+       GroupItemsDelete :<|> GroupItemsInsert
+
+-- | Creates a group item.
+type GroupItemsInsert =
+     "youtube" :> "analytics" :> "v1beta1" :> "groupItems"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "onBehalfOfContentOwner" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Returns a collection of group items that match the API request
+-- parameters.
+type GroupItemsList =
+     "youtube" :> "analytics" :> "v1beta1" :> "groupItems"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "onBehalfOfContentOwner" Text
+       :> QueryParam "key" Text
+       :> QueryParam "groupId" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Removes an item from a group.
+type GroupItemsDelete =
+     "youtube" :> "analytics" :> "v1beta1" :> "groupItems"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "onBehalfOfContentOwner" Text
+       :> QueryParam "key" Text
+       :> QueryParam "id" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type BatchReportsAPI = BatchReportsList
+
+-- | Retrieves a list of processed batch reports.
+type BatchReportsList =
+     "youtube" :> "analytics" :> "v1beta1" :>
+       "batchReports"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "batchReportDefinitionId" Text
+       :> QueryParam "userIp" Text
+       :> QueryParam "onBehalfOfContentOwner" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type BatchReportDefinitionsAPI =
+     BatchReportDefinitionsList
+
+-- | Retrieves a list of available batch report definitions.
+type BatchReportDefinitionsList =
+     "youtube" :> "analytics" :> "v1beta1" :>
+       "batchReportDefinitions"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "onBehalfOfContentOwner" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text

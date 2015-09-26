@@ -1,3 +1,9 @@
+{-# LANGUAGE DataKinds     #-}
+{-# LANGUAGE TypeOperators #-}
+
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+
 -- |
 -- Module      : Network.Google.Calendar
 -- Copyright   : (c) 2015 Brendan Hay
@@ -6,15 +12,58 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lets you manipulate events and other calendar data.
+-- -- | Lets you manipulate events and other calendar data.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference>
 module Network.Google.Calendar
     (
-    -- * API Definition
+    -- * Resources
       Calendar
-
-
+    , SettingsAPI
+    , SettingsList
+    , SettingsGet
+    , SettingsWatch
+    , ChannelsAPI
+    , ChannelsStop
+    , CalendarsAPI
+    , CalendarsInsert
+    , CalendarsPatch
+    , CalendarsGet
+    , CalendarsClear
+    , CalendarsDelete
+    , CalendarsUpdate
+    , EventsAPI
+    , EventsQuickAdd
+    , EventsInsert
+    , EventsList
+    , EventsPatch
+    , EventsGet
+    , EventsInstances
+    , EventsImport
+    , EventsDelete
+    , EventsUpdate
+    , EventsMove
+    , EventsWatch
+    , CalendarListAPI
+    , CalendarListInsert
+    , CalendarListList
+    , CalendarListPatch
+    , CalendarListGet
+    , CalendarListDelete
+    , CalendarListUpdate
+    , CalendarListWatch
+    , AclAPI
+    , AclInsert
+    , AclList
+    , AclPatch
+    , AclGet
+    , AclDelete
+    , AclUpdate
+    , AclWatch
+    , ColorsAPI
+    , ColorsGet
+    , FreebusyAPI
+    , FreebusyQuery
 
     -- * Types
 
@@ -365,11 +414,626 @@ import           Network.Google.Calendar.Types
 TODO
 -}
 
-type Calendar = ()
+type Calendar =
+     ChannelsAPI :<|>
+       CalendarsAPI :<|>
+         EventsAPI :<|>
+           CalendarListAPI :<|>
+             AclAPI :<|>
+               ColorsAPI :<|> FreebusyAPI :<|> SettingsAPI
 
-calendar :: Proxy Calendar
-calendar = Proxy
+type SettingsAPI =
+     SettingsGet :<|> SettingsWatch :<|> SettingsList
 
+-- | Returns all user settings for the authenticated user.
+type SettingsList =
+     "calendar" :> "v3" :> "users" :> "me" :> "settings"
+       :> QueryParam "syncToken" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "pageToken" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "maxResults" Natural
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
+-- | Returns a single user setting.
+type SettingsGet =
+     "calendar" :> "v3" :> "users" :> "me" :> "settings"
+       :> Capture "setting" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
+-- | Watch for changes to Settings resources.
+type SettingsWatch =
+     "calendar" :> "v3" :> "users" :> "me" :> "settings"
+       :> "watch"
+       :> QueryParam "syncToken" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "pageToken" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "maxResults" Natural
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
+type ChannelsAPI = ChannelsStop
+
+-- | Stop watching resources through this channel
+type ChannelsStop =
+     "calendar" :> "v3" :> "channels" :> "stop" :>
+       QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type CalendarsAPI =
+     CalendarsPatch :<|>
+       CalendarsGet :<|>
+         CalendarsClear :<|>
+           CalendarsDelete :<|>
+             CalendarsUpdate :<|> CalendarsInsert
+
+-- | Creates a secondary calendar.
+type CalendarsInsert =
+     "calendar" :> "v3" :> "calendars" :>
+       QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Updates metadata for a calendar. This method supports patch semantics.
+type CalendarsPatch =
+     "calendar" :> "v3" :> "calendars" :>
+       Capture "calendarId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Returns metadata for a calendar.
+type CalendarsGet =
+     "calendar" :> "v3" :> "calendars" :>
+       Capture "calendarId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Clears a primary calendar. This operation deletes all events associated
+-- with the primary calendar of an account.
+type CalendarsClear =
+     "calendar" :> "v3" :> "calendars" :>
+       Capture "calendarId" Text
+       :> "clear"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Deletes a secondary calendar. Use calendars.clear for clearing all
+-- events on primary calendars.
+type CalendarsDelete =
+     "calendar" :> "v3" :> "calendars" :>
+       Capture "calendarId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Updates metadata for a calendar.
+type CalendarsUpdate =
+     "calendar" :> "v3" :> "calendars" :>
+       Capture "calendarId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type EventsAPI =
+     EventsInsert :<|>
+       EventsList :<|>
+         EventsPatch :<|>
+           EventsGet :<|>
+             EventsInstances :<|>
+               EventsImport :<|>
+                 EventsDelete :<|>
+                   EventsUpdate :<|>
+                     EventsMove :<|> EventsWatch :<|> EventsQuickAdd
+
+-- | Creates an event based on a simple text string.
+type EventsQuickAdd =
+     "calendar" :> "v3" :> "calendars" :>
+       Capture "calendarId" Text
+       :> "events"
+       :> "quickAdd"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "text" Text
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "sendNotifications" Bool
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Creates an event.
+type EventsInsert =
+     "calendar" :> "v3" :> "calendars" :>
+       Capture "calendarId" Text
+       :> "events"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "maxAttendees" Natural
+       :> QueryParam "key" Text
+       :> QueryParam "sendNotifications" Bool
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "supportsAttachments" Bool
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Returns events on the specified calendar.
+type EventsList =
+     "calendar" :> "v3" :> "calendars" :>
+       Capture "calendarId" Text
+       :> "events"
+       :> QueryParam "syncToken" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "timeMin" UTCTime
+       :> QueryParam "orderBy" Text
+       :> QueryParam "singleEvents" Bool
+       :> QueryParam "privateExtendedProperty" Text
+       :> QueryParam "userIp" Text
+       :> QueryParam "showDeleted" Bool
+       :> QueryParam "q" Text
+       :> QueryParam "sharedExtendedProperty" Text
+       :> QueryParam "maxAttendees" Natural
+       :> QueryParam "key" Text
+       :> QueryParam "iCalUID" Text
+       :> QueryParam "updatedMin" UTCTime
+       :> QueryParam "pageToken" Text
+       :> QueryParam "timeZone" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "showHiddenInvitations" Bool
+       :> QueryParam "maxResults" Natural
+       :> QueryParam "alwaysIncludeEmail" Bool
+       :> QueryParam "timeMax" UTCTime
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Updates an event. This method supports patch semantics.
+type EventsPatch =
+     "calendar" :> "v3" :> "calendars" :>
+       Capture "calendarId" Text
+       :> "events"
+       :> Capture "eventId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "maxAttendees" Natural
+       :> QueryParam "key" Text
+       :> QueryParam "sendNotifications" Bool
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "supportsAttachments" Bool
+       :> QueryParam "alwaysIncludeEmail" Bool
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Returns an event.
+type EventsGet =
+     "calendar" :> "v3" :> "calendars" :>
+       Capture "calendarId" Text
+       :> "events"
+       :> Capture "eventId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "maxAttendees" Natural
+       :> QueryParam "key" Text
+       :> QueryParam "timeZone" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "alwaysIncludeEmail" Bool
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Returns instances of the specified recurring event.
+type EventsInstances =
+     "calendar" :> "v3" :> "calendars" :>
+       Capture "calendarId" Text
+       :> "events"
+       :> Capture "eventId" Text
+       :> "instances"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "timeMin" UTCTime
+       :> QueryParam "userIp" Text
+       :> QueryParam "showDeleted" Bool
+       :> QueryParam "originalStart" Text
+       :> QueryParam "maxAttendees" Natural
+       :> QueryParam "key" Text
+       :> QueryParam "pageToken" Text
+       :> QueryParam "timeZone" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "maxResults" Natural
+       :> QueryParam "alwaysIncludeEmail" Bool
+       :> QueryParam "timeMax" UTCTime
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Imports an event. This operation is used to add a private copy of an
+-- existing event to a calendar.
+type EventsImport =
+     "calendar" :> "v3" :> "calendars" :>
+       Capture "calendarId" Text
+       :> "events"
+       :> "import"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "supportsAttachments" Bool
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Deletes an event.
+type EventsDelete =
+     "calendar" :> "v3" :> "calendars" :>
+       Capture "calendarId" Text
+       :> "events"
+       :> Capture "eventId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "sendNotifications" Bool
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Updates an event.
+type EventsUpdate =
+     "calendar" :> "v3" :> "calendars" :>
+       Capture "calendarId" Text
+       :> "events"
+       :> Capture "eventId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "maxAttendees" Natural
+       :> QueryParam "key" Text
+       :> QueryParam "sendNotifications" Bool
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "supportsAttachments" Bool
+       :> QueryParam "alwaysIncludeEmail" Bool
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Moves an event to another calendar, i.e. changes an event\'s organizer.
+type EventsMove =
+     "calendar" :> "v3" :> "calendars" :>
+       Capture "calendarId" Text
+       :> "events"
+       :> Capture "eventId" Text
+       :> "move"
+       :> QueryParam "destination" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "sendNotifications" Bool
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Watch for changes to Events resources.
+type EventsWatch =
+     "calendar" :> "v3" :> "calendars" :>
+       Capture "calendarId" Text
+       :> "events"
+       :> "watch"
+       :> QueryParam "syncToken" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "timeMin" UTCTime
+       :> QueryParam "orderBy" Text
+       :> QueryParam "singleEvents" Bool
+       :> QueryParam "privateExtendedProperty" Text
+       :> QueryParam "userIp" Text
+       :> QueryParam "showDeleted" Bool
+       :> QueryParam "q" Text
+       :> QueryParam "sharedExtendedProperty" Text
+       :> QueryParam "maxAttendees" Natural
+       :> QueryParam "key" Text
+       :> QueryParam "iCalUID" Text
+       :> QueryParam "updatedMin" UTCTime
+       :> QueryParam "pageToken" Text
+       :> QueryParam "timeZone" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "showHiddenInvitations" Bool
+       :> QueryParam "maxResults" Natural
+       :> QueryParam "alwaysIncludeEmail" Bool
+       :> QueryParam "timeMax" UTCTime
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type CalendarListAPI =
+     CalendarListList :<|>
+       CalendarListPatch :<|>
+         CalendarListGet :<|>
+           CalendarListDelete :<|>
+             CalendarListUpdate :<|>
+               CalendarListWatch :<|> CalendarListInsert
+
+-- | Adds an entry to the user\'s calendar list.
+type CalendarListInsert =
+     "calendar" :> "v3" :> "users" :> "me" :>
+       "calendarList"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "colorRgbFormat" Bool
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Returns entries on the user\'s calendar list.
+type CalendarListList =
+     "calendar" :> "v3" :> "users" :> "me" :>
+       "calendarList"
+       :> QueryParam "syncToken" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "minAccessRole" Text
+       :> QueryParam "userIp" Text
+       :> QueryParam "showDeleted" Bool
+       :> QueryParam "showHidden" Bool
+       :> QueryParam "key" Text
+       :> QueryParam "pageToken" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "maxResults" Natural
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Updates an entry on the user\'s calendar list. This method supports
+-- patch semantics.
+type CalendarListPatch =
+     "calendar" :> "v3" :> "users" :> "me" :>
+       "calendarList"
+       :> Capture "calendarId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "colorRgbFormat" Bool
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Returns an entry on the user\'s calendar list.
+type CalendarListGet =
+     "calendar" :> "v3" :> "users" :> "me" :>
+       "calendarList"
+       :> Capture "calendarId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Deletes an entry on the user\'s calendar list.
+type CalendarListDelete =
+     "calendar" :> "v3" :> "users" :> "me" :>
+       "calendarList"
+       :> Capture "calendarId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Updates an entry on the user\'s calendar list.
+type CalendarListUpdate =
+     "calendar" :> "v3" :> "users" :> "me" :>
+       "calendarList"
+       :> Capture "calendarId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "colorRgbFormat" Bool
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Watch for changes to CalendarList resources.
+type CalendarListWatch =
+     "calendar" :> "v3" :> "users" :> "me" :>
+       "calendarList"
+       :> "watch"
+       :> QueryParam "syncToken" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "minAccessRole" Text
+       :> QueryParam "userIp" Text
+       :> QueryParam "showDeleted" Bool
+       :> QueryParam "showHidden" Bool
+       :> QueryParam "key" Text
+       :> QueryParam "pageToken" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "maxResults" Natural
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type AclAPI =
+     AclList :<|>
+       AclPatch :<|>
+         AclGet :<|>
+           AclDelete :<|> AclUpdate :<|> AclWatch :<|> AclInsert
+
+-- | Creates an access control rule.
+type AclInsert =
+     "calendar" :> "v3" :> "calendars" :>
+       Capture "calendarId" Text
+       :> "acl"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Returns the rules in the access control list for the calendar.
+type AclList =
+     "calendar" :> "v3" :> "calendars" :>
+       Capture "calendarId" Text
+       :> "acl"
+       :> QueryParam "syncToken" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "showDeleted" Bool
+       :> QueryParam "key" Text
+       :> QueryParam "pageToken" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "maxResults" Natural
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Updates an access control rule. This method supports patch semantics.
+type AclPatch =
+     "calendar" :> "v3" :> "calendars" :>
+       Capture "calendarId" Text
+       :> "acl"
+       :> Capture "ruleId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Returns an access control rule.
+type AclGet =
+     "calendar" :> "v3" :> "calendars" :>
+       Capture "calendarId" Text
+       :> "acl"
+       :> Capture "ruleId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Deletes an access control rule.
+type AclDelete =
+     "calendar" :> "v3" :> "calendars" :>
+       Capture "calendarId" Text
+       :> "acl"
+       :> Capture "ruleId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Updates an access control rule.
+type AclUpdate =
+     "calendar" :> "v3" :> "calendars" :>
+       Capture "calendarId" Text
+       :> "acl"
+       :> Capture "ruleId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Watch for changes to ACL resources.
+type AclWatch =
+     "calendar" :> "v3" :> "calendars" :>
+       Capture "calendarId" Text
+       :> "acl"
+       :> "watch"
+       :> QueryParam "syncToken" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "showDeleted" Bool
+       :> QueryParam "key" Text
+       :> QueryParam "pageToken" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "maxResults" Natural
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type ColorsAPI = ColorsGet
+
+-- | Returns the color definitions for calendars and events.
+type ColorsGet =
+     "calendar" :> "v3" :> "colors" :>
+       QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type FreebusyAPI = FreebusyQuery
+
+-- | Returns free\/busy information for a set of calendars.
+type FreebusyQuery =
+     "calendar" :> "v3" :> "freeBusy" :>
+       QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text

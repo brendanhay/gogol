@@ -14,7 +14,10 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    Pending
+    API for spectrum-management functions.
+    .
+    /Warning:/ This is an experimental preview release which is still under
+    heavy development and not intended for public consumption, caveat emptor!
 
 source-repository head
     type:     git
@@ -27,12 +30,12 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.SpectrumDatabase
-        , Network.Google.SpectrumDatabase.Types
+          Network.Google.Spectrum
+        , Network.Google.Spectrum.Types
 
     other-modules:
-          Network.Google.SpectrumDatabase.Types.Product
-        , Network.Google.SpectrumDatabase.Types.Sum
+          Network.Google.Spectrum.Types.Product
+        , Network.Google.Spectrum.Types.Sum
 
     build-depends:
           gogol-core == 0.0.1.*

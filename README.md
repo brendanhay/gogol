@@ -1,5 +1,9 @@
 # Gogol
 
+**Warning:** This is an experimental preview release which is still under
+heavy development and not intended for public consumption, caveat emptor!
+
+
 * [Description](#description)
 * [Contribute](#contribute)
 * [Licence](#licence)
@@ -9,6 +13,7 @@
 
 <img alt="Гоголь-моголь" height="261px;" src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Kogel_mogel.JPG">
 <img alt="Мико́ла Васи́льович Го́голь" height="261px" src="https://upload.wikimedia.org/wikipedia/commons/3/31/NV_Gogol.png">
+
 
 ## Contribute
 

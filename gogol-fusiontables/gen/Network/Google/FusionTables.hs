@@ -1,3 +1,9 @@
+{-# LANGUAGE DataKinds     #-}
+{-# LANGUAGE TypeOperators #-}
+
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+
 -- |
 -- Module      : Network.Google.FusionTables
 -- Copyright   : (c) 2015 Brendan Hay
@@ -6,15 +12,52 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- API for working with Fusion Tables data.
+-- -- | API for working with Fusion Tables data.
 --
 -- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference>
 module Network.Google.FusionTables
     (
-    -- * API Definition
+    -- * Resources
       FusionTables
-
-
+    , StyleAPI
+    , StyleInsert
+    , StyleList
+    , StylePatch
+    , StyleGet
+    , StyleDelete
+    , StyleUpdate
+    , QueryAPI
+    , QuerySqlGet
+    , QuerySql
+    , TaskAPI
+    , TaskList
+    , TaskGet
+    , TaskDelete
+    , TemplateAPI
+    , TemplateInsert
+    , TemplateList
+    , TemplatePatch
+    , TemplateGet
+    , TemplateDelete
+    , TemplateUpdate
+    , ColumnAPI
+    , ColumnInsert
+    , ColumnList
+    , ColumnPatch
+    , ColumnGet
+    , ColumnDelete
+    , ColumnUpdate
+    , TableAPI
+    , TableInsert
+    , TableList
+    , TableCopy
+    , TableReplaceRows
+    , TableImportTable
+    , TablePatch
+    , TableGet
+    , TableImportRows
+    , TableDelete
+    , TableUpdate
 
     -- * Types
 
@@ -229,11 +272,510 @@ import           Network.Google.FusionTables.Types
 TODO
 -}
 
-type FusionTables = ()
+type FusionTables =
+     QueryAPI :<|>
+       TaskAPI :<|>
+         TemplateAPI :<|>
+           ColumnAPI :<|> TableAPI :<|> StyleAPI
 
-fusionTables :: Proxy FusionTables
-fusionTables = Proxy
+type StyleAPI =
+     StyleList :<|>
+       StylePatch :<|>
+         StyleGet :<|>
+           StyleDelete :<|> StyleUpdate :<|> StyleInsert
 
+-- | Adds a new style for the table.
+type StyleInsert =
+     "fusiontables" :> "v2" :> "tables" :>
+       Capture "tableId" Text
+       :> "styles"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
+-- | Retrieves a list of styles.
+type StyleList =
+     "fusiontables" :> "v2" :> "tables" :>
+       Capture "tableId" Text
+       :> "styles"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "pageToken" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "maxResults" Word32
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
+-- | Updates an existing style. This method supports patch semantics.
+type StylePatch =
+     "fusiontables" :> "v2" :> "tables" :>
+       Capture "tableId" Text
+       :> "styles"
+       :> Capture "styleId" Int32
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
+-- | Gets a specific style.
+type StyleGet =
+     "fusiontables" :> "v2" :> "tables" :>
+       Capture "tableId" Text
+       :> "styles"
+       :> Capture "styleId" Int32
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Deletes a style.
+type StyleDelete =
+     "fusiontables" :> "v2" :> "tables" :>
+       Capture "tableId" Text
+       :> "styles"
+       :> Capture "styleId" Int32
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Updates an existing style.
+type StyleUpdate =
+     "fusiontables" :> "v2" :> "tables" :>
+       Capture "tableId" Text
+       :> "styles"
+       :> Capture "styleId" Int32
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type QueryAPI = QuerySql :<|> QuerySqlGet
+
+-- | Executes a SQL statement which can be any of - SELECT - SHOW - DESCRIBE
+type QuerySqlGet =
+     "fusiontables" :> "v2" :> "query" :>
+       QueryParam "typed" Bool
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "hdrs" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "sql" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Executes a Fusion Tables SQL statement, which can be any of - SELECT -
+-- INSERT - UPDATE - DELETE - SHOW - DESCRIBE - CREATE statement.
+type QuerySql =
+     "fusiontables" :> "v2" :> "query" :>
+       QueryParam "typed" Bool
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "hdrs" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "sql" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type TaskAPI = TaskGet :<|> TaskDelete :<|> TaskList
+
+-- | Retrieves a list of tasks.
+type TaskList =
+     "fusiontables" :> "v2" :> "tables" :>
+       Capture "tableId" Text
+       :> "tasks"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "pageToken" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "startIndex" Word32
+       :> QueryParam "maxResults" Word32
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Retrieves a specific task by its ID.
+type TaskGet =
+     "fusiontables" :> "v2" :> "tables" :>
+       Capture "tableId" Text
+       :> "tasks"
+       :> Capture "taskId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Deletes a specific task by its ID, unless that task has already started
+-- running.
+type TaskDelete =
+     "fusiontables" :> "v2" :> "tables" :>
+       Capture "tableId" Text
+       :> "tasks"
+       :> Capture "taskId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type TemplateAPI =
+     TemplateList :<|>
+       TemplatePatch :<|>
+         TemplateGet :<|>
+           TemplateDelete :<|>
+             TemplateUpdate :<|> TemplateInsert
+
+-- | Creates a new template for the table.
+type TemplateInsert =
+     "fusiontables" :> "v2" :> "tables" :>
+       Capture "tableId" Text
+       :> "templates"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Retrieves a list of templates.
+type TemplateList =
+     "fusiontables" :> "v2" :> "tables" :>
+       Capture "tableId" Text
+       :> "templates"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "pageToken" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "maxResults" Word32
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Updates an existing template. This method supports patch semantics.
+type TemplatePatch =
+     "fusiontables" :> "v2" :> "tables" :>
+       Capture "tableId" Text
+       :> "templates"
+       :> Capture "templateId" Int32
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Retrieves a specific template by its id
+type TemplateGet =
+     "fusiontables" :> "v2" :> "tables" :>
+       Capture "tableId" Text
+       :> "templates"
+       :> Capture "templateId" Int32
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Deletes a template
+type TemplateDelete =
+     "fusiontables" :> "v2" :> "tables" :>
+       Capture "tableId" Text
+       :> "templates"
+       :> Capture "templateId" Int32
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Updates an existing template
+type TemplateUpdate =
+     "fusiontables" :> "v2" :> "tables" :>
+       Capture "tableId" Text
+       :> "templates"
+       :> Capture "templateId" Int32
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type ColumnAPI =
+     ColumnList :<|>
+       ColumnPatch :<|>
+         ColumnGet :<|>
+           ColumnDelete :<|> ColumnUpdate :<|> ColumnInsert
+
+-- | Adds a new column to the table.
+type ColumnInsert =
+     "fusiontables" :> "v2" :> "tables" :>
+       Capture "tableId" Text
+       :> "columns"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Retrieves a list of columns.
+type ColumnList =
+     "fusiontables" :> "v2" :> "tables" :>
+       Capture "tableId" Text
+       :> "columns"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "pageToken" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "maxResults" Word32
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Updates the name or type of an existing column. This method supports
+-- patch semantics.
+type ColumnPatch =
+     "fusiontables" :> "v2" :> "tables" :>
+       Capture "tableId" Text
+       :> "columns"
+       :> Capture "columnId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Retrieves a specific column by its ID.
+type ColumnGet =
+     "fusiontables" :> "v2" :> "tables" :>
+       Capture "tableId" Text
+       :> "columns"
+       :> Capture "columnId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Deletes the specified column.
+type ColumnDelete =
+     "fusiontables" :> "v2" :> "tables" :>
+       Capture "tableId" Text
+       :> "columns"
+       :> Capture "columnId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Updates the name or type of an existing column.
+type ColumnUpdate =
+     "fusiontables" :> "v2" :> "tables" :>
+       Capture "tableId" Text
+       :> "columns"
+       :> Capture "columnId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type TableAPI =
+     TableList :<|>
+       TableCopy :<|>
+         TableReplaceRows :<|>
+           TableImportTable :<|>
+             TablePatch :<|>
+               TableGet :<|>
+                 TableImportRows :<|>
+                   TableDelete :<|> TableUpdate :<|> TableInsert
+
+-- | Creates a new table.
+type TableInsert =
+     "fusiontables" :> "v2" :> "tables" :>
+       QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Retrieves a list of tables a user owns.
+type TableList =
+     "fusiontables" :> "v2" :> "tables" :>
+       QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "pageToken" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "maxResults" Word32
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Copies a table.
+type TableCopy =
+     "fusiontables" :> "v2" :> "tables" :>
+       Capture "tableId" Text
+       :> "copy"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "copyPresentation" Bool
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Replaces rows of an existing table. Current rows remain visible until
+-- all replacement rows are ready.
+type TableReplaceRows =
+     "fusiontables" :> "v2" :> "tables" :>
+       Capture "tableId" Text
+       :> "replace"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "startLine" Int32
+       :> QueryParam "endLine" Int32
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "delimiter" Text
+       :> QueryParam "encoding" Text
+       :> QueryParam "isStrict" Bool
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Imports a new table.
+type TableImportTable =
+     "fusiontables" :> "v2" :> "tables" :> "import" :>
+       QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "name" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "delimiter" Text
+       :> QueryParam "encoding" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Updates an existing table. Unless explicitly requested, only the name,
+-- description, and attribution will be updated. This method supports patch
+-- semantics.
+type TablePatch =
+     "fusiontables" :> "v2" :> "tables" :>
+       Capture "tableId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "replaceViewDefinition" Bool
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Retrieves a specific table by its ID.
+type TableGet =
+     "fusiontables" :> "v2" :> "tables" :>
+       Capture "tableId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Imports more rows into a table.
+type TableImportRows =
+     "fusiontables" :> "v2" :> "tables" :>
+       Capture "tableId" Text
+       :> "import"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "startLine" Int32
+       :> QueryParam "endLine" Int32
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "delimiter" Text
+       :> QueryParam "encoding" Text
+       :> QueryParam "isStrict" Bool
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Deletes a table.
+type TableDelete =
+     "fusiontables" :> "v2" :> "tables" :>
+       Capture "tableId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Updates an existing table. Unless explicitly requested, only the name,
+-- description, and attribution will be updated.
+type TableUpdate =
+     "fusiontables" :> "v2" :> "tables" :>
+       Capture "tableId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "replaceViewDefinition" Bool
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text

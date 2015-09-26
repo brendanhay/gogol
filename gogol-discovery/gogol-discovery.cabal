@@ -14,7 +14,11 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    Pending
+    Lets you discover information about other Google APIs, such as what APIs
+    are available, the resource and method details for each API.
+    .
+    /Warning:/ This is an experimental preview release which is still under
+    heavy development and not intended for public consumption, caveat emptor!
 
 source-repository head
     type:     git
@@ -27,12 +31,12 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.APIsDiscoveryService
-        , Network.Google.APIsDiscoveryService.Types
+          Network.Google.Discovery
+        , Network.Google.Discovery.Types
 
     other-modules:
-          Network.Google.APIsDiscoveryService.Types.Product
-        , Network.Google.APIsDiscoveryService.Types.Sum
+          Network.Google.Discovery.Types.Product
+        , Network.Google.Discovery.Types.Sum
 
     build-depends:
           gogol-core == 0.0.1.*

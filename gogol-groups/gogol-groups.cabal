@@ -14,7 +14,11 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    Pending
+    Groups Migration Api.
+    Lets you manage permission levels and related settings of a group.
+    .
+    /Warning:/ This is an experimental preview release which is still under
+    heavy development and not intended for public consumption, caveat emptor!
 
 source-repository head
     type:     git

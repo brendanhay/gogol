@@ -14,7 +14,10 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    Pending
+    The Google Fonts Developer API.
+    .
+    /Warning:/ This is an experimental preview release which is still under
+    heavy development and not intended for public consumption, caveat emptor!
 
 source-repository head
     type:     git
@@ -27,12 +30,12 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.FontsDeveloper
-        , Network.Google.FontsDeveloper.Types
+          Network.Google.WebFonts
+        , Network.Google.WebFonts.Types
 
     other-modules:
-          Network.Google.FontsDeveloper.Types.Product
-        , Network.Google.FontsDeveloper.Types.Sum
+          Network.Google.WebFonts.Types.Product
+        , Network.Google.WebFonts.Types.Sum
 
     build-depends:
           gogol-core == 0.0.1.*

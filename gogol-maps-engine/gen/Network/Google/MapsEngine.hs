@@ -1,3 +1,9 @@
+{-# LANGUAGE DataKinds     #-}
+{-# LANGUAGE TypeOperators #-}
+
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+
 -- |
 -- Module      : Network.Google.MapsEngine
 -- Copyright   : (c) 2015 Brendan Hay
@@ -6,15 +12,71 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Google Maps Engine API allows developers to store and query geospatial vector and raster data.
+-- -- | The Google Maps Engine API allows developers to store and query
+-- geospatial vector and raster data.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference>
 module Network.Google.MapsEngine
     (
-    -- * API Definition
+    -- * Resources
       MapsEngine
-
-
+    , MapsAPI
+    , PermissionsAPI
+    , PermissionsList
+    , PermissionsBatchUpdate
+    , PermissionsBatchDelete
+    , TablesAPI
+    , ParentsAPI
+    , ParentsList
+    , FeaturesAPI
+    , FeaturesList
+    , FeaturesBatchInsert
+    , FeaturesGet
+    , FeaturesBatchPatch
+    , FeaturesBatchDelete
+    , FilesAPI
+    , FilesInsert
+    , PermissionsAPI
+    , PermissionsList
+    , PermissionsBatchUpdate
+    , PermissionsBatchDelete
+    , LayersAPI
+    , ParentsAPI
+    , ParentsList
+    , PermissionsAPI
+    , PermissionsList
+    , PermissionsBatchUpdate
+    , PermissionsBatchDelete
+    , RastersAPI
+    , ParentsAPI
+    , ParentsList
+    , FilesAPI
+    , FilesInsert
+    , PermissionsAPI
+    , PermissionsList
+    , PermissionsBatchUpdate
+    , PermissionsBatchDelete
+    , AssetsAPI
+    , ParentsAPI
+    , ParentsList
+    , PermissionsAPI
+    , PermissionsList
+    , ProjectsAPI
+    , IconsAPI
+    , IconsList
+    , IconsGet
+    , IconsCreate
+    , RasterCollectionsAPI
+    , ParentsAPI
+    , ParentsList
+    , PermissionsAPI
+    , PermissionsList
+    , PermissionsBatchUpdate
+    , PermissionsBatchDelete
+    , RastersAPI
+    , RastersList
+    , RastersBatchInsert
+    , RastersBatchDelete
 
     -- * Types
 
@@ -708,11 +770,588 @@ import           Network.Google.MapsEngine.Types
 TODO
 -}
 
-type MapsEngine = ()
+type MapsEngine =
+     TablesAPI :<|>
+       LayersAPI :<|>
+         RastersAPI :<|>
+           AssetsAPI :<|>
+             ProjectsAPI :<|> RasterCollectionsAPI :<|> MapsAPI
 
-mapsEngine :: Proxy MapsEngine
-mapsEngine = Proxy
+type MapsAPI = PermissionsAPI
 
+type PermissionsAPI =
+     PermissionsBatchUpdate :<|>
+       PermissionsBatchDelete :<|> PermissionsList
 
+-- | Return all of the permissions for the specified asset.
+type PermissionsList =
+     "mapsengine" :> "v1" :> "maps" :> Capture "id" Text
+       :> "permissions"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
+-- | Add or update permission entries to an already existing asset. An asset
+-- can hold up to 20 different permission entries. Each batchInsert request
+-- is atomic.
+type PermissionsBatchUpdate =
+     "mapsengine" :> "v1" :> "maps" :> Capture "id" Text
+       :> "permissions"
+       :> "batchUpdate"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
+-- | Remove permission entries from an already existing asset.
+type PermissionsBatchDelete =
+     "mapsengine" :> "v1" :> "maps" :> Capture "id" Text
+       :> "permissions"
+       :> "batchDelete"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type TablesAPI =
+     FeaturesAPI :<|>
+       FilesAPI :<|> PermissionsAPI :<|> ParentsAPI
+
+type ParentsAPI = ParentsList
+
+-- | Return all parent ids of the specified table.
+type ParentsList =
+     "mapsengine" :> "v1" :> "tables" :> Capture "id" Text
+       :> "parents"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "pageToken" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "maxResults" Word32
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type FeaturesAPI =
+     FeaturesBatchInsert :<|>
+       FeaturesGet :<|>
+         FeaturesBatchPatch :<|>
+           FeaturesBatchDelete :<|> FeaturesList
+
+-- | Return all features readable by the current user.
+type FeaturesList =
+     "mapsengine" :> "v1" :> "tables" :> Capture "id" Text
+       :> "features"
+       :> QueryParam "include" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "where" Text
+       :> QueryParam "orderBy" Text
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "version" Text
+       :> QueryParam "limit" Word32
+       :> QueryParam "pageToken" Text
+       :> QueryParam "select" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "intersects" Text
+       :> QueryParam "maxResults" Word32
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Append features to an existing table. A single batchInsert request can
+-- create: - Up to 50 features. - A combined total of 10 000 vertices.
+-- Feature limits are documented in the Supported data formats and limits
+-- article of the Google Maps Engine help center. Note that free and paid
+-- accounts have different limits. For more information about inserting
+-- features, read Creating features in the Google Maps Engine developer\'s
+-- guide.
+type FeaturesBatchInsert =
+     "mapsengine" :> "v1" :> "tables" :> Capture "id" Text
+       :> "features"
+       :> "batchInsert"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Return a single feature, given its ID.
+type FeaturesGet =
+     "mapsengine" :> "v1" :> "tables" :>
+       Capture "tableId" Text
+       :> "features"
+       :> Capture "id" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "version" Text
+       :> QueryParam "select" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Update the supplied features. A single batchPatch request can update: -
+-- Up to 50 features. - A combined total of 10 000 vertices. Feature limits
+-- are documented in the Supported data formats and limits article of the
+-- Google Maps Engine help center. Note that free and paid accounts have
+-- different limits. Feature updates use HTTP PATCH semantics: - A supplied
+-- value replaces an existing value (if any) in that field. - Omitted
+-- fields remain unchanged. - Complex values in geometries and properties
+-- must be replaced as atomic units. For example, providing just the
+-- coordinates of a geometry is not allowed; the complete geometry,
+-- including type, must be supplied. - Setting a property\'s value to null
+-- deletes that property. For more information about updating features,
+-- read Updating features in the Google Maps Engine developer\'s guide.
+type FeaturesBatchPatch =
+     "mapsengine" :> "v1" :> "tables" :> Capture "id" Text
+       :> "features"
+       :> "batchPatch"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Delete all features matching the given IDs.
+type FeaturesBatchDelete =
+     "mapsengine" :> "v1" :> "tables" :> Capture "id" Text
+       :> "features"
+       :> "batchDelete"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type FilesAPI = FilesInsert
+
+-- | Upload a file to a placeholder table asset. See Table Upload in the
+-- Developer\'s Guide for more information. Supported file types are listed
+-- in the Supported data formats and limits article of the Google Maps
+-- Engine help center.
+type FilesInsert =
+     "mapsengine" :> "v1" :> "tables" :> Capture "id" Text
+       :> "files"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "filename" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type PermissionsAPI =
+     PermissionsBatchUpdate :<|>
+       PermissionsBatchDelete :<|> PermissionsList
+
+-- | Return all of the permissions for the specified asset.
+type PermissionsList =
+     "mapsengine" :> "v1" :> "tables" :> Capture "id" Text
+       :> "permissions"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Add or update permission entries to an already existing asset. An asset
+-- can hold up to 20 different permission entries. Each batchInsert request
+-- is atomic.
+type PermissionsBatchUpdate =
+     "mapsengine" :> "v1" :> "tables" :> Capture "id" Text
+       :> "permissions"
+       :> "batchUpdate"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Remove permission entries from an already existing asset.
+type PermissionsBatchDelete =
+     "mapsengine" :> "v1" :> "tables" :> Capture "id" Text
+       :> "permissions"
+       :> "batchDelete"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type LayersAPI = PermissionsAPI :<|> ParentsAPI
+
+type ParentsAPI = ParentsList
+
+-- | Return all parent ids of the specified layer.
+type ParentsList =
+     "mapsengine" :> "v1" :> "layers" :> Capture "id" Text
+       :> "parents"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "pageToken" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "maxResults" Word32
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type PermissionsAPI =
+     PermissionsBatchUpdate :<|>
+       PermissionsBatchDelete :<|> PermissionsList
+
+-- | Return all of the permissions for the specified asset.
+type PermissionsList =
+     "mapsengine" :> "v1" :> "layers" :> Capture "id" Text
+       :> "permissions"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Add or update permission entries to an already existing asset. An asset
+-- can hold up to 20 different permission entries. Each batchInsert request
+-- is atomic.
+type PermissionsBatchUpdate =
+     "mapsengine" :> "v1" :> "layers" :> Capture "id" Text
+       :> "permissions"
+       :> "batchUpdate"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Remove permission entries from an already existing asset.
+type PermissionsBatchDelete =
+     "mapsengine" :> "v1" :> "layers" :> Capture "id" Text
+       :> "permissions"
+       :> "batchDelete"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type RastersAPI =
+     FilesAPI :<|> PermissionsAPI :<|> ParentsAPI
+
+type ParentsAPI = ParentsList
+
+-- | Return all parent ids of the specified rasters.
+type ParentsList =
+     "mapsengine" :> "v1" :> "rasters" :>
+       Capture "id" Text
+       :> "parents"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "pageToken" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "maxResults" Word32
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type FilesAPI = FilesInsert
+
+-- | Upload a file to a raster asset.
+type FilesInsert =
+     "mapsengine" :> "v1" :> "rasters" :>
+       Capture "id" Text
+       :> "files"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "filename" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type PermissionsAPI =
+     PermissionsBatchUpdate :<|>
+       PermissionsBatchDelete :<|> PermissionsList
+
+-- | Return all of the permissions for the specified asset.
+type PermissionsList =
+     "mapsengine" :> "v1" :> "rasters" :>
+       Capture "id" Text
+       :> "permissions"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Add or update permission entries to an already existing asset. An asset
+-- can hold up to 20 different permission entries. Each batchInsert request
+-- is atomic.
+type PermissionsBatchUpdate =
+     "mapsengine" :> "v1" :> "rasters" :>
+       Capture "id" Text
+       :> "permissions"
+       :> "batchUpdate"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Remove permission entries from an already existing asset.
+type PermissionsBatchDelete =
+     "mapsengine" :> "v1" :> "rasters" :>
+       Capture "id" Text
+       :> "permissions"
+       :> "batchDelete"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type AssetsAPI = PermissionsAPI :<|> ParentsAPI
+
+type ParentsAPI = ParentsList
+
+-- | Return all parent ids of the specified asset.
+type ParentsList =
+     "mapsengine" :> "v1" :> "assets" :> Capture "id" Text
+       :> "parents"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "pageToken" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "maxResults" Word32
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type PermissionsAPI = PermissionsList
+
+-- | Return all of the permissions for the specified asset.
+type PermissionsList =
+     "mapsengine" :> "v1" :> "assets" :> Capture "id" Text
+       :> "permissions"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type ProjectsAPI = IconsAPI
+
+type IconsAPI =
+     IconsGet :<|> IconsCreate :<|> IconsList
+
+-- | Return all icons in the current project
+type IconsList =
+     "mapsengine" :> "v1" :> "projects" :>
+       Capture "projectId" Text
+       :> "icons"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "pageToken" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "maxResults" Word32
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Return an icon or its associated metadata
+type IconsGet =
+     "mapsengine" :> "v1" :> "projects" :>
+       Capture "projectId" Text
+       :> "icons"
+       :> Capture "id" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Create an icon.
+type IconsCreate =
+     "mapsengine" :> "v1" :> "projects" :>
+       Capture "projectId" Text
+       :> "icons"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type RasterCollectionsAPI =
+     PermissionsAPI :<|> RastersAPI :<|> ParentsAPI
+
+type ParentsAPI = ParentsList
+
+-- | Return all parent ids of the specified raster collection.
+type ParentsList =
+     "mapsengine" :> "v1" :> "rasterCollections" :>
+       Capture "id" Text
+       :> "parents"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "pageToken" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "maxResults" Word32
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type PermissionsAPI =
+     PermissionsBatchUpdate :<|>
+       PermissionsBatchDelete :<|> PermissionsList
+
+-- | Return all of the permissions for the specified asset.
+type PermissionsList =
+     "mapsengine" :> "v1" :> "rasterCollections" :>
+       Capture "id" Text
+       :> "permissions"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Add or update permission entries to an already existing asset. An asset
+-- can hold up to 20 different permission entries. Each batchInsert request
+-- is atomic.
+type PermissionsBatchUpdate =
+     "mapsengine" :> "v1" :> "rasterCollections" :>
+       Capture "id" Text
+       :> "permissions"
+       :> "batchUpdate"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Remove permission entries from an already existing asset.
+type PermissionsBatchDelete =
+     "mapsengine" :> "v1" :> "rasterCollections" :>
+       Capture "id" Text
+       :> "permissions"
+       :> "batchDelete"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type RastersAPI =
+     RastersBatchInsert :<|>
+       RastersBatchDelete :<|> RastersList
+
+-- | Return all rasters within a raster collection.
+type RastersList =
+     "mapsengine" :> "v1" :> "rasterCollections" :>
+       Capture "id" Text
+       :> "rasters"
+       :> QueryParam "createdAfter" UTCTime
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "creatorEmail" Text
+       :> QueryParam "role" Text
+       :> QueryParam "key" Text
+       :> QueryParam "bbox" Text
+       :> QueryParam "modifiedAfter" UTCTime
+       :> QueryParam "modifiedBefore" UTCTime
+       :> QueryParam "pageToken" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "search" Text
+       :> QueryParam "maxResults" Word32
+       :> QueryParam "tags" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "createdBefore" UTCTime
+       :> QueryParam "alt" Text
+
+-- | Add rasters to an existing raster collection. Rasters must be
+-- successfully processed in order to be added to a raster collection. Up
+-- to 50 rasters can be included in a single batchInsert request. Each
+-- batchInsert request is atomic.
+type RastersBatchInsert =
+     "mapsengine" :> "v1" :> "rasterCollections" :>
+       Capture "id" Text
+       :> "rasters"
+       :> "batchInsert"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Remove rasters from an existing raster collection. Up to 50 rasters can
+-- be included in a single batchDelete request. Each batchDelete request is
+-- atomic.
+type RastersBatchDelete =
+     "mapsengine" :> "v1" :> "rasterCollections" :>
+       Capture "id" Text
+       :> "rasters"
+       :> "batchDelete"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text

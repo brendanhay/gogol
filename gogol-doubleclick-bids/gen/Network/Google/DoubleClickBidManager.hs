@@ -1,3 +1,9 @@
+{-# LANGUAGE DataKinds     #-}
+{-# LANGUAGE TypeOperators #-}
+
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+
 -- |
 -- Module      : Network.Google.DoubleClickBidManager
 -- Copyright   : (c) 2015 Brendan Hay
@@ -6,15 +12,24 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- API for viewing and managing your reports in DoubleClick Bid Manager.
+-- -- | API for viewing and managing your reports in DoubleClick Bid Manager.
 --
 -- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference>
 module Network.Google.DoubleClickBidManager
     (
-    -- * API Definition
+    -- * Resources
       DoubleClickBidManager
-
-
+    , QueriesAPI
+    , QueriesGetquery
+    , QueriesRunquery
+    , QueriesDeletequery
+    , QueriesCreatequery
+    , QueriesListqueries
+    , ReportsAPI
+    , ReportsListreports
+    , LineitemsAPI
+    , LineitemsUploadlineitems
+    , LineitemsDownloadlineitems
 
     -- * Types
 
@@ -211,11 +226,112 @@ import           Network.Google.DoubleClickBidManager.Types
 TODO
 -}
 
-type DoubleClickBidManager = ()
+type DoubleClickBidManager =
+     ReportsAPI :<|> LineitemsAPI :<|> QueriesAPI
 
-doubleClickBidManager :: Proxy DoubleClickBidManager
-doubleClickBidManager = Proxy
+type QueriesAPI =
+     QueriesRunquery :<|>
+       QueriesDeletequery :<|>
+         QueriesCreatequery :<|>
+           QueriesListqueries :<|> QueriesGetquery
 
+-- | Retrieves a stored query.
+type QueriesGetquery =
+     "doubleclickbidmanager" :> "v1" :> "query" :>
+       Capture "queryId" Int64
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
+-- | Runs a stored query to generate a report.
+type QueriesRunquery =
+     "doubleclickbidmanager" :> "v1" :> "query" :>
+       Capture "queryId" Int64
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
+-- | Deletes a stored query as well as the associated stored reports.
+type QueriesDeletequery =
+     "doubleclickbidmanager" :> "v1" :> "query" :>
+       Capture "queryId" Int64
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
+-- | Creates a query.
+type QueriesCreatequery =
+     "doubleclickbidmanager" :> "v1" :> "query" :>
+       QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Retrieves stored queries.
+type QueriesListqueries =
+     "doubleclickbidmanager" :> "v1" :> "queries" :>
+       QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type ReportsAPI = ReportsListreports
+
+-- | Retrieves stored reports.
+type ReportsListreports =
+     "doubleclickbidmanager" :> "v1" :> "queries" :>
+       Capture "queryId" Int64
+       :> "reports"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type LineitemsAPI =
+     LineitemsDownloadlineitems :<|>
+       LineitemsUploadlineitems
+
+-- | Uploads line items in CSV format.
+type LineitemsUploadlineitems =
+     "doubleclickbidmanager" :> "v1" :> "lineitems" :>
+       "uploadlineitems"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Retrieves line items in CSV format.
+type LineitemsDownloadlineitems =
+     "doubleclickbidmanager" :> "v1" :> "lineitems" :>
+       "downloadlineitems"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text

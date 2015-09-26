@@ -1,3 +1,9 @@
+{-# LANGUAGE DataKinds     #-}
+{-# LANGUAGE TypeOperators #-}
+
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+
 -- |
 -- Module      : Network.Google.CivicInfo
 -- Copyright   : (c) 2015 Brendan Hay
@@ -6,15 +12,21 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- An API for accessing civic information.
+-- -- | An API for accessing civic information.
 --
 -- /See:/ <https://developers.google.com/civic-information Google Civic Information API Reference>
 module Network.Google.CivicInfo
     (
-    -- * API Definition
+    -- * Resources
       CivicInfo
-
-
+    , ElectionsAPI
+    , ElectionsVoterInfoQuery
+    , ElectionsElectionQuery
+    , DivisionsAPI
+    , DivisionsSearch
+    , RepresentativesAPI
+    , RepresentativesRepresentativeInfoByDivision
+    , RepresentativesRepresentativeInfoByAddress
 
     -- * Types
 
@@ -238,11 +250,84 @@ import           Network.Google.CivicInfo.Types
 TODO
 -}
 
-type CivicInfo = ()
+type CivicInfo =
+     DivisionsAPI :<|>
+       RepresentativesAPI :<|> ElectionsAPI
 
-civicInfo :: Proxy CivicInfo
-civicInfo = Proxy
+type ElectionsAPI =
+     ElectionsElectionQuery :<|> ElectionsVoterInfoQuery
 
+-- | Looks up information relevant to a voter based on the voter\'s
+-- registered address.
+type ElectionsVoterInfoQuery =
+     "civicinfo" :> "v2" :> "voterinfo" :>
+       QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "electionId" Int64
+       :> QueryParam "address" Text
+       :> QueryParam "key" Text
+       :> QueryParam "officialOnly" Bool
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
+-- | List of available elections to query.
+type ElectionsElectionQuery =
+     "civicinfo" :> "v2" :> "elections" :>
+       QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
+type DivisionsAPI = DivisionsSearch
 
+-- | Searches for political divisions by their natural name or OCD ID.
+type DivisionsSearch =
+     "civicinfo" :> "v2" :> "divisions" :>
+       QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "query" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type RepresentativesAPI =
+     RepresentativesRepresentativeInfoByAddress :<|>
+       RepresentativesRepresentativeInfoByDivision
+
+-- | Looks up representative information for a single geographic division.
+type RepresentativesRepresentativeInfoByDivision =
+     "civicinfo" :> "v2" :> "representatives" :>
+       Capture "ocdId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "roles" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "recursive" Bool
+       :> QueryParam "levels" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Looks up political geography and representative information for a single
+-- address.
+type RepresentativesRepresentativeInfoByAddress =
+     "civicinfo" :> "v2" :> "representatives" :>
+       QueryParam "quotaUser" Text
+       :> QueryParam "roles" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "address" Text
+       :> QueryParam "key" Text
+       :> QueryParam "includeOffices" Bool
+       :> QueryParam "levels" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text

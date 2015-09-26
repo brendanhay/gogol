@@ -1,3 +1,9 @@
+{-# LANGUAGE DataKinds     #-}
+{-# LANGUAGE TypeOperators #-}
+
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+
 -- |
 -- Module      : Network.Google.Analytics
 -- Copyright   : (c) 2015 Brendan Hay
@@ -6,15 +12,117 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- View and manage your Google Analytics data
+-- -- | View and manage your Google Analytics data
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference>
 module Network.Google.Analytics
     (
-    -- * API Definition
+    -- * Resources
       Analytics
-
-
+    , DataAPI
+    , McfAPI
+    , McfGet
+    , GaAPI
+    , GaGet
+    , RealtimeAPI
+    , RealtimeGet
+    , ManagementAPI
+    , WebPropertyAdWordsLinksAPI
+    , WebPropertyAdWordsLinksInsert
+    , WebPropertyAdWordsLinksList
+    , WebPropertyAdWordsLinksPatch
+    , WebPropertyAdWordsLinksGet
+    , WebPropertyAdWordsLinksDelete
+    , WebPropertyAdWordsLinksUpdate
+    , UnsampledReportsAPI
+    , UnsampledReportsInsert
+    , UnsampledReportsList
+    , UnsampledReportsGet
+    , AccountsAPI
+    , AccountsList
+    , ExperimentsAPI
+    , ExperimentsInsert
+    , ExperimentsList
+    , ExperimentsPatch
+    , ExperimentsGet
+    , ExperimentsDelete
+    , ExperimentsUpdate
+    , CustomDataSourcesAPI
+    , CustomDataSourcesList
+    , WebpropertyUserLinksAPI
+    , WebpropertyUserLinksInsert
+    , WebpropertyUserLinksList
+    , WebpropertyUserLinksDelete
+    , WebpropertyUserLinksUpdate
+    , ProfilesAPI
+    , ProfilesInsert
+    , ProfilesList
+    , ProfilesPatch
+    , ProfilesGet
+    , ProfilesDelete
+    , ProfilesUpdate
+    , FiltersAPI
+    , FiltersInsert
+    , FiltersList
+    , FiltersPatch
+    , FiltersGet
+    , FiltersDelete
+    , FiltersUpdate
+    , AccountSummariesAPI
+    , AccountSummariesList
+    , GoalsAPI
+    , GoalsInsert
+    , GoalsList
+    , GoalsPatch
+    , GoalsGet
+    , GoalsUpdate
+    , WebpropertiesAPI
+    , WebpropertiesInsert
+    , WebpropertiesList
+    , WebpropertiesPatch
+    , WebpropertiesGet
+    , WebpropertiesUpdate
+    , CustomMetricsAPI
+    , CustomMetricsInsert
+    , CustomMetricsList
+    , CustomMetricsPatch
+    , CustomMetricsGet
+    , CustomMetricsUpdate
+    , UploadsAPI
+    , UploadsList
+    , UploadsDeleteUploadData
+    , UploadsGet
+    , UploadsUploadData
+    , SegmentsAPI
+    , SegmentsList
+    , ProfileFilterLinksAPI
+    , ProfileFilterLinksInsert
+    , ProfileFilterLinksList
+    , ProfileFilterLinksPatch
+    , ProfileFilterLinksGet
+    , ProfileFilterLinksDelete
+    , ProfileFilterLinksUpdate
+    , CustomDimensionsAPI
+    , CustomDimensionsInsert
+    , CustomDimensionsList
+    , CustomDimensionsPatch
+    , CustomDimensionsGet
+    , CustomDimensionsUpdate
+    , AccountUserLinksAPI
+    , AccountUserLinksInsert
+    , AccountUserLinksList
+    , AccountUserLinksDelete
+    , AccountUserLinksUpdate
+    , ProfileUserLinksAPI
+    , ProfileUserLinksInsert
+    , ProfileUserLinksList
+    , ProfileUserLinksDelete
+    , ProfileUserLinksUpdate
+    , ProvisioningAPI
+    , ProvisioningCreateAccountTicket
+    , MetadataAPI
+    , ColumnsAPI
+    , ColumnsList
 
     -- * Types
 
@@ -998,11 +1106,1416 @@ import           Network.Google.Analytics.Types
 TODO
 -}
 
-type Analytics = ()
+type Analytics =
+     ManagementAPI :<|>
+       ProvisioningAPI :<|> MetadataAPI :<|> DataAPI
 
-analytics :: Proxy Analytics
-analytics = Proxy
+type DataAPI = GaAPI :<|> RealtimeAPI :<|> McfAPI
 
+type McfAPI = McfGet
 
+-- | Returns Analytics Multi-Channel Funnels data for a view (profile).
+type McfGet =
+     "analytics" :> "v3" :> "data" :> "mcf" :>
+       QueryParam "quotaUser" Text
+       :> QueryParam "metrics" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "samplingLevel" Text
+       :> QueryParam "userIp" Text
+       :> QueryParam "filters" Text
+       :> QueryParam "ids" Text
+       :> QueryParam "end-date" Text
+       :> QueryParam "key" Text
+       :> QueryParam "sort" Text
+       :> QueryParam "dimensions" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "start-index" Natural
+       :> QueryParam "max-results" Int32
+       :> QueryParam "start-date" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
+type GaAPI = GaGet
 
+-- | Returns Analytics data for a view (profile).
+type GaGet =
+     "analytics" :> "v3" :> "data" :> "ga" :>
+       QueryParam "quotaUser" Text
+       :> QueryParam "metrics" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "samplingLevel" Text
+       :> QueryParam "userIp" Text
+       :> QueryParam "filters" Text
+       :> QueryParam "ids" Text
+       :> QueryParam "end-date" Text
+       :> QueryParam "key" Text
+       :> QueryParam "output" Text
+       :> QueryParam "sort" Text
+       :> QueryParam "dimensions" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "start-index" Natural
+       :> QueryParam "max-results" Int32
+       :> QueryParam "segment" Text
+       :> QueryParam "start-date" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type RealtimeAPI = RealtimeGet
+
+-- | Returns real time data for a view (profile).
+type RealtimeGet =
+     "analytics" :> "v3" :> "data" :> "realtime" :>
+       QueryParam "quotaUser" Text
+       :> QueryParam "metrics" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "filters" Text
+       :> QueryParam "ids" Text
+       :> QueryParam "key" Text
+       :> QueryParam "sort" Text
+       :> QueryParam "dimensions" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "max-results" Int32
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type ManagementAPI =
+     UnsampledReportsAPI :<|>
+       AccountsAPI :<|>
+         ExperimentsAPI :<|>
+           CustomDataSourcesAPI :<|>
+             WebpropertyUserLinksAPI :<|>
+               ProfilesAPI :<|>
+                 FiltersAPI :<|>
+                   AccountSummariesAPI :<|>
+                     GoalsAPI :<|>
+                       WebpropertiesAPI :<|>
+                         CustomMetricsAPI :<|>
+                           UploadsAPI :<|>
+                             SegmentsAPI :<|>
+                               ProfileFilterLinksAPI :<|>
+                                 CustomDimensionsAPI :<|>
+                                   AccountUserLinksAPI :<|>
+                                     ProfileUserLinksAPI :<|>
+                                       WebPropertyAdWordsLinksAPI
+
+type WebPropertyAdWordsLinksAPI =
+     WebPropertyAdWordsLinksList :<|>
+       WebPropertyAdWordsLinksPatch :<|>
+         WebPropertyAdWordsLinksGet :<|>
+           WebPropertyAdWordsLinksDelete :<|>
+             WebPropertyAdWordsLinksUpdate :<|>
+               WebPropertyAdWordsLinksInsert
+
+-- | Creates a webProperty-AdWords link.
+type WebPropertyAdWordsLinksInsert =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "entityAdWordsLinks"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Lists webProperty-AdWords links for a given web property.
+type WebPropertyAdWordsLinksList =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "entityAdWordsLinks"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "start-index" Natural
+       :> QueryParam "max-results" Int32
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Updates an existing webProperty-AdWords link. This method supports patch
+-- semantics.
+type WebPropertyAdWordsLinksPatch =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "entityAdWordsLinks"
+       :> Capture "webPropertyAdWordsLinkId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Returns a web property-AdWords link to which the user has access.
+type WebPropertyAdWordsLinksGet =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "entityAdWordsLinks"
+       :> Capture "webPropertyAdWordsLinkId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Deletes a web property-AdWords link.
+type WebPropertyAdWordsLinksDelete =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "entityAdWordsLinks"
+       :> Capture "webPropertyAdWordsLinkId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Updates an existing webProperty-AdWords link.
+type WebPropertyAdWordsLinksUpdate =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "entityAdWordsLinks"
+       :> Capture "webPropertyAdWordsLinkId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type UnsampledReportsAPI =
+     UnsampledReportsList :<|>
+       UnsampledReportsGet :<|> UnsampledReportsInsert
+
+-- | Create a new unsampled report.
+type UnsampledReportsInsert =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "profiles"
+       :> Capture "profileId" Text
+       :> "unsampledReports"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Lists unsampled reports to which the user has access.
+type UnsampledReportsList =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "profiles"
+       :> Capture "profileId" Text
+       :> "unsampledReports"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "start-index" Natural
+       :> QueryParam "max-results" Int32
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Returns a single unsampled report.
+type UnsampledReportsGet =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "profiles"
+       :> Capture "profileId" Text
+       :> "unsampledReports"
+       :> Capture "unsampledReportId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type AccountsAPI = AccountsList
+
+-- | Lists all accounts to which the user has access.
+type AccountsList =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "start-index" Natural
+       :> QueryParam "max-results" Int32
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type ExperimentsAPI =
+     ExperimentsList :<|>
+       ExperimentsPatch :<|>
+         ExperimentsGet :<|>
+           ExperimentsDelete :<|>
+             ExperimentsUpdate :<|> ExperimentsInsert
+
+-- | Create a new experiment.
+type ExperimentsInsert =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "profiles"
+       :> Capture "profileId" Text
+       :> "experiments"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Lists experiments to which the user has access.
+type ExperimentsList =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "profiles"
+       :> Capture "profileId" Text
+       :> "experiments"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "start-index" Natural
+       :> QueryParam "max-results" Int32
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Update an existing experiment. This method supports patch semantics.
+type ExperimentsPatch =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "profiles"
+       :> Capture "profileId" Text
+       :> "experiments"
+       :> Capture "experimentId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Returns an experiment to which the user has access.
+type ExperimentsGet =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "profiles"
+       :> Capture "profileId" Text
+       :> "experiments"
+       :> Capture "experimentId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Delete an experiment.
+type ExperimentsDelete =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "profiles"
+       :> Capture "profileId" Text
+       :> "experiments"
+       :> Capture "experimentId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Update an existing experiment.
+type ExperimentsUpdate =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "profiles"
+       :> Capture "profileId" Text
+       :> "experiments"
+       :> Capture "experimentId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type CustomDataSourcesAPI = CustomDataSourcesList
+
+-- | List custom data sources to which the user has access.
+type CustomDataSourcesList =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "customDataSources"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "start-index" Natural
+       :> QueryParam "max-results" Natural
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type WebpropertyUserLinksAPI =
+     WebpropertyUserLinksList :<|>
+       WebpropertyUserLinksDelete :<|>
+         WebpropertyUserLinksUpdate :<|>
+           WebpropertyUserLinksInsert
+
+-- | Adds a new user to the given web property.
+type WebpropertyUserLinksInsert =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "entityUserLinks"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Lists webProperty-user links for a given web property.
+type WebpropertyUserLinksList =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "entityUserLinks"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "start-index" Natural
+       :> QueryParam "max-results" Int32
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Removes a user from the given web property.
+type WebpropertyUserLinksDelete =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "entityUserLinks"
+       :> Capture "linkId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Updates permissions for an existing user on the given web property.
+type WebpropertyUserLinksUpdate =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "entityUserLinks"
+       :> Capture "linkId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type ProfilesAPI =
+     ProfilesList :<|>
+       ProfilesPatch :<|>
+         ProfilesGet :<|>
+           ProfilesDelete :<|>
+             ProfilesUpdate :<|> ProfilesInsert
+
+-- | Create a new view (profile).
+type ProfilesInsert =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "profiles"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Lists views (profiles) to which the user has access.
+type ProfilesList =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "profiles"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "start-index" Natural
+       :> QueryParam "max-results" Int32
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Updates an existing view (profile). This method supports patch
+-- semantics.
+type ProfilesPatch =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "profiles"
+       :> Capture "profileId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Gets a view (profile) to which the user has access.
+type ProfilesGet =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "profiles"
+       :> Capture "profileId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Deletes a view (profile).
+type ProfilesDelete =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "profiles"
+       :> Capture "profileId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Updates an existing view (profile).
+type ProfilesUpdate =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "profiles"
+       :> Capture "profileId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type FiltersAPI =
+     FiltersList :<|>
+       FiltersPatch :<|>
+         FiltersGet :<|>
+           FiltersDelete :<|> FiltersUpdate :<|> FiltersInsert
+
+-- | Create a new filter.
+type FiltersInsert =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "filters"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Lists all filters for an account
+type FiltersList =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "filters"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "start-index" Natural
+       :> QueryParam "max-results" Int32
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Updates an existing filter. This method supports patch semantics.
+type FiltersPatch =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "filters"
+       :> Capture "filterId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Returns a filters to which the user has access.
+type FiltersGet =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "filters"
+       :> Capture "filterId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Delete a filter.
+type FiltersDelete =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "filters"
+       :> Capture "filterId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Updates an existing filter.
+type FiltersUpdate =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "filters"
+       :> Capture "filterId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type AccountSummariesAPI = AccountSummariesList
+
+-- | Lists account summaries (lightweight tree comprised of
+-- accounts\/properties\/profiles) to which the user has access.
+type AccountSummariesList =
+     "analytics" :> "v3" :> "management" :>
+       "accountSummaries"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "start-index" Natural
+       :> QueryParam "max-results" Int32
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type GoalsAPI =
+     GoalsList :<|>
+       GoalsPatch :<|>
+         GoalsGet :<|> GoalsUpdate :<|> GoalsInsert
+
+-- | Create a new goal.
+type GoalsInsert =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "profiles"
+       :> Capture "profileId" Text
+       :> "goals"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Lists goals to which the user has access.
+type GoalsList =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "profiles"
+       :> Capture "profileId" Text
+       :> "goals"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "start-index" Natural
+       :> QueryParam "max-results" Int32
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Updates an existing view (profile). This method supports patch
+-- semantics.
+type GoalsPatch =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "profiles"
+       :> Capture "profileId" Text
+       :> "goals"
+       :> Capture "goalId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Gets a goal to which the user has access.
+type GoalsGet =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "profiles"
+       :> Capture "profileId" Text
+       :> "goals"
+       :> Capture "goalId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Updates an existing view (profile).
+type GoalsUpdate =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "profiles"
+       :> Capture "profileId" Text
+       :> "goals"
+       :> Capture "goalId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type WebpropertiesAPI =
+     WebpropertiesList :<|>
+       WebpropertiesPatch :<|>
+         WebpropertiesGet :<|>
+           WebpropertiesUpdate :<|> WebpropertiesInsert
+
+-- | Create a new property if the account has fewer than 20 properties. Web
+-- properties are visible in the Google Analytics interface only if they
+-- have at least one profile.
+type WebpropertiesInsert =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Lists web properties to which the user has access.
+type WebpropertiesList =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "start-index" Natural
+       :> QueryParam "max-results" Int32
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Updates an existing web property. This method supports patch semantics.
+type WebpropertiesPatch =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Gets a web property to which the user has access.
+type WebpropertiesGet =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Updates an existing web property.
+type WebpropertiesUpdate =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type CustomMetricsAPI =
+     CustomMetricsList :<|>
+       CustomMetricsPatch :<|>
+         CustomMetricsGet :<|>
+           CustomMetricsUpdate :<|> CustomMetricsInsert
+
+-- | Create a new custom metric.
+type CustomMetricsInsert =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "customMetrics"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Lists custom metrics to which the user has access.
+type CustomMetricsList =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "customMetrics"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "start-index" Natural
+       :> QueryParam "max-results" Int32
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Updates an existing custom metric. This method supports patch semantics.
+type CustomMetricsPatch =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "customMetrics"
+       :> Capture "customMetricId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "ignoreCustomDataSourceLinks" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Get a custom metric to which the user has access.
+type CustomMetricsGet =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "customMetrics"
+       :> Capture "customMetricId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Updates an existing custom metric.
+type CustomMetricsUpdate =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "customMetrics"
+       :> Capture "customMetricId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "ignoreCustomDataSourceLinks" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type UploadsAPI =
+     UploadsDeleteUploadData :<|>
+       UploadsGet :<|> UploadsUploadData :<|> UploadsList
+
+-- | List uploads to which the user has access.
+type UploadsList =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "customDataSources"
+       :> Capture "customDataSourceId" Text
+       :> "uploads"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "start-index" Natural
+       :> QueryParam "max-results" Natural
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Delete data associated with a previous upload.
+type UploadsDeleteUploadData =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "customDataSources"
+       :> Capture "customDataSourceId" Text
+       :> "deleteUploadData"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | List uploads to which the user has access.
+type UploadsGet =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "customDataSources"
+       :> Capture "customDataSourceId" Text
+       :> "uploads"
+       :> Capture "uploadId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Upload data for a custom data source.
+type UploadsUploadData =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "customDataSources"
+       :> Capture "customDataSourceId" Text
+       :> "uploads"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type SegmentsAPI = SegmentsList
+
+-- | Lists segments to which the user has access.
+type SegmentsList =
+     "analytics" :> "v3" :> "management" :> "segments" :>
+       QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "start-index" Natural
+       :> QueryParam "max-results" Int32
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type ProfileFilterLinksAPI =
+     ProfileFilterLinksList :<|>
+       ProfileFilterLinksPatch :<|>
+         ProfileFilterLinksGet :<|>
+           ProfileFilterLinksDelete :<|>
+             ProfileFilterLinksUpdate :<|>
+               ProfileFilterLinksInsert
+
+-- | Create a new profile filter link.
+type ProfileFilterLinksInsert =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "profiles"
+       :> Capture "profileId" Text
+       :> "profileFilterLinks"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Lists all profile filter links for a profile.
+type ProfileFilterLinksList =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "profiles"
+       :> Capture "profileId" Text
+       :> "profileFilterLinks"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "start-index" Natural
+       :> QueryParam "max-results" Int32
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Update an existing profile filter link. This method supports patch
+-- semantics.
+type ProfileFilterLinksPatch =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "profiles"
+       :> Capture "profileId" Text
+       :> "profileFilterLinks"
+       :> Capture "linkId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Returns a single profile filter link.
+type ProfileFilterLinksGet =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "profiles"
+       :> Capture "profileId" Text
+       :> "profileFilterLinks"
+       :> Capture "linkId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Delete a profile filter link.
+type ProfileFilterLinksDelete =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "profiles"
+       :> Capture "profileId" Text
+       :> "profileFilterLinks"
+       :> Capture "linkId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Update an existing profile filter link.
+type ProfileFilterLinksUpdate =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "profiles"
+       :> Capture "profileId" Text
+       :> "profileFilterLinks"
+       :> Capture "linkId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type CustomDimensionsAPI =
+     CustomDimensionsList :<|>
+       CustomDimensionsPatch :<|>
+         CustomDimensionsGet :<|>
+           CustomDimensionsUpdate :<|> CustomDimensionsInsert
+
+-- | Create a new custom dimension.
+type CustomDimensionsInsert =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "customDimensions"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Lists custom dimensions to which the user has access.
+type CustomDimensionsList =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "customDimensions"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "start-index" Natural
+       :> QueryParam "max-results" Int32
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Updates an existing custom dimension. This method supports patch
+-- semantics.
+type CustomDimensionsPatch =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "customDimensions"
+       :> Capture "customDimensionId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "ignoreCustomDataSourceLinks" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Get a custom dimension to which the user has access.
+type CustomDimensionsGet =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "customDimensions"
+       :> Capture "customDimensionId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Updates an existing custom dimension.
+type CustomDimensionsUpdate =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "customDimensions"
+       :> Capture "customDimensionId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "ignoreCustomDataSourceLinks" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type AccountUserLinksAPI =
+     AccountUserLinksList :<|>
+       AccountUserLinksDelete :<|>
+         AccountUserLinksUpdate :<|> AccountUserLinksInsert
+
+-- | Adds a new user to the given account.
+type AccountUserLinksInsert =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "entityUserLinks"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Lists account-user links for a given account.
+type AccountUserLinksList =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "entityUserLinks"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "start-index" Natural
+       :> QueryParam "max-results" Int32
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Removes a user from the given account.
+type AccountUserLinksDelete =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "entityUserLinks"
+       :> Capture "linkId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Updates permissions for an existing user on the given account.
+type AccountUserLinksUpdate =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "entityUserLinks"
+       :> Capture "linkId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type ProfileUserLinksAPI =
+     ProfileUserLinksList :<|>
+       ProfileUserLinksDelete :<|>
+         ProfileUserLinksUpdate :<|> ProfileUserLinksInsert
+
+-- | Adds a new user to the given view (profile).
+type ProfileUserLinksInsert =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "profiles"
+       :> Capture "profileId" Text
+       :> "entityUserLinks"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Lists profile-user links for a given view (profile).
+type ProfileUserLinksList =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "profiles"
+       :> Capture "profileId" Text
+       :> "entityUserLinks"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "start-index" Natural
+       :> QueryParam "max-results" Int32
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Removes a user from the given view (profile).
+type ProfileUserLinksDelete =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "profiles"
+       :> Capture "profileId" Text
+       :> "entityUserLinks"
+       :> Capture "linkId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Updates permissions for an existing user on the given view (profile).
+type ProfileUserLinksUpdate =
+     "analytics" :> "v3" :> "management" :> "accounts" :>
+       Capture "accountId" Text
+       :> "webproperties"
+       :> Capture "webPropertyId" Text
+       :> "profiles"
+       :> Capture "profileId" Text
+       :> "entityUserLinks"
+       :> Capture "linkId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type ProvisioningAPI =
+     ProvisioningCreateAccountTicket
+
+-- | Creates an account ticket.
+type ProvisioningCreateAccountTicket =
+     "analytics" :> "v3" :> "provisioning" :>
+       "createAccountTicket"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type MetadataAPI = ColumnsAPI
+
+type ColumnsAPI = ColumnsList
+
+-- | Lists all columns for a report type
+type ColumnsList =
+     "analytics" :> "v3" :> "metadata" :>
+       Capture "reportType" Text
+       :> "columns"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text

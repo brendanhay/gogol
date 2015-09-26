@@ -1,3 +1,9 @@
+{-# LANGUAGE DataKinds     #-}
+{-# LANGUAGE TypeOperators #-}
+
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+
 -- |
 -- Module      : Network.Google.OAuth2
 -- Copyright   : (c) 2015 Brendan Hay
@@ -6,15 +12,17 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lets you access OAuth2 protocol related APIs.
+-- -- | Lets you access OAuth2 protocol related APIs.
 --
 -- /See:/ <https://developers.google.com/accounts/docs/OAuth2 Google OAuth2 API Reference>
 module Network.Google.OAuth2
     (
-    -- * API Definition
+    -- * Resources
       OAuth2
-
-
+    , UserinfoAPI
+    , V2API
+    , MeAPI
+    , MeGet
 
     -- * Types
 
@@ -68,11 +76,20 @@ import           Network.Google.OAuth2.Types
 TODO
 -}
 
-type OAuth2 = ()
+type OAuth2 = UserinfoAPI
 
-oAuth2 :: Proxy OAuth2
-oAuth2 = Proxy
+type UserinfoAPI = V2API
 
+type V2API = MeAPI
 
+type MeAPI = MeGet
 
-
+type MeGet =
+     "userinfo" :> "v2" :> "me" :>
+       QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text

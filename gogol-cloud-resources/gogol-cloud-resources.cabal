@@ -14,7 +14,11 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    Pending
+    The Google Cloud Resource Manager API provides methods for creating,
+    reading, and updating of project metadata.
+    .
+    /Warning:/ This is an experimental preview release which is still under
+    heavy development and not intended for public consumption, caveat emptor!
 
 source-repository head
     type:     git

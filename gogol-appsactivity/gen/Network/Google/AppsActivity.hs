@@ -1,3 +1,9 @@
+{-# LANGUAGE DataKinds     #-}
+{-# LANGUAGE TypeOperators #-}
+
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+
 -- |
 -- Module      : Network.Google.AppsActivity
 -- Copyright   : (c) 2015 Brendan Hay
@@ -6,15 +12,15 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Provides a historical view of activity.
+-- -- | Provides a historical view of activity.
 --
 -- /See:/ <https://developers.google.com/google-apps/activity/ Google Apps Activity API Reference>
 module Network.Google.AppsActivity
     (
-    -- * API Definition
+    -- * Resources
       AppsActivity
-
-
+    , ActivitiesAPI
+    , ActivitiesList
 
     -- * Types
 
@@ -115,11 +121,29 @@ import           Network.Google.AppsActivity.Types
 TODO
 -}
 
-type AppsActivity = ()
+type AppsActivity = ActivitiesAPI
 
-appsActivity :: Proxy AppsActivity
-appsActivity = Proxy
+type ActivitiesAPI = ActivitiesList
 
-
-
-
+-- | Returns a list of activities visible to the current logged in user.
+-- Visible activities are determined by the visiblity settings of the
+-- object that was acted on, e.g. Drive files a user can see. An activity
+-- is a record of past events. Multiple events may be merged if they are
+-- similar. A request is scoped to activities from a given Google service
+-- using the source parameter.
+type ActivitiesList =
+     "appsactivity" :> "v1" :> "activities" :>
+       QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "drive.fileId" Text
+       :> QueryParam "drive.ancestorId" Text
+       :> QueryParam "groupingStrategy" Text
+       :> QueryParam "userId" Text
+       :> QueryParam "key" Text
+       :> QueryParam "source" Text
+       :> QueryParam "pageToken" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "pageSize" Int32
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text

@@ -1,3 +1,9 @@
+{-# LANGUAGE DataKinds     #-}
+{-# LANGUAGE TypeOperators #-}
+
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+
 -- |
 -- Module      : Network.Google.Reports
 -- Copyright   : (c) 2015 Brendan Hay
@@ -6,15 +12,23 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Allows the administrators of Google Apps customers to fetch reports about the usage, collaboration, security and risk for their users.
+-- -- | Allows the administrators of Google Apps customers to fetch reports
+-- about the usage, collaboration, security and risk for their users.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/reports/ Admin Reports API Reference>
 module Network.Google.Reports
     (
-    -- * API Definition
+    -- * Resources
       Reports
-
-
+    , ChannelsAPI
+    , ChannelsStop
+    , ActivitiesAPI
+    , ActivitiesList
+    , ActivitiesWatch
+    , CustomerUsageReportsAPI
+    , CustomerUsageReportsGet
+    , UserUsageReportAPI
+    , UserUsageReportGet
 
     -- * Types
 
@@ -148,11 +162,112 @@ import           Network.Google.Reports.Types
 TODO
 -}
 
-type Reports = ()
+type Reports =
+     ActivitiesAPI :<|>
+       CustomerUsageReportsAPI :<|>
+         UserUsageReportAPI :<|> ChannelsAPI
 
-reports :: Proxy Reports
-reports = Proxy
+type ChannelsAPI = ChannelsStop
 
+-- | Stop watching resources through this channel
+type ChannelsStop =
+     "admin" :> "reports" :> "v1" :> "admin" :>
+       "reports_v1"
+       :> "channels"
+       :> "stop"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
+type ActivitiesAPI =
+     ActivitiesWatch :<|> ActivitiesList
 
+-- | Retrieves a list of activities for a specific customer and application.
+type ActivitiesList =
+     "admin" :> "reports" :> "v1" :> "activity" :> "users"
+       :> Capture "userKey" Text
+       :> "applications"
+       :> Capture "applicationName" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "startTime" Text
+       :> QueryParam "userIp" Text
+       :> QueryParam "filters" Text
+       :> QueryParam "customerId" Text
+       :> QueryParam "actorIpAddress" Text
+       :> QueryParam "key" Text
+       :> QueryParam "endTime" Text
+       :> QueryParam "pageToken" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "eventName" Text
+       :> QueryParam "maxResults" Natural
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
+-- | Push changes to activities
+type ActivitiesWatch =
+     "admin" :> "reports" :> "v1" :> "activity" :> "users"
+       :> Capture "userKey" Text
+       :> "applications"
+       :> Capture "applicationName" Text
+       :> "watch"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "startTime" Text
+       :> QueryParam "userIp" Text
+       :> QueryParam "filters" Text
+       :> QueryParam "customerId" Text
+       :> QueryParam "actorIpAddress" Text
+       :> QueryParam "key" Text
+       :> QueryParam "endTime" Text
+       :> QueryParam "pageToken" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "eventName" Text
+       :> QueryParam "maxResults" Natural
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type CustomerUsageReportsAPI =
+     CustomerUsageReportsGet
+
+-- | Retrieves a report which is a collection of properties \/ statistics for
+-- a specific customer.
+type CustomerUsageReportsGet =
+     "admin" :> "reports" :> "v1" :> "usage" :> "dates" :>
+       Capture "date" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "customerId" Text
+       :> QueryParam "key" Text
+       :> QueryParam "parameters" Text
+       :> QueryParam "pageToken" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type UserUsageReportAPI = UserUsageReportGet
+
+-- | Retrieves a report which is a collection of properties \/ statistics for
+-- a set of users.
+type UserUsageReportGet =
+     "admin" :> "reports" :> "v1" :> "usage" :> "users" :>
+       Capture "userKey" Text
+       :> "dates"
+       :> Capture "date" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "filters" Text
+       :> QueryParam "customerId" Text
+       :> QueryParam "key" Text
+       :> QueryParam "parameters" Text
+       :> QueryParam "pageToken" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "maxResults" Word32
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text

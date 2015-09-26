@@ -12,7 +12,7 @@
 --
 module Network.Google.MapsEngine.Types.Sum where
 
-import Network.Google.Prelude
+import           Network.Google.Prelude
 
 -- | The precision of acquisition time.
 data AcquisitionTimePrecision
@@ -65,17 +65,17 @@ instance Hashable FileUploadStatus
 
 -- | Operation used to evaluate the filter.
 data FilterOperator
-    = FO!=
+    = FONotEqual
       -- ^ @!=@
-    | FO<
+    | FOLess
       -- ^ @<@
-    | FO<=
+    | FOLessOrEqual
       -- ^ @<=@
-    | FO==
+    | FOEqual
       -- ^ @==@
-    | FO>
+    | FOGreater
       -- ^ @>@
-    | FO>=
+    | FOGreaterEqual
       -- ^ @>=@
     | FOContains
       -- ^ @contains@

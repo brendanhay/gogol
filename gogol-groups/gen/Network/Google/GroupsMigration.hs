@@ -1,3 +1,9 @@
+{-# LANGUAGE DataKinds     #-}
+{-# LANGUAGE TypeOperators #-}
+
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+
 -- |
 -- Module      : Network.Google.GroupsMigration
 -- Copyright   : (c) 2015 Brendan Hay
@@ -6,15 +12,15 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Groups Migration Api.
+-- -- | Groups Migration Api.
 --
 -- /See:/ <https://developers.google.com/google-apps/groups-migration/ Groups Migration API Reference>
 module Network.Google.GroupsMigration
     (
-    -- * API Definition
+    -- * Resources
       GroupsMigration
-
-
+    , ArchiveAPI
+    , ArchiveInsert
 
     -- * Types
 
@@ -31,11 +37,19 @@ import           Network.Google.GroupsMigration.Types
 TODO
 -}
 
-type GroupsMigration = ()
+type GroupsMigration = ArchiveAPI
 
-groupsMigration :: Proxy GroupsMigration
-groupsMigration = Proxy
+type ArchiveAPI = ArchiveInsert
 
-
-
-
+-- | Inserts a new mail into the archive of the Google group.
+type ArchiveInsert =
+     "groups" :> "v1" :> "groups" :>
+       Capture "groupId" Text
+       :> "archive"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text

@@ -1,3 +1,9 @@
+{-# LANGUAGE DataKinds     #-}
+{-# LANGUAGE TypeOperators #-}
+
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+
 -- |
 -- Module      : Network.Google.CloudDNS
 -- Copyright   : (c) 2015 Brendan Hay
@@ -6,15 +12,27 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Google Cloud DNS API provides services for configuring and serving authoritative DNS records.
+-- -- | The Google Cloud DNS API provides services for configuring and serving
+-- authoritative DNS records.
 --
 -- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference>
 module Network.Google.CloudDNS
     (
-    -- * API Definition
+    -- * Resources
       CloudDNS
-
-
+    , ChangesAPI
+    , ChangesList
+    , ChangesGet
+    , ChangesCreate
+    , ResourceRecordSetsAPI
+    , ResourceRecordSetsList
+    , ManagedZonesAPI
+    , ManagedZonesList
+    , ManagedZonesGet
+    , ManagedZonesCreate
+    , ManagedZonesDelete
+    , ProjectsAPI
+    , ProjectsGet
 
     -- * Types
 
@@ -96,11 +114,156 @@ import           Network.Google.CloudDNS.Types
 TODO
 -}
 
-type CloudDNS = ()
+type CloudDNS =
+     ResourceRecordSetsAPI :<|>
+       ManagedZonesAPI :<|> ProjectsAPI :<|> ChangesAPI
 
-cloudDNS :: Proxy CloudDNS
-cloudDNS = Proxy
+type ChangesAPI =
+     ChangesGet :<|> ChangesCreate :<|> ChangesList
 
+-- | Enumerate Changes to a ResourceRecordSet collection.
+type ChangesList =
+     "dns" :> "v1beta1" :> "projects" :>
+       Capture "project" Text
+       :> "managedZones"
+       :> Capture "managedZone" Text
+       :> "changes"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "sortOrder" Text
+       :> QueryParam "key" Text
+       :> QueryParam "pageToken" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "maxResults" Int32
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+       :> QueryParam "sortBy" Text
 
+-- | Fetch the representation of an existing Change.
+type ChangesGet =
+     "dns" :> "v1beta1" :> "projects" :>
+       Capture "project" Text
+       :> "managedZones"
+       :> Capture "managedZone" Text
+       :> "changes"
+       :> Capture "changeId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
+-- | Atomically update the ResourceRecordSet collection.
+type ChangesCreate =
+     "dns" :> "v1beta1" :> "projects" :>
+       Capture "project" Text
+       :> "managedZones"
+       :> Capture "managedZone" Text
+       :> "changes"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
+type ResourceRecordSetsAPI = ResourceRecordSetsList
+
+-- | Enumerate ResourceRecordSets that have been created but not yet deleted.
+type ResourceRecordSetsList =
+     "dns" :> "v1beta1" :> "projects" :>
+       Capture "project" Text
+       :> "managedZones"
+       :> Capture "managedZone" Text
+       :> "rrsets"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "name" Text
+       :> QueryParam "pageToken" Text
+       :> QueryParam "type" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "maxResults" Int32
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type ManagedZonesAPI =
+     ManagedZonesGet :<|>
+       ManagedZonesCreate :<|>
+         ManagedZonesDelete :<|> ManagedZonesList
+
+-- | Enumerate ManagedZones that have been created but not yet deleted.
+type ManagedZonesList =
+     "dns" :> "v1beta1" :> "projects" :>
+       Capture "project" Text
+       :> "managedZones"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "pageToken" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "dnsName" Text
+       :> QueryParam "maxResults" Int32
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Fetch the representation of an existing ManagedZone.
+type ManagedZonesGet =
+     "dns" :> "v1beta1" :> "projects" :>
+       Capture "project" Text
+       :> "managedZones"
+       :> Capture "managedZone" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Create a new ManagedZone.
+type ManagedZonesCreate =
+     "dns" :> "v1beta1" :> "projects" :>
+       Capture "project" Text
+       :> "managedZones"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Delete a previously created ManagedZone.
+type ManagedZonesDelete =
+     "dns" :> "v1beta1" :> "projects" :>
+       Capture "project" Text
+       :> "managedZones"
+       :> Capture "managedZone" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type ProjectsAPI = ProjectsGet
+
+-- | Fetch the representation of an existing Project.
+type ProjectsGet =
+     "dns" :> "v1beta1" :> "projects" :>
+       Capture "project" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text

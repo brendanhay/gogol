@@ -1,3 +1,9 @@
+{-# LANGUAGE DataKinds     #-}
+{-# LANGUAGE TypeOperators #-}
+
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+
 -- |
 -- Module      : Network.Google.TagManager
 -- Copyright   : (c) 2015 Brendan Hay
@@ -6,15 +12,65 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- API for accessing Tag Manager accounts and containers.
+-- -- | API for accessing Tag Manager accounts and containers.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference>
 module Network.Google.TagManager
     (
-    -- * API Definition
+    -- * Resources
       TagManager
-
-
+    , AccountsAPI
+    , ContainersAPI
+    , RulesAPI
+    , RulesList
+    , RulesGet
+    , RulesCreate
+    , RulesDelete
+    , RulesUpdate
+    , VariablesAPI
+    , VariablesList
+    , VariablesGet
+    , VariablesCreate
+    , VariablesDelete
+    , VariablesUpdate
+    , FoldersAPI
+    , EntitiesAPI
+    , EntitiesList
+    , TriggersAPI
+    , TriggersList
+    , TriggersGet
+    , TriggersCreate
+    , TriggersDelete
+    , TriggersUpdate
+    , VersionsAPI
+    , VersionsList
+    , VersionsUndelete
+    , VersionsRestore
+    , VersionsGet
+    , VersionsCreate
+    , VersionsDelete
+    , VersionsUpdate
+    , VersionsPublish
+    , Move_foldersAPI
+    , Move_foldersUpdate
+    , MacrosAPI
+    , MacrosList
+    , MacrosGet
+    , MacrosCreate
+    , MacrosDelete
+    , MacrosUpdate
+    , TagsAPI
+    , TagsList
+    , TagsGet
+    , TagsCreate
+    , TagsDelete
+    , TagsUpdate
+    , PermissionsAPI
+    , PermissionsList
+    , PermissionsGet
+    , PermissionsCreate
+    , PermissionsDelete
+    , PermissionsUpdate
 
     -- * Types
 
@@ -329,11 +385,696 @@ import           Network.Google.TagManager.Types
 TODO
 -}
 
-type TagManager = ()
+type TagManager = AccountsAPI
 
-tagManager :: Proxy TagManager
-tagManager = Proxy
+type AccountsAPI = PermissionsAPI :<|> ContainersAPI
 
+type ContainersAPI =
+     VariablesAPI :<|>
+       FoldersAPI :<|>
+         TriggersAPI :<|>
+           VersionsAPI :<|>
+             Move_foldersAPI :<|>
+               MacrosAPI :<|> TagsAPI :<|> RulesAPI
 
+type RulesAPI =
+     RulesGet :<|>
+       RulesCreate :<|>
+         RulesDelete :<|> RulesUpdate :<|> RulesList
 
+-- | Lists all GTM Rules of a Container.
+type RulesList =
+     "tagmanager" :> "v1" :> "accounts" :>
+       Capture "accountId" Text
+       :> "containers"
+       :> Capture "containerId" Text
+       :> "rules"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
+-- | Gets a GTM Rule.
+type RulesGet =
+     "tagmanager" :> "v1" :> "accounts" :>
+       Capture "accountId" Text
+       :> "containers"
+       :> Capture "containerId" Text
+       :> "rules"
+       :> Capture "ruleId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Creates a GTM Rule.
+type RulesCreate =
+     "tagmanager" :> "v1" :> "accounts" :>
+       Capture "accountId" Text
+       :> "containers"
+       :> Capture "containerId" Text
+       :> "rules"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Deletes a GTM Rule.
+type RulesDelete =
+     "tagmanager" :> "v1" :> "accounts" :>
+       Capture "accountId" Text
+       :> "containers"
+       :> Capture "containerId" Text
+       :> "rules"
+       :> Capture "ruleId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Updates a GTM Rule.
+type RulesUpdate =
+     "tagmanager" :> "v1" :> "accounts" :>
+       Capture "accountId" Text
+       :> "containers"
+       :> Capture "containerId" Text
+       :> "rules"
+       :> Capture "ruleId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "fingerprint" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type VariablesAPI =
+     VariablesGet :<|>
+       VariablesCreate :<|>
+         VariablesDelete :<|>
+           VariablesUpdate :<|> VariablesList
+
+-- | Lists all GTM Variables of a Container.
+type VariablesList =
+     "tagmanager" :> "v1" :> "accounts" :>
+       Capture "accountId" Text
+       :> "containers"
+       :> Capture "containerId" Text
+       :> "variables"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Gets a GTM Variable.
+type VariablesGet =
+     "tagmanager" :> "v1" :> "accounts" :>
+       Capture "accountId" Text
+       :> "containers"
+       :> Capture "containerId" Text
+       :> "variables"
+       :> Capture "variableId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Creates a GTM Variable.
+type VariablesCreate =
+     "tagmanager" :> "v1" :> "accounts" :>
+       Capture "accountId" Text
+       :> "containers"
+       :> Capture "containerId" Text
+       :> "variables"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Deletes a GTM Variable.
+type VariablesDelete =
+     "tagmanager" :> "v1" :> "accounts" :>
+       Capture "accountId" Text
+       :> "containers"
+       :> Capture "containerId" Text
+       :> "variables"
+       :> Capture "variableId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Updates a GTM Variable.
+type VariablesUpdate =
+     "tagmanager" :> "v1" :> "accounts" :>
+       Capture "accountId" Text
+       :> "containers"
+       :> Capture "containerId" Text
+       :> "variables"
+       :> Capture "variableId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "fingerprint" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type FoldersAPI = EntitiesAPI
+
+type EntitiesAPI = EntitiesList
+
+-- | List all entities in a GTM Folder.
+type EntitiesList =
+     "tagmanager" :> "v1" :> "accounts" :>
+       Capture "accountId" Text
+       :> "containers"
+       :> Capture "containerId" Text
+       :> "folders"
+       :> Capture "folderId" Text
+       :> "entities"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type TriggersAPI =
+     TriggersGet :<|>
+       TriggersCreate :<|>
+         TriggersDelete :<|> TriggersUpdate :<|> TriggersList
+
+-- | Lists all GTM Triggers of a Container.
+type TriggersList =
+     "tagmanager" :> "v1" :> "accounts" :>
+       Capture "accountId" Text
+       :> "containers"
+       :> Capture "containerId" Text
+       :> "triggers"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Gets a GTM Trigger.
+type TriggersGet =
+     "tagmanager" :> "v1" :> "accounts" :>
+       Capture "accountId" Text
+       :> "containers"
+       :> Capture "containerId" Text
+       :> "triggers"
+       :> Capture "triggerId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Creates a GTM Trigger.
+type TriggersCreate =
+     "tagmanager" :> "v1" :> "accounts" :>
+       Capture "accountId" Text
+       :> "containers"
+       :> Capture "containerId" Text
+       :> "triggers"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Deletes a GTM Trigger.
+type TriggersDelete =
+     "tagmanager" :> "v1" :> "accounts" :>
+       Capture "accountId" Text
+       :> "containers"
+       :> Capture "containerId" Text
+       :> "triggers"
+       :> Capture "triggerId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Updates a GTM Trigger.
+type TriggersUpdate =
+     "tagmanager" :> "v1" :> "accounts" :>
+       Capture "accountId" Text
+       :> "containers"
+       :> Capture "containerId" Text
+       :> "triggers"
+       :> Capture "triggerId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "fingerprint" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type VersionsAPI =
+     VersionsUndelete :<|>
+       VersionsRestore :<|>
+         VersionsGet :<|>
+           VersionsCreate :<|>
+             VersionsDelete :<|>
+               VersionsUpdate :<|> VersionsPublish :<|> VersionsList
+
+-- | Lists all Container Versions of a GTM Container.
+type VersionsList =
+     "tagmanager" :> "v1" :> "accounts" :>
+       Capture "accountId" Text
+       :> "containers"
+       :> Capture "containerId" Text
+       :> "versions"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "headers" Bool
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Undeletes a Container Version.
+type VersionsUndelete =
+     "tagmanager" :> "v1" :> "accounts" :>
+       Capture "accountId" Text
+       :> "containers"
+       :> Capture "containerId" Text
+       :> "versions"
+       :> Capture "containerVersionId" Text
+       :> "undelete"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Restores a Container Version. This will overwrite the container\'s
+-- current configuration (including its macros, rules and tags). The
+-- operation will not have any effect on the version that is being served
+-- (i.e. the published version).
+type VersionsRestore =
+     "tagmanager" :> "v1" :> "accounts" :>
+       Capture "accountId" Text
+       :> "containers"
+       :> Capture "containerId" Text
+       :> "versions"
+       :> Capture "containerVersionId" Text
+       :> "restore"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Gets a Container Version.
+type VersionsGet =
+     "tagmanager" :> "v1" :> "accounts" :>
+       Capture "accountId" Text
+       :> "containers"
+       :> Capture "containerId" Text
+       :> "versions"
+       :> Capture "containerVersionId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Creates a Container Version.
+type VersionsCreate =
+     "tagmanager" :> "v1" :> "accounts" :>
+       Capture "accountId" Text
+       :> "containers"
+       :> Capture "containerId" Text
+       :> "versions"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Deletes a Container Version.
+type VersionsDelete =
+     "tagmanager" :> "v1" :> "accounts" :>
+       Capture "accountId" Text
+       :> "containers"
+       :> Capture "containerId" Text
+       :> "versions"
+       :> Capture "containerVersionId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Updates a Container Version.
+type VersionsUpdate =
+     "tagmanager" :> "v1" :> "accounts" :>
+       Capture "accountId" Text
+       :> "containers"
+       :> Capture "containerId" Text
+       :> "versions"
+       :> Capture "containerVersionId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "fingerprint" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Publishes a Container Version.
+type VersionsPublish =
+     "tagmanager" :> "v1" :> "accounts" :>
+       Capture "accountId" Text
+       :> "containers"
+       :> Capture "containerId" Text
+       :> "versions"
+       :> Capture "containerVersionId" Text
+       :> "publish"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "fingerprint" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type Move_foldersAPI = Move_foldersUpdate
+
+-- | Moves entities to a GTM Folder.
+type Move_foldersUpdate =
+     "tagmanager" :> "v1" :> "accounts" :>
+       Capture "accountId" Text
+       :> "containers"
+       :> Capture "containerId" Text
+       :> "move_folders"
+       :> Capture "folderId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "triggerId" Text
+       :> QueryParam "userIp" Text
+       :> QueryParam "variableId" Text
+       :> QueryParam "tagId" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type MacrosAPI =
+     MacrosGet :<|>
+       MacrosCreate :<|>
+         MacrosDelete :<|> MacrosUpdate :<|> MacrosList
+
+-- | Lists all GTM Macros of a Container.
+type MacrosList =
+     "tagmanager" :> "v1" :> "accounts" :>
+       Capture "accountId" Text
+       :> "containers"
+       :> Capture "containerId" Text
+       :> "macros"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Gets a GTM Macro.
+type MacrosGet =
+     "tagmanager" :> "v1" :> "accounts" :>
+       Capture "accountId" Text
+       :> "containers"
+       :> Capture "containerId" Text
+       :> "macros"
+       :> Capture "macroId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Creates a GTM Macro.
+type MacrosCreate =
+     "tagmanager" :> "v1" :> "accounts" :>
+       Capture "accountId" Text
+       :> "containers"
+       :> Capture "containerId" Text
+       :> "macros"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Deletes a GTM Macro.
+type MacrosDelete =
+     "tagmanager" :> "v1" :> "accounts" :>
+       Capture "accountId" Text
+       :> "containers"
+       :> Capture "containerId" Text
+       :> "macros"
+       :> Capture "macroId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Updates a GTM Macro.
+type MacrosUpdate =
+     "tagmanager" :> "v1" :> "accounts" :>
+       Capture "accountId" Text
+       :> "containers"
+       :> Capture "containerId" Text
+       :> "macros"
+       :> Capture "macroId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "fingerprint" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type TagsAPI =
+     TagsGet :<|>
+       TagsCreate :<|>
+         TagsDelete :<|> TagsUpdate :<|> TagsList
+
+-- | Lists all GTM Tags of a Container.
+type TagsList =
+     "tagmanager" :> "v1" :> "accounts" :>
+       Capture "accountId" Text
+       :> "containers"
+       :> Capture "containerId" Text
+       :> "tags"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Gets a GTM Tag.
+type TagsGet =
+     "tagmanager" :> "v1" :> "accounts" :>
+       Capture "accountId" Text
+       :> "containers"
+       :> Capture "containerId" Text
+       :> "tags"
+       :> Capture "tagId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Creates a GTM Tag.
+type TagsCreate =
+     "tagmanager" :> "v1" :> "accounts" :>
+       Capture "accountId" Text
+       :> "containers"
+       :> Capture "containerId" Text
+       :> "tags"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Deletes a GTM Tag.
+type TagsDelete =
+     "tagmanager" :> "v1" :> "accounts" :>
+       Capture "accountId" Text
+       :> "containers"
+       :> Capture "containerId" Text
+       :> "tags"
+       :> Capture "tagId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Updates a GTM Tag.
+type TagsUpdate =
+     "tagmanager" :> "v1" :> "accounts" :>
+       Capture "accountId" Text
+       :> "containers"
+       :> Capture "containerId" Text
+       :> "tags"
+       :> Capture "tagId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "fingerprint" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type PermissionsAPI =
+     PermissionsGet :<|>
+       PermissionsCreate :<|>
+         PermissionsDelete :<|>
+           PermissionsUpdate :<|> PermissionsList
+
+-- | List all users that have access to the account along with Account and
+-- Container Permissions granted to each of them.
+type PermissionsList =
+     "tagmanager" :> "v1" :> "accounts" :>
+       Capture "accountId" Text
+       :> "permissions"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Gets a user\'s Account & Container Permissions.
+type PermissionsGet =
+     "tagmanager" :> "v1" :> "accounts" :>
+       Capture "accountId" Text
+       :> "permissions"
+       :> Capture "permissionId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Creates a user\'s Account & Container Permissions.
+type PermissionsCreate =
+     "tagmanager" :> "v1" :> "accounts" :>
+       Capture "accountId" Text
+       :> "permissions"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Removes a user from the account, revoking access to it and all of its
+-- containers.
+type PermissionsDelete =
+     "tagmanager" :> "v1" :> "accounts" :>
+       Capture "accountId" Text
+       :> "permissions"
+       :> Capture "permissionId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Updates a user\'s Account & Container Permissions.
+type PermissionsUpdate =
+     "tagmanager" :> "v1" :> "accounts" :>
+       Capture "accountId" Text
+       :> "permissions"
+       :> Capture "permissionId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text

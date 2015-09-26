@@ -1,3 +1,9 @@
+{-# LANGUAGE DataKinds     #-}
+{-# LANGUAGE TypeOperators #-}
+
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+
 -- |
 -- Module      : Network.Google.Dataflow
 -- Copyright   : (c) 2015 Brendan Hay
@@ -6,15 +12,20 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Google Dataflow API.
+-- -- | Google Dataflow API.
 --
 -- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference>
 module Network.Google.Dataflow
     (
-    -- * API Definition
+    -- * Resources
       Dataflow
-
-
+    , ProjectsAPI
+    , JobsAPI
+    , WorkItemsAPI
+    , WorkItemsLease
+    , WorkItemsReportStatus
+    , MessagesAPI
+    , MessagesList
 
     -- * Types
 
@@ -680,11 +691,78 @@ import           Network.Google.Dataflow.Types
 TODO
 -}
 
-type Dataflow = ()
+type Dataflow = ProjectsAPI
 
-dataflow :: Proxy Dataflow
-dataflow = Proxy
+type ProjectsAPI = JobsAPI
 
+type JobsAPI = MessagesAPI :<|> WorkItemsAPI
 
+type WorkItemsAPI =
+     WorkItemsReportStatus :<|> WorkItemsLease
 
+-- | Leases a dataflow WorkItem to run.
+type WorkItemsLease =
+     "v1b3" :> "projects" :> Capture "projectId" Text :>
+       "jobs"
+       :> Capture "jobId" Text
+       :> "workItems:lease"
+       :> QueryParam "$.xgafv" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "upload_protocol" Text
+       :> QueryParam "pp" Bool
+       :> QueryParam "access_token" Text
+       :> QueryParam "uploadType" Text
+       :> QueryParam "bearer_token" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "callback" Text
+       :> QueryParam "alt" Text
 
+-- | Reports the status of dataflow WorkItems leased by a worker.
+type WorkItemsReportStatus =
+     "v1b3" :> "projects" :> Capture "projectId" Text :>
+       "jobs"
+       :> Capture "jobId" Text
+       :> "workItems:reportStatus"
+       :> QueryParam "$.xgafv" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "upload_protocol" Text
+       :> QueryParam "pp" Bool
+       :> QueryParam "access_token" Text
+       :> QueryParam "uploadType" Text
+       :> QueryParam "bearer_token" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "callback" Text
+       :> QueryParam "alt" Text
+
+type MessagesAPI = MessagesList
+
+-- | Request the job status.
+type MessagesList =
+     "v1b3" :> "projects" :> Capture "projectId" Text :>
+       "jobs"
+       :> Capture "jobId" Text
+       :> "messages"
+       :> QueryParam "$.xgafv" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "upload_protocol" Text
+       :> QueryParam "startTime" Text
+       :> QueryParam "pp" Bool
+       :> QueryParam "access_token" Text
+       :> QueryParam "uploadType" Text
+       :> QueryParam "bearer_token" Text
+       :> QueryParam "key" Text
+       :> QueryParam "endTime" Text
+       :> QueryParam "minimumImportance" Text
+       :> QueryParam "pageToken" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "pageSize" Int32
+       :> QueryParam "fields" Text
+       :> QueryParam "callback" Text
+       :> QueryParam "alt" Text

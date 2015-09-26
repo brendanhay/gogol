@@ -14,7 +14,10 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    Pending
+    Manage your DoubleClick Campaign Manager ad campaigns and reports.
+    .
+    /Warning:/ This is an experimental preview release which is still under
+    heavy development and not intended for public consumption, caveat emptor!
 
 source-repository head
     type:     git
@@ -27,12 +30,12 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.DCM/DFAReportingAndTrafficking
-        , Network.Google.DCM/DFAReportingAndTrafficking.Types
+          Network.Google.DFAReporting
+        , Network.Google.DFAReporting.Types
 
     other-modules:
-          Network.Google.DCM/DFAReportingAndTrafficking.Types.Product
-        , Network.Google.DCM/DFAReportingAndTrafficking.Types.Sum
+          Network.Google.DFAReporting.Types.Product
+        , Network.Google.DFAReporting.Types.Sum
 
     build-depends:
           gogol-core == 0.0.1.*

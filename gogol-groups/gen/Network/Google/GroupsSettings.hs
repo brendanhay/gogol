@@ -1,3 +1,9 @@
+{-# LANGUAGE DataKinds     #-}
+{-# LANGUAGE TypeOperators #-}
+
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+
 -- |
 -- Module      : Network.Google.GroupsSettings
 -- Copyright   : (c) 2015 Brendan Hay
@@ -6,15 +12,17 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lets you manage permission levels and related settings of a group.
+-- -- | Lets you manage permission levels and related settings of a group.
 --
 -- /See:/ <https://developers.google.com/google-apps/groups-settings/get_started Groups Settings API Reference>
 module Network.Google.GroupsSettings
     (
-    -- * API Definition
+    -- * Resources
       GroupsSettings
-
-
+    , GroupsAPI
+    , GroupsPatch
+    , GroupsGet
+    , GroupsUpdate
 
     -- * Types
 
@@ -57,11 +65,43 @@ import           Network.Google.GroupsSettings.Types
 TODO
 -}
 
-type GroupsSettings = ()
+type GroupsSettings = GroupsAPI
 
-groupsSettings :: Proxy GroupsSettings
-groupsSettings = Proxy
+type GroupsAPI =
+     GroupsGet :<|> GroupsUpdate :<|> GroupsPatch
 
+-- | Updates an existing resource. This method supports patch semantics.
+type GroupsPatch =
+     "groups" :> "v1" :> "groups" :>
+       Capture "groupUniqueId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
+-- | Gets one resource by id.
+type GroupsGet =
+     "groups" :> "v1" :> "groups" :>
+       Capture "groupUniqueId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
-
+-- | Updates an existing resource.
+type GroupsUpdate =
+     "groups" :> "v1" :> "groups" :>
+       Capture "groupUniqueId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text

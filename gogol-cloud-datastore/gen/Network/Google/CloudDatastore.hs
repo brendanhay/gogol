@@ -1,3 +1,9 @@
+{-# LANGUAGE DataKinds     #-}
+{-# LANGUAGE TypeOperators #-}
+
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+
 -- |
 -- Module      : Network.Google.CloudDatastore
 -- Copyright   : (c) 2015 Brendan Hay
@@ -6,15 +12,20 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- API for accessing Google Cloud Datastore.
+-- -- | API for accessing Google Cloud Datastore.
 --
 -- /See:/ <https://developers.google.com/datastore/ Google Cloud Datastore API Reference>
 module Network.Google.CloudDatastore
     (
-    -- * API Definition
+    -- * Resources
       CloudDatastore
-
-
+    , DatasetsAPI
+    , DatasetsBeginTransaction
+    , DatasetsAllocateIds
+    , DatasetsRunQuery
+    , DatasetsRollback
+    , DatasetsLookup
+    , DatasetsCommit
 
     -- * Types
 
@@ -297,11 +308,91 @@ import           Network.Google.CloudDatastore.Types
 TODO
 -}
 
-type CloudDatastore = ()
+type CloudDatastore = DatasetsAPI
 
-cloudDatastore :: Proxy CloudDatastore
-cloudDatastore = Proxy
+type DatasetsAPI =
+     DatasetsAllocateIds :<|>
+       DatasetsRunQuery :<|>
+         DatasetsRollback :<|>
+           DatasetsLookup :<|>
+             DatasetsCommit :<|> DatasetsBeginTransaction
 
+-- | Begin a new transaction.
+type DatasetsBeginTransaction =
+     "datastore" :> "v1beta2" :> "datasets" :>
+       Capture "datasetId" Text
+       :> "beginTransaction"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
+-- | Allocate IDs for incomplete keys (useful for referencing an entity
+-- before it is inserted).
+type DatasetsAllocateIds =
+     "datastore" :> "v1beta2" :> "datasets" :>
+       Capture "datasetId" Text
+       :> "allocateIds"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
+-- | Query for entities.
+type DatasetsRunQuery =
+     "datastore" :> "v1beta2" :> "datasets" :>
+       Capture "datasetId" Text
+       :> "runQuery"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
+-- | Roll back a transaction.
+type DatasetsRollback =
+     "datastore" :> "v1beta2" :> "datasets" :>
+       Capture "datasetId" Text
+       :> "rollback"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Look up some entities by key.
+type DatasetsLookup =
+     "datastore" :> "v1beta2" :> "datasets" :>
+       Capture "datasetId" Text
+       :> "lookup"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Commit a transaction, optionally creating, deleting or modifying some
+-- entities.
+type DatasetsCommit =
+     "datastore" :> "v1beta2" :> "datasets" :>
+       Capture "datasetId" Text
+       :> "commit"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text

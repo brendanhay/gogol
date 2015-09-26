@@ -1,3 +1,9 @@
+{-# LANGUAGE DataKinds     #-}
+{-# LANGUAGE TypeOperators #-}
+
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+
 -- |
 -- Module      : Network.Google.ComputeEngineAutoscaler
 -- Copyright   : (c) 2015 Brendan Hay
@@ -6,15 +12,27 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Google Compute Engine Autoscaler API provides autoscaling for groups of Cloud VMs.
+-- -- | The Google Compute Engine Autoscaler API provides autoscaling for groups
+-- of Cloud VMs.
 --
 -- /See:/ <http://developers.google.com/compute/docs/autoscaler Google Compute Engine Autoscaler API Reference>
 module Network.Google.ComputeEngineAutoscaler
     (
-    -- * API Definition
+    -- * Resources
       ComputeEngineAutoscaler
-
-
+    , ZonesAPI
+    , ZonesList
+    , AutoscalersAPI
+    , AutoscalersInsert
+    , AutoscalersList
+    , AutoscalersPatch
+    , AutoscalersGet
+    , AutoscalersDelete
+    , AutoscalersUpdate
+    , ZoneOperationsAPI
+    , ZoneOperationsList
+    , ZoneOperationsGet
+    , ZoneOperationsDelete
 
     -- * Types
 
@@ -171,11 +189,179 @@ import           Network.Google.ComputeEngineAutoscaler.Types
 TODO
 -}
 
-type ComputeEngineAutoscaler = ()
+type ComputeEngineAutoscaler =
+     AutoscalersAPI :<|> ZoneOperationsAPI :<|> ZonesAPI
 
-computeEngineAutoscaler :: Proxy ComputeEngineAutoscaler
-computeEngineAutoscaler = Proxy
+type ZonesAPI = ZonesList
 
+-- |
+type ZonesList =
+     "autoscaler" :> "v1beta2" :> Capture "project" Text
+       :> "zones"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "filter" Text
+       :> QueryParam "pageToken" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "maxResults" Word32
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
+type AutoscalersAPI =
+     AutoscalersList :<|>
+       AutoscalersPatch :<|>
+         AutoscalersGet :<|>
+           AutoscalersDelete :<|>
+             AutoscalersUpdate :<|> AutoscalersInsert
 
+-- | Adds new Autoscaler resource.
+type AutoscalersInsert =
+     "autoscaler" :> "v1beta2" :> "projects" :>
+       Capture "project" Text
+       :> "zones"
+       :> Capture "zone" Text
+       :> "autoscalers"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
+-- | Lists all Autoscaler resources in this zone.
+type AutoscalersList =
+     "autoscaler" :> "v1beta2" :> "projects" :>
+       Capture "project" Text
+       :> "zones"
+       :> Capture "zone" Text
+       :> "autoscalers"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "filter" Text
+       :> QueryParam "pageToken" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "maxResults" Word32
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Update the entire content of the Autoscaler resource. This method
+-- supports patch semantics.
+type AutoscalersPatch =
+     "autoscaler" :> "v1beta2" :> "projects" :>
+       Capture "project" Text
+       :> "zones"
+       :> Capture "zone" Text
+       :> "autoscalers"
+       :> Capture "autoscaler" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Gets the specified Autoscaler resource.
+type AutoscalersGet =
+     "autoscaler" :> "v1beta2" :> "projects" :>
+       Capture "project" Text
+       :> "zones"
+       :> Capture "zone" Text
+       :> "autoscalers"
+       :> Capture "autoscaler" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Deletes the specified Autoscaler resource.
+type AutoscalersDelete =
+     "autoscaler" :> "v1beta2" :> "projects" :>
+       Capture "project" Text
+       :> "zones"
+       :> Capture "zone" Text
+       :> "autoscalers"
+       :> Capture "autoscaler" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Update the entire content of the Autoscaler resource.
+type AutoscalersUpdate =
+     "autoscaler" :> "v1beta2" :> "projects" :>
+       Capture "project" Text
+       :> "zones"
+       :> Capture "zone" Text
+       :> "autoscalers"
+       :> Capture "autoscaler" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type ZoneOperationsAPI =
+     ZoneOperationsGet :<|>
+       ZoneOperationsDelete :<|> ZoneOperationsList
+
+-- | Retrieves the list of operation resources contained within the specified
+-- zone.
+type ZoneOperationsList =
+     "autoscaler" :> "v1beta2" :> Capture "project" Text
+       :> "zones"
+       :> Capture "zone" Text
+       :> "operations"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "filter" Text
+       :> QueryParam "pageToken" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "maxResults" Word32
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Retrieves the specified zone-specific operation resource.
+type ZoneOperationsGet =
+     "autoscaler" :> "v1beta2" :> Capture "project" Text
+       :> "zones"
+       :> Capture "zone" Text
+       :> "operations"
+       :> Capture "operation" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Deletes the specified zone-specific operation resource.
+type ZoneOperationsDelete =
+     "autoscaler" :> "v1beta2" :> Capture "project" Text
+       :> "zones"
+       :> Capture "zone" Text
+       :> "operations"
+       :> Capture "operation" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text

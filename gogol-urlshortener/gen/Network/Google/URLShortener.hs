@@ -1,3 +1,9 @@
+{-# LANGUAGE DataKinds     #-}
+{-# LANGUAGE TypeOperators #-}
+
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+
 -- |
 -- Module      : Network.Google.URLShortener
 -- Copyright   : (c) 2015 Brendan Hay
@@ -6,15 +12,17 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lets you create, inspect, and manage goo.gl short URLs
+-- -- | Lets you create, inspect, and manage goo.gl short URLs
 --
 -- /See:/ <https://developers.google.com/url-shortener/v1/getting_started URL Shortener API Reference>
 module Network.Google.URLShortener
     (
-    -- * API Definition
+    -- * Resources
       URLShortener
-
-
+    , UrlAPI
+    , UrlInsert
+    , UrlList
+    , UrlGet
 
     -- * Types
 
@@ -69,11 +77,43 @@ import           Network.Google.URLShortener.Types
 TODO
 -}
 
-type URLShortener = ()
+type URLShortener = UrlAPI
 
-uRLShortener :: Proxy URLShortener
-uRLShortener = Proxy
+type UrlAPI = UrlList :<|> UrlGet :<|> UrlInsert
 
+-- | Creates a new short URL.
+type UrlInsert =
+     "urlshortener" :> "v1" :> "url" :>
+       QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
+-- | Retrieves a list of URLs shortened by a user.
+type UrlList =
+     "urlshortener" :> "v1" :> "url" :> "history" :>
+       QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "start-token" Text
+       :> QueryParam "key" Text
+       :> QueryParam "projection" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
-
+-- | Expands a short URL or gets creation time and analytics.
+type UrlGet =
+     "urlshortener" :> "v1" :> "url" :>
+       QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "projection" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "shortUrl" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text

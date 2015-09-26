@@ -1,3 +1,9 @@
+{-# LANGUAGE DataKinds     #-}
+{-# LANGUAGE TypeOperators #-}
+
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+
 -- |
 -- Module      : Network.Google.EnterpriseAppsReseller
 -- Copyright   : (c) 2015 Brendan Hay
@@ -6,15 +12,29 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lets you create and manage your customers and their subscriptions.
+-- -- | Lets you create and manage your customers and their subscriptions.
 --
 -- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference>
 module Network.Google.EnterpriseAppsReseller
     (
-    -- * API Definition
+    -- * Resources
       EnterpriseAppsReseller
-
-
+    , CustomersAPI
+    , CustomersInsert
+    , CustomersPatch
+    , CustomersGet
+    , CustomersUpdate
+    , SubscriptionsAPI
+    , SubscriptionsInsert
+    , SubscriptionsList
+    , SubscriptionsChangeRenewalSettings
+    , SubscriptionsGet
+    , SubscriptionsActivate
+    , SubscriptionsSuspend
+    , SubscriptionsChangePlan
+    , SubscriptionsChangeSeats
+    , SubscriptionsDelete
+    , SubscriptionsStartPaidService
 
     -- * Types
 
@@ -123,11 +143,223 @@ import           Network.Google.EnterpriseAppsReseller.Types
 TODO
 -}
 
-type EnterpriseAppsReseller = ()
+type EnterpriseAppsReseller =
+     SubscriptionsAPI :<|> CustomersAPI
 
-enterpriseAppsReseller :: Proxy EnterpriseAppsReseller
-enterpriseAppsReseller = Proxy
+type CustomersAPI =
+     CustomersPatch :<|>
+       CustomersGet :<|>
+         CustomersUpdate :<|> CustomersInsert
 
+-- | Creates a customer resource if one does not already exist.
+type CustomersInsert =
+     "apps" :> "reseller" :> "v1sandbox" :> "customers" :>
+       QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "customerAuthToken" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
+-- | Update a customer resource if one it exists and is owned by the
+-- reseller. This method supports patch semantics.
+type CustomersPatch =
+     "apps" :> "reseller" :> "v1sandbox" :> "customers" :>
+       Capture "customerId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
+-- | Gets a customer resource if one exists and is owned by the reseller.
+type CustomersGet =
+     "apps" :> "reseller" :> "v1sandbox" :> "customers" :>
+       Capture "customerId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
+-- | Update a customer resource if one it exists and is owned by the
+-- reseller.
+type CustomersUpdate =
+     "apps" :> "reseller" :> "v1sandbox" :> "customers" :>
+       Capture "customerId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type SubscriptionsAPI =
+     SubscriptionsList :<|>
+       SubscriptionsChangeRenewalSettings :<|>
+         SubscriptionsGet :<|>
+           SubscriptionsActivate :<|>
+             SubscriptionsSuspend :<|>
+               SubscriptionsChangePlan :<|>
+                 SubscriptionsChangeSeats :<|>
+                   SubscriptionsDelete :<|>
+                     SubscriptionsStartPaidService :<|>
+                       SubscriptionsInsert
+
+-- | Creates\/Transfers a subscription for the customer.
+type SubscriptionsInsert =
+     "apps" :> "reseller" :> "v1sandbox" :> "customers" :>
+       Capture "customerId" Text
+       :> "subscriptions"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "customerAuthToken" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Lists subscriptions of a reseller, optionally filtered by a customer
+-- name prefix.
+type SubscriptionsList =
+     "apps" :> "reseller" :> "v1sandbox" :>
+       "subscriptions"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "customerNamePrefix" Text
+       :> QueryParam "customerId" Text
+       :> QueryParam "key" Text
+       :> QueryParam "customerAuthToken" Text
+       :> QueryParam "pageToken" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "maxResults" Natural
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Changes the renewal settings of a subscription
+type SubscriptionsChangeRenewalSettings =
+     "apps" :> "reseller" :> "v1sandbox" :> "customers" :>
+       Capture "customerId" Text
+       :> "subscriptions"
+       :> Capture "subscriptionId" Text
+       :> "changeRenewalSettings"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Gets a subscription of the customer.
+type SubscriptionsGet =
+     "apps" :> "reseller" :> "v1sandbox" :> "customers" :>
+       Capture "customerId" Text
+       :> "subscriptions"
+       :> Capture "subscriptionId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Activates a subscription previously suspended by the reseller
+type SubscriptionsActivate =
+     "apps" :> "reseller" :> "v1sandbox" :> "customers" :>
+       Capture "customerId" Text
+       :> "subscriptions"
+       :> Capture "subscriptionId" Text
+       :> "activate"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Suspends an active subscription
+type SubscriptionsSuspend =
+     "apps" :> "reseller" :> "v1sandbox" :> "customers" :>
+       Capture "customerId" Text
+       :> "subscriptions"
+       :> Capture "subscriptionId" Text
+       :> "suspend"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Changes the plan of a subscription
+type SubscriptionsChangePlan =
+     "apps" :> "reseller" :> "v1sandbox" :> "customers" :>
+       Capture "customerId" Text
+       :> "subscriptions"
+       :> Capture "subscriptionId" Text
+       :> "changePlan"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Changes the seats configuration of a subscription
+type SubscriptionsChangeSeats =
+     "apps" :> "reseller" :> "v1sandbox" :> "customers" :>
+       Capture "customerId" Text
+       :> "subscriptions"
+       :> Capture "subscriptionId" Text
+       :> "changeSeats"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Cancels\/Downgrades a subscription.
+type SubscriptionsDelete =
+     "apps" :> "reseller" :> "v1sandbox" :> "customers" :>
+       Capture "customerId" Text
+       :> "subscriptions"
+       :> Capture "subscriptionId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "deletionType" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Starts paid service of a trial subscription
+type SubscriptionsStartPaidService =
+     "apps" :> "reseller" :> "v1sandbox" :> "customers" :>
+       Capture "customerId" Text
+       :> "subscriptions"
+       :> Capture "subscriptionId" Text
+       :> "startPaidService"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text

@@ -1,3 +1,9 @@
+{-# LANGUAGE DataKinds     #-}
+{-# LANGUAGE TypeOperators #-}
+
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+
 -- |
 -- Module      : Network.Google.Mirror
 -- Copyright   : (c) 2015 Brendan Hay
@@ -6,15 +12,38 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- API for interacting with Glass users via the timeline.
+-- -- | API for interacting with Glass users via the timeline.
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference>
 module Network.Google.Mirror
     (
-    -- * API Definition
+    -- * Resources
       Mirror
-
-
+    , AccountsAPI
+    , AccountsInsert
+    , SettingsAPI
+    , SettingsGet
+    , SubscriptionsAPI
+    , SubscriptionsInsert
+    , SubscriptionsList
+    , SubscriptionsDelete
+    , SubscriptionsUpdate
+    , TimelineAPI
+    , AttachmentsAPI
+    , AttachmentsInsert
+    , AttachmentsList
+    , AttachmentsGet
+    , AttachmentsDelete
+    , ContactsAPI
+    , ContactsInsert
+    , ContactsList
+    , ContactsPatch
+    , ContactsGet
+    , ContactsDelete
+    , ContactsUpdate
+    , LocationsAPI
+    , LocationsList
+    , LocationsGet
 
     -- * Types
 
@@ -206,11 +235,247 @@ import           Network.Google.Mirror.Types
 TODO
 -}
 
-type Mirror = ()
+type Mirror =
+     SettingsAPI :<|>
+       SubscriptionsAPI :<|>
+         TimelineAPI :<|>
+           ContactsAPI :<|> LocationsAPI :<|> AccountsAPI
 
-mirror :: Proxy Mirror
-mirror = Proxy
+type AccountsAPI = AccountsInsert
 
+-- | Inserts a new account for a user
+type AccountsInsert =
+     "mirror" :> "v1" :> "accounts" :>
+       Capture "userToken" Text
+       :> Capture "accountType" Text
+       :> Capture "accountName" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
+type SettingsAPI = SettingsGet
 
+-- | Gets a single setting by ID.
+type SettingsGet =
+     "mirror" :> "v1" :> "settings" :> Capture "id" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
+type SubscriptionsAPI =
+     SubscriptionsList :<|>
+       SubscriptionsDelete :<|>
+         SubscriptionsUpdate :<|> SubscriptionsInsert
+
+-- | Creates a new subscription.
+type SubscriptionsInsert =
+     "mirror" :> "v1" :> "subscriptions" :>
+       QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Retrieves a list of subscriptions for the authenticated user and
+-- service.
+type SubscriptionsList =
+     "mirror" :> "v1" :> "subscriptions" :>
+       QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Deletes a subscription.
+type SubscriptionsDelete =
+     "mirror" :> "v1" :> "subscriptions" :>
+       Capture "id" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Updates an existing subscription in place.
+type SubscriptionsUpdate =
+     "mirror" :> "v1" :> "subscriptions" :>
+       Capture "id" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type TimelineAPI = AttachmentsAPI
+
+type AttachmentsAPI =
+     AttachmentsList :<|>
+       AttachmentsGet :<|>
+         AttachmentsDelete :<|> AttachmentsInsert
+
+-- | Adds a new attachment to a timeline item.
+type AttachmentsInsert =
+     "mirror" :> "v1" :> "timeline" :>
+       Capture "itemId" Text
+       :> "attachments"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Returns a list of attachments for a timeline item.
+type AttachmentsList =
+     "mirror" :> "v1" :> "timeline" :>
+       Capture "itemId" Text
+       :> "attachments"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Retrieves an attachment on a timeline item by item ID and attachment ID.
+type AttachmentsGet =
+     "mirror" :> "v1" :> "timeline" :>
+       Capture "itemId" Text
+       :> "attachments"
+       :> Capture "attachmentId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Deletes an attachment from a timeline item.
+type AttachmentsDelete =
+     "mirror" :> "v1" :> "timeline" :>
+       Capture "itemId" Text
+       :> "attachments"
+       :> Capture "attachmentId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type ContactsAPI =
+     ContactsList :<|>
+       ContactsPatch :<|>
+         ContactsGet :<|>
+           ContactsDelete :<|>
+             ContactsUpdate :<|> ContactsInsert
+
+-- | Inserts a new contact.
+type ContactsInsert =
+     "mirror" :> "v1" :> "contacts" :>
+       QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Retrieves a list of contacts for the authenticated user.
+type ContactsList =
+     "mirror" :> "v1" :> "contacts" :>
+       QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Updates a contact in place. This method supports patch semantics.
+type ContactsPatch =
+     "mirror" :> "v1" :> "contacts" :> Capture "id" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Gets a single contact by ID.
+type ContactsGet =
+     "mirror" :> "v1" :> "contacts" :> Capture "id" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Deletes a contact.
+type ContactsDelete =
+     "mirror" :> "v1" :> "contacts" :> Capture "id" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Updates a contact in place.
+type ContactsUpdate =
+     "mirror" :> "v1" :> "contacts" :> Capture "id" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type LocationsAPI = LocationsGet :<|> LocationsList
+
+-- | Retrieves a list of locations for the user.
+type LocationsList =
+     "mirror" :> "v1" :> "locations" :>
+       QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Gets a single location by ID.
+type LocationsGet =
+     "mirror" :> "v1" :> "locations" :> Capture "id" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text

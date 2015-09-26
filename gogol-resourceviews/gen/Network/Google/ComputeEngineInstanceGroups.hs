@@ -1,3 +1,9 @@
+{-# LANGUAGE DataKinds     #-}
+{-# LANGUAGE TypeOperators #-}
+
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+
 -- |
 -- Module      : Network.Google.ComputeEngineInstanceGroups
 -- Copyright   : (c) 2015 Brendan Hay
@@ -6,15 +12,27 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Resource View API allows users to create and manage logical sets of Google Compute Engine instances.
+-- -- | The Resource View API allows users to create and manage logical sets of
+-- Google Compute Engine instances.
 --
 -- /See:/ <https://developers.google.com/compute/ Google Compute Engine Instance Groups API Reference>
 module Network.Google.ComputeEngineInstanceGroups
     (
-    -- * API Definition
+    -- * Resources
       ComputeEngineInstanceGroups
-
-
+    , ZoneViewsAPI
+    , ZoneViewsSetService
+    , ZoneViewsInsert
+    , ZoneViewsList
+    , ZoneViewsListResources
+    , ZoneViewsGet
+    , ZoneViewsRemoveResources
+    , ZoneViewsAddResources
+    , ZoneViewsGetService
+    , ZoneViewsDelete
+    , ZoneOperationsAPI
+    , ZoneOperationsList
+    , ZoneOperationsGet
 
     -- * Types
 
@@ -161,11 +179,208 @@ import           Network.Google.ComputeEngineInstanceGroups.Types
 TODO
 -}
 
-type ComputeEngineInstanceGroups = ()
+type ComputeEngineInstanceGroups =
+     ZoneOperationsAPI :<|> ZoneViewsAPI
 
-computeEngineInstanceGroups :: Proxy ComputeEngineInstanceGroups
-computeEngineInstanceGroups = Proxy
+type ZoneViewsAPI =
+     ZoneViewsInsert :<|>
+       ZoneViewsList :<|>
+         ZoneViewsListResources :<|>
+           ZoneViewsGet :<|>
+             ZoneViewsRemoveResources :<|>
+               ZoneViewsAddResources :<|>
+                 ZoneViewsGetService :<|>
+                   ZoneViewsDelete :<|> ZoneViewsSetService
 
+-- | Update the service information of a resource view or a resource.
+type ZoneViewsSetService =
+     "resourceviews" :> "v1beta2" :> "projects" :>
+       Capture "project" Text
+       :> "zones"
+       :> Capture "zone" Text
+       :> "resourceViews"
+       :> Capture "resourceView" Text
+       :> "setService"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
+-- | Create a resource view.
+type ZoneViewsInsert =
+     "resourceviews" :> "v1beta2" :> "projects" :>
+       Capture "project" Text
+       :> "zones"
+       :> Capture "zone" Text
+       :> "resourceViews"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
+-- | List resource views.
+type ZoneViewsList =
+     "resourceviews" :> "v1beta2" :> "projects" :>
+       Capture "project" Text
+       :> "zones"
+       :> Capture "zone" Text
+       :> "resourceViews"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "pageToken" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "maxResults" Int32
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
+-- | List the resources of the resource view.
+type ZoneViewsListResources =
+     "resourceviews" :> "v1beta2" :> "projects" :>
+       Capture "project" Text
+       :> "zones"
+       :> Capture "zone" Text
+       :> "resourceViews"
+       :> Capture "resourceView" Text
+       :> "resources"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "listState" Text
+       :> QueryParam "userIp" Text
+       :> QueryParam "format" Text
+       :> QueryParam "key" Text
+       :> QueryParam "serviceName" Text
+       :> QueryParam "pageToken" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "maxResults" Int32
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Get the information of a zonal resource view.
+type ZoneViewsGet =
+     "resourceviews" :> "v1beta2" :> "projects" :>
+       Capture "project" Text
+       :> "zones"
+       :> Capture "zone" Text
+       :> "resourceViews"
+       :> Capture "resourceView" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Remove resources from the view.
+type ZoneViewsRemoveResources =
+     "resourceviews" :> "v1beta2" :> "projects" :>
+       Capture "project" Text
+       :> "zones"
+       :> Capture "zone" Text
+       :> "resourceViews"
+       :> Capture "resourceView" Text
+       :> "removeResources"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Add resources to the view.
+type ZoneViewsAddResources =
+     "resourceviews" :> "v1beta2" :> "projects" :>
+       Capture "project" Text
+       :> "zones"
+       :> Capture "zone" Text
+       :> "resourceViews"
+       :> Capture "resourceView" Text
+       :> "addResources"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Get the service information of a resource view or a resource.
+type ZoneViewsGetService =
+     "resourceviews" :> "v1beta2" :> "projects" :>
+       Capture "project" Text
+       :> "zones"
+       :> Capture "zone" Text
+       :> "resourceViews"
+       :> Capture "resourceView" Text
+       :> "getService"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "resourceName" Text
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Delete a resource view.
+type ZoneViewsDelete =
+     "resourceviews" :> "v1beta2" :> "projects" :>
+       Capture "project" Text
+       :> "zones"
+       :> Capture "zone" Text
+       :> "resourceViews"
+       :> Capture "resourceView" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type ZoneOperationsAPI =
+     ZoneOperationsGet :<|> ZoneOperationsList
+
+-- | Retrieves the list of operation resources contained within the specified
+-- zone.
+type ZoneOperationsList =
+     "resourceviews" :> "v1beta2" :> "projects" :>
+       Capture "project" Text
+       :> "zones"
+       :> Capture "zone" Text
+       :> "operations"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "filter" Text
+       :> QueryParam "pageToken" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "maxResults" Word32
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Retrieves the specified zone-specific operation resource.
+type ZoneOperationsGet =
+     "resourceviews" :> "v1beta2" :> "projects" :>
+       Capture "project" Text
+       :> "zones"
+       :> Capture "zone" Text
+       :> "operations"
+       :> Capture "operation" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text

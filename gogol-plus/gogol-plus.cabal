@@ -14,7 +14,11 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    Pending
+    The Google+ API enables developers to build on top of the Google+
+    platform.
+    .
+    /Warning:/ This is an experimental preview release which is still under
+    heavy development and not intended for public consumption, caveat emptor!
 
 source-repository head
     type:     git
@@ -27,12 +31,12 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.Google+
-        , Network.Google.Google+.Types
+          Network.Google.Plus
+        , Network.Google.Plus.Types
 
     other-modules:
-          Network.Google.Google+.Types.Product
-        , Network.Google.Google+.Types.Sum
+          Network.Google.Plus.Types.Product
+        , Network.Google.Plus.Types.Sum
 
     build-depends:
           gogol-core == 0.0.1.*

@@ -1,3 +1,9 @@
+{-# LANGUAGE DataKinds     #-}
+{-# LANGUAGE TypeOperators #-}
+
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+
 -- |
 -- Module      : Network.Google.Translate
 -- Copyright   : (c) 2015 Brendan Hay
@@ -6,15 +12,19 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lets you translate text from one language to another
+-- -- | Lets you translate text from one language to another
 --
 -- /See:/ <https://developers.google.com/translate/v2/using_rest Translate API Reference>
 module Network.Google.Translate
     (
-    -- * API Definition
+    -- * Resources
       Translate
-
-
+    , DetectionsAPI
+    , DetectionsList
+    , LanguagesAPI
+    , LanguagesList
+    , TranslationsAPI
+    , TranslationsList
 
     -- * Types
 
@@ -59,11 +69,51 @@ import           Network.Google.Translate.Types
 TODO
 -}
 
-type Translate = ()
+type Translate =
+     LanguagesAPI :<|> TranslationsAPI :<|> DetectionsAPI
 
-translate :: Proxy Translate
-translate = Proxy
+type DetectionsAPI = DetectionsList
 
+-- | Detect the language of text.
+type DetectionsList =
+     "language" :> "translate" :> "v2" :> "detect" :>
+       QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "q" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
+type LanguagesAPI = LanguagesList
 
+-- | List the source\/target languages supported by the API
+type LanguagesList =
+     "language" :> "translate" :> "v2" :> "languages" :>
+       QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "target" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
+type TranslationsAPI = TranslationsList
+
+-- | Returns text translations from one language to another.
+type TranslationsList =
+     "language" :> "translate" :> "v2" :>
+       QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "format" Text
+       :> QueryParam "q" Text
+       :> QueryParam "key" Text
+       :> QueryParam "source" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "cid" Text
+       :> QueryParam "target" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text

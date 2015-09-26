@@ -1,3 +1,9 @@
+{-# LANGUAGE DataKinds     #-}
+{-# LANGUAGE TypeOperators #-}
+
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+
 -- |
 -- Module      : Network.Google.DoubleClickSearch
 -- Copyright   : (c) 2015 Brendan Hay
@@ -6,15 +12,27 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Report and modify your advertising data in DoubleClick Search (for example, campaigns, ad groups, keywords, and conversions).
+-- -- | Report and modify your advertising data in DoubleClick Search (for
+-- example, campaigns, ad groups, keywords, and conversions).
 --
 -- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference>
 module Network.Google.DoubleClickSearch
     (
-    -- * API Definition
+    -- * Resources
       DoubleClickSearch
-
-
+    , ReportsAPI
+    , ReportsGet
+    , ReportsGetFile
+    , ReportsGenerate
+    , ReportsRequest
+    , SavedColumnsAPI
+    , SavedColumnsList
+    , ConversionAPI
+    , ConversionInsert
+    , ConversionPatch
+    , ConversionGet
+    , ConversionUpdateAvailability
+    , ConversionUpdate
 
     -- * Types
 
@@ -199,11 +217,161 @@ import           Network.Google.DoubleClickSearch.Types
 TODO
 -}
 
-type DoubleClickSearch = ()
+type DoubleClickSearch =
+     SavedColumnsAPI :<|> ConversionAPI :<|> ReportsAPI
 
-doubleClickSearch :: Proxy DoubleClickSearch
-doubleClickSearch = Proxy
+type ReportsAPI =
+     ReportsGetFile :<|>
+       ReportsGenerate :<|> ReportsRequest :<|> ReportsGet
 
+-- | Polls for the status of a report request.
+type ReportsGet =
+     "doubleclicksearch" :> "v2" :> "reports" :>
+       Capture "reportId" Text
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
+-- | Downloads a report file encoded in UTF-8.
+type ReportsGetFile =
+     "doubleclicksearch" :> "v2" :> "reports" :>
+       Capture "reportId" Text
+       :> "files"
+       :> Capture "reportFragment" Int32
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
+-- | Generates and returns a report immediately.
+type ReportsGenerate =
+     "doubleclicksearch" :> "v2" :> "reports" :>
+       "generate"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
+-- | Inserts a report request into the reporting system.
+type ReportsRequest =
+     "doubleclicksearch" :> "v2" :> "reports" :>
+       QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type SavedColumnsAPI = SavedColumnsList
+
+-- | Retrieve the list of saved columns for a specified advertiser.
+type SavedColumnsList =
+     "doubleclicksearch" :> "v2" :> "agency" :>
+       Capture "agencyId" Int64
+       :> "advertiser"
+       :> Capture "advertiserId" Int64
+       :> "savedcolumns"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+type ConversionAPI =
+     ConversionPatch :<|>
+       ConversionGet :<|>
+         ConversionUpdateAvailability :<|>
+           ConversionUpdate :<|> ConversionInsert
+
+-- | Inserts a batch of new conversions into DoubleClick Search.
+type ConversionInsert =
+     "doubleclicksearch" :> "v2" :> "conversion" :>
+       QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Updates a batch of conversions in DoubleClick Search. This method
+-- supports patch semantics.
+type ConversionPatch =
+     "doubleclicksearch" :> "v2" :> "conversion" :>
+       QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "engineAccountId" Int64
+       :> QueryParam "agencyId" Int64
+       :> QueryParam "userIp" Text
+       :> QueryParam "advertiserId" Int64
+       :> QueryParam "endDate" Natural
+       :> QueryParam "startDate" Natural
+       :> QueryParam "key" Text
+       :> QueryParam "startRow" Word32
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "rowCount" Natural
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Retrieves a list of conversions from a DoubleClick Search engine
+-- account.
+type ConversionGet =
+     "doubleclicksearch" :> "v2" :> "agency" :>
+       Capture "agencyId" Int64
+       :> "advertiser"
+       :> Capture "advertiserId" Int64
+       :> "engine"
+       :> Capture "engineAccountId" Int64
+       :> "conversion"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "adGroupId" Int64
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "endDate" Natural
+       :> QueryParam "campaignId" Int64
+       :> QueryParam "criterionId" Int64
+       :> QueryParam "startDate" Natural
+       :> QueryParam "key" Text
+       :> QueryParam "startRow" Word32
+       :> QueryParam "adId" Int64
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "rowCount" Natural
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Updates the availabilities of a batch of floodlight activities in
+-- DoubleClick Search.
+type ConversionUpdateAvailability =
+     "doubleclicksearch" :> "v2" :> "conversion" :>
+       "updateAvailability"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Updates a batch of conversions in DoubleClick Search.
+type ConversionUpdate =
+     "doubleclicksearch" :> "v2" :> "conversion" :>
+       QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text

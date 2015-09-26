@@ -1,3 +1,9 @@
+{-# LANGUAGE DataKinds     #-}
+{-# LANGUAGE TypeOperators #-}
+
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+
 -- |
 -- Module      : Network.Google.IdentityToolkit
 -- Copyright   : (c) 2015 Brendan Hay
@@ -6,15 +12,26 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Help the third party sites to implement federated login.
+-- -- | Help the third party sites to implement federated login.
 --
 -- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference>
 module Network.Google.IdentityToolkit
     (
-    -- * API Definition
+    -- * Resources
       IdentityToolkit
-
-
+    , RelyingpartyAPI
+    , RelyingpartyCreateAuthUri
+    , RelyingpartyUploadAccount
+    , RelyingpartyResetPassword
+    , RelyingpartySetAccountInfo
+    , RelyingpartyVerifyAssertion
+    , RelyingpartyDeleteAccount
+    , RelyingpartyGetOobConfirmationCode
+    , RelyingpartyGetRecaptchaParam
+    , RelyingpartyDownloadAccount
+    , RelyingpartyVerifyPassword
+    , RelyingpartyGetPublicKeys
+    , RelyingpartyGetAccountInfo
 
     -- * Types
 
@@ -273,11 +290,162 @@ import           Network.Google.IdentityToolkit.Types
 TODO
 -}
 
-type IdentityToolkit = ()
+type IdentityToolkit = RelyingpartyAPI
 
-identityToolkit :: Proxy IdentityToolkit
-identityToolkit = Proxy
+type RelyingpartyAPI =
+     RelyingpartyUploadAccount :<|>
+       RelyingpartyResetPassword :<|>
+         RelyingpartySetAccountInfo :<|>
+           RelyingpartyVerifyAssertion :<|>
+             RelyingpartyDeleteAccount :<|>
+               RelyingpartyGetOobConfirmationCode :<|>
+                 RelyingpartyGetRecaptchaParam :<|>
+                   RelyingpartyDownloadAccount :<|>
+                     RelyingpartyVerifyPassword :<|>
+                       RelyingpartyGetPublicKeys :<|>
+                         RelyingpartyGetAccountInfo :<|>
+                           RelyingpartyCreateAuthUri
 
+-- | Creates the URI used by the IdP to authenticate the user.
+type RelyingpartyCreateAuthUri =
+     "identitytoolkit" :> "v3" :> "relyingparty" :>
+       "createAuthUri"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
+-- | Batch upload existing user accounts.
+type RelyingpartyUploadAccount =
+     "identitytoolkit" :> "v3" :> "relyingparty" :>
+       "uploadAccount"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
+-- | Reset password for a user.
+type RelyingpartyResetPassword =
+     "identitytoolkit" :> "v3" :> "relyingparty" :>
+       "resetPassword"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
 
+-- | Set account info for a user.
+type RelyingpartySetAccountInfo =
+     "identitytoolkit" :> "v3" :> "relyingparty" :>
+       "setAccountInfo"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Verifies the assertion returned by the IdP.
+type RelyingpartyVerifyAssertion =
+     "identitytoolkit" :> "v3" :> "relyingparty" :>
+       "verifyAssertion"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Delete user account.
+type RelyingpartyDeleteAccount =
+     "identitytoolkit" :> "v3" :> "relyingparty" :>
+       "deleteAccount"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Get a code for user action confirmation.
+type RelyingpartyGetOobConfirmationCode =
+     "identitytoolkit" :> "v3" :> "relyingparty" :>
+       "getOobConfirmationCode"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Get recaptcha secure param.
+type RelyingpartyGetRecaptchaParam =
+     "identitytoolkit" :> "v3" :> "relyingparty" :>
+       "getRecaptchaParam"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Batch download user accounts.
+type RelyingpartyDownloadAccount =
+     "identitytoolkit" :> "v3" :> "relyingparty" :>
+       "downloadAccount"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Verifies the user entered password.
+type RelyingpartyVerifyPassword =
+     "identitytoolkit" :> "v3" :> "relyingparty" :>
+       "verifyPassword"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Get token signing public key.
+type RelyingpartyGetPublicKeys =
+     "identitytoolkit" :> "v3" :> "relyingparty" :>
+       "publicKeys"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text
+
+-- | Returns the account info.
+type RelyingpartyGetAccountInfo =
+     "identitytoolkit" :> "v3" :> "relyingparty" :>
+       "getAccountInfo"
+       :> QueryParam "quotaUser" Text
+       :> QueryParam "prettyPrint" Bool
+       :> QueryParam "userIp" Text
+       :> QueryParam "key" Text
+       :> QueryParam "oauth_token" Text
+       :> QueryParam "fields" Text
+       :> QueryParam "alt" Text

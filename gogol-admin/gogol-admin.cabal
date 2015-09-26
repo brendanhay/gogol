@@ -14,7 +14,17 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    Pending
+    Admin Data Transfer API lets you transfer user data from one user to
+    another.
+    The Admin SDK Directory API lets you view and manage enterprise
+    resources such as users and groups, administrative notifications,
+    security features, and more.
+    Email Migration API lets you migrate emails of users to Google backends.
+    Allows the administrators of Google Apps customers to fetch reports
+    about the usage, collaboration, security and risk for their users.
+    .
+    /Warning:/ This is an experimental preview release which is still under
+    heavy development and not intended for public consumption, caveat emptor!
 
 source-repository head
     type:     git
@@ -31,8 +41,8 @@ library
         , Network.Google.DataTransfer.Types
         , Network.Google.Directory
         , Network.Google.Directory.Types
-        , Network.Google.EmailMigrationAPIv2
-        , Network.Google.EmailMigrationAPIv2.Types
+        , Network.Google.EmailMigration
+        , Network.Google.EmailMigration.Types
         , Network.Google.Reports
         , Network.Google.Reports.Types
 
@@ -41,8 +51,8 @@ library
         , Network.Google.DataTransfer.Types.Sum
         , Network.Google.Directory.Types.Product
         , Network.Google.Directory.Types.Sum
-        , Network.Google.EmailMigrationAPIv2.Types.Product
-        , Network.Google.EmailMigrationAPIv2.Types.Sum
+        , Network.Google.EmailMigration.Types.Product
+        , Network.Google.EmailMigration.Types.Sum
         , Network.Google.Reports.Types.Product
         , Network.Google.Reports.Types.Sum
 
