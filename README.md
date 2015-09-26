@@ -7,8 +7,8 @@
 
 ## Description
 
-> TODO
-
+<img alt="Гоголь-моголь" height="261px;" src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Kogel_mogel.JPG">
+<img alt="Мико́ла Васи́льович Го́голь" height="261px" src="https://upload.wikimedia.org/wikipedia/commons/3/31/NV_Gogol.png">
 
 ## Contribute
 
