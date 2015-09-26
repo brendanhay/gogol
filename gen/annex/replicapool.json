@@ -1,3 +1,4 @@
 {
-    "library": "replicapool"
+    "library": "compute-instancegroups",
+    "canonicalName": "Compute.InstanceGroups"
 }

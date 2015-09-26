@@ -1,4 +1,5 @@
 {
-    "library": "replicapool-updater"
+    "library": "compute-instancegroups-updater",
+    "canonicalName": "Compute.InstanceGroups.Updater"
 }
 
