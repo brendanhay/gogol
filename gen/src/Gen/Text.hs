@@ -17,6 +17,7 @@ import           Control.Error
 import           Data.Bifunctor
 import           Data.Char
 import qualified Data.Foldable         as Fold
+import qualified Data.HashMap.Strict   as Map
 import qualified Data.HashSet          as Set
 import           Data.Monoid
 import           Data.String
@@ -60,7 +61,9 @@ renameField :: Text -> Text
 renameField = lowerHead . toCamel
 
 renameBranch :: Text -> Text
-renameBranch = renameReserved . go
+renameBranch t
+    | Just o <- operator t = o
+    | otherwise            = renameReserved (go t)
   where
     go x | Text.length x <= 2 = Text.toUpper x
          | otherwise          = upperAcronym . cat $ split x
@@ -75,6 +78,16 @@ renameBranch = renameReserved . go
         | isDigit (Text.last x) = Text.toUpper x
         | Text.all isUpper x    = toPascal (Text.toLower x)
         | otherwise             = toPascal x
+
+    operator x = Map.lookup x $
+        Map.fromList
+            [ ("!=", "NotEqual")
+            , ("==", "Equal")
+            , ("<",  "Less")
+            , ("<=", "LessOrEqual")
+            , (">",  "Greater")
+            , (">=", "GreaterEqual")
+            ]
 
 separator :: Char -> Bool
 separator x =
