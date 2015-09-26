@@ -54,6 +54,10 @@ type {{ api }} = ()
 {{ api | lowerHead }} :: Proxy {{ api }}
 {{ api | lowerHead }} = Proxy
 
+{{ resources.name }}
+
+
+
 {# type {{ api }} = #}
 {# {% for resource in resources %} #}
 {#     {% if resource.first %}    {% else %}:<|>{% endif %} {{ resource.value.name }} #}

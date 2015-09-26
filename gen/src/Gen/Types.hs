@@ -125,7 +125,7 @@ specFromPath x = Spec n p v x
    -- FIXME:
    n = Text.init
      . Text.intercalate "/"
-     . drop 2
+     . drop 1
      . dropWhile (/= "model")
      $ Text.split (== '/') p
 

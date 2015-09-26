@@ -14,7 +14,7 @@ CLIENT_VERSION = $(call version,$(TOP)/gen/gogol-gen.cabal)
 
 MODELS ?= $(shell find $(MODEL_DIR) -type f -name '*.json' | sort)
 
-.PHONY: $(BIN)/gogol-gen gen format
+.PHONY: gen format
 
 release: gen format
 
