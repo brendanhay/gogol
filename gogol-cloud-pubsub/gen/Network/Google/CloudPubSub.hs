@@ -169,6 +169,7 @@ module Network.Google.CloudPubSub
     ) where
 
 import           Network.Google.CloudPubSub.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

@@ -224,6 +224,7 @@ module Network.Google.Gmail
     ) where
 
 import           Network.Google.Gmail.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

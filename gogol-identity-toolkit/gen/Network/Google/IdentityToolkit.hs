@@ -285,6 +285,7 @@ module Network.Google.IdentityToolkit
     ) where
 
 import           Network.Google.IdentityToolkit.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

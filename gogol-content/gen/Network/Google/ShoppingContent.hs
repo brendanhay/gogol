@@ -507,6 +507,7 @@ module Network.Google.ShoppingContent
     , topmPredefinedBillingAddress
     ) where
 
+import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 {- $resources

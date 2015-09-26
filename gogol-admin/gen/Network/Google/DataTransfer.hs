@@ -82,6 +82,7 @@ module Network.Google.DataTransfer
     ) where
 
 import           Network.Google.DataTransfer.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

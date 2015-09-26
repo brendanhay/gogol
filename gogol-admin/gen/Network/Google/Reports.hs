@@ -156,6 +156,7 @@ module Network.Google.Reports
     , uriwMessage
     ) where
 
+import           Network.Google.Prelude
 import           Network.Google.Reports.Types
 
 {- $resources

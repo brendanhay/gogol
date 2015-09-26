@@ -572,6 +572,7 @@ module Network.Google.Directory
     ) where
 
 import           Network.Google.Directory.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

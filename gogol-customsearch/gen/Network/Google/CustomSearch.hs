@@ -182,6 +182,7 @@ module Network.Google.CustomSearch
     ) where
 
 import           Network.Google.CustomSearch.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

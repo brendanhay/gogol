@@ -71,6 +71,7 @@ module Network.Google.OAuth2
     ) where
 
 import           Network.Google.OAuth2.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

@@ -309,6 +309,7 @@ module Network.Google.AndroidEnterprise
     ) where
 
 import           Network.Google.AndroidEnterprise.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

@@ -272,6 +272,7 @@ module Network.Google.CloudStorage
     ) where
 
 import           Network.Google.CloudStorage.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

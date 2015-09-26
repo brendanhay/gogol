@@ -331,6 +331,7 @@ module Network.Google.AdSense
     ) where
 
 import           Network.Google.AdSense.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

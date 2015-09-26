@@ -540,6 +540,7 @@ module Network.Google.PlusDomains
     ) where
 
 import           Network.Google.PlusDomains.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

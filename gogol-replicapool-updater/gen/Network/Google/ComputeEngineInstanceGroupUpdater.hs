@@ -173,6 +173,7 @@ module Network.Google.ComputeEngineInstanceGroupUpdater
     ) where
 
 import           Network.Google.ComputeEngineInstanceGroupUpdater.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

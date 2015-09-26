@@ -1955,6 +1955,7 @@ module Network.Google.Compute
     ) where
 
 import           Network.Google.Compute.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

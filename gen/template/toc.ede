@@ -36,6 +36,7 @@ module {{ moduleName }}
   {% endfor %}
     ) where
 
+import Network.Google.Prelude
 {% for module in exposedModules %}
   {% if module.value != moduleName %}
 import {{ module.value }}

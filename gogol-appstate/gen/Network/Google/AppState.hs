@@ -58,6 +58,7 @@ module Network.Google.AppState
     ) where
 
 import           Network.Google.AppState.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

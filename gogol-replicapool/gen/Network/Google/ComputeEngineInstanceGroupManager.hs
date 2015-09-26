@@ -167,6 +167,7 @@ module Network.Google.ComputeEngineInstanceGroupManager
     ) where
 
 import           Network.Google.ComputeEngineInstanceGroupManager.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

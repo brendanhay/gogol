@@ -91,6 +91,7 @@ module Network.Google.Tasks
     , ttItems
     ) where
 
+import           Network.Google.Prelude
 import           Network.Google.Tasks.Types
 
 {- $resources

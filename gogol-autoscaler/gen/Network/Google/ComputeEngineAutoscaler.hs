@@ -184,6 +184,7 @@ module Network.Google.ComputeEngineAutoscaler
     ) where
 
 import           Network.Google.ComputeEngineAutoscaler.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

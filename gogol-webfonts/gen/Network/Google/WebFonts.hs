@@ -47,6 +47,7 @@ module Network.Google.WebFonts
     , wlItems
     ) where
 
+import           Network.Google.Prelude
 import           Network.Google.WebFonts.Types
 
 {- $resources

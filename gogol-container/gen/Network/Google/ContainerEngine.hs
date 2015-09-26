@@ -132,6 +132,7 @@ module Network.Google.ContainerEngine
     ) where
 
 import           Network.Google.ContainerEngine.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

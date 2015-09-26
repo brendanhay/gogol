@@ -585,6 +585,7 @@ module Network.Google.Drive
     ) where
 
 import           Network.Google.Drive.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

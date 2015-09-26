@@ -221,6 +221,7 @@ module Network.Google.DoubleClickBidManager
     ) where
 
 import           Network.Google.DoubleClickBidManager.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

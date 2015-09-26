@@ -295,6 +295,7 @@ module Network.Google.AffiliateNetwork
     ) where
 
 import           Network.Google.AffiliateNetwork.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

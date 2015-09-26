@@ -71,6 +71,7 @@ module Network.Google.URLShortener
     , uhItems
     ) where
 
+import           Network.Google.Prelude
 import           Network.Google.URLShortener.Types
 
 {- $resources

@@ -303,6 +303,7 @@ module Network.Google.CloudDatastore
     ) where
 
 import           Network.Google.CloudDatastore.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

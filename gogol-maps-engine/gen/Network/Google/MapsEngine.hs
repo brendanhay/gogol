@@ -765,6 +765,7 @@ module Network.Google.MapsEngine
     ) where
 
 import           Network.Google.MapsEngine.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

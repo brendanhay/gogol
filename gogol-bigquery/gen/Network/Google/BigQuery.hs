@@ -483,6 +483,7 @@ module Network.Google.BigQuery
     ) where
 
 import           Network.Google.BigQuery.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

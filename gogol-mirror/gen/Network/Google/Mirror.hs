@@ -230,6 +230,7 @@ module Network.Google.Mirror
     ) where
 
 import           Network.Google.Mirror.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

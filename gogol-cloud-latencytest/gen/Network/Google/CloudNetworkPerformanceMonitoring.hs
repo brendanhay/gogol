@@ -68,6 +68,7 @@ module Network.Google.CloudNetworkPerformanceMonitoring
     ) where
 
 import           Network.Google.CloudNetworkPerformanceMonitoring.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

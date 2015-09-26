@@ -208,6 +208,7 @@ module Network.Google.Prediction
     ) where
 
 import           Network.Google.Prediction.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

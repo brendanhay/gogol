@@ -686,6 +686,7 @@ module Network.Google.Dataflow
     ) where
 
 import           Network.Google.Dataflow.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

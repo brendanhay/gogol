@@ -39,6 +39,7 @@ module Network.Google.EmailMigration
     ) where
 
 import           Network.Google.EmailMigration.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

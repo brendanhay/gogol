@@ -58,6 +58,7 @@ module Network.Google.CloudBilling
     ) where
 
 import           Network.Google.CloudBilling.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

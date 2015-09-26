@@ -116,6 +116,7 @@ module Network.Google.AppsActivity
     ) where
 
 import           Network.Google.AppsActivity.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

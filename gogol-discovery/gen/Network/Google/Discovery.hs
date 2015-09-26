@@ -244,6 +244,7 @@ module Network.Google.Discovery
     ) where
 
 import           Network.Google.Discovery.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

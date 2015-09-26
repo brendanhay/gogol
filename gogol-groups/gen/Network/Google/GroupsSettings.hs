@@ -60,6 +60,7 @@ module Network.Google.GroupsSettings
     ) where
 
 import           Network.Google.GroupsSettings.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

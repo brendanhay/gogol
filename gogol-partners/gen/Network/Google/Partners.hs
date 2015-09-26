@@ -229,6 +229,7 @@ module Network.Google.Partners
     ) where
 
 import           Network.Google.Partners.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

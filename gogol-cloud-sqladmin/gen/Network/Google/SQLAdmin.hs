@@ -432,6 +432,7 @@ module Network.Google.SQLAdmin
     , ulrItems
     ) where
 
+import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 {- $resources

@@ -298,6 +298,7 @@ module Network.Google.Spectrum
     , vttText
     ) where
 
+import           Network.Google.Prelude
 import           Network.Google.Spectrum.Types
 
 {- $resources

@@ -127,6 +127,7 @@ module Network.Google.PageSpeedInsights
     ) where
 
 import           Network.Google.PageSpeedInsights.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

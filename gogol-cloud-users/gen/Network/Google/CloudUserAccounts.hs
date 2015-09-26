@@ -212,6 +212,7 @@ module Network.Google.CloudUserAccounts
     ) where
 
 import           Network.Google.CloudUserAccounts.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

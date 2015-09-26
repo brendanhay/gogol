@@ -350,6 +350,7 @@ module Network.Google.Blogger
     ) where
 
 import           Network.Google.Blogger.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

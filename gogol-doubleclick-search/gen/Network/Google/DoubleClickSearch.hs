@@ -212,6 +212,7 @@ module Network.Google.DoubleClickSearch
     ) where
 
 import           Network.Google.DoubleClickSearch.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

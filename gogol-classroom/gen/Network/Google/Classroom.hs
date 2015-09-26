@@ -145,6 +145,7 @@ module Network.Google.Classroom
     ) where
 
 import           Network.Google.Classroom.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

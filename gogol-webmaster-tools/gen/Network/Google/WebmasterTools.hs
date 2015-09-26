@@ -154,6 +154,7 @@ module Network.Google.WebmasterTools
     , wscSubmitted
     ) where
 
+import           Network.Google.Prelude
 import           Network.Google.WebmasterTools.Types
 
 {- $resources

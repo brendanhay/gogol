@@ -904,6 +904,7 @@ module Network.Google.AdExchangeBuyer
     ) where
 
 import           Network.Google.AdExchangeBuyer.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

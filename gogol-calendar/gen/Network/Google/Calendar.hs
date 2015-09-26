@@ -409,6 +409,7 @@ module Network.Google.Calendar
     ) where
 
 import           Network.Google.Calendar.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

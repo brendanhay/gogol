@@ -202,6 +202,7 @@ module Network.Google.Fitness
     ) where
 
 import           Network.Google.Fitness.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

@@ -245,6 +245,7 @@ module Network.Google.CivicInfo
     ) where
 
 import           Network.Google.CivicInfo.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

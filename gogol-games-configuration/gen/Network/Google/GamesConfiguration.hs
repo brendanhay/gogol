@@ -136,6 +136,7 @@ module Network.Google.GamesConfiguration
     ) where
 
 import           Network.Google.GamesConfiguration.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

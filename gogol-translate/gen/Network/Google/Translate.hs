@@ -63,6 +63,7 @@ module Network.Google.Translate
     , trTranslatedText
     ) where
 
+import           Network.Google.Prelude
 import           Network.Google.Translate.Types
 
 {- $resources

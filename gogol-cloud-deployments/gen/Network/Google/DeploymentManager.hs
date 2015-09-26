@@ -201,6 +201,7 @@ module Network.Google.DeploymentManager
     ) where
 
 import           Network.Google.DeploymentManager.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

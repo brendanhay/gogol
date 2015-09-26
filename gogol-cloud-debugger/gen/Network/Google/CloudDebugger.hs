@@ -213,6 +213,7 @@ module Network.Google.CloudDebugger
     ) where
 
 import           Network.Google.CloudDebugger.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

@@ -161,6 +161,7 @@ module Network.Google.ProximityBeacon
     , oAdvertisedId
     ) where
 
+import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types
 
 {- $resources

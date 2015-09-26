@@ -788,6 +788,7 @@ module Network.Google.Genomics
     ) where
 
 import           Network.Google.Genomics.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

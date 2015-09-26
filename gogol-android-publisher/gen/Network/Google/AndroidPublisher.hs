@@ -392,6 +392,7 @@ module Network.Google.AndroidPublisher
     ) where
 
 import           Network.Google.AndroidPublisher.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

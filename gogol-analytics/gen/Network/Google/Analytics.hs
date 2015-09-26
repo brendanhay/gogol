@@ -1101,6 +1101,7 @@ module Network.Google.Analytics
     ) where
 
 import           Network.Google.Analytics.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

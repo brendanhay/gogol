@@ -180,6 +180,7 @@ module Network.Google.CloudMonitoring
     ) where
 
 import           Network.Google.CloudMonitoring.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

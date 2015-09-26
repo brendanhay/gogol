@@ -954,6 +954,7 @@ module Network.Google.Games
     ) where
 
 import           Network.Google.Games.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

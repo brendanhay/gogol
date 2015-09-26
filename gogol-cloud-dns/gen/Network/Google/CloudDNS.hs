@@ -109,6 +109,7 @@ module Network.Google.CloudDNS
     ) where
 
 import           Network.Google.CloudDNS.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

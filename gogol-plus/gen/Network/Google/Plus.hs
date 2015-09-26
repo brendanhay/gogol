@@ -508,6 +508,7 @@ module Network.Google.Plus
     ) where
 
 import           Network.Google.Plus.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

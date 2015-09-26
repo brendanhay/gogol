@@ -379,6 +379,7 @@ module Network.Google.TagManager
     , vParameter
     ) where
 
+import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 {- $resources

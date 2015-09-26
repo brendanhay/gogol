@@ -138,6 +138,7 @@ module Network.Google.EnterpriseAppsReseller
     ) where
 
 import           Network.Google.EnterpriseAppsReseller.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

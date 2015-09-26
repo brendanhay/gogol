@@ -1857,6 +1857,7 @@ module Network.Google.YouTube
     , wsTextColor
     ) where
 
+import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 {- $resources

@@ -797,6 +797,7 @@ module Network.Google.Books
     ) where
 
 import           Network.Google.Books.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

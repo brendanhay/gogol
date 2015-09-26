@@ -32,6 +32,7 @@ module Network.Google.GroupsMigration
     ) where
 
 import           Network.Google.GroupsMigration.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

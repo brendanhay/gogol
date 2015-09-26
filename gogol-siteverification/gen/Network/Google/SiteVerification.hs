@@ -68,6 +68,7 @@ module Network.Google.SiteVerification
     , svwrrsType
     ) where
 
+import           Network.Google.Prelude
 import           Network.Google.SiteVerification.Types
 
 {- $resources

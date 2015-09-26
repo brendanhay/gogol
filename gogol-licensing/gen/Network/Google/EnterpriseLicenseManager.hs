@@ -55,6 +55,7 @@ module Network.Google.EnterpriseLicenseManager
     ) where
 
 import           Network.Google.EnterpriseLicenseManager.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

@@ -267,6 +267,7 @@ module Network.Google.FusionTables
     ) where
 
 import           Network.Google.FusionTables.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

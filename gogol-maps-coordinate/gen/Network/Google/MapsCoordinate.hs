@@ -180,6 +180,7 @@ module Network.Google.MapsCoordinate
     ) where
 
 import           Network.Google.MapsCoordinate.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

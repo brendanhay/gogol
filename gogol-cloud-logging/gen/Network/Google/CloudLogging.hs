@@ -243,6 +243,7 @@ module Network.Google.CloudLogging
     ) where
 
 import           Network.Google.CloudLogging.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

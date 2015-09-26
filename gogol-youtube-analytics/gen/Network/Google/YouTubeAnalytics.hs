@@ -146,6 +146,7 @@ module Network.Google.YouTubeAnalytics
     , rtichDataType
     ) where
 
+import           Network.Google.Prelude
 import           Network.Google.YouTubeAnalytics.Types
 
 {- $resources

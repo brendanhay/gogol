@@ -310,6 +310,7 @@ module Network.Google.AppEngineAdmin
     ) where
 
 import           Network.Google.AppEngineAdmin.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

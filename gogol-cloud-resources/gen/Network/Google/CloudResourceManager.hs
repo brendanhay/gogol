@@ -123,6 +123,7 @@ module Network.Google.CloudResourceManager
     ) where
 
 import           Network.Google.CloudResourceManager.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

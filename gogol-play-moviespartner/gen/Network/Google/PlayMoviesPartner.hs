@@ -180,6 +180,7 @@ module Network.Google.PlayMoviesPartner
     ) where
 
 import           Network.Google.PlayMoviesPartner.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

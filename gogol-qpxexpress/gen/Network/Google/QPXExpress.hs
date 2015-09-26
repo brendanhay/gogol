@@ -257,6 +257,7 @@ module Network.Google.QPXExpress
     , tsrKind
     ) where
 
+import           Network.Google.Prelude
 import           Network.Google.QPXExpress.Types
 
 {- $resources

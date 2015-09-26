@@ -2517,6 +2517,7 @@ module Network.Google.DFAReporting
     ) where
 
 import           Network.Google.DFAReporting.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

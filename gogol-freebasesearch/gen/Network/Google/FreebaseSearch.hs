@@ -62,6 +62,7 @@ module Network.Google.FreebaseSearch
     ) where
 
 import           Network.Google.FreebaseSearch.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

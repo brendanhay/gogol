@@ -223,6 +223,7 @@ module Network.Google.AdSenseHost
     ) where
 
 import           Network.Google.AdSenseHost.Types
+import           Network.Google.Prelude
 
 {- $resources
 TODO

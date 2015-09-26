@@ -81,6 +81,7 @@ module Network.Google.TaskQueue
     , ttItems
     ) where
 
+import           Network.Google.Prelude
 import           Network.Google.TaskQueue.Types
 
 {- $resources

@@ -232,6 +232,7 @@ module Network.Google.StorageTransfer
     , utjrUpdateTransferJobFieldMask
     ) where
 
+import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types
 
 {- $resources
