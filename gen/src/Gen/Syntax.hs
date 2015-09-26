@@ -15,7 +15,7 @@ module Gen.Syntax where
 
 import           Control.Lens                 hiding (iso, mapping, op, pre,
                                                strict)
-import           Data.Foldable                (foldr')
+import           Data.Foldable                (foldl', foldr')
 import           Data.Hashable
 import qualified Data.HashMap.Strict          as Map
 import           Data.Maybe
@@ -44,28 +44,41 @@ apiAlias n ls = TypeDecl noLoc n [] alias
 verbDecl :: Service s r -> Local -> Local -> Method -> Decl
 verbDecl s p l m = TypeDecl noLoc (vname p l) [] alias
   where
-    alias = case path ++ prms of
+    alias = case path ++ qry of
         []   -> unit_tycon
-        x:xs -> foldr' (\l r -> TyInfix l (UnQual (sym ":>")) r) x xs
+        x:xs -> foldl' (\l r -> TyInfix l (UnQual (sym ":>")) r) x xs
+
+-- Need to deal with interpolation?
 
     path :: [Type]
-    path = map sing
+    path = map match
          . filter (not . Text.null)
          $ Text.split (== '/') (_svcServicePath s)
         <> Text.split (== '/') (_mPath m)
+      where
+        match x
+            | Just (c, t) <- Text.uncons x
+            , c == '{'
+            , Just k <- Map.lookup (Local (Text.init t)) params
+            , _prmLocation k == Path
+                        = TyApp (TyApp (tycon "Capture")
+                                       (sing (Text.init t)))
+                                (literal (_prmLiteral k))
+            | otherwise = sing x
 
     -- FIXME: order by _mParameterOrder
-    prms :: [Type]
-    prms = map f (Map.toList (_svcParameters s))
-        ++ map f (Map.toList (_mParameters   m))
+    qry :: [Type]
+    qry = mapMaybe f (Map.toList params)
       where
         f (k, p) =
            -- FIXME: types, many/repeated
            let t = literal (_prmLiteral p)
                n = sing (local k)
             in case _prmLocation p of
-                Path  -> TyApp (TyApp (tycon "Capture")    n) t
-                Query -> TyApp (TyApp (tycon "QueryParam") n) t
+                Query -> Just $ TyApp (TyApp (tycon "QueryParam") n) t
+                Path  -> Nothing
+
+    params = _svcParameters s <> _mParameters m
 
     verb :: Type
     verb = TyApp (TyApp meth typ) res

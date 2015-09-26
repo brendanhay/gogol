@@ -52,7 +52,7 @@ renameTitle =
 
 renameAbbrev :: Text -> Text
 renameAbbrev = mconcat
-    . Text.split  isSpace
+    . Text.split  separator
     . stripPrefix "Google "
     . stripSuffix " API"
 
@@ -66,7 +66,7 @@ renameBranch = renameReserved . go
          | otherwise          = upperAcronym . cat $ split x
 
     cat   = Fold.foldMap (Text.intercalate "_" . map component . Text.split dot)
-    split = Text.split seperator
+    split = Text.split separator
 
     dot x = x == '.'
 
@@ -76,8 +76,8 @@ renameBranch = renameReserved . go
         | Text.all isUpper x    = toPascal (Text.toLower x)
         | otherwise             = toPascal x
 
-seperator :: Char -> Bool
-seperator x =
+separator :: Char -> Bool
+separator x =
       x == '\\'
    || x == '/'
    || x == '+'
