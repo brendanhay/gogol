@@ -7,14 +7,9 @@ module {{ moduleName }}
     (
     -- * Resources
       {{ api.name }}
-    {# {% for act in api.actions %} #}
-
-    {# -- ** {{ act.value.name }} #}
-    {# , {{ act.value.name }} #}
-    {#   {% for nv in act.value.actions %} #}
-    {# , {{ nv.value.name }} #}
-    {#   {% endfor %} #}
-    {# {% endfor %} #}
+    {% for action in api.actions %}
+    , {{ action.value.name }}
+    {% endfor %}
 
     -- * Types
   {% for schema in schemas %}
@@ -48,5 +43,8 @@ TODO
 {{ api.decl }}
 {% for action in api.actions %}
 
+{% if action.value.help %}
+{{ action.value.help }}
+{% endif %}
 {{ action.value.decl }}
 {% endfor %}

@@ -2,6 +2,7 @@
 {-# LANGUAGE FlexibleInstances          #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase                 #-}
+{-# LANGUAGE OverloadedStrings          #-}
 
 -- Module      : Gen.Types.Id
 -- Copyright   : (c) 2015 Brendan Hay
@@ -41,11 +42,8 @@ import           Language.Haskell.Exts.Build
 import           Language.Haskell.Exts.Pretty (prettyPrint)
 import           Language.Haskell.Exts.Syntax (Name)
 
-aname :: Id -> Name
-aname = name . Text.unpack . upperHead . idToText
-
 nname :: Local -> Name
-nname = name . Text.unpack . upperHead . local
+nname = name . Text.unpack . (<> "API") . upperHead . local
 
 vname :: Local -> Local -> Name
 vname p l = name (f p <> f l)

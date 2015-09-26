@@ -326,11 +326,12 @@ instance ToJSON Data where
             , "lenses" .= ls
             ]
 
-data Action = Action Name Rendered
+data Action = Action Name (Maybe Help) Rendered
 
 instance ToJSON Action where
-    toJSON (Action n d) = object
+    toJSON (Action n h d) = object
         [ "name" .= Syn n
+        , "help" .= h
         , "decl" .= d
         ]
 

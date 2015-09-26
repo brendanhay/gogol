@@ -106,18 +106,21 @@ render svc = do
         sub l = \case
             t@(Top rs) -> do
                 let k = nname l
-                t  <- Action k <$> pp Print (apiAlias k (nouns t))
+                t  <- Action k Nothing
+                    <$> pp Print (apiAlias k (nouns t))
                 as <- traverse (uncurry sub) (Map.toList rs) <&> concat
                 return (t : as)
 
             Sub ms -> do
                 let k = nname l
-                t  <- Action k <$> pp Print (apiAlias k (map (vname l) $ Map.keys ms))
+                t  <- Action k Nothing
+                    <$> pp Print (apiAlias k (map (vname l) $ Map.keys ms))
                 as <- traverse (uncurry (verb l)) (Map.toList ms)
                 return (t : as)
 
         verb :: Local -> Local -> Method -> AST Action
-        verb p l m = Action (vname p l) <$> pp Print (verbDecl svc p l m)
+        verb p l m = Action (vname p l) (_mDescription m)
+            <$> pp Print (verbDecl svc p l m)
 
 flatten :: Service (Fix Schema) Resource -> Service (Schema Id) Resource
 flatten svc = svc { _svcSchemas = execState run mempty }
