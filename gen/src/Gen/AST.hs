@@ -26,22 +26,19 @@ import           Control.Error
 import           Control.Lens                 hiding (lens)
 import           Control.Monad.Except
 import           Control.Monad.State.Strict
-import           Data.Bifunctor
 import           Data.Char
-import           Data.Function                (on)
 import qualified Data.HashMap.Strict          as Map
-import           Data.List                    (groupBy)
-import           Data.List.NonEmpty           (NonEmpty (..))
 import           Data.Semigroup               ((<>))
+import qualified Data.Text                    as Text
 import qualified Data.Text.Lazy               as LText
 import qualified Data.Text.Lazy.Builder       as Build
 import           Gen.Formatting
 import           Gen.Solve
 import           Gen.Syntax
-import           Gen.Text
 import           Gen.Types
 import           HIndent
 import           Language.Haskell.Exts        (Name)
+import           Language.Haskell.Exts.Build  (name)
 import           Language.Haskell.Exts.Pretty
 import           Prelude                      hiding (sum)
 
@@ -53,8 +50,8 @@ runAST svc =  evalState (runExceptT (render ss)) (initial (_svcSchemas ss))
 render :: Service (Schema Id) Resource -> AST (Service Data API)
 render svc = do
     x <- kvTraverseMaybe typ (_svcSchemas svc)
-    y <- api (_svcResources svc)
-    return $! svc { _svcSchemas = x, _svcResources = y }
+    y <- api (_svcApi svc)
+    return $! svc { _svcSchemas = x, _svcApi = y }
   where
     typ :: Id -> Schema Id -> AST (Maybe Data)
     typ k = \case
@@ -92,25 +89,35 @@ render svc = do
                          k
 
     api :: Resource -> AST API
-    api = fmap (API "API" . Map.fromList) . res Nothing
+    api x = API n <$> pp Print (apiAlias n (nouns x)) <*> top x
       where
-        res :: Maybe Id -> Resource -> AST [(Name, [Rendered])]
-        res p = \case
-            Parent rs -> traverse (parent p) (Map.toList rs) <&> concat
-            Sub ms | Just x <- p
-                   -> traverse (sub  x) (Map.toList ms)
-            Sub ms -> traverse (sub "") (Map.toList ms)
+        n = name (Text.unpack (svcAbbrev svc))
 
-        parent :: Maybe Id -> (Local, Resource) -> AST [(Name, [Rendered])]
-        parent p (n, r) = res (Just (pid p n)) r
+        nouns = map nname . \case
+            Top rs -> Map.keys rs
+            Sub ms -> Map.keys ms
 
-        sub :: Id -> (Local, Method) -> AST (Name, [Rendered])
-        sub p (n, m) = (mname p n,) <$> traverse (pp None) (apiTypes svc p m)
+        top :: Resource -> AST [Action]
+        top = \case
+           Top rs -> traverse (uncurry sub)       (Map.toList rs) <&> concat
+           Sub ms -> traverse (uncurry (verb "")) (Map.toList ms)
 
-        -- FIXME: This breaks all naming invariants.
-        pid :: Maybe Id -> Local -> Id
-        pid Nothing  = Free . Global . local
-        pid (Just p) = mkProp p
+        sub :: Local -> Resource -> AST [Action]
+        sub l = \case
+            t@(Top rs) -> do
+                let k = nname l
+                t  <- Action k <$> pp Print (apiAlias k (nouns t))
+                as <- traverse (uncurry sub) (Map.toList rs) <&> concat
+                return (t : as)
+
+            Sub ms -> do
+                let k = nname l
+                t  <- Action k <$> pp Print (apiAlias k (map (vname l) $ Map.keys ms))
+                as <- traverse (uncurry (verb l)) (Map.toList ms)
+                return (t : as)
+
+        verb :: Local -> Local -> Method -> AST Action
+        verb p l m = Action (vname p l) <$> pp Print (verbDecl svc p l m)
 
 flatten :: Service (Fix Schema) Resource -> Service (Schema Id) Resource
 flatten svc = svc { _svcSchemas = execState run mempty }

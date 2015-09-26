@@ -15,11 +15,13 @@ import           Control.Error
 import           Control.Monad.Except
 import           Control.Monad.State
 import           Data.ByteString           (ByteString)
+import qualified Data.HashMap.Strict       as Map
 import           Data.Text                 (Text)
 import qualified Data.Text                 as Text
 import qualified Data.Text.Lazy            as LText
 import           Data.Text.Lazy.Builder    (toLazyText)
 import qualified Data.Text.Lazy.IO         as LText
+import           Debug.Trace
 import qualified Filesystem                as FS
 import           Filesystem.Path.CurrentOS
 import           Gen.Formatting
@@ -83,14 +85,7 @@ copyDir src dst = io (FS.listDirectory src >>= mapM_ copy)
 readTemplate :: MonadIO m
              => Path
              -> Path
-             -> StateT (Map Text (EDE.Result EDE.Template)) (ExceptT Error m) EDE.Template
-readTemplate d f = do
-    let tmpl = d </> f
-    lift (readBSFile tmpl)
-        >>= EDE.parseWith EDE.defaultSyntax (load d) (toTextIgnore tmpl)
-        >>= EDE.result (throwError . LText.pack . show) return
-  where
-    load p o k _ = lift (readBSFile x) >>= EDE.parseWith o (load (directory x)) k
-      where
-        x | Text.null k = fromText k
-          | otherwise   = p </> fromText k
+             -> ExceptT Error m EDE.Template
+readTemplate d f =
+        liftIO (EDE.eitherParseFile (encodeString (d </> f)))
+    >>= either (throwError . LText.pack) return

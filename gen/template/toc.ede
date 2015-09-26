@@ -5,20 +5,16 @@
 -- /See:/ <{{ documentationLink }} {{ title }} Reference>
 module {{ moduleName }}
     (
-    -- * API Definition
-      {{ api }}
-    {# , {{ api | lowerHead }} #}
+    -- * Resources
+      {{ api.name }}
+    {# {% for act in api.actions %} #}
 
-  {#   -- * Resources #}
-  {#   -- $resources #}
-  {# {% for resource in resources %} #}
-
-  {#   -- ** {{ resource.value.name }} #}
-  {#   , {{ resource.value.name }} #}
-  {#   {% for method in resource.value.methods %} #}
-  {#   , {{ method.key }} #}
-  {#   {% endfor %} #}
-  {# {% endfor %} #}
+    {# -- ** {{ act.value.name }} #}
+    {# , {{ act.value.name }} #}
+    {#   {% for nv in act.value.actions %} #}
+    {# , {{ nv.value.name }} #}
+    {#   {% endfor %} #}
+    {# {% endfor %} #}
 
     -- * Types
   {% for schema in schemas %}
@@ -49,31 +45,8 @@ import {{ module.value }}
 TODO
 -}
 
-type {{ api }} = ()
+{{ api.decl }}
+{% for action in api.actions %}
 
-{{ api | lowerHead }} :: Proxy {{ api }}
-{{ api | lowerHead }} = Proxy
-
-{{ resources.name }}
-
-
-
-{# type {{ api }} = #}
-{# {% for resource in resources %} #}
-{#     {% if resource.first %}    {% else %}:<|>{% endif %} {{ resource.value.name }} #}
-{# {% endfor %} #}
-{# {% for resource in resources %} #}
-
-{# type {{ resource.value.name }} = #}
-{#   {% for method in resource.value.methods %} #}
-{#     {% if !method.first %}:<|>{% else %}    {% endif %} {{ method.key }} #}
-{#   {% endfor %} #}
-{#   {% for method in resource.value.methods %} #}
-
-{# type {{ method.key }} = #}
-{#     {% for type in method.value %} #}
-{#     {% if !type.first %}:>{% else %}  {% endif %} {{ type.value }} #}
-{#     {% endfor %} #}
-{#   {% endfor %} #}
-{# {% endfor %} #}
-
+{{ action.value.decl }}
+{% endfor %}

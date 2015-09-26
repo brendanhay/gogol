@@ -32,32 +32,47 @@ import           Language.Haskell.Exts.Build
 import           Language.Haskell.Exts.SrcLoc
 import           Language.Haskell.Exts.Syntax hiding (Int, Lit)
 
-apiTypes :: Service s r -> Id -> Method -> [Type]
-apiTypes s r m = map sing ps ++ qs ++ [end]
+ -- type API = :<|> ...
+apiAlias :: Name -> [Name] -> Decl
+apiAlias n ls = TypeDecl noLoc n [] alias
   where
-    ps = filter (not . Text.null)
+    alias = case map (TyCon . UnQual) ls of
+        []   -> unit_tycon
+        x:xs -> foldr' (\l r -> TyInfix l (UnQual (sym ":<|>")) r) x xs
+
+-- type Method = :> ...
+verbDecl :: Service s r -> Local -> Local -> Method -> Decl
+verbDecl s p l m = TypeDecl noLoc (vname p l) [] alias
+  where
+    alias = case path ++ prms of
+        []   -> unit_tycon
+        x:xs -> foldr' (\l r -> TyInfix l (UnQual (sym ":>")) r) x xs
+
+    path :: [Type]
+    path = map sing
+         . filter (not . Text.null)
          $ Text.split (== '/') (_svcServicePath s)
         <> Text.split (== '/') (_mPath m)
 
     -- FIXME: order by _mParameterOrder
-    qs = map param (Map.toList (_svcParameters s))
-      ++ map param (Map.toList (_mParameters   m))
+    prms :: [Type]
+    prms = map f (Map.toList (_svcParameters s))
+        ++ map f (Map.toList (_mParameters   m))
+      where
+        f (k, p) =
+           -- FIXME: types, many/repeated
+           let t = literal (_prmLiteral p)
+               n = sing (local k)
+            in case _prmLocation p of
+                Path  -> TyApp (TyApp (tycon "Capture")    n) t
+                Query -> TyApp (TyApp (tycon "QueryParam") n) t
 
-    param (k, p) =
-       -- FIXME: types, many/repeated
-       let t = literal (_prmLiteral p)
-           n = sing (local k)
-        in case _prmLocation p of
-            Path  -> TyApp (TyApp (tycon "Capture")    n) t
-            Query -> TyApp (TyApp (tycon "QueryParam") n) t
-
-    end = TyApp (TyApp meth typ) res
-
-    meth = TyCon . unqual . Text.unpack $ Text.toTitle (_mMethod m)
-    typ  = tycon "'[JSON]"
-    res  = maybe (tycon "()") (tycon . Free) (_mResponse m)
-
-    -- method (titlecase) '[JSON] (responsetype)
+    verb :: Type
+    verb = TyApp (TyApp meth typ) res
+      where
+        meth = TyCon . unqual . Text.unpack $ Text.toTitle (_mMethod m)
+        typ  = tycon "'[JSON]"
+        res  = maybe (tycon "()") (tycon . Free) (_mResponse m)
 
 objDecl :: Id -> Pre -> Map Local Solved -> AST Decl
 objDecl n p rs = DataDecl noLoc arity [] d [] [conDecl d p rs] <$> derivings n

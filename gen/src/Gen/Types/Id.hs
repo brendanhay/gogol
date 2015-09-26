@@ -11,28 +11,6 @@
 -- Portability : non-portable (GHC extensions)
 
 module Gen.Types.Id where
-    -- ( Id
-    -- , Pre (..)
-
-    -- -- * Conversion
-    -- , idToText
-    -- , idFromText
-    -- , direct
-
-    -- -- * Formatting
-    -- , fid
-    -- , ref
-    -- , pre
-
-    -- -- * Syntax
-    -- , aname
-    -- , mname
-    -- , dname
-    -- , cname
-    -- , fname
-    -- , lname
-    -- , pname
-    -- ) where
 
 import           Control.Applicative
 import           Control.Lens                 hiding (pre, (.=))
@@ -60,13 +38,19 @@ import           Gen.Text
 import           Gen.Types.Map
 import           GHC.Generics
 import           Language.Haskell.Exts.Build
+import           Language.Haskell.Exts.Pretty (prettyPrint)
 import           Language.Haskell.Exts.Syntax (Name)
 
 aname :: Id -> Name
 aname = name . Text.unpack . upperHead . idToText
 
-mname :: Id -> Local -> Name
-mname x y = aname $ mkProp x y
+nname :: Local -> Name
+nname = name . Text.unpack . upperHead . local
+
+vname :: Local -> Local -> Name
+vname p l = name (f p <> f l)
+  where
+    f = Text.unpack . upperHead . local
 
 dname, cname :: Id -> Name
 dname = name . Text.unpack . upperHead . idToText

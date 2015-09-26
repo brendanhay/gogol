@@ -18,7 +18,6 @@ import           Control.Error
 import           Control.Lens              hiding ((<.>))
 import           Control.Monad.State
 import           Data.List                 (nub, sort)
-import           Data.Maybe
 import           Data.String
 import           Data.Text                 (Text)
 import qualified Data.Text                 as Text
@@ -132,14 +131,14 @@ main = do
 
         let load = readTemplate _optTemplates
 
-        tmpl <- flip evalStateT mempty $ Templates
+        tmpl <- Templates
             <$> load "cabal.ede"
             <*> load "toc.ede"
             <*> load "readme.ede"
             <*> load "types.ede"
             <*> load "prod.ede"
             <*> load "sum.ede"
-            <*  lift done
+            <*  done
 
         title "Selecting new service models..."
         say ("Found "    % int % " model specifications.") (length _optModels)

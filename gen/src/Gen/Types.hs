@@ -326,13 +326,22 @@ instance ToJSON Data where
             , "lenses" .= ls
             ]
 
-data API = API Name (Map Name [Rendered])
+data Action = Action Name Rendered
+
+instance ToJSON Action where
+    toJSON (Action n d) = object
+        [ "name" .= Syn n
+        , "decl" .= d
+        ]
+
+data API = API Name Rendered [Action]
 
 instance ToJSON API where
-    toJSON (API n ms) = object
-        [ "name"    .= Syn n
-        , "methods" .= ms
-        ]
+    toJSON (API n d as) = object
+         [ "name"    .= Syn n
+         , "decl"    .= d
+         , "actions" .= as
+         ]
 
 data Method = Method
     { _mId             :: Text
@@ -364,20 +373,20 @@ instance FromJSON Method where
 deriveToJSON (js "_m") ''Method
 
 data Resource
-    = Parent (Map Local Resource)
-    | Sub    (Map Local Method)
+    = Top (Map Local Resource)
+    | Sub (Map Local Method)
 
 instance FromJSON Resource where
     parseJSON = withObject "resource" $ \o ->
-            Parent <$> o .: "resources"
-        <|> Sub    <$> o .: "methods"
+            Top <$> o .: "resources"
+        <|> Sub <$> o .: "methods"
 
 data Service s r = Service
     { _svcLibrary           :: Text
     , _svcTitle             :: Text
     , _svcName              :: Text
     , _svcCanonicalName     :: Maybe Text
-    , _svcDescription       :: Text
+    , _svcDescription       :: Help
     , _svcRevision          :: Maybe Text
     , _svcVersion           :: Text
     , _svcOwnerName         :: Text
@@ -392,7 +401,7 @@ data Service s r = Service
     , _svcAuth              :: Maybe Object
     , _svcParameters        :: Map Local Param
     , _svcSchemas           :: Map Id s
-    , _svcResources         :: r
+    , _svcApi               :: r
     } deriving (Generic)
 
 instance FromJSON s => FromJSON (Service s Resource) where
@@ -424,7 +433,6 @@ instance ToJSON (Service Data API) where
         Object x = genericToJSON (js "_svc") s
         Object y = object
             [ "exposedModules" .= exposedModules s
-            , "api"            .= svcAbbrev s
             ]
 
 svcAbbrev :: Service s r -> Text
@@ -458,13 +466,14 @@ data Library = Library
 
 instance ToJSON Library where
     toJSON Library{..} = object
-        [ "libraryName"    .= _libName
-        , "libraryTitle"   .= _libTitle
-        , "libraryVersion" .= _libraryVersion _libVersions
-        , "coreVersion"    .= _coreVersion    _libVersions
-        , "clientVersion"  .= _clientVersion  _libVersions
-        , "exposedModules" .= concatMap exposedModules (NE.toList _libServices)
-        , "otherModules"   .= concatMap otherModules   (NE.toList _libServices)
+        [ "libraryName"         .= _libName
+        , "libraryTitle"        .= _libTitle
+        , "libraryVersion"      .= _libraryVersion _libVersions
+        , "libraryDescriptions" .= map (Desc 4 . _svcDescription) (NE.toList _libServices)
+        , "coreVersion"         .= _coreVersion    _libVersions
+        , "clientVersion"       .= _clientVersion  _libVersions
+        , "exposedModules"      .= concatMap exposedModules (NE.toList _libServices)
+        , "otherModules"        .= concatMap otherModules   (NE.toList _libServices)
         ]
 
 merge :: Versions -> [Service Data API] -> [Library]
