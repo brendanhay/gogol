@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.Mirror.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.Mirror.Types
     (
-    -- * API Definition
-      mirror
-
 
     -- * Account
-    , Account
+      Account
     , account
     , aAuthTokens
     , aUserData
@@ -201,6 +200,3 @@ module Network.Google.Mirror.Types
 import           Network.Google.Mirror.Types.Product
 import           Network.Google.Mirror.Types.Sum
 import           Network.Google.Prelude
-
-mirror :: a
-mirror = error "mirror"

@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.MapsEngine.Types.Product
 -- Copyright   : (c) 2015 Brendan Hay
@@ -22,7 +24,7 @@ data AcquisitionTime = AcquisitionTime
     { _atStart     :: !(Maybe UTCTime)
     , _atPrecision :: !(Maybe AcquisitionTimePrecision)
     , _atEnd       :: !(Maybe UTCTime)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AcquisitionTime' with the minimum fields required to make a request.
 --
@@ -79,7 +81,7 @@ data Asset = Asset
     , _aType                      :: !(Maybe AssetType)
     , _aDescription               :: !(Maybe Text)
     , _aTags                      :: !(Maybe [Text])
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Asset' with the minimum fields required to make a request.
 --
@@ -669,7 +671,7 @@ data File = File
     { _fSize         :: !(Maybe Int64)
     , _fUploadStatus :: !(Maybe FileUploadStatus)
     , _fFilename     :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'File' with the minimum fields required to make a request.
 --
@@ -711,7 +713,7 @@ data Filter = Filter
     { _fOperator :: !(Maybe FilterOperator)
     , _fValue    :: !(Maybe (Either Text Int64))
     , _fColumn   :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Filter' with the minimum fields required to make a request.
 --
@@ -762,7 +764,7 @@ geoJsonGeometry = GeoJsonGeometry
 data GeoJsonGeometryCollection = GeoJsonGeometryCollection
     { _gjgcGeometries :: !(Maybe [Maybe GeoJsonGeometry])
     , _gjgcType       :: !(Maybe GeoJsonGeometryCollectionType)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GeoJsonGeometryCollection' with the minimum fields required to make a request.
 --
@@ -797,7 +799,7 @@ gjgcType = lens _gjgcType (\ s a -> s{_gjgcType = a})
 data GeoJsonLineString = GeoJsonLineString
     { _gjlsCoordinates :: !(Maybe [Maybe [Double]])
     , _gjlsType        :: !(Maybe GeoJsonLineStringType)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GeoJsonLineString' with the minimum fields required to make a request.
 --
@@ -832,7 +834,7 @@ gjlsType = lens _gjlsType (\ s a -> s{_gjlsType = a})
 data GeoJsonMultiLineString = GeoJsonMultiLineString
     { _gjmlsCoordinates :: !(Maybe [[Maybe [Double]]])
     , _gjmlsType        :: !(Maybe GeoJsonMultiLineStringType)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GeoJsonMultiLineString' with the minimum fields required to make a request.
 --
@@ -867,7 +869,7 @@ gjmlsType
 data GeoJsonMultiPoint = GeoJsonMultiPoint
     { _gjsonmpCoordinates :: !(Maybe [Maybe [Double]])
     , _gjsonmpType        :: !(Maybe GeoJsonMultiPointType)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GeoJsonMultiPoint' with the minimum fields required to make a request.
 --
@@ -902,7 +904,7 @@ gjsonmpType
 data GeoJsonMultiPolygon = GeoJsonMultiPolygon
     { _gjmpCoordinates :: !(Maybe [[[Maybe [Double]]]])
     , _gjmpType        :: !(Maybe GeoJsonMultiPolygonType)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GeoJsonMultiPolygon' with the minimum fields required to make a request.
 --
@@ -936,7 +938,7 @@ gjmpType = lens _gjmpType (\ s a -> s{_gjmpType = a})
 data GeoJsonPoint = GeoJsonPoint
     { _gjpCoordinates :: !(Maybe (Maybe [Double]))
     , _gjpType        :: !(Maybe GeoJsonPointType)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GeoJsonPoint' with the minimum fields required to make a request.
 --
@@ -969,7 +971,7 @@ gjpType = lens _gjpType (\ s a -> s{_gjpType = a})
 data GeoJsonPolygon = GeoJsonPolygon
     { _gjsonpCoordinates :: !(Maybe [[Maybe [Double]]])
     , _gjsonpType        :: !(Maybe GeoJsonPolygonType)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GeoJsonPolygon' with the minimum fields required to make a request.
 --
@@ -1158,7 +1160,7 @@ data LabelStyle = LabelStyle
     , _lsOutline    :: !(Maybe (Maybe Color))
     , _lsFontWeight :: !(Maybe LabelStyleFontWeight)
     , _lsColumn     :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LabelStyle' with the minimum fields required to make a request.
 --
@@ -1248,7 +1250,7 @@ data Layer = Layer
     , _lPublishedAccessList       :: !(Maybe Text)
     , _lDescription               :: !(Maybe Text)
     , _lTags                      :: !(Maybe (Maybe [Text]))
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Layer' with the minimum fields required to make a request.
 --
@@ -1618,7 +1620,7 @@ data Map = Map
     , _mapPublishedAccessList       :: !(Maybe Text)
     , _mapDescription               :: !(Maybe Text)
     , _mapTags                      :: !(Maybe (Maybe [Text]))
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Map' with the minimum fields required to make a request.
 --
@@ -1832,7 +1834,7 @@ data MapFolder = MapFolder
     , _mfKey             :: !(Maybe Text)
     , _mfName            :: !(Maybe Text)
     , _mfType            :: !(Maybe MapFolderType)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MapFolder' with the minimum fields required to make a request.
 --
@@ -1924,7 +1926,7 @@ data MapKmlLink = MapKmlLink
     , _mklName            :: !(Maybe Text)
     , _mklType            :: !(Maybe MapKmlLinkType)
     , _mklKmlUrl          :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MapKmlLink' with the minimum fields required to make a request.
 --
@@ -1989,7 +1991,7 @@ data MapLayer = MapLayer
     , _mlName            :: !(Maybe Text)
     , _mlId              :: !(Maybe Text)
     , _mlType            :: !(Maybe MapLayerType)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MapLayer' with the minimum fields required to make a request.
 --
@@ -2154,7 +2156,7 @@ data Permission = Permission
     , _pId           :: !(Maybe Text)
     , _pType         :: !(Maybe PermissionType)
     , _pDiscoverable :: !(Maybe Bool)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Permission' with the minimum fields required to make a request.
 --
@@ -2469,7 +2471,7 @@ data PublishedLayer = PublishedLayer
     , _plId          :: !(Maybe Text)
     , _plProjectId   :: !(Maybe Text)
     , _plDescription :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PublishedLayer' with the minimum fields required to make a request.
 --
@@ -2689,7 +2691,7 @@ data Raster = Raster
     , _rDescription               :: !(Maybe Text)
     , _rAttribution               :: !(Maybe Text)
     , _rTags                      :: !(Maybe (Maybe [Text]))
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Raster' with the minimum fields required to make a request.
 --
@@ -2896,7 +2898,7 @@ data RasterCollection = RasterCollection
     , _rcDescription               :: !(Maybe Text)
     , _rcAttribution               :: !(Maybe Text)
     , _rcTags                      :: !(Maybe (Maybe [Text]))
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RasterCollection' with the minimum fields required to make a request.
 --
@@ -3375,7 +3377,7 @@ data ScaledShape = ScaledShape
     { _ssBorder :: !(Maybe (Maybe Border))
     , _ssFill   :: !(Maybe (Maybe Color))
     , _ssShape  :: !(Maybe ScaledShapeShape)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ScaledShape' with the minimum fields required to make a request.
 --
@@ -3417,7 +3419,7 @@ data ScalingFunction = ScalingFunction
     , _sfSizeRange   :: !(Maybe (Maybe SizeRange))
     , _sfScalingType :: !(Maybe ScalingFunctionScalingType)
     , _sfColumn      :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ScalingFunction' with the minimum fields required to make a request.
 --
@@ -3567,7 +3569,7 @@ data Table = Table
     , _tSourceEncoding            :: !Text
     , _tDescription               :: !(Maybe Text)
     , _tTags                      :: !(Maybe (Maybe [Text]))
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Table' with the minimum fields required to make a request.
 --
@@ -3763,7 +3765,7 @@ tTags
 data TableColumn = TableColumn
     { _tcName :: !(Maybe Text)
     , _tcType :: !(Maybe TableColumnType)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableColumn' with the minimum fields required to make a request.
 --
@@ -3867,7 +3869,7 @@ data VectorStyle = VectorStyle
     { _vsDisplayRules :: !(Maybe [Maybe DisplayRule])
     , _vsFeatureInfo  :: !(Maybe (Maybe FeatureInfo))
     , _vsType         :: !(Maybe VectorStyleType)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VectorStyle' with the minimum fields required to make a request.
 --

@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.CloudDatastore.Types.Product
 -- Copyright   : (c) 2015 Brendan Hay
@@ -76,7 +78,7 @@ aHeader = lens _aHeader (\ s a -> s{_aHeader = a})
 -- /See:/ 'beginTransactionRequest' smart constructor.
 newtype BeginTransactionRequest = BeginTransactionRequest
     { _btrIsolationLevel :: Maybe BeginTransactionRequestIsolationLevel
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeginTransactionRequest' with the minimum fields required to make a request.
 --
@@ -140,7 +142,7 @@ data CommitRequest = CommitRequest
     , _crMutation       :: !(Maybe (Maybe Mutation))
     , _crTransaction    :: !(Maybe Word8)
     , _crIgnoreReadOnly :: !(Maybe Bool)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommitRequest' with the minimum fields required to make a request.
 --
@@ -223,7 +225,7 @@ crHeader = lens _crHeader (\ s a -> s{_crHeader = a})
 data CompositeFilter = CompositeFilter
     { _cfOperator :: !(Maybe CompositeFilterOperator)
     , _cfFilters  :: !(Maybe [Maybe Filter])
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CompositeFilter' with the minimum fields required to make a request.
 --
@@ -961,7 +963,7 @@ pBlobValue
 data PropertyExpression = PropertyExpression
     { _peProperty            :: !(Maybe (Maybe PropertyReference))
     , _peAggregationFunction :: !(Maybe PropertyExpressionAggregationFunction)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PropertyExpression' with the minimum fields required to make a request.
 --
@@ -1000,7 +1002,7 @@ data PropertyFilter = PropertyFilter
     { _pfProperty :: !(Maybe (Maybe PropertyReference))
     , _pfOperator :: !(Maybe PropertyFilterOperator)
     , _pfValue    :: !(Maybe (Maybe Value))
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PropertyFilter' with the minimum fields required to make a request.
 --
@@ -1041,7 +1043,7 @@ pfValue = lens _pfValue (\ s a -> s{_pfValue = a})
 data PropertyOrder = PropertyOrder
     { _poProperty  :: !(Maybe (Maybe PropertyReference))
     , _poDirection :: !(Maybe PropertyOrderDirection)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PropertyOrder' with the minimum fields required to make a request.
 --
@@ -1206,7 +1208,7 @@ data QueryResultBatch = QueryResultBatch
     , _qrbEntityResults    :: !(Maybe [Maybe EntityResult])
     , _qrbMoreResults      :: !(Maybe QueryResultBatchMoreResults)
     , _qrbEndCursor        :: !(Maybe Word8)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QueryResultBatch' with the minimum fields required to make a request.
 --
@@ -1273,7 +1275,7 @@ qrbEndCursor
 data ReadOptions = ReadOptions
     { _roReadConsistency :: !(Maybe ReadOptionsReadConsistency)
     , _roTransaction     :: !(Maybe Word8)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadOptions' with the minimum fields required to make a request.
 --

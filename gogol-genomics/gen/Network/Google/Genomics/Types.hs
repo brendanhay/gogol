@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.Genomics.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.Genomics.Types
     (
-    -- * API Definition
-      genomics
-
 
     -- * AlignReadGroupSetsRequest
-    , AlignReadGroupSetsRequest
+      AlignReadGroupSetsRequest
     , alignReadGroupSetsRequest
     , argsrInterleavedFastqSource
     , argsrReadGroupSetId
@@ -720,6 +719,3 @@ module Network.Google.Genomics.Types
 import           Network.Google.Genomics.Types.Product
 import           Network.Google.Genomics.Types.Sum
 import           Network.Google.Prelude
-
-genomics :: a
-genomics = error "genomics"

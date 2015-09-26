@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.OAuth2.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.OAuth2.Types
     (
-    -- * API Definition
-      oauth2
-
 
     -- * Jwk
-    , Jwk
+      Jwk
     , jwk
     , jwkKeys
 
@@ -63,6 +62,3 @@ module Network.Google.OAuth2.Types
 import           Network.Google.OAuth2.Types.Product
 import           Network.Google.OAuth2.Types.Sum
 import           Network.Google.Prelude
-
-oauth2 :: a
-oauth2 = error "oauth2"

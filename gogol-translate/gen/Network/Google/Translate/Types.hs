@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.Translate.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.Translate.Types
     (
-    -- * API Definition
-      translate
-
 
     -- * DetectionsListResponse
-    , DetectionsListResponse
+      DetectionsListResponse
     , detectionsListResponse
     , dlrDetections
 
@@ -54,6 +53,3 @@ module Network.Google.Translate.Types
 import           Network.Google.Prelude
 import           Network.Google.Translate.Types.Product
 import           Network.Google.Translate.Types.Sum
-
-translate :: a
-translate = error "translate"

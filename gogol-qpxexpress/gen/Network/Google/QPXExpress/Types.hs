@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.QPXExpress.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.QPXExpress.Types
     (
-    -- * API Definition
-      qpxExpress
-
 
     -- * AircraftData
-    , AircraftData
+      AircraftData
     , aircraftData
     , adKind
     , adName
@@ -251,6 +250,3 @@ module Network.Google.QPXExpress.Types
 import           Network.Google.Prelude
 import           Network.Google.QPXExpress.Types.Product
 import           Network.Google.QPXExpress.Types.Sum
-
-qpxExpress :: a
-qpxExpress = error "qpxExpress"

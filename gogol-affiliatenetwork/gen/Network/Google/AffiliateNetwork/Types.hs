@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.AffiliateNetwork.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.AffiliateNetwork.Types
     (
-    -- * API Definition
-      gan
-
 
     -- * Advertiser
-    , Advertiser
+      Advertiser
     , advertiser
     , aAllowPublisherCreatedLinks
     , aContactPhone
@@ -275,6 +274,3 @@ module Network.Google.AffiliateNetwork.Types
 import           Network.Google.AffiliateNetwork.Types.Product
 import           Network.Google.AffiliateNetwork.Types.Sum
 import           Network.Google.Prelude
-
-gan :: a
-gan = error "gan"

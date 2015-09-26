@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.Compute.Types.Product
 -- Copyright   : (c) 2015 Brendan Hay
@@ -23,7 +25,7 @@ data AccessConfig = AccessConfig
     , _acName  :: !(Maybe Text)
     , _acNatIP :: !(Maybe Text)
     , _acType  :: !AccessConfigType
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccessConfig' with the minimum fields required to make a request.
 --
@@ -82,7 +84,7 @@ data Address = Address
     , _addId                :: !(Maybe Word64)
     , _addRegion            :: !(Maybe Text)
     , _addDescription       :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Address' with the minimum fields required to make a request.
 --
@@ -323,7 +325,7 @@ alId = lens _alId (\ s a -> s{_alId = a})
 data AddressesScopedList = AddressesScopedList
     { _aslAddresses :: !(Maybe [Maybe Address])
     , _aslWarning   :: !(Maybe AddressesScopedListWarning)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AddressesScopedList' with the minimum fields required to make a request.
 --
@@ -393,7 +395,7 @@ data AddressesScopedListWarning = AddressesScopedListWarning
     { _aslwData    :: !(Maybe [AddressesScopedListItemDataWarning])
     , _aslwCode    :: !(Maybe AddressesScopedListCodeWarning)
     , _aslwMessage :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AddressesScopedListWarning' with the minimum fields required to make a request.
 --
@@ -444,7 +446,7 @@ data AttachedDisk = AttachedDisk
     , _adLicenses         :: !(Maybe [Text])
     , _adType             :: !(Maybe AttachedDiskType)
     , _adIndex            :: !(Maybe Int32)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AttachedDisk' with the minimum fields required to make a request.
 --
@@ -871,7 +873,7 @@ aId = lens _aId (\ s a -> s{_aId = a})
 data AutoscalersScopedList = AutoscalersScopedList
     { _aAutoscalers :: !(Maybe [Maybe Autoscaler])
     , _aWarning     :: !(Maybe AutoscalersScopedListWarning)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AutoscalersScopedList' with the minimum fields required to make a request.
 --
@@ -938,7 +940,7 @@ data AutoscalersScopedListWarning = AutoscalersScopedListWarning
     { _aData    :: !(Maybe [AutoscalersScopedListItemDataWarning])
     , _aCode    :: !(Maybe AutoscalersScopedListCodeWarning)
     , _aMessage :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AutoscalersScopedListWarning' with the minimum fields required to make a request.
 --
@@ -1095,7 +1097,7 @@ data AutoscalingPolicyCustomMetricUtilization = AutoscalingPolicyCustomMetricUti
     { _apcmuUtilizationTarget     :: !(Maybe Double)
     , _apcmuMetric                :: !(Maybe Text)
     , _apcmuUtilizationTargetType :: !(Maybe AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AutoscalingPolicyCustomMetricUtilization' with the minimum fields required to make a request.
 --
@@ -1178,7 +1180,7 @@ data Backend = Backend
     , _bMaxRatePerInstance :: !(Maybe Float)
     , _bDescription        :: !(Maybe Text)
     , _bCapacityScaler     :: !(Maybe Float)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Backend' with the minimum fields required to make a request.
 --
@@ -1283,7 +1285,7 @@ data BackendService = BackendService
     , _bsPortName          :: !(Maybe Text)
     , _bsHealthChecks      :: !(Maybe [Text])
     , _bsPort              :: !(Maybe Int32)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BackendService' with the minimum fields required to make a request.
 --
@@ -1522,7 +1524,7 @@ data DeprecationStatus = DeprecationStatus
     , _dsReplacement :: !(Maybe Text)
     , _dsObsolete    :: !(Maybe Text)
     , _dsDeprecated  :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeprecationStatus' with the minimum fields required to make a request.
 --
@@ -1606,7 +1608,7 @@ data Disk = Disk
     , _dType                :: !(Maybe Text)
     , _dDescription         :: !(Maybe Text)
     , _dSourceSnapshot      :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Disk' with the minimum fields required to make a request.
 --
@@ -2227,7 +2229,7 @@ dtlId = lens _dtlId (\ s a -> s{_dtlId = a})
 data DiskTypesScopedList = DiskTypesScopedList
     { _dtslDiskTypes :: !(Maybe [Maybe DiskType])
     , _dtslWarning   :: !(Maybe DiskTypesScopedListWarning)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DiskTypesScopedList' with the minimum fields required to make a request.
 --
@@ -2298,7 +2300,7 @@ data DiskTypesScopedListWarning = DiskTypesScopedListWarning
     { _dtslwData    :: !(Maybe [DiskTypesScopedListItemDataWarning])
     , _dtslwCode    :: !(Maybe DiskTypesScopedListCodeWarning)
     , _dtslwMessage :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DiskTypesScopedListWarning' with the minimum fields required to make a request.
 --
@@ -2340,7 +2342,7 @@ dtslwMessage
 data DisksScopedList = DisksScopedList
     { _dslWarning :: !(Maybe DisksScopedListWarning)
     , _dslDisks   :: !(Maybe [Maybe Disk])
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DisksScopedList' with the minimum fields required to make a request.
 --
@@ -2410,7 +2412,7 @@ data DisksScopedListWarning = DisksScopedListWarning
     { _dslwData    :: !(Maybe [DisksScopedListItemDataWarning])
     , _dslwCode    :: !(Maybe DisksScopedListCodeWarning)
     , _dslwMessage :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DisksScopedListWarning' with the minimum fields required to make a request.
 --
@@ -2714,7 +2716,7 @@ data ForwardingRule = ForwardingRule
     , _frRegion            :: !(Maybe Text)
     , _frDescription       :: !(Maybe Text)
     , _frTarget            :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ForwardingRule' with the minimum fields required to make a request.
 --
@@ -2967,7 +2969,7 @@ frlId = lens _frlId (\ s a -> s{_frlId = a})
 data ForwardingRulesScopedList = ForwardingRulesScopedList
     { _frslWarning         :: !(Maybe ForwardingRulesScopedListWarning)
     , _frslForwardingRules :: !(Maybe [Maybe ForwardingRule])
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ForwardingRulesScopedList' with the minimum fields required to make a request.
 --
@@ -3038,7 +3040,7 @@ data ForwardingRulesScopedListWarning = ForwardingRulesScopedListWarning
     { _frslwData    :: !(Maybe [ForwardingRulesScopedListItemDataWarning])
     , _frslwCode    :: !(Maybe ForwardingRulesScopedListCodeWarning)
     , _frslwMessage :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ForwardingRulesScopedListWarning' with the minimum fields required to make a request.
 --
@@ -3105,7 +3107,7 @@ data HealthStatus = HealthStatus
     , _hsHealthState :: !(Maybe HealthStatusHealthState)
     , _hsPort        :: !(Maybe Int32)
     , _hsInstance    :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HealthStatus' with the minimum fields required to make a request.
 --
@@ -3428,7 +3430,7 @@ data Image = Image
     , _imaSourceDisk        :: !(Maybe Text)
     , _imaDescription       :: !(Maybe Text)
     , _imaDeprecated        :: !(Maybe (Maybe DeprecationStatus))
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Image' with the minimum fields required to make a request.
 --
@@ -3653,7 +3655,7 @@ data ImageRawDisk = ImageRawDisk
     { _irdContainerType :: !(Maybe ImageContainerTypeRawDisk)
     , _irdSource        :: !(Maybe Text)
     , _irdSha1Checksum  :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ImageRawDisk' with the minimum fields required to make a request.
 --
@@ -3717,7 +3719,7 @@ data Instance = Instance
     , _iCanIpForward      :: !(Maybe Bool)
     , _iDescription       :: !(Maybe Text)
     , _iTags              :: !(Maybe (Maybe Tags))
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Instance' with the minimum fields required to make a request.
 --
@@ -4749,7 +4751,7 @@ igmrirInstances
 data InstanceGroupManagersScopedList = InstanceGroupManagersScopedList
     { _igmslWarning               :: !(Maybe InstanceGroupManagersScopedListWarning)
     , _igmslInstanceGroupManagers :: !(Maybe [Maybe InstanceGroupManager])
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagersScopedList' with the minimum fields required to make a request.
 --
@@ -4822,7 +4824,7 @@ data InstanceGroupManagersScopedListWarning = InstanceGroupManagersScopedListWar
     { _igmslwData    :: !(Maybe [InstanceGroupManagersScopedListItemDataWarning])
     , _igmslwCode    :: !(Maybe InstanceGroupManagersScopedListCodeWarning)
     , _igmslwMessage :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagersScopedListWarning' with the minimum fields required to make a request.
 --
@@ -5023,7 +5025,7 @@ igliId = lens _igliId (\ s a -> s{_igliId = a})
 -- /See:/ 'instanceGroupsListInstancesRequest' smart constructor.
 newtype InstanceGroupsListInstancesRequest = InstanceGroupsListInstancesRequest
     { _iglirInstanceState :: Maybe InstanceGroupsListInstancesRequestInstanceState
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupsListInstancesRequest' with the minimum fields required to make a request.
 --
@@ -5076,7 +5078,7 @@ igrirInstances
 data InstanceGroupsScopedList = InstanceGroupsScopedList
     { _igslWarning        :: !(Maybe InstanceGroupsScopedListWarning)
     , _igslInstanceGroups :: !(Maybe [Maybe InstanceGroup])
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupsScopedList' with the minimum fields required to make a request.
 --
@@ -5148,7 +5150,7 @@ data InstanceGroupsScopedListWarning = InstanceGroupsScopedListWarning
     { _igslwData    :: !(Maybe [InstanceGroupsScopedListItemDataWarning])
     , _igslwCode    :: !(Maybe InstanceGroupsScopedListCodeWarning)
     , _igslwMessage :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupsScopedListWarning' with the minimum fields required to make a request.
 --
@@ -5626,7 +5628,7 @@ data InstanceWithNamedPorts = InstanceWithNamedPorts
     { _iwnpStatus     :: !(Maybe InstanceWithNamedPortsStatus)
     , _iwnpNamedPorts :: !(Maybe [Maybe NamedPort])
     , _iwnpInstance   :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceWithNamedPorts' with the minimum fields required to make a request.
 --
@@ -5669,7 +5671,7 @@ iwnpInstance
 data InstancesScopedList = InstancesScopedList
     { _islWarning   :: !(Maybe InstancesScopedListWarning)
     , _islInstances :: !(Maybe [Maybe Instance])
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesScopedList' with the minimum fields required to make a request.
 --
@@ -5739,7 +5741,7 @@ data InstancesScopedListWarning = InstancesScopedListWarning
     { _islwData    :: !(Maybe [InstancesScopedListItemDataWarning])
     , _islwCode    :: !(Maybe InstancesScopedListCodeWarning)
     , _islwMessage :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesScopedListWarning' with the minimum fields required to make a request.
 --
@@ -6137,7 +6139,7 @@ mtlId = lens _mtlId (\ s a -> s{_mtlId = a})
 data MachineTypesScopedList = MachineTypesScopedList
     { _mtslMachineTypes :: !(Maybe [Maybe MachineType])
     , _mtslWarning      :: !(Maybe MachineTypesScopedListWarning)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MachineTypesScopedList' with the minimum fields required to make a request.
 --
@@ -6208,7 +6210,7 @@ data MachineTypesScopedListWarning = MachineTypesScopedListWarning
     { _mtslwData    :: !(Maybe [MachineTypesScopedListItemDataWarning])
     , _mtslwCode    :: !(Maybe MachineTypesScopedListCodeWarning)
     , _mtslwMessage :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MachineTypesScopedListWarning' with the minimum fields required to make a request.
 --
@@ -6253,7 +6255,7 @@ data ManagedInstance = ManagedInstance
     , _miId             :: !(Maybe Word64)
     , _miInstanceStatus :: !(Maybe ManagedInstanceInstanceStatus)
     , _miInstance       :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagedInstance' with the minimum fields required to make a request.
 --
@@ -6768,7 +6770,7 @@ data Operation = Operation
     , _oRegion              :: !(Maybe Text)
     , _oTargetLink          :: !(Maybe Text)
     , _oClientOperationId   :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
@@ -7150,7 +7152,7 @@ data OperationItemWarnings = OperationItemWarnings
     { _oiwData    :: !(Maybe [OperationItemDataItemWarnings])
     , _oiwCode    :: !(Maybe OperationCodeItemWarnings)
     , _oiwMessage :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperationItemWarnings' with the minimum fields required to make a request.
 --
@@ -7251,7 +7253,7 @@ olId = lens _olId (\ s a -> s{_olId = a})
 data OperationsScopedList = OperationsScopedList
     { _oslWarning    :: !(Maybe OperationsScopedListWarning)
     , _oslOperations :: !(Maybe [Maybe Operation])
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperationsScopedList' with the minimum fields required to make a request.
 --
@@ -7322,7 +7324,7 @@ data OperationsScopedListWarning = OperationsScopedListWarning
     { _oslwData    :: !(Maybe [OperationsScopedListItemDataWarning])
     , _oslwCode    :: !(Maybe OperationsScopedListCodeWarning)
     , _oslwMessage :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperationsScopedListWarning' with the minimum fields required to make a request.
 --
@@ -7574,7 +7576,7 @@ data Quota = Quota
     { _qMetric :: !(Maybe QuotaMetric)
     , _qLimit  :: !(Maybe Double)
     , _qUsage  :: !(Maybe Double)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Quota' with the minimum fields required to make a request.
 --
@@ -7620,7 +7622,7 @@ data Region = Region
     , _rId                :: !(Maybe Word64)
     , _rDescription       :: !(Maybe Text)
     , _rDeprecated        :: !(Maybe (Maybe DeprecationStatus))
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Region' with the minimum fields required to make a request.
 --
@@ -7829,7 +7831,7 @@ data Route = Route
     , _rrDescription       :: !(Maybe Text)
     , _rrTags              :: !(Maybe [Text])
     , _rrNextHopInstance   :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Route' with the minimum fields required to make a request.
 --
@@ -8027,7 +8029,7 @@ data RouteItemWarnings = RouteItemWarnings
     { _riwData    :: !(Maybe [RouteItemDataItemWarnings])
     , _riwCode    :: !(Maybe RouteCodeItemWarnings)
     , _riwMessage :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RouteItemWarnings' with the minimum fields required to make a request.
 --
@@ -8130,7 +8132,7 @@ data Scheduling = Scheduling
     { _sAutomaticRestart  :: !(Maybe Bool)
     , _sOnHostMaintenance :: !(Maybe SchedulingOnHostMaintenance)
     , _sPreemptible       :: !(Maybe Bool)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Scheduling' with the minimum fields required to make a request.
 --
@@ -8266,7 +8268,7 @@ data Snapshot = Snapshot
     , _sLicenses           :: !(Maybe [Text])
     , _sSourceDisk         :: !(Maybe Text)
     , _sDescription        :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Snapshot' with the minimum fields required to make a request.
 --
@@ -8658,7 +8660,7 @@ data TargetInstance = TargetInstance
     , _tiId                :: !(Maybe Word64)
     , _tiDescription       :: !(Maybe Text)
     , _tiInstance          :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetInstance' with the minimum fields required to make a request.
 --
@@ -8884,7 +8886,7 @@ tilId = lens _tilId (\ s a -> s{_tilId = a})
 data TargetInstancesScopedList = TargetInstancesScopedList
     { _tislWarning         :: !(Maybe TargetInstancesScopedListWarning)
     , _tislTargetInstances :: !(Maybe [Maybe TargetInstance])
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetInstancesScopedList' with the minimum fields required to make a request.
 --
@@ -8955,7 +8957,7 @@ data TargetInstancesScopedListWarning = TargetInstancesScopedListWarning
     { _tislwData    :: !(Maybe [TargetInstancesScopedListItemDataWarning])
     , _tislwCode    :: !(Maybe TargetInstancesScopedListCodeWarning)
     , _tislwMessage :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetInstancesScopedListWarning' with the minimum fields required to make a request.
 --
@@ -9009,7 +9011,7 @@ data TargetPool = TargetPool
     , _tpRegion            :: !(Maybe Text)
     , _tpDescription       :: !(Maybe Text)
     , _tpHealthChecks      :: !(Maybe [Text])
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetPool' with the minimum fields required to make a request.
 --
@@ -9433,7 +9435,7 @@ tprirInstances
 data TargetPoolsScopedList = TargetPoolsScopedList
     { _tpslWarning     :: !(Maybe TargetPoolsScopedListWarning)
     , _tpslTargetPools :: !(Maybe [Maybe TargetPool])
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetPoolsScopedList' with the minimum fields required to make a request.
 --
@@ -9504,7 +9506,7 @@ data TargetPoolsScopedListWarning = TargetPoolsScopedListWarning
     { _tpslwData    :: !(Maybe [TargetPoolsScopedListItemDataWarning])
     , _tpslwCode    :: !(Maybe TargetPoolsScopedListCodeWarning)
     , _tpslwMessage :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetPoolsScopedListWarning' with the minimum fields required to make a request.
 --
@@ -9576,7 +9578,7 @@ data TargetVpnGateway = TargetVpnGateway
     , _tvgTunnels           :: !(Maybe [Text])
     , _tvgDescription       :: !(Maybe Text)
     , _tvgForwardingRules   :: !(Maybe [Text])
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetVpnGateway' with the minimum fields required to make a request.
 --
@@ -9832,7 +9834,7 @@ tvglId = lens _tvglId (\ s a -> s{_tvglId = a})
 data TargetVpnGatewaysScopedList = TargetVpnGatewaysScopedList
     { _tvgslTargetVpnGateways :: !(Maybe [Maybe TargetVpnGateway])
     , _tvgslWarning           :: !(Maybe TargetVpnGatewaysScopedListWarning)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetVpnGatewaysScopedList' with the minimum fields required to make a request.
 --
@@ -9904,7 +9906,7 @@ data TargetVpnGatewaysScopedListWarning = TargetVpnGatewaysScopedListWarning
     { _tvgslwData    :: !(Maybe [TargetVpnGatewaysScopedListItemDataWarning])
     , _tvgslwCode    :: !(Maybe TargetVpnGatewaysScopedListCodeWarning)
     , _tvgslwMessage :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetVpnGatewaysScopedListWarning' with the minimum fields required to make a request.
 --
@@ -10419,7 +10421,7 @@ data VpnTunnel = VpnTunnel
     , _vtIkeVersion        :: !(Maybe Int32)
     , _vtRegion            :: !(Maybe Text)
     , _vtDescription       :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VpnTunnel' with the minimum fields required to make a request.
 --
@@ -10692,7 +10694,7 @@ vtlId = lens _vtlId (\ s a -> s{_vtlId = a})
 data VpnTunnelsScopedList = VpnTunnelsScopedList
     { _vtslVpnTunnels :: !(Maybe [Maybe VpnTunnel])
     , _vtslWarning    :: !(Maybe VpnTunnelsScopedListWarning)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VpnTunnelsScopedList' with the minimum fields required to make a request.
 --
@@ -10763,7 +10765,7 @@ data VpnTunnelsScopedListWarning = VpnTunnelsScopedListWarning
     { _vtslwData    :: !(Maybe [VpnTunnelsScopedListItemDataWarning])
     , _vtslwCode    :: !(Maybe VpnTunnelsScopedListCodeWarning)
     , _vtslwMessage :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VpnTunnelsScopedListWarning' with the minimum fields required to make a request.
 --
@@ -10814,7 +10816,7 @@ data Zone = Zone
     , _zRegion             :: !(Maybe Text)
     , _zDescription        :: !(Maybe Text)
     , _zDeprecated         :: !(Maybe (Maybe DeprecationStatus))
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Zone' with the minimum fields required to make a request.
 --

@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.DFAReporting.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.DFAReporting.Types
     (
-    -- * API Definition
-      dfareporting
-
 
     -- * Account
-    , Account
+      Account
     , account
     , aaAccountPermissionIds
     , aaMaximumImageSize
@@ -2270,6 +2269,3 @@ module Network.Google.DFAReporting.Types
 import           Network.Google.DFAReporting.Types.Product
 import           Network.Google.DFAReporting.Types.Sum
 import           Network.Google.Prelude
-
-dfareporting :: a
-dfareporting = error "dfareporting"

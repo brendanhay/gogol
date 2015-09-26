@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.AdExchangeBuyer.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.AdExchangeBuyer.Types
     (
-    -- * API Definition
-      adexchangebuyer
-
 
     -- * Account
-    , Account
+      Account
     , account
     , aMaximumTotalQps
     , aKind
@@ -837,6 +836,3 @@ module Network.Google.AdExchangeBuyer.Types
 import           Network.Google.AdExchangeBuyer.Types.Product
 import           Network.Google.AdExchangeBuyer.Types.Sum
 import           Network.Google.Prelude
-
-adexchangebuyer :: a
-adexchangebuyer = error "adexchangebuyer"

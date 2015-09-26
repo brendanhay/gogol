@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.Fitness.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.Fitness.Types
     (
-    -- * API Definition
-      fitness
-
 
     -- * AggregateBucket
-    , AggregateBucket
+      AggregateBucket
     , aggregateBucket
     , abEndTimeMillis
     , abDataset
@@ -186,6 +185,3 @@ module Network.Google.Fitness.Types
 import           Network.Google.Fitness.Types.Product
 import           Network.Google.Fitness.Types.Sum
 import           Network.Google.Prelude
-
-fitness :: a
-fitness = error "fitness"

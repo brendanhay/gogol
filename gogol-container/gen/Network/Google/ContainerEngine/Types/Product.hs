@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.ContainerEngine.Types.Product
 -- Copyright   : (c) 2015 Brendan Hay
@@ -37,7 +39,7 @@ data Cluster = Cluster
     , _cDescription           :: !(Maybe Text)
     , _cInstanceGroupUrls     :: !(Maybe [Text])
     , _cNodeRoutingPrefixSize :: !(Maybe Int32)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Cluster' with the minimum fields required to make a request.
 --
@@ -511,7 +513,7 @@ data Operation = Operation
     , _oErrorMessage  :: !(Maybe Text)
     , _oTargetLink    :: !(Maybe Text)
     , _oTarget        :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --

@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.AndroidPublisher.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.AndroidPublisher.Types
     (
-    -- * API Definition
-      androidpublisher
-
 
     -- * Apk
-    , Apk
+      Apk
     , apk
     , apkVersionCode
     , apkBinary
@@ -327,6 +326,3 @@ module Network.Google.AndroidPublisher.Types
 import           Network.Google.AndroidPublisher.Types.Product
 import           Network.Google.AndroidPublisher.Types.Sum
 import           Network.Google.Prelude
-
-androidpublisher :: a
-androidpublisher = error "androidpublisher"

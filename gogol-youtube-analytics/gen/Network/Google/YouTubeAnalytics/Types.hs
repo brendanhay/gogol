@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.YouTubeAnalytics.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.YouTubeAnalytics.Types
     (
-    -- * API Definition
-      youtubeAnalytics
-
 
     -- * BatchReport
-    , BatchReport
+      BatchReport
     , batchReport
     , brTimeUpdated
     , brKind
@@ -128,6 +127,3 @@ module Network.Google.YouTubeAnalytics.Types
 import           Network.Google.Prelude
 import           Network.Google.YouTubeAnalytics.Types.Product
 import           Network.Google.YouTubeAnalytics.Types.Sum
-
-youtubeAnalytics :: a
-youtubeAnalytics = error "youtubeAnalytics"

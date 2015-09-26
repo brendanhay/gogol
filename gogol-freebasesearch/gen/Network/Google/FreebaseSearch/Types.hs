@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.FreebaseSearch.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.FreebaseSearch.Types
     (
-    -- * API Definition
-      freebase
-
 
     -- * ReconcileCandidate
-    , ReconcileCandidate
+      ReconcileCandidate
     , reconcileCandidate
     , rcLang
     , rcConfidence
@@ -56,6 +55,3 @@ module Network.Google.FreebaseSearch.Types
 import           Network.Google.FreebaseSearch.Types.Product
 import           Network.Google.FreebaseSearch.Types.Sum
 import           Network.Google.Prelude
-
-freebase :: a
-freebase = error "freebase"

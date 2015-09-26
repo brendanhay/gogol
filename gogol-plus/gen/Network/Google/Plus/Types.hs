@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.Plus.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.Plus.Types
     (
-    -- * API Definition
-      plus
-
 
     -- * Acl
-    , Acl
+      Acl
     , acl
     , aclKind
     , aclItems
@@ -488,6 +487,3 @@ module Network.Google.Plus.Types
 import           Network.Google.Plus.Types.Product
 import           Network.Google.Plus.Types.Sum
 import           Network.Google.Prelude
-
-plus :: a
-plus = error "plus"

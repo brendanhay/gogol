@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.Reports.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.Reports.Types
     (
-    -- * API Definition
-      admin
-
 
     -- * Activities
-    , Activities
+      Activities
     , activities
     , actEtag
     , actNextPageToken
@@ -143,6 +142,3 @@ module Network.Google.Reports.Types
 import           Network.Google.Prelude
 import           Network.Google.Reports.Types.Product
 import           Network.Google.Reports.Types.Sum
-
-admin :: a
-admin = error "admin"

@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.GamesManagement.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.GamesManagement.Types
     (
-    -- * API Definition
-      gamesManagement
-
 
     -- * AchievementResetAllResponse
-    , AchievementResetAllResponse
+      AchievementResetAllResponse
     , achievementResetAllResponse
     , ararResults
     , ararKind
@@ -124,6 +123,3 @@ module Network.Google.GamesManagement.Types
 import           Network.Google.GamesManagement.Types.Product
 import           Network.Google.GamesManagement.Types.Sum
 import           Network.Google.Prelude
-
-gamesManagement :: a
-gamesManagement = error "gamesManagement"

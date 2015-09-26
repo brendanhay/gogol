@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.CloudNetworkPerformanceMonitoring.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.CloudNetworkPerformanceMonitoring.Types
     (
-    -- * API Definition
-      cloudlatencytest
-
 
     -- * AggregatedStats
-    , AggregatedStats
+      AggregatedStats
     , aggregatedStats
     , asStats
 
@@ -61,6 +60,3 @@ module Network.Google.CloudNetworkPerformanceMonitoring.Types
 import           Network.Google.CloudNetworkPerformanceMonitoring.Types.Product
 import           Network.Google.CloudNetworkPerformanceMonitoring.Types.Sum
 import           Network.Google.Prelude
-
-cloudlatencytest :: a
-cloudlatencytest = error "cloudlatencytest"

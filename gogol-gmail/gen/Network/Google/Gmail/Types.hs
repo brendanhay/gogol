@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.Gmail.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.Gmail.Types
     (
-    -- * API Definition
-      gmail
-
 
     -- * Draft
-    , Draft
+      Draft
     , draft
     , dId
     , dMessage
@@ -193,6 +192,3 @@ module Network.Google.Gmail.Types
 import           Network.Google.Gmail.Types.Product
 import           Network.Google.Gmail.Types.Sum
 import           Network.Google.Prelude
-
-gmail :: a
-gmail = error "gmail"

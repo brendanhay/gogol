@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.GroupsSettings.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.GroupsSettings.Types
     (
-    -- * API Definition
-      groupssettings
-
 
     -- * Groups
-    , Groups
+      Groups
     , groups
     , gEmail
     , gSendMessageDenyNotification
@@ -52,6 +51,3 @@ module Network.Google.GroupsSettings.Types
 import           Network.Google.GroupsSettings.Types.Product
 import           Network.Google.GroupsSettings.Types.Sum
 import           Network.Google.Prelude
-
-groupssettings :: a
-groupssettings = error "groupssettings"

@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.ComputeEngineInstanceGroupUpdater.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.ComputeEngineInstanceGroupUpdater.Types
     (
-    -- * API Definition
-      replicapoolupdater
-
 
     -- * InstanceUpdate
-    , InstanceUpdate
+      InstanceUpdate
     , instanceUpdate
     , iuStatus
     , iuError
@@ -156,6 +155,3 @@ module Network.Google.ComputeEngineInstanceGroupUpdater.Types
 import           Network.Google.ComputeEngineInstanceGroupUpdater.Types.Product
 import           Network.Google.ComputeEngineInstanceGroupUpdater.Types.Sum
 import           Network.Google.Prelude
-
-replicapoolupdater :: a
-replicapoolupdater = error "replicapoolupdater"

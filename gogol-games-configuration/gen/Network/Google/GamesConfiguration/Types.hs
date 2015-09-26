@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.GamesConfiguration.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.GamesConfiguration.Types
     (
-    -- * API Definition
-      gamesConfiguration
-
 
     -- * AchievementConfiguration
-    , AchievementConfiguration
+      AchievementConfiguration
     , achievementConfiguration
     , acAchievementType
     , acStepsToUnlock
@@ -116,6 +115,3 @@ module Network.Google.GamesConfiguration.Types
 import           Network.Google.GamesConfiguration.Types.Product
 import           Network.Google.GamesConfiguration.Types.Sum
 import           Network.Google.Prelude
-
-gamesConfiguration :: a
-gamesConfiguration = error "gamesConfiguration"

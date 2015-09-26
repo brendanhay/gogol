@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.CloudStorage.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.CloudStorage.Types
     (
-    -- * API Definition
-      storage
-
 
     -- * Bucket
-    , Bucket
+      Bucket
     , bucket
     , bucEtag
     , bucLocation
@@ -228,6 +227,3 @@ module Network.Google.CloudStorage.Types
 import           Network.Google.CloudStorage.Types.Product
 import           Network.Google.CloudStorage.Types.Sum
 import           Network.Google.Prelude
-
-storage :: a
-storage = error "storage"

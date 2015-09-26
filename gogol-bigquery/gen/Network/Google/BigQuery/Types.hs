@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.BigQuery.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.BigQuery.Types
     (
-    -- * API Definition
-      bigquery
-
 
     -- * CsvOptions
-    , CsvOptions
+      CsvOptions
     , csvOptions
     , coSkipLeadingRows
     , coAllowJaggedRows
@@ -453,6 +452,3 @@ module Network.Google.BigQuery.Types
 import           Network.Google.BigQuery.Types.Product
 import           Network.Google.BigQuery.Types.Sum
 import           Network.Google.Prelude
-
-bigquery :: a
-bigquery = error "bigquery"

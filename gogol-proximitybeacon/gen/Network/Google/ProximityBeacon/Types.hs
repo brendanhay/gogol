@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.ProximityBeacon.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.ProximityBeacon.Types
     (
-    -- * API Definition
-      proximitybeacon
-
 
     -- * AdvertisedId
-    , AdvertisedId
+      AdvertisedId
     , advertisedId
     , aiId
     , aiType
@@ -145,6 +144,3 @@ module Network.Google.ProximityBeacon.Types
 import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types.Product
 import           Network.Google.ProximityBeacon.Types.Sum
-
-proximitybeacon :: a
-proximitybeacon = error "proximitybeacon"

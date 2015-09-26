@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.DoubleClickSearch.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.DoubleClickSearch.Types
     (
-    -- * API Definition
-      doubleclicksearch
-
 
     -- * Availability
-    , Availability
+      Availability
     , availability
     , aAgencyId
     , aAdvertiserId
@@ -194,6 +193,3 @@ module Network.Google.DoubleClickSearch.Types
 import           Network.Google.DoubleClickSearch.Types.Product
 import           Network.Google.DoubleClickSearch.Types.Sum
 import           Network.Google.Prelude
-
-doubleclicksearch :: a
-doubleclicksearch = error "doubleclicksearch"

@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.IdentityToolkit.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.IdentityToolkit.Types
     (
-    -- * API Definition
-      identitytoolkit
-
 
     -- * CreateAuthUriResponse
-    , CreateAuthUriResponse
+      CreateAuthUriResponse
     , createAuthUriResponse
     , caurProviderId
     , caurKind
@@ -268,6 +267,3 @@ module Network.Google.IdentityToolkit.Types
 import           Network.Google.IdentityToolkit.Types.Product
 import           Network.Google.IdentityToolkit.Types.Sum
 import           Network.Google.Prelude
-
-identitytoolkit :: a
-identitytoolkit = error "identitytoolkit"

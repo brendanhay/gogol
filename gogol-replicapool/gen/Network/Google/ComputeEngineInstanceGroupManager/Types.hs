@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.ComputeEngineInstanceGroupManager.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.ComputeEngineInstanceGroupManager.Types
     (
-    -- * API Definition
-      replicapool
-
 
     -- * InstanceGroupManager
-    , InstanceGroupManager
+      InstanceGroupManager
     , instanceGroupManager
     , igmCurrentSize
     , igmGroup
@@ -148,6 +147,3 @@ module Network.Google.ComputeEngineInstanceGroupManager.Types
 import           Network.Google.ComputeEngineInstanceGroupManager.Types.Product
 import           Network.Google.ComputeEngineInstanceGroupManager.Types.Sum
 import           Network.Google.Prelude
-
-replicapool :: a
-replicapool = error "replicapool"

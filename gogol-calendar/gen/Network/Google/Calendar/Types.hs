@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.Calendar.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.Calendar.Types
     (
-    -- * API Definition
-      calendar
-
 
     -- * Acl
-    , Acl
+      Acl
     , acl
     , aclEtag
     , aclNextPageToken
@@ -360,6 +359,3 @@ module Network.Google.Calendar.Types
 import           Network.Google.Calendar.Types.Product
 import           Network.Google.Calendar.Types.Sum
 import           Network.Google.Prelude
-
-calendar :: a
-calendar = error "calendar"

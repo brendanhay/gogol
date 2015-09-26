@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.MapsEngine.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.MapsEngine.Types
     (
-    -- * API Definition
-      mapsengine
-
 
     -- * AcquisitionTime
-    , AcquisitionTime
+      AcquisitionTime
     , acquisitionTime
     , atStart
     , atPrecision
@@ -703,6 +702,3 @@ module Network.Google.MapsEngine.Types
 import           Network.Google.MapsEngine.Types.Product
 import           Network.Google.MapsEngine.Types.Sum
 import           Network.Google.Prelude
-
-mapsengine :: a
-mapsengine = error "mapsengine"

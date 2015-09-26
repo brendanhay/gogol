@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.Genomics.Types.Product
 -- Copyright   : (c) 2015 Brendan Hay
@@ -137,7 +139,7 @@ data Annotation = Annotation
     , _aTranscript      :: !(Maybe (Maybe Transcript))
     , _aInfo            :: !(Maybe AnnotationInfo)
     , _aPosition        :: !(Maybe (Maybe RangePosition))
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Annotation' with the minimum fields required to make a request.
 --
@@ -242,7 +244,7 @@ data AnnotationSet = AnnotationSet
     , _asType           :: !(Maybe AnnotationSetType)
     , _asSourceUri      :: !(Maybe Text)
     , _asInfo           :: !(Maybe AnnotationSetInfo)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnnotationSet' with the minimum fields required to make a request.
 --
@@ -714,7 +716,7 @@ data CigarUnit = CigarUnit
     { _cuOperation         :: !(Maybe CigarUnitOperation)
     , _cuOperationLength   :: !(Maybe Int64)
     , _cuReferenceSequence :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CigarUnit' with the minimum fields required to make a request.
 --
@@ -1057,7 +1059,7 @@ data ExportVariantSetRequest = ExportVariantSetRequest
     , _evsrFormat          :: !(Maybe ExportVariantSetRequestFormat)
     , _evsrProjectNumber   :: !(Maybe Int64)
     , _evsrCallSetIds      :: !(Maybe [Text])
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ExportVariantSetRequest' with the minimum fields required to make a request.
 --
@@ -1249,7 +1251,7 @@ data ImportReadGroupSetsRequest = ImportReadGroupSetsRequest
     , _irgsrDatasetId         :: !(Maybe Text)
     , _irgsrSourceUris        :: !(Maybe [Text])
     , _irgsrPartitionStrategy :: !(Maybe ImportReadGroupSetsRequestPartitionStrategy)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ImportReadGroupSetsRequest' with the minimum fields required to make a request.
 --
@@ -1335,7 +1337,7 @@ data ImportVariantsRequest = ImportVariantsRequest
     { _ivrFormat                  :: !(Maybe ImportVariantsRequestFormat)
     , _ivrNormalizeReferenceNames :: !(Maybe Bool)
     , _ivrSourceUris              :: !(Maybe [Text])
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ImportVariantsRequest' with the minimum fields required to make a request.
 --
@@ -1483,7 +1485,7 @@ data Job = Job
     , _jobId             :: !(Maybe Text)
     , _jobErrors         :: !(Maybe [Text])
     , _jobRequest        :: !(Maybe (Maybe JobRequest))
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Job' with the minimum fields required to make a request.
 --
@@ -1582,7 +1584,7 @@ data JobRequest = JobRequest
     { _jrDestination :: !(Maybe [Text])
     , _jrSource      :: !(Maybe [Text])
     , _jrType        :: !(Maybe JobRequestType)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobRequest' with the minimum fields required to make a request.
 --
@@ -1882,7 +1884,7 @@ data Metadata = Metadata
     , _mNumber      :: !(Maybe Text)
     , _mDescription :: !(Maybe Text)
     , _mInfo        :: !(Maybe MetadataInfo)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Metadata' with the minimum fields required to make a request.
 --
@@ -3076,7 +3078,7 @@ data SearchAnnotationSetsRequest = SearchAnnotationSetsRequest
     , _sasrName           :: !(Maybe Text)
     , _sasrPageToken      :: !(Maybe Text)
     , _sasrPageSize       :: !(Maybe Int32)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SearchAnnotationSetsRequest' with the minimum fields required to make a request.
 --
@@ -3392,7 +3394,7 @@ data SearchJobsRequest = SearchJobsRequest
     , _sjrPageToken     :: !(Maybe Text)
     , _sjrPageSize      :: !(Maybe Int32)
     , _sjrCreatedBefore :: !(Maybe Int64)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SearchJobsRequest' with the minimum fields required to make a request.
 --
@@ -4511,7 +4513,7 @@ data VariantAnnotation = VariantAnnotation
     , _vaConditions           :: !(Maybe [Maybe VariantAnnotationCondition])
     , _vaType                 :: !(Maybe VariantAnnotationType)
     , _vaTranscriptIds        :: !(Maybe [Text])
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantAnnotation' with the minimum fields required to make a request.
 --

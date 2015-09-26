@@ -1,6 +1,9 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE LambdaCase         #-}
 {-# LANGUAGE OverloadedStrings  #-}
+
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
 -- Module      : Network.Google.CloudDatastore.Types.Sum
@@ -29,6 +32,17 @@ data BeginTransactionRequestIsolationLevel
 
 instance Hashable BeginTransactionRequestIsolationLevel
 
+instance FromText BeginTransactionRequestIsolationLevel where
+    fromText = \case
+        "SERIALIZABLE" -> Just BTRILSerializable
+        "SNAPSHOT" -> Just BTRILSnapshot
+        _ -> Nothing
+
+instance ToText BeginTransactionRequestIsolationLevel where
+    toText = \case
+        BTRILSerializable -> "SERIALIZABLE"
+        BTRILSnapshot -> "SNAPSHOT"
+
 -- | The type of commit to perform. Either TRANSACTIONAL or
 -- NON_TRANSACTIONAL.
 data CommitRequestMode
@@ -40,6 +54,17 @@ data CommitRequestMode
 
 instance Hashable CommitRequestMode
 
+instance FromText CommitRequestMode where
+    fromText = \case
+        "NON_TRANSACTIONAL" -> Just CRMNonTransactional
+        "TRANSACTIONAL" -> Just CRMTransactional
+        _ -> Nothing
+
+instance ToText CommitRequestMode where
+    toText = \case
+        CRMNonTransactional -> "NON_TRANSACTIONAL"
+        CRMTransactional -> "TRANSACTIONAL"
+
 -- | The operator for combining multiple filters. Only \"and\" is currently
 -- supported.
 data CompositeFilterOperator
@@ -48,6 +73,15 @@ data CompositeFilterOperator
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
 instance Hashable CompositeFilterOperator
+
+instance FromText CompositeFilterOperator where
+    fromText = \case
+        "AND" -> Just CFOAnd
+        _ -> Nothing
+
+instance ToText CompositeFilterOperator where
+    toText = \case
+        CFOAnd -> "AND"
 
 -- | The aggregation function to apply to the property. Optional. Can only be
 -- used when grouping by at least one property. Must then be set on all
@@ -60,6 +94,15 @@ data PropertyExpressionAggregationFunction
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
 instance Hashable PropertyExpressionAggregationFunction
+
+instance FromText PropertyExpressionAggregationFunction where
+    fromText = \case
+        "FIRST" -> Just PEAFFirst
+        _ -> Nothing
+
+instance ToText PropertyExpressionAggregationFunction where
+    toText = \case
+        PEAFFirst -> "FIRST"
 
 -- | The operator to filter by. One of lessThan, lessThanOrEqual,
 -- greaterThan, greaterThanOrEqual, equal, or hasAncestor.
@@ -80,6 +123,25 @@ data PropertyFilterOperator
 
 instance Hashable PropertyFilterOperator
 
+instance FromText PropertyFilterOperator where
+    fromText = \case
+        "EQUAL" -> Just PFOEqual
+        "GREATER_THAN" -> Just PFOGreaterThan
+        "GREATER_THAN_OR_EQUAL" -> Just PFOGreaterThanOrEqual
+        "HAS_ANCESTOR" -> Just PFOHasAncestor
+        "LESS_THAN" -> Just PFOLessThan
+        "LESS_THAN_OR_EQUAL" -> Just PFOLessThanOrEqual
+        _ -> Nothing
+
+instance ToText PropertyFilterOperator where
+    toText = \case
+        PFOEqual -> "EQUAL"
+        PFOGreaterThan -> "GREATER_THAN"
+        PFOGreaterThanOrEqual -> "GREATER_THAN_OR_EQUAL"
+        PFOHasAncestor -> "HAS_ANCESTOR"
+        PFOLessThan -> "LESS_THAN"
+        PFOLessThanOrEqual -> "LESS_THAN_OR_EQUAL"
+
 -- | The direction to order by. One of ascending or descending. Optional,
 -- defaults to ascending.
 data PropertyOrderDirection
@@ -90,6 +152,17 @@ data PropertyOrderDirection
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
 instance Hashable PropertyOrderDirection
+
+instance FromText PropertyOrderDirection where
+    fromText = \case
+        "ASCENDING" -> Just PODAscending
+        "DESCENDING" -> Just PODDescending
+        _ -> Nothing
+
+instance ToText PropertyOrderDirection where
+    toText = \case
+        PODAscending -> "ASCENDING"
+        PODDescending -> "DESCENDING"
 
 -- | The result type for every entity in entityResults. full for full
 -- entities, projection for entities with only projected properties,
@@ -105,6 +178,19 @@ data QueryResultBatchEntityResultType
 
 instance Hashable QueryResultBatchEntityResultType
 
+instance FromText QueryResultBatchEntityResultType where
+    fromText = \case
+        "FULL" -> Just QRBERTFull
+        "KEY_ONLY" -> Just QRBERTKeyOnly
+        "PROJECTION" -> Just QRBERTProjection
+        _ -> Nothing
+
+instance ToText QueryResultBatchEntityResultType where
+    toText = \case
+        QRBERTFull -> "FULL"
+        QRBERTKeyOnly -> "KEY_ONLY"
+        QRBERTProjection -> "PROJECTION"
+
 -- | The state of the query after the current batch. One of notFinished,
 -- moreResultsAfterLimit, noMoreResults.
 data QueryResultBatchMoreResults
@@ -117,6 +203,19 @@ data QueryResultBatchMoreResults
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
 instance Hashable QueryResultBatchMoreResults
+
+instance FromText QueryResultBatchMoreResults where
+    fromText = \case
+        "MORE_RESULTS_AFTER_LIMIT" -> Just QRBMRMoreResultsAfterLimit
+        "NOT_FINISHED" -> Just QRBMRNotFinished
+        "NO_MORE_RESULTS" -> Just QRBMRNoMoreResults
+        _ -> Nothing
+
+instance ToText QueryResultBatchMoreResults where
+    toText = \case
+        QRBMRMoreResultsAfterLimit -> "MORE_RESULTS_AFTER_LIMIT"
+        QRBMRNotFinished -> "NOT_FINISHED"
+        QRBMRNoMoreResults -> "NO_MORE_RESULTS"
 
 -- | The read consistency to use. One of default, strong, or eventual. Cannot
 -- be set when transaction is set. Lookup and ancestor queries default to
@@ -132,3 +231,16 @@ data ReadOptionsReadConsistency
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
 instance Hashable ReadOptionsReadConsistency
+
+instance FromText ReadOptionsReadConsistency where
+    fromText = \case
+        "DEFAULT" -> Just RORCDefault
+        "EVENTUAL" -> Just RORCEventual
+        "STRONG" -> Just RORCStrong
+        _ -> Nothing
+
+instance ToText ReadOptionsReadConsistency where
+    toText = \case
+        RORCDefault -> "DEFAULT"
+        RORCEventual -> "EVENTUAL"
+        RORCStrong -> "STRONG"

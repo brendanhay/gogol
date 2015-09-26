@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.URLShortener.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.URLShortener.Types
     (
-    -- * API Definition
-      urlshortener
-
 
     -- * AnalyticsSnapshot
-    , AnalyticsSnapshot
+      AnalyticsSnapshot
     , analyticsSnapshot
     , asPlatforms
     , asShortUrlClicks
@@ -64,6 +63,3 @@ module Network.Google.URLShortener.Types
 import           Network.Google.Prelude
 import           Network.Google.URLShortener.Types.Product
 import           Network.Google.URLShortener.Types.Sum
-
-urlshortener :: a
-urlshortener = error "urlshortener"

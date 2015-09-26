@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.Analytics.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.Analytics.Types
     (
-    -- * API Definition
-      analytics
-
 
     -- * Account
-    , Account
+      Account
     , account
     , accChildLink
     , accKind
@@ -993,6 +992,3 @@ module Network.Google.Analytics.Types
 import           Network.Google.Analytics.Types.Product
 import           Network.Google.Analytics.Types.Sum
 import           Network.Google.Prelude
-
-analytics :: a
-analytics = error "analytics"

@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.SQLAdmin.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.SQLAdmin.Types
     (
-    -- * API Definition
-      sqladmin
-
 
     -- * AclEntry
-    , AclEntry
+      AclEntry
     , aclEntry
     , aeKind
     , aeValue
@@ -384,6 +383,3 @@ module Network.Google.SQLAdmin.Types
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types.Product
 import           Network.Google.SQLAdmin.Types.Sum
-
-sqladmin :: a
-sqladmin = error "sqladmin"

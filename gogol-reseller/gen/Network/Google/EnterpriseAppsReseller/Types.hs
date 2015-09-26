@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.EnterpriseAppsReseller.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.EnterpriseAppsReseller.Types
     (
-    -- * API Definition
-      reseller
-
 
     -- * Address
-    , Address
+      Address
     , address
     , aOrganizationName
     , aKind
@@ -118,6 +117,3 @@ module Network.Google.EnterpriseAppsReseller.Types
 import           Network.Google.EnterpriseAppsReseller.Types.Product
 import           Network.Google.EnterpriseAppsReseller.Types.Sum
 import           Network.Google.Prelude
-
-reseller :: a
-reseller = error "reseller"

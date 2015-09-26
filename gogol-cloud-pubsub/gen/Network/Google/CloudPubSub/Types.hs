@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.CloudPubSub.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.CloudPubSub.Types
     (
-    -- * API Definition
-      pubsub
-
 
     -- * AcknowledgeRequest
-    , AcknowledgeRequest
+      AcknowledgeRequest
     , acknowledgeRequest
     , arAckIds
 
@@ -148,6 +147,3 @@ module Network.Google.CloudPubSub.Types
 import           Network.Google.CloudPubSub.Types.Product
 import           Network.Google.CloudPubSub.Types.Sum
 import           Network.Google.Prelude
-
-pubsub :: a
-pubsub = error "pubsub"

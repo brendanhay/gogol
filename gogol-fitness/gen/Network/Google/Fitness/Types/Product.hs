@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.Fitness.Types.Product
 -- Copyright   : (c) 2015 Brendan Hay
@@ -24,7 +26,7 @@ data AggregateBucket = AggregateBucket
     , _abType            :: !(Maybe AggregateBucketType)
     , _abStartTimeMillis :: !(Maybe Int64)
     , _abSession         :: !(Maybe (Maybe Session))
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AggregateBucket' with the minimum fields required to make a request.
 --
@@ -542,7 +544,7 @@ data DataSource = DataSource
     , _dsType           :: !(Maybe DataSourceType)
     , _dsDataStreamName :: !(Maybe Text)
     , _dsDataStreamId   :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DataSource' with the minimum fields required to make a request.
 --
@@ -686,7 +688,7 @@ data DataTypeField = DataTypeField
     { _dtfFormat   :: !(Maybe DataTypeFieldFormat)
     , _dtfName     :: !(Maybe Text)
     , _dtfOptional :: !(Maybe Bool)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DataTypeField' with the minimum fields required to make a request.
 --
@@ -817,7 +819,7 @@ data Device = Device
     , _dModel        :: !(Maybe Text)
     , _dVersion      :: !(Maybe Text)
     , _dType         :: !(Maybe DeviceType)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Device' with the minimum fields required to make a request.
 --

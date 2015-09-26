@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.CloudLogging.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.CloudLogging.Types
     (
-    -- * API Definition
-      logging
-
 
     -- * Empty
-    , Empty
+      Empty
     , empty
 
     -- * HttpRequest
@@ -213,6 +212,3 @@ module Network.Google.CloudLogging.Types
 import           Network.Google.CloudLogging.Types.Product
 import           Network.Google.CloudLogging.Types.Sum
 import           Network.Google.Prelude
-
-logging :: a
-logging = error "logging"

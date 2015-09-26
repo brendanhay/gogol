@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.ComputeEngineAutoscaler.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.ComputeEngineAutoscaler.Types
     (
-    -- * API Definition
-      autoscaler
-
 
     -- * Autoscaler
-    , Autoscaler
+      Autoscaler
     , autoscaler
     , aKind
     , aSelfLink
@@ -166,6 +165,3 @@ module Network.Google.ComputeEngineAutoscaler.Types
 import           Network.Google.ComputeEngineAutoscaler.Types.Product
 import           Network.Google.ComputeEngineAutoscaler.Types.Sum
 import           Network.Google.Prelude
-
-autoscaler :: a
-autoscaler = error "autoscaler"

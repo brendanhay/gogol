@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.Dataflow.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.Dataflow.Types
     (
-    -- * API Definition
-      dataflow
-
 
     -- * ApproximateProgress
-    , ApproximateProgress
+      ApproximateProgress
     , approximateProgress
     , apRemainingTime
     , apPercentComplete
@@ -675,6 +674,3 @@ module Network.Google.Dataflow.Types
 import           Network.Google.Dataflow.Types.Product
 import           Network.Google.Dataflow.Types.Sum
 import           Network.Google.Prelude
-
-dataflow :: a
-dataflow = error "dataflow"

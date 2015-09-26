@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.Discovery.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.Discovery.Types
     (
-    -- * API Definition
-      discovery
-
 
     -- * DirectoryList
-    , DirectoryList
+      DirectoryList
     , directoryList
     , dlKind
     , dlItems
@@ -236,6 +235,3 @@ module Network.Google.Discovery.Types
 import           Network.Google.Discovery.Types.Product
 import           Network.Google.Discovery.Types.Sum
 import           Network.Google.Prelude
-
-discovery :: a
-discovery = error "discovery"

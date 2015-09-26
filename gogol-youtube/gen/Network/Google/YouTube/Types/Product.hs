@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.YouTube.Types.Product
 -- Copyright   : (c) 2015 Brendan Hay
@@ -446,7 +448,7 @@ data ActivityContentDetailsPromotedItem = ActivityContentDetailsPromotedItem
     , _acdpiCreativeViewUrl     :: !(Maybe Text)
     , _acdpiImpressionUrl       :: !(Maybe [Text])
     , _acdpiCustomCtaButtonText :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivityContentDetailsPromotedItem' with the minimum fields required to make a request.
 --
@@ -563,7 +565,7 @@ data ActivityContentDetailsRecommendation = ActivityContentDetailsRecommendation
     { _acdrResourceId     :: !(Maybe (Maybe ResourceId))
     , _acdrSeedResourceId :: !(Maybe (Maybe ResourceId))
     , _acdrReason         :: !(Maybe ActivityContentDetailsRecommendationReason)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivityContentDetailsRecommendation' with the minimum fields required to make a request.
 --
@@ -611,7 +613,7 @@ data ActivityContentDetailsSocial = ActivityContentDetailsSocial
     , _acdsAuthor       :: !(Maybe Text)
     , _acdsReferenceUrl :: !(Maybe Text)
     , _acdsType         :: !(Maybe ActivityContentDetailsSocialType)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivityContentDetailsSocial' with the minimum fields required to make a request.
 --
@@ -825,7 +827,7 @@ data ActivitySnippet = ActivitySnippet
     , _asTitle        :: !(Maybe Text)
     , _asType         :: !(Maybe ActivitySnippetType)
     , _asDescription  :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivitySnippet' with the minimum fields required to make a request.
 --
@@ -1038,7 +1040,7 @@ data CaptionSnippet = CaptionSnippet
     , _csIsAutoSynced   :: !(Maybe Bool)
     , _csIsEasyReader   :: !(Maybe Bool)
     , _csAudioTrackType :: !(Maybe CaptionSnippetAudioTrackType)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CaptionSnippet' with the minimum fields required to make a request.
 --
@@ -1178,7 +1180,7 @@ data CdnSettings = CdnSettings
     { _csIngestionInfo :: !(Maybe (Maybe IngestionInfo))
     , _csFormat        :: !(Maybe Text)
     , _csIngestionType :: !(Maybe CdnSettingsIngestionType)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CdnSettings' with the minimum fields required to make a request.
 --
@@ -1677,7 +1679,7 @@ ccodContentOwner
 data ChannelConversionPing = ChannelConversionPing
     { _ccpContext       :: !(Maybe ChannelConversionPingContext)
     , _ccpConversionUrl :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChannelConversionPing' with the minimum fields required to make a request.
 --
@@ -2134,7 +2136,7 @@ data ChannelSectionSnippet = ChannelSectionSnippet
     , _cssType            :: !(Maybe ChannelSectionSnippetType)
     , _cssPosition        :: !(Maybe Word32)
     , _cssDefaultLanguage :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChannelSectionSnippet' with the minimum fields required to make a request.
 --
@@ -2555,7 +2557,7 @@ data ChannelStatus = ChannelStatus
     { _csIsLinked          :: !(Maybe Bool)
     , _csLongUploadsStatus :: !(Maybe ChannelStatusLongUploadsStatus)
     , _csPrivacyStatus     :: !(Maybe ChannelStatusPrivacyStatus)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChannelStatus' with the minimum fields required to make a request.
 --
@@ -2778,7 +2780,7 @@ data CommentSnippet = CommentSnippet
     , _csniCanRate                    :: !(Maybe Bool)
     , _csniAuthorGoogleplusProfileUrl :: !(Maybe Text)
     , _csniParentId                   :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentSnippet' with the minimum fields required to make a request.
 --
@@ -3267,7 +3269,7 @@ data ContentRating = ContentRating
     , _crSkfilmRating           :: !(Maybe ContentRatingSkfilmRating)
     , _crOflcRating             :: !(Maybe ContentRatingOflcRating)
     , _crKmrbRating             :: !(Maybe ContentRatingKmrbRating)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContentRating' with the minimum fields required to make a request.
 --
@@ -4741,7 +4743,7 @@ ibPosition
 data InvideoPosition = InvideoPosition
     { _ipCornerPosition :: !(Maybe InvideoPositionCornerPosition)
     , _ipType           :: !(Maybe InvideoPositionType)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InvideoPosition' with the minimum fields required to make a request.
 --
@@ -4836,7 +4838,7 @@ data InvideoTiming = InvideoTiming
     { _itDurationMs :: !(Maybe Word64)
     , _itOffsetMs   :: !(Maybe Word64)
     , _itType       :: !(Maybe InvideoTimingType)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InvideoTiming' with the minimum fields required to make a request.
 --
@@ -5411,7 +5413,7 @@ data LiveBroadcastStatus = LiveBroadcastStatus
     , _lbsRecordingStatus       :: !(Maybe LiveBroadcastStatusRecordingStatus)
     , _lbsLifeCycleStatus       :: !(Maybe LiveBroadcastStatusLifeCycleStatus)
     , _lbsPrivacyStatus         :: !(Maybe LiveBroadcastStatusPrivacyStatus)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveBroadcastStatus' with the minimum fields required to make a request.
 --
@@ -5469,7 +5471,7 @@ data LiveBroadcastTopic = LiveBroadcastTopic
     { _lbtSnippet   :: !(Maybe (Maybe LiveBroadcastTopicSnippet))
     , _lbtUnmatched :: !(Maybe Bool)
     , _lbtType      :: !(Maybe LiveBroadcastTopicType)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveBroadcastTopic' with the minimum fields required to make a request.
 --
@@ -5646,7 +5648,7 @@ data LiveStreamConfigurationIssue = LiveStreamConfigurationIssue
     , _lsciReason      :: !(Maybe Text)
     , _lsciType        :: !(Maybe LiveStreamConfigurationIssueType)
     , _lsciDescription :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveStreamConfigurationIssue' with the minimum fields required to make a request.
 --
@@ -5741,7 +5743,7 @@ data LiveStreamHealthStatus = LiveStreamHealthStatus
     { _lshsStatus                :: !(Maybe LiveStreamHealthStatusStatus)
     , _lshsConfigurationIssues   :: !(Maybe [Maybe LiveStreamConfigurationIssue])
     , _lshsLastUpdateTimeSeconds :: !(Maybe Word64)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveStreamHealthStatus' with the minimum fields required to make a request.
 --
@@ -5950,7 +5952,7 @@ lssDescription
 data LiveStreamStatus = LiveStreamStatus
     { _lssStreamStatus :: !(Maybe LiveStreamStatusStreamStatus)
     , _lssHealthStatus :: !(Maybe (Maybe LiveStreamHealthStatus))
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveStreamStatus' with the minimum fields required to make a request.
 --
@@ -6622,7 +6624,7 @@ pisPosition
 -- /See:/ 'playlistItemStatus' smart constructor.
 newtype PlaylistItemStatus = PlaylistItemStatus
     { _pisPrivacyStatus :: Maybe PlaylistItemStatusPrivacyStatus
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlaylistItemStatus' with the minimum fields required to make a request.
 --
@@ -6920,7 +6922,7 @@ psDefaultLanguage
 -- /See:/ 'playlistStatus' smart constructor.
 newtype PlaylistStatus = PlaylistStatus
     { _psPrivacyStatus :: Maybe PlaylistStatusPrivacyStatus
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlaylistStatus' with the minimum fields required to make a request.
 --
@@ -7004,7 +7006,7 @@ data PromotedItemId = PromotedItemId
     , _piiVideoId            :: !(Maybe Text)
     , _piiWebsiteUrl         :: !(Maybe Text)
     , _piiType               :: !(Maybe PromotedItemIdType)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PromotedItemId' with the minimum fields required to make a request.
 --
@@ -7310,7 +7312,7 @@ data SearchResultSnippet = SearchResultSnippet
     , _srsTitle                :: !(Maybe Text)
     , _srsLiveBroadcastContent :: !(Maybe SearchResultSnippetLiveBroadcastContent)
     , _srsDescription          :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SearchResultSnippet' with the minimum fields required to make a request.
 --
@@ -7471,7 +7473,7 @@ data SubscriptionContentDetails = SubscriptionContentDetails
     { _scdActivityType   :: !(Maybe SubscriptionContentDetailsActivityType)
     , _scdTotalItemCount :: !(Maybe Word32)
     , _scdNewItemCount   :: !(Maybe Word32)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionContentDetails' with the minimum fields required to make a request.
 --
@@ -8383,7 +8385,7 @@ data VideoAgeGating = VideoAgeGating
     { _vagAlcoholContent  :: !(Maybe Bool)
     , _vagRestricted      :: !(Maybe Bool)
     , _vagVideoGameRating :: !(Maybe VideoAgeGatingVideoGameRating)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideoAgeGating' with the minimum fields required to make a request.
 --
@@ -8632,7 +8634,7 @@ data VideoContentDetails = VideoContentDetails
     , _vcdDuration           :: !(Maybe Text)
     , _vcdContentRating      :: !(Maybe (Maybe ContentRating))
     , _vcdLicensedContent    :: !(Maybe Bool)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideoContentDetails' with the minimum fields required to make a request.
 --
@@ -8776,7 +8778,7 @@ vcdrrBlocked
 data VideoConversionPing = VideoConversionPing
     { _vcpContext       :: !(Maybe VideoConversionPingContext)
     , _vcpConversionUrl :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideoConversionPing' with the minimum fields required to make a request.
 --
@@ -8853,7 +8855,7 @@ data VideoFileDetails = VideoFileDetails
     , _vfdVideoStreams      :: !(Maybe [Maybe VideoFileDetailsVideoStream])
     , _vfdAudioStreams      :: !(Maybe [Maybe VideoFileDetailsAudioStream])
     , _vfdFileName          :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideoFileDetails' with the minimum fields required to make a request.
 --
@@ -9031,7 +9033,7 @@ data VideoFileDetailsVideoStream = VideoFileDetailsVideoStream
     , _vfdvsCodec        :: !(Maybe Text)
     , _vfdvsAspectRatio  :: !(Maybe Double)
     , _vfdvsWidthPixels  :: !(Maybe Word32)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideoFileDetailsVideoStream' with the minimum fields required to make a request.
 --
@@ -9463,7 +9465,7 @@ data VideoProcessingDetails = VideoProcessingDetails
     , _vpdProcessingStatus              :: !(Maybe VideoProcessingDetailsProcessingStatus)
     , _vpdEditorSuggestionsAvailability :: !(Maybe Text)
     , _vpdFileDetailsAvailability       :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideoProcessingDetails' with the minimum fields required to make a request.
 --
@@ -9647,7 +9649,7 @@ vpdTags
 data VideoRating = VideoRating
     { _vrRating  :: !(Maybe VideoRatingRating)
     , _vrVideoId :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideoRating' with the minimum fields required to make a request.
 --
@@ -9733,7 +9735,7 @@ data VideoSnippet = VideoSnippet
     , _vsDescription          :: !(Maybe Text)
     , _vsTags                 :: !(Maybe [Text])
     , _vsDefaultLanguage      :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideoSnippet' with the minimum fields required to make a request.
 --
@@ -9934,7 +9936,7 @@ data VideoStatus = VideoStatus
     , _vsPrivacyStatus       :: !(Maybe VideoStatusPrivacyStatus)
     , _vsEmbeddable          :: !(Maybe Bool)
     , _vsLicense             :: !(Maybe VideoStatusLicense)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideoStatus' with the minimum fields required to make a request.
 --
@@ -10031,7 +10033,7 @@ data VideoSuggestions = VideoSuggestions
     , _vsEditorSuggestions  :: !(Maybe [VideoSuggestionsItemEditorSuggestions])
     , _vsProcessingWarnings :: !(Maybe [VideoSuggestionsItemProcessingWarnings])
     , _vsTagSuggestions     :: !(Maybe [Maybe VideoSuggestionsTagSuggestion])
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideoSuggestions' with the minimum fields required to make a request.
 --

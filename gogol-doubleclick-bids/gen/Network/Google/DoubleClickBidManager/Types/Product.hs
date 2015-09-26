@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.DoubleClickBidManager.Types.Product
 -- Copyright   : (c) 2015 Brendan Hay
@@ -22,7 +24,7 @@ data DownloadLineItemsRequest = DownloadLineItemsRequest
     { _dlirFilterType :: !(Maybe DownloadLineItemsRequestFilterType)
     , _dlirFormat     :: !(Maybe DownloadLineItemsRequestFormat)
     , _dlirFilterIds  :: !(Maybe [Int64])
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DownloadLineItemsRequest' with the minimum fields required to make a request.
 --
@@ -94,7 +96,7 @@ dlirLineItems
 data FilterPair = FilterPair
     { _fpValue :: !(Maybe Text)
     , _fpType  :: !(Maybe FilterPairType)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilterPair' with the minimum fields required to make a request.
 --
@@ -198,7 +200,7 @@ data Parameters = Parameters
     , _pFilters           :: !(Maybe [Maybe FilterPair])
     , _pGroupBys          :: !(Maybe [ParametersItemGroupBys])
     , _pType              :: !(Maybe ParametersType)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Parameters' with the minimum fields required to make a request.
 --
@@ -363,7 +365,7 @@ data QueryMetadata = QueryMetadata
     , _qmReportCount                           :: !(Maybe Int32)
     , _qmTitle                                 :: !(Maybe Text)
     , _qmSendNotification                      :: !(Maybe Bool)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QueryMetadata' with the minimum fields required to make a request.
 --
@@ -483,7 +485,7 @@ data QuerySchedule = QuerySchedule
     , _qsEndTimeMs           :: !(Maybe Int64)
     , _qsNextRunMinuteOfDay  :: !(Maybe Int32)
     , _qsNextRunTimezoneCode :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QuerySchedule' with the minimum fields required to make a request.
 --
@@ -576,7 +578,7 @@ rMetadata
 -- /See:/ 'reportFailure' smart constructor.
 newtype ReportFailure = ReportFailure
     { _rfErrorCode :: Maybe ReportFailureErrorCode
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportFailure' with the minimum fields required to make a request.
 --
@@ -690,7 +692,7 @@ data ReportStatus = ReportStatus
     , _rsFinishTimeMs :: !(Maybe Int64)
     , _rsFormat       :: !(Maybe ReportStatusFormat)
     , _rsFailure      :: !(Maybe (Maybe ReportFailure))
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportStatus' with the minimum fields required to make a request.
 --
@@ -811,7 +813,7 @@ data RunQueryRequest = RunQueryRequest
     , _rqrDataRange             :: !(Maybe RunQueryRequestDataRange)
     , _rqrReportDataStartTimeMs :: !(Maybe Int64)
     , _rqrTimezoneCode          :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RunQueryRequest' with the minimum fields required to make a request.
 --
@@ -869,7 +871,7 @@ data UploadLineItemsRequest = UploadLineItemsRequest
     { _ulirLineItems :: !(Maybe Text)
     , _ulirFormat    :: !(Maybe UploadLineItemsRequestFormat)
     , _ulirDryRun    :: !(Maybe Bool)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UploadLineItemsRequest' with the minimum fields required to make a request.
 --

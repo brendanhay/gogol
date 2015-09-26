@@ -1,6 +1,9 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE LambdaCase         #-}
 {-# LANGUAGE OverloadedStrings  #-}
+
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
 -- Module      : Network.Google.Gmail.Types.Sum
@@ -27,6 +30,19 @@ data LabelLabelListVisibility
 
 instance Hashable LabelLabelListVisibility
 
+instance FromText LabelLabelListVisibility where
+    fromText = \case
+        "labelHide" -> Just LLLVLabelHide
+        "labelShow" -> Just LLLVLabelShow
+        "labelShowIfUnread" -> Just LLLVLabelShowIfUnread
+        _ -> Nothing
+
+instance ToText LabelLabelListVisibility where
+    toText = \case
+        LLLVLabelHide -> "labelHide"
+        LLLVLabelShow -> "labelShow"
+        LLLVLabelShowIfUnread -> "labelShowIfUnread"
+
 -- | The visibility of the label in the message list in the Gmail web
 -- interface.
 data LabelMessageListVisibility
@@ -37,6 +53,17 @@ data LabelMessageListVisibility
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
 instance Hashable LabelMessageListVisibility
+
+instance FromText LabelMessageListVisibility where
+    fromText = \case
+        "hide" -> Just LMLVHide
+        "show" -> Just LMLVShow
+        _ -> Nothing
+
+instance ToText LabelMessageListVisibility where
+    toText = \case
+        LMLVHide -> "hide"
+        LMLVShow -> "show"
 
 -- | The owner type for the label. User labels are created by the user and
 -- can be modified and deleted by the user and can be applied to any
@@ -55,6 +82,17 @@ data LabelType
 
 instance Hashable LabelType
 
+instance FromText LabelType where
+    fromText = \case
+        "system" -> Just LTSystem
+        "user" -> Just LTUser
+        _ -> Nothing
+
+instance ToText LabelType where
+    toText = \case
+        LTSystem -> "system"
+        LTUser -> "user"
+
 -- | Filtering behavior of labelIds list specified.
 data WatchRequestLabelFilterAction
     = WRLFAExclude
@@ -64,3 +102,14 @@ data WatchRequestLabelFilterAction
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
 instance Hashable WatchRequestLabelFilterAction
+
+instance FromText WatchRequestLabelFilterAction where
+    fromText = \case
+        "exclude" -> Just WRLFAExclude
+        "include" -> Just WRLFAInclude
+        _ -> Nothing
+
+instance ToText WatchRequestLabelFilterAction where
+    toText = \case
+        WRLFAExclude -> "exclude"
+        WRLFAInclude -> "include"

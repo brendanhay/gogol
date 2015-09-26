@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.WebmasterTools.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.WebmasterTools.Types
     (
-    -- * API Definition
-      webmasters
-
 
     -- * ApiDataRow
-    , ApiDataRow
+      ApiDataRow
     , apiDataRow
     , adrImpressions
     , adrKeys
@@ -133,6 +132,3 @@ module Network.Google.WebmasterTools.Types
 import           Network.Google.Prelude
 import           Network.Google.WebmasterTools.Types.Product
 import           Network.Google.WebmasterTools.Types.Sum
-
-webmasters :: a
-webmasters = error "webmasters"

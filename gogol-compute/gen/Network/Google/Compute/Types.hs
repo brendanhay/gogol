@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.Compute.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.Compute.Types
     (
-    -- * API Definition
-      compute
-
 
     -- * AccessConfig
-    , AccessConfig
+      AccessConfig
     , accessConfig
     , acKind
     , acName
@@ -1745,6 +1744,3 @@ module Network.Google.Compute.Types
 import           Network.Google.Compute.Types.Product
 import           Network.Google.Compute.Types.Sum
 import           Network.Google.Prelude
-
-compute :: a
-compute = error "compute"

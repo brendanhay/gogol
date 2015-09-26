@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.EmailMigration.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.EmailMigration.Types
     (
-    -- * API Definition
-      admin
-
 
     -- * MailItem
-    , MailItem
+      MailItem
     , mailItem
     , miIsDeleted
     , miIsDraft
@@ -33,6 +32,3 @@ module Network.Google.EmailMigration.Types
 import           Network.Google.EmailMigration.Types.Product
 import           Network.Google.EmailMigration.Types.Sum
 import           Network.Google.Prelude
-
-admin :: a
-admin = error "admin"

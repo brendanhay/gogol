@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.Gmail.Types.Product
 -- Copyright   : (c) 2015 Brendan Hay
@@ -255,7 +257,7 @@ data Label = Label
     , _lLabelListVisibility   :: !(Maybe LabelLabelListVisibility)
     , _lId                    :: !(Maybe Text)
     , _lType                  :: !(Maybe LabelType)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Label' with the minimum fields required to make a request.
 --
@@ -1005,7 +1007,7 @@ data WatchRequest = WatchRequest
     { _wrLabelFilterAction :: !(Maybe WatchRequestLabelFilterAction)
     , _wrTopicName         :: !(Maybe Text)
     , _wrLabelIds          :: !(Maybe [Text])
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WatchRequest' with the minimum fields required to make a request.
 --

@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.DataTransfer.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.DataTransfer.Types
     (
-    -- * API Definition
-      admin
-
 
     -- * Application
-    , Application
+      Application
     , application
     , aTransferParams
     , aEtag
@@ -70,6 +69,3 @@ module Network.Google.DataTransfer.Types
 import           Network.Google.DataTransfer.Types.Product
 import           Network.Google.DataTransfer.Types.Sum
 import           Network.Google.Prelude
-
-admin :: a
-admin = error "admin"

@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.CloudMonitoring.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.CloudMonitoring.Types
     (
-    -- * API Definition
-      cloudmonitoring
-
 
     -- * DeleteMetricDescriptorResponse
-    , DeleteMetricDescriptorResponse
+      DeleteMetricDescriptorResponse
     , deleteMetricDescriptorResponse
     , dmdrKind
 
@@ -167,6 +166,3 @@ module Network.Google.CloudMonitoring.Types
 import           Network.Google.CloudMonitoring.Types.Product
 import           Network.Google.CloudMonitoring.Types.Sum
 import           Network.Google.Prelude
-
-cloudmonitoring :: a
-cloudmonitoring = error "cloudmonitoring"

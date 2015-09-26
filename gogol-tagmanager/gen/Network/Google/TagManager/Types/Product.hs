@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.TagManager.Types.Product
 -- Copyright   : (c) 2015 Brendan Hay
@@ -71,7 +73,7 @@ aName = lens _aName (\ s a -> s{_aName = a})
 -- /See:/ 'accountAccess' smart constructor.
 newtype AccountAccess = AccountAccess
     { _aaPermission :: Maybe [AccountAccessItemPermission]
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountAccess' with the minimum fields required to make a request.
 --
@@ -99,7 +101,7 @@ aaPermission
 data Condition = Condition
     { _cType      :: !(Maybe ConditionType)
     , _cParameter :: !(Maybe [Maybe Parameter])
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Condition' with the minimum fields required to make a request.
 --
@@ -150,7 +152,7 @@ data Container = Container
     , _cName                   :: !(Maybe Text)
     , _cNotes                  :: !(Maybe Text)
     , _cTimeZoneId             :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Container' with the minimum fields required to make a request.
 --
@@ -270,7 +272,7 @@ cTimeZoneId
 data ContainerAccess = ContainerAccess
     { _caContainerId :: !(Maybe Text)
     , _caPermission  :: !(Maybe [ContainerAccessItemPermission])
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContainerAccess' with the minimum fields required to make a request.
 --
@@ -1178,7 +1180,7 @@ data Parameter = Parameter
     , _pMap   :: !(Maybe [Maybe Parameter])
     , _pKey   :: !(Maybe Text)
     , _pType  :: !(Maybe ParameterType)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Parameter' with the minimum fields required to make a request.
 --
@@ -1409,7 +1411,7 @@ data Tag = Tag
     , _tagNotes             :: !(Maybe Text)
     , _tagFiringRuleId      :: !(Maybe [Text])
     , _tagParameter         :: !(Maybe [Maybe Parameter])
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Tag' with the minimum fields required to make a request.
 --
@@ -1668,7 +1670,7 @@ data Trigger = Trigger
     , _tVideoPercentageList :: !(Maybe (Maybe Parameter))
     , _tEventName           :: !(Maybe (Maybe Parameter))
     , _tWaitForTags         :: !(Maybe (Maybe Parameter))
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Trigger' with the minimum fields required to make a request.
 --

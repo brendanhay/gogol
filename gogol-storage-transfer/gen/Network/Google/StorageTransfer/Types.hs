@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.StorageTransfer.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.StorageTransfer.Types
     (
-    -- * API Definition
-      storagetransfer
-
 
     -- * AwsAccessKey
-    , AwsAccessKey
+      AwsAccessKey
     , awsAccessKey
     , aakSecretAccessKey
     , aakAccessKeyId
@@ -212,6 +211,3 @@ module Network.Google.StorageTransfer.Types
 import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types.Product
 import           Network.Google.StorageTransfer.Types.Sum
-
-storagetransfer :: a
-storagetransfer = error "storagetransfer"

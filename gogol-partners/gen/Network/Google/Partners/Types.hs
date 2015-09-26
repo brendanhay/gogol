@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.Partners.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.Partners.Types
     (
-    -- * API Definition
-      partners
-
 
     -- * CertificationExamStatus
-    , CertificationExamStatus
+      CertificationExamStatus
     , certificationExamStatus
     , cesNumberUsersPass
     , cesType
@@ -215,6 +214,3 @@ module Network.Google.Partners.Types
 import           Network.Google.Partners.Types.Product
 import           Network.Google.Partners.Types.Sum
 import           Network.Google.Prelude
-
-partners :: a
-partners = error "partners"

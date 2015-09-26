@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.TaskQueue.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.TaskQueue.Types
     (
-    -- * API Definition
-      taskqueue
-
 
     -- * Task
-    , Task
+      Task
     , task
     , tRetryCount
     , tEnqueueTimestamp
@@ -68,6 +67,3 @@ module Network.Google.TaskQueue.Types
 import           Network.Google.Prelude
 import           Network.Google.TaskQueue.Types.Product
 import           Network.Google.TaskQueue.Types.Sum
-
-taskqueue :: a
-taskqueue = error "taskqueue"

@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.YouTube.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.YouTube.Types
     (
-    -- * API Definition
-      youtube
-
 
     -- * AccessPolicy
-    , AccessPolicy
+      AccessPolicy
     , accessPolicy
     , apException
     , apAllowed
@@ -1771,6 +1770,3 @@ module Network.Google.YouTube.Types
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types.Product
 import           Network.Google.YouTube.Types.Sum
-
-youtube :: a
-youtube = error "youtube"

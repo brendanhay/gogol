@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.CloudDebugger.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.CloudDebugger.Types
     (
-    -- * API Definition
-      clouddebugger
-
 
     -- * Breakpoint
-    , Breakpoint
+      Breakpoint
     , breakpoint
     , bStatus
     , bLogLevel
@@ -196,6 +195,3 @@ module Network.Google.CloudDebugger.Types
 import           Network.Google.CloudDebugger.Types.Product
 import           Network.Google.CloudDebugger.Types.Sum
 import           Network.Google.Prelude
-
-clouddebugger :: a
-clouddebugger = error "clouddebugger"

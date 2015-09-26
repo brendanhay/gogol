@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.Drive.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.Drive.Types
     (
-    -- * API Definition
-      drive
-
 
     -- * About
-    , About
+      About
     , about
     , aExportFormats
     , aRemainingChangeIds
@@ -508,6 +507,3 @@ module Network.Google.Drive.Types
 import           Network.Google.Drive.Types.Product
 import           Network.Google.Drive.Types.Sum
 import           Network.Google.Prelude
-
-drive :: a
-drive = error "drive"

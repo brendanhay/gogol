@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.DoubleClickBidManager.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.DoubleClickBidManager.Types
     (
-    -- * API Definition
-      doubleclickbidmanager
-
 
     -- * DownloadLineItemsRequest
-    , DownloadLineItemsRequest
+      DownloadLineItemsRequest
     , downloadLineItemsRequest
     , dlirFilterType
     , dlirFormat
@@ -206,6 +205,3 @@ module Network.Google.DoubleClickBidManager.Types
 import           Network.Google.DoubleClickBidManager.Types.Product
 import           Network.Google.DoubleClickBidManager.Types.Sum
 import           Network.Google.Prelude
-
-doubleclickbidmanager :: a
-doubleclickbidmanager = error "doubleclickbidmanager"

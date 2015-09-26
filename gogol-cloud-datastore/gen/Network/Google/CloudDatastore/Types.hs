@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.CloudDatastore.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.CloudDatastore.Types
     (
-    -- * API Definition
-      datastore
-
 
     -- * AllocateIdsRequest
-    , AllocateIdsRequest
+      AllocateIdsRequest
     , allocateIdsRequest
     , airKeys
 
@@ -292,6 +291,3 @@ module Network.Google.CloudDatastore.Types
 import           Network.Google.CloudDatastore.Types.Product
 import           Network.Google.CloudDatastore.Types.Sum
 import           Network.Google.Prelude
-
-datastore :: a
-datastore = error "datastore"

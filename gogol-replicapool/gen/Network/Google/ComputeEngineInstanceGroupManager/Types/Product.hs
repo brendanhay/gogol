@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.ComputeEngineInstanceGroupManager.Types.Product
 -- Copyright   : (c) 2015 Brendan Hay
@@ -417,7 +419,7 @@ data Operation = Operation
     , _oRegion              :: !(Maybe Text)
     , _oTargetLink          :: !(Maybe Text)
     , _oClientOperationId   :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Operation' with the minimum fields required to make a request.
 --
@@ -728,7 +730,7 @@ data OperationItemWarnings = OperationItemWarnings
     { _oiwData    :: !(Maybe [OperationItemDataItemWarnings])
     , _oiwCode    :: !(Maybe OperationCodeItemWarnings)
     , _oiwMessage :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperationItemWarnings' with the minimum fields required to make a request.
 --
@@ -827,7 +829,7 @@ olId = lens _olId (\ s a -> s{_olId = a})
 data ReplicaPoolAutoHealingPolicy = ReplicaPoolAutoHealingPolicy
     { _rpahpHealthCheck :: !(Maybe Text)
     , _rpahpActionType  :: !(Maybe ReplicaPoolAutoHealingPolicyActionType)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReplicaPoolAutoHealingPolicy' with the minimum fields required to make a request.
 --

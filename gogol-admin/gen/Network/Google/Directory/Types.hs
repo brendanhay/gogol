@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.Directory.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.Directory.Types
     (
-    -- * API Definition
-      admin
-
 
     -- * Alias
-    , Alias
+      Alias
     , alias
     , aEtag
     , aKind
@@ -499,6 +498,3 @@ module Network.Google.Directory.Types
 import           Network.Google.Directory.Types.Product
 import           Network.Google.Directory.Types.Sum
 import           Network.Google.Prelude
-
-admin :: a
-admin = error "admin"

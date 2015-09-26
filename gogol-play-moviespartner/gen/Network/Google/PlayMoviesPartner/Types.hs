@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.PlayMoviesPartner.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.PlayMoviesPartner.Types
     (
-    -- * API Definition
-      playmoviespartner
-
 
     -- * Avail
-    , Avail
+      Avail
     , avail
     , aAltId
     , aPphNames
@@ -163,6 +162,3 @@ module Network.Google.PlayMoviesPartner.Types
 import           Network.Google.PlayMoviesPartner.Types.Product
 import           Network.Google.PlayMoviesPartner.Types.Sum
 import           Network.Google.Prelude
-
-playmoviespartner :: a
-playmoviespartner = error "playmoviespartner"

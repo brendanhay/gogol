@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.AppState.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.AppState.Types
     (
-    -- * API Definition
-      appstate
-
 
     -- * GetResponse
-    , GetResponse
+      GetResponse
     , getResponse
     , grCurrentStateVersion
     , grKind
@@ -48,6 +47,3 @@ module Network.Google.AppState.Types
 import           Network.Google.AppState.Types.Product
 import           Network.Google.AppState.Types.Sum
 import           Network.Google.Prelude
-
-appstate :: a
-appstate = error "appstate"

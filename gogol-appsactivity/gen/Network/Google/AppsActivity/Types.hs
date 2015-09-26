@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.AppsActivity.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.AppsActivity.Types
     (
-    -- * API Definition
-      appsactivity
-
 
     -- * Activity
-    , Activity
+      Activity
     , activity
     , aSingleEvents
     , aCombinedEvent
@@ -110,6 +109,3 @@ module Network.Google.AppsActivity.Types
 import           Network.Google.AppsActivity.Types.Product
 import           Network.Google.AppsActivity.Types.Sum
 import           Network.Google.Prelude
-
-appsactivity :: a
-appsactivity = error "appsactivity"

@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.GroupsMigration.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.GroupsMigration.Types
     (
-    -- * API Definition
-      groupsmigration
-
 
     -- * Groups
-    , Groups
+      Groups
     , groups
     , gKind
     , gResponseCode
@@ -26,6 +25,3 @@ module Network.Google.GroupsMigration.Types
 import           Network.Google.GroupsMigration.Types.Product
 import           Network.Google.GroupsMigration.Types.Sum
 import           Network.Google.Prelude
-
-groupsmigration :: a
-groupsmigration = error "groupsmigration"

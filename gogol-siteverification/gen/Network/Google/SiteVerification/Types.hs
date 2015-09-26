@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.SiteVerification.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.SiteVerification.Types
     (
-    -- * API Definition
-      siteVerification
-
 
     -- * SiteVerificationWebResourceGettokenRequest
-    , SiteVerificationWebResourceGettokenRequest
+      SiteVerificationWebResourceGettokenRequest
     , siteVerificationWebResourceGettokenRequest
     , svwrgrSite
     , svwrgrVerificationMethod
@@ -56,6 +55,3 @@ module Network.Google.SiteVerification.Types
 import           Network.Google.Prelude
 import           Network.Google.SiteVerification.Types.Product
 import           Network.Google.SiteVerification.Types.Sum
-
-siteVerification :: a
-siteVerification = error "siteVerification"

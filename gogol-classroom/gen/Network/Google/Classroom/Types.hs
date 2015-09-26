@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.Classroom.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.Classroom.Types
     (
-    -- * API Definition
-      classroom
-
 
     -- * Course
-    , Course
+      Course
     , course
     , cCreationTime
     , cRoom
@@ -118,6 +117,3 @@ module Network.Google.Classroom.Types
 import           Network.Google.Classroom.Types.Product
 import           Network.Google.Classroom.Types.Sum
 import           Network.Google.Prelude
-
-classroom :: a
-classroom = error "classroom"

@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.AdSenseHost.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.AdSenseHost.Types
     (
-    -- * API Definition
-      adsensehost
-
 
     -- * Account
-    , Account
+      Account
     , account
     , accStatus
     , accKind
@@ -185,6 +184,3 @@ module Network.Google.AdSenseHost.Types
 import           Network.Google.AdSenseHost.Types.Product
 import           Network.Google.AdSenseHost.Types.Sum
 import           Network.Google.Prelude
-
-adsensehost :: a
-adsensehost = error "adsensehost"

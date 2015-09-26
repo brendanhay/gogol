@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.DFAReporting.Types.Product
 -- Copyright   : (c) 2015 Brendan Hay
@@ -38,7 +40,7 @@ data Account = Account
     , _aaActiveAdsLimitTier     :: !(Maybe AccountActiveAdsLimitTier)
     , _aaDefaultCreativeSizeId  :: !(Maybe Int64)
     , _aaDescription            :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Account' with the minimum fields required to make a request.
 --
@@ -242,7 +244,7 @@ data AccountActiveAdSummary = AccountActiveAdSummary
     , _aaasAccountId          :: !(Maybe Int64)
     , _aaasActiveAds          :: !(Maybe Int64)
     , _aaasActiveAdsLimitTier :: !(Maybe AccountActiveAdSummaryActiveAdsLimitTier)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountActiveAdSummary' with the minimum fields required to make a request.
 --
@@ -309,7 +311,7 @@ data AccountPermission = AccountPermission
     , _apId                :: !(Maybe Int64)
     , _apLevel             :: !(Maybe AccountPermissionLevel)
     , _apPermissionGroupId :: !(Maybe Int64)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountPermission' with the minimum fields required to make a request.
 --
@@ -506,7 +508,7 @@ data AccountUserProfile = AccountUserProfile
     , _aupComments         :: !(Maybe Text)
     , _aupSubaccountId     :: !(Maybe Int64)
     , _aupCampaignFilter   :: !(Maybe (Maybe ObjectFilter))
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountUserProfile' with the minimum fields required to make a request.
 --
@@ -844,7 +846,7 @@ data Ad = Ad
     , _addArchived                              :: !(Maybe Bool)
     , _addDefaultClickThroughEventTagProperties :: !(Maybe (Maybe DefaultClickThroughEventTagProperties))
     , _addPlacementAssignments                  :: !(Maybe [Maybe PlacementAssignment])
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Ad' with the minimum fields required to make a request.
 --
@@ -1228,7 +1230,7 @@ data AdSlot = AdSlot
     , _adName              :: !(Maybe Text)
     , _adComment           :: !(Maybe Text)
     , _adCompatibility     :: !(Maybe AdSlotCompatibility)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdSlot' with the minimum fields required to make a request.
 --
@@ -1371,7 +1373,7 @@ data Advertiser = Advertiser
     , _aSubaccountId                            :: !(Maybe Int64)
     , _aFloodlightConfigurationIdDimensionValue :: !(Maybe (Maybe DimensionValue))
     , _aClickThroughUrlSuffix                   :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Advertiser' with the minimum fields required to make a request.
 --
@@ -3251,7 +3253,7 @@ data Creative = Creative
     , _ccRedirectUrl                         :: !(Maybe Text)
     , _ccAutoAdvanceImages                   :: !(Maybe Bool)
     , _ccCreativeFieldAssignments            :: !(Maybe [Maybe CreativeFieldAssignment])
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Creative' with the minimum fields required to make a request.
 --
@@ -3951,7 +3953,7 @@ data CreativeAsset = CreativeAsset
     , _cBackupImageExit       :: !(Maybe (Maybe CreativeCustomEvent))
     , _cPosition              :: !(Maybe (Maybe OffsetPosition))
     , _cHorizontallyLocked    :: !(Maybe Bool)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeAsset' with the minimum fields required to make a request.
 --
@@ -4413,7 +4415,7 @@ cHorizontallyLocked
 data CreativeAssetId = CreativeAssetId
     { _caiName :: !(Maybe Text)
     , _caiType :: !(Maybe CreativeAssetIdType)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeAssetId' with the minimum fields required to make a request.
 --
@@ -4453,7 +4455,7 @@ data CreativeAssetMetadata = CreativeAssetMetadata
     , _camaClickTags             :: !(Maybe [Maybe ClickTag])
     , _camaWarnedValidationRules :: !(Maybe [CreativeAssetMetadataItemWarnedValidationRules])
     , _camaDetectedFeatures      :: !(Maybe [CreativeAssetMetadataItemDetectedFeatures])
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeAssetMetadata' with the minimum fields required to make a request.
 --
@@ -4702,7 +4704,7 @@ data CreativeCustomEvent = CreativeCustomEvent
     , _cceId                        :: !(Maybe Int64)
     , _cceArtworkLabel              :: !(Maybe Text)
     , _cceArtworkType               :: !(Maybe CreativeCustomEventArtworkType)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeCustomEvent' with the minimum fields required to make a request.
 --
@@ -5155,7 +5157,7 @@ cgSubaccountId
 data CreativeGroupAssignment = CreativeGroupAssignment
     { _cgaCreativeGroupNumber :: !(Maybe CreativeGroupAssignmentCreativeGroupNumber)
     , _cgaCreativeGroupId     :: !(Maybe Int64)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeGroupAssignment' with the minimum fields required to make a request.
 --
@@ -5238,7 +5240,7 @@ data CreativeOptimizationConfiguration = CreativeOptimizationConfiguration
     , _cocName                  :: !(Maybe Text)
     , _cocOptimizationActivitys :: !(Maybe [Maybe OptimizationActivity])
     , _cocId                    :: !(Maybe Int64)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeOptimizationConfiguration' with the minimum fields required to make a request.
 --
@@ -5294,7 +5296,7 @@ data CreativeRotation = CreativeRotation
     , _crCreativeAssignments                 :: !(Maybe [Maybe CreativeAssignment])
     , _crCreativeOptimizationConfigurationId :: !(Maybe Int64)
     , _crType                                :: !(Maybe CreativeRotationType)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeRotation' with the minimum fields required to make a request.
 --
@@ -5553,7 +5555,7 @@ data DateRange = DateRange
     , _drEndDate           :: !(Maybe UTCTime)
     , _drStartDate         :: !(Maybe UTCTime)
     , _drRelativeDateRange :: !(Maybe DateRangeRelativeDateRange)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DateRange' with the minimum fields required to make a request.
 --
@@ -5605,7 +5607,7 @@ data DayPartTargeting = DayPartTargeting
     { _dptDaysOfWeek    :: !(Maybe [DayPartTargetingItemDaysOfWeek])
     , _dptHoursOfDay    :: !(Maybe [Int32])
     , _dptUserLocalTime :: !(Maybe Bool)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DayPartTargeting' with the minimum fields required to make a request.
 --
@@ -5704,7 +5706,7 @@ data DeliverySchedule = DeliverySchedule
     , _dsPriority        :: !(Maybe DeliverySchedulePriority)
     , _dsImpressionRatio :: !(Maybe Int64)
     , _dsFrequencyCap    :: !(Maybe (Maybe FrequencyCap))
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeliverySchedule' with the minimum fields required to make a request.
 --
@@ -5904,7 +5906,7 @@ data DimensionValue = DimensionValue
     , _dvMatchType     :: !(Maybe DimensionValueMatchType)
     , _dvDimensionName :: !(Maybe Text)
     , _dvId            :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DimensionValue' with the minimum fields required to make a request.
 --
@@ -6104,7 +6106,7 @@ data DirectorySite = DirectorySite
     , _dsContactAssignments     :: !(Maybe [Maybe DirectorySiteContactAssignment])
     , _dsDescription            :: !(Maybe Text)
     , _dsParentId               :: !(Maybe Int64)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DirectorySite' with the minimum fields required to make a request.
 --
@@ -6262,7 +6264,7 @@ data DirectorySiteContact = DirectorySiteContact
     , _dscId        :: !(Maybe Int64)
     , _dscTitle     :: !(Maybe Text)
     , _dscType      :: !(Maybe DirectorySiteContactType)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DirectorySiteContact' with the minimum fields required to make a request.
 --
@@ -6354,7 +6356,7 @@ dscType = lens _dscType (\ s a -> s{_dscType = a})
 data DirectorySiteContactAssignment = DirectorySiteContactAssignment
     { _dscaVisibility :: !(Maybe DirectorySiteContactAssignmentVisibility)
     , _dscaContactId  :: !(Maybe Int64)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DirectorySiteContactAssignment' with the minimum fields required to make a request.
 --
@@ -6588,7 +6590,7 @@ data EventTag = EventTag
     , _etSubaccountId               :: !(Maybe Int64)
     , _etType                       :: !(Maybe EventTagType)
     , _etSiteFilterType             :: !(Maybe EventTagSiteFilterType)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventTag' with the minimum fields required to make a request.
 --
@@ -6856,7 +6858,7 @@ data File = File
     , _fLastModifiedTime :: !(Maybe Int64)
     , _fId               :: !(Maybe Int64)
     , _fFileName         :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'File' with the minimum fields required to make a request.
 --
@@ -7193,7 +7195,7 @@ data FloodlightActivity = FloodlightActivity
     , _faSubaccountId                            :: !(Maybe Int64)
     , _faNotes                                   :: !(Maybe Text)
     , _faFloodlightConfigurationIdDimensionValue :: !(Maybe (Maybe DimensionValue))
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivity' with the minimum fields required to make a request.
 --
@@ -7534,7 +7536,7 @@ data FloodlightActivityGroup = FloodlightActivityGroup
     , _fagSubaccountId                            :: !(Maybe Int64)
     , _fagType                                    :: !(Maybe FloodlightActivityGroupType)
     , _fagFloodlightConfigurationIdDimensionValue :: !(Maybe (Maybe DimensionValue))
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivityGroup' with the minimum fields required to make a request.
 --
@@ -7810,7 +7812,7 @@ data FloodlightConfiguration = FloodlightConfiguration
     , _fcFirstDayOfWeek                           :: !(Maybe FloodlightConfigurationFirstDayOfWeek)
     , _fcOmnitureSettings                         :: !(Maybe (Maybe OmnitureSettings))
     , _fcStandardVariableTypes                    :: !(Maybe [FloodlightConfigurationItemStandardVariableTypes])
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightConfiguration' with the minimum fields required to make a request.
 --
@@ -8151,7 +8153,7 @@ data FsCommand = FsCommand
     , _fcWindowHeight   :: !(Maybe Int32)
     , _fcWindowWidth    :: !(Maybe Int32)
     , _fcTop            :: !(Maybe Int32)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FsCommand' with the minimum fields required to make a request.
 --
@@ -8782,7 +8784,7 @@ data ListPopulationTerm = ListPopulationTerm
     , _lptRemarketingListId    :: !(Maybe Int64)
     , _lptType                 :: !(Maybe ListPopulationTermType)
     , _lptContains             :: !(Maybe Bool)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListPopulationTerm' with the minimum fields required to make a request.
 --
@@ -9189,7 +9191,7 @@ data ObjectFilter = ObjectFilter
     { _ofStatus    :: !(Maybe ObjectFilterStatus)
     , _ofKind      :: !Text
     , _ofObjectIds :: !(Maybe [Int64])
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectFilter' with the minimum fields required to make a request.
 --
@@ -9765,7 +9767,7 @@ data OrderContact = OrderContact
     , _ocContactTitle           :: !(Maybe Text)
     , _ocContactType            :: !(Maybe OrderContactContactType)
     , _ocContactInfo            :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrderContact' with the minimum fields required to make a request.
 --
@@ -9845,7 +9847,7 @@ data OrderDocument = OrderDocument
     , _odOrderId                  :: !(Maybe Int64)
     , _odCancelled                :: !(Maybe Bool)
     , _odCreatedInfo              :: !(Maybe (Maybe LastModifiedInfo))
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrderDocument' with the minimum fields required to make a request.
 --
@@ -10211,7 +10213,7 @@ data Placement = Placement
     , _pArchived                       :: !(Maybe Bool)
     , _pPaymentApproved                :: !(Maybe Bool)
     , _pPublisherUpdateInfo            :: !(Maybe (Maybe LastModifiedInfo))
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Placement' with the minimum fields required to make a request.
 --
@@ -10648,7 +10650,7 @@ data PlacementGroup = PlacementGroup
     , _pgPrimaryPlacementIdDimensionValue :: !(Maybe (Maybe DimensionValue))
     , _pgSiteId                           :: !(Maybe Int64)
     , _pgArchived                         :: !(Maybe Bool)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementGroup' with the minimum fields required to make a request.
 --
@@ -11262,7 +11264,7 @@ data PopupWindowProperties = PopupWindowProperties
     , _pwpShowScrollBar  :: !(Maybe Bool)
     , _pwpShowToolBar    :: !(Maybe Bool)
     , _pwpTitle          :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PopupWindowProperties' with the minimum fields required to make a request.
 --
@@ -11458,7 +11460,7 @@ data Pricing = Pricing
     , _pPricingType :: !(Maybe PricingPricingType)
     , _pFlights     :: !(Maybe [Maybe Flight])
     , _pCapCostType :: !(Maybe PricingCapCostType)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Pricing' with the minimum fields required to make a request.
 --
@@ -11540,7 +11542,7 @@ data PricingSchedule = PricingSchedule
     , _psPricingType           :: !(Maybe PricingSchedulePricingType)
     , _psPricingPeriods        :: !(Maybe [Maybe PricingSchedulePricingPeriod])
     , _psFlighted              :: !(Maybe Bool)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PricingSchedule' with the minimum fields required to make a request.
 --
@@ -11738,7 +11740,7 @@ data Project = Project
     , _ppAudienceGender    :: !(Maybe ProjectAudienceGender)
     , _ppClientName        :: !(Maybe Text)
     , _ppTargetCpaNanos    :: !(Maybe Int64)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Project' with the minimum fields required to make a request.
 --
@@ -12070,7 +12072,7 @@ data Recipient = Recipient
     { _recEmail        :: !(Maybe Text)
     , _recKind         :: !Text
     , _recDeliveryType :: !(Maybe RecipientDeliveryType)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Recipient' with the minimum fields required to make a request.
 --
@@ -12230,7 +12232,7 @@ data RemarketingList = RemarketingList
     , _remId                         :: !(Maybe Int64)
     , _remSubaccountId               :: !(Maybe Int64)
     , _remDescription                :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RemarketingList' with the minimum fields required to make a request.
 --
@@ -12484,7 +12486,7 @@ data Report = Report
     , _repFloodlightCriteria          :: !(Maybe ReportFloodlightCriteria)
     , _repCriteria                    :: !(Maybe ReportCriteria)
     , _repFileName                    :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Report' with the minimum fields required to make a request.
 --
@@ -12813,7 +12815,7 @@ data ReportCrossDimensionReachCriteria = ReportCrossDimensionReachCriteria
     , _rcdrcDimensionFilters   :: !(Maybe [Maybe DimensionValue])
     , _rcdrcDateRange          :: !(Maybe (Maybe DateRange))
     , _rcdrcOverlapMetricNames :: !(Maybe [Text])
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportCrossDimensionReachCriteria' with the minimum fields required to make a request.
 --
@@ -12902,7 +12904,7 @@ data ReportDelivery = ReportDelivery
     , _rdRecipients             :: !(Maybe [Maybe Recipient])
     , _rdMessage                :: !(Maybe Text)
     , _rdEmailOwnerDeliveryType :: !(Maybe ReportEmailOwnerDeliveryTypeDelivery)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportDelivery' with the minimum fields required to make a request.
 --
@@ -13515,7 +13517,7 @@ data ReportSchedule = ReportSchedule
     , _rsExpirationDate    :: !(Maybe UTCTime)
     , _rsRunsOnDayOfMonth  :: !(Maybe ReportRunsOnDayOfMonthSchedule)
     , _rsRepeatsOnWeekDays :: !(Maybe [ReportItemRepeatsOnWeekDaysSchedule])
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportSchedule' with the minimum fields required to make a request.
 --
@@ -13845,7 +13847,7 @@ data SiteContact = SiteContact
     , _scId          :: !(Maybe Int64)
     , _scTitle       :: !(Maybe Text)
     , _scContactType :: !(Maybe SiteContactContactType)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SiteContact' with the minimum fields required to make a request.
 --
@@ -14135,7 +14137,7 @@ data SortedDimension = SortedDimension
     { _sdKind      :: !Text
     , _sdSortOrder :: !(Maybe SortedDimensionSortOrder)
     , _sdName      :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SortedDimension' with the minimum fields required to make a request.
 --
@@ -14287,7 +14289,7 @@ data TagData = TagData
     , _tdCreativeId    :: !(Maybe Int64)
     , _tdAdId          :: !(Maybe Int64)
     , _tdImpressionTag :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TagData' with the minimum fields required to make a request.
 --
@@ -14345,7 +14347,7 @@ data TagSetting = TagSetting
     , _tsIncludeClickThroughUrls :: !(Maybe Bool)
     , _tsIncludeClickTracking    :: !(Maybe Bool)
     , _tsAdditionalKeyValues     :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TagSetting' with the minimum fields required to make a request.
 --
@@ -14440,7 +14442,7 @@ tsImageTagEnabled
 data TargetWindow = TargetWindow
     { _twCustomHtml         :: !(Maybe Text)
     , _twTargetWindowOption :: !(Maybe TargetWindowTargetWindowOption)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetWindow' with the minimum fields required to make a request.
 --
@@ -14492,7 +14494,7 @@ data TargetableRemarketingList = TargetableRemarketingList
     , _trlId                         :: !(Maybe Int64)
     , _trlSubaccountId               :: !(Maybe Int64)
     , _trlDescription                :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetableRemarketingList' with the minimum fields required to make a request.
 --
@@ -14798,7 +14800,7 @@ tpatName = lens _tpatName (\ s a -> s{_tpatName = a})
 data ThirdPartyTrackingUrl = ThirdPartyTrackingUrl
     { _tptuUrl               :: !(Maybe Text)
     , _tptuThirdPartyUrlType :: !(Maybe ThirdPartyTrackingUrlThirdPartyUrlType)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ThirdPartyTrackingUrl' with the minimum fields required to make a request.
 --
@@ -14832,7 +14834,7 @@ data UserDefinedVariableConfiguration = UserDefinedVariableConfiguration
     { _udvcReportName   :: !(Maybe Text)
     , _udvcDataType     :: !(Maybe UserDefinedVariableConfigurationDataType)
     , _udvcVariableType :: !(Maybe UserDefinedVariableConfigurationVariableType)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserDefinedVariableConfiguration' with the minimum fields required to make a request.
 --
@@ -15111,7 +15113,7 @@ data UserRolePermission = UserRolePermission
     , _urpName              :: !(Maybe Text)
     , _urpId                :: !(Maybe Int64)
     , _urpPermissionGroupId :: !(Maybe Int64)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserRolePermission' with the minimum fields required to make a request.
 --

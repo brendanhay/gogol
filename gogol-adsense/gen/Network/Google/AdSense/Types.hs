@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.AdSense.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.AdSense.Types
     (
-    -- * API Definition
-      adsense
-
 
     -- * Account
-    , Account
+      Account
     , account
     , accKind
     , accPremium
@@ -276,6 +275,3 @@ module Network.Google.AdSense.Types
 import           Network.Google.AdSense.Types.Product
 import           Network.Google.AdSense.Types.Sum
 import           Network.Google.Prelude
-
-adsense :: a
-adsense = error "adsense"

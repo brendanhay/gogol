@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.AndroidEnterprise.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.AndroidEnterprise.Types
     (
-    -- * API Definition
-      androidenterprise
-
 
     -- * AppRestrictionsSchema
-    , AppRestrictionsSchema
+      AppRestrictionsSchema
     , appRestrictionsSchema
     , arsKind
     , arsRestrictions
@@ -244,6 +243,3 @@ module Network.Google.AndroidEnterprise.Types
 import           Network.Google.AndroidEnterprise.Types.Product
 import           Network.Google.AndroidEnterprise.Types.Sum
 import           Network.Google.Prelude
-
-androidenterprise :: a
-androidenterprise = error "androidenterprise"

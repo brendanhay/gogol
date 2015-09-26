@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.Prediction.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.Prediction.Types
     (
-    -- * API Definition
-      prediction
-
 
     -- * Analyze
-    , Analyze
+      Analyze
     , analyze
     , aKind
     , aModelDescription
@@ -193,6 +192,3 @@ module Network.Google.Prediction.Types
 import           Network.Google.Prediction.Types.Product
 import           Network.Google.Prediction.Types.Sum
 import           Network.Google.Prelude
-
-prediction :: a
-prediction = error "prediction"

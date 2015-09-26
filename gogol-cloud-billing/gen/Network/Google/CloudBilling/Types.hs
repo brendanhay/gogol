@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.CloudBilling.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.CloudBilling.Types
     (
-    -- * API Definition
-      cloudbilling
-
 
     -- * BillingAccount
-    , BillingAccount
+      BillingAccount
     , billingAccount
     , baOpen
     , baName
@@ -47,6 +46,3 @@ module Network.Google.CloudBilling.Types
 import           Network.Google.CloudBilling.Types.Product
 import           Network.Google.CloudBilling.Types.Sum
 import           Network.Google.Prelude
-
-cloudbilling :: a
-cloudbilling = error "cloudbilling"

@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.EnterpriseLicenseManager.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.EnterpriseLicenseManager.Types
     (
-    -- * API Definition
-      licensing
-
 
     -- * LicenseAssignment
-    , LicenseAssignment
+      LicenseAssignment
     , licenseAssignment
     , laEtags
     , laKind
@@ -43,6 +42,3 @@ module Network.Google.EnterpriseLicenseManager.Types
 import           Network.Google.EnterpriseLicenseManager.Types.Product
 import           Network.Google.EnterpriseLicenseManager.Types.Sum
 import           Network.Google.Prelude
-
-licensing :: a
-licensing = error "licensing"

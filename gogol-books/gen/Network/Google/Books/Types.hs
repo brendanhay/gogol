@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.Books.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.Books.Types
     (
-    -- * API Definition
-      books
-
 
     -- * Annotation
-    , Annotation
+      Annotation
     , annotation
     , aaSelectedText
     , aaLayerSummary
@@ -741,6 +740,3 @@ module Network.Google.Books.Types
 import           Network.Google.Books.Types.Product
 import           Network.Google.Books.Types.Sum
 import           Network.Google.Prelude
-
-books :: a
-books = error "books"

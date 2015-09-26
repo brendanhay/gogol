@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.Blogger.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.Blogger.Types
     (
-    -- * API Definition
-      blogger
-
 
     -- * Blog
-    , Blog
+      Blog
     , blog
     , bStatus
     , bKind
@@ -305,6 +304,3 @@ module Network.Google.Blogger.Types
 import           Network.Google.Blogger.Types.Product
 import           Network.Google.Blogger.Types.Sum
 import           Network.Google.Prelude
-
-blogger :: a
-blogger = error "blogger"

@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.AppEngineAdmin.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.AppEngineAdmin.Types
     (
-    -- * API Definition
-      appengine
-
 
     -- * ApiConfigHandler
-    , ApiConfigHandler
+      ApiConfigHandler
     , apiConfigHandler
     , achScript
     , achSecurityLevel
@@ -295,6 +294,3 @@ module Network.Google.AppEngineAdmin.Types
 import           Network.Google.AppEngineAdmin.Types.Product
 import           Network.Google.AppEngineAdmin.Types.Sum
 import           Network.Google.Prelude
-
-appengine :: a
-appengine = error "appengine"

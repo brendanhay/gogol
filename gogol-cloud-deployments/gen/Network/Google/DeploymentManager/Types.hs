@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.DeploymentManager.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.DeploymentManager.Types
     (
-    -- * API Definition
-      deploymentmanager
-
 
     -- * Deployment
-    , Deployment
+      Deployment
     , deployment
     , dState
     , dInsertTime
@@ -178,6 +177,3 @@ module Network.Google.DeploymentManager.Types
 import           Network.Google.DeploymentManager.Types.Product
 import           Network.Google.DeploymentManager.Types.Sum
 import           Network.Google.Prelude
-
-deploymentmanager :: a
-deploymentmanager = error "deploymentmanager"

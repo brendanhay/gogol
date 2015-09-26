@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.PageSpeedInsights.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.PageSpeedInsights.Types
     (
-    -- * API Definition
-      pagespeedonline
-
 
     -- * PagespeedApiFormatStringV2
-    , PagespeedApiFormatStringV2
+      PagespeedApiFormatStringV2
     , pagespeedApiFormatStringV2
     , pafsvArgs
     , pafsvFormat
@@ -120,6 +119,3 @@ module Network.Google.PageSpeedInsights.Types
 import           Network.Google.PageSpeedInsights.Types.Product
 import           Network.Google.PageSpeedInsights.Types.Sum
 import           Network.Google.Prelude
-
-pagespeedonline :: a
-pagespeedonline = error "pagespeedonline"

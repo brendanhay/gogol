@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.CustomSearch.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.CustomSearch.Types
     (
-    -- * API Definition
-      customsearch
-
 
     -- * Context
-    , Context
+      Context
     , context
     , cFacets
     , cTitle
@@ -176,6 +175,3 @@ module Network.Google.CustomSearch.Types
 import           Network.Google.CustomSearch.Types.Product
 import           Network.Google.CustomSearch.Types.Sum
 import           Network.Google.Prelude
-
-customsearch :: a
-customsearch = error "customsearch"

@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.Tasks.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.Tasks.Types
     (
-    -- * API Definition
-      tasks
-
 
     -- * Task
-    , Task
+      Task
     , task
     , tasParent
     , tasStatus
@@ -72,6 +71,3 @@ module Network.Google.Tasks.Types
 import           Network.Google.Prelude
 import           Network.Google.Tasks.Types.Product
 import           Network.Google.Tasks.Types.Sum
-
-tasks :: a
-tasks = error "tasks"

@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.CloudResourceManager.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.CloudResourceManager.Types
     (
-    -- * API Definition
-      cloudresourcemanager
-
 
     -- * Binding
-    , Binding
+      Binding
     , binding
     , bMembers
     , bRole
@@ -101,6 +100,3 @@ module Network.Google.CloudResourceManager.Types
 import           Network.Google.CloudResourceManager.Types.Product
 import           Network.Google.CloudResourceManager.Types.Sum
 import           Network.Google.Prelude
-
-cloudresourcemanager :: a
-cloudresourcemanager = error "cloudresourcemanager"

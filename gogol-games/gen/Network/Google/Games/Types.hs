@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.Games.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.Games.Types
     (
-    -- * API Definition
-      games
-
 
     -- * AchievementDefinition
-    , AchievementDefinition
+      AchievementDefinition
     , achievementDefinition
     , adAchievementType
     , adFormattedTotalSteps
@@ -883,6 +882,3 @@ module Network.Google.Games.Types
 import           Network.Google.Games.Types.Product
 import           Network.Google.Games.Types.Sum
 import           Network.Google.Prelude
-
-games :: a
-games = error "games"

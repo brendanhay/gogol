@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.ComputeEngineInstanceGroups.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.ComputeEngineInstanceGroups.Types
     (
-    -- * API Definition
-      resourceviews
-
 
     -- * Label
-    , Label
+      Label
     , label
     , lValue
     , lKey
@@ -156,6 +155,3 @@ module Network.Google.ComputeEngineInstanceGroups.Types
 import           Network.Google.ComputeEngineInstanceGroups.Types.Product
 import           Network.Google.ComputeEngineInstanceGroups.Types.Sum
 import           Network.Google.Prelude
-
-resourceviews :: a
-resourceviews = error "resourceviews"

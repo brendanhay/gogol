@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.AdExchangeSeller.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.AdExchangeSeller.Types
     (
-    -- * API Definition
-      adexchangeseller
-
 
     -- * Account
-    , Account
+      Account
     , account
     , accKind
     , accName
@@ -175,6 +174,3 @@ module Network.Google.AdExchangeSeller.Types
 import           Network.Google.AdExchangeSeller.Types.Product
 import           Network.Google.AdExchangeSeller.Types.Sum
 import           Network.Google.Prelude
-
-adexchangeseller :: a
-adexchangeseller = error "adexchangeseller"

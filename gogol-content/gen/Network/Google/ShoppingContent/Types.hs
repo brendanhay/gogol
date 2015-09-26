@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.ShoppingContent.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.ShoppingContent.Types
     (
-    -- * API Definition
-      content
-
 
     -- * Error
-    , Error
+      Error
     , error'
     , errDomain
     , errReason
@@ -487,6 +486,3 @@ module Network.Google.ShoppingContent.Types
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types.Product
 import           Network.Google.ShoppingContent.Types.Sum
-
-content :: a
-content = error "content"

@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.Spectrum.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.Spectrum.Types
     (
-    -- * API Definition
-      spectrum
-
 
     -- * AntennaCharacteristics
-    , AntennaCharacteristics
+      AntennaCharacteristics
     , antennaCharacteristics
     , acHeight
     , acHeightType
@@ -288,6 +287,3 @@ module Network.Google.Spectrum.Types
 import           Network.Google.Prelude
 import           Network.Google.Spectrum.Types.Product
 import           Network.Google.Spectrum.Types.Sum
-
-spectrum :: a
-spectrum = error "spectrum"

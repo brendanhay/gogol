@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.CloudUserAccounts.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.CloudUserAccounts.Types
     (
-    -- * API Definition
-      clouduseraccounts
-
 
     -- * AuthorizedKeysView
-    , AuthorizedKeysView
+      AuthorizedKeysView
     , authorizedKeysView
     , akvSudoer
     , akvKeys
@@ -187,6 +186,3 @@ module Network.Google.CloudUserAccounts.Types
 import           Network.Google.CloudUserAccounts.Types.Product
 import           Network.Google.CloudUserAccounts.Types.Sum
 import           Network.Google.Prelude
-
-clouduseraccounts :: a
-clouduseraccounts = error "clouduseraccounts"

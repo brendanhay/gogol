@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.WebFonts.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.WebFonts.Types
     (
-    -- * API Definition
-      webfonts
-
 
     -- * Webfont
-    , Webfont
+      Webfont
     , webfont
     , wVariants
     , wKind
@@ -42,6 +41,3 @@ module Network.Google.WebFonts.Types
 import           Network.Google.Prelude
 import           Network.Google.WebFonts.Types.Product
 import           Network.Google.WebFonts.Types.Sum
-
-webfonts :: a
-webfonts = error "webfonts"

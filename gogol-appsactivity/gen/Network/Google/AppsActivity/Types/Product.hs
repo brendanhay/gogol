@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.AppsActivity.Types.Product
 -- Copyright   : (c) 2015 Brendan Hay
@@ -67,7 +69,7 @@ data Event = Event
     , _ePermissionChanges    :: !(Maybe [Maybe PermissionChange])
     , _eTarget               :: !(Maybe (Maybe Target))
     , _eMove                 :: !(Maybe (Maybe Move))
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Event' with the minimum fields required to make a request.
 --
@@ -291,7 +293,7 @@ data Permission = Permission
     , _pName         :: !(Maybe Text)
     , _pType         :: !(Maybe PermissionType)
     , _pPermissionId :: !(Maybe Text)
-    }
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Permission' with the minimum fields required to make a request.
 --

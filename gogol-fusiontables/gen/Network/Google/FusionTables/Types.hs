@@ -2,6 +2,8 @@
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Network.Google.FusionTables.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -12,12 +14,9 @@
 --
 module Network.Google.FusionTables.Types
     (
-    -- * API Definition
-      fusiontables
-
 
     -- * Bucket
-    , Bucket
+      Bucket
     , bucket
     , bMax
     , bColor
@@ -224,6 +223,3 @@ module Network.Google.FusionTables.Types
 import           Network.Google.FusionTables.Types.Product
 import           Network.Google.FusionTables.Types.Sum
 import           Network.Google.Prelude
-
-fusiontables :: a
-fusiontables = error "fusiontables"
