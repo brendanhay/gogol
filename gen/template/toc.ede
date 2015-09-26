@@ -50,26 +50,26 @@ TODO
 -}
 
 type {{ api }} = ()
--- 
--- {{ api | lowerHead }} :: Proxy {{ api }}
--- {{ api | lowerHead }} = Proxy
--- 
--- type {{ api }} =
--- {% for resource in resources %}
---     {% if resource.first %}    {% else %}:<|>{% endif %} {{ resource.value.name }}
--- {% endfor %}
--- {% for resource in resources %}
--- 
--- type {{ resource.value.name }} =
---   {% for method in resource.value.methods %}
---     {% if !method.first %}:<|>{% else %}    {% endif %} {{ method.key }}
---   {% endfor %}
---   {% for method in resource.value.methods %}
--- 
--- type {{ method.key }} =
---     {% for type in method.value %}
---     {% if !type.first %}:>{% else %}  {% endif %} {{ type.value }}
---     {% endfor %}
---   {% endfor %}
--- {% endfor %}
--- 
+
+{{ api | lowerHead }} :: Proxy {{ api }}
+{{ api | lowerHead }} = Proxy
+
+{# type {{ api }} = #}
+{# {% for resource in resources %} #}
+{#     {% if resource.first %}    {% else %}:<|>{% endif %} {{ resource.value.name }} #}
+{# {% endfor %} #}
+{# {% for resource in resources %} #}
+
+{# type {{ resource.value.name }} = #}
+{#   {% for method in resource.value.methods %} #}
+{#     {% if !method.first %}:<|>{% else %}    {% endif %} {{ method.key }} #}
+{#   {% endfor %} #}
+{#   {% for method in resource.value.methods %} #}
+
+{# type {{ method.key }} = #}
+{#     {% for type in method.value %} #}
+{#     {% if !type.first %}:>{% else %}  {% endif %} {{ type.value }} #}
+{#     {% endfor %} #}
+{#   {% endfor %} #}
+{# {% endfor %} #}
+

@@ -79,8 +79,8 @@ bname (Pre p) = name
     . renameBranch
 
 fname, lname, pname :: Pre -> Local -> Name
-fname = pre (Text.cons '_' . lowerHead)
-lname = pre lowerHead
+fname = pre (Text.cons '_' . renameField)
+lname = pre renameField
 pname = pre (flip Text.snoc '_' . Text.cons 'p' . upperHead)
 
 pre :: (Text -> Text) -> Pre -> Local -> Name

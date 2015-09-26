@@ -107,9 +107,13 @@ fieldUpdate p l s = FieldUpdate (UnQual (fname p l)) rhs
 
     def x = \case
         Enum {}     -> var (bname (_prefix s) x)
+        Lit  _ Bool -> lit (upperHead x)
         Lit  _ Text -> str x
+        Lit  _ _    -> lit x
         --- FIXME: lift to AST
         s           -> error $ "Unmatched fieldUpdate:\n" ++ show s
+
+    lit = var . name . Text.unpack
 
 lensSig :: Id -> Pre -> Local -> Solved -> Decl
 lensSig n p l s = TypeSig noLoc [lname p l] $

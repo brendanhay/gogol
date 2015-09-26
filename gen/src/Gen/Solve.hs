@@ -177,7 +177,17 @@ prefix n = loc "prefix" n $ memo prefixed n typ
          -> [CI Text]
          -> Set (CI Text)
          -> AST Text
-    uniq _    []     ks = failure ("Unable to generate unique prefix: " % fid) n
+    uniq seen [] ks = do
+        s <- use seen
+        let hs  = acronymPrefixes n
+            f x = sformat ("\n" % stext % " => " % shown)
+                          (CI.foldedCase x) (Map.lookup x s)
+        throwError $
+            format ("Error prefixing: " % fid   %
+                    "\n  Fields: "      % shown %
+                    "\n  Matches: "     % stext)
+                   n (Set.toList ks) (foldMap f hs)
+
     uniq seen (x:xs) ks = do
         m <- uses seen (Map.lookup x)
         case m of
@@ -191,13 +201,15 @@ overlap :: (Eq a, Hashable a) => Set a -> Set a -> Bool
 overlap xs ys = not . Set.null $ Set.intersection xs ys
 
 acronymPrefixes :: Id -> [CI Text]
-acronymPrefixes (idToText -> n) = map CI.mk (xs ++ map suffix ys)
+acronymPrefixes (idToText -> n) = map CI.mk (xs ++ map suffix ys ++ zs)
   where
     -- Take the next char
     suffix x = Text.snoc x c
       where
         c | Text.length x >= 2 = Text.head (Text.drop 1 x)
           | otherwise          = Text.head x
+
+    zs = zipWith (\n x -> Text.snoc x (head (show n))) ([1..] :: [Int]) xs
 
     xs = catMaybes [r1, r2, r3, r4, r5, r6]
     ys = catMaybes [r1, r2, r3, r4, r6]

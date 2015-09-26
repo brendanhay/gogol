@@ -56,6 +56,9 @@ renameAbbrev = mconcat
     . stripPrefix "Google "
     . stripSuffix " API"
 
+renameField :: Text -> Text
+renameField = lowerHead . toCamel
+
 renameBranch :: Text -> Text
 renameBranch = renameReserved . go
   where
@@ -67,23 +70,24 @@ renameBranch = renameReserved . go
 
     dot x = x == '.'
 
-    seperator x =
-          x == '\\'
-       || x == '/'
-       || x == '+'
-       || x == ' '
-       || x == '('
-       || x == ')'
-       || x == ':'
-       || x == '-'
-       || x == '_'
-       || x == '*'
-
     component x
         | Text.length x <= 1    = x
         | isDigit (Text.last x) = Text.toUpper x
         | Text.all isUpper x    = toPascal (Text.toLower x)
         | otherwise             = toPascal x
+
+seperator :: Char -> Bool
+seperator x =
+      x == '\\'
+   || x == '/'
+   || x == '+'
+   || x == ' '
+   || x == '('
+   || x == ')'
+   || x == ':'
+   || x == '-'
+   || x == '_'
+   || x == '*'
 
 renameReserved :: Text -> Text
 renameReserved x
@@ -176,4 +180,66 @@ upperAcronym x = Fold.foldl' (flip (uncurry RE.replaceAll)) x xs
          ]
 
 acronyms :: [(String, String)]
-acronyms = [("NAT", "Nat")]
+acronyms =
+    [ ("ACL",      "Acl")
+    , ("AES",      "Aes")
+    , ("API",      "Api")
+    , ("APNS",     "Apns")
+    , ("ASN",      "Asn")
+    , ("BGP",      "Bgp")
+    , ("CIDR",     "Cidr")
+    , ("CORS",     "Cors")
+    , ("CSV",      "Csv")
+    , ("CPU",      "Cpu")
+    , ("DB",       "Db")
+    , ("DHCP",     "Dhcp")
+    , ("DNS",      "Dns")
+    , ("EBS",      "Ebs")
+    , ("EC2",      "Ec2")
+    , ("EIP",      "Eip")
+    , ("GCM",      "Gcm")
+    , ("HTML",     "Html")
+    , ("HTTPS",    "Https")
+    , ("HSM",      "Hsm")
+    , ("HVM",      "Hvm")
+    , ("IAM",      "Iam")
+    , ("ICMP",     "Icmp")
+    , ("IDN",      "Idn")
+    , ("IOPS",     "Iops")
+    , ("IP",       "Ip")
+    , ("JAR",      "Jar")
+    , ("JSON",     "Json")
+    , ("JVM",      "Jvm")
+    , ("KMS",      "Kms")
+    , ("MD5",      "Md5")
+    , ("MFA",      "Mfa")
+    , ("OK",       "Ok")
+    , ("OS",       "Os")
+    , ("PHP",      "Php")
+    , ("RAID",     "Raid")
+    , ("RAMDisk",  "Ramdisk")
+    , ("RDS",      "Rds")
+    , ("SGD",      "Sgd")
+    , ("SNI",      "Sni")
+    , ("SNS",      "Sns")
+    , ("SRIOV",    "Sriov")
+    , ("SSH",      "Ssh")
+    , ("SSL",      "Ssl")
+    , ("SSO",      "Sso")
+    , ("SVN",      "Svn")
+    , ("TDE",      "Tde")
+    , ("TCP",      "Tcp")
+    , ("TGZ",      "Tgz")
+    , ("TLS",      "Tls")
+    , ("URI",      "Uri")
+    , ("URL",      "Url")
+    , ("VGW",      "Vgw")
+    , ("VHD",      "Vhd")
+    , ("VIP",      "Vip")
+    , ("VLAN",     "Vlan")
+    , ("VMDK",     "Vmdk")
+    , ("VPC",      "Vpc")
+    , ("VPN",      "Vpn")
+    , ("XML",      "Xml")
+    , ("ID",       "Id")
+    ]

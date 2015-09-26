@@ -369,8 +369,8 @@ data Resource
 
 instance FromJSON Resource where
     parseJSON = withObject "resource" $ \o ->
-            Sub    <$> o .: "methods"
-        <|> Parent <$> o .: "resources"
+            Parent <$> o .: "resources"
+        <|> Sub    <$> o .: "methods"
 
 data Service s r = Service
     { _svcLibrary           :: Text
@@ -395,9 +395,28 @@ data Service s r = Service
     , _svcResources         :: r
     } deriving (Generic)
 
-Have to manually write the fromjson instance due to resources?
-
-deriveFromJSON (js "_svc") ''Service
+instance FromJSON s => FromJSON (Service s Resource) where
+    parseJSON = withObject "service" $ \o -> Service
+        <$> o .:  "library"
+        <*> o .:  "title"
+        <*> o .:  "name"
+        <*> o .:? "canonicalName"
+        <*> o .:  "description"
+        <*> o .:? "revision"
+        <*> o .:  "version"
+        <*> o .:  "ownerName"
+        <*> o .:  "ownerDomain"
+        <*> o .:? "packagePath"
+        <*> o .:  "documentationLink"
+        <*> o .:  "protocol"
+        <*> o .:  "baseUrl"
+        <*> o .:  "rootUrl"
+        <*> o .:  "servicePath"
+        <*> o .:  "batchPath"
+        <*> o .:? "auth"
+        <*> o .:  "parameters"
+        <*> o .:  "schemas"
+        <*> parseJSON (Object o)
 
 instance ToJSON (Service Data API) where
     toJSON s = Object (x <> y)

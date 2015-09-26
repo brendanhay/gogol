@@ -98,7 +98,8 @@ render svc = do
         res p = \case
             Parent rs -> traverse (parent p) (Map.toList rs) <&> concat
             Sub ms | Just x <- p
-                 -> traverse (sub x) (Map.toList ms)
+                   -> traverse (sub  x) (Map.toList ms)
+            Sub ms -> traverse (sub "") (Map.toList ms)
 
         parent :: Maybe Id -> (Local, Resource) -> AST [(Name, [Rendered])]
         parent p (n, r) = res (Just (pid p n)) r
