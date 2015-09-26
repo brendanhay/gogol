@@ -1,5 +1,5 @@
 {
-    "library": "cloud-sqladmin",
-    "canonicalName": "Cloud.SQLAdmin"
+    "library": "sqladmin",
+    "canonicalName": "SQLAdmin"
 }
 

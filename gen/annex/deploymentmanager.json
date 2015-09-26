@@ -1,5 +1,5 @@
 {
-    "library": "cloud-deployments",
-    "canonicalName": "Cloud.Deployment"
+    "library": "deploymentmanager",
+    "canonicalName": "DeploymentManager"
 }
 

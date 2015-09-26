@@ -1,5 +1,5 @@
 {
-    "library": "cloud-pubsub",
-    "canonicalName": "Cloud.PubSub"
+    "library": "pubsub",
+    "canonicalName": "PubSub"
 }
 

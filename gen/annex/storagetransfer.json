@@ -1,5 +1,5 @@
 {
-    "library": "cloud-storage-transfer",
-    "canonicalName": "Cloud.Storage.Transfer"
+    "library": "storage-transfer",
+    "canonicalName": "Storage.Transfer"
 }
 

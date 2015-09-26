@@ -1,5 +1,5 @@
 {
-    "library": "cloud-datastore",
-    "canonicalName": "Cloud.Datastore"
+    "library": "datastore",
+    "canonicalName": "Datastore"
 }
 

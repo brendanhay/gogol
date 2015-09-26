@@ -1,5 +1,5 @@
 {
-    "library": "cloud-storage",
-    "canonicalName": "Cloud.Storage"
+    "library": "storage",
+    "canonicalName": "Storage"
 }
 

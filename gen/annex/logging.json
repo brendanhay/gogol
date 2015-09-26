@@ -1,5 +1,5 @@
 {
-    "library": "cloud-logging",
-    "canonicalName": "Cloud.Logging"
+    "library": "logging",
+    "canonicalName": "Logging"
 }
 
