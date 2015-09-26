@@ -52,9 +52,9 @@ runAST svc =  evalState (runExceptT (render ss)) (initial (_svcSchemas ss))
 
 render :: Service (Schema Id) Resource -> AST (Service Data API)
 render svc = do
-    x <- kvTraverseMaybe     typ (_svcSchemas   svc)
-    y <- Map.traverseWithKey api (_svcResources svc)
-    return $! svc { _svcSchemas = x, _svcResources = mempty }
+    x <- kvTraverseMaybe typ (_svcSchemas svc)
+    y <- api (_svcResources svc)
+    return $! svc { _svcSchemas = x, _svcResources = y }
   where
     typ :: Id -> Schema Id -> AST (Maybe Data)
     typ k = \case
@@ -91,19 +91,25 @@ render svc = do
                          "' with the minimum fields required to make a request.\n")
                          k
 
-    api :: Id -> Resource -> AST API
-    api k = fmap (API (aname k) . Map.fromList) . res k
+    api :: Resource -> AST API
+    api = fmap (API "API" . Map.fromList) . res Nothing
       where
-        res :: Id -> Resource -> AST [(Name, [Rendered])]
+        res :: Maybe Id -> Resource -> AST [(Name, [Rendered])]
         res p = \case
             Parent rs -> traverse (parent p) (Map.toList rs) <&> concat
-            Sub    ms -> traverse (sub    p) (Map.toList ms)
+            Sub ms | Just x <- p
+                 -> traverse (sub x) (Map.toList ms)
 
-        parent :: Id -> (Local, Resource) -> AST [(Name, [Rendered])]
-        parent p (n, r) = res (mkProp p n) r
+        parent :: Maybe Id -> (Local, Resource) -> AST [(Name, [Rendered])]
+        parent p (n, r) = res (Just (pid p n)) r
 
         sub :: Id -> (Local, Method) -> AST (Name, [Rendered])
         sub p (n, m) = (mname p n,) <$> traverse (pp None) (apiTypes svc p m)
+
+        -- FIXME: This breaks all naming invariants.
+        pid :: Maybe Id -> Local -> Id
+        pid Nothing  = Free . Global . local
+        pid (Just p) = mkProp p
 
 flatten :: Service (Fix Schema) Resource -> Service (Schema Id) Resource
 flatten svc = svc { _svcSchemas = execState run mempty }

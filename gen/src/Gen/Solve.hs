@@ -137,7 +137,7 @@ derive k = loc "derive" k $ memo derived k go
         Obj  _ rs -> foldM props base (Map.elems rs)
         Arr  _ r  -> mappend monoid . intersect base <$> derive r
         Enum {}   -> pure enum
-        Ref  _ r  -> derive (Free r)
+        Ref  _ r  -> pure base -- derive (Free r)
         Any  _    -> pure base
         Lit  _ l  -> pure $
             case l of
@@ -231,4 +231,4 @@ acronymPrefixes (idToText -> n) = map CI.mk (xs ++ map suffix ys)
     r6 = Text.take limit <$> listToMaybe (splitWords a)
 
 loc :: String -> Id -> a -> a
-loc n r = trace (n ++ ": " ++ Text.unpack (idToText r))
+loc n r = id -- trace (n ++ ": " ++ Text.unpack (idToText r))
