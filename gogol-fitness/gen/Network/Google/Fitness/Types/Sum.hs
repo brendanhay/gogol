@@ -51,6 +51,12 @@ instance ToText AggregateBucketType where
         ABTTime -> "time"
         ABTUnknown -> "unknown"
 
+instance FromJSON AggregateBucketType where
+    parseJSON = parseJSONText "AggregateBucketType"
+
+instance ToJSON AggregateBucketType where
+    toJSON = toJSONText
+
 -- | A constant describing the type of this data source. Indicates whether
 -- this data source produces raw or derived data.
 data DataSourceType
@@ -72,6 +78,12 @@ instance ToText DataSourceType where
     toText = \case
         DSTDerived -> "derived"
         DSTRaw -> "raw"
+
+instance FromJSON DataSourceType where
+    parseJSON = parseJSONText "DataSourceType"
+
+instance ToJSON DataSourceType where
+    toJSON = toJSONText
 
 -- | The different supported formats for each field in a data type.
 data DataTypeFieldFormat
@@ -110,6 +122,12 @@ instance ToText DataTypeFieldFormat where
         DTFFMap -> "map"
         DTFFString -> "string"
 
+instance FromJSON DataTypeFieldFormat where
+    parseJSON = parseJSONText "DataTypeFieldFormat"
+
+instance ToJSON DataTypeFieldFormat where
+    toJSON = toJSONText
+
 -- | A constant representing the type of the device.
 data DeviceType
     = DTChestStrap
@@ -146,3 +164,9 @@ instance ToText DeviceType where
         DTTablet -> "tablet"
         DTUnknown -> "unknown"
         DTWatch -> "watch"
+
+instance FromJSON DeviceType where
+    parseJSON = parseJSONText "DeviceType"
+
+instance ToJSON DeviceType where
+    toJSON = toJSONText

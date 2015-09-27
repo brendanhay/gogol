@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -100,6 +101,29 @@ asBrowsers
       _Default
       . _Coerce
 
+instance FromJSON AnalyticsSnapshot where
+        parseJSON
+          = withObject "AnalyticsSnapshot"
+              (\ o ->
+                 AnalyticsSnapshot <$>
+                   (o .:? "platforms" .!= mempty) <*>
+                     (o .:? "shortUrlClicks")
+                     <*> (o .:? "referrers" .!= mempty)
+                     <*> (o .:? "countries" .!= mempty)
+                     <*> (o .:? "longUrlClicks")
+                     <*> (o .:? "browsers" .!= mempty))
+
+instance ToJSON AnalyticsSnapshot where
+        toJSON AnalyticsSnapshot{..}
+          = object
+              (catMaybes
+                 [("platforms" .=) <$> _asPlatforms,
+                  ("shortUrlClicks" .=) <$> _asShortUrlClicks,
+                  ("referrers" .=) <$> _asReferrers,
+                  ("countries" .=) <$> _asCountries,
+                  ("longUrlClicks" .=) <$> _asLongUrlClicks,
+                  ("browsers" .=) <$> _asBrowsers])
+
 --
 -- /See:/ 'analyticsSummary' smart constructor.
 data AnalyticsSummary = AnalyticsSummary
@@ -156,6 +180,25 @@ asTwoHours
 asMonth :: Lens' AnalyticsSummary (Maybe (Maybe AnalyticsSnapshot))
 asMonth = lens _asMonth (\ s a -> s{_asMonth = a})
 
+instance FromJSON AnalyticsSummary where
+        parseJSON
+          = withObject "AnalyticsSummary"
+              (\ o ->
+                 AnalyticsSummary <$>
+                   (o .:? "week") <*> (o .:? "allTime") <*>
+                     (o .:? "day")
+                     <*> (o .:? "twoHours")
+                     <*> (o .:? "month"))
+
+instance ToJSON AnalyticsSummary where
+        toJSON AnalyticsSummary{..}
+          = object
+              (catMaybes
+                 [("week" .=) <$> _asWeek,
+                  ("allTime" .=) <$> _asAllTime, ("day" .=) <$> _asDay,
+                  ("twoHours" .=) <$> _asTwoHours,
+                  ("month" .=) <$> _asMonth])
+
 --
 -- /See:/ 'stringCount' smart constructor.
 data StringCount = StringCount
@@ -186,6 +229,18 @@ scCount = lens _scCount (\ s a -> s{_scCount = a})
 -- | Label assigned to this top entry, e.g. \"US\" or \"Chrome\".
 scId :: Lens' StringCount (Maybe Text)
 scId = lens _scId (\ s a -> s{_scId = a})
+
+instance FromJSON StringCount where
+        parseJSON
+          = withObject "StringCount"
+              (\ o ->
+                 StringCount <$> (o .:? "count") <*> (o .:? "id"))
+
+instance ToJSON StringCount where
+        toJSON StringCount{..}
+          = object
+              (catMaybes
+                 [("count" .=) <$> _scCount, ("id" .=) <$> _scId])
 
 --
 -- /See:/ 'url' smart constructor.
@@ -259,6 +314,29 @@ urlLongUrl
 urlId :: Lens' Url (Maybe Text)
 urlId = lens _urlId (\ s a -> s{_urlId = a})
 
+instance FromJSON Url where
+        parseJSON
+          = withObject "Url"
+              (\ o ->
+                 Url <$>
+                   (o .:? "status") <*>
+                     (o .:? "kind" .!= "urlshortener#url")
+                     <*> (o .:? "created")
+                     <*> (o .:? "analytics")
+                     <*> (o .:? "longUrl")
+                     <*> (o .:? "id"))
+
+instance ToJSON Url where
+        toJSON Url{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _urlStatus,
+                  Just ("kind" .= _urlKind),
+                  ("created" .=) <$> _urlCreated,
+                  ("analytics" .=) <$> _urlAnalytics,
+                  ("longUrl" .=) <$> _urlLongUrl,
+                  ("id" .=) <$> _urlId])
+
 --
 -- /See:/ 'urlHistory' smart constructor.
 data UrlHistory = UrlHistory
@@ -321,3 +399,22 @@ uhItems :: Lens' UrlHistory [Maybe Url]
 uhItems
   = lens _uhItems (\ s a -> s{_uhItems = a}) . _Default
       . _Coerce
+
+instance FromJSON UrlHistory where
+        parseJSON
+          = withObject "UrlHistory"
+              (\ o ->
+                 UrlHistory <$>
+                   (o .:? "totalItems") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "itemsPerPage")
+                     <*> (o .:? "kind" .!= "urlshortener#urlHistory")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON UrlHistory where
+        toJSON UrlHistory{..}
+          = object
+              (catMaybes
+                 [("totalItems" .=) <$> _uhTotalItems,
+                  ("nextPageToken" .=) <$> _uhNextPageToken,
+                  ("itemsPerPage" .=) <$> _uhItemsPerPage,
+                  Just ("kind" .= _uhKind), ("items" .=) <$> _uhItems])

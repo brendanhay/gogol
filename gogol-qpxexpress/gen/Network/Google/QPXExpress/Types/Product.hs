@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -57,6 +58,22 @@ adName = lens _adName (\ s a -> s{_adName = a})
 adCode :: Lens' AircraftData (Maybe Text)
 adCode = lens _adCode (\ s a -> s{_adCode = a})
 
+instance FromJSON AircraftData where
+        parseJSON
+          = withObject "AircraftData"
+              (\ o ->
+                 AircraftData <$>
+                   (o .:? "kind" .!= "qpxexpress#aircraftData") <*>
+                     (o .:? "name")
+                     <*> (o .:? "code"))
+
+instance ToJSON AircraftData where
+        toJSON AircraftData{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _adKind), ("name" .=) <$> _adName,
+                  ("code" .=) <$> _adCode])
+
 -- | An airport.
 --
 -- /See:/ 'airportData' smart constructor.
@@ -106,6 +123,23 @@ aCity = lens _aCity (\ s a -> s{_aCity = a})
 -- | An airport\'s code. For example, for Boston Logan airport, this is BOS.
 aCode :: Lens' AirportData (Maybe Text)
 aCode = lens _aCode (\ s a -> s{_aCode = a})
+
+instance FromJSON AirportData where
+        parseJSON
+          = withObject "AirportData"
+              (\ o ->
+                 AirportData <$>
+                   (o .:? "kind" .!= "qpxexpress#airportData") <*>
+                     (o .:? "name")
+                     <*> (o .:? "city")
+                     <*> (o .:? "code"))
+
+instance ToJSON AirportData where
+        toJSON AirportData{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _aKind), ("name" .=) <$> _aName,
+                  ("city" .=) <$> _aCity, ("code" .=) <$> _aCode])
 
 -- | Information about an item of baggage.
 --
@@ -170,6 +204,27 @@ bdSubcode :: Lens' BagDescriptor (Maybe Text)
 bdSubcode
   = lens _bdSubcode (\ s a -> s{_bdSubcode = a})
 
+instance FromJSON BagDescriptor where
+        parseJSON
+          = withObject "BagDescriptor"
+              (\ o ->
+                 BagDescriptor <$>
+                   (o .:? "kind" .!= "qpxexpress#bagDescriptor") <*>
+                     (o .:? "commercialName")
+                     <*> (o .:? "count")
+                     <*> (o .:? "description" .!= mempty)
+                     <*> (o .:? "subcode"))
+
+instance ToJSON BagDescriptor where
+        toJSON BagDescriptor{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _bdKind),
+                  ("commercialName" .=) <$> _bdCommercialName,
+                  ("count" .=) <$> _bdCount,
+                  ("description" .=) <$> _bdDescription,
+                  ("subcode" .=) <$> _bdSubcode])
+
 -- | Information about a carrier (ie. an airline, bus line, railroad, etc)
 -- that might be useful to display to an end-user.
 --
@@ -211,6 +266,22 @@ cName = lens _cName (\ s a -> s{_cName = a})
 -- American Airlines, the code is AA.
 cCode :: Lens' CarrierData (Maybe Text)
 cCode = lens _cCode (\ s a -> s{_cCode = a})
+
+instance FromJSON CarrierData where
+        parseJSON
+          = withObject "CarrierData"
+              (\ o ->
+                 CarrierData <$>
+                   (o .:? "kind" .!= "qpxexpress#carrierData") <*>
+                     (o .:? "name")
+                     <*> (o .:? "code"))
+
+instance ToJSON CarrierData where
+        toJSON CarrierData{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _cKind), ("name" .=) <$> _cName,
+                  ("code" .=) <$> _cCode])
 
 -- | Information about a city that might be useful to an end-user; typically
 -- the city of an airport.
@@ -262,6 +333,24 @@ cdName = lens _cdName (\ s a -> s{_cdName = a})
 -- | The IATA character ID of a city. For example, for Boston this is BOS.
 cdCode :: Lens' CityData (Maybe Text)
 cdCode = lens _cdCode (\ s a -> s{_cdCode = a})
+
+instance FromJSON CityData where
+        parseJSON
+          = withObject "CityData"
+              (\ o ->
+                 CityData <$>
+                   (o .:? "country") <*>
+                     (o .:? "kind" .!= "qpxexpress#cityData")
+                     <*> (o .:? "name")
+                     <*> (o .:? "code"))
+
+instance ToJSON CityData where
+        toJSON CityData{..}
+          = object
+              (catMaybes
+                 [("country" .=) <$> _cdCountry,
+                  Just ("kind" .= _cdKind), ("name" .=) <$> _cdName,
+                  ("code" .=) <$> _cdCode])
 
 -- | Detailed information about components found in the solutions of this
 -- response, including a trip\'s airport, city, taxes, airline, and
@@ -343,6 +432,28 @@ dTax :: Lens' Data [Maybe TaxData]
 dTax
   = lens _dTax (\ s a -> s{_dTax = a}) . _Default .
       _Coerce
+
+instance FromJSON Data where
+        parseJSON
+          = withObject "Data"
+              (\ o ->
+                 Data <$>
+                   (o .:? "carrier" .!= mempty) <*>
+                     (o .:? "kind" .!= "qpxexpress#data")
+                     <*> (o .:? "aircraft" .!= mempty)
+                     <*> (o .:? "airport" .!= mempty)
+                     <*> (o .:? "city" .!= mempty)
+                     <*> (o .:? "tax" .!= mempty))
+
+instance ToJSON Data where
+        toJSON Data{..}
+          = object
+              (catMaybes
+                 [("carrier" .=) <$> _dCarrier,
+                  Just ("kind" .= _dKind),
+                  ("aircraft" .=) <$> _dAircraft,
+                  ("airport" .=) <$> _dAirport, ("city" .=) <$> _dCity,
+                  ("tax" .=) <$> _dTax])
 
 -- | Complete information about a fare used in the solution to a low-fare
 -- search query. In the airline industry a fare is a price an airline
@@ -426,6 +537,30 @@ fiBasisCode
 fiId :: Lens' FareInfo (Maybe Text)
 fiId = lens _fiId (\ s a -> s{_fiId = a})
 
+instance FromJSON FareInfo where
+        parseJSON
+          = withObject "FareInfo"
+              (\ o ->
+                 FareInfo <$>
+                   (o .:? "carrier") <*> (o .:? "destination") <*>
+                     (o .:? "origin")
+                     <*> (o .:? "private")
+                     <*> (o .:? "kind" .!= "qpxexpress#fareInfo")
+                     <*> (o .:? "basisCode")
+                     <*> (o .:? "id"))
+
+instance ToJSON FareInfo where
+        toJSON FareInfo{..}
+          = object
+              (catMaybes
+                 [("carrier" .=) <$> _fiCarrier,
+                  ("destination" .=) <$> _fiDestination,
+                  ("origin" .=) <$> _fiOrigin,
+                  ("private" .=) <$> _fiPrivate,
+                  Just ("kind" .= _fiKind),
+                  ("basisCode" .=) <$> _fiBasisCode,
+                  ("id" .=) <$> _fiId])
+
 -- | A flight is a sequence of legs with the same airline carrier and flight
 -- number. (A leg is the smallest unit of travel, in the case of a flight a
 -- takeoff immediately followed by a landing at two set points on a
@@ -461,6 +596,20 @@ fCarrier = lens _fCarrier (\ s a -> s{_fCarrier = a})
 -- | The flight number.
 fNumber :: Lens' FlightInfo (Maybe Text)
 fNumber = lens _fNumber (\ s a -> s{_fNumber = a})
+
+instance FromJSON FlightInfo where
+        parseJSON
+          = withObject "FlightInfo"
+              (\ o ->
+                 FlightInfo <$>
+                   (o .:? "carrier") <*> (o .:? "number"))
+
+instance ToJSON FlightInfo where
+        toJSON FlightInfo{..}
+          = object
+              (catMaybes
+                 [("carrier" .=) <$> _fCarrier,
+                  ("number" .=) <$> _fNumber])
 
 -- | Information about free baggage allowed on one segment of a trip.
 --
@@ -534,6 +683,29 @@ fbaKilos = lens _fbaKilos (\ s a -> s{_fbaKilos = a})
 fbaPieces :: Lens' FreeBaggageAllowance (Maybe Int32)
 fbaPieces
   = lens _fbaPieces (\ s a -> s{_fbaPieces = a})
+
+instance FromJSON FreeBaggageAllowance where
+        parseJSON
+          = withObject "FreeBaggageAllowance"
+              (\ o ->
+                 FreeBaggageAllowance <$>
+                   (o .:? "kind" .!= "qpxexpress#freeBaggageAllowance")
+                     <*> (o .:? "pounds")
+                     <*> (o .:? "bagDescriptor" .!= mempty)
+                     <*> (o .:? "kilosPerPiece")
+                     <*> (o .:? "kilos")
+                     <*> (o .:? "pieces"))
+
+instance ToJSON FreeBaggageAllowance where
+        toJSON FreeBaggageAllowance{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _fbaKind),
+                  ("pounds" .=) <$> _fbaPounds,
+                  ("bagDescriptor" .=) <$> _fbaBagDescriptor,
+                  ("kilosPerPiece" .=) <$> _fbaKilosPerPiece,
+                  ("kilos" .=) <$> _fbaKilos,
+                  ("pieces" .=) <$> _fbaPieces])
 
 -- | Information about a leg. (A leg is the smallest unit of travel, in the
 -- case of a flight a takeoff immediately followed by a landing at two set
@@ -722,6 +894,51 @@ liDepartureTime
   = lens _liDepartureTime
       (\ s a -> s{_liDepartureTime = a})
 
+instance FromJSON LegInfo where
+        parseJSON
+          = withObject "LegInfo"
+              (\ o ->
+                 LegInfo <$>
+                   (o .:? "destination") <*> (o .:? "origin") <*>
+                     (o .:? "secure")
+                     <*> (o .:? "kind" .!= "qpxexpress#legInfo")
+                     <*> (o .:? "aircraft")
+                     <*> (o .:? "arrivalTime")
+                     <*> (o .:? "onTimePerformance")
+                     <*> (o .:? "operatingDisclosure")
+                     <*> (o .:? "meal")
+                     <*> (o .:? "id")
+                     <*> (o .:? "originTerminal")
+                     <*> (o .:? "changePlane")
+                     <*> (o .:? "destinationTerminal")
+                     <*> (o .:? "connectionDuration")
+                     <*> (o .:? "duration")
+                     <*> (o .:? "mileage")
+                     <*> (o .:? "departureTime"))
+
+instance ToJSON LegInfo where
+        toJSON LegInfo{..}
+          = object
+              (catMaybes
+                 [("destination" .=) <$> _liDestination,
+                  ("origin" .=) <$> _liOrigin,
+                  ("secure" .=) <$> _liSecure,
+                  Just ("kind" .= _liKind),
+                  ("aircraft" .=) <$> _liAircraft,
+                  ("arrivalTime" .=) <$> _liArrivalTime,
+                  ("onTimePerformance" .=) <$> _liOnTimePerformance,
+                  ("operatingDisclosure" .=) <$>
+                    _liOperatingDisclosure,
+                  ("meal" .=) <$> _liMeal, ("id" .=) <$> _liId,
+                  ("originTerminal" .=) <$> _liOriginTerminal,
+                  ("changePlane" .=) <$> _liChangePlane,
+                  ("destinationTerminal" .=) <$>
+                    _liDestinationTerminal,
+                  ("connectionDuration" .=) <$> _liConnectionDuration,
+                  ("duration" .=) <$> _liDuration,
+                  ("mileage" .=) <$> _liMileage,
+                  ("departureTime" .=) <$> _liDepartureTime])
+
 -- | The number and type of passengers. Unfortunately the definition of an
 -- infant, child, adult, and senior citizen varies across carriers and
 -- reservation systems.
@@ -796,6 +1013,29 @@ pcInfantInSeatCount
 pcAdultCount :: Lens' PassengerCounts (Maybe Int32)
 pcAdultCount
   = lens _pcAdultCount (\ s a -> s{_pcAdultCount = a})
+
+instance FromJSON PassengerCounts where
+        parseJSON
+          = withObject "PassengerCounts"
+              (\ o ->
+                 PassengerCounts <$>
+                   (o .:? "seniorCount") <*>
+                     (o .:? "kind" .!= "qpxexpress#passengerCounts")
+                     <*> (o .:? "infantInLapCount")
+                     <*> (o .:? "childCount")
+                     <*> (o .:? "infantInSeatCount")
+                     <*> (o .:? "adultCount"))
+
+instance ToJSON PassengerCounts where
+        toJSON PassengerCounts{..}
+          = object
+              (catMaybes
+                 [("seniorCount" .=) <$> _pcSeniorCount,
+                  Just ("kind" .= _pcKind),
+                  ("infantInLapCount" .=) <$> _pcInfantInLapCount,
+                  ("childCount" .=) <$> _pcChildCount,
+                  ("infantInSeatCount" .=) <$> _pcInfantInSeatCount,
+                  ("adultCount" .=) <$> _pcAdultCount])
 
 -- | The price of one or more travel segments. The currency used to purchase
 -- tickets is usually determined by the sale\/ticketing city or the
@@ -950,6 +1190,42 @@ piSaleFareTotal
   = lens _piSaleFareTotal
       (\ s a -> s{_piSaleFareTotal = a})
 
+instance FromJSON PricingInfo where
+        parseJSON
+          = withObject "PricingInfo"
+              (\ o ->
+                 PricingInfo <$>
+                   (o .:? "saleTaxTotal") <*> (o .:? "refundable") <*>
+                     (o .:? "ptc")
+                     <*> (o .:? "baseFareTotal")
+                     <*> (o .:? "fare" .!= mempty)
+                     <*> (o .:? "kind" .!= "qpxexpress#pricingInfo")
+                     <*> (o .:? "segmentPricing" .!= mempty)
+                     <*> (o .:? "passengers")
+                     <*> (o .:? "fareCalculation")
+                     <*> (o .:? "latestTicketingTime")
+                     <*> (o .:? "tax" .!= mempty)
+                     <*> (o .:? "saleTotal")
+                     <*> (o .:? "saleFareTotal"))
+
+instance ToJSON PricingInfo where
+        toJSON PricingInfo{..}
+          = object
+              (catMaybes
+                 [("saleTaxTotal" .=) <$> _piSaleTaxTotal,
+                  ("refundable" .=) <$> _piRefundable,
+                  ("ptc" .=) <$> _piPtc,
+                  ("baseFareTotal" .=) <$> _piBaseFareTotal,
+                  ("fare" .=) <$> _piFare, Just ("kind" .= _piKind),
+                  ("segmentPricing" .=) <$> _piSegmentPricing,
+                  ("passengers" .=) <$> _piPassengers,
+                  ("fareCalculation" .=) <$> _piFareCalculation,
+                  ("latestTicketingTime" .=) <$>
+                    _piLatestTicketingTime,
+                  ("tax" .=) <$> _piTax,
+                  ("saleTotal" .=) <$> _piSaleTotal,
+                  ("saleFareTotal" .=) <$> _piSaleFareTotal])
+
 -- | Details of a segment of a flight; a segment is one or more consecutive
 -- legs on the same flight. For example a hypothetical flight ZZ001, from
 -- DFW to OGG, would have one segment with two legs: DFW to HNL (leg 1),
@@ -1083,6 +1359,39 @@ siLeg
   = lens _siLeg (\ s a -> s{_siLeg = a}) . _Default .
       _Coerce
 
+instance FromJSON SegmentInfo where
+        parseJSON
+          = withObject "SegmentInfo"
+              (\ o ->
+                 SegmentInfo <$>
+                   (o .:? "bookingCode") <*> (o .:? "cabin") <*>
+                     (o .:? "bookingCodeCount")
+                     <*> (o .:? "subjectToGovernmentApproval")
+                     <*> (o .:? "kind" .!= "qpxexpress#segmentInfo")
+                     <*> (o .:? "flight")
+                     <*> (o .:? "id")
+                     <*> (o .:? "marriedSegmentGroup")
+                     <*> (o .:? "connectionDuration")
+                     <*> (o .:? "duration")
+                     <*> (o .:? "leg" .!= mempty))
+
+instance ToJSON SegmentInfo where
+        toJSON SegmentInfo{..}
+          = object
+              (catMaybes
+                 [("bookingCode" .=) <$> _siBookingCode,
+                  ("cabin" .=) <$> _siCabin,
+                  ("bookingCodeCount" .=) <$> _siBookingCodeCount,
+                  ("subjectToGovernmentApproval" .=) <$>
+                    _siSubjectToGovernmentApproval,
+                  Just ("kind" .= _siKind),
+                  ("flight" .=) <$> _siFlight, ("id" .=) <$> _siId,
+                  ("marriedSegmentGroup" .=) <$>
+                    _siMarriedSegmentGroup,
+                  ("connectionDuration" .=) <$> _siConnectionDuration,
+                  ("duration" .=) <$> _siDuration,
+                  ("leg" .=) <$> _siLeg])
+
 -- | The price of this segment.
 --
 -- /See:/ 'segmentPricing' smart constructor.
@@ -1137,6 +1446,25 @@ spSegmentId :: Lens' SegmentPricing (Maybe Text)
 spSegmentId
   = lens _spSegmentId (\ s a -> s{_spSegmentId = a})
 
+instance FromJSON SegmentPricing where
+        parseJSON
+          = withObject "SegmentPricing"
+              (\ o ->
+                 SegmentPricing <$>
+                   (o .:? "freeBaggageOption" .!= mempty) <*>
+                     (o .:? "kind" .!= "qpxexpress#segmentPricing")
+                     <*> (o .:? "fareId")
+                     <*> (o .:? "segmentId"))
+
+instance ToJSON SegmentPricing where
+        toJSON SegmentPricing{..}
+          = object
+              (catMaybes
+                 [("freeBaggageOption" .=) <$> _spFreeBaggageOption,
+                  Just ("kind" .= _spKind),
+                  ("fareId" .=) <$> _spFareId,
+                  ("segmentId" .=) <$> _spSegmentId])
+
 -- | Information about a slice. A slice represents a traveller\'s intent, the
 -- portion of a low-fare search corresponding to a traveler\'s request to
 -- get between two points. One-way journeys are generally expressed using 1
@@ -1189,6 +1517,23 @@ sSegment
 sDuration :: Lens' SliceInfo (Maybe Int32)
 sDuration
   = lens _sDuration (\ s a -> s{_sDuration = a})
+
+instance FromJSON SliceInfo where
+        parseJSON
+          = withObject "SliceInfo"
+              (\ o ->
+                 SliceInfo <$>
+                   (o .:? "kind" .!= "qpxexpress#sliceInfo") <*>
+                     (o .:? "segment" .!= mempty)
+                     <*> (o .:? "duration"))
+
+instance ToJSON SliceInfo where
+        toJSON SliceInfo{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _sKind),
+                  ("segment" .=) <$> _sSegment,
+                  ("duration" .=) <$> _sDuration])
 
 -- | Criteria a desired slice must satisfy.
 --
@@ -1321,6 +1666,40 @@ sliAlliance :: Lens' SliceInput (Maybe Text)
 sliAlliance
   = lens _sliAlliance (\ s a -> s{_sliAlliance = a})
 
+instance FromJSON SliceInput where
+        parseJSON
+          = withObject "SliceInput"
+              (\ o ->
+                 SliceInput <$>
+                   (o .:? "destination") <*> (o .:? "origin") <*>
+                     (o .:? "maxStops")
+                     <*> (o .:? "kind" .!= "qpxexpress#sliceInput")
+                     <*> (o .:? "prohibitedCarrier" .!= mempty)
+                     <*> (o .:? "date")
+                     <*> (o .:? "maxConnectionDuration")
+                     <*> (o .:? "preferredCabin")
+                     <*> (o .:? "permittedDepartureTime")
+                     <*> (o .:? "permittedCarrier" .!= mempty)
+                     <*> (o .:? "alliance"))
+
+instance ToJSON SliceInput where
+        toJSON SliceInput{..}
+          = object
+              (catMaybes
+                 [("destination" .=) <$> _sliDestination,
+                  ("origin" .=) <$> _sliOrigin,
+                  ("maxStops" .=) <$> _sliMaxStops,
+                  Just ("kind" .= _sliKind),
+                  ("prohibitedCarrier" .=) <$> _sliProhibitedCarrier,
+                  ("date" .=) <$> _sliDate,
+                  ("maxConnectionDuration" .=) <$>
+                    _sliMaxConnectionDuration,
+                  ("preferredCabin" .=) <$> _sliPreferredCabin,
+                  ("permittedDepartureTime" .=) <$>
+                    _sliPermittedDepartureTime,
+                  ("permittedCarrier" .=) <$> _sliPermittedCarrier,
+                  ("alliance" .=) <$> _sliAlliance])
+
 -- | Tax data.
 --
 -- /See:/ 'taxData' smart constructor.
@@ -1360,6 +1739,22 @@ tdName = lens _tdName (\ s a -> s{_tdName = a})
 -- | An identifier uniquely identifying a tax in a response.
 tdId :: Lens' TaxData (Maybe Text)
 tdId = lens _tdId (\ s a -> s{_tdId = a})
+
+instance FromJSON TaxData where
+        parseJSON
+          = withObject "TaxData"
+              (\ o ->
+                 TaxData <$>
+                   (o .:? "kind" .!= "qpxexpress#taxData") <*>
+                     (o .:? "name")
+                     <*> (o .:? "id"))
+
+instance ToJSON TaxData where
+        toJSON TaxData{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _tdKind), ("name" .=) <$> _tdName,
+                  ("id" .=) <$> _tdId])
 
 -- | Tax information.
 --
@@ -1429,6 +1824,27 @@ tiCode = lens _tiCode (\ s a -> s{_tiCode = a})
 tiId :: Lens' TaxInfo (Maybe Text)
 tiId = lens _tiId (\ s a -> s{_tiId = a})
 
+instance FromJSON TaxInfo where
+        parseJSON
+          = withObject "TaxInfo"
+              (\ o ->
+                 TaxInfo <$>
+                   (o .:? "chargeType") <*> (o .:? "country") <*>
+                     (o .:? "kind" .!= "qpxexpress#taxInfo")
+                     <*> (o .:? "salePrice")
+                     <*> (o .:? "code")
+                     <*> (o .:? "id"))
+
+instance ToJSON TaxInfo where
+        toJSON TaxInfo{..}
+          = object
+              (catMaybes
+                 [("chargeType" .=) <$> _tiChargeType,
+                  ("country" .=) <$> _tiCountry,
+                  Just ("kind" .= _tiKind),
+                  ("salePrice" .=) <$> _tiSalePrice,
+                  ("code" .=) <$> _tiCode, ("id" .=) <$> _tiId])
+
 -- | Two times in a single day defining a time range.
 --
 -- /See:/ 'timeOfDayRange' smart constructor.
@@ -1473,6 +1889,23 @@ todrEarliestTime :: Lens' TimeOfDayRange (Maybe Text)
 todrEarliestTime
   = lens _todrEarliestTime
       (\ s a -> s{_todrEarliestTime = a})
+
+instance FromJSON TimeOfDayRange where
+        parseJSON
+          = withObject "TimeOfDayRange"
+              (\ o ->
+                 TimeOfDayRange <$>
+                   (o .:? "kind" .!= "qpxexpress#timeOfDayRange") <*>
+                     (o .:? "latestTime")
+                     <*> (o .:? "earliestTime"))
+
+instance ToJSON TimeOfDayRange where
+        toJSON TimeOfDayRange{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _todrKind),
+                  ("latestTime" .=) <$> _todrLatestTime,
+                  ("earliestTime" .=) <$> _todrEarliestTime])
 
 -- | Trip information.
 --
@@ -1536,6 +1969,26 @@ toSlice
 toSaleTotal :: Lens' TripOption (Maybe Text)
 toSaleTotal
   = lens _toSaleTotal (\ s a -> s{_toSaleTotal = a})
+
+instance FromJSON TripOption where
+        parseJSON
+          = withObject "TripOption"
+              (\ o ->
+                 TripOption <$>
+                   (o .:? "pricing" .!= mempty) <*>
+                     (o .:? "kind" .!= "qpxexpress#tripOption")
+                     <*> (o .:? "id")
+                     <*> (o .:? "slice" .!= mempty)
+                     <*> (o .:? "saleTotal"))
+
+instance ToJSON TripOption where
+        toJSON TripOption{..}
+          = object
+              (catMaybes
+                 [("pricing" .=) <$> _toPricing,
+                  Just ("kind" .= _toKind), ("id" .=) <$> _toId,
+                  ("slice" .=) <$> _toSlice,
+                  ("saleTotal" .=) <$> _toSaleTotal])
 
 -- | A QPX Express search request, which will yield one or more solutions.
 --
@@ -1620,6 +2073,28 @@ torMaxPrice :: Lens' TripOptionsRequest (Maybe Text)
 torMaxPrice
   = lens _torMaxPrice (\ s a -> s{_torMaxPrice = a})
 
+instance FromJSON TripOptionsRequest where
+        parseJSON
+          = withObject "TripOptionsRequest"
+              (\ o ->
+                 TripOptionsRequest <$>
+                   (o .:? "refundable") <*> (o .:? "saleCountry") <*>
+                     (o .:? "passengers")
+                     <*> (o .:? "solutions")
+                     <*> (o .:? "slice" .!= mempty)
+                     <*> (o .:? "maxPrice"))
+
+instance ToJSON TripOptionsRequest where
+        toJSON TripOptionsRequest{..}
+          = object
+              (catMaybes
+                 [("refundable" .=) <$> _torRefundable,
+                  ("saleCountry" .=) <$> _torSaleCountry,
+                  ("passengers" .=) <$> _torPassengers,
+                  ("solutions" .=) <$> _torSolutions,
+                  ("slice" .=) <$> _torSlice,
+                  ("maxPrice" .=) <$> _torMaxPrice])
+
 -- | A QPX Express search response.
 --
 -- /See:/ 'tripOptionsResponse' smart constructor.
@@ -1673,6 +2148,24 @@ torTripOption
       . _Default
       . _Coerce
 
+instance FromJSON TripOptionsResponse where
+        parseJSON
+          = withObject "TripOptionsResponse"
+              (\ o ->
+                 TripOptionsResponse <$>
+                   (o .:? "requestId") <*>
+                     (o .:? "kind" .!= "qpxexpress#tripOptions")
+                     <*> (o .:? "data")
+                     <*> (o .:? "tripOption" .!= mempty))
+
+instance ToJSON TripOptionsResponse where
+        toJSON TripOptionsResponse{..}
+          = object
+              (catMaybes
+                 [("requestId" .=) <$> _torRequestId,
+                  Just ("kind" .= _torKind), ("data" .=) <$> _torData,
+                  ("tripOption" .=) <$> _torTripOption])
+
 -- | A QPX Express search request.
 --
 -- /See:/ 'tripsSearchRequest' smart constructor.
@@ -1697,6 +2190,15 @@ tripsSearchRequest =
 tsrRequest :: Lens' TripsSearchRequest (Maybe (Maybe TripOptionsRequest))
 tsrRequest
   = lens _tsrRequest (\ s a -> s{_tsrRequest = a})
+
+instance FromJSON TripsSearchRequest where
+        parseJSON
+          = withObject "TripsSearchRequest"
+              (\ o -> TripsSearchRequest <$> (o .:? "request"))
+
+instance ToJSON TripsSearchRequest where
+        toJSON TripsSearchRequest{..}
+          = object (catMaybes [("request" .=) <$> _tsrRequest])
 
 -- | A QPX Express search response.
 --
@@ -1729,3 +2231,18 @@ tsrTrips = lens _tsrTrips (\ s a -> s{_tsrTrips = a})
 -- the fixed string qpxExpress#tripsSearch.
 tsrKind :: Lens' TripsSearchResponse Text
 tsrKind = lens _tsrKind (\ s a -> s{_tsrKind = a})
+
+instance FromJSON TripsSearchResponse where
+        parseJSON
+          = withObject "TripsSearchResponse"
+              (\ o ->
+                 TripsSearchResponse <$>
+                   (o .:? "trips") <*>
+                     (o .:? "kind" .!= "qpxExpress#tripsSearch"))
+
+instance ToJSON TripsSearchResponse where
+        toJSON TripsSearchResponse{..}
+          = object
+              (catMaybes
+                 [("trips" .=) <$> _tsrTrips,
+                  Just ("kind" .= _tsrKind)])

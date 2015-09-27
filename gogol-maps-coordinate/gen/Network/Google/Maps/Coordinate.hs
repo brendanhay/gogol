@@ -198,91 +198,105 @@ type ScheduleAPI =
 -- | Replaces the schedule of a job with the provided schedule. This method
 -- supports patch semantics.
 type SchedulePatch =
-     "coordinate" :> "v1" :> "teams" :>
-       Capture "teamId" Text
-       :> "jobs"
-       :> Capture "jobId" Word64
-       :> "schedule"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "allDay" Bool
-       :> QueryParam "startTime" Word64
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "endTime" Word64
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "duration" Word64
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "coordinate" :>
+       "v1" :>
+         "teams" :>
+           Capture "teamId" Text :>
+             "jobs" :>
+               Capture "jobId" Word64 :>
+                 "schedule" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "allDay" Bool :>
+                         QueryParam "startTime" Word64 :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "endTime" Word64 :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "duration" Word64 :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Text :>
+                                         Patch '[JSON] Schedule
 
 -- | Retrieves the schedule for a job.
 type ScheduleGet =
-     "coordinate" :> "v1" :> "teams" :>
-       Capture "teamId" Text
-       :> "jobs"
-       :> Capture "jobId" Word64
-       :> "schedule"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "coordinate" :>
+       "v1" :>
+         "teams" :>
+           Capture "teamId" Text :>
+             "jobs" :>
+               Capture "jobId" Word64 :>
+                 "schedule" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Get '[JSON] Schedule
 
 -- | Replaces the schedule of a job with the provided schedule.
 type ScheduleUpdate =
-     "coordinate" :> "v1" :> "teams" :>
-       Capture "teamId" Text
-       :> "jobs"
-       :> Capture "jobId" Word64
-       :> "schedule"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "allDay" Bool
-       :> QueryParam "startTime" Word64
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "endTime" Word64
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "duration" Word64
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "coordinate" :>
+       "v1" :>
+         "teams" :>
+           Capture "teamId" Text :>
+             "jobs" :>
+               Capture "jobId" Word64 :>
+                 "schedule" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "allDay" Bool :>
+                         QueryParam "startTime" Word64 :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "endTime" Word64 :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "duration" Word64 :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Text :>
+                                         Put '[JSON] Schedule
 
 type LocationAPI = LocationList
 
 -- | Retrieves a list of locations for a worker.
 type LocationList =
-     "coordinate" :> "v1" :> "teams" :>
-       Capture "teamId" Text
-       :> "workers"
-       :> Capture "workerEmail" Text
-       :> "locations"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "startTimestampMs" Word64
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Word32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "coordinate" :>
+       "v1" :>
+         "teams" :>
+           Capture "teamId" Text :>
+             "workers" :>
+               Capture "workerEmail" Text :>
+                 "locations" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "startTimestampMs" Word64 :>
+                           QueryParam "key" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "maxResults" Word32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :>
+                                       Get '[JSON] LocationListResponse
 
 type CustomFieldDefAPI = CustomFieldDefList
 
 -- | Retrieves a list of custom field definitions for a team.
 type CustomFieldDefList =
-     "coordinate" :> "v1" :> "teams" :>
-       Capture "teamId" Text
-       :> "custom_fields"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "coordinate" :>
+       "v1" :>
+         "teams" :>
+           Capture "teamId" Text :>
+             "custom_fields" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Get '[JSON] CustomFieldDefListResponse
 
 type JobsAPI =
      JobsInsert :<|> JobsList :<|> JobsPatch :<|> JobsGet
@@ -290,133 +304,153 @@ type JobsAPI =
 
 -- | Inserts a new job. Only the state field of the job should be set.
 type JobsInsert =
-     "coordinate" :> "v1" :> "teams" :>
-       Capture "teamId" Text
-       :> "jobs"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "note" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "customerPhoneNumber" Text
-       :> QueryParam "customerName" Text
-       :> QueryParam "address" Text
-       :> QueryParam "assignee" Text
-       :> QueryParam "lat" Double
-       :> QueryParam "key" Text
-       :> QueryParam "lng" Double
-       :> QueryParam "title" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "customField" Text
-       :> QueryParam "alt" Text
+     "coordinate" :>
+       "v1" :>
+         "teams" :>
+           Capture "teamId" Text :>
+             "jobs" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "note" Text :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "customerPhoneNumber" Text :>
+                         QueryParam "customerName" Text :>
+                           QueryParam "address" Text :>
+                             QueryParam "assignee" Text :>
+                               QueryParam "lat" Double :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "lng" Double :>
+                                     QueryParam "title" Text :>
+                                       QueryParam "oauth_token" Text :>
+                                         QueryParam "fields" Text :>
+                                           QueryParam "customField" Text :>
+                                             QueryParam "alt" Text :>
+                                               Post '[JSON] Job
 
 -- | Retrieves jobs created or modified since the given timestamp.
 type JobsList =
-     "coordinate" :> "v1" :> "teams" :>
-       Capture "teamId" Text
-       :> "jobs"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "minModifiedTimestampMs" Word64
-       :> QueryParam "key" Text
-       :> QueryParam "omitJobChanges" Bool
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Word32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "coordinate" :>
+       "v1" :>
+         "teams" :>
+           Capture "teamId" Text :>
+             "jobs" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "minModifiedTimestampMs" Word64 :>
+                       QueryParam "key" Text :>
+                         QueryParam "omitJobChanges" Bool :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "maxResults" Word32 :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON] JobListResponse
 
 -- | Updates a job. Fields that are set in the job state will be updated.
 -- This method supports patch semantics.
 type JobsPatch =
-     "coordinate" :> "v1" :> "teams" :>
-       Capture "teamId" Text
-       :> "jobs"
-       :> Capture "jobId" Word64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "progress" Text
-       :> QueryParam "note" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "customerPhoneNumber" Text
-       :> QueryParam "customerName" Text
-       :> QueryParam "address" Text
-       :> QueryParam "assignee" Text
-       :> QueryParam "lat" Double
-       :> QueryParam "key" Text
-       :> QueryParam "lng" Double
-       :> QueryParam "title" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "customField" Text
-       :> QueryParam "alt" Text
+     "coordinate" :>
+       "v1" :>
+         "teams" :>
+           Capture "teamId" Text :>
+             "jobs" :>
+               Capture "jobId" Word64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "progress" Text :>
+                       QueryParam "note" Text :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "customerPhoneNumber" Text :>
+                             QueryParam "customerName" Text :>
+                               QueryParam "address" Text :>
+                                 QueryParam "assignee" Text :>
+                                   QueryParam "lat" Double :>
+                                     QueryParam "key" Text :>
+                                       QueryParam "lng" Double :>
+                                         QueryParam "title" Text :>
+                                           QueryParam "oauth_token" Text :>
+                                             QueryParam "fields" Text :>
+                                               QueryParam "customField" Text :>
+                                                 QueryParam "alt" Text :>
+                                                   Patch '[JSON] Job
 
 -- | Retrieves a job, including all the changes made to the job.
 type JobsGet =
-     "coordinate" :> "v1" :> "teams" :>
-       Capture "teamId" Text
-       :> "jobs"
-       :> Capture "jobId" Word64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "coordinate" :>
+       "v1" :>
+         "teams" :>
+           Capture "teamId" Text :>
+             "jobs" :>
+               Capture "jobId" Word64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] Job
 
 -- | Updates a job. Fields that are set in the job state will be updated.
 type JobsUpdate =
-     "coordinate" :> "v1" :> "teams" :>
-       Capture "teamId" Text
-       :> "jobs"
-       :> Capture "jobId" Word64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "progress" Text
-       :> QueryParam "note" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "customerPhoneNumber" Text
-       :> QueryParam "customerName" Text
-       :> QueryParam "address" Text
-       :> QueryParam "assignee" Text
-       :> QueryParam "lat" Double
-       :> QueryParam "key" Text
-       :> QueryParam "lng" Double
-       :> QueryParam "title" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "customField" Text
-       :> QueryParam "alt" Text
+     "coordinate" :>
+       "v1" :>
+         "teams" :>
+           Capture "teamId" Text :>
+             "jobs" :>
+               Capture "jobId" Word64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "progress" Text :>
+                       QueryParam "note" Text :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "customerPhoneNumber" Text :>
+                             QueryParam "customerName" Text :>
+                               QueryParam "address" Text :>
+                                 QueryParam "assignee" Text :>
+                                   QueryParam "lat" Double :>
+                                     QueryParam "key" Text :>
+                                       QueryParam "lng" Double :>
+                                         QueryParam "title" Text :>
+                                           QueryParam "oauth_token" Text :>
+                                             QueryParam "fields" Text :>
+                                               QueryParam "customField" Text :>
+                                                 QueryParam "alt" Text :>
+                                                   Put '[JSON] Job
 
 type TeamAPI = TeamList
 
 -- | Retrieves a list of teams for a user.
 type TeamList =
-     "coordinate" :> "v1" :> "teams" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "dispatcher" Bool
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "admin" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "worker" Bool
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "coordinate" :>
+       "v1" :>
+         "teams" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "dispatcher" Bool :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "admin" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "worker" Bool :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Get '[JSON] TeamListResponse
 
 type WorkerAPI = WorkerList
 
 -- | Retrieves a list of workers in a team.
 type WorkerList =
-     "coordinate" :> "v1" :> "teams" :>
-       Capture "teamId" Text
-       :> "workers"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "coordinate" :>
+       "v1" :>
+         "teams" :>
+           Capture "teamId" Text :>
+             "workers" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Get '[JSON] WorkerListResponse

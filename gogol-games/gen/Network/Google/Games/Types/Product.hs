@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -162,6 +163,45 @@ adUnlockedIconUrl
   = lens _adUnlockedIconUrl
       (\ s a -> s{_adUnlockedIconUrl = a})
 
+instance FromJSON AchievementDefinition where
+        parseJSON
+          = withObject "AchievementDefinition"
+              (\ o ->
+                 AchievementDefinition <$>
+                   (o .:? "achievementType") <*>
+                     (o .:? "formattedTotalSteps")
+                     <*> (o .:? "revealedIconUrl")
+                     <*> (o .:? "kind" .!= "games#achievementDefinition")
+                     <*> (o .:? "experiencePoints")
+                     <*> (o .:? "initialState")
+                     <*> (o .:? "name")
+                     <*> (o .:? "id")
+                     <*> (o .:? "isUnlockedIconUrlDefault")
+                     <*> (o .:? "totalSteps")
+                     <*> (o .:? "description")
+                     <*> (o .:? "isRevealedIconUrlDefault")
+                     <*> (o .:? "unlockedIconUrl"))
+
+instance ToJSON AchievementDefinition where
+        toJSON AchievementDefinition{..}
+          = object
+              (catMaybes
+                 [("achievementType" .=) <$> _adAchievementType,
+                  ("formattedTotalSteps" .=) <$>
+                    _adFormattedTotalSteps,
+                  ("revealedIconUrl" .=) <$> _adRevealedIconUrl,
+                  Just ("kind" .= _adKind),
+                  ("experiencePoints" .=) <$> _adExperiencePoints,
+                  ("initialState" .=) <$> _adInitialState,
+                  ("name" .=) <$> _adName, ("id" .=) <$> _adId,
+                  ("isUnlockedIconUrlDefault" .=) <$>
+                    _adIsUnlockedIconUrlDefault,
+                  ("totalSteps" .=) <$> _adTotalSteps,
+                  ("description" .=) <$> _adDescription,
+                  ("isRevealedIconUrlDefault" .=) <$>
+                    _adIsRevealedIconUrlDefault,
+                  ("unlockedIconUrl" .=) <$> _adUnlockedIconUrl])
+
 -- | This is a JSON template for a list of achievement definition objects.
 --
 -- /See:/ 'achievementDefinitionsListResponse' smart constructor.
@@ -206,6 +246,26 @@ adlrItems
   = lens _adlrItems (\ s a -> s{_adlrItems = a}) .
       _Default
       . _Coerce
+
+instance FromJSON AchievementDefinitionsListResponse
+         where
+        parseJSON
+          = withObject "AchievementDefinitionsListResponse"
+              (\ o ->
+                 AchievementDefinitionsListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!=
+                        "games#achievementDefinitionsListResponse")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON AchievementDefinitionsListResponse
+         where
+        toJSON AchievementDefinitionsListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _adlrNextPageToken,
+                  Just ("kind" .= _adlrKind),
+                  ("items" .=) <$> _adlrItems])
 
 -- | This is a JSON template for an achievement increment response
 --
@@ -252,6 +312,24 @@ airCurrentSteps
   = lens _airCurrentSteps
       (\ s a -> s{_airCurrentSteps = a})
 
+instance FromJSON AchievementIncrementResponse where
+        parseJSON
+          = withObject "AchievementIncrementResponse"
+              (\ o ->
+                 AchievementIncrementResponse <$>
+                   (o .:? "kind" .!=
+                      "games#achievementIncrementResponse")
+                     <*> (o .:? "newlyUnlocked")
+                     <*> (o .:? "currentSteps"))
+
+instance ToJSON AchievementIncrementResponse where
+        toJSON AchievementIncrementResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _airKind),
+                  ("newlyUnlocked" .=) <$> _airNewlyUnlocked,
+                  ("currentSteps" .=) <$> _airCurrentSteps])
+
 -- | This is a JSON template for an achievement reveal response
 --
 -- /See:/ 'achievementRevealResponse' smart constructor.
@@ -288,6 +366,21 @@ arrCurrentState :: Lens' AchievementRevealResponse (Maybe Text)
 arrCurrentState
   = lens _arrCurrentState
       (\ s a -> s{_arrCurrentState = a})
+
+instance FromJSON AchievementRevealResponse where
+        parseJSON
+          = withObject "AchievementRevealResponse"
+              (\ o ->
+                 AchievementRevealResponse <$>
+                   (o .:? "kind" .!= "games#achievementRevealResponse")
+                     <*> (o .:? "currentState"))
+
+instance ToJSON AchievementRevealResponse where
+        toJSON AchievementRevealResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _arrKind),
+                  ("currentState" .=) <$> _arrCurrentState])
 
 -- | This is a JSON template for an achievement set steps at least response.
 --
@@ -335,6 +428,26 @@ assalrCurrentSteps
   = lens _assalrCurrentSteps
       (\ s a -> s{_assalrCurrentSteps = a})
 
+instance FromJSON AchievementSetStepsAtLeastResponse
+         where
+        parseJSON
+          = withObject "AchievementSetStepsAtLeastResponse"
+              (\ o ->
+                 AchievementSetStepsAtLeastResponse <$>
+                   (o .:? "kind" .!=
+                      "games#achievementSetStepsAtLeastResponse")
+                     <*> (o .:? "newlyUnlocked")
+                     <*> (o .:? "currentSteps"))
+
+instance ToJSON AchievementSetStepsAtLeastResponse
+         where
+        toJSON AchievementSetStepsAtLeastResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _assalrKind),
+                  ("newlyUnlocked" .=) <$> _assalrNewlyUnlocked,
+                  ("currentSteps" .=) <$> _assalrCurrentSteps])
+
 -- | This is a JSON template for an achievement unlock response
 --
 -- /See:/ 'achievementUnlockResponse' smart constructor.
@@ -370,6 +483,21 @@ aurNewlyUnlocked
   = lens _aurNewlyUnlocked
       (\ s a -> s{_aurNewlyUnlocked = a})
 
+instance FromJSON AchievementUnlockResponse where
+        parseJSON
+          = withObject "AchievementUnlockResponse"
+              (\ o ->
+                 AchievementUnlockResponse <$>
+                   (o .:? "kind" .!= "games#achievementUnlockResponse")
+                     <*> (o .:? "newlyUnlocked"))
+
+instance ToJSON AchievementUnlockResponse where
+        toJSON AchievementUnlockResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _aurKind),
+                  ("newlyUnlocked" .=) <$> _aurNewlyUnlocked])
+
 -- | This is a JSON template for a list of achievement update requests.
 --
 -- /See:/ 'achievementUpdateMultipleRequest' smart constructor.
@@ -404,6 +532,24 @@ aumrUpdates
   = lens _aumrUpdates (\ s a -> s{_aumrUpdates = a}) .
       _Default
       . _Coerce
+
+instance FromJSON AchievementUpdateMultipleRequest
+         where
+        parseJSON
+          = withObject "AchievementUpdateMultipleRequest"
+              (\ o ->
+                 AchievementUpdateMultipleRequest <$>
+                   (o .:? "kind" .!=
+                      "games#achievementUpdateMultipleRequest")
+                     <*> (o .:? "updates" .!= mempty))
+
+instance ToJSON AchievementUpdateMultipleRequest
+         where
+        toJSON AchievementUpdateMultipleRequest{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _aumrKind),
+                  ("updates" .=) <$> _aumrUpdates])
 
 -- | This is a JSON template for an achievement unlock response.
 --
@@ -441,6 +587,25 @@ aumruUpdatedAchievements
       (\ s a -> s{_aumruUpdatedAchievements = a})
       . _Default
       . _Coerce
+
+instance FromJSON AchievementUpdateMultipleResponse
+         where
+        parseJSON
+          = withObject "AchievementUpdateMultipleResponse"
+              (\ o ->
+                 AchievementUpdateMultipleResponse <$>
+                   (o .:? "kind" .!=
+                      "games#achievementUpdateMultipleResponse")
+                     <*> (o .:? "updatedAchievements" .!= mempty))
+
+instance ToJSON AchievementUpdateMultipleResponse
+         where
+        toJSON AchievementUpdateMultipleResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _aumruKind),
+                  ("updatedAchievements" .=) <$>
+                    _aumruUpdatedAchievements])
 
 -- | This is a JSON template for a request to update an achievement.
 --
@@ -509,6 +674,28 @@ aIncrementPayload :: Lens' AchievementUpdateRequest (Maybe (Maybe GamesAchieveme
 aIncrementPayload
   = lens _aIncrementPayload
       (\ s a -> s{_aIncrementPayload = a})
+
+instance FromJSON AchievementUpdateRequest where
+        parseJSON
+          = withObject "AchievementUpdateRequest"
+              (\ o ->
+                 AchievementUpdateRequest <$>
+                   (o .:? "achievementId") <*>
+                     (o .:? "kind" .!= "games#achievementUpdateRequest")
+                     <*> (o .:? "updateType")
+                     <*> (o .:? "setStepsAtLeastPayload")
+                     <*> (o .:? "incrementPayload"))
+
+instance ToJSON AchievementUpdateRequest where
+        toJSON AchievementUpdateRequest{..}
+          = object
+              (catMaybes
+                 [("achievementId" .=) <$> _aAchievementId,
+                  Just ("kind" .= _aKind),
+                  ("updateType" .=) <$> _aUpdateType,
+                  ("setStepsAtLeastPayload" .=) <$>
+                    _aSetStepsAtLeastPayload,
+                  ("incrementPayload" .=) <$> _aIncrementPayload])
 
 -- | This is a JSON template for an achievement update response.
 --
@@ -587,6 +774,29 @@ achCurrentSteps
   = lens _achCurrentSteps
       (\ s a -> s{_achCurrentSteps = a})
 
+instance FromJSON AchievementUpdateResponse where
+        parseJSON
+          = withObject "AchievementUpdateResponse"
+              (\ o ->
+                 AchievementUpdateResponse <$>
+                   (o .:? "updateOccurred") <*> (o .:? "achievementId")
+                     <*>
+                     (o .:? "kind" .!= "games#achievementUpdateResponse")
+                     <*> (o .:? "currentState")
+                     <*> (o .:? "newlyUnlocked")
+                     <*> (o .:? "currentSteps"))
+
+instance ToJSON AchievementUpdateResponse where
+        toJSON AchievementUpdateResponse{..}
+          = object
+              (catMaybes
+                 [("updateOccurred" .=) <$> _achUpdateOccurred,
+                  ("achievementId" .=) <$> _achAchievementId,
+                  Just ("kind" .= _achKind),
+                  ("currentState" .=) <$> _achCurrentState,
+                  ("newlyUnlocked" .=) <$> _achNewlyUnlocked,
+                  ("currentSteps" .=) <$> _achCurrentSteps])
+
 -- | This is a JSON template for aggregate stats.
 --
 -- /See:/ 'aggregateStats' smart constructor.
@@ -643,6 +853,25 @@ asMin = lens _asMin (\ s a -> s{_asMin = a})
 asSum :: Lens' AggregateStats (Maybe Int64)
 asSum = lens _asSum (\ s a -> s{_asSum = a})
 
+instance FromJSON AggregateStats where
+        parseJSON
+          = withObject "AggregateStats"
+              (\ o ->
+                 AggregateStats <$>
+                   (o .:? "max") <*>
+                     (o .:? "kind" .!= "games#aggregateStats")
+                     <*> (o .:? "count")
+                     <*> (o .:? "min")
+                     <*> (o .:? "sum"))
+
+instance ToJSON AggregateStats where
+        toJSON AggregateStats{..}
+          = object
+              (catMaybes
+                 [("max" .=) <$> _asMax, Just ("kind" .= _asKind),
+                  ("count" .=) <$> _asCount, ("min" .=) <$> _asMin,
+                  ("sum" .=) <$> _asSum])
+
 -- | This is a JSON template for an anonymous player
 --
 -- /See:/ 'anonymousPlayer' smart constructor.
@@ -686,6 +915,23 @@ apDisplayName :: Lens' AnonymousPlayer (Maybe Text)
 apDisplayName
   = lens _apDisplayName
       (\ s a -> s{_apDisplayName = a})
+
+instance FromJSON AnonymousPlayer where
+        parseJSON
+          = withObject "AnonymousPlayer"
+              (\ o ->
+                 AnonymousPlayer <$>
+                   (o .:? "avatarImageUrl") <*>
+                     (o .:? "kind" .!= "games#anonymousPlayer")
+                     <*> (o .:? "displayName"))
+
+instance ToJSON AnonymousPlayer where
+        toJSON AnonymousPlayer{..}
+          = object
+              (catMaybes
+                 [("avatarImageUrl" .=) <$> _apAvatarImageUrl,
+                  Just ("kind" .= _apKind),
+                  ("displayName" .=) <$> _apDisplayName])
 
 -- | This is a JSON template for the Application resource.
 --
@@ -833,6 +1079,42 @@ appLastUpdatedTimestamp
   = lens _appLastUpdatedTimestamp
       (\ s a -> s{_appLastUpdatedTimestamp = a})
 
+instance FromJSON Application where
+        parseJSON
+          = withObject "Application"
+              (\ o ->
+                 Application <$>
+                   (o .:? "themeColor") <*> (o .:? "leaderboard_count")
+                     <*> (o .:? "kind" .!= "games#application")
+                     <*> (o .:? "category")
+                     <*> (o .:? "name")
+                     <*> (o .:? "enabledFeatures" .!= mempty)
+                     <*> (o .:? "instances" .!= mempty)
+                     <*> (o .:? "author")
+                     <*> (o .:? "id")
+                     <*> (o .:? "achievement_count")
+                     <*> (o .:? "assets" .!= mempty)
+                     <*> (o .:? "description")
+                     <*> (o .:? "lastUpdatedTimestamp"))
+
+instance ToJSON Application where
+        toJSON Application{..}
+          = object
+              (catMaybes
+                 [("themeColor" .=) <$> _appThemeColor,
+                  ("leaderboard_count" .=) <$> _appLeaderboardCount,
+                  Just ("kind" .= _appKind),
+                  ("category" .=) <$> _appCategory,
+                  ("name" .=) <$> _appName,
+                  ("enabledFeatures" .=) <$> _appEnabledFeatures,
+                  ("instances" .=) <$> _appInstances,
+                  ("author" .=) <$> _appAuthor, ("id" .=) <$> _appId,
+                  ("achievement_count" .=) <$> _appAchievementCount,
+                  ("assets" .=) <$> _appAssets,
+                  ("description" .=) <$> _appDescription,
+                  ("lastUpdatedTimestamp" .=) <$>
+                    _appLastUpdatedTimestamp])
+
 -- | This is a JSON template for an application category object.
 --
 -- /See:/ 'applicationCategory' smart constructor.
@@ -874,6 +1156,23 @@ acKind = lens _acKind (\ s a -> s{_acKind = a})
 acPrimary :: Lens' ApplicationCategory (Maybe Text)
 acPrimary
   = lens _acPrimary (\ s a -> s{_acPrimary = a})
+
+instance FromJSON ApplicationCategory where
+        parseJSON
+          = withObject "ApplicationCategory"
+              (\ o ->
+                 ApplicationCategory <$>
+                   (o .:? "secondary") <*>
+                     (o .:? "kind" .!= "games#applicationCategory")
+                     <*> (o .:? "primary"))
+
+instance ToJSON ApplicationCategory where
+        toJSON ApplicationCategory{..}
+          = object
+              (catMaybes
+                 [("secondary" .=) <$> _acSecondary,
+                  Just ("kind" .= _acKind),
+                  ("primary" .=) <$> _acPrimary])
 
 -- | This is a JSON template for data related to individual game categories.
 --
@@ -917,6 +1216,23 @@ cExperiencePoints :: Lens' Category (Maybe Int64)
 cExperiencePoints
   = lens _cExperiencePoints
       (\ s a -> s{_cExperiencePoints = a})
+
+instance FromJSON Category where
+        parseJSON
+          = withObject "Category"
+              (\ o ->
+                 Category <$>
+                   (o .:? "kind" .!= "games#category") <*>
+                     (o .:? "category")
+                     <*> (o .:? "experiencePoints"))
+
+instance ToJSON Category where
+        toJSON Category{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _cKind),
+                  ("category" .=) <$> _cCategory,
+                  ("experiencePoints" .=) <$> _cExperiencePoints])
 
 -- | This is a JSON template for a list of category data objects.
 --
@@ -962,6 +1278,23 @@ clrItems
   = lens _clrItems (\ s a -> s{_clrItems = a}) .
       _Default
       . _Coerce
+
+instance FromJSON CategoryListResponse where
+        parseJSON
+          = withObject "CategoryListResponse"
+              (\ o ->
+                 CategoryListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "games#categoryListResponse")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON CategoryListResponse where
+        toJSON CategoryListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _clrNextPageToken,
+                  Just ("kind" .= _clrKind),
+                  ("items" .=) <$> _clrItems])
 
 -- | This is a JSON template for a batch update failure resource.
 --
@@ -1014,6 +1347,23 @@ ebrfFailureCause
   = lens _ebrfFailureCause
       (\ s a -> s{_ebrfFailureCause = a})
 
+instance FromJSON EventBatchRecordFailure where
+        parseJSON
+          = withObject "EventBatchRecordFailure"
+              (\ o ->
+                 EventBatchRecordFailure <$>
+                   (o .:? "kind" .!= "games#eventBatchRecordFailure")
+                     <*> (o .:? "range")
+                     <*> (o .:? "failureCause"))
+
+instance ToJSON EventBatchRecordFailure where
+        toJSON EventBatchRecordFailure{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _ebrfKind),
+                  ("range" .=) <$> _ebrfRange,
+                  ("failureCause" .=) <$> _ebrfFailureCause])
+
 -- | This is a JSON template for an event child relationship resource.
 --
 -- /See:/ 'eventChild' smart constructor.
@@ -1046,6 +1396,21 @@ ecKind = lens _ecKind (\ s a -> s{_ecKind = a})
 ecChildId :: Lens' EventChild (Maybe Text)
 ecChildId
   = lens _ecChildId (\ s a -> s{_ecChildId = a})
+
+instance FromJSON EventChild where
+        parseJSON
+          = withObject "EventChild"
+              (\ o ->
+                 EventChild <$>
+                   (o .:? "kind" .!= "games#eventChild") <*>
+                     (o .:? "childId"))
+
+instance ToJSON EventChild where
+        toJSON EventChild{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _ecKind),
+                  ("childId" .=) <$> _ecChildId])
 
 -- | This is a JSON template for an event definition resource.
 --
@@ -1143,6 +1508,33 @@ edDescription
   = lens _edDescription
       (\ s a -> s{_edDescription = a})
 
+instance FromJSON EventDefinition where
+        parseJSON
+          = withObject "EventDefinition"
+              (\ o ->
+                 EventDefinition <$>
+                   (o .:? "isDefaultImageUrl") <*>
+                     (o .:? "kind" .!= "games#eventDefinition")
+                     <*> (o .:? "visibility")
+                     <*> (o .:? "imageUrl")
+                     <*> (o .:? "displayName")
+                     <*> (o .:? "id")
+                     <*> (o .:? "childEvents" .!= mempty)
+                     <*> (o .:? "description"))
+
+instance ToJSON EventDefinition where
+        toJSON EventDefinition{..}
+          = object
+              (catMaybes
+                 [("isDefaultImageUrl" .=) <$> _edIsDefaultImageUrl,
+                  Just ("kind" .= _edKind),
+                  ("visibility" .=) <$> _edVisibility,
+                  ("imageUrl" .=) <$> _edImageUrl,
+                  ("displayName" .=) <$> _edDisplayName,
+                  ("id" .=) <$> _edId,
+                  ("childEvents" .=) <$> _edChildEvents,
+                  ("description" .=) <$> _edDescription])
+
 -- | This is a JSON template for a ListDefinitions response.
 --
 -- /See:/ 'eventDefinitionListResponse' smart constructor.
@@ -1187,6 +1579,24 @@ edlrItems
   = lens _edlrItems (\ s a -> s{_edlrItems = a}) .
       _Default
       . _Coerce
+
+instance FromJSON EventDefinitionListResponse where
+        parseJSON
+          = withObject "EventDefinitionListResponse"
+              (\ o ->
+                 EventDefinitionListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!=
+                        "games#eventDefinitionListResponse")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON EventDefinitionListResponse where
+        toJSON EventDefinitionListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _edlrNextPageToken,
+                  Just ("kind" .= _edlrKind),
+                  ("items" .=) <$> _edlrItems])
 
 -- | This is a JSON template for an event period time range.
 --
@@ -1234,6 +1644,23 @@ eprPeriodEndMillis
   = lens _eprPeriodEndMillis
       (\ s a -> s{_eprPeriodEndMillis = a})
 
+instance FromJSON EventPeriodRange where
+        parseJSON
+          = withObject "EventPeriodRange"
+              (\ o ->
+                 EventPeriodRange <$>
+                   (o .:? "kind" .!= "games#eventPeriodRange") <*>
+                     (o .:? "periodStartMillis")
+                     <*> (o .:? "periodEndMillis"))
+
+instance ToJSON EventPeriodRange where
+        toJSON EventPeriodRange{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _eprKind),
+                  ("periodStartMillis" .=) <$> _eprPeriodStartMillis,
+                  ("periodEndMillis" .=) <$> _eprPeriodEndMillis])
+
 -- | This is a JSON template for an event period update resource.
 --
 -- /See:/ 'eventPeriodUpdate' smart constructor.
@@ -1278,6 +1705,23 @@ epuUpdates
   = lens _epuUpdates (\ s a -> s{_epuUpdates = a}) .
       _Default
       . _Coerce
+
+instance FromJSON EventPeriodUpdate where
+        parseJSON
+          = withObject "EventPeriodUpdate"
+              (\ o ->
+                 EventPeriodUpdate <$>
+                   (o .:? "kind" .!= "games#eventPeriodUpdate") <*>
+                     (o .:? "timePeriod")
+                     <*> (o .:? "updates" .!= mempty))
+
+instance ToJSON EventPeriodUpdate where
+        toJSON EventPeriodUpdate{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _epuKind),
+                  ("timePeriod" .=) <$> _epuTimePeriod,
+                  ("updates" .=) <$> _epuUpdates])
 
 -- | This is a JSON template for an event update failure resource.
 --
@@ -1324,6 +1768,23 @@ erfFailureCause
 erfEventId :: Lens' EventRecordFailure (Maybe Text)
 erfEventId
   = lens _erfEventId (\ s a -> s{_erfEventId = a})
+
+instance FromJSON EventRecordFailure where
+        parseJSON
+          = withObject "EventRecordFailure"
+              (\ o ->
+                 EventRecordFailure <$>
+                   (o .:? "kind" .!= "games#eventRecordFailure") <*>
+                     (o .:? "failureCause")
+                     <*> (o .:? "eventId"))
+
+instance ToJSON EventRecordFailure where
+        toJSON EventRecordFailure{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _erfKind),
+                  ("failureCause" .=) <$> _erfFailureCause,
+                  ("eventId" .=) <$> _erfEventId])
 
 -- | This is a JSON template for an event period update resource.
 --
@@ -1381,6 +1842,25 @@ errTimePeriods
       . _Default
       . _Coerce
 
+instance FromJSON EventRecordRequest where
+        parseJSON
+          = withObject "EventRecordRequest"
+              (\ o ->
+                 EventRecordRequest <$>
+                   (o .:? "requestId") <*>
+                     (o .:? "kind" .!= "games#eventRecordRequest")
+                     <*> (o .:? "currentTimeMillis")
+                     <*> (o .:? "timePeriods" .!= mempty))
+
+instance ToJSON EventRecordRequest where
+        toJSON EventRecordRequest{..}
+          = object
+              (catMaybes
+                 [("requestId" .=) <$> _errRequestId,
+                  Just ("kind" .= _errKind),
+                  ("currentTimeMillis" .=) <$> _errCurrentTimeMillis,
+                  ("timePeriods" .=) <$> _errTimePeriods])
+
 -- | This is a JSON template for an event period update resource.
 --
 -- /See:/ 'eventUpdateRequest' smart constructor.
@@ -1424,6 +1904,23 @@ eurDefinitionId :: Lens' EventUpdateRequest (Maybe Text)
 eurDefinitionId
   = lens _eurDefinitionId
       (\ s a -> s{_eurDefinitionId = a})
+
+instance FromJSON EventUpdateRequest where
+        parseJSON
+          = withObject "EventUpdateRequest"
+              (\ o ->
+                 EventUpdateRequest <$>
+                   (o .:? "updateCount") <*>
+                     (o .:? "kind" .!= "games#eventUpdateRequest")
+                     <*> (o .:? "definitionId"))
+
+instance ToJSON EventUpdateRequest where
+        toJSON EventUpdateRequest{..}
+          = object
+              (catMaybes
+                 [("updateCount" .=) <$> _eurUpdateCount,
+                  Just ("kind" .= _eurKind),
+                  ("definitionId" .=) <$> _eurDefinitionId])
 
 -- | This is a JSON template for an event period update resource.
 --
@@ -1485,6 +1982,25 @@ eEventFailures
 eKind :: Lens' EventUpdateResponse Text
 eKind = lens _eKind (\ s a -> s{_eKind = a})
 
+instance FromJSON EventUpdateResponse where
+        parseJSON
+          = withObject "EventUpdateResponse"
+              (\ o ->
+                 EventUpdateResponse <$>
+                   (o .:? "playerEvents" .!= mempty) <*>
+                     (o .:? "batchFailures" .!= mempty)
+                     <*> (o .:? "eventFailures" .!= mempty)
+                     <*> (o .:? "kind" .!= "games#eventUpdateResponse"))
+
+instance ToJSON EventUpdateResponse where
+        toJSON EventUpdateResponse{..}
+          = object
+              (catMaybes
+                 [("playerEvents" .=) <$> _ePlayerEvents,
+                  ("batchFailures" .=) <$> _eBatchFailures,
+                  ("eventFailures" .=) <$> _eEventFailures,
+                  Just ("kind" .= _eKind)])
+
 -- | This is a JSON template for the payload to request to increment an
 -- achievement.
 --
@@ -1527,6 +2043,23 @@ gaiKind = lens _gaiKind (\ s a -> s{_gaiKind = a})
 gaiSteps :: Lens' GamesAchievementIncrement (Maybe Int32)
 gaiSteps = lens _gaiSteps (\ s a -> s{_gaiSteps = a})
 
+instance FromJSON GamesAchievementIncrement where
+        parseJSON
+          = withObject "GamesAchievementIncrement"
+              (\ o ->
+                 GamesAchievementIncrement <$>
+                   (o .:? "requestId") <*>
+                     (o .:? "kind" .!= "games#GamesAchievementIncrement")
+                     <*> (o .:? "steps"))
+
+instance ToJSON GamesAchievementIncrement where
+        toJSON GamesAchievementIncrement{..}
+          = object
+              (catMaybes
+                 [("requestId" .=) <$> _gaiRequestId,
+                  Just ("kind" .= _gaiKind),
+                  ("steps" .=) <$> _gaiSteps])
+
 -- | This is a JSON template for the payload to request to increment an
 -- achievement.
 --
@@ -1561,6 +2094,23 @@ gassalKind
 gassalSteps :: Lens' GamesAchievementSetStepsAtLeast (Maybe Int32)
 gassalSteps
   = lens _gassalSteps (\ s a -> s{_gassalSteps = a})
+
+instance FromJSON GamesAchievementSetStepsAtLeast
+         where
+        parseJSON
+          = withObject "GamesAchievementSetStepsAtLeast"
+              (\ o ->
+                 GamesAchievementSetStepsAtLeast <$>
+                   (o .:? "kind" .!=
+                      "games#GamesAchievementSetStepsAtLeast")
+                     <*> (o .:? "steps"))
+
+instance ToJSON GamesAchievementSetStepsAtLeast where
+        toJSON GamesAchievementSetStepsAtLeast{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _gassalKind),
+                  ("steps" .=) <$> _gassalSteps])
 
 -- | This is a JSON template for an image asset object.
 --
@@ -1617,6 +2167,25 @@ iaWidth = lens _iaWidth (\ s a -> s{_iaWidth = a})
 -- | The name of the asset.
 iaName :: Lens' ImageAsset (Maybe Text)
 iaName = lens _iaName (\ s a -> s{_iaName = a})
+
+instance FromJSON ImageAsset where
+        parseJSON
+          = withObject "ImageAsset"
+              (\ o ->
+                 ImageAsset <$>
+                   (o .:? "height") <*>
+                     (o .:? "kind" .!= "games#imageAsset")
+                     <*> (o .:? "url")
+                     <*> (o .:? "width")
+                     <*> (o .:? "name"))
+
+instance ToJSON ImageAsset where
+        toJSON ImageAsset{..}
+          = object
+              (catMaybes
+                 [("height" .=) <$> _iaHeight,
+                  Just ("kind" .= _iaKind), ("url" .=) <$> _iaUrl,
+                  ("width" .=) <$> _iaWidth, ("name" .=) <$> _iaName])
 
 -- | This is a JSON template for the Instance resource.
 --
@@ -1720,6 +2289,35 @@ iRealtimePlay
   = lens _iRealtimePlay
       (\ s a -> s{_iRealtimePlay = a})
 
+instance FromJSON Instance where
+        parseJSON
+          = withObject "Instance"
+              (\ o ->
+                 Instance <$>
+                   (o .:? "androidInstance") <*>
+                     (o .:? "kind" .!= "games#instance")
+                     <*> (o .:? "webInstance")
+                     <*> (o .:? "iosInstance")
+                     <*> (o .:? "name")
+                     <*> (o .:? "acquisitionUri")
+                     <*> (o .:? "platformType")
+                     <*> (o .:? "turnBasedPlay")
+                     <*> (o .:? "realtimePlay"))
+
+instance ToJSON Instance where
+        toJSON Instance{..}
+          = object
+              (catMaybes
+                 [("androidInstance" .=) <$> _iAndroidInstance,
+                  Just ("kind" .= _iKind),
+                  ("webInstance" .=) <$> _iWebInstance,
+                  ("iosInstance" .=) <$> _iIosInstance,
+                  ("name" .=) <$> _iName,
+                  ("acquisitionUri" .=) <$> _iAcquisitionUri,
+                  ("platformType" .=) <$> _iPlatformType,
+                  ("turnBasedPlay" .=) <$> _iTurnBasedPlay,
+                  ("realtimePlay" .=) <$> _iRealtimePlay])
+
 -- | This is a JSON template for the Android instance details resource.
 --
 -- /See:/ 'instanceAndroidDetails' smart constructor.
@@ -1772,6 +2370,24 @@ iadEnablePiracyCheck :: Lens' InstanceAndroidDetails (Maybe Bool)
 iadEnablePiracyCheck
   = lens _iadEnablePiracyCheck
       (\ s a -> s{_iadEnablePiracyCheck = a})
+
+instance FromJSON InstanceAndroidDetails where
+        parseJSON
+          = withObject "InstanceAndroidDetails"
+              (\ o ->
+                 InstanceAndroidDetails <$>
+                   (o .:? "packageName") <*> (o .:? "preferred") <*>
+                     (o .:? "kind" .!= "games#instanceAndroidDetails")
+                     <*> (o .:? "enablePiracyCheck"))
+
+instance ToJSON InstanceAndroidDetails where
+        toJSON InstanceAndroidDetails{..}
+          = object
+              (catMaybes
+                 [("packageName" .=) <$> _iadPackageName,
+                  ("preferred" .=) <$> _iadPreferred,
+                  Just ("kind" .= _iadKind),
+                  ("enablePiracyCheck" .=) <$> _iadEnablePiracyCheck])
 
 -- | This is a JSON template for the iOS details resource.
 --
@@ -1859,6 +2475,30 @@ iidBundleIdentifier
   = lens _iidBundleIdentifier
       (\ s a -> s{_iidBundleIdentifier = a})
 
+instance FromJSON InstanceIosDetails where
+        parseJSON
+          = withObject "InstanceIosDetails"
+              (\ o ->
+                 InstanceIosDetails <$>
+                   (o .:? "itunesAppId") <*> (o .:? "preferredForIpad")
+                     <*> (o .:? "supportIphone")
+                     <*> (o .:? "kind" .!= "games#instanceIosDetails")
+                     <*> (o .:? "supportIpad")
+                     <*> (o .:? "preferredForIphone")
+                     <*> (o .:? "bundleIdentifier"))
+
+instance ToJSON InstanceIosDetails where
+        toJSON InstanceIosDetails{..}
+          = object
+              (catMaybes
+                 [("itunesAppId" .=) <$> _iidItunesAppId,
+                  ("preferredForIpad" .=) <$> _iidPreferredForIpad,
+                  ("supportIphone" .=) <$> _iidSupportIphone,
+                  Just ("kind" .= _iidKind),
+                  ("supportIpad" .=) <$> _iidSupportIpad,
+                  ("preferredForIphone" .=) <$> _iidPreferredForIphone,
+                  ("bundleIdentifier" .=) <$> _iidBundleIdentifier])
+
 -- | This is a JSON template for the Web details resource.
 --
 -- /See:/ 'instanceWebDetails' smart constructor.
@@ -1900,6 +2540,23 @@ iwdKind = lens _iwdKind (\ s a -> s{_iwdKind = a})
 iwdLaunchUrl :: Lens' InstanceWebDetails (Maybe Text)
 iwdLaunchUrl
   = lens _iwdLaunchUrl (\ s a -> s{_iwdLaunchUrl = a})
+
+instance FromJSON InstanceWebDetails where
+        parseJSON
+          = withObject "InstanceWebDetails"
+              (\ o ->
+                 InstanceWebDetails <$>
+                   (o .:? "preferred") <*>
+                     (o .:? "kind" .!= "games#instanceWebDetails")
+                     <*> (o .:? "launchUrl"))
+
+instance ToJSON InstanceWebDetails where
+        toJSON InstanceWebDetails{..}
+          = object
+              (catMaybes
+                 [("preferred" .=) <$> _iwdPreferred,
+                  Just ("kind" .= _iwdKind),
+                  ("launchUrl" .=) <$> _iwdLaunchUrl])
 
 -- | This is a JSON template for the Leaderboard resource.
 --
@@ -1970,6 +2627,28 @@ lIconUrl = lens _lIconUrl (\ s a -> s{_lIconUrl = a})
 -- ascending order.
 lOrder :: Lens' Leaderboard (Maybe Text)
 lOrder = lens _lOrder (\ s a -> s{_lOrder = a})
+
+instance FromJSON Leaderboard where
+        parseJSON
+          = withObject "Leaderboard"
+              (\ o ->
+                 Leaderboard <$>
+                   (o .:? "kind" .!= "games#leaderboard") <*>
+                     (o .:? "isIconUrlDefault")
+                     <*> (o .:? "name")
+                     <*> (o .:? "id")
+                     <*> (o .:? "iconUrl")
+                     <*> (o .:? "order"))
+
+instance ToJSON Leaderboard where
+        toJSON Leaderboard{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _lKind),
+                  ("isIconUrlDefault" .=) <$> _lIsIconUrlDefault,
+                  ("name" .=) <$> _lName, ("id" .=) <$> _lId,
+                  ("iconUrl" .=) <$> _lIconUrl,
+                  ("order" .=) <$> _lOrder])
 
 -- | This is a JSON template for the Leaderboard Entry resource.
 --
@@ -2073,6 +2752,35 @@ leScoreRank :: Lens' LeaderboardEntry (Maybe Int64)
 leScoreRank
   = lens _leScoreRank (\ s a -> s{_leScoreRank = a})
 
+instance FromJSON LeaderboardEntry where
+        parseJSON
+          = withObject "LeaderboardEntry"
+              (\ o ->
+                 LeaderboardEntry <$>
+                   (o .:? "scoreTag") <*> (o .:? "writeTimestampMillis")
+                     <*> (o .:? "kind" .!= "games#leaderboardEntry")
+                     <*> (o .:? "scoreValue")
+                     <*> (o .:? "formattedScore")
+                     <*> (o .:? "timeSpan")
+                     <*> (o .:? "formattedScoreRank")
+                     <*> (o .:? "player")
+                     <*> (o .:? "scoreRank"))
+
+instance ToJSON LeaderboardEntry where
+        toJSON LeaderboardEntry{..}
+          = object
+              (catMaybes
+                 [("scoreTag" .=) <$> _leScoreTag,
+                  ("writeTimestampMillis" .=) <$>
+                    _leWriteTimestampMillis,
+                  Just ("kind" .= _leKind),
+                  ("scoreValue" .=) <$> _leScoreValue,
+                  ("formattedScore" .=) <$> _leFormattedScore,
+                  ("timeSpan" .=) <$> _leTimeSpan,
+                  ("formattedScoreRank" .=) <$> _leFormattedScoreRank,
+                  ("player" .=) <$> _lePlayer,
+                  ("scoreRank" .=) <$> _leScoreRank])
+
 -- | This is a JSON template for a list of leaderboard objects.
 --
 -- /See:/ 'leaderboardListResponse' smart constructor.
@@ -2117,6 +2825,23 @@ llrItems
   = lens _llrItems (\ s a -> s{_llrItems = a}) .
       _Default
       . _Coerce
+
+instance FromJSON LeaderboardListResponse where
+        parseJSON
+          = withObject "LeaderboardListResponse"
+              (\ o ->
+                 LeaderboardListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "games#leaderboardListResponse")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON LeaderboardListResponse where
+        toJSON LeaderboardListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _llrNextPageToken,
+                  Just ("kind" .= _llrKind),
+                  ("items" .=) <$> _llrItems])
 
 -- | This is a JSON template for a score rank in a leaderboard.
 --
@@ -2178,6 +2903,27 @@ lsrFormattedNumScores
 -- | The rank in the leaderboard.
 lsrRank :: Lens' LeaderboardScoreRank (Maybe Int64)
 lsrRank = lens _lsrRank (\ s a -> s{_lsrRank = a})
+
+instance FromJSON LeaderboardScoreRank where
+        parseJSON
+          = withObject "LeaderboardScoreRank"
+              (\ o ->
+                 LeaderboardScoreRank <$>
+                   (o .:? "numScores") <*>
+                     (o .:? "kind" .!= "games#leaderboardScoreRank")
+                     <*> (o .:? "formattedRank")
+                     <*> (o .:? "formattedNumScores")
+                     <*> (o .:? "rank"))
+
+instance ToJSON LeaderboardScoreRank where
+        toJSON LeaderboardScoreRank{..}
+          = object
+              (catMaybes
+                 [("numScores" .=) <$> _lsrNumScores,
+                  Just ("kind" .= _lsrKind),
+                  ("formattedRank" .=) <$> _lsrFormattedRank,
+                  ("formattedNumScores" .=) <$> _lsrFormattedNumScores,
+                  ("rank" .=) <$> _lsrRank])
 
 -- | This is a JSON template for a ListScores response.
 --
@@ -2256,6 +3002,28 @@ lsPrevPageToken
   = lens _lsPrevPageToken
       (\ s a -> s{_lsPrevPageToken = a})
 
+instance FromJSON LeaderboardScores where
+        parseJSON
+          = withObject "LeaderboardScores"
+              (\ o ->
+                 LeaderboardScores <$>
+                   (o .:? "nextPageToken") <*> (o .:? "numScores") <*>
+                     (o .:? "kind" .!= "games#leaderboardScores")
+                     <*> (o .:? "playerScore")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "prevPageToken"))
+
+instance ToJSON LeaderboardScores where
+        toJSON LeaderboardScores{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lsNextPageToken,
+                  ("numScores" .=) <$> _lsNumScores,
+                  Just ("kind" .= _lsKind),
+                  ("playerScore" .=) <$> _lsPlayerScore,
+                  ("items" .=) <$> _lsItems,
+                  ("prevPageToken" .=) <$> _lsPrevPageToken])
+
 -- | This is a JSON template for the metagame config resource
 --
 -- /See:/ 'metagameConfig' smart constructor.
@@ -2302,6 +3070,23 @@ mcPlayerLevels
       (\ s a -> s{_mcPlayerLevels = a})
       . _Default
       . _Coerce
+
+instance FromJSON MetagameConfig where
+        parseJSON
+          = withObject "MetagameConfig"
+              (\ o ->
+                 MetagameConfig <$>
+                   (o .:? "kind" .!= "games#metagameConfig") <*>
+                     (o .:? "currentVersion")
+                     <*> (o .:? "playerLevels" .!= mempty))
+
+instance ToJSON MetagameConfig where
+        toJSON MetagameConfig{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _mcKind),
+                  ("currentVersion" .=) <$> _mcCurrentVersion,
+                  ("playerLevels" .=) <$> _mcPlayerLevels])
 
 -- | This is a JSON template for network diagnostics reported for a client.
 --
@@ -2394,6 +3179,35 @@ ndAndroidNetworkSubtype
   = lens _ndAndroidNetworkSubtype
       (\ s a -> s{_ndAndroidNetworkSubtype = a})
 
+instance FromJSON NetworkDiagnostics where
+        parseJSON
+          = withObject "NetworkDiagnostics"
+              (\ o ->
+                 NetworkDiagnostics <$>
+                   (o .:? "androidNetworkType") <*>
+                     (o .:? "kind" .!= "games#networkDiagnostics")
+                     <*> (o .:? "networkOperatorCode")
+                     <*> (o .:? "networkOperatorName")
+                     <*> (o .:? "registrationLatencyMillis")
+                     <*> (o .:? "iosNetworkType")
+                     <*> (o .:? "androidNetworkSubtype"))
+
+instance ToJSON NetworkDiagnostics where
+        toJSON NetworkDiagnostics{..}
+          = object
+              (catMaybes
+                 [("androidNetworkType" .=) <$> _ndAndroidNetworkType,
+                  Just ("kind" .= _ndKind),
+                  ("networkOperatorCode" .=) <$>
+                    _ndNetworkOperatorCode,
+                  ("networkOperatorName" .=) <$>
+                    _ndNetworkOperatorName,
+                  ("registrationLatencyMillis" .=) <$>
+                    _ndRegistrationLatencyMillis,
+                  ("iosNetworkType" .=) <$> _ndIosNetworkType,
+                  ("androidNetworkSubtype" .=) <$>
+                    _ndAndroidNetworkSubtype])
+
 -- | This is a JSON template for a result for a match participant.
 --
 -- /See:/ 'participantResult' smart constructor.
@@ -2454,6 +3268,25 @@ prResult = lens _prResult (\ s a -> s{_prResult = a})
 prPlacing :: Lens' ParticipantResult (Maybe Int32)
 prPlacing
   = lens _prPlacing (\ s a -> s{_prPlacing = a})
+
+instance FromJSON ParticipantResult where
+        parseJSON
+          = withObject "ParticipantResult"
+              (\ o ->
+                 ParticipantResult <$>
+                   (o .:? "participantId") <*>
+                     (o .:? "kind" .!= "games#participantResult")
+                     <*> (o .:? "result")
+                     <*> (o .:? "placing"))
+
+instance ToJSON ParticipantResult where
+        toJSON ParticipantResult{..}
+          = object
+              (catMaybes
+                 [("participantId" .=) <$> _prParticipantId,
+                  Just ("kind" .= _prKind),
+                  ("result" .=) <$> _prResult,
+                  ("placing" .=) <$> _prPlacing])
 
 -- | This is a JSON template for peer channel diagnostics.
 --
@@ -2548,6 +3381,34 @@ pcdNumMessagesSent
   = lens _pcdNumMessagesSent
       (\ s a -> s{_pcdNumMessagesSent = a})
 
+instance FromJSON PeerChannelDiagnostics where
+        parseJSON
+          = withObject "PeerChannelDiagnostics"
+              (\ o ->
+                 PeerChannelDiagnostics <$>
+                   (o .:? "numMessagesLost") <*> (o .:? "bytesSent") <*>
+                     (o .:? "kind" .!= "games#peerChannelDiagnostics")
+                     <*> (o .:? "roundtripLatencyMillis")
+                     <*> (o .:? "bytesReceived")
+                     <*> (o .:? "numMessagesReceived")
+                     <*> (o .:? "numSendFailures")
+                     <*> (o .:? "numMessagesSent"))
+
+instance ToJSON PeerChannelDiagnostics where
+        toJSON PeerChannelDiagnostics{..}
+          = object
+              (catMaybes
+                 [("numMessagesLost" .=) <$> _pcdNumMessagesLost,
+                  ("bytesSent" .=) <$> _pcdBytesSent,
+                  Just ("kind" .= _pcdKind),
+                  ("roundtripLatencyMillis" .=) <$>
+                    _pcdRoundtripLatencyMillis,
+                  ("bytesReceived" .=) <$> _pcdBytesReceived,
+                  ("numMessagesReceived" .=) <$>
+                    _pcdNumMessagesReceived,
+                  ("numSendFailures" .=) <$> _pcdNumSendFailures,
+                  ("numMessagesSent" .=) <$> _pcdNumMessagesSent])
+
 -- | This is a JSON template for peer session diagnostics.
 --
 -- /See:/ 'peerSessionDiagnostics' smart constructor.
@@ -2612,6 +3473,28 @@ psdReliableChannel
   = lens _psdReliableChannel
       (\ s a -> s{_psdReliableChannel = a})
 
+instance FromJSON PeerSessionDiagnostics where
+        parseJSON
+          = withObject "PeerSessionDiagnostics"
+              (\ o ->
+                 PeerSessionDiagnostics <$>
+                   (o .:? "connectedTimestampMillis") <*>
+                     (o .:? "participantId")
+                     <*> (o .:? "kind" .!= "games#peerSessionDiagnostics")
+                     <*> (o .:? "unreliableChannel")
+                     <*> (o .:? "reliableChannel"))
+
+instance ToJSON PeerSessionDiagnostics where
+        toJSON PeerSessionDiagnostics{..}
+          = object
+              (catMaybes
+                 [("connectedTimestampMillis" .=) <$>
+                    _psdConnectedTimestampMillis,
+                  ("participantId" .=) <$> _psdParticipantId,
+                  Just ("kind" .= _psdKind),
+                  ("unreliableChannel" .=) <$> _psdUnreliableChannel,
+                  ("reliableChannel" .=) <$> _psdReliableChannel])
+
 -- | This is a JSON template for metadata about a player playing a game with
 -- the currently authenticated user.
 --
@@ -2656,6 +3539,23 @@ pAutoMatched
 pTimeMillis :: Lens' Played (Maybe Int64)
 pTimeMillis
   = lens _pTimeMillis (\ s a -> s{_pTimeMillis = a})
+
+instance FromJSON Played where
+        parseJSON
+          = withObject "Played"
+              (\ o ->
+                 Played <$>
+                   (o .:? "kind" .!= "games#played") <*>
+                     (o .:? "autoMatched")
+                     <*> (o .:? "timeMillis"))
+
+instance ToJSON Played where
+        toJSON Played{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _pKind),
+                  ("autoMatched" .=) <$> _pAutoMatched,
+                  ("timeMillis" .=) <$> _pTimeMillis])
 
 -- | This is a JSON template for a Player resource.
 --
@@ -2749,6 +3649,32 @@ plaPlayerId :: Lens' Player (Maybe Text)
 plaPlayerId
   = lens _plaPlayerId (\ s a -> s{_plaPlayerId = a})
 
+instance FromJSON Player where
+        parseJSON
+          = withObject "Player"
+              (\ o ->
+                 Player <$>
+                   (o .:? "lastPlayedWith") <*> (o .:? "avatarImageUrl")
+                     <*> (o .:? "kind" .!= "games#player")
+                     <*> (o .:? "experienceInfo")
+                     <*> (o .:? "name")
+                     <*> (o .:? "displayName")
+                     <*> (o .:? "title")
+                     <*> (o .:? "playerId"))
+
+instance ToJSON Player where
+        toJSON Player{..}
+          = object
+              (catMaybes
+                 [("lastPlayedWith" .=) <$> _plaLastPlayedWith,
+                  ("avatarImageUrl" .=) <$> _plaAvatarImageUrl,
+                  Just ("kind" .= _plaKind),
+                  ("experienceInfo" .=) <$> _plaExperienceInfo,
+                  ("name" .=) <$> _plaName,
+                  ("displayName" .=) <$> _plaDisplayName,
+                  ("title" .=) <$> _plaTitle,
+                  ("playerId" .=) <$> _plaPlayerId])
+
 -- | This is a JSON template for an achievement object.
 --
 -- /See:/ 'playerAchievement' smart constructor.
@@ -2835,6 +3761,33 @@ paLastUpdatedTimestamp
   = lens _paLastUpdatedTimestamp
       (\ s a -> s{_paLastUpdatedTimestamp = a})
 
+instance FromJSON PlayerAchievement where
+        parseJSON
+          = withObject "PlayerAchievement"
+              (\ o ->
+                 PlayerAchievement <$>
+                   (o .:? "kind" .!= "games#playerAchievement") <*>
+                     (o .:? "achievementState")
+                     <*> (o .:? "formattedCurrentStepsString")
+                     <*> (o .:? "experiencePoints")
+                     <*> (o .:? "id")
+                     <*> (o .:? "currentSteps")
+                     <*> (o .:? "lastUpdatedTimestamp"))
+
+instance ToJSON PlayerAchievement where
+        toJSON PlayerAchievement{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _paKind),
+                  ("achievementState" .=) <$> _paAchievementState,
+                  ("formattedCurrentStepsString" .=) <$>
+                    _paFormattedCurrentStepsString,
+                  ("experiencePoints" .=) <$> _paExperiencePoints,
+                  ("id" .=) <$> _paId,
+                  ("currentSteps" .=) <$> _paCurrentSteps,
+                  ("lastUpdatedTimestamp" .=) <$>
+                    _paLastUpdatedTimestamp])
+
 -- | This is a JSON template for a list of achievement objects.
 --
 -- /See:/ 'playerAchievementListResponse' smart constructor.
@@ -2879,6 +3832,24 @@ palrItems
   = lens _palrItems (\ s a -> s{_palrItems = a}) .
       _Default
       . _Coerce
+
+instance FromJSON PlayerAchievementListResponse where
+        parseJSON
+          = withObject "PlayerAchievementListResponse"
+              (\ o ->
+                 PlayerAchievementListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!=
+                        "games#playerAchievementListResponse")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON PlayerAchievementListResponse where
+        toJSON PlayerAchievementListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _palrNextPageToken,
+                  Just ("kind" .= _palrKind),
+                  ("items" .=) <$> _palrItems])
 
 -- | This is a JSON template for an event status resource.
 --
@@ -2944,6 +3915,27 @@ pePlayerId :: Lens' PlayerEvent (Maybe Text)
 pePlayerId
   = lens _pePlayerId (\ s a -> s{_pePlayerId = a})
 
+instance FromJSON PlayerEvent where
+        parseJSON
+          = withObject "PlayerEvent"
+              (\ o ->
+                 PlayerEvent <$>
+                   (o .:? "kind" .!= "games#playerEvent") <*>
+                     (o .:? "numEvents")
+                     <*> (o .:? "formattedNumEvents")
+                     <*> (o .:? "definitionId")
+                     <*> (o .:? "playerId"))
+
+instance ToJSON PlayerEvent where
+        toJSON PlayerEvent{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _peKind),
+                  ("numEvents" .=) <$> _peNumEvents,
+                  ("formattedNumEvents" .=) <$> _peFormattedNumEvents,
+                  ("definitionId" .=) <$> _peDefinitionId,
+                  ("playerId" .=) <$> _pePlayerId])
+
 -- | This is a JSON template for a ListByPlayer response.
 --
 -- /See:/ 'playerEventListResponse' smart constructor.
@@ -2988,6 +3980,23 @@ pelrItems
   = lens _pelrItems (\ s a -> s{_pelrItems = a}) .
       _Default
       . _Coerce
+
+instance FromJSON PlayerEventListResponse where
+        parseJSON
+          = withObject "PlayerEventListResponse"
+              (\ o ->
+                 PlayerEventListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "games#playerEventListResponse")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON PlayerEventListResponse where
+        toJSON PlayerEventListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _pelrNextPageToken,
+                  Just ("kind" .= _pelrKind),
+                  ("items" .=) <$> _pelrItems])
 
 -- | This is a JSON template for 1P\/3P metadata about the player\'s
 -- experience.
@@ -3054,6 +4063,29 @@ peiLastLevelUpTimestampMillis :: Lens' PlayerExperienceInfo (Maybe Int64)
 peiLastLevelUpTimestampMillis
   = lens _peiLastLevelUpTimestampMillis
       (\ s a -> s{_peiLastLevelUpTimestampMillis = a})
+
+instance FromJSON PlayerExperienceInfo where
+        parseJSON
+          = withObject "PlayerExperienceInfo"
+              (\ o ->
+                 PlayerExperienceInfo <$>
+                   (o .:? "kind" .!= "games#playerExperienceInfo") <*>
+                     (o .:? "currentExperiencePoints")
+                     <*> (o .:? "currentLevel")
+                     <*> (o .:? "nextLevel")
+                     <*> (o .:? "lastLevelUpTimestampMillis"))
+
+instance ToJSON PlayerExperienceInfo where
+        toJSON PlayerExperienceInfo{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _peiKind),
+                  ("currentExperiencePoints" .=) <$>
+                    _peiCurrentExperiencePoints,
+                  ("currentLevel" .=) <$> _peiCurrentLevel,
+                  ("nextLevel" .=) <$> _peiNextLevel,
+                  ("lastLevelUpTimestampMillis" .=) <$>
+                    _peiLastLevelUpTimestampMillis])
 
 -- | This is a JSON template for a player leaderboard score object.
 --
@@ -3162,6 +4194,34 @@ plsWriteTimestamp
   = lens _plsWriteTimestamp
       (\ s a -> s{_plsWriteTimestamp = a})
 
+instance FromJSON PlayerLeaderboardScore where
+        parseJSON
+          = withObject "PlayerLeaderboardScore"
+              (\ o ->
+                 PlayerLeaderboardScore <$>
+                   (o .:? "scoreTag") <*> (o .:? "scoreString") <*>
+                     (o .:? "kind" .!= "games#playerLeaderboardScore")
+                     <*> (o .:? "scoreValue")
+                     <*> (o .:? "timeSpan")
+                     <*> (o .:? "publicRank")
+                     <*> (o .:? "socialRank")
+                     <*> (o .:? "leaderboard_id")
+                     <*> (o .:? "writeTimestamp"))
+
+instance ToJSON PlayerLeaderboardScore where
+        toJSON PlayerLeaderboardScore{..}
+          = object
+              (catMaybes
+                 [("scoreTag" .=) <$> _plsScoreTag,
+                  ("scoreString" .=) <$> _plsScoreString,
+                  Just ("kind" .= _plsKind),
+                  ("scoreValue" .=) <$> _plsScoreValue,
+                  ("timeSpan" .=) <$> _plsTimeSpan,
+                  ("publicRank" .=) <$> _plsPublicRank,
+                  ("socialRank" .=) <$> _plsSocialRank,
+                  ("leaderboard_id" .=) <$> _plsLeaderboardId,
+                  ("writeTimestamp" .=) <$> _plsWriteTimestamp])
+
 -- | This is a JSON template for a list of player leaderboard scores.
 --
 -- /See:/ 'playerLeaderboardScoreListResponse' smart constructor.
@@ -3217,6 +4277,28 @@ plslrPlayer :: Lens' PlayerLeaderboardScoreListResponse (Maybe (Maybe Player))
 plslrPlayer
   = lens _plslrPlayer (\ s a -> s{_plslrPlayer = a})
 
+instance FromJSON PlayerLeaderboardScoreListResponse
+         where
+        parseJSON
+          = withObject "PlayerLeaderboardScoreListResponse"
+              (\ o ->
+                 PlayerLeaderboardScoreListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!=
+                        "games#playerLeaderboardScoreListResponse")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "player"))
+
+instance ToJSON PlayerLeaderboardScoreListResponse
+         where
+        toJSON PlayerLeaderboardScoreListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _plslrNextPageToken,
+                  Just ("kind" .= _plslrKind),
+                  ("items" .=) <$> _plslrItems,
+                  ("player" .=) <$> _plslrPlayer])
+
 -- | This is a JSON template for 1P\/3P metadata about a user\'s level.
 --
 -- /See:/ 'playerLevel' smart constructor.
@@ -3269,6 +4351,27 @@ plMinExperiencePoints
 plLevel :: Lens' PlayerLevel (Maybe Int32)
 plLevel = lens _plLevel (\ s a -> s{_plLevel = a})
 
+instance FromJSON PlayerLevel where
+        parseJSON
+          = withObject "PlayerLevel"
+              (\ o ->
+                 PlayerLevel <$>
+                   (o .:? "maxExperiencePoints") <*>
+                     (o .:? "kind" .!= "games#playerLevel")
+                     <*> (o .:? "minExperiencePoints")
+                     <*> (o .:? "level"))
+
+instance ToJSON PlayerLevel where
+        toJSON PlayerLevel{..}
+          = object
+              (catMaybes
+                 [("maxExperiencePoints" .=) <$>
+                    _plMaxExperiencePoints,
+                  Just ("kind" .= _plKind),
+                  ("minExperiencePoints" .=) <$>
+                    _plMinExperiencePoints,
+                  ("level" .=) <$> _plLevel])
+
 -- | This is a JSON template for a third party player list response.
 --
 -- /See:/ 'playerListResponse' smart constructor.
@@ -3314,6 +4417,23 @@ plrItems
       _Default
       . _Coerce
 
+instance FromJSON PlayerListResponse where
+        parseJSON
+          = withObject "PlayerListResponse"
+              (\ o ->
+                 PlayerListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "games#playerListResponse")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON PlayerListResponse where
+        toJSON PlayerListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _plrNextPageToken,
+                  Just ("kind" .= _plrKind),
+                  ("items" .=) <$> _plrItems])
+
 -- | An object representation of the individual components of the player\'s
 -- name. For some players, these fields may not be present.
 --
@@ -3349,6 +4469,20 @@ pnGivenName
 pnFamilyName :: Lens' PlayerName (Maybe Text)
 pnFamilyName
   = lens _pnFamilyName (\ s a -> s{_pnFamilyName = a})
+
+instance FromJSON PlayerName where
+        parseJSON
+          = withObject "PlayerName"
+              (\ o ->
+                 PlayerName <$>
+                   (o .:? "givenName") <*> (o .:? "familyName"))
+
+instance ToJSON PlayerName where
+        toJSON PlayerName{..}
+          = object
+              (catMaybes
+                 [("givenName" .=) <$> _pnGivenName,
+                  ("familyName" .=) <$> _pnFamilyName])
 
 -- | This is a JSON template for a player score.
 --
@@ -3413,6 +4547,25 @@ psTimeSpan :: Lens' PlayerScore (Maybe Text)
 psTimeSpan
   = lens _psTimeSpan (\ s a -> s{_psTimeSpan = a})
 
+instance FromJSON PlayerScore where
+        parseJSON
+          = withObject "PlayerScore"
+              (\ o ->
+                 PlayerScore <$>
+                   (o .:? "scoreTag") <*> (o .:? "score") <*>
+                     (o .:? "kind" .!= "games#playerScore")
+                     <*> (o .:? "formattedScore")
+                     <*> (o .:? "timeSpan"))
+
+instance ToJSON PlayerScore where
+        toJSON PlayerScore{..}
+          = object
+              (catMaybes
+                 [("scoreTag" .=) <$> _psScoreTag,
+                  ("score" .=) <$> _psScore, Just ("kind" .= _psKind),
+                  ("formattedScore" .=) <$> _psFormattedScore,
+                  ("timeSpan" .=) <$> _psTimeSpan])
+
 -- | This is a JSON template for a list of score submission statuses.
 --
 -- /See:/ 'playerScoreListResponse' smart constructor.
@@ -3448,6 +4601,21 @@ pslrSubmittedScores
 -- string games#playerScoreListResponse.
 pslrKind :: Lens' PlayerScoreListResponse Text
 pslrKind = lens _pslrKind (\ s a -> s{_pslrKind = a})
+
+instance FromJSON PlayerScoreListResponse where
+        parseJSON
+          = withObject "PlayerScoreListResponse"
+              (\ o ->
+                 PlayerScoreListResponse <$>
+                   (o .:? "submittedScores" .!= mempty) <*>
+                     (o .:? "kind" .!= "games#playerScoreListResponse"))
+
+instance ToJSON PlayerScoreListResponse where
+        toJSON PlayerScoreListResponse{..}
+          = object
+              (catMaybes
+                 [("submittedScores" .=) <$> _pslrSubmittedScores,
+                  Just ("kind" .= _pslrKind)])
 
 -- | This is a JSON template for a list of leaderboard entry resources.
 --
@@ -3532,6 +4700,30 @@ psrUnbeatenScores
       . _Default
       . _Coerce
 
+instance FromJSON PlayerScoreResponse where
+        parseJSON
+          = withObject "PlayerScoreResponse"
+              (\ o ->
+                 PlayerScoreResponse <$>
+                   (o .:? "scoreTag") <*>
+                     (o .:? "kind" .!= "games#playerScoreResponse")
+                     <*> (o .:? "formattedScore")
+                     <*> (o .:? "leaderboardId")
+                     <*> (o .:? "beatenScoreTimeSpans" .!= mempty)
+                     <*> (o .:? "unbeatenScores" .!= mempty))
+
+instance ToJSON PlayerScoreResponse where
+        toJSON PlayerScoreResponse{..}
+          = object
+              (catMaybes
+                 [("scoreTag" .=) <$> _psrScoreTag,
+                  Just ("kind" .= _psrKind),
+                  ("formattedScore" .=) <$> _psrFormattedScore,
+                  ("leaderboardId" .=) <$> _psrLeaderboardId,
+                  ("beatenScoreTimeSpans" .=) <$>
+                    _psrBeatenScoreTimeSpans,
+                  ("unbeatenScores" .=) <$> _psrUnbeatenScores])
+
 -- | This is a JSON template for a list of score submission requests
 --
 -- /See:/ 'playerScoreSubmissionList' smart constructor.
@@ -3566,6 +4758,21 @@ psslScores
   = lens _psslScores (\ s a -> s{_psslScores = a}) .
       _Default
       . _Coerce
+
+instance FromJSON PlayerScoreSubmissionList where
+        parseJSON
+          = withObject "PlayerScoreSubmissionList"
+              (\ o ->
+                 PlayerScoreSubmissionList <$>
+                   (o .:? "kind" .!= "games#playerScoreSubmissionList")
+                     <*> (o .:? "scores" .!= mempty))
+
+instance ToJSON PlayerScoreSubmissionList where
+        toJSON PlayerScoreSubmissionList{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _psslKind),
+                  ("scores" .=) <$> _psslScores])
 
 -- | This is a JSON template for a push token resource.
 --
@@ -3621,6 +4828,25 @@ ptLanguage
 ptId :: Lens' PushToken (Maybe (Maybe PushTokenId))
 ptId = lens _ptId (\ s a -> s{_ptId = a})
 
+instance FromJSON PushToken where
+        parseJSON
+          = withObject "PushToken"
+              (\ o ->
+                 PushToken <$>
+                   (o .:? "clientRevision") <*>
+                     (o .:? "kind" .!= "games#pushToken")
+                     <*> (o .:? "language")
+                     <*> (o .:? "id"))
+
+instance ToJSON PushToken where
+        toJSON PushToken{..}
+          = object
+              (catMaybes
+                 [("clientRevision" .=) <$> _ptClientRevision,
+                  Just ("kind" .= _ptKind),
+                  ("language" .=) <$> _ptLanguage,
+                  ("id" .=) <$> _ptId])
+
 -- | This is a JSON template for a push token ID resource.
 --
 -- /See:/ 'pushTokenId' smart constructor.
@@ -3652,6 +4878,20 @@ ptiIos = lens _ptiIos (\ s a -> s{_ptiIos = a})
 -- string games#pushTokenId.
 ptiKind :: Lens' PushTokenId Text
 ptiKind = lens _ptiKind (\ s a -> s{_ptiKind = a})
+
+instance FromJSON PushTokenId where
+        parseJSON
+          = withObject "PushTokenId"
+              (\ o ->
+                 PushTokenId <$>
+                   (o .:? "ios") <*>
+                     (o .:? "kind" .!= "games#pushTokenId"))
+
+instance ToJSON PushTokenId where
+        toJSON PushTokenId{..}
+          = object
+              (catMaybes
+                 [("ios" .=) <$> _ptiIos, Just ("kind" .= _ptiKind)])
 
 -- | A push token ID for iOS devices.
 --
@@ -3689,6 +4929,21 @@ ptiiApnsEnvironment :: Lens' PushTokenIdIos (Maybe Text)
 ptiiApnsEnvironment
   = lens _ptiiApnsEnvironment
       (\ s a -> s{_ptiiApnsEnvironment = a})
+
+instance FromJSON PushTokenIdIos where
+        parseJSON
+          = withObject "PushTokenIdIos"
+              (\ o ->
+                 PushTokenIdIos <$>
+                   (o .:? "apns_device_token") <*>
+                     (o .:? "apns_environment"))
+
+instance ToJSON PushTokenIdIos where
+        toJSON PushTokenIdIos{..}
+          = object
+              (catMaybes
+                 [("apns_device_token" .=) <$> _ptiiApnsDeviceToken,
+                  ("apns_environment" .=) <$> _ptiiApnsEnvironment])
 
 -- | This is a JSON template for a Quest resource.
 --
@@ -3873,6 +5128,52 @@ queAcceptedTimestampMillis
   = lens _queAcceptedTimestampMillis
       (\ s a -> s{_queAcceptedTimestampMillis = a})
 
+instance FromJSON Quest where
+        parseJSON
+          = withObject "Quest"
+              (\ o ->
+                 Quest <$>
+                   (o .:? "lastUpdatedTimestampMillis") <*>
+                     (o .:? "bannerUrl")
+                     <*> (o .:? "state")
+                     <*> (o .:? "milestones" .!= mempty)
+                     <*> (o .:? "kind" .!= "games#quest")
+                     <*> (o .:? "applicationId")
+                     <*> (o .:? "endTimestampMillis")
+                     <*> (o .:? "name")
+                     <*> (o .:? "id")
+                     <*> (o .:? "iconUrl")
+                     <*> (o .:? "startTimestampMillis")
+                     <*> (o .:? "notifyTimestampMillis")
+                     <*> (o .:? "description")
+                     <*> (o .:? "isDefaultBannerUrl")
+                     <*> (o .:? "isDefaultIconUrl")
+                     <*> (o .:? "acceptedTimestampMillis"))
+
+instance ToJSON Quest where
+        toJSON Quest{..}
+          = object
+              (catMaybes
+                 [("lastUpdatedTimestampMillis" .=) <$>
+                    _queLastUpdatedTimestampMillis,
+                  ("bannerUrl" .=) <$> _queBannerUrl,
+                  ("state" .=) <$> _queState,
+                  ("milestones" .=) <$> _queMilestones,
+                  Just ("kind" .= _queKind),
+                  ("applicationId" .=) <$> _queApplicationId,
+                  ("endTimestampMillis" .=) <$> _queEndTimestampMillis,
+                  ("name" .=) <$> _queName, ("id" .=) <$> _queId,
+                  ("iconUrl" .=) <$> _queIconUrl,
+                  ("startTimestampMillis" .=) <$>
+                    _queStartTimestampMillis,
+                  ("notifyTimestampMillis" .=) <$>
+                    _queNotifyTimestampMillis,
+                  ("description" .=) <$> _queDescription,
+                  ("isDefaultBannerUrl" .=) <$> _queIsDefaultBannerUrl,
+                  ("isDefaultIconUrl" .=) <$> _queIsDefaultIconUrl,
+                  ("acceptedTimestampMillis" .=) <$>
+                    _queAcceptedTimestampMillis])
+
 -- | This is a JSON template for a Quest Criterion Contribution resource.
 --
 -- /See:/ 'questContribution' smart constructor.
@@ -3916,6 +5217,22 @@ qFormattedValue :: Lens' QuestContribution (Maybe Text)
 qFormattedValue
   = lens _qFormattedValue
       (\ s a -> s{_qFormattedValue = a})
+
+instance FromJSON QuestContribution where
+        parseJSON
+          = withObject "QuestContribution"
+              (\ o ->
+                 QuestContribution <$>
+                   (o .:? "kind" .!= "games#questContribution") <*>
+                     (o .:? "value")
+                     <*> (o .:? "formattedValue"))
+
+instance ToJSON QuestContribution where
+        toJSON QuestContribution{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _qKind), ("value" .=) <$> _qValue,
+                  ("formattedValue" .=) <$> _qFormattedValue])
 
 -- | This is a JSON template for a Quest Criterion resource.
 --
@@ -3988,6 +5305,30 @@ qcEventId :: Lens' QuestCriterion (Maybe Text)
 qcEventId
   = lens _qcEventId (\ s a -> s{_qcEventId = a})
 
+instance FromJSON QuestCriterion where
+        parseJSON
+          = withObject "QuestCriterion"
+              (\ o ->
+                 QuestCriterion <$>
+                   (o .:? "currentContribution") <*>
+                     (o .:? "completionContribution")
+                     <*> (o .:? "kind" .!= "games#questCriterion")
+                     <*> (o .:? "initialPlayerProgress")
+                     <*> (o .:? "eventId"))
+
+instance ToJSON QuestCriterion where
+        toJSON QuestCriterion{..}
+          = object
+              (catMaybes
+                 [("currentContribution" .=) <$>
+                    _qcCurrentContribution,
+                  ("completionContribution" .=) <$>
+                    _qcCompletionContribution,
+                  Just ("kind" .= _qcKind),
+                  ("initialPlayerProgress" .=) <$>
+                    _qcInitialPlayerProgress,
+                  ("eventId" .=) <$> _qcEventId])
+
 -- | This is a JSON template for a list of quest objects.
 --
 -- /See:/ 'questListResponse' smart constructor.
@@ -4032,6 +5373,23 @@ qlrItems
   = lens _qlrItems (\ s a -> s{_qlrItems = a}) .
       _Default
       . _Coerce
+
+instance FromJSON QuestListResponse where
+        parseJSON
+          = withObject "QuestListResponse"
+              (\ o ->
+                 QuestListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "games#questListResponse")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON QuestListResponse where
+        toJSON QuestListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _qlrNextPageToken,
+                  Just ("kind" .= _qlrKind),
+                  ("items" .=) <$> _qlrItems])
 
 -- | This is a JSON template for a Quest Milestone resource.
 --
@@ -4101,6 +5459,27 @@ qmCriteria
       _Default
       . _Coerce
 
+instance FromJSON QuestMilestone where
+        parseJSON
+          = withObject "QuestMilestone"
+              (\ o ->
+                 QuestMilestone <$>
+                   (o .:? "state") <*>
+                     (o .:? "kind" .!= "games#questMilestone")
+                     <*> (o .:? "id")
+                     <*> (o .:? "completionRewardData")
+                     <*> (o .:? "criteria" .!= mempty))
+
+instance ToJSON QuestMilestone where
+        toJSON QuestMilestone{..}
+          = object
+              (catMaybes
+                 [("state" .=) <$> _qmState, Just ("kind" .= _qmKind),
+                  ("id" .=) <$> _qmId,
+                  ("completionRewardData" .=) <$>
+                    _qmCompletionRewardData,
+                  ("criteria" .=) <$> _qmCriteria])
+
 -- | This is a JSON template for the result of checking a revision.
 --
 -- /See:/ 'revisionCheckResponse' smart constructor.
@@ -4149,6 +5528,23 @@ rcrRevisionStatus :: Lens' RevisionCheckResponse (Maybe Text)
 rcrRevisionStatus
   = lens _rcrRevisionStatus
       (\ s a -> s{_rcrRevisionStatus = a})
+
+instance FromJSON RevisionCheckResponse where
+        parseJSON
+          = withObject "RevisionCheckResponse"
+              (\ o ->
+                 RevisionCheckResponse <$>
+                   (o .:? "apiVersion") <*>
+                     (o .:? "kind" .!= "games#revisionCheckResponse")
+                     <*> (o .:? "revisionStatus"))
+
+instance ToJSON RevisionCheckResponse where
+        toJSON RevisionCheckResponse{..}
+          = object
+              (catMaybes
+                 [("apiVersion" .=) <$> _rcrApiVersion,
+                  Just ("kind" .= _rcrKind),
+                  ("revisionStatus" .=) <$> _rcrRevisionStatus])
 
 -- | This is a JSON template for a room resource object.
 --
@@ -4303,6 +5699,43 @@ rDescription :: Lens' Room (Maybe Text)
 rDescription
   = lens _rDescription (\ s a -> s{_rDescription = a})
 
+instance FromJSON Room where
+        parseJSON
+          = withObject "Room"
+              (\ o ->
+                 Room <$>
+                   (o .:? "status") <*> (o .:? "variant") <*>
+                     (o .:? "kind" .!= "games#room")
+                     <*> (o .:? "autoMatchingStatus")
+                     <*> (o .:? "creationDetails")
+                     <*> (o .:? "inviterId")
+                     <*> (o .:? "lastUpdateDetails")
+                     <*> (o .:? "roomStatusVersion")
+                     <*> (o .:? "participants" .!= mempty)
+                     <*> (o .:? "applicationId")
+                     <*> (o .:? "autoMatchingCriteria")
+                     <*> (o .:? "roomId")
+                     <*> (o .:? "description"))
+
+instance ToJSON Room where
+        toJSON Room{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _rStatus,
+                  ("variant" .=) <$> _rVariant,
+                  Just ("kind" .= _rKind),
+                  ("autoMatchingStatus" .=) <$> _rAutoMatchingStatus,
+                  ("creationDetails" .=) <$> _rCreationDetails,
+                  ("inviterId" .=) <$> _rInviterId,
+                  ("lastUpdateDetails" .=) <$> _rLastUpdateDetails,
+                  ("roomStatusVersion" .=) <$> _rRoomStatusVersion,
+                  ("participants" .=) <$> _rParticipants,
+                  ("applicationId" .=) <$> _rApplicationId,
+                  ("autoMatchingCriteria" .=) <$>
+                    _rAutoMatchingCriteria,
+                  ("roomId" .=) <$> _rRoomId,
+                  ("description" .=) <$> _rDescription])
+
 -- | This is a JSON template for status of room automatching that is in
 -- progress.
 --
@@ -4338,6 +5771,22 @@ ramsWaitEstimateSeconds :: Lens' RoomAutoMatchStatus (Maybe Int32)
 ramsWaitEstimateSeconds
   = lens _ramsWaitEstimateSeconds
       (\ s a -> s{_ramsWaitEstimateSeconds = a})
+
+instance FromJSON RoomAutoMatchStatus where
+        parseJSON
+          = withObject "RoomAutoMatchStatus"
+              (\ o ->
+                 RoomAutoMatchStatus <$>
+                   (o .:? "kind" .!= "games#roomAutoMatchStatus") <*>
+                     (o .:? "waitEstimateSeconds"))
+
+instance ToJSON RoomAutoMatchStatus where
+        toJSON RoomAutoMatchStatus{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _ramsKind),
+                  ("waitEstimateSeconds" .=) <$>
+                    _ramsWaitEstimateSeconds])
 
 -- | This is a JSON template for a room auto-match criteria object.
 --
@@ -4397,6 +5846,27 @@ ramcMinAutoMatchingPlayers
   = lens _ramcMinAutoMatchingPlayers
       (\ s a -> s{_ramcMinAutoMatchingPlayers = a})
 
+instance FromJSON RoomAutoMatchingCriteria where
+        parseJSON
+          = withObject "RoomAutoMatchingCriteria"
+              (\ o ->
+                 RoomAutoMatchingCriteria <$>
+                   (o .:? "kind" .!= "games#roomAutoMatchingCriteria")
+                     <*> (o .:? "exclusiveBitmask")
+                     <*> (o .:? "maxAutoMatchingPlayers")
+                     <*> (o .:? "minAutoMatchingPlayers"))
+
+instance ToJSON RoomAutoMatchingCriteria where
+        toJSON RoomAutoMatchingCriteria{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _ramcKind),
+                  ("exclusiveBitmask" .=) <$> _ramcExclusiveBitmask,
+                  ("maxAutoMatchingPlayers" .=) <$>
+                    _ramcMaxAutoMatchingPlayers,
+                  ("minAutoMatchingPlayers" .=) <$>
+                    _ramcMinAutoMatchingPlayers])
+
 -- | This is a JSON template for the client address when setting up a room.
 --
 -- /See:/ 'roomClientAddress' smart constructor.
@@ -4430,6 +5900,21 @@ rcaXmppAddress :: Lens' RoomClientAddress (Maybe Text)
 rcaXmppAddress
   = lens _rcaXmppAddress
       (\ s a -> s{_rcaXmppAddress = a})
+
+instance FromJSON RoomClientAddress where
+        parseJSON
+          = withObject "RoomClientAddress"
+              (\ o ->
+                 RoomClientAddress <$>
+                   (o .:? "kind" .!= "games#roomClientAddress") <*>
+                     (o .:? "xmppAddress"))
+
+instance ToJSON RoomClientAddress where
+        toJSON RoomClientAddress{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _rcaKind),
+                  ("xmppAddress" .=) <$> _rcaXmppAddress])
 
 -- | This is a JSON template for a room creation request.
 --
@@ -4530,6 +6015,33 @@ rooCapabilities
       . _Default
       . _Coerce
 
+instance FromJSON RoomCreateRequest where
+        parseJSON
+          = withObject "RoomCreateRequest"
+              (\ o ->
+                 RoomCreateRequest <$>
+                   (o .:? "requestId") <*> (o .:? "variant") <*>
+                     (o .:? "networkDiagnostics")
+                     <*> (o .:? "kind" .!= "games#roomCreateRequest")
+                     <*> (o .:? "invitedPlayerIds" .!= mempty)
+                     <*> (o .:? "clientAddress")
+                     <*> (o .:? "autoMatchingCriteria")
+                     <*> (o .:? "capabilities" .!= mempty))
+
+instance ToJSON RoomCreateRequest where
+        toJSON RoomCreateRequest{..}
+          = object
+              (catMaybes
+                 [("requestId" .=) <$> _rooRequestId,
+                  ("variant" .=) <$> _rooVariant,
+                  ("networkDiagnostics" .=) <$> _rooNetworkDiagnostics,
+                  Just ("kind" .= _rooKind),
+                  ("invitedPlayerIds" .=) <$> _rooInvitedPlayerIds,
+                  ("clientAddress" .=) <$> _rooClientAddress,
+                  ("autoMatchingCriteria" .=) <$>
+                    _rooAutoMatchingCriteria,
+                  ("capabilities" .=) <$> _rooCapabilities])
+
 -- | This is a JSON template for a join room request.
 --
 -- /See:/ 'roomJoinRequest' smart constructor.
@@ -4585,6 +6097,26 @@ rjrCapabilities
       (\ s a -> s{_rjrCapabilities = a})
       . _Default
       . _Coerce
+
+instance FromJSON RoomJoinRequest where
+        parseJSON
+          = withObject "RoomJoinRequest"
+              (\ o ->
+                 RoomJoinRequest <$>
+                   (o .:? "networkDiagnostics") <*>
+                     (o .:? "kind" .!= "games#roomJoinRequest")
+                     <*> (o .:? "clientAddress")
+                     <*> (o .:? "capabilities" .!= mempty))
+
+instance ToJSON RoomJoinRequest where
+        toJSON RoomJoinRequest{..}
+          = object
+              (catMaybes
+                 [("networkDiagnostics" .=) <$>
+                    _rjrNetworkDiagnostics,
+                  Just ("kind" .= _rjrKind),
+                  ("clientAddress" .=) <$> _rjrClientAddress,
+                  ("capabilities" .=) <$> _rjrCapabilities])
 
 -- | This is a JSON template for room leave diagnostics.
 --
@@ -4690,6 +6222,36 @@ rldAndroidNetworkSubtype
   = lens _rldAndroidNetworkSubtype
       (\ s a -> s{_rldAndroidNetworkSubtype = a})
 
+instance FromJSON RoomLeaveDiagnostics where
+        parseJSON
+          = withObject "RoomLeaveDiagnostics"
+              (\ o ->
+                 RoomLeaveDiagnostics <$>
+                   (o .:? "peerSession" .!= mempty) <*>
+                     (o .:? "androidNetworkType")
+                     <*> (o .:? "kind" .!= "games#roomLeaveDiagnostics")
+                     <*> (o .:? "networkOperatorCode")
+                     <*> (o .:? "networkOperatorName")
+                     <*> (o .:? "socketsUsed")
+                     <*> (o .:? "iosNetworkType")
+                     <*> (o .:? "androidNetworkSubtype"))
+
+instance ToJSON RoomLeaveDiagnostics where
+        toJSON RoomLeaveDiagnostics{..}
+          = object
+              (catMaybes
+                 [("peerSession" .=) <$> _rldPeerSession,
+                  ("androidNetworkType" .=) <$> _rldAndroidNetworkType,
+                  Just ("kind" .= _rldKind),
+                  ("networkOperatorCode" .=) <$>
+                    _rldNetworkOperatorCode,
+                  ("networkOperatorName" .=) <$>
+                    _rldNetworkOperatorName,
+                  ("socketsUsed" .=) <$> _rldSocketsUsed,
+                  ("iosNetworkType" .=) <$> _rldIosNetworkType,
+                  ("androidNetworkSubtype" .=) <$>
+                    _rldAndroidNetworkSubtype])
+
 -- | This is a JSON template for a leave room request.
 --
 -- /See:/ 'roomLeaveRequest' smart constructor.
@@ -4749,6 +6311,23 @@ rlrLeaveDiagnostics
   = lens _rlrLeaveDiagnostics
       (\ s a -> s{_rlrLeaveDiagnostics = a})
 
+instance FromJSON RoomLeaveRequest where
+        parseJSON
+          = withObject "RoomLeaveRequest"
+              (\ o ->
+                 RoomLeaveRequest <$>
+                   (o .:? "kind" .!= "games#roomLeaveRequest") <*>
+                     (o .:? "reason")
+                     <*> (o .:? "leaveDiagnostics"))
+
+instance ToJSON RoomLeaveRequest where
+        toJSON RoomLeaveRequest{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _rlrKind),
+                  ("reason" .=) <$> _rlrReason,
+                  ("leaveDiagnostics" .=) <$> _rlrLeaveDiagnostics])
+
 -- | This is a JSON template for a list of rooms.
 --
 -- /See:/ 'roomList' smart constructor.
@@ -4792,6 +6371,22 @@ rlItems :: Lens' RoomList [Maybe Room]
 rlItems
   = lens _rlItems (\ s a -> s{_rlItems = a}) . _Default
       . _Coerce
+
+instance FromJSON RoomList where
+        parseJSON
+          = withObject "RoomList"
+              (\ o ->
+                 RoomList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "games#roomList")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON RoomList where
+        toJSON RoomList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _rlNextPageToken,
+                  Just ("kind" .= _rlKind), ("items" .=) <$> _rlItems])
 
 -- | This is a JSON template for room modification metadata.
 --
@@ -4837,6 +6432,24 @@ rmModifiedTimestampMillis :: Lens' RoomModification (Maybe Int64)
 rmModifiedTimestampMillis
   = lens _rmModifiedTimestampMillis
       (\ s a -> s{_rmModifiedTimestampMillis = a})
+
+instance FromJSON RoomModification where
+        parseJSON
+          = withObject "RoomModification"
+              (\ o ->
+                 RoomModification <$>
+                   (o .:? "participantId") <*>
+                     (o .:? "kind" .!= "games#roomModification")
+                     <*> (o .:? "modifiedTimestampMillis"))
+
+instance ToJSON RoomModification where
+        toJSON RoomModification{..}
+          = object
+              (catMaybes
+                 [("participantId" .=) <$> _rmParticipantId,
+                  Just ("kind" .= _rmKind),
+                  ("modifiedTimestampMillis" .=) <$>
+                    _rmModifiedTimestampMillis])
 
 -- | This is a JSON template for an update on the status of a peer in a room.
 --
@@ -4932,6 +6545,32 @@ rppssUnreliableRoundtripLatencyMillis
       (\ s a ->
          s{_rppssUnreliableRoundtripLatencyMillis = a})
 
+instance FromJSON RoomP2PStatus where
+        parseJSON
+          = withObject "RoomP2PStatus"
+              (\ o ->
+                 RoomP2PStatus <$>
+                   (o .:? "status") <*> (o .:? "participantId") <*>
+                     (o .:? "kind" .!= "games#roomP2PStatus")
+                     <*> (o .:? "error")
+                     <*> (o .:? "error_reason")
+                     <*> (o .:? "connectionSetupLatencyMillis")
+                     <*> (o .:? "unreliableRoundtripLatencyMillis"))
+
+instance ToJSON RoomP2PStatus where
+        toJSON RoomP2PStatus{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _rppssStatus,
+                  ("participantId" .=) <$> _rppssParticipantId,
+                  Just ("kind" .= _rppssKind),
+                  ("error" .=) <$> _rppssError,
+                  ("error_reason" .=) <$> _rppssErrorReason,
+                  ("connectionSetupLatencyMillis" .=) <$>
+                    _rppssConnectionSetupLatencyMillis,
+                  ("unreliableRoundtripLatencyMillis" .=) <$>
+                    _rppssUnreliableRoundtripLatencyMillis])
+
 -- | This is a JSON template for an update on the status of peers in a room.
 --
 -- /See:/ 'roomP2PStatuses' smart constructor.
@@ -4966,6 +6605,21 @@ rppsUpdates
   = lens _rppsUpdates (\ s a -> s{_rppsUpdates = a}) .
       _Default
       . _Coerce
+
+instance FromJSON RoomP2PStatuses where
+        parseJSON
+          = withObject "RoomP2PStatuses"
+              (\ o ->
+                 RoomP2PStatuses <$>
+                   (o .:? "kind" .!= "games#roomP2PStatuses") <*>
+                     (o .:? "updates" .!= mempty))
+
+instance ToJSON RoomP2PStatuses where
+        toJSON RoomP2PStatuses{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _rppsKind),
+                  ("updates" .=) <$> _rppsUpdates])
 
 -- | This is a JSON template for a participant in a room.
 --
@@ -5099,6 +6753,36 @@ rpAutoMatchedPlayer
   = lens _rpAutoMatchedPlayer
       (\ s a -> s{_rpAutoMatchedPlayer = a})
 
+instance FromJSON RoomParticipant where
+        parseJSON
+          = withObject "RoomParticipant"
+              (\ o ->
+                 RoomParticipant <$>
+                   (o .:? "status") <*> (o .:? "connected") <*>
+                     (o .:? "leaveReason")
+                     <*> (o .:? "kind" .!= "games#roomParticipant")
+                     <*> (o .:? "clientAddress")
+                     <*> (o .:? "id")
+                     <*> (o .:? "autoMatched")
+                     <*> (o .:? "player")
+                     <*> (o .:? "capabilities" .!= mempty)
+                     <*> (o .:? "autoMatchedPlayer"))
+
+instance ToJSON RoomParticipant where
+        toJSON RoomParticipant{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _rpStatus,
+                  ("connected" .=) <$> _rpConnected,
+                  ("leaveReason" .=) <$> _rpLeaveReason,
+                  Just ("kind" .= _rpKind),
+                  ("clientAddress" .=) <$> _rpClientAddress,
+                  ("id" .=) <$> _rpId,
+                  ("autoMatched" .=) <$> _rpAutoMatched,
+                  ("player" .=) <$> _rpPlayer,
+                  ("capabilities" .=) <$> _rpCapabilities,
+                  ("autoMatchedPlayer" .=) <$> _rpAutoMatchedPlayer])
+
 -- | This is a JSON template for the status of a room that the player has
 -- joined.
 --
@@ -5181,6 +6865,29 @@ rsParticipants
 rsRoomId :: Lens' RoomStatus (Maybe Text)
 rsRoomId = lens _rsRoomId (\ s a -> s{_rsRoomId = a})
 
+instance FromJSON RoomStatus where
+        parseJSON
+          = withObject "RoomStatus"
+              (\ o ->
+                 RoomStatus <$>
+                   (o .:? "status") <*>
+                     (o .:? "kind" .!= "games#roomStatus")
+                     <*> (o .:? "autoMatchingStatus")
+                     <*> (o .:? "statusVersion")
+                     <*> (o .:? "participants" .!= mempty)
+                     <*> (o .:? "roomId"))
+
+instance ToJSON RoomStatus where
+        toJSON RoomStatus{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _rsStatus,
+                  Just ("kind" .= _rsKind),
+                  ("autoMatchingStatus" .=) <$> _rsAutoMatchingStatus,
+                  ("statusVersion" .=) <$> _rsStatusVersion,
+                  ("participants" .=) <$> _rsParticipants,
+                  ("roomId" .=) <$> _rsRoomId])
+
 -- | This is a JSON template for a request to submit a score to leaderboards.
 --
 -- /See:/ 'scoreSubmission' smart constructor.
@@ -5242,6 +6949,25 @@ ssLeaderboardId :: Lens' ScoreSubmission (Maybe Text)
 ssLeaderboardId
   = lens _ssLeaderboardId
       (\ s a -> s{_ssLeaderboardId = a})
+
+instance FromJSON ScoreSubmission where
+        parseJSON
+          = withObject "ScoreSubmission"
+              (\ o ->
+                 ScoreSubmission <$>
+                   (o .:? "signature") <*> (o .:? "scoreTag") <*>
+                     (o .:? "score")
+                     <*> (o .:? "kind" .!= "games#scoreSubmission")
+                     <*> (o .:? "leaderboardId"))
+
+instance ToJSON ScoreSubmission where
+        toJSON ScoreSubmission{..}
+          = object
+              (catMaybes
+                 [("signature" .=) <$> _ssSignature,
+                  ("scoreTag" .=) <$> _ssScoreTag,
+                  ("score" .=) <$> _ssScore, Just ("kind" .= _ssKind),
+                  ("leaderboardId" .=) <$> _ssLeaderboardId])
 
 -- | This is a JSON template for an snapshot object.
 --
@@ -5361,6 +7087,38 @@ sDescription
 sDriveId :: Lens' Snapshot (Maybe Text)
 sDriveId = lens _sDriveId (\ s a -> s{_sDriveId = a})
 
+instance FromJSON Snapshot where
+        parseJSON
+          = withObject "Snapshot"
+              (\ o ->
+                 Snapshot <$>
+                   (o .:? "lastModifiedMillis") <*>
+                     (o .:? "kind" .!= "games#snapshot")
+                     <*> (o .:? "progressValue")
+                     <*> (o .:? "uniqueName")
+                     <*> (o .:? "coverImage")
+                     <*> (o .:? "id")
+                     <*> (o .:? "durationMillis")
+                     <*> (o .:? "title")
+                     <*> (o .:? "type")
+                     <*> (o .:? "description")
+                     <*> (o .:? "driveId"))
+
+instance ToJSON Snapshot where
+        toJSON Snapshot{..}
+          = object
+              (catMaybes
+                 [("lastModifiedMillis" .=) <$> _sLastModifiedMillis,
+                  Just ("kind" .= _sKind),
+                  ("progressValue" .=) <$> _sProgressValue,
+                  ("uniqueName" .=) <$> _sUniqueName,
+                  ("coverImage" .=) <$> _sCoverImage,
+                  ("id" .=) <$> _sId,
+                  ("durationMillis" .=) <$> _sDurationMillis,
+                  ("title" .=) <$> _sTitle, ("type" .=) <$> _sType,
+                  ("description" .=) <$> _sDescription,
+                  ("driveId" .=) <$> _sDriveId])
+
 -- | This is a JSON template for an image of a snapshot.
 --
 -- /See:/ 'snapshotImage' smart constructor.
@@ -5419,6 +7177,26 @@ siMimeType
 siWidth :: Lens' SnapshotImage (Maybe Int32)
 siWidth = lens _siWidth (\ s a -> s{_siWidth = a})
 
+instance FromJSON SnapshotImage where
+        parseJSON
+          = withObject "SnapshotImage"
+              (\ o ->
+                 SnapshotImage <$>
+                   (o .:? "height") <*>
+                     (o .:? "kind" .!= "games#snapshotImage")
+                     <*> (o .:? "url")
+                     <*> (o .:? "mime_type")
+                     <*> (o .:? "width"))
+
+instance ToJSON SnapshotImage where
+        toJSON SnapshotImage{..}
+          = object
+              (catMaybes
+                 [("height" .=) <$> _siHeight,
+                  Just ("kind" .= _siKind), ("url" .=) <$> _siUrl,
+                  ("mime_type" .=) <$> _siMimeType,
+                  ("width" .=) <$> _siWidth])
+
 -- | This is a JSON template for a list of snapshot objects.
 --
 -- /See:/ 'snapshotListResponse' smart constructor.
@@ -5464,6 +7242,23 @@ slrItems
   = lens _slrItems (\ s a -> s{_slrItems = a}) .
       _Default
       . _Coerce
+
+instance FromJSON SnapshotListResponse where
+        parseJSON
+          = withObject "SnapshotListResponse"
+              (\ o ->
+                 SnapshotListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "games#snapshotListResponse")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON SnapshotListResponse where
+        toJSON SnapshotListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _slrNextPageToken,
+                  Just ("kind" .= _slrKind),
+                  ("items" .=) <$> _slrItems])
 
 -- | This is a JSON template for an turn-based auto-match criteria object.
 --
@@ -5523,6 +7318,28 @@ tbamcMinAutoMatchingPlayers :: Lens' TurnBasedAutoMatchingCriteria (Maybe Int32)
 tbamcMinAutoMatchingPlayers
   = lens _tbamcMinAutoMatchingPlayers
       (\ s a -> s{_tbamcMinAutoMatchingPlayers = a})
+
+instance FromJSON TurnBasedAutoMatchingCriteria where
+        parseJSON
+          = withObject "TurnBasedAutoMatchingCriteria"
+              (\ o ->
+                 TurnBasedAutoMatchingCriteria <$>
+                   (o .:? "kind" .!=
+                      "games#turnBasedAutoMatchingCriteria")
+                     <*> (o .:? "exclusiveBitmask")
+                     <*> (o .:? "maxAutoMatchingPlayers")
+                     <*> (o .:? "minAutoMatchingPlayers"))
+
+instance ToJSON TurnBasedAutoMatchingCriteria where
+        toJSON TurnBasedAutoMatchingCriteria{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _tbamcKind),
+                  ("exclusiveBitmask" .=) <$> _tbamcExclusiveBitmask,
+                  ("maxAutoMatchingPlayers" .=) <$>
+                    _tbamcMaxAutoMatchingPlayers,
+                  ("minAutoMatchingPlayers" .=) <$>
+                    _tbamcMinAutoMatchingPlayers])
 
 -- | This is a JSON template for a turn-based match resource object.
 --
@@ -5758,6 +7575,57 @@ tbmMatchVersion
   = lens _tbmMatchVersion
       (\ s a -> s{_tbmMatchVersion = a})
 
+instance FromJSON TurnBasedMatch where
+        parseJSON
+          = withObject "TurnBasedMatch"
+              (\ o ->
+                 TurnBasedMatch <$>
+                   (o .:? "status") <*> (o .:? "variant") <*>
+                     (o .:? "results" .!= mempty)
+                     <*> (o .:? "matchNumber")
+                     <*> (o .:? "kind" .!= "games#turnBasedMatch")
+                     <*> (o .:? "data")
+                     <*> (o .:? "withParticipantId")
+                     <*> (o .:? "creationDetails")
+                     <*> (o .:? "inviterId")
+                     <*> (o .:? "lastUpdateDetails")
+                     <*> (o .:? "participants" .!= mempty)
+                     <*> (o .:? "applicationId")
+                     <*> (o .:? "autoMatchingCriteria")
+                     <*> (o .:? "previousMatchData")
+                     <*> (o .:? "pendingParticipantId")
+                     <*> (o .:? "userMatchStatus")
+                     <*> (o .:? "matchId")
+                     <*> (o .:? "description")
+                     <*> (o .:? "rematchId")
+                     <*> (o .:? "matchVersion"))
+
+instance ToJSON TurnBasedMatch where
+        toJSON TurnBasedMatch{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _tbmStatus,
+                  ("variant" .=) <$> _tbmVariant,
+                  ("results" .=) <$> _tbmResults,
+                  ("matchNumber" .=) <$> _tbmMatchNumber,
+                  Just ("kind" .= _tbmKind), ("data" .=) <$> _tbmData,
+                  ("withParticipantId" .=) <$> _tbmWithParticipantId,
+                  ("creationDetails" .=) <$> _tbmCreationDetails,
+                  ("inviterId" .=) <$> _tbmInviterId,
+                  ("lastUpdateDetails" .=) <$> _tbmLastUpdateDetails,
+                  ("participants" .=) <$> _tbmParticipants,
+                  ("applicationId" .=) <$> _tbmApplicationId,
+                  ("autoMatchingCriteria" .=) <$>
+                    _tbmAutoMatchingCriteria,
+                  ("previousMatchData" .=) <$> _tbmPreviousMatchData,
+                  ("pendingParticipantId" .=) <$>
+                    _tbmPendingParticipantId,
+                  ("userMatchStatus" .=) <$> _tbmUserMatchStatus,
+                  ("matchId" .=) <$> _tbmMatchId,
+                  ("description" .=) <$> _tbmDescription,
+                  ("rematchId" .=) <$> _tbmRematchId,
+                  ("matchVersion" .=) <$> _tbmMatchVersion])
+
 -- | This is a JSON template for a turn-based match creation request.
 --
 -- /See:/ 'turnBasedMatchCreateRequest' smart constructor.
@@ -5827,6 +7695,28 @@ tbmcrAutoMatchingCriteria
   = lens _tbmcrAutoMatchingCriteria
       (\ s a -> s{_tbmcrAutoMatchingCriteria = a})
 
+instance FromJSON TurnBasedMatchCreateRequest where
+        parseJSON
+          = withObject "TurnBasedMatchCreateRequest"
+              (\ o ->
+                 TurnBasedMatchCreateRequest <$>
+                   (o .:? "requestId") <*> (o .:? "variant") <*>
+                     (o .:? "kind" .!=
+                        "games#turnBasedMatchCreateRequest")
+                     <*> (o .:? "invitedPlayerIds" .!= mempty)
+                     <*> (o .:? "autoMatchingCriteria"))
+
+instance ToJSON TurnBasedMatchCreateRequest where
+        toJSON TurnBasedMatchCreateRequest{..}
+          = object
+              (catMaybes
+                 [("requestId" .=) <$> _tbmcrRequestId,
+                  ("variant" .=) <$> _tbmcrVariant,
+                  Just ("kind" .= _tbmcrKind),
+                  ("invitedPlayerIds" .=) <$> _tbmcrInvitedPlayerIds,
+                  ("autoMatchingCriteria" .=) <$>
+                    _tbmcrAutoMatchingCriteria])
+
 -- | This is a JSON template for a turn-based match data object.
 --
 -- /See:/ 'turnBasedMatchData' smart constructor.
@@ -5871,6 +7761,23 @@ tbmdDataAvailable
   = lens _tbmdDataAvailable
       (\ s a -> s{_tbmdDataAvailable = a})
 
+instance FromJSON TurnBasedMatchData where
+        parseJSON
+          = withObject "TurnBasedMatchData"
+              (\ o ->
+                 TurnBasedMatchData <$>
+                   (o .:? "kind" .!= "games#turnBasedMatchData") <*>
+                     (o .:? "data")
+                     <*> (o .:? "dataAvailable"))
+
+instance ToJSON TurnBasedMatchData where
+        toJSON TurnBasedMatchData{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _tbmdKind),
+                  ("data" .=) <$> _tbmdData,
+                  ("dataAvailable" .=) <$> _tbmdDataAvailable])
+
 -- | This is a JSON template for sending a turn-based match data object.
 --
 -- /See:/ 'turnBasedMatchDataRequest' smart constructor.
@@ -5905,6 +7812,21 @@ tbmdrKind
 tbmdrData :: Lens' TurnBasedMatchDataRequest (Maybe Word8)
 tbmdrData
   = lens _tbmdrData (\ s a -> s{_tbmdrData = a})
+
+instance FromJSON TurnBasedMatchDataRequest where
+        parseJSON
+          = withObject "TurnBasedMatchDataRequest"
+              (\ o ->
+                 TurnBasedMatchDataRequest <$>
+                   (o .:? "kind" .!= "games#turnBasedMatchDataRequest")
+                     <*> (o .:? "data"))
+
+instance ToJSON TurnBasedMatchDataRequest where
+        toJSON TurnBasedMatchDataRequest{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _tbmdrKind),
+                  ("data" .=) <$> _tbmdrData])
 
 -- | This is a JSON template for a list of turn-based matches.
 --
@@ -5951,6 +7873,23 @@ tbmlItems
       _Default
       . _Coerce
 
+instance FromJSON TurnBasedMatchList where
+        parseJSON
+          = withObject "TurnBasedMatchList"
+              (\ o ->
+                 TurnBasedMatchList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "games#turnBasedMatchList")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON TurnBasedMatchList where
+        toJSON TurnBasedMatchList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _tbmlNextPageToken,
+                  Just ("kind" .= _tbmlKind),
+                  ("items" .=) <$> _tbmlItems])
+
 -- | This is a JSON template for turn-based match modification metadata.
 --
 -- /See:/ 'turnBasedMatchModification' smart constructor.
@@ -5995,6 +7934,24 @@ tbmmModifiedTimestampMillis :: Lens' TurnBasedMatchModification (Maybe Int64)
 tbmmModifiedTimestampMillis
   = lens _tbmmModifiedTimestampMillis
       (\ s a -> s{_tbmmModifiedTimestampMillis = a})
+
+instance FromJSON TurnBasedMatchModification where
+        parseJSON
+          = withObject "TurnBasedMatchModification"
+              (\ o ->
+                 TurnBasedMatchModification <$>
+                   (o .:? "participantId") <*>
+                     (o .:? "kind" .!= "games#turnBasedMatchModification")
+                     <*> (o .:? "modifiedTimestampMillis"))
+
+instance ToJSON TurnBasedMatchModification where
+        toJSON TurnBasedMatchModification{..}
+          = object
+              (catMaybes
+                 [("participantId" .=) <$> _tbmmParticipantId,
+                  Just ("kind" .= _tbmmKind),
+                  ("modifiedTimestampMillis" .=) <$>
+                    _tbmmModifiedTimestampMillis])
 
 -- | This is a JSON template for a participant in a turn-based match.
 --
@@ -6082,6 +8039,28 @@ tbmpAutoMatchedPlayer
   = lens _tbmpAutoMatchedPlayer
       (\ s a -> s{_tbmpAutoMatchedPlayer = a})
 
+instance FromJSON TurnBasedMatchParticipant where
+        parseJSON
+          = withObject "TurnBasedMatchParticipant"
+              (\ o ->
+                 TurnBasedMatchParticipant <$>
+                   (o .:? "status") <*>
+                     (o .:? "kind" .!= "games#turnBasedMatchParticipant")
+                     <*> (o .:? "id")
+                     <*> (o .:? "autoMatched")
+                     <*> (o .:? "player")
+                     <*> (o .:? "autoMatchedPlayer"))
+
+instance ToJSON TurnBasedMatchParticipant where
+        toJSON TurnBasedMatchParticipant{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _tbmpStatus,
+                  Just ("kind" .= _tbmpKind), ("id" .=) <$> _tbmpId,
+                  ("autoMatched" .=) <$> _tbmpAutoMatched,
+                  ("player" .=) <$> _tbmpPlayer,
+                  ("autoMatchedPlayer" .=) <$> _tbmpAutoMatchedPlayer])
+
 -- | This is a JSON template for a rematch response.
 --
 -- /See:/ 'turnBasedMatchRematch' smart constructor.
@@ -6125,6 +8104,23 @@ tPreviousMatch :: Lens' TurnBasedMatchRematch (Maybe (Maybe TurnBasedMatch))
 tPreviousMatch
   = lens _tPreviousMatch
       (\ s a -> s{_tPreviousMatch = a})
+
+instance FromJSON TurnBasedMatchRematch where
+        parseJSON
+          = withObject "TurnBasedMatchRematch"
+              (\ o ->
+                 TurnBasedMatchRematch <$>
+                   (o .:? "rematch") <*>
+                     (o .:? "kind" .!= "games#turnBasedMatchRematch")
+                     <*> (o .:? "previousMatch"))
+
+instance ToJSON TurnBasedMatchRematch where
+        toJSON TurnBasedMatchRematch{..}
+          = object
+              (catMaybes
+                 [("rematch" .=) <$> _tRematch,
+                  Just ("kind" .= _tKind),
+                  ("previousMatch" .=) <$> _tPreviousMatch])
 
 -- | This is a JSON template for a turn-based match results object.
 --
@@ -6178,6 +8174,25 @@ tbmrMatchVersion :: Lens' TurnBasedMatchResults (Maybe Int32)
 tbmrMatchVersion
   = lens _tbmrMatchVersion
       (\ s a -> s{_tbmrMatchVersion = a})
+
+instance FromJSON TurnBasedMatchResults where
+        parseJSON
+          = withObject "TurnBasedMatchResults"
+              (\ o ->
+                 TurnBasedMatchResults <$>
+                   (o .:? "results" .!= mempty) <*>
+                     (o .:? "kind" .!= "games#turnBasedMatchResults")
+                     <*> (o .:? "data")
+                     <*> (o .:? "matchVersion"))
+
+instance ToJSON TurnBasedMatchResults where
+        toJSON TurnBasedMatchResults{..}
+          = object
+              (catMaybes
+                 [("results" .=) <$> _tbmrResults,
+                  Just ("kind" .= _tbmrKind),
+                  ("data" .=) <$> _tbmrData,
+                  ("matchVersion" .=) <$> _tbmrMatchVersion])
 
 -- | This is a JSON template for a list of turn-based matches returned from a
 -- sync.
@@ -6236,6 +8251,24 @@ tbmsItems
   = lens _tbmsItems (\ s a -> s{_tbmsItems = a}) .
       _Default
       . _Coerce
+
+instance FromJSON TurnBasedMatchSync where
+        parseJSON
+          = withObject "TurnBasedMatchSync"
+              (\ o ->
+                 TurnBasedMatchSync <$>
+                   (o .:? "moreAvailable") <*> (o .:? "nextPageToken")
+                     <*> (o .:? "kind" .!= "games#turnBasedMatchSync")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON TurnBasedMatchSync where
+        toJSON TurnBasedMatchSync{..}
+          = object
+              (catMaybes
+                 [("moreAvailable" .=) <$> _tbmsMoreAvailable,
+                  ("nextPageToken" .=) <$> _tbmsNextPageToken,
+                  Just ("kind" .= _tbmsKind),
+                  ("items" .=) <$> _tbmsItems])
 
 -- | This is a JSON template for the object representing a turn.
 --
@@ -6304,3 +8337,25 @@ tbmtMatchVersion :: Lens' TurnBasedMatchTurn (Maybe Int32)
 tbmtMatchVersion
   = lens _tbmtMatchVersion
       (\ s a -> s{_tbmtMatchVersion = a})
+
+instance FromJSON TurnBasedMatchTurn where
+        parseJSON
+          = withObject "TurnBasedMatchTurn"
+              (\ o ->
+                 TurnBasedMatchTurn <$>
+                   (o .:? "results" .!= mempty) <*>
+                     (o .:? "kind" .!= "games#turnBasedMatchTurn")
+                     <*> (o .:? "data")
+                     <*> (o .:? "pendingParticipantId")
+                     <*> (o .:? "matchVersion"))
+
+instance ToJSON TurnBasedMatchTurn where
+        toJSON TurnBasedMatchTurn{..}
+          = object
+              (catMaybes
+                 [("results" .=) <$> _tbmtResults,
+                  Just ("kind" .= _tbmtKind),
+                  ("data" .=) <$> _tbmtData,
+                  ("pendingParticipantId" .=) <$>
+                    _tbmtPendingParticipantId,
+                  ("matchVersion" .=) <$> _tbmtMatchVersion])

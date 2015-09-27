@@ -61,12 +61,14 @@ type WebfontsAPI = WebfontsList
 -- | Retrieves the list of fonts currently served by the Google Fonts
 -- Developer API
 type WebfontsList =
-     "webfonts" :> "v1" :> "webfonts" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "sort" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "webfonts" :>
+       "v1" :>
+         "webfonts" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "sort" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Get '[JSON] WebfontList

@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -65,6 +66,20 @@ bMembers
 bRole :: Lens' Binding (Maybe Text)
 bRole = lens _bRole (\ s a -> s{_bRole = a})
 
+instance FromJSON Binding where
+        parseJSON
+          = withObject "Binding"
+              (\ o ->
+                 Binding <$>
+                   (o .:? "members" .!= mempty) <*> (o .:? "role"))
+
+instance ToJSON Binding where
+        toJSON Binding{..}
+          = object
+              (catMaybes
+                 [("members" .=) <$> _bMembers,
+                  ("role" .=) <$> _bRole])
+
 -- | A generic empty message that you can re-use to avoid defining duplicated
 -- empty messages in your APIs. A typical example is to use it as the
 -- request or the response type of an API method. For instance: service Foo
@@ -82,6 +97,12 @@ empty
     :: Empty
 empty = Empty
 
+instance FromJSON Empty where
+        parseJSON = withObject "Empty" (\ o -> pure Empty)
+
+instance ToJSON Empty where
+        toJSON = const (Object mempty)
+
 -- | Request message for \`GetIamPolicy\` method.
 --
 -- /See:/ 'getIamPolicyRequest' smart constructor.
@@ -94,6 +115,14 @@ data GetIamPolicyRequest =
 getIamPolicyRequest
     :: GetIamPolicyRequest
 getIamPolicyRequest = GetIamPolicyRequest
+
+instance FromJSON GetIamPolicyRequest where
+        parseJSON
+          = withObject "GetIamPolicyRequest"
+              (\ o -> pure GetIamPolicyRequest)
+
+instance ToJSON GetIamPolicyRequest where
+        toJSON = const (Object mempty)
 
 -- | The response returned from the ListOrganizations method.
 --
@@ -136,6 +165,21 @@ lorOrganizations
       (\ s a -> s{_lorOrganizations = a})
       . _Default
       . _Coerce
+
+instance FromJSON ListOrganizationsResponse where
+        parseJSON
+          = withObject "ListOrganizationsResponse"
+              (\ o ->
+                 ListOrganizationsResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "organizations" .!= mempty))
+
+instance ToJSON ListOrganizationsResponse where
+        toJSON ListOrganizationsResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lorNextPageToken,
+                  ("organizations" .=) <$> _lorOrganizations])
 
 -- | A page of the response received from the
 -- [ListProjects][google.cloudresourcemanager.projects.v1beta1.DeveloperProjects.ListProjects]
@@ -185,6 +229,21 @@ lprProjects
       _Default
       . _Coerce
 
+instance FromJSON ListProjectsResponse where
+        parseJSON
+          = withObject "ListProjectsResponse"
+              (\ o ->
+                 ListProjectsResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "projects" .!= mempty))
+
+instance ToJSON ListProjectsResponse where
+        toJSON ListProjectsResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lprNextPageToken,
+                  ("projects" .=) <$> _lprProjects])
+
 -- | The root node in the resource hierarchy to which a particular entity\'s
 -- (e.g., company) resources belong.
 --
@@ -232,6 +291,22 @@ oOrganizationId
   = lens _oOrganizationId
       (\ s a -> s{_oOrganizationId = a})
 
+instance FromJSON Organization where
+        parseJSON
+          = withObject "Organization"
+              (\ o ->
+                 Organization <$>
+                   (o .:? "owner") <*> (o .:? "displayName") <*>
+                     (o .:? "organizationId"))
+
+instance ToJSON Organization where
+        toJSON Organization{..}
+          = object
+              (catMaybes
+                 [("owner" .=) <$> _oOwner,
+                  ("displayName" .=) <$> _oDisplayName,
+                  ("organizationId" .=) <$> _oOrganizationId])
+
 -- | The entity that owns an Organization. The lifetime of the Organization
 -- and all of its descendants are bound to the OrganizationOwner. If the
 -- OrganizationOwner is deleted, the Organization and all its descendants
@@ -259,6 +334,19 @@ ooDirectoryCustomerId :: Lens' OrganizationOwner (Maybe Text)
 ooDirectoryCustomerId
   = lens _ooDirectoryCustomerId
       (\ s a -> s{_ooDirectoryCustomerId = a})
+
+instance FromJSON OrganizationOwner where
+        parseJSON
+          = withObject "OrganizationOwner"
+              (\ o ->
+                 OrganizationOwner <$> (o .:? "directoryCustomerId"))
+
+instance ToJSON OrganizationOwner where
+        toJSON OrganizationOwner{..}
+          = object
+              (catMaybes
+                 [("directoryCustomerId" .=) <$>
+                    _ooDirectoryCustomerId])
 
 -- | Defines an Identity and Access Management (IAM) policy. It is used to
 -- specify access control policies for Cloud Platform resources. A
@@ -315,6 +403,22 @@ pBindings
   = lens _pBindings (\ s a -> s{_pBindings = a}) .
       _Default
       . _Coerce
+
+instance FromJSON Policy where
+        parseJSON
+          = withObject "Policy"
+              (\ o ->
+                 Policy <$>
+                   (o .:? "etag") <*> (o .:? "version") <*>
+                     (o .:? "bindings" .!= mempty))
+
+instance ToJSON Policy where
+        toJSON Policy{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _pEtag,
+                  ("version" .=) <$> _pVersion,
+                  ("bindings" .=) <$> _pBindings])
 
 -- | A Project is a high-level Google Cloud Platform entity. It is a
 -- container for ACLs, APIs, AppEngine Apps, VMs, and other Google Cloud
@@ -412,6 +516,29 @@ pCreateTime :: Lens' Project (Maybe Text)
 pCreateTime
   = lens _pCreateTime (\ s a -> s{_pCreateTime = a})
 
+instance FromJSON Project where
+        parseJSON
+          = withObject "Project"
+              (\ o ->
+                 Project <$>
+                   (o .:? "parent") <*> (o .:? "projectNumber") <*>
+                     (o .:? "name")
+                     <*> (o .:? "labels")
+                     <*> (o .:? "projectId")
+                     <*> (o .:? "lifecycleState")
+                     <*> (o .:? "createTime"))
+
+instance ToJSON Project where
+        toJSON Project{..}
+          = object
+              (catMaybes
+                 [("parent" .=) <$> _pParent,
+                  ("projectNumber" .=) <$> _pProjectNumber,
+                  ("name" .=) <$> _pName, ("labels" .=) <$> _pLabels,
+                  ("projectId" .=) <$> _pProjectId,
+                  ("lifecycleState" .=) <$> _pLifecycleState,
+                  ("createTime" .=) <$> _pCreateTime])
+
 -- | The labels associated with this project. Label keys must be between 1
 -- and 63 characters long and must conform to the following regular
 -- expression: \\[a-z\\](\\[-a-z0-9\\]*\\[a-z0-9\\])?. Label values must be
@@ -432,6 +559,14 @@ data ProjectLabels =
 projectLabels
     :: ProjectLabels
 projectLabels = ProjectLabels
+
+instance FromJSON ProjectLabels where
+        parseJSON
+          = withObject "ProjectLabels"
+              (\ o -> pure ProjectLabels)
+
+instance ToJSON ProjectLabels where
+        toJSON = const (Object mempty)
 
 -- | A container to reference an id for any resource type. A \'resource\' in
 -- Google Cloud Platform is a generic term for something you (a developer)
@@ -469,6 +604,18 @@ riId = lens _riId (\ s a -> s{_riId = a})
 riType :: Lens' ResourceId (Maybe Text)
 riType = lens _riType (\ s a -> s{_riType = a})
 
+instance FromJSON ResourceId where
+        parseJSON
+          = withObject "ResourceId"
+              (\ o ->
+                 ResourceId <$> (o .:? "id") <*> (o .:? "type"))
+
+instance ToJSON ResourceId where
+        toJSON ResourceId{..}
+          = object
+              (catMaybes
+                 [("id" .=) <$> _riId, ("type" .=) <$> _riType])
+
 -- | Request message for \`SetIamPolicy\` method.
 --
 -- /See:/ 'setIamPolicyRequest' smart constructor.
@@ -495,6 +642,15 @@ setIamPolicyRequest =
 siprPolicy :: Lens' SetIamPolicyRequest (Maybe (Maybe Policy))
 siprPolicy
   = lens _siprPolicy (\ s a -> s{_siprPolicy = a})
+
+instance FromJSON SetIamPolicyRequest where
+        parseJSON
+          = withObject "SetIamPolicyRequest"
+              (\ o -> SetIamPolicyRequest <$> (o .:? "policy"))
+
+instance ToJSON SetIamPolicyRequest where
+        toJSON SetIamPolicyRequest{..}
+          = object (catMaybes [("policy" .=) <$> _siprPolicy])
 
 -- | Request message for \`TestIamPermissions\` method.
 --
@@ -524,6 +680,19 @@ tiamprPermissions
       . _Default
       . _Coerce
 
+instance FromJSON TestIamPermissionsRequest where
+        parseJSON
+          = withObject "TestIamPermissionsRequest"
+              (\ o ->
+                 TestIamPermissionsRequest <$>
+                   (o .:? "permissions" .!= mempty))
+
+instance ToJSON TestIamPermissionsRequest where
+        toJSON TestIamPermissionsRequest{..}
+          = object
+              (catMaybes
+                 [("permissions" .=) <$> _tiamprPermissions])
+
 -- | Response message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIamPermissionsResponse' smart constructor.
@@ -551,3 +720,15 @@ tiprPermissions
       (\ s a -> s{_tiprPermissions = a})
       . _Default
       . _Coerce
+
+instance FromJSON TestIamPermissionsResponse where
+        parseJSON
+          = withObject "TestIamPermissionsResponse"
+              (\ o ->
+                 TestIamPermissionsResponse <$>
+                   (o .:? "permissions" .!= mempty))
+
+instance ToJSON TestIamPermissionsResponse where
+        toJSON TestIamPermissionsResponse{..}
+          = object
+              (catMaybes [("permissions" .=) <$> _tiprPermissions])

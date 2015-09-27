@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -103,6 +104,32 @@ accPermissions
   = lens _accPermissions
       (\ s a -> s{_accPermissions = a})
 
+instance FromJSON Account where
+        parseJSON
+          = withObject "Account"
+              (\ o ->
+                 Account <$>
+                   (o .:? "childLink") <*>
+                     (o .:? "kind" .!= "analytics#account")
+                     <*> (o .:? "created")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "id")
+                     <*> (o .:? "updated")
+                     <*> (o .:? "permissions"))
+
+instance ToJSON Account where
+        toJSON Account{..}
+          = object
+              (catMaybes
+                 [("childLink" .=) <$> _accChildLink,
+                  Just ("kind" .= _accKind),
+                  ("created" .=) <$> _accCreated,
+                  ("selfLink" .=) <$> _accSelfLink,
+                  ("name" .=) <$> _accName, ("id" .=) <$> _accId,
+                  ("updated" .=) <$> _accUpdated,
+                  ("permissions" .=) <$> _accPermissions])
+
 -- | Child link for an account entry. Points to the list of web properties
 -- for this account.
 --
@@ -135,6 +162,21 @@ aclHref = lens _aclHref (\ s a -> s{_aclHref = a})
 aclType :: Lens' AccountChildLink Text
 aclType = lens _aclType (\ s a -> s{_aclType = a})
 
+instance FromJSON AccountChildLink where
+        parseJSON
+          = withObject "AccountChildLink"
+              (\ o ->
+                 AccountChildLink <$>
+                   (o .:? "href") <*>
+                     (o .:? "type" .!= "analytics#webproperties"))
+
+instance ToJSON AccountChildLink where
+        toJSON AccountChildLink{..}
+          = object
+              (catMaybes
+                 [("href" .=) <$> _aclHref,
+                  Just ("type" .= _aclType)])
+
 -- | Permissions the user has for this account.
 --
 -- /See:/ 'accountPermissions' smart constructor.
@@ -161,6 +203,18 @@ apEffective
   = lens _apEffective (\ s a -> s{_apEffective = a}) .
       _Default
       . _Coerce
+
+instance FromJSON AccountPermissions where
+        parseJSON
+          = withObject "AccountPermissions"
+              (\ o ->
+                 AccountPermissions <$>
+                   (o .:? "effective" .!= mempty))
+
+instance ToJSON AccountPermissions where
+        toJSON AccountPermissions{..}
+          = object
+              (catMaybes [("effective" .=) <$> _apEffective])
 
 -- | JSON template for a linked account.
 --
@@ -208,6 +262,23 @@ arName = lens _arName (\ s a -> s{_arName = a})
 -- | Account ID.
 arId :: Lens' AccountRef (Maybe Text)
 arId = lens _arId (\ s a -> s{_arId = a})
+
+instance FromJSON AccountRef where
+        parseJSON
+          = withObject "AccountRef"
+              (\ o ->
+                 AccountRef <$>
+                   (o .:? "kind" .!= "analytics#accountRef") <*>
+                     (o .:? "href")
+                     <*> (o .:? "name")
+                     <*> (o .:? "id"))
+
+instance ToJSON AccountRef where
+        toJSON AccountRef{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _arKind), ("href" .=) <$> _arHref,
+                  ("name" .=) <$> _arName, ("id" .=) <$> _arId])
 
 -- | An AccountSummary collection lists a summary of accounts, properties and
 -- views (profiles) to which the user has access. Each resource in the
@@ -308,6 +379,32 @@ assPreviousLink
   = lens _assPreviousLink
       (\ s a -> s{_assPreviousLink = a})
 
+instance FromJSON AccountSummaries where
+        parseJSON
+          = withObject "AccountSummaries"
+              (\ o ->
+                 AccountSummaries <$>
+                   (o .:? "nextLink") <*> (o .:? "itemsPerPage") <*>
+                     (o .:? "kind" .!= "analytics#accountSummaries")
+                     <*> (o .:? "username")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "totalResults")
+                     <*> (o .:? "startIndex")
+                     <*> (o .:? "previousLink"))
+
+instance ToJSON AccountSummaries where
+        toJSON AccountSummaries{..}
+          = object
+              (catMaybes
+                 [("nextLink" .=) <$> _assNextLink,
+                  ("itemsPerPage" .=) <$> _assItemsPerPage,
+                  Just ("kind" .= _assKind),
+                  ("username" .=) <$> _assUsername,
+                  ("items" .=) <$> _assItems,
+                  ("totalResults" .=) <$> _assTotalResults,
+                  ("startIndex" .=) <$> _assStartIndex,
+                  ("previousLink" .=) <$> _assPreviousLink])
+
 -- | JSON template for an Analytics AccountSummary. An AccountSummary is a
 -- lightweight tree comprised of properties\/profiles.
 --
@@ -359,6 +456,24 @@ asName = lens _asName (\ s a -> s{_asName = a})
 -- | Account ID.
 asId :: Lens' AccountSummary (Maybe Text)
 asId = lens _asId (\ s a -> s{_asId = a})
+
+instance FromJSON AccountSummary where
+        parseJSON
+          = withObject "AccountSummary"
+              (\ o ->
+                 AccountSummary <$>
+                   (o .:? "kind" .!= "analytics#accountSummary") <*>
+                     (o .:? "webProperties" .!= mempty)
+                     <*> (o .:? "name")
+                     <*> (o .:? "id"))
+
+instance ToJSON AccountSummary where
+        toJSON AccountSummary{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _asKind),
+                  ("webProperties" .=) <$> _asWebProperties,
+                  ("name" .=) <$> _asName, ("id" .=) <$> _asId])
 
 -- | JSON template for an Analytics account ticket. The account ticket
 -- consists of the ticket ID and the basic information for the account,
@@ -431,6 +546,29 @@ atWebproperty
 -- | Account ticket ID used to access the account ticket.
 atId :: Lens' AccountTicket (Maybe Text)
 atId = lens _atId (\ s a -> s{_atId = a})
+
+instance FromJSON AccountTicket where
+        parseJSON
+          = withObject "AccountTicket"
+              (\ o ->
+                 AccountTicket <$>
+                   (o .:? "redirectUri") <*>
+                     (o .:? "kind" .!= "analytics#accountTicket")
+                     <*> (o .:? "profile")
+                     <*> (o .:? "account")
+                     <*> (o .:? "webproperty")
+                     <*> (o .:? "id"))
+
+instance ToJSON AccountTicket where
+        toJSON AccountTicket{..}
+          = object
+              (catMaybes
+                 [("redirectUri" .=) <$> _atRedirectUri,
+                  Just ("kind" .= _atKind),
+                  ("profile" .=) <$> _atProfile,
+                  ("account" .=) <$> _atAccount,
+                  ("webproperty" .=) <$> _atWebproperty,
+                  ("id" .=) <$> _atId])
 
 -- | An account collection provides a list of Analytics accounts to which a
 -- user has access. The account collection is the entry point to all
@@ -530,6 +668,32 @@ aPreviousLink
   = lens _aPreviousLink
       (\ s a -> s{_aPreviousLink = a})
 
+instance FromJSON Accounts where
+        parseJSON
+          = withObject "Accounts"
+              (\ o ->
+                 Accounts <$>
+                   (o .:? "nextLink") <*> (o .:? "itemsPerPage") <*>
+                     (o .:? "kind" .!= "analytics#accounts")
+                     <*> (o .:? "username")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "totalResults")
+                     <*> (o .:? "startIndex")
+                     <*> (o .:? "previousLink"))
+
+instance ToJSON Accounts where
+        toJSON Accounts{..}
+          = object
+              (catMaybes
+                 [("nextLink" .=) <$> _aNextLink,
+                  ("itemsPerPage" .=) <$> _aItemsPerPage,
+                  Just ("kind" .= _aKind),
+                  ("username" .=) <$> _aUsername,
+                  ("items" .=) <$> _aItems,
+                  ("totalResults" .=) <$> _aTotalResults,
+                  ("startIndex" .=) <$> _aStartIndex,
+                  ("previousLink" .=) <$> _aPreviousLink])
+
 -- | JSON template for an AdWords account.
 --
 -- /See:/ 'adWordsAccount' smart constructor.
@@ -574,6 +738,24 @@ awaCustomerId
   = lens _awaCustomerId
       (\ s a -> s{_awaCustomerId = a})
 
+instance FromJSON AdWordsAccount where
+        parseJSON
+          = withObject "AdWordsAccount"
+              (\ o ->
+                 AdWordsAccount <$>
+                   (o .:? "autoTaggingEnabled") <*>
+                     (o .:? "kind" .!= "analytics#adWordsAccount")
+                     <*> (o .:? "customerId"))
+
+instance ToJSON AdWordsAccount where
+        toJSON AdWordsAccount{..}
+          = object
+              (catMaybes
+                 [("autoTaggingEnabled" .=) <$>
+                    _awaAutoTaggingEnabled,
+                  Just ("kind" .= _awaKind),
+                  ("customerId" .=) <$> _awaCustomerId])
+
 -- | Request template for the delete upload data request.
 --
 -- /See:/ 'analyticsDataimportDeleteUploadDataRequest' smart constructor.
@@ -600,6 +782,23 @@ addudrCustomDataImportUids
       (\ s a -> s{_addudrCustomDataImportUids = a})
       . _Default
       . _Coerce
+
+instance FromJSON
+         AnalyticsDataimportDeleteUploadDataRequest where
+        parseJSON
+          = withObject
+              "AnalyticsDataimportDeleteUploadDataRequest"
+              (\ o ->
+                 AnalyticsDataimportDeleteUploadDataRequest <$>
+                   (o .:? "customDataImportUids" .!= mempty))
+
+instance ToJSON
+         AnalyticsDataimportDeleteUploadDataRequest where
+        toJSON AnalyticsDataimportDeleteUploadDataRequest{..}
+          = object
+              (catMaybes
+                 [("customDataImportUids" .=) <$>
+                    _addudrCustomDataImportUids])
 
 -- | JSON template for a metadata column.
 --
@@ -641,6 +840,23 @@ ccAttributes
 ccId :: Lens' Column (Maybe Text)
 ccId = lens _ccId (\ s a -> s{_ccId = a})
 
+instance FromJSON Column where
+        parseJSON
+          = withObject "Column"
+              (\ o ->
+                 Column <$>
+                   (o .:? "kind" .!= "analytics#column") <*>
+                     (o .:? "attributes")
+                     <*> (o .:? "id"))
+
+instance ToJSON Column where
+        toJSON Column{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _ccKind),
+                  ("attributes" .=) <$> _ccAttributes,
+                  ("id" .=) <$> _ccId])
+
 -- | Map of attribute name and value for this column.
 --
 -- /See:/ 'columnAttributes' smart constructor.
@@ -653,6 +869,14 @@ data ColumnAttributes =
 columnAttributes
     :: ColumnAttributes
 columnAttributes = ColumnAttributes
+
+instance FromJSON ColumnAttributes where
+        parseJSON
+          = withObject "ColumnAttributes"
+              (\ o -> pure ColumnAttributes)
+
+instance ToJSON ColumnAttributes where
+        toJSON = const (Object mempty)
 
 -- | Lists columns (dimensions and metrics) for a particular report type.
 --
@@ -718,6 +942,26 @@ colAttributeNames
       (\ s a -> s{_colAttributeNames = a})
       . _Default
       . _Coerce
+
+instance FromJSON Columns where
+        parseJSON
+          = withObject "Columns"
+              (\ o ->
+                 Columns <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!= "analytics#columns")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "totalResults")
+                     <*> (o .:? "attributeNames" .!= mempty))
+
+instance ToJSON Columns where
+        toJSON Columns{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _colEtag, Just ("kind" .= _colKind),
+                  ("items" .=) <$> _colItems,
+                  ("totalResults" .=) <$> _colTotalResults,
+                  ("attributeNames" .=) <$> _colAttributeNames])
 
 -- | JSON template for an Analytics custom data source.
 --
@@ -872,6 +1116,45 @@ cdsProfilesLinked
       . _Default
       . _Coerce
 
+instance FromJSON CustomDataSource where
+        parseJSON
+          = withObject "CustomDataSource"
+              (\ o ->
+                 CustomDataSource <$>
+                   (o .:? "parentLink") <*> (o .:? "webPropertyId") <*>
+                     (o .:? "childLink")
+                     <*> (o .:? "kind" .!= "analytics#customDataSource")
+                     <*> (o .:? "created")
+                     <*> (o .:? "uploadType")
+                     <*> (o .:? "importBehavior")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "accountId")
+                     <*> (o .:? "name")
+                     <*> (o .:? "id")
+                     <*> (o .:? "updated")
+                     <*> (o .:? "type")
+                     <*> (o .:? "description")
+                     <*> (o .:? "profilesLinked" .!= mempty))
+
+instance ToJSON CustomDataSource where
+        toJSON CustomDataSource{..}
+          = object
+              (catMaybes
+                 [("parentLink" .=) <$> _cdsParentLink,
+                  ("webPropertyId" .=) <$> _cdsWebPropertyId,
+                  ("childLink" .=) <$> _cdsChildLink,
+                  Just ("kind" .= _cdsKind),
+                  ("created" .=) <$> _cdsCreated,
+                  ("uploadType" .=) <$> _cdsUploadType,
+                  ("importBehavior" .=) <$> _cdsImportBehavior,
+                  ("selfLink" .=) <$> _cdsSelfLink,
+                  ("accountId" .=) <$> _cdsAccountId,
+                  ("name" .=) <$> _cdsName, ("id" .=) <$> _cdsId,
+                  ("updated" .=) <$> _cdsUpdated,
+                  ("type" .=) <$> _cdsType,
+                  ("description" .=) <$> _cdsDescription,
+                  ("profilesLinked" .=) <$> _cdsProfilesLinked])
+
 --
 -- /See:/ 'customDataSourceChildLink' smart constructor.
 data CustomDataSourceChildLink = CustomDataSourceChildLink
@@ -904,6 +1187,20 @@ cdsclHref
 cdsclType :: Lens' CustomDataSourceChildLink (Maybe Text)
 cdsclType
   = lens _cdsclType (\ s a -> s{_cdsclType = a})
+
+instance FromJSON CustomDataSourceChildLink where
+        parseJSON
+          = withObject "CustomDataSourceChildLink"
+              (\ o ->
+                 CustomDataSourceChildLink <$>
+                   (o .:? "href") <*> (o .:? "type"))
+
+instance ToJSON CustomDataSourceChildLink where
+        toJSON CustomDataSourceChildLink{..}
+          = object
+              (catMaybes
+                 [("href" .=) <$> _cdsclHref,
+                  ("type" .=) <$> _cdsclType])
 
 -- | Parent link for this custom data source. Points to the web property to
 -- which this custom data source belongs.
@@ -938,6 +1235,21 @@ cdsplHref
 cdsplType :: Lens' CustomDataSourceParentLink Text
 cdsplType
   = lens _cdsplType (\ s a -> s{_cdsplType = a})
+
+instance FromJSON CustomDataSourceParentLink where
+        parseJSON
+          = withObject "CustomDataSourceParentLink"
+              (\ o ->
+                 CustomDataSourceParentLink <$>
+                   (o .:? "href") <*>
+                     (o .:? "type" .!= "analytics#webproperty"))
+
+instance ToJSON CustomDataSourceParentLink where
+        toJSON CustomDataSourceParentLink{..}
+          = object
+              (catMaybes
+                 [("href" .=) <$> _cdsplHref,
+                  Just ("type" .= _cdsplType)])
 
 -- | Lists Analytics custom data sources to which the user has access. Each
 -- resource in the collection corresponds to a single Analytics custom data
@@ -1037,6 +1349,32 @@ cdssPreviousLink :: Lens' CustomDataSources (Maybe Text)
 cdssPreviousLink
   = lens _cdssPreviousLink
       (\ s a -> s{_cdssPreviousLink = a})
+
+instance FromJSON CustomDataSources where
+        parseJSON
+          = withObject "CustomDataSources"
+              (\ o ->
+                 CustomDataSources <$>
+                   (o .:? "nextLink") <*> (o .:? "itemsPerPage") <*>
+                     (o .:? "kind" .!= "analytics#customDataSources")
+                     <*> (o .:? "username")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "totalResults")
+                     <*> (o .:? "startIndex")
+                     <*> (o .:? "previousLink"))
+
+instance ToJSON CustomDataSources where
+        toJSON CustomDataSources{..}
+          = object
+              (catMaybes
+                 [("nextLink" .=) <$> _cdssNextLink,
+                  ("itemsPerPage" .=) <$> _cdssItemsPerPage,
+                  Just ("kind" .= _cdssKind),
+                  ("username" .=) <$> _cdssUsername,
+                  ("items" .=) <$> _cdssItems,
+                  ("totalResults" .=) <$> _cdssTotalResults,
+                  ("startIndex" .=) <$> _cdssStartIndex,
+                  ("previousLink" .=) <$> _cdssPreviousLink])
 
 -- | JSON template for Analytics Custom Dimension.
 --
@@ -1160,6 +1498,38 @@ cusUpdated
 cusIndex :: Lens' CustomDimension (Maybe Int32)
 cusIndex = lens _cusIndex (\ s a -> s{_cusIndex = a})
 
+instance FromJSON CustomDimension where
+        parseJSON
+          = withObject "CustomDimension"
+              (\ o ->
+                 CustomDimension <$>
+                   (o .:? "parentLink") <*> (o .:? "webPropertyId") <*>
+                     (o .:? "kind" .!= "analytics#customDimension")
+                     <*> (o .:? "created")
+                     <*> (o .:? "active")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "accountId")
+                     <*> (o .:? "name")
+                     <*> (o .:? "scope")
+                     <*> (o .:? "id")
+                     <*> (o .:? "updated")
+                     <*> (o .:? "index"))
+
+instance ToJSON CustomDimension where
+        toJSON CustomDimension{..}
+          = object
+              (catMaybes
+                 [("parentLink" .=) <$> _cusParentLink,
+                  ("webPropertyId" .=) <$> _cusWebPropertyId,
+                  Just ("kind" .= _cusKind),
+                  ("created" .=) <$> _cusCreated,
+                  ("active" .=) <$> _cusActive,
+                  ("selfLink" .=) <$> _cusSelfLink,
+                  ("accountId" .=) <$> _cusAccountId,
+                  ("name" .=) <$> _cusName, ("scope" .=) <$> _cusScope,
+                  ("id" .=) <$> _cusId, ("updated" .=) <$> _cusUpdated,
+                  ("index" .=) <$> _cusIndex])
+
 -- | Parent link for the custom dimension. Points to the property to which
 -- the custom dimension belongs.
 --
@@ -1191,6 +1561,21 @@ cdplHref = lens _cdplHref (\ s a -> s{_cdplHref = a})
 -- | Type of the parent link. Set to \"analytics#webproperty\".
 cdplType :: Lens' CustomDimensionParentLink Text
 cdplType = lens _cdplType (\ s a -> s{_cdplType = a})
+
+instance FromJSON CustomDimensionParentLink where
+        parseJSON
+          = withObject "CustomDimensionParentLink"
+              (\ o ->
+                 CustomDimensionParentLink <$>
+                   (o .:? "href") <*>
+                     (o .:? "type" .!= "analytics#webproperty"))
+
+instance ToJSON CustomDimensionParentLink where
+        toJSON CustomDimensionParentLink{..}
+          = object
+              (catMaybes
+                 [("href" .=) <$> _cdplHref,
+                  Just ("type" .= _cdplType)])
 
 -- | A custom dimension collection lists Analytics custom dimensions to which
 -- the user has access. Each resource in the collection corresponds to a
@@ -1288,6 +1673,32 @@ cdPreviousLink :: Lens' CustomDimensions (Maybe Text)
 cdPreviousLink
   = lens _cdPreviousLink
       (\ s a -> s{_cdPreviousLink = a})
+
+instance FromJSON CustomDimensions where
+        parseJSON
+          = withObject "CustomDimensions"
+              (\ o ->
+                 CustomDimensions <$>
+                   (o .:? "nextLink") <*> (o .:? "itemsPerPage") <*>
+                     (o .:? "kind" .!= "analytics#customDimensions")
+                     <*> (o .:? "username")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "totalResults")
+                     <*> (o .:? "startIndex")
+                     <*> (o .:? "previousLink"))
+
+instance ToJSON CustomDimensions where
+        toJSON CustomDimensions{..}
+          = object
+              (catMaybes
+                 [("nextLink" .=) <$> _cdNextLink,
+                  ("itemsPerPage" .=) <$> _cdItemsPerPage,
+                  Just ("kind" .= _cdKind),
+                  ("username" .=) <$> _cdUsername,
+                  ("items" .=) <$> _cdItems,
+                  ("totalResults" .=) <$> _cdTotalResults,
+                  ("startIndex" .=) <$> _cdStartIndex,
+                  ("previousLink" .=) <$> _cdPreviousLink])
 
 -- | JSON template for Analytics Custom Metric.
 --
@@ -1433,6 +1844,43 @@ cType = lens _cType (\ s a -> s{_cType = a})
 cIndex :: Lens' CustomMetric (Maybe Int32)
 cIndex = lens _cIndex (\ s a -> s{_cIndex = a})
 
+instance FromJSON CustomMetric where
+        parseJSON
+          = withObject "CustomMetric"
+              (\ o ->
+                 CustomMetric <$>
+                   (o .:? "parentLink") <*> (o .:? "webPropertyId") <*>
+                     (o .:? "kind" .!= "analytics#customMetric")
+                     <*> (o .:? "max_value")
+                     <*> (o .:? "created")
+                     <*> (o .:? "min_value")
+                     <*> (o .:? "active")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "accountId")
+                     <*> (o .:? "name")
+                     <*> (o .:? "scope")
+                     <*> (o .:? "id")
+                     <*> (o .:? "updated")
+                     <*> (o .:? "type")
+                     <*> (o .:? "index"))
+
+instance ToJSON CustomMetric where
+        toJSON CustomMetric{..}
+          = object
+              (catMaybes
+                 [("parentLink" .=) <$> _cParentLink,
+                  ("webPropertyId" .=) <$> _cWebPropertyId,
+                  Just ("kind" .= _cKind),
+                  ("max_value" .=) <$> _cMaxValue,
+                  ("created" .=) <$> _cCreated,
+                  ("min_value" .=) <$> _cMinValue,
+                  ("active" .=) <$> _cActive,
+                  ("selfLink" .=) <$> _cSelfLink,
+                  ("accountId" .=) <$> _cAccountId,
+                  ("name" .=) <$> _cName, ("scope" .=) <$> _cScope,
+                  ("id" .=) <$> _cId, ("updated" .=) <$> _cUpdated,
+                  ("type" .=) <$> _cType, ("index" .=) <$> _cIndex])
+
 -- | Parent link for the custom metric. Points to the property to which the
 -- custom metric belongs.
 --
@@ -1464,6 +1912,21 @@ cmplHref = lens _cmplHref (\ s a -> s{_cmplHref = a})
 -- | Type of the parent link. Set to \"analytics#webproperty\".
 cmplType :: Lens' CustomMetricParentLink Text
 cmplType = lens _cmplType (\ s a -> s{_cmplType = a})
+
+instance FromJSON CustomMetricParentLink where
+        parseJSON
+          = withObject "CustomMetricParentLink"
+              (\ o ->
+                 CustomMetricParentLink <$>
+                   (o .:? "href") <*>
+                     (o .:? "type" .!= "analytics#webproperty"))
+
+instance ToJSON CustomMetricParentLink where
+        toJSON CustomMetricParentLink{..}
+          = object
+              (catMaybes
+                 [("href" .=) <$> _cmplHref,
+                  Just ("type" .= _cmplType)])
 
 -- | A custom metric collection lists Analytics custom metrics to which the
 -- user has access. Each resource in the collection corresponds to a single
@@ -1562,6 +2025,32 @@ cmPreviousLink
   = lens _cmPreviousLink
       (\ s a -> s{_cmPreviousLink = a})
 
+instance FromJSON CustomMetrics where
+        parseJSON
+          = withObject "CustomMetrics"
+              (\ o ->
+                 CustomMetrics <$>
+                   (o .:? "nextLink") <*> (o .:? "itemsPerPage") <*>
+                     (o .:? "kind" .!= "analytics#customMetrics")
+                     <*> (o .:? "username")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "totalResults")
+                     <*> (o .:? "startIndex")
+                     <*> (o .:? "previousLink"))
+
+instance ToJSON CustomMetrics where
+        toJSON CustomMetrics{..}
+          = object
+              (catMaybes
+                 [("nextLink" .=) <$> _cmNextLink,
+                  ("itemsPerPage" .=) <$> _cmItemsPerPage,
+                  Just ("kind" .= _cmKind),
+                  ("username" .=) <$> _cmUsername,
+                  ("items" .=) <$> _cmItems,
+                  ("totalResults" .=) <$> _cmTotalResults,
+                  ("startIndex" .=) <$> _cmStartIndex,
+                  ("previousLink" .=) <$> _cmPreviousLink])
+
 -- | JSON template for Analytics Entity AdWords Link.
 --
 -- /See:/ 'entityAdWordsLink' smart constructor.
@@ -1644,6 +2133,30 @@ entEntity :: Lens' EntityAdWordsLink (Maybe EntityAdWordsLinkEntity)
 entEntity
   = lens _entEntity (\ s a -> s{_entEntity = a})
 
+instance FromJSON EntityAdWordsLink where
+        parseJSON
+          = withObject "EntityAdWordsLink"
+              (\ o ->
+                 EntityAdWordsLink <$>
+                   (o .:? "adWordsAccounts" .!= mempty) <*>
+                     (o .:? "profileIds" .!= mempty)
+                     <*> (o .:? "kind" .!= "analytics#entityAdWordsLink")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "id")
+                     <*> (o .:? "entity"))
+
+instance ToJSON EntityAdWordsLink where
+        toJSON EntityAdWordsLink{..}
+          = object
+              (catMaybes
+                 [("adWordsAccounts" .=) <$> _entAdWordsAccounts,
+                  ("profileIds" .=) <$> _entProfileIds,
+                  Just ("kind" .= _entKind),
+                  ("selfLink" .=) <$> _entSelfLink,
+                  ("name" .=) <$> _entName, ("id" .=) <$> _entId,
+                  ("entity" .=) <$> _entEntity])
+
 -- | Web property being linked.
 --
 -- /See:/ 'entityAdWordsLinkEntity' smart constructor.
@@ -1667,6 +2180,18 @@ eawleWebPropertyRef :: Lens' EntityAdWordsLinkEntity (Maybe (Maybe WebPropertyRe
 eawleWebPropertyRef
   = lens _eawleWebPropertyRef
       (\ s a -> s{_eawleWebPropertyRef = a})
+
+instance FromJSON EntityAdWordsLinkEntity where
+        parseJSON
+          = withObject "EntityAdWordsLinkEntity"
+              (\ o ->
+                 EntityAdWordsLinkEntity <$> (o .:? "webPropertyRef"))
+
+instance ToJSON EntityAdWordsLinkEntity where
+        toJSON EntityAdWordsLinkEntity{..}
+          = object
+              (catMaybes
+                 [("webPropertyRef" .=) <$> _eawleWebPropertyRef])
 
 -- | An entity AdWords link collection provides a list of GA-AdWords links
 -- Each resource in this collection corresponds to a single link.
@@ -1757,6 +2282,30 @@ eawlPreviousLink
   = lens _eawlPreviousLink
       (\ s a -> s{_eawlPreviousLink = a})
 
+instance FromJSON EntityAdWordsLinks where
+        parseJSON
+          = withObject "EntityAdWordsLinks"
+              (\ o ->
+                 EntityAdWordsLinks <$>
+                   (o .:? "nextLink") <*> (o .:? "itemsPerPage") <*>
+                     (o .:? "kind" .!= "analytics#entityAdWordsLinks")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "totalResults")
+                     <*> (o .:? "startIndex")
+                     <*> (o .:? "previousLink"))
+
+instance ToJSON EntityAdWordsLinks where
+        toJSON EntityAdWordsLinks{..}
+          = object
+              (catMaybes
+                 [("nextLink" .=) <$> _eawlNextLink,
+                  ("itemsPerPage" .=) <$> _eawlItemsPerPage,
+                  Just ("kind" .= _eawlKind),
+                  ("items" .=) <$> _eawlItems,
+                  ("totalResults" .=) <$> _eawlTotalResults,
+                  ("startIndex" .=) <$> _eawlStartIndex,
+                  ("previousLink" .=) <$> _eawlPreviousLink])
+
 -- | JSON template for an Analytics Entity-User Link. Returns permissions
 -- that a user has for an entity.
 --
@@ -1827,6 +2376,29 @@ eulEntity :: Lens' EntityUserLink (Maybe EntityUserLinkEntity)
 eulEntity
   = lens _eulEntity (\ s a -> s{_eulEntity = a})
 
+instance FromJSON EntityUserLink where
+        parseJSON
+          = withObject "EntityUserLink"
+              (\ o ->
+                 EntityUserLink <$>
+                   (o .:? "kind" .!= "analytics#entityUserLink") <*>
+                     (o .:? "userRef")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id")
+                     <*> (o .:? "permissions")
+                     <*> (o .:? "entity"))
+
+instance ToJSON EntityUserLink where
+        toJSON EntityUserLink{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _eulKind),
+                  ("userRef" .=) <$> _eulUserRef,
+                  ("selfLink" .=) <$> _eulSelfLink,
+                  ("id" .=) <$> _eulId,
+                  ("permissions" .=) <$> _eulPermissions,
+                  ("entity" .=) <$> _eulEntity])
+
 -- | Entity for this link. It can be an account, a web property, or a view
 -- (profile).
 --
@@ -1873,6 +2445,22 @@ euleWebPropertyRef
   = lens _euleWebPropertyRef
       (\ s a -> s{_euleWebPropertyRef = a})
 
+instance FromJSON EntityUserLinkEntity where
+        parseJSON
+          = withObject "EntityUserLinkEntity"
+              (\ o ->
+                 EntityUserLinkEntity <$>
+                   (o .:? "profileRef") <*> (o .:? "accountRef") <*>
+                     (o .:? "webPropertyRef"))
+
+instance ToJSON EntityUserLinkEntity where
+        toJSON EntityUserLinkEntity{..}
+          = object
+              (catMaybes
+                 [("profileRef" .=) <$> _euleProfileRef,
+                  ("accountRef" .=) <$> _euleAccountRef,
+                  ("webPropertyRef" .=) <$> _euleWebPropertyRef])
+
 -- | Permissions the user has for this entity.
 --
 -- /See:/ 'entityUserLinkPermissions' smart constructor.
@@ -1915,6 +2503,21 @@ eulpEffective
       (\ s a -> s{_eulpEffective = a})
       . _Default
       . _Coerce
+
+instance FromJSON EntityUserLinkPermissions where
+        parseJSON
+          = withObject "EntityUserLinkPermissions"
+              (\ o ->
+                 EntityUserLinkPermissions <$>
+                   (o .:? "local" .!= mempty) <*>
+                     (o .:? "effective" .!= mempty))
+
+instance ToJSON EntityUserLinkPermissions where
+        toJSON EntityUserLinkPermissions{..}
+          = object
+              (catMaybes
+                 [("local" .=) <$> _eulpLocal,
+                  ("effective" .=) <$> _eulpEffective])
 
 -- | An entity user link collection provides a list of Analytics ACL links
 -- Each resource in this collection corresponds to a single link.
@@ -2004,6 +2607,30 @@ eulsPreviousLink :: Lens' EntityUserLinks (Maybe Text)
 eulsPreviousLink
   = lens _eulsPreviousLink
       (\ s a -> s{_eulsPreviousLink = a})
+
+instance FromJSON EntityUserLinks where
+        parseJSON
+          = withObject "EntityUserLinks"
+              (\ o ->
+                 EntityUserLinks <$>
+                   (o .:? "nextLink") <*> (o .:? "itemsPerPage") <*>
+                     (o .:? "kind" .!= "analytics#entityUserLinks")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "totalResults")
+                     <*> (o .:? "startIndex")
+                     <*> (o .:? "previousLink"))
+
+instance ToJSON EntityUserLinks where
+        toJSON EntityUserLinks{..}
+          = object
+              (catMaybes
+                 [("nextLink" .=) <$> _eulsNextLink,
+                  ("itemsPerPage" .=) <$> _eulsItemsPerPage,
+                  Just ("kind" .= _eulsKind),
+                  ("items" .=) <$> _eulsItems,
+                  ("totalResults" .=) <$> _eulsTotalResults,
+                  ("startIndex" .=) <$> _eulsStartIndex,
+                  ("previousLink" .=) <$> _eulsPreviousLink])
 
 -- | JSON template for Analytics experiment resource.
 --
@@ -2339,6 +2966,76 @@ expDescription
   = lens _expDescription
       (\ s a -> s{_expDescription = a})
 
+instance FromJSON Experiment where
+        parseJSON
+          = withObject "Experiment"
+              (\ o ->
+                 Experiment <$>
+                   (o .:? "parentLink") <*> (o .:? "equalWeighting") <*>
+                     (o .:? "status")
+                     <*> (o .:? "webPropertyId")
+                     <*> (o .:? "startTime")
+                     <*> (o .:? "snippet")
+                     <*> (o .:? "kind" .!= "analytics#experiment")
+                     <*> (o .:? "created")
+                     <*> (o .:? "reasonExperimentEnded")
+                     <*> (o .:? "trafficCoverage")
+                     <*> (o .:? "editableInGaUi")
+                     <*> (o .:? "minimumExperimentLengthInDays")
+                     <*> (o .:? "profileId")
+                     <*> (o .:? "optimizationType")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "accountId")
+                     <*> (o .:? "name")
+                     <*> (o .:? "winnerFound")
+                     <*> (o .:? "endTime")
+                     <*> (o .:? "variations" .!= mempty)
+                     <*> (o .:? "internalWebPropertyId")
+                     <*> (o .:? "id")
+                     <*> (o .:? "updated")
+                     <*> (o .:? "rewriteVariationUrlsAsOriginal")
+                     <*> (o .:? "objectiveMetric")
+                     <*> (o .:? "winnerConfidenceLevel")
+                     <*> (o .:? "servingFramework")
+                     <*> (o .:? "description"))
+
+instance ToJSON Experiment where
+        toJSON Experiment{..}
+          = object
+              (catMaybes
+                 [("parentLink" .=) <$> _expParentLink,
+                  ("equalWeighting" .=) <$> _expEqualWeighting,
+                  ("status" .=) <$> _expStatus,
+                  ("webPropertyId" .=) <$> _expWebPropertyId,
+                  ("startTime" .=) <$> _expStartTime,
+                  ("snippet" .=) <$> _expSnippet,
+                  Just ("kind" .= _expKind),
+                  ("created" .=) <$> _expCreated,
+                  ("reasonExperimentEnded" .=) <$>
+                    _expReasonExperimentEnded,
+                  ("trafficCoverage" .=) <$> _expTrafficCoverage,
+                  ("editableInGaUi" .=) <$> _expEditableInGaUi,
+                  ("minimumExperimentLengthInDays" .=) <$>
+                    _expMinimumExperimentLengthInDays,
+                  ("profileId" .=) <$> _expProfileId,
+                  ("optimizationType" .=) <$> _expOptimizationType,
+                  ("selfLink" .=) <$> _expSelfLink,
+                  ("accountId" .=) <$> _expAccountId,
+                  ("name" .=) <$> _expName,
+                  ("winnerFound" .=) <$> _expWinnerFound,
+                  ("endTime" .=) <$> _expEndTime,
+                  ("variations" .=) <$> _expVariations,
+                  ("internalWebPropertyId" .=) <$>
+                    _expInternalWebPropertyId,
+                  ("id" .=) <$> _expId, ("updated" .=) <$> _expUpdated,
+                  ("rewriteVariationUrlsAsOriginal" .=) <$>
+                    _expRewriteVariationUrlsAsOriginal,
+                  ("objectiveMetric" .=) <$> _expObjectiveMetric,
+                  ("winnerConfidenceLevel" .=) <$>
+                    _expWinnerConfidenceLevel,
+                  ("servingFramework" .=) <$> _expServingFramework,
+                  ("description" .=) <$> _expDescription])
+
 --
 -- /See:/ 'experimentItemVariations' smart constructor.
 data ExperimentItemVariations = ExperimentItemVariations
@@ -2403,6 +3100,24 @@ eivWon = lens _eivWon (\ s a -> s{_eivWon = a})
 eivName :: Lens' ExperimentItemVariations (Maybe Text)
 eivName = lens _eivName (\ s a -> s{_eivName = a})
 
+instance FromJSON ExperimentItemVariations where
+        parseJSON
+          = withObject "ExperimentItemVariations"
+              (\ o ->
+                 ExperimentItemVariations <$>
+                   (o .:? "status") <*> (o .:? "weight") <*>
+                     (o .:? "url")
+                     <*> (o .:? "won")
+                     <*> (o .:? "name"))
+
+instance ToJSON ExperimentItemVariations where
+        toJSON ExperimentItemVariations{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _eivStatus,
+                  ("weight" .=) <$> _eivWeight, ("url" .=) <$> _eivUrl,
+                  ("won" .=) <$> _eivWon, ("name" .=) <$> _eivName])
+
 -- | Parent link for an experiment. Points to the view (profile) to which
 -- this experiment belongs.
 --
@@ -2435,6 +3150,21 @@ eplHref = lens _eplHref (\ s a -> s{_eplHref = a})
 -- | Value is \"analytics#profile\". This field is read-only.
 eplType :: Lens' ExperimentParentLink Text
 eplType = lens _eplType (\ s a -> s{_eplType = a})
+
+instance FromJSON ExperimentParentLink where
+        parseJSON
+          = withObject "ExperimentParentLink"
+              (\ o ->
+                 ExperimentParentLink <$>
+                   (o .:? "href") <*>
+                     (o .:? "type" .!= "analytics#profile"))
+
+instance ToJSON ExperimentParentLink where
+        toJSON ExperimentParentLink{..}
+          = object
+              (catMaybes
+                 [("href" .=) <$> _eplHref,
+                  Just ("type" .= _eplType)])
 
 -- | An experiment collection lists Analytics experiments to which the user
 -- has access. Each view (profile) can have a set of experiments. Each
@@ -2533,6 +3263,32 @@ ePreviousLink :: Lens' Experiments (Maybe Text)
 ePreviousLink
   = lens _ePreviousLink
       (\ s a -> s{_ePreviousLink = a})
+
+instance FromJSON Experiments where
+        parseJSON
+          = withObject "Experiments"
+              (\ o ->
+                 Experiments <$>
+                   (o .:? "nextLink") <*> (o .:? "itemsPerPage") <*>
+                     (o .:? "kind" .!= "analytics#experiments")
+                     <*> (o .:? "username")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "totalResults")
+                     <*> (o .:? "startIndex")
+                     <*> (o .:? "previousLink"))
+
+instance ToJSON Experiments where
+        toJSON Experiments{..}
+          = object
+              (catMaybes
+                 [("nextLink" .=) <$> _eNextLink,
+                  ("itemsPerPage" .=) <$> _eItemsPerPage,
+                  Just ("kind" .= _eKind),
+                  ("username" .=) <$> _eUsername,
+                  ("items" .=) <$> _eItems,
+                  ("totalResults" .=) <$> _eTotalResults,
+                  ("startIndex" .=) <$> _eStartIndex,
+                  ("previousLink" .=) <$> _ePreviousLink])
 
 -- | JSON template for an Analytics account filter.
 --
@@ -2686,6 +3442,45 @@ fSearchAndReplaceDetails
   = lens _fSearchAndReplaceDetails
       (\ s a -> s{_fSearchAndReplaceDetails = a})
 
+instance FromJSON Filter where
+        parseJSON
+          = withObject "Filter"
+              (\ o ->
+                 Filter <$>
+                   (o .:? "parentLink") <*> (o .:? "advancedDetails")
+                     <*> (o .:? "uppercaseDetails")
+                     <*> (o .:? "lowercaseDetails")
+                     <*> (o .:? "kind" .!= "analytics#filter")
+                     <*> (o .:? "created")
+                     <*> (o .:? "includeDetails")
+                     <*> (o .:? "excludeDetails")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "accountId")
+                     <*> (o .:? "name")
+                     <*> (o .:? "id")
+                     <*> (o .:? "updated")
+                     <*> (o .:? "type")
+                     <*> (o .:? "searchAndReplaceDetails"))
+
+instance ToJSON Filter where
+        toJSON Filter{..}
+          = object
+              (catMaybes
+                 [("parentLink" .=) <$> _fParentLink,
+                  ("advancedDetails" .=) <$> _fAdvancedDetails,
+                  ("uppercaseDetails" .=) <$> _fUppercaseDetails,
+                  ("lowercaseDetails" .=) <$> _fLowercaseDetails,
+                  Just ("kind" .= _fKind),
+                  ("created" .=) <$> _fCreated,
+                  ("includeDetails" .=) <$> _fIncludeDetails,
+                  ("excludeDetails" .=) <$> _fExcludeDetails,
+                  ("selfLink" .=) <$> _fSelfLink,
+                  ("accountId" .=) <$> _fAccountId,
+                  ("name" .=) <$> _fName, ("id" .=) <$> _fId,
+                  ("updated" .=) <$> _fUpdated, ("type" .=) <$> _fType,
+                  ("searchAndReplaceDetails" .=) <$>
+                    _fSearchAndReplaceDetails])
+
 -- | Details for the filter of the type ADVANCED.
 --
 -- /See:/ 'filterAdvancedDetails' smart constructor.
@@ -2831,6 +3626,43 @@ fadOverrideOutputField
   = lens _fadOverrideOutputField
       (\ s a -> s{_fadOverrideOutputField = a})
 
+instance FromJSON FilterAdvancedDetails where
+        parseJSON
+          = withObject "FilterAdvancedDetails"
+              (\ o ->
+                 FilterAdvancedDetails <$>
+                   (o .:? "extractA") <*> (o .:? "fieldARequired") <*>
+                     (o .:? "fieldA")
+                     <*> (o .:? "fieldBIndex")
+                     <*> (o .:? "outputToField")
+                     <*> (o .:? "outputConstructor")
+                     <*> (o .:? "extractB")
+                     <*> (o .:? "fieldAIndex")
+                     <*> (o .:? "caseSensitive")
+                     <*> (o .:? "outputToFieldIndex")
+                     <*> (o .:? "fieldB")
+                     <*> (o .:? "fieldBRequired")
+                     <*> (o .:? "overrideOutputField"))
+
+instance ToJSON FilterAdvancedDetails where
+        toJSON FilterAdvancedDetails{..}
+          = object
+              (catMaybes
+                 [("extractA" .=) <$> _fadExtractA,
+                  ("fieldARequired" .=) <$> _fadFieldARequired,
+                  ("fieldA" .=) <$> _fadFieldA,
+                  ("fieldBIndex" .=) <$> _fadFieldBIndex,
+                  ("outputToField" .=) <$> _fadOutputToField,
+                  ("outputConstructor" .=) <$> _fadOutputConstructor,
+                  ("extractB" .=) <$> _fadExtractB,
+                  ("fieldAIndex" .=) <$> _fadFieldAIndex,
+                  ("caseSensitive" .=) <$> _fadCaseSensitive,
+                  ("outputToFieldIndex" .=) <$> _fadOutputToFieldIndex,
+                  ("fieldB" .=) <$> _fadFieldB,
+                  ("fieldBRequired" .=) <$> _fadFieldBRequired,
+                  ("overrideOutputField" .=) <$>
+                    _fadOverrideOutputField])
+
 -- | JSON template for an Analytics filter expression.
 --
 -- /See:/ 'filterExpression' smart constructor.
@@ -2932,6 +3764,27 @@ feExpressionValue
   = lens _feExpressionValue
       (\ s a -> s{_feExpressionValue = a})
 
+instance FromJSON FilterExpression where
+        parseJSON
+          = withObject "FilterExpression"
+              (\ o ->
+                 FilterExpression <$>
+                   (o .:? "fieldIndex") <*> (o .:? "field") <*>
+                     (o .:? "kind" .!= "analytics#filterExpression")
+                     <*> (o .:? "matchType")
+                     <*> (o .:? "caseSensitive")
+                     <*> (o .:? "expressionValue"))
+
+instance ToJSON FilterExpression where
+        toJSON FilterExpression{..}
+          = object
+              (catMaybes
+                 [("fieldIndex" .=) <$> _feFieldIndex,
+                  ("field" .=) <$> _feField, Just ("kind" .= _feKind),
+                  ("matchType" .=) <$> _feMatchType,
+                  ("caseSensitive" .=) <$> _feCaseSensitive,
+                  ("expressionValue" .=) <$> _feExpressionValue])
+
 -- | Details for the filter of the type LOWER.
 --
 -- /See:/ 'filterLowercaseDetails' smart constructor.
@@ -2966,6 +3819,20 @@ fldFieldIndex
 fldField :: Lens' FilterLowercaseDetails (Maybe Text)
 fldField = lens _fldField (\ s a -> s{_fldField = a})
 
+instance FromJSON FilterLowercaseDetails where
+        parseJSON
+          = withObject "FilterLowercaseDetails"
+              (\ o ->
+                 FilterLowercaseDetails <$>
+                   (o .:? "fieldIndex") <*> (o .:? "field"))
+
+instance ToJSON FilterLowercaseDetails where
+        toJSON FilterLowercaseDetails{..}
+          = object
+              (catMaybes
+                 [("fieldIndex" .=) <$> _fldFieldIndex,
+                  ("field" .=) <$> _fldField])
+
 -- | Parent link for this filter. Points to the account to which this filter
 -- belongs.
 --
@@ -2997,6 +3864,21 @@ fplHref = lens _fplHref (\ s a -> s{_fplHref = a})
 -- | Value is \"analytics#account\".
 fplType :: Lens' FilterParentLink Text
 fplType = lens _fplType (\ s a -> s{_fplType = a})
+
+instance FromJSON FilterParentLink where
+        parseJSON
+          = withObject "FilterParentLink"
+              (\ o ->
+                 FilterParentLink <$>
+                   (o .:? "href") <*>
+                     (o .:? "type" .!= "analytics#account"))
+
+instance ToJSON FilterParentLink where
+        toJSON FilterParentLink{..}
+          = object
+              (catMaybes
+                 [("href" .=) <$> _fplHref,
+                  Just ("type" .= _fplType)])
 
 -- | JSON template for a profile filter link.
 --
@@ -3053,6 +3935,25 @@ frName = lens _frName (\ s a -> s{_frName = a})
 -- | Filter ID.
 frId :: Lens' FilterRef (Maybe Text)
 frId = lens _frId (\ s a -> s{_frId = a})
+
+instance FromJSON FilterRef where
+        parseJSON
+          = withObject "FilterRef"
+              (\ o ->
+                 FilterRef <$>
+                   (o .:? "kind" .!= "analytics#filterRef") <*>
+                     (o .:? "href")
+                     <*> (o .:? "accountId")
+                     <*> (o .:? "name")
+                     <*> (o .:? "id"))
+
+instance ToJSON FilterRef where
+        toJSON FilterRef{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _frKind), ("href" .=) <$> _frHref,
+                  ("accountId" .=) <$> _frAccountId,
+                  ("name" .=) <$> _frName, ("id" .=) <$> _frId])
 
 -- | Details for the filter of the type SEARCH_AND_REPLACE.
 --
@@ -3119,6 +4020,26 @@ fsardCaseSensitive
   = lens _fsardCaseSensitive
       (\ s a -> s{_fsardCaseSensitive = a})
 
+instance FromJSON FilterSearchAndReplaceDetails where
+        parseJSON
+          = withObject "FilterSearchAndReplaceDetails"
+              (\ o ->
+                 FilterSearchAndReplaceDetails <$>
+                   (o .:? "fieldIndex") <*> (o .:? "field") <*>
+                     (o .:? "searchString")
+                     <*> (o .:? "replaceString")
+                     <*> (o .:? "caseSensitive"))
+
+instance ToJSON FilterSearchAndReplaceDetails where
+        toJSON FilterSearchAndReplaceDetails{..}
+          = object
+              (catMaybes
+                 [("fieldIndex" .=) <$> _fsardFieldIndex,
+                  ("field" .=) <$> _fsardField,
+                  ("searchString" .=) <$> _fsardSearchString,
+                  ("replaceString" .=) <$> _fsardReplaceString,
+                  ("caseSensitive" .=) <$> _fsardCaseSensitive])
+
 -- | Details for the filter of the type UPPER.
 --
 -- /See:/ 'filterUppercaseDetails' smart constructor.
@@ -3152,6 +4073,20 @@ fudFieldIndex
 -- | Field to use in the filter.
 fudField :: Lens' FilterUppercaseDetails (Maybe Text)
 fudField = lens _fudField (\ s a -> s{_fudField = a})
+
+instance FromJSON FilterUppercaseDetails where
+        parseJSON
+          = withObject "FilterUppercaseDetails"
+              (\ o ->
+                 FilterUppercaseDetails <$>
+                   (o .:? "fieldIndex") <*> (o .:? "field"))
+
+instance ToJSON FilterUppercaseDetails where
+        toJSON FilterUppercaseDetails{..}
+          = object
+              (catMaybes
+                 [("fieldIndex" .=) <$> _fudFieldIndex,
+                  ("field" .=) <$> _fudField])
 
 -- | A filter collection lists filters created by users in an Analytics
 -- account. Each resource in the collection corresponds to a filter.
@@ -3250,6 +4185,32 @@ filPreviousLink :: Lens' Filters (Maybe Text)
 filPreviousLink
   = lens _filPreviousLink
       (\ s a -> s{_filPreviousLink = a})
+
+instance FromJSON Filters where
+        parseJSON
+          = withObject "Filters"
+              (\ o ->
+                 Filters <$>
+                   (o .:? "nextLink") <*> (o .:? "itemsPerPage") <*>
+                     (o .:? "kind" .!= "analytics#filters")
+                     <*> (o .:? "username")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "totalResults")
+                     <*> (o .:? "startIndex")
+                     <*> (o .:? "previousLink"))
+
+instance ToJSON Filters where
+        toJSON Filters{..}
+          = object
+              (catMaybes
+                 [("nextLink" .=) <$> _filNextLink,
+                  ("itemsPerPage" .=) <$> _filItemsPerPage,
+                  Just ("kind" .= _filKind),
+                  ("username" .=) <$> _filUsername,
+                  ("items" .=) <$> _filItems,
+                  ("totalResults" .=) <$> _filTotalResults,
+                  ("startIndex" .=) <$> _filStartIndex,
+                  ("previousLink" .=) <$> _filPreviousLink])
 
 -- | Analytics data for a given view (profile).
 --
@@ -3427,6 +4388,50 @@ gdPreviousLink
   = lens _gdPreviousLink
       (\ s a -> s{_gdPreviousLink = a})
 
+instance FromJSON GaData where
+        parseJSON
+          = withObject "GaData"
+              (\ o ->
+                 GaData <$>
+                   (o .:? "nextLink") <*> (o .:? "sampleSpace") <*>
+                     (o .:? "itemsPerPage")
+                     <*> (o .:? "profileInfo")
+                     <*> (o .:? "kind" .!= "analytics#gaData")
+                     <*> (o .:? "sampleSize")
+                     <*> (o .:? "rows" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "query")
+                     <*> (o .:? "columnHeaders" .!= mempty)
+                     <*> (o .:? "id")
+                     <*> (o .:? "totalResults")
+                     <*> (o .:? "dataTable")
+                     <*> (o .:? "containsSampledData")
+                     <*> (o .:? "totalsForAllResults")
+                     <*> (o .:? "previousLink"))
+
+instance ToJSON GaData where
+        toJSON GaData{..}
+          = object
+              (catMaybes
+                 [("nextLink" .=) <$> _gdNextLink,
+                  ("sampleSpace" .=) <$> _gdSampleSpace,
+                  ("itemsPerPage" .=) <$> _gdItemsPerPage,
+                  ("profileInfo" .=) <$> _gdProfileInfo,
+                  Just ("kind" .= _gdKind),
+                  ("sampleSize" .=) <$> _gdSampleSize,
+                  ("rows" .=) <$> _gdRows,
+                  ("selfLink" .=) <$> _gdSelfLink,
+                  ("query" .=) <$> _gdQuery,
+                  ("columnHeaders" .=) <$> _gdColumnHeaders,
+                  ("id" .=) <$> _gdId,
+                  ("totalResults" .=) <$> _gdTotalResults,
+                  ("dataTable" .=) <$> _gdDataTable,
+                  ("containsSampledData" .=) <$>
+                    _gdContainsSampledData,
+                  ("totalsForAllResults" .=) <$>
+                    _gdTotalsForAllResults,
+                  ("previousLink" .=) <$> _gdPreviousLink])
+
 --
 -- /See:/ 'gaDataDataTable' smart constructor.
 data GaDataDataTable = GaDataDataTable
@@ -3461,6 +4466,21 @@ gddtRows
       _Default
       . _Coerce
 
+instance FromJSON GaDataDataTable where
+        parseJSON
+          = withObject "GaDataDataTable"
+              (\ o ->
+                 GaDataDataTable <$>
+                   (o .:? "cols" .!= mempty) <*>
+                     (o .:? "rows" .!= mempty))
+
+instance ToJSON GaDataDataTable where
+        toJSON GaDataDataTable{..}
+          = object
+              (catMaybes
+                 [("cols" .=) <$> _gddtCols,
+                  ("rows" .=) <$> _gddtRows])
+
 --
 -- /See:/ 'gaDataItemCItemRowsDataTable' smart constructor.
 newtype GaDataItemCItemRowsDataTable = GaDataItemCItemRowsDataTable
@@ -3482,6 +4502,15 @@ gaDataItemCItemRowsDataTable =
 gdicirdtV :: Lens' GaDataItemCItemRowsDataTable (Maybe Text)
 gdicirdtV
   = lens _gdicirdtV (\ s a -> s{_gdicirdtV = a})
+
+instance FromJSON GaDataItemCItemRowsDataTable where
+        parseJSON
+          = withObject "GaDataItemCItemRowsDataTable"
+              (\ o -> GaDataItemCItemRowsDataTable <$> (o .:? "v"))
+
+instance ToJSON GaDataItemCItemRowsDataTable where
+        toJSON GaDataItemCItemRowsDataTable{..}
+          = object (catMaybes [("v" .=) <$> _gdicirdtV])
 
 --
 -- /See:/ 'gaDataItemColsDataTable' smart constructor.
@@ -3519,6 +4548,21 @@ gdicdtType
 gdicdtLabel :: Lens' GaDataItemColsDataTable (Maybe Text)
 gdicdtLabel
   = lens _gdicdtLabel (\ s a -> s{_gdicdtLabel = a})
+
+instance FromJSON GaDataItemColsDataTable where
+        parseJSON
+          = withObject "GaDataItemColsDataTable"
+              (\ o ->
+                 GaDataItemColsDataTable <$>
+                   (o .:? "id") <*> (o .:? "type") <*> (o .:? "label"))
+
+instance ToJSON GaDataItemColsDataTable where
+        toJSON GaDataItemColsDataTable{..}
+          = object
+              (catMaybes
+                 [("id" .=) <$> _gdicdtId,
+                  ("type" .=) <$> _gdicdtType,
+                  ("label" .=) <$> _gdicdtLabel])
 
 --
 -- /See:/ 'gaDataItemColumnHeaders' smart constructor.
@@ -3565,6 +4609,22 @@ gdichDataType
   = lens _gdichDataType
       (\ s a -> s{_gdichDataType = a})
 
+instance FromJSON GaDataItemColumnHeaders where
+        parseJSON
+          = withObject "GaDataItemColumnHeaders"
+              (\ o ->
+                 GaDataItemColumnHeaders <$>
+                   (o .:? "columnType") <*> (o .:? "name") <*>
+                     (o .:? "dataType"))
+
+instance ToJSON GaDataItemColumnHeaders where
+        toJSON GaDataItemColumnHeaders{..}
+          = object
+              (catMaybes
+                 [("columnType" .=) <$> _gdichColumnType,
+                  ("name" .=) <$> _gdichName,
+                  ("dataType" .=) <$> _gdichDataType])
+
 --
 -- /See:/ 'gaDataItemRowsDataTable' smart constructor.
 newtype GaDataItemRowsDataTable = GaDataItemRowsDataTable
@@ -3587,6 +4647,16 @@ gdirdtC :: Lens' GaDataItemRowsDataTable [GaDataItemCItemRowsDataTable]
 gdirdtC
   = lens _gdirdtC (\ s a -> s{_gdirdtC = a}) . _Default
       . _Coerce
+
+instance FromJSON GaDataItemRowsDataTable where
+        parseJSON
+          = withObject "GaDataItemRowsDataTable"
+              (\ o ->
+                 GaDataItemRowsDataTable <$> (o .:? "c" .!= mempty))
+
+instance ToJSON GaDataItemRowsDataTable where
+        toJSON GaDataItemRowsDataTable{..}
+          = object (catMaybes [("c" .=) <$> _gdirdtC])
 
 -- | Information for the view (profile), for which the Analytics data was
 -- requested.
@@ -3662,6 +4732,29 @@ gdpiInternalWebPropertyId
 gdpiTableId :: Lens' GaDataProfileInfo (Maybe Text)
 gdpiTableId
   = lens _gdpiTableId (\ s a -> s{_gdpiTableId = a})
+
+instance FromJSON GaDataProfileInfo where
+        parseJSON
+          = withObject "GaDataProfileInfo"
+              (\ o ->
+                 GaDataProfileInfo <$>
+                   (o .:? "webPropertyId") <*> (o .:? "profileId") <*>
+                     (o .:? "profileName")
+                     <*> (o .:? "accountId")
+                     <*> (o .:? "internalWebPropertyId")
+                     <*> (o .:? "tableId"))
+
+instance ToJSON GaDataProfileInfo where
+        toJSON GaDataProfileInfo{..}
+          = object
+              (catMaybes
+                 [("webPropertyId" .=) <$> _gdpiWebPropertyId,
+                  ("profileId" .=) <$> _gdpiProfileId,
+                  ("profileName" .=) <$> _gdpiProfileName,
+                  ("accountId" .=) <$> _gdpiAccountId,
+                  ("internalWebPropertyId" .=) <$>
+                    _gdpiInternalWebPropertyId,
+                  ("tableId" .=) <$> _gdpiTableId])
 
 -- | Analytics data request query parameters.
 --
@@ -3783,6 +4876,39 @@ gdqStartDate :: Lens' GaDataQuery (Maybe Text)
 gdqStartDate
   = lens _gdqStartDate (\ s a -> s{_gdqStartDate = a})
 
+instance FromJSON GaDataQuery where
+        parseJSON
+          = withObject "GaDataQuery"
+              (\ o ->
+                 GaDataQuery <$>
+                   (o .:? "metrics" .!= mempty) <*>
+                     (o .:? "samplingLevel")
+                     <*> (o .:? "filters")
+                     <*> (o .:? "ids")
+                     <*> (o .:? "end-date")
+                     <*> (o .:? "sort" .!= mempty)
+                     <*> (o .:? "dimensions")
+                     <*> (o .:? "start-index")
+                     <*> (o .:? "max-results")
+                     <*> (o .:? "segment")
+                     <*> (o .:? "start-date"))
+
+instance ToJSON GaDataQuery where
+        toJSON GaDataQuery{..}
+          = object
+              (catMaybes
+                 [("metrics" .=) <$> _gdqMetrics,
+                  ("samplingLevel" .=) <$> _gdqSamplingLevel,
+                  ("filters" .=) <$> _gdqFilters,
+                  ("ids" .=) <$> _gdqIds,
+                  ("end-date" .=) <$> _gdqEndDate,
+                  ("sort" .=) <$> _gdqSort,
+                  ("dimensions" .=) <$> _gdqDimensions,
+                  ("start-index" .=) <$> _gdqStartIndex,
+                  ("max-results" .=) <$> _gdqMaxResults,
+                  ("segment" .=) <$> _gdqSegment,
+                  ("start-date" .=) <$> _gdqStartDate])
+
 -- | Total values for the requested metrics over all the results, not just
 -- the results returned in this response. The order of the metric totals is
 -- same as the metric order specified in the request.
@@ -3797,6 +4923,14 @@ data GaDataTotalsForAllResults =
 gaDataTotalsForAllResults
     :: GaDataTotalsForAllResults
 gaDataTotalsForAllResults = GaDataTotalsForAllResults
+
+instance FromJSON GaDataTotalsForAllResults where
+        parseJSON
+          = withObject "GaDataTotalsForAllResults"
+              (\ o -> pure GaDataTotalsForAllResults)
+
+instance ToJSON GaDataTotalsForAllResults where
+        toJSON = const (Object mempty)
 
 -- | JSON template for Analytics goal resource.
 --
@@ -3976,6 +5110,56 @@ gUpdated = lens _gUpdated (\ s a -> s{_gUpdated = a})
 gType :: Lens' Goal (Maybe Text)
 gType = lens _gType (\ s a -> s{_gType = a})
 
+instance FromJSON Goal where
+        parseJSON
+          = withObject "Goal"
+              (\ o ->
+                 Goal <$>
+                   (o .:? "parentLink") <*> (o .:? "webPropertyId") <*>
+                     (o .:? "kind" .!= "analytics#goal")
+                     <*> (o .:? "created")
+                     <*> (o .:? "value")
+                     <*> (o .:? "profileId")
+                     <*> (o .:? "eventDetails")
+                     <*> (o .:? "active")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "visitTimeOnSiteDetails")
+                     <*> (o .:? "accountId")
+                     <*> (o .:? "name")
+                     <*> (o .:? "internalWebPropertyId")
+                     <*> (o .:? "id")
+                     <*> (o .:? "urlDestinationDetails")
+                     <*> (o .:? "visitNumPagesDetails")
+                     <*> (o .:? "updated")
+                     <*> (o .:? "type"))
+
+instance ToJSON Goal where
+        toJSON Goal{..}
+          = object
+              (catMaybes
+                 [("parentLink" .=) <$> _gParentLink,
+                  ("webPropertyId" .=) <$> _gWebPropertyId,
+                  Just ("kind" .= _gKind),
+                  ("created" .=) <$> _gCreated,
+                  ("value" .=) <$> _gValue,
+                  ("profileId" .=) <$> _gProfileId,
+                  ("eventDetails" .=) <$> _gEventDetails,
+                  ("active" .=) <$> _gActive,
+                  ("selfLink" .=) <$> _gSelfLink,
+                  ("visitTimeOnSiteDetails" .=) <$>
+                    _gVisitTimeOnSiteDetails,
+                  ("accountId" .=) <$> _gAccountId,
+                  ("name" .=) <$> _gName,
+                  ("internalWebPropertyId" .=) <$>
+                    _gInternalWebPropertyId,
+                  ("id" .=) <$> _gId,
+                  ("urlDestinationDetails" .=) <$>
+                    _gUrlDestinationDetails,
+                  ("visitNumPagesDetails" .=) <$>
+                    _gVisitNumPagesDetails,
+                  ("updated" .=) <$> _gUpdated,
+                  ("type" .=) <$> _gType])
+
 -- | Details for the goal of the type EVENT.
 --
 -- /See:/ 'goalEventDetails' smart constructor.
@@ -4012,6 +5196,21 @@ gedEventConditions
       (\ s a -> s{_gedEventConditions = a})
       . _Default
       . _Coerce
+
+instance FromJSON GoalEventDetails where
+        parseJSON
+          = withObject "GoalEventDetails"
+              (\ o ->
+                 GoalEventDetails <$>
+                   (o .:? "useEventValue") <*>
+                     (o .:? "eventConditions" .!= mempty))
+
+instance ToJSON GoalEventDetails where
+        toJSON GoalEventDetails{..}
+          = object
+              (catMaybes
+                 [("useEventValue" .=) <$> _gedUseEventValue,
+                  ("eventConditions" .=) <$> _gedEventConditions])
 
 --
 -- /See:/ 'goalItemEventConditionsEventDetails' smart constructor.
@@ -4079,6 +5278,28 @@ giecedComparisonType
   = lens _giecedComparisonType
       (\ s a -> s{_giecedComparisonType = a})
 
+instance FromJSON GoalItemEventConditionsEventDetails
+         where
+        parseJSON
+          = withObject "GoalItemEventConditionsEventDetails"
+              (\ o ->
+                 GoalItemEventConditionsEventDetails <$>
+                   (o .:? "matchType") <*> (o .:? "expression") <*>
+                     (o .:? "comparisonValue")
+                     <*> (o .:? "type")
+                     <*> (o .:? "comparisonType"))
+
+instance ToJSON GoalItemEventConditionsEventDetails
+         where
+        toJSON GoalItemEventConditionsEventDetails{..}
+          = object
+              (catMaybes
+                 [("matchType" .=) <$> _giecedMatchType,
+                  ("expression" .=) <$> _giecedExpression,
+                  ("comparisonValue" .=) <$> _giecedComparisonValue,
+                  ("type" .=) <$> _giecedType,
+                  ("comparisonType" .=) <$> _giecedComparisonType])
+
 --
 -- /See:/ 'goalItemStepsUrlDestinationDetails' smart constructor.
 data GoalItemStepsUrlDestinationDetails = GoalItemStepsUrlDestinationDetails
@@ -4120,6 +5341,24 @@ gisuddNumber :: Lens' GoalItemStepsUrlDestinationDetails (Maybe Int32)
 gisuddNumber
   = lens _gisuddNumber (\ s a -> s{_gisuddNumber = a})
 
+instance FromJSON GoalItemStepsUrlDestinationDetails
+         where
+        parseJSON
+          = withObject "GoalItemStepsUrlDestinationDetails"
+              (\ o ->
+                 GoalItemStepsUrlDestinationDetails <$>
+                   (o .:? "url") <*> (o .:? "name") <*>
+                     (o .:? "number"))
+
+instance ToJSON GoalItemStepsUrlDestinationDetails
+         where
+        toJSON GoalItemStepsUrlDestinationDetails{..}
+          = object
+              (catMaybes
+                 [("url" .=) <$> _gisuddUrl,
+                  ("name" .=) <$> _gisuddName,
+                  ("number" .=) <$> _gisuddNumber])
+
 -- | Parent link for a goal. Points to the view (profile) to which this goal
 -- belongs.
 --
@@ -4151,6 +5390,21 @@ gplHref = lens _gplHref (\ s a -> s{_gplHref = a})
 -- | Value is \"analytics#profile\".
 gplType :: Lens' GoalParentLink Text
 gplType = lens _gplType (\ s a -> s{_gplType = a})
+
+instance FromJSON GoalParentLink where
+        parseJSON
+          = withObject "GoalParentLink"
+              (\ o ->
+                 GoalParentLink <$>
+                   (o .:? "href") <*>
+                     (o .:? "type" .!= "analytics#profile"))
+
+instance ToJSON GoalParentLink where
+        toJSON GoalParentLink{..}
+          = object
+              (catMaybes
+                 [("href" .=) <$> _gplHref,
+                  Just ("type" .= _gplType)])
 
 -- | Details for the goal of the type URL_DESTINATION.
 --
@@ -4217,6 +5471,26 @@ guddFirstStepRequired
   = lens _guddFirstStepRequired
       (\ s a -> s{_guddFirstStepRequired = a})
 
+instance FromJSON GoalUrlDestinationDetails where
+        parseJSON
+          = withObject "GoalUrlDestinationDetails"
+              (\ o ->
+                 GoalUrlDestinationDetails <$>
+                   (o .:? "url") <*> (o .:? "matchType") <*>
+                     (o .:? "steps" .!= mempty)
+                     <*> (o .:? "caseSensitive")
+                     <*> (o .:? "firstStepRequired"))
+
+instance ToJSON GoalUrlDestinationDetails where
+        toJSON GoalUrlDestinationDetails{..}
+          = object
+              (catMaybes
+                 [("url" .=) <$> _guddUrl,
+                  ("matchType" .=) <$> _guddMatchType,
+                  ("steps" .=) <$> _guddSteps,
+                  ("caseSensitive" .=) <$> _guddCaseSensitive,
+                  ("firstStepRequired" .=) <$> _guddFirstStepRequired])
+
 -- | Details for the goal of the type VISIT_NUM_PAGES.
 --
 -- /See:/ 'goalVisitNumPagesDetails' smart constructor.
@@ -4253,6 +5527,21 @@ gvnpdComparisonType
   = lens _gvnpdComparisonType
       (\ s a -> s{_gvnpdComparisonType = a})
 
+instance FromJSON GoalVisitNumPagesDetails where
+        parseJSON
+          = withObject "GoalVisitNumPagesDetails"
+              (\ o ->
+                 GoalVisitNumPagesDetails <$>
+                   (o .:? "comparisonValue") <*>
+                     (o .:? "comparisonType"))
+
+instance ToJSON GoalVisitNumPagesDetails where
+        toJSON GoalVisitNumPagesDetails{..}
+          = object
+              (catMaybes
+                 [("comparisonValue" .=) <$> _gvnpdComparisonValue,
+                  ("comparisonType" .=) <$> _gvnpdComparisonType])
+
 -- | Details for the goal of the type VISIT_TIME_ON_SITE.
 --
 -- /See:/ 'goalVisitTimeOnSiteDetails' smart constructor.
@@ -4287,6 +5576,21 @@ gvtosdComparisonType :: Lens' GoalVisitTimeOnSiteDetails (Maybe Text)
 gvtosdComparisonType
   = lens _gvtosdComparisonType
       (\ s a -> s{_gvtosdComparisonType = a})
+
+instance FromJSON GoalVisitTimeOnSiteDetails where
+        parseJSON
+          = withObject "GoalVisitTimeOnSiteDetails"
+              (\ o ->
+                 GoalVisitTimeOnSiteDetails <$>
+                   (o .:? "comparisonValue") <*>
+                     (o .:? "comparisonType"))
+
+instance ToJSON GoalVisitTimeOnSiteDetails where
+        toJSON GoalVisitTimeOnSiteDetails{..}
+          = object
+              (catMaybes
+                 [("comparisonValue" .=) <$> _gvtosdComparisonValue,
+                  ("comparisonType" .=) <$> _gvtosdComparisonType])
 
 -- | A goal collection lists Analytics goals to which the user has access.
 -- Each view (profile) can have a set of goals. Each resource in the Goal
@@ -4386,6 +5690,32 @@ goaPreviousLink :: Lens' Goals (Maybe Text)
 goaPreviousLink
   = lens _goaPreviousLink
       (\ s a -> s{_goaPreviousLink = a})
+
+instance FromJSON Goals where
+        parseJSON
+          = withObject "Goals"
+              (\ o ->
+                 Goals <$>
+                   (o .:? "nextLink") <*> (o .:? "itemsPerPage") <*>
+                     (o .:? "kind" .!= "analytics#goals")
+                     <*> (o .:? "username")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "totalResults")
+                     <*> (o .:? "startIndex")
+                     <*> (o .:? "previousLink"))
+
+instance ToJSON Goals where
+        toJSON Goals{..}
+          = object
+              (catMaybes
+                 [("nextLink" .=) <$> _goaNextLink,
+                  ("itemsPerPage" .=) <$> _goaItemsPerPage,
+                  Just ("kind" .= _goaKind),
+                  ("username" .=) <$> _goaUsername,
+                  ("items" .=) <$> _goaItems,
+                  ("totalResults" .=) <$> _goaTotalResults,
+                  ("startIndex" .=) <$> _goaStartIndex,
+                  ("previousLink" .=) <$> _goaPreviousLink])
 
 -- | Multi-Channel Funnels data for a given view (profile).
 --
@@ -4555,6 +5885,48 @@ mdPreviousLink
   = lens _mdPreviousLink
       (\ s a -> s{_mdPreviousLink = a})
 
+instance FromJSON McfData where
+        parseJSON
+          = withObject "McfData"
+              (\ o ->
+                 McfData <$>
+                   (o .:? "nextLink") <*> (o .:? "sampleSpace") <*>
+                     (o .:? "itemsPerPage")
+                     <*> (o .:? "profileInfo")
+                     <*> (o .:? "kind" .!= "analytics#mcfData")
+                     <*> (o .:? "sampleSize")
+                     <*> (o .:? "rows" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "query")
+                     <*> (o .:? "columnHeaders" .!= mempty)
+                     <*> (o .:? "id")
+                     <*> (o .:? "totalResults")
+                     <*> (o .:? "containsSampledData")
+                     <*> (o .:? "totalsForAllResults")
+                     <*> (o .:? "previousLink"))
+
+instance ToJSON McfData where
+        toJSON McfData{..}
+          = object
+              (catMaybes
+                 [("nextLink" .=) <$> _mdNextLink,
+                  ("sampleSpace" .=) <$> _mdSampleSpace,
+                  ("itemsPerPage" .=) <$> _mdItemsPerPage,
+                  ("profileInfo" .=) <$> _mdProfileInfo,
+                  Just ("kind" .= _mdKind),
+                  ("sampleSize" .=) <$> _mdSampleSize,
+                  ("rows" .=) <$> _mdRows,
+                  ("selfLink" .=) <$> _mdSelfLink,
+                  ("query" .=) <$> _mdQuery,
+                  ("columnHeaders" .=) <$> _mdColumnHeaders,
+                  ("id" .=) <$> _mdId,
+                  ("totalResults" .=) <$> _mdTotalResults,
+                  ("containsSampledData" .=) <$>
+                    _mdContainsSampledData,
+                  ("totalsForAllResults" .=) <$>
+                    _mdTotalsForAllResults,
+                  ("previousLink" .=) <$> _mdPreviousLink])
+
 --
 -- /See:/ 'mcfDataItemColumnHeaders' smart constructor.
 data McfDataItemColumnHeaders = McfDataItemColumnHeaders
@@ -4599,6 +5971,22 @@ mdichDataType
   = lens _mdichDataType
       (\ s a -> s{_mdichDataType = a})
 
+instance FromJSON McfDataItemColumnHeaders where
+        parseJSON
+          = withObject "McfDataItemColumnHeaders"
+              (\ o ->
+                 McfDataItemColumnHeaders <$>
+                   (o .:? "columnType") <*> (o .:? "name") <*>
+                     (o .:? "dataType"))
+
+instance ToJSON McfDataItemColumnHeaders where
+        toJSON McfDataItemColumnHeaders{..}
+          = object
+              (catMaybes
+                 [("columnType" .=) <$> _mdichColumnType,
+                  ("name" .=) <$> _mdichName,
+                  ("dataType" .=) <$> _mdichDataType])
+
 --
 -- /See:/ 'mcfDataItemConversionPathValueItemItemRows' smart constructor.
 data McfDataItemConversionPathValueItemItemRows = McfDataItemConversionPathValueItemItemRows
@@ -4634,6 +6022,24 @@ mdicpviirNodeValue :: Lens' McfDataItemConversionPathValueItemItemRows (Maybe Te
 mdicpviirNodeValue
   = lens _mdicpviirNodeValue
       (\ s a -> s{_mdicpviirNodeValue = a})
+
+instance FromJSON
+         McfDataItemConversionPathValueItemItemRows where
+        parseJSON
+          = withObject
+              "McfDataItemConversionPathValueItemItemRows"
+              (\ o ->
+                 McfDataItemConversionPathValueItemItemRows <$>
+                   (o .:? "interactionType") <*> (o .:? "nodeValue"))
+
+instance ToJSON
+         McfDataItemConversionPathValueItemItemRows where
+        toJSON McfDataItemConversionPathValueItemItemRows{..}
+          = object
+              (catMaybes
+                 [("interactionType" .=) <$>
+                    _mdicpviirInteractionType,
+                  ("nodeValue" .=) <$> _mdicpviirNodeValue])
 
 -- | A union object representing a dimension or metric value. Only one of
 -- \"primitiveValue\" or \"conversionPathValue\" attribute will be
@@ -4674,6 +6080,22 @@ mdiirConversionPathValue
       (\ s a -> s{_mdiirConversionPathValue = a})
       . _Default
       . _Coerce
+
+instance FromJSON McfDataItemItemRows where
+        parseJSON
+          = withObject "McfDataItemItemRows"
+              (\ o ->
+                 McfDataItemItemRows <$>
+                   (o .:? "primitiveValue") <*>
+                     (o .:? "conversionPathValue" .!= mempty))
+
+instance ToJSON McfDataItemItemRows where
+        toJSON McfDataItemItemRows{..}
+          = object
+              (catMaybes
+                 [("primitiveValue" .=) <$> _mdiirPrimitiveValue,
+                  ("conversionPathValue" .=) <$>
+                    _mdiirConversionPathValue])
 
 -- | Information for the view (profile), for which the Analytics data was
 -- requested.
@@ -4749,6 +6171,29 @@ mdpiInternalWebPropertyId
 mdpiTableId :: Lens' McfDataProfileInfo (Maybe Text)
 mdpiTableId
   = lens _mdpiTableId (\ s a -> s{_mdpiTableId = a})
+
+instance FromJSON McfDataProfileInfo where
+        parseJSON
+          = withObject "McfDataProfileInfo"
+              (\ o ->
+                 McfDataProfileInfo <$>
+                   (o .:? "webPropertyId") <*> (o .:? "profileId") <*>
+                     (o .:? "profileName")
+                     <*> (o .:? "accountId")
+                     <*> (o .:? "internalWebPropertyId")
+                     <*> (o .:? "tableId"))
+
+instance ToJSON McfDataProfileInfo where
+        toJSON McfDataProfileInfo{..}
+          = object
+              (catMaybes
+                 [("webPropertyId" .=) <$> _mdpiWebPropertyId,
+                  ("profileId" .=) <$> _mdpiProfileId,
+                  ("profileName" .=) <$> _mdpiProfileName,
+                  ("accountId" .=) <$> _mdpiAccountId,
+                  ("internalWebPropertyId" .=) <$>
+                    _mdpiInternalWebPropertyId,
+                  ("tableId" .=) <$> _mdpiTableId])
 
 -- | Analytics data request query parameters.
 --
@@ -4870,6 +6315,39 @@ mdqStartDate :: Lens' McfDataQuery (Maybe Text)
 mdqStartDate
   = lens _mdqStartDate (\ s a -> s{_mdqStartDate = a})
 
+instance FromJSON McfDataQuery where
+        parseJSON
+          = withObject "McfDataQuery"
+              (\ o ->
+                 McfDataQuery <$>
+                   (o .:? "metrics" .!= mempty) <*>
+                     (o .:? "samplingLevel")
+                     <*> (o .:? "filters")
+                     <*> (o .:? "ids")
+                     <*> (o .:? "end-date")
+                     <*> (o .:? "sort" .!= mempty)
+                     <*> (o .:? "dimensions")
+                     <*> (o .:? "start-index")
+                     <*> (o .:? "max-results")
+                     <*> (o .:? "segment")
+                     <*> (o .:? "start-date"))
+
+instance ToJSON McfDataQuery where
+        toJSON McfDataQuery{..}
+          = object
+              (catMaybes
+                 [("metrics" .=) <$> _mdqMetrics,
+                  ("samplingLevel" .=) <$> _mdqSamplingLevel,
+                  ("filters" .=) <$> _mdqFilters,
+                  ("ids" .=) <$> _mdqIds,
+                  ("end-date" .=) <$> _mdqEndDate,
+                  ("sort" .=) <$> _mdqSort,
+                  ("dimensions" .=) <$> _mdqDimensions,
+                  ("start-index" .=) <$> _mdqStartIndex,
+                  ("max-results" .=) <$> _mdqMaxResults,
+                  ("segment" .=) <$> _mdqSegment,
+                  ("start-date" .=) <$> _mdqStartDate])
+
 -- | Total values for the requested metrics over all the results, not just
 -- the results returned in this response. The order of the metric totals is
 -- same as the metric order specified in the request.
@@ -4884,6 +6362,14 @@ data McfDataTotalsForAllResults =
 mcfDataTotalsForAllResults
     :: McfDataTotalsForAllResults
 mcfDataTotalsForAllResults = McfDataTotalsForAllResults
+
+instance FromJSON McfDataTotalsForAllResults where
+        parseJSON
+          = withObject "McfDataTotalsForAllResults"
+              (\ o -> pure McfDataTotalsForAllResults)
+
+instance ToJSON McfDataTotalsForAllResults where
+        toJSON = const (Object mempty)
 
 -- | JSON template for an Analytics view (profile).
 --
@@ -5135,6 +6621,70 @@ ppStripSiteSearchQueryParameters
   = lens _ppStripSiteSearchQueryParameters
       (\ s a -> s{_ppStripSiteSearchQueryParameters = a})
 
+instance FromJSON Profile where
+        parseJSON
+          = withObject "Profile"
+              (\ o ->
+                 Profile <$>
+                   (o .:? "parentLink") <*> (o .:? "eCommerceTracking")
+                     <*> (o .:? "siteSearchCategoryParameters")
+                     <*> (o .:? "webPropertyId")
+                     <*> (o .:? "childLink")
+                     <*> (o .:? "siteSearchQueryParameters")
+                     <*> (o .:? "kind" .!= "analytics#profile")
+                     <*> (o .:? "defaultPage")
+                     <*> (o .:? "created")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "accountId")
+                     <*> (o .:? "name")
+                     <*> (o .:? "currency")
+                     <*> (o .:? "internalWebPropertyId")
+                     <*> (o .:? "id")
+                     <*> (o .:? "updated")
+                     <*> (o .:? "permissions")
+                     <*> (o .:? "websiteUrl")
+                     <*> (o .:? "type")
+                     <*> (o .:? "stripSiteSearchCategoryParameters")
+                     <*> (o .:? "timezone")
+                     <*> (o .:? "excludeQueryParameters")
+                     <*> (o .:? "enhancedECommerceTracking")
+                     <*> (o .:? "stripSiteSearchQueryParameters"))
+
+instance ToJSON Profile where
+        toJSON Profile{..}
+          = object
+              (catMaybes
+                 [("parentLink" .=) <$> _ppParentLink,
+                  ("eCommerceTracking" .=) <$> _ppECommerceTracking,
+                  ("siteSearchCategoryParameters" .=) <$>
+                    _ppSiteSearchCategoryParameters,
+                  ("webPropertyId" .=) <$> _ppWebPropertyId,
+                  ("childLink" .=) <$> _ppChildLink,
+                  ("siteSearchQueryParameters" .=) <$>
+                    _ppSiteSearchQueryParameters,
+                  Just ("kind" .= _ppKind),
+                  ("defaultPage" .=) <$> _ppDefaultPage,
+                  ("created" .=) <$> _ppCreated,
+                  ("selfLink" .=) <$> _ppSelfLink,
+                  ("accountId" .=) <$> _ppAccountId,
+                  ("name" .=) <$> _ppName,
+                  ("currency" .=) <$> _ppCurrency,
+                  ("internalWebPropertyId" .=) <$>
+                    _ppInternalWebPropertyId,
+                  ("id" .=) <$> _ppId, ("updated" .=) <$> _ppUpdated,
+                  ("permissions" .=) <$> _ppPermissions,
+                  ("websiteUrl" .=) <$> _ppWebsiteUrl,
+                  ("type" .=) <$> _ppType,
+                  ("stripSiteSearchCategoryParameters" .=) <$>
+                    _ppStripSiteSearchCategoryParameters,
+                  ("timezone" .=) <$> _ppTimezone,
+                  ("excludeQueryParameters" .=) <$>
+                    _ppExcludeQueryParameters,
+                  ("enhancedECommerceTracking" .=) <$>
+                    _ppEnhancedECommerceTracking,
+                  ("stripSiteSearchQueryParameters" .=) <$>
+                    _ppStripSiteSearchQueryParameters])
+
 -- | Child link for this view (profile). Points to the list of goals for this
 -- view (profile).
 --
@@ -5166,6 +6716,21 @@ pclHref = lens _pclHref (\ s a -> s{_pclHref = a})
 -- | Value is \"analytics#goals\".
 pclType :: Lens' ProfileChildLink Text
 pclType = lens _pclType (\ s a -> s{_pclType = a})
+
+instance FromJSON ProfileChildLink where
+        parseJSON
+          = withObject "ProfileChildLink"
+              (\ o ->
+                 ProfileChildLink <$>
+                   (o .:? "href") <*>
+                     (o .:? "type" .!= "analytics#goals"))
+
+instance ToJSON ProfileChildLink where
+        toJSON ProfileChildLink{..}
+          = object
+              (catMaybes
+                 [("href" .=) <$> _pclHref,
+                  Just ("type" .= _pclType)])
 
 -- | JSON template for an Analytics profile filter link.
 --
@@ -5242,6 +6807,28 @@ pId = lens _pId (\ s a -> s{_pId = a})
 -- links will be renumbered starting at 1.
 pRank :: Lens' ProfileFilterLink (Maybe Int32)
 pRank = lens _pRank (\ s a -> s{_pRank = a})
+
+instance FromJSON ProfileFilterLink where
+        parseJSON
+          = withObject "ProfileFilterLink"
+              (\ o ->
+                 ProfileFilterLink <$>
+                   (o .:? "profileRef") <*>
+                     (o .:? "kind" .!= "analytics#profileFilterLink")
+                     <*> (o .:? "filterRef")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id")
+                     <*> (o .:? "rank"))
+
+instance ToJSON ProfileFilterLink where
+        toJSON ProfileFilterLink{..}
+          = object
+              (catMaybes
+                 [("profileRef" .=) <$> _pProfileRef,
+                  Just ("kind" .= _pKind),
+                  ("filterRef" .=) <$> _pFilterRef,
+                  ("selfLink" .=) <$> _pSelfLink, ("id" .=) <$> _pId,
+                  ("rank" .=) <$> _pRank])
 
 -- | A profile filter link collection lists profile filter links between
 -- profiles and filters. Each resource in the collection corresponds to a
@@ -5342,6 +6929,32 @@ pflPreviousLink
   = lens _pflPreviousLink
       (\ s a -> s{_pflPreviousLink = a})
 
+instance FromJSON ProfileFilterLinks where
+        parseJSON
+          = withObject "ProfileFilterLinks"
+              (\ o ->
+                 ProfileFilterLinks <$>
+                   (o .:? "nextLink") <*> (o .:? "itemsPerPage") <*>
+                     (o .:? "kind" .!= "analytics#profileFilterLinks")
+                     <*> (o .:? "username")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "totalResults")
+                     <*> (o .:? "startIndex")
+                     <*> (o .:? "previousLink"))
+
+instance ToJSON ProfileFilterLinks where
+        toJSON ProfileFilterLinks{..}
+          = object
+              (catMaybes
+                 [("nextLink" .=) <$> _pflNextLink,
+                  ("itemsPerPage" .=) <$> _pflItemsPerPage,
+                  Just ("kind" .= _pflKind),
+                  ("username" .=) <$> _pflUsername,
+                  ("items" .=) <$> _pflItems,
+                  ("totalResults" .=) <$> _pflTotalResults,
+                  ("startIndex" .=) <$> _pflStartIndex,
+                  ("previousLink" .=) <$> _pflPreviousLink])
+
 -- | Parent link for this view (profile). Points to the web property to which
 -- this view (profile) belongs.
 --
@@ -5374,6 +6987,21 @@ pplHref = lens _pplHref (\ s a -> s{_pplHref = a})
 pplType :: Lens' ProfileParentLink Text
 pplType = lens _pplType (\ s a -> s{_pplType = a})
 
+instance FromJSON ProfileParentLink where
+        parseJSON
+          = withObject "ProfileParentLink"
+              (\ o ->
+                 ProfileParentLink <$>
+                   (o .:? "href") <*>
+                     (o .:? "type" .!= "analytics#webproperty"))
+
+instance ToJSON ProfileParentLink where
+        toJSON ProfileParentLink{..}
+          = object
+              (catMaybes
+                 [("href" .=) <$> _pplHref,
+                  Just ("type" .= _pplType)])
+
 -- | Permissions the user has for this view (profile).
 --
 -- /See:/ 'profilePermissions' smart constructor.
@@ -5401,6 +7029,18 @@ ppEffective
   = lens _ppEffective (\ s a -> s{_ppEffective = a}) .
       _Default
       . _Coerce
+
+instance FromJSON ProfilePermissions where
+        parseJSON
+          = withObject "ProfilePermissions"
+              (\ o ->
+                 ProfilePermissions <$>
+                   (o .:? "effective" .!= mempty))
+
+instance ToJSON ProfilePermissions where
+        toJSON ProfilePermissions{..}
+          = object
+              (catMaybes [("effective" .=) <$> _ppEffective])
 
 -- | JSON template for a linked view (profile).
 --
@@ -5479,6 +7119,31 @@ prInternalWebPropertyId
 prId :: Lens' ProfileRef (Maybe Text)
 prId = lens _prId (\ s a -> s{_prId = a})
 
+instance FromJSON ProfileRef where
+        parseJSON
+          = withObject "ProfileRef"
+              (\ o ->
+                 ProfileRef <$>
+                   (o .:? "webPropertyId") <*>
+                     (o .:? "kind" .!= "analytics#profileRef")
+                     <*> (o .:? "href")
+                     <*> (o .:? "accountId")
+                     <*> (o .:? "name")
+                     <*> (o .:? "internalWebPropertyId")
+                     <*> (o .:? "id"))
+
+instance ToJSON ProfileRef where
+        toJSON ProfileRef{..}
+          = object
+              (catMaybes
+                 [("webPropertyId" .=) <$> _prWebPropertyId,
+                  Just ("kind" .= _prKind), ("href" .=) <$> _prHref,
+                  ("accountId" .=) <$> _prAccountId,
+                  ("name" .=) <$> _prName,
+                  ("internalWebPropertyId" .=) <$>
+                    _prInternalWebPropertyId,
+                  ("id" .=) <$> _prId])
+
 -- | JSON template for an Analytics ProfileSummary. ProfileSummary returns
 -- basic information (i.e., summary) for a profile.
 --
@@ -5526,6 +7191,23 @@ psId = lens _psId (\ s a -> s{_psId = a})
 -- | View (Profile) type. Supported types: WEB or APP.
 psType :: Lens' ProfileSummary (Maybe Text)
 psType = lens _psType (\ s a -> s{_psType = a})
+
+instance FromJSON ProfileSummary where
+        parseJSON
+          = withObject "ProfileSummary"
+              (\ o ->
+                 ProfileSummary <$>
+                   (o .:? "kind" .!= "analytics#profileSummary") <*>
+                     (o .:? "name")
+                     <*> (o .:? "id")
+                     <*> (o .:? "type"))
+
+instance ToJSON ProfileSummary where
+        toJSON ProfileSummary{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _psKind), ("name" .=) <$> _psName,
+                  ("id" .=) <$> _psId, ("type" .=) <$> _psType])
 
 -- | A view (profile) collection lists Analytics views (profiles) to which
 -- the user has access. Each resource in the collection corresponds to a
@@ -5625,6 +7307,32 @@ proPreviousLink :: Lens' Profiles (Maybe Text)
 proPreviousLink
   = lens _proPreviousLink
       (\ s a -> s{_proPreviousLink = a})
+
+instance FromJSON Profiles where
+        parseJSON
+          = withObject "Profiles"
+              (\ o ->
+                 Profiles <$>
+                   (o .:? "nextLink") <*> (o .:? "itemsPerPage") <*>
+                     (o .:? "kind" .!= "analytics#profiles")
+                     <*> (o .:? "username")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "totalResults")
+                     <*> (o .:? "startIndex")
+                     <*> (o .:? "previousLink"))
+
+instance ToJSON Profiles where
+        toJSON Profiles{..}
+          = object
+              (catMaybes
+                 [("nextLink" .=) <$> _proNextLink,
+                  ("itemsPerPage" .=) <$> _proItemsPerPage,
+                  Just ("kind" .= _proKind),
+                  ("username" .=) <$> _proUsername,
+                  ("items" .=) <$> _proItems,
+                  ("totalResults" .=) <$> _proTotalResults,
+                  ("startIndex" .=) <$> _proStartIndex,
+                  ("previousLink" .=) <$> _proPreviousLink])
 
 -- | Real time data for a given view (profile).
 --
@@ -5733,6 +7441,35 @@ rdTotalsForAllResults
   = lens _rdTotalsForAllResults
       (\ s a -> s{_rdTotalsForAllResults = a})
 
+instance FromJSON RealtimeData where
+        parseJSON
+          = withObject "RealtimeData"
+              (\ o ->
+                 RealtimeData <$>
+                   (o .:? "profileInfo") <*>
+                     (o .:? "kind" .!= "analytics#realtimeData")
+                     <*> (o .:? "rows" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "query")
+                     <*> (o .:? "columnHeaders" .!= mempty)
+                     <*> (o .:? "id")
+                     <*> (o .:? "totalResults")
+                     <*> (o .:? "totalsForAllResults"))
+
+instance ToJSON RealtimeData where
+        toJSON RealtimeData{..}
+          = object
+              (catMaybes
+                 [("profileInfo" .=) <$> _rdProfileInfo,
+                  Just ("kind" .= _rdKind), ("rows" .=) <$> _rdRows,
+                  ("selfLink" .=) <$> _rdSelfLink,
+                  ("query" .=) <$> _rdQuery,
+                  ("columnHeaders" .=) <$> _rdColumnHeaders,
+                  ("id" .=) <$> _rdId,
+                  ("totalResults" .=) <$> _rdTotalResults,
+                  ("totalsForAllResults" .=) <$>
+                    _rdTotalsForAllResults])
+
 --
 -- /See:/ 'realtimeDataItemColumnHeaders' smart constructor.
 data RealtimeDataItemColumnHeaders = RealtimeDataItemColumnHeaders
@@ -5777,6 +7514,22 @@ rdichDataType :: Lens' RealtimeDataItemColumnHeaders (Maybe Text)
 rdichDataType
   = lens _rdichDataType
       (\ s a -> s{_rdichDataType = a})
+
+instance FromJSON RealtimeDataItemColumnHeaders where
+        parseJSON
+          = withObject "RealtimeDataItemColumnHeaders"
+              (\ o ->
+                 RealtimeDataItemColumnHeaders <$>
+                   (o .:? "columnType") <*> (o .:? "name") <*>
+                     (o .:? "dataType"))
+
+instance ToJSON RealtimeDataItemColumnHeaders where
+        toJSON RealtimeDataItemColumnHeaders{..}
+          = object
+              (catMaybes
+                 [("columnType" .=) <$> _rdichColumnType,
+                  ("name" .=) <$> _rdichName,
+                  ("dataType" .=) <$> _rdichDataType])
 
 -- | Information for the view (profile), for which the real time data was
 -- requested.
@@ -5853,6 +7606,29 @@ rdpiTableId :: Lens' RealtimeDataProfileInfo (Maybe Text)
 rdpiTableId
   = lens _rdpiTableId (\ s a -> s{_rdpiTableId = a})
 
+instance FromJSON RealtimeDataProfileInfo where
+        parseJSON
+          = withObject "RealtimeDataProfileInfo"
+              (\ o ->
+                 RealtimeDataProfileInfo <$>
+                   (o .:? "webPropertyId") <*> (o .:? "profileId") <*>
+                     (o .:? "profileName")
+                     <*> (o .:? "accountId")
+                     <*> (o .:? "internalWebPropertyId")
+                     <*> (o .:? "tableId"))
+
+instance ToJSON RealtimeDataProfileInfo where
+        toJSON RealtimeDataProfileInfo{..}
+          = object
+              (catMaybes
+                 [("webPropertyId" .=) <$> _rdpiWebPropertyId,
+                  ("profileId" .=) <$> _rdpiProfileId,
+                  ("profileName" .=) <$> _rdpiProfileName,
+                  ("accountId" .=) <$> _rdpiAccountId,
+                  ("internalWebPropertyId" .=) <$>
+                    _rdpiInternalWebPropertyId,
+                  ("tableId" .=) <$> _rdpiTableId])
+
 -- | Real time data request query parameters.
 --
 -- /See:/ 'realtimeDataQuery' smart constructor.
@@ -5926,6 +7702,27 @@ rdqMaxResults
   = lens _rdqMaxResults
       (\ s a -> s{_rdqMaxResults = a})
 
+instance FromJSON RealtimeDataQuery where
+        parseJSON
+          = withObject "RealtimeDataQuery"
+              (\ o ->
+                 RealtimeDataQuery <$>
+                   (o .:? "metrics" .!= mempty) <*> (o .:? "filters")
+                     <*> (o .:? "ids")
+                     <*> (o .:? "sort" .!= mempty)
+                     <*> (o .:? "dimensions")
+                     <*> (o .:? "max-results"))
+
+instance ToJSON RealtimeDataQuery where
+        toJSON RealtimeDataQuery{..}
+          = object
+              (catMaybes
+                 [("metrics" .=) <$> _rdqMetrics,
+                  ("filters" .=) <$> _rdqFilters,
+                  ("ids" .=) <$> _rdqIds, ("sort" .=) <$> _rdqSort,
+                  ("dimensions" .=) <$> _rdqDimensions,
+                  ("max-results" .=) <$> _rdqMaxResults])
+
 -- | Total values for the requested metrics over all the results, not just
 -- the results returned in this response. The order of the metric totals is
 -- same as the metric order specified in the request.
@@ -5940,6 +7737,15 @@ data RealtimeDataTotalsForAllResults =
 realtimeDataTotalsForAllResults
     :: RealtimeDataTotalsForAllResults
 realtimeDataTotalsForAllResults = RealtimeDataTotalsForAllResults
+
+instance FromJSON RealtimeDataTotalsForAllResults
+         where
+        parseJSON
+          = withObject "RealtimeDataTotalsForAllResults"
+              (\ o -> pure RealtimeDataTotalsForAllResults)
+
+instance ToJSON RealtimeDataTotalsForAllResults where
+        toJSON = const (Object mempty)
 
 -- | JSON template for an Analytics segment.
 --
@@ -6034,6 +7840,34 @@ segType = lens _segType (\ s a -> s{_segType = a})
 segSegmentId :: Lens' Segment (Maybe Text)
 segSegmentId
   = lens _segSegmentId (\ s a -> s{_segSegmentId = a})
+
+instance FromJSON Segment where
+        parseJSON
+          = withObject "Segment"
+              (\ o ->
+                 Segment <$>
+                   (o .:? "definition") <*>
+                     (o .:? "kind" .!= "analytics#segment")
+                     <*> (o .:? "created")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "id")
+                     <*> (o .:? "updated")
+                     <*> (o .:? "type")
+                     <*> (o .:? "segmentId"))
+
+instance ToJSON Segment where
+        toJSON Segment{..}
+          = object
+              (catMaybes
+                 [("definition" .=) <$> _segDefinition,
+                  Just ("kind" .= _segKind),
+                  ("created" .=) <$> _segCreated,
+                  ("selfLink" .=) <$> _segSelfLink,
+                  ("name" .=) <$> _segName, ("id" .=) <$> _segId,
+                  ("updated" .=) <$> _segUpdated,
+                  ("type" .=) <$> _segType,
+                  ("segmentId" .=) <$> _segSegmentId])
 
 -- | An segment collection lists Analytics segments that the user has access
 -- to. Each resource in the collection corresponds to a single Analytics
@@ -6131,6 +7965,32 @@ sPreviousLink :: Lens' Segments (Maybe Text)
 sPreviousLink
   = lens _sPreviousLink
       (\ s a -> s{_sPreviousLink = a})
+
+instance FromJSON Segments where
+        parseJSON
+          = withObject "Segments"
+              (\ o ->
+                 Segments <$>
+                   (o .:? "nextLink") <*> (o .:? "itemsPerPage") <*>
+                     (o .:? "kind" .!= "analytics#segments")
+                     <*> (o .:? "username")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "totalResults")
+                     <*> (o .:? "startIndex")
+                     <*> (o .:? "previousLink"))
+
+instance ToJSON Segments where
+        toJSON Segments{..}
+          = object
+              (catMaybes
+                 [("nextLink" .=) <$> _sNextLink,
+                  ("itemsPerPage" .=) <$> _sItemsPerPage,
+                  Just ("kind" .= _sKind),
+                  ("username" .=) <$> _sUsername,
+                  ("items" .=) <$> _sItems,
+                  ("totalResults" .=) <$> _sTotalResults,
+                  ("startIndex" .=) <$> _sStartIndex,
+                  ("previousLink" .=) <$> _sPreviousLink])
 
 -- | JSON template for Analytics unsampled report resource.
 --
@@ -6322,6 +8182,55 @@ unsStartDate :: Lens' UnsampledReport (Maybe Text)
 unsStartDate
   = lens _unsStartDate (\ s a -> s{_unsStartDate = a})
 
+instance FromJSON UnsampledReport where
+        parseJSON
+          = withObject "UnsampledReport"
+              (\ o ->
+                 UnsampledReport <$>
+                   (o .:? "downloadType") <*> (o .:? "status") <*>
+                     (o .:? "metrics")
+                     <*> (o .:? "driveDownloadDetails")
+                     <*> (o .:? "webPropertyId")
+                     <*> (o .:? "kind" .!= "analytics#unsampledReport")
+                     <*> (o .:? "created")
+                     <*> (o .:? "filters")
+                     <*> (o .:? "profileId")
+                     <*> (o .:? "end-date")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "accountId")
+                     <*> (o .:? "id")
+                     <*> (o .:? "updated")
+                     <*> (o .:? "title")
+                     <*> (o .:? "dimensions")
+                     <*> (o .:? "segment")
+                     <*> (o .:? "cloudStorageDownloadDetails")
+                     <*> (o .:? "start-date"))
+
+instance ToJSON UnsampledReport where
+        toJSON UnsampledReport{..}
+          = object
+              (catMaybes
+                 [("downloadType" .=) <$> _unsDownloadType,
+                  ("status" .=) <$> _unsStatus,
+                  ("metrics" .=) <$> _unsMetrics,
+                  ("driveDownloadDetails" .=) <$>
+                    _unsDriveDownloadDetails,
+                  ("webPropertyId" .=) <$> _unsWebPropertyId,
+                  Just ("kind" .= _unsKind),
+                  ("created" .=) <$> _unsCreated,
+                  ("filters" .=) <$> _unsFilters,
+                  ("profileId" .=) <$> _unsProfileId,
+                  ("end-date" .=) <$> _unsEndDate,
+                  ("selfLink" .=) <$> _unsSelfLink,
+                  ("accountId" .=) <$> _unsAccountId,
+                  ("id" .=) <$> _unsId, ("updated" .=) <$> _unsUpdated,
+                  ("title" .=) <$> _unsTitle,
+                  ("dimensions" .=) <$> _unsDimensions,
+                  ("segment" .=) <$> _unsSegment,
+                  ("cloudStorageDownloadDetails" .=) <$>
+                    _unsCloudStorageDownloadDetails,
+                  ("start-date" .=) <$> _unsStartDate])
+
 -- | Download details for a file stored in Google Cloud Storage.
 --
 -- /See:/ 'unsampledReportCloudStorageDownloadDetails' smart constructor.
@@ -6357,6 +8266,23 @@ urcsddBucketId
   = lens _urcsddBucketId
       (\ s a -> s{_urcsddBucketId = a})
 
+instance FromJSON
+         UnsampledReportCloudStorageDownloadDetails where
+        parseJSON
+          = withObject
+              "UnsampledReportCloudStorageDownloadDetails"
+              (\ o ->
+                 UnsampledReportCloudStorageDownloadDetails <$>
+                   (o .:? "objectId") <*> (o .:? "bucketId"))
+
+instance ToJSON
+         UnsampledReportCloudStorageDownloadDetails where
+        toJSON UnsampledReportCloudStorageDownloadDetails{..}
+          = object
+              (catMaybes
+                 [("objectId" .=) <$> _urcsddObjectId,
+                  ("bucketId" .=) <$> _urcsddBucketId])
+
 -- | Download details for a file stored in Google Drive.
 --
 -- /See:/ 'unsampledReportDriveDownloadDetails' smart constructor.
@@ -6381,6 +8307,20 @@ urdddDocumentId :: Lens' UnsampledReportDriveDownloadDetails (Maybe Text)
 urdddDocumentId
   = lens _urdddDocumentId
       (\ s a -> s{_urdddDocumentId = a})
+
+instance FromJSON UnsampledReportDriveDownloadDetails
+         where
+        parseJSON
+          = withObject "UnsampledReportDriveDownloadDetails"
+              (\ o ->
+                 UnsampledReportDriveDownloadDetails <$>
+                   (o .:? "documentId"))
+
+instance ToJSON UnsampledReportDriveDownloadDetails
+         where
+        toJSON UnsampledReportDriveDownloadDetails{..}
+          = object
+              (catMaybes [("documentId" .=) <$> _urdddDocumentId])
 
 -- | An unsampled report collection lists Analytics unsampled reports to
 -- which the user has access. Each view (profile) can have a set of
@@ -6480,6 +8420,32 @@ urPreviousLink
   = lens _urPreviousLink
       (\ s a -> s{_urPreviousLink = a})
 
+instance FromJSON UnsampledReports where
+        parseJSON
+          = withObject "UnsampledReports"
+              (\ o ->
+                 UnsampledReports <$>
+                   (o .:? "nextLink") <*> (o .:? "itemsPerPage") <*>
+                     (o .:? "kind" .!= "analytics#unsampledReports")
+                     <*> (o .:? "username")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "totalResults")
+                     <*> (o .:? "startIndex")
+                     <*> (o .:? "previousLink"))
+
+instance ToJSON UnsampledReports where
+        toJSON UnsampledReports{..}
+          = object
+              (catMaybes
+                 [("nextLink" .=) <$> _urNextLink,
+                  ("itemsPerPage" .=) <$> _urItemsPerPage,
+                  Just ("kind" .= _urKind),
+                  ("username" .=) <$> _urUsername,
+                  ("items" .=) <$> _urItems,
+                  ("totalResults" .=) <$> _urTotalResults,
+                  ("startIndex" .=) <$> _urStartIndex,
+                  ("previousLink" .=) <$> _urPreviousLink])
+
 -- | Metadata returned for an upload operation.
 --
 -- /See:/ 'upload' smart constructor.
@@ -6550,6 +8516,28 @@ uplErrors
   = lens _uplErrors (\ s a -> s{_uplErrors = a}) .
       _Default
       . _Coerce
+
+instance FromJSON Upload where
+        parseJSON
+          = withObject "Upload"
+              (\ o ->
+                 Upload <$>
+                   (o .:? "status") <*>
+                     (o .:? "kind" .!= "analytics#upload")
+                     <*> (o .:? "customDataSourceId")
+                     <*> (o .:? "accountId")
+                     <*> (o .:? "id")
+                     <*> (o .:? "errors" .!= mempty))
+
+instance ToJSON Upload where
+        toJSON Upload{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _uplStatus,
+                  Just ("kind" .= _uplKind),
+                  ("customDataSourceId" .=) <$> _uplCustomDataSourceId,
+                  ("accountId" .=) <$> _uplAccountId,
+                  ("id" .=) <$> _uplId, ("errors" .=) <$> _uplErrors])
 
 -- | Upload collection lists Analytics uploads to which the user has access.
 -- Each custom data source can have a set of uploads. Each resource in the
@@ -6639,6 +8627,29 @@ uPreviousLink
   = lens _uPreviousLink
       (\ s a -> s{_uPreviousLink = a})
 
+instance FromJSON Uploads where
+        parseJSON
+          = withObject "Uploads"
+              (\ o ->
+                 Uploads <$>
+                   (o .:? "nextLink") <*> (o .:? "itemsPerPage") <*>
+                     (o .:? "kind" .!= "analytics#uploads")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "totalResults")
+                     <*> (o .:? "startIndex")
+                     <*> (o .:? "previousLink"))
+
+instance ToJSON Uploads where
+        toJSON Uploads{..}
+          = object
+              (catMaybes
+                 [("nextLink" .=) <$> _uNextLink,
+                  ("itemsPerPage" .=) <$> _uItemsPerPage,
+                  Just ("kind" .= _uKind), ("items" .=) <$> _uItems,
+                  ("totalResults" .=) <$> _uTotalResults,
+                  ("startIndex" .=) <$> _uStartIndex,
+                  ("previousLink" .=) <$> _uPreviousLink])
+
 -- | JSON template for a user reference.
 --
 -- /See:/ 'userRef' smart constructor.
@@ -6676,6 +8687,22 @@ useKind = lens _useKind (\ s a -> s{_useKind = a})
 -- | User ID.
 useId :: Lens' UserRef (Maybe Text)
 useId = lens _useId (\ s a -> s{_useId = a})
+
+instance FromJSON UserRef where
+        parseJSON
+          = withObject "UserRef"
+              (\ o ->
+                 UserRef <$>
+                   (o .:? "email") <*>
+                     (o .:? "kind" .!= "analytics#userRef")
+                     <*> (o .:? "id"))
+
+instance ToJSON UserRef where
+        toJSON UserRef{..}
+          = object
+              (catMaybes
+                 [("email" .=) <$> _useEmail,
+                  Just ("kind" .= _useKind), ("id" .=) <$> _useId])
 
 -- | JSON template for a web property reference.
 --
@@ -6742,6 +8769,29 @@ wprInternalWebPropertyId
 -- | Web property ID of the form UA-XXXXX-YY.
 wprId :: Lens' WebPropertyRef (Maybe Text)
 wprId = lens _wprId (\ s a -> s{_wprId = a})
+
+instance FromJSON WebPropertyRef where
+        parseJSON
+          = withObject "WebPropertyRef"
+              (\ o ->
+                 WebPropertyRef <$>
+                   (o .:? "kind" .!= "analytics#webPropertyRef") <*>
+                     (o .:? "href")
+                     <*> (o .:? "accountId")
+                     <*> (o .:? "name")
+                     <*> (o .:? "internalWebPropertyId")
+                     <*> (o .:? "id"))
+
+instance ToJSON WebPropertyRef where
+        toJSON WebPropertyRef{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _wprKind), ("href" .=) <$> _wprHref,
+                  ("accountId" .=) <$> _wprAccountId,
+                  ("name" .=) <$> _wprName,
+                  ("internalWebPropertyId" .=) <$>
+                    _wprInternalWebPropertyId,
+                  ("id" .=) <$> _wprId])
 
 -- | JSON template for an Analytics WebPropertySummary. WebPropertySummary
 -- returns basic information (i.e., summary) for a web property.
@@ -6821,6 +8871,32 @@ wpsWebsiteUrl
 -- | Level for this web property. Possible values are STANDARD or PREMIUM.
 wpsLevel :: Lens' WebPropertySummary (Maybe Text)
 wpsLevel = lens _wpsLevel (\ s a -> s{_wpsLevel = a})
+
+instance FromJSON WebPropertySummary where
+        parseJSON
+          = withObject "WebPropertySummary"
+              (\ o ->
+                 WebPropertySummary <$>
+                   (o .:? "kind" .!= "analytics#webPropertySummary") <*>
+                     (o .:? "profiles" .!= mempty)
+                     <*> (o .:? "name")
+                     <*> (o .:? "internalWebPropertyId")
+                     <*> (o .:? "id")
+                     <*> (o .:? "websiteUrl")
+                     <*> (o .:? "level"))
+
+instance ToJSON WebPropertySummary where
+        toJSON WebPropertySummary{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _wpsKind),
+                  ("profiles" .=) <$> _wpsProfiles,
+                  ("name" .=) <$> _wpsName,
+                  ("internalWebPropertyId" .=) <$>
+                    _wpsInternalWebPropertyId,
+                  ("id" .=) <$> _wpsId,
+                  ("websiteUrl" .=) <$> _wpsWebsiteUrl,
+                  ("level" .=) <$> _wpsLevel])
 
 -- | A web property collection lists Analytics web properties to which the
 -- user has access. Each resource in the collection corresponds to a single
@@ -6920,6 +8996,32 @@ webPreviousLink :: Lens' Webproperties (Maybe Text)
 webPreviousLink
   = lens _webPreviousLink
       (\ s a -> s{_webPreviousLink = a})
+
+instance FromJSON Webproperties where
+        parseJSON
+          = withObject "Webproperties"
+              (\ o ->
+                 Webproperties <$>
+                   (o .:? "nextLink") <*> (o .:? "itemsPerPage") <*>
+                     (o .:? "kind" .!= "analytics#webproperties")
+                     <*> (o .:? "username")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "totalResults")
+                     <*> (o .:? "startIndex")
+                     <*> (o .:? "previousLink"))
+
+instance ToJSON Webproperties where
+        toJSON Webproperties{..}
+          = object
+              (catMaybes
+                 [("nextLink" .=) <$> _webNextLink,
+                  ("itemsPerPage" .=) <$> _webItemsPerPage,
+                  Just ("kind" .= _webKind),
+                  ("username" .=) <$> _webUsername,
+                  ("items" .=) <$> _webItems,
+                  ("totalResults" .=) <$> _webTotalResults,
+                  ("startIndex" .=) <$> _webStartIndex,
+                  ("previousLink" .=) <$> _webPreviousLink])
 
 -- | JSON template for an Analytics web property.
 --
@@ -7080,6 +9182,48 @@ wIndustryVertical
 wLevel :: Lens' Webproperty (Maybe Text)
 wLevel = lens _wLevel (\ s a -> s{_wLevel = a})
 
+instance FromJSON Webproperty where
+        parseJSON
+          = withObject "Webproperty"
+              (\ o ->
+                 Webproperty <$>
+                   (o .:? "parentLink") <*> (o .:? "childLink") <*>
+                     (o .:? "defaultProfileId")
+                     <*> (o .:? "kind" .!= "analytics#webproperty")
+                     <*> (o .:? "created")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "accountId")
+                     <*> (o .:? "name")
+                     <*> (o .:? "internalWebPropertyId")
+                     <*> (o .:? "id")
+                     <*> (o .:? "updated")
+                     <*> (o .:? "profileCount")
+                     <*> (o .:? "permissions")
+                     <*> (o .:? "websiteUrl")
+                     <*> (o .:? "industryVertical")
+                     <*> (o .:? "level"))
+
+instance ToJSON Webproperty where
+        toJSON Webproperty{..}
+          = object
+              (catMaybes
+                 [("parentLink" .=) <$> _wParentLink,
+                  ("childLink" .=) <$> _wChildLink,
+                  ("defaultProfileId" .=) <$> _wDefaultProfileId,
+                  Just ("kind" .= _wKind),
+                  ("created" .=) <$> _wCreated,
+                  ("selfLink" .=) <$> _wSelfLink,
+                  ("accountId" .=) <$> _wAccountId,
+                  ("name" .=) <$> _wName,
+                  ("internalWebPropertyId" .=) <$>
+                    _wInternalWebPropertyId,
+                  ("id" .=) <$> _wId, ("updated" .=) <$> _wUpdated,
+                  ("profileCount" .=) <$> _wProfileCount,
+                  ("permissions" .=) <$> _wPermissions,
+                  ("websiteUrl" .=) <$> _wWebsiteUrl,
+                  ("industryVertical" .=) <$> _wIndustryVertical,
+                  ("level" .=) <$> _wLevel])
+
 -- | Child link for this web property. Points to the list of views (profiles)
 -- for this web property.
 --
@@ -7111,6 +9255,21 @@ wclHref = lens _wclHref (\ s a -> s{_wclHref = a})
 -- | Type of the parent link. Its value is \"analytics#profiles\".
 wclType :: Lens' WebpropertyChildLink Text
 wclType = lens _wclType (\ s a -> s{_wclType = a})
+
+instance FromJSON WebpropertyChildLink where
+        parseJSON
+          = withObject "WebpropertyChildLink"
+              (\ o ->
+                 WebpropertyChildLink <$>
+                   (o .:? "href") <*>
+                     (o .:? "type" .!= "analytics#profiles"))
+
+instance ToJSON WebpropertyChildLink where
+        toJSON WebpropertyChildLink{..}
+          = object
+              (catMaybes
+                 [("href" .=) <$> _wclHref,
+                  Just ("type" .= _wclType)])
 
 -- | Parent link for this web property. Points to the account to which this
 -- web property belongs.
@@ -7144,6 +9303,21 @@ wplHref = lens _wplHref (\ s a -> s{_wplHref = a})
 wplType :: Lens' WebpropertyParentLink Text
 wplType = lens _wplType (\ s a -> s{_wplType = a})
 
+instance FromJSON WebpropertyParentLink where
+        parseJSON
+          = withObject "WebpropertyParentLink"
+              (\ o ->
+                 WebpropertyParentLink <$>
+                   (o .:? "href") <*>
+                     (o .:? "type" .!= "analytics#account"))
+
+instance ToJSON WebpropertyParentLink where
+        toJSON WebpropertyParentLink{..}
+          = object
+              (catMaybes
+                 [("href" .=) <$> _wplHref,
+                  Just ("type" .= _wplType)])
+
 -- | Permissions the user has for this web property.
 --
 -- /See:/ 'webpropertyPermissions' smart constructor.
@@ -7171,3 +9345,15 @@ wpEffective
   = lens _wpEffective (\ s a -> s{_wpEffective = a}) .
       _Default
       . _Coerce
+
+instance FromJSON WebpropertyPermissions where
+        parseJSON
+          = withObject "WebpropertyPermissions"
+              (\ o ->
+                 WebpropertyPermissions <$>
+                   (o .:? "effective" .!= mempty))
+
+instance ToJSON WebpropertyPermissions where
+        toJSON WebpropertyPermissions{..}
+          = object
+              (catMaybes [("effective" .=) <$> _wpEffective])

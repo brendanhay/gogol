@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -67,6 +68,22 @@ acHeightUncertainty
   = lens _acHeightUncertainty
       (\ s a -> s{_acHeightUncertainty = a})
 
+instance FromJSON AntennaCharacteristics where
+        parseJSON
+          = withObject "AntennaCharacteristics"
+              (\ o ->
+                 AntennaCharacteristics <$>
+                   (o .:? "height") <*> (o .:? "heightType") <*>
+                     (o .:? "heightUncertainty"))
+
+instance ToJSON AntennaCharacteristics where
+        toJSON AntennaCharacteristics{..}
+          = object
+              (catMaybes
+                 [("height" .=) <$> _acHeight,
+                  ("heightType" .=) <$> _acHeightType,
+                  ("heightUncertainty" .=) <$> _acHeightUncertainty])
+
 -- | This message contains the name and URI of a database.
 --
 -- /See:/ 'databaseSpec' smart constructor.
@@ -98,6 +115,18 @@ dsUri = lens _dsUri (\ s a -> s{_dsUri = a})
 dsName :: Lens' DatabaseSpec (Maybe Text)
 dsName = lens _dsName (\ s a -> s{_dsName = a})
 
+instance FromJSON DatabaseSpec where
+        parseJSON
+          = withObject "DatabaseSpec"
+              (\ o ->
+                 DatabaseSpec <$> (o .:? "uri") <*> (o .:? "name"))
+
+instance ToJSON DatabaseSpec where
+        toJSON DatabaseSpec{..}
+          = object
+              (catMaybes
+                 [("uri" .=) <$> _dsUri, ("name" .=) <$> _dsName])
+
 -- | This message is provided by the database to notify devices of an
 -- upcoming change to the database URI.
 --
@@ -126,6 +155,17 @@ dusDatabases
   = lens _dusDatabases (\ s a -> s{_dusDatabases = a})
       . _Default
       . _Coerce
+
+instance FromJSON DbUpdateSpec where
+        parseJSON
+          = withObject "DbUpdateSpec"
+              (\ o ->
+                 DbUpdateSpec <$> (o .:? "databases" .!= mempty))
+
+instance ToJSON DbUpdateSpec where
+        toJSON DbUpdateSpec{..}
+          = object
+              (catMaybes [("databases" .=) <$> _dusDatabases])
 
 -- | Device capabilities provide additional information that may be used by a
 -- device to provide additional information to the database that may help
@@ -160,6 +200,19 @@ dcFrequencyRanges
       (\ s a -> s{_dcFrequencyRanges = a})
       . _Default
       . _Coerce
+
+instance FromJSON DeviceCapabilities where
+        parseJSON
+          = withObject "DeviceCapabilities"
+              (\ o ->
+                 DeviceCapabilities <$>
+                   (o .:? "frequencyRanges" .!= mempty))
+
+instance ToJSON DeviceCapabilities where
+        toJSON DeviceCapabilities{..}
+          = object
+              (catMaybes
+                 [("frequencyRanges" .=) <$> _dcFrequencyRanges])
 
 -- | The device descriptor contains parameters that identify the specific
 -- device, such as its manufacturer serial number, regulatory-specific
@@ -302,6 +355,39 @@ ddSerialNumber
   = lens _ddSerialNumber
       (\ s a -> s{_ddSerialNumber = a})
 
+instance FromJSON DeviceDescriptor where
+        parseJSON
+          = withObject "DeviceDescriptor"
+              (\ o ->
+                 DeviceDescriptor <$>
+                   (o .:? "etsiEnDeviceEmissionsClass") <*>
+                     (o .:? "rulesetIds" .!= mempty)
+                     <*> (o .:? "modelId")
+                     <*> (o .:? "etsiEnDeviceType")
+                     <*> (o .:? "etsiEnTechnologyId")
+                     <*> (o .:? "fccId")
+                     <*> (o .:? "manufacturerId")
+                     <*> (o .:? "fccTvbdDeviceType")
+                     <*> (o .:? "etsiEnDeviceCategory")
+                     <*> (o .:? "serialNumber"))
+
+instance ToJSON DeviceDescriptor where
+        toJSON DeviceDescriptor{..}
+          = object
+              (catMaybes
+                 [("etsiEnDeviceEmissionsClass" .=) <$>
+                    _ddEtsiEnDeviceEmissionsClass,
+                  ("rulesetIds" .=) <$> _ddRulesetIds,
+                  ("modelId" .=) <$> _ddModelId,
+                  ("etsiEnDeviceType" .=) <$> _ddEtsiEnDeviceType,
+                  ("etsiEnTechnologyId" .=) <$> _ddEtsiEnTechnologyId,
+                  ("fccId" .=) <$> _ddFccId,
+                  ("manufacturerId" .=) <$> _ddManufacturerId,
+                  ("fccTvbdDeviceType" .=) <$> _ddFccTvbdDeviceType,
+                  ("etsiEnDeviceCategory" .=) <$>
+                    _ddEtsiEnDeviceCategory,
+                  ("serialNumber" .=) <$> _ddSerialNumber])
+
 -- | This parameter contains device-owner information required as part of
 -- device registration. The regulatory domains may require additional
 -- parameters. All contact information must be expressed using the
@@ -342,6 +428,20 @@ doOperator
 -- the device is required.
 doOwner :: Lens' DeviceOwner (Maybe (Maybe Vcard))
 doOwner = lens _doOwner (\ s a -> s{_doOwner = a})
+
+instance FromJSON DeviceOwner where
+        parseJSON
+          = withObject "DeviceOwner"
+              (\ o ->
+                 DeviceOwner <$>
+                   (o .:? "operator") <*> (o .:? "owner"))
+
+instance ToJSON DeviceOwner where
+        toJSON DeviceOwner{..}
+          = object
+              (catMaybes
+                 [("operator" .=) <$> _doOperator,
+                  ("owner" .=) <$> _doOwner])
 
 -- | The device validity element describes whether a particular device is
 -- valid to operate in the regulatory domain.
@@ -389,6 +489,22 @@ dvDeviceDesc :: Lens' DeviceValidity (Maybe (Maybe DeviceDescriptor))
 dvDeviceDesc
   = lens _dvDeviceDesc (\ s a -> s{_dvDeviceDesc = a})
 
+instance FromJSON DeviceValidity where
+        parseJSON
+          = withObject "DeviceValidity"
+              (\ o ->
+                 DeviceValidity <$>
+                   (o .:? "isValid") <*> (o .:? "reason") <*>
+                     (o .:? "deviceDesc"))
+
+instance ToJSON DeviceValidity where
+        toJSON DeviceValidity{..}
+          = object
+              (catMaybes
+                 [("isValid" .=) <$> _dvIsValid,
+                  ("reason" .=) <$> _dvReason,
+                  ("deviceDesc" .=) <$> _dvDeviceDesc])
+
 -- | The start and stop times of an event. This is used to indicate the time
 -- period for which a spectrum profile is valid. Both times are expressed
 -- using the format, YYYY-MM-DDThh:mm:ssZ, as defined in RFC3339. The times
@@ -424,6 +540,20 @@ etStartTime
 etStopTime :: Lens' EventTime (Maybe Text)
 etStopTime
   = lens _etStopTime (\ s a -> s{_etStopTime = a})
+
+instance FromJSON EventTime where
+        parseJSON
+          = withObject "EventTime"
+              (\ o ->
+                 EventTime <$>
+                   (o .:? "startTime") <*> (o .:? "stopTime"))
+
+instance ToJSON EventTime where
+        toJSON EventTime{..}
+          = object
+              (catMaybes
+                 [("startTime" .=) <$> _etStartTime,
+                  ("stopTime" .=) <$> _etStopTime])
 
 -- | A specific range of frequencies together with the associated maximum
 -- power level and channel identifier.
@@ -486,6 +616,24 @@ frStartHz :: Lens' FrequencyRange (Maybe Double)
 frStartHz
   = lens _frStartHz (\ s a -> s{_frStartHz = a})
 
+instance FromJSON FrequencyRange where
+        parseJSON
+          = withObject "FrequencyRange"
+              (\ o ->
+                 FrequencyRange <$>
+                   (o .:? "stopHz") <*> (o .:? "maxPowerDBm") <*>
+                     (o .:? "channelId")
+                     <*> (o .:? "startHz"))
+
+instance ToJSON FrequencyRange where
+        toJSON FrequencyRange{..}
+          = object
+              (catMaybes
+                 [("stopHz" .=) <$> _frStopHz,
+                  ("maxPowerDBm" .=) <$> _frMaxPowerDBm,
+                  ("channelId" .=) <$> _frChannelId,
+                  ("startHz" .=) <$> _frStartHz])
+
 -- | This parameter is used to specify the geolocation of the device.
 --
 -- /See:/ 'geoLocation' smart constructor.
@@ -535,6 +683,22 @@ glPoint = lens _glPoint (\ s a -> s{_glPoint = a})
 -- support for regions is optional.
 glRegion :: Lens' GeoLocation (Maybe (Maybe GeoLocationPolygon))
 glRegion = lens _glRegion (\ s a -> s{_glRegion = a})
+
+instance FromJSON GeoLocation where
+        parseJSON
+          = withObject "GeoLocation"
+              (\ o ->
+                 GeoLocation <$>
+                   (o .:? "confidence") <*> (o .:? "point") <*>
+                     (o .:? "region"))
+
+instance ToJSON GeoLocation where
+        toJSON GeoLocation{..}
+          = object
+              (catMaybes
+                 [("confidence" .=) <$> _glConfidence,
+                  ("point" .=) <$> _glPoint,
+                  ("region" .=) <$> _glRegion])
 
 -- | A \"point\" with uncertainty is represented using the Ellipse shape.
 --
@@ -600,6 +764,24 @@ gleSemiMinorAxis
   = lens _gleSemiMinorAxis
       (\ s a -> s{_gleSemiMinorAxis = a})
 
+instance FromJSON GeoLocationEllipse where
+        parseJSON
+          = withObject "GeoLocationEllipse"
+              (\ o ->
+                 GeoLocationEllipse <$>
+                   (o .:? "semiMajorAxis") <*> (o .:? "center") <*>
+                     (o .:? "orientation")
+                     <*> (o .:? "semiMinorAxis"))
+
+instance ToJSON GeoLocationEllipse where
+        toJSON GeoLocationEllipse{..}
+          = object
+              (catMaybes
+                 [("semiMajorAxis" .=) <$> _gleSemiMajorAxis,
+                  ("center" .=) <$> _gleCenter,
+                  ("orientation" .=) <$> _gleOrientation,
+                  ("semiMinorAxis" .=) <$> _gleSemiMinorAxis])
+
 -- | A single geolocation on the globe.
 --
 -- /See:/ 'geoLocationPoint' smart constructor.
@@ -637,6 +819,20 @@ glpLongitude :: Lens' GeoLocationPoint (Maybe Double)
 glpLongitude
   = lens _glpLongitude (\ s a -> s{_glpLongitude = a})
 
+instance FromJSON GeoLocationPoint where
+        parseJSON
+          = withObject "GeoLocationPoint"
+              (\ o ->
+                 GeoLocationPoint <$>
+                   (o .:? "latitude") <*> (o .:? "longitude"))
+
+instance ToJSON GeoLocationPoint where
+        toJSON GeoLocationPoint{..}
+          = object
+              (catMaybes
+                 [("latitude" .=) <$> _glpLatitude,
+                  ("longitude" .=) <$> _glpLongitude])
+
 -- | A region is represented using the polygonal shape.
 --
 -- /See:/ 'geoLocationPolygon' smart constructor.
@@ -673,6 +869,17 @@ glpExterior
   = lens _glpExterior (\ s a -> s{_glpExterior = a}) .
       _Default
       . _Coerce
+
+instance FromJSON GeoLocationPolygon where
+        parseJSON
+          = withObject "GeoLocationPolygon"
+              (\ o ->
+                 GeoLocationPolygon <$> (o .:? "exterior" .!= mempty))
+
+instance ToJSON GeoLocationPolygon where
+        toJSON GeoLocationPolygon{..}
+          = object
+              (catMaybes [("exterior" .=) <$> _glpExterior])
 
 -- | The schedule of spectrum profiles available at a particular geolocation.
 --
@@ -713,6 +920,21 @@ gssSpectrumSchedules
       (\ s a -> s{_gssSpectrumSchedules = a})
       . _Default
       . _Coerce
+
+instance FromJSON GeoSpectrumSchedule where
+        parseJSON
+          = withObject "GeoSpectrumSchedule"
+              (\ o ->
+                 GeoSpectrumSchedule <$>
+                   (o .:? "location") <*>
+                     (o .:? "spectrumSchedules" .!= mempty))
+
+instance ToJSON GeoSpectrumSchedule where
+        toJSON GeoSpectrumSchedule{..}
+          = object
+              (catMaybes
+                 [("location" .=) <$> _gssLocation,
+                  ("spectrumSchedules" .=) <$> _gssSpectrumSchedules])
 
 -- | The request message for a batch available spectrum query protocol.
 --
@@ -856,6 +1078,34 @@ pgsbrgDeviceDesc :: Lens' PawsGetSpectrumBatchRequest (Maybe (Maybe DeviceDescri
 pgsbrgDeviceDesc
   = lens _pgsbrgDeviceDesc
       (\ s a -> s{_pgsbrgDeviceDesc = a})
+
+instance FromJSON PawsGetSpectrumBatchRequest where
+        parseJSON
+          = withObject "PawsGetSpectrumBatchRequest"
+              (\ o ->
+                 PawsGetSpectrumBatchRequest <$>
+                   (o .:? "antenna") <*> (o .:? "masterDeviceDesc") <*>
+                     (o .:? "owner")
+                     <*> (o .:? "requestType")
+                     <*> (o .:? "version")
+                     <*> (o .:? "type")
+                     <*> (o .:? "locations" .!= mempty)
+                     <*> (o .:? "capabilities")
+                     <*> (o .:? "deviceDesc"))
+
+instance ToJSON PawsGetSpectrumBatchRequest where
+        toJSON PawsGetSpectrumBatchRequest{..}
+          = object
+              (catMaybes
+                 [("antenna" .=) <$> _pgsbrgAntenna,
+                  ("masterDeviceDesc" .=) <$> _pgsbrgMasterDeviceDesc,
+                  ("owner" .=) <$> _pgsbrgOwner,
+                  ("requestType" .=) <$> _pgsbrgRequestType,
+                  ("version" .=) <$> _pgsbrgVersion,
+                  ("type" .=) <$> _pgsbrgType,
+                  ("locations" .=) <$> _pgsbrgLocations,
+                  ("capabilities" .=) <$> _pgsbrgCapabilities,
+                  ("deviceDesc" .=) <$> _pgsbrgDeviceDesc])
 
 -- | The response message for the batch available spectrum query contains a
 -- schedule of available spectrum for the device at multiple locations.
@@ -1023,6 +1273,42 @@ pgsbrMaxTotalBwHz
   = lens _pgsbrMaxTotalBwHz
       (\ s a -> s{_pgsbrMaxTotalBwHz = a})
 
+instance FromJSON PawsGetSpectrumBatchResponse where
+        parseJSON
+          = withObject "PawsGetSpectrumBatchResponse"
+              (\ o ->
+                 PawsGetSpectrumBatchResponse <$>
+                   (o .:? "needsSpectrumReport") <*>
+                     (o .:? "kind" .!=
+                        "spectrum#pawsGetSpectrumBatchResponse")
+                     <*> (o .:? "geoSpectrumSchedules" .!= mempty)
+                     <*> (o .:? "maxContiguousBwHz")
+                     <*> (o .:? "version")
+                     <*> (o .:? "rulesetInfo")
+                     <*> (o .:? "type")
+                     <*> (o .:? "databaseChange")
+                     <*> (o .:? "timestamp")
+                     <*> (o .:? "deviceDesc")
+                     <*> (o .:? "maxTotalBwHz"))
+
+instance ToJSON PawsGetSpectrumBatchResponse where
+        toJSON PawsGetSpectrumBatchResponse{..}
+          = object
+              (catMaybes
+                 [("needsSpectrumReport" .=) <$>
+                    _pgsbrNeedsSpectrumReport,
+                  Just ("kind" .= _pgsbrKind),
+                  ("geoSpectrumSchedules" .=) <$>
+                    _pgsbrGeoSpectrumSchedules,
+                  ("maxContiguousBwHz" .=) <$> _pgsbrMaxContiguousBwHz,
+                  ("version" .=) <$> _pgsbrVersion,
+                  ("rulesetInfo" .=) <$> _pgsbrRulesetInfo,
+                  ("type" .=) <$> _pgsbrType,
+                  ("databaseChange" .=) <$> _pgsbrDatabaseChange,
+                  ("timestamp" .=) <$> _pgsbrTimestamp,
+                  ("deviceDesc" .=) <$> _pgsbrDeviceDesc,
+                  ("maxTotalBwHz" .=) <$> _pgsbrMaxTotalBwHz])
+
 -- | The request message for the available spectrum query protocol which must
 -- include the device\'s geolocation.
 --
@@ -1158,6 +1444,34 @@ pgsrgDeviceDesc :: Lens' PawsGetSpectrumRequest (Maybe (Maybe DeviceDescriptor))
 pgsrgDeviceDesc
   = lens _pgsrgDeviceDesc
       (\ s a -> s{_pgsrgDeviceDesc = a})
+
+instance FromJSON PawsGetSpectrumRequest where
+        parseJSON
+          = withObject "PawsGetSpectrumRequest"
+              (\ o ->
+                 PawsGetSpectrumRequest <$>
+                   (o .:? "antenna") <*> (o .:? "masterDeviceDesc") <*>
+                     (o .:? "location")
+                     <*> (o .:? "owner")
+                     <*> (o .:? "requestType")
+                     <*> (o .:? "version")
+                     <*> (o .:? "type")
+                     <*> (o .:? "capabilities")
+                     <*> (o .:? "deviceDesc"))
+
+instance ToJSON PawsGetSpectrumRequest where
+        toJSON PawsGetSpectrumRequest{..}
+          = object
+              (catMaybes
+                 [("antenna" .=) <$> _pgsrgAntenna,
+                  ("masterDeviceDesc" .=) <$> _pgsrgMasterDeviceDesc,
+                  ("location" .=) <$> _pgsrgLocation,
+                  ("owner" .=) <$> _pgsrgOwner,
+                  ("requestType" .=) <$> _pgsrgRequestType,
+                  ("version" .=) <$> _pgsrgVersion,
+                  ("type" .=) <$> _pgsrgType,
+                  ("capabilities" .=) <$> _pgsrgCapabilities,
+                  ("deviceDesc" .=) <$> _pgsrgDeviceDesc])
 
 -- | The response message for the available spectrum query which contains a
 -- schedule of available spectrum for the device.
@@ -1318,6 +1632,41 @@ pgsrMaxTotalBwHz
   = lens _pgsrMaxTotalBwHz
       (\ s a -> s{_pgsrMaxTotalBwHz = a})
 
+instance FromJSON PawsGetSpectrumResponse where
+        parseJSON
+          = withObject "PawsGetSpectrumResponse"
+              (\ o ->
+                 PawsGetSpectrumResponse <$>
+                   (o .:? "needsSpectrumReport") <*>
+                     (o .:? "spectrumSchedules" .!= mempty)
+                     <*>
+                     (o .:? "kind" .!= "spectrum#pawsGetSpectrumResponse")
+                     <*> (o .:? "maxContiguousBwHz")
+                     <*> (o .:? "version")
+                     <*> (o .:? "rulesetInfo")
+                     <*> (o .:? "type")
+                     <*> (o .:? "databaseChange")
+                     <*> (o .:? "timestamp")
+                     <*> (o .:? "deviceDesc")
+                     <*> (o .:? "maxTotalBwHz"))
+
+instance ToJSON PawsGetSpectrumResponse where
+        toJSON PawsGetSpectrumResponse{..}
+          = object
+              (catMaybes
+                 [("needsSpectrumReport" .=) <$>
+                    _pgsrNeedsSpectrumReport,
+                  ("spectrumSchedules" .=) <$> _pgsrSpectrumSchedules,
+                  Just ("kind" .= _pgsrKind),
+                  ("maxContiguousBwHz" .=) <$> _pgsrMaxContiguousBwHz,
+                  ("version" .=) <$> _pgsrVersion,
+                  ("rulesetInfo" .=) <$> _pgsrRulesetInfo,
+                  ("type" .=) <$> _pgsrType,
+                  ("databaseChange" .=) <$> _pgsrDatabaseChange,
+                  ("timestamp" .=) <$> _pgsrTimestamp,
+                  ("deviceDesc" .=) <$> _pgsrDeviceDesc,
+                  ("maxTotalBwHz" .=) <$> _pgsrMaxTotalBwHz])
+
 -- | The initialization request message allows the master device to initiate
 -- exchange of capabilities with the database.
 --
@@ -1373,6 +1722,24 @@ piriDeviceDesc :: Lens' PawsInitRequest (Maybe (Maybe DeviceDescriptor))
 piriDeviceDesc
   = lens _piriDeviceDesc
       (\ s a -> s{_piriDeviceDesc = a})
+
+instance FromJSON PawsInitRequest where
+        parseJSON
+          = withObject "PawsInitRequest"
+              (\ o ->
+                 PawsInitRequest <$>
+                   (o .:? "location") <*> (o .:? "version") <*>
+                     (o .:? "type")
+                     <*> (o .:? "deviceDesc"))
+
+instance ToJSON PawsInitRequest where
+        toJSON PawsInitRequest{..}
+          = object
+              (catMaybes
+                 [("location" .=) <$> _piriLocation,
+                  ("version" .=) <$> _piriVersion,
+                  ("type" .=) <$> _piriType,
+                  ("deviceDesc" .=) <$> _piriDeviceDesc])
 
 -- | The initialization response message communicates database parameters to
 -- the requesting device.
@@ -1444,6 +1811,27 @@ pirDatabaseChange :: Lens' PawsInitResponse (Maybe (Maybe DbUpdateSpec))
 pirDatabaseChange
   = lens _pirDatabaseChange
       (\ s a -> s{_pirDatabaseChange = a})
+
+instance FromJSON PawsInitResponse where
+        parseJSON
+          = withObject "PawsInitResponse"
+              (\ o ->
+                 PawsInitResponse <$>
+                   (o .:? "kind" .!= "spectrum#pawsInitResponse") <*>
+                     (o .:? "version")
+                     <*> (o .:? "rulesetInfo")
+                     <*> (o .:? "type")
+                     <*> (o .:? "databaseChange"))
+
+instance ToJSON PawsInitResponse where
+        toJSON PawsInitResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _pirKind),
+                  ("version" .=) <$> _pirVersion,
+                  ("rulesetInfo" .=) <$> _pirRulesetInfo,
+                  ("type" .=) <$> _pirType,
+                  ("databaseChange" .=) <$> _pirDatabaseChange])
 
 -- | The spectrum-use notification message which must contain the geolocation
 -- of the Device and parameters required by the regulatory domain.
@@ -1523,6 +1911,25 @@ pDeviceDesc :: Lens' PawsNotifySpectrumUseRequest (Maybe (Maybe DeviceDescriptor
 pDeviceDesc
   = lens _pDeviceDesc (\ s a -> s{_pDeviceDesc = a})
 
+instance FromJSON PawsNotifySpectrumUseRequest where
+        parseJSON
+          = withObject "PawsNotifySpectrumUseRequest"
+              (\ o ->
+                 PawsNotifySpectrumUseRequest <$>
+                   (o .:? "spectra" .!= mempty) <*> (o .:? "location")
+                     <*> (o .:? "version")
+                     <*> (o .:? "type")
+                     <*> (o .:? "deviceDesc"))
+
+instance ToJSON PawsNotifySpectrumUseRequest where
+        toJSON PawsNotifySpectrumUseRequest{..}
+          = object
+              (catMaybes
+                 [("spectra" .=) <$> _pSpectra,
+                  ("location" .=) <$> _pLocation,
+                  ("version" .=) <$> _pVersion, ("type" .=) <$> _pType,
+                  ("deviceDesc" .=) <$> _pDeviceDesc])
+
 -- | An empty response to the notification.
 --
 -- /See:/ 'pawsNotifySpectrumUseResponse' smart constructor.
@@ -1566,6 +1973,24 @@ pnsurVersion
 pnsurType :: Lens' PawsNotifySpectrumUseResponse (Maybe Text)
 pnsurType
   = lens _pnsurType (\ s a -> s{_pnsurType = a})
+
+instance FromJSON PawsNotifySpectrumUseResponse where
+        parseJSON
+          = withObject "PawsNotifySpectrumUseResponse"
+              (\ o ->
+                 PawsNotifySpectrumUseResponse <$>
+                   (o .:? "kind" .!=
+                      "spectrum#pawsNotifySpectrumUseResponse")
+                     <*> (o .:? "version")
+                     <*> (o .:? "type"))
+
+instance ToJSON PawsNotifySpectrumUseResponse where
+        toJSON PawsNotifySpectrumUseResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _pnsurKind),
+                  ("version" .=) <$> _pnsurVersion,
+                  ("type" .=) <$> _pnsurType])
 
 -- | The registration request message contains the required registration
 -- parameters.
@@ -1639,6 +2064,28 @@ prrDeviceDesc
   = lens _prrDeviceDesc
       (\ s a -> s{_prrDeviceDesc = a})
 
+instance FromJSON PawsRegisterRequest where
+        parseJSON
+          = withObject "PawsRegisterRequest"
+              (\ o ->
+                 PawsRegisterRequest <$>
+                   (o .:? "antenna") <*> (o .:? "location") <*>
+                     (o .:? "deviceOwner")
+                     <*> (o .:? "version")
+                     <*> (o .:? "type")
+                     <*> (o .:? "deviceDesc"))
+
+instance ToJSON PawsRegisterRequest where
+        toJSON PawsRegisterRequest{..}
+          = object
+              (catMaybes
+                 [("antenna" .=) <$> _prrAntenna,
+                  ("location" .=) <$> _prrLocation,
+                  ("deviceOwner" .=) <$> _prrDeviceOwner,
+                  ("version" .=) <$> _prrVersion,
+                  ("type" .=) <$> _prrType,
+                  ("deviceDesc" .=) <$> _prrDeviceDesc])
+
 -- | The registration response message simply acknowledges receipt of the
 -- request and is otherwise empty.
 --
@@ -1696,6 +2143,25 @@ pawDatabaseChange
   = lens _pawDatabaseChange
       (\ s a -> s{_pawDatabaseChange = a})
 
+instance FromJSON PawsRegisterResponse where
+        parseJSON
+          = withObject "PawsRegisterResponse"
+              (\ o ->
+                 PawsRegisterResponse <$>
+                   (o .:? "kind" .!= "spectrum#pawsRegisterResponse")
+                     <*> (o .:? "version")
+                     <*> (o .:? "type")
+                     <*> (o .:? "databaseChange"))
+
+instance ToJSON PawsRegisterResponse where
+        toJSON PawsRegisterResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _pawKind),
+                  ("version" .=) <$> _pawVersion,
+                  ("type" .=) <$> _pawType,
+                  ("databaseChange" .=) <$> _pawDatabaseChange])
+
 -- | The device validation request message.
 --
 -- /See:/ 'pawsVerifyDeviceRequest' smart constructor.
@@ -1741,6 +2207,23 @@ pvdrDeviceDescs
 -- field.
 pvdrType :: Lens' PawsVerifyDeviceRequest (Maybe Text)
 pvdrType = lens _pvdrType (\ s a -> s{_pvdrType = a})
+
+instance FromJSON PawsVerifyDeviceRequest where
+        parseJSON
+          = withObject "PawsVerifyDeviceRequest"
+              (\ o ->
+                 PawsVerifyDeviceRequest <$>
+                   (o .:? "version") <*>
+                     (o .:? "deviceDescs" .!= mempty)
+                     <*> (o .:? "type"))
+
+instance ToJSON PawsVerifyDeviceRequest where
+        toJSON PawsVerifyDeviceRequest{..}
+          = object
+              (catMaybes
+                 [("version" .=) <$> _pvdrVersion,
+                  ("deviceDescs" .=) <$> _pvdrDeviceDescs,
+                  ("type" .=) <$> _pvdrType])
 
 -- | The device validation response message.
 --
@@ -1814,6 +2297,28 @@ pvdrvDatabaseChange :: Lens' PawsVerifyDeviceResponse (Maybe (Maybe DbUpdateSpec
 pvdrvDatabaseChange
   = lens _pvdrvDatabaseChange
       (\ s a -> s{_pvdrvDatabaseChange = a})
+
+instance FromJSON PawsVerifyDeviceResponse where
+        parseJSON
+          = withObject "PawsVerifyDeviceResponse"
+              (\ o ->
+                 PawsVerifyDeviceResponse <$>
+                   (o .:? "deviceValidities" .!= mempty) <*>
+                     (o .:? "kind" .!=
+                        "spectrum#pawsVerifyDeviceResponse")
+                     <*> (o .:? "version")
+                     <*> (o .:? "type")
+                     <*> (o .:? "databaseChange"))
+
+instance ToJSON PawsVerifyDeviceResponse where
+        toJSON PawsVerifyDeviceResponse{..}
+          = object
+              (catMaybes
+                 [("deviceValidities" .=) <$> _pvdrvDeviceValidities,
+                  Just ("kind" .= _pvdrvKind),
+                  ("version" .=) <$> _pvdrvVersion,
+                  ("type" .=) <$> _pvdrvType,
+                  ("databaseChange" .=) <$> _pvdrvDatabaseChange])
 
 -- | This contains parameters for the ruleset of a regulatory domain that is
 -- communicated using the initialization and available-spectrum processes.
@@ -1897,6 +2402,25 @@ riAuthority :: Lens' RulesetInfo (Maybe Text)
 riAuthority
   = lens _riAuthority (\ s a -> s{_riAuthority = a})
 
+instance FromJSON RulesetInfo where
+        parseJSON
+          = withObject "RulesetInfo"
+              (\ o ->
+                 RulesetInfo <$>
+                   (o .:? "rulesetIds" .!= mempty) <*>
+                     (o .:? "maxPollingSecs")
+                     <*> (o .:? "maxLocationChange")
+                     <*> (o .:? "authority"))
+
+instance ToJSON RulesetInfo where
+        toJSON RulesetInfo{..}
+          = object
+              (catMaybes
+                 [("rulesetIds" .=) <$> _riRulesetIds,
+                  ("maxPollingSecs" .=) <$> _riMaxPollingSecs,
+                  ("maxLocationChange" .=) <$> _riMaxLocationChange,
+                  ("authority" .=) <$> _riAuthority])
+
 -- | Available spectrum can be logically characterized by a list of frequency
 -- ranges and permissible power levels for each range.
 --
@@ -1940,6 +2464,21 @@ smFrequencyRanges
       . _Default
       . _Coerce
 
+instance FromJSON SpectrumMessage where
+        parseJSON
+          = withObject "SpectrumMessage"
+              (\ o ->
+                 SpectrumMessage <$>
+                   (o .:? "bandwidth") <*>
+                     (o .:? "frequencyRanges" .!= mempty))
+
+instance ToJSON SpectrumMessage where
+        toJSON SpectrumMessage{..}
+          = object
+              (catMaybes
+                 [("bandwidth" .=) <$> _smBandwidth,
+                  ("frequencyRanges" .=) <$> _smFrequencyRanges])
+
 -- | The spectrum schedule element combines an event time with spectrum
 -- profile to define a time period in which the profile is valid.
 --
@@ -1977,6 +2516,20 @@ ssSpectra
 ssEventTime :: Lens' SpectrumSchedule (Maybe (Maybe EventTime))
 ssEventTime
   = lens _ssEventTime (\ s a -> s{_ssEventTime = a})
+
+instance FromJSON SpectrumSchedule where
+        parseJSON
+          = withObject "SpectrumSchedule"
+              (\ o ->
+                 SpectrumSchedule <$>
+                   (o .:? "spectra" .!= mempty) <*> (o .:? "eventTime"))
+
+instance ToJSON SpectrumSchedule where
+        toJSON SpectrumSchedule{..}
+          = object
+              (catMaybes
+                 [("spectra" .=) <$> _ssSpectra,
+                  ("eventTime" .=) <$> _ssEventTime])
 
 -- | A vCard-in-JSON message that contains only the fields needed for PAWS: -
 -- fn: Full name of an individual - org: Name of the organization - adr:
@@ -2034,6 +2587,23 @@ vTel = lens _vTel (\ s a -> s{_vTel = a})
 -- | The full name of the contact person. For example: John A. Smith.
 vFn :: Lens' Vcard (Maybe Text)
 vFn = lens _vFn (\ s a -> s{_vFn = a})
+
+instance FromJSON Vcard where
+        parseJSON
+          = withObject "Vcard"
+              (\ o ->
+                 Vcard <$>
+                   (o .:? "email") <*> (o .:? "adr") <*> (o .:? "org")
+                     <*> (o .:? "tel")
+                     <*> (o .:? "fn"))
+
+instance ToJSON Vcard where
+        toJSON Vcard{..}
+          = object
+              (catMaybes
+                 [("email" .=) <$> _vEmail, ("adr" .=) <$> _vAdr,
+                  ("org" .=) <$> _vOrg, ("tel" .=) <$> _vTel,
+                  ("fn" .=) <$> _vFn])
 
 -- | The structure used to represent a street address.
 --
@@ -2101,6 +2671,28 @@ vaCode = lens _vaCode (\ s a -> s{_vaCode = a})
 vaRegion :: Lens' VcardAddress (Maybe Text)
 vaRegion = lens _vaRegion (\ s a -> s{_vaRegion = a})
 
+instance FromJSON VcardAddress where
+        parseJSON
+          = withObject "VcardAddress"
+              (\ o ->
+                 VcardAddress <$>
+                   (o .:? "pobox") <*> (o .:? "country") <*>
+                     (o .:? "street")
+                     <*> (o .:? "locality")
+                     <*> (o .:? "code")
+                     <*> (o .:? "region"))
+
+instance ToJSON VcardAddress where
+        toJSON VcardAddress{..}
+          = object
+              (catMaybes
+                 [("pobox" .=) <$> _vaPobox,
+                  ("country" .=) <$> _vaCountry,
+                  ("street" .=) <$> _vaStreet,
+                  ("locality" .=) <$> _vaLocality,
+                  ("code" .=) <$> _vaCode,
+                  ("region" .=) <$> _vaRegion])
+
 -- | The structure used to represent a telephone number.
 --
 -- /See:/ 'vcardTelephone' smart constructor.
@@ -2123,6 +2715,15 @@ vcardTelephone =
 -- | A nested telephone URI of the form: tel:+1-123-456-7890.
 vtUri :: Lens' VcardTelephone (Maybe Text)
 vtUri = lens _vtUri (\ s a -> s{_vtUri = a})
+
+instance FromJSON VcardTelephone where
+        parseJSON
+          = withObject "VcardTelephone"
+              (\ o -> VcardTelephone <$> (o .:? "uri"))
+
+instance ToJSON VcardTelephone where
+        toJSON VcardTelephone{..}
+          = object (catMaybes [("uri" .=) <$> _vtUri])
 
 -- | The structure used to represent an organization and an email address.
 --
@@ -2147,3 +2748,12 @@ vcardTypedText =
 -- field: ACME, inc. For an email field: smith\'example.com.
 vttText :: Lens' VcardTypedText (Maybe Text)
 vttText = lens _vttText (\ s a -> s{_vttText = a})
+
+instance FromJSON VcardTypedText where
+        parseJSON
+          = withObject "VcardTypedText"
+              (\ o -> VcardTypedText <$> (o .:? "text"))
+
+instance ToJSON VcardTypedText where
+        toJSON VcardTypedText{..}
+          = object (catMaybes [("text" .=) <$> _vttText])

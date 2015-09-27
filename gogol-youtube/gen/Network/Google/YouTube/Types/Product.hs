@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -53,6 +54,20 @@ apException
 apAllowed :: Lens' AccessPolicy (Maybe Bool)
 apAllowed
   = lens _apAllowed (\ s a -> s{_apAllowed = a})
+
+instance FromJSON AccessPolicy where
+        parseJSON
+          = withObject "AccessPolicy"
+              (\ o ->
+                 AccessPolicy <$>
+                   (o .:? "exception" .!= mempty) <*> (o .:? "allowed"))
+
+instance ToJSON AccessPolicy where
+        toJSON AccessPolicy{..}
+          = object
+              (catMaybes
+                 [("exception" .=) <$> _apException,
+                  ("allowed" .=) <$> _apAllowed])
 
 -- | An activity resource contains information about an action that a
 -- particular channel, or user, has taken on YouTube.The actions reported
@@ -121,6 +136,26 @@ aContentDetails
 -- | The ID that YouTube uses to uniquely identify the activity.
 aId :: Lens' Activity (Maybe Text)
 aId = lens _aId (\ s a -> s{_aId = a})
+
+instance FromJSON Activity where
+        parseJSON
+          = withObject "Activity"
+              (\ o ->
+                 Activity <$>
+                   (o .:? "etag") <*> (o .:? "snippet") <*>
+                     (o .:? "kind" .!= "youtube#activity")
+                     <*> (o .:? "contentDetails")
+                     <*> (o .:? "id"))
+
+instance ToJSON Activity where
+        toJSON Activity{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _aEtag,
+                  ("snippet" .=) <$> _aSnippet,
+                  Just ("kind" .= _aKind),
+                  ("contentDetails" .=) <$> _aContentDetails,
+                  ("id" .=) <$> _aId])
 
 -- | Details about the content of an activity: the video that was shared, the
 -- channel that was subscribed to, etc.
@@ -258,6 +293,38 @@ acdRecommendation
   = lens _acdRecommendation
       (\ s a -> s{_acdRecommendation = a})
 
+instance FromJSON ActivityContentDetails where
+        parseJSON
+          = withObject "ActivityContentDetails"
+              (\ o ->
+                 ActivityContentDetails <$>
+                   (o .:? "promotedItem") <*> (o .:? "channelItem") <*>
+                     (o .:? "bulletin")
+                     <*> (o .:? "favorite")
+                     <*> (o .:? "upload")
+                     <*> (o .:? "comment")
+                     <*> (o .:? "social")
+                     <*> (o .:? "subscription")
+                     <*> (o .:? "playlistItem")
+                     <*> (o .:? "like")
+                     <*> (o .:? "recommendation"))
+
+instance ToJSON ActivityContentDetails where
+        toJSON ActivityContentDetails{..}
+          = object
+              (catMaybes
+                 [("promotedItem" .=) <$> _acdPromotedItem,
+                  ("channelItem" .=) <$> _acdChannelItem,
+                  ("bulletin" .=) <$> _acdBulletin,
+                  ("favorite" .=) <$> _acdFavorite,
+                  ("upload" .=) <$> _acdUpload,
+                  ("comment" .=) <$> _acdComment,
+                  ("social" .=) <$> _acdSocial,
+                  ("subscription" .=) <$> _acdSubscription,
+                  ("playlistItem" .=) <$> _acdPlaylistItem,
+                  ("like" .=) <$> _acdLike,
+                  ("recommendation" .=) <$> _acdRecommendation])
+
 -- | Details about a channel bulletin post.
 --
 -- /See:/ 'activityContentDetailsBulletin' smart constructor.
@@ -283,6 +350,19 @@ acdbResourceId :: Lens' ActivityContentDetailsBulletin (Maybe (Maybe ResourceId)
 acdbResourceId
   = lens _acdbResourceId
       (\ s a -> s{_acdbResourceId = a})
+
+instance FromJSON ActivityContentDetailsBulletin
+         where
+        parseJSON
+          = withObject "ActivityContentDetailsBulletin"
+              (\ o ->
+                 ActivityContentDetailsBulletin <$>
+                   (o .:? "resourceId"))
+
+instance ToJSON ActivityContentDetailsBulletin where
+        toJSON ActivityContentDetailsBulletin{..}
+          = object
+              (catMaybes [("resourceId" .=) <$> _acdbResourceId])
 
 -- | Details about a resource which was added to a channel.
 --
@@ -310,6 +390,20 @@ acdciResourceId
   = lens _acdciResourceId
       (\ s a -> s{_acdciResourceId = a})
 
+instance FromJSON ActivityContentDetailsChannelItem
+         where
+        parseJSON
+          = withObject "ActivityContentDetailsChannelItem"
+              (\ o ->
+                 ActivityContentDetailsChannelItem <$>
+                   (o .:? "resourceId"))
+
+instance ToJSON ActivityContentDetailsChannelItem
+         where
+        toJSON ActivityContentDetailsChannelItem{..}
+          = object
+              (catMaybes [("resourceId" .=) <$> _acdciResourceId])
+
 -- | Information about a resource that received a comment.
 --
 -- /See:/ 'activityContentDetailsComment' smart constructor.
@@ -335,6 +429,18 @@ acdcResourceId :: Lens' ActivityContentDetailsComment (Maybe (Maybe ResourceId))
 acdcResourceId
   = lens _acdcResourceId
       (\ s a -> s{_acdcResourceId = a})
+
+instance FromJSON ActivityContentDetailsComment where
+        parseJSON
+          = withObject "ActivityContentDetailsComment"
+              (\ o ->
+                 ActivityContentDetailsComment <$>
+                   (o .:? "resourceId"))
+
+instance ToJSON ActivityContentDetailsComment where
+        toJSON ActivityContentDetailsComment{..}
+          = object
+              (catMaybes [("resourceId" .=) <$> _acdcResourceId])
 
 -- | Information about a video that was marked as a favorite video.
 --
@@ -362,6 +468,19 @@ acdfResourceId
   = lens _acdfResourceId
       (\ s a -> s{_acdfResourceId = a})
 
+instance FromJSON ActivityContentDetailsFavorite
+         where
+        parseJSON
+          = withObject "ActivityContentDetailsFavorite"
+              (\ o ->
+                 ActivityContentDetailsFavorite <$>
+                   (o .:? "resourceId"))
+
+instance ToJSON ActivityContentDetailsFavorite where
+        toJSON ActivityContentDetailsFavorite{..}
+          = object
+              (catMaybes [("resourceId" .=) <$> _acdfResourceId])
+
 -- | Information about a resource that received a positive (like) rating.
 --
 -- /See:/ 'activityContentDetailsLike' smart constructor.
@@ -387,6 +506,17 @@ acdlResourceId :: Lens' ActivityContentDetailsLike (Maybe (Maybe ResourceId))
 acdlResourceId
   = lens _acdlResourceId
       (\ s a -> s{_acdlResourceId = a})
+
+instance FromJSON ActivityContentDetailsLike where
+        parseJSON
+          = withObject "ActivityContentDetailsLike"
+              (\ o ->
+                 ActivityContentDetailsLike <$> (o .:? "resourceId"))
+
+instance ToJSON ActivityContentDetailsLike where
+        toJSON ActivityContentDetailsLike{..}
+          = object
+              (catMaybes [("resourceId" .=) <$> _acdlResourceId])
 
 -- | Information about a new playlist item.
 --
@@ -433,6 +563,24 @@ acdpiPlaylistItemId :: Lens' ActivityContentDetailsPlaylistItem (Maybe Text)
 acdpiPlaylistItemId
   = lens _acdpiPlaylistItemId
       (\ s a -> s{_acdpiPlaylistItemId = a})
+
+instance FromJSON ActivityContentDetailsPlaylistItem
+         where
+        parseJSON
+          = withObject "ActivityContentDetailsPlaylistItem"
+              (\ o ->
+                 ActivityContentDetailsPlaylistItem <$>
+                   (o .:? "resourceId") <*> (o .:? "playlistId") <*>
+                     (o .:? "playlistItemId"))
+
+instance ToJSON ActivityContentDetailsPlaylistItem
+         where
+        toJSON ActivityContentDetailsPlaylistItem{..}
+          = object
+              (catMaybes
+                 [("resourceId" .=) <$> _acdpiResourceId,
+                  ("playlistId" .=) <$> _acdpiPlaylistId,
+                  ("playlistItemId" .=) <$> _acdpiPlaylistItemId])
 
 -- | Details about a resource which is being promoted.
 --
@@ -558,6 +706,40 @@ acdpiCustomCtaButtonText
   = lens _acdpiCustomCtaButtonText
       (\ s a -> s{_acdpiCustomCtaButtonText = a})
 
+instance FromJSON ActivityContentDetailsPromotedItem
+         where
+        parseJSON
+          = withObject "ActivityContentDetailsPromotedItem"
+              (\ o ->
+                 ActivityContentDetailsPromotedItem <$>
+                   (o .:? "destinationUrl") <*>
+                     (o .:? "clickTrackingUrl")
+                     <*> (o .:? "forecastingUrl" .!= mempty)
+                     <*> (o .:? "descriptionText")
+                     <*> (o .:? "ctaType")
+                     <*> (o .:? "videoId")
+                     <*> (o .:? "adTag")
+                     <*> (o .:? "creativeViewUrl")
+                     <*> (o .:? "impressionUrl" .!= mempty)
+                     <*> (o .:? "customCtaButtonText"))
+
+instance ToJSON ActivityContentDetailsPromotedItem
+         where
+        toJSON ActivityContentDetailsPromotedItem{..}
+          = object
+              (catMaybes
+                 [("destinationUrl" .=) <$> _acdpiDestinationUrl,
+                  ("clickTrackingUrl" .=) <$> _acdpiClickTrackingUrl,
+                  ("forecastingUrl" .=) <$> _acdpiForecastingUrl,
+                  ("descriptionText" .=) <$> _acdpiDescriptionText,
+                  ("ctaType" .=) <$> _acdpiCtaType,
+                  ("videoId" .=) <$> _acdpiVideoId,
+                  ("adTag" .=) <$> _acdpiAdTag,
+                  ("creativeViewUrl" .=) <$> _acdpiCreativeViewUrl,
+                  ("impressionUrl" .=) <$> _acdpiImpressionUrl,
+                  ("customCtaButtonText" .=) <$>
+                    _acdpiCustomCtaButtonText])
+
 -- | Information that identifies the recommended resource.
 --
 -- /See:/ 'activityContentDetailsRecommendation' smart constructor.
@@ -603,6 +785,24 @@ acdrSeedResourceId
 acdrReason :: Lens' ActivityContentDetailsRecommendation (Maybe ActivityContentDetailsRecommendationReason)
 acdrReason
   = lens _acdrReason (\ s a -> s{_acdrReason = a})
+
+instance FromJSON
+         ActivityContentDetailsRecommendation where
+        parseJSON
+          = withObject "ActivityContentDetailsRecommendation"
+              (\ o ->
+                 ActivityContentDetailsRecommendation <$>
+                   (o .:? "resourceId") <*> (o .:? "seedResourceId") <*>
+                     (o .:? "reason"))
+
+instance ToJSON ActivityContentDetailsRecommendation
+         where
+        toJSON ActivityContentDetailsRecommendation{..}
+          = object
+              (catMaybes
+                 [("resourceId" .=) <$> _acdrResourceId,
+                  ("seedResourceId" .=) <$> _acdrSeedResourceId,
+                  ("reason" .=) <$> _acdrReason])
 
 -- | Details about a social network post.
 --
@@ -666,6 +866,26 @@ acdsReferenceUrl
 acdsType :: Lens' ActivityContentDetailsSocial (Maybe ActivityContentDetailsSocialType)
 acdsType = lens _acdsType (\ s a -> s{_acdsType = a})
 
+instance FromJSON ActivityContentDetailsSocial where
+        parseJSON
+          = withObject "ActivityContentDetailsSocial"
+              (\ o ->
+                 ActivityContentDetailsSocial <$>
+                   (o .:? "resourceId") <*> (o .:? "imageUrl") <*>
+                     (o .:? "author")
+                     <*> (o .:? "referenceUrl")
+                     <*> (o .:? "type"))
+
+instance ToJSON ActivityContentDetailsSocial where
+        toJSON ActivityContentDetailsSocial{..}
+          = object
+              (catMaybes
+                 [("resourceId" .=) <$> _acdsResourceId,
+                  ("imageUrl" .=) <$> _acdsImageUrl,
+                  ("author" .=) <$> _acdsAuthor,
+                  ("referenceUrl" .=) <$> _acdsReferenceUrl,
+                  ("type" .=) <$> _acdsType])
+
 -- | Information about a channel that a user subscribed to.
 --
 -- /See:/ 'activityContentDetailsSubscription' smart constructor.
@@ -691,6 +911,20 @@ aResourceId :: Lens' ActivityContentDetailsSubscription (Maybe (Maybe ResourceId
 aResourceId
   = lens _aResourceId (\ s a -> s{_aResourceId = a})
 
+instance FromJSON ActivityContentDetailsSubscription
+         where
+        parseJSON
+          = withObject "ActivityContentDetailsSubscription"
+              (\ o ->
+                 ActivityContentDetailsSubscription <$>
+                   (o .:? "resourceId"))
+
+instance ToJSON ActivityContentDetailsSubscription
+         where
+        toJSON ActivityContentDetailsSubscription{..}
+          = object
+              (catMaybes [("resourceId" .=) <$> _aResourceId])
+
 -- | Information about the uploaded video.
 --
 -- /See:/ 'activityContentDetailsUpload' smart constructor.
@@ -714,6 +948,17 @@ activityContentDetailsUpload =
 acduVideoId :: Lens' ActivityContentDetailsUpload (Maybe Text)
 acduVideoId
   = lens _acduVideoId (\ s a -> s{_acduVideoId = a})
+
+instance FromJSON ActivityContentDetailsUpload where
+        parseJSON
+          = withObject "ActivityContentDetailsUpload"
+              (\ o ->
+                 ActivityContentDetailsUpload <$> (o .:? "videoId"))
+
+instance ToJSON ActivityContentDetailsUpload where
+        toJSON ActivityContentDetailsUpload{..}
+          = object
+              (catMaybes [("videoId" .=) <$> _acduVideoId])
 
 --
 -- /See:/ 'activityListResponse' smart constructor.
@@ -814,6 +1059,34 @@ alrPrevPageToken
   = lens _alrPrevPageToken
       (\ s a -> s{_alrPrevPageToken = a})
 
+instance FromJSON ActivityListResponse where
+        parseJSON
+          = withObject "ActivityListResponse"
+              (\ o ->
+                 ActivityListResponse <$>
+                   (o .:? "etag") <*> (o .:? "tokenPagination") <*>
+                     (o .:? "nextPageToken")
+                     <*> (o .:? "pageInfo")
+                     <*> (o .:? "kind" .!= "youtube#activityListResponse")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "visitorId")
+                     <*> (o .:? "eventId")
+                     <*> (o .:? "prevPageToken"))
+
+instance ToJSON ActivityListResponse where
+        toJSON ActivityListResponse{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _alrEtag,
+                  ("tokenPagination" .=) <$> _alrTokenPagination,
+                  ("nextPageToken" .=) <$> _alrNextPageToken,
+                  ("pageInfo" .=) <$> _alrPageInfo,
+                  Just ("kind" .= _alrKind),
+                  ("items" .=) <$> _alrItems,
+                  ("visitorId" .=) <$> _alrVisitorId,
+                  ("eventId" .=) <$> _alrEventId,
+                  ("prevPageToken" .=) <$> _alrPrevPageToken])
+
 -- | Basic details about an activity, including title, description,
 -- thumbnails, activity type and group.
 --
@@ -913,6 +1186,31 @@ asDescription
   = lens _asDescription
       (\ s a -> s{_asDescription = a})
 
+instance FromJSON ActivitySnippet where
+        parseJSON
+          = withObject "ActivitySnippet"
+              (\ o ->
+                 ActivitySnippet <$>
+                   (o .:? "publishedAt") <*> (o .:? "channelTitle") <*>
+                     (o .:? "channelId")
+                     <*> (o .:? "thumbnails")
+                     <*> (o .:? "groupId")
+                     <*> (o .:? "title")
+                     <*> (o .:? "type")
+                     <*> (o .:? "description"))
+
+instance ToJSON ActivitySnippet where
+        toJSON ActivitySnippet{..}
+          = object
+              (catMaybes
+                 [("publishedAt" .=) <$> _asPublishedAt,
+                  ("channelTitle" .=) <$> _asChannelTitle,
+                  ("channelId" .=) <$> _asChannelId,
+                  ("thumbnails" .=) <$> _asThumbnails,
+                  ("groupId" .=) <$> _asGroupId,
+                  ("title" .=) <$> _asTitle, ("type" .=) <$> _asType,
+                  ("description" .=) <$> _asDescription])
+
 -- | A caption resource represents a YouTube caption track. A caption track
 -- is associated with exactly one YouTube video.
 --
@@ -962,6 +1260,23 @@ capKind = lens _capKind (\ s a -> s{_capKind = a})
 -- | The ID that YouTube uses to uniquely identify the caption track.
 capId :: Lens' Caption (Maybe Text)
 capId = lens _capId (\ s a -> s{_capId = a})
+
+instance FromJSON Caption where
+        parseJSON
+          = withObject "Caption"
+              (\ o ->
+                 Caption <$>
+                   (o .:? "etag") <*> (o .:? "snippet") <*>
+                     (o .:? "kind" .!= "youtube#caption")
+                     <*> (o .:? "id"))
+
+instance ToJSON Caption where
+        toJSON Caption{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _capEtag,
+                  ("snippet" .=) <$> _capSnippet,
+                  Just ("kind" .= _capKind), ("id" .=) <$> _capId])
 
 --
 -- /See:/ 'captionListResponse' smart constructor.
@@ -1022,6 +1337,26 @@ clrVisitorId
 clrEventId :: Lens' CaptionListResponse (Maybe Text)
 clrEventId
   = lens _clrEventId (\ s a -> s{_clrEventId = a})
+
+instance FromJSON CaptionListResponse where
+        parseJSON
+          = withObject "CaptionListResponse"
+              (\ o ->
+                 CaptionListResponse <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!= "youtube#captionListResponse")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "visitorId")
+                     <*> (o .:? "eventId"))
+
+instance ToJSON CaptionListResponse where
+        toJSON CaptionListResponse{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _clrEtag, Just ("kind" .= _clrKind),
+                  ("items" .=) <$> _clrItems,
+                  ("visitorId" .=) <$> _clrVisitorId,
+                  ("eventId" .=) <$> _clrEventId])
 
 -- | Basic details about a caption track, such as its language and name.
 --
@@ -1173,6 +1508,42 @@ csAudioTrackType
   = lens _csAudioTrackType
       (\ s a -> s{_csAudioTrackType = a})
 
+instance FromJSON CaptionSnippet where
+        parseJSON
+          = withObject "CaptionSnippet"
+              (\ o ->
+                 CaptionSnippet <$>
+                   (o .:? "failureReason") <*> (o .:? "status") <*>
+                     (o .:? "lastUpdated")
+                     <*> (o .:? "trackKind")
+                     <*> (o .:? "isDraft")
+                     <*> (o .:? "isCC")
+                     <*> (o .:? "videoId")
+                     <*> (o .:? "name")
+                     <*> (o .:? "isLarge")
+                     <*> (o .:? "language")
+                     <*> (o .:? "isAutoSynced")
+                     <*> (o .:? "isEasyReader")
+                     <*> (o .:? "audioTrackType"))
+
+instance ToJSON CaptionSnippet where
+        toJSON CaptionSnippet{..}
+          = object
+              (catMaybes
+                 [("failureReason" .=) <$> _csFailureReason,
+                  ("status" .=) <$> _csStatus,
+                  ("lastUpdated" .=) <$> _csLastUpdated,
+                  ("trackKind" .=) <$> _csTrackKind,
+                  ("isDraft" .=) <$> _csIsDraft,
+                  ("isCC" .=) <$> _csIsCC,
+                  ("videoId" .=) <$> _csVideoId,
+                  ("name" .=) <$> _csName,
+                  ("isLarge" .=) <$> _csIsLarge,
+                  ("language" .=) <$> _csLanguage,
+                  ("isAutoSynced" .=) <$> _csIsAutoSynced,
+                  ("isEasyReader" .=) <$> _csIsEasyReader,
+                  ("audioTrackType" .=) <$> _csAudioTrackType])
+
 -- | Brief description of the live stream cdn settings.
 --
 -- /See:/ 'cdnSettings' smart constructor.
@@ -1216,6 +1587,22 @@ csIngestionType :: Lens' CdnSettings (Maybe CdnSettingsIngestionType)
 csIngestionType
   = lens _csIngestionType
       (\ s a -> s{_csIngestionType = a})
+
+instance FromJSON CdnSettings where
+        parseJSON
+          = withObject "CdnSettings"
+              (\ o ->
+                 CdnSettings <$>
+                   (o .:? "ingestionInfo") <*> (o .:? "format") <*>
+                     (o .:? "ingestionType"))
+
+instance ToJSON CdnSettings where
+        toJSON CdnSettings{..}
+          = object
+              (catMaybes
+                 [("ingestionInfo" .=) <$> _csIngestionInfo,
+                  ("format" .=) <$> _csFormat,
+                  ("ingestionType" .=) <$> _csIngestionType])
 
 -- | A channel resource contains information about a YouTube channel.
 --
@@ -1374,6 +1761,45 @@ chaLocalizations
   = lens _chaLocalizations
       (\ s a -> s{_chaLocalizations = a})
 
+instance FromJSON Channel where
+        parseJSON
+          = withObject "Channel"
+              (\ o ->
+                 Channel <$>
+                   (o .:? "status") <*> (o .:? "etag") <*>
+                     (o .:? "auditDetails")
+                     <*> (o .:? "contentOwnerDetails")
+                     <*> (o .:? "snippet")
+                     <*> (o .:? "kind" .!= "youtube#channel")
+                     <*> (o .:? "topicDetails")
+                     <*> (o .:? "contentDetails")
+                     <*> (o .:? "conversionPings")
+                     <*> (o .:? "brandingSettings")
+                     <*> (o .:? "id")
+                     <*> (o .:? "invideoPromotion")
+                     <*> (o .:? "statistics")
+                     <*> (o .:? "localizations"))
+
+instance ToJSON Channel where
+        toJSON Channel{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _chaStatus,
+                  ("etag" .=) <$> _chaEtag,
+                  ("auditDetails" .=) <$> _chaAuditDetails,
+                  ("contentOwnerDetails" .=) <$>
+                    _chaContentOwnerDetails,
+                  ("snippet" .=) <$> _chaSnippet,
+                  Just ("kind" .= _chaKind),
+                  ("topicDetails" .=) <$> _chaTopicDetails,
+                  ("contentDetails" .=) <$> _chaContentDetails,
+                  ("conversionPings" .=) <$> _chaConversionPings,
+                  ("brandingSettings" .=) <$> _chaBrandingSettings,
+                  ("id" .=) <$> _chaId,
+                  ("invideoPromotion" .=) <$> _chaInvideoPromotion,
+                  ("statistics" .=) <$> _chaStatistics,
+                  ("localizations" .=) <$> _chaLocalizations])
+
 -- | The auditDetails object encapsulates channel data that is relevant for
 -- YouTube Partners during the audit process.
 --
@@ -1435,6 +1861,29 @@ cadCommunityGuidelinesGoodStanding
   = lens _cadCommunityGuidelinesGoodStanding
       (\ s a -> s{_cadCommunityGuidelinesGoodStanding = a})
 
+instance FromJSON ChannelAuditDetails where
+        parseJSON
+          = withObject "ChannelAuditDetails"
+              (\ o ->
+                 ChannelAuditDetails <$>
+                   (o .:? "contentIdClaimsGoodStanding") <*>
+                     (o .:? "overallGoodStanding")
+                     <*> (o .:? "copyrightStrikesGoodStanding")
+                     <*> (o .:? "communityGuidelinesGoodStanding"))
+
+instance ToJSON ChannelAuditDetails where
+        toJSON ChannelAuditDetails{..}
+          = object
+              (catMaybes
+                 [("contentIdClaimsGoodStanding" .=) <$>
+                    _cadContentIdClaimsGoodStanding,
+                  ("overallGoodStanding" .=) <$>
+                    _cadOverallGoodStanding,
+                  ("copyrightStrikesGoodStanding" .=) <$>
+                    _cadCopyrightStrikesGoodStanding,
+                  ("communityGuidelinesGoodStanding" .=) <$>
+                    _cadCommunityGuidelinesGoodStanding])
+
 -- | A channel banner returned as the response to a channel_banner.insert
 -- call.
 --
@@ -1475,6 +1924,22 @@ cbrKind = lens _cbrKind (\ s a -> s{_cbrKind = a})
 -- | The URL of this banner image.
 cbrUrl :: Lens' ChannelBannerResource (Maybe Text)
 cbrUrl = lens _cbrUrl (\ s a -> s{_cbrUrl = a})
+
+instance FromJSON ChannelBannerResource where
+        parseJSON
+          = withObject "ChannelBannerResource"
+              (\ o ->
+                 ChannelBannerResource <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!= "youtube#channelBannerResource")
+                     <*> (o .:? "url"))
+
+instance ToJSON ChannelBannerResource where
+        toJSON ChannelBannerResource{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _cbrEtag, Just ("kind" .= _cbrKind),
+                  ("url" .=) <$> _cbrUrl])
 
 -- | Branding properties of a YouTube channel.
 --
@@ -1527,6 +1992,24 @@ cbsChannel
 cbsWatch :: Lens' ChannelBrandingSettings (Maybe (Maybe WatchSettings))
 cbsWatch = lens _cbsWatch (\ s a -> s{_cbsWatch = a})
 
+instance FromJSON ChannelBrandingSettings where
+        parseJSON
+          = withObject "ChannelBrandingSettings"
+              (\ o ->
+                 ChannelBrandingSettings <$>
+                   (o .:? "image") <*> (o .:? "hints" .!= mempty) <*>
+                     (o .:? "channel")
+                     <*> (o .:? "watch"))
+
+instance ToJSON ChannelBrandingSettings where
+        toJSON ChannelBrandingSettings{..}
+          = object
+              (catMaybes
+                 [("image" .=) <$> _cbsImage,
+                  ("hints" .=) <$> _cbsHints,
+                  ("channel" .=) <$> _cbsChannel,
+                  ("watch" .=) <$> _cbsWatch])
+
 -- | Details about the content of a channel.
 --
 -- /See:/ 'channelContentDetails' smart constructor.
@@ -1561,6 +2044,21 @@ ccdGooglePlusUserId :: Lens' ChannelContentDetails (Maybe Text)
 ccdGooglePlusUserId
   = lens _ccdGooglePlusUserId
       (\ s a -> s{_ccdGooglePlusUserId = a})
+
+instance FromJSON ChannelContentDetails where
+        parseJSON
+          = withObject "ChannelContentDetails"
+              (\ o ->
+                 ChannelContentDetails <$>
+                   (o .:? "relatedPlaylists") <*>
+                     (o .:? "googlePlusUserId"))
+
+instance ToJSON ChannelContentDetails where
+        toJSON ChannelContentDetails{..}
+          = object
+              (catMaybes
+                 [("relatedPlaylists" .=) <$> _ccdRelatedPlaylists,
+                  ("googlePlusUserId" .=) <$> _ccdGooglePlusUserId])
 
 --
 -- /See:/ 'channelContentDetailsRelatedPlaylists' smart constructor.
@@ -1634,6 +2132,28 @@ ccdrpLikes :: Lens' ChannelContentDetailsRelatedPlaylists (Maybe Text)
 ccdrpLikes
   = lens _ccdrpLikes (\ s a -> s{_ccdrpLikes = a})
 
+instance FromJSON
+         ChannelContentDetailsRelatedPlaylists where
+        parseJSON
+          = withObject "ChannelContentDetailsRelatedPlaylists"
+              (\ o ->
+                 ChannelContentDetailsRelatedPlaylists <$>
+                   (o .:? "favorites") <*> (o .:? "watchHistory") <*>
+                     (o .:? "watchLater")
+                     <*> (o .:? "uploads")
+                     <*> (o .:? "likes"))
+
+instance ToJSON ChannelContentDetailsRelatedPlaylists
+         where
+        toJSON ChannelContentDetailsRelatedPlaylists{..}
+          = object
+              (catMaybes
+                 [("favorites" .=) <$> _ccdrpFavorites,
+                  ("watchHistory" .=) <$> _ccdrpWatchHistory,
+                  ("watchLater" .=) <$> _ccdrpWatchLater,
+                  ("uploads" .=) <$> _ccdrpUploads,
+                  ("likes" .=) <$> _ccdrpLikes])
+
 -- | The contentOwnerDetails object encapsulates channel data that is
 -- relevant for YouTube Partners linked with the channel.
 --
@@ -1670,6 +2190,20 @@ ccodContentOwner :: Lens' ChannelContentOwnerDetails (Maybe Text)
 ccodContentOwner
   = lens _ccodContentOwner
       (\ s a -> s{_ccodContentOwner = a})
+
+instance FromJSON ChannelContentOwnerDetails where
+        parseJSON
+          = withObject "ChannelContentOwnerDetails"
+              (\ o ->
+                 ChannelContentOwnerDetails <$>
+                   (o .:? "timeLinked") <*> (o .:? "contentOwner"))
+
+instance ToJSON ChannelContentOwnerDetails where
+        toJSON ChannelContentOwnerDetails{..}
+          = object
+              (catMaybes
+                 [("timeLinked" .=) <$> _ccodTimeLinked,
+                  ("contentOwner" .=) <$> _ccodContentOwner])
 
 -- | Pings that the app shall fire (authenticated by biscotti cookie). Each
 -- ping has a context, in which the app must fire the ping, and a url
@@ -1714,6 +2248,20 @@ ccpConversionUrl
   = lens _ccpConversionUrl
       (\ s a -> s{_ccpConversionUrl = a})
 
+instance FromJSON ChannelConversionPing where
+        parseJSON
+          = withObject "ChannelConversionPing"
+              (\ o ->
+                 ChannelConversionPing <$>
+                   (o .:? "context") <*> (o .:? "conversionUrl"))
+
+instance ToJSON ChannelConversionPing where
+        toJSON ChannelConversionPing{..}
+          = object
+              (catMaybes
+                 [("context" .=) <$> _ccpContext,
+                  ("conversionUrl" .=) <$> _ccpConversionUrl])
+
 -- | The conversionPings object encapsulates information about conversion
 -- pings that need to be respected by the channel.
 --
@@ -1743,6 +2291,17 @@ ccpPings
       _Default
       . _Coerce
 
+instance FromJSON ChannelConversionPings where
+        parseJSON
+          = withObject "ChannelConversionPings"
+              (\ o ->
+                 ChannelConversionPings <$>
+                   (o .:? "pings" .!= mempty))
+
+instance ToJSON ChannelConversionPings where
+        toJSON ChannelConversionPings{..}
+          = object (catMaybes [("pings" .=) <$> _ccpPings])
+
 --
 -- /See:/ 'channelId' smart constructor.
 newtype ChannelId = ChannelId
@@ -1763,6 +2322,15 @@ channelId =
 
 ciValue :: Lens' ChannelId (Maybe Text)
 ciValue = lens _ciValue (\ s a -> s{_ciValue = a})
+
+instance FromJSON ChannelId where
+        parseJSON
+          = withObject "ChannelId"
+              (\ o -> ChannelId <$> (o .:? "value"))
+
+instance ToJSON ChannelId where
+        toJSON ChannelId{..}
+          = object (catMaybes [("value" .=) <$> _ciValue])
 
 --
 -- /See:/ 'channelListResponse' smart constructor.
@@ -1861,6 +2429,33 @@ cPrevPageToken
   = lens _cPrevPageToken
       (\ s a -> s{_cPrevPageToken = a})
 
+instance FromJSON ChannelListResponse where
+        parseJSON
+          = withObject "ChannelListResponse"
+              (\ o ->
+                 ChannelListResponse <$>
+                   (o .:? "etag") <*> (o .:? "tokenPagination") <*>
+                     (o .:? "nextPageToken")
+                     <*> (o .:? "pageInfo")
+                     <*> (o .:? "kind" .!= "youtube#channelListResponse")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "visitorId")
+                     <*> (o .:? "eventId")
+                     <*> (o .:? "prevPageToken"))
+
+instance ToJSON ChannelListResponse where
+        toJSON ChannelListResponse{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _cEtag,
+                  ("tokenPagination" .=) <$> _cTokenPagination,
+                  ("nextPageToken" .=) <$> _cNextPageToken,
+                  ("pageInfo" .=) <$> _cPageInfo,
+                  Just ("kind" .= _cKind), ("items" .=) <$> _cItems,
+                  ("visitorId" .=) <$> _cVisitorId,
+                  ("eventId" .=) <$> _cEventId,
+                  ("prevPageToken" .=) <$> _cPrevPageToken])
+
 -- | Channel localization setting
 --
 -- /See:/ 'channelLocalization' smart constructor.
@@ -1894,6 +2489,20 @@ clDescription
   = lens _clDescription
       (\ s a -> s{_clDescription = a})
 
+instance FromJSON ChannelLocalization where
+        parseJSON
+          = withObject "ChannelLocalization"
+              (\ o ->
+                 ChannelLocalization <$>
+                   (o .:? "title") <*> (o .:? "description"))
+
+instance ToJSON ChannelLocalization where
+        toJSON ChannelLocalization{..}
+          = object
+              (catMaybes
+                 [("title" .=) <$> _clTitle,
+                  ("description" .=) <$> _clDescription])
+
 -- | Localizations for different languages
 --
 -- /See:/ 'channelLocalizations' smart constructor.
@@ -1906,6 +2515,14 @@ data ChannelLocalizations =
 channelLocalizations
     :: ChannelLocalizations
 channelLocalizations = ChannelLocalizations
+
+instance FromJSON ChannelLocalizations where
+        parseJSON
+          = withObject "ChannelLocalizations"
+              (\ o -> pure ChannelLocalizations)
+
+instance ToJSON ChannelLocalizations where
+        toJSON = const (Object mempty)
 
 --
 -- /See:/ 'channelSection' smart constructor.
@@ -1988,6 +2605,30 @@ csLocalizations
   = lens _csLocalizations
       (\ s a -> s{_csLocalizations = a})
 
+instance FromJSON ChannelSection where
+        parseJSON
+          = withObject "ChannelSection"
+              (\ o ->
+                 ChannelSection <$>
+                   (o .:? "etag") <*> (o .:? "snippet") <*>
+                     (o .:? "kind" .!= "youtube#channelSection")
+                     <*> (o .:? "contentDetails")
+                     <*> (o .:? "targeting")
+                     <*> (o .:? "id")
+                     <*> (o .:? "localizations"))
+
+instance ToJSON ChannelSection where
+        toJSON ChannelSection{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _csEtag,
+                  ("snippet" .=) <$> _csSnippet,
+                  Just ("kind" .= _csKind),
+                  ("contentDetails" .=) <$> _csContentDetails,
+                  ("targeting" .=) <$> _csTargeting,
+                  ("id" .=) <$> _csId,
+                  ("localizations" .=) <$> _csLocalizations])
+
 -- | Details about a channelsection, including playlists and channels.
 --
 -- /See:/ 'channelSectionContentDetails' smart constructor.
@@ -2026,6 +2667,21 @@ cscdPlaylists
       (\ s a -> s{_cscdPlaylists = a})
       . _Default
       . _Coerce
+
+instance FromJSON ChannelSectionContentDetails where
+        parseJSON
+          = withObject "ChannelSectionContentDetails"
+              (\ o ->
+                 ChannelSectionContentDetails <$>
+                   (o .:? "channels" .!= mempty) <*>
+                     (o .:? "playlists" .!= mempty))
+
+instance ToJSON ChannelSectionContentDetails where
+        toJSON ChannelSectionContentDetails{..}
+          = object
+              (catMaybes
+                 [("channels" .=) <$> _cscdChannels,
+                  ("playlists" .=) <$> _cscdPlaylists])
 
 --
 -- /See:/ 'channelSectionListResponse' smart constructor.
@@ -2088,6 +2744,28 @@ cslrEventId :: Lens' ChannelSectionListResponse (Maybe Text)
 cslrEventId
   = lens _cslrEventId (\ s a -> s{_cslrEventId = a})
 
+instance FromJSON ChannelSectionListResponse where
+        parseJSON
+          = withObject "ChannelSectionListResponse"
+              (\ o ->
+                 ChannelSectionListResponse <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!=
+                        "youtube#channelSectionListResponse")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "visitorId")
+                     <*> (o .:? "eventId"))
+
+instance ToJSON ChannelSectionListResponse where
+        toJSON ChannelSectionListResponse{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _cslrEtag,
+                  Just ("kind" .= _cslrKind),
+                  ("items" .=) <$> _cslrItems,
+                  ("visitorId" .=) <$> _cslrVisitorId,
+                  ("eventId" .=) <$> _cslrEventId])
+
 -- | ChannelSection localization setting
 --
 -- /See:/ 'channelSectionLocalization' smart constructor.
@@ -2111,6 +2789,16 @@ channelSectionLocalization =
 cslTitle :: Lens' ChannelSectionLocalization (Maybe Text)
 cslTitle = lens _cslTitle (\ s a -> s{_cslTitle = a})
 
+instance FromJSON ChannelSectionLocalization where
+        parseJSON
+          = withObject "ChannelSectionLocalization"
+              (\ o ->
+                 ChannelSectionLocalization <$> (o .:? "title"))
+
+instance ToJSON ChannelSectionLocalization where
+        toJSON ChannelSectionLocalization{..}
+          = object (catMaybes [("title" .=) <$> _cslTitle])
+
 -- | Localizations for different languages
 --
 -- /See:/ 'channelSectionLocalizations' smart constructor.
@@ -2123,6 +2811,14 @@ data ChannelSectionLocalizations =
 channelSectionLocalizations
     :: ChannelSectionLocalizations
 channelSectionLocalizations = ChannelSectionLocalizations
+
+instance FromJSON ChannelSectionLocalizations where
+        parseJSON
+          = withObject "ChannelSectionLocalizations"
+              (\ o -> pure ChannelSectionLocalizations)
+
+instance ToJSON ChannelSectionLocalizations where
+        toJSON = const (Object mempty)
 
 -- | Basic details about a channel section, including title, style and
 -- position.
@@ -2203,6 +2899,29 @@ cssDefaultLanguage
   = lens _cssDefaultLanguage
       (\ s a -> s{_cssDefaultLanguage = a})
 
+instance FromJSON ChannelSectionSnippet where
+        parseJSON
+          = withObject "ChannelSectionSnippet"
+              (\ o ->
+                 ChannelSectionSnippet <$>
+                   (o .:? "style") <*> (o .:? "channelId") <*>
+                     (o .:? "localized")
+                     <*> (o .:? "title")
+                     <*> (o .:? "type")
+                     <*> (o .:? "position")
+                     <*> (o .:? "defaultLanguage"))
+
+instance ToJSON ChannelSectionSnippet where
+        toJSON ChannelSectionSnippet{..}
+          = object
+              (catMaybes
+                 [("style" .=) <$> _cssStyle,
+                  ("channelId" .=) <$> _cssChannelId,
+                  ("localized" .=) <$> _cssLocalized,
+                  ("title" .=) <$> _cssTitle, ("type" .=) <$> _cssType,
+                  ("position" .=) <$> _cssPosition,
+                  ("defaultLanguage" .=) <$> _cssDefaultLanguage])
+
 -- | ChannelSection targeting setting.
 --
 -- /See:/ 'channelSectionTargeting' smart constructor.
@@ -2250,6 +2969,23 @@ cstLanguages
   = lens _cstLanguages (\ s a -> s{_cstLanguages = a})
       . _Default
       . _Coerce
+
+instance FromJSON ChannelSectionTargeting where
+        parseJSON
+          = withObject "ChannelSectionTargeting"
+              (\ o ->
+                 ChannelSectionTargeting <$>
+                   (o .:? "regions" .!= mempty) <*>
+                     (o .:? "countries" .!= mempty)
+                     <*> (o .:? "languages" .!= mempty))
+
+instance ToJSON ChannelSectionTargeting where
+        toJSON ChannelSectionTargeting{..}
+          = object
+              (catMaybes
+                 [("regions" .=) <$> _cstRegions,
+                  ("countries" .=) <$> _cstCountries,
+                  ("languages" .=) <$> _cstLanguages])
 
 -- | Branding properties for the channel view.
 --
@@ -2402,6 +3138,49 @@ cDefaultLanguage
   = lens _cDefaultLanguage
       (\ s a -> s{_cDefaultLanguage = a})
 
+instance FromJSON ChannelSettings where
+        parseJSON
+          = withObject "ChannelSettings"
+              (\ o ->
+                 ChannelSettings <$>
+                   (o .:? "showRelatedChannels") <*>
+                     (o .:? "defaultTab")
+                     <*> (o .:? "featuredChannelsTitle")
+                     <*> (o .:? "country")
+                     <*> (o .:? "profileColor")
+                     <*> (o .:? "moderateComments")
+                     <*> (o .:? "keywords")
+                     <*> (o .:? "unsubscribedTrailer")
+                     <*> (o .:? "trackingAnalyticsAccountId")
+                     <*> (o .:? "featuredChannelsUrls" .!= mempty)
+                     <*> (o .:? "showBrowseView")
+                     <*> (o .:? "title")
+                     <*> (o .:? "description")
+                     <*> (o .:? "defaultLanguage"))
+
+instance ToJSON ChannelSettings where
+        toJSON ChannelSettings{..}
+          = object
+              (catMaybes
+                 [("showRelatedChannels" .=) <$>
+                    _cShowRelatedChannels,
+                  ("defaultTab" .=) <$> _cDefaultTab,
+                  ("featuredChannelsTitle" .=) <$>
+                    _cFeaturedChannelsTitle,
+                  ("country" .=) <$> _cCountry,
+                  ("profileColor" .=) <$> _cProfileColor,
+                  ("moderateComments" .=) <$> _cModerateComments,
+                  ("keywords" .=) <$> _cKeywords,
+                  ("unsubscribedTrailer" .=) <$> _cUnsubscribedTrailer,
+                  ("trackingAnalyticsAccountId" .=) <$>
+                    _cTrackingAnalyticsAccountId,
+                  ("featuredChannelsUrls" .=) <$>
+                    _cFeaturedChannelsUrls,
+                  ("showBrowseView" .=) <$> _cShowBrowseView,
+                  ("title" .=) <$> _cTitle,
+                  ("description" .=) <$> _cDescription,
+                  ("defaultLanguage" .=) <$> _cDefaultLanguage])
+
 -- | Basic details about a channel, including title, description and
 -- thumbnails.
 --
@@ -2486,6 +3265,30 @@ csDefaultLanguage
   = lens _csDefaultLanguage
       (\ s a -> s{_csDefaultLanguage = a})
 
+instance FromJSON ChannelSnippet where
+        parseJSON
+          = withObject "ChannelSnippet"
+              (\ o ->
+                 ChannelSnippet <$>
+                   (o .:? "publishedAt") <*> (o .:? "country") <*>
+                     (o .:? "thumbnails")
+                     <*> (o .:? "localized")
+                     <*> (o .:? "title")
+                     <*> (o .:? "description")
+                     <*> (o .:? "defaultLanguage"))
+
+instance ToJSON ChannelSnippet where
+        toJSON ChannelSnippet{..}
+          = object
+              (catMaybes
+                 [("publishedAt" .=) <$> _csPublishedAt,
+                  ("country" .=) <$> _csCountry,
+                  ("thumbnails" .=) <$> _csThumbnails,
+                  ("localized" .=) <$> _csLocalized,
+                  ("title" .=) <$> _csTitle,
+                  ("description" .=) <$> _csDescription,
+                  ("defaultLanguage" .=) <$> _csDefaultLanguage])
+
 -- | Statistics about a channel: number of subscribers, number of videos in
 -- the channel, etc.
 --
@@ -2550,6 +3353,27 @@ csViewCount :: Lens' ChannelStatistics (Maybe Word64)
 csViewCount
   = lens _csViewCount (\ s a -> s{_csViewCount = a})
 
+instance FromJSON ChannelStatistics where
+        parseJSON
+          = withObject "ChannelStatistics"
+              (\ o ->
+                 ChannelStatistics <$>
+                   (o .:? "commentCount") <*> (o .:? "subscriberCount")
+                     <*> (o .:? "videoCount")
+                     <*> (o .:? "hiddenSubscriberCount")
+                     <*> (o .:? "viewCount"))
+
+instance ToJSON ChannelStatistics where
+        toJSON ChannelStatistics{..}
+          = object
+              (catMaybes
+                 [("commentCount" .=) <$> _csCommentCount,
+                  ("subscriberCount" .=) <$> _csSubscriberCount,
+                  ("videoCount" .=) <$> _csVideoCount,
+                  ("hiddenSubscriberCount" .=) <$>
+                    _csHiddenSubscriberCount,
+                  ("viewCount" .=) <$> _csViewCount])
+
 -- | JSON template for the status part of a channel.
 --
 -- /See:/ 'channelStatus' smart constructor.
@@ -2595,6 +3419,22 @@ csPrivacyStatus
   = lens _csPrivacyStatus
       (\ s a -> s{_csPrivacyStatus = a})
 
+instance FromJSON ChannelStatus where
+        parseJSON
+          = withObject "ChannelStatus"
+              (\ o ->
+                 ChannelStatus <$>
+                   (o .:? "isLinked") <*> (o .:? "longUploadsStatus")
+                     <*> (o .:? "privacyStatus"))
+
+instance ToJSON ChannelStatus where
+        toJSON ChannelStatus{..}
+          = object
+              (catMaybes
+                 [("isLinked" .=) <$> _csIsLinked,
+                  ("longUploadsStatus" .=) <$> _csLongUploadsStatus,
+                  ("privacyStatus" .=) <$> _csPrivacyStatus])
+
 -- | Freebase topic information related to the channel.
 --
 -- /See:/ 'channelTopicDetails' smart constructor.
@@ -2621,6 +3461,18 @@ ctdTopicIds
   = lens _ctdTopicIds (\ s a -> s{_ctdTopicIds = a}) .
       _Default
       . _Coerce
+
+instance FromJSON ChannelTopicDetails where
+        parseJSON
+          = withObject "ChannelTopicDetails"
+              (\ o ->
+                 ChannelTopicDetails <$>
+                   (o .:? "topicIds" .!= mempty))
+
+instance ToJSON ChannelTopicDetails where
+        toJSON ChannelTopicDetails{..}
+          = object
+              (catMaybes [("topicIds" .=) <$> _ctdTopicIds])
 
 -- | A comment represents a single YouTube comment.
 --
@@ -2670,6 +3522,23 @@ comKind = lens _comKind (\ s a -> s{_comKind = a})
 -- | The ID that YouTube uses to uniquely identify the comment.
 comId :: Lens' Comment (Maybe Text)
 comId = lens _comId (\ s a -> s{_comId = a})
+
+instance FromJSON Comment where
+        parseJSON
+          = withObject "Comment"
+              (\ o ->
+                 Comment <$>
+                   (o .:? "etag") <*> (o .:? "snippet") <*>
+                     (o .:? "kind" .!= "youtube#comment")
+                     <*> (o .:? "id"))
+
+instance ToJSON Comment where
+        toJSON Comment{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _comEtag,
+                  ("snippet" .=) <$> _comSnippet,
+                  Just ("kind" .= _comKind), ("id" .=) <$> _comId])
 
 --
 -- /See:/ 'commentListResponse' smart constructor.
@@ -2759,6 +3628,32 @@ clrlVisitorId
 clrlEventId :: Lens' CommentListResponse (Maybe Text)
 clrlEventId
   = lens _clrlEventId (\ s a -> s{_clrlEventId = a})
+
+instance FromJSON CommentListResponse where
+        parseJSON
+          = withObject "CommentListResponse"
+              (\ o ->
+                 CommentListResponse <$>
+                   (o .:? "etag") <*> (o .:? "tokenPagination") <*>
+                     (o .:? "nextPageToken")
+                     <*> (o .:? "pageInfo")
+                     <*> (o .:? "kind" .!= "youtube#commentListResponse")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "visitorId")
+                     <*> (o .:? "eventId"))
+
+instance ToJSON CommentListResponse where
+        toJSON CommentListResponse{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _clrlEtag,
+                  ("tokenPagination" .=) <$> _clrlTokenPagination,
+                  ("nextPageToken" .=) <$> _clrlNextPageToken,
+                  ("pageInfo" .=) <$> _clrlPageInfo,
+                  Just ("kind" .= _clrlKind),
+                  ("items" .=) <$> _clrlItems,
+                  ("visitorId" .=) <$> _clrlVisitorId,
+                  ("eventId" .=) <$> _clrlEventId])
 
 -- | Basic details about a comment, such as its author and text.
 --
@@ -2944,6 +3839,50 @@ csniParentId :: Lens' CommentSnippet (Maybe Text)
 csniParentId
   = lens _csniParentId (\ s a -> s{_csniParentId = a})
 
+instance FromJSON CommentSnippet where
+        parseJSON
+          = withObject "CommentSnippet"
+              (\ o ->
+                 CommentSnippet <$>
+                   (o .:? "viewerRating") <*> (o .:? "publishedAt") <*>
+                     (o .:? "authorChannelUrl")
+                     <*> (o .:? "moderationStatus")
+                     <*> (o .:? "likeCount")
+                     <*> (o .:? "channelId")
+                     <*> (o .:? "textOriginal")
+                     <*> (o .:? "videoId")
+                     <*> (o .:? "textDisplay")
+                     <*> (o .:? "authorProfileImageUrl")
+                     <*> (o .:? "authorDisplayName")
+                     <*> (o .:? "updatedAt")
+                     <*> (o .:? "authorChannelId")
+                     <*> (o .:? "canRate")
+                     <*> (o .:? "authorGoogleplusProfileUrl")
+                     <*> (o .:? "parentId"))
+
+instance ToJSON CommentSnippet where
+        toJSON CommentSnippet{..}
+          = object
+              (catMaybes
+                 [("viewerRating" .=) <$> _csniViewerRating,
+                  ("publishedAt" .=) <$> _csniPublishedAt,
+                  ("authorChannelUrl" .=) <$> _csniAuthorChannelUrl,
+                  ("moderationStatus" .=) <$> _csniModerationStatus,
+                  ("likeCount" .=) <$> _csniLikeCount,
+                  ("channelId" .=) <$> _csniChannelId,
+                  ("textOriginal" .=) <$> _csniTextOriginal,
+                  ("videoId" .=) <$> _csniVideoId,
+                  ("textDisplay" .=) <$> _csniTextDisplay,
+                  ("authorProfileImageUrl" .=) <$>
+                    _csniAuthorProfileImageUrl,
+                  ("authorDisplayName" .=) <$> _csniAuthorDisplayName,
+                  ("updatedAt" .=) <$> _csniUpdatedAt,
+                  ("authorChannelId" .=) <$> _csniAuthorChannelId,
+                  ("canRate" .=) <$> _csniCanRate,
+                  ("authorGoogleplusProfileUrl" .=) <$>
+                    _csniAuthorGoogleplusProfileUrl,
+                  ("parentId" .=) <$> _csniParentId])
+
 -- | A comment thread represents information that applies to a top level
 -- comment and all its replies. It can also include the top level comment
 -- itself and some of the replies.
@@ -3005,6 +3944,25 @@ ctReplies
 -- | The ID that YouTube uses to uniquely identify the comment thread.
 ctId :: Lens' CommentThread (Maybe Text)
 ctId = lens _ctId (\ s a -> s{_ctId = a})
+
+instance FromJSON CommentThread where
+        parseJSON
+          = withObject "CommentThread"
+              (\ o ->
+                 CommentThread <$>
+                   (o .:? "etag") <*> (o .:? "snippet") <*>
+                     (o .:? "kind" .!= "youtube#commentThread")
+                     <*> (o .:? "replies")
+                     <*> (o .:? "id"))
+
+instance ToJSON CommentThread where
+        toJSON CommentThread{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _ctEtag,
+                  ("snippet" .=) <$> _ctSnippet,
+                  Just ("kind" .= _ctKind),
+                  ("replies" .=) <$> _ctReplies, ("id" .=) <$> _ctId])
 
 --
 -- /See:/ 'commentThreadListResponse' smart constructor.
@@ -3095,6 +4053,34 @@ ctlrEventId :: Lens' CommentThreadListResponse (Maybe Text)
 ctlrEventId
   = lens _ctlrEventId (\ s a -> s{_ctlrEventId = a})
 
+instance FromJSON CommentThreadListResponse where
+        parseJSON
+          = withObject "CommentThreadListResponse"
+              (\ o ->
+                 CommentThreadListResponse <$>
+                   (o .:? "etag") <*> (o .:? "tokenPagination") <*>
+                     (o .:? "nextPageToken")
+                     <*> (o .:? "pageInfo")
+                     <*>
+                     (o .:? "kind" .!=
+                        "youtube#commentThreadListResponse")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "visitorId")
+                     <*> (o .:? "eventId"))
+
+instance ToJSON CommentThreadListResponse where
+        toJSON CommentThreadListResponse{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _ctlrEtag,
+                  ("tokenPagination" .=) <$> _ctlrTokenPagination,
+                  ("nextPageToken" .=) <$> _ctlrNextPageToken,
+                  ("pageInfo" .=) <$> _ctlrPageInfo,
+                  Just ("kind" .= _ctlrKind),
+                  ("items" .=) <$> _ctlrItems,
+                  ("visitorId" .=) <$> _ctlrVisitorId,
+                  ("eventId" .=) <$> _ctlrEventId])
+
 -- | Comments written in (direct or indirect) reply to the top level comment.
 --
 -- /See:/ 'commentThreadReplies' smart constructor.
@@ -3122,6 +4108,18 @@ ctrComments
   = lens _ctrComments (\ s a -> s{_ctrComments = a}) .
       _Default
       . _Coerce
+
+instance FromJSON CommentThreadReplies where
+        parseJSON
+          = withObject "CommentThreadReplies"
+              (\ o ->
+                 CommentThreadReplies <$>
+                   (o .:? "comments" .!= mempty))
+
+instance ToJSON CommentThreadReplies where
+        toJSON CommentThreadReplies{..}
+          = object
+              (catMaybes [("comments" .=) <$> _ctrComments])
 
 -- | Basic details about a comment thread.
 --
@@ -3198,6 +4196,28 @@ ctsTopLevelComment :: Lens' CommentThreadSnippet (Maybe (Maybe Comment))
 ctsTopLevelComment
   = lens _ctsTopLevelComment
       (\ s a -> s{_ctsTopLevelComment = a})
+
+instance FromJSON CommentThreadSnippet where
+        parseJSON
+          = withObject "CommentThreadSnippet"
+              (\ o ->
+                 CommentThreadSnippet <$>
+                   (o .:? "isPublic") <*> (o .:? "channelId") <*>
+                     (o .:? "canReply")
+                     <*> (o .:? "videoId")
+                     <*> (o .:? "totalReplyCount")
+                     <*> (o .:? "topLevelComment"))
+
+instance ToJSON CommentThreadSnippet where
+        toJSON CommentThreadSnippet{..}
+          = object
+              (catMaybes
+                 [("isPublic" .=) <$> _ctsIsPublic,
+                  ("channelId" .=) <$> _ctsChannelId,
+                  ("canReply" .=) <$> _ctsCanReply,
+                  ("videoId" .=) <$> _ctsVideoId,
+                  ("totalReplyCount" .=) <$> _ctsTotalReplyCount,
+                  ("topLevelComment" .=) <$> _ctsTopLevelComment])
 
 -- | Ratings schemes. The country-specific ratings are mostly for movies and
 -- shows. NEXT_ID: 66
@@ -3869,6 +4889,148 @@ crKmrbRating :: Lens' ContentRating (Maybe ContentRatingKmrbRating)
 crKmrbRating
   = lens _crKmrbRating (\ s a -> s{_crKmrbRating = a})
 
+instance FromJSON ContentRating where
+        parseJSON
+          = withObject "ContentRating"
+              (\ o ->
+                 ContentRating <$>
+                   (o .:? "pefilmRating") <*> (o .:? "cccRating") <*>
+                     (o .:? "anatelRating")
+                     <*> (o .:? "mpaaRating")
+                     <*> (o .:? "cceRating")
+                     <*> (o .:? "mccaaRating")
+                     <*> (o .:? "chfilmRating")
+                     <*> (o .:? "icaaRating")
+                     <*> (o .:? "fcbmRating")
+                     <*> (o .:? "bmukkRating")
+                     <*> (o .:? "moctwRating")
+                     <*> (o .:? "nfvcbRating")
+                     <*> (o .:? "djctqRatingReasons" .!= mempty)
+                     <*> (o .:? "agcomRating")
+                     <*> (o .:? "cnaRating")
+                     <*> (o .:? "catvfrRating")
+                     <*> (o .:? "cbfcRating")
+                     <*> (o .:? "kfcbRating")
+                     <*> (o .:? "smsaRating")
+                     <*> (o .:? "chvrsRating")
+                     <*> (o .:? "incaaRating")
+                     <*> (o .:? "nfrcRating")
+                     <*> (o .:? "csaRating")
+                     <*> (o .:? "mocRating")
+                     <*> (o .:? "eirinRating")
+                     <*> (o .:? "fskRating")
+                     <*> (o .:? "eefilmRating")
+                     <*> (o .:? "rcnofRating")
+                     <*> (o .:? "mekuRating")
+                     <*> (o .:? "ilfilmRating")
+                     <*> (o .:? "ifcoRating")
+                     <*> (o .:? "nbcplRating")
+                     <*> (o .:? "grfilmRating")
+                     <*> (o .:? "rteRating")
+                     <*> (o .:? "acbRating")
+                     <*> (o .:? "catvRating")
+                     <*> (o .:? "mdaRating")
+                     <*> (o .:? "djctqRating")
+                     <*> (o .:? "smaisRating")
+                     <*> (o .:? "cscfRating")
+                     <*> (o .:? "tvpgRating")
+                     <*> (o .:? "rtcRating")
+                     <*> (o .:? "ytRating")
+                     <*> (o .:? "bbfcRating")
+                     <*> (o .:? "kijkwijzerRating")
+                     <*> (o .:? "mtrcbRating")
+                     <*> (o .:? "fcoRating")
+                     <*> (o .:? "cicfRating")
+                     <*> (o .:? "czfilmRating")
+                     <*> (o .:? "nbcRating")
+                     <*> (o .:? "fmocRating")
+                     <*> (o .:? "russiaRating")
+                     <*> (o .:? "egfilmRating")
+                     <*> (o .:? "resorteviolenciaRating")
+                     <*> (o .:? "mibacRating")
+                     <*> (o .:? "medietilsynetRating")
+                     <*> (o .:? "mccypRating")
+                     <*> (o .:? "nkclvRating")
+                     <*> (o .:? "fpbRating")
+                     <*> (o .:? "lsfRating")
+                     <*> (o .:? "bfvcRating")
+                     <*> (o .:? "cncRating")
+                     <*> (o .:? "skfilmRating")
+                     <*> (o .:? "oflcRating")
+                     <*> (o .:? "kmrbRating"))
+
+instance ToJSON ContentRating where
+        toJSON ContentRating{..}
+          = object
+              (catMaybes
+                 [("pefilmRating" .=) <$> _crPefilmRating,
+                  ("cccRating" .=) <$> _crCccRating,
+                  ("anatelRating" .=) <$> _crAnatelRating,
+                  ("mpaaRating" .=) <$> _crMpaaRating,
+                  ("cceRating" .=) <$> _crCceRating,
+                  ("mccaaRating" .=) <$> _crMccaaRating,
+                  ("chfilmRating" .=) <$> _crChfilmRating,
+                  ("icaaRating" .=) <$> _crIcaaRating,
+                  ("fcbmRating" .=) <$> _crFcbmRating,
+                  ("bmukkRating" .=) <$> _crBmukkRating,
+                  ("moctwRating" .=) <$> _crMoctwRating,
+                  ("nfvcbRating" .=) <$> _crNfvcbRating,
+                  ("djctqRatingReasons" .=) <$> _crDjctqRatingReasons,
+                  ("agcomRating" .=) <$> _crAgcomRating,
+                  ("cnaRating" .=) <$> _crCnaRating,
+                  ("catvfrRating" .=) <$> _crCatvfrRating,
+                  ("cbfcRating" .=) <$> _crCbfcRating,
+                  ("kfcbRating" .=) <$> _crKfcbRating,
+                  ("smsaRating" .=) <$> _crSmsaRating,
+                  ("chvrsRating" .=) <$> _crChvrsRating,
+                  ("incaaRating" .=) <$> _crIncaaRating,
+                  ("nfrcRating" .=) <$> _crNfrcRating,
+                  ("csaRating" .=) <$> _crCsaRating,
+                  ("mocRating" .=) <$> _crMocRating,
+                  ("eirinRating" .=) <$> _crEirinRating,
+                  ("fskRating" .=) <$> _crFskRating,
+                  ("eefilmRating" .=) <$> _crEefilmRating,
+                  ("rcnofRating" .=) <$> _crRcnofRating,
+                  ("mekuRating" .=) <$> _crMekuRating,
+                  ("ilfilmRating" .=) <$> _crIlfilmRating,
+                  ("ifcoRating" .=) <$> _crIfcoRating,
+                  ("nbcplRating" .=) <$> _crNbcplRating,
+                  ("grfilmRating" .=) <$> _crGrfilmRating,
+                  ("rteRating" .=) <$> _crRteRating,
+                  ("acbRating" .=) <$> _crAcbRating,
+                  ("catvRating" .=) <$> _crCatvRating,
+                  ("mdaRating" .=) <$> _crMdaRating,
+                  ("djctqRating" .=) <$> _crDjctqRating,
+                  ("smaisRating" .=) <$> _crSmaisRating,
+                  ("cscfRating" .=) <$> _crCscfRating,
+                  ("tvpgRating" .=) <$> _crTvpgRating,
+                  ("rtcRating" .=) <$> _crRtcRating,
+                  ("ytRating" .=) <$> _crYtRating,
+                  ("bbfcRating" .=) <$> _crBbfcRating,
+                  ("kijkwijzerRating" .=) <$> _crKijkwijzerRating,
+                  ("mtrcbRating" .=) <$> _crMtrcbRating,
+                  ("fcoRating" .=) <$> _crFcoRating,
+                  ("cicfRating" .=) <$> _crCicfRating,
+                  ("czfilmRating" .=) <$> _crCzfilmRating,
+                  ("nbcRating" .=) <$> _crNbcRating,
+                  ("fmocRating" .=) <$> _crFmocRating,
+                  ("russiaRating" .=) <$> _crRussiaRating,
+                  ("egfilmRating" .=) <$> _crEgfilmRating,
+                  ("resorteviolenciaRating" .=) <$>
+                    _crResorteviolenciaRating,
+                  ("mibacRating" .=) <$> _crMibacRating,
+                  ("medietilsynetRating" .=) <$>
+                    _crMedietilsynetRating,
+                  ("mccypRating" .=) <$> _crMccypRating,
+                  ("nkclvRating" .=) <$> _crNkclvRating,
+                  ("fpbRating" .=) <$> _crFpbRating,
+                  ("lsfRating" .=) <$> _crLsfRating,
+                  ("bfvcRating" .=) <$> _crBfvcRating,
+                  ("cncRating" .=) <$> _crCncRating,
+                  ("skfilmRating" .=) <$> _crSkfilmRating,
+                  ("oflcRating" .=) <$> _crOflcRating,
+                  ("kmrbRating" .=) <$> _crKmrbRating])
+
 -- | Geographical coordinates of a point, in WGS84.
 --
 -- /See:/ 'geoPoint' smart constructor.
@@ -3910,6 +5072,22 @@ gpAltitude
 gpLongitude :: Lens' GeoPoint (Maybe Double)
 gpLongitude
   = lens _gpLongitude (\ s a -> s{_gpLongitude = a})
+
+instance FromJSON GeoPoint where
+        parseJSON
+          = withObject "GeoPoint"
+              (\ o ->
+                 GeoPoint <$>
+                   (o .:? "latitude") <*> (o .:? "altitude") <*>
+                     (o .:? "longitude"))
+
+instance ToJSON GeoPoint where
+        toJSON GeoPoint{..}
+          = object
+              (catMaybes
+                 [("latitude" .=) <$> _gpLatitude,
+                  ("altitude" .=) <$> _gpAltitude,
+                  ("longitude" .=) <$> _gpLongitude])
 
 -- | A guideCategory resource identifies a category that YouTube
 -- algorithmically assigns based on a channel\'s content or other
@@ -3964,6 +5142,23 @@ gcKind = lens _gcKind (\ s a -> s{_gcKind = a})
 -- | The ID that YouTube uses to uniquely identify the guide category.
 gcId :: Lens' GuideCategory (Maybe Text)
 gcId = lens _gcId (\ s a -> s{_gcId = a})
+
+instance FromJSON GuideCategory where
+        parseJSON
+          = withObject "GuideCategory"
+              (\ o ->
+                 GuideCategory <$>
+                   (o .:? "etag") <*> (o .:? "snippet") <*>
+                     (o .:? "kind" .!= "youtube#guideCategory")
+                     <*> (o .:? "id"))
+
+instance ToJSON GuideCategory where
+        toJSON GuideCategory{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _gcEtag,
+                  ("snippet" .=) <$> _gcSnippet,
+                  Just ("kind" .= _gcKind), ("id" .=) <$> _gcId])
 
 --
 -- /See:/ 'guideCategoryListResponse' smart constructor.
@@ -4067,6 +5262,36 @@ gclrPrevPageToken
   = lens _gclrPrevPageToken
       (\ s a -> s{_gclrPrevPageToken = a})
 
+instance FromJSON GuideCategoryListResponse where
+        parseJSON
+          = withObject "GuideCategoryListResponse"
+              (\ o ->
+                 GuideCategoryListResponse <$>
+                   (o .:? "etag") <*> (o .:? "tokenPagination") <*>
+                     (o .:? "nextPageToken")
+                     <*> (o .:? "pageInfo")
+                     <*>
+                     (o .:? "kind" .!=
+                        "youtube#guideCategoryListResponse")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "visitorId")
+                     <*> (o .:? "eventId")
+                     <*> (o .:? "prevPageToken"))
+
+instance ToJSON GuideCategoryListResponse where
+        toJSON GuideCategoryListResponse{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _gclrEtag,
+                  ("tokenPagination" .=) <$> _gclrTokenPagination,
+                  ("nextPageToken" .=) <$> _gclrNextPageToken,
+                  ("pageInfo" .=) <$> _gclrPageInfo,
+                  Just ("kind" .= _gclrKind),
+                  ("items" .=) <$> _gclrItems,
+                  ("visitorId" .=) <$> _gclrVisitorId,
+                  ("eventId" .=) <$> _gclrEventId,
+                  ("prevPageToken" .=) <$> _gclrPrevPageToken])
+
 -- | Basic details about a guide category.
 --
 -- /See:/ 'guideCategorySnippet' smart constructor.
@@ -4097,6 +5322,21 @@ gcsChannelId
 -- | Description of the guide category.
 gcsTitle :: Lens' GuideCategorySnippet (Maybe Text)
 gcsTitle = lens _gcsTitle (\ s a -> s{_gcsTitle = a})
+
+instance FromJSON GuideCategorySnippet where
+        parseJSON
+          = withObject "GuideCategorySnippet"
+              (\ o ->
+                 GuideCategorySnippet <$>
+                   (o .:? "channelId" .!= "UCBR8-60-B28hp2BmDPdntcQ")
+                     <*> (o .:? "title"))
+
+instance ToJSON GuideCategorySnippet where
+        toJSON GuideCategorySnippet{..}
+          = object
+              (catMaybes
+                 [Just ("channelId" .= _gcsChannelId),
+                  ("title" .=) <$> _gcsTitle])
 
 -- | An i18nLanguage resource identifies a UI language currently supported by
 -- YouTube.
@@ -4148,6 +5388,23 @@ ilKind = lens _ilKind (\ s a -> s{_ilKind = a})
 -- | The ID that YouTube uses to uniquely identify the i18n language.
 ilId :: Lens' I18nLanguage (Maybe Text)
 ilId = lens _ilId (\ s a -> s{_ilId = a})
+
+instance FromJSON I18nLanguage where
+        parseJSON
+          = withObject "I18nLanguage"
+              (\ o ->
+                 I18nLanguage <$>
+                   (o .:? "etag") <*> (o .:? "snippet") <*>
+                     (o .:? "kind" .!= "youtube#i18nLanguage")
+                     <*> (o .:? "id"))
+
+instance ToJSON I18nLanguage where
+        toJSON I18nLanguage{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _ilEtag,
+                  ("snippet" .=) <$> _ilSnippet,
+                  Just ("kind" .= _ilKind), ("id" .=) <$> _ilId])
 
 --
 -- /See:/ 'i18nLanguageListResponse' smart constructor.
@@ -4211,6 +5468,27 @@ illrEventId :: Lens' I18nLanguageListResponse (Maybe Text)
 illrEventId
   = lens _illrEventId (\ s a -> s{_illrEventId = a})
 
+instance FromJSON I18nLanguageListResponse where
+        parseJSON
+          = withObject "I18nLanguageListResponse"
+              (\ o ->
+                 I18nLanguageListResponse <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!= "youtube#i18nLanguageListResponse")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "visitorId")
+                     <*> (o .:? "eventId"))
+
+instance ToJSON I18nLanguageListResponse where
+        toJSON I18nLanguageListResponse{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _illrEtag,
+                  Just ("kind" .= _illrKind),
+                  ("items" .=) <$> _illrItems,
+                  ("visitorId" .=) <$> _illrVisitorId,
+                  ("eventId" .=) <$> _illrEventId])
+
 -- | Basic details about an i18n language, such as language code and
 -- human-readable name.
 --
@@ -4242,6 +5520,19 @@ ilsHl = lens _ilsHl (\ s a -> s{_ilsHl = a})
 -- | The human-readable name of the language in the language itself.
 ilsName :: Lens' I18nLanguageSnippet (Maybe Text)
 ilsName = lens _ilsName (\ s a -> s{_ilsName = a})
+
+instance FromJSON I18nLanguageSnippet where
+        parseJSON
+          = withObject "I18nLanguageSnippet"
+              (\ o ->
+                 I18nLanguageSnippet <$>
+                   (o .:? "hl") <*> (o .:? "name"))
+
+instance ToJSON I18nLanguageSnippet where
+        toJSON I18nLanguageSnippet{..}
+          = object
+              (catMaybes
+                 [("hl" .=) <$> _ilsHl, ("name" .=) <$> _ilsName])
 
 -- | A i18nRegion resource identifies a region where YouTube is available.
 --
@@ -4292,6 +5583,23 @@ irKind = lens _irKind (\ s a -> s{_irKind = a})
 -- | The ID that YouTube uses to uniquely identify the i18n region.
 irId :: Lens' I18nRegion (Maybe Text)
 irId = lens _irId (\ s a -> s{_irId = a})
+
+instance FromJSON I18nRegion where
+        parseJSON
+          = withObject "I18nRegion"
+              (\ o ->
+                 I18nRegion <$>
+                   (o .:? "etag") <*> (o .:? "snippet") <*>
+                     (o .:? "kind" .!= "youtube#i18nRegion")
+                     <*> (o .:? "id"))
+
+instance ToJSON I18nRegion where
+        toJSON I18nRegion{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _irEtag,
+                  ("snippet" .=) <$> _irSnippet,
+                  Just ("kind" .= _irKind), ("id" .=) <$> _irId])
 
 --
 -- /See:/ 'i18nRegionListResponse' smart constructor.
@@ -4356,6 +5664,27 @@ irlrEventId :: Lens' I18nRegionListResponse (Maybe Text)
 irlrEventId
   = lens _irlrEventId (\ s a -> s{_irlrEventId = a})
 
+instance FromJSON I18nRegionListResponse where
+        parseJSON
+          = withObject "I18nRegionListResponse"
+              (\ o ->
+                 I18nRegionListResponse <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!= "youtube#i18nRegionListResponse")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "visitorId")
+                     <*> (o .:? "eventId"))
+
+instance ToJSON I18nRegionListResponse where
+        toJSON I18nRegionListResponse{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _irlrEtag,
+                  Just ("kind" .= _irlrKind),
+                  ("items" .=) <$> _irlrItems,
+                  ("visitorId" .=) <$> _irlrVisitorId,
+                  ("eventId" .=) <$> _irlrEventId])
+
 -- | Basic details about an i18n region, such as region code and
 -- human-readable name.
 --
@@ -4387,6 +5716,19 @@ irsName = lens _irsName (\ s a -> s{_irsName = a})
 -- | The region code as a 2-letter ISO country code.
 irsGl :: Lens' I18nRegionSnippet (Maybe Text)
 irsGl = lens _irsGl (\ s a -> s{_irsGl = a})
+
+instance FromJSON I18nRegionSnippet where
+        parseJSON
+          = withObject "I18nRegionSnippet"
+              (\ o ->
+                 I18nRegionSnippet <$>
+                   (o .:? "name") <*> (o .:? "gl"))
+
+instance ToJSON I18nRegionSnippet where
+        toJSON I18nRegionSnippet{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _irsName, ("gl" .=) <$> _irsGl])
 
 -- | Branding properties for images associated with the channel.
 --
@@ -4632,6 +5974,77 @@ isBannerTabletHdImageUrl
   = lens _isBannerTabletHdImageUrl
       (\ s a -> s{_isBannerTabletHdImageUrl = a})
 
+instance FromJSON ImageSettings where
+        parseJSON
+          = withObject "ImageSettings"
+              (\ o ->
+                 ImageSettings <$>
+                   (o .:? "bannerMobileLowImageUrl") <*>
+                     (o .:? "bannerTabletExtraHdImageUrl")
+                     <*> (o .:? "smallBrandedBannerImageImapScript")
+                     <*> (o .:? "bannerTvHighImageUrl")
+                     <*> (o .:? "bannerMobileHdImageUrl")
+                     <*> (o .:? "bannerTvMediumImageUrl")
+                     <*> (o .:? "bannerTvImageUrl")
+                     <*> (o .:? "bannerTabletImageUrl")
+                     <*> (o .:? "bannerMobileImageUrl")
+                     <*> (o .:? "trackingImageUrl")
+                     <*> (o .:? "bannerMobileMediumHdImageUrl")
+                     <*> (o .:? "largeBrandedBannerImageUrl")
+                     <*> (o .:? "bannerExternalUrl")
+                     <*> (o .:? "backgroundImageUrl")
+                     <*> (o .:? "smallBrandedBannerImageUrl")
+                     <*> (o .:? "bannerImageUrl")
+                     <*> (o .:? "watchIconImageUrl")
+                     <*> (o .:? "bannerTvLowImageUrl")
+                     <*> (o .:? "bannerMobileExtraHdImageUrl")
+                     <*> (o .:? "largeBrandedBannerImageImapScript")
+                     <*> (o .:? "bannerTabletLowImageUrl")
+                     <*> (o .:? "bannerTabletHdImageUrl"))
+
+instance ToJSON ImageSettings where
+        toJSON ImageSettings{..}
+          = object
+              (catMaybes
+                 [("bannerMobileLowImageUrl" .=) <$>
+                    _isBannerMobileLowImageUrl,
+                  ("bannerTabletExtraHdImageUrl" .=) <$>
+                    _isBannerTabletExtraHdImageUrl,
+                  ("smallBrandedBannerImageImapScript" .=) <$>
+                    _isSmallBrandedBannerImageImapScript,
+                  ("bannerTvHighImageUrl" .=) <$>
+                    _isBannerTvHighImageUrl,
+                  ("bannerMobileHdImageUrl" .=) <$>
+                    _isBannerMobileHdImageUrl,
+                  ("bannerTvMediumImageUrl" .=) <$>
+                    _isBannerTvMediumImageUrl,
+                  ("bannerTvImageUrl" .=) <$> _isBannerTvImageUrl,
+                  ("bannerTabletImageUrl" .=) <$>
+                    _isBannerTabletImageUrl,
+                  ("bannerMobileImageUrl" .=) <$>
+                    _isBannerMobileImageUrl,
+                  ("trackingImageUrl" .=) <$> _isTrackingImageUrl,
+                  ("bannerMobileMediumHdImageUrl" .=) <$>
+                    _isBannerMobileMediumHdImageUrl,
+                  ("largeBrandedBannerImageUrl" .=) <$>
+                    _isLargeBrandedBannerImageUrl,
+                  ("bannerExternalUrl" .=) <$> _isBannerExternalUrl,
+                  ("backgroundImageUrl" .=) <$> _isBackgroundImageUrl,
+                  ("smallBrandedBannerImageUrl" .=) <$>
+                    _isSmallBrandedBannerImageUrl,
+                  ("bannerImageUrl" .=) <$> _isBannerImageUrl,
+                  ("watchIconImageUrl" .=) <$> _isWatchIconImageUrl,
+                  ("bannerTvLowImageUrl" .=) <$>
+                    _isBannerTvLowImageUrl,
+                  ("bannerMobileExtraHdImageUrl" .=) <$>
+                    _isBannerMobileExtraHdImageUrl,
+                  ("largeBrandedBannerImageImapScript" .=) <$>
+                    _isLargeBrandedBannerImageImapScript,
+                  ("bannerTabletLowImageUrl" .=) <$>
+                    _isBannerTabletLowImageUrl,
+                  ("bannerTabletHdImageUrl" .=) <$>
+                    _isBannerTabletHdImageUrl])
+
 -- | Describes information necessary for ingesting an RTMP or an HTTP stream.
 --
 -- /See:/ 'ingestionInfo' smart constructor.
@@ -4681,6 +6094,24 @@ iiIngestionAddress
 iiStreamName :: Lens' IngestionInfo (Maybe Text)
 iiStreamName
   = lens _iiStreamName (\ s a -> s{_iiStreamName = a})
+
+instance FromJSON IngestionInfo where
+        parseJSON
+          = withObject "IngestionInfo"
+              (\ o ->
+                 IngestionInfo <$>
+                   (o .:? "backupIngestionAddress") <*>
+                     (o .:? "ingestionAddress")
+                     <*> (o .:? "streamName"))
+
+instance ToJSON IngestionInfo where
+        toJSON IngestionInfo{..}
+          = object
+              (catMaybes
+                 [("backupIngestionAddress" .=) <$>
+                    _iiBackupIngestionAddress,
+                  ("ingestionAddress" .=) <$> _iiIngestionAddress,
+                  ("streamName" .=) <$> _iiStreamName])
 
 --
 -- /See:/ 'invideoBranding' smart constructor.
@@ -4736,6 +6167,26 @@ ibPosition :: Lens' InvideoBranding (Maybe (Maybe InvideoPosition))
 ibPosition
   = lens _ibPosition (\ s a -> s{_ibPosition = a})
 
+instance FromJSON InvideoBranding where
+        parseJSON
+          = withObject "InvideoBranding"
+              (\ o ->
+                 InvideoBranding <$>
+                   (o .:? "imageUrl") <*> (o .:? "targetChannelId") <*>
+                     (o .:? "timing")
+                     <*> (o .:? "imageBytes")
+                     <*> (o .:? "position"))
+
+instance ToJSON InvideoBranding where
+        toJSON InvideoBranding{..}
+          = object
+              (catMaybes
+                 [("imageUrl" .=) <$> _ibImageUrl,
+                  ("targetChannelId" .=) <$> _ibTargetChannelId,
+                  ("timing" .=) <$> _ibTiming,
+                  ("imageBytes" .=) <$> _ibImageBytes,
+                  ("position" .=) <$> _ibPosition])
+
 -- | Describes the spatial position of a visual widget inside a video. It is
 -- a union of various position types, out of which only will be set one.
 --
@@ -4769,6 +6220,20 @@ ipCornerPosition
 -- | Defines the position type.
 ipType :: Lens' InvideoPosition (Maybe InvideoPositionType)
 ipType = lens _ipType (\ s a -> s{_ipType = a})
+
+instance FromJSON InvideoPosition where
+        parseJSON
+          = withObject "InvideoPosition"
+              (\ o ->
+                 InvideoPosition <$>
+                   (o .:? "cornerPosition") <*> (o .:? "type"))
+
+instance ToJSON InvideoPosition where
+        toJSON InvideoPosition{..}
+          = object
+              (catMaybes
+                 [("cornerPosition" .=) <$> _ipCornerPosition,
+                  ("type" .=) <$> _ipType])
 
 -- | Describes an invideo promotion campaign consisting of multiple promoted
 -- items. A campaign belongs to a single channel_id.
@@ -4831,6 +6296,25 @@ ipPosition :: Lens' InvideoPromotion (Maybe (Maybe InvideoPosition))
 ipPosition
   = lens _ipPosition (\ s a -> s{_ipPosition = a})
 
+instance FromJSON InvideoPromotion where
+        parseJSON
+          = withObject "InvideoPromotion"
+              (\ o ->
+                 InvideoPromotion <$>
+                   (o .:? "useSmartTiming") <*>
+                     (o .:? "items" .!= mempty)
+                     <*> (o .:? "defaultTiming")
+                     <*> (o .:? "position"))
+
+instance ToJSON InvideoPromotion where
+        toJSON InvideoPromotion{..}
+          = object
+              (catMaybes
+                 [("useSmartTiming" .=) <$> _ipUseSmartTiming,
+                  ("items" .=) <$> _ipItems,
+                  ("defaultTiming" .=) <$> _ipDefaultTiming,
+                  ("position" .=) <$> _ipPosition])
+
 -- | Describes a temporal position of a visual widget inside a video.
 --
 -- /See:/ 'invideoTiming' smart constructor.
@@ -4879,6 +6363,22 @@ itOffsetMs
 itType :: Lens' InvideoTiming (Maybe InvideoTimingType)
 itType = lens _itType (\ s a -> s{_itType = a})
 
+instance FromJSON InvideoTiming where
+        parseJSON
+          = withObject "InvideoTiming"
+              (\ o ->
+                 InvideoTiming <$>
+                   (o .:? "durationMs") <*> (o .:? "offsetMs") <*>
+                     (o .:? "type"))
+
+instance ToJSON InvideoTiming where
+        toJSON InvideoTiming{..}
+          = object
+              (catMaybes
+                 [("durationMs" .=) <$> _itDurationMs,
+                  ("offsetMs" .=) <$> _itOffsetMs,
+                  ("type" .=) <$> _itType])
+
 --
 -- /See:/ 'languageTag' smart constructor.
 newtype LanguageTag = LanguageTag
@@ -4899,6 +6399,15 @@ languageTag =
 
 ltValue :: Lens' LanguageTag (Maybe Text)
 ltValue = lens _ltValue (\ s a -> s{_ltValue = a})
+
+instance FromJSON LanguageTag where
+        parseJSON
+          = withObject "LanguageTag"
+              (\ o -> LanguageTag <$> (o .:? "value"))
+
+instance ToJSON LanguageTag where
+        toJSON LanguageTag{..}
+          = object (catMaybes [("value" .=) <$> _ltValue])
 
 -- | A liveBroadcast resource represents an event that will be streamed, via
 -- live video, on YouTube.
@@ -4992,6 +6501,32 @@ lbId = lens _lbId (\ s a -> s{_lbId = a})
 lbStatistics :: Lens' LiveBroadcast (Maybe (Maybe LiveBroadcastStatistics))
 lbStatistics
   = lens _lbStatistics (\ s a -> s{_lbStatistics = a})
+
+instance FromJSON LiveBroadcast where
+        parseJSON
+          = withObject "LiveBroadcast"
+              (\ o ->
+                 LiveBroadcast <$>
+                   (o .:? "status") <*> (o .:? "etag") <*>
+                     (o .:? "snippet")
+                     <*> (o .:? "kind" .!= "youtube#liveBroadcast")
+                     <*> (o .:? "topicDetails")
+                     <*> (o .:? "contentDetails")
+                     <*> (o .:? "id")
+                     <*> (o .:? "statistics"))
+
+instance ToJSON LiveBroadcast where
+        toJSON LiveBroadcast{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _lbStatus,
+                  ("etag" .=) <$> _lbEtag,
+                  ("snippet" .=) <$> _lbSnippet,
+                  Just ("kind" .= _lbKind),
+                  ("topicDetails" .=) <$> _lbTopicDetails,
+                  ("contentDetails" .=) <$> _lbContentDetails,
+                  ("id" .=) <$> _lbId,
+                  ("statistics" .=) <$> _lbStatistics])
 
 -- | Detailed settings of a broadcast.
 --
@@ -5121,6 +6656,37 @@ lbcdEnableDvr
   = lens _lbcdEnableDvr
       (\ s a -> s{_lbcdEnableDvr = a})
 
+instance FromJSON LiveBroadcastContentDetails where
+        parseJSON
+          = withObject "LiveBroadcastContentDetails"
+              (\ o ->
+                 LiveBroadcastContentDetails <$>
+                   (o .:? "enableContentEncryption") <*>
+                     (o .:? "enableLowLatency")
+                     <*> (o .:? "enableEmbed")
+                     <*> (o .:? "startWithSlate")
+                     <*> (o .:? "monitorStream")
+                     <*> (o .:? "boundStreamId")
+                     <*> (o .:? "recordFromStart")
+                     <*> (o .:? "enableClosedCaptions")
+                     <*> (o .:? "enableDvr"))
+
+instance ToJSON LiveBroadcastContentDetails where
+        toJSON LiveBroadcastContentDetails{..}
+          = object
+              (catMaybes
+                 [("enableContentEncryption" .=) <$>
+                    _lbcdEnableContentEncryption,
+                  ("enableLowLatency" .=) <$> _lbcdEnableLowLatency,
+                  ("enableEmbed" .=) <$> _lbcdEnableEmbed,
+                  ("startWithSlate" .=) <$> _lbcdStartWithSlate,
+                  ("monitorStream" .=) <$> _lbcdMonitorStream,
+                  ("boundStreamId" .=) <$> _lbcdBoundStreamId,
+                  ("recordFromStart" .=) <$> _lbcdRecordFromStart,
+                  ("enableClosedCaptions" .=) <$>
+                    _lbcdEnableClosedCaptions,
+                  ("enableDvr" .=) <$> _lbcdEnableDvr])
+
 --
 -- /See:/ 'liveBroadcastListResponse' smart constructor.
 data LiveBroadcastListResponse = LiveBroadcastListResponse
@@ -5220,6 +6786,36 @@ lblrPrevPageToken :: Lens' LiveBroadcastListResponse (Maybe Text)
 lblrPrevPageToken
   = lens _lblrPrevPageToken
       (\ s a -> s{_lblrPrevPageToken = a})
+
+instance FromJSON LiveBroadcastListResponse where
+        parseJSON
+          = withObject "LiveBroadcastListResponse"
+              (\ o ->
+                 LiveBroadcastListResponse <$>
+                   (o .:? "etag") <*> (o .:? "tokenPagination") <*>
+                     (o .:? "nextPageToken")
+                     <*> (o .:? "pageInfo")
+                     <*>
+                     (o .:? "kind" .!=
+                        "youtube#liveBroadcastListResponse")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "visitorId")
+                     <*> (o .:? "eventId")
+                     <*> (o .:? "prevPageToken"))
+
+instance ToJSON LiveBroadcastListResponse where
+        toJSON LiveBroadcastListResponse{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _lblrEtag,
+                  ("tokenPagination" .=) <$> _lblrTokenPagination,
+                  ("nextPageToken" .=) <$> _lblrNextPageToken,
+                  ("pageInfo" .=) <$> _lblrPageInfo,
+                  Just ("kind" .= _lblrKind),
+                  ("items" .=) <$> _lblrItems,
+                  ("visitorId" .=) <$> _lblrVisitorId,
+                  ("eventId" .=) <$> _lblrEventId,
+                  ("prevPageToken" .=) <$> _lblrPrevPageToken])
 
 --
 -- /See:/ 'liveBroadcastSnippet' smart constructor.
@@ -5358,6 +6954,38 @@ lbsDescription
   = lens _lbsDescription
       (\ s a -> s{_lbsDescription = a})
 
+instance FromJSON LiveBroadcastSnippet where
+        parseJSON
+          = withObject "LiveBroadcastSnippet"
+              (\ o ->
+                 LiveBroadcastSnippet <$>
+                   (o .:? "actualEndTime") <*> (o .:? "liveChatId") <*>
+                     (o .:? "publishedAt")
+                     <*> (o .:? "scheduledEndTime")
+                     <*> (o .:? "channelId")
+                     <*> (o .:? "scheduledStartTime")
+                     <*> (o .:? "thumbnails")
+                     <*> (o .:? "title")
+                     <*> (o .:? "actualStartTime")
+                     <*> (o .:? "isDefaultBroadcast")
+                     <*> (o .:? "description"))
+
+instance ToJSON LiveBroadcastSnippet where
+        toJSON LiveBroadcastSnippet{..}
+          = object
+              (catMaybes
+                 [("actualEndTime" .=) <$> _lbsActualEndTime,
+                  ("liveChatId" .=) <$> _lbsLiveChatId,
+                  ("publishedAt" .=) <$> _lbsPublishedAt,
+                  ("scheduledEndTime" .=) <$> _lbsScheduledEndTime,
+                  ("channelId" .=) <$> _lbsChannelId,
+                  ("scheduledStartTime" .=) <$> _lbsScheduledStartTime,
+                  ("thumbnails" .=) <$> _lbsThumbnails,
+                  ("title" .=) <$> _lbsTitle,
+                  ("actualStartTime" .=) <$> _lbsActualStartTime,
+                  ("isDefaultBroadcast" .=) <$> _lbsIsDefaultBroadcast,
+                  ("description" .=) <$> _lbsDescription])
+
 -- | Statistics about the live broadcast. These represent a snapshot of the
 -- values at the time of the request. Statistics are only returned for live
 -- broadcasts.
@@ -5405,6 +7033,21 @@ lbsConcurrentViewers :: Lens' LiveBroadcastStatistics (Maybe Word64)
 lbsConcurrentViewers
   = lens _lbsConcurrentViewers
       (\ s a -> s{_lbsConcurrentViewers = a})
+
+instance FromJSON LiveBroadcastStatistics where
+        parseJSON
+          = withObject "LiveBroadcastStatistics"
+              (\ o ->
+                 LiveBroadcastStatistics <$>
+                   (o .:? "totalChatCount") <*>
+                     (o .:? "concurrentViewers"))
+
+instance ToJSON LiveBroadcastStatistics where
+        toJSON LiveBroadcastStatistics{..}
+          = object
+              (catMaybes
+                 [("totalChatCount" .=) <$> _lbsTotalChatCount,
+                  ("concurrentViewers" .=) <$> _lbsConcurrentViewers])
 
 --
 -- /See:/ 'liveBroadcastStatus' smart constructor.
@@ -5465,6 +7108,26 @@ lbsPrivacyStatus
   = lens _lbsPrivacyStatus
       (\ s a -> s{_lbsPrivacyStatus = a})
 
+instance FromJSON LiveBroadcastStatus where
+        parseJSON
+          = withObject "LiveBroadcastStatus"
+              (\ o ->
+                 LiveBroadcastStatus <$>
+                   (o .:? "liveBroadcastPriority") <*>
+                     (o .:? "recordingStatus")
+                     <*> (o .:? "lifeCycleStatus")
+                     <*> (o .:? "privacyStatus"))
+
+instance ToJSON LiveBroadcastStatus where
+        toJSON LiveBroadcastStatus{..}
+          = object
+              (catMaybes
+                 [("liveBroadcastPriority" .=) <$>
+                    _lbsLiveBroadcastPriority,
+                  ("recordingStatus" .=) <$> _lbsRecordingStatus,
+                  ("lifeCycleStatus" .=) <$> _lbsLifeCycleStatus,
+                  ("privacyStatus" .=) <$> _lbsPrivacyStatus])
+
 --
 -- /See:/ 'liveBroadcastTopic' smart constructor.
 data LiveBroadcastTopic = LiveBroadcastTopic
@@ -5506,6 +7169,22 @@ lbtUnmatched
 lbtType :: Lens' LiveBroadcastTopic (Maybe LiveBroadcastTopicType)
 lbtType = lens _lbtType (\ s a -> s{_lbtType = a})
 
+instance FromJSON LiveBroadcastTopic where
+        parseJSON
+          = withObject "LiveBroadcastTopic"
+              (\ o ->
+                 LiveBroadcastTopic <$>
+                   (o .:? "snippet") <*> (o .:? "unmatched") <*>
+                     (o .:? "type"))
+
+instance ToJSON LiveBroadcastTopic where
+        toJSON LiveBroadcastTopic{..}
+          = object
+              (catMaybes
+                 [("snippet" .=) <$> _lbtSnippet,
+                  ("unmatched" .=) <$> _lbtUnmatched,
+                  ("type" .=) <$> _lbtType])
+
 --
 -- /See:/ 'liveBroadcastTopicDetails' smart constructor.
 newtype LiveBroadcastTopicDetails = LiveBroadcastTopicDetails
@@ -5529,6 +7208,17 @@ lbtdTopics
   = lens _lbtdTopics (\ s a -> s{_lbtdTopics = a}) .
       _Default
       . _Coerce
+
+instance FromJSON LiveBroadcastTopicDetails where
+        parseJSON
+          = withObject "LiveBroadcastTopicDetails"
+              (\ o ->
+                 LiveBroadcastTopicDetails <$>
+                   (o .:? "topics" .!= mempty))
+
+instance ToJSON LiveBroadcastTopicDetails where
+        toJSON LiveBroadcastTopicDetails{..}
+          = object (catMaybes [("topics" .=) <$> _lbtdTopics])
 
 --
 -- /See:/ 'liveBroadcastTopicSnippet' smart constructor.
@@ -5561,6 +7251,20 @@ lbtsReleaseDate :: Lens' LiveBroadcastTopicSnippet (Maybe Text)
 lbtsReleaseDate
   = lens _lbtsReleaseDate
       (\ s a -> s{_lbtsReleaseDate = a})
+
+instance FromJSON LiveBroadcastTopicSnippet where
+        parseJSON
+          = withObject "LiveBroadcastTopicSnippet"
+              (\ o ->
+                 LiveBroadcastTopicSnippet <$>
+                   (o .:? "name") <*> (o .:? "releaseDate"))
+
+instance ToJSON LiveBroadcastTopicSnippet where
+        toJSON LiveBroadcastTopicSnippet{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _lbtsName,
+                  ("releaseDate" .=) <$> _lbtsReleaseDate])
 
 -- | A live stream describes a live ingestion point.
 --
@@ -5641,6 +7345,29 @@ lsId = lens _lsId (\ s a -> s{_lsId = a})
 lsCdn :: Lens' LiveStream (Maybe (Maybe CdnSettings))
 lsCdn = lens _lsCdn (\ s a -> s{_lsCdn = a})
 
+instance FromJSON LiveStream where
+        parseJSON
+          = withObject "LiveStream"
+              (\ o ->
+                 LiveStream <$>
+                   (o .:? "status") <*> (o .:? "etag") <*>
+                     (o .:? "snippet")
+                     <*> (o .:? "kind" .!= "youtube#liveStream")
+                     <*> (o .:? "contentDetails")
+                     <*> (o .:? "id")
+                     <*> (o .:? "cdn"))
+
+instance ToJSON LiveStream where
+        toJSON LiveStream{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _lsStatus,
+                  ("etag" .=) <$> _lsEtag,
+                  ("snippet" .=) <$> _lsSnippet,
+                  Just ("kind" .= _lsKind),
+                  ("contentDetails" .=) <$> _lsContentDetails,
+                  ("id" .=) <$> _lsId, ("cdn" .=) <$> _lsCdn])
+
 --
 -- /See:/ 'liveStreamConfigurationIssue' smart constructor.
 data LiveStreamConfigurationIssue = LiveStreamConfigurationIssue
@@ -5691,6 +7418,24 @@ lsciDescription
   = lens _lsciDescription
       (\ s a -> s{_lsciDescription = a})
 
+instance FromJSON LiveStreamConfigurationIssue where
+        parseJSON
+          = withObject "LiveStreamConfigurationIssue"
+              (\ o ->
+                 LiveStreamConfigurationIssue <$>
+                   (o .:? "severity") <*> (o .:? "reason") <*>
+                     (o .:? "type")
+                     <*> (o .:? "description"))
+
+instance ToJSON LiveStreamConfigurationIssue where
+        toJSON LiveStreamConfigurationIssue{..}
+          = object
+              (catMaybes
+                 [("severity" .=) <$> _lsciSeverity,
+                  ("reason" .=) <$> _lsciReason,
+                  ("type" .=) <$> _lsciType,
+                  ("description" .=) <$> _lsciDescription])
+
 -- | Detailed settings of a stream.
 --
 -- /See:/ 'liveStreamContentDetails' smart constructor.
@@ -5737,6 +7482,22 @@ lscdIsReusable
   = lens _lscdIsReusable
       (\ s a -> s{_lscdIsReusable = a})
 
+instance FromJSON LiveStreamContentDetails where
+        parseJSON
+          = withObject "LiveStreamContentDetails"
+              (\ o ->
+                 LiveStreamContentDetails <$>
+                   (o .:? "closedCaptionsIngestionUrl") <*>
+                     (o .:? "isReusable"))
+
+instance ToJSON LiveStreamContentDetails where
+        toJSON LiveStreamContentDetails{..}
+          = object
+              (catMaybes
+                 [("closedCaptionsIngestionUrl" .=) <$>
+                    _lscdClosedCaptionsIngestionUrl,
+                  ("isReusable" .=) <$> _lscdIsReusable])
+
 --
 -- /See:/ 'liveStreamHealthStatus' smart constructor.
 data LiveStreamHealthStatus = LiveStreamHealthStatus
@@ -5781,6 +7542,25 @@ lshsLastUpdateTimeSeconds :: Lens' LiveStreamHealthStatus (Maybe Word64)
 lshsLastUpdateTimeSeconds
   = lens _lshsLastUpdateTimeSeconds
       (\ s a -> s{_lshsLastUpdateTimeSeconds = a})
+
+instance FromJSON LiveStreamHealthStatus where
+        parseJSON
+          = withObject "LiveStreamHealthStatus"
+              (\ o ->
+                 LiveStreamHealthStatus <$>
+                   (o .:? "status") <*>
+                     (o .:? "configurationIssues" .!= mempty)
+                     <*> (o .:? "lastUpdateTimeSeconds"))
+
+instance ToJSON LiveStreamHealthStatus where
+        toJSON LiveStreamHealthStatus{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _lshsStatus,
+                  ("configurationIssues" .=) <$>
+                    _lshsConfigurationIssues,
+                  ("lastUpdateTimeSeconds" .=) <$>
+                    _lshsLastUpdateTimeSeconds])
 
 --
 -- /See:/ 'liveStreamListResponse' smart constructor.
@@ -5882,6 +7662,35 @@ lslrPrevPageToken
   = lens _lslrPrevPageToken
       (\ s a -> s{_lslrPrevPageToken = a})
 
+instance FromJSON LiveStreamListResponse where
+        parseJSON
+          = withObject "LiveStreamListResponse"
+              (\ o ->
+                 LiveStreamListResponse <$>
+                   (o .:? "etag") <*> (o .:? "tokenPagination") <*>
+                     (o .:? "nextPageToken")
+                     <*> (o .:? "pageInfo")
+                     <*>
+                     (o .:? "kind" .!= "youtube#liveStreamListResponse")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "visitorId")
+                     <*> (o .:? "eventId")
+                     <*> (o .:? "prevPageToken"))
+
+instance ToJSON LiveStreamListResponse where
+        toJSON LiveStreamListResponse{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _lslrEtag,
+                  ("tokenPagination" .=) <$> _lslrTokenPagination,
+                  ("nextPageToken" .=) <$> _lslrNextPageToken,
+                  ("pageInfo" .=) <$> _lslrPageInfo,
+                  Just ("kind" .= _lslrKind),
+                  ("items" .=) <$> _lslrItems,
+                  ("visitorId" .=) <$> _lslrVisitorId,
+                  ("eventId" .=) <$> _lslrEventId,
+                  ("prevPageToken" .=) <$> _lslrPrevPageToken])
+
 --
 -- /See:/ 'liveStreamSnippet' smart constructor.
 data LiveStreamSnippet = LiveStreamSnippet
@@ -5946,6 +7755,26 @@ lssDescription
   = lens _lssDescription
       (\ s a -> s{_lssDescription = a})
 
+instance FromJSON LiveStreamSnippet where
+        parseJSON
+          = withObject "LiveStreamSnippet"
+              (\ o ->
+                 LiveStreamSnippet <$>
+                   (o .:? "publishedAt") <*> (o .:? "channelId") <*>
+                     (o .:? "isDefaultStream")
+                     <*> (o .:? "title")
+                     <*> (o .:? "description"))
+
+instance ToJSON LiveStreamSnippet where
+        toJSON LiveStreamSnippet{..}
+          = object
+              (catMaybes
+                 [("publishedAt" .=) <$> _lssPublishedAt,
+                  ("channelId" .=) <$> _lssChannelId,
+                  ("isDefaultStream" .=) <$> _lssIsDefaultStream,
+                  ("title" .=) <$> _lssTitle,
+                  ("description" .=) <$> _lssDescription])
+
 -- | Brief description of the live stream status.
 --
 -- /See:/ 'liveStreamStatus' smart constructor.
@@ -5979,6 +7808,20 @@ lssHealthStatus :: Lens' LiveStreamStatus (Maybe (Maybe LiveStreamHealthStatus))
 lssHealthStatus
   = lens _lssHealthStatus
       (\ s a -> s{_lssHealthStatus = a})
+
+instance FromJSON LiveStreamStatus where
+        parseJSON
+          = withObject "LiveStreamStatus"
+              (\ o ->
+                 LiveStreamStatus <$>
+                   (o .:? "streamStatus") <*> (o .:? "healthStatus"))
+
+instance ToJSON LiveStreamStatus where
+        toJSON LiveStreamStatus{..}
+          = object
+              (catMaybes
+                 [("streamStatus" .=) <$> _lssStreamStatus,
+                  ("healthStatus" .=) <$> _lssHealthStatus])
 
 --
 -- /See:/ 'localizedProperty' smart constructor.
@@ -6022,6 +7865,22 @@ lpDefaultLanguage
   = lens _lpDefaultLanguage
       (\ s a -> s{_lpDefaultLanguage = a})
 
+instance FromJSON LocalizedProperty where
+        parseJSON
+          = withObject "LocalizedProperty"
+              (\ o ->
+                 LocalizedProperty <$>
+                   (o .:? "default") <*> (o .:? "localized" .!= mempty)
+                     <*> (o .:? "defaultLanguage"))
+
+instance ToJSON LocalizedProperty where
+        toJSON LocalizedProperty{..}
+          = object
+              (catMaybes
+                 [("default" .=) <$> _lpDefault,
+                  ("localized" .=) <$> _lpLocalized,
+                  ("defaultLanguage" .=) <$> _lpDefaultLanguage])
+
 --
 -- /See:/ 'localizedString' smart constructor.
 data LocalizedString = LocalizedString
@@ -6050,6 +7909,20 @@ lsValue = lens _lsValue (\ s a -> s{_lsValue = a})
 lsLanguage :: Lens' LocalizedString (Maybe Text)
 lsLanguage
   = lens _lsLanguage (\ s a -> s{_lsLanguage = a})
+
+instance FromJSON LocalizedString where
+        parseJSON
+          = withObject "LocalizedString"
+              (\ o ->
+                 LocalizedString <$>
+                   (o .:? "value") <*> (o .:? "language"))
+
+instance ToJSON LocalizedString where
+        toJSON LocalizedString{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _lsValue,
+                  ("language" .=) <$> _lsLanguage])
 
 -- | Settings and Info of the monitor stream
 --
@@ -6103,6 +7976,25 @@ msiEnableMonitorStream
   = lens _msiEnableMonitorStream
       (\ s a -> s{_msiEnableMonitorStream = a})
 
+instance FromJSON MonitorStreamInfo where
+        parseJSON
+          = withObject "MonitorStreamInfo"
+              (\ o ->
+                 MonitorStreamInfo <$>
+                   (o .:? "broadcastStreamDelayMs") <*>
+                     (o .:? "embedHtml")
+                     <*> (o .:? "enableMonitorStream"))
+
+instance ToJSON MonitorStreamInfo where
+        toJSON MonitorStreamInfo{..}
+          = object
+              (catMaybes
+                 [("broadcastStreamDelayMs" .=) <$>
+                    _msiBroadcastStreamDelayMs,
+                  ("embedHtml" .=) <$> _msiEmbedHtml,
+                  ("enableMonitorStream" .=) <$>
+                    _msiEnableMonitorStream])
+
 -- | Paging details for lists of resources, including total number of items
 -- available and number of resources returned in a single page.
 --
@@ -6138,6 +8030,20 @@ piTotalResults :: Lens' PageInfo (Maybe Int32)
 piTotalResults
   = lens _piTotalResults
       (\ s a -> s{_piTotalResults = a})
+
+instance FromJSON PageInfo where
+        parseJSON
+          = withObject "PageInfo"
+              (\ o ->
+                 PageInfo <$>
+                   (o .:? "resultsPerPage") <*> (o .:? "totalResults"))
+
+instance ToJSON PageInfo where
+        toJSON PageInfo{..}
+          = object
+              (catMaybes
+                 [("resultsPerPage" .=) <$> _piResultsPerPage,
+                  ("totalResults" .=) <$> _piTotalResults])
 
 -- | A playlist resource represents a YouTube playlist. A playlist is a
 -- collection of videos that can be viewed sequentially and shared with
@@ -6242,6 +8148,32 @@ plaPlayer :: Lens' Playlist (Maybe (Maybe PlaylistPlayer))
 plaPlayer
   = lens _plaPlayer (\ s a -> s{_plaPlayer = a})
 
+instance FromJSON Playlist where
+        parseJSON
+          = withObject "Playlist"
+              (\ o ->
+                 Playlist <$>
+                   (o .:? "status") <*> (o .:? "etag") <*>
+                     (o .:? "snippet")
+                     <*> (o .:? "kind" .!= "youtube#playlist")
+                     <*> (o .:? "contentDetails")
+                     <*> (o .:? "id")
+                     <*> (o .:? "localizations")
+                     <*> (o .:? "player"))
+
+instance ToJSON Playlist where
+        toJSON Playlist{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _plaStatus,
+                  ("etag" .=) <$> _plaEtag,
+                  ("snippet" .=) <$> _plaSnippet,
+                  Just ("kind" .= _plaKind),
+                  ("contentDetails" .=) <$> _plaContentDetails,
+                  ("id" .=) <$> _plaId,
+                  ("localizations" .=) <$> _plaLocalizations,
+                  ("player" .=) <$> _plaPlayer])
+
 --
 -- /See:/ 'playlistContentDetails' smart constructor.
 newtype PlaylistContentDetails = PlaylistContentDetails
@@ -6264,6 +8196,17 @@ playlistContentDetails =
 pcdItemCount :: Lens' PlaylistContentDetails (Maybe Word32)
 pcdItemCount
   = lens _pcdItemCount (\ s a -> s{_pcdItemCount = a})
+
+instance FromJSON PlaylistContentDetails where
+        parseJSON
+          = withObject "PlaylistContentDetails"
+              (\ o ->
+                 PlaylistContentDetails <$> (o .:? "itemCount"))
+
+instance ToJSON PlaylistContentDetails where
+        toJSON PlaylistContentDetails{..}
+          = object
+              (catMaybes [("itemCount" .=) <$> _pcdItemCount])
 
 -- | A playlistItem resource identifies another resource, such as a video,
 -- that is included in a playlist. In addition, the playlistItem resource
@@ -6351,6 +8294,28 @@ piContentDetails
 piId :: Lens' PlaylistItem (Maybe Text)
 piId = lens _piId (\ s a -> s{_piId = a})
 
+instance FromJSON PlaylistItem where
+        parseJSON
+          = withObject "PlaylistItem"
+              (\ o ->
+                 PlaylistItem <$>
+                   (o .:? "status") <*> (o .:? "etag") <*>
+                     (o .:? "snippet")
+                     <*> (o .:? "kind" .!= "youtube#playlistItem")
+                     <*> (o .:? "contentDetails")
+                     <*> (o .:? "id"))
+
+instance ToJSON PlaylistItem where
+        toJSON PlaylistItem{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _piStatus,
+                  ("etag" .=) <$> _piEtag,
+                  ("snippet" .=) <$> _piSnippet,
+                  Just ("kind" .= _piKind),
+                  ("contentDetails" .=) <$> _piContentDetails,
+                  ("id" .=) <$> _piId])
+
 --
 -- /See:/ 'playlistItemContentDetails' smart constructor.
 data PlaylistItemContentDetails = PlaylistItemContentDetails
@@ -6408,6 +8373,24 @@ picdVideoId
 picdEndAt :: Lens' PlaylistItemContentDetails (Maybe Text)
 picdEndAt
   = lens _picdEndAt (\ s a -> s{_picdEndAt = a})
+
+instance FromJSON PlaylistItemContentDetails where
+        parseJSON
+          = withObject "PlaylistItemContentDetails"
+              (\ o ->
+                 PlaylistItemContentDetails <$>
+                   (o .:? "startAt") <*> (o .:? "note") <*>
+                     (o .:? "videoId")
+                     <*> (o .:? "endAt"))
+
+instance ToJSON PlaylistItemContentDetails where
+        toJSON PlaylistItemContentDetails{..}
+          = object
+              (catMaybes
+                 [("startAt" .=) <$> _picdStartAt,
+                  ("note" .=) <$> _picdNote,
+                  ("videoId" .=) <$> _picdVideoId,
+                  ("endAt" .=) <$> _picdEndAt])
 
 --
 -- /See:/ 'playlistItemListResponse' smart constructor.
@@ -6508,6 +8491,35 @@ pilrPrevPageToken :: Lens' PlaylistItemListResponse (Maybe Text)
 pilrPrevPageToken
   = lens _pilrPrevPageToken
       (\ s a -> s{_pilrPrevPageToken = a})
+
+instance FromJSON PlaylistItemListResponse where
+        parseJSON
+          = withObject "PlaylistItemListResponse"
+              (\ o ->
+                 PlaylistItemListResponse <$>
+                   (o .:? "etag") <*> (o .:? "tokenPagination") <*>
+                     (o .:? "nextPageToken")
+                     <*> (o .:? "pageInfo")
+                     <*>
+                     (o .:? "kind" .!= "youtube#playlistItemListResponse")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "visitorId")
+                     <*> (o .:? "eventId")
+                     <*> (o .:? "prevPageToken"))
+
+instance ToJSON PlaylistItemListResponse where
+        toJSON PlaylistItemListResponse{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _pilrEtag,
+                  ("tokenPagination" .=) <$> _pilrTokenPagination,
+                  ("nextPageToken" .=) <$> _pilrNextPageToken,
+                  ("pageInfo" .=) <$> _pilrPageInfo,
+                  Just ("kind" .= _pilrKind),
+                  ("items" .=) <$> _pilrItems,
+                  ("visitorId" .=) <$> _pilrVisitorId,
+                  ("eventId" .=) <$> _pilrEventId,
+                  ("prevPageToken" .=) <$> _pilrPrevPageToken])
 
 -- | Basic details about a playlist, including title, description and
 -- thumbnails.
@@ -6619,6 +8631,34 @@ pisPosition :: Lens' PlaylistItemSnippet (Maybe Word32)
 pisPosition
   = lens _pisPosition (\ s a -> s{_pisPosition = a})
 
+instance FromJSON PlaylistItemSnippet where
+        parseJSON
+          = withObject "PlaylistItemSnippet"
+              (\ o ->
+                 PlaylistItemSnippet <$>
+                   (o .:? "resourceId") <*> (o .:? "publishedAt") <*>
+                     (o .:? "channelTitle")
+                     <*> (o .:? "channelId")
+                     <*> (o .:? "thumbnails")
+                     <*> (o .:? "title")
+                     <*> (o .:? "playlistId")
+                     <*> (o .:? "description")
+                     <*> (o .:? "position"))
+
+instance ToJSON PlaylistItemSnippet where
+        toJSON PlaylistItemSnippet{..}
+          = object
+              (catMaybes
+                 [("resourceId" .=) <$> _pisResourceId,
+                  ("publishedAt" .=) <$> _pisPublishedAt,
+                  ("channelTitle" .=) <$> _pisChannelTitle,
+                  ("channelId" .=) <$> _pisChannelId,
+                  ("thumbnails" .=) <$> _pisThumbnails,
+                  ("title" .=) <$> _pisTitle,
+                  ("playlistId" .=) <$> _pisPlaylistId,
+                  ("description" .=) <$> _pisDescription,
+                  ("position" .=) <$> _pisPosition])
+
 -- | Information about the playlist item\'s privacy status.
 --
 -- /See:/ 'playlistItemStatus' smart constructor.
@@ -6643,6 +8683,18 @@ pisPrivacyStatus :: Lens' PlaylistItemStatus (Maybe PlaylistItemStatusPrivacySta
 pisPrivacyStatus
   = lens _pisPrivacyStatus
       (\ s a -> s{_pisPrivacyStatus = a})
+
+instance FromJSON PlaylistItemStatus where
+        parseJSON
+          = withObject "PlaylistItemStatus"
+              (\ o ->
+                 PlaylistItemStatus <$> (o .:? "privacyStatus"))
+
+instance ToJSON PlaylistItemStatus where
+        toJSON PlaylistItemStatus{..}
+          = object
+              (catMaybes
+                 [("privacyStatus" .=) <$> _pisPrivacyStatus])
 
 --
 -- /See:/ 'playlistListResponse' smart constructor.
@@ -6743,6 +8795,34 @@ plrPrevPageToken
   = lens _plrPrevPageToken
       (\ s a -> s{_plrPrevPageToken = a})
 
+instance FromJSON PlaylistListResponse where
+        parseJSON
+          = withObject "PlaylistListResponse"
+              (\ o ->
+                 PlaylistListResponse <$>
+                   (o .:? "etag") <*> (o .:? "tokenPagination") <*>
+                     (o .:? "nextPageToken")
+                     <*> (o .:? "pageInfo")
+                     <*> (o .:? "kind" .!= "youtube#playlistListResponse")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "visitorId")
+                     <*> (o .:? "eventId")
+                     <*> (o .:? "prevPageToken"))
+
+instance ToJSON PlaylistListResponse where
+        toJSON PlaylistListResponse{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _plrEtag,
+                  ("tokenPagination" .=) <$> _plrTokenPagination,
+                  ("nextPageToken" .=) <$> _plrNextPageToken,
+                  ("pageInfo" .=) <$> _plrPageInfo,
+                  Just ("kind" .= _plrKind),
+                  ("items" .=) <$> _plrItems,
+                  ("visitorId" .=) <$> _plrVisitorId,
+                  ("eventId" .=) <$> _plrEventId,
+                  ("prevPageToken" .=) <$> _plrPrevPageToken])
+
 -- | Playlist localization setting
 --
 -- /See:/ 'playlistLocalization' smart constructor.
@@ -6776,6 +8856,20 @@ plDescription
   = lens _plDescription
       (\ s a -> s{_plDescription = a})
 
+instance FromJSON PlaylistLocalization where
+        parseJSON
+          = withObject "PlaylistLocalization"
+              (\ o ->
+                 PlaylistLocalization <$>
+                   (o .:? "title") <*> (o .:? "description"))
+
+instance ToJSON PlaylistLocalization where
+        toJSON PlaylistLocalization{..}
+          = object
+              (catMaybes
+                 [("title" .=) <$> _plTitle,
+                  ("description" .=) <$> _plDescription])
+
 -- | Localizations for different languages
 --
 -- /See:/ 'playlistLocalizations' smart constructor.
@@ -6788,6 +8882,14 @@ data PlaylistLocalizations =
 playlistLocalizations
     :: PlaylistLocalizations
 playlistLocalizations = PlaylistLocalizations
+
+instance FromJSON PlaylistLocalizations where
+        parseJSON
+          = withObject "PlaylistLocalizations"
+              (\ o -> pure PlaylistLocalizations)
+
+instance ToJSON PlaylistLocalizations where
+        toJSON = const (Object mempty)
 
 --
 -- /See:/ 'playlistPlayer' smart constructor.
@@ -6812,6 +8914,16 @@ playlistPlayer =
 ppEmbedHtml :: Lens' PlaylistPlayer (Maybe Text)
 ppEmbedHtml
   = lens _ppEmbedHtml (\ s a -> s{_ppEmbedHtml = a})
+
+instance FromJSON PlaylistPlayer where
+        parseJSON
+          = withObject "PlaylistPlayer"
+              (\ o -> PlaylistPlayer <$> (o .:? "embedHtml"))
+
+instance ToJSON PlaylistPlayer where
+        toJSON PlaylistPlayer{..}
+          = object
+              (catMaybes [("embedHtml" .=) <$> _ppEmbedHtml])
 
 -- | Basic details about a playlist, including title, description and
 -- thumbnails.
@@ -6918,6 +9030,34 @@ psDefaultLanguage
   = lens _psDefaultLanguage
       (\ s a -> s{_psDefaultLanguage = a})
 
+instance FromJSON PlaylistSnippet where
+        parseJSON
+          = withObject "PlaylistSnippet"
+              (\ o ->
+                 PlaylistSnippet <$>
+                   (o .:? "publishedAt") <*> (o .:? "channelTitle") <*>
+                     (o .:? "channelId")
+                     <*> (o .:? "thumbnails")
+                     <*> (o .:? "localized")
+                     <*> (o .:? "title")
+                     <*> (o .:? "description")
+                     <*> (o .:? "tags" .!= mempty)
+                     <*> (o .:? "defaultLanguage"))
+
+instance ToJSON PlaylistSnippet where
+        toJSON PlaylistSnippet{..}
+          = object
+              (catMaybes
+                 [("publishedAt" .=) <$> _psPublishedAt,
+                  ("channelTitle" .=) <$> _psChannelTitle,
+                  ("channelId" .=) <$> _psChannelId,
+                  ("thumbnails" .=) <$> _psThumbnails,
+                  ("localized" .=) <$> _psLocalized,
+                  ("title" .=) <$> _psTitle,
+                  ("description" .=) <$> _psDescription,
+                  ("tags" .=) <$> _psTags,
+                  ("defaultLanguage" .=) <$> _psDefaultLanguage])
+
 --
 -- /See:/ 'playlistStatus' smart constructor.
 newtype PlaylistStatus = PlaylistStatus
@@ -6941,6 +9081,17 @@ psPrivacyStatus :: Lens' PlaylistStatus (Maybe PlaylistStatusPrivacyStatus)
 psPrivacyStatus
   = lens _psPrivacyStatus
       (\ s a -> s{_psPrivacyStatus = a})
+
+instance FromJSON PlaylistStatus where
+        parseJSON
+          = withObject "PlaylistStatus"
+              (\ o -> PlaylistStatus <$> (o .:? "privacyStatus"))
+
+instance ToJSON PlaylistStatus where
+        toJSON PlaylistStatus{..}
+          = object
+              (catMaybes
+                 [("privacyStatus" .=) <$> _psPrivacyStatus])
 
 -- | Describes a single promoted item.
 --
@@ -6996,6 +9147,25 @@ pId = lens _pId (\ s a -> s{_pId = a})
 -- displayed. If present, it overrides the default timing.
 pTiming :: Lens' PromotedItem (Maybe (Maybe InvideoTiming))
 pTiming = lens _pTiming (\ s a -> s{_pTiming = a})
+
+instance FromJSON PromotedItem where
+        parseJSON
+          = withObject "PromotedItem"
+              (\ o ->
+                 PromotedItem <$>
+                   (o .:? "customMessage") <*>
+                     (o .:? "promotedByContentOwner")
+                     <*> (o .:? "id")
+                     <*> (o .:? "timing"))
+
+instance ToJSON PromotedItem where
+        toJSON PromotedItem{..}
+          = object
+              (catMaybes
+                 [("customMessage" .=) <$> _pCustomMessage,
+                  ("promotedByContentOwner" .=) <$>
+                    _pPromotedByContentOwner,
+                  ("id" .=) <$> _pId, ("timing" .=) <$> _pTiming])
 
 -- | Describes a single promoted item id. It is a union of various possible
 -- types.
@@ -7056,6 +9226,25 @@ piiWebsiteUrl
 piiType :: Lens' PromotedItemId (Maybe PromotedItemIdType)
 piiType = lens _piiType (\ s a -> s{_piiType = a})
 
+instance FromJSON PromotedItemId where
+        parseJSON
+          = withObject "PromotedItemId"
+              (\ o ->
+                 PromotedItemId <$>
+                   (o .:? "recentlyUploadedBy") <*> (o .:? "videoId")
+                     <*> (o .:? "websiteUrl")
+                     <*> (o .:? "type"))
+
+instance ToJSON PromotedItemId where
+        toJSON PromotedItemId{..}
+          = object
+              (catMaybes
+                 [("recentlyUploadedBy" .=) <$>
+                    _piiRecentlyUploadedBy,
+                  ("videoId" .=) <$> _piiVideoId,
+                  ("websiteUrl" .=) <$> _piiWebsiteUrl,
+                  ("type" .=) <$> _piiType])
+
 -- | A pair Property \/ Value.
 --
 -- /See:/ 'propertyValue' smart constructor.
@@ -7087,6 +9276,20 @@ pvProperty
 -- | The property\'s value.
 pvValue :: Lens' PropertyValue (Maybe Text)
 pvValue = lens _pvValue (\ s a -> s{_pvValue = a})
+
+instance FromJSON PropertyValue where
+        parseJSON
+          = withObject "PropertyValue"
+              (\ o ->
+                 PropertyValue <$>
+                   (o .:? "property") <*> (o .:? "value"))
+
+instance ToJSON PropertyValue where
+        toJSON PropertyValue{..}
+          = object
+              (catMaybes
+                 [("property" .=) <$> _pvProperty,
+                  ("value" .=) <$> _pvValue])
 
 -- | A resource id is a generic reference that points to another YouTube
 -- resource.
@@ -7144,6 +9347,24 @@ riVideoId
 riPlaylistId :: Lens' ResourceId (Maybe Text)
 riPlaylistId
   = lens _riPlaylistId (\ s a -> s{_riPlaylistId = a})
+
+instance FromJSON ResourceId where
+        parseJSON
+          = withObject "ResourceId"
+              (\ o ->
+                 ResourceId <$>
+                   (o .:? "kind") <*> (o .:? "channelId") <*>
+                     (o .:? "videoId")
+                     <*> (o .:? "playlistId"))
+
+instance ToJSON ResourceId where
+        toJSON ResourceId{..}
+          = object
+              (catMaybes
+                 [("kind" .=) <$> _riKind,
+                  ("channelId" .=) <$> _riChannelId,
+                  ("videoId" .=) <$> _riVideoId,
+                  ("playlistId" .=) <$> _riPlaylistId])
 
 --
 -- /See:/ 'searchListResponse' smart constructor.
@@ -7244,6 +9465,34 @@ slrPrevPageToken
   = lens _slrPrevPageToken
       (\ s a -> s{_slrPrevPageToken = a})
 
+instance FromJSON SearchListResponse where
+        parseJSON
+          = withObject "SearchListResponse"
+              (\ o ->
+                 SearchListResponse <$>
+                   (o .:? "etag") <*> (o .:? "tokenPagination") <*>
+                     (o .:? "nextPageToken")
+                     <*> (o .:? "pageInfo")
+                     <*> (o .:? "kind" .!= "youtube#searchListResponse")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "visitorId")
+                     <*> (o .:? "eventId")
+                     <*> (o .:? "prevPageToken"))
+
+instance ToJSON SearchListResponse where
+        toJSON SearchListResponse{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _slrEtag,
+                  ("tokenPagination" .=) <$> _slrTokenPagination,
+                  ("nextPageToken" .=) <$> _slrNextPageToken,
+                  ("pageInfo" .=) <$> _slrPageInfo,
+                  Just ("kind" .= _slrKind),
+                  ("items" .=) <$> _slrItems,
+                  ("visitorId" .=) <$> _slrVisitorId,
+                  ("eventId" .=) <$> _slrEventId,
+                  ("prevPageToken" .=) <$> _slrPrevPageToken])
+
 -- | A search result contains information about a YouTube video, channel, or
 -- playlist that matches the search parameters specified in an API request.
 -- While a search result points to a uniquely identifiable resource, like a
@@ -7299,6 +9548,23 @@ srKind = lens _srKind (\ s a -> s{_srKind = a})
 -- the resource that matches the search request.
 srId :: Lens' SearchResult (Maybe (Maybe ResourceId))
 srId = lens _srId (\ s a -> s{_srId = a})
+
+instance FromJSON SearchResult where
+        parseJSON
+          = withObject "SearchResult"
+              (\ o ->
+                 SearchResult <$>
+                   (o .:? "etag") <*> (o .:? "snippet") <*>
+                     (o .:? "kind" .!= "youtube#searchResult")
+                     <*> (o .:? "id"))
+
+instance ToJSON SearchResult where
+        toJSON SearchResult{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _srEtag,
+                  ("snippet" .=) <$> _srSnippet,
+                  Just ("kind" .= _srKind), ("id" .=) <$> _srId])
 
 -- | Basic details about a search result, including title, description and
 -- thumbnails of the item referenced by the search result.
@@ -7391,6 +9657,31 @@ srsDescription
   = lens _srsDescription
       (\ s a -> s{_srsDescription = a})
 
+instance FromJSON SearchResultSnippet where
+        parseJSON
+          = withObject "SearchResultSnippet"
+              (\ o ->
+                 SearchResultSnippet <$>
+                   (o .:? "publishedAt") <*> (o .:? "channelTitle") <*>
+                     (o .:? "channelId")
+                     <*> (o .:? "thumbnails")
+                     <*> (o .:? "title")
+                     <*> (o .:? "liveBroadcastContent")
+                     <*> (o .:? "description"))
+
+instance ToJSON SearchResultSnippet where
+        toJSON SearchResultSnippet{..}
+          = object
+              (catMaybes
+                 [("publishedAt" .=) <$> _srsPublishedAt,
+                  ("channelTitle" .=) <$> _srsChannelTitle,
+                  ("channelId" .=) <$> _srsChannelId,
+                  ("thumbnails" .=) <$> _srsThumbnails,
+                  ("title" .=) <$> _srsTitle,
+                  ("liveBroadcastContent" .=) <$>
+                    _srsLiveBroadcastContent,
+                  ("description" .=) <$> _srsDescription])
+
 -- | A subscription resource contains information about a YouTube user
 -- subscription. A subscription notifies a user when new videos are added
 -- to a channel or when another user takes one of several actions on
@@ -7466,6 +9757,28 @@ sContentDetails
 sId :: Lens' Subscription (Maybe Text)
 sId = lens _sId (\ s a -> s{_sId = a})
 
+instance FromJSON Subscription where
+        parseJSON
+          = withObject "Subscription"
+              (\ o ->
+                 Subscription <$>
+                   (o .:? "etag") <*> (o .:? "subscriberSnippet") <*>
+                     (o .:? "snippet")
+                     <*> (o .:? "kind" .!= "youtube#subscription")
+                     <*> (o .:? "contentDetails")
+                     <*> (o .:? "id"))
+
+instance ToJSON Subscription where
+        toJSON Subscription{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _sEtag,
+                  ("subscriberSnippet" .=) <$> _sSubscriberSnippet,
+                  ("snippet" .=) <$> _sSnippet,
+                  Just ("kind" .= _sKind),
+                  ("contentDetails" .=) <$> _sContentDetails,
+                  ("id" .=) <$> _sId])
+
 -- | Details about the content to witch a subscription refers.
 --
 -- /See:/ 'subscriptionContentDetails' smart constructor.
@@ -7512,6 +9825,22 @@ scdNewItemCount :: Lens' SubscriptionContentDetails (Maybe Word32)
 scdNewItemCount
   = lens _scdNewItemCount
       (\ s a -> s{_scdNewItemCount = a})
+
+instance FromJSON SubscriptionContentDetails where
+        parseJSON
+          = withObject "SubscriptionContentDetails"
+              (\ o ->
+                 SubscriptionContentDetails <$>
+                   (o .:? "activityType") <*> (o .:? "totalItemCount")
+                     <*> (o .:? "newItemCount"))
+
+instance ToJSON SubscriptionContentDetails where
+        toJSON SubscriptionContentDetails{..}
+          = object
+              (catMaybes
+                 [("activityType" .=) <$> _scdActivityType,
+                  ("totalItemCount" .=) <$> _scdTotalItemCount,
+                  ("newItemCount" .=) <$> _scdNewItemCount])
 
 --
 -- /See:/ 'subscriptionListResponse' smart constructor.
@@ -7612,6 +9941,35 @@ subPrevPageToken
   = lens _subPrevPageToken
       (\ s a -> s{_subPrevPageToken = a})
 
+instance FromJSON SubscriptionListResponse where
+        parseJSON
+          = withObject "SubscriptionListResponse"
+              (\ o ->
+                 SubscriptionListResponse <$>
+                   (o .:? "etag") <*> (o .:? "tokenPagination") <*>
+                     (o .:? "nextPageToken")
+                     <*> (o .:? "pageInfo")
+                     <*>
+                     (o .:? "kind" .!= "youtube#subscriptionListResponse")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "visitorId")
+                     <*> (o .:? "eventId")
+                     <*> (o .:? "prevPageToken"))
+
+instance ToJSON SubscriptionListResponse where
+        toJSON SubscriptionListResponse{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _subEtag,
+                  ("tokenPagination" .=) <$> _subTokenPagination,
+                  ("nextPageToken" .=) <$> _subNextPageToken,
+                  ("pageInfo" .=) <$> _subPageInfo,
+                  Just ("kind" .= _subKind),
+                  ("items" .=) <$> _subItems,
+                  ("visitorId" .=) <$> _subVisitorId,
+                  ("eventId" .=) <$> _subEventId,
+                  ("prevPageToken" .=) <$> _subPrevPageToken])
+
 -- | Basic details about a subscription, including title, description and
 -- thumbnails of the subscribed item.
 --
@@ -7697,6 +10055,30 @@ ssDescription
   = lens _ssDescription
       (\ s a -> s{_ssDescription = a})
 
+instance FromJSON SubscriptionSnippet where
+        parseJSON
+          = withObject "SubscriptionSnippet"
+              (\ o ->
+                 SubscriptionSnippet <$>
+                   (o .:? "resourceId") <*> (o .:? "publishedAt") <*>
+                     (o .:? "channelTitle")
+                     <*> (o .:? "channelId")
+                     <*> (o .:? "thumbnails")
+                     <*> (o .:? "title")
+                     <*> (o .:? "description"))
+
+instance ToJSON SubscriptionSnippet where
+        toJSON SubscriptionSnippet{..}
+          = object
+              (catMaybes
+                 [("resourceId" .=) <$> _ssResourceId,
+                  ("publishedAt" .=) <$> _ssPublishedAt,
+                  ("channelTitle" .=) <$> _ssChannelTitle,
+                  ("channelId" .=) <$> _ssChannelId,
+                  ("thumbnails" .=) <$> _ssThumbnails,
+                  ("title" .=) <$> _ssTitle,
+                  ("description" .=) <$> _ssDescription])
+
 -- | Basic details about a subscription\'s subscriber including title,
 -- description, channel ID and thumbnails.
 --
@@ -7750,6 +10132,24 @@ sssDescription
   = lens _sssDescription
       (\ s a -> s{_sssDescription = a})
 
+instance FromJSON SubscriptionSubscriberSnippet where
+        parseJSON
+          = withObject "SubscriptionSubscriberSnippet"
+              (\ o ->
+                 SubscriptionSubscriberSnippet <$>
+                   (o .:? "channelId") <*> (o .:? "thumbnails") <*>
+                     (o .:? "title")
+                     <*> (o .:? "description"))
+
+instance ToJSON SubscriptionSubscriberSnippet where
+        toJSON SubscriptionSubscriberSnippet{..}
+          = object
+              (catMaybes
+                 [("channelId" .=) <$> _sssChannelId,
+                  ("thumbnails" .=) <$> _sssThumbnails,
+                  ("title" .=) <$> _sssTitle,
+                  ("description" .=) <$> _sssDescription])
+
 -- | A thumbnail is an image representing a YouTube resource.
 --
 -- /See:/ 'thumbnail' smart constructor.
@@ -7788,6 +10188,21 @@ tUrl = lens _tUrl (\ s a -> s{_tUrl = a})
 -- | (Optional) Width of the thumbnail image.
 tWidth :: Lens' Thumbnail (Maybe Word32)
 tWidth = lens _tWidth (\ s a -> s{_tWidth = a})
+
+instance FromJSON Thumbnail where
+        parseJSON
+          = withObject "Thumbnail"
+              (\ o ->
+                 Thumbnail <$>
+                   (o .:? "height") <*> (o .:? "url") <*>
+                     (o .:? "width"))
+
+instance ToJSON Thumbnail where
+        toJSON Thumbnail{..}
+          = object
+              (catMaybes
+                 [("height" .=) <$> _tHeight, ("url" .=) <$> _tUrl,
+                  ("width" .=) <$> _tWidth])
 
 -- | Internal representation of thumbnails for a YouTube resource.
 --
@@ -7845,6 +10260,26 @@ tdStandard
 -- | The high quality image for this resource.
 tdHigh :: Lens' ThumbnailDetails (Maybe (Maybe Thumbnail))
 tdHigh = lens _tdHigh (\ s a -> s{_tdHigh = a})
+
+instance FromJSON ThumbnailDetails where
+        parseJSON
+          = withObject "ThumbnailDetails"
+              (\ o ->
+                 ThumbnailDetails <$>
+                   (o .:? "medium") <*> (o .:? "maxres") <*>
+                     (o .:? "default")
+                     <*> (o .:? "standard")
+                     <*> (o .:? "high"))
+
+instance ToJSON ThumbnailDetails where
+        toJSON ThumbnailDetails{..}
+          = object
+              (catMaybes
+                 [("medium" .=) <$> _tdMedium,
+                  ("maxres" .=) <$> _tdMaxres,
+                  ("default" .=) <$> _tdDefault,
+                  ("standard" .=) <$> _tdStandard,
+                  ("high" .=) <$> _tdHigh])
 
 --
 -- /See:/ 'thumbnailSetResponse' smart constructor.
@@ -7906,6 +10341,26 @@ tsrEventId :: Lens' ThumbnailSetResponse (Maybe Text)
 tsrEventId
   = lens _tsrEventId (\ s a -> s{_tsrEventId = a})
 
+instance FromJSON ThumbnailSetResponse where
+        parseJSON
+          = withObject "ThumbnailSetResponse"
+              (\ o ->
+                 ThumbnailSetResponse <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!= "youtube#thumbnailSetResponse")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "visitorId")
+                     <*> (o .:? "eventId"))
+
+instance ToJSON ThumbnailSetResponse where
+        toJSON ThumbnailSetResponse{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _tsrEtag, Just ("kind" .= _tsrKind),
+                  ("items" .=) <$> _tsrItems,
+                  ("visitorId" .=) <$> _tsrVisitorId,
+                  ("eventId" .=) <$> _tsrEventId])
+
 -- | Stub token pagination template to suppress results.
 --
 -- /See:/ 'tokenPagination' smart constructor.
@@ -7918,6 +10373,14 @@ data TokenPagination =
 tokenPagination
     :: TokenPagination
 tokenPagination = TokenPagination
+
+instance FromJSON TokenPagination where
+        parseJSON
+          = withObject "TokenPagination"
+              (\ o -> pure TokenPagination)
+
+instance ToJSON TokenPagination where
+        toJSON = const (Object mempty)
 
 -- | A video resource represents a YouTube video.
 --
@@ -8133,6 +10596,55 @@ vMonetizationDetails
   = lens _vMonetizationDetails
       (\ s a -> s{_vMonetizationDetails = a})
 
+instance FromJSON Video where
+        parseJSON
+          = withObject "Video"
+              (\ o ->
+                 Video <$>
+                   (o .:? "status") <*> (o .:? "etag") <*>
+                     (o .:? "projectDetails")
+                     <*> (o .:? "recordingDetails")
+                     <*> (o .:? "snippet")
+                     <*> (o .:? "kind" .!= "youtube#video")
+                     <*> (o .:? "topicDetails")
+                     <*> (o .:? "contentDetails")
+                     <*> (o .:? "conversionPings")
+                     <*> (o .:? "ageGating")
+                     <*> (o .:? "fileDetails")
+                     <*> (o .:? "suggestions")
+                     <*> (o .:? "id")
+                     <*> (o .:? "statistics")
+                     <*> (o .:? "localizations")
+                     <*> (o .:? "liveStreamingDetails")
+                     <*> (o .:? "player")
+                     <*> (o .:? "processingDetails")
+                     <*> (o .:? "monetizationDetails"))
+
+instance ToJSON Video where
+        toJSON Video{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _vStatus, ("etag" .=) <$> _vEtag,
+                  ("projectDetails" .=) <$> _vProjectDetails,
+                  ("recordingDetails" .=) <$> _vRecordingDetails,
+                  ("snippet" .=) <$> _vSnippet,
+                  Just ("kind" .= _vKind),
+                  ("topicDetails" .=) <$> _vTopicDetails,
+                  ("contentDetails" .=) <$> _vContentDetails,
+                  ("conversionPings" .=) <$> _vConversionPings,
+                  ("ageGating" .=) <$> _vAgeGating,
+                  ("fileDetails" .=) <$> _vFileDetails,
+                  ("suggestions" .=) <$> _vSuggestions,
+                  ("id" .=) <$> _vId,
+                  ("statistics" .=) <$> _vStatistics,
+                  ("localizations" .=) <$> _vLocalizations,
+                  ("liveStreamingDetails" .=) <$>
+                    _vLiveStreamingDetails,
+                  ("player" .=) <$> _vPlayer,
+                  ("processingDetails" .=) <$> _vProcessingDetails,
+                  ("monetizationDetails" .=) <$>
+                    _vMonetizationDetails])
+
 --
 -- /See:/ 'videoAbuseReport' smart constructor.
 data VideoAbuseReport = VideoAbuseReport
@@ -8196,6 +10708,26 @@ varComments :: Lens' VideoAbuseReport (Maybe Text)
 varComments
   = lens _varComments (\ s a -> s{_varComments = a})
 
+instance FromJSON VideoAbuseReport where
+        parseJSON
+          = withObject "VideoAbuseReport"
+              (\ o ->
+                 VideoAbuseReport <$>
+                   (o .:? "secondaryReasonId") <*> (o .:? "reasonId")
+                     <*> (o .:? "videoId")
+                     <*> (o .:? "language")
+                     <*> (o .:? "comments"))
+
+instance ToJSON VideoAbuseReport where
+        toJSON VideoAbuseReport{..}
+          = object
+              (catMaybes
+                 [("secondaryReasonId" .=) <$> _varSecondaryReasonId,
+                  ("reasonId" .=) <$> _varReasonId,
+                  ("videoId" .=) <$> _varVideoId,
+                  ("language" .=) <$> _varLanguage,
+                  ("comments" .=) <$> _varComments])
+
 -- | A videoAbuseReportReason resource identifies a reason that a video could
 -- be reported as abusive. Video abuse report reasons are used with
 -- video.ReportAbuse.
@@ -8246,6 +10778,23 @@ varrKind = lens _varrKind (\ s a -> s{_varrKind = a})
 -- | The ID of this abuse report reason.
 varrId :: Lens' VideoAbuseReportReason (Maybe Text)
 varrId = lens _varrId (\ s a -> s{_varrId = a})
+
+instance FromJSON VideoAbuseReportReason where
+        parseJSON
+          = withObject "VideoAbuseReportReason"
+              (\ o ->
+                 VideoAbuseReportReason <$>
+                   (o .:? "etag") <*> (o .:? "snippet") <*>
+                     (o .:? "kind" .!= "youtube#videoAbuseReportReason")
+                     <*> (o .:? "id"))
+
+instance ToJSON VideoAbuseReportReason where
+        toJSON VideoAbuseReportReason{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _varrEtag,
+                  ("snippet" .=) <$> _varrSnippet,
+                  Just ("kind" .= _varrKind), ("id" .=) <$> _varrId])
 
 --
 -- /See:/ 'videoAbuseReportReasonListResponse' smart constructor.
@@ -8311,6 +10860,30 @@ varrlrEventId
   = lens _varrlrEventId
       (\ s a -> s{_varrlrEventId = a})
 
+instance FromJSON VideoAbuseReportReasonListResponse
+         where
+        parseJSON
+          = withObject "VideoAbuseReportReasonListResponse"
+              (\ o ->
+                 VideoAbuseReportReasonListResponse <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!=
+                        "youtube#videoAbuseReportReasonListResponse")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "visitorId")
+                     <*> (o .:? "eventId"))
+
+instance ToJSON VideoAbuseReportReasonListResponse
+         where
+        toJSON VideoAbuseReportReasonListResponse{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _varrlrEtag,
+                  Just ("kind" .= _varrlrKind),
+                  ("items" .=) <$> _varrlrItems,
+                  ("visitorId" .=) <$> _varrlrVisitorId,
+                  ("eventId" .=) <$> _varrlrEventId])
+
 -- | Basic details about a video category, such as its localized title.
 --
 -- /See:/ 'videoAbuseReportReasonSnippet' smart constructor.
@@ -8348,6 +10921,21 @@ varrsLabel :: Lens' VideoAbuseReportReasonSnippet (Maybe Text)
 varrsLabel
   = lens _varrsLabel (\ s a -> s{_varrsLabel = a})
 
+instance FromJSON VideoAbuseReportReasonSnippet where
+        parseJSON
+          = withObject "VideoAbuseReportReasonSnippet"
+              (\ o ->
+                 VideoAbuseReportReasonSnippet <$>
+                   (o .:? "secondaryReasons" .!= mempty) <*>
+                     (o .:? "label"))
+
+instance ToJSON VideoAbuseReportReasonSnippet where
+        toJSON VideoAbuseReportReasonSnippet{..}
+          = object
+              (catMaybes
+                 [("secondaryReasons" .=) <$> _varrsSecondaryReasons,
+                  ("label" .=) <$> _varrsLabel])
+
 --
 -- /See:/ 'videoAbuseReportSecondaryReason' smart constructor.
 data VideoAbuseReportSecondaryReason = VideoAbuseReportSecondaryReason
@@ -8378,6 +10966,21 @@ varsrId = lens _varsrId (\ s a -> s{_varsrId = a})
 varsrLabel :: Lens' VideoAbuseReportSecondaryReason (Maybe Text)
 varsrLabel
   = lens _varsrLabel (\ s a -> s{_varsrLabel = a})
+
+instance FromJSON VideoAbuseReportSecondaryReason
+         where
+        parseJSON
+          = withObject "VideoAbuseReportSecondaryReason"
+              (\ o ->
+                 VideoAbuseReportSecondaryReason <$>
+                   (o .:? "id") <*> (o .:? "label"))
+
+instance ToJSON VideoAbuseReportSecondaryReason where
+        toJSON VideoAbuseReportSecondaryReason{..}
+          = object
+              (catMaybes
+                 [("id" .=) <$> _varsrId,
+                  ("label" .=) <$> _varsrLabel])
 
 --
 -- /See:/ 'videoAgeGating' smart constructor.
@@ -8427,6 +11030,22 @@ vagVideoGameRating :: Lens' VideoAgeGating (Maybe VideoAgeGatingVideoGameRating)
 vagVideoGameRating
   = lens _vagVideoGameRating
       (\ s a -> s{_vagVideoGameRating = a})
+
+instance FromJSON VideoAgeGating where
+        parseJSON
+          = withObject "VideoAgeGating"
+              (\ o ->
+                 VideoAgeGating <$>
+                   (o .:? "alcoholContent") <*> (o .:? "restricted") <*>
+                     (o .:? "videoGameRating"))
+
+instance ToJSON VideoAgeGating where
+        toJSON VideoAgeGating{..}
+          = object
+              (catMaybes
+                 [("alcoholContent" .=) <$> _vagAlcoholContent,
+                  ("restricted" .=) <$> _vagRestricted,
+                  ("videoGameRating" .=) <$> _vagVideoGameRating])
 
 -- | A videoCategory resource identifies a category that has been or could be
 -- associated with uploaded videos.
@@ -8478,6 +11097,23 @@ vcKind = lens _vcKind (\ s a -> s{_vcKind = a})
 -- | The ID that YouTube uses to uniquely identify the video category.
 vcId :: Lens' VideoCategory (Maybe Text)
 vcId = lens _vcId (\ s a -> s{_vcId = a})
+
+instance FromJSON VideoCategory where
+        parseJSON
+          = withObject "VideoCategory"
+              (\ o ->
+                 VideoCategory <$>
+                   (o .:? "etag") <*> (o .:? "snippet") <*>
+                     (o .:? "kind" .!= "youtube#videoCategory")
+                     <*> (o .:? "id"))
+
+instance ToJSON VideoCategory where
+        toJSON VideoCategory{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _vcEtag,
+                  ("snippet" .=) <$> _vcSnippet,
+                  Just ("kind" .= _vcKind), ("id" .=) <$> _vcId])
 
 --
 -- /See:/ 'videoCategoryListResponse' smart constructor.
@@ -8581,6 +11217,36 @@ vclrPrevPageToken
   = lens _vclrPrevPageToken
       (\ s a -> s{_vclrPrevPageToken = a})
 
+instance FromJSON VideoCategoryListResponse where
+        parseJSON
+          = withObject "VideoCategoryListResponse"
+              (\ o ->
+                 VideoCategoryListResponse <$>
+                   (o .:? "etag") <*> (o .:? "tokenPagination") <*>
+                     (o .:? "nextPageToken")
+                     <*> (o .:? "pageInfo")
+                     <*>
+                     (o .:? "kind" .!=
+                        "youtube#videoCategoryListResponse")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "visitorId")
+                     <*> (o .:? "eventId")
+                     <*> (o .:? "prevPageToken"))
+
+instance ToJSON VideoCategoryListResponse where
+        toJSON VideoCategoryListResponse{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _vclrEtag,
+                  ("tokenPagination" .=) <$> _vclrTokenPagination,
+                  ("nextPageToken" .=) <$> _vclrNextPageToken,
+                  ("pageInfo" .=) <$> _vclrPageInfo,
+                  Just ("kind" .= _vclrKind),
+                  ("items" .=) <$> _vclrItems,
+                  ("visitorId" .=) <$> _vclrVisitorId,
+                  ("eventId" .=) <$> _vclrEventId,
+                  ("prevPageToken" .=) <$> _vclrPrevPageToken])
+
 -- | Basic details about a video category, such as its localized title.
 --
 -- /See:/ 'videoCategorySnippet' smart constructor.
@@ -8621,6 +11287,23 @@ vcsChannelId
 -- | The video category\'s title.
 vcsTitle :: Lens' VideoCategorySnippet (Maybe Text)
 vcsTitle = lens _vcsTitle (\ s a -> s{_vcsTitle = a})
+
+instance FromJSON VideoCategorySnippet where
+        parseJSON
+          = withObject "VideoCategorySnippet"
+              (\ o ->
+                 VideoCategorySnippet <$>
+                   (o .:? "assignable") <*>
+                     (o .:? "channelId" .!= "UCBR8-60-B28hp2BmDPdntcQ")
+                     <*> (o .:? "title"))
+
+instance ToJSON VideoCategorySnippet where
+        toJSON VideoCategorySnippet{..}
+          = object
+              (catMaybes
+                 [("assignable" .=) <$> _vcsAssignable,
+                  Just ("channelId" .= _vcsChannelId),
+                  ("title" .=) <$> _vcsTitle])
 
 -- | Details about the content of a YouTube Video.
 --
@@ -8728,6 +11411,33 @@ vcdLicensedContent
   = lens _vcdLicensedContent
       (\ s a -> s{_vcdLicensedContent = a})
 
+instance FromJSON VideoContentDetails where
+        parseJSON
+          = withObject "VideoContentDetails"
+              (\ o ->
+                 VideoContentDetails <$>
+                   (o .:? "countryRestriction") <*> (o .:? "definition")
+                     <*> (o .:? "dimension")
+                     <*> (o .:? "caption")
+                     <*> (o .:? "regionRestriction")
+                     <*> (o .:? "duration")
+                     <*> (o .:? "contentRating")
+                     <*> (o .:? "licensedContent"))
+
+instance ToJSON VideoContentDetails where
+        toJSON VideoContentDetails{..}
+          = object
+              (catMaybes
+                 [("countryRestriction" .=) <$>
+                    _vcdCountryRestriction,
+                  ("definition" .=) <$> _vcdDefinition,
+                  ("dimension" .=) <$> _vcdDimension,
+                  ("caption" .=) <$> _vcdCaption,
+                  ("regionRestriction" .=) <$> _vcdRegionRestriction,
+                  ("duration" .=) <$> _vcdDuration,
+                  ("contentRating" .=) <$> _vcdContentRating,
+                  ("licensedContent" .=) <$> _vcdLicensedContent])
+
 -- | DEPRECATED Region restriction of the video.
 --
 -- /See:/ 'videoContentDetailsRegionRestriction' smart constructor.
@@ -8773,6 +11483,23 @@ vcdrrBlocked
       . _Default
       . _Coerce
 
+instance FromJSON
+         VideoContentDetailsRegionRestriction where
+        parseJSON
+          = withObject "VideoContentDetailsRegionRestriction"
+              (\ o ->
+                 VideoContentDetailsRegionRestriction <$>
+                   (o .:? "allowed" .!= mempty) <*>
+                     (o .:? "blocked" .!= mempty))
+
+instance ToJSON VideoContentDetailsRegionRestriction
+         where
+        toJSON VideoContentDetailsRegionRestriction{..}
+          = object
+              (catMaybes
+                 [("allowed" .=) <$> _vcdrrAllowed,
+                  ("blocked" .=) <$> _vcdrrBlocked])
+
 --
 -- /See:/ 'videoConversionPing' smart constructor.
 data VideoConversionPing = VideoConversionPing
@@ -8812,6 +11539,20 @@ vcpConversionUrl
   = lens _vcpConversionUrl
       (\ s a -> s{_vcpConversionUrl = a})
 
+instance FromJSON VideoConversionPing where
+        parseJSON
+          = withObject "VideoConversionPing"
+              (\ o ->
+                 VideoConversionPing <$>
+                   (o .:? "context") <*> (o .:? "conversionUrl"))
+
+instance ToJSON VideoConversionPing where
+        toJSON VideoConversionPing{..}
+          = object
+              (catMaybes
+                 [("context" .=) <$> _vcpContext,
+                  ("conversionUrl" .=) <$> _vcpConversionUrl])
+
 --
 -- /See:/ 'videoConversionPings' smart constructor.
 newtype VideoConversionPings = VideoConversionPings
@@ -8838,6 +11579,16 @@ vcpPings
   = lens _vcpPings (\ s a -> s{_vcpPings = a}) .
       _Default
       . _Coerce
+
+instance FromJSON VideoConversionPings where
+        parseJSON
+          = withObject "VideoConversionPings"
+              (\ o ->
+                 VideoConversionPings <$> (o .:? "pings" .!= mempty))
+
+instance ToJSON VideoConversionPings where
+        toJSON VideoConversionPings{..}
+          = object (catMaybes [("pings" .=) <$> _vcpPings])
 
 -- | Describes original video file properties, including technical details
 -- about audio and video streams, but also metadata information like
@@ -8967,6 +11718,36 @@ vfdFileName :: Lens' VideoFileDetails (Maybe Text)
 vfdFileName
   = lens _vfdFileName (\ s a -> s{_vfdFileName = a})
 
+instance FromJSON VideoFileDetails where
+        parseJSON
+          = withObject "VideoFileDetails"
+              (\ o ->
+                 VideoFileDetails <$>
+                   (o .:? "bitrateBps") <*> (o .:? "creationTime") <*>
+                     (o .:? "recordingLocation")
+                     <*> (o .:? "durationMs")
+                     <*> (o .:? "fileSize")
+                     <*> (o .:? "fileType")
+                     <*> (o .:? "container")
+                     <*> (o .:? "videoStreams" .!= mempty)
+                     <*> (o .:? "audioStreams" .!= mempty)
+                     <*> (o .:? "fileName"))
+
+instance ToJSON VideoFileDetails where
+        toJSON VideoFileDetails{..}
+          = object
+              (catMaybes
+                 [("bitrateBps" .=) <$> _vfdBitrateBps,
+                  ("creationTime" .=) <$> _vfdCreationTime,
+                  ("recordingLocation" .=) <$> _vfdRecordingLocation,
+                  ("durationMs" .=) <$> _vfdDurationMs,
+                  ("fileSize" .=) <$> _vfdFileSize,
+                  ("fileType" .=) <$> _vfdFileType,
+                  ("container" .=) <$> _vfdContainer,
+                  ("videoStreams" .=) <$> _vfdVideoStreams,
+                  ("audioStreams" .=) <$> _vfdAudioStreams,
+                  ("fileName" .=) <$> _vfdFileName])
+
 -- | Information about an audio stream.
 --
 -- /See:/ 'videoFileDetailsAudioStream' smart constructor.
@@ -9020,6 +11801,24 @@ vfdasChannelCount :: Lens' VideoFileDetailsAudioStream (Maybe Word32)
 vfdasChannelCount
   = lens _vfdasChannelCount
       (\ s a -> s{_vfdasChannelCount = a})
+
+instance FromJSON VideoFileDetailsAudioStream where
+        parseJSON
+          = withObject "VideoFileDetailsAudioStream"
+              (\ o ->
+                 VideoFileDetailsAudioStream <$>
+                   (o .:? "bitrateBps") <*> (o .:? "vendor") <*>
+                     (o .:? "codec")
+                     <*> (o .:? "channelCount"))
+
+instance ToJSON VideoFileDetailsAudioStream where
+        toJSON VideoFileDetailsAudioStream{..}
+          = object
+              (catMaybes
+                 [("bitrateBps" .=) <$> _vfdasBitrateBps,
+                  ("vendor" .=) <$> _vfdasVendor,
+                  ("codec" .=) <$> _vfdasCodec,
+                  ("channelCount" .=) <$> _vfdasChannelCount])
 
 -- | Information about a video stream.
 --
@@ -9118,6 +11917,32 @@ vfdvsWidthPixels
   = lens _vfdvsWidthPixels
       (\ s a -> s{_vfdvsWidthPixels = a})
 
+instance FromJSON VideoFileDetailsVideoStream where
+        parseJSON
+          = withObject "VideoFileDetailsVideoStream"
+              (\ o ->
+                 VideoFileDetailsVideoStream <$>
+                   (o .:? "heightPixels") <*> (o .:? "bitrateBps") <*>
+                     (o .:? "vendor")
+                     <*> (o .:? "rotation")
+                     <*> (o .:? "frameRateFps")
+                     <*> (o .:? "codec")
+                     <*> (o .:? "aspectRatio")
+                     <*> (o .:? "widthPixels"))
+
+instance ToJSON VideoFileDetailsVideoStream where
+        toJSON VideoFileDetailsVideoStream{..}
+          = object
+              (catMaybes
+                 [("heightPixels" .=) <$> _vfdvsHeightPixels,
+                  ("bitrateBps" .=) <$> _vfdvsBitrateBps,
+                  ("vendor" .=) <$> _vfdvsVendor,
+                  ("rotation" .=) <$> _vfdvsRotation,
+                  ("frameRateFps" .=) <$> _vfdvsFrameRateFps,
+                  ("codec" .=) <$> _vfdvsCodec,
+                  ("aspectRatio" .=) <$> _vfdvsAspectRatio,
+                  ("widthPixels" .=) <$> _vfdvsWidthPixels])
+
 --
 -- /See:/ 'videoGetRatingResponse' smart constructor.
 data VideoGetRatingResponse = VideoGetRatingResponse
@@ -9178,6 +12003,27 @@ vgrrVisitorId
 vgrrEventId :: Lens' VideoGetRatingResponse (Maybe Text)
 vgrrEventId
   = lens _vgrrEventId (\ s a -> s{_vgrrEventId = a})
+
+instance FromJSON VideoGetRatingResponse where
+        parseJSON
+          = withObject "VideoGetRatingResponse"
+              (\ o ->
+                 VideoGetRatingResponse <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!= "youtube#videoGetRatingResponse")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "visitorId")
+                     <*> (o .:? "eventId"))
+
+instance ToJSON VideoGetRatingResponse where
+        toJSON VideoGetRatingResponse{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _vgrrEtag,
+                  Just ("kind" .= _vgrrKind),
+                  ("items" .=) <$> _vgrrItems,
+                  ("visitorId" .=) <$> _vgrrVisitorId,
+                  ("eventId" .=) <$> _vgrrEventId])
 
 --
 -- /See:/ 'videoListResponse' smart constructor.
@@ -9278,6 +12124,34 @@ vlrPrevPageToken
   = lens _vlrPrevPageToken
       (\ s a -> s{_vlrPrevPageToken = a})
 
+instance FromJSON VideoListResponse where
+        parseJSON
+          = withObject "VideoListResponse"
+              (\ o ->
+                 VideoListResponse <$>
+                   (o .:? "etag") <*> (o .:? "tokenPagination") <*>
+                     (o .:? "nextPageToken")
+                     <*> (o .:? "pageInfo")
+                     <*> (o .:? "kind" .!= "youtube#videoListResponse")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "visitorId")
+                     <*> (o .:? "eventId")
+                     <*> (o .:? "prevPageToken"))
+
+instance ToJSON VideoListResponse where
+        toJSON VideoListResponse{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _vlrEtag,
+                  ("tokenPagination" .=) <$> _vlrTokenPagination,
+                  ("nextPageToken" .=) <$> _vlrNextPageToken,
+                  ("pageInfo" .=) <$> _vlrPageInfo,
+                  Just ("kind" .= _vlrKind),
+                  ("items" .=) <$> _vlrItems,
+                  ("visitorId" .=) <$> _vlrVisitorId,
+                  ("eventId" .=) <$> _vlrEventId,
+                  ("prevPageToken" .=) <$> _vlrPrevPageToken])
+
 -- | Details about the live streaming metadata.
 --
 -- /See:/ 'videoLiveStreamingDetails' smart constructor.
@@ -9357,6 +12231,28 @@ vlsdActualStartTime
   = lens _vlsdActualStartTime
       (\ s a -> s{_vlsdActualStartTime = a})
 
+instance FromJSON VideoLiveStreamingDetails where
+        parseJSON
+          = withObject "VideoLiveStreamingDetails"
+              (\ o ->
+                 VideoLiveStreamingDetails <$>
+                   (o .:? "actualEndTime") <*>
+                     (o .:? "concurrentViewers")
+                     <*> (o .:? "scheduledEndTime")
+                     <*> (o .:? "scheduledStartTime")
+                     <*> (o .:? "actualStartTime"))
+
+instance ToJSON VideoLiveStreamingDetails where
+        toJSON VideoLiveStreamingDetails{..}
+          = object
+              (catMaybes
+                 [("actualEndTime" .=) <$> _vlsdActualEndTime,
+                  ("concurrentViewers" .=) <$> _vlsdConcurrentViewers,
+                  ("scheduledEndTime" .=) <$> _vlsdScheduledEndTime,
+                  ("scheduledStartTime" .=) <$>
+                    _vlsdScheduledStartTime,
+                  ("actualStartTime" .=) <$> _vlsdActualStartTime])
+
 -- | Localized versions of certain video properties (e.g. title).
 --
 -- /See:/ 'videoLocalization' smart constructor.
@@ -9390,6 +12286,20 @@ vlDescription
   = lens _vlDescription
       (\ s a -> s{_vlDescription = a})
 
+instance FromJSON VideoLocalization where
+        parseJSON
+          = withObject "VideoLocalization"
+              (\ o ->
+                 VideoLocalization <$>
+                   (o .:? "title") <*> (o .:? "description"))
+
+instance ToJSON VideoLocalization where
+        toJSON VideoLocalization{..}
+          = object
+              (catMaybes
+                 [("title" .=) <$> _vlTitle,
+                  ("description" .=) <$> _vlDescription])
+
 -- | List with all localizations.
 --
 -- /See:/ 'videoLocalizations' smart constructor.
@@ -9402,6 +12312,14 @@ data VideoLocalizations =
 videoLocalizations
     :: VideoLocalizations
 videoLocalizations = VideoLocalizations
+
+instance FromJSON VideoLocalizations where
+        parseJSON
+          = withObject "VideoLocalizations"
+              (\ o -> pure VideoLocalizations)
+
+instance ToJSON VideoLocalizations where
+        toJSON = const (Object mempty)
 
 -- | Details about monetization of a YouTube Video.
 --
@@ -9427,6 +12345,16 @@ vmdAccess :: Lens' VideoMonetizationDetails (Maybe (Maybe AccessPolicy))
 vmdAccess
   = lens _vmdAccess (\ s a -> s{_vmdAccess = a})
 
+instance FromJSON VideoMonetizationDetails where
+        parseJSON
+          = withObject "VideoMonetizationDetails"
+              (\ o ->
+                 VideoMonetizationDetails <$> (o .:? "access"))
+
+instance ToJSON VideoMonetizationDetails where
+        toJSON VideoMonetizationDetails{..}
+          = object (catMaybes [("access" .=) <$> _vmdAccess])
+
 -- | Player to be used for a video playback.
 --
 -- /See:/ 'videoPlayer' smart constructor.
@@ -9451,6 +12379,16 @@ videoPlayer =
 vpEmbedHtml :: Lens' VideoPlayer (Maybe Text)
 vpEmbedHtml
   = lens _vpEmbedHtml (\ s a -> s{_vpEmbedHtml = a})
+
+instance FromJSON VideoPlayer where
+        parseJSON
+          = withObject "VideoPlayer"
+              (\ o -> VideoPlayer <$> (o .:? "embedHtml"))
+
+instance ToJSON VideoPlayer where
+        toJSON VideoPlayer{..}
+          = object
+              (catMaybes [("embedHtml" .=) <$> _vpEmbedHtml])
 
 -- | Describes processing status and progress and availability of some other
 -- Video resource parts.
@@ -9565,6 +12503,39 @@ vpdFileDetailsAvailability
   = lens _vpdFileDetailsAvailability
       (\ s a -> s{_vpdFileDetailsAvailability = a})
 
+instance FromJSON VideoProcessingDetails where
+        parseJSON
+          = withObject "VideoProcessingDetails"
+              (\ o ->
+                 VideoProcessingDetails <$>
+                   (o .:? "processingFailureReason") <*>
+                     (o .:? "processingIssuesAvailability")
+                     <*> (o .:? "processingProgress")
+                     <*> (o .:? "thumbnailsAvailability")
+                     <*> (o .:? "tagSuggestionsAvailability")
+                     <*> (o .:? "processingStatus")
+                     <*> (o .:? "editorSuggestionsAvailability")
+                     <*> (o .:? "fileDetailsAvailability"))
+
+instance ToJSON VideoProcessingDetails where
+        toJSON VideoProcessingDetails{..}
+          = object
+              (catMaybes
+                 [("processingFailureReason" .=) <$>
+                    _vpdProcessingFailureReason,
+                  ("processingIssuesAvailability" .=) <$>
+                    _vpdProcessingIssuesAvailability,
+                  ("processingProgress" .=) <$> _vpdProcessingProgress,
+                  ("thumbnailsAvailability" .=) <$>
+                    _vpdThumbnailsAvailability,
+                  ("tagSuggestionsAvailability" .=) <$>
+                    _vpdTagSuggestionsAvailability,
+                  ("processingStatus" .=) <$> _vpdProcessingStatus,
+                  ("editorSuggestionsAvailability" .=) <$>
+                    _vpdEditorSuggestionsAvailability,
+                  ("fileDetailsAvailability" .=) <$>
+                    _vpdFileDetailsAvailability])
+
 -- | Video processing progress and completion time estimate.
 --
 -- /See:/ 'videoProcessingDetailsProcessingProgress' smart constructor.
@@ -9619,6 +12590,25 @@ vpdppPartsProcessed
   = lens _vpdppPartsProcessed
       (\ s a -> s{_vpdppPartsProcessed = a})
 
+instance FromJSON
+         VideoProcessingDetailsProcessingProgress where
+        parseJSON
+          = withObject
+              "VideoProcessingDetailsProcessingProgress"
+              (\ o ->
+                 VideoProcessingDetailsProcessingProgress <$>
+                   (o .:? "timeLeftMs") <*> (o .:? "partsTotal") <*>
+                     (o .:? "partsProcessed"))
+
+instance ToJSON
+         VideoProcessingDetailsProcessingProgress where
+        toJSON VideoProcessingDetailsProcessingProgress{..}
+          = object
+              (catMaybes
+                 [("timeLeftMs" .=) <$> _vpdppTimeLeftMs,
+                  ("partsTotal" .=) <$> _vpdppPartsTotal,
+                  ("partsProcessed" .=) <$> _vpdppPartsProcessed])
+
 -- | Project specific details about the content of a YouTube Video.
 --
 -- /See:/ 'videoProjectDetails' smart constructor.
@@ -9643,6 +12633,16 @@ vpdTags :: Lens' VideoProjectDetails [Text]
 vpdTags
   = lens _vpdTags (\ s a -> s{_vpdTags = a}) . _Default
       . _Coerce
+
+instance FromJSON VideoProjectDetails where
+        parseJSON
+          = withObject "VideoProjectDetails"
+              (\ o ->
+                 VideoProjectDetails <$> (o .:? "tags" .!= mempty))
+
+instance ToJSON VideoProjectDetails where
+        toJSON VideoProjectDetails{..}
+          = object (catMaybes [("tags" .=) <$> _vpdTags])
 
 --
 -- /See:/ 'videoRating' smart constructor.
@@ -9672,6 +12672,20 @@ vrRating = lens _vrRating (\ s a -> s{_vrRating = a})
 vrVideoId :: Lens' VideoRating (Maybe Text)
 vrVideoId
   = lens _vrVideoId (\ s a -> s{_vrVideoId = a})
+
+instance FromJSON VideoRating where
+        parseJSON
+          = withObject "VideoRating"
+              (\ o ->
+                 VideoRating <$>
+                   (o .:? "rating") <*> (o .:? "videoId"))
+
+instance ToJSON VideoRating where
+        toJSON VideoRating{..}
+          = object
+              (catMaybes
+                 [("rating" .=) <$> _vrRating,
+                  ("videoId" .=) <$> _vrVideoId])
 
 -- | Recording information associated with the video.
 --
@@ -9717,6 +12731,23 @@ vrdRecordingDate :: Lens' VideoRecordingDetails (Maybe UTCTime)
 vrdRecordingDate
   = lens _vrdRecordingDate
       (\ s a -> s{_vrdRecordingDate = a})
+
+instance FromJSON VideoRecordingDetails where
+        parseJSON
+          = withObject "VideoRecordingDetails"
+              (\ o ->
+                 VideoRecordingDetails <$>
+                   (o .:? "location") <*> (o .:? "locationDescription")
+                     <*> (o .:? "recordingDate"))
+
+instance ToJSON VideoRecordingDetails where
+        toJSON VideoRecordingDetails{..}
+          = object
+              (catMaybes
+                 [("location" .=) <$> _vrdLocation,
+                  ("locationDescription" .=) <$>
+                    _vrdLocationDescription,
+                  ("recordingDate" .=) <$> _vrdRecordingDate])
 
 -- | Basic details about a video, including title, description, uploader,
 -- thumbnails and category.
@@ -9857,6 +12888,43 @@ vsDefaultLanguage
   = lens _vsDefaultLanguage
       (\ s a -> s{_vsDefaultLanguage = a})
 
+instance FromJSON VideoSnippet where
+        parseJSON
+          = withObject "VideoSnippet"
+              (\ o ->
+                 VideoSnippet <$>
+                   (o .:? "defaultAudioLanguage") <*>
+                     (o .:? "publishedAt")
+                     <*> (o .:? "channelTitle")
+                     <*> (o .:? "channelId")
+                     <*> (o .:? "thumbnails")
+                     <*> (o .:? "localized")
+                     <*> (o .:? "categoryId")
+                     <*> (o .:? "title")
+                     <*> (o .:? "liveBroadcastContent")
+                     <*> (o .:? "description")
+                     <*> (o .:? "tags" .!= mempty)
+                     <*> (o .:? "defaultLanguage"))
+
+instance ToJSON VideoSnippet where
+        toJSON VideoSnippet{..}
+          = object
+              (catMaybes
+                 [("defaultAudioLanguage" .=) <$>
+                    _vsDefaultAudioLanguage,
+                  ("publishedAt" .=) <$> _vsPublishedAt,
+                  ("channelTitle" .=) <$> _vsChannelTitle,
+                  ("channelId" .=) <$> _vsChannelId,
+                  ("thumbnails" .=) <$> _vsThumbnails,
+                  ("localized" .=) <$> _vsLocalized,
+                  ("categoryId" .=) <$> _vsCategoryId,
+                  ("title" .=) <$> _vsTitle,
+                  ("liveBroadcastContent" .=) <$>
+                    _vsLiveBroadcastContent,
+                  ("description" .=) <$> _vsDescription,
+                  ("tags" .=) <$> _vsTags,
+                  ("defaultLanguage" .=) <$> _vsDefaultLanguage])
+
 -- | Statistics about the video, such as the number of times the video was
 -- viewed or liked.
 --
@@ -9923,6 +12991,26 @@ vsDislikeCount
 vsViewCount :: Lens' VideoStatistics (Maybe Word64)
 vsViewCount
   = lens _vsViewCount (\ s a -> s{_vsViewCount = a})
+
+instance FromJSON VideoStatistics where
+        parseJSON
+          = withObject "VideoStatistics"
+              (\ o ->
+                 VideoStatistics <$>
+                   (o .:? "likeCount") <*> (o .:? "commentCount") <*>
+                     (o .:? "favoriteCount")
+                     <*> (o .:? "dislikeCount")
+                     <*> (o .:? "viewCount"))
+
+instance ToJSON VideoStatistics where
+        toJSON VideoStatistics{..}
+          = object
+              (catMaybes
+                 [("likeCount" .=) <$> _vsLikeCount,
+                  ("commentCount" .=) <$> _vsCommentCount,
+                  ("favoriteCount" .=) <$> _vsFavoriteCount,
+                  ("dislikeCount" .=) <$> _vsDislikeCount,
+                  ("viewCount" .=) <$> _vsViewCount])
 
 -- | Basic details about a video category, such as its localized title.
 --
@@ -10023,6 +13111,34 @@ vsLicense :: Lens' VideoStatus (Maybe VideoStatusLicense)
 vsLicense
   = lens _vsLicense (\ s a -> s{_vsLicense = a})
 
+instance FromJSON VideoStatus where
+        parseJSON
+          = withObject "VideoStatus"
+              (\ o ->
+                 VideoStatus <$>
+                   (o .:? "failureReason") <*>
+                     (o .:? "publicStatsViewable")
+                     <*> (o .:? "rejectionReason")
+                     <*> (o .:? "publishAt")
+                     <*> (o .:? "uploadStatus")
+                     <*> (o .:? "privacyStatus")
+                     <*> (o .:? "embeddable")
+                     <*> (o .:? "license"))
+
+instance ToJSON VideoStatus where
+        toJSON VideoStatus{..}
+          = object
+              (catMaybes
+                 [("failureReason" .=) <$> _vsFailureReason,
+                  ("publicStatsViewable" .=) <$>
+                    _vsPublicStatsViewable,
+                  ("rejectionReason" .=) <$> _vsRejectionReason,
+                  ("publishAt" .=) <$> _vsPublishAt,
+                  ("uploadStatus" .=) <$> _vsUploadStatus,
+                  ("privacyStatus" .=) <$> _vsPrivacyStatus,
+                  ("embeddable" .=) <$> _vsEmbeddable,
+                  ("license" .=) <$> _vsLicense])
+
 -- | Specifies suggestions on how to improve video content, including
 -- encoding hints, tag suggestions, and editor suggestions.
 --
@@ -10111,6 +13227,27 @@ vsTagSuggestions
       . _Default
       . _Coerce
 
+instance FromJSON VideoSuggestions where
+        parseJSON
+          = withObject "VideoSuggestions"
+              (\ o ->
+                 VideoSuggestions <$>
+                   (o .:? "processingErrors" .!= mempty) <*>
+                     (o .:? "processingHints" .!= mempty)
+                     <*> (o .:? "editorSuggestions" .!= mempty)
+                     <*> (o .:? "processingWarnings" .!= mempty)
+                     <*> (o .:? "tagSuggestions" .!= mempty))
+
+instance ToJSON VideoSuggestions where
+        toJSON VideoSuggestions{..}
+          = object
+              (catMaybes
+                 [("processingErrors" .=) <$> _vsProcessingErrors,
+                  ("processingHints" .=) <$> _vsProcessingHints,
+                  ("editorSuggestions" .=) <$> _vsEditorSuggestions,
+                  ("processingWarnings" .=) <$> _vsProcessingWarnings,
+                  ("tagSuggestions" .=) <$> _vsTagSuggestions])
+
 -- | A single tag suggestion with it\'s relevance information.
 --
 -- /See:/ 'videoSuggestionsTagSuggestion' smart constructor.
@@ -10149,6 +13286,21 @@ vstsCategoryRestricts
       (\ s a -> s{_vstsCategoryRestricts = a})
       . _Default
       . _Coerce
+
+instance FromJSON VideoSuggestionsTagSuggestion where
+        parseJSON
+          = withObject "VideoSuggestionsTagSuggestion"
+              (\ o ->
+                 VideoSuggestionsTagSuggestion <$>
+                   (o .:? "tag") <*>
+                     (o .:? "categoryRestricts" .!= mempty))
+
+instance ToJSON VideoSuggestionsTagSuggestion where
+        toJSON VideoSuggestionsTagSuggestion{..}
+          = object
+              (catMaybes
+                 [("tag" .=) <$> _vstsTag,
+                  ("categoryRestricts" .=) <$> _vstsCategoryRestricts])
 
 -- | Freebase topic information related to the video.
 --
@@ -10194,6 +13346,21 @@ vtdRelevantTopicIds
       . _Default
       . _Coerce
 
+instance FromJSON VideoTopicDetails where
+        parseJSON
+          = withObject "VideoTopicDetails"
+              (\ o ->
+                 VideoTopicDetails <$>
+                   (o .:? "topicIds" .!= mempty) <*>
+                     (o .:? "relevantTopicIds" .!= mempty))
+
+instance ToJSON VideoTopicDetails where
+        toJSON VideoTopicDetails{..}
+          = object
+              (catMaybes
+                 [("topicIds" .=) <$> _vtdTopicIds,
+                  ("relevantTopicIds" .=) <$> _vtdRelevantTopicIds])
+
 -- | Branding properties for the watch.
 --
 -- /See:/ 'watchSettings' smart constructor.
@@ -10238,3 +13405,20 @@ wsBackgroundColor
 wsTextColor :: Lens' WatchSettings (Maybe Text)
 wsTextColor
   = lens _wsTextColor (\ s a -> s{_wsTextColor = a})
+
+instance FromJSON WatchSettings where
+        parseJSON
+          = withObject "WatchSettings"
+              (\ o ->
+                 WatchSettings <$>
+                   (o .:? "featuredPlaylistId") <*>
+                     (o .:? "backgroundColor")
+                     <*> (o .:? "textColor"))
+
+instance ToJSON WatchSettings where
+        toJSON WatchSettings{..}
+          = object
+              (catMaybes
+                 [("featuredPlaylistId" .=) <$> _wsFeaturedPlaylistId,
+                  ("backgroundColor" .=) <$> _wsBackgroundColor,
+                  ("textColor" .=) <$> _wsTextColor])

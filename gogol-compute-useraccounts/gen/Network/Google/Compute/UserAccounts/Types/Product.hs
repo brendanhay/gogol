@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -51,6 +52,20 @@ akvKeys :: Lens' AuthorizedKeysView [Text]
 akvKeys
   = lens _akvKeys (\ s a -> s{_akvKeys = a}) . _Default
       . _Coerce
+
+instance FromJSON AuthorizedKeysView where
+        parseJSON
+          = withObject "AuthorizedKeysView"
+              (\ o ->
+                 AuthorizedKeysView <$>
+                   (o .:? "sudoer") <*> (o .:? "keys" .!= mempty))
+
+instance ToJSON AuthorizedKeysView where
+        toJSON AuthorizedKeysView{..}
+          = object
+              (catMaybes
+                 [("sudoer" .=) <$> _akvSudoer,
+                  ("keys" .=) <$> _akvKeys])
 
 -- | A Group resource.
 --
@@ -134,6 +149,31 @@ gDescription :: Lens' Group (Maybe Text)
 gDescription
   = lens _gDescription (\ s a -> s{_gDescription = a})
 
+instance FromJSON Group where
+        parseJSON
+          = withObject "Group"
+              (\ o ->
+                 Group <$>
+                   (o .:? "kind" .!= "clouduseraccounts#group") <*>
+                     (o .:? "members" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "id")
+                     <*> (o .:? "description"))
+
+instance ToJSON Group where
+        toJSON Group{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _gKind),
+                  ("members" .=) <$> _gMembers,
+                  ("selfLink" .=) <$> _gSelfLink,
+                  ("name" .=) <$> _gName,
+                  ("creationTimestamp" .=) <$> _gCreationTimestamp,
+                  ("id" .=) <$> _gId,
+                  ("description" .=) <$> _gDescription])
+
 --
 -- /See:/ 'groupList' smart constructor.
 data GroupList = GroupList
@@ -194,6 +234,26 @@ glSelfLink
 glId :: Lens' GroupList (Maybe Text)
 glId = lens _glId (\ s a -> s{_glId = a})
 
+instance FromJSON GroupList where
+        parseJSON
+          = withObject "GroupList"
+              (\ o ->
+                 GroupList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "clouduseraccounts#groupList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON GroupList where
+        toJSON GroupList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _glNextPageToken,
+                  Just ("kind" .= _glKind), ("items" .=) <$> _glItems,
+                  ("selfLink" .=) <$> _glSelfLink,
+                  ("id" .=) <$> _glId])
+
 --
 -- /See:/ 'groupsAddMemberRequest' smart constructor.
 newtype GroupsAddMemberRequest = GroupsAddMemberRequest
@@ -219,6 +279,17 @@ gamrUsers
       _Default
       . _Coerce
 
+instance FromJSON GroupsAddMemberRequest where
+        parseJSON
+          = withObject "GroupsAddMemberRequest"
+              (\ o ->
+                 GroupsAddMemberRequest <$>
+                   (o .:? "users" .!= mempty))
+
+instance ToJSON GroupsAddMemberRequest where
+        toJSON GroupsAddMemberRequest{..}
+          = object (catMaybes [("users" .=) <$> _gamrUsers])
+
 --
 -- /See:/ 'groupsRemoveMemberRequest' smart constructor.
 newtype GroupsRemoveMemberRequest = GroupsRemoveMemberRequest
@@ -243,6 +314,17 @@ grmrUsers
   = lens _grmrUsers (\ s a -> s{_grmrUsers = a}) .
       _Default
       . _Coerce
+
+instance FromJSON GroupsRemoveMemberRequest where
+        parseJSON
+          = withObject "GroupsRemoveMemberRequest"
+              (\ o ->
+                 GroupsRemoveMemberRequest <$>
+                   (o .:? "users" .!= mempty))
+
+instance ToJSON GroupsRemoveMemberRequest where
+        toJSON GroupsRemoveMemberRequest{..}
+          = object (catMaybes [("users" .=) <$> _grmrUsers])
 
 -- | A list of all Linux accounts for this project. This API is only used by
 -- Compute Engine virtual machines to get information about user accounts
@@ -294,6 +376,24 @@ lavGroupViews
       . _Default
       . _Coerce
 
+instance FromJSON LinuxAccountViews where
+        parseJSON
+          = withObject "LinuxAccountViews"
+              (\ o ->
+                 LinuxAccountViews <$>
+                   (o .:? "userViews" .!= mempty) <*>
+                     (o .:? "kind" .!=
+                        "clouduseraccounts#linuxAccountViews")
+                     <*> (o .:? "groupViews" .!= mempty))
+
+instance ToJSON LinuxAccountViews where
+        toJSON LinuxAccountViews{..}
+          = object
+              (catMaybes
+                 [("userViews" .=) <$> _lavUserViews,
+                  Just ("kind" .= _lavKind),
+                  ("groupViews" .=) <$> _lavGroupViews])
+
 --
 -- /See:/ 'linuxGetAuthorizedKeysViewResponse' smart constructor.
 newtype LinuxGetAuthorizedKeysViewResponse = LinuxGetAuthorizedKeysViewResponse
@@ -318,6 +418,20 @@ lgakvrResource
   = lens _lgakvrResource
       (\ s a -> s{_lgakvrResource = a})
 
+instance FromJSON LinuxGetAuthorizedKeysViewResponse
+         where
+        parseJSON
+          = withObject "LinuxGetAuthorizedKeysViewResponse"
+              (\ o ->
+                 LinuxGetAuthorizedKeysViewResponse <$>
+                   (o .:? "resource"))
+
+instance ToJSON LinuxGetAuthorizedKeysViewResponse
+         where
+        toJSON LinuxGetAuthorizedKeysViewResponse{..}
+          = object
+              (catMaybes [("resource" .=) <$> _lgakvrResource])
+
 --
 -- /See:/ 'linuxGetLinuxAccountViewsResponse' smart constructor.
 newtype LinuxGetLinuxAccountViewsResponse = LinuxGetLinuxAccountViewsResponse
@@ -341,6 +455,20 @@ lglavrResource :: Lens' LinuxGetLinuxAccountViewsResponse (Maybe (Maybe LinuxAcc
 lglavrResource
   = lens _lglavrResource
       (\ s a -> s{_lglavrResource = a})
+
+instance FromJSON LinuxGetLinuxAccountViewsResponse
+         where
+        parseJSON
+          = withObject "LinuxGetLinuxAccountViewsResponse"
+              (\ o ->
+                 LinuxGetLinuxAccountViewsResponse <$>
+                   (o .:? "resource"))
+
+instance ToJSON LinuxGetLinuxAccountViewsResponse
+         where
+        toJSON LinuxGetLinuxAccountViewsResponse{..}
+          = object
+              (catMaybes [("resource" .=) <$> _lglavrResource])
 
 -- | A detailed view of a Linux group.
 --
@@ -384,6 +512,22 @@ lgvGid = lens _lgvGid (\ s a -> s{_lgvGid = a})
 lgvGroupName :: Lens' LinuxGroupView (Maybe Text)
 lgvGroupName
   = lens _lgvGroupName (\ s a -> s{_lgvGroupName = a})
+
+instance FromJSON LinuxGroupView where
+        parseJSON
+          = withObject "LinuxGroupView"
+              (\ o ->
+                 LinuxGroupView <$>
+                   (o .:? "members" .!= mempty) <*> (o .:? "gid") <*>
+                     (o .:? "groupName"))
+
+instance ToJSON LinuxGroupView where
+        toJSON LinuxGroupView{..}
+          = object
+              (catMaybes
+                 [("members" .=) <$> _lgvMembers,
+                  ("gid" .=) <$> _lgvGid,
+                  ("groupName" .=) <$> _lgvGroupName])
 
 -- | A detailed view of a Linux user account.
 --
@@ -450,6 +594,26 @@ luvHomeDirectory :: Lens' LinuxUserView (Maybe Text)
 luvHomeDirectory
   = lens _luvHomeDirectory
       (\ s a -> s{_luvHomeDirectory = a})
+
+instance FromJSON LinuxUserView where
+        parseJSON
+          = withObject "LinuxUserView"
+              (\ o ->
+                 LinuxUserView <$>
+                   (o .:? "gecos") <*> (o .:? "uid") <*>
+                     (o .:? "username")
+                     <*> (o .:? "shell")
+                     <*> (o .:? "gid")
+                     <*> (o .:? "homeDirectory"))
+
+instance ToJSON LinuxUserView where
+        toJSON LinuxUserView{..}
+          = object
+              (catMaybes
+                 [("gecos" .=) <$> _luvGecos, ("uid" .=) <$> _luvUid,
+                  ("username" .=) <$> _luvUsername,
+                  ("shell" .=) <$> _luvShell, ("gid" .=) <$> _luvGid,
+                  ("homeDirectory" .=) <$> _luvHomeDirectory])
 
 -- | An Operation resource, used to manage asynchronous API requests.
 --
@@ -683,6 +847,58 @@ oClientOperationId
   = lens _oClientOperationId
       (\ s a -> s{_oClientOperationId = a})
 
+instance FromJSON Operation where
+        parseJSON
+          = withObject "Operation"
+              (\ o ->
+                 Operation <$>
+                   (o .:? "targetId") <*> (o .:? "status") <*>
+                     (o .:? "insertTime")
+                     <*> (o .:? "progress")
+                     <*> (o .:? "startTime")
+                     <*> (o .:? "kind" .!= "clouduseraccounts#operation")
+                     <*> (o .:? "error")
+                     <*> (o .:? "httpErrorMessage")
+                     <*> (o .:? "zone")
+                     <*> (o .:? "warnings" .!= mempty)
+                     <*> (o .:? "httpErrorStatusCode")
+                     <*> (o .:? "user")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "statusMessage")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "endTime")
+                     <*> (o .:? "id")
+                     <*> (o .:? "operationType")
+                     <*> (o .:? "region")
+                     <*> (o .:? "targetLink")
+                     <*> (o .:? "clientOperationId"))
+
+instance ToJSON Operation where
+        toJSON Operation{..}
+          = object
+              (catMaybes
+                 [("targetId" .=) <$> _oTargetId,
+                  ("status" .=) <$> _oStatus,
+                  ("insertTime" .=) <$> _oInsertTime,
+                  ("progress" .=) <$> _oProgress,
+                  ("startTime" .=) <$> _oStartTime,
+                  Just ("kind" .= _oKind), ("error" .=) <$> _oError,
+                  ("httpErrorMessage" .=) <$> _oHttpErrorMessage,
+                  ("zone" .=) <$> _oZone,
+                  ("warnings" .=) <$> _oWarnings,
+                  ("httpErrorStatusCode" .=) <$> _oHttpErrorStatusCode,
+                  ("user" .=) <$> _oUser,
+                  ("selfLink" .=) <$> _oSelfLink,
+                  ("name" .=) <$> _oName,
+                  ("statusMessage" .=) <$> _oStatusMessage,
+                  ("creationTimestamp" .=) <$> _oCreationTimestamp,
+                  ("endTime" .=) <$> _oEndTime, ("id" .=) <$> _oId,
+                  ("operationType" .=) <$> _oOperationType,
+                  ("region" .=) <$> _oRegion,
+                  ("targetLink" .=) <$> _oTargetLink,
+                  ("clientOperationId" .=) <$> _oClientOperationId])
+
 -- | [Output Only] If errors are generated during processing of the
 -- operation, this field will be populated.
 --
@@ -710,6 +926,16 @@ oeErrors
   = lens _oeErrors (\ s a -> s{_oeErrors = a}) .
       _Default
       . _Coerce
+
+instance FromJSON OperationError where
+        parseJSON
+          = withObject "OperationError"
+              (\ o ->
+                 OperationError <$> (o .:? "errors" .!= mempty))
+
+instance ToJSON OperationError where
+        toJSON OperationError{..}
+          = object (catMaybes [("errors" .=) <$> _oeErrors])
 
 --
 -- /See:/ 'operationItemDataItemWarnings' smart constructor.
@@ -741,6 +967,20 @@ oidiwValue
 -- | [Output Only] A key for the warning data.
 oidiwKey :: Lens' OperationItemDataItemWarnings (Maybe Text)
 oidiwKey = lens _oidiwKey (\ s a -> s{_oidiwKey = a})
+
+instance FromJSON OperationItemDataItemWarnings where
+        parseJSON
+          = withObject "OperationItemDataItemWarnings"
+              (\ o ->
+                 OperationItemDataItemWarnings <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON OperationItemDataItemWarnings where
+        toJSON OperationItemDataItemWarnings{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _oidiwValue,
+                  ("key" .=) <$> _oidiwKey])
 
 --
 -- /See:/ 'operationItemErrorsError' smart constructor.
@@ -783,6 +1023,22 @@ oieeMessage :: Lens' OperationItemErrorsError (Maybe Text)
 oieeMessage
   = lens _oieeMessage (\ s a -> s{_oieeMessage = a})
 
+instance FromJSON OperationItemErrorsError where
+        parseJSON
+          = withObject "OperationItemErrorsError"
+              (\ o ->
+                 OperationItemErrorsError <$>
+                   (o .:? "location") <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON OperationItemErrorsError where
+        toJSON OperationItemErrorsError{..}
+          = object
+              (catMaybes
+                 [("location" .=) <$> _oieeLocation,
+                  ("code" .=) <$> _oieeCode,
+                  ("message" .=) <$> _oieeMessage])
+
 --
 -- /See:/ 'operationItemWarnings' smart constructor.
 data OperationItemWarnings = OperationItemWarnings
@@ -823,6 +1079,21 @@ oiwCode = lens _oiwCode (\ s a -> s{_oiwCode = a})
 oiwMessage :: Lens' OperationItemWarnings (Maybe Text)
 oiwMessage
   = lens _oiwMessage (\ s a -> s{_oiwMessage = a})
+
+instance FromJSON OperationItemWarnings where
+        parseJSON
+          = withObject "OperationItemWarnings"
+              (\ o ->
+                 OperationItemWarnings <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON OperationItemWarnings where
+        toJSON OperationItemWarnings{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _oiwData, ("code" .=) <$> _oiwCode,
+                  ("message" .=) <$> _oiwMessage])
 
 -- | Contains a list of Operation resources.
 --
@@ -884,6 +1155,26 @@ olSelfLink
 -- | [Output Only] Unique identifier for the resource; defined by the server.
 olId :: Lens' OperationList (Maybe Text)
 olId = lens _olId (\ s a -> s{_olId = a})
+
+instance FromJSON OperationList where
+        parseJSON
+          = withObject "OperationList"
+              (\ o ->
+                 OperationList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "clouduseraccounts#operationList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON OperationList where
+        toJSON OperationList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _olNextPageToken,
+                  Just ("kind" .= _olKind), ("items" .=) <$> _olItems,
+                  ("selfLink" .=) <$> _olSelfLink,
+                  ("id" .=) <$> _olId])
 
 -- | A public key for authenticating to guests.
 --
@@ -950,6 +1241,27 @@ pkDescription :: Lens' PublicKey (Maybe Text)
 pkDescription
   = lens _pkDescription
       (\ s a -> s{_pkDescription = a})
+
+instance FromJSON PublicKey where
+        parseJSON
+          = withObject "PublicKey"
+              (\ o ->
+                 PublicKey <$>
+                   (o .:? "fingerprint") <*> (o .:? "key") <*>
+                     (o .:? "creationTimestamp")
+                     <*> (o .:? "expirationTimestamp")
+                     <*> (o .:? "description"))
+
+instance ToJSON PublicKey where
+        toJSON PublicKey{..}
+          = object
+              (catMaybes
+                 [("fingerprint" .=) <$> _pkFingerprint,
+                  ("key" .=) <$> _pkKey,
+                  ("creationTimestamp" .=) <$> _pkCreationTimestamp,
+                  ("expirationTimestamp" .=) <$>
+                    _pkExpirationTimestamp,
+                  ("description" .=) <$> _pkDescription])
 
 -- | A User resource.
 --
@@ -1053,6 +1365,34 @@ uDescription :: Lens' User (Maybe Text)
 uDescription
   = lens _uDescription (\ s a -> s{_uDescription = a})
 
+instance FromJSON User where
+        parseJSON
+          = withObject "User"
+              (\ o ->
+                 User <$>
+                   (o .:? "groups" .!= mempty) <*>
+                     (o .:? "publicKeys" .!= mempty)
+                     <*> (o .:? "kind" .!= "clouduseraccounts#user")
+                     <*> (o .:? "owner")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "id")
+                     <*> (o .:? "description"))
+
+instance ToJSON User where
+        toJSON User{..}
+          = object
+              (catMaybes
+                 [("groups" .=) <$> _uGroups,
+                  ("publicKeys" .=) <$> _uPublicKeys,
+                  Just ("kind" .= _uKind), ("owner" .=) <$> _uOwner,
+                  ("selfLink" .=) <$> _uSelfLink,
+                  ("name" .=) <$> _uName,
+                  ("creationTimestamp" .=) <$> _uCreationTimestamp,
+                  ("id" .=) <$> _uId,
+                  ("description" .=) <$> _uDescription])
+
 --
 -- /See:/ 'userList' smart constructor.
 data UserList = UserList
@@ -1112,3 +1452,23 @@ ulSelfLink
 -- | [Output Only] Unique identifier for the resource; defined by the server.
 ulId :: Lens' UserList (Maybe Text)
 ulId = lens _ulId (\ s a -> s{_ulId = a})
+
+instance FromJSON UserList where
+        parseJSON
+          = withObject "UserList"
+              (\ o ->
+                 UserList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "clouduseraccounts#userList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON UserList where
+        toJSON UserList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _ulNextPageToken,
+                  Just ("kind" .= _ulKind), ("items" .=) <$> _ulItems,
+                  ("selfLink" .=) <$> _ulSelfLink,
+                  ("id" .=) <$> _ulId])

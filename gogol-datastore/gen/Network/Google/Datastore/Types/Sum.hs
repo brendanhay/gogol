@@ -43,6 +43,12 @@ instance ToText BeginTransactionRequestIsolationLevel where
         BTRILSerializable -> "SERIALIZABLE"
         BTRILSnapshot -> "SNAPSHOT"
 
+instance FromJSON BeginTransactionRequestIsolationLevel where
+    parseJSON = parseJSONText "BeginTransactionRequestIsolationLevel"
+
+instance ToJSON BeginTransactionRequestIsolationLevel where
+    toJSON = toJSONText
+
 -- | The type of commit to perform. Either TRANSACTIONAL or
 -- NON_TRANSACTIONAL.
 data CommitRequestMode
@@ -65,6 +71,12 @@ instance ToText CommitRequestMode where
         CRMNonTransactional -> "NON_TRANSACTIONAL"
         CRMTransactional -> "TRANSACTIONAL"
 
+instance FromJSON CommitRequestMode where
+    parseJSON = parseJSONText "CommitRequestMode"
+
+instance ToJSON CommitRequestMode where
+    toJSON = toJSONText
+
 -- | The operator for combining multiple filters. Only \"and\" is currently
 -- supported.
 data CompositeFilterOperator
@@ -82,6 +94,12 @@ instance FromText CompositeFilterOperator where
 instance ToText CompositeFilterOperator where
     toText = \case
         CFOAnd -> "AND"
+
+instance FromJSON CompositeFilterOperator where
+    parseJSON = parseJSONText "CompositeFilterOperator"
+
+instance ToJSON CompositeFilterOperator where
+    toJSON = toJSONText
 
 -- | The aggregation function to apply to the property. Optional. Can only be
 -- used when grouping by at least one property. Must then be set on all
@@ -103,6 +121,12 @@ instance FromText PropertyExpressionAggregationFunction where
 instance ToText PropertyExpressionAggregationFunction where
     toText = \case
         PEAFFirst -> "FIRST"
+
+instance FromJSON PropertyExpressionAggregationFunction where
+    parseJSON = parseJSONText "PropertyExpressionAggregationFunction"
+
+instance ToJSON PropertyExpressionAggregationFunction where
+    toJSON = toJSONText
 
 -- | The operator to filter by. One of lessThan, lessThanOrEqual,
 -- greaterThan, greaterThanOrEqual, equal, or hasAncestor.
@@ -142,6 +166,12 @@ instance ToText PropertyFilterOperator where
         PFOLessThan -> "LESS_THAN"
         PFOLessThanOrEqual -> "LESS_THAN_OR_EQUAL"
 
+instance FromJSON PropertyFilterOperator where
+    parseJSON = parseJSONText "PropertyFilterOperator"
+
+instance ToJSON PropertyFilterOperator where
+    toJSON = toJSONText
+
 -- | The direction to order by. One of ascending or descending. Optional,
 -- defaults to ascending.
 data PropertyOrderDirection
@@ -163,6 +193,12 @@ instance ToText PropertyOrderDirection where
     toText = \case
         PODAscending -> "ASCENDING"
         PODDescending -> "DESCENDING"
+
+instance FromJSON PropertyOrderDirection where
+    parseJSON = parseJSONText "PropertyOrderDirection"
+
+instance ToJSON PropertyOrderDirection where
+    toJSON = toJSONText
 
 -- | The result type for every entity in entityResults. full for full
 -- entities, projection for entities with only projected properties,
@@ -191,6 +227,12 @@ instance ToText QueryResultBatchEntityResultType where
         QRBERTKeyOnly -> "KEY_ONLY"
         QRBERTProjection -> "PROJECTION"
 
+instance FromJSON QueryResultBatchEntityResultType where
+    parseJSON = parseJSONText "QueryResultBatchEntityResultType"
+
+instance ToJSON QueryResultBatchEntityResultType where
+    toJSON = toJSONText
+
 -- | The state of the query after the current batch. One of notFinished,
 -- moreResultsAfterLimit, noMoreResults.
 data QueryResultBatchMoreResults
@@ -216,6 +258,12 @@ instance ToText QueryResultBatchMoreResults where
         QRBMRMoreResultsAfterLimit -> "MORE_RESULTS_AFTER_LIMIT"
         QRBMRNotFinished -> "NOT_FINISHED"
         QRBMRNoMoreResults -> "NO_MORE_RESULTS"
+
+instance FromJSON QueryResultBatchMoreResults where
+    parseJSON = parseJSONText "QueryResultBatchMoreResults"
+
+instance ToJSON QueryResultBatchMoreResults where
+    toJSON = toJSONText
 
 -- | The read consistency to use. One of default, strong, or eventual. Cannot
 -- be set when transaction is set. Lookup and ancestor queries default to
@@ -244,3 +292,9 @@ instance ToText ReadOptionsReadConsistency where
         RORCDefault -> "DEFAULT"
         RORCEventual -> "EVENTUAL"
         RORCStrong -> "STRONG"
+
+instance FromJSON ReadOptionsReadConsistency where
+    parseJSON = parseJSONText "ReadOptionsReadConsistency"
+
+instance ToJSON ReadOptionsReadConsistency where
+    toJSON = toJSONText

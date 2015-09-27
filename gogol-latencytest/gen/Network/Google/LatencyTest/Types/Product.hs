@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -40,6 +41,16 @@ asStats
   = lens _asStats (\ s a -> s{_asStats = a}) . _Default
       . _Coerce
 
+instance FromJSON AggregatedStats where
+        parseJSON
+          = withObject "AggregatedStats"
+              (\ o ->
+                 AggregatedStats <$> (o .:? "stats" .!= mempty))
+
+instance ToJSON AggregatedStats where
+        toJSON AggregatedStats{..}
+          = object (catMaybes [("stats" .=) <$> _asStats])
+
 --
 -- /See:/ 'aggregatedStatsReply' smart constructor.
 newtype AggregatedStatsReply = AggregatedStatsReply
@@ -61,6 +72,16 @@ aggregatedStatsReply =
 asrTestValue :: Lens' AggregatedStatsReply (Maybe Text)
 asrTestValue
   = lens _asrTestValue (\ s a -> s{_asrTestValue = a})
+
+instance FromJSON AggregatedStatsReply where
+        parseJSON
+          = withObject "AggregatedStatsReply"
+              (\ o -> AggregatedStatsReply <$> (o .:? "testValue"))
+
+instance ToJSON AggregatedStatsReply where
+        toJSON AggregatedStatsReply{..}
+          = object
+              (catMaybes [("testValue" .=) <$> _asrTestValue])
 
 --
 -- /See:/ 'doubleValue' smart constructor.
@@ -90,6 +111,19 @@ dvValue = lens _dvValue (\ s a -> s{_dvValue = a})
 dvLabel :: Lens' DoubleValue (Maybe Text)
 dvLabel = lens _dvLabel (\ s a -> s{_dvLabel = a})
 
+instance FromJSON DoubleValue where
+        parseJSON
+          = withObject "DoubleValue"
+              (\ o ->
+                 DoubleValue <$> (o .:? "value") <*> (o .:? "label"))
+
+instance ToJSON DoubleValue where
+        toJSON DoubleValue{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _dvValue,
+                  ("label" .=) <$> _dvLabel])
+
 --
 -- /See:/ 'intValue' smart constructor.
 data IntValue = IntValue
@@ -117,6 +151,19 @@ ivValue = lens _ivValue (\ s a -> s{_ivValue = a})
 
 ivLabel :: Lens' IntValue (Maybe Text)
 ivLabel = lens _ivLabel (\ s a -> s{_ivLabel = a})
+
+instance FromJSON IntValue where
+        parseJSON
+          = withObject "IntValue"
+              (\ o ->
+                 IntValue <$> (o .:? "value") <*> (o .:? "label"))
+
+instance ToJSON IntValue where
+        toJSON IntValue{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _ivValue,
+                  ("label" .=) <$> _ivLabel])
 
 --
 -- /See:/ 'stats' smart constructor.
@@ -171,6 +218,24 @@ sIntValues
       _Default
       . _Coerce
 
+instance FromJSON Stats where
+        parseJSON
+          = withObject "Stats"
+              (\ o ->
+                 Stats <$>
+                   (o .:? "time") <*> (o .:? "doubleValues" .!= mempty)
+                     <*> (o .:? "stringValues" .!= mempty)
+                     <*> (o .:? "intValues" .!= mempty))
+
+instance ToJSON Stats where
+        toJSON Stats{..}
+          = object
+              (catMaybes
+                 [("time" .=) <$> _sTime,
+                  ("doubleValues" .=) <$> _sDoubleValues,
+                  ("stringValues" .=) <$> _sStringValues,
+                  ("intValues" .=) <$> _sIntValues])
+
 --
 -- /See:/ 'statsReply' smart constructor.
 newtype StatsReply = StatsReply
@@ -192,6 +257,16 @@ statsReply =
 srTestValue :: Lens' StatsReply (Maybe Text)
 srTestValue
   = lens _srTestValue (\ s a -> s{_srTestValue = a})
+
+instance FromJSON StatsReply where
+        parseJSON
+          = withObject "StatsReply"
+              (\ o -> StatsReply <$> (o .:? "testValue"))
+
+instance ToJSON StatsReply where
+        toJSON StatsReply{..}
+          = object
+              (catMaybes [("testValue" .=) <$> _srTestValue])
 
 --
 -- /See:/ 'stringValue' smart constructor.
@@ -220,3 +295,16 @@ svValue = lens _svValue (\ s a -> s{_svValue = a})
 
 svLabel :: Lens' StringValue (Maybe Text)
 svLabel = lens _svLabel (\ s a -> s{_svLabel = a})
+
+instance FromJSON StringValue where
+        parseJSON
+          = withObject "StringValue"
+              (\ o ->
+                 StringValue <$> (o .:? "value") <*> (o .:? "label"))
+
+instance ToJSON StringValue where
+        toJSON StringValue{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _svValue,
+                  ("label" .=) <$> _svLabel])

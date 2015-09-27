@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -315,3 +316,79 @@ gAllowWebPosting :: Lens' Groups (Maybe Text)
 gAllowWebPosting
   = lens _gAllowWebPosting
       (\ s a -> s{_gAllowWebPosting = a})
+
+instance FromJSON Groups where
+        parseJSON
+          = withObject "Groups"
+              (\ o ->
+                 Groups <$>
+                   (o .:? "email") <*>
+                     (o .:? "sendMessageDenyNotification")
+                     <*> (o .:? "whoCanPostMessage")
+                     <*> (o .:? "allowExternalMembers")
+                     <*> (o .:? "showInGroupDirectory")
+                     <*> (o .:? "spamModerationLevel")
+                     <*> (o .:? "kind" .!= "groupsSettings#groups")
+                     <*> (o .:? "whoCanViewMembership")
+                     <*> (o .:? "membersCanPostAsTheGroup")
+                     <*> (o .:? "whoCanViewGroup")
+                     <*> (o .:? "whoCanJoin")
+                     <*> (o .:? "archiveOnly")
+                     <*> (o .:? "maxMessageBytes")
+                     <*> (o .:? "replyTo")
+                     <*> (o .:? "messageModerationLevel")
+                     <*> (o .:? "includeInGlobalAddressList")
+                     <*> (o .:? "isArchived")
+                     <*> (o .:? "name")
+                     <*> (o .:? "messageDisplayFont")
+                     <*> (o .:? "customReplyTo")
+                     <*> (o .:? "whoCanContactOwner")
+                     <*> (o .:? "whoCanInvite")
+                     <*> (o .:? "whoCanLeaveGroup")
+                     <*> (o .:? "allowGoogleCommunication")
+                     <*> (o .:? "primaryLanguage")
+                     <*> (o .:? "description")
+                     <*> (o .:? "defaultMessageDenyNotificationText")
+                     <*> (o .:? "allowWebPosting"))
+
+instance ToJSON Groups where
+        toJSON Groups{..}
+          = object
+              (catMaybes
+                 [("email" .=) <$> _gEmail,
+                  ("sendMessageDenyNotification" .=) <$>
+                    _gSendMessageDenyNotification,
+                  ("whoCanPostMessage" .=) <$> _gWhoCanPostMessage,
+                  ("allowExternalMembers" .=) <$>
+                    _gAllowExternalMembers,
+                  ("showInGroupDirectory" .=) <$>
+                    _gShowInGroupDirectory,
+                  ("spamModerationLevel" .=) <$> _gSpamModerationLevel,
+                  Just ("kind" .= _gKind),
+                  ("whoCanViewMembership" .=) <$>
+                    _gWhoCanViewMembership,
+                  ("membersCanPostAsTheGroup" .=) <$>
+                    _gMembersCanPostAsTheGroup,
+                  ("whoCanViewGroup" .=) <$> _gWhoCanViewGroup,
+                  ("whoCanJoin" .=) <$> _gWhoCanJoin,
+                  ("archiveOnly" .=) <$> _gArchiveOnly,
+                  ("maxMessageBytes" .=) <$> _gMaxMessageBytes,
+                  ("replyTo" .=) <$> _gReplyTo,
+                  ("messageModerationLevel" .=) <$>
+                    _gMessageModerationLevel,
+                  ("includeInGlobalAddressList" .=) <$>
+                    _gIncludeInGlobalAddressList,
+                  ("isArchived" .=) <$> _gIsArchived,
+                  ("name" .=) <$> _gName,
+                  ("messageDisplayFont" .=) <$> _gMessageDisplayFont,
+                  ("customReplyTo" .=) <$> _gCustomReplyTo,
+                  ("whoCanContactOwner" .=) <$> _gWhoCanContactOwner,
+                  ("whoCanInvite" .=) <$> _gWhoCanInvite,
+                  ("whoCanLeaveGroup" .=) <$> _gWhoCanLeaveGroup,
+                  ("allowGoogleCommunication" .=) <$>
+                    _gAllowGoogleCommunication,
+                  ("primaryLanguage" .=) <$> _gPrimaryLanguage,
+                  ("description" .=) <$> _gDescription,
+                  ("defaultMessageDenyNotificationText" .=) <$>
+                    _gDefaultMessageDenyNotificationText,
+                  ("allowWebPosting" .=) <$> _gAllowWebPosting])

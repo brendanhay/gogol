@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -108,6 +109,33 @@ acDraft = lens _acDraft (\ s a -> s{_acDraft = a})
 acId :: Lens' AchievementConfiguration (Maybe Text)
 acId = lens _acId (\ s a -> s{_acId = a})
 
+instance FromJSON AchievementConfiguration where
+        parseJSON
+          = withObject "AchievementConfiguration"
+              (\ o ->
+                 AchievementConfiguration <$>
+                   (o .:? "achievementType") <*> (o .:? "stepsToUnlock")
+                     <*>
+                     (o .:? "kind" .!=
+                        "gamesConfiguration#achievementConfiguration")
+                     <*> (o .:? "published")
+                     <*> (o .:? "token")
+                     <*> (o .:? "initialState")
+                     <*> (o .:? "draft")
+                     <*> (o .:? "id"))
+
+instance ToJSON AchievementConfiguration where
+        toJSON AchievementConfiguration{..}
+          = object
+              (catMaybes
+                 [("achievementType" .=) <$> _acAchievementType,
+                  ("stepsToUnlock" .=) <$> _acStepsToUnlock,
+                  Just ("kind" .= _acKind),
+                  ("published" .=) <$> _acPublished,
+                  ("token" .=) <$> _acToken,
+                  ("initialState" .=) <$> _acInitialState,
+                  ("draft" .=) <$> _acDraft, ("id" .=) <$> _acId])
+
 -- | This is a JSON template for an achievement configuration detail.
 --
 -- /See:/ 'achievementConfigurationDetail' smart constructor.
@@ -178,6 +206,31 @@ acdDescription
   = lens _acdDescription
       (\ s a -> s{_acdDescription = a})
 
+instance FromJSON AchievementConfigurationDetail
+         where
+        parseJSON
+          = withObject "AchievementConfigurationDetail"
+              (\ o ->
+                 AchievementConfigurationDetail <$>
+                   (o .:? "kind" .!=
+                      "gamesConfiguration#achievementConfigurationDetail")
+                     <*> (o .:? "sortRank")
+                     <*> (o .:? "name")
+                     <*> (o .:? "pointValue")
+                     <*> (o .:? "iconUrl")
+                     <*> (o .:? "description"))
+
+instance ToJSON AchievementConfigurationDetail where
+        toJSON AchievementConfigurationDetail{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _acdKind),
+                  ("sortRank" .=) <$> _acdSortRank,
+                  ("name" .=) <$> _acdName,
+                  ("pointValue" .=) <$> _acdPointValue,
+                  ("iconUrl" .=) <$> _acdIconUrl,
+                  ("description" .=) <$> _acdDescription])
+
 -- | This is a JSON template for a ListConfigurations response.
 --
 -- /See:/ 'achievementConfigurationListResponse' smart constructor.
@@ -222,6 +275,26 @@ aclrItems
   = lens _aclrItems (\ s a -> s{_aclrItems = a}) .
       _Default
       . _Coerce
+
+instance FromJSON
+         AchievementConfigurationListResponse where
+        parseJSON
+          = withObject "AchievementConfigurationListResponse"
+              (\ o ->
+                 AchievementConfigurationListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!=
+                        "gamesConfiguration#achievementConfigurationListResponse")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON AchievementConfigurationListResponse
+         where
+        toJSON AchievementConfigurationListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _aclrNextPageToken,
+                  Just ("kind" .= _aclrKind),
+                  ("items" .=) <$> _aclrItems])
 
 -- | This is a JSON template for a number affix resource.
 --
@@ -295,6 +368,25 @@ gnacZero = lens _gnacZero (\ s a -> s{_gnacZero = a})
 gnacMany :: Lens' GamesNumberAffixConfiguration (Maybe (Maybe LocalizedStringBundle))
 gnacMany = lens _gnacMany (\ s a -> s{_gnacMany = a})
 
+instance FromJSON GamesNumberAffixConfiguration where
+        parseJSON
+          = withObject "GamesNumberAffixConfiguration"
+              (\ o ->
+                 GamesNumberAffixConfiguration <$>
+                   (o .:? "few") <*> (o .:? "other") <*> (o .:? "two")
+                     <*> (o .:? "one")
+                     <*> (o .:? "zero")
+                     <*> (o .:? "many"))
+
+instance ToJSON GamesNumberAffixConfiguration where
+        toJSON GamesNumberAffixConfiguration{..}
+          = object
+              (catMaybes
+                 [("few" .=) <$> _gnacFew,
+                  ("other" .=) <$> _gnacOther, ("two" .=) <$> _gnacTwo,
+                  ("one" .=) <$> _gnacOne, ("zero" .=) <$> _gnacZero,
+                  ("many" .=) <$> _gnacMany])
+
 -- | This is a JSON template for a number format resource.
 --
 -- /See:/ 'gamesNumberFormatConfiguration' smart constructor.
@@ -356,6 +448,25 @@ gnfcNumDecimalPlaces
   = lens _gnfcNumDecimalPlaces
       (\ s a -> s{_gnfcNumDecimalPlaces = a})
 
+instance FromJSON GamesNumberFormatConfiguration
+         where
+        parseJSON
+          = withObject "GamesNumberFormatConfiguration"
+              (\ o ->
+                 GamesNumberFormatConfiguration <$>
+                   (o .:? "suffix") <*> (o .:? "currencyCode") <*>
+                     (o .:? "numberFormatType")
+                     <*> (o .:? "numDecimalPlaces"))
+
+instance ToJSON GamesNumberFormatConfiguration where
+        toJSON GamesNumberFormatConfiguration{..}
+          = object
+              (catMaybes
+                 [("suffix" .=) <$> _gnfcSuffix,
+                  ("currencyCode" .=) <$> _gnfcCurrencyCode,
+                  ("numberFormatType" .=) <$> _gnfcNumberFormatType,
+                  ("numDecimalPlaces" .=) <$> _gnfcNumDecimalPlaces])
+
 -- | This is a JSON template for an image configuration resource.
 --
 -- /See:/ 'imageConfiguration' smart constructor.
@@ -405,6 +516,25 @@ icUrl = lens _icUrl (\ s a -> s{_icUrl = a})
 icImageType :: Lens' ImageConfiguration (Maybe Text)
 icImageType
   = lens _icImageType (\ s a -> s{_icImageType = a})
+
+instance FromJSON ImageConfiguration where
+        parseJSON
+          = withObject "ImageConfiguration"
+              (\ o ->
+                 ImageConfiguration <$>
+                   (o .:? "resourceId") <*>
+                     (o .:? "kind" .!=
+                        "gamesConfiguration#imageConfiguration")
+                     <*> (o .:? "url")
+                     <*> (o .:? "imageType"))
+
+instance ToJSON ImageConfiguration where
+        toJSON ImageConfiguration{..}
+          = object
+              (catMaybes
+                 [("resourceId" .=) <$> _icResourceId,
+                  Just ("kind" .= _icKind), ("url" .=) <$> _icUrl,
+                  ("imageType" .=) <$> _icImageType])
 
 -- | This is a JSON template for an leaderboard configuration resource.
 --
@@ -492,6 +622,33 @@ lcScoreOrder :: Lens' LeaderboardConfiguration (Maybe Text)
 lcScoreOrder
   = lens _lcScoreOrder (\ s a -> s{_lcScoreOrder = a})
 
+instance FromJSON LeaderboardConfiguration where
+        parseJSON
+          = withObject "LeaderboardConfiguration"
+              (\ o ->
+                 LeaderboardConfiguration <$>
+                   (o .:? "scoreMax") <*>
+                     (o .:? "kind" .!=
+                        "gamesConfiguration#leaderboardConfiguration")
+                     <*> (o .:? "published")
+                     <*> (o .:? "token")
+                     <*> (o .:? "scoreMin")
+                     <*> (o .:? "draft")
+                     <*> (o .:? "id")
+                     <*> (o .:? "scoreOrder"))
+
+instance ToJSON LeaderboardConfiguration where
+        toJSON LeaderboardConfiguration{..}
+          = object
+              (catMaybes
+                 [("scoreMax" .=) <$> _lcScoreMax,
+                  Just ("kind" .= _lcKind),
+                  ("published" .=) <$> _lcPublished,
+                  ("token" .=) <$> _lcToken,
+                  ("scoreMin" .=) <$> _lcScoreMin,
+                  ("draft" .=) <$> _lcDraft, ("id" .=) <$> _lcId,
+                  ("scoreOrder" .=) <$> _lcScoreOrder])
+
 -- | This is a JSON template for a leaderboard configuration detail.
 --
 -- /See:/ 'leaderboardConfigurationDetail' smart constructor.
@@ -552,6 +709,29 @@ lcdIconUrl :: Lens' LeaderboardConfigurationDetail (Maybe Text)
 lcdIconUrl
   = lens _lcdIconUrl (\ s a -> s{_lcdIconUrl = a})
 
+instance FromJSON LeaderboardConfigurationDetail
+         where
+        parseJSON
+          = withObject "LeaderboardConfigurationDetail"
+              (\ o ->
+                 LeaderboardConfigurationDetail <$>
+                   (o .:? "kind" .!=
+                      "gamesConfiguration#leaderboardConfigurationDetail")
+                     <*> (o .:? "scoreFormat")
+                     <*> (o .:? "sortRank")
+                     <*> (o .:? "name")
+                     <*> (o .:? "iconUrl"))
+
+instance ToJSON LeaderboardConfigurationDetail where
+        toJSON LeaderboardConfigurationDetail{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _lcdKind),
+                  ("scoreFormat" .=) <$> _lcdScoreFormat,
+                  ("sortRank" .=) <$> _lcdSortRank,
+                  ("name" .=) <$> _lcdName,
+                  ("iconUrl" .=) <$> _lcdIconUrl])
+
 -- | This is a JSON template for a ListConfigurations response.
 --
 -- /See:/ 'leaderboardConfigurationListResponse' smart constructor.
@@ -597,6 +777,26 @@ lclrItems
       _Default
       . _Coerce
 
+instance FromJSON
+         LeaderboardConfigurationListResponse where
+        parseJSON
+          = withObject "LeaderboardConfigurationListResponse"
+              (\ o ->
+                 LeaderboardConfigurationListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!=
+                        "gamesConfiguration#leaderboardConfigurationListResponse")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON LeaderboardConfigurationListResponse
+         where
+        toJSON LeaderboardConfigurationListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lclrNextPageToken,
+                  Just ("kind" .= _lclrKind),
+                  ("items" .=) <$> _lclrItems])
+
 -- | This is a JSON template for a localized string resource.
 --
 -- /See:/ 'localizedString' smart constructor.
@@ -637,6 +837,24 @@ lsLocale = lens _lsLocale (\ s a -> s{_lsLocale = a})
 lsValue :: Lens' LocalizedString (Maybe Text)
 lsValue = lens _lsValue (\ s a -> s{_lsValue = a})
 
+instance FromJSON LocalizedString where
+        parseJSON
+          = withObject "LocalizedString"
+              (\ o ->
+                 LocalizedString <$>
+                   (o .:? "kind" .!=
+                      "gamesConfiguration#localizedString")
+                     <*> (o .:? "locale")
+                     <*> (o .:? "value"))
+
+instance ToJSON LocalizedString where
+        toJSON LocalizedString{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _lsKind),
+                  ("locale" .=) <$> _lsLocale,
+                  ("value" .=) <$> _lsValue])
+
 -- | This is a JSON template for a localized string bundle resource.
 --
 -- /See:/ 'localizedStringBundle' smart constructor.
@@ -672,3 +890,19 @@ lsbTranslations
       (\ s a -> s{_lsbTranslations = a})
       . _Default
       . _Coerce
+
+instance FromJSON LocalizedStringBundle where
+        parseJSON
+          = withObject "LocalizedStringBundle"
+              (\ o ->
+                 LocalizedStringBundle <$>
+                   (o .:? "kind" .!=
+                      "gamesConfiguration#localizedStringBundle")
+                     <*> (o .:? "translations" .!= mempty))
+
+instance ToJSON LocalizedStringBundle where
+        toJSON LocalizedStringBundle{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _lsbKind),
+                  ("translations" .=) <$> _lsbTranslations])

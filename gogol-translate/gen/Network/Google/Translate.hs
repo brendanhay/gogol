@@ -77,44 +77,55 @@ type DetectionsAPI = DetectionsList
 
 -- | Detect the language of text.
 type DetectionsList =
-     "language" :> "translate" :> "v2" :> "detect" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "q" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "language" :>
+       "translate" :>
+         "v2" :>
+           "detect" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "q" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Get '[JSON] DetectionsListResponse
 
 type LanguagesAPI = LanguagesList
 
 -- | List the source\/target languages supported by the API
 type LanguagesList =
-     "language" :> "translate" :> "v2" :> "languages" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "target" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "language" :>
+       "translate" :>
+         "v2" :>
+           "languages" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "target" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Get '[JSON] LanguagesListResponse
 
 type TranslationsAPI = TranslationsList
 
 -- | Returns text translations from one language to another.
 type TranslationsList =
-     "language" :> "translate" :> "v2" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "format" Text
-       :> QueryParam "q" Text
-       :> QueryParam "key" Text
-       :> QueryParam "source" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "cid" Text
-       :> QueryParam "target" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "language" :>
+       "translate" :>
+         "v2" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "format" Text :>
+                   QueryParam "q" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "source" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "cid" Text :>
+                             QueryParam "target" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Get '[JSON] TranslationsListResponse

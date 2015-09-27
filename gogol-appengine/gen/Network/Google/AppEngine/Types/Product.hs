@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -79,6 +80,26 @@ achAuthFailAction
 achLogin :: Lens' ApiConfigHandler (Maybe Text)
 achLogin = lens _achLogin (\ s a -> s{_achLogin = a})
 
+instance FromJSON ApiConfigHandler where
+        parseJSON
+          = withObject "ApiConfigHandler"
+              (\ o ->
+                 ApiConfigHandler <$>
+                   (o .:? "script") <*> (o .:? "securityLevel") <*>
+                     (o .:? "url")
+                     <*> (o .:? "authFailAction")
+                     <*> (o .:? "login"))
+
+instance ToJSON ApiConfigHandler where
+        toJSON ApiConfigHandler{..}
+          = object
+              (catMaybes
+                 [("script" .=) <$> _achScript,
+                  ("securityLevel" .=) <$> _achSecurityLevel,
+                  ("url" .=) <$> _achUrl,
+                  ("authFailAction" .=) <$> _achAuthFailAction,
+                  ("login" .=) <$> _achLogin])
+
 -- | Use Google Cloud Endpoints to handle requests.
 --
 -- /See:/ 'apiEndpointHandler' smart constructor.
@@ -103,6 +124,16 @@ aehScriptPath :: Lens' ApiEndpointHandler (Maybe Text)
 aehScriptPath
   = lens _aehScriptPath
       (\ s a -> s{_aehScriptPath = a})
+
+instance FromJSON ApiEndpointHandler where
+        parseJSON
+          = withObject "ApiEndpointHandler"
+              (\ o -> ApiEndpointHandler <$> (o .:? "scriptPath"))
+
+instance ToJSON ApiEndpointHandler where
+        toJSON ApiEndpointHandler{..}
+          = object
+              (catMaybes [("scriptPath" .=) <$> _aehScriptPath])
 
 -- | An Application contains the top-level configuration of an App Engine
 -- application.
@@ -175,6 +206,26 @@ aDispatchRules
 -- \'OutputOnly
 aId :: Lens' Application (Maybe Text)
 aId = lens _aId (\ s a -> s{_aId = a})
+
+instance FromJSON Application where
+        parseJSON
+          = withObject "Application"
+              (\ o ->
+                 Application <$>
+                   (o .:? "location") <*> (o .:? "codeBucket") <*>
+                     (o .:? "name")
+                     <*> (o .:? "dispatchRules" .!= mempty)
+                     <*> (o .:? "id"))
+
+instance ToJSON Application where
+        toJSON Application{..}
+          = object
+              (catMaybes
+                 [("location" .=) <$> _aLocation,
+                  ("codeBucket" .=) <$> _aCodeBucket,
+                  ("name" .=) <$> _aName,
+                  ("dispatchRules" .=) <$> _aDispatchRules,
+                  ("id" .=) <$> _aId])
 
 -- | Automatic scaling is the scaling policy that App Engine has used since
 -- its inception. It is based on request rate, response latencies, and
@@ -293,6 +344,36 @@ asMaxPendingLatency
   = lens _asMaxPendingLatency
       (\ s a -> s{_asMaxPendingLatency = a})
 
+instance FromJSON AutomaticScaling where
+        parseJSON
+          = withObject "AutomaticScaling"
+              (\ o ->
+                 AutomaticScaling <$>
+                   (o .:? "maxTotalInstances") <*>
+                     (o .:? "minIdleInstances")
+                     <*> (o .:? "minPendingLatency")
+                     <*> (o .:? "cpuUtilization")
+                     <*> (o .:? "maxIdleInstances")
+                     <*> (o .:? "minTotalInstances")
+                     <*> (o .:? "maxConcurrentRequests")
+                     <*> (o .:? "coolDownPeriod")
+                     <*> (o .:? "maxPendingLatency"))
+
+instance ToJSON AutomaticScaling where
+        toJSON AutomaticScaling{..}
+          = object
+              (catMaybes
+                 [("maxTotalInstances" .=) <$> _asMaxTotalInstances,
+                  ("minIdleInstances" .=) <$> _asMinIdleInstances,
+                  ("minPendingLatency" .=) <$> _asMinPendingLatency,
+                  ("cpuUtilization" .=) <$> _asCpuUtilization,
+                  ("maxIdleInstances" .=) <$> _asMaxIdleInstances,
+                  ("minTotalInstances" .=) <$> _asMinTotalInstances,
+                  ("maxConcurrentRequests" .=) <$>
+                    _asMaxConcurrentRequests,
+                  ("coolDownPeriod" .=) <$> _asCoolDownPeriod,
+                  ("maxPendingLatency" .=) <$> _asMaxPendingLatency])
+
 -- | A module with basic scaling will create an instance when the application
 -- receives a request. The instance will be turned down when the app
 -- becomes idle. Basic scaling is ideal for work that is intermittent or
@@ -333,6 +414,20 @@ bsIdleTimeout
   = lens _bsIdleTimeout
       (\ s a -> s{_bsIdleTimeout = a})
 
+instance FromJSON BasicScaling where
+        parseJSON
+          = withObject "BasicScaling"
+              (\ o ->
+                 BasicScaling <$>
+                   (o .:? "maxInstances") <*> (o .:? "idleTimeout"))
+
+instance ToJSON BasicScaling where
+        toJSON BasicScaling{..}
+          = object
+              (catMaybes
+                 [("maxInstances" .=) <$> _bsMaxInstances,
+                  ("idleTimeout" .=) <$> _bsIdleTimeout])
+
 -- | A Docker (container) image which should be used to start the
 -- application.
 --
@@ -358,6 +453,15 @@ containerInfo =
 -- e.g. gcr.io\/my-project\/image:tag or gcr.io\/my-project\/image\'digest
 ciImage :: Lens' ContainerInfo (Maybe Text)
 ciImage = lens _ciImage (\ s a -> s{_ciImage = a})
+
+instance FromJSON ContainerInfo where
+        parseJSON
+          = withObject "ContainerInfo"
+              (\ o -> ContainerInfo <$> (o .:? "image"))
+
+instance ToJSON ContainerInfo where
+        toJSON ContainerInfo{..}
+          = object (catMaybes [("image" .=) <$> _ciImage])
 
 -- | Target scaling by CPU usage.
 --
@@ -393,6 +497,22 @@ cuTargetUtilization :: Lens' CpuUtilization (Maybe Double)
 cuTargetUtilization
   = lens _cuTargetUtilization
       (\ s a -> s{_cuTargetUtilization = a})
+
+instance FromJSON CpuUtilization where
+        parseJSON
+          = withObject "CpuUtilization"
+              (\ o ->
+                 CpuUtilization <$>
+                   (o .:? "aggregationWindowLength") <*>
+                     (o .:? "targetUtilization"))
+
+instance ToJSON CpuUtilization where
+        toJSON CpuUtilization{..}
+          = object
+              (catMaybes
+                 [("aggregationWindowLength" .=) <$>
+                    _cuAggregationWindowLength,
+                  ("targetUtilization" .=) <$> _cuTargetUtilization])
 
 -- | Code and application artifacts used to deploy a version to App Engine.
 --
@@ -443,6 +563,22 @@ dSourceReferences
       . _Default
       . _Coerce
 
+instance FromJSON Deployment where
+        parseJSON
+          = withObject "Deployment"
+              (\ o ->
+                 Deployment <$>
+                   (o .:? "container") <*> (o .:? "files") <*>
+                     (o .:? "sourceReferences" .!= mempty))
+
+instance ToJSON Deployment where
+        toJSON Deployment{..}
+          = object
+              (catMaybes
+                 [("container" .=) <$> _dContainer,
+                  ("files" .=) <$> _dFiles,
+                  ("sourceReferences" .=) <$> _dSourceReferences])
+
 -- | A manifest of files stored in Google Cloud Storage which should be
 -- included as part of this application. All files must be readable using
 -- the credentials supplied with this call.
@@ -457,6 +593,14 @@ data DeploymentFiles =
 deploymentFiles
     :: DeploymentFiles
 deploymentFiles = DeploymentFiles
+
+instance FromJSON DeploymentFiles where
+        parseJSON
+          = withObject "DeploymentFiles"
+              (\ o -> pure DeploymentFiles)
+
+instance ToJSON DeploymentFiles where
+        toJSON = const (Object mempty)
 
 -- | A custom static error page to be served when an error occurs.
 --
@@ -499,6 +643,22 @@ ehErrorCode
 ehStaticFile :: Lens' ErrorHandler (Maybe Text)
 ehStaticFile
   = lens _ehStaticFile (\ s a -> s{_ehStaticFile = a})
+
+instance FromJSON ErrorHandler where
+        parseJSON
+          = withObject "ErrorHandler"
+              (\ o ->
+                 ErrorHandler <$>
+                   (o .:? "mimeType") <*> (o .:? "errorCode") <*>
+                     (o .:? "staticFile"))
+
+instance ToJSON ErrorHandler where
+        toJSON ErrorHandler{..}
+          = object
+              (catMaybes
+                 [("mimeType" .=) <$> _ehMimeType,
+                  ("errorCode" .=) <$> _ehErrorCode,
+                  ("staticFile" .=) <$> _ehStaticFile])
 
 -- | A single source file which is part of the application to be deployed.
 --
@@ -543,6 +703,22 @@ fiMimeType
 fiSourceUrl :: Lens' FileInfo (Maybe Text)
 fiSourceUrl
   = lens _fiSourceUrl (\ s a -> s{_fiSourceUrl = a})
+
+instance FromJSON FileInfo where
+        parseJSON
+          = withObject "FileInfo"
+              (\ o ->
+                 FileInfo <$>
+                   (o .:? "sha1Sum") <*> (o .:? "mimeType") <*>
+                     (o .:? "sourceUrl"))
+
+instance ToJSON FileInfo where
+        toJSON FileInfo{..}
+          = object
+              (catMaybes
+                 [("sha1Sum" .=) <$> _fiSha1Sum,
+                  ("mimeType" .=) <$> _fiMimeType,
+                  ("sourceUrl" .=) <$> _fiSourceUrl])
 
 -- | Configure health checking for the VM instances. Unhealthy VM instances
 -- will be killed and replaced with new instances.
@@ -630,6 +806,31 @@ hcUnhealthyThreshold
   = lens _hcUnhealthyThreshold
       (\ s a -> s{_hcUnhealthyThreshold = a})
 
+instance FromJSON HealthCheck where
+        parseJSON
+          = withObject "HealthCheck"
+              (\ o ->
+                 HealthCheck <$>
+                   (o .:? "healthyThreshold") <*>
+                     (o .:? "disableHealthCheck")
+                     <*> (o .:? "checkInterval")
+                     <*> (o .:? "restartThreshold")
+                     <*> (o .:? "host")
+                     <*> (o .:? "timeout")
+                     <*> (o .:? "unhealthyThreshold"))
+
+instance ToJSON HealthCheck where
+        toJSON HealthCheck{..}
+          = object
+              (catMaybes
+                 [("healthyThreshold" .=) <$> _hcHealthyThreshold,
+                  ("disableHealthCheck" .=) <$> _hcDisableHealthCheck,
+                  ("checkInterval" .=) <$> _hcCheckInterval,
+                  ("restartThreshold" .=) <$> _hcRestartThreshold,
+                  ("host" .=) <$> _hcHost,
+                  ("timeout" .=) <$> _hcTimeout,
+                  ("unhealthyThreshold" .=) <$> _hcUnhealthyThreshold])
+
 -- | A Python runtime third-party library required by the application.
 --
 -- /See:/ 'library' smart constructor.
@@ -660,6 +861,19 @@ lName = lens _lName (\ s a -> s{_lName = a})
 -- | The version of the library to select, or \"latest\".
 lVersion :: Lens' Library (Maybe Text)
 lVersion = lens _lVersion (\ s a -> s{_lVersion = a})
+
+instance FromJSON Library where
+        parseJSON
+          = withObject "Library"
+              (\ o ->
+                 Library <$> (o .:? "name") <*> (o .:? "version"))
+
+instance ToJSON Library where
+        toJSON Library{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _lName,
+                  ("version" .=) <$> _lVersion])
 
 -- | Response message for \`Modules.ListModules\`.
 --
@@ -696,6 +910,21 @@ lmrModules
   = lens _lmrModules (\ s a -> s{_lmrModules = a}) .
       _Default
       . _Coerce
+
+instance FromJSON ListModulesResponse where
+        parseJSON
+          = withObject "ListModulesResponse"
+              (\ o ->
+                 ListModulesResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "modules" .!= mempty))
+
+instance ToJSON ListModulesResponse where
+        toJSON ListModulesResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lmrNextPageToken,
+                  ("modules" .=) <$> _lmrModules])
 
 -- | The response message for
 -- [Operations.ListOperations][google.longrunning.Operations.ListOperations].
@@ -735,6 +964,21 @@ lorOperations
       . _Default
       . _Coerce
 
+instance FromJSON ListOperationsResponse where
+        parseJSON
+          = withObject "ListOperationsResponse"
+              (\ o ->
+                 ListOperationsResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "operations" .!= mempty))
+
+instance ToJSON ListOperationsResponse where
+        toJSON ListOperationsResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lorNextPageToken,
+                  ("operations" .=) <$> _lorOperations])
+
 -- | Response message for \`Versions.ListVersions\`.
 --
 -- /See:/ 'listVersionsResponse' smart constructor.
@@ -771,6 +1015,21 @@ lvrVersions
       _Default
       . _Coerce
 
+instance FromJSON ListVersionsResponse where
+        parseJSON
+          = withObject "ListVersionsResponse"
+              (\ o ->
+                 ListVersionsResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "versions" .!= mempty))
+
+instance ToJSON ListVersionsResponse where
+        toJSON ListVersionsResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lvrNextPageToken,
+                  ("versions" .=) <$> _lvrVersions])
+
 -- | A module with manual scaling runs continuously, allowing you to perform
 -- complex initialization and rely on the state of its memory over time.
 --
@@ -798,6 +1057,16 @@ manualScaling =
 msInstances :: Lens' ManualScaling (Maybe Int32)
 msInstances
   = lens _msInstances (\ s a -> s{_msInstances = a})
+
+instance FromJSON ManualScaling where
+        parseJSON
+          = withObject "ManualScaling"
+              (\ o -> ManualScaling <$> (o .:? "instances"))
+
+instance ToJSON ManualScaling where
+        toJSON ManualScaling{..}
+          = object
+              (catMaybes [("instances" .=) <$> _msInstances])
 
 -- | A module is a component of an application that provides a single service
 -- or configuration. A module has a collection of versions that define a
@@ -842,6 +1111,20 @@ mName = lens _mName (\ s a -> s{_mName = a})
 -- \"default\" \'OutputOnly
 mId :: Lens' Module (Maybe Text)
 mId = lens _mId (\ s a -> s{_mId = a})
+
+instance FromJSON Module where
+        parseJSON
+          = withObject "Module"
+              (\ o ->
+                 Module <$>
+                   (o .:? "split") <*> (o .:? "name") <*> (o .:? "id"))
+
+instance ToJSON Module where
+        toJSON Module{..}
+          = object
+              (catMaybes
+                 [("split" .=) <$> _mSplit, ("name" .=) <$> _mName,
+                  ("id" .=) <$> _mId])
 
 -- | Used to specify extra network settings (for VM runtimes only).
 --
@@ -889,6 +1172,23 @@ nInstanceTag
 -- short name should be specified, not the resource path.)
 nName :: Lens' Network (Maybe Text)
 nName = lens _nName (\ s a -> s{_nName = a})
+
+instance FromJSON Network where
+        parseJSON
+          = withObject "Network"
+              (\ o ->
+                 Network <$>
+                   (o .:? "forwardedPorts" .!= mempty) <*>
+                     (o .:? "instanceTag")
+                     <*> (o .:? "name"))
+
+instance ToJSON Network where
+        toJSON Network{..}
+          = object
+              (catMaybes
+                 [("forwardedPorts" .=) <$> _nForwardedPorts,
+                  ("instanceTag" .=) <$> _nInstanceTag,
+                  ("name" .=) <$> _nName])
 
 -- | This resource represents a long-running operation that is the result of
 -- a network API call.
@@ -963,6 +1263,25 @@ oMetadata :: Lens' Operation (Maybe OperationMetadata)
 oMetadata
   = lens _oMetadata (\ s a -> s{_oMetadata = a})
 
+instance FromJSON Operation where
+        parseJSON
+          = withObject "Operation"
+              (\ o ->
+                 Operation <$>
+                   (o .:? "done") <*> (o .:? "error") <*>
+                     (o .:? "response")
+                     <*> (o .:? "name")
+                     <*> (o .:? "metadata"))
+
+instance ToJSON Operation where
+        toJSON Operation{..}
+          = object
+              (catMaybes
+                 [("done" .=) <$> _oDone, ("error" .=) <$> _oError,
+                  ("response" .=) <$> _oResponse,
+                  ("name" .=) <$> _oName,
+                  ("metadata" .=) <$> _oMetadata])
+
 -- | Service-specific metadata associated with the operation. It typically
 -- contains progress information and common metadata such as create time.
 -- Some services might not provide such metadata. Any method that returns a
@@ -978,6 +1297,14 @@ data OperationMetadata =
 operationMetadata
     :: OperationMetadata
 operationMetadata = OperationMetadata
+
+instance FromJSON OperationMetadata where
+        parseJSON
+          = withObject "OperationMetadata"
+              (\ o -> pure OperationMetadata)
+
+instance ToJSON OperationMetadata where
+        toJSON = const (Object mempty)
 
 -- | The normal response of the operation in case of success. If the original
 -- method returns no data on success, such as \`Delete\`, the response is
@@ -998,6 +1325,14 @@ data OperationResponse =
 operationResponse
     :: OperationResponse
 operationResponse = OperationResponse
+
+instance FromJSON OperationResponse where
+        parseJSON
+          = withObject "OperationResponse"
+              (\ o -> pure OperationResponse)
+
+instance ToJSON OperationResponse where
+        toJSON = const (Object mempty)
 
 -- | Used to specify how many machine resources an app version needs.
 --
@@ -1039,6 +1374,21 @@ rDiskGb = lens _rDiskGb (\ s a -> s{_rDiskGb = a})
 rCpu :: Lens' Resources (Maybe Double)
 rCpu = lens _rCpu (\ s a -> s{_rCpu = a})
 
+instance FromJSON Resources where
+        parseJSON
+          = withObject "Resources"
+              (\ o ->
+                 Resources <$>
+                   (o .:? "memoryGb") <*> (o .:? "diskGb") <*>
+                     (o .:? "cpu"))
+
+instance ToJSON Resources where
+        toJSON Resources{..}
+          = object
+              (catMaybes
+                 [("memoryGb" .=) <$> _rMemoryGb,
+                  ("diskGb" .=) <$> _rDiskGb, ("cpu" .=) <$> _rCpu])
+
 -- | Executes a script to handle the request that matches the URL pattern.
 --
 -- /See:/ 'scriptHandler' smart constructor.
@@ -1062,6 +1412,16 @@ scriptHandler =
 shScriptPath :: Lens' ScriptHandler (Maybe Text)
 shScriptPath
   = lens _shScriptPath (\ s a -> s{_shScriptPath = a})
+
+instance FromJSON ScriptHandler where
+        parseJSON
+          = withObject "ScriptHandler"
+              (\ o -> ScriptHandler <$> (o .:? "scriptPath"))
+
+instance ToJSON ScriptHandler where
+        toJSON ScriptHandler{..}
+          = object
+              (catMaybes [("scriptPath" .=) <$> _shScriptPath])
 
 -- | A reference to a particular snapshot of the source tree used to build
 -- and deploy the application.
@@ -1099,6 +1459,20 @@ srRepository
 srRevisionId :: Lens' SourceReference (Maybe Text)
 srRevisionId
   = lens _srRevisionId (\ s a -> s{_srRevisionId = a})
+
+instance FromJSON SourceReference where
+        parseJSON
+          = withObject "SourceReference"
+              (\ o ->
+                 SourceReference <$>
+                   (o .:? "repository") <*> (o .:? "revisionId"))
+
+instance ToJSON SourceReference where
+        toJSON SourceReference{..}
+          = object
+              (catMaybes
+                 [("repository" .=) <$> _srRepository,
+                  ("revisionId" .=) <$> _srRevisionId])
 
 -- | Files served directly to the user for a given URL, such as images, CSS
 -- stylesheets, or JavaScript source files. Static directory handlers make
@@ -1188,6 +1562,31 @@ sdhDirectory :: Lens' StaticDirectoryHandler (Maybe Text)
 sdhDirectory
   = lens _sdhDirectory (\ s a -> s{_sdhDirectory = a})
 
+instance FromJSON StaticDirectoryHandler where
+        parseJSON
+          = withObject "StaticDirectoryHandler"
+              (\ o ->
+                 StaticDirectoryHandler <$>
+                   (o .:? "httpHeaders") <*>
+                     (o .:? "requireMatchingFile")
+                     <*> (o .:? "expiration")
+                     <*> (o .:? "mimeType")
+                     <*> (o .:? "applicationReadable")
+                     <*> (o .:? "directory"))
+
+instance ToJSON StaticDirectoryHandler where
+        toJSON StaticDirectoryHandler{..}
+          = object
+              (catMaybes
+                 [("httpHeaders" .=) <$> _sdhHttpHeaders,
+                  ("requireMatchingFile" .=) <$>
+                    _sdhRequireMatchingFile,
+                  ("expiration" .=) <$> _sdhExpiration,
+                  ("mimeType" .=) <$> _sdhMimeType,
+                  ("applicationReadable" .=) <$>
+                    _sdhApplicationReadable,
+                  ("directory" .=) <$> _sdhDirectory])
+
 -- | HTTP headers to use for all responses from these URLs.
 --
 -- /See:/ 'staticDirectoryHandlerHttpHeaders' smart constructor.
@@ -1200,6 +1599,16 @@ data StaticDirectoryHandlerHttpHeaders =
 staticDirectoryHandlerHttpHeaders
     :: StaticDirectoryHandlerHttpHeaders
 staticDirectoryHandlerHttpHeaders = StaticDirectoryHandlerHttpHeaders
+
+instance FromJSON StaticDirectoryHandlerHttpHeaders
+         where
+        parseJSON
+          = withObject "StaticDirectoryHandlerHttpHeaders"
+              (\ o -> pure StaticDirectoryHandlerHttpHeaders)
+
+instance ToJSON StaticDirectoryHandlerHttpHeaders
+         where
+        toJSON = const (Object mempty)
 
 -- | Files served directly to the user for a given URL, such as images, CSS
 -- stylesheets, or JavaScript source files. Static file handlers describe
@@ -1300,6 +1709,32 @@ sfhUploadPathRegex
   = lens _sfhUploadPathRegex
       (\ s a -> s{_sfhUploadPathRegex = a})
 
+instance FromJSON StaticFilesHandler where
+        parseJSON
+          = withObject "StaticFilesHandler"
+              (\ o ->
+                 StaticFilesHandler <$>
+                   (o .:? "httpHeaders") <*> (o .:? "path") <*>
+                     (o .:? "requireMatchingFile")
+                     <*> (o .:? "expiration")
+                     <*> (o .:? "mimeType")
+                     <*> (o .:? "applicationReadable")
+                     <*> (o .:? "uploadPathRegex"))
+
+instance ToJSON StaticFilesHandler where
+        toJSON StaticFilesHandler{..}
+          = object
+              (catMaybes
+                 [("httpHeaders" .=) <$> _sfhHttpHeaders,
+                  ("path" .=) <$> _sfhPath,
+                  ("requireMatchingFile" .=) <$>
+                    _sfhRequireMatchingFile,
+                  ("expiration" .=) <$> _sfhExpiration,
+                  ("mimeType" .=) <$> _sfhMimeType,
+                  ("applicationReadable" .=) <$>
+                    _sfhApplicationReadable,
+                  ("uploadPathRegex" .=) <$> _sfhUploadPathRegex])
+
 -- | HTTP headers to use for all responses from these URLs.
 --
 -- /See:/ 'staticFilesHandlerHttpHeaders' smart constructor.
@@ -1312,6 +1747,14 @@ data StaticFilesHandlerHttpHeaders =
 staticFilesHandlerHttpHeaders
     :: StaticFilesHandlerHttpHeaders
 staticFilesHandlerHttpHeaders = StaticFilesHandlerHttpHeaders
+
+instance FromJSON StaticFilesHandlerHttpHeaders where
+        parseJSON
+          = withObject "StaticFilesHandlerHttpHeaders"
+              (\ o -> pure StaticFilesHandlerHttpHeaders)
+
+instance ToJSON StaticFilesHandlerHttpHeaders where
+        toJSON = const (Object mempty)
 
 -- | The \`Status\` type defines a logical error model that is suitable for
 -- different programming environments, including REST APIs and RPC APIs. It
@@ -1395,6 +1838,22 @@ sCode = lens _sCode (\ s a -> s{_sCode = a})
 sMessage :: Lens' Status (Maybe Text)
 sMessage = lens _sMessage (\ s a -> s{_sMessage = a})
 
+instance FromJSON Status where
+        parseJSON
+          = withObject "Status"
+              (\ o ->
+                 Status <$>
+                   (o .:? "details" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON Status where
+        toJSON Status{..}
+          = object
+              (catMaybes
+                 [("details" .=) <$> _sDetails,
+                  ("code" .=) <$> _sCode,
+                  ("message" .=) <$> _sMessage])
+
 --
 -- /See:/ 'statusItemDetails' smart constructor.
 data StatusItemDetails =
@@ -1406,6 +1865,14 @@ data StatusItemDetails =
 statusItemDetails
     :: StatusItemDetails
 statusItemDetails = StatusItemDetails
+
+instance FromJSON StatusItemDetails where
+        parseJSON
+          = withObject "StatusItemDetails"
+              (\ o -> pure StatusItemDetails)
+
+instance ToJSON StatusItemDetails where
+        toJSON = const (Object mempty)
 
 -- | Configuration for traffic splitting for versions within a single module.
 -- Traffic splitting allows traffic directed to the module to be assigned
@@ -1453,6 +1920,20 @@ tsAllocations
   = lens _tsAllocations
       (\ s a -> s{_tsAllocations = a})
 
+instance FromJSON TrafficSplit where
+        parseJSON
+          = withObject "TrafficSplit"
+              (\ o ->
+                 TrafficSplit <$>
+                   (o .:? "shardBy") <*> (o .:? "allocations"))
+
+instance ToJSON TrafficSplit where
+        toJSON TrafficSplit{..}
+          = object
+              (catMaybes
+                 [("shardBy" .=) <$> _tsShardBy,
+                  ("allocations" .=) <$> _tsAllocations])
+
 -- | Mapping from module version IDs within the module to fractional (0.000,
 -- 1] allocations of traffic for that version. Each version may only be
 -- specified once, but some versions in the module may not have any traffic
@@ -1472,6 +1953,14 @@ data TrafficSplitAllocations =
 trafficSplitAllocations
     :: TrafficSplitAllocations
 trafficSplitAllocations = TrafficSplitAllocations
+
+instance FromJSON TrafficSplitAllocations where
+        parseJSON
+          = withObject "TrafficSplitAllocations"
+              (\ o -> pure TrafficSplitAllocations)
+
+instance ToJSON TrafficSplitAllocations where
+        toJSON = const (Object mempty)
 
 -- | Rules to match an HTTP request and dispatch that request to a module.
 --
@@ -1518,6 +2007,22 @@ udrDomain
 udrModule :: Lens' UrlDispatchRule (Maybe Text)
 udrModule
   = lens _udrModule (\ s a -> s{_udrModule = a})
+
+instance FromJSON UrlDispatchRule where
+        parseJSON
+          = withObject "UrlDispatchRule"
+              (\ o ->
+                 UrlDispatchRule <$>
+                   (o .:? "path") <*> (o .:? "domain") <*>
+                     (o .:? "module"))
+
+instance ToJSON UrlDispatchRule where
+        toJSON UrlDispatchRule{..}
+          = object
+              (catMaybes
+                 [("path" .=) <$> _udrPath,
+                  ("domain" .=) <$> _udrDomain,
+                  ("module" .=) <$> _udrModule])
 
 -- | A URL pattern and description of how it should be handled. App Engine
 -- can handle URLs by executing application code, or by serving static
@@ -1628,6 +2133,35 @@ umStaticDirectory :: Lens' UrlMap (Maybe (Maybe StaticDirectoryHandler))
 umStaticDirectory
   = lens _umStaticDirectory
       (\ s a -> s{_umStaticDirectory = a})
+
+instance FromJSON UrlMap where
+        parseJSON
+          = withObject "UrlMap"
+              (\ o ->
+                 UrlMap <$>
+                   (o .:? "script") <*> (o .:? "securityLevel") <*>
+                     (o .:? "apiEndpoint")
+                     <*> (o .:? "urlRegex")
+                     <*> (o .:? "redirectHttpResponseCode")
+                     <*> (o .:? "authFailAction")
+                     <*> (o .:? "staticFiles")
+                     <*> (o .:? "login")
+                     <*> (o .:? "staticDirectory"))
+
+instance ToJSON UrlMap where
+        toJSON UrlMap{..}
+          = object
+              (catMaybes
+                 [("script" .=) <$> _umScript,
+                  ("securityLevel" .=) <$> _umSecurityLevel,
+                  ("apiEndpoint" .=) <$> _umApiEndpoint,
+                  ("urlRegex" .=) <$> _umUrlRegex,
+                  ("redirectHttpResponseCode" .=) <$>
+                    _umRedirectHttpResponseCode,
+                  ("authFailAction" .=) <$> _umAuthFailAction,
+                  ("staticFiles" .=) <$> _umStaticFiles,
+                  ("login" .=) <$> _umLogin,
+                  ("staticDirectory" .=) <$> _umStaticDirectory])
 
 -- | A Version is a specific set of source code and configuration files
 -- deployed to a module.
@@ -1934,6 +2468,66 @@ vDeployment :: Lens' Version (Maybe (Maybe Deployment))
 vDeployment
   = lens _vDeployment (\ s a -> s{_vDeployment = a})
 
+instance FromJSON Version where
+        parseJSON
+          = withObject "Version"
+              (\ o ->
+                 Version <$>
+                   (o .:? "creationTime") <*> (o .:? "runtime") <*>
+                     (o .:? "deployer")
+                     <*> (o .:? "nobuildFilesRegex")
+                     <*> (o .:? "instanceClass")
+                     <*> (o .:? "healthCheck")
+                     <*> (o .:? "env")
+                     <*> (o .:? "defaultExpiration")
+                     <*> (o .:? "automaticScaling")
+                     <*> (o .:? "errorHandlers" .!= mempty)
+                     <*> (o .:? "vm")
+                     <*> (o .:? "handlers" .!= mempty)
+                     <*> (o .:? "inboundServices" .!= mempty)
+                     <*> (o .:? "network")
+                     <*> (o .:? "resources")
+                     <*> (o .:? "name")
+                     <*> (o .:? "threadsafe")
+                     <*> (o .:? "betaSettings")
+                     <*> (o .:? "basicScaling")
+                     <*> (o .:? "manualScaling")
+                     <*> (o .:? "apiConfig")
+                     <*> (o .:? "id")
+                     <*> (o .:? "envVariables")
+                     <*> (o .:? "servingStatus")
+                     <*> (o .:? "libraries" .!= mempty)
+                     <*> (o .:? "deployment"))
+
+instance ToJSON Version where
+        toJSON Version{..}
+          = object
+              (catMaybes
+                 [("creationTime" .=) <$> _vCreationTime,
+                  ("runtime" .=) <$> _vRuntime,
+                  ("deployer" .=) <$> _vDeployer,
+                  ("nobuildFilesRegex" .=) <$> _vNobuildFilesRegex,
+                  ("instanceClass" .=) <$> _vInstanceClass,
+                  ("healthCheck" .=) <$> _vHealthCheck,
+                  ("env" .=) <$> _vEnv,
+                  ("defaultExpiration" .=) <$> _vDefaultExpiration,
+                  ("automaticScaling" .=) <$> _vAutomaticScaling,
+                  ("errorHandlers" .=) <$> _vErrorHandlers,
+                  ("vm" .=) <$> _vVm, ("handlers" .=) <$> _vHandlers,
+                  ("inboundServices" .=) <$> _vInboundServices,
+                  ("network" .=) <$> _vNetwork,
+                  ("resources" .=) <$> _vResources,
+                  ("name" .=) <$> _vName,
+                  ("threadsafe" .=) <$> _vThreadsafe,
+                  ("betaSettings" .=) <$> _vBetaSettings,
+                  ("basicScaling" .=) <$> _vBasicScaling,
+                  ("manualScaling" .=) <$> _vManualScaling,
+                  ("apiConfig" .=) <$> _vApiConfig, ("id" .=) <$> _vId,
+                  ("envVariables" .=) <$> _vEnvVariables,
+                  ("servingStatus" .=) <$> _vServingStatus,
+                  ("libraries" .=) <$> _vLibraries,
+                  ("deployment" .=) <$> _vDeployment])
+
 -- | Beta settings supplied to the application via metadata.
 --
 -- /See:/ 'versionBetaSettings' smart constructor.
@@ -1946,6 +2540,14 @@ data VersionBetaSettings =
 versionBetaSettings
     :: VersionBetaSettings
 versionBetaSettings = VersionBetaSettings
+
+instance FromJSON VersionBetaSettings where
+        parseJSON
+          = withObject "VersionBetaSettings"
+              (\ o -> pure VersionBetaSettings)
+
+instance ToJSON VersionBetaSettings where
+        toJSON = const (Object mempty)
 
 -- | Environment variables made available to the application. Only returned
 -- in \`GET\` requests if \`view=FULL\` is set. May only be set on create
@@ -1961,3 +2563,11 @@ data VersionEnvVariables =
 versionEnvVariables
     :: VersionEnvVariables
 versionEnvVariables = VersionEnvVariables
+
+instance FromJSON VersionEnvVariables where
+        parseJSON
+          = withObject "VersionEnvVariables"
+              (\ o -> pure VersionEnvVariables)
+
+instance ToJSON VersionEnvVariables where
+        toJSON = const (Object mempty)

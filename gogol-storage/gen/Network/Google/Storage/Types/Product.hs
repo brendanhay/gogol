@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -197,6 +198,50 @@ bucAcl
   = lens _bucAcl (\ s a -> s{_bucAcl = a}) . _Default .
       _Coerce
 
+instance FromJSON Bucket where
+        parseJSON
+          = withObject "Bucket"
+              (\ o ->
+                 Bucket <$>
+                   (o .:? "etag") <*> (o .:? "location") <*>
+                     (o .:? "kind" .!= "storage#bucket")
+                     <*> (o .:? "website")
+                     <*> (o .:? "lifecycle")
+                     <*> (o .:? "owner")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "storageClass")
+                     <*> (o .:? "versioning")
+                     <*> (o .:? "cors" .!= mempty)
+                     <*> (o .:? "timeCreated")
+                     <*> (o .:? "id")
+                     <*> (o .:? "defaultObjectAcl" .!= mempty)
+                     <*> (o .:? "metageneration")
+                     <*> (o .:? "logging")
+                     <*> (o .:? "acl" .!= mempty))
+
+instance ToJSON Bucket where
+        toJSON Bucket{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _bucEtag,
+                  ("location" .=) <$> _bucLocation,
+                  Just ("kind" .= _bucKind),
+                  ("website" .=) <$> _bucWebsite,
+                  ("lifecycle" .=) <$> _bucLifecycle,
+                  ("owner" .=) <$> _bucOwner,
+                  ("selfLink" .=) <$> _bucSelfLink,
+                  ("name" .=) <$> _bucName,
+                  ("storageClass" .=) <$> _bucStorageClass,
+                  ("versioning" .=) <$> _bucVersioning,
+                  ("cors" .=) <$> _bucCors,
+                  ("timeCreated" .=) <$> _bucTimeCreated,
+                  ("id" .=) <$> _bucId,
+                  ("defaultObjectAcl" .=) <$> _bucDefaultObjectAcl,
+                  ("metageneration" .=) <$> _bucMetageneration,
+                  ("logging" .=) <$> _bucLogging,
+                  ("acl" .=) <$> _bucAcl])
+
 -- | An access-control entry.
 --
 -- /See:/ 'bucketAccessControl' smart constructor.
@@ -304,6 +349,34 @@ bacEntityId :: Lens' BucketAccessControl (Maybe Text)
 bacEntityId
   = lens _bacEntityId (\ s a -> s{_bacEntityId = a})
 
+instance FromJSON BucketAccessControl where
+        parseJSON
+          = withObject "BucketAccessControl"
+              (\ o ->
+                 BucketAccessControl <$>
+                   (o .:? "email") <*> (o .:? "etag") <*>
+                     (o .:? "kind" .!= "storage#bucketAccessControl")
+                     <*> (o .:? "domain")
+                     <*> (o .:? "bucket")
+                     <*> (o .:? "role")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id")
+                     <*> (o .:? "entity")
+                     <*> (o .:? "entityId"))
+
+instance ToJSON BucketAccessControl where
+        toJSON BucketAccessControl{..}
+          = object
+              (catMaybes
+                 [("email" .=) <$> _bacEmail,
+                  ("etag" .=) <$> _bacEtag, Just ("kind" .= _bacKind),
+                  ("domain" .=) <$> _bacDomain,
+                  ("bucket" .=) <$> _bacBucket,
+                  ("role" .=) <$> _bacRole,
+                  ("selfLink" .=) <$> _bacSelfLink,
+                  ("id" .=) <$> _bacId, ("entity" .=) <$> _bacEntity,
+                  ("entityId" .=) <$> _bacEntityId])
+
 -- | An access-control list.
 --
 -- /See:/ 'bucketAccessControls' smart constructor.
@@ -338,6 +411,20 @@ bItems
   = lens _bItems (\ s a -> s{_bItems = a}) . _Default .
       _Coerce
 
+instance FromJSON BucketAccessControls where
+        parseJSON
+          = withObject "BucketAccessControls"
+              (\ o ->
+                 BucketAccessControls <$>
+                   (o .:? "kind" .!= "storage#bucketAccessControls") <*>
+                     (o .:? "items" .!= mempty))
+
+instance ToJSON BucketAccessControls where
+        toJSON BucketAccessControls{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _bKind), ("items" .=) <$> _bItems])
+
 -- | The action to take.
 --
 -- /See:/ 'bucketActionItemRuleLifecycle' smart constructor.
@@ -361,6 +448,16 @@ bucketActionItemRuleLifecycle =
 bairlType :: Lens' BucketActionItemRuleLifecycle (Maybe Text)
 bairlType
   = lens _bairlType (\ s a -> s{_bairlType = a})
+
+instance FromJSON BucketActionItemRuleLifecycle where
+        parseJSON
+          = withObject "BucketActionItemRuleLifecycle"
+              (\ o ->
+                 BucketActionItemRuleLifecycle <$> (o .:? "type"))
+
+instance ToJSON BucketActionItemRuleLifecycle where
+        toJSON BucketActionItemRuleLifecycle{..}
+          = object (catMaybes [("type" .=) <$> _bairlType])
 
 -- | The condition(s) under which the action will be taken.
 --
@@ -420,6 +517,26 @@ bcirlCreatedBefore :: Lens' BucketConditionItemRuleLifecycle (Maybe UTCTime)
 bcirlCreatedBefore
   = lens _bcirlCreatedBefore
       (\ s a -> s{_bcirlCreatedBefore = a})
+
+instance FromJSON BucketConditionItemRuleLifecycle
+         where
+        parseJSON
+          = withObject "BucketConditionItemRuleLifecycle"
+              (\ o ->
+                 BucketConditionItemRuleLifecycle <$>
+                   (o .:? "age") <*> (o .:? "isLive") <*>
+                     (o .:? "numNewerVersions")
+                     <*> (o .:? "createdBefore"))
+
+instance ToJSON BucketConditionItemRuleLifecycle
+         where
+        toJSON BucketConditionItemRuleLifecycle{..}
+          = object
+              (catMaybes
+                 [("age" .=) <$> _bcirlAge,
+                  ("isLive" .=) <$> _bcirlIsLive,
+                  ("numNewerVersions" .=) <$> _bcirlNumNewerVersions,
+                  ("createdBefore" .=) <$> _bcirlCreatedBefore])
 
 --
 -- /See:/ 'bucketItemCors' smart constructor.
@@ -484,6 +601,25 @@ bicMethod
       _Default
       . _Coerce
 
+instance FromJSON BucketItemCors where
+        parseJSON
+          = withObject "BucketItemCors"
+              (\ o ->
+                 BucketItemCors <$>
+                   (o .:? "maxAgeSeconds") <*>
+                     (o .:? "origin" .!= mempty)
+                     <*> (o .:? "responseHeader" .!= mempty)
+                     <*> (o .:? "method" .!= mempty))
+
+instance ToJSON BucketItemCors where
+        toJSON BucketItemCors{..}
+          = object
+              (catMaybes
+                 [("maxAgeSeconds" .=) <$> _bicMaxAgeSeconds,
+                  ("origin" .=) <$> _bicOrigin,
+                  ("responseHeader" .=) <$> _bicResponseHeader,
+                  ("method" .=) <$> _bicMethod])
+
 --
 -- /See:/ 'bucketItemRuleLifecycle' smart constructor.
 data BucketItemRuleLifecycle = BucketItemRuleLifecycle
@@ -517,6 +653,20 @@ birlCondition
   = lens _birlCondition
       (\ s a -> s{_birlCondition = a})
 
+instance FromJSON BucketItemRuleLifecycle where
+        parseJSON
+          = withObject "BucketItemRuleLifecycle"
+              (\ o ->
+                 BucketItemRuleLifecycle <$>
+                   (o .:? "action") <*> (o .:? "condition"))
+
+instance ToJSON BucketItemRuleLifecycle where
+        toJSON BucketItemRuleLifecycle{..}
+          = object
+              (catMaybes
+                 [("action" .=) <$> _birlAction,
+                  ("condition" .=) <$> _birlCondition])
+
 -- | The bucket\'s lifecycle configuration. See object lifecycle management
 -- for more information.
 --
@@ -543,6 +693,16 @@ blRule :: Lens' BucketLifecycle [BucketItemRuleLifecycle]
 blRule
   = lens _blRule (\ s a -> s{_blRule = a}) . _Default .
       _Coerce
+
+instance FromJSON BucketLifecycle where
+        parseJSON
+          = withObject "BucketLifecycle"
+              (\ o ->
+                 BucketLifecycle <$> (o .:? "rule" .!= mempty))
+
+instance ToJSON BucketLifecycle where
+        toJSON BucketLifecycle{..}
+          = object (catMaybes [("rule" .=) <$> _blRule])
 
 -- | The bucket\'s logging configuration, which defines the destination
 -- bucket and optional name prefix for the current bucket\'s logs.
@@ -580,6 +740,20 @@ blLogObjectPrefix
   = lens _blLogObjectPrefix
       (\ s a -> s{_blLogObjectPrefix = a})
 
+instance FromJSON BucketLogging where
+        parseJSON
+          = withObject "BucketLogging"
+              (\ o ->
+                 BucketLogging <$>
+                   (o .:? "logBucket") <*> (o .:? "logObjectPrefix"))
+
+instance ToJSON BucketLogging where
+        toJSON BucketLogging{..}
+          = object
+              (catMaybes
+                 [("logBucket" .=) <$> _blLogBucket,
+                  ("logObjectPrefix" .=) <$> _blLogObjectPrefix])
+
 -- | The owner of the bucket. This is always the project team\'s owner group.
 --
 -- /See:/ 'bucketOwner' smart constructor.
@@ -612,6 +786,20 @@ boEntityId :: Lens' BucketOwner (Maybe Text)
 boEntityId
   = lens _boEntityId (\ s a -> s{_boEntityId = a})
 
+instance FromJSON BucketOwner where
+        parseJSON
+          = withObject "BucketOwner"
+              (\ o ->
+                 BucketOwner <$>
+                   (o .:? "entity") <*> (o .:? "entityId"))
+
+instance ToJSON BucketOwner where
+        toJSON BucketOwner{..}
+          = object
+              (catMaybes
+                 [("entity" .=) <$> _boEntity,
+                  ("entityId" .=) <$> _boEntityId])
+
 -- | The bucket\'s versioning configuration.
 --
 -- /See:/ 'bucketVersioning' smart constructor.
@@ -635,6 +823,15 @@ bucketVersioning =
 bvEnabled :: Lens' BucketVersioning (Maybe Bool)
 bvEnabled
   = lens _bvEnabled (\ s a -> s{_bvEnabled = a})
+
+instance FromJSON BucketVersioning where
+        parseJSON
+          = withObject "BucketVersioning"
+              (\ o -> BucketVersioning <$> (o .:? "enabled"))
+
+instance ToJSON BucketVersioning where
+        toJSON BucketVersioning{..}
+          = object (catMaybes [("enabled" .=) <$> _bvEnabled])
 
 -- | The bucket\'s website configuration.
 --
@@ -671,6 +868,20 @@ bwNotFoundPage :: Lens' BucketWebsite (Maybe Text)
 bwNotFoundPage
   = lens _bwNotFoundPage
       (\ s a -> s{_bwNotFoundPage = a})
+
+instance FromJSON BucketWebsite where
+        parseJSON
+          = withObject "BucketWebsite"
+              (\ o ->
+                 BucketWebsite <$>
+                   (o .:? "mainPageSuffix") <*> (o .:? "notFoundPage"))
+
+instance ToJSON BucketWebsite where
+        toJSON BucketWebsite{..}
+          = object
+              (catMaybes
+                 [("mainPageSuffix" .=) <$> _bwMainPageSuffix,
+                  ("notFoundPage" .=) <$> _bwNotFoundPage])
 
 -- | A list of buckets.
 --
@@ -716,6 +927,22 @@ bbItems :: Lens' Buckets [Maybe Bucket]
 bbItems
   = lens _bbItems (\ s a -> s{_bbItems = a}) . _Default
       . _Coerce
+
+instance FromJSON Buckets where
+        parseJSON
+          = withObject "Buckets"
+              (\ o ->
+                 Buckets <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "storage#buckets")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON Buckets where
+        toJSON Buckets{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _bbNextPageToken,
+                  Just ("kind" .= _bbKind), ("items" .=) <$> _bbItems])
 
 -- | An notification channel used to watch for resource changes.
 --
@@ -819,6 +1046,35 @@ cId = lens _cId (\ s a -> s{_cId = a})
 cType :: Lens' Channel (Maybe Text)
 cType = lens _cType (\ s a -> s{_cType = a})
 
+instance FromJSON Channel where
+        parseJSON
+          = withObject "Channel"
+              (\ o ->
+                 Channel <$>
+                   (o .:? "resourceUri") <*> (o .:? "resourceId") <*>
+                     (o .:? "kind" .!= "api#channel")
+                     <*> (o .:? "expiration")
+                     <*> (o .:? "token")
+                     <*> (o .:? "address")
+                     <*> (o .:? "payload")
+                     <*> (o .:? "params")
+                     <*> (o .:? "id")
+                     <*> (o .:? "type"))
+
+instance ToJSON Channel where
+        toJSON Channel{..}
+          = object
+              (catMaybes
+                 [("resourceUri" .=) <$> _cResourceUri,
+                  ("resourceId" .=) <$> _cResourceId,
+                  Just ("kind" .= _cKind),
+                  ("expiration" .=) <$> _cExpiration,
+                  ("token" .=) <$> _cToken,
+                  ("address" .=) <$> _cAddress,
+                  ("payload" .=) <$> _cPayload,
+                  ("params" .=) <$> _cParams, ("id" .=) <$> _cId,
+                  ("type" .=) <$> _cType])
+
 -- | Additional parameters controlling delivery channel behavior. Optional.
 --
 -- /See:/ 'channelParams' smart constructor.
@@ -831,6 +1087,14 @@ data ChannelParams =
 channelParams
     :: ChannelParams
 channelParams = ChannelParams
+
+instance FromJSON ChannelParams where
+        parseJSON
+          = withObject "ChannelParams"
+              (\ o -> pure ChannelParams)
+
+instance ToJSON ChannelParams where
+        toJSON = const (Object mempty)
 
 -- | A Compose request.
 --
@@ -878,6 +1142,23 @@ crSourceObjects
       . _Default
       . _Coerce
 
+instance FromJSON ComposeRequest where
+        parseJSON
+          = withObject "ComposeRequest"
+              (\ o ->
+                 ComposeRequest <$>
+                   (o .:? "destination") <*>
+                     (o .:? "kind" .!= "storage#composeRequest")
+                     <*> (o .:? "sourceObjects" .!= mempty))
+
+instance ToJSON ComposeRequest where
+        toJSON ComposeRequest{..}
+          = object
+              (catMaybes
+                 [("destination" .=) <$> _crDestination,
+                  Just ("kind" .= _crKind),
+                  ("sourceObjects" .=) <$> _crSourceObjects])
+
 --
 -- /See:/ 'composeRequestItemSourceObjects' smart constructor.
 data ComposeRequestItemSourceObjects = ComposeRequestItemSourceObjects
@@ -922,6 +1203,24 @@ crisoGeneration
   = lens _crisoGeneration
       (\ s a -> s{_crisoGeneration = a})
 
+instance FromJSON ComposeRequestItemSourceObjects
+         where
+        parseJSON
+          = withObject "ComposeRequestItemSourceObjects"
+              (\ o ->
+                 ComposeRequestItemSourceObjects <$>
+                   (o .:? "name") <*> (o .:? "objectPreconditions") <*>
+                     (o .:? "generation"))
+
+instance ToJSON ComposeRequestItemSourceObjects where
+        toJSON ComposeRequestItemSourceObjects{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _crisoName,
+                  ("objectPreconditions" .=) <$>
+                    _crisoObjectPreconditions,
+                  ("generation" .=) <$> _crisoGeneration])
+
 -- | Conditions that must be met for this operation to execute.
 --
 -- /See:/ 'composeRequestObjectPreconditionsItemSourceObjects' smart constructor.
@@ -948,6 +1247,26 @@ cropisoIfGenerationMatch :: Lens' ComposeRequestObjectPreconditionsItemSourceObj
 cropisoIfGenerationMatch
   = lens _cropisoIfGenerationMatch
       (\ s a -> s{_cropisoIfGenerationMatch = a})
+
+instance FromJSON
+         ComposeRequestObjectPreconditionsItemSourceObjects
+         where
+        parseJSON
+          = withObject
+              "ComposeRequestObjectPreconditionsItemSourceObjects"
+              (\ o ->
+                 ComposeRequestObjectPreconditionsItemSourceObjects
+                   <$> (o .:? "ifGenerationMatch"))
+
+instance ToJSON
+         ComposeRequestObjectPreconditionsItemSourceObjects
+         where
+        toJSON
+          ComposeRequestObjectPreconditionsItemSourceObjects{..}
+          = object
+              (catMaybes
+                 [("ifGenerationMatch" .=) <$>
+                    _cropisoIfGenerationMatch])
 
 -- | An object.
 --
@@ -1183,6 +1502,61 @@ oContentType :: Lens' Object (Maybe Text)
 oContentType
   = lens _oContentType (\ s a -> s{_oContentType = a})
 
+instance FromJSON Object where
+        parseJSON
+          = withObject "Object"
+              (\ o ->
+                 Object <$>
+                   (o .:? "etag") <*> (o .:? "size") <*>
+                     (o .:? "kind" .!= "storage#object")
+                     <*> (o .:? "timeDeleted")
+                     <*> (o .:? "crc32c")
+                     <*> (o .:? "bucket")
+                     <*> (o .:? "owner")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "mediaLink")
+                     <*> (o .:? "componentCount")
+                     <*> (o .:? "name")
+                     <*> (o .:? "storageClass")
+                     <*> (o .:? "contentEncoding")
+                     <*> (o .:? "metadata")
+                     <*> (o .:? "id")
+                     <*> (o .:? "updated")
+                     <*> (o .:? "contentLanguage")
+                     <*> (o .:? "cacheControl")
+                     <*> (o .:? "metageneration")
+                     <*> (o .:? "generation")
+                     <*> (o .:? "acl" .!= mempty)
+                     <*> (o .:? "contentDisposition")
+                     <*> (o .:? "md5Hash")
+                     <*> (o .:? "contentType"))
+
+instance ToJSON Object where
+        toJSON Object{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _oEtag, ("size" .=) <$> _oSize,
+                  Just ("kind" .= _oKind),
+                  ("timeDeleted" .=) <$> _oTimeDeleted,
+                  ("crc32c" .=) <$> _oCrc32c,
+                  ("bucket" .=) <$> _oBucket, ("owner" .=) <$> _oOwner,
+                  ("selfLink" .=) <$> _oSelfLink,
+                  ("mediaLink" .=) <$> _oMediaLink,
+                  ("componentCount" .=) <$> _oComponentCount,
+                  ("name" .=) <$> _oName,
+                  ("storageClass" .=) <$> _oStorageClass,
+                  ("contentEncoding" .=) <$> _oContentEncoding,
+                  ("metadata" .=) <$> _oMetadata, ("id" .=) <$> _oId,
+                  ("updated" .=) <$> _oUpdated,
+                  ("contentLanguage" .=) <$> _oContentLanguage,
+                  ("cacheControl" .=) <$> _oCacheControl,
+                  ("metageneration" .=) <$> _oMetageneration,
+                  ("generation" .=) <$> _oGeneration,
+                  ("acl" .=) <$> _oAcl,
+                  ("contentDisposition" .=) <$> _oContentDisposition,
+                  ("md5Hash" .=) <$> _oMd5Hash,
+                  ("contentType" .=) <$> _oContentType])
+
 -- | An access-control entry.
 --
 -- /See:/ 'objectAccessControl' smart constructor.
@@ -1310,6 +1684,39 @@ oacaEntityId :: Lens' ObjectAccessControl (Maybe Text)
 oacaEntityId
   = lens _oacaEntityId (\ s a -> s{_oacaEntityId = a})
 
+instance FromJSON ObjectAccessControl where
+        parseJSON
+          = withObject "ObjectAccessControl"
+              (\ o ->
+                 ObjectAccessControl <$>
+                   (o .:? "email") <*> (o .:? "etag") <*>
+                     (o .:? "kind" .!= "storage#objectAccessControl")
+                     <*> (o .:? "domain")
+                     <*> (o .:? "bucket")
+                     <*> (o .:? "role")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "object")
+                     <*> (o .:? "id")
+                     <*> (o .:? "entity")
+                     <*> (o .:? "generation")
+                     <*> (o .:? "entityId"))
+
+instance ToJSON ObjectAccessControl where
+        toJSON ObjectAccessControl{..}
+          = object
+              (catMaybes
+                 [("email" .=) <$> _oacaEmail,
+                  ("etag" .=) <$> _oacaEtag,
+                  Just ("kind" .= _oacaKind),
+                  ("domain" .=) <$> _oacaDomain,
+                  ("bucket" .=) <$> _oacaBucket,
+                  ("role" .=) <$> _oacaRole,
+                  ("selfLink" .=) <$> _oacaSelfLink,
+                  ("object" .=) <$> _oacaObject, ("id" .=) <$> _oacaId,
+                  ("entity" .=) <$> _oacaEntity,
+                  ("generation" .=) <$> _oacaGeneration,
+                  ("entityId" .=) <$> _oacaEntityId])
+
 -- | An access-control list.
 --
 -- /See:/ 'objectAccessControls' smart constructor.
@@ -1345,6 +1752,21 @@ oacItems
       _Default
       . _Coerce
 
+instance FromJSON ObjectAccessControls where
+        parseJSON
+          = withObject "ObjectAccessControls"
+              (\ o ->
+                 ObjectAccessControls <$>
+                   (o .:? "kind" .!= "storage#objectAccessControls") <*>
+                     (o .:? "items" .!= mempty))
+
+instance ToJSON ObjectAccessControls where
+        toJSON ObjectAccessControls{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _oacKind),
+                  ("items" .=) <$> _oacItems])
+
 -- | User-provided metadata, in key\/value pairs.
 --
 -- /See:/ 'objectMetadata' smart constructor.
@@ -1357,6 +1779,14 @@ data ObjectMetadata =
 objectMetadata
     :: ObjectMetadata
 objectMetadata = ObjectMetadata
+
+instance FromJSON ObjectMetadata where
+        parseJSON
+          = withObject "ObjectMetadata"
+              (\ o -> pure ObjectMetadata)
+
+instance ToJSON ObjectMetadata where
+        toJSON = const (Object mempty)
 
 -- | The owner of the object. This will always be the uploader of the object.
 --
@@ -1389,6 +1819,20 @@ ooEntity = lens _ooEntity (\ s a -> s{_ooEntity = a})
 ooEntityId :: Lens' ObjectOwner (Maybe Text)
 ooEntityId
   = lens _ooEntityId (\ s a -> s{_ooEntityId = a})
+
+instance FromJSON ObjectOwner where
+        parseJSON
+          = withObject "ObjectOwner"
+              (\ o ->
+                 ObjectOwner <$>
+                   (o .:? "entity") <*> (o .:? "entityId"))
+
+instance ToJSON ObjectOwner where
+        toJSON ObjectOwner{..}
+          = object
+              (catMaybes
+                 [("entity" .=) <$> _ooEntity,
+                  ("entityId" .=) <$> _ooEntityId])
 
 -- | A list of objects.
 --
@@ -1447,3 +1891,22 @@ objPrefixes
   = lens _objPrefixes (\ s a -> s{_objPrefixes = a}) .
       _Default
       . _Coerce
+
+instance FromJSON Objects where
+        parseJSON
+          = withObject "Objects"
+              (\ o ->
+                 Objects <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "storage#objects")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "prefixes" .!= mempty))
+
+instance ToJSON Objects where
+        toJSON Objects{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _objNextPageToken,
+                  Just ("kind" .= _objKind),
+                  ("items" .=) <$> _objItems,
+                  ("prefixes" .=) <$> _objPrefixes])

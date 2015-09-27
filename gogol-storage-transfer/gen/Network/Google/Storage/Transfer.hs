@@ -250,73 +250,85 @@ type TransferJobsAPI =
 
 -- | Lists transfer jobs.
 type TransferJobsList =
-     "v1" :> "transferJobs" :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "filter" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "pageSize" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1" :>
+       "transferJobs" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "filter" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "pageSize" Int32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" Text :>
+                                         Get '[JSON] ListTransferJobsResponse
 
 -- | Updates a transfer job. Updating a job\'s transfer spec does not affect
 -- transfer operations that are running already. Updating the scheduling of
 -- a job is not allowed.
 type TransferJobsPatch =
-     "v1" :> "{+jobName}" :> QueryParam "$.xgafv" Text :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1" :>
+       "{+jobName}" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :>
+                                   Patch '[JSON] TransferJob
 
 -- | Gets a transfer job.
 type TransferJobsGet =
-     "v1" :> "{+jobName}" :> QueryParam "$.xgafv" Text :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "projectId" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1" :>
+       "{+jobName}" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "projectId" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON] TransferJob
 
 -- | Creates a transfer job that runs periodically.
 type TransferJobsCreate =
-     "v1" :> "transferJobs" :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1" :>
+       "transferJobs" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :>
+                                   Post '[JSON] TransferJob
 
 type V1API = V1GetGoogleServiceAccount
 
@@ -329,20 +341,21 @@ type V1API = V1GetGoogleServiceAccount
 -- Service and can only be used by Storage Transfer Service.
 type V1GetGoogleServiceAccount =
      "v1:getGoogleServiceAccount" :>
-       QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "projectId" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+       QueryParam "$.xgafv" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "pp" Bool :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "projectId" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :>
+                                   Get '[JSON] GoogleServiceAccount
 
 type TransferOperationsAPI =
      TransferOperationsList :<|> TransferOperationsGet
@@ -357,105 +370,118 @@ type TransferOperationsAPI =
 -- to use different resource name schemes, such as
 -- \`users\/*\/operations\`.
 type TransferOperationsList =
-     "v1" :> "{+name}" :> QueryParam "$.xgafv" Text :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "filter" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "pageSize" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1" :>
+       "{+name}" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "filter" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "pageSize" Int32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" Text :>
+                                         Get '[JSON] ListOperationsResponse
 
 -- | Gets the latest state of a long-running operation. Clients can use this
 -- method to poll the operation result at intervals as recommended by the
 -- API service.
 type TransferOperationsGet =
-     "v1" :> "{+name}" :> QueryParam "$.xgafv" Text :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1" :>
+       "{+name}" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :> Get '[JSON] Operation
 
 -- | Pauses a transfer operation.
 type TransferOperationsPause =
-     "v1" :> "{+name}:pause" :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1" :>
+       "{+name}:pause" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :> Post '[JSON] Empty
 
 -- | Cancels a transfer. Use the get method to check whether the cancellation
 -- succeeded or whether the operation completed despite cancellation.
 type TransferOperationsCancel =
-     "v1" :> "{+name}:cancel" :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1" :>
+       "{+name}:cancel" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :> Post '[JSON] Empty
 
 -- | This method is not supported and the server returns \`UNIMPLEMENTED\`.
 type TransferOperationsDelete =
-     "v1" :> "{+name}" :> QueryParam "$.xgafv" Text :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1" :>
+       "{+name}" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :> Delete '[JSON] Empty
 
 -- | Resumes a transfer operation that is paused.
 type TransferOperationsResume =
-     "v1" :> "{+name}:resume" :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1" :>
+       "{+name}:resume" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :> Post '[JSON] Empty
 
 type GoogleServiceAccountsAPI =
      GoogleServiceAccountsGet
@@ -468,18 +494,20 @@ type GoogleServiceAccountsAPI =
 -- Service. This service account is created and owned by Storage Transfer
 -- Service and can only be used by Storage Transfer Service.
 type GoogleServiceAccountsGet =
-     "v1" :> "googleServiceAccounts" :>
-       Capture "projectId" Text
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1" :>
+       "googleServiceAccounts" :>
+         Capture "projectId" Text :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON] GoogleServiceAccount

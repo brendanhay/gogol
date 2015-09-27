@@ -227,118 +227,134 @@ type TrainedmodelsAPI =
 
 -- | Train a Prediction API model.
 type TrainedmodelsInsert =
-     "prediction" :> "v1.6" :> "projects" :>
-       Capture "project" Text
-       :> "trainedmodels"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "prediction" :>
+       "v1.6" :>
+         "projects" :>
+           Capture "project" Text :>
+             "trainedmodels" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] Insert2
 
 -- | List available models.
 type TrainedmodelsList =
-     "prediction" :> "v1.6" :> "projects" :>
-       Capture "project" Text
-       :> "trainedmodels"
-       :> "list"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Word32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "prediction" :>
+       "v1.6" :>
+         "projects" :>
+           Capture "project" Text :>
+             "trainedmodels" :>
+               "list" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "maxResults" Word32 :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :> Get '[JSON] List
 
 -- | Check training status of your model.
 type TrainedmodelsGet =
-     "prediction" :> "v1.6" :> "projects" :>
-       Capture "project" Text
-       :> "trainedmodels"
-       :> Capture "id" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "prediction" :>
+       "v1.6" :>
+         "projects" :>
+           Capture "project" Text :>
+             "trainedmodels" :>
+               Capture "id" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] Insert2
 
 -- | Get analysis of the model and the data the model was trained on.
 type TrainedmodelsAnalyze =
-     "prediction" :> "v1.6" :> "projects" :>
-       Capture "project" Text
-       :> "trainedmodels"
-       :> Capture "id" Text
-       :> "analyze"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "prediction" :>
+       "v1.6" :>
+         "projects" :>
+           Capture "project" Text :>
+             "trainedmodels" :>
+               Capture "id" Text :>
+                 "analyze" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Get '[JSON] Analyze
 
 -- | Submit model id and request a prediction.
 type TrainedmodelsPredict =
-     "prediction" :> "v1.6" :> "projects" :>
-       Capture "project" Text
-       :> "trainedmodels"
-       :> Capture "id" Text
-       :> "predict"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "prediction" :>
+       "v1.6" :>
+         "projects" :>
+           Capture "project" Text :>
+             "trainedmodels" :>
+               Capture "id" Text :>
+                 "predict" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Post '[JSON] Output
 
 -- | Delete a trained model.
 type TrainedmodelsDelete =
-     "prediction" :> "v1.6" :> "projects" :>
-       Capture "project" Text
-       :> "trainedmodels"
-       :> Capture "id" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "prediction" :>
+       "v1.6" :>
+         "projects" :>
+           Capture "project" Text :>
+             "trainedmodels" :>
+               Capture "id" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Add new data to a trained model.
 type TrainedmodelsUpdate =
-     "prediction" :> "v1.6" :> "projects" :>
-       Capture "project" Text
-       :> "trainedmodels"
-       :> Capture "id" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "prediction" :>
+       "v1.6" :>
+         "projects" :>
+           Capture "project" Text :>
+             "trainedmodels" :>
+               Capture "id" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Put '[JSON] Insert2
 
 type HostedmodelsAPI = HostedmodelsPredict
 
 -- | Submit input and request an output against a hosted model.
 type HostedmodelsPredict =
-     "prediction" :> "v1.6" :> "projects" :>
-       Capture "project" Text
-       :> "hostedmodels"
-       :> Capture "hostedModelName" Text
-       :> "predict"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "prediction" :>
+       "v1.6" :>
+         "projects" :>
+           Capture "project" Text :>
+             "hostedmodels" :>
+               Capture "hostedModelName" Text :>
+                 "predict" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Post '[JSON] Output

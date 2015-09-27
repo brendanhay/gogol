@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -66,6 +67,22 @@ iuInstance :: Lens' InstanceUpdate (Maybe Text)
 iuInstance
   = lens _iuInstance (\ s a -> s{_iuInstance = a})
 
+instance FromJSON InstanceUpdate where
+        parseJSON
+          = withObject "InstanceUpdate"
+              (\ o ->
+                 InstanceUpdate <$>
+                   (o .:? "status") <*> (o .:? "error") <*>
+                     (o .:? "instance"))
+
+instance ToJSON InstanceUpdate where
+        toJSON InstanceUpdate{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _iuStatus,
+                  ("error" .=) <$> _iuError,
+                  ("instance" .=) <$> _iuInstance])
+
 -- | Errors that occurred during the instance update.
 --
 -- /See:/ 'instanceUpdateError' smart constructor.
@@ -92,6 +109,16 @@ iueErrors
   = lens _iueErrors (\ s a -> s{_iueErrors = a}) .
       _Default
       . _Coerce
+
+instance FromJSON InstanceUpdateError where
+        parseJSON
+          = withObject "InstanceUpdateError"
+              (\ o ->
+                 InstanceUpdateError <$> (o .:? "errors" .!= mempty))
+
+instance ToJSON InstanceUpdateError where
+        toJSON InstanceUpdateError{..}
+          = object (catMaybes [("errors" .=) <$> _iueErrors])
 
 --
 -- /See:/ 'instanceUpdateItemErrorsError' smart constructor.
@@ -135,6 +162,22 @@ iuieeCode
 iuieeMessage :: Lens' InstanceUpdateItemErrorsError (Maybe Text)
 iuieeMessage
   = lens _iuieeMessage (\ s a -> s{_iuieeMessage = a})
+
+instance FromJSON InstanceUpdateItemErrorsError where
+        parseJSON
+          = withObject "InstanceUpdateItemErrorsError"
+              (\ o ->
+                 InstanceUpdateItemErrorsError <$>
+                   (o .:? "location") <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON InstanceUpdateItemErrorsError where
+        toJSON InstanceUpdateItemErrorsError{..}
+          = object
+              (catMaybes
+                 [("location" .=) <$> _iuieeLocation,
+                  ("code" .=) <$> _iuieeCode,
+                  ("message" .=) <$> _iuieeMessage])
 
 -- | Response returned by ListInstanceUpdates method.
 --
@@ -188,6 +231,26 @@ iulItems
 iulSelfLink :: Lens' InstanceUpdateList (Maybe Text)
 iulSelfLink
   = lens _iulSelfLink (\ s a -> s{_iulSelfLink = a})
+
+instance FromJSON InstanceUpdateList where
+        parseJSON
+          = withObject "InstanceUpdateList"
+              (\ o ->
+                 InstanceUpdateList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!=
+                        "replicapoolupdater#instanceUpdateList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink"))
+
+instance ToJSON InstanceUpdateList where
+        toJSON InstanceUpdateList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _iulNextPageToken,
+                  Just ("kind" .= _iulKind),
+                  ("items" .=) <$> _iulItems,
+                  ("selfLink" .=) <$> _iulSelfLink])
 
 -- | An operation resource, used to manage asynchronous API requests.
 --
@@ -400,6 +463,58 @@ oClientOperationId
   = lens _oClientOperationId
       (\ s a -> s{_oClientOperationId = a})
 
+instance FromJSON Operation where
+        parseJSON
+          = withObject "Operation"
+              (\ o ->
+                 Operation <$>
+                   (o .:? "targetId") <*> (o .:? "status") <*>
+                     (o .:? "insertTime")
+                     <*> (o .:? "progress")
+                     <*> (o .:? "startTime")
+                     <*> (o .:? "kind" .!= "replicapoolupdater#operation")
+                     <*> (o .:? "error")
+                     <*> (o .:? "httpErrorMessage")
+                     <*> (o .:? "zone")
+                     <*> (o .:? "warnings" .!= mempty)
+                     <*> (o .:? "httpErrorStatusCode")
+                     <*> (o .:? "user")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "statusMessage")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "endTime")
+                     <*> (o .:? "id")
+                     <*> (o .:? "operationType")
+                     <*> (o .:? "region")
+                     <*> (o .:? "targetLink")
+                     <*> (o .:? "clientOperationId"))
+
+instance ToJSON Operation where
+        toJSON Operation{..}
+          = object
+              (catMaybes
+                 [("targetId" .=) <$> _oTargetId,
+                  ("status" .=) <$> _oStatus,
+                  ("insertTime" .=) <$> _oInsertTime,
+                  ("progress" .=) <$> _oProgress,
+                  ("startTime" .=) <$> _oStartTime,
+                  Just ("kind" .= _oKind), ("error" .=) <$> _oError,
+                  ("httpErrorMessage" .=) <$> _oHttpErrorMessage,
+                  ("zone" .=) <$> _oZone,
+                  ("warnings" .=) <$> _oWarnings,
+                  ("httpErrorStatusCode" .=) <$> _oHttpErrorStatusCode,
+                  ("user" .=) <$> _oUser,
+                  ("selfLink" .=) <$> _oSelfLink,
+                  ("name" .=) <$> _oName,
+                  ("statusMessage" .=) <$> _oStatusMessage,
+                  ("creationTimestamp" .=) <$> _oCreationTimestamp,
+                  ("endTime" .=) <$> _oEndTime, ("id" .=) <$> _oId,
+                  ("operationType" .=) <$> _oOperationType,
+                  ("region" .=) <$> _oRegion,
+                  ("targetLink" .=) <$> _oTargetLink,
+                  ("clientOperationId" .=) <$> _oClientOperationId])
+
 -- | [Output Only] If errors occurred during processing of this operation,
 -- this field will be populated.
 --
@@ -427,6 +542,16 @@ oeErrors
   = lens _oeErrors (\ s a -> s{_oeErrors = a}) .
       _Default
       . _Coerce
+
+instance FromJSON OperationError where
+        parseJSON
+          = withObject "OperationError"
+              (\ o ->
+                 OperationError <$> (o .:? "errors" .!= mempty))
+
+instance ToJSON OperationError where
+        toJSON OperationError{..}
+          = object (catMaybes [("errors" .=) <$> _oeErrors])
 
 --
 -- /See:/ 'operationItemDataItemWarnings' smart constructor.
@@ -458,6 +583,20 @@ oidiwValue
 -- | [Output Only] Metadata key for this warning.
 oidiwKey :: Lens' OperationItemDataItemWarnings (Maybe Text)
 oidiwKey = lens _oidiwKey (\ s a -> s{_oidiwKey = a})
+
+instance FromJSON OperationItemDataItemWarnings where
+        parseJSON
+          = withObject "OperationItemDataItemWarnings"
+              (\ o ->
+                 OperationItemDataItemWarnings <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON OperationItemDataItemWarnings where
+        toJSON OperationItemDataItemWarnings{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _oidiwValue,
+                  ("key" .=) <$> _oidiwKey])
 
 --
 -- /See:/ 'operationItemErrorsError' smart constructor.
@@ -500,6 +639,22 @@ oieeMessage :: Lens' OperationItemErrorsError (Maybe Text)
 oieeMessage
   = lens _oieeMessage (\ s a -> s{_oieeMessage = a})
 
+instance FromJSON OperationItemErrorsError where
+        parseJSON
+          = withObject "OperationItemErrorsError"
+              (\ o ->
+                 OperationItemErrorsError <$>
+                   (o .:? "location") <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON OperationItemErrorsError where
+        toJSON OperationItemErrorsError{..}
+          = object
+              (catMaybes
+                 [("location" .=) <$> _oieeLocation,
+                  ("code" .=) <$> _oieeCode,
+                  ("message" .=) <$> _oieeMessage])
+
 --
 -- /See:/ 'operationItemWarnings' smart constructor.
 data OperationItemWarnings = OperationItemWarnings
@@ -540,6 +695,21 @@ oiwCode = lens _oiwCode (\ s a -> s{_oiwCode = a})
 oiwMessage :: Lens' OperationItemWarnings (Maybe Text)
 oiwMessage
   = lens _oiwMessage (\ s a -> s{_oiwMessage = a})
+
+instance FromJSON OperationItemWarnings where
+        parseJSON
+          = withObject "OperationItemWarnings"
+              (\ o ->
+                 OperationItemWarnings <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON OperationItemWarnings where
+        toJSON OperationItemWarnings{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _oiwData, ("code" .=) <$> _oiwCode,
+                  ("message" .=) <$> _oiwMessage])
 
 -- | Contains a list of Operation resources.
 --
@@ -601,6 +771,26 @@ olSelfLink
 -- | [Output Only] Unique identifier for the resource; defined by the server.
 olId :: Lens' OperationList (Maybe Text)
 olId = lens _olId (\ s a -> s{_olId = a})
+
+instance FromJSON OperationList where
+        parseJSON
+          = withObject "OperationList"
+              (\ o ->
+                 OperationList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "replicapoolupdater#operationList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON OperationList where
+        toJSON OperationList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _olNextPageToken,
+                  Just ("kind" .= _olKind), ("items" .=) <$> _olItems,
+                  ("selfLink" .=) <$> _olSelfLink,
+                  ("id" .=) <$> _olId])
 
 -- | The following represents a resource describing a single update (rollout)
 -- of a group of instances to the given template.
@@ -784,6 +974,49 @@ ruInstanceGroup
   = lens _ruInstanceGroup
       (\ s a -> s{_ruInstanceGroup = a})
 
+instance FromJSON RollingUpdate where
+        parseJSON
+          = withObject "RollingUpdate"
+              (\ o ->
+                 RollingUpdate <$>
+                   (o .:? "status") <*> (o .:? "progress") <*>
+                     (o .:? "instanceGroupManager")
+                     <*>
+                     (o .:? "kind" .!= "replicapoolupdater#rollingUpdate")
+                     <*> (o .:? "error")
+                     <*> (o .:? "instanceTemplate")
+                     <*> (o .:? "user")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "statusMessage")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "id")
+                     <*> (o .:? "policy")
+                     <*> (o .:? "actionType")
+                     <*> (o .:? "oldInstanceTemplate")
+                     <*> (o .:? "description")
+                     <*> (o .:? "instanceGroup"))
+
+instance ToJSON RollingUpdate where
+        toJSON RollingUpdate{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _ruStatus,
+                  ("progress" .=) <$> _ruProgress,
+                  ("instanceGroupManager" .=) <$>
+                    _ruInstanceGroupManager,
+                  Just ("kind" .= _ruKind), ("error" .=) <$> _ruError,
+                  ("instanceTemplate" .=) <$> _ruInstanceTemplate,
+                  ("user" .=) <$> _ruUser,
+                  ("selfLink" .=) <$> _ruSelfLink,
+                  ("statusMessage" .=) <$> _ruStatusMessage,
+                  ("creationTimestamp" .=) <$> _ruCreationTimestamp,
+                  ("id" .=) <$> _ruId, ("policy" .=) <$> _ruPolicy,
+                  ("actionType" .=) <$> _ruActionType,
+                  ("oldInstanceTemplate" .=) <$>
+                    _ruOldInstanceTemplate,
+                  ("description" .=) <$> _ruDescription,
+                  ("instanceGroup" .=) <$> _ruInstanceGroup])
+
 -- | [Output Only] Errors that occurred during the rolling update.
 --
 -- /See:/ 'rollingUpdateError' smart constructor.
@@ -810,6 +1043,16 @@ rueErrors
   = lens _rueErrors (\ s a -> s{_rueErrors = a}) .
       _Default
       . _Coerce
+
+instance FromJSON RollingUpdateError where
+        parseJSON
+          = withObject "RollingUpdateError"
+              (\ o ->
+                 RollingUpdateError <$> (o .:? "errors" .!= mempty))
+
+instance ToJSON RollingUpdateError where
+        toJSON RollingUpdateError{..}
+          = object (catMaybes [("errors" .=) <$> _rueErrors])
 
 --
 -- /See:/ 'rollingUpdateItemErrorsError' smart constructor.
@@ -853,6 +1096,22 @@ ruieeCode
 ruieeMessage :: Lens' RollingUpdateItemErrorsError (Maybe Text)
 ruieeMessage
   = lens _ruieeMessage (\ s a -> s{_ruieeMessage = a})
+
+instance FromJSON RollingUpdateItemErrorsError where
+        parseJSON
+          = withObject "RollingUpdateItemErrorsError"
+              (\ o ->
+                 RollingUpdateItemErrorsError <$>
+                   (o .:? "location") <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON RollingUpdateItemErrorsError where
+        toJSON RollingUpdateItemErrorsError{..}
+          = object
+              (catMaybes
+                 [("location" .=) <$> _ruieeLocation,
+                  ("code" .=) <$> _ruieeCode,
+                  ("message" .=) <$> _ruieeMessage])
 
 -- | Response returned by List method.
 --
@@ -906,6 +1165,26 @@ rulItems
 rulSelfLink :: Lens' RollingUpdateList (Maybe Text)
 rulSelfLink
   = lens _rulSelfLink (\ s a -> s{_rulSelfLink = a})
+
+instance FromJSON RollingUpdateList where
+        parseJSON
+          = withObject "RollingUpdateList"
+              (\ o ->
+                 RollingUpdateList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!=
+                        "replicapoolupdater#rollingUpdateList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink"))
+
+instance ToJSON RollingUpdateList where
+        toJSON RollingUpdateList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _rulNextPageToken,
+                  Just ("kind" .= _rulKind),
+                  ("items" .=) <$> _rulItems,
+                  ("selfLink" .=) <$> _rulSelfLink])
 
 -- | Parameters of the update process.
 --
@@ -986,3 +1265,29 @@ rupMaxNumConcurrentInstances :: Lens' RollingUpdatePolicy (Maybe Int32)
 rupMaxNumConcurrentInstances
   = lens _rupMaxNumConcurrentInstances
       (\ s a -> s{_rupMaxNumConcurrentInstances = a})
+
+instance FromJSON RollingUpdatePolicy where
+        parseJSON
+          = withObject "RollingUpdatePolicy"
+              (\ o ->
+                 RollingUpdatePolicy <$>
+                   (o .:? "minInstanceUpdateTimeSec") <*>
+                     (o .:? "instanceStartupTimeoutSec")
+                     <*> (o .:? "maxNumFailedInstances")
+                     <*> (o .:? "autoPauseAfterInstances")
+                     <*> (o .:? "maxNumConcurrentInstances"))
+
+instance ToJSON RollingUpdatePolicy where
+        toJSON RollingUpdatePolicy{..}
+          = object
+              (catMaybes
+                 [("minInstanceUpdateTimeSec" .=) <$>
+                    _rupMinInstanceUpdateTimeSec,
+                  ("instanceStartupTimeoutSec" .=) <$>
+                    _rupInstanceStartupTimeoutSec,
+                  ("maxNumFailedInstances" .=) <$>
+                    _rupMaxNumFailedInstances,
+                  ("autoPauseAfterInstances" .=) <$>
+                    _rupAutoPauseAfterInstances,
+                  ("maxNumConcurrentInstances" .=) <$>
+                    _rupMaxNumConcurrentInstances])

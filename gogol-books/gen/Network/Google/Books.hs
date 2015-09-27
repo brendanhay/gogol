@@ -818,32 +818,37 @@ type OnboardingAPI =
 
 -- | List categories for onboarding experience.
 type OnboardingListCategories =
-     "books" :> "v1" :> "onboarding" :> "listCategories"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "locale" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "books" :>
+       "v1" :>
+         "onboarding" :>
+           "listCategories" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "locale" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Get '[JSON] Category
 
 -- | List available volumes under categories for onboarding experience.
 type OnboardingListCategoryVolumes =
-     "books" :> "v1" :> "onboarding" :>
-       "listCategoryVolumes"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "locale" Text
-       :> QueryParam "maxAllowedMaturityRating" Text
-       :> QueryParam "key" Text
-       :> QueryParam "categoryId" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "pageSize" Word32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "books" :>
+       "v1" :>
+         "onboarding" :>
+           "listCategoryVolumes" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "locale" Text :>
+                     QueryParam "maxAllowedMaturityRating" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "categoryId" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "pageSize" Word32 :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :> Get '[JSON] Volume2
 
 type MylibraryAPI =
      AnnotationsAPI :<|> ReadingpositionsAPI :<|>
@@ -857,114 +862,139 @@ type AnnotationsAPI =
 
 -- | Gets the summary of specified layers.
 type AnnotationsSummary =
-     "books" :> "v1" :> "mylibrary" :> "annotations" :>
-       "summary"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "layerIds" Text
-       :> QueryParam "volumeId" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "books" :>
+       "v1" :>
+         "mylibrary" :>
+           "annotations" :>
+             "summary" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "layerIds" Text :>
+                         QueryParam "volumeId" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :>
+                                 Post '[JSON] AnnotationsSummary
 
 -- | Inserts a new annotation.
 type AnnotationsInsert =
-     "books" :> "v1" :> "mylibrary" :> "annotations" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "country" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "showOnlySummaryInResponse" Bool
-       :> QueryParam "source" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "books" :>
+       "v1" :>
+         "mylibrary" :>
+           "annotations" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "country" Text :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "showOnlySummaryInResponse" Bool :>
+                         QueryParam "source" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Post '[JSON] Annotation
 
 -- | Retrieves a list of annotations, possibly filtered.
 type AnnotationsList =
-     "books" :> "v1" :> "mylibrary" :> "annotations" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "contentVersion" Text
-       :> QueryParam "showDeleted" Bool
-       :> QueryParam "updatedMax" Text
-       :> QueryParam "key" Text
-       :> QueryParam "updatedMin" Text
-       :> QueryParam "layerIds" Text
-       :> QueryParam "volumeId" Text
-       :> QueryParam "source" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "layerId" Text
-       :> QueryParam "maxResults" Word32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "books" :>
+       "v1" :>
+         "mylibrary" :>
+           "annotations" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "contentVersion" Text :>
+                     QueryParam "showDeleted" Bool :>
+                       QueryParam "updatedMax" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "updatedMin" Text :>
+                             QueryParam "layerIds" Text :>
+                               QueryParam "volumeId" Text :>
+                                 QueryParam "source" Text :>
+                                   QueryParam "pageToken" Text :>
+                                     QueryParam "oauth_token" Text :>
+                                       QueryParam "layerId" Text :>
+                                         QueryParam "maxResults" Word32 :>
+                                           QueryParam "fields" Text :>
+                                             QueryParam "alt" Text :>
+                                               Get '[JSON] Annotations
 
 -- | Deletes an annotation.
 type AnnotationsDelete =
-     "books" :> "v1" :> "mylibrary" :> "annotations" :>
-       Capture "annotationId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "source" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "books" :>
+       "v1" :>
+         "mylibrary" :>
+           "annotations" :>
+             Capture "annotationId" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "source" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Updates an existing annotation.
 type AnnotationsUpdate =
-     "books" :> "v1" :> "mylibrary" :> "annotations" :>
-       Capture "annotationId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "source" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "books" :>
+       "v1" :>
+         "mylibrary" :>
+           "annotations" :>
+             Capture "annotationId" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "source" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Put '[JSON] Annotation
 
 type ReadingpositionsAPI =
      ReadingpositionsGet :<|> ReadingpositionsSetPosition
 
 -- | Retrieves my reading position information for a volume.
 type ReadingpositionsGet =
-     "books" :> "v1" :> "mylibrary" :> "readingpositions"
-       :> Capture "volumeId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "contentVersion" Text
-       :> QueryParam "key" Text
-       :> QueryParam "source" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "books" :>
+       "v1" :>
+         "mylibrary" :>
+           "readingpositions" :>
+             Capture "volumeId" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "contentVersion" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "source" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :>
+                                 Get '[JSON] ReadingPosition
 
 -- | Sets my reading position information for a volume.
 type ReadingpositionsSetPosition =
-     "books" :> "v1" :> "mylibrary" :> "readingpositions"
-       :> Capture "volumeId" Text
-       :> "setPosition"
-       :> QueryParam "deviceCookie" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "contentVersion" Text
-       :> QueryParam "action" Text
-       :> QueryParam "key" Text
-       :> QueryParam "source" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "timestamp" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
-       :> QueryParam "position" Text
+     "books" :>
+       "v1" :>
+         "mylibrary" :>
+           "readingpositions" :>
+             Capture "volumeId" Text :>
+               "setPosition" :>
+                 QueryParam "deviceCookie" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "contentVersion" Text :>
+                           QueryParam "action" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "source" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "timestamp" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Text :>
+                                         QueryParam "position" Text :>
+                                           Post '[JSON] ()
 
 type BookshelvesAPI = VolumesAPI
 
@@ -972,23 +1002,27 @@ type VolumesAPI = VolumesList
 
 -- | Gets volume information for volumes on a bookshelf.
 type VolumesList =
-     "books" :> "v1" :> "mylibrary" :> "bookshelves" :>
-       Capture "shelf" Text
-       :> "volumes"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "country" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "q" Text
-       :> QueryParam "key" Text
-       :> QueryParam "source" Text
-       :> QueryParam "projection" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "startIndex" Word32
-       :> QueryParam "maxResults" Word32
-       :> QueryParam "showPreorders" Bool
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "books" :>
+       "v1" :>
+         "mylibrary" :>
+           "bookshelves" :>
+             Capture "shelf" Text :>
+               "volumes" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "country" Text :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "q" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "source" Text :>
+                               QueryParam "projection" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "startIndex" Word32 :>
+                                     QueryParam "maxResults" Word32 :>
+                                       QueryParam "showPreorders" Bool :>
+                                         QueryParam "fields" Text :>
+                                           QueryParam "alt" Text :>
+                                             Get '[JSON] Volumes
 
 type PromoofferAPI =
      PromoofferAccept :<|> PromoofferGet :<|>
@@ -996,57 +1030,67 @@ type PromoofferAPI =
 
 -- |
 type PromoofferAccept =
-     "books" :> "v1" :> "promooffer" :> "accept" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "manufacturer" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "serial" Text
-       :> QueryParam "device" Text
-       :> QueryParam "key" Text
-       :> QueryParam "model" Text
-       :> QueryParam "volumeId" Text
-       :> QueryParam "offerId" Text
-       :> QueryParam "product" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "androidId" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "books" :>
+       "v1" :>
+         "promooffer" :>
+           "accept" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "manufacturer" Text :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "serial" Text :>
+                       QueryParam "device" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "model" Text :>
+                             QueryParam "volumeId" Text :>
+                               QueryParam "offerId" Text :>
+                                 QueryParam "product" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "androidId" Text :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "alt" Text :>
+                                           Post '[JSON] ()
 
 -- | Returns a list of promo offers available to the user
 type PromoofferGet =
-     "books" :> "v1" :> "promooffer" :> "get" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "manufacturer" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "serial" Text
-       :> QueryParam "device" Text
-       :> QueryParam "key" Text
-       :> QueryParam "model" Text
-       :> QueryParam "product" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "androidId" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "books" :>
+       "v1" :>
+         "promooffer" :>
+           "get" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "manufacturer" Text :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "serial" Text :>
+                       QueryParam "device" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "model" Text :>
+                             QueryParam "product" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "androidId" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :> Get '[JSON] Offers
 
 -- |
 type PromoofferDismiss =
-     "books" :> "v1" :> "promooffer" :> "dismiss" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "manufacturer" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "serial" Text
-       :> QueryParam "device" Text
-       :> QueryParam "key" Text
-       :> QueryParam "model" Text
-       :> QueryParam "offerId" Text
-       :> QueryParam "product" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "androidId" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "books" :>
+       "v1" :>
+         "promooffer" :>
+           "dismiss" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "manufacturer" Text :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "serial" Text :>
+                       QueryParam "device" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "model" Text :>
+                             QueryParam "offerId" Text :>
+                               QueryParam "product" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "androidId" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Text :> Post '[JSON] ()
 
 type CloudloadingAPI =
      CloudloadingAddBook :<|> CloudloadingUpdateBook :<|>
@@ -1054,41 +1098,52 @@ type CloudloadingAPI =
 
 -- |
 type CloudloadingAddBook =
-     "books" :> "v1" :> "cloudloading" :> "addBook" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "mime_type" Text
-       :> QueryParam "upload_client_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "name" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "drive_document_id" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "books" :>
+       "v1" :>
+         "cloudloading" :>
+           "addBook" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "mime_type" Text :>
+                     QueryParam "upload_client_token" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "name" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "drive_document_id" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Post '[JSON] BooksCloudloadingResource
 
 -- |
 type CloudloadingUpdateBook =
-     "books" :> "v1" :> "cloudloading" :> "updateBook" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "books" :>
+       "v1" :>
+         "cloudloading" :>
+           "updateBook" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :>
+                           Post '[JSON] BooksCloudloadingResource
 
 -- | Remove the book and its contents
 type CloudloadingDeleteBook =
-     "books" :> "v1" :> "cloudloading" :> "deleteBook" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "volumeId" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "books" :>
+       "v1" :>
+         "cloudloading" :>
+           "deleteBook" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "volumeId" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] ()
 
 type LayersAPI =
      VolumeAnnotationsAPI :<|> AnnotationDataAPI
@@ -1098,115 +1153,135 @@ type VolumeAnnotationsAPI =
 
 -- | Gets the volume annotations for a volume and layer.
 type VolumeAnnotationsList =
-     "books" :> "v1" :> "volumes" :>
-       Capture "volumeId" Text
-       :> "layers"
-       :> Capture "layerId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "startOffset" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "locale" Text
-       :> QueryParam "contentVersion" Text
-       :> QueryParam "showDeleted" Bool
-       :> QueryParam "volumeAnnotationsVersion" Text
-       :> QueryParam "updatedMax" Text
-       :> QueryParam "key" Text
-       :> QueryParam "updatedMin" Text
-       :> QueryParam "endOffset" Text
-       :> QueryParam "source" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "endPosition" Text
-       :> QueryParam "maxResults" Word32
-       :> QueryParam "startPosition" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "books" :>
+       "v1" :>
+         "volumes" :>
+           Capture "volumeId" Text :>
+             "layers" :>
+               Capture "layerId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "startOffset" Text :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "locale" Text :>
+                           QueryParam "contentVersion" Text :>
+                             QueryParam "showDeleted" Bool :>
+                               QueryParam "volumeAnnotationsVersion" Text :>
+                                 QueryParam "updatedMax" Text :>
+                                   QueryParam "key" Text :>
+                                     QueryParam "updatedMin" Text :>
+                                       QueryParam "endOffset" Text :>
+                                         QueryParam "source" Text :>
+                                           QueryParam "pageToken" Text :>
+                                             QueryParam "oauth_token" Text :>
+                                               QueryParam "endPosition" Text :>
+                                                 QueryParam "maxResults" Word32
+                                                   :>
+                                                   QueryParam "startPosition"
+                                                     Text
+                                                     :>
+                                                     QueryParam "fields" Text :>
+                                                       QueryParam "alt" Text :>
+                                                         Get '[JSON]
+                                                           Volumeannotations
 
 -- | Gets the volume annotation.
 type VolumeAnnotationsGet =
-     "books" :> "v1" :> "volumes" :>
-       Capture "volumeId" Text
-       :> "layers"
-       :> Capture "layerId" Text
-       :> "annotations"
-       :> Capture "annotationId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "locale" Text
-       :> QueryParam "key" Text
-       :> QueryParam "source" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "books" :>
+       "v1" :>
+         "volumes" :>
+           Capture "volumeId" Text :>
+             "layers" :>
+               Capture "layerId" Text :>
+                 "annotations" :>
+                   Capture "annotationId" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "locale" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "source" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :>
+                                       Get '[JSON] Volumeannotation
 
 type AnnotationDataAPI =
      AnnotationDataList :<|> AnnotationDataGet
 
 -- | Gets the annotation data for a volume and layer.
 type AnnotationDataList =
-     "books" :> "v1" :> "volumes" :>
-       Capture "volumeId" Text
-       :> "layers"
-       :> Capture "layerId" Text
-       :> "data"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "w" Int32
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "scale" Int32
-       :> QueryParam "userIp" Text
-       :> QueryParam "locale" Text
-       :> QueryParam "contentVersion" Text
-       :> QueryParam "updatedMax" Text
-       :> QueryParam "key" Text
-       :> QueryParam "updatedMin" Text
-       :> QueryParam "annotationDataId" Text
-       :> QueryParam "source" Text
-       :> QueryParam "h" Int32
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Word32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "books" :>
+       "v1" :>
+         "volumes" :>
+           Capture "volumeId" Text :>
+             "layers" :>
+               Capture "layerId" Text :>
+                 "data" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "w" Int32 :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "scale" Int32 :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "locale" Text :>
+                               QueryParam "contentVersion" Text :>
+                                 QueryParam "updatedMax" Text :>
+                                   QueryParam "key" Text :>
+                                     QueryParam "updatedMin" Text :>
+                                       QueryParam "annotationDataId" Text :>
+                                         QueryParam "source" Text :>
+                                           QueryParam "h" Int32 :>
+                                             QueryParam "pageToken" Text :>
+                                               QueryParam "oauth_token" Text :>
+                                                 QueryParam "maxResults" Word32
+                                                   :>
+                                                   QueryParam "fields" Text :>
+                                                     QueryParam "alt" Text :>
+                                                       Get '[JSON]
+                                                         Annotationsdata
 
 -- | Gets the annotation data.
 type AnnotationDataGet =
-     "books" :> "v1" :> "volumes" :>
-       Capture "volumeId" Text
-       :> "layers"
-       :> Capture "layerId" Text
-       :> "data"
-       :> Capture "annotationDataId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "w" Int32
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "scale" Int32
-       :> QueryParam "userIp" Text
-       :> QueryParam "locale" Text
-       :> QueryParam "contentVersion" Text
-       :> QueryParam "key" Text
-       :> QueryParam "allowWebDefinitions" Bool
-       :> QueryParam "source" Text
-       :> QueryParam "h" Int32
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "books" :>
+       "v1" :>
+         "volumes" :>
+           Capture "volumeId" Text :>
+             "layers" :>
+               Capture "layerId" Text :>
+                 "data" :>
+                   Capture "annotationDataId" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "w" Int32 :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "scale" Int32 :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "locale" Text :>
+                                 QueryParam "contentVersion" Text :>
+                                   QueryParam "key" Text :>
+                                     QueryParam "allowWebDefinitions" Bool :>
+                                       QueryParam "source" Text :>
+                                         QueryParam "h" Int32 :>
+                                           QueryParam "oauth_token" Text :>
+                                             QueryParam "fields" Text :>
+                                               QueryParam "alt" Text :>
+                                                 Get '[JSON] Annotationdata
 
 type DictionaryAPI = DictionaryListOfflineMetadata
 
 -- | Returns a list of offline dictionary meatadata available
 type DictionaryListOfflineMetadata =
-     "books" :> "v1" :> "dictionary" :>
-       "listOfflineMetadata"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "cpksver" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "books" :>
+       "v1" :>
+         "dictionary" :>
+           "listOfflineMetadata" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "cpksver" Text :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Get '[JSON] Metadata
 
 type VolumesAPI =
      UseruploadedAPI :<|> RecommendedAPI :<|>
@@ -1217,91 +1292,110 @@ type UseruploadedAPI = UseruploadedList
 
 -- | Return a list of books uploaded by the current user.
 type UseruploadedList =
-     "books" :> "v1" :> "volumes" :> "useruploaded" :>
-       QueryParam "processingState" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "locale" Text
-       :> QueryParam "key" Text
-       :> QueryParam "volumeId" Text
-       :> QueryParam "source" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "startIndex" Word32
-       :> QueryParam "maxResults" Word32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "books" :>
+       "v1" :>
+         "volumes" :>
+           "useruploaded" :>
+             QueryParam "processingState" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "locale" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "volumeId" Text :>
+                           QueryParam "source" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "startIndex" Word32 :>
+                                 QueryParam "maxResults" Word32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :>
+                                       Get '[JSON] Volumes
 
 type RecommendedAPI =
      RecommendedList :<|> RecommendedRate
 
 -- | Return a list of recommended books for the current user.
 type RecommendedList =
-     "books" :> "v1" :> "volumes" :> "recommended" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "locale" Text
-       :> QueryParam "maxAllowedMaturityRating" Text
-       :> QueryParam "key" Text
-       :> QueryParam "source" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "books" :>
+       "v1" :>
+         "volumes" :>
+           "recommended" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "locale" Text :>
+                     QueryParam "maxAllowedMaturityRating" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "source" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Get '[JSON] Volumes
 
 -- | Rate a recommended book for the current user.
 type RecommendedRate =
-     "books" :> "v1" :> "volumes" :> "recommended" :>
-       "rate"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "rating" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "locale" Text
-       :> QueryParam "key" Text
-       :> QueryParam "volumeId" Text
-       :> QueryParam "source" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "books" :>
+       "v1" :>
+         "volumes" :>
+           "recommended" :>
+             "rate" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "rating" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "locale" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "volumeId" Text :>
+                             QueryParam "source" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Post '[JSON]
+                                       BooksVolumesRecommendedRateResponse
 
 type AssociatedAPI = AssociatedList
 
 -- | Return a list of associated books.
 type AssociatedList =
-     "books" :> "v1" :> "volumes" :>
-       Capture "volumeId" Text
-       :> "associated"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "locale" Text
-       :> QueryParam "maxAllowedMaturityRating" Text
-       :> QueryParam "key" Text
-       :> QueryParam "source" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
-       :> QueryParam "association" Text
+     "books" :>
+       "v1" :>
+         "volumes" :>
+           Capture "volumeId" Text :>
+             "associated" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "locale" Text :>
+                       QueryParam "maxAllowedMaturityRating" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "source" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   QueryParam "association" Text :>
+                                     Get '[JSON] Volumes
 
 type MybooksAPI = MybooksList
 
 -- | Return a list of books in My Library.
 type MybooksList =
-     "books" :> "v1" :> "volumes" :> "mybooks" :>
-       QueryParam "processingState" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "acquireMethod" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "locale" Text
-       :> QueryParam "key" Text
-       :> QueryParam "source" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "startIndex" Word32
-       :> QueryParam "maxResults" Word32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "books" :>
+       "v1" :>
+         "volumes" :>
+           "mybooks" :>
+             QueryParam "processingState" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "acquireMethod" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "locale" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "source" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "startIndex" Word32 :>
+                                 QueryParam "maxResults" Word32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :>
+                                       Get '[JSON] Volumes
 
 type BookshelvesAPI = VolumesAPI
 
@@ -1309,21 +1403,25 @@ type VolumesAPI = VolumesList
 
 -- | Retrieves volumes in a specific bookshelf for the specified user.
 type VolumesList =
-     "books" :> "v1" :> "users" :> Capture "userId" Text
-       :> "bookshelves"
-       :> Capture "shelf" Text
-       :> "volumes"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "source" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "startIndex" Word32
-       :> QueryParam "maxResults" Word32
-       :> QueryParam "showPreorders" Bool
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "books" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "bookshelves" :>
+               Capture "shelf" Text :>
+                 "volumes" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "source" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "startIndex" Word32 :>
+                                 QueryParam "maxResults" Word32 :>
+                                   QueryParam "showPreorders" Bool :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Text :>
+                                         Get '[JSON] Volumes
 
 type MyconfigAPI =
      MyconfigSyncVolumeLicenses :<|>
@@ -1335,75 +1433,92 @@ type MyconfigAPI =
 -- | Request downloaded content access for specified volumes on the My eBooks
 -- shelf.
 type MyconfigSyncVolumeLicenses =
-     "books" :> "v1" :> "myconfig" :> "syncVolumeLicenses"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "cpksver" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "locale" Text
-       :> QueryParam "volumeIds" Text
-       :> QueryParam "key" Text
-       :> QueryParam "features" Text
-       :> QueryParam "source" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "showPreorders" Bool
-       :> QueryParam "fields" Text
-       :> QueryParam "nonce" Text
-       :> QueryParam "alt" Text
+     "books" :>
+       "v1" :>
+         "myconfig" :>
+           "syncVolumeLicenses" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "cpksver" Text :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "locale" Text :>
+                       QueryParam "volumeIds" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "features" Text :>
+                             QueryParam "source" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "showPreorders" Bool :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "nonce" Text :>
+                                       QueryParam "alt" Text :>
+                                         Post '[JSON] Volumes
 
 -- | Gets the current settings for the user.
 type MyconfigGetUserSettings =
-     "books" :> "v1" :> "myconfig" :> "getUserSettings" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "books" :>
+       "v1" :>
+         "myconfig" :>
+           "getUserSettings" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Get '[JSON] Usersettings
 
 -- | Request concurrent and download access restrictions.
 type MyconfigRequestAccess =
-     "books" :> "v1" :> "myconfig" :> "requestAccess" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "cpksver" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "locale" Text
-       :> QueryParam "licenseTypes" Text
-       :> QueryParam "key" Text
-       :> QueryParam "volumeId" Text
-       :> QueryParam "source" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "nonce" Text
-       :> QueryParam "alt" Text
+     "books" :>
+       "v1" :>
+         "myconfig" :>
+           "requestAccess" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "cpksver" Text :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "locale" Text :>
+                       QueryParam "licenseTypes" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "volumeId" Text :>
+                             QueryParam "source" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "nonce" Text :>
+                                     QueryParam "alt" Text :>
+                                       Post '[JSON] RequestAccess
 
 -- | Sets the settings for the user. If a sub-object is specified, it will
 -- overwrite the existing sub-object stored in the server. Unspecified
 -- sub-objects will retain the existing value.
 type MyconfigUpdateUserSettings =
-     "books" :> "v1" :> "myconfig" :> "updateUserSettings"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "books" :>
+       "v1" :>
+         "myconfig" :>
+           "updateUserSettings" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Post '[JSON] Usersettings
 
 -- | Release downloaded content access restriction.
 type MyconfigReleaseDownloadAccess =
-     "books" :> "v1" :> "myconfig" :>
-       "releaseDownloadAccess"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "cpksver" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "locale" Text
-       :> QueryParam "volumeIds" Text
-       :> QueryParam "key" Text
-       :> QueryParam "source" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "books" :>
+       "v1" :>
+         "myconfig" :>
+           "releaseDownloadAccess" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "cpksver" Text :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "locale" Text :>
+                       QueryParam "volumeIds" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "source" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Post '[JSON] DownloadAccesses

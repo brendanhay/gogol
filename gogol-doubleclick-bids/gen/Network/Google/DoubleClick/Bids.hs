@@ -238,76 +238,90 @@ type QueriesAPI =
 
 -- | Retrieves a stored query.
 type QueriesGetquery =
-     "doubleclickbidmanager" :> "v1" :> "query" :>
-       Capture "queryId" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "doubleclickbidmanager" :>
+       "v1" :>
+         "query" :>
+           Capture "queryId" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Get '[JSON] Query
 
 -- | Runs a stored query to generate a report.
 type QueriesRunquery =
-     "doubleclickbidmanager" :> "v1" :> "query" :>
-       Capture "queryId" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "doubleclickbidmanager" :>
+       "v1" :>
+         "query" :>
+           Capture "queryId" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Post '[JSON] ()
 
 -- | Deletes a stored query as well as the associated stored reports.
 type QueriesDeletequery =
-     "doubleclickbidmanager" :> "v1" :> "query" :>
-       Capture "queryId" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "doubleclickbidmanager" :>
+       "v1" :>
+         "query" :>
+           Capture "queryId" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Creates a query.
 type QueriesCreatequery =
-     "doubleclickbidmanager" :> "v1" :> "query" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "doubleclickbidmanager" :>
+       "v1" :>
+         "query" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Text :> Post '[JSON] Query
 
 -- | Retrieves stored queries.
 type QueriesListqueries =
-     "doubleclickbidmanager" :> "v1" :> "queries" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "doubleclickbidmanager" :>
+       "v1" :>
+         "queries" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Text :>
+                         Get '[JSON] ListQueriesResponse
 
 type ReportsAPI = ReportsListreports
 
 -- | Retrieves stored reports.
 type ReportsListreports =
-     "doubleclickbidmanager" :> "v1" :> "queries" :>
-       Capture "queryId" Int64
-       :> "reports"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "doubleclickbidmanager" :>
+       "v1" :>
+         "queries" :>
+           Capture "queryId" Int64 :>
+             "reports" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Get '[JSON] ListReportsResponse
 
 type LineitemsAPI =
      LineitemsUploadlineitems :<|>
@@ -315,24 +329,30 @@ type LineitemsAPI =
 
 -- | Uploads line items in CSV format.
 type LineitemsUploadlineitems =
-     "doubleclickbidmanager" :> "v1" :> "lineitems" :>
-       "uploadlineitems"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "doubleclickbidmanager" :>
+       "v1" :>
+         "lineitems" :>
+           "uploadlineitems" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :>
+                           Post '[JSON] UploadLineItemsResponse
 
 -- | Retrieves line items in CSV format.
 type LineitemsDownloadlineitems =
-     "doubleclickbidmanager" :> "v1" :> "lineitems" :>
-       "downloadlineitems"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "doubleclickbidmanager" :>
+       "v1" :>
+         "lineitems" :>
+           "downloadlineitems" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :>
+                           Post '[JSON] DownloadLineItemsResponse

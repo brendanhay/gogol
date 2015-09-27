@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -50,6 +51,20 @@ cesNumberUsersPass
 cesType :: Lens' CertificationExamStatus (Maybe Text)
 cesType = lens _cesType (\ s a -> s{_cesType = a})
 
+instance FromJSON CertificationExamStatus where
+        parseJSON
+          = withObject "CertificationExamStatus"
+              (\ o ->
+                 CertificationExamStatus <$>
+                   (o .:? "numberUsersPass") <*> (o .:? "type"))
+
+instance ToJSON CertificationExamStatus where
+        toJSON CertificationExamStatus{..}
+          = object
+              (catMaybes
+                 [("numberUsersPass" .=) <$> _cesNumberUsersPass,
+                  ("type" .=) <$> _cesType])
+
 -- | Google Partners certification status.
 --
 -- /See:/ 'certificationStatus' smart constructor.
@@ -94,6 +109,22 @@ csExamStatuses
       (\ s a -> s{_csExamStatuses = a})
       . _Default
       . _Coerce
+
+instance FromJSON CertificationStatus where
+        parseJSON
+          = withObject "CertificationStatus"
+              (\ o ->
+                 CertificationStatus <$>
+                   (o .:? "isCertified") <*> (o .:? "type") <*>
+                     (o .:? "examStatuses" .!= mempty))
+
+instance ToJSON CertificationStatus where
+        toJSON CertificationStatus{..}
+          = object
+              (catMaybes
+                 [("isCertified" .=) <$> _csIsCertified,
+                  ("type" .=) <$> _csType,
+                  ("examStatuses" .=) <$> _csExamStatuses])
 
 -- | A company resource in the Google Partners API. Once certified, it
 -- qualifies for being searched by advertisers.
@@ -236,6 +267,43 @@ cServices
       _Default
       . _Coerce
 
+instance FromJSON Company where
+        parseJSON
+          = withObject "Company"
+              (\ o ->
+                 Company <$>
+                   (o .:? "publicProfile") <*>
+                     (o .:? "originalMinMonthlyBudget")
+                     <*> (o .:? "industries" .!= mempty)
+                     <*> (o .:? "convertedMinMonthlyBudget")
+                     <*> (o .:? "name")
+                     <*> (o .:? "localizedInfos" .!= mempty)
+                     <*> (o .:? "certificationStatuses" .!= mempty)
+                     <*> (o .:? "ranks" .!= mempty)
+                     <*> (o .:? "id")
+                     <*> (o .:? "websiteUrl")
+                     <*> (o .:? "locations" .!= mempty)
+                     <*> (o .:? "services" .!= mempty))
+
+instance ToJSON Company where
+        toJSON Company{..}
+          = object
+              (catMaybes
+                 [("publicProfile" .=) <$> _cPublicProfile,
+                  ("originalMinMonthlyBudget" .=) <$>
+                    _cOriginalMinMonthlyBudget,
+                  ("industries" .=) <$> _cIndustries,
+                  ("convertedMinMonthlyBudget" .=) <$>
+                    _cConvertedMinMonthlyBudget,
+                  ("name" .=) <$> _cName,
+                  ("localizedInfos" .=) <$> _cLocalizedInfos,
+                  ("certificationStatuses" .=) <$>
+                    _cCertificationStatuses,
+                  ("ranks" .=) <$> _cRanks, ("id" .=) <$> _cId,
+                  ("websiteUrl" .=) <$> _cWebsiteUrl,
+                  ("locations" .=) <$> _cLocations,
+                  ("services" .=) <$> _cServices])
+
 -- | Request message for CreateLead.
 --
 -- /See:/ 'createLeadRequest' smart constructor.
@@ -281,6 +349,23 @@ clrRecaptchaChallenge
 clrLead :: Lens' CreateLeadRequest (Maybe (Maybe Lead))
 clrLead = lens _clrLead (\ s a -> s{_clrLead = a})
 
+instance FromJSON CreateLeadRequest where
+        parseJSON
+          = withObject "CreateLeadRequest"
+              (\ o ->
+                 CreateLeadRequest <$>
+                   (o .:? "requestMetadata") <*>
+                     (o .:? "recaptchaChallenge")
+                     <*> (o .:? "lead"))
+
+instance ToJSON CreateLeadRequest where
+        toJSON CreateLeadRequest{..}
+          = object
+              (catMaybes
+                 [("requestMetadata" .=) <$> _clrRequestMetadata,
+                  ("recaptchaChallenge" .=) <$> _clrRecaptchaChallenge,
+                  ("lead" .=) <$> _clrLead])
+
 -- | Response message for CreateLead. Debug information about this request.
 --
 -- /See:/ 'createLeadResponse' smart constructor.
@@ -323,6 +408,23 @@ cResponseMetadata
 -- | Lead that was created depending on the outcome of reCaptcha validation.
 cLead :: Lens' CreateLeadResponse (Maybe (Maybe Lead))
 cLead = lens _cLead (\ s a -> s{_cLead = a})
+
+instance FromJSON CreateLeadResponse where
+        parseJSON
+          = withObject "CreateLeadResponse"
+              (\ o ->
+                 CreateLeadResponse <$>
+                   (o .:? "recaptchaStatus") <*>
+                     (o .:? "responseMetadata")
+                     <*> (o .:? "lead"))
+
+instance ToJSON CreateLeadResponse where
+        toJSON CreateLeadResponse{..}
+          = object
+              (catMaybes
+                 [("recaptchaStatus" .=) <$> _cRecaptchaStatus,
+                  ("responseMetadata" .=) <$> _cResponseMetadata,
+                  ("lead" .=) <$> _cLead])
 
 -- | Debug information about this request.
 --
@@ -367,6 +469,22 @@ diServerInfo :: Lens' DebugInfo (Maybe Text)
 diServerInfo
   = lens _diServerInfo (\ s a -> s{_diServerInfo = a})
 
+instance FromJSON DebugInfo where
+        parseJSON
+          = withObject "DebugInfo"
+              (\ o ->
+                 DebugInfo <$>
+                   (o .:? "serviceUrl") <*> (o .:? "serverTraceInfo")
+                     <*> (o .:? "serverInfo"))
+
+instance ToJSON DebugInfo where
+        toJSON DebugInfo{..}
+          = object
+              (catMaybes
+                 [("serviceUrl" .=) <$> _diServiceUrl,
+                  ("serverTraceInfo" .=) <$> _diServerTraceInfo,
+                  ("serverInfo" .=) <$> _diServerInfo])
+
 -- | Key value data pair for an event.
 --
 -- /See:/ 'eventData' smart constructor.
@@ -401,6 +519,19 @@ edValues
 edKey :: Lens' EventData (Maybe Text)
 edKey = lens _edKey (\ s a -> s{_edKey = a})
 
+instance FromJSON EventData where
+        parseJSON
+          = withObject "EventData"
+              (\ o ->
+                 EventData <$>
+                   (o .:? "values" .!= mempty) <*> (o .:? "key"))
+
+instance ToJSON EventData where
+        toJSON EventData{..}
+          = object
+              (catMaybes
+                 [("values" .=) <$> _edValues, ("key" .=) <$> _edKey])
+
 -- | Response message for GetCompany.
 --
 -- /See:/ 'getCompanyResponse' smart constructor.
@@ -434,6 +565,20 @@ gcrResponseMetadata
 gcrCompany :: Lens' GetCompanyResponse (Maybe (Maybe Company))
 gcrCompany
   = lens _gcrCompany (\ s a -> s{_gcrCompany = a})
+
+instance FromJSON GetCompanyResponse where
+        parseJSON
+          = withObject "GetCompanyResponse"
+              (\ o ->
+                 GetCompanyResponse <$>
+                   (o .:? "responseMetadata") <*> (o .:? "company"))
+
+instance ToJSON GetCompanyResponse where
+        toJSON GetCompanyResponse{..}
+          = object
+              (catMaybes
+                 [("responseMetadata" .=) <$> _gcrResponseMetadata,
+                  ("company" .=) <$> _gcrCompany])
 
 -- | An object representing a latitude\/longitude pair. This is expressed as
 -- a pair of doubles representing degrees latitude and degrees longitude.
@@ -489,6 +634,20 @@ llLatitude
 llLongitude :: Lens' LatLng (Maybe Double)
 llLongitude
   = lens _llLongitude (\ s a -> s{_llLongitude = a})
+
+instance FromJSON LatLng where
+        parseJSON
+          = withObject "LatLng"
+              (\ o ->
+                 LatLng <$>
+                   (o .:? "latitude") <*> (o .:? "longitude"))
+
+instance ToJSON LatLng where
+        toJSON LatLng{..}
+          = object
+              (catMaybes
+                 [("latitude" .=) <$> _llLatitude,
+                  ("longitude" .=) <$> _llLongitude])
 
 -- | A lead resource that represents an advertiser contact for a \`Company\`.
 -- These are usually generated via Google Partner Search (the advertiser
@@ -598,6 +757,35 @@ lGpsMotivations
       . _Default
       . _Coerce
 
+instance FromJSON Lead where
+        parseJSON
+          = withObject "Lead"
+              (\ o ->
+                 Lead <$>
+                   (o .:? "givenName") <*> (o .:? "email") <*>
+                     (o .:? "familyName")
+                     <*> (o .:? "phoneNumber")
+                     <*> (o .:? "minMonthlyBudget")
+                     <*> (o .:? "id")
+                     <*> (o .:? "comments")
+                     <*> (o .:? "websiteUrl")
+                     <*> (o .:? "type")
+                     <*> (o .:? "gpsMotivations" .!= mempty))
+
+instance ToJSON Lead where
+        toJSON Lead{..}
+          = object
+              (catMaybes
+                 [("givenName" .=) <$> _lGivenName,
+                  ("email" .=) <$> _lEmail,
+                  ("familyName" .=) <$> _lFamilyName,
+                  ("phoneNumber" .=) <$> _lPhoneNumber,
+                  ("minMonthlyBudget" .=) <$> _lMinMonthlyBudget,
+                  ("id" .=) <$> _lId, ("comments" .=) <$> _lComments,
+                  ("websiteUrl" .=) <$> _lWebsiteUrl,
+                  ("type" .=) <$> _lType,
+                  ("gpsMotivations" .=) <$> _lGpsMotivations])
+
 -- | Response message for ListCompanies.
 --
 -- /See:/ 'listCompaniesResponse' smart constructor.
@@ -646,6 +834,23 @@ lcrCompanies
       . _Default
       . _Coerce
 
+instance FromJSON ListCompaniesResponse where
+        parseJSON
+          = withObject "ListCompaniesResponse"
+              (\ o ->
+                 ListCompaniesResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "responseMetadata")
+                     <*> (o .:? "companies" .!= mempty))
+
+instance ToJSON ListCompaniesResponse where
+        toJSON ListCompaniesResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lcrNextPageToken,
+                  ("responseMetadata" .=) <$> _lcrResponseMetadata,
+                  ("companies" .=) <$> _lcrCompanies])
+
 -- | Response message for ListUserStates.
 --
 -- /See:/ 'listUserStatesResponse' smart constructor.
@@ -682,6 +887,21 @@ lusrResponseMetadata :: Lens' ListUserStatesResponse (Maybe (Maybe ResponseMetad
 lusrResponseMetadata
   = lens _lusrResponseMetadata
       (\ s a -> s{_lusrResponseMetadata = a})
+
+instance FromJSON ListUserStatesResponse where
+        parseJSON
+          = withObject "ListUserStatesResponse"
+              (\ o ->
+                 ListUserStatesResponse <$>
+                   (o .:? "userStates" .!= mempty) <*>
+                     (o .:? "responseMetadata"))
+
+instance ToJSON ListUserStatesResponse where
+        toJSON ListUserStatesResponse{..}
+          = object
+              (catMaybes
+                 [("userStates" .=) <$> _lusrUserStates,
+                  ("responseMetadata" .=) <$> _lusrResponseMetadata])
 
 -- | The localized company information.
 --
@@ -741,6 +961,24 @@ lciDisplayName
   = lens _lciDisplayName
       (\ s a -> s{_lciDisplayName = a})
 
+instance FromJSON LocalizedCompanyInfo where
+        parseJSON
+          = withObject "LocalizedCompanyInfo"
+              (\ o ->
+                 LocalizedCompanyInfo <$>
+                   (o .:? "languageCode") <*> (o .:? "overview") <*>
+                     (o .:? "countryCodes" .!= mempty)
+                     <*> (o .:? "displayName"))
+
+instance ToJSON LocalizedCompanyInfo where
+        toJSON LocalizedCompanyInfo{..}
+          = object
+              (catMaybes
+                 [("languageCode" .=) <$> _lciLanguageCode,
+                  ("overview" .=) <$> _lciOverview,
+                  ("countryCodes" .=) <$> _lciCountryCodes,
+                  ("displayName" .=) <$> _lciDisplayName])
+
 -- | A location with address and geographic coordinates.
 --
 -- /See:/ 'location' smart constructor.
@@ -771,6 +1009,19 @@ lLatLng = lens _lLatLng (\ s a -> s{_lLatLng = a})
 -- | The complete address of the location.
 lAddress :: Lens' Location (Maybe Text)
 lAddress = lens _lAddress (\ s a -> s{_lAddress = a})
+
+instance FromJSON Location where
+        parseJSON
+          = withObject "Location"
+              (\ o ->
+                 Location <$> (o .:? "latLng") <*> (o .:? "address"))
+
+instance ToJSON Location where
+        toJSON Location{..}
+          = object
+              (catMaybes
+                 [("latLng" .=) <$> _lLatLng,
+                  ("address" .=) <$> _lAddress])
 
 -- | Request message for LogClientMessage.
 --
@@ -825,6 +1076,24 @@ lmrDetails
 lmrLevel :: Lens' LogMessageRequest (Maybe Text)
 lmrLevel = lens _lmrLevel (\ s a -> s{_lmrLevel = a})
 
+instance FromJSON LogMessageRequest where
+        parseJSON
+          = withObject "LogMessageRequest"
+              (\ o ->
+                 LogMessageRequest <$>
+                   (o .:? "requestMetadata") <*> (o .:? "clientInfo")
+                     <*> (o .:? "details")
+                     <*> (o .:? "level"))
+
+instance ToJSON LogMessageRequest where
+        toJSON LogMessageRequest{..}
+          = object
+              (catMaybes
+                 [("requestMetadata" .=) <$> _lmrRequestMetadata,
+                  ("clientInfo" .=) <$> _lmrClientInfo,
+                  ("details" .=) <$> _lmrDetails,
+                  ("level" .=) <$> _lmrLevel])
+
 -- | Map of client info, such as URL, browser navigator, browser platform,
 -- etc.
 --
@@ -838,6 +1107,14 @@ data LogMessageRequestClientInfo =
 logMessageRequestClientInfo
     :: LogMessageRequestClientInfo
 logMessageRequestClientInfo = LogMessageRequestClientInfo
+
+instance FromJSON LogMessageRequestClientInfo where
+        parseJSON
+          = withObject "LogMessageRequestClientInfo"
+              (\ o -> pure LogMessageRequestClientInfo)
+
+instance ToJSON LogMessageRequestClientInfo where
+        toJSON = const (Object mempty)
 
 -- | Response message for LogClientMessage.
 --
@@ -863,6 +1140,18 @@ lmrResponseMetadata :: Lens' LogMessageResponse (Maybe (Maybe ResponseMetadata))
 lmrResponseMetadata
   = lens _lmrResponseMetadata
       (\ s a -> s{_lmrResponseMetadata = a})
+
+instance FromJSON LogMessageResponse where
+        parseJSON
+          = withObject "LogMessageResponse"
+              (\ o ->
+                 LogMessageResponse <$> (o .:? "responseMetadata"))
+
+instance ToJSON LogMessageResponse where
+        toJSON LogMessageResponse{..}
+          = object
+              (catMaybes
+                 [("responseMetadata" .=) <$> _lmrResponseMetadata])
 
 -- | Request message for LogUserEvent.
 --
@@ -947,6 +1236,30 @@ luerEventAction
   = lens _luerEventAction
       (\ s a -> s{_luerEventAction = a})
 
+instance FromJSON LogUserEventRequest where
+        parseJSON
+          = withObject "LogUserEventRequest"
+              (\ o ->
+                 LogUserEventRequest <$>
+                   (o .:? "eventCategory") <*> (o .:? "requestMetadata")
+                     <*> (o .:? "url")
+                     <*> (o .:? "eventScope")
+                     <*> (o .:? "lead")
+                     <*> (o .:? "eventDatas" .!= mempty)
+                     <*> (o .:? "eventAction"))
+
+instance ToJSON LogUserEventRequest where
+        toJSON LogUserEventRequest{..}
+          = object
+              (catMaybes
+                 [("eventCategory" .=) <$> _luerEventCategory,
+                  ("requestMetadata" .=) <$> _luerRequestMetadata,
+                  ("url" .=) <$> _luerUrl,
+                  ("eventScope" .=) <$> _luerEventScope,
+                  ("lead" .=) <$> _luerLead,
+                  ("eventDatas" .=) <$> _luerEventDatas,
+                  ("eventAction" .=) <$> _luerEventAction])
+
 -- | Response message for LogUserEvent.
 --
 -- /See:/ 'logUserEventResponse' smart constructor.
@@ -971,6 +1284,18 @@ luerResponseMetadata :: Lens' LogUserEventResponse (Maybe (Maybe ResponseMetadat
 luerResponseMetadata
   = lens _luerResponseMetadata
       (\ s a -> s{_luerResponseMetadata = a})
+
+instance FromJSON LogUserEventResponse where
+        parseJSON
+          = withObject "LogUserEventResponse"
+              (\ o ->
+                 LogUserEventResponse <$> (o .:? "responseMetadata"))
+
+instance ToJSON LogUserEventResponse where
+        toJSON LogUserEventResponse{..}
+          = object
+              (catMaybes
+                 [("responseMetadata" .=) <$> _luerResponseMetadata])
 
 -- | Represents an amount of money with its currency type.
 --
@@ -1018,6 +1343,21 @@ mNanos = lens _mNanos (\ s a -> s{_mNanos = a})
 -- \`\"USD\"\`, then 1 unit is one US dollar.
 mUnits :: Lens' Money (Maybe Int64)
 mUnits = lens _mUnits (\ s a -> s{_mUnits = a})
+
+instance FromJSON Money where
+        parseJSON
+          = withObject "Money"
+              (\ o ->
+                 Money <$>
+                   (o .:? "currencyCode") <*> (o .:? "nanos") <*>
+                     (o .:? "units"))
+
+instance ToJSON Money where
+        toJSON Money{..}
+          = object
+              (catMaybes
+                 [("currencyCode" .=) <$> _mCurrencyCode,
+                  ("nanos" .=) <$> _mNanos, ("units" .=) <$> _mUnits])
 
 -- | Basic information from a public profile.
 --
@@ -1071,6 +1411,24 @@ ppDisplayName
 ppId :: Lens' PublicProfile (Maybe Text)
 ppId = lens _ppId (\ s a -> s{_ppId = a})
 
+instance FromJSON PublicProfile where
+        parseJSON
+          = withObject "PublicProfile"
+              (\ o ->
+                 PublicProfile <$>
+                   (o .:? "url") <*> (o .:? "displayImageUrl") <*>
+                     (o .:? "displayName")
+                     <*> (o .:? "id"))
+
+instance ToJSON PublicProfile where
+        toJSON PublicProfile{..}
+          = object
+              (catMaybes
+                 [("url" .=) <$> _ppUrl,
+                  ("displayImageUrl" .=) <$> _ppDisplayImageUrl,
+                  ("displayName" .=) <$> _ppDisplayName,
+                  ("id" .=) <$> _ppId])
+
 -- | Information related to ranking of results.
 --
 -- /See:/ 'rank' smart constructor.
@@ -1101,6 +1459,17 @@ rValue = lens _rValue (\ s a -> s{_rValue = a})
 -- | The type of rank.
 rType :: Lens' Rank (Maybe Text)
 rType = lens _rType (\ s a -> s{_rType = a})
+
+instance FromJSON Rank where
+        parseJSON
+          = withObject "Rank"
+              (\ o -> Rank <$> (o .:? "value") <*> (o .:? "type"))
+
+instance ToJSON Rank where
+        toJSON Rank{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _rValue, ("type" .=) <$> _rType])
 
 -- | reCaptcha challenge info.
 --
@@ -1133,6 +1502,20 @@ rcResponse
 -- | The ID of the reCaptcha challenge.
 rcId :: Lens' RecaptchaChallenge (Maybe Text)
 rcId = lens _rcId (\ s a -> s{_rcId = a})
+
+instance FromJSON RecaptchaChallenge where
+        parseJSON
+          = withObject "RecaptchaChallenge"
+              (\ o ->
+                 RecaptchaChallenge <$>
+                   (o .:? "response") <*> (o .:? "id"))
+
+instance ToJSON RecaptchaChallenge where
+        toJSON RecaptchaChallenge{..}
+          = object
+              (catMaybes
+                 [("response" .=) <$> _rcResponse,
+                  ("id" .=) <$> _rcId])
 
 -- | Common data that is in each API request.
 --
@@ -1200,6 +1583,27 @@ rmPartnersSessionId
   = lens _rmPartnersSessionId
       (\ s a -> s{_rmPartnersSessionId = a})
 
+instance FromJSON RequestMetadata where
+        parseJSON
+          = withObject "RequestMetadata"
+              (\ o ->
+                 RequestMetadata <$>
+                   (o .:? "experimentIds" .!= mempty) <*>
+                     (o .:? "trafficSource")
+                     <*> (o .:? "locale")
+                     <*> (o .:? "userOverrides")
+                     <*> (o .:? "partnersSessionId"))
+
+instance ToJSON RequestMetadata where
+        toJSON RequestMetadata{..}
+          = object
+              (catMaybes
+                 [("experimentIds" .=) <$> _rmExperimentIds,
+                  ("trafficSource" .=) <$> _rmTrafficSource,
+                  ("locale" .=) <$> _rmLocale,
+                  ("userOverrides" .=) <$> _rmUserOverrides,
+                  ("partnersSessionId" .=) <$> _rmPartnersSessionId])
+
 -- | Common data that is in each API response.
 --
 -- /See:/ 'responseMetadata' smart constructor.
@@ -1223,6 +1627,16 @@ responseMetadata =
 rmDebugInfo :: Lens' ResponseMetadata (Maybe (Maybe DebugInfo))
 rmDebugInfo
   = lens _rmDebugInfo (\ s a -> s{_rmDebugInfo = a})
+
+instance FromJSON ResponseMetadata where
+        parseJSON
+          = withObject "ResponseMetadata"
+              (\ o -> ResponseMetadata <$> (o .:? "debugInfo"))
+
+instance ToJSON ResponseMetadata where
+        toJSON ResponseMetadata{..}
+          = object
+              (catMaybes [("debugInfo" .=) <$> _rmDebugInfo])
 
 -- | Source of traffic for the current request.
 --
@@ -1262,6 +1676,20 @@ tsTrafficSourceId
   = lens _tsTrafficSourceId
       (\ s a -> s{_tsTrafficSourceId = a})
 
+instance FromJSON TrafficSource where
+        parseJSON
+          = withObject "TrafficSource"
+              (\ o ->
+                 TrafficSource <$>
+                   (o .:? "trafficSubId") <*> (o .:? "trafficSourceId"))
+
+instance ToJSON TrafficSource where
+        toJSON TrafficSource{..}
+          = object
+              (catMaybes
+                 [("trafficSubId" .=) <$> _tsTrafficSubId,
+                  ("trafficSourceId" .=) <$> _tsTrafficSourceId])
+
 -- | Values to use instead of the user\'s respective defaults. These are only
 -- honored by whitelisted products.
 --
@@ -1294,3 +1722,17 @@ uoIpAddress
 -- | Logged-in user ID to impersonate instead of the user\'s ID.
 uoUserId :: Lens' UserOverrides (Maybe Text)
 uoUserId = lens _uoUserId (\ s a -> s{_uoUserId = a})
+
+instance FromJSON UserOverrides where
+        parseJSON
+          = withObject "UserOverrides"
+              (\ o ->
+                 UserOverrides <$>
+                   (o .:? "ipAddress") <*> (o .:? "userId"))
+
+instance ToJSON UserOverrides where
+        toJSON UserOverrides{..}
+          = object
+              (catMaybes
+                 [("ipAddress" .=) <$> _uoIpAddress,
+                  ("userId" .=) <$> _uoUserId])

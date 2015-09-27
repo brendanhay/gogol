@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -67,6 +68,23 @@ aeExpirationTime
   = lens _aeExpirationTime
       (\ s a -> s{_aeExpirationTime = a})
 
+instance FromJSON AclEntry where
+        parseJSON
+          = withObject "AclEntry"
+              (\ o ->
+                 AclEntry <$>
+                   (o .:? "kind" .!= "sql#aclEntry") <*> (o .:? "value")
+                     <*> (o .:? "name")
+                     <*> (o .:? "expirationTime"))
+
+instance ToJSON AclEntry where
+        toJSON AclEntry{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _aeKind), ("value" .=) <$> _aeValue,
+                  ("name" .=) <$> _aeName,
+                  ("expirationTime" .=) <$> _aeExpirationTime])
+
 -- | Database instance backup configuration.
 --
 -- /See:/ 'backupConfiguration' smart constructor.
@@ -119,6 +137,24 @@ bcBinaryLogEnabled :: Lens' BackupConfiguration (Maybe Bool)
 bcBinaryLogEnabled
   = lens _bcBinaryLogEnabled
       (\ s a -> s{_bcBinaryLogEnabled = a})
+
+instance FromJSON BackupConfiguration where
+        parseJSON
+          = withObject "BackupConfiguration"
+              (\ o ->
+                 BackupConfiguration <$>
+                   (o .:? "enabled") <*> (o .:? "startTime") <*>
+                     (o .:? "kind" .!= "sql#backupConfiguration")
+                     <*> (o .:? "binaryLogEnabled"))
+
+instance ToJSON BackupConfiguration where
+        toJSON BackupConfiguration{..}
+          = object
+              (catMaybes
+                 [("enabled" .=) <$> _bcEnabled,
+                  ("startTime" .=) <$> _bcStartTime,
+                  Just ("kind" .= _bcKind),
+                  ("binaryLogEnabled" .=) <$> _bcBinaryLogEnabled])
 
 -- | A database instance backup run resource.
 --
@@ -229,6 +265,34 @@ brInstance :: Lens' BackupRun (Maybe Text)
 brInstance
   = lens _brInstance (\ s a -> s{_brInstance = a})
 
+instance FromJSON BackupRun where
+        parseJSON
+          = withObject "BackupRun"
+              (\ o ->
+                 BackupRun <$>
+                   (o .:? "status") <*> (o .:? "startTime") <*>
+                     (o .:? "kind" .!= "sql#backupRun")
+                     <*> (o .:? "error")
+                     <*> (o .:? "windowStartTime")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "endTime")
+                     <*> (o .:? "id")
+                     <*> (o .:? "enqueuedTime")
+                     <*> (o .:? "instance"))
+
+instance ToJSON BackupRun where
+        toJSON BackupRun{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _brStatus,
+                  ("startTime" .=) <$> _brStartTime,
+                  Just ("kind" .= _brKind), ("error" .=) <$> _brError,
+                  ("windowStartTime" .=) <$> _brWindowStartTime,
+                  ("selfLink" .=) <$> _brSelfLink,
+                  ("endTime" .=) <$> _brEndTime, ("id" .=) <$> _brId,
+                  ("enqueuedTime" .=) <$> _brEnqueuedTime,
+                  ("instance" .=) <$> _brInstance])
+
 -- | Backup run list results.
 --
 -- /See:/ 'backupRunsListResponse' smart constructor.
@@ -275,6 +339,23 @@ brlrItems
       _Default
       . _Coerce
 
+instance FromJSON BackupRunsListResponse where
+        parseJSON
+          = withObject "BackupRunsListResponse"
+              (\ o ->
+                 BackupRunsListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "sql#backupRunsList")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON BackupRunsListResponse where
+        toJSON BackupRunsListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _brlrNextPageToken,
+                  Just ("kind" .= _brlrKind),
+                  ("items" .=) <$> _brlrItems])
+
 -- | Binary log coordinates.
 --
 -- /See:/ 'binLogCoordinates' smart constructor.
@@ -317,6 +398,23 @@ blcBinLogFileName :: Lens' BinLogCoordinates (Maybe Text)
 blcBinLogFileName
   = lens _blcBinLogFileName
       (\ s a -> s{_blcBinLogFileName = a})
+
+instance FromJSON BinLogCoordinates where
+        parseJSON
+          = withObject "BinLogCoordinates"
+              (\ o ->
+                 BinLogCoordinates <$>
+                   (o .:? "binLogPosition") <*>
+                     (o .:? "kind" .!= "sql#binLogCoordinates")
+                     <*> (o .:? "binLogFileName"))
+
+instance ToJSON BinLogCoordinates where
+        toJSON BinLogCoordinates{..}
+          = object
+              (catMaybes
+                 [("binLogPosition" .=) <$> _blcBinLogPosition,
+                  Just ("kind" .= _blcKind),
+                  ("binLogFileName" .=) <$> _blcBinLogFileName])
 
 -- | Database instance clone context.
 --
@@ -362,6 +460,24 @@ ccBinLogCoordinates
 -- | This is always sql#cloneContext.
 ccKind :: Lens' CloneContext Text
 ccKind = lens _ccKind (\ s a -> s{_ccKind = a})
+
+instance FromJSON CloneContext where
+        parseJSON
+          = withObject "CloneContext"
+              (\ o ->
+                 CloneContext <$>
+                   (o .:? "destinationInstanceName") <*>
+                     (o .:? "binLogCoordinates")
+                     <*> (o .:? "kind" .!= "sql#cloneContext"))
+
+instance ToJSON CloneContext where
+        toJSON CloneContext{..}
+          = object
+              (catMaybes
+                 [("destinationInstanceName" .=) <$>
+                    _ccDestinationInstanceName,
+                  ("binLogCoordinates" .=) <$> _ccBinLogCoordinates,
+                  Just ("kind" .= _ccKind)])
 
 -- | A database resource inside a Cloud SQL instance.
 --
@@ -448,6 +564,31 @@ dInstance :: Lens' Database (Maybe Text)
 dInstance
   = lens _dInstance (\ s a -> s{_dInstance = a})
 
+instance FromJSON Database where
+        parseJSON
+          = withObject "Database"
+              (\ o ->
+                 Database <$>
+                   (o .:? "etag") <*> (o .:? "project") <*>
+                     (o .:? "kind" .!= "sql#database")
+                     <*> (o .:? "collation")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "charset")
+                     <*> (o .:? "instance"))
+
+instance ToJSON Database where
+        toJSON Database{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _dEtag,
+                  ("project" .=) <$> _dProject,
+                  Just ("kind" .= _dKind),
+                  ("collation" .=) <$> _dCollation,
+                  ("selfLink" .=) <$> _dSelfLink,
+                  ("name" .=) <$> _dName, ("charset" .=) <$> _dCharset,
+                  ("instance" .=) <$> _dInstance])
+
 -- | MySQL flags for Cloud SQL instances.
 --
 -- /See:/ 'databaseFlags' smart constructor.
@@ -484,6 +625,18 @@ dfValue = lens _dfValue (\ s a -> s{_dfValue = a})
 -- variables.
 dfName :: Lens' DatabaseFlags (Maybe Text)
 dfName = lens _dfName (\ s a -> s{_dfName = a})
+
+instance FromJSON DatabaseFlags where
+        parseJSON
+          = withObject "DatabaseFlags"
+              (\ o ->
+                 DatabaseFlags <$> (o .:? "value") <*> (o .:? "name"))
+
+instance ToJSON DatabaseFlags where
+        toJSON DatabaseFlags{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _dfValue, ("name" .=) <$> _dfName])
 
 -- | A Cloud SQL instance resource.
 --
@@ -707,6 +860,59 @@ diIpAddresses
       . _Default
       . _Coerce
 
+instance FromJSON DatabaseInstance where
+        parseJSON
+          = withObject "DatabaseInstance"
+              (\ o ->
+                 DatabaseInstance <$>
+                   (o .:? "maxDiskSize") <*>
+                     (o .:? "onPremisesConfiguration")
+                     <*> (o .:? "etag")
+                     <*> (o .:? "state")
+                     <*> (o .:? "ipv6Address")
+                     <*> (o .:? "serverCaCert")
+                     <*> (o .:? "databaseVersion")
+                     <*> (o .:? "project")
+                     <*> (o .:? "settings")
+                     <*> (o .:? "kind" .!= "sql#instance")
+                     <*> (o .:? "currentDiskSize")
+                     <*> (o .:? "instanceType")
+                     <*> (o .:? "replicaNames" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "masterInstanceName")
+                     <*> (o .:? "replicaConfiguration")
+                     <*> (o .:? "region")
+                     <*> (o .:? "serviceAccountEmailAddress")
+                     <*> (o .:? "ipAddresses" .!= mempty))
+
+instance ToJSON DatabaseInstance where
+        toJSON DatabaseInstance{..}
+          = object
+              (catMaybes
+                 [("maxDiskSize" .=) <$> _diMaxDiskSize,
+                  ("onPremisesConfiguration" .=) <$>
+                    _diOnPremisesConfiguration,
+                  ("etag" .=) <$> _diEtag, ("state" .=) <$> _diState,
+                  ("ipv6Address" .=) <$> _diIpv6Address,
+                  ("serverCaCert" .=) <$> _diServerCaCert,
+                  ("databaseVersion" .=) <$> _diDatabaseVersion,
+                  ("project" .=) <$> _diProject,
+                  ("settings" .=) <$> _diSettings,
+                  Just ("kind" .= _diKind),
+                  ("currentDiskSize" .=) <$> _diCurrentDiskSize,
+                  ("instanceType" .=) <$> _diInstanceType,
+                  ("replicaNames" .=) <$> _diReplicaNames,
+                  ("selfLink" .=) <$> _diSelfLink,
+                  ("name" .=) <$> _diName,
+                  ("masterInstanceName" .=) <$> _diMasterInstanceName,
+                  ("replicaConfiguration" .=) <$>
+                    _diReplicaConfiguration,
+                  ("region" .=) <$> _diRegion,
+                  ("serviceAccountEmailAddress" .=) <$>
+                    _diServiceAccountEmailAddress,
+                  ("ipAddresses" .=) <$> _diIpAddresses])
+
 -- | Database list response.
 --
 -- /See:/ 'databasesListResponse' smart constructor.
@@ -740,6 +946,21 @@ dlrItems
   = lens _dlrItems (\ s a -> s{_dlrItems = a}) .
       _Default
       . _Coerce
+
+instance FromJSON DatabasesListResponse where
+        parseJSON
+          = withObject "DatabasesListResponse"
+              (\ o ->
+                 DatabasesListResponse <$>
+                   (o .:? "kind" .!= "sql#databasesList") <*>
+                     (o .:? "items" .!= mempty))
+
+instance ToJSON DatabasesListResponse where
+        toJSON DatabasesListResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _dlrKind),
+                  ("items" .=) <$> _dlrItems])
 
 -- | Database instance export context.
 --
@@ -820,6 +1041,28 @@ ecDatabases
       _Default
       . _Coerce
 
+instance FromJSON ExportContext where
+        parseJSON
+          = withObject "ExportContext"
+              (\ o ->
+                 ExportContext <$>
+                   (o .:? "csvExportOptions") <*>
+                     (o .:? "kind" .!= "sql#exportContext")
+                     <*> (o .:? "uri")
+                     <*> (o .:? "fileType")
+                     <*> (o .:? "sqlExportOptions")
+                     <*> (o .:? "databases" .!= mempty))
+
+instance ToJSON ExportContext where
+        toJSON ExportContext{..}
+          = object
+              (catMaybes
+                 [("csvExportOptions" .=) <$> _ecCsvExportOptions,
+                  Just ("kind" .= _ecKind), ("uri" .=) <$> _ecUri,
+                  ("fileType" .=) <$> _ecFileType,
+                  ("sqlExportOptions" .=) <$> _ecSqlExportOptions,
+                  ("databases" .=) <$> _ecDatabases])
+
 -- | Options for exporting data as CSV.
 --
 -- /See:/ 'exportContextCsvExportOptions' smart constructor.
@@ -844,6 +1087,19 @@ ecceoSelectQuery :: Lens' ExportContextCsvExportOptions (Maybe Text)
 ecceoSelectQuery
   = lens _ecceoSelectQuery
       (\ s a -> s{_ecceoSelectQuery = a})
+
+instance FromJSON ExportContextCsvExportOptions where
+        parseJSON
+          = withObject "ExportContextCsvExportOptions"
+              (\ o ->
+                 ExportContextCsvExportOptions <$>
+                   (o .:? "selectQuery"))
+
+instance ToJSON ExportContextCsvExportOptions where
+        toJSON ExportContextCsvExportOptions{..}
+          = object
+              (catMaybes
+                 [("selectQuery" .=) <$> _ecceoSelectQuery])
 
 -- | Options for exporting data as SQL statements.
 --
@@ -881,6 +1137,20 @@ ecseoTables
   = lens _ecseoTables (\ s a -> s{_ecseoTables = a}) .
       _Default
       . _Coerce
+
+instance FromJSON ExportContextSqlExportOptions where
+        parseJSON
+          = withObject "ExportContextSqlExportOptions"
+              (\ o ->
+                 ExportContextSqlExportOptions <$>
+                   (o .:? "schemaOnly") <*> (o .:? "tables" .!= mempty))
+
+instance ToJSON ExportContextSqlExportOptions where
+        toJSON ExportContextSqlExportOptions{..}
+          = object
+              (catMaybes
+                 [("schemaOnly" .=) <$> _ecseoSchemaOnly,
+                  ("tables" .=) <$> _ecseoTables])
 
 -- | A Google Cloud SQL service flag resource.
 --
@@ -966,6 +1236,30 @@ fMinValue :: Lens' Flag (Maybe Int64)
 fMinValue
   = lens _fMinValue (\ s a -> s{_fMinValue = a})
 
+instance FromJSON Flag where
+        parseJSON
+          = withObject "Flag"
+              (\ o ->
+                 Flag <$>
+                   (o .:? "maxValue") <*> (o .:? "kind" .!= "sql#flag")
+                     <*> (o .:? "appliesTo" .!= mempty)
+                     <*> (o .:? "name")
+                     <*> (o .:? "allowedStringValues" .!= mempty)
+                     <*> (o .:? "type")
+                     <*> (o .:? "minValue"))
+
+instance ToJSON Flag where
+        toJSON Flag{..}
+          = object
+              (catMaybes
+                 [("maxValue" .=) <$> _fMaxValue,
+                  Just ("kind" .= _fKind),
+                  ("appliesTo" .=) <$> _fAppliesTo,
+                  ("name" .=) <$> _fName,
+                  ("allowedStringValues" .=) <$> _fAllowedStringValues,
+                  ("type" .=) <$> _fType,
+                  ("minValue" .=) <$> _fMinValue])
+
 -- | Flags list response.
 --
 -- /See:/ 'flagsListResponse' smart constructor.
@@ -999,6 +1293,21 @@ flrItems
   = lens _flrItems (\ s a -> s{_flrItems = a}) .
       _Default
       . _Coerce
+
+instance FromJSON FlagsListResponse where
+        parseJSON
+          = withObject "FlagsListResponse"
+              (\ o ->
+                 FlagsListResponse <$>
+                   (o .:? "kind" .!= "sql#flagsList") <*>
+                     (o .:? "items" .!= mempty))
+
+instance ToJSON FlagsListResponse where
+        toJSON FlagsListResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _flrKind),
+                  ("items" .=) <$> _flrItems])
 
 -- | Database instance import context.
 --
@@ -1065,6 +1374,27 @@ icFileType :: Lens' ImportContext (Maybe Text)
 icFileType
   = lens _icFileType (\ s a -> s{_icFileType = a})
 
+instance FromJSON ImportContext where
+        parseJSON
+          = withObject "ImportContext"
+              (\ o ->
+                 ImportContext <$>
+                   (o .:? "database") <*>
+                     (o .:? "kind" .!= "sql#importContext")
+                     <*> (o .:? "csvImportOptions")
+                     <*> (o .:? "uri")
+                     <*> (o .:? "fileType"))
+
+instance ToJSON ImportContext where
+        toJSON ImportContext{..}
+          = object
+              (catMaybes
+                 [("database" .=) <$> _icDatabase,
+                  Just ("kind" .= _icKind),
+                  ("csvImportOptions" .=) <$> _icCsvImportOptions,
+                  ("uri" .=) <$> _icUri,
+                  ("fileType" .=) <$> _icFileType])
+
 -- | Options for importing data as CSV.
 --
 -- /See:/ 'importContextCsvImportOptions' smart constructor.
@@ -1101,6 +1431,20 @@ iccioTable :: Lens' ImportContextCsvImportOptions (Maybe Text)
 iccioTable
   = lens _iccioTable (\ s a -> s{_iccioTable = a})
 
+instance FromJSON ImportContextCsvImportOptions where
+        parseJSON
+          = withObject "ImportContextCsvImportOptions"
+              (\ o ->
+                 ImportContextCsvImportOptions <$>
+                   (o .:? "columns" .!= mempty) <*> (o .:? "table"))
+
+instance ToJSON ImportContextCsvImportOptions where
+        toJSON ImportContextCsvImportOptions{..}
+          = object
+              (catMaybes
+                 [("columns" .=) <$> _iccioColumns,
+                  ("table" .=) <$> _iccioTable])
+
 -- | Database instance clone request.
 --
 -- /See:/ 'instancesCloneRequest' smart constructor.
@@ -1125,6 +1469,18 @@ icrCloneContext :: Lens' InstancesCloneRequest (Maybe (Maybe CloneContext))
 icrCloneContext
   = lens _icrCloneContext
       (\ s a -> s{_icrCloneContext = a})
+
+instance FromJSON InstancesCloneRequest where
+        parseJSON
+          = withObject "InstancesCloneRequest"
+              (\ o ->
+                 InstancesCloneRequest <$> (o .:? "cloneContext"))
+
+instance ToJSON InstancesCloneRequest where
+        toJSON InstancesCloneRequest{..}
+          = object
+              (catMaybes
+                 [("cloneContext" .=) <$> _icrCloneContext])
 
 -- | Database instance export request.
 --
@@ -1151,6 +1507,18 @@ ierExportContext
   = lens _ierExportContext
       (\ s a -> s{_ierExportContext = a})
 
+instance FromJSON InstancesExportRequest where
+        parseJSON
+          = withObject "InstancesExportRequest"
+              (\ o ->
+                 InstancesExportRequest <$> (o .:? "exportContext"))
+
+instance ToJSON InstancesExportRequest where
+        toJSON InstancesExportRequest{..}
+          = object
+              (catMaybes
+                 [("exportContext" .=) <$> _ierExportContext])
+
 -- | Database instance import request.
 --
 -- /See:/ 'instancesImportRequest' smart constructor.
@@ -1175,6 +1543,18 @@ iirImportContext :: Lens' InstancesImportRequest (Maybe (Maybe ImportContext))
 iirImportContext
   = lens _iirImportContext
       (\ s a -> s{_iirImportContext = a})
+
+instance FromJSON InstancesImportRequest where
+        parseJSON
+          = withObject "InstancesImportRequest"
+              (\ o ->
+                 InstancesImportRequest <$> (o .:? "importContext"))
+
+instance ToJSON InstancesImportRequest where
+        toJSON InstancesImportRequest{..}
+          = object
+              (catMaybes
+                 [("importContext" .=) <$> _iirImportContext])
 
 -- | Database instances list response.
 --
@@ -1221,6 +1601,23 @@ ilrItems
       _Default
       . _Coerce
 
+instance FromJSON InstancesListResponse where
+        parseJSON
+          = withObject "InstancesListResponse"
+              (\ o ->
+                 InstancesListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "sql#instancesList")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON InstancesListResponse where
+        toJSON InstancesListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _ilrNextPageToken,
+                  Just ("kind" .= _ilrKind),
+                  ("items" .=) <$> _ilrItems])
+
 -- | Database instance restore backup request.
 --
 -- /See:/ 'instancesRestoreBackupRequest' smart constructor.
@@ -1245,6 +1642,20 @@ irbrRestoreBackupContext :: Lens' InstancesRestoreBackupRequest (Maybe (Maybe Re
 irbrRestoreBackupContext
   = lens _irbrRestoreBackupContext
       (\ s a -> s{_irbrRestoreBackupContext = a})
+
+instance FromJSON InstancesRestoreBackupRequest where
+        parseJSON
+          = withObject "InstancesRestoreBackupRequest"
+              (\ o ->
+                 InstancesRestoreBackupRequest <$>
+                   (o .:? "restoreBackupContext"))
+
+instance ToJSON InstancesRestoreBackupRequest where
+        toJSON InstancesRestoreBackupRequest{..}
+          = object
+              (catMaybes
+                 [("restoreBackupContext" .=) <$>
+                    _irbrRestoreBackupContext])
 
 -- | IP Management configuration.
 --
@@ -1295,6 +1706,23 @@ icIpv4Enabled
   = lens _icIpv4Enabled
       (\ s a -> s{_icIpv4Enabled = a})
 
+instance FromJSON IpConfiguration where
+        parseJSON
+          = withObject "IpConfiguration"
+              (\ o ->
+                 IpConfiguration <$>
+                   (o .:? "authorizedNetworks" .!= mempty) <*>
+                     (o .:? "requireSsl")
+                     <*> (o .:? "ipv4Enabled"))
+
+instance ToJSON IpConfiguration where
+        toJSON IpConfiguration{..}
+          = object
+              (catMaybes
+                 [("authorizedNetworks" .=) <$> _icAuthorizedNetworks,
+                  ("requireSsl" .=) <$> _icRequireSsl,
+                  ("ipv4Enabled" .=) <$> _icIpv4Enabled])
+
 -- | Database instance IP Mapping.
 --
 -- /See:/ 'ipMapping' smart constructor.
@@ -1330,6 +1758,20 @@ imTimeToRetire :: Lens' IpMapping (Maybe UTCTime)
 imTimeToRetire
   = lens _imTimeToRetire
       (\ s a -> s{_imTimeToRetire = a})
+
+instance FromJSON IpMapping where
+        parseJSON
+          = withObject "IpMapping"
+              (\ o ->
+                 IpMapping <$>
+                   (o .:? "ipAddress") <*> (o .:? "timeToRetire"))
+
+instance ToJSON IpMapping where
+        toJSON IpMapping{..}
+          = object
+              (catMaybes
+                 [("ipAddress" .=) <$> _imIpAddress,
+                  ("timeToRetire" .=) <$> _imTimeToRetire])
 
 -- | Preferred location. This specifies where a Cloud SQL instance should
 -- preferably be located, either in a specific Compute Engine zone, or
@@ -1377,6 +1819,24 @@ lpFollowGaeApplication
 -- etc.).
 lpZone :: Lens' LocationPreference (Maybe Text)
 lpZone = lens _lpZone (\ s a -> s{_lpZone = a})
+
+instance FromJSON LocationPreference where
+        parseJSON
+          = withObject "LocationPreference"
+              (\ o ->
+                 LocationPreference <$>
+                   (o .:? "kind" .!= "sql#locationPreference") <*>
+                     (o .:? "followGaeApplication")
+                     <*> (o .:? "zone"))
+
+instance ToJSON LocationPreference where
+        toJSON LocationPreference{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _lpKind),
+                  ("followGaeApplication" .=) <$>
+                    _lpFollowGaeApplication,
+                  ("zone" .=) <$> _lpZone])
 
 -- | Read-replica configuration specific to MySQL databases.
 --
@@ -1506,6 +1966,42 @@ msrcPassword :: Lens' MySqlReplicaConfiguration (Maybe Text)
 msrcPassword
   = lens _msrcPassword (\ s a -> s{_msrcPassword = a})
 
+instance FromJSON MySqlReplicaConfiguration where
+        parseJSON
+          = withObject "MySqlReplicaConfiguration"
+              (\ o ->
+                 MySqlReplicaConfiguration <$>
+                   (o .:? "verifyServerCertificate") <*>
+                     (o .:? "kind" .!= "sql#mysqlReplicaConfiguration")
+                     <*> (o .:? "clientKey")
+                     <*> (o .:? "username")
+                     <*> (o .:? "sslCipher")
+                     <*> (o .:? "masterHeartbeatPeriod")
+                     <*> (o .:? "connectRetryInterval")
+                     <*> (o .:? "clientCertificate")
+                     <*> (o .:? "caCertificate")
+                     <*> (o .:? "dumpFilePath")
+                     <*> (o .:? "password"))
+
+instance ToJSON MySqlReplicaConfiguration where
+        toJSON MySqlReplicaConfiguration{..}
+          = object
+              (catMaybes
+                 [("verifyServerCertificate" .=) <$>
+                    _msrcVerifyServerCertificate,
+                  Just ("kind" .= _msrcKind),
+                  ("clientKey" .=) <$> _msrcClientKey,
+                  ("username" .=) <$> _msrcUsername,
+                  ("sslCipher" .=) <$> _msrcSslCipher,
+                  ("masterHeartbeatPeriod" .=) <$>
+                    _msrcMasterHeartbeatPeriod,
+                  ("connectRetryInterval" .=) <$>
+                    _msrcConnectRetryInterval,
+                  ("clientCertificate" .=) <$> _msrcClientCertificate,
+                  ("caCertificate" .=) <$> _msrcCaCertificate,
+                  ("dumpFilePath" .=) <$> _msrcDumpFilePath,
+                  ("password" .=) <$> _msrcPassword])
+
 -- | On-premises instance configuration.
 --
 -- /See:/ 'onPremisesConfiguration' smart constructor.
@@ -1537,6 +2033,21 @@ opcKind = lens _opcKind (\ s a -> s{_opcKind = a})
 opcHostPort :: Lens' OnPremisesConfiguration (Maybe Text)
 opcHostPort
   = lens _opcHostPort (\ s a -> s{_opcHostPort = a})
+
+instance FromJSON OnPremisesConfiguration where
+        parseJSON
+          = withObject "OnPremisesConfiguration"
+              (\ o ->
+                 OnPremisesConfiguration <$>
+                   (o .:? "kind" .!= "sql#onPremisesConfiguration") <*>
+                     (o .:? "hostPort"))
+
+instance ToJSON OnPremisesConfiguration where
+        toJSON OnPremisesConfiguration{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _opcKind),
+                  ("hostPort" .=) <$> _opcHostPort])
 
 -- | An Operations resource contains information about database instance
 -- operations such as create, delete, and restart. Operations resources are
@@ -1702,6 +2213,46 @@ opeTargetLink
   = lens _opeTargetLink
       (\ s a -> s{_opeTargetLink = a})
 
+instance FromJSON Operation where
+        parseJSON
+          = withObject "Operation"
+              (\ o ->
+                 Operation <$>
+                   (o .:? "targetId") <*> (o .:? "targetProject") <*>
+                     (o .:? "status")
+                     <*> (o .:? "insertTime")
+                     <*> (o .:? "importContext")
+                     <*> (o .:? "startTime")
+                     <*> (o .:? "kind" .!= "sql#operation")
+                     <*> (o .:? "error")
+                     <*> (o .:? "exportContext")
+                     <*> (o .:? "user")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "endTime")
+                     <*> (o .:? "operationType")
+                     <*> (o .:? "targetLink"))
+
+instance ToJSON Operation where
+        toJSON Operation{..}
+          = object
+              (catMaybes
+                 [("targetId" .=) <$> _opeTargetId,
+                  ("targetProject" .=) <$> _opeTargetProject,
+                  ("status" .=) <$> _opeStatus,
+                  ("insertTime" .=) <$> _opeInsertTime,
+                  ("importContext" .=) <$> _opeImportContext,
+                  ("startTime" .=) <$> _opeStartTime,
+                  Just ("kind" .= _opeKind),
+                  ("error" .=) <$> _opeError,
+                  ("exportContext" .=) <$> _opeExportContext,
+                  ("user" .=) <$> _opeUser,
+                  ("selfLink" .=) <$> _opeSelfLink,
+                  ("name" .=) <$> _opeName,
+                  ("endTime" .=) <$> _opeEndTime,
+                  ("operationType" .=) <$> _opeOperationType,
+                  ("targetLink" .=) <$> _opeTargetLink])
+
 -- | Database instance operation error.
 --
 -- /See:/ 'operationError' smart constructor.
@@ -1742,6 +2293,22 @@ oeMessage :: Lens' OperationError (Maybe Text)
 oeMessage
   = lens _oeMessage (\ s a -> s{_oeMessage = a})
 
+instance FromJSON OperationError where
+        parseJSON
+          = withObject "OperationError"
+              (\ o ->
+                 OperationError <$>
+                   (o .:? "kind" .!= "sql#operationError") <*>
+                     (o .:? "code")
+                     <*> (o .:? "message"))
+
+instance ToJSON OperationError where
+        toJSON OperationError{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _oeKind), ("code" .=) <$> _oeCode,
+                  ("message" .=) <$> _oeMessage])
+
 -- | Database instance operation errors list wrapper.
 --
 -- /See:/ 'operationErrors' smart constructor.
@@ -1774,6 +2341,21 @@ oErrors :: Lens' OperationErrors [Maybe OperationError]
 oErrors
   = lens _oErrors (\ s a -> s{_oErrors = a}) . _Default
       . _Coerce
+
+instance FromJSON OperationErrors where
+        parseJSON
+          = withObject "OperationErrors"
+              (\ o ->
+                 OperationErrors <$>
+                   (o .:? "kind" .!= "sql#operationErrors") <*>
+                     (o .:? "errors" .!= mempty))
+
+instance ToJSON OperationErrors where
+        toJSON OperationErrors{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _oKind),
+                  ("errors" .=) <$> _oErrors])
 
 -- | Database instance list operations response.
 --
@@ -1820,6 +2402,23 @@ olrItems
       _Default
       . _Coerce
 
+instance FromJSON OperationsListResponse where
+        parseJSON
+          = withObject "OperationsListResponse"
+              (\ o ->
+                 OperationsListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "sql#operationsList")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON OperationsListResponse where
+        toJSON OperationsListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _olrNextPageToken,
+                  Just ("kind" .= _olrKind),
+                  ("items" .=) <$> _olrItems])
+
 -- | Read-replica configuration for connecting to the master.
 --
 -- /See:/ 'replicaConfiguration' smart constructor.
@@ -1857,6 +2456,22 @@ rcMysqlReplicaConfiguration :: Lens' ReplicaConfiguration (Maybe (Maybe MySqlRep
 rcMysqlReplicaConfiguration
   = lens _rcMysqlReplicaConfiguration
       (\ s a -> s{_rcMysqlReplicaConfiguration = a})
+
+instance FromJSON ReplicaConfiguration where
+        parseJSON
+          = withObject "ReplicaConfiguration"
+              (\ o ->
+                 ReplicaConfiguration <$>
+                   (o .:? "kind" .!= "sql#replicaConfiguration") <*>
+                     (o .:? "mysqlReplicaConfiguration"))
+
+instance ToJSON ReplicaConfiguration where
+        toJSON ReplicaConfiguration{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _rcKind),
+                  ("mysqlReplicaConfiguration" .=) <$>
+                    _rcMysqlReplicaConfiguration])
 
 -- | Database instance restore from backup context.
 --
@@ -1900,6 +2515,22 @@ rbcBackupRunId
 -- | This is always sql#restoreBackupContext.
 rbcKind :: Lens' RestoreBackupContext Text
 rbcKind = lens _rbcKind (\ s a -> s{_rbcKind = a})
+
+instance FromJSON RestoreBackupContext where
+        parseJSON
+          = withObject "RestoreBackupContext"
+              (\ o ->
+                 RestoreBackupContext <$>
+                   (o .:? "instanceId") <*> (o .:? "backupRunId") <*>
+                     (o .:? "kind" .!= "sql#restoreBackupContext"))
+
+instance ToJSON RestoreBackupContext where
+        toJSON RestoreBackupContext{..}
+          = object
+              (catMaybes
+                 [("instanceId" .=) <$> _rbcInstanceId,
+                  ("backupRunId" .=) <$> _rbcBackupRunId,
+                  Just ("kind" .= _rbcKind)])
 
 -- | Database instance settings.
 --
@@ -2061,6 +2692,47 @@ sBackupConfiguration
   = lens _sBackupConfiguration
       (\ s a -> s{_sBackupConfiguration = a})
 
+instance FromJSON Settings where
+        parseJSON
+          = withObject "Settings"
+              (\ o ->
+                 Settings <$>
+                   (o .:? "replicationType") <*>
+                     (o .:? "activationPolicy")
+                     <*> (o .:? "settingsVersion")
+                     <*> (o .:? "authorizedGaeApplications" .!= mempty)
+                     <*> (o .:? "kind" .!= "sql#settings")
+                     <*> (o .:? "pricingPlan")
+                     <*> (o .:? "ipConfiguration")
+                     <*> (o .:? "databaseReplicationEnabled")
+                     <*> (o .:? "tier")
+                     <*> (o .:? "databaseFlags" .!= mempty)
+                     <*> (o .:? "crashSafeReplicationEnabled")
+                     <*> (o .:? "locationPreference")
+                     <*> (o .:? "backupConfiguration"))
+
+instance ToJSON Settings where
+        toJSON Settings{..}
+          = object
+              (catMaybes
+                 [("replicationType" .=) <$> _sReplicationType,
+                  ("activationPolicy" .=) <$> _sActivationPolicy,
+                  ("settingsVersion" .=) <$> _sSettingsVersion,
+                  ("authorizedGaeApplications" .=) <$>
+                    _sAuthorizedGaeApplications,
+                  Just ("kind" .= _sKind),
+                  ("pricingPlan" .=) <$> _sPricingPlan,
+                  ("ipConfiguration" .=) <$> _sIpConfiguration,
+                  ("databaseReplicationEnabled" .=) <$>
+                    _sDatabaseReplicationEnabled,
+                  ("tier" .=) <$> _sTier,
+                  ("databaseFlags" .=) <$> _sDatabaseFlags,
+                  ("crashSafeReplicationEnabled" .=) <$>
+                    _sCrashSafeReplicationEnabled,
+                  ("locationPreference" .=) <$> _sLocationPreference,
+                  ("backupConfiguration" .=) <$>
+                    _sBackupConfiguration])
+
 -- | SslCerts Resource
 --
 -- /See:/ 'sslCert' smart constructor.
@@ -2160,6 +2832,35 @@ scInstance :: Lens' SslCert (Maybe Text)
 scInstance
   = lens _scInstance (\ s a -> s{_scInstance = a})
 
+instance FromJSON SslCert where
+        parseJSON
+          = withObject "SslCert"
+              (\ o ->
+                 SslCert <$>
+                   (o .:? "commonName") <*>
+                     (o .:? "kind" .!= "sql#sslCert")
+                     <*> (o .:? "certSerialNumber")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "cert")
+                     <*> (o .:? "sha1Fingerprint")
+                     <*> (o .:? "expirationTime")
+                     <*> (o .:? "createTime")
+                     <*> (o .:? "instance"))
+
+instance ToJSON SslCert where
+        toJSON SslCert{..}
+          = object
+              (catMaybes
+                 [("commonName" .=) <$> _scCommonName,
+                  Just ("kind" .= _scKind),
+                  ("certSerialNumber" .=) <$> _scCertSerialNumber,
+                  ("selfLink" .=) <$> _scSelfLink,
+                  ("cert" .=) <$> _scCert,
+                  ("sha1Fingerprint" .=) <$> _scSha1Fingerprint,
+                  ("expirationTime" .=) <$> _scExpirationTime,
+                  ("createTime" .=) <$> _scCreateTime,
+                  ("instance" .=) <$> _scInstance])
+
 -- | SslCertDetail.
 --
 -- /See:/ 'sslCertDetail' smart constructor.
@@ -2195,6 +2896,20 @@ scdCertPrivateKey
   = lens _scdCertPrivateKey
       (\ s a -> s{_scdCertPrivateKey = a})
 
+instance FromJSON SslCertDetail where
+        parseJSON
+          = withObject "SslCertDetail"
+              (\ o ->
+                 SslCertDetail <$>
+                   (o .:? "certInfo") <*> (o .:? "certPrivateKey"))
+
+instance ToJSON SslCertDetail where
+        toJSON SslCertDetail{..}
+          = object
+              (catMaybes
+                 [("certInfo" .=) <$> _scdCertInfo,
+                  ("certPrivateKey" .=) <$> _scdCertPrivateKey])
+
 -- | SslCerts create ephemeral certificate request.
 --
 -- /See:/ 'sslCertsCreateEphemeralRequest' smart constructor.
@@ -2219,6 +2934,19 @@ sccerPublicKey :: Lens' SslCertsCreateEphemeralRequest (Maybe Text)
 sccerPublicKey
   = lens _sccerPublicKey
       (\ s a -> s{_sccerPublicKey = a})
+
+instance FromJSON SslCertsCreateEphemeralRequest
+         where
+        parseJSON
+          = withObject "SslCertsCreateEphemeralRequest"
+              (\ o ->
+                 SslCertsCreateEphemeralRequest <$>
+                   (o .:? "public_key"))
+
+instance ToJSON SslCertsCreateEphemeralRequest where
+        toJSON SslCertsCreateEphemeralRequest{..}
+          = object
+              (catMaybes [("public_key" .=) <$> _sccerPublicKey])
 
 -- | SslCerts insert request.
 --
@@ -2246,6 +2974,17 @@ scirCommonName :: Lens' SslCertsInsertRequest (Maybe Text)
 scirCommonName
   = lens _scirCommonName
       (\ s a -> s{_scirCommonName = a})
+
+instance FromJSON SslCertsInsertRequest where
+        parseJSON
+          = withObject "SslCertsInsertRequest"
+              (\ o ->
+                 SslCertsInsertRequest <$> (o .:? "commonName"))
+
+instance ToJSON SslCertsInsertRequest where
+        toJSON SslCertsInsertRequest{..}
+          = object
+              (catMaybes [("commonName" .=) <$> _scirCommonName])
 
 -- | SslCert insert response.
 --
@@ -2293,6 +3032,23 @@ scirClientCert
   = lens _scirClientCert
       (\ s a -> s{_scirClientCert = a})
 
+instance FromJSON SslCertsInsertResponse where
+        parseJSON
+          = withObject "SslCertsInsertResponse"
+              (\ o ->
+                 SslCertsInsertResponse <$>
+                   (o .:? "serverCaCert") <*>
+                     (o .:? "kind" .!= "sql#sslCertsInsert")
+                     <*> (o .:? "clientCert"))
+
+instance ToJSON SslCertsInsertResponse where
+        toJSON SslCertsInsertResponse{..}
+          = object
+              (catMaybes
+                 [("serverCaCert" .=) <$> _scirServerCaCert,
+                  Just ("kind" .= _scirKind),
+                  ("clientCert" .=) <$> _scirClientCert])
+
 -- | SslCerts list response.
 --
 -- /See:/ 'sslCertsListResponse' smart constructor.
@@ -2326,6 +3082,21 @@ sclrItems
   = lens _sclrItems (\ s a -> s{_sclrItems = a}) .
       _Default
       . _Coerce
+
+instance FromJSON SslCertsListResponse where
+        parseJSON
+          = withObject "SslCertsListResponse"
+              (\ o ->
+                 SslCertsListResponse <$>
+                   (o .:? "kind" .!= "sql#sslCertsList") <*>
+                     (o .:? "items" .!= mempty))
+
+instance ToJSON SslCertsListResponse where
+        toJSON SslCertsListResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _sclrKind),
+                  ("items" .=) <$> _sclrItems])
 
 -- | A Google Cloud SQL service tier resource.
 --
@@ -2387,6 +3158,25 @@ tDiskQuota
 tRAM :: Lens' Tier (Maybe Int64)
 tRAM = lens _tRAM (\ s a -> s{_tRAM = a})
 
+instance FromJSON Tier where
+        parseJSON
+          = withObject "Tier"
+              (\ o ->
+                 Tier <$>
+                   (o .:? "kind" .!= "sql#tier") <*> (o .:? "tier") <*>
+                     (o .:? "region" .!= mempty)
+                     <*> (o .:? "DiskQuota")
+                     <*> (o .:? "RAM"))
+
+instance ToJSON Tier where
+        toJSON Tier{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _tKind), ("tier" .=) <$> _tTier,
+                  ("region" .=) <$> _tRegion,
+                  ("DiskQuota" .=) <$> _tDiskQuota,
+                  ("RAM" .=) <$> _tRAM])
+
 -- | Tiers list response.
 --
 -- /See:/ 'tiersListResponse' smart constructor.
@@ -2420,6 +3210,21 @@ tlrItems
   = lens _tlrItems (\ s a -> s{_tlrItems = a}) .
       _Default
       . _Coerce
+
+instance FromJSON TiersListResponse where
+        parseJSON
+          = withObject "TiersListResponse"
+              (\ o ->
+                 TiersListResponse <$>
+                   (o .:? "kind" .!= "sql#tiersList") <*>
+                     (o .:? "items" .!= mempty))
+
+instance ToJSON TiersListResponse where
+        toJSON TiersListResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _tlrKind),
+                  ("items" .=) <$> _tlrItems])
 
 -- | A Cloud SQL user resource.
 --
@@ -2501,6 +3306,29 @@ uInstance :: Lens' User (Maybe Text)
 uInstance
   = lens _uInstance (\ s a -> s{_uInstance = a})
 
+instance FromJSON User where
+        parseJSON
+          = withObject "User"
+              (\ o ->
+                 User <$>
+                   (o .:? "etag") <*> (o .:? "project") <*>
+                     (o .:? "kind" .!= "sql#user")
+                     <*> (o .:? "name")
+                     <*> (o .:? "password")
+                     <*> (o .:? "host")
+                     <*> (o .:? "instance"))
+
+instance ToJSON User where
+        toJSON User{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _uEtag,
+                  ("project" .=) <$> _uProject,
+                  Just ("kind" .= _uKind), ("name" .=) <$> _uName,
+                  ("password" .=) <$> _uPassword,
+                  ("host" .=) <$> _uHost,
+                  ("instance" .=) <$> _uInstance])
+
 -- | User list response.
 --
 -- /See:/ 'usersListResponse' smart constructor.
@@ -2546,3 +3374,20 @@ ulrItems
   = lens _ulrItems (\ s a -> s{_ulrItems = a}) .
       _Default
       . _Coerce
+
+instance FromJSON UsersListResponse where
+        parseJSON
+          = withObject "UsersListResponse"
+              (\ o ->
+                 UsersListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "sql#usersList")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON UsersListResponse where
+        toJSON UsersListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _ulrNextPageToken,
+                  Just ("kind" .= _ulrKind),
+                  ("items" .=) <$> _ulrItems])

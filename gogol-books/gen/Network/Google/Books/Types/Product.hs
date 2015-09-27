@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -191,6 +192,50 @@ aaLayerId :: Lens' Annotation (Maybe Text)
 aaLayerId
   = lens _aaLayerId (\ s a -> s{_aaLayerId = a})
 
+instance FromJSON Annotation where
+        parseJSON
+          = withObject "Annotation"
+              (\ o ->
+                 Annotation <$>
+                   (o .:? "selectedText") <*> (o .:? "layerSummary") <*>
+                     (o .:? "highlightStyle")
+                     <*> (o .:? "clientVersionRanges")
+                     <*> (o .:? "pageIds" .!= mempty)
+                     <*> (o .:? "kind" .!= "books#annotation")
+                     <*> (o .:? "data")
+                     <*> (o .:? "created")
+                     <*> (o .:? "afterSelectedText")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "currentVersionRanges")
+                     <*> (o .:? "volumeId")
+                     <*> (o .:? "beforeSelectedText")
+                     <*> (o .:? "id")
+                     <*> (o .:? "deleted")
+                     <*> (o .:? "updated")
+                     <*> (o .:? "layerId"))
+
+instance ToJSON Annotation where
+        toJSON Annotation{..}
+          = object
+              (catMaybes
+                 [("selectedText" .=) <$> _aaSelectedText,
+                  ("layerSummary" .=) <$> _aaLayerSummary,
+                  ("highlightStyle" .=) <$> _aaHighlightStyle,
+                  ("clientVersionRanges" .=) <$>
+                    _aaClientVersionRanges,
+                  ("pageIds" .=) <$> _aaPageIds,
+                  Just ("kind" .= _aaKind), ("data" .=) <$> _aaData,
+                  ("created" .=) <$> _aaCreated,
+                  ("afterSelectedText" .=) <$> _aaAfterSelectedText,
+                  ("selfLink" .=) <$> _aaSelfLink,
+                  ("currentVersionRanges" .=) <$>
+                    _aaCurrentVersionRanges,
+                  ("volumeId" .=) <$> _aaVolumeId,
+                  ("beforeSelectedText" .=) <$> _aaBeforeSelectedText,
+                  ("id" .=) <$> _aaId, ("deleted" .=) <$> _aaDeleted,
+                  ("updated" .=) <$> _aaUpdated,
+                  ("layerId" .=) <$> _aaLayerId])
+
 -- | Selection ranges sent from the client.
 --
 -- /See:/ 'annotationClientVersionRanges' smart constructor.
@@ -253,6 +298,26 @@ aGbTextRange
 aCfiRange :: Lens' AnnotationClientVersionRanges (Maybe (Maybe BooksAnnotationsRange))
 aCfiRange
   = lens _aCfiRange (\ s a -> s{_aCfiRange = a})
+
+instance FromJSON AnnotationClientVersionRanges where
+        parseJSON
+          = withObject "AnnotationClientVersionRanges"
+              (\ o ->
+                 AnnotationClientVersionRanges <$>
+                   (o .:? "gbImageRange") <*> (o .:? "contentVersion")
+                     <*> (o .:? "imageCfiRange")
+                     <*> (o .:? "gbTextRange")
+                     <*> (o .:? "cfiRange"))
+
+instance ToJSON AnnotationClientVersionRanges where
+        toJSON AnnotationClientVersionRanges{..}
+          = object
+              (catMaybes
+                 [("gbImageRange" .=) <$> _aGbImageRange,
+                  ("contentVersion" .=) <$> _aContentVersion,
+                  ("imageCfiRange" .=) <$> _aImageCfiRange,
+                  ("gbTextRange" .=) <$> _aGbTextRange,
+                  ("cfiRange" .=) <$> _aCfiRange])
 
 -- | Selection ranges for the most recent content version.
 --
@@ -318,6 +383,27 @@ acvrCfiRange :: Lens' AnnotationCurrentVersionRanges (Maybe (Maybe BooksAnnotati
 acvrCfiRange
   = lens _acvrCfiRange (\ s a -> s{_acvrCfiRange = a})
 
+instance FromJSON AnnotationCurrentVersionRanges
+         where
+        parseJSON
+          = withObject "AnnotationCurrentVersionRanges"
+              (\ o ->
+                 AnnotationCurrentVersionRanges <$>
+                   (o .:? "gbImageRange") <*> (o .:? "contentVersion")
+                     <*> (o .:? "imageCfiRange")
+                     <*> (o .:? "gbTextRange")
+                     <*> (o .:? "cfiRange"))
+
+instance ToJSON AnnotationCurrentVersionRanges where
+        toJSON AnnotationCurrentVersionRanges{..}
+          = object
+              (catMaybes
+                 [("gbImageRange" .=) <$> _acvrGbImageRange,
+                  ("contentVersion" .=) <$> _acvrContentVersion,
+                  ("imageCfiRange" .=) <$> _acvrImageCfiRange,
+                  ("gbTextRange" .=) <$> _acvrGbTextRange,
+                  ("cfiRange" .=) <$> _acvrCfiRange])
+
 --
 -- /See:/ 'annotationLayerSummary' smart constructor.
 data AnnotationLayerSummary = AnnotationLayerSummary
@@ -363,6 +449,25 @@ alsRemainingCharacterCount :: Lens' AnnotationLayerSummary (Maybe Int32)
 alsRemainingCharacterCount
   = lens _alsRemainingCharacterCount
       (\ s a -> s{_alsRemainingCharacterCount = a})
+
+instance FromJSON AnnotationLayerSummary where
+        parseJSON
+          = withObject "AnnotationLayerSummary"
+              (\ o ->
+                 AnnotationLayerSummary <$>
+                   (o .:? "limitType") <*>
+                     (o .:? "allowedCharacterCount")
+                     <*> (o .:? "remainingCharacterCount"))
+
+instance ToJSON AnnotationLayerSummary where
+        toJSON AnnotationLayerSummary{..}
+          = object
+              (catMaybes
+                 [("limitType" .=) <$> _alsLimitType,
+                  ("allowedCharacterCount" .=) <$>
+                    _alsAllowedCharacterCount,
+                  ("remainingCharacterCount" .=) <$>
+                    _alsRemainingCharacterCount])
 
 --
 -- /See:/ 'annotationdata' smart constructor.
@@ -458,6 +563,35 @@ annnLayerId :: Lens' Annotationdata (Maybe Text)
 annnLayerId
   = lens _annnLayerId (\ s a -> s{_annnLayerId = a})
 
+instance FromJSON Annotationdata where
+        parseJSON
+          = withObject "Annotationdata"
+              (\ o ->
+                 Annotationdata <$>
+                   (o .:? "encoded_data") <*>
+                     (o .:? "kind" .!= "books#annotationdata")
+                     <*> (o .:? "data")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "annotationType")
+                     <*> (o .:? "volumeId")
+                     <*> (o .:? "id")
+                     <*> (o .:? "updated")
+                     <*> (o .:? "layerId"))
+
+instance ToJSON Annotationdata where
+        toJSON Annotationdata{..}
+          = object
+              (catMaybes
+                 [("encoded_data" .=) <$> _annnEncodedData,
+                  Just ("kind" .= _annnKind),
+                  ("data" .=) <$> _annnData,
+                  ("selfLink" .=) <$> _annnSelfLink,
+                  ("annotationType" .=) <$> _annnAnnotationType,
+                  ("volumeId" .=) <$> _annnVolumeId,
+                  ("id" .=) <$> _annnId,
+                  ("updated" .=) <$> _annnUpdated,
+                  ("layerId" .=) <$> _annnLayerId])
+
 --
 -- /See:/ 'annotations' smart constructor.
 data Annotations = Annotations
@@ -513,6 +647,24 @@ annItems
       _Default
       . _Coerce
 
+instance FromJSON Annotations where
+        parseJSON
+          = withObject "Annotations"
+              (\ o ->
+                 Annotations <$>
+                   (o .:? "totalItems") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "books#annotations")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON Annotations where
+        toJSON Annotations{..}
+          = object
+              (catMaybes
+                 [("totalItems" .=) <$> _annTotalItems,
+                  ("nextPageToken" .=) <$> _annNextPageToken,
+                  Just ("kind" .= _annKind),
+                  ("items" .=) <$> _annItems])
+
 --
 -- /See:/ 'annotationsSummary' smart constructor.
 data AnnotationsSummary = AnnotationsSummary
@@ -543,6 +695,21 @@ asLayers
   = lens _asLayers (\ s a -> s{_asLayers = a}) .
       _Default
       . _Coerce
+
+instance FromJSON AnnotationsSummary where
+        parseJSON
+          = withObject "AnnotationsSummary"
+              (\ o ->
+                 AnnotationsSummary <$>
+                   (o .:? "kind" .!= "books#annotationsSummary") <*>
+                     (o .:? "layers" .!= mempty))
+
+instance ToJSON AnnotationsSummary where
+        toJSON AnnotationsSummary{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _asKind),
+                  ("layers" .=) <$> _asLayers])
 
 --
 -- /See:/ 'annotationsSummaryItemLayers' smart constructor.
@@ -601,6 +768,29 @@ asilRemainingCharacterCount
   = lens _asilRemainingCharacterCount
       (\ s a -> s{_asilRemainingCharacterCount = a})
 
+instance FromJSON AnnotationsSummaryItemLayers where
+        parseJSON
+          = withObject "AnnotationsSummaryItemLayers"
+              (\ o ->
+                 AnnotationsSummaryItemLayers <$>
+                   (o .:? "limitType") <*>
+                     (o .:? "allowedCharacterCount")
+                     <*> (o .:? "updated")
+                     <*> (o .:? "layerId")
+                     <*> (o .:? "remainingCharacterCount"))
+
+instance ToJSON AnnotationsSummaryItemLayers where
+        toJSON AnnotationsSummaryItemLayers{..}
+          = object
+              (catMaybes
+                 [("limitType" .=) <$> _asilLimitType,
+                  ("allowedCharacterCount" .=) <$>
+                    _asilAllowedCharacterCount,
+                  ("updated" .=) <$> _asilUpdated,
+                  ("layerId" .=) <$> _asilLayerId,
+                  ("remainingCharacterCount" .=) <$>
+                    _asilRemainingCharacterCount])
+
 --
 -- /See:/ 'annotationsdata' smart constructor.
 data Annotationsdata = Annotationsdata
@@ -652,6 +842,23 @@ aItems :: Lens' Annotationsdata [Maybe Annotationdata]
 aItems
   = lens _aItems (\ s a -> s{_aItems = a}) . _Default .
       _Coerce
+
+instance FromJSON Annotationsdata where
+        parseJSON
+          = withObject "Annotationsdata"
+              (\ o ->
+                 Annotationsdata <$>
+                   (o .:? "totalItems") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "books#annotationsdata")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON Annotationsdata where
+        toJSON Annotationsdata{..}
+          = object
+              (catMaybes
+                 [("totalItems" .=) <$> _aTotalItems,
+                  ("nextPageToken" .=) <$> _aNextPageToken,
+                  Just ("kind" .= _aKind), ("items" .=) <$> _aItems])
 
 --
 -- /See:/ 'booksAnnotationsRange' smart constructor.
@@ -706,6 +913,24 @@ barStartPosition
   = lens _barStartPosition
       (\ s a -> s{_barStartPosition = a})
 
+instance FromJSON BooksAnnotationsRange where
+        parseJSON
+          = withObject "BooksAnnotationsRange"
+              (\ o ->
+                 BooksAnnotationsRange <$>
+                   (o .:? "startOffset") <*> (o .:? "endOffset") <*>
+                     (o .:? "endPosition")
+                     <*> (o .:? "startPosition"))
+
+instance ToJSON BooksAnnotationsRange where
+        toJSON BooksAnnotationsRange{..}
+          = object
+              (catMaybes
+                 [("startOffset" .=) <$> _barStartOffset,
+                  ("endOffset" .=) <$> _barEndOffset,
+                  ("endPosition" .=) <$> _barEndPosition,
+                  ("startPosition" .=) <$> _barStartPosition])
+
 --
 -- /See:/ 'booksCloudloadingResource' smart constructor.
 data BooksCloudloadingResource = BooksCloudloadingResource
@@ -752,6 +977,24 @@ bcrAuthor
 bcrTitle :: Lens' BooksCloudloadingResource (Maybe Text)
 bcrTitle = lens _bcrTitle (\ s a -> s{_bcrTitle = a})
 
+instance FromJSON BooksCloudloadingResource where
+        parseJSON
+          = withObject "BooksCloudloadingResource"
+              (\ o ->
+                 BooksCloudloadingResource <$>
+                   (o .:? "processingState") <*> (o .:? "volumeId") <*>
+                     (o .:? "author")
+                     <*> (o .:? "title"))
+
+instance ToJSON BooksCloudloadingResource where
+        toJSON BooksCloudloadingResource{..}
+          = object
+              (catMaybes
+                 [("processingState" .=) <$> _bcrProcessingState,
+                  ("volumeId" .=) <$> _bcrVolumeId,
+                  ("author" .=) <$> _bcrAuthor,
+                  ("title" .=) <$> _bcrTitle])
+
 --
 -- /See:/ 'booksVolumesRecommendedRateResponse' smart constructor.
 newtype BooksVolumesRecommendedRateResponse = BooksVolumesRecommendedRateResponse
@@ -774,6 +1017,22 @@ bvrrrConsistencyToken :: Lens' BooksVolumesRecommendedRateResponse (Maybe Text)
 bvrrrConsistencyToken
   = lens _bvrrrConsistencyToken
       (\ s a -> s{_bvrrrConsistencyToken = a})
+
+instance FromJSON BooksVolumesRecommendedRateResponse
+         where
+        parseJSON
+          = withObject "BooksVolumesRecommendedRateResponse"
+              (\ o ->
+                 BooksVolumesRecommendedRateResponse <$>
+                   (o .:? "consistency_token"))
+
+instance ToJSON BooksVolumesRecommendedRateResponse
+         where
+        toJSON BooksVolumesRecommendedRateResponse{..}
+          = object
+              (catMaybes
+                 [("consistency_token" .=) <$>
+                    _bvrrrConsistencyToken])
 
 --
 -- /See:/ 'bookshelf' smart constructor.
@@ -882,6 +1141,35 @@ booDescription
   = lens _booDescription
       (\ s a -> s{_booDescription = a})
 
+instance FromJSON Bookshelf where
+        parseJSON
+          = withObject "Bookshelf"
+              (\ o ->
+                 Bookshelf <$>
+                   (o .:? "access") <*> (o .:? "volumesLastUpdated") <*>
+                     (o .:? "kind" .!= "books#bookshelf")
+                     <*> (o .:? "created")
+                     <*> (o .:? "volumeCount")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id")
+                     <*> (o .:? "updated")
+                     <*> (o .:? "title")
+                     <*> (o .:? "description"))
+
+instance ToJSON Bookshelf where
+        toJSON Bookshelf{..}
+          = object
+              (catMaybes
+                 [("access" .=) <$> _booAccess,
+                  ("volumesLastUpdated" .=) <$> _booVolumesLastUpdated,
+                  Just ("kind" .= _booKind),
+                  ("created" .=) <$> _booCreated,
+                  ("volumeCount" .=) <$> _booVolumeCount,
+                  ("selfLink" .=) <$> _booSelfLink,
+                  ("id" .=) <$> _booId, ("updated" .=) <$> _booUpdated,
+                  ("title" .=) <$> _booTitle,
+                  ("description" .=) <$> _booDescription])
+
 --
 -- /See:/ 'bookshelves' smart constructor.
 data Bookshelves = Bookshelves
@@ -914,6 +1202,20 @@ bItems
   = lens _bItems (\ s a -> s{_bItems = a}) . _Default .
       _Coerce
 
+instance FromJSON Bookshelves where
+        parseJSON
+          = withObject "Bookshelves"
+              (\ o ->
+                 Bookshelves <$>
+                   (o .:? "kind" .!= "books#bookshelves") <*>
+                     (o .:? "items" .!= mempty))
+
+instance ToJSON Bookshelves where
+        toJSON Bookshelves{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _bKind), ("items" .=) <$> _bItems])
+
 --
 -- /See:/ 'category' smart constructor.
 data Category = Category
@@ -945,6 +1247,20 @@ cItems :: Lens' Category [CategoryItemItems]
 cItems
   = lens _cItems (\ s a -> s{_cItems = a}) . _Default .
       _Coerce
+
+instance FromJSON Category where
+        parseJSON
+          = withObject "Category"
+              (\ o ->
+                 Category <$>
+                   (o .:? "kind" .!= "onboarding#category") <*>
+                     (o .:? "items" .!= mempty))
+
+instance ToJSON Category where
+        toJSON Category{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _cKind), ("items" .=) <$> _cItems])
 
 --
 -- /See:/ 'categoryItemItems' smart constructor.
@@ -983,6 +1299,22 @@ ciiCategoryId
 ciiBadgeUrl :: Lens' CategoryItemItems (Maybe Text)
 ciiBadgeUrl
   = lens _ciiBadgeUrl (\ s a -> s{_ciiBadgeUrl = a})
+
+instance FromJSON CategoryItemItems where
+        parseJSON
+          = withObject "CategoryItemItems"
+              (\ o ->
+                 CategoryItemItems <$>
+                   (o .:? "name") <*> (o .:? "categoryId") <*>
+                     (o .:? "badgeUrl"))
+
+instance ToJSON CategoryItemItems where
+        toJSON CategoryItemItems{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _ciiName,
+                  ("categoryId" .=) <$> _ciiCategoryId,
+                  ("badgeUrl" .=) <$> _ciiBadgeUrl])
 
 --
 -- /See:/ 'concurrentAccessRestriction' smart constructor.
@@ -1102,6 +1434,42 @@ carMessage
 carNonce :: Lens' ConcurrentAccessRestriction (Maybe Text)
 carNonce = lens _carNonce (\ s a -> s{_carNonce = a})
 
+instance FromJSON ConcurrentAccessRestriction where
+        parseJSON
+          = withObject "ConcurrentAccessRestriction"
+              (\ o ->
+                 ConcurrentAccessRestriction <$>
+                   (o .:? "maxConcurrentDevices") <*>
+                     (o .:? "signature")
+                     <*> (o .:? "timeWindowSeconds")
+                     <*>
+                     (o .:? "kind" .!=
+                        "books#concurrentAccessRestriction")
+                     <*> (o .:? "reasonCode")
+                     <*> (o .:? "volumeId")
+                     <*> (o .:? "restricted")
+                     <*> (o .:? "source")
+                     <*> (o .:? "deviceAllowed")
+                     <*> (o .:? "message")
+                     <*> (o .:? "nonce"))
+
+instance ToJSON ConcurrentAccessRestriction where
+        toJSON ConcurrentAccessRestriction{..}
+          = object
+              (catMaybes
+                 [("maxConcurrentDevices" .=) <$>
+                    _carMaxConcurrentDevices,
+                  ("signature" .=) <$> _carSignature,
+                  ("timeWindowSeconds" .=) <$> _carTimeWindowSeconds,
+                  Just ("kind" .= _carKind),
+                  ("reasonCode" .=) <$> _carReasonCode,
+                  ("volumeId" .=) <$> _carVolumeId,
+                  ("restricted" .=) <$> _carRestricted,
+                  ("source" .=) <$> _carSource,
+                  ("deviceAllowed" .=) <$> _carDeviceAllowed,
+                  ("message" .=) <$> _carMessage,
+                  ("nonce" .=) <$> _carNonce])
+
 --
 -- /See:/ 'dictlayerdata' smart constructor.
 data Dictlayerdata = Dictlayerdata
@@ -1137,6 +1505,22 @@ dDict = lens _dDict (\ s a -> s{_dDict = a})
 dCommon :: Lens' Dictlayerdata (Maybe DictlayerdataCommon)
 dCommon = lens _dCommon (\ s a -> s{_dCommon = a})
 
+instance FromJSON Dictlayerdata where
+        parseJSON
+          = withObject "Dictlayerdata"
+              (\ o ->
+                 Dictlayerdata <$>
+                   (o .:? "kind" .!= "books#dictlayerdata") <*>
+                     (o .:? "dict")
+                     <*> (o .:? "common"))
+
+instance ToJSON Dictlayerdata where
+        toJSON Dictlayerdata{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _dKind), ("dict" .=) <$> _dDict,
+                  ("common" .=) <$> _dCommon])
+
 --
 -- /See:/ 'dictlayerdataCommon' smart constructor.
 newtype DictlayerdataCommon = DictlayerdataCommon
@@ -1159,6 +1543,15 @@ dictlayerdataCommon =
 -- this entity on Google search.
 dcTitle :: Lens' DictlayerdataCommon (Maybe Text)
 dcTitle = lens _dcTitle (\ s a -> s{_dcTitle = a})
+
+instance FromJSON DictlayerdataCommon where
+        parseJSON
+          = withObject "DictlayerdataCommon"
+              (\ o -> DictlayerdataCommon <$> (o .:? "title"))
+
+instance ToJSON DictlayerdataCommon where
+        toJSON DictlayerdataCommon{..}
+          = object (catMaybes [("title" .=) <$> _dcTitle])
 
 --
 -- /See:/ 'dictlayerdataDict' smart constructor.
@@ -1191,6 +1584,20 @@ ddWords
   = lens _ddWords (\ s a -> s{_ddWords = a}) . _Default
       . _Coerce
 
+instance FromJSON DictlayerdataDict where
+        parseJSON
+          = withObject "DictlayerdataDict"
+              (\ o ->
+                 DictlayerdataDict <$>
+                   (o .:? "source") <*> (o .:? "words" .!= mempty))
+
+instance ToJSON DictlayerdataDict where
+        toJSON DictlayerdataDict{..}
+          = object
+              (catMaybes
+                 [("source" .=) <$> _ddSource,
+                  ("words" .=) <$> _ddWords])
+
 --
 -- /See:/ 'dictlayerdataItemConjugationsItemSensesItemWordsDict' smart constructor.
 data DictlayerdataItemConjugationsItemSensesItemWordsDict = DictlayerdataItemConjugationsItemSensesItemWordsDict
@@ -1221,6 +1628,26 @@ dicisiwdValue
 dicisiwdType :: Lens' DictlayerdataItemConjugationsItemSensesItemWordsDict (Maybe Text)
 dicisiwdType
   = lens _dicisiwdType (\ s a -> s{_dicisiwdType = a})
+
+instance FromJSON
+         DictlayerdataItemConjugationsItemSensesItemWordsDict
+         where
+        parseJSON
+          = withObject
+              "DictlayerdataItemConjugationsItemSensesItemWordsDict"
+              (\ o ->
+                 DictlayerdataItemConjugationsItemSensesItemWordsDict
+                   <$> (o .:? "value") <*> (o .:? "type"))
+
+instance ToJSON
+         DictlayerdataItemConjugationsItemSensesItemWordsDict
+         where
+        toJSON
+          DictlayerdataItemConjugationsItemSensesItemWordsDict{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _dicisiwdValue,
+                  ("type" .=) <$> _dicisiwdType])
 
 --
 -- /See:/ 'dictlayerdataItemDefinitionsItemSensesItemWordsDict' smart constructor.
@@ -1256,6 +1683,28 @@ didisiwdExamples
       . _Default
       . _Coerce
 
+instance FromJSON
+         DictlayerdataItemDefinitionsItemSensesItemWordsDict
+         where
+        parseJSON
+          = withObject
+              "DictlayerdataItemDefinitionsItemSensesItemWordsDict"
+              (\ o ->
+                 DictlayerdataItemDefinitionsItemSensesItemWordsDict
+                   <$>
+                   (o .:? "definition") <*>
+                     (o .:? "examples" .!= mempty))
+
+instance ToJSON
+         DictlayerdataItemDefinitionsItemSensesItemWordsDict
+         where
+        toJSON
+          DictlayerdataItemDefinitionsItemSensesItemWordsDict{..}
+          = object
+              (catMaybes
+                 [("definition" .=) <$> _didisiwdDefinition,
+                  ("examples" .=) <$> _didisiwdExamples])
+
 --
 -- /See:/ 'dictlayerdataItemDerivativesItemWordsDict' smart constructor.
 data DictlayerdataItemDerivativesItemWordsDict = DictlayerdataItemDerivativesItemWordsDict
@@ -1285,6 +1734,23 @@ didiwdText
 didiwdSource :: Lens' DictlayerdataItemDerivativesItemWordsDict (Maybe DictlayerdataSourceItemDerivativesItemWordsDict)
 didiwdSource
   = lens _didiwdSource (\ s a -> s{_didiwdSource = a})
+
+instance FromJSON
+         DictlayerdataItemDerivativesItemWordsDict where
+        parseJSON
+          = withObject
+              "DictlayerdataItemDerivativesItemWordsDict"
+              (\ o ->
+                 DictlayerdataItemDerivativesItemWordsDict <$>
+                   (o .:? "text") <*> (o .:? "source"))
+
+instance ToJSON
+         DictlayerdataItemDerivativesItemWordsDict where
+        toJSON DictlayerdataItemDerivativesItemWordsDict{..}
+          = object
+              (catMaybes
+                 [("text" .=) <$> _didiwdText,
+                  ("source" .=) <$> _didiwdSource])
 
 --
 -- /See:/ 'dictlayerdataItemExamplesItemDefinitionsItemSensesItemWordsDict' smart constructor.
@@ -1318,6 +1784,26 @@ dieidisiwdSource
   = lens _dieidisiwdSource
       (\ s a -> s{_dieidisiwdSource = a})
 
+instance FromJSON
+         DictlayerdataItemExamplesItemDefinitionsItemSensesItemWordsDict
+         where
+        parseJSON
+          = withObject
+              "DictlayerdataItemExamplesItemDefinitionsItemSensesItemWordsDict"
+              (\ o ->
+                 DictlayerdataItemExamplesItemDefinitionsItemSensesItemWordsDict
+                   <$> (o .:? "text") <*> (o .:? "source"))
+
+instance ToJSON
+         DictlayerdataItemExamplesItemDefinitionsItemSensesItemWordsDict
+         where
+        toJSON
+          DictlayerdataItemExamplesItemDefinitionsItemSensesItemWordsDict{..}
+          = object
+              (catMaybes
+                 [("text" .=) <$> _dieidisiwdText,
+                  ("source" .=) <$> _dieidisiwdSource])
+
 --
 -- /See:/ 'dictlayerdataItemExamplesItemWordsDict' smart constructor.
 data DictlayerdataItemExamplesItemWordsDict = DictlayerdataItemExamplesItemWordsDict
@@ -1347,6 +1833,22 @@ dieiwdText
 dieiwdSource :: Lens' DictlayerdataItemExamplesItemWordsDict (Maybe DictlayerdataSourceItemExamplesItemWordsDict)
 dieiwdSource
   = lens _dieiwdSource (\ s a -> s{_dieiwdSource = a})
+
+instance FromJSON
+         DictlayerdataItemExamplesItemWordsDict where
+        parseJSON
+          = withObject "DictlayerdataItemExamplesItemWordsDict"
+              (\ o ->
+                 DictlayerdataItemExamplesItemWordsDict <$>
+                   (o .:? "text") <*> (o .:? "source"))
+
+instance ToJSON
+         DictlayerdataItemExamplesItemWordsDict where
+        toJSON DictlayerdataItemExamplesItemWordsDict{..}
+          = object
+              (catMaybes
+                 [("text" .=) <$> _dieiwdText,
+                  ("source" .=) <$> _dieiwdSource])
 
 --
 -- /See:/ 'dictlayerdataItemSensesItemWordsDict' smart constructor.
@@ -1439,6 +1941,35 @@ disiwdSyllabification
   = lens _disiwdSyllabification
       (\ s a -> s{_disiwdSyllabification = a})
 
+instance FromJSON
+         DictlayerdataItemSensesItemWordsDict where
+        parseJSON
+          = withObject "DictlayerdataItemSensesItemWordsDict"
+              (\ o ->
+                 DictlayerdataItemSensesItemWordsDict <$>
+                   (o .:? "pronunciationUrl") <*>
+                     (o .:? "conjugations" .!= mempty)
+                     <*> (o .:? "pronunciation")
+                     <*> (o .:? "synonyms" .!= mempty)
+                     <*> (o .:? "source")
+                     <*> (o .:? "partOfSpeech")
+                     <*> (o .:? "definitions" .!= mempty)
+                     <*> (o .:? "syllabification"))
+
+instance ToJSON DictlayerdataItemSensesItemWordsDict
+         where
+        toJSON DictlayerdataItemSensesItemWordsDict{..}
+          = object
+              (catMaybes
+                 [("pronunciationUrl" .=) <$> _disiwdPronunciationUrl,
+                  ("conjugations" .=) <$> _disiwdConjugations,
+                  ("pronunciation" .=) <$> _disiwdPronunciation,
+                  ("synonyms" .=) <$> _disiwdSynonyms,
+                  ("source" .=) <$> _disiwdSource,
+                  ("partOfSpeech" .=) <$> _disiwdPartOfSpeech,
+                  ("definitions" .=) <$> _disiwdDefinitions,
+                  ("syllabification" .=) <$> _disiwdSyllabification])
+
 --
 -- /See:/ 'dictlayerdataItemSynonymsItemSensesItemWordsDict' smart constructor.
 data DictlayerdataItemSynonymsItemSensesItemWordsDict = DictlayerdataItemSynonymsItemSensesItemWordsDict
@@ -1469,6 +2000,26 @@ disisiwdSource :: Lens' DictlayerdataItemSynonymsItemSensesItemWordsDict (Maybe 
 disisiwdSource
   = lens _disisiwdSource
       (\ s a -> s{_disisiwdSource = a})
+
+instance FromJSON
+         DictlayerdataItemSynonymsItemSensesItemWordsDict
+         where
+        parseJSON
+          = withObject
+              "DictlayerdataItemSynonymsItemSensesItemWordsDict"
+              (\ o ->
+                 DictlayerdataItemSynonymsItemSensesItemWordsDict <$>
+                   (o .:? "text") <*> (o .:? "source"))
+
+instance ToJSON
+         DictlayerdataItemSynonymsItemSensesItemWordsDict
+         where
+        toJSON
+          DictlayerdataItemSynonymsItemSensesItemWordsDict{..}
+          = object
+              (catMaybes
+                 [("text" .=) <$> _disisiwdText,
+                  ("source" .=) <$> _disisiwdSource])
 
 --
 -- /See:/ 'dictlayerdataItemWordsDict' smart constructor.
@@ -1525,6 +2076,24 @@ diwdExamples
       . _Default
       . _Coerce
 
+instance FromJSON DictlayerdataItemWordsDict where
+        parseJSON
+          = withObject "DictlayerdataItemWordsDict"
+              (\ o ->
+                 DictlayerdataItemWordsDict <$>
+                   (o .:? "senses" .!= mempty) <*> (o .:? "source") <*>
+                     (o .:? "derivatives" .!= mempty)
+                     <*> (o .:? "examples" .!= mempty))
+
+instance ToJSON DictlayerdataItemWordsDict where
+        toJSON DictlayerdataItemWordsDict{..}
+          = object
+              (catMaybes
+                 [("senses" .=) <$> _diwdSenses,
+                  ("source" .=) <$> _diwdSource,
+                  ("derivatives" .=) <$> _diwdDerivatives,
+                  ("examples" .=) <$> _diwdExamples])
+
 -- | The source, url and attribution for this dictionary data.
 --
 -- /See:/ 'dictlayerdataSourceDict' smart constructor.
@@ -1556,6 +2125,20 @@ dsdAttribution
   = lens _dsdAttribution
       (\ s a -> s{_dsdAttribution = a})
 
+instance FromJSON DictlayerdataSourceDict where
+        parseJSON
+          = withObject "DictlayerdataSourceDict"
+              (\ o ->
+                 DictlayerdataSourceDict <$>
+                   (o .:? "url") <*> (o .:? "attribution"))
+
+instance ToJSON DictlayerdataSourceDict where
+        toJSON DictlayerdataSourceDict{..}
+          = object
+              (catMaybes
+                 [("url" .=) <$> _dsdUrl,
+                  ("attribution" .=) <$> _dsdAttribution])
+
 --
 -- /See:/ 'dictlayerdataSourceItemDerivativesItemWordsDict' smart constructor.
 data DictlayerdataSourceItemDerivativesItemWordsDict = DictlayerdataSourceItemDerivativesItemWordsDict
@@ -1586,6 +2169,24 @@ dsidiwdAttribution :: Lens' DictlayerdataSourceItemDerivativesItemWordsDict (May
 dsidiwdAttribution
   = lens _dsidiwdAttribution
       (\ s a -> s{_dsidiwdAttribution = a})
+
+instance FromJSON
+         DictlayerdataSourceItemDerivativesItemWordsDict where
+        parseJSON
+          = withObject
+              "DictlayerdataSourceItemDerivativesItemWordsDict"
+              (\ o ->
+                 DictlayerdataSourceItemDerivativesItemWordsDict <$>
+                   (o .:? "url") <*> (o .:? "attribution"))
+
+instance ToJSON
+         DictlayerdataSourceItemDerivativesItemWordsDict where
+        toJSON
+          DictlayerdataSourceItemDerivativesItemWordsDict{..}
+          = object
+              (catMaybes
+                 [("url" .=) <$> _dsidiwdUrl,
+                  ("attribution" .=) <$> _dsidiwdAttribution])
 
 --
 -- /See:/ 'dictlayerdataSourceItemExamplesItemDefinitionsItemSensesItemWordsDict' smart constructor.
@@ -1619,6 +2220,26 @@ dsieidisiwdAttribution
   = lens _dsieidisiwdAttribution
       (\ s a -> s{_dsieidisiwdAttribution = a})
 
+instance FromJSON
+         DictlayerdataSourceItemExamplesItemDefinitionsItemSensesItemWordsDict
+         where
+        parseJSON
+          = withObject
+              "DictlayerdataSourceItemExamplesItemDefinitionsItemSensesItemWordsDict"
+              (\ o ->
+                 DictlayerdataSourceItemExamplesItemDefinitionsItemSensesItemWordsDict
+                   <$> (o .:? "url") <*> (o .:? "attribution"))
+
+instance ToJSON
+         DictlayerdataSourceItemExamplesItemDefinitionsItemSensesItemWordsDict
+         where
+        toJSON
+          DictlayerdataSourceItemExamplesItemDefinitionsItemSensesItemWordsDict{..}
+          = object
+              (catMaybes
+                 [("url" .=) <$> _dsieidisiwdUrl,
+                  ("attribution" .=) <$> _dsieidisiwdAttribution])
+
 --
 -- /See:/ 'dictlayerdataSourceItemExamplesItemWordsDict' smart constructor.
 data DictlayerdataSourceItemExamplesItemWordsDict = DictlayerdataSourceItemExamplesItemWordsDict
@@ -1649,6 +2270,24 @@ dsieiwdAttribution :: Lens' DictlayerdataSourceItemExamplesItemWordsDict (Maybe 
 dsieiwdAttribution
   = lens _dsieiwdAttribution
       (\ s a -> s{_dsieiwdAttribution = a})
+
+instance FromJSON
+         DictlayerdataSourceItemExamplesItemWordsDict where
+        parseJSON
+          = withObject
+              "DictlayerdataSourceItemExamplesItemWordsDict"
+              (\ o ->
+                 DictlayerdataSourceItemExamplesItemWordsDict <$>
+                   (o .:? "url") <*> (o .:? "attribution"))
+
+instance ToJSON
+         DictlayerdataSourceItemExamplesItemWordsDict where
+        toJSON
+          DictlayerdataSourceItemExamplesItemWordsDict{..}
+          = object
+              (catMaybes
+                 [("url" .=) <$> _dsieiwdUrl,
+                  ("attribution" .=) <$> _dsieiwdAttribution])
 
 --
 -- /See:/ 'dictlayerdataSourceItemSensesItemWordsDict' smart constructor.
@@ -1681,6 +2320,23 @@ dsisiwdAttribution
   = lens _dsisiwdAttribution
       (\ s a -> s{_dsisiwdAttribution = a})
 
+instance FromJSON
+         DictlayerdataSourceItemSensesItemWordsDict where
+        parseJSON
+          = withObject
+              "DictlayerdataSourceItemSensesItemWordsDict"
+              (\ o ->
+                 DictlayerdataSourceItemSensesItemWordsDict <$>
+                   (o .:? "url") <*> (o .:? "attribution"))
+
+instance ToJSON
+         DictlayerdataSourceItemSensesItemWordsDict where
+        toJSON DictlayerdataSourceItemSensesItemWordsDict{..}
+          = object
+              (catMaybes
+                 [("url" .=) <$> _dsisiwdUrl,
+                  ("attribution" .=) <$> _dsisiwdAttribution])
+
 --
 -- /See:/ 'dictlayerdataSourceItemSynonymsItemSensesItemWordsDict' smart constructor.
 data DictlayerdataSourceItemSynonymsItemSensesItemWordsDict = DictlayerdataSourceItemSynonymsItemSensesItemWordsDict
@@ -1711,6 +2367,26 @@ dsisisiwdAttribution :: Lens' DictlayerdataSourceItemSynonymsItemSensesItemWords
 dsisisiwdAttribution
   = lens _dsisisiwdAttribution
       (\ s a -> s{_dsisisiwdAttribution = a})
+
+instance FromJSON
+         DictlayerdataSourceItemSynonymsItemSensesItemWordsDict
+         where
+        parseJSON
+          = withObject
+              "DictlayerdataSourceItemSynonymsItemSensesItemWordsDict"
+              (\ o ->
+                 DictlayerdataSourceItemSynonymsItemSensesItemWordsDict
+                   <$> (o .:? "url") <*> (o .:? "attribution"))
+
+instance ToJSON
+         DictlayerdataSourceItemSynonymsItemSensesItemWordsDict
+         where
+        toJSON
+          DictlayerdataSourceItemSynonymsItemSensesItemWordsDict{..}
+          = object
+              (catMaybes
+                 [("url" .=) <$> _dsisisiwdUrl,
+                  ("attribution" .=) <$> _dsisisiwdAttribution])
 
 -- | The words with different meanings but not related words, e.g. \"go\"
 -- (game) and \"go\" (verb).
@@ -1743,6 +2419,22 @@ dsiwdAttribution :: Lens' DictlayerdataSourceItemWordsDict (Maybe Text)
 dsiwdAttribution
   = lens _dsiwdAttribution
       (\ s a -> s{_dsiwdAttribution = a})
+
+instance FromJSON DictlayerdataSourceItemWordsDict
+         where
+        parseJSON
+          = withObject "DictlayerdataSourceItemWordsDict"
+              (\ o ->
+                 DictlayerdataSourceItemWordsDict <$>
+                   (o .:? "url") <*> (o .:? "attribution"))
+
+instance ToJSON DictlayerdataSourceItemWordsDict
+         where
+        toJSON DictlayerdataSourceItemWordsDict{..}
+          = object
+              (catMaybes
+                 [("url" .=) <$> _dsiwdUrl,
+                  ("attribution" .=) <$> _dsiwdAttribution])
 
 --
 -- /See:/ 'downloadAccessRestriction' smart constructor.
@@ -1877,6 +2569,40 @@ darMessage
 darNonce :: Lens' DownloadAccessRestriction (Maybe Text)
 darNonce = lens _darNonce (\ s a -> s{_darNonce = a})
 
+instance FromJSON DownloadAccessRestriction where
+        parseJSON
+          = withObject "DownloadAccessRestriction"
+              (\ o ->
+                 DownloadAccessRestriction <$>
+                   (o .:? "justAcquired") <*> (o .:? "signature") <*>
+                     (o .:? "kind" .!= "books#downloadAccessRestriction")
+                     <*> (o .:? "maxDownloadDevices")
+                     <*> (o .:? "downloadsAcquired")
+                     <*> (o .:? "reasonCode")
+                     <*> (o .:? "volumeId")
+                     <*> (o .:? "restricted")
+                     <*> (o .:? "source")
+                     <*> (o .:? "deviceAllowed")
+                     <*> (o .:? "message")
+                     <*> (o .:? "nonce"))
+
+instance ToJSON DownloadAccessRestriction where
+        toJSON DownloadAccessRestriction{..}
+          = object
+              (catMaybes
+                 [("justAcquired" .=) <$> _darJustAcquired,
+                  ("signature" .=) <$> _darSignature,
+                  Just ("kind" .= _darKind),
+                  ("maxDownloadDevices" .=) <$> _darMaxDownloadDevices,
+                  ("downloadsAcquired" .=) <$> _darDownloadsAcquired,
+                  ("reasonCode" .=) <$> _darReasonCode,
+                  ("volumeId" .=) <$> _darVolumeId,
+                  ("restricted" .=) <$> _darRestricted,
+                  ("source" .=) <$> _darSource,
+                  ("deviceAllowed" .=) <$> _darDeviceAllowed,
+                  ("message" .=) <$> _darMessage,
+                  ("nonce" .=) <$> _darNonce])
+
 --
 -- /See:/ 'downloadAccesses' smart constructor.
 data DownloadAccesses = DownloadAccesses
@@ -1910,6 +2636,21 @@ daDownloadAccessList
       (\ s a -> s{_daDownloadAccessList = a})
       . _Default
       . _Coerce
+
+instance FromJSON DownloadAccesses where
+        parseJSON
+          = withObject "DownloadAccesses"
+              (\ o ->
+                 DownloadAccesses <$>
+                   (o .:? "kind" .!= "books#downloadAccesses") <*>
+                     (o .:? "downloadAccessList" .!= mempty))
+
+instance ToJSON DownloadAccesses where
+        toJSON DownloadAccesses{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _daKind),
+                  ("downloadAccessList" .=) <$> _daDownloadAccessList])
 
 --
 -- /See:/ 'geolayerdata' smart constructor.
@@ -1945,6 +2686,22 @@ gGeo = lens _gGeo (\ s a -> s{_gGeo = a})
 
 gCommon :: Lens' Geolayerdata (Maybe GeolayerdataCommon)
 gCommon = lens _gCommon (\ s a -> s{_gCommon = a})
+
+instance FromJSON Geolayerdata where
+        parseJSON
+          = withObject "Geolayerdata"
+              (\ o ->
+                 Geolayerdata <$>
+                   (o .:? "kind" .!= "books#geolayerdata") <*>
+                     (o .:? "geo")
+                     <*> (o .:? "common"))
+
+instance ToJSON Geolayerdata where
+        toJSON Geolayerdata{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _gKind), ("geo" .=) <$> _gGeo,
+                  ("common" .=) <$> _gCommon])
 
 --
 -- /See:/ 'geolayerdataCommon' smart constructor.
@@ -2004,6 +2761,25 @@ gcPreviewImageUrl :: Lens' GeolayerdataCommon (Maybe Text)
 gcPreviewImageUrl
   = lens _gcPreviewImageUrl
       (\ s a -> s{_gcPreviewImageUrl = a})
+
+instance FromJSON GeolayerdataCommon where
+        parseJSON
+          = withObject "GeolayerdataCommon"
+              (\ o ->
+                 GeolayerdataCommon <$>
+                   (o .:? "snippet") <*> (o .:? "snippetUrl") <*>
+                     (o .:? "lang")
+                     <*> (o .:? "title")
+                     <*> (o .:? "previewImageUrl"))
+
+instance ToJSON GeolayerdataCommon where
+        toJSON GeolayerdataCommon{..}
+          = object
+              (catMaybes
+                 [("snippet" .=) <$> _gcSnippet,
+                  ("snippetUrl" .=) <$> _gcSnippetUrl,
+                  ("lang" .=) <$> _gcLang, ("title" .=) <$> _gcTitle,
+                  ("previewImageUrl" .=) <$> _gcPreviewImageUrl])
 
 --
 -- /See:/ 'geolayerdataGeo' smart constructor.
@@ -2101,6 +2877,32 @@ ggLongitude :: Lens' GeolayerdataGeo (Maybe Double)
 ggLongitude
   = lens _ggLongitude (\ s a -> s{_ggLongitude = a})
 
+instance FromJSON GeolayerdataGeo where
+        parseJSON
+          = withObject "GeolayerdataGeo"
+              (\ o ->
+                 GeolayerdataGeo <$>
+                   (o .:? "mapType") <*> (o .:? "cachePolicy") <*>
+                     (o .:? "viewport")
+                     <*> (o .:? "boundary" .!= mempty)
+                     <*> (o .:? "latitude")
+                     <*> (o .:? "zoom")
+                     <*> (o .:? "countryCode")
+                     <*> (o .:? "longitude"))
+
+instance ToJSON GeolayerdataGeo where
+        toJSON GeolayerdataGeo{..}
+          = object
+              (catMaybes
+                 [("mapType" .=) <$> _ggMapType,
+                  ("cachePolicy" .=) <$> _ggCachePolicy,
+                  ("viewport" .=) <$> _ggViewport,
+                  ("boundary" .=) <$> _ggBoundary,
+                  ("latitude" .=) <$> _ggLatitude,
+                  ("zoom" .=) <$> _ggZoom,
+                  ("countryCode" .=) <$> _ggCountryCode,
+                  ("longitude" .=) <$> _ggLongitude])
+
 --
 -- /See:/ 'geolayerdataHiViewportGeo' smart constructor.
 data GeolayerdataHiViewportGeo = GeolayerdataHiViewportGeo
@@ -2131,6 +2933,20 @@ ghvgLongitude :: Lens' GeolayerdataHiViewportGeo (Maybe Double)
 ghvgLongitude
   = lens _ghvgLongitude
       (\ s a -> s{_ghvgLongitude = a})
+
+instance FromJSON GeolayerdataHiViewportGeo where
+        parseJSON
+          = withObject "GeolayerdataHiViewportGeo"
+              (\ o ->
+                 GeolayerdataHiViewportGeo <$>
+                   (o .:? "latitude") <*> (o .:? "longitude"))
+
+instance ToJSON GeolayerdataHiViewportGeo where
+        toJSON GeolayerdataHiViewportGeo{..}
+          = object
+              (catMaybes
+                 [("latitude" .=) <$> _ghvgLatitude,
+                  ("longitude" .=) <$> _ghvgLongitude])
 
 --
 -- /See:/ 'geolayerdataItemItemBoundaryGeo' smart constructor.
@@ -2164,6 +2980,21 @@ giibgLongitude
   = lens _giibgLongitude
       (\ s a -> s{_giibgLongitude = a})
 
+instance FromJSON GeolayerdataItemItemBoundaryGeo
+         where
+        parseJSON
+          = withObject "GeolayerdataItemItemBoundaryGeo"
+              (\ o ->
+                 GeolayerdataItemItemBoundaryGeo <$>
+                   (o .:? "latitude") <*> (o .:? "longitude"))
+
+instance ToJSON GeolayerdataItemItemBoundaryGeo where
+        toJSON GeolayerdataItemItemBoundaryGeo{..}
+          = object
+              (catMaybes
+                 [("latitude" .=) <$> _giibgLatitude,
+                  ("longitude" .=) <$> _giibgLongitude])
+
 --
 -- /See:/ 'geolayerdataLoViewportGeo' smart constructor.
 data GeolayerdataLoViewportGeo = GeolayerdataLoViewportGeo
@@ -2195,6 +3026,20 @@ glvgLongitude
   = lens _glvgLongitude
       (\ s a -> s{_glvgLongitude = a})
 
+instance FromJSON GeolayerdataLoViewportGeo where
+        parseJSON
+          = withObject "GeolayerdataLoViewportGeo"
+              (\ o ->
+                 GeolayerdataLoViewportGeo <$>
+                   (o .:? "latitude") <*> (o .:? "longitude"))
+
+instance ToJSON GeolayerdataLoViewportGeo where
+        toJSON GeolayerdataLoViewportGeo{..}
+          = object
+              (catMaybes
+                 [("latitude" .=) <$> _glvgLatitude,
+                  ("longitude" .=) <$> _glvgLongitude])
+
 -- | The viewport for showing this location. This is a latitude, longitude
 -- rectangle.
 --
@@ -2224,6 +3069,19 @@ gvgHi = lens _gvgHi (\ s a -> s{_gvgHi = a})
 
 gvgLo :: Lens' GeolayerdataViewportGeo (Maybe GeolayerdataLoViewportGeo)
 gvgLo = lens _gvgLo (\ s a -> s{_gvgLo = a})
+
+instance FromJSON GeolayerdataViewportGeo where
+        parseJSON
+          = withObject "GeolayerdataViewportGeo"
+              (\ o ->
+                 GeolayerdataViewportGeo <$>
+                   (o .:? "hi") <*> (o .:? "lo"))
+
+instance ToJSON GeolayerdataViewportGeo where
+        toJSON GeolayerdataViewportGeo{..}
+          = object
+              (catMaybes
+                 [("hi" .=) <$> _gvgHi, ("lo" .=) <$> _gvgLo])
 
 --
 -- /See:/ 'layersummaries' smart constructor.
@@ -2265,6 +3123,22 @@ lItems :: Lens' Layersummaries [Maybe Layersummary]
 lItems
   = lens _lItems (\ s a -> s{_lItems = a}) . _Default .
       _Coerce
+
+instance FromJSON Layersummaries where
+        parseJSON
+          = withObject "Layersummaries"
+              (\ o ->
+                 Layersummaries <$>
+                   (o .:? "totalItems") <*>
+                     (o .:? "kind" .!= "books#layersummaries")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON Layersummaries where
+        toJSON Layersummaries{..}
+          = object
+              (catMaybes
+                 [("totalItems" .=) <$> _lTotalItems,
+                  Just ("kind" .= _lKind), ("items" .=) <$> _lItems])
 
 --
 -- /See:/ 'layersummary' smart constructor.
@@ -2406,6 +3280,44 @@ layLayerId :: Lens' Layersummary (Maybe Text)
 layLayerId
   = lens _layLayerId (\ s a -> s{_layLayerId = a})
 
+instance FromJSON Layersummary where
+        parseJSON
+          = withObject "Layersummary"
+              (\ o ->
+                 Layersummary <$>
+                   (o .:? "annotationsDataLink") <*>
+                     (o .:? "annotationsLink")
+                     <*> (o .:? "kind" .!= "books#layersummary")
+                     <*> (o .:? "dataCount")
+                     <*> (o .:? "contentVersion")
+                     <*> (o .:? "volumeAnnotationsVersion")
+                     <*> (o .:? "annotationCount")
+                     <*> (o .:? "annotationTypes" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "volumeId")
+                     <*> (o .:? "id")
+                     <*> (o .:? "updated")
+                     <*> (o .:? "layerId"))
+
+instance ToJSON Layersummary where
+        toJSON Layersummary{..}
+          = object
+              (catMaybes
+                 [("annotationsDataLink" .=) <$>
+                    _layAnnotationsDataLink,
+                  ("annotationsLink" .=) <$> _layAnnotationsLink,
+                  Just ("kind" .= _layKind),
+                  ("dataCount" .=) <$> _layDataCount,
+                  ("contentVersion" .=) <$> _layContentVersion,
+                  ("volumeAnnotationsVersion" .=) <$>
+                    _layVolumeAnnotationsVersion,
+                  ("annotationCount" .=) <$> _layAnnotationCount,
+                  ("annotationTypes" .=) <$> _layAnnotationTypes,
+                  ("selfLink" .=) <$> _laySelfLink,
+                  ("volumeId" .=) <$> _layVolumeId,
+                  ("id" .=) <$> _layId, ("updated" .=) <$> _layUpdated,
+                  ("layerId" .=) <$> _layLayerId])
+
 --
 -- /See:/ 'metadata' smart constructor.
 data Metadata = Metadata
@@ -2437,6 +3349,20 @@ mItems :: Lens' Metadata [MetadataItemItems]
 mItems
   = lens _mItems (\ s a -> s{_mItems = a}) . _Default .
       _Coerce
+
+instance FromJSON Metadata where
+        parseJSON
+          = withObject "Metadata"
+              (\ o ->
+                 Metadata <$>
+                   (o .:? "kind" .!= "dictionary#metadata") <*>
+                     (o .:? "items" .!= mempty))
+
+instance ToJSON Metadata where
+        toJSON Metadata{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _mKind), ("items" .=) <$> _mItems])
 
 --
 -- /See:/ 'metadataItemItems' smart constructor.
@@ -2493,6 +3419,26 @@ miiEncryptedKey
   = lens _miiEncryptedKey
       (\ s a -> s{_miiEncryptedKey = a})
 
+instance FromJSON MetadataItemItems where
+        parseJSON
+          = withObject "MetadataItemItems"
+              (\ o ->
+                 MetadataItemItems <$>
+                   (o .:? "size") <*> (o .:? "version") <*>
+                     (o .:? "language")
+                     <*> (o .:? "download_url")
+                     <*> (o .:? "encrypted_key"))
+
+instance ToJSON MetadataItemItems where
+        toJSON MetadataItemItems{..}
+          = object
+              (catMaybes
+                 [("size" .=) <$> _miiSize,
+                  ("version" .=) <$> _miiVersion,
+                  ("language" .=) <$> _miiLanguage,
+                  ("download_url" .=) <$> _miiDownloadUrl,
+                  ("encrypted_key" .=) <$> _miiEncryptedKey])
+
 --
 -- /See:/ 'offers' smart constructor.
 data Offers = Offers
@@ -2524,6 +3470,20 @@ oItems :: Lens' Offers [OffersItemItems]
 oItems
   = lens _oItems (\ s a -> s{_oItems = a}) . _Default .
       _Coerce
+
+instance FromJSON Offers where
+        parseJSON
+          = withObject "Offers"
+              (\ o ->
+                 Offers <$>
+                   (o .:? "kind" .!= "promooffer#offers") <*>
+                     (o .:? "items" .!= mempty))
+
+instance ToJSON Offers where
+        toJSON Offers{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _oKind), ("items" .=) <$> _oItems])
 
 --
 -- /See:/ 'offersItemItems' smart constructor.
@@ -2572,6 +3532,23 @@ oiiGservicesKey :: Lens' OffersItemItems (Maybe Text)
 oiiGservicesKey
   = lens _oiiGservicesKey
       (\ s a -> s{_oiiGservicesKey = a})
+
+instance FromJSON OffersItemItems where
+        parseJSON
+          = withObject "OffersItemItems"
+              (\ o ->
+                 OffersItemItems <$>
+                   (o .:? "items" .!= mempty) <*> (o .:? "artUrl") <*>
+                     (o .:? "id")
+                     <*> (o .:? "gservicesKey"))
+
+instance ToJSON OffersItemItems where
+        toJSON OffersItemItems{..}
+          = object
+              (catMaybes
+                 [("items" .=) <$> _oiiItems,
+                  ("artUrl" .=) <$> _oiiArtUrl, ("id" .=) <$> _oiiId,
+                  ("gservicesKey" .=) <$> _oiiGservicesKey])
 
 --
 -- /See:/ 'offersItemItemsItemItems' smart constructor.
@@ -2638,6 +3615,29 @@ oiiiiDescription :: Lens' OffersItemItemsItemItems (Maybe Text)
 oiiiiDescription
   = lens _oiiiiDescription
       (\ s a -> s{_oiiiiDescription = a})
+
+instance FromJSON OffersItemItemsItemItems where
+        parseJSON
+          = withObject "OffersItemItemsItemItems"
+              (\ o ->
+                 OffersItemItemsItemItems <$>
+                   (o .:? "canonicalVolumeLink") <*> (o .:? "coverUrl")
+                     <*> (o .:? "volumeId")
+                     <*> (o .:? "author")
+                     <*> (o .:? "title")
+                     <*> (o .:? "description"))
+
+instance ToJSON OffersItemItemsItemItems where
+        toJSON OffersItemItemsItemItems{..}
+          = object
+              (catMaybes
+                 [("canonicalVolumeLink" .=) <$>
+                    _oiiiiCanonicalVolumeLink,
+                  ("coverUrl" .=) <$> _oiiiiCoverUrl,
+                  ("volumeId" .=) <$> _oiiiiVolumeId,
+                  ("author" .=) <$> _oiiiiAuthor,
+                  ("title" .=) <$> _oiiiiTitle,
+                  ("description" .=) <$> _oiiiiDescription])
 
 --
 -- /See:/ 'readingPosition' smart constructor.
@@ -2720,6 +3720,31 @@ rpGbTextPosition
   = lens _rpGbTextPosition
       (\ s a -> s{_rpGbTextPosition = a})
 
+instance FromJSON ReadingPosition where
+        parseJSON
+          = withObject "ReadingPosition"
+              (\ o ->
+                 ReadingPosition <$>
+                   (o .:? "epubCfiPosition") <*>
+                     (o .:? "kind" .!= "books#readingPosition")
+                     <*> (o .:? "gbImagePosition")
+                     <*> (o .:? "pdfPosition")
+                     <*> (o .:? "volumeId")
+                     <*> (o .:? "updated")
+                     <*> (o .:? "gbTextPosition"))
+
+instance ToJSON ReadingPosition where
+        toJSON ReadingPosition{..}
+          = object
+              (catMaybes
+                 [("epubCfiPosition" .=) <$> _rpEpubCfiPosition,
+                  Just ("kind" .= _rpKind),
+                  ("gbImagePosition" .=) <$> _rpGbImagePosition,
+                  ("pdfPosition" .=) <$> _rpPdfPosition,
+                  ("volumeId" .=) <$> _rpVolumeId,
+                  ("updated" .=) <$> _rpUpdated,
+                  ("gbTextPosition" .=) <$> _rpGbTextPosition])
+
 --
 -- /See:/ 'requestAccess' smart constructor.
 data RequestAccess = RequestAccess
@@ -2761,6 +3786,23 @@ raDownloadAccess :: Lens' RequestAccess (Maybe (Maybe DownloadAccessRestriction)
 raDownloadAccess
   = lens _raDownloadAccess
       (\ s a -> s{_raDownloadAccess = a})
+
+instance FromJSON RequestAccess where
+        parseJSON
+          = withObject "RequestAccess"
+              (\ o ->
+                 RequestAccess <$>
+                   (o .:? "concurrentAccess") <*>
+                     (o .:? "kind" .!= "books#requestAccess")
+                     <*> (o .:? "downloadAccess"))
+
+instance ToJSON RequestAccess where
+        toJSON RequestAccess{..}
+          = object
+              (catMaybes
+                 [("concurrentAccess" .=) <$> _raConcurrentAccess,
+                  Just ("kind" .= _raKind),
+                  ("downloadAccess" .=) <$> _raDownloadAccess])
 
 --
 -- /See:/ 'review' smart constructor.
@@ -2861,6 +3903,34 @@ rTitle = lens _rTitle (\ s a -> s{_rTitle = a})
 rType :: Lens' Review (Maybe Text)
 rType = lens _rType (\ s a -> s{_rType = a})
 
+instance FromJSON Review where
+        parseJSON
+          = withObject "Review"
+              (\ o ->
+                 Review <$>
+                   (o .:? "rating") <*>
+                     (o .:? "kind" .!= "books#review")
+                     <*> (o .:? "content")
+                     <*> (o .:? "date")
+                     <*> (o .:? "volumeId")
+                     <*> (o .:? "author")
+                     <*> (o .:? "source")
+                     <*> (o .:? "fullTextUrl")
+                     <*> (o .:? "title")
+                     <*> (o .:? "type"))
+
+instance ToJSON Review where
+        toJSON Review{..}
+          = object
+              (catMaybes
+                 [("rating" .=) <$> _rRating, Just ("kind" .= _rKind),
+                  ("content" .=) <$> _rContent, ("date" .=) <$> _rDate,
+                  ("volumeId" .=) <$> _rVolumeId,
+                  ("author" .=) <$> _rAuthor,
+                  ("source" .=) <$> _rSource,
+                  ("fullTextUrl" .=) <$> _rFullTextUrl,
+                  ("title" .=) <$> _rTitle, ("type" .=) <$> _rType])
+
 -- | Author of this review.
 --
 -- /See:/ 'reviewAuthor' smart constructor.
@@ -2885,6 +3955,16 @@ raDisplayName :: Lens' ReviewAuthor (Maybe Text)
 raDisplayName
   = lens _raDisplayName
       (\ s a -> s{_raDisplayName = a})
+
+instance FromJSON ReviewAuthor where
+        parseJSON
+          = withObject "ReviewAuthor"
+              (\ o -> ReviewAuthor <$> (o .:? "displayName"))
+
+instance ToJSON ReviewAuthor where
+        toJSON ReviewAuthor{..}
+          = object
+              (catMaybes [("displayName" .=) <$> _raDisplayName])
 
 -- | Information regarding the source of this review, when the review is not
 -- from a Google Books user.
@@ -2930,6 +4010,22 @@ rsDescription
   = lens _rsDescription
       (\ s a -> s{_rsDescription = a})
 
+instance FromJSON ReviewSource where
+        parseJSON
+          = withObject "ReviewSource"
+              (\ o ->
+                 ReviewSource <$>
+                   (o .:? "extraDescription") <*> (o .:? "url") <*>
+                     (o .:? "description"))
+
+instance ToJSON ReviewSource where
+        toJSON ReviewSource{..}
+          = object
+              (catMaybes
+                 [("extraDescription" .=) <$> _rsExtraDescription,
+                  ("url" .=) <$> _rsUrl,
+                  ("description" .=) <$> _rsDescription])
+
 --
 -- /See:/ 'usersettings' smart constructor.
 data Usersettings = Usersettings
@@ -2960,6 +4056,21 @@ uKind = lens _uKind (\ s a -> s{_uKind = a})
 uNotesExport :: Lens' Usersettings (Maybe UsersettingsNotesExport)
 uNotesExport
   = lens _uNotesExport (\ s a -> s{_uNotesExport = a})
+
+instance FromJSON Usersettings where
+        parseJSON
+          = withObject "Usersettings"
+              (\ o ->
+                 Usersettings <$>
+                   (o .:? "kind" .!= "books#usersettings") <*>
+                     (o .:? "notesExport"))
+
+instance ToJSON Usersettings where
+        toJSON Usersettings{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _uKind),
+                  ("notesExport" .=) <$> _uNotesExport])
 
 -- | User settings in sub-objects, each for different purposes.
 --
@@ -2992,6 +4103,20 @@ uneFolderName
 uneIsEnabled :: Lens' UsersettingsNotesExport (Maybe Bool)
 uneIsEnabled
   = lens _uneIsEnabled (\ s a -> s{_uneIsEnabled = a})
+
+instance FromJSON UsersettingsNotesExport where
+        parseJSON
+          = withObject "UsersettingsNotesExport"
+              (\ o ->
+                 UsersettingsNotesExport <$>
+                   (o .:? "folderName") <*> (o .:? "isEnabled"))
+
+instance ToJSON UsersettingsNotesExport where
+        toJSON UsersettingsNotesExport{..}
+          = object
+              (catMaybes
+                 [("folderName" .=) <$> _uneFolderName,
+                  ("isEnabled" .=) <$> _uneIsEnabled])
 
 --
 -- /See:/ 'volume' smart constructor.
@@ -3111,6 +4236,37 @@ v1VolumeInfo :: Lens' Volume (Maybe VolumeVolumeInfo)
 v1VolumeInfo
   = lens _v1VolumeInfo (\ s a -> s{_v1VolumeInfo = a})
 
+instance FromJSON Volume where
+        parseJSON
+          = withObject "Volume"
+              (\ o ->
+                 Volume <$>
+                   (o .:? "userInfo") <*> (o .:? "etag") <*>
+                     (o .:? "accessInfo")
+                     <*> (o .:? "kind" .!= "books#volume")
+                     <*> (o .:? "searchInfo")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "layerInfo")
+                     <*> (o .:? "saleInfo")
+                     <*> (o .:? "id")
+                     <*> (o .:? "recommendedInfo")
+                     <*> (o .:? "volumeInfo"))
+
+instance ToJSON Volume where
+        toJSON Volume{..}
+          = object
+              (catMaybes
+                 [("userInfo" .=) <$> _v1UserInfo,
+                  ("etag" .=) <$> _v1Etag,
+                  ("accessInfo" .=) <$> _v1AccessInfo,
+                  Just ("kind" .= _v1Kind),
+                  ("searchInfo" .=) <$> _v1SearchInfo,
+                  ("selfLink" .=) <$> _v1SelfLink,
+                  ("layerInfo" .=) <$> _v1LayerInfo,
+                  ("saleInfo" .=) <$> _v1SaleInfo, ("id" .=) <$> _v1Id,
+                  ("recommendedInfo" .=) <$> _v1RecommendedInfo,
+                  ("volumeInfo" .=) <$> _v1VolumeInfo])
+
 --
 -- /See:/ 'volume2' smart constructor.
 data Volume2 = Volume2
@@ -3152,6 +4308,23 @@ voloItems
   = lens _voloItems (\ s a -> s{_voloItems = a}) .
       _Default
       . _Coerce
+
+instance FromJSON Volume2 where
+        parseJSON
+          = withObject "Volume2"
+              (\ o ->
+                 Volume2 <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "onboarding#volume")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON Volume2 where
+        toJSON Volume2{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _voloNextPageToken,
+                  Just ("kind" .= _voloKind),
+                  ("items" .=) <$> _voloItems])
 
 -- | Any information about a volume related to reading or obtaining that
 -- volume text. This information can depend on country (books may be public
@@ -3321,6 +4494,47 @@ vaiPublicDomain
   = lens _vaiPublicDomain
       (\ s a -> s{_vaiPublicDomain = a})
 
+instance FromJSON VolumeAccessInfo where
+        parseJSON
+          = withObject "VolumeAccessInfo"
+              (\ o ->
+                 VolumeAccessInfo <$>
+                   (o .:? "webReaderLink") <*> (o .:? "country") <*>
+                     (o .:? "driveImportedContentLink")
+                     <*> (o .:? "explicitOfflineLicenseManagement")
+                     <*> (o .:? "viewability")
+                     <*> (o .:? "quoteSharingAllowed")
+                     <*> (o .:? "epub")
+                     <*> (o .:? "pdf")
+                     <*> (o .:? "textToSpeechPermission")
+                     <*> (o .:? "embeddable")
+                     <*> (o .:? "accessViewStatus")
+                     <*> (o .:? "downloadAccess")
+                     <*> (o .:? "viewOrderUrl")
+                     <*> (o .:? "publicDomain"))
+
+instance ToJSON VolumeAccessInfo where
+        toJSON VolumeAccessInfo{..}
+          = object
+              (catMaybes
+                 [("webReaderLink" .=) <$> _vaiWebReaderLink,
+                  ("country" .=) <$> _vaiCountry,
+                  ("driveImportedContentLink" .=) <$>
+                    _vaiDriveImportedContentLink,
+                  ("explicitOfflineLicenseManagement" .=) <$>
+                    _vaiExplicitOfflineLicenseManagement,
+                  ("viewability" .=) <$> _vaiViewability,
+                  ("quoteSharingAllowed" .=) <$>
+                    _vaiQuoteSharingAllowed,
+                  ("epub" .=) <$> _vaiEpub, ("pdf" .=) <$> _vaiPdf,
+                  ("textToSpeechPermission" .=) <$>
+                    _vaiTextToSpeechPermission,
+                  ("embeddable" .=) <$> _vaiEmbeddable,
+                  ("accessViewStatus" .=) <$> _vaiAccessViewStatus,
+                  ("downloadAccess" .=) <$> _vaiDownloadAccess,
+                  ("viewOrderUrl" .=) <$> _vaiViewOrderUrl,
+                  ("publicDomain" .=) <$> _vaiPublicDomain])
+
 -- | Copy\/Paste accounting information.
 --
 -- /See:/ 'volumeCopyUserInfo' smart constructor.
@@ -3371,6 +4585,27 @@ vcuiRemainingCharacterCount
   = lens _vcuiRemainingCharacterCount
       (\ s a -> s{_vcuiRemainingCharacterCount = a})
 
+instance FromJSON VolumeCopyUserInfo where
+        parseJSON
+          = withObject "VolumeCopyUserInfo"
+              (\ o ->
+                 VolumeCopyUserInfo <$>
+                   (o .:? "limitType") <*>
+                     (o .:? "allowedCharacterCount")
+                     <*> (o .:? "updated")
+                     <*> (o .:? "remainingCharacterCount"))
+
+instance ToJSON VolumeCopyUserInfo where
+        toJSON VolumeCopyUserInfo{..}
+          = object
+              (catMaybes
+                 [("limitType" .=) <$> _vcuiLimitType,
+                  ("allowedCharacterCount" .=) <$>
+                    _vcuiAllowedCharacterCount,
+                  ("updated" .=) <$> _vcuiUpdated,
+                  ("remainingCharacterCount" .=) <$>
+                    _vcuiRemainingCharacterCount])
+
 -- | Physical dimensions of this volume.
 --
 -- /See:/ 'volumeDimensionsVolumeInfo' smart constructor.
@@ -3413,6 +4648,22 @@ vdviThickness :: Lens' VolumeDimensionsVolumeInfo (Maybe Text)
 vdviThickness
   = lens _vdviThickness
       (\ s a -> s{_vdviThickness = a})
+
+instance FromJSON VolumeDimensionsVolumeInfo where
+        parseJSON
+          = withObject "VolumeDimensionsVolumeInfo"
+              (\ o ->
+                 VolumeDimensionsVolumeInfo <$>
+                   (o .:? "height") <*> (o .:? "width") <*>
+                     (o .:? "thickness"))
+
+instance ToJSON VolumeDimensionsVolumeInfo where
+        toJSON VolumeDimensionsVolumeInfo{..}
+          = object
+              (catMaybes
+                 [("height" .=) <$> _vdviHeight,
+                  ("width" .=) <$> _vdviWidth,
+                  ("thickness" .=) <$> _vdviThickness])
 
 -- | Information about epub content. (In LITE projection.)
 --
@@ -3459,6 +4710,22 @@ veaiDownloadLink :: Lens' VolumeEpubAccessInfo (Maybe Text)
 veaiDownloadLink
   = lens _veaiDownloadLink
       (\ s a -> s{_veaiDownloadLink = a})
+
+instance FromJSON VolumeEpubAccessInfo where
+        parseJSON
+          = withObject "VolumeEpubAccessInfo"
+              (\ o ->
+                 VolumeEpubAccessInfo <$>
+                   (o .:? "acsTokenLink") <*> (o .:? "isAvailable") <*>
+                     (o .:? "downloadLink"))
+
+instance ToJSON VolumeEpubAccessInfo where
+        toJSON VolumeEpubAccessInfo{..}
+          = object
+              (catMaybes
+                 [("acsTokenLink" .=) <$> _veaiAcsTokenLink,
+                  ("isAvailable" .=) <$> _veaiIsAvailable,
+                  ("downloadLink" .=) <$> _veaiDownloadLink])
 
 -- | A list of image links for all the sizes that are available. (In LITE
 -- projection.)
@@ -3536,6 +4803,28 @@ vilviSmallThumbnail
   = lens _vilviSmallThumbnail
       (\ s a -> s{_vilviSmallThumbnail = a})
 
+instance FromJSON VolumeImageLinksVolumeInfo where
+        parseJSON
+          = withObject "VolumeImageLinksVolumeInfo"
+              (\ o ->
+                 VolumeImageLinksVolumeInfo <$>
+                   (o .:? "thumbnail") <*> (o .:? "small") <*>
+                     (o .:? "extraLarge")
+                     <*> (o .:? "large")
+                     <*> (o .:? "medium")
+                     <*> (o .:? "smallThumbnail"))
+
+instance ToJSON VolumeImageLinksVolumeInfo where
+        toJSON VolumeImageLinksVolumeInfo{..}
+          = object
+              (catMaybes
+                 [("thumbnail" .=) <$> _vilviThumbnail,
+                  ("small" .=) <$> _vilviSmall,
+                  ("extraLarge" .=) <$> _vilviExtraLarge,
+                  ("large" .=) <$> _vilviLarge,
+                  ("medium" .=) <$> _vilviMedium,
+                  ("smallThumbnail" .=) <$> _vilviSmallThumbnail])
+
 --
 -- /See:/ 'volumeItemIndustryIdentifiersVolumeInfo' smart constructor.
 data VolumeItemIndustryIdentifiersVolumeInfo = VolumeItemIndustryIdentifiersVolumeInfo
@@ -3568,6 +4857,23 @@ viiiviIdentifier
 viiiviType :: Lens' VolumeItemIndustryIdentifiersVolumeInfo (Maybe Text)
 viiiviType
   = lens _viiiviType (\ s a -> s{_viiiviType = a})
+
+instance FromJSON
+         VolumeItemIndustryIdentifiersVolumeInfo where
+        parseJSON
+          = withObject
+              "VolumeItemIndustryIdentifiersVolumeInfo"
+              (\ o ->
+                 VolumeItemIndustryIdentifiersVolumeInfo <$>
+                   (o .:? "identifier") <*> (o .:? "type"))
+
+instance ToJSON
+         VolumeItemIndustryIdentifiersVolumeInfo where
+        toJSON VolumeItemIndustryIdentifiersVolumeInfo{..}
+          = object
+              (catMaybes
+                 [("identifier" .=) <$> _viiiviIdentifier,
+                  ("type" .=) <$> _viiiviType])
 
 --
 -- /See:/ 'volumeItemLayersLayerInfo' smart constructor.
@@ -3603,6 +4909,22 @@ villiVolumeAnnotationsVersion
 villiLayerId :: Lens' VolumeItemLayersLayerInfo (Maybe Text)
 villiLayerId
   = lens _villiLayerId (\ s a -> s{_villiLayerId = a})
+
+instance FromJSON VolumeItemLayersLayerInfo where
+        parseJSON
+          = withObject "VolumeItemLayersLayerInfo"
+              (\ o ->
+                 VolumeItemLayersLayerInfo <$>
+                   (o .:? "volumeAnnotationsVersion") <*>
+                     (o .:? "layerId"))
+
+instance ToJSON VolumeItemLayersLayerInfo where
+        toJSON VolumeItemLayersLayerInfo{..}
+          = object
+              (catMaybes
+                 [("volumeAnnotationsVersion" .=) <$>
+                    _villiVolumeAnnotationsVersion,
+                  ("layerId" .=) <$> _villiLayerId])
 
 --
 -- /See:/ 'volumeItemOffersSaleInfo' smart constructor.
@@ -3658,6 +4980,25 @@ viosiRetailPrice
   = lens _viosiRetailPrice
       (\ s a -> s{_viosiRetailPrice = a})
 
+instance FromJSON VolumeItemOffersSaleInfo where
+        parseJSON
+          = withObject "VolumeItemOffersSaleInfo"
+              (\ o ->
+                 VolumeItemOffersSaleInfo <$>
+                   (o .:? "finskyOfferType") <*>
+                     (o .:? "rentalDuration")
+                     <*> (o .:? "listPrice")
+                     <*> (o .:? "retailPrice"))
+
+instance ToJSON VolumeItemOffersSaleInfo where
+        toJSON VolumeItemOffersSaleInfo{..}
+          = object
+              (catMaybes
+                 [("finskyOfferType" .=) <$> _viosiFinskyOfferType,
+                  ("rentalDuration" .=) <$> _viosiRentalDuration,
+                  ("listPrice" .=) <$> _viosiListPrice,
+                  ("retailPrice" .=) <$> _viosiRetailPrice])
+
 -- | What layers exist in this volume and high level information about them.
 --
 -- /See:/ 'volumeLayerInfo' smart constructor.
@@ -3684,6 +5025,16 @@ vliLayers
   = lens _vliLayers (\ s a -> s{_vliLayers = a}) .
       _Default
       . _Coerce
+
+instance FromJSON VolumeLayerInfo where
+        parseJSON
+          = withObject "VolumeLayerInfo"
+              (\ o ->
+                 VolumeLayerInfo <$> (o .:? "layers" .!= mempty))
+
+instance ToJSON VolumeLayerInfo where
+        toJSON VolumeLayerInfo{..}
+          = object (catMaybes [("layers" .=) <$> _vliLayers])
 
 -- | Offer list (=undiscounted) price in Micros.
 --
@@ -3718,6 +5069,22 @@ vlpiosiAmountInMicros
   = lens _vlpiosiAmountInMicros
       (\ s a -> s{_vlpiosiAmountInMicros = a})
 
+instance FromJSON VolumeListPriceItemOffersSaleInfo
+         where
+        parseJSON
+          = withObject "VolumeListPriceItemOffersSaleInfo"
+              (\ o ->
+                 VolumeListPriceItemOffersSaleInfo <$>
+                   (o .:? "currencyCode") <*> (o .:? "amountInMicros"))
+
+instance ToJSON VolumeListPriceItemOffersSaleInfo
+         where
+        toJSON VolumeListPriceItemOffersSaleInfo{..}
+          = object
+              (catMaybes
+                 [("currencyCode" .=) <$> _vlpiosiCurrencyCode,
+                  ("amountInMicros" .=) <$> _vlpiosiAmountInMicros])
+
 -- | Suggested retail price. (In LITE projection.)
 --
 -- /See:/ 'volumeListPriceSaleInfo' smart constructor.
@@ -3751,6 +5118,20 @@ vlpsiCurrencyCode :: Lens' VolumeListPriceSaleInfo (Maybe Text)
 vlpsiCurrencyCode
   = lens _vlpsiCurrencyCode
       (\ s a -> s{_vlpsiCurrencyCode = a})
+
+instance FromJSON VolumeListPriceSaleInfo where
+        parseJSON
+          = withObject "VolumeListPriceSaleInfo"
+              (\ o ->
+                 VolumeListPriceSaleInfo <$>
+                   (o .:? "amount") <*> (o .:? "currencyCode"))
+
+instance ToJSON VolumeListPriceSaleInfo where
+        toJSON VolumeListPriceSaleInfo{..}
+          = object
+              (catMaybes
+                 [("amount" .=) <$> _vlpsiAmount,
+                  ("currencyCode" .=) <$> _vlpsiCurrencyCode])
 
 -- | Information about pdf content. (In LITE projection.)
 --
@@ -3798,6 +5179,22 @@ vpaiDownloadLink
   = lens _vpaiDownloadLink
       (\ s a -> s{_vpaiDownloadLink = a})
 
+instance FromJSON VolumePdfAccessInfo where
+        parseJSON
+          = withObject "VolumePdfAccessInfo"
+              (\ o ->
+                 VolumePdfAccessInfo <$>
+                   (o .:? "acsTokenLink") <*> (o .:? "isAvailable") <*>
+                     (o .:? "downloadLink"))
+
+instance ToJSON VolumePdfAccessInfo where
+        toJSON VolumePdfAccessInfo{..}
+          = object
+              (catMaybes
+                 [("acsTokenLink" .=) <$> _vpaiAcsTokenLink,
+                  ("isAvailable" .=) <$> _vpaiIsAvailable,
+                  ("downloadLink" .=) <$> _vpaiDownloadLink])
+
 -- | Recommendation related information for this volume.
 --
 -- /See:/ 'volumeRecommendedInfo' smart constructor.
@@ -3822,6 +5219,17 @@ vriExplanation :: Lens' VolumeRecommendedInfo (Maybe Text)
 vriExplanation
   = lens _vriExplanation
       (\ s a -> s{_vriExplanation = a})
+
+instance FromJSON VolumeRecommendedInfo where
+        parseJSON
+          = withObject "VolumeRecommendedInfo"
+              (\ o ->
+                 VolumeRecommendedInfo <$> (o .:? "explanation"))
+
+instance ToJSON VolumeRecommendedInfo where
+        toJSON VolumeRecommendedInfo{..}
+          = object
+              (catMaybes [("explanation" .=) <$> _vriExplanation])
 
 -- | The rental duration (for rental offers only).
 --
@@ -3853,6 +5261,22 @@ vrdiosiCount
 vrdiosiUnit :: Lens' VolumeRentalDurationItemOffersSaleInfo (Maybe Text)
 vrdiosiUnit
   = lens _vrdiosiUnit (\ s a -> s{_vrdiosiUnit = a})
+
+instance FromJSON
+         VolumeRentalDurationItemOffersSaleInfo where
+        parseJSON
+          = withObject "VolumeRentalDurationItemOffersSaleInfo"
+              (\ o ->
+                 VolumeRentalDurationItemOffersSaleInfo <$>
+                   (o .:? "count") <*> (o .:? "unit"))
+
+instance ToJSON
+         VolumeRentalDurationItemOffersSaleInfo where
+        toJSON VolumeRentalDurationItemOffersSaleInfo{..}
+          = object
+              (catMaybes
+                 [("count" .=) <$> _vrdiosiCount,
+                  ("unit" .=) <$> _vrdiosiUnit])
 
 -- | Period during this book is\/was a valid rental.
 --
@@ -3887,6 +5311,20 @@ vrpuiStartUtcSec
   = lens _vrpuiStartUtcSec
       (\ s a -> s{_vrpuiStartUtcSec = a})
 
+instance FromJSON VolumeRentalPeriodUserInfo where
+        parseJSON
+          = withObject "VolumeRentalPeriodUserInfo"
+              (\ o ->
+                 VolumeRentalPeriodUserInfo <$>
+                   (o .:? "endUtcSec") <*> (o .:? "startUtcSec"))
+
+instance ToJSON VolumeRentalPeriodUserInfo where
+        toJSON VolumeRentalPeriodUserInfo{..}
+          = object
+              (catMaybes
+                 [("endUtcSec" .=) <$> _vrpuiEndUtcSec,
+                  ("startUtcSec" .=) <$> _vrpuiStartUtcSec])
+
 -- | Offer retail (=discounted) price in Micros
 --
 -- /See:/ 'volumeRetailPriceItemOffersSaleInfo' smart constructor.
@@ -3919,6 +5357,22 @@ vrpiosiAmountInMicros :: Lens' VolumeRetailPriceItemOffersSaleInfo (Maybe Double
 vrpiosiAmountInMicros
   = lens _vrpiosiAmountInMicros
       (\ s a -> s{_vrpiosiAmountInMicros = a})
+
+instance FromJSON VolumeRetailPriceItemOffersSaleInfo
+         where
+        parseJSON
+          = withObject "VolumeRetailPriceItemOffersSaleInfo"
+              (\ o ->
+                 VolumeRetailPriceItemOffersSaleInfo <$>
+                   (o .:? "currencyCode") <*> (o .:? "amountInMicros"))
+
+instance ToJSON VolumeRetailPriceItemOffersSaleInfo
+         where
+        toJSON VolumeRetailPriceItemOffersSaleInfo{..}
+          = object
+              (catMaybes
+                 [("currencyCode" .=) <$> _vrpiosiCurrencyCode,
+                  ("amountInMicros" .=) <$> _vrpiosiAmountInMicros])
 
 -- | The actual selling price of the book. This is the same as the suggested
 -- retail or list price unless there are offers or discounts on this
@@ -3955,6 +5409,20 @@ vrpsiCurrencyCode :: Lens' VolumeRetailPriceSaleInfo (Maybe Text)
 vrpsiCurrencyCode
   = lens _vrpsiCurrencyCode
       (\ s a -> s{_vrpsiCurrencyCode = a})
+
+instance FromJSON VolumeRetailPriceSaleInfo where
+        parseJSON
+          = withObject "VolumeRetailPriceSaleInfo"
+              (\ o ->
+                 VolumeRetailPriceSaleInfo <$>
+                   (o .:? "amount") <*> (o .:? "currencyCode"))
+
+instance ToJSON VolumeRetailPriceSaleInfo where
+        toJSON VolumeRetailPriceSaleInfo{..}
+          = object
+              (catMaybes
+                 [("amount" .=) <$> _vrpsiAmount,
+                  ("currencyCode" .=) <$> _vrpsiCurrencyCode])
 
 -- | Any information about a volume related to the eBookstore and\/or
 -- purchaseability. This information can depend on the country where the
@@ -4059,6 +5527,32 @@ vsiSaleability
   = lens _vsiSaleability
       (\ s a -> s{_vsiSaleability = a})
 
+instance FromJSON VolumeSaleInfo where
+        parseJSON
+          = withObject "VolumeSaleInfo"
+              (\ o ->
+                 VolumeSaleInfo <$>
+                   (o .:? "country") <*> (o .:? "onSaleDate") <*>
+                     (o .:? "listPrice")
+                     <*> (o .:? "retailPrice")
+                     <*> (o .:? "offers" .!= mempty)
+                     <*> (o .:? "buyLink")
+                     <*> (o .:? "isEbook")
+                     <*> (o .:? "saleability"))
+
+instance ToJSON VolumeSaleInfo where
+        toJSON VolumeSaleInfo{..}
+          = object
+              (catMaybes
+                 [("country" .=) <$> _vsiCountry,
+                  ("onSaleDate" .=) <$> _vsiOnSaleDate,
+                  ("listPrice" .=) <$> _vsiListPrice,
+                  ("retailPrice" .=) <$> _vsiRetailPrice,
+                  ("offers" .=) <$> _vsiOffers,
+                  ("buyLink" .=) <$> _vsiBuyLink,
+                  ("isEbook" .=) <$> _vsiIsEbook,
+                  ("saleability" .=) <$> _vsiSaleability])
+
 -- | Search result information related to this volume.
 --
 -- /See:/ 'volumeSearchInfo' smart constructor.
@@ -4083,6 +5577,16 @@ vsiTextSnippet :: Lens' VolumeSearchInfo (Maybe Text)
 vsiTextSnippet
   = lens _vsiTextSnippet
       (\ s a -> s{_vsiTextSnippet = a})
+
+instance FromJSON VolumeSearchInfo where
+        parseJSON
+          = withObject "VolumeSearchInfo"
+              (\ o -> VolumeSearchInfo <$> (o .:? "textSnippet"))
+
+instance ToJSON VolumeSearchInfo where
+        toJSON VolumeSearchInfo{..}
+          = object
+              (catMaybes [("textSnippet" .=) <$> _vsiTextSnippet])
 
 -- | User specific information related to this volume. (e.g. page this user
 -- last read or whether they purchased this book)
@@ -4210,6 +5714,39 @@ vuiReadingPosition
   = lens _vuiReadingPosition
       (\ s a -> s{_vuiReadingPosition = a})
 
+instance FromJSON VolumeUserInfo where
+        parseJSON
+          = withObject "VolumeUserInfo"
+              (\ o ->
+                 VolumeUserInfo <$>
+                   (o .:? "copy") <*> (o .:? "userUploadedVolumeInfo")
+                     <*> (o .:? "isPurchased")
+                     <*> (o .:? "rentalState")
+                     <*> (o .:? "isPreordered")
+                     <*> (o .:? "review")
+                     <*> (o .:? "rentalPeriod")
+                     <*> (o .:? "updated")
+                     <*> (o .:? "isUploaded")
+                     <*> (o .:? "isInMyBooks")
+                     <*> (o .:? "readingPosition"))
+
+instance ToJSON VolumeUserInfo where
+        toJSON VolumeUserInfo{..}
+          = object
+              (catMaybes
+                 [("copy" .=) <$> _vuiCopy,
+                  ("userUploadedVolumeInfo" .=) <$>
+                    _vuiUserUploadedVolumeInfo,
+                  ("isPurchased" .=) <$> _vuiIsPurchased,
+                  ("rentalState" .=) <$> _vuiRentalState,
+                  ("isPreordered" .=) <$> _vuiIsPreordered,
+                  ("review" .=) <$> _vuiReview,
+                  ("rentalPeriod" .=) <$> _vuiRentalPeriod,
+                  ("updated" .=) <$> _vuiUpdated,
+                  ("isUploaded" .=) <$> _vuiIsUploaded,
+                  ("isInMyBooks" .=) <$> _vuiIsInMyBooks,
+                  ("readingPosition" .=) <$> _vuiReadingPosition])
+
 --
 -- /See:/ 'volumeUserUploadedVolumeInfoUserInfo' smart constructor.
 newtype VolumeUserUploadedVolumeInfoUserInfo = VolumeUserUploadedVolumeInfoUserInfo
@@ -4232,6 +5769,21 @@ vuuviuiProcessingState :: Lens' VolumeUserUploadedVolumeInfoUserInfo (Maybe Text
 vuuviuiProcessingState
   = lens _vuuviuiProcessingState
       (\ s a -> s{_vuuviuiProcessingState = a})
+
+instance FromJSON
+         VolumeUserUploadedVolumeInfoUserInfo where
+        parseJSON
+          = withObject "VolumeUserUploadedVolumeInfoUserInfo"
+              (\ o ->
+                 VolumeUserUploadedVolumeInfoUserInfo <$>
+                   (o .:? "processingState"))
+
+instance ToJSON VolumeUserUploadedVolumeInfoUserInfo
+         where
+        toJSON VolumeUserUploadedVolumeInfoUserInfo{..}
+          = object
+              (catMaybes
+                 [("processingState" .=) <$> _vuuviuiProcessingState])
 
 -- | General volume information.
 --
@@ -4503,6 +6055,68 @@ vviPrintType :: Lens' VolumeVolumeInfo (Maybe Text)
 vviPrintType
   = lens _vviPrintType (\ s a -> s{_vviPrintType = a})
 
+instance FromJSON VolumeVolumeInfo where
+        parseJSON
+          = withObject "VolumeVolumeInfo"
+              (\ o ->
+                 VolumeVolumeInfo <$>
+                   (o .:? "imageLinks") <*> (o .:? "averageRating") <*>
+                     (o .:? "ratingsCount")
+                     <*> (o .:? "canonicalVolumeLink")
+                     <*> (o .:? "readingModes")
+                     <*> (o .:? "industryIdentifiers" .!= mempty)
+                     <*> (o .:? "printedPageCount")
+                     <*> (o .:? "mainCategory")
+                     <*> (o .:? "contentVersion")
+                     <*> (o .:? "samplePageCount")
+                     <*> (o .:? "categories" .!= mempty)
+                     <*> (o .:? "authors" .!= mempty)
+                     <*> (o .:? "allowAnonLogging")
+                     <*> (o .:? "subtitle")
+                     <*> (o .:? "publishedDate")
+                     <*> (o .:? "maturityRating")
+                     <*> (o .:? "previewLink")
+                     <*> (o .:? "language")
+                     <*> (o .:? "title")
+                     <*> (o .:? "pageCount")
+                     <*> (o .:? "dimensions")
+                     <*> (o .:? "infoLink")
+                     <*> (o .:? "publisher")
+                     <*> (o .:? "description")
+                     <*> (o .:? "printType"))
+
+instance ToJSON VolumeVolumeInfo where
+        toJSON VolumeVolumeInfo{..}
+          = object
+              (catMaybes
+                 [("imageLinks" .=) <$> _vviImageLinks,
+                  ("averageRating" .=) <$> _vviAverageRating,
+                  ("ratingsCount" .=) <$> _vviRatingsCount,
+                  ("canonicalVolumeLink" .=) <$>
+                    _vviCanonicalVolumeLink,
+                  ("readingModes" .=) <$> _vviReadingModes,
+                  ("industryIdentifiers" .=) <$>
+                    _vviIndustryIdentifiers,
+                  ("printedPageCount" .=) <$> _vviPrintedPageCount,
+                  ("mainCategory" .=) <$> _vviMainCategory,
+                  ("contentVersion" .=) <$> _vviContentVersion,
+                  ("samplePageCount" .=) <$> _vviSamplePageCount,
+                  ("categories" .=) <$> _vviCategories,
+                  ("authors" .=) <$> _vviAuthors,
+                  ("allowAnonLogging" .=) <$> _vviAllowAnonLogging,
+                  ("subtitle" .=) <$> _vviSubtitle,
+                  ("publishedDate" .=) <$> _vviPublishedDate,
+                  ("maturityRating" .=) <$> _vviMaturityRating,
+                  ("previewLink" .=) <$> _vviPreviewLink,
+                  ("language" .=) <$> _vviLanguage,
+                  ("title" .=) <$> _vviTitle,
+                  ("pageCount" .=) <$> _vviPageCount,
+                  ("dimensions" .=) <$> _vviDimensions,
+                  ("infoLink" .=) <$> _vviInfoLink,
+                  ("publisher" .=) <$> _vviPublisher,
+                  ("description" .=) <$> _vviDescription,
+                  ("printType" .=) <$> _vviPrintType])
+
 --
 -- /See:/ 'volumeannotation' smart constructor.
 data Volumeannotation = Volumeannotation
@@ -4648,6 +6262,43 @@ vvLayerId :: Lens' Volumeannotation (Maybe Text)
 vvLayerId
   = lens _vvLayerId (\ s a -> s{_vvLayerId = a})
 
+instance FromJSON Volumeannotation where
+        parseJSON
+          = withObject "Volumeannotation"
+              (\ o ->
+                 Volumeannotation <$>
+                   (o .:? "selectedText") <*>
+                     (o .:? "annotationDataLink")
+                     <*> (o .:? "pageIds" .!= mempty)
+                     <*> (o .:? "kind" .!= "books#volumeannotation")
+                     <*> (o .:? "data")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "annotationType")
+                     <*> (o .:? "annotationDataId")
+                     <*> (o .:? "contentRanges")
+                     <*> (o .:? "volumeId")
+                     <*> (o .:? "id")
+                     <*> (o .:? "deleted")
+                     <*> (o .:? "updated")
+                     <*> (o .:? "layerId"))
+
+instance ToJSON Volumeannotation where
+        toJSON Volumeannotation{..}
+          = object
+              (catMaybes
+                 [("selectedText" .=) <$> _vvSelectedText,
+                  ("annotationDataLink" .=) <$> _vvAnnotationDataLink,
+                  ("pageIds" .=) <$> _vvPageIds,
+                  Just ("kind" .= _vvKind), ("data" .=) <$> _vvData,
+                  ("selfLink" .=) <$> _vvSelfLink,
+                  ("annotationType" .=) <$> _vvAnnotationType,
+                  ("annotationDataId" .=) <$> _vvAnnotationDataId,
+                  ("contentRanges" .=) <$> _vvContentRanges,
+                  ("volumeId" .=) <$> _vvVolumeId, ("id" .=) <$> _vvId,
+                  ("deleted" .=) <$> _vvDeleted,
+                  ("updated" .=) <$> _vvUpdated,
+                  ("layerId" .=) <$> _vvLayerId])
+
 -- | The content ranges to identify the selected text.
 --
 -- /See:/ 'volumeannotationContentRanges' smart constructor.
@@ -4701,6 +6352,24 @@ vcrGbTextRange
 vcrCfiRange :: Lens' VolumeannotationContentRanges (Maybe (Maybe BooksAnnotationsRange))
 vcrCfiRange
   = lens _vcrCfiRange (\ s a -> s{_vcrCfiRange = a})
+
+instance FromJSON VolumeannotationContentRanges where
+        parseJSON
+          = withObject "VolumeannotationContentRanges"
+              (\ o ->
+                 VolumeannotationContentRanges <$>
+                   (o .:? "gbImageRange") <*> (o .:? "contentVersion")
+                     <*> (o .:? "gbTextRange")
+                     <*> (o .:? "cfiRange"))
+
+instance ToJSON VolumeannotationContentRanges where
+        toJSON VolumeannotationContentRanges{..}
+          = object
+              (catMaybes
+                 [("gbImageRange" .=) <$> _vcrGbImageRange,
+                  ("contentVersion" .=) <$> _vcrContentVersion,
+                  ("gbTextRange" .=) <$> _vcrGbTextRange,
+                  ("cfiRange" .=) <$> _vcrCfiRange])
 
 --
 -- /See:/ 'volumeannotations' smart constructor.
@@ -4768,6 +6437,26 @@ volVersion :: Lens' Volumeannotations (Maybe Text)
 volVersion
   = lens _volVersion (\ s a -> s{_volVersion = a})
 
+instance FromJSON Volumeannotations where
+        parseJSON
+          = withObject "Volumeannotations"
+              (\ o ->
+                 Volumeannotations <$>
+                   (o .:? "totalItems") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "books#volumeannotations")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "version"))
+
+instance ToJSON Volumeannotations where
+        toJSON Volumeannotations{..}
+          = object
+              (catMaybes
+                 [("totalItems" .=) <$> _volTotalItems,
+                  ("nextPageToken" .=) <$> _volNextPageToken,
+                  Just ("kind" .= _volKind),
+                  ("items" .=) <$> _volItems,
+                  ("version" .=) <$> _volVersion])
+
 --
 -- /See:/ 'volumes' smart constructor.
 data Volumes = Volumes
@@ -4809,3 +6498,19 @@ vItems :: Lens' Volumes [Maybe Volume]
 vItems
   = lens _vItems (\ s a -> s{_vItems = a}) . _Default .
       _Coerce
+
+instance FromJSON Volumes where
+        parseJSON
+          = withObject "Volumes"
+              (\ o ->
+                 Volumes <$>
+                   (o .:? "totalItems") <*>
+                     (o .:? "kind" .!= "books#volumes")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON Volumes where
+        toJSON Volumes{..}
+          = object
+              (catMaybes
+                 [("totalItems" .=) <$> _vTotalItems,
+                  Just ("kind" .= _vKind), ("items" .=) <$> _vItems])

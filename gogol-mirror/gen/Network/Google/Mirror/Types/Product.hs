@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -70,6 +71,25 @@ aFeatures
       _Default
       . _Coerce
 
+instance FromJSON Account where
+        parseJSON
+          = withObject "Account"
+              (\ o ->
+                 Account <$>
+                   (o .:? "authTokens" .!= mempty) <*>
+                     (o .:? "userData" .!= mempty)
+                     <*> (o .:? "password")
+                     <*> (o .:? "features" .!= mempty))
+
+instance ToJSON Account where
+        toJSON Account{..}
+          = object
+              (catMaybes
+                 [("authTokens" .=) <$> _aAuthTokens,
+                  ("userData" .=) <$> _aUserData,
+                  ("password" .=) <$> _aPassword,
+                  ("features" .=) <$> _aFeatures])
+
 -- | Represents media content, such as a photo, that can be attached to a
 -- timeline item.
 --
@@ -124,6 +144,24 @@ aContentType :: Lens' Attachment (Maybe Text)
 aContentType
   = lens _aContentType (\ s a -> s{_aContentType = a})
 
+instance FromJSON Attachment where
+        parseJSON
+          = withObject "Attachment"
+              (\ o ->
+                 Attachment <$>
+                   (o .:? "contentUrl") <*> (o .:? "id") <*>
+                     (o .:? "isProcessingContent")
+                     <*> (o .:? "contentType"))
+
+instance ToJSON Attachment where
+        toJSON Attachment{..}
+          = object
+              (catMaybes
+                 [("contentUrl" .=) <$> _aContentUrl,
+                  ("id" .=) <$> _aId,
+                  ("isProcessingContent" .=) <$> _aIsProcessingContent,
+                  ("contentType" .=) <$> _aContentType])
+
 -- | A list of Attachments. This is the response from the server to GET
 -- requests on the attachments collection.
 --
@@ -159,6 +197,21 @@ alrItems
       _Default
       . _Coerce
 
+instance FromJSON AttachmentsListResponse where
+        parseJSON
+          = withObject "AttachmentsListResponse"
+              (\ o ->
+                 AttachmentsListResponse <$>
+                   (o .:? "kind" .!= "mirror#attachmentsList") <*>
+                     (o .:? "items" .!= mempty))
+
+instance ToJSON AttachmentsListResponse where
+        toJSON AttachmentsListResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _alrKind),
+                  ("items" .=) <$> _alrItems])
+
 --
 -- /See:/ 'authToken' smart constructor.
 data AuthToken = AuthToken
@@ -188,6 +241,19 @@ atAuthToken
 atType :: Lens' AuthToken (Maybe Text)
 atType = lens _atType (\ s a -> s{_atType = a})
 
+instance FromJSON AuthToken where
+        parseJSON
+          = withObject "AuthToken"
+              (\ o ->
+                 AuthToken <$> (o .:? "authToken") <*> (o .:? "type"))
+
+instance ToJSON AuthToken where
+        toJSON AuthToken{..}
+          = object
+              (catMaybes
+                 [("authToken" .=) <$> _atAuthToken,
+                  ("type" .=) <$> _atType])
+
 -- | A single menu command that is part of a Contact.
 --
 -- /See:/ 'command' smart constructor.
@@ -214,6 +280,15 @@ command =
 -- \"Post an update\" voice menu command.
 cType :: Lens' Command (Maybe Text)
 cType = lens _cType (\ s a -> s{_cType = a})
+
+instance FromJSON Command where
+        parseJSON
+          = withObject "Command"
+              (\ o -> Command <$> (o .:? "type"))
+
+instance ToJSON Command where
+        toJSON Command{..}
+          = object (catMaybes [("type" .=) <$> _cType])
 
 -- | A person or group that can be used as a creator or a contact.
 --
@@ -369,6 +444,40 @@ conSpeakableName
   = lens _conSpeakableName
       (\ s a -> s{_conSpeakableName = a})
 
+instance FromJSON Contact where
+        parseJSON
+          = withObject "Contact"
+              (\ o ->
+                 Contact <$>
+                   (o .:? "acceptCommands" .!= mempty) <*>
+                     (o .:? "sharingFeatures" .!= mempty)
+                     <*> (o .:? "imageUrls" .!= mempty)
+                     <*> (o .:? "priority")
+                     <*> (o .:? "kind" .!= "mirror#contact")
+                     <*> (o .:? "acceptTypes" .!= mempty)
+                     <*> (o .:? "phoneNumber")
+                     <*> (o .:? "displayName")
+                     <*> (o .:? "source")
+                     <*> (o .:? "id")
+                     <*> (o .:? "type")
+                     <*> (o .:? "speakableName"))
+
+instance ToJSON Contact where
+        toJSON Contact{..}
+          = object
+              (catMaybes
+                 [("acceptCommands" .=) <$> _conAcceptCommands,
+                  ("sharingFeatures" .=) <$> _conSharingFeatures,
+                  ("imageUrls" .=) <$> _conImageUrls,
+                  ("priority" .=) <$> _conPriority,
+                  Just ("kind" .= _conKind),
+                  ("acceptTypes" .=) <$> _conAcceptTypes,
+                  ("phoneNumber" .=) <$> _conPhoneNumber,
+                  ("displayName" .=) <$> _conDisplayName,
+                  ("source" .=) <$> _conSource, ("id" .=) <$> _conId,
+                  ("type" .=) <$> _conType,
+                  ("speakableName" .=) <$> _conSpeakableName])
+
 -- | A list of Contacts representing contacts. This is the response from the
 -- server to GET requests on the contacts collection.
 --
@@ -403,6 +512,21 @@ clrItems
   = lens _clrItems (\ s a -> s{_clrItems = a}) .
       _Default
       . _Coerce
+
+instance FromJSON ContactsListResponse where
+        parseJSON
+          = withObject "ContactsListResponse"
+              (\ o ->
+                 ContactsListResponse <$>
+                   (o .:? "kind" .!= "mirror#contacts") <*>
+                     (o .:? "items" .!= mempty))
+
+instance ToJSON ContactsListResponse where
+        toJSON ContactsListResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _clrKind),
+                  ("items" .=) <$> _clrItems])
 
 -- | A geographic location that can be associated with a timeline item.
 --
@@ -490,6 +614,32 @@ lTimestamp :: Lens' Location (Maybe UTCTime)
 lTimestamp
   = lens _lTimestamp (\ s a -> s{_lTimestamp = a})
 
+instance FromJSON Location where
+        parseJSON
+          = withObject "Location"
+              (\ o ->
+                 Location <$>
+                   (o .:? "kind" .!= "mirror#location") <*>
+                     (o .:? "latitude")
+                     <*> (o .:? "address")
+                     <*> (o .:? "displayName")
+                     <*> (o .:? "id")
+                     <*> (o .:? "accuracy")
+                     <*> (o .:? "longitude")
+                     <*> (o .:? "timestamp"))
+
+instance ToJSON Location where
+        toJSON Location{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _lKind),
+                  ("latitude" .=) <$> _lLatitude,
+                  ("address" .=) <$> _lAddress,
+                  ("displayName" .=) <$> _lDisplayName,
+                  ("id" .=) <$> _lId, ("accuracy" .=) <$> _lAccuracy,
+                  ("longitude" .=) <$> _lLongitude,
+                  ("timestamp" .=) <$> _lTimestamp])
+
 -- | A list of Locations. This is the response from the server to GET
 -- requests on the locations collection.
 --
@@ -524,6 +674,21 @@ llrItems
   = lens _llrItems (\ s a -> s{_llrItems = a}) .
       _Default
       . _Coerce
+
+instance FromJSON LocationsListResponse where
+        parseJSON
+          = withObject "LocationsListResponse"
+              (\ o ->
+                 LocationsListResponse <$>
+                   (o .:? "kind" .!= "mirror#locationsList") <*>
+                     (o .:? "items" .!= mempty))
+
+instance ToJSON LocationsListResponse where
+        toJSON LocationsListResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _llrKind),
+                  ("items" .=) <$> _llrItems])
 
 -- | A custom menu item that can be presented to the user by a timeline item.
 --
@@ -636,6 +801,29 @@ miContextualCommand
 miId :: Lens' MenuItem (Maybe Text)
 miId = lens _miId (\ s a -> s{_miId = a})
 
+instance FromJSON MenuItem where
+        parseJSON
+          = withObject "MenuItem"
+              (\ o ->
+                 MenuItem <$>
+                   (o .:? "values" .!= mempty) <*>
+                     (o .:? "removeWhenSelected")
+                     <*> (o .:? "action")
+                     <*> (o .:? "payload")
+                     <*> (o .:? "contextual_command")
+                     <*> (o .:? "id"))
+
+instance ToJSON MenuItem where
+        toJSON MenuItem{..}
+          = object
+              (catMaybes
+                 [("values" .=) <$> _miValues,
+                  ("removeWhenSelected" .=) <$> _miRemoveWhenSelected,
+                  ("action" .=) <$> _miAction,
+                  ("payload" .=) <$> _miPayload,
+                  ("contextual_command" .=) <$> _miContextualCommand,
+                  ("id" .=) <$> _miId])
+
 -- | A single value that is part of a MenuItem.
 --
 -- /See:/ 'menuValue' smart constructor.
@@ -683,6 +871,22 @@ mvDisplayName
 mvIconUrl :: Lens' MenuValue (Maybe Text)
 mvIconUrl
   = lens _mvIconUrl (\ s a -> s{_mvIconUrl = a})
+
+instance FromJSON MenuValue where
+        parseJSON
+          = withObject "MenuValue"
+              (\ o ->
+                 MenuValue <$>
+                   (o .:? "state") <*> (o .:? "displayName") <*>
+                     (o .:? "iconUrl"))
+
+instance ToJSON MenuValue where
+        toJSON MenuValue{..}
+          = object
+              (catMaybes
+                 [("state" .=) <$> _mvState,
+                  ("displayName" .=) <$> _mvDisplayName,
+                  ("iconUrl" .=) <$> _mvIconUrl])
 
 -- | A notification delivered by the API.
 --
@@ -756,6 +960,28 @@ nUserToken :: Lens' Notification (Maybe Text)
 nUserToken
   = lens _nUserToken (\ s a -> s{_nUserToken = a})
 
+instance FromJSON Notification where
+        parseJSON
+          = withObject "Notification"
+              (\ o ->
+                 Notification <$>
+                   (o .:? "operation") <*> (o .:? "itemId") <*>
+                     (o .:? "collection")
+                     <*> (o .:? "userActions" .!= mempty)
+                     <*> (o .:? "verifyToken")
+                     <*> (o .:? "userToken"))
+
+instance ToJSON Notification where
+        toJSON Notification{..}
+          = object
+              (catMaybes
+                 [("operation" .=) <$> _nOperation,
+                  ("itemId" .=) <$> _nItemId,
+                  ("collection" .=) <$> _nCollection,
+                  ("userActions" .=) <$> _nUserActions,
+                  ("verifyToken" .=) <$> _nVerifyToken,
+                  ("userToken" .=) <$> _nUserToken])
+
 -- | Controls how notifications for a timeline item are presented to the
 -- user.
 --
@@ -791,6 +1017,20 @@ ncDeliveryTime
 -- alert users.
 ncLevel :: Lens' NotificationConfig (Maybe Text)
 ncLevel = lens _ncLevel (\ s a -> s{_ncLevel = a})
+
+instance FromJSON NotificationConfig where
+        parseJSON
+          = withObject "NotificationConfig"
+              (\ o ->
+                 NotificationConfig <$>
+                   (o .:? "deliveryTime") <*> (o .:? "level"))
+
+instance ToJSON NotificationConfig where
+        toJSON NotificationConfig{..}
+          = object
+              (catMaybes
+                 [("deliveryTime" .=) <$> _ncDeliveryTime,
+                  ("level" .=) <$> _ncLevel])
 
 -- | A setting for Glass.
 --
@@ -834,6 +1074,22 @@ setValue = lens _setValue (\ s a -> s{_setValue = a})
 -- America\/Los_Angeles.
 setId :: Lens' Setting (Maybe Text)
 setId = lens _setId (\ s a -> s{_setId = a})
+
+instance FromJSON Setting where
+        parseJSON
+          = withObject "Setting"
+              (\ o ->
+                 Setting <$>
+                   (o .:? "kind" .!= "mirror#setting") <*>
+                     (o .:? "value")
+                     <*> (o .:? "id"))
+
+instance ToJSON Setting where
+        toJSON Setting{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _setKind),
+                  ("value" .=) <$> _setValue, ("id" .=) <$> _setId])
 
 -- | A subscription to events on a collection.
 --
@@ -942,6 +1198,34 @@ sId = lens _sId (\ s a -> s{_sId = a})
 sUpdated :: Lens' Subscription (Maybe UTCTime)
 sUpdated = lens _sUpdated (\ s a -> s{_sUpdated = a})
 
+instance FromJSON Subscription where
+        parseJSON
+          = withObject "Subscription"
+              (\ o ->
+                 Subscription <$>
+                   (o .:? "callbackUrl") <*>
+                     (o .:? "operation" .!= mempty)
+                     <*> (o .:? "notification")
+                     <*> (o .:? "kind" .!= "mirror#subscription")
+                     <*> (o .:? "collection")
+                     <*> (o .:? "verifyToken")
+                     <*> (o .:? "userToken")
+                     <*> (o .:? "id")
+                     <*> (o .:? "updated"))
+
+instance ToJSON Subscription where
+        toJSON Subscription{..}
+          = object
+              (catMaybes
+                 [("callbackUrl" .=) <$> _sCallbackUrl,
+                  ("operation" .=) <$> _sOperation,
+                  ("notification" .=) <$> _sNotification,
+                  Just ("kind" .= _sKind),
+                  ("collection" .=) <$> _sCollection,
+                  ("verifyToken" .=) <$> _sVerifyToken,
+                  ("userToken" .=) <$> _sUserToken, ("id" .=) <$> _sId,
+                  ("updated" .=) <$> _sUpdated])
+
 -- | A list of Subscriptions. This is the response from the server to GET
 -- requests on the subscription collection.
 --
@@ -976,6 +1260,21 @@ slrItems
   = lens _slrItems (\ s a -> s{_slrItems = a}) .
       _Default
       . _Coerce
+
+instance FromJSON SubscriptionsListResponse where
+        parseJSON
+          = withObject "SubscriptionsListResponse"
+              (\ o ->
+                 SubscriptionsListResponse <$>
+                   (o .:? "kind" .!= "mirror#subscriptionsList") <*>
+                     (o .:? "items" .!= mempty))
+
+instance ToJSON SubscriptionsListResponse where
+        toJSON SubscriptionsListResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _slrKind),
+                  ("items" .=) <$> _slrItems])
 
 -- | Each item in the user\'s timeline is represented as a TimelineItem JSON
 -- structure, described below.
@@ -1293,6 +1592,66 @@ tiInReplyTo :: Lens' TimelineItem (Maybe Text)
 tiInReplyTo
   = lens _tiInReplyTo (\ s a -> s{_tiInReplyTo = a})
 
+instance FromJSON TimelineItem where
+        parseJSON
+          = withObject "TimelineItem"
+              (\ o ->
+                 TimelineItem <$>
+                   (o .:? "creator") <*> (o .:? "displayTime") <*>
+                     (o .:? "etag")
+                     <*> (o .:? "isDeleted")
+                     <*> (o .:? "pinScore")
+                     <*> (o .:? "attachments" .!= mempty)
+                     <*> (o .:? "location")
+                     <*> (o .:? "menuItems" .!= mempty)
+                     <*> (o .:? "notification")
+                     <*> (o .:? "text")
+                     <*> (o .:? "kind" .!= "mirror#timelineItem")
+                     <*> (o .:? "created")
+                     <*> (o .:? "speakableText")
+                     <*> (o .:? "isBundleCover")
+                     <*> (o .:? "speakableType")
+                     <*> (o .:? "bundleId")
+                     <*> (o .:? "canonicalUrl")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "isPinned")
+                     <*> (o .:? "sourceItemId")
+                     <*> (o .:? "id")
+                     <*> (o .:? "html")
+                     <*> (o .:? "updated")
+                     <*> (o .:? "recipients" .!= mempty)
+                     <*> (o .:? "title")
+                     <*> (o .:? "inReplyTo"))
+
+instance ToJSON TimelineItem where
+        toJSON TimelineItem{..}
+          = object
+              (catMaybes
+                 [("creator" .=) <$> _tiCreator,
+                  ("displayTime" .=) <$> _tiDisplayTime,
+                  ("etag" .=) <$> _tiEtag,
+                  ("isDeleted" .=) <$> _tiIsDeleted,
+                  ("pinScore" .=) <$> _tiPinScore,
+                  ("attachments" .=) <$> _tiAttachments,
+                  ("location" .=) <$> _tiLocation,
+                  ("menuItems" .=) <$> _tiMenuItems,
+                  ("notification" .=) <$> _tiNotification,
+                  ("text" .=) <$> _tiText, Just ("kind" .= _tiKind),
+                  ("created" .=) <$> _tiCreated,
+                  ("speakableText" .=) <$> _tiSpeakableText,
+                  ("isBundleCover" .=) <$> _tiIsBundleCover,
+                  ("speakableType" .=) <$> _tiSpeakableType,
+                  ("bundleId" .=) <$> _tiBundleId,
+                  ("canonicalUrl" .=) <$> _tiCanonicalUrl,
+                  ("selfLink" .=) <$> _tiSelfLink,
+                  ("isPinned" .=) <$> _tiIsPinned,
+                  ("sourceItemId" .=) <$> _tiSourceItemId,
+                  ("id" .=) <$> _tiId, ("html" .=) <$> _tiHtml,
+                  ("updated" .=) <$> _tiUpdated,
+                  ("recipients" .=) <$> _tiRecipients,
+                  ("title" .=) <$> _tiTitle,
+                  ("inReplyTo" .=) <$> _tiInReplyTo])
+
 -- | A list of timeline items. This is the response from the server to GET
 -- requests on the timeline collection.
 --
@@ -1339,6 +1698,23 @@ tlrItems
       _Default
       . _Coerce
 
+instance FromJSON TimelineListResponse where
+        parseJSON
+          = withObject "TimelineListResponse"
+              (\ o ->
+                 TimelineListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "mirror#timeline")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON TimelineListResponse where
+        toJSON TimelineListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _tlrNextPageToken,
+                  Just ("kind" .= _tlrKind),
+                  ("items" .=) <$> _tlrItems])
+
 -- | Represents an action taken by the user that triggered a notification.
 --
 -- /See:/ 'userAction' smart constructor.
@@ -1379,6 +1755,19 @@ uaPayload
 uaType :: Lens' UserAction (Maybe Text)
 uaType = lens _uaType (\ s a -> s{_uaType = a})
 
+instance FromJSON UserAction where
+        parseJSON
+          = withObject "UserAction"
+              (\ o ->
+                 UserAction <$> (o .:? "payload") <*> (o .:? "type"))
+
+instance ToJSON UserAction where
+        toJSON UserAction{..}
+          = object
+              (catMaybes
+                 [("payload" .=) <$> _uaPayload,
+                  ("type" .=) <$> _uaType])
+
 --
 -- /See:/ 'userData' smart constructor.
 data UserData = UserData
@@ -1406,3 +1795,15 @@ udValue = lens _udValue (\ s a -> s{_udValue = a})
 
 udKey :: Lens' UserData (Maybe Text)
 udKey = lens _udKey (\ s a -> s{_udKey = a})
+
+instance FromJSON UserData where
+        parseJSON
+          = withObject "UserData"
+              (\ o ->
+                 UserData <$> (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON UserData where
+        toJSON UserData{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _udValue, ("key" .=) <$> _udKey])

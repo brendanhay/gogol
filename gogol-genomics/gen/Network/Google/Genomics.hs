@@ -819,40 +819,46 @@ type AnnotationsAPI =
 -- Caller must have WRITE permission for the associated dataset. This
 -- method supports patch semantics.
 type AnnotationsPatch =
-     "genomics" :> "v1beta2" :> "annotations" :>
-       Capture "annotationId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "annotations" :>
+           Capture "annotationId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Patch '[JSON] Annotation
 
 -- | Gets an annotation. Caller must have READ permission for the associated
 -- annotation set.
 type AnnotationsGet =
-     "genomics" :> "v1beta2" :> "annotations" :>
-       Capture "annotationId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "annotations" :>
+           Capture "annotationId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Get '[JSON] Annotation
 
 -- | Creates a new annotation. Caller must have WRITE permission for the
 -- associated annotation set.
 type AnnotationsCreate =
-     "genomics" :> "v1beta2" :> "annotations" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "annotations" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Text :> Post '[JSON] Annotation
 
 -- | Creates one or more new annotations atomically. All annotations must
 -- belong to the same annotation set. Caller must have WRITE permission for
@@ -863,55 +869,66 @@ type AnnotationsCreate =
 -- will be isolated to the corresponding batch entry in the response; the
 -- remaining well formed annotations will be created normally.
 type AnnotationsBatchCreate =
-     "genomics" :> "v1beta2" :> "annotations:batchCreate"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "annotations:batchCreate" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Text :>
+                         Post '[JSON] BatchAnnotationsResponse
 
 -- | Searches for annotations that match the given criteria. Results are
 -- returned ordered by start position. Annotations that have matching start
 -- positions are ordered deterministically. Caller must have READ
 -- permission for the queried annotation sets.
 type AnnotationsSearch =
-     "genomics" :> "v1beta2" :> "annotations" :> "search"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "annotations" :>
+           "search" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :>
+                           Post '[JSON] SearchAnnotationsResponse
 
 -- | Deletes an annotation. Caller must have WRITE permission for the
 -- associated annotation set.
 type AnnotationsDelete =
-     "genomics" :> "v1beta2" :> "annotations" :>
-       Capture "annotationId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "annotations" :>
+           Capture "annotationId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Updates an annotation. The update must respect all mutability
 -- restrictions and other invariants described on the annotation resource.
 -- Caller must have WRITE permission for the associated dataset.
 type AnnotationsUpdate =
-     "genomics" :> "v1beta2" :> "annotations" :>
-       Capture "annotationId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "annotations" :>
+           Capture "annotationId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Put '[JSON] Annotation
 
 type VariantsAPI =
      VariantsGet :<|> VariantsCreate :<|> VariantsSearch
@@ -920,63 +937,75 @@ type VariantsAPI =
 
 -- | Gets a variant by ID.
 type VariantsGet =
-     "genomics" :> "v1beta2" :> "variants" :>
-       Capture "variantId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "variants" :>
+           Capture "variantId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Get '[JSON] Variant
 
 -- | Creates a new variant.
 type VariantsCreate =
-     "genomics" :> "v1beta2" :> "variants" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "variants" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Text :> Post '[JSON] Variant
 
 -- | Gets a list of variants matching the criteria. Implements
 -- GlobalAllianceApi.searchVariants.
 type VariantsSearch =
-     "genomics" :> "v1beta2" :> "variants" :> "search" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "variants" :>
+           "search" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :>
+                           Post '[JSON] SearchVariantsResponse
 
 -- | Deletes a variant.
 type VariantsDelete =
-     "genomics" :> "v1beta2" :> "variants" :>
-       Capture "variantId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "variants" :>
+           Capture "variantId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Updates a variant\'s names and info fields. All other modifications are
 -- silently ignored. Returns the modified variant without its calls.
 type VariantsUpdate =
-     "genomics" :> "v1beta2" :> "variants" :>
-       Capture "variantId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "variants" :>
+           Capture "variantId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Put '[JSON] Variant
 
 type ReferencesAPI = BasesAPI
 
@@ -985,20 +1014,23 @@ type BasesAPI = BasesList
 -- | Lists the bases in a reference, optionally restricted to a range.
 -- Implements GlobalAllianceApi.getReferenceBases.
 type BasesList =
-     "genomics" :> "v1beta2" :> "references" :>
-       Capture "referenceId" Text
-       :> "bases"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "start" Int64
-       :> QueryParam "key" Text
-       :> QueryParam "end" Int64
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "pageSize" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "references" :>
+           Capture "referenceId" Text :>
+             "bases" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "start" Int64 :>
+                       QueryParam "key" Text :>
+                         QueryParam "end" Int64 :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "pageSize" Int32 :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON] ListBasesResponse
 
 type VariantsetsAPI =
      VariantsetsExport :<|> VariantsetsPatch :<|>
@@ -1012,41 +1044,48 @@ type VariantsetsAPI =
 
 -- | Exports variant set data to an external destination.
 type VariantsetsExport =
-     "genomics" :> "v1beta2" :> "variantsets" :>
-       Capture "variantSetId" Text
-       :> "export"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "variantsets" :>
+           Capture "variantSetId" Text :>
+             "export" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Post '[JSON] ExportVariantSetResponse
 
 -- | Updates a variant set\'s metadata. All other modifications are silently
 -- ignored. This method supports patch semantics.
 type VariantsetsPatch =
-     "genomics" :> "v1beta2" :> "variantsets" :>
-       Capture "variantSetId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "variantsets" :>
+           Capture "variantSetId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Patch '[JSON] VariantSet
 
 -- | Gets a variant set by ID.
 type VariantsetsGet =
-     "genomics" :> "v1beta2" :> "variantsets" :>
-       Capture "variantSetId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "variantsets" :>
+           Capture "variantSetId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Get '[JSON] VariantSet
 
 -- | Merges the given variants with existing variants. Each variant will be
 -- merged with an existing variant that matches its reference sequence,
@@ -1055,68 +1094,80 @@ type VariantsetsGet =
 -- information from the new variant is added to the existing variant, and
 -- other fields (such as key\/value pairs) are discarded.
 type VariantsetsMergeVariants =
-     "genomics" :> "v1beta2" :> "variantsets" :>
-       Capture "variantSetId" Text
-       :> "mergeVariants"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "variantsets" :>
+           Capture "variantSetId" Text :>
+             "mergeVariants" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] ()
 
 -- | Creates a new variant set (only necessary in v1). The provided variant
 -- set must have a valid datasetId set - all other fields are optional.
 -- Note that the id field will be ignored, as this is assigned by the
 -- server.
 type VariantsetsCreate =
-     "genomics" :> "v1beta2" :> "variantsets" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "variantsets" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Text :> Post '[JSON] VariantSet
 
 -- | Returns a list of all variant sets matching search criteria. Implements
 -- GlobalAllianceApi.searchVariantSets.
 type VariantsetsSearch =
-     "genomics" :> "v1beta2" :> "variantsets" :> "search"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "variantsets" :>
+           "search" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :>
+                           Post '[JSON] SearchVariantSetsResponse
 
 -- | Deletes the contents of a variant set. The variant set object is not
 -- deleted.
 type VariantsetsDelete =
-     "genomics" :> "v1beta2" :> "variantsets" :>
-       Capture "variantSetId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "variantsets" :>
+           Capture "variantSetId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Updates a variant set\'s metadata. All other modifications are silently
 -- ignored.
 type VariantsetsUpdate =
-     "genomics" :> "v1beta2" :> "variantsets" :>
-       Capture "variantSetId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "variantsets" :>
+           Capture "variantSetId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Put '[JSON] VariantSet
 
 -- | Creates variant data by asynchronously importing the provided
 -- information. The variants for import will be merged with any existing
@@ -1128,16 +1179,19 @@ type VariantsetsUpdate =
 -- Imported VCF headers are appended to the metadata already in a variant
 -- set.
 type VariantsetsImportVariants =
-     "genomics" :> "v1beta2" :> "variantsets" :>
-       Capture "variantSetId" Text
-       :> "importVariants"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "variantsets" :>
+           Capture "variantSetId" Text :>
+             "importVariants" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Post '[JSON] ImportVariantsResponse
 
 type AnnotationSetsAPI =
      AnnotationSetsPatch :<|> AnnotationSetsGet :<|>
@@ -1151,81 +1205,94 @@ type AnnotationSetsAPI =
 -- resource. Caller must have WRITE permission for the associated dataset.
 -- This method supports patch semantics.
 type AnnotationSetsPatch =
-     "genomics" :> "v1beta2" :> "annotationSets" :>
-       Capture "annotationSetId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "annotationSets" :>
+           Capture "annotationSetId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Patch '[JSON] AnnotationSet
 
 -- | Gets an annotation set. Caller must have READ permission for the
 -- associated dataset.
 type AnnotationSetsGet =
-     "genomics" :> "v1beta2" :> "annotationSets" :>
-       Capture "annotationSetId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "annotationSets" :>
+           Capture "annotationSetId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Get '[JSON] AnnotationSet
 
 -- | Creates a new annotation set. Caller must have WRITE permission for the
 -- associated dataset.
 type AnnotationSetsCreate =
-     "genomics" :> "v1beta2" :> "annotationSets" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "annotationSets" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Text :> Post '[JSON] AnnotationSet
 
 -- | Searches for annotation sets that match the given criteria. Results are
 -- returned in a deterministic order. Caller must have READ permission for
 -- the queried datasets.
 type AnnotationSetsSearch =
-     "genomics" :> "v1beta2" :> "annotationSets" :>
-       "search"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "annotationSets" :>
+           "search" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :>
+                           Post '[JSON] SearchAnnotationSetsResponse
 
 -- | Deletes an annotation set. Caller must have WRITE permission for the
 -- associated annotation set.
 type AnnotationSetsDelete =
-     "genomics" :> "v1beta2" :> "annotationSets" :>
-       Capture "annotationSetId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "annotationSets" :>
+           Capture "annotationSetId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Updates an annotation set. The update must respect all mutability
 -- restrictions and other invariants described on the annotation set
 -- resource. Caller must have WRITE permission for the associated dataset.
 type AnnotationSetsUpdate =
-     "genomics" :> "v1beta2" :> "annotationSets" :>
-       Capture "annotationSetId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "annotationSets" :>
+           Capture "annotationSetId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Put '[JSON] AnnotationSet
 
 type ExperimentalAPI = JobsAPI
 
@@ -1234,55 +1301,67 @@ type JobsAPI = JobsCreate
 -- | Creates and asynchronously runs an ad-hoc job. This is an experimental
 -- call and may be removed or changed at any time.
 type JobsCreate =
-     "genomics" :> "v1beta2" :> "experimental" :> "jobs"
-       :> "create"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "experimental" :>
+           "jobs" :>
+             "create" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Post '[JSON] ExperimentalCreateJobResponse
 
 type JobsAPI =
      JobsGet :<|> JobsCancel :<|> JobsSearch
 
 -- | Gets a job by ID.
 type JobsGet =
-     "genomics" :> "v1beta2" :> "jobs" :>
-       Capture "jobId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "jobs" :>
+           Capture "jobId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Get '[JSON] Job
 
 -- | Cancels a job by ID. Note that it is possible for partial results to be
 -- generated and stored for cancelled jobs.
 type JobsCancel =
-     "genomics" :> "v1beta2" :> "jobs" :>
-       Capture "jobId" Text
-       :> "cancel"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "jobs" :>
+           Capture "jobId" Text :>
+             "cancel" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] ()
 
 -- | Gets a list of jobs matching the criteria.
 type JobsSearch =
-     "genomics" :> "v1beta2" :> "jobs" :> "search" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "jobs" :>
+           "search" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :>
+                           Post '[JSON] SearchJobsResponse
 
 type ReadgroupsetsAPI = CoveragebucketsAPI
 
@@ -1297,50 +1376,58 @@ type CoveragebucketsAPI = CoveragebucketsList
 -- levels\'. The caller must have READ permissions for the target read
 -- group set.
 type CoveragebucketsList =
-     "genomics" :> "v1beta2" :> "readgroupsets" :>
-       Capture "readGroupSetId" Text
-       :> "coveragebuckets"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "range.end" Int64
-       :> QueryParam "range.start" Int64
-       :> QueryParam "targetBucketWidth" Int64
-       :> QueryParam "key" Text
-       :> QueryParam "range.referenceName" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "pageSize" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "readgroupsets" :>
+           Capture "readGroupSetId" Text :>
+             "coveragebuckets" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "range.end" Int64 :>
+                       QueryParam "range.start" Int64 :>
+                         QueryParam "targetBucketWidth" Int64 :>
+                           QueryParam "key" Text :>
+                             QueryParam "range.referenceName" Text :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "pageSize" Int32 :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Text :>
+                                         Get '[JSON] ListCoverageBucketsResponse
 
 type ReferencesetsAPI =
      ReferencesetsGet :<|> ReferencesetsSearch
 
 -- | Gets a reference set. Implements GlobalAllianceApi.getReferenceSet.
 type ReferencesetsGet =
-     "genomics" :> "v1beta2" :> "referencesets" :>
-       Capture "referenceSetId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "referencesets" :>
+           Capture "referenceSetId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Get '[JSON] ReferenceSet
 
 -- | Searches for reference sets which match the given criteria. Implements
 -- GlobalAllianceApi.searchReferenceSets.
 type ReferencesetsSearch =
-     "genomics" :> "v1beta2" :> "referencesets" :>
-       "search"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "referencesets" :>
+           "search" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :>
+                           Post '[JSON] SearchReferenceSetsResponse
 
 type CallsetsAPI =
      CallsetsPatch :<|> CallsetsGet :<|> CallsetsCreate
@@ -1350,74 +1437,88 @@ type CallsetsAPI =
 
 -- | Updates a call set. This method supports patch semantics.
 type CallsetsPatch =
-     "genomics" :> "v1beta2" :> "callsets" :>
-       Capture "callSetId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "callsets" :>
+           Capture "callSetId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Patch '[JSON] CallSet
 
 -- | Gets a call set by ID.
 type CallsetsGet =
-     "genomics" :> "v1beta2" :> "callsets" :>
-       Capture "callSetId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "callsets" :>
+           Capture "callSetId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Get '[JSON] CallSet
 
 -- | Creates a new call set.
 type CallsetsCreate =
-     "genomics" :> "v1beta2" :> "callsets" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "callsets" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Text :> Post '[JSON] CallSet
 
 -- | Gets a list of call sets matching the criteria. Implements
 -- GlobalAllianceApi.searchCallSets.
 type CallsetsSearch =
-     "genomics" :> "v1beta2" :> "callsets" :> "search" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "callsets" :>
+           "search" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :>
+                           Post '[JSON] SearchCallSetsResponse
 
 -- | Deletes a call set.
 type CallsetsDelete =
-     "genomics" :> "v1beta2" :> "callsets" :>
-       Capture "callSetId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "callsets" :>
+           Capture "callSetId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Updates a call set.
 type CallsetsUpdate =
-     "genomics" :> "v1beta2" :> "callsets" :>
-       Capture "callSetId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "callsets" :>
+           Capture "callSetId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Put '[JSON] CallSet
 
 type ReadsAPI = ReadsSearch
 
@@ -1433,14 +1534,18 @@ type ReadsAPI = ReadsSearch
 -- genomic coordinates are returned in a deterministic order. Implements
 -- GlobalAllianceApi.searchReads.
 type ReadsSearch =
-     "genomics" :> "v1beta2" :> "reads" :> "search" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "reads" :>
+           "search" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :>
+                           Post '[JSON] SearchReadsResponse
 
 type DatasetsAPI =
      DatasetsList :<|> DatasetsUndelete :<|> DatasetsPatch
@@ -1451,88 +1556,103 @@ type DatasetsAPI =
 
 -- | Lists datasets within a project.
 type DatasetsList =
-     "genomics" :> "v1beta2" :> "datasets" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "projectNumber" Int64
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "pageSize" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "datasets" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "projectNumber" Int64 :>
+                   QueryParam "key" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "pageSize" Int32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Get '[JSON] ListDatasetsResponse
 
 -- | Undeletes a dataset by restoring a dataset which was deleted via this
 -- API. This operation is only possible for a week after the deletion
 -- occurred.
 type DatasetsUndelete =
-     "genomics" :> "v1beta2" :> "datasets" :>
-       Capture "datasetId" Text
-       :> "undelete"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "datasets" :>
+           Capture "datasetId" Text :>
+             "undelete" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] Dataset
 
 -- | Updates a dataset. This method supports patch semantics.
 type DatasetsPatch =
-     "genomics" :> "v1beta2" :> "datasets" :>
-       Capture "datasetId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "datasets" :>
+           Capture "datasetId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Patch '[JSON] Dataset
 
 -- | Gets a dataset by ID.
 type DatasetsGet =
-     "genomics" :> "v1beta2" :> "datasets" :>
-       Capture "datasetId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "datasets" :>
+           Capture "datasetId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Get '[JSON] Dataset
 
 -- | Creates a new dataset.
 type DatasetsCreate =
-     "genomics" :> "v1beta2" :> "datasets" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "datasets" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Text :> Post '[JSON] Dataset
 
 -- | Deletes a dataset.
 type DatasetsDelete =
-     "genomics" :> "v1beta2" :> "datasets" :>
-       Capture "datasetId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "datasets" :>
+           Capture "datasetId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Updates a dataset.
 type DatasetsUpdate =
-     "genomics" :> "v1beta2" :> "datasets" :>
-       Capture "datasetId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "genomics" :>
+       "v1beta2" :>
+         "datasets" :>
+           Capture "datasetId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Put '[JSON] Dataset

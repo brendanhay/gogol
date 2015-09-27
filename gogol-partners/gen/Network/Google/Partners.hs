@@ -244,55 +244,65 @@ type UserStatesAPI = UserStatesList
 
 -- | Lists states for current user.
 type UserStatesList =
-     "v2" :> "userStates" :> QueryParam "$.xgafv" Text :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :>
-       QueryParam "requestMetadata.partnersSessionId" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "requestMetadata.locale" Text
-       :> QueryParam "requestMetadata.experimentIds" Text
-       :>
-       QueryParam "requestMetadata.userOverrides.ipAddress"
-         Text
-       :>
-       QueryParam
-         "requestMetadata.trafficSource.trafficSubId"
-         Text
-       :> QueryParam "oauth_token" Text
-       :>
-       QueryParam "requestMetadata.userOverrides.userId"
-         Text
-       :>
-       QueryParam
-         "requestMetadata.trafficSource.trafficSourceId"
-         Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v2" :>
+       "userStates" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "requestMetadata.partnersSessionId" Text
+                         :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "requestMetadata.locale" Text :>
+                               QueryParam "requestMetadata.experimentIds" Text
+                                 :>
+                                 QueryParam
+                                   "requestMetadata.userOverrides.ipAddress"
+                                   Text
+                                   :>
+                                   QueryParam
+                                     "requestMetadata.trafficSource.trafficSubId"
+                                     Text
+                                     :>
+                                     QueryParam "oauth_token" Text :>
+                                       QueryParam
+                                         "requestMetadata.userOverrides.userId"
+                                         Text
+                                         :>
+                                         QueryParam
+                                           "requestMetadata.trafficSource.trafficSourceId"
+                                           Text
+                                           :>
+                                           QueryParam "fields" Text :>
+                                             QueryParam "callback" Text :>
+                                               QueryParam "alt" Text :>
+                                                 Get '[JSON]
+                                                   ListUserStatesResponse
 
 type UserEventsAPI = UserEventsLog
 
 -- | Logs a user event.
 type UserEventsLog =
-     "v2" :> "userEvents:log" :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v2" :>
+       "userEvents:log" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :>
+                                   Post '[JSON] LogUserEventResponse
 
 type ClientMessagesAPI = ClientMessagesLog
 
@@ -300,20 +310,22 @@ type ClientMessagesAPI = ClientMessagesLog
 -- component\`, \`Profile page is running slow\`, \`More than 500 users
 -- have accessed this result.\`, etc.
 type ClientMessagesLog =
-     "v2" :> "clientMessages:log" :>
-       QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v2" :>
+       "clientMessages:log" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :>
+                                   Post '[JSON] LogMessageResponse
 
 type CompaniesAPI = LeadsAPI
 
@@ -321,18 +333,21 @@ type LeadsAPI = LeadsCreate
 
 -- | Creates an advertiser lead for the given company ID.
 type LeadsCreate =
-     "v2" :> "companies" :> Capture "companyId" Text :>
-       "leads"
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v2" :>
+       "companies" :>
+         Capture "companyId" Text :>
+           "leads" :>
+             QueryParam "$.xgafv" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "pp" Bool :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "bearer_token" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "callback" Text :>
+                                     QueryParam "alt" Text :>
+                                       Post '[JSON] CreateLeadResponse

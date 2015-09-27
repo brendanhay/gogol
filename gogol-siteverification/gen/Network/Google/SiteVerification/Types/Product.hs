@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -52,6 +53,24 @@ svwrgrVerificationMethod
   = lens _svwrgrVerificationMethod
       (\ s a -> s{_svwrgrVerificationMethod = a})
 
+instance FromJSON
+         SiteVerificationWebResourceGettokenRequest where
+        parseJSON
+          = withObject
+              "SiteVerificationWebResourceGettokenRequest"
+              (\ o ->
+                 SiteVerificationWebResourceGettokenRequest <$>
+                   (o .:? "site") <*> (o .:? "verificationMethod"))
+
+instance ToJSON
+         SiteVerificationWebResourceGettokenRequest where
+        toJSON SiteVerificationWebResourceGettokenRequest{..}
+          = object
+              (catMaybes
+                 [("site" .=) <$> _svwrgrSite,
+                  ("verificationMethod" .=) <$>
+                    _svwrgrVerificationMethod])
+
 -- | The site for which a verification token will be generated.
 --
 -- /See:/ 'siteVerificationWebResourceGettokenRequestSite' smart constructor.
@@ -88,6 +107,24 @@ svwrgrsIdentifier
 svwrgrsType :: Lens' SiteVerificationWebResourceGettokenRequestSite (Maybe Text)
 svwrgrsType
   = lens _svwrgrsType (\ s a -> s{_svwrgrsType = a})
+
+instance FromJSON
+         SiteVerificationWebResourceGettokenRequestSite where
+        parseJSON
+          = withObject
+              "SiteVerificationWebResourceGettokenRequestSite"
+              (\ o ->
+                 SiteVerificationWebResourceGettokenRequestSite <$>
+                   (o .:? "identifier") <*> (o .:? "type"))
+
+instance ToJSON
+         SiteVerificationWebResourceGettokenRequestSite where
+        toJSON
+          SiteVerificationWebResourceGettokenRequestSite{..}
+          = object
+              (catMaybes
+                 [("identifier" .=) <$> _svwrgrsIdentifier,
+                  ("type" .=) <$> _svwrgrsType])
 
 --
 -- /See:/ 'siteVerificationWebResourceGettokenResponse' smart constructor.
@@ -126,6 +163,24 @@ svwrgrMethod :: Lens' SiteVerificationWebResourceGettokenResponse (Maybe Text)
 svwrgrMethod
   = lens _svwrgrMethod (\ s a -> s{_svwrgrMethod = a})
 
+instance FromJSON
+         SiteVerificationWebResourceGettokenResponse where
+        parseJSON
+          = withObject
+              "SiteVerificationWebResourceGettokenResponse"
+              (\ o ->
+                 SiteVerificationWebResourceGettokenResponse <$>
+                   (o .:? "token") <*> (o .:? "method"))
+
+instance ToJSON
+         SiteVerificationWebResourceGettokenResponse where
+        toJSON
+          SiteVerificationWebResourceGettokenResponse{..}
+          = object
+              (catMaybes
+                 [("token" .=) <$> _svwrgrToken,
+                  ("method" .=) <$> _svwrgrMethod])
+
 --
 -- /See:/ 'siteVerificationWebResourceListResponse' smart constructor.
 newtype SiteVerificationWebResourceListResponse = SiteVerificationWebResourceListResponse
@@ -150,6 +205,20 @@ svwrlrItems
   = lens _svwrlrItems (\ s a -> s{_svwrlrItems = a}) .
       _Default
       . _Coerce
+
+instance FromJSON
+         SiteVerificationWebResourceListResponse where
+        parseJSON
+          = withObject
+              "SiteVerificationWebResourceListResponse"
+              (\ o ->
+                 SiteVerificationWebResourceListResponse <$>
+                   (o .:? "items" .!= mempty))
+
+instance ToJSON
+         SiteVerificationWebResourceListResponse where
+        toJSON SiteVerificationWebResourceListResponse{..}
+          = object (catMaybes [("items" .=) <$> _svwrlrItems])
 
 --
 -- /See:/ 'siteVerificationWebResourceResource' smart constructor.
@@ -195,6 +264,23 @@ svwrrSite :: Lens' SiteVerificationWebResourceResource (Maybe SiteVerificationWe
 svwrrSite
   = lens _svwrrSite (\ s a -> s{_svwrrSite = a})
 
+instance FromJSON SiteVerificationWebResourceResource
+         where
+        parseJSON
+          = withObject "SiteVerificationWebResourceResource"
+              (\ o ->
+                 SiteVerificationWebResourceResource <$>
+                   (o .:? "owners" .!= mempty) <*> (o .:? "id") <*>
+                     (o .:? "site"))
+
+instance ToJSON SiteVerificationWebResourceResource
+         where
+        toJSON SiteVerificationWebResourceResource{..}
+          = object
+              (catMaybes
+                 [("owners" .=) <$> _svwrrOwners,
+                  ("id" .=) <$> _svwrrId, ("site" .=) <$> _svwrrSite])
+
 -- | The address and type of a site that is verified or will be verified.
 --
 -- /See:/ 'siteVerificationWebResourceResourceSite' smart constructor.
@@ -230,3 +316,20 @@ svwrrsIdentifier
 svwrrsType :: Lens' SiteVerificationWebResourceResourceSite (Maybe Text)
 svwrrsType
   = lens _svwrrsType (\ s a -> s{_svwrrsType = a})
+
+instance FromJSON
+         SiteVerificationWebResourceResourceSite where
+        parseJSON
+          = withObject
+              "SiteVerificationWebResourceResourceSite"
+              (\ o ->
+                 SiteVerificationWebResourceResourceSite <$>
+                   (o .:? "identifier") <*> (o .:? "type"))
+
+instance ToJSON
+         SiteVerificationWebResourceResourceSite where
+        toJSON SiteVerificationWebResourceResourceSite{..}
+          = object
+              (catMaybes
+                 [("identifier" .=) <$> _svwrrsIdentifier,
+                  ("type" .=) <$> _svwrrsType])

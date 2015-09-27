@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -140,6 +141,40 @@ bDescription :: Lens' Blog (Maybe Text)
 bDescription
   = lens _bDescription (\ s a -> s{_bDescription = a})
 
+instance FromJSON Blog where
+        parseJSON
+          = withObject "Blog"
+              (\ o ->
+                 Blog <$>
+                   (o .:? "status") <*>
+                     (o .:? "kind" .!= "blogger#blog")
+                     <*> (o .:? "pages")
+                     <*> (o .:? "locale")
+                     <*> (o .:? "published")
+                     <*> (o .:? "url")
+                     <*> (o .:? "customMetaData")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "id")
+                     <*> (o .:? "updated")
+                     <*> (o .:? "posts")
+                     <*> (o .:? "description"))
+
+instance ToJSON Blog where
+        toJSON Blog{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _bStatus, Just ("kind" .= _bKind),
+                  ("pages" .=) <$> _bPages, ("locale" .=) <$> _bLocale,
+                  ("published" .=) <$> _bPublished,
+                  ("url" .=) <$> _bUrl,
+                  ("customMetaData" .=) <$> _bCustomMetaData,
+                  ("selfLink" .=) <$> _bSelfLink,
+                  ("name" .=) <$> _bName, ("id" .=) <$> _bId,
+                  ("updated" .=) <$> _bUpdated,
+                  ("posts" .=) <$> _bPosts,
+                  ("description" .=) <$> _bDescription])
+
 --
 -- /See:/ 'blogList' smart constructor.
 data BlogList = BlogList
@@ -184,6 +219,22 @@ blBlogUserInfos
       . _Default
       . _Coerce
 
+instance FromJSON BlogList where
+        parseJSON
+          = withObject "BlogList"
+              (\ o ->
+                 BlogList <$>
+                   (o .:? "kind" .!= "blogger#blogList") <*>
+                     (o .:? "items" .!= mempty)
+                     <*> (o .:? "blogUserInfos" .!= mempty))
+
+instance ToJSON BlogList where
+        toJSON BlogList{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _blKind), ("items" .=) <$> _blItems,
+                  ("blogUserInfos" .=) <$> _blBlogUserInfos])
+
 -- | The locale this Blog is set to.
 --
 -- /See:/ 'blogLocale' smart constructor.
@@ -226,6 +277,22 @@ blLanguage :: Lens' BlogLocale (Maybe Text)
 blLanguage
   = lens _blLanguage (\ s a -> s{_blLanguage = a})
 
+instance FromJSON BlogLocale where
+        parseJSON
+          = withObject "BlogLocale"
+              (\ o ->
+                 BlogLocale <$>
+                   (o .:? "variant") <*> (o .:? "country") <*>
+                     (o .:? "language"))
+
+instance ToJSON BlogLocale where
+        toJSON BlogLocale{..}
+          = object
+              (catMaybes
+                 [("variant" .=) <$> _blVariant,
+                  ("country" .=) <$> _blCountry,
+                  ("language" .=) <$> _blLanguage])
+
 -- | The container of pages in this blog.
 --
 -- /See:/ 'blogPages' smart constructor.
@@ -259,6 +326,20 @@ bpsTotalItems
 bpsSelfLink :: Lens' BlogPages (Maybe Text)
 bpsSelfLink
   = lens _bpsSelfLink (\ s a -> s{_bpsSelfLink = a})
+
+instance FromJSON BlogPages where
+        parseJSON
+          = withObject "BlogPages"
+              (\ o ->
+                 BlogPages <$>
+                   (o .:? "totalItems") <*> (o .:? "selfLink"))
+
+instance ToJSON BlogPages where
+        toJSON BlogPages{..}
+          = object
+              (catMaybes
+                 [("totalItems" .=) <$> _bpsTotalItems,
+                  ("selfLink" .=) <$> _bpsSelfLink])
 
 --
 -- /See:/ 'blogPerUserInfo' smart constructor.
@@ -329,6 +410,29 @@ bpuiHasAdminAccess
   = lens _bpuiHasAdminAccess
       (\ s a -> s{_bpuiHasAdminAccess = a})
 
+instance FromJSON BlogPerUserInfo where
+        parseJSON
+          = withObject "BlogPerUserInfo"
+              (\ o ->
+                 BlogPerUserInfo <$>
+                   (o .:? "photosAlbumKey") <*>
+                     (o .:? "kind" .!= "blogger#blogPerUserInfo")
+                     <*> (o .:? "blogId")
+                     <*> (o .:? "userId")
+                     <*> (o .:? "role")
+                     <*> (o .:? "hasAdminAccess"))
+
+instance ToJSON BlogPerUserInfo where
+        toJSON BlogPerUserInfo{..}
+          = object
+              (catMaybes
+                 [("photosAlbumKey" .=) <$> _bpuiPhotosAlbumKey,
+                  Just ("kind" .= _bpuiKind),
+                  ("blogId" .=) <$> _bpuiBlogId,
+                  ("userId" .=) <$> _bpuiUserId,
+                  ("role" .=) <$> _bpuiRole,
+                  ("hasAdminAccess" .=) <$> _bpuiHasAdminAccess])
+
 -- | The container of posts in this blog.
 --
 -- /See:/ 'blogPosts' smart constructor.
@@ -372,6 +476,22 @@ bpSelfLink :: Lens' BlogPosts (Maybe Text)
 bpSelfLink
   = lens _bpSelfLink (\ s a -> s{_bpSelfLink = a})
 
+instance FromJSON BlogPosts where
+        parseJSON
+          = withObject "BlogPosts"
+              (\ o ->
+                 BlogPosts <$>
+                   (o .:? "totalItems") <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink"))
+
+instance ToJSON BlogPosts where
+        toJSON BlogPosts{..}
+          = object
+              (catMaybes
+                 [("totalItems" .=) <$> _bpTotalItems,
+                  ("items" .=) <$> _bpItems,
+                  ("selfLink" .=) <$> _bpSelfLink])
+
 --
 -- /See:/ 'blogUserInfo' smart constructor.
 data BlogUserInfo = BlogUserInfo
@@ -411,6 +531,22 @@ buiBlogUserInfo :: Lens' BlogUserInfo (Maybe (Maybe BlogPerUserInfo))
 buiBlogUserInfo
   = lens _buiBlogUserInfo
       (\ s a -> s{_buiBlogUserInfo = a})
+
+instance FromJSON BlogUserInfo where
+        parseJSON
+          = withObject "BlogUserInfo"
+              (\ o ->
+                 BlogUserInfo <$>
+                   (o .:? "kind" .!= "blogger#blogUserInfo") <*>
+                     (o .:? "blog")
+                     <*> (o .:? "blog_user_info"))
+
+instance ToJSON BlogUserInfo where
+        toJSON BlogUserInfo{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _buiKind), ("blog" .=) <$> _buiBlog,
+                  ("blog_user_info" .=) <$> _buiBlogUserInfo])
 
 --
 -- /See:/ 'comment' smart constructor.
@@ -517,6 +653,35 @@ cInReplyTo :: Lens' Comment (Maybe CommentInReplyTo)
 cInReplyTo
   = lens _cInReplyTo (\ s a -> s{_cInReplyTo = a})
 
+instance FromJSON Comment where
+        parseJSON
+          = withObject "Comment"
+              (\ o ->
+                 Comment <$>
+                   (o .:? "status") <*> (o .:? "post") <*>
+                     (o .:? "kind" .!= "blogger#comment")
+                     <*> (o .:? "published")
+                     <*> (o .:? "blog")
+                     <*> (o .:? "content")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "author")
+                     <*> (o .:? "id")
+                     <*> (o .:? "updated")
+                     <*> (o .:? "inReplyTo"))
+
+instance ToJSON Comment where
+        toJSON Comment{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _cStatus, ("post" .=) <$> _cPost,
+                  Just ("kind" .= _cKind),
+                  ("published" .=) <$> _cPublished,
+                  ("blog" .=) <$> _cBlog, ("content" .=) <$> _cContent,
+                  ("selfLink" .=) <$> _cSelfLink,
+                  ("author" .=) <$> _cAuthor, ("id" .=) <$> _cId,
+                  ("updated" .=) <$> _cUpdated,
+                  ("inReplyTo" .=) <$> _cInReplyTo])
+
 -- | The author of this Comment.
 --
 -- /See:/ 'commentAuthor' smart constructor.
@@ -566,6 +731,23 @@ caDisplayName
 caId :: Lens' CommentAuthor (Maybe Text)
 caId = lens _caId (\ s a -> s{_caId = a})
 
+instance FromJSON CommentAuthor where
+        parseJSON
+          = withObject "CommentAuthor"
+              (\ o ->
+                 CommentAuthor <$>
+                   (o .:? "image") <*> (o .:? "url") <*>
+                     (o .:? "displayName")
+                     <*> (o .:? "id"))
+
+instance ToJSON CommentAuthor where
+        toJSON CommentAuthor{..}
+          = object
+              (catMaybes
+                 [("image" .=) <$> _caImage, ("url" .=) <$> _caUrl,
+                  ("displayName" .=) <$> _caDisplayName,
+                  ("id" .=) <$> _caId])
+
 -- | Data about the blog containing this comment.
 --
 -- /See:/ 'commentBlog' smart constructor.
@@ -588,6 +770,15 @@ commentBlog =
 -- | The identifier of the blog containing this comment.
 cbId :: Lens' CommentBlog (Maybe Text)
 cbId = lens _cbId (\ s a -> s{_cbId = a})
+
+instance FromJSON CommentBlog where
+        parseJSON
+          = withObject "CommentBlog"
+              (\ o -> CommentBlog <$> (o .:? "id"))
+
+instance ToJSON CommentBlog where
+        toJSON CommentBlog{..}
+          = object (catMaybes [("id" .=) <$> _cbId])
 
 -- | The comment creator\'s avatar.
 --
@@ -612,6 +803,15 @@ commentImageAuthor =
 ciaUrl :: Lens' CommentImageAuthor (Maybe Text)
 ciaUrl = lens _ciaUrl (\ s a -> s{_ciaUrl = a})
 
+instance FromJSON CommentImageAuthor where
+        parseJSON
+          = withObject "CommentImageAuthor"
+              (\ o -> CommentImageAuthor <$> (o .:? "url"))
+
+instance ToJSON CommentImageAuthor where
+        toJSON CommentImageAuthor{..}
+          = object (catMaybes [("url" .=) <$> _ciaUrl])
+
 -- | Data about the comment this is in reply to.
 --
 -- /See:/ 'commentInReplyTo' smart constructor.
@@ -634,6 +834,15 @@ commentInReplyTo =
 -- | The identified of the parent of this comment.
 cirtId :: Lens' CommentInReplyTo (Maybe Text)
 cirtId = lens _cirtId (\ s a -> s{_cirtId = a})
+
+instance FromJSON CommentInReplyTo where
+        parseJSON
+          = withObject "CommentInReplyTo"
+              (\ o -> CommentInReplyTo <$> (o .:? "id"))
+
+instance ToJSON CommentInReplyTo where
+        toJSON CommentInReplyTo{..}
+          = object (catMaybes [("id" .=) <$> _cirtId])
 
 --
 -- /See:/ 'commentList' smart constructor.
@@ -695,6 +904,25 @@ clPrevPageToken
   = lens _clPrevPageToken
       (\ s a -> s{_clPrevPageToken = a})
 
+instance FromJSON CommentList where
+        parseJSON
+          = withObject "CommentList"
+              (\ o ->
+                 CommentList <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "blogger#commentList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "prevPageToken"))
+
+instance ToJSON CommentList where
+        toJSON CommentList{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _clEtag,
+                  ("nextPageToken" .=) <$> _clNextPageToken,
+                  Just ("kind" .= _clKind), ("items" .=) <$> _clItems,
+                  ("prevPageToken" .=) <$> _clPrevPageToken])
+
 -- | Data about the post containing this comment.
 --
 -- /See:/ 'commentPost' smart constructor.
@@ -717,6 +945,15 @@ commentPost =
 -- | The identifier of the post containing this comment.
 cpId :: Lens' CommentPost (Maybe Text)
 cpId = lens _cpId (\ s a -> s{_cpId = a})
+
+instance FromJSON CommentPost where
+        parseJSON
+          = withObject "CommentPost"
+              (\ o -> CommentPost <$> (o .:? "id"))
+
+instance ToJSON CommentPost where
+        toJSON CommentPost{..}
+          = object (catMaybes [("id" .=) <$> _cpId])
 
 --
 -- /See:/ 'page' smart constructor.
@@ -835,6 +1072,37 @@ pagUpdated
 pagTitle :: Lens' Page (Maybe Text)
 pagTitle = lens _pagTitle (\ s a -> s{_pagTitle = a})
 
+instance FromJSON Page where
+        parseJSON
+          = withObject "Page"
+              (\ o ->
+                 Page <$>
+                   (o .:? "status") <*> (o .:? "etag") <*>
+                     (o .:? "kind" .!= "blogger#page")
+                     <*> (o .:? "published")
+                     <*> (o .:? "url")
+                     <*> (o .:? "blog")
+                     <*> (o .:? "content")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "author")
+                     <*> (o .:? "id")
+                     <*> (o .:? "updated")
+                     <*> (o .:? "title"))
+
+instance ToJSON Page where
+        toJSON Page{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _pagStatus,
+                  ("etag" .=) <$> _pagEtag, Just ("kind" .= _pagKind),
+                  ("published" .=) <$> _pagPublished,
+                  ("url" .=) <$> _pagUrl, ("blog" .=) <$> _pagBlog,
+                  ("content" .=) <$> _pagContent,
+                  ("selfLink" .=) <$> _pagSelfLink,
+                  ("author" .=) <$> _pagAuthor, ("id" .=) <$> _pagId,
+                  ("updated" .=) <$> _pagUpdated,
+                  ("title" .=) <$> _pagTitle])
+
 -- | The author of this Page.
 --
 -- /See:/ 'pageAuthor' smart constructor.
@@ -884,6 +1152,23 @@ paDisplayName
 paId :: Lens' PageAuthor (Maybe Text)
 paId = lens _paId (\ s a -> s{_paId = a})
 
+instance FromJSON PageAuthor where
+        parseJSON
+          = withObject "PageAuthor"
+              (\ o ->
+                 PageAuthor <$>
+                   (o .:? "image") <*> (o .:? "url") <*>
+                     (o .:? "displayName")
+                     <*> (o .:? "id"))
+
+instance ToJSON PageAuthor where
+        toJSON PageAuthor{..}
+          = object
+              (catMaybes
+                 [("image" .=) <$> _paImage, ("url" .=) <$> _paUrl,
+                  ("displayName" .=) <$> _paDisplayName,
+                  ("id" .=) <$> _paId])
+
 -- | Data about the blog containing this Page.
 --
 -- /See:/ 'pageBlog' smart constructor.
@@ -907,6 +1192,15 @@ pageBlog =
 pId :: Lens' PageBlog (Maybe Text)
 pId = lens _pId (\ s a -> s{_pId = a})
 
+instance FromJSON PageBlog where
+        parseJSON
+          = withObject "PageBlog"
+              (\ o -> PageBlog <$> (o .:? "id"))
+
+instance ToJSON PageBlog where
+        toJSON PageBlog{..}
+          = object (catMaybes [("id" .=) <$> _pId])
+
 -- | The page author\'s avatar.
 --
 -- /See:/ 'pageImageAuthor' smart constructor.
@@ -929,6 +1223,15 @@ pageImageAuthor =
 -- | The page author\'s avatar URL.
 piaUrl :: Lens' PageImageAuthor (Maybe Text)
 piaUrl = lens _piaUrl (\ s a -> s{_piaUrl = a})
+
+instance FromJSON PageImageAuthor where
+        parseJSON
+          = withObject "PageImageAuthor"
+              (\ o -> PageImageAuthor <$> (o .:? "url"))
+
+instance ToJSON PageImageAuthor where
+        toJSON PageImageAuthor{..}
+          = object (catMaybes [("url" .=) <$> _piaUrl])
 
 --
 -- /See:/ 'pageList' smart constructor.
@@ -981,6 +1284,24 @@ pllItems
       _Default
       . _Coerce
 
+instance FromJSON PageList where
+        parseJSON
+          = withObject "PageList"
+              (\ o ->
+                 PageList <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "blogger#pageList")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON PageList where
+        toJSON PageList{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _pllEtag,
+                  ("nextPageToken" .=) <$> _pllNextPageToken,
+                  Just ("kind" .= _pllKind),
+                  ("items" .=) <$> _pllItems])
+
 --
 -- /See:/ 'pageviews' smart constructor.
 data Pageviews = Pageviews
@@ -1021,6 +1342,22 @@ pCounts
 pBlogId :: Lens' Pageviews (Maybe Text)
 pBlogId = lens _pBlogId (\ s a -> s{_pBlogId = a})
 
+instance FromJSON Pageviews where
+        parseJSON
+          = withObject "Pageviews"
+              (\ o ->
+                 Pageviews <$>
+                   (o .:? "kind" .!= "blogger#page_views") <*>
+                     (o .:? "counts" .!= mempty)
+                     <*> (o .:? "blogId"))
+
+instance ToJSON Pageviews where
+        toJSON Pageviews{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _pKind), ("counts" .=) <$> _pCounts,
+                  ("blogId" .=) <$> _pBlogId])
+
 --
 -- /See:/ 'pageviewsItemCounts' smart constructor.
 data PageviewsItemCounts = PageviewsItemCounts
@@ -1051,6 +1388,20 @@ picTimeRange
 -- | Count of page views for the given time range
 picCount :: Lens' PageviewsItemCounts (Maybe Int64)
 picCount = lens _picCount (\ s a -> s{_picCount = a})
+
+instance FromJSON PageviewsItemCounts where
+        parseJSON
+          = withObject "PageviewsItemCounts"
+              (\ o ->
+                 PageviewsItemCounts <$>
+                   (o .:? "timeRange") <*> (o .:? "count"))
+
+instance ToJSON PageviewsItemCounts where
+        toJSON PageviewsItemCounts{..}
+          = object
+              (catMaybes
+                 [("timeRange" .=) <$> _picTimeRange,
+                  ("count" .=) <$> _picCount])
 
 --
 -- /See:/ 'post' smart constructor.
@@ -1235,6 +1586,51 @@ ppTitleLink
 ppTitle :: Lens' Post (Maybe Text)
 ppTitle = lens _ppTitle (\ s a -> s{_ppTitle = a})
 
+instance FromJSON Post where
+        parseJSON
+          = withObject "Post"
+              (\ o ->
+                 Post <$>
+                   (o .:? "images" .!= mempty) <*> (o .:? "status") <*>
+                     (o .:? "etag")
+                     <*> (o .:? "readerComments")
+                     <*> (o .:? "location")
+                     <*> (o .:? "kind" .!= "blogger#post")
+                     <*> (o .:? "published")
+                     <*> (o .:? "url")
+                     <*> (o .:? "blog")
+                     <*> (o .:? "customMetaData")
+                     <*> (o .:? "content")
+                     <*> (o .:? "replies")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "author")
+                     <*> (o .:? "id")
+                     <*> (o .:? "labels" .!= mempty)
+                     <*> (o .:? "updated")
+                     <*> (o .:? "titleLink")
+                     <*> (o .:? "title"))
+
+instance ToJSON Post where
+        toJSON Post{..}
+          = object
+              (catMaybes
+                 [("images" .=) <$> _ppImages,
+                  ("status" .=) <$> _ppStatus, ("etag" .=) <$> _ppEtag,
+                  ("readerComments" .=) <$> _ppReaderComments,
+                  ("location" .=) <$> _ppLocation,
+                  Just ("kind" .= _ppKind),
+                  ("published" .=) <$> _ppPublished,
+                  ("url" .=) <$> _ppUrl, ("blog" .=) <$> _ppBlog,
+                  ("customMetaData" .=) <$> _ppCustomMetaData,
+                  ("content" .=) <$> _ppContent,
+                  ("replies" .=) <$> _ppReplies,
+                  ("selfLink" .=) <$> _ppSelfLink,
+                  ("author" .=) <$> _ppAuthor, ("id" .=) <$> _ppId,
+                  ("labels" .=) <$> _ppLabels,
+                  ("updated" .=) <$> _ppUpdated,
+                  ("titleLink" .=) <$> _ppTitleLink,
+                  ("title" .=) <$> _ppTitle])
+
 -- | The author of this Post.
 --
 -- /See:/ 'postAuthor' smart constructor.
@@ -1284,6 +1680,23 @@ posDisplayName
 posId :: Lens' PostAuthor (Maybe Text)
 posId = lens _posId (\ s a -> s{_posId = a})
 
+instance FromJSON PostAuthor where
+        parseJSON
+          = withObject "PostAuthor"
+              (\ o ->
+                 PostAuthor <$>
+                   (o .:? "image") <*> (o .:? "url") <*>
+                     (o .:? "displayName")
+                     <*> (o .:? "id"))
+
+instance ToJSON PostAuthor where
+        toJSON PostAuthor{..}
+          = object
+              (catMaybes
+                 [("image" .=) <$> _posImage, ("url" .=) <$> _posUrl,
+                  ("displayName" .=) <$> _posDisplayName,
+                  ("id" .=) <$> _posId])
+
 -- | Data about the blog containing this Post.
 --
 -- /See:/ 'postBlog' smart constructor.
@@ -1306,6 +1719,15 @@ postBlog =
 -- | The identifier of the Blog that contains this Post.
 pbId :: Lens' PostBlog (Maybe Text)
 pbId = lens _pbId (\ s a -> s{_pbId = a})
+
+instance FromJSON PostBlog where
+        parseJSON
+          = withObject "PostBlog"
+              (\ o -> PostBlog <$> (o .:? "id"))
+
+instance ToJSON PostBlog where
+        toJSON PostBlog{..}
+          = object (catMaybes [("id" .=) <$> _pbId])
 
 -- | The Post author\'s avatar.
 --
@@ -1330,6 +1752,15 @@ postImageAuthor =
 pUrl :: Lens' PostImageAuthor (Maybe Text)
 pUrl = lens _pUrl (\ s a -> s{_pUrl = a})
 
+instance FromJSON PostImageAuthor where
+        parseJSON
+          = withObject "PostImageAuthor"
+              (\ o -> PostImageAuthor <$> (o .:? "url"))
+
+instance ToJSON PostImageAuthor where
+        toJSON PostImageAuthor{..}
+          = object (catMaybes [("url" .=) <$> _pUrl])
+
 --
 -- /See:/ 'postItemImages' smart constructor.
 newtype PostItemImages = PostItemImages
@@ -1350,6 +1781,15 @@ postItemImages =
 
 piiUrl :: Lens' PostItemImages (Maybe Text)
 piiUrl = lens _piiUrl (\ s a -> s{_piiUrl = a})
+
+instance FromJSON PostItemImages where
+        parseJSON
+          = withObject "PostItemImages"
+              (\ o -> PostItemImages <$> (o .:? "url"))
+
+instance ToJSON PostItemImages where
+        toJSON PostItemImages{..}
+          = object (catMaybes [("url" .=) <$> _piiUrl])
 
 --
 -- /See:/ 'postList' smart constructor.
@@ -1401,6 +1841,23 @@ plItems
   = lens _plItems (\ s a -> s{_plItems = a}) . _Default
       . _Coerce
 
+instance FromJSON PostList where
+        parseJSON
+          = withObject "PostList"
+              (\ o ->
+                 PostList <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "blogger#postList")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON PostList where
+        toJSON PostList{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _plEtag,
+                  ("nextPageToken" .=) <$> _plNextPageToken,
+                  Just ("kind" .= _plKind), ("items" .=) <$> _plItems])
+
 -- | The location for geotagged posts.
 --
 -- /See:/ 'postLocation' smart constructor.
@@ -1447,6 +1904,21 @@ plName = lens _plName (\ s a -> s{_plName = a})
 -- | Location\'s longitude.
 plLng :: Lens' PostLocation (Maybe Double)
 plLng = lens _plLng (\ s a -> s{_plLng = a})
+
+instance FromJSON PostLocation where
+        parseJSON
+          = withObject "PostLocation"
+              (\ o ->
+                 PostLocation <$>
+                   (o .:? "span") <*> (o .:? "lat") <*> (o .:? "name")
+                     <*> (o .:? "lng"))
+
+instance ToJSON PostLocation where
+        toJSON PostLocation{..}
+          = object
+              (catMaybes
+                 [("span" .=) <$> _plSpan, ("lat" .=) <$> _plLat,
+                  ("name" .=) <$> _plName, ("lng" .=) <$> _plLng])
 
 --
 -- /See:/ 'postPerUserInfo' smart constructor.
@@ -1507,6 +1979,27 @@ ppuiPostId :: Lens' PostPerUserInfo (Maybe Text)
 ppuiPostId
   = lens _ppuiPostId (\ s a -> s{_ppuiPostId = a})
 
+instance FromJSON PostPerUserInfo where
+        parseJSON
+          = withObject "PostPerUserInfo"
+              (\ o ->
+                 PostPerUserInfo <$>
+                   (o .:? "kind" .!= "blogger#postPerUserInfo") <*>
+                     (o .:? "blogId")
+                     <*> (o .:? "userId")
+                     <*> (o .:? "hasEditAccess")
+                     <*> (o .:? "postId"))
+
+instance ToJSON PostPerUserInfo where
+        toJSON PostPerUserInfo{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _ppuiKind),
+                  ("blogId" .=) <$> _ppuiBlogId,
+                  ("userId" .=) <$> _ppuiUserId,
+                  ("hasEditAccess" .=) <$> _ppuiHasEditAccess,
+                  ("postId" .=) <$> _ppuiPostId])
+
 -- | The container of comments on this Post.
 --
 -- /See:/ 'postReplies' smart constructor.
@@ -1550,6 +2043,22 @@ prSelfLink :: Lens' PostReplies (Maybe Text)
 prSelfLink
   = lens _prSelfLink (\ s a -> s{_prSelfLink = a})
 
+instance FromJSON PostReplies where
+        parseJSON
+          = withObject "PostReplies"
+              (\ o ->
+                 PostReplies <$>
+                   (o .:? "totalItems") <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink"))
+
+instance ToJSON PostReplies where
+        toJSON PostReplies{..}
+          = object
+              (catMaybes
+                 [("totalItems" .=) <$> _prTotalItems,
+                  ("items" .=) <$> _prItems,
+                  ("selfLink" .=) <$> _prSelfLink])
+
 --
 -- /See:/ 'postUserInfo' smart constructor.
 data PostUserInfo = PostUserInfo
@@ -1589,6 +2098,21 @@ puiPost = lens _puiPost (\ s a -> s{_puiPost = a})
 -- | The kind of this entity. Always blogger#postUserInfo
 puiKind :: Lens' PostUserInfo Text
 puiKind = lens _puiKind (\ s a -> s{_puiKind = a})
+
+instance FromJSON PostUserInfo where
+        parseJSON
+          = withObject "PostUserInfo"
+              (\ o ->
+                 PostUserInfo <$>
+                   (o .:? "post_user_info") <*> (o .:? "post") <*>
+                     (o .:? "kind" .!= "blogger#postUserInfo"))
+
+instance ToJSON PostUserInfo where
+        toJSON PostUserInfo{..}
+          = object
+              (catMaybes
+                 [("post_user_info" .=) <$> _puiPostUserInfo,
+                  ("post" .=) <$> _puiPost, Just ("kind" .= _puiKind)])
 
 --
 -- /See:/ 'postUserInfosList' smart constructor.
@@ -1632,6 +2156,23 @@ puilItems
   = lens _puilItems (\ s a -> s{_puilItems = a}) .
       _Default
       . _Coerce
+
+instance FromJSON PostUserInfosList where
+        parseJSON
+          = withObject "PostUserInfosList"
+              (\ o ->
+                 PostUserInfosList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "blogger#postUserInfosList")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON PostUserInfosList where
+        toJSON PostUserInfosList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _puilNextPageToken,
+                  Just ("kind" .= _puilKind),
+                  ("items" .=) <$> _puilItems])
 
 --
 -- /See:/ 'user' smart constructor.
@@ -1721,6 +2262,32 @@ uDisplayName
 uId :: Lens' User (Maybe Text)
 uId = lens _uId (\ s a -> s{_uId = a})
 
+instance FromJSON User where
+        parseJSON
+          = withObject "User"
+              (\ o ->
+                 User <$>
+                   (o .:? "blogs") <*> (o .:? "kind" .!= "blogger#user")
+                     <*> (o .:? "created")
+                     <*> (o .:? "locale")
+                     <*> (o .:? "url")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "about")
+                     <*> (o .:? "displayName")
+                     <*> (o .:? "id"))
+
+instance ToJSON User where
+        toJSON User{..}
+          = object
+              (catMaybes
+                 [("blogs" .=) <$> _uBlogs, Just ("kind" .= _uKind),
+                  ("created" .=) <$> _uCreated,
+                  ("locale" .=) <$> _uLocale, ("url" .=) <$> _uUrl,
+                  ("selfLink" .=) <$> _uSelfLink,
+                  ("about" .=) <$> _uAbout,
+                  ("displayName" .=) <$> _uDisplayName,
+                  ("id" .=) <$> _uId])
+
 -- | The container of blogs for this user.
 --
 -- /See:/ 'userBlogs' smart constructor.
@@ -1744,6 +2311,16 @@ userBlogs =
 ubSelfLink :: Lens' UserBlogs (Maybe Text)
 ubSelfLink
   = lens _ubSelfLink (\ s a -> s{_ubSelfLink = a})
+
+instance FromJSON UserBlogs where
+        parseJSON
+          = withObject "UserBlogs"
+              (\ o -> UserBlogs <$> (o .:? "selfLink"))
+
+instance ToJSON UserBlogs where
+        toJSON UserBlogs{..}
+          = object
+              (catMaybes [("selfLink" .=) <$> _ubSelfLink])
 
 -- | This user\'s locale
 --
@@ -1786,3 +2363,19 @@ ulCountry
 ulLanguage :: Lens' UserLocale (Maybe Text)
 ulLanguage
   = lens _ulLanguage (\ s a -> s{_ulLanguage = a})
+
+instance FromJSON UserLocale where
+        parseJSON
+          = withObject "UserLocale"
+              (\ o ->
+                 UserLocale <$>
+                   (o .:? "variant") <*> (o .:? "country") <*>
+                     (o .:? "language"))
+
+instance ToJSON UserLocale where
+        toJSON UserLocale{..}
+          = object
+              (catMaybes
+                 [("variant" .=) <$> _ulVariant,
+                  ("country" .=) <$> _ulCountry,
+                  ("language" .=) <$> _ulLanguage])

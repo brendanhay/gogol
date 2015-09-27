@@ -184,28 +184,33 @@ type RoomsAPI =
 -- tester accounts for your application. This method is only available to
 -- user accounts for your developer console.
 type RoomsResetForAllPlayers =
-     "games" :> "v1management" :> "rooms" :>
-       "resetForAllPlayers"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1management" :>
+         "rooms" :>
+           "resetForAllPlayers" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Post '[JSON] ()
 
 -- | Reset all rooms for the currently authenticated player for your
 -- application. This method is only accessible to whitelisted tester
 -- accounts for your application.
 type RoomsReset =
-     "games" :> "v1management" :> "rooms" :> "reset" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1management" :>
+         "rooms" :>
+           "reset" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Post '[JSON] ()
 
 type AchievementsAPI =
      AchievementsResetAll :<|>
@@ -218,72 +223,84 @@ type AchievementsAPI =
 -- application. This method is only accessible to whitelisted tester
 -- accounts for your application.
 type AchievementsResetAll =
-     "games" :> "v1management" :> "achievements" :>
-       "reset"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1management" :>
+         "achievements" :>
+           "reset" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :>
+                           Post '[JSON] AchievementResetAllResponse
 
 -- | Resets all draft achievements for all players. This method is only
 -- available to user accounts for your developer console.
 type AchievementsResetAllForAllPlayers =
-     "games" :> "v1management" :> "achievements" :>
-       "resetAllForAllPlayers"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1management" :>
+         "achievements" :>
+           "resetAllForAllPlayers" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Post '[JSON] ()
 
 -- | Resets achievements with the given IDs for all players. This method is
 -- only available to user accounts for your developer console. Only draft
 -- achievements may be reset.
 type AchievementsResetMultipleForAllPlayers =
-     "games" :> "v1management" :> "achievements" :>
-       "resetMultipleForAllPlayers"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1management" :>
+         "achievements" :>
+           "resetMultipleForAllPlayers" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Post '[JSON] ()
 
 -- | Resets the achievement with the given ID for all players. This method is
 -- only available to user accounts for your developer console. Only draft
 -- achievements can be reset.
 type AchievementsResetForAllPlayers =
-     "games" :> "v1management" :> "achievements" :>
-       Capture "achievementId" Text
-       :> "resetForAllPlayers"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1management" :>
+         "achievements" :>
+           Capture "achievementId" Text :>
+             "resetForAllPlayers" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] ()
 
 -- | Resets the achievement with the given ID for the currently authenticated
 -- player. This method is only accessible to whitelisted tester accounts
 -- for your application.
 type AchievementsReset =
-     "games" :> "v1management" :> "achievements" :>
-       Capture "achievementId" Text
-       :> "reset"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1management" :>
+         "achievements" :>
+           Capture "achievementId" Text :>
+             "reset" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Post '[JSON] AchievementResetResponse
 
 type EventsAPI =
      EventsResetAll :<|> EventsResetAllForAllPlayers :<|>
@@ -295,73 +312,84 @@ type EventsAPI =
 -- player. This method is only accessible to whitelisted tester accounts
 -- for your application. All quests for this player will also be reset.
 type EventsResetAll =
-     "games" :> "v1management" :> "events" :> "reset" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1management" :>
+         "events" :>
+           "reset" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Post '[JSON] ()
 
 -- | Resets all draft events for all players. This method is only available
 -- to user accounts for your developer console. All quests that use any of
 -- these events will also be reset.
 type EventsResetAllForAllPlayers =
-     "games" :> "v1management" :> "events" :>
-       "resetAllForAllPlayers"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1management" :>
+         "events" :>
+           "resetAllForAllPlayers" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Post '[JSON] ()
 
 -- | Resets events with the given IDs for all players. This method is only
 -- available to user accounts for your developer console. Only draft events
 -- may be reset. All quests that use any of the events will also be reset.
 type EventsResetMultipleForAllPlayers =
-     "games" :> "v1management" :> "events" :>
-       "resetMultipleForAllPlayers"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1management" :>
+         "events" :>
+           "resetMultipleForAllPlayers" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Post '[JSON] ()
 
 -- | Resets the event with the given ID for all players. This method is only
 -- available to user accounts for your developer console. Only draft events
 -- can be reset. All quests that use the event will also be reset.
 type EventsResetForAllPlayers =
-     "games" :> "v1management" :> "events" :>
-       Capture "eventId" Text
-       :> "resetForAllPlayers"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1management" :>
+         "events" :>
+           Capture "eventId" Text :>
+             "resetForAllPlayers" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] ()
 
 -- | Resets all player progress on the event with the given ID for the
 -- currently authenticated player. This method is only accessible to
 -- whitelisted tester accounts for your application. All quests for this
 -- player that use the event will also be reset.
 type EventsReset =
-     "games" :> "v1management" :> "events" :>
-       Capture "eventId" Text
-       :> "reset"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1management" :>
+         "events" :>
+           Capture "eventId" Text :>
+             "reset" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] ()
 
 type QuestsAPI =
      QuestsResetAll :<|> QuestsResetAllForAllPlayers :<|>
@@ -373,71 +401,82 @@ type QuestsAPI =
 -- player. This method is only accessible to whitelisted tester accounts
 -- for your application.
 type QuestsResetAll =
-     "games" :> "v1management" :> "quests" :> "reset" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1management" :>
+         "quests" :>
+           "reset" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Post '[JSON] ()
 
 -- | Resets all draft quests for all players. This method is only available
 -- to user accounts for your developer console.
 type QuestsResetAllForAllPlayers =
-     "games" :> "v1management" :> "quests" :>
-       "resetAllForAllPlayers"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1management" :>
+         "quests" :>
+           "resetAllForAllPlayers" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Post '[JSON] ()
 
 -- | Resets quests with the given IDs for all players. This method is only
 -- available to user accounts for your developer console. Only draft quests
 -- may be reset.
 type QuestsResetMultipleForAllPlayers =
-     "games" :> "v1management" :> "quests" :>
-       "resetMultipleForAllPlayers"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1management" :>
+         "quests" :>
+           "resetMultipleForAllPlayers" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Post '[JSON] ()
 
 -- | Resets all player progress on the quest with the given ID for all
 -- players. This method is only available to user accounts for your
 -- developer console. Only draft quests can be reset.
 type QuestsResetForAllPlayers =
-     "games" :> "v1management" :> "quests" :>
-       Capture "questId" Text
-       :> "resetForAllPlayers"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1management" :>
+         "quests" :>
+           Capture "questId" Text :>
+             "resetForAllPlayers" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] ()
 
 -- | Resets all player progress on the quest with the given ID for the
 -- currently authenticated player. This method is only accessible to
 -- whitelisted tester accounts for your application.
 type QuestsReset =
-     "games" :> "v1management" :> "quests" :>
-       Capture "questId" Text
-       :> "reset"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1management" :>
+         "quests" :>
+           Capture "questId" Text :>
+             "reset" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] ()
 
 type PlayersAPI = PlayersHide :<|> PlayersUnhide
 
@@ -445,35 +484,39 @@ type PlayersAPI = PlayersHide :<|> PlayersUnhide
 -- This method is only available to user accounts for your developer
 -- console.
 type PlayersHide =
-     "games" :> "v1management" :> "applications" :>
-       Capture "applicationId" Text
-       :> "players"
-       :> "hidden"
-       :> Capture "playerId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1management" :>
+         "applications" :>
+           Capture "applicationId" Text :>
+             "players" :>
+               "hidden" :>
+                 Capture "playerId" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Post '[JSON] ()
 
 -- | Unhide the given player\'s leaderboard scores from the given
 -- application. This method is only available to user accounts for your
 -- developer console.
 type PlayersUnhide =
-     "games" :> "v1management" :> "applications" :>
-       Capture "applicationId" Text
-       :> "players"
-       :> "hidden"
-       :> Capture "playerId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1management" :>
+         "applications" :>
+           Capture "applicationId" Text :>
+             "players" :>
+               "hidden" :>
+                 Capture "playerId" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Delete '[JSON] ()
 
 type ScoresAPI =
      ScoresResetAll :<|> ScoresResetAllForAllPlayers :<|>
@@ -485,73 +528,86 @@ type ScoresAPI =
 -- players. This method is only accessible to whitelisted tester accounts
 -- for your application.
 type ScoresResetAll =
-     "games" :> "v1management" :> "scores" :> "reset" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1management" :>
+         "scores" :>
+           "reset" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :>
+                           Post '[JSON] PlayerScoreResetAllResponse
 
 -- | Resets scores for all draft leaderboards for all players. This method is
 -- only available to user accounts for your developer console.
 type ScoresResetAllForAllPlayers =
-     "games" :> "v1management" :> "scores" :>
-       "resetAllForAllPlayers"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1management" :>
+         "scores" :>
+           "resetAllForAllPlayers" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Post '[JSON] ()
 
 -- | Resets scores for the leaderboards with the given IDs for all players.
 -- This method is only available to user accounts for your developer
 -- console. Only draft leaderboards may be reset.
 type ScoresResetMultipleForAllPlayers =
-     "games" :> "v1management" :> "scores" :>
-       "resetMultipleForAllPlayers"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1management" :>
+         "scores" :>
+           "resetMultipleForAllPlayers" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Post '[JSON] ()
 
 -- | Resets scores for the leaderboard with the given ID for all players.
 -- This method is only available to user accounts for your developer
 -- console. Only draft leaderboards can be reset.
 type ScoresResetForAllPlayers =
-     "games" :> "v1management" :> "leaderboards" :>
-       Capture "leaderboardId" Text
-       :> "scores"
-       :> "resetForAllPlayers"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1management" :>
+         "leaderboards" :>
+           Capture "leaderboardId" Text :>
+             "scores" :>
+               "resetForAllPlayers" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Post '[JSON] ()
 
 -- | Resets scores for the leaderboard with the given ID for the currently
 -- authenticated player. This method is only accessible to whitelisted
 -- tester accounts for your application.
 type ScoresReset =
-     "games" :> "v1management" :> "leaderboards" :>
-       Capture "leaderboardId" Text
-       :> "scores"
-       :> "reset"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1management" :>
+         "leaderboards" :>
+           Capture "leaderboardId" Text :>
+             "scores" :>
+               "reset" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Post '[JSON] PlayerScoreResetResponse
 
 type TurnBasedMatchesAPI =
      TurnBasedMatchesResetForAllPlayers :<|>
@@ -561,44 +617,51 @@ type TurnBasedMatchesAPI =
 -- whitelisted tester accounts for your application. This method is only
 -- available to user accounts for your developer console.
 type TurnBasedMatchesResetForAllPlayers =
-     "games" :> "v1management" :> "turnbasedmatches" :>
-       "resetForAllPlayers"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1management" :>
+         "turnbasedmatches" :>
+           "resetForAllPlayers" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Post '[JSON] ()
 
 -- | Reset all turn-based match data for a user. This method is only
 -- accessible to whitelisted tester accounts for your application.
 type TurnBasedMatchesReset =
-     "games" :> "v1management" :> "turnbasedmatches" :>
-       "reset"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1management" :>
+         "turnbasedmatches" :>
+           "reset" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Post '[JSON] ()
 
 type ApplicationsAPI = ApplicationsListHidden
 
 -- | Get the list of players hidden from the given application. This method
 -- is only available to user accounts for your developer console.
 type ApplicationsListHidden =
-     "games" :> "v1management" :> "applications" :>
-       Capture "applicationId" Text
-       :> "players"
-       :> "hidden"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Natural
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1management" :>
+         "applications" :>
+           Capture "applicationId" Text :>
+             "players" :>
+               "hidden" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "maxResults" Natural :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Get '[JSON] HiddenPlayerList

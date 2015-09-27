@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -91,6 +92,29 @@ abSession :: Lens' AggregateBucket (Maybe (Maybe Session))
 abSession
   = lens _abSession (\ s a -> s{_abSession = a})
 
+instance FromJSON AggregateBucket where
+        parseJSON
+          = withObject "AggregateBucket"
+              (\ o ->
+                 AggregateBucket <$>
+                   (o .:? "endTimeMillis") <*>
+                     (o .:? "dataset" .!= mempty)
+                     <*> (o .:? "activity")
+                     <*> (o .:? "type")
+                     <*> (o .:? "startTimeMillis")
+                     <*> (o .:? "session"))
+
+instance ToJSON AggregateBucket where
+        toJSON AggregateBucket{..}
+          = object
+              (catMaybes
+                 [("endTimeMillis" .=) <$> _abEndTimeMillis,
+                  ("dataset" .=) <$> _abDataset,
+                  ("activity" .=) <$> _abActivity,
+                  ("type" .=) <$> _abType,
+                  ("startTimeMillis" .=) <$> _abStartTimeMillis,
+                  ("session" .=) <$> _abSession])
+
 -- | The specification of which data to aggregate.
 --
 -- /See:/ 'aggregateBy' smart constructor.
@@ -131,6 +155,20 @@ abDataSourceId :: Lens' AggregateBy (Maybe Text)
 abDataSourceId
   = lens _abDataSourceId
       (\ s a -> s{_abDataSourceId = a})
+
+instance FromJSON AggregateBy where
+        parseJSON
+          = withObject "AggregateBy"
+              (\ o ->
+                 AggregateBy <$>
+                   (o .:? "dataTypeName") <*> (o .:? "dataSourceId"))
+
+instance ToJSON AggregateBy where
+        toJSON AggregateBy{..}
+          = object
+              (catMaybes
+                 [("dataTypeName" .=) <$> _abDataTypeName,
+                  ("dataSourceId" .=) <$> _abDataSourceId])
 
 --
 -- /See:/ 'aggregateRequest' smart constructor.
@@ -235,6 +273,33 @@ arBucketByActivitySegment
   = lens _arBucketByActivitySegment
       (\ s a -> s{_arBucketByActivitySegment = a})
 
+instance FromJSON AggregateRequest where
+        parseJSON
+          = withObject "AggregateRequest"
+              (\ o ->
+                 AggregateRequest <$>
+                   (o .:? "endTimeMillis") <*>
+                     (o .:? "aggregateBy" .!= mempty)
+                     <*> (o .:? "bucketBySession")
+                     <*> (o .:? "bucketByActivityType")
+                     <*> (o .:? "bucketByTime")
+                     <*> (o .:? "startTimeMillis")
+                     <*> (o .:? "bucketByActivitySegment"))
+
+instance ToJSON AggregateRequest where
+        toJSON AggregateRequest{..}
+          = object
+              (catMaybes
+                 [("endTimeMillis" .=) <$> _arEndTimeMillis,
+                  ("aggregateBy" .=) <$> _arAggregateBy,
+                  ("bucketBySession" .=) <$> _arBucketBySession,
+                  ("bucketByActivityType" .=) <$>
+                    _arBucketByActivityType,
+                  ("bucketByTime" .=) <$> _arBucketByTime,
+                  ("startTimeMillis" .=) <$> _arStartTimeMillis,
+                  ("bucketByActivitySegment" .=) <$>
+                    _arBucketByActivitySegment])
+
 --
 -- /See:/ 'aggregateResponse' smart constructor.
 newtype AggregateResponse = AggregateResponse
@@ -259,6 +324,16 @@ arBucket
   = lens _arBucket (\ s a -> s{_arBucket = a}) .
       _Default
       . _Coerce
+
+instance FromJSON AggregateResponse where
+        parseJSON
+          = withObject "AggregateResponse"
+              (\ o ->
+                 AggregateResponse <$> (o .:? "bucket" .!= mempty))
+
+instance ToJSON AggregateResponse where
+        toJSON AggregateResponse{..}
+          = object (catMaybes [("bucket" .=) <$> _arBucket])
 
 -- | See:
 -- google3\/java\/com\/google\/android\/apps\/heart\/platform\/api\/Application.java
@@ -317,6 +392,23 @@ aDetailsUrl :: Lens' Application (Maybe Text)
 aDetailsUrl
   = lens _aDetailsUrl (\ s a -> s{_aDetailsUrl = a})
 
+instance FromJSON Application where
+        parseJSON
+          = withObject "Application"
+              (\ o ->
+                 Application <$>
+                   (o .:? "packageName") <*> (o .:? "name") <*>
+                     (o .:? "version")
+                     <*> (o .:? "detailsUrl"))
+
+instance ToJSON Application where
+        toJSON Application{..}
+          = object
+              (catMaybes
+                 [("packageName" .=) <$> _aPackageName,
+                  ("name" .=) <$> _aName, ("version" .=) <$> _aVersion,
+                  ("detailsUrl" .=) <$> _aDetailsUrl])
+
 --
 -- /See:/ 'bucketByActivity' smart constructor.
 data BucketByActivity = BucketByActivity
@@ -354,6 +446,22 @@ bbaActivityDataSourceId
   = lens _bbaActivityDataSourceId
       (\ s a -> s{_bbaActivityDataSourceId = a})
 
+instance FromJSON BucketByActivity where
+        parseJSON
+          = withObject "BucketByActivity"
+              (\ o ->
+                 BucketByActivity <$>
+                   (o .:? "minDurationMillis") <*>
+                     (o .:? "activityDataSourceId"))
+
+instance ToJSON BucketByActivity where
+        toJSON BucketByActivity{..}
+          = object
+              (catMaybes
+                 [("minDurationMillis" .=) <$> _bbaMinDurationMillis,
+                  ("activityDataSourceId" .=) <$>
+                    _bbaActivityDataSourceId])
+
 --
 -- /See:/ 'bucketBySession' smart constructor.
 newtype BucketBySession = BucketBySession
@@ -378,6 +486,18 @@ bbsMinDurationMillis :: Lens' BucketBySession (Maybe Int64)
 bbsMinDurationMillis
   = lens _bbsMinDurationMillis
       (\ s a -> s{_bbsMinDurationMillis = a})
+
+instance FromJSON BucketBySession where
+        parseJSON
+          = withObject "BucketBySession"
+              (\ o ->
+                 BucketBySession <$> (o .:? "minDurationMillis"))
+
+instance ToJSON BucketBySession where
+        toJSON BucketBySession{..}
+          = object
+              (catMaybes
+                 [("minDurationMillis" .=) <$> _bbsMinDurationMillis])
 
 --
 -- /See:/ 'bucketByTime' smart constructor.
@@ -404,6 +524,17 @@ bbtDurationMillis :: Lens' BucketByTime (Maybe Int64)
 bbtDurationMillis
   = lens _bbtDurationMillis
       (\ s a -> s{_bbtDurationMillis = a})
+
+instance FromJSON BucketByTime where
+        parseJSON
+          = withObject "BucketByTime"
+              (\ o -> BucketByTime <$> (o .:? "durationMillis"))
+
+instance ToJSON BucketByTime where
+        toJSON BucketByTime{..}
+          = object
+              (catMaybes
+                 [("durationMillis" .=) <$> _bbtDurationMillis])
 
 -- | Represents a single data point, generated by a particular data source. A
 -- data point holds a value for each field, an end timestamp and an
@@ -519,6 +650,34 @@ dpStartTimeNanos :: Lens' DataPoint (Maybe Int64)
 dpStartTimeNanos
   = lens _dpStartTimeNanos
       (\ s a -> s{_dpStartTimeNanos = a})
+
+instance FromJSON DataPoint where
+        parseJSON
+          = withObject "DataPoint"
+              (\ o ->
+                 DataPoint <$>
+                   (o .:? "originDataSourceId") <*>
+                     (o .:? "rawTimestampNanos")
+                     <*> (o .:? "dataTypeName")
+                     <*> (o .:? "value" .!= mempty)
+                     <*> (o .:? "computationTimeMillis")
+                     <*> (o .:? "endTimeNanos")
+                     <*> (o .:? "modifiedTimeMillis")
+                     <*> (o .:? "startTimeNanos"))
+
+instance ToJSON DataPoint where
+        toJSON DataPoint{..}
+          = object
+              (catMaybes
+                 [("originDataSourceId" .=) <$> _dpOriginDataSourceId,
+                  ("rawTimestampNanos" .=) <$> _dpRawTimestampNanos,
+                  ("dataTypeName" .=) <$> _dpDataTypeName,
+                  ("value" .=) <$> _dpValue,
+                  ("computationTimeMillis" .=) <$>
+                    _dpComputationTimeMillis,
+                  ("endTimeNanos" .=) <$> _dpEndTimeNanos,
+                  ("modifiedTimeMillis" .=) <$> _dpModifiedTimeMillis,
+                  ("startTimeNanos" .=) <$> _dpStartTimeNanos])
 
 -- | Definition of a unique source of sensor data. Data sources can expose
 -- raw data coming from hardware sensors on local or companion devices.
@@ -642,6 +801,29 @@ dsDataStreamId
   = lens _dsDataStreamId
       (\ s a -> s{_dsDataStreamId = a})
 
+instance FromJSON DataSource where
+        parseJSON
+          = withObject "DataSource"
+              (\ o ->
+                 DataSource <$>
+                   (o .:? "application") <*> (o .:? "device") <*>
+                     (o .:? "name")
+                     <*> (o .:? "dataType")
+                     <*> (o .:? "type")
+                     <*> (o .:? "dataStreamName")
+                     <*> (o .:? "dataStreamId"))
+
+instance ToJSON DataSource where
+        toJSON DataSource{..}
+          = object
+              (catMaybes
+                 [("application" .=) <$> _dsApplication,
+                  ("device" .=) <$> _dsDevice, ("name" .=) <$> _dsName,
+                  ("dataType" .=) <$> _dsDataType,
+                  ("type" .=) <$> _dsType,
+                  ("dataStreamName" .=) <$> _dsDataStreamName,
+                  ("dataStreamId" .=) <$> _dsDataStreamId])
+
 -- | See:
 -- google3\/java\/com\/google\/android\/apps\/heart\/platform\/api\/DataType.java
 --
@@ -676,6 +858,19 @@ dtField
 -- com.google namespace are shared as part of the platform.
 dtName :: Lens' DataType (Maybe Text)
 dtName = lens _dtName (\ s a -> s{_dtName = a})
+
+instance FromJSON DataType where
+        parseJSON
+          = withObject "DataType"
+              (\ o ->
+                 DataType <$>
+                   (o .:? "field" .!= mempty) <*> (o .:? "name"))
+
+instance ToJSON DataType where
+        toJSON DataType{..}
+          = object
+              (catMaybes
+                 [("field" .=) <$> _dtField, ("name" .=) <$> _dtName])
 
 -- | In case of multi-dimensional data (such as an accelerometer with x, y,
 -- and z axes) each field represents one dimension. Each data type field
@@ -721,6 +916,22 @@ dtfName = lens _dtfName (\ s a -> s{_dtfName = a})
 dtfOptional :: Lens' DataTypeField (Maybe Bool)
 dtfOptional
   = lens _dtfOptional (\ s a -> s{_dtfOptional = a})
+
+instance FromJSON DataTypeField where
+        parseJSON
+          = withObject "DataTypeField"
+              (\ o ->
+                 DataTypeField <$>
+                   (o .:? "format") <*> (o .:? "name") <*>
+                     (o .:? "optional"))
+
+instance ToJSON DataTypeField where
+        toJSON DataTypeField{..}
+          = object
+              (catMaybes
+                 [("format" .=) <$> _dtfFormat,
+                  ("name" .=) <$> _dtfName,
+                  ("optional" .=) <$> _dtfOptional])
 
 -- | A dataset represents a projection container for data points. They do not
 -- carry any info of their own. Datasets represent a set of data points
@@ -801,6 +1012,26 @@ dMaxEndTimeNs
   = lens _dMaxEndTimeNs
       (\ s a -> s{_dMaxEndTimeNs = a})
 
+instance FromJSON Dataset where
+        parseJSON
+          = withObject "Dataset"
+              (\ o ->
+                 Dataset <$>
+                   (o .:? "nextPageToken") <*> (o .:? "dataSourceId")
+                     <*> (o .:? "point" .!= mempty)
+                     <*> (o .:? "minStartTimeNs")
+                     <*> (o .:? "maxEndTimeNs"))
+
+instance ToJSON Dataset where
+        toJSON Dataset{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _dNextPageToken,
+                  ("dataSourceId" .=) <$> _dDataSourceId,
+                  ("point" .=) <$> _dPoint,
+                  ("minStartTimeNs" .=) <$> _dMinStartTimeNs,
+                  ("maxEndTimeNs" .=) <$> _dMaxEndTimeNs])
+
 -- | Representation of an integrated device (such as a phone or a wearable)
 -- that can hold sensors. Each sensor is exposed as a data source. The main
 -- purpose of the device information contained in this class is to identify
@@ -870,6 +1101,25 @@ dVersion = lens _dVersion (\ s a -> s{_dVersion = a})
 dType :: Lens' Device (Maybe DeviceType)
 dType = lens _dType (\ s a -> s{_dType = a})
 
+instance FromJSON Device where
+        parseJSON
+          = withObject "Device"
+              (\ o ->
+                 Device <$>
+                   (o .:? "manufacturer") <*> (o .:? "uid") <*>
+                     (o .:? "model")
+                     <*> (o .:? "version")
+                     <*> (o .:? "type"))
+
+instance ToJSON Device where
+        toJSON Device{..}
+          = object
+              (catMaybes
+                 [("manufacturer" .=) <$> _dManufacturer,
+                  ("uid" .=) <$> _dUid, ("model" .=) <$> _dModel,
+                  ("version" .=) <$> _dVersion,
+                  ("type" .=) <$> _dType])
+
 --
 -- /See:/ 'listDataSourcesResponse' smart constructor.
 newtype ListDataSourcesResponse = ListDataSourcesResponse
@@ -895,6 +1145,18 @@ ldsrDataSource
       (\ s a -> s{_ldsrDataSource = a})
       . _Default
       . _Coerce
+
+instance FromJSON ListDataSourcesResponse where
+        parseJSON
+          = withObject "ListDataSourcesResponse"
+              (\ o ->
+                 ListDataSourcesResponse <$>
+                   (o .:? "dataSource" .!= mempty))
+
+instance ToJSON ListDataSourcesResponse where
+        toJSON ListDataSourcesResponse{..}
+          = object
+              (catMaybes [("dataSource" .=) <$> _ldsrDataSource])
 
 --
 -- /See:/ 'listSessionsResponse' smart constructor.
@@ -948,6 +1210,23 @@ lsrSession
       _Default
       . _Coerce
 
+instance FromJSON ListSessionsResponse where
+        parseJSON
+          = withObject "ListSessionsResponse"
+              (\ o ->
+                 ListSessionsResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "deletedSession" .!= mempty)
+                     <*> (o .:? "session" .!= mempty))
+
+instance ToJSON ListSessionsResponse where
+        toJSON ListSessionsResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lsrNextPageToken,
+                  ("deletedSession" .=) <$> _lsrDeletedSession,
+                  ("session" .=) <$> _lsrSession])
+
 -- | Holder object for the value of an entry in a map field of a data point.
 -- A map value supports a subset of the formats that the regular Value
 -- supports.
@@ -972,6 +1251,15 @@ mapValue =
 -- | Floating point value.
 mvFpVal :: Lens' MapValue (Maybe Double)
 mvFpVal = lens _mvFpVal (\ s a -> s{_mvFpVal = a})
+
+instance FromJSON MapValue where
+        parseJSON
+          = withObject "MapValue"
+              (\ o -> MapValue <$> (o .:? "fpVal"))
+
+instance ToJSON MapValue where
+        toJSON MapValue{..}
+          = object (catMaybes [("fpVal" .=) <$> _mvFpVal])
 
 -- | Sessions contain metadata, such as a user-friendly name and time
 -- interval information.
@@ -1078,6 +1366,35 @@ sDescription :: Lens' Session (Maybe Text)
 sDescription
   = lens _sDescription (\ s a -> s{_sDescription = a})
 
+instance FromJSON Session where
+        parseJSON
+          = withObject "Session"
+              (\ o ->
+                 Session <$>
+                   (o .:? "endTimeMillis") <*>
+                     (o .:? "activeTimeMillis")
+                     <*> (o .:? "application")
+                     <*> (o .:? "activityType")
+                     <*> (o .:? "name")
+                     <*> (o .:? "modifiedTimeMillis")
+                     <*> (o .:? "id")
+                     <*> (o .:? "startTimeMillis")
+                     <*> (o .:? "description"))
+
+instance ToJSON Session where
+        toJSON Session{..}
+          = object
+              (catMaybes
+                 [("endTimeMillis" .=) <$> _sEndTimeMillis,
+                  ("activeTimeMillis" .=) <$> _sActiveTimeMillis,
+                  ("application" .=) <$> _sApplication,
+                  ("activityType" .=) <$> _sActivityType,
+                  ("name" .=) <$> _sName,
+                  ("modifiedTimeMillis" .=) <$> _sModifiedTimeMillis,
+                  ("id" .=) <$> _sId,
+                  ("startTimeMillis" .=) <$> _sStartTimeMillis,
+                  ("description" .=) <$> _sDescription])
+
 -- | Holder object for the value of a single field in a data point. A field
 -- value has a particular format and is only ever set to one of an integer
 -- or a floating point value.
@@ -1135,6 +1452,23 @@ vStringVal :: Lens' Value (Maybe Text)
 vStringVal
   = lens _vStringVal (\ s a -> s{_vStringVal = a})
 
+instance FromJSON Value where
+        parseJSON
+          = withObject "Value"
+              (\ o ->
+                 Value <$>
+                   (o .:? "mapVal" .!= mempty) <*> (o .:? "fpVal") <*>
+                     (o .:? "intVal")
+                     <*> (o .:? "stringVal"))
+
+instance ToJSON Value where
+        toJSON Value{..}
+          = object
+              (catMaybes
+                 [("mapVal" .=) <$> _vMapVal,
+                  ("fpVal" .=) <$> _vFpVal, ("intVal" .=) <$> _vIntVal,
+                  ("stringVal" .=) <$> _vStringVal])
+
 --
 -- /See:/ 'valueMapValEntry' smart constructor.
 data ValueMapValEntry = ValueMapValEntry
@@ -1163,3 +1497,17 @@ vmveValue
 
 vmveKey :: Lens' ValueMapValEntry (Maybe Text)
 vmveKey = lens _vmveKey (\ s a -> s{_vmveKey = a})
+
+instance FromJSON ValueMapValEntry where
+        parseJSON
+          = withObject "ValueMapValEntry"
+              (\ o ->
+                 ValueMapValEntry <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON ValueMapValEntry where
+        toJSON ValueMapValEntry{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _vmveValue,
+                  ("key" .=) <$> _vmveKey])

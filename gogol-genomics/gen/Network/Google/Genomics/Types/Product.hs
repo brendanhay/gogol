@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -97,6 +98,28 @@ argsrDatasetId
   = lens _argsrDatasetId
       (\ s a -> s{_argsrDatasetId = a})
 
+instance FromJSON AlignReadGroupSetsRequest where
+        parseJSON
+          = withObject "AlignReadGroupSetsRequest"
+              (\ o ->
+                 AlignReadGroupSetsRequest <$>
+                   (o .:? "interleavedFastqSource") <*>
+                     (o .:? "readGroupSetId")
+                     <*> (o .:? "bamSourceUris" .!= mempty)
+                     <*> (o .:? "pairedFastqSource")
+                     <*> (o .:? "datasetId"))
+
+instance ToJSON AlignReadGroupSetsRequest where
+        toJSON AlignReadGroupSetsRequest{..}
+          = object
+              (catMaybes
+                 [("interleavedFastqSource" .=) <$>
+                    _argsrInterleavedFastqSource,
+                  ("readGroupSetId" .=) <$> _argsrReadGroupSetId,
+                  ("bamSourceUris" .=) <$> _argsrBamSourceUris,
+                  ("pairedFastqSource" .=) <$> _argsrPairedFastqSource,
+                  ("datasetId" .=) <$> _argsrDatasetId])
+
 -- | The read group set align response.
 --
 -- /See:/ 'alignReadGroupSetsResponse' smart constructor.
@@ -120,6 +143,16 @@ alignReadGroupSetsResponse =
 argsrJobId :: Lens' AlignReadGroupSetsResponse (Maybe Text)
 argsrJobId
   = lens _argsrJobId (\ s a -> s{_argsrJobId = a})
+
+instance FromJSON AlignReadGroupSetsResponse where
+        parseJSON
+          = withObject "AlignReadGroupSetsResponse"
+              (\ o ->
+                 AlignReadGroupSetsResponse <$> (o .:? "jobId"))
+
+instance ToJSON AlignReadGroupSetsResponse where
+        toJSON AlignReadGroupSetsResponse{..}
+          = object (catMaybes [("jobId" .=) <$> _argsrJobId])
 
 -- | An annotation describes a region of reference genome. The value of an
 -- annotation may be one of several canonical types, supplemented by
@@ -217,6 +250,31 @@ aPosition :: Lens' Annotation (Maybe (Maybe RangePosition))
 aPosition
   = lens _aPosition (\ s a -> s{_aPosition = a})
 
+instance FromJSON Annotation where
+        parseJSON
+          = withObject "Annotation"
+              (\ o ->
+                 Annotation <$>
+                   (o .:? "variant") <*> (o .:? "annotationSetId") <*>
+                     (o .:? "name")
+                     <*> (o .:? "id")
+                     <*> (o .:? "type")
+                     <*> (o .:? "transcript")
+                     <*> (o .:? "info")
+                     <*> (o .:? "position"))
+
+instance ToJSON Annotation where
+        toJSON Annotation{..}
+          = object
+              (catMaybes
+                 [("variant" .=) <$> _aVariant,
+                  ("annotationSetId" .=) <$> _aAnnotationSetId,
+                  ("name" .=) <$> _aName, ("id" .=) <$> _aId,
+                  ("type" .=) <$> _aType,
+                  ("transcript" .=) <$> _aTranscript,
+                  ("info" .=) <$> _aInfo,
+                  ("position" .=) <$> _aPosition])
+
 -- | A string which maps to an array of values.
 --
 -- /See:/ 'annotationInfo' smart constructor.
@@ -229,6 +287,14 @@ data AnnotationInfo =
 annotationInfo
     :: AnnotationInfo
 annotationInfo = AnnotationInfo
+
+instance FromJSON AnnotationInfo where
+        parseJSON
+          = withObject "AnnotationInfo"
+              (\ o -> pure AnnotationInfo)
+
+instance ToJSON AnnotationInfo where
+        toJSON = const (Object mempty)
 
 -- | An annotation set is a logical grouping of annotations that share
 -- consistent type information and provenance. Examples of annotation sets
@@ -310,6 +376,29 @@ asSourceUri
 asInfo :: Lens' AnnotationSet (Maybe AnnotationSetInfo)
 asInfo = lens _asInfo (\ s a -> s{_asInfo = a})
 
+instance FromJSON AnnotationSet where
+        parseJSON
+          = withObject "AnnotationSet"
+              (\ o ->
+                 AnnotationSet <$>
+                   (o .:? "referenceSetId") <*> (o .:? "name") <*>
+                     (o .:? "datasetId")
+                     <*> (o .:? "id")
+                     <*> (o .:? "type")
+                     <*> (o .:? "sourceUri")
+                     <*> (o .:? "info"))
+
+instance ToJSON AnnotationSet where
+        toJSON AnnotationSet{..}
+          = object
+              (catMaybes
+                 [("referenceSetId" .=) <$> _asReferenceSetId,
+                  ("name" .=) <$> _asName,
+                  ("datasetId" .=) <$> _asDatasetId,
+                  ("id" .=) <$> _asId, ("type" .=) <$> _asType,
+                  ("sourceUri" .=) <$> _asSourceUri,
+                  ("info" .=) <$> _asInfo])
+
 -- | A string which maps to an array of values.
 --
 -- /See:/ 'annotationSetInfo' smart constructor.
@@ -322,6 +411,14 @@ data AnnotationSetInfo =
 annotationSetInfo
     :: AnnotationSetInfo
 annotationSetInfo = AnnotationSetInfo
+
+instance FromJSON AnnotationSetInfo where
+        parseJSON
+          = withObject "AnnotationSetInfo"
+              (\ o -> pure AnnotationSetInfo)
+
+instance ToJSON AnnotationSetInfo where
+        toJSON = const (Object mempty)
 
 --
 -- /See:/ 'batchAnnotationsResponse' smart constructor.
@@ -348,6 +445,17 @@ barEntries
   = lens _barEntries (\ s a -> s{_barEntries = a}) .
       _Default
       . _Coerce
+
+instance FromJSON BatchAnnotationsResponse where
+        parseJSON
+          = withObject "BatchAnnotationsResponse"
+              (\ o ->
+                 BatchAnnotationsResponse <$>
+                   (o .:? "entries" .!= mempty))
+
+instance ToJSON BatchAnnotationsResponse where
+        toJSON BatchAnnotationsResponse{..}
+          = object (catMaybes [("entries" .=) <$> _barEntries])
 
 --
 -- /See:/ 'batchAnnotationsResponseEntry' smart constructor.
@@ -382,6 +490,20 @@ bareAnnotation
   = lens _bareAnnotation
       (\ s a -> s{_bareAnnotation = a})
 
+instance FromJSON BatchAnnotationsResponseEntry where
+        parseJSON
+          = withObject "BatchAnnotationsResponseEntry"
+              (\ o ->
+                 BatchAnnotationsResponseEntry <$>
+                   (o .:? "status") <*> (o .:? "annotation"))
+
+instance ToJSON BatchAnnotationsResponseEntry where
+        toJSON BatchAnnotationsResponseEntry{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _bareStatus,
+                  ("annotation" .=) <$> _bareAnnotation])
+
 -- |
 --
 -- /See:/ 'batchAnnotationsResponseEntryStatus' smart constructor.
@@ -415,6 +537,22 @@ baresMessage :: Lens' BatchAnnotationsResponseEntryStatus (Maybe Text)
 baresMessage
   = lens _baresMessage (\ s a -> s{_baresMessage = a})
 
+instance FromJSON BatchAnnotationsResponseEntryStatus
+         where
+        parseJSON
+          = withObject "BatchAnnotationsResponseEntryStatus"
+              (\ o ->
+                 BatchAnnotationsResponseEntryStatus <$>
+                   (o .:? "code") <*> (o .:? "message"))
+
+instance ToJSON BatchAnnotationsResponseEntryStatus
+         where
+        toJSON BatchAnnotationsResponseEntryStatus{..}
+          = object
+              (catMaybes
+                 [("code" .=) <$> _baresCode,
+                  ("message" .=) <$> _baresMessage])
+
 --
 -- /See:/ 'batchCreateAnnotationsRequest' smart constructor.
 newtype BatchCreateAnnotationsRequest = BatchCreateAnnotationsRequest
@@ -441,6 +579,18 @@ bcarAnnotations
       (\ s a -> s{_bcarAnnotations = a})
       . _Default
       . _Coerce
+
+instance FromJSON BatchCreateAnnotationsRequest where
+        parseJSON
+          = withObject "BatchCreateAnnotationsRequest"
+              (\ o ->
+                 BatchCreateAnnotationsRequest <$>
+                   (o .:? "annotations" .!= mempty))
+
+instance ToJSON BatchCreateAnnotationsRequest where
+        toJSON BatchCreateAnnotationsRequest{..}
+          = object
+              (catMaybes [("annotations" .=) <$> _bcarAnnotations])
 
 -- | A call represents the determination of genotype with respect to a
 -- particular variant. It may include associated information such as
@@ -536,6 +686,29 @@ cGenotype
 cInfo :: Lens' Call (Maybe CallInfo)
 cInfo = lens _cInfo (\ s a -> s{_cInfo = a})
 
+instance FromJSON Call where
+        parseJSON
+          = withObject "Call"
+              (\ o ->
+                 Call <$>
+                   (o .:? "genotypeLikelihood" .!= mempty) <*>
+                     (o .:? "callSetName")
+                     <*> (o .:? "phaseset")
+                     <*> (o .:? "callSetId")
+                     <*> (o .:? "genotype" .!= mempty)
+                     <*> (o .:? "info"))
+
+instance ToJSON Call where
+        toJSON Call{..}
+          = object
+              (catMaybes
+                 [("genotypeLikelihood" .=) <$> _cGenotypeLikelihood,
+                  ("callSetName" .=) <$> _cCallSetName,
+                  ("phaseset" .=) <$> _cPhaseset,
+                  ("callSetId" .=) <$> _cCallSetId,
+                  ("genotype" .=) <$> _cGenotype,
+                  ("info" .=) <$> _cInfo])
+
 -- | A string which maps to an array of values.
 --
 -- /See:/ 'callInfo' smart constructor.
@@ -548,6 +721,13 @@ data CallInfo =
 callInfo
     :: CallInfo
 callInfo = CallInfo
+
+instance FromJSON CallInfo where
+        parseJSON
+          = withObject "CallInfo" (\ o -> pure CallInfo)
+
+instance ToJSON CallInfo where
+        toJSON = const (Object mempty)
 
 -- | The read group set call request.
 --
@@ -602,6 +782,22 @@ crgsrSourceUris
       . _Default
       . _Coerce
 
+instance FromJSON CallReadGroupSetsRequest where
+        parseJSON
+          = withObject "CallReadGroupSetsRequest"
+              (\ o ->
+                 CallReadGroupSetsRequest <$>
+                   (o .:? "readGroupSetId") <*> (o .:? "datasetId") <*>
+                     (o .:? "sourceUris" .!= mempty))
+
+instance ToJSON CallReadGroupSetsRequest where
+        toJSON CallReadGroupSetsRequest{..}
+          = object
+              (catMaybes
+                 [("readGroupSetId" .=) <$> _crgsrReadGroupSetId,
+                  ("datasetId" .=) <$> _crgsrDatasetId,
+                  ("sourceUris" .=) <$> _crgsrSourceUris])
+
 -- | The read group set call response.
 --
 -- /See:/ 'callReadGroupSetsResponse' smart constructor.
@@ -625,6 +821,16 @@ callReadGroupSetsResponse =
 crgsrJobId :: Lens' CallReadGroupSetsResponse (Maybe Text)
 crgsrJobId
   = lens _crgsrJobId (\ s a -> s{_crgsrJobId = a})
+
+instance FromJSON CallReadGroupSetsResponse where
+        parseJSON
+          = withObject "CallReadGroupSetsResponse"
+              (\ o ->
+                 CallReadGroupSetsResponse <$> (o .:? "jobId"))
+
+instance ToJSON CallReadGroupSetsResponse where
+        toJSON CallReadGroupSetsResponse{..}
+          = object (catMaybes [("jobId" .=) <$> _crgsrJobId])
 
 -- | A call set is a collection of variant calls, typically for one sample.
 -- It belongs to a variant set.
@@ -696,6 +902,26 @@ csVariantSetIds
 csInfo :: Lens' CallSet (Maybe CallSetInfo)
 csInfo = lens _csInfo (\ s a -> s{_csInfo = a})
 
+instance FromJSON CallSet where
+        parseJSON
+          = withObject "CallSet"
+              (\ o ->
+                 CallSet <$>
+                   (o .:? "created") <*> (o .:? "name") <*> (o .:? "id")
+                     <*> (o .:? "sampleId")
+                     <*> (o .:? "variantSetIds" .!= mempty)
+                     <*> (o .:? "info"))
+
+instance ToJSON CallSet where
+        toJSON CallSet{..}
+          = object
+              (catMaybes
+                 [("created" .=) <$> _csCreated,
+                  ("name" .=) <$> _csName, ("id" .=) <$> _csId,
+                  ("sampleId" .=) <$> _csSampleId,
+                  ("variantSetIds" .=) <$> _csVariantSetIds,
+                  ("info" .=) <$> _csInfo])
+
 -- | A string which maps to an array of values.
 --
 -- /See:/ 'callSetInfo' smart constructor.
@@ -708,6 +934,13 @@ data CallSetInfo =
 callSetInfo
     :: CallSetInfo
 callSetInfo = CallSetInfo
+
+instance FromJSON CallSetInfo where
+        parseJSON
+          = withObject "CallSetInfo" (\ o -> pure CallSetInfo)
+
+instance ToJSON CallSetInfo where
+        toJSON = const (Object mempty)
 
 -- | A single CIGAR operation.
 --
@@ -754,6 +987,22 @@ cuReferenceSequence
   = lens _cuReferenceSequence
       (\ s a -> s{_cuReferenceSequence = a})
 
+instance FromJSON CigarUnit where
+        parseJSON
+          = withObject "CigarUnit"
+              (\ o ->
+                 CigarUnit <$>
+                   (o .:? "operation") <*> (o .:? "operationLength") <*>
+                     (o .:? "referenceSequence"))
+
+instance ToJSON CigarUnit where
+        toJSON CigarUnit{..}
+          = object
+              (catMaybes
+                 [("operation" .=) <$> _cuOperation,
+                  ("operationLength" .=) <$> _cuOperationLength,
+                  ("referenceSequence" .=) <$> _cuReferenceSequence])
+
 -- | A bucket over which read coverage has been precomputed. A bucket
 -- corresponds to a specific range of the reference sequence.
 --
@@ -788,6 +1037,20 @@ cbMeanCoverage :: Lens' CoverageBucket (Maybe Float)
 cbMeanCoverage
   = lens _cbMeanCoverage
       (\ s a -> s{_cbMeanCoverage = a})
+
+instance FromJSON CoverageBucket where
+        parseJSON
+          = withObject "CoverageBucket"
+              (\ o ->
+                 CoverageBucket <$>
+                   (o .:? "range") <*> (o .:? "meanCoverage"))
+
+instance ToJSON CoverageBucket where
+        toJSON CoverageBucket{..}
+          = object
+              (catMaybes
+                 [("range" .=) <$> _cbRange,
+                  ("meanCoverage" .=) <$> _cbMeanCoverage])
 
 -- | A Dataset is a collection of genomic data.
 --
@@ -849,6 +1112,25 @@ dId = lens _dId (\ s a -> s{_dId = a})
 dCreateTime :: Lens' Dataset (Maybe Int64)
 dCreateTime
   = lens _dCreateTime (\ s a -> s{_dCreateTime = a})
+
+instance FromJSON Dataset where
+        parseJSON
+          = withObject "Dataset"
+              (\ o ->
+                 Dataset <$>
+                   (o .:? "isPublic") <*> (o .:? "projectNumber") <*>
+                     (o .:? "name")
+                     <*> (o .:? "id")
+                     <*> (o .:? "createTime"))
+
+instance ToJSON Dataset where
+        toJSON Dataset{..}
+          = object
+              (catMaybes
+                 [("isPublic" .=) <$> _dIsPublic,
+                  ("projectNumber" .=) <$> _dProjectNumber,
+                  ("name" .=) <$> _dName, ("id" .=) <$> _dId,
+                  ("createTime" .=) <$> _dCreateTime])
 
 -- | The job creation request.
 --
@@ -938,6 +1220,28 @@ ecjrCallVariants
   = lens _ecjrCallVariants
       (\ s a -> s{_ecjrCallVariants = a})
 
+instance FromJSON ExperimentalCreateJobRequest where
+        parseJSON
+          = withObject "ExperimentalCreateJobRequest"
+              (\ o ->
+                 ExperimentalCreateJobRequest <$>
+                   (o .:? "gcsOutputPath") <*> (o .:? "projectNumber")
+                     <*> (o .:? "align")
+                     <*> (o .:? "sourceUris" .!= mempty)
+                     <*> (o .:? "pairedSourceUris" .!= mempty)
+                     <*> (o .:? "callVariants"))
+
+instance ToJSON ExperimentalCreateJobRequest where
+        toJSON ExperimentalCreateJobRequest{..}
+          = object
+              (catMaybes
+                 [("gcsOutputPath" .=) <$> _ecjrGcsOutputPath,
+                  ("projectNumber" .=) <$> _ecjrProjectNumber,
+                  ("align" .=) <$> _ecjrAlign,
+                  ("sourceUris" .=) <$> _ecjrSourceUris,
+                  ("pairedSourceUris" .=) <$> _ecjrPairedSourceUris,
+                  ("callVariants" .=) <$> _ecjrCallVariants])
+
 -- | The job creation response.
 --
 -- /See:/ 'experimentalCreateJobResponse' smart constructor.
@@ -961,6 +1265,16 @@ experimentalCreateJobResponse =
 ecjrJobId :: Lens' ExperimentalCreateJobResponse (Maybe Text)
 ecjrJobId
   = lens _ecjrJobId (\ s a -> s{_ecjrJobId = a})
+
+instance FromJSON ExperimentalCreateJobResponse where
+        parseJSON
+          = withObject "ExperimentalCreateJobResponse"
+              (\ o ->
+                 ExperimentalCreateJobResponse <$> (o .:? "jobId"))
+
+instance ToJSON ExperimentalCreateJobResponse where
+        toJSON ExperimentalCreateJobResponse{..}
+          = object (catMaybes [("jobId" .=) <$> _ecjrJobId])
 
 -- | The read group set export request.
 --
@@ -1026,6 +1340,25 @@ ergsrReadGroupSetIds
       . _Default
       . _Coerce
 
+instance FromJSON ExportReadGroupSetsRequest where
+        parseJSON
+          = withObject "ExportReadGroupSetsRequest"
+              (\ o ->
+                 ExportReadGroupSetsRequest <$>
+                   (o .:? "referenceNames" .!= mempty) <*>
+                     (o .:? "projectNumber")
+                     <*> (o .:? "exportUri")
+                     <*> (o .:? "readGroupSetIds" .!= mempty))
+
+instance ToJSON ExportReadGroupSetsRequest where
+        toJSON ExportReadGroupSetsRequest{..}
+          = object
+              (catMaybes
+                 [("referenceNames" .=) <$> _ergsrReferenceNames,
+                  ("projectNumber" .=) <$> _ergsrProjectNumber,
+                  ("exportUri" .=) <$> _ergsrExportUri,
+                  ("readGroupSetIds" .=) <$> _ergsrReadGroupSetIds])
+
 -- | The read group set export response.
 --
 -- /See:/ 'exportReadGroupSetsResponse' smart constructor.
@@ -1049,6 +1382,16 @@ exportReadGroupSetsResponse =
 ergsrJobId :: Lens' ExportReadGroupSetsResponse (Maybe Text)
 ergsrJobId
   = lens _ergsrJobId (\ s a -> s{_ergsrJobId = a})
+
+instance FromJSON ExportReadGroupSetsResponse where
+        parseJSON
+          = withObject "ExportReadGroupSetsResponse"
+              (\ o ->
+                 ExportReadGroupSetsResponse <$> (o .:? "jobId"))
+
+instance ToJSON ExportReadGroupSetsResponse where
+        toJSON ExportReadGroupSetsResponse{..}
+          = object (catMaybes [("jobId" .=) <$> _ergsrJobId])
 
 -- | The variant data export request.
 --
@@ -1122,6 +1465,26 @@ evsrCallSetIds
       . _Default
       . _Coerce
 
+instance FromJSON ExportVariantSetRequest where
+        parseJSON
+          = withObject "ExportVariantSetRequest"
+              (\ o ->
+                 ExportVariantSetRequest <$>
+                   (o .:? "bigqueryDataset") <*> (o .:? "bigqueryTable")
+                     <*> (o .:? "format")
+                     <*> (o .:? "projectNumber")
+                     <*> (o .:? "callSetIds" .!= mempty))
+
+instance ToJSON ExportVariantSetRequest where
+        toJSON ExportVariantSetRequest{..}
+          = object
+              (catMaybes
+                 [("bigqueryDataset" .=) <$> _evsrBigqueryDataset,
+                  ("bigqueryTable" .=) <$> _evsrBigqueryTable,
+                  ("format" .=) <$> _evsrFormat,
+                  ("projectNumber" .=) <$> _evsrProjectNumber,
+                  ("callSetIds" .=) <$> _evsrCallSetIds])
+
 -- | The variant data export response.
 --
 -- /See:/ 'exportVariantSetResponse' smart constructor.
@@ -1145,6 +1508,15 @@ exportVariantSetResponse =
 evsrJobId :: Lens' ExportVariantSetResponse (Maybe Text)
 evsrJobId
   = lens _evsrJobId (\ s a -> s{_evsrJobId = a})
+
+instance FromJSON ExportVariantSetResponse where
+        parseJSON
+          = withObject "ExportVariantSetResponse"
+              (\ o -> ExportVariantSetResponse <$> (o .:? "jobId"))
+
+instance ToJSON ExportVariantSetResponse where
+        toJSON ExportVariantSetResponse{..}
+          = object (catMaybes [("jobId" .=) <$> _evsrJobId])
 
 -- |
 --
@@ -1177,6 +1549,19 @@ eiSourceName
 -- | The id used by the source of this data.
 eiId :: Lens' ExternalId (Maybe Text)
 eiId = lens _eiId (\ s a -> s{_eiId = a})
+
+instance FromJSON ExternalId where
+        parseJSON
+          = withObject "ExternalId"
+              (\ o ->
+                 ExternalId <$> (o .:? "sourceName") <*> (o .:? "id"))
+
+instance ToJSON ExternalId where
+        toJSON ExternalId{..}
+          = object
+              (catMaybes
+                 [("sourceName" .=) <$> _eiSourceName,
+                  ("id" .=) <$> _eiId])
 
 --
 -- /See:/ 'fastqMetadata' smart constructor.
@@ -1243,6 +1628,26 @@ fmSampleName :: Lens' FastqMetadata (Maybe Text)
 fmSampleName
   = lens _fmSampleName (\ s a -> s{_fmSampleName = a})
 
+instance FromJSON FastqMetadata where
+        parseJSON
+          = withObject "FastqMetadata"
+              (\ o ->
+                 FastqMetadata <$>
+                   (o .:? "platformUnit") <*> (o .:? "readGroupName")
+                     <*> (o .:? "libraryName")
+                     <*> (o .:? "platformName")
+                     <*> (o .:? "sampleName"))
+
+instance ToJSON FastqMetadata where
+        toJSON FastqMetadata{..}
+          = object
+              (catMaybes
+                 [("platformUnit" .=) <$> _fmPlatformUnit,
+                  ("readGroupName" .=) <$> _fmReadGroupName,
+                  ("libraryName" .=) <$> _fmLibraryName,
+                  ("platformName" .=) <$> _fmPlatformName,
+                  ("sampleName" .=) <$> _fmSampleName])
+
 -- | The read group set import request.
 --
 -- /See:/ 'importReadGroupSetsRequest' smart constructor.
@@ -1306,6 +1711,25 @@ irgsrPartitionStrategy
   = lens _irgsrPartitionStrategy
       (\ s a -> s{_irgsrPartitionStrategy = a})
 
+instance FromJSON ImportReadGroupSetsRequest where
+        parseJSON
+          = withObject "ImportReadGroupSetsRequest"
+              (\ o ->
+                 ImportReadGroupSetsRequest <$>
+                   (o .:? "referenceSetId") <*> (o .:? "datasetId") <*>
+                     (o .:? "sourceUris" .!= mempty)
+                     <*> (o .:? "partitionStrategy"))
+
+instance ToJSON ImportReadGroupSetsRequest where
+        toJSON ImportReadGroupSetsRequest{..}
+          = object
+              (catMaybes
+                 [("referenceSetId" .=) <$> _irgsrReferenceSetId,
+                  ("datasetId" .=) <$> _irgsrDatasetId,
+                  ("sourceUris" .=) <$> _irgsrSourceUris,
+                  ("partitionStrategy" .=) <$>
+                    _irgsrPartitionStrategy])
+
 -- | The read group set import response.
 --
 -- /See:/ 'importReadGroupSetsResponse' smart constructor.
@@ -1329,6 +1753,16 @@ importReadGroupSetsResponse =
 irgsrJobId :: Lens' ImportReadGroupSetsResponse (Maybe Text)
 irgsrJobId
   = lens _irgsrJobId (\ s a -> s{_irgsrJobId = a})
+
+instance FromJSON ImportReadGroupSetsResponse where
+        parseJSON
+          = withObject "ImportReadGroupSetsResponse"
+              (\ o ->
+                 ImportReadGroupSetsResponse <$> (o .:? "jobId"))
+
+instance ToJSON ImportReadGroupSetsResponse where
+        toJSON ImportReadGroupSetsResponse{..}
+          = object (catMaybes [("jobId" .=) <$> _irgsrJobId])
 
 -- | The variant data import request.
 --
@@ -1385,6 +1819,24 @@ ivrSourceUris
       . _Default
       . _Coerce
 
+instance FromJSON ImportVariantsRequest where
+        parseJSON
+          = withObject "ImportVariantsRequest"
+              (\ o ->
+                 ImportVariantsRequest <$>
+                   (o .:? "format") <*>
+                     (o .:? "normalizeReferenceNames")
+                     <*> (o .:? "sourceUris" .!= mempty))
+
+instance ToJSON ImportVariantsRequest where
+        toJSON ImportVariantsRequest{..}
+          = object
+              (catMaybes
+                 [("format" .=) <$> _ivrFormat,
+                  ("normalizeReferenceNames" .=) <$>
+                    _ivrNormalizeReferenceNames,
+                  ("sourceUris" .=) <$> _ivrSourceUris])
+
 -- | The variant data import response.
 --
 -- /See:/ 'importVariantsResponse' smart constructor.
@@ -1407,6 +1859,15 @@ importVariantsResponse =
 -- | A job ID that can be used to get status information.
 ivrJobId :: Lens' ImportVariantsResponse (Maybe Text)
 ivrJobId = lens _ivrJobId (\ s a -> s{_ivrJobId = a})
+
+instance FromJSON ImportVariantsResponse where
+        parseJSON
+          = withObject "ImportVariantsResponse"
+              (\ o -> ImportVariantsResponse <$> (o .:? "jobId"))
+
+instance ToJSON ImportVariantsResponse where
+        toJSON ImportVariantsResponse{..}
+          = object (catMaybes [("jobId" .=) <$> _ivrJobId])
 
 -- | Wrapper message for \`int32\`. The JSON representation for
 -- \`Int32Value\` is JSON number.
@@ -1431,6 +1892,15 @@ int32Value =
 -- | The int32 value.
 ivValue :: Lens' Int32Value (Maybe Int32)
 ivValue = lens _ivValue (\ s a -> s{_ivValue = a})
+
+instance FromJSON Int32Value where
+        parseJSON
+          = withObject "Int32Value"
+              (\ o -> Int32Value <$> (o .:? "value"))
+
+instance ToJSON Int32Value where
+        toJSON Int32Value{..}
+          = object (catMaybes [("value" .=) <$> _ivValue])
 
 -- | Describes an interleaved FASTQ file source for alignment.
 --
@@ -1470,6 +1940,21 @@ ifsSourceUris
       (\ s a -> s{_ifsSourceUris = a})
       . _Default
       . _Coerce
+
+instance FromJSON InterleavedFastqSource where
+        parseJSON
+          = withObject "InterleavedFastqSource"
+              (\ o ->
+                 InterleavedFastqSource <$>
+                   (o .:? "metadata") <*>
+                     (o .:? "sourceUris" .!= mempty))
+
+instance ToJSON InterleavedFastqSource where
+        toJSON InterleavedFastqSource{..}
+          = object
+              (catMaybes
+                 [("metadata" .=) <$> _ifsMetadata,
+                  ("sourceUris" .=) <$> _ifsSourceUris])
 
 -- | A Job represents an ongoing process that can be monitored for status
 -- information.
@@ -1577,6 +2062,33 @@ jobRequest :: Lens' Job (Maybe (Maybe JobRequest))
 jobRequest
   = lens _jobRequest (\ s a -> s{_jobRequest = a})
 
+instance FromJSON Job where
+        parseJSON
+          = withObject "Job"
+              (\ o ->
+                 Job <$>
+                   (o .:? "detailedStatus") <*> (o .:? "status") <*>
+                     (o .:? "created")
+                     <*> (o .:? "projectNumber")
+                     <*> (o .:? "warnings" .!= mempty)
+                     <*> (o .:? "importedIds" .!= mempty)
+                     <*> (o .:? "id")
+                     <*> (o .:? "errors" .!= mempty)
+                     <*> (o .:? "request"))
+
+instance ToJSON Job where
+        toJSON Job{..}
+          = object
+              (catMaybes
+                 [("detailedStatus" .=) <$> _jobDetailedStatus,
+                  ("status" .=) <$> _jobStatus,
+                  ("created" .=) <$> _jobCreated,
+                  ("projectNumber" .=) <$> _jobProjectNumber,
+                  ("warnings" .=) <$> _jobWarnings,
+                  ("importedIds" .=) <$> _jobImportedIds,
+                  ("id" .=) <$> _jobId, ("errors" .=) <$> _jobErrors,
+                  ("request" .=) <$> _jobRequest])
+
 -- | A summary representation of the service request that spawned the job.
 --
 -- /See:/ 'jobRequest' smart constructor.
@@ -1625,6 +2137,23 @@ jrSource
 jrType :: Lens' JobRequest (Maybe JobRequestType)
 jrType = lens _jrType (\ s a -> s{_jrType = a})
 
+instance FromJSON JobRequest where
+        parseJSON
+          = withObject "JobRequest"
+              (\ o ->
+                 JobRequest <$>
+                   (o .:? "destination" .!= mempty) <*>
+                     (o .:? "source" .!= mempty)
+                     <*> (o .:? "type"))
+
+instance ToJSON JobRequest where
+        toJSON JobRequest{..}
+          = object
+              (catMaybes
+                 [("destination" .=) <$> _jrDestination,
+                  ("source" .=) <$> _jrSource,
+                  ("type" .=) <$> _jrType])
+
 -- | Used to hold basic key value information.
 --
 -- /See:/ 'keyValue' smart constructor.
@@ -1657,6 +2186,19 @@ kvValue
 -- | A string which maps to an array of values.
 kvKey :: Lens' KeyValue (Maybe Text)
 kvKey = lens _kvKey (\ s a -> s{_kvKey = a})
+
+instance FromJSON KeyValue where
+        parseJSON
+          = withObject "KeyValue"
+              (\ o ->
+                 KeyValue <$>
+                   (o .:? "value" .!= mempty) <*> (o .:? "key"))
+
+instance ToJSON KeyValue where
+        toJSON KeyValue{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _kvValue, ("key" .=) <$> _kvKey])
 
 -- | A linear alignment can be represented by one CIGAR string. Describes the
 -- mapped position and local alignment of the read to the reference.
@@ -1705,6 +2247,23 @@ laPosition :: Lens' LinearAlignment (Maybe (Maybe Position))
 laPosition
   = lens _laPosition (\ s a -> s{_laPosition = a})
 
+instance FromJSON LinearAlignment where
+        parseJSON
+          = withObject "LinearAlignment"
+              (\ o ->
+                 LinearAlignment <$>
+                   (o .:? "cigar" .!= mempty) <*>
+                     (o .:? "mappingQuality")
+                     <*> (o .:? "position"))
+
+instance ToJSON LinearAlignment where
+        toJSON LinearAlignment{..}
+          = object
+              (catMaybes
+                 [("cigar" .=) <$> _laCigar,
+                  ("mappingQuality" .=) <$> _laMappingQuality,
+                  ("position" .=) <$> _laPosition])
+
 --
 -- /See:/ 'listBasesResponse' smart constructor.
 data ListBasesResponse = ListBasesResponse
@@ -1751,6 +2310,22 @@ lbrOffset
 lbrSequence :: Lens' ListBasesResponse (Maybe Text)
 lbrSequence
   = lens _lbrSequence (\ s a -> s{_lbrSequence = a})
+
+instance FromJSON ListBasesResponse where
+        parseJSON
+          = withObject "ListBasesResponse"
+              (\ o ->
+                 ListBasesResponse <$>
+                   (o .:? "nextPageToken") <*> (o .:? "offset") <*>
+                     (o .:? "sequence"))
+
+instance ToJSON ListBasesResponse where
+        toJSON ListBasesResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lbrNextPageToken,
+                  ("offset" .=) <$> _lbrOffset,
+                  ("sequence" .=) <$> _lbrSequence])
 
 --
 -- /See:/ 'listCoverageBucketsResponse' smart constructor.
@@ -1807,6 +2382,22 @@ lcbrCoverageBuckets
       . _Default
       . _Coerce
 
+instance FromJSON ListCoverageBucketsResponse where
+        parseJSON
+          = withObject "ListCoverageBucketsResponse"
+              (\ o ->
+                 ListCoverageBucketsResponse <$>
+                   (o .:? "nextPageToken") <*> (o .:? "bucketWidth") <*>
+                     (o .:? "coverageBuckets" .!= mempty))
+
+instance ToJSON ListCoverageBucketsResponse where
+        toJSON ListCoverageBucketsResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lcbrNextPageToken,
+                  ("bucketWidth" .=) <$> _lcbrBucketWidth,
+                  ("coverageBuckets" .=) <$> _lcbrCoverageBuckets])
+
 -- | The dataset list response.
 --
 -- /See:/ 'listDatasetsResponse' smart constructor.
@@ -1846,6 +2437,21 @@ ldrDatasets
       _Default
       . _Coerce
 
+instance FromJSON ListDatasetsResponse where
+        parseJSON
+          = withObject "ListDatasetsResponse"
+              (\ o ->
+                 ListDatasetsResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "datasets" .!= mempty))
+
+instance ToJSON ListDatasetsResponse where
+        toJSON ListDatasetsResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _ldrNextPageToken,
+                  ("datasets" .=) <$> _ldrDatasets])
+
 --
 -- /See:/ 'mergeVariantsRequest' smart constructor.
 newtype MergeVariantsRequest = MergeVariantsRequest
@@ -1870,6 +2476,18 @@ mvrVariants
   = lens _mvrVariants (\ s a -> s{_mvrVariants = a}) .
       _Default
       . _Coerce
+
+instance FromJSON MergeVariantsRequest where
+        parseJSON
+          = withObject "MergeVariantsRequest"
+              (\ o ->
+                 MergeVariantsRequest <$>
+                   (o .:? "variants" .!= mempty))
+
+instance ToJSON MergeVariantsRequest where
+        toJSON MergeVariantsRequest{..}
+          = object
+              (catMaybes [("variants" .=) <$> _mvrVariants])
 
 -- | Metadata describes a single piece of variant call metadata. These data
 -- include a top level key and either a single value string (value) or a
@@ -1949,6 +2567,27 @@ mDescription
 mInfo :: Lens' Metadata (Maybe MetadataInfo)
 mInfo = lens _mInfo (\ s a -> s{_mInfo = a})
 
+instance FromJSON Metadata where
+        parseJSON
+          = withObject "Metadata"
+              (\ o ->
+                 Metadata <$>
+                   (o .:? "value") <*> (o .:? "key") <*> (o .:? "id")
+                     <*> (o .:? "type")
+                     <*> (o .:? "number")
+                     <*> (o .:? "description")
+                     <*> (o .:? "info"))
+
+instance ToJSON Metadata where
+        toJSON Metadata{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _mValue, ("key" .=) <$> _mKey,
+                  ("id" .=) <$> _mId, ("type" .=) <$> _mType,
+                  ("number" .=) <$> _mNumber,
+                  ("description" .=) <$> _mDescription,
+                  ("info" .=) <$> _mInfo])
+
 -- | A string which maps to an array of values.
 --
 -- /See:/ 'metadataInfo' smart constructor.
@@ -1961,6 +2600,14 @@ data MetadataInfo =
 metadataInfo
     :: MetadataInfo
 metadataInfo = MetadataInfo
+
+instance FromJSON MetadataInfo where
+        parseJSON
+          = withObject "MetadataInfo"
+              (\ o -> pure MetadataInfo)
+
+instance ToJSON MetadataInfo where
+        toJSON = const (Object mempty)
 
 -- | Describes a paired-end FASTQ file source for alignment.
 --
@@ -2021,6 +2668,23 @@ pfsSecondSourceUris
       . _Default
       . _Coerce
 
+instance FromJSON PairedFastqSource where
+        parseJSON
+          = withObject "PairedFastqSource"
+              (\ o ->
+                 PairedFastqSource <$>
+                   (o .:? "firstSourceUris" .!= mempty) <*>
+                     (o .:? "metadata")
+                     <*> (o .:? "secondSourceUris" .!= mempty))
+
+instance ToJSON PairedFastqSource where
+        toJSON PairedFastqSource{..}
+          = object
+              (catMaybes
+                 [("firstSourceUris" .=) <$> _pfsFirstSourceUris,
+                  ("metadata" .=) <$> _pfsMetadata,
+                  ("secondSourceUris" .=) <$> _pfsSecondSourceUris])
+
 -- | An abstraction for referring to a genomic position, in relation to some
 -- already known reference. For now, represents a genomic position as a
 -- reference name, a base number on that reference (0-based), and a
@@ -2069,6 +2733,22 @@ pReferenceName
 pPosition :: Lens' Position (Maybe Int64)
 pPosition
   = lens _pPosition (\ s a -> s{_pPosition = a})
+
+instance FromJSON Position where
+        parseJSON
+          = withObject "Position"
+              (\ o ->
+                 Position <$>
+                   (o .:? "reverseStrand") <*> (o .:? "referenceName")
+                     <*> (o .:? "position"))
+
+instance ToJSON Position where
+        toJSON Position{..}
+          = object
+              (catMaybes
+                 [("reverseStrand" .=) <$> _pReverseStrand,
+                  ("referenceName" .=) <$> _pReferenceName,
+                  ("position" .=) <$> _pPosition])
 
 -- | A 0-based half-open genomic coordinate range for search requests.
 --
@@ -2128,6 +2808,24 @@ qrReferenceName
 qrEnd :: Lens' QueryRange (Maybe Int64)
 qrEnd = lens _qrEnd (\ s a -> s{_qrEnd = a})
 
+instance FromJSON QueryRange where
+        parseJSON
+          = withObject "QueryRange"
+              (\ o ->
+                 QueryRange <$>
+                   (o .:? "start") <*> (o .:? "referenceId") <*>
+                     (o .:? "referenceName")
+                     <*> (o .:? "end"))
+
+instance ToJSON QueryRange where
+        toJSON QueryRange{..}
+          = object
+              (catMaybes
+                 [("start" .=) <$> _qrStart,
+                  ("referenceId" .=) <$> _qrReferenceId,
+                  ("referenceName" .=) <$> _qrReferenceName,
+                  ("end" .=) <$> _qrEnd])
+
 -- | A 0-based half-open genomic coordinate range over a reference sequence.
 --
 -- /See:/ 'range' smart constructor.
@@ -2170,6 +2868,22 @@ rReferenceName
 -- specified, referenceName must also be specified.
 rEnd :: Lens' Range (Maybe Int64)
 rEnd = lens _rEnd (\ s a -> s{_rEnd = a})
+
+instance FromJSON Range where
+        parseJSON
+          = withObject "Range"
+              (\ o ->
+                 Range <$>
+                   (o .:? "start") <*> (o .:? "referenceName") <*>
+                     (o .:? "end"))
+
+instance ToJSON Range where
+        toJSON Range{..}
+          = object
+              (catMaybes
+                 [("start" .=) <$> _rStart,
+                  ("referenceName" .=) <$> _rReferenceName,
+                  ("end" .=) <$> _rEnd])
 
 -- | A 0-based half-open genomic coordinate range over a reference sequence,
 -- for representing the position of a genomic resource.
@@ -2235,6 +2949,26 @@ rpReferenceName
 -- | The end position of the range on the reference, 0-based exclusive.
 rpEnd :: Lens' RangePosition (Maybe Int64)
 rpEnd = lens _rpEnd (\ s a -> s{_rpEnd = a})
+
+instance FromJSON RangePosition where
+        parseJSON
+          = withObject "RangePosition"
+              (\ o ->
+                 RangePosition <$>
+                   (o .:? "start") <*> (o .:? "reverseStrand") <*>
+                     (o .:? "referenceId")
+                     <*> (o .:? "referenceName")
+                     <*> (o .:? "end"))
+
+instance ToJSON RangePosition where
+        toJSON RangePosition{..}
+          = object
+              (catMaybes
+                 [("start" .=) <$> _rpStart,
+                  ("reverseStrand" .=) <$> _rpReverseStrand,
+                  ("referenceId" .=) <$> _rpReferenceId,
+                  ("referenceName" .=) <$> _rpReferenceName,
+                  ("end" .=) <$> _rpEnd])
 
 -- | A read alignment describes a linear alignment of a string of DNA to a
 -- reference sequence, in addition to metadata about the fragment (the
@@ -2474,6 +3208,53 @@ rAlignedQuality
       . _Default
       . _Coerce
 
+instance FromJSON Read where
+        parseJSON
+          = withObject "Read"
+              (\ o ->
+                 Read <$>
+                   (o .:? "fragmentLength") <*>
+                     (o .:? "duplicateFragment")
+                     <*> (o .:? "readGroupSetId")
+                     <*> (o .:? "nextMatePosition")
+                     <*> (o .:? "failedVendorQualityChecks")
+                     <*> (o .:? "alignment")
+                     <*> (o .:? "fragmentName")
+                     <*> (o .:? "numberReads")
+                     <*> (o .:? "id")
+                     <*> (o .:? "secondaryAlignment")
+                     <*> (o .:? "readGroupId")
+                     <*> (o .:? "supplementaryAlignment")
+                     <*> (o .:? "alignedSequence")
+                     <*> (o .:? "properPlacement")
+                     <*> (o .:? "info")
+                     <*> (o .:? "readNumber")
+                     <*> (o .:? "alignedQuality" .!= mempty))
+
+instance ToJSON Read where
+        toJSON Read{..}
+          = object
+              (catMaybes
+                 [("fragmentLength" .=) <$> _rFragmentLength,
+                  ("duplicateFragment" .=) <$> _rDuplicateFragment,
+                  ("readGroupSetId" .=) <$> _rReadGroupSetId,
+                  ("nextMatePosition" .=) <$> _rNextMatePosition,
+                  ("failedVendorQualityChecks" .=) <$>
+                    _rFailedVendorQualityChecks,
+                  ("alignment" .=) <$> _rAlignment,
+                  ("fragmentName" .=) <$> _rFragmentName,
+                  ("numberReads" .=) <$> _rNumberReads,
+                  ("id" .=) <$> _rId,
+                  ("secondaryAlignment" .=) <$> _rSecondaryAlignment,
+                  ("readGroupId" .=) <$> _rReadGroupId,
+                  ("supplementaryAlignment" .=) <$>
+                    _rSupplementaryAlignment,
+                  ("alignedSequence" .=) <$> _rAlignedSequence,
+                  ("properPlacement" .=) <$> _rProperPlacement,
+                  ("info" .=) <$> _rInfo,
+                  ("readNumber" .=) <$> _rReadNumber,
+                  ("alignedQuality" .=) <$> _rAlignedQuality])
+
 -- | A read group is all the data that\'s processed the same way by the
 -- sequencer.
 --
@@ -2592,6 +3373,37 @@ rgDescription
 rgInfo :: Lens' ReadGroup (Maybe ReadGroupInfo)
 rgInfo = lens _rgInfo (\ s a -> s{_rgInfo = a})
 
+instance FromJSON ReadGroup where
+        parseJSON
+          = withObject "ReadGroup"
+              (\ o ->
+                 ReadGroup <$>
+                   (o .:? "referenceSetId") <*>
+                     (o .:? "programs" .!= mempty)
+                     <*> (o .:? "experiment")
+                     <*> (o .:? "name")
+                     <*> (o .:? "datasetId")
+                     <*> (o .:? "id")
+                     <*> (o .:? "sampleId")
+                     <*> (o .:? "predictedInsertSize")
+                     <*> (o .:? "description")
+                     <*> (o .:? "info"))
+
+instance ToJSON ReadGroup where
+        toJSON ReadGroup{..}
+          = object
+              (catMaybes
+                 [("referenceSetId" .=) <$> _rgReferenceSetId,
+                  ("programs" .=) <$> _rgPrograms,
+                  ("experiment" .=) <$> _rgExperiment,
+                  ("name" .=) <$> _rgName,
+                  ("datasetId" .=) <$> _rgDatasetId,
+                  ("id" .=) <$> _rgId, ("sampleId" .=) <$> _rgSampleId,
+                  ("predictedInsertSize" .=) <$>
+                    _rgPredictedInsertSize,
+                  ("description" .=) <$> _rgDescription,
+                  ("info" .=) <$> _rgInfo])
+
 --
 -- /See:/ 'readGroupExperiment' smart constructor.
 data ReadGroupExperiment = ReadGroupExperiment
@@ -2650,6 +3462,24 @@ rgeLibraryId :: Lens' ReadGroupExperiment (Maybe Text)
 rgeLibraryId
   = lens _rgeLibraryId (\ s a -> s{_rgeLibraryId = a})
 
+instance FromJSON ReadGroupExperiment where
+        parseJSON
+          = withObject "ReadGroupExperiment"
+              (\ o ->
+                 ReadGroupExperiment <$>
+                   (o .:? "instrumentModel") <*> (o .:? "platformUnit")
+                     <*> (o .:? "sequencingCenter")
+                     <*> (o .:? "libraryId"))
+
+instance ToJSON ReadGroupExperiment where
+        toJSON ReadGroupExperiment{..}
+          = object
+              (catMaybes
+                 [("instrumentModel" .=) <$> _rgeInstrumentModel,
+                  ("platformUnit" .=) <$> _rgePlatformUnit,
+                  ("sequencingCenter" .=) <$> _rgeSequencingCenter,
+                  ("libraryId" .=) <$> _rgeLibraryId])
+
 -- | A string which maps to an array of values.
 --
 -- /See:/ 'readGroupInfo' smart constructor.
@@ -2662,6 +3492,14 @@ data ReadGroupInfo =
 readGroupInfo
     :: ReadGroupInfo
 readGroupInfo = ReadGroupInfo
+
+instance FromJSON ReadGroupInfo where
+        parseJSON
+          = withObject "ReadGroupInfo"
+              (\ o -> pure ReadGroupInfo)
+
+instance ToJSON ReadGroupInfo where
+        toJSON = const (Object mempty)
 
 --
 -- /See:/ 'readGroupProgram' smart constructor.
@@ -2722,6 +3560,25 @@ rgpCommandLine :: Lens' ReadGroupProgram (Maybe Text)
 rgpCommandLine
   = lens _rgpCommandLine
       (\ s a -> s{_rgpCommandLine = a})
+
+instance FromJSON ReadGroupProgram where
+        parseJSON
+          = withObject "ReadGroupProgram"
+              (\ o ->
+                 ReadGroupProgram <$>
+                   (o .:? "prevProgramId") <*> (o .:? "name") <*>
+                     (o .:? "version")
+                     <*> (o .:? "id")
+                     <*> (o .:? "commandLine"))
+
+instance ToJSON ReadGroupProgram where
+        toJSON ReadGroupProgram{..}
+          = object
+              (catMaybes
+                 [("prevProgramId" .=) <$> _rgpPrevProgramId,
+                  ("name" .=) <$> _rgpName,
+                  ("version" .=) <$> _rgpVersion, ("id" .=) <$> _rgpId,
+                  ("commandLine" .=) <$> _rgpCommandLine])
 
 -- | A read group set is a logical collection of read groups, which are
 -- collections of reads produced by a sequencer. A read group set typically
@@ -2809,6 +3666,29 @@ rgsFilename :: Lens' ReadGroupSet (Maybe Text)
 rgsFilename
   = lens _rgsFilename (\ s a -> s{_rgsFilename = a})
 
+instance FromJSON ReadGroupSet where
+        parseJSON
+          = withObject "ReadGroupSet"
+              (\ o ->
+                 ReadGroupSet <$>
+                   (o .:? "referenceSetId") <*> (o .:? "name") <*>
+                     (o .:? "datasetId")
+                     <*> (o .:? "id")
+                     <*> (o .:? "info")
+                     <*> (o .:? "readGroups" .!= mempty)
+                     <*> (o .:? "filename"))
+
+instance ToJSON ReadGroupSet where
+        toJSON ReadGroupSet{..}
+          = object
+              (catMaybes
+                 [("referenceSetId" .=) <$> _rgsReferenceSetId,
+                  ("name" .=) <$> _rgsName,
+                  ("datasetId" .=) <$> _rgsDatasetId,
+                  ("id" .=) <$> _rgsId, ("info" .=) <$> _rgsInfo,
+                  ("readGroups" .=) <$> _rgsReadGroups,
+                  ("filename" .=) <$> _rgsFilename])
+
 -- | A string which maps to an array of values.
 --
 -- /See:/ 'readGroupSetInfo' smart constructor.
@@ -2822,6 +3702,14 @@ readGroupSetInfo
     :: ReadGroupSetInfo
 readGroupSetInfo = ReadGroupSetInfo
 
+instance FromJSON ReadGroupSetInfo where
+        parseJSON
+          = withObject "ReadGroupSetInfo"
+              (\ o -> pure ReadGroupSetInfo)
+
+instance ToJSON ReadGroupSetInfo where
+        toJSON = const (Object mempty)
+
 -- | A string which maps to an array of values.
 --
 -- /See:/ 'readInfo' smart constructor.
@@ -2834,6 +3722,13 @@ data ReadInfo =
 readInfo
     :: ReadInfo
 readInfo = ReadInfo
+
+instance FromJSON ReadInfo where
+        parseJSON
+          = withObject "ReadInfo" (\ o -> pure ReadInfo)
+
+instance ToJSON ReadInfo where
+        toJSON = const (Object mempty)
 
 -- | A reference is a canonical assembled DNA sequence, intended to act as a
 -- reference coordinate space for other genomic annotations. A single
@@ -2924,6 +3819,31 @@ refSourceURI :: Lens' Reference (Maybe Text)
 refSourceURI
   = lens _refSourceURI (\ s a -> s{_refSourceURI = a})
 
+instance FromJSON Reference where
+        parseJSON
+          = withObject "Reference"
+              (\ o ->
+                 Reference <$>
+                   (o .:? "length") <*>
+                     (o .:? "sourceAccessions" .!= mempty)
+                     <*> (o .:? "md5checksum")
+                     <*> (o .:? "name")
+                     <*> (o .:? "ncbiTaxonId")
+                     <*> (o .:? "id")
+                     <*> (o .:? "sourceURI"))
+
+instance ToJSON Reference where
+        toJSON Reference{..}
+          = object
+              (catMaybes
+                 [("length" .=) <$> _refLength,
+                  ("sourceAccessions" .=) <$> _refSourceAccessions,
+                  ("md5checksum" .=) <$> _refMd5checksum,
+                  ("name" .=) <$> _refName,
+                  ("ncbiTaxonId" .=) <$> _refNcbiTaxonId,
+                  ("id" .=) <$> _refId,
+                  ("sourceURI" .=) <$> _refSourceURI])
+
 -- | ReferenceBound records an upper bound for the starting coordinate of
 -- variants in a particular reference.
 --
@@ -2959,6 +3879,20 @@ rbReferenceName :: Lens' ReferenceBound (Maybe Text)
 rbReferenceName
   = lens _rbReferenceName
       (\ s a -> s{_rbReferenceName = a})
+
+instance FromJSON ReferenceBound where
+        parseJSON
+          = withObject "ReferenceBound"
+              (\ o ->
+                 ReferenceBound <$>
+                   (o .:? "upperBound") <*> (o .:? "referenceName"))
+
+instance ToJSON ReferenceBound where
+        toJSON ReferenceBound{..}
+          = object
+              (catMaybes
+                 [("upperBound" .=) <$> _rbUpperBound,
+                  ("referenceName" .=) <$> _rbReferenceName])
 
 -- | A reference set is a set of references which typically comprise a
 -- reference assembly for a species, such as GRCh38 which is representative
@@ -3069,6 +4003,33 @@ rsDescription
   = lens _rsDescription
       (\ s a -> s{_rsDescription = a})
 
+instance FromJSON ReferenceSet where
+        parseJSON
+          = withObject "ReferenceSet"
+              (\ o ->
+                 ReferenceSet <$>
+                   (o .:? "sourceAccessions" .!= mempty) <*>
+                     (o .:? "referenceIds" .!= mempty)
+                     <*> (o .:? "md5checksum")
+                     <*> (o .:? "ncbiTaxonId")
+                     <*> (o .:? "id")
+                     <*> (o .:? "assemblyId")
+                     <*> (o .:? "sourceURI")
+                     <*> (o .:? "description"))
+
+instance ToJSON ReferenceSet where
+        toJSON ReferenceSet{..}
+          = object
+              (catMaybes
+                 [("sourceAccessions" .=) <$> _rsSourceAccessions,
+                  ("referenceIds" .=) <$> _rsReferenceIds,
+                  ("md5checksum" .=) <$> _rsMd5checksum,
+                  ("ncbiTaxonId" .=) <$> _rsNcbiTaxonId,
+                  ("id" .=) <$> _rsId,
+                  ("assemblyId" .=) <$> _rsAssemblyId,
+                  ("sourceURI" .=) <$> _rsSourceURI,
+                  ("description" .=) <$> _rsDescription])
+
 --
 -- /See:/ 'searchAnnotationSetsRequest' smart constructor.
 data SearchAnnotationSetsRequest = SearchAnnotationSetsRequest
@@ -3150,6 +4111,29 @@ sasrPageSize :: Lens' SearchAnnotationSetsRequest (Maybe Int32)
 sasrPageSize
   = lens _sasrPageSize (\ s a -> s{_sasrPageSize = a})
 
+instance FromJSON SearchAnnotationSetsRequest where
+        parseJSON
+          = withObject "SearchAnnotationSetsRequest"
+              (\ o ->
+                 SearchAnnotationSetsRequest <$>
+                   (o .:? "referenceSetId") <*>
+                     (o .:? "types" .!= mempty)
+                     <*> (o .:? "datasetIds" .!= mempty)
+                     <*> (o .:? "name")
+                     <*> (o .:? "pageToken")
+                     <*> (o .:? "pageSize"))
+
+instance ToJSON SearchAnnotationSetsRequest where
+        toJSON SearchAnnotationSetsRequest{..}
+          = object
+              (catMaybes
+                 [("referenceSetId" .=) <$> _sasrReferenceSetId,
+                  ("types" .=) <$> _sasrTypes,
+                  ("datasetIds" .=) <$> _sasrDatasetIds,
+                  ("name" .=) <$> _sasrName,
+                  ("pageToken" .=) <$> _sasrPageToken,
+                  ("pageSize" .=) <$> _sasrPageSize])
+
 --
 -- /See:/ 'searchAnnotationSetsResponse' smart constructor.
 data SearchAnnotationSetsResponse = SearchAnnotationSetsResponse
@@ -3188,6 +4172,21 @@ sasrAnnotationSets
       (\ s a -> s{_sasrAnnotationSets = a})
       . _Default
       . _Coerce
+
+instance FromJSON SearchAnnotationSetsResponse where
+        parseJSON
+          = withObject "SearchAnnotationSetsResponse"
+              (\ o ->
+                 SearchAnnotationSetsResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "annotationSets" .!= mempty))
+
+instance ToJSON SearchAnnotationSetsResponse where
+        toJSON SearchAnnotationSetsResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _sasrNextPageToken,
+                  ("annotationSets" .=) <$> _sasrAnnotationSets])
 
 --
 -- /See:/ 'searchAnnotationsRequest' smart constructor.
@@ -3247,6 +4246,24 @@ sarPageSize :: Lens' SearchAnnotationsRequest (Maybe Int32)
 sarPageSize
   = lens _sarPageSize (\ s a -> s{_sarPageSize = a})
 
+instance FromJSON SearchAnnotationsRequest where
+        parseJSON
+          = withObject "SearchAnnotationsRequest"
+              (\ o ->
+                 SearchAnnotationsRequest <$>
+                   (o .:? "range") <*> (o .:? "pageToken") <*>
+                     (o .:? "annotationSetIds" .!= mempty)
+                     <*> (o .:? "pageSize"))
+
+instance ToJSON SearchAnnotationsRequest where
+        toJSON SearchAnnotationsRequest{..}
+          = object
+              (catMaybes
+                 [("range" .=) <$> _sarRange,
+                  ("pageToken" .=) <$> _sarPageToken,
+                  ("annotationSetIds" .=) <$> _sarAnnotationSetIds,
+                  ("pageSize" .=) <$> _sarPageSize])
+
 --
 -- /See:/ 'searchAnnotationsResponse' smart constructor.
 data SearchAnnotationsResponse = SearchAnnotationsResponse
@@ -3285,6 +4302,21 @@ sarNextPageToken :: Lens' SearchAnnotationsResponse (Maybe Text)
 sarNextPageToken
   = lens _sarNextPageToken
       (\ s a -> s{_sarNextPageToken = a})
+
+instance FromJSON SearchAnnotationsResponse where
+        parseJSON
+          = withObject "SearchAnnotationsResponse"
+              (\ o ->
+                 SearchAnnotationsResponse <$>
+                   (o .:? "annotations" .!= mempty) <*>
+                     (o .:? "nextPageToken"))
+
+instance ToJSON SearchAnnotationsResponse where
+        toJSON SearchAnnotationsResponse{..}
+          = object
+              (catMaybes
+                 [("annotations" .=) <$> _sarAnnotations,
+                  ("nextPageToken" .=) <$> _sarNextPageToken])
 
 -- | The call set search request.
 --
@@ -3345,6 +4377,24 @@ scsrPageSize :: Lens' SearchCallSetsRequest (Maybe Int32)
 scsrPageSize
   = lens _scsrPageSize (\ s a -> s{_scsrPageSize = a})
 
+instance FromJSON SearchCallSetsRequest where
+        parseJSON
+          = withObject "SearchCallSetsRequest"
+              (\ o ->
+                 SearchCallSetsRequest <$>
+                   (o .:? "name") <*> (o .:? "pageToken") <*>
+                     (o .:? "variantSetIds" .!= mempty)
+                     <*> (o .:? "pageSize"))
+
+instance ToJSON SearchCallSetsRequest where
+        toJSON SearchCallSetsRequest{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _scsrName,
+                  ("pageToken" .=) <$> _scsrPageToken,
+                  ("variantSetIds" .=) <$> _scsrVariantSetIds,
+                  ("pageSize" .=) <$> _scsrPageSize])
+
 -- | The call set search response.
 --
 -- /See:/ 'searchCallSetsResponse' smart constructor.
@@ -3383,6 +4433,21 @@ scsrCallSets
   = lens _scsrCallSets (\ s a -> s{_scsrCallSets = a})
       . _Default
       . _Coerce
+
+instance FromJSON SearchCallSetsResponse where
+        parseJSON
+          = withObject "SearchCallSetsResponse"
+              (\ o ->
+                 SearchCallSetsResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "callSets" .!= mempty))
+
+instance ToJSON SearchCallSetsResponse where
+        toJSON SearchCallSetsResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _scsrNextPageToken,
+                  ("callSets" .=) <$> _scsrCallSets])
 
 -- | The jobs search request.
 --
@@ -3464,6 +4529,29 @@ sjrCreatedBefore
   = lens _sjrCreatedBefore
       (\ s a -> s{_sjrCreatedBefore = a})
 
+instance FromJSON SearchJobsRequest where
+        parseJSON
+          = withObject "SearchJobsRequest"
+              (\ o ->
+                 SearchJobsRequest <$>
+                   (o .:? "createdAfter") <*>
+                     (o .:? "status" .!= mempty)
+                     <*> (o .:? "projectNumber")
+                     <*> (o .:? "pageToken")
+                     <*> (o .:? "pageSize")
+                     <*> (o .:? "createdBefore"))
+
+instance ToJSON SearchJobsRequest where
+        toJSON SearchJobsRequest{..}
+          = object
+              (catMaybes
+                 [("createdAfter" .=) <$> _sjrCreatedAfter,
+                  ("status" .=) <$> _sjrStatus,
+                  ("projectNumber" .=) <$> _sjrProjectNumber,
+                  ("pageToken" .=) <$> _sjrPageToken,
+                  ("pageSize" .=) <$> _sjrPageSize,
+                  ("createdBefore" .=) <$> _sjrCreatedBefore])
+
 -- | The job search response.
 --
 -- /See:/ 'searchJobsResponse' smart constructor.
@@ -3500,6 +4588,21 @@ sjrJobs :: Lens' SearchJobsResponse [Maybe Job]
 sjrJobs
   = lens _sjrJobs (\ s a -> s{_sjrJobs = a}) . _Default
       . _Coerce
+
+instance FromJSON SearchJobsResponse where
+        parseJSON
+          = withObject "SearchJobsResponse"
+              (\ o ->
+                 SearchJobsResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "jobs" .!= mempty))
+
+instance ToJSON SearchJobsResponse where
+        toJSON SearchJobsResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _sjrNextPageToken,
+                  ("jobs" .=) <$> _sjrJobs])
 
 -- | The read group set search request.
 --
@@ -3562,6 +4665,24 @@ srgsrPageSize
   = lens _srgsrPageSize
       (\ s a -> s{_srgsrPageSize = a})
 
+instance FromJSON SearchReadGroupSetsRequest where
+        parseJSON
+          = withObject "SearchReadGroupSetsRequest"
+              (\ o ->
+                 SearchReadGroupSetsRequest <$>
+                   (o .:? "datasetIds" .!= mempty) <*> (o .:? "name")
+                     <*> (o .:? "pageToken")
+                     <*> (o .:? "pageSize"))
+
+instance ToJSON SearchReadGroupSetsRequest where
+        toJSON SearchReadGroupSetsRequest{..}
+          = object
+              (catMaybes
+                 [("datasetIds" .=) <$> _srgsrDatasetIds,
+                  ("name" .=) <$> _srgsrName,
+                  ("pageToken" .=) <$> _srgsrPageToken,
+                  ("pageSize" .=) <$> _srgsrPageSize])
+
 -- | The read group set search response.
 --
 -- /See:/ 'searchReadGroupSetsResponse' smart constructor.
@@ -3601,6 +4722,21 @@ srgsrReadGroupSets
       (\ s a -> s{_srgsrReadGroupSets = a})
       . _Default
       . _Coerce
+
+instance FromJSON SearchReadGroupSetsResponse where
+        parseJSON
+          = withObject "SearchReadGroupSetsResponse"
+              (\ o ->
+                 SearchReadGroupSetsResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "readGroupSets" .!= mempty))
+
+instance ToJSON SearchReadGroupSetsResponse where
+        toJSON SearchReadGroupSetsResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _srgsrNextPageToken,
+                  ("readGroupSets" .=) <$> _srgsrReadGroupSets])
 
 -- | The read search request.
 --
@@ -3696,6 +4832,30 @@ sReadGroupSetIds
       . _Default
       . _Coerce
 
+instance FromJSON SearchReadsRequest where
+        parseJSON
+          = withObject "SearchReadsRequest"
+              (\ o ->
+                 SearchReadsRequest <$>
+                   (o .:? "start") <*> (o .:? "readGroupIds" .!= mempty)
+                     <*> (o .:? "referenceName")
+                     <*> (o .:? "end")
+                     <*> (o .:? "pageToken")
+                     <*> (o .:? "pageSize")
+                     <*> (o .:? "readGroupSetIds" .!= mempty))
+
+instance ToJSON SearchReadsRequest where
+        toJSON SearchReadsRequest{..}
+          = object
+              (catMaybes
+                 [("start" .=) <$> _sStart,
+                  ("readGroupIds" .=) <$> _sReadGroupIds,
+                  ("referenceName" .=) <$> _sReferenceName,
+                  ("end" .=) <$> _sEnd,
+                  ("pageToken" .=) <$> _sPageToken,
+                  ("pageSize" .=) <$> _sPageSize,
+                  ("readGroupSetIds" .=) <$> _sReadGroupSetIds])
+
 -- | The read search response.
 --
 -- /See:/ 'searchReadsResponse' smart constructor.
@@ -3738,6 +4898,21 @@ srrAlignments
       (\ s a -> s{_srrAlignments = a})
       . _Default
       . _Coerce
+
+instance FromJSON SearchReadsResponse where
+        parseJSON
+          = withObject "SearchReadsResponse"
+              (\ o ->
+                 SearchReadsResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "alignments" .!= mempty))
+
+instance ToJSON SearchReadsResponse where
+        toJSON SearchReadsResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _srrNextPageToken,
+                  ("alignments" .=) <$> _srrAlignments])
 
 -- |
 --
@@ -3815,6 +4990,27 @@ srsrPageSize :: Lens' SearchReferenceSetsRequest (Maybe Int32)
 srsrPageSize
   = lens _srsrPageSize (\ s a -> s{_srsrPageSize = a})
 
+instance FromJSON SearchReferenceSetsRequest where
+        parseJSON
+          = withObject "SearchReferenceSetsRequest"
+              (\ o ->
+                 SearchReferenceSetsRequest <$>
+                   (o .:? "md5checksums" .!= mempty) <*>
+                     (o .:? "accessions" .!= mempty)
+                     <*> (o .:? "pageToken")
+                     <*> (o .:? "assemblyId")
+                     <*> (o .:? "pageSize"))
+
+instance ToJSON SearchReferenceSetsRequest where
+        toJSON SearchReferenceSetsRequest{..}
+          = object
+              (catMaybes
+                 [("md5checksums" .=) <$> _srsrMd5checksums,
+                  ("accessions" .=) <$> _srsrAccessions,
+                  ("pageToken" .=) <$> _srsrPageToken,
+                  ("assemblyId" .=) <$> _srsrAssemblyId,
+                  ("pageSize" .=) <$> _srsrPageSize])
+
 --
 -- /See:/ 'searchReferenceSetsResponse' smart constructor.
 data SearchReferenceSetsResponse = SearchReferenceSetsResponse
@@ -3853,6 +5049,21 @@ srsrReferenceSets
       (\ s a -> s{_srsrReferenceSets = a})
       . _Default
       . _Coerce
+
+instance FromJSON SearchReferenceSetsResponse where
+        parseJSON
+          = withObject "SearchReferenceSetsResponse"
+              (\ o ->
+                 SearchReferenceSetsResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "referenceSets" .!= mempty))
+
+instance ToJSON SearchReferenceSetsResponse where
+        toJSON SearchReferenceSetsResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _srsrNextPageToken,
+                  ("referenceSets" .=) <$> _srsrReferenceSets])
 
 -- |
 --
@@ -3928,6 +5139,27 @@ srrPageSize :: Lens' SearchReferencesRequest (Maybe Int32)
 srrPageSize
   = lens _srrPageSize (\ s a -> s{_srrPageSize = a})
 
+instance FromJSON SearchReferencesRequest where
+        parseJSON
+          = withObject "SearchReferencesRequest"
+              (\ o ->
+                 SearchReferencesRequest <$>
+                   (o .:? "referenceSetId") <*>
+                     (o .:? "md5checksums" .!= mempty)
+                     <*> (o .:? "accessions" .!= mempty)
+                     <*> (o .:? "pageToken")
+                     <*> (o .:? "pageSize"))
+
+instance ToJSON SearchReferencesRequest where
+        toJSON SearchReferencesRequest{..}
+          = object
+              (catMaybes
+                 [("referenceSetId" .=) <$> _srrReferenceSetId,
+                  ("md5checksums" .=) <$> _srrMd5checksums,
+                  ("accessions" .=) <$> _srrAccessions,
+                  ("pageToken" .=) <$> _srrPageToken,
+                  ("pageSize" .=) <$> _srrPageSize])
+
 --
 -- /See:/ 'searchReferencesResponse' smart constructor.
 data SearchReferencesResponse = SearchReferencesResponse
@@ -3965,6 +5197,21 @@ sReferences
   = lens _sReferences (\ s a -> s{_sReferences = a}) .
       _Default
       . _Coerce
+
+instance FromJSON SearchReferencesResponse where
+        parseJSON
+          = withObject "SearchReferencesResponse"
+              (\ o ->
+                 SearchReferencesResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "references" .!= mempty))
+
+instance ToJSON SearchReferencesResponse where
+        toJSON SearchReferencesResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _sNextPageToken,
+                  ("references" .=) <$> _sReferences])
 
 -- | The search variant sets request.
 --
@@ -4015,6 +5262,23 @@ svsrPageSize :: Lens' SearchVariantSetsRequest (Maybe Int32)
 svsrPageSize
   = lens _svsrPageSize (\ s a -> s{_svsrPageSize = a})
 
+instance FromJSON SearchVariantSetsRequest where
+        parseJSON
+          = withObject "SearchVariantSetsRequest"
+              (\ o ->
+                 SearchVariantSetsRequest <$>
+                   (o .:? "datasetIds" .!= mempty) <*>
+                     (o .:? "pageToken")
+                     <*> (o .:? "pageSize"))
+
+instance ToJSON SearchVariantSetsRequest where
+        toJSON SearchVariantSetsRequest{..}
+          = object
+              (catMaybes
+                 [("datasetIds" .=) <$> _svsrDatasetIds,
+                  ("pageToken" .=) <$> _svsrPageToken,
+                  ("pageSize" .=) <$> _svsrPageSize])
+
 -- | The search variant sets response.
 --
 -- /See:/ 'searchVariantSetsResponse' smart constructor.
@@ -4054,6 +5318,21 @@ svsrVariantSets
       (\ s a -> s{_svsrVariantSets = a})
       . _Default
       . _Coerce
+
+instance FromJSON SearchVariantSetsResponse where
+        parseJSON
+          = withObject "SearchVariantSetsResponse"
+              (\ o ->
+                 SearchVariantSetsResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "variantSets" .!= mempty))
+
+instance ToJSON SearchVariantSetsResponse where
+        toJSON SearchVariantSetsResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _svsrNextPageToken,
+                  ("variantSets" .=) <$> _svsrVariantSets])
 
 -- | The variant search request.
 --
@@ -4170,6 +5449,34 @@ svrPageSize :: Lens' SearchVariantsRequest (Maybe Int32)
 svrPageSize
   = lens _svrPageSize (\ s a -> s{_svrPageSize = a})
 
+instance FromJSON SearchVariantsRequest where
+        parseJSON
+          = withObject "SearchVariantsRequest"
+              (\ o ->
+                 SearchVariantsRequest <$>
+                   (o .:? "start") <*> (o .:? "callSetIds" .!= mempty)
+                     <*> (o .:? "referenceName")
+                     <*> (o .:? "end")
+                     <*> (o .:? "maxCalls")
+                     <*> (o .:? "pageToken")
+                     <*> (o .:? "variantName")
+                     <*> (o .:? "variantSetIds" .!= mempty)
+                     <*> (o .:? "pageSize"))
+
+instance ToJSON SearchVariantsRequest where
+        toJSON SearchVariantsRequest{..}
+          = object
+              (catMaybes
+                 [("start" .=) <$> _svrStart,
+                  ("callSetIds" .=) <$> _svrCallSetIds,
+                  ("referenceName" .=) <$> _svrReferenceName,
+                  ("end" .=) <$> _svrEnd,
+                  ("maxCalls" .=) <$> _svrMaxCalls,
+                  ("pageToken" .=) <$> _svrPageToken,
+                  ("variantName" .=) <$> _svrVariantName,
+                  ("variantSetIds" .=) <$> _svrVariantSetIds,
+                  ("pageSize" .=) <$> _svrPageSize])
+
 -- | The variant search response.
 --
 -- /See:/ 'searchVariantsResponse' smart constructor.
@@ -4208,6 +5515,21 @@ svrNextPageToken :: Lens' SearchVariantsResponse (Maybe Text)
 svrNextPageToken
   = lens _svrNextPageToken
       (\ s a -> s{_svrNextPageToken = a})
+
+instance FromJSON SearchVariantsResponse where
+        parseJSON
+          = withObject "SearchVariantsResponse"
+              (\ o ->
+                 SearchVariantsResponse <$>
+                   (o .:? "variants" .!= mempty) <*>
+                     (o .:? "nextPageToken"))
+
+instance ToJSON SearchVariantsResponse where
+        toJSON SearchVariantsResponse{..}
+          = object
+              (catMaybes
+                 [("variants" .=) <$> _svrVariants,
+                  ("nextPageToken" .=) <$> _svrNextPageToken])
 
 -- | A transcript represents the assertion that a particular region of the
 -- reference genome may be transcribed as RNA.
@@ -4269,6 +5591,22 @@ tExons
   = lens _tExons (\ s a -> s{_tExons = a}) . _Default .
       _Coerce
 
+instance FromJSON Transcript where
+        parseJSON
+          = withObject "Transcript"
+              (\ o ->
+                 Transcript <$>
+                   (o .:? "geneId") <*> (o .:? "codingSequence") <*>
+                     (o .:? "exons" .!= mempty))
+
+instance ToJSON Transcript where
+        toJSON Transcript{..}
+          = object
+              (catMaybes
+                 [("geneId" .=) <$> _tGeneId,
+                  ("codingSequence" .=) <$> _tCodingSequence,
+                  ("exons" .=) <$> _tExons])
+
 --
 -- /See:/ 'transcriptCodingSequence' smart constructor.
 data TranscriptCodingSequence = TranscriptCodingSequence
@@ -4302,6 +5640,19 @@ tcsStart = lens _tcsStart (\ s a -> s{_tcsStart = a})
 -- start, and not the containing annotation start.
 tcsEnd :: Lens' TranscriptCodingSequence (Maybe Int64)
 tcsEnd = lens _tcsEnd (\ s a -> s{_tcsEnd = a})
+
+instance FromJSON TranscriptCodingSequence where
+        parseJSON
+          = withObject "TranscriptCodingSequence"
+              (\ o ->
+                 TranscriptCodingSequence <$>
+                   (o .:? "start") <*> (o .:? "end"))
+
+instance ToJSON TranscriptCodingSequence where
+        toJSON TranscriptCodingSequence{..}
+          = object
+              (catMaybes
+                 [("start" .=) <$> _tcsStart, ("end" .=) <$> _tcsEnd])
 
 --
 -- /See:/ 'transcriptExon' smart constructor.
@@ -4352,6 +5703,21 @@ teEnd = lens _teEnd (\ s a -> s{_teEnd = a})
 -- all or none of the coding exons.
 teFrame :: Lens' TranscriptExon (Maybe (Maybe Int32Value))
 teFrame = lens _teFrame (\ s a -> s{_teFrame = a})
+
+instance FromJSON TranscriptExon where
+        parseJSON
+          = withObject "TranscriptExon"
+              (\ o ->
+                 TranscriptExon <$>
+                   (o .:? "start") <*> (o .:? "end") <*>
+                     (o .:? "frame"))
+
+instance ToJSON TranscriptExon where
+        toJSON TranscriptExon{..}
+          = object
+              (catMaybes
+                 [("start" .=) <$> _teStart, ("end" .=) <$> _teEnd,
+                  ("frame" .=) <$> _teFrame])
 
 -- | A variant represents a change in DNA sequence relative to a reference
 -- sequence. For example, a variant could represent a SNP or an insertion.
@@ -4502,6 +5868,39 @@ vCalls
   = lens _vCalls (\ s a -> s{_vCalls = a}) . _Default .
       _Coerce
 
+instance FromJSON Variant where
+        parseJSON
+          = withObject "Variant"
+              (\ o ->
+                 Variant <$>
+                   (o .:? "variantSetId") <*> (o .:? "created") <*>
+                     (o .:? "start")
+                     <*> (o .:? "alternateBases" .!= mempty)
+                     <*> (o .:? "referenceName")
+                     <*> (o .:? "names" .!= mempty)
+                     <*> (o .:? "end")
+                     <*> (o .:? "referenceBases")
+                     <*> (o .:? "id")
+                     <*> (o .:? "quality")
+                     <*> (o .:? "filter" .!= mempty)
+                     <*> (o .:? "info")
+                     <*> (o .:? "calls" .!= mempty))
+
+instance ToJSON Variant where
+        toJSON Variant{..}
+          = object
+              (catMaybes
+                 [("variantSetId" .=) <$> _vVariantSetId,
+                  ("created" .=) <$> _vCreated,
+                  ("start" .=) <$> _vStart,
+                  ("alternateBases" .=) <$> _vAlternateBases,
+                  ("referenceName" .=) <$> _vReferenceName,
+                  ("names" .=) <$> _vNames, ("end" .=) <$> _vEnd,
+                  ("referenceBases" .=) <$> _vReferenceBases,
+                  ("id" .=) <$> _vId, ("quality" .=) <$> _vQuality,
+                  ("filter" .=) <$> _vFilter, ("info" .=) <$> _vInfo,
+                  ("calls" .=) <$> _vCalls])
+
 -- | A Variant annotation.
 --
 -- /See:/ 'variantAnnotation' smart constructor.
@@ -4591,6 +5990,31 @@ vaTranscriptIds
       . _Default
       . _Coerce
 
+instance FromJSON VariantAnnotation where
+        parseJSON
+          = withObject "VariantAnnotation"
+              (\ o ->
+                 VariantAnnotation <$>
+                   (o .:? "effect") <*> (o .:? "clinicalSignificance")
+                     <*> (o .:? "alternateBases")
+                     <*> (o .:? "geneId")
+                     <*> (o .:? "conditions" .!= mempty)
+                     <*> (o .:? "type")
+                     <*> (o .:? "transcriptIds" .!= mempty))
+
+instance ToJSON VariantAnnotation where
+        toJSON VariantAnnotation{..}
+          = object
+              (catMaybes
+                 [("effect" .=) <$> _vaEffect,
+                  ("clinicalSignificance" .=) <$>
+                    _vaClinicalSignificance,
+                  ("alternateBases" .=) <$> _vaAlternateBases,
+                  ("geneId" .=) <$> _vaGeneId,
+                  ("conditions" .=) <$> _vaConditions,
+                  ("type" .=) <$> _vaType,
+                  ("transcriptIds" .=) <$> _vaTranscriptIds])
+
 -- |
 --
 -- /See:/ 'variantAnnotationCondition' smart constructor.
@@ -4649,6 +6073,25 @@ vacOmimId :: Lens' VariantAnnotationCondition (Maybe Text)
 vacOmimId
   = lens _vacOmimId (\ s a -> s{_vacOmimId = a})
 
+instance FromJSON VariantAnnotationCondition where
+        parseJSON
+          = withObject "VariantAnnotationCondition"
+              (\ o ->
+                 VariantAnnotationCondition <$>
+                   (o .:? "externalIds" .!= mempty) <*>
+                     (o .:? "names" .!= mempty)
+                     <*> (o .:? "conceptId")
+                     <*> (o .:? "omimId"))
+
+instance ToJSON VariantAnnotationCondition where
+        toJSON VariantAnnotationCondition{..}
+          = object
+              (catMaybes
+                 [("externalIds" .=) <$> _vacExternalIds,
+                  ("names" .=) <$> _vacNames,
+                  ("conceptId" .=) <$> _vacConceptId,
+                  ("omimId" .=) <$> _vacOmimId])
+
 -- | A string which maps to an array of values.
 --
 -- /See:/ 'variantInfo' smart constructor.
@@ -4661,6 +6104,13 @@ data VariantInfo =
 variantInfo
     :: VariantInfo
 variantInfo = VariantInfo
+
+instance FromJSON VariantInfo where
+        parseJSON
+          = withObject "VariantInfo" (\ o -> pure VariantInfo)
+
+instance ToJSON VariantInfo where
+        toJSON = const (Object mempty)
 
 -- | A variant set is a collection of call sets and variants. It contains
 -- summary statistics of those contents. A variant set belongs to a
@@ -4719,3 +6169,22 @@ vsMetadata
 -- | The Google-generated ID of the variant set. Immutable.
 vsId :: Lens' VariantSet (Maybe Text)
 vsId = lens _vsId (\ s a -> s{_vsId = a})
+
+instance FromJSON VariantSet where
+        parseJSON
+          = withObject "VariantSet"
+              (\ o ->
+                 VariantSet <$>
+                   (o .:? "datasetId") <*>
+                     (o .:? "referenceBounds" .!= mempty)
+                     <*> (o .:? "metadata" .!= mempty)
+                     <*> (o .:? "id"))
+
+instance ToJSON VariantSet where
+        toJSON VariantSet{..}
+          = object
+              (catMaybes
+                 [("datasetId" .=) <$> _vsDatasetId,
+                  ("referenceBounds" .=) <$> _vsReferenceBounds,
+                  ("metadata" .=) <$> _vsMetadata,
+                  ("id" .=) <$> _vsId])

@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -62,6 +63,22 @@ apPosition :: Lens' ApproximateProgress (Maybe (Maybe Position))
 apPosition
   = lens _apPosition (\ s a -> s{_apPosition = a})
 
+instance FromJSON ApproximateProgress where
+        parseJSON
+          = withObject "ApproximateProgress"
+              (\ o ->
+                 ApproximateProgress <$>
+                   (o .:? "remainingTime") <*> (o .:? "percentComplete")
+                     <*> (o .:? "position"))
+
+instance ToJSON ApproximateProgress where
+        toJSON ApproximateProgress{..}
+          = object
+              (catMaybes
+                 [("remainingTime" .=) <$> _apRemainingTime,
+                  ("percentComplete" .=) <$> _apPercentComplete,
+                  ("position" .=) <$> _apPosition])
+
 -- | Settings for WorkerPool autoscaling.
 --
 -- /See:/ 'autoscalingSettings' smart constructor.
@@ -95,6 +112,20 @@ asMaxNumWorkers
 asAlgorithm :: Lens' AutoscalingSettings (Maybe Text)
 asAlgorithm
   = lens _asAlgorithm (\ s a -> s{_asAlgorithm = a})
+
+instance FromJSON AutoscalingSettings where
+        parseJSON
+          = withObject "AutoscalingSettings"
+              (\ o ->
+                 AutoscalingSettings <$>
+                   (o .:? "maxNumWorkers") <*> (o .:? "algorithm"))
+
+instance ToJSON AutoscalingSettings where
+        toJSON AutoscalingSettings{..}
+          = object
+              (catMaybes
+                 [("maxNumWorkers" .=) <$> _asMaxNumWorkers,
+                  ("algorithm" .=) <$> _asAlgorithm])
 
 -- | All configuration data for a particular Computation.
 --
@@ -186,6 +217,31 @@ ctSystemStageName
   = lens _ctSystemStageName
       (\ s a -> s{_ctSystemStageName = a})
 
+instance FromJSON ComputationTopology where
+        parseJSON
+          = withObject "ComputationTopology"
+              (\ o ->
+                 ComputationTopology <$>
+                   (o .:? "stateFamilies" .!= mempty) <*>
+                     (o .:? "userStageName")
+                     <*> (o .:? "inputs" .!= mempty)
+                     <*> (o .:? "keyRanges" .!= mempty)
+                     <*> (o .:? "outputs" .!= mempty)
+                     <*> (o .:? "computationId")
+                     <*> (o .:? "systemStageName"))
+
+instance ToJSON ComputationTopology where
+        toJSON ComputationTopology{..}
+          = object
+              (catMaybes
+                 [("stateFamilies" .=) <$> _ctStateFamilies,
+                  ("userStageName" .=) <$> _ctUserStageName,
+                  ("inputs" .=) <$> _ctInputs,
+                  ("keyRanges" .=) <$> _ctKeyRanges,
+                  ("outputs" .=) <$> _ctOutputs,
+                  ("computationId" .=) <$> _ctComputationId,
+                  ("systemStageName" .=) <$> _ctSystemStageName])
+
 -- | A position that encapsulates an inner position and an index for the
 -- inner position. A ConcatPosition can be used by a reader of a source
 -- that encapsulates a set of other sources.
@@ -220,6 +276,20 @@ cpPosition :: Lens' ConcatPosition (Maybe (Maybe Position))
 cpPosition
   = lens _cpPosition (\ s a -> s{_cpPosition = a})
 
+instance FromJSON ConcatPosition where
+        parseJSON
+          = withObject "ConcatPosition"
+              (\ o ->
+                 ConcatPosition <$>
+                   (o .:? "index") <*> (o .:? "position"))
+
+instance ToJSON ConcatPosition where
+        toJSON ConcatPosition{..}
+          = object
+              (catMaybes
+                 [("index" .=) <$> _cpIndex,
+                  ("position" .=) <$> _cpPosition])
+
 -- | Identifies the location of a custom souce.
 --
 -- /See:/ 'customSourceLocation' smart constructor.
@@ -243,6 +313,16 @@ customSourceLocation =
 cslStateful :: Lens' CustomSourceLocation (Maybe Bool)
 cslStateful
   = lens _cslStateful (\ s a -> s{_cslStateful = a})
+
+instance FromJSON CustomSourceLocation where
+        parseJSON
+          = withObject "CustomSourceLocation"
+              (\ o -> CustomSourceLocation <$> (o .:? "stateful"))
+
+instance ToJSON CustomSourceLocation where
+        toJSON CustomSourceLocation{..}
+          = object
+              (catMaybes [("stateful" .=) <$> _cslStateful])
 
 -- | Data disk assignment for a given VM instance.
 --
@@ -284,6 +364,21 @@ ddaDataDisks
       . _Default
       . _Coerce
 
+instance FromJSON DataDiskAssignment where
+        parseJSON
+          = withObject "DataDiskAssignment"
+              (\ o ->
+                 DataDiskAssignment <$>
+                   (o .:? "vmInstance") <*>
+                     (o .:? "dataDisks" .!= mempty))
+
+instance ToJSON DataDiskAssignment where
+        toJSON DataDiskAssignment{..}
+          = object
+              (catMaybes
+                 [("vmInstance" .=) <$> _ddaVmInstance,
+                  ("dataDisks" .=) <$> _ddaDataDisks])
+
 -- | Specification of one of the bundles produced as a result of splitting a
 -- Source (e.g. when executing a SourceSplitRequest, or when splitting an
 -- active task using WorkItemStatus.dynamic_source_split), relative to the
@@ -319,6 +414,20 @@ dsDerivationMode
 -- | Specification of the source.
 dsSource :: Lens' DerivedSource (Maybe (Maybe Source))
 dsSource = lens _dsSource (\ s a -> s{_dsSource = a})
+
+instance FromJSON DerivedSource where
+        parseJSON
+          = withObject "DerivedSource"
+              (\ o ->
+                 DerivedSource <$>
+                   (o .:? "derivationMode") <*> (o .:? "source"))
+
+instance ToJSON DerivedSource where
+        toJSON DerivedSource{..}
+          = object
+              (catMaybes
+                 [("derivationMode" .=) <$> _dsDerivationMode,
+                  ("source" .=) <$> _dsSource])
 
 -- | Describes the data disk used by a workflow job.
 --
@@ -374,6 +483,22 @@ dMountPoint :: Lens' Disk (Maybe Text)
 dMountPoint
   = lens _dMountPoint (\ s a -> s{_dMountPoint = a})
 
+instance FromJSON Disk where
+        parseJSON
+          = withObject "Disk"
+              (\ o ->
+                 Disk <$>
+                   (o .:? "sizeGb") <*> (o .:? "diskType") <*>
+                     (o .:? "mountPoint"))
+
+instance ToJSON Disk where
+        toJSON Disk{..}
+          = object
+              (catMaybes
+                 [("sizeGb" .=) <$> _dSizeGb,
+                  ("diskType" .=) <$> _dDiskType,
+                  ("mountPoint" .=) <$> _dMountPoint])
+
 -- | When a task splits using WorkItemStatus.dynamic_source_split, this
 -- message describes the two parts of the split relative to the description
 -- of the current task\'s input.
@@ -410,6 +535,20 @@ dssResidual
 dssPrimary :: Lens' DynamicSourceSplit (Maybe (Maybe DerivedSource))
 dssPrimary
   = lens _dssPrimary (\ s a -> s{_dssPrimary = a})
+
+instance FromJSON DynamicSourceSplit where
+        parseJSON
+          = withObject "DynamicSourceSplit"
+              (\ o ->
+                 DynamicSourceSplit <$>
+                   (o .:? "residual") <*> (o .:? "primary"))
+
+instance ToJSON DynamicSourceSplit where
+        toJSON DynamicSourceSplit{..}
+          = object
+              (catMaybes
+                 [("residual" .=) <$> _dssResidual,
+                  ("primary" .=) <$> _dssPrimary])
 
 -- | Describes the environment in which a Dataflow Job runs.
 --
@@ -530,6 +669,36 @@ eSdkPipelineOptions
   = lens _eSdkPipelineOptions
       (\ s a -> s{_eSdkPipelineOptions = a})
 
+instance FromJSON Environment where
+        parseJSON
+          = withObject "Environment"
+              (\ o ->
+                 Environment <$>
+                   (o .:? "dataset") <*>
+                     (o .:? "experiments" .!= mempty)
+                     <*> (o .:? "workerPools" .!= mempty)
+                     <*> (o .:? "clusterManagerApiService")
+                     <*> (o .:? "version")
+                     <*> (o .:? "internalExperiments")
+                     <*> (o .:? "tempStoragePrefix")
+                     <*> (o .:? "userAgent")
+                     <*> (o .:? "sdkPipelineOptions"))
+
+instance ToJSON Environment where
+        toJSON Environment{..}
+          = object
+              (catMaybes
+                 [("dataset" .=) <$> _eDataset,
+                  ("experiments" .=) <$> _eExperiments,
+                  ("workerPools" .=) <$> _eWorkerPools,
+                  ("clusterManagerApiService" .=) <$>
+                    _eClusterManagerApiService,
+                  ("version" .=) <$> _eVersion,
+                  ("internalExperiments" .=) <$> _eInternalExperiments,
+                  ("tempStoragePrefix" .=) <$> _eTempStoragePrefix,
+                  ("userAgent" .=) <$> _eUserAgent,
+                  ("sdkPipelineOptions" .=) <$> _eSdkPipelineOptions])
+
 -- | Experimental settings.
 --
 -- /See:/ 'environmentInternalExperiments' smart constructor.
@@ -542,6 +711,15 @@ data EnvironmentInternalExperiments =
 environmentInternalExperiments
     :: EnvironmentInternalExperiments
 environmentInternalExperiments = EnvironmentInternalExperiments
+
+instance FromJSON EnvironmentInternalExperiments
+         where
+        parseJSON
+          = withObject "EnvironmentInternalExperiments"
+              (\ o -> pure EnvironmentInternalExperiments)
+
+instance ToJSON EnvironmentInternalExperiments where
+        toJSON = const (Object mempty)
 
 -- | The Dataflow SDK pipeline options specified by the user. These options
 -- are passed through the service and are used to recreate the SDK pipeline
@@ -559,6 +737,14 @@ environmentSdkPipelineOptions
     :: EnvironmentSdkPipelineOptions
 environmentSdkPipelineOptions = EnvironmentSdkPipelineOptions
 
+instance FromJSON EnvironmentSdkPipelineOptions where
+        parseJSON
+          = withObject "EnvironmentSdkPipelineOptions"
+              (\ o -> pure EnvironmentSdkPipelineOptions)
+
+instance ToJSON EnvironmentSdkPipelineOptions where
+        toJSON = const (Object mempty)
+
 -- | A description of the process that generated the request.
 --
 -- /See:/ 'environmentUserAgent' smart constructor.
@@ -571,6 +757,14 @@ data EnvironmentUserAgent =
 environmentUserAgent
     :: EnvironmentUserAgent
 environmentUserAgent = EnvironmentUserAgent
+
+instance FromJSON EnvironmentUserAgent where
+        parseJSON
+          = withObject "EnvironmentUserAgent"
+              (\ o -> pure EnvironmentUserAgent)
+
+instance ToJSON EnvironmentUserAgent where
+        toJSON = const (Object mempty)
 
 -- | A structure describing which components and their versions of the
 -- service are required in order to run the job.
@@ -585,6 +779,14 @@ data EnvironmentVersion =
 environmentVersion
     :: EnvironmentVersion
 environmentVersion = EnvironmentVersion
+
+instance FromJSON EnvironmentVersion where
+        parseJSON
+          = withObject "EnvironmentVersion"
+              (\ o -> pure EnvironmentVersion)
+
+instance ToJSON EnvironmentVersion where
+        toJSON = const (Object mempty)
 
 -- | An instruction that copies its inputs (zero or more) to its (single)
 -- output.
@@ -612,6 +814,16 @@ fiInputs
   = lens _fiInputs (\ s a -> s{_fiInputs = a}) .
       _Default
       . _Coerce
+
+instance FromJSON FlattenInstruction where
+        parseJSON
+          = withObject "FlattenInstruction"
+              (\ o ->
+                 FlattenInstruction <$> (o .:? "inputs" .!= mempty))
+
+instance ToJSON FlattenInstruction where
+        toJSON FlattenInstruction{..}
+          = object (catMaybes [("inputs" .=) <$> _fiInputs])
 
 -- | An input of an instruction, as a reference to an output of a producer
 -- instruction.
@@ -649,6 +861,22 @@ iiProducerInstructionIndex
 iiOutputNum :: Lens' InstructionInput (Maybe Int32)
 iiOutputNum
   = lens _iiOutputNum (\ s a -> s{_iiOutputNum = a})
+
+instance FromJSON InstructionInput where
+        parseJSON
+          = withObject "InstructionInput"
+              (\ o ->
+                 InstructionInput <$>
+                   (o .:? "producerInstructionIndex") <*>
+                     (o .:? "outputNum"))
+
+instance ToJSON InstructionInput where
+        toJSON InstructionInput{..}
+          = object
+              (catMaybes
+                 [("producerInstructionIndex" .=) <$>
+                    _iiProducerInstructionIndex,
+                  ("outputNum" .=) <$> _iiOutputNum])
 
 -- | An output of an instruction.
 --
@@ -690,6 +918,21 @@ ioSystemName :: Lens' InstructionOutput (Maybe Text)
 ioSystemName
   = lens _ioSystemName (\ s a -> s{_ioSystemName = a})
 
+instance FromJSON InstructionOutput where
+        parseJSON
+          = withObject "InstructionOutput"
+              (\ o ->
+                 InstructionOutput <$>
+                   (o .:? "codec") <*> (o .:? "name") <*>
+                     (o .:? "systemName"))
+
+instance ToJSON InstructionOutput where
+        toJSON InstructionOutput{..}
+          = object
+              (catMaybes
+                 [("codec" .=) <$> _ioCodec, ("name" .=) <$> _ioName,
+                  ("systemName" .=) <$> _ioSystemName])
+
 -- | The codec to use to encode data being written via this output.
 --
 -- /See:/ 'instructionOutputCodec' smart constructor.
@@ -702,6 +945,14 @@ data InstructionOutputCodec =
 instructionOutputCodec
     :: InstructionOutputCodec
 instructionOutputCodec = InstructionOutputCodec
+
+instance FromJSON InstructionOutputCodec where
+        parseJSON
+          = withObject "InstructionOutputCodec"
+              (\ o -> pure InstructionOutputCodec)
+
+instance ToJSON InstructionOutputCodec where
+        toJSON = const (Object mempty)
 
 -- | Defines a job to be run by the Dataflow service.
 --
@@ -887,6 +1138,47 @@ jobCreateTime
   = lens _jobCreateTime
       (\ s a -> s{_jobCreateTime = a})
 
+instance FromJSON Job where
+        parseJSON
+          = withObject "Job"
+              (\ o ->
+                 Job <$>
+                   (o .:? "requestedState") <*> (o .:? "environment")
+                     <*> (o .:? "clientRequestId")
+                     <*> (o .:? "currentState")
+                     <*> (o .:? "replacedByJobId")
+                     <*> (o .:? "steps" .!= mempty)
+                     <*> (o .:? "executionInfo")
+                     <*> (o .:? "name")
+                     <*> (o .:? "transformNameMapping")
+                     <*> (o .:? "id")
+                     <*> (o .:? "projectId")
+                     <*> (o .:? "type")
+                     <*> (o .:? "currentStateTime")
+                     <*> (o .:? "replaceJobId")
+                     <*> (o .:? "createTime"))
+
+instance ToJSON Job where
+        toJSON Job{..}
+          = object
+              (catMaybes
+                 [("requestedState" .=) <$> _jobRequestedState,
+                  ("environment" .=) <$> _jobEnvironment,
+                  ("clientRequestId" .=) <$> _jobClientRequestId,
+                  ("currentState" .=) <$> _jobCurrentState,
+                  ("replacedByJobId" .=) <$> _jobReplacedByJobId,
+                  ("steps" .=) <$> _jobSteps,
+                  ("executionInfo" .=) <$> _jobExecutionInfo,
+                  ("name" .=) <$> _jobName,
+                  ("transformNameMapping" .=) <$>
+                    _jobTransformNameMapping,
+                  ("id" .=) <$> _jobId,
+                  ("projectId" .=) <$> _jobProjectId,
+                  ("type" .=) <$> _jobType,
+                  ("currentStateTime" .=) <$> _jobCurrentStateTime,
+                  ("replaceJobId" .=) <$> _jobReplaceJobId,
+                  ("createTime" .=) <$> _jobCreateTime])
+
 -- | Additional information about how a Dataflow job will be executed which
 -- isn’t contained in the submitted job.
 --
@@ -912,6 +1204,15 @@ jeiStages :: Lens' JobExecutionInfo (Maybe JobExecutionInfoStages)
 jeiStages
   = lens _jeiStages (\ s a -> s{_jeiStages = a})
 
+instance FromJSON JobExecutionInfo where
+        parseJSON
+          = withObject "JobExecutionInfo"
+              (\ o -> JobExecutionInfo <$> (o .:? "stages"))
+
+instance ToJSON JobExecutionInfo where
+        toJSON JobExecutionInfo{..}
+          = object (catMaybes [("stages" .=) <$> _jeiStages])
+
 -- | A mapping from each stage to the information about that stage.
 --
 -- /See:/ 'jobExecutionInfoStages' smart constructor.
@@ -924,6 +1225,14 @@ data JobExecutionInfoStages =
 jobExecutionInfoStages
     :: JobExecutionInfoStages
 jobExecutionInfoStages = JobExecutionInfoStages
+
+instance FromJSON JobExecutionInfoStages where
+        parseJSON
+          = withObject "JobExecutionInfoStages"
+              (\ o -> pure JobExecutionInfoStages)
+
+instance ToJSON JobExecutionInfoStages where
+        toJSON = const (Object mempty)
 
 -- | Contains information about how a particular
 -- [google.dataflow.v1beta3.Step][google.dataflow.v1beta3.Step] will be
@@ -954,6 +1263,18 @@ jesiStepName
   = lens _jesiStepName (\ s a -> s{_jesiStepName = a})
       . _Default
       . _Coerce
+
+instance FromJSON JobExecutionStageInfo where
+        parseJSON
+          = withObject "JobExecutionStageInfo"
+              (\ o ->
+                 JobExecutionStageInfo <$>
+                   (o .:? "stepName" .!= mempty))
+
+instance ToJSON JobExecutionStageInfo where
+        toJSON JobExecutionStageInfo{..}
+          = object
+              (catMaybes [("stepName" .=) <$> _jesiStepName])
 
 -- | A particular message pertaining to a Dataflow job.
 --
@@ -1007,6 +1328,24 @@ jmMessageImportance
 jmId :: Lens' JobMessage (Maybe Text)
 jmId = lens _jmId (\ s a -> s{_jmId = a})
 
+instance FromJSON JobMessage where
+        parseJSON
+          = withObject "JobMessage"
+              (\ o ->
+                 JobMessage <$>
+                   (o .:? "time") <*> (o .:? "messageText") <*>
+                     (o .:? "messageImportance")
+                     <*> (o .:? "id"))
+
+instance ToJSON JobMessage where
+        toJSON JobMessage{..}
+          = object
+              (catMaybes
+                 [("time" .=) <$> _jmTime,
+                  ("messageText" .=) <$> _jmMessageText,
+                  ("messageImportance" .=) <$> _jmMessageImportance,
+                  ("id" .=) <$> _jmId])
+
 -- | JobMetrics contains a collection of metrics descibing the detailed
 -- progress of a Dataflow job. Metrics correspond to user-defined and
 -- system-defined metrics in the job. This resource captures only the most
@@ -1046,6 +1385,21 @@ jmMetricTime :: Lens' JobMetrics (Maybe Text)
 jmMetricTime
   = lens _jmMetricTime (\ s a -> s{_jmMetricTime = a})
 
+instance FromJSON JobMetrics where
+        parseJSON
+          = withObject "JobMetrics"
+              (\ o ->
+                 JobMetrics <$>
+                   (o .:? "metrics" .!= mempty) <*>
+                     (o .:? "metricTime"))
+
+instance ToJSON JobMetrics where
+        toJSON JobMetrics{..}
+          = object
+              (catMaybes
+                 [("metrics" .=) <$> _jmMetrics,
+                  ("metricTime" .=) <$> _jmMetricTime])
+
 -- | Map of transform name prefixes of the job to be replaced to the
 -- corresponding name prefixes of the new job.
 --
@@ -1059,6 +1413,14 @@ data JobTransformNameMapping =
 jobTransformNameMapping
     :: JobTransformNameMapping
 jobTransformNameMapping = JobTransformNameMapping
+
+instance FromJSON JobTransformNameMapping where
+        parseJSON
+          = withObject "JobTransformNameMapping"
+              (\ o -> pure JobTransformNameMapping)
+
+instance ToJSON JobTransformNameMapping where
+        toJSON = const (Object mempty)
 
 -- | Data disk assignment information for a specific key-range of a sharded
 -- computation. Currently we only support UTF-8 character splits to
@@ -1106,6 +1468,22 @@ krddaStart
 -- | The end (exclusive) of the key range.
 krddaEnd :: Lens' KeyRangeDataDiskAssignment (Maybe Text)
 krddaEnd = lens _krddaEnd (\ s a -> s{_krddaEnd = a})
+
+instance FromJSON KeyRangeDataDiskAssignment where
+        parseJSON
+          = withObject "KeyRangeDataDiskAssignment"
+              (\ o ->
+                 KeyRangeDataDiskAssignment <$>
+                   (o .:? "dataDisk") <*> (o .:? "start") <*>
+                     (o .:? "end"))
+
+instance ToJSON KeyRangeDataDiskAssignment where
+        toJSON KeyRangeDataDiskAssignment{..}
+          = object
+              (catMaybes
+                 [("dataDisk" .=) <$> _krddaDataDisk,
+                  ("start" .=) <$> _krddaStart,
+                  ("end" .=) <$> _krddaEnd])
 
 -- | Location information for a specific key-range of a sharded computation.
 -- Currently we only support UTF-8 character splits to simplify encoding
@@ -1173,6 +1551,27 @@ krlDeliveryEndpoint
 -- | The end (exclusive) of the key range.
 krlEnd :: Lens' KeyRangeLocation (Maybe Text)
 krlEnd = lens _krlEnd (\ s a -> s{_krlEnd = a})
+
+instance FromJSON KeyRangeLocation where
+        parseJSON
+          = withObject "KeyRangeLocation"
+              (\ o ->
+                 KeyRangeLocation <$>
+                   (o .:? "persistentDirectory") <*> (o .:? "dataDisk")
+                     <*> (o .:? "start")
+                     <*> (o .:? "deliveryEndpoint")
+                     <*> (o .:? "end"))
+
+instance ToJSON KeyRangeLocation where
+        toJSON KeyRangeLocation{..}
+          = object
+              (catMaybes
+                 [("persistentDirectory" .=) <$>
+                    _krlPersistentDirectory,
+                  ("dataDisk" .=) <$> _krlDataDisk,
+                  ("start" .=) <$> _krlStart,
+                  ("deliveryEndpoint" .=) <$> _krlDeliveryEndpoint,
+                  ("end" .=) <$> _krlEnd])
 
 -- | Request to lease WorkItems.
 --
@@ -1244,6 +1643,29 @@ lwirWorkerId :: Lens' LeaseWorkItemRequest (Maybe Text)
 lwirWorkerId
   = lens _lwirWorkerId (\ s a -> s{_lwirWorkerId = a})
 
+instance FromJSON LeaseWorkItemRequest where
+        parseJSON
+          = withObject "LeaseWorkItemRequest"
+              (\ o ->
+                 LeaseWorkItemRequest <$>
+                   (o .:? "workItemTypes" .!= mempty) <*>
+                     (o .:? "currentWorkerTime")
+                     <*> (o .:? "workerCapabilities" .!= mempty)
+                     <*> (o .:? "requestedLeaseDuration")
+                     <*> (o .:? "workerId"))
+
+instance ToJSON LeaseWorkItemRequest where
+        toJSON LeaseWorkItemRequest{..}
+          = object
+              (catMaybes
+                 [("workItemTypes" .=) <$> _lwirWorkItemTypes,
+                  ("currentWorkerTime" .=) <$> _lwirCurrentWorkerTime,
+                  ("workerCapabilities" .=) <$>
+                    _lwirWorkerCapabilities,
+                  ("requestedLeaseDuration" .=) <$>
+                    _lwirRequestedLeaseDuration,
+                  ("workerId" .=) <$> _lwirWorkerId])
+
 -- | Response to a request to lease WorkItems.
 --
 -- /See:/ 'leaseWorkItemResponse' smart constructor.
@@ -1270,6 +1692,18 @@ lwirWorkItems
       (\ s a -> s{_lwirWorkItems = a})
       . _Default
       . _Coerce
+
+instance FromJSON LeaseWorkItemResponse where
+        parseJSON
+          = withObject "LeaseWorkItemResponse"
+              (\ o ->
+                 LeaseWorkItemResponse <$>
+                   (o .:? "workItems" .!= mempty))
+
+instance ToJSON LeaseWorkItemResponse where
+        toJSON LeaseWorkItemResponse{..}
+          = object
+              (catMaybes [("workItems" .=) <$> _lwirWorkItems])
 
 -- | Response to a request to list job messages.
 --
@@ -1308,6 +1742,21 @@ ljmrNextPageToken
   = lens _ljmrNextPageToken
       (\ s a -> s{_ljmrNextPageToken = a})
 
+instance FromJSON ListJobMessagesResponse where
+        parseJSON
+          = withObject "ListJobMessagesResponse"
+              (\ o ->
+                 ListJobMessagesResponse <$>
+                   (o .:? "jobMessages" .!= mempty) <*>
+                     (o .:? "nextPageToken"))
+
+instance ToJSON ListJobMessagesResponse where
+        toJSON ListJobMessagesResponse{..}
+          = object
+              (catMaybes
+                 [("jobMessages" .=) <$> _ljmrJobMessages,
+                  ("nextPageToken" .=) <$> _ljmrNextPageToken])
+
 -- | Response to a request to list Dataflow jobs. This may be a partial
 -- response, depending on the page size in the ListJobsRequest.
 --
@@ -1343,6 +1792,21 @@ ljrJobs :: Lens' ListJobsResponse [Maybe Job]
 ljrJobs
   = lens _ljrJobs (\ s a -> s{_ljrJobs = a}) . _Default
       . _Coerce
+
+instance FromJSON ListJobsResponse where
+        parseJSON
+          = withObject "ListJobsResponse"
+              (\ o ->
+                 ListJobsResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "jobs" .!= mempty))
+
+instance ToJSON ListJobsResponse where
+        toJSON ListJobsResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _ljrNextPageToken,
+                  ("jobs" .=) <$> _ljrJobs])
 
 -- | MapTask consists of an ordered set of instructions, each of which
 -- describes one particular low-level operation for the worker to perform
@@ -1393,6 +1857,23 @@ mtStageName :: Lens' MapTask (Maybe Text)
 mtStageName
   = lens _mtStageName (\ s a -> s{_mtStageName = a})
 
+instance FromJSON MapTask where
+        parseJSON
+          = withObject "MapTask"
+              (\ o ->
+                 MapTask <$>
+                   (o .:? "instructions" .!= mempty) <*>
+                     (o .:? "systemName")
+                     <*> (o .:? "stageName"))
+
+instance ToJSON MapTask where
+        toJSON MapTask{..}
+          = object
+              (catMaybes
+                 [("instructions" .=) <$> _mtInstructions,
+                  ("systemName" .=) <$> _mtSystemName,
+                  ("stageName" .=) <$> _mtStageName])
+
 -- | Identifies a metric, by describing the source which generated the
 -- metric.
 --
@@ -1440,6 +1921,22 @@ msnContext
 msnName :: Lens' MetricStructuredName (Maybe Text)
 msnName = lens _msnName (\ s a -> s{_msnName = a})
 
+instance FromJSON MetricStructuredName where
+        parseJSON
+          = withObject "MetricStructuredName"
+              (\ o ->
+                 MetricStructuredName <$>
+                   (o .:? "origin") <*> (o .:? "context") <*>
+                     (o .:? "name"))
+
+instance ToJSON MetricStructuredName where
+        toJSON MetricStructuredName{..}
+          = object
+              (catMaybes
+                 [("origin" .=) <$> _msnOrigin,
+                  ("context" .=) <$> _msnContext,
+                  ("name" .=) <$> _msnName])
+
 -- | Zero or more labeled fields which identify the part of the job this
 -- metric is associated with, such as the name of a step or collection. For
 -- example, built-in counters associated with steps will have
@@ -1456,6 +1953,14 @@ data MetricStructuredNameContext =
 metricStructuredNameContext
     :: MetricStructuredNameContext
 metricStructuredNameContext = MetricStructuredNameContext
+
+instance FromJSON MetricStructuredNameContext where
+        parseJSON
+          = withObject "MetricStructuredNameContext"
+              (\ o -> pure MetricStructuredNameContext)
+
+instance ToJSON MetricStructuredNameContext where
+        toJSON = const (Object mempty)
 
 -- | Describes the state of a metric.
 --
@@ -1569,6 +2074,34 @@ muName = lens _muName (\ s a -> s{_muName = a})
 muScalar :: Lens' MetricUpdate (Maybe (Either Text Int64))
 muScalar = lens _muScalar (\ s a -> s{_muScalar = a})
 
+instance FromJSON MetricUpdate where
+        parseJSON
+          = withObject "MetricUpdate"
+              (\ o ->
+                 MetricUpdate <$>
+                   (o .:? "meanSum") <*> (o .:? "internal") <*>
+                     (o .:? "set")
+                     <*> (o .:? "cumulative")
+                     <*> (o .:? "kind")
+                     <*> (o .:? "updateTime")
+                     <*> (o .:? "meanCount")
+                     <*> (o .:? "name")
+                     <*> (o .:? "scalar"))
+
+instance ToJSON MetricUpdate where
+        toJSON MetricUpdate{..}
+          = object
+              (catMaybes
+                 [("meanSum" .=) <$> _muMeanSum,
+                  ("internal" .=) <$> _muInternal,
+                  ("set" .=) <$> _muSet,
+                  ("cumulative" .=) <$> _muCumulative,
+                  ("kind" .=) <$> _muKind,
+                  ("updateTime" .=) <$> _muUpdateTime,
+                  ("meanCount" .=) <$> _muMeanCount,
+                  ("name" .=) <$> _muName,
+                  ("scalar" .=) <$> _muScalar])
+
 -- | Describes mounted data disk.
 --
 -- /See:/ 'mountedDataDisk' smart constructor.
@@ -1595,6 +2128,16 @@ mddDataDisk :: Lens' MountedDataDisk (Maybe Text)
 mddDataDisk
   = lens _mddDataDisk (\ s a -> s{_mddDataDisk = a})
 
+instance FromJSON MountedDataDisk where
+        parseJSON
+          = withObject "MountedDataDisk"
+              (\ o -> MountedDataDisk <$> (o .:? "dataDisk"))
+
+instance ToJSON MountedDataDisk where
+        toJSON MountedDataDisk{..}
+          = object
+              (catMaybes [("dataDisk" .=) <$> _mddDataDisk])
+
 -- | Information about an output of a multi-output DoFn.
 --
 -- /See:/ 'multiOutputInfo' smart constructor.
@@ -1618,6 +2161,15 @@ multiOutputInfo =
 -- correspond to the tag of some SideInputInfo.
 moiTag :: Lens' MultiOutputInfo (Maybe Text)
 moiTag = lens _moiTag (\ s a -> s{_moiTag = a})
+
+instance FromJSON MultiOutputInfo where
+        parseJSON
+          = withObject "MultiOutputInfo"
+              (\ o -> MultiOutputInfo <$> (o .:? "tag"))
+
+instance ToJSON MultiOutputInfo where
+        toJSON MultiOutputInfo{..}
+          = object (catMaybes [("tag" .=) <$> _moiTag])
 
 -- | Packages that need to be installed in order for a worker to run the
 -- steps of the Dataflow job which will be assigned to its worker pool.
@@ -1657,6 +2209,19 @@ pLocation
 -- | The name of the package.
 pName :: Lens' Package (Maybe Text)
 pName = lens _pName (\ s a -> s{_pName = a})
+
+instance FromJSON Package where
+        parseJSON
+          = withObject "Package"
+              (\ o ->
+                 Package <$> (o .:? "location") <*> (o .:? "name"))
+
+instance ToJSON Package where
+        toJSON Package{..}
+          = object
+              (catMaybes
+                 [("location" .=) <$> _pLocation,
+                  ("name" .=) <$> _pName])
 
 -- | An instruction that does a ParDo operation. Takes one main input and
 -- zero or more side inputs, and produces zero or more outputs. Runs user
@@ -1726,6 +2291,27 @@ pdiUserFn :: Lens' ParDoInstruction (Maybe ParDoInstructionUserFn)
 pdiUserFn
   = lens _pdiUserFn (\ s a -> s{_pdiUserFn = a})
 
+instance FromJSON ParDoInstruction where
+        parseJSON
+          = withObject "ParDoInstruction"
+              (\ o ->
+                 ParDoInstruction <$>
+                   (o .:? "numOutputs") <*>
+                     (o .:? "multiOutputInfos" .!= mempty)
+                     <*> (o .:? "sideInputs" .!= mempty)
+                     <*> (o .:? "input")
+                     <*> (o .:? "userFn"))
+
+instance ToJSON ParDoInstruction where
+        toJSON ParDoInstruction{..}
+          = object
+              (catMaybes
+                 [("numOutputs" .=) <$> _pdiNumOutputs,
+                  ("multiOutputInfos" .=) <$> _pdiMultiOutputInfos,
+                  ("sideInputs" .=) <$> _pdiSideInputs,
+                  ("input" .=) <$> _pdiInput,
+                  ("userFn" .=) <$> _pdiUserFn])
+
 -- | The user function to invoke.
 --
 -- /See:/ 'parDoInstructionUserFn' smart constructor.
@@ -1738,6 +2324,14 @@ data ParDoInstructionUserFn =
 parDoInstructionUserFn
     :: ParDoInstructionUserFn
 parDoInstructionUserFn = ParDoInstructionUserFn
+
+instance FromJSON ParDoInstructionUserFn where
+        parseJSON
+          = withObject "ParDoInstructionUserFn"
+              (\ o -> pure ParDoInstructionUserFn)
+
+instance ToJSON ParDoInstructionUserFn where
+        toJSON = const (Object mempty)
 
 -- | Describes a particular operation comprising a MapTask.
 --
@@ -1825,6 +2419,31 @@ piFlatten :: Lens' ParallelInstruction (Maybe (Maybe FlattenInstruction))
 piFlatten
   = lens _piFlatten (\ s a -> s{_piFlatten = a})
 
+instance FromJSON ParallelInstruction where
+        parseJSON
+          = withObject "ParallelInstruction"
+              (\ o ->
+                 ParallelInstruction <$>
+                   (o .:? "read") <*> (o .:? "write") <*>
+                     (o .:? "parDo")
+                     <*> (o .:? "partialGroupByKey")
+                     <*> (o .:? "outputs" .!= mempty)
+                     <*> (o .:? "name")
+                     <*> (o .:? "systemName")
+                     <*> (o .:? "flatten"))
+
+instance ToJSON ParallelInstruction where
+        toJSON ParallelInstruction{..}
+          = object
+              (catMaybes
+                 [("read" .=) <$> _piRead, ("write" .=) <$> _piWrite,
+                  ("parDo" .=) <$> _piParDo,
+                  ("partialGroupByKey" .=) <$> _piPartialGroupByKey,
+                  ("outputs" .=) <$> _piOutputs,
+                  ("name" .=) <$> _piName,
+                  ("systemName" .=) <$> _piSystemName,
+                  ("flatten" .=) <$> _piFlatten])
+
 -- | An instruction that does a partial group-by-key. One input and one
 -- output.
 --
@@ -1870,6 +2489,23 @@ pgbkiInputElementCodec
   = lens _pgbkiInputElementCodec
       (\ s a -> s{_pgbkiInputElementCodec = a})
 
+instance FromJSON PartialGroupByKeyInstruction where
+        parseJSON
+          = withObject "PartialGroupByKeyInstruction"
+              (\ o ->
+                 PartialGroupByKeyInstruction <$>
+                   (o .:? "valueCombiningFn") <*> (o .:? "input") <*>
+                     (o .:? "inputElementCodec"))
+
+instance ToJSON PartialGroupByKeyInstruction where
+        toJSON PartialGroupByKeyInstruction{..}
+          = object
+              (catMaybes
+                 [("valueCombiningFn" .=) <$> _pgbkiValueCombiningFn,
+                  ("input" .=) <$> _pgbkiInput,
+                  ("inputElementCodec" .=) <$>
+                    _pgbkiInputElementCodec])
+
 -- | The codec to use for interpreting an element in the input PTable.
 --
 -- /See:/ 'partialGroupByKeyInstructionInputElementCodec' smart constructor.
@@ -1884,6 +2520,18 @@ partialGroupByKeyInstructionInputElementCodec
 partialGroupByKeyInstructionInputElementCodec =
     PartialGroupByKeyInstructionInputElementCodec
 
+instance FromJSON
+         PartialGroupByKeyInstructionInputElementCodec where
+        parseJSON
+          = withObject
+              "PartialGroupByKeyInstructionInputElementCodec"
+              (\ o ->
+                 pure PartialGroupByKeyInstructionInputElementCodec)
+
+instance ToJSON
+         PartialGroupByKeyInstructionInputElementCodec where
+        toJSON = const (Object mempty)
+
 -- | The value combining function to invoke.
 --
 -- /See:/ 'partialGroupByKeyInstructionValueCombiningFn' smart constructor.
@@ -1897,6 +2545,18 @@ partialGroupByKeyInstructionValueCombiningFn
     :: PartialGroupByKeyInstructionValueCombiningFn
 partialGroupByKeyInstructionValueCombiningFn =
     PartialGroupByKeyInstructionValueCombiningFn
+
+instance FromJSON
+         PartialGroupByKeyInstructionValueCombiningFn where
+        parseJSON
+          = withObject
+              "PartialGroupByKeyInstructionValueCombiningFn"
+              (\ o ->
+                 pure PartialGroupByKeyInstructionValueCombiningFn)
+
+instance ToJSON
+         PartialGroupByKeyInstructionValueCombiningFn where
+        toJSON = const (Object mempty)
 
 -- | Position defines a position within a collection of data. The value can
 -- be either the end position, a key (used with ordered collections), a
@@ -1970,6 +2630,27 @@ pKey = lens _pKey (\ s a -> s{_pKey = a})
 -- of an unbounded range.
 pEnd :: Lens' Position (Maybe Bool)
 pEnd = lens _pEnd (\ s a -> s{_pEnd = a})
+
+instance FromJSON Position where
+        parseJSON
+          = withObject "Position"
+              (\ o ->
+                 Position <$>
+                   (o .:? "byteOffset") <*> (o .:? "concatPosition") <*>
+                     (o .:? "recordIndex")
+                     <*> (o .:? "shufflePosition")
+                     <*> (o .:? "key")
+                     <*> (o .:? "end"))
+
+instance ToJSON Position where
+        toJSON Position{..}
+          = object
+              (catMaybes
+                 [("byteOffset" .=) <$> _pByteOffset,
+                  ("concatPosition" .=) <$> _pConcatPosition,
+                  ("recordIndex" .=) <$> _pRecordIndex,
+                  ("shufflePosition" .=) <$> _pShufflePosition,
+                  ("key" .=) <$> _pKey, ("end" .=) <$> _pEnd])
 
 -- | Identifies a pubsub location to use for transferring data into or out of
 -- a streaming Dataflow job.
@@ -2048,6 +2729,30 @@ plSubscription
   = lens _plSubscription
       (\ s a -> s{_plSubscription = a})
 
+instance FromJSON PubsubLocation where
+        parseJSON
+          = withObject "PubsubLocation"
+              (\ o ->
+                 PubsubLocation <$>
+                   (o .:? "trackingSubscription") <*>
+                     (o .:? "dropLateData")
+                     <*> (o .:? "timestampLabel")
+                     <*> (o .:? "idLabel")
+                     <*> (o .:? "topic")
+                     <*> (o .:? "subscription"))
+
+instance ToJSON PubsubLocation where
+        toJSON PubsubLocation{..}
+          = object
+              (catMaybes
+                 [("trackingSubscription" .=) <$>
+                    _plTrackingSubscription,
+                  ("dropLateData" .=) <$> _plDropLateData,
+                  ("timestampLabel" .=) <$> _plTimestampLabel,
+                  ("idLabel" .=) <$> _plIdLabel,
+                  ("topic" .=) <$> _plTopic,
+                  ("subscription" .=) <$> _plSubscription])
+
 -- | An instruction that reads records. Takes no inputs, produces one output.
 --
 -- /See:/ 'readInstruction' smart constructor.
@@ -2070,6 +2775,15 @@ readInstruction =
 -- | The source to read from.
 riSource :: Lens' ReadInstruction (Maybe (Maybe Source))
 riSource = lens _riSource (\ s a -> s{_riSource = a})
+
+instance FromJSON ReadInstruction where
+        parseJSON
+          = withObject "ReadInstruction"
+              (\ o -> ReadInstruction <$> (o .:? "source"))
+
+instance ToJSON ReadInstruction where
+        toJSON ReadInstruction{..}
+          = object (catMaybes [("source" .=) <$> _riSource])
 
 -- | Request to report the status of WorkItems.
 --
@@ -2123,6 +2837,24 @@ rwisrWorkerId
   = lens _rwisrWorkerId
       (\ s a -> s{_rwisrWorkerId = a})
 
+instance FromJSON ReportWorkItemStatusRequest where
+        parseJSON
+          = withObject "ReportWorkItemStatusRequest"
+              (\ o ->
+                 ReportWorkItemStatusRequest <$>
+                   (o .:? "currentWorkerTime") <*>
+                     (o .:? "workItemStatuses" .!= mempty)
+                     <*> (o .:? "workerId"))
+
+instance ToJSON ReportWorkItemStatusRequest where
+        toJSON ReportWorkItemStatusRequest{..}
+          = object
+              (catMaybes
+                 [("currentWorkerTime" .=) <$>
+                    _rwisrCurrentWorkerTime,
+                  ("workItemStatuses" .=) <$> _rwisrWorkItemStatuses,
+                  ("workerId" .=) <$> _rwisrWorkerId])
+
 -- | Response from a request to report the status of WorkItems.
 --
 -- /See:/ 'reportWorkItemStatusResponse' smart constructor.
@@ -2152,6 +2884,20 @@ rwisrWorkItemServiceStates
       (\ s a -> s{_rwisrWorkItemServiceStates = a})
       . _Default
       . _Coerce
+
+instance FromJSON ReportWorkItemStatusResponse where
+        parseJSON
+          = withObject "ReportWorkItemStatusResponse"
+              (\ o ->
+                 ReportWorkItemStatusResponse <$>
+                   (o .:? "workItemServiceStates" .!= mempty))
+
+instance ToJSON ReportWorkItemStatusResponse where
+        toJSON ReportWorkItemStatusResponse{..}
+          = object
+              (catMaybes
+                 [("workItemServiceStates" .=) <$>
+                    _rwisrWorkItemServiceStates])
 
 -- | Describes a particular function to invoke.
 --
@@ -2228,6 +2974,28 @@ smtUserFn :: Lens' SeqMapTask (Maybe SeqMapTaskUserFn)
 smtUserFn
   = lens _smtUserFn (\ s a -> s{_smtUserFn = a})
 
+instance FromJSON SeqMapTask where
+        parseJSON
+          = withObject "SeqMapTask"
+              (\ o ->
+                 SeqMapTask <$>
+                   (o .:? "inputs" .!= mempty) <*> (o .:? "name") <*>
+                     (o .:? "outputInfos" .!= mempty)
+                     <*> (o .:? "systemName")
+                     <*> (o .:? "stageName")
+                     <*> (o .:? "userFn"))
+
+instance ToJSON SeqMapTask where
+        toJSON SeqMapTask{..}
+          = object
+              (catMaybes
+                 [("inputs" .=) <$> _smtInputs,
+                  ("name" .=) <$> _smtName,
+                  ("outputInfos" .=) <$> _smtOutputInfos,
+                  ("systemName" .=) <$> _smtSystemName,
+                  ("stageName" .=) <$> _smtStageName,
+                  ("userFn" .=) <$> _smtUserFn])
+
 -- | Information about an output of a SeqMapTask.
 --
 -- /See:/ 'seqMapTaskOutputInfo' smart constructor.
@@ -2260,6 +3028,20 @@ smtoiSink
 smtoiTag :: Lens' SeqMapTaskOutputInfo (Maybe Text)
 smtoiTag = lens _smtoiTag (\ s a -> s{_smtoiTag = a})
 
+instance FromJSON SeqMapTaskOutputInfo where
+        parseJSON
+          = withObject "SeqMapTaskOutputInfo"
+              (\ o ->
+                 SeqMapTaskOutputInfo <$>
+                   (o .:? "sink") <*> (o .:? "tag"))
+
+instance ToJSON SeqMapTaskOutputInfo where
+        toJSON SeqMapTaskOutputInfo{..}
+          = object
+              (catMaybes
+                 [("sink" .=) <$> _smtoiSink,
+                  ("tag" .=) <$> _smtoiTag])
+
 -- | The user function to invoke.
 --
 -- /See:/ 'seqMapTaskUserFn' smart constructor.
@@ -2272,6 +3054,14 @@ data SeqMapTaskUserFn =
 seqMapTaskUserFn
     :: SeqMapTaskUserFn
 seqMapTaskUserFn = SeqMapTaskUserFn
+
+instance FromJSON SeqMapTaskUserFn where
+        parseJSON
+          = withObject "SeqMapTaskUserFn"
+              (\ o -> pure SeqMapTaskUserFn)
+
+instance ToJSON SeqMapTaskUserFn where
+        toJSON = const (Object mempty)
 
 -- | A task which consists of a shell command for the worker to execute.
 --
@@ -2305,6 +3095,20 @@ stCommand
 stExitCode :: Lens' ShellTask (Maybe Int32)
 stExitCode
   = lens _stExitCode (\ s a -> s{_stExitCode = a})
+
+instance FromJSON ShellTask where
+        parseJSON
+          = withObject "ShellTask"
+              (\ o ->
+                 ShellTask <$>
+                   (o .:? "command") <*> (o .:? "exitCode"))
+
+instance ToJSON ShellTask where
+        toJSON ShellTask{..}
+          = object
+              (catMaybes
+                 [("command" .=) <$> _stCommand,
+                  ("exitCode" .=) <$> _stExitCode])
 
 -- | Information about a side input of a DoFn or an input of a SeqDoFn.
 --
@@ -2352,6 +3156,21 @@ siiSources
       _Default
       . _Coerce
 
+instance FromJSON SideInputInfo where
+        parseJSON
+          = withObject "SideInputInfo"
+              (\ o ->
+                 SideInputInfo <$>
+                   (o .:? "tag") <*> (o .:? "kind") <*>
+                     (o .:? "sources" .!= mempty))
+
+instance ToJSON SideInputInfo where
+        toJSON SideInputInfo{..}
+          = object
+              (catMaybes
+                 [("tag" .=) <$> _siiTag, ("kind" .=) <$> _siiKind,
+                  ("sources" .=) <$> _siiSources])
+
 -- | How to interpret the source element(s) as a side input value.
 --
 -- /See:/ 'sideInputInfoKind' smart constructor.
@@ -2364,6 +3183,14 @@ data SideInputInfoKind =
 sideInputInfoKind
     :: SideInputInfoKind
 sideInputInfoKind = SideInputInfoKind
+
+instance FromJSON SideInputInfoKind where
+        parseJSON
+          = withObject "SideInputInfoKind"
+              (\ o -> pure SideInputInfoKind)
+
+instance ToJSON SideInputInfoKind where
+        toJSON = const (Object mempty)
 
 -- | A sink that records can be encoded and written to.
 --
@@ -2396,6 +3223,18 @@ sinCodec = lens _sinCodec (\ s a -> s{_sinCodec = a})
 sinSpec :: Lens' Sink (Maybe SinkSpec)
 sinSpec = lens _sinSpec (\ s a -> s{_sinSpec = a})
 
+instance FromJSON Sink where
+        parseJSON
+          = withObject "Sink"
+              (\ o -> Sink <$> (o .:? "codec") <*> (o .:? "spec"))
+
+instance ToJSON Sink where
+        toJSON Sink{..}
+          = object
+              (catMaybes
+                 [("codec" .=) <$> _sinCodec,
+                  ("spec" .=) <$> _sinSpec])
+
 -- | The codec to use to encode data written to the sink.
 --
 -- /See:/ 'sinkCodec' smart constructor.
@@ -2409,6 +3248,13 @@ sinkCodec
     :: SinkCodec
 sinkCodec = SinkCodec
 
+instance FromJSON SinkCodec where
+        parseJSON
+          = withObject "SinkCodec" (\ o -> pure SinkCodec)
+
+instance ToJSON SinkCodec where
+        toJSON = const (Object mempty)
+
 -- | The sink to write to, plus its parameters.
 --
 -- /See:/ 'sinkSpec' smart constructor.
@@ -2421,6 +3267,13 @@ data SinkSpec =
 sinkSpec
     :: SinkSpec
 sinkSpec = SinkSpec
+
+instance FromJSON SinkSpec where
+        parseJSON
+          = withObject "SinkSpec" (\ o -> pure SinkSpec)
+
+instance ToJSON SinkSpec where
+        toJSON = const (Object mempty)
 
 -- | A source that records can be read and decoded from.
 --
@@ -2505,6 +3358,27 @@ sMetadata :: Lens' Source (Maybe (Maybe SourceMetadata))
 sMetadata
   = lens _sMetadata (\ s a -> s{_sMetadata = a})
 
+instance FromJSON Source where
+        parseJSON
+          = withObject "Source"
+              (\ o ->
+                 Source <$>
+                   (o .:? "doesNotNeedSplitting") <*>
+                     (o .:? "baseSpecs" .!= mempty)
+                     <*> (o .:? "codec")
+                     <*> (o .:? "spec")
+                     <*> (o .:? "metadata"))
+
+instance ToJSON Source where
+        toJSON Source{..}
+          = object
+              (catMaybes
+                 [("doesNotNeedSplitting" .=) <$>
+                    _sDoesNotNeedSplitting,
+                  ("baseSpecs" .=) <$> _sBaseSpecs,
+                  ("codec" .=) <$> _sCodec, ("spec" .=) <$> _sSpec,
+                  ("metadata" .=) <$> _sMetadata])
+
 -- | The codec to use to decode data read from the source.
 --
 -- /See:/ 'sourceCodec' smart constructor.
@@ -2517,6 +3391,13 @@ data SourceCodec =
 sourceCodec
     :: SourceCodec
 sourceCodec = SourceCodec
+
+instance FromJSON SourceCodec where
+        parseJSON
+          = withObject "SourceCodec" (\ o -> pure SourceCodec)
+
+instance ToJSON SourceCodec where
+        toJSON = const (Object mempty)
 
 -- | DEPRECATED in favor of DynamicSourceSplit.
 --
@@ -2571,6 +3452,24 @@ sfResidualSource
   = lens _sfResidualSource
       (\ s a -> s{_sfResidualSource = a})
 
+instance FromJSON SourceFork where
+        parseJSON
+          = withObject "SourceFork"
+              (\ o ->
+                 SourceFork <$>
+                   (o .:? "residual") <*> (o .:? "primarySource") <*>
+                     (o .:? "primary")
+                     <*> (o .:? "residualSource"))
+
+instance ToJSON SourceFork where
+        toJSON SourceFork{..}
+          = object
+              (catMaybes
+                 [("residual" .=) <$> _sfResidual,
+                  ("primarySource" .=) <$> _sfPrimarySource,
+                  ("primary" .=) <$> _sfPrimary,
+                  ("residualSource" .=) <$> _sfResidualSource])
+
 -- | A request to compute the SourceMetadata of a Source.
 --
 -- /See:/ 'sourceGetMetadataRequest' smart constructor.
@@ -2594,6 +3493,16 @@ sourceGetMetadataRequest =
 sgmrSource :: Lens' SourceGetMetadataRequest (Maybe (Maybe Source))
 sgmrSource
   = lens _sgmrSource (\ s a -> s{_sgmrSource = a})
+
+instance FromJSON SourceGetMetadataRequest where
+        parseJSON
+          = withObject "SourceGetMetadataRequest"
+              (\ o ->
+                 SourceGetMetadataRequest <$> (o .:? "source"))
+
+instance ToJSON SourceGetMetadataRequest where
+        toJSON SourceGetMetadataRequest{..}
+          = object (catMaybes [("source" .=) <$> _sgmrSource])
 
 -- | The result of a SourceGetMetadataOperation.
 --
@@ -2619,6 +3528,17 @@ sgmrMetadata :: Lens' SourceGetMetadataResponse (Maybe (Maybe SourceMetadata))
 sgmrMetadata
   = lens _sgmrMetadata (\ s a -> s{_sgmrMetadata = a})
 
+instance FromJSON SourceGetMetadataResponse where
+        parseJSON
+          = withObject "SourceGetMetadataResponse"
+              (\ o ->
+                 SourceGetMetadataResponse <$> (o .:? "metadata"))
+
+instance ToJSON SourceGetMetadataResponse where
+        toJSON SourceGetMetadataResponse{..}
+          = object
+              (catMaybes [("metadata" .=) <$> _sgmrMetadata])
+
 --
 -- /See:/ 'sourceItemBaseSpecs' smart constructor.
 data SourceItemBaseSpecs =
@@ -2630,6 +3550,14 @@ data SourceItemBaseSpecs =
 sourceItemBaseSpecs
     :: SourceItemBaseSpecs
 sourceItemBaseSpecs = SourceItemBaseSpecs
+
+instance FromJSON SourceItemBaseSpecs where
+        parseJSON
+          = withObject "SourceItemBaseSpecs"
+              (\ o -> pure SourceItemBaseSpecs)
+
+instance ToJSON SourceItemBaseSpecs where
+        toJSON = const (Object mempty)
 
 -- | Metadata about a Source useful for automatically optimizing and tuning
 -- the pipeline, etc.
@@ -2680,6 +3608,23 @@ smInfinite :: Lens' SourceMetadata (Maybe Bool)
 smInfinite
   = lens _smInfinite (\ s a -> s{_smInfinite = a})
 
+instance FromJSON SourceMetadata where
+        parseJSON
+          = withObject "SourceMetadata"
+              (\ o ->
+                 SourceMetadata <$>
+                   (o .:? "estimatedSizeBytes") <*>
+                     (o .:? "producesSortedKeys")
+                     <*> (o .:? "infinite"))
+
+instance ToJSON SourceMetadata where
+        toJSON SourceMetadata{..}
+          = object
+              (catMaybes
+                 [("estimatedSizeBytes" .=) <$> _smEstimatedSizeBytes,
+                  ("producesSortedKeys" .=) <$> _smProducesSortedKeys,
+                  ("infinite" .=) <$> _smInfinite])
+
 -- | A work item that represents the different operations that can be
 -- performed on a user-defined Source specification.
 --
@@ -2713,6 +3658,20 @@ sorGetMetadata :: Lens' SourceOperationRequest (Maybe (Maybe SourceGetMetadataRe
 sorGetMetadata
   = lens _sorGetMetadata
       (\ s a -> s{_sorGetMetadata = a})
+
+instance FromJSON SourceOperationRequest where
+        parseJSON
+          = withObject "SourceOperationRequest"
+              (\ o ->
+                 SourceOperationRequest <$>
+                   (o .:? "split") <*> (o .:? "getMetadata"))
+
+instance ToJSON SourceOperationRequest where
+        toJSON SourceOperationRequest{..}
+          = object
+              (catMaybes
+                 [("split" .=) <$> _sorSplit,
+                  ("getMetadata" .=) <$> _sorGetMetadata])
 
 -- | The result of a SourceOperationRequest, specified in
 -- ReportWorkItemStatusRequest.source_operation when the work item is
@@ -2748,6 +3707,20 @@ sGetMetadata :: Lens' SourceOperationResponse (Maybe (Maybe SourceGetMetadataRes
 sGetMetadata
   = lens _sGetMetadata (\ s a -> s{_sGetMetadata = a})
 
+instance FromJSON SourceOperationResponse where
+        parseJSON
+          = withObject "SourceOperationResponse"
+              (\ o ->
+                 SourceOperationResponse <$>
+                   (o .:? "split") <*> (o .:? "getMetadata"))
+
+instance ToJSON SourceOperationResponse where
+        toJSON SourceOperationResponse{..}
+          = object
+              (catMaybes
+                 [("split" .=) <$> _sSplit,
+                  ("getMetadata" .=) <$> _sGetMetadata])
+
 -- | The source to read from, plus its parameters.
 --
 -- /See:/ 'sourceSpec' smart constructor.
@@ -2760,6 +3733,13 @@ data SourceSpec =
 sourceSpec
     :: SourceSpec
 sourceSpec = SourceSpec
+
+instance FromJSON SourceSpec where
+        parseJSON
+          = withObject "SourceSpec" (\ o -> pure SourceSpec)
+
+instance ToJSON SourceSpec where
+        toJSON = const (Object mempty)
 
 -- | Hints for splitting a Source into bundles (parts for parallel
 -- processing) using SourceSplitRequest.
@@ -2797,6 +3777,23 @@ ssoDesiredBundleSizeBytes :: Lens' SourceSplitOptions (Maybe Int64)
 ssoDesiredBundleSizeBytes
   = lens _ssoDesiredBundleSizeBytes
       (\ s a -> s{_ssoDesiredBundleSizeBytes = a})
+
+instance FromJSON SourceSplitOptions where
+        parseJSON
+          = withObject "SourceSplitOptions"
+              (\ o ->
+                 SourceSplitOptions <$>
+                   (o .:? "desiredShardSizeBytes") <*>
+                     (o .:? "desiredBundleSizeBytes"))
+
+instance ToJSON SourceSplitOptions where
+        toJSON SourceSplitOptions{..}
+          = object
+              (catMaybes
+                 [("desiredShardSizeBytes" .=) <$>
+                    _ssoDesiredShardSizeBytes,
+                  ("desiredBundleSizeBytes" .=) <$>
+                    _ssoDesiredBundleSizeBytes])
 
 -- | Represents the operation to split a high-level Source specification into
 -- bundles (parts for parallel processing). At a high level, splitting of a
@@ -2840,6 +3837,20 @@ ssrSource
 ssrOptions :: Lens' SourceSplitRequest (Maybe (Maybe SourceSplitOptions))
 ssrOptions
   = lens _ssrOptions (\ s a -> s{_ssrOptions = a})
+
+instance FromJSON SourceSplitRequest where
+        parseJSON
+          = withObject "SourceSplitRequest"
+              (\ o ->
+                 SourceSplitRequest <$>
+                   (o .:? "source") <*> (o .:? "options"))
+
+instance ToJSON SourceSplitRequest where
+        toJSON SourceSplitRequest{..}
+          = object
+              (catMaybes
+                 [("source" .=) <$> _ssrSource,
+                  ("options" .=) <$> _ssrOptions])
 
 -- | The response to a SourceSplitRequest.
 --
@@ -2893,6 +3904,23 @@ ssrOutcome :: Lens' SourceSplitResponse (Maybe Text)
 ssrOutcome
   = lens _ssrOutcome (\ s a -> s{_ssrOutcome = a})
 
+instance FromJSON SourceSplitResponse where
+        parseJSON
+          = withObject "SourceSplitResponse"
+              (\ o ->
+                 SourceSplitResponse <$>
+                   (o .:? "bundles" .!= mempty) <*>
+                     (o .:? "shards" .!= mempty)
+                     <*> (o .:? "outcome"))
+
+instance ToJSON SourceSplitResponse where
+        toJSON SourceSplitResponse{..}
+          = object
+              (catMaybes
+                 [("bundles" .=) <$> _ssrBundles,
+                  ("shards" .=) <$> _ssrShards,
+                  ("outcome" .=) <$> _ssrOutcome])
+
 -- | DEPRECATED in favor of DerivedSource.
 --
 -- /See:/ 'sourceSplitShard' smart constructor.
@@ -2927,6 +3955,20 @@ sssSource :: Lens' SourceSplitShard (Maybe (Maybe Source))
 sssSource
   = lens _sssSource (\ s a -> s{_sssSource = a})
 
+instance FromJSON SourceSplitShard where
+        parseJSON
+          = withObject "SourceSplitShard"
+              (\ o ->
+                 SourceSplitShard <$>
+                   (o .:? "derivationMode") <*> (o .:? "source"))
+
+instance ToJSON SourceSplitShard where
+        toJSON SourceSplitShard{..}
+          = object
+              (catMaybes
+                 [("derivationMode" .=) <$> _sssDerivationMode,
+                  ("source" .=) <$> _sssSource])
+
 -- | State family configuration.
 --
 -- /See:/ 'stateFamilyConfig' smart constructor.
@@ -2960,6 +4002,20 @@ sfcStateFamily :: Lens' StateFamilyConfig (Maybe Text)
 sfcStateFamily
   = lens _sfcStateFamily
       (\ s a -> s{_sfcStateFamily = a})
+
+instance FromJSON StateFamilyConfig where
+        parseJSON
+          = withObject "StateFamilyConfig"
+              (\ o ->
+                 StateFamilyConfig <$>
+                   (o .:? "isRead") <*> (o .:? "stateFamily"))
+
+instance ToJSON StateFamilyConfig where
+        toJSON StateFamilyConfig{..}
+          = object
+              (catMaybes
+                 [("isRead" .=) <$> _sfcIsRead,
+                  ("stateFamily" .=) <$> _sfcStateFamily])
 
 -- | The \`Status\` type defines a logical error model that is suitable for
 -- different programming environments, including REST APIs and RPC APIs. It
@@ -3041,6 +4097,22 @@ sCode = lens _sCode (\ s a -> s{_sCode = a})
 sMessage :: Lens' Status (Maybe Text)
 sMessage = lens _sMessage (\ s a -> s{_sMessage = a})
 
+instance FromJSON Status where
+        parseJSON
+          = withObject "Status"
+              (\ o ->
+                 Status <$>
+                   (o .:? "details" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON Status where
+        toJSON Status{..}
+          = object
+              (catMaybes
+                 [("details" .=) <$> _sDetails,
+                  ("code" .=) <$> _sCode,
+                  ("message" .=) <$> _sMessage])
+
 --
 -- /See:/ 'statusItemDetails' smart constructor.
 data StatusItemDetails =
@@ -3052,6 +4124,14 @@ data StatusItemDetails =
 statusItemDetails
     :: StatusItemDetails
 statusItemDetails = StatusItemDetails
+
+instance FromJSON StatusItemDetails where
+        parseJSON
+          = withObject "StatusItemDetails"
+              (\ o -> pure StatusItemDetails)
+
+instance ToJSON StatusItemDetails where
+        toJSON = const (Object mempty)
 
 -- | Defines a particular step within a Dataflow job. A job consists of
 -- multiple steps, each of which performs some specific operation as part
@@ -3106,6 +4186,21 @@ sProperties :: Lens' Step (Maybe StepProperties)
 sProperties
   = lens _sProperties (\ s a -> s{_sProperties = a})
 
+instance FromJSON Step where
+        parseJSON
+          = withObject "Step"
+              (\ o ->
+                 Step <$>
+                   (o .:? "kind") <*> (o .:? "name") <*>
+                     (o .:? "properties"))
+
+instance ToJSON Step where
+        toJSON Step{..}
+          = object
+              (catMaybes
+                 [("kind" .=) <$> _sKind, ("name" .=) <$> _sName,
+                  ("properties" .=) <$> _sProperties])
+
 -- | Named properties associated with the step. Each kind of predefined step
 -- has its own required set of properties.
 --
@@ -3119,6 +4214,14 @@ data StepProperties =
 stepProperties
     :: StepProperties
 stepProperties = StepProperties
+
+instance FromJSON StepProperties where
+        parseJSON
+          = withObject "StepProperties"
+              (\ o -> pure StepProperties)
+
+instance ToJSON StepProperties where
+        toJSON = const (Object mempty)
 
 -- | Describes a stream of data, either as input to be processed or as output
 -- of a streaming Dataflow job.
@@ -3177,6 +4280,27 @@ slPubsubLocation
   = lens _slPubsubLocation
       (\ s a -> s{_slPubsubLocation = a})
 
+instance FromJSON StreamLocation where
+        parseJSON
+          = withObject "StreamLocation"
+              (\ o ->
+                 StreamLocation <$>
+                   (o .:? "streamingStageLocation") <*>
+                     (o .:? "sideInputLocation")
+                     <*> (o .:? "customSourceLocation")
+                     <*> (o .:? "pubsubLocation"))
+
+instance ToJSON StreamLocation where
+        toJSON StreamLocation{..}
+          = object
+              (catMaybes
+                 [("streamingStageLocation" .=) <$>
+                    _slStreamingStageLocation,
+                  ("sideInputLocation" .=) <$> _slSideInputLocation,
+                  ("customSourceLocation" .=) <$>
+                    _slCustomSourceLocation,
+                  ("pubsubLocation" .=) <$> _slPubsubLocation])
+
 -- | Describes full or partial data disk assignment information of the
 -- computation ranges.
 --
@@ -3214,6 +4338,21 @@ scrComputationId :: Lens' StreamingComputationRanges (Maybe Text)
 scrComputationId
   = lens _scrComputationId
       (\ s a -> s{_scrComputationId = a})
+
+instance FromJSON StreamingComputationRanges where
+        parseJSON
+          = withObject "StreamingComputationRanges"
+              (\ o ->
+                 StreamingComputationRanges <$>
+                   (o .:? "rangeAssignments" .!= mempty) <*>
+                     (o .:? "computationId"))
+
+instance ToJSON StreamingComputationRanges where
+        toJSON StreamingComputationRanges{..}
+          = object
+              (catMaybes
+                 [("rangeAssignments" .=) <$> _scrRangeAssignments,
+                  ("computationId" .=) <$> _scrComputationId])
 
 -- | A task which describes what action should be performed for the specified
 -- streaming computation ranges.
@@ -3263,6 +4402,22 @@ sctComputationRanges
       . _Default
       . _Coerce
 
+instance FromJSON StreamingComputationTask where
+        parseJSON
+          = withObject "StreamingComputationTask"
+              (\ o ->
+                 StreamingComputationTask <$>
+                   (o .:? "taskType") <*> (o .:? "dataDisks" .!= mempty)
+                     <*> (o .:? "computationRanges" .!= mempty))
+
+instance ToJSON StreamingComputationTask where
+        toJSON StreamingComputationTask{..}
+          = object
+              (catMaybes
+                 [("taskType" .=) <$> _sctTaskType,
+                  ("dataDisks" .=) <$> _sctDataDisks,
+                  ("computationRanges" .=) <$> _sctComputationRanges])
+
 -- | A task which initializes part of a streaming Dataflow job.
 --
 -- /See:/ 'streamingSetupTask' smart constructor.
@@ -3310,6 +4465,24 @@ sstWorkerHarnessPort
   = lens _sstWorkerHarnessPort
       (\ s a -> s{_sstWorkerHarnessPort = a})
 
+instance FromJSON StreamingSetupTask where
+        parseJSON
+          = withObject "StreamingSetupTask"
+              (\ o ->
+                 StreamingSetupTask <$>
+                   (o .:? "streamingComputationTopology") <*>
+                     (o .:? "receiveWorkPort")
+                     <*> (o .:? "workerHarnessPort"))
+
+instance ToJSON StreamingSetupTask where
+        toJSON StreamingSetupTask{..}
+          = object
+              (catMaybes
+                 [("streamingComputationTopology" .=) <$>
+                    _sstStreamingComputationTopology,
+                  ("receiveWorkPort" .=) <$> _sstReceiveWorkPort,
+                  ("workerHarnessPort" .=) <$> _sstWorkerHarnessPort])
+
 -- | Identifies the location of a streaming side input.
 --
 -- /See:/ 'streamingSideInputLocation' smart constructor.
@@ -3343,6 +4516,20 @@ ssilStateFamily
   = lens _ssilStateFamily
       (\ s a -> s{_ssilStateFamily = a})
 
+instance FromJSON StreamingSideInputLocation where
+        parseJSON
+          = withObject "StreamingSideInputLocation"
+              (\ o ->
+                 StreamingSideInputLocation <$>
+                   (o .:? "tag") <*> (o .:? "stateFamily"))
+
+instance ToJSON StreamingSideInputLocation where
+        toJSON StreamingSideInputLocation{..}
+          = object
+              (catMaybes
+                 [("tag" .=) <$> _ssilTag,
+                  ("stateFamily" .=) <$> _ssilStateFamily])
+
 -- | Identifies the location of a streaming computation stage, for
 -- stage-to-stage communication.
 --
@@ -3367,6 +4554,17 @@ streamingStageLocation =
 sslStreamId :: Lens' StreamingStageLocation (Maybe Text)
 sslStreamId
   = lens _sslStreamId (\ s a -> s{_sslStreamId = a})
+
+instance FromJSON StreamingStageLocation where
+        parseJSON
+          = withObject "StreamingStageLocation"
+              (\ o ->
+                 StreamingStageLocation <$> (o .:? "streamId"))
+
+instance ToJSON StreamingStageLocation where
+        toJSON StreamingStageLocation{..}
+          = object
+              (catMaybes [("streamId" .=) <$> _sslStreamId])
 
 -- | Taskrunner configuration settings.
 --
@@ -3583,6 +4781,59 @@ trsLanguageHint
   = lens _trsLanguageHint
       (\ s a -> s{_trsLanguageHint = a})
 
+instance FromJSON TaskRunnerSettings where
+        parseJSON
+          = withObject "TaskRunnerSettings"
+              (\ o ->
+                 TaskRunnerSettings <$>
+                   (o .:? "continueOnException") <*>
+                     (o .:? "harnessCommand")
+                     <*> (o .:? "workflowFileName")
+                     <*> (o .:? "taskGroup")
+                     <*> (o .:? "alsologtostderr")
+                     <*> (o .:? "dataflowApiVersion")
+                     <*> (o .:? "logDir")
+                     <*> (o .:? "commandlinesFileName")
+                     <*> (o .:? "vmId")
+                     <*> (o .:? "baseUrl")
+                     <*> (o .:? "oauthScopes" .!= mempty)
+                     <*> (o .:? "taskUser")
+                     <*> (o .:? "streamingWorkerMainClass")
+                     <*> (o .:? "baseTaskDir")
+                     <*> (o .:? "logUploadLocation")
+                     <*> (o .:? "tempStoragePrefix")
+                     <*> (o .:? "logToSerialconsole")
+                     <*> (o .:? "parallelWorkerSettings")
+                     <*> (o .:? "languageHint"))
+
+instance ToJSON TaskRunnerSettings where
+        toJSON TaskRunnerSettings{..}
+          = object
+              (catMaybes
+                 [("continueOnException" .=) <$>
+                    _trsContinueOnException,
+                  ("harnessCommand" .=) <$> _trsHarnessCommand,
+                  ("workflowFileName" .=) <$> _trsWorkflowFileName,
+                  ("taskGroup" .=) <$> _trsTaskGroup,
+                  ("alsologtostderr" .=) <$> _trsAlsologtostderr,
+                  ("dataflowApiVersion" .=) <$> _trsDataflowApiVersion,
+                  ("logDir" .=) <$> _trsLogDir,
+                  ("commandlinesFileName" .=) <$>
+                    _trsCommandlinesFileName,
+                  ("vmId" .=) <$> _trsVmId,
+                  ("baseUrl" .=) <$> _trsBaseUrl,
+                  ("oauthScopes" .=) <$> _trsOauthScopes,
+                  ("taskUser" .=) <$> _trsTaskUser,
+                  ("streamingWorkerMainClass" .=) <$>
+                    _trsStreamingWorkerMainClass,
+                  ("baseTaskDir" .=) <$> _trsBaseTaskDir,
+                  ("logUploadLocation" .=) <$> _trsLogUploadLocation,
+                  ("tempStoragePrefix" .=) <$> _trsTempStoragePrefix,
+                  ("logToSerialconsole" .=) <$> _trsLogToSerialconsole,
+                  ("parallelWorkerSettings" .=) <$>
+                    _trsParallelWorkerSettings,
+                  ("languageHint" .=) <$> _trsLanguageHint])
+
 -- | Global topology of the streaming Dataflow job, including all
 -- computations and their sharded locations.
 --
@@ -3633,6 +4884,25 @@ tcComputations
       . _Default
       . _Coerce
 
+instance FromJSON TopologyConfig where
+        parseJSON
+          = withObject "TopologyConfig"
+              (\ o ->
+                 TopologyConfig <$>
+                   (o .:? "dataDiskAssignments" .!= mempty) <*>
+                     (o .:? "userStageToComputationNameMap")
+                     <*> (o .:? "computations" .!= mempty))
+
+instance ToJSON TopologyConfig where
+        toJSON TopologyConfig{..}
+          = object
+              (catMaybes
+                 [("dataDiskAssignments" .=) <$>
+                    _tcDataDiskAssignments,
+                  ("userStageToComputationNameMap" .=) <$>
+                    _tcUserStageToComputationNameMap,
+                  ("computations" .=) <$> _tcComputations])
+
 -- | Maps user stage names to stable computation names.
 --
 -- /See:/ 'topologyConfigUserStageToComputationNameMap' smart constructor.
@@ -3646,6 +4916,18 @@ topologyConfigUserStageToComputationNameMap
     :: TopologyConfigUserStageToComputationNameMap
 topologyConfigUserStageToComputationNameMap =
     TopologyConfigUserStageToComputationNameMap
+
+instance FromJSON
+         TopologyConfigUserStageToComputationNameMap where
+        parseJSON
+          = withObject
+              "TopologyConfigUserStageToComputationNameMap"
+              (\ o ->
+                 pure TopologyConfigUserStageToComputationNameMap)
+
+instance ToJSON
+         TopologyConfigUserStageToComputationNameMap where
+        toJSON = const (Object mempty)
 
 -- | WorkItem represents basic information about a WorkItem to be executed in
 -- the cloud.
@@ -3797,6 +5079,47 @@ wiSeqMapTask :: Lens' WorkItem (Maybe (Maybe SeqMapTask))
 wiSeqMapTask
   = lens _wiSeqMapTask (\ s a -> s{_wiSeqMapTask = a})
 
+instance FromJSON WorkItem where
+        parseJSON
+          = withObject "WorkItem"
+              (\ o ->
+                 WorkItem <$>
+                   (o .:? "jobId") <*> (o .:? "reportStatusInterval")
+                     <*> (o .:? "shellTask")
+                     <*> (o .:? "streamingSetupTask")
+                     <*> (o .:? "initialReportIndex")
+                     <*> (o .:? "mapTask")
+                     <*> (o .:? "packages" .!= mempty)
+                     <*> (o .:? "streamingComputationTask")
+                     <*> (o .:? "sourceOperationTask")
+                     <*> (o .:? "id")
+                     <*> (o .:? "projectId")
+                     <*> (o .:? "leaseExpireTime")
+                     <*> (o .:? "configuration")
+                     <*> (o .:? "seqMapTask"))
+
+instance ToJSON WorkItem where
+        toJSON WorkItem{..}
+          = object
+              (catMaybes
+                 [("jobId" .=) <$> _wiJobId,
+                  ("reportStatusInterval" .=) <$>
+                    _wiReportStatusInterval,
+                  ("shellTask" .=) <$> _wiShellTask,
+                  ("streamingSetupTask" .=) <$> _wiStreamingSetupTask,
+                  ("initialReportIndex" .=) <$> _wiInitialReportIndex,
+                  ("mapTask" .=) <$> _wiMapTask,
+                  ("packages" .=) <$> _wiPackages,
+                  ("streamingComputationTask" .=) <$>
+                    _wiStreamingComputationTask,
+                  ("sourceOperationTask" .=) <$>
+                    _wiSourceOperationTask,
+                  ("id" .=) <$> _wiId,
+                  ("projectId" .=) <$> _wiProjectId,
+                  ("leaseExpireTime" .=) <$> _wiLeaseExpireTime,
+                  ("configuration" .=) <$> _wiConfiguration,
+                  ("seqMapTask" .=) <$> _wiSeqMapTask])
+
 -- | The Dataflow service\'s idea of the current state of a WorkItem being
 -- processed by a worker.
 --
@@ -3877,6 +5200,32 @@ wissLeaseExpireTime
   = lens _wissLeaseExpireTime
       (\ s a -> s{_wissLeaseExpireTime = a})
 
+instance FromJSON WorkItemServiceState where
+        parseJSON
+          = withObject "WorkItemServiceState"
+              (\ o ->
+                 WorkItemServiceState <$>
+                   (o .:? "nextReportIndex") <*>
+                     (o .:? "reportStatusInterval")
+                     <*> (o .:? "harnessData")
+                     <*> (o .:? "suggestedStopPoint")
+                     <*> (o .:? "suggestedStopPosition")
+                     <*> (o .:? "leaseExpireTime"))
+
+instance ToJSON WorkItemServiceState where
+        toJSON WorkItemServiceState{..}
+          = object
+              (catMaybes
+                 [("nextReportIndex" .=) <$> _wissNextReportIndex,
+                  ("reportStatusInterval" .=) <$>
+                    _wissReportStatusInterval,
+                  ("harnessData" .=) <$> _wissHarnessData,
+                  ("suggestedStopPoint" .=) <$>
+                    _wissSuggestedStopPoint,
+                  ("suggestedStopPosition" .=) <$>
+                    _wissSuggestedStopPosition,
+                  ("leaseExpireTime" .=) <$> _wissLeaseExpireTime])
+
 -- | Other data returned by the service, specific to the particular worker
 -- harness.
 --
@@ -3890,6 +5239,15 @@ data WorkItemServiceStateHarnessData =
 workItemServiceStateHarnessData
     :: WorkItemServiceStateHarnessData
 workItemServiceStateHarnessData = WorkItemServiceStateHarnessData
+
+instance FromJSON WorkItemServiceStateHarnessData
+         where
+        parseJSON
+          = withObject "WorkItemServiceStateHarnessData"
+              (\ o -> pure WorkItemServiceStateHarnessData)
+
+instance ToJSON WorkItemServiceStateHarnessData where
+        toJSON = const (Object mempty)
 
 -- | Conveys a worker\'s progress through the work described by a WorkItem.
 --
@@ -4051,6 +5409,41 @@ wisWorkItemId :: Lens' WorkItemStatus (Maybe Text)
 wisWorkItemId
   = lens _wisWorkItemId
       (\ s a -> s{_wisWorkItemId = a})
+
+instance FromJSON WorkItemStatus where
+        parseJSON
+          = withObject "WorkItemStatus"
+              (\ o ->
+                 WorkItemStatus <$>
+                   (o .:? "progress") <*>
+                     (o .:? "sourceOperationResponse")
+                     <*> (o .:? "stopPosition")
+                     <*> (o .:? "dynamicSourceSplit")
+                     <*> (o .:? "completed")
+                     <*> (o .:? "sourceFork")
+                     <*> (o .:? "reportIndex")
+                     <*> (o .:? "requestedLeaseDuration")
+                     <*> (o .:? "errors" .!= mempty)
+                     <*> (o .:? "metricUpdates" .!= mempty)
+                     <*> (o .:? "workItemId"))
+
+instance ToJSON WorkItemStatus where
+        toJSON WorkItemStatus{..}
+          = object
+              (catMaybes
+                 [("progress" .=) <$> _wisProgress,
+                  ("sourceOperationResponse" .=) <$>
+                    _wisSourceOperationResponse,
+                  ("stopPosition" .=) <$> _wisStopPosition,
+                  ("dynamicSourceSplit" .=) <$> _wisDynamicSourceSplit,
+                  ("completed" .=) <$> _wisCompleted,
+                  ("sourceFork" .=) <$> _wisSourceFork,
+                  ("reportIndex" .=) <$> _wisReportIndex,
+                  ("requestedLeaseDuration" .=) <$>
+                    _wisRequestedLeaseDuration,
+                  ("errors" .=) <$> _wisErrors,
+                  ("metricUpdates" .=) <$> _wisMetricUpdates,
+                  ("workItemId" .=) <$> _wisWorkItemId])
 
 -- | Describes one particular pool of Dataflow workers to be instantiated by
 -- the Dataflow service in order to perform the computations required by a
@@ -4254,6 +5647,52 @@ wpDataDisks
       _Default
       . _Coerce
 
+instance FromJSON WorkerPool where
+        parseJSON
+          = withObject "WorkerPool"
+              (\ o ->
+                 WorkerPool <$>
+                   (o .:? "autoscalingSettings") <*>
+                     (o .:? "diskSizeGb")
+                     <*> (o .:? "kind")
+                     <*> (o .:? "taskrunnerSettings")
+                     <*> (o .:? "numWorkers")
+                     <*> (o .:? "network")
+                     <*> (o .:? "zone")
+                     <*> (o .:? "packages" .!= mempty)
+                     <*> (o .:? "onHostMaintenance")
+                     <*> (o .:? "diskSourceImage")
+                     <*> (o .:? "machineType")
+                     <*> (o .:? "metadata")
+                     <*> (o .:? "diskType")
+                     <*> (o .:? "teardownPolicy")
+                     <*> (o .:? "defaultPackageSet")
+                     <*> (o .:? "poolArgs")
+                     <*> (o .:? "dataDisks" .!= mempty))
+
+instance ToJSON WorkerPool where
+        toJSON WorkerPool{..}
+          = object
+              (catMaybes
+                 [("autoscalingSettings" .=) <$>
+                    _wpAutoscalingSettings,
+                  ("diskSizeGb" .=) <$> _wpDiskSizeGb,
+                  ("kind" .=) <$> _wpKind,
+                  ("taskrunnerSettings" .=) <$> _wpTaskrunnerSettings,
+                  ("numWorkers" .=) <$> _wpNumWorkers,
+                  ("network" .=) <$> _wpNetwork,
+                  ("zone" .=) <$> _wpZone,
+                  ("packages" .=) <$> _wpPackages,
+                  ("onHostMaintenance" .=) <$> _wpOnHostMaintenance,
+                  ("diskSourceImage" .=) <$> _wpDiskSourceImage,
+                  ("machineType" .=) <$> _wpMachineType,
+                  ("metadata" .=) <$> _wpMetadata,
+                  ("diskType" .=) <$> _wpDiskType,
+                  ("teardownPolicy" .=) <$> _wpTeardownPolicy,
+                  ("defaultPackageSet" .=) <$> _wpDefaultPackageSet,
+                  ("poolArgs" .=) <$> _wpPoolArgs,
+                  ("dataDisks" .=) <$> _wpDataDisks])
+
 -- | Metadata to set on the Google Compute Engine VMs.
 --
 -- /See:/ 'workerPoolMetadata' smart constructor.
@@ -4267,6 +5706,14 @@ workerPoolMetadata
     :: WorkerPoolMetadata
 workerPoolMetadata = WorkerPoolMetadata
 
+instance FromJSON WorkerPoolMetadata where
+        parseJSON
+          = withObject "WorkerPoolMetadata"
+              (\ o -> pure WorkerPoolMetadata)
+
+instance ToJSON WorkerPoolMetadata where
+        toJSON = const (Object mempty)
+
 -- | Extra arguments for this worker pool.
 --
 -- /See:/ 'workerPoolPoolArgs' smart constructor.
@@ -4279,6 +5726,14 @@ data WorkerPoolPoolArgs =
 workerPoolPoolArgs
     :: WorkerPoolPoolArgs
 workerPoolPoolArgs = WorkerPoolPoolArgs
+
+instance FromJSON WorkerPoolPoolArgs where
+        parseJSON
+          = withObject "WorkerPoolPoolArgs"
+              (\ o -> pure WorkerPoolPoolArgs)
+
+instance ToJSON WorkerPoolPoolArgs where
+        toJSON = const (Object mempty)
 
 -- | Provides data to pass through to the worker harness.
 --
@@ -4363,6 +5818,28 @@ wsWorkerId :: Lens' WorkerSettings (Maybe Text)
 wsWorkerId
   = lens _wsWorkerId (\ s a -> s{_wsWorkerId = a})
 
+instance FromJSON WorkerSettings where
+        parseJSON
+          = withObject "WorkerSettings"
+              (\ o ->
+                 WorkerSettings <$>
+                   (o .:? "servicePath") <*> (o .:? "baseUrl") <*>
+                     (o .:? "shuffleServicePath")
+                     <*> (o .:? "tempStoragePrefix")
+                     <*> (o .:? "reportingEnabled")
+                     <*> (o .:? "workerId"))
+
+instance ToJSON WorkerSettings where
+        toJSON WorkerSettings{..}
+          = object
+              (catMaybes
+                 [("servicePath" .=) <$> _wsServicePath,
+                  ("baseUrl" .=) <$> _wsBaseUrl,
+                  ("shuffleServicePath" .=) <$> _wsShuffleServicePath,
+                  ("tempStoragePrefix" .=) <$> _wsTempStoragePrefix,
+                  ("reportingEnabled" .=) <$> _wsReportingEnabled,
+                  ("workerId" .=) <$> _wsWorkerId])
+
 -- | An instruction that writes records. Takes one input, produces no
 -- outputs.
 --
@@ -4394,3 +5871,16 @@ wiSink = lens _wiSink (\ s a -> s{_wiSink = a})
 -- | The input.
 wiInput :: Lens' WriteInstruction (Maybe (Maybe InstructionInput))
 wiInput = lens _wiInput (\ s a -> s{_wiInput = a})
+
+instance FromJSON WriteInstruction where
+        parseJSON
+          = withObject "WriteInstruction"
+              (\ o ->
+                 WriteInstruction <$>
+                   (o .:? "sink") <*> (o .:? "input"))
+
+instance ToJSON WriteInstruction where
+        toJSON WriteInstruction{..}
+          = object
+              (catMaybes
+                 [("sink" .=) <$> _wiSink, ("input" .=) <$> _wiInput])

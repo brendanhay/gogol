@@ -328,89 +328,102 @@ type VersionsAPI =
 
 -- | Lists the versions of a module.
 type VersionsList =
-     "v1beta4" :> "apps" :> Capture "appsId" Text :>
-       "modules"
-       :> Capture "modulesId" Text
-       :> "versions"
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "view" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "pageSize" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1beta4" :>
+       "apps" :>
+         Capture "appsId" Text :>
+           "modules" :>
+             Capture "modulesId" Text :>
+               "versions" :>
+                 QueryParam "$.xgafv" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "pp" Bool :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "bearer_token" Text :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "view" Text :>
+                                     QueryParam "pageToken" Text :>
+                                       QueryParam "oauth_token" Text :>
+                                         QueryParam "pageSize" Int32 :>
+                                           QueryParam "fields" Text :>
+                                             QueryParam "callback" Text :>
+                                               QueryParam "alt" Text :>
+                                                 Get '[JSON]
+                                                   ListVersionsResponse
 
 -- | Gets application deployment information.
 type VersionsGet =
-     "v1beta4" :> "apps" :> Capture "appsId" Text :>
-       "modules"
-       :> Capture "modulesId" Text
-       :> "versions"
-       :> Capture "versionsId" Text
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "view" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1beta4" :>
+       "apps" :>
+         Capture "appsId" Text :>
+           "modules" :>
+             Capture "modulesId" Text :>
+               "versions" :>
+                 Capture "versionsId" Text :>
+                   QueryParam "$.xgafv" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "upload_protocol" Text :>
+                           QueryParam "pp" Bool :>
+                             QueryParam "access_token" Text :>
+                               QueryParam "uploadType" Text :>
+                                 QueryParam "bearer_token" Text :>
+                                   QueryParam "key" Text :>
+                                     QueryParam "view" Text :>
+                                       QueryParam "oauth_token" Text :>
+                                         QueryParam "fields" Text :>
+                                           QueryParam "callback" Text :>
+                                             QueryParam "alt" Text :>
+                                               Get '[JSON] Version
 
 -- | Deploys new code and resource files to a version.
 type VersionsCreate =
-     "v1beta4" :> "apps" :> Capture "appsId" Text :>
-       "modules"
-       :> Capture "modulesId" Text
-       :> "versions"
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1beta4" :>
+       "apps" :>
+         Capture "appsId" Text :>
+           "modules" :>
+             Capture "modulesId" Text :>
+               "versions" :>
+                 QueryParam "$.xgafv" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "pp" Bool :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "bearer_token" Text :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" Text :>
+                                           Post '[JSON] Operation
 
 -- | Deletes an existing version.
 type VersionsDelete =
-     "v1beta4" :> "apps" :> Capture "appsId" Text :>
-       "modules"
-       :> Capture "modulesId" Text
-       :> "versions"
-       :> Capture "versionsId" Text
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1beta4" :>
+       "apps" :>
+         Capture "appsId" Text :>
+           "modules" :>
+             Capture "modulesId" Text :>
+               "versions" :>
+                 Capture "versionsId" Text :>
+                   QueryParam "$.xgafv" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "upload_protocol" Text :>
+                           QueryParam "pp" Bool :>
+                             QueryParam "access_token" Text :>
+                               QueryParam "uploadType" Text :>
+                                 QueryParam "bearer_token" Text :>
+                                   QueryParam "key" Text :>
+                                     QueryParam "oauth_token" Text :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "callback" Text :>
+                                           QueryParam "alt" Text :>
+                                             Delete '[JSON] Operation
 
 type OperationsAPI =
      OperationsList :<|> OperationsGet
@@ -421,42 +434,48 @@ type OperationsAPI =
 -- to use different resource name schemes, such as
 -- \`users\/*\/operations\`.
 type OperationsList =
-     "v1beta4" :> "apps" :> Capture "appsId" Text :>
-       "operations"
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "filter" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "pageSize" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1beta4" :>
+       "apps" :>
+         Capture "appsId" Text :>
+           "operations" :>
+             QueryParam "$.xgafv" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "pp" Bool :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "bearer_token" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "filter" Text :>
+                                 QueryParam "pageToken" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "pageSize" Int32 :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "callback" Text :>
+                                           QueryParam "alt" Text :>
+                                             Get '[JSON] ListOperationsResponse
 
 -- | Gets the latest state of a long-running operation. Clients can use this
 -- method to poll the operation result at intervals as recommended by the
 -- API service.
 type OperationsGet =
-     "v1beta4" :> "apps" :> Capture "appsId" Text :>
-       "operations"
-       :> Capture "operationsId" Text
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1beta4" :>
+       "apps" :>
+         Capture "appsId" Text :>
+           "operations" :>
+             Capture "operationsId" Text :>
+               QueryParam "$.xgafv" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "bearer_token" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" Text :>
+                                         Get '[JSON] Operation

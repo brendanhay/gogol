@@ -152,17 +152,20 @@ type ImageConfigurationsAPI =
 
 -- | Uploads an image for a resource with the given ID and image type.
 type ImageConfigurationsUpload =
-     "games" :> "v1configuration" :> "images" :>
-       Capture "resourceId" Text
-       :> "imageType"
-       :> Capture "imageType" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1configuration" :>
+         "images" :>
+           Capture "resourceId" Text :>
+             "imageType" :>
+               Capture "imageType" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Post '[JSON] ImageConfiguration
 
 type LeaderboardConfigurationsAPI =
      LeaderboardConfigurationsInsert :<|>
@@ -174,81 +177,99 @@ type LeaderboardConfigurationsAPI =
 
 -- | Insert a new leaderboard configuration in this application.
 type LeaderboardConfigurationsInsert =
-     "games" :> "v1configuration" :> "applications" :>
-       Capture "applicationId" Text
-       :> "leaderboards"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1configuration" :>
+         "applications" :>
+           Capture "applicationId" Text :>
+             "leaderboards" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Post '[JSON] LeaderboardConfiguration
 
 -- | Returns a list of the leaderboard configurations in this application.
 type LeaderboardConfigurationsList =
-     "games" :> "v1configuration" :> "applications" :>
-       Capture "applicationId" Text
-       :> "leaderboards"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Natural
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1configuration" :>
+         "applications" :>
+           Capture "applicationId" Text :>
+             "leaderboards" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Natural :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :>
+                                 Get '[JSON]
+                                   LeaderboardConfigurationListResponse
 
 -- | Update the metadata of the leaderboard configuration with the given ID.
 -- This method supports patch semantics.
 type LeaderboardConfigurationsPatch =
-     "games" :> "v1configuration" :> "leaderboards" :>
-       Capture "leaderboardId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1configuration" :>
+         "leaderboards" :>
+           Capture "leaderboardId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :>
+                           Patch '[JSON] LeaderboardConfiguration
 
 -- | Retrieves the metadata of the leaderboard configuration with the given
 -- ID.
 type LeaderboardConfigurationsGet =
-     "games" :> "v1configuration" :> "leaderboards" :>
-       Capture "leaderboardId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1configuration" :>
+         "leaderboards" :>
+           Capture "leaderboardId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :>
+                           Get '[JSON] LeaderboardConfiguration
 
 -- | Delete the leaderboard configuration with the given ID.
 type LeaderboardConfigurationsDelete =
-     "games" :> "v1configuration" :> "leaderboards" :>
-       Capture "leaderboardId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1configuration" :>
+         "leaderboards" :>
+           Capture "leaderboardId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Update the metadata of the leaderboard configuration with the given ID.
 type LeaderboardConfigurationsUpdate =
-     "games" :> "v1configuration" :> "leaderboards" :>
-       Capture "leaderboardId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1configuration" :>
+         "leaderboards" :>
+           Capture "leaderboardId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :>
+                           Put '[JSON] LeaderboardConfiguration
 
 type AchievementConfigurationsAPI =
      AchievementConfigurationsInsert :<|>
@@ -260,78 +281,96 @@ type AchievementConfigurationsAPI =
 
 -- | Insert a new achievement configuration in this application.
 type AchievementConfigurationsInsert =
-     "games" :> "v1configuration" :> "applications" :>
-       Capture "applicationId" Text
-       :> "achievements"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1configuration" :>
+         "applications" :>
+           Capture "applicationId" Text :>
+             "achievements" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Post '[JSON] AchievementConfiguration
 
 -- | Returns a list of the achievement configurations in this application.
 type AchievementConfigurationsList =
-     "games" :> "v1configuration" :> "applications" :>
-       Capture "applicationId" Text
-       :> "achievements"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Natural
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1configuration" :>
+         "applications" :>
+           Capture "applicationId" Text :>
+             "achievements" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Natural :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :>
+                                 Get '[JSON]
+                                   AchievementConfigurationListResponse
 
 -- | Update the metadata of the achievement configuration with the given ID.
 -- This method supports patch semantics.
 type AchievementConfigurationsPatch =
-     "games" :> "v1configuration" :> "achievements" :>
-       Capture "achievementId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1configuration" :>
+         "achievements" :>
+           Capture "achievementId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :>
+                           Patch '[JSON] AchievementConfiguration
 
 -- | Retrieves the metadata of the achievement configuration with the given
 -- ID.
 type AchievementConfigurationsGet =
-     "games" :> "v1configuration" :> "achievements" :>
-       Capture "achievementId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1configuration" :>
+         "achievements" :>
+           Capture "achievementId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :>
+                           Get '[JSON] AchievementConfiguration
 
 -- | Delete the achievement configuration with the given ID.
 type AchievementConfigurationsDelete =
-     "games" :> "v1configuration" :> "achievements" :>
-       Capture "achievementId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1configuration" :>
+         "achievements" :>
+           Capture "achievementId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Update the metadata of the achievement configuration with the given ID.
 type AchievementConfigurationsUpdate =
-     "games" :> "v1configuration" :> "achievements" :>
-       Capture "achievementId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1configuration" :>
+         "achievements" :>
+           Capture "achievementId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :>
+                           Put '[JSON] AchievementConfiguration

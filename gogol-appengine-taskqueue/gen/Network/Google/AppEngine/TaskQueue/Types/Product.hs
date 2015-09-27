@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -106,6 +107,31 @@ tLeaseTimestamp
   = lens _tLeaseTimestamp
       (\ s a -> s{_tLeaseTimestamp = a})
 
+instance FromJSON Task where
+        parseJSON
+          = withObject "Task"
+              (\ o ->
+                 Task <$>
+                   (o .:? "retry_count") <*> (o .:? "enqueueTimestamp")
+                     <*> (o .:? "tag")
+                     <*> (o .:? "kind" .!= "taskqueues#task")
+                     <*> (o .:? "queueName")
+                     <*> (o .:? "payloadBase64")
+                     <*> (o .:? "id")
+                     <*> (o .:? "leaseTimestamp"))
+
+instance ToJSON Task where
+        toJSON Task{..}
+          = object
+              (catMaybes
+                 [("retry_count" .=) <$> _tRetryCount,
+                  ("enqueueTimestamp" .=) <$> _tEnqueueTimestamp,
+                  ("tag" .=) <$> _tTag, Just ("kind" .= _tKind),
+                  ("queueName" .=) <$> _tQueueName,
+                  ("payloadBase64" .=) <$> _tPayloadBase64,
+                  ("id" .=) <$> _tId,
+                  ("leaseTimestamp" .=) <$> _tLeaseTimestamp])
+
 --
 -- /See:/ 'taskQueue' smart constructor.
 data TaskQueue = TaskQueue
@@ -162,6 +188,25 @@ tqId = lens _tqId (\ s a -> s{_tqId = a})
 tqAcl :: Lens' TaskQueue (Maybe TaskQueueAcl)
 tqAcl = lens _tqAcl (\ s a -> s{_tqAcl = a})
 
+instance FromJSON TaskQueue where
+        parseJSON
+          = withObject "TaskQueue"
+              (\ o ->
+                 TaskQueue <$>
+                   (o .:? "kind" .!= "taskqueues#taskqueue") <*>
+                     (o .:? "stats")
+                     <*> (o .:? "maxLeases")
+                     <*> (o .:? "id")
+                     <*> (o .:? "acl"))
+
+instance ToJSON TaskQueue where
+        toJSON TaskQueue{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _tqKind), ("stats" .=) <$> _tqStats,
+                  ("maxLeases" .=) <$> _tqMaxLeases,
+                  ("id" .=) <$> _tqId, ("acl" .=) <$> _tqAcl])
+
 -- | ACLs that are applicable to this TaskQueue object.
 --
 -- /See:/ 'taskQueueAcl' smart constructor.
@@ -215,6 +260,23 @@ tqaConsumerEmails
       (\ s a -> s{_tqaConsumerEmails = a})
       . _Default
       . _Coerce
+
+instance FromJSON TaskQueueAcl where
+        parseJSON
+          = withObject "TaskQueueAcl"
+              (\ o ->
+                 TaskQueueAcl <$>
+                   (o .:? "producerEmails" .!= mempty) <*>
+                     (o .:? "adminEmails" .!= mempty)
+                     <*> (o .:? "consumerEmails" .!= mempty))
+
+instance ToJSON TaskQueueAcl where
+        toJSON TaskQueueAcl{..}
+          = object
+              (catMaybes
+                 [("producerEmails" .=) <$> _tqaProducerEmails,
+                  ("adminEmails" .=) <$> _tqaAdminEmails,
+                  ("consumerEmails" .=) <$> _tqaConsumerEmails])
 
 -- | Statistics for the TaskQueue object in question.
 --
@@ -272,6 +334,24 @@ tqsLeasedLastMinute
   = lens _tqsLeasedLastMinute
       (\ s a -> s{_tqsLeasedLastMinute = a})
 
+instance FromJSON TaskQueueStats where
+        parseJSON
+          = withObject "TaskQueueStats"
+              (\ o ->
+                 TaskQueueStats <$>
+                   (o .:? "totalTasks") <*> (o .:? "oldestTask") <*>
+                     (o .:? "leasedLastHour")
+                     <*> (o .:? "leasedLastMinute"))
+
+instance ToJSON TaskQueueStats where
+        toJSON TaskQueueStats{..}
+          = object
+              (catMaybes
+                 [("totalTasks" .=) <$> _tqsTotalTasks,
+                  ("oldestTask" .=) <$> _tqsOldestTask,
+                  ("leasedLastHour" .=) <$> _tqsLeasedLastHour,
+                  ("leasedLastMinute" .=) <$> _tqsLeasedLastMinute])
+
 --
 -- /See:/ 'tasks' smart constructor.
 data Tasks = Tasks
@@ -305,6 +385,21 @@ tasItems
       _Default
       . _Coerce
 
+instance FromJSON Tasks where
+        parseJSON
+          = withObject "Tasks"
+              (\ o ->
+                 Tasks <$>
+                   (o .:? "kind" .!= "taskqueue#tasks") <*>
+                     (o .:? "items" .!= mempty))
+
+instance ToJSON Tasks where
+        toJSON Tasks{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _tasKind),
+                  ("items" .=) <$> _tasItems])
+
 --
 -- /See:/ 'tasks2' smart constructor.
 data Tasks2 = Tasks2
@@ -336,3 +431,18 @@ ttItems :: Lens' Tasks2 [Maybe Task]
 ttItems
   = lens _ttItems (\ s a -> s{_ttItems = a}) . _Default
       . _Coerce
+
+instance FromJSON Tasks2 where
+        parseJSON
+          = withObject "Tasks2"
+              (\ o ->
+                 Tasks2 <$>
+                   (o .:? "kind" .!= "taskqueues#tasks") <*>
+                     (o .:? "items" .!= mempty))
+
+instance ToJSON Tasks2 where
+        toJSON Tasks2{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _ttKind),
+                  ("items" .=) <$> _ttItems])

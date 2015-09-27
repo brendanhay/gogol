@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -89,6 +90,28 @@ brOutputs
 brId :: Lens' BatchReport (Maybe Text)
 brId = lens _brId (\ s a -> s{_brId = a})
 
+instance FromJSON BatchReport where
+        parseJSON
+          = withObject "BatchReport"
+              (\ o ->
+                 BatchReport <$>
+                   (o .:? "timeUpdated") <*>
+                     (o .:? "kind" .!= "youtubeAnalytics#batchReport")
+                     <*> (o .:? "reportId")
+                     <*> (o .:? "timeSpan")
+                     <*> (o .:? "outputs" .!= mempty)
+                     <*> (o .:? "id"))
+
+instance ToJSON BatchReport where
+        toJSON BatchReport{..}
+          = object
+              (catMaybes
+                 [("timeUpdated" .=) <$> _brTimeUpdated,
+                  Just ("kind" .= _brKind),
+                  ("reportId" .=) <$> _brReportId,
+                  ("timeSpan" .=) <$> _brTimeSpan,
+                  ("outputs" .=) <$> _brOutputs, ("id" .=) <$> _brId])
+
 -- | Contains single batchReportDefinition resource.
 --
 -- /See:/ 'batchReportDefinition' smart constructor.
@@ -148,6 +171,26 @@ brdId = lens _brdId (\ s a -> s{_brdId = a})
 brdType :: Lens' BatchReportDefinition (Maybe Text)
 brdType = lens _brdType (\ s a -> s{_brdType = a})
 
+instance FromJSON BatchReportDefinition where
+        parseJSON
+          = withObject "BatchReportDefinition"
+              (\ o ->
+                 BatchReportDefinition <$>
+                   (o .:? "status") <*>
+                     (o .:? "kind" .!=
+                        "youtubeAnalytics#batchReportDefinition")
+                     <*> (o .:? "name")
+                     <*> (o .:? "id")
+                     <*> (o .:? "type"))
+
+instance ToJSON BatchReportDefinition where
+        toJSON BatchReportDefinition{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _brdStatus,
+                  Just ("kind" .= _brdKind), ("name" .=) <$> _brdName,
+                  ("id" .=) <$> _brdId, ("type" .=) <$> _brdType])
+
 -- | A paginated list of batchReportDefinition resources returned in response
 -- to a youtubeAnalytics.batchReportDefinitions.list request.
 --
@@ -185,6 +228,22 @@ brdlItems
   = lens _brdlItems (\ s a -> s{_brdlItems = a}) .
       _Default
       . _Coerce
+
+instance FromJSON BatchReportDefinitionList where
+        parseJSON
+          = withObject "BatchReportDefinitionList"
+              (\ o ->
+                 BatchReportDefinitionList <$>
+                   (o .:? "kind" .!=
+                      "youtubeAnalytics#batchReportDefinitionList")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON BatchReportDefinitionList where
+        toJSON BatchReportDefinitionList{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _brdlKind),
+                  ("items" .=) <$> _brdlItems])
 
 --
 -- /See:/ 'batchReportItemOutputs' smart constructor.
@@ -228,6 +287,22 @@ brioDownloadUrl
 brioType :: Lens' BatchReportItemOutputs Text
 brioType = lens _brioType (\ s a -> s{_brioType = a})
 
+instance FromJSON BatchReportItemOutputs where
+        parseJSON
+          = withObject "BatchReportItemOutputs"
+              (\ o ->
+                 BatchReportItemOutputs <$>
+                   (o .:? "format") <*> (o .:? "downloadUrl") <*>
+                     (o .:? "type" .!= "cloudStorageOutput"))
+
+instance ToJSON BatchReportItemOutputs where
+        toJSON BatchReportItemOutputs{..}
+          = object
+              (catMaybes
+                 [("format" .=) <$> _brioFormat,
+                  ("downloadUrl" .=) <$> _brioDownloadUrl,
+                  Just ("type" .= _brioType)])
+
 -- | A paginated list of batchReport resources returned in response to a
 -- youtubeAnalytics.batchReport.list request.
 --
@@ -265,6 +340,21 @@ brlItems
       _Default
       . _Coerce
 
+instance FromJSON BatchReportList where
+        parseJSON
+          = withObject "BatchReportList"
+              (\ o ->
+                 BatchReportList <$>
+                   (o .:? "kind" .!= "youtubeAnalytics#batchReportList")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON BatchReportList where
+        toJSON BatchReportList{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _brlKind),
+                  ("items" .=) <$> _brlItems])
+
 -- | Period included in the report. For reports containing all entities
 -- endTime is not set. Both startTime and endTime are inclusive.
 --
@@ -300,6 +390,20 @@ brtsStartTime
 brtsEndTime :: Lens' BatchReportTimeSpan (Maybe UTCTime)
 brtsEndTime
   = lens _brtsEndTime (\ s a -> s{_brtsEndTime = a})
+
+instance FromJSON BatchReportTimeSpan where
+        parseJSON
+          = withObject "BatchReportTimeSpan"
+              (\ o ->
+                 BatchReportTimeSpan <$>
+                   (o .:? "startTime") <*> (o .:? "endTime"))
+
+instance ToJSON BatchReportTimeSpan where
+        toJSON BatchReportTimeSpan{..}
+          = object
+              (catMaybes
+                 [("startTime" .=) <$> _brtsStartTime,
+                  ("endTime" .=) <$> _brtsEndTime])
 
 --
 -- /See:/ 'group'' smart constructor.
@@ -352,6 +456,26 @@ gContentDetails
 gId :: Lens' Group (Maybe Text)
 gId = lens _gId (\ s a -> s{_gId = a})
 
+instance FromJSON Group where
+        parseJSON
+          = withObject "Group"
+              (\ o ->
+                 Group <$>
+                   (o .:? "etag") <*> (o .:? "snippet") <*>
+                     (o .:? "kind" .!= "youtube#group")
+                     <*> (o .:? "contentDetails")
+                     <*> (o .:? "id"))
+
+instance ToJSON Group where
+        toJSON Group{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _gEtag,
+                  ("snippet" .=) <$> _gSnippet,
+                  Just ("kind" .= _gKind),
+                  ("contentDetails" .=) <$> _gContentDetails,
+                  ("id" .=) <$> _gId])
+
 --
 -- /See:/ 'groupContentDetails' smart constructor.
 data GroupContentDetails = GroupContentDetails
@@ -381,6 +505,20 @@ gcdItemType
 gcdItemCount :: Lens' GroupContentDetails (Maybe Word64)
 gcdItemCount
   = lens _gcdItemCount (\ s a -> s{_gcdItemCount = a})
+
+instance FromJSON GroupContentDetails where
+        parseJSON
+          = withObject "GroupContentDetails"
+              (\ o ->
+                 GroupContentDetails <$>
+                   (o .:? "itemType") <*> (o .:? "itemCount"))
+
+instance ToJSON GroupContentDetails where
+        toJSON GroupContentDetails{..}
+          = object
+              (catMaybes
+                 [("itemType" .=) <$> _gcdItemType,
+                  ("itemCount" .=) <$> _gcdItemCount])
 
 --
 -- /See:/ 'groupItem' smart constructor.
@@ -433,6 +571,25 @@ giGroupId
 giId :: Lens' GroupItem (Maybe Text)
 giId = lens _giId (\ s a -> s{_giId = a})
 
+instance FromJSON GroupItem where
+        parseJSON
+          = withObject "GroupItem"
+              (\ o ->
+                 GroupItem <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!= "youtube#groupItem")
+                     <*> (o .:? "resource")
+                     <*> (o .:? "groupId")
+                     <*> (o .:? "id"))
+
+instance ToJSON GroupItem where
+        toJSON GroupItem{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _giEtag, Just ("kind" .= _giKind),
+                  ("resource" .=) <$> _giResource,
+                  ("groupId" .=) <$> _giGroupId, ("id" .=) <$> _giId])
+
 -- | A paginated list of grouList resources returned in response to a
 -- youtubeAnalytics.groupApi.list request.
 --
@@ -473,6 +630,23 @@ gilrItems
       _Default
       . _Coerce
 
+instance FromJSON GroupItemListResponse where
+        parseJSON
+          = withObject "GroupItemListResponse"
+              (\ o ->
+                 GroupItemListResponse <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!= "youtube#groupItemListResponse")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON GroupItemListResponse where
+        toJSON GroupItemListResponse{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _gilrEtag,
+                  Just ("kind" .= _gilrKind),
+                  ("items" .=) <$> _gilrItems])
+
 --
 -- /See:/ 'groupItemResource' smart constructor.
 data GroupItemResource = GroupItemResource
@@ -500,6 +674,19 @@ girKind = lens _girKind (\ s a -> s{_girKind = a})
 
 girId :: Lens' GroupItemResource (Maybe Text)
 girId = lens _girId (\ s a -> s{_girId = a})
+
+instance FromJSON GroupItemResource where
+        parseJSON
+          = withObject "GroupItemResource"
+              (\ o ->
+                 GroupItemResource <$>
+                   (o .:? "kind") <*> (o .:? "id"))
+
+instance ToJSON GroupItemResource where
+        toJSON GroupItemResource{..}
+          = object
+              (catMaybes
+                 [("kind" .=) <$> _girKind, ("id" .=) <$> _girId])
 
 -- | A paginated list of grouList resources returned in response to a
 -- youtubeAnalytics.groupApi.list request.
@@ -541,6 +728,22 @@ glrItems
       _Default
       . _Coerce
 
+instance FromJSON GroupListResponse where
+        parseJSON
+          = withObject "GroupListResponse"
+              (\ o ->
+                 GroupListResponse <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!= "youtube#groupListResponse")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON GroupListResponse where
+        toJSON GroupListResponse{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _glrEtag, Just ("kind" .= _glrKind),
+                  ("items" .=) <$> _glrItems])
+
 --
 -- /See:/ 'groupSnippet' smart constructor.
 data GroupSnippet = GroupSnippet
@@ -570,6 +773,20 @@ gsPublishedAt
 
 gsTitle :: Lens' GroupSnippet (Maybe Text)
 gsTitle = lens _gsTitle (\ s a -> s{_gsTitle = a})
+
+instance FromJSON GroupSnippet where
+        parseJSON
+          = withObject "GroupSnippet"
+              (\ o ->
+                 GroupSnippet <$>
+                   (o .:? "publishedAt") <*> (o .:? "title"))
+
+instance ToJSON GroupSnippet where
+        toJSON GroupSnippet{..}
+          = object
+              (catMaybes
+                 [("publishedAt" .=) <$> _gsPublishedAt,
+                  ("title" .=) <$> _gsTitle])
 
 -- | Contains a single result table. The table is returned as an array of
 -- rows that contain the values for the cells of the table. Depending on
@@ -636,6 +853,22 @@ rtColumnHeaders
       . _Default
       . _Coerce
 
+instance FromJSON ResultTable where
+        parseJSON
+          = withObject "ResultTable"
+              (\ o ->
+                 ResultTable <$>
+                   (o .:? "kind" .!= "youtubeAnalytics#resultTable") <*>
+                     (o .:? "rows" .!= mempty)
+                     <*> (o .:? "columnHeaders" .!= mempty))
+
+instance ToJSON ResultTable where
+        toJSON ResultTable{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _rtKind), ("rows" .=) <$> _rtRows,
+                  ("columnHeaders" .=) <$> _rtColumnHeaders])
+
 --
 -- /See:/ 'resultTableItemColumnHeaders' smart constructor.
 data ResultTableItemColumnHeaders = ResultTableItemColumnHeaders
@@ -678,3 +911,19 @@ rtichDataType :: Lens' ResultTableItemColumnHeaders (Maybe Text)
 rtichDataType
   = lens _rtichDataType
       (\ s a -> s{_rtichDataType = a})
+
+instance FromJSON ResultTableItemColumnHeaders where
+        parseJSON
+          = withObject "ResultTableItemColumnHeaders"
+              (\ o ->
+                 ResultTableItemColumnHeaders <$>
+                   (o .:? "columnType") <*> (o .:? "name") <*>
+                     (o .:? "dataType"))
+
+instance ToJSON ResultTableItemColumnHeaders where
+        toJSON ResultTableItemColumnHeaders{..}
+          = object
+              (catMaybes
+                 [("columnType" .=) <$> _rtichColumnType,
+                  ("name" .=) <$> _rtichName,
+                  ("dataType" .=) <$> _rtichDataType])

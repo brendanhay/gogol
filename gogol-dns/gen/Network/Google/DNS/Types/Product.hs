@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -89,6 +90,28 @@ cDeletions
 cId :: Lens' Change (Maybe Text)
 cId = lens _cId (\ s a -> s{_cId = a})
 
+instance FromJSON Change where
+        parseJSON
+          = withObject "Change"
+              (\ o ->
+                 Change <$>
+                   (o .:? "status") <*> (o .:? "additions" .!= mempty)
+                     <*> (o .:? "startTime")
+                     <*> (o .:? "kind" .!= "dns#change")
+                     <*> (o .:? "deletions" .!= mempty)
+                     <*> (o .:? "id"))
+
+instance ToJSON Change where
+        toJSON Change{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _cStatus,
+                  ("additions" .=) <$> _cAdditions,
+                  ("startTime" .=) <$> _cStartTime,
+                  Just ("kind" .= _cKind),
+                  ("deletions" .=) <$> _cDeletions,
+                  ("id" .=) <$> _cId])
+
 -- | The response to a request to enumerate Changes to a ResourceRecordSets
 -- collection.
 --
@@ -141,6 +164,23 @@ clrChanges
 -- | Type of resource.
 clrKind :: Lens' ChangesListResponse Text
 clrKind = lens _clrKind (\ s a -> s{_clrKind = a})
+
+instance FromJSON ChangesListResponse where
+        parseJSON
+          = withObject "ChangesListResponse"
+              (\ o ->
+                 ChangesListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "changes" .!= mempty)
+                     <*> (o .:? "kind" .!= "dns#changesListResponse"))
+
+instance ToJSON ChangesListResponse where
+        toJSON ChangesListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _clrNextPageToken,
+                  ("changes" .=) <$> _clrChanges,
+                  Just ("kind" .= _clrKind)])
 
 -- | A zone is a subtree of the DNS namespace under one administrative
 -- responsibility. A ManagedZone is a resource that represents a DNS zone
@@ -244,6 +284,32 @@ mzNameServers
       . _Default
       . _Coerce
 
+instance FromJSON ManagedZone where
+        parseJSON
+          = withObject "ManagedZone"
+              (\ o ->
+                 ManagedZone <$>
+                   (o .:? "creationTime") <*>
+                     (o .:? "kind" .!= "dns#managedZone")
+                     <*> (o .:? "nameServerSet")
+                     <*> (o .:? "name")
+                     <*> (o .:? "id")
+                     <*> (o .:? "dnsName")
+                     <*> (o .:? "description")
+                     <*> (o .:? "nameServers" .!= mempty))
+
+instance ToJSON ManagedZone where
+        toJSON ManagedZone{..}
+          = object
+              (catMaybes
+                 [("creationTime" .=) <$> _mzCreationTime,
+                  Just ("kind" .= _mzKind),
+                  ("nameServerSet" .=) <$> _mzNameServerSet,
+                  ("name" .=) <$> _mzName, ("id" .=) <$> _mzId,
+                  ("dnsName" .=) <$> _mzDnsName,
+                  ("description" .=) <$> _mzDescription,
+                  ("nameServers" .=) <$> _mzNameServers])
+
 --
 -- /See:/ 'managedZonesListResponse' smart constructor.
 data ManagedZonesListResponse = ManagedZonesListResponse
@@ -296,6 +362,23 @@ mzlrManagedZones
       . _Default
       . _Coerce
 
+instance FromJSON ManagedZonesListResponse where
+        parseJSON
+          = withObject "ManagedZonesListResponse"
+              (\ o ->
+                 ManagedZonesListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "dns#managedZonesListResponse")
+                     <*> (o .:? "managedZones" .!= mempty))
+
+instance ToJSON ManagedZonesListResponse where
+        toJSON ManagedZonesListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _mzlrNextPageToken,
+                  Just ("kind" .= _mzlrKind),
+                  ("managedZones" .=) <$> _mzlrManagedZones])
+
 -- | A project resource. The project is a top level container for resources
 -- including Cloud DNS ManagedZones. Projects can be created only in the
 -- APIs console.
@@ -346,6 +429,23 @@ pNumber = lens _pNumber (\ s a -> s{_pNumber = a})
 -- | Quotas assigned to this project (output only).
 pQuota :: Lens' Project (Maybe (Maybe Quota))
 pQuota = lens _pQuota (\ s a -> s{_pQuota = a})
+
+instance FromJSON Project where
+        parseJSON
+          = withObject "Project"
+              (\ o ->
+                 Project <$>
+                   (o .:? "kind" .!= "dns#project") <*> (o .:? "id") <*>
+                     (o .:? "number")
+                     <*> (o .:? "quota"))
+
+instance ToJSON Project where
+        toJSON Project{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _pKind), ("id" .=) <$> _pId,
+                  ("number" .=) <$> _pNumber,
+                  ("quota" .=) <$> _pQuota])
 
 -- | Limits associated with a Project.
 --
@@ -434,6 +534,36 @@ qTotalRrdataSizePerChange
   = lens _qTotalRrdataSizePerChange
       (\ s a -> s{_qTotalRrdataSizePerChange = a})
 
+instance FromJSON Quota where
+        parseJSON
+          = withObject "Quota"
+              (\ o ->
+                 Quota <$>
+                   (o .:? "rrsetDeletionsPerChange") <*>
+                     (o .:? "rrsetsPerManagedZone")
+                     <*> (o .:? "kind" .!= "dns#quota")
+                     <*> (o .:? "resourceRecordsPerRrset")
+                     <*> (o .:? "rrsetAdditionsPerChange")
+                     <*> (o .:? "managedZones")
+                     <*> (o .:? "totalRrdataSizePerChange"))
+
+instance ToJSON Quota where
+        toJSON Quota{..}
+          = object
+              (catMaybes
+                 [("rrsetDeletionsPerChange" .=) <$>
+                    _qRrsetDeletionsPerChange,
+                  ("rrsetsPerManagedZone" .=) <$>
+                    _qRrsetsPerManagedZone,
+                  Just ("kind" .= _qKind),
+                  ("resourceRecordsPerRrset" .=) <$>
+                    _qResourceRecordsPerRrset,
+                  ("rrsetAdditionsPerChange" .=) <$>
+                    _qRrsetAdditionsPerChange,
+                  ("managedZones" .=) <$> _qManagedZones,
+                  ("totalRrdataSizePerChange" .=) <$>
+                    _qTotalRrdataSizePerChange])
+
 -- | A unit of data that will be returned by the DNS servers.
 --
 -- /See:/ 'resourceRecordSet' smart constructor.
@@ -495,6 +625,25 @@ rrsRrdatas
       _Default
       . _Coerce
 
+instance FromJSON ResourceRecordSet where
+        parseJSON
+          = withObject "ResourceRecordSet"
+              (\ o ->
+                 ResourceRecordSet <$>
+                   (o .:? "ttl") <*>
+                     (o .:? "kind" .!= "dns#resourceRecordSet")
+                     <*> (o .:? "name")
+                     <*> (o .:? "type")
+                     <*> (o .:? "rrdatas" .!= mempty))
+
+instance ToJSON ResourceRecordSet where
+        toJSON ResourceRecordSet{..}
+          = object
+              (catMaybes
+                 [("ttl" .=) <$> _rrsTtl, Just ("kind" .= _rrsKind),
+                  ("name" .=) <$> _rrsName, ("type" .=) <$> _rrsType,
+                  ("rrdatas" .=) <$> _rrsRrdatas])
+
 --
 -- /See:/ 'resourceRecordSetsListResponse' smart constructor.
 data ResourceRecordSetsListResponse = ResourceRecordSetsListResponse
@@ -546,3 +695,22 @@ rrslrRrsets
   = lens _rrslrRrsets (\ s a -> s{_rrslrRrsets = a}) .
       _Default
       . _Coerce
+
+instance FromJSON ResourceRecordSetsListResponse
+         where
+        parseJSON
+          = withObject "ResourceRecordSetsListResponse"
+              (\ o ->
+                 ResourceRecordSetsListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!=
+                        "dns#resourceRecordSetsListResponse")
+                     <*> (o .:? "rrsets" .!= mempty))
+
+instance ToJSON ResourceRecordSetsListResponse where
+        toJSON ResourceRecordSetsListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _rrslrNextPageToken,
+                  Just ("kind" .= _rrslrKind),
+                  ("rrsets" .=) <$> _rrslrRrsets])

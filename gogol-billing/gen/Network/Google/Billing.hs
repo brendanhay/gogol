@@ -74,20 +74,23 @@ type ProjectsAPI =
 -- project](https:\/\/cloud.google.com\/docs\/permissions-overview#h.bgs0oxofvnoo
 -- ).
 type ProjectsGetBillingInfo =
-     "v1" :> "{+name}" :> "billingInfo" :>
-       QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1" :>
+       "{+name}" :>
+         "billingInfo" :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON] ProjectBillingInfo
 
 -- | Sets or updates the billing account associated with a project. You
 -- specify the new billing account by setting the \`billing_account_name\`
@@ -117,20 +120,23 @@ type ProjectsGetBillingInfo =
 -- billing, you should always call this method with the name of an *open*
 -- billing account.
 type ProjectsUpdateBillingInfo =
-     "v1" :> "{+name}" :> "billingInfo" :>
-       QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1" :>
+       "{+name}" :>
+         "billingInfo" :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" Text :>
+                                     Put '[JSON] ProjectBillingInfo
 
 type BillingAccountsAPI = ProjectsAPI
 
@@ -140,19 +146,23 @@ type ProjectsAPI = ProjectsList
 -- authenticated user must be an [owner of the billing
 -- account](https:\/\/support.google.com\/cloud\/answer\/4430947).
 type ProjectsList =
-     "v1" :> "{+name}" :> "projects" :>
-       QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "pageSize" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1" :>
+       "{+name}" :>
+         "projects" :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "pageSize" Int32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" Text :>
+                                         Get '[JSON]
+                                           ListProjectBillingInfoResponse

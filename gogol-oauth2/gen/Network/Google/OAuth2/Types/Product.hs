@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -39,6 +40,15 @@ jwkKeys :: Lens' Jwk [JwkItemKeys]
 jwkKeys
   = lens _jwkKeys (\ s a -> s{_jwkKeys = a}) . _Default
       . _Coerce
+
+instance FromJSON Jwk where
+        parseJSON
+          = withObject "Jwk"
+              (\ o -> Jwk <$> (o .:? "keys" .!= mempty))
+
+instance ToJSON Jwk where
+        toJSON Jwk{..}
+          = object (catMaybes [("keys" .=) <$> _jwkKeys])
 
 --
 -- /See:/ 'jwkItemKeys' smart constructor.
@@ -95,6 +105,25 @@ jikE = lens _jikE (\ s a -> s{_jikE = a})
 
 jikKty :: Lens' JwkItemKeys Text
 jikKty = lens _jikKty (\ s a -> s{_jikKty = a})
+
+instance FromJSON JwkItemKeys where
+        parseJSON
+          = withObject "JwkItemKeys"
+              (\ o ->
+                 JwkItemKeys <$>
+                   (o .:? "alg" .!= "RS256") <*> (o .:? "use" .!= "sig")
+                     <*> (o .:? "kid")
+                     <*> (o .:? "n")
+                     <*> (o .:? "e")
+                     <*> (o .:? "kty" .!= "RSA"))
+
+instance ToJSON JwkItemKeys where
+        toJSON JwkItemKeys{..}
+          = object
+              (catMaybes
+                 [Just ("alg" .= _jikAlg), Just ("use" .= _jikUse),
+                  ("kid" .=) <$> _jikKid, ("n" .=) <$> _jikN,
+                  ("e" .=) <$> _jikE, Just ("kty" .= _jikKty)])
 
 --
 -- /See:/ 'tokeninfo' smart constructor.
@@ -191,6 +220,34 @@ tTokenHandle
 tIssuedTo :: Lens' Tokeninfo (Maybe Text)
 tIssuedTo
   = lens _tIssuedTo (\ s a -> s{_tIssuedTo = a})
+
+instance FromJSON Tokeninfo where
+        parseJSON
+          = withObject "Tokeninfo"
+              (\ o ->
+                 Tokeninfo <$>
+                   (o .:? "audience") <*> (o .:? "email") <*>
+                     (o .:? "expires_in")
+                     <*> (o .:? "access_type")
+                     <*> (o .:? "scope")
+                     <*> (o .:? "verified_email")
+                     <*> (o .:? "user_id")
+                     <*> (o .:? "token_handle")
+                     <*> (o .:? "issued_to"))
+
+instance ToJSON Tokeninfo where
+        toJSON Tokeninfo{..}
+          = object
+              (catMaybes
+                 [("audience" .=) <$> _tAudience,
+                  ("email" .=) <$> _tEmail,
+                  ("expires_in" .=) <$> _tExpiresIn,
+                  ("access_type" .=) <$> _tAccessType,
+                  ("scope" .=) <$> _tScope,
+                  ("verified_email" .=) <$> _tVerifiedEmail,
+                  ("user_id" .=) <$> _tUserId,
+                  ("token_handle" .=) <$> _tTokenHandle,
+                  ("issued_to" .=) <$> _tIssuedTo])
 
 --
 -- /See:/ 'userinfoplus' smart constructor.
@@ -298,3 +355,31 @@ uVerifiedEmail
 -- | The obfuscated ID of the user.
 uId :: Lens' Userinfoplus (Maybe Text)
 uId = lens _uId (\ s a -> s{_uId = a})
+
+instance FromJSON Userinfoplus where
+        parseJSON
+          = withObject "Userinfoplus"
+              (\ o ->
+                 Userinfoplus <$>
+                   (o .:? "hd") <*> (o .:? "email") <*> (o .:? "link")
+                     <*> (o .:? "locale")
+                     <*> (o .:? "given_name")
+                     <*> (o .:? "family_name")
+                     <*> (o .:? "picture")
+                     <*> (o .:? "gender")
+                     <*> (o .:? "name")
+                     <*> (o .:? "verified_email" .!= True)
+                     <*> (o .:? "id"))
+
+instance ToJSON Userinfoplus where
+        toJSON Userinfoplus{..}
+          = object
+              (catMaybes
+                 [("hd" .=) <$> _uHd, ("email" .=) <$> _uEmail,
+                  ("link" .=) <$> _uLink, ("locale" .=) <$> _uLocale,
+                  ("given_name" .=) <$> _uGivenName,
+                  ("family_name" .=) <$> _uFamilyName,
+                  ("picture" .=) <$> _uPicture,
+                  ("gender" .=) <$> _uGender, ("name" .=) <$> _uName,
+                  Just ("verified_email" .= _uVerifiedEmail),
+                  ("id" .=) <$> _uId])

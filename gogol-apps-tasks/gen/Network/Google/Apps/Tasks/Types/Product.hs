@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -173,6 +174,43 @@ tasPosition :: Lens' Task (Maybe Text)
 tasPosition
   = lens _tasPosition (\ s a -> s{_tasPosition = a})
 
+instance FromJSON Task where
+        parseJSON
+          = withObject "Task"
+              (\ o ->
+                 Task <$>
+                   (o .:? "parent") <*> (o .:? "status") <*>
+                     (o .:? "due")
+                     <*> (o .:? "etag")
+                     <*> (o .:? "kind" .!= "tasks#task")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "hidden")
+                     <*> (o .:? "completed")
+                     <*> (o .:? "id")
+                     <*> (o .:? "deleted")
+                     <*> (o .:? "updated")
+                     <*> (o .:? "title")
+                     <*> (o .:? "links" .!= mempty)
+                     <*> (o .:? "notes")
+                     <*> (o .:? "position"))
+
+instance ToJSON Task where
+        toJSON Task{..}
+          = object
+              (catMaybes
+                 [("parent" .=) <$> _tasParent,
+                  ("status" .=) <$> _tasStatus, ("due" .=) <$> _tasDue,
+                  ("etag" .=) <$> _tasEtag, Just ("kind" .= _tasKind),
+                  ("selfLink" .=) <$> _tasSelfLink,
+                  ("hidden" .=) <$> _tasHidden,
+                  ("completed" .=) <$> _tasCompleted,
+                  ("id" .=) <$> _tasId, ("deleted" .=) <$> _tasDeleted,
+                  ("updated" .=) <$> _tasUpdated,
+                  ("title" .=) <$> _tasTitle,
+                  ("links" .=) <$> _tasLinks,
+                  ("notes" .=) <$> _tasNotes,
+                  ("position" .=) <$> _tasPosition])
+
 --
 -- /See:/ 'taskItemLinks' smart constructor.
 data TaskItemLinks = TaskItemLinks
@@ -212,6 +250,21 @@ tilDescription :: Lens' TaskItemLinks (Maybe Text)
 tilDescription
   = lens _tilDescription
       (\ s a -> s{_tilDescription = a})
+
+instance FromJSON TaskItemLinks where
+        parseJSON
+          = withObject "TaskItemLinks"
+              (\ o ->
+                 TaskItemLinks <$>
+                   (o .:? "link") <*> (o .:? "type") <*>
+                     (o .:? "description"))
+
+instance ToJSON TaskItemLinks where
+        toJSON TaskItemLinks{..}
+          = object
+              (catMaybes
+                 [("link" .=) <$> _tilLink, ("type" .=) <$> _tilType,
+                  ("description" .=) <$> _tilDescription])
 
 --
 -- /See:/ 'taskList' smart constructor.
@@ -277,6 +330,27 @@ tUpdated = lens _tUpdated (\ s a -> s{_tUpdated = a})
 tTitle :: Lens' TaskList (Maybe Text)
 tTitle = lens _tTitle (\ s a -> s{_tTitle = a})
 
+instance FromJSON TaskList where
+        parseJSON
+          = withObject "TaskList"
+              (\ o ->
+                 TaskList <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!= "tasks#taskList")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id")
+                     <*> (o .:? "updated")
+                     <*> (o .:? "title"))
+
+instance ToJSON TaskList where
+        toJSON TaskList{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _tEtag, Just ("kind" .= _tKind),
+                  ("selfLink" .=) <$> _tSelfLink, ("id" .=) <$> _tId,
+                  ("updated" .=) <$> _tUpdated,
+                  ("title" .=) <$> _tTitle])
+
 --
 -- /See:/ 'taskLists' smart constructor.
 data TaskLists = TaskLists
@@ -327,6 +401,23 @@ tlItems
   = lens _tlItems (\ s a -> s{_tlItems = a}) . _Default
       . _Coerce
 
+instance FromJSON TaskLists where
+        parseJSON
+          = withObject "TaskLists"
+              (\ o ->
+                 TaskLists <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "tasks#taskLists")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON TaskLists where
+        toJSON TaskLists{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _tlEtag,
+                  ("nextPageToken" .=) <$> _tlNextPageToken,
+                  Just ("kind" .= _tlKind), ("items" .=) <$> _tlItems])
+
 --
 -- /See:/ 'tasks' smart constructor.
 data Tasks = Tasks
@@ -376,3 +467,20 @@ ttItems :: Lens' Tasks [Maybe Task]
 ttItems
   = lens _ttItems (\ s a -> s{_ttItems = a}) . _Default
       . _Coerce
+
+instance FromJSON Tasks where
+        parseJSON
+          = withObject "Tasks"
+              (\ o ->
+                 Tasks <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "tasks#tasks")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON Tasks where
+        toJSON Tasks{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _ttEtag,
+                  ("nextPageToken" .=) <$> _ttNextPageToken,
+                  Just ("kind" .= _ttKind), ("items" .=) <$> _ttItems])

@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -81,6 +82,26 @@ aclNextSyncToken
   = lens _aclNextSyncToken
       (\ s a -> s{_aclNextSyncToken = a})
 
+instance FromJSON Acl where
+        parseJSON
+          = withObject "Acl"
+              (\ o ->
+                 Acl <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "calendar#acl")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "nextSyncToken"))
+
+instance ToJSON Acl where
+        toJSON Acl{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _aclEtag,
+                  ("nextPageToken" .=) <$> _aclNextPageToken,
+                  Just ("kind" .= _aclKind),
+                  ("items" .=) <$> _aclItems,
+                  ("nextSyncToken" .=) <$> _aclNextSyncToken])
+
 --
 -- /See:/ 'aclRule' smart constructor.
 data AclRule = AclRule
@@ -143,6 +164,25 @@ arScope = lens _arScope (\ s a -> s{_arScope = a})
 arId :: Lens' AclRule (Maybe Text)
 arId = lens _arId (\ s a -> s{_arId = a})
 
+instance FromJSON AclRule where
+        parseJSON
+          = withObject "AclRule"
+              (\ o ->
+                 AclRule <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!= "calendar#aclRule")
+                     <*> (o .:? "role")
+                     <*> (o .:? "scope")
+                     <*> (o .:? "id"))
+
+instance ToJSON AclRule where
+        toJSON AclRule{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _arEtag, Just ("kind" .= _arKind),
+                  ("role" .=) <$> _arRole, ("scope" .=) <$> _arScope,
+                  ("id" .=) <$> _arId])
+
 -- | The scope of the rule.
 --
 -- /See:/ 'aclRuleScope' smart constructor.
@@ -178,6 +218,19 @@ arsValue = lens _arsValue (\ s a -> s{_arsValue = a})
 -- \"default\", or public, scope apply to any user, authenticated or not.
 arsType :: Lens' AclRuleScope (Maybe Text)
 arsType = lens _arsType (\ s a -> s{_arsType = a})
+
+instance FromJSON AclRuleScope where
+        parseJSON
+          = withObject "AclRuleScope"
+              (\ o ->
+                 AclRuleScope <$> (o .:? "value") <*> (o .:? "type"))
+
+instance ToJSON AclRuleScope where
+        toJSON AclRuleScope{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _arsValue,
+                  ("type" .=) <$> _arsType])
 
 --
 -- /See:/ 'calendar' smart constructor.
@@ -254,6 +307,29 @@ cDescription :: Lens' Calendar (Maybe Text)
 cDescription
   = lens _cDescription (\ s a -> s{_cDescription = a})
 
+instance FromJSON Calendar where
+        parseJSON
+          = withObject "Calendar"
+              (\ o ->
+                 Calendar <$>
+                   (o .:? "summary") <*> (o .:? "etag") <*>
+                     (o .:? "location")
+                     <*> (o .:? "kind" .!= "calendar#calendar")
+                     <*> (o .:? "id")
+                     <*> (o .:? "timeZone")
+                     <*> (o .:? "description"))
+
+instance ToJSON Calendar where
+        toJSON Calendar{..}
+          = object
+              (catMaybes
+                 [("summary" .=) <$> _cSummary,
+                  ("etag" .=) <$> _cEtag,
+                  ("location" .=) <$> _cLocation,
+                  Just ("kind" .= _cKind), ("id" .=) <$> _cId,
+                  ("timeZone" .=) <$> _cTimeZone,
+                  ("description" .=) <$> _cDescription])
+
 --
 -- /See:/ 'calendarList' smart constructor.
 data CalendarList = CalendarList
@@ -316,6 +392,25 @@ clNextSyncToken :: Lens' CalendarList (Maybe Text)
 clNextSyncToken
   = lens _clNextSyncToken
       (\ s a -> s{_clNextSyncToken = a})
+
+instance FromJSON CalendarList where
+        parseJSON
+          = withObject "CalendarList"
+              (\ o ->
+                 CalendarList <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "calendar#calendarList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "nextSyncToken"))
+
+instance ToJSON CalendarList where
+        toJSON CalendarList{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _clEtag,
+                  ("nextPageToken" .=) <$> _clNextPageToken,
+                  Just ("kind" .= _clKind), ("items" .=) <$> _clItems,
+                  ("nextSyncToken" .=) <$> _clNextSyncToken])
 
 --
 -- /See:/ 'calendarListEntry' smart constructor.
@@ -524,6 +619,52 @@ cleDescription
   = lens _cleDescription
       (\ s a -> s{_cleDescription = a})
 
+instance FromJSON CalendarListEntry where
+        parseJSON
+          = withObject "CalendarListEntry"
+              (\ o ->
+                 CalendarListEntry <$>
+                   (o .:? "summary") <*> (o .:? "etag") <*>
+                     (o .:? "location")
+                     <*> (o .:? "kind" .!= "calendar#calendarListEntry")
+                     <*> (o .:? "notificationSettings")
+                     <*> (o .:? "backgroundColor")
+                     <*> (o .:? "foregroundColor")
+                     <*> (o .:? "defaultReminders" .!= mempty)
+                     <*> (o .:? "selected" .!= False)
+                     <*> (o .:? "primary" .!= False)
+                     <*> (o .:? "hidden" .!= False)
+                     <*> (o .:? "id")
+                     <*> (o .:? "deleted" .!= False)
+                     <*> (o .:? "accessRole")
+                     <*> (o .:? "summaryOverride")
+                     <*> (o .:? "colorId")
+                     <*> (o .:? "timeZone")
+                     <*> (o .:? "description"))
+
+instance ToJSON CalendarListEntry where
+        toJSON CalendarListEntry{..}
+          = object
+              (catMaybes
+                 [("summary" .=) <$> _cleSummary,
+                  ("etag" .=) <$> _cleEtag,
+                  ("location" .=) <$> _cleLocation,
+                  Just ("kind" .= _cleKind),
+                  ("notificationSettings" .=) <$>
+                    _cleNotificationSettings,
+                  ("backgroundColor" .=) <$> _cleBackgroundColor,
+                  ("foregroundColor" .=) <$> _cleForegroundColor,
+                  ("defaultReminders" .=) <$> _cleDefaultReminders,
+                  Just ("selected" .= _cleSelected),
+                  Just ("primary" .= _clePrimary),
+                  Just ("hidden" .= _cleHidden), ("id" .=) <$> _cleId,
+                  Just ("deleted" .= _cleDeleted),
+                  ("accessRole" .=) <$> _cleAccessRole,
+                  ("summaryOverride" .=) <$> _cleSummaryOverride,
+                  ("colorId" .=) <$> _cleColorId,
+                  ("timeZone" .=) <$> _cleTimeZone,
+                  ("description" .=) <$> _cleDescription])
+
 -- | The notifications that the authenticated user is receiving for this
 -- calendar.
 --
@@ -551,6 +692,21 @@ clensNotifications
       (\ s a -> s{_clensNotifications = a})
       . _Default
       . _Coerce
+
+instance FromJSON
+         CalendarListEntryNotificationSettings where
+        parseJSON
+          = withObject "CalendarListEntryNotificationSettings"
+              (\ o ->
+                 CalendarListEntryNotificationSettings <$>
+                   (o .:? "notifications" .!= mempty))
+
+instance ToJSON CalendarListEntryNotificationSettings
+         where
+        toJSON CalendarListEntryNotificationSettings{..}
+          = object
+              (catMaybes
+                 [("notifications" .=) <$> _clensNotifications])
 
 --
 -- /See:/ 'calendarNotification' smart constructor.
@@ -591,6 +747,20 @@ cnMethod = lens _cnMethod (\ s a -> s{_cnMethod = a})
 -- morning).
 cnType :: Lens' CalendarNotification (Maybe Text)
 cnType = lens _cnType (\ s a -> s{_cnType = a})
+
+instance FromJSON CalendarNotification where
+        parseJSON
+          = withObject "CalendarNotification"
+              (\ o ->
+                 CalendarNotification <$>
+                   (o .:? "method") <*> (o .:? "type"))
+
+instance ToJSON CalendarNotification where
+        toJSON CalendarNotification{..}
+          = object
+              (catMaybes
+                 [("method" .=) <$> _cnMethod,
+                  ("type" .=) <$> _cnType])
 
 --
 -- /See:/ 'channel' smart constructor.
@@ -699,6 +869,35 @@ chaId = lens _chaId (\ s a -> s{_chaId = a})
 chaType :: Lens' Channel (Maybe Text)
 chaType = lens _chaType (\ s a -> s{_chaType = a})
 
+instance FromJSON Channel where
+        parseJSON
+          = withObject "Channel"
+              (\ o ->
+                 Channel <$>
+                   (o .:? "resourceUri") <*> (o .:? "resourceId") <*>
+                     (o .:? "kind" .!= "api#channel")
+                     <*> (o .:? "expiration")
+                     <*> (o .:? "token")
+                     <*> (o .:? "address")
+                     <*> (o .:? "payload")
+                     <*> (o .:? "params")
+                     <*> (o .:? "id")
+                     <*> (o .:? "type"))
+
+instance ToJSON Channel where
+        toJSON Channel{..}
+          = object
+              (catMaybes
+                 [("resourceUri" .=) <$> _chaResourceUri,
+                  ("resourceId" .=) <$> _chaResourceId,
+                  Just ("kind" .= _chaKind),
+                  ("expiration" .=) <$> _chaExpiration,
+                  ("token" .=) <$> _chaToken,
+                  ("address" .=) <$> _chaAddress,
+                  ("payload" .=) <$> _chaPayload,
+                  ("params" .=) <$> _chaParams, ("id" .=) <$> _chaId,
+                  ("type" .=) <$> _chaType])
+
 -- | Additional parameters controlling delivery channel behavior. Optional.
 --
 -- /See:/ 'channelParams' smart constructor.
@@ -711,6 +910,14 @@ data ChannelParams =
 channelParams
     :: ChannelParams
 channelParams = ChannelParams
+
+instance FromJSON ChannelParams where
+        parseJSON
+          = withObject "ChannelParams"
+              (\ o -> pure ChannelParams)
+
+instance ToJSON ChannelParams where
+        toJSON = const (Object mempty)
 
 --
 -- /See:/ 'colorDefinition' smart constructor.
@@ -744,6 +951,20 @@ cdForeground
 cdBackground :: Lens' ColorDefinition (Maybe Text)
 cdBackground
   = lens _cdBackground (\ s a -> s{_cdBackground = a})
+
+instance FromJSON ColorDefinition where
+        parseJSON
+          = withObject "ColorDefinition"
+              (\ o ->
+                 ColorDefinition <$>
+                   (o .:? "foreground") <*> (o .:? "background"))
+
+instance ToJSON ColorDefinition where
+        toJSON ColorDefinition{..}
+          = object
+              (catMaybes
+                 [("foreground" .=) <$> _cdForeground,
+                  ("background" .=) <$> _cdBackground])
 
 --
 -- /See:/ 'colors' smart constructor.
@@ -798,6 +1019,25 @@ colUpdated :: Lens' Colors (Maybe UTCTime)
 colUpdated
   = lens _colUpdated (\ s a -> s{_colUpdated = a})
 
+instance FromJSON Colors where
+        parseJSON
+          = withObject "Colors"
+              (\ o ->
+                 Colors <$>
+                   (o .:? "event") <*>
+                     (o .:? "kind" .!= "calendar#colors")
+                     <*> (o .:? "calendar")
+                     <*> (o .:? "updated"))
+
+instance ToJSON Colors where
+        toJSON Colors{..}
+          = object
+              (catMaybes
+                 [("event" .=) <$> _colEvent,
+                  Just ("kind" .= _colKind),
+                  ("calendar" .=) <$> _colCalendar,
+                  ("updated" .=) <$> _colUpdated])
+
 -- | A global palette of calendar colors, mapping from the color ID to its
 -- definition. A calendarListEntry resource refers to one of these color
 -- IDs in its color field. Read-only.
@@ -813,6 +1053,14 @@ colorsCalendar
     :: ColorsCalendar
 colorsCalendar = ColorsCalendar
 
+instance FromJSON ColorsCalendar where
+        parseJSON
+          = withObject "ColorsCalendar"
+              (\ o -> pure ColorsCalendar)
+
+instance ToJSON ColorsCalendar where
+        toJSON = const (Object mempty)
+
 -- | A global palette of event colors, mapping from the color ID to its
 -- definition. An event resource may refer to one of these color IDs in its
 -- color field. Read-only.
@@ -827,6 +1075,13 @@ data ColorsEvent =
 colorsEvent
     :: ColorsEvent
 colorsEvent = ColorsEvent
+
+instance FromJSON ColorsEvent where
+        parseJSON
+          = withObject "ColorsEvent" (\ o -> pure ColorsEvent)
+
+instance ToJSON ColorsEvent where
+        toJSON = const (Object mempty)
 
 --
 -- /See:/ 'error'' smart constructor.
@@ -864,6 +1119,19 @@ eDomain = lens _eDomain (\ s a -> s{_eDomain = a})
 -- statuses not included in this list.
 eReason :: Lens' Error (Maybe Text)
 eReason = lens _eReason (\ s a -> s{_eReason = a})
+
+instance FromJSON Error where
+        parseJSON
+          = withObject "Error"
+              (\ o ->
+                 Error <$> (o .:? "domain") <*> (o .:? "reason"))
+
+instance ToJSON Error where
+        toJSON Error{..}
+          = object
+              (catMaybes
+                 [("domain" .=) <$> _eDomain,
+                  ("reason" .=) <$> _eReason])
 
 --
 -- /See:/ 'event' smart constructor.
@@ -1294,6 +1562,94 @@ eveOrganizer :: Lens' Event (Maybe EventOrganizer)
 eveOrganizer
   = lens _eveOrganizer (\ s a -> s{_eveOrganizer = a})
 
+instance FromJSON Event where
+        parseJSON
+          = withObject "Event"
+              (\ o ->
+                 Event <$>
+                   (o .:? "summary") <*> (o .:? "originalStartTime") <*>
+                     (o .:? "creator")
+                     <*> (o .:? "status")
+                     <*> (o .:? "guestsCanModify" .!= False)
+                     <*> (o .:? "etag")
+                     <*> (o .:? "attachments" .!= mempty)
+                     <*> (o .:? "locked" .!= False)
+                     <*> (o .:? "location")
+                     <*> (o .:? "attendees" .!= mempty)
+                     <*> (o .:? "reminders")
+                     <*> (o .:? "kind" .!= "calendar#event")
+                     <*> (o .:? "created")
+                     <*> (o .:? "transparency" .!= "opaque")
+                     <*> (o .:? "recurringEventId")
+                     <*> (o .:? "start")
+                     <*> (o .:? "privateCopy" .!= False)
+                     <*> (o .:? "endTimeUnspecified" .!= False)
+                     <*> (o .:? "extendedProperties")
+                     <*> (o .:? "visibility" .!= "default")
+                     <*> (o .:? "guestsCanInviteOthers" .!= True)
+                     <*> (o .:? "recurrence" .!= mempty)
+                     <*> (o .:? "gadget")
+                     <*> (o .:? "sequence")
+                     <*> (o .:? "iCalUID")
+                     <*> (o .:? "end")
+                     <*> (o .:? "attendeesOmitted" .!= False)
+                     <*> (o .:? "source")
+                     <*> (o .:? "id")
+                     <*> (o .:? "htmlLink")
+                     <*> (o .:? "updated")
+                     <*> (o .:? "colorId")
+                     <*> (o .:? "anyoneCanAddSelf" .!= False)
+                     <*> (o .:? "guestsCanSeeOtherGuests" .!= True)
+                     <*> (o .:? "hangoutLink")
+                     <*> (o .:? "description")
+                     <*> (o .:? "organizer"))
+
+instance ToJSON Event where
+        toJSON Event{..}
+          = object
+              (catMaybes
+                 [("summary" .=) <$> _eveSummary,
+                  ("originalStartTime" .=) <$> _eveOriginalStartTime,
+                  ("creator" .=) <$> _eveCreator,
+                  ("status" .=) <$> _eveStatus,
+                  Just ("guestsCanModify" .= _eveGuestsCanModify),
+                  ("etag" .=) <$> _eveEtag,
+                  ("attachments" .=) <$> _eveAttachments,
+                  Just ("locked" .= _eveLocked),
+                  ("location" .=) <$> _eveLocation,
+                  ("attendees" .=) <$> _eveAttendees,
+                  ("reminders" .=) <$> _eveReminders,
+                  Just ("kind" .= _eveKind),
+                  ("created" .=) <$> _eveCreated,
+                  Just ("transparency" .= _eveTransparency),
+                  ("recurringEventId" .=) <$> _eveRecurringEventId,
+                  ("start" .=) <$> _eveStart,
+                  Just ("privateCopy" .= _evePrivateCopy),
+                  Just
+                    ("endTimeUnspecified" .= _eveEndTimeUnspecified),
+                  ("extendedProperties" .=) <$> _eveExtendedProperties,
+                  Just ("visibility" .= _eveVisibility),
+                  Just
+                    ("guestsCanInviteOthers" .=
+                       _eveGuestsCanInviteOthers),
+                  ("recurrence" .=) <$> _eveRecurrence,
+                  ("gadget" .=) <$> _eveGadget,
+                  ("sequence" .=) <$> _eveSequence,
+                  ("iCalUID" .=) <$> _eveICalUID,
+                  ("end" .=) <$> _eveEnd,
+                  Just ("attendeesOmitted" .= _eveAttendeesOmitted),
+                  ("source" .=) <$> _eveSource, ("id" .=) <$> _eveId,
+                  ("htmlLink" .=) <$> _eveHtmlLink,
+                  ("updated" .=) <$> _eveUpdated,
+                  ("colorId" .=) <$> _eveColorId,
+                  Just ("anyoneCanAddSelf" .= _eveAnyoneCanAddSelf),
+                  Just
+                    ("guestsCanSeeOtherGuests" .=
+                       _eveGuestsCanSeeOtherGuests),
+                  ("hangoutLink" .=) <$> _eveHangoutLink,
+                  ("description" .=) <$> _eveDescription,
+                  ("organizer" .=) <$> _eveOrganizer])
+
 --
 -- /See:/ 'eventAttachment' smart constructor.
 data EventAttachment = EventAttachment
@@ -1353,6 +1709,26 @@ eaTitle = lens _eaTitle (\ s a -> s{_eaTitle = a})
 -- ID of the corresponding Files resource entry in the Drive API.
 eaFileId :: Lens' EventAttachment (Maybe Text)
 eaFileId = lens _eaFileId (\ s a -> s{_eaFileId = a})
+
+instance FromJSON EventAttachment where
+        parseJSON
+          = withObject "EventAttachment"
+              (\ o ->
+                 EventAttachment <$>
+                   (o .:? "fileUrl") <*> (o .:? "iconLink") <*>
+                     (o .:? "mimeType")
+                     <*> (o .:? "title")
+                     <*> (o .:? "fileId"))
+
+instance ToJSON EventAttachment where
+        toJSON EventAttachment{..}
+          = object
+              (catMaybes
+                 [("fileUrl" .=) <$> _eaFileUrl,
+                  ("iconLink" .=) <$> _eaIconLink,
+                  ("mimeType" .=) <$> _eaMimeType,
+                  ("title" .=) <$> _eaTitle,
+                  ("fileId" .=) <$> _eaFileId])
 
 --
 -- /See:/ 'eventAttendee' smart constructor.
@@ -1467,6 +1843,35 @@ eaOrganizer :: Lens' EventAttendee (Maybe Bool)
 eaOrganizer
   = lens _eaOrganizer (\ s a -> s{_eaOrganizer = a})
 
+instance FromJSON EventAttendee where
+        parseJSON
+          = withObject "EventAttendee"
+              (\ o ->
+                 EventAttendee <$>
+                   (o .:? "email") <*> (o .:? "responseStatus") <*>
+                     (o .:? "self" .!= False)
+                     <*> (o .:? "resource" .!= False)
+                     <*> (o .:? "additionalGuests" .!= 0)
+                     <*> (o .:? "displayName")
+                     <*> (o .:? "id")
+                     <*> (o .:? "comment")
+                     <*> (o .:? "optional" .!= False)
+                     <*> (o .:? "organizer"))
+
+instance ToJSON EventAttendee where
+        toJSON EventAttendee{..}
+          = object
+              (catMaybes
+                 [("email" .=) <$> _eaEmail,
+                  ("responseStatus" .=) <$> _eaResponseStatus,
+                  Just ("self" .= _eaSelf),
+                  Just ("resource" .= _eaResource),
+                  Just ("additionalGuests" .= _eaAdditionalGuests),
+                  ("displayName" .=) <$> _eaDisplayName,
+                  ("id" .=) <$> _eaId, ("comment" .=) <$> _eaComment,
+                  Just ("optional" .= _eaOptional),
+                  ("organizer" .=) <$> _eaOrganizer])
+
 -- | The creator of the event. Read-only.
 --
 -- /See:/ 'eventCreator' smart constructor.
@@ -1518,6 +1923,23 @@ ecDisplayName
 ecId :: Lens' EventCreator (Maybe Text)
 ecId = lens _ecId (\ s a -> s{_ecId = a})
 
+instance FromJSON EventCreator where
+        parseJSON
+          = withObject "EventCreator"
+              (\ o ->
+                 EventCreator <$>
+                   (o .:? "email") <*> (o .:? "self" .!= False) <*>
+                     (o .:? "displayName")
+                     <*> (o .:? "id"))
+
+instance ToJSON EventCreator where
+        toJSON EventCreator{..}
+          = object
+              (catMaybes
+                 [("email" .=) <$> _ecEmail, Just ("self" .= _ecSelf),
+                  ("displayName" .=) <$> _ecDisplayName,
+                  ("id" .=) <$> _ecId])
+
 --
 -- /See:/ 'eventDateTime' smart constructor.
 data EventDateTime = EventDateTime
@@ -1564,6 +1986,22 @@ edtDateTime :: Lens' EventDateTime (Maybe UTCTime)
 edtDateTime
   = lens _edtDateTime (\ s a -> s{_edtDateTime = a})
 
+instance FromJSON EventDateTime where
+        parseJSON
+          = withObject "EventDateTime"
+              (\ o ->
+                 EventDateTime <$>
+                   (o .:? "date") <*> (o .:? "timeZone") <*>
+                     (o .:? "dateTime"))
+
+instance ToJSON EventDateTime where
+        toJSON EventDateTime{..}
+          = object
+              (catMaybes
+                 [("date" .=) <$> _edtDate,
+                  ("timeZone" .=) <$> _edtTimeZone,
+                  ("dateTime" .=) <$> _edtDateTime])
+
 -- | Extended properties of the event.
 --
 -- /See:/ 'eventExtendedProperties' smart constructor.
@@ -1598,6 +2036,20 @@ eepPrivate
 eepShared :: Lens' EventExtendedProperties (Maybe EventSharedExtendedProperties)
 eepShared
   = lens _eepShared (\ s a -> s{_eepShared = a})
+
+instance FromJSON EventExtendedProperties where
+        parseJSON
+          = withObject "EventExtendedProperties"
+              (\ o ->
+                 EventExtendedProperties <$>
+                   (o .:? "private") <*> (o .:? "shared"))
+
+instance ToJSON EventExtendedProperties where
+        toJSON EventExtendedProperties{..}
+          = object
+              (catMaybes
+                 [("private" .=) <$> _eepPrivate,
+                  ("shared" .=) <$> _eepShared])
 
 -- | A gadget that extends this event.
 --
@@ -1686,6 +2138,31 @@ egTitle = lens _egTitle (\ s a -> s{_egTitle = a})
 egType :: Lens' EventGadget (Maybe Text)
 egType = lens _egType (\ s a -> s{_egType = a})
 
+instance FromJSON EventGadget where
+        parseJSON
+          = withObject "EventGadget"
+              (\ o ->
+                 EventGadget <$>
+                   (o .:? "height") <*> (o .:? "display") <*>
+                     (o .:? "preferences")
+                     <*> (o .:? "link")
+                     <*> (o .:? "iconLink")
+                     <*> (o .:? "width")
+                     <*> (o .:? "title")
+                     <*> (o .:? "type"))
+
+instance ToJSON EventGadget where
+        toJSON EventGadget{..}
+          = object
+              (catMaybes
+                 [("height" .=) <$> _egHeight,
+                  ("display" .=) <$> _egDisplay,
+                  ("preferences" .=) <$> _egPreferences,
+                  ("link" .=) <$> _egLink,
+                  ("iconLink" .=) <$> _egIconLink,
+                  ("width" .=) <$> _egWidth, ("title" .=) <$> _egTitle,
+                  ("type" .=) <$> _egType])
+
 -- | The organizer of the event. If the organizer is also an attendee, this
 -- is indicated with a separate entry in attendees with the organizer field
 -- set to True. To change the organizer, use the move operation. Read-only,
@@ -1741,6 +2218,23 @@ eoDisplayName
 eoId :: Lens' EventOrganizer (Maybe Text)
 eoId = lens _eoId (\ s a -> s{_eoId = a})
 
+instance FromJSON EventOrganizer where
+        parseJSON
+          = withObject "EventOrganizer"
+              (\ o ->
+                 EventOrganizer <$>
+                   (o .:? "email") <*> (o .:? "self" .!= False) <*>
+                     (o .:? "displayName")
+                     <*> (o .:? "id"))
+
+instance ToJSON EventOrganizer where
+        toJSON EventOrganizer{..}
+          = object
+              (catMaybes
+                 [("email" .=) <$> _eoEmail, Just ("self" .= _eoSelf),
+                  ("displayName" .=) <$> _eoDisplayName,
+                  ("id" .=) <$> _eoId])
+
 -- | Preferences.
 --
 -- /See:/ 'eventPreferencesGadget' smart constructor.
@@ -1753,6 +2247,14 @@ data EventPreferencesGadget =
 eventPreferencesGadget
     :: EventPreferencesGadget
 eventPreferencesGadget = EventPreferencesGadget
+
+instance FromJSON EventPreferencesGadget where
+        parseJSON
+          = withObject "EventPreferencesGadget"
+              (\ o -> pure EventPreferencesGadget)
+
+instance ToJSON EventPreferencesGadget where
+        toJSON = const (Object mempty)
 
 -- | Properties that are private to the copy of the event that appears on
 -- this calendar.
@@ -1767,6 +2269,15 @@ data EventPrivateExtendedProperties =
 eventPrivateExtendedProperties
     :: EventPrivateExtendedProperties
 eventPrivateExtendedProperties = EventPrivateExtendedProperties
+
+instance FromJSON EventPrivateExtendedProperties
+         where
+        parseJSON
+          = withObject "EventPrivateExtendedProperties"
+              (\ o -> pure EventPrivateExtendedProperties)
+
+instance ToJSON EventPrivateExtendedProperties where
+        toJSON = const (Object mempty)
 
 --
 -- /See:/ 'eventReminder' smart constructor.
@@ -1803,6 +2314,20 @@ erMethod = lens _erMethod (\ s a -> s{_erMethod = a})
 erMinutes :: Lens' EventReminder (Maybe Int32)
 erMinutes
   = lens _erMinutes (\ s a -> s{_erMinutes = a})
+
+instance FromJSON EventReminder where
+        parseJSON
+          = withObject "EventReminder"
+              (\ o ->
+                 EventReminder <$>
+                   (o .:? "method") <*> (o .:? "minutes"))
+
+instance ToJSON EventReminder where
+        toJSON EventReminder{..}
+          = object
+              (catMaybes
+                 [("method" .=) <$> _erMethod,
+                  ("minutes" .=) <$> _erMinutes])
 
 -- | Information about the event\'s reminders for the authenticated user.
 --
@@ -1842,6 +2367,21 @@ erUseDefault :: Lens' EventReminders (Maybe Bool)
 erUseDefault
   = lens _erUseDefault (\ s a -> s{_erUseDefault = a})
 
+instance FromJSON EventReminders where
+        parseJSON
+          = withObject "EventReminders"
+              (\ o ->
+                 EventReminders <$>
+                   (o .:? "overrides" .!= mempty) <*>
+                     (o .:? "useDefault"))
+
+instance ToJSON EventReminders where
+        toJSON EventReminders{..}
+          = object
+              (catMaybes
+                 [("overrides" .=) <$> _erOverrides,
+                  ("useDefault" .=) <$> _erUseDefault])
+
 -- | Properties that are shared between copies of the event on other
 -- attendees\' calendars.
 --
@@ -1855,6 +2395,14 @@ data EventSharedExtendedProperties =
 eventSharedExtendedProperties
     :: EventSharedExtendedProperties
 eventSharedExtendedProperties = EventSharedExtendedProperties
+
+instance FromJSON EventSharedExtendedProperties where
+        parseJSON
+          = withObject "EventSharedExtendedProperties"
+              (\ o -> pure EventSharedExtendedProperties)
+
+instance ToJSON EventSharedExtendedProperties where
+        toJSON = const (Object mempty)
 
 -- | Source from which the event was created. For example, a web page, an
 -- email message or any document identifiable by an URL with HTTP or HTTPS
@@ -1890,6 +2438,18 @@ esUrl = lens _esUrl (\ s a -> s{_esUrl = a})
 -- subject.
 esTitle :: Lens' EventSource (Maybe Text)
 esTitle = lens _esTitle (\ s a -> s{_esTitle = a})
+
+instance FromJSON EventSource where
+        parseJSON
+          = withObject "EventSource"
+              (\ o ->
+                 EventSource <$> (o .:? "url") <*> (o .:? "title"))
+
+instance ToJSON EventSource where
+        toJSON EventSource{..}
+          = object
+              (catMaybes
+                 [("url" .=) <$> _esUrl, ("title" .=) <$> _esTitle])
 
 --
 -- /See:/ 'events' smart constructor.
@@ -2021,6 +2581,37 @@ eDescription :: Lens' Events (Maybe Text)
 eDescription
   = lens _eDescription (\ s a -> s{_eDescription = a})
 
+instance FromJSON Events where
+        parseJSON
+          = withObject "Events"
+              (\ o ->
+                 Events <$>
+                   (o .:? "summary") <*> (o .:? "etag") <*>
+                     (o .:? "nextPageToken")
+                     <*> (o .:? "kind" .!= "calendar#events")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "defaultReminders" .!= mempty)
+                     <*> (o .:? "updated")
+                     <*> (o .:? "accessRole")
+                     <*> (o .:? "timeZone")
+                     <*> (o .:? "nextSyncToken")
+                     <*> (o .:? "description"))
+
+instance ToJSON Events where
+        toJSON Events{..}
+          = object
+              (catMaybes
+                 [("summary" .=) <$> _eSummary,
+                  ("etag" .=) <$> _eEtag,
+                  ("nextPageToken" .=) <$> _eNextPageToken,
+                  Just ("kind" .= _eKind), ("items" .=) <$> _eItems,
+                  ("defaultReminders" .=) <$> _eDefaultReminders,
+                  ("updated" .=) <$> _eUpdated,
+                  ("accessRole" .=) <$> _eAccessRole,
+                  ("timeZone" .=) <$> _eTimeZone,
+                  ("nextSyncToken" .=) <$> _eNextSyncToken,
+                  ("description" .=) <$> _eDescription])
+
 --
 -- /See:/ 'freeBusyCalendar' smart constructor.
 data FreeBusyCalendar = FreeBusyCalendar
@@ -2057,6 +2648,21 @@ fbcErrors
       _Default
       . _Coerce
 
+instance FromJSON FreeBusyCalendar where
+        parseJSON
+          = withObject "FreeBusyCalendar"
+              (\ o ->
+                 FreeBusyCalendar <$>
+                   (o .:? "busy" .!= mempty) <*>
+                     (o .:? "errors" .!= mempty))
+
+instance ToJSON FreeBusyCalendar where
+        toJSON FreeBusyCalendar{..}
+          = object
+              (catMaybes
+                 [("busy" .=) <$> _fbcBusy,
+                  ("errors" .=) <$> _fbcErrors])
+
 --
 -- /See:/ 'freeBusyGroup' smart constructor.
 data FreeBusyGroup = FreeBusyGroup
@@ -2092,6 +2698,21 @@ fbgErrors
   = lens _fbgErrors (\ s a -> s{_fbgErrors = a}) .
       _Default
       . _Coerce
+
+instance FromJSON FreeBusyGroup where
+        parseJSON
+          = withObject "FreeBusyGroup"
+              (\ o ->
+                 FreeBusyGroup <$>
+                   (o .:? "calendars" .!= mempty) <*>
+                     (o .:? "errors" .!= mempty))
+
+instance ToJSON FreeBusyGroup where
+        toJSON FreeBusyGroup{..}
+          = object
+              (catMaybes
+                 [("calendars" .=) <$> _fbgCalendars,
+                  ("errors" .=) <$> _fbgErrors])
 
 --
 -- /See:/ 'freeBusyRequest' smart constructor.
@@ -2168,6 +2789,29 @@ fbrTimeMax :: Lens' FreeBusyRequest (Maybe UTCTime)
 fbrTimeMax
   = lens _fbrTimeMax (\ s a -> s{_fbrTimeMax = a})
 
+instance FromJSON FreeBusyRequest where
+        parseJSON
+          = withObject "FreeBusyRequest"
+              (\ o ->
+                 FreeBusyRequest <$>
+                   (o .:? "calendarExpansionMax") <*> (o .:? "timeMin")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "groupExpansionMax")
+                     <*> (o .:? "timeZone" .!= "UTC")
+                     <*> (o .:? "timeMax"))
+
+instance ToJSON FreeBusyRequest where
+        toJSON FreeBusyRequest{..}
+          = object
+              (catMaybes
+                 [("calendarExpansionMax" .=) <$>
+                    _fbrCalendarExpansionMax,
+                  ("timeMin" .=) <$> _fbrTimeMin,
+                  ("items" .=) <$> _fbrItems,
+                  ("groupExpansionMax" .=) <$> _fbrGroupExpansionMax,
+                  Just ("timeZone" .= _fbrTimeZone),
+                  ("timeMax" .=) <$> _fbrTimeMax])
+
 --
 -- /See:/ 'freeBusyRequestItem' smart constructor.
 newtype FreeBusyRequestItem = FreeBusyRequestItem
@@ -2189,6 +2833,15 @@ freeBusyRequestItem =
 -- | The identifier of a calendar or a group.
 fbriId :: Lens' FreeBusyRequestItem (Maybe Text)
 fbriId = lens _fbriId (\ s a -> s{_fbriId = a})
+
+instance FromJSON FreeBusyRequestItem where
+        parseJSON
+          = withObject "FreeBusyRequestItem"
+              (\ o -> FreeBusyRequestItem <$> (o .:? "id"))
+
+instance ToJSON FreeBusyRequestItem where
+        toJSON FreeBusyRequestItem{..}
+          = object (catMaybes [("id" .=) <$> _fbriId])
 
 --
 -- /See:/ 'freeBusyResponse' smart constructor.
@@ -2245,6 +2898,26 @@ fCalendars
 fTimeMax :: Lens' FreeBusyResponse (Maybe UTCTime)
 fTimeMax = lens _fTimeMax (\ s a -> s{_fTimeMax = a})
 
+instance FromJSON FreeBusyResponse where
+        parseJSON
+          = withObject "FreeBusyResponse"
+              (\ o ->
+                 FreeBusyResponse <$>
+                   (o .:? "groups") <*> (o .:? "timeMin") <*>
+                     (o .:? "kind" .!= "calendar#freeBusy")
+                     <*> (o .:? "calendars")
+                     <*> (o .:? "timeMax"))
+
+instance ToJSON FreeBusyResponse where
+        toJSON FreeBusyResponse{..}
+          = object
+              (catMaybes
+                 [("groups" .=) <$> _fGroups,
+                  ("timeMin" .=) <$> _fTimeMin,
+                  Just ("kind" .= _fKind),
+                  ("calendars" .=) <$> _fCalendars,
+                  ("timeMax" .=) <$> _fTimeMax])
+
 -- | List of free\/busy information for calendars.
 --
 -- /See:/ 'freeBusyResponseCalendars' smart constructor.
@@ -2258,6 +2931,14 @@ freeBusyResponseCalendars
     :: FreeBusyResponseCalendars
 freeBusyResponseCalendars = FreeBusyResponseCalendars
 
+instance FromJSON FreeBusyResponseCalendars where
+        parseJSON
+          = withObject "FreeBusyResponseCalendars"
+              (\ o -> pure FreeBusyResponseCalendars)
+
+instance ToJSON FreeBusyResponseCalendars where
+        toJSON = const (Object mempty)
+
 -- | Expansion of groups.
 --
 -- /See:/ 'freeBusyResponseGroups' smart constructor.
@@ -2270,6 +2951,14 @@ data FreeBusyResponseGroups =
 freeBusyResponseGroups
     :: FreeBusyResponseGroups
 freeBusyResponseGroups = FreeBusyResponseGroups
+
+instance FromJSON FreeBusyResponseGroups where
+        parseJSON
+          = withObject "FreeBusyResponseGroups"
+              (\ o -> pure FreeBusyResponseGroups)
+
+instance ToJSON FreeBusyResponseGroups where
+        toJSON = const (Object mempty)
 
 --
 -- /See:/ 'setting' smart constructor.
@@ -2318,6 +3007,23 @@ sValue = lens _sValue (\ s a -> s{_sValue = a})
 -- | The id of the user setting.
 sId :: Lens' Setting (Maybe Text)
 sId = lens _sId (\ s a -> s{_sId = a})
+
+instance FromJSON Setting where
+        parseJSON
+          = withObject "Setting"
+              (\ o ->
+                 Setting <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!= "calendar#setting")
+                     <*> (o .:? "value")
+                     <*> (o .:? "id"))
+
+instance ToJSON Setting where
+        toJSON Setting{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _sEtag, Just ("kind" .= _sKind),
+                  ("value" .=) <$> _sValue, ("id" .=) <$> _sId])
 
 --
 -- /See:/ 'settings' smart constructor.
@@ -2383,6 +3089,26 @@ setNextSyncToken
   = lens _setNextSyncToken
       (\ s a -> s{_setNextSyncToken = a})
 
+instance FromJSON Settings where
+        parseJSON
+          = withObject "Settings"
+              (\ o ->
+                 Settings <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "calendar#settings")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "nextSyncToken"))
+
+instance ToJSON Settings where
+        toJSON Settings{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _setEtag,
+                  ("nextPageToken" .=) <$> _setNextPageToken,
+                  Just ("kind" .= _setKind),
+                  ("items" .=) <$> _setItems,
+                  ("nextSyncToken" .=) <$> _setNextSyncToken])
+
 --
 -- /See:/ 'timePeriod' smart constructor.
 data TimePeriod = TimePeriod
@@ -2412,3 +3138,15 @@ tpStart = lens _tpStart (\ s a -> s{_tpStart = a})
 -- | The (exclusive) end of the time period.
 tpEnd :: Lens' TimePeriod (Maybe UTCTime)
 tpEnd = lens _tpEnd (\ s a -> s{_tpEnd = a})
+
+instance FromJSON TimePeriod where
+        parseJSON
+          = withObject "TimePeriod"
+              (\ o ->
+                 TimePeriod <$> (o .:? "start") <*> (o .:? "end"))
+
+instance ToJSON TimePeriod where
+        toJSON TimePeriod{..}
+          = object
+              (catMaybes
+                 [("start" .=) <$> _tpStart, ("end" .=) <$> _tpEnd])

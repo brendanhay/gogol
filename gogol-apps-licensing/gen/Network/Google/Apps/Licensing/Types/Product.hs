@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -82,6 +83,28 @@ laProductId :: Lens' LicenseAssignment (Maybe Text)
 laProductId
   = lens _laProductId (\ s a -> s{_laProductId = a})
 
+instance FromJSON LicenseAssignment where
+        parseJSON
+          = withObject "LicenseAssignment"
+              (\ o ->
+                 LicenseAssignment <$>
+                   (o .:? "etags") <*>
+                     (o .:? "kind" .!= "licensing#licenseAssignment")
+                     <*> (o .:? "skuId")
+                     <*> (o .:? "userId")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "productId"))
+
+instance ToJSON LicenseAssignment where
+        toJSON LicenseAssignment{..}
+          = object
+              (catMaybes
+                 [("etags" .=) <$> _laEtags, Just ("kind" .= _laKind),
+                  ("skuId" .=) <$> _laSkuId,
+                  ("userId" .=) <$> _laUserId,
+                  ("selfLink" .=) <$> _laSelfLink,
+                  ("productId" .=) <$> _laProductId])
+
 -- | Template for LicenseAssignment Insert request
 --
 -- /See:/ 'licenseAssignmentInsert' smart constructor.
@@ -105,6 +128,15 @@ licenseAssignmentInsert =
 laiUserId :: Lens' LicenseAssignmentInsert (Maybe Text)
 laiUserId
   = lens _laiUserId (\ s a -> s{_laiUserId = a})
+
+instance FromJSON LicenseAssignmentInsert where
+        parseJSON
+          = withObject "LicenseAssignmentInsert"
+              (\ o -> LicenseAssignmentInsert <$> (o .:? "userId"))
+
+instance ToJSON LicenseAssignmentInsert where
+        toJSON LicenseAssignmentInsert{..}
+          = object (catMaybes [("userId" .=) <$> _laiUserId])
 
 -- | LicesnseAssignment List for a given product\/sku for a customer.
 --
@@ -158,3 +190,21 @@ lalItems
   = lens _lalItems (\ s a -> s{_lalItems = a}) .
       _Default
       . _Coerce
+
+instance FromJSON LicenseAssignmentList where
+        parseJSON
+          = withObject "LicenseAssignmentList"
+              (\ o ->
+                 LicenseAssignmentList <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "licensing#licenseAssignmentList")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON LicenseAssignmentList where
+        toJSON LicenseAssignmentList{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _lalEtag,
+                  ("nextPageToken" .=) <$> _lalNextPageToken,
+                  Just ("kind" .= _lalKind),
+                  ("items" .=) <$> _lalItems])

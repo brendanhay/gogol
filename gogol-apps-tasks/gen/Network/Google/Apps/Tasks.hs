@@ -110,123 +110,148 @@ type TasksAPI =
 
 -- | Creates a new task on the specified task list.
 type TasksInsert =
-     "tasks" :> "v1" :> "lists" :> Capture "tasklist" Text
-       :> "tasks"
-       :> QueryParam "parent" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "previous" Text
-       :> QueryParam "alt" Text
+     "tasks" :>
+       "v1" :>
+         "lists" :>
+           Capture "tasklist" Text :>
+             "tasks" :>
+               QueryParam "parent" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "previous" Text :>
+                               QueryParam "alt" Text :> Post '[JSON] Task
 
 -- | Returns all tasks in the specified task list.
 type TasksList =
-     "tasks" :> "v1" :> "lists" :> Capture "tasklist" Text
-       :> "tasks"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "dueMax" Text
-       :> QueryParam "showDeleted" Bool
-       :> QueryParam "showCompleted" Bool
-       :> QueryParam "dueMin" Text
-       :> QueryParam "showHidden" Bool
-       :> QueryParam "completedMax" Text
-       :> QueryParam "key" Text
-       :> QueryParam "updatedMin" Text
-       :> QueryParam "completedMin" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Int64
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "tasks" :>
+       "v1" :>
+         "lists" :>
+           Capture "tasklist" Text :>
+             "tasks" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "dueMax" Text :>
+                       QueryParam "showDeleted" Bool :>
+                         QueryParam "showCompleted" Bool :>
+                           QueryParam "dueMin" Text :>
+                             QueryParam "showHidden" Bool :>
+                               QueryParam "completedMax" Text :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "updatedMin" Text :>
+                                     QueryParam "completedMin" Text :>
+                                       QueryParam "pageToken" Text :>
+                                         QueryParam "oauth_token" Text :>
+                                           QueryParam "maxResults" Int64 :>
+                                             QueryParam "fields" Text :>
+                                               QueryParam "alt" Text :>
+                                                 Get '[JSON] Tasks
 
 -- | Updates the specified task. This method supports patch semantics.
 type TasksPatch =
-     "tasks" :> "v1" :> "lists" :> Capture "tasklist" Text
-       :> "tasks"
-       :> Capture "task" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "tasks" :>
+       "v1" :>
+         "lists" :>
+           Capture "tasklist" Text :>
+             "tasks" :>
+               Capture "task" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Patch '[JSON] Task
 
 -- | Returns the specified task.
 type TasksGet =
-     "tasks" :> "v1" :> "lists" :> Capture "tasklist" Text
-       :> "tasks"
-       :> Capture "task" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "tasks" :>
+       "v1" :>
+         "lists" :>
+           Capture "tasklist" Text :>
+             "tasks" :>
+               Capture "task" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] Task
 
 -- | Clears all completed tasks from the specified task list. The affected
 -- tasks will be marked as \'hidden\' and no longer be returned by default
 -- when retrieving all tasks for a task list.
 type TasksClear =
-     "tasks" :> "v1" :> "lists" :> Capture "tasklist" Text
-       :> "clear"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "tasks" :>
+       "v1" :>
+         "lists" :>
+           Capture "tasklist" Text :>
+             "clear" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] ()
 
 -- | Deletes the specified task from the task list.
 type TasksDelete =
-     "tasks" :> "v1" :> "lists" :> Capture "tasklist" Text
-       :> "tasks"
-       :> Capture "task" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "tasks" :>
+       "v1" :>
+         "lists" :>
+           Capture "tasklist" Text :>
+             "tasks" :>
+               Capture "task" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Updates the specified task.
 type TasksUpdate =
-     "tasks" :> "v1" :> "lists" :> Capture "tasklist" Text
-       :> "tasks"
-       :> Capture "task" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "tasks" :>
+       "v1" :>
+         "lists" :>
+           Capture "tasklist" Text :>
+             "tasks" :>
+               Capture "task" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Put '[JSON] Task
 
 -- | Moves the specified task to another position in the task list. This can
 -- include putting it as a child task under a new parent and\/or move it to
 -- a different position among its sibling tasks.
 type TasksMove =
-     "tasks" :> "v1" :> "lists" :> Capture "tasklist" Text
-       :> "tasks"
-       :> Capture "task" Text
-       :> "move"
-       :> QueryParam "parent" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "previous" Text
-       :> QueryParam "alt" Text
+     "tasks" :>
+       "v1" :>
+         "lists" :>
+           Capture "tasklist" Text :>
+             "tasks" :>
+               Capture "task" Text :>
+                 "move" :>
+                   QueryParam "parent" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "previous" Text :>
+                                   QueryParam "alt" Text :> Post '[JSON] Task
 
 type TasklistsAPI =
      TasklistsInsert :<|> TasklistsList :<|>
@@ -238,73 +263,97 @@ type TasklistsAPI =
 -- | Creates a new task list and adds it to the authenticated user\'s task
 -- lists.
 type TasklistsInsert =
-     "tasks" :> "v1" :> "users" :> "@me" :> "lists" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "tasks" :>
+       "v1" :>
+         "users" :>
+           "@me" :>
+             "lists" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] TaskList
 
 -- | Returns all the authenticated user\'s task lists.
 type TasklistsList =
-     "tasks" :> "v1" :> "users" :> "@me" :> "lists" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Int64
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "tasks" :>
+       "v1" :>
+         "users" :>
+           "@me" :>
+             "lists" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Int64 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Get '[JSON] TaskLists
 
 -- | Updates the authenticated user\'s specified task list. This method
 -- supports patch semantics.
 type TasklistsPatch =
-     "tasks" :> "v1" :> "users" :> "@me" :> "lists" :>
-       Capture "tasklist" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "tasks" :>
+       "v1" :>
+         "users" :>
+           "@me" :>
+             "lists" :>
+               Capture "tasklist" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Patch '[JSON] TaskList
 
 -- | Returns the authenticated user\'s specified task list.
 type TasklistsGet =
-     "tasks" :> "v1" :> "users" :> "@me" :> "lists" :>
-       Capture "tasklist" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "tasks" :>
+       "v1" :>
+         "users" :>
+           "@me" :>
+             "lists" :>
+               Capture "tasklist" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] TaskList
 
 -- | Deletes the authenticated user\'s specified task list.
 type TasklistsDelete =
-     "tasks" :> "v1" :> "users" :> "@me" :> "lists" :>
-       Capture "tasklist" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "tasks" :>
+       "v1" :>
+         "users" :>
+           "@me" :>
+             "lists" :>
+               Capture "tasklist" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Updates the authenticated user\'s specified task list.
 type TasklistsUpdate =
-     "tasks" :> "v1" :> "users" :> "@me" :> "lists" :>
-       Capture "tasklist" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "tasks" :>
+       "v1" :>
+         "users" :>
+           "@me" :>
+             "lists" :>
+               Capture "tasklist" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Put '[JSON] TaskList

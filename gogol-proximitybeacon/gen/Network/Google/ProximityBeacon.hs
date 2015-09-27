@@ -185,21 +185,24 @@ type AttachmentsAPI =
 -- namespace must be one of the ones returned from the \`namespaces\`
 -- endpoint.
 type AttachmentsList =
-     "v1beta1" :> "{+beaconName}" :> "attachments" :>
-       QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "namespacedType" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1beta1" :>
+       "{+beaconName}" :>
+         "attachments" :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "namespacedType" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "callback" Text :>
+                                     QueryParam "alt" Text :>
+                                       Get '[JSON] ListBeaconAttachmentsResponse
 
 -- | Associates the given data with the specified beacon. Attachment data
 -- must contain two parts: - A namespaced type. - The actual attachment
@@ -209,20 +212,23 @@ type AttachmentsList =
 -- characters except for the forward slash (\`\/\`) up to 100 characters in
 -- length. Attachment data can be up to 1024 bytes long.
 type AttachmentsCreate =
-     "v1beta1" :> "{+beaconName}" :> "attachments" :>
-       QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1beta1" :>
+       "{+beaconName}" :>
+         "attachments" :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" Text :>
+                                     Post '[JSON] BeaconAttachment
 
 -- | Deletes multiple attachments on a given beacon. This operation is
 -- permanent and cannot be undone. You can optionally specify
@@ -231,22 +237,24 @@ type AttachmentsCreate =
 -- beacon will be deleted. You also may explicitly specify \`*\/*\` to
 -- delete all.
 type AttachmentsBatchDelete =
-     "v1beta1" :> "{+beaconName}" :>
-       "attachments:batchDelete"
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "namespacedType" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1beta1" :>
+       "{+beaconName}" :>
+         "attachments:batchDelete" :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "namespacedType" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "callback" Text :>
+                                     QueryParam "alt" Text :>
+                                       Post '[JSON] DeleteAttachmentsResponse
 
 -- | Deletes the specified attachment for the given beacon. Each attachment
 -- has a unique attachment name (\`attachmentName\`) which is returned when
@@ -254,20 +262,21 @@ type AttachmentsBatchDelete =
 -- delete request to control which attachment is removed. This operation
 -- cannot be undone.
 type AttachmentsDelete =
-     "v1beta1" :> "{+attachmentName}" :>
-       QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1beta1" :>
+       "{+attachmentName}" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :> Delete '[JSON] Empty
 
 type DiagnosticsAPI = DiagnosticsList
 
@@ -275,23 +284,26 @@ type DiagnosticsAPI = DiagnosticsList
 -- for all the beacons owned by your Google Developers Console project by
 -- using the beacon name \`beacons\/-\`.
 type DiagnosticsList =
-     "v1beta1" :> "{+beaconName}" :> "diagnostics" :>
-       QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "pageSize" Int32
-       :> QueryParam "alertFilter" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1beta1" :>
+       "{+beaconName}" :>
+         "diagnostics" :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "pageSize" Int32 :>
+                                   QueryParam "alertFilter" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" Text :>
+                                           Get '[JSON] ListDiagnosticsResponse
 
 type NamespacesAPI = NamespacesList
 
@@ -299,37 +311,42 @@ type NamespacesAPI = NamespacesList
 -- project. Attachment data associated with a beacon must include a
 -- namespaced type, and the namespace must be owned by your project.
 type NamespacesList =
-     "v1beta1" :> "namespaces" :>
-       QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1beta1" :>
+       "namespaces" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :>
+                                   Get '[JSON] ListNamespacesResponse
 
 type BeaconinfoAPI = BeaconinfoGetforobserved
 
 -- | Given one or more beacon observations, returns any beacon information
 -- and attachments accessible to your application.
 type BeaconinfoGetforobserved =
-     "v1beta1" :> "beaconinfo:getforobserved" :>
-       QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1beta1" :>
+       "beaconinfo:getforobserved" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :>
+                                   Post '[JSON]
+                                     GetInfoForObservedBeaconsResponse

@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -42,6 +43,18 @@ dlrDetections
       (\ s a -> s{_dlrDetections = a})
       . _Default
       . _Coerce
+
+instance FromJSON DetectionsListResponse where
+        parseJSON
+          = withObject "DetectionsListResponse"
+              (\ o ->
+                 DetectionsListResponse <$>
+                   (o .:? "detections" .!= mempty))
+
+instance ToJSON DetectionsListResponse where
+        toJSON DetectionsListResponse{..}
+          = object
+              (catMaybes [("detections" .=) <$> _dlrDetections])
 
 --
 -- /See:/ 'detectionsResourceItem' smart constructor.
@@ -86,6 +99,22 @@ driLanguage :: Lens' DetectionsResourceItem (Maybe Text)
 driLanguage
   = lens _driLanguage (\ s a -> s{_driLanguage = a})
 
+instance FromJSON DetectionsResourceItem where
+        parseJSON
+          = withObject "DetectionsResourceItem"
+              (\ o ->
+                 DetectionsResourceItem <$>
+                   (o .:? "confidence") <*> (o .:? "isReliable") <*>
+                     (o .:? "language"))
+
+instance ToJSON DetectionsResourceItem where
+        toJSON DetectionsResourceItem{..}
+          = object
+              (catMaybes
+                 [("confidence" .=) <$> _driConfidence,
+                  ("isReliable" .=) <$> _driIsReliable,
+                  ("language" .=) <$> _driLanguage])
+
 --
 -- /See:/ 'languagesListResponse' smart constructor.
 newtype LanguagesListResponse = LanguagesListResponse
@@ -114,6 +143,18 @@ llrLanguages
   = lens _llrLanguages (\ s a -> s{_llrLanguages = a})
       . _Default
       . _Coerce
+
+instance FromJSON LanguagesListResponse where
+        parseJSON
+          = withObject "LanguagesListResponse"
+              (\ o ->
+                 LanguagesListResponse <$>
+                   (o .:? "languages" .!= mempty))
+
+instance ToJSON LanguagesListResponse where
+        toJSON LanguagesListResponse{..}
+          = object
+              (catMaybes [("languages" .=) <$> _llrLanguages])
 
 --
 -- /See:/ 'languagesResource' smart constructor.
@@ -146,6 +187,20 @@ lrLanguage :: Lens' LanguagesResource (Maybe Text)
 lrLanguage
   = lens _lrLanguage (\ s a -> s{_lrLanguage = a})
 
+instance FromJSON LanguagesResource where
+        parseJSON
+          = withObject "LanguagesResource"
+              (\ o ->
+                 LanguagesResource <$>
+                   (o .:? "name") <*> (o .:? "language"))
+
+instance ToJSON LanguagesResource where
+        toJSON LanguagesResource{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _lrName,
+                  ("language" .=) <$> _lrLanguage])
+
 --
 -- /See:/ 'translationsListResponse' smart constructor.
 newtype TranslationsListResponse = TranslationsListResponse
@@ -171,6 +226,19 @@ tlrTranslations
       (\ s a -> s{_tlrTranslations = a})
       . _Default
       . _Coerce
+
+instance FromJSON TranslationsListResponse where
+        parseJSON
+          = withObject "TranslationsListResponse"
+              (\ o ->
+                 TranslationsListResponse <$>
+                   (o .:? "translations" .!= mempty))
+
+instance ToJSON TranslationsListResponse where
+        toJSON TranslationsListResponse{..}
+          = object
+              (catMaybes
+                 [("translations" .=) <$> _tlrTranslations])
 
 --
 -- /See:/ 'translationsResource' smart constructor.
@@ -205,3 +273,19 @@ trTranslatedText :: Lens' TranslationsResource (Maybe Text)
 trTranslatedText
   = lens _trTranslatedText
       (\ s a -> s{_trTranslatedText = a})
+
+instance FromJSON TranslationsResource where
+        parseJSON
+          = withObject "TranslationsResource"
+              (\ o ->
+                 TranslationsResource <$>
+                   (o .:? "detectedSourceLanguage") <*>
+                     (o .:? "translatedText"))
+
+instance ToJSON TranslationsResource where
+        toJSON TranslationsResource{..}
+          = object
+              (catMaybes
+                 [("detectedSourceLanguage" .=) <$>
+                    _trDetectedSourceLanguage,
+                  ("translatedText" .=) <$> _trTranslatedText])

@@ -141,17 +141,19 @@ type PagespeedapiAPI = PagespeedapiRunpagespeed
 -- PageSpeed scores, a list of suggestions to make that page faster, and
 -- other information.
 type PagespeedapiRunpagespeed =
-     "pagespeedonline" :> "v2" :> "runPagespeed" :>
-       QueryParam "screenshot" Bool
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "locale" Text
-       :> QueryParam "url" Text
-       :> QueryParam "filter_third_party_resources" Bool
-       :> QueryParam "strategy" Text
-       :> QueryParam "rule" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "pagespeedonline" :>
+       "v2" :>
+         "runPagespeed" :>
+           QueryParam "screenshot" Bool :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "locale" Text :>
+                     QueryParam "url" Text :>
+                       QueryParam "filter_third_party_resources" Bool :>
+                         QueryParam "strategy" Text :>
+                           QueryParam "rule" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :> Get '[JSON] Result

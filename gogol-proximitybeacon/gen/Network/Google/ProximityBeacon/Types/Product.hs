@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -52,6 +53,18 @@ aiId = lens _aiId (\ s a -> s{_aiId = a})
 aiType :: Lens' AdvertisedId (Maybe Text)
 aiType = lens _aiType (\ s a -> s{_aiType = a})
 
+instance FromJSON AdvertisedId where
+        parseJSON
+          = withObject "AdvertisedId"
+              (\ o ->
+                 AdvertisedId <$> (o .:? "id") <*> (o .:? "type"))
+
+instance ToJSON AdvertisedId where
+        toJSON AdvertisedId{..}
+          = object
+              (catMaybes
+                 [("id" .=) <$> _aiId, ("type" .=) <$> _aiType])
+
 -- | A subset of attachment information served via the
 -- \`beaconinfo.getforobserved\` method, used when your users encounter
 -- your beacons.
@@ -88,6 +101,20 @@ aiNamespacedType :: Lens' AttachmentInfo (Maybe Text)
 aiNamespacedType
   = lens _aiNamespacedType
       (\ s a -> s{_aiNamespacedType = a})
+
+instance FromJSON AttachmentInfo where
+        parseJSON
+          = withObject "AttachmentInfo"
+              (\ o ->
+                 AttachmentInfo <$>
+                   (o .:? "data") <*> (o .:? "namespacedType"))
+
+instance ToJSON AttachmentInfo where
+        toJSON AttachmentInfo{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _aiData,
+                  ("namespacedType" .=) <$> _aiNamespacedType])
 
 -- | Details of a beacon device.
 --
@@ -200,6 +227,34 @@ bProperties :: Lens' Beacon (Maybe BeaconProperties)
 bProperties
   = lens _bProperties (\ s a -> s{_bProperties = a})
 
+instance FromJSON Beacon where
+        parseJSON
+          = withObject "Beacon"
+              (\ o ->
+                 Beacon <$>
+                   (o .:? "latLng") <*> (o .:? "status") <*>
+                     (o .:? "beaconName")
+                     <*> (o .:? "indoorLevel")
+                     <*> (o .:? "expectedStability")
+                     <*> (o .:? "description")
+                     <*> (o .:? "placeId")
+                     <*> (o .:? "advertisedId")
+                     <*> (o .:? "properties"))
+
+instance ToJSON Beacon where
+        toJSON Beacon{..}
+          = object
+              (catMaybes
+                 [("latLng" .=) <$> _bLatLng,
+                  ("status" .=) <$> _bStatus,
+                  ("beaconName" .=) <$> _bBeaconName,
+                  ("indoorLevel" .=) <$> _bIndoorLevel,
+                  ("expectedStability" .=) <$> _bExpectedStability,
+                  ("description" .=) <$> _bDescription,
+                  ("placeId" .=) <$> _bPlaceId,
+                  ("advertisedId" .=) <$> _bAdvertisedId,
+                  ("properties" .=) <$> _bProperties])
+
 -- | Project-specific data associated with a beacon.
 --
 -- /See:/ 'beaconAttachment' smart constructor.
@@ -251,6 +306,22 @@ baNamespacedType :: Lens' BeaconAttachment (Maybe Text)
 baNamespacedType
   = lens _baNamespacedType
       (\ s a -> s{_baNamespacedType = a})
+
+instance FromJSON BeaconAttachment where
+        parseJSON
+          = withObject "BeaconAttachment"
+              (\ o ->
+                 BeaconAttachment <$>
+                   (o .:? "data") <*> (o .:? "attachmentName") <*>
+                     (o .:? "namespacedType"))
+
+instance ToJSON BeaconAttachment where
+        toJSON BeaconAttachment{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _baData,
+                  ("attachmentName" .=) <$> _baAttachmentName,
+                  ("namespacedType" .=) <$> _baNamespacedType])
 
 -- | A subset of beacon information served via the
 -- \`beaconinfo.getforobserved\` method, which you call when users of your
@@ -313,6 +384,25 @@ biAdvertisedId
   = lens _biAdvertisedId
       (\ s a -> s{_biAdvertisedId = a})
 
+instance FromJSON BeaconInfo where
+        parseJSON
+          = withObject "BeaconInfo"
+              (\ o ->
+                 BeaconInfo <$>
+                   (o .:? "attachments" .!= mempty) <*>
+                     (o .:? "beaconName")
+                     <*> (o .:? "description")
+                     <*> (o .:? "advertisedId"))
+
+instance ToJSON BeaconInfo where
+        toJSON BeaconInfo{..}
+          = object
+              (catMaybes
+                 [("attachments" .=) <$> _biAttachments,
+                  ("beaconName" .=) <$> _biBeaconName,
+                  ("description" .=) <$> _biDescription,
+                  ("advertisedId" .=) <$> _biAdvertisedId])
+
 -- | Properties of the beacon device, for example battery type or firmware
 -- version. Optional.
 --
@@ -326,6 +416,14 @@ data BeaconProperties =
 beaconProperties
     :: BeaconProperties
 beaconProperties = BeaconProperties
+
+instance FromJSON BeaconProperties where
+        parseJSON
+          = withObject "BeaconProperties"
+              (\ o -> pure BeaconProperties)
+
+instance ToJSON BeaconProperties where
+        toJSON = const (Object mempty)
 
 -- | Represents a whole calendar date, e.g. date of birth. The time of day
 -- and time zone are either specified elsewhere or are not significant. The
@@ -374,6 +472,20 @@ dYear = lens _dYear (\ s a -> s{_dYear = a})
 dMonth :: Lens' Date (Maybe Int32)
 dMonth = lens _dMonth (\ s a -> s{_dMonth = a})
 
+instance FromJSON Date where
+        parseJSON
+          = withObject "Date"
+              (\ o ->
+                 Date <$>
+                   (o .:? "day") <*> (o .:? "year") <*> (o .:? "month"))
+
+instance ToJSON Date where
+        toJSON Date{..}
+          = object
+              (catMaybes
+                 [("day" .=) <$> _dDay, ("year" .=) <$> _dYear,
+                  ("month" .=) <$> _dMonth])
+
 -- | Response for a request to delete attachments.
 --
 -- /See:/ 'deleteAttachmentsResponse' smart constructor.
@@ -398,6 +510,17 @@ darNumDeleted :: Lens' DeleteAttachmentsResponse (Maybe Int32)
 darNumDeleted
   = lens _darNumDeleted
       (\ s a -> s{_darNumDeleted = a})
+
+instance FromJSON DeleteAttachmentsResponse where
+        parseJSON
+          = withObject "DeleteAttachmentsResponse"
+              (\ o ->
+                 DeleteAttachmentsResponse <$> (o .:? "numDeleted"))
+
+instance ToJSON DeleteAttachmentsResponse where
+        toJSON DeleteAttachmentsResponse{..}
+          = object
+              (catMaybes [("numDeleted" .=) <$> _darNumDeleted])
 
 -- | Diagnostics for a single beacon.
 --
@@ -445,6 +568,23 @@ dEstimatedLowBatteryDate
   = lens _dEstimatedLowBatteryDate
       (\ s a -> s{_dEstimatedLowBatteryDate = a})
 
+instance FromJSON Diagnostics where
+        parseJSON
+          = withObject "Diagnostics"
+              (\ o ->
+                 Diagnostics <$>
+                   (o .:? "alerts" .!= mempty) <*> (o .:? "beaconName")
+                     <*> (o .:? "estimatedLowBatteryDate"))
+
+instance ToJSON Diagnostics where
+        toJSON Diagnostics{..}
+          = object
+              (catMaybes
+                 [("alerts" .=) <$> _dAlerts,
+                  ("beaconName" .=) <$> _dBeaconName,
+                  ("estimatedLowBatteryDate" .=) <$>
+                    _dEstimatedLowBatteryDate])
+
 -- | A generic empty message that you can re-use to avoid defining duplicated
 -- empty messages in your APIs. A typical example is to use it as the
 -- request or the response type of an API method. For instance: service Foo
@@ -461,6 +601,12 @@ data Empty =
 empty
     :: Empty
 empty = Empty
+
+instance FromJSON Empty where
+        parseJSON = withObject "Empty" (\ o -> pure Empty)
+
+instance ToJSON Empty where
+        toJSON = const (Object mempty)
 
 -- | Request for beacon and attachment information about beacons that a
 -- mobile client has encountered \"in the wild\".
@@ -506,6 +652,23 @@ gifobrNamespacedTypes
       . _Default
       . _Coerce
 
+instance FromJSON GetInfoForObservedBeaconsRequest
+         where
+        parseJSON
+          = withObject "GetInfoForObservedBeaconsRequest"
+              (\ o ->
+                 GetInfoForObservedBeaconsRequest <$>
+                   (o .:? "observations" .!= mempty) <*>
+                     (o .:? "namespacedTypes" .!= mempty))
+
+instance ToJSON GetInfoForObservedBeaconsRequest
+         where
+        toJSON GetInfoForObservedBeaconsRequest{..}
+          = object
+              (catMaybes
+                 [("observations" .=) <$> _gifobrObservations,
+                  ("namespacedTypes" .=) <$> _gifobrNamespacedTypes])
+
 -- | Information about the requested beacons, optionally including attachment
 -- data.
 --
@@ -535,6 +698,20 @@ gifobrBeacons
       . _Default
       . _Coerce
 
+instance FromJSON GetInfoForObservedBeaconsResponse
+         where
+        parseJSON
+          = withObject "GetInfoForObservedBeaconsResponse"
+              (\ o ->
+                 GetInfoForObservedBeaconsResponse <$>
+                   (o .:? "beacons" .!= mempty))
+
+instance ToJSON GetInfoForObservedBeaconsResponse
+         where
+        toJSON GetInfoForObservedBeaconsResponse{..}
+          = object
+              (catMaybes [("beacons" .=) <$> _gifobrBeacons])
+
 -- | Indoor level, a human-readable string as returned by Google Maps APIs,
 -- useful to indicate which floor of a building a beacon is located on.
 --
@@ -558,6 +735,15 @@ indoorLevel =
 -- | The name of this level.
 ilName :: Lens' IndoorLevel (Maybe Text)
 ilName = lens _ilName (\ s a -> s{_ilName = a})
+
+instance FromJSON IndoorLevel where
+        parseJSON
+          = withObject "IndoorLevel"
+              (\ o -> IndoorLevel <$> (o .:? "name"))
+
+instance ToJSON IndoorLevel where
+        toJSON IndoorLevel{..}
+          = object (catMaybes [("name" .=) <$> _ilName])
 
 -- | An object representing a latitude\/longitude pair. This is expressed as
 -- a pair of doubles representing degrees latitude and degrees longitude.
@@ -614,6 +800,20 @@ llLongitude :: Lens' LatLng (Maybe Double)
 llLongitude
   = lens _llLongitude (\ s a -> s{_llLongitude = a})
 
+instance FromJSON LatLng where
+        parseJSON
+          = withObject "LatLng"
+              (\ o ->
+                 LatLng <$>
+                   (o .:? "latitude") <*> (o .:? "longitude"))
+
+instance ToJSON LatLng where
+        toJSON LatLng{..}
+          = object
+              (catMaybes
+                 [("latitude" .=) <$> _llLatitude,
+                  ("longitude" .=) <$> _llLongitude])
+
 -- | Response to ListBeaconAttachments that contains the requested
 -- attachments.
 --
@@ -641,6 +841,18 @@ lbarAttachments
       (\ s a -> s{_lbarAttachments = a})
       . _Default
       . _Coerce
+
+instance FromJSON ListBeaconAttachmentsResponse where
+        parseJSON
+          = withObject "ListBeaconAttachmentsResponse"
+              (\ o ->
+                 ListBeaconAttachmentsResponse <$>
+                   (o .:? "attachments" .!= mempty))
+
+instance ToJSON ListBeaconAttachmentsResponse where
+        toJSON ListBeaconAttachmentsResponse{..}
+          = object
+              (catMaybes [("attachments" .=) <$> _lbarAttachments])
 
 -- | Response that contains list beacon results and pagination help.
 --
@@ -690,6 +902,23 @@ lbrTotalCount
   = lens _lbrTotalCount
       (\ s a -> s{_lbrTotalCount = a})
 
+instance FromJSON ListBeaconsResponse where
+        parseJSON
+          = withObject "ListBeaconsResponse"
+              (\ o ->
+                 ListBeaconsResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "beacons" .!= mempty)
+                     <*> (o .:? "totalCount"))
+
+instance ToJSON ListBeaconsResponse where
+        toJSON ListBeaconsResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lbrNextPageToken,
+                  ("beacons" .=) <$> _lbrBeacons,
+                  ("totalCount" .=) <$> _lbrTotalCount])
+
 -- | Response that contains the requested diagnostics.
 --
 -- /See:/ 'listDiagnosticsResponse' smart constructor.
@@ -728,6 +957,21 @@ ldrDiagnostics
       . _Default
       . _Coerce
 
+instance FromJSON ListDiagnosticsResponse where
+        parseJSON
+          = withObject "ListDiagnosticsResponse"
+              (\ o ->
+                 ListDiagnosticsResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "diagnostics" .!= mempty))
+
+instance ToJSON ListDiagnosticsResponse where
+        toJSON ListDiagnosticsResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _ldrNextPageToken,
+                  ("diagnostics" .=) <$> _ldrDiagnostics])
+
 -- | Response to ListNamespacesRequest that contains all the project\'s
 -- namespaces.
 --
@@ -755,6 +999,18 @@ lnrNamespaces
       (\ s a -> s{_lnrNamespaces = a})
       . _Default
       . _Coerce
+
+instance FromJSON ListNamespacesResponse where
+        parseJSON
+          = withObject "ListNamespacesResponse"
+              (\ o ->
+                 ListNamespacesResponse <$>
+                   (o .:? "namespaces" .!= mempty))
+
+instance ToJSON ListNamespacesResponse where
+        toJSON ListNamespacesResponse{..}
+          = object
+              (catMaybes [("namespaces" .=) <$> _lnrNamespaces])
 
 -- | An attachment namespace defines read and write access for all the
 -- attachments created under it. Each namespace is globally unique, and
@@ -795,6 +1051,21 @@ nNamespaceName :: Lens' Namespace (Maybe Text)
 nNamespaceName
   = lens _nNamespaceName
       (\ s a -> s{_nNamespaceName = a})
+
+instance FromJSON Namespace where
+        parseJSON
+          = withObject "Namespace"
+              (\ o ->
+                 Namespace <$>
+                   (o .:? "servingVisibility") <*>
+                     (o .:? "namespaceName"))
+
+instance ToJSON Namespace where
+        toJSON Namespace{..}
+          = object
+              (catMaybes
+                 [("servingVisibility" .=) <$> _nServingVisibility,
+                  ("namespaceName" .=) <$> _nNamespaceName])
 
 -- | Represents one beacon observed once.
 --
@@ -841,3 +1112,19 @@ oAdvertisedId :: Lens' Observation (Maybe (Maybe AdvertisedId))
 oAdvertisedId
   = lens _oAdvertisedId
       (\ s a -> s{_oAdvertisedId = a})
+
+instance FromJSON Observation where
+        parseJSON
+          = withObject "Observation"
+              (\ o ->
+                 Observation <$>
+                   (o .:? "telemetry") <*> (o .:? "timestampMs") <*>
+                     (o .:? "advertisedId"))
+
+instance ToJSON Observation where
+        toJSON Observation{..}
+          = object
+              (catMaybes
+                 [("telemetry" .=) <$> _oTelemetry,
+                  ("timestampMs" .=) <$> _oTimestampMs,
+                  ("advertisedId" .=) <$> _oAdvertisedId])

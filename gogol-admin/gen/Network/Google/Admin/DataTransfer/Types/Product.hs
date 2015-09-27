@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -78,6 +79,27 @@ aName = lens _aName (\ s a -> s{_aName = a})
 aId :: Lens' Application (Maybe Int64)
 aId = lens _aId (\ s a -> s{_aId = a})
 
+instance FromJSON Application where
+        parseJSON
+          = withObject "Application"
+              (\ o ->
+                 Application <$>
+                   (o .:? "transferParams" .!= mempty) <*>
+                     (o .:? "etag")
+                     <*>
+                     (o .:? "kind" .!=
+                        "admin#datatransfer#ApplicationResource")
+                     <*> (o .:? "name")
+                     <*> (o .:? "id"))
+
+instance ToJSON Application where
+        toJSON Application{..}
+          = object
+              (catMaybes
+                 [("transferParams" .=) <$> _aTransferParams,
+                  ("etag" .=) <$> _aEtag, Just ("kind" .= _aKind),
+                  ("name" .=) <$> _aName, ("id" .=) <$> _aId])
+
 -- | Template to map fields of ApplicationDataTransfer resource.
 --
 -- /See:/ 'applicationDataTransfer' smart constructor.
@@ -127,6 +149,25 @@ adtApplicationTransferStatus
   = lens _adtApplicationTransferStatus
       (\ s a -> s{_adtApplicationTransferStatus = a})
 
+instance FromJSON ApplicationDataTransfer where
+        parseJSON
+          = withObject "ApplicationDataTransfer"
+              (\ o ->
+                 ApplicationDataTransfer <$>
+                   (o .:? "applicationTransferParams" .!= mempty) <*>
+                     (o .:? "applicationId")
+                     <*> (o .:? "applicationTransferStatus"))
+
+instance ToJSON ApplicationDataTransfer where
+        toJSON ApplicationDataTransfer{..}
+          = object
+              (catMaybes
+                 [("applicationTransferParams" .=) <$>
+                    _adtApplicationTransferParams,
+                  ("applicationId" .=) <$> _adtApplicationId,
+                  ("applicationTransferStatus" .=) <$>
+                    _adtApplicationTransferStatus])
+
 -- | Template for application transfer parameters.
 --
 -- /See:/ 'applicationTransferParam' smart constructor.
@@ -161,6 +202,19 @@ atpValue
 -- | The type of the transfer parameter. eg: \'PRIVACY_LEVEL\'
 atpKey :: Lens' ApplicationTransferParam (Maybe Text)
 atpKey = lens _atpKey (\ s a -> s{_atpKey = a})
+
+instance FromJSON ApplicationTransferParam where
+        parseJSON
+          = withObject "ApplicationTransferParam"
+              (\ o ->
+                 ApplicationTransferParam <$>
+                   (o .:? "value" .!= mempty) <*> (o .:? "key"))
+
+instance ToJSON ApplicationTransferParam where
+        toJSON ApplicationTransferParam{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _atpValue, ("key" .=) <$> _atpKey])
 
 -- | Template for a collection of Applications.
 --
@@ -215,6 +269,25 @@ alrApplications
       (\ s a -> s{_alrApplications = a})
       . _Default
       . _Coerce
+
+instance FromJSON ApplicationsListResponse where
+        parseJSON
+          = withObject "ApplicationsListResponse"
+              (\ o ->
+                 ApplicationsListResponse <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!=
+                        "admin#datatransfer#applicationsList")
+                     <*> (o .:? "applications" .!= mempty))
+
+instance ToJSON ApplicationsListResponse where
+        toJSON ApplicationsListResponse{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _alrEtag,
+                  ("nextPageToken" .=) <$> _alrNextPageToken,
+                  Just ("kind" .= _alrKind),
+                  ("applications" .=) <$> _alrApplications])
 
 -- | The JSON template for a DataTransfer resource.
 --
@@ -311,6 +384,34 @@ dtOverallTransferStatusCode
   = lens _dtOverallTransferStatusCode
       (\ s a -> s{_dtOverallTransferStatusCode = a})
 
+instance FromJSON DataTransfer where
+        parseJSON
+          = withObject "DataTransfer"
+              (\ o ->
+                 DataTransfer <$>
+                   (o .:? "etag") <*> (o .:? "oldOwnerUserId") <*>
+                     (o .:? "kind" .!= "admin#datatransfer#DataTransfer")
+                     <*> (o .:? "newOwnerUserId")
+                     <*> (o .:? "requestTime")
+                     <*> (o .:? "applicationDataTransfers" .!= mempty)
+                     <*> (o .:? "id")
+                     <*> (o .:? "overallTransferStatusCode"))
+
+instance ToJSON DataTransfer where
+        toJSON DataTransfer{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _dtEtag,
+                  ("oldOwnerUserId" .=) <$> _dtOldOwnerUserId,
+                  Just ("kind" .= _dtKind),
+                  ("newOwnerUserId" .=) <$> _dtNewOwnerUserId,
+                  ("requestTime" .=) <$> _dtRequestTime,
+                  ("applicationDataTransfers" .=) <$>
+                    _dtApplicationDataTransfers,
+                  ("id" .=) <$> _dtId,
+                  ("overallTransferStatusCode" .=) <$>
+                    _dtOverallTransferStatusCode])
+
 -- | Template for a collection of DataTransfer resources.
 --
 -- /See:/ 'dataTransfersListResponse' smart constructor.
@@ -363,3 +464,22 @@ dtlrDataTransfers
       (\ s a -> s{_dtlrDataTransfers = a})
       . _Default
       . _Coerce
+
+instance FromJSON DataTransfersListResponse where
+        parseJSON
+          = withObject "DataTransfersListResponse"
+              (\ o ->
+                 DataTransfersListResponse <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!=
+                        "admin#datatransfer#dataTransfersList")
+                     <*> (o .:? "dataTransfers" .!= mempty))
+
+instance ToJSON DataTransfersListResponse where
+        toJSON DataTransfersListResponse{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _dtlrEtag,
+                  ("nextPageToken" .=) <$> _dtlrNextPageToken,
+                  Just ("kind" .= _dtlrKind),
+                  ("dataTransfers" .=) <$> _dtlrDataTransfers])

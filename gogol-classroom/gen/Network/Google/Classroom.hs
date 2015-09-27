@@ -167,23 +167,26 @@ type InvitationsAPI =
 -- \`PERMISSION_DENIED\` for [general user permission errors][User
 -- Permission Errors].
 type InvitationsList =
-     "v1" :> "invitations" :> QueryParam "$.xgafv" Text :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "courseId" Text
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "userId" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "pageSize" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1" :>
+       "invitations" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "courseId" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "userId" Text :>
+                           QueryParam "bearer_token" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "pageSize" Int32 :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" Text :>
+                                           Get '[JSON] ListInvitationsResponse
 
 -- | Accepts an invitation, removing it and adding the invited user to the
 -- teachers or students (as appropriate) of the specified course. Only the
@@ -193,20 +196,22 @@ type InvitationsList =
 -- permission errors][User Permission Errors]. * \`NOT_FOUND\` if no
 -- invitation exists with the requested ID.
 type InvitationsAccept =
-     "v1" :> "invitations" :> "{id}:accept" :>
-       QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1" :>
+       "invitations" :>
+         "{id}:accept" :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" Text :> Post '[JSON] Empty
 
 -- | Returns an invitation. This method returns the following error codes: *
 -- \`PERMISSION_DENIED\` if the requesting user is not permitted to view
@@ -214,20 +219,23 @@ type InvitationsAccept =
 -- Permission Errors]. * \`NOT_FOUND\` if no invitation exists with the
 -- requested ID.
 type InvitationsGet =
-     "v1" :> "invitations" :> Capture "id" Text :>
-       QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1" :>
+       "invitations" :>
+         Capture "id" Text :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON] Invitation
 
 -- | Creates an invitation. Only one invitation for a user and course may
 -- exist at a time. Delete and re-create an invitation to make changes.
@@ -240,19 +248,22 @@ type InvitationsGet =
 -- \`ALREADY_EXISTS\` if an invitation for the specified user and course
 -- already exists.
 type InvitationsCreate =
-     "v1" :> "invitations" :> QueryParam "$.xgafv" Text :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1" :>
+       "invitations" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :>
+                                   Post '[JSON] Invitation
 
 -- | Deletes an invitation. This method returns the following error codes: *
 -- \`PERMISSION_DENIED\` if the requesting user is not permitted to delete
@@ -260,20 +271,22 @@ type InvitationsCreate =
 -- Permission Errors]. * \`NOT_FOUND\` if no invitation exists with the
 -- requested ID.
 type InvitationsDelete =
-     "v1" :> "invitations" :> Capture "id" Text :>
-       QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1" :>
+       "invitations" :>
+         Capture "id" Text :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" Text :> Delete '[JSON] Empty
 
 type CoursesAPI =
      TeachersAPI :<|> AliasesAPI :<|> StudentsAPI
@@ -287,23 +300,26 @@ type TeachersAPI =
 -- \`NOT_FOUND\` if the course does not exist. * \`PERMISSION_DENIED\` for
 -- [general user permission errors][User Permission Errors].
 type TeachersList =
-     "v1" :> "courses" :> Capture "courseId" Text :>
-       "teachers"
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "pageSize" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1" :>
+       "courses" :>
+         Capture "courseId" Text :>
+           "teachers" :>
+             QueryParam "$.xgafv" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "pp" Bool :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "bearer_token" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "pageSize" Int32 :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" Text :>
+                                           Get '[JSON] ListTeachersResponse
 
 -- | Returns a teacher of a course. This method returns the following error
 -- codes: * \`PERMISSION_DENIED\` if the requesting user is not permitted
@@ -311,22 +327,25 @@ type TeachersList =
 -- errors][User Permission Errors]. * \`NOT_FOUND\` if no teacher of this
 -- course has the requested ID or if the course does not exist.
 type TeachersGet =
-     "v1" :> "courses" :> Capture "courseId" Text :>
-       "teachers"
-       :> Capture "userId" Text
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1" :>
+       "courses" :>
+         Capture "courseId" Text :>
+           "teachers" :>
+             Capture "userId" Text :>
+               QueryParam "$.xgafv" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "bearer_token" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" Text :>
+                                         Get '[JSON] Teacher
 
 -- | Creates a teacher of a course. This method returns the following error
 -- codes: * \`PERMISSION_DENIED\` if the requesting user is not permitted
@@ -336,21 +355,24 @@ type TeachersGet =
 -- account is disabled. * \`ALREADY_EXISTS\` if the user is already a
 -- teacher or student in the course.
 type TeachersCreate =
-     "v1" :> "courses" :> Capture "courseId" Text :>
-       "teachers"
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1" :>
+       "courses" :>
+         Capture "courseId" Text :>
+           "teachers" :>
+             QueryParam "$.xgafv" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "pp" Bool :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "bearer_token" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "callback" Text :>
+                                     QueryParam "alt" Text :>
+                                       Post '[JSON] Teacher
 
 -- | Deletes a teacher of a course. This method returns the following error
 -- codes: * \`PERMISSION_DENIED\` if the requesting user is not permitted
@@ -360,22 +382,25 @@ type TeachersCreate =
 -- \`FAILED_PRECONDITION\` if the requested ID belongs to the primary
 -- teacher of this course.
 type TeachersDelete =
-     "v1" :> "courses" :> Capture "courseId" Text :>
-       "teachers"
-       :> Capture "userId" Text
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1" :>
+       "courses" :>
+         Capture "courseId" Text :>
+           "teachers" :>
+             Capture "userId" Text :>
+               QueryParam "$.xgafv" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "bearer_token" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" Text :>
+                                         Delete '[JSON] Empty
 
 type AliasesAPI =
      AliasesList :<|> AliasesCreate :<|> AliasesDelete
@@ -386,23 +411,26 @@ type AliasesAPI =
 -- errors][User Permission Errors]. * \`NOT_FOUND\` if the course does not
 -- exist.
 type AliasesList =
-     "v1" :> "courses" :> Capture "courseId" Text :>
-       "aliases"
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "pageSize" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1" :>
+       "courses" :>
+         Capture "courseId" Text :>
+           "aliases" :>
+             QueryParam "$.xgafv" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "pp" Bool :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "bearer_token" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "pageSize" Int32 :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" Text :>
+                                           Get '[JSON] ListCourseAliasesResponse
 
 -- | Creates an alias for a course. This method returns the following error
 -- codes: * \`PERMISSION_DENIED\` if the requesting user is not permitted
@@ -410,43 +438,49 @@ type AliasesList =
 -- Permission Errors]. * \`NOT_FOUND\` if the course does not exist. *
 -- \`ALREADY_EXISTS\` if the alias already exists.
 type AliasesCreate =
-     "v1" :> "courses" :> Capture "courseId" Text :>
-       "aliases"
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1" :>
+       "courses" :>
+         Capture "courseId" Text :>
+           "aliases" :>
+             QueryParam "$.xgafv" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "pp" Bool :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "bearer_token" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "callback" Text :>
+                                     QueryParam "alt" Text :>
+                                       Post '[JSON] CourseAlias
 
 -- | Deletes an alias of a course. This method returns the following error
 -- codes: * \`PERMISSION_DENIED\` if the requesting user is not permitted
 -- to remove the alias or for [general user permission errors][User
 -- Permission Errors]. * \`NOT_FOUND\` if the alias does not exist.
 type AliasesDelete =
-     "v1" :> "courses" :> Capture "courseId" Text :>
-       "aliases"
-       :> Capture "alias" Text
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1" :>
+       "courses" :>
+         Capture "courseId" Text :>
+           "aliases" :>
+             Capture "alias" Text :>
+               QueryParam "$.xgafv" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "bearer_token" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" Text :>
+                                         Delete '[JSON] Empty
 
 type StudentsAPI =
      StudentsList :<|> StudentsGet :<|> StudentsCreate
@@ -457,23 +491,26 @@ type StudentsAPI =
 -- \`NOT_FOUND\` if the course does not exist. * \`PERMISSION_DENIED\` for
 -- [general user permission errors][User Permission Errors].
 type StudentsList =
-     "v1" :> "courses" :> Capture "courseId" Text :>
-       "students"
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "pageSize" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1" :>
+       "courses" :>
+         Capture "courseId" Text :>
+           "students" :>
+             QueryParam "$.xgafv" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "pp" Bool :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "bearer_token" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "pageSize" Int32 :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" Text :>
+                                           Get '[JSON] ListStudentsResponse
 
 -- | Returns a student of a course. This method returns the following error
 -- codes: * \`PERMISSION_DENIED\` if the requesting user is not permitted
@@ -481,22 +518,25 @@ type StudentsList =
 -- errors][User Permission Errors]. * \`NOT_FOUND\` if no student of this
 -- course has the requested ID or if the course does not exist.
 type StudentsGet =
-     "v1" :> "courses" :> Capture "courseId" Text :>
-       "students"
-       :> Capture "userId" Text
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1" :>
+       "courses" :>
+         Capture "courseId" Text :>
+           "students" :>
+             Capture "userId" Text :>
+               QueryParam "$.xgafv" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "bearer_token" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" Text :>
+                                         Get '[JSON] Student
 
 -- | Adds a user as a student of a course. This method returns the following
 -- error codes: * \`PERMISSION_DENIED\` if the requesting user is not
@@ -506,22 +546,25 @@ type StudentsGet =
 -- requested user\'s account is disabled. * \`ALREADY_EXISTS\` if the user
 -- is already a student or teacher in the course.
 type StudentsCreate =
-     "v1" :> "courses" :> Capture "courseId" Text :>
-       "students"
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "enrollmentCode" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1" :>
+       "courses" :>
+         Capture "courseId" Text :>
+           "students" :>
+             QueryParam "$.xgafv" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "pp" Bool :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "enrollmentCode" Text :>
+                             QueryParam "bearer_token" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" Text :>
+                                         Post '[JSON] Student
 
 -- | Deletes a student of a course. This method returns the following error
 -- codes: * \`PERMISSION_DENIED\` if the requesting user is not permitted
@@ -529,22 +572,25 @@ type StudentsCreate =
 -- errors][User Permission Errors]. * \`NOT_FOUND\` if no student of this
 -- course has the requested ID or if the course does not exist.
 type StudentsDelete =
-     "v1" :> "courses" :> Capture "courseId" Text :>
-       "students"
-       :> Capture "userId" Text
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1" :>
+       "courses" :>
+         Capture "courseId" Text :>
+           "students" :>
+             Capture "userId" Text :>
+               QueryParam "$.xgafv" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "bearer_token" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" Text :>
+                                         Delete '[JSON] Empty
 
 type UserProfilesAPI = UserProfilesGet
 
@@ -553,17 +599,20 @@ type UserProfilesAPI = UserProfilesGet
 -- this user profile or if no profile exists with the requested ID or for
 -- [general user permission errors][User Permission Errors].
 type UserProfilesGet =
-     "v1" :> "userProfiles" :> Capture "userId" Text :>
-       QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1" :>
+       "userProfiles" :>
+         Capture "userId" Text :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON] UserProfile

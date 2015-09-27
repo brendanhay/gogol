@@ -141,115 +141,125 @@ type OrganizationsAPI =
 
 -- | Query Organization resources.
 type OrganizationsList =
-     "v1beta1" :> "organizations" :>
-       QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "filter" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "pageSize" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1beta1" :>
+       "organizations" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "filter" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "pageSize" Int32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" Text :>
+                                         Get '[JSON] ListOrganizationsResponse
 
 -- | Gets the access control policy for a Organization resource. May be empty
 -- if no such policy or resource exists.
 type OrganizationsGetIamPolicy =
-     "v1beta1" :> "organizations" :>
-       "{resource}:getIamPolicy"
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1beta1" :>
+       "organizations" :>
+         "{resource}:getIamPolicy" :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" Text :> Post '[JSON] Policy
 
 -- | Fetches an Organization resource by id.
 type OrganizationsGet =
-     "v1beta1" :> "organizations" :>
-       Capture "organizationId" Text
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1beta1" :>
+       "organizations" :>
+         Capture "organizationId" Text :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON] Organization
 
 -- | Sets the access control policy on a Organization resource. Replaces any
 -- existing policy.
 type OrganizationsSetIamPolicy =
-     "v1beta1" :> "organizations" :>
-       "{resource}:setIamPolicy"
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1beta1" :>
+       "organizations" :>
+         "{resource}:setIamPolicy" :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" Text :> Post '[JSON] Policy
 
 -- | Returns permissions that a caller has on the specified Organization.
 type OrganizationsTestIamPermissions =
-     "v1beta1" :> "organizations" :>
-       "{resource}:testIamPermissions"
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1beta1" :>
+       "organizations" :>
+         "{resource}:testIamPermissions" :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" Text :>
+                                     Post '[JSON] TestIamPermissionsResponse
 
 -- | Updates an Organization resource.
 type OrganizationsUpdate =
-     "v1beta1" :> "organizations" :>
-       Capture "organizationId" Text
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1beta1" :>
+       "organizations" :>
+         Capture "organizationId" Text :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" Text :>
+                                     Put '[JSON] Organization
 
 type ProjectsAPI =
      ProjectsList :<|> ProjectsUndelete :<|>
@@ -265,22 +275,25 @@ type ProjectsAPI =
 -- filter. This method returns projects in an unspecified order. New
 -- projects do not necessarily appear at the end of the list.
 type ProjectsList =
-     "v1beta1" :> "projects" :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "filter" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "pageSize" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1beta1" :>
+       "projects" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "filter" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "pageSize" Int32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" Text :>
+                                         Get '[JSON] ListProjectsResponse
 
 -- | Restores the project identified by the specified \`project_id\` (for
 -- example, \`my-project-123\`). You can only use this method for a project
@@ -292,113 +305,125 @@ type ProjectsList =
 -- the project cannot be restored. The caller must have modify permissions
 -- for this project.
 type ProjectsUndelete =
-     "v1beta1" :> "projects" :> "{projectId}:undelete" :>
-       QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1beta1" :>
+       "projects" :>
+         "{projectId}:undelete" :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" Text :> Post '[JSON] Empty
 
 -- | Returns the IAM access control policy for specified project.
 type ProjectsGetIamPolicy =
-     "v1beta1" :> "projects" :> "{resource}:getIamPolicy"
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1beta1" :>
+       "projects" :>
+         "{resource}:getIamPolicy" :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" Text :> Post '[JSON] Policy
 
 -- | Retrieves the project identified by the specified \`project_id\` (for
 -- example, \`my-project-123\`). The caller must have read permissions for
 -- this project.
 type ProjectsGet =
-     "v1beta1" :> "projects" :> Capture "projectId" Text
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1beta1" :>
+       "projects" :>
+         Capture "projectId" Text :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" Text :> Get '[JSON] Project
 
 -- | Creates a project resource. Initially, the project resource is owned by
 -- its creator exclusively. The creator can later grant permission to
 -- others to read or update the project. Several APIs are activated
 -- automatically for the project, including Google Cloud Storage.
 type ProjectsCreate =
-     "v1beta1" :> "projects" :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1beta1" :>
+       "projects" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :> Post '[JSON] Project
 
 -- | Sets the IAM access control policy for the specified project. We do not
 -- currently support \'domain:\' prefixed members in a Binding of a Policy.
 -- Calling this method requires enabling the App Engine Admin API.
 type ProjectsSetIamPolicy =
-     "v1beta1" :> "projects" :> "{resource}:setIamPolicy"
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1beta1" :>
+       "projects" :>
+         "{resource}:setIamPolicy" :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" Text :> Post '[JSON] Policy
 
 -- | Tests the specified permissions against the IAM access control policy
 -- for the specified project.
 type ProjectsTestIamPermissions =
-     "v1beta1" :> "projects" :>
-       "{resource}:testIamPermissions"
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1beta1" :>
+       "projects" :>
+         "{resource}:testIamPermissions" :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" Text :>
+                                     Post '[JSON] TestIamPermissionsResponse
 
 -- | Marks the project identified by the specified \`project_id\` (for
 -- example, \`my-project-123\`) for deletion. This method will only affect
@@ -425,36 +450,40 @@ type ProjectsTestIamPermissions =
 -- [google.cloudresourcemanager.projects.v1beta1.DeveloperProjects.ListProjects]
 -- methods. The caller must have modify permissions for this project.
 type ProjectsDelete =
-     "v1beta1" :> "projects" :> Capture "projectId" Text
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1beta1" :>
+       "projects" :>
+         Capture "projectId" Text :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" Text :> Delete '[JSON] Empty
 
 -- | Updates the attributes of the project identified by the specified
 -- \`project_id\` (for example, \`my-project-123\`). The caller must have
 -- modify permissions for this project.
 type ProjectsUpdate =
-     "v1beta1" :> "projects" :> Capture "projectId" Text
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1beta1" :>
+       "projects" :>
+         Capture "projectId" Text :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" Text :> Put '[JSON] Project

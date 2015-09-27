@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -47,6 +48,20 @@ cFacets
 cTitle :: Lens' Context (Maybe Text)
 cTitle = lens _cTitle (\ s a -> s{_cTitle = a})
 
+instance FromJSON Context where
+        parseJSON
+          = withObject "Context"
+              (\ o ->
+                 Context <$>
+                   (o .:? "facets" .!= mempty) <*> (o .:? "title"))
+
+instance ToJSON Context where
+        toJSON Context{..}
+          = object
+              (catMaybes
+                 [("facets" .=) <$> _cFacets,
+                  ("title" .=) <$> _cTitle])
+
 --
 -- /See:/ 'contextItemItemFacets' smart constructor.
 data ContextItemItemFacets = ContextItemItemFacets
@@ -85,6 +100,22 @@ ciifLabelWithOp
 ciifLabel :: Lens' ContextItemItemFacets (Maybe Text)
 ciifLabel
   = lens _ciifLabel (\ s a -> s{_ciifLabel = a})
+
+instance FromJSON ContextItemItemFacets where
+        parseJSON
+          = withObject "ContextItemItemFacets"
+              (\ o ->
+                 ContextItemItemFacets <$>
+                   (o .:? "anchor") <*> (o .:? "label_with_op") <*>
+                     (o .:? "label"))
+
+instance ToJSON ContextItemItemFacets where
+        toJSON ContextItemItemFacets{..}
+          = object
+              (catMaybes
+                 [("anchor" .=) <$> _ciifAnchor,
+                  ("label_with_op" .=) <$> _ciifLabelWithOp,
+                  ("label" .=) <$> _ciifLabel])
 
 --
 -- /See:/ 'promotion' smart constructor.
@@ -147,6 +178,28 @@ pHtmlTitle
 pTitle :: Lens' Promotion (Maybe Text)
 pTitle = lens _pTitle (\ s a -> s{_pTitle = a})
 
+instance FromJSON Promotion where
+        parseJSON
+          = withObject "Promotion"
+              (\ o ->
+                 Promotion <$>
+                   (o .:? "image") <*> (o .:? "displayLink") <*>
+                     (o .:? "bodyLines" .!= mempty)
+                     <*> (o .:? "link")
+                     <*> (o .:? "htmlTitle")
+                     <*> (o .:? "title"))
+
+instance ToJSON Promotion where
+        toJSON Promotion{..}
+          = object
+              (catMaybes
+                 [("image" .=) <$> _pImage,
+                  ("displayLink" .=) <$> _pDisplayLink,
+                  ("bodyLines" .=) <$> _pBodyLines,
+                  ("link" .=) <$> _pLink,
+                  ("htmlTitle" .=) <$> _pHtmlTitle,
+                  ("title" .=) <$> _pTitle])
+
 --
 -- /See:/ 'promotionImage' smart constructor.
 data PromotionImage = PromotionImage
@@ -181,6 +234,22 @@ piWidth = lens _piWidth (\ s a -> s{_piWidth = a})
 
 piSource :: Lens' PromotionImage (Maybe Text)
 piSource = lens _piSource (\ s a -> s{_piSource = a})
+
+instance FromJSON PromotionImage where
+        parseJSON
+          = withObject "PromotionImage"
+              (\ o ->
+                 PromotionImage <$>
+                   (o .:? "height") <*> (o .:? "width") <*>
+                     (o .:? "source"))
+
+instance ToJSON PromotionImage where
+        toJSON PromotionImage{..}
+          = object
+              (catMaybes
+                 [("height" .=) <$> _piHeight,
+                  ("width" .=) <$> _piWidth,
+                  ("source" .=) <$> _piSource])
 
 --
 -- /See:/ 'promotionItemBodyLines' smart constructor.
@@ -226,6 +295,23 @@ piblHtmlTitle
 piblTitle :: Lens' PromotionItemBodyLines (Maybe Text)
 piblTitle
   = lens _piblTitle (\ s a -> s{_piblTitle = a})
+
+instance FromJSON PromotionItemBodyLines where
+        parseJSON
+          = withObject "PromotionItemBodyLines"
+              (\ o ->
+                 PromotionItemBodyLines <$>
+                   (o .:? "link") <*> (o .:? "url") <*>
+                     (o .:? "htmlTitle")
+                     <*> (o .:? "title"))
+
+instance ToJSON PromotionItemBodyLines where
+        toJSON PromotionItemBodyLines{..}
+          = object
+              (catMaybes
+                 [("link" .=) <$> _piblLink, ("url" .=) <$> _piblUrl,
+                  ("htmlTitle" .=) <$> _piblHtmlTitle,
+                  ("title" .=) <$> _piblTitle])
 
 --
 -- /See:/ 'query' smart constructor.
@@ -531,6 +617,88 @@ qHighRange :: Lens' Query (Maybe Text)
 qHighRange
   = lens _qHighRange (\ s a -> s{_qHighRange = a})
 
+instance FromJSON Query where
+        parseJSON
+          = withObject "Query"
+              (\ o ->
+                 Query <$>
+                   (o .:? "imgDominantColor") <*>
+                     (o .:? "outputEncoding")
+                     <*> (o .:? "siteSearchFilter")
+                     <*> (o .:? "inputEncoding")
+                     <*> (o .:? "orTerms")
+                     <*> (o .:? "searchTerms")
+                     <*> (o .:? "startPage")
+                     <*> (o .:? "rights")
+                     <*> (o .:? "count")
+                     <*> (o .:? "excludeTerms")
+                     <*> (o .:? "fileType")
+                     <*> (o .:? "searchType")
+                     <*> (o .:? "googleHost")
+                     <*> (o .:? "disableCnTwTranslation")
+                     <*> (o .:? "relatedSite")
+                     <*> (o .:? "hl")
+                     <*> (o .:? "cref")
+                     <*> (o .:? "sort")
+                     <*> (o .:? "language")
+                     <*> (o .:? "siteSearch")
+                     <*> (o .:? "filter")
+                     <*> (o .:? "totalResults")
+                     <*> (o .:? "dateRestrict")
+                     <*> (o .:? "title")
+                     <*> (o .:? "linkSite")
+                     <*> (o .:? "lowRange")
+                     <*> (o .:? "imgType")
+                     <*> (o .:? "gl")
+                     <*> (o .:? "cx")
+                     <*> (o .:? "imgColorType")
+                     <*> (o .:? "imgSize")
+                     <*> (o .:? "exactTerms")
+                     <*> (o .:? "startIndex")
+                     <*> (o .:? "cr")
+                     <*> (o .:? "safe")
+                     <*> (o .:? "hq")
+                     <*> (o .:? "highRange"))
+
+instance ToJSON Query where
+        toJSON Query{..}
+          = object
+              (catMaybes
+                 [("imgDominantColor" .=) <$> _qImgDominantColor,
+                  ("outputEncoding" .=) <$> _qOutputEncoding,
+                  ("siteSearchFilter" .=) <$> _qSiteSearchFilter,
+                  ("inputEncoding" .=) <$> _qInputEncoding,
+                  ("orTerms" .=) <$> _qOrTerms,
+                  ("searchTerms" .=) <$> _qSearchTerms,
+                  ("startPage" .=) <$> _qStartPage,
+                  ("rights" .=) <$> _qRights, ("count" .=) <$> _qCount,
+                  ("excludeTerms" .=) <$> _qExcludeTerms,
+                  ("fileType" .=) <$> _qFileType,
+                  ("searchType" .=) <$> _qSearchType,
+                  ("googleHost" .=) <$> _qGoogleHost,
+                  ("disableCnTwTranslation" .=) <$>
+                    _qDisableCnTwTranslation,
+                  ("relatedSite" .=) <$> _qRelatedSite,
+                  ("hl" .=) <$> _qHl, ("cref" .=) <$> _qCref,
+                  ("sort" .=) <$> _qSort,
+                  ("language" .=) <$> _qLanguage,
+                  ("siteSearch" .=) <$> _qSiteSearch,
+                  ("filter" .=) <$> _qFilter,
+                  ("totalResults" .=) <$> _qTotalResults,
+                  ("dateRestrict" .=) <$> _qDateRestrict,
+                  ("title" .=) <$> _qTitle,
+                  ("linkSite" .=) <$> _qLinkSite,
+                  ("lowRange" .=) <$> _qLowRange,
+                  ("imgType" .=) <$> _qImgType, ("gl" .=) <$> _qGl,
+                  ("cx" .=) <$> _qCx,
+                  ("imgColorType" .=) <$> _qImgColorType,
+                  ("imgSize" .=) <$> _qImgSize,
+                  ("exactTerms" .=) <$> _qExactTerms,
+                  ("startIndex" .=) <$> _qStartIndex,
+                  ("cr" .=) <$> _qCr, ("safe" .=) <$> _qSafe,
+                  ("hq" .=) <$> _qHq,
+                  ("highRange" .=) <$> _qHighRange])
+
 --
 -- /See:/ 'result' smart constructor.
 data Result = Result
@@ -660,6 +828,44 @@ rLabels
 rTitle :: Lens' Result (Maybe Text)
 rTitle = lens _rTitle (\ s a -> s{_rTitle = a})
 
+instance FromJSON Result where
+        parseJSON
+          = withObject "Result"
+              (\ o ->
+                 Result <$>
+                   (o .:? "mime") <*> (o .:? "image") <*>
+                     (o .:? "pagemap")
+                     <*> (o .:? "displayLink")
+                     <*> (o .:? "fileFormat")
+                     <*> (o .:? "snippet")
+                     <*> (o .:? "kind" .!= "customsearch#result")
+                     <*> (o .:? "link")
+                     <*> (o .:? "htmlSnippet")
+                     <*> (o .:? "htmlFormattedUrl")
+                     <*> (o .:? "cacheId")
+                     <*> (o .:? "formattedUrl")
+                     <*> (o .:? "htmlTitle")
+                     <*> (o .:? "labels" .!= mempty)
+                     <*> (o .:? "title"))
+
+instance ToJSON Result where
+        toJSON Result{..}
+          = object
+              (catMaybes
+                 [("mime" .=) <$> _rMime, ("image" .=) <$> _rImage,
+                  ("pagemap" .=) <$> _rPagemap,
+                  ("displayLink" .=) <$> _rDisplayLink,
+                  ("fileFormat" .=) <$> _rFileFormat,
+                  ("snippet" .=) <$> _rSnippet,
+                  Just ("kind" .= _rKind), ("link" .=) <$> _rLink,
+                  ("htmlSnippet" .=) <$> _rHtmlSnippet,
+                  ("htmlFormattedUrl" .=) <$> _rHtmlFormattedUrl,
+                  ("cacheId" .=) <$> _rCacheId,
+                  ("formattedUrl" .=) <$> _rFormattedUrl,
+                  ("htmlTitle" .=) <$> _rHtmlTitle,
+                  ("labels" .=) <$> _rLabels,
+                  ("title" .=) <$> _rTitle])
+
 --
 -- /See:/ 'resultImage' smart constructor.
 data ResultImage = ResultImage
@@ -732,6 +938,30 @@ riThumbnailWidth
   = lens _riThumbnailWidth
       (\ s a -> s{_riThumbnailWidth = a})
 
+instance FromJSON ResultImage where
+        parseJSON
+          = withObject "ResultImage"
+              (\ o ->
+                 ResultImage <$>
+                   (o .:? "thumbnailLink") <*> (o .:? "height") <*>
+                     (o .:? "byteSize")
+                     <*> (o .:? "contextLink")
+                     <*> (o .:? "thumbnailHeight")
+                     <*> (o .:? "width")
+                     <*> (o .:? "thumbnailWidth"))
+
+instance ToJSON ResultImage where
+        toJSON ResultImage{..}
+          = object
+              (catMaybes
+                 [("thumbnailLink" .=) <$> _riThumbnailLink,
+                  ("height" .=) <$> _riHeight,
+                  ("byteSize" .=) <$> _riByteSize,
+                  ("contextLink" .=) <$> _riContextLink,
+                  ("thumbnailHeight" .=) <$> _riThumbnailHeight,
+                  ("width" .=) <$> _riWidth,
+                  ("thumbnailWidth" .=) <$> _riThumbnailWidth])
+
 --
 -- /See:/ 'resultItemLabels' smart constructor.
 data ResultItemLabels = ResultItemLabels
@@ -771,6 +1001,22 @@ rilLabelWithOp
   = lens _rilLabelWithOp
       (\ s a -> s{_rilLabelWithOp = a})
 
+instance FromJSON ResultItemLabels where
+        parseJSON
+          = withObject "ResultItemLabels"
+              (\ o ->
+                 ResultItemLabels <$>
+                   (o .:? "name") <*> (o .:? "displayName") <*>
+                     (o .:? "label_with_op"))
+
+instance ToJSON ResultItemLabels where
+        toJSON ResultItemLabels{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _rilName,
+                  ("displayName" .=) <$> _rilDisplayName,
+                  ("label_with_op" .=) <$> _rilLabelWithOp])
+
 --
 -- /See:/ 'resultPagemap' smart constructor.
 data ResultPagemap =
@@ -782,6 +1028,14 @@ data ResultPagemap =
 resultPagemap
     :: ResultPagemap
 resultPagemap = ResultPagemap
+
+instance FromJSON ResultPagemap where
+        parseJSON
+          = withObject "ResultPagemap"
+              (\ o -> pure ResultPagemap)
+
+instance ToJSON ResultPagemap where
+        toJSON = const (Object mempty)
 
 --
 -- /See:/ 'search' smart constructor.
@@ -861,6 +1115,31 @@ sSpelling :: Lens' Search (Maybe SearchSpelling)
 sSpelling
   = lens _sSpelling (\ s a -> s{_sSpelling = a})
 
+instance FromJSON Search where
+        parseJSON
+          = withObject "Search"
+              (\ o ->
+                 Search <$>
+                   (o .:? "queries") <*> (o .:? "context") <*>
+                     (o .:? "kind" .!= "customsearch#search")
+                     <*> (o .:? "url")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "searchInformation")
+                     <*> (o .:? "promotions" .!= mempty)
+                     <*> (o .:? "spelling"))
+
+instance ToJSON Search where
+        toJSON Search{..}
+          = object
+              (catMaybes
+                 [("queries" .=) <$> _sQueries,
+                  ("context" .=) <$> _sContext,
+                  Just ("kind" .= _sKind), ("url" .=) <$> _sUrl,
+                  ("items" .=) <$> _sItems,
+                  ("searchInformation" .=) <$> _sSearchInformation,
+                  ("promotions" .=) <$> _sPromotions,
+                  ("spelling" .=) <$> _sSpelling])
+
 --
 -- /See:/ 'searchQueries' smart constructor.
 data SearchQueries =
@@ -872,6 +1151,14 @@ data SearchQueries =
 searchQueries
     :: SearchQueries
 searchQueries = SearchQueries
+
+instance FromJSON SearchQueries where
+        parseJSON
+          = withObject "SearchQueries"
+              (\ o -> pure SearchQueries)
+
+instance ToJSON SearchQueries where
+        toJSON = const (Object mempty)
 
 --
 -- /See:/ 'searchSearchInformation' smart constructor.
@@ -923,6 +1210,27 @@ ssiFormattedTotalResults
   = lens _ssiFormattedTotalResults
       (\ s a -> s{_ssiFormattedTotalResults = a})
 
+instance FromJSON SearchSearchInformation where
+        parseJSON
+          = withObject "SearchSearchInformation"
+              (\ o ->
+                 SearchSearchInformation <$>
+                   (o .:? "searchTime") <*>
+                     (o .:? "formattedSearchTime")
+                     <*> (o .:? "totalResults")
+                     <*> (o .:? "formattedTotalResults"))
+
+instance ToJSON SearchSearchInformation where
+        toJSON SearchSearchInformation{..}
+          = object
+              (catMaybes
+                 [("searchTime" .=) <$> _ssiSearchTime,
+                  ("formattedSearchTime" .=) <$>
+                    _ssiFormattedSearchTime,
+                  ("totalResults" .=) <$> _ssiTotalResults,
+                  ("formattedTotalResults" .=) <$>
+                    _ssiFormattedTotalResults])
+
 --
 -- /See:/ 'searchSpelling' smart constructor.
 data SearchSpelling = SearchSpelling
@@ -955,6 +1263,21 @@ ssHtmlCorrectedQuery
   = lens _ssHtmlCorrectedQuery
       (\ s a -> s{_ssHtmlCorrectedQuery = a})
 
+instance FromJSON SearchSpelling where
+        parseJSON
+          = withObject "SearchSpelling"
+              (\ o ->
+                 SearchSpelling <$>
+                   (o .:? "correctedQuery") <*>
+                     (o .:? "htmlCorrectedQuery"))
+
+instance ToJSON SearchSpelling where
+        toJSON SearchSpelling{..}
+          = object
+              (catMaybes
+                 [("correctedQuery" .=) <$> _ssCorrectedQuery,
+                  ("htmlCorrectedQuery" .=) <$> _ssHtmlCorrectedQuery])
+
 --
 -- /See:/ 'searchUrl' smart constructor.
 data SearchUrl = SearchUrl
@@ -983,3 +1306,19 @@ suType = lens _suType (\ s a -> s{_suType = a})
 suTemplate :: Lens' SearchUrl Text
 suTemplate
   = lens _suTemplate (\ s a -> s{_suTemplate = a})
+
+instance FromJSON SearchUrl where
+        parseJSON
+          = withObject "SearchUrl"
+              (\ o ->
+                 SearchUrl <$>
+                   (o .:? "type" .!= "application/json") <*>
+                     (o .:? "template" .!=
+                        "https://www.googleapis.com/customsearch/v1?q={searchTerms}&num={count?}&start={startIndex?}&lr={language?}&safe={safe?}&cx={cx?}&cref={cref?}&sort={sort?}&filter={filter?}&gl={gl?}&cr={cr?}&googlehost={googleHost?}&c2coff={disableCnTwTranslation?}&hq={hq?}&hl={hl?}&siteSearch={siteSearch?}&siteSearchFilter={siteSearchFilter?}&exactTerms={exactTerms?}&excludeTerms={excludeTerms?}&linkSite={linkSite?}&orTerms={orTerms?}&relatedSite={relatedSite?}&dateRestrict={dateRestrict?}&lowRange={lowRange?}&highRange={highRange?}&searchType={searchType}&fileType={fileType?}&rights={rights?}&imgSize={imgSize?}&imgType={imgType?}&imgColorType={imgColorType?}&imgDominantColor={imgDominantColor?}&alt=json"))
+
+instance ToJSON SearchUrl where
+        toJSON SearchUrl{..}
+          = object
+              (catMaybes
+                 [Just ("type" .= _suType),
+                  Just ("template" .= _suTemplate)])

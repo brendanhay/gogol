@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -53,6 +54,20 @@ pafsvArgs
 pafsvFormat :: Lens' PagespeedApiFormatStringV2 (Maybe Text)
 pafsvFormat
   = lens _pafsvFormat (\ s a -> s{_pafsvFormat = a})
+
+instance FromJSON PagespeedApiFormatStringV2 where
+        parseJSON
+          = withObject "PagespeedApiFormatStringV2"
+              (\ o ->
+                 PagespeedApiFormatStringV2 <$>
+                   (o .:? "args" .!= mempty) <*> (o .:? "format"))
+
+instance ToJSON PagespeedApiFormatStringV2 where
+        toJSON PagespeedApiFormatStringV2{..}
+          = object
+              (catMaybes
+                 [("args" .=) <$> _pafsvArgs,
+                  ("format" .=) <$> _pafsvFormat])
 
 --
 -- /See:/ 'pagespeedApiFormatStringV2ItemArgs' smart constructor.
@@ -123,6 +138,28 @@ pafsviaSecondaryRects
       . _Default
       . _Coerce
 
+instance FromJSON PagespeedApiFormatStringV2ItemArgs
+         where
+        parseJSON
+          = withObject "PagespeedApiFormatStringV2ItemArgs"
+              (\ o ->
+                 PagespeedApiFormatStringV2ItemArgs <$>
+                   (o .:? "value") <*> (o .:? "rects" .!= mempty) <*>
+                     (o .:? "key")
+                     <*> (o .:? "type")
+                     <*> (o .:? "secondary_rects" .!= mempty))
+
+instance ToJSON PagespeedApiFormatStringV2ItemArgs
+         where
+        toJSON PagespeedApiFormatStringV2ItemArgs{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _pafsviaValue,
+                  ("rects" .=) <$> _pafsviaRects,
+                  ("key" .=) <$> _pafsviaKey,
+                  ("type" .=) <$> _pafsviaType,
+                  ("secondary_rects" .=) <$> _pafsviaSecondaryRects])
+
 --
 -- /See:/ 'pagespeedApiFormatStringV2ItemRectsItemArgs' smart constructor.
 data PagespeedApiFormatStringV2ItemRectsItemArgs = PagespeedApiFormatStringV2ItemRectsItemArgs
@@ -176,6 +213,28 @@ pafsviriaTop :: Lens' PagespeedApiFormatStringV2ItemRectsItemArgs (Maybe Int32)
 pafsviriaTop
   = lens _pafsviriaTop (\ s a -> s{_pafsviriaTop = a})
 
+instance FromJSON
+         PagespeedApiFormatStringV2ItemRectsItemArgs where
+        parseJSON
+          = withObject
+              "PagespeedApiFormatStringV2ItemRectsItemArgs"
+              (\ o ->
+                 PagespeedApiFormatStringV2ItemRectsItemArgs <$>
+                   (o .:? "height") <*> (o .:? "left") <*>
+                     (o .:? "width")
+                     <*> (o .:? "top"))
+
+instance ToJSON
+         PagespeedApiFormatStringV2ItemRectsItemArgs where
+        toJSON
+          PagespeedApiFormatStringV2ItemRectsItemArgs{..}
+          = object
+              (catMaybes
+                 [("height" .=) <$> _pafsviriaHeight,
+                  ("left" .=) <$> _pafsviriaLeft,
+                  ("width" .=) <$> _pafsviriaWidth,
+                  ("top" .=) <$> _pafsviriaTop])
+
 --
 -- /See:/ 'pagespeedApiFormatStringV2ItemSecondary_rectsItemArgs' smart constructor.
 data PagespeedApiFormatStringV2ItemSecondary_rectsItemArgs = PagespeedApiFormatStringV2ItemSecondary_rectsItemArgs
@@ -228,6 +287,31 @@ pafsvisiaWidth
 pafsvisiaTop :: Lens' PagespeedApiFormatStringV2ItemSecondary_rectsItemArgs (Maybe Int32)
 pafsvisiaTop
   = lens _pafsvisiaTop (\ s a -> s{_pafsvisiaTop = a})
+
+instance FromJSON
+         PagespeedApiFormatStringV2ItemSecondary_rectsItemArgs
+         where
+        parseJSON
+          = withObject
+              "PagespeedApiFormatStringV2ItemSecondary_rectsItemArgs"
+              (\ o ->
+                 PagespeedApiFormatStringV2ItemSecondary_rectsItemArgs
+                   <$>
+                   (o .:? "height") <*> (o .:? "left") <*>
+                     (o .:? "width")
+                     <*> (o .:? "top"))
+
+instance ToJSON
+         PagespeedApiFormatStringV2ItemSecondary_rectsItemArgs
+         where
+        toJSON
+          PagespeedApiFormatStringV2ItemSecondary_rectsItemArgs{..}
+          = object
+              (catMaybes
+                 [("height" .=) <$> _pafsvisiaHeight,
+                  ("left" .=) <$> _pafsvisiaLeft,
+                  ("width" .=) <$> _pafsvisiaWidth,
+                  ("top" .=) <$> _pafsvisiaTop])
 
 --
 -- /See:/ 'pagespeedApiImageV2' smart constructor.
@@ -296,6 +380,28 @@ paivPageRect
 paivKey :: Lens' PagespeedApiImageV2 (Maybe Text)
 paivKey = lens _paivKey (\ s a -> s{_paivKey = a})
 
+instance FromJSON PagespeedApiImageV2 where
+        parseJSON
+          = withObject "PagespeedApiImageV2"
+              (\ o ->
+                 PagespeedApiImageV2 <$>
+                   (o .:? "height") <*> (o .:? "data") <*>
+                     (o .:? "mime_type")
+                     <*> (o .:? "width")
+                     <*> (o .:? "page_rect")
+                     <*> (o .:? "key"))
+
+instance ToJSON PagespeedApiImageV2 where
+        toJSON PagespeedApiImageV2{..}
+          = object
+              (catMaybes
+                 [("height" .=) <$> _paivHeight,
+                  ("data" .=) <$> _paivData,
+                  ("mime_type" .=) <$> _paivMimeType,
+                  ("width" .=) <$> _paivWidth,
+                  ("page_rect" .=) <$> _paivPageRect,
+                  ("key" .=) <$> _paivKey])
+
 -- | The region of the page that is captured by this image, with dimensions
 -- measured in CSS pixels.
 --
@@ -346,6 +452,24 @@ paivpWidth
 -- | The top coordinate of the rect, in page coordinates.
 paivpTop :: Lens' PagespeedApiImageV2Page_rect (Maybe Int32)
 paivpTop = lens _paivpTop (\ s a -> s{_paivpTop = a})
+
+instance FromJSON PagespeedApiImageV2Page_rect where
+        parseJSON
+          = withObject "PagespeedApiImageV2Page_rect"
+              (\ o ->
+                 PagespeedApiImageV2Page_rect <$>
+                   (o .:? "height") <*> (o .:? "left") <*>
+                     (o .:? "width")
+                     <*> (o .:? "top"))
+
+instance ToJSON PagespeedApiImageV2Page_rect where
+        toJSON PagespeedApiImageV2Page_rect{..}
+          = object
+              (catMaybes
+                 [("height" .=) <$> _paivpHeight,
+                  ("left" .=) <$> _paivpLeft,
+                  ("width" .=) <$> _paivpWidth,
+                  ("top" .=) <$> _paivpTop])
 
 --
 -- /See:/ 'result' smart constructor.
@@ -457,6 +581,36 @@ rId = lens _rId (\ s a -> s{_rId = a})
 rTitle :: Lens' Result (Maybe Text)
 rTitle = lens _rTitle (\ s a -> s{_rTitle = a})
 
+instance FromJSON Result where
+        parseJSON
+          = withObject "Result"
+              (\ o ->
+                 Result <$>
+                   (o .:? "screenshot") <*>
+                     (o .:? "kind" .!= "pagespeedonline#result")
+                     <*> (o .:? "responseCode")
+                     <*> (o .:? "invalidRules" .!= mempty)
+                     <*> (o .:? "formattedResults")
+                     <*> (o .:? "version")
+                     <*> (o .:? "ruleGroups")
+                     <*> (o .:? "pageStats")
+                     <*> (o .:? "id")
+                     <*> (o .:? "title"))
+
+instance ToJSON Result where
+        toJSON Result{..}
+          = object
+              (catMaybes
+                 [("screenshot" .=) <$> _rScreenshot,
+                  Just ("kind" .= _rKind),
+                  ("responseCode" .=) <$> _rResponseCode,
+                  ("invalidRules" .=) <$> _rInvalidRules,
+                  ("formattedResults" .=) <$> _rFormattedResults,
+                  ("version" .=) <$> _rVersion,
+                  ("ruleGroups" .=) <$> _rRuleGroups,
+                  ("pageStats" .=) <$> _rPageStats, ("id" .=) <$> _rId,
+                  ("title" .=) <$> _rTitle])
+
 -- | Localized PageSpeed results. Contains a ruleResults entry for each
 -- PageSpeed rule instantiated and run by the server.
 --
@@ -492,6 +646,20 @@ rfrRuleResults :: Lens' ResultFormattedResults (Maybe ResultRuleResultsFormatted
 rfrRuleResults
   = lens _rfrRuleResults
       (\ s a -> s{_rfrRuleResults = a})
+
+instance FromJSON ResultFormattedResults where
+        parseJSON
+          = withObject "ResultFormattedResults"
+              (\ o ->
+                 ResultFormattedResults <$>
+                   (o .:? "locale") <*> (o .:? "ruleResults"))
+
+instance ToJSON ResultFormattedResults where
+        toJSON ResultFormattedResults{..}
+          = object
+              (catMaybes
+                 [("locale" .=) <$> _rfrLocale,
+                  ("ruleResults" .=) <$> _rfrRuleResults])
 
 -- | Summary statistics for the page, such as number of JavaScript bytes,
 -- number of HTML bytes, etc.
@@ -642,6 +810,45 @@ rpsCssResponseBytes
   = lens _rpsCssResponseBytes
       (\ s a -> s{_rpsCssResponseBytes = a})
 
+instance FromJSON ResultPageStats where
+        parseJSON
+          = withObject "ResultPageStats"
+              (\ o ->
+                 ResultPageStats <$>
+                   (o .:? "htmlResponseBytes") <*>
+                     (o .:? "totalRequestBytes")
+                     <*> (o .:? "numberResources")
+                     <*> (o .:? "numberStaticResources")
+                     <*> (o .:? "numberHosts")
+                     <*> (o .:? "numberJsResources")
+                     <*> (o .:? "numberCssResources")
+                     <*> (o .:? "textResponseBytes")
+                     <*> (o .:? "flashResponseBytes")
+                     <*> (o .:? "imageResponseBytes")
+                     <*> (o .:? "otherResponseBytes")
+                     <*> (o .:? "javascriptResponseBytes")
+                     <*> (o .:? "cssResponseBytes"))
+
+instance ToJSON ResultPageStats where
+        toJSON ResultPageStats{..}
+          = object
+              (catMaybes
+                 [("htmlResponseBytes" .=) <$> _rpsHtmlResponseBytes,
+                  ("totalRequestBytes" .=) <$> _rpsTotalRequestBytes,
+                  ("numberResources" .=) <$> _rpsNumberResources,
+                  ("numberStaticResources" .=) <$>
+                    _rpsNumberStaticResources,
+                  ("numberHosts" .=) <$> _rpsNumberHosts,
+                  ("numberJsResources" .=) <$> _rpsNumberJsResources,
+                  ("numberCssResources" .=) <$> _rpsNumberCssResources,
+                  ("textResponseBytes" .=) <$> _rpsTextResponseBytes,
+                  ("flashResponseBytes" .=) <$> _rpsFlashResponseBytes,
+                  ("imageResponseBytes" .=) <$> _rpsImageResponseBytes,
+                  ("otherResponseBytes" .=) <$> _rpsOtherResponseBytes,
+                  ("javascriptResponseBytes" .=) <$>
+                    _rpsJavascriptResponseBytes,
+                  ("cssResponseBytes" .=) <$> _rpsCssResponseBytes])
+
 -- | A map with one entry for each rule group in these results.
 --
 -- /See:/ 'resultRuleGroups' smart constructor.
@@ -654,6 +861,14 @@ data ResultRuleGroups =
 resultRuleGroups
     :: ResultRuleGroups
 resultRuleGroups = ResultRuleGroups
+
+instance FromJSON ResultRuleGroups where
+        parseJSON
+          = withObject "ResultRuleGroups"
+              (\ o -> pure ResultRuleGroups)
+
+instance ToJSON ResultRuleGroups where
+        toJSON = const (Object mempty)
 
 -- | Dictionary of formatted rule results, with one entry for each PageSpeed
 -- rule instantiated and run by the server.
@@ -668,6 +883,16 @@ data ResultRuleResultsFormattedResults =
 resultRuleResultsFormattedResults
     :: ResultRuleResultsFormattedResults
 resultRuleResultsFormattedResults = ResultRuleResultsFormattedResults
+
+instance FromJSON ResultRuleResultsFormattedResults
+         where
+        parseJSON
+          = withObject "ResultRuleResultsFormattedResults"
+              (\ o -> pure ResultRuleResultsFormattedResults)
+
+instance ToJSON ResultRuleResultsFormattedResults
+         where
+        toJSON = const (Object mempty)
 
 -- | The version of PageSpeed used to generate these results.
 --
@@ -699,3 +924,17 @@ rvMinor = lens _rvMinor (\ s a -> s{_rvMinor = a})
 -- | The major version number of PageSpeed used to generate these results.
 rvMajor :: Lens' ResultVersion (Maybe Int32)
 rvMajor = lens _rvMajor (\ s a -> s{_rvMajor = a})
+
+instance FromJSON ResultVersion where
+        parseJSON
+          = withObject "ResultVersion"
+              (\ o ->
+                 ResultVersion <$>
+                   (o .:? "minor") <*> (o .:? "major"))
+
+instance ToJSON ResultVersion where
+        toJSON ResultVersion{..}
+          = object
+              (catMaybes
+                 [("minor" .=) <$> _rvMinor,
+                  ("major" .=) <$> _rvMajor])

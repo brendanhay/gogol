@@ -558,46 +558,53 @@ type ActivitiesAPI =
 
 -- | Create a new activity for the authenticated user.
 type ActivitiesInsert =
-     "plusDomains" :> "v1" :> "people" :>
-       Capture "userId" Text
-       :> "activities"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "preview" Bool
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "plusDomains" :>
+       "v1" :>
+         "people" :>
+           Capture "userId" Text :>
+             "activities" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "preview" Bool :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Post '[JSON] Activity
 
 -- | List all of the activities in the specified collection for a particular
 -- user.
 type ActivitiesList =
-     "plusDomains" :> "v1" :> "people" :>
-       Capture "userId" Text
-       :> "activities"
-       :> Capture "collection" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Natural
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "plusDomains" :>
+       "v1" :>
+         "people" :>
+           Capture "userId" Text :>
+             "activities" :>
+               Capture "collection" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "maxResults" Natural :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Get '[JSON] ActivityFeed
 
 -- | Get an activity.
 type ActivitiesGet =
-     "plusDomains" :> "v1" :> "activities" :>
-       Capture "activityId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "plusDomains" :>
+       "v1" :>
+         "activities" :>
+           Capture "activityId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Get '[JSON] Activity
 
 type PeopleAPI =
      PeopleList :<|> PeopleListByCircle :<|> PeopleGet
@@ -605,64 +612,73 @@ type PeopleAPI =
 
 -- | List all of the people in the specified collection.
 type PeopleList =
-     "plusDomains" :> "v1" :> "people" :>
-       Capture "userId" Text
-       :> "people"
-       :> Capture "collection" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "orderBy" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Natural
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "plusDomains" :>
+       "v1" :>
+         "people" :>
+           Capture "userId" Text :>
+             "people" :>
+               Capture "collection" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "orderBy" Text :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "maxResults" Natural :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON] PeopleFeed
 
 -- | List all of the people who are members of a circle.
 type PeopleListByCircle =
-     "plusDomains" :> "v1" :> "circles" :>
-       Capture "circleId" Text
-       :> "people"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Natural
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "plusDomains" :>
+       "v1" :>
+         "circles" :>
+           Capture "circleId" Text :>
+             "people" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Natural :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Get '[JSON] PeopleFeed
 
 -- | Get a person\'s profile.
 type PeopleGet =
-     "plusDomains" :> "v1" :> "people" :>
-       Capture "userId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "plusDomains" :>
+       "v1" :>
+         "people" :>
+           Capture "userId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Get '[JSON] Person
 
 -- | List all of the people in the specified collection for a particular
 -- activity.
 type PeopleListByActivity =
-     "plusDomains" :> "v1" :> "activities" :>
-       Capture "activityId" Text
-       :> "people"
-       :> Capture "collection" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Natural
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "plusDomains" :>
+       "v1" :>
+         "activities" :>
+           Capture "activityId" Text :>
+             "people" :>
+               Capture "collection" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "maxResults" Natural :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :> Get '[JSON] PeopleFeed
 
 type MediaAPI = MediaInsert
 
@@ -671,78 +687,90 @@ type MediaAPI = MediaInsert
 -- quota if photos are less than 2048 pixels on their longest side or
 -- videos are less than 15 minutes in length.
 type MediaInsert =
-     "plusDomains" :> "v1" :> "people" :>
-       Capture "userId" Text
-       :> "media"
-       :> Capture "collection" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "plusDomains" :>
+       "v1" :>
+         "people" :>
+           Capture "userId" Text :>
+             "media" :>
+               Capture "collection" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Post '[JSON] Media
 
 type AudiencesAPI = AudiencesList
 
 -- | List all of the audiences to which a user can share.
 type AudiencesList =
-     "plusDomains" :> "v1" :> "people" :>
-       Capture "userId" Text
-       :> "audiences"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Natural
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "plusDomains" :>
+       "v1" :>
+         "people" :>
+           Capture "userId" Text :>
+             "audiences" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Natural :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :>
+                                 Get '[JSON] AudiencesFeed
 
 type CommentsAPI =
      CommentsInsert :<|> CommentsList :<|> CommentsGet
 
 -- | Create a new comment in reply to an activity.
 type CommentsInsert =
-     "plusDomains" :> "v1" :> "activities" :>
-       Capture "activityId" Text
-       :> "comments"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "plusDomains" :>
+       "v1" :>
+         "activities" :>
+           Capture "activityId" Text :>
+             "comments" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] Comment
 
 -- | List all of the comments for an activity.
 type CommentsList =
-     "plusDomains" :> "v1" :> "activities" :>
-       Capture "activityId" Text
-       :> "comments"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "sortOrder" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Word32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "plusDomains" :>
+       "v1" :>
+         "activities" :>
+           Capture "activityId" Text :>
+             "comments" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "sortOrder" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "maxResults" Word32 :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Get '[JSON] CommentFeed
 
 -- | Get a comment.
 type CommentsGet =
-     "plusDomains" :> "v1" :> "comments" :>
-       Capture "commentId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "plusDomains" :>
+       "v1" :>
+         "comments" :>
+           Capture "commentId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Get '[JSON] Comment
 
 type CirclesAPI =
      CirclesInsert :<|> CirclesAddPeople :<|> CirclesList
@@ -754,107 +782,123 @@ type CirclesAPI =
 
 -- | Create a new circle for the authenticated user.
 type CirclesInsert =
-     "plusDomains" :> "v1" :> "people" :>
-       Capture "userId" Text
-       :> "circles"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "plusDomains" :>
+       "v1" :>
+         "people" :>
+           Capture "userId" Text :>
+             "circles" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] Circle
 
 -- | Add a person to a circle. Google+ limits certain circle operations,
 -- including the number of circle adds. Learn More.
 type CirclesAddPeople =
-     "plusDomains" :> "v1" :> "circles" :>
-       Capture "circleId" Text
-       :> "people"
-       :> QueryParam "email" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "userId" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "plusDomains" :>
+       "v1" :>
+         "circles" :>
+           Capture "circleId" Text :>
+             "people" :>
+               QueryParam "email" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "userId" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Put '[JSON] Circle
 
 -- | List all of the circles for a user.
 type CirclesList =
-     "plusDomains" :> "v1" :> "people" :>
-       Capture "userId" Text
-       :> "circles"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Natural
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "plusDomains" :>
+       "v1" :>
+         "people" :>
+           Capture "userId" Text :>
+             "circles" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Natural :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Get '[JSON] CircleFeed
 
 -- | Update a circle\'s description. This method supports patch semantics.
 type CirclesPatch =
-     "plusDomains" :> "v1" :> "circles" :>
-       Capture "circleId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "plusDomains" :>
+       "v1" :>
+         "circles" :>
+           Capture "circleId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Patch '[JSON] Circle
 
 -- | Get a circle.
 type CirclesGet =
-     "plusDomains" :> "v1" :> "circles" :>
-       Capture "circleId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "plusDomains" :>
+       "v1" :>
+         "circles" :>
+           Capture "circleId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Get '[JSON] Circle
 
 -- | Delete a circle.
 type CirclesRemove =
-     "plusDomains" :> "v1" :> "circles" :>
-       Capture "circleId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "plusDomains" :>
+       "v1" :>
+         "circles" :>
+           Capture "circleId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Remove a person from a circle.
 type CirclesRemovePeople =
-     "plusDomains" :> "v1" :> "circles" :>
-       Capture "circleId" Text
-       :> "people"
-       :> QueryParam "email" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "userId" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "plusDomains" :>
+       "v1" :>
+         "circles" :>
+           Capture "circleId" Text :>
+             "people" :>
+               QueryParam "email" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "userId" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Update a circle\'s description.
 type CirclesUpdate =
-     "plusDomains" :> "v1" :> "circles" :>
-       Capture "circleId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "plusDomains" :>
+       "v1" :>
+         "circles" :>
+           Capture "circleId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Put '[JSON] Circle

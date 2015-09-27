@@ -451,14 +451,17 @@ type FlagsAPI = FlagsList
 
 -- | List all available database flags for Google Cloud SQL instances.
 type FlagsList =
-     "sql" :> "v1beta4" :> "flags" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "sql" :>
+       "v1beta4" :>
+         "flags" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Text :>
+                         Get '[JSON] FlagsListResponse
 
 type UsersAPI =
      UsersInsert :<|> UsersList :<|> UsersDelete :<|>
@@ -466,83 +469,97 @@ type UsersAPI =
 
 -- | Creates a new user in a Cloud SQL instance.
 type UsersInsert =
-     "sql" :> "v1beta4" :> "projects" :>
-       Capture "project" Text
-       :> "instances"
-       :> Capture "instance" Text
-       :> "users"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "users" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Post '[JSON] Operation
 
 -- | Lists users in the specified Cloud SQL instance.
 type UsersList =
-     "sql" :> "v1beta4" :> "projects" :>
-       Capture "project" Text
-       :> "instances"
-       :> Capture "instance" Text
-       :> "users"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "users" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :>
+                                 Get '[JSON] UsersListResponse
 
 -- | Deletes a user from a Cloud SQL instance.
 type UsersDelete =
-     "sql" :> "v1beta4" :> "projects" :>
-       Capture "project" Text
-       :> "instances"
-       :> Capture "instance" Text
-       :> "users"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "name" Text
-       :> QueryParam "host" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "users" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "name" Text :>
+                             QueryParam "host" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Delete '[JSON] Operation
 
 -- | Updates an existing user in a Cloud SQL instance.
 type UsersUpdate =
-     "sql" :> "v1beta4" :> "projects" :>
-       Capture "project" Text
-       :> "instances"
-       :> Capture "instance" Text
-       :> "users"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "name" Text
-       :> QueryParam "host" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "users" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "name" Text :>
+                             QueryParam "host" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Put '[JSON] Operation
 
 type TiersAPI = TiersList
 
 -- | Lists all available service tiers for Google Cloud SQL, for example D1,
 -- D2. For related information, see Pricing.
 type TiersList =
-     "sql" :> "v1beta4" :> "projects" :>
-       Capture "project" Text
-       :> "tiers"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "tiers" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Get '[JSON] TiersListResponse
 
 type BackupRunsAPI =
      BackupRunsList :<|> BackupRunsGet :<|>
@@ -551,52 +568,60 @@ type BackupRunsAPI =
 -- | Lists all backup runs associated with a given instance and configuration
 -- in the reverse chronological order of the enqueued time.
 type BackupRunsList =
-     "sql" :> "v1beta4" :> "projects" :>
-       Capture "project" Text
-       :> "instances"
-       :> Capture "instance" Text
-       :> "backupRuns"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "backupRuns" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "maxResults" Int32 :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON] BackupRunsListResponse
 
 -- | Retrieves a resource containing information about a backup run.
 type BackupRunsGet =
-     "sql" :> "v1beta4" :> "projects" :>
-       Capture "project" Text
-       :> "instances"
-       :> Capture "instance" Text
-       :> "backupRuns"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "backupRuns" :>
+                   Capture "id" Int64 :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :> Get '[JSON] BackupRun
 
 -- | Deletes the backup taken by a backup run.
 type BackupRunsDelete =
-     "sql" :> "v1beta4" :> "projects" :>
-       Capture "project" Text
-       :> "instances"
-       :> Capture "instance" Text
-       :> "backupRuns"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "backupRuns" :>
+                   Capture "id" Int64 :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Delete '[JSON] Operation
 
 type SslCertsAPI =
      SslCertsInsert :<|> SslCertsList :<|> SslCertsGet
@@ -607,86 +632,99 @@ type SslCertsAPI =
 -- server certificate authority. The new certificate will not be usable
 -- until the instance is restarted.
 type SslCertsInsert =
-     "sql" :> "v1beta4" :> "projects" :>
-       Capture "project" Text
-       :> "instances"
-       :> Capture "instance" Text
-       :> "sslCerts"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "sslCerts" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :>
+                                 Post '[JSON] SslCertsInsertResponse
 
 -- | Lists all of the current SSL certificates for the instance.
 type SslCertsList =
-     "sql" :> "v1beta4" :> "projects" :>
-       Capture "project" Text
-       :> "instances"
-       :> Capture "instance" Text
-       :> "sslCerts"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "sslCerts" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :>
+                                 Get '[JSON] SslCertsListResponse
 
 -- | Retrieves a particular SSL certificate. Does not include the private key
 -- (required for usage). The private key must be saved from the response to
 -- initial creation.
 type SslCertsGet =
-     "sql" :> "v1beta4" :> "projects" :>
-       Capture "project" Text
-       :> "instances"
-       :> Capture "instance" Text
-       :> "sslCerts"
-       :> Capture "sha1Fingerprint" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "sslCerts" :>
+                   Capture "sha1Fingerprint" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :> Get '[JSON] SslCert
 
 -- | Generates a short-lived X509 certificate containing the provided public
 -- key and signed by a private key specific to the target instance. Users
 -- may use the certificate to authenticate as themselves when connecting to
 -- the database.
 type SslCertsCreateEphemeral =
-     "sql" :> "v1beta4" :> "projects" :>
-       Capture "project" Text
-       :> "instances"
-       :> Capture "instance" Text
-       :> "createEphemeral"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "createEphemeral" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Post '[JSON] SslCert
 
 -- | Deletes the SSL certificate. The change will not take effect until the
 -- instance is restarted.
 type SslCertsDelete =
-     "sql" :> "v1beta4" :> "projects" :>
-       Capture "project" Text
-       :> "instances"
-       :> Capture "instance" Text
-       :> "sslCerts"
-       :> Capture "sha1Fingerprint" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "sslCerts" :>
+                   Capture "sha1Fingerprint" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Delete '[JSON] Operation
 
 type InstancesAPI =
      InstancesExport :<|> InstancesInsert :<|>
@@ -707,233 +745,265 @@ type InstancesAPI =
 -- | Exports data from a Cloud SQL instance to a Google Cloud Storage bucket
 -- as a MySQL dump file.
 type InstancesExport =
-     "sql" :> "v1beta4" :> "projects" :>
-       Capture "project" Text
-       :> "instances"
-       :> Capture "instance" Text
-       :> "export"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "export" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Post '[JSON] Operation
 
 -- | Creates a new Cloud SQL instance.
 type InstancesInsert =
-     "sql" :> "v1beta4" :> "projects" :>
-       Capture "project" Text
-       :> "instances"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] Operation
 
 -- | Lists instances under a given project in the alphabetical order of the
 -- instance name.
 type InstancesList =
-     "sql" :> "v1beta4" :> "projects" :>
-       Capture "project" Text
-       :> "instances"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Word32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Word32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :>
+                                 Get '[JSON] InstancesListResponse
 
 -- | Starts the replication in the read replica instance.
 type InstancesStartReplica =
-     "sql" :> "v1beta4" :> "projects" :>
-       Capture "project" Text
-       :> "instances"
-       :> Capture "instance" Text
-       :> "startReplica"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "startReplica" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Post '[JSON] Operation
 
 -- | Creates a Cloud SQL instance as a clone of the source instance.
 type InstancesClone =
-     "sql" :> "v1beta4" :> "projects" :>
-       Capture "project" Text
-       :> "instances"
-       :> Capture "instance" Text
-       :> "clone"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "clone" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Post '[JSON] Operation
 
 -- | Updates settings of a Cloud SQL instance. Caution: This is not a partial
 -- update, so you must include values for all the settings that you want to
 -- retain. For partial updates, use patch.. This method supports patch
 -- semantics.
 type InstancesPatch =
-     "sql" :> "v1beta4" :> "projects" :>
-       Capture "project" Text
-       :> "instances"
-       :> Capture "instance" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Patch '[JSON] Operation
 
 -- | Retrieves a resource containing information about a Cloud SQL instance.
 type InstancesGet =
-     "sql" :> "v1beta4" :> "projects" :>
-       Capture "project" Text
-       :> "instances"
-       :> Capture "instance" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Get '[JSON] DatabaseInstance
 
 -- | Restores a backup of a Cloud SQL instance.
 type InstancesRestoreBackup =
-     "sql" :> "v1beta4" :> "projects" :>
-       Capture "project" Text
-       :> "instances"
-       :> Capture "instance" Text
-       :> "restoreBackup"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "restoreBackup" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Post '[JSON] Operation
 
 -- | Restarts a Cloud SQL instance.
 type InstancesRestart =
-     "sql" :> "v1beta4" :> "projects" :>
-       Capture "project" Text
-       :> "instances"
-       :> Capture "instance" Text
-       :> "restart"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "restart" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Post '[JSON] Operation
 
 -- | Imports data into a Cloud SQL instance from a MySQL dump file in Google
 -- Cloud Storage.
 type InstancesImport =
-     "sql" :> "v1beta4" :> "projects" :>
-       Capture "project" Text
-       :> "instances"
-       :> Capture "instance" Text
-       :> "import"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "import" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Post '[JSON] Operation
 
 -- | Stops the replication in the read replica instance.
 type InstancesStopReplica =
-     "sql" :> "v1beta4" :> "projects" :>
-       Capture "project" Text
-       :> "instances"
-       :> Capture "instance" Text
-       :> "stopReplica"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "stopReplica" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Post '[JSON] Operation
 
 -- | Deletes all client certificates and generates a new server SSL
 -- certificate for the instance. The changes will not take effect until the
 -- instance is restarted. Existing instances without a server certificate
 -- will need to call this once to set a server certificate.
 type InstancesResetSslConfig =
-     "sql" :> "v1beta4" :> "projects" :>
-       Capture "project" Text
-       :> "instances"
-       :> Capture "instance" Text
-       :> "resetSslConfig"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "resetSslConfig" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Post '[JSON] Operation
 
 -- | Promotes the read replica instance to be a stand-alone Cloud SQL
 -- instance.
 type InstancesPromoteReplica =
-     "sql" :> "v1beta4" :> "projects" :>
-       Capture "project" Text
-       :> "instances"
-       :> Capture "instance" Text
-       :> "promoteReplica"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "promoteReplica" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Post '[JSON] Operation
 
 -- | Deletes a Cloud SQL instance.
 type InstancesDelete =
-     "sql" :> "v1beta4" :> "projects" :>
-       Capture "project" Text
-       :> "instances"
-       :> Capture "instance" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Delete '[JSON] Operation
 
 -- | Updates settings of a Cloud SQL instance. Caution: This is not a partial
 -- update, so you must include values for all the settings that you want to
 -- retain. For partial updates, use patch.
 type InstancesUpdate =
-     "sql" :> "v1beta4" :> "projects" :>
-       Capture "project" Text
-       :> "instances"
-       :> Capture "instance" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Put '[JSON] Operation
 
 type OperationsAPI =
      OperationsList :<|> OperationsGet
@@ -941,33 +1011,38 @@ type OperationsAPI =
 -- | Lists all instance operations that have been performed on the given
 -- Cloud SQL instance in the reverse chronological order of the start time.
 type OperationsList =
-     "sql" :> "v1beta4" :> "projects" :>
-       Capture "project" Text
-       :> "operations"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Word32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
-       :> QueryParam "instance" Text
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "operations" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Word32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :>
+                                 QueryParam "instance" Text :>
+                                   Get '[JSON] OperationsListResponse
 
 -- | Retrieves an instance operation that has been performed on an instance.
 type OperationsGet =
-     "sql" :> "v1beta4" :> "projects" :>
-       Capture "project" Text
-       :> "operations"
-       :> Capture "operation" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "operations" :>
+               Capture "operation" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] Operation
 
 type DatabasesAPI =
      DatabasesInsert :<|> DatabasesList :<|>
@@ -979,98 +1054,113 @@ type DatabasesAPI =
 -- | Inserts a resource containing information about a database inside a
 -- Cloud SQL instance.
 type DatabasesInsert =
-     "sql" :> "v1beta4" :> "projects" :>
-       Capture "project" Text
-       :> "instances"
-       :> Capture "instance" Text
-       :> "databases"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "databases" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Post '[JSON] Operation
 
 -- | Lists databases in the specified Cloud SQL instance.
 type DatabasesList =
-     "sql" :> "v1beta4" :> "projects" :>
-       Capture "project" Text
-       :> "instances"
-       :> Capture "instance" Text
-       :> "databases"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "databases" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :>
+                                 Get '[JSON] DatabasesListResponse
 
 -- | Updates a resource containing information about a database inside a
 -- Cloud SQL instance. This method supports patch semantics.
 type DatabasesPatch =
-     "sql" :> "v1beta4" :> "projects" :>
-       Capture "project" Text
-       :> "instances"
-       :> Capture "instance" Text
-       :> "databases"
-       :> Capture "database" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "databases" :>
+                   Capture "database" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Patch '[JSON] Operation
 
 -- | Retrieves a resource containing information about a database inside a
 -- Cloud SQL instance.
 type DatabasesGet =
-     "sql" :> "v1beta4" :> "projects" :>
-       Capture "project" Text
-       :> "instances"
-       :> Capture "instance" Text
-       :> "databases"
-       :> Capture "database" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "databases" :>
+                   Capture "database" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :> Get '[JSON] Database
 
 -- | Deletes a resource containing information about a database inside a
 -- Cloud SQL instance.
 type DatabasesDelete =
-     "sql" :> "v1beta4" :> "projects" :>
-       Capture "project" Text
-       :> "instances"
-       :> Capture "instance" Text
-       :> "databases"
-       :> Capture "database" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "databases" :>
+                   Capture "database" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Delete '[JSON] Operation
 
 -- | Updates a resource containing information about a database inside a
 -- Cloud SQL instance.
 type DatabasesUpdate =
-     "sql" :> "v1beta4" :> "projects" :>
-       Capture "project" Text
-       :> "instances"
-       :> Capture "instance" Text
-       :> "databases"
-       :> Capture "database" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "sql" :>
+       "v1beta4" :>
+         "projects" :>
+           Capture "project" Text :>
+             "instances" :>
+               Capture "instance" Text :>
+                 "databases" :>
+                   Capture "database" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :> Put '[JSON] Operation

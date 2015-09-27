@@ -931,59 +931,70 @@ type MarketplacenotesAPI =
 
 -- | Add notes to the order
 type MarketplacenotesInsert =
-     "adexchangebuyer" :> "v1.4" :> "marketplaceOrders" :>
-       Capture "orderId" Text
-       :> "notes"
-       :> "insert"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "marketplaceOrders" :>
+           Capture "orderId" Text :>
+             "notes" :>
+               "insert" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Post '[JSON] AddOrderNotesResponse
 
 -- | Get all the notes associated with an order
 type MarketplacenotesList =
-     "adexchangebuyer" :> "v1.4" :> "marketplaceOrders" :>
-       Capture "orderId" Text
-       :> "notes"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "marketplaceOrders" :>
+           Capture "orderId" Text :>
+             "notes" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Get '[JSON] GetOrderNotesResponse
 
 type DealsAPI = DealsGet
 
 -- | Gets the requested deal.
 type DealsGet =
-     "adexchangebuyer" :> "v1.4" :> "deals" :>
-       Capture "dealId" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "deals" :>
+           Capture "dealId" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Get '[JSON] NegotiationDto
 
 type NegotiationroundsAPI = NegotiationroundsInsert
 
 -- | Adds the requested negotiationRound to the requested negotiation.
 type NegotiationroundsInsert =
-     "adexchangebuyer" :> "v1.4" :> "negotiations" :>
-       Capture "negotiationId" Int64
-       :> "negotiationrounds"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "negotiations" :>
+           Capture "negotiationId" Int64 :>
+             "negotiationrounds" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Post '[JSON] NegotiationRoundDto
 
 type AccountsAPI =
      AccountsList :<|> AccountsPatch :<|> AccountsGet :<|>
@@ -991,50 +1002,58 @@ type AccountsAPI =
 
 -- | Retrieves the authenticated user\'s list of accounts.
 type AccountsList =
-     "adexchangebuyer" :> "v1.4" :> "accounts" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "accounts" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Text :> Get '[JSON] AccountsList
 
 -- | Updates an existing account. This method supports patch semantics.
 type AccountsPatch =
-     "adexchangebuyer" :> "v1.4" :> "accounts" :>
-       Capture "id" Int32
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "accounts" :>
+           Capture "id" Int32 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Patch '[JSON] Account
 
 -- | Gets one account by ID.
 type AccountsGet =
-     "adexchangebuyer" :> "v1.4" :> "accounts" :>
-       Capture "id" Int32
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "accounts" :>
+           Capture "id" Int32 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Get '[JSON] Account
 
 -- | Updates an existing account.
 type AccountsUpdate =
-     "adexchangebuyer" :> "v1.4" :> "accounts" :>
-       Capture "id" Int32
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "accounts" :>
+           Capture "id" Int32 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Put '[JSON] Account
 
 type BudgetAPI =
      BudgetPatch :<|> BudgetGet :<|> BudgetUpdate
@@ -1043,136 +1062,157 @@ type BudgetAPI =
 -- accountId and billingId, with the budget amount in the request. This
 -- method supports patch semantics.
 type BudgetPatch =
-     "adexchangebuyer" :> "v1.4" :> "billinginfo" :>
-       Capture "accountId" Int64
-       :> Capture "billingId" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "billinginfo" :>
+           Capture "accountId" Int64 :>
+             Capture "billingId" Int64 :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Patch '[JSON] Budget
 
 -- | Returns the budget information for the adgroup specified by the
 -- accountId and billingId.
 type BudgetGet =
-     "adexchangebuyer" :> "v1.4" :> "billinginfo" :>
-       Capture "accountId" Int64
-       :> Capture "billingId" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "billinginfo" :>
+           Capture "accountId" Int64 :>
+             Capture "billingId" Int64 :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Get '[JSON] Budget
 
 -- | Updates the budget amount for the budget of the adgroup specified by the
 -- accountId and billingId, with the budget amount in the request.
 type BudgetUpdate =
-     "adexchangebuyer" :> "v1.4" :> "billinginfo" :>
-       Capture "accountId" Int64
-       :> Capture "billingId" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "billinginfo" :>
+           Capture "accountId" Int64 :>
+             Capture "billingId" Int64 :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Put '[JSON] Budget
 
 type CreativesAPI =
      CreativesInsert :<|> CreativesList :<|> CreativesGet
 
 -- | Submit a new creative.
 type CreativesInsert =
-     "adexchangebuyer" :> "v1.4" :> "creatives" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "creatives" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Text :> Post '[JSON] Creative
 
 -- | Retrieves a list of the authenticated user\'s active creatives. A
 -- creative will be available 30-40 minutes after submission.
 type CreativesList =
-     "adexchangebuyer" :> "v1.4" :> "creatives" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "buyerCreativeId" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "openAuctionStatusFilter" Text
-       :> QueryParam "accountId" Int32
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "dealsStatusFilter" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Natural
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "creatives" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "buyerCreativeId" Text :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "openAuctionStatusFilter" Text :>
+                     QueryParam "accountId" Int32 :>
+                       QueryParam "key" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "dealsStatusFilter" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "maxResults" Natural :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON] CreativesList
 
 -- | Gets the status for a single creative. A creative will be available
 -- 30-40 minutes after submission.
 type CreativesGet =
-     "adexchangebuyer" :> "v1.4" :> "creatives" :>
-       Capture "accountId" Int32
-       :> Capture "buyerCreativeId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "creatives" :>
+           Capture "accountId" Int32 :>
+             Capture "buyerCreativeId" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Get '[JSON] Creative
 
 type PerformanceReportAPI = PerformanceReportList
 
 -- | Retrieves the authenticated user\'s list of performance metrics.
 type PerformanceReportList =
-     "adexchangebuyer" :> "v1.4" :> "performancereport" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "accountId" Int64
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "endDateTime" Text
-       :> QueryParam "maxResults" Natural
-       :> QueryParam "startDateTime" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "performancereport" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "accountId" Int64 :>
+                   QueryParam "key" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "endDateTime" Text :>
+                           QueryParam "maxResults" Natural :>
+                             QueryParam "startDateTime" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Get '[JSON] PerformanceReportList
 
 type MarketplaceoffersAPI =
      MarketplaceoffersGet :<|> MarketplaceoffersSearch
 
 -- | Gets the requested negotiation.
 type MarketplaceoffersGet =
-     "adexchangebuyer" :> "v1.4" :> "marketplaceOffers" :>
-       Capture "offerId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "marketplaceOffers" :>
+           Capture "offerId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Get '[JSON] MarketplaceOffer
 
 -- | Gets the requested negotiation.
 type MarketplaceoffersSearch =
-     "adexchangebuyer" :> "v1.4" :> "marketplaceOffers" :>
-       "search"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pqlQuery" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "marketplaceOffers" :>
+           "search" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "pqlQuery" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Get '[JSON] GetOffersResponse
 
 type PretargetingConfigAPI =
      PretargetingConfigInsert :<|> PretargetingConfigList
@@ -1183,81 +1223,98 @@ type PretargetingConfigAPI =
 
 -- | Inserts a new pretargeting configuration.
 type PretargetingConfigInsert =
-     "adexchangebuyer" :> "v1.4" :> "pretargetingconfigs"
-       :> Capture "accountId" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "pretargetingconfigs" :>
+           Capture "accountId" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :>
+                           Post '[JSON] PretargetingConfig
 
 -- | Retrieves a list of the authenticated user\'s pretargeting
 -- configurations.
 type PretargetingConfigList =
-     "adexchangebuyer" :> "v1.4" :> "pretargetingconfigs"
-       :> Capture "accountId" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "pretargetingconfigs" :>
+           Capture "accountId" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :>
+                           Get '[JSON] PretargetingConfigList
 
 -- | Updates an existing pretargeting config. This method supports patch
 -- semantics.
 type PretargetingConfigPatch =
-     "adexchangebuyer" :> "v1.4" :> "pretargetingconfigs"
-       :> Capture "accountId" Int64
-       :> Capture "configId" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "pretargetingconfigs" :>
+           Capture "accountId" Int64 :>
+             Capture "configId" Int64 :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Patch '[JSON] PretargetingConfig
 
 -- | Gets a specific pretargeting configuration
 type PretargetingConfigGet =
-     "adexchangebuyer" :> "v1.4" :> "pretargetingconfigs"
-       :> Capture "accountId" Int64
-       :> Capture "configId" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "pretargetingconfigs" :>
+           Capture "accountId" Int64 :>
+             Capture "configId" Int64 :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Get '[JSON] PretargetingConfig
 
 -- | Deletes an existing pretargeting config.
 type PretargetingConfigDelete =
-     "adexchangebuyer" :> "v1.4" :> "pretargetingconfigs"
-       :> Capture "accountId" Int64
-       :> Capture "configId" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "pretargetingconfigs" :>
+           Capture "accountId" Int64 :>
+             Capture "configId" Int64 :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Updates an existing pretargeting config.
 type PretargetingConfigUpdate =
-     "adexchangebuyer" :> "v1.4" :> "pretargetingconfigs"
-       :> Capture "accountId" Int64
-       :> Capture "configId" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "pretargetingconfigs" :>
+           Capture "accountId" Int64 :>
+             Capture "configId" Int64 :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Put '[JSON] PretargetingConfig
 
 type MarketplaceordersAPI =
      MarketplaceordersInsert :<|> MarketplaceordersPatch
@@ -1267,68 +1324,82 @@ type MarketplaceordersAPI =
 
 -- | Create the given list of orders
 type MarketplaceordersInsert =
-     "adexchangebuyer" :> "v1.4" :> "marketplaceOrders" :>
-       "insert"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "marketplaceOrders" :>
+           "insert" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :>
+                           Post '[JSON] CreateOrdersResponse
 
 -- | Update the given order. This method supports patch semantics.
 type MarketplaceordersPatch =
-     "adexchangebuyer" :> "v1.4" :> "marketplaceOrders" :>
-       Capture "orderId" Text
-       :> Capture "revisionNumber" Int64
-       :> Capture "updateAction" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "marketplaceOrders" :>
+           Capture "orderId" Text :>
+             Capture "revisionNumber" Int64 :>
+               Capture "updateAction" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Patch '[JSON] MarketplaceOrder
 
 -- | Get an order given its id
 type MarketplaceordersGet =
-     "adexchangebuyer" :> "v1.4" :> "marketplaceOrders" :>
-       Capture "orderId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "marketplaceOrders" :>
+           Capture "orderId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Get '[JSON] MarketplaceOrder
 
 -- | Search for orders using pql query
 type MarketplaceordersSearch =
-     "adexchangebuyer" :> "v1.4" :> "marketplaceOrders" :>
-       "search"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pqlQuery" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "marketplaceOrders" :>
+           "search" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "pqlQuery" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Get '[JSON] GetOrdersResponse
 
 -- | Update the given order
 type MarketplaceordersUpdate =
-     "adexchangebuyer" :> "v1.4" :> "marketplaceOrders" :>
-       Capture "orderId" Text
-       :> Capture "revisionNumber" Int64
-       :> Capture "updateAction" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "marketplaceOrders" :>
+           Capture "orderId" Text :>
+             Capture "revisionNumber" Int64 :>
+               Capture "updateAction" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Put '[JSON] MarketplaceOrder
 
 type ClientaccessAPI =
      ClientaccessInsert :<|> ClientaccessList :<|>
@@ -1338,74 +1409,91 @@ type ClientaccessAPI =
        :<|> ClientaccessUpdate
 
 type ClientaccessInsert =
-     "adexchangebuyer" :> "v1.4" :> "clientAccess" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "sponsorAccountId" Int32
-       :> QueryParam "key" Text
-       :> QueryParam "clientAccountId" Int64
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "clientAccess" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "sponsorAccountId" Int32 :>
+                   QueryParam "key" Text :>
+                     QueryParam "clientAccountId" Int64 :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Post '[JSON] ClientAccessCapabilities
 
 type ClientaccessList =
-     "adexchangebuyer" :> "v1.4" :> "clientAccess" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "clientAccess" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Text :>
+                         Get '[JSON] ListClientAccessCapabilitiesResponse
 
 type ClientaccessPatch =
-     "adexchangebuyer" :> "v1.4" :> "clientAccess" :>
-       Capture "clientAccountId" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "sponsorAccountId" Int32
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "clientAccess" :>
+           Capture "clientAccountId" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "sponsorAccountId" Int32 :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Patch '[JSON] ClientAccessCapabilities
 
 type ClientaccessGet =
-     "adexchangebuyer" :> "v1.4" :> "clientAccess" :>
-       Capture "clientAccountId" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "sponsorAccountId" Int32
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "clientAccess" :>
+           Capture "clientAccountId" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "sponsorAccountId" Int32 :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Get '[JSON] ClientAccessCapabilities
 
 type ClientaccessDelete =
-     "adexchangebuyer" :> "v1.4" :> "clientAccess" :>
-       Capture "clientAccountId" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "sponsorAccountId" Int32
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "clientAccess" :>
+           Capture "clientAccountId" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "sponsorAccountId" Int32 :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Delete '[JSON] ()
 
 type ClientaccessUpdate =
-     "adexchangebuyer" :> "v1.4" :> "clientAccess" :>
-       Capture "clientAccountId" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "sponsorAccountId" Int32
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "clientAccess" :>
+           Capture "clientAccountId" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "sponsorAccountId" Int32 :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Put '[JSON] ClientAccessCapabilities
 
 type BillingInfoAPI =
      BillingInfoList :<|> BillingInfoGet
@@ -1413,26 +1501,30 @@ type BillingInfoAPI =
 -- | Retrieves a list of billing information for all accounts of the
 -- authenticated user.
 type BillingInfoList =
-     "adexchangebuyer" :> "v1.4" :> "billinginfo" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "billinginfo" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Text :> Get '[JSON] BillingInfoList
 
 -- | Returns the billing information for one account specified by account ID.
 type BillingInfoGet =
-     "adexchangebuyer" :> "v1.4" :> "billinginfo" :>
-       Capture "accountId" Int32
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "billinginfo" :>
+           Capture "accountId" Int32 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Get '[JSON] BillingInfo
 
 type MarketplacedealsAPI =
      MarketplacedealsInsert :<|> MarketplacedealsList :<|>
@@ -1441,58 +1533,70 @@ type MarketplacedealsAPI =
 
 -- | Add new deals for the specified order
 type MarketplacedealsInsert =
-     "adexchangebuyer" :> "v1.4" :> "marketplaceOrders" :>
-       Capture "orderId" Text
-       :> "deals"
-       :> "insert"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "marketplaceOrders" :>
+           Capture "orderId" Text :>
+             "deals" :>
+               "insert" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Post '[JSON] AddOrderDealsResponse
 
 -- | List all the deals for a given order
 type MarketplacedealsList =
-     "adexchangebuyer" :> "v1.4" :> "marketplaceOrders" :>
-       Capture "orderId" Text
-       :> "deals"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "marketplaceOrders" :>
+           Capture "orderId" Text :>
+             "deals" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Get '[JSON] GetOrderDealsResponse
 
 -- | Delete the specified deals from the order
 type MarketplacedealsDelete =
-     "adexchangebuyer" :> "v1.4" :> "marketplaceOrders" :>
-       Capture "orderId" Text
-       :> "deals"
-       :> "delete"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "marketplaceOrders" :>
+           Capture "orderId" Text :>
+             "deals" :>
+               "delete" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Post '[JSON] DeleteOrderDealsResponse
 
 -- | Replaces all the deals in the order with the passed in deals
 type MarketplacedealsUpdate =
-     "adexchangebuyer" :> "v1.4" :> "marketplaceOrders" :>
-       Capture "orderId" Text
-       :> "deals"
-       :> "update"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "marketplaceOrders" :>
+           Capture "orderId" Text :>
+             "deals" :>
+               "update" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Post '[JSON] EditAllOrderDealsResponse
 
 type NegotiationsAPI =
      NegotiationsInsert :<|> NegotiationsList :<|>
@@ -1500,71 +1604,85 @@ type NegotiationsAPI =
 
 -- | Creates or updates the requested negotiation.
 type NegotiationsInsert =
-     "adexchangebuyer" :> "v1.4" :> "negotiations" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "negotiations" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Text :> Post '[JSON] NegotiationDto
 
 -- | Lists all negotiations the authenticated user has access to.
 type NegotiationsList =
-     "adexchangebuyer" :> "v1.4" :> "negotiations" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "negotiations" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Text :>
+                         Get '[JSON] GetNegotiationsResponse
 
 -- | Gets the requested negotiation.
 type NegotiationsGet =
-     "adexchangebuyer" :> "v1.4" :> "negotiations" :>
-       Capture "negotiationId" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "negotiations" :>
+           Capture "negotiationId" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Get '[JSON] NegotiationDto
 
 type OffersAPI =
      OffersInsert :<|> OffersList :<|> OffersGet
 
 -- | Creates or updates the requested offer.
 type OffersInsert =
-     "adexchangebuyer" :> "v1.4" :> "offers" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "offers" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Text :> Post '[JSON] OfferDto
 
 -- | Lists all offers the authenticated user has access to.
 type OffersList =
-     "adexchangebuyer" :> "v1.4" :> "offers" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "offers" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Text :>
+                         Get '[JSON] ListOffersResponse
 
 -- | Gets the requested offer.
 type OffersGet =
-     "adexchangebuyer" :> "v1.4" :> "offers" :>
-       Capture "offerId" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangebuyer" :>
+       "v1.4" :>
+         "offers" :>
+           Capture "offerId" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Get '[JSON] OfferDto

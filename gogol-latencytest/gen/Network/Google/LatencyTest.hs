@@ -82,22 +82,27 @@ type StatscollectionAPI =
 
 -- | RPC to update the new TCP stats.
 type StatscollectionUpdatestats =
-     "v2" :> "statscollection" :> "updatestats" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "v2" :>
+       "statscollection" :>
+         "updatestats" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Text :> Post '[JSON] StatsReply
 
 -- | RPC to update the new TCP stats.
 type StatscollectionUpdateaggregatedstats =
-     "v2" :> "statscollection" :> "updateaggregatedstats"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "v2" :>
+       "statscollection" :>
+         "updateaggregatedstats" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Text :>
+                         Post '[JSON] AggregatedStatsReply

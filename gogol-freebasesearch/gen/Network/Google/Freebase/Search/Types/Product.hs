@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -74,6 +75,26 @@ rcNotable
 rcMid :: Lens' ReconcileCandidate (Maybe Text)
 rcMid = lens _rcMid (\ s a -> s{_rcMid = a})
 
+instance FromJSON ReconcileCandidate where
+        parseJSON
+          = withObject "ReconcileCandidate"
+              (\ o ->
+                 ReconcileCandidate <$>
+                   (o .:? "lang") <*> (o .:? "confidence") <*>
+                     (o .:? "name")
+                     <*> (o .:? "notable")
+                     <*> (o .:? "mid"))
+
+instance ToJSON ReconcileCandidate where
+        toJSON ReconcileCandidate{..}
+          = object
+              (catMaybes
+                 [("lang" .=) <$> _rcLang,
+                  ("confidence" .=) <$> _rcConfidence,
+                  ("name" .=) <$> _rcName,
+                  ("notable" .=) <$> _rcNotable,
+                  ("mid" .=) <$> _rcMid])
+
 -- | Type or profession the candidate is notable for.
 --
 -- /See:/ 'reconcileCandidateNotable' smart constructor.
@@ -104,6 +125,19 @@ rcnName = lens _rcnName (\ s a -> s{_rcnName = a})
 -- | MID of notable category.
 rcnId :: Lens' ReconcileCandidateNotable (Maybe Text)
 rcnId = lens _rcnId (\ s a -> s{_rcnId = a})
+
+instance FromJSON ReconcileCandidateNotable where
+        parseJSON
+          = withObject "ReconcileCandidateNotable"
+              (\ o ->
+                 ReconcileCandidateNotable <$>
+                   (o .:? "name") <*> (o .:? "id"))
+
+instance ToJSON ReconcileCandidateNotable where
+        toJSON ReconcileCandidateNotable{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _rcnName, ("id" .=) <$> _rcnId])
 
 --
 -- /See:/ 'reconcileGet' smart constructor.
@@ -165,6 +199,24 @@ rgWarning
 rgMatch :: Lens' ReconcileGet (Maybe (Maybe ReconcileCandidate))
 rgMatch = lens _rgMatch (\ s a -> s{_rgMatch = a})
 
+instance FromJSON ReconcileGet where
+        parseJSON
+          = withObject "ReconcileGet"
+              (\ o ->
+                 ReconcileGet <$>
+                   (o .:? "candidate" .!= mempty) <*> (o .:? "costs")
+                     <*> (o .:? "warning" .!= mempty)
+                     <*> (o .:? "match"))
+
+instance ToJSON ReconcileGet where
+        toJSON ReconcileGet{..}
+          = object
+              (catMaybes
+                 [("candidate" .=) <$> _rgCandidate,
+                  ("costs" .=) <$> _rgCosts,
+                  ("warning" .=) <$> _rgWarning,
+                  ("match" .=) <$> _rgMatch])
+
 -- | Server costs for reconciling.
 --
 -- /See:/ 'reconcileGetCosts' smart constructor.
@@ -195,6 +247,19 @@ rgcHits = lens _rgcHits (\ s a -> s{_rgcHits = a})
 -- | Total milliseconds spent.
 rgcMs :: Lens' ReconcileGetCosts (Maybe Int32)
 rgcMs = lens _rgcMs (\ s a -> s{_rgcMs = a})
+
+instance FromJSON ReconcileGetCosts where
+        parseJSON
+          = withObject "ReconcileGetCosts"
+              (\ o ->
+                 ReconcileGetCosts <$>
+                   (o .:? "hits") <*> (o .:? "ms"))
+
+instance ToJSON ReconcileGetCosts where
+        toJSON ReconcileGetCosts{..}
+          = object
+              (catMaybes
+                 [("hits" .=) <$> _rgcHits, ("ms" .=) <$> _rgcMs])
 
 --
 -- /See:/ 'reconcileGetItemWarning' smart constructor.
@@ -236,3 +301,19 @@ rgiwReason
 rgiwMessage :: Lens' ReconcileGetItemWarning (Maybe Text)
 rgiwMessage
   = lens _rgiwMessage (\ s a -> s{_rgiwMessage = a})
+
+instance FromJSON ReconcileGetItemWarning where
+        parseJSON
+          = withObject "ReconcileGetItemWarning"
+              (\ o ->
+                 ReconcileGetItemWarning <$>
+                   (o .:? "location") <*> (o .:? "reason") <*>
+                     (o .:? "message"))
+
+instance ToJSON ReconcileGetItemWarning where
+        toJSON ReconcileGetItemWarning{..}
+          = object
+              (catMaybes
+                 [("location" .=) <$> _rgiwLocation,
+                  ("reason" .=) <$> _rgiwReason,
+                  ("message" .=) <$> _rgiwMessage])

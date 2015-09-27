@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -67,6 +68,21 @@ baDisplayName
   = lens _baDisplayName
       (\ s a -> s{_baDisplayName = a})
 
+instance FromJSON BillingAccount where
+        parseJSON
+          = withObject "BillingAccount"
+              (\ o ->
+                 BillingAccount <$>
+                   (o .:? "open") <*> (o .:? "name") <*>
+                     (o .:? "displayName"))
+
+instance ToJSON BillingAccount where
+        toJSON BillingAccount{..}
+          = object
+              (catMaybes
+                 [("open" .=) <$> _baOpen, ("name" .=) <$> _baName,
+                  ("displayName" .=) <$> _baDisplayName])
+
 -- | Response message for \`ListBillingAccounts\`.
 --
 -- /See:/ 'listBillingAccountsResponse' smart constructor.
@@ -106,6 +122,21 @@ lbarBillingAccounts
       (\ s a -> s{_lbarBillingAccounts = a})
       . _Default
       . _Coerce
+
+instance FromJSON ListBillingAccountsResponse where
+        parseJSON
+          = withObject "ListBillingAccountsResponse"
+              (\ o ->
+                 ListBillingAccountsResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "billingAccounts" .!= mempty))
+
+instance ToJSON ListBillingAccountsResponse where
+        toJSON ListBillingAccountsResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lbarNextPageToken,
+                  ("billingAccounts" .=) <$> _lbarBillingAccounts])
 
 -- | Request message for \`ListProjectBillingInfoResponse\`.
 --
@@ -147,6 +178,23 @@ lpbirProjectBillingInfo
       (\ s a -> s{_lpbirProjectBillingInfo = a})
       . _Default
       . _Coerce
+
+instance FromJSON ListProjectBillingInfoResponse
+         where
+        parseJSON
+          = withObject "ListProjectBillingInfoResponse"
+              (\ o ->
+                 ListProjectBillingInfoResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "projectBillingInfo" .!= mempty))
+
+instance ToJSON ListProjectBillingInfoResponse where
+        toJSON ListProjectBillingInfoResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lpbirNextPageToken,
+                  ("projectBillingInfo" .=) <$>
+                    _lpbirProjectBillingInfo])
 
 -- | Encapsulation of billing information for a Developers Console project. A
 -- project has at most one associated billing account at a time (but a
@@ -211,3 +259,21 @@ pbiBillingEnabled :: Lens' ProjectBillingInfo (Maybe Bool)
 pbiBillingEnabled
   = lens _pbiBillingEnabled
       (\ s a -> s{_pbiBillingEnabled = a})
+
+instance FromJSON ProjectBillingInfo where
+        parseJSON
+          = withObject "ProjectBillingInfo"
+              (\ o ->
+                 ProjectBillingInfo <$>
+                   (o .:? "name") <*> (o .:? "billingAccountName") <*>
+                     (o .:? "projectId")
+                     <*> (o .:? "billingEnabled"))
+
+instance ToJSON ProjectBillingInfo where
+        toJSON ProjectBillingInfo{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _pbiName,
+                  ("billingAccountName" .=) <$> _pbiBillingAccountName,
+                  ("projectId" .=) <$> _pbiProjectId,
+                  ("billingEnabled" .=) <$> _pbiBillingEnabled])

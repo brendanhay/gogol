@@ -703,67 +703,78 @@ type WorkItemsAPI =
 
 -- | Leases a dataflow WorkItem to run.
 type WorkItemsLease =
-     "v1b3" :> "projects" :> Capture "projectId" Text :>
-       "jobs"
-       :> Capture "jobId" Text
-       :> "workItems:lease"
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1b3" :>
+       "projects" :>
+         Capture "projectId" Text :>
+           "jobs" :>
+             Capture "jobId" Text :>
+               "workItems:lease" :>
+                 QueryParam "$.xgafv" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "pp" Bool :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "bearer_token" Text :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" Text :>
+                                           Post '[JSON] LeaseWorkItemResponse
 
 -- | Reports the status of dataflow WorkItems leased by a worker.
 type WorkItemsReportStatus =
-     "v1b3" :> "projects" :> Capture "projectId" Text :>
-       "jobs"
-       :> Capture "jobId" Text
-       :> "workItems:reportStatus"
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1b3" :>
+       "projects" :>
+         Capture "projectId" Text :>
+           "jobs" :>
+             Capture "jobId" Text :>
+               "workItems:reportStatus" :>
+                 QueryParam "$.xgafv" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "pp" Bool :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "bearer_token" Text :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" Text :>
+                                           Post '[JSON]
+                                             ReportWorkItemStatusResponse
 
 type MessagesAPI = MessagesList
 
 -- | Request the job status.
 type MessagesList =
-     "v1b3" :> "projects" :> Capture "projectId" Text :>
-       "jobs"
-       :> Capture "jobId" Text
-       :> "messages"
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "startTime" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "endTime" Text
-       :> QueryParam "minimumImportance" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "pageSize" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1b3" :>
+       "projects" :>
+         Capture "projectId" Text :>
+           "jobs" :>
+             Capture "jobId" Text :>
+               "messages" :>
+                 QueryParam "$.xgafv" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "startTime" Text :>
+                           QueryParam "pp" Bool :>
+                             QueryParam "access_token" Text :>
+                               QueryParam "uploadType" Text :>
+                                 QueryParam "bearer_token" Text :>
+                                   QueryParam "key" Text :>
+                                     QueryParam "endTime" Text :>
+                                       QueryParam "minimumImportance" Text :>
+                                         QueryParam "pageToken" Text :>
+                                           QueryParam "oauth_token" Text :>
+                                             QueryParam "pageSize" Int32 :>
+                                               QueryParam "fields" Text :>
+                                                 QueryParam "callback" Text :>
+                                                   QueryParam "alt" Text :>
+                                                     Get '[JSON]
+                                                       ListJobMessagesResponse

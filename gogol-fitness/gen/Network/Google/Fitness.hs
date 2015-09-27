@@ -220,15 +220,19 @@ type DatasetAPI = DatasetAggregate
 -- multiple sources can be aggreated into exactly one bucket type per
 -- request.
 type DatasetAggregate =
-     "fitness" :> "v1" :> "users" :> Capture "userId" Text
-       :> "dataset:aggregate"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "fitness" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "dataset:aggregate" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Post '[JSON] AggregateResponse
 
 type DataSourcesAPI = DatasetsAPI
 
@@ -240,19 +244,23 @@ type DatasetsAPI =
 -- subsquent calls to retrieve this dataset. Data points can belong to more
 -- than one dataset. This method does not use patch semantics.
 type DatasetsPatch =
-     "fitness" :> "v1" :> "users" :> Capture "userId" Text
-       :> "dataSources"
-       :> Capture "dataSourceId" Text
-       :> "datasets"
-       :> Capture "datasetId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "currentTimeMillis" Int64
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "fitness" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "dataSources" :>
+               Capture "dataSourceId" Text :>
+                 "datasets" :>
+                   Capture "datasetId" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "currentTimeMillis" Int64 :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Patch '[JSON] Dataset
 
 -- | Returns a dataset containing all data points whose start and end times
 -- overlap with the specified range of the dataset minimum start time and
@@ -260,20 +268,24 @@ type DatasetsPatch =
 -- than or equal to the dataset end time and whose end time is greater than
 -- or equal to the dataset start time.
 type DatasetsGet =
-     "fitness" :> "v1" :> "users" :> Capture "userId" Text
-       :> "dataSources"
-       :> Capture "dataSourceId" Text
-       :> "datasets"
-       :> Capture "datasetId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "limit" Int32
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "fitness" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "dataSources" :>
+               Capture "dataSourceId" Text :>
+                 "datasets" :>
+                   Capture "datasetId" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "limit" Int32 :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :>
+                                       Get '[JSON] Dataset
 
 -- | Performs an inclusive delete of all data points whose start and end
 -- times have any overlap with the time range specified by the dataset ID.
@@ -283,64 +295,77 @@ type DatasetsGet =
 -- point of the dataset, only the overlapping portion of the data point
 -- will be deleted.
 type DatasetsDelete =
-     "fitness" :> "v1" :> "users" :> Capture "userId" Text
-       :> "dataSources"
-       :> Capture "dataSourceId" Text
-       :> "datasets"
-       :> Capture "datasetId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "modifiedTimeMillis" Int64
-       :> QueryParam "currentTimeMillis" Int64
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "fitness" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "dataSources" :>
+               Capture "dataSourceId" Text :>
+                 "datasets" :>
+                   Capture "datasetId" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "modifiedTimeMillis" Int64 :>
+                               QueryParam "currentTimeMillis" Int64 :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :> Delete '[JSON] ()
 
 type SessionsAPI =
      SessionsList :<|> SessionsDelete :<|> SessionsUpdate
 
 -- | Lists sessions previously created.
 type SessionsList =
-     "fitness" :> "v1" :> "users" :> Capture "userId" Text
-       :> "sessions"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "startTime" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "endTime" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "includeDeleted" Bool
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "fitness" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "sessions" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "startTime" Text :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "endTime" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "includeDeleted" Bool :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON] ListSessionsResponse
 
 -- | Deletes a session specified by the given session ID.
 type SessionsDelete =
-     "fitness" :> "v1" :> "users" :> Capture "userId" Text
-       :> "sessions"
-       :> Capture "sessionId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "currentTimeMillis" Int64
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "fitness" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "sessions" :>
+               Capture "sessionId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "currentTimeMillis" Int64 :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Updates or insert a given session.
 type SessionsUpdate =
-     "fitness" :> "v1" :> "users" :> Capture "userId" Text
-       :> "sessions"
-       :> Capture "sessionId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "currentTimeMillis" Int64
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "fitness" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "sessions" :>
+               Capture "sessionId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "currentTimeMillis" Int64 :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Put '[JSON] Session

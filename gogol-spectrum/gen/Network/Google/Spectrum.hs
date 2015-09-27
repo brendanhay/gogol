@@ -317,77 +317,98 @@ type PawsAPI =
 -- rules. The Google Spectrum Database does not support master\/slave
 -- configurations, so this always yields an UNIMPLEMENTED error.
 type PawsVerifyDevice =
-     "spectrum" :> "v1explorer" :> "paws" :>
-       "verifyDevice"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "spectrum" :>
+       "v1explorer" :>
+         "paws" :>
+           "verifyDevice" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :>
+                           Post '[JSON] PawsVerifyDeviceResponse
 
 -- | Initializes the connection between a white space device and the
 -- database.
 type PawsInit =
-     "spectrum" :> "v1explorer" :> "paws" :> "init" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "spectrum" :>
+       "v1explorer" :>
+         "paws" :>
+           "init" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :>
+                           Post '[JSON] PawsInitResponse
 
 -- | Requests information about the available spectrum for a device at a
 -- location. Requests from a fixed-mode device must include owner
 -- information so the device can be registered with the database.
 type PawsGetSpectrum =
-     "spectrum" :> "v1explorer" :> "paws" :> "getSpectrum"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "spectrum" :>
+       "v1explorer" :>
+         "paws" :>
+           "getSpectrum" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :>
+                           Post '[JSON] PawsGetSpectrumResponse
 
 -- | Notifies the database that the device has selected certain frequency
 -- ranges for transmission. Only to be invoked when required by the
 -- regulator. The Google Spectrum Database does not operate in domains that
 -- require notification, so this always yields an UNIMPLEMENTED error.
 type PawsNotifySpectrumUse =
-     "spectrum" :> "v1explorer" :> "paws" :>
-       "notifySpectrumUse"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "spectrum" :>
+       "v1explorer" :>
+         "paws" :>
+           "notifySpectrumUse" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :>
+                           Post '[JSON] PawsNotifySpectrumUseResponse
 
 -- | The Google Spectrum Database implements registration in the getSpectrum
 -- method. As such this always returns an UNIMPLEMENTED error.
 type PawsRegister =
-     "spectrum" :> "v1explorer" :> "paws" :> "register" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "spectrum" :>
+       "v1explorer" :>
+         "paws" :>
+           "register" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :>
+                           Post '[JSON] PawsRegisterResponse
 
 -- | The Google Spectrum Database does not support batch requests, so this
 -- method always yields an UNIMPLEMENTED error.
 type PawsGetSpectrumBatch =
-     "spectrum" :> "v1explorer" :> "paws" :>
-       "getSpectrumBatch"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "spectrum" :>
+       "v1explorer" :>
+         "paws" :>
+           "getSpectrumBatch" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :>
+                           Post '[JSON] PawsGetSpectrumBatchResponse

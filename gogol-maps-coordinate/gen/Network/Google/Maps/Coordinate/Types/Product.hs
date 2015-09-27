@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -57,6 +58,22 @@ cfKind = lens _cfKind (\ s a -> s{_cfKind = a})
 -- | Custom field value.
 cfValue :: Lens' CustomField (Maybe Text)
 cfValue = lens _cfValue (\ s a -> s{_cfValue = a})
+
+instance FromJSON CustomField where
+        parseJSON
+          = withObject "CustomField"
+              (\ o ->
+                 CustomField <$>
+                   (o .:? "customFieldId") <*>
+                     (o .:? "kind" .!= "coordinate#customField")
+                     <*> (o .:? "value"))
+
+instance ToJSON CustomField where
+        toJSON CustomField{..}
+          = object
+              (catMaybes
+                 [("customFieldId" .=) <$> _cfCustomFieldId,
+                  Just ("kind" .= _cfKind), ("value" .=) <$> _cfValue])
 
 -- | Custom field definition.
 --
@@ -137,6 +154,31 @@ cfdEnumitems
 cfdType :: Lens' CustomFieldDef (Maybe Text)
 cfdType = lens _cfdType (\ s a -> s{_cfdType = a})
 
+instance FromJSON CustomFieldDef where
+        parseJSON
+          = withObject "CustomFieldDef"
+              (\ o ->
+                 CustomFieldDef <$>
+                   (o .:? "enabled") <*>
+                     (o .:? "kind" .!= "coordinate#customFieldDef")
+                     <*> (o .:? "name")
+                     <*> (o .:? "requiredForCheckout")
+                     <*> (o .:? "id")
+                     <*> (o .:? "enumitems" .!= mempty)
+                     <*> (o .:? "type"))
+
+instance ToJSON CustomFieldDef where
+        toJSON CustomFieldDef{..}
+          = object
+              (catMaybes
+                 [("enabled" .=) <$> _cfdEnabled,
+                  Just ("kind" .= _cfdKind), ("name" .=) <$> _cfdName,
+                  ("requiredForCheckout" .=) <$>
+                    _cfdRequiredForCheckout,
+                  ("id" .=) <$> _cfdId,
+                  ("enumitems" .=) <$> _cfdEnumitems,
+                  ("type" .=) <$> _cfdType])
+
 -- | Collection of custom field definitions for a team.
 --
 -- /See:/ 'customFieldDefListResponse' smart constructor.
@@ -173,6 +215,21 @@ cfdlrItems
       _Default
       . _Coerce
 
+instance FromJSON CustomFieldDefListResponse where
+        parseJSON
+          = withObject "CustomFieldDefListResponse"
+              (\ o ->
+                 CustomFieldDefListResponse <$>
+                   (o .:? "kind" .!= "coordinate#customFieldDefList")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON CustomFieldDefListResponse where
+        toJSON CustomFieldDefListResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _cfdlrKind),
+                  ("items" .=) <$> _cfdlrItems])
+
 -- | Collection of custom fields.
 --
 -- /See:/ 'customFields' smart constructor.
@@ -206,6 +263,21 @@ cCustomField
   = lens _cCustomField (\ s a -> s{_cCustomField = a})
       . _Default
       . _Coerce
+
+instance FromJSON CustomFields where
+        parseJSON
+          = withObject "CustomFields"
+              (\ o ->
+                 CustomFields <$>
+                   (o .:? "kind" .!= "coordinate#customFields") <*>
+                     (o .:? "customField" .!= mempty))
+
+instance ToJSON CustomFields where
+        toJSON CustomFields{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _cKind),
+                  ("customField" .=) <$> _cCustomField])
 
 -- | Enum Item definition.
 --
@@ -248,6 +320,23 @@ eidValue = lens _eidValue (\ s a -> s{_eidValue = a})
 eidActive :: Lens' EnumItemDef (Maybe Bool)
 eidActive
   = lens _eidActive (\ s a -> s{_eidActive = a})
+
+instance FromJSON EnumItemDef where
+        parseJSON
+          = withObject "EnumItemDef"
+              (\ o ->
+                 EnumItemDef <$>
+                   (o .:? "kind" .!= "coordinate#enumItemDef") <*>
+                     (o .:? "value")
+                     <*> (o .:? "active"))
+
+instance ToJSON EnumItemDef where
+        toJSON EnumItemDef{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _eidKind),
+                  ("value" .=) <$> _eidValue,
+                  ("active" .=) <$> _eidActive])
 
 -- | A job.
 --
@@ -300,6 +389,25 @@ jobJobChange
 jobId :: Lens' Job (Maybe Word64)
 jobId = lens _jobId (\ s a -> s{_jobId = a})
 
+instance FromJSON Job where
+        parseJSON
+          = withObject "Job"
+              (\ o ->
+                 Job <$>
+                   (o .:? "state") <*>
+                     (o .:? "kind" .!= "coordinate#job")
+                     <*> (o .:? "jobChange" .!= mempty)
+                     <*> (o .:? "id"))
+
+instance ToJSON Job where
+        toJSON Job{..}
+          = object
+              (catMaybes
+                 [("state" .=) <$> _jobState,
+                  Just ("kind" .= _jobKind),
+                  ("jobChange" .=) <$> _jobJobChange,
+                  ("id" .=) <$> _jobId])
+
 -- | Change to a job. For example assigning the job to a different worker.
 --
 -- /See:/ 'jobChange' smart constructor.
@@ -339,6 +447,22 @@ jcKind = lens _jcKind (\ s a -> s{_jcKind = a})
 jcTimestamp :: Lens' JobChange (Maybe Word64)
 jcTimestamp
   = lens _jcTimestamp (\ s a -> s{_jcTimestamp = a})
+
+instance FromJSON JobChange where
+        parseJSON
+          = withObject "JobChange"
+              (\ o ->
+                 JobChange <$>
+                   (o .:? "state") <*>
+                     (o .:? "kind" .!= "coordinate#jobChange")
+                     <*> (o .:? "timestamp"))
+
+instance ToJSON JobChange where
+        toJSON JobChange{..}
+          = object
+              (catMaybes
+                 [("state" .=) <$> _jcState, Just ("kind" .= _jcKind),
+                  ("timestamp" .=) <$> _jcTimestamp])
 
 -- | Response from a List Jobs request.
 --
@@ -383,6 +507,23 @@ jlrItems
   = lens _jlrItems (\ s a -> s{_jlrItems = a}) .
       _Default
       . _Coerce
+
+instance FromJSON JobListResponse where
+        parseJSON
+          = withObject "JobListResponse"
+              (\ o ->
+                 JobListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "coordinate#jobList")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON JobListResponse where
+        toJSON JobListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _jlrNextPageToken,
+                  Just ("kind" .= _jlrKind),
+                  ("items" .=) <$> _jlrItems])
 
 -- | Current state of a job.
 --
@@ -483,6 +624,34 @@ jsCustomFields
 jsTitle :: Lens' JobState (Maybe Text)
 jsTitle = lens _jsTitle (\ s a -> s{_jsTitle = a})
 
+instance FromJSON JobState where
+        parseJSON
+          = withObject "JobState"
+              (\ o ->
+                 JobState <$>
+                   (o .:? "location") <*> (o .:? "progress") <*>
+                     (o .:? "note" .!= mempty)
+                     <*> (o .:? "kind" .!= "coordinate#jobState")
+                     <*> (o .:? "customerPhoneNumber")
+                     <*> (o .:? "customerName")
+                     <*> (o .:? "assignee")
+                     <*> (o .:? "customFields")
+                     <*> (o .:? "title"))
+
+instance ToJSON JobState where
+        toJSON JobState{..}
+          = object
+              (catMaybes
+                 [("location" .=) <$> _jsLocation,
+                  ("progress" .=) <$> _jsProgress,
+                  ("note" .=) <$> _jsNote, Just ("kind" .= _jsKind),
+                  ("customerPhoneNumber" .=) <$>
+                    _jsCustomerPhoneNumber,
+                  ("customerName" .=) <$> _jsCustomerName,
+                  ("assignee" .=) <$> _jsAssignee,
+                  ("customFields" .=) <$> _jsCustomFields,
+                  ("title" .=) <$> _jsTitle])
+
 -- | Location of a job.
 --
 -- /See:/ 'location' smart constructor.
@@ -532,6 +701,24 @@ lLat = lens _lLat (\ s a -> s{_lLat = a})
 -- | Longitude.
 lLng :: Lens' Location (Maybe Double)
 lLng = lens _lLng (\ s a -> s{_lLng = a})
+
+instance FromJSON Location where
+        parseJSON
+          = withObject "Location"
+              (\ o ->
+                 Location <$>
+                   (o .:? "addressLine" .!= mempty) <*>
+                     (o .:? "kind" .!= "coordinate#location")
+                     <*> (o .:? "lat")
+                     <*> (o .:? "lng"))
+
+instance ToJSON Location where
+        toJSON Location{..}
+          = object
+              (catMaybes
+                 [("addressLine" .=) <$> _lAddressLine,
+                  Just ("kind" .= _lKind), ("lat" .=) <$> _lLat,
+                  ("lng" .=) <$> _lLng])
 
 -- | Response from a List Locations request.
 --
@@ -586,6 +773,24 @@ llrItems
   = lens _llrItems (\ s a -> s{_llrItems = a}) .
       _Default
       . _Coerce
+
+instance FromJSON LocationListResponse where
+        parseJSON
+          = withObject "LocationListResponse"
+              (\ o ->
+                 LocationListResponse <$>
+                   (o .:? "tokenPagination") <*> (o .:? "nextPageToken")
+                     <*> (o .:? "kind" .!= "coordinate#locationList")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON LocationListResponse where
+        toJSON LocationListResponse{..}
+          = object
+              (catMaybes
+                 [("tokenPagination" .=) <$> _llrTokenPagination,
+                  ("nextPageToken" .=) <$> _llrNextPageToken,
+                  Just ("kind" .= _llrKind),
+                  ("items" .=) <$> _llrItems])
 
 -- | Recorded location of a worker.
 --
@@ -649,6 +854,27 @@ lrCollectionTime
   = lens _lrCollectionTime
       (\ s a -> s{_lrCollectionTime = a})
 
+instance FromJSON LocationRecord where
+        parseJSON
+          = withObject "LocationRecord"
+              (\ o ->
+                 LocationRecord <$>
+                   (o .:? "kind" .!= "coordinate#locationRecord") <*>
+                     (o .:? "latitude")
+                     <*> (o .:? "confidenceRadius")
+                     <*> (o .:? "longitude")
+                     <*> (o .:? "collectionTime"))
+
+instance ToJSON LocationRecord where
+        toJSON LocationRecord{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _lrKind),
+                  ("latitude" .=) <$> _lrLatitude,
+                  ("confidenceRadius" .=) <$> _lrConfidenceRadius,
+                  ("longitude" .=) <$> _lrLongitude,
+                  ("collectionTime" .=) <$> _lrCollectionTime])
+
 -- | Job schedule.
 --
 -- /See:/ 'schedule' smart constructor.
@@ -707,6 +933,26 @@ sDuration :: Lens' Schedule (Maybe Word64)
 sDuration
   = lens _sDuration (\ s a -> s{_sDuration = a})
 
+instance FromJSON Schedule where
+        parseJSON
+          = withObject "Schedule"
+              (\ o ->
+                 Schedule <$>
+                   (o .:? "allDay") <*> (o .:? "startTime") <*>
+                     (o .:? "kind" .!= "coordinate#schedule")
+                     <*> (o .:? "endTime")
+                     <*> (o .:? "duration"))
+
+instance ToJSON Schedule where
+        toJSON Schedule{..}
+          = object
+              (catMaybes
+                 [("allDay" .=) <$> _sAllDay,
+                  ("startTime" .=) <$> _sStartTime,
+                  Just ("kind" .= _sKind),
+                  ("endTime" .=) <$> _sEndTime,
+                  ("duration" .=) <$> _sDuration])
+
 -- | A Coordinate team.
 --
 -- /See:/ 'team' smart constructor.
@@ -747,6 +993,22 @@ tName = lens _tName (\ s a -> s{_tName = a})
 tId :: Lens' Team (Maybe Text)
 tId = lens _tId (\ s a -> s{_tId = a})
 
+instance FromJSON Team where
+        parseJSON
+          = withObject "Team"
+              (\ o ->
+                 Team <$>
+                   (o .:? "kind" .!= "coordinate#team") <*>
+                     (o .:? "name")
+                     <*> (o .:? "id"))
+
+instance ToJSON Team where
+        toJSON Team{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _tKind), ("name" .=) <$> _tName,
+                  ("id" .=) <$> _tId])
+
 -- | Response from a List Teams request.
 --
 -- /See:/ 'teamListResponse' smart constructor.
@@ -780,6 +1042,21 @@ tlrItems
   = lens _tlrItems (\ s a -> s{_tlrItems = a}) .
       _Default
       . _Coerce
+
+instance FromJSON TeamListResponse where
+        parseJSON
+          = withObject "TeamListResponse"
+              (\ o ->
+                 TeamListResponse <$>
+                   (o .:? "kind" .!= "coordinate#teamList") <*>
+                     (o .:? "items" .!= mempty))
+
+instance ToJSON TeamListResponse where
+        toJSON TeamListResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _tlrKind),
+                  ("items" .=) <$> _tlrItems])
 
 -- | Pagination information.
 --
@@ -824,6 +1101,23 @@ tpPreviousPageToken
   = lens _tpPreviousPageToken
       (\ s a -> s{_tpPreviousPageToken = a})
 
+instance FromJSON TokenPagination where
+        parseJSON
+          = withObject "TokenPagination"
+              (\ o ->
+                 TokenPagination <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "coordinate#tokenPagination")
+                     <*> (o .:? "previousPageToken"))
+
+instance ToJSON TokenPagination where
+        toJSON TokenPagination{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _tpNextPageToken,
+                  Just ("kind" .= _tpKind),
+                  ("previousPageToken" .=) <$> _tpPreviousPageToken])
+
 -- | A worker in a Coordinate team.
 --
 -- /See:/ 'worker' smart constructor.
@@ -855,6 +1149,20 @@ wKind = lens _wKind (\ s a -> s{_wKind = a})
 -- email address will appear as DELETED_USER.
 wId :: Lens' Worker (Maybe Text)
 wId = lens _wId (\ s a -> s{_wId = a})
+
+instance FromJSON Worker where
+        parseJSON
+          = withObject "Worker"
+              (\ o ->
+                 Worker <$>
+                   (o .:? "kind" .!= "coordinate#worker") <*>
+                     (o .:? "id"))
+
+instance ToJSON Worker where
+        toJSON Worker{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _wKind), ("id" .=) <$> _wId])
 
 -- | Response from a List Workers request.
 --
@@ -889,3 +1197,18 @@ wlrItems
   = lens _wlrItems (\ s a -> s{_wlrItems = a}) .
       _Default
       . _Coerce
+
+instance FromJSON WorkerListResponse where
+        parseJSON
+          = withObject "WorkerListResponse"
+              (\ o ->
+                 WorkerListResponse <$>
+                   (o .:? "kind" .!= "coordinate#workerList") <*>
+                     (o .:? "items" .!= mempty))
+
+instance ToJSON WorkerListResponse where
+        toJSON WorkerListResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _wlrKind),
+                  ("items" .=) <$> _wlrItems])

@@ -51,12 +51,15 @@ type MailAPI = MailInsert
 
 -- | Insert Mail into Google\'s Gmail backends
 type MailInsert =
-     "email" :> "v2" :> "users" :> Capture "userKey" Text
-       :> "mail"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "email" :>
+       "v2" :>
+         "users" :>
+           Capture "userKey" Text :>
+             "mail" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] ()

@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -64,6 +65,24 @@ accName = lens _accName (\ s a -> s{_accName = a})
 accId :: Lens' Account (Maybe Text)
 accId = lens _accId (\ s a -> s{_accId = a})
 
+instance FromJSON Account where
+        parseJSON
+          = withObject "Account"
+              (\ o ->
+                 Account <$>
+                   (o .:? "status") <*>
+                     (o .:? "kind" .!= "adsensehost#account")
+                     <*> (o .:? "name")
+                     <*> (o .:? "id"))
+
+instance ToJSON Account where
+        toJSON Account{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _accStatus,
+                  Just ("kind" .= _accKind), ("name" .=) <$> _accName,
+                  ("id" .=) <$> _accId])
+
 --
 -- /See:/ 'accounts' smart constructor.
 data Accounts = Accounts
@@ -103,6 +122,22 @@ aItems :: Lens' Accounts [Maybe Account]
 aItems
   = lens _aItems (\ s a -> s{_aItems = a}) . _Default .
       _Coerce
+
+instance FromJSON Accounts where
+        parseJSON
+          = withObject "Accounts"
+              (\ o ->
+                 Accounts <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!= "adsensehost#accounts")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON Accounts where
+        toJSON Accounts{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _aEtag, Just ("kind" .= _aKind),
+                  ("items" .=) <$> _aItems])
 
 --
 -- /See:/ 'adClient' smart constructor.
@@ -164,6 +199,27 @@ acProductCode
   = lens _acProductCode
       (\ s a -> s{_acProductCode = a})
 
+instance FromJSON AdClient where
+        parseJSON
+          = withObject "AdClient"
+              (\ o ->
+                 AdClient <$>
+                   (o .:? "kind" .!= "adsensehost#adClient") <*>
+                     (o .:? "arcOptIn")
+                     <*> (o .:? "supportsReporting")
+                     <*> (o .:? "id")
+                     <*> (o .:? "productCode"))
+
+instance ToJSON AdClient where
+        toJSON AdClient{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _acKind),
+                  ("arcOptIn" .=) <$> _acArcOptIn,
+                  ("supportsReporting" .=) <$> _acSupportsReporting,
+                  ("id" .=) <$> _acId,
+                  ("productCode" .=) <$> _acProductCode])
+
 --
 -- /See:/ 'adClients' smart constructor.
 data AdClients = AdClients
@@ -216,6 +272,24 @@ acsItems
       _Default
       . _Coerce
 
+instance FromJSON AdClients where
+        parseJSON
+          = withObject "AdClients"
+              (\ o ->
+                 AdClients <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "adsensehost#adClients")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON AdClients where
+        toJSON AdClients{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _acsEtag,
+                  ("nextPageToken" .=) <$> _acsNextPageToken,
+                  Just ("kind" .= _acsKind),
+                  ("items" .=) <$> _acsItems])
+
 --
 -- /See:/ 'adCode' smart constructor.
 data AdCode = AdCode
@@ -245,6 +319,21 @@ adKind = lens _adKind (\ s a -> s{_adKind = a})
 -- | The ad code snippet.
 adAdCode :: Lens' AdCode (Maybe Text)
 adAdCode = lens _adAdCode (\ s a -> s{_adAdCode = a})
+
+instance FromJSON AdCode where
+        parseJSON
+          = withObject "AdCode"
+              (\ o ->
+                 AdCode <$>
+                   (o .:? "kind" .!= "adsensehost#adCode") <*>
+                     (o .:? "adCode"))
+
+instance ToJSON AdCode where
+        toJSON AdCode{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _adKind),
+                  ("adCode" .=) <$> _adAdCode])
 
 --
 -- /See:/ 'adStyle' smart constructor.
@@ -296,6 +385,24 @@ assFont = lens _assFont (\ s a -> s{_assFont = a})
 assColors :: Lens' AdStyle (Maybe AdStyleColors)
 assColors
   = lens _assColors (\ s a -> s{_assColors = a})
+
+instance FromJSON AdStyle where
+        parseJSON
+          = withObject "AdStyle"
+              (\ o ->
+                 AdStyle <$>
+                   (o .:? "corners") <*>
+                     (o .:? "kind" .!= "adsensehost#adStyle")
+                     <*> (o .:? "font")
+                     <*> (o .:? "colors"))
+
+instance ToJSON AdStyle where
+        toJSON AdStyle{..}
+          = object
+              (catMaybes
+                 [("corners" .=) <$> _assCorners,
+                  Just ("kind" .= _assKind), ("font" .=) <$> _assFont,
+                  ("colors" .=) <$> _assColors])
 
 -- | The colors included in the style. These are represented as six
 -- hexadecimal characters, similar to HTML color codes, but without the
@@ -357,6 +464,24 @@ ascBackground
   = lens _ascBackground
       (\ s a -> s{_ascBackground = a})
 
+instance FromJSON AdStyleColors where
+        parseJSON
+          = withObject "AdStyleColors"
+              (\ o ->
+                 AdStyleColors <$>
+                   (o .:? "text") <*> (o .:? "url") <*> (o .:? "border")
+                     <*> (o .:? "title")
+                     <*> (o .:? "background"))
+
+instance ToJSON AdStyleColors where
+        toJSON AdStyleColors{..}
+          = object
+              (catMaybes
+                 [("text" .=) <$> _ascText, ("url" .=) <$> _ascUrl,
+                  ("border" .=) <$> _ascBorder,
+                  ("title" .=) <$> _ascTitle,
+                  ("background" .=) <$> _ascBackground])
+
 -- | The font which is included in the style.
 --
 -- /See:/ 'adStyleFont' smart constructor.
@@ -390,6 +515,19 @@ asfSize = lens _asfSize (\ s a -> s{_asfSize = a})
 asfFamily :: Lens' AdStyleFont (Maybe Text)
 asfFamily
   = lens _asfFamily (\ s a -> s{_asfFamily = a})
+
+instance FromJSON AdStyleFont where
+        parseJSON
+          = withObject "AdStyleFont"
+              (\ o ->
+                 AdStyleFont <$> (o .:? "size") <*> (o .:? "family"))
+
+instance ToJSON AdStyleFont where
+        toJSON AdStyleFont{..}
+          = object
+              (catMaybes
+                 [("size" .=) <$> _asfSize,
+                  ("family" .=) <$> _asfFamily])
 
 --
 -- /See:/ 'adUnit' smart constructor.
@@ -482,6 +620,33 @@ auuCode = lens _auuCode (\ s a -> s{_auuCode = a})
 auuId :: Lens' AdUnit (Maybe Text)
 auuId = lens _auuId (\ s a -> s{_auuId = a})
 
+instance FromJSON AdUnit where
+        parseJSON
+          = withObject "AdUnit"
+              (\ o ->
+                 AdUnit <$>
+                   (o .:? "status") <*>
+                     (o .:? "mobileContentAdsSettings")
+                     <*> (o .:? "kind" .!= "adsensehost#adUnit")
+                     <*> (o .:? "customStyle")
+                     <*> (o .:? "name")
+                     <*> (o .:? "contentAdsSettings")
+                     <*> (o .:? "code")
+                     <*> (o .:? "id"))
+
+instance ToJSON AdUnit where
+        toJSON AdUnit{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _auuStatus,
+                  ("mobileContentAdsSettings" .=) <$>
+                    _auuMobileContentAdsSettings,
+                  Just ("kind" .= _auuKind),
+                  ("customStyle" .=) <$> _auuCustomStyle,
+                  ("name" .=) <$> _auuName,
+                  ("contentAdsSettings" .=) <$> _auuContentAdsSettings,
+                  ("code" .=) <$> _auuCode, ("id" .=) <$> _auuId])
+
 -- | The backup option to be used in instances where no ad is available.
 --
 -- /See:/ 'adUnitBackupOptionContentAdsSettings' smart constructor.
@@ -525,6 +690,23 @@ aubocasUrl
 aubocasType :: Lens' AdUnitBackupOptionContentAdsSettings (Maybe Text)
 aubocasType
   = lens _aubocasType (\ s a -> s{_aubocasType = a})
+
+instance FromJSON
+         AdUnitBackupOptionContentAdsSettings where
+        parseJSON
+          = withObject "AdUnitBackupOptionContentAdsSettings"
+              (\ o ->
+                 AdUnitBackupOptionContentAdsSettings <$>
+                   (o .:? "color") <*> (o .:? "url") <*> (o .:? "type"))
+
+instance ToJSON AdUnitBackupOptionContentAdsSettings
+         where
+        toJSON AdUnitBackupOptionContentAdsSettings{..}
+          = object
+              (catMaybes
+                 [("color" .=) <$> _aubocasColor,
+                  ("url" .=) <$> _aubocasUrl,
+                  ("type" .=) <$> _aubocasType])
 
 -- | Settings specific to content ads (AFC) and highend mobile content ads
 -- (AFMC).
@@ -570,6 +752,22 @@ aucasSize
 aucasType :: Lens' AdUnitContentAdsSettings (Maybe Text)
 aucasType
   = lens _aucasType (\ s a -> s{_aucasType = a})
+
+instance FromJSON AdUnitContentAdsSettings where
+        parseJSON
+          = withObject "AdUnitContentAdsSettings"
+              (\ o ->
+                 AdUnitContentAdsSettings <$>
+                   (o .:? "backupOption") <*> (o .:? "size") <*>
+                     (o .:? "type"))
+
+instance ToJSON AdUnitContentAdsSettings where
+        toJSON AdUnitContentAdsSettings{..}
+          = object
+              (catMaybes
+                 [("backupOption" .=) <$> _aucasBackupOption,
+                  ("size" .=) <$> _aucasSize,
+                  ("type" .=) <$> _aucasType])
 
 -- | Settings specific to WAP mobile content ads (AFMC).
 --
@@ -624,6 +822,26 @@ aumcasType :: Lens' AdUnitMobileContentAdsSettings (Maybe Text)
 aumcasType
   = lens _aumcasType (\ s a -> s{_aumcasType = a})
 
+instance FromJSON AdUnitMobileContentAdsSettings
+         where
+        parseJSON
+          = withObject "AdUnitMobileContentAdsSettings"
+              (\ o ->
+                 AdUnitMobileContentAdsSettings <$>
+                   (o .:? "size") <*> (o .:? "scriptingLanguage") <*>
+                     (o .:? "markupLanguage")
+                     <*> (o .:? "type"))
+
+instance ToJSON AdUnitMobileContentAdsSettings where
+        toJSON AdUnitMobileContentAdsSettings{..}
+          = object
+              (catMaybes
+                 [("size" .=) <$> _aumcasSize,
+                  ("scriptingLanguage" .=) <$>
+                    _aumcasScriptingLanguage,
+                  ("markupLanguage" .=) <$> _aumcasMarkupLanguage,
+                  ("type" .=) <$> _aumcasType])
+
 --
 -- /See:/ 'adUnits' smart constructor.
 data AdUnits = AdUnits
@@ -674,6 +892,23 @@ auItems :: Lens' AdUnits [Maybe AdUnit]
 auItems
   = lens _auItems (\ s a -> s{_auItems = a}) . _Default
       . _Coerce
+
+instance FromJSON AdUnits where
+        parseJSON
+          = withObject "AdUnits"
+              (\ o ->
+                 AdUnits <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "adsensehost#adUnits")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON AdUnits where
+        toJSON AdUnits{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _auEtag,
+                  ("nextPageToken" .=) <$> _auNextPageToken,
+                  Just ("kind" .= _auKind), ("items" .=) <$> _auItems])
 
 --
 -- /See:/ 'associationSession' smart constructor.
@@ -776,6 +1011,35 @@ asRedirectUrl
   = lens _asRedirectUrl
       (\ s a -> s{_asRedirectUrl = a})
 
+instance FromJSON AssociationSession where
+        parseJSON
+          = withObject "AssociationSession"
+              (\ o ->
+                 AssociationSession <$>
+                   (o .:? "status") <*>
+                     (o .:? "kind" .!= "adsensehost#associationSession")
+                     <*> (o .:? "websiteLocale")
+                     <*> (o .:? "userLocale")
+                     <*> (o .:? "accountId")
+                     <*> (o .:? "productCodes" .!= mempty)
+                     <*> (o .:? "id")
+                     <*> (o .:? "websiteUrl")
+                     <*> (o .:? "redirectUrl"))
+
+instance ToJSON AssociationSession where
+        toJSON AssociationSession{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _asStatus,
+                  Just ("kind" .= _asKind),
+                  ("websiteLocale" .=) <$> _asWebsiteLocale,
+                  ("userLocale" .=) <$> _asUserLocale,
+                  ("accountId" .=) <$> _asAccountId,
+                  ("productCodes" .=) <$> _asProductCodes,
+                  ("id" .=) <$> _asId,
+                  ("websiteUrl" .=) <$> _asWebsiteUrl,
+                  ("redirectUrl" .=) <$> _asRedirectUrl])
+
 --
 -- /See:/ 'customChannel' smart constructor.
 data CustomChannel = CustomChannel
@@ -823,6 +1087,23 @@ ccCode = lens _ccCode (\ s a -> s{_ccCode = a})
 -- format.
 ccId :: Lens' CustomChannel (Maybe Text)
 ccId = lens _ccId (\ s a -> s{_ccId = a})
+
+instance FromJSON CustomChannel where
+        parseJSON
+          = withObject "CustomChannel"
+              (\ o ->
+                 CustomChannel <$>
+                   (o .:? "kind" .!= "adsensehost#customChannel") <*>
+                     (o .:? "name")
+                     <*> (o .:? "code")
+                     <*> (o .:? "id"))
+
+instance ToJSON CustomChannel where
+        toJSON CustomChannel{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _ccKind), ("name" .=) <$> _ccName,
+                  ("code" .=) <$> _ccCode, ("id" .=) <$> _ccId])
 
 --
 -- /See:/ 'customChannels' smart constructor.
@@ -875,6 +1156,23 @@ cItems :: Lens' CustomChannels [Maybe CustomChannel]
 cItems
   = lens _cItems (\ s a -> s{_cItems = a}) . _Default .
       _Coerce
+
+instance FromJSON CustomChannels where
+        parseJSON
+          = withObject "CustomChannels"
+              (\ o ->
+                 CustomChannels <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "adsensehost#customChannels")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON CustomChannels where
+        toJSON CustomChannels{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _cEtag,
+                  ("nextPageToken" .=) <$> _cNextPageToken,
+                  Just ("kind" .= _cKind), ("items" .=) <$> _cItems])
 
 --
 -- /See:/ 'report' smart constructor.
@@ -970,6 +1268,30 @@ rTotalMatchedRows
   = lens _rTotalMatchedRows
       (\ s a -> s{_rTotalMatchedRows = a})
 
+instance FromJSON Report where
+        parseJSON
+          = withObject "Report"
+              (\ o ->
+                 Report <$>
+                   (o .:? "kind" .!= "adsensehost#report") <*>
+                     (o .:? "averages" .!= mempty)
+                     <*> (o .:? "warnings" .!= mempty)
+                     <*> (o .:? "rows" .!= mempty)
+                     <*> (o .:? "totals" .!= mempty)
+                     <*> (o .:? "headers" .!= mempty)
+                     <*> (o .:? "totalMatchedRows"))
+
+instance ToJSON Report where
+        toJSON Report{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _rKind),
+                  ("averages" .=) <$> _rAverages,
+                  ("warnings" .=) <$> _rWarnings,
+                  ("rows" .=) <$> _rRows, ("totals" .=) <$> _rTotals,
+                  ("headers" .=) <$> _rHeaders,
+                  ("totalMatchedRows" .=) <$> _rTotalMatchedRows])
+
 --
 -- /See:/ 'reportItemHeaders' smart constructor.
 data ReportItemHeaders = ReportItemHeaders
@@ -1010,6 +1332,22 @@ rihCurrency
 -- METRIC_CURRENCY.
 rihType :: Lens' ReportItemHeaders (Maybe Text)
 rihType = lens _rihType (\ s a -> s{_rihType = a})
+
+instance FromJSON ReportItemHeaders where
+        parseJSON
+          = withObject "ReportItemHeaders"
+              (\ o ->
+                 ReportItemHeaders <$>
+                   (o .:? "name") <*> (o .:? "currency") <*>
+                     (o .:? "type"))
+
+instance ToJSON ReportItemHeaders where
+        toJSON ReportItemHeaders{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _rihName,
+                  ("currency" .=) <$> _rihCurrency,
+                  ("type" .=) <$> _rihType])
 
 --
 -- /See:/ 'urlChannel' smart constructor.
@@ -1052,6 +1390,22 @@ ucId = lens _ucId (\ s a -> s{_ucId = a})
 ucUrlPattern :: Lens' UrlChannel (Maybe Text)
 ucUrlPattern
   = lens _ucUrlPattern (\ s a -> s{_ucUrlPattern = a})
+
+instance FromJSON UrlChannel where
+        parseJSON
+          = withObject "UrlChannel"
+              (\ o ->
+                 UrlChannel <$>
+                   (o .:? "kind" .!= "adsensehost#urlChannel") <*>
+                     (o .:? "id")
+                     <*> (o .:? "urlPattern"))
+
+instance ToJSON UrlChannel where
+        toJSON UrlChannel{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _ucKind), ("id" .=) <$> _ucId,
+                  ("urlPattern" .=) <$> _ucUrlPattern])
 
 --
 -- /See:/ 'urlChannels' smart constructor.
@@ -1105,3 +1459,21 @@ urlcItems
   = lens _urlcItems (\ s a -> s{_urlcItems = a}) .
       _Default
       . _Coerce
+
+instance FromJSON UrlChannels where
+        parseJSON
+          = withObject "UrlChannels"
+              (\ o ->
+                 UrlChannels <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "adsensehost#urlChannels")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON UrlChannels where
+        toJSON UrlChannels{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _urlcEtag,
+                  ("nextPageToken" .=) <$> _urlcNextPageToken,
+                  Just ("kind" .= _urlcKind),
+                  ("items" .=) <$> _urlcItems])

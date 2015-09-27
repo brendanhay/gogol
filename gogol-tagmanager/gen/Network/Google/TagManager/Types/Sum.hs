@@ -49,6 +49,12 @@ instance ToText AccountAccessItemPermission where
         AAIPPublish -> "publish"
         AAIPRead -> "read"
 
+instance FromJSON AccountAccessItemPermission where
+    parseJSON = parseJSONText "AccountAccessItemPermission"
+
+instance ToJSON AccountAccessItemPermission where
+    toJSON = toJSONText
+
 -- | The type of operator for this condition.
 data ConditionType
     = CTContains
@@ -106,6 +112,12 @@ instance ToText ConditionType where
         CTStartsWith -> "startsWith"
         CTURLMatches -> "urlMatches"
 
+instance FromJSON ConditionType where
+    parseJSON = parseJSONText "ConditionType"
+
+instance ToJSON ConditionType where
+    toJSON = toJSONText
+
 data ContainerAccessItemPermission
     = CAIPDelete
       -- ^ @delete@
@@ -137,6 +149,12 @@ instance ToText ContainerAccessItemPermission where
         CAIPManage -> "manage"
         CAIPPublish -> "publish"
         CAIPRead -> "read"
+
+instance FromJSON ContainerAccessItemPermission where
+    parseJSON = parseJSONText "ContainerAccessItemPermission"
+
+instance ToJSON ContainerAccessItemPermission where
+    toJSON = toJSONText
 
 data ContainerItemEnabledBuiltInVariable
     = CIEBIVAdvertiserId
@@ -318,6 +336,12 @@ instance ToText ContainerItemEnabledBuiltInVariable where
         CIEBIVResolution -> "resolution"
         CIEBIVSdkVersion -> "sdkVersion"
 
+instance FromJSON ContainerItemEnabledBuiltInVariable where
+    parseJSON = parseJSONText "ContainerItemEnabledBuiltInVariable"
+
+instance ToJSON ContainerItemEnabledBuiltInVariable where
+    toJSON = toJSONText
+
 data ContainerItemUsageContext
     = CIUCAndroid
       -- ^ @android@
@@ -341,6 +365,12 @@ instance ToText ContainerItemUsageContext where
         CIUCAndroid -> "android"
         CIUCIos -> "ios"
         CIUCWeb -> "web"
+
+instance FromJSON ContainerItemUsageContext where
+    parseJSON = parseJSONText "ContainerItemUsageContext"
+
+instance ToJSON ContainerItemUsageContext where
+    toJSON = toJSONText
 
 -- | The parameter type. Valid values are: - boolean: The value represents a
 -- boolean, represented as \'true\' or \'false\' - integer: The value
@@ -381,6 +411,12 @@ instance ToText ParameterType where
         PTMap -> "map"
         PTTemplate -> "template"
 
+instance FromJSON ParameterType where
+    parseJSON = parseJSONText "ParameterType"
+
+instance ToJSON ParameterType where
+    toJSON = toJSONText
+
 -- | Option to fire this tag.
 data TagTagFiringOption
     = TTFOOncePerEvent
@@ -405,6 +441,12 @@ instance ToText TagTagFiringOption where
         TTFOOncePerEvent -> "oncePerEvent"
         TTFOOncePerLoad -> "oncePerLoad"
         TTFOUnlimited -> "unlimited"
+
+instance FromJSON TagTagFiringOption where
+    parseJSON = parseJSONText "TagTagFiringOption"
+
+instance ToJSON TagTagFiringOption where
+    toJSON = toJSONText
 
 -- | Defines the data layer event that causes this trigger.
 data TriggerType
@@ -470,3 +512,9 @@ instance ToText TriggerType where
         TTTimer -> "timer"
         TTWindowLoaded -> "windowLoaded"
         TTYouTube -> "youTube"
+
+instance FromJSON TriggerType where
+    parseJSON = parseJSONText "TriggerType"
+
+instance ToJSON TriggerType where
+    toJSON = toJSONText

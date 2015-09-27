@@ -198,29 +198,33 @@ type AvailsAPI = AvailsList
 -- Authorization rules_ and _List methods rules_ for more information about
 -- this method.
 type AvailsList =
-     "v1" :> "accounts" :> Capture "accountId" Text :>
-       "avails"
-       :> QueryParam "altId" Text
-       :> QueryParam "pphNames" Text
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "studioNames" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "videoIds" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "territories" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "title" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "pageSize" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1" :>
+       "accounts" :>
+         Capture "accountId" Text :>
+           "avails" :>
+             QueryParam "altId" Text :>
+               QueryParam "pphNames" Text :>
+                 QueryParam "$.xgafv" Text :>
+                   QueryParam "studioNames" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "videoIds" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "upload_protocol" Text :>
+                             QueryParam "pp" Bool :>
+                               QueryParam "access_token" Text :>
+                                 QueryParam "uploadType" Text :>
+                                   QueryParam "territories" Text :>
+                                     QueryParam "bearer_token" Text :>
+                                       QueryParam "key" Text :>
+                                         QueryParam "pageToken" Text :>
+                                           QueryParam "title" Text :>
+                                             QueryParam "oauth_token" Text :>
+                                               QueryParam "pageSize" Int32 :>
+                                                 QueryParam "fields" Text :>
+                                                   QueryParam "callback" Text :>
+                                                     QueryParam "alt" Text :>
+                                                       Get '[JSON]
+                                                         ListAvailsResponse
 
 type StoreInfosAPI = CountryAPI
 
@@ -230,24 +234,27 @@ type CountryAPI = CountryGet
 -- Authorization rules_ and _Get methods rules_ for more information about
 -- this method.
 type CountryGet =
-     "v1" :> "accounts" :> Capture "accountId" Text :>
-       "storeInfos"
-       :> Capture "videoId" Text
-       :> "country"
-       :> Capture "country" Text
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1" :>
+       "accounts" :>
+         Capture "accountId" Text :>
+           "storeInfos" :>
+             Capture "videoId" Text :>
+               "country" :>
+                 Capture "country" Text :>
+                   QueryParam "$.xgafv" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "upload_protocol" Text :>
+                           QueryParam "pp" Bool :>
+                             QueryParam "access_token" Text :>
+                               QueryParam "uploadType" Text :>
+                                 QueryParam "bearer_token" Text :>
+                                   QueryParam "key" Text :>
+                                     QueryParam "oauth_token" Text :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "callback" Text :>
+                                           QueryParam "alt" Text :>
+                                             Get '[JSON] StoreInfo
 
 type OrdersAPI = OrdersList :<|> OrdersGet
 
@@ -255,48 +262,55 @@ type OrdersAPI = OrdersList :<|> OrdersGet
 -- Authorization rules_ and _List methods rules_ for more information about
 -- this method.
 type OrdersList =
-     "v1" :> "accounts" :> Capture "accountId" Text :>
-       "orders"
-       :> QueryParam "status" Text
-       :> QueryParam "pphNames" Text
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "studioNames" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "customId" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "name" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "pageSize" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1" :>
+       "accounts" :>
+         Capture "accountId" Text :>
+           "orders" :>
+             QueryParam "status" Text :>
+               QueryParam "pphNames" Text :>
+                 QueryParam "$.xgafv" Text :>
+                   QueryParam "studioNames" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "upload_protocol" Text :>
+                           QueryParam "pp" Bool :>
+                             QueryParam "access_token" Text :>
+                               QueryParam "uploadType" Text :>
+                                 QueryParam "customId" Text :>
+                                   QueryParam "bearer_token" Text :>
+                                     QueryParam "key" Text :>
+                                       QueryParam "name" Text :>
+                                         QueryParam "pageToken" Text :>
+                                           QueryParam "oauth_token" Text :>
+                                             QueryParam "pageSize" Int32 :>
+                                               QueryParam "fields" Text :>
+                                                 QueryParam "callback" Text :>
+                                                   QueryParam "alt" Text :>
+                                                     Get '[JSON]
+                                                       ListOrdersResponse
 
 -- | Get an Order given its id. See _Authentication and Authorization rules_
 -- and _Get methods rules_ for more information about this method.
 type OrdersGet =
-     "v1" :> "accounts" :> Capture "accountId" Text :>
-       "orders"
-       :> Capture "orderId" Text
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1" :>
+       "accounts" :>
+         Capture "accountId" Text :>
+           "orders" :>
+             Capture "orderId" Text :>
+               QueryParam "$.xgafv" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "bearer_token" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" Text :>
+                                         Get '[JSON] Order
 
 type ExperienceLocalesAPI =
      ExperienceLocalesList :<|> ExperienceLocalesGet
@@ -305,48 +319,56 @@ type ExperienceLocalesAPI =
 -- _Authentication and Authorization rules_ and _List methods rules_ for
 -- more information about this method.
 type ExperienceLocalesList =
-     "v1" :> "accounts" :> Capture "accountId" Text :>
-       "experienceLocales"
-       :> QueryParam "titleLevelEidr" Text
-       :> QueryParam "status" Text
-       :> QueryParam "pphNames" Text
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "studioNames" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "altCutId" Text
-       :> QueryParam "customId" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "editLevelEidr" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "pageSize" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1" :>
+       "accounts" :>
+         Capture "accountId" Text :>
+           "experienceLocales" :>
+             QueryParam "titleLevelEidr" Text :>
+               QueryParam "status" Text :>
+                 QueryParam "pphNames" Text :>
+                   QueryParam "$.xgafv" Text :>
+                     QueryParam "studioNames" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "upload_protocol" Text :>
+                             QueryParam "pp" Bool :>
+                               QueryParam "access_token" Text :>
+                                 QueryParam "uploadType" Text :>
+                                   QueryParam "altCutId" Text :>
+                                     QueryParam "customId" Text :>
+                                       QueryParam "bearer_token" Text :>
+                                         QueryParam "key" Text :>
+                                           QueryParam "editLevelEidr" Text :>
+                                             QueryParam "pageToken" Text :>
+                                               QueryParam "oauth_token" Text :>
+                                                 QueryParam "pageSize" Int32 :>
+                                                   QueryParam "fields" Text :>
+                                                     QueryParam "callback" Text
+                                                       :>
+                                                       QueryParam "alt" Text :>
+                                                         Get '[JSON]
+                                                           ListExperienceLocalesResponse
 
 -- | Get an ExperienceLocale given its id. See _Authentication and
 -- Authorization rules_ and _Get methods rules_ for more information about
 -- this method.
 type ExperienceLocalesGet =
-     "v1" :> "accounts" :> Capture "accountId" Text :>
-       "experienceLocales"
-       :> Capture "elId" Text
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1" :>
+       "accounts" :>
+         Capture "accountId" Text :>
+           "experienceLocales" :>
+             Capture "elId" Text :>
+               QueryParam "$.xgafv" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "bearer_token" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" Text :>
+                                         Get '[JSON] ExperienceLocale

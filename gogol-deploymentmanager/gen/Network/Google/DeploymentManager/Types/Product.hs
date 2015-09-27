@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -160,6 +161,37 @@ dUpdate = lens _dUpdate (\ s a -> s{_dUpdate = a})
 dTarget :: Lens' Deployment (Maybe (Maybe TargetConfiguration))
 dTarget = lens _dTarget (\ s a -> s{_dTarget = a})
 
+instance FromJSON Deployment where
+        parseJSON
+          = withObject "Deployment"
+              (\ o ->
+                 Deployment <$>
+                   (o .:? "state") <*> (o .:? "insertTime") <*>
+                     (o .:? "fingerprint")
+                     <*> (o .:? "intent")
+                     <*> (o .:? "updateTime")
+                     <*> (o .:? "name")
+                     <*> (o .:? "manifest")
+                     <*> (o .:? "id")
+                     <*> (o .:? "description")
+                     <*> (o .:? "update")
+                     <*> (o .:? "target"))
+
+instance ToJSON Deployment where
+        toJSON Deployment{..}
+          = object
+              (catMaybes
+                 [("state" .=) <$> _dState,
+                  ("insertTime" .=) <$> _dInsertTime,
+                  ("fingerprint" .=) <$> _dFingerprint,
+                  ("intent" .=) <$> _dIntent,
+                  ("updateTime" .=) <$> _dUpdateTime,
+                  ("name" .=) <$> _dName,
+                  ("manifest" .=) <$> _dManifest, ("id" .=) <$> _dId,
+                  ("description" .=) <$> _dDescription,
+                  ("update" .=) <$> _dUpdate,
+                  ("target" .=) <$> _dTarget])
+
 -- |
 --
 -- /See:/ 'deploymentUpdate' smart constructor.
@@ -196,6 +228,20 @@ duErrors
   = lens _duErrors (\ s a -> s{_duErrors = a}) .
       _Default
       . _Coerce
+
+instance FromJSON DeploymentUpdate where
+        parseJSON
+          = withObject "DeploymentUpdate"
+              (\ o ->
+                 DeploymentUpdate <$>
+                   (o .:? "manifest") <*> (o .:? "errors" .!= mempty))
+
+instance ToJSON DeploymentUpdate where
+        toJSON DeploymentUpdate{..}
+          = object
+              (catMaybes
+                 [("manifest" .=) <$> _duManifest,
+                  ("errors" .=) <$> _duErrors])
 
 -- | A response containing a partial list of deployments and a page token
 -- used to build the next request if the request has been truncated.
@@ -235,6 +281,21 @@ dlrDeployments
       . _Default
       . _Coerce
 
+instance FromJSON DeploymentsListResponse where
+        parseJSON
+          = withObject "DeploymentsListResponse"
+              (\ o ->
+                 DeploymentsListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "deployments" .!= mempty))
+
+instance ToJSON DeploymentsListResponse where
+        toJSON DeploymentsListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _dlrNextPageToken,
+                  ("deployments" .=) <$> _dlrDeployments])
+
 -- |
 --
 -- /See:/ 'importFile' smart constructor.
@@ -266,6 +327,19 @@ ifContent
 -- | The name of the file.
 ifName :: Lens' ImportFile (Maybe Text)
 ifName = lens _ifName (\ s a -> s{_ifName = a})
+
+instance FromJSON ImportFile where
+        parseJSON
+          = withObject "ImportFile"
+              (\ o ->
+                 ImportFile <$> (o .:? "content") <*> (o .:? "name"))
+
+instance ToJSON ImportFile where
+        toJSON ImportFile{..}
+          = object
+              (catMaybes
+                 [("content" .=) <$> _ifContent,
+                  ("name" .=) <$> _ifName])
 
 -- |
 --
@@ -355,6 +429,32 @@ mEvaluatedConfig
 mId :: Lens' Manifest (Maybe Word64)
 mId = lens _mId (\ s a -> s{_mId = a})
 
+instance FromJSON Manifest where
+        parseJSON
+          = withObject "Manifest"
+              (\ o ->
+                 Manifest <$>
+                   (o .:? "insertTime") <*> (o .:? "layout") <*>
+                     (o .:? "config")
+                     <*> (o .:? "imports" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "evaluatedConfig")
+                     <*> (o .:? "id"))
+
+instance ToJSON Manifest where
+        toJSON Manifest{..}
+          = object
+              (catMaybes
+                 [("insertTime" .=) <$> _mInsertTime,
+                  ("layout" .=) <$> _mLayout,
+                  ("config" .=) <$> _mConfig,
+                  ("imports" .=) <$> _mImports,
+                  ("selfLink" .=) <$> _mSelfLink,
+                  ("name" .=) <$> _mName,
+                  ("evaluatedConfig" .=) <$> _mEvaluatedConfig,
+                  ("id" .=) <$> _mId])
+
 -- | A response containing a partial list of manifests and a page token used
 -- to build the next request if the request has been truncated.
 --
@@ -391,6 +491,21 @@ mlrManifests
   = lens _mlrManifests (\ s a -> s{_mlrManifests = a})
       . _Default
       . _Coerce
+
+instance FromJSON ManifestsListResponse where
+        parseJSON
+          = withObject "ManifestsListResponse"
+              (\ o ->
+                 ManifestsListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "manifests" .!= mempty))
+
+instance ToJSON ManifestsListResponse where
+        toJSON ManifestsListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _mlrNextPageToken,
+                  ("manifests" .=) <$> _mlrManifests])
 
 -- | An Operation resource, used to manage asynchronous API requests.
 --
@@ -623,6 +738,58 @@ oClientOperationId
   = lens _oClientOperationId
       (\ s a -> s{_oClientOperationId = a})
 
+instance FromJSON Operation where
+        parseJSON
+          = withObject "Operation"
+              (\ o ->
+                 Operation <$>
+                   (o .:? "targetId") <*> (o .:? "status") <*>
+                     (o .:? "insertTime")
+                     <*> (o .:? "progress")
+                     <*> (o .:? "startTime")
+                     <*> (o .:? "kind" .!= "deploymentmanager#operation")
+                     <*> (o .:? "error")
+                     <*> (o .:? "httpErrorMessage")
+                     <*> (o .:? "zone")
+                     <*> (o .:? "warnings" .!= mempty)
+                     <*> (o .:? "httpErrorStatusCode")
+                     <*> (o .:? "user")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "statusMessage")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "endTime")
+                     <*> (o .:? "id")
+                     <*> (o .:? "operationType")
+                     <*> (o .:? "region")
+                     <*> (o .:? "targetLink")
+                     <*> (o .:? "clientOperationId"))
+
+instance ToJSON Operation where
+        toJSON Operation{..}
+          = object
+              (catMaybes
+                 [("targetId" .=) <$> _oTargetId,
+                  ("status" .=) <$> _oStatus,
+                  ("insertTime" .=) <$> _oInsertTime,
+                  ("progress" .=) <$> _oProgress,
+                  ("startTime" .=) <$> _oStartTime,
+                  Just ("kind" .= _oKind), ("error" .=) <$> _oError,
+                  ("httpErrorMessage" .=) <$> _oHttpErrorMessage,
+                  ("zone" .=) <$> _oZone,
+                  ("warnings" .=) <$> _oWarnings,
+                  ("httpErrorStatusCode" .=) <$> _oHttpErrorStatusCode,
+                  ("user" .=) <$> _oUser,
+                  ("selfLink" .=) <$> _oSelfLink,
+                  ("name" .=) <$> _oName,
+                  ("statusMessage" .=) <$> _oStatusMessage,
+                  ("creationTimestamp" .=) <$> _oCreationTimestamp,
+                  ("endTime" .=) <$> _oEndTime, ("id" .=) <$> _oId,
+                  ("operationType" .=) <$> _oOperationType,
+                  ("region" .=) <$> _oRegion,
+                  ("targetLink" .=) <$> _oTargetLink,
+                  ("clientOperationId" .=) <$> _oClientOperationId])
+
 -- | [Output Only] If errors are generated during processing of the
 -- operation, this field will be populated.
 --
@@ -650,6 +817,16 @@ oeErrors
   = lens _oeErrors (\ s a -> s{_oeErrors = a}) .
       _Default
       . _Coerce
+
+instance FromJSON OperationError where
+        parseJSON
+          = withObject "OperationError"
+              (\ o ->
+                 OperationError <$> (o .:? "errors" .!= mempty))
+
+instance ToJSON OperationError where
+        toJSON OperationError{..}
+          = object (catMaybes [("errors" .=) <$> _oeErrors])
 
 --
 -- /See:/ 'operationItemDataItemWarnings' smart constructor.
@@ -681,6 +858,20 @@ oidiwValue
 -- | [Output Only] A key for the warning data.
 oidiwKey :: Lens' OperationItemDataItemWarnings (Maybe Text)
 oidiwKey = lens _oidiwKey (\ s a -> s{_oidiwKey = a})
+
+instance FromJSON OperationItemDataItemWarnings where
+        parseJSON
+          = withObject "OperationItemDataItemWarnings"
+              (\ o ->
+                 OperationItemDataItemWarnings <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON OperationItemDataItemWarnings where
+        toJSON OperationItemDataItemWarnings{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _oidiwValue,
+                  ("key" .=) <$> _oidiwKey])
 
 --
 -- /See:/ 'operationItemErrorsError' smart constructor.
@@ -723,6 +914,22 @@ oieeMessage :: Lens' OperationItemErrorsError (Maybe Text)
 oieeMessage
   = lens _oieeMessage (\ s a -> s{_oieeMessage = a})
 
+instance FromJSON OperationItemErrorsError where
+        parseJSON
+          = withObject "OperationItemErrorsError"
+              (\ o ->
+                 OperationItemErrorsError <$>
+                   (o .:? "location") <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON OperationItemErrorsError where
+        toJSON OperationItemErrorsError{..}
+          = object
+              (catMaybes
+                 [("location" .=) <$> _oieeLocation,
+                  ("code" .=) <$> _oieeCode,
+                  ("message" .=) <$> _oieeMessage])
+
 --
 -- /See:/ 'operationItemWarnings' smart constructor.
 data OperationItemWarnings = OperationItemWarnings
@@ -764,6 +971,21 @@ oiwMessage :: Lens' OperationItemWarnings (Maybe Text)
 oiwMessage
   = lens _oiwMessage (\ s a -> s{_oiwMessage = a})
 
+instance FromJSON OperationItemWarnings where
+        parseJSON
+          = withObject "OperationItemWarnings"
+              (\ o ->
+                 OperationItemWarnings <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON OperationItemWarnings where
+        toJSON OperationItemWarnings{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _oiwData, ("code" .=) <$> _oiwCode,
+                  ("message" .=) <$> _oiwMessage])
+
 -- | A response containing a partial list of operations and a page token used
 -- to build the next request if the request has been truncated.
 --
@@ -801,6 +1023,21 @@ olrOperations
       (\ s a -> s{_olrOperations = a})
       . _Default
       . _Coerce
+
+instance FromJSON OperationsListResponse where
+        parseJSON
+          = withObject "OperationsListResponse"
+              (\ o ->
+                 OperationsListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "operations" .!= mempty))
+
+instance ToJSON OperationsListResponse where
+        toJSON OperationsListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _olrNextPageToken,
+                  ("operations" .=) <$> _olrOperations])
 
 -- |
 --
@@ -910,6 +1147,35 @@ rProperties :: Lens' Resource (Maybe Text)
 rProperties
   = lens _rProperties (\ s a -> s{_rProperties = a})
 
+instance FromJSON Resource where
+        parseJSON
+          = withObject "Resource"
+              (\ o ->
+                 Resource <$>
+                   (o .:? "insertTime") <*> (o .:? "url") <*>
+                     (o .:? "updateTime")
+                     <*> (o .:? "name")
+                     <*> (o .:? "manifest")
+                     <*> (o .:? "finalProperties")
+                     <*> (o .:? "id")
+                     <*> (o .:? "type")
+                     <*> (o .:? "update")
+                     <*> (o .:? "properties"))
+
+instance ToJSON Resource where
+        toJSON Resource{..}
+          = object
+              (catMaybes
+                 [("insertTime" .=) <$> _rInsertTime,
+                  ("url" .=) <$> _rUrl,
+                  ("updateTime" .=) <$> _rUpdateTime,
+                  ("name" .=) <$> _rName,
+                  ("manifest" .=) <$> _rManifest,
+                  ("finalProperties" .=) <$> _rFinalProperties,
+                  ("id" .=) <$> _rId, ("type" .=) <$> _rType,
+                  ("update" .=) <$> _rUpdate,
+                  ("properties" .=) <$> _rProperties])
+
 -- |
 --
 -- /See:/ 'resourceUpdate' smart constructor.
@@ -984,6 +1250,28 @@ ruProperties :: Lens' ResourceUpdate (Maybe Text)
 ruProperties
   = lens _ruProperties (\ s a -> s{_ruProperties = a})
 
+instance FromJSON ResourceUpdate where
+        parseJSON
+          = withObject "ResourceUpdate"
+              (\ o ->
+                 ResourceUpdate <$>
+                   (o .:? "state") <*> (o .:? "intent") <*>
+                     (o .:? "manifest")
+                     <*> (o .:? "finalProperties")
+                     <*> (o .:? "errors" .!= mempty)
+                     <*> (o .:? "properties"))
+
+instance ToJSON ResourceUpdate where
+        toJSON ResourceUpdate{..}
+          = object
+              (catMaybes
+                 [("state" .=) <$> _ruState,
+                  ("intent" .=) <$> _ruIntent,
+                  ("manifest" .=) <$> _ruManifest,
+                  ("finalProperties" .=) <$> _ruFinalProperties,
+                  ("errors" .=) <$> _ruErrors,
+                  ("properties" .=) <$> _ruProperties])
+
 -- | A response containing a partial list of resources and a page token used
 -- to build the next request if the request has been truncated.
 --
@@ -1021,6 +1309,21 @@ rlrResources
       . _Default
       . _Coerce
 
+instance FromJSON ResourcesListResponse where
+        parseJSON
+          = withObject "ResourcesListResponse"
+              (\ o ->
+                 ResourcesListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "resources" .!= mempty))
+
+instance ToJSON ResourcesListResponse where
+        toJSON ResourcesListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _rlrNextPageToken,
+                  ("resources" .=) <$> _rlrResources])
+
 -- |
 --
 -- /See:/ 'targetConfiguration' smart constructor.
@@ -1056,6 +1359,20 @@ tcImports
   = lens _tcImports (\ s a -> s{_tcImports = a}) .
       _Default
       . _Coerce
+
+instance FromJSON TargetConfiguration where
+        parseJSON
+          = withObject "TargetConfiguration"
+              (\ o ->
+                 TargetConfiguration <$>
+                   (o .:? "config") <*> (o .:? "imports" .!= mempty))
+
+instance ToJSON TargetConfiguration where
+        toJSON TargetConfiguration{..}
+          = object
+              (catMaybes
+                 [("config" .=) <$> _tcConfig,
+                  ("imports" .=) <$> _tcImports])
 
 -- | A resource type supported by Deployment Manager.
 --
@@ -1107,6 +1424,23 @@ tName = lens _tName (\ s a -> s{_tName = a})
 tId :: Lens' Type (Maybe Word64)
 tId = lens _tId (\ s a -> s{_tId = a})
 
+instance FromJSON Type where
+        parseJSON
+          = withObject "Type"
+              (\ o ->
+                 Type <$>
+                   (o .:? "insertTime") <*> (o .:? "selfLink") <*>
+                     (o .:? "name")
+                     <*> (o .:? "id"))
+
+instance ToJSON Type where
+        toJSON Type{..}
+          = object
+              (catMaybes
+                 [("insertTime" .=) <$> _tInsertTime,
+                  ("selfLink" .=) <$> _tSelfLink,
+                  ("name" .=) <$> _tName, ("id" .=) <$> _tId])
+
 -- | A response that returns all Types supported by Deployment Manager
 --
 -- /See:/ 'typesListResponse' smart constructor.
@@ -1142,3 +1476,18 @@ tlrTypes
   = lens _tlrTypes (\ s a -> s{_tlrTypes = a}) .
       _Default
       . _Coerce
+
+instance FromJSON TypesListResponse where
+        parseJSON
+          = withObject "TypesListResponse"
+              (\ o ->
+                 TypesListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "types" .!= mempty))
+
+instance ToJSON TypesListResponse where
+        toJSON TypesListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _tlrNextPageToken,
+                  ("types" .=) <$> _tlrTypes])

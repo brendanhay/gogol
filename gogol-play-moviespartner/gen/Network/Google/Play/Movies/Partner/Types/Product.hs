@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -372,6 +373,83 @@ aTitleInternalAlias
   = lens _aTitleInternalAlias
       (\ s a -> s{_aTitleInternalAlias = a})
 
+instance FromJSON Avail where
+        parseJSON
+          = withObject "Avail"
+              (\ o ->
+                 Avail <$>
+                   (o .:? "altId") <*> (o .:? "pphNames" .!= mempty) <*>
+                     (o .:? "captionExemption")
+                     <*> (o .:? "ratingSystem")
+                     <*> (o .:? "suppressionLiftDate")
+                     <*> (o .:? "episodeNumber")
+                     <*> (o .:? "priceType")
+                     <*> (o .:? "storeLanguage")
+                     <*> (o .:? "episodeAltId")
+                     <*> (o .:? "start")
+                     <*> (o .:? "territory")
+                     <*> (o .:? "episodeTitleInternalAlias")
+                     <*> (o .:? "licenseType")
+                     <*> (o .:? "seasonNumber")
+                     <*> (o .:? "workType")
+                     <*> (o .:? "ratingValue")
+                     <*> (o .:? "seasonTitleInternalAlias")
+                     <*> (o .:? "contentId")
+                     <*> (o .:? "videoId")
+                     <*> (o .:? "seriesAltId")
+                     <*> (o .:? "end")
+                     <*> (o .:? "seriesTitleInternalAlias")
+                     <*> (o .:? "displayName")
+                     <*> (o .:? "releaseDate")
+                     <*> (o .:? "formatProfile")
+                     <*> (o .:? "ratingReason")
+                     <*> (o .:? "encodeId")
+                     <*> (o .:? "priceValue")
+                     <*> (o .:? "captionIncluded")
+                     <*> (o .:? "productId")
+                     <*> (o .:? "seasonAltId")
+                     <*> (o .:? "titleInternalAlias"))
+
+instance ToJSON Avail where
+        toJSON Avail{..}
+          = object
+              (catMaybes
+                 [("altId" .=) <$> _aAltId,
+                  ("pphNames" .=) <$> _aPphNames,
+                  ("captionExemption" .=) <$> _aCaptionExemption,
+                  ("ratingSystem" .=) <$> _aRatingSystem,
+                  ("suppressionLiftDate" .=) <$> _aSuppressionLiftDate,
+                  ("episodeNumber" .=) <$> _aEpisodeNumber,
+                  ("priceType" .=) <$> _aPriceType,
+                  ("storeLanguage" .=) <$> _aStoreLanguage,
+                  ("episodeAltId" .=) <$> _aEpisodeAltId,
+                  ("start" .=) <$> _aStart,
+                  ("territory" .=) <$> _aTerritory,
+                  ("episodeTitleInternalAlias" .=) <$>
+                    _aEpisodeTitleInternalAlias,
+                  ("licenseType" .=) <$> _aLicenseType,
+                  ("seasonNumber" .=) <$> _aSeasonNumber,
+                  ("workType" .=) <$> _aWorkType,
+                  ("ratingValue" .=) <$> _aRatingValue,
+                  ("seasonTitleInternalAlias" .=) <$>
+                    _aSeasonTitleInternalAlias,
+                  ("contentId" .=) <$> _aContentId,
+                  ("videoId" .=) <$> _aVideoId,
+                  ("seriesAltId" .=) <$> _aSeriesAltId,
+                  ("end" .=) <$> _aEnd,
+                  ("seriesTitleInternalAlias" .=) <$>
+                    _aSeriesTitleInternalAlias,
+                  ("displayName" .=) <$> _aDisplayName,
+                  ("releaseDate" .=) <$> _aReleaseDate,
+                  ("formatProfile" .=) <$> _aFormatProfile,
+                  ("ratingReason" .=) <$> _aRatingReason,
+                  ("encodeId" .=) <$> _aEncodeId,
+                  ("priceValue" .=) <$> _aPriceValue,
+                  ("captionIncluded" .=) <$> _aCaptionIncluded,
+                  ("productId" .=) <$> _aProductId,
+                  ("seasonAltId" .=) <$> _aSeasonAltId,
+                  ("titleInternalAlias" .=) <$> _aTitleInternalAlias])
+
 -- | An ExperienceLocale tracks the fulfillment of a Title in a country using
 -- a specific language, when delivered using component-based delivery. For
 -- example, a Title in Switzerland might have 3 ExperienceLocales: they
@@ -622,6 +700,63 @@ elNormalizedPriority
   = lens _elNormalizedPriority
       (\ s a -> s{_elNormalizedPriority = a})
 
+instance FromJSON ExperienceLocale where
+        parseJSON
+          = withObject "ExperienceLocale"
+              (\ o ->
+                 ExperienceLocale <$>
+                   (o .:? "titleLevelEidr") <*> (o .:? "status") <*>
+                     (o .:? "pphNames" .!= mempty)
+                     <*> (o .:? "inventoryId")
+                     <*> (o .:? "earliestAvailStartTime")
+                     <*> (o .:? "studioName")
+                     <*> (o .:? "priority")
+                     <*> (o .:? "customIds" .!= mempty)
+                     <*> (o .:? "createdTime")
+                     <*> (o .:? "country")
+                     <*> (o .:? "trailerId")
+                     <*> (o .:? "presentationId")
+                     <*> (o .:? "altCutId")
+                     <*> (o .:? "channelId")
+                     <*> (o .:? "approvedTime")
+                     <*> (o .:? "playableSequenceId")
+                     <*> (o .:? "elId")
+                     <*> (o .:? "videoId")
+                     <*> (o .:? "name")
+                     <*> (o .:? "language")
+                     <*> (o .:? "editLevelEidr")
+                     <*> (o .:? "type")
+                     <*> (o .:? "normalizedPriority"))
+
+instance ToJSON ExperienceLocale where
+        toJSON ExperienceLocale{..}
+          = object
+              (catMaybes
+                 [("titleLevelEidr" .=) <$> _elTitleLevelEidr,
+                  ("status" .=) <$> _elStatus,
+                  ("pphNames" .=) <$> _elPphNames,
+                  ("inventoryId" .=) <$> _elInventoryId,
+                  ("earliestAvailStartTime" .=) <$>
+                    _elEarliestAvailStartTime,
+                  ("studioName" .=) <$> _elStudioName,
+                  ("priority" .=) <$> _elPriority,
+                  ("customIds" .=) <$> _elCustomIds,
+                  ("createdTime" .=) <$> _elCreatedTime,
+                  ("country" .=) <$> _elCountry,
+                  ("trailerId" .=) <$> _elTrailerId,
+                  ("presentationId" .=) <$> _elPresentationId,
+                  ("altCutId" .=) <$> _elAltCutId,
+                  ("channelId" .=) <$> _elChannelId,
+                  ("approvedTime" .=) <$> _elApprovedTime,
+                  ("playableSequenceId" .=) <$> _elPlayableSequenceId,
+                  ("elId" .=) <$> _elElId,
+                  ("videoId" .=) <$> _elVideoId,
+                  ("name" .=) <$> _elName,
+                  ("language" .=) <$> _elLanguage,
+                  ("editLevelEidr" .=) <$> _elEditLevelEidr,
+                  ("type" .=) <$> _elType,
+                  ("normalizedPriority" .=) <$> _elNormalizedPriority])
+
 -- | Response to the \'ListAvails\' method.
 --
 -- /See:/ 'listAvailsResponse' smart constructor.
@@ -657,6 +792,21 @@ larAvails
   = lens _larAvails (\ s a -> s{_larAvails = a}) .
       _Default
       . _Coerce
+
+instance FromJSON ListAvailsResponse where
+        parseJSON
+          = withObject "ListAvailsResponse"
+              (\ o ->
+                 ListAvailsResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "avails" .!= mempty))
+
+instance ToJSON ListAvailsResponse where
+        toJSON ListAvailsResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _larNextPageToken,
+                  ("avails" .=) <$> _larAvails])
 
 -- | Response to the \'ListExperienceLocales\' method.
 --
@@ -695,6 +845,21 @@ lelrExperienceLocales
       . _Default
       . _Coerce
 
+instance FromJSON ListExperienceLocalesResponse where
+        parseJSON
+          = withObject "ListExperienceLocalesResponse"
+              (\ o ->
+                 ListExperienceLocalesResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "experienceLocales" .!= mempty))
+
+instance ToJSON ListExperienceLocalesResponse where
+        toJSON ListExperienceLocalesResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lelrNextPageToken,
+                  ("experienceLocales" .=) <$> _lelrExperienceLocales])
+
 -- | Response to the \'ListOrders\' method.
 --
 -- /See:/ 'listOrdersResponse' smart constructor.
@@ -730,6 +895,21 @@ lorOrders
   = lens _lorOrders (\ s a -> s{_lorOrders = a}) .
       _Default
       . _Coerce
+
+instance FromJSON ListOrdersResponse where
+        parseJSON
+          = withObject "ListOrdersResponse"
+              (\ o ->
+                 ListOrdersResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "orders" .!= mempty))
+
+instance ToJSON ListOrdersResponse where
+        toJSON ListOrdersResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lorNextPageToken,
+                  ("orders" .=) <$> _lorOrders])
 
 -- | Response to the \'ListStoreInfos\' method.
 --
@@ -767,6 +947,21 @@ lsirStoreInfos
       (\ s a -> s{_lsirStoreInfos = a})
       . _Default
       . _Coerce
+
+instance FromJSON ListStoreInfosResponse where
+        parseJSON
+          = withObject "ListStoreInfosResponse"
+              (\ o ->
+                 ListStoreInfosResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "storeInfos" .!= mempty))
+
+instance ToJSON ListStoreInfosResponse where
+        toJSON ListStoreInfosResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lsirNextPageToken,
+                  ("storeInfos" .=) <$> _lsirStoreInfos])
 
 -- | An Order tracks the fulfillment of an Edit when delivered using the
 -- legacy, non-component-based delivery. Each Order is uniquely identified
@@ -1008,6 +1203,63 @@ oOrderId = lens _oOrderId (\ s a -> s{_oOrderId = a})
 oEpisodeName :: Lens' Order (Maybe Text)
 oEpisodeName
   = lens _oEpisodeName (\ s a -> s{_oEpisodeName = a})
+
+instance FromJSON Order where
+        parseJSON
+          = withObject "Order"
+              (\ o ->
+                 Order <$>
+                   (o .:? "status") <*> (o .:? "showName") <*>
+                     (o .:? "pphName")
+                     <*> (o .:? "earliestAvailStartTime")
+                     <*> (o .:? "studioName")
+                     <*> (o .:? "receivedTime")
+                     <*> (o .:? "priority")
+                     <*> (o .:? "channelId")
+                     <*> (o .:? "customId")
+                     <*> (o .:? "approvedTime")
+                     <*> (o .:? "countries" .!= mempty)
+                     <*> (o .:? "channelName")
+                     <*> (o .:? "videoId")
+                     <*> (o .:? "legacyPriority")
+                     <*> (o .:? "name")
+                     <*> (o .:? "rejectionNote")
+                     <*> (o .:? "orderedTime")
+                     <*> (o .:? "seasonName")
+                     <*> (o .:? "statusDetail")
+                     <*> (o .:? "type")
+                     <*> (o .:? "normalizedPriority")
+                     <*> (o .:? "orderId")
+                     <*> (o .:? "episodeName"))
+
+instance ToJSON Order where
+        toJSON Order{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _oStatus,
+                  ("showName" .=) <$> _oShowName,
+                  ("pphName" .=) <$> _oPphName,
+                  ("earliestAvailStartTime" .=) <$>
+                    _oEarliestAvailStartTime,
+                  ("studioName" .=) <$> _oStudioName,
+                  ("receivedTime" .=) <$> _oReceivedTime,
+                  ("priority" .=) <$> _oPriority,
+                  ("channelId" .=) <$> _oChannelId,
+                  ("customId" .=) <$> _oCustomId,
+                  ("approvedTime" .=) <$> _oApprovedTime,
+                  ("countries" .=) <$> _oCountries,
+                  ("channelName" .=) <$> _oChannelName,
+                  ("videoId" .=) <$> _oVideoId,
+                  ("legacyPriority" .=) <$> _oLegacyPriority,
+                  ("name" .=) <$> _oName,
+                  ("rejectionNote" .=) <$> _oRejectionNote,
+                  ("orderedTime" .=) <$> _oOrderedTime,
+                  ("seasonName" .=) <$> _oSeasonName,
+                  ("statusDetail" .=) <$> _oStatusDetail,
+                  ("type" .=) <$> _oType,
+                  ("normalizedPriority" .=) <$> _oNormalizedPriority,
+                  ("orderId" .=) <$> _oOrderId,
+                  ("episodeName" .=) <$> _oEpisodeName])
 
 -- | Information about a playable sequence (video) associated with an Edit
 -- and available at the Google Play Store. Internally, each StoreInfo is
@@ -1277,3 +1529,64 @@ siSeasonId
 -- available for TV Edits. Example: \'et2hsue_x\'
 siShowId :: Lens' StoreInfo (Maybe Text)
 siShowId = lens _siShowId (\ s a -> s{_siShowId = a})
+
+instance FromJSON StoreInfo where
+        parseJSON
+          = withObject "StoreInfo"
+              (\ o ->
+                 StoreInfo <$>
+                   (o .:? "titleLevelEidr") <*>
+                     (o .:? "pphNames" .!= mempty)
+                     <*> (o .:? "showName")
+                     <*> (o .:? "subtitles" .!= mempty)
+                     <*> (o .:? "studioName")
+                     <*> (o .:? "audioTracks" .!= mempty)
+                     <*> (o .:? "episodeNumber")
+                     <*> (o .:? "country")
+                     <*> (o .:? "trailerId")
+                     <*> (o .:? "hasInfoCards")
+                     <*> (o .:? "liveTime")
+                     <*> (o .:? "seasonNumber")
+                     <*> (o .:? "hasHdOffer")
+                     <*> (o .:? "videoId")
+                     <*> (o .:? "name")
+                     <*> (o .:? "hasVodOffer")
+                     <*> (o .:? "seasonName")
+                     <*> (o .:? "hasSdOffer")
+                     <*> (o .:? "mid")
+                     <*> (o .:? "editLevelEidr")
+                     <*> (o .:? "type")
+                     <*> (o .:? "hasEstOffer")
+                     <*> (o .:? "hasAudio51")
+                     <*> (o .:? "seasonId")
+                     <*> (o .:? "showId"))
+
+instance ToJSON StoreInfo where
+        toJSON StoreInfo{..}
+          = object
+              (catMaybes
+                 [("titleLevelEidr" .=) <$> _siTitleLevelEidr,
+                  ("pphNames" .=) <$> _siPphNames,
+                  ("showName" .=) <$> _siShowName,
+                  ("subtitles" .=) <$> _siSubtitles,
+                  ("studioName" .=) <$> _siStudioName,
+                  ("audioTracks" .=) <$> _siAudioTracks,
+                  ("episodeNumber" .=) <$> _siEpisodeNumber,
+                  ("country" .=) <$> _siCountry,
+                  ("trailerId" .=) <$> _siTrailerId,
+                  ("hasInfoCards" .=) <$> _siHasInfoCards,
+                  ("liveTime" .=) <$> _siLiveTime,
+                  ("seasonNumber" .=) <$> _siSeasonNumber,
+                  ("hasHdOffer" .=) <$> _siHasHdOffer,
+                  ("videoId" .=) <$> _siVideoId,
+                  ("name" .=) <$> _siName,
+                  ("hasVodOffer" .=) <$> _siHasVodOffer,
+                  ("seasonName" .=) <$> _siSeasonName,
+                  ("hasSdOffer" .=) <$> _siHasSdOffer,
+                  ("mid" .=) <$> _siMid,
+                  ("editLevelEidr" .=) <$> _siEditLevelEidr,
+                  ("type" .=) <$> _siType,
+                  ("hasEstOffer" .=) <$> _siHasEstOffer,
+                  ("hasAudio51" .=) <$> _siHasAudio51,
+                  ("seasonId" .=) <$> _siSeasonId,
+                  ("showId" .=) <$> _siShowId])

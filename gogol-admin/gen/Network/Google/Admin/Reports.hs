@@ -172,65 +172,79 @@ type ChannelsAPI = ChannelsStop
 
 -- | Stop watching resources through this channel
 type ChannelsStop =
-     "admin" :> "reports" :> "v1" :> "admin" :>
-       "reports_v1"
-       :> "channels"
-       :> "stop"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "admin" :>
+       "reports" :>
+         "v1" :>
+           "admin" :>
+             "reports_v1" :>
+               "channels" :>
+                 "stop" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Post '[JSON] ()
 
 type ActivitiesAPI =
      ActivitiesList :<|> ActivitiesWatch
 
 -- | Retrieves a list of activities for a specific customer and application.
 type ActivitiesList =
-     "admin" :> "reports" :> "v1" :> "activity" :> "users"
-       :> Capture "userKey" Text
-       :> "applications"
-       :> Capture "applicationName" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "startTime" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "filters" Text
-       :> QueryParam "customerId" Text
-       :> QueryParam "actorIpAddress" Text
-       :> QueryParam "key" Text
-       :> QueryParam "endTime" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "eventName" Text
-       :> QueryParam "maxResults" Natural
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "admin" :>
+       "reports" :>
+         "v1" :>
+           "activity" :>
+             "users" :>
+               Capture "userKey" Text :>
+                 "applications" :>
+                   Capture "applicationName" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "startTime" Text :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "filters" Text :>
+                               QueryParam "customerId" Text :>
+                                 QueryParam "actorIpAddress" Text :>
+                                   QueryParam "key" Text :>
+                                     QueryParam "endTime" Text :>
+                                       QueryParam "pageToken" Text :>
+                                         QueryParam "oauth_token" Text :>
+                                           QueryParam "eventName" Text :>
+                                             QueryParam "maxResults" Natural :>
+                                               QueryParam "fields" Text :>
+                                                 QueryParam "alt" Text :>
+                                                   Get '[JSON] Activities
 
 -- | Push changes to activities
 type ActivitiesWatch =
-     "admin" :> "reports" :> "v1" :> "activity" :> "users"
-       :> Capture "userKey" Text
-       :> "applications"
-       :> Capture "applicationName" Text
-       :> "watch"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "startTime" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "filters" Text
-       :> QueryParam "customerId" Text
-       :> QueryParam "actorIpAddress" Text
-       :> QueryParam "key" Text
-       :> QueryParam "endTime" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "eventName" Text
-       :> QueryParam "maxResults" Natural
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "admin" :>
+       "reports" :>
+         "v1" :>
+           "activity" :>
+             "users" :>
+               Capture "userKey" Text :>
+                 "applications" :>
+                   Capture "applicationName" Text :>
+                     "watch" :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "startTime" Text :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "filters" Text :>
+                                 QueryParam "customerId" Text :>
+                                   QueryParam "actorIpAddress" Text :>
+                                     QueryParam "key" Text :>
+                                       QueryParam "endTime" Text :>
+                                         QueryParam "pageToken" Text :>
+                                           QueryParam "oauth_token" Text :>
+                                             QueryParam "eventName" Text :>
+                                               QueryParam "maxResults" Natural
+                                                 :>
+                                                 QueryParam "fields" Text :>
+                                                   QueryParam "alt" Text :>
+                                                     Post '[JSON] Channel
 
 type CustomerUsageReportsAPI =
      CustomerUsageReportsGet
@@ -238,37 +252,47 @@ type CustomerUsageReportsAPI =
 -- | Retrieves a report which is a collection of properties \/ statistics for
 -- a specific customer.
 type CustomerUsageReportsGet =
-     "admin" :> "reports" :> "v1" :> "usage" :> "dates" :>
-       Capture "date" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "customerId" Text
-       :> QueryParam "key" Text
-       :> QueryParam "parameters" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "admin" :>
+       "reports" :>
+         "v1" :>
+           "usage" :>
+             "dates" :>
+               Capture "date" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "customerId" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "parameters" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON] UsageReports
 
 type UserUsageReportAPI = UserUsageReportGet
 
 -- | Retrieves a report which is a collection of properties \/ statistics for
 -- a set of users.
 type UserUsageReportGet =
-     "admin" :> "reports" :> "v1" :> "usage" :> "users" :>
-       Capture "userKey" Text
-       :> "dates"
-       :> Capture "date" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "filters" Text
-       :> QueryParam "customerId" Text
-       :> QueryParam "key" Text
-       :> QueryParam "parameters" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Word32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "admin" :>
+       "reports" :>
+         "v1" :>
+           "usage" :>
+             "users" :>
+               Capture "userKey" Text :>
+                 "dates" :>
+                   Capture "date" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "filters" Text :>
+                             QueryParam "customerId" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "parameters" Text :>
+                                   QueryParam "pageToken" Text :>
+                                     QueryParam "oauth_token" Text :>
+                                       QueryParam "maxResults" Word32 :>
+                                         QueryParam "fields" Text :>
+                                           QueryParam "alt" Text :>
+                                             Get '[JSON] UsageReports

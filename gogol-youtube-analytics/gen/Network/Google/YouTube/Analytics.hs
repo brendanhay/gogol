@@ -164,79 +164,96 @@ type GroupsAPI =
 
 -- | Creates a group.
 type GroupsInsert =
-     "youtube" :> "analytics" :> "v1beta1" :> "groups" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "onBehalfOfContentOwner" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "youtube" :>
+       "analytics" :>
+         "v1beta1" :>
+           "groups" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "onBehalfOfContentOwner" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] Group
 
 -- | Returns a collection of groups that match the API request parameters.
 -- For example, you can retrieve all groups that the authenticated user
 -- owns, or you can retrieve one or more groups by their unique IDs.
 type GroupsList =
-     "youtube" :> "analytics" :> "v1beta1" :> "groups" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "mine" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "onBehalfOfContentOwner" Text
-       :> QueryParam "key" Text
-       :> QueryParam "id" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "youtube" :>
+       "analytics" :>
+         "v1beta1" :>
+           "groups" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "mine" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "onBehalfOfContentOwner" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "id" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :>
+                                 Get '[JSON] GroupListResponse
 
 -- | Deletes a group.
 type GroupsDelete =
-     "youtube" :> "analytics" :> "v1beta1" :> "groups" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "onBehalfOfContentOwner" Text
-       :> QueryParam "key" Text
-       :> QueryParam "id" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "youtube" :>
+       "analytics" :>
+         "v1beta1" :>
+           "groups" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "onBehalfOfContentOwner" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "id" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Modifies a group. For example, you could change a group\'s title.
 type GroupsUpdate =
-     "youtube" :> "analytics" :> "v1beta1" :> "groups" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "onBehalfOfContentOwner" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "youtube" :>
+       "analytics" :>
+         "v1beta1" :>
+           "groups" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "onBehalfOfContentOwner" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Put '[JSON] Group
 
 type ReportsAPI = ReportsQuery
 
 -- | Retrieve your YouTube Analytics reports.
 type ReportsQuery =
-     "youtube" :> "analytics" :> "v1beta1" :> "reports" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "metrics" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "filters" Text
-       :> QueryParam "ids" Text
-       :> QueryParam "end-date" Text
-       :> QueryParam "key" Text
-       :> QueryParam "currency" Text
-       :> QueryParam "sort" Text
-       :> QueryParam "dimensions" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "start-index" Natural
-       :> QueryParam "max-results" Natural
-       :> QueryParam "start-date" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "youtube" :>
+       "analytics" :>
+         "v1beta1" :>
+           "reports" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "metrics" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "filters" Text :>
+                       QueryParam "ids" Text :>
+                         QueryParam "end-date" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "currency" Text :>
+                               QueryParam "sort" Text :>
+                                 QueryParam "dimensions" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "start-index" Natural :>
+                                       QueryParam "max-results" Natural :>
+                                         QueryParam "start-date" Text :>
+                                           QueryParam "fields" Text :>
+                                             QueryParam "alt" Text :>
+                                               Get '[JSON] ResultTable
 
 type GroupItemsAPI =
      GroupItemsInsert :<|> GroupItemsList :<|>
@@ -244,71 +261,87 @@ type GroupItemsAPI =
 
 -- | Creates a group item.
 type GroupItemsInsert =
-     "youtube" :> "analytics" :> "v1beta1" :> "groupItems"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "onBehalfOfContentOwner" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "youtube" :>
+       "analytics" :>
+         "v1beta1" :>
+           "groupItems" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "onBehalfOfContentOwner" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] GroupItem
 
 -- | Returns a collection of group items that match the API request
 -- parameters.
 type GroupItemsList =
-     "youtube" :> "analytics" :> "v1beta1" :> "groupItems"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "onBehalfOfContentOwner" Text
-       :> QueryParam "key" Text
-       :> QueryParam "groupId" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "youtube" :>
+       "analytics" :>
+         "v1beta1" :>
+           "groupItems" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "onBehalfOfContentOwner" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "groupId" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Get '[JSON] GroupItemListResponse
 
 -- | Removes an item from a group.
 type GroupItemsDelete =
-     "youtube" :> "analytics" :> "v1beta1" :> "groupItems"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "onBehalfOfContentOwner" Text
-       :> QueryParam "key" Text
-       :> QueryParam "id" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "youtube" :>
+       "analytics" :>
+         "v1beta1" :>
+           "groupItems" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "onBehalfOfContentOwner" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "id" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Delete '[JSON] ()
 
 type BatchReportsAPI = BatchReportsList
 
 -- | Retrieves a list of processed batch reports.
 type BatchReportsList =
-     "youtube" :> "analytics" :> "v1beta1" :>
-       "batchReports"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "batchReportDefinitionId" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "onBehalfOfContentOwner" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "youtube" :>
+       "analytics" :>
+         "v1beta1" :>
+           "batchReports" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "batchReportDefinitionId" Text :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "onBehalfOfContentOwner" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Get '[JSON] BatchReportList
 
 type BatchReportDefinitionsAPI =
      BatchReportDefinitionsList
 
 -- | Retrieves a list of available batch report definitions.
 type BatchReportDefinitionsList =
-     "youtube" :> "analytics" :> "v1beta1" :>
-       "batchReportDefinitions"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "onBehalfOfContentOwner" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "youtube" :>
+       "analytics" :>
+         "v1beta1" :>
+           "batchReportDefinitions" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "onBehalfOfContentOwner" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Get '[JSON] BatchReportDefinitionList

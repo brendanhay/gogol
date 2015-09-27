@@ -242,19 +242,23 @@ type HistoryAPI = HistoryList
 -- | Lists the history of all changes to the given mailbox. History results
 -- are returned in chronological order (increasing historyId).
 type HistoryList =
-     "gmail" :> "v1" :> "users" :> Capture "userId" Text
-       :> "history"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "startHistoryId" Word64
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "labelId" Text
-       :> QueryParam "maxResults" Word32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "history" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "startHistoryId" Word64 :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "labelId" Text :>
+                               QueryParam "maxResults" Word32 :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON] ListHistoryResponse
 
 type DraftsAPI =
      DraftsList :<|> DraftsGet :<|> DraftsCreate :<|>
@@ -264,84 +268,103 @@ type DraftsAPI =
 
 -- | Lists the drafts in the user\'s mailbox.
 type DraftsList =
-     "gmail" :> "v1" :> "users" :> Capture "userId" Text
-       :> "drafts"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Word32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "drafts" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Word32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :>
+                                 Get '[JSON] ListDraftsResponse
 
 -- | Gets the specified draft.
 type DraftsGet =
-     "gmail" :> "v1" :> "users" :> Capture "userId" Text
-       :> "drafts"
-       :> Capture "id" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "format" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "drafts" :>
+               Capture "id" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "format" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Get '[JSON] Draft
 
 -- | Creates a new draft with the DRAFT label.
 type DraftsCreate =
-     "gmail" :> "v1" :> "users" :> Capture "userId" Text
-       :> "drafts"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "drafts" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] Draft
 
 -- | Sends the specified, existing draft to the recipients in the To, Cc, and
 -- Bcc headers.
 type DraftsSend =
-     "gmail" :> "v1" :> "users" :> Capture "userId" Text
-       :> "drafts"
-       :> "send"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "drafts" :>
+               "send" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Post '[JSON] Message
 
 -- | Immediately and permanently deletes the specified draft. Does not simply
 -- trash it.
 type DraftsDelete =
-     "gmail" :> "v1" :> "users" :> Capture "userId" Text
-       :> "drafts"
-       :> Capture "id" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "drafts" :>
+               Capture "id" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Replaces a draft\'s content.
 type DraftsUpdate =
-     "gmail" :> "v1" :> "users" :> Capture "userId" Text
-       :> "drafts"
-       :> Capture "id" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "drafts" :>
+               Capture "id" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Put '[JSON] Draft
 
 type LabelsAPI =
      LabelsList :<|> LabelsPatch :<|> LabelsGet :<|>
@@ -351,80 +374,99 @@ type LabelsAPI =
 
 -- | Lists all labels in the user\'s mailbox.
 type LabelsList =
-     "gmail" :> "v1" :> "users" :> Capture "userId" Text
-       :> "labels"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "labels" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Get '[JSON] ListLabelsResponse
 
 -- | Updates the specified label. This method supports patch semantics.
 type LabelsPatch =
-     "gmail" :> "v1" :> "users" :> Capture "userId" Text
-       :> "labels"
-       :> Capture "id" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "labels" :>
+               Capture "id" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Patch '[JSON] Label
 
 -- | Gets the specified label.
 type LabelsGet =
-     "gmail" :> "v1" :> "users" :> Capture "userId" Text
-       :> "labels"
-       :> Capture "id" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "labels" :>
+               Capture "id" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] Label
 
 -- | Creates a new label.
 type LabelsCreate =
-     "gmail" :> "v1" :> "users" :> Capture "userId" Text
-       :> "labels"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "labels" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] Label
 
 -- | Immediately and permanently deletes the specified label and removes it
 -- from any messages and threads that it is applied to.
 type LabelsDelete =
-     "gmail" :> "v1" :> "users" :> Capture "userId" Text
-       :> "labels"
-       :> Capture "id" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "labels" :>
+               Capture "id" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Updates the specified label.
 type LabelsUpdate =
-     "gmail" :> "v1" :> "users" :> Capture "userId" Text
-       :> "labels"
-       :> Capture "id" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "labels" :>
+               Capture "id" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Put '[JSON] Label
 
 type ThreadsAPI =
      ThreadsList :<|> ThreadsGet :<|> ThreadsTrash :<|>
@@ -434,92 +476,111 @@ type ThreadsAPI =
 
 -- | Lists the threads in the user\'s mailbox.
 type ThreadsList =
-     "gmail" :> "v1" :> "users" :> Capture "userId" Text
-       :> "threads"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "q" Text
-       :> QueryParam "key" Text
-       :> QueryParam "includeSpamTrash" Bool
-       :> QueryParam "labelIds" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Word32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "threads" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "q" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "includeSpamTrash" Bool :>
+                           QueryParam "labelIds" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "maxResults" Word32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :>
+                                       Get '[JSON] ListThreadsResponse
 
 -- | Gets the specified thread.
 type ThreadsGet =
-     "gmail" :> "v1" :> "users" :> Capture "userId" Text
-       :> "threads"
-       :> Capture "id" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "format" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "metadataHeaders" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "threads" :>
+               Capture "id" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "format" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "metadataHeaders" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :> Get '[JSON] Thread
 
 -- | Moves the specified thread to the trash.
 type ThreadsTrash =
-     "gmail" :> "v1" :> "users" :> Capture "userId" Text
-       :> "threads"
-       :> Capture "id" Text
-       :> "trash"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "threads" :>
+               Capture "id" Text :>
+                 "trash" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Post '[JSON] Thread
 
 -- | Removes the specified thread from the trash.
 type ThreadsUntrash =
-     "gmail" :> "v1" :> "users" :> Capture "userId" Text
-       :> "threads"
-       :> Capture "id" Text
-       :> "untrash"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "threads" :>
+               Capture "id" Text :>
+                 "untrash" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Post '[JSON] Thread
 
 -- | Modifies the labels applied to the thread. This applies to all messages
 -- in the thread.
 type ThreadsModify =
-     "gmail" :> "v1" :> "users" :> Capture "userId" Text
-       :> "threads"
-       :> Capture "id" Text
-       :> "modify"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "threads" :>
+               Capture "id" Text :>
+                 "modify" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Post '[JSON] Thread
 
 -- | Immediately and permanently deletes the specified thread. This operation
 -- cannot be undone. Prefer threads.trash instead.
 type ThreadsDelete =
-     "gmail" :> "v1" :> "users" :> Capture "userId" Text
-       :> "threads"
-       :> Capture "id" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "threads" :>
+               Capture "id" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Delete '[JSON] ()
 
 type MessagesAPI = AttachmentsAPI
 
@@ -527,15 +588,19 @@ type AttachmentsAPI = AttachmentsGet
 
 -- | Gets the specified message attachment.
 type AttachmentsGet =
-     "gmail" :> "v1" :> "users" :> Capture "userId" Text
-       :> "messages"
-       :> Capture "messageId" Text
-       :> "attachments"
-       :> Capture "id" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "gmail" :>
+       "v1" :>
+         "users" :>
+           Capture "userId" Text :>
+             "messages" :>
+               Capture "messageId" Text :>
+                 "attachments" :>
+                   Capture "id" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Get '[JSON] MessagePartBody

@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -94,6 +95,29 @@ aSegmentationType :: Lens' Availability (Maybe Text)
 aSegmentationType
   = lens _aSegmentationType
       (\ s a -> s{_aSegmentationType = a})
+
+instance FromJSON Availability where
+        parseJSON
+          = withObject "Availability"
+              (\ o ->
+                 Availability <$>
+                   (o .:? "agencyId") <*> (o .:? "advertiserId") <*>
+                     (o .:? "segmentationId")
+                     <*> (o .:? "segmentationName")
+                     <*> (o .:? "availabilityTimestamp")
+                     <*> (o .:? "segmentationType"))
+
+instance ToJSON Availability where
+        toJSON Availability{..}
+          = object
+              (catMaybes
+                 [("agencyId" .=) <$> _aAgencyId,
+                  ("advertiserId" .=) <$> _aAdvertiserId,
+                  ("segmentationId" .=) <$> _aSegmentationId,
+                  ("segmentationName" .=) <$> _aSegmentationName,
+                  ("availabilityTimestamp" .=) <$>
+                    _aAvailabilityTimestamp,
+                  ("segmentationType" .=) <$> _aSegmentationType])
 
 -- | A conversion containing data relevant to DoubleClick Search.
 --
@@ -444,6 +468,84 @@ cProductGroupId
   = lens _cProductGroupId
       (\ s a -> s{_cProductGroupId = a})
 
+instance FromJSON Conversion where
+        parseJSON
+          = withObject "Conversion"
+              (\ o ->
+                 Conversion <$>
+                   (o .:? "adGroupId") <*>
+                     (o .:? "conversionModifiedTimestamp")
+                     <*> (o .:? "state")
+                     <*> (o .:? "engineAccountId")
+                     <*> (o .:? "agencyId")
+                     <*> (o .:? "currencyCode")
+                     <*> (o .:? "storeId")
+                     <*> (o .:? "dsConversionId")
+                     <*> (o .:? "conversionId")
+                     <*> (o .:? "advertiserId")
+                     <*> (o .:? "segmentationId")
+                     <*> (o .:? "channel")
+                     <*> (o .:? "productCountry")
+                     <*> (o .:? "campaignId")
+                     <*> (o .:? "criterionId")
+                     <*> (o .:? "conversionTimestamp")
+                     <*> (o .:? "attributionModel")
+                     <*> (o .:? "segmentationName")
+                     <*> (o .:? "productLanguage")
+                     <*> (o .:? "customMetric" .!= mempty)
+                     <*> (o .:? "countMillis")
+                     <*> (o .:? "quantityMillis")
+                     <*> (o .:? "adId")
+                     <*> (o .:? "deviceType")
+                     <*> (o .:? "type")
+                     <*> (o .:? "customDimension" .!= mempty)
+                     <*> (o .:? "floodlightOrderId")
+                     <*> (o .:? "revenueMicros")
+                     <*> (o .:? "clickId")
+                     <*> (o .:? "inventoryAccountId")
+                     <*> (o .:? "segmentationType")
+                     <*> (o .:? "productId")
+                     <*> (o .:? "productGroupId"))
+
+instance ToJSON Conversion where
+        toJSON Conversion{..}
+          = object
+              (catMaybes
+                 [("adGroupId" .=) <$> _cAdGroupId,
+                  ("conversionModifiedTimestamp" .=) <$>
+                    _cConversionModifiedTimestamp,
+                  ("state" .=) <$> _cState,
+                  ("engineAccountId" .=) <$> _cEngineAccountId,
+                  ("agencyId" .=) <$> _cAgencyId,
+                  ("currencyCode" .=) <$> _cCurrencyCode,
+                  ("storeId" .=) <$> _cStoreId,
+                  ("dsConversionId" .=) <$> _cDsConversionId,
+                  ("conversionId" .=) <$> _cConversionId,
+                  ("advertiserId" .=) <$> _cAdvertiserId,
+                  ("segmentationId" .=) <$> _cSegmentationId,
+                  ("channel" .=) <$> _cChannel,
+                  ("productCountry" .=) <$> _cProductCountry,
+                  ("campaignId" .=) <$> _cCampaignId,
+                  ("criterionId" .=) <$> _cCriterionId,
+                  ("conversionTimestamp" .=) <$> _cConversionTimestamp,
+                  ("attributionModel" .=) <$> _cAttributionModel,
+                  ("segmentationName" .=) <$> _cSegmentationName,
+                  ("productLanguage" .=) <$> _cProductLanguage,
+                  ("customMetric" .=) <$> _cCustomMetric,
+                  ("countMillis" .=) <$> _cCountMillis,
+                  ("quantityMillis" .=) <$> _cQuantityMillis,
+                  ("adId" .=) <$> _cAdId,
+                  ("deviceType" .=) <$> _cDeviceType,
+                  ("type" .=) <$> _cType,
+                  ("customDimension" .=) <$> _cCustomDimension,
+                  ("floodlightOrderId" .=) <$> _cFloodlightOrderId,
+                  ("revenueMicros" .=) <$> _cRevenueMicros,
+                  ("clickId" .=) <$> _cClickId,
+                  ("inventoryAccountId" .=) <$> _cInventoryAccountId,
+                  ("segmentationType" .=) <$> _cSegmentationType,
+                  ("productId" .=) <$> _cProductId,
+                  ("productGroupId" .=) <$> _cProductGroupId])
+
 -- | A list of conversions.
 --
 -- /See:/ 'conversionList' smart constructor.
@@ -479,6 +581,21 @@ clConversion
       . _Default
       . _Coerce
 
+instance FromJSON ConversionList where
+        parseJSON
+          = withObject "ConversionList"
+              (\ o ->
+                 ConversionList <$>
+                   (o .:? "kind" .!= "doubleclicksearch#conversionList")
+                     <*> (o .:? "conversion" .!= mempty))
+
+instance ToJSON ConversionList where
+        toJSON ConversionList{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _clKind),
+                  ("conversion" .=) <$> _clConversion])
+
 -- | A message containing the custome dimension.
 --
 -- /See:/ 'customDimension' smart constructor.
@@ -510,6 +627,19 @@ cdValue = lens _cdValue (\ s a -> s{_cdValue = a})
 cdName :: Lens' CustomDimension (Maybe Text)
 cdName = lens _cdName (\ s a -> s{_cdName = a})
 
+instance FromJSON CustomDimension where
+        parseJSON
+          = withObject "CustomDimension"
+              (\ o ->
+                 CustomDimension <$>
+                   (o .:? "value") <*> (o .:? "name"))
+
+instance ToJSON CustomDimension where
+        toJSON CustomDimension{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _cdValue, ("name" .=) <$> _cdName])
+
 -- | A message containing the custome metric.
 --
 -- /See:/ 'customMetric' smart constructor.
@@ -540,6 +670,18 @@ cmValue = lens _cmValue (\ s a -> s{_cmValue = a})
 -- | Custom metric name.
 cmName :: Lens' CustomMetric (Maybe Text)
 cmName = lens _cmName (\ s a -> s{_cmName = a})
+
+instance FromJSON CustomMetric where
+        parseJSON
+          = withObject "CustomMetric"
+              (\ o ->
+                 CustomMetric <$> (o .:? "value") <*> (o .:? "name"))
+
+instance ToJSON CustomMetric where
+        toJSON CustomMetric{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _cmValue, ("name" .=) <$> _cmName])
 
 -- | A DoubleClick Search report. This object contains the report request,
 -- some report metadata such as currency code, and the generated report
@@ -649,6 +791,34 @@ rRowCount
 -- the original request are filled with default values.
 rRequest :: Lens' Report (Maybe (Maybe ReportRequest))
 rRequest = lens _rRequest (\ s a -> s{_rRequest = a})
+
+instance FromJSON Report where
+        parseJSON
+          = withObject "Report"
+              (\ o ->
+                 Report <$>
+                   (o .:? "kind" .!= "doubleclicksearch#report") <*>
+                     (o .:? "rows" .!= mempty)
+                     <*> (o .:? "statisticsCurrencyCode")
+                     <*> (o .:? "isReportReady")
+                     <*> (o .:? "files" .!= mempty)
+                     <*> (o .:? "id")
+                     <*> (o .:? "statisticsTimeZone")
+                     <*> (o .:? "rowCount")
+                     <*> (o .:? "request"))
+
+instance ToJSON Report where
+        toJSON Report{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _rKind), ("rows" .=) <$> _rRows,
+                  ("statisticsCurrencyCode" .=) <$>
+                    _rStatisticsCurrencyCode,
+                  ("isReportReady" .=) <$> _rIsReportReady,
+                  ("files" .=) <$> _rFiles, ("id" .=) <$> _rId,
+                  ("statisticsTimeZone" .=) <$> _rStatisticsTimeZone,
+                  ("rowCount" .=) <$> _rRowCount,
+                  ("request" .=) <$> _rRequest])
 
 -- | A request object used to create a DoubleClick Search report.
 --
@@ -773,6 +943,36 @@ racsColumnName
   = lens _racsColumnName
       (\ s a -> s{_racsColumnName = a})
 
+instance FromJSON ReportApiColumnSpec where
+        parseJSON
+          = withObject "ReportApiColumnSpec"
+              (\ o ->
+                 ReportApiColumnSpec <$>
+                   (o .:? "customDimensionName") <*>
+                     (o .:? "savedColumnName")
+                     <*> (o .:? "groupByColumn" .!= False)
+                     <*> (o .:? "customMetricName")
+                     <*> (o .:? "endDate")
+                     <*> (o .:? "startDate")
+                     <*> (o .:? "headerText")
+                     <*> (o .:? "platformSource")
+                     <*> (o .:? "columnName"))
+
+instance ToJSON ReportApiColumnSpec where
+        toJSON ReportApiColumnSpec{..}
+          = object
+              (catMaybes
+                 [("customDimensionName" .=) <$>
+                    _racsCustomDimensionName,
+                  ("savedColumnName" .=) <$> _racsSavedColumnName,
+                  Just ("groupByColumn" .= _racsGroupByColumn),
+                  ("customMetricName" .=) <$> _racsCustomMetricName,
+                  ("endDate" .=) <$> _racsEndDate,
+                  ("startDate" .=) <$> _racsStartDate,
+                  ("headerText" .=) <$> _racsHeaderText,
+                  ("platformSource" .=) <$> _racsPlatformSource,
+                  ("columnName" .=) <$> _racsColumnName])
+
 --
 -- /See:/ 'reportItemFiles' smart constructor.
 data ReportItemFiles = ReportItemFiles
@@ -803,6 +1003,20 @@ rifUrl = lens _rifUrl (\ s a -> s{_rifUrl = a})
 rifByteCount :: Lens' ReportItemFiles (Maybe Int64)
 rifByteCount
   = lens _rifByteCount (\ s a -> s{_rifByteCount = a})
+
+instance FromJSON ReportItemFiles where
+        parseJSON
+          = withObject "ReportItemFiles"
+              (\ o ->
+                 ReportItemFiles <$>
+                   (o .:? "url") <*> (o .:? "byteCount"))
+
+instance ToJSON ReportItemFiles where
+        toJSON ReportItemFiles{..}
+          = object
+              (catMaybes
+                 [("url" .=) <$> _rifUrl,
+                  ("byteCount" .=) <$> _rifByteCount])
 
 -- | A request object used to create a DoubleClick Search report.
 --
@@ -983,6 +1197,49 @@ rrRowCount :: Lens' ReportRequest Int32
 rrRowCount
   = lens _rrRowCount (\ s a -> s{_rrRowCount = a})
 
+instance FromJSON ReportRequest where
+        parseJSON
+          = withObject "ReportRequest"
+              (\ o ->
+                 ReportRequest <$>
+                   (o .:? "maxRowsPerFile") <*> (o .:? "reportScope")
+                     <*> (o .:? "statisticsCurrency")
+                     <*> (o .:? "timeRange")
+                     <*> (o .:? "orderBy" .!= mempty)
+                     <*> (o .:? "filters" .!= mempty)
+                     <*> (o .:? "includeRemovedEntities" .!= False)
+                     <*> (o .:? "includeDeletedEntities" .!= False)
+                     <*> (o .:? "downloadFormat")
+                     <*> (o .:? "startRow" .!= 0)
+                     <*> (o .:? "columns" .!= mempty)
+                     <*> (o .:? "reportType")
+                     <*> (o .:? "verifySingleTimeZone" .!= False)
+                     <*> (o .:? "rowCount" .!= 10000))
+
+instance ToJSON ReportRequest where
+        toJSON ReportRequest{..}
+          = object
+              (catMaybes
+                 [("maxRowsPerFile" .=) <$> _rrMaxRowsPerFile,
+                  ("reportScope" .=) <$> _rrReportScope,
+                  ("statisticsCurrency" .=) <$> _rrStatisticsCurrency,
+                  ("timeRange" .=) <$> _rrTimeRange,
+                  ("orderBy" .=) <$> _rrOrderBy,
+                  ("filters" .=) <$> _rrFilters,
+                  Just
+                    ("includeRemovedEntities" .=
+                       _rrIncludeRemovedEntities),
+                  Just
+                    ("includeDeletedEntities" .=
+                       _rrIncludeDeletedEntities),
+                  ("downloadFormat" .=) <$> _rrDownloadFormat,
+                  Just ("startRow" .= _rrStartRow),
+                  ("columns" .=) <$> _rrColumns,
+                  ("reportType" .=) <$> _rrReportType,
+                  Just
+                    ("verifySingleTimeZone" .= _rrVerifySingleTimeZone),
+                  Just ("rowCount" .= _rrRowCount)])
+
 --
 -- /See:/ 'reportRequestItemFilters' smart constructor.
 data ReportRequestItemFilters = ReportRequestItemFilters
@@ -1028,6 +1285,22 @@ rrifColumn :: Lens' ReportRequestItemFilters (Maybe (Maybe ReportApiColumnSpec))
 rrifColumn
   = lens _rrifColumn (\ s a -> s{_rrifColumn = a})
 
+instance FromJSON ReportRequestItemFilters where
+        parseJSON
+          = withObject "ReportRequestItemFilters"
+              (\ o ->
+                 ReportRequestItemFilters <$>
+                   (o .:? "operator") <*> (o .:? "values" .!= mempty)
+                     <*> (o .:? "column"))
+
+instance ToJSON ReportRequestItemFilters where
+        toJSON ReportRequestItemFilters{..}
+          = object
+              (catMaybes
+                 [("operator" .=) <$> _rrifOperator,
+                  ("values" .=) <$> _rrifValues,
+                  ("column" .=) <$> _rrifColumn])
+
 --
 -- /See:/ 'reportRequestItemOrderBy' smart constructor.
 data ReportRequestItemOrderBy = ReportRequestItemOrderBy
@@ -1061,6 +1334,20 @@ rriobSortOrder
 rriobColumn :: Lens' ReportRequestItemOrderBy (Maybe (Maybe ReportApiColumnSpec))
 rriobColumn
   = lens _rriobColumn (\ s a -> s{_rriobColumn = a})
+
+instance FromJSON ReportRequestItemOrderBy where
+        parseJSON
+          = withObject "ReportRequestItemOrderBy"
+              (\ o ->
+                 ReportRequestItemOrderBy <$>
+                   (o .:? "sortOrder") <*> (o .:? "column"))
+
+instance ToJSON ReportRequestItemOrderBy where
+        toJSON ReportRequestItemOrderBy{..}
+          = object
+              (catMaybes
+                 [("sortOrder" .=) <$> _rriobSortOrder,
+                  ("column" .=) <$> _rriobColumn])
 
 -- | The reportScope is a set of IDs that are used to determine which subset
 -- of entities will be returned in the report. The full lineage of IDs from
@@ -1146,6 +1433,30 @@ rrrsCampaignId
 rrrsAdId :: Lens' ReportRequestReportScope (Maybe Int64)
 rrrsAdId = lens _rrrsAdId (\ s a -> s{_rrrsAdId = a})
 
+instance FromJSON ReportRequestReportScope where
+        parseJSON
+          = withObject "ReportRequestReportScope"
+              (\ o ->
+                 ReportRequestReportScope <$>
+                   (o .:? "keywordId") <*> (o .:? "adGroupId") <*>
+                     (o .:? "engineAccountId")
+                     <*> (o .:? "agencyId")
+                     <*> (o .:? "advertiserId")
+                     <*> (o .:? "campaignId")
+                     <*> (o .:? "adId"))
+
+instance ToJSON ReportRequestReportScope where
+        toJSON ReportRequestReportScope{..}
+          = object
+              (catMaybes
+                 [("keywordId" .=) <$> _rrrsKeywordId,
+                  ("adGroupId" .=) <$> _rrrsAdGroupId,
+                  ("engineAccountId" .=) <$> _rrrsEngineAccountId,
+                  ("agencyId" .=) <$> _rrrsAgencyId,
+                  ("advertiserId" .=) <$> _rrrsAdvertiserId,
+                  ("campaignId" .=) <$> _rrrsCampaignId,
+                  ("adId" .=) <$> _rrrsAdId])
+
 -- | If metrics are requested in a report, this argument will be used to
 -- restrict the metrics to a specific time range.
 --
@@ -1204,6 +1515,27 @@ rrtrChangedMetricsSinceTimestamp
   = lens _rrtrChangedMetricsSinceTimestamp
       (\ s a -> s{_rrtrChangedMetricsSinceTimestamp = a})
 
+instance FromJSON ReportRequestTimeRange where
+        parseJSON
+          = withObject "ReportRequestTimeRange"
+              (\ o ->
+                 ReportRequestTimeRange <$>
+                   (o .:? "endDate") <*>
+                     (o .:? "changedAttributesSinceTimestamp")
+                     <*> (o .:? "startDate")
+                     <*> (o .:? "changedMetricsSinceTimestamp"))
+
+instance ToJSON ReportRequestTimeRange where
+        toJSON ReportRequestTimeRange{..}
+          = object
+              (catMaybes
+                 [("endDate" .=) <$> _rrtrEndDate,
+                  ("changedAttributesSinceTimestamp" .=) <$>
+                    _rrtrChangedAttributesSinceTimestamp,
+                  ("startDate" .=) <$> _rrtrStartDate,
+                  ("changedMetricsSinceTimestamp" .=) <$>
+                    _rrtrChangedMetricsSinceTimestamp])
+
 -- | A row in a DoubleClick Search report.
 --
 -- /See:/ 'reportRow' smart constructor.
@@ -1216,6 +1548,13 @@ data ReportRow =
 reportRow
     :: ReportRow
 reportRow = ReportRow
+
+instance FromJSON ReportRow where
+        parseJSON
+          = withObject "ReportRow" (\ o -> pure ReportRow)
+
+instance ToJSON ReportRow where
+        toJSON = const (Object mempty)
 
 -- | A saved column
 --
@@ -1259,6 +1598,22 @@ scKind = lens _scKind (\ s a -> s{_scKind = a})
 scType :: Lens' SavedColumn (Maybe Text)
 scType = lens _scType (\ s a -> s{_scType = a})
 
+instance FromJSON SavedColumn where
+        parseJSON
+          = withObject "SavedColumn"
+              (\ o ->
+                 SavedColumn <$>
+                   (o .:? "savedColumnName") <*>
+                     (o .:? "kind" .!= "doubleclicksearch#savedColumn")
+                     <*> (o .:? "type"))
+
+instance ToJSON SavedColumn where
+        toJSON SavedColumn{..}
+          = object
+              (catMaybes
+                 [("savedColumnName" .=) <$> _scSavedColumnName,
+                  Just ("kind" .= _scKind), ("type" .=) <$> _scType])
+
 -- | A list of saved columns. Advertisers create saved columns to report on
 -- Floodlight activities, Google Analytics goals, or custom KPIs. To
 -- request reports with saved columns, you\'ll need the saved column names
@@ -1297,6 +1652,22 @@ sclItems
       _Default
       . _Coerce
 
+instance FromJSON SavedColumnList where
+        parseJSON
+          = withObject "SavedColumnList"
+              (\ o ->
+                 SavedColumnList <$>
+                   (o .:? "kind" .!=
+                      "doubleclicksearch#savedColumnList")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON SavedColumnList where
+        toJSON SavedColumnList{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _sclKind),
+                  ("items" .=) <$> _sclItems])
+
 -- | The request to update availability.
 --
 -- /See:/ 'updateAvailabilityRequest' smart constructor.
@@ -1324,6 +1695,19 @@ uAvailabilities
       . _Default
       . _Coerce
 
+instance FromJSON UpdateAvailabilityRequest where
+        parseJSON
+          = withObject "UpdateAvailabilityRequest"
+              (\ o ->
+                 UpdateAvailabilityRequest <$>
+                   (o .:? "availabilities" .!= mempty))
+
+instance ToJSON UpdateAvailabilityRequest where
+        toJSON UpdateAvailabilityRequest{..}
+          = object
+              (catMaybes
+                 [("availabilities" .=) <$> _uAvailabilities])
+
 -- | The response to a update availability request.
 --
 -- /See:/ 'updateAvailabilityResponse' smart constructor.
@@ -1350,3 +1734,16 @@ uarAvailabilities
       (\ s a -> s{_uarAvailabilities = a})
       . _Default
       . _Coerce
+
+instance FromJSON UpdateAvailabilityResponse where
+        parseJSON
+          = withObject "UpdateAvailabilityResponse"
+              (\ o ->
+                 UpdateAvailabilityResponse <$>
+                   (o .:? "availabilities" .!= mempty))
+
+instance ToJSON UpdateAvailabilityResponse where
+        toJSON UpdateAvailabilityResponse{..}
+          = object
+              (catMaybes
+                 [("availabilities" .=) <$> _uarAvailabilities])

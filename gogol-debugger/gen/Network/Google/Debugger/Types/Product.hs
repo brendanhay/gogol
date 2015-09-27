@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -211,6 +212,46 @@ bIsFinalState
   = lens _bIsFinalState
       (\ s a -> s{_bIsFinalState = a})
 
+instance FromJSON Breakpoint where
+        parseJSON
+          = withObject "Breakpoint"
+              (\ o ->
+                 Breakpoint <$>
+                   (o .:? "status") <*> (o .:? "logLevel") <*>
+                     (o .:? "location")
+                     <*> (o .:? "action")
+                     <*> (o .:? "finalTime")
+                     <*> (o .:? "expressions" .!= mempty)
+                     <*> (o .:? "logMessageFormat")
+                     <*> (o .:? "id")
+                     <*> (o .:? "userEmail")
+                     <*> (o .:? "variableTable" .!= mempty)
+                     <*> (o .:? "stackFrames" .!= mempty)
+                     <*> (o .:? "condition")
+                     <*> (o .:? "evaluatedExpressions" .!= mempty)
+                     <*> (o .:? "createTime")
+                     <*> (o .:? "isFinalState"))
+
+instance ToJSON Breakpoint where
+        toJSON Breakpoint{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _bStatus,
+                  ("logLevel" .=) <$> _bLogLevel,
+                  ("location" .=) <$> _bLocation,
+                  ("action" .=) <$> _bAction,
+                  ("finalTime" .=) <$> _bFinalTime,
+                  ("expressions" .=) <$> _bExpressions,
+                  ("logMessageFormat" .=) <$> _bLogMessageFormat,
+                  ("id" .=) <$> _bId, ("userEmail" .=) <$> _bUserEmail,
+                  ("variableTable" .=) <$> _bVariableTable,
+                  ("stackFrames" .=) <$> _bStackFrames,
+                  ("condition" .=) <$> _bCondition,
+                  ("evaluatedExpressions" .=) <$>
+                    _bEvaluatedExpressions,
+                  ("createTime" .=) <$> _bCreateTime,
+                  ("isFinalState" .=) <$> _bIsFinalState])
+
 -- | A CloudRepoSourceContext denotes a particular revision in a cloud repo
 -- (a repo hosted by the Google Cloud Platform).
 --
@@ -256,6 +297,22 @@ crscRevisionId
   = lens _crscRevisionId
       (\ s a -> s{_crscRevisionId = a})
 
+instance FromJSON CloudRepoSourceContext where
+        parseJSON
+          = withObject "CloudRepoSourceContext"
+              (\ o ->
+                 CloudRepoSourceContext <$>
+                   (o .:? "repoId") <*> (o .:? "aliasName") <*>
+                     (o .:? "revisionId"))
+
+instance ToJSON CloudRepoSourceContext where
+        toJSON CloudRepoSourceContext{..}
+          = object
+              (catMaybes
+                 [("repoId" .=) <$> _crscRepoId,
+                  ("aliasName" .=) <$> _crscAliasName,
+                  ("revisionId" .=) <$> _crscRevisionId])
+
 -- | A CloudWorkspaceId is a unique identifier for a cloud workspace. A cloud
 -- workspace is a place associated with a repo where modified files can be
 -- stored before they are committed.
@@ -290,6 +347,20 @@ cwiRepoId
 -- chosen by the client in the Source API\'s CreateWorkspace method.
 cwiName :: Lens' CloudWorkspaceId (Maybe Text)
 cwiName = lens _cwiName (\ s a -> s{_cwiName = a})
+
+instance FromJSON CloudWorkspaceId where
+        parseJSON
+          = withObject "CloudWorkspaceId"
+              (\ o ->
+                 CloudWorkspaceId <$>
+                   (o .:? "repoId") <*> (o .:? "name"))
+
+instance ToJSON CloudWorkspaceId where
+        toJSON CloudWorkspaceId{..}
+          = object
+              (catMaybes
+                 [("repoId" .=) <$> _cwiRepoId,
+                  ("name" .=) <$> _cwiName])
 
 -- | A CloudWorkspaceSourceContext denotes a workspace at a particular
 -- snapshot.
@@ -327,6 +398,20 @@ cwscSnapshotId :: Lens' CloudWorkspaceSourceContext (Maybe Text)
 cwscSnapshotId
   = lens _cwscSnapshotId
       (\ s a -> s{_cwscSnapshotId = a})
+
+instance FromJSON CloudWorkspaceSourceContext where
+        parseJSON
+          = withObject "CloudWorkspaceSourceContext"
+              (\ o ->
+                 CloudWorkspaceSourceContext <$>
+                   (o .:? "workspaceId") <*> (o .:? "snapshotId"))
+
+instance ToJSON CloudWorkspaceSourceContext where
+        toJSON CloudWorkspaceSourceContext{..}
+          = object
+              (catMaybes
+                 [("workspaceId" .=) <$> _cwscWorkspaceId,
+                  ("snapshotId" .=) <$> _cwscSnapshotId])
 
 -- | Represents the application to debug. The application may include one or
 -- more replicated processes executing the same code. Each of these
@@ -449,6 +534,35 @@ dSourceContexts
       . _Default
       . _Coerce
 
+instance FromJSON Debuggee where
+        parseJSON
+          = withObject "Debuggee"
+              (\ o ->
+                 Debuggee <$>
+                   (o .:? "status") <*> (o .:? "uniquifier") <*>
+                     (o .:? "project")
+                     <*> (o .:? "agentVersion")
+                     <*> (o .:? "isDisabled")
+                     <*> (o .:? "id")
+                     <*> (o .:? "labels")
+                     <*> (o .:? "description")
+                     <*> (o .:? "isInactive")
+                     <*> (o .:? "sourceContexts" .!= mempty))
+
+instance ToJSON Debuggee where
+        toJSON Debuggee{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _dStatus,
+                  ("uniquifier" .=) <$> _dUniquifier,
+                  ("project" .=) <$> _dProject,
+                  ("agentVersion" .=) <$> _dAgentVersion,
+                  ("isDisabled" .=) <$> _dIsDisabled,
+                  ("id" .=) <$> _dId, ("labels" .=) <$> _dLabels,
+                  ("description" .=) <$> _dDescription,
+                  ("isInactive" .=) <$> _dIsInactive,
+                  ("sourceContexts" .=) <$> _dSourceContexts])
+
 -- | A set of custom debuggee properties, populated by the agent, to be
 -- displayed to the user.
 --
@@ -462,6 +576,14 @@ data DebuggeeLabels =
 debuggeeLabels
     :: DebuggeeLabels
 debuggeeLabels = DebuggeeLabels
+
+instance FromJSON DebuggeeLabels where
+        parseJSON
+          = withObject "DebuggeeLabels"
+              (\ o -> pure DebuggeeLabels)
+
+instance ToJSON DebuggeeLabels where
+        toJSON = const (Object mempty)
 
 -- | A generic empty message that you can re-use to avoid defining duplicated
 -- empty messages in your APIs. A typical example is to use it as the
@@ -479,6 +601,12 @@ data Empty =
 empty
     :: Empty
 empty = Empty
+
+instance FromJSON Empty where
+        parseJSON = withObject "Empty" (\ o -> pure Empty)
+
+instance ToJSON Empty where
+        toJSON = const (Object mempty)
 
 -- | Represents a message with parameters.
 --
@@ -517,6 +645,20 @@ fmParameters
   = lens _fmParameters (\ s a -> s{_fmParameters = a})
       . _Default
       . _Coerce
+
+instance FromJSON FormatMessage where
+        parseJSON
+          = withObject "FormatMessage"
+              (\ o ->
+                 FormatMessage <$>
+                   (o .:? "format") <*> (o .:? "parameters" .!= mempty))
+
+instance ToJSON FormatMessage where
+        toJSON FormatMessage{..}
+          = object
+              (catMaybes
+                 [("format" .=) <$> _fmFormat,
+                  ("parameters" .=) <$> _fmParameters])
 
 -- | A SourceContext referring to a Gerrit project.
 --
@@ -571,6 +713,24 @@ gRevisionId
 gHostUri :: Lens' GerritSourceContext (Maybe Text)
 gHostUri = lens _gHostUri (\ s a -> s{_gHostUri = a})
 
+instance FromJSON GerritSourceContext where
+        parseJSON
+          = withObject "GerritSourceContext"
+              (\ o ->
+                 GerritSourceContext <$>
+                   (o .:? "gerritProject") <*> (o .:? "aliasName") <*>
+                     (o .:? "revisionId")
+                     <*> (o .:? "hostUri"))
+
+instance ToJSON GerritSourceContext where
+        toJSON GerritSourceContext{..}
+          = object
+              (catMaybes
+                 [("gerritProject" .=) <$> _gGerritProject,
+                  ("aliasName" .=) <$> _gAliasName,
+                  ("revisionId" .=) <$> _gRevisionId,
+                  ("hostUri" .=) <$> _gHostUri])
+
 -- | The response of getting breakpoint information.
 --
 -- /See:/ 'getBreakpointResponse' smart constructor.
@@ -596,6 +756,17 @@ gbrBreakpoint :: Lens' GetBreakpointResponse (Maybe (Maybe Breakpoint))
 gbrBreakpoint
   = lens _gbrBreakpoint
       (\ s a -> s{_gbrBreakpoint = a})
+
+instance FromJSON GetBreakpointResponse where
+        parseJSON
+          = withObject "GetBreakpointResponse"
+              (\ o ->
+                 GetBreakpointResponse <$> (o .:? "breakpoint"))
+
+instance ToJSON GetBreakpointResponse where
+        toJSON GetBreakpointResponse{..}
+          = object
+              (catMaybes [("breakpoint" .=) <$> _gbrBreakpoint])
 
 -- | A GitSourceContext denotes a particular revision in a third party Git
 -- repository (e.g. GitHub).
@@ -630,6 +801,20 @@ gscRevisionId :: Lens' GitSourceContext (Maybe Text)
 gscRevisionId
   = lens _gscRevisionId
       (\ s a -> s{_gscRevisionId = a})
+
+instance FromJSON GitSourceContext where
+        parseJSON
+          = withObject "GitSourceContext"
+              (\ o ->
+                 GitSourceContext <$>
+                   (o .:? "url") <*> (o .:? "revisionId"))
+
+instance ToJSON GitSourceContext where
+        toJSON GitSourceContext{..}
+          = object
+              (catMaybes
+                 [("url" .=) <$> _gscUrl,
+                  ("revisionId" .=) <$> _gscRevisionId])
 
 -- | The response of listing active breakpoints.
 --
@@ -670,6 +855,21 @@ labrBreakpoints
       . _Default
       . _Coerce
 
+instance FromJSON ListActiveBreakpointsResponse where
+        parseJSON
+          = withObject "ListActiveBreakpointsResponse"
+              (\ o ->
+                 ListActiveBreakpointsResponse <$>
+                   (o .:? "nextWaitToken") <*>
+                     (o .:? "breakpoints" .!= mempty))
+
+instance ToJSON ListActiveBreakpointsResponse where
+        toJSON ListActiveBreakpointsResponse{..}
+          = object
+              (catMaybes
+                 [("nextWaitToken" .=) <$> _labrNextWaitToken,
+                  ("breakpoints" .=) <$> _labrBreakpoints])
+
 -- | The response of listing breakpoints.
 --
 -- /See:/ 'listBreakpointsResponse' smart constructor.
@@ -709,6 +909,21 @@ lbrBreakpoints
       . _Default
       . _Coerce
 
+instance FromJSON ListBreakpointsResponse where
+        parseJSON
+          = withObject "ListBreakpointsResponse"
+              (\ o ->
+                 ListBreakpointsResponse <$>
+                   (o .:? "nextWaitToken") <*>
+                     (o .:? "breakpoints" .!= mempty))
+
+instance ToJSON ListBreakpointsResponse where
+        toJSON ListBreakpointsResponse{..}
+          = object
+              (catMaybes
+                 [("nextWaitToken" .=) <$> _lbrNextWaitToken,
+                  ("breakpoints" .=) <$> _lbrBreakpoints])
+
 -- | The response of listing debuggees.
 --
 -- /See:/ 'listDebuggeesResponse' smart constructor.
@@ -737,6 +952,18 @@ ldrDebuggees
   = lens _ldrDebuggees (\ s a -> s{_ldrDebuggees = a})
       . _Default
       . _Coerce
+
+instance FromJSON ListDebuggeesResponse where
+        parseJSON
+          = withObject "ListDebuggeesResponse"
+              (\ o ->
+                 ListDebuggeesResponse <$>
+                   (o .:? "debuggees" .!= mempty))
+
+instance ToJSON ListDebuggeesResponse where
+        toJSON ListDebuggeesResponse{..}
+          = object
+              (catMaybes [("debuggees" .=) <$> _ldrDebuggees])
 
 -- | Selects a repo using a Google Cloud Platform project ID (e.g.
 -- winged-cargo-31) and a repo name within that project.
@@ -772,6 +999,20 @@ priProjectId :: Lens' ProjectRepoId (Maybe Text)
 priProjectId
   = lens _priProjectId (\ s a -> s{_priProjectId = a})
 
+instance FromJSON ProjectRepoId where
+        parseJSON
+          = withObject "ProjectRepoId"
+              (\ o ->
+                 ProjectRepoId <$>
+                   (o .:? "repoName") <*> (o .:? "projectId"))
+
+instance ToJSON ProjectRepoId where
+        toJSON ProjectRepoId{..}
+          = object
+              (catMaybes
+                 [("repoName" .=) <$> _priRepoName,
+                  ("projectId" .=) <$> _priProjectId])
+
 -- | The request to register a debuggee.
 --
 -- /See:/ 'registerDebuggeeRequest' smart constructor.
@@ -798,6 +1039,16 @@ rDebuggee :: Lens' RegisterDebuggeeRequest (Maybe (Maybe Debuggee))
 rDebuggee
   = lens _rDebuggee (\ s a -> s{_rDebuggee = a})
 
+instance FromJSON RegisterDebuggeeRequest where
+        parseJSON
+          = withObject "RegisterDebuggeeRequest"
+              (\ o ->
+                 RegisterDebuggeeRequest <$> (o .:? "debuggee"))
+
+instance ToJSON RegisterDebuggeeRequest where
+        toJSON RegisterDebuggeeRequest{..}
+          = object (catMaybes [("debuggee" .=) <$> _rDebuggee])
+
 -- | The response of registering a debuggee.
 --
 -- /See:/ 'registerDebuggeeResponse' smart constructor.
@@ -822,6 +1073,17 @@ registerDebuggeeResponse =
 rdrDebuggee :: Lens' RegisterDebuggeeResponse (Maybe (Maybe Debuggee))
 rdrDebuggee
   = lens _rdrDebuggee (\ s a -> s{_rdrDebuggee = a})
+
+instance FromJSON RegisterDebuggeeResponse where
+        parseJSON
+          = withObject "RegisterDebuggeeResponse"
+              (\ o ->
+                 RegisterDebuggeeResponse <$> (o .:? "debuggee"))
+
+instance ToJSON RegisterDebuggeeResponse where
+        toJSON RegisterDebuggeeResponse{..}
+          = object
+              (catMaybes [("debuggee" .=) <$> _rdrDebuggee])
 
 -- | A unique identifier for a cloud repo.
 --
@@ -856,6 +1118,19 @@ riProjectRepoId
   = lens _riProjectRepoId
       (\ s a -> s{_riProjectRepoId = a})
 
+instance FromJSON RepoId where
+        parseJSON
+          = withObject "RepoId"
+              (\ o ->
+                 RepoId <$> (o .:? "uid") <*> (o .:? "projectRepoId"))
+
+instance ToJSON RepoId where
+        toJSON RepoId{..}
+          = object
+              (catMaybes
+                 [("uid" .=) <$> _riUid,
+                  ("projectRepoId" .=) <$> _riProjectRepoId])
+
 -- | The response of setting a breakpoint.
 --
 -- /See:/ 'setBreakpointResponse' smart constructor.
@@ -881,6 +1156,17 @@ sbrBreakpoint :: Lens' SetBreakpointResponse (Maybe (Maybe Breakpoint))
 sbrBreakpoint
   = lens _sbrBreakpoint
       (\ s a -> s{_sbrBreakpoint = a})
+
+instance FromJSON SetBreakpointResponse where
+        parseJSON
+          = withObject "SetBreakpointResponse"
+              (\ o ->
+                 SetBreakpointResponse <$> (o .:? "breakpoint"))
+
+instance ToJSON SetBreakpointResponse where
+        toJSON SetBreakpointResponse{..}
+          = object
+              (catMaybes [("breakpoint" .=) <$> _sbrBreakpoint])
 
 -- | A SourceContext is a reference to a tree of files. A SourceContext
 -- together with a path point to a unique revision of a single file or
@@ -934,6 +1220,23 @@ scGerrit = lens _scGerrit (\ s a -> s{_scGerrit = a})
 scGit :: Lens' SourceContext (Maybe (Maybe GitSourceContext))
 scGit = lens _scGit (\ s a -> s{_scGit = a})
 
+instance FromJSON SourceContext where
+        parseJSON
+          = withObject "SourceContext"
+              (\ o ->
+                 SourceContext <$>
+                   (o .:? "cloudWorkspace") <*> (o .:? "cloudRepo") <*>
+                     (o .:? "gerrit")
+                     <*> (o .:? "git"))
+
+instance ToJSON SourceContext where
+        toJSON SourceContext{..}
+          = object
+              (catMaybes
+                 [("cloudWorkspace" .=) <$> _scCloudWorkspace,
+                  ("cloudRepo" .=) <$> _scCloudRepo,
+                  ("gerrit" .=) <$> _scGerrit, ("git" .=) <$> _scGit])
+
 -- | Represents a location in the source code.
 --
 -- /See:/ 'sourceLocation' smart constructor.
@@ -965,6 +1268,18 @@ slPath = lens _slPath (\ s a -> s{_slPath = a})
 -- | The line inside the file (first line value is \'1\').
 slLine :: Lens' SourceLocation (Maybe Int32)
 slLine = lens _slLine (\ s a -> s{_slLine = a})
+
+instance FromJSON SourceLocation where
+        parseJSON
+          = withObject "SourceLocation"
+              (\ o ->
+                 SourceLocation <$> (o .:? "path") <*> (o .:? "line"))
+
+instance ToJSON SourceLocation where
+        toJSON SourceLocation{..}
+          = object
+              (catMaybes
+                 [("path" .=) <$> _slPath, ("line" .=) <$> _slLine])
 
 -- | Represents a stack frame context.
 --
@@ -1023,6 +1338,24 @@ sfLocals
       _Default
       . _Coerce
 
+instance FromJSON StackFrame where
+        parseJSON
+          = withObject "StackFrame"
+              (\ o ->
+                 StackFrame <$>
+                   (o .:? "function") <*> (o .:? "location") <*>
+                     (o .:? "arguments" .!= mempty)
+                     <*> (o .:? "locals" .!= mempty))
+
+instance ToJSON StackFrame where
+        toJSON StackFrame{..}
+          = object
+              (catMaybes
+                 [("function" .=) <$> _sfFunction,
+                  ("location" .=) <$> _sfLocation,
+                  ("arguments" .=) <$> _sfArguments,
+                  ("locals" .=) <$> _sfLocals])
+
 -- | Represents a contextual status message. The message can indicate an
 -- error or informational status, and refer to specific parts of the
 -- containing object. For example, the Breakpoint.status field can indicate
@@ -1070,6 +1403,22 @@ smDescription
   = lens _smDescription
       (\ s a -> s{_smDescription = a})
 
+instance FromJSON StatusMessage where
+        parseJSON
+          = withObject "StatusMessage"
+              (\ o ->
+                 StatusMessage <$>
+                   (o .:? "refersTo") <*> (o .:? "isError") <*>
+                     (o .:? "description"))
+
+instance ToJSON StatusMessage where
+        toJSON StatusMessage{..}
+          = object
+              (catMaybes
+                 [("refersTo" .=) <$> _smRefersTo,
+                  ("isError" .=) <$> _smIsError,
+                  ("description" .=) <$> _smDescription])
+
 -- | The request to update an active breakpoint.
 --
 -- /See:/ 'updateActiveBreakpointRequest' smart constructor.
@@ -1095,6 +1444,18 @@ uabrBreakpoint
   = lens _uabrBreakpoint
       (\ s a -> s{_uabrBreakpoint = a})
 
+instance FromJSON UpdateActiveBreakpointRequest where
+        parseJSON
+          = withObject "UpdateActiveBreakpointRequest"
+              (\ o ->
+                 UpdateActiveBreakpointRequest <$>
+                   (o .:? "breakpoint"))
+
+instance ToJSON UpdateActiveBreakpointRequest where
+        toJSON UpdateActiveBreakpointRequest{..}
+          = object
+              (catMaybes [("breakpoint" .=) <$> _uabrBreakpoint])
+
 -- | The response of updating an active breakpoint. The message is defined to
 -- allow future extensions.
 --
@@ -1108,6 +1469,15 @@ data UpdateActiveBreakpointResponse =
 updateActiveBreakpointResponse
     :: UpdateActiveBreakpointResponse
 updateActiveBreakpointResponse = UpdateActiveBreakpointResponse
+
+instance FromJSON UpdateActiveBreakpointResponse
+         where
+        parseJSON
+          = withObject "UpdateActiveBreakpointResponse"
+              (\ o -> pure UpdateActiveBreakpointResponse)
+
+instance ToJSON UpdateActiveBreakpointResponse where
+        toJSON = const (Object mempty)
 
 -- | Represents a variable or an argument possibly of a compound object type.
 -- 1. A simple variable such as, int x = 5 is represented as: { name:
@@ -1211,3 +1581,22 @@ vValue = lens _vValue (\ s a -> s{_vValue = a})
 -- | The name of the variable, if any.
 vName :: Lens' Variable (Maybe Text)
 vName = lens _vName (\ s a -> s{_vName = a})
+
+instance FromJSON Variable where
+        parseJSON
+          = withObject "Variable"
+              (\ o ->
+                 Variable <$>
+                   (o .:? "status") <*> (o .:? "varTableIndex") <*>
+                     (o .:? "members" .!= mempty)
+                     <*> (o .:? "value")
+                     <*> (o .:? "name"))
+
+instance ToJSON Variable where
+        toJSON Variable{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _vStatus,
+                  ("varTableIndex" .=) <$> _vVarTableIndex,
+                  ("members" .=) <$> _vMembers,
+                  ("value" .=) <$> _vValue, ("name" .=) <$> _vName])

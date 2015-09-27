@@ -608,90 +608,107 @@ type AppsAPI = AppsList :<|> AppsGet
 
 -- | Lists a user\'s installed apps.
 type AppsList =
-     "drive" :> "v2" :> "apps" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "languageCode" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "appFilterExtensions" Text
-       :> QueryParam "appFilterMimeTypes" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "apps" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "languageCode" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "appFilterExtensions" Text :>
+                         QueryParam "appFilterMimeTypes" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] AppList
 
 -- | Gets a specific app.
 type AppsGet =
-     "drive" :> "v2" :> "apps" :> Capture "appId" Text :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "apps" :>
+           Capture "appId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Get '[JSON] App
 
 type ChangesAPI =
      ChangesList :<|> ChangesGet :<|> ChangesWatch
 
 -- | Lists the changes for a user.
 type ChangesList =
-     "drive" :> "v2" :> "changes" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "includeSubscribed" Bool
-       :> QueryParam "startChangeId" Int64
-       :> QueryParam "key" Text
-       :> QueryParam "spaces" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Natural
-       :> QueryParam "includeDeleted" Bool
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "changes" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "includeSubscribed" Bool :>
+                   QueryParam "startChangeId" Int64 :>
+                     QueryParam "key" Text :>
+                       QueryParam "spaces" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "maxResults" Natural :>
+                               QueryParam "includeDeleted" Bool :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON] ChangeList
 
 -- | Gets a specific change.
 type ChangesGet =
-     "drive" :> "v2" :> "changes" :>
-       Capture "changeId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "changes" :>
+           Capture "changeId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Get '[JSON] Change
 
 -- | Subscribe to changes for a user.
 type ChangesWatch =
-     "drive" :> "v2" :> "changes" :> "watch" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "includeSubscribed" Bool
-       :> QueryParam "startChangeId" Int64
-       :> QueryParam "key" Text
-       :> QueryParam "spaces" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Natural
-       :> QueryParam "includeDeleted" Bool
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "changes" :>
+           "watch" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "includeSubscribed" Bool :>
+                     QueryParam "startChangeId" Int64 :>
+                       QueryParam "key" Text :>
+                         QueryParam "spaces" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "maxResults" Natural :>
+                                 QueryParam "includeDeleted" Bool :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :>
+                                       Post '[JSON] Channel
 
 type ChannelsAPI = ChannelsStop
 
 -- | Stop watching resources through this channel
 type ChannelsStop =
-     "drive" :> "v2" :> "channels" :> "stop" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "channels" :>
+           "stop" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Post '[JSON] ()
 
 type ChildrenAPI =
      ChildrenInsert :<|> ChildrenList :<|> ChildrenGet
@@ -699,57 +716,70 @@ type ChildrenAPI =
 
 -- | Inserts a file into a folder.
 type ChildrenInsert =
-     "drive" :> "v2" :> "files" :> Capture "folderId" Text
-       :> "children"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "folderId" Text :>
+             "children" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] ChildReference
 
 -- | Lists a folder\'s children.
 type ChildrenList =
-     "drive" :> "v2" :> "files" :> Capture "folderId" Text
-       :> "children"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "orderBy" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "q" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "folderId" Text :>
+             "children" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "orderBy" Text :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "q" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "maxResults" Int32 :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON] ChildList
 
 -- | Gets a specific child reference.
 type ChildrenGet =
-     "drive" :> "v2" :> "files" :> Capture "folderId" Text
-       :> "children"
-       :> Capture "childId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "folderId" Text :>
+             "children" :>
+               Capture "childId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] ChildReference
 
 -- | Removes a child from a folder.
 type ChildrenDelete =
-     "drive" :> "v2" :> "files" :> Capture "folderId" Text
-       :> "children"
-       :> Capture "childId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "folderId" Text :>
+             "children" :>
+               Capture "childId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Delete '[JSON] ()
 
 type RepliesAPI =
      RepliesInsert :<|> RepliesList :<|> RepliesPatch :<|>
@@ -759,95 +789,118 @@ type RepliesAPI =
 
 -- | Creates a new reply to the given comment.
 type RepliesInsert =
-     "drive" :> "v2" :> "files" :> Capture "fileId" Text
-       :> "comments"
-       :> Capture "commentId" Text
-       :> "replies"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "comments" :>
+               Capture "commentId" Text :>
+                 "replies" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :>
+                                 Post '[JSON] CommentReply
 
 -- | Lists all of the replies to a comment.
 type RepliesList =
-     "drive" :> "v2" :> "files" :> Capture "fileId" Text
-       :> "comments"
-       :> Capture "commentId" Text
-       :> "replies"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "includeDeleted" Bool
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "comments" :>
+               Capture "commentId" Text :>
+                 "replies" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "maxResults" Int32 :>
+                                 QueryParam "includeDeleted" Bool :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :>
+                                       Get '[JSON] CommentReplyList
 
 -- | Updates an existing reply. This method supports patch semantics.
 type RepliesPatch =
-     "drive" :> "v2" :> "files" :> Capture "fileId" Text
-       :> "comments"
-       :> Capture "commentId" Text
-       :> "replies"
-       :> Capture "replyId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "comments" :>
+               Capture "commentId" Text :>
+                 "replies" :>
+                   Capture "replyId" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Patch '[JSON] CommentReply
 
 -- | Gets a reply.
 type RepliesGet =
-     "drive" :> "v2" :> "files" :> Capture "fileId" Text
-       :> "comments"
-       :> Capture "commentId" Text
-       :> "replies"
-       :> Capture "replyId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "includeDeleted" Bool
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "comments" :>
+               Capture "commentId" Text :>
+                 "replies" :>
+                   Capture "replyId" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "includeDeleted" Bool :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON] CommentReply
 
 -- | Deletes a reply.
 type RepliesDelete =
-     "drive" :> "v2" :> "files" :> Capture "fileId" Text
-       :> "comments"
-       :> Capture "commentId" Text
-       :> "replies"
-       :> Capture "replyId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "comments" :>
+               Capture "commentId" Text :>
+                 "replies" :>
+                   Capture "replyId" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Updates an existing reply.
 type RepliesUpdate =
-     "drive" :> "v2" :> "files" :> Capture "fileId" Text
-       :> "comments"
-       :> Capture "commentId" Text
-       :> "replies"
-       :> Capture "replyId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "comments" :>
+               Capture "commentId" Text :>
+                 "replies" :>
+                   Capture "replyId" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Put '[JSON] CommentReply
 
 type ParentsAPI =
      ParentsInsert :<|> ParentsList :<|> ParentsGet :<|>
@@ -855,100 +908,121 @@ type ParentsAPI =
 
 -- | Adds a parent folder for a file.
 type ParentsInsert =
-     "drive" :> "v2" :> "files" :> Capture "fileId" Text
-       :> "parents"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "parents" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] ParentReference
 
 -- | Lists a file\'s parents.
 type ParentsList =
-     "drive" :> "v2" :> "files" :> Capture "fileId" Text
-       :> "parents"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "parents" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Get '[JSON] ParentList
 
 -- | Gets a specific parent reference.
 type ParentsGet =
-     "drive" :> "v2" :> "files" :> Capture "fileId" Text
-       :> "parents"
-       :> Capture "parentId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "parents" :>
+               Capture "parentId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Get '[JSON] ParentReference
 
 -- | Removes a parent from a file.
 type ParentsDelete =
-     "drive" :> "v2" :> "files" :> Capture "fileId" Text
-       :> "parents"
-       :> Capture "parentId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "parents" :>
+               Capture "parentId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Delete '[JSON] ()
 
 type RealtimeAPI = RealtimeGet :<|> RealtimeUpdate
 
 -- | Exports the contents of the Realtime API data model associated with this
 -- file as JSON.
 type RealtimeGet =
-     "drive" :> "v2" :> "files" :> Capture "fileId" Text
-       :> "realtime"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "revision" Natural
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "realtime" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "revision" Natural :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] ()
 
 -- | Overwrites the Realtime API data model associated with this file with
 -- the provided JSON data model.
 type RealtimeUpdate =
-     "drive" :> "v2" :> "files" :> Capture "fileId" Text
-       :> "realtime"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "baseRevision" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "realtime" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "baseRevision" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Put '[JSON] ()
 
 type AboutAPI = AboutGet
 
 -- | Gets the information about the current user along with Drive API
 -- settings
 type AboutGet =
-     "drive" :> "v2" :> "about" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "includeSubscribed" Bool
-       :> QueryParam "startChangeId" Int64
-       :> QueryParam "maxChangeIdCount" Int64
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "about" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "includeSubscribed" Bool :>
+                   QueryParam "startChangeId" Int64 :>
+                     QueryParam "maxChangeIdCount" Int64 :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] About
 
 type FilesAPI =
      FilesInsert :<|> FilesList :<|> FilesCopy :<|>
@@ -965,212 +1039,254 @@ type FilesAPI =
 
 -- | Insert a new file.
 type FilesInsert =
-     "drive" :> "v2" :> "files" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "pinned" Bool
-       :> QueryParam "visibility" Text
-       :> QueryParam "timedTextLanguage" Text
-       :> QueryParam "useContentAsIndexableText" Bool
-       :> QueryParam "timedTextTrackName" Text
-       :> QueryParam "ocrLanguage" Text
-       :> QueryParam "key" Text
-       :> QueryParam "convert" Bool
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "ocr" Bool
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "pinned" Bool :>
+                   QueryParam "visibility" Text :>
+                     QueryParam "timedTextLanguage" Text :>
+                       QueryParam "useContentAsIndexableText" Bool :>
+                         QueryParam "timedTextTrackName" Text :>
+                           QueryParam "ocrLanguage" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "convert" Bool :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "ocr" Bool :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Text :>
+                                         Post '[JSON] File
 
 -- | Lists the user\'s files.
 type FilesList =
-     "drive" :> "v2" :> "files" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "orderBy" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "q" Text
-       :> QueryParam "key" Text
-       :> QueryParam "spaces" Text
-       :> QueryParam "projection" Text
-       :> QueryParam "corpus" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "orderBy" Text :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "q" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "spaces" Text :>
+                         QueryParam "projection" Text :>
+                           QueryParam "corpus" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "maxResults" Int32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :>
+                                       Get '[JSON] FileList
 
 -- | Creates a copy of the specified file.
 type FilesCopy =
-     "drive" :> "v2" :> "files" :> Capture "fileId" Text
-       :> "copy"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "pinned" Bool
-       :> QueryParam "visibility" Text
-       :> QueryParam "timedTextLanguage" Text
-       :> QueryParam "timedTextTrackName" Text
-       :> QueryParam "ocrLanguage" Text
-       :> QueryParam "key" Text
-       :> QueryParam "convert" Bool
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "ocr" Bool
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "copy" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "pinned" Bool :>
+                       QueryParam "visibility" Text :>
+                         QueryParam "timedTextLanguage" Text :>
+                           QueryParam "timedTextTrackName" Text :>
+                             QueryParam "ocrLanguage" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "convert" Bool :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "ocr" Bool :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "alt" Text :>
+                                           Post '[JSON] File
 
 -- | Updates file metadata and\/or content. This method supports patch
 -- semantics.
 type FilesPatch =
-     "drive" :> "v2" :> "files" :> Capture "fileId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "newRevision" Bool
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "pinned" Bool
-       :> QueryParam "timedTextLanguage" Text
-       :> QueryParam "updateViewedDate" Bool
-       :> QueryParam "removeParents" Text
-       :> QueryParam "modifiedDateBehavior" Text
-       :> QueryParam "useContentAsIndexableText" Bool
-       :> QueryParam "timedTextTrackName" Text
-       :> QueryParam "ocrLanguage" Text
-       :> QueryParam "key" Text
-       :> QueryParam "convert" Bool
-       :> QueryParam "setModifiedDate" Bool
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "addParents" Text
-       :> QueryParam "ocr" Bool
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "newRevision" Bool :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "pinned" Bool :>
+                       QueryParam "timedTextLanguage" Text :>
+                         QueryParam "updateViewedDate" Bool :>
+                           QueryParam "removeParents" Text :>
+                             QueryParam "modifiedDateBehavior" Text :>
+                               QueryParam "useContentAsIndexableText" Bool :>
+                                 QueryParam "timedTextTrackName" Text :>
+                                   QueryParam "ocrLanguage" Text :>
+                                     QueryParam "key" Text :>
+                                       QueryParam "convert" Bool :>
+                                         QueryParam "setModifiedDate" Bool :>
+                                           QueryParam "oauth_token" Text :>
+                                             QueryParam "addParents" Text :>
+                                               QueryParam "ocr" Bool :>
+                                                 QueryParam "fields" Text :>
+                                                   QueryParam "alt" Text :>
+                                                     Patch '[JSON] File
 
 -- | Gets a file\'s metadata by ID.
 type FilesGet =
-     "drive" :> "v2" :> "files" :> Capture "fileId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "updateViewedDate" Bool
-       :> QueryParam "key" Text
-       :> QueryParam "projection" Text
-       :> QueryParam "acknowledgeAbuse" Bool
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "revisionId" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "updateViewedDate" Bool :>
+                     QueryParam "key" Text :>
+                       QueryParam "projection" Text :>
+                         QueryParam "acknowledgeAbuse" Bool :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "revisionId" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :> Get '[JSON] File
 
 -- | Permanently deletes all of the user\'s trashed files.
 type FilesEmptyTrash =
-     "drive" :> "v2" :> "files" :> "trash" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           "trash" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Moves a file to the trash. The currently authenticated user must own the
 -- file.
 type FilesTrash =
-     "drive" :> "v2" :> "files" :> Capture "fileId" Text
-       :> "trash"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "trash" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] File
 
 -- | Restores a file from the trash.
 type FilesUntrash =
-     "drive" :> "v2" :> "files" :> Capture "fileId" Text
-       :> "untrash"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "untrash" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] File
 
 -- | Set the file\'s updated time to the current server time.
 type FilesTouch =
-     "drive" :> "v2" :> "files" :> Capture "fileId" Text
-       :> "touch"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "touch" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] File
 
 -- | Generates a set of file IDs which can be provided in insert requests.
 type FilesGenerateIds =
-     "drive" :> "v2" :> "files" :> "generateIds" :>
-       QueryParam "space" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Natural
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           "generateIds" :>
+             QueryParam "space" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Natural :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] GeneratedIds
 
 -- | Permanently deletes a file by ID. Skips the trash. The currently
 -- authenticated user must own the file.
 type FilesDelete =
-     "drive" :> "v2" :> "files" :> Capture "fileId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Updates file metadata and\/or content.
 type FilesUpdate =
-     "drive" :> "v2" :> "files" :> Capture "fileId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "newRevision" Bool
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "pinned" Bool
-       :> QueryParam "timedTextLanguage" Text
-       :> QueryParam "updateViewedDate" Bool
-       :> QueryParam "removeParents" Text
-       :> QueryParam "modifiedDateBehavior" Text
-       :> QueryParam "useContentAsIndexableText" Bool
-       :> QueryParam "timedTextTrackName" Text
-       :> QueryParam "ocrLanguage" Text
-       :> QueryParam "key" Text
-       :> QueryParam "convert" Bool
-       :> QueryParam "setModifiedDate" Bool
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "addParents" Text
-       :> QueryParam "ocr" Bool
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "newRevision" Bool :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "pinned" Bool :>
+                       QueryParam "timedTextLanguage" Text :>
+                         QueryParam "updateViewedDate" Bool :>
+                           QueryParam "removeParents" Text :>
+                             QueryParam "modifiedDateBehavior" Text :>
+                               QueryParam "useContentAsIndexableText" Bool :>
+                                 QueryParam "timedTextTrackName" Text :>
+                                   QueryParam "ocrLanguage" Text :>
+                                     QueryParam "key" Text :>
+                                       QueryParam "convert" Bool :>
+                                         QueryParam "setModifiedDate" Bool :>
+                                           QueryParam "oauth_token" Text :>
+                                             QueryParam "addParents" Text :>
+                                               QueryParam "ocr" Bool :>
+                                                 QueryParam "fields" Text :>
+                                                   QueryParam "alt" Text :>
+                                                     Put '[JSON] File
 
 -- | Subscribe to changes on a file
 type FilesWatch =
-     "drive" :> "v2" :> "files" :> Capture "fileId" Text
-       :> "watch"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "updateViewedDate" Bool
-       :> QueryParam "key" Text
-       :> QueryParam "projection" Text
-       :> QueryParam "acknowledgeAbuse" Bool
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "revisionId" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "watch" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "updateViewedDate" Bool :>
+                       QueryParam "key" Text :>
+                         QueryParam "projection" Text :>
+                           QueryParam "acknowledgeAbuse" Bool :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "revisionId" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :> Post '[JSON] Channel
 
 type PermissionsAPI =
      PermissionsGetIdForEmail :<|> PermissionsInsert :<|>
@@ -1182,95 +1298,115 @@ type PermissionsAPI =
 
 -- | Returns the permission ID for an email address.
 type PermissionsGetIdForEmail =
-     "drive" :> "v2" :> "permissionIds" :>
-       Capture "email" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "permissionIds" :>
+           Capture "email" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Get '[JSON] PermissionId
 
 -- | Inserts a permission for a file.
 type PermissionsInsert =
-     "drive" :> "v2" :> "files" :> Capture "fileId" Text
-       :> "permissions"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "emailMessage" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "sendNotificationEmails" Bool
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "permissions" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "emailMessage" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "sendNotificationEmails" Bool :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Post '[JSON] Permission
 
 -- | Lists a file\'s permissions.
 type PermissionsList =
-     "drive" :> "v2" :> "files" :> Capture "fileId" Text
-       :> "permissions"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "permissions" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Get '[JSON] PermissionList
 
 -- | Updates a permission using patch semantics.
 type PermissionsPatch =
-     "drive" :> "v2" :> "files" :> Capture "fileId" Text
-       :> "permissions"
-       :> Capture "permissionId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "transferOwnership" Bool
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "permissions" :>
+               Capture "permissionId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "transferOwnership" Bool :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Patch '[JSON] Permission
 
 -- | Gets a permission by ID.
 type PermissionsGet =
-     "drive" :> "v2" :> "files" :> Capture "fileId" Text
-       :> "permissions"
-       :> Capture "permissionId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "permissions" :>
+               Capture "permissionId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] Permission
 
 -- | Deletes a permission from a file.
 type PermissionsDelete =
-     "drive" :> "v2" :> "files" :> Capture "fileId" Text
-       :> "permissions"
-       :> Capture "permissionId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "permissions" :>
+               Capture "permissionId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Updates a permission.
 type PermissionsUpdate =
-     "drive" :> "v2" :> "files" :> Capture "fileId" Text
-       :> "permissions"
-       :> Capture "permissionId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "transferOwnership" Bool
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "permissions" :>
+               Capture "permissionId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "transferOwnership" Bool :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Put '[JSON] Permission
 
 type CommentsAPI =
      CommentsInsert :<|> CommentsList :<|> CommentsPatch
@@ -1280,84 +1416,103 @@ type CommentsAPI =
 
 -- | Creates a new comment on the given file.
 type CommentsInsert =
-     "drive" :> "v2" :> "files" :> Capture "fileId" Text
-       :> "comments"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "comments" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] Comment
 
 -- | Lists a file\'s comments.
 type CommentsList =
-     "drive" :> "v2" :> "files" :> Capture "fileId" Text
-       :> "comments"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "updatedMin" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "includeDeleted" Bool
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "comments" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "updatedMin" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "maxResults" Int32 :>
+                               QueryParam "includeDeleted" Bool :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON] CommentList
 
 -- | Updates an existing comment. This method supports patch semantics.
 type CommentsPatch =
-     "drive" :> "v2" :> "files" :> Capture "fileId" Text
-       :> "comments"
-       :> Capture "commentId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "comments" :>
+               Capture "commentId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Patch '[JSON] Comment
 
 -- | Gets a comment by ID.
 type CommentsGet =
-     "drive" :> "v2" :> "files" :> Capture "fileId" Text
-       :> "comments"
-       :> Capture "commentId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "includeDeleted" Bool
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "comments" :>
+               Capture "commentId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "includeDeleted" Bool :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Get '[JSON] Comment
 
 -- | Deletes a comment.
 type CommentsDelete =
-     "drive" :> "v2" :> "files" :> Capture "fileId" Text
-       :> "comments"
-       :> Capture "commentId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "comments" :>
+               Capture "commentId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Updates an existing comment.
 type CommentsUpdate =
-     "drive" :> "v2" :> "files" :> Capture "fileId" Text
-       :> "comments"
-       :> Capture "commentId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "comments" :>
+               Capture "commentId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Put '[JSON] Comment
 
 type RevisionsAPI =
      RevisionsList :<|> RevisionsPatch :<|> RevisionsGet
@@ -1366,67 +1521,82 @@ type RevisionsAPI =
 
 -- | Lists a file\'s revisions.
 type RevisionsList =
-     "drive" :> "v2" :> "files" :> Capture "fileId" Text
-       :> "revisions"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "revisions" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Get '[JSON] RevisionList
 
 -- | Updates a revision. This method supports patch semantics.
 type RevisionsPatch =
-     "drive" :> "v2" :> "files" :> Capture "fileId" Text
-       :> "revisions"
-       :> Capture "revisionId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "revisions" :>
+               Capture "revisionId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Patch '[JSON] Revision
 
 -- | Gets a specific revision.
 type RevisionsGet =
-     "drive" :> "v2" :> "files" :> Capture "fileId" Text
-       :> "revisions"
-       :> Capture "revisionId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "revisions" :>
+               Capture "revisionId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] Revision
 
 -- | Removes a revision.
 type RevisionsDelete =
-     "drive" :> "v2" :> "files" :> Capture "fileId" Text
-       :> "revisions"
-       :> Capture "revisionId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "revisions" :>
+               Capture "revisionId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Updates a revision.
 type RevisionsUpdate =
-     "drive" :> "v2" :> "files" :> Capture "fileId" Text
-       :> "revisions"
-       :> Capture "revisionId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "revisions" :>
+               Capture "revisionId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Put '[JSON] Revision
 
 type PropertiesAPI =
      PropertiesInsert :<|> PropertiesList :<|>
@@ -1437,80 +1607,98 @@ type PropertiesAPI =
 
 -- | Adds a property to a file.
 type PropertiesInsert =
-     "drive" :> "v2" :> "files" :> Capture "fileId" Text
-       :> "properties"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "properties" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] Property
 
 -- | Lists a file\'s properties.
 type PropertiesList =
-     "drive" :> "v2" :> "files" :> Capture "fileId" Text
-       :> "properties"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "properties" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Get '[JSON] PropertyList
 
 -- | Updates a property. This method supports patch semantics.
 type PropertiesPatch =
-     "drive" :> "v2" :> "files" :> Capture "fileId" Text
-       :> "properties"
-       :> Capture "propertyKey" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "visibility" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "properties" :>
+               Capture "propertyKey" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "visibility" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Patch '[JSON] Property
 
 -- | Gets a property by its key.
 type PropertiesGet =
-     "drive" :> "v2" :> "files" :> Capture "fileId" Text
-       :> "properties"
-       :> Capture "propertyKey" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "visibility" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "properties" :>
+               Capture "propertyKey" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "visibility" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Get '[JSON] Property
 
 -- | Deletes a property.
 type PropertiesDelete =
-     "drive" :> "v2" :> "files" :> Capture "fileId" Text
-       :> "properties"
-       :> Capture "propertyKey" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "visibility" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "properties" :>
+               Capture "propertyKey" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "visibility" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Updates a property.
 type PropertiesUpdate =
-     "drive" :> "v2" :> "files" :> Capture "fileId" Text
-       :> "properties"
-       :> Capture "propertyKey" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "visibility" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "drive" :>
+       "v2" :>
+         "files" :>
+           Capture "fileId" Text :>
+             "properties" :>
+               Capture "propertyKey" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "visibility" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Put '[JSON] Property

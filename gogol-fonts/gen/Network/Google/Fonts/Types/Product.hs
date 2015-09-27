@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -106,6 +107,33 @@ wLastModified
   = lens _wLastModified
       (\ s a -> s{_wLastModified = a})
 
+instance FromJSON Webfont where
+        parseJSON
+          = withObject "Webfont"
+              (\ o ->
+                 Webfont <$>
+                   (o .:? "variants" .!= mempty) <*>
+                     (o .:? "kind" .!= "webfonts#webfont")
+                     <*> (o .:? "category")
+                     <*> (o .:? "family")
+                     <*> (o .:? "version")
+                     <*> (o .:? "files")
+                     <*> (o .:? "subsets" .!= mempty)
+                     <*> (o .:? "lastModified"))
+
+instance ToJSON Webfont where
+        toJSON Webfont{..}
+          = object
+              (catMaybes
+                 [("variants" .=) <$> _wVariants,
+                  Just ("kind" .= _wKind),
+                  ("category" .=) <$> _wCategory,
+                  ("family" .=) <$> _wFamily,
+                  ("version" .=) <$> _wVersion,
+                  ("files" .=) <$> _wFiles,
+                  ("subsets" .=) <$> _wSubsets,
+                  ("lastModified" .=) <$> _wLastModified])
+
 -- | The font files (with all supported scripts) for each one of the
 -- available variants, as a key : value map.
 --
@@ -119,6 +147,14 @@ data WebfontFiles =
 webfontFiles
     :: WebfontFiles
 webfontFiles = WebfontFiles
+
+instance FromJSON WebfontFiles where
+        parseJSON
+          = withObject "WebfontFiles"
+              (\ o -> pure WebfontFiles)
+
+instance ToJSON WebfontFiles where
+        toJSON = const (Object mempty)
 
 --
 -- /See:/ 'webfontList' smart constructor.
@@ -151,3 +187,18 @@ wlItems :: Lens' WebfontList [Maybe Webfont]
 wlItems
   = lens _wlItems (\ s a -> s{_wlItems = a}) . _Default
       . _Coerce
+
+instance FromJSON WebfontList where
+        parseJSON
+          = withObject "WebfontList"
+              (\ o ->
+                 WebfontList <$>
+                   (o .:? "kind" .!= "webfonts#webfontList") <*>
+                     (o .:? "items" .!= mempty))
+
+instance ToJSON WebfontList where
+        toJSON WebfontList{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _wlKind),
+                  ("items" .=) <$> _wlItems])

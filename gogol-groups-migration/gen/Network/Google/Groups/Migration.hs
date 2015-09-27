@@ -44,13 +44,15 @@ type ArchiveAPI = ArchiveInsert
 
 -- | Inserts a new mail into the archive of the Google group.
 type ArchiveInsert =
-     "groups" :> "v1" :> "groups" :>
-       Capture "groupId" Text
-       :> "archive"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "groups" :>
+       "v1" :>
+         "groups" :>
+           Capture "groupId" Text :>
+             "archive" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] Groups

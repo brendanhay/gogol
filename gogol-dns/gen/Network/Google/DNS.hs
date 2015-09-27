@@ -125,74 +125,85 @@ type ChangesAPI =
 
 -- | Enumerate Changes to a ResourceRecordSet collection.
 type ChangesList =
-     "dns" :> "v1beta1" :> "projects" :>
-       Capture "project" Text
-       :> "managedZones"
-       :> Capture "managedZone" Text
-       :> "changes"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "sortOrder" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
-       :> QueryParam "sortBy" Text
+     "dns" :>
+       "v1beta1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "managedZones" :>
+               Capture "managedZone" Text :>
+                 "changes" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "sortOrder" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "maxResults" Int32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :>
+                                       QueryParam "sortBy" Text :>
+                                         Get '[JSON] ChangesListResponse
 
 -- | Fetch the representation of an existing Change.
 type ChangesGet =
-     "dns" :> "v1beta1" :> "projects" :>
-       Capture "project" Text
-       :> "managedZones"
-       :> Capture "managedZone" Text
-       :> "changes"
-       :> Capture "changeId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dns" :>
+       "v1beta1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "managedZones" :>
+               Capture "managedZone" Text :>
+                 "changes" :>
+                   Capture "changeId" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :> Get '[JSON] Change
 
 -- | Atomically update the ResourceRecordSet collection.
 type ChangesCreate =
-     "dns" :> "v1beta1" :> "projects" :>
-       Capture "project" Text
-       :> "managedZones"
-       :> Capture "managedZone" Text
-       :> "changes"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dns" :>
+       "v1beta1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "managedZones" :>
+               Capture "managedZone" Text :>
+                 "changes" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Post '[JSON] Change
 
 type ResourceRecordSetsAPI = ResourceRecordSetsList
 
 -- | Enumerate ResourceRecordSets that have been created but not yet deleted.
 type ResourceRecordSetsList =
-     "dns" :> "v1beta1" :> "projects" :>
-       Capture "project" Text
-       :> "managedZones"
-       :> Capture "managedZone" Text
-       :> "rrsets"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "name" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "type" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dns" :>
+       "v1beta1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "managedZones" :>
+               Capture "managedZone" Text :>
+                 "rrsets" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "name" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "type" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "maxResults" Int32 :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Text :>
+                                         Get '[JSON]
+                                           ResourceRecordSetsListResponse
 
 type ManagedZonesAPI =
      ManagedZonesList :<|> ManagedZonesGet :<|>
@@ -201,71 +212,82 @@ type ManagedZonesAPI =
 
 -- | Enumerate ManagedZones that have been created but not yet deleted.
 type ManagedZonesList =
-     "dns" :> "v1beta1" :> "projects" :>
-       Capture "project" Text
-       :> "managedZones"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "dnsName" Text
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dns" :>
+       "v1beta1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "managedZones" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "dnsName" Text :>
+                             QueryParam "maxResults" Int32 :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Get '[JSON] ManagedZonesListResponse
 
 -- | Fetch the representation of an existing ManagedZone.
 type ManagedZonesGet =
-     "dns" :> "v1beta1" :> "projects" :>
-       Capture "project" Text
-       :> "managedZones"
-       :> Capture "managedZone" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dns" :>
+       "v1beta1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "managedZones" :>
+               Capture "managedZone" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] ManagedZone
 
 -- | Create a new ManagedZone.
 type ManagedZonesCreate =
-     "dns" :> "v1beta1" :> "projects" :>
-       Capture "project" Text
-       :> "managedZones"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dns" :>
+       "v1beta1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "managedZones" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] ManagedZone
 
 -- | Delete a previously created ManagedZone.
 type ManagedZonesDelete =
-     "dns" :> "v1beta1" :> "projects" :>
-       Capture "project" Text
-       :> "managedZones"
-       :> Capture "managedZone" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dns" :>
+       "v1beta1" :>
+         "projects" :>
+           Capture "project" Text :>
+             "managedZones" :>
+               Capture "managedZone" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Delete '[JSON] ()
 
 type ProjectsAPI = ProjectsGet
 
 -- | Fetch the representation of an existing Project.
 type ProjectsGet =
-     "dns" :> "v1beta1" :> "projects" :>
-       Capture "project" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dns" :>
+       "v1beta1" :>
+         "projects" :>
+           Capture "project" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Get '[JSON] Project

@@ -99,134 +99,151 @@ type TasksAPI =
 
 -- | Insert a new task in a TaskQueue
 type TasksInsert =
-     "taskqueue" :> "v1beta2" :> "projects" :>
-       Capture "project" Text
-       :> "taskqueues"
-       :> Capture "taskqueue" Text
-       :> "tasks"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "taskqueue" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "taskqueues" :>
+               Capture "taskqueue" Text :>
+                 "tasks" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Post '[JSON] Task
 
 -- | List Tasks in a TaskQueue
 type TasksList =
-     "taskqueue" :> "v1beta2" :> "projects" :>
-       Capture "project" Text
-       :> "taskqueues"
-       :> Capture "taskqueue" Text
-       :> "tasks"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "taskqueue" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "taskqueues" :>
+               Capture "taskqueue" Text :>
+                 "tasks" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Get '[JSON] Tasks2
 
 -- | Update tasks that are leased out of a TaskQueue. This method supports
 -- patch semantics.
 type TasksPatch =
-     "taskqueue" :> "v1beta2" :> "projects" :>
-       Capture "project" Text
-       :> "taskqueues"
-       :> Capture "taskqueue" Text
-       :> "tasks"
-       :> Capture "task" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "newLeaseSeconds" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "taskqueue" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "taskqueues" :>
+               Capture "taskqueue" Text :>
+                 "tasks" :>
+                   Capture "task" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "newLeaseSeconds" Int32 :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :> Patch '[JSON] Task
 
 -- | Get a particular task from a TaskQueue.
 type TasksGet =
-     "taskqueue" :> "v1beta2" :> "projects" :>
-       Capture "project" Text
-       :> "taskqueues"
-       :> Capture "taskqueue" Text
-       :> "tasks"
-       :> Capture "task" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "taskqueue" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "taskqueues" :>
+               Capture "taskqueue" Text :>
+                 "tasks" :>
+                   Capture "task" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :> Get '[JSON] Task
 
 -- | Lease 1 or more tasks from a TaskQueue.
 type TasksLease =
-     "taskqueue" :> "v1beta2" :> "projects" :>
-       Capture "project" Text
-       :> "taskqueues"
-       :> Capture "taskqueue" Text
-       :> "tasks"
-       :> "lease"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "tag" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "numTasks" Int32
-       :> QueryParam "key" Text
-       :> QueryParam "leaseSecs" Int32
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "groupByTag" Bool
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "taskqueue" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "taskqueues" :>
+               Capture "taskqueue" Text :>
+                 "tasks" :>
+                   "lease" :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "tag" Text :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "numTasks" Int32 :>
+                               QueryParam "key" Text :>
+                                 QueryParam "leaseSecs" Int32 :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "groupByTag" Bool :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "alt" Text :>
+                                           Post '[JSON] Tasks
 
 -- | Delete a task from a TaskQueue.
 type TasksDelete =
-     "taskqueue" :> "v1beta2" :> "projects" :>
-       Capture "project" Text
-       :> "taskqueues"
-       :> Capture "taskqueue" Text
-       :> "tasks"
-       :> Capture "task" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "taskqueue" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "taskqueues" :>
+               Capture "taskqueue" Text :>
+                 "tasks" :>
+                   Capture "task" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Update tasks that are leased out of a TaskQueue.
 type TasksUpdate =
-     "taskqueue" :> "v1beta2" :> "projects" :>
-       Capture "project" Text
-       :> "taskqueues"
-       :> Capture "taskqueue" Text
-       :> "tasks"
-       :> Capture "task" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "newLeaseSeconds" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "taskqueue" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "taskqueues" :>
+               Capture "taskqueue" Text :>
+                 "tasks" :>
+                   Capture "task" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "newLeaseSeconds" Int32 :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :> Post '[JSON] Task
 
 type TaskqueuesAPI = TaskqueuesGet
 
 -- | Get detailed information about a TaskQueue.
 type TaskqueuesGet =
-     "taskqueue" :> "v1beta2" :> "projects" :>
-       Capture "project" Text
-       :> "taskqueues"
-       :> Capture "taskqueue" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "getStats" Bool
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "taskqueue" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "taskqueues" :>
+               Capture "taskqueue" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "getStats" Bool :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Get '[JSON] TaskQueue

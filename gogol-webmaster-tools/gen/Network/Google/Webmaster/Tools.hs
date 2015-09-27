@@ -175,51 +175,59 @@ type UrlcrawlerrorssamplesAPI =
 -- | Lists a site\'s sample URLs for the specified crawl error category and
 -- platform.
 type UrlcrawlerrorssamplesList =
-     "webmasters" :> "v3" :> "sites" :>
-       Capture "siteUrl" Text
-       :> "urlCrawlErrorsSamples"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "platform" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "category" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "webmasters" :>
+       "v3" :>
+         "sites" :>
+           Capture "siteUrl" Text :>
+             "urlCrawlErrorsSamples" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "platform" Text :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "category" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :>
+                                 Get '[JSON] UrlCrawlErrorsSamplesListResponse
 
 -- | Retrieves details about crawl errors for a site\'s sample URL.
 type UrlcrawlerrorssamplesGet =
-     "webmasters" :> "v3" :> "sites" :>
-       Capture "siteUrl" Text
-       :> "urlCrawlErrorsSamples"
-       :> Capture "url" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "platform" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "category" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "webmasters" :>
+       "v3" :>
+         "sites" :>
+           Capture "siteUrl" Text :>
+             "urlCrawlErrorsSamples" :>
+               Capture "url" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "platform" Text :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "category" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Get '[JSON] UrlCrawlErrorsSample
 
 -- | Marks the provided site\'s sample URL as fixed, and removes it from the
 -- samples list.
 type UrlcrawlerrorssamplesMarkAsFixed =
-     "webmasters" :> "v3" :> "sites" :>
-       Capture "siteUrl" Text
-       :> "urlCrawlErrorsSamples"
-       :> Capture "url" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "platform" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "category" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "webmasters" :>
+       "v3" :>
+         "sites" :>
+           Capture "siteUrl" Text :>
+             "urlCrawlErrorsSamples" :>
+               Capture "url" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "platform" Text :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "category" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :> Delete '[JSON] ()
 
 type SitemapsAPI =
      SitemapsList :<|> SitemapsGet :<|> SitemapsSubmit
@@ -228,59 +236,68 @@ type SitemapsAPI =
 -- | Lists the sitemaps-entries submitted for this site, or included in the
 -- sitemap index file (if sitemapIndex is specified in the request).
 type SitemapsList =
-     "webmasters" :> "v3" :> "sites" :>
-       Capture "siteUrl" Text
-       :> "sitemaps"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "sitemapIndex" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "webmasters" :>
+       "v3" :>
+         "sites" :>
+           Capture "siteUrl" Text :>
+             "sitemaps" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "sitemapIndex" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Get '[JSON] SitemapsListResponse
 
 -- | Retrieves information about a specific sitemap.
 type SitemapsGet =
-     "webmasters" :> "v3" :> "sites" :>
-       Capture "siteUrl" Text
-       :> "sitemaps"
-       :> Capture "feedpath" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "webmasters" :>
+       "v3" :>
+         "sites" :>
+           Capture "siteUrl" Text :>
+             "sitemaps" :>
+               Capture "feedpath" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] WmxSitemap
 
 -- | Submits a sitemap for a site.
 type SitemapsSubmit =
-     "webmasters" :> "v3" :> "sites" :>
-       Capture "siteUrl" Text
-       :> "sitemaps"
-       :> Capture "feedpath" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "webmasters" :>
+       "v3" :>
+         "sites" :>
+           Capture "siteUrl" Text :>
+             "sitemaps" :>
+               Capture "feedpath" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Put '[JSON] ()
 
 -- | Deletes a sitemap from this site.
 type SitemapsDelete =
-     "webmasters" :> "v3" :> "sites" :>
-       Capture "siteUrl" Text
-       :> "sitemaps"
-       :> Capture "feedpath" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "webmasters" :>
+       "v3" :>
+         "sites" :>
+           Capture "siteUrl" Text :>
+             "sitemaps" :>
+               Capture "feedpath" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Delete '[JSON] ()
 
 type SearchanalyticsAPI = SearchanalyticsQuery
 
@@ -291,17 +308,20 @@ type SearchanalyticsAPI = SearchanalyticsQuery
 -- you need to know which days have data, issue a broad date range query
 -- grouped by date for any metric, and see which day rows are returned.
 type SearchanalyticsQuery =
-     "webmasters" :> "v3" :> "sites" :>
-       Capture "siteUrl" Text
-       :> "searchAnalytics"
-       :> "query"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "webmasters" :>
+       "v3" :>
+         "sites" :>
+           Capture "siteUrl" Text :>
+             "searchAnalytics" :>
+               "query" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Post '[JSON] SearchAnalyticsQueryResponse
 
 type SitesAPI =
      SitesList :<|> SitesGet :<|> SitesAdd :<|>
@@ -309,50 +329,59 @@ type SitesAPI =
 
 -- | Lists the user\'s Webmaster Tools sites.
 type SitesList =
-     "webmasters" :> "v3" :> "sites" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "webmasters" :>
+       "v3" :>
+         "sites" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Text :>
+                         Get '[JSON] SitesListResponse
 
 -- | Retrieves information about specific site.
 type SitesGet =
-     "webmasters" :> "v3" :> "sites" :>
-       Capture "siteUrl" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "webmasters" :>
+       "v3" :>
+         "sites" :>
+           Capture "siteUrl" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Get '[JSON] WmxSite
 
 -- | Adds a site to the set of the user\'s sites in Webmaster Tools.
 type SitesAdd =
-     "webmasters" :> "v3" :> "sites" :>
-       Capture "siteUrl" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "webmasters" :>
+       "v3" :>
+         "sites" :>
+           Capture "siteUrl" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Put '[JSON] ()
 
 -- | Removes a site from the set of the user\'s Webmaster Tools sites.
 type SitesDelete =
-     "webmasters" :> "v3" :> "sites" :>
-       Capture "siteUrl" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "webmasters" :>
+       "v3" :>
+         "sites" :>
+           Capture "siteUrl" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Delete '[JSON] ()
 
 type UrlcrawlerrorscountsAPI =
      UrlcrawlerrorscountsQuery
@@ -360,17 +389,21 @@ type UrlcrawlerrorscountsAPI =
 -- | Retrieves a time series of the number of URL crawl errors per error
 -- category and platform.
 type UrlcrawlerrorscountsQuery =
-     "webmasters" :> "v3" :> "sites" :>
-       Capture "siteUrl" Text
-       :> "urlCrawlErrorsCounts"
-       :> "query"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "platform" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "category" Text
-       :> QueryParam "key" Text
-       :> QueryParam "latestCountsOnly" Bool
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "webmasters" :>
+       "v3" :>
+         "sites" :>
+           Capture "siteUrl" Text :>
+             "urlCrawlErrorsCounts" :>
+               "query" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "platform" Text :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "category" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "latestCountsOnly" Bool :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON]
+                                       UrlCrawlErrorsCountsQueryResponse

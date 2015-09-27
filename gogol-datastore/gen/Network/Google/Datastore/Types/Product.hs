@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -42,6 +43,16 @@ airKeys
   = lens _airKeys (\ s a -> s{_airKeys = a}) . _Default
       . _Coerce
 
+instance FromJSON AllocateIdsRequest where
+        parseJSON
+          = withObject "AllocateIdsRequest"
+              (\ o ->
+                 AllocateIdsRequest <$> (o .:? "keys" .!= mempty))
+
+instance ToJSON AllocateIdsRequest where
+        toJSON AllocateIdsRequest{..}
+          = object (catMaybes [("keys" .=) <$> _airKeys])
+
 --
 -- /See:/ 'allocateIdsResponse' smart constructor.
 data AllocateIdsResponse = AllocateIdsResponse
@@ -74,6 +85,19 @@ aKeys
 aHeader :: Lens' AllocateIdsResponse (Maybe (Maybe ResponseHeader))
 aHeader = lens _aHeader (\ s a -> s{_aHeader = a})
 
+instance FromJSON AllocateIdsResponse where
+        parseJSON
+          = withObject "AllocateIdsResponse"
+              (\ o ->
+                 AllocateIdsResponse <$>
+                   (o .:? "keys" .!= mempty) <*> (o .:? "header"))
+
+instance ToJSON AllocateIdsResponse where
+        toJSON AllocateIdsResponse{..}
+          = object
+              (catMaybes
+                 [("keys" .=) <$> _aKeys, ("header" .=) <$> _aHeader])
+
 --
 -- /See:/ 'beginTransactionRequest' smart constructor.
 newtype BeginTransactionRequest = BeginTransactionRequest
@@ -102,6 +126,18 @@ btrIsolationLevel :: Lens' BeginTransactionRequest (Maybe BeginTransactionReques
 btrIsolationLevel
   = lens _btrIsolationLevel
       (\ s a -> s{_btrIsolationLevel = a})
+
+instance FromJSON BeginTransactionRequest where
+        parseJSON
+          = withObject "BeginTransactionRequest"
+              (\ o ->
+                 BeginTransactionRequest <$> (o .:? "isolationLevel"))
+
+instance ToJSON BeginTransactionRequest where
+        toJSON BeginTransactionRequest{..}
+          = object
+              (catMaybes
+                 [("isolationLevel" .=) <$> _btrIsolationLevel])
 
 --
 -- /See:/ 'beginTransactionResponse' smart constructor.
@@ -134,6 +170,20 @@ btrTransaction
 btrHeader :: Lens' BeginTransactionResponse (Maybe (Maybe ResponseHeader))
 btrHeader
   = lens _btrHeader (\ s a -> s{_btrHeader = a})
+
+instance FromJSON BeginTransactionResponse where
+        parseJSON
+          = withObject "BeginTransactionResponse"
+              (\ o ->
+                 BeginTransactionResponse <$>
+                   (o .:? "transaction") <*> (o .:? "header"))
+
+instance ToJSON BeginTransactionResponse where
+        toJSON BeginTransactionResponse{..}
+          = object
+              (catMaybes
+                 [("transaction" .=) <$> _btrTransaction,
+                  ("header" .=) <$> _btrHeader])
 
 --
 -- /See:/ 'commitRequest' smart constructor.
@@ -187,6 +237,24 @@ crIgnoreReadOnly
   = lens _crIgnoreReadOnly
       (\ s a -> s{_crIgnoreReadOnly = a})
 
+instance FromJSON CommitRequest where
+        parseJSON
+          = withObject "CommitRequest"
+              (\ o ->
+                 CommitRequest <$>
+                   (o .:? "mode") <*> (o .:? "mutation") <*>
+                     (o .:? "transaction")
+                     <*> (o .:? "ignoreReadOnly"))
+
+instance ToJSON CommitRequest where
+        toJSON CommitRequest{..}
+          = object
+              (catMaybes
+                 [("mode" .=) <$> _crMode,
+                  ("mutation" .=) <$> _crMutation,
+                  ("transaction" .=) <$> _crTransaction,
+                  ("ignoreReadOnly" .=) <$> _crIgnoreReadOnly])
+
 --
 -- /See:/ 'commitResponse' smart constructor.
 data CommitResponse = CommitResponse
@@ -217,6 +285,20 @@ crMutationResult
 
 crHeader :: Lens' CommitResponse (Maybe (Maybe ResponseHeader))
 crHeader = lens _crHeader (\ s a -> s{_crHeader = a})
+
+instance FromJSON CommitResponse where
+        parseJSON
+          = withObject "CommitResponse"
+              (\ o ->
+                 CommitResponse <$>
+                   (o .:? "mutationResult") <*> (o .:? "header"))
+
+instance ToJSON CommitResponse where
+        toJSON CommitResponse{..}
+          = object
+              (catMaybes
+                 [("mutationResult" .=) <$> _crMutationResult,
+                  ("header" .=) <$> _crHeader])
 
 -- | A filter that merges the multiple other filters using the given
 -- operation.
@@ -255,6 +337,20 @@ cfFilters
       _Default
       . _Coerce
 
+instance FromJSON CompositeFilter where
+        parseJSON
+          = withObject "CompositeFilter"
+              (\ o ->
+                 CompositeFilter <$>
+                   (o .:? "operator") <*> (o .:? "filters" .!= mempty))
+
+instance ToJSON CompositeFilter where
+        toJSON CompositeFilter{..}
+          = object
+              (catMaybes
+                 [("operator" .=) <$> _cfOperator,
+                  ("filters" .=) <$> _cfFilters])
+
 -- | An entity.
 --
 -- /See:/ 'entity' smart constructor.
@@ -290,6 +386,19 @@ eProperties :: Lens' Entity (Maybe EntityProperties)
 eProperties
   = lens _eProperties (\ s a -> s{_eProperties = a})
 
+instance FromJSON Entity where
+        parseJSON
+          = withObject "Entity"
+              (\ o ->
+                 Entity <$> (o .:? "key") <*> (o .:? "properties"))
+
+instance ToJSON Entity where
+        toJSON Entity{..}
+          = object
+              (catMaybes
+                 [("key" .=) <$> _eKey,
+                  ("properties" .=) <$> _eProperties])
+
 -- | The entity\'s properties.
 --
 -- /See:/ 'entityProperties' smart constructor.
@@ -302,6 +411,14 @@ data EntityProperties =
 entityProperties
     :: EntityProperties
 entityProperties = EntityProperties
+
+instance FromJSON EntityProperties where
+        parseJSON
+          = withObject "EntityProperties"
+              (\ o -> pure EntityProperties)
+
+instance ToJSON EntityProperties where
+        toJSON = const (Object mempty)
 
 -- | The result of fetching an entity from the datastore.
 --
@@ -325,6 +442,15 @@ entityResult =
 -- | The resulting entity.
 erEntity :: Lens' EntityResult (Maybe (Maybe Entity))
 erEntity = lens _erEntity (\ s a -> s{_erEntity = a})
+
+instance FromJSON EntityResult where
+        parseJSON
+          = withObject "EntityResult"
+              (\ o -> EntityResult <$> (o .:? "entity"))
+
+instance ToJSON EntityResult where
+        toJSON EntityResult{..}
+          = object (catMaybes [("entity" .=) <$> _erEntity])
 
 -- | A holder for any type of filter. Exactly one field should be specified.
 --
@@ -360,6 +486,21 @@ fPropertyFilter :: Lens' Filter (Maybe (Maybe PropertyFilter))
 fPropertyFilter
   = lens _fPropertyFilter
       (\ s a -> s{_fPropertyFilter = a})
+
+instance FromJSON Filter where
+        parseJSON
+          = withObject "Filter"
+              (\ o ->
+                 Filter <$>
+                   (o .:? "compositeFilter") <*>
+                     (o .:? "propertyFilter"))
+
+instance ToJSON Filter where
+        toJSON Filter{..}
+          = object
+              (catMaybes
+                 [("compositeFilter" .=) <$> _fCompositeFilter,
+                  ("propertyFilter" .=) <$> _fPropertyFilter])
 
 -- | A GQL query.
 --
@@ -425,6 +566,25 @@ gqNameArgs
       _Default
       . _Coerce
 
+instance FromJSON GqlQuery where
+        parseJSON
+          = withObject "GqlQuery"
+              (\ o ->
+                 GqlQuery <$>
+                   (o .:? "allowLiteral") <*>
+                     (o .:? "numberArgs" .!= mempty)
+                     <*> (o .:? "queryString")
+                     <*> (o .:? "nameArgs" .!= mempty))
+
+instance ToJSON GqlQuery where
+        toJSON GqlQuery{..}
+          = object
+              (catMaybes
+                 [("allowLiteral" .=) <$> _gqAllowLiteral,
+                  ("numberArgs" .=) <$> _gqNumberArgs,
+                  ("queryString" .=) <$> _gqQueryString,
+                  ("nameArgs" .=) <$> _gqNameArgs])
+
 -- | A binding argument for a GQL query.
 --
 -- /See:/ 'gqlQueryArg' smart constructor.
@@ -463,6 +623,22 @@ gqaValue = lens _gqaValue (\ s a -> s{_gqaValue = a})
 -- \"__.*__\". Must not be \"\".
 gqaName :: Lens' GqlQueryArg (Maybe Text)
 gqaName = lens _gqaName (\ s a -> s{_gqaName = a})
+
+instance FromJSON GqlQueryArg where
+        parseJSON
+          = withObject "GqlQueryArg"
+              (\ o ->
+                 GqlQueryArg <$>
+                   (o .:? "cursor") <*> (o .:? "value") <*>
+                     (o .:? "name"))
+
+instance ToJSON GqlQueryArg where
+        toJSON GqlQueryArg{..}
+          = object
+              (catMaybes
+                 [("cursor" .=) <$> _gqaCursor,
+                  ("value" .=) <$> _gqaValue,
+                  ("name" .=) <$> _gqaName])
 
 -- | A unique identifier for an entity.
 --
@@ -511,6 +687,20 @@ keyPath
   = lens _keyPath (\ s a -> s{_keyPath = a}) . _Default
       . _Coerce
 
+instance FromJSON Key where
+        parseJSON
+          = withObject "Key"
+              (\ o ->
+                 Key <$>
+                   (o .:? "partitionId") <*> (o .:? "path" .!= mempty))
+
+instance ToJSON Key where
+        toJSON Key{..}
+          = object
+              (catMaybes
+                 [("partitionId" .=) <$> _keyPartitionId,
+                  ("path" .=) <$> _keyPath])
+
 -- | A (kind, ID\/name) pair used to construct a key path. At most one of
 -- name or ID may be set. If either is set, the element is complete. If
 -- neither is set, the element is incomplete.
@@ -557,6 +747,20 @@ kpeName = lens _kpeName (\ s a -> s{_kpeName = a})
 kpeId :: Lens' KeyPathElement (Maybe Int64)
 kpeId = lens _kpeId (\ s a -> s{_kpeId = a})
 
+instance FromJSON KeyPathElement where
+        parseJSON
+          = withObject "KeyPathElement"
+              (\ o ->
+                 KeyPathElement <$>
+                   (o .:? "kind") <*> (o .:? "name") <*> (o .:? "id"))
+
+instance ToJSON KeyPathElement where
+        toJSON KeyPathElement{..}
+          = object
+              (catMaybes
+                 [("kind" .=) <$> _kpeKind, ("name" .=) <$> _kpeName,
+                  ("id" .=) <$> _kpeId])
+
 -- | A representation of a kind.
 --
 -- /See:/ 'kindExpression' smart constructor.
@@ -579,6 +783,15 @@ kindExpression =
 -- | The name of the kind.
 keName :: Lens' KindExpression (Maybe Text)
 keName = lens _keName (\ s a -> s{_keName = a})
+
+instance FromJSON KindExpression where
+        parseJSON
+          = withObject "KindExpression"
+              (\ o -> KindExpression <$> (o .:? "name"))
+
+instance ToJSON KindExpression where
+        toJSON KindExpression{..}
+          = object (catMaybes [("name" .=) <$> _keName])
 
 --
 -- /See:/ 'lookupRequest' smart constructor.
@@ -613,6 +826,20 @@ lrReadOptions :: Lens' LookupRequest (Maybe (Maybe ReadOptions))
 lrReadOptions
   = lens _lrReadOptions
       (\ s a -> s{_lrReadOptions = a})
+
+instance FromJSON LookupRequest where
+        parseJSON
+          = withObject "LookupRequest"
+              (\ o ->
+                 LookupRequest <$>
+                   (o .:? "keys" .!= mempty) <*> (o .:? "readOptions"))
+
+instance ToJSON LookupRequest where
+        toJSON LookupRequest{..}
+          = object
+              (catMaybes
+                 [("keys" .=) <$> _lrKeys,
+                  ("readOptions" .=) <$> _lrReadOptions])
 
 --
 -- /See:/ 'lookupResponse' smart constructor.
@@ -666,6 +893,25 @@ lrMissing
 
 lrHeader :: Lens' LookupResponse (Maybe (Maybe ResponseHeader))
 lrHeader = lens _lrHeader (\ s a -> s{_lrHeader = a})
+
+instance FromJSON LookupResponse where
+        parseJSON
+          = withObject "LookupResponse"
+              (\ o ->
+                 LookupResponse <$>
+                   (o .:? "deferred" .!= mempty) <*>
+                     (o .:? "found" .!= mempty)
+                     <*> (o .:? "missing" .!= mempty)
+                     <*> (o .:? "header"))
+
+instance ToJSON LookupResponse where
+        toJSON LookupResponse{..}
+          = object
+              (catMaybes
+                 [("deferred" .=) <$> _lrDeferred,
+                  ("found" .=) <$> _lrFound,
+                  ("missing" .=) <$> _lrMissing,
+                  ("header" .=) <$> _lrHeader])
 
 -- | A set of changes to apply.
 --
@@ -748,6 +994,28 @@ mUpdate
   = lens _mUpdate (\ s a -> s{_mUpdate = a}) . _Default
       . _Coerce
 
+instance FromJSON Mutation where
+        parseJSON
+          = withObject "Mutation"
+              (\ o ->
+                 Mutation <$>
+                   (o .:? "insert" .!= mempty) <*> (o .:? "force") <*>
+                     (o .:? "insertAutoId" .!= mempty)
+                     <*> (o .:? "upsert" .!= mempty)
+                     <*> (o .:? "delete" .!= mempty)
+                     <*> (o .:? "update" .!= mempty))
+
+instance ToJSON Mutation where
+        toJSON Mutation{..}
+          = object
+              (catMaybes
+                 [("insert" .=) <$> _mInsert,
+                  ("force" .=) <$> _mForce,
+                  ("insertAutoId" .=) <$> _mInsertAutoId,
+                  ("upsert" .=) <$> _mUpsert,
+                  ("delete" .=) <$> _mDelete,
+                  ("update" .=) <$> _mUpdate])
+
 --
 -- /See:/ 'mutationResult' smart constructor.
 data MutationResult = MutationResult
@@ -785,6 +1053,21 @@ mrIndexUpdates
   = lens _mrIndexUpdates
       (\ s a -> s{_mrIndexUpdates = a})
 
+instance FromJSON MutationResult where
+        parseJSON
+          = withObject "MutationResult"
+              (\ o ->
+                 MutationResult <$>
+                   (o .:? "insertAutoIdKeys" .!= mempty) <*>
+                     (o .:? "indexUpdates"))
+
+instance ToJSON MutationResult where
+        toJSON MutationResult{..}
+          = object
+              (catMaybes
+                 [("insertAutoIdKeys" .=) <$> _mrInsertAutoIdKeys,
+                  ("indexUpdates" .=) <$> _mrIndexUpdates])
+
 -- | An identifier for a particular subset of entities. Entities are
 -- partitioned into various subsets, each used by different datasets and
 -- different namespaces within a dataset and so forth.
@@ -819,6 +1102,20 @@ piNamespace
 piDatasetId :: Lens' PartitionId (Maybe Text)
 piDatasetId
   = lens _piDatasetId (\ s a -> s{_piDatasetId = a})
+
+instance FromJSON PartitionId where
+        parseJSON
+          = withObject "PartitionId"
+              (\ o ->
+                 PartitionId <$>
+                   (o .:? "namespace") <*> (o .:? "datasetId"))
+
+instance ToJSON PartitionId where
+        toJSON PartitionId{..}
+          = object
+              (catMaybes
+                 [("namespace" .=) <$> _piNamespace,
+                  ("datasetId" .=) <$> _piDatasetId])
 
 -- | An entity property.
 --
@@ -957,6 +1254,40 @@ pBlobValue :: Lens' Property (Maybe Word8)
 pBlobValue
   = lens _pBlobValue (\ s a -> s{_pBlobValue = a})
 
+instance FromJSON Property where
+        parseJSON
+          = withObject "Property"
+              (\ o ->
+                 Property <$>
+                   (o .:? "keyValue") <*> (o .:? "blobKeyValue") <*>
+                     (o .:? "dateTimeValue")
+                     <*> (o .:? "integerValue")
+                     <*> (o .:? "entityValue")
+                     <*> (o .:? "doubleValue")
+                     <*> (o .:? "stringValue")
+                     <*> (o .:? "listValue" .!= mempty)
+                     <*> (o .:? "indexed")
+                     <*> (o .:? "booleanValue")
+                     <*> (o .:? "meaning")
+                     <*> (o .:? "blobValue"))
+
+instance ToJSON Property where
+        toJSON Property{..}
+          = object
+              (catMaybes
+                 [("keyValue" .=) <$> _pKeyValue,
+                  ("blobKeyValue" .=) <$> _pBlobKeyValue,
+                  ("dateTimeValue" .=) <$> _pDateTimeValue,
+                  ("integerValue" .=) <$> _pIntegerValue,
+                  ("entityValue" .=) <$> _pEntityValue,
+                  ("doubleValue" .=) <$> _pDoubleValue,
+                  ("stringValue" .=) <$> _pStringValue,
+                  ("listValue" .=) <$> _pListValue,
+                  ("indexed" .=) <$> _pIndexed,
+                  ("booleanValue" .=) <$> _pBooleanValue,
+                  ("meaning" .=) <$> _pMeaning,
+                  ("blobValue" .=) <$> _pBlobValue])
+
 -- | A representation of a property in a projection.
 --
 -- /See:/ 'propertyExpression' smart constructor.
@@ -994,6 +1325,21 @@ peAggregationFunction :: Lens' PropertyExpression (Maybe PropertyExpressionAggre
 peAggregationFunction
   = lens _peAggregationFunction
       (\ s a -> s{_peAggregationFunction = a})
+
+instance FromJSON PropertyExpression where
+        parseJSON
+          = withObject "PropertyExpression"
+              (\ o ->
+                 PropertyExpression <$>
+                   (o .:? "property") <*> (o .:? "aggregationFunction"))
+
+instance ToJSON PropertyExpression where
+        toJSON PropertyExpression{..}
+          = object
+              (catMaybes
+                 [("property" .=) <$> _peProperty,
+                  ("aggregationFunction" .=) <$>
+                    _peAggregationFunction])
 
 -- | A filter on a specific property.
 --
@@ -1037,6 +1383,22 @@ pfOperator
 pfValue :: Lens' PropertyFilter (Maybe (Maybe Value))
 pfValue = lens _pfValue (\ s a -> s{_pfValue = a})
 
+instance FromJSON PropertyFilter where
+        parseJSON
+          = withObject "PropertyFilter"
+              (\ o ->
+                 PropertyFilter <$>
+                   (o .:? "property") <*> (o .:? "operator") <*>
+                     (o .:? "value"))
+
+instance ToJSON PropertyFilter where
+        toJSON PropertyFilter{..}
+          = object
+              (catMaybes
+                 [("property" .=) <$> _pfProperty,
+                  ("operator" .=) <$> _pfOperator,
+                  ("value" .=) <$> _pfValue])
+
 -- | The desired order for a specific property.
 --
 -- /See:/ 'propertyOrder' smart constructor.
@@ -1071,6 +1433,20 @@ poDirection :: Lens' PropertyOrder (Maybe PropertyOrderDirection)
 poDirection
   = lens _poDirection (\ s a -> s{_poDirection = a})
 
+instance FromJSON PropertyOrder where
+        parseJSON
+          = withObject "PropertyOrder"
+              (\ o ->
+                 PropertyOrder <$>
+                   (o .:? "property") <*> (o .:? "direction"))
+
+instance ToJSON PropertyOrder where
+        toJSON PropertyOrder{..}
+          = object
+              (catMaybes
+                 [("property" .=) <$> _poProperty,
+                  ("direction" .=) <$> _poDirection])
+
 -- | A reference to a property relative to the kind expressions.
 --
 -- /See:/ 'propertyReference' smart constructor.
@@ -1093,6 +1469,15 @@ propertyReference =
 -- | The name of the property.
 prName :: Lens' PropertyReference (Maybe Text)
 prName = lens _prName (\ s a -> s{_prName = a})
+
+instance FromJSON PropertyReference where
+        parseJSON
+          = withObject "PropertyReference"
+              (\ o -> PropertyReference <$> (o .:? "name"))
+
+instance ToJSON PropertyReference where
+        toJSON PropertyReference{..}
+          = object (catMaybes [("name" .=) <$> _prName])
 
 -- | A query.
 --
@@ -1199,6 +1584,34 @@ qOrder
   = lens _qOrder (\ s a -> s{_qOrder = a}) . _Default .
       _Coerce
 
+instance FromJSON Query where
+        parseJSON
+          = withObject "Query"
+              (\ o ->
+                 Query <$>
+                   (o .:? "groupBy" .!= mempty) <*>
+                     (o .:? "startCursor")
+                     <*> (o .:? "offset")
+                     <*> (o .:? "endCursor")
+                     <*> (o .:? "limit")
+                     <*> (o .:? "projection" .!= mempty)
+                     <*> (o .:? "filter")
+                     <*> (o .:? "kinds" .!= mempty)
+                     <*> (o .:? "order" .!= mempty))
+
+instance ToJSON Query where
+        toJSON Query{..}
+          = object
+              (catMaybes
+                 [("groupBy" .=) <$> _qGroupBy,
+                  ("startCursor" .=) <$> _qStartCursor,
+                  ("offset" .=) <$> _qOffset,
+                  ("endCursor" .=) <$> _qEndCursor,
+                  ("limit" .=) <$> _qLimit,
+                  ("projection" .=) <$> _qProjection,
+                  ("filter" .=) <$> _qFilter, ("kinds" .=) <$> _qKinds,
+                  ("order" .=) <$> _qOrder])
+
 -- | A batch of results produced by a query.
 --
 -- /See:/ 'queryResultBatch' smart constructor.
@@ -1270,6 +1683,27 @@ qrbEndCursor :: Lens' QueryResultBatch (Maybe Word8)
 qrbEndCursor
   = lens _qrbEndCursor (\ s a -> s{_qrbEndCursor = a})
 
+instance FromJSON QueryResultBatch where
+        parseJSON
+          = withObject "QueryResultBatch"
+              (\ o ->
+                 QueryResultBatch <$>
+                   (o .:? "skippedResults") <*>
+                     (o .:? "entityResultType")
+                     <*> (o .:? "entityResults" .!= mempty)
+                     <*> (o .:? "moreResults")
+                     <*> (o .:? "endCursor"))
+
+instance ToJSON QueryResultBatch where
+        toJSON QueryResultBatch{..}
+          = object
+              (catMaybes
+                 [("skippedResults" .=) <$> _qrbSkippedResults,
+                  ("entityResultType" .=) <$> _qrbEntityResultType,
+                  ("entityResults" .=) <$> _qrbEntityResults,
+                  ("moreResults" .=) <$> _qrbMoreResults,
+                  ("endCursor" .=) <$> _qrbEndCursor])
+
 --
 -- /See:/ 'readOptions' smart constructor.
 data ReadOptions = ReadOptions
@@ -1307,6 +1741,20 @@ roTransaction
   = lens _roTransaction
       (\ s a -> s{_roTransaction = a})
 
+instance FromJSON ReadOptions where
+        parseJSON
+          = withObject "ReadOptions"
+              (\ o ->
+                 ReadOptions <$>
+                   (o .:? "readConsistency") <*> (o .:? "transaction"))
+
+instance ToJSON ReadOptions where
+        toJSON ReadOptions{..}
+          = object
+              (catMaybes
+                 [("readConsistency" .=) <$> _roReadConsistency,
+                  ("transaction" .=) <$> _roTransaction])
+
 --
 -- /See:/ 'responseHeader' smart constructor.
 newtype ResponseHeader = ResponseHeader
@@ -1329,6 +1777,17 @@ responseHeader =
 -- \"datastore#responseHeader\".
 rhKind :: Lens' ResponseHeader Text
 rhKind = lens _rhKind (\ s a -> s{_rhKind = a})
+
+instance FromJSON ResponseHeader where
+        parseJSON
+          = withObject "ResponseHeader"
+              (\ o ->
+                 ResponseHeader <$>
+                   (o .:? "kind" .!= "datastore#responseHeader"))
+
+instance ToJSON ResponseHeader where
+        toJSON ResponseHeader{..}
+          = object (catMaybes [Just ("kind" .= _rhKind)])
 
 --
 -- /See:/ 'rollbackRequest' smart constructor.
@@ -1354,6 +1813,16 @@ rrTransaction
   = lens _rrTransaction
       (\ s a -> s{_rrTransaction = a})
 
+instance FromJSON RollbackRequest where
+        parseJSON
+          = withObject "RollbackRequest"
+              (\ o -> RollbackRequest <$> (o .:? "transaction"))
+
+instance ToJSON RollbackRequest where
+        toJSON RollbackRequest{..}
+          = object
+              (catMaybes [("transaction" .=) <$> _rrTransaction])
+
 --
 -- /See:/ 'rollbackResponse' smart constructor.
 newtype RollbackResponse = RollbackResponse
@@ -1374,6 +1843,15 @@ rollbackResponse =
 
 rrHeader :: Lens' RollbackResponse (Maybe (Maybe ResponseHeader))
 rrHeader = lens _rrHeader (\ s a -> s{_rrHeader = a})
+
+instance FromJSON RollbackResponse where
+        parseJSON
+          = withObject "RollbackResponse"
+              (\ o -> RollbackResponse <$> (o .:? "header"))
+
+instance ToJSON RollbackResponse where
+        toJSON RollbackResponse{..}
+          = object (catMaybes [("header" .=) <$> _rrHeader])
 
 --
 -- /See:/ 'runQueryRequest' smart constructor.
@@ -1433,6 +1911,24 @@ rqrReadOptions
   = lens _rqrReadOptions
       (\ s a -> s{_rqrReadOptions = a})
 
+instance FromJSON RunQueryRequest where
+        parseJSON
+          = withObject "RunQueryRequest"
+              (\ o ->
+                 RunQueryRequest <$>
+                   (o .:? "partitionId") <*> (o .:? "gqlQuery") <*>
+                     (o .:? "query")
+                     <*> (o .:? "readOptions"))
+
+instance ToJSON RunQueryRequest where
+        toJSON RunQueryRequest{..}
+          = object
+              (catMaybes
+                 [("partitionId" .=) <$> _rqrPartitionId,
+                  ("gqlQuery" .=) <$> _rqrGqlQuery,
+                  ("query" .=) <$> _rqrQuery,
+                  ("readOptions" .=) <$> _rqrReadOptions])
+
 --
 -- /See:/ 'runQueryResponse' smart constructor.
 data RunQueryResponse = RunQueryResponse
@@ -1462,6 +1958,20 @@ rqrBatch = lens _rqrBatch (\ s a -> s{_rqrBatch = a})
 rqrHeader :: Lens' RunQueryResponse (Maybe (Maybe ResponseHeader))
 rqrHeader
   = lens _rqrHeader (\ s a -> s{_rqrHeader = a})
+
+instance FromJSON RunQueryResponse where
+        parseJSON
+          = withObject "RunQueryResponse"
+              (\ o ->
+                 RunQueryResponse <$>
+                   (o .:? "batch") <*> (o .:? "header"))
+
+instance ToJSON RunQueryResponse where
+        toJSON RunQueryResponse{..}
+          = object
+              (catMaybes
+                 [("batch" .=) <$> _rqrBatch,
+                  ("header" .=) <$> _rqrHeader])
 
 -- | A message that can hold any of the supported value types and associated
 -- metadata.
@@ -1600,3 +2110,37 @@ vMeaning = lens _vMeaning (\ s a -> s{_vMeaning = a})
 vBlobValue :: Lens' Value (Maybe Word8)
 vBlobValue
   = lens _vBlobValue (\ s a -> s{_vBlobValue = a})
+
+instance FromJSON Value where
+        parseJSON
+          = withObject "Value"
+              (\ o ->
+                 Value <$>
+                   (o .:? "keyValue") <*> (o .:? "blobKeyValue") <*>
+                     (o .:? "dateTimeValue")
+                     <*> (o .:? "integerValue")
+                     <*> (o .:? "entityValue")
+                     <*> (o .:? "doubleValue")
+                     <*> (o .:? "stringValue")
+                     <*> (o .:? "listValue" .!= mempty)
+                     <*> (o .:? "indexed")
+                     <*> (o .:? "booleanValue")
+                     <*> (o .:? "meaning")
+                     <*> (o .:? "blobValue"))
+
+instance ToJSON Value where
+        toJSON Value{..}
+          = object
+              (catMaybes
+                 [("keyValue" .=) <$> _vKeyValue,
+                  ("blobKeyValue" .=) <$> _vBlobKeyValue,
+                  ("dateTimeValue" .=) <$> _vDateTimeValue,
+                  ("integerValue" .=) <$> _vIntegerValue,
+                  ("entityValue" .=) <$> _vEntityValue,
+                  ("doubleValue" .=) <$> _vDoubleValue,
+                  ("stringValue" .=) <$> _vStringValue,
+                  ("listValue" .=) <$> _vListValue,
+                  ("indexed" .=) <$> _vIndexed,
+                  ("booleanValue" .=) <$> _vBooleanValue,
+                  ("meaning" .=) <$> _vMeaning,
+                  ("blobValue" .=) <$> _vBlobValue])

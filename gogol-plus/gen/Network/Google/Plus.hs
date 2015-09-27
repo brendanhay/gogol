@@ -525,46 +525,55 @@ type ActivitiesAPI =
 -- | List all of the activities in the specified collection for a particular
 -- user.
 type ActivitiesList =
-     "plus" :> "v1" :> "people" :> Capture "userId" Text
-       :> "activities"
-       :> Capture "collection" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Natural
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "plus" :>
+       "v1" :>
+         "people" :>
+           Capture "userId" Text :>
+             "activities" :>
+               Capture "collection" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "maxResults" Natural :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Get '[JSON] ActivityFeed
 
 -- | Get an activity.
 type ActivitiesGet =
-     "plus" :> "v1" :> "activities" :>
-       Capture "activityId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "plus" :>
+       "v1" :>
+         "activities" :>
+           Capture "activityId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Get '[JSON] Activity
 
 -- | Search public activities.
 type ActivitiesSearch =
-     "plus" :> "v1" :> "activities" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "orderBy" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "query" Text
-       :> QueryParam "language" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Natural
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "plus" :>
+       "v1" :>
+         "activities" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "orderBy" Text :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "query" Text :>
+                       QueryParam "language" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "maxResults" Natural :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Get '[JSON] ActivityFeed
 
 type PeopleAPI =
      PeopleList :<|> PeopleGet :<|> PeopleListByActivity
@@ -572,125 +581,148 @@ type PeopleAPI =
 
 -- | List all of the people in the specified collection.
 type PeopleList =
-     "plus" :> "v1" :> "people" :> Capture "userId" Text
-       :> "people"
-       :> Capture "collection" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "orderBy" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Natural
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "plus" :>
+       "v1" :>
+         "people" :>
+           Capture "userId" Text :>
+             "people" :>
+               Capture "collection" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "orderBy" Text :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "maxResults" Natural :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON] PeopleFeed
 
 -- | Get a person\'s profile. If your app uses scope
 -- https:\/\/www.googleapis.com\/auth\/plus.login, this method is
 -- guaranteed to return ageRange and language.
 type PeopleGet =
-     "plus" :> "v1" :> "people" :> Capture "userId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "plus" :>
+       "v1" :>
+         "people" :>
+           Capture "userId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Get '[JSON] Person
 
 -- | List all of the people in the specified collection for a particular
 -- activity.
 type PeopleListByActivity =
-     "plus" :> "v1" :> "activities" :>
-       Capture "activityId" Text
-       :> "people"
-       :> Capture "collection" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Natural
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "plus" :>
+       "v1" :>
+         "activities" :>
+           Capture "activityId" Text :>
+             "people" :>
+               Capture "collection" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "maxResults" Natural :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :> Get '[JSON] PeopleFeed
 
 -- | Search all public profiles.
 type PeopleSearch =
-     "plus" :> "v1" :> "people" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "query" Text
-       :> QueryParam "language" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Natural
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "plus" :>
+       "v1" :>
+         "people" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "query" Text :>
+                     QueryParam "language" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Natural :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Get '[JSON] PeopleFeed
 
 type CommentsAPI = CommentsList :<|> CommentsGet
 
 -- | List all of the comments for an activity.
 type CommentsList =
-     "plus" :> "v1" :> "activities" :>
-       Capture "activityId" Text
-       :> "comments"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "sortOrder" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Word32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "plus" :>
+       "v1" :>
+         "activities" :>
+           Capture "activityId" Text :>
+             "comments" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "sortOrder" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "maxResults" Word32 :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Get '[JSON] CommentFeed
 
 -- | Get a comment.
 type CommentsGet =
-     "plus" :> "v1" :> "comments" :>
-       Capture "commentId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "plus" :>
+       "v1" :>
+         "comments" :>
+           Capture "commentId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Get '[JSON] Comment
 
 type MomentsAPI = MomentsInsert :<|> MomentsList
 
 -- | Record a moment representing a user\'s action such as making a purchase
 -- or commenting on a blog.
 type MomentsInsert =
-     "plus" :> "v1" :> "people" :> Capture "userId" Text
-       :> "moments"
-       :> Capture "collection" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "debug" Bool
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "plus" :>
+       "v1" :>
+         "people" :>
+           Capture "userId" Text :>
+             "moments" :>
+               Capture "collection" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "debug" Bool :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Post '[JSON] Moment
 
 -- | List all of the moments for a particular user.
 type MomentsList =
-     "plus" :> "v1" :> "people" :> Capture "userId" Text
-       :> "moments"
-       :> Capture "collection" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "targetUrl" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "type" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Natural
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "plus" :>
+       "v1" :>
+         "people" :>
+           Capture "userId" Text :>
+             "moments" :>
+               Capture "collection" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "targetUrl" Text :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "type" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "maxResults" Natural :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :>
+                                       Get '[JSON] MomentsFeed

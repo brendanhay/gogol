@@ -84,37 +84,44 @@ type UrlAPI = UrlInsert :<|> UrlList :<|> UrlGet
 
 -- | Creates a new short URL.
 type UrlInsert =
-     "urlshortener" :> "v1" :> "url" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "urlshortener" :>
+       "v1" :>
+         "url" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Text :> Post '[JSON] Url
 
 -- | Retrieves a list of URLs shortened by a user.
 type UrlList =
-     "urlshortener" :> "v1" :> "url" :> "history" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "start-token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "projection" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "urlshortener" :>
+       "v1" :>
+         "url" :>
+           "history" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "start-token" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "projection" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] UrlHistory
 
 -- | Expands a short URL or gets creation time and analytics.
 type UrlGet =
-     "urlshortener" :> "v1" :> "url" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "projection" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "shortUrl" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "urlshortener" :>
+       "v1" :>
+         "url" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "projection" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "shortUrl" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Get '[JSON] Url

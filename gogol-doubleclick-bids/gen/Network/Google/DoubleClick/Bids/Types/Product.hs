@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -64,6 +65,22 @@ dlirFilterIds
       . _Default
       . _Coerce
 
+instance FromJSON DownloadLineItemsRequest where
+        parseJSON
+          = withObject "DownloadLineItemsRequest"
+              (\ o ->
+                 DownloadLineItemsRequest <$>
+                   (o .:? "filterType") <*> (o .:? "format") <*>
+                     (o .:? "filterIds" .!= mempty))
+
+instance ToJSON DownloadLineItemsRequest where
+        toJSON DownloadLineItemsRequest{..}
+          = object
+              (catMaybes
+                 [("filterType" .=) <$> _dlirFilterType,
+                  ("format" .=) <$> _dlirFormat,
+                  ("filterIds" .=) <$> _dlirFilterIds])
+
 -- | Download line items response.
 --
 -- /See:/ 'downloadLineItemsResponse' smart constructor.
@@ -89,6 +106,17 @@ dlirLineItems :: Lens' DownloadLineItemsResponse (Maybe Text)
 dlirLineItems
   = lens _dlirLineItems
       (\ s a -> s{_dlirLineItems = a})
+
+instance FromJSON DownloadLineItemsResponse where
+        parseJSON
+          = withObject "DownloadLineItemsResponse"
+              (\ o ->
+                 DownloadLineItemsResponse <$> (o .:? "lineItems"))
+
+instance ToJSON DownloadLineItemsResponse where
+        toJSON DownloadLineItemsResponse{..}
+          = object
+              (catMaybes [("lineItems" .=) <$> _dlirLineItems])
 
 -- | Filter used to match traffic data in your report.
 --
@@ -120,6 +148,18 @@ fpValue = lens _fpValue (\ s a -> s{_fpValue = a})
 -- | Filter type.
 fpType :: Lens' FilterPair (Maybe FilterPairType)
 fpType = lens _fpType (\ s a -> s{_fpType = a})
+
+instance FromJSON FilterPair where
+        parseJSON
+          = withObject "FilterPair"
+              (\ o ->
+                 FilterPair <$> (o .:? "value") <*> (o .:? "type"))
+
+instance ToJSON FilterPair where
+        toJSON FilterPair{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _fpValue, ("type" .=) <$> _fpType])
 
 -- | List queries response.
 --
@@ -156,6 +196,22 @@ lqrQueries
 lqrKind :: Lens' ListQueriesResponse Text
 lqrKind = lens _lqrKind (\ s a -> s{_lqrKind = a})
 
+instance FromJSON ListQueriesResponse where
+        parseJSON
+          = withObject "ListQueriesResponse"
+              (\ o ->
+                 ListQueriesResponse <$>
+                   (o .:? "queries" .!= mempty) <*>
+                     (o .:? "kind" .!=
+                        "doubleclickbidmanager#listQueriesResponse"))
+
+instance ToJSON ListQueriesResponse where
+        toJSON ListQueriesResponse{..}
+          = object
+              (catMaybes
+                 [("queries" .=) <$> _lqrQueries,
+                  Just ("kind" .= _lqrKind)])
+
 -- | List reports response.
 --
 -- /See:/ 'listReportsResponse' smart constructor.
@@ -190,6 +246,22 @@ lrrReports
 -- \"doubleclickbidmanager#listReportsResponse\".
 lrrKind :: Lens' ListReportsResponse Text
 lrrKind = lens _lrrKind (\ s a -> s{_lrrKind = a})
+
+instance FromJSON ListReportsResponse where
+        parseJSON
+          = withObject "ListReportsResponse"
+              (\ o ->
+                 ListReportsResponse <$>
+                   (o .:? "reports" .!= mempty) <*>
+                     (o .:? "kind" .!=
+                        "doubleclickbidmanager#listReportsResponse"))
+
+instance ToJSON ListReportsResponse where
+        toJSON ListReportsResponse{..}
+          = object
+              (catMaybes
+                 [("reports" .=) <$> _lrrReports,
+                  Just ("kind" .= _lrrKind)])
 
 -- | Parameters of a query or report.
 --
@@ -256,6 +328,27 @@ pGroupBys
 -- | Report type.
 pType :: Lens' Parameters (Maybe ParametersType)
 pType = lens _pType (\ s a -> s{_pType = a})
+
+instance FromJSON Parameters where
+        parseJSON
+          = withObject "Parameters"
+              (\ o ->
+                 Parameters <$>
+                   (o .:? "metrics" .!= mempty) <*>
+                     (o .:? "includeInviteData")
+                     <*> (o .:? "filters" .!= mempty)
+                     <*> (o .:? "groupBys" .!= mempty)
+                     <*> (o .:? "type"))
+
+instance ToJSON Parameters where
+        toJSON Parameters{..}
+          = object
+              (catMaybes
+                 [("metrics" .=) <$> _pMetrics,
+                  ("includeInviteData" .=) <$> _pIncludeInviteData,
+                  ("filters" .=) <$> _pFilters,
+                  ("groupBys" .=) <$> _pGroupBys,
+                  ("type" .=) <$> _pType])
 
 -- | Represents a query.
 --
@@ -349,6 +442,32 @@ qTimezoneCode :: Lens' Query (Maybe Text)
 qTimezoneCode
   = lens _qTimezoneCode
       (\ s a -> s{_qTimezoneCode = a})
+
+instance FromJSON Query where
+        parseJSON
+          = withObject "Query"
+              (\ o ->
+                 Query <$>
+                   (o .:? "queryId") <*> (o .:? "reportDataEndTimeMs")
+                     <*> (o .:? "schedule")
+                     <*> (o .:? "kind" .!= "doubleclickbidmanager#query")
+                     <*> (o .:? "params")
+                     <*> (o .:? "metadata")
+                     <*> (o .:? "reportDataStartTimeMs")
+                     <*> (o .:? "timezoneCode"))
+
+instance ToJSON Query where
+        toJSON Query{..}
+          = object
+              (catMaybes
+                 [("queryId" .=) <$> _qQueryId,
+                  ("reportDataEndTimeMs" .=) <$> _qReportDataEndTimeMs,
+                  ("schedule" .=) <$> _qSchedule,
+                  Just ("kind" .= _qKind), ("params" .=) <$> _qParams,
+                  ("metadata" .=) <$> _qMetadata,
+                  ("reportDataStartTimeMs" .=) <$>
+                    _qReportDataStartTimeMs,
+                  ("timezoneCode" .=) <$> _qTimezoneCode])
 
 -- | Query metadata.
 --
@@ -477,6 +596,42 @@ qmSendNotification
   = lens _qmSendNotification
       (\ s a -> s{_qmSendNotification = a})
 
+instance FromJSON QueryMetadata where
+        parseJSON
+          = withObject "QueryMetadata"
+              (\ o ->
+                 QueryMetadata <$>
+                   (o .:? "googleCloudStoragePathForLatestReport") <*>
+                     (o .:? "locale")
+                     <*> (o .:? "format")
+                     <*> (o .:? "googleDrivePathForLatestReport")
+                     <*> (o .:? "shareEmailAddress" .!= mempty)
+                     <*> (o .:? "running")
+                     <*> (o .:? "dataRange")
+                     <*> (o .:? "latestReportRunTimeMs")
+                     <*> (o .:? "reportCount")
+                     <*> (o .:? "title")
+                     <*> (o .:? "sendNotification"))
+
+instance ToJSON QueryMetadata where
+        toJSON QueryMetadata{..}
+          = object
+              (catMaybes
+                 [("googleCloudStoragePathForLatestReport" .=) <$>
+                    _qmGoogleCloudStoragePathForLatestReport,
+                  ("locale" .=) <$> _qmLocale,
+                  ("format" .=) <$> _qmFormat,
+                  ("googleDrivePathForLatestReport" .=) <$>
+                    _qmGoogleDrivePathForLatestReport,
+                  ("shareEmailAddress" .=) <$> _qmShareEmailAddress,
+                  ("running" .=) <$> _qmRunning,
+                  ("dataRange" .=) <$> _qmDataRange,
+                  ("latestReportRunTimeMs" .=) <$>
+                    _qmLatestReportRunTimeMs,
+                  ("reportCount" .=) <$> _qmReportCount,
+                  ("title" .=) <$> _qmTitle,
+                  ("sendNotification" .=) <$> _qmSendNotification])
+
 -- | Information on how frequently and when to run a query.
 --
 -- /See:/ 'querySchedule' smart constructor.
@@ -533,6 +688,25 @@ qsNextRunTimezoneCode
   = lens _qsNextRunTimezoneCode
       (\ s a -> s{_qsNextRunTimezoneCode = a})
 
+instance FromJSON QuerySchedule where
+        parseJSON
+          = withObject "QuerySchedule"
+              (\ o ->
+                 QuerySchedule <$>
+                   (o .:? "frequency") <*> (o .:? "endTimeMs") <*>
+                     (o .:? "nextRunMinuteOfDay")
+                     <*> (o .:? "nextRunTimezoneCode"))
+
+instance ToJSON QuerySchedule where
+        toJSON QuerySchedule{..}
+          = object
+              (catMaybes
+                 [("frequency" .=) <$> _qsFrequency,
+                  ("endTimeMs" .=) <$> _qsEndTimeMs,
+                  ("nextRunMinuteOfDay" .=) <$> _qsNextRunMinuteOfDay,
+                  ("nextRunTimezoneCode" .=) <$>
+                    _qsNextRunTimezoneCode])
+
 -- | Represents a report.
 --
 -- /See:/ 'report' smart constructor.
@@ -573,6 +747,21 @@ rMetadata :: Lens' Report (Maybe (Maybe ReportMetadata))
 rMetadata
   = lens _rMetadata (\ s a -> s{_rMetadata = a})
 
+instance FromJSON Report where
+        parseJSON
+          = withObject "Report"
+              (\ o ->
+                 Report <$>
+                   (o .:? "params") <*> (o .:? "key") <*>
+                     (o .:? "metadata"))
+
+instance ToJSON Report where
+        toJSON Report{..}
+          = object
+              (catMaybes
+                 [("params" .=) <$> _rParams, ("key" .=) <$> _rKey,
+                  ("metadata" .=) <$> _rMetadata])
+
 -- | An explanation of a report failure.
 --
 -- /See:/ 'reportFailure' smart constructor.
@@ -596,6 +785,16 @@ reportFailure =
 rfErrorCode :: Lens' ReportFailure (Maybe ReportFailureErrorCode)
 rfErrorCode
   = lens _rfErrorCode (\ s a -> s{_rfErrorCode = a})
+
+instance FromJSON ReportFailure where
+        parseJSON
+          = withObject "ReportFailure"
+              (\ o -> ReportFailure <$> (o .:? "errorCode"))
+
+instance ToJSON ReportFailure where
+        toJSON ReportFailure{..}
+          = object
+              (catMaybes [("errorCode" .=) <$> _rfErrorCode])
 
 -- | Key used to identify a report.
 --
@@ -629,6 +828,20 @@ rkQueryId
 rkReportId :: Lens' ReportKey (Maybe Int64)
 rkReportId
   = lens _rkReportId (\ s a -> s{_rkReportId = a})
+
+instance FromJSON ReportKey where
+        parseJSON
+          = withObject "ReportKey"
+              (\ o ->
+                 ReportKey <$>
+                   (o .:? "queryId") <*> (o .:? "reportId"))
+
+instance ToJSON ReportKey where
+        toJSON ReportKey{..}
+          = object
+              (catMaybes
+                 [("queryId" .=) <$> _rkQueryId,
+                  ("reportId" .=) <$> _rkReportId])
 
 -- | Report metadata.
 --
@@ -684,6 +897,27 @@ rmReportDataStartTimeMs
   = lens _rmReportDataStartTimeMs
       (\ s a -> s{_rmReportDataStartTimeMs = a})
 
+instance FromJSON ReportMetadata where
+        parseJSON
+          = withObject "ReportMetadata"
+              (\ o ->
+                 ReportMetadata <$>
+                   (o .:? "status") <*> (o .:? "reportDataEndTimeMs")
+                     <*> (o .:? "googleCloudStoragePath")
+                     <*> (o .:? "reportDataStartTimeMs"))
+
+instance ToJSON ReportMetadata where
+        toJSON ReportMetadata{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _rmStatus,
+                  ("reportDataEndTimeMs" .=) <$>
+                    _rmReportDataEndTimeMs,
+                  ("googleCloudStoragePath" .=) <$>
+                    _rmGoogleCloudStoragePath,
+                  ("reportDataStartTimeMs" .=) <$>
+                    _rmReportDataStartTimeMs])
+
 -- | Report status.
 --
 -- /See:/ 'reportStatus' smart constructor.
@@ -733,6 +967,24 @@ rsFormat = lens _rsFormat (\ s a -> s{_rsFormat = a})
 rsFailure :: Lens' ReportStatus (Maybe (Maybe ReportFailure))
 rsFailure
   = lens _rsFailure (\ s a -> s{_rsFailure = a})
+
+instance FromJSON ReportStatus where
+        parseJSON
+          = withObject "ReportStatus"
+              (\ o ->
+                 ReportStatus <$>
+                   (o .:? "state") <*> (o .:? "finishTimeMs") <*>
+                     (o .:? "format")
+                     <*> (o .:? "failure"))
+
+instance ToJSON ReportStatus where
+        toJSON ReportStatus{..}
+          = object
+              (catMaybes
+                 [("state" .=) <$> _rsState,
+                  ("finishTimeMs" .=) <$> _rsFinishTimeMs,
+                  ("format" .=) <$> _rsFormat,
+                  ("failure" .=) <$> _rsFailure])
 
 -- | Represents the upload status of a row in the request.
 --
@@ -805,6 +1057,28 @@ rsEntityId :: Lens' RowStatus (Maybe Int64)
 rsEntityId
   = lens _rsEntityId (\ s a -> s{_rsEntityId = a})
 
+instance FromJSON RowStatus where
+        parseJSON
+          = withObject "RowStatus"
+              (\ o ->
+                 RowStatus <$>
+                   (o .:? "entityName") <*> (o .:? "changed") <*>
+                     (o .:? "persisted")
+                     <*> (o .:? "rowNumber")
+                     <*> (o .:? "errors" .!= mempty)
+                     <*> (o .:? "entityId"))
+
+instance ToJSON RowStatus where
+        toJSON RowStatus{..}
+          = object
+              (catMaybes
+                 [("entityName" .=) <$> _rsEntityName,
+                  ("changed" .=) <$> _rsChanged,
+                  ("persisted" .=) <$> _rsPersisted,
+                  ("rowNumber" .=) <$> _rsRowNumber,
+                  ("errors" .=) <$> _rsErrors,
+                  ("entityId" .=) <$> _rsEntityId])
+
 -- | Request to run a stored query to generate a report.
 --
 -- /See:/ 'runQueryRequest' smart constructor.
@@ -864,6 +1138,26 @@ rqrTimezoneCode
   = lens _rqrTimezoneCode
       (\ s a -> s{_rqrTimezoneCode = a})
 
+instance FromJSON RunQueryRequest where
+        parseJSON
+          = withObject "RunQueryRequest"
+              (\ o ->
+                 RunQueryRequest <$>
+                   (o .:? "reportDataEndTimeMs") <*> (o .:? "dataRange")
+                     <*> (o .:? "reportDataStartTimeMs")
+                     <*> (o .:? "timezoneCode"))
+
+instance ToJSON RunQueryRequest where
+        toJSON RunQueryRequest{..}
+          = object
+              (catMaybes
+                 [("reportDataEndTimeMs" .=) <$>
+                    _rqrReportDataEndTimeMs,
+                  ("dataRange" .=) <$> _rqrDataRange,
+                  ("reportDataStartTimeMs" .=) <$>
+                    _rqrReportDataStartTimeMs,
+                  ("timezoneCode" .=) <$> _rqrTimezoneCode])
+
 -- | Request to upload line items.
 --
 -- /See:/ 'uploadLineItemsRequest' smart constructor.
@@ -909,6 +1203,22 @@ ulirDryRun :: Lens' UploadLineItemsRequest (Maybe Bool)
 ulirDryRun
   = lens _ulirDryRun (\ s a -> s{_ulirDryRun = a})
 
+instance FromJSON UploadLineItemsRequest where
+        parseJSON
+          = withObject "UploadLineItemsRequest"
+              (\ o ->
+                 UploadLineItemsRequest <$>
+                   (o .:? "lineItems") <*> (o .:? "format") <*>
+                     (o .:? "dryRun"))
+
+instance ToJSON UploadLineItemsRequest where
+        toJSON UploadLineItemsRequest{..}
+          = object
+              (catMaybes
+                 [("lineItems" .=) <$> _ulirLineItems,
+                  ("format" .=) <$> _ulirFormat,
+                  ("dryRun" .=) <$> _ulirDryRun])
+
 -- | Upload line items response.
 --
 -- /See:/ 'uploadLineItemsResponse' smart constructor.
@@ -933,6 +1243,18 @@ ulirUploadStatus :: Lens' UploadLineItemsResponse (Maybe (Maybe UploadStatus))
 ulirUploadStatus
   = lens _ulirUploadStatus
       (\ s a -> s{_ulirUploadStatus = a})
+
+instance FromJSON UploadLineItemsResponse where
+        parseJSON
+          = withObject "UploadLineItemsResponse"
+              (\ o ->
+                 UploadLineItemsResponse <$> (o .:? "uploadStatus"))
+
+instance ToJSON UploadLineItemsResponse where
+        toJSON UploadLineItemsResponse{..}
+          = object
+              (catMaybes
+                 [("uploadStatus" .=) <$> _ulirUploadStatus])
 
 -- | Represents the status of upload.
 --
@@ -970,3 +1292,18 @@ usErrors
   = lens _usErrors (\ s a -> s{_usErrors = a}) .
       _Default
       . _Coerce
+
+instance FromJSON UploadStatus where
+        parseJSON
+          = withObject "UploadStatus"
+              (\ o ->
+                 UploadStatus <$>
+                   (o .:? "rowStatus" .!= mempty) <*>
+                     (o .:? "errors" .!= mempty))
+
+instance ToJSON UploadStatus where
+        toJSON UploadStatus{..}
+          = object
+              (catMaybes
+                 [("rowStatus" .=) <$> _usRowStatus,
+                  ("errors" .=) <$> _usErrors])

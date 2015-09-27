@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -164,6 +165,39 @@ cDescriptionHeading
 cSection :: Lens' Course (Maybe Text)
 cSection = lens _cSection (\ s a -> s{_cSection = a})
 
+instance FromJSON Course where
+        parseJSON
+          = withObject "Course"
+              (\ o ->
+                 Course <$>
+                   (o .:? "creationTime") <*> (o .:? "room") <*>
+                     (o .:? "courseState")
+                     <*> (o .:? "enrollmentCode")
+                     <*> (o .:? "updateTime")
+                     <*> (o .:? "ownerId")
+                     <*> (o .:? "name")
+                     <*> (o .:? "id")
+                     <*> (o .:? "alternateLink")
+                     <*> (o .:? "description")
+                     <*> (o .:? "descriptionHeading")
+                     <*> (o .:? "section"))
+
+instance ToJSON Course where
+        toJSON Course{..}
+          = object
+              (catMaybes
+                 [("creationTime" .=) <$> _cCreationTime,
+                  ("room" .=) <$> _cRoom,
+                  ("courseState" .=) <$> _cCourseState,
+                  ("enrollmentCode" .=) <$> _cEnrollmentCode,
+                  ("updateTime" .=) <$> _cUpdateTime,
+                  ("ownerId" .=) <$> _cOwnerId, ("name" .=) <$> _cName,
+                  ("id" .=) <$> _cId,
+                  ("alternateLink" .=) <$> _cAlternateLink,
+                  ("description" .=) <$> _cDescription,
+                  ("descriptionHeading" .=) <$> _cDescriptionHeading,
+                  ("section" .=) <$> _cSection])
+
 -- | Alternative identifier for a course. An alias uniquely identifies a
 -- course. It must be unique within one of the following scopes: * domain:
 -- A domain-scoped alias is visible to all users within the alias
@@ -201,6 +235,15 @@ courseAlias =
 caAlias :: Lens' CourseAlias (Maybe Text)
 caAlias = lens _caAlias (\ s a -> s{_caAlias = a})
 
+instance FromJSON CourseAlias where
+        parseJSON
+          = withObject "CourseAlias"
+              (\ o -> CourseAlias <$> (o .:? "alias"))
+
+instance ToJSON CourseAlias where
+        toJSON CourseAlias{..}
+          = object (catMaybes [("alias" .=) <$> _caAlias])
+
 -- | A generic empty message that you can re-use to avoid defining duplicated
 -- empty messages in your APIs. A typical example is to use it as the
 -- request or the response type of an API method. For instance: service Foo
@@ -217,6 +260,12 @@ data Empty =
 empty
     :: Empty
 empty = Empty
+
+instance FromJSON Empty where
+        parseJSON = withObject "Empty" (\ o -> pure Empty)
+
+instance ToJSON Empty where
+        toJSON = const (Object mempty)
 
 -- | Global user permission description.
 --
@@ -241,6 +290,16 @@ globalPermission =
 gpPermission :: Lens' GlobalPermission (Maybe Text)
 gpPermission
   = lens _gpPermission (\ s a -> s{_gpPermission = a})
+
+instance FromJSON GlobalPermission where
+        parseJSON
+          = withObject "GlobalPermission"
+              (\ o -> GlobalPermission <$> (o .:? "permission"))
+
+instance ToJSON GlobalPermission where
+        toJSON GlobalPermission{..}
+          = object
+              (catMaybes [("permission" .=) <$> _gpPermission])
 
 -- | An invitation to join a course.
 --
@@ -294,6 +353,23 @@ iRole = lens _iRole (\ s a -> s{_iRole = a})
 iId :: Lens' Invitation (Maybe Text)
 iId = lens _iId (\ s a -> s{_iId = a})
 
+instance FromJSON Invitation where
+        parseJSON
+          = withObject "Invitation"
+              (\ o ->
+                 Invitation <$>
+                   (o .:? "courseId") <*> (o .:? "userId") <*>
+                     (o .:? "role")
+                     <*> (o .:? "id"))
+
+instance ToJSON Invitation where
+        toJSON Invitation{..}
+          = object
+              (catMaybes
+                 [("courseId" .=) <$> _iCourseId,
+                  ("userId" .=) <$> _iUserId, ("role" .=) <$> _iRole,
+                  ("id" .=) <$> _iId])
+
 -- | Response when listing course aliases.
 --
 -- /See:/ 'listCourseAliasesResponse' smart constructor.
@@ -331,6 +407,21 @@ lcarAliases
       _Default
       . _Coerce
 
+instance FromJSON ListCourseAliasesResponse where
+        parseJSON
+          = withObject "ListCourseAliasesResponse"
+              (\ o ->
+                 ListCourseAliasesResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "aliases" .!= mempty))
+
+instance ToJSON ListCourseAliasesResponse where
+        toJSON ListCourseAliasesResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lcarNextPageToken,
+                  ("aliases" .=) <$> _lcarAliases])
+
 -- | Response when listing courses.
 --
 -- /See:/ 'listCoursesResponse' smart constructor.
@@ -367,6 +458,21 @@ lcrCourses
   = lens _lcrCourses (\ s a -> s{_lcrCourses = a}) .
       _Default
       . _Coerce
+
+instance FromJSON ListCoursesResponse where
+        parseJSON
+          = withObject "ListCoursesResponse"
+              (\ o ->
+                 ListCoursesResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "courses" .!= mempty))
+
+instance ToJSON ListCoursesResponse where
+        toJSON ListCoursesResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lcrNextPageToken,
+                  ("courses" .=) <$> _lcrCourses])
 
 -- | Response when listing invitations.
 --
@@ -406,6 +512,21 @@ lirInvitations
       . _Default
       . _Coerce
 
+instance FromJSON ListInvitationsResponse where
+        parseJSON
+          = withObject "ListInvitationsResponse"
+              (\ o ->
+                 ListInvitationsResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "invitations" .!= mempty))
+
+instance ToJSON ListInvitationsResponse where
+        toJSON ListInvitationsResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lirNextPageToken,
+                  ("invitations" .=) <$> _lirInvitations])
+
 -- | Response when listing students.
 --
 -- /See:/ 'listStudentsResponse' smart constructor.
@@ -443,6 +564,21 @@ lsrStudents
       _Default
       . _Coerce
 
+instance FromJSON ListStudentsResponse where
+        parseJSON
+          = withObject "ListStudentsResponse"
+              (\ o ->
+                 ListStudentsResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "students" .!= mempty))
+
+instance ToJSON ListStudentsResponse where
+        toJSON ListStudentsResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lsrNextPageToken,
+                  ("students" .=) <$> _lsrStudents])
+
 -- | Response when listing teachers.
 --
 -- /See:/ 'listTeachersResponse' smart constructor.
@@ -479,6 +615,21 @@ ltrTeachers
   = lens _ltrTeachers (\ s a -> s{_ltrTeachers = a}) .
       _Default
       . _Coerce
+
+instance FromJSON ListTeachersResponse where
+        parseJSON
+          = withObject "ListTeachersResponse"
+              (\ o ->
+                 ListTeachersResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "teachers" .!= mempty))
+
+instance ToJSON ListTeachersResponse where
+        toJSON ListTeachersResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _ltrNextPageToken,
+                  ("teachers" .=) <$> _ltrTeachers])
 
 -- | Details of the user\'s name.
 --
@@ -523,6 +674,22 @@ nFamilyName :: Lens' Name (Maybe Text)
 nFamilyName
   = lens _nFamilyName (\ s a -> s{_nFamilyName = a})
 
+instance FromJSON Name where
+        parseJSON
+          = withObject "Name"
+              (\ o ->
+                 Name <$>
+                   (o .:? "givenName") <*> (o .:? "fullName") <*>
+                     (o .:? "familyName"))
+
+instance ToJSON Name where
+        toJSON Name{..}
+          = object
+              (catMaybes
+                 [("givenName" .=) <$> _nGivenName,
+                  ("fullName" .=) <$> _nFullName,
+                  ("familyName" .=) <$> _nFamilyName])
+
 -- | Student in a course.
 --
 -- /See:/ 'student' smart constructor.
@@ -566,6 +733,22 @@ sProfile = lens _sProfile (\ s a -> s{_sProfile = a})
 sUserId :: Lens' Student (Maybe Text)
 sUserId = lens _sUserId (\ s a -> s{_sUserId = a})
 
+instance FromJSON Student where
+        parseJSON
+          = withObject "Student"
+              (\ o ->
+                 Student <$>
+                   (o .:? "courseId") <*> (o .:? "profile") <*>
+                     (o .:? "userId"))
+
+instance ToJSON Student where
+        toJSON Student{..}
+          = object
+              (catMaybes
+                 [("courseId" .=) <$> _sCourseId,
+                  ("profile" .=) <$> _sProfile,
+                  ("userId" .=) <$> _sUserId])
+
 -- | Teacher of a course.
 --
 -- /See:/ 'teacher' smart constructor.
@@ -608,6 +791,22 @@ tProfile = lens _tProfile (\ s a -> s{_tProfile = a})
 -- indicating the requesting user
 tUserId :: Lens' Teacher (Maybe Text)
 tUserId = lens _tUserId (\ s a -> s{_tUserId = a})
+
+instance FromJSON Teacher where
+        parseJSON
+          = withObject "Teacher"
+              (\ o ->
+                 Teacher <$>
+                   (o .:? "courseId") <*> (o .:? "profile") <*>
+                     (o .:? "userId"))
+
+instance ToJSON Teacher where
+        toJSON Teacher{..}
+          = object
+              (catMaybes
+                 [("courseId" .=) <$> _tCourseId,
+                  ("profile" .=) <$> _tProfile,
+                  ("userId" .=) <$> _tUserId])
 
 -- | Global information for a user.
 --
@@ -670,3 +869,23 @@ upPermissions
       (\ s a -> s{_upPermissions = a})
       . _Default
       . _Coerce
+
+instance FromJSON UserProfile where
+        parseJSON
+          = withObject "UserProfile"
+              (\ o ->
+                 UserProfile <$>
+                   (o .:? "photoUrl") <*> (o .:? "name") <*>
+                     (o .:? "emailAddress")
+                     <*> (o .:? "id")
+                     <*> (o .:? "permissions" .!= mempty))
+
+instance ToJSON UserProfile where
+        toJSON UserProfile{..}
+          = object
+              (catMaybes
+                 [("photoUrl" .=) <$> _upPhotoUrl,
+                  ("name" .=) <$> _upName,
+                  ("emailAddress" .=) <$> _upEmailAddress,
+                  ("id" .=) <$> _upId,
+                  ("permissions" .=) <$> _upPermissions])

@@ -82,6 +82,12 @@ instance ToText OperationCodeItemWarnings where
         OCIWSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
         OCIWUnreachable -> "UNREACHABLE"
 
+instance FromJSON OperationCodeItemWarnings where
+    parseJSON = parseJSONText "OperationCodeItemWarnings"
+
+instance ToJSON OperationCodeItemWarnings where
+    toJSON = toJSONText
+
 -- | [Output Only] Status of the operation.
 data OperationStatus
     = OSDone
@@ -107,6 +113,12 @@ instance ToText OperationStatus where
         OSPending -> "PENDING"
         OSRunning -> "RUNNING"
 
+instance FromJSON OperationStatus where
+    parseJSON = parseJSONText "OperationStatus"
+
+instance ToJSON OperationStatus where
+    toJSON = toJSONText
+
 -- | The action to perform when an instance becomes unhealthy. Possible
 -- values are RECREATE or REBOOT. RECREATE replaces an unhealthy instance
 -- with a new instance that is based on the instance template for this
@@ -131,3 +143,9 @@ instance ToText ReplicaPoolAutoHealingPolicyActionType where
     toText = \case
         RPAHPATReboot -> "REBOOT"
         RPAHPATRecreate -> "RECREATE"
+
+instance FromJSON ReplicaPoolAutoHealingPolicyActionType where
+    parseJSON = parseJSONText "ReplicaPoolAutoHealingPolicyActionType"
+
+instance ToJSON ReplicaPoolAutoHealingPolicyActionType where
+    toJSON = toJSONText

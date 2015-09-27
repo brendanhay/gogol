@@ -216,96 +216,109 @@ type TypesAPI = TypesList
 
 -- | Lists all resource types for Deployment Manager.
 type TypesList =
-     "deploymentmanager" :> "v2beta2" :> "projects" :>
-       Capture "project" Text
-       :> "global"
-       :> "types"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "filter" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Word32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "deploymentmanager" :>
+       "v2beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "types" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "filter" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "maxResults" Word32 :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON] TypesListResponse
 
 type ResourcesAPI = ResourcesList :<|> ResourcesGet
 
 -- | Lists all resources in a given deployment.
 type ResourcesList =
-     "deploymentmanager" :> "v2beta2" :> "projects" :>
-       Capture "project" Text
-       :> "global"
-       :> "deployments"
-       :> Capture "deployment" Text
-       :> "resources"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "filter" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Word32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "deploymentmanager" :>
+       "v2beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "deployments" :>
+                 Capture "deployment" Text :>
+                   "resources" :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "filter" Text :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "maxResults" Word32 :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Text :>
+                                         Get '[JSON] ResourcesListResponse
 
 -- | Gets information about a single resource.
 type ResourcesGet =
-     "deploymentmanager" :> "v2beta2" :> "projects" :>
-       Capture "project" Text
-       :> "global"
-       :> "deployments"
-       :> Capture "deployment" Text
-       :> "resources"
-       :> Capture "resource" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "deploymentmanager" :>
+       "v2beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "deployments" :>
+                 Capture "deployment" Text :>
+                   "resources" :>
+                     Capture "resource" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :> Get '[JSON] Resource
 
 type ManifestsAPI = ManifestsList :<|> ManifestsGet
 
 -- | Lists all manifests for a given deployment.
 type ManifestsList =
-     "deploymentmanager" :> "v2beta2" :> "projects" :>
-       Capture "project" Text
-       :> "global"
-       :> "deployments"
-       :> Capture "deployment" Text
-       :> "manifests"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "filter" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Word32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "deploymentmanager" :>
+       "v2beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "deployments" :>
+                 Capture "deployment" Text :>
+                   "manifests" :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "filter" Text :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "maxResults" Word32 :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Text :>
+                                         Get '[JSON] ManifestsListResponse
 
 -- | Gets information about a specific manifest.
 type ManifestsGet =
-     "deploymentmanager" :> "v2beta2" :> "projects" :>
-       Capture "project" Text
-       :> "global"
-       :> "deployments"
-       :> Capture "deployment" Text
-       :> "manifests"
-       :> Capture "manifest" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "deploymentmanager" :>
+       "v2beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "deployments" :>
+                 Capture "deployment" Text :>
+                   "manifests" :>
+                     Capture "manifest" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :> Get '[JSON] Manifest
 
 type DeploymentsAPI =
      DeploymentsInsert :<|> DeploymentsList :<|>
@@ -317,134 +330,154 @@ type DeploymentsAPI =
 -- | Creates a deployment and all of the resources described by the
 -- deployment manifest.
 type DeploymentsInsert =
-     "deploymentmanager" :> "v2beta2" :> "projects" :>
-       Capture "project" Text
-       :> "global"
-       :> "deployments"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "deploymentmanager" :>
+       "v2beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "deployments" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Post '[JSON] Operation
 
 -- | Lists all deployments for a given project.
 type DeploymentsList =
-     "deploymentmanager" :> "v2beta2" :> "projects" :>
-       Capture "project" Text
-       :> "global"
-       :> "deployments"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "filter" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Word32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "deploymentmanager" :>
+       "v2beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "deployments" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "filter" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "maxResults" Word32 :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON] DeploymentsListResponse
 
 -- | Updates a deployment and all of the resources described by the
 -- deployment manifest. This method supports patch semantics.
 type DeploymentsPatch =
-     "deploymentmanager" :> "v2beta2" :> "projects" :>
-       Capture "project" Text
-       :> "global"
-       :> "deployments"
-       :> Capture "deployment" Text
-       :> QueryParam "createPolicy" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "updatePolicy" Text
-       :> QueryParam "deletePolicy" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "deploymentmanager" :>
+       "v2beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "deployments" :>
+                 Capture "deployment" Text :>
+                   QueryParam "createPolicy" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "updatePolicy" Text :>
+                             QueryParam "deletePolicy" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :>
+                                       Patch '[JSON] Operation
 
 -- | Gets information about a specific deployment.
 type DeploymentsGet =
-     "deploymentmanager" :> "v2beta2" :> "projects" :>
-       Capture "project" Text
-       :> "global"
-       :> "deployments"
-       :> Capture "deployment" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "deploymentmanager" :>
+       "v2beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "deployments" :>
+                 Capture "deployment" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Get '[JSON] Deployment
 
 -- | Deletes a deployment and all of the resources in the deployment.
 type DeploymentsDelete =
-     "deploymentmanager" :> "v2beta2" :> "projects" :>
-       Capture "project" Text
-       :> "global"
-       :> "deployments"
-       :> Capture "deployment" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "deploymentmanager" :>
+       "v2beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "deployments" :>
+                 Capture "deployment" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Delete '[JSON] Operation
 
 -- | Updates a deployment and all of the resources described by the
 -- deployment manifest.
 type DeploymentsUpdate =
-     "deploymentmanager" :> "v2beta2" :> "projects" :>
-       Capture "project" Text
-       :> "global"
-       :> "deployments"
-       :> Capture "deployment" Text
-       :> QueryParam "createPolicy" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "updatePolicy" Text
-       :> QueryParam "deletePolicy" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "deploymentmanager" :>
+       "v2beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "deployments" :>
+                 Capture "deployment" Text :>
+                   QueryParam "createPolicy" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "updatePolicy" Text :>
+                             QueryParam "deletePolicy" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :>
+                                       Put '[JSON] Operation
 
 type OperationsAPI =
      OperationsList :<|> OperationsGet
 
 -- | Lists all operations for a project.
 type OperationsList =
-     "deploymentmanager" :> "v2beta2" :> "projects" :>
-       Capture "project" Text
-       :> "global"
-       :> "operations"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "filter" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Word32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "deploymentmanager" :>
+       "v2beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "operations" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "filter" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "maxResults" Word32 :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON] OperationsListResponse
 
 -- | Gets information about a specific operation.
 type OperationsGet =
-     "deploymentmanager" :> "v2beta2" :> "projects" :>
-       Capture "project" Text
-       :> "global"
-       :> "operations"
-       :> Capture "operation" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "deploymentmanager" :>
+       "v2beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "operations" :>
+                 Capture "operation" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Get '[JSON] Operation

@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -44,6 +45,16 @@ arAckIds
       _Default
       . _Coerce
 
+instance FromJSON AcknowledgeRequest where
+        parseJSON
+          = withObject "AcknowledgeRequest"
+              (\ o ->
+                 AcknowledgeRequest <$> (o .:? "ackIds" .!= mempty))
+
+instance ToJSON AcknowledgeRequest where
+        toJSON AcknowledgeRequest{..}
+          = object (catMaybes [("ackIds" .=) <$> _arAckIds])
+
 -- | Associates members with roles. See below for allowed formats of members.
 --
 -- /See:/ 'binding' smart constructor.
@@ -86,6 +97,20 @@ bMembers
 bRole :: Lens' Binding (Maybe Text)
 bRole = lens _bRole (\ s a -> s{_bRole = a})
 
+instance FromJSON Binding where
+        parseJSON
+          = withObject "Binding"
+              (\ o ->
+                 Binding <$>
+                   (o .:? "members" .!= mempty) <*> (o .:? "role"))
+
+instance ToJSON Binding where
+        toJSON Binding{..}
+          = object
+              (catMaybes
+                 [("members" .=) <$> _bMembers,
+                  ("role" .=) <$> _bRole])
+
 -- | A generic empty message that you can re-use to avoid defining duplicated
 -- empty messages in your APIs. A typical example is to use it as the
 -- request or the response type of an API method. For instance: service Foo
@@ -102,6 +127,12 @@ data Empty =
 empty
     :: Empty
 empty = Empty
+
+instance FromJSON Empty where
+        parseJSON = withObject "Empty" (\ o -> pure Empty)
+
+instance ToJSON Empty where
+        toJSON = const (Object mempty)
 
 -- | Response for the ListSubscriptions method.
 --
@@ -142,6 +173,21 @@ lsrSubscriptions
       . _Default
       . _Coerce
 
+instance FromJSON ListSubscriptionsResponse where
+        parseJSON
+          = withObject "ListSubscriptionsResponse"
+              (\ o ->
+                 ListSubscriptionsResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "subscriptions" .!= mempty))
+
+instance ToJSON ListSubscriptionsResponse where
+        toJSON ListSubscriptionsResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lsrNextPageToken,
+                  ("subscriptions" .=) <$> _lsrSubscriptions])
+
 -- | Response for the ListTopicSubscriptions method.
 --
 -- /See:/ 'listTopicSubscriptionsResponse' smart constructor.
@@ -181,6 +227,22 @@ ltsrSubscriptions
       . _Default
       . _Coerce
 
+instance FromJSON ListTopicSubscriptionsResponse
+         where
+        parseJSON
+          = withObject "ListTopicSubscriptionsResponse"
+              (\ o ->
+                 ListTopicSubscriptionsResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "subscriptions" .!= mempty))
+
+instance ToJSON ListTopicSubscriptionsResponse where
+        toJSON ListTopicSubscriptionsResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _ltsrNextPageToken,
+                  ("subscriptions" .=) <$> _ltsrSubscriptions])
+
 -- | Response for the ListTopics method.
 --
 -- /See:/ 'listTopicsResponse' smart constructor.
@@ -217,6 +279,21 @@ ltrTopics
   = lens _ltrTopics (\ s a -> s{_ltrTopics = a}) .
       _Default
       . _Coerce
+
+instance FromJSON ListTopicsResponse where
+        parseJSON
+          = withObject "ListTopicsResponse"
+              (\ o ->
+                 ListTopicsResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "topics" .!= mempty))
+
+instance ToJSON ListTopicsResponse where
+        toJSON ListTopicsResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _ltrNextPageToken,
+                  ("topics" .=) <$> _ltrTopics])
 
 -- | Request for the ModifyAckDeadline method.
 --
@@ -268,6 +345,23 @@ madrAckDeadlineSeconds
   = lens _madrAckDeadlineSeconds
       (\ s a -> s{_madrAckDeadlineSeconds = a})
 
+instance FromJSON ModifyAckDeadlineRequest where
+        parseJSON
+          = withObject "ModifyAckDeadlineRequest"
+              (\ o ->
+                 ModifyAckDeadlineRequest <$>
+                   (o .:? "ackIds" .!= mempty) <*> (o .:? "ackId") <*>
+                     (o .:? "ackDeadlineSeconds"))
+
+instance ToJSON ModifyAckDeadlineRequest where
+        toJSON ModifyAckDeadlineRequest{..}
+          = object
+              (catMaybes
+                 [("ackIds" .=) <$> _madrAckIds,
+                  ("ackId" .=) <$> _madrAckId,
+                  ("ackDeadlineSeconds" .=) <$>
+                    _madrAckDeadlineSeconds])
+
 -- | Request for the ModifyPushConfig method.
 --
 -- /See:/ 'modifyPushConfigRequest' smart constructor.
@@ -295,6 +389,17 @@ mpcrPushConfig :: Lens' ModifyPushConfigRequest (Maybe (Maybe PushConfig))
 mpcrPushConfig
   = lens _mpcrPushConfig
       (\ s a -> s{_mpcrPushConfig = a})
+
+instance FromJSON ModifyPushConfigRequest where
+        parseJSON
+          = withObject "ModifyPushConfigRequest"
+              (\ o ->
+                 ModifyPushConfigRequest <$> (o .:? "pushConfig"))
+
+instance ToJSON ModifyPushConfigRequest where
+        toJSON ModifyPushConfigRequest{..}
+          = object
+              (catMaybes [("pushConfig" .=) <$> _mpcrPushConfig])
 
 -- | # Overview The \`Policy\` defines an access control policy language. It
 -- is used to define policies that are attached to resources like files,
@@ -355,6 +460,22 @@ pBindings
       _Default
       . _Coerce
 
+instance FromJSON Policy where
+        parseJSON
+          = withObject "Policy"
+              (\ o ->
+                 Policy <$>
+                   (o .:? "etag") <*> (o .:? "version") <*>
+                     (o .:? "bindings" .!= mempty))
+
+instance ToJSON Policy where
+        toJSON Policy{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _pEtag,
+                  ("version" .=) <$> _pVersion,
+                  ("bindings" .=) <$> _pBindings])
+
 -- | Request for the Publish method.
 --
 -- /See:/ 'publishRequest' smart constructor.
@@ -380,6 +501,17 @@ prMessages
   = lens _prMessages (\ s a -> s{_prMessages = a}) .
       _Default
       . _Coerce
+
+instance FromJSON PublishRequest where
+        parseJSON
+          = withObject "PublishRequest"
+              (\ o ->
+                 PublishRequest <$> (o .:? "messages" .!= mempty))
+
+instance ToJSON PublishRequest where
+        toJSON PublishRequest{..}
+          = object
+              (catMaybes [("messages" .=) <$> _prMessages])
 
 -- | Response for the Publish method.
 --
@@ -408,6 +540,17 @@ prMessageIds
   = lens _prMessageIds (\ s a -> s{_prMessageIds = a})
       . _Default
       . _Coerce
+
+instance FromJSON PublishResponse where
+        parseJSON
+          = withObject "PublishResponse"
+              (\ o ->
+                 PublishResponse <$> (o .:? "messageIds" .!= mempty))
+
+instance ToJSON PublishResponse where
+        toJSON PublishResponse{..}
+          = object
+              (catMaybes [("messageIds" .=) <$> _prMessageIds])
 
 -- | A message data and its attributes. The message payload must not be
 -- empty; it must contain either a non-empty data field, or at least one
@@ -456,6 +599,22 @@ pmMessageId :: Lens' PubsubMessage (Maybe Text)
 pmMessageId
   = lens _pmMessageId (\ s a -> s{_pmMessageId = a})
 
+instance FromJSON PubsubMessage where
+        parseJSON
+          = withObject "PubsubMessage"
+              (\ o ->
+                 PubsubMessage <$>
+                   (o .:? "data") <*> (o .:? "attributes") <*>
+                     (o .:? "messageId"))
+
+instance ToJSON PubsubMessage where
+        toJSON PubsubMessage{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _pmData,
+                  ("attributes" .=) <$> _pmAttributes,
+                  ("messageId" .=) <$> _pmMessageId])
+
 -- | Optional attributes for this message.
 --
 -- /See:/ 'pubsubMessageAttributes' smart constructor.
@@ -468,6 +627,14 @@ data PubsubMessageAttributes =
 pubsubMessageAttributes
     :: PubsubMessageAttributes
 pubsubMessageAttributes = PubsubMessageAttributes
+
+instance FromJSON PubsubMessageAttributes where
+        parseJSON
+          = withObject "PubsubMessageAttributes"
+              (\ o -> pure PubsubMessageAttributes)
+
+instance ToJSON PubsubMessageAttributes where
+        toJSON = const (Object mempty)
 
 -- | Request for the Pull method.
 --
@@ -509,6 +676,21 @@ prReturnImmediately
   = lens _prReturnImmediately
       (\ s a -> s{_prReturnImmediately = a})
 
+instance FromJSON PullRequest where
+        parseJSON
+          = withObject "PullRequest"
+              (\ o ->
+                 PullRequest <$>
+                   (o .:? "maxMessages") <*>
+                     (o .:? "returnImmediately"))
+
+instance ToJSON PullRequest where
+        toJSON PullRequest{..}
+          = object
+              (catMaybes
+                 [("maxMessages" .=) <$> _prMaxMessages,
+                  ("returnImmediately" .=) <$> _prReturnImmediately])
+
 -- | Response for the Pull method.
 --
 -- /See:/ 'pullResponse' smart constructor.
@@ -538,6 +720,19 @@ prReceivedMessages
       (\ s a -> s{_prReceivedMessages = a})
       . _Default
       . _Coerce
+
+instance FromJSON PullResponse where
+        parseJSON
+          = withObject "PullResponse"
+              (\ o ->
+                 PullResponse <$>
+                   (o .:? "receivedMessages" .!= mempty))
+
+instance ToJSON PullResponse where
+        toJSON PullResponse{..}
+          = object
+              (catMaybes
+                 [("receivedMessages" .=) <$> _prReceivedMessages])
 
 -- | Configuration for a push delivery endpoint.
 --
@@ -588,6 +783,20 @@ pcPushEndpoint
   = lens _pcPushEndpoint
       (\ s a -> s{_pcPushEndpoint = a})
 
+instance FromJSON PushConfig where
+        parseJSON
+          = withObject "PushConfig"
+              (\ o ->
+                 PushConfig <$>
+                   (o .:? "attributes") <*> (o .:? "pushEndpoint"))
+
+instance ToJSON PushConfig where
+        toJSON PushConfig{..}
+          = object
+              (catMaybes
+                 [("attributes" .=) <$> _pcAttributes,
+                  ("pushEndpoint" .=) <$> _pcPushEndpoint])
+
 -- | Endpoint configuration attributes. Every endpoint has a set of API
 -- supported attributes that can be used to control different aspects of
 -- the message delivery. The currently supported attribute is
@@ -614,6 +823,14 @@ data PushConfigAttributes =
 pushConfigAttributes
     :: PushConfigAttributes
 pushConfigAttributes = PushConfigAttributes
+
+instance FromJSON PushConfigAttributes where
+        parseJSON
+          = withObject "PushConfigAttributes"
+              (\ o -> pure PushConfigAttributes)
+
+instance ToJSON PushConfigAttributes where
+        toJSON = const (Object mempty)
 
 -- | A message and its corresponding acknowledgment ID.
 --
@@ -647,6 +864,20 @@ rmMessage :: Lens' ReceivedMessage (Maybe (Maybe PubsubMessage))
 rmMessage
   = lens _rmMessage (\ s a -> s{_rmMessage = a})
 
+instance FromJSON ReceivedMessage where
+        parseJSON
+          = withObject "ReceivedMessage"
+              (\ o ->
+                 ReceivedMessage <$>
+                   (o .:? "ackId") <*> (o .:? "message"))
+
+instance ToJSON ReceivedMessage where
+        toJSON ReceivedMessage{..}
+          = object
+              (catMaybes
+                 [("ackId" .=) <$> _rmAckId,
+                  ("message" .=) <$> _rmMessage])
+
 -- | Request message for \`SetIamPolicy\` method.
 --
 -- /See:/ 'setIamPolicyRequest' smart constructor.
@@ -673,6 +904,15 @@ setIamPolicyRequest =
 siprPolicy :: Lens' SetIamPolicyRequest (Maybe (Maybe Policy))
 siprPolicy
   = lens _siprPolicy (\ s a -> s{_siprPolicy = a})
+
+instance FromJSON SetIamPolicyRequest where
+        parseJSON
+          = withObject "SetIamPolicyRequest"
+              (\ o -> SetIamPolicyRequest <$> (o .:? "policy"))
+
+instance ToJSON SetIamPolicyRequest where
+        toJSON SetIamPolicyRequest{..}
+          = object (catMaybes [("policy" .=) <$> _siprPolicy])
 
 -- | A subscription resource.
 --
@@ -745,6 +985,23 @@ sAckDeadlineSeconds
   = lens _sAckDeadlineSeconds
       (\ s a -> s{_sAckDeadlineSeconds = a})
 
+instance FromJSON Subscription where
+        parseJSON
+          = withObject "Subscription"
+              (\ o ->
+                 Subscription <$>
+                   (o .:? "pushConfig") <*> (o .:? "topic") <*>
+                     (o .:? "name")
+                     <*> (o .:? "ackDeadlineSeconds"))
+
+instance ToJSON Subscription where
+        toJSON Subscription{..}
+          = object
+              (catMaybes
+                 [("pushConfig" .=) <$> _sPushConfig,
+                  ("topic" .=) <$> _sTopic, ("name" .=) <$> _sName,
+                  ("ackDeadlineSeconds" .=) <$> _sAckDeadlineSeconds])
+
 -- | Request message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIamPermissionsRequest' smart constructor.
@@ -772,6 +1029,19 @@ tiamprPermissions
       (\ s a -> s{_tiamprPermissions = a})
       . _Default
       . _Coerce
+
+instance FromJSON TestIamPermissionsRequest where
+        parseJSON
+          = withObject "TestIamPermissionsRequest"
+              (\ o ->
+                 TestIamPermissionsRequest <$>
+                   (o .:? "permissions" .!= mempty))
+
+instance ToJSON TestIamPermissionsRequest where
+        toJSON TestIamPermissionsRequest{..}
+          = object
+              (catMaybes
+                 [("permissions" .=) <$> _tiamprPermissions])
 
 -- | Response message for \`TestIamPermissions\` method.
 --
@@ -801,6 +1071,18 @@ tiprPermissions
       . _Default
       . _Coerce
 
+instance FromJSON TestIamPermissionsResponse where
+        parseJSON
+          = withObject "TestIamPermissionsResponse"
+              (\ o ->
+                 TestIamPermissionsResponse <$>
+                   (o .:? "permissions" .!= mempty))
+
+instance ToJSON TestIamPermissionsResponse where
+        toJSON TestIamPermissionsResponse{..}
+          = object
+              (catMaybes [("permissions" .=) <$> _tiprPermissions])
+
 -- | A topic resource.
 --
 -- /See:/ 'topic' smart constructor.
@@ -829,3 +1111,12 @@ topic =
 -- \`\"goog\"\`.
 tName :: Lens' Topic (Maybe Text)
 tName = lens _tName (\ s a -> s{_tName = a})
+
+instance FromJSON Topic where
+        parseJSON
+          = withObject "Topic"
+              (\ o -> Topic <$> (o .:? "name"))
+
+instance ToJSON Topic where
+        toJSON Topic{..}
+          = object (catMaybes [("name" .=) <$> _tName])

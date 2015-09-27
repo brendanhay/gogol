@@ -195,158 +195,185 @@ type ZoneViewsAPI =
 
 -- | Update the service information of a resource view or a resource.
 type ZoneViewsSetService =
-     "resourceviews" :> "v1beta2" :> "projects" :>
-       Capture "project" Text
-       :> "zones"
-       :> Capture "zone" Text
-       :> "resourceViews"
-       :> Capture "resourceView" Text
-       :> "setService"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "resourceviews" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "resourceViews" :>
+                   Capture "resourceView" Text :>
+                     "setService" :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Post '[JSON] Operation
 
 -- | Create a resource view.
 type ZoneViewsInsert =
-     "resourceviews" :> "v1beta2" :> "projects" :>
-       Capture "project" Text
-       :> "zones"
-       :> Capture "zone" Text
-       :> "resourceViews"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "resourceviews" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "resourceViews" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Post '[JSON] Operation
 
 -- | List resource views.
 type ZoneViewsList =
-     "resourceviews" :> "v1beta2" :> "projects" :>
-       Capture "project" Text
-       :> "zones"
-       :> Capture "zone" Text
-       :> "resourceViews"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "resourceviews" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "resourceViews" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "maxResults" Int32 :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON] ZoneViewsList
 
 -- | List the resources of the resource view.
 type ZoneViewsListResources =
-     "resourceviews" :> "v1beta2" :> "projects" :>
-       Capture "project" Text
-       :> "zones"
-       :> Capture "zone" Text
-       :> "resourceViews"
-       :> Capture "resourceView" Text
-       :> "resources"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "listState" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "format" Text
-       :> QueryParam "key" Text
-       :> QueryParam "serviceName" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "resourceviews" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "resourceViews" :>
+                   Capture "resourceView" Text :>
+                     "resources" :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "listState" Text :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "format" Text :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "serviceName" Text :>
+                                     QueryParam "pageToken" Text :>
+                                       QueryParam "oauth_token" Text :>
+                                         QueryParam "maxResults" Int32 :>
+                                           QueryParam "fields" Text :>
+                                             QueryParam "alt" Text :>
+                                               Get '[JSON]
+                                                 ZoneViewsListResourcesResponse
 
 -- | Get the information of a zonal resource view.
 type ZoneViewsGet =
-     "resourceviews" :> "v1beta2" :> "projects" :>
-       Capture "project" Text
-       :> "zones"
-       :> Capture "zone" Text
-       :> "resourceViews"
-       :> Capture "resourceView" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "resourceviews" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "resourceViews" :>
+                   Capture "resourceView" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Get '[JSON] ResourceView
 
 -- | Remove resources from the view.
 type ZoneViewsRemoveResources =
-     "resourceviews" :> "v1beta2" :> "projects" :>
-       Capture "project" Text
-       :> "zones"
-       :> Capture "zone" Text
-       :> "resourceViews"
-       :> Capture "resourceView" Text
-       :> "removeResources"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "resourceviews" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "resourceViews" :>
+                   Capture "resourceView" Text :>
+                     "removeResources" :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Post '[JSON] Operation
 
 -- | Add resources to the view.
 type ZoneViewsAddResources =
-     "resourceviews" :> "v1beta2" :> "projects" :>
-       Capture "project" Text
-       :> "zones"
-       :> Capture "zone" Text
-       :> "resourceViews"
-       :> Capture "resourceView" Text
-       :> "addResources"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "resourceviews" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "resourceViews" :>
+                   Capture "resourceView" Text :>
+                     "addResources" :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Post '[JSON] Operation
 
 -- | Get the service information of a resource view or a resource.
 type ZoneViewsGetService =
-     "resourceviews" :> "v1beta2" :> "projects" :>
-       Capture "project" Text
-       :> "zones"
-       :> Capture "zone" Text
-       :> "resourceViews"
-       :> Capture "resourceView" Text
-       :> "getService"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "resourceName" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "resourceviews" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "resourceViews" :>
+                   Capture "resourceView" Text :>
+                     "getService" :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "resourceName" Text :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :>
+                                       Post '[JSON] ZoneViewsGetServiceResponse
 
 -- | Delete a resource view.
 type ZoneViewsDelete =
-     "resourceviews" :> "v1beta2" :> "projects" :>
-       Capture "project" Text
-       :> "zones"
-       :> Capture "zone" Text
-       :> "resourceViews"
-       :> Capture "resourceView" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "resourceviews" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "resourceViews" :>
+                   Capture "resourceView" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Delete '[JSON] Operation
 
 type ZoneOperationsAPI =
      ZoneOperationsList :<|> ZoneOperationsGet
@@ -354,34 +381,39 @@ type ZoneOperationsAPI =
 -- | Retrieves the list of operation resources contained within the specified
 -- zone.
 type ZoneOperationsList =
-     "resourceviews" :> "v1beta2" :> "projects" :>
-       Capture "project" Text
-       :> "zones"
-       :> Capture "zone" Text
-       :> "operations"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "filter" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Word32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "resourceviews" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "operations" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "filter" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "maxResults" Word32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :>
+                                       Get '[JSON] OperationList
 
 -- | Retrieves the specified zone-specific operation resource.
 type ZoneOperationsGet =
-     "resourceviews" :> "v1beta2" :> "projects" :>
-       Capture "project" Text
-       :> "zones"
-       :> Capture "zone" Text
-       :> "operations"
-       :> Capture "operation" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "resourceviews" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "operations" :>
+                   Capture "operation" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :> Get '[JSON] Operation

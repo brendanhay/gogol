@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -49,3 +50,18 @@ gResponseCode :: Lens' Groups (Maybe Text)
 gResponseCode
   = lens _gResponseCode
       (\ s a -> s{_gResponseCode = a})
+
+instance FromJSON Groups where
+        parseJSON
+          = withObject "Groups"
+              (\ o ->
+                 Groups <$>
+                   (o .:? "kind" .!= "groupsmigration#groups") <*>
+                     (o .:? "responseCode"))
+
+instance ToJSON Groups where
+        toJSON Groups{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _gKind),
+                  ("responseCode" .=) <$> _gResponseCode])

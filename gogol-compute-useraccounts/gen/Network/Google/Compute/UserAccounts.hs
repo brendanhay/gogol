@@ -232,97 +232,110 @@ type GroupsAPI =
 -- | Creates a Group resource in the specified project using the data
 -- included in the request.
 type GroupsInsert =
-     "clouduseraccounts" :> "vm_beta" :> "projects" :>
-       Capture "project" Text
-       :> "global"
-       :> "groups"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "clouduseraccounts" :>
+       "vm_beta" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "groups" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Post '[JSON] Operation
 
 -- | Retrieves the list of groups contained within the specified project.
 type GroupsList =
-     "clouduseraccounts" :> "vm_beta" :> "projects" :>
-       Capture "project" Text
-       :> "global"
-       :> "groups"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "orderBy" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "filter" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Word32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "clouduseraccounts" :>
+       "vm_beta" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "groups" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "orderBy" Text :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "filter" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "maxResults" Word32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :>
+                                       Get '[JSON] GroupList
 
 -- | Returns the specified Group resource.
 type GroupsGet =
-     "clouduseraccounts" :> "vm_beta" :> "projects" :>
-       Capture "project" Text
-       :> "global"
-       :> "groups"
-       :> Capture "groupName" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "clouduseraccounts" :>
+       "vm_beta" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "groups" :>
+                 Capture "groupName" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Get '[JSON] Group
 
 -- | Removes users from the specified group.
 type GroupsRemoveMember =
-     "clouduseraccounts" :> "vm_beta" :> "projects" :>
-       Capture "project" Text
-       :> "global"
-       :> "groups"
-       :> Capture "groupName" Text
-       :> "removeMember"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "clouduseraccounts" :>
+       "vm_beta" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "groups" :>
+                 Capture "groupName" Text :>
+                   "removeMember" :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :> Post '[JSON] Operation
 
 -- | Deletes the specified Group resource.
 type GroupsDelete =
-     "clouduseraccounts" :> "vm_beta" :> "projects" :>
-       Capture "project" Text
-       :> "global"
-       :> "groups"
-       :> Capture "groupName" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "clouduseraccounts" :>
+       "vm_beta" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "groups" :>
+                 Capture "groupName" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Delete '[JSON] Operation
 
 -- | Adds users to the specified group.
 type GroupsAddMember =
-     "clouduseraccounts" :> "vm_beta" :> "projects" :>
-       Capture "project" Text
-       :> "global"
-       :> "groups"
-       :> Capture "groupName" Text
-       :> "addMember"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "clouduseraccounts" :>
+       "vm_beta" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "groups" :>
+                 Capture "groupName" Text :>
+                   "addMember" :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :> Post '[JSON] Operation
 
 type UsersAPI =
      UsersAddPublicKey :<|> UsersInsert :<|> UsersList
@@ -333,99 +346,113 @@ type UsersAPI =
 -- | Adds a public key to the specified User resource with the data included
 -- in the request.
 type UsersAddPublicKey =
-     "clouduseraccounts" :> "vm_beta" :> "projects" :>
-       Capture "project" Text
-       :> "global"
-       :> "users"
-       :> Capture "user" Text
-       :> "addPublicKey"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "clouduseraccounts" :>
+       "vm_beta" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "users" :>
+                 Capture "user" Text :>
+                   "addPublicKey" :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :> Post '[JSON] Operation
 
 -- | Creates a User resource in the specified project using the data included
 -- in the request.
 type UsersInsert =
-     "clouduseraccounts" :> "vm_beta" :> "projects" :>
-       Capture "project" Text
-       :> "global"
-       :> "users"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "clouduseraccounts" :>
+       "vm_beta" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "users" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Post '[JSON] Operation
 
 -- | Retrieves a list of users contained within the specified project.
 type UsersList =
-     "clouduseraccounts" :> "vm_beta" :> "projects" :>
-       Capture "project" Text
-       :> "global"
-       :> "users"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "orderBy" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "filter" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Word32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "clouduseraccounts" :>
+       "vm_beta" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "users" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "orderBy" Text :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "filter" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "maxResults" Word32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :>
+                                       Get '[JSON] UserList
 
 -- | Removes the specified public key from the user.
 type UsersRemovePublicKey =
-     "clouduseraccounts" :> "vm_beta" :> "projects" :>
-       Capture "project" Text
-       :> "global"
-       :> "users"
-       :> Capture "user" Text
-       :> "removePublicKey"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "fingerprint" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "clouduseraccounts" :>
+       "vm_beta" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "users" :>
+                 Capture "user" Text :>
+                   "removePublicKey" :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "fingerprint" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Post '[JSON] Operation
 
 -- | Returns the specified User resource.
 type UsersGet =
-     "clouduseraccounts" :> "vm_beta" :> "projects" :>
-       Capture "project" Text
-       :> "global"
-       :> "users"
-       :> Capture "user" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "clouduseraccounts" :>
+       "vm_beta" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "users" :>
+                 Capture "user" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Get '[JSON] User
 
 -- | Deletes the specified User resource.
 type UsersDelete =
-     "clouduseraccounts" :> "vm_beta" :> "projects" :>
-       Capture "project" Text
-       :> "global"
-       :> "users"
-       :> Capture "user" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "clouduseraccounts" :>
+       "vm_beta" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "users" :>
+                 Capture "user" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Delete '[JSON] Operation
 
 type GlobalAccountsOperationsAPI =
      GlobalAccountsOperationsList :<|>
@@ -435,51 +462,58 @@ type GlobalAccountsOperationsAPI =
 -- | Retrieves the list of operation resources contained within the specified
 -- project.
 type GlobalAccountsOperationsList =
-     "clouduseraccounts" :> "vm_beta" :> "projects" :>
-       Capture "project" Text
-       :> "global"
-       :> "operations"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "orderBy" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "filter" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Word32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "clouduseraccounts" :>
+       "vm_beta" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "operations" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "orderBy" Text :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "filter" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "maxResults" Word32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :>
+                                       Get '[JSON] OperationList
 
 -- | Retrieves the specified operation resource.
 type GlobalAccountsOperationsGet =
-     "clouduseraccounts" :> "vm_beta" :> "projects" :>
-       Capture "project" Text
-       :> "global"
-       :> "operations"
-       :> Capture "operation" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "clouduseraccounts" :>
+       "vm_beta" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "operations" :>
+                 Capture "operation" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Get '[JSON] Operation
 
 -- | Deletes the specified operation resource.
 type GlobalAccountsOperationsDelete =
-     "clouduseraccounts" :> "vm_beta" :> "projects" :>
-       Capture "project" Text
-       :> "global"
-       :> "operations"
-       :> Capture "operation" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "clouduseraccounts" :>
+       "vm_beta" :>
+         "projects" :>
+           Capture "project" Text :>
+             "global" :>
+               "operations" :>
+                 Capture "operation" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Delete '[JSON] ()
 
 type LinuxAPI =
      LinuxGetLinuxAccountViews :<|>
@@ -488,38 +522,46 @@ type LinuxAPI =
 -- | Retrieves a list of user accounts for an instance within a specific
 -- project.
 type LinuxGetLinuxAccountViews =
-     "clouduseraccounts" :> "vm_beta" :> "projects" :>
-       Capture "project" Text
-       :> "zones"
-       :> Capture "zone" Text
-       :> "linuxAccountViews"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "orderBy" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "filter" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Word32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
-       :> QueryParam "instance" Text
+     "clouduseraccounts" :>
+       "vm_beta" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "linuxAccountViews" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "orderBy" Text :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "filter" Text :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "maxResults" Word32 :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Text :>
+                                         QueryParam "instance" Text :>
+                                           Post '[JSON]
+                                             LinuxGetLinuxAccountViewsResponse
 
 -- | Returns a list of authorized public keys for a specific user account.
 type LinuxGetAuthorizedKeysView =
-     "clouduseraccounts" :> "vm_beta" :> "projects" :>
-       Capture "project" Text
-       :> "zones"
-       :> Capture "zone" Text
-       :> "authorizedKeysView"
-       :> Capture "user" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "login" Bool
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
-       :> QueryParam "instance" Text
+     "clouduseraccounts" :>
+       "vm_beta" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "authorizedKeysView" :>
+                   Capture "user" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "login" Bool :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     QueryParam "instance" Text :>
+                                       Post '[JSON]
+                                         LinuxGetAuthorizedKeysViewResponse

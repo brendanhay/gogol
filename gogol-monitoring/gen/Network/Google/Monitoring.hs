@@ -200,46 +200,55 @@ type MetricDescriptorsAPI =
 -- request subsequent pages of results by setting the pageToken query
 -- parameter to the value of the nextPageToken.
 type MetricDescriptorsList =
-     "cloudmonitoring" :> "v2beta2" :> "projects" :>
-       Capture "project" Text
-       :> "metricDescriptors"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "count" Natural
-       :> QueryParam "key" Text
-       :> QueryParam "query" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "cloudmonitoring" :>
+       "v2beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "metricDescriptors" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "count" Natural :>
+                       QueryParam "key" Text :>
+                         QueryParam "query" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Get '[JSON] ListMetricDescriptorsResponse
 
 -- | Create a new metric.
 type MetricDescriptorsCreate =
-     "cloudmonitoring" :> "v2beta2" :> "projects" :>
-       Capture "project" Text
-       :> "metricDescriptors"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "cloudmonitoring" :>
+       "v2beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "metricDescriptors" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Post '[JSON] MetricDescriptor
 
 -- | Delete an existing metric.
 type MetricDescriptorsDelete =
-     "cloudmonitoring" :> "v2beta2" :> "projects" :>
-       Capture "project" Text
-       :> "metricDescriptors"
-       :> Capture "metric" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "cloudmonitoring" :>
+       "v2beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "metricDescriptors" :>
+               Capture "metric" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Delete '[JSON] DeleteMetricDescriptorResponse
 
 type TimeseriesDescriptorsAPI =
      TimeseriesDescriptorsList
@@ -250,25 +259,29 @@ type TimeseriesDescriptorsAPI =
 -- subsequent pages of results by setting the pageToken query parameter to
 -- the value of the nextPageToken.
 type TimeseriesDescriptorsList =
-     "cloudmonitoring" :> "v2beta2" :> "projects" :>
-       Capture "project" Text
-       :> "timeseriesDescriptors"
-       :> Capture "metric" Text
-       :> QueryParam "window" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "count" Natural
-       :> QueryParam "aggregator" Text
-       :> QueryParam "timespan" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oldest" Text
-       :> QueryParam "labels" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "youngest" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "cloudmonitoring" :>
+       "v2beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "timeseriesDescriptors" :>
+               Capture "metric" Text :>
+                 QueryParam "window" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "count" Natural :>
+                           QueryParam "aggregator" Text :>
+                             QueryParam "timespan" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oldest" Text :>
+                                   QueryParam "labels" Text :>
+                                     QueryParam "pageToken" Text :>
+                                       QueryParam "youngest" Text :>
+                                         QueryParam "oauth_token" Text :>
+                                           QueryParam "fields" Text :>
+                                             QueryParam "alt" Text :>
+                                               Get '[JSON]
+                                                 ListTimeseriesDescriptorsResponse
 
 type TimeseriesAPI =
      TimeseriesList :<|> TimeseriesWrite
@@ -279,25 +292,29 @@ type TimeseriesAPI =
 -- subsequent pages of results by setting the pageToken query parameter to
 -- the value of the nextPageToken.
 type TimeseriesList =
-     "cloudmonitoring" :> "v2beta2" :> "projects" :>
-       Capture "project" Text
-       :> "timeseries"
-       :> Capture "metric" Text
-       :> QueryParam "window" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "count" Natural
-       :> QueryParam "aggregator" Text
-       :> QueryParam "timespan" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oldest" Text
-       :> QueryParam "labels" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "youngest" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "cloudmonitoring" :>
+       "v2beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "timeseries" :>
+               Capture "metric" Text :>
+                 QueryParam "window" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "count" Natural :>
+                           QueryParam "aggregator" Text :>
+                             QueryParam "timespan" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oldest" Text :>
+                                   QueryParam "labels" Text :>
+                                     QueryParam "pageToken" Text :>
+                                       QueryParam "youngest" Text :>
+                                         QueryParam "oauth_token" Text :>
+                                           QueryParam "fields" Text :>
+                                             QueryParam "alt" Text :>
+                                               Get '[JSON]
+                                                 ListTimeseriesResponse
 
 -- | Put data points to one or more time series for one or more metrics. If a
 -- time series does not exist, a new time series will be created. It is not
@@ -307,13 +324,16 @@ type TimeseriesList =
 -- Therefore, users should make sure that points of a time series are
 -- written sequentially in the order of their end time.
 type TimeseriesWrite =
-     "cloudmonitoring" :> "v2beta2" :> "projects" :>
-       Capture "project" Text
-       :> "timeseries:write"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "cloudmonitoring" :>
+       "v2beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "timeseries:write" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Post '[JSON] WriteTimeseriesResponse

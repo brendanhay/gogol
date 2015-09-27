@@ -985,142 +985,170 @@ type RoomsAPI =
 
 -- | Returns invitations to join rooms.
 type RoomsList =
-     "games" :> "v1" :> "rooms" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "language" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Natural
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "rooms" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "language" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Natural :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] RoomList
 
 -- | Join a room. For internal use by the Games SDK only. Calling this method
 -- directly is unsupported.
 type RoomsJoin =
-     "games" :> "v1" :> "rooms" :> Capture "roomId" Text
-       :> "join"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "language" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "rooms" :>
+           Capture "roomId" Text :>
+             "join" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "language" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Post '[JSON] Room
 
 -- | Get the data for a room.
 type RoomsGet =
-     "games" :> "v1" :> "rooms" :> Capture "roomId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "language" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "rooms" :>
+           Capture "roomId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "language" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Get '[JSON] Room
 
 -- | Create a room. For internal use by the Games SDK only. Calling this
 -- method directly is unsupported.
 type RoomsCreate =
-     "games" :> "v1" :> "rooms" :> "create" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "language" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "rooms" :>
+           "create" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "language" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] Room
 
 -- | Decline an invitation to join a room. For internal use by the Games SDK
 -- only. Calling this method directly is unsupported.
 type RoomsDecline =
-     "games" :> "v1" :> "rooms" :> Capture "roomId" Text
-       :> "decline"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "language" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "rooms" :>
+           Capture "roomId" Text :>
+             "decline" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "language" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Post '[JSON] Room
 
 -- | Dismiss an invitation to join a room. For internal use by the Games SDK
 -- only. Calling this method directly is unsupported.
 type RoomsDismiss =
-     "games" :> "v1" :> "rooms" :> Capture "roomId" Text
-       :> "dismiss"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "rooms" :>
+           Capture "roomId" Text :>
+             "dismiss" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] ()
 
 -- | Updates sent by a client reporting the status of peers in a room. For
 -- internal use by the Games SDK only. Calling this method directly is
 -- unsupported.
 type RoomsReportStatus =
-     "games" :> "v1" :> "rooms" :> Capture "roomId" Text
-       :> "reportstatus"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "language" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "rooms" :>
+           Capture "roomId" Text :>
+             "reportstatus" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "language" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Post '[JSON] RoomStatus
 
 -- | Leave a room. For internal use by the Games SDK only. Calling this
 -- method directly is unsupported.
 type RoomsLeave =
-     "games" :> "v1" :> "rooms" :> Capture "roomId" Text
-       :> "leave"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "language" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "rooms" :>
+           Capture "roomId" Text :>
+             "leave" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "language" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Post '[JSON] Room
 
 type LeaderboardsAPI =
      LeaderboardsList :<|> LeaderboardsGet
 
 -- | Lists all the leaderboard metadata for your application.
 type LeaderboardsList =
-     "games" :> "v1" :> "leaderboards" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "language" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Natural
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "leaderboards" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "language" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Natural :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Get '[JSON] LeaderboardListResponse
 
 -- | Retrieves the metadata of the leaderboard with the given ID.
 type LeaderboardsGet =
-     "games" :> "v1" :> "leaderboards" :>
-       Capture "leaderboardId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "language" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "leaderboards" :>
+           Capture "leaderboardId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "language" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Get '[JSON] Leaderboard
 
 type QuestMilestonesAPI = QuestMilestonesClaim
 
@@ -1128,18 +1156,21 @@ type QuestMilestonesAPI = QuestMilestonesClaim
 -- the quest corresponding to questId has been claimed by the currently
 -- authorized user.
 type QuestMilestonesClaim =
-     "games" :> "v1" :> "quests" :> Capture "questId" Text
-       :> "milestones"
-       :> Capture "milestoneId" Text
-       :> "claim"
-       :> QueryParam "requestId" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "quests" :>
+           Capture "questId" Text :>
+             "milestones" :>
+               Capture "milestoneId" Text :>
+                 "claim" :>
+                   QueryParam "requestId" Int64 :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :> Put '[JSON] ()
 
 type MetagameAPI =
      MetagameListCategoriesByPlayer :<|>
@@ -1148,48 +1179,56 @@ type MetagameAPI =
 -- | List play data aggregated per category for the player corresponding to
 -- playerId.
 type MetagameListCategoriesByPlayer =
-     "games" :> "v1" :> "players" :>
-       Capture "playerId" Text
-       :> "categories"
-       :> Capture "collection" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "language" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Natural
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "players" :>
+           Capture "playerId" Text :>
+             "categories" :>
+               Capture "collection" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "language" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "maxResults" Natural :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON] CategoryListResponse
 
 -- | Return the metagame configuration data for the calling application.
 type MetagameGetMetagameConfig =
-     "games" :> "v1" :> "metagameConfig" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "metagameConfig" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Text :> Get '[JSON] MetagameConfig
 
 type AchievementDefinitionsAPI =
      AchievementDefinitionsList
 
 -- | Lists all the achievement definitions for your application.
 type AchievementDefinitionsList =
-     "games" :> "v1" :> "achievements" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "language" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Natural
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "achievements" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "language" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Natural :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Get '[JSON] AchievementDefinitionsListResponse
 
 type AchievementsAPI =
      AchievementsList :<|> AchievementsUnlock :<|>
@@ -1201,123 +1240,147 @@ type AchievementsAPI =
 -- | Lists the progress for all your application\'s achievements for the
 -- currently authenticated player.
 type AchievementsList =
-     "games" :> "v1" :> "players" :>
-       Capture "playerId" Text
-       :> "achievements"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "state" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "language" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Natural
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "players" :>
+           Capture "playerId" Text :>
+             "achievements" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "state" Text :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "language" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "maxResults" Natural :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON] PlayerAchievementListResponse
 
 -- | Unlocks this achievement for the currently authenticated player.
 type AchievementsUnlock =
-     "games" :> "v1" :> "achievements" :>
-       Capture "achievementId" Text
-       :> "unlock"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "achievements" :>
+           Capture "achievementId" Text :>
+             "unlock" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Post '[JSON] AchievementUnlockResponse
 
 -- | Sets the state of the achievement with the given ID to REVEALED for the
 -- currently authenticated player.
 type AchievementsReveal =
-     "games" :> "v1" :> "achievements" :>
-       Capture "achievementId" Text
-       :> "reveal"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "achievements" :>
+           Capture "achievementId" Text :>
+             "reveal" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Post '[JSON] AchievementRevealResponse
 
 -- | Sets the steps for the currently authenticated player towards unlocking
 -- an achievement. If the steps parameter is less than the current number
 -- of steps that the player already gained for the achievement, the
 -- achievement is not modified.
 type AchievementsSetStepsAtLeast =
-     "games" :> "v1" :> "achievements" :>
-       Capture "achievementId" Text
-       :> "setStepsAtLeast"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "steps" Natural
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "achievements" :>
+           Capture "achievementId" Text :>
+             "setStepsAtLeast" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "steps" Natural :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Post '[JSON] AchievementSetStepsAtLeastResponse
 
 -- | Updates multiple achievements for the currently authenticated player.
 type AchievementsUpdateMultiple =
-     "games" :> "v1" :> "achievements" :> "updateMultiple"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "achievements" :>
+           "updateMultiple" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :>
+                           Post '[JSON] AchievementUpdateMultipleResponse
 
 -- | Increments the steps of the achievement with the given ID for the
 -- currently authenticated player.
 type AchievementsIncrement =
-     "games" :> "v1" :> "achievements" :>
-       Capture "achievementId" Text
-       :> "increment"
-       :> QueryParam "requestId" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "stepsToIncrement" Natural
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "achievements" :>
+           Capture "achievementId" Text :>
+             "increment" :>
+               QueryParam "requestId" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "stepsToIncrement" Natural :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :>
+                                 Post '[JSON] AchievementIncrementResponse
 
 type SnapshotsAPI = SnapshotsList :<|> SnapshotsGet
 
 -- | Retrieves a list of snapshots created by your application for the player
 -- corresponding to the player ID.
 type SnapshotsList =
-     "games" :> "v1" :> "players" :>
-       Capture "playerId" Text
-       :> "snapshots"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "language" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Natural
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "players" :>
+           Capture "playerId" Text :>
+             "snapshots" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "language" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "maxResults" Natural :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Get '[JSON] SnapshotListResponse
 
 -- | Retrieves the metadata for a given snapshot ID.
 type SnapshotsGet =
-     "games" :> "v1" :> "snapshots" :>
-       Capture "snapshotId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "language" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "snapshots" :>
+           Capture "snapshotId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "language" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Get '[JSON] Snapshot
 
 type EventsAPI =
      EventsListDefinitions :<|> EventsListByPlayer :<|>
@@ -1325,123 +1388,149 @@ type EventsAPI =
 
 -- | Returns a list of the event definitions in this application.
 type EventsListDefinitions =
-     "games" :> "v1" :> "eventDefinitions" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "language" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Natural
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "eventDefinitions" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "language" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Natural :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Get '[JSON] EventDefinitionListResponse
 
 -- | Returns a list showing the current progress on events in this
 -- application for the currently authenticated user.
 type EventsListByPlayer =
-     "games" :> "v1" :> "events" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "language" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Natural
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "events" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "language" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Natural :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Get '[JSON] PlayerEventListResponse
 
 -- | Records a batch of changes to the number of times events have occurred
 -- for the currently authenticated user of this application.
 type EventsRecord =
-     "games" :> "v1" :> "events" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "language" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "events" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "language" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :>
+                           Post '[JSON] EventUpdateResponse
 
 type QuestsAPI = QuestsList :<|> QuestsAccept
 
 -- | Get a list of quests for your application and the currently
 -- authenticated player.
 type QuestsList =
-     "games" :> "v1" :> "players" :>
-       Capture "playerId" Text
-       :> "quests"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "language" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Natural
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "players" :>
+           Capture "playerId" Text :>
+             "quests" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "language" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "maxResults" Natural :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Get '[JSON] QuestListResponse
 
 -- | Indicates that the currently authorized user will participate in the
 -- quest.
 type QuestsAccept =
-     "games" :> "v1" :> "quests" :> Capture "questId" Text
-       :> "accept"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "language" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "quests" :>
+           Capture "questId" Text :>
+             "accept" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "language" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Post '[JSON] Quest
 
 type PlayersAPI = PlayersList :<|> PlayersGet
 
 -- | Get the collection of players for the currently authenticated user.
 type PlayersList =
-     "games" :> "v1" :> "players" :> "me" :> "players" :>
-       Capture "collection" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "language" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Natural
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "players" :>
+           "me" :>
+             "players" :>
+               Capture "collection" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "language" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "maxResults" Natural :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON] PlayerListResponse
 
 -- | Retrieves the Player resource with the given ID. To retrieve the player
 -- for the currently authenticated user, set playerId to me.
 type PlayersGet =
-     "games" :> "v1" :> "players" :>
-       Capture "playerId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "language" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "players" :>
+           Capture "playerId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "language" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Get '[JSON] Player
 
 type RevisionsAPI = RevisionsCheck
 
 -- | Checks whether the games client is out of date.
 type RevisionsCheck =
-     "games" :> "v1" :> "revisions" :> "check" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "clientRevision" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "revisions" :>
+           "check" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "clientRevision" Text :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Get '[JSON] RevisionCheckResponse
 
 type ScoresAPI =
      ScoresList :<|> ScoresGet :<|> ScoresSubmit :<|>
@@ -1450,21 +1539,24 @@ type ScoresAPI =
 
 -- | Lists the scores in a leaderboard, starting from the top.
 type ScoresList =
-     "games" :> "v1" :> "leaderboards" :>
-       Capture "leaderboardId" Text
-       :> "scores"
-       :> Capture "collection" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "timeSpan" Text
-       :> QueryParam "key" Text
-       :> QueryParam "language" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Natural
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "leaderboards" :>
+           Capture "leaderboardId" Text :>
+             "scores" :>
+               Capture "collection" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "timeSpan" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "language" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "maxResults" Natural :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :>
+                                       Get '[JSON] LeaderboardScores
 
 -- | Get high scores, and optionally ranks, in leaderboards for the currently
 -- authenticated player. For a specific time span, leaderboardId can be set
@@ -1472,72 +1564,86 @@ type ScoresList =
 -- You cannot ask for \'ALL\' leaderboards and \'ALL\' timeSpans in the
 -- same request; only one parameter may be set to \'ALL\'.
 type ScoresGet =
-     "games" :> "v1" :> "players" :>
-       Capture "playerId" Text
-       :> "leaderboards"
-       :> Capture "leaderboardId" Text
-       :> "scores"
-       :> Capture "timeSpan" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "includeRankType" Text
-       :> QueryParam "language" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Natural
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "players" :>
+           Capture "playerId" Text :>
+             "leaderboards" :>
+               Capture "leaderboardId" Text :>
+                 "scores" :>
+                   Capture "timeSpan" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "includeRankType" Text :>
+                               QueryParam "language" Text :>
+                                 QueryParam "pageToken" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "maxResults" Natural :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "alt" Text :>
+                                           Get '[JSON]
+                                             PlayerLeaderboardScoreListResponse
 
 -- | Submits a score to the specified leaderboard.
 type ScoresSubmit =
-     "games" :> "v1" :> "leaderboards" :>
-       Capture "leaderboardId" Text
-       :> "scores"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "scoreTag" Text
-       :> QueryParam "score" Int64
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "language" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "leaderboards" :>
+           Capture "leaderboardId" Text :>
+             "scores" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "scoreTag" Text :>
+                     QueryParam "score" Int64 :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "language" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Post '[JSON] PlayerScoreResponse
 
 -- | Submits multiple scores to leaderboards.
 type ScoresSubmitMultiple =
-     "games" :> "v1" :> "leaderboards" :> "scores" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "language" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "leaderboards" :>
+           "scores" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "language" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Post '[JSON] PlayerScoreListResponse
 
 -- | Lists the scores in a leaderboard around (and including) a player\'s
 -- score.
 type ScoresListWindow =
-     "games" :> "v1" :> "leaderboards" :>
-       Capture "leaderboardId" Text
-       :> "window"
-       :> Capture "collection" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "timeSpan" Text
-       :> QueryParam "returnTopIfAbsent" Bool
-       :> QueryParam "key" Text
-       :> QueryParam "language" Text
-       :> QueryParam "resultsAbove" Int32
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Natural
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "leaderboards" :>
+           Capture "leaderboardId" Text :>
+             "window" :>
+               Capture "collection" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "timeSpan" Text :>
+                         QueryParam "returnTopIfAbsent" Bool :>
+                           QueryParam "key" Text :>
+                             QueryParam "language" Text :>
+                               QueryParam "resultsAbove" Int32 :>
+                                 QueryParam "pageToken" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "maxResults" Natural :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "alt" Text :>
+                                           Get '[JSON] LeaderboardScores
 
 type PushtokensAPI =
      PushtokensRemove :<|> PushtokensUpdate
@@ -1545,25 +1651,30 @@ type PushtokensAPI =
 -- | Removes a push token for the current user and application. Removing a
 -- non-existent push token will report success.
 type PushtokensRemove =
-     "games" :> "v1" :> "pushtokens" :> "remove" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "pushtokens" :>
+           "remove" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Post '[JSON] ()
 
 -- | Registers a push token for the current user and application.
 type PushtokensUpdate =
-     "games" :> "v1" :> "pushtokens" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "pushtokens" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Text :> Put '[JSON] ()
 
 type TurnBasedMatchesAPI =
      TurnBasedMatchesRematch :<|> TurnBasedMatchesList
@@ -1584,196 +1695,228 @@ type TurnBasedMatchesAPI =
 -- their list; the player must have called Finish first. Returns the newly
 -- created match; it will be the caller\'s turn.
 type TurnBasedMatchesRematch =
-     "games" :> "v1" :> "turnbasedmatches" :>
-       Capture "matchId" Text
-       :> "rematch"
-       :> QueryParam "requestId" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "language" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "turnbasedmatches" :>
+           Capture "matchId" Text :>
+             "rematch" :>
+               QueryParam "requestId" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "language" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :>
+                                 Post '[JSON] TurnBasedMatchRematch
 
 -- | Returns turn-based matches the player is or was involved in.
 type TurnBasedMatchesList =
-     "games" :> "v1" :> "turnbasedmatches" :>
-       QueryParam "maxCompletedMatches" Int32
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "includeMatchData" Bool
-       :> QueryParam "language" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Natural
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "turnbasedmatches" :>
+           QueryParam "maxCompletedMatches" Int32 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "includeMatchData" Bool :>
+                       QueryParam "language" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "maxResults" Natural :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Get '[JSON] TurnBasedMatchList
 
 -- | Join a turn-based match.
 type TurnBasedMatchesJoin =
-     "games" :> "v1" :> "turnbasedmatches" :>
-       Capture "matchId" Text
-       :> "join"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "language" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "turnbasedmatches" :>
+           Capture "matchId" Text :>
+             "join" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "language" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Put '[JSON] TurnBasedMatch
 
 -- | Finish a turn-based match. Each player should make this call once, after
 -- all results are in. Only the player whose turn it is may make the first
 -- call to Finish, and can pass in the final match state.
 type TurnBasedMatchesFinish =
-     "games" :> "v1" :> "turnbasedmatches" :>
-       Capture "matchId" Text
-       :> "finish"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "language" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "turnbasedmatches" :>
+           Capture "matchId" Text :>
+             "finish" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "language" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Put '[JSON] TurnBasedMatch
 
 -- | Commit the results of a player turn.
 type TurnBasedMatchesTakeTurn =
-     "games" :> "v1" :> "turnbasedmatches" :>
-       Capture "matchId" Text
-       :> "turn"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "language" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "turnbasedmatches" :>
+           Capture "matchId" Text :>
+             "turn" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "language" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Put '[JSON] TurnBasedMatch
 
 -- | Leave a turn-based match during the current player\'s turn, without
 -- canceling the match.
 type TurnBasedMatchesLeaveTurn =
-     "games" :> "v1" :> "turnbasedmatches" :>
-       Capture "matchId" Text
-       :> "leaveTurn"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "language" Text
-       :> QueryParam "pendingParticipantId" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "matchVersion" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "turnbasedmatches" :>
+           Capture "matchId" Text :>
+             "leaveTurn" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "language" Text :>
+                         QueryParam "pendingParticipantId" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "matchVersion" Int32 :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Put '[JSON] TurnBasedMatch
 
 -- | Get the data for a turn-based match.
 type TurnBasedMatchesGet =
-     "games" :> "v1" :> "turnbasedmatches" :>
-       Capture "matchId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "includeMatchData" Bool
-       :> QueryParam "language" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "turnbasedmatches" :>
+           Capture "matchId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "includeMatchData" Bool :>
+                       QueryParam "language" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] TurnBasedMatch
 
 -- | Create a turn-based match.
 type TurnBasedMatchesCreate =
-     "games" :> "v1" :> "turnbasedmatches" :> "create" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "language" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "turnbasedmatches" :>
+           "create" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "language" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] TurnBasedMatch
 
 -- | Decline an invitation to play a turn-based match.
 type TurnBasedMatchesDecline =
-     "games" :> "v1" :> "turnbasedmatches" :>
-       Capture "matchId" Text
-       :> "decline"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "language" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "turnbasedmatches" :>
+           Capture "matchId" Text :>
+             "decline" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "language" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Put '[JSON] TurnBasedMatch
 
 -- | Returns turn-based matches the player is or was involved in that changed
 -- since the last sync call, with the least recent changes coming first.
 -- Matches that should be removed from the local cache will have a status
 -- of MATCH_DELETED.
 type TurnBasedMatchesSync =
-     "games" :> "v1" :> "turnbasedmatches" :> "sync" :>
-       QueryParam "maxCompletedMatches" Int32
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "includeMatchData" Bool
-       :> QueryParam "language" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Natural
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "turnbasedmatches" :>
+           "sync" :>
+             QueryParam "maxCompletedMatches" Int32 :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "includeMatchData" Bool :>
+                         QueryParam "language" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "maxResults" Natural :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON] TurnBasedMatchSync
 
 -- | Dismiss a turn-based match from the match list. The match will no longer
 -- show up in the list and will not generate notifications.
 type TurnBasedMatchesDismiss =
-     "games" :> "v1" :> "turnbasedmatches" :>
-       Capture "matchId" Text
-       :> "dismiss"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "turnbasedmatches" :>
+           Capture "matchId" Text :>
+             "dismiss" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Put '[JSON] ()
 
 -- | Leave a turn-based match when it is not the current player\'s turn,
 -- without canceling the match.
 type TurnBasedMatchesLeave =
-     "games" :> "v1" :> "turnbasedmatches" :>
-       Capture "matchId" Text
-       :> "leave"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "language" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "turnbasedmatches" :>
+           Capture "matchId" Text :>
+             "leave" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "language" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Put '[JSON] TurnBasedMatch
 
 -- | Cancel a turn-based match.
 type TurnBasedMatchesCancel =
-     "games" :> "v1" :> "turnbasedmatches" :>
-       Capture "matchId" Text
-       :> "cancel"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "turnbasedmatches" :>
+           Capture "matchId" Text :>
+             "cancel" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Put '[JSON] ()
 
 type ApplicationsAPI =
      ApplicationsGet :<|> ApplicationsPlayed
@@ -1782,26 +1925,31 @@ type ApplicationsAPI =
 -- requested application is not available for the specified platformType,
 -- the returned response will not include any instance data.
 type ApplicationsGet =
-     "games" :> "v1" :> "applications" :>
-       Capture "applicationId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "platformType" Text
-       :> QueryParam "language" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "applications" :>
+           Capture "applicationId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "platformType" Text :>
+                       QueryParam "language" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] Application
 
 -- | Indicate that the the currently authenticated user is playing your
 -- application.
 type ApplicationsPlayed =
-     "games" :> "v1" :> "applications" :> "played" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "games" :>
+       "v1" :>
+         "applications" :>
+           "played" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Post '[JSON] ()

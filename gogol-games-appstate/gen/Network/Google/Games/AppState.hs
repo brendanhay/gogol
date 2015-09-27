@@ -73,44 +73,50 @@ type StatesAPI =
 
 -- | Lists all the states keys, and optionally the state data.
 type StatesList =
-     "appstate" :> "v1" :> "states" :>
-       QueryParam "includeData" Bool
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "appstate" :>
+       "v1" :>
+         "states" :>
+           QueryParam "includeData" Bool :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Get '[JSON] ListResponse
 
 -- | Retrieves the data corresponding to the passed key. If the key does not
 -- exist on the server, an HTTP 404 will be returned.
 type StatesGet =
-     "appstate" :> "v1" :> "states" :>
-       Capture "stateKey" Int32
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "appstate" :>
+       "v1" :>
+         "states" :>
+           Capture "stateKey" Int32 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Get '[JSON] GetResponse
 
 -- | Clears (sets to empty) the data for the passed key if and only if the
 -- passed version matches the currently stored version. This method results
 -- in a conflict error on version mismatch.
 type StatesClear =
-     "appstate" :> "v1" :> "states" :>
-       Capture "stateKey" Int32
-       :> "clear"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "currentDataVersion" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "appstate" :>
+       "v1" :>
+         "states" :>
+           Capture "stateKey" Int32 :>
+             "clear" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "currentDataVersion" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Post '[JSON] WriteResult
 
 -- | Deletes a key and the data associated with it. The key is removed and no
 -- longer counts against the key quota. Note that since this method is not
@@ -118,27 +124,31 @@ type StatesClear =
 -- development and testing purposes. Invoking this method in shipping code
 -- can result in data loss and data corruption.
 type StatesDelete =
-     "appstate" :> "v1" :> "states" :>
-       Capture "stateKey" Int32
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "appstate" :>
+       "v1" :>
+         "states" :>
+           Capture "stateKey" Int32 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Update the data associated with the input key if and only if the passed
 -- version matches the currently stored version. This method is safe in the
 -- face of concurrent writes. Maximum per-key size is 128KB.
 type StatesUpdate =
-     "appstate" :> "v1" :> "states" :>
-       Capture "stateKey" Int32
-       :> QueryParam "currentStateVersion" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "appstate" :>
+       "v1" :>
+         "states" :>
+           Capture "stateKey" Int32 :>
+             QueryParam "currentStateVersion" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Put '[JSON] WriteResult

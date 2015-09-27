@@ -72,51 +72,80 @@ type FreebaseSearch = ReconcileAPI :<|> SearchAPI
 
 -- | Reconcile entities to Freebase open data.
 type Reconcile =
-     "freebase" :> "v1" :> "reconcile" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "kind" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "lang" Text
-       :> QueryParam "confidence" Float
-       :> QueryParam "key" Text
-       :> QueryParam "name" Text
-       :> QueryParam "limit" Int32
-       :> QueryParam "prop" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "freebase" :>
+       "v1" :>
+         "reconcile" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "kind" Text :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "lang" Text :>
+                     QueryParam "confidence" Float :>
+                       QueryParam "key" Text :>
+                         QueryParam "name" Text :>
+                           QueryParam "limit" Int32 :>
+                             QueryParam "prop" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON] ReconcileGet
 
 -- | Search Freebase open data.
 type Search =
-     "freebase" :> "v1" :> "search" :>
-       QueryParam "without" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "cursor" Int32
-       :> QueryParam "with" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "domain" Text
-       :> QueryParam "format" Text
-       :> QueryParam "help" Text
-       :> QueryParam "lang" Text
-       :> QueryParam "indent" Bool
-       :> QueryParam "key" Text
-       :> QueryParam "output" Text
-       :> QueryParam "query" Text
-       :> QueryParam "scoring" Text
-       :> QueryParam "limit" Int32
-       :> QueryParam "filter" Text
-       :> QueryParam "mql_output" Text
-       :> QueryParam "mid" Text
-       :> QueryParam "type" Text
-       :> QueryParam "stemmed" Bool
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "exact" Bool
-       :> QueryParam "spell" Text
-       :> QueryParam "as_of_time" Text
-       :> QueryParam "encode" Text
-       :> QueryParam "prefixed" Bool
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "freebase" :>
+       "v1" :>
+         "search" :>
+           QueryParam "without" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "cursor" Int32 :>
+                   QueryParam "with" Text :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "domain" Text :>
+                         QueryParam "format" Text :>
+                           QueryParam "help" Text :>
+                             QueryParam "lang" Text :>
+                               QueryParam "indent" Bool :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "output" Text :>
+                                     QueryParam "query" Text :>
+                                       QueryParam "scoring" Text :>
+                                         QueryParam "limit" Int32 :>
+                                           QueryParam "filter" Text :>
+                                             QueryParam "mql_output" Text :>
+                                               QueryParam "mid" Text :>
+                                                 QueryParam "type" Text :>
+                                                   QueryParam "stemmed" Bool :>
+                                                     QueryParam "oauth_token"
+                                                       Text
+                                                       :>
+                                                       QueryParam "exact" Bool
+                                                         :>
+                                                         QueryParam "spell" Text
+                                                           :>
+                                                           QueryParam
+                                                             "as_of_time"
+                                                             Text
+                                                             :>
+                                                             QueryParam "encode"
+                                                               Text
+                                                               :>
+                                                               QueryParam
+                                                                 "prefixed"
+                                                                 Bool
+                                                                 :>
+                                                                 QueryParam
+                                                                   "fields"
+                                                                   Text
+                                                                   :>
+                                                                   QueryParam
+                                                                     "callback"
+                                                                     Text
+                                                                     :>
+                                                                     QueryParam
+                                                                       "alt"
+                                                                       Text
+                                                                       :>
+                                                                       Get
+                                                                         '[JSON]
+                                                                         ()

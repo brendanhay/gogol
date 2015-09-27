@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -68,6 +69,24 @@ actItems
   = lens _actItems (\ s a -> s{_actItems = a}) .
       _Default
       . _Coerce
+
+instance FromJSON Activities where
+        parseJSON
+          = withObject "Activities"
+              (\ o ->
+                 Activities <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "admin#reports#activities")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON Activities where
+        toJSON Activities{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _actEtag,
+                  ("nextPageToken" .=) <$> _actNextPageToken,
+                  Just ("kind" .= _actKind),
+                  ("items" .=) <$> _actItems])
 
 -- | JSON template for the activity resource.
 --
@@ -144,6 +163,28 @@ aEvents
 aId :: Lens' Activity (Maybe ActivityId)
 aId = lens _aId (\ s a -> s{_aId = a})
 
+instance FromJSON Activity where
+        parseJSON
+          = withObject "Activity"
+              (\ o ->
+                 Activity <$>
+                   (o .:? "etag") <*> (o .:? "ipAddress") <*>
+                     (o .:? "kind" .!= "admin#reports#activity")
+                     <*> (o .:? "actor")
+                     <*> (o .:? "ownerDomain")
+                     <*> (o .:? "events" .!= mempty)
+                     <*> (o .:? "id"))
+
+instance ToJSON Activity where
+        toJSON Activity{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _aEtag,
+                  ("ipAddress" .=) <$> _aIpAddress,
+                  Just ("kind" .= _aKind), ("actor" .=) <$> _aActor,
+                  ("ownerDomain" .=) <$> _aOwnerDomain,
+                  ("events" .=) <$> _aEvents, ("id" .=) <$> _aId])
+
 -- | User doing the action.
 --
 -- /See:/ 'activityActor' smart constructor.
@@ -192,6 +233,24 @@ aaProfileId
 -- | For OAuth 2LO API requests, consumer_key of the requestor.
 aaKey :: Lens' ActivityActor (Maybe Text)
 aaKey = lens _aaKey (\ s a -> s{_aaKey = a})
+
+instance FromJSON ActivityActor where
+        parseJSON
+          = withObject "ActivityActor"
+              (\ o ->
+                 ActivityActor <$>
+                   (o .:? "email") <*> (o .:? "callerType") <*>
+                     (o .:? "profileId")
+                     <*> (o .:? "key"))
+
+instance ToJSON ActivityActor where
+        toJSON ActivityActor{..}
+          = object
+              (catMaybes
+                 [("email" .=) <$> _aaEmail,
+                  ("callerType" .=) <$> _aaCallerType,
+                  ("profileId" .=) <$> _aaProfileId,
+                  ("key" .=) <$> _aaKey])
 
 -- | Unique identifier for each activity record.
 --
@@ -245,6 +304,24 @@ aiApplicationName
   = lens _aiApplicationName
       (\ s a -> s{_aiApplicationName = a})
 
+instance FromJSON ActivityId where
+        parseJSON
+          = withObject "ActivityId"
+              (\ o ->
+                 ActivityId <$>
+                   (o .:? "time") <*> (o .:? "uniqueQualifier") <*>
+                     (o .:? "customerId")
+                     <*> (o .:? "applicationName"))
+
+instance ToJSON ActivityId where
+        toJSON ActivityId{..}
+          = object
+              (catMaybes
+                 [("time" .=) <$> _aiTime,
+                  ("uniqueQualifier" .=) <$> _aiUniqueQualifier,
+                  ("customerId" .=) <$> _aiCustomerId,
+                  ("applicationName" .=) <$> _aiApplicationName])
+
 --
 -- /See:/ 'activityItemEvents' smart constructor.
 data ActivityItemEvents = ActivityItemEvents
@@ -286,6 +363,22 @@ aieParameters
 -- | Type of event.
 aieType :: Lens' ActivityItemEvents (Maybe Text)
 aieType = lens _aieType (\ s a -> s{_aieType = a})
+
+instance FromJSON ActivityItemEvents where
+        parseJSON
+          = withObject "ActivityItemEvents"
+              (\ o ->
+                 ActivityItemEvents <$>
+                   (o .:? "name") <*> (o .:? "parameters" .!= mempty)
+                     <*> (o .:? "type"))
+
+instance ToJSON ActivityItemEvents where
+        toJSON ActivityItemEvents{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _aieName,
+                  ("parameters" .=) <$> _aieParameters,
+                  ("type" .=) <$> _aieType])
 
 --
 -- /See:/ 'activityItemParametersItemEvents' smart constructor.
@@ -362,6 +455,30 @@ aipieMultiValue
       (\ s a -> s{_aipieMultiValue = a})
       . _Default
       . _Coerce
+
+instance FromJSON ActivityItemParametersItemEvents
+         where
+        parseJSON
+          = withObject "ActivityItemParametersItemEvents"
+              (\ o ->
+                 ActivityItemParametersItemEvents <$>
+                   (o .:? "boolValue") <*> (o .:? "intValue") <*>
+                     (o .:? "value")
+                     <*> (o .:? "multiIntValue" .!= mempty)
+                     <*> (o .:? "name")
+                     <*> (o .:? "multiValue" .!= mempty))
+
+instance ToJSON ActivityItemParametersItemEvents
+         where
+        toJSON ActivityItemParametersItemEvents{..}
+          = object
+              (catMaybes
+                 [("boolValue" .=) <$> _aipieBoolValue,
+                  ("intValue" .=) <$> _aipieIntValue,
+                  ("value" .=) <$> _aipieValue,
+                  ("multiIntValue" .=) <$> _aipieMultiIntValue,
+                  ("name" .=) <$> _aipieName,
+                  ("multiValue" .=) <$> _aipieMultiValue])
 
 -- | An notification channel used to watch for resource changes.
 --
@@ -465,6 +582,35 @@ cId = lens _cId (\ s a -> s{_cId = a})
 cType :: Lens' Channel (Maybe Text)
 cType = lens _cType (\ s a -> s{_cType = a})
 
+instance FromJSON Channel where
+        parseJSON
+          = withObject "Channel"
+              (\ o ->
+                 Channel <$>
+                   (o .:? "resourceUri") <*> (o .:? "resourceId") <*>
+                     (o .:? "kind" .!= "api#channel")
+                     <*> (o .:? "expiration")
+                     <*> (o .:? "token")
+                     <*> (o .:? "address")
+                     <*> (o .:? "payload")
+                     <*> (o .:? "params")
+                     <*> (o .:? "id")
+                     <*> (o .:? "type"))
+
+instance ToJSON Channel where
+        toJSON Channel{..}
+          = object
+              (catMaybes
+                 [("resourceUri" .=) <$> _cResourceUri,
+                  ("resourceId" .=) <$> _cResourceId,
+                  Just ("kind" .= _cKind),
+                  ("expiration" .=) <$> _cExpiration,
+                  ("token" .=) <$> _cToken,
+                  ("address" .=) <$> _cAddress,
+                  ("payload" .=) <$> _cPayload,
+                  ("params" .=) <$> _cParams, ("id" .=) <$> _cId,
+                  ("type" .=) <$> _cType])
+
 -- | Additional parameters controlling delivery channel behavior. Optional.
 --
 -- /See:/ 'channelParams' smart constructor.
@@ -477,6 +623,14 @@ data ChannelParams =
 channelParams
     :: ChannelParams
 channelParams = ChannelParams
+
+instance FromJSON ChannelParams where
+        parseJSON
+          = withObject "ChannelParams"
+              (\ o -> pure ChannelParams)
+
+instance ToJSON ChannelParams where
+        toJSON = const (Object mempty)
 
 -- | JSON template for a usage report.
 --
@@ -536,6 +690,26 @@ uParameters
 uEntity :: Lens' UsageReport (Maybe UsageReportEntity)
 uEntity = lens _uEntity (\ s a -> s{_uEntity = a})
 
+instance FromJSON UsageReport where
+        parseJSON
+          = withObject "UsageReport"
+              (\ o ->
+                 UsageReport <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!= "admin#reports#usageReport")
+                     <*> (o .:? "date")
+                     <*> (o .:? "parameters" .!= mempty)
+                     <*> (o .:? "entity"))
+
+instance ToJSON UsageReport where
+        toJSON UsageReport{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _uEtag, Just ("kind" .= _uKind),
+                  ("date" .=) <$> _uDate,
+                  ("parameters" .=) <$> _uParameters,
+                  ("entity" .=) <$> _uEntity])
+
 -- | Information about the type of the item.
 --
 -- /See:/ 'usageReportEntity' smart constructor.
@@ -587,6 +761,24 @@ ureUserEmail
 ureType :: Lens' UsageReportEntity (Maybe Text)
 ureType = lens _ureType (\ s a -> s{_ureType = a})
 
+instance FromJSON UsageReportEntity where
+        parseJSON
+          = withObject "UsageReportEntity"
+              (\ o ->
+                 UsageReportEntity <$>
+                   (o .:? "profileId") <*> (o .:? "customerId") <*>
+                     (o .:? "userEmail")
+                     <*> (o .:? "type"))
+
+instance ToJSON UsageReportEntity where
+        toJSON UsageReportEntity{..}
+          = object
+              (catMaybes
+                 [("profileId" .=) <$> _ureProfileId,
+                  ("customerId" .=) <$> _ureCustomerId,
+                  ("userEmail" .=) <$> _ureUserEmail,
+                  ("type" .=) <$> _ureType])
+
 --
 -- /See:/ 'usageReportItemMsgValueItemParameters' smart constructor.
 data UsageReportItemMsgValueItemParameters =
@@ -598,6 +790,16 @@ data UsageReportItemMsgValueItemParameters =
 usageReportItemMsgValueItemParameters
     :: UsageReportItemMsgValueItemParameters
 usageReportItemMsgValueItemParameters = UsageReportItemMsgValueItemParameters
+
+instance FromJSON
+         UsageReportItemMsgValueItemParameters where
+        parseJSON
+          = withObject "UsageReportItemMsgValueItemParameters"
+              (\ o -> pure UsageReportItemMsgValueItemParameters)
+
+instance ToJSON UsageReportItemMsgValueItemParameters
+         where
+        toJSON = const (Object mempty)
 
 --
 -- /See:/ 'usageReportItemParameters' smart constructor.
@@ -671,6 +873,28 @@ uripMsgValue
       . _Default
       . _Coerce
 
+instance FromJSON UsageReportItemParameters where
+        parseJSON
+          = withObject "UsageReportItemParameters"
+              (\ o ->
+                 UsageReportItemParameters <$>
+                   (o .:? "datetimeValue") <*> (o .:? "boolValue") <*>
+                     (o .:? "intValue")
+                     <*> (o .:? "stringValue")
+                     <*> (o .:? "name")
+                     <*> (o .:? "msgValue" .!= mempty))
+
+instance ToJSON UsageReportItemParameters where
+        toJSON UsageReportItemParameters{..}
+          = object
+              (catMaybes
+                 [("datetimeValue" .=) <$> _uripDatetimeValue,
+                  ("boolValue" .=) <$> _uripBoolValue,
+                  ("intValue" .=) <$> _uripIntValue,
+                  ("stringValue" .=) <$> _uripStringValue,
+                  ("name" .=) <$> _uripName,
+                  ("msgValue" .=) <$> _uripMsgValue])
+
 -- | JSON template for a collection of usage reports.
 --
 -- /See:/ 'usageReports' smart constructor.
@@ -735,6 +959,26 @@ urWarnings
       _Default
       . _Coerce
 
+instance FromJSON UsageReports where
+        parseJSON
+          = withObject "UsageReports"
+              (\ o ->
+                 UsageReports <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "usageReports" .!= mempty)
+                     <*> (o .:? "kind" .!= "admin#reports#usageReports")
+                     <*> (o .:? "warnings" .!= mempty))
+
+instance ToJSON UsageReports where
+        toJSON UsageReports{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _urEtag,
+                  ("nextPageToken" .=) <$> _urNextPageToken,
+                  ("usageReports" .=) <$> _urUsageReports,
+                  Just ("kind" .= _urKind),
+                  ("warnings" .=) <$> _urWarnings])
+
 --
 -- /See:/ 'usageReportsItemDataItemWarnings' smart constructor.
 data UsageReportsItemDataItemWarnings = UsageReportsItemDataItemWarnings
@@ -768,6 +1012,22 @@ uridiwValue
 uridiwKey :: Lens' UsageReportsItemDataItemWarnings (Maybe Text)
 uridiwKey
   = lens _uridiwKey (\ s a -> s{_uridiwKey = a})
+
+instance FromJSON UsageReportsItemDataItemWarnings
+         where
+        parseJSON
+          = withObject "UsageReportsItemDataItemWarnings"
+              (\ o ->
+                 UsageReportsItemDataItemWarnings <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON UsageReportsItemDataItemWarnings
+         where
+        toJSON UsageReportsItemDataItemWarnings{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _uridiwValue,
+                  ("key" .=) <$> _uridiwKey])
 
 --
 -- /See:/ 'usageReportsItemWarnings' smart constructor.
@@ -810,3 +1070,19 @@ uriwCode = lens _uriwCode (\ s a -> s{_uriwCode = a})
 uriwMessage :: Lens' UsageReportsItemWarnings (Maybe Text)
 uriwMessage
   = lens _uriwMessage (\ s a -> s{_uriwMessage = a})
+
+instance FromJSON UsageReportsItemWarnings where
+        parseJSON
+          = withObject "UsageReportsItemWarnings"
+              (\ o ->
+                 UsageReportsItemWarnings <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON UsageReportsItemWarnings where
+        toJSON UsageReportsItemWarnings{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _uriwData,
+                  ("code" .=) <$> _uriwCode,
+                  ("message" .=) <$> _uriwMessage])

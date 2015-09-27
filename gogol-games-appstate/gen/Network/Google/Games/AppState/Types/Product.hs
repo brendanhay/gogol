@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -68,6 +69,25 @@ grStateKey :: Lens' GetResponse (Maybe Int32)
 grStateKey
   = lens _grStateKey (\ s a -> s{_grStateKey = a})
 
+instance FromJSON GetResponse where
+        parseJSON
+          = withObject "GetResponse"
+              (\ o ->
+                 GetResponse <$>
+                   (o .:? "currentStateVersion") <*>
+                     (o .:? "kind" .!= "appstate#getResponse")
+                     <*> (o .:? "data")
+                     <*> (o .:? "stateKey"))
+
+instance ToJSON GetResponse where
+        toJSON GetResponse{..}
+          = object
+              (catMaybes
+                 [("currentStateVersion" .=) <$>
+                    _grCurrentStateVersion,
+                  Just ("kind" .= _grKind), ("data" .=) <$> _grData,
+                  ("stateKey" .=) <$> _grStateKey])
+
 -- | This is a JSON template to convert a list-response for app state.
 --
 -- /See:/ 'listResponse' smart constructor.
@@ -112,6 +132,22 @@ lrItems
   = lens _lrItems (\ s a -> s{_lrItems = a}) . _Default
       . _Coerce
 
+instance FromJSON ListResponse where
+        parseJSON
+          = withObject "ListResponse"
+              (\ o ->
+                 ListResponse <$>
+                   (o .:? "maximumKeyCount") <*>
+                     (o .:? "kind" .!= "appstate#listResponse")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON ListResponse where
+        toJSON ListResponse{..}
+          = object
+              (catMaybes
+                 [("maximumKeyCount" .=) <$> _lrMaximumKeyCount,
+                  Just ("kind" .= _lrKind), ("items" .=) <$> _lrItems])
+
 -- | This is a JSON template for a requests which update app state
 --
 -- /See:/ 'updateRequest' smart constructor.
@@ -143,6 +179,20 @@ urKind = lens _urKind (\ s a -> s{_urKind = a})
 -- | The new app state data that your application is trying to update with.
 urData :: Lens' UpdateRequest (Maybe Text)
 urData = lens _urData (\ s a -> s{_urData = a})
+
+instance FromJSON UpdateRequest where
+        parseJSON
+          = withObject "UpdateRequest"
+              (\ o ->
+                 UpdateRequest <$>
+                   (o .:? "kind" .!= "appstate#updateRequest") <*>
+                     (o .:? "data"))
+
+instance ToJSON UpdateRequest where
+        toJSON UpdateRequest{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _urKind), ("data" .=) <$> _urData])
 
 -- | This is a JSON template for an app state write result.
 --
@@ -186,3 +236,21 @@ wrKind = lens _wrKind (\ s a -> s{_wrKind = a})
 wrStateKey :: Lens' WriteResult (Maybe Int32)
 wrStateKey
   = lens _wrStateKey (\ s a -> s{_wrStateKey = a})
+
+instance FromJSON WriteResult where
+        parseJSON
+          = withObject "WriteResult"
+              (\ o ->
+                 WriteResult <$>
+                   (o .:? "currentStateVersion") <*>
+                     (o .:? "kind" .!= "appstate#writeResult")
+                     <*> (o .:? "stateKey"))
+
+instance ToJSON WriteResult where
+        toJSON WriteResult{..}
+          = object
+              (catMaybes
+                 [("currentStateVersion" .=) <$>
+                    _wrCurrentStateVersion,
+                  Just ("kind" .= _wrKind),
+                  ("stateKey" .=) <$> _wrStateKey])

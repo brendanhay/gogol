@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -89,6 +90,31 @@ caurForExistingProvider
   = lens _caurForExistingProvider
       (\ s a -> s{_caurForExistingProvider = a})
 
+instance FromJSON CreateAuthUriResponse where
+        parseJSON
+          = withObject "CreateAuthUriResponse"
+              (\ o ->
+                 CreateAuthUriResponse <$>
+                   (o .:? "providerId") <*>
+                     (o .:? "kind" .!=
+                        "identitytoolkit#CreateAuthUriResponse")
+                     <*> (o .:? "authUri")
+                     <*> (o .:? "captchaRequired")
+                     <*> (o .:? "registered")
+                     <*> (o .:? "forExistingProvider"))
+
+instance ToJSON CreateAuthUriResponse where
+        toJSON CreateAuthUriResponse{..}
+          = object
+              (catMaybes
+                 [("providerId" .=) <$> _caurProviderId,
+                  Just ("kind" .= _caurKind),
+                  ("authUri" .=) <$> _caurAuthUri,
+                  ("captchaRequired" .=) <$> _caurCaptchaRequired,
+                  ("registered" .=) <$> _caurRegistered,
+                  ("forExistingProvider" .=) <$>
+                    _caurForExistingProvider])
+
 -- | Respone of deleting account.
 --
 -- /See:/ 'deleteAccountResponse' smart constructor.
@@ -111,6 +137,18 @@ deleteAccountResponse =
 -- | The fixed string \"identitytoolkit#DeleteAccountResponse\".
 dKind :: Lens' DeleteAccountResponse Text
 dKind = lens _dKind (\ s a -> s{_dKind = a})
+
+instance FromJSON DeleteAccountResponse where
+        parseJSON
+          = withObject "DeleteAccountResponse"
+              (\ o ->
+                 DeleteAccountResponse <$>
+                   (o .:? "kind" .!=
+                      "identitytoolkit#DeleteAccountResponse"))
+
+instance ToJSON DeleteAccountResponse where
+        toJSON DeleteAccountResponse{..}
+          = object (catMaybes [Just ("kind" .= _dKind)])
 
 -- | Respone of downloading accounts in batch.
 --
@@ -157,6 +195,25 @@ darUsers
 darKind :: Lens' DownloadAccountResponse Text
 darKind = lens _darKind (\ s a -> s{_darKind = a})
 
+instance FromJSON DownloadAccountResponse where
+        parseJSON
+          = withObject "DownloadAccountResponse"
+              (\ o ->
+                 DownloadAccountResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "users" .!= mempty)
+                     <*>
+                     (o .:? "kind" .!=
+                        "identitytoolkit#DownloadAccountResponse"))
+
+instance ToJSON DownloadAccountResponse where
+        toJSON DownloadAccountResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _darNextPageToken,
+                  ("users" .=) <$> _darUsers,
+                  Just ("kind" .= _darKind)])
+
 -- | Response of getting account information.
 --
 -- /See:/ 'getAccountInfoResponse' smart constructor.
@@ -191,6 +248,22 @@ gairUsers
 gairKind :: Lens' GetAccountInfoResponse Text
 gairKind = lens _gairKind (\ s a -> s{_gairKind = a})
 
+instance FromJSON GetAccountInfoResponse where
+        parseJSON
+          = withObject "GetAccountInfoResponse"
+              (\ o ->
+                 GetAccountInfoResponse <$>
+                   (o .:? "users" .!= mempty) <*>
+                     (o .:? "kind" .!=
+                        "identitytoolkit#GetAccountInfoResponse"))
+
+instance ToJSON GetAccountInfoResponse where
+        toJSON GetAccountInfoResponse{..}
+          = object
+              (catMaybes
+                 [("users" .=) <$> _gairUsers,
+                  Just ("kind" .= _gairKind)])
+
 -- | Response of getting a code for user confirmation (reset password, change
 -- email etc.).
 --
@@ -224,6 +297,23 @@ goccrKind
 goccrOobCode :: Lens' GetOobConfirmationCodeResponse (Maybe Text)
 goccrOobCode
   = lens _goccrOobCode (\ s a -> s{_goccrOobCode = a})
+
+instance FromJSON GetOobConfirmationCodeResponse
+         where
+        parseJSON
+          = withObject "GetOobConfirmationCodeResponse"
+              (\ o ->
+                 GetOobConfirmationCodeResponse <$>
+                   (o .:? "kind" .!=
+                      "identitytoolkit#GetOobConfirmationCodeResponse")
+                     <*> (o .:? "oobCode"))
+
+instance ToJSON GetOobConfirmationCodeResponse where
+        toJSON GetOobConfirmationCodeResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _goccrKind),
+                  ("oobCode" .=) <$> _goccrOobCode])
 
 -- | Response of getting recaptcha param.
 --
@@ -268,6 +358,24 @@ grprRecaptchaStoken :: Lens' GetRecaptchaParamResponse (Maybe Text)
 grprRecaptchaStoken
   = lens _grprRecaptchaStoken
       (\ s a -> s{_grprRecaptchaStoken = a})
+
+instance FromJSON GetRecaptchaParamResponse where
+        parseJSON
+          = withObject "GetRecaptchaParamResponse"
+              (\ o ->
+                 GetRecaptchaParamResponse <$>
+                   (o .:? "recaptchaSiteKey") <*>
+                     (o .:? "kind" .!=
+                        "identitytoolkit#GetRecaptchaParamResponse")
+                     <*> (o .:? "recaptchaStoken"))
+
+instance ToJSON GetRecaptchaParamResponse where
+        toJSON GetRecaptchaParamResponse{..}
+          = object
+              (catMaybes
+                 [("recaptchaSiteKey" .=) <$> _grprRecaptchaSiteKey,
+                  Just ("kind" .= _grprKind),
+                  ("recaptchaStoken" .=) <$> _grprRecaptchaStoken])
 
 -- | Request to get the IDP authentication URL.
 --
@@ -390,6 +498,40 @@ ircaurOpenidRealm
   = lens _ircaurOpenidRealm
       (\ s a -> s{_ircaurOpenidRealm = a})
 
+instance FromJSON
+         IdentitytoolkitRelyingpartyCreateAuthUriRequest where
+        parseJSON
+          = withObject
+              "IdentitytoolkitRelyingpartyCreateAuthUriRequest"
+              (\ o ->
+                 IdentitytoolkitRelyingpartyCreateAuthUriRequest <$>
+                   (o .:? "providerId") <*> (o .:? "clientId") <*>
+                     (o .:? "context")
+                     <*> (o .:? "identifier")
+                     <*> (o .:? "otaApp")
+                     <*> (o .:? "oauthConsumerKey")
+                     <*> (o .:? "appId")
+                     <*> (o .:? "continueUri")
+                     <*> (o .:? "oauthScope")
+                     <*> (o .:? "openidRealm"))
+
+instance ToJSON
+         IdentitytoolkitRelyingpartyCreateAuthUriRequest where
+        toJSON
+          IdentitytoolkitRelyingpartyCreateAuthUriRequest{..}
+          = object
+              (catMaybes
+                 [("providerId" .=) <$> _ircaurProviderId,
+                  ("clientId" .=) <$> _ircaurClientId,
+                  ("context" .=) <$> _ircaurContext,
+                  ("identifier" .=) <$> _ircaurIdentifier,
+                  ("otaApp" .=) <$> _ircaurOtaApp,
+                  ("oauthConsumerKey" .=) <$> _ircaurOauthConsumerKey,
+                  ("appId" .=) <$> _ircaurAppId,
+                  ("continueUri" .=) <$> _ircaurContinueUri,
+                  ("oauthScope" .=) <$> _ircaurOauthScope,
+                  ("openidRealm" .=) <$> _ircaurOpenidRealm])
+
 -- | Request to delete account.
 --
 -- /See:/ 'identitytoolkitRelyingpartyDeleteAccountRequest' smart constructor.
@@ -413,6 +555,22 @@ identitytoolkitRelyingpartyDeleteAccountRequest =
 irdarLocalId :: Lens' IdentitytoolkitRelyingpartyDeleteAccountRequest (Maybe Text)
 irdarLocalId
   = lens _irdarLocalId (\ s a -> s{_irdarLocalId = a})
+
+instance FromJSON
+         IdentitytoolkitRelyingpartyDeleteAccountRequest where
+        parseJSON
+          = withObject
+              "IdentitytoolkitRelyingpartyDeleteAccountRequest"
+              (\ o ->
+                 IdentitytoolkitRelyingpartyDeleteAccountRequest <$>
+                   (o .:? "localId"))
+
+instance ToJSON
+         IdentitytoolkitRelyingpartyDeleteAccountRequest where
+        toJSON
+          IdentitytoolkitRelyingpartyDeleteAccountRequest{..}
+          = object
+              (catMaybes [("localId" .=) <$> _irdarLocalId])
 
 -- | Request to download user account in batch.
 --
@@ -449,6 +607,26 @@ irdarMaxResults :: Lens' IdentitytoolkitRelyingpartyDownloadAccountRequest (Mayb
 irdarMaxResults
   = lens _irdarMaxResults
       (\ s a -> s{_irdarMaxResults = a})
+
+instance FromJSON
+         IdentitytoolkitRelyingpartyDownloadAccountRequest
+         where
+        parseJSON
+          = withObject
+              "IdentitytoolkitRelyingpartyDownloadAccountRequest"
+              (\ o ->
+                 IdentitytoolkitRelyingpartyDownloadAccountRequest <$>
+                   (o .:? "nextPageToken") <*> (o .:? "maxResults"))
+
+instance ToJSON
+         IdentitytoolkitRelyingpartyDownloadAccountRequest
+         where
+        toJSON
+          IdentitytoolkitRelyingpartyDownloadAccountRequest{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _irdarNextPageToken,
+                  ("maxResults" .=) <$> _irdarMaxResults])
 
 -- | Request to get the account information.
 --
@@ -498,6 +676,29 @@ irgairIdToken
   = lens _irgairIdToken
       (\ s a -> s{_irgairIdToken = a})
 
+instance FromJSON
+         IdentitytoolkitRelyingpartyGetAccountInfoRequest
+         where
+        parseJSON
+          = withObject
+              "IdentitytoolkitRelyingpartyGetAccountInfoRequest"
+              (\ o ->
+                 IdentitytoolkitRelyingpartyGetAccountInfoRequest <$>
+                   (o .:? "email" .!= mempty) <*>
+                     (o .:? "localId" .!= mempty)
+                     <*> (o .:? "idToken"))
+
+instance ToJSON
+         IdentitytoolkitRelyingpartyGetAccountInfoRequest
+         where
+        toJSON
+          IdentitytoolkitRelyingpartyGetAccountInfoRequest{..}
+          = object
+              (catMaybes
+                 [("email" .=) <$> _irgairEmail,
+                  ("localId" .=) <$> _irgairLocalId,
+                  ("idToken" .=) <$> _irgairIdToken])
+
 -- | Respone of getting public keys.
 --
 -- /See:/ 'identitytoolkitRelyingpartyGetPublicKeysResponse' smart constructor.
@@ -511,6 +712,21 @@ identitytoolkitRelyingpartyGetPublicKeysResponse
     :: IdentitytoolkitRelyingpartyGetPublicKeysResponse
 identitytoolkitRelyingpartyGetPublicKeysResponse =
     IdentitytoolkitRelyingpartyGetPublicKeysResponse
+
+instance FromJSON
+         IdentitytoolkitRelyingpartyGetPublicKeysResponse
+         where
+        parseJSON
+          = withObject
+              "IdentitytoolkitRelyingpartyGetPublicKeysResponse"
+              (\ o ->
+                 pure
+                   IdentitytoolkitRelyingpartyGetPublicKeysResponse)
+
+instance ToJSON
+         IdentitytoolkitRelyingpartyGetPublicKeysResponse
+         where
+        toJSON = const (Object mempty)
 
 -- | Request to reset the password.
 --
@@ -564,6 +780,28 @@ irrprOldPassword :: Lens' IdentitytoolkitRelyingpartyResetPasswordRequest (Maybe
 irrprOldPassword
   = lens _irrprOldPassword
       (\ s a -> s{_irrprOldPassword = a})
+
+instance FromJSON
+         IdentitytoolkitRelyingpartyResetPasswordRequest where
+        parseJSON
+          = withObject
+              "IdentitytoolkitRelyingpartyResetPasswordRequest"
+              (\ o ->
+                 IdentitytoolkitRelyingpartyResetPasswordRequest <$>
+                   (o .:? "email") <*> (o .:? "newPassword") <*>
+                     (o .:? "oobCode")
+                     <*> (o .:? "oldPassword"))
+
+instance ToJSON
+         IdentitytoolkitRelyingpartyResetPasswordRequest where
+        toJSON
+          IdentitytoolkitRelyingpartyResetPasswordRequest{..}
+          = object
+              (catMaybes
+                 [("email" .=) <$> _irrprEmail,
+                  ("newPassword" .=) <$> _irrprNewPassword,
+                  ("oobCode" .=) <$> _irrprOobCode,
+                  ("oldPassword" .=) <$> _irrprOldPassword])
 
 -- | Request to set the account information.
 --
@@ -711,6 +949,49 @@ irsairProvider
       . _Default
       . _Coerce
 
+instance FromJSON
+         IdentitytoolkitRelyingpartySetAccountInfoRequest
+         where
+        parseJSON
+          = withObject
+              "IdentitytoolkitRelyingpartySetAccountInfoRequest"
+              (\ o ->
+                 IdentitytoolkitRelyingpartySetAccountInfoRequest <$>
+                   (o .:? "upgradeToFederatedLogin") <*> (o .:? "email")
+                     <*> (o .:? "captchaChallenge")
+                     <*> (o .:? "validSince")
+                     <*> (o .:? "oobCode")
+                     <*> (o .:? "password")
+                     <*> (o .:? "captchaResponse")
+                     <*> (o .:? "emailVerified")
+                     <*> (o .:? "displayName")
+                     <*> (o .:? "disableUser")
+                     <*> (o .:? "localId")
+                     <*> (o .:? "idToken")
+                     <*> (o .:? "provider" .!= mempty))
+
+instance ToJSON
+         IdentitytoolkitRelyingpartySetAccountInfoRequest
+         where
+        toJSON
+          IdentitytoolkitRelyingpartySetAccountInfoRequest{..}
+          = object
+              (catMaybes
+                 [("upgradeToFederatedLogin" .=) <$>
+                    _irsairUpgradeToFederatedLogin,
+                  ("email" .=) <$> _irsairEmail,
+                  ("captchaChallenge" .=) <$> _irsairCaptchaChallenge,
+                  ("validSince" .=) <$> _irsairValidSince,
+                  ("oobCode" .=) <$> _irsairOobCode,
+                  ("password" .=) <$> _irsairPassword,
+                  ("captchaResponse" .=) <$> _irsairCaptchaResponse,
+                  ("emailVerified" .=) <$> _irsairEmailVerified,
+                  ("displayName" .=) <$> _irsairDisplayName,
+                  ("disableUser" .=) <$> _irsairDisableUser,
+                  ("localId" .=) <$> _irsairLocalId,
+                  ("idToken" .=) <$> _irsairIdToken,
+                  ("provider" .=) <$> _irsairProvider])
+
 -- | Request to upload user account in batch.
 --
 -- /See:/ 'identitytoolkitRelyingpartyUploadAccountRequest' smart constructor.
@@ -786,6 +1067,32 @@ iruarRounds :: Lens' IdentitytoolkitRelyingpartyUploadAccountRequest (Maybe Int3
 iruarRounds
   = lens _iruarRounds (\ s a -> s{_iruarRounds = a})
 
+instance FromJSON
+         IdentitytoolkitRelyingpartyUploadAccountRequest where
+        parseJSON
+          = withObject
+              "IdentitytoolkitRelyingpartyUploadAccountRequest"
+              (\ o ->
+                 IdentitytoolkitRelyingpartyUploadAccountRequest <$>
+                   (o .:? "users" .!= mempty) <*> (o .:? "memoryCost")
+                     <*> (o .:? "saltSeparator")
+                     <*> (o .:? "hashAlgorithm")
+                     <*> (o .:? "signerKey")
+                     <*> (o .:? "rounds"))
+
+instance ToJSON
+         IdentitytoolkitRelyingpartyUploadAccountRequest where
+        toJSON
+          IdentitytoolkitRelyingpartyUploadAccountRequest{..}
+          = object
+              (catMaybes
+                 [("users" .=) <$> _iruarUsers,
+                  ("memoryCost" .=) <$> _iruarMemoryCost,
+                  ("saltSeparator" .=) <$> _iruarSaltSeparator,
+                  ("hashAlgorithm" .=) <$> _iruarHashAlgorithm,
+                  ("signerKey" .=) <$> _iruarSignerKey,
+                  ("rounds" .=) <$> _iruarRounds])
+
 -- | Request to verify the IDP assertion.
 --
 -- /See:/ 'identitytoolkitRelyingpartyVerifyAssertionRequest' smart constructor.
@@ -842,6 +1149,31 @@ irvarPendingIdToken :: Lens' IdentitytoolkitRelyingpartyVerifyAssertionRequest (
 irvarPendingIdToken
   = lens _irvarPendingIdToken
       (\ s a -> s{_irvarPendingIdToken = a})
+
+instance FromJSON
+         IdentitytoolkitRelyingpartyVerifyAssertionRequest
+         where
+        parseJSON
+          = withObject
+              "IdentitytoolkitRelyingpartyVerifyAssertionRequest"
+              (\ o ->
+                 IdentitytoolkitRelyingpartyVerifyAssertionRequest <$>
+                   (o .:? "postBody") <*> (o .:? "returnRefreshToken")
+                     <*> (o .:? "requestUri")
+                     <*> (o .:? "pendingIdToken"))
+
+instance ToJSON
+         IdentitytoolkitRelyingpartyVerifyAssertionRequest
+         where
+        toJSON
+          IdentitytoolkitRelyingpartyVerifyAssertionRequest{..}
+          = object
+              (catMaybes
+                 [("postBody" .=) <$> _irvarPostBody,
+                  ("returnRefreshToken" .=) <$>
+                    _irvarReturnRefreshToken,
+                  ("requestUri" .=) <$> _irvarRequestUri,
+                  ("pendingIdToken" .=) <$> _irvarPendingIdToken])
 
 -- | Request to verify the password.
 --
@@ -907,6 +1239,32 @@ irvprPendingIdToken :: Lens' IdentitytoolkitRelyingpartyVerifyPasswordRequest (M
 irvprPendingIdToken
   = lens _irvprPendingIdToken
       (\ s a -> s{_irvprPendingIdToken = a})
+
+instance FromJSON
+         IdentitytoolkitRelyingpartyVerifyPasswordRequest
+         where
+        parseJSON
+          = withObject
+              "IdentitytoolkitRelyingpartyVerifyPasswordRequest"
+              (\ o ->
+                 IdentitytoolkitRelyingpartyVerifyPasswordRequest <$>
+                   (o .:? "email") <*> (o .:? "captchaChallenge") <*>
+                     (o .:? "password")
+                     <*> (o .:? "captchaResponse")
+                     <*> (o .:? "pendingIdToken"))
+
+instance ToJSON
+         IdentitytoolkitRelyingpartyVerifyPasswordRequest
+         where
+        toJSON
+          IdentitytoolkitRelyingpartyVerifyPasswordRequest{..}
+          = object
+              (catMaybes
+                 [("email" .=) <$> _irvprEmail,
+                  ("captchaChallenge" .=) <$> _irvprCaptchaChallenge,
+                  ("password" .=) <$> _irvprPassword,
+                  ("captchaResponse" .=) <$> _irvprCaptchaResponse,
+                  ("pendingIdToken" .=) <$> _irvprPendingIdToken])
 
 -- | Request of getting a code for user confirmation (reset password, change
 -- email etc.)
@@ -992,6 +1350,32 @@ rChallenge
 rIdToken :: Lens' Relyingparty (Maybe Text)
 rIdToken = lens _rIdToken (\ s a -> s{_rIdToken = a})
 
+instance FromJSON Relyingparty where
+        parseJSON
+          = withObject "Relyingparty"
+              (\ o ->
+                 Relyingparty <$>
+                   (o .:? "email") <*>
+                     (o .:? "kind" .!= "identitytoolkit#relyingparty")
+                     <*> (o .:? "userIp")
+                     <*> (o .:? "requestType")
+                     <*> (o .:? "captchaResp")
+                     <*> (o .:? "newEmail")
+                     <*> (o .:? "challenge")
+                     <*> (o .:? "idToken"))
+
+instance ToJSON Relyingparty where
+        toJSON Relyingparty{..}
+          = object
+              (catMaybes
+                 [("email" .=) <$> _rEmail, Just ("kind" .= _rKind),
+                  ("userIp" .=) <$> _rUserIp,
+                  ("requestType" .=) <$> _rRequestType,
+                  ("captchaResp" .=) <$> _rCaptchaResp,
+                  ("newEmail" .=) <$> _rNewEmail,
+                  ("challenge" .=) <$> _rChallenge,
+                  ("idToken" .=) <$> _rIdToken])
+
 -- | Response of resetting the password.
 --
 -- /See:/ 'resetPasswordResponse' smart constructor.
@@ -1022,6 +1406,22 @@ rprEmail = lens _rprEmail (\ s a -> s{_rprEmail = a})
 -- | The fixed string \"identitytoolkit#ResetPasswordResponse\".
 rprKind :: Lens' ResetPasswordResponse Text
 rprKind = lens _rprKind (\ s a -> s{_rprKind = a})
+
+instance FromJSON ResetPasswordResponse where
+        parseJSON
+          = withObject "ResetPasswordResponse"
+              (\ o ->
+                 ResetPasswordResponse <$>
+                   (o .:? "email") <*>
+                     (o .:? "kind" .!=
+                        "identitytoolkit#ResetPasswordResponse"))
+
+instance ToJSON ResetPasswordResponse where
+        toJSON ResetPasswordResponse{..}
+          = object
+              (catMaybes
+                 [("email" .=) <$> _rprEmail,
+                  Just ("kind" .= _rprKind)])
 
 -- | Respone of setting the account information.
 --
@@ -1095,6 +1495,30 @@ sairIdToken :: Lens' SetAccountInfoResponse (Maybe Text)
 sairIdToken
   = lens _sairIdToken (\ s a -> s{_sairIdToken = a})
 
+instance FromJSON SetAccountInfoResponse where
+        parseJSON
+          = withObject "SetAccountInfoResponse"
+              (\ o ->
+                 SetAccountInfoResponse <$>
+                   (o .:? "email") <*>
+                     (o .:? "kind" .!=
+                        "identitytoolkit#SetAccountInfoResponse")
+                     <*> (o .:? "providerUserInfo" .!= mempty)
+                     <*> (o .:? "displayName")
+                     <*> (o .:? "newEmail")
+                     <*> (o .:? "idToken"))
+
+instance ToJSON SetAccountInfoResponse where
+        toJSON SetAccountInfoResponse{..}
+          = object
+              (catMaybes
+                 [("email" .=) <$> _sairEmail,
+                  Just ("kind" .= _sairKind),
+                  ("providerUserInfo" .=) <$> _sairProviderUserInfo,
+                  ("displayName" .=) <$> _sairDisplayName,
+                  ("newEmail" .=) <$> _sairNewEmail,
+                  ("idToken" .=) <$> _sairIdToken])
+
 --
 -- /See:/ 'setAccountInfoResponseItemProviderUserInfo' smart constructor.
 data SetAccountInfoResponseItemProviderUserInfo = SetAccountInfoResponseItemProviderUserInfo
@@ -1141,6 +1565,25 @@ sairipuiDisplayName
   = lens _sairipuiDisplayName
       (\ s a -> s{_sairipuiDisplayName = a})
 
+instance FromJSON
+         SetAccountInfoResponseItemProviderUserInfo where
+        parseJSON
+          = withObject
+              "SetAccountInfoResponseItemProviderUserInfo"
+              (\ o ->
+                 SetAccountInfoResponseItemProviderUserInfo <$>
+                   (o .:? "providerId") <*> (o .:? "photoUrl") <*>
+                     (o .:? "displayName"))
+
+instance ToJSON
+         SetAccountInfoResponseItemProviderUserInfo where
+        toJSON SetAccountInfoResponseItemProviderUserInfo{..}
+          = object
+              (catMaybes
+                 [("providerId" .=) <$> _sairipuiProviderId,
+                  ("photoUrl" .=) <$> _sairipuiPhotoUrl,
+                  ("displayName" .=) <$> _sairipuiDisplayName])
+
 -- | Respone of uploading accounts in batch.
 --
 -- /See:/ 'uploadAccountResponse' smart constructor.
@@ -1175,6 +1618,22 @@ uarError
       _Default
       . _Coerce
 
+instance FromJSON UploadAccountResponse where
+        parseJSON
+          = withObject "UploadAccountResponse"
+              (\ o ->
+                 UploadAccountResponse <$>
+                   (o .:? "kind" .!=
+                      "identitytoolkit#UploadAccountResponse")
+                     <*> (o .:? "error" .!= mempty))
+
+instance ToJSON UploadAccountResponse where
+        toJSON UploadAccountResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _uarKind),
+                  ("error" .=) <$> _uarError])
+
 --
 -- /See:/ 'uploadAccountResponseItemError' smart constructor.
 data UploadAccountResponseItemError = UploadAccountResponseItemError
@@ -1206,6 +1665,21 @@ uarieMessage
 uarieIndex :: Lens' UploadAccountResponseItemError (Maybe Int32)
 uarieIndex
   = lens _uarieIndex (\ s a -> s{_uarieIndex = a})
+
+instance FromJSON UploadAccountResponseItemError
+         where
+        parseJSON
+          = withObject "UploadAccountResponseItemError"
+              (\ o ->
+                 UploadAccountResponseItemError <$>
+                   (o .:? "message") <*> (o .:? "index"))
+
+instance ToJSON UploadAccountResponseItemError where
+        toJSON UploadAccountResponseItemError{..}
+          = object
+              (catMaybes
+                 [("message" .=) <$> _uarieMessage,
+                  ("index" .=) <$> _uarieIndex])
 
 -- | Template for an individual account info.
 --
@@ -1335,6 +1809,40 @@ uiLocalId :: Lens' UserInfo (Maybe Text)
 uiLocalId
   = lens _uiLocalId (\ s a -> s{_uiLocalId = a})
 
+instance FromJSON UserInfo where
+        parseJSON
+          = withObject "UserInfo"
+              (\ o ->
+                 UserInfo <$>
+                   (o .:? "email") <*> (o .:? "photoUrl") <*>
+                     (o .:? "disabled")
+                     <*> (o .:? "providerUserInfo" .!= mempty)
+                     <*> (o .:? "validSince")
+                     <*> (o .:? "passwordUpdatedAt")
+                     <*> (o .:? "version")
+                     <*> (o .:? "emailVerified")
+                     <*> (o .:? "salt")
+                     <*> (o .:? "displayName")
+                     <*> (o .:? "passwordHash")
+                     <*> (o .:? "localId"))
+
+instance ToJSON UserInfo where
+        toJSON UserInfo{..}
+          = object
+              (catMaybes
+                 [("email" .=) <$> _uiEmail,
+                  ("photoUrl" .=) <$> _uiPhotoUrl,
+                  ("disabled" .=) <$> _uiDisabled,
+                  ("providerUserInfo" .=) <$> _uiProviderUserInfo,
+                  ("validSince" .=) <$> _uiValidSince,
+                  ("passwordUpdatedAt" .=) <$> _uiPasswordUpdatedAt,
+                  ("version" .=) <$> _uiVersion,
+                  ("emailVerified" .=) <$> _uiEmailVerified,
+                  ("salt" .=) <$> _uiSalt,
+                  ("displayName" .=) <$> _uiDisplayName,
+                  ("passwordHash" .=) <$> _uiPasswordHash,
+                  ("localId" .=) <$> _uiLocalId])
+
 --
 -- /See:/ 'userInfoItemProviderUserInfo' smart constructor.
 data UserInfoItemProviderUserInfo = UserInfoItemProviderUserInfo
@@ -1390,6 +1898,24 @@ uiipuiDisplayName :: Lens' UserInfoItemProviderUserInfo (Maybe Text)
 uiipuiDisplayName
   = lens _uiipuiDisplayName
       (\ s a -> s{_uiipuiDisplayName = a})
+
+instance FromJSON UserInfoItemProviderUserInfo where
+        parseJSON
+          = withObject "UserInfoItemProviderUserInfo"
+              (\ o ->
+                 UserInfoItemProviderUserInfo <$>
+                   (o .:? "providerId") <*> (o .:? "photoUrl") <*>
+                     (o .:? "federatedId")
+                     <*> (o .:? "displayName"))
+
+instance ToJSON UserInfoItemProviderUserInfo where
+        toJSON UserInfoItemProviderUserInfo{..}
+          = object
+              (catMaybes
+                 [("providerId" .=) <$> _uiipuiProviderId,
+                  ("photoUrl" .=) <$> _uiipuiPhotoUrl,
+                  ("federatedId" .=) <$> _uiipuiFederatedId,
+                  ("displayName" .=) <$> _uiipuiDisplayName])
 
 -- | Response of verifying the IDP assertion.
 --
@@ -1706,6 +2232,79 @@ varOauthAuthorizationCode
   = lens _varOauthAuthorizationCode
       (\ s a -> s{_varOauthAuthorizationCode = a})
 
+instance FromJSON VerifyAssertionResponse where
+        parseJSON
+          = withObject "VerifyAssertionResponse"
+              (\ o ->
+                 VerifyAssertionResponse <$>
+                   (o .:? "providerId") <*> (o .:? "fullName") <*>
+                     (o .:? "email")
+                     <*> (o .:? "emailRecycled")
+                     <*> (o .:? "photoUrl")
+                     <*> (o .:? "verifiedProvider" .!= mempty)
+                     <*> (o .:? "context")
+                     <*> (o .:? "needConfirmation")
+                     <*> (o .:? "originalEmail")
+                     <*> (o .:? "lastName")
+                     <*> (o .:? "oauthAccessToken")
+                     <*> (o .:? "dateOfBirth")
+                     <*>
+                     (o .:? "kind" .!=
+                        "identitytoolkit#VerifyAssertionResponse")
+                     <*> (o .:? "oauthExpireIn")
+                     <*> (o .:? "appInstallationUrl")
+                     <*> (o .:? "action")
+                     <*> (o .:? "federatedId")
+                     <*> (o .:? "appScheme")
+                     <*> (o .:? "inputEmail")
+                     <*> (o .:? "emailVerified")
+                     <*> (o .:? "language")
+                     <*> (o .:? "firstName")
+                     <*> (o .:? "displayName")
+                     <*> (o .:? "oauthRequestToken")
+                     <*> (o .:? "oauthScope")
+                     <*> (o .:? "nickName")
+                     <*> (o .:? "localId")
+                     <*> (o .:? "timeZone")
+                     <*> (o .:? "idToken")
+                     <*> (o .:? "oauthAuthorizationCode"))
+
+instance ToJSON VerifyAssertionResponse where
+        toJSON VerifyAssertionResponse{..}
+          = object
+              (catMaybes
+                 [("providerId" .=) <$> _varProviderId,
+                  ("fullName" .=) <$> _varFullName,
+                  ("email" .=) <$> _varEmail,
+                  ("emailRecycled" .=) <$> _varEmailRecycled,
+                  ("photoUrl" .=) <$> _varPhotoUrl,
+                  ("verifiedProvider" .=) <$> _varVerifiedProvider,
+                  ("context" .=) <$> _varContext,
+                  ("needConfirmation" .=) <$> _varNeedConfirmation,
+                  ("originalEmail" .=) <$> _varOriginalEmail,
+                  ("lastName" .=) <$> _varLastName,
+                  ("oauthAccessToken" .=) <$> _varOauthAccessToken,
+                  ("dateOfBirth" .=) <$> _varDateOfBirth,
+                  Just ("kind" .= _varKind),
+                  ("oauthExpireIn" .=) <$> _varOauthExpireIn,
+                  ("appInstallationUrl" .=) <$> _varAppInstallationUrl,
+                  ("action" .=) <$> _varAction,
+                  ("federatedId" .=) <$> _varFederatedId,
+                  ("appScheme" .=) <$> _varAppScheme,
+                  ("inputEmail" .=) <$> _varInputEmail,
+                  ("emailVerified" .=) <$> _varEmailVerified,
+                  ("language" .=) <$> _varLanguage,
+                  ("firstName" .=) <$> _varFirstName,
+                  ("displayName" .=) <$> _varDisplayName,
+                  ("oauthRequestToken" .=) <$> _varOauthRequestToken,
+                  ("oauthScope" .=) <$> _varOauthScope,
+                  ("nickName" .=) <$> _varNickName,
+                  ("localId" .=) <$> _varLocalId,
+                  ("timeZone" .=) <$> _varTimeZone,
+                  ("idToken" .=) <$> _varIdToken,
+                  ("oauthAuthorizationCode" .=) <$>
+                    _varOauthAuthorizationCode])
+
 -- | Request of verifying the password.
 --
 -- /See:/ 'verifyPasswordResponse' smart constructor.
@@ -1815,3 +2414,36 @@ vprOauthAuthorizationCode :: Lens' VerifyPasswordResponse (Maybe Text)
 vprOauthAuthorizationCode
   = lens _vprOauthAuthorizationCode
       (\ s a -> s{_vprOauthAuthorizationCode = a})
+
+instance FromJSON VerifyPasswordResponse where
+        parseJSON
+          = withObject "VerifyPasswordResponse"
+              (\ o ->
+                 VerifyPasswordResponse <$>
+                   (o .:? "email") <*> (o .:? "photoUrl") <*>
+                     (o .:? "oauthAccessToken")
+                     <*>
+                     (o .:? "kind" .!=
+                        "identitytoolkit#VerifyPasswordResponse")
+                     <*> (o .:? "oauthExpireIn")
+                     <*> (o .:? "displayName")
+                     <*> (o .:? "localId")
+                     <*> (o .:? "registered")
+                     <*> (o .:? "idToken")
+                     <*> (o .:? "oauthAuthorizationCode"))
+
+instance ToJSON VerifyPasswordResponse where
+        toJSON VerifyPasswordResponse{..}
+          = object
+              (catMaybes
+                 [("email" .=) <$> _vprEmail,
+                  ("photoUrl" .=) <$> _vprPhotoUrl,
+                  ("oauthAccessToken" .=) <$> _vprOauthAccessToken,
+                  Just ("kind" .= _vprKind),
+                  ("oauthExpireIn" .=) <$> _vprOauthExpireIn,
+                  ("displayName" .=) <$> _vprDisplayName,
+                  ("localId" .=) <$> _vprLocalId,
+                  ("registered" .=) <$> _vprRegistered,
+                  ("idToken" .=) <$> _vprIdToken,
+                  ("oauthAuthorizationCode" .=) <$>
+                    _vprOauthAuthorizationCode])

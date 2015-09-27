@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -69,6 +70,23 @@ acNatIP = lens _acNatIP (\ s a -> s{_acNatIP = a})
 -- ONE_TO_ONE_NAT.
 acType :: Lens' AccessConfig AccessConfigType
 acType = lens _acType (\ s a -> s{_acType = a})
+
+instance FromJSON AccessConfig where
+        parseJSON
+          = withObject "AccessConfig"
+              (\ o ->
+                 AccessConfig <$>
+                   (o .:? "kind" .!= "compute#accessConfig") <*>
+                     (o .:? "name")
+                     <*> (o .:? "natIP")
+                     <*> (o .:? "type" .!= ACTOneToOneNAT))
+
+instance ToJSON AccessConfig where
+        toJSON AccessConfig{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _acKind), ("name" .=) <$> _acName,
+                  ("natIP" .=) <$> _acNatIP, Just ("type" .= _acType)])
 
 -- | A reserved address resource.
 --
@@ -188,6 +206,35 @@ addDescription
   = lens _addDescription
       (\ s a -> s{_addDescription = a})
 
+instance FromJSON Address where
+        parseJSON
+          = withObject "Address"
+              (\ o ->
+                 Address <$>
+                   (o .:? "status") <*> (o .:? "users" .!= mempty) <*>
+                     (o .:? "kind" .!= "compute#address")
+                     <*> (o .:? "address")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "id")
+                     <*> (o .:? "region")
+                     <*> (o .:? "description"))
+
+instance ToJSON Address where
+        toJSON Address{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _addStatus,
+                  ("users" .=) <$> _addUsers,
+                  Just ("kind" .= _addKind),
+                  ("address" .=) <$> _addAddress,
+                  ("selfLink" .=) <$> _addSelfLink,
+                  ("name" .=) <$> _addName,
+                  ("creationTimestamp" .=) <$> _addCreationTimestamp,
+                  ("id" .=) <$> _addId, ("region" .=) <$> _addRegion,
+                  ("description" .=) <$> _addDescription])
+
 --
 -- /See:/ 'addressAggregatedList' smart constructor.
 data AddressAggregatedList = AddressAggregatedList
@@ -246,6 +293,27 @@ aalSelfLink
 aalId :: Lens' AddressAggregatedList (Maybe Text)
 aalId = lens _aalId (\ s a -> s{_aalId = a})
 
+instance FromJSON AddressAggregatedList where
+        parseJSON
+          = withObject "AddressAggregatedList"
+              (\ o ->
+                 AddressAggregatedList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#addressAggregatedList")
+                     <*> (o .:? "items")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON AddressAggregatedList where
+        toJSON AddressAggregatedList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _aalNextPageToken,
+                  Just ("kind" .= _aalKind),
+                  ("items" .=) <$> _aalItems,
+                  ("selfLink" .=) <$> _aalSelfLink,
+                  ("id" .=) <$> _aalId])
+
 -- | [Output Only] A map of scoped address lists.
 --
 -- /See:/ 'addressAggregatedListItems' smart constructor.
@@ -258,6 +326,14 @@ data AddressAggregatedListItems =
 addressAggregatedListItems
     :: AddressAggregatedListItems
 addressAggregatedListItems = AddressAggregatedListItems
+
+instance FromJSON AddressAggregatedListItems where
+        parseJSON
+          = withObject "AddressAggregatedListItems"
+              (\ o -> pure AddressAggregatedListItems)
+
+instance ToJSON AddressAggregatedListItems where
+        toJSON = const (Object mempty)
 
 -- | Contains a list of address resources.
 --
@@ -320,6 +396,26 @@ alSelfLink
 alId :: Lens' AddressList (Maybe Text)
 alId = lens _alId (\ s a -> s{_alId = a})
 
+instance FromJSON AddressList where
+        parseJSON
+          = withObject "AddressList"
+              (\ o ->
+                 AddressList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#addressList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON AddressList where
+        toJSON AddressList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _alNextPageToken,
+                  Just ("kind" .= _alKind), ("items" .=) <$> _alItems,
+                  ("selfLink" .=) <$> _alSelfLink,
+                  ("id" .=) <$> _alId])
+
 --
 -- /See:/ 'addressesScopedList' smart constructor.
 data AddressesScopedList = AddressesScopedList
@@ -355,6 +451,20 @@ aslWarning :: Lens' AddressesScopedList (Maybe AddressesScopedListWarning)
 aslWarning
   = lens _aslWarning (\ s a -> s{_aslWarning = a})
 
+instance FromJSON AddressesScopedList where
+        parseJSON
+          = withObject "AddressesScopedList"
+              (\ o ->
+                 AddressesScopedList <$>
+                   (o .:? "addresses" .!= mempty) <*> (o .:? "warning"))
+
+instance ToJSON AddressesScopedList where
+        toJSON AddressesScopedList{..}
+          = object
+              (catMaybes
+                 [("addresses" .=) <$> _aslAddresses,
+                  ("warning" .=) <$> _aslWarning])
+
 --
 -- /See:/ 'addressesScopedListItemDataWarning' smart constructor.
 data AddressesScopedListItemDataWarning = AddressesScopedListItemDataWarning
@@ -386,6 +496,22 @@ aslidwValue
 aslidwKey :: Lens' AddressesScopedListItemDataWarning (Maybe Text)
 aslidwKey
   = lens _aslidwKey (\ s a -> s{_aslidwKey = a})
+
+instance FromJSON AddressesScopedListItemDataWarning
+         where
+        parseJSON
+          = withObject "AddressesScopedListItemDataWarning"
+              (\ o ->
+                 AddressesScopedListItemDataWarning <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON AddressesScopedListItemDataWarning
+         where
+        toJSON AddressesScopedListItemDataWarning{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _aslidwValue,
+                  ("key" .=) <$> _aslidwKey])
 
 -- | [Output Only] Informational warning which replaces the list of addresses
 -- when the list is empty.
@@ -430,6 +556,22 @@ aslwCode = lens _aslwCode (\ s a -> s{_aslwCode = a})
 aslwMessage :: Lens' AddressesScopedListWarning (Maybe Text)
 aslwMessage
   = lens _aslwMessage (\ s a -> s{_aslwMessage = a})
+
+instance FromJSON AddressesScopedListWarning where
+        parseJSON
+          = withObject "AddressesScopedListWarning"
+              (\ o ->
+                 AddressesScopedListWarning <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON AddressesScopedListWarning where
+        toJSON AddressesScopedListWarning{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _aslwData,
+                  ("code" .=) <$> _aslwCode,
+                  ("message" .=) <$> _aslwMessage])
 
 -- | An instance-attached disk resource.
 --
@@ -561,6 +703,37 @@ adType = lens _adType (\ s a -> s{_adType = a})
 adIndex :: Lens' AttachedDisk (Maybe Int32)
 adIndex = lens _adIndex (\ s a -> s{_adIndex = a})
 
+instance FromJSON AttachedDisk where
+        parseJSON
+          = withObject "AttachedDisk"
+              (\ o ->
+                 AttachedDisk <$>
+                   (o .:? "kind" .!= "compute#attachedDisk") <*>
+                     (o .:? "mode")
+                     <*> (o .:? "boot")
+                     <*> (o .:? "autoDelete")
+                     <*> (o .:? "initializeParams")
+                     <*> (o .:? "deviceName")
+                     <*> (o .:? "interface")
+                     <*> (o .:? "source")
+                     <*> (o .:? "licenses" .!= mempty)
+                     <*> (o .:? "type")
+                     <*> (o .:? "index"))
+
+instance ToJSON AttachedDisk where
+        toJSON AttachedDisk{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _adKind), ("mode" .=) <$> _adMode,
+                  ("boot" .=) <$> _adBoot,
+                  ("autoDelete" .=) <$> _adAutoDelete,
+                  ("initializeParams" .=) <$> _adInitializeParams,
+                  ("deviceName" .=) <$> _adDeviceName,
+                  ("interface" .=) <$> _adInterface,
+                  ("source" .=) <$> _adSource,
+                  ("licenses" .=) <$> _adLicenses,
+                  ("type" .=) <$> _adType, ("index" .=) <$> _adIndex])
+
 -- | [Input Only] Specifies the parameters for a new disk that will be
 -- created alongside the new instance. Use initialization parameters to
 -- create boot disks or local SSDs attached to the new instance. This
@@ -634,6 +807,24 @@ adipDiskName
 adipDiskType :: Lens' AttachedDiskInitializeParams (Maybe Text)
 adipDiskType
   = lens _adipDiskType (\ s a -> s{_adipDiskType = a})
+
+instance FromJSON AttachedDiskInitializeParams where
+        parseJSON
+          = withObject "AttachedDiskInitializeParams"
+              (\ o ->
+                 AttachedDiskInitializeParams <$>
+                   (o .:? "sourceImage") <*> (o .:? "diskSizeGb") <*>
+                     (o .:? "diskName")
+                     <*> (o .:? "diskType"))
+
+instance ToJSON AttachedDiskInitializeParams where
+        toJSON AttachedDiskInitializeParams{..}
+          = object
+              (catMaybes
+                 [("sourceImage" .=) <$> _adipSourceImage,
+                  ("diskSizeGb" .=) <$> _adipDiskSizeGb,
+                  ("diskName" .=) <$> _adipDiskName,
+                  ("diskType" .=) <$> _adipDiskType])
 
 --
 -- /See:/ 'autoscaler' smart constructor.
@@ -737,6 +928,34 @@ autTarget :: Lens' Autoscaler (Maybe Text)
 autTarget
   = lens _autTarget (\ s a -> s{_autTarget = a})
 
+instance FromJSON Autoscaler where
+        parseJSON
+          = withObject "Autoscaler"
+              (\ o ->
+                 Autoscaler <$>
+                   (o .:? "kind" .!= "compute#autoscaler") <*>
+                     (o .:? "zone")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "autoscalingPolicy")
+                     <*> (o .:? "id")
+                     <*> (o .:? "description")
+                     <*> (o .:? "target"))
+
+instance ToJSON Autoscaler where
+        toJSON Autoscaler{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _autKind), ("zone" .=) <$> _autZone,
+                  ("selfLink" .=) <$> _autSelfLink,
+                  ("name" .=) <$> _autName,
+                  ("creationTimestamp" .=) <$> _autCreationTimestamp,
+                  ("autoscalingPolicy" .=) <$> _autAutoscalingPolicy,
+                  ("id" .=) <$> _autId,
+                  ("description" .=) <$> _autDescription,
+                  ("target" .=) <$> _autTarget])
+
 --
 -- /See:/ 'autoscalerAggregatedList' smart constructor.
 data AutoscalerAggregatedList = AutoscalerAggregatedList
@@ -795,6 +1014,27 @@ aalaSelfLink
 aalaId :: Lens' AutoscalerAggregatedList (Maybe Text)
 aalaId = lens _aalaId (\ s a -> s{_aalaId = a})
 
+instance FromJSON AutoscalerAggregatedList where
+        parseJSON
+          = withObject "AutoscalerAggregatedList"
+              (\ o ->
+                 AutoscalerAggregatedList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#autoscalerAggregatedList")
+                     <*> (o .:? "items")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON AutoscalerAggregatedList where
+        toJSON AutoscalerAggregatedList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _aalaNextPageToken,
+                  Just ("kind" .= _aalaKind),
+                  ("items" .=) <$> _aalaItems,
+                  ("selfLink" .=) <$> _aalaSelfLink,
+                  ("id" .=) <$> _aalaId])
+
 -- | A map of scoped autoscaler lists.
 --
 -- /See:/ 'autoscalerAggregatedListItems' smart constructor.
@@ -807,6 +1047,14 @@ data AutoscalerAggregatedListItems =
 autoscalerAggregatedListItems
     :: AutoscalerAggregatedListItems
 autoscalerAggregatedListItems = AutoscalerAggregatedListItems
+
+instance FromJSON AutoscalerAggregatedListItems where
+        parseJSON
+          = withObject "AutoscalerAggregatedListItems"
+              (\ o -> pure AutoscalerAggregatedListItems)
+
+instance ToJSON AutoscalerAggregatedListItems where
+        toJSON = const (Object mempty)
 
 -- | Contains a list of persistent autoscaler resources.
 --
@@ -868,6 +1116,25 @@ aSelfLink
 aId :: Lens' AutoscalerList (Maybe Text)
 aId = lens _aId (\ s a -> s{_aId = a})
 
+instance FromJSON AutoscalerList where
+        parseJSON
+          = withObject "AutoscalerList"
+              (\ o ->
+                 AutoscalerList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#autoscalerList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON AutoscalerList where
+        toJSON AutoscalerList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _aNextPageToken,
+                  Just ("kind" .= _aKind), ("items" .=) <$> _aItems,
+                  ("selfLink" .=) <$> _aSelfLink, ("id" .=) <$> _aId])
+
 --
 -- /See:/ 'autoscalersScopedList' smart constructor.
 data AutoscalersScopedList = AutoscalersScopedList
@@ -902,6 +1169,21 @@ aAutoscalers
 aWarning :: Lens' AutoscalersScopedList (Maybe AutoscalersScopedListWarning)
 aWarning = lens _aWarning (\ s a -> s{_aWarning = a})
 
+instance FromJSON AutoscalersScopedList where
+        parseJSON
+          = withObject "AutoscalersScopedList"
+              (\ o ->
+                 AutoscalersScopedList <$>
+                   (o .:? "autoscalers" .!= mempty) <*>
+                     (o .:? "warning"))
+
+instance ToJSON AutoscalersScopedList where
+        toJSON AutoscalersScopedList{..}
+          = object
+              (catMaybes
+                 [("autoscalers" .=) <$> _aAutoscalers,
+                  ("warning" .=) <$> _aWarning])
+
 --
 -- /See:/ 'autoscalersScopedListItemDataWarning' smart constructor.
 data AutoscalersScopedListItemDataWarning = AutoscalersScopedListItemDataWarning
@@ -931,6 +1213,21 @@ aValue = lens _aValue (\ s a -> s{_aValue = a})
 -- | [Output Only] A key for the warning data.
 aKey :: Lens' AutoscalersScopedListItemDataWarning (Maybe Text)
 aKey = lens _aKey (\ s a -> s{_aKey = a})
+
+instance FromJSON
+         AutoscalersScopedListItemDataWarning where
+        parseJSON
+          = withObject "AutoscalersScopedListItemDataWarning"
+              (\ o ->
+                 AutoscalersScopedListItemDataWarning <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON AutoscalersScopedListItemDataWarning
+         where
+        toJSON AutoscalersScopedListItemDataWarning{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _aValue, ("key" .=) <$> _aKey])
 
 -- | Informational warning which replaces the list of autoscalers when the
 -- list is empty.
@@ -973,6 +1270,21 @@ aCode = lens _aCode (\ s a -> s{_aCode = a})
 -- | [Output Only] Optional human-readable details for this warning.
 aMessage :: Lens' AutoscalersScopedListWarning (Maybe Text)
 aMessage = lens _aMessage (\ s a -> s{_aMessage = a})
+
+instance FromJSON AutoscalersScopedListWarning where
+        parseJSON
+          = withObject "AutoscalersScopedListWarning"
+              (\ o ->
+                 AutoscalersScopedListWarning <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON AutoscalersScopedListWarning where
+        toJSON AutoscalersScopedListWarning{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _aData, ("code" .=) <$> _aCode,
+                  ("message" .=) <$> _aMessage])
 
 -- | Cloud Autoscaler policy.
 --
@@ -1062,6 +1374,31 @@ apCoolDownPeriodSec
   = lens _apCoolDownPeriodSec
       (\ s a -> s{_apCoolDownPeriodSec = a})
 
+instance FromJSON AutoscalingPolicy where
+        parseJSON
+          = withObject "AutoscalingPolicy"
+              (\ o ->
+                 AutoscalingPolicy <$>
+                   (o .:? "customMetricUtilizations" .!= mempty) <*>
+                     (o .:? "maxNumReplicas")
+                     <*> (o .:? "cpuUtilization")
+                     <*> (o .:? "loadBalancingUtilization")
+                     <*> (o .:? "minNumReplicas")
+                     <*> (o .:? "coolDownPeriodSec"))
+
+instance ToJSON AutoscalingPolicy where
+        toJSON AutoscalingPolicy{..}
+          = object
+              (catMaybes
+                 [("customMetricUtilizations" .=) <$>
+                    _apCustomMetricUtilizations,
+                  ("maxNumReplicas" .=) <$> _apMaxNumReplicas,
+                  ("cpuUtilization" .=) <$> _apCpuUtilization,
+                  ("loadBalancingUtilization" .=) <$>
+                    _apLoadBalancingUtilization,
+                  ("minNumReplicas" .=) <$> _apMinNumReplicas,
+                  ("coolDownPeriodSec" .=) <$> _apCoolDownPeriodSec])
+
 -- | CPU utilization policy.
 --
 -- /See:/ 'autoscalingPolicyCpuUtilization' smart constructor.
@@ -1089,6 +1426,21 @@ apcuUtilizationTarget :: Lens' AutoscalingPolicyCpuUtilization (Maybe Double)
 apcuUtilizationTarget
   = lens _apcuUtilizationTarget
       (\ s a -> s{_apcuUtilizationTarget = a})
+
+instance FromJSON AutoscalingPolicyCpuUtilization
+         where
+        parseJSON
+          = withObject "AutoscalingPolicyCpuUtilization"
+              (\ o ->
+                 AutoscalingPolicyCpuUtilization <$>
+                   (o .:? "utilizationTarget"))
+
+instance ToJSON AutoscalingPolicyCpuUtilization where
+        toJSON AutoscalingPolicyCpuUtilization{..}
+          = object
+              (catMaybes
+                 [("utilizationTarget" .=) <$>
+                    _apcuUtilizationTarget])
 
 -- | Custom utilization metric policy.
 --
@@ -1139,6 +1491,27 @@ apcmuUtilizationTargetType
   = lens _apcmuUtilizationTargetType
       (\ s a -> s{_apcmuUtilizationTargetType = a})
 
+instance FromJSON
+         AutoscalingPolicyCustomMetricUtilization where
+        parseJSON
+          = withObject
+              "AutoscalingPolicyCustomMetricUtilization"
+              (\ o ->
+                 AutoscalingPolicyCustomMetricUtilization <$>
+                   (o .:? "utilizationTarget") <*> (o .:? "metric") <*>
+                     (o .:? "utilizationTargetType"))
+
+instance ToJSON
+         AutoscalingPolicyCustomMetricUtilization where
+        toJSON AutoscalingPolicyCustomMetricUtilization{..}
+          = object
+              (catMaybes
+                 [("utilizationTarget" .=) <$>
+                    _apcmuUtilizationTarget,
+                  ("metric" .=) <$> _apcmuMetric,
+                  ("utilizationTargetType" .=) <$>
+                    _apcmuUtilizationTargetType])
+
 -- | Load balancing utilization policy.
 --
 -- /See:/ 'autoscalingPolicyLoadBalancingUtilization' smart constructor.
@@ -1168,6 +1541,23 @@ aplbuUtilizationTarget :: Lens' AutoscalingPolicyLoadBalancingUtilization (Maybe
 aplbuUtilizationTarget
   = lens _aplbuUtilizationTarget
       (\ s a -> s{_aplbuUtilizationTarget = a})
+
+instance FromJSON
+         AutoscalingPolicyLoadBalancingUtilization where
+        parseJSON
+          = withObject
+              "AutoscalingPolicyLoadBalancingUtilization"
+              (\ o ->
+                 AutoscalingPolicyLoadBalancingUtilization <$>
+                   (o .:? "utilizationTarget"))
+
+instance ToJSON
+         AutoscalingPolicyLoadBalancingUtilization where
+        toJSON AutoscalingPolicyLoadBalancingUtilization{..}
+          = object
+              (catMaybes
+                 [("utilizationTarget" .=) <$>
+                    _aplbuUtilizationTarget])
 
 -- | Message containing information of one individual backend.
 --
@@ -1266,6 +1656,30 @@ bCapacityScaler :: Lens' Backend (Maybe Float)
 bCapacityScaler
   = lens _bCapacityScaler
       (\ s a -> s{_bCapacityScaler = a})
+
+instance FromJSON Backend where
+        parseJSON
+          = withObject "Backend"
+              (\ o ->
+                 Backend <$>
+                   (o .:? "group") <*> (o .:? "balancingMode") <*>
+                     (o .:? "maxUtilization")
+                     <*> (o .:? "maxRate")
+                     <*> (o .:? "maxRatePerInstance")
+                     <*> (o .:? "description")
+                     <*> (o .:? "capacityScaler"))
+
+instance ToJSON Backend where
+        toJSON Backend{..}
+          = object
+              (catMaybes
+                 [("group" .=) <$> _bGroup,
+                  ("balancingMode" .=) <$> _bBalancingMode,
+                  ("maxUtilization" .=) <$> _bMaxUtilization,
+                  ("maxRate" .=) <$> _bMaxRate,
+                  ("maxRatePerInstance" .=) <$> _bMaxRatePerInstance,
+                  ("description" .=) <$> _bDescription,
+                  ("capacityScaler" .=) <$> _bCapacityScaler])
 
 -- | A BackendService resource. This resource defines a group of backend
 -- virtual machines together with their serving capacity.
@@ -1419,6 +1833,43 @@ bsHealthChecks
 bsPort :: Lens' BackendService (Maybe Int32)
 bsPort = lens _bsPort (\ s a -> s{_bsPort = a})
 
+instance FromJSON BackendService where
+        parseJSON
+          = withObject "BackendService"
+              (\ o ->
+                 BackendService <$>
+                   (o .:? "backends" .!= mempty) <*>
+                     (o .:? "kind" .!= "compute#backendService")
+                     <*> (o .:? "fingerprint")
+                     <*> (o .:? "protocol")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "id")
+                     <*> (o .:? "timeoutSec")
+                     <*> (o .:? "description")
+                     <*> (o .:? "portName")
+                     <*> (o .:? "healthChecks" .!= mempty)
+                     <*> (o .:? "port"))
+
+instance ToJSON BackendService where
+        toJSON BackendService{..}
+          = object
+              (catMaybes
+                 [("backends" .=) <$> _bsBackends,
+                  Just ("kind" .= _bsKind),
+                  ("fingerprint" .=) <$> _bsFingerprint,
+                  ("protocol" .=) <$> _bsProtocol,
+                  ("selfLink" .=) <$> _bsSelfLink,
+                  ("name" .=) <$> _bsName,
+                  ("creationTimestamp" .=) <$> _bsCreationTimestamp,
+                  ("id" .=) <$> _bsId,
+                  ("timeoutSec" .=) <$> _bsTimeoutSec,
+                  ("description" .=) <$> _bsDescription,
+                  ("portName" .=) <$> _bsPortName,
+                  ("healthChecks" .=) <$> _bsHealthChecks,
+                  ("port" .=) <$> _bsPort])
+
 --
 -- /See:/ 'backendServiceGroupHealth' smart constructor.
 data BackendServiceGroupHealth = BackendServiceGroupHealth
@@ -1452,6 +1903,22 @@ bsghHealthStatus
       (\ s a -> s{_bsghHealthStatus = a})
       . _Default
       . _Coerce
+
+instance FromJSON BackendServiceGroupHealth where
+        parseJSON
+          = withObject "BackendServiceGroupHealth"
+              (\ o ->
+                 BackendServiceGroupHealth <$>
+                   (o .:? "kind" .!=
+                      "compute#backendServiceGroupHealth")
+                     <*> (o .:? "healthStatus" .!= mempty))
+
+instance ToJSON BackendServiceGroupHealth where
+        toJSON BackendServiceGroupHealth{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _bsghKind),
+                  ("healthStatus" .=) <$> _bsghHealthStatus])
 
 -- | Contains a list of BackendService resources.
 --
@@ -1514,6 +1981,27 @@ bslSelfLink
 -- | [Output Only] Unique identifier for the resource; defined by the server.
 bslId :: Lens' BackendServiceList (Maybe Text)
 bslId = lens _bslId (\ s a -> s{_bslId = a})
+
+instance FromJSON BackendServiceList where
+        parseJSON
+          = withObject "BackendServiceList"
+              (\ o ->
+                 BackendServiceList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#backendServiceList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON BackendServiceList where
+        toJSON BackendServiceList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _bslNextPageToken,
+                  Just ("kind" .= _bslKind),
+                  ("items" .=) <$> _bslItems,
+                  ("selfLink" .=) <$> _bslSelfLink,
+                  ("id" .=) <$> _bslId])
 
 -- | Deprecation status for a public resource.
 --
@@ -1584,6 +2072,26 @@ dsObsolete
 dsDeprecated :: Lens' DeprecationStatus (Maybe Text)
 dsDeprecated
   = lens _dsDeprecated (\ s a -> s{_dsDeprecated = a})
+
+instance FromJSON DeprecationStatus where
+        parseJSON
+          = withObject "DeprecationStatus"
+              (\ o ->
+                 DeprecationStatus <$>
+                   (o .:? "state") <*> (o .:? "deleted") <*>
+                     (o .:? "replacement")
+                     <*> (o .:? "obsolete")
+                     <*> (o .:? "deprecated"))
+
+instance ToJSON DeprecationStatus where
+        toJSON DeprecationStatus{..}
+          = object
+              (catMaybes
+                 [("state" .=) <$> _dsState,
+                  ("deleted" .=) <$> _dsDeleted,
+                  ("replacement" .=) <$> _dsReplacement,
+                  ("obsolete" .=) <$> _dsObsolete,
+                  ("deprecated" .=) <$> _dsDeprecated])
 
 -- | A Disk resource.
 --
@@ -1811,6 +2319,51 @@ dSourceSnapshot
   = lens _dSourceSnapshot
       (\ s a -> s{_dSourceSnapshot = a})
 
+instance FromJSON Disk where
+        parseJSON
+          = withObject "Disk"
+              (\ o ->
+                 Disk <$>
+                   (o .:? "status") <*> (o .:? "sourceSnapshotId") <*>
+                     (o .:? "lastAttachTimestamp")
+                     <*> (o .:? "users" .!= mempty)
+                     <*> (o .:? "sourceImage")
+                     <*> (o .:? "sizeGb")
+                     <*> (o .:? "kind" .!= "compute#disk")
+                     <*> (o .:? "lastDetachTimestamp")
+                     <*> (o .:? "zone")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "sourceImageId")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "id")
+                     <*> (o .:? "licenses" .!= mempty)
+                     <*> (o .:? "options")
+                     <*> (o .:? "type")
+                     <*> (o .:? "description")
+                     <*> (o .:? "sourceSnapshot"))
+
+instance ToJSON Disk where
+        toJSON Disk{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _dStatus,
+                  ("sourceSnapshotId" .=) <$> _dSourceSnapshotId,
+                  ("lastAttachTimestamp" .=) <$> _dLastAttachTimestamp,
+                  ("users" .=) <$> _dUsers,
+                  ("sourceImage" .=) <$> _dSourceImage,
+                  ("sizeGb" .=) <$> _dSizeGb, Just ("kind" .= _dKind),
+                  ("lastDetachTimestamp" .=) <$> _dLastDetachTimestamp,
+                  ("zone" .=) <$> _dZone,
+                  ("selfLink" .=) <$> _dSelfLink,
+                  ("name" .=) <$> _dName,
+                  ("sourceImageId" .=) <$> _dSourceImageId,
+                  ("creationTimestamp" .=) <$> _dCreationTimestamp,
+                  ("id" .=) <$> _dId, ("licenses" .=) <$> _dLicenses,
+                  ("options" .=) <$> _dOptions, ("type" .=) <$> _dType,
+                  ("description" .=) <$> _dDescription,
+                  ("sourceSnapshot" .=) <$> _dSourceSnapshot])
+
 --
 -- /See:/ 'diskAggregatedList' smart constructor.
 data DiskAggregatedList = DiskAggregatedList
@@ -1869,6 +2422,27 @@ dalSelfLink
 dalId :: Lens' DiskAggregatedList (Maybe Text)
 dalId = lens _dalId (\ s a -> s{_dalId = a})
 
+instance FromJSON DiskAggregatedList where
+        parseJSON
+          = withObject "DiskAggregatedList"
+              (\ o ->
+                 DiskAggregatedList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#diskAggregatedList")
+                     <*> (o .:? "items")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON DiskAggregatedList where
+        toJSON DiskAggregatedList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _dalNextPageToken,
+                  Just ("kind" .= _dalKind),
+                  ("items" .=) <$> _dalItems,
+                  ("selfLink" .=) <$> _dalSelfLink,
+                  ("id" .=) <$> _dalId])
+
 -- | [Output Only] A map of scoped disk lists.
 --
 -- /See:/ 'diskAggregatedListItems' smart constructor.
@@ -1881,6 +2455,14 @@ data DiskAggregatedListItems =
 diskAggregatedListItems
     :: DiskAggregatedListItems
 diskAggregatedListItems = DiskAggregatedListItems
+
+instance FromJSON DiskAggregatedListItems where
+        parseJSON
+          = withObject "DiskAggregatedListItems"
+              (\ o -> pure DiskAggregatedListItems)
+
+instance ToJSON DiskAggregatedListItems where
+        toJSON = const (Object mempty)
 
 -- | A list of Disk resources.
 --
@@ -1943,6 +2525,26 @@ dlSelfLink
 dlId :: Lens' DiskList (Maybe Text)
 dlId = lens _dlId (\ s a -> s{_dlId = a})
 
+instance FromJSON DiskList where
+        parseJSON
+          = withObject "DiskList"
+              (\ o ->
+                 DiskList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#diskList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON DiskList where
+        toJSON DiskList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _dlNextPageToken,
+                  Just ("kind" .= _dlKind), ("items" .=) <$> _dlItems,
+                  ("selfLink" .=) <$> _dlSelfLink,
+                  ("id" .=) <$> _dlId])
+
 --
 -- /See:/ 'diskMoveRequest' smart constructor.
 data DiskMoveRequest = DiskMoveRequest
@@ -1983,6 +2585,20 @@ dmrDestinationZone :: Lens' DiskMoveRequest (Maybe Text)
 dmrDestinationZone
   = lens _dmrDestinationZone
       (\ s a -> s{_dmrDestinationZone = a})
+
+instance FromJSON DiskMoveRequest where
+        parseJSON
+          = withObject "DiskMoveRequest"
+              (\ o ->
+                 DiskMoveRequest <$>
+                   (o .:? "targetDisk") <*> (o .:? "destinationZone"))
+
+instance ToJSON DiskMoveRequest where
+        toJSON DiskMoveRequest{..}
+          = object
+              (catMaybes
+                 [("targetDisk" .=) <$> _dmrTargetDisk,
+                  ("destinationZone" .=) <$> _dmrDestinationZone])
 
 -- | A disk type resource.
 --
@@ -2091,6 +2707,36 @@ dtDeprecated :: Lens' DiskType (Maybe (Maybe DeprecationStatus))
 dtDeprecated
   = lens _dtDeprecated (\ s a -> s{_dtDeprecated = a})
 
+instance FromJSON DiskType where
+        parseJSON
+          = withObject "DiskType"
+              (\ o ->
+                 DiskType <$>
+                   (o .:? "kind" .!= "compute#diskType") <*>
+                     (o .:? "zone")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "id")
+                     <*> (o .:? "validDiskSize")
+                     <*> (o .:? "description")
+                     <*> (o .:? "defaultDiskSizeGb")
+                     <*> (o .:? "deprecated"))
+
+instance ToJSON DiskType where
+        toJSON DiskType{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _dtKind), ("zone" .=) <$> _dtZone,
+                  ("selfLink" .=) <$> _dtSelfLink,
+                  ("name" .=) <$> _dtName,
+                  ("creationTimestamp" .=) <$> _dtCreationTimestamp,
+                  ("id" .=) <$> _dtId,
+                  ("validDiskSize" .=) <$> _dtValidDiskSize,
+                  ("description" .=) <$> _dtDescription,
+                  ("defaultDiskSizeGb" .=) <$> _dtDefaultDiskSizeGb,
+                  ("deprecated" .=) <$> _dtDeprecated])
+
 --
 -- /See:/ 'diskTypeAggregatedList' smart constructor.
 data DiskTypeAggregatedList = DiskTypeAggregatedList
@@ -2149,6 +2795,27 @@ dtalSelfLink
 dtalId :: Lens' DiskTypeAggregatedList (Maybe Text)
 dtalId = lens _dtalId (\ s a -> s{_dtalId = a})
 
+instance FromJSON DiskTypeAggregatedList where
+        parseJSON
+          = withObject "DiskTypeAggregatedList"
+              (\ o ->
+                 DiskTypeAggregatedList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#diskTypeAggregatedList")
+                     <*> (o .:? "items")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON DiskTypeAggregatedList where
+        toJSON DiskTypeAggregatedList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _dtalNextPageToken,
+                  Just ("kind" .= _dtalKind),
+                  ("items" .=) <$> _dtalItems,
+                  ("selfLink" .=) <$> _dtalSelfLink,
+                  ("id" .=) <$> _dtalId])
+
 -- | [Output Only] A map of scoped disk type lists.
 --
 -- /See:/ 'diskTypeAggregatedListItems' smart constructor.
@@ -2161,6 +2828,14 @@ data DiskTypeAggregatedListItems =
 diskTypeAggregatedListItems
     :: DiskTypeAggregatedListItems
 diskTypeAggregatedListItems = DiskTypeAggregatedListItems
+
+instance FromJSON DiskTypeAggregatedListItems where
+        parseJSON
+          = withObject "DiskTypeAggregatedListItems"
+              (\ o -> pure DiskTypeAggregatedListItems)
+
+instance ToJSON DiskTypeAggregatedListItems where
+        toJSON = const (Object mempty)
 
 -- | Contains a list of disk type resources.
 --
@@ -2224,6 +2899,27 @@ dtlSelfLink
 dtlId :: Lens' DiskTypeList (Maybe Text)
 dtlId = lens _dtlId (\ s a -> s{_dtlId = a})
 
+instance FromJSON DiskTypeList where
+        parseJSON
+          = withObject "DiskTypeList"
+              (\ o ->
+                 DiskTypeList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#diskTypeList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON DiskTypeList where
+        toJSON DiskTypeList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _dtlNextPageToken,
+                  Just ("kind" .= _dtlKind),
+                  ("items" .=) <$> _dtlItems,
+                  ("selfLink" .=) <$> _dtlSelfLink,
+                  ("id" .=) <$> _dtlId])
+
 --
 -- /See:/ 'diskTypesScopedList' smart constructor.
 data DiskTypesScopedList = DiskTypesScopedList
@@ -2260,6 +2956,20 @@ dtslWarning :: Lens' DiskTypesScopedList (Maybe DiskTypesScopedListWarning)
 dtslWarning
   = lens _dtslWarning (\ s a -> s{_dtslWarning = a})
 
+instance FromJSON DiskTypesScopedList where
+        parseJSON
+          = withObject "DiskTypesScopedList"
+              (\ o ->
+                 DiskTypesScopedList <$>
+                   (o .:? "diskTypes" .!= mempty) <*> (o .:? "warning"))
+
+instance ToJSON DiskTypesScopedList where
+        toJSON DiskTypesScopedList{..}
+          = object
+              (catMaybes
+                 [("diskTypes" .=) <$> _dtslDiskTypes,
+                  ("warning" .=) <$> _dtslWarning])
+
 --
 -- /See:/ 'diskTypesScopedListItemDataWarning' smart constructor.
 data DiskTypesScopedListItemDataWarning = DiskTypesScopedListItemDataWarning
@@ -2291,6 +3001,22 @@ dtslidwValue
 dtslidwKey :: Lens' DiskTypesScopedListItemDataWarning (Maybe Text)
 dtslidwKey
   = lens _dtslidwKey (\ s a -> s{_dtslidwKey = a})
+
+instance FromJSON DiskTypesScopedListItemDataWarning
+         where
+        parseJSON
+          = withObject "DiskTypesScopedListItemDataWarning"
+              (\ o ->
+                 DiskTypesScopedListItemDataWarning <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON DiskTypesScopedListItemDataWarning
+         where
+        toJSON DiskTypesScopedListItemDataWarning{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _dtslidwValue,
+                  ("key" .=) <$> _dtslidwKey])
 
 -- | [Output Only] Informational warning which replaces the list of disk
 -- types when the list is empty.
@@ -2337,6 +3063,22 @@ dtslwMessage :: Lens' DiskTypesScopedListWarning (Maybe Text)
 dtslwMessage
   = lens _dtslwMessage (\ s a -> s{_dtslwMessage = a})
 
+instance FromJSON DiskTypesScopedListWarning where
+        parseJSON
+          = withObject "DiskTypesScopedListWarning"
+              (\ o ->
+                 DiskTypesScopedListWarning <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON DiskTypesScopedListWarning where
+        toJSON DiskTypesScopedListWarning{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _dtslwData,
+                  ("code" .=) <$> _dtslwCode,
+                  ("message" .=) <$> _dtslwMessage])
+
 --
 -- /See:/ 'disksScopedList' smart constructor.
 data DisksScopedList = DisksScopedList
@@ -2372,6 +3114,20 @@ dslDisks
       _Default
       . _Coerce
 
+instance FromJSON DisksScopedList where
+        parseJSON
+          = withObject "DisksScopedList"
+              (\ o ->
+                 DisksScopedList <$>
+                   (o .:? "warning") <*> (o .:? "disks" .!= mempty))
+
+instance ToJSON DisksScopedList where
+        toJSON DisksScopedList{..}
+          = object
+              (catMaybes
+                 [("warning" .=) <$> _dslWarning,
+                  ("disks" .=) <$> _dslDisks])
+
 --
 -- /See:/ 'disksScopedListItemDataWarning' smart constructor.
 data DisksScopedListItemDataWarning = DisksScopedListItemDataWarning
@@ -2403,6 +3159,21 @@ dslidwValue
 dslidwKey :: Lens' DisksScopedListItemDataWarning (Maybe Text)
 dslidwKey
   = lens _dslidwKey (\ s a -> s{_dslidwKey = a})
+
+instance FromJSON DisksScopedListItemDataWarning
+         where
+        parseJSON
+          = withObject "DisksScopedListItemDataWarning"
+              (\ o ->
+                 DisksScopedListItemDataWarning <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON DisksScopedListItemDataWarning where
+        toJSON DisksScopedListItemDataWarning{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _dslidwValue,
+                  ("key" .=) <$> _dslidwKey])
 
 -- | [Output Only] Informational warning which replaces the list of disks
 -- when the list is empty.
@@ -2447,6 +3218,22 @@ dslwCode = lens _dslwCode (\ s a -> s{_dslwCode = a})
 dslwMessage :: Lens' DisksScopedListWarning (Maybe Text)
 dslwMessage
   = lens _dslwMessage (\ s a -> s{_dslwMessage = a})
+
+instance FromJSON DisksScopedListWarning where
+        parseJSON
+          = withObject "DisksScopedListWarning"
+              (\ o ->
+                 DisksScopedListWarning <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON DisksScopedListWarning where
+        toJSON DisksScopedListWarning{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _dslwData,
+                  ("code" .=) <$> _dslwCode,
+                  ("message" .=) <$> _dslwMessage])
 
 -- | A Firewall resource.
 --
@@ -2596,6 +3383,38 @@ fDescription :: Lens' Firewall (Maybe Text)
 fDescription
   = lens _fDescription (\ s a -> s{_fDescription = a})
 
+instance FromJSON Firewall where
+        parseJSON
+          = withObject "Firewall"
+              (\ o ->
+                 Firewall <$>
+                   (o .:? "sourceTags" .!= mempty) <*>
+                     (o .:? "kind" .!= "compute#firewall")
+                     <*> (o .:? "targetTags" .!= mempty)
+                     <*> (o .:? "network")
+                     <*> (o .:? "sourceRanges" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "id")
+                     <*> (o .:? "allowed" .!= mempty)
+                     <*> (o .:? "description"))
+
+instance ToJSON Firewall where
+        toJSON Firewall{..}
+          = object
+              (catMaybes
+                 [("sourceTags" .=) <$> _fSourceTags,
+                  Just ("kind" .= _fKind),
+                  ("targetTags" .=) <$> _fTargetTags,
+                  ("network" .=) <$> _fNetwork,
+                  ("sourceRanges" .=) <$> _fSourceRanges,
+                  ("selfLink" .=) <$> _fSelfLink,
+                  ("name" .=) <$> _fName,
+                  ("creationTimestamp" .=) <$> _fCreationTimestamp,
+                  ("id" .=) <$> _fId, ("allowed" .=) <$> _fAllowed,
+                  ("description" .=) <$> _fDescription])
+
 --
 -- /See:/ 'firewallItemAllowed' smart constructor.
 data FirewallItemAllowed = FirewallItemAllowed
@@ -2637,6 +3456,20 @@ fiaPorts
   = lens _fiaPorts (\ s a -> s{_fiaPorts = a}) .
       _Default
       . _Coerce
+
+instance FromJSON FirewallItemAllowed where
+        parseJSON
+          = withObject "FirewallItemAllowed"
+              (\ o ->
+                 FirewallItemAllowed <$>
+                   (o .:? "IPProtocol") <*> (o .:? "ports" .!= mempty))
+
+instance ToJSON FirewallItemAllowed where
+        toJSON FirewallItemAllowed{..}
+          = object
+              (catMaybes
+                 [("IPProtocol" .=) <$> _fiaIPProtocol,
+                  ("ports" .=) <$> _fiaPorts])
 
 -- | Contains a list of Firewall resources.
 --
@@ -2698,6 +3531,26 @@ flSelfLink
 -- | [Output Only] Unique identifier for the resource; defined by the server.
 flId :: Lens' FirewallList (Maybe Text)
 flId = lens _flId (\ s a -> s{_flId = a})
+
+instance FromJSON FirewallList where
+        parseJSON
+          = withObject "FirewallList"
+              (\ o ->
+                 FirewallList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#firewallList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON FirewallList where
+        toJSON FirewallList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _flNextPageToken,
+                  Just ("kind" .= _flKind), ("items" .=) <$> _flItems,
+                  ("selfLink" .=) <$> _flSelfLink,
+                  ("id" .=) <$> _flId])
 
 -- | A ForwardingRule resource. A ForwardingRule resource specifies which
 -- pool of target virtual machines to forward a packet to if it matches the
@@ -2832,6 +3685,38 @@ frDescription
 frTarget :: Lens' ForwardingRule (Maybe Text)
 frTarget = lens _frTarget (\ s a -> s{_frTarget = a})
 
+instance FromJSON ForwardingRule where
+        parseJSON
+          = withObject "ForwardingRule"
+              (\ o ->
+                 ForwardingRule <$>
+                   (o .:? "IPAddress") <*>
+                     (o .:? "kind" .!= "compute#forwardingRule")
+                     <*> (o .:? "portRange")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "IPProtocol")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "id")
+                     <*> (o .:? "region")
+                     <*> (o .:? "description")
+                     <*> (o .:? "target"))
+
+instance ToJSON ForwardingRule where
+        toJSON ForwardingRule{..}
+          = object
+              (catMaybes
+                 [("IPAddress" .=) <$> _frIPAddress,
+                  Just ("kind" .= _frKind),
+                  ("portRange" .=) <$> _frPortRange,
+                  ("selfLink" .=) <$> _frSelfLink,
+                  ("name" .=) <$> _frName,
+                  ("IPProtocol" .=) <$> _frIPProtocol,
+                  ("creationTimestamp" .=) <$> _frCreationTimestamp,
+                  ("id" .=) <$> _frId, ("region" .=) <$> _frRegion,
+                  ("description" .=) <$> _frDescription,
+                  ("target" .=) <$> _frTarget])
+
 --
 -- /See:/ 'forwardingRuleAggregatedList' smart constructor.
 data ForwardingRuleAggregatedList = ForwardingRuleAggregatedList
@@ -2890,6 +3775,28 @@ fralSelfLink
 fralId :: Lens' ForwardingRuleAggregatedList (Maybe Text)
 fralId = lens _fralId (\ s a -> s{_fralId = a})
 
+instance FromJSON ForwardingRuleAggregatedList where
+        parseJSON
+          = withObject "ForwardingRuleAggregatedList"
+              (\ o ->
+                 ForwardingRuleAggregatedList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!=
+                        "compute#forwardingRuleAggregatedList")
+                     <*> (o .:? "items")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON ForwardingRuleAggregatedList where
+        toJSON ForwardingRuleAggregatedList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _fralNextPageToken,
+                  Just ("kind" .= _fralKind),
+                  ("items" .=) <$> _fralItems,
+                  ("selfLink" .=) <$> _fralSelfLink,
+                  ("id" .=) <$> _fralId])
+
 -- | A map of scoped forwarding rule lists.
 --
 -- /See:/ 'forwardingRuleAggregatedListItems' smart constructor.
@@ -2902,6 +3809,16 @@ data ForwardingRuleAggregatedListItems =
 forwardingRuleAggregatedListItems
     :: ForwardingRuleAggregatedListItems
 forwardingRuleAggregatedListItems = ForwardingRuleAggregatedListItems
+
+instance FromJSON ForwardingRuleAggregatedListItems
+         where
+        parseJSON
+          = withObject "ForwardingRuleAggregatedListItems"
+              (\ o -> pure ForwardingRuleAggregatedListItems)
+
+instance ToJSON ForwardingRuleAggregatedListItems
+         where
+        toJSON = const (Object mempty)
 
 -- | Contains a list of ForwardingRule resources.
 --
@@ -2964,6 +3881,27 @@ frlSelfLink
 frlId :: Lens' ForwardingRuleList (Maybe Text)
 frlId = lens _frlId (\ s a -> s{_frlId = a})
 
+instance FromJSON ForwardingRuleList where
+        parseJSON
+          = withObject "ForwardingRuleList"
+              (\ o ->
+                 ForwardingRuleList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#forwardingRuleList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON ForwardingRuleList where
+        toJSON ForwardingRuleList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _frlNextPageToken,
+                  Just ("kind" .= _frlKind),
+                  ("items" .=) <$> _frlItems,
+                  ("selfLink" .=) <$> _frlSelfLink,
+                  ("id" .=) <$> _frlId])
+
 --
 -- /See:/ 'forwardingRulesScopedList' smart constructor.
 data ForwardingRulesScopedList = ForwardingRulesScopedList
@@ -3000,6 +3938,21 @@ frslForwardingRules
       . _Default
       . _Coerce
 
+instance FromJSON ForwardingRulesScopedList where
+        parseJSON
+          = withObject "ForwardingRulesScopedList"
+              (\ o ->
+                 ForwardingRulesScopedList <$>
+                   (o .:? "warning") <*>
+                     (o .:? "forwardingRules" .!= mempty))
+
+instance ToJSON ForwardingRulesScopedList where
+        toJSON ForwardingRulesScopedList{..}
+          = object
+              (catMaybes
+                 [("warning" .=) <$> _frslWarning,
+                  ("forwardingRules" .=) <$> _frslForwardingRules])
+
 --
 -- /See:/ 'forwardingRulesScopedListItemDataWarning' smart constructor.
 data ForwardingRulesScopedListItemDataWarning = ForwardingRulesScopedListItemDataWarning
@@ -3031,6 +3984,23 @@ frslidwValue
 frslidwKey :: Lens' ForwardingRulesScopedListItemDataWarning (Maybe Text)
 frslidwKey
   = lens _frslidwKey (\ s a -> s{_frslidwKey = a})
+
+instance FromJSON
+         ForwardingRulesScopedListItemDataWarning where
+        parseJSON
+          = withObject
+              "ForwardingRulesScopedListItemDataWarning"
+              (\ o ->
+                 ForwardingRulesScopedListItemDataWarning <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON
+         ForwardingRulesScopedListItemDataWarning where
+        toJSON ForwardingRulesScopedListItemDataWarning{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _frslidwValue,
+                  ("key" .=) <$> _frslidwKey])
 
 -- | Informational warning which replaces the list of forwarding rules when
 -- the list is empty.
@@ -3077,6 +4047,24 @@ frslwMessage :: Lens' ForwardingRulesScopedListWarning (Maybe Text)
 frslwMessage
   = lens _frslwMessage (\ s a -> s{_frslwMessage = a})
 
+instance FromJSON ForwardingRulesScopedListWarning
+         where
+        parseJSON
+          = withObject "ForwardingRulesScopedListWarning"
+              (\ o ->
+                 ForwardingRulesScopedListWarning <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON ForwardingRulesScopedListWarning
+         where
+        toJSON ForwardingRulesScopedListWarning{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _frslwData,
+                  ("code" .=) <$> _frslwCode,
+                  ("message" .=) <$> _frslwMessage])
+
 --
 -- /See:/ 'healthCheckReference' smart constructor.
 newtype HealthCheckReference = HealthCheckReference
@@ -3099,6 +4087,17 @@ hcrHealthCheck :: Lens' HealthCheckReference (Maybe Text)
 hcrHealthCheck
   = lens _hcrHealthCheck
       (\ s a -> s{_hcrHealthCheck = a})
+
+instance FromJSON HealthCheckReference where
+        parseJSON
+          = withObject "HealthCheckReference"
+              (\ o ->
+                 HealthCheckReference <$> (o .:? "healthCheck"))
+
+instance ToJSON HealthCheckReference where
+        toJSON HealthCheckReference{..}
+          = object
+              (catMaybes [("healthCheck" .=) <$> _hcrHealthCheck])
 
 --
 -- /See:/ 'healthStatus' smart constructor.
@@ -3150,6 +4149,24 @@ hsInstance :: Lens' HealthStatus (Maybe Text)
 hsInstance
   = lens _hsInstance (\ s a -> s{_hsInstance = a})
 
+instance FromJSON HealthStatus where
+        parseJSON
+          = withObject "HealthStatus"
+              (\ o ->
+                 HealthStatus <$>
+                   (o .:? "ipAddress") <*> (o .:? "healthState") <*>
+                     (o .:? "port")
+                     <*> (o .:? "instance"))
+
+instance ToJSON HealthStatus where
+        toJSON HealthStatus{..}
+          = object
+              (catMaybes
+                 [("ipAddress" .=) <$> _hsIpAddress,
+                  ("healthState" .=) <$> _hsHealthState,
+                  ("port" .=) <$> _hsPort,
+                  ("instance" .=) <$> _hsInstance])
+
 -- | UrlMaps A host-matching rule for a URL. If matched, will use the named
 -- PathMatcher to select the BackendService.
 --
@@ -3198,6 +4215,22 @@ hrPathMatcher :: Lens' HostRule (Maybe Text)
 hrPathMatcher
   = lens _hrPathMatcher
       (\ s a -> s{_hrPathMatcher = a})
+
+instance FromJSON HostRule where
+        parseJSON
+          = withObject "HostRule"
+              (\ o ->
+                 HostRule <$>
+                   (o .:? "hosts" .!= mempty) <*> (o .:? "description")
+                     <*> (o .:? "pathMatcher"))
+
+instance ToJSON HostRule where
+        toJSON HostRule{..}
+          = object
+              (catMaybes
+                 [("hosts" .=) <$> _hrHosts,
+                  ("description" .=) <$> _hrDescription,
+                  ("pathMatcher" .=) <$> _hrPathMatcher])
 
 -- | An HttpHealthCheck resource. This resource defines a template for how
 -- individual instances should be checked for health, via HTTP.
@@ -3350,6 +4383,42 @@ hhcUnhealthyThreshold
 hhcPort :: Lens' HttpHealthCheck (Maybe Int32)
 hhcPort = lens _hhcPort (\ s a -> s{_hhcPort = a})
 
+instance FromJSON HttpHealthCheck where
+        parseJSON
+          = withObject "HttpHealthCheck"
+              (\ o ->
+                 HttpHealthCheck <$>
+                   (o .:? "healthyThreshold") <*>
+                     (o .:? "kind" .!= "compute#httpHealthCheck")
+                     <*> (o .:? "requestPath")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "checkIntervalSec")
+                     <*> (o .:? "name")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "id")
+                     <*> (o .:? "host")
+                     <*> (o .:? "timeoutSec")
+                     <*> (o .:? "description")
+                     <*> (o .:? "unhealthyThreshold")
+                     <*> (o .:? "port"))
+
+instance ToJSON HttpHealthCheck where
+        toJSON HttpHealthCheck{..}
+          = object
+              (catMaybes
+                 [("healthyThreshold" .=) <$> _hhcHealthyThreshold,
+                  Just ("kind" .= _hhcKind),
+                  ("requestPath" .=) <$> _hhcRequestPath,
+                  ("selfLink" .=) <$> _hhcSelfLink,
+                  ("checkIntervalSec" .=) <$> _hhcCheckIntervalSec,
+                  ("name" .=) <$> _hhcName,
+                  ("creationTimestamp" .=) <$> _hhcCreationTimestamp,
+                  ("id" .=) <$> _hhcId, ("host" .=) <$> _hhcHost,
+                  ("timeoutSec" .=) <$> _hhcTimeoutSec,
+                  ("description" .=) <$> _hhcDescription,
+                  ("unhealthyThreshold" .=) <$> _hhcUnhealthyThreshold,
+                  ("port" .=) <$> _hhcPort])
+
 -- | Contains a list of HttpHealthCheck resources.
 --
 -- /See:/ 'httpHealthCheckList' smart constructor.
@@ -3410,6 +4479,27 @@ hhclSelfLink
 -- | [Output Only] Unique identifier for the resource. Defined by the server.
 hhclId :: Lens' HttpHealthCheckList (Maybe Text)
 hhclId = lens _hhclId (\ s a -> s{_hhclId = a})
+
+instance FromJSON HttpHealthCheckList where
+        parseJSON
+          = withObject "HttpHealthCheckList"
+              (\ o ->
+                 HttpHealthCheckList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#httpHealthCheckList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON HttpHealthCheckList where
+        toJSON HttpHealthCheckList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _hhclNextPageToken,
+                  Just ("kind" .= _hhclKind),
+                  ("items" .=) <$> _hhclItems,
+                  ("selfLink" .=) <$> _hhclSelfLink,
+                  ("id" .=) <$> _hhclId])
 
 -- | An Image resource.
 --
@@ -3587,6 +4677,46 @@ imaDeprecated
   = lens _imaDeprecated
       (\ s a -> s{_imaDeprecated = a})
 
+instance FromJSON Image where
+        parseJSON
+          = withObject "Image"
+              (\ o ->
+                 Image <$>
+                   (o .:? "status") <*> (o .:? "diskSizeGb") <*>
+                     (o .:? "sourceType" .!= ISTRaw)
+                     <*> (o .:? "sourceDiskId")
+                     <*> (o .:? "kind" .!= "compute#image")
+                     <*> (o .:? "archiveSizeBytes")
+                     <*> (o .:? "rawDisk")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "id")
+                     <*> (o .:? "licenses" .!= mempty)
+                     <*> (o .:? "sourceDisk")
+                     <*> (o .:? "description")
+                     <*> (o .:? "deprecated"))
+
+instance ToJSON Image where
+        toJSON Image{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _imaStatus,
+                  ("diskSizeGb" .=) <$> _imaDiskSizeGb,
+                  Just ("sourceType" .= _imaSourceType),
+                  ("sourceDiskId" .=) <$> _imaSourceDiskId,
+                  Just ("kind" .= _imaKind),
+                  ("archiveSizeBytes" .=) <$> _imaArchiveSizeBytes,
+                  ("rawDisk" .=) <$> _imaRawDisk,
+                  ("selfLink" .=) <$> _imaSelfLink,
+                  ("name" .=) <$> _imaName,
+                  ("creationTimestamp" .=) <$> _imaCreationTimestamp,
+                  ("id" .=) <$> _imaId,
+                  ("licenses" .=) <$> _imaLicenses,
+                  ("sourceDisk" .=) <$> _imaSourceDisk,
+                  ("description" .=) <$> _imaDescription,
+                  ("deprecated" .=) <$> _imaDeprecated])
+
 -- | Contains a list of Image resources.
 --
 -- /See:/ 'imageList' smart constructor.
@@ -3648,6 +4778,27 @@ illSelfLink
 illId :: Lens' ImageList (Maybe Text)
 illId = lens _illId (\ s a -> s{_illId = a})
 
+instance FromJSON ImageList where
+        parseJSON
+          = withObject "ImageList"
+              (\ o ->
+                 ImageList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#imageList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON ImageList where
+        toJSON ImageList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _illNextPageToken,
+                  Just ("kind" .= _illKind),
+                  ("items" .=) <$> _illItems,
+                  ("selfLink" .=) <$> _illSelfLink,
+                  ("id" .=) <$> _illId])
+
 -- | The parameters of the raw disk image.
 --
 -- /See:/ 'imageRawDisk' smart constructor.
@@ -3696,6 +4847,22 @@ irdSha1Checksum :: Lens' ImageRawDisk (Maybe Text)
 irdSha1Checksum
   = lens _irdSha1Checksum
       (\ s a -> s{_irdSha1Checksum = a})
+
+instance FromJSON ImageRawDisk where
+        parseJSON
+          = withObject "ImageRawDisk"
+              (\ o ->
+                 ImageRawDisk <$>
+                   (o .:? "containerType") <*> (o .:? "source") <*>
+                     (o .:? "sha1Checksum"))
+
+instance ToJSON ImageRawDisk where
+        toJSON ImageRawDisk{..}
+          = object
+              (catMaybes
+                 [("containerType" .=) <$> _irdContainerType,
+                  ("source" .=) <$> _irdSource,
+                  ("sha1Checksum" .=) <$> _irdSha1Checksum])
 
 -- | An Instance resource.
 --
@@ -3904,6 +5071,51 @@ iDescription
 iTags :: Lens' Instance (Maybe (Maybe Tags))
 iTags = lens _iTags (\ s a -> s{_iTags = a})
 
+instance FromJSON Instance where
+        parseJSON
+          = withObject "Instance"
+              (\ o ->
+                 Instance <$>
+                   (o .:? "status") <*>
+                     (o .:? "serviceAccounts" .!= mempty)
+                     <*> (o .:? "networkInterfaces" .!= mempty)
+                     <*> (o .:? "kind" .!= "compute#instance")
+                     <*> (o .:? "zone")
+                     <*> (o .:? "cpuPlatform")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "statusMessage")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "machineType")
+                     <*> (o .:? "metadata")
+                     <*> (o .:? "id")
+                     <*> (o .:? "scheduling")
+                     <*> (o .:? "disks" .!= mempty)
+                     <*> (o .:? "canIpForward")
+                     <*> (o .:? "description")
+                     <*> (o .:? "tags"))
+
+instance ToJSON Instance where
+        toJSON Instance{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _iStatus,
+                  ("serviceAccounts" .=) <$> _iServiceAccounts,
+                  ("networkInterfaces" .=) <$> _iNetworkInterfaces,
+                  Just ("kind" .= _iKind), ("zone" .=) <$> _iZone,
+                  ("cpuPlatform" .=) <$> _iCpuPlatform,
+                  ("selfLink" .=) <$> _iSelfLink,
+                  ("name" .=) <$> _iName,
+                  ("statusMessage" .=) <$> _iStatusMessage,
+                  ("creationTimestamp" .=) <$> _iCreationTimestamp,
+                  ("machineType" .=) <$> _iMachineType,
+                  ("metadata" .=) <$> _iMetadata, ("id" .=) <$> _iId,
+                  ("scheduling" .=) <$> _iScheduling,
+                  ("disks" .=) <$> _iDisks,
+                  ("canIpForward" .=) <$> _iCanIpForward,
+                  ("description" .=) <$> _iDescription,
+                  ("tags" .=) <$> _iTags])
+
 --
 -- /See:/ 'instanceAggregatedList' smart constructor.
 data InstanceAggregatedList = InstanceAggregatedList
@@ -3962,6 +5174,27 @@ ialSelfLink
 ialId :: Lens' InstanceAggregatedList (Maybe Text)
 ialId = lens _ialId (\ s a -> s{_ialId = a})
 
+instance FromJSON InstanceAggregatedList where
+        parseJSON
+          = withObject "InstanceAggregatedList"
+              (\ o ->
+                 InstanceAggregatedList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#instanceAggregatedList")
+                     <*> (o .:? "items")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON InstanceAggregatedList where
+        toJSON InstanceAggregatedList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _ialNextPageToken,
+                  Just ("kind" .= _ialKind),
+                  ("items" .=) <$> _ialItems,
+                  ("selfLink" .=) <$> _ialSelfLink,
+                  ("id" .=) <$> _ialId])
+
 -- | [Output Only] A map of scoped instance lists.
 --
 -- /See:/ 'instanceAggregatedListItems' smart constructor.
@@ -3974,6 +5207,14 @@ data InstanceAggregatedListItems =
 instanceAggregatedListItems
     :: InstanceAggregatedListItems
 instanceAggregatedListItems = InstanceAggregatedListItems
+
+instance FromJSON InstanceAggregatedListItems where
+        parseJSON
+          = withObject "InstanceAggregatedListItems"
+              (\ o -> pure InstanceAggregatedListItems)
+
+instance ToJSON InstanceAggregatedListItems where
+        toJSON = const (Object mempty)
 
 --
 -- /See:/ 'instanceGroup' smart constructor.
@@ -4100,6 +5341,38 @@ igNamedPorts
       . _Default
       . _Coerce
 
+instance FromJSON InstanceGroup where
+        parseJSON
+          = withObject "InstanceGroup"
+              (\ o ->
+                 InstanceGroup <$>
+                   (o .:? "size") <*>
+                     (o .:? "kind" .!= "compute#instanceGroup")
+                     <*> (o .:? "fingerprint")
+                     <*> (o .:? "network")
+                     <*> (o .:? "zone")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "id")
+                     <*> (o .:? "description")
+                     <*> (o .:? "namedPorts" .!= mempty))
+
+instance ToJSON InstanceGroup where
+        toJSON InstanceGroup{..}
+          = object
+              (catMaybes
+                 [("size" .=) <$> _igSize, Just ("kind" .= _igKind),
+                  ("fingerprint" .=) <$> _igFingerprint,
+                  ("network" .=) <$> _igNetwork,
+                  ("zone" .=) <$> _igZone,
+                  ("selfLink" .=) <$> _igSelfLink,
+                  ("name" .=) <$> _igName,
+                  ("creationTimestamp" .=) <$> _igCreationTimestamp,
+                  ("id" .=) <$> _igId,
+                  ("description" .=) <$> _igDescription,
+                  ("namedPorts" .=) <$> _igNamedPorts])
+
 --
 -- /See:/ 'instanceGroupAggregatedList' smart constructor.
 data InstanceGroupAggregatedList = InstanceGroupAggregatedList
@@ -4162,6 +5435,28 @@ igalSelfLink
 igalId :: Lens' InstanceGroupAggregatedList (Maybe Text)
 igalId = lens _igalId (\ s a -> s{_igalId = a})
 
+instance FromJSON InstanceGroupAggregatedList where
+        parseJSON
+          = withObject "InstanceGroupAggregatedList"
+              (\ o ->
+                 InstanceGroupAggregatedList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!=
+                        "compute#instanceGroupAggregatedList")
+                     <*> (o .:? "items")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON InstanceGroupAggregatedList where
+        toJSON InstanceGroupAggregatedList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _igalNextPageToken,
+                  Just ("kind" .= _igalKind),
+                  ("items" .=) <$> _igalItems,
+                  ("selfLink" .=) <$> _igalSelfLink,
+                  ("id" .=) <$> _igalId])
+
 -- | A map of scoped instance group lists.
 --
 -- /See:/ 'instanceGroupAggregatedListItems' smart constructor.
@@ -4174,6 +5469,16 @@ data InstanceGroupAggregatedListItems =
 instanceGroupAggregatedListItems
     :: InstanceGroupAggregatedListItems
 instanceGroupAggregatedListItems = InstanceGroupAggregatedListItems
+
+instance FromJSON InstanceGroupAggregatedListItems
+         where
+        parseJSON
+          = withObject "InstanceGroupAggregatedListItems"
+              (\ o -> pure InstanceGroupAggregatedListItems)
+
+instance ToJSON InstanceGroupAggregatedListItems
+         where
+        toJSON = const (Object mempty)
 
 -- | A list of InstanceGroup resources.
 --
@@ -4238,6 +5543,27 @@ iglSelfLink
 -- server defines this identifier.
 iglId :: Lens' InstanceGroupList (Maybe Text)
 iglId = lens _iglId (\ s a -> s{_iglId = a})
+
+instance FromJSON InstanceGroupList where
+        parseJSON
+          = withObject "InstanceGroupList"
+              (\ o ->
+                 InstanceGroupList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#instanceGroupList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON InstanceGroupList where
+        toJSON InstanceGroupList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _iglNextPageToken,
+                  Just ("kind" .= _iglKind),
+                  ("items" .=) <$> _iglItems,
+                  ("selfLink" .=) <$> _iglSelfLink,
+                  ("id" .=) <$> _iglId])
 
 -- | InstanceGroupManagers Next available tag: 19
 --
@@ -4403,6 +5729,45 @@ igmInstanceGroup
   = lens _igmInstanceGroup
       (\ s a -> s{_igmInstanceGroup = a})
 
+instance FromJSON InstanceGroupManager where
+        parseJSON
+          = withObject "InstanceGroupManager"
+              (\ o ->
+                 InstanceGroupManager <$>
+                   (o .:? "kind" .!= "compute#instanceGroupManager") <*>
+                     (o .:? "fingerprint")
+                     <*> (o .:? "baseInstanceName")
+                     <*> (o .:? "zone")
+                     <*> (o .:? "instanceTemplate")
+                     <*> (o .:? "targetSize")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "currentActions")
+                     <*> (o .:? "name")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "id")
+                     <*> (o .:? "targetPools" .!= mempty)
+                     <*> (o .:? "description")
+                     <*> (o .:? "instanceGroup"))
+
+instance ToJSON InstanceGroupManager where
+        toJSON InstanceGroupManager{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _igmKind),
+                  ("fingerprint" .=) <$> _igmFingerprint,
+                  ("baseInstanceName" .=) <$> _igmBaseInstanceName,
+                  ("zone" .=) <$> _igmZone,
+                  ("instanceTemplate" .=) <$> _igmInstanceTemplate,
+                  ("targetSize" .=) <$> _igmTargetSize,
+                  ("selfLink" .=) <$> _igmSelfLink,
+                  ("currentActions" .=) <$> _igmCurrentActions,
+                  ("name" .=) <$> _igmName,
+                  ("creationTimestamp" .=) <$> _igmCreationTimestamp,
+                  ("id" .=) <$> _igmId,
+                  ("targetPools" .=) <$> _igmTargetPools,
+                  ("description" .=) <$> _igmDescription,
+                  ("instanceGroup" .=) <$> _igmInstanceGroup])
+
 --
 -- /See:/ 'instanceGroupManagerActionsSummary' smart constructor.
 data InstanceGroupManagerActionsSummary = InstanceGroupManagerActionsSummary
@@ -4499,6 +5864,32 @@ igmasAbandoning
   = lens _igmasAbandoning
       (\ s a -> s{_igmasAbandoning = a})
 
+instance FromJSON InstanceGroupManagerActionsSummary
+         where
+        parseJSON
+          = withObject "InstanceGroupManagerActionsSummary"
+              (\ o ->
+                 InstanceGroupManagerActionsSummary <$>
+                   (o .:? "deleting") <*> (o .:? "restarting") <*>
+                     (o .:? "none")
+                     <*> (o .:? "creating")
+                     <*> (o .:? "refreshing")
+                     <*> (o .:? "recreating")
+                     <*> (o .:? "abandoning"))
+
+instance ToJSON InstanceGroupManagerActionsSummary
+         where
+        toJSON InstanceGroupManagerActionsSummary{..}
+          = object
+              (catMaybes
+                 [("deleting" .=) <$> _igmasDeleting,
+                  ("restarting" .=) <$> _igmasRestarting,
+                  ("none" .=) <$> _igmasNone,
+                  ("creating" .=) <$> _igmasCreating,
+                  ("refreshing" .=) <$> _igmasRefreshing,
+                  ("recreating" .=) <$> _igmasRecreating,
+                  ("abandoning" .=) <$> _igmasAbandoning])
+
 --
 -- /See:/ 'instanceGroupManagerAggregatedList' smart constructor.
 data InstanceGroupManagerAggregatedList = InstanceGroupManagerAggregatedList
@@ -4563,6 +5954,30 @@ igmalSelfLink
 igmalId :: Lens' InstanceGroupManagerAggregatedList (Maybe Text)
 igmalId = lens _igmalId (\ s a -> s{_igmalId = a})
 
+instance FromJSON InstanceGroupManagerAggregatedList
+         where
+        parseJSON
+          = withObject "InstanceGroupManagerAggregatedList"
+              (\ o ->
+                 InstanceGroupManagerAggregatedList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!=
+                        "compute#instanceGroupManagerAggregatedList")
+                     <*> (o .:? "items")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON InstanceGroupManagerAggregatedList
+         where
+        toJSON InstanceGroupManagerAggregatedList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _igmalNextPageToken,
+                  Just ("kind" .= _igmalKind),
+                  ("items" .=) <$> _igmalItems,
+                  ("selfLink" .=) <$> _igmalSelfLink,
+                  ("id" .=) <$> _igmalId])
+
 -- | A map of filtered managed instance group lists.
 --
 -- /See:/ 'instanceGroupManagerAggregatedListItems' smart constructor.
@@ -4576,6 +5991,17 @@ instanceGroupManagerAggregatedListItems
     :: InstanceGroupManagerAggregatedListItems
 instanceGroupManagerAggregatedListItems =
     InstanceGroupManagerAggregatedListItems
+
+instance FromJSON
+         InstanceGroupManagerAggregatedListItems where
+        parseJSON
+          = withObject
+              "InstanceGroupManagerAggregatedListItems"
+              (\ o -> pure InstanceGroupManagerAggregatedListItems)
+
+instance ToJSON
+         InstanceGroupManagerAggregatedListItems where
+        toJSON = const (Object mempty)
 
 -- | [Output Only] A list of InstanceGroupManager resources.
 --
@@ -4642,6 +6068,27 @@ igmlSelfLink
 igmlId :: Lens' InstanceGroupManagerList (Maybe Text)
 igmlId = lens _igmlId (\ s a -> s{_igmlId = a})
 
+instance FromJSON InstanceGroupManagerList where
+        parseJSON
+          = withObject "InstanceGroupManagerList"
+              (\ o ->
+                 InstanceGroupManagerList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#instanceGroupManagerList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON InstanceGroupManagerList where
+        toJSON InstanceGroupManagerList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _igmlNextPageToken,
+                  Just ("kind" .= _igmlKind),
+                  ("items" .=) <$> _igmlItems,
+                  ("selfLink" .=) <$> _igmlSelfLink,
+                  ("id" .=) <$> _igmlId])
+
 --
 -- /See:/ 'instanceGroupManagersAbandonInstancesRequest' smart constructor.
 newtype InstanceGroupManagersAbandonInstancesRequest = InstanceGroupManagersAbandonInstancesRequest
@@ -4667,6 +6114,22 @@ igmairInstances
       (\ s a -> s{_igmairInstances = a})
       . _Default
       . _Coerce
+
+instance FromJSON
+         InstanceGroupManagersAbandonInstancesRequest where
+        parseJSON
+          = withObject
+              "InstanceGroupManagersAbandonInstancesRequest"
+              (\ o ->
+                 InstanceGroupManagersAbandonInstancesRequest <$>
+                   (o .:? "instances" .!= mempty))
+
+instance ToJSON
+         InstanceGroupManagersAbandonInstancesRequest where
+        toJSON
+          InstanceGroupManagersAbandonInstancesRequest{..}
+          = object
+              (catMaybes [("instances" .=) <$> _igmairInstances])
 
 --
 -- /See:/ 'instanceGroupManagersDeleteInstancesRequest' smart constructor.
@@ -4694,6 +6157,22 @@ igmdirInstances
       . _Default
       . _Coerce
 
+instance FromJSON
+         InstanceGroupManagersDeleteInstancesRequest where
+        parseJSON
+          = withObject
+              "InstanceGroupManagersDeleteInstancesRequest"
+              (\ o ->
+                 InstanceGroupManagersDeleteInstancesRequest <$>
+                   (o .:? "instances" .!= mempty))
+
+instance ToJSON
+         InstanceGroupManagersDeleteInstancesRequest where
+        toJSON
+          InstanceGroupManagersDeleteInstancesRequest{..}
+          = object
+              (catMaybes [("instances" .=) <$> _igmdirInstances])
+
 --
 -- /See:/ 'instanceGroupManagersListManagedInstancesResponse' smart constructor.
 newtype InstanceGroupManagersListManagedInstancesResponse = InstanceGroupManagersListManagedInstancesResponse
@@ -4720,6 +6199,26 @@ igmlmirManagedInstances
       . _Default
       . _Coerce
 
+instance FromJSON
+         InstanceGroupManagersListManagedInstancesResponse
+         where
+        parseJSON
+          = withObject
+              "InstanceGroupManagersListManagedInstancesResponse"
+              (\ o ->
+                 InstanceGroupManagersListManagedInstancesResponse <$>
+                   (o .:? "managedInstances" .!= mempty))
+
+instance ToJSON
+         InstanceGroupManagersListManagedInstancesResponse
+         where
+        toJSON
+          InstanceGroupManagersListManagedInstancesResponse{..}
+          = object
+              (catMaybes
+                 [("managedInstances" .=) <$>
+                    _igmlmirManagedInstances])
+
 --
 -- /See:/ 'instanceGroupManagersRecreateInstancesRequest' smart constructor.
 newtype InstanceGroupManagersRecreateInstancesRequest = InstanceGroupManagersRecreateInstancesRequest
@@ -4745,6 +6244,22 @@ igmrirInstances
       (\ s a -> s{_igmrirInstances = a})
       . _Default
       . _Coerce
+
+instance FromJSON
+         InstanceGroupManagersRecreateInstancesRequest where
+        parseJSON
+          = withObject
+              "InstanceGroupManagersRecreateInstancesRequest"
+              (\ o ->
+                 InstanceGroupManagersRecreateInstancesRequest <$>
+                   (o .:? "instances" .!= mempty))
+
+instance ToJSON
+         InstanceGroupManagersRecreateInstancesRequest where
+        toJSON
+          InstanceGroupManagersRecreateInstancesRequest{..}
+          = object
+              (catMaybes [("instances" .=) <$> _igmrirInstances])
 
 --
 -- /See:/ 'instanceGroupManagersScopedList' smart constructor.
@@ -4783,6 +6298,23 @@ igmslInstanceGroupManagers
       . _Default
       . _Coerce
 
+instance FromJSON InstanceGroupManagersScopedList
+         where
+        parseJSON
+          = withObject "InstanceGroupManagersScopedList"
+              (\ o ->
+                 InstanceGroupManagersScopedList <$>
+                   (o .:? "warning") <*>
+                     (o .:? "instanceGroupManagers" .!= mempty))
+
+instance ToJSON InstanceGroupManagersScopedList where
+        toJSON InstanceGroupManagersScopedList{..}
+          = object
+              (catMaybes
+                 [("warning" .=) <$> _igmslWarning,
+                  ("instanceGroupManagers" .=) <$>
+                    _igmslInstanceGroupManagers])
+
 --
 -- /See:/ 'instanceGroupManagersScopedListItemDataWarning' smart constructor.
 data InstanceGroupManagersScopedListItemDataWarning = InstanceGroupManagersScopedListItemDataWarning
@@ -4815,6 +6347,24 @@ igmslidwValue
 igmslidwKey :: Lens' InstanceGroupManagersScopedListItemDataWarning (Maybe Text)
 igmslidwKey
   = lens _igmslidwKey (\ s a -> s{_igmslidwKey = a})
+
+instance FromJSON
+         InstanceGroupManagersScopedListItemDataWarning where
+        parseJSON
+          = withObject
+              "InstanceGroupManagersScopedListItemDataWarning"
+              (\ o ->
+                 InstanceGroupManagersScopedListItemDataWarning <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON
+         InstanceGroupManagersScopedListItemDataWarning where
+        toJSON
+          InstanceGroupManagersScopedListItemDataWarning{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _igmslidwValue,
+                  ("key" .=) <$> _igmslidwKey])
 
 -- | [Output Only] The warning that replaces the list of managed instance
 -- groups when the list is empty.
@@ -4862,6 +6412,24 @@ igmslwMessage
   = lens _igmslwMessage
       (\ s a -> s{_igmslwMessage = a})
 
+instance FromJSON
+         InstanceGroupManagersScopedListWarning where
+        parseJSON
+          = withObject "InstanceGroupManagersScopedListWarning"
+              (\ o ->
+                 InstanceGroupManagersScopedListWarning <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON
+         InstanceGroupManagersScopedListWarning where
+        toJSON InstanceGroupManagersScopedListWarning{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _igmslwData,
+                  ("code" .=) <$> _igmslwCode,
+                  ("message" .=) <$> _igmslwMessage])
+
 --
 -- /See:/ 'instanceGroupManagersSetInstanceTemplateRequest' smart constructor.
 newtype InstanceGroupManagersSetInstanceTemplateRequest = InstanceGroupManagersSetInstanceTemplateRequest
@@ -4887,6 +6455,24 @@ igmsitrInstanceTemplate :: Lens' InstanceGroupManagersSetInstanceTemplateRequest
 igmsitrInstanceTemplate
   = lens _igmsitrInstanceTemplate
       (\ s a -> s{_igmsitrInstanceTemplate = a})
+
+instance FromJSON
+         InstanceGroupManagersSetInstanceTemplateRequest where
+        parseJSON
+          = withObject
+              "InstanceGroupManagersSetInstanceTemplateRequest"
+              (\ o ->
+                 InstanceGroupManagersSetInstanceTemplateRequest <$>
+                   (o .:? "instanceTemplate"))
+
+instance ToJSON
+         InstanceGroupManagersSetInstanceTemplateRequest where
+        toJSON
+          InstanceGroupManagersSetInstanceTemplateRequest{..}
+          = object
+              (catMaybes
+                 [("instanceTemplate" .=) <$>
+                    _igmsitrInstanceTemplate])
 
 --
 -- /See:/ 'instanceGroupManagersSetTargetPoolsRequest' smart constructor.
@@ -4931,6 +6517,24 @@ igmstprTargetPools
       . _Default
       . _Coerce
 
+instance FromJSON
+         InstanceGroupManagersSetTargetPoolsRequest where
+        parseJSON
+          = withObject
+              "InstanceGroupManagersSetTargetPoolsRequest"
+              (\ o ->
+                 InstanceGroupManagersSetTargetPoolsRequest <$>
+                   (o .:? "fingerprint") <*>
+                     (o .:? "targetPools" .!= mempty))
+
+instance ToJSON
+         InstanceGroupManagersSetTargetPoolsRequest where
+        toJSON InstanceGroupManagersSetTargetPoolsRequest{..}
+          = object
+              (catMaybes
+                 [("fingerprint" .=) <$> _igmstprFingerprint,
+                  ("targetPools" .=) <$> _igmstprTargetPools])
+
 --
 -- /See:/ 'instanceGroupsAddInstancesRequest' smart constructor.
 newtype InstanceGroupsAddInstancesRequest = InstanceGroupsAddInstancesRequest
@@ -4956,6 +6560,20 @@ igairInstances
       (\ s a -> s{_igairInstances = a})
       . _Default
       . _Coerce
+
+instance FromJSON InstanceGroupsAddInstancesRequest
+         where
+        parseJSON
+          = withObject "InstanceGroupsAddInstancesRequest"
+              (\ o ->
+                 InstanceGroupsAddInstancesRequest <$>
+                   (o .:? "instances" .!= mempty))
+
+instance ToJSON InstanceGroupsAddInstancesRequest
+         where
+        toJSON InstanceGroupsAddInstancesRequest{..}
+          = object
+              (catMaybes [("instances" .=) <$> _igairInstances])
 
 --
 -- /See:/ 'instanceGroupsListInstances' smart constructor.
@@ -5021,6 +6639,28 @@ igliSelfLink
 igliId :: Lens' InstanceGroupsListInstances (Maybe Text)
 igliId = lens _igliId (\ s a -> s{_igliId = a})
 
+instance FromJSON InstanceGroupsListInstances where
+        parseJSON
+          = withObject "InstanceGroupsListInstances"
+              (\ o ->
+                 InstanceGroupsListInstances <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!=
+                        "compute#instanceGroupsListInstances")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON InstanceGroupsListInstances where
+        toJSON InstanceGroupsListInstances{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _igliNextPageToken,
+                  Just ("kind" .= _igliKind),
+                  ("items" .=) <$> _igliItems,
+                  ("selfLink" .=) <$> _igliSelfLink,
+                  ("id" .=) <$> _igliId])
+
 --
 -- /See:/ 'instanceGroupsListInstancesRequest' smart constructor.
 newtype InstanceGroupsListInstancesRequest = InstanceGroupsListInstancesRequest
@@ -5047,6 +6687,21 @@ iglirInstanceState
   = lens _iglirInstanceState
       (\ s a -> s{_iglirInstanceState = a})
 
+instance FromJSON InstanceGroupsListInstancesRequest
+         where
+        parseJSON
+          = withObject "InstanceGroupsListInstancesRequest"
+              (\ o ->
+                 InstanceGroupsListInstancesRequest <$>
+                   (o .:? "instanceState"))
+
+instance ToJSON InstanceGroupsListInstancesRequest
+         where
+        toJSON InstanceGroupsListInstancesRequest{..}
+          = object
+              (catMaybes
+                 [("instanceState" .=) <$> _iglirInstanceState])
+
 --
 -- /See:/ 'instanceGroupsRemoveInstancesRequest' smart constructor.
 newtype InstanceGroupsRemoveInstancesRequest = InstanceGroupsRemoveInstancesRequest
@@ -5072,6 +6727,20 @@ igrirInstances
       (\ s a -> s{_igrirInstances = a})
       . _Default
       . _Coerce
+
+instance FromJSON
+         InstanceGroupsRemoveInstancesRequest where
+        parseJSON
+          = withObject "InstanceGroupsRemoveInstancesRequest"
+              (\ o ->
+                 InstanceGroupsRemoveInstancesRequest <$>
+                   (o .:? "instances" .!= mempty))
+
+instance ToJSON InstanceGroupsRemoveInstancesRequest
+         where
+        toJSON InstanceGroupsRemoveInstancesRequest{..}
+          = object
+              (catMaybes [("instances" .=) <$> _igrirInstances])
 
 --
 -- /See:/ 'instanceGroupsScopedList' smart constructor.
@@ -5110,6 +6779,21 @@ igslInstanceGroups
       . _Default
       . _Coerce
 
+instance FromJSON InstanceGroupsScopedList where
+        parseJSON
+          = withObject "InstanceGroupsScopedList"
+              (\ o ->
+                 InstanceGroupsScopedList <$>
+                   (o .:? "warning") <*>
+                     (o .:? "instanceGroups" .!= mempty))
+
+instance ToJSON InstanceGroupsScopedList where
+        toJSON InstanceGroupsScopedList{..}
+          = object
+              (catMaybes
+                 [("warning" .=) <$> _igslWarning,
+                  ("instanceGroups" .=) <$> _igslInstanceGroups])
+
 --
 -- /See:/ 'instanceGroupsScopedListItemDataWarning' smart constructor.
 data InstanceGroupsScopedListItemDataWarning = InstanceGroupsScopedListItemDataWarning
@@ -5141,6 +6825,23 @@ igslidwValue
 igslidwKey :: Lens' InstanceGroupsScopedListItemDataWarning (Maybe Text)
 igslidwKey
   = lens _igslidwKey (\ s a -> s{_igslidwKey = a})
+
+instance FromJSON
+         InstanceGroupsScopedListItemDataWarning where
+        parseJSON
+          = withObject
+              "InstanceGroupsScopedListItemDataWarning"
+              (\ o ->
+                 InstanceGroupsScopedListItemDataWarning <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON
+         InstanceGroupsScopedListItemDataWarning where
+        toJSON InstanceGroupsScopedListItemDataWarning{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _igslidwValue,
+                  ("key" .=) <$> _igslidwKey])
 
 -- | [Output Only] An informational warning that replaces the list of
 -- instance groups when the list is empty.
@@ -5187,6 +6888,23 @@ igslwMessage :: Lens' InstanceGroupsScopedListWarning (Maybe Text)
 igslwMessage
   = lens _igslwMessage (\ s a -> s{_igslwMessage = a})
 
+instance FromJSON InstanceGroupsScopedListWarning
+         where
+        parseJSON
+          = withObject "InstanceGroupsScopedListWarning"
+              (\ o ->
+                 InstanceGroupsScopedListWarning <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON InstanceGroupsScopedListWarning where
+        toJSON InstanceGroupsScopedListWarning{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _igslwData,
+                  ("code" .=) <$> _igslwCode,
+                  ("message" .=) <$> _igslwMessage])
+
 --
 -- /See:/ 'instanceGroupsSetNamedPortsRequest' smart constructor.
 data InstanceGroupsSetNamedPortsRequest = InstanceGroupsSetNamedPortsRequest
@@ -5224,6 +6942,23 @@ igsnprNamedPorts
       (\ s a -> s{_igsnprNamedPorts = a})
       . _Default
       . _Coerce
+
+instance FromJSON InstanceGroupsSetNamedPortsRequest
+         where
+        parseJSON
+          = withObject "InstanceGroupsSetNamedPortsRequest"
+              (\ o ->
+                 InstanceGroupsSetNamedPortsRequest <$>
+                   (o .:? "fingerprint") <*>
+                     (o .:? "namedPorts" .!= mempty))
+
+instance ToJSON InstanceGroupsSetNamedPortsRequest
+         where
+        toJSON InstanceGroupsSetNamedPortsRequest{..}
+          = object
+              (catMaybes
+                 [("fingerprint" .=) <$> _igsnprFingerprint,
+                  ("namedPorts" .=) <$> _igsnprNamedPorts])
 
 -- | Contains a list of instance resources.
 --
@@ -5286,6 +7021,26 @@ ilSelfLink
 ilId :: Lens' InstanceList (Maybe Text)
 ilId = lens _ilId (\ s a -> s{_ilId = a})
 
+instance FromJSON InstanceList where
+        parseJSON
+          = withObject "InstanceList"
+              (\ o ->
+                 InstanceList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#instanceList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON InstanceList where
+        toJSON InstanceList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _ilNextPageToken,
+                  Just ("kind" .= _ilKind), ("items" .=) <$> _ilItems,
+                  ("selfLink" .=) <$> _ilSelfLink,
+                  ("id" .=) <$> _ilId])
+
 --
 -- /See:/ 'instanceMoveRequest' smart constructor.
 data InstanceMoveRequest = InstanceMoveRequest
@@ -5327,6 +7082,21 @@ imrDestinationZone :: Lens' InstanceMoveRequest (Maybe Text)
 imrDestinationZone
   = lens _imrDestinationZone
       (\ s a -> s{_imrDestinationZone = a})
+
+instance FromJSON InstanceMoveRequest where
+        parseJSON
+          = withObject "InstanceMoveRequest"
+              (\ o ->
+                 InstanceMoveRequest <$>
+                   (o .:? "targetInstance") <*>
+                     (o .:? "destinationZone"))
+
+instance ToJSON InstanceMoveRequest where
+        toJSON InstanceMoveRequest{..}
+          = object
+              (catMaybes
+                 [("targetInstance" .=) <$> _imrTargetInstance,
+                  ("destinationZone" .=) <$> _imrDestinationZone])
 
 -- |
 --
@@ -5454,6 +7224,35 @@ ipDescription
 ipTags :: Lens' InstanceProperties (Maybe (Maybe Tags))
 ipTags = lens _ipTags (\ s a -> s{_ipTags = a})
 
+instance FromJSON InstanceProperties where
+        parseJSON
+          = withObject "InstanceProperties"
+              (\ o ->
+                 InstanceProperties <$>
+                   (o .:? "serviceAccounts" .!= mempty) <*>
+                     (o .:? "networkInterfaces" .!= mempty)
+                     <*> (o .:? "machineType")
+                     <*> (o .:? "metadata")
+                     <*> (o .:? "scheduling")
+                     <*> (o .:? "disks" .!= mempty)
+                     <*> (o .:? "canIpForward")
+                     <*> (o .:? "description")
+                     <*> (o .:? "tags"))
+
+instance ToJSON InstanceProperties where
+        toJSON InstanceProperties{..}
+          = object
+              (catMaybes
+                 [("serviceAccounts" .=) <$> _ipServiceAccounts,
+                  ("networkInterfaces" .=) <$> _ipNetworkInterfaces,
+                  ("machineType" .=) <$> _ipMachineType,
+                  ("metadata" .=) <$> _ipMetadata,
+                  ("scheduling" .=) <$> _ipScheduling,
+                  ("disks" .=) <$> _ipDisks,
+                  ("canIpForward" .=) <$> _ipCanIpForward,
+                  ("description" .=) <$> _ipDescription,
+                  ("tags" .=) <$> _ipTags])
+
 --
 -- /See:/ 'instanceReference' smart constructor.
 newtype InstanceReference = InstanceReference
@@ -5475,6 +7274,16 @@ instanceReference =
 irInstance :: Lens' InstanceReference (Maybe Text)
 irInstance
   = lens _irInstance (\ s a -> s{_irInstance = a})
+
+instance FromJSON InstanceReference where
+        parseJSON
+          = withObject "InstanceReference"
+              (\ o -> InstanceReference <$> (o .:? "instance"))
+
+instance ToJSON InstanceReference where
+        toJSON InstanceReference{..}
+          = object
+              (catMaybes [("instance" .=) <$> _irInstance])
 
 -- | An Instance Template resource.
 --
@@ -5558,6 +7367,31 @@ itProperties :: Lens' InstanceTemplate (Maybe (Maybe InstanceProperties))
 itProperties
   = lens _itProperties (\ s a -> s{_itProperties = a})
 
+instance FromJSON InstanceTemplate where
+        parseJSON
+          = withObject "InstanceTemplate"
+              (\ o ->
+                 InstanceTemplate <$>
+                   (o .:? "kind" .!= "compute#instanceTemplate") <*>
+                     (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "id")
+                     <*> (o .:? "description")
+                     <*> (o .:? "properties"))
+
+instance ToJSON InstanceTemplate where
+        toJSON InstanceTemplate{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _itKind),
+                  ("selfLink" .=) <$> _itSelfLink,
+                  ("name" .=) <$> _itName,
+                  ("creationTimestamp" .=) <$> _itCreationTimestamp,
+                  ("id" .=) <$> _itId,
+                  ("description" .=) <$> _itDescription,
+                  ("properties" .=) <$> _itProperties])
+
 -- | A list of instance templates.
 --
 -- /See:/ 'instanceTemplateList' smart constructor.
@@ -5622,6 +7456,27 @@ itlSelfLink
 itlId :: Lens' InstanceTemplateList (Maybe Text)
 itlId = lens _itlId (\ s a -> s{_itlId = a})
 
+instance FromJSON InstanceTemplateList where
+        parseJSON
+          = withObject "InstanceTemplateList"
+              (\ o ->
+                 InstanceTemplateList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#instanceTemplateList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON InstanceTemplateList where
+        toJSON InstanceTemplateList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _itlNextPageToken,
+                  Just ("kind" .= _itlKind),
+                  ("items" .=) <$> _itlItems,
+                  ("selfLink" .=) <$> _itlSelfLink,
+                  ("id" .=) <$> _itlId])
+
 --
 -- /See:/ 'instanceWithNamedPorts' smart constructor.
 data InstanceWithNamedPorts = InstanceWithNamedPorts
@@ -5666,6 +7521,22 @@ iwnpInstance :: Lens' InstanceWithNamedPorts (Maybe Text)
 iwnpInstance
   = lens _iwnpInstance (\ s a -> s{_iwnpInstance = a})
 
+instance FromJSON InstanceWithNamedPorts where
+        parseJSON
+          = withObject "InstanceWithNamedPorts"
+              (\ o ->
+                 InstanceWithNamedPorts <$>
+                   (o .:? "status") <*> (o .:? "namedPorts" .!= mempty)
+                     <*> (o .:? "instance"))
+
+instance ToJSON InstanceWithNamedPorts where
+        toJSON InstanceWithNamedPorts{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _iwnpStatus,
+                  ("namedPorts" .=) <$> _iwnpNamedPorts,
+                  ("instance" .=) <$> _iwnpInstance])
+
 --
 -- /See:/ 'instancesScopedList' smart constructor.
 data InstancesScopedList = InstancesScopedList
@@ -5701,6 +7572,20 @@ islInstances
       . _Default
       . _Coerce
 
+instance FromJSON InstancesScopedList where
+        parseJSON
+          = withObject "InstancesScopedList"
+              (\ o ->
+                 InstancesScopedList <$>
+                   (o .:? "warning") <*> (o .:? "instances" .!= mempty))
+
+instance ToJSON InstancesScopedList where
+        toJSON InstancesScopedList{..}
+          = object
+              (catMaybes
+                 [("warning" .=) <$> _islWarning,
+                  ("instances" .=) <$> _islInstances])
+
 --
 -- /See:/ 'instancesScopedListItemDataWarning' smart constructor.
 data InstancesScopedListItemDataWarning = InstancesScopedListItemDataWarning
@@ -5732,6 +7617,22 @@ islidwValue
 islidwKey :: Lens' InstancesScopedListItemDataWarning (Maybe Text)
 islidwKey
   = lens _islidwKey (\ s a -> s{_islidwKey = a})
+
+instance FromJSON InstancesScopedListItemDataWarning
+         where
+        parseJSON
+          = withObject "InstancesScopedListItemDataWarning"
+              (\ o ->
+                 InstancesScopedListItemDataWarning <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON InstancesScopedListItemDataWarning
+         where
+        toJSON InstancesScopedListItemDataWarning{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _islidwValue,
+                  ("key" .=) <$> _islidwKey])
 
 -- | [Output Only] Informational warning which replaces the list of instances
 -- when the list is empty.
@@ -5776,6 +7677,22 @@ islwCode = lens _islwCode (\ s a -> s{_islwCode = a})
 islwMessage :: Lens' InstancesScopedListWarning (Maybe Text)
 islwMessage
   = lens _islwMessage (\ s a -> s{_islwMessage = a})
+
+instance FromJSON InstancesScopedListWarning where
+        parseJSON
+          = withObject "InstancesScopedListWarning"
+              (\ o ->
+                 InstancesScopedListWarning <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON InstancesScopedListWarning where
+        toJSON InstancesScopedListWarning{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _islwData,
+                  ("code" .=) <$> _islwCode,
+                  ("message" .=) <$> _islwMessage])
 
 -- | A license resource.
 --
@@ -5828,6 +7745,25 @@ lSelfLink
 -- complies with RFC1035.
 lName :: Lens' License (Maybe Text)
 lName = lens _lName (\ s a -> s{_lName = a})
+
+instance FromJSON License where
+        parseJSON
+          = withObject "License"
+              (\ o ->
+                 License <$>
+                   (o .:? "chargesUseFee") <*>
+                     (o .:? "kind" .!= "compute#license")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name"))
+
+instance ToJSON License where
+        toJSON License{..}
+          = object
+              (catMaybes
+                 [("chargesUseFee" .=) <$> _lChargesUseFee,
+                  Just ("kind" .= _lKind),
+                  ("selfLink" .=) <$> _lSelfLink,
+                  ("name" .=) <$> _lName])
 
 -- | A Machine Type resource.
 --
@@ -5977,6 +7913,47 @@ mtDeprecated :: Lens' MachineType (Maybe (Maybe DeprecationStatus))
 mtDeprecated
   = lens _mtDeprecated (\ s a -> s{_mtDeprecated = a})
 
+instance FromJSON MachineType where
+        parseJSON
+          = withObject "MachineType"
+              (\ o ->
+                 MachineType <$>
+                   (o .:? "kind" .!= "compute#machineType") <*>
+                     (o .:? "imageSpaceGb")
+                     <*> (o .:? "zone")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "scratchDisks" .!= mempty)
+                     <*> (o .:? "id")
+                     <*> (o .:? "guestCpus")
+                     <*> (o .:? "maximumPersistentDisksSizeGb")
+                     <*> (o .:? "maximumPersistentDisks")
+                     <*> (o .:? "memoryMb")
+                     <*> (o .:? "description")
+                     <*> (o .:? "deprecated"))
+
+instance ToJSON MachineType where
+        toJSON MachineType{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _mtKind),
+                  ("imageSpaceGb" .=) <$> _mtImageSpaceGb,
+                  ("zone" .=) <$> _mtZone,
+                  ("selfLink" .=) <$> _mtSelfLink,
+                  ("name" .=) <$> _mtName,
+                  ("creationTimestamp" .=) <$> _mtCreationTimestamp,
+                  ("scratchDisks" .=) <$> _mtScratchDisks,
+                  ("id" .=) <$> _mtId,
+                  ("guestCpus" .=) <$> _mtGuestCpus,
+                  ("maximumPersistentDisksSizeGb" .=) <$>
+                    _mtMaximumPersistentDisksSizeGb,
+                  ("maximumPersistentDisks" .=) <$>
+                    _mtMaximumPersistentDisks,
+                  ("memoryMb" .=) <$> _mtMemoryMb,
+                  ("description" .=) <$> _mtDescription,
+                  ("deprecated" .=) <$> _mtDeprecated])
+
 --
 -- /See:/ 'machineTypeAggregatedList' smart constructor.
 data MachineTypeAggregatedList = MachineTypeAggregatedList
@@ -6036,6 +8013,28 @@ mtalSelfLink
 mtalId :: Lens' MachineTypeAggregatedList (Maybe Text)
 mtalId = lens _mtalId (\ s a -> s{_mtalId = a})
 
+instance FromJSON MachineTypeAggregatedList where
+        parseJSON
+          = withObject "MachineTypeAggregatedList"
+              (\ o ->
+                 MachineTypeAggregatedList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!=
+                        "compute#machineTypeAggregatedList")
+                     <*> (o .:? "items")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON MachineTypeAggregatedList where
+        toJSON MachineTypeAggregatedList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _mtalNextPageToken,
+                  Just ("kind" .= _mtalKind),
+                  ("items" .=) <$> _mtalItems,
+                  ("selfLink" .=) <$> _mtalSelfLink,
+                  ("id" .=) <$> _mtalId])
+
 -- | [Output Only] A map of scoped machine type lists.
 --
 -- /See:/ 'machineTypeAggregatedListItems' smart constructor.
@@ -6048,6 +8047,15 @@ data MachineTypeAggregatedListItems =
 machineTypeAggregatedListItems
     :: MachineTypeAggregatedListItems
 machineTypeAggregatedListItems = MachineTypeAggregatedListItems
+
+instance FromJSON MachineTypeAggregatedListItems
+         where
+        parseJSON
+          = withObject "MachineTypeAggregatedListItems"
+              (\ o -> pure MachineTypeAggregatedListItems)
+
+instance ToJSON MachineTypeAggregatedListItems where
+        toJSON = const (Object mempty)
 
 --
 -- /See:/ 'machineTypeItemScratchDisks' smart constructor.
@@ -6071,6 +8079,16 @@ machineTypeItemScratchDisks =
 mtisdDiskGb :: Lens' MachineTypeItemScratchDisks (Maybe Int32)
 mtisdDiskGb
   = lens _mtisdDiskGb (\ s a -> s{_mtisdDiskGb = a})
+
+instance FromJSON MachineTypeItemScratchDisks where
+        parseJSON
+          = withObject "MachineTypeItemScratchDisks"
+              (\ o ->
+                 MachineTypeItemScratchDisks <$> (o .:? "diskGb"))
+
+instance ToJSON MachineTypeItemScratchDisks where
+        toJSON MachineTypeItemScratchDisks{..}
+          = object (catMaybes [("diskGb" .=) <$> _mtisdDiskGb])
 
 -- | Contains a list of Machine Type resources.
 --
@@ -6134,6 +8152,27 @@ mtlSelfLink
 mtlId :: Lens' MachineTypeList (Maybe Text)
 mtlId = lens _mtlId (\ s a -> s{_mtlId = a})
 
+instance FromJSON MachineTypeList where
+        parseJSON
+          = withObject "MachineTypeList"
+              (\ o ->
+                 MachineTypeList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#machineTypeList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON MachineTypeList where
+        toJSON MachineTypeList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _mtlNextPageToken,
+                  Just ("kind" .= _mtlKind),
+                  ("items" .=) <$> _mtlItems,
+                  ("selfLink" .=) <$> _mtlSelfLink,
+                  ("id" .=) <$> _mtlId])
+
 --
 -- /See:/ 'machineTypesScopedList' smart constructor.
 data MachineTypesScopedList = MachineTypesScopedList
@@ -6170,6 +8209,21 @@ mtslWarning :: Lens' MachineTypesScopedList (Maybe MachineTypesScopedListWarning
 mtslWarning
   = lens _mtslWarning (\ s a -> s{_mtslWarning = a})
 
+instance FromJSON MachineTypesScopedList where
+        parseJSON
+          = withObject "MachineTypesScopedList"
+              (\ o ->
+                 MachineTypesScopedList <$>
+                   (o .:? "machineTypes" .!= mempty) <*>
+                     (o .:? "warning"))
+
+instance ToJSON MachineTypesScopedList where
+        toJSON MachineTypesScopedList{..}
+          = object
+              (catMaybes
+                 [("machineTypes" .=) <$> _mtslMachineTypes,
+                  ("warning" .=) <$> _mtslWarning])
+
 --
 -- /See:/ 'machineTypesScopedListItemDataWarning' smart constructor.
 data MachineTypesScopedListItemDataWarning = MachineTypesScopedListItemDataWarning
@@ -6201,6 +8255,22 @@ mtslidwValue
 mtslidwKey :: Lens' MachineTypesScopedListItemDataWarning (Maybe Text)
 mtslidwKey
   = lens _mtslidwKey (\ s a -> s{_mtslidwKey = a})
+
+instance FromJSON
+         MachineTypesScopedListItemDataWarning where
+        parseJSON
+          = withObject "MachineTypesScopedListItemDataWarning"
+              (\ o ->
+                 MachineTypesScopedListItemDataWarning <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON MachineTypesScopedListItemDataWarning
+         where
+        toJSON MachineTypesScopedListItemDataWarning{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _mtslidwValue,
+                  ("key" .=) <$> _mtslidwKey])
 
 -- | [Output Only] An informational warning that appears when the machine
 -- types list is empty.
@@ -6246,6 +8316,22 @@ mtslwCode
 mtslwMessage :: Lens' MachineTypesScopedListWarning (Maybe Text)
 mtslwMessage
   = lens _mtslwMessage (\ s a -> s{_mtslwMessage = a})
+
+instance FromJSON MachineTypesScopedListWarning where
+        parseJSON
+          = withObject "MachineTypesScopedListWarning"
+              (\ o ->
+                 MachineTypesScopedListWarning <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON MachineTypesScopedListWarning where
+        toJSON MachineTypesScopedListWarning{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _mtslwData,
+                  ("code" .=) <$> _mtslwCode,
+                  ("message" .=) <$> _mtslwMessage])
 
 --
 -- /See:/ 'managedInstance' smart constructor.
@@ -6310,6 +8396,26 @@ miInstance :: Lens' ManagedInstance (Maybe Text)
 miInstance
   = lens _miInstance (\ s a -> s{_miInstance = a})
 
+instance FromJSON ManagedInstance where
+        parseJSON
+          = withObject "ManagedInstance"
+              (\ o ->
+                 ManagedInstance <$>
+                   (o .:? "lastAttempt") <*> (o .:? "currentAction") <*>
+                     (o .:? "id")
+                     <*> (o .:? "instanceStatus")
+                     <*> (o .:? "instance"))
+
+instance ToJSON ManagedInstance where
+        toJSON ManagedInstance{..}
+          = object
+              (catMaybes
+                 [("lastAttempt" .=) <$> _miLastAttempt,
+                  ("currentAction" .=) <$> _miCurrentAction,
+                  ("id" .=) <$> _miId,
+                  ("instanceStatus" .=) <$> _miInstanceStatus,
+                  ("instance" .=) <$> _miInstance])
+
 --
 -- /See:/ 'managedInstanceLastAttempt' smart constructor.
 newtype ManagedInstanceLastAttempt = ManagedInstanceLastAttempt
@@ -6333,6 +8439,16 @@ managedInstanceLastAttempt =
 milaErrors :: Lens' ManagedInstanceLastAttempt (Maybe ManagedInstanceLastAttemptErrors)
 milaErrors
   = lens _milaErrors (\ s a -> s{_milaErrors = a})
+
+instance FromJSON ManagedInstanceLastAttempt where
+        parseJSON
+          = withObject "ManagedInstanceLastAttempt"
+              (\ o ->
+                 ManagedInstanceLastAttempt <$> (o .:? "errors"))
+
+instance ToJSON ManagedInstanceLastAttempt where
+        toJSON ManagedInstanceLastAttempt{..}
+          = object (catMaybes [("errors" .=) <$> _milaErrors])
 
 -- | Encountered errors during the last attempt to create or delete the
 -- instance.
@@ -6361,6 +8477,19 @@ milaeErrors
   = lens _milaeErrors (\ s a -> s{_milaeErrors = a}) .
       _Default
       . _Coerce
+
+instance FromJSON ManagedInstanceLastAttemptErrors
+         where
+        parseJSON
+          = withObject "ManagedInstanceLastAttemptErrors"
+              (\ o ->
+                 ManagedInstanceLastAttemptErrors <$>
+                   (o .:? "errors" .!= mempty))
+
+instance ToJSON ManagedInstanceLastAttemptErrors
+         where
+        toJSON ManagedInstanceLastAttemptErrors{..}
+          = object (catMaybes [("errors" .=) <$> _milaeErrors])
 
 --
 -- /See:/ 'managedInstanceLastAttemptItemErrorsErrors' smart constructor.
@@ -6405,6 +8534,25 @@ milaieeMessage :: Lens' ManagedInstanceLastAttemptItemErrorsErrors (Maybe Text)
 milaieeMessage
   = lens _milaieeMessage
       (\ s a -> s{_milaieeMessage = a})
+
+instance FromJSON
+         ManagedInstanceLastAttemptItemErrorsErrors where
+        parseJSON
+          = withObject
+              "ManagedInstanceLastAttemptItemErrorsErrors"
+              (\ o ->
+                 ManagedInstanceLastAttemptItemErrorsErrors <$>
+                   (o .:? "location") <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON
+         ManagedInstanceLastAttemptItemErrorsErrors where
+        toJSON ManagedInstanceLastAttemptItemErrorsErrors{..}
+          = object
+              (catMaybes
+                 [("location" .=) <$> _milaieeLocation,
+                  ("code" .=) <$> _milaieeCode,
+                  ("message" .=) <$> _milaieeMessage])
 
 -- | A metadata key\/value entry.
 --
@@ -6454,6 +8602,23 @@ mItems
   = lens _mItems (\ s a -> s{_mItems = a}) . _Default .
       _Coerce
 
+instance FromJSON Metadata where
+        parseJSON
+          = withObject "Metadata"
+              (\ o ->
+                 Metadata <$>
+                   (o .:? "kind" .!= "compute#metadata") <*>
+                     (o .:? "fingerprint")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON Metadata where
+        toJSON Metadata{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _mKind),
+                  ("fingerprint" .=) <$> _mFingerprint,
+                  ("items" .=) <$> _mItems])
+
 --
 -- /See:/ 'metadataItemItems' smart constructor.
 data MetadataItemItems = MetadataItemItems
@@ -6491,6 +8656,19 @@ miiValue = lens _miiValue (\ s a -> s{_miiValue = a})
 miiKey :: Lens' MetadataItemItems (Maybe Text)
 miiKey = lens _miiKey (\ s a -> s{_miiKey = a})
 
+instance FromJSON MetadataItemItems where
+        parseJSON
+          = withObject "MetadataItemItems"
+              (\ o ->
+                 MetadataItemItems <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON MetadataItemItems where
+        toJSON MetadataItemItems{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _miiValue, ("key" .=) <$> _miiKey])
+
 -- | The named port information. For example: .
 --
 -- /See:/ 'namedPort' smart constructor.
@@ -6521,6 +8699,18 @@ npName = lens _npName (\ s a -> s{_npName = a})
 -- | The port number, which can be a value between 1 and 65535.
 npPort :: Lens' NamedPort (Maybe Int32)
 npPort = lens _npPort (\ s a -> s{_npPort = a})
+
+instance FromJSON NamedPort where
+        parseJSON
+          = withObject "NamedPort"
+              (\ o ->
+                 NamedPort <$> (o .:? "name") <*> (o .:? "port"))
+
+instance ToJSON NamedPort where
+        toJSON NamedPort{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _npName, ("port" .=) <$> _npPort])
 
 -- | A network resource.
 --
@@ -6618,6 +8808,33 @@ nDescription :: Lens' Network (Maybe Text)
 nDescription
   = lens _nDescription (\ s a -> s{_nDescription = a})
 
+instance FromJSON Network where
+        parseJSON
+          = withObject "Network"
+              (\ o ->
+                 Network <$>
+                   (o .:? "kind" .!= "compute#network") <*>
+                     (o .:? "IPv4Range")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "id")
+                     <*> (o .:? "gatewayIPv4")
+                     <*> (o .:? "description"))
+
+instance ToJSON Network where
+        toJSON Network{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _nKind),
+                  ("IPv4Range" .=) <$> _nIPv4Range,
+                  ("selfLink" .=) <$> _nSelfLink,
+                  ("name" .=) <$> _nName,
+                  ("creationTimestamp" .=) <$> _nCreationTimestamp,
+                  ("id" .=) <$> _nId,
+                  ("gatewayIPv4" .=) <$> _nGatewayIPv4,
+                  ("description" .=) <$> _nDescription])
+
 -- | A network interface resource attached to an instance.
 --
 -- /See:/ 'networkInterface' smart constructor.
@@ -6683,6 +8900,24 @@ niAccessConfigs
       . _Default
       . _Coerce
 
+instance FromJSON NetworkInterface where
+        parseJSON
+          = withObject "NetworkInterface"
+              (\ o ->
+                 NetworkInterface <$>
+                   (o .:? "network") <*> (o .:? "name") <*>
+                     (o .:? "networkIP")
+                     <*> (o .:? "accessConfigs" .!= mempty))
+
+instance ToJSON NetworkInterface where
+        toJSON NetworkInterface{..}
+          = object
+              (catMaybes
+                 [("network" .=) <$> _niNetwork,
+                  ("name" .=) <$> _niName,
+                  ("networkIP" .=) <$> _niNetworkIP,
+                  ("accessConfigs" .=) <$> _niAccessConfigs])
+
 -- | Contains a list of Network resources.
 --
 -- /See:/ 'networkList' smart constructor.
@@ -6743,6 +8978,26 @@ nlSelfLink
 -- | [Output Only] Unique identifier for the resource. Defined by the server.
 nlId :: Lens' NetworkList (Maybe Text)
 nlId = lens _nlId (\ s a -> s{_nlId = a})
+
+instance FromJSON NetworkList where
+        parseJSON
+          = withObject "NetworkList"
+              (\ o ->
+                 NetworkList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#networkList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON NetworkList where
+        toJSON NetworkList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _nlNextPageToken,
+                  Just ("kind" .= _nlKind), ("items" .=) <$> _nlItems,
+                  ("selfLink" .=) <$> _nlSelfLink,
+                  ("id" .=) <$> _nlId])
 
 -- | An Operation resource, used to manage asynchronous API requests.
 --
@@ -6975,6 +9230,58 @@ oClientOperationId
   = lens _oClientOperationId
       (\ s a -> s{_oClientOperationId = a})
 
+instance FromJSON Operation where
+        parseJSON
+          = withObject "Operation"
+              (\ o ->
+                 Operation <$>
+                   (o .:? "targetId") <*> (o .:? "status") <*>
+                     (o .:? "insertTime")
+                     <*> (o .:? "progress")
+                     <*> (o .:? "startTime")
+                     <*> (o .:? "kind" .!= "compute#operation")
+                     <*> (o .:? "error")
+                     <*> (o .:? "httpErrorMessage")
+                     <*> (o .:? "zone")
+                     <*> (o .:? "warnings" .!= mempty)
+                     <*> (o .:? "httpErrorStatusCode")
+                     <*> (o .:? "user")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "statusMessage")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "endTime")
+                     <*> (o .:? "id")
+                     <*> (o .:? "operationType")
+                     <*> (o .:? "region")
+                     <*> (o .:? "targetLink")
+                     <*> (o .:? "clientOperationId"))
+
+instance ToJSON Operation where
+        toJSON Operation{..}
+          = object
+              (catMaybes
+                 [("targetId" .=) <$> _oTargetId,
+                  ("status" .=) <$> _oStatus,
+                  ("insertTime" .=) <$> _oInsertTime,
+                  ("progress" .=) <$> _oProgress,
+                  ("startTime" .=) <$> _oStartTime,
+                  Just ("kind" .= _oKind), ("error" .=) <$> _oError,
+                  ("httpErrorMessage" .=) <$> _oHttpErrorMessage,
+                  ("zone" .=) <$> _oZone,
+                  ("warnings" .=) <$> _oWarnings,
+                  ("httpErrorStatusCode" .=) <$> _oHttpErrorStatusCode,
+                  ("user" .=) <$> _oUser,
+                  ("selfLink" .=) <$> _oSelfLink,
+                  ("name" .=) <$> _oName,
+                  ("statusMessage" .=) <$> _oStatusMessage,
+                  ("creationTimestamp" .=) <$> _oCreationTimestamp,
+                  ("endTime" .=) <$> _oEndTime, ("id" .=) <$> _oId,
+                  ("operationType" .=) <$> _oOperationType,
+                  ("region" .=) <$> _oRegion,
+                  ("targetLink" .=) <$> _oTargetLink,
+                  ("clientOperationId" .=) <$> _oClientOperationId])
+
 --
 -- /See:/ 'operationAggregatedList' smart constructor.
 data OperationAggregatedList = OperationAggregatedList
@@ -7033,6 +9340,27 @@ oalSelfLink
 oalId :: Lens' OperationAggregatedList (Maybe Text)
 oalId = lens _oalId (\ s a -> s{_oalId = a})
 
+instance FromJSON OperationAggregatedList where
+        parseJSON
+          = withObject "OperationAggregatedList"
+              (\ o ->
+                 OperationAggregatedList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#operationAggregatedList")
+                     <*> (o .:? "items")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON OperationAggregatedList where
+        toJSON OperationAggregatedList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _oalNextPageToken,
+                  Just ("kind" .= _oalKind),
+                  ("items" .=) <$> _oalItems,
+                  ("selfLink" .=) <$> _oalSelfLink,
+                  ("id" .=) <$> _oalId])
+
 -- | [Output Only] A map of scoped operation lists.
 --
 -- /See:/ 'operationAggregatedListItems' smart constructor.
@@ -7045,6 +9373,14 @@ data OperationAggregatedListItems =
 operationAggregatedListItems
     :: OperationAggregatedListItems
 operationAggregatedListItems = OperationAggregatedListItems
+
+instance FromJSON OperationAggregatedListItems where
+        parseJSON
+          = withObject "OperationAggregatedListItems"
+              (\ o -> pure OperationAggregatedListItems)
+
+instance ToJSON OperationAggregatedListItems where
+        toJSON = const (Object mempty)
 
 -- | [Output Only] If errors are generated during processing of the
 -- operation, this field will be populated.
@@ -7073,6 +9409,16 @@ oeErrors
   = lens _oeErrors (\ s a -> s{_oeErrors = a}) .
       _Default
       . _Coerce
+
+instance FromJSON OperationError where
+        parseJSON
+          = withObject "OperationError"
+              (\ o ->
+                 OperationError <$> (o .:? "errors" .!= mempty))
+
+instance ToJSON OperationError where
+        toJSON OperationError{..}
+          = object (catMaybes [("errors" .=) <$> _oeErrors])
 
 --
 -- /See:/ 'operationItemDataItemWarnings' smart constructor.
@@ -7104,6 +9450,20 @@ oidiwValue
 -- | [Output Only] A key for the warning data.
 oidiwKey :: Lens' OperationItemDataItemWarnings (Maybe Text)
 oidiwKey = lens _oidiwKey (\ s a -> s{_oidiwKey = a})
+
+instance FromJSON OperationItemDataItemWarnings where
+        parseJSON
+          = withObject "OperationItemDataItemWarnings"
+              (\ o ->
+                 OperationItemDataItemWarnings <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON OperationItemDataItemWarnings where
+        toJSON OperationItemDataItemWarnings{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _oidiwValue,
+                  ("key" .=) <$> _oidiwKey])
 
 --
 -- /See:/ 'operationItemErrorsError' smart constructor.
@@ -7146,6 +9506,22 @@ oieeMessage :: Lens' OperationItemErrorsError (Maybe Text)
 oieeMessage
   = lens _oieeMessage (\ s a -> s{_oieeMessage = a})
 
+instance FromJSON OperationItemErrorsError where
+        parseJSON
+          = withObject "OperationItemErrorsError"
+              (\ o ->
+                 OperationItemErrorsError <$>
+                   (o .:? "location") <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON OperationItemErrorsError where
+        toJSON OperationItemErrorsError{..}
+          = object
+              (catMaybes
+                 [("location" .=) <$> _oieeLocation,
+                  ("code" .=) <$> _oieeCode,
+                  ("message" .=) <$> _oieeMessage])
+
 --
 -- /See:/ 'operationItemWarnings' smart constructor.
 data OperationItemWarnings = OperationItemWarnings
@@ -7186,6 +9562,21 @@ oiwCode = lens _oiwCode (\ s a -> s{_oiwCode = a})
 oiwMessage :: Lens' OperationItemWarnings (Maybe Text)
 oiwMessage
   = lens _oiwMessage (\ s a -> s{_oiwMessage = a})
+
+instance FromJSON OperationItemWarnings where
+        parseJSON
+          = withObject "OperationItemWarnings"
+              (\ o ->
+                 OperationItemWarnings <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON OperationItemWarnings where
+        toJSON OperationItemWarnings{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _oiwData, ("code" .=) <$> _oiwCode,
+                  ("message" .=) <$> _oiwMessage])
 
 -- | Contains a list of Operation resources.
 --
@@ -7248,6 +9639,26 @@ olSelfLink
 olId :: Lens' OperationList (Maybe Text)
 olId = lens _olId (\ s a -> s{_olId = a})
 
+instance FromJSON OperationList where
+        parseJSON
+          = withObject "OperationList"
+              (\ o ->
+                 OperationList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#operationList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON OperationList where
+        toJSON OperationList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _olNextPageToken,
+                  Just ("kind" .= _olKind), ("items" .=) <$> _olItems,
+                  ("selfLink" .=) <$> _olSelfLink,
+                  ("id" .=) <$> _olId])
+
 --
 -- /See:/ 'operationsScopedList' smart constructor.
 data OperationsScopedList = OperationsScopedList
@@ -7284,6 +9695,21 @@ oslOperations
       . _Default
       . _Coerce
 
+instance FromJSON OperationsScopedList where
+        parseJSON
+          = withObject "OperationsScopedList"
+              (\ o ->
+                 OperationsScopedList <$>
+                   (o .:? "warning") <*>
+                     (o .:? "operations" .!= mempty))
+
+instance ToJSON OperationsScopedList where
+        toJSON OperationsScopedList{..}
+          = object
+              (catMaybes
+                 [("warning" .=) <$> _oslWarning,
+                  ("operations" .=) <$> _oslOperations])
+
 --
 -- /See:/ 'operationsScopedListItemDataWarning' smart constructor.
 data OperationsScopedListItemDataWarning = OperationsScopedListItemDataWarning
@@ -7315,6 +9741,22 @@ oslidwValue
 oslidwKey :: Lens' OperationsScopedListItemDataWarning (Maybe Text)
 oslidwKey
   = lens _oslidwKey (\ s a -> s{_oslidwKey = a})
+
+instance FromJSON OperationsScopedListItemDataWarning
+         where
+        parseJSON
+          = withObject "OperationsScopedListItemDataWarning"
+              (\ o ->
+                 OperationsScopedListItemDataWarning <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON OperationsScopedListItemDataWarning
+         where
+        toJSON OperationsScopedListItemDataWarning{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _oslidwValue,
+                  ("key" .=) <$> _oslidwKey])
 
 -- | [Output Only] Informational warning which replaces the list of
 -- operations when the list is empty.
@@ -7359,6 +9801,22 @@ oslwCode = lens _oslwCode (\ s a -> s{_oslwCode = a})
 oslwMessage :: Lens' OperationsScopedListWarning (Maybe Text)
 oslwMessage
   = lens _oslwMessage (\ s a -> s{_oslwMessage = a})
+
+instance FromJSON OperationsScopedListWarning where
+        parseJSON
+          = withObject "OperationsScopedListWarning"
+              (\ o ->
+                 OperationsScopedListWarning <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON OperationsScopedListWarning where
+        toJSON OperationsScopedListWarning{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _oslwData,
+                  ("code" .=) <$> _oslwCode,
+                  ("message" .=) <$> _oslwMessage])
 
 -- | A matcher for the path portion of the URL. The BackendService from the
 -- longest-matched rule will serve the URL. If no rule was matched, the
@@ -7418,6 +9876,24 @@ pmDescription
   = lens _pmDescription
       (\ s a -> s{_pmDescription = a})
 
+instance FromJSON PathMatcher where
+        parseJSON
+          = withObject "PathMatcher"
+              (\ o ->
+                 PathMatcher <$>
+                   (o .:? "defaultService") <*> (o .:? "name") <*>
+                     (o .:? "pathRules" .!= mempty)
+                     <*> (o .:? "description"))
+
+instance ToJSON PathMatcher where
+        toJSON PathMatcher{..}
+          = object
+              (catMaybes
+                 [("defaultService" .=) <$> _pmDefaultService,
+                  ("name" .=) <$> _pmName,
+                  ("pathRules" .=) <$> _pmPathRules,
+                  ("description" .=) <$> _pmDescription])
+
 -- | A path-matching rule for a URL. If matched, will use the specified
 -- BackendService to handle the traffic arriving at this URL.
 --
@@ -7455,6 +9931,20 @@ prPaths :: Lens' PathRule [Text]
 prPaths
   = lens _prPaths (\ s a -> s{_prPaths = a}) . _Default
       . _Coerce
+
+instance FromJSON PathRule where
+        parseJSON
+          = withObject "PathRule"
+              (\ o ->
+                 PathRule <$>
+                   (o .:? "service") <*> (o .:? "paths" .!= mempty))
+
+instance ToJSON PathRule where
+        toJSON PathRule{..}
+          = object
+              (catMaybes
+                 [("service" .=) <$> _prService,
+                  ("paths" .=) <$> _prPaths])
 
 -- | A Project resource. Projects can only be created in the Google
 -- Developers Console. Unless marked otherwise, values can only be modified
@@ -7569,6 +10059,37 @@ pCommonInstanceMetadata
   = lens _pCommonInstanceMetadata
       (\ s a -> s{_pCommonInstanceMetadata = a})
 
+instance FromJSON Project where
+        parseJSON
+          = withObject "Project"
+              (\ o ->
+                 Project <$>
+                   (o .:? "kind" .!= "compute#project") <*>
+                     (o .:? "usageExportLocation")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "enabledFeatures" .!= mempty)
+                     <*> (o .:? "quotas" .!= mempty)
+                     <*> (o .:? "id")
+                     <*> (o .:? "description")
+                     <*> (o .:? "commonInstanceMetadata"))
+
+instance ToJSON Project where
+        toJSON Project{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _pKind),
+                  ("usageExportLocation" .=) <$> _pUsageExportLocation,
+                  ("selfLink" .=) <$> _pSelfLink,
+                  ("name" .=) <$> _pName,
+                  ("creationTimestamp" .=) <$> _pCreationTimestamp,
+                  ("enabledFeatures" .=) <$> _pEnabledFeatures,
+                  ("quotas" .=) <$> _pQuotas, ("id" .=) <$> _pId,
+                  ("description" .=) <$> _pDescription,
+                  ("commonInstanceMetadata" .=) <$>
+                    _pCommonInstanceMetadata])
+
 -- | A quotas entry.
 --
 -- /See:/ 'quota' smart constructor.
@@ -7607,6 +10128,21 @@ qLimit = lens _qLimit (\ s a -> s{_qLimit = a})
 -- | [Output Only] Current usage of this metric.
 qUsage :: Lens' Quota (Maybe Double)
 qUsage = lens _qUsage (\ s a -> s{_qUsage = a})
+
+instance FromJSON Quota where
+        parseJSON
+          = withObject "Quota"
+              (\ o ->
+                 Quota <$>
+                   (o .:? "metric") <*> (o .:? "limit") <*>
+                     (o .:? "usage"))
+
+instance ToJSON Quota where
+        toJSON Quota{..}
+          = object
+              (catMaybes
+                 [("metric" .=) <$> _qMetric,
+                  ("limit" .=) <$> _qLimit, ("usage" .=) <$> _qUsage])
 
 -- | Region resource.
 --
@@ -7714,6 +10250,34 @@ rDeprecated :: Lens' Region (Maybe (Maybe DeprecationStatus))
 rDeprecated
   = lens _rDeprecated (\ s a -> s{_rDeprecated = a})
 
+instance FromJSON Region where
+        parseJSON
+          = withObject "Region"
+              (\ o ->
+                 Region <$>
+                   (o .:? "status") <*> (o .:? "zones" .!= mempty) <*>
+                     (o .:? "kind" .!= "compute#region")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "quotas" .!= mempty)
+                     <*> (o .:? "id")
+                     <*> (o .:? "description")
+                     <*> (o .:? "deprecated"))
+
+instance ToJSON Region where
+        toJSON Region{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _rStatus,
+                  ("zones" .=) <$> _rZones, Just ("kind" .= _rKind),
+                  ("selfLink" .=) <$> _rSelfLink,
+                  ("name" .=) <$> _rName,
+                  ("creationTimestamp" .=) <$> _rCreationTimestamp,
+                  ("quotas" .=) <$> _rQuotas, ("id" .=) <$> _rId,
+                  ("description" .=) <$> _rDescription,
+                  ("deprecated" .=) <$> _rDeprecated])
+
 -- | Contains a list of region resources.
 --
 -- /See:/ 'regionList' smart constructor.
@@ -7775,6 +10339,26 @@ rlSelfLink
 rlId :: Lens' RegionList (Maybe Text)
 rlId = lens _rlId (\ s a -> s{_rlId = a})
 
+instance FromJSON RegionList where
+        parseJSON
+          = withObject "RegionList"
+              (\ o ->
+                 RegionList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#regionList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON RegionList where
+        toJSON RegionList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _rlNextPageToken,
+                  Just ("kind" .= _rlKind), ("items" .=) <$> _rlItems,
+                  ("selfLink" .=) <$> _rlSelfLink,
+                  ("id" .=) <$> _rlId])
+
 --
 -- /See:/ 'resourceGroupReference' smart constructor.
 newtype ResourceGroupReference = ResourceGroupReference
@@ -7797,6 +10381,15 @@ resourceGroupReference =
 -- service.
 rgrGroup :: Lens' ResourceGroupReference (Maybe Text)
 rgrGroup = lens _rgrGroup (\ s a -> s{_rgrGroup = a})
+
+instance FromJSON ResourceGroupReference where
+        parseJSON
+          = withObject "ResourceGroupReference"
+              (\ o -> ResourceGroupReference <$> (o .:? "group"))
+
+instance ToJSON ResourceGroupReference where
+        toJSON ResourceGroupReference{..}
+          = object (catMaybes [("group" .=) <$> _rgrGroup])
 
 -- | The route resource. A Route is a rule that specifies how certain packets
 -- should be handled by the virtual network. Routes are associated with
@@ -7992,6 +10585,49 @@ rrNextHopInstance
   = lens _rrNextHopInstance
       (\ s a -> s{_rrNextHopInstance = a})
 
+instance FromJSON Route where
+        parseJSON
+          = withObject "Route"
+              (\ o ->
+                 Route <$>
+                   (o .:? "priority") <*>
+                     (o .:? "kind" .!= "compute#route")
+                     <*> (o .:? "nextHopGateway")
+                     <*> (o .:? "nextHopNetwork")
+                     <*> (o .:? "network")
+                     <*> (o .:? "warnings" .!= mempty)
+                     <*> (o .:? "nextHopIp")
+                     <*> (o .:? "destRange")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "id")
+                     <*> (o .:? "nextHopVpnTunnel")
+                     <*> (o .:? "description")
+                     <*> (o .:? "tags" .!= mempty)
+                     <*> (o .:? "nextHopInstance"))
+
+instance ToJSON Route where
+        toJSON Route{..}
+          = object
+              (catMaybes
+                 [("priority" .=) <$> _rrPriority,
+                  Just ("kind" .= _rrKind),
+                  ("nextHopGateway" .=) <$> _rrNextHopGateway,
+                  ("nextHopNetwork" .=) <$> _rrNextHopNetwork,
+                  ("network" .=) <$> _rrNetwork,
+                  ("warnings" .=) <$> _rrWarnings,
+                  ("nextHopIp" .=) <$> _rrNextHopIp,
+                  ("destRange" .=) <$> _rrDestRange,
+                  ("selfLink" .=) <$> _rrSelfLink,
+                  ("name" .=) <$> _rrName,
+                  ("creationTimestamp" .=) <$> _rrCreationTimestamp,
+                  ("id" .=) <$> _rrId,
+                  ("nextHopVpnTunnel" .=) <$> _rrNextHopVpnTunnel,
+                  ("description" .=) <$> _rrDescription,
+                  ("tags" .=) <$> _rrTags,
+                  ("nextHopInstance" .=) <$> _rrNextHopInstance])
+
 --
 -- /See:/ 'routeItemDataItemWarnings' smart constructor.
 data RouteItemDataItemWarnings = RouteItemDataItemWarnings
@@ -8022,6 +10658,20 @@ ridiwValue
 -- | [Output Only] A key for the warning data.
 ridiwKey :: Lens' RouteItemDataItemWarnings (Maybe Text)
 ridiwKey = lens _ridiwKey (\ s a -> s{_ridiwKey = a})
+
+instance FromJSON RouteItemDataItemWarnings where
+        parseJSON
+          = withObject "RouteItemDataItemWarnings"
+              (\ o ->
+                 RouteItemDataItemWarnings <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON RouteItemDataItemWarnings where
+        toJSON RouteItemDataItemWarnings{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _ridiwValue,
+                  ("key" .=) <$> _ridiwKey])
 
 --
 -- /See:/ 'routeItemWarnings' smart constructor.
@@ -8063,6 +10713,21 @@ riwCode = lens _riwCode (\ s a -> s{_riwCode = a})
 riwMessage :: Lens' RouteItemWarnings (Maybe Text)
 riwMessage
   = lens _riwMessage (\ s a -> s{_riwMessage = a})
+
+instance FromJSON RouteItemWarnings where
+        parseJSON
+          = withObject "RouteItemWarnings"
+              (\ o ->
+                 RouteItemWarnings <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON RouteItemWarnings where
+        toJSON RouteItemWarnings{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _riwData, ("code" .=) <$> _riwCode,
+                  ("message" .=) <$> _riwMessage])
 
 -- | Contains a list of route resources.
 --
@@ -8125,6 +10790,27 @@ rouSelfLink
 rouId :: Lens' RouteList (Maybe Text)
 rouId = lens _rouId (\ s a -> s{_rouId = a})
 
+instance FromJSON RouteList where
+        parseJSON
+          = withObject "RouteList"
+              (\ o ->
+                 RouteList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#routeList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON RouteList where
+        toJSON RouteList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _rouNextPageToken,
+                  Just ("kind" .= _rouKind),
+                  ("items" .=) <$> _rouItems,
+                  ("selfLink" .=) <$> _rouSelfLink,
+                  ("id" .=) <$> _rouId])
+
 -- | Sets the scheduling options for an Instance.
 --
 -- /See:/ 'scheduling' smart constructor.
@@ -8175,6 +10861,23 @@ sPreemptible :: Lens' Scheduling (Maybe Bool)
 sPreemptible
   = lens _sPreemptible (\ s a -> s{_sPreemptible = a})
 
+instance FromJSON Scheduling where
+        parseJSON
+          = withObject "Scheduling"
+              (\ o ->
+                 Scheduling <$>
+                   (o .:? "automaticRestart") <*>
+                     (o .:? "onHostMaintenance")
+                     <*> (o .:? "preemptible"))
+
+instance ToJSON Scheduling where
+        toJSON Scheduling{..}
+          = object
+              (catMaybes
+                 [("automaticRestart" .=) <$> _sAutomaticRestart,
+                  ("onHostMaintenance" .=) <$> _sOnHostMaintenance,
+                  ("preemptible" .=) <$> _sPreemptible])
+
 -- | An instance\'s serial console output.
 --
 -- /See:/ 'serialPortOutput' smart constructor.
@@ -8217,6 +10920,23 @@ spoSelfLink :: Lens' SerialPortOutput (Maybe Text)
 spoSelfLink
   = lens _spoSelfLink (\ s a -> s{_spoSelfLink = a})
 
+instance FromJSON SerialPortOutput where
+        parseJSON
+          = withObject "SerialPortOutput"
+              (\ o ->
+                 SerialPortOutput <$>
+                   (o .:? "contents") <*>
+                     (o .:? "kind" .!= "compute#serialPortOutput")
+                     <*> (o .:? "selfLink"))
+
+instance ToJSON SerialPortOutput where
+        toJSON SerialPortOutput{..}
+          = object
+              (catMaybes
+                 [("contents" .=) <$> _spoContents,
+                  Just ("kind" .= _spoKind),
+                  ("selfLink" .=) <$> _spoSelfLink])
+
 -- | A service account.
 --
 -- /See:/ 'serviceAccount' smart constructor.
@@ -8250,6 +10970,20 @@ saScopes
   = lens _saScopes (\ s a -> s{_saScopes = a}) .
       _Default
       . _Coerce
+
+instance FromJSON ServiceAccount where
+        parseJSON
+          = withObject "ServiceAccount"
+              (\ o ->
+                 ServiceAccount <$>
+                   (o .:? "email") <*> (o .:? "scopes" .!= mempty))
+
+instance ToJSON ServiceAccount where
+        toJSON ServiceAccount{..}
+          = object
+              (catMaybes
+                 [("email" .=) <$> _saEmail,
+                  ("scopes" .=) <$> _saScopes])
 
 -- | A persistent disk snapshot resource.
 --
@@ -8398,6 +11132,41 @@ sDescription :: Lens' Snapshot (Maybe Text)
 sDescription
   = lens _sDescription (\ s a -> s{_sDescription = a})
 
+instance FromJSON Snapshot where
+        parseJSON
+          = withObject "Snapshot"
+              (\ o ->
+                 Snapshot <$>
+                   (o .:? "storageBytesStatus") <*> (o .:? "status") <*>
+                     (o .:? "diskSizeGb")
+                     <*> (o .:? "sourceDiskId")
+                     <*> (o .:? "kind" .!= "compute#snapshot")
+                     <*> (o .:? "storageBytes")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "id")
+                     <*> (o .:? "licenses" .!= mempty)
+                     <*> (o .:? "sourceDisk")
+                     <*> (o .:? "description"))
+
+instance ToJSON Snapshot where
+        toJSON Snapshot{..}
+          = object
+              (catMaybes
+                 [("storageBytesStatus" .=) <$> _sStorageBytesStatus,
+                  ("status" .=) <$> _sStatus,
+                  ("diskSizeGb" .=) <$> _sDiskSizeGb,
+                  ("sourceDiskId" .=) <$> _sSourceDiskId,
+                  Just ("kind" .= _sKind),
+                  ("storageBytes" .=) <$> _sStorageBytes,
+                  ("selfLink" .=) <$> _sSelfLink,
+                  ("name" .=) <$> _sName,
+                  ("creationTimestamp" .=) <$> _sCreationTimestamp,
+                  ("id" .=) <$> _sId, ("licenses" .=) <$> _sLicenses,
+                  ("sourceDisk" .=) <$> _sSourceDisk,
+                  ("description" .=) <$> _sDescription])
+
 -- | Contains a list of Snapshot resources.
 --
 -- /See:/ 'snapshotList' smart constructor.
@@ -8458,6 +11227,26 @@ slSelfLink
 slId :: Lens' SnapshotList (Maybe Text)
 slId = lens _slId (\ s a -> s{_slId = a})
 
+instance FromJSON SnapshotList where
+        parseJSON
+          = withObject "SnapshotList"
+              (\ o ->
+                 SnapshotList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#snapshotList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON SnapshotList where
+        toJSON SnapshotList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _slNextPageToken,
+                  Just ("kind" .= _slKind), ("items" .=) <$> _slItems,
+                  ("selfLink" .=) <$> _slSelfLink,
+                  ("id" .=) <$> _slId])
+
 -- | A set of instance tags.
 --
 -- /See:/ 'tags' smart constructor.
@@ -8497,6 +11286,20 @@ tItems :: Lens' Tags [Text]
 tItems
   = lens _tItems (\ s a -> s{_tItems = a}) . _Default .
       _Coerce
+
+instance FromJSON Tags where
+        parseJSON
+          = withObject "Tags"
+              (\ o ->
+                 Tags <$>
+                   (o .:? "fingerprint") <*> (o .:? "items" .!= mempty))
+
+instance ToJSON Tags where
+        toJSON Tags{..}
+          = object
+              (catMaybes
+                 [("fingerprint" .=) <$> _tFingerprint,
+                  ("items" .=) <$> _tItems])
 
 -- | A TargetHttpProxy resource. This resource defines an HTTP proxy.
 --
@@ -8584,6 +11387,31 @@ thpDescription
   = lens _thpDescription
       (\ s a -> s{_thpDescription = a})
 
+instance FromJSON TargetHttpProxy where
+        parseJSON
+          = withObject "TargetHttpProxy"
+              (\ o ->
+                 TargetHttpProxy <$>
+                   (o .:? "urlMap") <*>
+                     (o .:? "kind" .!= "compute#targetHttpProxy")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "id")
+                     <*> (o .:? "description"))
+
+instance ToJSON TargetHttpProxy where
+        toJSON TargetHttpProxy{..}
+          = object
+              (catMaybes
+                 [("urlMap" .=) <$> _thpUrlMap,
+                  Just ("kind" .= _thpKind),
+                  ("selfLink" .=) <$> _thpSelfLink,
+                  ("name" .=) <$> _thpName,
+                  ("creationTimestamp" .=) <$> _thpCreationTimestamp,
+                  ("id" .=) <$> _thpId,
+                  ("description" .=) <$> _thpDescription])
+
 -- | A list of TargetHttpProxy resources.
 --
 -- /See:/ 'targetHttpProxyList' smart constructor.
@@ -8645,6 +11473,27 @@ thplSelfLink
 -- | [Output Only] Unique identifier for the resource; defined by the server.
 thplId :: Lens' TargetHttpProxyList (Maybe Text)
 thplId = lens _thplId (\ s a -> s{_thplId = a})
+
+instance FromJSON TargetHttpProxyList where
+        parseJSON
+          = withObject "TargetHttpProxyList"
+              (\ o ->
+                 TargetHttpProxyList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#targetHttpProxyList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON TargetHttpProxyList where
+        toJSON TargetHttpProxyList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _thplNextPageToken,
+                  Just ("kind" .= _thplKind),
+                  ("items" .=) <$> _thplItems,
+                  ("selfLink" .=) <$> _thplSelfLink,
+                  ("id" .=) <$> _thplId])
 
 -- | A TargetInstance resource. This resource defines an endpoint instance
 -- that terminates traffic of certain protocols.
@@ -8749,6 +11598,35 @@ tiInstance :: Lens' TargetInstance (Maybe Text)
 tiInstance
   = lens _tiInstance (\ s a -> s{_tiInstance = a})
 
+instance FromJSON TargetInstance where
+        parseJSON
+          = withObject "TargetInstance"
+              (\ o ->
+                 TargetInstance <$>
+                   (o .:? "kind" .!= "compute#targetInstance") <*>
+                     (o .:? "natPolicy")
+                     <*> (o .:? "zone")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "id")
+                     <*> (o .:? "description")
+                     <*> (o .:? "instance"))
+
+instance ToJSON TargetInstance where
+        toJSON TargetInstance{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _tiKind),
+                  ("natPolicy" .=) <$> _tiNatPolicy,
+                  ("zone" .=) <$> _tiZone,
+                  ("selfLink" .=) <$> _tiSelfLink,
+                  ("name" .=) <$> _tiName,
+                  ("creationTimestamp" .=) <$> _tiCreationTimestamp,
+                  ("id" .=) <$> _tiId,
+                  ("description" .=) <$> _tiDescription,
+                  ("instance" .=) <$> _tiInstance])
+
 --
 -- /See:/ 'targetInstanceAggregatedList' smart constructor.
 data TargetInstanceAggregatedList = TargetInstanceAggregatedList
@@ -8807,6 +11685,28 @@ tialSelfLink
 tialId :: Lens' TargetInstanceAggregatedList (Maybe Text)
 tialId = lens _tialId (\ s a -> s{_tialId = a})
 
+instance FromJSON TargetInstanceAggregatedList where
+        parseJSON
+          = withObject "TargetInstanceAggregatedList"
+              (\ o ->
+                 TargetInstanceAggregatedList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!=
+                        "compute#targetInstanceAggregatedList")
+                     <*> (o .:? "items")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON TargetInstanceAggregatedList where
+        toJSON TargetInstanceAggregatedList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _tialNextPageToken,
+                  Just ("kind" .= _tialKind),
+                  ("items" .=) <$> _tialItems,
+                  ("selfLink" .=) <$> _tialSelfLink,
+                  ("id" .=) <$> _tialId])
+
 -- | A map of scoped target instance lists.
 --
 -- /See:/ 'targetInstanceAggregatedListItems' smart constructor.
@@ -8819,6 +11719,16 @@ data TargetInstanceAggregatedListItems =
 targetInstanceAggregatedListItems
     :: TargetInstanceAggregatedListItems
 targetInstanceAggregatedListItems = TargetInstanceAggregatedListItems
+
+instance FromJSON TargetInstanceAggregatedListItems
+         where
+        parseJSON
+          = withObject "TargetInstanceAggregatedListItems"
+              (\ o -> pure TargetInstanceAggregatedListItems)
+
+instance ToJSON TargetInstanceAggregatedListItems
+         where
+        toJSON = const (Object mempty)
 
 -- | Contains a list of TargetInstance resources.
 --
@@ -8881,6 +11791,27 @@ tilSelfLink
 tilId :: Lens' TargetInstanceList (Maybe Text)
 tilId = lens _tilId (\ s a -> s{_tilId = a})
 
+instance FromJSON TargetInstanceList where
+        parseJSON
+          = withObject "TargetInstanceList"
+              (\ o ->
+                 TargetInstanceList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#targetInstanceList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON TargetInstanceList where
+        toJSON TargetInstanceList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _tilNextPageToken,
+                  Just ("kind" .= _tilKind),
+                  ("items" .=) <$> _tilItems,
+                  ("selfLink" .=) <$> _tilSelfLink,
+                  ("id" .=) <$> _tilId])
+
 --
 -- /See:/ 'targetInstancesScopedList' smart constructor.
 data TargetInstancesScopedList = TargetInstancesScopedList
@@ -8917,6 +11848,21 @@ tislTargetInstances
       . _Default
       . _Coerce
 
+instance FromJSON TargetInstancesScopedList where
+        parseJSON
+          = withObject "TargetInstancesScopedList"
+              (\ o ->
+                 TargetInstancesScopedList <$>
+                   (o .:? "warning") <*>
+                     (o .:? "targetInstances" .!= mempty))
+
+instance ToJSON TargetInstancesScopedList where
+        toJSON TargetInstancesScopedList{..}
+          = object
+              (catMaybes
+                 [("warning" .=) <$> _tislWarning,
+                  ("targetInstances" .=) <$> _tislTargetInstances])
+
 --
 -- /See:/ 'targetInstancesScopedListItemDataWarning' smart constructor.
 data TargetInstancesScopedListItemDataWarning = TargetInstancesScopedListItemDataWarning
@@ -8948,6 +11894,23 @@ tislidwValue
 tislidwKey :: Lens' TargetInstancesScopedListItemDataWarning (Maybe Text)
 tislidwKey
   = lens _tislidwKey (\ s a -> s{_tislidwKey = a})
+
+instance FromJSON
+         TargetInstancesScopedListItemDataWarning where
+        parseJSON
+          = withObject
+              "TargetInstancesScopedListItemDataWarning"
+              (\ o ->
+                 TargetInstancesScopedListItemDataWarning <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON
+         TargetInstancesScopedListItemDataWarning where
+        toJSON TargetInstancesScopedListItemDataWarning{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _tislidwValue,
+                  ("key" .=) <$> _tislidwKey])
 
 -- | Informational warning which replaces the list of addresses when the list
 -- is empty.
@@ -8993,6 +11956,24 @@ tislwCode
 tislwMessage :: Lens' TargetInstancesScopedListWarning (Maybe Text)
 tislwMessage
   = lens _tislwMessage (\ s a -> s{_tislwMessage = a})
+
+instance FromJSON TargetInstancesScopedListWarning
+         where
+        parseJSON
+          = withObject "TargetInstancesScopedListWarning"
+              (\ o ->
+                 TargetInstancesScopedListWarning <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON TargetInstancesScopedListWarning
+         where
+        toJSON TargetInstancesScopedListWarning{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _tislwData,
+                  ("code" .=) <$> _tislwCode,
+                  ("message" .=) <$> _tislwMessage])
 
 -- | A TargetPool resource. This resource defines a pool of instances,
 -- associated HttpHealthCheck resources, and the fallback TargetPool.
@@ -9161,6 +12142,40 @@ tpHealthChecks
       . _Default
       . _Coerce
 
+instance FromJSON TargetPool where
+        parseJSON
+          = withObject "TargetPool"
+              (\ o ->
+                 TargetPool <$>
+                   (o .:? "sessionAffinity") <*> (o .:? "backupPool")
+                     <*> (o .:? "kind" .!= "compute#targetPool")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "instances" .!= mempty)
+                     <*> (o .:? "id")
+                     <*> (o .:? "failoverRatio")
+                     <*> (o .:? "region")
+                     <*> (o .:? "description")
+                     <*> (o .:? "healthChecks" .!= mempty))
+
+instance ToJSON TargetPool where
+        toJSON TargetPool{..}
+          = object
+              (catMaybes
+                 [("sessionAffinity" .=) <$> _tpSessionAffinity,
+                  ("backupPool" .=) <$> _tpBackupPool,
+                  Just ("kind" .= _tpKind),
+                  ("selfLink" .=) <$> _tpSelfLink,
+                  ("name" .=) <$> _tpName,
+                  ("creationTimestamp" .=) <$> _tpCreationTimestamp,
+                  ("instances" .=) <$> _tpInstances,
+                  ("id" .=) <$> _tpId,
+                  ("failoverRatio" .=) <$> _tpFailoverRatio,
+                  ("region" .=) <$> _tpRegion,
+                  ("description" .=) <$> _tpDescription,
+                  ("healthChecks" .=) <$> _tpHealthChecks])
+
 --
 -- /See:/ 'targetPoolAggregatedList' smart constructor.
 data TargetPoolAggregatedList = TargetPoolAggregatedList
@@ -9219,6 +12234,27 @@ tpalSelfLink
 tpalId :: Lens' TargetPoolAggregatedList (Maybe Text)
 tpalId = lens _tpalId (\ s a -> s{_tpalId = a})
 
+instance FromJSON TargetPoolAggregatedList where
+        parseJSON
+          = withObject "TargetPoolAggregatedList"
+              (\ o ->
+                 TargetPoolAggregatedList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#targetPoolAggregatedList")
+                     <*> (o .:? "items")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON TargetPoolAggregatedList where
+        toJSON TargetPoolAggregatedList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _tpalNextPageToken,
+                  Just ("kind" .= _tpalKind),
+                  ("items" .=) <$> _tpalItems,
+                  ("selfLink" .=) <$> _tpalSelfLink,
+                  ("id" .=) <$> _tpalId])
+
 -- | A map of scoped target pool lists.
 --
 -- /See:/ 'targetPoolAggregatedListItems' smart constructor.
@@ -9231,6 +12267,14 @@ data TargetPoolAggregatedListItems =
 targetPoolAggregatedListItems
     :: TargetPoolAggregatedListItems
 targetPoolAggregatedListItems = TargetPoolAggregatedListItems
+
+instance FromJSON TargetPoolAggregatedListItems where
+        parseJSON
+          = withObject "TargetPoolAggregatedListItems"
+              (\ o -> pure TargetPoolAggregatedListItems)
+
+instance ToJSON TargetPoolAggregatedListItems where
+        toJSON = const (Object mempty)
 
 --
 -- /See:/ 'targetPoolInstanceHealth' smart constructor.
@@ -9264,6 +12308,21 @@ tpihHealthStatus
       (\ s a -> s{_tpihHealthStatus = a})
       . _Default
       . _Coerce
+
+instance FromJSON TargetPoolInstanceHealth where
+        parseJSON
+          = withObject "TargetPoolInstanceHealth"
+              (\ o ->
+                 TargetPoolInstanceHealth <$>
+                   (o .:? "kind" .!= "compute#targetPoolInstanceHealth")
+                     <*> (o .:? "healthStatus" .!= mempty))
+
+instance ToJSON TargetPoolInstanceHealth where
+        toJSON TargetPoolInstanceHealth{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _tpihKind),
+                  ("healthStatus" .=) <$> _tpihHealthStatus])
 
 -- | Contains a list of TargetPool resources.
 --
@@ -9326,6 +12385,27 @@ tplSelfLink
 tplId :: Lens' TargetPoolList (Maybe Text)
 tplId = lens _tplId (\ s a -> s{_tplId = a})
 
+instance FromJSON TargetPoolList where
+        parseJSON
+          = withObject "TargetPoolList"
+              (\ o ->
+                 TargetPoolList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#targetPoolList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON TargetPoolList where
+        toJSON TargetPoolList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _tplNextPageToken,
+                  Just ("kind" .= _tplKind),
+                  ("items" .=) <$> _tplItems,
+                  ("selfLink" .=) <$> _tplSelfLink,
+                  ("id" .=) <$> _tplId])
+
 --
 -- /See:/ 'targetPoolsAddHealthCheckRequest' smart constructor.
 newtype TargetPoolsAddHealthCheckRequest = TargetPoolsAddHealthCheckRequest
@@ -9351,6 +12431,21 @@ tpahcrHealthChecks
       (\ s a -> s{_tpahcrHealthChecks = a})
       . _Default
       . _Coerce
+
+instance FromJSON TargetPoolsAddHealthCheckRequest
+         where
+        parseJSON
+          = withObject "TargetPoolsAddHealthCheckRequest"
+              (\ o ->
+                 TargetPoolsAddHealthCheckRequest <$>
+                   (o .:? "healthChecks" .!= mempty))
+
+instance ToJSON TargetPoolsAddHealthCheckRequest
+         where
+        toJSON TargetPoolsAddHealthCheckRequest{..}
+          = object
+              (catMaybes
+                 [("healthChecks" .=) <$> _tpahcrHealthChecks])
 
 --
 -- /See:/ 'targetPoolsAddInstanceRequest' smart constructor.
@@ -9378,6 +12473,18 @@ tpairInstances
       . _Default
       . _Coerce
 
+instance FromJSON TargetPoolsAddInstanceRequest where
+        parseJSON
+          = withObject "TargetPoolsAddInstanceRequest"
+              (\ o ->
+                 TargetPoolsAddInstanceRequest <$>
+                   (o .:? "instances" .!= mempty))
+
+instance ToJSON TargetPoolsAddInstanceRequest where
+        toJSON TargetPoolsAddInstanceRequest{..}
+          = object
+              (catMaybes [("instances" .=) <$> _tpairInstances])
+
 --
 -- /See:/ 'targetPoolsRemoveHealthCheckRequest' smart constructor.
 newtype TargetPoolsRemoveHealthCheckRequest = TargetPoolsRemoveHealthCheckRequest
@@ -9404,6 +12511,21 @@ tprhcrHealthChecks
       . _Default
       . _Coerce
 
+instance FromJSON TargetPoolsRemoveHealthCheckRequest
+         where
+        parseJSON
+          = withObject "TargetPoolsRemoveHealthCheckRequest"
+              (\ o ->
+                 TargetPoolsRemoveHealthCheckRequest <$>
+                   (o .:? "healthChecks" .!= mempty))
+
+instance ToJSON TargetPoolsRemoveHealthCheckRequest
+         where
+        toJSON TargetPoolsRemoveHealthCheckRequest{..}
+          = object
+              (catMaybes
+                 [("healthChecks" .=) <$> _tprhcrHealthChecks])
+
 --
 -- /See:/ 'targetPoolsRemoveInstanceRequest' smart constructor.
 newtype TargetPoolsRemoveInstanceRequest = TargetPoolsRemoveInstanceRequest
@@ -9429,6 +12551,20 @@ tprirInstances
       (\ s a -> s{_tprirInstances = a})
       . _Default
       . _Coerce
+
+instance FromJSON TargetPoolsRemoveInstanceRequest
+         where
+        parseJSON
+          = withObject "TargetPoolsRemoveInstanceRequest"
+              (\ o ->
+                 TargetPoolsRemoveInstanceRequest <$>
+                   (o .:? "instances" .!= mempty))
+
+instance ToJSON TargetPoolsRemoveInstanceRequest
+         where
+        toJSON TargetPoolsRemoveInstanceRequest{..}
+          = object
+              (catMaybes [("instances" .=) <$> _tprirInstances])
 
 --
 -- /See:/ 'targetPoolsScopedList' smart constructor.
@@ -9466,6 +12602,21 @@ tpslTargetPools
       . _Default
       . _Coerce
 
+instance FromJSON TargetPoolsScopedList where
+        parseJSON
+          = withObject "TargetPoolsScopedList"
+              (\ o ->
+                 TargetPoolsScopedList <$>
+                   (o .:? "warning") <*>
+                     (o .:? "targetPools" .!= mempty))
+
+instance ToJSON TargetPoolsScopedList where
+        toJSON TargetPoolsScopedList{..}
+          = object
+              (catMaybes
+                 [("warning" .=) <$> _tpslWarning,
+                  ("targetPools" .=) <$> _tpslTargetPools])
+
 --
 -- /See:/ 'targetPoolsScopedListItemDataWarning' smart constructor.
 data TargetPoolsScopedListItemDataWarning = TargetPoolsScopedListItemDataWarning
@@ -9497,6 +12648,22 @@ tpslidwValue
 tpslidwKey :: Lens' TargetPoolsScopedListItemDataWarning (Maybe Text)
 tpslidwKey
   = lens _tpslidwKey (\ s a -> s{_tpslidwKey = a})
+
+instance FromJSON
+         TargetPoolsScopedListItemDataWarning where
+        parseJSON
+          = withObject "TargetPoolsScopedListItemDataWarning"
+              (\ o ->
+                 TargetPoolsScopedListItemDataWarning <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON TargetPoolsScopedListItemDataWarning
+         where
+        toJSON TargetPoolsScopedListItemDataWarning{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _tpslidwValue,
+                  ("key" .=) <$> _tpslidwKey])
 
 -- | Informational warning which replaces the list of addresses when the list
 -- is empty.
@@ -9543,6 +12710,22 @@ tpslwMessage :: Lens' TargetPoolsScopedListWarning (Maybe Text)
 tpslwMessage
   = lens _tpslwMessage (\ s a -> s{_tpslwMessage = a})
 
+instance FromJSON TargetPoolsScopedListWarning where
+        parseJSON
+          = withObject "TargetPoolsScopedListWarning"
+              (\ o ->
+                 TargetPoolsScopedListWarning <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON TargetPoolsScopedListWarning where
+        toJSON TargetPoolsScopedListWarning{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _tpslwData,
+                  ("code" .=) <$> _tpslwCode,
+                  ("message" .=) <$> _tpslwMessage])
+
 --
 -- /See:/ 'targetReference' smart constructor.
 newtype TargetReference = TargetReference
@@ -9563,6 +12746,15 @@ targetReference =
 
 trTarget :: Lens' TargetReference (Maybe Text)
 trTarget = lens _trTarget (\ s a -> s{_trTarget = a})
+
+instance FromJSON TargetReference where
+        parseJSON
+          = withObject "TargetReference"
+              (\ o -> TargetReference <$> (o .:? "target"))
+
+instance ToJSON TargetReference where
+        toJSON TargetReference{..}
+          = object (catMaybes [("target" .=) <$> _trTarget])
 
 --
 -- /See:/ 'targetVpnGateway' smart constructor.
@@ -9693,6 +12885,38 @@ tvgForwardingRules
       . _Default
       . _Coerce
 
+instance FromJSON TargetVpnGateway where
+        parseJSON
+          = withObject "TargetVpnGateway"
+              (\ o ->
+                 TargetVpnGateway <$>
+                   (o .:? "status") <*>
+                     (o .:? "kind" .!= "compute#targetVpnGateway")
+                     <*> (o .:? "network")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "id")
+                     <*> (o .:? "region")
+                     <*> (o .:? "tunnels" .!= mempty)
+                     <*> (o .:? "description")
+                     <*> (o .:? "forwardingRules" .!= mempty))
+
+instance ToJSON TargetVpnGateway where
+        toJSON TargetVpnGateway{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _tvgStatus,
+                  Just ("kind" .= _tvgKind),
+                  ("network" .=) <$> _tvgNetwork,
+                  ("selfLink" .=) <$> _tvgSelfLink,
+                  ("name" .=) <$> _tvgName,
+                  ("creationTimestamp" .=) <$> _tvgCreationTimestamp,
+                  ("id" .=) <$> _tvgId, ("region" .=) <$> _tvgRegion,
+                  ("tunnels" .=) <$> _tvgTunnels,
+                  ("description" .=) <$> _tvgDescription,
+                  ("forwardingRules" .=) <$> _tvgForwardingRules])
+
 --
 -- /See:/ 'targetVpnGatewayAggregatedList' smart constructor.
 data TargetVpnGatewayAggregatedList = TargetVpnGatewayAggregatedList
@@ -9754,6 +12978,29 @@ tvgalSelfLink
 tvgalId :: Lens' TargetVpnGatewayAggregatedList (Maybe Text)
 tvgalId = lens _tvgalId (\ s a -> s{_tvgalId = a})
 
+instance FromJSON TargetVpnGatewayAggregatedList
+         where
+        parseJSON
+          = withObject "TargetVpnGatewayAggregatedList"
+              (\ o ->
+                 TargetVpnGatewayAggregatedList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!=
+                        "compute#targetVpnGatewayAggregatedList")
+                     <*> (o .:? "items")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON TargetVpnGatewayAggregatedList where
+        toJSON TargetVpnGatewayAggregatedList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _tvgalNextPageToken,
+                  Just ("kind" .= _tvgalKind),
+                  ("items" .=) <$> _tvgalItems,
+                  ("selfLink" .=) <$> _tvgalSelfLink,
+                  ("id" .=) <$> _tvgalId])
+
 -- | A map of scoped target vpn gateway lists.
 --
 -- /See:/ 'targetVpnGatewayAggregatedListItems' smart constructor.
@@ -9766,6 +13013,16 @@ data TargetVpnGatewayAggregatedListItems =
 targetVpnGatewayAggregatedListItems
     :: TargetVpnGatewayAggregatedListItems
 targetVpnGatewayAggregatedListItems = TargetVpnGatewayAggregatedListItems
+
+instance FromJSON TargetVpnGatewayAggregatedListItems
+         where
+        parseJSON
+          = withObject "TargetVpnGatewayAggregatedListItems"
+              (\ o -> pure TargetVpnGatewayAggregatedListItems)
+
+instance ToJSON TargetVpnGatewayAggregatedListItems
+         where
+        toJSON = const (Object mempty)
 
 -- | Contains a list of TargetVpnGateway resources.
 --
@@ -9829,6 +13086,27 @@ tvglSelfLink
 tvglId :: Lens' TargetVpnGatewayList (Maybe Text)
 tvglId = lens _tvglId (\ s a -> s{_tvglId = a})
 
+instance FromJSON TargetVpnGatewayList where
+        parseJSON
+          = withObject "TargetVpnGatewayList"
+              (\ o ->
+                 TargetVpnGatewayList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#targetVpnGatewayList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON TargetVpnGatewayList where
+        toJSON TargetVpnGatewayList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _tvglNextPageToken,
+                  Just ("kind" .= _tvglKind),
+                  ("items" .=) <$> _tvglItems,
+                  ("selfLink" .=) <$> _tvglSelfLink,
+                  ("id" .=) <$> _tvglId])
+
 --
 -- /See:/ 'targetVpnGatewaysScopedList' smart constructor.
 data TargetVpnGatewaysScopedList = TargetVpnGatewaysScopedList
@@ -9865,6 +13143,22 @@ tvgslWarning :: Lens' TargetVpnGatewaysScopedList (Maybe TargetVpnGatewaysScoped
 tvgslWarning
   = lens _tvgslWarning (\ s a -> s{_tvgslWarning = a})
 
+instance FromJSON TargetVpnGatewaysScopedList where
+        parseJSON
+          = withObject "TargetVpnGatewaysScopedList"
+              (\ o ->
+                 TargetVpnGatewaysScopedList <$>
+                   (o .:? "targetVpnGateways" .!= mempty) <*>
+                     (o .:? "warning"))
+
+instance ToJSON TargetVpnGatewaysScopedList where
+        toJSON TargetVpnGatewaysScopedList{..}
+          = object
+              (catMaybes
+                 [("targetVpnGateways" .=) <$>
+                    _tvgslTargetVpnGateways,
+                  ("warning" .=) <$> _tvgslWarning])
+
 --
 -- /See:/ 'targetVpnGatewaysScopedListItemDataWarning' smart constructor.
 data TargetVpnGatewaysScopedListItemDataWarning = TargetVpnGatewaysScopedListItemDataWarning
@@ -9897,6 +13191,23 @@ tvgslidwValue
 tvgslidwKey :: Lens' TargetVpnGatewaysScopedListItemDataWarning (Maybe Text)
 tvgslidwKey
   = lens _tvgslidwKey (\ s a -> s{_tvgslidwKey = a})
+
+instance FromJSON
+         TargetVpnGatewaysScopedListItemDataWarning where
+        parseJSON
+          = withObject
+              "TargetVpnGatewaysScopedListItemDataWarning"
+              (\ o ->
+                 TargetVpnGatewaysScopedListItemDataWarning <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON
+         TargetVpnGatewaysScopedListItemDataWarning where
+        toJSON TargetVpnGatewaysScopedListItemDataWarning{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _tvgslidwValue,
+                  ("key" .=) <$> _tvgslidwKey])
 
 -- | [Output Only] Informational warning which replaces the list of addresses
 -- when the list is empty.
@@ -9944,6 +13255,24 @@ tvgslwMessage
   = lens _tvgslwMessage
       (\ s a -> s{_tvgslwMessage = a})
 
+instance FromJSON TargetVpnGatewaysScopedListWarning
+         where
+        parseJSON
+          = withObject "TargetVpnGatewaysScopedListWarning"
+              (\ o ->
+                 TargetVpnGatewaysScopedListWarning <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON TargetVpnGatewaysScopedListWarning
+         where
+        toJSON TargetVpnGatewaysScopedListWarning{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _tvgslwData,
+                  ("code" .=) <$> _tvgslwCode,
+                  ("message" .=) <$> _tvgslwMessage])
+
 --
 -- /See:/ 'testFailure' smart constructor.
 data TestFailure = TestFailure
@@ -9989,6 +13318,24 @@ tfActualService :: Lens' TestFailure (Maybe Text)
 tfActualService
   = lens _tfActualService
       (\ s a -> s{_tfActualService = a})
+
+instance FromJSON TestFailure where
+        parseJSON
+          = withObject "TestFailure"
+              (\ o ->
+                 TestFailure <$>
+                   (o .:? "path") <*> (o .:? "expectedService") <*>
+                     (o .:? "host")
+                     <*> (o .:? "actualService"))
+
+instance ToJSON TestFailure where
+        toJSON TestFailure{..}
+          = object
+              (catMaybes
+                 [("path" .=) <$> _tfPath,
+                  ("expectedService" .=) <$> _tfExpectedService,
+                  ("host" .=) <$> _tfHost,
+                  ("actualService" .=) <$> _tfActualService])
 
 -- | A UrlMap resource. This resource defines the mapping from URL to the
 -- BackendService resource, based on the \"longest-match\" of the URL\'s
@@ -10124,6 +13471,38 @@ umDescription
   = lens _umDescription
       (\ s a -> s{_umDescription = a})
 
+instance FromJSON UrlMap where
+        parseJSON
+          = withObject "UrlMap"
+              (\ o ->
+                 UrlMap <$>
+                   (o .:? "tests" .!= mempty) <*>
+                     (o .:? "kind" .!= "compute#urlMap")
+                     <*> (o .:? "fingerprint")
+                     <*> (o .:? "defaultService")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "pathMatchers" .!= mempty)
+                     <*> (o .:? "id")
+                     <*> (o .:? "hostRules" .!= mempty)
+                     <*> (o .:? "description"))
+
+instance ToJSON UrlMap where
+        toJSON UrlMap{..}
+          = object
+              (catMaybes
+                 [("tests" .=) <$> _umTests, Just ("kind" .= _umKind),
+                  ("fingerprint" .=) <$> _umFingerprint,
+                  ("defaultService" .=) <$> _umDefaultService,
+                  ("selfLink" .=) <$> _umSelfLink,
+                  ("name" .=) <$> _umName,
+                  ("creationTimestamp" .=) <$> _umCreationTimestamp,
+                  ("pathMatchers" .=) <$> _umPathMatchers,
+                  ("id" .=) <$> _umId,
+                  ("hostRules" .=) <$> _umHostRules,
+                  ("description" .=) <$> _umDescription])
+
 -- | Contains a list of UrlMap resources.
 --
 -- /See:/ 'urlMapList' smart constructor.
@@ -10185,6 +13564,27 @@ umlSelfLink
 umlId :: Lens' UrlMapList (Maybe Text)
 umlId = lens _umlId (\ s a -> s{_umlId = a})
 
+instance FromJSON UrlMapList where
+        parseJSON
+          = withObject "UrlMapList"
+              (\ o ->
+                 UrlMapList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#urlMapList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON UrlMapList where
+        toJSON UrlMapList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _umlNextPageToken,
+                  Just ("kind" .= _umlKind),
+                  ("items" .=) <$> _umlItems,
+                  ("selfLink" .=) <$> _umlSelfLink,
+                  ("id" .=) <$> _umlId])
+
 --
 -- /See:/ 'urlMapReference' smart constructor.
 newtype UrlMapReference = UrlMapReference
@@ -10206,6 +13606,15 @@ urlMapReference =
 umrUrlMap :: Lens' UrlMapReference (Maybe Text)
 umrUrlMap
   = lens _umrUrlMap (\ s a -> s{_umrUrlMap = a})
+
+instance FromJSON UrlMapReference where
+        parseJSON
+          = withObject "UrlMapReference"
+              (\ o -> UrlMapReference <$> (o .:? "urlMap"))
+
+instance ToJSON UrlMapReference where
+        toJSON UrlMapReference{..}
+          = object (catMaybes [("urlMap" .=) <$> _umrUrlMap])
 
 -- | Message for the expected URL mappings.
 --
@@ -10256,6 +13665,24 @@ umtDescription :: Lens' UrlMapTest (Maybe Text)
 umtDescription
   = lens _umtDescription
       (\ s a -> s{_umtDescription = a})
+
+instance FromJSON UrlMapTest where
+        parseJSON
+          = withObject "UrlMapTest"
+              (\ o ->
+                 UrlMapTest <$>
+                   (o .:? "path") <*> (o .:? "service") <*>
+                     (o .:? "host")
+                     <*> (o .:? "description"))
+
+instance ToJSON UrlMapTest where
+        toJSON UrlMapTest{..}
+          = object
+              (catMaybes
+                 [("path" .=) <$> _umtPath,
+                  ("service" .=) <$> _umtService,
+                  ("host" .=) <$> _umtHost,
+                  ("description" .=) <$> _umtDescription])
 
 -- | Message representing the validation result for a UrlMap.
 --
@@ -10316,6 +13743,25 @@ umvrTestFailures
       . _Default
       . _Coerce
 
+instance FromJSON UrlMapValidationResult where
+        parseJSON
+          = withObject "UrlMapValidationResult"
+              (\ o ->
+                 UrlMapValidationResult <$>
+                   (o .:? "loadErrors" .!= mempty) <*>
+                     (o .:? "loadSucceeded")
+                     <*> (o .:? "testPassed")
+                     <*> (o .:? "testFailures" .!= mempty))
+
+instance ToJSON UrlMapValidationResult where
+        toJSON UrlMapValidationResult{..}
+          = object
+              (catMaybes
+                 [("loadErrors" .=) <$> _umvrLoadErrors,
+                  ("loadSucceeded" .=) <$> _umvrLoadSucceeded,
+                  ("testPassed" .=) <$> _umvrTestPassed,
+                  ("testFailures" .=) <$> _umvrTestFailures])
+
 --
 -- /See:/ 'urlMapsValidateRequest' smart constructor.
 newtype UrlMapsValidateRequest = UrlMapsValidateRequest
@@ -10339,6 +13785,17 @@ umvrResource :: Lens' UrlMapsValidateRequest (Maybe (Maybe UrlMap))
 umvrResource
   = lens _umvrResource (\ s a -> s{_umvrResource = a})
 
+instance FromJSON UrlMapsValidateRequest where
+        parseJSON
+          = withObject "UrlMapsValidateRequest"
+              (\ o ->
+                 UrlMapsValidateRequest <$> (o .:? "resource"))
+
+instance ToJSON UrlMapsValidateRequest where
+        toJSON UrlMapsValidateRequest{..}
+          = object
+              (catMaybes [("resource" .=) <$> _umvrResource])
+
 --
 -- /See:/ 'urlMapsValidateResponse' smart constructor.
 newtype UrlMapsValidateResponse = UrlMapsValidateResponse
@@ -10360,6 +13817,15 @@ urlMapsValidateResponse =
 umvrResult :: Lens' UrlMapsValidateResponse (Maybe (Maybe UrlMapValidationResult))
 umvrResult
   = lens _umvrResult (\ s a -> s{_umvrResult = a})
+
+instance FromJSON UrlMapsValidateResponse where
+        parseJSON
+          = withObject "UrlMapsValidateResponse"
+              (\ o -> UrlMapsValidateResponse <$> (o .:? "result"))
+
+instance ToJSON UrlMapsValidateResponse where
+        toJSON UrlMapsValidateResponse{..}
+          = object (catMaybes [("result" .=) <$> _umvrResult])
 
 -- | The location in Cloud Storage and naming method of the daily usage
 -- report. Contains bucket_name and report_name prefix.
@@ -10403,6 +13869,20 @@ uelBucketName :: Lens' UsageExportLocation (Maybe Text)
 uelBucketName
   = lens _uelBucketName
       (\ s a -> s{_uelBucketName = a})
+
+instance FromJSON UsageExportLocation where
+        parseJSON
+          = withObject "UsageExportLocation"
+              (\ o ->
+                 UsageExportLocation <$>
+                   (o .:? "reportNamePrefix") <*> (o .:? "bucketName"))
+
+instance ToJSON UsageExportLocation where
+        toJSON UsageExportLocation{..}
+          = object
+              (catMaybes
+                 [("reportNamePrefix" .=) <$> _uelReportNamePrefix,
+                  ("bucketName" .=) <$> _uelBucketName])
 
 --
 -- /See:/ 'vpnTunnel' smart constructor.
@@ -10555,6 +14035,44 @@ vtDescription
   = lens _vtDescription
       (\ s a -> s{_vtDescription = a})
 
+instance FromJSON VpnTunnel where
+        parseJSON
+          = withObject "VpnTunnel"
+              (\ o ->
+                 VpnTunnel <$>
+                   (o .:? "detailedStatus") <*> (o .:? "status") <*>
+                     (o .:? "kind" .!= "compute#vpnTunnel")
+                     <*> (o .:? "peerIp")
+                     <*> (o .:? "targetVpnGateway")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "sharedSecret")
+                     <*> (o .:? "name")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "sharedSecretHash")
+                     <*> (o .:? "id")
+                     <*> (o .:? "ikeVersion")
+                     <*> (o .:? "region")
+                     <*> (o .:? "description"))
+
+instance ToJSON VpnTunnel where
+        toJSON VpnTunnel{..}
+          = object
+              (catMaybes
+                 [("detailedStatus" .=) <$> _vtDetailedStatus,
+                  ("status" .=) <$> _vtStatus,
+                  Just ("kind" .= _vtKind),
+                  ("peerIp" .=) <$> _vtPeerIp,
+                  ("targetVpnGateway" .=) <$> _vtTargetVpnGateway,
+                  ("selfLink" .=) <$> _vtSelfLink,
+                  ("sharedSecret" .=) <$> _vtSharedSecret,
+                  ("name" .=) <$> _vtName,
+                  ("creationTimestamp" .=) <$> _vtCreationTimestamp,
+                  ("sharedSecretHash" .=) <$> _vtSharedSecretHash,
+                  ("id" .=) <$> _vtId,
+                  ("ikeVersion" .=) <$> _vtIkeVersion,
+                  ("region" .=) <$> _vtRegion,
+                  ("description" .=) <$> _vtDescription])
+
 --
 -- /See:/ 'vpnTunnelAggregatedList' smart constructor.
 data VpnTunnelAggregatedList = VpnTunnelAggregatedList
@@ -10614,6 +14132,27 @@ vtalSelfLink
 vtalId :: Lens' VpnTunnelAggregatedList (Maybe Text)
 vtalId = lens _vtalId (\ s a -> s{_vtalId = a})
 
+instance FromJSON VpnTunnelAggregatedList where
+        parseJSON
+          = withObject "VpnTunnelAggregatedList"
+              (\ o ->
+                 VpnTunnelAggregatedList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#vpnTunnelAggregatedList")
+                     <*> (o .:? "items")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON VpnTunnelAggregatedList where
+        toJSON VpnTunnelAggregatedList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _vtalNextPageToken,
+                  Just ("kind" .= _vtalKind),
+                  ("items" .=) <$> _vtalItems,
+                  ("selfLink" .=) <$> _vtalSelfLink,
+                  ("id" .=) <$> _vtalId])
+
 -- | [Output Only] A map of scoped vpn tunnel lists.
 --
 -- /See:/ 'vpnTunnelAggregatedListItems' smart constructor.
@@ -10626,6 +14165,14 @@ data VpnTunnelAggregatedListItems =
 vpnTunnelAggregatedListItems
     :: VpnTunnelAggregatedListItems
 vpnTunnelAggregatedListItems = VpnTunnelAggregatedListItems
+
+instance FromJSON VpnTunnelAggregatedListItems where
+        parseJSON
+          = withObject "VpnTunnelAggregatedListItems"
+              (\ o -> pure VpnTunnelAggregatedListItems)
+
+instance ToJSON VpnTunnelAggregatedListItems where
+        toJSON = const (Object mempty)
 
 -- | Contains a list of VpnTunnel resources.
 --
@@ -10689,6 +14236,27 @@ vtlSelfLink
 vtlId :: Lens' VpnTunnelList (Maybe Text)
 vtlId = lens _vtlId (\ s a -> s{_vtlId = a})
 
+instance FromJSON VpnTunnelList where
+        parseJSON
+          = withObject "VpnTunnelList"
+              (\ o ->
+                 VpnTunnelList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#vpnTunnelList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON VpnTunnelList where
+        toJSON VpnTunnelList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _vtlNextPageToken,
+                  Just ("kind" .= _vtlKind),
+                  ("items" .=) <$> _vtlItems,
+                  ("selfLink" .=) <$> _vtlSelfLink,
+                  ("id" .=) <$> _vtlId])
+
 --
 -- /See:/ 'vpnTunnelsScopedList' smart constructor.
 data VpnTunnelsScopedList = VpnTunnelsScopedList
@@ -10725,6 +14293,21 @@ vtslWarning :: Lens' VpnTunnelsScopedList (Maybe VpnTunnelsScopedListWarning)
 vtslWarning
   = lens _vtslWarning (\ s a -> s{_vtslWarning = a})
 
+instance FromJSON VpnTunnelsScopedList where
+        parseJSON
+          = withObject "VpnTunnelsScopedList"
+              (\ o ->
+                 VpnTunnelsScopedList <$>
+                   (o .:? "vpnTunnels" .!= mempty) <*>
+                     (o .:? "warning"))
+
+instance ToJSON VpnTunnelsScopedList where
+        toJSON VpnTunnelsScopedList{..}
+          = object
+              (catMaybes
+                 [("vpnTunnels" .=) <$> _vtslVpnTunnels,
+                  ("warning" .=) <$> _vtslWarning])
+
 --
 -- /See:/ 'vpnTunnelsScopedListItemDataWarning' smart constructor.
 data VpnTunnelsScopedListItemDataWarning = VpnTunnelsScopedListItemDataWarning
@@ -10756,6 +14339,22 @@ vtslidwValue
 vtslidwKey :: Lens' VpnTunnelsScopedListItemDataWarning (Maybe Text)
 vtslidwKey
   = lens _vtslidwKey (\ s a -> s{_vtslidwKey = a})
+
+instance FromJSON VpnTunnelsScopedListItemDataWarning
+         where
+        parseJSON
+          = withObject "VpnTunnelsScopedListItemDataWarning"
+              (\ o ->
+                 VpnTunnelsScopedListItemDataWarning <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON VpnTunnelsScopedListItemDataWarning
+         where
+        toJSON VpnTunnelsScopedListItemDataWarning{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _vtslidwValue,
+                  ("key" .=) <$> _vtslidwKey])
 
 -- | Informational warning which replaces the list of addresses when the list
 -- is empty.
@@ -10801,6 +14400,22 @@ vtslwCode
 vtslwMessage :: Lens' VpnTunnelsScopedListWarning (Maybe Text)
 vtslwMessage
   = lens _vtslwMessage (\ s a -> s{_vtslwMessage = a})
+
+instance FromJSON VpnTunnelsScopedListWarning where
+        parseJSON
+          = withObject "VpnTunnelsScopedListWarning"
+              (\ o ->
+                 VpnTunnelsScopedListWarning <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON VpnTunnelsScopedListWarning where
+        toJSON VpnTunnelsScopedListWarning{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _vtslwData,
+                  ("code" .=) <$> _vtslwCode,
+                  ("message" .=) <$> _vtslwMessage])
 
 -- | A Zone resource.
 --
@@ -10908,6 +14523,36 @@ zDeprecated :: Lens' Zone (Maybe (Maybe DeprecationStatus))
 zDeprecated
   = lens _zDeprecated (\ s a -> s{_zDeprecated = a})
 
+instance FromJSON Zone where
+        parseJSON
+          = withObject "Zone"
+              (\ o ->
+                 Zone <$>
+                   (o .:? "status") <*>
+                     (o .:? "maintenanceWindows" .!= mempty)
+                     <*> (o .:? "kind" .!= "compute#zone")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "id")
+                     <*> (o .:? "region")
+                     <*> (o .:? "description")
+                     <*> (o .:? "deprecated"))
+
+instance ToJSON Zone where
+        toJSON Zone{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _zStatus,
+                  ("maintenanceWindows" .=) <$> _zMaintenanceWindows,
+                  Just ("kind" .= _zKind),
+                  ("selfLink" .=) <$> _zSelfLink,
+                  ("name" .=) <$> _zName,
+                  ("creationTimestamp" .=) <$> _zCreationTimestamp,
+                  ("id" .=) <$> _zId, ("region" .=) <$> _zRegion,
+                  ("description" .=) <$> _zDescription,
+                  ("deprecated" .=) <$> _zDeprecated])
+
 --
 -- /See:/ 'zoneItemMaintenanceWindows' smart constructor.
 data ZoneItemMaintenanceWindows = ZoneItemMaintenanceWindows
@@ -10959,6 +14604,24 @@ zimwDescription :: Lens' ZoneItemMaintenanceWindows (Maybe Text)
 zimwDescription
   = lens _zimwDescription
       (\ s a -> s{_zimwDescription = a})
+
+instance FromJSON ZoneItemMaintenanceWindows where
+        parseJSON
+          = withObject "ZoneItemMaintenanceWindows"
+              (\ o ->
+                 ZoneItemMaintenanceWindows <$>
+                   (o .:? "beginTime") <*> (o .:? "name") <*>
+                     (o .:? "endTime")
+                     <*> (o .:? "description"))
+
+instance ToJSON ZoneItemMaintenanceWindows where
+        toJSON ZoneItemMaintenanceWindows{..}
+          = object
+              (catMaybes
+                 [("beginTime" .=) <$> _zimwBeginTime,
+                  ("name" .=) <$> _zimwName,
+                  ("endTime" .=) <$> _zimwEndTime,
+                  ("description" .=) <$> _zimwDescription])
 
 -- | Contains a list of zone resources.
 --
@@ -11019,3 +14682,23 @@ zlSelfLink
 -- | [Output Only] Unique identifier for the resource; defined by the server.
 zlId :: Lens' ZoneList (Maybe Text)
 zlId = lens _zlId (\ s a -> s{_zlId = a})
+
+instance FromJSON ZoneList where
+        parseJSON
+          = withObject "ZoneList"
+              (\ o ->
+                 ZoneList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#zoneList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON ZoneList where
+        toJSON ZoneList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _zlNextPageToken,
+                  Just ("kind" .= _zlKind), ("items" .=) <$> _zlItems,
+                  ("selfLink" .=) <$> _zlSelfLink,
+                  ("id" .=) <$> _zlId])

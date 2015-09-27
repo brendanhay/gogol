@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -86,6 +87,28 @@ aDataDescription
   = lens _aDataDescription
       (\ s a -> s{_aDataDescription = a})
 
+instance FromJSON Analyze where
+        parseJSON
+          = withObject "Analyze"
+              (\ o ->
+                 Analyze <$>
+                   (o .:? "kind" .!= "prediction#analyze") <*>
+                     (o .:? "modelDescription")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id")
+                     <*> (o .:? "errors" .!= mempty)
+                     <*> (o .:? "dataDescription"))
+
+instance ToJSON Analyze where
+        toJSON Analyze{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _aKind),
+                  ("modelDescription" .=) <$> _aModelDescription,
+                  ("selfLink" .=) <$> _aSelfLink, ("id" .=) <$> _aId,
+                  ("errors" .=) <$> _aErrors,
+                  ("dataDescription" .=) <$> _aDataDescription])
+
 -- | Description of the categorical values of this feature.
 --
 -- /See:/ 'analyzeCategoricalItemFeaturesDataDescription' smart constructor.
@@ -121,6 +144,24 @@ acifddCount :: Lens' AnalyzeCategoricalItemFeaturesDataDescription (Maybe Int64)
 acifddCount
   = lens _acifddCount (\ s a -> s{_acifddCount = a})
 
+instance FromJSON
+         AnalyzeCategoricalItemFeaturesDataDescription where
+        parseJSON
+          = withObject
+              "AnalyzeCategoricalItemFeaturesDataDescription"
+              (\ o ->
+                 AnalyzeCategoricalItemFeaturesDataDescription <$>
+                   (o .:? "values" .!= mempty) <*> (o .:? "count"))
+
+instance ToJSON
+         AnalyzeCategoricalItemFeaturesDataDescription where
+        toJSON
+          AnalyzeCategoricalItemFeaturesDataDescription{..}
+          = object
+              (catMaybes
+                 [("values" .=) <$> _acifddValues,
+                  ("count" .=) <$> _acifddCount])
+
 -- | An output confusion matrix. This shows an estimate for how this model
 -- will do in predictions. This is first indexed by the true class label.
 -- For each true class label, this provides a pair {predicted_label,
@@ -139,6 +180,16 @@ analyzeConfusionMatrixModelDescription
     :: AnalyzeConfusionMatrixModelDescription
 analyzeConfusionMatrixModelDescription = AnalyzeConfusionMatrixModelDescription
 
+instance FromJSON
+         AnalyzeConfusionMatrixModelDescription where
+        parseJSON
+          = withObject "AnalyzeConfusionMatrixModelDescription"
+              (\ o -> pure AnalyzeConfusionMatrixModelDescription)
+
+instance ToJSON
+         AnalyzeConfusionMatrixModelDescription where
+        toJSON = const (Object mempty)
+
 -- | A list of the confusion matrix row totals.
 --
 -- /See:/ 'analyzeConfusionMatrixRowTotalsModelDescription' smart constructor.
@@ -152,6 +203,18 @@ analyzeConfusionMatrixRowTotalsModelDescription
     :: AnalyzeConfusionMatrixRowTotalsModelDescription
 analyzeConfusionMatrixRowTotalsModelDescription =
     AnalyzeConfusionMatrixRowTotalsModelDescription
+
+instance FromJSON
+         AnalyzeConfusionMatrixRowTotalsModelDescription where
+        parseJSON
+          = withObject
+              "AnalyzeConfusionMatrixRowTotalsModelDescription"
+              (\ o ->
+                 pure AnalyzeConfusionMatrixRowTotalsModelDescription)
+
+instance ToJSON
+         AnalyzeConfusionMatrixRowTotalsModelDescription where
+        toJSON = const (Object mempty)
 
 -- | Description of the data the model was trained on.
 --
@@ -189,6 +252,21 @@ addFeatures
       _Default
       . _Coerce
 
+instance FromJSON AnalyzeDataDescription where
+        parseJSON
+          = withObject "AnalyzeDataDescription"
+              (\ o ->
+                 AnalyzeDataDescription <$>
+                   (o .:? "outputFeature") <*>
+                     (o .:? "features" .!= mempty))
+
+instance ToJSON AnalyzeDataDescription where
+        toJSON AnalyzeDataDescription{..}
+          = object
+              (catMaybes
+                 [("outputFeature" .=) <$> _addOutputFeature,
+                  ("features" .=) <$> _addFeatures])
+
 --
 -- /See:/ 'analyzeItemErrors' smart constructor.
 data AnalyzeItemErrors =
@@ -200,6 +278,14 @@ data AnalyzeItemErrors =
 analyzeItemErrors
     :: AnalyzeItemErrors
 analyzeItemErrors = AnalyzeItemErrors
+
+instance FromJSON AnalyzeItemErrors where
+        parseJSON
+          = withObject "AnalyzeItemErrors"
+              (\ o -> pure AnalyzeItemErrors)
+
+instance ToJSON AnalyzeItemErrors where
+        toJSON = const (Object mempty)
 
 --
 -- /See:/ 'analyzeItemFeaturesDataDescription' smart constructor.
@@ -252,6 +338,26 @@ aifddCategorical
   = lens _aifddCategorical
       (\ s a -> s{_aifddCategorical = a})
 
+instance FromJSON AnalyzeItemFeaturesDataDescription
+         where
+        parseJSON
+          = withObject "AnalyzeItemFeaturesDataDescription"
+              (\ o ->
+                 AnalyzeItemFeaturesDataDescription <$>
+                   (o .:? "text") <*> (o .:? "numeric") <*>
+                     (o .:? "index")
+                     <*> (o .:? "categorical"))
+
+instance ToJSON AnalyzeItemFeaturesDataDescription
+         where
+        toJSON AnalyzeItemFeaturesDataDescription{..}
+          = object
+              (catMaybes
+                 [("text" .=) <$> _aifddText,
+                  ("numeric" .=) <$> _aifddNumeric,
+                  ("index" .=) <$> _aifddIndex,
+                  ("categorical" .=) <$> _aifddCategorical])
+
 --
 -- /See:/ 'analyzeItemTextOutputFeatureDataDescription' smart constructor.
 data AnalyzeItemTextOutputFeatureDataDescription = AnalyzeItemTextOutputFeatureDataDescription
@@ -283,6 +389,24 @@ aitofddValue
 aitofddCount :: Lens' AnalyzeItemTextOutputFeatureDataDescription (Maybe Int64)
 aitofddCount
   = lens _aitofddCount (\ s a -> s{_aitofddCount = a})
+
+instance FromJSON
+         AnalyzeItemTextOutputFeatureDataDescription where
+        parseJSON
+          = withObject
+              "AnalyzeItemTextOutputFeatureDataDescription"
+              (\ o ->
+                 AnalyzeItemTextOutputFeatureDataDescription <$>
+                   (o .:? "value") <*> (o .:? "count"))
+
+instance ToJSON
+         AnalyzeItemTextOutputFeatureDataDescription where
+        toJSON
+          AnalyzeItemTextOutputFeatureDataDescription{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _aitofddValue,
+                  ("count" .=) <$> _aitofddCount])
 
 --
 -- /See:/ 'analyzeItemValuesCategoricalItemFeaturesDataDescription' smart constructor.
@@ -317,6 +441,26 @@ aivcifddCount :: Lens' AnalyzeItemValuesCategoricalItemFeaturesDataDescription (
 aivcifddCount
   = lens _aivcifddCount
       (\ s a -> s{_aivcifddCount = a})
+
+instance FromJSON
+         AnalyzeItemValuesCategoricalItemFeaturesDataDescription
+         where
+        parseJSON
+          = withObject
+              "AnalyzeItemValuesCategoricalItemFeaturesDataDescription"
+              (\ o ->
+                 AnalyzeItemValuesCategoricalItemFeaturesDataDescription
+                   <$> (o .:? "value") <*> (o .:? "count"))
+
+instance ToJSON
+         AnalyzeItemValuesCategoricalItemFeaturesDataDescription
+         where
+        toJSON
+          AnalyzeItemValuesCategoricalItemFeaturesDataDescription{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _aivcifddValue,
+                  ("count" .=) <$> _aivcifddCount])
 
 -- | Description of the model.
 --
@@ -367,6 +511,24 @@ amdModelinfo :: Lens' AnalyzeModelDescription (Maybe (Maybe Insert2))
 amdModelinfo
   = lens _amdModelinfo (\ s a -> s{_amdModelinfo = a})
 
+instance FromJSON AnalyzeModelDescription where
+        parseJSON
+          = withObject "AnalyzeModelDescription"
+              (\ o ->
+                 AnalyzeModelDescription <$>
+                   (o .:? "confusionMatrixRowTotals") <*>
+                     (o .:? "confusionMatrix")
+                     <*> (o .:? "modelinfo"))
+
+instance ToJSON AnalyzeModelDescription where
+        toJSON AnalyzeModelDescription{..}
+          = object
+              (catMaybes
+                 [("confusionMatrixRowTotals" .=) <$>
+                    _amdConfusionMatrixRowTotals,
+                  ("confusionMatrix" .=) <$> _amdConfusionMatrix,
+                  ("modelinfo" .=) <$> _amdModelinfo])
+
 -- | Description of the numeric values of this feature.
 --
 -- /See:/ 'analyzeNumericItemFeaturesDataDescription' smart constructor.
@@ -409,6 +571,25 @@ anifddVariance :: Lens' AnalyzeNumericItemFeaturesDataDescription (Maybe Text)
 anifddVariance
   = lens _anifddVariance
       (\ s a -> s{_anifddVariance = a})
+
+instance FromJSON
+         AnalyzeNumericItemFeaturesDataDescription where
+        parseJSON
+          = withObject
+              "AnalyzeNumericItemFeaturesDataDescription"
+              (\ o ->
+                 AnalyzeNumericItemFeaturesDataDescription <$>
+                   (o .:? "mean") <*> (o .:? "count") <*>
+                     (o .:? "variance"))
+
+instance ToJSON
+         AnalyzeNumericItemFeaturesDataDescription where
+        toJSON AnalyzeNumericItemFeaturesDataDescription{..}
+          = object
+              (catMaybes
+                 [("mean" .=) <$> _anifddMean,
+                  ("count" .=) <$> _anifddCount,
+                  ("variance" .=) <$> _anifddVariance])
 
 -- | Description of the output values in the data set.
 --
@@ -453,6 +634,25 @@ anofddVariance
   = lens _anofddVariance
       (\ s a -> s{_anofddVariance = a})
 
+instance FromJSON
+         AnalyzeNumericOutputFeatureDataDescription where
+        parseJSON
+          = withObject
+              "AnalyzeNumericOutputFeatureDataDescription"
+              (\ o ->
+                 AnalyzeNumericOutputFeatureDataDescription <$>
+                   (o .:? "mean") <*> (o .:? "count") <*>
+                     (o .:? "variance"))
+
+instance ToJSON
+         AnalyzeNumericOutputFeatureDataDescription where
+        toJSON AnalyzeNumericOutputFeatureDataDescription{..}
+          = object
+              (catMaybes
+                 [("mean" .=) <$> _anofddMean,
+                  ("count" .=) <$> _anofddCount,
+                  ("variance" .=) <$> _anofddVariance])
+
 -- | Description of the output value or label.
 --
 -- /See:/ 'analyzeOutputFeatureDataDescription' smart constructor.
@@ -488,6 +688,22 @@ aofddNumeric :: Lens' AnalyzeOutputFeatureDataDescription (Maybe AnalyzeNumericO
 aofddNumeric
   = lens _aofddNumeric (\ s a -> s{_aofddNumeric = a})
 
+instance FromJSON AnalyzeOutputFeatureDataDescription
+         where
+        parseJSON
+          = withObject "AnalyzeOutputFeatureDataDescription"
+              (\ o ->
+                 AnalyzeOutputFeatureDataDescription <$>
+                   (o .:? "text" .!= mempty) <*> (o .:? "numeric"))
+
+instance ToJSON AnalyzeOutputFeatureDataDescription
+         where
+        toJSON AnalyzeOutputFeatureDataDescription{..}
+          = object
+              (catMaybes
+                 [("text" .=) <$> _aofddText,
+                  ("numeric" .=) <$> _aofddNumeric])
+
 -- | Description of multiple-word text values of this feature.
 --
 -- /See:/ 'analyzeTextItemFeaturesDataDescription' smart constructor.
@@ -512,6 +728,19 @@ atifddCount :: Lens' AnalyzeTextItemFeaturesDataDescription (Maybe Int64)
 atifddCount
   = lens _atifddCount (\ s a -> s{_atifddCount = a})
 
+instance FromJSON
+         AnalyzeTextItemFeaturesDataDescription where
+        parseJSON
+          = withObject "AnalyzeTextItemFeaturesDataDescription"
+              (\ o ->
+                 AnalyzeTextItemFeaturesDataDescription <$>
+                   (o .:? "count"))
+
+instance ToJSON
+         AnalyzeTextItemFeaturesDataDescription where
+        toJSON AnalyzeTextItemFeaturesDataDescription{..}
+          = object (catMaybes [("count" .=) <$> _atifddCount])
+
 --
 -- /See:/ 'input' smart constructor.
 newtype Input = Input
@@ -533,6 +762,15 @@ input =
 -- | Input to the model for a prediction.
 iInput :: Lens' Input (Maybe InputInput)
 iInput = lens _iInput (\ s a -> s{_iInput = a})
+
+instance FromJSON Input where
+        parseJSON
+          = withObject "Input"
+              (\ o -> Input <$> (o .:? "input"))
+
+instance ToJSON Input where
+        toJSON Input{..}
+          = object (catMaybes [("input" .=) <$> _iInput])
 
 -- | Input to the model for a prediction.
 --
@@ -560,6 +798,17 @@ iiCsvInstance
       (\ s a -> s{_iiCsvInstance = a})
       . _Default
       . _Coerce
+
+instance FromJSON InputInput where
+        parseJSON
+          = withObject "InputInput"
+              (\ o ->
+                 InputInput <$> (o .:? "csvInstance" .!= mempty))
+
+instance ToJSON InputInput where
+        toJSON InputInput{..}
+          = object
+              (catMaybes [("csvInstance" .=) <$> _iiCsvInstance])
 
 --
 -- /See:/ 'insert' smart constructor.
@@ -654,6 +903,35 @@ iStoragePMMLLocation :: Lens' Insert (Maybe Text)
 iStoragePMMLLocation
   = lens _iStoragePMMLLocation
       (\ s a -> s{_iStoragePMMLLocation = a})
+
+instance FromJSON Insert where
+        parseJSON
+          = withObject "Insert"
+              (\ o ->
+                 Insert <$>
+                   (o .:? "storageDataLocation") <*> (o .:? "modelType")
+                     <*> (o .:? "trainingInstances" .!= mempty)
+                     <*> (o .:? "utility" .!= mempty)
+                     <*> (o .:? "storagePMMLModelLocation")
+                     <*> (o .:? "sourceModel")
+                     <*> (o .:? "id")
+                     <*> (o .:? "storagePMMLLocation"))
+
+instance ToJSON Insert where
+        toJSON Insert{..}
+          = object
+              (catMaybes
+                 [("storageDataLocation" .=) <$>
+                    _iStorageDataLocation,
+                  ("modelType" .=) <$> _iModelType,
+                  ("trainingInstances" .=) <$> _iTrainingInstances,
+                  ("utility" .=) <$> _iUtility,
+                  ("storagePMMLModelLocation" .=) <$>
+                    _iStoragePMMLModelLocation,
+                  ("sourceModel" .=) <$> _iSourceModel,
+                  ("id" .=) <$> _iId,
+                  ("storagePMMLLocation" .=) <$>
+                    _iStoragePMMLLocation])
 
 --
 -- /See:/ 'insert2' smart constructor.
@@ -772,6 +1050,41 @@ insModelInfo :: Lens' Insert2 (Maybe Insert2ModelInfo)
 insModelInfo
   = lens _insModelInfo (\ s a -> s{_insModelInfo = a})
 
+instance FromJSON Insert2 where
+        parseJSON
+          = withObject "Insert2"
+              (\ o ->
+                 Insert2 <$>
+                   (o .:? "storageDataLocation") <*> (o .:? "modelType")
+                     <*> (o .:? "kind" .!= "prediction#training")
+                     <*> (o .:? "created")
+                     <*> (o .:? "trainingComplete")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "trainingStatus")
+                     <*> (o .:? "storagePMMLModelLocation")
+                     <*> (o .:? "id")
+                     <*> (o .:? "storagePMMLLocation")
+                     <*> (o .:? "modelInfo"))
+
+instance ToJSON Insert2 where
+        toJSON Insert2{..}
+          = object
+              (catMaybes
+                 [("storageDataLocation" .=) <$>
+                    _insStorageDataLocation,
+                  ("modelType" .=) <$> _insModelType,
+                  Just ("kind" .= _insKind),
+                  ("created" .=) <$> _insCreated,
+                  ("trainingComplete" .=) <$> _insTrainingComplete,
+                  ("selfLink" .=) <$> _insSelfLink,
+                  ("trainingStatus" .=) <$> _insTrainingStatus,
+                  ("storagePMMLModelLocation" .=) <$>
+                    _insStoragePMMLModelLocation,
+                  ("id" .=) <$> _insId,
+                  ("storagePMMLLocation" .=) <$>
+                    _insStoragePMMLLocation,
+                  ("modelInfo" .=) <$> _insModelInfo])
+
 -- | Model metadata.
 --
 -- /See:/ 'insert2ModelInfo' smart constructor.
@@ -853,6 +1166,31 @@ imiNumberInstances
   = lens _imiNumberInstances
       (\ s a -> s{_imiNumberInstances = a})
 
+instance FromJSON Insert2ModelInfo where
+        parseJSON
+          = withObject "Insert2ModelInfo"
+              (\ o ->
+                 Insert2ModelInfo <$>
+                   (o .:? "modelType") <*>
+                     (o .:? "classWeightedAccuracy")
+                     <*> (o .:? "classificationAccuracy")
+                     <*> (o .:? "meanSquaredError")
+                     <*> (o .:? "numberLabels")
+                     <*> (o .:? "numberInstances"))
+
+instance ToJSON Insert2ModelInfo where
+        toJSON Insert2ModelInfo{..}
+          = object
+              (catMaybes
+                 [("modelType" .=) <$> _imiModelType,
+                  ("classWeightedAccuracy" .=) <$>
+                    _imiClassWeightedAccuracy,
+                  ("classificationAccuracy" .=) <$>
+                    _imiClassificationAccuracy,
+                  ("meanSquaredError" .=) <$> _imiMeanSquaredError,
+                  ("numberLabels" .=) <$> _imiNumberLabels,
+                  ("numberInstances" .=) <$> _imiNumberInstances])
+
 --
 -- /See:/ 'insertItemTrainingInstances' smart constructor.
 data InsertItemTrainingInstances = InsertItemTrainingInstances
@@ -888,6 +1226,21 @@ iitiOutput :: Lens' InsertItemTrainingInstances (Maybe Text)
 iitiOutput
   = lens _iitiOutput (\ s a -> s{_iitiOutput = a})
 
+instance FromJSON InsertItemTrainingInstances where
+        parseJSON
+          = withObject "InsertItemTrainingInstances"
+              (\ o ->
+                 InsertItemTrainingInstances <$>
+                   (o .:? "csvInstance" .!= mempty) <*>
+                     (o .:? "output"))
+
+instance ToJSON InsertItemTrainingInstances where
+        toJSON InsertItemTrainingInstances{..}
+          = object
+              (catMaybes
+                 [("csvInstance" .=) <$> _iitiCsvInstance,
+                  ("output" .=) <$> _iitiOutput])
+
 -- | Class label (string).
 --
 -- /See:/ 'insertItemUtility' smart constructor.
@@ -900,6 +1253,14 @@ data InsertItemUtility =
 insertItemUtility
     :: InsertItemUtility
 insertItemUtility = InsertItemUtility
+
+instance FromJSON InsertItemUtility where
+        parseJSON
+          = withObject "InsertItemUtility"
+              (\ o -> pure InsertItemUtility)
+
+instance ToJSON InsertItemUtility where
+        toJSON = const (Object mempty)
 
 --
 -- /See:/ 'list' smart constructor.
@@ -951,6 +1312,24 @@ lItems
 lSelfLink :: Lens' List (Maybe Text)
 lSelfLink
   = lens _lSelfLink (\ s a -> s{_lSelfLink = a})
+
+instance FromJSON List where
+        parseJSON
+          = withObject "List"
+              (\ o ->
+                 List <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "prediction#list")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink"))
+
+instance ToJSON List where
+        toJSON List{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lNextPageToken,
+                  Just ("kind" .= _lKind), ("items" .=) <$> _lItems,
+                  ("selfLink" .=) <$> _lSelfLink])
 
 --
 -- /See:/ 'output' smart constructor.
@@ -1021,6 +1400,28 @@ oOutputMulti
       . _Default
       . _Coerce
 
+instance FromJSON Output where
+        parseJSON
+          = withObject "Output"
+              (\ o ->
+                 Output <$>
+                   (o .:? "outputValue") <*>
+                     (o .:? "kind" .!= "prediction#output")
+                     <*> (o .:? "outputLabel")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id")
+                     <*> (o .:? "outputMulti" .!= mempty))
+
+instance ToJSON Output where
+        toJSON Output{..}
+          = object
+              (catMaybes
+                 [("outputValue" .=) <$> _oOutputValue,
+                  Just ("kind" .= _oKind),
+                  ("outputLabel" .=) <$> _oOutputLabel,
+                  ("selfLink" .=) <$> _oSelfLink, ("id" .=) <$> _oId,
+                  ("outputMulti" .=) <$> _oOutputMulti])
+
 --
 -- /See:/ 'outputItemOutputMulti' smart constructor.
 data OutputItemOutputMulti = OutputItemOutputMulti
@@ -1052,6 +1453,20 @@ oiomScore
 oiomLabel :: Lens' OutputItemOutputMulti (Maybe Text)
 oiomLabel
   = lens _oiomLabel (\ s a -> s{_oiomLabel = a})
+
+instance FromJSON OutputItemOutputMulti where
+        parseJSON
+          = withObject "OutputItemOutputMulti"
+              (\ o ->
+                 OutputItemOutputMulti <$>
+                   (o .:? "score") <*> (o .:? "label"))
+
+instance ToJSON OutputItemOutputMulti where
+        toJSON OutputItemOutputMulti{..}
+          = object
+              (catMaybes
+                 [("score" .=) <$> _oiomScore,
+                  ("label" .=) <$> _oiomLabel])
 
 --
 -- /See:/ 'update' smart constructor.
@@ -1085,3 +1500,18 @@ uCsvInstance
 -- | The generic output value - could be regression or class label.
 uOutput :: Lens' Update (Maybe Text)
 uOutput = lens _uOutput (\ s a -> s{_uOutput = a})
+
+instance FromJSON Update where
+        parseJSON
+          = withObject "Update"
+              (\ o ->
+                 Update <$>
+                   (o .:? "csvInstance" .!= mempty) <*>
+                     (o .:? "output"))
+
+instance ToJSON Update where
+        toJSON Update{..}
+          = object
+              (catMaybes
+                 [("csvInstance" .=) <$> _uCsvInstance,
+                  ("output" .=) <$> _uOutput])

@@ -351,16 +351,18 @@ type AdclientsAPI = AdclientsList
 
 -- | List all ad clients in this AdSense account.
 type AdclientsList =
-     "adsense" :> "v1.4" :> "adclients" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adsense" :>
+       "v1.4" :>
+         "adclients" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "maxResults" Int32 :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Get '[JSON] AdClients
 
 type AccountsAPI =
      AdclientsAPI :<|> ReportsAPI :<|> AlertsAPI :<|>
@@ -374,18 +376,20 @@ type AdclientsAPI = AdclientsList
 
 -- | List all ad clients in the specified account.
 type AdclientsList =
-     "adsense" :> "v1.4" :> "accounts" :>
-       Capture "accountId" Text
-       :> "adclients"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adsense" :>
+       "v1.4" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "adclients" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Int32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Get '[JSON] AdClients
 
 type ReportsAPI = SavedAPI
 
@@ -393,68 +397,78 @@ type SavedAPI = SavedList :<|> SavedGenerate
 
 -- | List all saved reports in the specified AdSense account.
 type SavedList =
-     "adsense" :> "v1.4" :> "accounts" :>
-       Capture "accountId" Text
-       :> "reports"
-       :> "saved"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adsense" :>
+       "v1.4" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "reports" :>
+               "saved" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "maxResults" Int32 :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Get '[JSON] SavedReports
 
 -- | Generate an AdSense report based on the saved report ID sent in the
 -- query parameters.
 type SavedGenerate =
-     "adsense" :> "v1.4" :> "accounts" :>
-       Capture "accountId" Text
-       :> "reports"
-       :> Capture "savedReportId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "locale" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "startIndex" Int32
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adsense" :>
+       "v1.4" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "reports" :>
+               Capture "savedReportId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "locale" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "startIndex" Int32 :>
+                               QueryParam "maxResults" Int32 :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON] AdsenseReportsGenerateResponse
 
 type AlertsAPI = AlertsList :<|> AlertsDelete
 
 -- | List the alerts for the specified AdSense account.
 type AlertsList =
-     "adsense" :> "v1.4" :> "accounts" :>
-       Capture "accountId" Text
-       :> "alerts"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "locale" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adsense" :>
+       "v1.4" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "alerts" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "locale" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] Alerts
 
 -- | Dismiss (delete) the specified alert from the specified publisher
 -- AdSense account.
 type AlertsDelete =
-     "adsense" :> "v1.4" :> "accounts" :>
-       Capture "accountId" Text
-       :> "alerts"
-       :> Capture "alertId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adsense" :>
+       "v1.4" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "alerts" :>
+               Capture "alertId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Delete '[JSON] ()
 
 type AdunitsAPI = CustomchannelsAPI
 
@@ -462,42 +476,48 @@ type CustomchannelsAPI = CustomchannelsList
 
 -- | List all custom channels which the specified ad unit belongs to.
 type CustomchannelsList =
-     "adsense" :> "v1.4" :> "accounts" :>
-       Capture "accountId" Text
-       :> "adclients"
-       :> Capture "adClientId" Text
-       :> "adunits"
-       :> Capture "adUnitId" Text
-       :> "customchannels"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adsense" :>
+       "v1.4" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "adclients" :>
+               Capture "adClientId" Text :>
+                 "adunits" :>
+                   Capture "adUnitId" Text :>
+                     "customchannels" :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "maxResults" Int32 :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Text :>
+                                         Get '[JSON] CustomChannels
 
 type UrlchannelsAPI = UrlchannelsList
 
 -- | List all URL channels in the specified ad client for the specified
 -- account.
 type UrlchannelsList =
-     "adsense" :> "v1.4" :> "accounts" :>
-       Capture "accountId" Text
-       :> "adclients"
-       :> Capture "adClientId" Text
-       :> "urlchannels"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adsense" :>
+       "v1.4" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "adclients" :>
+               Capture "adClientId" Text :>
+                 "urlchannels" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "maxResults" Int32 :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON] UrlChannels
 
 type CustomchannelsAPI = AdunitsAPI
 
@@ -505,70 +525,80 @@ type AdunitsAPI = AdunitsList
 
 -- | List all ad units in the specified custom channel.
 type AdunitsList =
-     "adsense" :> "v1.4" :> "accounts" :>
-       Capture "accountId" Text
-       :> "adclients"
-       :> Capture "adClientId" Text
-       :> "customchannels"
-       :> Capture "customChannelId" Text
-       :> "adunits"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "includeInactive" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adsense" :>
+       "v1.4" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "adclients" :>
+               Capture "adClientId" Text :>
+                 "customchannels" :>
+                   Capture "customChannelId" Text :>
+                     "adunits" :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "includeInactive" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "pageToken" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "maxResults" Int32 :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "alt" Text :>
+                                           Get '[JSON] AdUnits
 
 type SavedadstylesAPI =
      SavedadstylesList :<|> SavedadstylesGet
 
 -- | List all saved ad styles in the specified account.
 type SavedadstylesList =
-     "adsense" :> "v1.4" :> "accounts" :>
-       Capture "accountId" Text
-       :> "savedadstyles"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adsense" :>
+       "v1.4" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "savedadstyles" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Int32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :>
+                                 Get '[JSON] SavedAdStyles
 
 -- | List a specific saved ad style for the specified account.
 type SavedadstylesGet =
-     "adsense" :> "v1.4" :> "accounts" :>
-       Capture "accountId" Text
-       :> "savedadstyles"
-       :> Capture "savedAdStyleId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adsense" :>
+       "v1.4" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "savedadstyles" :>
+               Capture "savedAdStyleId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] SavedAdStyle
 
 type PaymentsAPI = PaymentsList
 
 -- | List the payments for the specified AdSense account.
 type PaymentsList =
-     "adsense" :> "v1.4" :> "accounts" :>
-       Capture "accountId" Text
-       :> "payments"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adsense" :>
+       "v1.4" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "payments" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Get '[JSON] Payments
 
 type ReportsAPI = SavedAPI
 
@@ -576,59 +606,69 @@ type SavedAPI = SavedList :<|> SavedGenerate
 
 -- | List all saved reports in this AdSense account.
 type SavedList =
-     "adsense" :> "v1.4" :> "reports" :> "saved" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adsense" :>
+       "v1.4" :>
+         "reports" :>
+           "saved" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Int32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] SavedReports
 
 -- | Generate an AdSense report based on the saved report ID sent in the
 -- query parameters.
 type SavedGenerate =
-     "adsense" :> "v1.4" :> "reports" :>
-       Capture "savedReportId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "locale" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "startIndex" Int32
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adsense" :>
+       "v1.4" :>
+         "reports" :>
+           Capture "savedReportId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "locale" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "startIndex" Int32 :>
+                           QueryParam "maxResults" Int32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :>
+                                 Get '[JSON] AdsenseReportsGenerateResponse
 
 type AlertsAPI = AlertsList :<|> AlertsDelete
 
 -- | List the alerts for this AdSense account.
 type AlertsList =
-     "adsense" :> "v1.4" :> "alerts" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "locale" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adsense" :>
+       "v1.4" :>
+         "alerts" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "locale" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Get '[JSON] Alerts
 
 -- | Dismiss (delete) the specified alert from the publisher\'s AdSense
 -- account.
 type AlertsDelete =
-     "adsense" :> "v1.4" :> "alerts" :>
-       Capture "alertId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adsense" :>
+       "v1.4" :>
+         "alerts" :>
+           Capture "alertId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Delete '[JSON] ()
 
 type AdunitsAPI = CustomchannelsAPI
 
@@ -636,38 +676,43 @@ type CustomchannelsAPI = CustomchannelsList
 
 -- | List all custom channels which the specified ad unit belongs to.
 type CustomchannelsList =
-     "adsense" :> "v1.4" :> "adclients" :>
-       Capture "adClientId" Text
-       :> "adunits"
-       :> Capture "adUnitId" Text
-       :> "customchannels"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adsense" :>
+       "v1.4" :>
+         "adclients" :>
+           Capture "adClientId" Text :>
+             "adunits" :>
+               Capture "adUnitId" Text :>
+                 "customchannels" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "maxResults" Int32 :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON] CustomChannels
 
 type UrlchannelsAPI = UrlchannelsList
 
 -- | List all URL channels in the specified ad client for this AdSense
 -- account.
 type UrlchannelsList =
-     "adsense" :> "v1.4" :> "adclients" :>
-       Capture "adClientId" Text
-       :> "urlchannels"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adsense" :>
+       "v1.4" :>
+         "adclients" :>
+           Capture "adClientId" Text :>
+             "urlchannels" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Int32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Get '[JSON] UrlChannels
 
 type CustomchannelsAPI = AdunitsAPI
 
@@ -675,49 +720,56 @@ type AdunitsAPI = AdunitsList
 
 -- | List all ad units in the specified custom channel.
 type AdunitsList =
-     "adsense" :> "v1.4" :> "adclients" :>
-       Capture "adClientId" Text
-       :> "customchannels"
-       :> Capture "customChannelId" Text
-       :> "adunits"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "includeInactive" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adsense" :>
+       "v1.4" :>
+         "adclients" :>
+           Capture "adClientId" Text :>
+             "customchannels" :>
+               Capture "customChannelId" Text :>
+                 "adunits" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "includeInactive" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "maxResults" Int32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :>
+                                       Get '[JSON] AdUnits
 
 type SavedadstylesAPI =
      SavedadstylesList :<|> SavedadstylesGet
 
 -- | List all saved ad styles in the user\'s account.
 type SavedadstylesList =
-     "adsense" :> "v1.4" :> "savedadstyles" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adsense" :>
+       "v1.4" :>
+         "savedadstyles" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "maxResults" Int32 :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Get '[JSON] SavedAdStyles
 
 -- | Get a specific saved ad style from the user\'s account.
 type SavedadstylesGet =
-     "adsense" :> "v1.4" :> "savedadstyles" :>
-       Capture "savedAdStyleId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adsense" :>
+       "v1.4" :>
+         "savedadstyles" :>
+           Capture "savedAdStyleId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Get '[JSON] SavedAdStyle
 
 type MetadataAPI = MetricsAPI :<|> DimensionsAPI
 
@@ -725,37 +777,45 @@ type MetricsAPI = MetricsList
 
 -- | List the metadata for the metrics available to this AdSense account.
 type MetricsList =
-     "adsense" :> "v1.4" :> "metadata" :> "metrics" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adsense" :>
+       "v1.4" :>
+         "metadata" :>
+           "metrics" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Get '[JSON] Metadata
 
 type DimensionsAPI = DimensionsList
 
 -- | List the metadata for the dimensions available to this AdSense account.
 type DimensionsList =
-     "adsense" :> "v1.4" :> "metadata" :> "dimensions" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adsense" :>
+       "v1.4" :>
+         "metadata" :>
+           "dimensions" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Get '[JSON] Metadata
 
 type PaymentsAPI = PaymentsList
 
 -- | List the payments for this AdSense account.
 type PaymentsList =
-     "adsense" :> "v1.4" :> "payments" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adsense" :>
+       "v1.4" :>
+         "payments" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Text :> Get '[JSON] Payments

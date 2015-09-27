@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -282,6 +283,68 @@ aLargestChangeId
   = lens _aLargestChangeId
       (\ s a -> s{_aLargestChangeId = a})
 
+instance FromJSON About where
+        parseJSON
+          = withObject "About"
+              (\ o ->
+                 About <$>
+                   (o .:? "exportFormats" .!= mempty) <*>
+                     (o .:? "remainingChangeIds")
+                     <*> (o .:? "languageCode")
+                     <*> (o .:? "etag")
+                     <*> (o .:? "importFormats" .!= mempty)
+                     <*> (o .:? "kind" .!= "drive#about")
+                     <*> (o .:? "domainSharingPolicy")
+                     <*> (o .:? "quotaBytesUsedInTrash")
+                     <*> (o .:? "quotaType")
+                     <*> (o .:? "maxUploadSizes" .!= mempty)
+                     <*> (o .:? "user")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "features" .!= mempty)
+                     <*> (o .:? "isCurrentAppInstalled")
+                     <*> (o .:? "quotaBytesTotal")
+                     <*> (o .:? "rootFolderId")
+                     <*> (o .:? "quotaBytesUsed")
+                     <*> (o .:? "additionalRoleInfo" .!= mempty)
+                     <*> (o .:? "folderColorPalette" .!= mempty)
+                     <*> (o .:? "permissionId")
+                     <*> (o .:? "quotaBytesUsedAggregate")
+                     <*> (o .:? "quotaBytesByService" .!= mempty)
+                     <*> (o .:? "largestChangeId"))
+
+instance ToJSON About where
+        toJSON About{..}
+          = object
+              (catMaybes
+                 [("exportFormats" .=) <$> _aExportFormats,
+                  ("remainingChangeIds" .=) <$> _aRemainingChangeIds,
+                  ("languageCode" .=) <$> _aLanguageCode,
+                  ("etag" .=) <$> _aEtag,
+                  ("importFormats" .=) <$> _aImportFormats,
+                  Just ("kind" .= _aKind),
+                  ("domainSharingPolicy" .=) <$> _aDomainSharingPolicy,
+                  ("quotaBytesUsedInTrash" .=) <$>
+                    _aQuotaBytesUsedInTrash,
+                  ("quotaType" .=) <$> _aQuotaType,
+                  ("maxUploadSizes" .=) <$> _aMaxUploadSizes,
+                  ("user" .=) <$> _aUser,
+                  ("selfLink" .=) <$> _aSelfLink,
+                  ("name" .=) <$> _aName,
+                  ("features" .=) <$> _aFeatures,
+                  ("isCurrentAppInstalled" .=) <$>
+                    _aIsCurrentAppInstalled,
+                  ("quotaBytesTotal" .=) <$> _aQuotaBytesTotal,
+                  ("rootFolderId" .=) <$> _aRootFolderId,
+                  ("quotaBytesUsed" .=) <$> _aQuotaBytesUsed,
+                  ("additionalRoleInfo" .=) <$> _aAdditionalRoleInfo,
+                  ("folderColorPalette" .=) <$> _aFolderColorPalette,
+                  ("permissionId" .=) <$> _aPermissionId,
+                  ("quotaBytesUsedAggregate" .=) <$>
+                    _aQuotaBytesUsedAggregate,
+                  ("quotaBytesByService" .=) <$> _aQuotaBytesByService,
+                  ("largestChangeId" .=) <$> _aLargestChangeId])
+
 --
 -- /See:/ 'aboutItemAdditionalRoleInfo' smart constructor.
 data AboutItemAdditionalRoleInfo = AboutItemAdditionalRoleInfo
@@ -317,6 +380,20 @@ aiariType :: Lens' AboutItemAdditionalRoleInfo (Maybe Text)
 aiariType
   = lens _aiariType (\ s a -> s{_aiariType = a})
 
+instance FromJSON AboutItemAdditionalRoleInfo where
+        parseJSON
+          = withObject "AboutItemAdditionalRoleInfo"
+              (\ o ->
+                 AboutItemAdditionalRoleInfo <$>
+                   (o .:? "roleSets" .!= mempty) <*> (o .:? "type"))
+
+instance ToJSON AboutItemAdditionalRoleInfo where
+        toJSON AboutItemAdditionalRoleInfo{..}
+          = object
+              (catMaybes
+                 [("roleSets" .=) <$> _aiariRoleSets,
+                  ("type" .=) <$> _aiariType])
+
 --
 -- /See:/ 'aboutItemExportFormats' smart constructor.
 data AboutItemExportFormats = AboutItemExportFormats
@@ -350,6 +427,20 @@ aiefTargets
 aiefSource :: Lens' AboutItemExportFormats (Maybe Text)
 aiefSource
   = lens _aiefSource (\ s a -> s{_aiefSource = a})
+
+instance FromJSON AboutItemExportFormats where
+        parseJSON
+          = withObject "AboutItemExportFormats"
+              (\ o ->
+                 AboutItemExportFormats <$>
+                   (o .:? "targets" .!= mempty) <*> (o .:? "source"))
+
+instance ToJSON AboutItemExportFormats where
+        toJSON AboutItemExportFormats{..}
+          = object
+              (catMaybes
+                 [("targets" .=) <$> _aiefTargets,
+                  ("source" .=) <$> _aiefSource])
 
 --
 -- /See:/ 'aboutItemFeatures' smart constructor.
@@ -385,6 +476,20 @@ aifFeatureName
   = lens _aifFeatureName
       (\ s a -> s{_aifFeatureName = a})
 
+instance FromJSON AboutItemFeatures where
+        parseJSON
+          = withObject "AboutItemFeatures"
+              (\ o ->
+                 AboutItemFeatures <$>
+                   (o .:? "featureRate") <*> (o .:? "featureName"))
+
+instance ToJSON AboutItemFeatures where
+        toJSON AboutItemFeatures{..}
+          = object
+              (catMaybes
+                 [("featureRate" .=) <$> _aifFeatureRate,
+                  ("featureName" .=) <$> _aifFeatureName])
+
 --
 -- /See:/ 'aboutItemImportFormats' smart constructor.
 data AboutItemImportFormats = AboutItemImportFormats
@@ -419,6 +524,20 @@ aiifSource :: Lens' AboutItemImportFormats (Maybe Text)
 aiifSource
   = lens _aiifSource (\ s a -> s{_aiifSource = a})
 
+instance FromJSON AboutItemImportFormats where
+        parseJSON
+          = withObject "AboutItemImportFormats"
+              (\ o ->
+                 AboutItemImportFormats <$>
+                   (o .:? "targets" .!= mempty) <*> (o .:? "source"))
+
+instance ToJSON AboutItemImportFormats where
+        toJSON AboutItemImportFormats{..}
+          = object
+              (catMaybes
+                 [("targets" .=) <$> _aiifTargets,
+                  ("source" .=) <$> _aiifSource])
+
 --
 -- /See:/ 'aboutItemMaxUploadSizes' smart constructor.
 data AboutItemMaxUploadSizes = AboutItemMaxUploadSizes
@@ -450,6 +569,20 @@ aimusSize
 aimusType :: Lens' AboutItemMaxUploadSizes (Maybe Text)
 aimusType
   = lens _aimusType (\ s a -> s{_aimusType = a})
+
+instance FromJSON AboutItemMaxUploadSizes where
+        parseJSON
+          = withObject "AboutItemMaxUploadSizes"
+              (\ o ->
+                 AboutItemMaxUploadSizes <$>
+                   (o .:? "size") <*> (o .:? "type"))
+
+instance ToJSON AboutItemMaxUploadSizes where
+        toJSON AboutItemMaxUploadSizes{..}
+          = object
+              (catMaybes
+                 [("size" .=) <$> _aimusSize,
+                  ("type" .=) <$> _aimusType])
 
 --
 -- /See:/ 'aboutItemQuotaBytesByService' smart constructor.
@@ -484,6 +617,20 @@ aiqbbsServiceName :: Lens' AboutItemQuotaBytesByService (Maybe Text)
 aiqbbsServiceName
   = lens _aiqbbsServiceName
       (\ s a -> s{_aiqbbsServiceName = a})
+
+instance FromJSON AboutItemQuotaBytesByService where
+        parseJSON
+          = withObject "AboutItemQuotaBytesByService"
+              (\ o ->
+                 AboutItemQuotaBytesByService <$>
+                   (o .:? "bytesUsed") <*> (o .:? "serviceName"))
+
+instance ToJSON AboutItemQuotaBytesByService where
+        toJSON AboutItemQuotaBytesByService{..}
+          = object
+              (catMaybes
+                 [("bytesUsed" .=) <$> _aiqbbsBytesUsed,
+                  ("serviceName" .=) <$> _aiqbbsServiceName])
 
 --
 -- /See:/ 'aboutItemRoleSetsItemAdditionalRoleInfo' smart constructor.
@@ -520,6 +667,24 @@ airsiariAdditionalRoles
       (\ s a -> s{_airsiariAdditionalRoles = a})
       . _Default
       . _Coerce
+
+instance FromJSON
+         AboutItemRoleSetsItemAdditionalRoleInfo where
+        parseJSON
+          = withObject
+              "AboutItemRoleSetsItemAdditionalRoleInfo"
+              (\ o ->
+                 AboutItemRoleSetsItemAdditionalRoleInfo <$>
+                   (o .:? "primaryRole") <*>
+                     (o .:? "additionalRoles" .!= mempty))
+
+instance ToJSON
+         AboutItemRoleSetsItemAdditionalRoleInfo where
+        toJSON AboutItemRoleSetsItemAdditionalRoleInfo{..}
+          = object
+              (catMaybes
+                 [("primaryRole" .=) <$> _airsiariPrimaryRole,
+                  ("additionalRoles" .=) <$> _airsiariAdditionalRoles])
 
 -- | The apps resource provides a list of the apps that a user has installed,
 -- with information about each app\'s supported MIME types, file
@@ -785,6 +950,69 @@ appSupportsOfflineCreate
   = lens _appSupportsOfflineCreate
       (\ s a -> s{_appSupportsOfflineCreate = a})
 
+instance FromJSON App where
+        parseJSON
+          = withObject "App"
+              (\ o ->
+                 App <$>
+                   (o .:? "longDescription") <*>
+                     (o .:? "openUrlTemplate")
+                     <*> (o .:? "authorized")
+                     <*> (o .:? "objectType")
+                     <*> (o .:? "secondaryMimeTypes" .!= mempty)
+                     <*> (o .:? "createInFolderTemplate")
+                     <*> (o .:? "kind" .!= "drive#app")
+                     <*> (o .:? "icons" .!= mempty)
+                     <*> (o .:? "productUrl")
+                     <*> (o .:? "useByDefault")
+                     <*> (o .:? "shortDescription")
+                     <*> (o .:? "name")
+                     <*> (o .:? "createUrl")
+                     <*> (o .:? "id")
+                     <*> (o .:? "primaryFileExtensions" .!= mempty)
+                     <*> (o .:? "installed")
+                     <*> (o .:? "supportsCreate")
+                     <*> (o .:? "primaryMimeTypes" .!= mempty)
+                     <*> (o .:? "hasDriveWideScope")
+                     <*> (o .:? "productId")
+                     <*> (o .:? "secondaryFileExtensions" .!= mempty)
+                     <*> (o .:? "supportsMultiOpen")
+                     <*> (o .:? "supportsImport")
+                     <*> (o .:? "supportsOfflineCreate"))
+
+instance ToJSON App where
+        toJSON App{..}
+          = object
+              (catMaybes
+                 [("longDescription" .=) <$> _appLongDescription,
+                  ("openUrlTemplate" .=) <$> _appOpenUrlTemplate,
+                  ("authorized" .=) <$> _appAuthorized,
+                  ("objectType" .=) <$> _appObjectType,
+                  ("secondaryMimeTypes" .=) <$> _appSecondaryMimeTypes,
+                  ("createInFolderTemplate" .=) <$>
+                    _appCreateInFolderTemplate,
+                  Just ("kind" .= _appKind),
+                  ("icons" .=) <$> _appIcons,
+                  ("productUrl" .=) <$> _appProductUrl,
+                  ("useByDefault" .=) <$> _appUseByDefault,
+                  ("shortDescription" .=) <$> _appShortDescription,
+                  ("name" .=) <$> _appName,
+                  ("createUrl" .=) <$> _appCreateUrl,
+                  ("id" .=) <$> _appId,
+                  ("primaryFileExtensions" .=) <$>
+                    _appPrimaryFileExtensions,
+                  ("installed" .=) <$> _appInstalled,
+                  ("supportsCreate" .=) <$> _appSupportsCreate,
+                  ("primaryMimeTypes" .=) <$> _appPrimaryMimeTypes,
+                  ("hasDriveWideScope" .=) <$> _appHasDriveWideScope,
+                  ("productId" .=) <$> _appProductId,
+                  ("secondaryFileExtensions" .=) <$>
+                    _appSecondaryFileExtensions,
+                  ("supportsMultiOpen" .=) <$> _appSupportsMultiOpen,
+                  ("supportsImport" .=) <$> _appSupportsImport,
+                  ("supportsOfflineCreate" .=) <$>
+                    _appSupportsOfflineCreate])
+
 --
 -- /See:/ 'appItemIcons' smart constructor.
 data AppItemIcons = AppItemIcons
@@ -826,6 +1054,22 @@ aiiCategory
 aiiIconUrl :: Lens' AppItemIcons (Maybe Text)
 aiiIconUrl
   = lens _aiiIconUrl (\ s a -> s{_aiiIconUrl = a})
+
+instance FromJSON AppItemIcons where
+        parseJSON
+          = withObject "AppItemIcons"
+              (\ o ->
+                 AppItemIcons <$>
+                   (o .:? "size") <*> (o .:? "category") <*>
+                     (o .:? "iconUrl"))
+
+instance ToJSON AppItemIcons where
+        toJSON AppItemIcons{..}
+          = object
+              (catMaybes
+                 [("size" .=) <$> _aiiSize,
+                  ("category" .=) <$> _aiiCategory,
+                  ("iconUrl" .=) <$> _aiiIconUrl])
 
 -- | A list of third-party applications which the user has installed or given
 -- access to Google Drive.
@@ -890,6 +1134,25 @@ alItems
 alSelfLink :: Lens' AppList (Maybe Text)
 alSelfLink
   = lens _alSelfLink (\ s a -> s{_alSelfLink = a})
+
+instance FromJSON AppList where
+        parseJSON
+          = withObject "AppList"
+              (\ o ->
+                 AppList <$>
+                   (o .:? "defaultAppIds" .!= mempty) <*> (o .:? "etag")
+                     <*> (o .:? "kind" .!= "drive#appList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink"))
+
+instance ToJSON AppList where
+        toJSON AppList{..}
+          = object
+              (catMaybes
+                 [("defaultAppIds" .=) <$> _alDefaultAppIds,
+                  ("etag" .=) <$> _alEtag, Just ("kind" .= _alKind),
+                  ("items" .=) <$> _alItems,
+                  ("selfLink" .=) <$> _alSelfLink])
 
 -- | Representation of a change to a file.
 --
@@ -966,6 +1229,30 @@ chaFileId
 -- | The updated state of the file. Present if the file has not been deleted.
 chaFile :: Lens' Change (Maybe (Maybe File))
 chaFile = lens _chaFile (\ s a -> s{_chaFile = a})
+
+instance FromJSON Change where
+        parseJSON
+          = withObject "Change"
+              (\ o ->
+                 Change <$>
+                   (o .:? "kind" .!= "drive#change") <*>
+                     (o .:? "selfLink")
+                     <*> (o .:? "modificationDate")
+                     <*> (o .:? "id")
+                     <*> (o .:? "deleted")
+                     <*> (o .:? "fileId")
+                     <*> (o .:? "file"))
+
+instance ToJSON Change where
+        toJSON Change{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _chaKind),
+                  ("selfLink" .=) <$> _chaSelfLink,
+                  ("modificationDate" .=) <$> _chaModificationDate,
+                  ("id" .=) <$> _chaId, ("deleted" .=) <$> _chaDeleted,
+                  ("fileId" .=) <$> _chaFileId,
+                  ("file" .=) <$> _chaFile])
 
 -- | A list of changes for a user.
 --
@@ -1045,6 +1332,29 @@ clLargestChangeId :: Lens' ChangeList (Maybe Int64)
 clLargestChangeId
   = lens _clLargestChangeId
       (\ s a -> s{_clLargestChangeId = a})
+
+instance FromJSON ChangeList where
+        parseJSON
+          = withObject "ChangeList"
+              (\ o ->
+                 ChangeList <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "nextLink")
+                     <*> (o .:? "kind" .!= "drive#changeList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "largestChangeId"))
+
+instance ToJSON ChangeList where
+        toJSON ChangeList{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _clEtag,
+                  ("nextPageToken" .=) <$> _clNextPageToken,
+                  ("nextLink" .=) <$> _clNextLink,
+                  Just ("kind" .= _clKind), ("items" .=) <$> _clItems,
+                  ("selfLink" .=) <$> _clSelfLink,
+                  ("largestChangeId" .=) <$> _clLargestChangeId])
 
 -- | An notification channel used to watch for resource changes.
 --
@@ -1155,6 +1465,35 @@ chahId = lens _chahId (\ s a -> s{_chahId = a})
 chahType :: Lens' Channel (Maybe Text)
 chahType = lens _chahType (\ s a -> s{_chahType = a})
 
+instance FromJSON Channel where
+        parseJSON
+          = withObject "Channel"
+              (\ o ->
+                 Channel <$>
+                   (o .:? "resourceUri") <*> (o .:? "resourceId") <*>
+                     (o .:? "kind" .!= "api#channel")
+                     <*> (o .:? "expiration")
+                     <*> (o .:? "token")
+                     <*> (o .:? "address")
+                     <*> (o .:? "payload")
+                     <*> (o .:? "params")
+                     <*> (o .:? "id")
+                     <*> (o .:? "type"))
+
+instance ToJSON Channel where
+        toJSON Channel{..}
+          = object
+              (catMaybes
+                 [("resourceUri" .=) <$> _chahResourceUri,
+                  ("resourceId" .=) <$> _chahResourceId,
+                  Just ("kind" .= _chahKind),
+                  ("expiration" .=) <$> _chahExpiration,
+                  ("token" .=) <$> _chahToken,
+                  ("address" .=) <$> _chahAddress,
+                  ("payload" .=) <$> _chahPayload,
+                  ("params" .=) <$> _chahParams, ("id" .=) <$> _chahId,
+                  ("type" .=) <$> _chahType])
+
 -- | Additional parameters controlling delivery channel behavior. Optional.
 --
 -- /See:/ 'channelParams' smart constructor.
@@ -1167,6 +1506,14 @@ data ChannelParams =
 channelParams
     :: ChannelParams
 channelParams = ChannelParams
+
+instance FromJSON ChannelParams where
+        parseJSON
+          = withObject "ChannelParams"
+              (\ o -> pure ChannelParams)
+
+instance ToJSON ChannelParams where
+        toJSON = const (Object mempty)
 
 -- | A list of children of a file.
 --
@@ -1238,6 +1585,28 @@ chiSelfLink :: Lens' ChildList (Maybe Text)
 chiSelfLink
   = lens _chiSelfLink (\ s a -> s{_chiSelfLink = a})
 
+instance FromJSON ChildList where
+        parseJSON
+          = withObject "ChildList"
+              (\ o ->
+                 ChildList <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "nextLink")
+                     <*> (o .:? "kind" .!= "drive#childList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink"))
+
+instance ToJSON ChildList where
+        toJSON ChildList{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _chiEtag,
+                  ("nextPageToken" .=) <$> _chiNextPageToken,
+                  ("nextLink" .=) <$> _chiNextLink,
+                  Just ("kind" .= _chiKind),
+                  ("items" .=) <$> _chiItems,
+                  ("selfLink" .=) <$> _chiSelfLink])
+
 -- | A reference to a folder\'s child.
 --
 -- /See:/ 'childReference' smart constructor.
@@ -1286,6 +1655,25 @@ crSelfLink
 -- | The ID of the child.
 crId :: Lens' ChildReference (Maybe Text)
 crId = lens _crId (\ s a -> s{_crId = a})
+
+instance FromJSON ChildReference where
+        parseJSON
+          = withObject "ChildReference"
+              (\ o ->
+                 ChildReference <$>
+                   (o .:? "childLink") <*>
+                     (o .:? "kind" .!= "drive#childReference")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON ChildReference where
+        toJSON ChildReference{..}
+          = object
+              (catMaybes
+                 [("childLink" .=) <$> _crChildLink,
+                  Just ("kind" .= _crKind),
+                  ("selfLink" .=) <$> _crSelfLink,
+                  ("id" .=) <$> _crId])
 
 -- | A JSON representation of a comment on a file in Google Drive.
 --
@@ -1441,6 +1829,46 @@ cCommentId :: Lens' Comment (Maybe Text)
 cCommentId
   = lens _cCommentId (\ s a -> s{_cCommentId = a})
 
+instance FromJSON Comment where
+        parseJSON
+          = withObject "Comment"
+              (\ o ->
+                 Comment <$>
+                   (o .:? "status") <*> (o .:? "htmlContent") <*>
+                     (o .:? "context")
+                     <*> (o .:? "kind" .!= "drive#comment")
+                     <*> (o .:? "fileTitle")
+                     <*> (o .:? "anchor")
+                     <*> (o .:? "content")
+                     <*> (o .:? "replies" .!= mempty)
+                     <*> (o .:? "createdDate")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "author")
+                     <*> (o .:? "modifiedDate")
+                     <*> (o .:? "deleted")
+                     <*> (o .:? "fileId")
+                     <*> (o .:? "commentId"))
+
+instance ToJSON Comment where
+        toJSON Comment{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _cStatus,
+                  ("htmlContent" .=) <$> _cHtmlContent,
+                  ("context" .=) <$> _cContext,
+                  Just ("kind" .= _cKind),
+                  ("fileTitle" .=) <$> _cFileTitle,
+                  ("anchor" .=) <$> _cAnchor,
+                  ("content" .=) <$> _cContent,
+                  ("replies" .=) <$> _cReplies,
+                  ("createdDate" .=) <$> _cCreatedDate,
+                  ("selfLink" .=) <$> _cSelfLink,
+                  ("author" .=) <$> _cAuthor,
+                  ("modifiedDate" .=) <$> _cModifiedDate,
+                  ("deleted" .=) <$> _cDeleted,
+                  ("fileId" .=) <$> _cFileId,
+                  ("commentId" .=) <$> _cCommentId])
+
 -- | The context of the file which is being commented on.
 --
 -- /See:/ 'commentContext' smart constructor.
@@ -1473,6 +1901,19 @@ ccValue = lens _ccValue (\ s a -> s{_ccValue = a})
 -- | The MIME type of the context snippet.
 ccType :: Lens' CommentContext (Maybe Text)
 ccType = lens _ccType (\ s a -> s{_ccType = a})
+
+instance FromJSON CommentContext where
+        parseJSON
+          = withObject "CommentContext"
+              (\ o ->
+                 CommentContext <$>
+                   (o .:? "value") <*> (o .:? "type"))
+
+instance ToJSON CommentContext where
+        toJSON CommentContext{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _ccValue, ("type" .=) <$> _ccType])
 
 -- | A JSON representation of a list of comments on a file in Google Drive.
 --
@@ -1535,6 +1976,26 @@ comItems
 comSelfLink :: Lens' CommentList (Maybe Text)
 comSelfLink
   = lens _comSelfLink (\ s a -> s{_comSelfLink = a})
+
+instance FromJSON CommentList where
+        parseJSON
+          = withObject "CommentList"
+              (\ o ->
+                 CommentList <$>
+                   (o .:? "nextPageToken") <*> (o .:? "nextLink") <*>
+                     (o .:? "kind" .!= "drive#commentList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink"))
+
+instance ToJSON CommentList where
+        toJSON CommentList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _comNextPageToken,
+                  ("nextLink" .=) <$> _comNextLink,
+                  Just ("kind" .= _comKind),
+                  ("items" .=) <$> _comItems,
+                  ("selfLink" .=) <$> _comSelfLink])
 
 -- | A JSON representation of a reply to a comment on a file in Google Drive.
 --
@@ -1641,6 +2102,35 @@ crrDeleted
 crrVerb :: Lens' CommentReply (Maybe Text)
 crrVerb = lens _crrVerb (\ s a -> s{_crrVerb = a})
 
+instance FromJSON CommentReply where
+        parseJSON
+          = withObject "CommentReply"
+              (\ o ->
+                 CommentReply <$>
+                   (o .:? "htmlContent") <*>
+                     (o .:? "kind" .!= "drive#commentReply")
+                     <*> (o .:? "content")
+                     <*> (o .:? "createdDate")
+                     <*> (o .:? "replyId")
+                     <*> (o .:? "author")
+                     <*> (o .:? "modifiedDate")
+                     <*> (o .:? "deleted")
+                     <*> (o .:? "verb"))
+
+instance ToJSON CommentReply where
+        toJSON CommentReply{..}
+          = object
+              (catMaybes
+                 [("htmlContent" .=) <$> _crrHtmlContent,
+                  Just ("kind" .= _crrKind),
+                  ("content" .=) <$> _crrContent,
+                  ("createdDate" .=) <$> _crrCreatedDate,
+                  ("replyId" .=) <$> _crrReplyId,
+                  ("author" .=) <$> _crrAuthor,
+                  ("modifiedDate" .=) <$> _crrModifiedDate,
+                  ("deleted" .=) <$> _crrDeleted,
+                  ("verb" .=) <$> _crrVerb])
+
 -- | A JSON representation of a list of replies to a comment on a file in
 -- Google Drive.
 --
@@ -1703,6 +2193,26 @@ crlItems
 crlSelfLink :: Lens' CommentReplyList (Maybe Text)
 crlSelfLink
   = lens _crlSelfLink (\ s a -> s{_crlSelfLink = a})
+
+instance FromJSON CommentReplyList where
+        parseJSON
+          = withObject "CommentReplyList"
+              (\ o ->
+                 CommentReplyList <$>
+                   (o .:? "nextPageToken") <*> (o .:? "nextLink") <*>
+                     (o .:? "kind" .!= "drive#commentReplyList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink"))
+
+instance ToJSON CommentReplyList where
+        toJSON CommentReplyList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _crlNextPageToken,
+                  ("nextLink" .=) <$> _crlNextLink,
+                  Just ("kind" .= _crlKind),
+                  ("items" .=) <$> _crlItems,
+                  ("selfLink" .=) <$> _crlSelfLink])
 
 -- | The metadata for a file.
 --
@@ -2298,6 +2808,129 @@ fIndexableText
   = lens _fIndexableText
       (\ s a -> s{_fIndexableText = a})
 
+instance FromJSON File where
+        parseJSON
+          = withObject "File"
+              (\ o ->
+                 File <$>
+                   (o .:? "ownedByMe") <*> (o .:? "thumbnailLink") <*>
+                     (o .:? "fullFileExtension")
+                     <*> (o .:? "thumbnail")
+                     <*> (o .:? "markedViewedByMeDate")
+                     <*> (o .:? "etag")
+                     <*> (o .:? "fileExtension")
+                     <*> (o .:? "canComment")
+                     <*> (o .:? "owners" .!= mempty)
+                     <*> (o .:? "ownerNames" .!= mempty)
+                     <*> (o .:? "openWithLinks")
+                     <*> (o .:? "webViewLink")
+                     <*> (o .:? "originalFilename")
+                     <*> (o .:? "kind" .!= "drive#file")
+                     <*> (o .:? "lastModifyingUser")
+                     <*> (o .:? "iconLink")
+                     <*> (o .:? "embedLink")
+                     <*> (o .:? "fileSize")
+                     <*> (o .:? "appDataContents")
+                     <*> (o .:? "imageMediaMetadata")
+                     <*> (o .:? "explicitlyTrashed")
+                     <*> (o .:? "editable")
+                     <*> (o .:? "modifiedByMeDate")
+                     <*> (o .:? "lastViewedByMeDate")
+                     <*> (o .:? "shared")
+                     <*> (o .:? "md5Checksum")
+                     <*> (o .:? "folderColorRgb")
+                     <*> (o .:? "mimeType")
+                     <*> (o .:? "createdDate")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "lastModifyingUserName")
+                     <*> (o .:? "shareable")
+                     <*> (o .:? "downloadUrl")
+                     <*> (o .:? "exportLinks")
+                     <*> (o .:? "copyable")
+                     <*> (o .:? "parents" .!= mempty)
+                     <*> (o .:? "sharedWithMeDate")
+                     <*> (o .:? "spaces" .!= mempty)
+                     <*> (o .:? "version")
+                     <*> (o .:? "userPermission")
+                     <*> (o .:? "writersCanShare")
+                     <*> (o .:? "defaultOpenWithLink")
+                     <*> (o .:? "id")
+                     <*> (o .:? "labels")
+                     <*> (o .:? "modifiedDate")
+                     <*> (o .:? "permissions" .!= mempty)
+                     <*> (o .:? "quotaBytesUsed")
+                     <*> (o .:? "title")
+                     <*> (o .:? "alternateLink")
+                     <*> (o .:? "videoMediaMetadata")
+                     <*> (o .:? "headRevisionId")
+                     <*> (o .:? "description")
+                     <*> (o .:? "sharingUser")
+                     <*> (o .:? "webContentLink")
+                     <*> (o .:? "properties" .!= mempty)
+                     <*> (o .:? "indexableText"))
+
+instance ToJSON File where
+        toJSON File{..}
+          = object
+              (catMaybes
+                 [("ownedByMe" .=) <$> _fOwnedByMe,
+                  ("thumbnailLink" .=) <$> _fThumbnailLink,
+                  ("fullFileExtension" .=) <$> _fFullFileExtension,
+                  ("thumbnail" .=) <$> _fThumbnail,
+                  ("markedViewedByMeDate" .=) <$>
+                    _fMarkedViewedByMeDate,
+                  ("etag" .=) <$> _fEtag,
+                  ("fileExtension" .=) <$> _fFileExtension,
+                  ("canComment" .=) <$> _fCanComment,
+                  ("owners" .=) <$> _fOwners,
+                  ("ownerNames" .=) <$> _fOwnerNames,
+                  ("openWithLinks" .=) <$> _fOpenWithLinks,
+                  ("webViewLink" .=) <$> _fWebViewLink,
+                  ("originalFilename" .=) <$> _fOriginalFilename,
+                  Just ("kind" .= _fKind),
+                  ("lastModifyingUser" .=) <$> _fLastModifyingUser,
+                  ("iconLink" .=) <$> _fIconLink,
+                  ("embedLink" .=) <$> _fEmbedLink,
+                  ("fileSize" .=) <$> _fFileSize,
+                  ("appDataContents" .=) <$> _fAppDataContents,
+                  ("imageMediaMetadata" .=) <$> _fImageMediaMetadata,
+                  ("explicitlyTrashed" .=) <$> _fExplicitlyTrashed,
+                  ("editable" .=) <$> _fEditable,
+                  ("modifiedByMeDate" .=) <$> _fModifiedByMeDate,
+                  ("lastViewedByMeDate" .=) <$> _fLastViewedByMeDate,
+                  ("shared" .=) <$> _fShared,
+                  ("md5Checksum" .=) <$> _fMd5Checksum,
+                  ("folderColorRgb" .=) <$> _fFolderColorRgb,
+                  ("mimeType" .=) <$> _fMimeType,
+                  ("createdDate" .=) <$> _fCreatedDate,
+                  ("selfLink" .=) <$> _fSelfLink,
+                  ("lastModifyingUserName" .=) <$>
+                    _fLastModifyingUserName,
+                  ("shareable" .=) <$> _fShareable,
+                  ("downloadUrl" .=) <$> _fDownloadUrl,
+                  ("exportLinks" .=) <$> _fExportLinks,
+                  ("copyable" .=) <$> _fCopyable,
+                  ("parents" .=) <$> _fParents,
+                  ("sharedWithMeDate" .=) <$> _fSharedWithMeDate,
+                  ("spaces" .=) <$> _fSpaces,
+                  ("version" .=) <$> _fVersion,
+                  ("userPermission" .=) <$> _fUserPermission,
+                  ("writersCanShare" .=) <$> _fWritersCanShare,
+                  ("defaultOpenWithLink" .=) <$> _fDefaultOpenWithLink,
+                  ("id" .=) <$> _fId, ("labels" .=) <$> _fLabels,
+                  ("modifiedDate" .=) <$> _fModifiedDate,
+                  ("permissions" .=) <$> _fPermissions,
+                  ("quotaBytesUsed" .=) <$> _fQuotaBytesUsed,
+                  ("title" .=) <$> _fTitle,
+                  ("alternateLink" .=) <$> _fAlternateLink,
+                  ("videoMediaMetadata" .=) <$> _fVideoMediaMetadata,
+                  ("headRevisionId" .=) <$> _fHeadRevisionId,
+                  ("description" .=) <$> _fDescription,
+                  ("sharingUser" .=) <$> _fSharingUser,
+                  ("webContentLink" .=) <$> _fWebContentLink,
+                  ("properties" .=) <$> _fProperties,
+                  ("indexableText" .=) <$> _fIndexableText])
+
 -- | Links for exporting Google Docs to specific formats.
 --
 -- /See:/ 'fileExportLinks' smart constructor.
@@ -2310,6 +2943,14 @@ data FileExportLinks =
 fileExportLinks
     :: FileExportLinks
 fileExportLinks = FileExportLinks
+
+instance FromJSON FileExportLinks where
+        parseJSON
+          = withObject "FileExportLinks"
+              (\ o -> pure FileExportLinks)
+
+instance ToJSON FileExportLinks where
+        toJSON = const (Object mempty)
 
 -- | Metadata about image media. This will only be present for image types,
 -- and its contents will depend on what can be parsed from the image
@@ -2529,6 +3170,57 @@ fimmColorSpace
   = lens _fimmColorSpace
       (\ s a -> s{_fimmColorSpace = a})
 
+instance FromJSON FileImageMediaMetadata where
+        parseJSON
+          = withObject "FileImageMediaMetadata"
+              (\ o ->
+                 FileImageMediaMetadata <$>
+                   (o .:? "rotation") <*> (o .:? "height") <*>
+                     (o .:? "subjectDistance")
+                     <*> (o .:? "maxApertureValue")
+                     <*> (o .:? "isoSpeed")
+                     <*> (o .:? "location")
+                     <*> (o .:? "aperture")
+                     <*> (o .:? "focalLength")
+                     <*> (o .:? "cameraMake")
+                     <*> (o .:? "width")
+                     <*> (o .:? "exposureTime")
+                     <*> (o .:? "cameraModel")
+                     <*> (o .:? "whiteBalance")
+                     <*> (o .:? "date")
+                     <*> (o .:? "lens")
+                     <*> (o .:? "flashUsed")
+                     <*> (o .:? "exposureBias")
+                     <*> (o .:? "meteringMode")
+                     <*> (o .:? "exposureMode")
+                     <*> (o .:? "sensor")
+                     <*> (o .:? "colorSpace"))
+
+instance ToJSON FileImageMediaMetadata where
+        toJSON FileImageMediaMetadata{..}
+          = object
+              (catMaybes
+                 [("rotation" .=) <$> _fimmRotation,
+                  ("height" .=) <$> _fimmHeight,
+                  ("subjectDistance" .=) <$> _fimmSubjectDistance,
+                  ("maxApertureValue" .=) <$> _fimmMaxApertureValue,
+                  ("isoSpeed" .=) <$> _fimmIsoSpeed,
+                  ("location" .=) <$> _fimmLocation,
+                  ("aperture" .=) <$> _fimmAperture,
+                  ("focalLength" .=) <$> _fimmFocalLength,
+                  ("cameraMake" .=) <$> _fimmCameraMake,
+                  ("width" .=) <$> _fimmWidth,
+                  ("exposureTime" .=) <$> _fimmExposureTime,
+                  ("cameraModel" .=) <$> _fimmCameraModel,
+                  ("whiteBalance" .=) <$> _fimmWhiteBalance,
+                  ("date" .=) <$> _fimmDate, ("lens" .=) <$> _fimmLens,
+                  ("flashUsed" .=) <$> _fimmFlashUsed,
+                  ("exposureBias" .=) <$> _fimmExposureBias,
+                  ("meteringMode" .=) <$> _fimmMeteringMode,
+                  ("exposureMode" .=) <$> _fimmExposureMode,
+                  ("sensor" .=) <$> _fimmSensor,
+                  ("colorSpace" .=) <$> _fimmColorSpace])
+
 -- | Indexable text attributes for the file (can only be written)
 --
 -- /See:/ 'fileIndexableText' smart constructor.
@@ -2551,6 +3243,15 @@ fileIndexableText =
 -- | The text to be indexed for this file.
 fitText :: Lens' FileIndexableText (Maybe Text)
 fitText = lens _fitText (\ s a -> s{_fitText = a})
+
+instance FromJSON FileIndexableText where
+        parseJSON
+          = withObject "FileIndexableText"
+              (\ o -> FileIndexableText <$> (o .:? "text"))
+
+instance ToJSON FileIndexableText where
+        toJSON FileIndexableText{..}
+          = object (catMaybes [("text" .=) <$> _fitText])
 
 -- | A group of labels for the file.
 --
@@ -2612,6 +3313,26 @@ flHidden = lens _flHidden (\ s a -> s{_flHidden = a})
 flRestricted :: Lens' FileLabels (Maybe Bool)
 flRestricted
   = lens _flRestricted (\ s a -> s{_flRestricted = a})
+
+instance FromJSON FileLabels where
+        parseJSON
+          = withObject "FileLabels"
+              (\ o ->
+                 FileLabels <$>
+                   (o .:? "viewed") <*> (o .:? "trashed") <*>
+                     (o .:? "starred")
+                     <*> (o .:? "hidden")
+                     <*> (o .:? "restricted"))
+
+instance ToJSON FileLabels where
+        toJSON FileLabels{..}
+          = object
+              (catMaybes
+                 [("viewed" .=) <$> _flViewed,
+                  ("trashed" .=) <$> _flTrashed,
+                  ("starred" .=) <$> _flStarred,
+                  ("hidden" .=) <$> _flHidden,
+                  ("restricted" .=) <$> _flRestricted])
 
 -- | A list of files.
 --
@@ -2682,6 +3403,27 @@ flSelfLink :: Lens' FileList (Maybe Text)
 flSelfLink
   = lens _flSelfLink (\ s a -> s{_flSelfLink = a})
 
+instance FromJSON FileList where
+        parseJSON
+          = withObject "FileList"
+              (\ o ->
+                 FileList <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "nextLink")
+                     <*> (o .:? "kind" .!= "drive#fileList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink"))
+
+instance ToJSON FileList where
+        toJSON FileList{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _flEtag,
+                  ("nextPageToken" .=) <$> _flNextPageToken,
+                  ("nextLink" .=) <$> _flNextLink,
+                  Just ("kind" .= _flKind), ("items" .=) <$> _flItems,
+                  ("selfLink" .=) <$> _flSelfLink])
+
 -- | Geographic location information stored in the image.
 --
 -- /See:/ 'fileLocationImageMediaMetadata' smart constructor.
@@ -2727,6 +3469,23 @@ flimmLongitude
   = lens _flimmLongitude
       (\ s a -> s{_flimmLongitude = a})
 
+instance FromJSON FileLocationImageMediaMetadata
+         where
+        parseJSON
+          = withObject "FileLocationImageMediaMetadata"
+              (\ o ->
+                 FileLocationImageMediaMetadata <$>
+                   (o .:? "latitude") <*> (o .:? "altitude") <*>
+                     (o .:? "longitude"))
+
+instance ToJSON FileLocationImageMediaMetadata where
+        toJSON FileLocationImageMediaMetadata{..}
+          = object
+              (catMaybes
+                 [("latitude" .=) <$> _flimmLatitude,
+                  ("altitude" .=) <$> _flimmAltitude,
+                  ("longitude" .=) <$> _flimmLongitude])
+
 -- | A map of the id of each of the user\'s apps to a link to open this file
 -- with that app. Only populated when the drive.apps.readonly scope is
 -- used.
@@ -2741,6 +3500,14 @@ data FileOpenWithLinks =
 fileOpenWithLinks
     :: FileOpenWithLinks
 fileOpenWithLinks = FileOpenWithLinks
+
+instance FromJSON FileOpenWithLinks where
+        parseJSON
+          = withObject "FileOpenWithLinks"
+              (\ o -> pure FileOpenWithLinks)
+
+instance ToJSON FileOpenWithLinks where
+        toJSON = const (Object mempty)
 
 -- | Thumbnail for the file. Only accepted on upload and for files that are
 -- not already thumbnailed by Google.
@@ -2775,6 +3542,20 @@ ftImage = lens _ftImage (\ s a -> s{_ftImage = a})
 ftMimeType :: Lens' FileThumbnail (Maybe Text)
 ftMimeType
   = lens _ftMimeType (\ s a -> s{_ftMimeType = a})
+
+instance FromJSON FileThumbnail where
+        parseJSON
+          = withObject "FileThumbnail"
+              (\ o ->
+                 FileThumbnail <$>
+                   (o .:? "image") <*> (o .:? "mimeType"))
+
+instance ToJSON FileThumbnail where
+        toJSON FileThumbnail{..}
+          = object
+              (catMaybes
+                 [("image" .=) <$> _ftImage,
+                  ("mimeType" .=) <$> _ftMimeType])
 
 -- | Metadata about video media. This will only be present for video types.
 --
@@ -2819,6 +3600,22 @@ fvmmDurationMillis
   = lens _fvmmDurationMillis
       (\ s a -> s{_fvmmDurationMillis = a})
 
+instance FromJSON FileVideoMediaMetadata where
+        parseJSON
+          = withObject "FileVideoMediaMetadata"
+              (\ o ->
+                 FileVideoMediaMetadata <$>
+                   (o .:? "height") <*> (o .:? "width") <*>
+                     (o .:? "durationMillis"))
+
+instance ToJSON FileVideoMediaMetadata where
+        toJSON FileVideoMediaMetadata{..}
+          = object
+              (catMaybes
+                 [("height" .=) <$> _fvmmHeight,
+                  ("width" .=) <$> _fvmmWidth,
+                  ("durationMillis" .=) <$> _fvmmDurationMillis])
+
 -- | A list of generated IDs which can be provided in insert requests
 --
 -- /See:/ 'generatedIds' smart constructor.
@@ -2859,6 +3656,22 @@ giIds :: Lens' GeneratedIds [Text]
 giIds
   = lens _giIds (\ s a -> s{_giIds = a}) . _Default .
       _Coerce
+
+instance FromJSON GeneratedIds where
+        parseJSON
+          = withObject "GeneratedIds"
+              (\ o ->
+                 GeneratedIds <$>
+                   (o .:? "space") <*>
+                     (o .:? "kind" .!= "drive#generatedIds")
+                     <*> (o .:? "ids" .!= mempty))
+
+instance ToJSON GeneratedIds where
+        toJSON GeneratedIds{..}
+          = object
+              (catMaybes
+                 [("space" .=) <$> _giSpace, Just ("kind" .= _giKind),
+                  ("ids" .=) <$> _giIds])
 
 -- | A list of a file\'s parents.
 --
@@ -2910,6 +3723,24 @@ parItems
 parSelfLink :: Lens' ParentList (Maybe Text)
 parSelfLink
   = lens _parSelfLink (\ s a -> s{_parSelfLink = a})
+
+instance FromJSON ParentList where
+        parseJSON
+          = withObject "ParentList"
+              (\ o ->
+                 ParentList <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!= "drive#parentList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink"))
+
+instance ToJSON ParentList where
+        toJSON ParentList{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _parEtag, Just ("kind" .= _parKind),
+                  ("items" .=) <$> _parItems,
+                  ("selfLink" .=) <$> _parSelfLink])
 
 -- | A reference to a file\'s parent.
 --
@@ -2967,6 +3798,26 @@ prSelfLink
 -- | The ID of the parent.
 prId :: Lens' ParentReference (Maybe Text)
 prId = lens _prId (\ s a -> s{_prId = a})
+
+instance FromJSON ParentReference where
+        parseJSON
+          = withObject "ParentReference"
+              (\ o ->
+                 ParentReference <$>
+                   (o .:? "parentLink") <*> (o .:? "isRoot") <*>
+                     (o .:? "kind" .!= "drive#parentReference")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON ParentReference where
+        toJSON ParentReference{..}
+          = object
+              (catMaybes
+                 [("parentLink" .=) <$> _prParentLink,
+                  ("isRoot" .=) <$> _prIsRoot,
+                  Just ("kind" .= _prKind),
+                  ("selfLink" .=) <$> _prSelfLink,
+                  ("id" .=) <$> _prId])
 
 -- | A permission for a file.
 --
@@ -3115,6 +3966,41 @@ pId = lens _pId (\ s a -> s{_pId = a})
 pType :: Lens' Permission (Maybe Text)
 pType = lens _pType (\ s a -> s{_pType = a})
 
+instance FromJSON Permission where
+        parseJSON
+          = withObject "Permission"
+              (\ o ->
+                 Permission <$>
+                   (o .:? "photoLink") <*> (o .:? "etag") <*>
+                     (o .:? "withLink")
+                     <*> (o .:? "kind" .!= "drive#permission")
+                     <*> (o .:? "domain")
+                     <*> (o .:? "value")
+                     <*> (o .:? "additionalRoles" .!= mempty)
+                     <*> (o .:? "role")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "authKey")
+                     <*> (o .:? "emailAddress")
+                     <*> (o .:? "id")
+                     <*> (o .:? "type"))
+
+instance ToJSON Permission where
+        toJSON Permission{..}
+          = object
+              (catMaybes
+                 [("photoLink" .=) <$> _pPhotoLink,
+                  ("etag" .=) <$> _pEtag,
+                  ("withLink" .=) <$> _pWithLink,
+                  Just ("kind" .= _pKind), ("domain" .=) <$> _pDomain,
+                  ("value" .=) <$> _pValue,
+                  ("additionalRoles" .=) <$> _pAdditionalRoles,
+                  ("role" .=) <$> _pRole,
+                  ("selfLink" .=) <$> _pSelfLink,
+                  ("name" .=) <$> _pName, ("authKey" .=) <$> _pAuthKey,
+                  ("emailAddress" .=) <$> _pEmailAddress,
+                  ("id" .=) <$> _pId, ("type" .=) <$> _pType])
+
 -- | An ID for a user or group as seen in Permission items.
 --
 -- /See:/ 'permissionId' smart constructor.
@@ -3145,6 +4031,20 @@ piKind = lens _piKind (\ s a -> s{_piKind = a})
 -- | The permission ID.
 piId :: Lens' PermissionId (Maybe Text)
 piId = lens _piId (\ s a -> s{_piId = a})
+
+instance FromJSON PermissionId where
+        parseJSON
+          = withObject "PermissionId"
+              (\ o ->
+                 PermissionId <$>
+                   (o .:? "kind" .!= "drive#permissionId") <*>
+                     (o .:? "id"))
+
+instance ToJSON PermissionId where
+        toJSON PermissionId{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _piKind), ("id" .=) <$> _piId])
 
 -- | A list of permissions associated with a file.
 --
@@ -3195,6 +4095,24 @@ plItems
 plSelfLink :: Lens' PermissionList (Maybe Text)
 plSelfLink
   = lens _plSelfLink (\ s a -> s{_plSelfLink = a})
+
+instance FromJSON PermissionList where
+        parseJSON
+          = withObject "PermissionList"
+              (\ o ->
+                 PermissionList <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!= "drive#permissionList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink"))
+
+instance ToJSON PermissionList where
+        toJSON PermissionList{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _plEtag, Just ("kind" .= _plKind),
+                  ("items" .=) <$> _plItems,
+                  ("selfLink" .=) <$> _plSelfLink])
 
 -- | A key-value pair attached to a file that is either public or private to
 -- an application. The following limits apply to file properties: - Maximum
@@ -3266,6 +4184,28 @@ proSelfLink
 proKey :: Lens' Property (Maybe Text)
 proKey = lens _proKey (\ s a -> s{_proKey = a})
 
+instance FromJSON Property where
+        parseJSON
+          = withObject "Property"
+              (\ o ->
+                 Property <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!= "drive#property")
+                     <*> (o .:? "value")
+                     <*> (o .:? "visibility")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "key"))
+
+instance ToJSON Property where
+        toJSON Property{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _proEtag, Just ("kind" .= _proKind),
+                  ("value" .=) <$> _proValue,
+                  ("visibility" .=) <$> _proVisibility,
+                  ("selfLink" .=) <$> _proSelfLink,
+                  ("key" .=) <$> _proKey])
+
 -- | A collection of properties, key-value pairs that are either public or
 -- private to an application.
 --
@@ -3317,6 +4257,24 @@ pllItems
 pllSelfLink :: Lens' PropertyList (Maybe Text)
 pllSelfLink
   = lens _pllSelfLink (\ s a -> s{_pllSelfLink = a})
+
+instance FromJSON PropertyList where
+        parseJSON
+          = withObject "PropertyList"
+              (\ o ->
+                 PropertyList <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!= "drive#propertyList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink"))
+
+instance ToJSON PropertyList where
+        toJSON PropertyList{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _pllEtag, Just ("kind" .= _pllKind),
+                  ("items" .=) <$> _pllItems,
+                  ("selfLink" .=) <$> _pllSelfLink])
 
 -- | A revision of a file.
 --
@@ -3508,6 +4466,54 @@ rModifiedDate
   = lens _rModifiedDate
       (\ s a -> s{_rModifiedDate = a})
 
+instance FromJSON Revision where
+        parseJSON
+          = withObject "Revision"
+              (\ o ->
+                 Revision <$>
+                   (o .:? "etag") <*> (o .:? "originalFilename") <*>
+                     (o .:? "kind" .!= "drive#revision")
+                     <*> (o .:? "publishedLink")
+                     <*> (o .:? "pinned")
+                     <*> (o .:? "published")
+                     <*> (o .:? "lastModifyingUser")
+                     <*> (o .:? "fileSize")
+                     <*> (o .:? "publishAuto")
+                     <*> (o .:? "md5Checksum")
+                     <*> (o .:? "mimeType")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "lastModifyingUserName")
+                     <*> (o .:? "downloadUrl")
+                     <*> (o .:? "exportLinks")
+                     <*> (o .:? "publishedOutsideDomain")
+                     <*> (o .:? "id")
+                     <*> (o .:? "modifiedDate"))
+
+instance ToJSON Revision where
+        toJSON Revision{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _rEtag,
+                  ("originalFilename" .=) <$> _rOriginalFilename,
+                  Just ("kind" .= _rKind),
+                  ("publishedLink" .=) <$> _rPublishedLink,
+                  ("pinned" .=) <$> _rPinned,
+                  ("published" .=) <$> _rPublished,
+                  ("lastModifyingUser" .=) <$> _rLastModifyingUser,
+                  ("fileSize" .=) <$> _rFileSize,
+                  ("publishAuto" .=) <$> _rPublishAuto,
+                  ("md5Checksum" .=) <$> _rMd5Checksum,
+                  ("mimeType" .=) <$> _rMimeType,
+                  ("selfLink" .=) <$> _rSelfLink,
+                  ("lastModifyingUserName" .=) <$>
+                    _rLastModifyingUserName,
+                  ("downloadUrl" .=) <$> _rDownloadUrl,
+                  ("exportLinks" .=) <$> _rExportLinks,
+                  ("publishedOutsideDomain" .=) <$>
+                    _rPublishedOutsideDomain,
+                  ("id" .=) <$> _rId,
+                  ("modifiedDate" .=) <$> _rModifiedDate])
+
 -- | Links for exporting Google Docs to specific formats.
 --
 -- /See:/ 'revisionExportLinks' smart constructor.
@@ -3520,6 +4526,14 @@ data RevisionExportLinks =
 revisionExportLinks
     :: RevisionExportLinks
 revisionExportLinks = RevisionExportLinks
+
+instance FromJSON RevisionExportLinks where
+        parseJSON
+          = withObject "RevisionExportLinks"
+              (\ o -> pure RevisionExportLinks)
+
+instance ToJSON RevisionExportLinks where
+        toJSON = const (Object mempty)
 
 -- | A list of revisions of a file.
 --
@@ -3570,6 +4584,24 @@ rlItems
 rlSelfLink :: Lens' RevisionList (Maybe Text)
 rlSelfLink
   = lens _rlSelfLink (\ s a -> s{_rlSelfLink = a})
+
+instance FromJSON RevisionList where
+        parseJSON
+          = withObject "RevisionList"
+              (\ o ->
+                 RevisionList <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!= "drive#revisionList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink"))
+
+instance ToJSON RevisionList where
+        toJSON RevisionList{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _rlEtag, Just ("kind" .= _rlKind),
+                  ("items" .=) <$> _rlItems,
+                  ("selfLink" .=) <$> _rlSelfLink])
 
 -- | The JSON template for a user.
 --
@@ -3642,6 +4674,30 @@ uPermissionId
   = lens _uPermissionId
       (\ s a -> s{_uPermissionId = a})
 
+instance FromJSON User where
+        parseJSON
+          = withObject "User"
+              (\ o ->
+                 User <$>
+                   (o .:? "isAuthenticatedUser") <*>
+                     (o .:? "kind" .!= "drive#user")
+                     <*> (o .:? "picture")
+                     <*> (o .:? "emailAddress")
+                     <*> (o .:? "displayName")
+                     <*> (o .:? "permissionId"))
+
+instance ToJSON User where
+        toJSON User{..}
+          = object
+              (catMaybes
+                 [("isAuthenticatedUser" .=) <$>
+                    _uIsAuthenticatedUser,
+                  Just ("kind" .= _uKind),
+                  ("picture" .=) <$> _uPicture,
+                  ("emailAddress" .=) <$> _uEmailAddress,
+                  ("displayName" .=) <$> _uDisplayName,
+                  ("permissionId" .=) <$> _uPermissionId])
+
 -- | The user\'s profile picture.
 --
 -- /See:/ 'userPicture' smart constructor.
@@ -3664,3 +4720,12 @@ userPicture =
 -- | A URL that points to a profile picture of this user.
 upUrl :: Lens' UserPicture (Maybe Text)
 upUrl = lens _upUrl (\ s a -> s{_upUrl = a})
+
+instance FromJSON UserPicture where
+        parseJSON
+          = withObject "UserPicture"
+              (\ o -> UserPicture <$> (o .:? "url"))
+
+instance ToJSON UserPicture where
+        toJSON UserPicture{..}
+          = object (catMaybes [("url" .=) <$> _upUrl])

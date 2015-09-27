@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -55,6 +56,21 @@ aCombinedEvent :: Lens' Activity (Maybe (Maybe Event))
 aCombinedEvent
   = lens _aCombinedEvent
       (\ s a -> s{_aCombinedEvent = a})
+
+instance FromJSON Activity where
+        parseJSON
+          = withObject "Activity"
+              (\ o ->
+                 Activity <$>
+                   (o .:? "singleEvents" .!= mempty) <*>
+                     (o .:? "combinedEvent"))
+
+instance ToJSON Activity where
+        toJSON Activity{..}
+          = object
+              (catMaybes
+                 [("singleEvents" .=) <$> _aSingleEvents,
+                  ("combinedEvent" .=) <$> _aCombinedEvent])
 
 -- | Represents the changes associated with an action taken by a user.
 --
@@ -163,6 +179,34 @@ eTarget = lens _eTarget (\ s a -> s{_eTarget = a})
 eMove :: Lens' Event (Maybe (Maybe Move))
 eMove = lens _eMove (\ s a -> s{_eMove = a})
 
+instance FromJSON Event where
+        parseJSON
+          = withObject "Event"
+              (\ o ->
+                 Event <$>
+                   (o .:? "primaryEventType") <*> (o .:? "user") <*>
+                     (o .:? "eventTimeMillis")
+                     <*> (o .:? "rename")
+                     <*> (o .:? "fromUserDeletion")
+                     <*> (o .:? "additionalEventTypes" .!= mempty)
+                     <*> (o .:? "permissionChanges" .!= mempty)
+                     <*> (o .:? "target")
+                     <*> (o .:? "move"))
+
+instance ToJSON Event where
+        toJSON Event{..}
+          = object
+              (catMaybes
+                 [("primaryEventType" .=) <$> _ePrimaryEventType,
+                  ("user" .=) <$> _eUser,
+                  ("eventTimeMillis" .=) <$> _eEventTimeMillis,
+                  ("rename" .=) <$> _eRename,
+                  ("fromUserDeletion" .=) <$> _eFromUserDeletion,
+                  ("additionalEventTypes" .=) <$>
+                    _eAdditionalEventTypes,
+                  ("permissionChanges" .=) <$> _ePermissionChanges,
+                  ("target" .=) <$> _eTarget, ("move" .=) <$> _eMove])
+
 -- | The response from the list request. Contains a list of activities and a
 -- token to retrieve the next page of results.
 --
@@ -200,6 +244,21 @@ larActivities
       (\ s a -> s{_larActivities = a})
       . _Default
       . _Coerce
+
+instance FromJSON ListActivitiesResponse where
+        parseJSON
+          = withObject "ListActivitiesResponse"
+              (\ o ->
+                 ListActivitiesResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "activities" .!= mempty))
+
+instance ToJSON ListActivitiesResponse where
+        toJSON ListActivitiesResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _larNextPageToken,
+                  ("activities" .=) <$> _larActivities])
 
 -- | Contains information about changes in an object\'s parents as a result
 -- of a move type event.
@@ -241,6 +300,21 @@ mRemovedParents
       . _Default
       . _Coerce
 
+instance FromJSON Move where
+        parseJSON
+          = withObject "Move"
+              (\ o ->
+                 Move <$>
+                   (o .:? "addedParents" .!= mempty) <*>
+                     (o .:? "removedParents" .!= mempty))
+
+instance ToJSON Move where
+        toJSON Move{..}
+          = object
+              (catMaybes
+                 [("addedParents" .=) <$> _mAddedParents,
+                  ("removedParents" .=) <$> _mRemovedParents])
+
 -- | Contains information about a parent object. For example, a folder in
 -- Drive is a parent for all files within it.
 --
@@ -280,6 +354,21 @@ pId = lens _pId (\ s a -> s{_pId = a})
 -- | The parent\'s title.
 pTitle :: Lens' Parent (Maybe Text)
 pTitle = lens _pTitle (\ s a -> s{_pTitle = a})
+
+instance FromJSON Parent where
+        parseJSON
+          = withObject "Parent"
+              (\ o ->
+                 Parent <$>
+                   (o .:? "isRoot") <*> (o .:? "id") <*>
+                     (o .:? "title"))
+
+instance ToJSON Parent where
+        toJSON Parent{..}
+          = object
+              (catMaybes
+                 [("isRoot" .=) <$> _pIsRoot, ("id" .=) <$> _pId,
+                  ("title" .=) <$> _pTitle])
 
 -- | Contains information about the permissions and type of access allowed
 -- with regards to a Google Drive object. This is a subset of the fields
@@ -351,6 +440,26 @@ pPermissionId
   = lens _pPermissionId
       (\ s a -> s{_pPermissionId = a})
 
+instance FromJSON Permission where
+        parseJSON
+          = withObject "Permission"
+              (\ o ->
+                 Permission <$>
+                   (o .:? "withLink") <*> (o .:? "user") <*>
+                     (o .:? "role")
+                     <*> (o .:? "name")
+                     <*> (o .:? "type")
+                     <*> (o .:? "permissionId"))
+
+instance ToJSON Permission where
+        toJSON Permission{..}
+          = object
+              (catMaybes
+                 [("withLink" .=) <$> _pWithLink,
+                  ("user" .=) <$> _pUser, ("role" .=) <$> _pRole,
+                  ("name" .=) <$> _pName, ("type" .=) <$> _pType,
+                  ("permissionId" .=) <$> _pPermissionId])
+
 -- | Contains information about a Drive object\'s permissions that changed as
 -- a result of a permissionChange type event.
 --
@@ -391,6 +500,21 @@ pcRemovedPermissions
       . _Default
       . _Coerce
 
+instance FromJSON PermissionChange where
+        parseJSON
+          = withObject "PermissionChange"
+              (\ o ->
+                 PermissionChange <$>
+                   (o .:? "addedPermissions" .!= mempty) <*>
+                     (o .:? "removedPermissions" .!= mempty))
+
+instance ToJSON PermissionChange where
+        toJSON PermissionChange{..}
+          = object
+              (catMaybes
+                 [("addedPermissions" .=) <$> _pcAddedPermissions,
+                  ("removedPermissions" .=) <$> _pcRemovedPermissions])
+
 -- | Photo information for a user.
 --
 -- /See:/ 'photo' smart constructor.
@@ -413,6 +537,14 @@ photo =
 -- | The URL of the photo.
 pUrl :: Lens' Photo (Maybe Text)
 pUrl = lens _pUrl (\ s a -> s{_pUrl = a})
+
+instance FromJSON Photo where
+        parseJSON
+          = withObject "Photo" (\ o -> Photo <$> (o .:? "url"))
+
+instance ToJSON Photo where
+        toJSON Photo{..}
+          = object (catMaybes [("url" .=) <$> _pUrl])
 
 -- | Contains information about a renametype event.
 --
@@ -446,6 +578,19 @@ rNewTitle
 rOldTitle :: Lens' Rename (Maybe Text)
 rOldTitle
   = lens _rOldTitle (\ s a -> s{_rOldTitle = a})
+
+instance FromJSON Rename where
+        parseJSON
+          = withObject "Rename"
+              (\ o ->
+                 Rename <$> (o .:? "newTitle") <*> (o .:? "oldTitle"))
+
+instance ToJSON Rename where
+        toJSON Rename{..}
+          = object
+              (catMaybes
+                 [("newTitle" .=) <$> _rNewTitle,
+                  ("oldTitle" .=) <$> _rOldTitle])
 
 -- | Information about the object modified by the event.
 --
@@ -489,6 +634,21 @@ tName = lens _tName (\ s a -> s{_tName = a})
 tId :: Lens' Target (Maybe Text)
 tId = lens _tId (\ s a -> s{_tId = a})
 
+instance FromJSON Target where
+        parseJSON
+          = withObject "Target"
+              (\ o ->
+                 Target <$>
+                   (o .:? "mimeType") <*> (o .:? "name") <*>
+                     (o .:? "id"))
+
+instance ToJSON Target where
+        toJSON Target{..}
+          = object
+              (catMaybes
+                 [("mimeType" .=) <$> _tMimeType,
+                  ("name" .=) <$> _tName, ("id" .=) <$> _tId])
+
 -- | A representation of a user.
 --
 -- /See:/ 'user' smart constructor.
@@ -519,3 +679,14 @@ uPhoto = lens _uPhoto (\ s a -> s{_uPhoto = a})
 -- | The displayable name of the user.
 uName :: Lens' User (Maybe Text)
 uName = lens _uName (\ s a -> s{_uName = a})
+
+instance FromJSON User where
+        parseJSON
+          = withObject "User"
+              (\ o -> User <$> (o .:? "photo") <*> (o .:? "name"))
+
+instance ToJSON User where
+        toJSON User{..}
+          = object
+              (catMaybes
+                 [("photo" .=) <$> _uPhoto, ("name" .=) <$> _uName])

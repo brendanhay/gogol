@@ -87,83 +87,104 @@ type WebResourceAPI =
 
 -- | Attempt verification of a website or domain.
 type WebResourceInsert =
-     "siteVerification" :> "v1" :> "webResource" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "verificationMethod" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "siteVerification" :>
+       "v1" :>
+         "webResource" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "verificationMethod" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :>
+                           Post '[JSON] SiteVerificationWebResourceResource
 
 -- | Get the list of your verified websites and domains.
 type WebResourceList =
-     "siteVerification" :> "v1" :> "webResource" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "siteVerification" :>
+       "v1" :>
+         "webResource" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Text :>
+                         Get '[JSON] SiteVerificationWebResourceListResponse
 
 -- | Modify the list of owners for your website or domain. This method
 -- supports patch semantics.
 type WebResourcePatch =
-     "siteVerification" :> "v1" :> "webResource" :>
-       Capture "id" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "siteVerification" :>
+       "v1" :>
+         "webResource" :>
+           Capture "id" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :>
+                           Patch '[JSON] SiteVerificationWebResourceResource
 
 -- | Get the most current data for a website or domain.
 type WebResourceGet =
-     "siteVerification" :> "v1" :> "webResource" :>
-       Capture "id" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "siteVerification" :>
+       "v1" :>
+         "webResource" :>
+           Capture "id" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :>
+                           Get '[JSON] SiteVerificationWebResourceResource
 
 -- | Get a verification token for placing on a website or domain.
 type WebResourceGetToken =
-     "siteVerification" :> "v1" :> "token" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "siteVerification" :>
+       "v1" :>
+         "token" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Text :>
+                         Post '[JSON]
+                           SiteVerificationWebResourceGettokenResponse
 
 -- | Relinquish ownership of a website or domain.
 type WebResourceDelete =
-     "siteVerification" :> "v1" :> "webResource" :>
-       Capture "id" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "siteVerification" :>
+       "v1" :>
+         "webResource" :>
+           Capture "id" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Modify the list of owners for your website or domain.
 type WebResourceUpdate =
-     "siteVerification" :> "v1" :> "webResource" :>
-       Capture "id" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "siteVerification" :>
+       "v1" :>
+         "webResource" :>
+           Capture "id" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :>
+                           Put '[JSON] SiteVerificationWebResourceResource

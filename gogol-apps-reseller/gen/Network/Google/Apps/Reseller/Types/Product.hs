@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -127,6 +128,37 @@ aAddressLine3
   = lens _aAddressLine3
       (\ s a -> s{_aAddressLine3 = a})
 
+instance FromJSON Address where
+        parseJSON
+          = withObject "Address"
+              (\ o ->
+                 Address <$>
+                   (o .:? "organizationName") <*>
+                     (o .:? "kind" .!= "customers#address")
+                     <*> (o .:? "postalCode")
+                     <*> (o .:? "addressLine1")
+                     <*> (o .:? "locality")
+                     <*> (o .:? "contactName")
+                     <*> (o .:? "addressLine2")
+                     <*> (o .:? "countryCode")
+                     <*> (o .:? "region")
+                     <*> (o .:? "addressLine3"))
+
+instance ToJSON Address where
+        toJSON Address{..}
+          = object
+              (catMaybes
+                 [("organizationName" .=) <$> _aOrganizationName,
+                  Just ("kind" .= _aKind),
+                  ("postalCode" .=) <$> _aPostalCode,
+                  ("addressLine1" .=) <$> _aAddressLine1,
+                  ("locality" .=) <$> _aLocality,
+                  ("contactName" .=) <$> _aContactName,
+                  ("addressLine2" .=) <$> _aAddressLine2,
+                  ("countryCode" .=) <$> _aCountryCode,
+                  ("region" .=) <$> _aRegion,
+                  ("addressLine3" .=) <$> _aAddressLine3])
+
 -- | JSON template for the ChangePlan rpc request.
 --
 -- /See:/ 'changePlanRequest' smart constructor.
@@ -176,6 +208,25 @@ cprPurchaseOrderId
 -- | Number\/Limit of seats in the new plan.
 cprSeats :: Lens' ChangePlanRequest (Maybe (Maybe Seats))
 cprSeats = lens _cprSeats (\ s a -> s{_cprSeats = a})
+
+instance FromJSON ChangePlanRequest where
+        parseJSON
+          = withObject "ChangePlanRequest"
+              (\ o ->
+                 ChangePlanRequest <$>
+                   (o .:? "kind" .!= "subscriptions#changePlanRequest")
+                     <*> (o .:? "planName")
+                     <*> (o .:? "purchaseOrderId")
+                     <*> (o .:? "seats"))
+
+instance ToJSON ChangePlanRequest where
+        toJSON ChangePlanRequest{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _cprKind),
+                  ("planName" .=) <$> _cprPlanName,
+                  ("purchaseOrderId" .=) <$> _cprPurchaseOrderId,
+                  ("seats" .=) <$> _cprSeats])
 
 -- | JSON template for a customer.
 --
@@ -258,6 +309,31 @@ cPostalAddress
   = lens _cPostalAddress
       (\ s a -> s{_cPostalAddress = a})
 
+instance FromJSON Customer where
+        parseJSON
+          = withObject "Customer"
+              (\ o ->
+                 Customer <$>
+                   (o .:? "resourceUiUrl") <*>
+                     (o .:? "kind" .!= "reseller#customer")
+                     <*> (o .:? "customerId")
+                     <*> (o .:? "alternateEmail")
+                     <*> (o .:? "customerDomain")
+                     <*> (o .:? "phoneNumber")
+                     <*> (o .:? "postalAddress"))
+
+instance ToJSON Customer where
+        toJSON Customer{..}
+          = object
+              (catMaybes
+                 [("resourceUiUrl" .=) <$> _cResourceUiUrl,
+                  Just ("kind" .= _cKind),
+                  ("customerId" .=) <$> _cCustomerId,
+                  ("alternateEmail" .=) <$> _cAlternateEmail,
+                  ("customerDomain" .=) <$> _cCustomerDomain,
+                  ("phoneNumber" .=) <$> _cPhoneNumber,
+                  ("postalAddress" .=) <$> _cPostalAddress])
+
 -- | JSON template for a subscription renewal settings.
 --
 -- /See:/ 'renewalSettings' smart constructor.
@@ -290,6 +366,21 @@ rsRenewalType :: Lens' RenewalSettings (Maybe Text)
 rsRenewalType
   = lens _rsRenewalType
       (\ s a -> s{_rsRenewalType = a})
+
+instance FromJSON RenewalSettings where
+        parseJSON
+          = withObject "RenewalSettings"
+              (\ o ->
+                 RenewalSettings <$>
+                   (o .:? "kind" .!= "subscriptions#renewalSettings")
+                     <*> (o .:? "renewalType"))
+
+instance ToJSON RenewalSettings where
+        toJSON RenewalSettings{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _rsKind),
+                  ("renewalType" .=) <$> _rsRenewalType])
 
 -- | JSON template for subscription seats.
 --
@@ -348,6 +439,27 @@ sLicensedNumberOfSeats
 -- | Identifies the resource as a subscription change plan request.
 sKind :: Lens' Seats Text
 sKind = lens _sKind (\ s a -> s{_sKind = a})
+
+instance FromJSON Seats where
+        parseJSON
+          = withObject "Seats"
+              (\ o ->
+                 Seats <$>
+                   (o .:? "numberOfSeats") <*>
+                     (o .:? "maximumNumberOfSeats")
+                     <*> (o .:? "licensedNumberOfSeats")
+                     <*> (o .:? "kind" .!= "subscriptions#seats"))
+
+instance ToJSON Seats where
+        toJSON Seats{..}
+          = object
+              (catMaybes
+                 [("numberOfSeats" .=) <$> _sNumberOfSeats,
+                  ("maximumNumberOfSeats" .=) <$>
+                    _sMaximumNumberOfSeats,
+                  ("licensedNumberOfSeats" .=) <$>
+                    _sLicensedNumberOfSeats,
+                  Just ("kind" .= _sKind)])
 
 -- | JSON template for a subscription.
 --
@@ -505,6 +617,45 @@ ssSubscriptionId
   = lens _ssSubscriptionId
       (\ s a -> s{_ssSubscriptionId = a})
 
+instance FromJSON Subscription where
+        parseJSON
+          = withObject "Subscription"
+              (\ o ->
+                 Subscription <$>
+                   (o .:? "creationTime") <*> (o .:? "billingMethod")
+                     <*> (o .:? "status")
+                     <*> (o .:? "trialSettings")
+                     <*> (o .:? "resourceUiUrl")
+                     <*> (o .:? "kind" .!= "reseller#subscription")
+                     <*> (o .:? "skuId")
+                     <*> (o .:? "plan")
+                     <*> (o .:? "customerId")
+                     <*> (o .:? "suspensionReasons" .!= mempty)
+                     <*> (o .:? "transferInfo")
+                     <*> (o .:? "purchaseOrderId")
+                     <*> (o .:? "seats")
+                     <*> (o .:? "renewalSettings")
+                     <*> (o .:? "subscriptionId"))
+
+instance ToJSON Subscription where
+        toJSON Subscription{..}
+          = object
+              (catMaybes
+                 [("creationTime" .=) <$> _ssCreationTime,
+                  ("billingMethod" .=) <$> _ssBillingMethod,
+                  ("status" .=) <$> _ssStatus,
+                  ("trialSettings" .=) <$> _ssTrialSettings,
+                  ("resourceUiUrl" .=) <$> _ssResourceUiUrl,
+                  Just ("kind" .= _ssKind), ("skuId" .=) <$> _ssSkuId,
+                  ("plan" .=) <$> _ssPlan,
+                  ("customerId" .=) <$> _ssCustomerId,
+                  ("suspensionReasons" .=) <$> _ssSuspensionReasons,
+                  ("transferInfo" .=) <$> _ssTransferInfo,
+                  ("purchaseOrderId" .=) <$> _ssPurchaseOrderId,
+                  ("seats" .=) <$> _ssSeats,
+                  ("renewalSettings" .=) <$> _ssRenewalSettings,
+                  ("subscriptionId" .=) <$> _ssSubscriptionId])
+
 -- | Interval of the commitment if it is a commitment plan.
 --
 -- /See:/ 'subscriptionCommitmentIntervalPlan' smart constructor.
@@ -538,6 +689,22 @@ scipStartTime
 scipEndTime :: Lens' SubscriptionCommitmentIntervalPlan (Maybe Int64)
 scipEndTime
   = lens _scipEndTime (\ s a -> s{_scipEndTime = a})
+
+instance FromJSON SubscriptionCommitmentIntervalPlan
+         where
+        parseJSON
+          = withObject "SubscriptionCommitmentIntervalPlan"
+              (\ o ->
+                 SubscriptionCommitmentIntervalPlan <$>
+                   (o .:? "startTime") <*> (o .:? "endTime"))
+
+instance ToJSON SubscriptionCommitmentIntervalPlan
+         where
+        toJSON SubscriptionCommitmentIntervalPlan{..}
+          = object
+              (catMaybes
+                 [("startTime" .=) <$> _scipStartTime,
+                  ("endTime" .=) <$> _scipEndTime])
 
 -- | Plan details of the subscription
 --
@@ -583,6 +750,23 @@ spPlanName :: Lens' SubscriptionPlan (Maybe Text)
 spPlanName
   = lens _spPlanName (\ s a -> s{_spPlanName = a})
 
+instance FromJSON SubscriptionPlan where
+        parseJSON
+          = withObject "SubscriptionPlan"
+              (\ o ->
+                 SubscriptionPlan <$>
+                   (o .:? "commitmentInterval") <*>
+                     (o .:? "isCommitmentPlan")
+                     <*> (o .:? "planName"))
+
+instance ToJSON SubscriptionPlan where
+        toJSON SubscriptionPlan{..}
+          = object
+              (catMaybes
+                 [("commitmentInterval" .=) <$> _spCommitmentInterval,
+                  ("isCommitmentPlan" .=) <$> _spIsCommitmentPlan,
+                  ("planName" .=) <$> _spPlanName])
+
 -- | Transfer related information for the subscription.
 --
 -- /See:/ 'subscriptionTransferInfo' smart constructor.
@@ -617,6 +801,23 @@ stiMinimumTransferableSeats
   = lens _stiMinimumTransferableSeats
       (\ s a -> s{_stiMinimumTransferableSeats = a})
 
+instance FromJSON SubscriptionTransferInfo where
+        parseJSON
+          = withObject "SubscriptionTransferInfo"
+              (\ o ->
+                 SubscriptionTransferInfo <$>
+                   (o .:? "transferabilityExpirationTime") <*>
+                     (o .:? "minimumTransferableSeats"))
+
+instance ToJSON SubscriptionTransferInfo where
+        toJSON SubscriptionTransferInfo{..}
+          = object
+              (catMaybes
+                 [("transferabilityExpirationTime" .=) <$>
+                    _stiTransferabilityExpirationTime,
+                  ("minimumTransferableSeats" .=) <$>
+                    _stiMinimumTransferableSeats])
+
 -- | Trial Settings of the subscription.
 --
 -- /See:/ 'subscriptionTrialSettings' smart constructor.
@@ -650,6 +851,20 @@ stsTrialEndTime :: Lens' SubscriptionTrialSettings (Maybe Int64)
 stsTrialEndTime
   = lens _stsTrialEndTime
       (\ s a -> s{_stsTrialEndTime = a})
+
+instance FromJSON SubscriptionTrialSettings where
+        parseJSON
+          = withObject "SubscriptionTrialSettings"
+              (\ o ->
+                 SubscriptionTrialSettings <$>
+                   (o .:? "isInTrial") <*> (o .:? "trialEndTime"))
+
+instance ToJSON SubscriptionTrialSettings where
+        toJSON SubscriptionTrialSettings{..}
+          = object
+              (catMaybes
+                 [("isInTrial" .=) <$> _stsIsInTrial,
+                  ("trialEndTime" .=) <$> _stsTrialEndTime])
 
 -- | JSON template for a subscription list.
 --
@@ -696,3 +911,20 @@ subSubscriptions
       (\ s a -> s{_subSubscriptions = a})
       . _Default
       . _Coerce
+
+instance FromJSON Subscriptions where
+        parseJSON
+          = withObject "Subscriptions"
+              (\ o ->
+                 Subscriptions <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "reseller#subscriptions")
+                     <*> (o .:? "subscriptions" .!= mempty))
+
+instance ToJSON Subscriptions where
+        toJSON Subscriptions{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _subNextPageToken,
+                  Just ("kind" .= _subKind),
+                  ("subscriptions" .=) <$> _subSubscriptions])

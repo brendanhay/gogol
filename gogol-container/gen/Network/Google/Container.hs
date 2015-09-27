@@ -150,34 +150,39 @@ type OperationsAPI =
 
 -- | Lists all operations in a project in a specific zone.
 type OperationsList =
-     "container" :> "v1beta1" :> "projects" :>
-       Capture "projectId" Text
-       :> "zones"
-       :> Capture "zoneId" Text
-       :> "operations"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "container" :>
+       "v1beta1" :>
+         "projects" :>
+           Capture "projectId" Text :>
+             "zones" :>
+               Capture "zoneId" Text :>
+                 "operations" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :>
+                                 Get '[JSON] ListOperationsResponse
 
 -- | Gets the specified operation.
 type OperationsGet =
-     "container" :> "v1beta1" :> "projects" :>
-       Capture "projectId" Text
-       :> "zones"
-       :> Capture "zoneId" Text
-       :> "operations"
-       :> Capture "operationId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "container" :>
+       "v1beta1" :>
+         "projects" :>
+           Capture "projectId" Text :>
+             "zones" :>
+               Capture "zoneId" Text :>
+                 "operations" :>
+                   Capture "operationId" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :> Get '[JSON] Operation
 
 type ClustersAPI =
      ClustersList :<|> ClustersGet :<|> ClustersCreate
@@ -185,34 +190,39 @@ type ClustersAPI =
 
 -- | Lists all clusters owned by a project in the specified zone.
 type ClustersList =
-     "container" :> "v1beta1" :> "projects" :>
-       Capture "projectId" Text
-       :> "zones"
-       :> Capture "zoneId" Text
-       :> "clusters"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "container" :>
+       "v1beta1" :>
+         "projects" :>
+           Capture "projectId" Text :>
+             "zones" :>
+               Capture "zoneId" Text :>
+                 "clusters" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :>
+                                 Get '[JSON] ListClustersResponse
 
 -- | Gets a specific cluster.
 type ClustersGet =
-     "container" :> "v1beta1" :> "projects" :>
-       Capture "projectId" Text
-       :> "zones"
-       :> Capture "zoneId" Text
-       :> "clusters"
-       :> Capture "clusterId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "container" :>
+       "v1beta1" :>
+         "projects" :>
+           Capture "projectId" Text :>
+             "zones" :>
+               Capture "zoneId" Text :>
+                 "clusters" :>
+                   Capture "clusterId" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :> Get '[JSON] Cluster
 
 -- | Creates a cluster, consisting of the specified number and type of Google
 -- Compute Engine instances, plus a Kubernetes master instance. The cluster
@@ -223,63 +233,74 @@ type ClustersGet =
 -- Finally, an entry is added to the project\'s global metadata indicating
 -- which CIDR range is being used by the cluster.
 type ClustersCreate =
-     "container" :> "v1beta1" :> "projects" :>
-       Capture "projectId" Text
-       :> "zones"
-       :> Capture "zoneId" Text
-       :> "clusters"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "container" :>
+       "v1beta1" :>
+         "projects" :>
+           Capture "projectId" Text :>
+             "zones" :>
+               Capture "zoneId" Text :>
+                 "clusters" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Post '[JSON] Operation
 
 -- | Deletes the cluster, including the Kubernetes master and all worker
 -- nodes. Firewalls and routes that were configured at cluster creation are
 -- also deleted.
 type ClustersDelete =
-     "container" :> "v1beta1" :> "projects" :>
-       Capture "projectId" Text
-       :> "zones"
-       :> Capture "zoneId" Text
-       :> "clusters"
-       :> Capture "clusterId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "container" :>
+       "v1beta1" :>
+         "projects" :>
+           Capture "projectId" Text :>
+             "zones" :>
+               Capture "zoneId" Text :>
+                 "clusters" :>
+                   Capture "clusterId" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Delete '[JSON] Operation
 
 type OperationsAPI = OperationsList
 
 -- | Lists all operations in a project, across all zones.
 type OperationsList =
-     "container" :> "v1beta1" :> "projects" :>
-       Capture "projectId" Text
-       :> "operations"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "container" :>
+       "v1beta1" :>
+         "projects" :>
+           Capture "projectId" Text :>
+             "operations" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Get '[JSON] ListAggregatedOperationsResponse
 
 type ClustersAPI = ClustersList
 
 -- | Lists all clusters owned by a project across all zones.
 type ClustersList =
-     "container" :> "v1beta1" :> "projects" :>
-       Capture "projectId" Text
-       :> "clusters"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "container" :>
+       "v1beta1" :>
+         "projects" :>
+           Capture "projectId" Text :>
+             "clusters" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Get '[JSON] ListAggregatedClustersResponse

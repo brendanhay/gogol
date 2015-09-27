@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -58,6 +59,22 @@ atPrecision
 -- formatted date-time value (1970-01-01T00:00:00Z).
 atEnd :: Lens' AcquisitionTime (Maybe UTCTime)
 atEnd = lens _atEnd (\ s a -> s{_atEnd = a})
+
+instance FromJSON AcquisitionTime where
+        parseJSON
+          = withObject "AcquisitionTime"
+              (\ o ->
+                 AcquisitionTime <$>
+                   (o .:? "start") <*> (o .:? "precision") <*>
+                     (o .:? "end"))
+
+instance ToJSON AcquisitionTime where
+        toJSON AcquisitionTime{..}
+          = object
+              (catMaybes
+                 [("start" .=) <$> _atStart,
+                  ("precision" .=) <$> _atPrecision,
+                  ("end" .=) <$> _atEnd])
 
 -- | An asset is any Google Maps Engine resource that has a globally unique
 -- ID. Assets include maps, layers, vector tables, raster collections, and
@@ -217,6 +234,44 @@ aTags
   = lens _aTags (\ s a -> s{_aTags = a}) . _Default .
       _Coerce
 
+instance FromJSON Asset where
+        parseJSON
+          = withObject "Asset"
+              (\ o ->
+                 Asset <$>
+                   (o .:? "creationTime") <*>
+                     (o .:? "writersCanEditPermissions")
+                     <*> (o .:? "etag")
+                     <*> (o .:? "creatorEmail")
+                     <*> (o .:? "lastModifiedTime")
+                     <*> (o .:? "lastModifierEmail")
+                     <*> (o .:? "name")
+                     <*> (o .:? "bbox" .!= mempty)
+                     <*> (o .:? "resource")
+                     <*> (o .:? "id")
+                     <*> (o .:? "projectId")
+                     <*> (o .:? "type")
+                     <*> (o .:? "description")
+                     <*> (o .:? "tags" .!= mempty))
+
+instance ToJSON Asset where
+        toJSON Asset{..}
+          = object
+              (catMaybes
+                 [("creationTime" .=) <$> _aCreationTime,
+                  ("writersCanEditPermissions" .=) <$>
+                    _aWritersCanEditPermissions,
+                  ("etag" .=) <$> _aEtag,
+                  ("creatorEmail" .=) <$> _aCreatorEmail,
+                  ("lastModifiedTime" .=) <$> _aLastModifiedTime,
+                  ("lastModifierEmail" .=) <$> _aLastModifierEmail,
+                  ("name" .=) <$> _aName, ("bbox" .=) <$> _aBbox,
+                  ("resource" .=) <$> _aResource, ("id" .=) <$> _aId,
+                  ("projectId" .=) <$> _aProjectId,
+                  ("type" .=) <$> _aType,
+                  ("description" .=) <$> _aDescription,
+                  ("tags" .=) <$> _aTags])
+
 -- | The response returned by a call to resources.List.
 --
 -- /See:/ 'assetsListResponse' smart constructor.
@@ -252,6 +307,21 @@ alrAssets
   = lens _alrAssets (\ s a -> s{_alrAssets = a}) .
       _Default
       . _Coerce
+
+instance FromJSON AssetsListResponse where
+        parseJSON
+          = withObject "AssetsListResponse"
+              (\ o ->
+                 AssetsListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "assets" .!= mempty))
+
+instance ToJSON AssetsListResponse where
+        toJSON AssetsListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _alrNextPageToken,
+                  ("assets" .=) <$> _alrAssets])
 
 -- | Border in line style. Both color and width are required.
 --
@@ -292,6 +362,21 @@ bWidth = lens _bWidth (\ s a -> s{_bWidth = a})
 bOpacity :: Lens' Border (Maybe Double)
 bOpacity = lens _bOpacity (\ s a -> s{_bOpacity = a})
 
+instance FromJSON Border where
+        parseJSON
+          = withObject "Border"
+              (\ o ->
+                 Border <$>
+                   (o .:? "color") <*> (o .:? "width") <*>
+                     (o .:? "opacity"))
+
+instance ToJSON Border where
+        toJSON Border{..}
+          = object
+              (catMaybes
+                 [("color" .=) <$> _bColor, ("width" .=) <$> _bWidth,
+                  ("opacity" .=) <$> _bOpacity])
+
 -- | Basic color used in styling.
 --
 -- /See:/ 'color' smart constructor.
@@ -323,6 +408,19 @@ cColor = lens _cColor (\ s a -> s{_cColor = a})
 cOpacity :: Lens' Color (Maybe Double)
 cOpacity = lens _cOpacity (\ s a -> s{_cOpacity = a})
 
+instance FromJSON Color where
+        parseJSON
+          = withObject "Color"
+              (\ o ->
+                 Color <$> (o .:? "color") <*> (o .:? "opacity"))
+
+instance ToJSON Color where
+        toJSON Color{..}
+          = object
+              (catMaybes
+                 [("color" .=) <$> _cColor,
+                  ("opacity" .=) <$> _cOpacity])
+
 --
 -- /See:/ 'datasource' smart constructor.
 newtype Datasource = Datasource
@@ -344,6 +442,15 @@ datasource =
 -- | The ID of a datasource.
 dId :: Lens' Datasource (Maybe Text)
 dId = lens _dId (\ s a -> s{_dId = a})
+
+instance FromJSON Datasource where
+        parseJSON
+          = withObject "Datasource"
+              (\ o -> Datasource <$> (o .:? "id"))
+
+instance ToJSON Datasource where
+        toJSON Datasource{..}
+          = object (catMaybes [("id" .=) <$> _dId])
 
 -- | A display rule of the vector style.
 --
@@ -421,6 +528,28 @@ drLineOptions
   = lens _drLineOptions
       (\ s a -> s{_drLineOptions = a})
 
+instance FromJSON DisplayRule where
+        parseJSON
+          = withObject "DisplayRule"
+              (\ o ->
+                 DisplayRule <$>
+                   (o .:? "pointOptions") <*> (o .:? "polygonOptions")
+                     <*> (o .:? "zoomLevels")
+                     <*> (o .:? "filters" .!= mempty)
+                     <*> (o .:? "name")
+                     <*> (o .:? "lineOptions"))
+
+instance ToJSON DisplayRule where
+        toJSON DisplayRule{..}
+          = object
+              (catMaybes
+                 [("pointOptions" .=) <$> _drPointOptions,
+                  ("polygonOptions" .=) <$> _drPolygonOptions,
+                  ("zoomLevels" .=) <$> _drZoomLevels,
+                  ("filters" .=) <$> _drFilters,
+                  ("name" .=) <$> _drName,
+                  ("lineOptions" .=) <$> _drLineOptions])
+
 -- | A feature within a table.
 --
 -- /See:/ 'feature' smart constructor.
@@ -462,6 +591,22 @@ fProperties :: Lens' Feature (Maybe (Maybe GeoJsonProperties))
 fProperties
   = lens _fProperties (\ s a -> s{_fProperties = a})
 
+instance FromJSON Feature where
+        parseJSON
+          = withObject "Feature"
+              (\ o ->
+                 Feature <$>
+                   (o .:? "geometry") <*> (o .:? "type" .!= "Feature")
+                     <*> (o .:? "properties"))
+
+instance ToJSON Feature where
+        toJSON Feature{..}
+          = object
+              (catMaybes
+                 [("geometry" .=) <$> _fGeometry,
+                  Just ("type" .= _fType),
+                  ("properties" .=) <$> _fProperties])
+
 -- | A feature info contains information about individual feature.
 --
 -- /See:/ 'featureInfo' smart constructor.
@@ -486,6 +631,15 @@ featureInfo =
 fiContent :: Lens' FeatureInfo (Maybe Text)
 fiContent
   = lens _fiContent (\ s a -> s{_fiContent = a})
+
+instance FromJSON FeatureInfo where
+        parseJSON
+          = withObject "FeatureInfo"
+              (\ o -> FeatureInfo <$> (o .:? "content"))
+
+instance ToJSON FeatureInfo where
+        toJSON FeatureInfo{..}
+          = object (catMaybes [("content" .=) <$> _fiContent])
 
 -- | The request sent to features.BatchDelete.
 --
@@ -522,6 +676,21 @@ fbdrGxIds
   = lens _fbdrGxIds (\ s a -> s{_fbdrGxIds = a}) .
       _Default
       . _Coerce
+
+instance FromJSON FeaturesBatchDeleteRequest where
+        parseJSON
+          = withObject "FeaturesBatchDeleteRequest"
+              (\ o ->
+                 FeaturesBatchDeleteRequest <$>
+                   (o .:? "primaryKeys" .!= mempty) <*>
+                     (o .:? "gx_ids" .!= mempty))
+
+instance ToJSON FeaturesBatchDeleteRequest where
+        toJSON FeaturesBatchDeleteRequest{..}
+          = object
+              (catMaybes
+                 [("primaryKeys" .=) <$> _fbdrPrimaryKeys,
+                  ("gx_ids" .=) <$> _fbdrGxIds])
 
 -- | The request sent to features.Insert.
 --
@@ -562,6 +731,22 @@ fbirNormalizeGeometries
   = lens _fbirNormalizeGeometries
       (\ s a -> s{_fbirNormalizeGeometries = a})
 
+instance FromJSON FeaturesBatchInsertRequest where
+        parseJSON
+          = withObject "FeaturesBatchInsertRequest"
+              (\ o ->
+                 FeaturesBatchInsertRequest <$>
+                   (o .:? "features" .!= mempty) <*>
+                     (o .:? "normalizeGeometries" .!= True))
+
+instance ToJSON FeaturesBatchInsertRequest where
+        toJSON FeaturesBatchInsertRequest{..}
+          = object
+              (catMaybes
+                 [("features" .=) <$> _fbirFeatures,
+                  Just
+                    ("normalizeGeometries" .= _fbirNormalizeGeometries)])
+
 -- | The request sent to features.BatchPatch.
 --
 -- /See:/ 'featuresBatchPatchRequest' smart constructor.
@@ -600,6 +785,22 @@ fbprNormalizeGeometries :: Lens' FeaturesBatchPatchRequest Bool
 fbprNormalizeGeometries
   = lens _fbprNormalizeGeometries
       (\ s a -> s{_fbprNormalizeGeometries = a})
+
+instance FromJSON FeaturesBatchPatchRequest where
+        parseJSON
+          = withObject "FeaturesBatchPatchRequest"
+              (\ o ->
+                 FeaturesBatchPatchRequest <$>
+                   (o .:? "features" .!= mempty) <*>
+                     (o .:? "normalizeGeometries" .!= True))
+
+instance ToJSON FeaturesBatchPatchRequest where
+        toJSON FeaturesBatchPatchRequest{..}
+          = object
+              (catMaybes
+                 [("features" .=) <$> _fbprFeatures,
+                  Just
+                    ("normalizeGeometries" .= _fbprNormalizeGeometries)])
 
 -- | The response returned by a call to features.List.
 --
@@ -664,6 +865,28 @@ flrFeatures
 flrType :: Lens' FeaturesListResponse Text
 flrType = lens _flrType (\ s a -> s{_flrType = a})
 
+instance FromJSON FeaturesListResponse where
+        parseJSON
+          = withObject "FeaturesListResponse"
+              (\ o ->
+                 FeaturesListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "allowedQueriesPerSecond")
+                     <*> (o .:? "schema")
+                     <*> (o .:? "features" .!= mempty)
+                     <*> (o .:? "type" .!= "FeatureCollection"))
+
+instance ToJSON FeaturesListResponse where
+        toJSON FeaturesListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _flrNextPageToken,
+                  ("allowedQueriesPerSecond" .=) <$>
+                    _flrAllowedQueriesPerSecond,
+                  ("schema" .=) <$> _flrSchema,
+                  ("features" .=) <$> _flrFeatures,
+                  Just ("type" .= _flrType)])
+
 -- | A single File, which is a component of an Asset.
 --
 -- /See:/ 'file' smart constructor.
@@ -706,6 +929,22 @@ fFilename :: Lens' File (Maybe Text)
 fFilename
   = lens _fFilename (\ s a -> s{_fFilename = a})
 
+instance FromJSON File where
+        parseJSON
+          = withObject "File"
+              (\ o ->
+                 File <$>
+                   (o .:? "size") <*> (o .:? "uploadStatus") <*>
+                     (o .:? "filename"))
+
+instance ToJSON File where
+        toJSON File{..}
+          = object
+              (catMaybes
+                 [("size" .=) <$> _fSize,
+                  ("uploadStatus" .=) <$> _fUploadStatus,
+                  ("filename" .=) <$> _fFilename])
+
 -- | Conditions for filtering features.
 --
 -- /See:/ 'filter'' smart constructor.
@@ -746,6 +985,22 @@ fValue = lens _fValue (\ s a -> s{_fValue = a})
 fColumn :: Lens' Filter (Maybe Text)
 fColumn = lens _fColumn (\ s a -> s{_fColumn = a})
 
+instance FromJSON Filter where
+        parseJSON
+          = withObject "Filter"
+              (\ o ->
+                 Filter <$>
+                   (o .:? "operator") <*> (o .:? "value") <*>
+                     (o .:? "column"))
+
+instance ToJSON Filter where
+        toJSON Filter{..}
+          = object
+              (catMaybes
+                 [("operator" .=) <$> _fOperator,
+                  ("value" .=) <$> _fValue,
+                  ("column" .=) <$> _fColumn])
+
 --
 -- /See:/ 'geoJsonGeometry' smart constructor.
 data GeoJsonGeometry =
@@ -757,6 +1012,14 @@ data GeoJsonGeometry =
 geoJsonGeometry
     :: GeoJsonGeometry
 geoJsonGeometry = GeoJsonGeometry
+
+instance FromJSON GeoJsonGeometry where
+        parseJSON
+          = withObject "GeoJsonGeometry"
+              (\ o -> pure GeoJsonGeometry)
+
+instance ToJSON GeoJsonGeometry where
+        toJSON = const (Object mempty)
 
 -- | A heterogenous collection of GeoJsonGeometry objects.
 --
@@ -794,6 +1057,20 @@ gjgcGeometries
 gjgcType :: Lens' GeoJsonGeometryCollection (Maybe GeoJsonGeometryCollectionType)
 gjgcType = lens _gjgcType (\ s a -> s{_gjgcType = a})
 
+instance FromJSON GeoJsonGeometryCollection where
+        parseJSON
+          = withObject "GeoJsonGeometryCollection"
+              (\ o ->
+                 GeoJsonGeometryCollection <$>
+                   (o .:? "geometries" .!= mempty) <*> (o .:? "type"))
+
+instance ToJSON GeoJsonGeometryCollection where
+        toJSON GeoJsonGeometryCollection{..}
+          = object
+              (catMaybes
+                 [("geometries" .=) <$> _gjgcGeometries,
+                  ("type" .=) <$> _gjgcType])
+
 --
 -- /See:/ 'geoJsonLineString' smart constructor.
 data GeoJsonLineString = GeoJsonLineString
@@ -827,6 +1104,20 @@ gjlsCoordinates
 -- | Identifies this object as a GeoJsonLineString.
 gjlsType :: Lens' GeoJsonLineString (Maybe GeoJsonLineStringType)
 gjlsType = lens _gjlsType (\ s a -> s{_gjlsType = a})
+
+instance FromJSON GeoJsonLineString where
+        parseJSON
+          = withObject "GeoJsonLineString"
+              (\ o ->
+                 GeoJsonLineString <$>
+                   (o .:? "coordinates" .!= mempty) <*> (o .:? "type"))
+
+instance ToJSON GeoJsonLineString where
+        toJSON GeoJsonLineString{..}
+          = object
+              (catMaybes
+                 [("coordinates" .=) <$> _gjlsCoordinates,
+                  ("type" .=) <$> _gjlsType])
 
 -- | Multi Line String
 --
@@ -864,6 +1155,20 @@ gjmlsType :: Lens' GeoJsonMultiLineString (Maybe GeoJsonMultiLineStringType)
 gjmlsType
   = lens _gjmlsType (\ s a -> s{_gjmlsType = a})
 
+instance FromJSON GeoJsonMultiLineString where
+        parseJSON
+          = withObject "GeoJsonMultiLineString"
+              (\ o ->
+                 GeoJsonMultiLineString <$>
+                   (o .:? "coordinates" .!= mempty) <*> (o .:? "type"))
+
+instance ToJSON GeoJsonMultiLineString where
+        toJSON GeoJsonMultiLineString{..}
+          = object
+              (catMaybes
+                 [("coordinates" .=) <$> _gjmlsCoordinates,
+                  ("type" .=) <$> _gjmlsType])
+
 --
 -- /See:/ 'geoJsonMultiPoint' smart constructor.
 data GeoJsonMultiPoint = GeoJsonMultiPoint
@@ -899,6 +1204,20 @@ gjsonmpType :: Lens' GeoJsonMultiPoint (Maybe GeoJsonMultiPointType)
 gjsonmpType
   = lens _gjsonmpType (\ s a -> s{_gjsonmpType = a})
 
+instance FromJSON GeoJsonMultiPoint where
+        parseJSON
+          = withObject "GeoJsonMultiPoint"
+              (\ o ->
+                 GeoJsonMultiPoint <$>
+                   (o .:? "coordinates" .!= mempty) <*> (o .:? "type"))
+
+instance ToJSON GeoJsonMultiPoint where
+        toJSON GeoJsonMultiPoint{..}
+          = object
+              (catMaybes
+                 [("coordinates" .=) <$> _gjsonmpCoordinates,
+                  ("type" .=) <$> _gjsonmpType])
+
 --
 -- /See:/ 'geoJsonMultiPolygon' smart constructor.
 data GeoJsonMultiPolygon = GeoJsonMultiPolygon
@@ -933,6 +1252,20 @@ gjmpCoordinates
 gjmpType :: Lens' GeoJsonMultiPolygon (Maybe GeoJsonMultiPolygonType)
 gjmpType = lens _gjmpType (\ s a -> s{_gjmpType = a})
 
+instance FromJSON GeoJsonMultiPolygon where
+        parseJSON
+          = withObject "GeoJsonMultiPolygon"
+              (\ o ->
+                 GeoJsonMultiPolygon <$>
+                   (o .:? "coordinates" .!= mempty) <*> (o .:? "type"))
+
+instance ToJSON GeoJsonMultiPolygon where
+        toJSON GeoJsonMultiPolygon{..}
+          = object
+              (catMaybes
+                 [("coordinates" .=) <$> _gjmpCoordinates,
+                  ("type" .=) <$> _gjmpType])
+
 --
 -- /See:/ 'geoJsonPoint' smart constructor.
 data GeoJsonPoint = GeoJsonPoint
@@ -965,6 +1298,20 @@ gjpCoordinates
 -- | Identifies this object as a GeoJsonPoint.
 gjpType :: Lens' GeoJsonPoint (Maybe GeoJsonPointType)
 gjpType = lens _gjpType (\ s a -> s{_gjpType = a})
+
+instance FromJSON GeoJsonPoint where
+        parseJSON
+          = withObject "GeoJsonPoint"
+              (\ o ->
+                 GeoJsonPoint <$>
+                   (o .:? "coordinates") <*> (o .:? "type"))
+
+instance ToJSON GeoJsonPoint where
+        toJSON GeoJsonPoint{..}
+          = object
+              (catMaybes
+                 [("coordinates" .=) <$> _gjpCoordinates,
+                  ("type" .=) <$> _gjpType])
 
 --
 -- /See:/ 'geoJsonPolygon' smart constructor.
@@ -1005,6 +1352,20 @@ gjsonpType :: Lens' GeoJsonPolygon (Maybe GeoJsonPolygonType)
 gjsonpType
   = lens _gjsonpType (\ s a -> s{_gjsonpType = a})
 
+instance FromJSON GeoJsonPolygon where
+        parseJSON
+          = withObject "GeoJsonPolygon"
+              (\ o ->
+                 GeoJsonPolygon <$>
+                   (o .:? "coordinates" .!= mempty) <*> (o .:? "type"))
+
+instance ToJSON GeoJsonPolygon where
+        toJSON GeoJsonPolygon{..}
+          = object
+              (catMaybes
+                 [("coordinates" .=) <$> _gjsonpCoordinates,
+                  ("type" .=) <$> _gjsonpType])
+
 -- | The properties associated with a feature.
 --
 -- /See:/ 'geoJsonProperties' smart constructor.
@@ -1017,6 +1378,14 @@ data GeoJsonProperties =
 geoJsonProperties
     :: GeoJsonProperties
 geoJsonProperties = GeoJsonProperties
+
+instance FromJSON GeoJsonProperties where
+        parseJSON
+          = withObject "GeoJsonProperties"
+              (\ o -> pure GeoJsonProperties)
+
+instance ToJSON GeoJsonProperties where
+        toJSON = const (Object mempty)
 
 -- | An icon is a user-uploaded image that can be used to style point
 -- geometries.
@@ -1058,6 +1427,21 @@ iId = lens _iId (\ s a -> s{_iId = a})
 iDescription :: Lens' Icon (Maybe Text)
 iDescription
   = lens _iDescription (\ s a -> s{_iDescription = a})
+
+instance FromJSON Icon where
+        parseJSON
+          = withObject "Icon"
+              (\ o ->
+                 Icon <$>
+                   (o .:? "name") <*> (o .:? "id") <*>
+                     (o .:? "description"))
+
+instance ToJSON Icon where
+        toJSON Icon{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _iName, ("id" .=) <$> _iId,
+                  ("description" .=) <$> _iDescription])
 
 -- | Style for icon, this is part of point style.
 --
@@ -1113,6 +1497,23 @@ isName = lens _isName (\ s a -> s{_isName = a})
 isId :: Lens' IconStyle (Maybe Text)
 isId = lens _isId (\ s a -> s{_isId = a})
 
+instance FromJSON IconStyle where
+        parseJSON
+          = withObject "IconStyle"
+              (\ o ->
+                 IconStyle <$>
+                   (o .:? "scaledShape") <*> (o .:? "scalingFunction")
+                     <*> (o .:? "name")
+                     <*> (o .:? "id"))
+
+instance ToJSON IconStyle where
+        toJSON IconStyle{..}
+          = object
+              (catMaybes
+                 [("scaledShape" .=) <$> _isScaledShape,
+                  ("scalingFunction" .=) <$> _isScalingFunction,
+                  ("name" .=) <$> _isName, ("id" .=) <$> _isId])
+
 -- | The response returned by a call to icons.List.
 --
 -- /See:/ 'iconsListResponse' smart constructor.
@@ -1148,6 +1549,21 @@ ilrIcons
   = lens _ilrIcons (\ s a -> s{_ilrIcons = a}) .
       _Default
       . _Coerce
+
+instance FromJSON IconsListResponse where
+        parseJSON
+          = withObject "IconsListResponse"
+              (\ o ->
+                 IconsListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "icons" .!= mempty))
+
+instance ToJSON IconsListResponse where
+        toJSON IconsListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _ilrNextPageToken,
+                  ("icons" .=) <$> _ilrIcons])
 
 -- | Text label style.
 --
@@ -1224,6 +1640,29 @@ lsFontWeight
 -- | The column value of the feature to be displayed.
 lsColumn :: Lens' LabelStyle (Maybe Text)
 lsColumn = lens _lsColumn (\ s a -> s{_lsColumn = a})
+
+instance FromJSON LabelStyle where
+        parseJSON
+          = withObject "LabelStyle"
+              (\ o ->
+                 LabelStyle <$>
+                   (o .:? "fontStyle") <*> (o .:? "color") <*>
+                     (o .:? "size")
+                     <*> (o .:? "opacity")
+                     <*> (o .:? "outline")
+                     <*> (o .:? "fontWeight")
+                     <*> (o .:? "column"))
+
+instance ToJSON LabelStyle where
+        toJSON LabelStyle{..}
+          = object
+              (catMaybes
+                 [("fontStyle" .=) <$> _lsFontStyle,
+                  ("color" .=) <$> _lsColor, ("size" .=) <$> _lsSize,
+                  ("opacity" .=) <$> _lsOpacity,
+                  ("outline" .=) <$> _lsOutline,
+                  ("fontWeight" .=) <$> _lsFontWeight,
+                  ("column" .=) <$> _lsColumn])
 
 -- | A Layer combines multiple datasources, with styling information, for
 -- presentation on a map.
@@ -1464,6 +1903,55 @@ lTags
   = lens _lTags (\ s a -> s{_lTags = a}) .
       mapping (_Default . _Coerce)
 
+instance FromJSON Layer where
+        parseJSON
+          = withObject "Layer"
+              (\ o ->
+                 Layer <$>
+                   (o .:? "creationTime") <*>
+                     (o .:? "writersCanEditPermissions")
+                     <*> (o .:? "style")
+                     <*> (o .:? "etag")
+                     <*> (o .:? "datasourceType")
+                     <*> (o .:? "publishingStatus")
+                     <*> (o .:? "creatorEmail")
+                     <*> (o .:? "layerType")
+                     <*> (o .:? "lastModifiedTime")
+                     <*> (o .:? "datasources")
+                     <*> (o .:? "lastModifierEmail")
+                     <*> (o .:? "name")
+                     <*> (o .:? "bbox" .!= mempty)
+                     <*> (o .:? "processingStatus")
+                     <*> (o .:? "id")
+                     <*> (o .:? "projectId")
+                     <*> (o .:? "draftAccessList")
+                     <*> (o .:? "publishedAccessList")
+                     <*> (o .:? "description")
+                     <*> (o .:? "tags"))
+
+instance ToJSON Layer where
+        toJSON Layer{..}
+          = object
+              (catMaybes
+                 [("creationTime" .=) <$> _lCreationTime,
+                  ("writersCanEditPermissions" .=) <$>
+                    _lWritersCanEditPermissions,
+                  ("style" .=) <$> _lStyle, ("etag" .=) <$> _lEtag,
+                  ("datasourceType" .=) <$> _lDatasourceType,
+                  ("publishingStatus" .=) <$> _lPublishingStatus,
+                  ("creatorEmail" .=) <$> _lCreatorEmail,
+                  ("layerType" .=) <$> _lLayerType,
+                  ("lastModifiedTime" .=) <$> _lLastModifiedTime,
+                  ("datasources" .=) <$> _lDatasources,
+                  ("lastModifierEmail" .=) <$> _lLastModifierEmail,
+                  ("name" .=) <$> _lName, ("bbox" .=) <$> _lBbox,
+                  ("processingStatus" .=) <$> _lProcessingStatus,
+                  ("id" .=) <$> _lId, ("projectId" .=) <$> _lProjectId,
+                  ("draftAccessList" .=) <$> _lDraftAccessList,
+                  ("publishedAccessList" .=) <$> _lPublishedAccessList,
+                  ("description" .=) <$> _lDescription,
+                  ("tags" .=) <$> _lTags])
+
 -- | The response returned by a call to layers.List. Note: The list response
 -- does not include all the fields available in a layer. Refer to the layer
 -- resource description for details of the fields that are not included.
@@ -1503,6 +1991,21 @@ llrLayers
   = lens _llrLayers (\ s a -> s{_llrLayers = a}) .
       _Default
       . _Coerce
+
+instance FromJSON LayersListResponse where
+        parseJSON
+          = withObject "LayersListResponse"
+              (\ o ->
+                 LayersListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "layers" .!= mempty))
+
+instance ToJSON LayersListResponse where
+        toJSON LayersListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _llrNextPageToken,
+                  ("layers" .=) <$> _llrLayers])
 
 -- | Style for lines.
 --
@@ -1556,6 +2059,23 @@ lsDash
 lsLabel :: Lens' LineStyle (Maybe (Maybe LabelStyle))
 lsLabel = lens _lsLabel (\ s a -> s{_lsLabel = a})
 
+instance FromJSON LineStyle where
+        parseJSON
+          = withObject "LineStyle"
+              (\ o ->
+                 LineStyle <$>
+                   (o .:? "stroke") <*> (o .:? "border") <*>
+                     (o .:? "dash" .!= mempty)
+                     <*> (o .:? "label"))
+
+instance ToJSON LineStyle where
+        toJSON LineStyle{..}
+          = object
+              (catMaybes
+                 [("stroke" .=) <$> _lsStroke,
+                  ("border" .=) <$> _lsBorder, ("dash" .=) <$> _lsDash,
+                  ("label" .=) <$> _lsLabel])
+
 -- | Stroke of the line.
 --
 -- /See:/ 'lineStyleStroke' smart constructor.
@@ -1596,6 +2116,22 @@ lssWidth = lens _lssWidth (\ s a -> s{_lssWidth = a})
 lssOpacity :: Lens' LineStyleStroke (Maybe Double)
 lssOpacity
   = lens _lssOpacity (\ s a -> s{_lssOpacity = a})
+
+instance FromJSON LineStyleStroke where
+        parseJSON
+          = withObject "LineStyleStroke"
+              (\ o ->
+                 LineStyleStroke <$>
+                   (o .:? "color") <*> (o .:? "width") <*>
+                     (o .:? "opacity"))
+
+instance ToJSON LineStyleStroke where
+        toJSON LineStyleStroke{..}
+          = object
+              (catMaybes
+                 [("color" .=) <$> _lssColor,
+                  ("width" .=) <$> _lssWidth,
+                  ("opacity" .=) <$> _lssOpacity])
 
 -- | A Map is a collection of Layers, optionally contained within folders.
 --
@@ -1824,6 +2360,56 @@ mapTags
   = lens _mapTags (\ s a -> s{_mapTags = a}) .
       mapping (_Default . _Coerce)
 
+instance FromJSON Map where
+        parseJSON
+          = withObject "Map"
+              (\ o ->
+                 Map <$>
+                   (o .:? "creationTime") <*>
+                     (o .:? "writersCanEditPermissions")
+                     <*> (o .:? "etag")
+                     <*> (o .:? "defaultViewport")
+                     <*> (o .:? "contents")
+                     <*> (o .:? "publishingStatus")
+                     <*> (o .:? "creatorEmail")
+                     <*> (o .:? "lastModifiedTime")
+                     <*> (o .:? "lastModifierEmail")
+                     <*> (o .:? "versions" .!= mempty)
+                     <*> (o .:? "name")
+                     <*> (o .:? "bbox" .!= mempty)
+                     <*> (o .:? "processingStatus")
+                     <*> (o .:? "id")
+                     <*> (o .:? "projectId")
+                     <*> (o .:? "draftAccessList")
+                     <*> (o .:? "publishedAccessList")
+                     <*> (o .:? "description")
+                     <*> (o .:? "tags"))
+
+instance ToJSON Map where
+        toJSON Map{..}
+          = object
+              (catMaybes
+                 [("creationTime" .=) <$> _mapCreationTime,
+                  ("writersCanEditPermissions" .=) <$>
+                    _mapWritersCanEditPermissions,
+                  ("etag" .=) <$> _mapEtag,
+                  ("defaultViewport" .=) <$> _mapDefaultViewport,
+                  ("contents" .=) <$> _mapContents,
+                  ("publishingStatus" .=) <$> _mapPublishingStatus,
+                  ("creatorEmail" .=) <$> _mapCreatorEmail,
+                  ("lastModifiedTime" .=) <$> _mapLastModifiedTime,
+                  ("lastModifierEmail" .=) <$> _mapLastModifierEmail,
+                  ("versions" .=) <$> _mapVersions,
+                  ("name" .=) <$> _mapName, ("bbox" .=) <$> _mapBbox,
+                  ("processingStatus" .=) <$> _mapProcessingStatus,
+                  ("id" .=) <$> _mapId,
+                  ("projectId" .=) <$> _mapProjectId,
+                  ("draftAccessList" .=) <$> _mapDraftAccessList,
+                  ("publishedAccessList" .=) <$>
+                    _mapPublishedAccessList,
+                  ("description" .=) <$> _mapDescription,
+                  ("tags" .=) <$> _mapTags])
+
 --
 -- /See:/ 'mapFolder' smart constructor.
 data MapFolder = MapFolder
@@ -1906,6 +2492,30 @@ mfName = lens _mfName (\ s a -> s{_mfName = a})
 mfType :: Lens' MapFolder (Maybe MapFolderType)
 mfType = lens _mfType (\ s a -> s{_mfType = a})
 
+instance FromJSON MapFolder where
+        parseJSON
+          = withObject "MapFolder"
+              (\ o ->
+                 MapFolder <$>
+                   (o .:? "expandable") <*>
+                     (o .:? "defaultViewport" .!= mempty)
+                     <*> (o .:? "contents" .!= mempty)
+                     <*> (o .:? "visibility")
+                     <*> (o .:? "key")
+                     <*> (o .:? "name")
+                     <*> (o .:? "type"))
+
+instance ToJSON MapFolder where
+        toJSON MapFolder{..}
+          = object
+              (catMaybes
+                 [("expandable" .=) <$> _mfExpandable,
+                  ("defaultViewport" .=) <$> _mfDefaultViewport,
+                  ("contents" .=) <$> _mfContents,
+                  ("visibility" .=) <$> _mfVisibility,
+                  ("key" .=) <$> _mfKey, ("name" .=) <$> _mfName,
+                  ("type" .=) <$> _mfType])
+
 --
 -- /See:/ 'mapItem' smart constructor.
 data MapItem =
@@ -1917,6 +2527,13 @@ data MapItem =
 mapItem
     :: MapItem
 mapItem = MapItem
+
+instance FromJSON MapItem where
+        parseJSON
+          = withObject "MapItem" (\ o -> pure MapItem)
+
+instance ToJSON MapItem where
+        toJSON = const (Object mempty)
 
 --
 -- /See:/ 'mapKmlLink' smart constructor.
@@ -1981,6 +2598,26 @@ mklType = lens _mklType (\ s a -> s{_mklType = a})
 mklKmlUrl :: Lens' MapKmlLink (Maybe Text)
 mklKmlUrl
   = lens _mklKmlUrl (\ s a -> s{_mklKmlUrl = a})
+
+instance FromJSON MapKmlLink where
+        parseJSON
+          = withObject "MapKmlLink"
+              (\ o ->
+                 MapKmlLink <$>
+                   (o .:? "defaultViewport" .!= mempty) <*>
+                     (o .:? "visibility")
+                     <*> (o .:? "name")
+                     <*> (o .:? "type")
+                     <*> (o .:? "kmlUrl"))
+
+instance ToJSON MapKmlLink where
+        toJSON MapKmlLink{..}
+          = object
+              (catMaybes
+                 [("defaultViewport" .=) <$> _mklDefaultViewport,
+                  ("visibility" .=) <$> _mklVisibility,
+                  ("name" .=) <$> _mklName, ("type" .=) <$> _mklType,
+                  ("kmlUrl" .=) <$> _mklKmlUrl])
 
 --
 -- /See:/ 'mapLayer' smart constructor.
@@ -2053,6 +2690,27 @@ mlId = lens _mlId (\ s a -> s{_mlId = a})
 mlType :: Lens' MapLayer (Maybe MapLayerType)
 mlType = lens _mlType (\ s a -> s{_mlType = a})
 
+instance FromJSON MapLayer where
+        parseJSON
+          = withObject "MapLayer"
+              (\ o ->
+                 MapLayer <$>
+                   (o .:? "defaultViewport" .!= mempty) <*>
+                     (o .:? "visibility")
+                     <*> (o .:? "key")
+                     <*> (o .:? "name")
+                     <*> (o .:? "id")
+                     <*> (o .:? "type"))
+
+instance ToJSON MapLayer where
+        toJSON MapLayer{..}
+          = object
+              (catMaybes
+                 [("defaultViewport" .=) <$> _mlDefaultViewport,
+                  ("visibility" .=) <$> _mlVisibility,
+                  ("key" .=) <$> _mlKey, ("name" .=) <$> _mlName,
+                  ("id" .=) <$> _mlId, ("type" .=) <$> _mlType])
+
 -- | The response returned by a call to maps.List.
 --
 -- /See:/ 'mapsListResponse' smart constructor.
@@ -2088,6 +2746,21 @@ mlrNextPageToken
   = lens _mlrNextPageToken
       (\ s a -> s{_mlrNextPageToken = a})
 
+instance FromJSON MapsListResponse where
+        parseJSON
+          = withObject "MapsListResponse"
+              (\ o ->
+                 MapsListResponse <$>
+                   (o .:? "maps" .!= mempty) <*>
+                     (o .:? "nextPageToken"))
+
+instance ToJSON MapsListResponse where
+        toJSON MapsListResponse{..}
+          = object
+              (catMaybes
+                 [("maps" .=) <$> _mlrMaps,
+                  ("nextPageToken" .=) <$> _mlrNextPageToken])
+
 -- | A list of the parents of an asset.
 --
 -- /See:/ 'parent' smart constructor.
@@ -2110,6 +2783,15 @@ parent =
 -- | The ID of this parent.
 parId :: Lens' Parent (Maybe Text)
 parId = lens _parId (\ s a -> s{_parId = a})
+
+instance FromJSON Parent where
+        parseJSON
+          = withObject "Parent"
+              (\ o -> Parent <$> (o .:? "id"))
+
+instance ToJSON Parent where
+        toJSON Parent{..}
+          = object (catMaybes [("id" .=) <$> _parId])
 
 -- | The response returned by a call to parents.List.
 --
@@ -2146,6 +2828,21 @@ plrParents
   = lens _plrParents (\ s a -> s{_plrParents = a}) .
       _Default
       . _Coerce
+
+instance FromJSON ParentsListResponse where
+        parseJSON
+          = withObject "ParentsListResponse"
+              (\ o ->
+                 ParentsListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "parents" .!= mempty))
+
+instance ToJSON ParentsListResponse where
+        toJSON ParentsListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _plrNextPageToken,
+                  ("parents" .=) <$> _plrParents])
 
 -- | A permission defines the user or group that has access to an asset, and
 -- the type of access they have.
@@ -2201,6 +2898,22 @@ pDiscoverable
   = lens _pDiscoverable
       (\ s a -> s{_pDiscoverable = a})
 
+instance FromJSON Permission where
+        parseJSON
+          = withObject "Permission"
+              (\ o ->
+                 Permission <$>
+                   (o .:? "role") <*> (o .:? "id") <*> (o .:? "type")
+                     <*> (o .:? "discoverable"))
+
+instance ToJSON Permission where
+        toJSON Permission{..}
+          = object
+              (catMaybes
+                 [("role" .=) <$> _pRole, ("id" .=) <$> _pId,
+                  ("type" .=) <$> _pType,
+                  ("discoverable" .=) <$> _pDiscoverable])
+
 -- | The request sent to mapsengine.permissions.batchDelete.
 --
 -- /See:/ 'permissionsBatchDeleteRequest' smart constructor.
@@ -2228,6 +2941,17 @@ pbdrIds
   = lens _pbdrIds (\ s a -> s{_pbdrIds = a}) . _Default
       . _Coerce
 
+instance FromJSON PermissionsBatchDeleteRequest where
+        parseJSON
+          = withObject "PermissionsBatchDeleteRequest"
+              (\ o ->
+                 PermissionsBatchDeleteRequest <$>
+                   (o .:? "ids" .!= mempty))
+
+instance ToJSON PermissionsBatchDeleteRequest where
+        toJSON PermissionsBatchDeleteRequest{..}
+          = object (catMaybes [("ids" .=) <$> _pbdrIds])
+
 -- | The response returned by a call to mapsengine.permissions.batchDelete.
 --
 -- /See:/ 'permissionsBatchDeleteResponse' smart constructor.
@@ -2240,6 +2964,15 @@ data PermissionsBatchDeleteResponse =
 permissionsBatchDeleteResponse
     :: PermissionsBatchDeleteResponse
 permissionsBatchDeleteResponse = PermissionsBatchDeleteResponse
+
+instance FromJSON PermissionsBatchDeleteResponse
+         where
+        parseJSON
+          = withObject "PermissionsBatchDeleteResponse"
+              (\ o -> pure PermissionsBatchDeleteResponse)
+
+instance ToJSON PermissionsBatchDeleteResponse where
+        toJSON = const (Object mempty)
 
 -- | The request sent to mapsengine.permissions.batchUpdate.
 --
@@ -2268,6 +3001,18 @@ pburPermissions
       . _Default
       . _Coerce
 
+instance FromJSON PermissionsBatchUpdateRequest where
+        parseJSON
+          = withObject "PermissionsBatchUpdateRequest"
+              (\ o ->
+                 PermissionsBatchUpdateRequest <$>
+                   (o .:? "permissions" .!= mempty))
+
+instance ToJSON PermissionsBatchUpdateRequest where
+        toJSON PermissionsBatchUpdateRequest{..}
+          = object
+              (catMaybes [("permissions" .=) <$> _pburPermissions])
+
 -- | The response returned by a call to mapsengine.permissions.batchUpdate.
 --
 -- /See:/ 'permissionsBatchUpdateResponse' smart constructor.
@@ -2280,6 +3025,15 @@ data PermissionsBatchUpdateResponse =
 permissionsBatchUpdateResponse
     :: PermissionsBatchUpdateResponse
 permissionsBatchUpdateResponse = PermissionsBatchUpdateResponse
+
+instance FromJSON PermissionsBatchUpdateResponse
+         where
+        parseJSON
+          = withObject "PermissionsBatchUpdateResponse"
+              (\ o -> pure PermissionsBatchUpdateResponse)
+
+instance ToJSON PermissionsBatchUpdateResponse where
+        toJSON = const (Object mempty)
 
 --
 -- /See:/ 'permissionsListResponse' smart constructor.
@@ -2306,6 +3060,18 @@ plrPermissions
       (\ s a -> s{_plrPermissions = a})
       . _Default
       . _Coerce
+
+instance FromJSON PermissionsListResponse where
+        parseJSON
+          = withObject "PermissionsListResponse"
+              (\ o ->
+                 PermissionsListResponse <$>
+                   (o .:? "permissions" .!= mempty))
+
+instance ToJSON PermissionsListResponse where
+        toJSON PermissionsListResponse{..}
+          = object
+              (catMaybes [("permissions" .=) <$> _plrPermissions])
 
 -- | Style for points.
 --
@@ -2338,6 +3104,18 @@ psIcon = lens _psIcon (\ s a -> s{_psIcon = a})
 -- | Label style for the point.
 psLabel :: Lens' PointStyle (Maybe (Maybe LabelStyle))
 psLabel = lens _psLabel (\ s a -> s{_psLabel = a})
+
+instance FromJSON PointStyle where
+        parseJSON
+          = withObject "PointStyle"
+              (\ o ->
+                 PointStyle <$> (o .:? "icon") <*> (o .:? "label"))
+
+instance ToJSON PointStyle where
+        toJSON PointStyle{..}
+          = object
+              (catMaybes
+                 [("icon" .=) <$> _psIcon, ("label" .=) <$> _psLabel])
 
 -- | Style for polygons.
 --
@@ -2379,6 +3157,21 @@ pFill = lens _pFill (\ s a -> s{_pFill = a})
 pLabel :: Lens' PolygonStyle (Maybe (Maybe LabelStyle))
 pLabel = lens _pLabel (\ s a -> s{_pLabel = a})
 
+instance FromJSON PolygonStyle where
+        parseJSON
+          = withObject "PolygonStyle"
+              (\ o ->
+                 PolygonStyle <$>
+                   (o .:? "stroke") <*> (o .:? "fill") <*>
+                     (o .:? "label"))
+
+instance ToJSON PolygonStyle where
+        toJSON PolygonStyle{..}
+          = object
+              (catMaybes
+                 [("stroke" .=) <$> _pStroke, ("fill" .=) <$> _pFill,
+                  ("label" .=) <$> _pLabel])
+
 -- | The response returned by a call to any asset\'s Process method.
 --
 -- /See:/ 'processResponse' smart constructor.
@@ -2391,6 +3184,14 @@ data ProcessResponse =
 processResponse
     :: ProcessResponse
 processResponse = ProcessResponse
+
+instance FromJSON ProcessResponse where
+        parseJSON
+          = withObject "ProcessResponse"
+              (\ o -> pure ProcessResponse)
+
+instance ToJSON ProcessResponse where
+        toJSON = const (Object mempty)
 
 -- | A Maps Engine project groups a collection of resources.
 --
@@ -2423,6 +3224,17 @@ proName = lens _proName (\ s a -> s{_proName = a})
 proId :: Lens' Project (Maybe Text)
 proId = lens _proId (\ s a -> s{_proId = a})
 
+instance FromJSON Project where
+        parseJSON
+          = withObject "Project"
+              (\ o -> Project <$> (o .:? "name") <*> (o .:? "id"))
+
+instance ToJSON Project where
+        toJSON Project{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _proName, ("id" .=) <$> _proId])
+
 -- | The response returned by a call to projects.List.
 --
 -- /See:/ 'projectsListResponse' smart constructor.
@@ -2449,6 +3261,18 @@ plrProjects
       _Default
       . _Coerce
 
+instance FromJSON ProjectsListResponse where
+        parseJSON
+          = withObject "ProjectsListResponse"
+              (\ o ->
+                 ProjectsListResponse <$>
+                   (o .:? "projects" .!= mempty))
+
+instance ToJSON ProjectsListResponse where
+        toJSON ProjectsListResponse{..}
+          = object
+              (catMaybes [("projects" .=) <$> _plrProjects])
+
 -- | The response returned by a call to any asset\'s Publish method.
 --
 -- /See:/ 'publishResponse' smart constructor.
@@ -2461,6 +3285,14 @@ data PublishResponse =
 publishResponse
     :: PublishResponse
 publishResponse = PublishResponse
+
+instance FromJSON PublishResponse where
+        parseJSON
+          = withObject "PublishResponse"
+              (\ o -> pure PublishResponse)
+
+instance ToJSON PublishResponse where
+        toJSON = const (Object mempty)
 
 -- | The published version of a layer.
 --
@@ -2523,6 +3355,25 @@ plDescription
   = lens _plDescription
       (\ s a -> s{_plDescription = a})
 
+instance FromJSON PublishedLayer where
+        parseJSON
+          = withObject "PublishedLayer"
+              (\ o ->
+                 PublishedLayer <$>
+                   (o .:? "layerType") <*> (o .:? "name") <*>
+                     (o .:? "id")
+                     <*> (o .:? "projectId")
+                     <*> (o .:? "description"))
+
+instance ToJSON PublishedLayer where
+        toJSON PublishedLayer{..}
+          = object
+              (catMaybes
+                 [("layerType" .=) <$> _plLayerType,
+                  ("name" .=) <$> _plName, ("id" .=) <$> _plId,
+                  ("projectId" .=) <$> _plProjectId,
+                  ("description" .=) <$> _plDescription])
+
 -- | The response returned by a call to layers.List.published.
 --
 -- /See:/ 'publishedLayersListResponse' smart constructor.
@@ -2558,6 +3409,21 @@ pllrLayers
   = lens _pllrLayers (\ s a -> s{_pllrLayers = a}) .
       _Default
       . _Coerce
+
+instance FromJSON PublishedLayersListResponse where
+        parseJSON
+          = withObject "PublishedLayersListResponse"
+              (\ o ->
+                 PublishedLayersListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "layers" .!= mempty))
+
+instance ToJSON PublishedLayersListResponse where
+        toJSON PublishedLayersListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _pllrNextPageToken,
+                  ("layers" .=) <$> _pllrLayers])
 
 -- | The published version of a map asset.
 --
@@ -2632,6 +3498,27 @@ pmDescription
   = lens _pmDescription
       (\ s a -> s{_pmDescription = a})
 
+instance FromJSON PublishedMap where
+        parseJSON
+          = withObject "PublishedMap"
+              (\ o ->
+                 PublishedMap <$>
+                   (o .:? "defaultViewport") <*> (o .:? "contents") <*>
+                     (o .:? "name")
+                     <*> (o .:? "id")
+                     <*> (o .:? "projectId")
+                     <*> (o .:? "description"))
+
+instance ToJSON PublishedMap where
+        toJSON PublishedMap{..}
+          = object
+              (catMaybes
+                 [("defaultViewport" .=) <$> _pmDefaultViewport,
+                  ("contents" .=) <$> _pmContents,
+                  ("name" .=) <$> _pmName, ("id" .=) <$> _pmId,
+                  ("projectId" .=) <$> _pmProjectId,
+                  ("description" .=) <$> _pmDescription])
+
 -- | The response returned by a call to maps.List.published.
 --
 -- /See:/ 'publishedMapsListResponse' smart constructor.
@@ -2667,6 +3554,21 @@ pmlrNextPageToken :: Lens' PublishedMapsListResponse (Maybe Word8)
 pmlrNextPageToken
   = lens _pmlrNextPageToken
       (\ s a -> s{_pmlrNextPageToken = a})
+
+instance FromJSON PublishedMapsListResponse where
+        parseJSON
+          = withObject "PublishedMapsListResponse"
+              (\ o ->
+                 PublishedMapsListResponse <$>
+                   (o .:? "maps" .!= mempty) <*>
+                     (o .:? "nextPageToken"))
+
+instance ToJSON PublishedMapsListResponse where
+        toJSON PublishedMapsListResponse{..}
+          = object
+              (catMaybes
+                 [("maps" .=) <$> _pmlrMaps,
+                  ("nextPageToken" .=) <$> _pmlrNextPageToken])
 
 -- | A geo-referenced raster.
 --
@@ -2876,6 +3778,54 @@ rTags
   = lens _rTags (\ s a -> s{_rTags = a}) .
       mapping (_Default . _Coerce)
 
+instance FromJSON Raster where
+        parseJSON
+          = withObject "Raster"
+              (\ o ->
+                 Raster <$>
+                   (o .:? "creationTime") <*>
+                     (o .:? "writersCanEditPermissions")
+                     <*> (o .:? "maskType" .!= "autoMask")
+                     <*> (o .:? "etag")
+                     <*> (o .:? "creatorEmail")
+                     <*> (o .:? "rasterType")
+                     <*> (o .:? "lastModifiedTime")
+                     <*> (o .:? "lastModifierEmail")
+                     <*> (o .:? "acquisitionTime")
+                     <*> (o .:? "name")
+                     <*> (o .:? "bbox" .!= mempty)
+                     <*> (o .:? "processingStatus")
+                     <*> (o .:? "files" .!= mempty)
+                     <*> (o .:? "id")
+                     <*> (o .:? "projectId")
+                     <*> (o .:? "draftAccessList")
+                     <*> (o .:? "description")
+                     <*> (o .:? "attribution")
+                     <*> (o .:? "tags"))
+
+instance ToJSON Raster where
+        toJSON Raster{..}
+          = object
+              (catMaybes
+                 [("creationTime" .=) <$> _rCreationTime,
+                  ("writersCanEditPermissions" .=) <$>
+                    _rWritersCanEditPermissions,
+                  Just ("maskType" .= _rMaskType),
+                  ("etag" .=) <$> _rEtag,
+                  ("creatorEmail" .=) <$> _rCreatorEmail,
+                  ("rasterType" .=) <$> _rRasterType,
+                  ("lastModifiedTime" .=) <$> _rLastModifiedTime,
+                  ("lastModifierEmail" .=) <$> _rLastModifierEmail,
+                  ("acquisitionTime" .=) <$> _rAcquisitionTime,
+                  ("name" .=) <$> _rName, ("bbox" .=) <$> _rBbox,
+                  ("processingStatus" .=) <$> _rProcessingStatus,
+                  ("files" .=) <$> _rFiles, ("id" .=) <$> _rId,
+                  ("projectId" .=) <$> _rProjectId,
+                  ("draftAccessList" .=) <$> _rDraftAccessList,
+                  ("description" .=) <$> _rDescription,
+                  ("attribution" .=) <$> _rAttribution,
+                  ("tags" .=) <$> _rTags])
+
 -- | A raster collection groups multiple Raster resources for inclusion in a
 -- Layer.
 --
@@ -3071,6 +4021,50 @@ rcTags
   = lens _rcTags (\ s a -> s{_rcTags = a}) .
       mapping (_Default . _Coerce)
 
+instance FromJSON RasterCollection where
+        parseJSON
+          = withObject "RasterCollection"
+              (\ o ->
+                 RasterCollection <$>
+                   (o .:? "creationTime") <*>
+                     (o .:? "writersCanEditPermissions")
+                     <*> (o .:? "etag")
+                     <*> (o .:? "creatorEmail")
+                     <*> (o .:? "rasterType")
+                     <*> (o .:? "lastModifiedTime")
+                     <*> (o .:? "lastModifierEmail")
+                     <*> (o .:? "name")
+                     <*> (o .:? "bbox" .!= mempty)
+                     <*> (o .:? "processingStatus")
+                     <*> (o .:? "mosaic")
+                     <*> (o .:? "id")
+                     <*> (o .:? "projectId")
+                     <*> (o .:? "draftAccessList")
+                     <*> (o .:? "description")
+                     <*> (o .:? "attribution")
+                     <*> (o .:? "tags"))
+
+instance ToJSON RasterCollection where
+        toJSON RasterCollection{..}
+          = object
+              (catMaybes
+                 [("creationTime" .=) <$> _rcCreationTime,
+                  ("writersCanEditPermissions" .=) <$>
+                    _rcWritersCanEditPermissions,
+                  ("etag" .=) <$> _rcEtag,
+                  ("creatorEmail" .=) <$> _rcCreatorEmail,
+                  ("rasterType" .=) <$> _rcRasterType,
+                  ("lastModifiedTime" .=) <$> _rcLastModifiedTime,
+                  ("lastModifierEmail" .=) <$> _rcLastModifierEmail,
+                  ("name" .=) <$> _rcName, ("bbox" .=) <$> _rcBbox,
+                  ("processingStatus" .=) <$> _rcProcessingStatus,
+                  ("mosaic" .=) <$> _rcMosaic, ("id" .=) <$> _rcId,
+                  ("projectId" .=) <$> _rcProjectId,
+                  ("draftAccessList" .=) <$> _rcDraftAccessList,
+                  ("description" .=) <$> _rcDescription,
+                  ("attribution" .=) <$> _rcAttribution,
+                  ("tags" .=) <$> _rcTags])
+
 -- | The response returned by a call to raster_collections.List. Note: The
 -- list response does not include all the fields available in a raster
 -- collection. Refer to the RasterCollection resource description for
@@ -3111,6 +4105,21 @@ rclrRasterCollections
       (\ s a -> s{_rclrRasterCollections = a})
       . _Default
       . _Coerce
+
+instance FromJSON RasterCollectionsListResponse where
+        parseJSON
+          = withObject "RasterCollectionsListResponse"
+              (\ o ->
+                 RasterCollectionsListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "rasterCollections" .!= mempty))
+
+instance ToJSON RasterCollectionsListResponse where
+        toJSON RasterCollectionsListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _rclrNextPageToken,
+                  ("rasterCollections" .=) <$> _rclrRasterCollections])
 
 -- | A raster resource.
 --
@@ -3216,6 +4225,34 @@ rcrTags
   = lens _rcrTags (\ s a -> s{_rcrTags = a}) . _Default
       . _Coerce
 
+instance FromJSON RasterCollectionsRaster where
+        parseJSON
+          = withObject "RasterCollectionsRaster"
+              (\ o ->
+                 RasterCollectionsRaster <$>
+                   (o .:? "creationTime") <*>
+                     (o .:? "rasterType" .!= "image")
+                     <*> (o .:? "lastModifiedTime")
+                     <*> (o .:? "name")
+                     <*> (o .:? "bbox" .!= mempty)
+                     <*> (o .:? "id")
+                     <*> (o .:? "projectId")
+                     <*> (o .:? "description")
+                     <*> (o .:? "tags" .!= mempty))
+
+instance ToJSON RasterCollectionsRaster where
+        toJSON RasterCollectionsRaster{..}
+          = object
+              (catMaybes
+                 [("creationTime" .=) <$> _rcrCreationTime,
+                  Just ("rasterType" .= _rcrRasterType),
+                  ("lastModifiedTime" .=) <$> _rcrLastModifiedTime,
+                  ("name" .=) <$> _rcrName, ("bbox" .=) <$> _rcrBbox,
+                  ("id" .=) <$> _rcrId,
+                  ("projectId" .=) <$> _rcrProjectId,
+                  ("description" .=) <$> _rcrDescription,
+                  ("tags" .=) <$> _rcrTags])
+
 -- | The request sent to rasterCollections.Rasters.BatchDelete.
 --
 -- /See:/ 'rasterCollectionsRasterBatchDeleteRequest' smart constructor.
@@ -3242,6 +4279,20 @@ rcrbdrIds
       _Default
       . _Coerce
 
+instance FromJSON
+         RasterCollectionsRasterBatchDeleteRequest where
+        parseJSON
+          = withObject
+              "RasterCollectionsRasterBatchDeleteRequest"
+              (\ o ->
+                 RasterCollectionsRasterBatchDeleteRequest <$>
+                   (o .:? "ids" .!= mempty))
+
+instance ToJSON
+         RasterCollectionsRasterBatchDeleteRequest where
+        toJSON RasterCollectionsRasterBatchDeleteRequest{..}
+          = object (catMaybes [("ids" .=) <$> _rcrbdrIds])
+
 -- | The response returned by a call to
 -- rasterCollections.rasters.batchDelete.
 --
@@ -3256,6 +4307,18 @@ rasterCollectionsRastersBatchDeleteResponse
     :: RasterCollectionsRastersBatchDeleteResponse
 rasterCollectionsRastersBatchDeleteResponse =
     RasterCollectionsRastersBatchDeleteResponse
+
+instance FromJSON
+         RasterCollectionsRastersBatchDeleteResponse where
+        parseJSON
+          = withObject
+              "RasterCollectionsRastersBatchDeleteResponse"
+              (\ o ->
+                 pure RasterCollectionsRastersBatchDeleteResponse)
+
+instance ToJSON
+         RasterCollectionsRastersBatchDeleteResponse where
+        toJSON = const (Object mempty)
 
 -- | The request sent to rasterCollections.Rasters.BatchInsert.
 --
@@ -3283,6 +4346,20 @@ rcrbirIds
       _Default
       . _Coerce
 
+instance FromJSON
+         RasterCollectionsRastersBatchInsertRequest where
+        parseJSON
+          = withObject
+              "RasterCollectionsRastersBatchInsertRequest"
+              (\ o ->
+                 RasterCollectionsRastersBatchInsertRequest <$>
+                   (o .:? "ids" .!= mempty))
+
+instance ToJSON
+         RasterCollectionsRastersBatchInsertRequest where
+        toJSON RasterCollectionsRastersBatchInsertRequest{..}
+          = object (catMaybes [("ids" .=) <$> _rcrbirIds])
+
 -- | The response returned by a call to
 -- rasterCollections.rasters.batchInsert.
 --
@@ -3297,6 +4374,18 @@ rasterCollectionsRastersBatchInsertResponse
     :: RasterCollectionsRastersBatchInsertResponse
 rasterCollectionsRastersBatchInsertResponse =
     RasterCollectionsRastersBatchInsertResponse
+
+instance FromJSON
+         RasterCollectionsRastersBatchInsertResponse where
+        parseJSON
+          = withObject
+              "RasterCollectionsRastersBatchInsertResponse"
+              (\ o ->
+                 pure RasterCollectionsRastersBatchInsertResponse)
+
+instance ToJSON
+         RasterCollectionsRastersBatchInsertResponse where
+        toJSON = const (Object mempty)
 
 -- | The response returned by a call to rasterCollections.rasters.List.
 --
@@ -3334,6 +4423,23 @@ rcrlrRasters
       . _Default
       . _Coerce
 
+instance FromJSON
+         RasterCollectionsRastersListResponse where
+        parseJSON
+          = withObject "RasterCollectionsRastersListResponse"
+              (\ o ->
+                 RasterCollectionsRastersListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "rasters" .!= mempty))
+
+instance ToJSON RasterCollectionsRastersListResponse
+         where
+        toJSON RasterCollectionsRastersListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _rcrlrNextPageToken,
+                  ("rasters" .=) <$> _rcrlrRasters])
+
 -- | The response returned by a call to rasters.List.
 --
 -- /See:/ 'rastersListResponse' smart constructor.
@@ -3369,6 +4475,21 @@ rlrRasters
   = lens _rlrRasters (\ s a -> s{_rlrRasters = a}) .
       _Default
       . _Coerce
+
+instance FromJSON RastersListResponse where
+        parseJSON
+          = withObject "RastersListResponse"
+              (\ o ->
+                 RastersListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "rasters" .!= mempty))
+
+instance ToJSON RastersListResponse where
+        toJSON RastersListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _rlrNextPageToken,
+                  ("rasters" .=) <$> _rlrRasters])
 
 -- | Parameters for styling points as scaled shapes.
 --
@@ -3410,6 +4531,21 @@ ssFill = lens _ssFill (\ s a -> s{_ssFill = a})
 -- | Name of the shape.
 ssShape :: Lens' ScaledShape (Maybe ScaledShapeShape)
 ssShape = lens _ssShape (\ s a -> s{_ssShape = a})
+
+instance FromJSON ScaledShape where
+        parseJSON
+          = withObject "ScaledShape"
+              (\ o ->
+                 ScaledShape <$>
+                   (o .:? "border") <*> (o .:? "fill") <*>
+                     (o .:? "shape"))
+
+instance ToJSON ScaledShape where
+        toJSON ScaledShape{..}
+          = object
+              (catMaybes
+                 [("border" .=) <$> _ssBorder,
+                  ("fill" .=) <$> _ssFill, ("shape" .=) <$> _ssShape])
 
 -- | Parameters for scaling scaled shapes.
 --
@@ -3464,6 +4600,24 @@ sfScalingType
 sfColumn :: Lens' ScalingFunction (Maybe Text)
 sfColumn = lens _sfColumn (\ s a -> s{_sfColumn = a})
 
+instance FromJSON ScalingFunction where
+        parseJSON
+          = withObject "ScalingFunction"
+              (\ o ->
+                 ScalingFunction <$>
+                   (o .:? "valueRange") <*> (o .:? "sizeRange") <*>
+                     (o .:? "scalingType")
+                     <*> (o .:? "column"))
+
+instance ToJSON ScalingFunction where
+        toJSON ScalingFunction{..}
+          = object
+              (catMaybes
+                 [("valueRange" .=) <$> _sfValueRange,
+                  ("sizeRange" .=) <$> _sfSizeRange,
+                  ("scalingType" .=) <$> _sfScalingType,
+                  ("column" .=) <$> _sfColumn])
+
 -- | A schema indicating the properties which may be associated with features
 -- within a Table, and the types of those properties.
 --
@@ -3515,6 +4669,22 @@ sPrimaryGeometry
   = lens _sPrimaryGeometry
       (\ s a -> s{_sPrimaryGeometry = a})
 
+instance FromJSON Schema where
+        parseJSON
+          = withObject "Schema"
+              (\ o ->
+                 Schema <$>
+                   (o .:? "primaryKey") <*> (o .:? "columns" .!= mempty)
+                     <*> (o .:? "primaryGeometry"))
+
+instance ToJSON Schema where
+        toJSON Schema{..}
+          = object
+              (catMaybes
+                 [("primaryKey" .=) <$> _sPrimaryKey,
+                  ("columns" .=) <$> _sColumns,
+                  ("primaryGeometry" .=) <$> _sPrimaryGeometry])
+
 -- | Scaled shape size range in pixels. For circles, size corresponds to
 -- diameter.
 --
@@ -3546,6 +4716,18 @@ srMax = lens _srMax (\ s a -> s{_srMax = a})
 -- | Minimum size, in pixels.
 srMin :: Lens' SizeRange (Maybe Double)
 srMin = lens _srMin (\ s a -> s{_srMin = a})
+
+instance FromJSON SizeRange where
+        parseJSON
+          = withObject "SizeRange"
+              (\ o ->
+                 SizeRange <$> (o .:? "max") <*> (o .:? "min"))
+
+instance ToJSON SizeRange where
+        toJSON SizeRange{..}
+          = object
+              (catMaybes
+                 [("max" .=) <$> _srMax, ("min" .=) <$> _srMin])
 
 -- | A collection of geographic features, and associated metadata.
 --
@@ -3760,6 +4942,52 @@ tTags
   = lens _tTags (\ s a -> s{_tTags = a}) .
       mapping (_Default . _Coerce)
 
+instance FromJSON Table where
+        parseJSON
+          = withObject "Table"
+              (\ o ->
+                 Table <$>
+                   (o .:? "creationTime") <*>
+                     (o .:? "writersCanEditPermissions")
+                     <*> (o .:? "etag")
+                     <*> (o .:? "creatorEmail")
+                     <*> (o .:? "lastModifiedTime")
+                     <*> (o .:? "schema")
+                     <*> (o .:? "lastModifierEmail")
+                     <*> (o .:? "name")
+                     <*> (o .:? "bbox" .!= mempty)
+                     <*> (o .:? "processingStatus")
+                     <*> (o .:? "files" .!= mempty)
+                     <*> (o .:? "id")
+                     <*> (o .:? "projectId")
+                     <*> (o .:? "draftAccessList")
+                     <*> (o .:? "publishedAccessList")
+                     <*> (o .:? "sourceEncoding" .!= "UTF-8")
+                     <*> (o .:? "description")
+                     <*> (o .:? "tags"))
+
+instance ToJSON Table where
+        toJSON Table{..}
+          = object
+              (catMaybes
+                 [("creationTime" .=) <$> _tCreationTime,
+                  ("writersCanEditPermissions" .=) <$>
+                    _tWritersCanEditPermissions,
+                  ("etag" .=) <$> _tEtag,
+                  ("creatorEmail" .=) <$> _tCreatorEmail,
+                  ("lastModifiedTime" .=) <$> _tLastModifiedTime,
+                  ("schema" .=) <$> _tSchema,
+                  ("lastModifierEmail" .=) <$> _tLastModifierEmail,
+                  ("name" .=) <$> _tName, ("bbox" .=) <$> _tBbox,
+                  ("processingStatus" .=) <$> _tProcessingStatus,
+                  ("files" .=) <$> _tFiles, ("id" .=) <$> _tId,
+                  ("projectId" .=) <$> _tProjectId,
+                  ("draftAccessList" .=) <$> _tDraftAccessList,
+                  ("publishedAccessList" .=) <$> _tPublishedAccessList,
+                  Just ("sourceEncoding" .= _tSourceEncoding),
+                  ("description" .=) <$> _tDescription,
+                  ("tags" .=) <$> _tTags])
+
 --
 -- /See:/ 'tableColumn' smart constructor.
 data TableColumn = TableColumn
@@ -3789,6 +5017,18 @@ tcName = lens _tcName (\ s a -> s{_tcName = a})
 -- | The type of data stored in this column.
 tcType :: Lens' TableColumn (Maybe TableColumnType)
 tcType = lens _tcType (\ s a -> s{_tcType = a})
+
+instance FromJSON TableColumn where
+        parseJSON
+          = withObject "TableColumn"
+              (\ o ->
+                 TableColumn <$> (o .:? "name") <*> (o .:? "type"))
+
+instance ToJSON TableColumn where
+        toJSON TableColumn{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _tcName, ("type" .=) <$> _tcType])
 
 -- | The response returned by a call to tables.List. Note: The list response
 -- does not include all the fields available in a table. Refer to the table
@@ -3830,6 +5070,21 @@ tlrTables
       _Default
       . _Coerce
 
+instance FromJSON TablesListResponse where
+        parseJSON
+          = withObject "TablesListResponse"
+              (\ o ->
+                 TablesListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "tables" .!= mempty))
+
+instance ToJSON TablesListResponse where
+        toJSON TablesListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _tlrNextPageToken,
+                  ("tables" .=) <$> _tlrTables])
+
 -- | Range of values used for scaling shapes. The min\/max values will be
 -- drawn as shapes with the min\/max size.
 --
@@ -3861,6 +5116,18 @@ vrMax = lens _vrMax (\ s a -> s{_vrMax = a})
 -- | Minimum value.
 vrMin :: Lens' ValueRange (Maybe Double)
 vrMin = lens _vrMin (\ s a -> s{_vrMin = a})
+
+instance FromJSON ValueRange where
+        parseJSON
+          = withObject "ValueRange"
+              (\ o ->
+                 ValueRange <$> (o .:? "max") <*> (o .:? "min"))
+
+instance ToJSON ValueRange where
+        toJSON ValueRange{..}
+          = object
+              (catMaybes
+                 [("max" .=) <$> _vrMax, ("min" .=) <$> _vrMin])
 
 -- | A vector style contains styling information for vector layer.
 --
@@ -3908,6 +5175,23 @@ vsFeatureInfo
 vsType :: Lens' VectorStyle (Maybe VectorStyleType)
 vsType = lens _vsType (\ s a -> s{_vsType = a})
 
+instance FromJSON VectorStyle where
+        parseJSON
+          = withObject "VectorStyle"
+              (\ o ->
+                 VectorStyle <$>
+                   (o .:? "displayRules" .!= mempty) <*>
+                     (o .:? "featureInfo")
+                     <*> (o .:? "type"))
+
+instance ToJSON VectorStyle where
+        toJSON VectorStyle{..}
+          = object
+              (catMaybes
+                 [("displayRules" .=) <$> _vsDisplayRules,
+                  ("featureInfo" .=) <$> _vsFeatureInfo,
+                  ("type" .=) <$> _vsType])
+
 -- | Zoom level range. Zoom levels are restricted between 0 and 24,
 -- inclusive.
 --
@@ -3939,3 +5223,15 @@ zlMax = lens _zlMax (\ s a -> s{_zlMax = a})
 -- | Minimum zoom level.
 zlMin :: Lens' ZoomLevels (Maybe Int32)
 zlMin = lens _zlMin (\ s a -> s{_zlMin = a})
+
+instance FromJSON ZoomLevels where
+        parseJSON
+          = withObject "ZoomLevels"
+              (\ o ->
+                 ZoomLevels <$> (o .:? "max") <*> (o .:? "min"))
+
+instance ToJSON ZoomLevels where
+        toJSON ZoomLevels{..}
+          = object
+              (catMaybes
+                 [("max" .=) <$> _zlMax, ("min" .=) <$> _zlMin])

@@ -311,45 +311,50 @@ type ReportsAPI = ReportsGet
 
 -- | Retrieves a report of the specified type.
 type ReportsGet =
-     "gan" :> "v1beta1" :> Capture "role" Text :>
-       Capture "roleId" Text
-       :> "report"
-       :> Capture "reportType" Text
-       :> QueryParam "status" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "advertiserId" Text
-       :> QueryParam "endDate" Text
-       :> QueryParam "eventType" Text
-       :> QueryParam "startDate" Text
-       :> QueryParam "key" Text
-       :> QueryParam "calculateTotals" Bool
-       :> QueryParam "linkId" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "orderId" Text
-       :> QueryParam "publisherId" Text
-       :> QueryParam "startIndex" Word32
-       :> QueryParam "maxResults" Word32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "gan" :>
+       "v1beta1" :>
+         Capture "role" Text :>
+           Capture "roleId" Text :>
+             "report" :>
+               Capture "reportType" Text :>
+                 QueryParam "status" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "advertiserId" Text :>
+                           QueryParam "endDate" Text :>
+                             QueryParam "eventType" Text :>
+                               QueryParam "startDate" Text :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "calculateTotals" Bool :>
+                                     QueryParam "linkId" Text :>
+                                       QueryParam "oauth_token" Text :>
+                                         QueryParam "orderId" Text :>
+                                           QueryParam "publisherId" Text :>
+                                             QueryParam "startIndex" Word32 :>
+                                               QueryParam "maxResults" Word32 :>
+                                                 QueryParam "fields" Text :>
+                                                   QueryParam "alt" Text :>
+                                                     Get '[JSON] Report
 
 type CcOffersAPI = CcOffersList
 
 -- | Retrieves credit card offers for the given publisher.
 type CcOffersList =
-     "gan" :> "v1beta1" :> "publishers" :>
-       Capture "publisher" Text
-       :> "ccOffers"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "advertiser" Text
-       :> QueryParam "projection" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "gan" :>
+       "v1beta1" :>
+         "publishers" :>
+           Capture "publisher" Text :>
+             "ccOffers" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "advertiser" Text :>
+                         QueryParam "projection" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Get '[JSON] CcOffers
 
 type AdvertisersAPI =
      AdvertisersList :<|> AdvertisersGet
@@ -357,71 +362,88 @@ type AdvertisersAPI =
 -- | Retrieves data about all advertisers that the requesting
 -- advertiser\/publisher has access to.
 type AdvertisersList =
-     "gan" :> "v1beta1" :> Capture "role" Text :>
-       Capture "roleId" Text
-       :> "advertisers"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "relationshipStatus" Text
-       :> QueryParam "minSevenDayEpc" Double
-       :> QueryParam "minNinetyDayEpc" Double
-       :> QueryParam "key" Text
-       :> QueryParam "minPayoutRank" Natural
-       :> QueryParam "advertiserCategory" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Word32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "gan" :>
+       "v1beta1" :>
+         Capture "role" Text :>
+           Capture "roleId" Text :>
+             "advertisers" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "relationshipStatus" Text :>
+                       QueryParam "minSevenDayEpc" Double :>
+                         QueryParam "minNinetyDayEpc" Double :>
+                           QueryParam "key" Text :>
+                             QueryParam "minPayoutRank" Natural :>
+                               QueryParam "advertiserCategory" Text :>
+                                 QueryParam "pageToken" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "maxResults" Word32 :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "alt" Text :>
+                                           Get '[JSON] Advertisers
 
 -- | Retrieves data about a single advertiser if that the requesting
 -- advertiser\/publisher has access to it. Only publishers can lookup
 -- advertisers. Advertisers can request information about themselves by
 -- omitting the advertiserId query parameter.
 type AdvertisersGet =
-     "gan" :> "v1beta1" :> Capture "role" Text :>
-       Capture "roleId" Text
-       :> "advertiser"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "advertiserId" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "gan" :>
+       "v1beta1" :>
+         Capture "role" Text :>
+           Capture "roleId" Text :>
+             "advertiser" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "advertiserId" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] Advertiser
 
 type EventsAPI = EventsList
 
 -- | Retrieves event data for a given advertiser\/publisher.
 type EventsList =
-     "gan" :> "v1beta1" :> Capture "role" Text :>
-       Capture "roleId" Text
-       :> "events"
-       :> QueryParam "status" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "eventDateMin" Text
-       :> QueryParam "chargeType" Text
-       :> QueryParam "memberId" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "modifyDateMax" Text
-       :> QueryParam "advertiserId" Text
-       :> QueryParam "modifyDateMin" Text
-       :> QueryParam "eventDateMax" Text
-       :> QueryParam "key" Text
-       :> QueryParam "sku" Text
-       :> QueryParam "linkId" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "type" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "orderId" Text
-       :> QueryParam "publisherId" Text
-       :> QueryParam "productCategory" Text
-       :> QueryParam "maxResults" Word32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "gan" :>
+       "v1beta1" :>
+         Capture "role" Text :>
+           Capture "roleId" Text :>
+             "events" :>
+               QueryParam "status" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "eventDateMin" Text :>
+                       QueryParam "chargeType" Text :>
+                         QueryParam "memberId" Text :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "modifyDateMax" Text :>
+                               QueryParam "advertiserId" Text :>
+                                 QueryParam "modifyDateMin" Text :>
+                                   QueryParam "eventDateMax" Text :>
+                                     QueryParam "key" Text :>
+                                       QueryParam "sku" Text :>
+                                         QueryParam "linkId" Text :>
+                                           QueryParam "pageToken" Text :>
+                                             QueryParam "type" Text :>
+                                               QueryParam "oauth_token" Text :>
+                                                 QueryParam "orderId" Text :>
+                                                   QueryParam "publisherId" Text
+                                                     :>
+                                                     QueryParam
+                                                       "productCategory"
+                                                       Text
+                                                       :>
+                                                       QueryParam "maxResults"
+                                                         Word32
+                                                         :>
+                                                         QueryParam "fields"
+                                                           Text
+                                                           :>
+                                                           QueryParam "alt" Text
+                                                             :>
+                                                             Get '[JSON] Events
 
 type PublishersAPI =
      PublishersList :<|> PublishersGet
@@ -429,96 +451,109 @@ type PublishersAPI =
 -- | Retrieves data about all publishers that the requesting
 -- advertiser\/publisher has access to.
 type PublishersList =
-     "gan" :> "v1beta1" :> Capture "role" Text :>
-       Capture "roleId" Text
-       :> "publishers"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "relationshipStatus" Text
-       :> QueryParam "minSevenDayEpc" Double
-       :> QueryParam "minNinetyDayEpc" Double
-       :> QueryParam "key" Text
-       :> QueryParam "minPayoutRank" Natural
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "publisherCategory" Text
-       :> QueryParam "maxResults" Word32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "gan" :>
+       "v1beta1" :>
+         Capture "role" Text :>
+           Capture "roleId" Text :>
+             "publishers" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "relationshipStatus" Text :>
+                       QueryParam "minSevenDayEpc" Double :>
+                         QueryParam "minNinetyDayEpc" Double :>
+                           QueryParam "key" Text :>
+                             QueryParam "minPayoutRank" Natural :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "publisherCategory" Text :>
+                                     QueryParam "maxResults" Word32 :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "alt" Text :>
+                                           Get '[JSON] Publishers
 
 -- | Retrieves data about a single advertiser if that the requesting
 -- advertiser\/publisher has access to it. Only advertisers can look up
 -- publishers. Publishers can request information about themselves by
 -- omitting the publisherId query parameter.
 type PublishersGet =
-     "gan" :> "v1beta1" :> Capture "role" Text :>
-       Capture "roleId" Text
-       :> "publisher"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "publisherId" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "gan" :>
+       "v1beta1" :>
+         Capture "role" Text :>
+           Capture "roleId" Text :>
+             "publisher" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "publisherId" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] Publisher
 
 type LinksAPI =
      LinksInsert :<|> LinksList :<|> LinksGet
 
 -- | Inserts a new link.
 type LinksInsert =
-     "gan" :> "v1beta1" :> Capture "role" Text :>
-       Capture "roleId" Text
-       :> "link"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "gan" :>
+       "v1beta1" :>
+         Capture "role" Text :>
+           Capture "roleId" Text :>
+             "link" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] Link
 
 -- | Retrieves all links that match the query parameters.
 type LinksList =
-     "gan" :> "v1beta1" :> Capture "role" Text :>
-       Capture "roleId" Text
-       :> "links"
-       :> QueryParam "createDateMax" Text
-       :> QueryParam "authorship" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "assetSize" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "relationshipStatus" Text
-       :> QueryParam "advertiserId" Int64
-       :> QueryParam "searchText" Text
-       :> QueryParam "promotionType" Text
-       :> QueryParam "key" Text
-       :> QueryParam "createDateMin" Text
-       :> QueryParam "linkType" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "startDateMax" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "startDateMin" Text
-       :> QueryParam "maxResults" Word32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "gan" :>
+       "v1beta1" :>
+         Capture "role" Text :>
+           Capture "roleId" Text :>
+             "links" :>
+               QueryParam "createDateMax" Text :>
+                 QueryParam "authorship" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "assetSize" Text :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "relationshipStatus" Text :>
+                             QueryParam "advertiserId" Int64 :>
+                               QueryParam "searchText" Text :>
+                                 QueryParam "promotionType" Text :>
+                                   QueryParam "key" Text :>
+                                     QueryParam "createDateMin" Text :>
+                                       QueryParam "linkType" Text :>
+                                         QueryParam "pageToken" Text :>
+                                           QueryParam "startDateMax" Text :>
+                                             QueryParam "oauth_token" Text :>
+                                               QueryParam "startDateMin" Text :>
+                                                 QueryParam "maxResults" Word32
+                                                   :>
+                                                   QueryParam "fields" Text :>
+                                                     QueryParam "alt" Text :>
+                                                       Get '[JSON] Links
 
 -- | Retrieves data about a single link if the requesting
 -- advertiser\/publisher has access to it. Advertisers can look up their
 -- own links. Publishers can look up visible links or links belonging to
 -- advertisers they are in a relationship with.
 type LinksGet =
-     "gan" :> "v1beta1" :> Capture "role" Text :>
-       Capture "roleId" Text
-       :> "link"
-       :> Capture "linkId" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "gan" :>
+       "v1beta1" :>
+         Capture "role" Text :>
+           Capture "roleId" Text :>
+             "link" :>
+               Capture "linkId" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] Link

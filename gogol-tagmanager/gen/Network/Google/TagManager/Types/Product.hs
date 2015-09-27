@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -68,6 +69,24 @@ aAccountId
 aName :: Lens' Account (Maybe Text)
 aName = lens _aName (\ s a -> s{_aName = a})
 
+instance FromJSON Account where
+        parseJSON
+          = withObject "Account"
+              (\ o ->
+                 Account <$>
+                   (o .:? "shareData") <*> (o .:? "fingerprint") <*>
+                     (o .:? "accountId")
+                     <*> (o .:? "name"))
+
+instance ToJSON Account where
+        toJSON Account{..}
+          = object
+              (catMaybes
+                 [("shareData" .=) <$> _aShareData,
+                  ("fingerprint" .=) <$> _aFingerprint,
+                  ("accountId" .=) <$> _aAccountId,
+                  ("name" .=) <$> _aName])
+
 -- | Defines the Google Tag Manager Account access permissions.
 --
 -- /See:/ 'accountAccess' smart constructor.
@@ -94,6 +113,17 @@ aaPermission
   = lens _aaPermission (\ s a -> s{_aaPermission = a})
       . _Default
       . _Coerce
+
+instance FromJSON AccountAccess where
+        parseJSON
+          = withObject "AccountAccess"
+              (\ o ->
+                 AccountAccess <$> (o .:? "permission" .!= mempty))
+
+instance ToJSON AccountAccess where
+        toJSON AccountAccess{..}
+          = object
+              (catMaybes [("permission" .=) <$> _aaPermission])
 
 -- | Represents a predicate.
 --
@@ -136,6 +166,20 @@ cParameter
   = lens _cParameter (\ s a -> s{_cParameter = a}) .
       _Default
       . _Coerce
+
+instance FromJSON Condition where
+        parseJSON
+          = withObject "Condition"
+              (\ o ->
+                 Condition <$>
+                   (o .:? "type") <*> (o .:? "parameter" .!= mempty))
+
+instance ToJSON Condition where
+        toJSON Condition{..}
+          = object
+              (catMaybes
+                 [("type" .=) <$> _cType,
+                  ("parameter" .=) <$> _cParameter])
 
 -- | Represents a Google Tag Manager Container.
 --
@@ -266,6 +310,39 @@ cTimeZoneId :: Lens' Container (Maybe Text)
 cTimeZoneId
   = lens _cTimeZoneId (\ s a -> s{_cTimeZoneId = a})
 
+instance FromJSON Container where
+        parseJSON
+          = withObject "Container"
+              (\ o ->
+                 Container <$>
+                   (o .:? "publicId") <*>
+                     (o .:? "usageContext" .!= mempty)
+                     <*> (o .:? "enabledBuiltInVariable" .!= mempty)
+                     <*> (o .:? "containerId")
+                     <*> (o .:? "fingerprint")
+                     <*> (o .:? "timeZoneCountryId")
+                     <*> (o .:? "accountId")
+                     <*> (o .:? "domainName" .!= mempty)
+                     <*> (o .:? "name")
+                     <*> (o .:? "notes")
+                     <*> (o .:? "timeZoneId"))
+
+instance ToJSON Container where
+        toJSON Container{..}
+          = object
+              (catMaybes
+                 [("publicId" .=) <$> _cPublicId,
+                  ("usageContext" .=) <$> _cUsageContext,
+                  ("enabledBuiltInVariable" .=) <$>
+                    _cEnabledBuiltInVariable,
+                  ("containerId" .=) <$> _cContainerId,
+                  ("fingerprint" .=) <$> _cFingerprint,
+                  ("timeZoneCountryId" .=) <$> _cTimeZoneCountryId,
+                  ("accountId" .=) <$> _cAccountId,
+                  ("domainName" .=) <$> _cDomainName,
+                  ("name" .=) <$> _cName, ("notes" .=) <$> _cNotes,
+                  ("timeZoneId" .=) <$> _cTimeZoneId])
+
 -- | Defines the Google Tag Manager Container access permissions.
 --
 -- /See:/ 'containerAccess' smart constructor.
@@ -302,6 +379,21 @@ caPermission
   = lens _caPermission (\ s a -> s{_caPermission = a})
       . _Default
       . _Coerce
+
+instance FromJSON ContainerAccess where
+        parseJSON
+          = withObject "ContainerAccess"
+              (\ o ->
+                 ContainerAccess <$>
+                   (o .:? "containerId") <*>
+                     (o .:? "permission" .!= mempty))
+
+instance ToJSON ContainerAccess where
+        toJSON ContainerAccess{..}
+          = object
+              (catMaybes
+                 [("containerId" .=) <$> _caContainerId,
+                  ("permission" .=) <$> _caPermission])
 
 -- | Represents a Google Tag Manager Container Version.
 --
@@ -456,6 +548,43 @@ cvTrigger
 cvNotes :: Lens' ContainerVersion (Maybe Text)
 cvNotes = lens _cvNotes (\ s a -> s{_cvNotes = a})
 
+instance FromJSON ContainerVersion where
+        parseJSON
+          = withObject "ContainerVersion"
+              (\ o ->
+                 ContainerVersion <$>
+                   (o .:? "macro" .!= mempty) <*>
+                     (o .:? "tag" .!= mempty)
+                     <*> (o .:? "containerId")
+                     <*> (o .:? "fingerprint")
+                     <*> (o .:? "containerVersionId")
+                     <*> (o .:? "rule" .!= mempty)
+                     <*> (o .:? "folder" .!= mempty)
+                     <*> (o .:? "variable" .!= mempty)
+                     <*> (o .:? "accountId")
+                     <*> (o .:? "name")
+                     <*> (o .:? "container")
+                     <*> (o .:? "deleted")
+                     <*> (o .:? "trigger" .!= mempty)
+                     <*> (o .:? "notes"))
+
+instance ToJSON ContainerVersion where
+        toJSON ContainerVersion{..}
+          = object
+              (catMaybes
+                 [("macro" .=) <$> _cvMacro, ("tag" .=) <$> _cvTag,
+                  ("containerId" .=) <$> _cvContainerId,
+                  ("fingerprint" .=) <$> _cvFingerprint,
+                  ("containerVersionId" .=) <$> _cvContainerVersionId,
+                  ("rule" .=) <$> _cvRule, ("folder" .=) <$> _cvFolder,
+                  ("variable" .=) <$> _cvVariable,
+                  ("accountId" .=) <$> _cvAccountId,
+                  ("name" .=) <$> _cvName,
+                  ("container" .=) <$> _cvContainer,
+                  ("deleted" .=) <$> _cvDeleted,
+                  ("trigger" .=) <$> _cvTrigger,
+                  ("notes" .=) <$> _cvNotes])
+
 -- | Represents a Google Tag Manager Container Version Header.
 --
 -- /See:/ 'containerVersionHeader' smart constructor.
@@ -564,6 +693,36 @@ cvhNumVariables
   = lens _cvhNumVariables
       (\ s a -> s{_cvhNumVariables = a})
 
+instance FromJSON ContainerVersionHeader where
+        parseJSON
+          = withObject "ContainerVersionHeader"
+              (\ o ->
+                 ContainerVersionHeader <$>
+                   (o .:? "numTags") <*> (o .:? "numMacros") <*>
+                     (o .:? "containerId")
+                     <*> (o .:? "containerVersionId")
+                     <*> (o .:? "accountId")
+                     <*> (o .:? "name")
+                     <*> (o .:? "numTriggers")
+                     <*> (o .:? "deleted")
+                     <*> (o .:? "numRules")
+                     <*> (o .:? "numVariables"))
+
+instance ToJSON ContainerVersionHeader where
+        toJSON ContainerVersionHeader{..}
+          = object
+              (catMaybes
+                 [("numTags" .=) <$> _cvhNumTags,
+                  ("numMacros" .=) <$> _cvhNumMacros,
+                  ("containerId" .=) <$> _cvhContainerId,
+                  ("containerVersionId" .=) <$> _cvhContainerVersionId,
+                  ("accountId" .=) <$> _cvhAccountId,
+                  ("name" .=) <$> _cvhName,
+                  ("numTriggers" .=) <$> _cvhNumTriggers,
+                  ("deleted" .=) <$> _cvhDeleted,
+                  ("numRules" .=) <$> _cvhNumRules,
+                  ("numVariables" .=) <$> _cvhNumVariables])
+
 -- | Options for new container versions.
 --
 -- /See:/ 'createContainerVersionRequestVersionOptions' smart constructor.
@@ -608,6 +767,26 @@ ccvrvoNotes :: Lens' CreateContainerVersionRequestVersionOptions (Maybe Text)
 ccvrvoNotes
   = lens _ccvrvoNotes (\ s a -> s{_ccvrvoNotes = a})
 
+instance FromJSON
+         CreateContainerVersionRequestVersionOptions where
+        parseJSON
+          = withObject
+              "CreateContainerVersionRequestVersionOptions"
+              (\ o ->
+                 CreateContainerVersionRequestVersionOptions <$>
+                   (o .:? "name") <*> (o .:? "quickPreview") <*>
+                     (o .:? "notes"))
+
+instance ToJSON
+         CreateContainerVersionRequestVersionOptions where
+        toJSON
+          CreateContainerVersionRequestVersionOptions{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _ccvrvoName,
+                  ("quickPreview" .=) <$> _ccvrvoQuickPreview,
+                  ("notes" .=) <$> _ccvrvoNotes])
+
 -- | Create container versions response.
 --
 -- /See:/ 'createContainerVersionResponse' smart constructor.
@@ -642,6 +821,22 @@ ccvrContainerVersion :: Lens' CreateContainerVersionResponse (Maybe (Maybe Conta
 ccvrContainerVersion
   = lens _ccvrContainerVersion
       (\ s a -> s{_ccvrContainerVersion = a})
+
+instance FromJSON CreateContainerVersionResponse
+         where
+        parseJSON
+          = withObject "CreateContainerVersionResponse"
+              (\ o ->
+                 CreateContainerVersionResponse <$>
+                   (o .:? "compilerError") <*>
+                     (o .:? "containerVersion"))
+
+instance ToJSON CreateContainerVersionResponse where
+        toJSON CreateContainerVersionResponse{..}
+          = object
+              (catMaybes
+                 [("compilerError" .=) <$> _ccvrCompilerError,
+                  ("containerVersion" .=) <$> _ccvrContainerVersion])
 
 -- | Represents a Google Tag Manager Folder.
 --
@@ -703,6 +898,26 @@ fAccountId
 fName :: Lens' Folder (Maybe Text)
 fName = lens _fName (\ s a -> s{_fName = a})
 
+instance FromJSON Folder where
+        parseJSON
+          = withObject "Folder"
+              (\ o ->
+                 Folder <$>
+                   (o .:? "containerId") <*> (o .:? "fingerprint") <*>
+                     (o .:? "folderId")
+                     <*> (o .:? "accountId")
+                     <*> (o .:? "name"))
+
+instance ToJSON Folder where
+        toJSON Folder{..}
+          = object
+              (catMaybes
+                 [("containerId" .=) <$> _fContainerId,
+                  ("fingerprint" .=) <$> _fFingerprint,
+                  ("folderId" .=) <$> _fFolderId,
+                  ("accountId" .=) <$> _fAccountId,
+                  ("name" .=) <$> _fName])
+
 -- | Represents a Google Tag Manager Folder\'s contents.
 --
 -- /See:/ 'folderEntities' smart constructor.
@@ -750,6 +965,23 @@ feTrigger
       _Default
       . _Coerce
 
+instance FromJSON FolderEntities where
+        parseJSON
+          = withObject "FolderEntities"
+              (\ o ->
+                 FolderEntities <$>
+                   (o .:? "tag" .!= mempty) <*>
+                     (o .:? "variable" .!= mempty)
+                     <*> (o .:? "trigger" .!= mempty))
+
+instance ToJSON FolderEntities where
+        toJSON FolderEntities{..}
+          = object
+              (catMaybes
+                 [("tag" .=) <$> _feTag,
+                  ("variable" .=) <$> _feVariable,
+                  ("trigger" .=) <$> _feTrigger])
+
 -- | List AccountUsers Response.
 --
 -- /See:/ 'listAccountUsersResponse' smart constructor.
@@ -777,6 +1009,18 @@ laurUserAccess
       . _Default
       . _Coerce
 
+instance FromJSON ListAccountUsersResponse where
+        parseJSON
+          = withObject "ListAccountUsersResponse"
+              (\ o ->
+                 ListAccountUsersResponse <$>
+                   (o .:? "userAccess" .!= mempty))
+
+instance ToJSON ListAccountUsersResponse where
+        toJSON ListAccountUsersResponse{..}
+          = object
+              (catMaybes [("userAccess" .=) <$> _laurUserAccess])
+
 -- | List Accounts Response.
 --
 -- /See:/ 'listAccountsResponse' smart constructor.
@@ -802,6 +1046,18 @@ larAccounts
   = lens _larAccounts (\ s a -> s{_larAccounts = a}) .
       _Default
       . _Coerce
+
+instance FromJSON ListAccountsResponse where
+        parseJSON
+          = withObject "ListAccountsResponse"
+              (\ o ->
+                 ListAccountsResponse <$>
+                   (o .:? "accounts" .!= mempty))
+
+instance ToJSON ListAccountsResponse where
+        toJSON ListAccountsResponse{..}
+          = object
+              (catMaybes [("accounts" .=) <$> _larAccounts])
 
 -- | List container versions response.
 --
@@ -842,6 +1098,22 @@ lcvrContainerVersion
       . _Default
       . _Coerce
 
+instance FromJSON ListContainerVersionsResponse where
+        parseJSON
+          = withObject "ListContainerVersionsResponse"
+              (\ o ->
+                 ListContainerVersionsResponse <$>
+                   (o .:? "containerVersionHeader" .!= mempty) <*>
+                     (o .:? "containerVersion" .!= mempty))
+
+instance ToJSON ListContainerVersionsResponse where
+        toJSON ListContainerVersionsResponse{..}
+          = object
+              (catMaybes
+                 [("containerVersionHeader" .=) <$>
+                    _lcvrContainerVersionHeader,
+                  ("containerVersion" .=) <$> _lcvrContainerVersion])
+
 -- | List Containers Response.
 --
 -- /See:/ 'listContainersResponse' smart constructor.
@@ -869,6 +1141,18 @@ lcrContainers
       . _Default
       . _Coerce
 
+instance FromJSON ListContainersResponse where
+        parseJSON
+          = withObject "ListContainersResponse"
+              (\ o ->
+                 ListContainersResponse <$>
+                   (o .:? "containers" .!= mempty))
+
+instance ToJSON ListContainersResponse where
+        toJSON ListContainersResponse{..}
+          = object
+              (catMaybes [("containers" .=) <$> _lcrContainers])
+
 -- | List Folders Response.
 --
 -- /See:/ 'listFoldersResponse' smart constructor.
@@ -894,6 +1178,16 @@ lfrFolders
   = lens _lfrFolders (\ s a -> s{_lfrFolders = a}) .
       _Default
       . _Coerce
+
+instance FromJSON ListFoldersResponse where
+        parseJSON
+          = withObject "ListFoldersResponse"
+              (\ o ->
+                 ListFoldersResponse <$> (o .:? "folders" .!= mempty))
+
+instance ToJSON ListFoldersResponse where
+        toJSON ListFoldersResponse{..}
+          = object (catMaybes [("folders" .=) <$> _lfrFolders])
 
 -- | List Macros Response.
 --
@@ -921,6 +1215,16 @@ lmrMacros
       _Default
       . _Coerce
 
+instance FromJSON ListMacrosResponse where
+        parseJSON
+          = withObject "ListMacrosResponse"
+              (\ o ->
+                 ListMacrosResponse <$> (o .:? "macros" .!= mempty))
+
+instance ToJSON ListMacrosResponse where
+        toJSON ListMacrosResponse{..}
+          = object (catMaybes [("macros" .=) <$> _lmrMacros])
+
 -- | List Rules Response.
 --
 -- /See:/ 'listRulesResponse' smart constructor.
@@ -947,6 +1251,16 @@ lrrRules
       _Default
       . _Coerce
 
+instance FromJSON ListRulesResponse where
+        parseJSON
+          = withObject "ListRulesResponse"
+              (\ o ->
+                 ListRulesResponse <$> (o .:? "rules" .!= mempty))
+
+instance ToJSON ListRulesResponse where
+        toJSON ListRulesResponse{..}
+          = object (catMaybes [("rules" .=) <$> _lrrRules])
+
 -- | List Tags Response.
 --
 -- /See:/ 'listTagsResponse' smart constructor.
@@ -971,6 +1285,16 @@ ltrTags :: Lens' ListTagsResponse [Maybe Tag]
 ltrTags
   = lens _ltrTags (\ s a -> s{_ltrTags = a}) . _Default
       . _Coerce
+
+instance FromJSON ListTagsResponse where
+        parseJSON
+          = withObject "ListTagsResponse"
+              (\ o ->
+                 ListTagsResponse <$> (o .:? "tags" .!= mempty))
+
+instance ToJSON ListTagsResponse where
+        toJSON ListTagsResponse{..}
+          = object (catMaybes [("tags" .=) <$> _ltrTags])
 
 -- | List triggers response.
 --
@@ -998,6 +1322,18 @@ ltrTriggers
       _Default
       . _Coerce
 
+instance FromJSON ListTriggersResponse where
+        parseJSON
+          = withObject "ListTriggersResponse"
+              (\ o ->
+                 ListTriggersResponse <$>
+                   (o .:? "triggers" .!= mempty))
+
+instance ToJSON ListTriggersResponse where
+        toJSON ListTriggersResponse{..}
+          = object
+              (catMaybes [("triggers" .=) <$> _ltrTriggers])
+
 -- | List Variables Response.
 --
 -- /See:/ 'listVariablesResponse' smart constructor.
@@ -1023,6 +1359,18 @@ lvrVariables
   = lens _lvrVariables (\ s a -> s{_lvrVariables = a})
       . _Default
       . _Coerce
+
+instance FromJSON ListVariablesResponse where
+        parseJSON
+          = withObject "ListVariablesResponse"
+              (\ o ->
+                 ListVariablesResponse <$>
+                   (o .:? "variables" .!= mempty))
+
+instance ToJSON ListVariablesResponse where
+        toJSON ListVariablesResponse{..}
+          = object
+              (catMaybes [("variables" .=) <$> _lvrVariables])
 
 -- | Represents a Google Tag Manager Macro.
 --
@@ -1171,6 +1519,42 @@ macParameter
       . _Default
       . _Coerce
 
+instance FromJSON Macro where
+        parseJSON
+          = withObject "Macro"
+              (\ o ->
+                 Macro <$>
+                   (o .:? "scheduleEndMs") <*> (o .:? "parentFolderId")
+                     <*> (o .:? "containerId")
+                     <*> (o .:? "disablingRuleId" .!= mempty)
+                     <*> (o .:? "fingerprint")
+                     <*> (o .:? "accountId")
+                     <*> (o .:? "name")
+                     <*> (o .:? "enablingRuleId" .!= mempty)
+                     <*> (o .:? "macroId")
+                     <*> (o .:? "type")
+                     <*> (o .:? "scheduleStartMs")
+                     <*> (o .:? "notes")
+                     <*> (o .:? "parameter" .!= mempty))
+
+instance ToJSON Macro where
+        toJSON Macro{..}
+          = object
+              (catMaybes
+                 [("scheduleEndMs" .=) <$> _macScheduleEndMs,
+                  ("parentFolderId" .=) <$> _macParentFolderId,
+                  ("containerId" .=) <$> _macContainerId,
+                  ("disablingRuleId" .=) <$> _macDisablingRuleId,
+                  ("fingerprint" .=) <$> _macFingerprint,
+                  ("accountId" .=) <$> _macAccountId,
+                  ("name" .=) <$> _macName,
+                  ("enablingRuleId" .=) <$> _macEnablingRuleId,
+                  ("macroId" .=) <$> _macMacroId,
+                  ("type" .=) <$> _macType,
+                  ("scheduleStartMs" .=) <$> _macScheduleStartMs,
+                  ("notes" .=) <$> _macNotes,
+                  ("parameter" .=) <$> _macParameter])
+
 -- | Represents a Google Tag Manager Parameter.
 --
 -- /See:/ 'parameter' smart constructor.
@@ -1238,6 +1622,24 @@ pKey = lens _pKey (\ s a -> s{_pKey = a})
 pType :: Lens' Parameter (Maybe ParameterType)
 pType = lens _pType (\ s a -> s{_pType = a})
 
+instance FromJSON Parameter where
+        parseJSON
+          = withObject "Parameter"
+              (\ o ->
+                 Parameter <$>
+                   (o .:? "list" .!= mempty) <*> (o .:? "value") <*>
+                     (o .:? "map" .!= mempty)
+                     <*> (o .:? "key")
+                     <*> (o .:? "type"))
+
+instance ToJSON Parameter where
+        toJSON Parameter{..}
+          = object
+              (catMaybes
+                 [("list" .=) <$> _pList, ("value" .=) <$> _pValue,
+                  ("map" .=) <$> _pMap, ("key" .=) <$> _pKey,
+                  ("type" .=) <$> _pType])
+
 -- | Publish container version response.
 --
 -- /See:/ 'publishContainerVersionResponse' smart constructor.
@@ -1272,6 +1674,22 @@ pcvrContainerVersion :: Lens' PublishContainerVersionResponse (Maybe (Maybe Cont
 pcvrContainerVersion
   = lens _pcvrContainerVersion
       (\ s a -> s{_pcvrContainerVersion = a})
+
+instance FromJSON PublishContainerVersionResponse
+         where
+        parseJSON
+          = withObject "PublishContainerVersionResponse"
+              (\ o ->
+                 PublishContainerVersionResponse <$>
+                   (o .:? "compilerError") <*>
+                     (o .:? "containerVersion"))
+
+instance ToJSON PublishContainerVersionResponse where
+        toJSON PublishContainerVersionResponse{..}
+          = object
+              (catMaybes
+                 [("compilerError" .=) <$> _pcvrCompilerError,
+                  ("containerVersion" .=) <$> _pcvrContainerVersion])
 
 -- | Represents a Google Tag Manager Rule.
 --
@@ -1352,6 +1770,29 @@ rCondition
       _Default
       . _Coerce
 
+instance FromJSON Rule where
+        parseJSON
+          = withObject "Rule"
+              (\ o ->
+                 Rule <$>
+                   (o .:? "containerId") <*> (o .:? "fingerprint") <*>
+                     (o .:? "ruleId")
+                     <*> (o .:? "accountId")
+                     <*> (o .:? "name")
+                     <*> (o .:? "notes")
+                     <*> (o .:? "condition" .!= mempty))
+
+instance ToJSON Rule where
+        toJSON Rule{..}
+          = object
+              (catMaybes
+                 [("containerId" .=) <$> _rContainerId,
+                  ("fingerprint" .=) <$> _rFingerprint,
+                  ("ruleId" .=) <$> _rRuleId,
+                  ("accountId" .=) <$> _rAccountId,
+                  ("name" .=) <$> _rName, ("notes" .=) <$> _rNotes,
+                  ("condition" .=) <$> _rCondition])
+
 --
 -- /See:/ 'setupTag' smart constructor.
 data SetupTag = SetupTag
@@ -1386,6 +1827,20 @@ stStopOnSetupFailure :: Lens' SetupTag (Maybe Bool)
 stStopOnSetupFailure
   = lens _stStopOnSetupFailure
       (\ s a -> s{_stStopOnSetupFailure = a})
+
+instance FromJSON SetupTag where
+        parseJSON
+          = withObject "SetupTag"
+              (\ o ->
+                 SetupTag <$>
+                   (o .:? "tagName") <*> (o .:? "stopOnSetupFailure"))
+
+instance ToJSON SetupTag where
+        toJSON SetupTag{..}
+          = object
+              (catMaybes
+                 [("tagName" .=) <$> _stTagName,
+                  ("stopOnSetupFailure" .=) <$> _stStopOnSetupFailure])
 
 -- | Represents a Google Tag Manager Tag.
 --
@@ -1612,6 +2067,56 @@ tagParameter
       . _Default
       . _Coerce
 
+instance FromJSON Tag where
+        parseJSON
+          = withObject "Tag"
+              (\ o ->
+                 Tag <$>
+                   (o .:? "blockingTriggerId" .!= mempty) <*>
+                     (o .:? "scheduleEndMs")
+                     <*> (o .:? "parentFolderId")
+                     <*> (o .:? "liveOnly")
+                     <*> (o .:? "containerId")
+                     <*> (o .:? "priority")
+                     <*> (o .:? "teardownTag" .!= mempty)
+                     <*> (o .:? "fingerprint")
+                     <*> (o .:? "tagFiringOption")
+                     <*> (o .:? "accountId")
+                     <*> (o .:? "tagId")
+                     <*> (o .:? "name")
+                     <*> (o .:? "blockingRuleId" .!= mempty)
+                     <*> (o .:? "setupTag" .!= mempty)
+                     <*> (o .:? "firingTriggerId" .!= mempty)
+                     <*> (o .:? "type")
+                     <*> (o .:? "scheduleStartMs")
+                     <*> (o .:? "notes")
+                     <*> (o .:? "firingRuleId" .!= mempty)
+                     <*> (o .:? "parameter" .!= mempty))
+
+instance ToJSON Tag where
+        toJSON Tag{..}
+          = object
+              (catMaybes
+                 [("blockingTriggerId" .=) <$> _tagBlockingTriggerId,
+                  ("scheduleEndMs" .=) <$> _tagScheduleEndMs,
+                  ("parentFolderId" .=) <$> _tagParentFolderId,
+                  ("liveOnly" .=) <$> _tagLiveOnly,
+                  ("containerId" .=) <$> _tagContainerId,
+                  ("priority" .=) <$> _tagPriority,
+                  ("teardownTag" .=) <$> _tagTeardownTag,
+                  ("fingerprint" .=) <$> _tagFingerprint,
+                  ("tagFiringOption" .=) <$> _tagTagFiringOption,
+                  ("accountId" .=) <$> _tagAccountId,
+                  ("tagId" .=) <$> _tagTagId, ("name" .=) <$> _tagName,
+                  ("blockingRuleId" .=) <$> _tagBlockingRuleId,
+                  ("setupTag" .=) <$> _tagSetupTag,
+                  ("firingTriggerId" .=) <$> _tagFiringTriggerId,
+                  ("type" .=) <$> _tagType,
+                  ("scheduleStartMs" .=) <$> _tagScheduleStartMs,
+                  ("notes" .=) <$> _tagNotes,
+                  ("firingRuleId" .=) <$> _tagFiringRuleId,
+                  ("parameter" .=) <$> _tagParameter])
+
 --
 -- /See:/ 'teardownTag' smart constructor.
 data TeardownTag = TeardownTag
@@ -1646,6 +2151,22 @@ ttStopTeardownOnFailure
 ttTagName :: Lens' TeardownTag (Maybe Text)
 ttTagName
   = lens _ttTagName (\ s a -> s{_ttTagName = a})
+
+instance FromJSON TeardownTag where
+        parseJSON
+          = withObject "TeardownTag"
+              (\ o ->
+                 TeardownTag <$>
+                   (o .:? "stopTeardownOnFailure") <*>
+                     (o .:? "tagName"))
+
+instance ToJSON TeardownTag where
+        toJSON TeardownTag{..}
+          = object
+              (catMaybes
+                 [("stopTeardownOnFailure" .=) <$>
+                    _ttStopTeardownOnFailure,
+                  ("tagName" .=) <$> _ttTagName])
 
 -- | Represents a Google Tag Manager Trigger
 --
@@ -1864,6 +2385,54 @@ tWaitForTags :: Lens' Trigger (Maybe (Maybe Parameter))
 tWaitForTags
   = lens _tWaitForTags (\ s a -> s{_tWaitForTags = a})
 
+instance FromJSON Trigger where
+        parseJSON
+          = withObject "Trigger"
+              (\ o ->
+                 Trigger <$>
+                   (o .:? "customEventFilter" .!= mempty) <*>
+                     (o .:? "parentFolderId")
+                     <*> (o .:? "containerId")
+                     <*> (o .:? "triggerId")
+                     <*> (o .:? "checkValidation")
+                     <*> (o .:? "fingerprint")
+                     <*> (o .:? "autoEventFilter" .!= mempty)
+                     <*> (o .:? "uniqueTriggerId")
+                     <*> (o .:? "accountId")
+                     <*> (o .:? "name")
+                     <*> (o .:? "interval")
+                     <*> (o .:? "enableAllVideos")
+                     <*> (o .:? "waitForTagsTimeout")
+                     <*> (o .:? "limit")
+                     <*> (o .:? "filter" .!= mempty)
+                     <*> (o .:? "type")
+                     <*> (o .:? "videoPercentageList")
+                     <*> (o .:? "eventName")
+                     <*> (o .:? "waitForTags"))
+
+instance ToJSON Trigger where
+        toJSON Trigger{..}
+          = object
+              (catMaybes
+                 [("customEventFilter" .=) <$> _tCustomEventFilter,
+                  ("parentFolderId" .=) <$> _tParentFolderId,
+                  ("containerId" .=) <$> _tContainerId,
+                  ("triggerId" .=) <$> _tTriggerId,
+                  ("checkValidation" .=) <$> _tCheckValidation,
+                  ("fingerprint" .=) <$> _tFingerprint,
+                  ("autoEventFilter" .=) <$> _tAutoEventFilter,
+                  ("uniqueTriggerId" .=) <$> _tUniqueTriggerId,
+                  ("accountId" .=) <$> _tAccountId,
+                  ("name" .=) <$> _tName,
+                  ("interval" .=) <$> _tInterval,
+                  ("enableAllVideos" .=) <$> _tEnableAllVideos,
+                  ("waitForTagsTimeout" .=) <$> _tWaitForTagsTimeout,
+                  ("limit" .=) <$> _tLimit, ("filter" .=) <$> _tFilter,
+                  ("type" .=) <$> _tType,
+                  ("videoPercentageList" .=) <$> _tVideoPercentageList,
+                  ("eventName" .=) <$> _tEventName,
+                  ("waitForTags" .=) <$> _tWaitForTags])
+
 -- | Represents a user\'s permissions to an account and its container.
 --
 -- /See:/ 'userAccess' smart constructor.
@@ -1929,6 +2498,26 @@ uaPermissionId :: Lens' UserAccess (Maybe Text)
 uaPermissionId
   = lens _uaPermissionId
       (\ s a -> s{_uaPermissionId = a})
+
+instance FromJSON UserAccess where
+        parseJSON
+          = withObject "UserAccess"
+              (\ o ->
+                 UserAccess <$>
+                   (o .:? "accountAccess") <*> (o .:? "accountId") <*>
+                     (o .:? "emailAddress")
+                     <*> (o .:? "containerAccess" .!= mempty)
+                     <*> (o .:? "permissionId"))
+
+instance ToJSON UserAccess where
+        toJSON UserAccess{..}
+          = object
+              (catMaybes
+                 [("accountAccess" .=) <$> _uaAccountAccess,
+                  ("accountId" .=) <$> _uaAccountId,
+                  ("emailAddress" .=) <$> _uaEmailAddress,
+                  ("containerAccess" .=) <$> _uaContainerAccess,
+                  ("permissionId" .=) <$> _uaPermissionId])
 
 -- | Represents a Google Tag Manager Variable.
 --
@@ -2076,3 +2665,38 @@ vParameter
   = lens _vParameter (\ s a -> s{_vParameter = a}) .
       _Default
       . _Coerce
+
+instance FromJSON Variable where
+        parseJSON
+          = withObject "Variable"
+              (\ o ->
+                 Variable <$>
+                   (o .:? "scheduleEndMs") <*> (o .:? "parentFolderId")
+                     <*> (o .:? "containerId")
+                     <*> (o .:? "fingerprint")
+                     <*> (o .:? "variableId")
+                     <*> (o .:? "accountId")
+                     <*> (o .:? "disablingTriggerId" .!= mempty)
+                     <*> (o .:? "name")
+                     <*> (o .:? "type")
+                     <*> (o .:? "scheduleStartMs")
+                     <*> (o .:? "notes")
+                     <*> (o .:? "enablingTriggerId" .!= mempty)
+                     <*> (o .:? "parameter" .!= mempty))
+
+instance ToJSON Variable where
+        toJSON Variable{..}
+          = object
+              (catMaybes
+                 [("scheduleEndMs" .=) <$> _vScheduleEndMs,
+                  ("parentFolderId" .=) <$> _vParentFolderId,
+                  ("containerId" .=) <$> _vContainerId,
+                  ("fingerprint" .=) <$> _vFingerprint,
+                  ("variableId" .=) <$> _vVariableId,
+                  ("accountId" .=) <$> _vAccountId,
+                  ("disablingTriggerId" .=) <$> _vDisablingTriggerId,
+                  ("name" .=) <$> _vName, ("type" .=) <$> _vType,
+                  ("scheduleStartMs" .=) <$> _vScheduleStartMs,
+                  ("notes" .=) <$> _vNotes,
+                  ("enablingTriggerId" .=) <$> _vEnablingTriggerId,
+                  ("parameter" .=) <$> _vParameter])

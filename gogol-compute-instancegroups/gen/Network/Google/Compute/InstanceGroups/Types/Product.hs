@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -48,6 +49,17 @@ lValue = lens _lValue (\ s a -> s{_lValue = a})
 lKey :: Lens' Label (Maybe Text)
 lKey = lens _lKey (\ s a -> s{_lKey = a})
 
+instance FromJSON Label where
+        parseJSON
+          = withObject "Label"
+              (\ o -> Label <$> (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON Label where
+        toJSON Label{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _lValue, ("key" .=) <$> _lKey])
+
 -- | The list response item that contains the resource and end points
 -- information.
 --
@@ -83,6 +95,20 @@ lrriEndpoints
   = lens _lrriEndpoints
       (\ s a -> s{_lrriEndpoints = a})
 
+instance FromJSON ListResourceResponseItem where
+        parseJSON
+          = withObject "ListResourceResponseItem"
+              (\ o ->
+                 ListResourceResponseItem <$>
+                   (o .:? "resource") <*> (o .:? "endpoints"))
+
+instance ToJSON ListResourceResponseItem where
+        toJSON ListResourceResponseItem{..}
+          = object
+              (catMaybes
+                 [("resource" .=) <$> _lrriResource,
+                  ("endpoints" .=) <$> _lrriEndpoints])
+
 -- | The list of service end points on the resource.
 --
 -- /See:/ 'listResourceResponseItemEndpoints' smart constructor.
@@ -95,6 +121,16 @@ data ListResourceResponseItemEndpoints =
 listResourceResponseItemEndpoints
     :: ListResourceResponseItemEndpoints
 listResourceResponseItemEndpoints = ListResourceResponseItemEndpoints
+
+instance FromJSON ListResourceResponseItemEndpoints
+         where
+        parseJSON
+          = withObject "ListResourceResponseItemEndpoints"
+              (\ o -> pure ListResourceResponseItemEndpoints)
+
+instance ToJSON ListResourceResponseItemEndpoints
+         where
+        toJSON = const (Object mempty)
 
 -- | An operation resource, used to manage asynchronous API requests.
 --
@@ -327,6 +363,58 @@ oClientOperationId
   = lens _oClientOperationId
       (\ s a -> s{_oClientOperationId = a})
 
+instance FromJSON Operation where
+        parseJSON
+          = withObject "Operation"
+              (\ o ->
+                 Operation <$>
+                   (o .:? "targetId") <*> (o .:? "status") <*>
+                     (o .:? "insertTime")
+                     <*> (o .:? "progress")
+                     <*> (o .:? "startTime")
+                     <*> (o .:? "kind" .!= "resourceviews#operation")
+                     <*> (o .:? "error")
+                     <*> (o .:? "httpErrorMessage")
+                     <*> (o .:? "zone")
+                     <*> (o .:? "warnings" .!= mempty)
+                     <*> (o .:? "httpErrorStatusCode")
+                     <*> (o .:? "user")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "statusMessage")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "endTime")
+                     <*> (o .:? "id")
+                     <*> (o .:? "operationType")
+                     <*> (o .:? "region")
+                     <*> (o .:? "targetLink")
+                     <*> (o .:? "clientOperationId"))
+
+instance ToJSON Operation where
+        toJSON Operation{..}
+          = object
+              (catMaybes
+                 [("targetId" .=) <$> _oTargetId,
+                  ("status" .=) <$> _oStatus,
+                  ("insertTime" .=) <$> _oInsertTime,
+                  ("progress" .=) <$> _oProgress,
+                  ("startTime" .=) <$> _oStartTime,
+                  Just ("kind" .= _oKind), ("error" .=) <$> _oError,
+                  ("httpErrorMessage" .=) <$> _oHttpErrorMessage,
+                  ("zone" .=) <$> _oZone,
+                  ("warnings" .=) <$> _oWarnings,
+                  ("httpErrorStatusCode" .=) <$> _oHttpErrorStatusCode,
+                  ("user" .=) <$> _oUser,
+                  ("selfLink" .=) <$> _oSelfLink,
+                  ("name" .=) <$> _oName,
+                  ("statusMessage" .=) <$> _oStatusMessage,
+                  ("creationTimestamp" .=) <$> _oCreationTimestamp,
+                  ("endTime" .=) <$> _oEndTime, ("id" .=) <$> _oId,
+                  ("operationType" .=) <$> _oOperationType,
+                  ("region" .=) <$> _oRegion,
+                  ("targetLink" .=) <$> _oTargetLink,
+                  ("clientOperationId" .=) <$> _oClientOperationId])
+
 -- | [Output Only] If errors occurred during processing of this operation,
 -- this field will be populated.
 --
@@ -354,6 +442,16 @@ oeErrors
   = lens _oeErrors (\ s a -> s{_oeErrors = a}) .
       _Default
       . _Coerce
+
+instance FromJSON OperationError where
+        parseJSON
+          = withObject "OperationError"
+              (\ o ->
+                 OperationError <$> (o .:? "errors" .!= mempty))
+
+instance ToJSON OperationError where
+        toJSON OperationError{..}
+          = object (catMaybes [("errors" .=) <$> _oeErrors])
 
 --
 -- /See:/ 'operationItemDataItemWarnings' smart constructor.
@@ -385,6 +483,20 @@ oidiwValue
 -- | [Output Only] Metadata key for this warning.
 oidiwKey :: Lens' OperationItemDataItemWarnings (Maybe Text)
 oidiwKey = lens _oidiwKey (\ s a -> s{_oidiwKey = a})
+
+instance FromJSON OperationItemDataItemWarnings where
+        parseJSON
+          = withObject "OperationItemDataItemWarnings"
+              (\ o ->
+                 OperationItemDataItemWarnings <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON OperationItemDataItemWarnings where
+        toJSON OperationItemDataItemWarnings{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _oidiwValue,
+                  ("key" .=) <$> _oidiwKey])
 
 --
 -- /See:/ 'operationItemErrorsError' smart constructor.
@@ -427,6 +539,22 @@ oieeMessage :: Lens' OperationItemErrorsError (Maybe Text)
 oieeMessage
   = lens _oieeMessage (\ s a -> s{_oieeMessage = a})
 
+instance FromJSON OperationItemErrorsError where
+        parseJSON
+          = withObject "OperationItemErrorsError"
+              (\ o ->
+                 OperationItemErrorsError <$>
+                   (o .:? "location") <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON OperationItemErrorsError where
+        toJSON OperationItemErrorsError{..}
+          = object
+              (catMaybes
+                 [("location" .=) <$> _oieeLocation,
+                  ("code" .=) <$> _oieeCode,
+                  ("message" .=) <$> _oieeMessage])
+
 --
 -- /See:/ 'operationItemWarnings' smart constructor.
 data OperationItemWarnings = OperationItemWarnings
@@ -467,6 +595,21 @@ oiwCode = lens _oiwCode (\ s a -> s{_oiwCode = a})
 oiwMessage :: Lens' OperationItemWarnings (Maybe Text)
 oiwMessage
   = lens _oiwMessage (\ s a -> s{_oiwMessage = a})
+
+instance FromJSON OperationItemWarnings where
+        parseJSON
+          = withObject "OperationItemWarnings"
+              (\ o ->
+                 OperationItemWarnings <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON OperationItemWarnings where
+        toJSON OperationItemWarnings{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _oiwData, ("code" .=) <$> _oiwCode,
+                  ("message" .=) <$> _oiwMessage])
 
 --
 -- /See:/ 'operationList' smart constructor.
@@ -526,6 +669,26 @@ olSelfLink
 -- | Unique identifier for the resource; defined by the server (output only).
 olId :: Lens' OperationList (Maybe Text)
 olId = lens _olId (\ s a -> s{_olId = a})
+
+instance FromJSON OperationList where
+        parseJSON
+          = withObject "OperationList"
+              (\ o ->
+                 OperationList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "resourceviews#operationList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON OperationList where
+        toJSON OperationList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _olNextPageToken,
+                  Just ("kind" .= _olKind), ("items" .=) <$> _olItems,
+                  ("selfLink" .=) <$> _olSelfLink,
+                  ("id" .=) <$> _olId])
 
 -- | The resource view object.
 --
@@ -656,6 +819,39 @@ rvDescription
   = lens _rvDescription
       (\ s a -> s{_rvDescription = a})
 
+instance FromJSON ResourceView where
+        parseJSON
+          = withObject "ResourceView"
+              (\ o ->
+                 ResourceView <$>
+                   (o .:? "size") <*>
+                     (o .:? "kind" .!= "resourceviews#resourceView")
+                     <*> (o .:? "fingerprint")
+                     <*> (o .:? "network")
+                     <*> (o .:? "resources" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "id")
+                     <*> (o .:? "labels" .!= mempty)
+                     <*> (o .:? "endpoints" .!= mempty)
+                     <*> (o .:? "description"))
+
+instance ToJSON ResourceView where
+        toJSON ResourceView{..}
+          = object
+              (catMaybes
+                 [("size" .=) <$> _rvSize, Just ("kind" .= _rvKind),
+                  ("fingerprint" .=) <$> _rvFingerprint,
+                  ("network" .=) <$> _rvNetwork,
+                  ("resources" .=) <$> _rvResources,
+                  ("selfLink" .=) <$> _rvSelfLink,
+                  ("name" .=) <$> _rvName,
+                  ("creationTimestamp" .=) <$> _rvCreationTimestamp,
+                  ("id" .=) <$> _rvId, ("labels" .=) <$> _rvLabels,
+                  ("endpoints" .=) <$> _rvEndpoints,
+                  ("description" .=) <$> _rvDescription])
+
 -- | The service endpoint that may be started in a VM.
 --
 -- /See:/ 'serviceEndpoint' smart constructor.
@@ -687,6 +883,19 @@ seName = lens _seName (\ s a -> s{_seName = a})
 sePort :: Lens' ServiceEndpoint (Maybe Int32)
 sePort = lens _sePort (\ s a -> s{_sePort = a})
 
+instance FromJSON ServiceEndpoint where
+        parseJSON
+          = withObject "ServiceEndpoint"
+              (\ o ->
+                 ServiceEndpoint <$>
+                   (o .:? "name") <*> (o .:? "port"))
+
+instance ToJSON ServiceEndpoint where
+        toJSON ServiceEndpoint{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _seName, ("port" .=) <$> _sePort])
+
 -- | The request to add resources to the resource view.
 --
 -- /See:/ 'zoneViewsAddResourcesRequest' smart constructor.
@@ -713,6 +922,18 @@ zvarrResources
       (\ s a -> s{_zvarrResources = a})
       . _Default
       . _Coerce
+
+instance FromJSON ZoneViewsAddResourcesRequest where
+        parseJSON
+          = withObject "ZoneViewsAddResourcesRequest"
+              (\ o ->
+                 ZoneViewsAddResourcesRequest <$>
+                   (o .:? "resources" .!= mempty))
+
+instance ToJSON ZoneViewsAddResourcesRequest where
+        toJSON ZoneViewsAddResourcesRequest{..}
+          = object
+              (catMaybes [("resources" .=) <$> _zvarrResources])
 
 --
 -- /See:/ 'zoneViewsGetServiceResponse' smart constructor.
@@ -749,6 +970,21 @@ zvgsrEndpoints
       (\ s a -> s{_zvgsrEndpoints = a})
       . _Default
       . _Coerce
+
+instance FromJSON ZoneViewsGetServiceResponse where
+        parseJSON
+          = withObject "ZoneViewsGetServiceResponse"
+              (\ o ->
+                 ZoneViewsGetServiceResponse <$>
+                   (o .:? "fingerprint") <*>
+                     (o .:? "endpoints" .!= mempty))
+
+instance ToJSON ZoneViewsGetServiceResponse where
+        toJSON ZoneViewsGetServiceResponse{..}
+          = object
+              (catMaybes
+                 [("fingerprint" .=) <$> _zvgsrFingerprint,
+                  ("endpoints" .=) <$> _zvgsrEndpoints])
 
 -- | The response to a list request.
 --
@@ -803,6 +1039,25 @@ zvlSelfLink :: Lens' ZoneViewsList (Maybe Text)
 zvlSelfLink
   = lens _zvlSelfLink (\ s a -> s{_zvlSelfLink = a})
 
+instance FromJSON ZoneViewsList where
+        parseJSON
+          = withObject "ZoneViewsList"
+              (\ o ->
+                 ZoneViewsList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "resourceviews#zoneViewsList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink"))
+
+instance ToJSON ZoneViewsList where
+        toJSON ZoneViewsList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _zvlNextPageToken,
+                  Just ("kind" .= _zvlKind),
+                  ("items" .=) <$> _zvlItems,
+                  ("selfLink" .=) <$> _zvlSelfLink])
+
 -- | The response to a list resource request.
 --
 -- /See:/ 'zoneViewsListResourcesResponse' smart constructor.
@@ -849,6 +1104,24 @@ zvlrrNetwork :: Lens' ZoneViewsListResourcesResponse (Maybe Text)
 zvlrrNetwork
   = lens _zvlrrNetwork (\ s a -> s{_zvlrrNetwork = a})
 
+instance FromJSON ZoneViewsListResourcesResponse
+         where
+        parseJSON
+          = withObject "ZoneViewsListResourcesResponse"
+              (\ o ->
+                 ZoneViewsListResourcesResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "items" .!= mempty)
+                     <*> (o .:? "network"))
+
+instance ToJSON ZoneViewsListResourcesResponse where
+        toJSON ZoneViewsListResourcesResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _zvlrrNextPageToken,
+                  ("items" .=) <$> _zvlrrItems,
+                  ("network" .=) <$> _zvlrrNetwork])
+
 -- | The request to remove resources from the resource view.
 --
 -- /See:/ 'zoneViewsRemoveResourcesRequest' smart constructor.
@@ -875,6 +1148,19 @@ zvrrrResources
       (\ s a -> s{_zvrrrResources = a})
       . _Default
       . _Coerce
+
+instance FromJSON ZoneViewsRemoveResourcesRequest
+         where
+        parseJSON
+          = withObject "ZoneViewsRemoveResourcesRequest"
+              (\ o ->
+                 ZoneViewsRemoveResourcesRequest <$>
+                   (o .:? "resources" .!= mempty))
+
+instance ToJSON ZoneViewsRemoveResourcesRequest where
+        toJSON ZoneViewsRemoveResourcesRequest{..}
+          = object
+              (catMaybes [("resources" .=) <$> _zvrrrResources])
 
 --
 -- /See:/ 'zoneViewsSetServiceRequest' smart constructor.
@@ -923,3 +1209,19 @@ zvssrEndpoints
       (\ s a -> s{_zvssrEndpoints = a})
       . _Default
       . _Coerce
+
+instance FromJSON ZoneViewsSetServiceRequest where
+        parseJSON
+          = withObject "ZoneViewsSetServiceRequest"
+              (\ o ->
+                 ZoneViewsSetServiceRequest <$>
+                   (o .:? "resourceName") <*> (o .:? "fingerprint") <*>
+                     (o .:? "endpoints" .!= mempty))
+
+instance ToJSON ZoneViewsSetServiceRequest where
+        toJSON ZoneViewsSetServiceRequest{..}
+          = object
+              (catMaybes
+                 [("resourceName" .=) <$> _zvssrResourceName,
+                  ("fingerprint" .=) <$> _zvssrFingerprint,
+                  ("endpoints" .=) <$> _zvssrEndpoints])

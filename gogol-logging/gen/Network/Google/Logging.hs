@@ -261,99 +261,114 @@ type SinksAPI =
 
 -- | Lists project sinks associated with a project.
 type SinksList =
-     "v1beta3" :> "projects" :> Capture "projectsId" Text
-       :> "sinks"
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1beta3" :>
+       "projects" :>
+         Capture "projectsId" Text :>
+           "sinks" :>
+             QueryParam "$.xgafv" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "pp" Bool :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "bearer_token" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "callback" Text :>
+                                     QueryParam "alt" Text :>
+                                       Get '[JSON] ListSinksResponse
 
 -- | Gets a project sink.
 type SinksGet =
-     "v1beta3" :> "projects" :> Capture "projectsId" Text
-       :> "sinks"
-       :> Capture "sinksId" Text
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1beta3" :>
+       "projects" :>
+         Capture "projectsId" Text :>
+           "sinks" :>
+             Capture "sinksId" Text :>
+               QueryParam "$.xgafv" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "bearer_token" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" Text :>
+                                         Get '[JSON] LogSink
 
 -- | Creates a project sink. A logs filter determines which log entries are
 -- written to the destination.
 type SinksCreate =
-     "v1beta3" :> "projects" :> Capture "projectsId" Text
-       :> "sinks"
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1beta3" :>
+       "projects" :>
+         Capture "projectsId" Text :>
+           "sinks" :>
+             QueryParam "$.xgafv" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "pp" Bool :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "bearer_token" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "callback" Text :>
+                                     QueryParam "alt" Text :>
+                                       Post '[JSON] LogSink
 
 -- | Deletes a project sink. After deletion, no new log entries are written
 -- to the destination.
 type SinksDelete =
-     "v1beta3" :> "projects" :> Capture "projectsId" Text
-       :> "sinks"
-       :> Capture "sinksId" Text
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1beta3" :>
+       "projects" :>
+         Capture "projectsId" Text :>
+           "sinks" :>
+             Capture "sinksId" Text :>
+               QueryParam "$.xgafv" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "bearer_token" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" Text :>
+                                         Delete '[JSON] Empty
 
 -- | Updates a project sink. If the sink does not exist, it is created. The
 -- destination, filter, or both may be updated.
 type SinksUpdate =
-     "v1beta3" :> "projects" :> Capture "projectsId" Text
-       :> "sinks"
-       :> Capture "sinksId" Text
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1beta3" :>
+       "projects" :>
+         Capture "projectsId" Text :>
+           "sinks" :>
+             Capture "sinksId" Text :>
+               QueryParam "$.xgafv" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "bearer_token" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" Text :>
+                                         Put '[JSON] LogSink
 
 type LogServicesAPI = SinksAPI :<|> IndexesAPI
 
@@ -364,135 +379,155 @@ type SinksAPI =
 
 -- | Lists log service sinks associated with a log service.
 type SinksList =
-     "v1beta3" :> "projects" :> Capture "projectsId" Text
-       :> "logServices"
-       :> Capture "logServicesId" Text
-       :> "sinks"
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1beta3" :>
+       "projects" :>
+         Capture "projectsId" Text :>
+           "logServices" :>
+             Capture "logServicesId" Text :>
+               "sinks" :>
+                 QueryParam "$.xgafv" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "pp" Bool :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "bearer_token" Text :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" Text :>
+                                           Get '[JSON]
+                                             ListLogServiceSinksResponse
 
 -- | Gets a log service sink.
 type SinksGet =
-     "v1beta3" :> "projects" :> Capture "projectsId" Text
-       :> "logServices"
-       :> Capture "logServicesId" Text
-       :> "sinks"
-       :> Capture "sinksId" Text
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1beta3" :>
+       "projects" :>
+         Capture "projectsId" Text :>
+           "logServices" :>
+             Capture "logServicesId" Text :>
+               "sinks" :>
+                 Capture "sinksId" Text :>
+                   QueryParam "$.xgafv" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "upload_protocol" Text :>
+                           QueryParam "pp" Bool :>
+                             QueryParam "access_token" Text :>
+                               QueryParam "uploadType" Text :>
+                                 QueryParam "bearer_token" Text :>
+                                   QueryParam "key" Text :>
+                                     QueryParam "oauth_token" Text :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "callback" Text :>
+                                           QueryParam "alt" Text :>
+                                             Get '[JSON] LogSink
 
 -- | Creates a log service sink. All log entries from a specified log service
 -- are written to the destination.
 type SinksCreate =
-     "v1beta3" :> "projects" :> Capture "projectsId" Text
-       :> "logServices"
-       :> Capture "logServicesId" Text
-       :> "sinks"
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1beta3" :>
+       "projects" :>
+         Capture "projectsId" Text :>
+           "logServices" :>
+             Capture "logServicesId" Text :>
+               "sinks" :>
+                 QueryParam "$.xgafv" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "pp" Bool :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "bearer_token" Text :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" Text :>
+                                           Post '[JSON] LogSink
 
 -- | Deletes a log service sink. After deletion, no new log entries are
 -- written to the destination.
 type SinksDelete =
-     "v1beta3" :> "projects" :> Capture "projectsId" Text
-       :> "logServices"
-       :> Capture "logServicesId" Text
-       :> "sinks"
-       :> Capture "sinksId" Text
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1beta3" :>
+       "projects" :>
+         Capture "projectsId" Text :>
+           "logServices" :>
+             Capture "logServicesId" Text :>
+               "sinks" :>
+                 Capture "sinksId" Text :>
+                   QueryParam "$.xgafv" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "upload_protocol" Text :>
+                           QueryParam "pp" Bool :>
+                             QueryParam "access_token" Text :>
+                               QueryParam "uploadType" Text :>
+                                 QueryParam "bearer_token" Text :>
+                                   QueryParam "key" Text :>
+                                     QueryParam "oauth_token" Text :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "callback" Text :>
+                                           QueryParam "alt" Text :>
+                                             Delete '[JSON] Empty
 
 -- | Updates a log service sink. If the sink does not exist, it is created.
 type SinksUpdate =
-     "v1beta3" :> "projects" :> Capture "projectsId" Text
-       :> "logServices"
-       :> Capture "logServicesId" Text
-       :> "sinks"
-       :> Capture "sinksId" Text
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1beta3" :>
+       "projects" :>
+         Capture "projectsId" Text :>
+           "logServices" :>
+             Capture "logServicesId" Text :>
+               "sinks" :>
+                 Capture "sinksId" Text :>
+                   QueryParam "$.xgafv" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "upload_protocol" Text :>
+                           QueryParam "pp" Bool :>
+                             QueryParam "access_token" Text :>
+                               QueryParam "uploadType" Text :>
+                                 QueryParam "bearer_token" Text :>
+                                   QueryParam "key" Text :>
+                                     QueryParam "oauth_token" Text :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "callback" Text :>
+                                           QueryParam "alt" Text :>
+                                             Put '[JSON] LogSink
 
 type IndexesAPI = IndexesList
 
 -- | Lists the current index values for a log service.
 type IndexesList =
-     "v1beta3" :> "projects" :> Capture "projectsId" Text
-       :> "logServices"
-       :> Capture "logServicesId" Text
-       :> "indexes"
-       :> QueryParam "log" Text
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "depth" Int32
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "pageSize" Int32
-       :> QueryParam "indexPrefix" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1beta3" :>
+       "projects" :>
+         Capture "projectsId" Text :>
+           "logServices" :>
+             Capture "logServicesId" Text :>
+               "indexes" :>
+                 QueryParam "log" Text :>
+                   QueryParam "$.xgafv" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "upload_protocol" Text :>
+                           QueryParam "pp" Bool :>
+                             QueryParam "access_token" Text :>
+                               QueryParam "uploadType" Text :>
+                                 QueryParam "bearer_token" Text :>
+                                   QueryParam "key" Text :>
+                                     QueryParam "depth" Int32 :>
+                                       QueryParam "pageToken" Text :>
+                                         QueryParam "oauth_token" Text :>
+                                           QueryParam "pageSize" Int32 :>
+                                             QueryParam "indexPrefix" Text :>
+                                               QueryParam "fields" Text :>
+                                                 QueryParam "callback" Text :>
+                                                   QueryParam "alt" Text :>
+                                                     Get '[JSON]
+                                                       ListLogServiceIndexesResponse
 
 type LogsAPI = SinksAPI :<|> EntriesAPI
 
@@ -503,108 +538,123 @@ type SinksAPI =
 
 -- | Lists log sinks associated with a log.
 type SinksList =
-     "v1beta3" :> "projects" :> Capture "projectsId" Text
-       :> "logs"
-       :> Capture "logsId" Text
-       :> "sinks"
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1beta3" :>
+       "projects" :>
+         Capture "projectsId" Text :>
+           "logs" :>
+             Capture "logsId" Text :>
+               "sinks" :>
+                 QueryParam "$.xgafv" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "pp" Bool :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "bearer_token" Text :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" Text :>
+                                           Get '[JSON] ListLogSinksResponse
 
 -- | Gets a log sink.
 type SinksGet =
-     "v1beta3" :> "projects" :> Capture "projectsId" Text
-       :> "logs"
-       :> Capture "logsId" Text
-       :> "sinks"
-       :> Capture "sinksId" Text
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1beta3" :>
+       "projects" :>
+         Capture "projectsId" Text :>
+           "logs" :>
+             Capture "logsId" Text :>
+               "sinks" :>
+                 Capture "sinksId" Text :>
+                   QueryParam "$.xgafv" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "upload_protocol" Text :>
+                           QueryParam "pp" Bool :>
+                             QueryParam "access_token" Text :>
+                               QueryParam "uploadType" Text :>
+                                 QueryParam "bearer_token" Text :>
+                                   QueryParam "key" Text :>
+                                     QueryParam "oauth_token" Text :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "callback" Text :>
+                                           QueryParam "alt" Text :>
+                                             Get '[JSON] LogSink
 
 -- | Creates a log sink. All log entries for a specified log are written to
 -- the destination.
 type SinksCreate =
-     "v1beta3" :> "projects" :> Capture "projectsId" Text
-       :> "logs"
-       :> Capture "logsId" Text
-       :> "sinks"
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1beta3" :>
+       "projects" :>
+         Capture "projectsId" Text :>
+           "logs" :>
+             Capture "logsId" Text :>
+               "sinks" :>
+                 QueryParam "$.xgafv" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "pp" Bool :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "bearer_token" Text :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" Text :>
+                                           Post '[JSON] LogSink
 
 -- | Deletes a log sink. After deletion, no new log entries are written to
 -- the destination.
 type SinksDelete =
-     "v1beta3" :> "projects" :> Capture "projectsId" Text
-       :> "logs"
-       :> Capture "logsId" Text
-       :> "sinks"
-       :> Capture "sinksId" Text
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1beta3" :>
+       "projects" :>
+         Capture "projectsId" Text :>
+           "logs" :>
+             Capture "logsId" Text :>
+               "sinks" :>
+                 Capture "sinksId" Text :>
+                   QueryParam "$.xgafv" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "upload_protocol" Text :>
+                           QueryParam "pp" Bool :>
+                             QueryParam "access_token" Text :>
+                               QueryParam "uploadType" Text :>
+                                 QueryParam "bearer_token" Text :>
+                                   QueryParam "key" Text :>
+                                     QueryParam "oauth_token" Text :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "callback" Text :>
+                                           QueryParam "alt" Text :>
+                                             Delete '[JSON] Empty
 
 -- | Updates a log sink. If the sink does not exist, it is created.
 type SinksUpdate =
-     "v1beta3" :> "projects" :> Capture "projectsId" Text
-       :> "logs"
-       :> Capture "logsId" Text
-       :> "sinks"
-       :> Capture "sinksId" Text
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1beta3" :>
+       "projects" :>
+         Capture "projectsId" Text :>
+           "logs" :>
+             Capture "logsId" Text :>
+               "sinks" :>
+                 Capture "sinksId" Text :>
+                   QueryParam "$.xgafv" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "upload_protocol" Text :>
+                           QueryParam "pp" Bool :>
+                             QueryParam "access_token" Text :>
+                               QueryParam "uploadType" Text :>
+                                 QueryParam "bearer_token" Text :>
+                                   QueryParam "key" Text :>
+                                     QueryParam "oauth_token" Text :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "callback" Text :>
+                                           QueryParam "alt" Text :>
+                                             Put '[JSON] LogSink
 
 type EntriesAPI = EntriesWrite
 
@@ -615,20 +665,23 @@ type EntriesAPI = EntriesWrite
 -- \`entries[].metadata.labels\` map in each entry, saving you the trouble
 -- of creating identical copies for each entry.
 type EntriesWrite =
-     "v1beta3" :> "projects" :> Capture "projectsId" Text
-       :> "logs"
-       :> Capture "logsId" Text
-       :> "entries:write"
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v1beta3" :>
+       "projects" :>
+         Capture "projectsId" Text :>
+           "logs" :>
+             Capture "logsId" Text :>
+               "entries:write" :>
+                 QueryParam "$.xgafv" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "pp" Bool :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "bearer_token" Text :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" Text :>
+                                           Post '[JSON] WriteLogEntriesResponse

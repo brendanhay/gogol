@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -70,6 +71,25 @@ aclDescription :: Lens' Acl (Maybe Text)
 aclDescription
   = lens _aclDescription
       (\ s a -> s{_aclDescription = a})
+
+instance FromJSON Acl where
+        parseJSON
+          = withObject "Acl"
+              (\ o ->
+                 Acl <$>
+                   (o .:? "kind" .!= "plus#acl") <*>
+                     (o .:? "items" .!= mempty)
+                     <*> (o .:? "domainRestricted")
+                     <*> (o .:? "description"))
+
+instance ToJSON Acl where
+        toJSON Acl{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _aclKind),
+                  ("items" .=) <$> _aclItems,
+                  ("domainRestricted" .=) <$> _aclDomainRestricted,
+                  ("description" .=) <$> _aclDescription])
 
 --
 -- /See:/ 'activity' smart constructor.
@@ -261,6 +281,52 @@ aProvider :: Lens' Activity (Maybe ActivityProvider)
 aProvider
   = lens _aProvider (\ s a -> s{_aProvider = a})
 
+instance FromJSON Activity where
+        parseJSON
+          = withObject "Activity"
+              (\ o ->
+                 Activity <$>
+                   (o .:? "access") <*> (o .:? "placeName") <*>
+                     (o .:? "etag")
+                     <*> (o .:? "annotation")
+                     <*> (o .:? "location")
+                     <*> (o .:? "geocode")
+                     <*> (o .:? "kind" .!= "plus#activity")
+                     <*> (o .:? "radius")
+                     <*> (o .:? "published")
+                     <*> (o .:? "url")
+                     <*> (o .:? "actor")
+                     <*> (o .:? "address")
+                     <*> (o .:? "object")
+                     <*> (o .:? "id")
+                     <*> (o .:? "updated")
+                     <*> (o .:? "title")
+                     <*> (o .:? "verb")
+                     <*> (o .:? "crosspostSource")
+                     <*> (o .:? "placeId")
+                     <*> (o .:? "provider"))
+
+instance ToJSON Activity where
+        toJSON Activity{..}
+          = object
+              (catMaybes
+                 [("access" .=) <$> _aAccess,
+                  ("placeName" .=) <$> _aPlaceName,
+                  ("etag" .=) <$> _aEtag,
+                  ("annotation" .=) <$> _aAnnotation,
+                  ("location" .=) <$> _aLocation,
+                  ("geocode" .=) <$> _aGeocode,
+                  Just ("kind" .= _aKind), ("radius" .=) <$> _aRadius,
+                  ("published" .=) <$> _aPublished,
+                  ("url" .=) <$> _aUrl, ("actor" .=) <$> _aActor,
+                  ("address" .=) <$> _aAddress,
+                  ("object" .=) <$> _aObject, ("id" .=) <$> _aId,
+                  ("updated" .=) <$> _aUpdated,
+                  ("title" .=) <$> _aTitle, ("verb" .=) <$> _aVerb,
+                  ("crosspostSource" .=) <$> _aCrosspostSource,
+                  ("placeId" .=) <$> _aPlaceId,
+                  ("provider" .=) <$> _aProvider])
+
 -- | The person who performed this activity.
 --
 -- /See:/ 'activityActor' smart constructor.
@@ -328,6 +394,26 @@ aaVerification
   = lens _aaVerification
       (\ s a -> s{_aaVerification = a})
 
+instance FromJSON ActivityActor where
+        parseJSON
+          = withObject "ActivityActor"
+              (\ o ->
+                 ActivityActor <$>
+                   (o .:? "image") <*> (o .:? "url") <*> (o .:? "name")
+                     <*> (o .:? "displayName")
+                     <*> (o .:? "id")
+                     <*> (o .:? "verification"))
+
+instance ToJSON ActivityActor where
+        toJSON ActivityActor{..}
+          = object
+              (catMaybes
+                 [("image" .=) <$> _aaImage, ("url" .=) <$> _aaUrl,
+                  ("name" .=) <$> _aaName,
+                  ("displayName" .=) <$> _aaDisplayName,
+                  ("id" .=) <$> _aaId,
+                  ("verification" .=) <$> _aaVerification])
+
 -- | If this activity\'s object is itself another activity, such as when a
 -- person reshares an activity, this property specifies the original
 -- activity\'s actor.
@@ -389,6 +475,25 @@ aaoVerification
   = lens _aaoVerification
       (\ s a -> s{_aaoVerification = a})
 
+instance FromJSON ActivityActorObject where
+        parseJSON
+          = withObject "ActivityActorObject"
+              (\ o ->
+                 ActivityActorObject <$>
+                   (o .:? "image") <*> (o .:? "url") <*>
+                     (o .:? "displayName")
+                     <*> (o .:? "id")
+                     <*> (o .:? "verification"))
+
+instance ToJSON ActivityActorObject where
+        toJSON ActivityActorObject{..}
+          = object
+              (catMaybes
+                 [("image" .=) <$> _aaoImage, ("url" .=) <$> _aaoUrl,
+                  ("displayName" .=) <$> _aaoDisplayName,
+                  ("id" .=) <$> _aaoId,
+                  ("verification" .=) <$> _aaoVerification])
+
 -- | If the attachment is a video, the embeddable link.
 --
 -- /See:/ 'activityEmbedItemAttachmentsObject' smart constructor.
@@ -420,6 +525,22 @@ aeiaoUrl = lens _aeiaoUrl (\ s a -> s{_aeiaoUrl = a})
 aeiaoType :: Lens' ActivityEmbedItemAttachmentsObject (Maybe Text)
 aeiaoType
   = lens _aeiaoType (\ s a -> s{_aeiaoType = a})
+
+instance FromJSON ActivityEmbedItemAttachmentsObject
+         where
+        parseJSON
+          = withObject "ActivityEmbedItemAttachmentsObject"
+              (\ o ->
+                 ActivityEmbedItemAttachmentsObject <$>
+                   (o .:? "url") <*> (o .:? "type"))
+
+instance ToJSON ActivityEmbedItemAttachmentsObject
+         where
+        toJSON ActivityEmbedItemAttachmentsObject{..}
+          = object
+              (catMaybes
+                 [("url" .=) <$> _aeiaoUrl,
+                  ("type" .=) <$> _aeiaoType])
 
 --
 -- /See:/ 'activityFeed' smart constructor.
@@ -519,6 +640,32 @@ afUpdated
 afTitle :: Lens' ActivityFeed (Maybe Text)
 afTitle = lens _afTitle (\ s a -> s{_afTitle = a})
 
+instance FromJSON ActivityFeed where
+        parseJSON
+          = withObject "ActivityFeed"
+              (\ o ->
+                 ActivityFeed <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "nextLink")
+                     <*> (o .:? "kind" .!= "plus#activityFeed")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id")
+                     <*> (o .:? "updated")
+                     <*> (o .:? "title"))
+
+instance ToJSON ActivityFeed where
+        toJSON ActivityFeed{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _afEtag,
+                  ("nextPageToken" .=) <$> _afNextPageToken,
+                  ("nextLink" .=) <$> _afNextLink,
+                  Just ("kind" .= _afKind), ("items" .=) <$> _afItems,
+                  ("selfLink" .=) <$> _afSelfLink, ("id" .=) <$> _afId,
+                  ("updated" .=) <$> _afUpdated,
+                  ("title" .=) <$> _afTitle])
+
 -- | The full image URL for photo attachments.
 --
 -- /See:/ 'activityFullImageItemAttachmentsObject' smart constructor.
@@ -570,6 +717,26 @@ afiiaoType :: Lens' ActivityFullImageItemAttachmentsObject (Maybe Text)
 afiiaoType
   = lens _afiiaoType (\ s a -> s{_afiiaoType = a})
 
+instance FromJSON
+         ActivityFullImageItemAttachmentsObject where
+        parseJSON
+          = withObject "ActivityFullImageItemAttachmentsObject"
+              (\ o ->
+                 ActivityFullImageItemAttachmentsObject <$>
+                   (o .:? "height") <*> (o .:? "url") <*>
+                     (o .:? "width")
+                     <*> (o .:? "type"))
+
+instance ToJSON
+         ActivityFullImageItemAttachmentsObject where
+        toJSON ActivityFullImageItemAttachmentsObject{..}
+          = object
+              (catMaybes
+                 [("height" .=) <$> _afiiaoHeight,
+                  ("url" .=) <$> _afiiaoUrl,
+                  ("width" .=) <$> _afiiaoWidth,
+                  ("type" .=) <$> _afiiaoType])
+
 -- | The image representation of the actor.
 --
 -- /See:/ 'activityImageActor' smart constructor.
@@ -595,6 +762,15 @@ activityImageActor =
 aiaUrl :: Lens' ActivityImageActor (Maybe Text)
 aiaUrl = lens _aiaUrl (\ s a -> s{_aiaUrl = a})
 
+instance FromJSON ActivityImageActor where
+        parseJSON
+          = withObject "ActivityImageActor"
+              (\ o -> ActivityImageActor <$> (o .:? "url"))
+
+instance ToJSON ActivityImageActor where
+        toJSON ActivityImageActor{..}
+          = object (catMaybes [("url" .=) <$> _aiaUrl])
+
 -- | The image representation of the original actor.
 --
 -- /See:/ 'activityImageActorObject' smart constructor.
@@ -617,6 +793,15 @@ activityImageActorObject =
 -- | A URL that points to a thumbnail photo of the original actor.
 aiaoUrl :: Lens' ActivityImageActorObject (Maybe Text)
 aiaoUrl = lens _aiaoUrl (\ s a -> s{_aiaoUrl = a})
+
+instance FromJSON ActivityImageActorObject where
+        parseJSON
+          = withObject "ActivityImageActorObject"
+              (\ o -> ActivityImageActorObject <$> (o .:? "url"))
+
+instance ToJSON ActivityImageActorObject where
+        toJSON ActivityImageActorObject{..}
+          = object (catMaybes [("url" .=) <$> _aiaoUrl])
 
 -- | The preview image for photos or videos.
 --
@@ -667,6 +852,26 @@ aiiaoWidth
 aiiaoType :: Lens' ActivityImageItemAttachmentsObject (Maybe Text)
 aiiaoType
   = lens _aiiaoType (\ s a -> s{_aiiaoType = a})
+
+instance FromJSON ActivityImageItemAttachmentsObject
+         where
+        parseJSON
+          = withObject "ActivityImageItemAttachmentsObject"
+              (\ o ->
+                 ActivityImageItemAttachmentsObject <$>
+                   (o .:? "height") <*> (o .:? "url") <*>
+                     (o .:? "width")
+                     <*> (o .:? "type"))
+
+instance ToJSON ActivityImageItemAttachmentsObject
+         where
+        toJSON ActivityImageItemAttachmentsObject{..}
+          = object
+              (catMaybes
+                 [("height" .=) <$> _aiiaoHeight,
+                  ("url" .=) <$> _aiiaoUrl,
+                  ("width" .=) <$> _aiiaoWidth,
+                  ("type" .=) <$> _aiiaoType])
 
 -- | Image resource.
 --
@@ -719,6 +924,30 @@ aiitiaoWidth
 aiitiaoType :: Lens' ActivityImageItemThumbnailsItemAttachmentsObject (Maybe Text)
 aiitiaoType
   = lens _aiitiaoType (\ s a -> s{_aiitiaoType = a})
+
+instance FromJSON
+         ActivityImageItemThumbnailsItemAttachmentsObject
+         where
+        parseJSON
+          = withObject
+              "ActivityImageItemThumbnailsItemAttachmentsObject"
+              (\ o ->
+                 ActivityImageItemThumbnailsItemAttachmentsObject <$>
+                   (o .:? "height") <*> (o .:? "url") <*>
+                     (o .:? "width")
+                     <*> (o .:? "type"))
+
+instance ToJSON
+         ActivityImageItemThumbnailsItemAttachmentsObject
+         where
+        toJSON
+          ActivityImageItemThumbnailsItemAttachmentsObject{..}
+          = object
+              (catMaybes
+                 [("height" .=) <$> _aiitiaoHeight,
+                  ("url" .=) <$> _aiitiaoUrl,
+                  ("width" .=) <$> _aiitiaoWidth,
+                  ("type" .=) <$> _aiitiaoType])
 
 --
 -- /See:/ 'activityItemAttachmentsObject' smart constructor.
@@ -836,6 +1065,35 @@ actDisplayName
 actId :: Lens' ActivityItemAttachmentsObject (Maybe Text)
 actId = lens _actId (\ s a -> s{_actId = a})
 
+instance FromJSON ActivityItemAttachmentsObject where
+        parseJSON
+          = withObject "ActivityItemAttachmentsObject"
+              (\ o ->
+                 ActivityItemAttachmentsObject <$>
+                   (o .:? "fullImage") <*> (o .:? "image") <*>
+                     (o .:? "objectType")
+                     <*> (o .:? "previewThumbnails" .!= mempty)
+                     <*> (o .:? "url")
+                     <*> (o .:? "embed")
+                     <*> (o .:? "content")
+                     <*> (o .:? "thumbnails" .!= mempty)
+                     <*> (o .:? "displayName")
+                     <*> (o .:? "id"))
+
+instance ToJSON ActivityItemAttachmentsObject where
+        toJSON ActivityItemAttachmentsObject{..}
+          = object
+              (catMaybes
+                 [("fullImage" .=) <$> _actFullImage,
+                  ("image" .=) <$> _actImage,
+                  ("objectType" .=) <$> _actObjectType,
+                  ("previewThumbnails" .=) <$> _actPreviewThumbnails,
+                  ("url" .=) <$> _actUrl, ("embed" .=) <$> _actEmbed,
+                  ("content" .=) <$> _actContent,
+                  ("thumbnails" .=) <$> _actThumbnails,
+                  ("displayName" .=) <$> _actDisplayName,
+                  ("id" .=) <$> _actId])
+
 --
 -- /See:/ 'activityItemPreviewThumbnailsItemAttachmentsObject' smart constructor.
 newtype ActivityItemPreviewThumbnailsItemAttachmentsObject = ActivityItemPreviewThumbnailsItemAttachmentsObject
@@ -858,6 +1116,23 @@ activityItemPreviewThumbnailsItemAttachmentsObject =
 aiptiaoUrl :: Lens' ActivityItemPreviewThumbnailsItemAttachmentsObject (Maybe Text)
 aiptiaoUrl
   = lens _aiptiaoUrl (\ s a -> s{_aiptiaoUrl = a})
+
+instance FromJSON
+         ActivityItemPreviewThumbnailsItemAttachmentsObject
+         where
+        parseJSON
+          = withObject
+              "ActivityItemPreviewThumbnailsItemAttachmentsObject"
+              (\ o ->
+                 ActivityItemPreviewThumbnailsItemAttachmentsObject
+                   <$> (o .:? "url"))
+
+instance ToJSON
+         ActivityItemPreviewThumbnailsItemAttachmentsObject
+         where
+        toJSON
+          ActivityItemPreviewThumbnailsItemAttachmentsObject{..}
+          = object (catMaybes [("url" .=) <$> _aiptiaoUrl])
 
 --
 -- /See:/ 'activityItemThumbnailsItemAttachmentsObject' smart constructor.
@@ -901,6 +1176,26 @@ aitiaoDescription
   = lens _aitiaoDescription
       (\ s a -> s{_aitiaoDescription = a})
 
+instance FromJSON
+         ActivityItemThumbnailsItemAttachmentsObject where
+        parseJSON
+          = withObject
+              "ActivityItemThumbnailsItemAttachmentsObject"
+              (\ o ->
+                 ActivityItemThumbnailsItemAttachmentsObject <$>
+                   (o .:? "image") <*> (o .:? "url") <*>
+                     (o .:? "description"))
+
+instance ToJSON
+         ActivityItemThumbnailsItemAttachmentsObject where
+        toJSON
+          ActivityItemThumbnailsItemAttachmentsObject{..}
+          = object
+              (catMaybes
+                 [("image" .=) <$> _aitiaoImage,
+                  ("url" .=) <$> _aitiaoUrl,
+                  ("description" .=) <$> _aitiaoDescription])
+
 -- | An object representation of the individual components of name.
 --
 -- /See:/ 'activityNameActor' smart constructor.
@@ -934,6 +1229,20 @@ anaFamilyName :: Lens' ActivityNameActor (Maybe Text)
 anaFamilyName
   = lens _anaFamilyName
       (\ s a -> s{_anaFamilyName = a})
+
+instance FromJSON ActivityNameActor where
+        parseJSON
+          = withObject "ActivityNameActor"
+              (\ o ->
+                 ActivityNameActor <$>
+                   (o .:? "givenName") <*> (o .:? "familyName"))
+
+instance ToJSON ActivityNameActor where
+        toJSON ActivityNameActor{..}
+          = object
+              (catMaybes
+                 [("givenName" .=) <$> _anaGivenName,
+                  ("familyName" .=) <$> _anaFamilyName])
 
 -- | The object of this activity.
 --
@@ -1058,6 +1367,37 @@ aoResharers :: Lens' ActivityObject (Maybe ActivityResharersObject)
 aoResharers
   = lens _aoResharers (\ s a -> s{_aoResharers = a})
 
+instance FromJSON ActivityObject where
+        parseJSON
+          = withObject "ActivityObject"
+              (\ o ->
+                 ActivityObject <$>
+                   (o .:? "plusoners") <*>
+                     (o .:? "attachments" .!= mempty)
+                     <*> (o .:? "objectType")
+                     <*> (o .:? "originalContent")
+                     <*> (o .:? "url")
+                     <*> (o .:? "actor")
+                     <*> (o .:? "content")
+                     <*> (o .:? "replies")
+                     <*> (o .:? "id")
+                     <*> (o .:? "statusForViewer")
+                     <*> (o .:? "resharers"))
+
+instance ToJSON ActivityObject where
+        toJSON ActivityObject{..}
+          = object
+              (catMaybes
+                 [("plusoners" .=) <$> _aoPlusoners,
+                  ("attachments" .=) <$> _aoAttachments,
+                  ("objectType" .=) <$> _aoObjectType,
+                  ("originalContent" .=) <$> _aoOriginalContent,
+                  ("url" .=) <$> _aoUrl, ("actor" .=) <$> _aoActor,
+                  ("content" .=) <$> _aoContent,
+                  ("replies" .=) <$> _aoReplies, ("id" .=) <$> _aoId,
+                  ("statusForViewer" .=) <$> _aoStatusForViewer,
+                  ("resharers" .=) <$> _aoResharers])
+
 -- | People who +1\'d this activity.
 --
 -- /See:/ 'activityPlusonersObject' smart constructor.
@@ -1092,6 +1432,20 @@ apoSelfLink :: Lens' ActivityPlusonersObject (Maybe Text)
 apoSelfLink
   = lens _apoSelfLink (\ s a -> s{_apoSelfLink = a})
 
+instance FromJSON ActivityPlusonersObject where
+        parseJSON
+          = withObject "ActivityPlusonersObject"
+              (\ o ->
+                 ActivityPlusonersObject <$>
+                   (o .:? "totalItems") <*> (o .:? "selfLink"))
+
+instance ToJSON ActivityPlusonersObject where
+        toJSON ActivityPlusonersObject{..}
+          = object
+              (catMaybes
+                 [("totalItems" .=) <$> _apoTotalItems,
+                  ("selfLink" .=) <$> _apoSelfLink])
+
 -- | The service provider that initially published this activity.
 --
 -- /See:/ 'activityProvider' smart constructor.
@@ -1114,6 +1468,15 @@ activityProvider =
 -- | Name of the service provider.
 apTitle :: Lens' ActivityProvider (Maybe Text)
 apTitle = lens _apTitle (\ s a -> s{_apTitle = a})
+
+instance FromJSON ActivityProvider where
+        parseJSON
+          = withObject "ActivityProvider"
+              (\ o -> ActivityProvider <$> (o .:? "title"))
+
+instance ToJSON ActivityProvider where
+        toJSON ActivityProvider{..}
+          = object (catMaybes [("title" .=) <$> _apTitle])
 
 -- | Comments in reply to this activity.
 --
@@ -1149,6 +1512,20 @@ aroSelfLink :: Lens' ActivityRepliesObject (Maybe Text)
 aroSelfLink
   = lens _aroSelfLink (\ s a -> s{_aroSelfLink = a})
 
+instance FromJSON ActivityRepliesObject where
+        parseJSON
+          = withObject "ActivityRepliesObject"
+              (\ o ->
+                 ActivityRepliesObject <$>
+                   (o .:? "totalItems") <*> (o .:? "selfLink"))
+
+instance ToJSON ActivityRepliesObject where
+        toJSON ActivityRepliesObject{..}
+          = object
+              (catMaybes
+                 [("totalItems" .=) <$> _aroTotalItems,
+                  ("selfLink" .=) <$> _aroSelfLink])
+
 -- | People who reshared this activity.
 --
 -- /See:/ 'activityResharersObject' smart constructor.
@@ -1181,6 +1558,20 @@ aTotalItems
 aSelfLink :: Lens' ActivityResharersObject (Maybe Text)
 aSelfLink
   = lens _aSelfLink (\ s a -> s{_aSelfLink = a})
+
+instance FromJSON ActivityResharersObject where
+        parseJSON
+          = withObject "ActivityResharersObject"
+              (\ o ->
+                 ActivityResharersObject <$>
+                   (o .:? "totalItems") <*> (o .:? "selfLink"))
+
+instance ToJSON ActivityResharersObject where
+        toJSON ActivityResharersObject{..}
+          = object
+              (catMaybes
+                 [("totalItems" .=) <$> _aTotalItems,
+                  ("selfLink" .=) <$> _aSelfLink])
 
 -- | Status of the activity as seen by the viewer.
 --
@@ -1247,6 +1638,26 @@ asfvoCanPlusone
   = lens _asfvoCanPlusone
       (\ s a -> s{_asfvoCanPlusone = a})
 
+instance FromJSON ActivityStatusForViewerObject where
+        parseJSON
+          = withObject "ActivityStatusForViewerObject"
+              (\ o ->
+                 ActivityStatusForViewerObject <$>
+                   (o .:? "canComment") <*> (o .:? "resharingDisabled")
+                     <*> (o .:? "canUpdate")
+                     <*> (o .:? "isPlusOned")
+                     <*> (o .:? "canPlusone"))
+
+instance ToJSON ActivityStatusForViewerObject where
+        toJSON ActivityStatusForViewerObject{..}
+          = object
+              (catMaybes
+                 [("canComment" .=) <$> _asfvoCanComment,
+                  ("resharingDisabled" .=) <$> _asfvoResharingDisabled,
+                  ("canUpdate" .=) <$> _asfvoCanUpdate,
+                  ("isPlusOned" .=) <$> _asfvoIsPlusOned,
+                  ("canPlusone" .=) <$> _asfvoCanPlusone])
+
 -- | Verification status of actor.
 --
 -- /See:/ 'activityVerificationActor' smart constructor.
@@ -1272,6 +1683,19 @@ avaAdHocVerified
   = lens _avaAdHocVerified
       (\ s a -> s{_avaAdHocVerified = a})
 
+instance FromJSON ActivityVerificationActor where
+        parseJSON
+          = withObject "ActivityVerificationActor"
+              (\ o ->
+                 ActivityVerificationActor <$>
+                   (o .:? "adHocVerified"))
+
+instance ToJSON ActivityVerificationActor where
+        toJSON ActivityVerificationActor{..}
+          = object
+              (catMaybes
+                 [("adHocVerified" .=) <$> _avaAdHocVerified])
+
 -- | Verification status of actor.
 --
 -- /See:/ 'activityVerificationActorObject' smart constructor.
@@ -1296,6 +1720,20 @@ avaoAdHocVerified :: Lens' ActivityVerificationActorObject (Maybe Text)
 avaoAdHocVerified
   = lens _avaoAdHocVerified
       (\ s a -> s{_avaoAdHocVerified = a})
+
+instance FromJSON ActivityVerificationActorObject
+         where
+        parseJSON
+          = withObject "ActivityVerificationActorObject"
+              (\ o ->
+                 ActivityVerificationActorObject <$>
+                   (o .:? "adHocVerified"))
+
+instance ToJSON ActivityVerificationActorObject where
+        toJSON ActivityVerificationActorObject{..}
+          = object
+              (catMaybes
+                 [("adHocVerified" .=) <$> _avaoAdHocVerified])
 
 --
 -- /See:/ 'audience' smart constructor.
@@ -1358,6 +1796,25 @@ aaMemberCount :: Lens' Audience (Maybe Word32)
 aaMemberCount
   = lens _aaMemberCount
       (\ s a -> s{_aaMemberCount = a})
+
+instance FromJSON Audience where
+        parseJSON
+          = withObject "Audience"
+              (\ o ->
+                 Audience <$>
+                   (o .:? "etag") <*> (o .:? "kind" .!= "plus#audience")
+                     <*> (o .:? "visibility")
+                     <*> (o .:? "item")
+                     <*> (o .:? "memberCount"))
+
+instance ToJSON Audience where
+        toJSON Audience{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _aaEtag, Just ("kind" .= _aaKind),
+                  ("visibility" .=) <$> _aaVisibility,
+                  ("item" .=) <$> _aaItem,
+                  ("memberCount" .=) <$> _aaMemberCount])
 
 --
 -- /See:/ 'audiencesFeed' smart constructor.
@@ -1423,6 +1880,26 @@ audItems
   = lens _audItems (\ s a -> s{_audItems = a}) .
       _Default
       . _Coerce
+
+instance FromJSON AudiencesFeed where
+        parseJSON
+          = withObject "AudiencesFeed"
+              (\ o ->
+                 AudiencesFeed <$>
+                   (o .:? "totalItems") <*> (o .:? "etag") <*>
+                     (o .:? "nextPageToken")
+                     <*> (o .:? "kind" .!= "plus#audiencesFeed")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON AudiencesFeed where
+        toJSON AudiencesFeed{..}
+          = object
+              (catMaybes
+                 [("totalItems" .=) <$> _audTotalItems,
+                  ("etag" .=) <$> _audEtag,
+                  ("nextPageToken" .=) <$> _audNextPageToken,
+                  Just ("kind" .= _audKind),
+                  ("items" .=) <$> _audItems])
 
 --
 -- /See:/ 'circle' smart constructor.
@@ -1496,6 +1973,29 @@ cId = lens _cId (\ s a -> s{_cId = a})
 cDescription :: Lens' Circle (Maybe Text)
 cDescription
   = lens _cDescription (\ s a -> s{_cDescription = a})
+
+instance FromJSON Circle where
+        parseJSON
+          = withObject "Circle"
+              (\ o ->
+                 Circle <$>
+                   (o .:? "etag") <*> (o .:? "kind" .!= "plus#circle")
+                     <*> (o .:? "people")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "displayName")
+                     <*> (o .:? "id")
+                     <*> (o .:? "description"))
+
+instance ToJSON Circle where
+        toJSON Circle{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _cEtag, Just ("kind" .= _cKind),
+                  ("people" .=) <$> _cPeople,
+                  ("selfLink" .=) <$> _cSelfLink,
+                  ("displayName" .=) <$> _cDisplayName,
+                  ("id" .=) <$> _cId,
+                  ("description" .=) <$> _cDescription])
 
 --
 -- /See:/ 'circleFeed' smart constructor.
@@ -1588,6 +2088,32 @@ cirSelfLink
 cirTitle :: Lens' CircleFeed (Maybe Text)
 cirTitle = lens _cirTitle (\ s a -> s{_cirTitle = a})
 
+instance FromJSON CircleFeed where
+        parseJSON
+          = withObject "CircleFeed"
+              (\ o ->
+                 CircleFeed <$>
+                   (o .:? "totalItems") <*> (o .:? "etag") <*>
+                     (o .:? "nextPageToken")
+                     <*> (o .:? "nextLink")
+                     <*> (o .:? "kind" .!= "plus#circleFeed")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "title"))
+
+instance ToJSON CircleFeed where
+        toJSON CircleFeed{..}
+          = object
+              (catMaybes
+                 [("totalItems" .=) <$> _cirTotalItems,
+                  ("etag" .=) <$> _cirEtag,
+                  ("nextPageToken" .=) <$> _cirNextPageToken,
+                  ("nextLink" .=) <$> _cirNextLink,
+                  Just ("kind" .= _cirKind),
+                  ("items" .=) <$> _cirItems,
+                  ("selfLink" .=) <$> _cirSelfLink,
+                  ("title" .=) <$> _cirTitle])
+
 -- | The people in this circle.
 --
 -- /See:/ 'circlePeople' smart constructor.
@@ -1611,6 +2137,16 @@ circlePeople =
 cpTotalItems :: Lens' CirclePeople (Maybe Word32)
 cpTotalItems
   = lens _cpTotalItems (\ s a -> s{_cpTotalItems = a})
+
+instance FromJSON CirclePeople where
+        parseJSON
+          = withObject "CirclePeople"
+              (\ o -> CirclePeople <$> (o .:? "totalItems"))
+
+instance ToJSON CirclePeople where
+        toJSON CirclePeople{..}
+          = object
+              (catMaybes [("totalItems" .=) <$> _cpTotalItems])
 
 --
 -- /See:/ 'comment' smart constructor.
@@ -1725,6 +2261,37 @@ comInReplyTo
       . _Default
       . _Coerce
 
+instance FromJSON Comment where
+        parseJSON
+          = withObject "Comment"
+              (\ o ->
+                 Comment <$>
+                   (o .:? "etag") <*> (o .:? "plusoners") <*>
+                     (o .:? "kind" .!= "plus#comment")
+                     <*> (o .:? "published")
+                     <*> (o .:? "actor")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "object")
+                     <*> (o .:? "id")
+                     <*> (o .:? "updated")
+                     <*> (o .:? "verb" .!= "post")
+                     <*> (o .:? "inReplyTo" .!= mempty))
+
+instance ToJSON Comment where
+        toJSON Comment{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _comEtag,
+                  ("plusoners" .=) <$> _comPlusoners,
+                  Just ("kind" .= _comKind),
+                  ("published" .=) <$> _comPublished,
+                  ("actor" .=) <$> _comActor,
+                  ("selfLink" .=) <$> _comSelfLink,
+                  ("object" .=) <$> _comObject, ("id" .=) <$> _comId,
+                  ("updated" .=) <$> _comUpdated,
+                  Just ("verb" .= _comVerb),
+                  ("inReplyTo" .=) <$> _comInReplyTo])
+
 -- | The person who posted this comment.
 --
 -- /See:/ 'commentActor' smart constructor.
@@ -1783,6 +2350,25 @@ caVerification :: Lens' CommentActor (Maybe CommentVerificationActor)
 caVerification
   = lens _caVerification
       (\ s a -> s{_caVerification = a})
+
+instance FromJSON CommentActor where
+        parseJSON
+          = withObject "CommentActor"
+              (\ o ->
+                 CommentActor <$>
+                   (o .:? "image") <*> (o .:? "url") <*>
+                     (o .:? "displayName")
+                     <*> (o .:? "id")
+                     <*> (o .:? "verification"))
+
+instance ToJSON CommentActor where
+        toJSON CommentActor{..}
+          = object
+              (catMaybes
+                 [("image" .=) <$> _caImage, ("url" .=) <$> _caUrl,
+                  ("displayName" .=) <$> _caDisplayName,
+                  ("id" .=) <$> _caId,
+                  ("verification" .=) <$> _caVerification])
 
 --
 -- /See:/ 'commentFeed' smart constructor.
@@ -1872,6 +2458,30 @@ cfUpdated
 cfTitle :: Lens' CommentFeed (Maybe Text)
 cfTitle = lens _cfTitle (\ s a -> s{_cfTitle = a})
 
+instance FromJSON CommentFeed where
+        parseJSON
+          = withObject "CommentFeed"
+              (\ o ->
+                 CommentFeed <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "nextLink")
+                     <*> (o .:? "kind" .!= "plus#commentFeed")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "id")
+                     <*> (o .:? "updated")
+                     <*> (o .:? "title"))
+
+instance ToJSON CommentFeed where
+        toJSON CommentFeed{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _cfEtag,
+                  ("nextPageToken" .=) <$> _cfNextPageToken,
+                  ("nextLink" .=) <$> _cfNextLink,
+                  Just ("kind" .= _cfKind), ("items" .=) <$> _cfItems,
+                  ("id" .=) <$> _cfId, ("updated" .=) <$> _cfUpdated,
+                  ("title" .=) <$> _cfTitle])
+
 -- | The image representation of this actor.
 --
 -- /See:/ 'commentImageActor' smart constructor.
@@ -1896,6 +2506,15 @@ commentImageActor =
 -- pixels of each side.
 ciaUrl :: Lens' CommentImageActor (Maybe Text)
 ciaUrl = lens _ciaUrl (\ s a -> s{_ciaUrl = a})
+
+instance FromJSON CommentImageActor where
+        parseJSON
+          = withObject "CommentImageActor"
+              (\ o -> CommentImageActor <$> (o .:? "url"))
+
+instance ToJSON CommentImageActor where
+        toJSON CommentImageActor{..}
+          = object (catMaybes [("url" .=) <$> _ciaUrl])
 
 --
 -- /See:/ 'commentItemInReplyTo' smart constructor.
@@ -1926,6 +2545,19 @@ ciirtUrl = lens _ciirtUrl (\ s a -> s{_ciirtUrl = a})
 -- | The ID of the activity.
 ciirtId :: Lens' CommentItemInReplyTo (Maybe Text)
 ciirtId = lens _ciirtId (\ s a -> s{_ciirtId = a})
+
+instance FromJSON CommentItemInReplyTo where
+        parseJSON
+          = withObject "CommentItemInReplyTo"
+              (\ o ->
+                 CommentItemInReplyTo <$>
+                   (o .:? "url") <*> (o .:? "id"))
+
+instance ToJSON CommentItemInReplyTo where
+        toJSON CommentItemInReplyTo{..}
+          = object
+              (catMaybes
+                 [("url" .=) <$> _ciirtUrl, ("id" .=) <$> _ciirtId])
 
 -- | The object of this comment.
 --
@@ -1973,6 +2605,23 @@ coContent :: Lens' CommentObject (Maybe Text)
 coContent
   = lens _coContent (\ s a -> s{_coContent = a})
 
+instance FromJSON CommentObject where
+        parseJSON
+          = withObject "CommentObject"
+              (\ o ->
+                 CommentObject <$>
+                   (o .:? "objectType" .!= "comment") <*>
+                     (o .:? "originalContent")
+                     <*> (o .:? "content"))
+
+instance ToJSON CommentObject where
+        toJSON CommentObject{..}
+          = object
+              (catMaybes
+                 [Just ("objectType" .= _coObjectType),
+                  ("originalContent" .=) <$> _coOriginalContent,
+                  ("content" .=) <$> _coContent])
+
 -- | People who +1\'d this comment.
 --
 -- /See:/ 'commentPlusoners' smart constructor.
@@ -1996,6 +2645,16 @@ commentPlusoners =
 cTotalItems :: Lens' CommentPlusoners (Maybe Word32)
 cTotalItems
   = lens _cTotalItems (\ s a -> s{_cTotalItems = a})
+
+instance FromJSON CommentPlusoners where
+        parseJSON
+          = withObject "CommentPlusoners"
+              (\ o -> CommentPlusoners <$> (o .:? "totalItems"))
+
+instance ToJSON CommentPlusoners where
+        toJSON CommentPlusoners{..}
+          = object
+              (catMaybes [("totalItems" .=) <$> _cTotalItems])
 
 -- | Verification status of actor.
 --
@@ -2021,6 +2680,18 @@ cvaAdHocVerified :: Lens' CommentVerificationActor (Maybe Text)
 cvaAdHocVerified
   = lens _cvaAdHocVerified
       (\ s a -> s{_cvaAdHocVerified = a})
+
+instance FromJSON CommentVerificationActor where
+        parseJSON
+          = withObject "CommentVerificationActor"
+              (\ o ->
+                 CommentVerificationActor <$> (o .:? "adHocVerified"))
+
+instance ToJSON CommentVerificationActor where
+        toJSON CommentVerificationActor{..}
+          = object
+              (catMaybes
+                 [("adHocVerified" .=) <$> _cvaAdHocVerified])
 
 --
 -- /See:/ 'media' smart constructor.
@@ -2202,6 +2873,48 @@ mMediaCreatedTime
   = lens _mMediaCreatedTime
       (\ s a -> s{_mMediaCreatedTime = a})
 
+instance FromJSON Media where
+        parseJSON
+          = withObject "Media"
+              (\ o ->
+                 Media <$>
+                   (o .:? "sizeBytes") <*> (o .:? "summary") <*>
+                     (o .:? "etag")
+                     <*> (o .:? "height")
+                     <*> (o .:? "videoDuration")
+                     <*> (o .:? "videoStatus")
+                     <*> (o .:? "kind" .!= "plus#media")
+                     <*> (o .:? "published")
+                     <*> (o .:? "url")
+                     <*> (o .:? "width")
+                     <*> (o .:? "mediaUrl")
+                     <*> (o .:? "streams" .!= mempty)
+                     <*> (o .:? "exif")
+                     <*> (o .:? "displayName")
+                     <*> (o .:? "author")
+                     <*> (o .:? "id")
+                     <*> (o .:? "updated")
+                     <*> (o .:? "mediaCreatedTime"))
+
+instance ToJSON Media where
+        toJSON Media{..}
+          = object
+              (catMaybes
+                 [("sizeBytes" .=) <$> _mSizeBytes,
+                  ("summary" .=) <$> _mSummary, ("etag" .=) <$> _mEtag,
+                  ("height" .=) <$> _mHeight,
+                  ("videoDuration" .=) <$> _mVideoDuration,
+                  ("videoStatus" .=) <$> _mVideoStatus,
+                  Just ("kind" .= _mKind),
+                  ("published" .=) <$> _mPublished,
+                  ("url" .=) <$> _mUrl, ("width" .=) <$> _mWidth,
+                  ("mediaUrl" .=) <$> _mMediaUrl,
+                  ("streams" .=) <$> _mStreams, ("exif" .=) <$> _mExif,
+                  ("displayName" .=) <$> _mDisplayName,
+                  ("author" .=) <$> _mAuthor, ("id" .=) <$> _mId,
+                  ("updated" .=) <$> _mUpdated,
+                  ("mediaCreatedTime" .=) <$> _mMediaCreatedTime])
+
 -- | The person who uploaded this media.
 --
 -- /See:/ 'mediaAuthor' smart constructor.
@@ -2251,6 +2964,23 @@ maDisplayName
 maId :: Lens' MediaAuthor (Maybe Text)
 maId = lens _maId (\ s a -> s{_maId = a})
 
+instance FromJSON MediaAuthor where
+        parseJSON
+          = withObject "MediaAuthor"
+              (\ o ->
+                 MediaAuthor <$>
+                   (o .:? "image") <*> (o .:? "url") <*>
+                     (o .:? "displayName")
+                     <*> (o .:? "id"))
+
+instance ToJSON MediaAuthor where
+        toJSON MediaAuthor{..}
+          = object
+              (catMaybes
+                 [("image" .=) <$> _maImage, ("url" .=) <$> _maUrl,
+                  ("displayName" .=) <$> _maDisplayName,
+                  ("id" .=) <$> _maId])
+
 -- | Exif information of the media item.
 --
 -- /See:/ 'mediaExif' smart constructor.
@@ -2273,6 +3003,15 @@ mediaExif =
 -- | The time the media was captured. Formatted as an RFC 3339 timestamp.
 meTime :: Lens' MediaExif (Maybe UTCTime)
 meTime = lens _meTime (\ s a -> s{_meTime = a})
+
+instance FromJSON MediaExif where
+        parseJSON
+          = withObject "MediaExif"
+              (\ o -> MediaExif <$> (o .:? "time"))
+
+instance ToJSON MediaExif where
+        toJSON MediaExif{..}
+          = object (catMaybes [("time" .=) <$> _meTime])
 
 -- | The author\'s Google profile image.
 --
@@ -2298,6 +3037,15 @@ mediaImageAuthor =
 -- pixels of each side.
 miaUrl :: Lens' MediaImageAuthor (Maybe Text)
 miaUrl = lens _miaUrl (\ s a -> s{_miaUrl = a})
+
+instance FromJSON MediaImageAuthor where
+        parseJSON
+          = withObject "MediaImageAuthor"
+              (\ o -> MediaImageAuthor <$> (o .:? "url"))
+
+instance ToJSON MediaImageAuthor where
+        toJSON MediaImageAuthor{..}
+          = object (catMaybes [("url" .=) <$> _miaUrl])
 
 --
 -- /See:/ 'peopleFeed' smart constructor.
@@ -2381,6 +3129,29 @@ pfSelfLink
 -- | The title of this collection of people.
 pfTitle :: Lens' PeopleFeed (Maybe Text)
 pfTitle = lens _pfTitle (\ s a -> s{_pfTitle = a})
+
+instance FromJSON PeopleFeed where
+        parseJSON
+          = withObject "PeopleFeed"
+              (\ o ->
+                 PeopleFeed <$>
+                   (o .:? "totalItems") <*> (o .:? "etag") <*>
+                     (o .:? "nextPageToken")
+                     <*> (o .:? "kind" .!= "plus#peopleFeed")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "title"))
+
+instance ToJSON PeopleFeed where
+        toJSON PeopleFeed{..}
+          = object
+              (catMaybes
+                 [("totalItems" .=) <$> _pfTotalItems,
+                  ("etag" .=) <$> _pfEtag,
+                  ("nextPageToken" .=) <$> _pfNextPageToken,
+                  Just ("kind" .= _pfKind), ("items" .=) <$> _pfItems,
+                  ("selfLink" .=) <$> _pfSelfLink,
+                  ("title" .=) <$> _pfTitle])
 
 --
 -- /See:/ 'person' smart constructor.
@@ -2679,6 +3450,70 @@ perCircledByCount
   = lens _perCircledByCount
       (\ s a -> s{_perCircledByCount = a})
 
+instance FromJSON Person where
+        parseJSON
+          = withObject "Person"
+              (\ o ->
+                 Person <$>
+                   (o .:? "currentLocation") <*> (o .:? "etag") <*>
+                     (o .:? "image")
+                     <*> (o .:? "braggingRights")
+                     <*> (o .:? "placesLived" .!= mempty)
+                     <*> (o .:? "plusOneCount")
+                     <*> (o .:? "objectType")
+                     <*> (o .:? "cover")
+                     <*> (o .:? "kind" .!= "plus#person")
+                     <*> (o .:? "relationshipStatus")
+                     <*> (o .:? "urls" .!= mempty)
+                     <*> (o .:? "domain")
+                     <*> (o .:? "url")
+                     <*> (o .:? "verified")
+                     <*> (o .:? "birthday")
+                     <*> (o .:? "isPlusUser")
+                     <*> (o .:? "tagline")
+                     <*> (o .:? "gender")
+                     <*> (o .:? "name")
+                     <*> (o .:? "emails" .!= mempty)
+                     <*> (o .:? "occupation")
+                     <*> (o .:? "skills")
+                     <*> (o .:? "aboutMe")
+                     <*> (o .:? "displayName")
+                     <*> (o .:? "id")
+                     <*> (o .:? "nickname")
+                     <*> (o .:? "organizations" .!= mempty)
+                     <*> (o .:? "circledByCount"))
+
+instance ToJSON Person where
+        toJSON Person{..}
+          = object
+              (catMaybes
+                 [("currentLocation" .=) <$> _perCurrentLocation,
+                  ("etag" .=) <$> _perEtag, ("image" .=) <$> _perImage,
+                  ("braggingRights" .=) <$> _perBraggingRights,
+                  ("placesLived" .=) <$> _perPlacesLived,
+                  ("plusOneCount" .=) <$> _perPlusOneCount,
+                  ("objectType" .=) <$> _perObjectType,
+                  ("cover" .=) <$> _perCover,
+                  Just ("kind" .= _perKind),
+                  ("relationshipStatus" .=) <$> _perRelationshipStatus,
+                  ("urls" .=) <$> _perUrls,
+                  ("domain" .=) <$> _perDomain, ("url" .=) <$> _perUrl,
+                  ("verified" .=) <$> _perVerified,
+                  ("birthday" .=) <$> _perBirthday,
+                  ("isPlusUser" .=) <$> _perIsPlusUser,
+                  ("tagline" .=) <$> _perTagline,
+                  ("gender" .=) <$> _perGender,
+                  ("name" .=) <$> _perName,
+                  ("emails" .=) <$> _perEmails,
+                  ("occupation" .=) <$> _perOccupation,
+                  ("skills" .=) <$> _perSkills,
+                  ("aboutMe" .=) <$> _perAboutMe,
+                  ("displayName" .=) <$> _perDisplayName,
+                  ("id" .=) <$> _perId,
+                  ("nickname" .=) <$> _perNickname,
+                  ("organizations" .=) <$> _perOrganizations,
+                  ("circledByCount" .=) <$> _perCircledByCount])
+
 -- | The cover photo content.
 --
 -- /See:/ 'personCover' smart constructor.
@@ -2721,6 +3556,22 @@ pcCoverPhoto :: Lens' PersonCover (Maybe PersonCoverPhotoCover)
 pcCoverPhoto
   = lens _pcCoverPhoto (\ s a -> s{_pcCoverPhoto = a})
 
+instance FromJSON PersonCover where
+        parseJSON
+          = withObject "PersonCover"
+              (\ o ->
+                 PersonCover <$>
+                   (o .:? "layout") <*> (o .:? "coverInfo") <*>
+                     (o .:? "coverPhoto"))
+
+instance ToJSON PersonCover where
+        toJSON PersonCover{..}
+          = object
+              (catMaybes
+                 [("layout" .=) <$> _pcLayout,
+                  ("coverInfo" .=) <$> _pcCoverInfo,
+                  ("coverPhoto" .=) <$> _pcCoverPhoto])
+
 -- | Extra information about the cover photo.
 --
 -- /See:/ 'personCoverInfoCover' smart constructor.
@@ -2757,6 +3608,21 @@ pcicLeftImageOffset :: Lens' PersonCoverInfoCover (Maybe Int32)
 pcicLeftImageOffset
   = lens _pcicLeftImageOffset
       (\ s a -> s{_pcicLeftImageOffset = a})
+
+instance FromJSON PersonCoverInfoCover where
+        parseJSON
+          = withObject "PersonCoverInfoCover"
+              (\ o ->
+                 PersonCoverInfoCover <$>
+                   (o .:? "topImageOffset") <*>
+                     (o .:? "leftImageOffset"))
+
+instance ToJSON PersonCoverInfoCover where
+        toJSON PersonCoverInfoCover{..}
+          = object
+              (catMaybes
+                 [("topImageOffset" .=) <$> _pcicTopImageOffset,
+                  ("leftImageOffset" .=) <$> _pcicLeftImageOffset])
 
 -- | The person\'s primary cover image.
 --
@@ -2799,6 +3665,22 @@ pcpcWidth :: Lens' PersonCoverPhotoCover (Maybe Int32)
 pcpcWidth
   = lens _pcpcWidth (\ s a -> s{_pcpcWidth = a})
 
+instance FromJSON PersonCoverPhotoCover where
+        parseJSON
+          = withObject "PersonCoverPhotoCover"
+              (\ o ->
+                 PersonCoverPhotoCover <$>
+                   (o .:? "height") <*> (o .:? "url") <*>
+                     (o .:? "width"))
+
+instance ToJSON PersonCoverPhotoCover where
+        toJSON PersonCoverPhotoCover{..}
+          = object
+              (catMaybes
+                 [("height" .=) <$> _pcpcHeight,
+                  ("url" .=) <$> _pcpcUrl,
+                  ("width" .=) <$> _pcpcWidth])
+
 -- | The representation of the person\'s profile photo.
 --
 -- /See:/ 'personImage' smart constructor.
@@ -2833,6 +3715,20 @@ piIsDefault :: Lens' PersonImage (Maybe Bool)
 piIsDefault
   = lens _piIsDefault (\ s a -> s{_piIsDefault = a})
 
+instance FromJSON PersonImage where
+        parseJSON
+          = withObject "PersonImage"
+              (\ o ->
+                 PersonImage <$>
+                   (o .:? "url") <*> (o .:? "isDefault"))
+
+instance ToJSON PersonImage where
+        toJSON PersonImage{..}
+          = object
+              (catMaybes
+                 [("url" .=) <$> _piUrl,
+                  ("isDefault" .=) <$> _piIsDefault])
+
 --
 -- /See:/ 'personItemEmails' smart constructor.
 data PersonItemEmails = PersonItemEmails
@@ -2865,6 +3761,20 @@ pieValue = lens _pieValue (\ s a -> s{_pieValue = a})
 -- \"other\" - Other.
 pieType :: Lens' PersonItemEmails (Maybe Text)
 pieType = lens _pieType (\ s a -> s{_pieType = a})
+
+instance FromJSON PersonItemEmails where
+        parseJSON
+          = withObject "PersonItemEmails"
+              (\ o ->
+                 PersonItemEmails <$>
+                   (o .:? "value") <*> (o .:? "type"))
+
+instance ToJSON PersonItemEmails where
+        toJSON PersonItemEmails{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _pieValue,
+                  ("type" .=) <$> _pieType])
 
 --
 -- /See:/ 'personItemOrganizations' smart constructor.
@@ -2963,6 +3873,33 @@ pioDescription
   = lens _pioDescription
       (\ s a -> s{_pioDescription = a})
 
+instance FromJSON PersonItemOrganizations where
+        parseJSON
+          = withObject "PersonItemOrganizations"
+              (\ o ->
+                 PersonItemOrganizations <$>
+                   (o .:? "department") <*> (o .:? "location") <*>
+                     (o .:? "endDate")
+                     <*> (o .:? "primary")
+                     <*> (o .:? "startDate")
+                     <*> (o .:? "name")
+                     <*> (o .:? "title")
+                     <*> (o .:? "type")
+                     <*> (o .:? "description"))
+
+instance ToJSON PersonItemOrganizations where
+        toJSON PersonItemOrganizations{..}
+          = object
+              (catMaybes
+                 [("department" .=) <$> _pioDepartment,
+                  ("location" .=) <$> _pioLocation,
+                  ("endDate" .=) <$> _pioEndDate,
+                  ("primary" .=) <$> _pioPrimary,
+                  ("startDate" .=) <$> _pioStartDate,
+                  ("name" .=) <$> _pioName, ("title" .=) <$> _pioTitle,
+                  ("type" .=) <$> _pioType,
+                  ("description" .=) <$> _pioDescription])
+
 --
 -- /See:/ 'personItemPlacesLived' smart constructor.
 data PersonItemPlacesLived = PersonItemPlacesLived
@@ -2996,6 +3933,20 @@ piplValue
 piplPrimary :: Lens' PersonItemPlacesLived (Maybe Bool)
 piplPrimary
   = lens _piplPrimary (\ s a -> s{_piplPrimary = a})
+
+instance FromJSON PersonItemPlacesLived where
+        parseJSON
+          = withObject "PersonItemPlacesLived"
+              (\ o ->
+                 PersonItemPlacesLived <$>
+                   (o .:? "value") <*> (o .:? "primary"))
+
+instance ToJSON PersonItemPlacesLived where
+        toJSON PersonItemPlacesLived{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _piplValue,
+                  ("primary" .=) <$> _piplPrimary])
 
 --
 -- /See:/ 'personItemUrls' smart constructor.
@@ -3038,6 +3989,22 @@ piuType = lens _piuType (\ s a -> s{_piuType = a})
 -- | The label of the URL.
 piuLabel :: Lens' PersonItemUrls (Maybe Text)
 piuLabel = lens _piuLabel (\ s a -> s{_piuLabel = a})
+
+instance FromJSON PersonItemUrls where
+        parseJSON
+          = withObject "PersonItemUrls"
+              (\ o ->
+                 PersonItemUrls <$>
+                   (o .:? "value") <*> (o .:? "type") <*>
+                     (o .:? "label"))
+
+instance ToJSON PersonItemUrls where
+        toJSON PersonItemUrls{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _piuValue,
+                  ("type" .=) <$> _piuType,
+                  ("label" .=) <$> _piuLabel])
 
 -- | An object representation of the individual components of a person\'s
 -- name.
@@ -3111,6 +4078,28 @@ pnHonorificSuffix
   = lens _pnHonorificSuffix
       (\ s a -> s{_pnHonorificSuffix = a})
 
+instance FromJSON PersonName where
+        parseJSON
+          = withObject "PersonName"
+              (\ o ->
+                 PersonName <$>
+                   (o .:? "givenName") <*> (o .:? "middleName") <*>
+                     (o .:? "formatted")
+                     <*> (o .:? "honorificPrefix")
+                     <*> (o .:? "familyName")
+                     <*> (o .:? "honorificSuffix"))
+
+instance ToJSON PersonName where
+        toJSON PersonName{..}
+          = object
+              (catMaybes
+                 [("givenName" .=) <$> _pnGivenName,
+                  ("middleName" .=) <$> _pnMiddleName,
+                  ("formatted" .=) <$> _pnFormatted,
+                  ("honorificPrefix" .=) <$> _pnHonorificPrefix,
+                  ("familyName" .=) <$> _pnFamilyName,
+                  ("honorificSuffix" .=) <$> _pnHonorificSuffix])
+
 --
 -- /See:/ 'place' smart constructor.
 data Place = Place
@@ -3167,6 +4156,25 @@ pPosition :: Lens' Place (Maybe PlacePosition)
 pPosition
   = lens _pPosition (\ s a -> s{_pPosition = a})
 
+instance FromJSON Place where
+        parseJSON
+          = withObject "Place"
+              (\ o ->
+                 Place <$>
+                   (o .:? "kind" .!= "plus#place") <*> (o .:? "address")
+                     <*> (o .:? "displayName")
+                     <*> (o .:? "id")
+                     <*> (o .:? "position"))
+
+instance ToJSON Place where
+        toJSON Place{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _pKind),
+                  ("address" .=) <$> _pAddress,
+                  ("displayName" .=) <$> _pDisplayName,
+                  ("id" .=) <$> _pId, ("position" .=) <$> _pPosition])
+
 -- | The physical address of the place.
 --
 -- /See:/ 'placeAddress' smart constructor.
@@ -3190,6 +4198,16 @@ placeAddress =
 paFormatted :: Lens' PlaceAddress (Maybe Text)
 paFormatted
   = lens _paFormatted (\ s a -> s{_paFormatted = a})
+
+instance FromJSON PlaceAddress where
+        parseJSON
+          = withObject "PlaceAddress"
+              (\ o -> PlaceAddress <$> (o .:? "formatted"))
+
+instance ToJSON PlaceAddress where
+        toJSON PlaceAddress{..}
+          = object
+              (catMaybes [("formatted" .=) <$> _paFormatted])
 
 -- | The position of the place.
 --
@@ -3223,6 +4241,20 @@ ppLatitude
 ppLongitude :: Lens' PlacePosition (Maybe Double)
 ppLongitude
   = lens _ppLongitude (\ s a -> s{_ppLongitude = a})
+
+instance FromJSON PlacePosition where
+        parseJSON
+          = withObject "PlacePosition"
+              (\ o ->
+                 PlacePosition <$>
+                   (o .:? "latitude") <*> (o .:? "longitude"))
+
+instance ToJSON PlacePosition where
+        toJSON PlacePosition{..}
+          = object
+              (catMaybes
+                 [("latitude" .=) <$> _ppLatitude,
+                  ("longitude" .=) <$> _ppLongitude])
 
 --
 -- /See:/ 'plusDomainsAclentryResource' smart constructor.
@@ -3271,6 +4303,21 @@ pdarId = lens _pdarId (\ s a -> s{_pdarId = a})
 pdarType :: Lens' PlusDomainsAclentryResource (Maybe Text)
 pdarType = lens _pdarType (\ s a -> s{_pdarType = a})
 
+instance FromJSON PlusDomainsAclentryResource where
+        parseJSON
+          = withObject "PlusDomainsAclentryResource"
+              (\ o ->
+                 PlusDomainsAclentryResource <$>
+                   (o .:? "displayName") <*> (o .:? "id") <*>
+                     (o .:? "type"))
+
+instance ToJSON PlusDomainsAclentryResource where
+        toJSON PlusDomainsAclentryResource{..}
+          = object
+              (catMaybes
+                 [("displayName" .=) <$> _pdarDisplayName,
+                  ("id" .=) <$> _pdarId, ("type" .=) <$> _pdarType])
+
 --
 -- /See:/ 'videostream' smart constructor.
 data Videostream = Videostream
@@ -3316,3 +4363,19 @@ vWidth = lens _vWidth (\ s a -> s{_vWidth = a})
 -- | MIME type of the video stream.
 vType :: Lens' Videostream (Maybe Text)
 vType = lens _vType (\ s a -> s{_vType = a})
+
+instance FromJSON Videostream where
+        parseJSON
+          = withObject "Videostream"
+              (\ o ->
+                 Videostream <$>
+                   (o .:? "height") <*> (o .:? "url") <*>
+                     (o .:? "width")
+                     <*> (o .:? "type"))
+
+instance ToJSON Videostream where
+        toJSON Videostream{..}
+          = object
+              (catMaybes
+                 [("height" .=) <$> _vHeight, ("url" .=) <$> _vUrl,
+                  ("width" .=) <$> _vWidth, ("type" .=) <$> _vType])

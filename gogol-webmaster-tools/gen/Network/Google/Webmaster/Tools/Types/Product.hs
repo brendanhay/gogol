@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -72,6 +73,25 @@ adrPosition :: Lens' ApiDataRow (Maybe Double)
 adrPosition
   = lens _adrPosition (\ s a -> s{_adrPosition = a})
 
+instance FromJSON ApiDataRow where
+        parseJSON
+          = withObject "ApiDataRow"
+              (\ o ->
+                 ApiDataRow <$>
+                   (o .:? "impressions") <*> (o .:? "keys" .!= mempty)
+                     <*> (o .:? "ctr")
+                     <*> (o .:? "clicks")
+                     <*> (o .:? "position"))
+
+instance ToJSON ApiDataRow where
+        toJSON ApiDataRow{..}
+          = object
+              (catMaybes
+                 [("impressions" .=) <$> _adrImpressions,
+                  ("keys" .=) <$> _adrKeys, ("ctr" .=) <$> _adrCtr,
+                  ("clicks" .=) <$> _adrClicks,
+                  ("position" .=) <$> _adrPosition])
+
 --
 -- /See:/ 'apiDimensionFilter' smart constructor.
 data ApiDimensionFilter = ApiDimensionFilter
@@ -111,6 +131,22 @@ adfExpression
   = lens _adfExpression
       (\ s a -> s{_adfExpression = a})
 
+instance FromJSON ApiDimensionFilter where
+        parseJSON
+          = withObject "ApiDimensionFilter"
+              (\ o ->
+                 ApiDimensionFilter <$>
+                   (o .:? "operator") <*> (o .:? "dimension") <*>
+                     (o .:? "expression"))
+
+instance ToJSON ApiDimensionFilter where
+        toJSON ApiDimensionFilter{..}
+          = object
+              (catMaybes
+                 [("operator" .=) <$> _adfOperator,
+                  ("dimension" .=) <$> _adfDimension,
+                  ("expression" .=) <$> _adfExpression])
+
 --
 -- /See:/ 'apiDimensionFilterGroup' smart constructor.
 data ApiDimensionFilterGroup = ApiDimensionFilterGroup
@@ -143,6 +179,20 @@ adfgGroupType :: Lens' ApiDimensionFilterGroup (Maybe Text)
 adfgGroupType
   = lens _adfgGroupType
       (\ s a -> s{_adfgGroupType = a})
+
+instance FromJSON ApiDimensionFilterGroup where
+        parseJSON
+          = withObject "ApiDimensionFilterGroup"
+              (\ o ->
+                 ApiDimensionFilterGroup <$>
+                   (o .:? "filters" .!= mempty) <*> (o .:? "groupType"))
+
+instance ToJSON ApiDimensionFilterGroup where
+        toJSON ApiDimensionFilterGroup{..}
+          = object
+              (catMaybes
+                 [("filters" .=) <$> _adfgFilters,
+                  ("groupType" .=) <$> _adfgGroupType])
 
 --
 -- /See:/ 'searchAnalyticsQueryRequest' smart constructor.
@@ -251,6 +301,31 @@ saqrDimensions
       . _Default
       . _Coerce
 
+instance FromJSON SearchAnalyticsQueryRequest where
+        parseJSON
+          = withObject "SearchAnalyticsQueryRequest"
+              (\ o ->
+                 SearchAnalyticsQueryRequest <$>
+                   (o .:? "aggregationType") <*> (o .:? "rowLimit") <*>
+                     (o .:? "endDate")
+                     <*> (o .:? "searchType")
+                     <*> (o .:? "dimensionFilterGroups" .!= mempty)
+                     <*> (o .:? "startDate")
+                     <*> (o .:? "dimensions" .!= mempty))
+
+instance ToJSON SearchAnalyticsQueryRequest where
+        toJSON SearchAnalyticsQueryRequest{..}
+          = object
+              (catMaybes
+                 [("aggregationType" .=) <$> _saqrAggregationType,
+                  ("rowLimit" .=) <$> _saqrRowLimit,
+                  ("endDate" .=) <$> _saqrEndDate,
+                  ("searchType" .=) <$> _saqrSearchType,
+                  ("dimensionFilterGroups" .=) <$>
+                    _saqrDimensionFilterGroups,
+                  ("startDate" .=) <$> _saqrStartDate,
+                  ("dimensions" .=) <$> _saqrDimensions])
+
 -- | A list of rows, one per result, grouped by key. Metrics in each row are
 -- aggregated for all data grouped by that key either by page or property,
 -- as specified by the aggregation type parameter.
@@ -290,6 +365,22 @@ saqrResponseAggregationType
   = lens _saqrResponseAggregationType
       (\ s a -> s{_saqrResponseAggregationType = a})
 
+instance FromJSON SearchAnalyticsQueryResponse where
+        parseJSON
+          = withObject "SearchAnalyticsQueryResponse"
+              (\ o ->
+                 SearchAnalyticsQueryResponse <$>
+                   (o .:? "rows" .!= mempty) <*>
+                     (o .:? "responseAggregationType"))
+
+instance ToJSON SearchAnalyticsQueryResponse where
+        toJSON SearchAnalyticsQueryResponse{..}
+          = object
+              (catMaybes
+                 [("rows" .=) <$> _saqrRows,
+                  ("responseAggregationType" .=) <$>
+                    _saqrResponseAggregationType])
+
 -- | List of sitemaps.
 --
 -- /See:/ 'sitemapsListResponse' smart constructor.
@@ -317,6 +408,17 @@ slrSitemap
       _Default
       . _Coerce
 
+instance FromJSON SitemapsListResponse where
+        parseJSON
+          = withObject "SitemapsListResponse"
+              (\ o ->
+                 SitemapsListResponse <$>
+                   (o .:? "sitemap" .!= mempty))
+
+instance ToJSON SitemapsListResponse where
+        toJSON SitemapsListResponse{..}
+          = object (catMaybes [("sitemap" .=) <$> _slrSitemap])
+
 -- | List of sites with access level information.
 --
 -- /See:/ 'sitesListResponse' smart constructor.
@@ -343,6 +445,17 @@ slrSiteEntry
   = lens _slrSiteEntry (\ s a -> s{_slrSiteEntry = a})
       . _Default
       . _Coerce
+
+instance FromJSON SitesListResponse where
+        parseJSON
+          = withObject "SitesListResponse"
+              (\ o ->
+                 SitesListResponse <$> (o .:? "siteEntry" .!= mempty))
+
+instance ToJSON SitesListResponse where
+        toJSON SitesListResponse{..}
+          = object
+              (catMaybes [("siteEntry" .=) <$> _slrSiteEntry])
 
 -- | An entry in a URL crawl errors time series.
 --
@@ -377,6 +490,20 @@ ucecTimestamp :: Lens' UrlCrawlErrorCount (Maybe UTCTime)
 ucecTimestamp
   = lens _ucecTimestamp
       (\ s a -> s{_ucecTimestamp = a})
+
+instance FromJSON UrlCrawlErrorCount where
+        parseJSON
+          = withObject "UrlCrawlErrorCount"
+              (\ o ->
+                 UrlCrawlErrorCount <$>
+                   (o .:? "count") <*> (o .:? "timestamp"))
+
+instance ToJSON UrlCrawlErrorCount where
+        toJSON UrlCrawlErrorCount{..}
+          = object
+              (catMaybes
+                 [("count" .=) <$> _ucecCount,
+                  ("timestamp" .=) <$> _ucecTimestamp])
 
 -- | Number of errors per day for a specific error type (defined by platform
 -- and category).
@@ -427,6 +554,22 @@ ucecptCategory
   = lens _ucecptCategory
       (\ s a -> s{_ucecptCategory = a})
 
+instance FromJSON UrlCrawlErrorCountsPerType where
+        parseJSON
+          = withObject "UrlCrawlErrorCountsPerType"
+              (\ o ->
+                 UrlCrawlErrorCountsPerType <$>
+                   (o .:? "platform") <*> (o .:? "entries" .!= mempty)
+                     <*> (o .:? "category"))
+
+instance ToJSON UrlCrawlErrorCountsPerType where
+        toJSON UrlCrawlErrorCountsPerType{..}
+          = object
+              (catMaybes
+                 [("platform" .=) <$> _ucecptPlatform,
+                  ("entries" .=) <$> _ucecptEntries,
+                  ("category" .=) <$> _ucecptCategory])
+
 -- | A time series of the number of URL crawl errors per error category and
 -- platform.
 --
@@ -455,6 +598,21 @@ ucecqrCountPerTypes
       (\ s a -> s{_ucecqrCountPerTypes = a})
       . _Default
       . _Coerce
+
+instance FromJSON UrlCrawlErrorsCountsQueryResponse
+         where
+        parseJSON
+          = withObject "UrlCrawlErrorsCountsQueryResponse"
+              (\ o ->
+                 UrlCrawlErrorsCountsQueryResponse <$>
+                   (o .:? "countPerTypes" .!= mempty))
+
+instance ToJSON UrlCrawlErrorsCountsQueryResponse
+         where
+        toJSON UrlCrawlErrorsCountsQueryResponse{..}
+          = object
+              (catMaybes
+                 [("countPerTypes" .=) <$> _ucecqrCountPerTypes])
 
 -- | Contains information about specific crawl errors.
 --
@@ -520,6 +678,26 @@ ucesFirstDetected
   = lens _ucesFirstDetected
       (\ s a -> s{_ucesFirstDetected = a})
 
+instance FromJSON UrlCrawlErrorsSample where
+        parseJSON
+          = withObject "UrlCrawlErrorsSample"
+              (\ o ->
+                 UrlCrawlErrorsSample <$>
+                   (o .:? "responseCode") <*> (o .:? "urlDetails") <*>
+                     (o .:? "last_crawled")
+                     <*> (o .:? "pageUrl")
+                     <*> (o .:? "first_detected"))
+
+instance ToJSON UrlCrawlErrorsSample where
+        toJSON UrlCrawlErrorsSample{..}
+          = object
+              (catMaybes
+                 [("responseCode" .=) <$> _ucesResponseCode,
+                  ("urlDetails" .=) <$> _ucesUrlDetails,
+                  ("last_crawled" .=) <$> _ucesLastCrawled,
+                  ("pageUrl" .=) <$> _ucesPageUrl,
+                  ("first_detected" .=) <$> _ucesFirstDetected])
+
 -- | List of crawl error samples.
 --
 -- /See:/ 'urlCrawlErrorsSamplesListResponse' smart constructor.
@@ -546,6 +724,22 @@ uceslrUrlCrawlErrorSample
       (\ s a -> s{_uceslrUrlCrawlErrorSample = a})
       . _Default
       . _Coerce
+
+instance FromJSON UrlCrawlErrorsSamplesListResponse
+         where
+        parseJSON
+          = withObject "UrlCrawlErrorsSamplesListResponse"
+              (\ o ->
+                 UrlCrawlErrorsSamplesListResponse <$>
+                   (o .:? "urlCrawlErrorSample" .!= mempty))
+
+instance ToJSON UrlCrawlErrorsSamplesListResponse
+         where
+        toJSON UrlCrawlErrorsSamplesListResponse{..}
+          = object
+              (catMaybes
+                 [("urlCrawlErrorSample" .=) <$>
+                    _uceslrUrlCrawlErrorSample])
 
 -- | Additional details about the URL, set only when calling get().
 --
@@ -586,6 +780,22 @@ usdContainingSitemaps
       . _Default
       . _Coerce
 
+instance FromJSON UrlSampleDetails where
+        parseJSON
+          = withObject "UrlSampleDetails"
+              (\ o ->
+                 UrlSampleDetails <$>
+                   (o .:? "linkedFromUrls" .!= mempty) <*>
+                     (o .:? "containingSitemaps" .!= mempty))
+
+instance ToJSON UrlSampleDetails where
+        toJSON UrlSampleDetails{..}
+          = object
+              (catMaybes
+                 [("linkedFromUrls" .=) <$> _usdLinkedFromUrls,
+                  ("containingSitemaps" .=) <$>
+                    _usdContainingSitemaps])
+
 -- | Contains permission level information about a Webmaster Tools site. For
 -- more information, see Permissions in Webmaster Tools.
 --
@@ -620,6 +830,20 @@ wsPermissionLevel
 wsSiteUrl :: Lens' WmxSite (Maybe Text)
 wsSiteUrl
   = lens _wsSiteUrl (\ s a -> s{_wsSiteUrl = a})
+
+instance FromJSON WmxSite where
+        parseJSON
+          = withObject "WmxSite"
+              (\ o ->
+                 WmxSite <$>
+                   (o .:? "permissionLevel") <*> (o .:? "siteUrl"))
+
+instance ToJSON WmxSite where
+        toJSON WmxSite{..}
+          = object
+              (catMaybes
+                 [("permissionLevel" .=) <$> _wsPermissionLevel,
+                  ("siteUrl" .=) <$> _wsSiteUrl])
 
 -- | Contains detailed information about a specific URL submitted as a
 -- sitemap.
@@ -724,6 +948,34 @@ wsType = lens _wsType (\ s a -> s{_wsType = a})
 wsErrors :: Lens' WmxSitemap (Maybe Int64)
 wsErrors = lens _wsErrors (\ s a -> s{_wsErrors = a})
 
+instance FromJSON WmxSitemap where
+        parseJSON
+          = withObject "WmxSitemap"
+              (\ o ->
+                 WmxSitemap <$>
+                   (o .:? "contents" .!= mempty) <*> (o .:? "path") <*>
+                     (o .:? "isSitemapsIndex")
+                     <*> (o .:? "lastSubmitted")
+                     <*> (o .:? "warnings")
+                     <*> (o .:? "lastDownloaded")
+                     <*> (o .:? "isPending")
+                     <*> (o .:? "type")
+                     <*> (o .:? "errors"))
+
+instance ToJSON WmxSitemap where
+        toJSON WmxSitemap{..}
+          = object
+              (catMaybes
+                 [("contents" .=) <$> _wsContents,
+                  ("path" .=) <$> _wsPath,
+                  ("isSitemapsIndex" .=) <$> _wsIsSitemapsIndex,
+                  ("lastSubmitted" .=) <$> _wsLastSubmitted,
+                  ("warnings" .=) <$> _wsWarnings,
+                  ("lastDownloaded" .=) <$> _wsLastDownloaded,
+                  ("isPending" .=) <$> _wsIsPending,
+                  ("type" .=) <$> _wsType,
+                  ("errors" .=) <$> _wsErrors])
+
 -- | Information about the various content types in the sitemap.
 --
 -- /See:/ 'wmxSitemapContent' smart constructor.
@@ -765,3 +1017,19 @@ wscType = lens _wscType (\ s a -> s{_wscType = a})
 wscSubmitted :: Lens' WmxSitemapContent (Maybe Int64)
 wscSubmitted
   = lens _wscSubmitted (\ s a -> s{_wscSubmitted = a})
+
+instance FromJSON WmxSitemapContent where
+        parseJSON
+          = withObject "WmxSitemapContent"
+              (\ o ->
+                 WmxSitemapContent <$>
+                   (o .:? "indexed") <*> (o .:? "type") <*>
+                     (o .:? "submitted"))
+
+instance ToJSON WmxSitemapContent where
+        toJSON WmxSitemapContent{..}
+          = object
+              (catMaybes
+                 [("indexed" .=) <$> _wscIndexed,
+                  ("type" .=) <$> _wscType,
+                  ("submitted" .=) <$> _wscSubmitted])

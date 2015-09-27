@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -82,6 +83,28 @@ arElectionAdministrationBody
 -- requested from the Request more link on the Quotas page.
 arId :: Lens' AdministrationRegion (Maybe Text)
 arId = lens _arId (\ s a -> s{_arId = a})
+
+instance FromJSON AdministrationRegion where
+        parseJSON
+          = withObject "AdministrationRegion"
+              (\ o ->
+                 AdministrationRegion <$>
+                   (o .:? "local_jurisdiction") <*>
+                     (o .:? "sources" .!= mempty)
+                     <*> (o .:? "name")
+                     <*> (o .:? "electionAdministrationBody")
+                     <*> (o .:? "id"))
+
+instance ToJSON AdministrationRegion where
+        toJSON AdministrationRegion{..}
+          = object
+              (catMaybes
+                 [("local_jurisdiction" .=) <$> _arLocalJurisdiction,
+                  ("sources" .=) <$> _arSources,
+                  ("name" .=) <$> _arName,
+                  ("electionAdministrationBody" .=) <$>
+                    _arElectionAdministrationBody,
+                  ("id" .=) <$> _arId])
 
 -- | Information about an election administrative body (e.g. County Board of
 -- Elections).
@@ -238,6 +261,48 @@ abElectionRegistrationUrl
   = lens _abElectionRegistrationUrl
       (\ s a -> s{_abElectionRegistrationUrl = a})
 
+instance FromJSON AdministrativeBody where
+        parseJSON
+          = withObject "AdministrativeBody"
+              (\ o ->
+                 AdministrativeBody <$>
+                   (o .:? "correspondenceAddress") <*>
+                     (o .:? "absenteeVotingInfoUrl")
+                     <*> (o .:? "hoursOfOperation")
+                     <*> (o .:? "ballotInfoUrl")
+                     <*> (o .:? "physicalAddress")
+                     <*> (o .:? "electionRegistrationConfirmationUrl")
+                     <*> (o .:? "electionInfoUrl")
+                     <*> (o .:? "votingLocationFinderUrl")
+                     <*> (o .:? "electionOfficials" .!= mempty)
+                     <*> (o .:? "name")
+                     <*> (o .:? "electionRulesUrl")
+                     <*> (o .:? "voter_services" .!= mempty)
+                     <*> (o .:? "electionRegistrationUrl"))
+
+instance ToJSON AdministrativeBody where
+        toJSON AdministrativeBody{..}
+          = object
+              (catMaybes
+                 [("correspondenceAddress" .=) <$>
+                    _abCorrespondenceAddress,
+                  ("absenteeVotingInfoUrl" .=) <$>
+                    _abAbsenteeVotingInfoUrl,
+                  ("hoursOfOperation" .=) <$> _abHoursOfOperation,
+                  ("ballotInfoUrl" .=) <$> _abBallotInfoUrl,
+                  ("physicalAddress" .=) <$> _abPhysicalAddress,
+                  ("electionRegistrationConfirmationUrl" .=) <$>
+                    _abElectionRegistrationConfirmationUrl,
+                  ("electionInfoUrl" .=) <$> _abElectionInfoUrl,
+                  ("votingLocationFinderUrl" .=) <$>
+                    _abVotingLocationFinderUrl,
+                  ("electionOfficials" .=) <$> _abElectionOfficials,
+                  ("name" .=) <$> _abName,
+                  ("electionRulesUrl" .=) <$> _abElectionRulesUrl,
+                  ("voter_services" .=) <$> _abVoterServices,
+                  ("electionRegistrationUrl" .=) <$>
+                    _abElectionRegistrationUrl])
+
 -- | Information about a candidate running for elected office.
 --
 -- /See:/ 'candidate' smart constructor.
@@ -325,6 +390,30 @@ cName = lens _cName (\ s a -> s{_cName = a})
 cParty :: Lens' Candidate (Maybe Text)
 cParty = lens _cParty (\ s a -> s{_cParty = a})
 
+instance FromJSON Candidate where
+        parseJSON
+          = withObject "Candidate"
+              (\ o ->
+                 Candidate <$>
+                   (o .:? "email") <*> (o .:? "phone") <*>
+                     (o .:? "photoUrl")
+                     <*> (o .:? "channels" .!= mempty)
+                     <*> (o .:? "candidateUrl")
+                     <*> (o .:? "orderOnBallot")
+                     <*> (o .:? "name")
+                     <*> (o .:? "party"))
+
+instance ToJSON Candidate where
+        toJSON Candidate{..}
+          = object
+              (catMaybes
+                 [("email" .=) <$> _cEmail, ("phone" .=) <$> _cPhone,
+                  ("photoUrl" .=) <$> _cPhotoUrl,
+                  ("channels" .=) <$> _cChannels,
+                  ("candidateUrl" .=) <$> _cCandidateUrl,
+                  ("orderOnBallot" .=) <$> _cOrderOnBallot,
+                  ("name" .=) <$> _cName, ("party" .=) <$> _cParty])
+
 -- | A social media or web channel for a candidate.
 --
 -- /See:/ 'channel' smart constructor.
@@ -357,6 +446,17 @@ chaId = lens _chaId (\ s a -> s{_chaId = a})
 -- of: GooglePlus, YouTube, Facebook, Twitter
 chaType :: Lens' Channel (Maybe Text)
 chaType = lens _chaType (\ s a -> s{_chaType = a})
+
+instance FromJSON Channel where
+        parseJSON
+          = withObject "Channel"
+              (\ o -> Channel <$> (o .:? "id") <*> (o .:? "type"))
+
+instance ToJSON Channel where
+        toJSON Channel{..}
+          = object
+              (catMaybes
+                 [("id" .=) <$> _chaId, ("type" .=) <$> _chaType])
 
 -- | Information about a contest that appears on a voter\'s ballot.
 --
@@ -636,6 +736,70 @@ cBallotPlacement
   = lens _cBallotPlacement
       (\ s a -> s{_cBallotPlacement = a})
 
+instance FromJSON Contest where
+        parseJSON
+          = withObject "Contest"
+              (\ o ->
+                 Contest <$>
+                   (o .:? "referendumPassageThreshold") <*>
+                     (o .:? "roles" .!= mempty)
+                     <*> (o .:? "referendumUrl")
+                     <*> (o .:? "referendumEffectOfAbstain")
+                     <*> (o .:? "referendumSubtitle")
+                     <*> (o .:? "numberVotingFor")
+                     <*> (o .:? "office")
+                     <*> (o .:? "referendumConStatement")
+                     <*> (o .:? "sources" .!= mempty)
+                     <*> (o .:? "referendumProStatement")
+                     <*> (o .:? "referendumBallotResponses" .!= mempty)
+                     <*> (o .:? "numberElected")
+                     <*> (o .:? "special")
+                     <*> (o .:? "referendumText")
+                     <*> (o .:? "primaryParty")
+                     <*> (o .:? "id")
+                     <*> (o .:? "type")
+                     <*> (o .:? "electorateSpecifications")
+                     <*> (o .:? "referendumBrief")
+                     <*> (o .:? "district")
+                     <*> (o .:? "level" .!= mempty)
+                     <*> (o .:? "candidates" .!= mempty)
+                     <*> (o .:? "referendumTitle")
+                     <*> (o .:? "ballotPlacement"))
+
+instance ToJSON Contest where
+        toJSON Contest{..}
+          = object
+              (catMaybes
+                 [("referendumPassageThreshold" .=) <$>
+                    _cReferendumPassageThreshold,
+                  ("roles" .=) <$> _cRoles,
+                  ("referendumUrl" .=) <$> _cReferendumUrl,
+                  ("referendumEffectOfAbstain" .=) <$>
+                    _cReferendumEffectOfAbstain,
+                  ("referendumSubtitle" .=) <$> _cReferendumSubtitle,
+                  ("numberVotingFor" .=) <$> _cNumberVotingFor,
+                  ("office" .=) <$> _cOffice,
+                  ("referendumConStatement" .=) <$>
+                    _cReferendumConStatement,
+                  ("sources" .=) <$> _cSources,
+                  ("referendumProStatement" .=) <$>
+                    _cReferendumProStatement,
+                  ("referendumBallotResponses" .=) <$>
+                    _cReferendumBallotResponses,
+                  ("numberElected" .=) <$> _cNumberElected,
+                  ("special" .=) <$> _cSpecial,
+                  ("referendumText" .=) <$> _cReferendumText,
+                  ("primaryParty" .=) <$> _cPrimaryParty,
+                  ("id" .=) <$> _cId, ("type" .=) <$> _cType,
+                  ("electorateSpecifications" .=) <$>
+                    _cElectorateSpecifications,
+                  ("referendumBrief" .=) <$> _cReferendumBrief,
+                  ("district" .=) <$> _cDistrict,
+                  ("level" .=) <$> _cLevel,
+                  ("candidates" .=) <$> _cCandidates,
+                  ("referendumTitle" .=) <$> _cReferendumTitle,
+                  ("ballotPlacement" .=) <$> _cBallotPlacement])
+
 -- | The result of a division search query.
 --
 -- /See:/ 'divisionSearchResponse' smart constructor.
@@ -669,6 +833,22 @@ dsrResults
 -- \"civicinfo#divisionSearchResponse\".
 dsrKind :: Lens' DivisionSearchResponse Text
 dsrKind = lens _dsrKind (\ s a -> s{_dsrKind = a})
+
+instance FromJSON DivisionSearchResponse where
+        parseJSON
+          = withObject "DivisionSearchResponse"
+              (\ o ->
+                 DivisionSearchResponse <$>
+                   (o .:? "results" .!= mempty) <*>
+                     (o .:? "kind" .!=
+                        "civicinfo#divisionSearchResponse"))
+
+instance ToJSON DivisionSearchResponse where
+        toJSON DivisionSearchResponse{..}
+          = object
+              (catMaybes
+                 [("results" .=) <$> _dsrResults,
+                  Just ("kind" .= _dsrKind)])
 
 -- | Represents a political geographic division that matches the requested
 -- query.
@@ -717,6 +897,22 @@ dsrName = lens _dsrName (\ s a -> s{_dsrName = a})
 -- | The unique Open Civic Data identifier for this division.
 dsrOcdId :: Lens' DivisionSearchResult (Maybe Text)
 dsrOcdId = lens _dsrOcdId (\ s a -> s{_dsrOcdId = a})
+
+instance FromJSON DivisionSearchResult where
+        parseJSON
+          = withObject "DivisionSearchResult"
+              (\ o ->
+                 DivisionSearchResult <$>
+                   (o .:? "aliases" .!= mempty) <*> (o .:? "name") <*>
+                     (o .:? "ocdId"))
+
+instance ToJSON DivisionSearchResult where
+        toJSON DivisionSearchResult{..}
+          = object
+              (catMaybes
+                 [("aliases" .=) <$> _dsrAliases,
+                  ("name" .=) <$> _dsrName,
+                  ("ocdId" .=) <$> _dsrOcdId])
 
 -- | Information about the election that was queried.
 --
@@ -771,6 +967,23 @@ eName = lens _eName (\ s a -> s{_eName = a})
 -- | The unique ID of this election.
 eId :: Lens' Election (Maybe Int64)
 eId = lens _eId (\ s a -> s{_eId = a})
+
+instance FromJSON Election where
+        parseJSON
+          = withObject "Election"
+              (\ o ->
+                 Election <$>
+                   (o .:? "ocdDivisionId") <*> (o .:? "electionDay") <*>
+                     (o .:? "name")
+                     <*> (o .:? "id"))
+
+instance ToJSON Election where
+        toJSON Election{..}
+          = object
+              (catMaybes
+                 [("ocdDivisionId" .=) <$> _eOcdDivisionId,
+                  ("electionDay" .=) <$> _eElectionDay,
+                  ("name" .=) <$> _eName, ("id" .=) <$> _eId])
 
 -- | Information about individual election officials.
 --
@@ -832,6 +1045,26 @@ eoEmailAddress
 eoTitle :: Lens' ElectionOfficial (Maybe Text)
 eoTitle = lens _eoTitle (\ s a -> s{_eoTitle = a})
 
+instance FromJSON ElectionOfficial where
+        parseJSON
+          = withObject "ElectionOfficial"
+              (\ o ->
+                 ElectionOfficial <$>
+                   (o .:? "faxNumber") <*> (o .:? "name") <*>
+                     (o .:? "officePhoneNumber")
+                     <*> (o .:? "emailAddress")
+                     <*> (o .:? "title"))
+
+instance ToJSON ElectionOfficial where
+        toJSON ElectionOfficial{..}
+          = object
+              (catMaybes
+                 [("faxNumber" .=) <$> _eoFaxNumber,
+                  ("name" .=) <$> _eoName,
+                  ("officePhoneNumber" .=) <$> _eoOfficePhoneNumber,
+                  ("emailAddress" .=) <$> _eoEmailAddress,
+                  ("title" .=) <$> _eoTitle])
+
 -- | The list of elections available for this version of the API.
 --
 -- /See:/ 'electionsQueryResponse' smart constructor.
@@ -866,6 +1099,21 @@ eqrElections
   = lens _eqrElections (\ s a -> s{_eqrElections = a})
       . _Default
       . _Coerce
+
+instance FromJSON ElectionsQueryResponse where
+        parseJSON
+          = withObject "ElectionsQueryResponse"
+              (\ o ->
+                 ElectionsQueryResponse <$>
+                   (o .:? "kind" .!= "civicinfo#electionsQueryResponse")
+                     <*> (o .:? "elections" .!= mempty))
+
+instance ToJSON ElectionsQueryResponse where
+        toJSON ElectionsQueryResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _eqrKind),
+                  ("elections" .=) <$> _eqrElections])
 
 -- | Describes the geographic scope of a contest.
 --
@@ -910,6 +1158,20 @@ edScope = lens _edScope (\ s a -> s{_edScope = a})
 -- stateUpper.
 edId :: Lens' ElectoralDistrict (Maybe Text)
 edId = lens _edId (\ s a -> s{_edId = a})
+
+instance FromJSON ElectoralDistrict where
+        parseJSON
+          = withObject "ElectoralDistrict"
+              (\ o ->
+                 ElectoralDistrict <$>
+                   (o .:? "name") <*> (o .:? "scope") <*> (o .:? "id"))
+
+instance ToJSON ElectoralDistrict where
+        toJSON ElectoralDistrict{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _edName, ("scope" .=) <$> _edScope,
+                  ("id" .=) <$> _edId])
 
 -- | Describes a political geography.
 --
@@ -967,6 +1229,22 @@ gdAlsoKnownAs
       (\ s a -> s{_gdAlsoKnownAs = a})
       . _Default
       . _Coerce
+
+instance FromJSON GeographicDivision where
+        parseJSON
+          = withObject "GeographicDivision"
+              (\ o ->
+                 GeographicDivision <$>
+                   (o .:? "name") <*> (o .:? "officeIndices" .!= mempty)
+                     <*> (o .:? "alsoKnownAs" .!= mempty))
+
+instance ToJSON GeographicDivision where
+        toJSON GeographicDivision{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _gdName,
+                  ("officeIndices" .=) <$> _gdOfficeIndices,
+                  ("alsoKnownAs" .=) <$> _gdAlsoKnownAs])
 
 -- | Information about an Office held by one or more Officials.
 --
@@ -1054,6 +1332,28 @@ offLevels
   = lens _offLevels (\ s a -> s{_offLevels = a}) .
       _Default
       . _Coerce
+
+instance FromJSON Office where
+        parseJSON
+          = withObject "Office"
+              (\ o ->
+                 Office <$>
+                   (o .:? "divisionId") <*> (o .:? "roles" .!= mempty)
+                     <*> (o .:? "officialIndices" .!= mempty)
+                     <*> (o .:? "sources" .!= mempty)
+                     <*> (o .:? "name")
+                     <*> (o .:? "levels" .!= mempty))
+
+instance ToJSON Office where
+        toJSON Office{..}
+          = object
+              (catMaybes
+                 [("divisionId" .=) <$> _offDivisionId,
+                  ("roles" .=) <$> _offRoles,
+                  ("officialIndices" .=) <$> _offOfficialIndices,
+                  ("sources" .=) <$> _offSources,
+                  ("name" .=) <$> _offName,
+                  ("levels" .=) <$> _offLevels])
 
 -- | Information about a person holding an elected office.
 --
@@ -1146,6 +1446,31 @@ oEmails
 -- | The full name of the party the official belongs to.
 oParty :: Lens' Official (Maybe Text)
 oParty = lens _oParty (\ s a -> s{_oParty = a})
+
+instance FromJSON Official where
+        parseJSON
+          = withObject "Official"
+              (\ o ->
+                 Official <$>
+                   (o .:? "photoUrl") <*> (o .:? "urls" .!= mempty) <*>
+                     (o .:? "channels" .!= mempty)
+                     <*> (o .:? "address" .!= mempty)
+                     <*> (o .:? "phones" .!= mempty)
+                     <*> (o .:? "name")
+                     <*> (o .:? "emails" .!= mempty)
+                     <*> (o .:? "party"))
+
+instance ToJSON Official where
+        toJSON Official{..}
+          = object
+              (catMaybes
+                 [("photoUrl" .=) <$> _oPhotoUrl,
+                  ("urls" .=) <$> _oUrls,
+                  ("channels" .=) <$> _oChannels,
+                  ("address" .=) <$> _oAddress,
+                  ("phones" .=) <$> _oPhones, ("name" .=) <$> _oName,
+                  ("emails" .=) <$> _oEmails,
+                  ("party" .=) <$> _oParty])
 
 -- | A location where a voter can vote. This may be an early vote site, an
 -- election day voting location, or a drop off location for a completed
@@ -1253,6 +1578,33 @@ plId = lens _plId (\ s a -> s{_plId = a})
 plNotes :: Lens' PollingLocation (Maybe Text)
 plNotes = lens _plNotes (\ s a -> s{_plNotes = a})
 
+instance FromJSON PollingLocation where
+        parseJSON
+          = withObject "PollingLocation"
+              (\ o ->
+                 PollingLocation <$>
+                   (o .:? "voterServices") <*> (o .:? "endDate") <*>
+                     (o .:? "sources" .!= mempty)
+                     <*> (o .:? "address")
+                     <*> (o .:? "startDate")
+                     <*> (o .:? "pollingHours")
+                     <*> (o .:? "name")
+                     <*> (o .:? "id")
+                     <*> (o .:? "notes"))
+
+instance ToJSON PollingLocation where
+        toJSON PollingLocation{..}
+          = object
+              (catMaybes
+                 [("voterServices" .=) <$> _plVoterServices,
+                  ("endDate" .=) <$> _plEndDate,
+                  ("sources" .=) <$> _plSources,
+                  ("address" .=) <$> _plAddress,
+                  ("startDate" .=) <$> _plStartDate,
+                  ("pollingHours" .=) <$> _plPollingHours,
+                  ("name" .=) <$> _plName, ("id" .=) <$> _plId,
+                  ("notes" .=) <$> _plNotes])
+
 --
 -- /See:/ 'representativeInfoData' smart constructor.
 data RepresentativeInfoData = RepresentativeInfoData
@@ -1300,6 +1652,23 @@ ridOffices
       _Default
       . _Coerce
 
+instance FromJSON RepresentativeInfoData where
+        parseJSON
+          = withObject "RepresentativeInfoData"
+              (\ o ->
+                 RepresentativeInfoData <$>
+                   (o .:? "officials" .!= mempty) <*>
+                     (o .:? "divisions")
+                     <*> (o .:? "offices" .!= mempty))
+
+instance ToJSON RepresentativeInfoData where
+        toJSON RepresentativeInfoData{..}
+          = object
+              (catMaybes
+                 [("officials" .=) <$> _ridOfficials,
+                  ("divisions" .=) <$> _ridDivisions,
+                  ("offices" .=) <$> _ridOffices])
+
 -- | Political geographic divisions that contain the requested address.
 --
 -- /See:/ 'representativeInfoDataDivisions' smart constructor.
@@ -1312,6 +1681,15 @@ data RepresentativeInfoDataDivisions =
 representativeInfoDataDivisions
     :: RepresentativeInfoDataDivisions
 representativeInfoDataDivisions = RepresentativeInfoDataDivisions
+
+instance FromJSON RepresentativeInfoDataDivisions
+         where
+        parseJSON
+          = withObject "RepresentativeInfoDataDivisions"
+              (\ o -> pure RepresentativeInfoDataDivisions)
+
+instance ToJSON RepresentativeInfoDataDivisions where
+        toJSON = const (Object mempty)
 
 -- | The result of a representative info lookup query.
 --
@@ -1380,6 +1758,28 @@ rirOffices
       _Default
       . _Coerce
 
+instance FromJSON RepresentativeInfoResponse where
+        parseJSON
+          = withObject "RepresentativeInfoResponse"
+              (\ o ->
+                 RepresentativeInfoResponse <$>
+                   (o .:? "kind" .!=
+                      "civicinfo#representativeInfoResponse")
+                     <*> (o .:? "normalizedInput")
+                     <*> (o .:? "officials" .!= mempty)
+                     <*> (o .:? "divisions")
+                     <*> (o .:? "offices" .!= mempty))
+
+instance ToJSON RepresentativeInfoResponse where
+        toJSON RepresentativeInfoResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _rirKind),
+                  ("normalizedInput" .=) <$> _rirNormalizedInput,
+                  ("officials" .=) <$> _rirOfficials,
+                  ("divisions" .=) <$> _rirDivisions,
+                  ("offices" .=) <$> _rirOffices])
+
 -- | Political geographic divisions that contain the requested address.
 --
 -- /See:/ 'representativeInfoResponseDivisions' smart constructor.
@@ -1392,6 +1792,16 @@ data RepresentativeInfoResponseDivisions =
 representativeInfoResponseDivisions
     :: RepresentativeInfoResponseDivisions
 representativeInfoResponseDivisions = RepresentativeInfoResponseDivisions
+
+instance FromJSON RepresentativeInfoResponseDivisions
+         where
+        parseJSON
+          = withObject "RepresentativeInfoResponseDivisions"
+              (\ o -> pure RepresentativeInfoResponseDivisions)
+
+instance ToJSON RepresentativeInfoResponseDivisions
+         where
+        toJSON = const (Object mempty)
 
 -- | A simple representation of an address.
 --
@@ -1466,6 +1876,28 @@ satLocationName
   = lens _satLocationName
       (\ s a -> s{_satLocationName = a})
 
+instance FromJSON SimpleAddressType where
+        parseJSON
+          = withObject "SimpleAddressType"
+              (\ o ->
+                 SimpleAddressType <$>
+                   (o .:? "line2") <*> (o .:? "state") <*>
+                     (o .:? "line3")
+                     <*> (o .:? "zip")
+                     <*> (o .:? "city")
+                     <*> (o .:? "line1")
+                     <*> (o .:? "locationName"))
+
+instance ToJSON SimpleAddressType where
+        toJSON SimpleAddressType{..}
+          = object
+              (catMaybes
+                 [("line2" .=) <$> _satLine2,
+                  ("state" .=) <$> _satState,
+                  ("line3" .=) <$> _satLine3, ("zip" .=) <$> _satZip,
+                  ("city" .=) <$> _satCity, ("line1" .=) <$> _satLine1,
+                  ("locationName" .=) <$> _satLocationName])
+
 -- | Contains information about the data source for the element containing
 -- it.
 --
@@ -1498,6 +1930,19 @@ sName = lens _sName (\ s a -> s{_sName = a})
 sOfficial :: Lens' Source (Maybe Bool)
 sOfficial
   = lens _sOfficial (\ s a -> s{_sOfficial = a})
+
+instance FromJSON Source where
+        parseJSON
+          = withObject "Source"
+              (\ o ->
+                 Source <$> (o .:? "name") <*> (o .:? "official"))
+
+instance ToJSON Source where
+        toJSON Source{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _sName,
+                  ("official" .=) <$> _sOfficial])
 
 -- | The result of a voter info lookup query.
 --
@@ -1639,3 +2084,36 @@ virPrecinctId :: Lens' VoterInfoResponse (Maybe Text)
 virPrecinctId
   = lens _virPrecinctId
       (\ s a -> s{_virPrecinctId = a})
+
+instance FromJSON VoterInfoResponse where
+        parseJSON
+          = withObject "VoterInfoResponse"
+              (\ o ->
+                 VoterInfoResponse <$>
+                   (o .:? "otherElections" .!= mempty) <*>
+                     (o .:? "contests" .!= mempty)
+                     <*> (o .:? "state" .!= mempty)
+                     <*> (o .:? "kind" .!= "civicinfo#voterInfoResponse")
+                     <*> (o .:? "dropOffLocations" .!= mempty)
+                     <*> (o .:? "election")
+                     <*> (o .:? "normalizedInput")
+                     <*> (o .:? "mailOnly")
+                     <*> (o .:? "earlyVoteSites" .!= mempty)
+                     <*> (o .:? "pollingLocations" .!= mempty)
+                     <*> (o .:? "precinctId"))
+
+instance ToJSON VoterInfoResponse where
+        toJSON VoterInfoResponse{..}
+          = object
+              (catMaybes
+                 [("otherElections" .=) <$> _virOtherElections,
+                  ("contests" .=) <$> _virContests,
+                  ("state" .=) <$> _virState,
+                  Just ("kind" .= _virKind),
+                  ("dropOffLocations" .=) <$> _virDropOffLocations,
+                  ("election" .=) <$> _virElection,
+                  ("normalizedInput" .=) <$> _virNormalizedInput,
+                  ("mailOnly" .=) <$> _virMailOnly,
+                  ("earlyVoteSites" .=) <$> _virEarlyVoteSites,
+                  ("pollingLocations" .=) <$> _virPollingLocations,
+                  ("precinctId" .=) <$> _virPrecinctId])

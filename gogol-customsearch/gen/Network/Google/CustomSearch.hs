@@ -195,43 +195,93 @@ type CseAPI = CseList
 -- | Returns metadata about the search performed, metadata about the custom
 -- search engine used for the search, and the search results.
 type CseList =
-     "customsearch" :> "v1" :>
-       QueryParam "imgDominantColor" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "siteSearchFilter" Text
-       :> QueryParam "c2coff" Text
-       :> QueryParam "orTerms" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "start" Word32
-       :> QueryParam "rights" Text
-       :> QueryParam "excludeTerms" Text
-       :> QueryParam "num" Word32
-       :> QueryParam "fileType" Text
-       :> QueryParam "searchType" Text
-       :> QueryParam "lr" Text
-       :> QueryParam "q" Text
-       :> QueryParam "googlehost" Text
-       :> QueryParam "relatedSite" Text
-       :> QueryParam "hl" Text
-       :> QueryParam "key" Text
-       :> QueryParam "cref" Text
-       :> QueryParam "sort" Text
-       :> QueryParam "siteSearch" Text
-       :> QueryParam "filter" Text
-       :> QueryParam "dateRestrict" Text
-       :> QueryParam "linkSite" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "lowRange" Text
-       :> QueryParam "imgType" Text
-       :> QueryParam "gl" Text
-       :> QueryParam "cx" Text
-       :> QueryParam "imgColorType" Text
-       :> QueryParam "imgSize" Text
-       :> QueryParam "exactTerms" Text
-       :> QueryParam "cr" Text
-       :> QueryParam "safe" Text
-       :> QueryParam "hq" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "highRange" Text
-       :> QueryParam "alt" Text
+     "customsearch" :>
+       "v1" :>
+         QueryParam "imgDominantColor" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "siteSearchFilter" Text :>
+                 QueryParam "c2coff" Text :>
+                   QueryParam "orTerms" Text :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "start" Word32 :>
+                         QueryParam "rights" Text :>
+                           QueryParam "excludeTerms" Text :>
+                             QueryParam "num" Word32 :>
+                               QueryParam "fileType" Text :>
+                                 QueryParam "searchType" Text :>
+                                   QueryParam "lr" Text :>
+                                     QueryParam "q" Text :>
+                                       QueryParam "googlehost" Text :>
+                                         QueryParam "relatedSite" Text :>
+                                           QueryParam "hl" Text :>
+                                             QueryParam "key" Text :>
+                                               QueryParam "cref" Text :>
+                                                 QueryParam "sort" Text :>
+                                                   QueryParam "siteSearch" Text
+                                                     :>
+                                                     QueryParam "filter" Text :>
+                                                       QueryParam "dateRestrict"
+                                                         Text
+                                                         :>
+                                                         QueryParam "linkSite"
+                                                           Text
+                                                           :>
+                                                           QueryParam
+                                                             "oauth_token"
+                                                             Text
+                                                             :>
+                                                             QueryParam
+                                                               "lowRange"
+                                                               Text
+                                                               :>
+                                                               QueryParam
+                                                                 "imgType"
+                                                                 Text
+                                                                 :>
+                                                                 QueryParam "gl"
+                                                                   Text
+                                                                   :>
+                                                                   QueryParam
+                                                                     "cx"
+                                                                     Text
+                                                                     :>
+                                                                     QueryParam
+                                                                       "imgColorType"
+                                                                       Text
+                                                                       :>
+                                                                       QueryParam
+                                                                         "imgSize"
+                                                                         Text
+                                                                         :>
+                                                                         QueryParam
+                                                                           "exactTerms"
+                                                                           Text
+                                                                           :>
+                                                                           QueryParam
+                                                                             "cr"
+                                                                             Text
+                                                                             :>
+                                                                             QueryParam
+                                                                               "safe"
+                                                                               Text
+                                                                               :>
+                                                                               QueryParam
+                                                                                 "hq"
+                                                                                 Text
+                                                                                 :>
+                                                                                 QueryParam
+                                                                                   "fields"
+                                                                                   Text
+                                                                                   :>
+                                                                                   QueryParam
+                                                                                     "highRange"
+                                                                                     Text
+                                                                                     :>
+                                                                                     QueryParam
+                                                                                       "alt"
+                                                                                       Text
+                                                                                       :>
+                                                                                       Get
+                                                                                         '[JSON]
+                                                                                         Search

@@ -96,70 +96,87 @@ type TransfersAPI =
 
 -- | Inserts a data transfer request.
 type TransfersInsert =
-     "admin" :> "datatransfer" :> "v1" :> "transfers" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "admin" :>
+       "datatransfer" :>
+         "v1" :>
+           "transfers" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Post '[JSON] DataTransfer
 
 -- | Lists the transfers for a customer by source user, destination user, or
 -- status.
 type TransfersList =
-     "admin" :> "datatransfer" :> "v1" :> "transfers" :>
-       QueryParam "status" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "oldOwnerUserId" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "newOwnerUserId" Text
-       :> QueryParam "customerId" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Natural
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "admin" :>
+       "datatransfer" :>
+         "v1" :>
+           "transfers" :>
+             QueryParam "status" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "oldOwnerUserId" Text :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "newOwnerUserId" Text :>
+                         QueryParam "customerId" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "maxResults" Natural :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :>
+                                       Get '[JSON] DataTransfersListResponse
 
 -- | Retrieves a data transfer request by its resource ID.
 type TransfersGet =
-     "admin" :> "datatransfer" :> "v1" :> "transfers" :>
-       Capture "dataTransferId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "admin" :>
+       "datatransfer" :>
+         "v1" :>
+           "transfers" :>
+             Capture "dataTransferId" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Get '[JSON] DataTransfer
 
 type ApplicationsAPI =
      ApplicationsList :<|> ApplicationsGet
 
 -- | Lists the applications available for data transfer for a customer.
 type ApplicationsList =
-     "admin" :> "datatransfer" :> "v1" :> "applications"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "customerId" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Natural
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "admin" :>
+       "datatransfer" :>
+         "v1" :>
+           "applications" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "customerId" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Natural :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :>
+                                 Get '[JSON] ApplicationsListResponse
 
 -- | Retrieves information about an application for the given application ID.
 type ApplicationsGet =
-     "admin" :> "datatransfer" :> "v1" :> "applications"
-       :> Capture "applicationId" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "admin" :>
+       "datatransfer" :>
+         "v1" :>
+           "applications" :>
+             Capture "applicationId" Int64 :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Get '[JSON] Application

@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -52,6 +53,22 @@ ararResults
 ararKind :: Lens' AchievementResetAllResponse Text
 ararKind = lens _ararKind (\ s a -> s{_ararKind = a})
 
+instance FromJSON AchievementResetAllResponse where
+        parseJSON
+          = withObject "AchievementResetAllResponse"
+              (\ o ->
+                 AchievementResetAllResponse <$>
+                   (o .:? "results" .!= mempty) <*>
+                     (o .:? "kind" .!=
+                        "gamesManagement#achievementResetAllResponse"))
+
+instance ToJSON AchievementResetAllResponse where
+        toJSON AchievementResetAllResponse{..}
+          = object
+              (catMaybes
+                 [("results" .=) <$> _ararResults,
+                  Just ("kind" .= _ararKind)])
+
 -- | This is a JSON template for multiple achievements reset all request.
 --
 -- /See:/ 'achievementResetMultipleForAllRequest' smart constructor.
@@ -88,6 +105,24 @@ armfarAchievementIds
       (\ s a -> s{_armfarAchievementIds = a})
       . _Default
       . _Coerce
+
+instance FromJSON
+         AchievementResetMultipleForAllRequest where
+        parseJSON
+          = withObject "AchievementResetMultipleForAllRequest"
+              (\ o ->
+                 AchievementResetMultipleForAllRequest <$>
+                   (o .:? "kind" .!=
+                      "gamesManagement#achievementResetMultipleForAllRequest")
+                     <*> (o .:? "achievement_ids" .!= mempty))
+
+instance ToJSON AchievementResetMultipleForAllRequest
+         where
+        toJSON AchievementResetMultipleForAllRequest{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _armfarKind),
+                  ("achievement_ids" .=) <$> _armfarAchievementIds])
 
 -- | This is a JSON template for an achievement reset response.
 --
@@ -146,6 +181,26 @@ arrDefinitionId
   = lens _arrDefinitionId
       (\ s a -> s{_arrDefinitionId = a})
 
+instance FromJSON AchievementResetResponse where
+        parseJSON
+          = withObject "AchievementResetResponse"
+              (\ o ->
+                 AchievementResetResponse <$>
+                   (o .:? "updateOccurred") <*>
+                     (o .:? "kind" .!=
+                        "gamesManagement#achievementResetResponse")
+                     <*> (o .:? "currentState")
+                     <*> (o .:? "definitionId"))
+
+instance ToJSON AchievementResetResponse where
+        toJSON AchievementResetResponse{..}
+          = object
+              (catMaybes
+                 [("updateOccurred" .=) <$> _arrUpdateOccurred,
+                  Just ("kind" .= _arrKind),
+                  ("currentState" .=) <$> _arrCurrentState,
+                  ("definitionId" .=) <$> _arrDefinitionId])
+
 -- | This is a JSON template for multiple events reset all request.
 --
 -- /See:/ 'eventsResetMultipleForAllRequest' smart constructor.
@@ -182,6 +237,24 @@ ermfarEventIds
       (\ s a -> s{_ermfarEventIds = a})
       . _Default
       . _Coerce
+
+instance FromJSON EventsResetMultipleForAllRequest
+         where
+        parseJSON
+          = withObject "EventsResetMultipleForAllRequest"
+              (\ o ->
+                 EventsResetMultipleForAllRequest <$>
+                   (o .:? "kind" .!=
+                      "gamesManagement#eventsResetMultipleForAllRequest")
+                     <*> (o .:? "event_ids" .!= mempty))
+
+instance ToJSON EventsResetMultipleForAllRequest
+         where
+        toJSON EventsResetMultipleForAllRequest{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _ermfarKind),
+                  ("event_ids" .=) <$> _ermfarEventIds])
 
 -- | This is a JSON template for metadata about a player playing a game with
 -- the currently authenticated user.
@@ -220,6 +293,20 @@ gprTimeMillis :: Lens' GamesPlayedResource (Maybe Int64)
 gprTimeMillis
   = lens _gprTimeMillis
       (\ s a -> s{_gprTimeMillis = a})
+
+instance FromJSON GamesPlayedResource where
+        parseJSON
+          = withObject "GamesPlayedResource"
+              (\ o ->
+                 GamesPlayedResource <$>
+                   (o .:? "autoMatched") <*> (o .:? "timeMillis"))
+
+instance ToJSON GamesPlayedResource where
+        toJSON GamesPlayedResource{..}
+          = object
+              (catMaybes
+                 [("autoMatched" .=) <$> _gprAutoMatched,
+                  ("timeMillis" .=) <$> _gprTimeMillis])
 
 -- | This is a JSON template for 1P\/3P metadata about the player\'s
 -- experience.
@@ -279,6 +366,29 @@ gpeirLastLevelUpTimestampMillis
   = lens _gpeirLastLevelUpTimestampMillis
       (\ s a -> s{_gpeirLastLevelUpTimestampMillis = a})
 
+instance FromJSON GamesPlayerExperienceInfoResource
+         where
+        parseJSON
+          = withObject "GamesPlayerExperienceInfoResource"
+              (\ o ->
+                 GamesPlayerExperienceInfoResource <$>
+                   (o .:? "currentExperiencePoints") <*>
+                     (o .:? "currentLevel")
+                     <*> (o .:? "nextLevel")
+                     <*> (o .:? "lastLevelUpTimestampMillis"))
+
+instance ToJSON GamesPlayerExperienceInfoResource
+         where
+        toJSON GamesPlayerExperienceInfoResource{..}
+          = object
+              (catMaybes
+                 [("currentExperiencePoints" .=) <$>
+                    _gpeirCurrentExperiencePoints,
+                  ("currentLevel" .=) <$> _gpeirCurrentLevel,
+                  ("nextLevel" .=) <$> _gpeirNextLevel,
+                  ("lastLevelUpTimestampMillis" .=) <$>
+                    _gpeirLastLevelUpTimestampMillis])
+
 -- | This is a JSON template for 1P\/3P metadata about a user\'s level.
 --
 -- /See:/ 'gamesPlayerLevelResource' smart constructor.
@@ -323,6 +433,25 @@ gplrLevel :: Lens' GamesPlayerLevelResource (Maybe Int32)
 gplrLevel
   = lens _gplrLevel (\ s a -> s{_gplrLevel = a})
 
+instance FromJSON GamesPlayerLevelResource where
+        parseJSON
+          = withObject "GamesPlayerLevelResource"
+              (\ o ->
+                 GamesPlayerLevelResource <$>
+                   (o .:? "maxExperiencePoints") <*>
+                     (o .:? "minExperiencePoints")
+                     <*> (o .:? "level"))
+
+instance ToJSON GamesPlayerLevelResource where
+        toJSON GamesPlayerLevelResource{..}
+          = object
+              (catMaybes
+                 [("maxExperiencePoints" .=) <$>
+                    _gplrMaxExperiencePoints,
+                  ("minExperiencePoints" .=) <$>
+                    _gplrMinExperiencePoints,
+                  ("level" .=) <$> _gplrLevel])
+
 -- | This is a JSON template for the HiddenPlayer resource.
 --
 -- /See:/ 'hiddenPlayer' smart constructor.
@@ -364,6 +493,23 @@ hpHiddenTimeMillis
 -- | The player information.
 hpPlayer :: Lens' HiddenPlayer (Maybe (Maybe Player))
 hpPlayer = lens _hpPlayer (\ s a -> s{_hpPlayer = a})
+
+instance FromJSON HiddenPlayer where
+        parseJSON
+          = withObject "HiddenPlayer"
+              (\ o ->
+                 HiddenPlayer <$>
+                   (o .:? "kind" .!= "gamesManagement#hiddenPlayer") <*>
+                     (o .:? "hiddenTimeMillis")
+                     <*> (o .:? "player"))
+
+instance ToJSON HiddenPlayer where
+        toJSON HiddenPlayer{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _hpKind),
+                  ("hiddenTimeMillis" .=) <$> _hpHiddenTimeMillis,
+                  ("player" .=) <$> _hpPlayer])
 
 -- | This is a JSON template for a list of hidden players.
 --
@@ -409,6 +555,23 @@ hplItems
   = lens _hplItems (\ s a -> s{_hplItems = a}) .
       _Default
       . _Coerce
+
+instance FromJSON HiddenPlayerList where
+        parseJSON
+          = withObject "HiddenPlayerList"
+              (\ o ->
+                 HiddenPlayerList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "gamesManagement#hiddenPlayerList")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON HiddenPlayerList where
+        toJSON HiddenPlayerList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _hplNextPageToken,
+                  Just ("kind" .= _hplKind),
+                  ("items" .=) <$> _hplItems])
 
 -- | This is a JSON template for a Player resource.
 --
@@ -501,6 +664,32 @@ pPlayerId :: Lens' Player (Maybe Text)
 pPlayerId
   = lens _pPlayerId (\ s a -> s{_pPlayerId = a})
 
+instance FromJSON Player where
+        parseJSON
+          = withObject "Player"
+              (\ o ->
+                 Player <$>
+                   (o .:? "lastPlayedWith") <*> (o .:? "avatarImageUrl")
+                     <*> (o .:? "kind" .!= "gamesManagement#player")
+                     <*> (o .:? "experienceInfo")
+                     <*> (o .:? "name")
+                     <*> (o .:? "displayName")
+                     <*> (o .:? "title")
+                     <*> (o .:? "playerId"))
+
+instance ToJSON Player where
+        toJSON Player{..}
+          = object
+              (catMaybes
+                 [("lastPlayedWith" .=) <$> _pLastPlayedWith,
+                  ("avatarImageUrl" .=) <$> _pAvatarImageUrl,
+                  Just ("kind" .= _pKind),
+                  ("experienceInfo" .=) <$> _pExperienceInfo,
+                  ("name" .=) <$> _pName,
+                  ("displayName" .=) <$> _pDisplayName,
+                  ("title" .=) <$> _pTitle,
+                  ("playerId" .=) <$> _pPlayerId])
+
 -- | An object representation of the individual components of the player\'s
 -- name. For some players, these fields may not be present.
 --
@@ -537,6 +726,20 @@ pnFamilyName :: Lens' PlayerName (Maybe Text)
 pnFamilyName
   = lens _pnFamilyName (\ s a -> s{_pnFamilyName = a})
 
+instance FromJSON PlayerName where
+        parseJSON
+          = withObject "PlayerName"
+              (\ o ->
+                 PlayerName <$>
+                   (o .:? "givenName") <*> (o .:? "familyName"))
+
+instance ToJSON PlayerName where
+        toJSON PlayerName{..}
+          = object
+              (catMaybes
+                 [("givenName" .=) <$> _pnGivenName,
+                  ("familyName" .=) <$> _pnFamilyName])
+
 -- | This is a JSON template for a list of leaderboard reset resources.
 --
 -- /See:/ 'playerScoreResetAllResponse' smart constructor.
@@ -572,6 +775,22 @@ psrarResults
 psrarKind :: Lens' PlayerScoreResetAllResponse Text
 psrarKind
   = lens _psrarKind (\ s a -> s{_psrarKind = a})
+
+instance FromJSON PlayerScoreResetAllResponse where
+        parseJSON
+          = withObject "PlayerScoreResetAllResponse"
+              (\ o ->
+                 PlayerScoreResetAllResponse <$>
+                   (o .:? "results" .!= mempty) <*>
+                     (o .:? "kind" .!=
+                        "gamesManagement#playerScoreResetAllResponse"))
+
+instance ToJSON PlayerScoreResetAllResponse where
+        toJSON PlayerScoreResetAllResponse{..}
+          = object
+              (catMaybes
+                 [("results" .=) <$> _psrarResults,
+                  Just ("kind" .= _psrarKind)])
 
 -- | This is a JSON template for a list of reset leaderboard entry resources.
 --
@@ -621,6 +840,25 @@ psrrDefinitionId
   = lens _psrrDefinitionId
       (\ s a -> s{_psrrDefinitionId = a})
 
+instance FromJSON PlayerScoreResetResponse where
+        parseJSON
+          = withObject "PlayerScoreResetResponse"
+              (\ o ->
+                 PlayerScoreResetResponse <$>
+                   (o .:? "kind" .!=
+                      "gamesManagement#playerScoreResetResponse")
+                     <*> (o .:? "resetScoreTimeSpans" .!= mempty)
+                     <*> (o .:? "definitionId"))
+
+instance ToJSON PlayerScoreResetResponse where
+        toJSON PlayerScoreResetResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _psrrKind),
+                  ("resetScoreTimeSpans" .=) <$>
+                    _psrrResetScoreTimeSpans,
+                  ("definitionId" .=) <$> _psrrDefinitionId])
+
 -- | This is a JSON template for multiple quests reset all request.
 --
 -- /See:/ 'questsResetMultipleForAllRequest' smart constructor.
@@ -658,6 +896,24 @@ qrmfarQuestIds
       . _Default
       . _Coerce
 
+instance FromJSON QuestsResetMultipleForAllRequest
+         where
+        parseJSON
+          = withObject "QuestsResetMultipleForAllRequest"
+              (\ o ->
+                 QuestsResetMultipleForAllRequest <$>
+                   (o .:? "kind" .!=
+                      "gamesManagement#questsResetMultipleForAllRequest")
+                     <*> (o .:? "quest_ids" .!= mempty))
+
+instance ToJSON QuestsResetMultipleForAllRequest
+         where
+        toJSON QuestsResetMultipleForAllRequest{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _qrmfarKind),
+                  ("quest_ids" .=) <$> _qrmfarQuestIds])
+
 -- | This is a JSON template for multiple scores reset all request.
 --
 -- /See:/ 'scoresResetMultipleForAllRequest' smart constructor.
@@ -694,3 +950,21 @@ srmfarLeaderboardIds
       (\ s a -> s{_srmfarLeaderboardIds = a})
       . _Default
       . _Coerce
+
+instance FromJSON ScoresResetMultipleForAllRequest
+         where
+        parseJSON
+          = withObject "ScoresResetMultipleForAllRequest"
+              (\ o ->
+                 ScoresResetMultipleForAllRequest <$>
+                   (o .:? "kind" .!=
+                      "gamesManagement#scoresResetMultipleForAllRequest")
+                     <*> (o .:? "leaderboard_ids" .!= mempty))
+
+instance ToJSON ScoresResetMultipleForAllRequest
+         where
+        toJSON ScoresResetMultipleForAllRequest{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _srmfarKind),
+                  ("leaderboard_ids" .=) <$> _srmfarLeaderboardIds])

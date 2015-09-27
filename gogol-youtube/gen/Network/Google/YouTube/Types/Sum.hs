@@ -39,6 +39,12 @@ instance ToText ActivityContentDetailsPromotedItemCtaType where
         ACDPICTUnspecified -> "unspecified"
         ACDPICTVisitAdvertiserSite -> "visitAdvertiserSite"
 
+instance FromJSON ActivityContentDetailsPromotedItemCtaType where
+    parseJSON = parseJSONText "ActivityContentDetailsPromotedItemCtaType"
+
+instance ToJSON ActivityContentDetailsPromotedItemCtaType where
+    toJSON = toJSONText
+
 -- | The reason that the resource is recommended to the user.
 data ActivityContentDetailsRecommendationReason
     = ACDRRUnspecified
@@ -68,6 +74,12 @@ instance ToText ActivityContentDetailsRecommendationReason where
         ACDRRVideoLiked -> "videoLiked"
         ACDRRVideoWatched -> "videoWatched"
 
+instance FromJSON ActivityContentDetailsRecommendationReason where
+    parseJSON = parseJSONText "ActivityContentDetailsRecommendationReason"
+
+instance ToJSON ActivityContentDetailsRecommendationReason where
+    toJSON = toJSONText
+
 -- | The name of the social network.
 data ActivityContentDetailsSocialType
     = ACDSTFacebook
@@ -96,6 +108,12 @@ instance ToText ActivityContentDetailsSocialType where
         ACDSTGooglePlus -> "googlePlus"
         ACDSTTwitter -> "twitter"
         ACDSTUnspecified -> "unspecified"
+
+instance FromJSON ActivityContentDetailsSocialType where
+    parseJSON = parseJSONText "ActivityContentDetailsSocialType"
+
+instance ToJSON ActivityContentDetailsSocialType where
+    toJSON = toJSONText
 
 -- | The type of activity that the resource describes.
 data ActivitySnippetType
@@ -154,6 +172,12 @@ instance ToText ActivitySnippetType where
         ASTSubscription -> "subscription"
         ASTUpload -> "upload"
 
+instance FromJSON ActivitySnippetType where
+    parseJSON = parseJSONText "ActivitySnippetType"
+
+instance ToJSON ActivitySnippetType where
+    toJSON = toJSONText
+
 -- | The type of audio track associated with the caption track.
 data CaptionSnippetAudioTrackType
     = CSATTCommentary
@@ -183,6 +207,12 @@ instance ToText CaptionSnippetAudioTrackType where
         CSATTPrimary -> "primary"
         CSATTUnknown -> "unknown"
 
+instance FromJSON CaptionSnippetAudioTrackType where
+    parseJSON = parseJSONText "CaptionSnippetAudioTrackType"
+
+instance ToJSON CaptionSnippetAudioTrackType where
+    toJSON = toJSONText
+
 -- | The reason that YouTube failed to process the caption track. This
 -- property is only present if the state property\'s value is failed.
 data CaptionSnippetFailureReason
@@ -209,6 +239,12 @@ instance ToText CaptionSnippetFailureReason where
         CSFRUnknownFormat -> "unknownFormat"
         CSFRUnsupportedFormat -> "unsupportedFormat"
 
+instance FromJSON CaptionSnippetFailureReason where
+    parseJSON = parseJSONText "CaptionSnippetFailureReason"
+
+instance ToJSON CaptionSnippetFailureReason where
+    toJSON = toJSONText
+
 -- | The caption track\'s status.
 data CaptionSnippetStatus
     = CSSFailed
@@ -233,6 +269,12 @@ instance ToText CaptionSnippetStatus where
         CSSFailed -> "failed"
         CSSServing -> "serving"
         CSSSyncing -> "syncing"
+
+instance FromJSON CaptionSnippetStatus where
+    parseJSON = parseJSONText "CaptionSnippetStatus"
+
+instance ToJSON CaptionSnippetStatus where
+    toJSON = toJSONText
 
 -- | The caption track\'s type.
 data CaptionSnippetTrackKind
@@ -259,6 +301,12 @@ instance ToText CaptionSnippetTrackKind where
         CSTKForced -> "forced"
         CSTKStandard -> "standard"
 
+instance FromJSON CaptionSnippetTrackKind where
+    parseJSON = parseJSONText "CaptionSnippetTrackKind"
+
+instance ToJSON CaptionSnippetTrackKind where
+    toJSON = toJSONText
+
 -- | The method or protocol used to transmit the video stream.
 data CdnSettingsIngestionType
     = CSITDash
@@ -279,6 +327,12 @@ instance ToText CdnSettingsIngestionType where
     toText = \case
         CSITDash -> "dash"
         CSITRtmp -> "rtmp"
+
+instance FromJSON CdnSettingsIngestionType where
+    parseJSON = parseJSONText "CdnSettingsIngestionType"
+
+instance ToJSON CdnSettingsIngestionType where
+    toJSON = toJSONText
 
 -- | Defines the context of the ping.
 data ChannelConversionPingContext
@@ -305,6 +359,12 @@ instance ToText ChannelConversionPingContext where
         CCPCSubscribe -> "subscribe"
         CCPCUnsubscribe -> "unsubscribe"
 
+instance FromJSON ChannelConversionPingContext where
+    parseJSON = parseJSONText "ChannelConversionPingContext"
+
+instance ToJSON ChannelConversionPingContext where
+    toJSON = toJSONText
+
 -- | The style of the channel section.
 data ChannelSectionSnippetStyle
     = CSSSChannelsectionStyleUndefined
@@ -329,6 +389,12 @@ instance ToText ChannelSectionSnippetStyle where
         CSSSChannelsectionStyleUndefined -> "channelsectionStyleUndefined"
         CSSSHorizontalRow -> "horizontalRow"
         CSSSVerticalList -> "verticalList"
+
+instance FromJSON ChannelSectionSnippetStyle where
+    parseJSON = parseJSONText "ChannelSectionSnippetStyle"
+
+instance ToJSON ChannelSectionSnippetStyle where
+    toJSON = toJSONText
 
 -- | The type of the channel section.
 data ChannelSectionSnippetType
@@ -411,6 +477,12 @@ instance ToText ChannelSectionSnippetType where
         CSSTSubscriptions -> "subscriptions"
         CSSTUpcomingEvents -> "upcomingEvents"
 
+instance FromJSON ChannelSectionSnippetType where
+    parseJSON = parseJSONText "ChannelSectionSnippetType"
+
+instance ToJSON ChannelSectionSnippetType where
+    toJSON = toJSONText
+
 -- | The long uploads status of this channel. See
 data ChannelStatusLongUploadsStatus
     = CSLUSAllowed
@@ -440,6 +512,12 @@ instance ToText ChannelStatusLongUploadsStatus where
         CSLUSEligible -> "eligible"
         CSLUSLongUploadsUnspecified -> "longUploadsUnspecified"
 
+instance FromJSON ChannelStatusLongUploadsStatus where
+    parseJSON = parseJSONText "ChannelStatusLongUploadsStatus"
+
+instance ToJSON ChannelStatusLongUploadsStatus where
+    toJSON = toJSONText
+
 -- | Privacy status of the channel.
 data ChannelStatusPrivacyStatus
     = CSPSPrivate
@@ -464,6 +542,12 @@ instance ToText ChannelStatusPrivacyStatus where
         CSPSPrivate -> "private"
         CSPSPublic -> "public"
         CSPSUnlisted -> "unlisted"
+
+instance FromJSON ChannelStatusPrivacyStatus where
+    parseJSON = parseJSONText "ChannelStatusPrivacyStatus"
+
+instance ToJSON ChannelStatusPrivacyStatus where
+    toJSON = toJSONText
 
 -- | The comment\'s moderation status. Will not be set if the comments were
 -- requested through the id filter.
@@ -495,6 +579,12 @@ instance ToText CommentSnippetModerationStatus where
         CSMSPublished -> "published"
         CSMSRejected -> "rejected"
 
+instance FromJSON CommentSnippetModerationStatus where
+    parseJSON = parseJSONText "CommentSnippetModerationStatus"
+
+instance ToJSON CommentSnippetModerationStatus where
+    toJSON = toJSONText
+
 -- | The rating the viewer has given to this comment. For the time being this
 -- will never return RATE_TYPE_DISLIKE and instead return RATE_TYPE_NONE.
 -- This may change in the future.
@@ -525,6 +615,12 @@ instance ToText CommentSnippetViewerRating where
         CSVRLike -> "like"
         CSVRNone -> "none"
         CSVRUnspecified -> "unspecified"
+
+instance FromJSON CommentSnippetViewerRating where
+    parseJSON = parseJSONText "CommentSnippetViewerRating"
+
+instance ToJSON CommentSnippetViewerRating where
+    toJSON = toJSONText
 
 -- | The video\'s Australian Classification Board (ACB) or Australian
 -- Communications and Media Authority (ACMA) rating. ACMA ratings are used
@@ -577,6 +673,12 @@ instance ToText ContentRatingAcbRating where
         CRARAcbR18plus -> "acbR18plus"
         CRARAcbUnrated -> "acbUnrated"
 
+instance FromJSON ContentRatingAcbRating where
+    parseJSON = parseJSONText "ContentRatingAcbRating"
+
+instance ToJSON ContentRatingAcbRating where
+    toJSON = toJSONText
+
 -- | The video\'s rating from Italy\'s Autorità per le Garanzie nelle
 -- Comunicazioni (AGCOM).
 data ContentRatingAgcomRating
@@ -606,6 +708,12 @@ instance ToText ContentRatingAgcomRating where
         CRARAgcomUnrated -> "agcomUnrated"
         CRARAGCOMVM14 -> "agcomVm14"
         CRARAGCOMVM18 -> "agcomVm18"
+
+instance FromJSON ContentRatingAgcomRating where
+    parseJSON = parseJSONText "ContentRatingAgcomRating"
+
+instance ToJSON ContentRatingAgcomRating where
+    toJSON = toJSONText
 
 -- | The video\'s Anatel (Asociación Nacional de Televisión) rating for
 -- Chilean television.
@@ -653,6 +761,12 @@ instance ToText ContentRatingAnatelRating where
         CRARAnatelR -> "anatelR"
         CRARAnatelUnrated -> "anatelUnrated"
 
+instance FromJSON ContentRatingAnatelRating where
+    parseJSON = parseJSONText "ContentRatingAnatelRating"
+
+instance ToJSON ContentRatingAnatelRating where
+    toJSON = toJSONText
+
 -- | The video\'s British Board of Film Classification (BBFC) rating.
 data ContentRatingBbfcRating
     = CRBRBBFC12
@@ -698,6 +812,12 @@ instance ToText ContentRatingBbfcRating where
         CRBRBbfcU -> "bbfcU"
         CRBRBbfcUnrated -> "bbfcUnrated"
 
+instance FromJSON ContentRatingBbfcRating where
+    parseJSON = parseJSONText "ContentRatingBbfcRating"
+
+instance ToJSON ContentRatingBbfcRating where
+    toJSON = toJSONText
+
 -- | The video\'s rating from Thailand\'s Board of Film and Video Censors.
 data ContentRatingBfvcRating
     = CRBRBFVC13
@@ -742,6 +862,12 @@ instance ToText ContentRatingBfvcRating where
         CRBRBfvcE -> "bfvcE"
         CRBRBfvcG -> "bfvcG"
         CRBRBfvcUnrated -> "bfvcUnrated"
+
+instance FromJSON ContentRatingBfvcRating where
+    parseJSON = parseJSONText "ContentRatingBfvcRating"
+
+instance ToJSON ContentRatingBfvcRating where
+    toJSON = toJSONText
 
 -- | The video\'s rating from the Austrian Board of Media Classification
 -- (Bundesministerium für Unterricht, Kunst und Kultur).
@@ -789,6 +915,12 @@ instance ToText ContentRatingBmukkRating where
         CRBRBmukkAa -> "bmukkAa"
         CRBRBmukkUnrated -> "bmukkUnrated"
 
+instance FromJSON ContentRatingBmukkRating where
+    parseJSON = parseJSONText "ContentRatingBmukkRating"
+
+instance ToJSON ContentRatingBmukkRating where
+    toJSON = toJSONText
+
 -- | Rating system for Canadian TV - Canadian TV Classification System The
 -- video\'s rating from the Canadian Radio-Television and
 -- Telecommunications Commission (CRTC) for Canadian English-language
@@ -834,6 +966,12 @@ instance ToText ContentRatingCatvRating where
         CRCRCatvPg -> "catvPg"
         CRCRCatvUnrated -> "catvUnrated"
 
+instance FromJSON ContentRatingCatvRating where
+    parseJSON = parseJSONText "ContentRatingCatvRating"
+
+instance ToJSON ContentRatingCatvRating where
+    toJSON = toJSONText
+
 -- | The video\'s rating from the Canadian Radio-Television and
 -- Telecommunications Commission (CRTC) for Canadian French-language
 -- broadcasts. For more information, see the Canadian Broadcast Standards
@@ -874,6 +1012,12 @@ instance ToText ContentRatingCatvfrRating where
         CRCRCatvfrG -> "catvfrG"
         CRCRCatvfrUnrated -> "catvfrUnrated"
 
+instance FromJSON ContentRatingCatvfrRating where
+    parseJSON = parseJSONText "ContentRatingCatvfrRating"
+
+instance ToJSON ContentRatingCatvfrRating where
+    toJSON = toJSONText
+
 -- | The video\'s Central Board of Film Certification (CBFC - India) rating.
 data ContentRatingCbfcRating
     = CRCRCbfcA
@@ -906,6 +1050,12 @@ instance ToText ContentRatingCbfcRating where
         CRCRCbfcU -> "cbfcU"
         CRCRCbfcUA -> "cbfcUA"
         CRCRCbfcUnrated -> "cbfcUnrated"
+
+instance FromJSON ContentRatingCbfcRating where
+    parseJSON = parseJSONText "ContentRatingCbfcRating"
+
+instance ToJSON ContentRatingCbfcRating where
+    toJSON = toJSONText
 
 -- | The video\'s Consejo de Calificación Cinematográfica (Chile) rating.
 data ContentRatingCccRating
@@ -948,6 +1098,12 @@ instance ToText ContentRatingCccRating where
         CRCRCccTe -> "cccTe"
         CRCRCccUnrated -> "cccUnrated"
 
+instance FromJSON ContentRatingCccRating where
+    parseJSON = parseJSONText "ContentRatingCccRating"
+
+instance ToJSON ContentRatingCccRating where
+    toJSON = toJSONText
+
 -- | The video\'s rating from Portugal\'s Comissão de Classificação de
 -- Espect´culos.
 data ContentRatingCceRating
@@ -986,6 +1142,12 @@ instance ToText ContentRatingCceRating where
         CRCRCCEM6 -> "cceM6"
         CRCRCceUnrated -> "cceUnrated"
 
+instance FromJSON ContentRatingCceRating where
+    parseJSON = parseJSONText "ContentRatingCceRating"
+
+instance ToJSON ContentRatingCceRating where
+    toJSON = toJSONText
+
 -- | The video\'s rating in Switzerland.
 data ContentRatingChfilmRating
     = CRCRCHFILM0
@@ -1022,6 +1184,12 @@ instance ToText ContentRatingChfilmRating where
         CRCRCHFILM18 -> "chfilm18"
         CRCRCHFILM6 -> "chfilm6"
         CRCRChfilmUnrated -> "chfilmUnrated"
+
+instance FromJSON ContentRatingChfilmRating where
+    parseJSON = parseJSONText "ContentRatingChfilmRating"
+
+instance ToJSON ContentRatingChfilmRating where
+    toJSON = toJSONText
 
 -- | The video\'s Canadian Home Video Rating System (CHVRS) rating.
 data ContentRatingChvrsRating
@@ -1064,6 +1232,12 @@ instance ToText ContentRatingChvrsRating where
         CRCRChvrsR -> "chvrsR"
         CRCRChvrsUnrated -> "chvrsUnrated"
 
+instance FromJSON ContentRatingChvrsRating where
+    parseJSON = parseJSONText "ContentRatingChvrsRating"
+
+instance ToJSON ContentRatingChvrsRating where
+    toJSON = toJSONText
+
 -- | The video\'s rating from the Commission de Contrôle des Films (Belgium).
 data ContentRatingCicfRating
     = CRCRCicfE
@@ -1092,6 +1266,12 @@ instance ToText ContentRatingCicfRating where
         CRCRCicfKntEna -> "cicfKntEna"
         CRCRCicfKtEa -> "cicfKtEa"
         CRCRCicfUnrated -> "cicfUnrated"
+
+instance FromJSON ContentRatingCicfRating where
+    parseJSON = parseJSONText "ContentRatingCicfRating"
+
+instance ToJSON ContentRatingCicfRating where
+    toJSON = toJSONText
 
 -- | The video\'s rating from Romania\'s CONSILIUL NATIONAL AL
 -- AUDIOVIZUALULUI (CNA).
@@ -1130,6 +1310,12 @@ instance ToText ContentRatingCnaRating where
         CRCRCna18plus -> "cna18plus"
         CRCRCnaAp -> "cnaAp"
         CRCRCnaUnrated -> "cnaUnrated"
+
+instance FromJSON ContentRatingCnaRating where
+    parseJSON = parseJSONText "ContentRatingCnaRating"
+
+instance ToJSON ContentRatingCnaRating where
+    toJSON = toJSONText
 
 -- | Rating system in France - Commission de classification cinematographique
 data ContentRatingCncRating
@@ -1172,6 +1358,12 @@ instance ToText ContentRatingCncRating where
         CRCRCncT -> "cncT"
         CRCRCncUnrated -> "cncUnrated"
 
+instance FromJSON ContentRatingCncRating where
+    parseJSON = parseJSONText "ContentRatingCncRating"
+
+instance ToJSON ContentRatingCncRating where
+    toJSON = toJSONText
+
 -- | The video\'s rating from France\'s Conseil supérieur de l?audiovisuel,
 -- which rates broadcast content.
 data ContentRatingCsaRating
@@ -1213,6 +1405,12 @@ instance ToText ContentRatingCsaRating where
         CRCRCsaInterdiction -> "csaInterdiction"
         CRCRCsaT -> "csaT"
         CRCRCsaUnrated -> "csaUnrated"
+
+instance FromJSON ContentRatingCsaRating where
+    parseJSON = parseJSONText "ContentRatingCsaRating"
+
+instance ToJSON ContentRatingCsaRating where
+    toJSON = toJSONText
 
 -- | The video\'s rating from Luxembourg\'s Commission de surveillance de la
 -- classification des films (CSCF).
@@ -1260,6 +1458,12 @@ instance ToText ContentRatingCscfRating where
         CRCRCscfAl -> "cscfAl"
         CRCRCscfUnrated -> "cscfUnrated"
 
+instance FromJSON ContentRatingCscfRating where
+    parseJSON = parseJSONText "ContentRatingCscfRating"
+
+instance ToJSON ContentRatingCscfRating where
+    toJSON = toJSONText
+
 -- | The video\'s rating in the Czech Republic.
 data ContentRatingCzfilmRating
     = CRCRCZFILM12
@@ -1292,6 +1496,12 @@ instance ToText ContentRatingCzfilmRating where
         CRCRCZFILM18 -> "czfilm18"
         CRCRCzfilmU -> "czfilmU"
         CRCRCzfilmUnrated -> "czfilmUnrated"
+
+instance FromJSON ContentRatingCzfilmRating where
+    parseJSON = parseJSONText "ContentRatingCzfilmRating"
+
+instance ToJSON ContentRatingCzfilmRating where
+    toJSON = toJSONText
 
 -- | The video\'s Departamento de Justiça, Classificação, Qualificação e
 -- Títulos (DJCQT - Brazil) rating.
@@ -1334,6 +1544,12 @@ instance ToText ContentRatingDjctqRating where
         CRDRDJCTQ18 -> "djctq18"
         CRDRDjctqL -> "djctqL"
         CRDRDjctqUnrated -> "djctqUnrated"
+
+instance FromJSON ContentRatingDjctqRating where
+    parseJSON = parseJSONText "ContentRatingDjctqRating"
+
+instance ToJSON ContentRatingDjctqRating where
+    toJSON = toJSONText
 
 -- | The video\'s rating in Estonia.
 data ContentRatingEefilmRating
@@ -1384,6 +1600,12 @@ instance ToText ContentRatingEefilmRating where
         CREREefilmPere -> "eefilmPere"
         CREREefilmUnrated -> "eefilmUnrated"
 
+instance FromJSON ContentRatingEefilmRating where
+    parseJSON = parseJSONText "ContentRatingEefilmRating"
+
+instance ToJSON ContentRatingEefilmRating where
+    toJSON = toJSONText
+
 -- | The video\'s rating in Egypt.
 data ContentRatingEgfilmRating
     = CREREGFILM18
@@ -1412,6 +1634,12 @@ instance ToText ContentRatingEgfilmRating where
         CREREgfilmBn -> "egfilmBn"
         CREREgfilmGn -> "egfilmGn"
         CREREgfilmUnrated -> "egfilmUnrated"
+
+instance FromJSON ContentRatingEgfilmRating where
+    parseJSON = parseJSONText "ContentRatingEgfilmRating"
+
+instance ToJSON ContentRatingEgfilmRating where
+    toJSON = toJSONText
 
 -- | The video\'s Eirin (映倫) rating. Eirin is the Japanese rating system.
 data ContentRatingEirinRating
@@ -1445,6 +1673,12 @@ instance ToText ContentRatingEirinRating where
         CREREirinR15plus -> "eirinR15plus"
         CREREirinR18plus -> "eirinR18plus"
         CREREirinUnrated -> "eirinUnrated"
+
+instance FromJSON ContentRatingEirinRating where
+    parseJSON = parseJSONText "ContentRatingEirinRating"
+
+instance ToJSON ContentRatingEirinRating where
+    toJSON = toJSONText
 
 -- | The video\'s rating from Malaysia\'s Film Censorship Board.
 data ContentRatingFcbmRating
@@ -1495,6 +1729,12 @@ instance ToText ContentRatingFcbmRating where
         CRFRFcbmU -> "fcbmU"
         CRFRFcbmUnrated -> "fcbmUnrated"
 
+instance FromJSON ContentRatingFcbmRating where
+    parseJSON = parseJSONText "ContentRatingFcbmRating"
+
+instance ToJSON ContentRatingFcbmRating where
+    toJSON = toJSONText
+
 -- | The video\'s rating from Hong Kong\'s Office for Film, Newspaper and
 -- Article Administration.
 data ContentRatingFcoRating
@@ -1532,6 +1772,12 @@ instance ToText ContentRatingFcoRating where
         CRFRFcoIib -> "fcoIib"
         CRFRFcoIii -> "fcoIii"
         CRFRFcoUnrated -> "fcoUnrated"
+
+instance FromJSON ContentRatingFcoRating where
+    parseJSON = parseJSONText "ContentRatingFcoRating"
+
+instance ToJSON ContentRatingFcoRating where
+    toJSON = toJSONText
 
 -- | This property has been deprecated. Use the
 -- contentDetails.contentRating.cncRating instead.
@@ -1574,6 +1820,12 @@ instance ToText ContentRatingFmocRating where
         CRFRFmocE -> "fmocE"
         CRFRFmocU -> "fmocU"
         CRFRFmocUnrated -> "fmocUnrated"
+
+instance FromJSON ContentRatingFmocRating where
+    parseJSON = parseJSONText "ContentRatingFmocRating"
+
+instance ToJSON ContentRatingFmocRating where
+    toJSON = toJSONText
 
 -- | The video\'s rating from South Africa\'s Film and Publication Board.
 data ContentRatingFpbRating
@@ -1628,6 +1880,12 @@ instance ToText ContentRatingFpbRating where
         CRFRFPBX18 -> "fpbX18"
         CRFRFpbXx -> "fpbXx"
 
+instance FromJSON ContentRatingFpbRating where
+    parseJSON = parseJSONText "ContentRatingFpbRating"
+
+instance ToJSON ContentRatingFpbRating where
+    toJSON = toJSONText
+
 -- | The video\'s Freiwillige Selbstkontrolle der Filmwirtschaft (FSK -
 -- Germany) rating.
 data ContentRatingFskRating
@@ -1666,6 +1924,12 @@ instance ToText ContentRatingFskRating where
         CRFRFSK6 -> "fsk6"
         CRFRFskUnrated -> "fskUnrated"
 
+instance FromJSON ContentRatingFskRating where
+    parseJSON = parseJSONText "ContentRatingFskRating"
+
+instance ToJSON ContentRatingFskRating where
+    toJSON = toJSONText
+
 -- | The video\'s rating in Greece.
 data ContentRatingGrfilmRating
     = CRGRGrfilmE
@@ -1698,6 +1962,12 @@ instance ToText ContentRatingGrfilmRating where
         CRGRGRFILMK13 -> "grfilmK13"
         CRGRGRFILMK17 -> "grfilmK17"
         CRGRGrfilmUnrated -> "grfilmUnrated"
+
+instance FromJSON ContentRatingGrfilmRating where
+    parseJSON = parseJSONText "ContentRatingGrfilmRating"
+
+instance ToJSON ContentRatingGrfilmRating where
+    toJSON = toJSONText
 
 -- | The video\'s Instituto de la Cinematografía y de las Artes Audiovisuales
 -- (ICAA - Spain) rating.
@@ -1744,6 +2014,12 @@ instance ToText ContentRatingIcaaRating where
         CRIRIcaaApta -> "icaaApta"
         CRIRIcaaUnrated -> "icaaUnrated"
         CRIRIcaaX -> "icaaX"
+
+instance FromJSON ContentRatingIcaaRating where
+    parseJSON = parseJSONText "ContentRatingIcaaRating"
+
+instance ToJSON ContentRatingIcaaRating where
+    toJSON = toJSONText
 
 -- | The video\'s Irish Film Classification Office (IFCO - Ireland) rating.
 -- See the IFCO website for more information.
@@ -1795,6 +2071,12 @@ instance ToText ContentRatingIfcoRating where
         CRIRIfcoPg -> "ifcoPg"
         CRIRIfcoUnrated -> "ifcoUnrated"
 
+instance FromJSON ContentRatingIfcoRating where
+    parseJSON = parseJSONText "ContentRatingIfcoRating"
+
+instance ToJSON ContentRatingIfcoRating where
+    toJSON = toJSONText
+
 -- | The video\'s rating in Israel.
 data ContentRatingIlfilmRating
     = CRIRILFILM12
@@ -1827,6 +2109,12 @@ instance ToText ContentRatingIlfilmRating where
         CRIRILFILM18 -> "ilfilm18"
         CRIRIlfilmAa -> "ilfilmAa"
         CRIRIlfilmUnrated -> "ilfilmUnrated"
+
+instance FromJSON ContentRatingIlfilmRating where
+    parseJSON = parseJSONText "ContentRatingIlfilmRating"
+
+instance ToJSON ContentRatingIlfilmRating where
+    toJSON = toJSONText
 
 -- | The video\'s INCAA (Instituto Nacional de Cine y Artes Audiovisuales -
 -- Argentina) rating.
@@ -1865,6 +2153,12 @@ instance ToText ContentRatingIncaaRating where
         CRIRINCAASAM16 -> "incaaSam16"
         CRIRINCAASAM18 -> "incaaSam18"
         CRIRIncaaUnrated -> "incaaUnrated"
+
+instance FromJSON ContentRatingIncaaRating where
+    parseJSON = parseJSONText "ContentRatingIncaaRating"
+
+instance ToJSON ContentRatingIncaaRating where
+    toJSON = toJSONText
 
 data ContentRatingItemDjctqRatingReasons
     = CRIDRRDjctqCriminalActs
@@ -1926,6 +2220,12 @@ instance ToText ContentRatingItemDjctqRatingReasons where
         CRIDRRDjctqSexualContent -> "djctqSexualContent"
         CRIDRRDjctqViolence -> "djctqViolence"
 
+instance FromJSON ContentRatingItemDjctqRatingReasons where
+    parseJSON = parseJSONText "ContentRatingItemDjctqRatingReasons"
+
+instance ToJSON ContentRatingItemDjctqRatingReasons where
+    toJSON = toJSONText
+
 -- | The video\'s rating from the Kenya Film Classification Board.
 data ContentRatingKfcbRating
     = CRKRKfcb16plus
@@ -1958,6 +2258,12 @@ instance ToText ContentRatingKfcbRating where
         CRKRKfcbPg -> "kfcbPg"
         CRKRKfcbR -> "kfcbR"
         CRKRKfcbUnrated -> "kfcbUnrated"
+
+instance FromJSON ContentRatingKfcbRating where
+    parseJSON = parseJSONText "ContentRatingKfcbRating"
+
+instance ToJSON ContentRatingKfcbRating where
+    toJSON = toJSONText
 
 -- | voor de Classificatie van Audiovisuele Media (Netherlands).
 data ContentRatingKijkwijzerRating
@@ -2000,6 +2306,12 @@ instance ToText ContentRatingKijkwijzerRating where
         CRKRKijkwijzerAl -> "kijkwijzerAl"
         CRKRKijkwijzerUnrated -> "kijkwijzerUnrated"
 
+instance FromJSON ContentRatingKijkwijzerRating where
+    parseJSON = parseJSONText "ContentRatingKijkwijzerRating"
+
+instance ToJSON ContentRatingKijkwijzerRating where
+    toJSON = toJSONText
+
 -- | The video\'s Korea Media Rating Board (영상물등급위원회) rating. The
 -- KMRB rates videos in South Korea.
 data ContentRatingKmrbRating
@@ -2037,6 +2349,12 @@ instance ToText ContentRatingKmrbRating where
         CRKRKmrbR -> "kmrbR"
         CRKRKmrbTeenr -> "kmrbTeenr"
         CRKRKmrbUnrated -> "kmrbUnrated"
+
+instance FromJSON ContentRatingKmrbRating where
+    parseJSON = parseJSONText "ContentRatingKmrbRating"
+
+instance ToJSON ContentRatingKmrbRating where
+    toJSON = toJSONText
 
 -- | The video\'s rating from Indonesia\'s Lembaga Sensor Film.
 data ContentRatingLsfRating
@@ -2087,6 +2405,12 @@ instance ToText ContentRatingLsfRating where
         CRLRLsfSu -> "lsfSu"
         CRLRLsfUnrated -> "lsfUnrated"
 
+instance FromJSON ContentRatingLsfRating where
+    parseJSON = parseJSONText "ContentRatingLsfRating"
+
+instance ToJSON ContentRatingLsfRating where
+    toJSON = toJSONText
+
 -- | The video\'s rating from Malta\'s Film Age-Classification Board.
 data ContentRatingMccaaRating
     = CRMRMCCAA12
@@ -2136,6 +2460,12 @@ instance ToText ContentRatingMccaaRating where
         CRMRMccaaU -> "mccaaU"
         CRMRMccaaUnrated -> "mccaaUnrated"
 
+instance FromJSON ContentRatingMccaaRating where
+    parseJSON = parseJSONText "ContentRatingMccaaRating"
+
+instance ToJSON ContentRatingMccaaRating where
+    toJSON = toJSONText
+
 -- | The video\'s rating from the Danish Film Institute\'s (Det Danske
 -- Filminstitut) Media Council for Children and Young People.
 data ContentRatingMccypRating
@@ -2169,6 +2499,12 @@ instance ToText ContentRatingMccypRating where
         CRMRMCCYP7 -> "mccyp7"
         CRMRMccypA -> "mccypA"
         CRMRMccypUnrated -> "mccypUnrated"
+
+instance FromJSON ContentRatingMccypRating where
+    parseJSON = parseJSONText "ContentRatingMccypRating"
+
+instance ToJSON ContentRatingMccypRating where
+    toJSON = toJSONText
 
 -- | The video\'s rating from Singapore\'s Media Development Authority (MDA)
 -- and, specifically, it\'s Board of Film Censors (BFC).
@@ -2211,6 +2547,12 @@ instance ToText ContentRatingMdaRating where
         CRMRMDAPG13 -> "mdaPg13"
         CRMRMDAR21 -> "mdaR21"
         CRMRMdaUnrated -> "mdaUnrated"
+
+instance FromJSON ContentRatingMdaRating where
+    parseJSON = parseJSONText "ContentRatingMdaRating"
+
+instance ToJSON ContentRatingMdaRating where
+    toJSON = toJSONText
 
 -- | The video\'s rating from Medietilsynet, the Norwegian Media Authority.
 data ContentRatingMedietilsynetRating
@@ -2261,6 +2603,12 @@ instance ToText ContentRatingMedietilsynetRating where
         CRMRMedietilsynetA -> "medietilsynetA"
         CRMRMedietilsynetUnrated -> "medietilsynetUnrated"
 
+instance FromJSON ContentRatingMedietilsynetRating where
+    parseJSON = parseJSONText "ContentRatingMedietilsynetRating"
+
+instance ToJSON ContentRatingMedietilsynetRating where
+    toJSON = toJSONText
+
 -- | The video\'s rating from Finland\'s Kansallinen Audiovisuaalinen
 -- Instituutti (National Audiovisual Institute).
 data ContentRatingMekuRating
@@ -2299,6 +2647,12 @@ instance ToText ContentRatingMekuRating where
         CRMRMekuS -> "mekuS"
         CRMRMekuUnrated -> "mekuUnrated"
 
+instance FromJSON ContentRatingMekuRating where
+    parseJSON = parseJSONText "ContentRatingMekuRating"
+
+instance ToJSON ContentRatingMekuRating where
+    toJSON = toJSONText
+
 -- | The video\'s rating from the Ministero dei Beni e delle Attività
 -- Culturali e del Turismo (Italy).
 data ContentRatingMibacRating
@@ -2336,6 +2690,12 @@ instance ToText ContentRatingMibacRating where
         CRMRMIBACVM12 -> "mibacVm12"
         CRMRMIBACVM14 -> "mibacVm14"
         CRMRMIBACVM18 -> "mibacVm18"
+
+instance FromJSON ContentRatingMibacRating where
+    parseJSON = parseJSONText "ContentRatingMibacRating"
+
+instance ToJSON ContentRatingMibacRating where
+    toJSON = toJSONText
 
 -- | The video\'s Ministerio de Cultura (Colombia) rating.
 data ContentRatingMocRating
@@ -2386,6 +2746,12 @@ instance ToText ContentRatingMocRating where
         CRMRMocUnrated -> "mocUnrated"
         CRMRMocX -> "mocX"
 
+instance FromJSON ContentRatingMocRating where
+    parseJSON = parseJSONText "ContentRatingMocRating"
+
+instance ToJSON ContentRatingMocRating where
+    toJSON = toJSONText
+
 -- | The video\'s rating from Taiwan\'s Ministry of Culture (文化部).
 data ContentRatingMoctwRating
     = CRMRMoctwG
@@ -2418,6 +2784,12 @@ instance ToText ContentRatingMoctwRating where
         CRMRMoctwPg -> "moctwPg"
         CRMRMoctwR -> "moctwR"
         CRMRMoctwUnrated -> "moctwUnrated"
+
+instance FromJSON ContentRatingMoctwRating where
+    parseJSON = parseJSONText "ContentRatingMoctwRating"
+
+instance ToJSON ContentRatingMoctwRating where
+    toJSON = toJSONText
 
 -- | The video\'s Motion Picture Association of America (MPAA) rating.
 data ContentRatingMpaaRating
@@ -2455,6 +2827,12 @@ instance ToText ContentRatingMpaaRating where
         CRMRMPAAPG13 -> "mpaaPg13"
         CRMRMpaaR -> "mpaaR"
         CRMRMpaaUnrated -> "mpaaUnrated"
+
+instance FromJSON ContentRatingMpaaRating where
+    parseJSON = parseJSONText "ContentRatingMpaaRating"
+
+instance ToJSON ContentRatingMpaaRating where
+    toJSON = toJSONText
 
 -- | The video\'s rating from the Movie and Television Review and
 -- Classification Board (Philippines).
@@ -2497,6 +2875,12 @@ instance ToText ContentRatingMtrcbRating where
         CRMRMTRCBR18 -> "mtrcbR18"
         CRMRMtrcbUnrated -> "mtrcbUnrated"
         CRMRMtrcbX -> "mtrcbX"
+
+instance FromJSON ContentRatingMtrcbRating where
+    parseJSON = parseJSONText "ContentRatingMtrcbRating"
+
+instance ToJSON ContentRatingMtrcbRating where
+    toJSON = toJSONText
 
 -- | The video\'s rating from the Maldives National Bureau of Classification.
 data ContentRatingNbcRating
@@ -2543,6 +2927,12 @@ instance ToText ContentRatingNbcRating where
         CRNRNbcPu -> "nbcPu"
         CRNRNbcUnrated -> "nbcUnrated"
 
+instance FromJSON ContentRatingNbcRating where
+    parseJSON = parseJSONText "ContentRatingNbcRating"
+
+instance ToJSON ContentRatingNbcRating where
+    toJSON = toJSONText
+
 -- | The video\'s rating in Poland.
 data ContentRatingNbcplRating
     = CRNRNbcpl18plus
@@ -2580,6 +2970,12 @@ instance ToText ContentRatingNbcplRating where
         CRNRNbcplIv -> "nbcplIv"
         CRNRNbcplUnrated -> "nbcplUnrated"
 
+instance FromJSON ContentRatingNbcplRating where
+    parseJSON = parseJSONText "ContentRatingNbcplRating"
+
+instance ToJSON ContentRatingNbcplRating where
+    toJSON = toJSONText
+
 -- | The video\'s rating from the Bulgarian National Film Center.
 data ContentRatingNfrcRating
     = CRNRNfrcA
@@ -2616,6 +3012,12 @@ instance ToText ContentRatingNfrcRating where
         CRNRNfrcD -> "nfrcD"
         CRNRNfrcUnrated -> "nfrcUnrated"
         CRNRNfrcX -> "nfrcX"
+
+instance FromJSON ContentRatingNfrcRating where
+    parseJSON = parseJSONText "ContentRatingNfrcRating"
+
+instance ToJSON ContentRatingNfrcRating where
+    toJSON = toJSONText
 
 -- | The video\'s rating from Nigeria\'s National Film and Video Censors
 -- Board.
@@ -2663,6 +3065,12 @@ instance ToText ContentRatingNfvcbRating where
         CRNRNfvcbRe -> "nfvcbRe"
         CRNRNfvcbUnrated -> "nfvcbUnrated"
 
+instance FromJSON ContentRatingNfvcbRating where
+    parseJSON = parseJSONText "ContentRatingNfvcbRating"
+
+instance ToJSON ContentRatingNfvcbRating where
+    toJSON = toJSONText
+
 -- | The video\'s rating from the Nacionãlais Kino centrs (National Film
 -- Centre of Latvia).
 data ContentRatingNkclvRating
@@ -2696,6 +3104,12 @@ instance ToText ContentRatingNkclvRating where
         CRNRNkclv7plus -> "nkclv7plus"
         CRNRNkclvU -> "nkclvU"
         CRNRNkclvUnrated -> "nkclvUnrated"
+
+instance FromJSON ContentRatingNkclvRating where
+    parseJSON = parseJSONText "ContentRatingNkclvRating"
+
+instance ToJSON ContentRatingNkclvRating where
+    toJSON = toJSONText
 
 -- | The video\'s Office of Film and Literature Classification (OFLC - New
 -- Zealand) rating.
@@ -2751,6 +3165,12 @@ instance ToText ContentRatingOflcRating where
         CROROFLCRP16 -> "oflcRp16"
         CROROflcUnrated -> "oflcUnrated"
 
+instance FromJSON ContentRatingOflcRating where
+    parseJSON = parseJSONText "ContentRatingOflcRating"
+
+instance ToJSON ContentRatingOflcRating where
+    toJSON = toJSONText
+
 -- | The video\'s rating in Peru.
 data ContentRatingPefilmRating
     = CRPRPEFILM14
@@ -2783,6 +3203,12 @@ instance ToText ContentRatingPefilmRating where
         CRPRPefilmPg -> "pefilmPg"
         CRPRPefilmPt -> "pefilmPt"
         CRPRPefilmUnrated -> "pefilmUnrated"
+
+instance FromJSON ContentRatingPefilmRating where
+    parseJSON = parseJSONText "ContentRatingPefilmRating"
+
+instance ToJSON ContentRatingPefilmRating where
+    toJSON = toJSONText
 
 -- | The video\'s rating from the Hungarian Nemzeti Filmiroda, the Rating
 -- Committee of the National Office of Film.
@@ -2826,6 +3252,12 @@ instance ToText ContentRatingRcnofRating where
         CRRRRcnofV -> "rcnofV"
         CRRRRcnofVi -> "rcnofVi"
 
+instance FromJSON ContentRatingRcnofRating where
+    parseJSON = parseJSONText "ContentRatingRcnofRating"
+
+instance ToJSON ContentRatingRcnofRating where
+    toJSON = toJSONText
+
 -- | The video\'s rating in Venezuela.
 data ContentRatingResorteviolenciaRating
     = CRRRResorteviolenciaA
@@ -2862,6 +3294,12 @@ instance ToText ContentRatingResorteviolenciaRating where
         CRRRResorteviolenciaD -> "resorteviolenciaD"
         CRRRResorteviolenciaE -> "resorteviolenciaE"
         CRRRResorteviolenciaUnrated -> "resorteviolenciaUnrated"
+
+instance FromJSON ContentRatingResorteviolenciaRating where
+    parseJSON = parseJSONText "ContentRatingResorteviolenciaRating"
+
+instance ToJSON ContentRatingResorteviolenciaRating where
+    toJSON = toJSONText
 
 -- | The video\'s General Directorate of Radio, Television and Cinematography
 -- (Mexico) rating.
@@ -2905,6 +3343,12 @@ instance ToText ContentRatingRtcRating where
         CRRRRtcD -> "rtcD"
         CRRRRtcUnrated -> "rtcUnrated"
 
+instance FromJSON ContentRatingRtcRating where
+    parseJSON = parseJSONText "ContentRatingRtcRating"
+
+instance ToJSON ContentRatingRtcRating where
+    toJSON = toJSONText
+
 -- | The video\'s rating from Ireland\'s Raidió Teilifís Éireann.
 data ContentRatingRteRating
     = CRRRRteCh
@@ -2937,6 +3381,12 @@ instance ToText ContentRatingRteRating where
         CRRRRteMa -> "rteMa"
         CRRRRtePs -> "rtePs"
         CRRRRteUnrated -> "rteUnrated"
+
+instance FromJSON ContentRatingRteRating where
+    parseJSON = parseJSONText "ContentRatingRteRating"
+
+instance ToJSON ContentRatingRteRating where
+    toJSON = toJSONText
 
 -- | The video\'s National Film Registry of the Russian Federation (MKRF -
 -- Russia) rating.
@@ -2976,6 +3426,12 @@ instance ToText ContentRatingRussiaRating where
         CRRRRUSSIA6 -> "russia6"
         CRRRRussiaUnrated -> "russiaUnrated"
 
+instance FromJSON ContentRatingRussiaRating where
+    parseJSON = parseJSONText "ContentRatingRussiaRating"
+
+instance ToJSON ContentRatingRussiaRating where
+    toJSON = toJSONText
+
 -- | The video\'s rating in Slovakia.
 data ContentRatingSkfilmRating
     = CRSRSkfilmG
@@ -3008,6 +3464,12 @@ instance ToText ContentRatingSkfilmRating where
         CRSRSKFILMP5 -> "skfilmP5"
         CRSRSKFILMP8 -> "skfilmP8"
         CRSRSkfilmUnrated -> "skfilmUnrated"
+
+instance FromJSON ContentRatingSkfilmRating where
+    parseJSON = parseJSONText "ContentRatingSkfilmRating"
+
+instance ToJSON ContentRatingSkfilmRating where
+    toJSON = toJSONText
 
 -- | The video\'s rating in Iceland.
 data ContentRatingSmaisRating
@@ -3050,6 +3512,12 @@ instance ToText ContentRatingSmaisRating where
         CRSRSmaisL -> "smaisL"
         CRSRSmaisUnrated -> "smaisUnrated"
 
+instance FromJSON ContentRatingSmaisRating where
+    parseJSON = parseJSONText "ContentRatingSmaisRating"
+
+instance ToJSON ContentRatingSmaisRating where
+    toJSON = toJSONText
+
 -- | The video\'s rating from Statens medieråd (Sweden\'s National Media
 -- Council).
 data ContentRatingSmsaRating
@@ -3083,6 +3551,12 @@ instance ToText ContentRatingSmsaRating where
         CRSRSMSA7 -> "smsa7"
         CRSRSmsaA -> "smsaA"
         CRSRSmsaUnrated -> "smsaUnrated"
+
+instance FromJSON ContentRatingSmsaRating where
+    parseJSON = parseJSONText "ContentRatingSmsaRating"
+
+instance ToJSON ContentRatingSmsaRating where
+    toJSON = toJSONText
 
 -- | The video\'s TV Parental Guidelines (TVPG) rating.
 data ContentRatingTvpgRating
@@ -3129,6 +3603,12 @@ instance ToText ContentRatingTvpgRating where
         CRTRTVPGY7 -> "tvpgY7"
         CRTRTvpgY7Fv -> "tvpgY7Fv"
 
+instance FromJSON ContentRatingTvpgRating where
+    parseJSON = parseJSONText "ContentRatingTvpgRating"
+
+instance ToJSON ContentRatingTvpgRating where
+    toJSON = toJSONText
+
 -- | A rating that YouTube uses to identify age-restricted content.
 data ContentRatingYtRating
     = CRYRYtAgeRestricted
@@ -3145,6 +3625,12 @@ instance FromText ContentRatingYtRating where
 instance ToText ContentRatingYtRating where
     toText = \case
         CRYRYtAgeRestricted -> "ytAgeRestricted"
+
+instance FromJSON ContentRatingYtRating where
+    parseJSON = parseJSONText "ContentRatingYtRating"
+
+instance ToJSON ContentRatingYtRating where
+    toJSON = toJSONText
 
 -- | Describes in which corner of the video the visual widget will appear.
 data InvideoPositionCornerPosition
@@ -3175,6 +3661,12 @@ instance ToText InvideoPositionCornerPosition where
         IPCPTopLeft -> "topLeft"
         IPCPTopRight -> "topRight"
 
+instance FromJSON InvideoPositionCornerPosition where
+    parseJSON = parseJSONText "InvideoPositionCornerPosition"
+
+instance ToJSON InvideoPositionCornerPosition where
+    toJSON = toJSONText
+
 -- | Defines the position type.
 data InvideoPositionType
     = IPTCorner
@@ -3191,6 +3683,12 @@ instance FromText InvideoPositionType where
 instance ToText InvideoPositionType where
     toText = \case
         IPTCorner -> "corner"
+
+instance FromJSON InvideoPositionType where
+    parseJSON = parseJSONText "InvideoPositionType"
+
+instance ToJSON InvideoPositionType where
+    toJSON = toJSONText
 
 -- | Describes a timing type. If the value is offsetFromStart, then the
 -- offsetMs field represents an offset from the start of the video. If the
@@ -3215,6 +3713,12 @@ instance ToText InvideoTimingType where
     toText = \case
         ITTOffsetFromEnd -> "offsetFromEnd"
         ITTOffsetFromStart -> "offsetFromStart"
+
+instance FromJSON InvideoTimingType where
+    parseJSON = parseJSONText "InvideoTimingType"
+
+instance ToJSON InvideoTimingType where
+    toJSON = toJSONText
 
 -- | The broadcast\'s status. The status can be updated using the API\'s
 -- liveBroadcasts.transition method.
@@ -3274,6 +3778,12 @@ instance ToText LiveBroadcastStatusLifeCycleStatus where
         LBSLCSTestStarting -> "testStarting"
         LBSLCSTesting -> "testing"
 
+instance FromJSON LiveBroadcastStatusLifeCycleStatus where
+    parseJSON = parseJSONText "LiveBroadcastStatusLifeCycleStatus"
+
+instance ToJSON LiveBroadcastStatusLifeCycleStatus where
+    toJSON = toJSONText
+
 -- | Priority of the live broadcast event (internal state).
 data LiveBroadcastStatusLiveBroadcastPriority
     = LBSLBPHigh
@@ -3298,6 +3808,12 @@ instance ToText LiveBroadcastStatusLiveBroadcastPriority where
         LBSLBPHigh -> "high"
         LBSLBPLow -> "low"
         LBSLBPNormal -> "normal"
+
+instance FromJSON LiveBroadcastStatusLiveBroadcastPriority where
+    parseJSON = parseJSONText "LiveBroadcastStatusLiveBroadcastPriority"
+
+instance ToJSON LiveBroadcastStatusLiveBroadcastPriority where
+    toJSON = toJSONText
 
 -- | The broadcast\'s privacy status. Note that the broadcast represents
 -- exactly one YouTube video, so the privacy settings are identical to
@@ -3328,6 +3844,12 @@ instance ToText LiveBroadcastStatusPrivacyStatus where
         LBSPSPublic -> "public"
         LBSPSUnlisted -> "unlisted"
 
+instance FromJSON LiveBroadcastStatusPrivacyStatus where
+    parseJSON = parseJSONText "LiveBroadcastStatusPrivacyStatus"
+
+instance ToJSON LiveBroadcastStatusPrivacyStatus where
+    toJSON = toJSONText
+
 -- | The broadcast\'s recording status.
 data LiveBroadcastStatusRecordingStatus
     = LBSRSNotRecording
@@ -3353,6 +3875,12 @@ instance ToText LiveBroadcastStatusRecordingStatus where
         LBSRSRecorded -> "recorded"
         LBSRSRecording -> "recording"
 
+instance FromJSON LiveBroadcastStatusRecordingStatus where
+    parseJSON = parseJSONText "LiveBroadcastStatusRecordingStatus"
+
+instance ToJSON LiveBroadcastStatusRecordingStatus where
+    toJSON = toJSONText
+
 -- | The type of the topic.
 data LiveBroadcastTopicType
     = LBTTVideoGame
@@ -3369,6 +3897,12 @@ instance FromText LiveBroadcastTopicType where
 instance ToText LiveBroadcastTopicType where
     toText = \case
         LBTTVideoGame -> "videoGame"
+
+instance FromJSON LiveBroadcastTopicType where
+    parseJSON = parseJSONText "LiveBroadcastTopicType"
+
+instance ToJSON LiveBroadcastTopicType where
+    toJSON = toJSONText
 
 -- | How severe this issue is to the stream.
 data LiveStreamConfigurationIssueSeverity
@@ -3394,6 +3928,12 @@ instance ToText LiveStreamConfigurationIssueSeverity where
         LSCISError -> "error"
         LSCISInfo -> "info"
         LSCISWarning -> "warning"
+
+instance FromJSON LiveStreamConfigurationIssueSeverity where
+    parseJSON = parseJSONText "LiveStreamConfigurationIssueSeverity"
+
+instance ToJSON LiveStreamConfigurationIssueSeverity where
+    toJSON = toJSONText
 
 -- | The kind of error happening.
 data LiveStreamConfigurationIssueType
@@ -3540,6 +4080,12 @@ instance ToText LiveStreamConfigurationIssueType where
         LSCITVideoResolutionSuboptimal -> "videoResolutionSuboptimal"
         LSCITVideoResolutionUnsupported -> "videoResolutionUnsupported"
 
+instance FromJSON LiveStreamConfigurationIssueType where
+    parseJSON = parseJSONText "LiveStreamConfigurationIssueType"
+
+instance ToJSON LiveStreamConfigurationIssueType where
+    toJSON = toJSONText
+
 -- | The status code of this stream
 data LiveStreamHealthStatusStatus
     = LSHSSBad
@@ -3573,6 +4119,12 @@ instance ToText LiveStreamHealthStatusStatus where
         LSHSSOK -> "ok"
         LSHSSRevoked -> "revoked"
 
+instance FromJSON LiveStreamHealthStatusStatus where
+    parseJSON = parseJSONText "LiveStreamHealthStatusStatus"
+
+instance ToJSON LiveStreamHealthStatusStatus where
+    toJSON = toJSONText
+
 data LiveStreamStatusStreamStatus
     = LSSSSActive
       -- ^ @active@
@@ -3605,6 +4157,12 @@ instance ToText LiveStreamStatusStreamStatus where
         LSSSSInactive -> "inactive"
         LSSSSReady -> "ready"
 
+instance FromJSON LiveStreamStatusStreamStatus where
+    parseJSON = parseJSONText "LiveStreamStatusStreamStatus"
+
+instance ToJSON LiveStreamStatusStreamStatus where
+    toJSON = toJSONText
+
 -- | This resource\'s privacy status.
 data PlaylistItemStatusPrivacyStatus
     = PISPSPrivate
@@ -3629,6 +4187,12 @@ instance ToText PlaylistItemStatusPrivacyStatus where
         PISPSPrivate -> "private"
         PISPSPublic -> "public"
         PISPSUnlisted -> "unlisted"
+
+instance FromJSON PlaylistItemStatusPrivacyStatus where
+    parseJSON = parseJSONText "PlaylistItemStatusPrivacyStatus"
+
+instance ToJSON PlaylistItemStatusPrivacyStatus where
+    toJSON = toJSONText
 
 -- | The playlist\'s privacy status.
 data PlaylistStatusPrivacyStatus
@@ -3655,6 +4219,12 @@ instance ToText PlaylistStatusPrivacyStatus where
         PSPSPublic -> "public"
         PSPSUnlisted -> "unlisted"
 
+instance FromJSON PlaylistStatusPrivacyStatus where
+    parseJSON = parseJSONText "PlaylistStatusPrivacyStatus"
+
+instance ToJSON PlaylistStatusPrivacyStatus where
+    toJSON = toJSONText
+
 -- | Describes the type of the promoted item.
 data PromotedItemIdType
     = PIITRecentUpload
@@ -3679,6 +4249,12 @@ instance ToText PromotedItemIdType where
         PIITRecentUpload -> "recentUpload"
         PIITVideo -> "video"
         PIITWebsite -> "website"
+
+instance FromJSON PromotedItemIdType where
+    parseJSON = parseJSONText "PromotedItemIdType"
+
+instance ToJSON PromotedItemIdType where
+    toJSON = toJSONText
 
 -- | It indicates if the resource (video or channel) has upcoming\/active
 -- live broadcast content. Or it\'s \"none\" if there is not any
@@ -3707,6 +4283,12 @@ instance ToText SearchResultSnippetLiveBroadcastContent where
         SRSLBCNone -> "none"
         SRSLBCUpcoming -> "upcoming"
 
+instance FromJSON SearchResultSnippetLiveBroadcastContent where
+    parseJSON = parseJSONText "SearchResultSnippetLiveBroadcastContent"
+
+instance ToJSON SearchResultSnippetLiveBroadcastContent where
+    toJSON = toJSONText
+
 -- | The type of activity this subscription is for (only uploads,
 -- everything).
 data SubscriptionContentDetailsActivityType
@@ -3728,6 +4310,12 @@ instance ToText SubscriptionContentDetailsActivityType where
     toText = \case
         SCDATAll -> "all"
         SCDATUploads -> "uploads"
+
+instance FromJSON SubscriptionContentDetailsActivityType where
+    parseJSON = parseJSONText "SubscriptionContentDetailsActivityType"
+
+instance ToJSON SubscriptionContentDetailsActivityType where
+    toJSON = toJSONText
 
 -- | Video game rating, if any.
 data VideoAgeGatingVideoGameRating
@@ -3758,6 +4346,12 @@ instance ToText VideoAgeGatingVideoGameRating where
         VAGVGRM16Plus -> "m16Plus"
         VAGVGRM17Plus -> "m17Plus"
 
+instance FromJSON VideoAgeGatingVideoGameRating where
+    parseJSON = parseJSONText "VideoAgeGatingVideoGameRating"
+
+instance ToJSON VideoAgeGatingVideoGameRating where
+    toJSON = toJSONText
+
 -- | The value of captions indicates whether the video has captions or not.
 data VideoContentDetailsCaption
     = VCDCFalse
@@ -3778,6 +4372,12 @@ instance ToText VideoContentDetailsCaption where
     toText = \case
         VCDCFalse -> "false"
         VCDCTrue -> "true"
+
+instance FromJSON VideoContentDetailsCaption where
+    parseJSON = parseJSONText "VideoContentDetailsCaption"
+
+instance ToJSON VideoContentDetailsCaption where
+    toJSON = toJSONText
 
 -- | The value of definition indicates whether the video is available in high
 -- definition or only in standard definition.
@@ -3800,6 +4400,12 @@ instance ToText VideoContentDetailsDefinition where
     toText = \case
         VCDDHD -> "hd"
         VCDDSD -> "sd"
+
+instance FromJSON VideoContentDetailsDefinition where
+    parseJSON = parseJSONText "VideoContentDetailsDefinition"
+
+instance ToJSON VideoContentDetailsDefinition where
+    toJSON = toJSONText
 
 -- | Defines the context of the ping.
 data VideoConversionPingContext
@@ -3829,6 +4435,12 @@ instance ToText VideoConversionPingContext where
         VCPCDislike -> "dislike"
         VCPCLike -> "like"
         VCPCShare -> "share"
+
+instance FromJSON VideoConversionPingContext where
+    parseJSON = parseJSONText "VideoConversionPingContext"
+
+instance ToJSON VideoConversionPingContext where
+    toJSON = toJSONText
 
 -- | The uploaded file\'s type as detected by YouTube\'s video processing
 -- engine. Currently, YouTube only processes video files, but this field is
@@ -3873,6 +4485,12 @@ instance ToText VideoFileDetailsFileType where
         VFDFTProject -> "project"
         VFDFTVideo -> "video"
 
+instance FromJSON VideoFileDetailsFileType where
+    parseJSON = parseJSONText "VideoFileDetailsFileType"
+
+instance ToJSON VideoFileDetailsFileType where
+    toJSON = toJSONText
+
 -- | The amount that YouTube needs to rotate the original source content to
 -- properly display the video.
 data VideoFileDetailsVideoStreamRotation
@@ -3907,6 +4525,12 @@ instance ToText VideoFileDetailsVideoStreamRotation where
         VFDVSROther -> "other"
         VFDVSRUpsideDown -> "upsideDown"
 
+instance FromJSON VideoFileDetailsVideoStreamRotation where
+    parseJSON = parseJSONText "VideoFileDetailsVideoStreamRotation"
+
+instance ToJSON VideoFileDetailsVideoStreamRotation where
+    toJSON = toJSONText
+
 -- | The reason that YouTube failed to process the video. This property will
 -- only have a value if the processingStatus property\'s value is failed.
 data VideoProcessingDetailsProcessingFailureReason
@@ -3936,6 +4560,12 @@ instance ToText VideoProcessingDetailsProcessingFailureReason where
         VPDPFRStreamingFailed -> "streamingFailed"
         VPDPFRTranscodeFailed -> "transcodeFailed"
         VPDPFRUploadFailed -> "uploadFailed"
+
+instance FromJSON VideoProcessingDetailsProcessingFailureReason where
+    parseJSON = parseJSONText "VideoProcessingDetailsProcessingFailureReason"
+
+instance ToJSON VideoProcessingDetailsProcessingFailureReason where
+    toJSON = toJSONText
 
 -- | The video\'s processing status. This value indicates whether YouTube was
 -- able to process the video or if the video is still being processed.
@@ -3967,6 +4597,12 @@ instance ToText VideoProcessingDetailsProcessingStatus where
         VPDPSSucceeded -> "succeeded"
         VPDPSTerminated -> "terminated"
 
+instance FromJSON VideoProcessingDetailsProcessingStatus where
+    parseJSON = parseJSONText "VideoProcessingDetailsProcessingStatus"
+
+instance ToJSON VideoProcessingDetailsProcessingStatus where
+    toJSON = toJSONText
+
 data VideoRatingRating
     = VRRDislike
       -- ^ @dislike@
@@ -3995,6 +4631,12 @@ instance ToText VideoRatingRating where
         VRRNone -> "none"
         VRRUnspecified -> "unspecified"
 
+instance FromJSON VideoRatingRating where
+    parseJSON = parseJSONText "VideoRatingRating"
+
+instance ToJSON VideoRatingRating where
+    toJSON = toJSONText
+
 -- | Indicates if the video is an upcoming\/active live broadcast. Or it\'s
 -- \"none\" if the video is not an upcoming\/active live broadcast.
 data VideoSnippetLiveBroadcastContent
@@ -4020,6 +4662,12 @@ instance ToText VideoSnippetLiveBroadcastContent where
         VSLBCLive -> "live"
         VSLBCNone -> "none"
         VSLBCUpcoming -> "upcoming"
+
+instance FromJSON VideoSnippetLiveBroadcastContent where
+    parseJSON = parseJSONText "VideoSnippetLiveBroadcastContent"
+
+instance ToJSON VideoSnippetLiveBroadcastContent where
+    toJSON = toJSONText
 
 -- | This value explains why a video failed to upload. This property is only
 -- present if the uploadStatus property indicates that the upload failed.
@@ -4059,6 +4707,12 @@ instance ToText VideoStatusFailureReason where
         VSFRTooSmall -> "tooSmall"
         VSFRUploadAborted -> "uploadAborted"
 
+instance FromJSON VideoStatusFailureReason where
+    parseJSON = parseJSONText "VideoStatusFailureReason"
+
+instance ToJSON VideoStatusFailureReason where
+    toJSON = toJSONText
+
 -- | The video\'s license.
 data VideoStatusLicense
     = VSLCreativeCommon
@@ -4079,6 +4733,12 @@ instance ToText VideoStatusLicense where
     toText = \case
         VSLCreativeCommon -> "creativeCommon"
         VSLYoutube -> "youtube"
+
+instance FromJSON VideoStatusLicense where
+    parseJSON = parseJSONText "VideoStatusLicense"
+
+instance ToJSON VideoStatusLicense where
+    toJSON = toJSONText
 
 -- | The video\'s privacy status.
 data VideoStatusPrivacyStatus
@@ -4104,6 +4764,12 @@ instance ToText VideoStatusPrivacyStatus where
         VSPSPrivate -> "private"
         VSPSPublic -> "public"
         VSPSUnlisted -> "unlisted"
+
+instance FromJSON VideoStatusPrivacyStatus where
+    parseJSON = parseJSONText "VideoStatusPrivacyStatus"
+
+instance ToJSON VideoStatusPrivacyStatus where
+    toJSON = toJSONText
 
 -- | This value explains why YouTube rejected an uploaded video. This
 -- property is only present if the uploadStatus property indicates that the
@@ -4156,6 +4822,12 @@ instance ToText VideoStatusRejectionReason where
         VSRRUploaderAccountClosed -> "uploaderAccountClosed"
         VSRRUploaderAccountSuspended -> "uploaderAccountSuspended"
 
+instance FromJSON VideoStatusRejectionReason where
+    parseJSON = parseJSONText "VideoStatusRejectionReason"
+
+instance ToJSON VideoStatusRejectionReason where
+    toJSON = toJSONText
+
 -- | The status of the uploaded video.
 data VideoStatusUploadStatus
     = VSUSDeleted
@@ -4189,6 +4861,12 @@ instance ToText VideoStatusUploadStatus where
         VSUSRejected -> "rejected"
         VSUSUploaded -> "uploaded"
 
+instance FromJSON VideoStatusUploadStatus where
+    parseJSON = parseJSONText "VideoStatusUploadStatus"
+
+instance ToJSON VideoStatusUploadStatus where
+    toJSON = toJSONText
+
 data VideoSuggestionsItemEditorSuggestions
     = VSIESAudioQuietAudioSwap
       -- ^ @audioQuietAudioSwap@
@@ -4216,6 +4894,12 @@ instance ToText VideoSuggestionsItemEditorSuggestions where
         VSIESVideoAutoLevels -> "videoAutoLevels"
         VSIESVideoCrop -> "videoCrop"
         VSIESVideoStabilize -> "videoStabilize"
+
+instance FromJSON VideoSuggestionsItemEditorSuggestions where
+    parseJSON = parseJSONText "VideoSuggestionsItemEditorSuggestions"
+
+instance ToJSON VideoSuggestionsItemEditorSuggestions where
+    toJSON = toJSONText
 
 data VideoSuggestionsItemProcessingErrors
     = VSIPEArchiveFile
@@ -4253,6 +4937,12 @@ instance ToText VideoSuggestionsItemProcessingErrors where
         VSIPENotAVideoFile -> "notAVideoFile"
         VSIPEProjectFile -> "projectFile"
 
+instance FromJSON VideoSuggestionsItemProcessingErrors where
+    parseJSON = parseJSONText "VideoSuggestionsItemProcessingErrors"
+
+instance ToJSON VideoSuggestionsItemProcessingErrors where
+    toJSON = toJSONText
+
 data VideoSuggestionsItemProcessingHints
     = VSIPHNonStreamableMov
       -- ^ @nonStreamableMov@
@@ -4272,6 +4962,12 @@ instance ToText VideoSuggestionsItemProcessingHints where
     toText = \case
         VSIPHNonStreamableMov -> "nonStreamableMov"
         VSIPHSendBestQualityVideo -> "sendBestQualityVideo"
+
+instance FromJSON VideoSuggestionsItemProcessingHints where
+    parseJSON = parseJSONText "VideoSuggestionsItemProcessingHints"
+
+instance ToJSON VideoSuggestionsItemProcessingHints where
+    toJSON = toJSONText
 
 data VideoSuggestionsItemProcessingWarnings
     = VSIPWHasEditlist
@@ -4312,3 +5008,9 @@ instance ToText VideoSuggestionsItemProcessingWarnings where
         VSIPWUnknownAudioCodec -> "unknownAudioCodec"
         VSIPWUnknownContainer -> "unknownContainer"
         VSIPWUnknownVideoCodec -> "unknownVideoCodec"
+
+instance FromJSON VideoSuggestionsItemProcessingWarnings where
+    parseJSON = parseJSONText "VideoSuggestionsItemProcessingWarnings"
+
+instance ToJSON VideoSuggestionsItemProcessingWarnings where
+    toJSON = toJSONText

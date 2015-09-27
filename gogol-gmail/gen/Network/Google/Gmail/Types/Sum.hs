@@ -43,6 +43,12 @@ instance ToText LabelLabelListVisibility where
         LLLVLabelShow -> "labelShow"
         LLLVLabelShowIfUnread -> "labelShowIfUnread"
 
+instance FromJSON LabelLabelListVisibility where
+    parseJSON = parseJSONText "LabelLabelListVisibility"
+
+instance ToJSON LabelLabelListVisibility where
+    toJSON = toJSONText
+
 -- | The visibility of the label in the message list in the Gmail web
 -- interface.
 data LabelMessageListVisibility
@@ -64,6 +70,12 @@ instance ToText LabelMessageListVisibility where
     toText = \case
         LMLVHide -> "hide"
         LMLVShow -> "show"
+
+instance FromJSON LabelMessageListVisibility where
+    parseJSON = parseJSONText "LabelMessageListVisibility"
+
+instance ToJSON LabelMessageListVisibility where
+    toJSON = toJSONText
 
 -- | The owner type for the label. User labels are created by the user and
 -- can be modified and deleted by the user and can be applied to any
@@ -93,6 +105,12 @@ instance ToText LabelType where
         LTSystem -> "system"
         LTUser -> "user"
 
+instance FromJSON LabelType where
+    parseJSON = parseJSONText "LabelType"
+
+instance ToJSON LabelType where
+    toJSON = toJSONText
+
 -- | Filtering behavior of labelIds list specified.
 data WatchRequestLabelFilterAction
     = WRLFAExclude
@@ -113,3 +131,9 @@ instance ToText WatchRequestLabelFilterAction where
     toText = \case
         WRLFAExclude -> "exclude"
         WRLFAInclude -> "include"
+
+instance FromJSON WatchRequestLabelFilterAction where
+    parseJSON = parseJSONText "WatchRequestLabelFilterAction"
+
+instance ToJSON WatchRequestLabelFilterAction where
+    toJSON = toJSONText

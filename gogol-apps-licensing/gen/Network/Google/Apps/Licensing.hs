@@ -73,113 +73,140 @@ type LicenseAssignmentsAPI =
 
 -- | Assign License.
 type LicenseAssignmentsInsert =
-     "apps" :> "licensing" :> "v1" :> "product" :>
-       Capture "productId" Text
-       :> "sku"
-       :> Capture "skuId" Text
-       :> "user"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "apps" :>
+       "licensing" :>
+         "v1" :>
+           "product" :>
+             Capture "productId" Text :>
+               "sku" :>
+                 Capture "skuId" Text :>
+                   "user" :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Post '[JSON] LicenseAssignment
 
 -- | Assign License. This method supports patch semantics.
 type LicenseAssignmentsPatch =
-     "apps" :> "licensing" :> "v1" :> "product" :>
-       Capture "productId" Text
-       :> "sku"
-       :> Capture "skuId" Text
-       :> "user"
-       :> Capture "userId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "apps" :>
+       "licensing" :>
+         "v1" :>
+           "product" :>
+             Capture "productId" Text :>
+               "sku" :>
+                 Capture "skuId" Text :>
+                   "user" :>
+                     Capture "userId" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Patch '[JSON] LicenseAssignment
 
 -- | Get license assignment of a particular product and sku for a user
 type LicenseAssignmentsGet =
-     "apps" :> "licensing" :> "v1" :> "product" :>
-       Capture "productId" Text
-       :> "sku"
-       :> Capture "skuId" Text
-       :> "user"
-       :> Capture "userId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "apps" :>
+       "licensing" :>
+         "v1" :>
+           "product" :>
+             Capture "productId" Text :>
+               "sku" :>
+                 Capture "skuId" Text :>
+                   "user" :>
+                     Capture "userId" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON] LicenseAssignment
 
 -- | List license assignments for given product and sku of the customer.
 type LicenseAssignmentsListForProductAndSku =
-     "apps" :> "licensing" :> "v1" :> "product" :>
-       Capture "productId" Text
-       :> "sku"
-       :> Capture "skuId" Text
-       :> "users"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "customerId" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Natural
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "apps" :>
+       "licensing" :>
+         "v1" :>
+           "product" :>
+             Capture "productId" Text :>
+               "sku" :>
+                 Capture "skuId" Text :>
+                   "users" :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "customerId" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "maxResults" Natural :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Text :>
+                                         Get '[JSON] LicenseAssignmentList
 
 -- | List license assignments for given product of the customer.
 type LicenseAssignmentsListForProduct =
-     "apps" :> "licensing" :> "v1" :> "product" :>
-       Capture "productId" Text
-       :> "users"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "customerId" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Natural
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "apps" :>
+       "licensing" :>
+         "v1" :>
+           "product" :>
+             Capture "productId" Text :>
+               "users" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "customerId" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "maxResults" Natural :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON] LicenseAssignmentList
 
 -- | Revoke License.
 type LicenseAssignmentsDelete =
-     "apps" :> "licensing" :> "v1" :> "product" :>
-       Capture "productId" Text
-       :> "sku"
-       :> Capture "skuId" Text
-       :> "user"
-       :> Capture "userId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "apps" :>
+       "licensing" :>
+         "v1" :>
+           "product" :>
+             Capture "productId" Text :>
+               "sku" :>
+                 Capture "skuId" Text :>
+                   "user" :>
+                     Capture "userId" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Assign License.
 type LicenseAssignmentsUpdate =
-     "apps" :> "licensing" :> "v1" :> "product" :>
-       Capture "productId" Text
-       :> "sku"
-       :> Capture "skuId" Text
-       :> "user"
-       :> Capture "userId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "apps" :>
+       "licensing" :>
+         "v1" :>
+           "product" :>
+             Capture "productId" Text :>
+               "sku" :>
+                 Capture "skuId" Text :>
+                   "user" :>
+                     Capture "userId" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Put '[JSON] LicenseAssignment

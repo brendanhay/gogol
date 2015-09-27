@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -82,6 +83,25 @@ bOpacity = lens _bOpacity (\ s a -> s{_bOpacity = a})
 -- the bucket color, opacity, icon, or weight.
 bMin :: Lens' Bucket (Maybe Double)
 bMin = lens _bMin (\ s a -> s{_bMin = a})
+
+instance FromJSON Bucket where
+        parseJSON
+          = withObject "Bucket"
+              (\ o ->
+                 Bucket <$>
+                   (o .:? "max") <*> (o .:? "color") <*>
+                     (o .:? "weight")
+                     <*> (o .:? "icon")
+                     <*> (o .:? "opacity")
+                     <*> (o .:? "min"))
+
+instance ToJSON Bucket where
+        toJSON Bucket{..}
+          = object
+              (catMaybes
+                 [("max" .=) <$> _bMax, ("color" .=) <$> _bColor,
+                  ("weight" .=) <$> _bWeight, ("icon" .=) <$> _bIcon,
+                  ("opacity" .=) <$> _bOpacity, ("min" .=) <$> _bMin])
 
 -- | Specifies the details of a column in a table.
 --
@@ -238,6 +258,41 @@ cDescription :: Lens' Column (Maybe Text)
 cDescription
   = lens _cDescription (\ s a -> s{_cDescription = a})
 
+instance FromJSON Column where
+        parseJSON
+          = withObject "Column"
+              (\ o ->
+                 Column <$>
+                   (o .:? "columnJsonSchema") <*>
+                     (o .:? "graphPredicate")
+                     <*> (o .:? "kind" .!= "fusiontables#column")
+                     <*> (o .:? "baseColumn")
+                     <*> (o .:? "columnPropertiesJson")
+                     <*> (o .:? "name")
+                     <*> (o .:? "type")
+                     <*> (o .:? "formatPattern")
+                     <*> (o .:? "columnId")
+                     <*> (o .:? "validValues" .!= mempty)
+                     <*> (o .:? "validateData")
+                     <*> (o .:? "description"))
+
+instance ToJSON Column where
+        toJSON Column{..}
+          = object
+              (catMaybes
+                 [("columnJsonSchema" .=) <$> _cColumnJsonSchema,
+                  ("graphPredicate" .=) <$> _cGraphPredicate,
+                  Just ("kind" .= _cKind),
+                  ("baseColumn" .=) <$> _cBaseColumn,
+                  ("columnPropertiesJson" .=) <$>
+                    _cColumnPropertiesJson,
+                  ("name" .=) <$> _cName, ("type" .=) <$> _cType,
+                  ("formatPattern" .=) <$> _cFormatPattern,
+                  ("columnId" .=) <$> _cColumnId,
+                  ("validValues" .=) <$> _cValidValues,
+                  ("validateData" .=) <$> _cValidateData,
+                  ("description" .=) <$> _cDescription])
+
 -- | Identifier of the base column. If present, this column is derived from
 -- the specified base column.
 --
@@ -273,6 +328,20 @@ cbcTableIndex
 cbcColumnId :: Lens' ColumnBaseColumn (Maybe Int32)
 cbcColumnId
   = lens _cbcColumnId (\ s a -> s{_cbcColumnId = a})
+
+instance FromJSON ColumnBaseColumn where
+        parseJSON
+          = withObject "ColumnBaseColumn"
+              (\ o ->
+                 ColumnBaseColumn <$>
+                   (o .:? "tableIndex") <*> (o .:? "columnId"))
+
+instance ToJSON ColumnBaseColumn where
+        toJSON ColumnBaseColumn{..}
+          = object
+              (catMaybes
+                 [("tableIndex" .=) <$> _cbcTableIndex,
+                  ("columnId" .=) <$> _cbcColumnId])
 
 -- | Represents a list of columns in a table.
 --
@@ -328,6 +397,23 @@ clItems
   = lens _clItems (\ s a -> s{_clItems = a}) . _Default
       . _Coerce
 
+instance FromJSON ColumnList where
+        parseJSON
+          = withObject "ColumnList"
+              (\ o ->
+                 ColumnList <$>
+                   (o .:? "totalItems") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "fusiontables#columnList")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON ColumnList where
+        toJSON ColumnList{..}
+          = object
+              (catMaybes
+                 [("totalItems" .=) <$> _clTotalItems,
+                  ("nextPageToken" .=) <$> _clNextPageToken,
+                  Just ("kind" .= _clKind), ("items" .=) <$> _clItems])
+
 -- | Represents a Geometry object.
 --
 -- /See:/ 'geometry' smart constructor.
@@ -370,6 +456,23 @@ gGeometry
 gType :: Lens' Geometry Text
 gType = lens _gType (\ s a -> s{_gType = a})
 
+instance FromJSON Geometry where
+        parseJSON
+          = withObject "Geometry"
+              (\ o ->
+                 Geometry <$>
+                   (o .:? "geometries" .!= mempty) <*>
+                     (o .:? "geometry")
+                     <*> (o .:? "type" .!= "GeometryCollection"))
+
+instance ToJSON Geometry where
+        toJSON Geometry{..}
+          = object
+              (catMaybes
+                 [("geometries" .=) <$> _gGeometries,
+                  ("geometry" .=) <$> _gGeometry,
+                  Just ("type" .= _gType)])
+
 -- | Represents an import request.
 --
 -- /See:/ 'import'' smart constructor.
@@ -404,6 +507,21 @@ iNumRowsReceived
   = lens _iNumRowsReceived
       (\ s a -> s{_iNumRowsReceived = a})
 
+instance FromJSON Import where
+        parseJSON
+          = withObject "Import"
+              (\ o ->
+                 Import <$>
+                   (o .:? "kind" .!= "fusiontables#import") <*>
+                     (o .:? "numRowsReceived"))
+
+instance ToJSON Import where
+        toJSON Import{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _iKind),
+                  ("numRowsReceived" .=) <$> _iNumRowsReceived])
+
 -- | Represents a line geometry.
 --
 -- /See:/ 'line' smart constructor.
@@ -437,6 +555,21 @@ lCoordinates
 -- | Type: A line geometry.
 lType :: Lens' Line Text
 lType = lens _lType (\ s a -> s{_lType = a})
+
+instance FromJSON Line where
+        parseJSON
+          = withObject "Line"
+              (\ o ->
+                 Line <$>
+                   (o .:? "coordinates" .!= mempty) <*>
+                     (o .:? "type" .!= "LineString"))
+
+instance ToJSON Line where
+        toJSON Line{..}
+          = object
+              (catMaybes
+                 [("coordinates" .=) <$> _lCoordinates,
+                  Just ("type" .= _lType)])
 
 -- | Represents a LineStyle within a StyleSetting
 --
@@ -505,6 +638,27 @@ lsStrokeColor
   = lens _lsStrokeColor
       (\ s a -> s{_lsStrokeColor = a})
 
+instance FromJSON LineStyle where
+        parseJSON
+          = withObject "LineStyle"
+              (\ o ->
+                 LineStyle <$>
+                   (o .:? "strokeColorStyler") <*>
+                     (o .:? "strokeWeight")
+                     <*> (o .:? "strokeOpacity")
+                     <*> (o .:? "strokeWeightStyler")
+                     <*> (o .:? "strokeColor"))
+
+instance ToJSON LineStyle where
+        toJSON LineStyle{..}
+          = object
+              (catMaybes
+                 [("strokeColorStyler" .=) <$> _lsStrokeColorStyler,
+                  ("strokeWeight" .=) <$> _lsStrokeWeight,
+                  ("strokeOpacity" .=) <$> _lsStrokeOpacity,
+                  ("strokeWeightStyler" .=) <$> _lsStrokeWeightStyler,
+                  ("strokeColor" .=) <$> _lsStrokeColor])
+
 -- | Represents a point object.
 --
 -- /See:/ 'point' smart constructor.
@@ -540,6 +694,21 @@ poiCoordinates
 poiType :: Lens' Point Text
 poiType = lens _poiType (\ s a -> s{_poiType = a})
 
+instance FromJSON Point where
+        parseJSON
+          = withObject "Point"
+              (\ o ->
+                 Point <$>
+                   (o .:? "coordinates" .!= mempty) <*>
+                     (o .:? "type" .!= "Point"))
+
+instance ToJSON Point where
+        toJSON Point{..}
+          = object
+              (catMaybes
+                 [("coordinates" .=) <$> _poiCoordinates,
+                  Just ("type" .= _poiType)])
+
 -- | Represents a PointStyle within a StyleSetting
 --
 -- /See:/ 'pointStyle' smart constructor.
@@ -574,6 +743,20 @@ psIconStyler :: Lens' PointStyle (Maybe (Maybe StyleFunction))
 psIconStyler
   = lens _psIconStyler (\ s a -> s{_psIconStyler = a})
 
+instance FromJSON PointStyle where
+        parseJSON
+          = withObject "PointStyle"
+              (\ o ->
+                 PointStyle <$>
+                   (o .:? "iconName") <*> (o .:? "iconStyler"))
+
+instance ToJSON PointStyle where
+        toJSON PointStyle{..}
+          = object
+              (catMaybes
+                 [("iconName" .=) <$> _psIconName,
+                  ("iconStyler" .=) <$> _psIconStyler])
+
 -- | Represents a polygon object.
 --
 -- /See:/ 'polygon' smart constructor.
@@ -607,6 +790,21 @@ pCoordinates
 -- | Type: A polygon geometry.
 pType :: Lens' Polygon Text
 pType = lens _pType (\ s a -> s{_pType = a})
+
+instance FromJSON Polygon where
+        parseJSON
+          = withObject "Polygon"
+              (\ o ->
+                 Polygon <$>
+                   (o .:? "coordinates" .!= mempty) <*>
+                     (o .:? "type" .!= "Polygon"))
+
+instance ToJSON Polygon where
+        toJSON Polygon{..}
+          = object
+              (catMaybes
+                 [("coordinates" .=) <$> _pCoordinates,
+                  Just ("type" .= _pType)])
 
 -- | Represents a PolygonStyle within a StyleSetting
 --
@@ -706,6 +904,32 @@ psStrokeColor
   = lens _psStrokeColor
       (\ s a -> s{_psStrokeColor = a})
 
+instance FromJSON PolygonStyle where
+        parseJSON
+          = withObject "PolygonStyle"
+              (\ o ->
+                 PolygonStyle <$>
+                   (o .:? "fillColorStyler") <*> (o .:? "fillColor") <*>
+                     (o .:? "strokeColorStyler")
+                     <*> (o .:? "strokeWeight")
+                     <*> (o .:? "strokeOpacity")
+                     <*> (o .:? "fillOpacity")
+                     <*> (o .:? "strokeWeightStyler")
+                     <*> (o .:? "strokeColor"))
+
+instance ToJSON PolygonStyle where
+        toJSON PolygonStyle{..}
+          = object
+              (catMaybes
+                 [("fillColorStyler" .=) <$> _psFillColorStyler,
+                  ("fillColor" .=) <$> _psFillColor,
+                  ("strokeColorStyler" .=) <$> _psStrokeColorStyler,
+                  ("strokeWeight" .=) <$> _psStrokeWeight,
+                  ("strokeOpacity" .=) <$> _psStrokeOpacity,
+                  ("fillOpacity" .=) <$> _psFillOpacity,
+                  ("strokeWeightStyler" .=) <$> _psStrokeWeightStyler,
+                  ("strokeColor" .=) <$> _psStrokeColor])
+
 -- | Represents a response to a SQL statement.
 --
 -- /See:/ 'sqlresponse' smart constructor.
@@ -752,6 +976,22 @@ sColumns
   = lens _sColumns (\ s a -> s{_sColumns = a}) .
       _Default
       . _Coerce
+
+instance FromJSON Sqlresponse where
+        parseJSON
+          = withObject "Sqlresponse"
+              (\ o ->
+                 Sqlresponse <$>
+                   (o .:? "kind" .!= "fusiontables#sqlresponse") <*>
+                     (o .:? "rows" .!= mempty)
+                     <*> (o .:? "columns" .!= mempty))
+
+instance ToJSON Sqlresponse where
+        toJSON Sqlresponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _sKind), ("rows" .=) <$> _sRows,
+                  ("columns" .=) <$> _sColumns])
 
 -- | Represents a StyleFunction within a StyleSetting
 --
@@ -813,6 +1053,24 @@ sfColumnName :: Lens' StyleFunction (Maybe Text)
 sfColumnName
   = lens _sfColumnName (\ s a -> s{_sfColumnName = a})
 
+instance FromJSON StyleFunction where
+        parseJSON
+          = withObject "StyleFunction"
+              (\ o ->
+                 StyleFunction <$>
+                   (o .:? "buckets" .!= mempty) <*> (o .:? "kind") <*>
+                     (o .:? "gradient")
+                     <*> (o .:? "columnName"))
+
+instance ToJSON StyleFunction where
+        toJSON StyleFunction{..}
+          = object
+              (catMaybes
+                 [("buckets" .=) <$> _sfBuckets,
+                  ("kind" .=) <$> _sfKind,
+                  ("gradient" .=) <$> _sfGradient,
+                  ("columnName" .=) <$> _sfColumnName])
+
 -- | Gradient function that interpolates a range of colors based on column
 -- value.
 --
@@ -858,6 +1116,21 @@ sfgColors
       _Default
       . _Coerce
 
+instance FromJSON StyleFunctionGradient where
+        parseJSON
+          = withObject "StyleFunctionGradient"
+              (\ o ->
+                 StyleFunctionGradient <$>
+                   (o .:? "max") <*> (o .:? "min") <*>
+                     (o .:? "colors" .!= mempty))
+
+instance ToJSON StyleFunctionGradient where
+        toJSON StyleFunctionGradient{..}
+          = object
+              (catMaybes
+                 [("max" .=) <$> _sfgMax, ("min" .=) <$> _sfgMin,
+                  ("colors" .=) <$> _sfgColors])
+
 --
 -- /See:/ 'styleFunctionItemColorsGradient' smart constructor.
 data StyleFunctionItemColorsGradient = StyleFunctionItemColorsGradient
@@ -889,6 +1162,21 @@ sficgColor
 sficgOpacity :: Lens' StyleFunctionItemColorsGradient (Maybe Double)
 sficgOpacity
   = lens _sficgOpacity (\ s a -> s{_sficgOpacity = a})
+
+instance FromJSON StyleFunctionItemColorsGradient
+         where
+        parseJSON
+          = withObject "StyleFunctionItemColorsGradient"
+              (\ o ->
+                 StyleFunctionItemColorsGradient <$>
+                   (o .:? "color") <*> (o .:? "opacity"))
+
+instance ToJSON StyleFunctionItemColorsGradient where
+        toJSON StyleFunctionItemColorsGradient{..}
+          = object
+              (catMaybes
+                 [("color" .=) <$> _sficgColor,
+                  ("opacity" .=) <$> _sficgOpacity])
 
 -- | Represents a complete StyleSettings object. The primary key is a
 -- combination of the tableId and a styleId.
@@ -973,6 +1261,30 @@ ssTableId :: Lens' StyleSetting (Maybe Text)
 ssTableId
   = lens _ssTableId (\ s a -> s{_ssTableId = a})
 
+instance FromJSON StyleSetting where
+        parseJSON
+          = withObject "StyleSetting"
+              (\ o ->
+                 StyleSetting <$>
+                   (o .:? "polylineOptions") <*>
+                     (o .:? "polygonOptions")
+                     <*> (o .:? "markerOptions")
+                     <*> (o .:? "kind" .!= "fusiontables#styleSetting")
+                     <*> (o .:? "name")
+                     <*> (o .:? "styleId")
+                     <*> (o .:? "tableId"))
+
+instance ToJSON StyleSetting where
+        toJSON StyleSetting{..}
+          = object
+              (catMaybes
+                 [("polylineOptions" .=) <$> _ssPolylineOptions,
+                  ("polygonOptions" .=) <$> _ssPolygonOptions,
+                  ("markerOptions" .=) <$> _ssMarkerOptions,
+                  Just ("kind" .= _ssKind), ("name" .=) <$> _ssName,
+                  ("styleId" .=) <$> _ssStyleId,
+                  ("tableId" .=) <$> _ssTableId])
+
 -- | Represents a list of styles for a given table.
 --
 -- /See:/ 'styleSettingList' smart constructor.
@@ -1028,6 +1340,24 @@ sslItems
   = lens _sslItems (\ s a -> s{_sslItems = a}) .
       _Default
       . _Coerce
+
+instance FromJSON StyleSettingList where
+        parseJSON
+          = withObject "StyleSettingList"
+              (\ o ->
+                 StyleSettingList <$>
+                   (o .:? "totalItems") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "fusiontables#styleSettingList")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON StyleSettingList where
+        toJSON StyleSettingList{..}
+          = object
+              (catMaybes
+                 [("totalItems" .=) <$> _sslTotalItems,
+                  ("nextPageToken" .=) <$> _sslNextPageToken,
+                  Just ("kind" .= _sslKind),
+                  ("items" .=) <$> _sslItems])
 
 -- | Represents a table.
 --
@@ -1171,6 +1501,45 @@ ttAttributionLink
   = lens _ttAttributionLink
       (\ s a -> s{_ttAttributionLink = a})
 
+instance FromJSON Table where
+        parseJSON
+          = withObject "Table"
+              (\ o ->
+                 Table <$>
+                   (o .:? "isExportable") <*>
+                     (o .:? "kind" .!= "fusiontables#table")
+                     <*> (o .:? "columnPropertiesJsonSchema")
+                     <*> (o .:? "tablePropertiesJsonSchema")
+                     <*> (o .:? "name")
+                     <*> (o .:? "tablePropertiesJson")
+                     <*> (o .:? "columns" .!= mempty)
+                     <*> (o .:? "baseTableIds" .!= mempty)
+                     <*> (o .:? "tableId")
+                     <*> (o .:? "sql")
+                     <*> (o .:? "description")
+                     <*> (o .:? "attribution")
+                     <*> (o .:? "attributionLink"))
+
+instance ToJSON Table where
+        toJSON Table{..}
+          = object
+              (catMaybes
+                 [("isExportable" .=) <$> _ttIsExportable,
+                  Just ("kind" .= _ttKind),
+                  ("columnPropertiesJsonSchema" .=) <$>
+                    _ttColumnPropertiesJsonSchema,
+                  ("tablePropertiesJsonSchema" .=) <$>
+                    _ttTablePropertiesJsonSchema,
+                  ("name" .=) <$> _ttName,
+                  ("tablePropertiesJson" .=) <$>
+                    _ttTablePropertiesJson,
+                  ("columns" .=) <$> _ttColumns,
+                  ("baseTableIds" .=) <$> _ttBaseTableIds,
+                  ("tableId" .=) <$> _ttTableId, ("sql" .=) <$> _ttSql,
+                  ("description" .=) <$> _ttDescription,
+                  ("attribution" .=) <$> _ttAttribution,
+                  ("attributionLink" .=) <$> _ttAttributionLink])
+
 -- | Represents a list of tables.
 --
 -- /See:/ 'tableList' smart constructor.
@@ -1216,6 +1585,23 @@ tabItems
   = lens _tabItems (\ s a -> s{_tabItems = a}) .
       _Default
       . _Coerce
+
+instance FromJSON TableList where
+        parseJSON
+          = withObject "TableList"
+              (\ o ->
+                 TableList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "fusiontables#tableList")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON TableList where
+        toJSON TableList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _tabNextPageToken,
+                  Just ("kind" .= _tabKind),
+                  ("items" .=) <$> _tabItems])
 
 -- | A background task on a table, initiated for time- or resource-consuming
 -- operations such as changing column types or deleting all rows.
@@ -1275,6 +1661,25 @@ tType = lens _tType (\ s a -> s{_tType = a})
 tStarted :: Lens' Task (Maybe Bool)
 tStarted = lens _tStarted (\ s a -> s{_tStarted = a})
 
+instance FromJSON Task where
+        parseJSON
+          = withObject "Task"
+              (\ o ->
+                 Task <$>
+                   (o .:? "progress") <*> (o .:? "taskId") <*>
+                     (o .:? "kind" .!= "fusiontables#task")
+                     <*> (o .:? "type")
+                     <*> (o .:? "started"))
+
+instance ToJSON Task where
+        toJSON Task{..}
+          = object
+              (catMaybes
+                 [("progress" .=) <$> _tProgress,
+                  ("taskId" .=) <$> _tTaskId, Just ("kind" .= _tKind),
+                  ("type" .=) <$> _tType,
+                  ("started" .=) <$> _tStarted])
+
 -- | Represents a list of tasks for a table.
 --
 -- /See:/ 'taskList' smart constructor.
@@ -1327,6 +1732,23 @@ tlItems :: Lens' TaskList [Maybe Task]
 tlItems
   = lens _tlItems (\ s a -> s{_tlItems = a}) . _Default
       . _Coerce
+
+instance FromJSON TaskList where
+        parseJSON
+          = withObject "TaskList"
+              (\ o ->
+                 TaskList <$>
+                   (o .:? "totalItems") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "fusiontables#taskList")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON TaskList where
+        toJSON TaskList{..}
+          = object
+              (catMaybes
+                 [("totalItems" .=) <$> _tlTotalItems,
+                  ("nextPageToken" .=) <$> _tlNextPageToken,
+                  Just ("kind" .= _tlKind), ("items" .=) <$> _tlItems])
 
 -- | Represents the contents of InfoWindow templates.
 --
@@ -1404,6 +1826,29 @@ temTableId :: Lens' Template (Maybe Text)
 temTableId
   = lens _temTableId (\ s a -> s{_temTableId = a})
 
+instance FromJSON Template where
+        parseJSON
+          = withObject "Template"
+              (\ o ->
+                 Template <$>
+                   (o .:? "automaticColumnNames" .!= mempty) <*>
+                     (o .:? "templateId")
+                     <*> (o .:? "kind" .!= "fusiontables#template")
+                     <*> (o .:? "body")
+                     <*> (o .:? "name")
+                     <*> (o .:? "tableId"))
+
+instance ToJSON Template where
+        toJSON Template{..}
+          = object
+              (catMaybes
+                 [("automaticColumnNames" .=) <$>
+                    _temAutomaticColumnNames,
+                  ("templateId" .=) <$> _temTemplateId,
+                  Just ("kind" .= _temKind), ("body" .=) <$> _temBody,
+                  ("name" .=) <$> _temName,
+                  ("tableId" .=) <$> _temTableId])
+
 -- | Represents a list of templates for a given table.
 --
 -- /See:/ 'templateList' smart constructor.
@@ -1459,3 +1904,21 @@ tllItems
   = lens _tllItems (\ s a -> s{_tllItems = a}) .
       _Default
       . _Coerce
+
+instance FromJSON TemplateList where
+        parseJSON
+          = withObject "TemplateList"
+              (\ o ->
+                 TemplateList <$>
+                   (o .:? "totalItems") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "fusiontables#templateList")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON TemplateList where
+        toJSON TemplateList{..}
+          = object
+              (catMaybes
+                 [("totalItems" .=) <$> _tllTotalItems,
+                  ("nextPageToken" .=) <$> _tllNextPageToken,
+                  Just ("kind" .= _tllKind),
+                  ("items" .=) <$> _tllItems])

@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -33,6 +34,12 @@ data Empty =
 empty
     :: Empty
 empty = Empty
+
+instance FromJSON Empty where
+        parseJSON = withObject "Empty" (\ o -> pure Empty)
+
+instance ToJSON Empty where
+        toJSON = const (Object mempty)
 
 -- | A common proto for logging HTTP requests.
 --
@@ -129,6 +136,32 @@ hrReferer :: Lens' HttpRequest (Maybe Text)
 hrReferer
   = lens _hrReferer (\ s a -> s{_hrReferer = a})
 
+instance FromJSON HttpRequest where
+        parseJSON
+          = withObject "HttpRequest"
+              (\ o ->
+                 HttpRequest <$>
+                   (o .:? "status") <*> (o .:? "requestUrl") <*>
+                     (o .:? "remoteIp")
+                     <*> (o .:? "requestSize")
+                     <*> (o .:? "userAgent")
+                     <*> (o .:? "responseSize")
+                     <*> (o .:? "requestMethod")
+                     <*> (o .:? "referer"))
+
+instance ToJSON HttpRequest where
+        toJSON HttpRequest{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _hrStatus,
+                  ("requestUrl" .=) <$> _hrRequestUrl,
+                  ("remoteIp" .=) <$> _hrRemoteIp,
+                  ("requestSize" .=) <$> _hrRequestSize,
+                  ("userAgent" .=) <$> _hrUserAgent,
+                  ("responseSize" .=) <$> _hrResponseSize,
+                  ("requestMethod" .=) <$> _hrRequestMethod,
+                  ("referer" .=) <$> _hrReferer])
+
 -- | Result returned from ListLogServiceIndexesRequest.
 --
 -- /See:/ 'listLogServiceIndexesResponse' smart constructor.
@@ -173,6 +206,22 @@ llsirServiceIndexPrefixes
       . _Default
       . _Coerce
 
+instance FromJSON ListLogServiceIndexesResponse where
+        parseJSON
+          = withObject "ListLogServiceIndexesResponse"
+              (\ o ->
+                 ListLogServiceIndexesResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "serviceIndexPrefixes" .!= mempty))
+
+instance ToJSON ListLogServiceIndexesResponse where
+        toJSON ListLogServiceIndexesResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _llsirNextPageToken,
+                  ("serviceIndexPrefixes" .=) <$>
+                    _llsirServiceIndexPrefixes])
+
 -- | Result returned from \`ListLogServiceSinks\`.
 --
 -- /See:/ 'listLogServiceSinksResponse' smart constructor.
@@ -200,6 +249,17 @@ llssrSinks
   = lens _llssrSinks (\ s a -> s{_llssrSinks = a}) .
       _Default
       . _Coerce
+
+instance FromJSON ListLogServiceSinksResponse where
+        parseJSON
+          = withObject "ListLogServiceSinksResponse"
+              (\ o ->
+                 ListLogServiceSinksResponse <$>
+                   (o .:? "sinks" .!= mempty))
+
+instance ToJSON ListLogServiceSinksResponse where
+        toJSON ListLogServiceSinksResponse{..}
+          = object (catMaybes [("sinks" .=) <$> _llssrSinks])
 
 -- | Result returned from \`ListLogServicesRequest\`.
 --
@@ -242,6 +302,21 @@ llsrLogServices
       . _Default
       . _Coerce
 
+instance FromJSON ListLogServicesResponse where
+        parseJSON
+          = withObject "ListLogServicesResponse"
+              (\ o ->
+                 ListLogServicesResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "logServices" .!= mempty))
+
+instance ToJSON ListLogServicesResponse where
+        toJSON ListLogServicesResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _llsrNextPageToken,
+                  ("logServices" .=) <$> _llsrLogServices])
+
 -- | Result returned from \`ListLogSinks\`.
 --
 -- /See:/ 'listLogSinksResponse' smart constructor.
@@ -269,6 +344,16 @@ llsrSinks
   = lens _llsrSinks (\ s a -> s{_llsrSinks = a}) .
       _Default
       . _Coerce
+
+instance FromJSON ListLogSinksResponse where
+        parseJSON
+          = withObject "ListLogSinksResponse"
+              (\ o ->
+                 ListLogSinksResponse <$> (o .:? "sinks" .!= mempty))
+
+instance ToJSON ListLogSinksResponse where
+        toJSON ListLogSinksResponse{..}
+          = object (catMaybes [("sinks" .=) <$> _llsrSinks])
 
 -- | Result returned from ListLogs.
 --
@@ -308,6 +393,21 @@ llrLogs
   = lens _llrLogs (\ s a -> s{_llrLogs = a}) . _Default
       . _Coerce
 
+instance FromJSON ListLogsResponse where
+        parseJSON
+          = withObject "ListLogsResponse"
+              (\ o ->
+                 ListLogsResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "logs" .!= mempty))
+
+instance ToJSON ListLogsResponse where
+        toJSON ListLogsResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _llrNextPageToken,
+                  ("logs" .=) <$> _llrLogs])
+
 -- | Result returned from \`ListSinks\`.
 --
 -- /See:/ 'listSinksResponse' smart constructor.
@@ -335,6 +435,16 @@ lsrSinks
   = lens _lsrSinks (\ s a -> s{_lsrSinks = a}) .
       _Default
       . _Coerce
+
+instance FromJSON ListSinksResponse where
+        parseJSON
+          = withObject "ListSinksResponse"
+              (\ o ->
+                 ListSinksResponse <$> (o .:? "sinks" .!= mempty))
+
+instance ToJSON ListSinksResponse where
+        toJSON ListSinksResponse{..}
+          = object (catMaybes [("sinks" .=) <$> _lsrSinks])
 
 -- | _Output only._ Describes a log, which is a named stream of log entries.
 --
@@ -386,6 +496,22 @@ logPayloadType :: Lens' Log (Maybe Text)
 logPayloadType
   = lens _logPayloadType
       (\ s a -> s{_logPayloadType = a})
+
+instance FromJSON Log where
+        parseJSON
+          = withObject "Log"
+              (\ o ->
+                 Log <$>
+                   (o .:? "name") <*> (o .:? "displayName") <*>
+                     (o .:? "payloadType"))
+
+instance ToJSON Log where
+        toJSON Log{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _logName,
+                  ("displayName" .=) <$> _logDisplayName,
+                  ("payloadType" .=) <$> _logPayloadType])
 
 -- | An individual entry in a log.
 --
@@ -474,6 +600,30 @@ leProtoPayload :: Lens' LogEntry (Maybe LogEntryProtoPayload)
 leProtoPayload
   = lens _leProtoPayload
       (\ s a -> s{_leProtoPayload = a})
+
+instance FromJSON LogEntry where
+        parseJSON
+          = withObject "LogEntry"
+              (\ o ->
+                 LogEntry <$>
+                   (o .:? "log") <*> (o .:? "textPayload") <*>
+                     (o .:? "httpRequest")
+                     <*> (o .:? "structPayload")
+                     <*> (o .:? "insertId")
+                     <*> (o .:? "metadata")
+                     <*> (o .:? "protoPayload"))
+
+instance ToJSON LogEntry where
+        toJSON LogEntry{..}
+          = object
+              (catMaybes
+                 [("log" .=) <$> _leLog,
+                  ("textPayload" .=) <$> _leTextPayload,
+                  ("httpRequest" .=) <$> _leHttpRequest,
+                  ("structPayload" .=) <$> _leStructPayload,
+                  ("insertId" .=) <$> _leInsertId,
+                  ("metadata" .=) <$> _leMetadata,
+                  ("protoPayload" .=) <$> _leProtoPayload])
 
 -- | Additional data that is associated with a log entry, set by the service
 -- creating the log entry.
@@ -581,6 +731,32 @@ lemTimestamp :: Lens' LogEntryMetadata (Maybe Text)
 lemTimestamp
   = lens _lemTimestamp (\ s a -> s{_lemTimestamp = a})
 
+instance FromJSON LogEntryMetadata where
+        parseJSON
+          = withObject "LogEntryMetadata"
+              (\ o ->
+                 LogEntryMetadata <$>
+                   (o .:? "severity") <*> (o .:? "zone") <*>
+                     (o .:? "userId")
+                     <*> (o .:? "serviceName")
+                     <*> (o .:? "labels")
+                     <*> (o .:? "region")
+                     <*> (o .:? "projectId")
+                     <*> (o .:? "timestamp"))
+
+instance ToJSON LogEntryMetadata where
+        toJSON LogEntryMetadata{..}
+          = object
+              (catMaybes
+                 [("severity" .=) <$> _lemSeverity,
+                  ("zone" .=) <$> _lemZone,
+                  ("userId" .=) <$> _lemUserId,
+                  ("serviceName" .=) <$> _lemServiceName,
+                  ("labels" .=) <$> _lemLabels,
+                  ("region" .=) <$> _lemRegion,
+                  ("projectId" .=) <$> _lemProjectId,
+                  ("timestamp" .=) <$> _lemTimestamp])
+
 -- | A set of (key, value) data that provides additional information about
 -- the log entry. If the log entry is from one of the Google Cloud Platform
 -- sources listed below, the indicated (key, value) information must be
@@ -604,6 +780,14 @@ logEntryMetadataLabels
     :: LogEntryMetadataLabels
 logEntryMetadataLabels = LogEntryMetadataLabels
 
+instance FromJSON LogEntryMetadataLabels where
+        parseJSON
+          = withObject "LogEntryMetadataLabels"
+              (\ o -> pure LogEntryMetadataLabels)
+
+instance ToJSON LogEntryMetadataLabels where
+        toJSON = const (Object mempty)
+
 -- | The log entry payload, represented as a protocol buffer that is
 -- expressed as a JSON object. You can only pass \`protoPayload\` values
 -- that belong to a set of approved types.
@@ -619,6 +803,14 @@ logEntryProtoPayload
     :: LogEntryProtoPayload
 logEntryProtoPayload = LogEntryProtoPayload
 
+instance FromJSON LogEntryProtoPayload where
+        parseJSON
+          = withObject "LogEntryProtoPayload"
+              (\ o -> pure LogEntryProtoPayload)
+
+instance ToJSON LogEntryProtoPayload where
+        toJSON = const (Object mempty)
+
 -- | The log entry payload, represented as a structure that is expressed as a
 -- JSON object.
 --
@@ -632,6 +824,14 @@ data LogEntryStructPayload =
 logEntryStructPayload
     :: LogEntryStructPayload
 logEntryStructPayload = LogEntryStructPayload
+
+instance FromJSON LogEntryStructPayload where
+        parseJSON
+          = withObject "LogEntryStructPayload"
+              (\ o -> pure LogEntryStructPayload)
+
+instance ToJSON LogEntryStructPayload where
+        toJSON = const (Object mempty)
 
 -- | Describes a problem with a logging resource or operation.
 --
@@ -676,6 +876,22 @@ leResource
 leTimeNanos :: Lens' LogError (Maybe Int64)
 leTimeNanos
   = lens _leTimeNanos (\ s a -> s{_leTimeNanos = a})
+
+instance FromJSON LogError where
+        parseJSON
+          = withObject "LogError"
+              (\ o ->
+                 LogError <$>
+                   (o .:? "status") <*> (o .:? "resource") <*>
+                     (o .:? "timeNanos"))
+
+instance ToJSON LogError where
+        toJSON LogError{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _leStatus,
+                  ("resource" .=) <$> _leResource,
+                  ("timeNanos" .=) <$> _leTimeNanos])
 
 -- | Application log line emitted while processing a request.
 --
@@ -728,6 +944,24 @@ llSourceLocation
   = lens _llSourceLocation
       (\ s a -> s{_llSourceLocation = a})
 
+instance FromJSON LogLine where
+        parseJSON
+          = withObject "LogLine"
+              (\ o ->
+                 LogLine <$>
+                   (o .:? "time") <*> (o .:? "severity") <*>
+                     (o .:? "logMessage")
+                     <*> (o .:? "sourceLocation"))
+
+instance ToJSON LogLine where
+        toJSON LogLine{..}
+          = object
+              (catMaybes
+                 [("time" .=) <$> _llTime,
+                  ("severity" .=) <$> _llSeverity,
+                  ("logMessage" .=) <$> _llLogMessage,
+                  ("sourceLocation" .=) <$> _llSourceLocation])
+
 -- | _Output only._ Describes a service that writes log entries.
 --
 -- /See:/ 'logService' smart constructor.
@@ -770,6 +1004,20 @@ lIndexKeys
   = lens _lIndexKeys (\ s a -> s{_lIndexKeys = a}) .
       _Default
       . _Coerce
+
+instance FromJSON LogService where
+        parseJSON
+          = withObject "LogService"
+              (\ o ->
+                 LogService <$>
+                   (o .:? "name") <*> (o .:? "indexKeys" .!= mempty))
+
+instance ToJSON LogService where
+        toJSON LogService{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _lName,
+                  ("indexKeys" .=) <$> _lIndexKeys])
 
 -- | Describes where log entries are written outside of Cloud Logging.
 --
@@ -829,6 +1077,23 @@ lsErrors
   = lens _lsErrors (\ s a -> s{_lsErrors = a}) .
       _Default
       . _Coerce
+
+instance FromJSON LogSink where
+        parseJSON
+          = withObject "LogSink"
+              (\ o ->
+                 LogSink <$>
+                   (o .:? "destination") <*> (o .:? "name") <*>
+                     (o .:? "filter")
+                     <*> (o .:? "errors" .!= mempty))
+
+instance ToJSON LogSink where
+        toJSON LogSink{..}
+          = object
+              (catMaybes
+                 [("destination" .=) <$> _lsDestination,
+                  ("name" .=) <$> _lsName, ("filter" .=) <$> _lsFilter,
+                  ("errors" .=) <$> _lsErrors])
 
 -- | Complete log information about a single request to an application.
 --
@@ -1150,6 +1415,77 @@ rlAppEngineRelease
   = lens _rlAppEngineRelease
       (\ s a -> s{_rlAppEngineRelease = a})
 
+instance FromJSON RequestLog where
+        parseJSON
+          = withObject "RequestLog"
+              (\ o ->
+                 RequestLog <$>
+                   (o .:? "traceId") <*> (o .:? "instanceId") <*>
+                     (o .:? "status")
+                     <*> (o .:? "requestId")
+                     <*> (o .:? "instanceIndex")
+                     <*> (o .:? "moduleId")
+                     <*> (o .:? "versionId")
+                     <*> (o .:? "httpVersion")
+                     <*> (o .:? "taskName")
+                     <*> (o .:? "pendingTime")
+                     <*> (o .:? "wasLoadingRequest")
+                     <*> (o .:? "startTime")
+                     <*> (o .:? "latency")
+                     <*> (o .:? "urlMapEntry")
+                     <*> (o .:? "cost")
+                     <*> (o .:? "referrer")
+                     <*> (o .:? "line" .!= mempty)
+                     <*> (o .:? "ip")
+                     <*> (o .:? "appId")
+                     <*> (o .:? "method")
+                     <*> (o .:? "resource")
+                     <*> (o .:? "endTime")
+                     <*> (o .:? "finished")
+                     <*> (o .:? "megaCycles")
+                     <*> (o .:? "userAgent")
+                     <*> (o .:? "nickname")
+                     <*> (o .:? "host")
+                     <*> (o .:? "taskQueueName")
+                     <*> (o .:? "responseSize")
+                     <*> (o .:? "sourceReference" .!= mempty)
+                     <*> (o .:? "appEngineRelease"))
+
+instance ToJSON RequestLog where
+        toJSON RequestLog{..}
+          = object
+              (catMaybes
+                 [("traceId" .=) <$> _rlTraceId,
+                  ("instanceId" .=) <$> _rlInstanceId,
+                  ("status" .=) <$> _rlStatus,
+                  ("requestId" .=) <$> _rlRequestId,
+                  ("instanceIndex" .=) <$> _rlInstanceIndex,
+                  ("moduleId" .=) <$> _rlModuleId,
+                  ("versionId" .=) <$> _rlVersionId,
+                  ("httpVersion" .=) <$> _rlHttpVersion,
+                  ("taskName" .=) <$> _rlTaskName,
+                  ("pendingTime" .=) <$> _rlPendingTime,
+                  ("wasLoadingRequest" .=) <$> _rlWasLoadingRequest,
+                  ("startTime" .=) <$> _rlStartTime,
+                  ("latency" .=) <$> _rlLatency,
+                  ("urlMapEntry" .=) <$> _rlUrlMapEntry,
+                  ("cost" .=) <$> _rlCost,
+                  ("referrer" .=) <$> _rlReferrer,
+                  ("line" .=) <$> _rlLine, ("ip" .=) <$> _rlIp,
+                  ("appId" .=) <$> _rlAppId,
+                  ("method" .=) <$> _rlMethod,
+                  ("resource" .=) <$> _rlResource,
+                  ("endTime" .=) <$> _rlEndTime,
+                  ("finished" .=) <$> _rlFinished,
+                  ("megaCycles" .=) <$> _rlMegaCycles,
+                  ("userAgent" .=) <$> _rlUserAgent,
+                  ("nickname" .=) <$> _rlNickname,
+                  ("host" .=) <$> _rlHost,
+                  ("taskQueueName" .=) <$> _rlTaskQueueName,
+                  ("responseSize" .=) <$> _rlResponseSize,
+                  ("sourceReference" .=) <$> _rlSourceReference,
+                  ("appEngineRelease" .=) <$> _rlAppEngineRelease])
+
 -- | Specifies a location in a source file.
 --
 -- /See:/ 'sourceLocation' smart constructor.
@@ -1196,6 +1532,22 @@ slFunctionName
 slFile :: Lens' SourceLocation (Maybe Text)
 slFile = lens _slFile (\ s a -> s{_slFile = a})
 
+instance FromJSON SourceLocation where
+        parseJSON
+          = withObject "SourceLocation"
+              (\ o ->
+                 SourceLocation <$>
+                   (o .:? "line") <*> (o .:? "functionName") <*>
+                     (o .:? "file"))
+
+instance ToJSON SourceLocation where
+        toJSON SourceLocation{..}
+          = object
+              (catMaybes
+                 [("line" .=) <$> _slLine,
+                  ("functionName" .=) <$> _slFunctionName,
+                  ("file" .=) <$> _slFile])
+
 -- | A reference to a particular snapshot of the source tree used to build
 -- and deploy an application.
 --
@@ -1231,6 +1583,20 @@ srRepository
 srRevisionId :: Lens' SourceReference (Maybe Text)
 srRevisionId
   = lens _srRevisionId (\ s a -> s{_srRevisionId = a})
+
+instance FromJSON SourceReference where
+        parseJSON
+          = withObject "SourceReference"
+              (\ o ->
+                 SourceReference <$>
+                   (o .:? "repository") <*> (o .:? "revisionId"))
+
+instance ToJSON SourceReference where
+        toJSON SourceReference{..}
+          = object
+              (catMaybes
+                 [("repository" .=) <$> _srRepository,
+                  ("revisionId" .=) <$> _srRevisionId])
 
 -- | The \`Status\` type defines a logical error model that is suitable for
 -- different programming environments, including REST APIs and RPC APIs. It
@@ -1312,6 +1678,22 @@ sCode = lens _sCode (\ s a -> s{_sCode = a})
 sMessage :: Lens' Status (Maybe Text)
 sMessage = lens _sMessage (\ s a -> s{_sMessage = a})
 
+instance FromJSON Status where
+        parseJSON
+          = withObject "Status"
+              (\ o ->
+                 Status <$>
+                   (o .:? "details" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON Status where
+        toJSON Status{..}
+          = object
+              (catMaybes
+                 [("details" .=) <$> _sDetails,
+                  ("code" .=) <$> _sCode,
+                  ("message" .=) <$> _sMessage])
+
 --
 -- /See:/ 'statusItemDetails' smart constructor.
 data StatusItemDetails =
@@ -1323,6 +1705,14 @@ data StatusItemDetails =
 statusItemDetails
     :: StatusItemDetails
 statusItemDetails = StatusItemDetails
+
+instance FromJSON StatusItemDetails where
+        parseJSON
+          = withObject "StatusItemDetails"
+              (\ o -> pure StatusItemDetails)
+
+instance ToJSON StatusItemDetails where
+        toJSON = const (Object mempty)
 
 -- | The parameters to WriteLogEntries.
 --
@@ -1364,6 +1754,21 @@ wlerCommonLabels
   = lens _wlerCommonLabels
       (\ s a -> s{_wlerCommonLabels = a})
 
+instance FromJSON WriteLogEntriesRequest where
+        parseJSON
+          = withObject "WriteLogEntriesRequest"
+              (\ o ->
+                 WriteLogEntriesRequest <$>
+                   (o .:? "entries" .!= mempty) <*>
+                     (o .:? "commonLabels"))
+
+instance ToJSON WriteLogEntriesRequest where
+        toJSON WriteLogEntriesRequest{..}
+          = object
+              (catMaybes
+                 [("entries" .=) <$> _wlerEntries,
+                  ("commonLabels" .=) <$> _wlerCommonLabels])
+
 -- | Metadata labels that apply to all log entries in this request, so that
 -- you don\'t have to repeat them in each log entry\'s \`metadata.labels\`
 -- field. If any of the log entries contains a (key, value) with the same
@@ -1381,6 +1786,16 @@ writeLogEntriesRequestCommonLabels
     :: WriteLogEntriesRequestCommonLabels
 writeLogEntriesRequestCommonLabels = WriteLogEntriesRequestCommonLabels
 
+instance FromJSON WriteLogEntriesRequestCommonLabels
+         where
+        parseJSON
+          = withObject "WriteLogEntriesRequestCommonLabels"
+              (\ o -> pure WriteLogEntriesRequestCommonLabels)
+
+instance ToJSON WriteLogEntriesRequestCommonLabels
+         where
+        toJSON = const (Object mempty)
+
 -- | Result returned from WriteLogEntries. empty
 --
 -- /See:/ 'writeLogEntriesResponse' smart constructor.
@@ -1393,3 +1808,11 @@ data WriteLogEntriesResponse =
 writeLogEntriesResponse
     :: WriteLogEntriesResponse
 writeLogEntriesResponse = WriteLogEntriesResponse
+
+instance FromJSON WriteLogEntriesResponse where
+        parseJSON
+          = withObject "WriteLogEntriesResponse"
+              (\ o -> pure WriteLogEntriesResponse)
+
+instance ToJSON WriteLogEntriesResponse where
+        toJSON = const (Object mempty)

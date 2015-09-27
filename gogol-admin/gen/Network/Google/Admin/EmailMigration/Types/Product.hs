@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -112,3 +113,31 @@ miIsTrash
 -- | Boolean indicating if the mail is in \'sent mails\'
 miIsSent :: Lens' MailItem (Maybe Bool)
 miIsSent = lens _miIsSent (\ s a -> s{_miIsSent = a})
+
+instance FromJSON MailItem where
+        parseJSON
+          = withObject "MailItem"
+              (\ o ->
+                 MailItem <$>
+                   (o .:? "isDeleted") <*> (o .:? "isDraft") <*>
+                     (o .:? "isStarred")
+                     <*> (o .:? "kind" .!= "mailItem")
+                     <*> (o .:? "isUnread")
+                     <*> (o .:? "labels" .!= mempty)
+                     <*> (o .:? "isInbox")
+                     <*> (o .:? "isTrash")
+                     <*> (o .:? "isSent"))
+
+instance ToJSON MailItem where
+        toJSON MailItem{..}
+          = object
+              (catMaybes
+                 [("isDeleted" .=) <$> _miIsDeleted,
+                  ("isDraft" .=) <$> _miIsDraft,
+                  ("isStarred" .=) <$> _miIsStarred,
+                  Just ("kind" .= _miKind),
+                  ("isUnread" .=) <$> _miIsUnread,
+                  ("labels" .=) <$> _miLabels,
+                  ("isInbox" .=) <$> _miIsInbox,
+                  ("isTrash" .=) <$> _miIsTrash,
+                  ("isSent" .=) <$> _miIsSent])

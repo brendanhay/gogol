@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -55,6 +56,22 @@ accName = lens _accName (\ s a -> s{_accName = a})
 accId :: Lens' Account (Maybe Text)
 accId = lens _accId (\ s a -> s{_accId = a})
 
+instance FromJSON Account where
+        parseJSON
+          = withObject "Account"
+              (\ o ->
+                 Account <$>
+                   (o .:? "kind" .!= "adexchangeseller#account") <*>
+                     (o .:? "name")
+                     <*> (o .:? "id"))
+
+instance ToJSON Account where
+        toJSON Account{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _accKind), ("name" .=) <$> _accName,
+                  ("id" .=) <$> _accId])
+
 --
 -- /See:/ 'accounts' smart constructor.
 data Accounts = Accounts
@@ -105,6 +122,23 @@ aItems :: Lens' Accounts [Maybe Account]
 aItems
   = lens _aItems (\ s a -> s{_aItems = a}) . _Default .
       _Coerce
+
+instance FromJSON Accounts where
+        parseJSON
+          = withObject "Accounts"
+              (\ o ->
+                 Accounts <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "adexchangeseller#accounts")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON Accounts where
+        toJSON Accounts{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _aEtag,
+                  ("nextPageToken" .=) <$> _aNextPageToken,
+                  Just ("kind" .= _aKind), ("items" .=) <$> _aItems])
 
 --
 -- /See:/ 'adClient' smart constructor.
@@ -166,6 +200,27 @@ acProductCode
   = lens _acProductCode
       (\ s a -> s{_acProductCode = a})
 
+instance FromJSON AdClient where
+        parseJSON
+          = withObject "AdClient"
+              (\ o ->
+                 AdClient <$>
+                   (o .:? "kind" .!= "adexchangeseller#adClient") <*>
+                     (o .:? "arcOptIn")
+                     <*> (o .:? "supportsReporting")
+                     <*> (o .:? "id")
+                     <*> (o .:? "productCode"))
+
+instance ToJSON AdClient where
+        toJSON AdClient{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _acKind),
+                  ("arcOptIn" .=) <$> _acArcOptIn,
+                  ("supportsReporting" .=) <$> _acSupportsReporting,
+                  ("id" .=) <$> _acId,
+                  ("productCode" .=) <$> _acProductCode])
+
 --
 -- /See:/ 'adClients' smart constructor.
 data AdClients = AdClients
@@ -217,6 +272,24 @@ acsItems
   = lens _acsItems (\ s a -> s{_acsItems = a}) .
       _Default
       . _Coerce
+
+instance FromJSON AdClients where
+        parseJSON
+          = withObject "AdClients"
+              (\ o ->
+                 AdClients <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "adexchangeseller#adClients")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON AdClients where
+        toJSON AdClients{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _acsEtag,
+                  ("nextPageToken" .=) <$> _acsNextPageToken,
+                  Just ("kind" .= _acsKind),
+                  ("items" .=) <$> _acsItems])
 
 --
 -- /See:/ 'alert' smart constructor.
@@ -277,6 +350,26 @@ aleMessage :: Lens' Alert (Maybe Text)
 aleMessage
   = lens _aleMessage (\ s a -> s{_aleMessage = a})
 
+instance FromJSON Alert where
+        parseJSON
+          = withObject "Alert"
+              (\ o ->
+                 Alert <$>
+                   (o .:? "kind" .!= "adexchangeseller#alert") <*>
+                     (o .:? "severity")
+                     <*> (o .:? "id")
+                     <*> (o .:? "type")
+                     <*> (o .:? "message"))
+
+instance ToJSON Alert where
+        toJSON Alert{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _aleKind),
+                  ("severity" .=) <$> _aleSeverity,
+                  ("id" .=) <$> _aleId, ("type" .=) <$> _aleType,
+                  ("message" .=) <$> _aleMessage])
+
 --
 -- /See:/ 'alerts' smart constructor.
 data Alerts = Alerts
@@ -308,6 +401,21 @@ aaItems :: Lens' Alerts [Maybe Alert]
 aaItems
   = lens _aaItems (\ s a -> s{_aaItems = a}) . _Default
       . _Coerce
+
+instance FromJSON Alerts where
+        parseJSON
+          = withObject "Alerts"
+              (\ o ->
+                 Alerts <$>
+                   (o .:? "kind" .!= "adexchangeseller#alerts") <*>
+                     (o .:? "items" .!= mempty))
+
+instance ToJSON Alerts where
+        toJSON Alerts{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _aaKind),
+                  ("items" .=) <$> _aaItems])
 
 --
 -- /See:/ 'customChannel' smart constructor.
@@ -366,6 +474,25 @@ ccCode = lens _ccCode (\ s a -> s{_ccCode = a})
 -- format.
 ccId :: Lens' CustomChannel (Maybe Text)
 ccId = lens _ccId (\ s a -> s{_ccId = a})
+
+instance FromJSON CustomChannel where
+        parseJSON
+          = withObject "CustomChannel"
+              (\ o ->
+                 CustomChannel <$>
+                   (o .:? "targetingInfo") <*>
+                     (o .:? "kind" .!= "adexchangeseller#customChannel")
+                     <*> (o .:? "name")
+                     <*> (o .:? "code")
+                     <*> (o .:? "id"))
+
+instance ToJSON CustomChannel where
+        toJSON CustomChannel{..}
+          = object
+              (catMaybes
+                 [("targetingInfo" .=) <$> _ccTargetingInfo,
+                  Just ("kind" .= _ccKind), ("name" .=) <$> _ccName,
+                  ("code" .=) <$> _ccCode, ("id" .=) <$> _ccId])
 
 -- | The targeting information of this custom channel, if activated.
 --
@@ -426,6 +553,24 @@ cctiDescription
   = lens _cctiDescription
       (\ s a -> s{_cctiDescription = a})
 
+instance FromJSON CustomChannelTargetingInfo where
+        parseJSON
+          = withObject "CustomChannelTargetingInfo"
+              (\ o ->
+                 CustomChannelTargetingInfo <$>
+                   (o .:? "location") <*> (o .:? "siteLanguage") <*>
+                     (o .:? "adsAppearOn")
+                     <*> (o .:? "description"))
+
+instance ToJSON CustomChannelTargetingInfo where
+        toJSON CustomChannelTargetingInfo{..}
+          = object
+              (catMaybes
+                 [("location" .=) <$> _cctiLocation,
+                  ("siteLanguage" .=) <$> _cctiSiteLanguage,
+                  ("adsAppearOn" .=) <$> _cctiAdsAppearOn,
+                  ("description" .=) <$> _cctiDescription])
+
 --
 -- /See:/ 'customChannels' smart constructor.
 data CustomChannels = CustomChannels
@@ -478,6 +623,23 @@ cItems
   = lens _cItems (\ s a -> s{_cItems = a}) . _Default .
       _Coerce
 
+instance FromJSON CustomChannels where
+        parseJSON
+          = withObject "CustomChannels"
+              (\ o ->
+                 CustomChannels <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "adexchangeseller#customChannels")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON CustomChannels where
+        toJSON CustomChannels{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _cEtag,
+                  ("nextPageToken" .=) <$> _cNextPageToken,
+                  Just ("kind" .= _cKind), ("items" .=) <$> _cItems])
+
 --
 -- /See:/ 'metadata' smart constructor.
 data Metadata = Metadata
@@ -508,6 +670,20 @@ mItems :: Lens' Metadata [Maybe ReportingMetadataEntry]
 mItems
   = lens _mItems (\ s a -> s{_mItems = a}) . _Default .
       _Coerce
+
+instance FromJSON Metadata where
+        parseJSON
+          = withObject "Metadata"
+              (\ o ->
+                 Metadata <$>
+                   (o .:? "kind" .!= "adexchangeseller#metadata") <*>
+                     (o .:? "items" .!= mempty))
+
+instance ToJSON Metadata where
+        toJSON Metadata{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _mKind), ("items" .=) <$> _mItems])
 
 --
 -- /See:/ 'preferredDeal' smart constructor.
@@ -603,6 +779,32 @@ pdFixedCpm :: Lens' PreferredDeal (Maybe Int64)
 pdFixedCpm
   = lens _pdFixedCpm (\ s a -> s{_pdFixedCpm = a})
 
+instance FromJSON PreferredDeal where
+        parseJSON
+          = withObject "PreferredDeal"
+              (\ o ->
+                 PreferredDeal <$>
+                   (o .:? "advertiserName") <*> (o .:? "currencyCode")
+                     <*> (o .:? "startTime")
+                     <*>
+                     (o .:? "kind" .!= "adexchangeseller#preferredDeal")
+                     <*> (o .:? "buyerNetworkName")
+                     <*> (o .:? "endTime")
+                     <*> (o .:? "id")
+                     <*> (o .:? "fixedCpm"))
+
+instance ToJSON PreferredDeal where
+        toJSON PreferredDeal{..}
+          = object
+              (catMaybes
+                 [("advertiserName" .=) <$> _pdAdvertiserName,
+                  ("currencyCode" .=) <$> _pdCurrencyCode,
+                  ("startTime" .=) <$> _pdStartTime,
+                  Just ("kind" .= _pdKind),
+                  ("buyerNetworkName" .=) <$> _pdBuyerNetworkName,
+                  ("endTime" .=) <$> _pdEndTime, ("id" .=) <$> _pdId,
+                  ("fixedCpm" .=) <$> _pdFixedCpm])
+
 --
 -- /See:/ 'preferredDeals' smart constructor.
 data PreferredDeals = PreferredDeals
@@ -634,6 +836,20 @@ pItems :: Lens' PreferredDeals [Maybe PreferredDeal]
 pItems
   = lens _pItems (\ s a -> s{_pItems = a}) . _Default .
       _Coerce
+
+instance FromJSON PreferredDeals where
+        parseJSON
+          = withObject "PreferredDeals"
+              (\ o ->
+                 PreferredDeals <$>
+                   (o .:? "kind" .!= "adexchangeseller#preferredDeals")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON PreferredDeals where
+        toJSON PreferredDeals{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _pKind), ("items" .=) <$> _pItems])
 
 --
 -- /See:/ 'report' smart constructor.
@@ -729,6 +945,30 @@ rTotalMatchedRows
   = lens _rTotalMatchedRows
       (\ s a -> s{_rTotalMatchedRows = a})
 
+instance FromJSON Report where
+        parseJSON
+          = withObject "Report"
+              (\ o ->
+                 Report <$>
+                   (o .:? "kind" .!= "adexchangeseller#report") <*>
+                     (o .:? "averages" .!= mempty)
+                     <*> (o .:? "warnings" .!= mempty)
+                     <*> (o .:? "rows" .!= mempty)
+                     <*> (o .:? "totals" .!= mempty)
+                     <*> (o .:? "headers" .!= mempty)
+                     <*> (o .:? "totalMatchedRows"))
+
+instance ToJSON Report where
+        toJSON Report{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _rKind),
+                  ("averages" .=) <$> _rAverages,
+                  ("warnings" .=) <$> _rWarnings,
+                  ("rows" .=) <$> _rRows, ("totals" .=) <$> _rTotals,
+                  ("headers" .=) <$> _rHeaders,
+                  ("totalMatchedRows" .=) <$> _rTotalMatchedRows])
+
 --
 -- /See:/ 'reportItemHeaders' smart constructor.
 data ReportItemHeaders = ReportItemHeaders
@@ -769,6 +1009,22 @@ rihCurrency
 -- METRIC_CURRENCY.
 rihType :: Lens' ReportItemHeaders (Maybe Text)
 rihType = lens _rihType (\ s a -> s{_rihType = a})
+
+instance FromJSON ReportItemHeaders where
+        parseJSON
+          = withObject "ReportItemHeaders"
+              (\ o ->
+                 ReportItemHeaders <$>
+                   (o .:? "name") <*> (o .:? "currency") <*>
+                     (o .:? "type"))
+
+instance ToJSON ReportItemHeaders where
+        toJSON ReportItemHeaders{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _rihName,
+                  ("currency" .=) <$> _rihCurrency,
+                  ("type" .=) <$> _rihType])
 
 --
 -- /See:/ 'reportingMetadataEntry' smart constructor.
@@ -872,6 +1128,33 @@ rmeSupportedProducts
       . _Default
       . _Coerce
 
+instance FromJSON ReportingMetadataEntry where
+        parseJSON
+          = withObject "ReportingMetadataEntry"
+              (\ o ->
+                 ReportingMetadataEntry <$>
+                   (o .:? "kind" .!=
+                      "adexchangeseller#reportingMetadataEntry")
+                     <*> (o .:? "requiredMetrics" .!= mempty)
+                     <*> (o .:? "compatibleMetrics" .!= mempty)
+                     <*> (o .:? "requiredDimensions" .!= mempty)
+                     <*> (o .:? "id")
+                     <*> (o .:? "compatibleDimensions" .!= mempty)
+                     <*> (o .:? "supportedProducts" .!= mempty))
+
+instance ToJSON ReportingMetadataEntry where
+        toJSON ReportingMetadataEntry{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _rmeKind),
+                  ("requiredMetrics" .=) <$> _rmeRequiredMetrics,
+                  ("compatibleMetrics" .=) <$> _rmeCompatibleMetrics,
+                  ("requiredDimensions" .=) <$> _rmeRequiredDimensions,
+                  ("id" .=) <$> _rmeId,
+                  ("compatibleDimensions" .=) <$>
+                    _rmeCompatibleDimensions,
+                  ("supportedProducts" .=) <$> _rmeSupportedProducts])
+
 --
 -- /See:/ 'savedReport' smart constructor.
 data SavedReport = SavedReport
@@ -909,6 +1192,22 @@ sName = lens _sName (\ s a -> s{_sName = a})
 -- | Unique identifier of this saved report.
 sId :: Lens' SavedReport (Maybe Text)
 sId = lens _sId (\ s a -> s{_sId = a})
+
+instance FromJSON SavedReport where
+        parseJSON
+          = withObject "SavedReport"
+              (\ o ->
+                 SavedReport <$>
+                   (o .:? "kind" .!= "adexchangeseller#savedReport") <*>
+                     (o .:? "name")
+                     <*> (o .:? "id"))
+
+instance ToJSON SavedReport where
+        toJSON SavedReport{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _sKind), ("name" .=) <$> _sName,
+                  ("id" .=) <$> _sId])
 
 --
 -- /See:/ 'savedReports' smart constructor.
@@ -962,6 +1261,23 @@ srItems
   = lens _srItems (\ s a -> s{_srItems = a}) . _Default
       . _Coerce
 
+instance FromJSON SavedReports where
+        parseJSON
+          = withObject "SavedReports"
+              (\ o ->
+                 SavedReports <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "adexchangeseller#savedReports")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON SavedReports where
+        toJSON SavedReports{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _srEtag,
+                  ("nextPageToken" .=) <$> _srNextPageToken,
+                  Just ("kind" .= _srKind), ("items" .=) <$> _srItems])
+
 --
 -- /See:/ 'urlChannel' smart constructor.
 data UrlChannel = UrlChannel
@@ -1003,6 +1319,22 @@ ucId = lens _ucId (\ s a -> s{_ucId = a})
 ucUrlPattern :: Lens' UrlChannel (Maybe Text)
 ucUrlPattern
   = lens _ucUrlPattern (\ s a -> s{_ucUrlPattern = a})
+
+instance FromJSON UrlChannel where
+        parseJSON
+          = withObject "UrlChannel"
+              (\ o ->
+                 UrlChannel <$>
+                   (o .:? "kind" .!= "adexchangeseller#urlChannel") <*>
+                     (o .:? "id")
+                     <*> (o .:? "urlPattern"))
+
+instance ToJSON UrlChannel where
+        toJSON UrlChannel{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _ucKind), ("id" .=) <$> _ucId,
+                  ("urlPattern" .=) <$> _ucUrlPattern])
 
 --
 -- /See:/ 'urlChannels' smart constructor.
@@ -1056,3 +1388,21 @@ urlcItems
   = lens _urlcItems (\ s a -> s{_urlcItems = a}) .
       _Default
       . _Coerce
+
+instance FromJSON UrlChannels where
+        parseJSON
+          = withObject "UrlChannels"
+              (\ o ->
+                 UrlChannels <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "adexchangeseller#urlChannels")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON UrlChannels where
+        toJSON UrlChannels{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _urlcEtag,
+                  ("nextPageToken" .=) <$> _urlcNextPageToken,
+                  Just ("kind" .= _urlcKind),
+                  ("items" .=) <$> _urlcItems])

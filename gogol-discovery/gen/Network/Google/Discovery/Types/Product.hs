@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -59,6 +60,22 @@ dlDiscoveryVersion
   = lens _dlDiscoveryVersion
       (\ s a -> s{_dlDiscoveryVersion = a})
 
+instance FromJSON DirectoryList where
+        parseJSON
+          = withObject "DirectoryList"
+              (\ o ->
+                 DirectoryList <$>
+                   (o .:? "kind" .!= "discovery#directoryList") <*>
+                     (o .:? "items" .!= mempty)
+                     <*> (o .:? "discoveryVersion" .!= "v1"))
+
+instance ToJSON DirectoryList where
+        toJSON DirectoryList{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _dlKind), ("items" .=) <$> _dlItems,
+                  Just ("discoveryVersion" .= _dlDiscoveryVersion)])
+
 -- | Links to 16x16 and 32x32 icons representing the API.
 --
 -- /See:/ 'directoryListIconsItemItems' smart constructor.
@@ -89,6 +106,19 @@ dliiiX16 = lens _dliiiX16 (\ s a -> s{_dliiiX16 = a})
 -- | The URL of the 32x32 icon.
 dliiiX32 :: Lens' DirectoryListIconsItemItems (Maybe Text)
 dliiiX32 = lens _dliiiX32 (\ s a -> s{_dliiiX32 = a})
+
+instance FromJSON DirectoryListIconsItemItems where
+        parseJSON
+          = withObject "DirectoryListIconsItemItems"
+              (\ o ->
+                 DirectoryListIconsItemItems <$>
+                   (o .:? "x16") <*> (o .:? "x32"))
+
+instance ToJSON DirectoryListIconsItemItems where
+        toJSON DirectoryListIconsItemItems{..}
+          = object
+              (catMaybes
+                 [("x16" .=) <$> _dliiiX16, ("x32" .=) <$> _dliiiX32])
 
 --
 -- /See:/ 'directoryListItemItems' smart constructor.
@@ -215,6 +245,39 @@ dliiDiscoveryRestUrl :: Lens' DirectoryListItemItems (Maybe Text)
 dliiDiscoveryRestUrl
   = lens _dliiDiscoveryRestUrl
       (\ s a -> s{_dliiDiscoveryRestUrl = a})
+
+instance FromJSON DirectoryListItemItems where
+        parseJSON
+          = withObject "DirectoryListItemItems"
+              (\ o ->
+                 DirectoryListItemItems <$>
+                   (o .:? "discoveryLink") <*> (o .:? "preferred") <*>
+                     (o .:? "kind" .!= "discovery#directoryItem")
+                     <*> (o .:? "icons")
+                     <*> (o .:? "name")
+                     <*> (o .:? "version")
+                     <*> (o .:? "documentationLink")
+                     <*> (o .:? "id")
+                     <*> (o .:? "labels" .!= mempty)
+                     <*> (o .:? "title")
+                     <*> (o .:? "description")
+                     <*> (o .:? "discoveryRestUrl"))
+
+instance ToJSON DirectoryListItemItems where
+        toJSON DirectoryListItemItems{..}
+          = object
+              (catMaybes
+                 [("discoveryLink" .=) <$> _dliiDiscoveryLink,
+                  ("preferred" .=) <$> _dliiPreferred,
+                  Just ("kind" .= _dliiKind),
+                  ("icons" .=) <$> _dliiIcons,
+                  ("name" .=) <$> _dliiName,
+                  ("version" .=) <$> _dliiVersion,
+                  ("documentationLink" .=) <$> _dliiDocumentationLink,
+                  ("id" .=) <$> _dliiId, ("labels" .=) <$> _dliiLabels,
+                  ("title" .=) <$> _dliiTitle,
+                  ("description" .=) <$> _dliiDescription,
+                  ("discoveryRestUrl" .=) <$> _dliiDiscoveryRestUrl])
 
 --
 -- /See:/ 'jsonSchema' smart constructor.
@@ -426,6 +489,55 @@ jsProperties :: Lens' JsonSchema (Maybe JsonSchemaProperties)
 jsProperties
   = lens _jsProperties (\ s a -> s{_jsProperties = a})
 
+instance FromJSON JsonSchema where
+        parseJSON
+          = withObject "JsonSchema"
+              (\ o ->
+                 JsonSchema <$>
+                   (o .:? "annotations") <*> (o .:? "variant") <*>
+                     (o .:? "location")
+                     <*> (o .:? "$ref")
+                     <*> (o .:? "pattern")
+                     <*> (o .:? "maximum")
+                     <*> (o .:? "default")
+                     <*> (o .:? "format")
+                     <*> (o .:? "items")
+                     <*> (o .:? "minimum")
+                     <*> (o .:? "required")
+                     <*> (o .:? "id")
+                     <*> (o .:? "additionalProperties")
+                     <*> (o .:? "type")
+                     <*> (o .:? "enum" .!= mempty)
+                     <*> (o .:? "repeated")
+                     <*> (o .:? "readOnly")
+                     <*> (o .:? "enumDescriptions" .!= mempty)
+                     <*> (o .:? "description")
+                     <*> (o .:? "properties"))
+
+instance ToJSON JsonSchema where
+        toJSON JsonSchema{..}
+          = object
+              (catMaybes
+                 [("annotations" .=) <$> _jsAnnotations,
+                  ("variant" .=) <$> _jsVariant,
+                  ("location" .=) <$> _jsLocation,
+                  ("$ref" .=) <$> _jsRef,
+                  ("pattern" .=) <$> _jsPattern,
+                  ("maximum" .=) <$> _jsMaximum,
+                  ("default" .=) <$> _jsDefault,
+                  ("format" .=) <$> _jsFormat,
+                  ("items" .=) <$> _jsItems,
+                  ("minimum" .=) <$> _jsMinimum,
+                  ("required" .=) <$> _jsRequired, ("id" .=) <$> _jsId,
+                  ("additionalProperties" .=) <$>
+                    _jsAdditionalProperties,
+                  ("type" .=) <$> _jsType, ("enum" .=) <$> _jsEnum,
+                  ("repeated" .=) <$> _jsRepeated,
+                  ("readOnly" .=) <$> _jsReadOnly,
+                  ("enumDescriptions" .=) <$> _jsEnumDescriptions,
+                  ("description" .=) <$> _jsDescription,
+                  ("properties" .=) <$> _jsProperties])
+
 -- | Additional information about this property.
 --
 -- /See:/ 'jsonSchemaAnnotations' smart constructor.
@@ -451,6 +563,18 @@ jsaRequired
   = lens _jsaRequired (\ s a -> s{_jsaRequired = a}) .
       _Default
       . _Coerce
+
+instance FromJSON JsonSchemaAnnotations where
+        parseJSON
+          = withObject "JsonSchemaAnnotations"
+              (\ o ->
+                 JsonSchemaAnnotations <$>
+                   (o .:? "required" .!= mempty))
+
+instance ToJSON JsonSchemaAnnotations where
+        toJSON JsonSchemaAnnotations{..}
+          = object
+              (catMaybes [("required" .=) <$> _jsaRequired])
 
 --
 -- /See:/ 'jsonSchemaItemMapVariant' smart constructor.
@@ -482,6 +606,20 @@ jsimvTypeValue
   = lens _jsimvTypeValue
       (\ s a -> s{_jsimvTypeValue = a})
 
+instance FromJSON JsonSchemaItemMapVariant where
+        parseJSON
+          = withObject "JsonSchemaItemMapVariant"
+              (\ o ->
+                 JsonSchemaItemMapVariant <$>
+                   (o .:? "$ref") <*> (o .:? "type_value"))
+
+instance ToJSON JsonSchemaItemMapVariant where
+        toJSON JsonSchemaItemMapVariant{..}
+          = object
+              (catMaybes
+                 [("$ref" .=) <$> _jsimvRef,
+                  ("type_value" .=) <$> _jsimvTypeValue])
+
 -- | If this is a schema for an object, list the schema for each property of
 -- this object.
 --
@@ -495,6 +633,14 @@ data JsonSchemaProperties =
 jsonSchemaProperties
     :: JsonSchemaProperties
 jsonSchemaProperties = JsonSchemaProperties
+
+instance FromJSON JsonSchemaProperties where
+        parseJSON
+          = withObject "JsonSchemaProperties"
+              (\ o -> pure JsonSchemaProperties)
+
+instance ToJSON JsonSchemaProperties where
+        toJSON = const (Object mempty)
 
 -- | In a variant data type, the value of one property is used to determine
 -- how to interpret the entire entity. Its value must exist in a map of
@@ -532,6 +678,20 @@ jsvMap :: Lens' JsonSchemaVariant [JsonSchemaItemMapVariant]
 jsvMap
   = lens _jsvMap (\ s a -> s{_jsvMap = a}) . _Default .
       _Coerce
+
+instance FromJSON JsonSchemaVariant where
+        parseJSON
+          = withObject "JsonSchemaVariant"
+              (\ o ->
+                 JsonSchemaVariant <$>
+                   (o .:? "discriminant") <*> (o .:? "map" .!= mempty))
+
+instance ToJSON JsonSchemaVariant where
+        toJSON JsonSchemaVariant{..}
+          = object
+              (catMaybes
+                 [("discriminant" .=) <$> _jsvDiscriminant,
+                  ("map" .=) <$> _jsvMap])
 
 --
 -- /See:/ 'restDescription' smart constructor.
@@ -817,6 +977,73 @@ rdDescription
   = lens _rdDescription
       (\ s a -> s{_rdDescription = a})
 
+instance FromJSON RestDescription where
+        parseJSON
+          = withObject "RestDescription"
+              (\ o ->
+                 RestDescription <$>
+                   (o .:? "etag") <*> (o .:? "schemas") <*>
+                     (o .:? "servicePath")
+                     <*> (o .:? "basePath")
+                     <*> (o .:? "kind" .!= "discovery#restDescription")
+                     <*> (o .:? "exponentialBackoffDefault")
+                     <*> (o .:? "auth")
+                     <*> (o .:? "icons")
+                     <*> (o .:? "baseUrl")
+                     <*> (o .:? "protocol" .!= "rest")
+                     <*> (o .:? "ownerName")
+                     <*> (o .:? "resources")
+                     <*> (o .:? "ownerDomain")
+                     <*> (o .:? "batchPath" .!= "batch")
+                     <*> (o .:? "methods")
+                     <*> (o .:? "name")
+                     <*> (o .:? "packagePath")
+                     <*> (o .:? "features" .!= mempty)
+                     <*> (o .:? "version")
+                     <*> (o .:? "parameters")
+                     <*> (o .:? "documentationLink")
+                     <*> (o .:? "rootUrl")
+                     <*> (o .:? "id")
+                     <*> (o .:? "canonicalName")
+                     <*> (o .:? "labels" .!= mempty)
+                     <*> (o .:? "discoveryVersion" .!= "v1")
+                     <*> (o .:? "title")
+                     <*> (o .:? "revision")
+                     <*> (o .:? "description"))
+
+instance ToJSON RestDescription where
+        toJSON RestDescription{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _rdEtag,
+                  ("schemas" .=) <$> _rdSchemas,
+                  ("servicePath" .=) <$> _rdServicePath,
+                  ("basePath" .=) <$> _rdBasePath,
+                  Just ("kind" .= _rdKind),
+                  ("exponentialBackoffDefault" .=) <$>
+                    _rdExponentialBackoffDefault,
+                  ("auth" .=) <$> _rdAuth, ("icons" .=) <$> _rdIcons,
+                  ("baseUrl" .=) <$> _rdBaseUrl,
+                  Just ("protocol" .= _rdProtocol),
+                  ("ownerName" .=) <$> _rdOwnerName,
+                  ("resources" .=) <$> _rdResources,
+                  ("ownerDomain" .=) <$> _rdOwnerDomain,
+                  Just ("batchPath" .= _rdBatchPath),
+                  ("methods" .=) <$> _rdMethods,
+                  ("name" .=) <$> _rdName,
+                  ("packagePath" .=) <$> _rdPackagePath,
+                  ("features" .=) <$> _rdFeatures,
+                  ("version" .=) <$> _rdVersion,
+                  ("parameters" .=) <$> _rdParameters,
+                  ("documentationLink" .=) <$> _rdDocumentationLink,
+                  ("rootUrl" .=) <$> _rdRootUrl, ("id" .=) <$> _rdId,
+                  ("canonicalName" .=) <$> _rdCanonicalName,
+                  ("labels" .=) <$> _rdLabels,
+                  Just ("discoveryVersion" .= _rdDiscoveryVersion),
+                  ("title" .=) <$> _rdTitle,
+                  ("revision" .=) <$> _rdRevision,
+                  ("description" .=) <$> _rdDescription])
+
 -- | Authentication information.
 --
 -- /See:/ 'restDescriptionAuth' smart constructor.
@@ -840,6 +1067,15 @@ restDescriptionAuth =
 rdaOauth2 :: Lens' RestDescriptionAuth (Maybe RestDescriptionOauth2Auth)
 rdaOauth2
   = lens _rdaOauth2 (\ s a -> s{_rdaOauth2 = a})
+
+instance FromJSON RestDescriptionAuth where
+        parseJSON
+          = withObject "RestDescriptionAuth"
+              (\ o -> RestDescriptionAuth <$> (o .:? "oauth2"))
+
+instance ToJSON RestDescriptionAuth where
+        toJSON RestDescriptionAuth{..}
+          = object (catMaybes [("oauth2" .=) <$> _rdaOauth2])
 
 -- | Links to 16x16 and 32x32 icons representing the API.
 --
@@ -872,6 +1108,19 @@ rdiX16 = lens _rdiX16 (\ s a -> s{_rdiX16 = a})
 rdiX32 :: Lens' RestDescriptionIcons (Maybe Text)
 rdiX32 = lens _rdiX32 (\ s a -> s{_rdiX32 = a})
 
+instance FromJSON RestDescriptionIcons where
+        parseJSON
+          = withObject "RestDescriptionIcons"
+              (\ o ->
+                 RestDescriptionIcons <$>
+                   (o .:? "x16") <*> (o .:? "x32"))
+
+instance ToJSON RestDescriptionIcons where
+        toJSON RestDescriptionIcons{..}
+          = object
+              (catMaybes
+                 [("x16" .=) <$> _rdiX16, ("x32" .=) <$> _rdiX32])
+
 -- | API-level methods for this API.
 --
 -- /See:/ 'restDescriptionMethods' smart constructor.
@@ -884,6 +1133,14 @@ data RestDescriptionMethods =
 restDescriptionMethods
     :: RestDescriptionMethods
 restDescriptionMethods = RestDescriptionMethods
+
+instance FromJSON RestDescriptionMethods where
+        parseJSON
+          = withObject "RestDescriptionMethods"
+              (\ o -> pure RestDescriptionMethods)
+
+instance ToJSON RestDescriptionMethods where
+        toJSON = const (Object mempty)
 
 -- | OAuth 2.0 authentication information.
 --
@@ -909,6 +1166,16 @@ rdoaScopes :: Lens' RestDescriptionOauth2Auth (Maybe RestDescriptionScopesOauth2
 rdoaScopes
   = lens _rdoaScopes (\ s a -> s{_rdoaScopes = a})
 
+instance FromJSON RestDescriptionOauth2Auth where
+        parseJSON
+          = withObject "RestDescriptionOauth2Auth"
+              (\ o ->
+                 RestDescriptionOauth2Auth <$> (o .:? "scopes"))
+
+instance ToJSON RestDescriptionOauth2Auth where
+        toJSON RestDescriptionOauth2Auth{..}
+          = object (catMaybes [("scopes" .=) <$> _rdoaScopes])
+
 -- | Common parameters that apply across all apis.
 --
 -- /See:/ 'restDescriptionParameters' smart constructor.
@@ -921,6 +1188,14 @@ data RestDescriptionParameters =
 restDescriptionParameters
     :: RestDescriptionParameters
 restDescriptionParameters = RestDescriptionParameters
+
+instance FromJSON RestDescriptionParameters where
+        parseJSON
+          = withObject "RestDescriptionParameters"
+              (\ o -> pure RestDescriptionParameters)
+
+instance ToJSON RestDescriptionParameters where
+        toJSON = const (Object mempty)
 
 -- | The resources in this API.
 --
@@ -935,6 +1210,14 @@ restDescriptionResources
     :: RestDescriptionResources
 restDescriptionResources = RestDescriptionResources
 
+instance FromJSON RestDescriptionResources where
+        parseJSON
+          = withObject "RestDescriptionResources"
+              (\ o -> pure RestDescriptionResources)
+
+instance ToJSON RestDescriptionResources where
+        toJSON = const (Object mempty)
+
 -- | The schemas for this API.
 --
 -- /See:/ 'restDescriptionSchemas' smart constructor.
@@ -948,6 +1231,14 @@ restDescriptionSchemas
     :: RestDescriptionSchemas
 restDescriptionSchemas = RestDescriptionSchemas
 
+instance FromJSON RestDescriptionSchemas where
+        parseJSON
+          = withObject "RestDescriptionSchemas"
+              (\ o -> pure RestDescriptionSchemas)
+
+instance ToJSON RestDescriptionSchemas where
+        toJSON = const (Object mempty)
+
 -- | Available OAuth 2.0 scopes.
 --
 -- /See:/ 'restDescriptionScopesOauth2Auth' smart constructor.
@@ -960,6 +1251,15 @@ data RestDescriptionScopesOauth2Auth =
 restDescriptionScopesOauth2Auth
     :: RestDescriptionScopesOauth2Auth
 restDescriptionScopesOauth2Auth = RestDescriptionScopesOauth2Auth
+
+instance FromJSON RestDescriptionScopesOauth2Auth
+         where
+        parseJSON
+          = withObject "RestDescriptionScopesOauth2Auth"
+              (\ o -> pure RestDescriptionScopesOauth2Auth)
+
+instance ToJSON RestDescriptionScopesOauth2Auth where
+        toJSON = const (Object mempty)
 
 --
 -- /See:/ 'restMethod' smart constructor.
@@ -1127,6 +1427,51 @@ rmRequest :: Lens' RestMethod (Maybe RestMethodRequest)
 rmRequest
   = lens _rmRequest (\ s a -> s{_rmRequest = a})
 
+instance FromJSON RestMethod where
+        parseJSON
+          = withObject "RestMethod"
+              (\ o ->
+                 RestMethod <$>
+                   (o .:? "supportsMediaDownload") <*>
+                     (o .:? "parameterOrder" .!= mempty)
+                     <*> (o .:? "mediaUpload")
+                     <*> (o .:? "httpMethod")
+                     <*> (o .:? "path")
+                     <*> (o .:? "response")
+                     <*> (o .:? "supportsMediaUpload")
+                     <*> (o .:? "scopes" .!= mempty)
+                     <*> (o .:? "supportsSubscription")
+                     <*> (o .:? "parameters")
+                     <*> (o .:? "id")
+                     <*> (o .:? "etagRequired")
+                     <*> (o .:? "useMediaDownloadService")
+                     <*> (o .:? "description")
+                     <*> (o .:? "request"))
+
+instance ToJSON RestMethod where
+        toJSON RestMethod{..}
+          = object
+              (catMaybes
+                 [("supportsMediaDownload" .=) <$>
+                    _rmSupportsMediaDownload,
+                  ("parameterOrder" .=) <$> _rmParameterOrder,
+                  ("mediaUpload" .=) <$> _rmMediaUpload,
+                  ("httpMethod" .=) <$> _rmHttpMethod,
+                  ("path" .=) <$> _rmPath,
+                  ("response" .=) <$> _rmResponse,
+                  ("supportsMediaUpload" .=) <$>
+                    _rmSupportsMediaUpload,
+                  ("scopes" .=) <$> _rmScopes,
+                  ("supportsSubscription" .=) <$>
+                    _rmSupportsSubscription,
+                  ("parameters" .=) <$> _rmParameters,
+                  ("id" .=) <$> _rmId,
+                  ("etagRequired" .=) <$> _rmEtagRequired,
+                  ("useMediaDownloadService" .=) <$>
+                    _rmUseMediaDownloadService,
+                  ("description" .=) <$> _rmDescription,
+                  ("request" .=) <$> _rmRequest])
+
 -- | Media upload parameters.
 --
 -- /See:/ 'restMethodMediaUpload' smart constructor.
@@ -1172,6 +1517,22 @@ rmmuMaxSize :: Lens' RestMethodMediaUpload (Maybe Text)
 rmmuMaxSize
   = lens _rmmuMaxSize (\ s a -> s{_rmmuMaxSize = a})
 
+instance FromJSON RestMethodMediaUpload where
+        parseJSON
+          = withObject "RestMethodMediaUpload"
+              (\ o ->
+                 RestMethodMediaUpload <$>
+                   (o .:? "protocols") <*> (o .:? "accept" .!= mempty)
+                     <*> (o .:? "maxSize"))
+
+instance ToJSON RestMethodMediaUpload where
+        toJSON RestMethodMediaUpload{..}
+          = object
+              (catMaybes
+                 [("protocols" .=) <$> _rmmuProtocols,
+                  ("accept" .=) <$> _rmmuAccept,
+                  ("maxSize" .=) <$> _rmmuMaxSize])
+
 -- | Details for all parameters in this method.
 --
 -- /See:/ 'restMethodParameters' smart constructor.
@@ -1184,6 +1545,14 @@ data RestMethodParameters =
 restMethodParameters
     :: RestMethodParameters
 restMethodParameters = RestMethodParameters
+
+instance FromJSON RestMethodParameters where
+        parseJSON
+          = withObject "RestMethodParameters"
+              (\ o -> pure RestMethodParameters)
+
+instance ToJSON RestMethodParameters where
+        toJSON = const (Object mempty)
 
 -- | Supported upload protocols.
 --
@@ -1219,6 +1588,21 @@ rmpmuResumable
   = lens _rmpmuResumable
       (\ s a -> s{_rmpmuResumable = a})
 
+instance FromJSON RestMethodProtocolsMediaUpload
+         where
+        parseJSON
+          = withObject "RestMethodProtocolsMediaUpload"
+              (\ o ->
+                 RestMethodProtocolsMediaUpload <$>
+                   (o .:? "simple") <*> (o .:? "resumable"))
+
+instance ToJSON RestMethodProtocolsMediaUpload where
+        toJSON RestMethodProtocolsMediaUpload{..}
+          = object
+              (catMaybes
+                 [("simple" .=) <$> _rmpmuSimple,
+                  ("resumable" .=) <$> _rmpmuResumable])
+
 -- | The schema for the request.
 --
 -- /See:/ 'restMethodRequest' smart constructor.
@@ -1252,6 +1636,20 @@ rmrParameterName
   = lens _rmrParameterName
       (\ s a -> s{_rmrParameterName = a})
 
+instance FromJSON RestMethodRequest where
+        parseJSON
+          = withObject "RestMethodRequest"
+              (\ o ->
+                 RestMethodRequest <$>
+                   (o .:? "$ref") <*> (o .:? "parameterName"))
+
+instance ToJSON RestMethodRequest where
+        toJSON RestMethodRequest{..}
+          = object
+              (catMaybes
+                 [("$ref" .=) <$> _rmrRef,
+                  ("parameterName" .=) <$> _rmrParameterName])
+
 -- | The schema for the response.
 --
 -- /See:/ 'restMethodResponse' smart constructor.
@@ -1274,6 +1672,15 @@ restMethodResponse =
 -- | Schema ID for the response schema.
 rRef :: Lens' RestMethodResponse (Maybe Text)
 rRef = lens _rRef (\ s a -> s{_rRef = a})
+
+instance FromJSON RestMethodResponse where
+        parseJSON
+          = withObject "RestMethodResponse"
+              (\ o -> RestMethodResponse <$> (o .:? "$ref"))
+
+instance ToJSON RestMethodResponse where
+        toJSON RestMethodResponse{..}
+          = object (catMaybes [("$ref" .=) <$> _rRef])
 
 -- | Supports the Resumable Media Upload protocol.
 --
@@ -1310,6 +1717,23 @@ rmrpmuMultipart
   = lens _rmrpmuMultipart
       (\ s a -> s{_rmrpmuMultipart = a})
 
+instance FromJSON
+         RestMethodResumableProtocolsMediaUpload where
+        parseJSON
+          = withObject
+              "RestMethodResumableProtocolsMediaUpload"
+              (\ o ->
+                 RestMethodResumableProtocolsMediaUpload <$>
+                   (o .:? "path") <*> (o .:? "multipart" .!= True))
+
+instance ToJSON
+         RestMethodResumableProtocolsMediaUpload where
+        toJSON RestMethodResumableProtocolsMediaUpload{..}
+          = object
+              (catMaybes
+                 [("path" .=) <$> _rmrpmuPath,
+                  Just ("multipart" .= _rmrpmuMultipart)])
+
 -- | Supports uploading as a single HTTP request.
 --
 -- /See:/ 'restMethodSimpleProtocolsMediaUpload' smart constructor.
@@ -1345,6 +1769,22 @@ rmspmuMultipart
   = lens _rmspmuMultipart
       (\ s a -> s{_rmspmuMultipart = a})
 
+instance FromJSON
+         RestMethodSimpleProtocolsMediaUpload where
+        parseJSON
+          = withObject "RestMethodSimpleProtocolsMediaUpload"
+              (\ o ->
+                 RestMethodSimpleProtocolsMediaUpload <$>
+                   (o .:? "path") <*> (o .:? "multipart" .!= True))
+
+instance ToJSON RestMethodSimpleProtocolsMediaUpload
+         where
+        toJSON RestMethodSimpleProtocolsMediaUpload{..}
+          = object
+              (catMaybes
+                 [("path" .=) <$> _rmspmuPath,
+                  Just ("multipart" .= _rmspmuMultipart)])
+
 --
 -- /See:/ 'restResource' smart constructor.
 data RestResource = RestResource
@@ -1377,6 +1817,20 @@ rrMethods :: Lens' RestResource (Maybe RestResourceMethods)
 rrMethods
   = lens _rrMethods (\ s a -> s{_rrMethods = a})
 
+instance FromJSON RestResource where
+        parseJSON
+          = withObject "RestResource"
+              (\ o ->
+                 RestResource <$>
+                   (o .:? "resources") <*> (o .:? "methods"))
+
+instance ToJSON RestResource where
+        toJSON RestResource{..}
+          = object
+              (catMaybes
+                 [("resources" .=) <$> _rrResources,
+                  ("methods" .=) <$> _rrMethods])
+
 -- | Methods on this resource.
 --
 -- /See:/ 'restResourceMethods' smart constructor.
@@ -1390,6 +1844,14 @@ restResourceMethods
     :: RestResourceMethods
 restResourceMethods = RestResourceMethods
 
+instance FromJSON RestResourceMethods where
+        parseJSON
+          = withObject "RestResourceMethods"
+              (\ o -> pure RestResourceMethods)
+
+instance ToJSON RestResourceMethods where
+        toJSON = const (Object mempty)
+
 -- | Sub-resources on this resource.
 --
 -- /See:/ 'restResourceResources' smart constructor.
@@ -1402,3 +1864,11 @@ data RestResourceResources =
 restResourceResources
     :: RestResourceResources
 restResourceResources = RestResourceResources
+
+instance FromJSON RestResourceResources where
+        parseJSON
+          = withObject "RestResourceResources"
+              (\ o -> pure RestResourceResources)
+
+instance ToJSON RestResourceResources where
+        toJSON = const (Object mempty)

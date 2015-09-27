@@ -256,26 +256,32 @@ type ApisAPI = ApisList :<|> ApisGetRest
 
 -- | Retrieve the list of APIs supported at this endpoint.
 type ApisList =
-     "discovery" :> "v1" :> "apis" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "preferred" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "name" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "discovery" :>
+       "v1" :>
+         "apis" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "preferred" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "name" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Get '[JSON] DirectoryList
 
 -- | Retrieve the description of a particular version of an api.
 type ApisGetRest =
-     "discovery" :> "v1" :> "apis" :> Capture "api" Text
-       :> Capture "version" Text
-       :> "rest"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "discovery" :>
+       "v1" :>
+         "apis" :>
+           Capture "api" Text :>
+             Capture "version" Text :>
+               "rest" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Get '[JSON] RestDescription

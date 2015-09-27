@@ -86,6 +86,12 @@ instance ToText OperationCodeItemWarnings where
         OCIWSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
         OCIWUnreachable -> "UNREACHABLE"
 
+instance FromJSON OperationCodeItemWarnings where
+    parseJSON = parseJSONText "OperationCodeItemWarnings"
+
+instance ToJSON OperationCodeItemWarnings where
+    toJSON = toJSONText
+
 -- | [Output Only] Status of the operation. Can be one of the following:
 -- PENDING, RUNNING, or DONE.
 data OperationStatus
@@ -111,3 +117,9 @@ instance ToText OperationStatus where
         OSDone -> "DONE"
         OSPending -> "PENDING"
         OSRunning -> "RUNNING"
+
+instance FromJSON OperationStatus where
+    parseJSON = parseJSONText "OperationStatus"
+
+instance ToJSON OperationStatus where
+    toJSON = toJSONText

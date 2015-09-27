@@ -1117,68 +1117,80 @@ type McfAPI = McfGet
 
 -- | Returns Analytics Multi-Channel Funnels data for a view (profile).
 type McfGet =
-     "analytics" :> "v3" :> "data" :> "mcf" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "metrics" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "samplingLevel" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "filters" Text
-       :> QueryParam "ids" Text
-       :> QueryParam "end-date" Text
-       :> QueryParam "key" Text
-       :> QueryParam "sort" Text
-       :> QueryParam "dimensions" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "start-index" Natural
-       :> QueryParam "max-results" Int32
-       :> QueryParam "start-date" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "data" :>
+           "mcf" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "metrics" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "samplingLevel" Text :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "filters" Text :>
+                         QueryParam "ids" Text :>
+                           QueryParam "end-date" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "sort" Text :>
+                                 QueryParam "dimensions" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "start-index" Natural :>
+                                       QueryParam "max-results" Int32 :>
+                                         QueryParam "start-date" Text :>
+                                           QueryParam "fields" Text :>
+                                             QueryParam "alt" Text :>
+                                               Get '[JSON] McfData
 
 type GaAPI = GaGet
 
 -- | Returns Analytics data for a view (profile).
 type GaGet =
-     "analytics" :> "v3" :> "data" :> "ga" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "metrics" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "samplingLevel" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "filters" Text
-       :> QueryParam "ids" Text
-       :> QueryParam "end-date" Text
-       :> QueryParam "key" Text
-       :> QueryParam "output" Text
-       :> QueryParam "sort" Text
-       :> QueryParam "dimensions" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "start-index" Natural
-       :> QueryParam "max-results" Int32
-       :> QueryParam "segment" Text
-       :> QueryParam "start-date" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "data" :>
+           "ga" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "metrics" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "samplingLevel" Text :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "filters" Text :>
+                         QueryParam "ids" Text :>
+                           QueryParam "end-date" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "output" Text :>
+                                 QueryParam "sort" Text :>
+                                   QueryParam "dimensions" Text :>
+                                     QueryParam "oauth_token" Text :>
+                                       QueryParam "start-index" Natural :>
+                                         QueryParam "max-results" Int32 :>
+                                           QueryParam "segment" Text :>
+                                             QueryParam "start-date" Text :>
+                                               QueryParam "fields" Text :>
+                                                 QueryParam "alt" Text :>
+                                                   Get '[JSON] GaData
 
 type RealtimeAPI = RealtimeGet
 
 -- | Returns real time data for a view (profile).
 type RealtimeGet =
-     "analytics" :> "v3" :> "data" :> "realtime" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "metrics" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "filters" Text
-       :> QueryParam "ids" Text
-       :> QueryParam "key" Text
-       :> QueryParam "sort" Text
-       :> QueryParam "dimensions" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "max-results" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "data" :>
+           "realtime" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "metrics" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "filters" Text :>
+                       QueryParam "ids" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "sort" Text :>
+                             QueryParam "dimensions" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "max-results" Int32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :>
+                                       Get '[JSON] RealtimeData
 
 type ManagementAPI =
      WebPropertyAdWordsLinksAPI :<|> UnsampledReportsAPI
@@ -1209,100 +1221,123 @@ type WebPropertyAdWordsLinksAPI =
 
 -- | Creates a webProperty-AdWords link.
 type WebPropertyAdWordsLinksInsert =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "entityAdWordsLinks"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "entityAdWordsLinks" :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Post '[JSON] EntityAdWordsLink
 
 -- | Lists webProperty-AdWords links for a given web property.
 type WebPropertyAdWordsLinksList =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "entityAdWordsLinks"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "start-index" Natural
-       :> QueryParam "max-results" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "entityAdWordsLinks" :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "start-index" Natural :>
+                                 QueryParam "max-results" Int32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :>
+                                       Get '[JSON] EntityAdWordsLinks
 
 -- | Updates an existing webProperty-AdWords link. This method supports patch
 -- semantics.
 type WebPropertyAdWordsLinksPatch =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "entityAdWordsLinks"
-       :> Capture "webPropertyAdWordsLinkId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "entityAdWordsLinks" :>
+                     Capture "webPropertyAdWordsLinkId" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Patch '[JSON] EntityAdWordsLink
 
 -- | Returns a web property-AdWords link to which the user has access.
 type WebPropertyAdWordsLinksGet =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "entityAdWordsLinks"
-       :> Capture "webPropertyAdWordsLinkId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "entityAdWordsLinks" :>
+                     Capture "webPropertyAdWordsLinkId" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON] EntityAdWordsLink
 
 -- | Deletes a web property-AdWords link.
 type WebPropertyAdWordsLinksDelete =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "entityAdWordsLinks"
-       :> Capture "webPropertyAdWordsLinkId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "entityAdWordsLinks" :>
+                     Capture "webPropertyAdWordsLinkId" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Updates an existing webProperty-AdWords link.
 type WebPropertyAdWordsLinksUpdate =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "entityAdWordsLinks"
-       :> Capture "webPropertyAdWordsLinkId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "entityAdWordsLinks" :>
+                     Capture "webPropertyAdWordsLinkId" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Put '[JSON] EntityAdWordsLink
 
 type UnsampledReportsAPI =
      UnsampledReportsInsert :<|> UnsampledReportsList :<|>
@@ -1310,72 +1345,87 @@ type UnsampledReportsAPI =
 
 -- | Create a new unsampled report.
 type UnsampledReportsInsert =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "profiles"
-       :> Capture "profileId" Text
-       :> "unsampledReports"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       "unsampledReports" :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :>
+                                       Post '[JSON] UnsampledReport
 
 -- | Lists unsampled reports to which the user has access.
 type UnsampledReportsList =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "profiles"
-       :> Capture "profileId" Text
-       :> "unsampledReports"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "start-index" Natural
-       :> QueryParam "max-results" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       "unsampledReports" :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "start-index" Natural :>
+                                     QueryParam "max-results" Int32 :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "alt" Text :>
+                                           Get '[JSON] UnsampledReports
 
 -- | Returns a single unsampled report.
 type UnsampledReportsGet =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "profiles"
-       :> Capture "profileId" Text
-       :> "unsampledReports"
-       :> Capture "unsampledReportId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       "unsampledReports" :>
+                         Capture "unsampledReportId" Text :>
+                           QueryParam "quotaUser" Text :>
+                             QueryParam "prettyPrint" Bool :>
+                               QueryParam "userIp" Text :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Text :>
+                                         Get '[JSON] UnsampledReport
 
 type AccountsAPI = AccountsList
 
 -- | Lists all accounts to which the user has access.
 type AccountsList =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "start-index" Natural
-       :> QueryParam "max-results" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "start-index" Natural :>
+                         QueryParam "max-results" Int32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] Accounts
 
 type ExperimentsAPI =
      ExperimentsInsert :<|> ExperimentsList :<|>
@@ -1386,130 +1436,158 @@ type ExperimentsAPI =
 
 -- | Create a new experiment.
 type ExperimentsInsert =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "profiles"
-       :> Capture "profileId" Text
-       :> "experiments"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       "experiments" :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :>
+                                       Post '[JSON] Experiment
 
 -- | Lists experiments to which the user has access.
 type ExperimentsList =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "profiles"
-       :> Capture "profileId" Text
-       :> "experiments"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "start-index" Natural
-       :> QueryParam "max-results" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       "experiments" :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "start-index" Natural :>
+                                     QueryParam "max-results" Int32 :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "alt" Text :>
+                                           Get '[JSON] Experiments
 
 -- | Update an existing experiment. This method supports patch semantics.
 type ExperimentsPatch =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "profiles"
-       :> Capture "profileId" Text
-       :> "experiments"
-       :> Capture "experimentId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       "experiments" :>
+                         Capture "experimentId" Text :>
+                           QueryParam "quotaUser" Text :>
+                             QueryParam "prettyPrint" Bool :>
+                               QueryParam "userIp" Text :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Text :>
+                                         Patch '[JSON] Experiment
 
 -- | Returns an experiment to which the user has access.
 type ExperimentsGet =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "profiles"
-       :> Capture "profileId" Text
-       :> "experiments"
-       :> Capture "experimentId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       "experiments" :>
+                         Capture "experimentId" Text :>
+                           QueryParam "quotaUser" Text :>
+                             QueryParam "prettyPrint" Bool :>
+                               QueryParam "userIp" Text :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Text :>
+                                         Get '[JSON] Experiment
 
 -- | Delete an experiment.
 type ExperimentsDelete =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "profiles"
-       :> Capture "profileId" Text
-       :> "experiments"
-       :> Capture "experimentId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       "experiments" :>
+                         Capture "experimentId" Text :>
+                           QueryParam "quotaUser" Text :>
+                             QueryParam "prettyPrint" Bool :>
+                               QueryParam "userIp" Text :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Text :>
+                                         Delete '[JSON] ()
 
 -- | Update an existing experiment.
 type ExperimentsUpdate =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "profiles"
-       :> Capture "profileId" Text
-       :> "experiments"
-       :> Capture "experimentId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       "experiments" :>
+                         Capture "experimentId" Text :>
+                           QueryParam "quotaUser" Text :>
+                             QueryParam "prettyPrint" Bool :>
+                               QueryParam "userIp" Text :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Text :>
+                                         Put '[JSON] Experiment
 
 type CustomDataSourcesAPI = CustomDataSourcesList
 
 -- | List custom data sources to which the user has access.
 type CustomDataSourcesList =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "customDataSources"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "start-index" Natural
-       :> QueryParam "max-results" Natural
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "customDataSources" :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "start-index" Natural :>
+                                 QueryParam "max-results" Natural :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :>
+                                       Get '[JSON] CustomDataSources
 
 type WebpropertyUserLinksAPI =
      WebpropertyUserLinksInsert :<|>
@@ -1519,67 +1597,82 @@ type WebpropertyUserLinksAPI =
 
 -- | Adds a new user to the given web property.
 type WebpropertyUserLinksInsert =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "entityUserLinks"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "entityUserLinks" :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Post '[JSON] EntityUserLink
 
 -- | Lists webProperty-user links for a given web property.
 type WebpropertyUserLinksList =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "entityUserLinks"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "start-index" Natural
-       :> QueryParam "max-results" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "entityUserLinks" :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "start-index" Natural :>
+                                 QueryParam "max-results" Int32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :>
+                                       Get '[JSON] EntityUserLinks
 
 -- | Removes a user from the given web property.
 type WebpropertyUserLinksDelete =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "entityUserLinks"
-       :> Capture "linkId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "entityUserLinks" :>
+                     Capture "linkId" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Updates permissions for an existing user on the given web property.
 type WebpropertyUserLinksUpdate =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "entityUserLinks"
-       :> Capture "linkId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "entityUserLinks" :>
+                     Capture "linkId" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Put '[JSON] EntityUserLink
 
 type ProfilesAPI =
      ProfilesInsert :<|> ProfilesList :<|> ProfilesPatch
@@ -1589,100 +1682,120 @@ type ProfilesAPI =
 
 -- | Create a new view (profile).
 type ProfilesInsert =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "profiles"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :> Post '[JSON] Profile
 
 -- | Lists views (profiles) to which the user has access.
 type ProfilesList =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "profiles"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "start-index" Natural
-       :> QueryParam "max-results" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "start-index" Natural :>
+                                 QueryParam "max-results" Int32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :>
+                                       Get '[JSON] Profiles
 
 -- | Updates an existing view (profile). This method supports patch
 -- semantics.
 type ProfilesPatch =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "profiles"
-       :> Capture "profileId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Patch '[JSON] Profile
 
 -- | Gets a view (profile) to which the user has access.
 type ProfilesGet =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "profiles"
-       :> Capture "profileId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :> Get '[JSON] Profile
 
 -- | Deletes a view (profile).
 type ProfilesDelete =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "profiles"
-       :> Capture "profileId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Updates an existing view (profile).
 type ProfilesUpdate =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "profiles"
-       :> Capture "profileId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :> Put '[JSON] Profile
 
 type FiltersAPI =
      FiltersInsert :<|> FiltersList :<|> FiltersPatch :<|>
@@ -1692,104 +1805,125 @@ type FiltersAPI =
 
 -- | Create a new filter.
 type FiltersInsert =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "filters"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "filters" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Post '[JSON] Filter
 
 -- | Lists all filters for an account
 type FiltersList =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "filters"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "start-index" Natural
-       :> QueryParam "max-results" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "filters" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "start-index" Natural :>
+                             QueryParam "max-results" Int32 :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :> Get '[JSON] Filters
 
 -- | Updates an existing filter. This method supports patch semantics.
 type FiltersPatch =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "filters"
-       :> Capture "filterId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "filters" :>
+                 Capture "filterId" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Patch '[JSON] Filter
 
 -- | Returns a filters to which the user has access.
 type FiltersGet =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "filters"
-       :> Capture "filterId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "filters" :>
+                 Capture "filterId" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Get '[JSON] Filter
 
 -- | Delete a filter.
 type FiltersDelete =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "filters"
-       :> Capture "filterId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "filters" :>
+                 Capture "filterId" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Delete '[JSON] Filter
 
 -- | Updates an existing filter.
 type FiltersUpdate =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "filters"
-       :> Capture "filterId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "filters" :>
+                 Capture "filterId" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Put '[JSON] Filter
 
 type AccountSummariesAPI = AccountSummariesList
 
 -- | Lists account summaries (lightweight tree comprised of
 -- accounts\/properties\/profiles) to which the user has access.
 type AccountSummariesList =
-     "analytics" :> "v3" :> "management" :>
-       "accountSummaries"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "start-index" Natural
-       :> QueryParam "max-results" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accountSummaries" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "start-index" Natural :>
+                         QueryParam "max-results" Int32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Get '[JSON] AccountSummaries
 
 type GoalsAPI =
      GoalsInsert :<|> GoalsList :<|> GoalsPatch :<|>
@@ -1798,94 +1932,111 @@ type GoalsAPI =
 
 -- | Create a new goal.
 type GoalsInsert =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "profiles"
-       :> Capture "profileId" Text
-       :> "goals"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       "goals" :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :> Post '[JSON] Goal
 
 -- | Lists goals to which the user has access.
 type GoalsList =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "profiles"
-       :> Capture "profileId" Text
-       :> "goals"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "start-index" Natural
-       :> QueryParam "max-results" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       "goals" :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "start-index" Natural :>
+                                     QueryParam "max-results" Int32 :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "alt" Text :>
+                                           Get '[JSON] Goals
 
 -- | Updates an existing view (profile). This method supports patch
 -- semantics.
 type GoalsPatch =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "profiles"
-       :> Capture "profileId" Text
-       :> "goals"
-       :> Capture "goalId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       "goals" :>
+                         Capture "goalId" Text :>
+                           QueryParam "quotaUser" Text :>
+                             QueryParam "prettyPrint" Bool :>
+                               QueryParam "userIp" Text :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Text :>
+                                         Patch '[JSON] Goal
 
 -- | Gets a goal to which the user has access.
 type GoalsGet =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "profiles"
-       :> Capture "profileId" Text
-       :> "goals"
-       :> Capture "goalId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       "goals" :>
+                         Capture "goalId" Text :>
+                           QueryParam "quotaUser" Text :>
+                             QueryParam "prettyPrint" Bool :>
+                               QueryParam "userIp" Text :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Text :> Get '[JSON] Goal
 
 -- | Updates an existing view (profile).
 type GoalsUpdate =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "profiles"
-       :> Capture "profileId" Text
-       :> "goals"
-       :> Capture "goalId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       "goals" :>
+                         Capture "goalId" Text :>
+                           QueryParam "quotaUser" Text :>
+                             QueryParam "prettyPrint" Bool :>
+                               QueryParam "userIp" Text :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Text :> Put '[JSON] Goal
 
 type WebpropertiesAPI =
      WebpropertiesInsert :<|> WebpropertiesList :<|>
@@ -1897,73 +2048,90 @@ type WebpropertiesAPI =
 -- properties are visible in the Google Analytics interface only if they
 -- have at least one profile.
 type WebpropertiesInsert =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Post '[JSON] Webproperty
 
 -- | Lists web properties to which the user has access.
 type WebpropertiesList =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "start-index" Natural
-       :> QueryParam "max-results" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "start-index" Natural :>
+                             QueryParam "max-results" Int32 :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Get '[JSON] Webproperties
 
 -- | Updates an existing web property. This method supports patch semantics.
 type WebpropertiesPatch =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :>
+                                 Patch '[JSON] Webproperty
 
 -- | Gets a web property to which the user has access.
 type WebpropertiesGet =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Get '[JSON] Webproperty
 
 -- | Updates an existing web property.
 type WebpropertiesUpdate =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Put '[JSON] Webproperty
 
 type CustomMetricsAPI =
      CustomMetricsInsert :<|> CustomMetricsList :<|>
@@ -1973,85 +2141,105 @@ type CustomMetricsAPI =
 
 -- | Create a new custom metric.
 type CustomMetricsInsert =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "customMetrics"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "customMetrics" :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Post '[JSON] CustomMetric
 
 -- | Lists custom metrics to which the user has access.
 type CustomMetricsList =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "customMetrics"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "start-index" Natural
-       :> QueryParam "max-results" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "customMetrics" :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "start-index" Natural :>
+                                 QueryParam "max-results" Int32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :>
+                                       Get '[JSON] CustomMetrics
 
 -- | Updates an existing custom metric. This method supports patch semantics.
 type CustomMetricsPatch =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "customMetrics"
-       :> Capture "customMetricId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "ignoreCustomDataSourceLinks" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "customMetrics" :>
+                     Capture "customMetricId" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "ignoreCustomDataSourceLinks" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :>
+                                       Patch '[JSON] CustomMetric
 
 -- | Get a custom metric to which the user has access.
 type CustomMetricsGet =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "customMetrics"
-       :> Capture "customMetricId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "customMetrics" :>
+                     Capture "customMetricId" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON] CustomMetric
 
 -- | Updates an existing custom metric.
 type CustomMetricsUpdate =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "customMetrics"
-       :> Capture "customMetricId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "ignoreCustomDataSourceLinks" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "customMetrics" :>
+                     Capture "customMetricId" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "ignoreCustomDataSourceLinks" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :>
+                                       Put '[JSON] CustomMetric
 
 type UploadsAPI =
      UploadsList :<|> UploadsDeleteUploadData :<|>
@@ -2060,89 +2248,107 @@ type UploadsAPI =
 
 -- | List uploads to which the user has access.
 type UploadsList =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "customDataSources"
-       :> Capture "customDataSourceId" Text
-       :> "uploads"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "start-index" Natural
-       :> QueryParam "max-results" Natural
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "customDataSources" :>
+                     Capture "customDataSourceId" Text :>
+                       "uploads" :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "start-index" Natural :>
+                                     QueryParam "max-results" Natural :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "alt" Text :>
+                                           Get '[JSON] Uploads
 
 -- | Delete data associated with a previous upload.
 type UploadsDeleteUploadData =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "customDataSources"
-       :> Capture "customDataSourceId" Text
-       :> "deleteUploadData"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "customDataSources" :>
+                     Capture "customDataSourceId" Text :>
+                       "deleteUploadData" :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :> Post '[JSON] ()
 
 -- | List uploads to which the user has access.
 type UploadsGet =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "customDataSources"
-       :> Capture "customDataSourceId" Text
-       :> "uploads"
-       :> Capture "uploadId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "customDataSources" :>
+                     Capture "customDataSourceId" Text :>
+                       "uploads" :>
+                         Capture "uploadId" Text :>
+                           QueryParam "quotaUser" Text :>
+                             QueryParam "prettyPrint" Bool :>
+                               QueryParam "userIp" Text :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Text :>
+                                         Get '[JSON] Upload
 
 -- | Upload data for a custom data source.
 type UploadsUploadData =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "customDataSources"
-       :> Capture "customDataSourceId" Text
-       :> "uploads"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "customDataSources" :>
+                     Capture "customDataSourceId" Text :>
+                       "uploads" :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :>
+                                       Post '[JSON] Upload
 
 type SegmentsAPI = SegmentsList
 
 -- | Lists segments to which the user has access.
 type SegmentsList =
-     "analytics" :> "v3" :> "management" :> "segments" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "start-index" Natural
-       :> QueryParam "max-results" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "segments" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "start-index" Natural :>
+                         QueryParam "max-results" Int32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] Segments
 
 type ProfileFilterLinksAPI =
      ProfileFilterLinksInsert :<|> ProfileFilterLinksList
@@ -2153,112 +2359,136 @@ type ProfileFilterLinksAPI =
 
 -- | Create a new profile filter link.
 type ProfileFilterLinksInsert =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "profiles"
-       :> Capture "profileId" Text
-       :> "profileFilterLinks"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       "profileFilterLinks" :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :>
+                                       Post '[JSON] ProfileFilterLink
 
 -- | Lists all profile filter links for a profile.
 type ProfileFilterLinksList =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "profiles"
-       :> Capture "profileId" Text
-       :> "profileFilterLinks"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "start-index" Natural
-       :> QueryParam "max-results" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       "profileFilterLinks" :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "start-index" Natural :>
+                                     QueryParam "max-results" Int32 :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "alt" Text :>
+                                           Get '[JSON] ProfileFilterLinks
 
 -- | Update an existing profile filter link. This method supports patch
 -- semantics.
 type ProfileFilterLinksPatch =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "profiles"
-       :> Capture "profileId" Text
-       :> "profileFilterLinks"
-       :> Capture "linkId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       "profileFilterLinks" :>
+                         Capture "linkId" Text :>
+                           QueryParam "quotaUser" Text :>
+                             QueryParam "prettyPrint" Bool :>
+                               QueryParam "userIp" Text :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Text :>
+                                         Patch '[JSON] ProfileFilterLink
 
 -- | Returns a single profile filter link.
 type ProfileFilterLinksGet =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "profiles"
-       :> Capture "profileId" Text
-       :> "profileFilterLinks"
-       :> Capture "linkId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       "profileFilterLinks" :>
+                         Capture "linkId" Text :>
+                           QueryParam "quotaUser" Text :>
+                             QueryParam "prettyPrint" Bool :>
+                               QueryParam "userIp" Text :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Text :>
+                                         Get '[JSON] ProfileFilterLink
 
 -- | Delete a profile filter link.
 type ProfileFilterLinksDelete =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "profiles"
-       :> Capture "profileId" Text
-       :> "profileFilterLinks"
-       :> Capture "linkId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       "profileFilterLinks" :>
+                         Capture "linkId" Text :>
+                           QueryParam "quotaUser" Text :>
+                             QueryParam "prettyPrint" Bool :>
+                               QueryParam "userIp" Text :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Text :>
+                                         Delete '[JSON] ()
 
 -- | Update an existing profile filter link.
 type ProfileFilterLinksUpdate =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "profiles"
-       :> Capture "profileId" Text
-       :> "profileFilterLinks"
-       :> Capture "linkId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       "profileFilterLinks" :>
+                         Capture "linkId" Text :>
+                           QueryParam "quotaUser" Text :>
+                             QueryParam "prettyPrint" Bool :>
+                               QueryParam "userIp" Text :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Text :>
+                                         Put '[JSON] ProfileFilterLink
 
 type CustomDimensionsAPI =
      CustomDimensionsInsert :<|> CustomDimensionsList :<|>
@@ -2268,86 +2498,106 @@ type CustomDimensionsAPI =
 
 -- | Create a new custom dimension.
 type CustomDimensionsInsert =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "customDimensions"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "customDimensions" :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Post '[JSON] CustomDimension
 
 -- | Lists custom dimensions to which the user has access.
 type CustomDimensionsList =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "customDimensions"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "start-index" Natural
-       :> QueryParam "max-results" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "customDimensions" :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "start-index" Natural :>
+                                 QueryParam "max-results" Int32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :>
+                                       Get '[JSON] CustomDimensions
 
 -- | Updates an existing custom dimension. This method supports patch
 -- semantics.
 type CustomDimensionsPatch =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "customDimensions"
-       :> Capture "customDimensionId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "ignoreCustomDataSourceLinks" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "customDimensions" :>
+                     Capture "customDimensionId" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "ignoreCustomDataSourceLinks" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :>
+                                       Patch '[JSON] CustomDimension
 
 -- | Get a custom dimension to which the user has access.
 type CustomDimensionsGet =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "customDimensions"
-       :> Capture "customDimensionId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "customDimensions" :>
+                     Capture "customDimensionId" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON] CustomDimension
 
 -- | Updates an existing custom dimension.
 type CustomDimensionsUpdate =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "customDimensions"
-       :> Capture "customDimensionId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "ignoreCustomDataSourceLinks" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "customDimensions" :>
+                     Capture "customDimensionId" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "ignoreCustomDataSourceLinks" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :>
+                                       Put '[JSON] CustomDimension
 
 type AccountUserLinksAPI =
      AccountUserLinksInsert :<|> AccountUserLinksList :<|>
@@ -2356,59 +2606,74 @@ type AccountUserLinksAPI =
 
 -- | Adds a new user to the given account.
 type AccountUserLinksInsert =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "entityUserLinks"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "entityUserLinks" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Post '[JSON] EntityUserLink
 
 -- | Lists account-user links for a given account.
 type AccountUserLinksList =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "entityUserLinks"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "start-index" Natural
-       :> QueryParam "max-results" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "entityUserLinks" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "start-index" Natural :>
+                             QueryParam "max-results" Int32 :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Get '[JSON] EntityUserLinks
 
 -- | Removes a user from the given account.
 type AccountUserLinksDelete =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "entityUserLinks"
-       :> Capture "linkId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "entityUserLinks" :>
+                 Capture "linkId" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Updates permissions for an existing user on the given account.
 type AccountUserLinksUpdate =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "entityUserLinks"
-       :> Capture "linkId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "entityUserLinks" :>
+                 Capture "linkId" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :>
+                                 Put '[JSON] EntityUserLink
 
 type ProfileUserLinksAPI =
      ProfileUserLinksInsert :<|> ProfileUserLinksList :<|>
@@ -2417,90 +2682,108 @@ type ProfileUserLinksAPI =
 
 -- | Adds a new user to the given view (profile).
 type ProfileUserLinksInsert =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "profiles"
-       :> Capture "profileId" Text
-       :> "entityUserLinks"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       "entityUserLinks" :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :>
+                                       Post '[JSON] EntityUserLink
 
 -- | Lists profile-user links for a given view (profile).
 type ProfileUserLinksList =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "profiles"
-       :> Capture "profileId" Text
-       :> "entityUserLinks"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "start-index" Natural
-       :> QueryParam "max-results" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       "entityUserLinks" :>
+                         QueryParam "quotaUser" Text :>
+                           QueryParam "prettyPrint" Bool :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "start-index" Natural :>
+                                     QueryParam "max-results" Int32 :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "alt" Text :>
+                                           Get '[JSON] EntityUserLinks
 
 -- | Removes a user from the given view (profile).
 type ProfileUserLinksDelete =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "profiles"
-       :> Capture "profileId" Text
-       :> "entityUserLinks"
-       :> Capture "linkId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       "entityUserLinks" :>
+                         Capture "linkId" Text :>
+                           QueryParam "quotaUser" Text :>
+                             QueryParam "prettyPrint" Bool :>
+                               QueryParam "userIp" Text :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Text :>
+                                         Delete '[JSON] ()
 
 -- | Updates permissions for an existing user on the given view (profile).
 type ProfileUserLinksUpdate =
-     "analytics" :> "v3" :> "management" :> "accounts" :>
-       Capture "accountId" Text
-       :> "webproperties"
-       :> Capture "webPropertyId" Text
-       :> "profiles"
-       :> Capture "profileId" Text
-       :> "entityUserLinks"
-       :> Capture "linkId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "management" :>
+           "accounts" :>
+             Capture "accountId" Text :>
+               "webproperties" :>
+                 Capture "webPropertyId" Text :>
+                   "profiles" :>
+                     Capture "profileId" Text :>
+                       "entityUserLinks" :>
+                         Capture "linkId" Text :>
+                           QueryParam "quotaUser" Text :>
+                             QueryParam "prettyPrint" Bool :>
+                               QueryParam "userIp" Text :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Text :>
+                                         Put '[JSON] EntityUserLink
 
 type ProvisioningAPI =
      ProvisioningCreateAccountTicket
 
 -- | Creates an account ticket.
 type ProvisioningCreateAccountTicket =
-     "analytics" :> "v3" :> "provisioning" :>
-       "createAccountTicket"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "provisioning" :>
+           "createAccountTicket" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Post '[JSON] AccountTicket
 
 type MetadataAPI = ColumnsAPI
 
@@ -2508,13 +2791,15 @@ type ColumnsAPI = ColumnsList
 
 -- | Lists all columns for a report type
 type ColumnsList =
-     "analytics" :> "v3" :> "metadata" :>
-       Capture "reportType" Text
-       :> "columns"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "analytics" :>
+       "v3" :>
+         "metadata" :>
+           Capture "reportType" Text :>
+             "columns" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Get '[JSON] Columns

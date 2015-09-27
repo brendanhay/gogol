@@ -42,6 +42,12 @@ instance ToText DownloadLineItemsRequestFilterType where
         DLIRFTInsertionOrderId -> "INSERTION_ORDER_ID"
         DLIRFTLineItemId -> "LINE_ITEM_ID"
 
+instance FromJSON DownloadLineItemsRequestFilterType where
+    parseJSON = parseJSONText "DownloadLineItemsRequestFilterType"
+
+instance ToJSON DownloadLineItemsRequestFilterType where
+    toJSON = toJSONText
+
 -- | Format in which the line items will be returned. Default to CSV.
 data DownloadLineItemsRequestFormat
     = DLIRFCSV
@@ -58,6 +64,12 @@ instance FromText DownloadLineItemsRequestFormat where
 instance ToText DownloadLineItemsRequestFormat where
     toText = \case
         DLIRFCSV -> "CSV"
+
+instance FromJSON DownloadLineItemsRequestFormat where
+    parseJSON = parseJSONText "DownloadLineItemsRequestFormat"
+
+instance ToJSON DownloadLineItemsRequestFormat where
+    toJSON = toJSONText
 
 -- | Filter type.
 data FilterPairType
@@ -388,6 +400,12 @@ instance ToText FilterPairType where
         FPTFilterYoutubeVertical -> "FILTER_YOUTUBE_VERTICAL"
         FPTFilterZipCode -> "FILTER_ZIP_CODE"
 
+instance FromJSON FilterPairType where
+    parseJSON = parseJSONText "FilterPairType"
+
+instance ToJSON FilterPairType where
+    toJSON = toJSONText
+
 data ParametersItemGroupBys
     = PIGBFilterActiveViewExpectedViewability
       -- ^ @FILTER_ACTIVE_VIEW_EXPECTED_VIEWABILITY@
@@ -715,6 +733,12 @@ instance ToText ParametersItemGroupBys where
         PIGBFilterYear -> "FILTER_YEAR"
         PIGBFilterYoutubeVertical -> "FILTER_YOUTUBE_VERTICAL"
         PIGBFilterZipCode -> "FILTER_ZIP_CODE"
+
+instance FromJSON ParametersItemGroupBys where
+    parseJSON = parseJSONText "ParametersItemGroupBys"
+
+instance ToJSON ParametersItemGroupBys where
+    toJSON = toJSONText
 
 data ParametersItemMetrics
     = PIMMetricBidRequests
@@ -1684,6 +1708,12 @@ instance ToText ParametersItemMetrics where
         PIMMetricVideoCompanionImpressions -> "METRIC_VIDEO_COMPANION_IMPRESSIONS"
         PIMMetricVideoCompletionRate -> "METRIC_VIDEO_COMPLETION_RATE"
 
+instance FromJSON ParametersItemMetrics where
+    parseJSON = parseJSONText "ParametersItemMetrics"
+
+instance ToJSON ParametersItemMetrics where
+    toJSON = toJSONText
+
 -- | Report type.
 data ParametersType
     = PTTypeActiveGrp
@@ -1797,6 +1827,12 @@ instance ToText ParametersType where
         PTTypeVerification -> "TYPE_VERIFICATION"
         PTTypeYoutubeVertical -> "TYPE_YOUTUBE_VERTICAL"
 
+instance FromJSON ParametersType where
+    parseJSON = parseJSONText "ParametersType"
+
+instance ToJSON ParametersType where
+    toJSON = toJSONText
+
 -- | Range of report data.
 data QueryMetadataDataRange
     = QMDRAllTime
@@ -1882,6 +1918,12 @@ instance ToText QueryMetadataDataRange where
         QMDRWeekToDate -> "WEEK_TO_DATE"
         QMDRYearToDate -> "YEAR_TO_DATE"
 
+instance FromJSON QueryMetadataDataRange where
+    parseJSON = parseJSONText "QueryMetadataDataRange"
+
+instance ToJSON QueryMetadataDataRange where
+    toJSON = toJSONText
+
 -- | Format of the generated report.
 data QueryMetadataFormat
     = QMFCSV
@@ -1906,6 +1948,12 @@ instance ToText QueryMetadataFormat where
         QMFCSV -> "CSV"
         QMFExcelCSV -> "EXCEL_CSV"
         QMFXlsx -> "XLSX"
+
+instance FromJSON QueryMetadataFormat where
+    parseJSON = parseJSONText "QueryMetadataFormat"
+
+instance ToJSON QueryMetadataFormat where
+    toJSON = toJSONText
 
 -- | How often the query is run.
 data QueryScheduleFrequency
@@ -1943,6 +1991,12 @@ instance ToText QueryScheduleFrequency where
         QSFQuarterly -> "QUARTERLY"
         QSFSemiMonthly -> "SEMI_MONTHLY"
         QSFWeekly -> "WEEKLY"
+
+instance FromJSON QueryScheduleFrequency where
+    parseJSON = parseJSONText "QueryScheduleFrequency"
+
+instance ToJSON QueryScheduleFrequency where
+    toJSON = toJSONText
 
 -- | Error code that shows why the report was not created.
 data ReportFailureErrorCode
@@ -2029,6 +2083,12 @@ instance ToText ReportFailureErrorCode where
         RFECUnauthorizedAPIAccess -> "UNAUTHORIZED_API_ACCESS"
         RFECValidationError -> "VALIDATION_ERROR"
 
+instance FromJSON ReportFailureErrorCode where
+    parseJSON = parseJSONText "ReportFailureErrorCode"
+
+instance ToJSON ReportFailureErrorCode where
+    toJSON = toJSONText
+
 -- | The file type of the report.
 data ReportStatusFormat
     = RSFCSV
@@ -2054,6 +2114,12 @@ instance ToText ReportStatusFormat where
         RSFExcelCSV -> "EXCEL_CSV"
         RSFXlsx -> "XLSX"
 
+instance FromJSON ReportStatusFormat where
+    parseJSON = parseJSONText "ReportStatusFormat"
+
+instance ToJSON ReportStatusFormat where
+    toJSON = toJSONText
+
 -- | The state of the report.
 data ReportStatusState
     = RSSDone
@@ -2078,6 +2144,12 @@ instance ToText ReportStatusState where
         RSSDone -> "DONE"
         RSSFailed -> "FAILED"
         RSSRunning -> "RUNNING"
+
+instance FromJSON ReportStatusState where
+    parseJSON = parseJSONText "ReportStatusState"
+
+instance ToJSON ReportStatusState where
+    toJSON = toJSONText
 
 -- | Report data range used to generate the report.
 data RunQueryRequestDataRange
@@ -2164,6 +2236,12 @@ instance ToText RunQueryRequestDataRange where
         RQRDRWeekToDate -> "WEEK_TO_DATE"
         RQRDRYearToDate -> "YEAR_TO_DATE"
 
+instance FromJSON RunQueryRequestDataRange where
+    parseJSON = parseJSONText "RunQueryRequestDataRange"
+
+instance ToJSON RunQueryRequestDataRange where
+    toJSON = toJSONText
+
 -- | Format the line items are in. Default to CSV.
 data UploadLineItemsRequestFormat
     = ULIRFCSV
@@ -2180,3 +2258,9 @@ instance FromText UploadLineItemsRequestFormat where
 instance ToText UploadLineItemsRequestFormat where
     toText = \case
         ULIRFCSV -> "CSV"
+
+instance FromJSON UploadLineItemsRequestFormat where
+    parseJSON = parseJSONText "UploadLineItemsRequestFormat"
+
+instance ToJSON UploadLineItemsRequestFormat where
+    toJSON = toJSONText

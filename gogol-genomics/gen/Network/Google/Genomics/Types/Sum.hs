@@ -46,6 +46,12 @@ instance ToText AnnotationSetType where
         ASTTranscript -> "TRANSCRIPT"
         ASTVariant -> "VARIANT"
 
+instance FromJSON AnnotationSetType where
+    parseJSON = parseJSONText "AnnotationSetType"
+
+instance ToJSON AnnotationSetType where
+    toJSON = toJSONText
+
 -- | The data type for this annotation. Must match the containing annotation
 -- set\'s type.
 data AnnotationType
@@ -75,6 +81,12 @@ instance ToText AnnotationType where
         ATGeneric -> "GENERIC"
         ATTranscript -> "TRANSCRIPT"
         ATVariant -> "VARIANT"
+
+instance FromJSON AnnotationType where
+    parseJSON = parseJSONText "AnnotationType"
+
+instance ToJSON AnnotationType where
+    toJSON = toJSONText
 
 data CigarUnitOperation
     = CUOAlignmentMatch
@@ -128,6 +140,12 @@ instance ToText CigarUnitOperation where
         CUOSequenceMismatch -> "SEQUENCE_MISMATCH"
         CUOSkip -> "SKIP"
 
+instance FromJSON CigarUnitOperation where
+    parseJSON = parseJSONText "CigarUnitOperation"
+
+instance ToJSON CigarUnitOperation where
+    toJSON = toJSONText
+
 -- | The format for the exported data.
 data ExportVariantSetRequestFormat
     = EVSRFBigquery
@@ -144,6 +162,12 @@ instance FromText ExportVariantSetRequestFormat where
 instance ToText ExportVariantSetRequestFormat where
     toText = \case
         EVSRFBigquery -> "BIGQUERY"
+
+instance FromJSON ExportVariantSetRequestFormat where
+    parseJSON = parseJSONText "ExportVariantSetRequestFormat"
+
+instance ToJSON ExportVariantSetRequestFormat where
+    toJSON = toJSONText
 
 -- | The partition strategy describes how read groups are partitioned into
 -- read group sets.
@@ -167,6 +191,12 @@ instance ToText ImportReadGroupSetsRequestPartitionStrategy where
         IRGSRPSMergeAll -> "MERGE_ALL"
         IRGSRPSPerFilePerSample -> "PER_FILE_PER_SAMPLE"
 
+instance FromJSON ImportReadGroupSetsRequestPartitionStrategy where
+    parseJSON = parseJSONText "ImportReadGroupSetsRequestPartitionStrategy"
+
+instance ToJSON ImportReadGroupSetsRequestPartitionStrategy where
+    toJSON = toJSONText
+
 -- | The format of the variant data being imported. If unspecified, defaults
 -- to to \"VCF\".
 data ImportVariantsRequestFormat
@@ -188,6 +218,12 @@ instance ToText ImportVariantsRequestFormat where
     toText = \case
         IVRFCompleteGenomics -> "COMPLETE_GENOMICS"
         IVRFVcf -> "VCF"
+
+instance FromJSON ImportVariantsRequestFormat where
+    parseJSON = parseJSONText "ImportVariantsRequestFormat"
+
+instance ToJSON ImportVariantsRequestFormat where
+    toJSON = toJSONText
 
 -- | The original request type.
 data JobRequestType
@@ -234,6 +270,12 @@ instance ToText JobRequestType where
         JRTImportVariants -> "IMPORT_VARIANTS"
         JRTUnknownType -> "UNKNOWN_TYPE"
 
+instance FromJSON JobRequestType where
+    parseJSON = parseJSONText "JobRequestType"
+
+instance ToJSON JobRequestType where
+    toJSON = toJSONText
+
 -- | The status of this job.
 data JobStatus
     = JSCanceled
@@ -275,6 +317,12 @@ instance ToText JobStatus where
         JSSuccess -> "SUCCESS"
         JSUnknownStatus -> "UNKNOWN_STATUS"
 
+instance FromJSON JobStatus where
+    parseJSON = parseJSONText "JobStatus"
+
+instance ToJSON JobStatus where
+    toJSON = toJSONText
+
 -- | The type of data. Possible types include: Integer, Float, Flag,
 -- Character, and String.
 data MetadataType
@@ -313,6 +361,12 @@ instance ToText MetadataType where
         MTString -> "STRING"
         MTUnknownType -> "UNKNOWN_TYPE"
 
+instance FromJSON MetadataType where
+    parseJSON = parseJSONText "MetadataType"
+
+instance ToJSON MetadataType where
+    toJSON = toJSONText
+
 data SearchAnnotationSetsRequestItemTypes
     = SASRITGene
       -- ^ @GENE@
@@ -340,6 +394,12 @@ instance ToText SearchAnnotationSetsRequestItemTypes where
         SASRITGeneric -> "GENERIC"
         SASRITTranscript -> "TRANSCRIPT"
         SASRITVariant -> "VARIANT"
+
+instance FromJSON SearchAnnotationSetsRequestItemTypes where
+    parseJSON = parseJSONText "SearchAnnotationSetsRequestItemTypes"
+
+instance ToJSON SearchAnnotationSetsRequestItemTypes where
+    toJSON = toJSONText
 
 data SearchJobsRequestItemStatus
     = SJRISCanceled
@@ -380,6 +440,12 @@ instance ToText SearchJobsRequestItemStatus where
         SJRISRunning -> "RUNNING"
         SJRISSuccess -> "SUCCESS"
         SJRISUnknownStatus -> "UNKNOWN_STATUS"
+
+instance FromJSON SearchJobsRequestItemStatus where
+    parseJSON = parseJSONText "SearchJobsRequestItemStatus"
+
+instance ToJSON SearchJobsRequestItemStatus where
+    toJSON = toJSONText
 
 -- | Describes the clinical significance of a variant. It is adapted from the
 -- ClinVar controlled vocabulary for clinical significance described at:
@@ -452,6 +518,12 @@ instance ToText VariantAnnotationClinicalSignificance where
         VACSRiskFactor -> "RISK_FACTOR"
         VACSUncertain -> "UNCERTAIN"
 
+instance FromJSON VariantAnnotationClinicalSignificance where
+    parseJSON = parseJSONText "VariantAnnotationClinicalSignificance"
+
+instance ToJSON VariantAnnotationClinicalSignificance where
+    toJSON = toJSONText
+
 -- | Effect of the variant on the coding sequence.
 data VariantAnnotationEffect
     = VAEEffectUnspecified
@@ -501,6 +573,12 @@ instance ToText VariantAnnotationEffect where
         VAEStopLoss -> "STOP_LOSS"
         VAESynonymousSnp -> "SYNONYMOUS_SNP"
 
+instance FromJSON VariantAnnotationEffect where
+    parseJSON = parseJSONText "VariantAnnotationEffect"
+
+instance ToJSON VariantAnnotationEffect where
+    toJSON = toJSONText
+
 -- | Type has been adapted from ClinVar\'s list of variant types.
 data VariantAnnotationType
     = VATCnv
@@ -545,3 +623,9 @@ instance ToText VariantAnnotationType where
         VATStructural -> "STRUCTURAL"
         VATSubstitution -> "SUBSTITUTION"
         VATTypeUnspecified -> "TYPE_UNSPECIFIED"
+
+instance FromJSON VariantAnnotationType where
+    parseJSON = parseJSONText "VariantAnnotationType"
+
+instance ToJSON VariantAnnotationType where
+    toJSON = toJSONText

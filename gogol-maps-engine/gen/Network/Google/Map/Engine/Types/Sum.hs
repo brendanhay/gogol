@@ -54,6 +54,12 @@ instance ToText AcquisitionTimePrecision where
         ATPSecond -> "second"
         ATPYear -> "year"
 
+instance FromJSON AcquisitionTimePrecision where
+    parseJSON = parseJSONText "AcquisitionTimePrecision"
+
+instance ToJSON AcquisitionTimePrecision where
+    toJSON = toJSONText
+
 -- | The type of asset. One of raster, rasterCollection, table, map, or
 -- layer.
 data AssetType
@@ -88,6 +94,12 @@ instance ToText AssetType where
         ATRasterCollection -> "rasterCollection"
         ATTable -> "table"
 
+instance FromJSON AssetType where
+    parseJSON = parseJSONText "AssetType"
+
+instance ToJSON AssetType where
+    toJSON = toJSONText
+
 -- | The upload status of the file.
 data FileUploadStatus
     = FUSCanceled
@@ -116,6 +128,12 @@ instance ToText FileUploadStatus where
         FUSComplete -> "complete"
         FUSFailed -> "failed"
         FUSInProgress -> "inProgress"
+
+instance FromJSON FileUploadStatus where
+    parseJSON = parseJSONText "FileUploadStatus"
+
+instance ToJSON FileUploadStatus where
+    toJSON = toJSONText
 
 -- | Operation used to evaluate the filter.
 data FilterOperator
@@ -166,6 +184,12 @@ instance ToText FilterOperator where
         FOEndsWith -> "endsWith"
         FOStartsWith -> "startsWith"
 
+instance FromJSON FilterOperator where
+    parseJSON = parseJSONText "FilterOperator"
+
+instance ToJSON FilterOperator where
+    toJSON = toJSONText
+
 -- | Identifies this object as a GeoJsonGeometryCollection.
 data GeoJsonGeometryCollectionType
     = GJGCTGeometryCollection
@@ -182,6 +206,12 @@ instance FromText GeoJsonGeometryCollectionType where
 instance ToText GeoJsonGeometryCollectionType where
     toText = \case
         GJGCTGeometryCollection -> "GeometryCollection"
+
+instance FromJSON GeoJsonGeometryCollectionType where
+    parseJSON = parseJSONText "GeoJsonGeometryCollectionType"
+
+instance ToJSON GeoJsonGeometryCollectionType where
+    toJSON = toJSONText
 
 -- | Identifies this object as a GeoJsonLineString.
 data GeoJsonLineStringType
@@ -200,6 +230,12 @@ instance ToText GeoJsonLineStringType where
     toText = \case
         GJLSTLineString -> "LineString"
 
+instance FromJSON GeoJsonLineStringType where
+    parseJSON = parseJSONText "GeoJsonLineStringType"
+
+instance ToJSON GeoJsonLineStringType where
+    toJSON = toJSONText
+
 -- | Identifies this object as a GeoJsonMultiLineString.
 data GeoJsonMultiLineStringType
     = GJMLSTMultiLineString
@@ -216,6 +252,12 @@ instance FromText GeoJsonMultiLineStringType where
 instance ToText GeoJsonMultiLineStringType where
     toText = \case
         GJMLSTMultiLineString -> "MultiLineString"
+
+instance FromJSON GeoJsonMultiLineStringType where
+    parseJSON = parseJSONText "GeoJsonMultiLineStringType"
+
+instance ToJSON GeoJsonMultiLineStringType where
+    toJSON = toJSONText
 
 -- | Identifies this object as a GeoJsonMultiPoint.
 data GeoJsonMultiPointType
@@ -234,6 +276,12 @@ instance ToText GeoJsonMultiPointType where
     toText = \case
         GJMPTMultiPoint -> "MultiPoint"
 
+instance FromJSON GeoJsonMultiPointType where
+    parseJSON = parseJSONText "GeoJsonMultiPointType"
+
+instance ToJSON GeoJsonMultiPointType where
+    toJSON = toJSONText
+
 -- | Identifies this object as a GeoJsonMultiPolygon.
 data GeoJsonMultiPolygonType
     = GJMPTMultiPolygon
@@ -250,6 +298,12 @@ instance FromText GeoJsonMultiPolygonType where
 instance ToText GeoJsonMultiPolygonType where
     toText = \case
         GJMPTMultiPolygon -> "MultiPolygon"
+
+instance FromJSON GeoJsonMultiPolygonType where
+    parseJSON = parseJSONText "GeoJsonMultiPolygonType"
+
+instance ToJSON GeoJsonMultiPolygonType where
+    toJSON = toJSONText
 
 -- | Identifies this object as a GeoJsonPoint.
 data GeoJsonPointType
@@ -268,6 +322,12 @@ instance ToText GeoJsonPointType where
     toText = \case
         GJPTPoint -> "Point"
 
+instance FromJSON GeoJsonPointType where
+    parseJSON = parseJSONText "GeoJsonPointType"
+
+instance ToJSON GeoJsonPointType where
+    toJSON = toJSONText
+
 -- | Identifies this object as a GeoJsonPolygon.
 data GeoJsonPolygonType
     = GJPTPolygon
@@ -284,6 +344,12 @@ instance FromText GeoJsonPolygonType where
 instance ToText GeoJsonPolygonType where
     toText = \case
         GJPTPolygon -> "Polygon"
+
+instance FromJSON GeoJsonPolygonType where
+    parseJSON = parseJSONText "GeoJsonPolygonType"
+
+instance ToJSON GeoJsonPolygonType where
+    toJSON = toJSONText
 
 -- | Font style of the label, defaults to \'normal\'.
 data LabelStyleFontStyle
@@ -306,6 +372,12 @@ instance ToText LabelStyleFontStyle where
         LSFSItalic -> "italic"
         LSFSNormal -> "normal"
 
+instance FromJSON LabelStyleFontStyle where
+    parseJSON = parseJSONText "LabelStyleFontStyle"
+
+instance ToJSON LabelStyleFontStyle where
+    toJSON = toJSONText
+
 -- | Font weight of the label, defaults to \'normal\'.
 data LabelStyleFontWeight
     = LSFWBold
@@ -326,6 +398,12 @@ instance ToText LabelStyleFontWeight where
     toText = \case
         LSFWBold -> "bold"
         LSFWNormal -> "normal"
+
+instance FromJSON LabelStyleFontWeight where
+    parseJSON = parseJSONText "LabelStyleFontWeight"
+
+instance ToJSON LabelStyleFontWeight where
+    toJSON = toJSONText
 
 -- | Deprecated: The type of the datasources used to build this Layer. Note:
 -- This has been replaced by layerType, but is still available for now to
@@ -350,6 +428,12 @@ instance ToText LayerDatasourceType where
         LDTImage -> "image"
         LDTTable -> "table"
 
+instance FromJSON LayerDatasourceType where
+    parseJSON = parseJSONText "LayerDatasourceType"
+
+instance ToJSON LayerDatasourceType where
+    toJSON = toJSONText
+
 -- | The type of the datasources used to build this Layer. This should be
 -- used instead of datasourceType. At least one of layerType and
 -- datasourceType and must be specified, but layerType takes precedence.
@@ -372,6 +456,12 @@ instance ToText LayerLayerType where
     toText = \case
         LLTImage -> "image"
         LLTVector -> "vector"
+
+instance FromJSON LayerLayerType where
+    parseJSON = parseJSONText "LayerLayerType"
+
+instance ToJSON LayerLayerType where
+    toJSON = toJSONText
 
 -- | The processing status of this layer.
 data LayerProcessingStatus
@@ -406,6 +496,12 @@ instance ToText LayerProcessingStatus where
         LPSProcessing -> "processing"
         LPSReady -> "ready"
 
+instance FromJSON LayerProcessingStatus where
+    parseJSON = parseJSONText "LayerProcessingStatus"
+
+instance ToJSON LayerProcessingStatus where
+    toJSON = toJSONText
+
 -- | The publishing status of this layer.
 data LayerPublishingStatus
     = LPSNotPublished
@@ -427,6 +523,12 @@ instance ToText LayerPublishingStatus where
         LPSNotPublished -> "notPublished"
         LPSPublished -> "published"
 
+instance FromJSON LayerPublishingStatus where
+    parseJSON = parseJSONText "LayerPublishingStatus"
+
+instance ToJSON LayerPublishingStatus where
+    toJSON = toJSONText
+
 -- | Identifies this object as a MapFolder.
 data MapFolderType
     = MFTFolder
@@ -443,6 +545,12 @@ instance FromText MapFolderType where
 instance ToText MapFolderType where
     toText = \case
         MFTFolder -> "folder"
+
+instance FromJSON MapFolderType where
+    parseJSON = parseJSONText "MapFolderType"
+
+instance ToJSON MapFolderType where
+    toJSON = toJSONText
 
 -- | Identifies this object as a MapKmlLink.
 data MapKmlLinkType
@@ -461,6 +569,12 @@ instance ToText MapKmlLinkType where
     toText = \case
         MKLTKmlLink -> "kmlLink"
 
+instance FromJSON MapKmlLinkType where
+    parseJSON = parseJSONText "MapKmlLinkType"
+
+instance ToJSON MapKmlLinkType where
+    toJSON = toJSONText
+
 -- | Identifies this object as a MapLayer.
 data MapLayerType
     = MLTLayer
@@ -477,6 +591,12 @@ instance FromText MapLayerType where
 instance ToText MapLayerType where
     toText = \case
         MLTLayer -> "layer"
+
+instance FromJSON MapLayerType where
+    parseJSON = parseJSONText "MapLayerType"
+
+instance ToJSON MapLayerType where
+    toJSON = toJSONText
 
 -- | The processing status of this map. Map processing is automatically
 -- started once a map becomes ready for processing.
@@ -512,6 +632,12 @@ instance ToText MapProcessingStatus where
         MPSProcessing -> "processing"
         MPSReady -> "ready"
 
+instance FromJSON MapProcessingStatus where
+    parseJSON = parseJSONText "MapProcessingStatus"
+
+instance ToJSON MapProcessingStatus where
+    toJSON = toJSONText
+
 -- | The publishing status of this map.
 data MapPublishingStatus
     = MPSNotPublished
@@ -532,6 +658,12 @@ instance ToText MapPublishingStatus where
     toText = \case
         MPSNotPublished -> "notPublished"
         MPSPublished -> "published"
+
+instance FromJSON MapPublishingStatus where
+    parseJSON = parseJSONText "MapPublishingStatus"
+
+instance ToJSON MapPublishingStatus where
+    toJSON = toJSONText
 
 -- | The type of access granted to this user or group.
 data PermissionRole
@@ -562,6 +694,12 @@ instance ToText PermissionRole where
         PRViewer -> "viewer"
         PRWriter -> "writer"
 
+instance FromJSON PermissionRole where
+    parseJSON = parseJSONText "PermissionRole"
+
+instance ToJSON PermissionRole where
+    toJSON = toJSONText
+
 -- | The account type.
 data PermissionType
     = PTAnyone
@@ -587,6 +725,12 @@ instance ToText PermissionType where
         PTGroup -> "group"
         PTUser -> "user"
 
+instance FromJSON PermissionType where
+    parseJSON = parseJSONText "PermissionType"
+
+instance ToJSON PermissionType where
+    toJSON = toJSONText
+
 -- | The type of the datasources used to build this Layer. This should be
 -- used instead of datasourceType. At least one of layerType and
 -- datasourceType and must be specified, but layerType takes precedence.
@@ -609,6 +753,12 @@ instance ToText PublishedLayerLayerType where
     toText = \case
         PLLTImage -> "image"
         PLLTVector -> "vector"
+
+instance FromJSON PublishedLayerLayerType where
+    parseJSON = parseJSONText "PublishedLayerLayerType"
+
+instance ToJSON PublishedLayerLayerType where
+    toJSON = toJSONText
 
 -- | The processing status of this RasterCollection.
 data RasterCollectionProcessingStatus
@@ -643,6 +793,12 @@ instance ToText RasterCollectionProcessingStatus where
         RCPSProcessing -> "processing"
         RCPSReady -> "ready"
 
+instance FromJSON RasterCollectionProcessingStatus where
+    parseJSON = parseJSONText "RasterCollectionProcessingStatus"
+
+instance ToJSON RasterCollectionProcessingStatus where
+    toJSON = toJSONText
+
 -- | The type of rasters contained within this RasterCollection.
 data RasterCollectionRasterType
     = RCRTImage
@@ -659,6 +815,12 @@ instance FromText RasterCollectionRasterType where
 instance ToText RasterCollectionRasterType where
     toText = \case
         RCRTImage -> "image"
+
+instance FromJSON RasterCollectionRasterType where
+    parseJSON = parseJSONText "RasterCollectionRasterType"
+
+instance ToJSON RasterCollectionRasterType where
+    toJSON = toJSONText
 
 -- | The processing status of this Raster.
 data RasterProcessingStatus
@@ -693,6 +855,12 @@ instance ToText RasterProcessingStatus where
         RPSProcessing -> "processing"
         RPSReady -> "ready"
 
+instance FromJSON RasterProcessingStatus where
+    parseJSON = parseJSONText "RasterProcessingStatus"
+
+instance ToJSON RasterProcessingStatus where
+    toJSON = toJSONText
+
 -- | The type of this Raster. Always \"image\" today.
 data RasterRasterType
     = RRTImage
@@ -710,6 +878,12 @@ instance ToText RasterRasterType where
     toText = \case
         RRTImage -> "image"
 
+instance FromJSON RasterRasterType where
+    parseJSON = parseJSONText "RasterRasterType"
+
+instance ToJSON RasterRasterType where
+    toJSON = toJSONText
+
 -- | Name of the shape.
 data ScaledShapeShape
     = SSSCircle
@@ -726,6 +900,12 @@ instance FromText ScaledShapeShape where
 instance ToText ScaledShapeShape where
     toText = \case
         SSSCircle -> "circle"
+
+instance FromJSON ScaledShapeShape where
+    parseJSON = parseJSONText "ScaledShapeShape"
+
+instance ToJSON ScaledShapeShape where
+    toJSON = toJSONText
 
 -- | The type of scaling function to use. Defaults to SQRT. Currently only
 -- linear and square root scaling are supported.
@@ -748,6 +928,12 @@ instance ToText ScalingFunctionScalingType where
     toText = \case
         SFSTLinear -> "linear"
         SFSTSqrt -> "sqrt"
+
+instance FromJSON ScalingFunctionScalingType where
+    parseJSON = parseJSONText "ScalingFunctionScalingType"
+
+instance ToJSON ScalingFunctionScalingType where
+    toJSON = toJSONText
 
 -- | The type of data stored in this column.
 data TableColumnType
@@ -794,6 +980,12 @@ instance ToText TableColumnType where
         TCTPolygons -> "polygons"
         TCTString -> "string"
 
+instance FromJSON TableColumnType where
+    parseJSON = parseJSONText "TableColumnType"
+
+instance ToJSON TableColumnType where
+    toJSON = toJSONText
+
 -- | The processing status of this table.
 data TableProcessingStatus
     = TPSComplete
@@ -827,6 +1019,12 @@ instance ToText TableProcessingStatus where
         TPSProcessing -> "processing"
         TPSReady -> "ready"
 
+instance FromJSON TableProcessingStatus where
+    parseJSON = parseJSONText "TableProcessingStatus"
+
+instance ToJSON TableProcessingStatus where
+    toJSON = toJSONText
+
 -- | The type of the vector style. Currently, only displayRule is supported.
 data VectorStyleType
     = VSTDisplayRule
@@ -843,3 +1041,9 @@ instance FromText VectorStyleType where
 instance ToText VectorStyleType where
     toText = \case
         VSTDisplayRule -> "displayRule"
+
+instance FromJSON VectorStyleType where
+    parseJSON = parseJSONText "VectorStyleType"
+
+instance ToJSON VectorStyleType where
+    toJSON = toJSONText

@@ -534,223 +534,254 @@ type OrdersAPI =
 
 -- | Retrieves an order using merchant order id.
 type OrdersGetbymerchantorderid =
-     "content" :> "v2sandbox" :>
-       Capture "merchantId" Word64
-       :> "ordersbymerchantid"
-       :> Capture "merchantOrderId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "content" :>
+       "v2sandbox" :>
+         Capture "merchantId" Word64 :>
+           "ordersbymerchantid" :>
+             Capture "merchantOrderId" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Get '[JSON] OrdersGetByMerchantOrderIdResponse
 
 -- | Sandbox only. Creates a test order.
 type OrdersCreatetestorder =
-     "content" :> "v2sandbox" :>
-       Capture "merchantId" Word64
-       :> "testorders"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "content" :>
+       "v2sandbox" :>
+         Capture "merchantId" Word64 :>
+           "testorders" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :>
+                           Post '[JSON] OrdersCreateTestOrderResponse
 
 -- | Lists the orders in your Merchant Center account.
 type OrdersList =
-     "content" :> "v2sandbox" :>
-       Capture "merchantId" Word64
-       :> "orders"
-       :> QueryParam "placedDateEnd" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "orderBy" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "acknowledged" Bool
-       :> QueryParam "key" Text
-       :> QueryParam "statuses" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "placedDateStart" Text
-       :> QueryParam "maxResults" Word32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "content" :>
+       "v2sandbox" :>
+         Capture "merchantId" Word64 :>
+           "orders" :>
+             QueryParam "placedDateEnd" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "orderBy" Text :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "acknowledged" Bool :>
+                         QueryParam "key" Text :>
+                           QueryParam "statuses" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "placedDateStart" Text :>
+                                   QueryParam "maxResults" Word32 :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Text :>
+                                         Get '[JSON] OrdersListResponse
 
 -- | Cancels a line item.
 type OrdersCancellineitem =
-     "content" :> "v2sandbox" :>
-       Capture "merchantId" Word64
-       :> "orders"
-       :> Capture "orderId" Text
-       :> "cancelLineItem"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "content" :>
+       "v2sandbox" :>
+         Capture "merchantId" Word64 :>
+           "orders" :>
+             Capture "orderId" Text :>
+               "cancelLineItem" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Post '[JSON] OrdersCancelLineItemResponse
 
 -- | Updates the merchant order ID for a given order.
 type OrdersUpdatemerchantorderid =
-     "content" :> "v2sandbox" :>
-       Capture "merchantId" Word64
-       :> "orders"
-       :> Capture "orderId" Text
-       :> "updateMerchantOrderId"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "content" :>
+       "v2sandbox" :>
+         Capture "merchantId" Word64 :>
+           "orders" :>
+             Capture "orderId" Text :>
+               "updateMerchantOrderId" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Post '[JSON] OrdersUpdateMerchantOrderIdResponse
 
 -- | Marks an order as acknowledged.
 type OrdersAcknowledge =
-     "content" :> "v2sandbox" :>
-       Capture "merchantId" Word64
-       :> "orders"
-       :> Capture "orderId" Text
-       :> "acknowledge"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "content" :>
+       "v2sandbox" :>
+         Capture "merchantId" Word64 :>
+           "orders" :>
+             Capture "orderId" Text :>
+               "acknowledge" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Post '[JSON] OrdersAcknowledgeResponse
 
 -- | Retrieves an order from your Merchant Center account.
 type OrdersGet =
-     "content" :> "v2sandbox" :>
-       Capture "merchantId" Word64
-       :> "orders"
-       :> Capture "orderId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "content" :>
+       "v2sandbox" :>
+         Capture "merchantId" Word64 :>
+           "orders" :>
+             Capture "orderId" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Get '[JSON] Order
 
 -- | Refund a portion of the order, up to the full amount paid.
 type OrdersRefund =
-     "content" :> "v2sandbox" :>
-       Capture "merchantId" Word64
-       :> "orders"
-       :> Capture "orderId" Text
-       :> "refund"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "content" :>
+       "v2sandbox" :>
+         Capture "merchantId" Word64 :>
+           "orders" :>
+             Capture "orderId" Text :>
+               "refund" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Post '[JSON] OrdersRefundResponse
 
 -- | Sandbox only. Retrieves an order template that can be used to quickly
 -- create a new order in sandbox.
 type OrdersGettestordertemplate =
-     "content" :> "v2sandbox" :>
-       Capture "merchantId" Word64
-       :> "testordertemplates"
-       :> Capture "templateName" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "content" :>
+       "v2sandbox" :>
+         Capture "merchantId" Word64 :>
+           "testordertemplates" :>
+             Capture "templateName" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Get '[JSON] OrdersGetTestOrderTemplateResponse
 
 -- | Returns a line item.
 type OrdersReturnlineitem =
-     "content" :> "v2sandbox" :>
-       Capture "merchantId" Word64
-       :> "orders"
-       :> Capture "orderId" Text
-       :> "returnLineItem"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "content" :>
+       "v2sandbox" :>
+         Capture "merchantId" Word64 :>
+           "orders" :>
+             Capture "orderId" Text :>
+               "returnLineItem" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Post '[JSON] OrdersReturnLineItemResponse
 
 -- | Updates a shipment\'s status, carrier, and\/or tracking ID.
 type OrdersUpdateshipment =
-     "content" :> "v2sandbox" :>
-       Capture "merchantId" Word64
-       :> "orders"
-       :> Capture "orderId" Text
-       :> "updateShipment"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "content" :>
+       "v2sandbox" :>
+         Capture "merchantId" Word64 :>
+           "orders" :>
+             Capture "orderId" Text :>
+               "updateShipment" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Post '[JSON] OrdersUpdateShipmentResponse
 
 -- | Retrieves or modifies multiple orders in a single request.
 type OrdersCustombatch =
-     "content" :> "v2sandbox" :> "orders" :> "batch" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "content" :>
+       "v2sandbox" :>
+         "orders" :>
+           "batch" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :>
+                           Post '[JSON] OrdersCustomBatchResponse
 
 -- | Sandbox only. Moves a test order from state \"inProgress\" to state
 -- \"pendingShipment\".
 type OrdersAdvancetestorder =
-     "content" :> "v2sandbox" :>
-       Capture "merchantId" Word64
-       :> "testorders"
-       :> Capture "orderId" Text
-       :> "advance"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "content" :>
+       "v2sandbox" :>
+         Capture "merchantId" Word64 :>
+           "testorders" :>
+             Capture "orderId" Text :>
+               "advance" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Post '[JSON] OrdersAdvanceTestOrderResponse
 
 -- | Marks line item(s) as shipped.
 type OrdersShiplineitems =
-     "content" :> "v2sandbox" :>
-       Capture "merchantId" Word64
-       :> "orders"
-       :> Capture "orderId" Text
-       :> "shipLineItems"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "content" :>
+       "v2sandbox" :>
+         Capture "merchantId" Word64 :>
+           "orders" :>
+             Capture "orderId" Text :>
+               "shipLineItems" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Post '[JSON] OrdersShipLineItemsResponse
 
 -- | Cancels all line items in an order.
 type OrdersCancel =
-     "content" :> "v2sandbox" :>
-       Capture "merchantId" Word64
-       :> "orders"
-       :> Capture "orderId" Text
-       :> "cancel"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "content" :>
+       "v2sandbox" :>
+         Capture "merchantId" Word64 :>
+           "orders" :>
+             Capture "orderId" Text :>
+               "cancel" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Post '[JSON] OrdersCancelResponse

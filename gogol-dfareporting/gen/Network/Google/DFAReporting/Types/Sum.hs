@@ -39,6 +39,12 @@ instance ToText AccountAccountProfile where
         AAPAccountProfileBasic -> "ACCOUNT_PROFILE_BASIC"
         AAPAccountProfileStandard -> "ACCOUNT_PROFILE_STANDARD"
 
+instance FromJSON AccountAccountProfile where
+    parseJSON = parseJSONText "AccountAccountProfile"
+
+instance ToJSON AccountAccountProfile where
+    toJSON = toJSONText
+
 -- | Maximum number of active ads allowed for the account.
 data AccountActiveAdSummaryActiveAdsLimitTier
     = AAASAALTActiveAdsTier100K
@@ -71,6 +77,12 @@ instance ToText AccountActiveAdSummaryActiveAdsLimitTier where
         AAASAALTActiveAdsTier300K -> "ACTIVE_ADS_TIER_300K"
         AAASAALTActiveAdsTier40K -> "ACTIVE_ADS_TIER_40K"
         AAASAALTActiveAdsTier75K -> "ACTIVE_ADS_TIER_75K"
+
+instance FromJSON AccountActiveAdSummaryActiveAdsLimitTier where
+    parseJSON = parseJSONText "AccountActiveAdSummaryActiveAdsLimitTier"
+
+instance ToJSON AccountActiveAdSummaryActiveAdsLimitTier where
+    toJSON = toJSONText
 
 -- | Maximum number of active ads allowed for this account.
 data AccountActiveAdsLimitTier
@@ -105,6 +117,12 @@ instance ToText AccountActiveAdsLimitTier where
         AAALTActiveAdsTier40K -> "ACTIVE_ADS_TIER_40K"
         AAALTActiveAdsTier75K -> "ACTIVE_ADS_TIER_75K"
 
+instance FromJSON AccountActiveAdsLimitTier where
+    parseJSON = parseJSONText "AccountActiveAdsLimitTier"
+
+instance ToJSON AccountActiveAdsLimitTier where
+    toJSON = toJSONText
+
 data AccountPermissionItemAccountProfiles
     = APIAPAccountProfileBasic
       -- ^ @ACCOUNT_PROFILE_BASIC@
@@ -124,6 +142,12 @@ instance ToText AccountPermissionItemAccountProfiles where
     toText = \case
         APIAPAccountProfileBasic -> "ACCOUNT_PROFILE_BASIC"
         APIAPAccountProfileStandard -> "ACCOUNT_PROFILE_STANDARD"
+
+instance FromJSON AccountPermissionItemAccountProfiles where
+    parseJSON = parseJSONText "AccountPermissionItemAccountProfiles"
+
+instance ToJSON AccountPermissionItemAccountProfiles where
+    toJSON = toJSONText
 
 -- | Administrative level required to enable this account permission.
 data AccountPermissionLevel
@@ -145,6 +169,12 @@ instance ToText AccountPermissionLevel where
     toText = \case
         APLAdministrator -> "ADMINISTRATOR"
         APLUser -> "USER"
+
+instance FromJSON AccountPermissionLevel where
+    parseJSON = parseJSONText "AccountPermissionLevel"
+
+instance ToJSON AccountPermissionLevel where
+    toJSON = toJSONText
 
 -- | Trafficker type of this user profile.
 data AccountUserProfileTraffickerType
@@ -171,6 +201,12 @@ instance ToText AccountUserProfileTraffickerType where
         AUPTTInternalNonTrafficker -> "INTERNAL_NON_TRAFFICKER"
         AUPTTInternalTrafficker -> "INTERNAL_TRAFFICKER"
 
+instance FromJSON AccountUserProfileTraffickerType where
+    parseJSON = parseJSONText "AccountUserProfileTraffickerType"
+
+instance ToJSON AccountUserProfileTraffickerType where
+    toJSON = toJSONText
+
 -- | User type of the user profile. This is a read-only field that can be
 -- left blank.
 data AccountUserProfileUserAccessType
@@ -196,6 +232,12 @@ instance ToText AccountUserProfileUserAccessType where
         AUPUATInternalAdministrator -> "INTERNAL_ADMINISTRATOR"
         AUPUATNormalUser -> "NORMAL_USER"
         AUPUATSuperUser -> "SUPER_USER"
+
+instance FromJSON AccountUserProfileUserAccessType where
+    parseJSON = parseJSONText "AccountUserProfileUserAccessType"
+
+instance ToJSON AccountUserProfileUserAccessType where
+    toJSON = toJSONText
 
 -- | Compatibility of this ad. Applicable when type is AD_SERVING_DEFAULT_AD.
 -- WEB and WEB_INTERSTITIAL refer to rendering either on desktop or on
@@ -235,6 +277,12 @@ instance ToText AdCompatibility where
         ACWeb -> "WEB"
         ACWebInterstitial -> "WEB_INTERSTITIAL"
 
+instance FromJSON AdCompatibility where
+    parseJSON = parseJSONText "AdCompatibility"
+
+instance ToJSON AdCompatibility where
+    toJSON = toJSONText
+
 -- | Ad slot compatibility. WEB and WEB_INTERSTITIAL refer to rendering
 -- either on desktop or on mobile devices for regular or interstitial ads
 -- respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps.
@@ -272,6 +320,12 @@ instance ToText AdSlotCompatibility where
         ASCPlanningRenderingEnvironmentTypeWeb -> "PLANNING_RENDERING_ENVIRONMENT_TYPE_WEB"
         ASCPlanningRenderingEnvironmentTypeWebInterstitial -> "PLANNING_RENDERING_ENVIRONMENT_TYPE_WEB_INTERSTITIAL"
 
+instance FromJSON AdSlotCompatibility where
+    parseJSON = parseJSONText "AdSlotCompatibility"
+
+instance ToJSON AdSlotCompatibility where
+    toJSON = toJSONText
+
 -- | Payment source type of this ad slot.
 data AdSlotPaymentSourceType
     = ASPSTPlanningPaymentSourceTypeAgencyPaid
@@ -292,6 +346,12 @@ instance ToText AdSlotPaymentSourceType where
     toText = \case
         ASPSTPlanningPaymentSourceTypeAgencyPaid -> "PLANNING_PAYMENT_SOURCE_TYPE_AGENCY_PAID"
         ASPSTPlanningPaymentSourceTypePublisherPaid -> "PLANNING_PAYMENT_SOURCE_TYPE_PUBLISHER_PAID"
+
+instance FromJSON AdSlotPaymentSourceType where
+    parseJSON = parseJSONText "AdSlotPaymentSourceType"
+
+instance ToJSON AdSlotPaymentSourceType where
+    toJSON = toJSONText
 
 -- | Type of ad. This is a required field on insertion. Note that default ads
 -- (AD_SERVING_DEFAULT_AD) cannot be created directly (see Creative
@@ -324,6 +384,12 @@ instance ToText AdType where
         ATAdServingStandardAd -> "AD_SERVING_STANDARD_AD"
         ATAdServingTracking -> "AD_SERVING_TRACKING"
 
+instance FromJSON AdType where
+    parseJSON = parseJSONText "AdType"
+
+instance ToJSON AdType where
+    toJSON = toJSONText
+
 -- | Status of this advertiser.
 data AdvertiserStatus
     = ASApproved
@@ -344,6 +410,12 @@ instance ToText AdvertiserStatus where
     toText = \case
         ASApproved -> "APPROVED"
         ASOnHold -> "ON_HOLD"
+
+instance FromJSON AdvertiserStatus where
+    parseJSON = parseJSONText "AdvertiserStatus"
+
+instance ToJSON AdvertiserStatus where
+    toJSON = toJSONText
 
 -- | Type of artwork used for the creative. This is a read-only field.
 -- Applicable to the following creative types: all RICH_MEDIA, and all
@@ -371,6 +443,12 @@ instance ToText CreativeArtworkType where
         CATArtworkTypeFlash -> "ARTWORK_TYPE_FLASH"
         CATArtworkTypeHTML5 -> "ARTWORK_TYPE_HTML5"
         CATArtworkTypeMixed -> "ARTWORK_TYPE_MIXED"
+
+instance FromJSON CreativeArtworkType where
+    parseJSON = parseJSONText "CreativeArtworkType"
+
+instance ToJSON CreativeArtworkType where
+    toJSON = toJSONText
 
 -- | Possible alignments for an asset. This is a read-only field. Applicable
 -- to the following creative types: RICH_MEDIA_MULTI_FLOATING.
@@ -402,6 +480,12 @@ instance ToText CreativeAssetAlignment where
         CAAAlignmentRight -> "ALIGNMENT_RIGHT"
         CAAAlignmentTop -> "ALIGNMENT_TOP"
 
+instance FromJSON CreativeAssetAlignment where
+    parseJSON = parseJSONText "CreativeAssetAlignment"
+
+instance ToJSON CreativeAssetAlignment where
+    toJSON = toJSONText
+
 -- | Artwork type of rich media creative. This is a read-only field.
 -- Applicable to the following creative types: all RICH_MEDIA.
 data CreativeAssetArtworkType
@@ -427,6 +511,12 @@ instance ToText CreativeAssetArtworkType where
         CAATArtworkTypeFlash -> "ARTWORK_TYPE_FLASH"
         CAATArtworkTypeHTML5 -> "ARTWORK_TYPE_HTML5"
         CAATArtworkTypeMixed -> "ARTWORK_TYPE_MIXED"
+
+instance FromJSON CreativeAssetArtworkType where
+    parseJSON = parseJSONText "CreativeAssetArtworkType"
+
+instance ToJSON CreativeAssetArtworkType where
+    toJSON = toJSONText
 
 -- | Rich media child asset type. This is a read-only field. Applicable to
 -- the following creative types: all VPAID.
@@ -457,6 +547,12 @@ instance ToText CreativeAssetChildAssetType where
         CACATChildAssetTypeFlash -> "CHILD_ASSET_TYPE_FLASH"
         CACATChildAssetTypeImage -> "CHILD_ASSET_TYPE_IMAGE"
         CACATChildAssetTypeVideo -> "CHILD_ASSET_TYPE_VIDEO"
+
+instance FromJSON CreativeAssetChildAssetType where
+    parseJSON = parseJSONText "CreativeAssetChildAssetType"
+
+instance ToJSON CreativeAssetChildAssetType where
+    toJSON = toJSONText
 
 -- | Type of rich media asset. This is a read-only field. Applicable to the
 -- following creative types: all RICH_MEDIA.
@@ -508,6 +604,12 @@ instance ToText CreativeAssetDisplayType where
         CADTAssetDisplayTypeVpaidLinear -> "ASSET_DISPLAY_TYPE_VPAID_LINEAR"
         CADTAssetDisplayTypeVpaidNonLinear -> "ASSET_DISPLAY_TYPE_VPAID_NON_LINEAR"
 
+instance FromJSON CreativeAssetDisplayType where
+    parseJSON = parseJSONText "CreativeAssetDisplayType"
+
+instance ToJSON CreativeAssetDisplayType where
+    toJSON = toJSONText
+
 -- | Duration type for which an asset will be displayed. Applicable to the
 -- following creative types: all RICH_MEDIA.
 data CreativeAssetDurationType
@@ -533,6 +635,12 @@ instance ToText CreativeAssetDurationType where
         CADTAssetDurationTypeAuto -> "ASSET_DURATION_TYPE_AUTO"
         CADTAssetDurationTypeCustom -> "ASSET_DURATION_TYPE_CUSTOM"
         CADTAssetDurationTypeNone -> "ASSET_DURATION_TYPE_NONE"
+
+instance FromJSON CreativeAssetDurationType where
+    parseJSON = parseJSONText "CreativeAssetDurationType"
+
+instance ToJSON CreativeAssetDurationType where
+    toJSON = toJSONText
 
 -- | Type of asset to upload. This is a required field. IMAGE is solely used
 -- for IMAGE creatives. Other image assets should use HTML_IMAGE.
@@ -567,6 +675,12 @@ instance ToText CreativeAssetIdType where
         CAITHTMLImage -> "HTML_IMAGE"
         CAITImage -> "IMAGE"
         CAITVideo -> "VIDEO"
+
+instance FromJSON CreativeAssetIdType where
+    parseJSON = parseJSONText "CreativeAssetIdType"
+
+instance ToJSON CreativeAssetIdType where
+    toJSON = toJSONText
 
 data CreativeAssetItemDetectedFeatures
     = CAIDFApplicationCache
@@ -844,6 +958,12 @@ instance ToText CreativeAssetItemDetectedFeatures where
         CAIDFWebSqlDatabase -> "WEB_SQL_DATABASE"
         CAIDFWebWorkers -> "WEB_WORKERS"
 
+instance FromJSON CreativeAssetItemDetectedFeatures where
+    parseJSON = parseJSONText "CreativeAssetItemDetectedFeatures"
+
+instance ToJSON CreativeAssetItemDetectedFeatures where
+    toJSON = toJSONText
+
 data CreativeAssetMetadataItemDetectedFeatures
     = CAMIDFApplicationCache
       -- ^ @APPLICATION_CACHE@
@@ -1120,6 +1240,12 @@ instance ToText CreativeAssetMetadataItemDetectedFeatures where
         CAMIDFWebSqlDatabase -> "WEB_SQL_DATABASE"
         CAMIDFWebWorkers -> "WEB_WORKERS"
 
+instance FromJSON CreativeAssetMetadataItemDetectedFeatures where
+    parseJSON = parseJSONText "CreativeAssetMetadataItemDetectedFeatures"
+
+instance ToJSON CreativeAssetMetadataItemDetectedFeatures where
+    toJSON = toJSONText
+
 data CreativeAssetMetadataItemWarnedValidationRules
     = CAMIWVRADMobReferenced
       -- ^ @ADMOB_REFERENCED@
@@ -1216,6 +1342,12 @@ instance ToText CreativeAssetMetadataItemWarnedValidationRules where
         CAMIWVRPrimaryHTMLMissing -> "PRIMARY_HTML_MISSING"
         CAMIWVRZipInvalid -> "ZIP_INVALID"
 
+instance FromJSON CreativeAssetMetadataItemWarnedValidationRules where
+    parseJSON = parseJSONText "CreativeAssetMetadataItemWarnedValidationRules"
+
+instance ToJSON CreativeAssetMetadataItemWarnedValidationRules where
+    toJSON = toJSONText
+
 -- | Offset left unit for an asset. This is a read-only field. Applicable to
 -- the following creative types: all RICH_MEDIA.
 data CreativeAssetPositionLeftUnit
@@ -1241,6 +1373,12 @@ instance ToText CreativeAssetPositionLeftUnit where
         CAPLUOffsetUnitPercent -> "OFFSET_UNIT_PERCENT"
         CAPLUOffsetUnitPixel -> "OFFSET_UNIT_PIXEL"
         CAPLUOffsetUnitPixelFromCenter -> "OFFSET_UNIT_PIXEL_FROM_CENTER"
+
+instance FromJSON CreativeAssetPositionLeftUnit where
+    parseJSON = parseJSONText "CreativeAssetPositionLeftUnit"
+
+instance ToJSON CreativeAssetPositionLeftUnit where
+    toJSON = toJSONText
 
 -- | Offset top unit for an asset. This is a read-only field if the asset
 -- displayType is ASSET_DISPLAY_TYPE_OVERLAY. Applicable to the following
@@ -1268,6 +1406,12 @@ instance ToText CreativeAssetPositionTopUnit where
         CAPTUOffsetUnitPercent -> "OFFSET_UNIT_PERCENT"
         CAPTUOffsetUnitPixel -> "OFFSET_UNIT_PIXEL"
         CAPTUOffsetUnitPixelFromCenter -> "OFFSET_UNIT_PIXEL_FROM_CENTER"
+
+instance FromJSON CreativeAssetPositionTopUnit where
+    parseJSON = parseJSONText "CreativeAssetPositionTopUnit"
+
+instance ToJSON CreativeAssetPositionTopUnit where
+    toJSON = toJSONText
 
 -- | Role of the asset in relation to creative. Applicable to all but the
 -- following creative types: all REDIRECT and TRACKING_TEXT. This is a
@@ -1333,6 +1477,12 @@ instance ToText CreativeAssetRole where
         CARPrimary -> "PRIMARY"
         CARTranscodedVideo -> "TRANSCODED_VIDEO"
 
+instance FromJSON CreativeAssetRole where
+    parseJSON = parseJSONText "CreativeAssetRole"
+
+instance ToJSON CreativeAssetRole where
+    toJSON = toJSONText
+
 -- | Initial wait time type before making the asset visible. Applicable to
 -- the following creative types: all RICH_MEDIA.
 data CreativeAssetStartTimeType
@@ -1354,6 +1504,12 @@ instance ToText CreativeAssetStartTimeType where
     toText = \case
         CASTTAssetStartTimeTypeCustom -> "ASSET_START_TIME_TYPE_CUSTOM"
         CASTTAssetStartTimeTypeNone -> "ASSET_START_TIME_TYPE_NONE"
+
+instance FromJSON CreativeAssetStartTimeType where
+    parseJSON = parseJSONText "CreativeAssetStartTimeType"
+
+instance ToJSON CreativeAssetStartTimeType where
+    toJSON = toJSONText
 
 -- | Window mode options for flash assets. Applicable to the following
 -- creative types: FLASH_INPAGE, RICH_MEDIA_EXPANDING,
@@ -1382,6 +1538,12 @@ instance ToText CreativeAssetWindowMode where
         CAWMTransparent -> "TRANSPARENT"
         CAWMWindow -> "WINDOW"
 
+instance FromJSON CreativeAssetWindowMode where
+    parseJSON = parseJSONText "CreativeAssetWindowMode"
+
+instance ToJSON CreativeAssetWindowMode where
+    toJSON = toJSONText
+
 -- | Authoring tool for HTML5 banner creatives. This is a read-only field.
 -- Applicable to the following creative types: HTML5_BANNER.
 data CreativeAuthoringTool
@@ -1403,6 +1565,12 @@ instance ToText CreativeAuthoringTool where
     toText = \case
         CATNinja -> "NINJA"
         CATSwiffy -> "SWIFFY"
+
+instance FromJSON CreativeAuthoringTool where
+    parseJSON = parseJSONText "CreativeAuthoringTool"
+
+instance ToJSON CreativeAuthoringTool where
+    toJSON = toJSONText
 
 -- | Type of the event. This is a read-only field.
 data CreativeCustomEventAdvertiserCustomEventType
@@ -1429,6 +1597,12 @@ instance ToText CreativeCustomEventAdvertiserCustomEventType where
         CCEACETAdvertiserEventExit -> "ADVERTISER_EVENT_EXIT"
         CCEACETAdvertiserEventTimer -> "ADVERTISER_EVENT_TIMER"
 
+instance FromJSON CreativeCustomEventAdvertiserCustomEventType where
+    parseJSON = parseJSONText "CreativeCustomEventAdvertiserCustomEventType"
+
+instance ToJSON CreativeCustomEventAdvertiserCustomEventType where
+    toJSON = toJSONText
+
 -- | Artwork type used by the creative.This is a read-only field.
 data CreativeCustomEventArtworkType
     = CCEATArtworkTypeFlash
@@ -1453,6 +1627,12 @@ instance ToText CreativeCustomEventArtworkType where
         CCEATArtworkTypeFlash -> "ARTWORK_TYPE_FLASH"
         CCEATArtworkTypeHTML5 -> "ARTWORK_TYPE_HTML5"
         CCEATArtworkTypeMixed -> "ARTWORK_TYPE_MIXED"
+
+instance FromJSON CreativeCustomEventArtworkType where
+    parseJSON = parseJSONText "CreativeCustomEventArtworkType"
+
+instance ToJSON CreativeCustomEventArtworkType where
+    toJSON = toJSONText
 
 -- | Target type used by the event.
 data CreativeCustomEventTargetType
@@ -1487,6 +1667,12 @@ instance ToText CreativeCustomEventTargetType where
         CCETTTargetSelf -> "TARGET_SELF"
         CCETTTargetTop -> "TARGET_TOP"
 
+instance FromJSON CreativeCustomEventTargetType where
+    parseJSON = parseJSONText "CreativeCustomEventTargetType"
+
+instance ToJSON CreativeCustomEventTargetType where
+    toJSON = toJSONText
+
 -- | Creative group number of the creative group assignment.
 data CreativeGroupAssignmentCreativeGroupNumber
     = CGACGNCreativeGroupOne
@@ -1507,6 +1693,12 @@ instance ToText CreativeGroupAssignmentCreativeGroupNumber where
     toText = \case
         CGACGNCreativeGroupOne -> "CREATIVE_GROUP_ONE"
         CGACGNCreativeGroupTwo -> "CREATIVE_GROUP_TWO"
+
+instance FromJSON CreativeGroupAssignmentCreativeGroupNumber where
+    parseJSON = parseJSONText "CreativeGroupAssignmentCreativeGroupNumber"
+
+instance ToJSON CreativeGroupAssignmentCreativeGroupNumber where
+    toJSON = toJSONText
 
 data CreativeItemBackupImageFeatures
     = CIBIFApplicationCache
@@ -1784,6 +1976,12 @@ instance ToText CreativeItemBackupImageFeatures where
         CIBIFWebSqlDatabase -> "WEB_SQL_DATABASE"
         CIBIFWebWorkers -> "WEB_WORKERS"
 
+instance FromJSON CreativeItemBackupImageFeatures where
+    parseJSON = parseJSONText "CreativeItemBackupImageFeatures"
+
+instance ToJSON CreativeItemBackupImageFeatures where
+    toJSON = toJSONText
+
 data CreativeItemCompatibility
     = CICApp
       -- ^ @APP@
@@ -1816,6 +2014,12 @@ instance ToText CreativeItemCompatibility where
         CICWeb -> "WEB"
         CICWebInterstitial -> "WEB_INTERSTITIAL"
 
+instance FromJSON CreativeItemCompatibility where
+    parseJSON = parseJSONText "CreativeItemCompatibility"
+
+instance ToJSON CreativeItemCompatibility where
+    toJSON = toJSONText
+
 -- | Optimization model for this configuration.
 data CreativeOptimizationConfigurationOptimizationModel
     = COCOMClick
@@ -1845,6 +2049,12 @@ instance ToText CreativeOptimizationConfigurationOptimizationModel where
         COCOMPostClickAndImpression -> "POST_CLICK_AND_IMPRESSION"
         COCOMPostImpression -> "POST_IMPRESSION"
 
+instance FromJSON CreativeOptimizationConfigurationOptimizationModel where
+    parseJSON = parseJSONText "CreativeOptimizationConfigurationOptimizationModel"
+
+instance ToJSON CreativeOptimizationConfigurationOptimizationModel where
+    toJSON = toJSONText
+
 -- | Type of creative rotation. Can be used to specify whether to use
 -- sequential or random rotation.
 data CreativeRotationType
@@ -1866,6 +2076,12 @@ instance ToText CreativeRotationType where
     toText = \case
         CRTCreativeRotationTypeRandom -> "CREATIVE_ROTATION_TYPE_RANDOM"
         CRTCreativeRotationTypeSequential -> "CREATIVE_ROTATION_TYPE_SEQUENTIAL"
+
+instance FromJSON CreativeRotationType where
+    parseJSON = parseJSONText "CreativeRotationType"
+
+instance ToJSON CreativeRotationType where
+    toJSON = toJSONText
 
 -- | Strategy for calculating weights. Used with
 -- CREATIVE_ROTATION_TYPE_RANDOM.
@@ -1896,6 +2112,12 @@ instance ToText CreativeRotationWeightCalculationStrategy where
         CRWCSWeightStrategyEqual -> "WEIGHT_STRATEGY_EQUAL"
         CRWCSWeightStrategyHighestCtr -> "WEIGHT_STRATEGY_HIGHEST_CTR"
         CRWCSWeightStrategyOptimized -> "WEIGHT_STRATEGY_OPTIMIZED"
+
+instance FromJSON CreativeRotationWeightCalculationStrategy where
+    parseJSON = parseJSONText "CreativeRotationWeightCalculationStrategy"
+
+instance ToJSON CreativeRotationWeightCalculationStrategy where
+    toJSON = toJSONText
 
 -- | Type of this creative.This is a required field. Applicable to all
 -- creative types.
@@ -2007,6 +2229,12 @@ instance ToText CreativeType where
         CTVpaidLinear -> "VPAID_LINEAR"
         CTVpaidNonLinear -> "VPAID_NON_LINEAR"
 
+instance FromJSON CreativeType where
+    parseJSON = parseJSONText "CreativeType"
+
+instance ToJSON CreativeType where
+    toJSON = toJSONText
+
 -- | The date range relative to the date of when the report is run.
 data DateRangeRelativeDateRange
     = DRRDRLast24Months
@@ -2080,6 +2308,12 @@ instance ToText DateRangeRelativeDateRange where
         DRRDRYearToDate -> "YEAR_TO_DATE"
         DRRDRYesterday -> "YESTERDAY"
 
+instance FromJSON DateRangeRelativeDateRange where
+    parseJSON = parseJSONText "DateRangeRelativeDateRange"
+
+instance ToJSON DateRangeRelativeDateRange where
+    toJSON = toJSONText
+
 data DayPartTargetingItemDaysOfWeek
     = DPTIDOWFriday
       -- ^ @FRIDAY@
@@ -2119,6 +2353,12 @@ instance ToText DayPartTargetingItemDaysOfWeek where
         DPTIDOWThursday -> "THURSDAY"
         DPTIDOWTuesday -> "TUESDAY"
         DPTIDOWWednesday -> "WEDNESDAY"
+
+instance FromJSON DayPartTargetingItemDaysOfWeek where
+    parseJSON = parseJSONText "DayPartTargetingItemDaysOfWeek"
+
+instance ToJSON DayPartTargetingItemDaysOfWeek where
+    toJSON = toJSONText
 
 -- | Serving priority of an ad, with respect to other ads. The lower the
 -- priority number, the greater the priority with which it is served.
@@ -2198,6 +2438,12 @@ instance ToText DeliverySchedulePriority where
         DSPAdPriority15 -> "AD_PRIORITY_15"
         DSPAdPriority16 -> "AD_PRIORITY_16"
 
+instance FromJSON DeliverySchedulePriority where
+    parseJSON = parseJSONText "DeliverySchedulePriority"
+
+instance ToJSON DeliverySchedulePriority where
+    toJSON = toJSONText
+
 -- | Determines how the \'value\' field is matched when filtering. If not
 -- specified, defaults to EXACT. If set to WILDCARD_EXPRESSION, \'*\' is
 -- allowed as a placeholder for variable length character sequences, and it
@@ -2231,6 +2477,12 @@ instance ToText DimensionValueMatchType where
         DVMTExact -> "EXACT"
         DVMTWildcardExpression -> "WILDCARD_EXPRESSION"
 
+instance FromJSON DimensionValueMatchType where
+    parseJSON = parseJSONText "DimensionValueMatchType"
+
+instance ToJSON DimensionValueMatchType where
+    toJSON = toJSONText
+
 -- | Visibility of this directory site contact assignment. When set to PUBLIC
 -- this contact assignment is visible to all account and agency users; when
 -- set to PRIVATE it is visible only to the site.
@@ -2253,6 +2505,12 @@ instance ToText DirectorySiteContactAssignmentVisibility where
     toText = \case
         DSCAVPrivate -> "PRIVATE"
         DSCAVPublic -> "PUBLIC"
+
+instance FromJSON DirectorySiteContactAssignmentVisibility where
+    parseJSON = parseJSONText "DirectorySiteContactAssignmentVisibility"
+
+instance ToJSON DirectorySiteContactAssignmentVisibility where
+    toJSON = toJSONText
 
 -- | Directory site contact role.
 data DirectorySiteContactRole
@@ -2278,6 +2536,12 @@ instance ToText DirectorySiteContactRole where
         DSCRAdmin -> "ADMIN"
         DSCREdit -> "EDIT"
         DSCRView -> "VIEW"
+
+instance FromJSON DirectorySiteContactRole where
+    parseJSON = parseJSONText "DirectorySiteContactRole"
+
+instance ToJSON DirectorySiteContactRole where
+    toJSON = toJSONText
 
 -- | Directory site contact type.
 data DirectorySiteContactType
@@ -2308,6 +2572,12 @@ instance ToText DirectorySiteContactType where
         DSCTSales -> "SALES"
         DSCTTechnical -> "TECHNICAL"
 
+instance FromJSON DirectorySiteContactType where
+    parseJSON = parseJSONText "DirectorySiteContactType"
+
+instance ToJSON DirectorySiteContactType where
+    toJSON = toJSONText
+
 data DirectorySiteItemInpageTagFormats
     = DSIITFIframeJavascriptInpage
       -- ^ @IFRAME_JAVASCRIPT_INPAGE@
@@ -2336,6 +2606,12 @@ instance ToText DirectorySiteItemInpageTagFormats where
         DSIITFJavascriptInpage -> "JAVASCRIPT_INPAGE"
         DSIITFStandard -> "STANDARD"
 
+instance FromJSON DirectorySiteItemInpageTagFormats where
+    parseJSON = parseJSONText "DirectorySiteItemInpageTagFormats"
+
+instance ToJSON DirectorySiteItemInpageTagFormats where
+    toJSON = toJSONText
+
 data DirectorySiteItemInterstitialTagFormats
     = DSIITFIframeJavascriptInterstitial
       -- ^ @IFRAME_JAVASCRIPT_INTERSTITIAL@
@@ -2360,6 +2636,12 @@ instance ToText DirectorySiteItemInterstitialTagFormats where
         DSIITFInternalRedirectInterstitial -> "INTERNAL_REDIRECT_INTERSTITIAL"
         DSIITFJavascriptInterstitial -> "JAVASCRIPT_INTERSTITIAL"
 
+instance FromJSON DirectorySiteItemInterstitialTagFormats where
+    parseJSON = parseJSONText "DirectorySiteItemInterstitialTagFormats"
+
+instance ToJSON DirectorySiteItemInterstitialTagFormats where
+    toJSON = toJSONText
+
 -- | Site filter type for this event tag. If no type is specified then the
 -- event tag will be applied to all sites.
 data EventTagSiteFilterType
@@ -2382,6 +2664,12 @@ instance ToText EventTagSiteFilterType where
         ETSFTBlacklist -> "BLACKLIST"
         ETSFTWhitelist -> "WHITELIST"
 
+instance FromJSON EventTagSiteFilterType where
+    parseJSON = parseJSONText "EventTagSiteFilterType"
+
+instance ToJSON EventTagSiteFilterType where
+    toJSON = toJSONText
+
 -- | Status of this event tag. Must be ENABLED for this event tag to fire.
 -- This is a required field.
 data EventTagStatus
@@ -2403,6 +2691,12 @@ instance ToText EventTagStatus where
     toText = \case
         ETSDisabled -> "DISABLED"
         ETSEnabled -> "ENABLED"
+
+instance FromJSON EventTagStatus where
+    parseJSON = parseJSONText "EventTagStatus"
+
+instance ToJSON EventTagStatus where
+    toJSON = toJSONText
 
 -- | Event tag type. Can be used to specify whether to use a third-party
 -- pixel, a third-party JavaScript URL, or a third-party click-through URL
@@ -2431,6 +2725,12 @@ instance ToText EventTagType where
         ETTImpressionImageEventTag -> "IMPRESSION_IMAGE_EVENT_TAG"
         ETTImpressionJavascriptEventTag -> "IMPRESSION_JAVASCRIPT_EVENT_TAG"
 
+instance FromJSON EventTagType where
+    parseJSON = parseJSONText "EventTagType"
+
+instance ToJSON EventTagType where
+    toJSON = toJSONText
+
 -- | The output format of the report. Only available once the file is
 -- available.
 data FileFormat
@@ -2452,6 +2752,12 @@ instance ToText FileFormat where
     toText = \case
         FFCSV -> "CSV"
         FFExcel -> "EXCEL"
+
+instance FromJSON FileFormat where
+    parseJSON = parseJSONText "FileFormat"
+
+instance ToJSON FileFormat where
+    toJSON = toJSONText
 
 -- | The status of the report file.
 data FileStatus
@@ -2481,6 +2787,12 @@ instance ToText FileStatus where
         FSFailed -> "FAILED"
         FSProcessing -> "PROCESSING"
         FSReportAvailable -> "REPORT_AVAILABLE"
+
+instance FromJSON FileStatus where
+    parseJSON = parseJSONText "FileStatus"
+
+instance ToJSON FileStatus where
+    toJSON = toJSONText
 
 -- | Code type used for cache busting in the generated tag.
 data FloodlightActivityCacheBustingType
@@ -2514,6 +2826,12 @@ instance ToText FloodlightActivityCacheBustingType where
         FACBTJavascript -> "JAVASCRIPT"
         FACBTJsp -> "JSP"
         FACBTPhp -> "PHP"
+
+instance FromJSON FloodlightActivityCacheBustingType where
+    parseJSON = parseJSONText "FloodlightActivityCacheBustingType"
+
+instance ToJSON FloodlightActivityCacheBustingType where
+    toJSON = toJSONText
 
 -- | Counting method for conversions for this floodlight activity. This is a
 -- required field.
@@ -2549,6 +2867,12 @@ instance ToText FloodlightActivityCountingMethod where
         FACMTransactionsCounting -> "TRANSACTIONS_COUNTING"
         FACMUniqueCounting -> "UNIQUE_COUNTING"
 
+instance FromJSON FloodlightActivityCountingMethod where
+    parseJSON = parseJSONText "FloodlightActivityCountingMethod"
+
+instance ToJSON FloodlightActivityCountingMethod where
+    toJSON = toJSONText
+
 -- | Type of the associated floodlight activity group. This is a read-only
 -- field.
 data FloodlightActivityFloodlightActivityGroupType
@@ -2571,6 +2895,12 @@ instance ToText FloodlightActivityFloodlightActivityGroupType where
         FAFAGTCounter -> "COUNTER"
         FAFAGTSale -> "SALE"
 
+instance FromJSON FloodlightActivityFloodlightActivityGroupType where
+    parseJSON = parseJSONText "FloodlightActivityFloodlightActivityGroupType"
+
+instance ToJSON FloodlightActivityFloodlightActivityGroupType where
+    toJSON = toJSONText
+
 -- | Type of the floodlight activity group. This is a required field that is
 -- read-only after insertion.
 data FloodlightActivityGroupType
@@ -2592,6 +2922,12 @@ instance ToText FloodlightActivityGroupType where
     toText = \case
         FAGTCounter -> "COUNTER"
         FAGTSale -> "SALE"
+
+instance FromJSON FloodlightActivityGroupType where
+    parseJSON = parseJSONText "FloodlightActivityGroupType"
+
+instance ToJSON FloodlightActivityGroupType where
+    toJSON = toJSONText
 
 data FloodlightActivityItemUserDefinedVariableTypes
     = FAIUDVTU1
@@ -2685,6 +3021,12 @@ instance ToText FloodlightActivityItemUserDefinedVariableTypes where
         FAIUDVTU8 -> "U8"
         FAIUDVTU9 -> "U9"
 
+instance FromJSON FloodlightActivityItemUserDefinedVariableTypes where
+    parseJSON = parseJSONText "FloodlightActivityItemUserDefinedVariableTypes"
+
+instance ToJSON FloodlightActivityItemUserDefinedVariableTypes where
+    toJSON = toJSONText
+
 -- | Tag format type for the floodlight activity. If left blank, the tag
 -- format will default to HTML.
 data FloodlightActivityTagFormat
@@ -2707,6 +3049,12 @@ instance ToText FloodlightActivityTagFormat where
         FATFHTML -> "HTML"
         FATFXhtml -> "XHTML"
 
+instance FromJSON FloodlightActivityTagFormat where
+    parseJSON = parseJSONText "FloodlightActivityTagFormat"
+
+instance ToJSON FloodlightActivityTagFormat where
+    toJSON = toJSONText
+
 -- | Day that will be counted as the first day of the week in reports. This
 -- is a required field.
 data FloodlightConfigurationFirstDayOfWeek
@@ -2728,6 +3076,12 @@ instance ToText FloodlightConfigurationFirstDayOfWeek where
     toText = \case
         FCFDOWMonday -> "MONDAY"
         FCFDOWSunday -> "SUNDAY"
+
+instance FromJSON FloodlightConfigurationFirstDayOfWeek where
+    parseJSON = parseJSONText "FloodlightConfigurationFirstDayOfWeek"
+
+instance ToJSON FloodlightConfigurationFirstDayOfWeek where
+    toJSON = toJSONText
 
 data FloodlightConfigurationItemStandardVariableTypes
     = FCISVTNum
@@ -2757,6 +3111,12 @@ instance ToText FloodlightConfigurationItemStandardVariableTypes where
         FCISVTTran -> "TRAN"
         FCISVTU -> "U"
 
+instance FromJSON FloodlightConfigurationItemStandardVariableTypes where
+    parseJSON = parseJSONText "FloodlightConfigurationItemStandardVariableTypes"
+
+instance ToJSON FloodlightConfigurationItemStandardVariableTypes where
+    toJSON = toJSONText
+
 -- | Types of attribution options for natural search conversions.
 data FloodlightConfigurationNaturalSearchConversionAttributionOption
     = FCNSCAOExcludeNATuralSearchConversionAttribution
@@ -2782,6 +3142,12 @@ instance ToText FloodlightConfigurationNaturalSearchConversionAttributionOption 
         FCNSCAOIncludeNATuralSearchConversionAttribution -> "INCLUDE_NATURAL_SEARCH_CONVERSION_ATTRIBUTION"
         FCNSCAOIncludeNATuralSearchTieredConversionAttribution -> "INCLUDE_NATURAL_SEARCH_TIERED_CONVERSION_ATTRIBUTION"
 
+instance FromJSON FloodlightConfigurationNaturalSearchConversionAttributionOption where
+    parseJSON = parseJSONText "FloodlightConfigurationNaturalSearchConversionAttributionOption"
+
+instance ToJSON FloodlightConfigurationNaturalSearchConversionAttributionOption where
+    toJSON = toJSONText
+
 -- | Position in the browser where the window will open.
 data FsCommandPositionOption
     = FCPOCentered
@@ -2802,6 +3168,12 @@ instance ToText FsCommandPositionOption where
     toText = \case
         FCPOCentered -> "CENTERED"
         FCPODistanceFromTopLeftCorner -> "DISTANCE_FROM_TOP_LEFT_CORNER"
+
+instance FromJSON FsCommandPositionOption where
+    parseJSON = parseJSONText "FsCommandPositionOption"
+
+instance ToJSON FsCommandPositionOption where
+    toJSON = toJSONText
 
 -- | Comparison operator of this term. This field is only relevant when type
 -- is left unset or set to CUSTOM_VARIABLE_TERM or REFERRER_TERM.
@@ -2845,6 +3217,12 @@ instance ToText ListPopulationTermOperator where
         LPTOStringContains -> "STRING_CONTAINS"
         LPTOStringEquals -> "STRING_EQUALS"
 
+instance FromJSON ListPopulationTermOperator where
+    parseJSON = parseJSONText "ListPopulationTermOperator"
+
+instance ToJSON ListPopulationTermOperator where
+    toJSON = toJSONText
+
 -- | List population term type determines the applicable fields in this
 -- object. If left unset or set to CUSTOM_VARIABLE_TERM, then variableName,
 -- variableFriendlyName, operator, value, and negation are applicable. If
@@ -2875,6 +3253,12 @@ instance ToText ListPopulationTermType where
         LPTTListMembershipTerm -> "LIST_MEMBERSHIP_TERM"
         LPTTReferrerTerm -> "REFERRER_TERM"
 
+instance FromJSON ListPopulationTermType where
+    parseJSON = parseJSONText "ListPopulationTermType"
+
+instance ToJSON ListPopulationTermType where
+    toJSON = toJSONText
+
 -- | Status of the filter. NONE means the user has access to none of the
 -- objects. ALL means the user has access to all objects. ASSIGNED means
 -- the user has access to the objects with IDs in the objectIds list.
@@ -2902,6 +3286,12 @@ instance ToText ObjectFilterStatus where
         OFSAssigned -> "ASSIGNED"
         OFSNone -> "NONE"
 
+instance FromJSON ObjectFilterStatus where
+    parseJSON = parseJSONText "ObjectFilterStatus"
+
+instance ToJSON ObjectFilterStatus where
+    toJSON = toJSONText
+
 -- | Type of this contact.
 data OrderContactContactType
     = OCCTPlanningOrderContactBuyerBillingContact
@@ -2927,6 +3317,12 @@ instance ToText OrderContactContactType where
         OCCTPlanningOrderContactBuyerContact -> "PLANNING_ORDER_CONTACT_BUYER_CONTACT"
         OCCTPlanningOrderContactSellerContact -> "PLANNING_ORDER_CONTACT_SELLER_CONTACT"
 
+instance FromJSON OrderContactContactType where
+    parseJSON = parseJSONText "OrderContactContactType"
+
+instance ToJSON OrderContactContactType where
+    toJSON = toJSONText
+
 -- | Type of this order document
 data OrderDocumentType
     = ODTPlanningOrderTypeChangeOrder
@@ -2947,6 +3343,12 @@ instance ToText OrderDocumentType where
     toText = \case
         ODTPlanningOrderTypeChangeOrder -> "PLANNING_ORDER_TYPE_CHANGE_ORDER"
         ODTPlanningOrderTypeInsertionOrder -> "PLANNING_ORDER_TYPE_INSERTION_ORDER"
+
+instance FromJSON OrderDocumentType where
+    parseJSON = parseJSONText "OrderDocumentType"
+
+instance ToJSON OrderDocumentType where
+    toJSON = toJSONText
 
 -- | Placement compatibility. WEB and WEB_INTERSTITIAL refer to rendering
 -- either on desktop or on mobile devices for regular or interstitial ads,
@@ -2985,6 +3387,12 @@ instance ToText PlacementCompatibility where
         PCWeb -> "WEB"
         PCWebInterstitial -> "WEB_INTERSTITIAL"
 
+instance FromJSON PlacementCompatibility where
+    parseJSON = parseJSONText "PlacementCompatibility"
+
+instance ToJSON PlacementCompatibility where
+    toJSON = toJSONText
+
 -- | Type of this placement group. A package is a simple group of placements
 -- that acts as a single pricing point for a group of tags. A roadblock is
 -- a group of placements that not only acts as a single pricing point, but
@@ -3010,6 +3418,12 @@ instance ToText PlacementGroupPlacementGroupType where
     toText = \case
         PGPGTPlacementPackage -> "PLACEMENT_PACKAGE"
         PGPGTPlacementRoadblock -> "PLACEMENT_ROADBLOCK"
+
+instance FromJSON PlacementGroupPlacementGroupType where
+    parseJSON = parseJSONText "PlacementGroupPlacementGroupType"
+
+instance ToJSON PlacementGroupPlacementGroupType where
+    toJSON = toJSONText
 
 data PlacementItemTagFormats
     = PITFPlacementTagClickCommands
@@ -3095,6 +3509,12 @@ instance ToText PlacementItemTagFormats where
         PITFPlacementTagTrackingIframe -> "PLACEMENT_TAG_TRACKING_IFRAME"
         PITFPlacementTagTrackingJavascript -> "PLACEMENT_TAG_TRACKING_JAVASCRIPT"
 
+instance FromJSON PlacementItemTagFormats where
+    parseJSON = parseJSONText "PlacementItemTagFormats"
+
+instance ToJSON PlacementItemTagFormats where
+    toJSON = toJSONText
+
 -- | Payment source for this placement. This is a required field that is
 -- read-only after insertion.
 data PlacementPaymentSource
@@ -3116,6 +3536,12 @@ instance ToText PlacementPaymentSource where
     toText = \case
         PPSPlacementAgencyPaid -> "PLACEMENT_AGENCY_PAID"
         PPSPlacementPublisherPaid -> "PLACEMENT_PUBLISHER_PAID"
+
+instance FromJSON PlacementPaymentSource where
+    parseJSON = parseJSONText "PlacementPaymentSource"
+
+instance ToJSON PlacementPaymentSource where
+    toJSON = toJSONText
 
 -- | Third-party placement status.
 data PlacementStatus
@@ -3154,6 +3580,12 @@ instance ToText PlacementStatus where
         PSPaymentRejected -> "PAYMENT_REJECTED"
         PSPendingReview -> "PENDING_REVIEW"
 
+instance FromJSON PlacementStatus where
+    parseJSON = parseJSONText "PlacementStatus"
+
+instance ToJSON PlacementStatus where
+    toJSON = toJSONText
+
 -- | Popup window position either centered or at specific coordinate.
 data PopupWindowPropertiesPositionType
     = PWPPTCenter
@@ -3174,6 +3606,12 @@ instance ToText PopupWindowPropertiesPositionType where
     toText = \case
         PWPPTCenter -> "CENTER"
         PWPPTCoordinates -> "COORDINATES"
+
+instance FromJSON PopupWindowPropertiesPositionType where
+    parseJSON = parseJSONText "PopupWindowPropertiesPositionType"
+
+instance ToJSON PopupWindowPropertiesPositionType where
+    toJSON = toJSONText
 
 -- | Cap cost type of this inventory item.
 data PricingCapCostType
@@ -3199,6 +3637,12 @@ instance ToText PricingCapCostType where
         PCCTPlanningPlacementCapCostTypeCumulative -> "PLANNING_PLACEMENT_CAP_COST_TYPE_CUMULATIVE"
         PCCTPlanningPlacementCapCostTypeMonthly -> "PLANNING_PLACEMENT_CAP_COST_TYPE_MONTHLY"
         PCCTPlanningPlacementCapCostTypeNone -> "PLANNING_PLACEMENT_CAP_COST_TYPE_NONE"
+
+instance FromJSON PricingCapCostType where
+    parseJSON = parseJSONText "PricingCapCostType"
+
+instance ToJSON PricingCapCostType where
+    toJSON = toJSONText
 
 -- | Group type of this inventory item if it represents a placement group. Is
 -- null otherwise. There are two type of placement groups:
@@ -3227,6 +3671,12 @@ instance ToText PricingGroupType where
     toText = \case
         PGTPlanningPlacementGroupTypePackage -> "PLANNING_PLACEMENT_GROUP_TYPE_PACKAGE"
         PGTPlanningPlacementGroupTypeRoadblock -> "PLANNING_PLACEMENT_GROUP_TYPE_ROADBLOCK"
+
+instance FromJSON PricingGroupType where
+    parseJSON = parseJSONText "PricingGroupType"
+
+instance ToJSON PricingGroupType where
+    toJSON = toJSONText
 
 -- | Pricing type of this inventory item.
 data PricingPricingType
@@ -3269,6 +3719,12 @@ instance ToText PricingPricingType where
         PPTPlanningPlacementPricingTypeFlatRateImpressions -> "PLANNING_PLACEMENT_PRICING_TYPE_FLAT_RATE_IMPRESSIONS"
         PPTPlanningPlacementPricingTypeImpressions -> "PLANNING_PLACEMENT_PRICING_TYPE_IMPRESSIONS"
 
+instance FromJSON PricingPricingType where
+    parseJSON = parseJSONText "PricingPricingType"
+
+instance ToJSON PricingPricingType where
+    toJSON = toJSONText
+
 -- | Placement cap cost option.
 data PricingScheduleCapCostOption
     = PSCCOCapCostCumulative
@@ -3293,6 +3749,12 @@ instance ToText PricingScheduleCapCostOption where
         PSCCOCapCostCumulative -> "CAP_COST_CUMULATIVE"
         PSCCOCapCostMonthly -> "CAP_COST_MONTHLY"
         PSCCOCapCostNone -> "CAP_COST_NONE"
+
+instance FromJSON PricingScheduleCapCostOption where
+    parseJSON = parseJSONText "PricingScheduleCapCostOption"
+
+instance ToJSON PricingScheduleCapCostOption where
+    toJSON = toJSONText
 
 -- | Placement pricing type. This field is required on insertion.
 data PricingSchedulePricingType
@@ -3326,6 +3788,12 @@ instance ToText PricingSchedulePricingType where
         PSPTPricingTypeCpm -> "PRICING_TYPE_CPM"
         PSPTPricingTypeFlatRateClicks -> "PRICING_TYPE_FLAT_RATE_CLICKS"
         PSPTPricingTypeFlatRateImpressions -> "PRICING_TYPE_FLAT_RATE_IMPRESSIONS"
+
+instance FromJSON PricingSchedulePricingType where
+    parseJSON = parseJSONText "PricingSchedulePricingType"
+
+instance ToJSON PricingSchedulePricingType where
+    toJSON = toJSONText
 
 -- | Audience age group of this project.
 data ProjectAudienceAgeGroup
@@ -3368,6 +3836,12 @@ instance ToText ProjectAudienceAgeGroup where
         PAAGPlanningAudienceAge65OrMore -> "PLANNING_AUDIENCE_AGE_65_OR_MORE"
         PAAGPlanningAudienceAgeUnknown -> "PLANNING_AUDIENCE_AGE_UNKNOWN"
 
+instance FromJSON ProjectAudienceAgeGroup where
+    parseJSON = parseJSONText "ProjectAudienceAgeGroup"
+
+instance ToJSON ProjectAudienceAgeGroup where
+    toJSON = toJSONText
+
 -- | Audience gender of this project.
 data ProjectAudienceGender
     = PAGPlanningAudienceGenderFemale
@@ -3389,6 +3863,12 @@ instance ToText ProjectAudienceGender where
         PAGPlanningAudienceGenderFemale -> "PLANNING_AUDIENCE_GENDER_FEMALE"
         PAGPlanningAudienceGenderMale -> "PLANNING_AUDIENCE_GENDER_MALE"
 
+instance FromJSON ProjectAudienceGender where
+    parseJSON = parseJSONText "ProjectAudienceGender"
+
+instance ToJSON ProjectAudienceGender where
+    toJSON = toJSONText
+
 -- | The delivery type for the recipient.
 data RecipientDeliveryType
     = RDTAttachment
@@ -3409,6 +3889,12 @@ instance ToText RecipientDeliveryType where
     toText = \case
         RDTAttachment -> "ATTACHMENT"
         RDTLink -> "LINK"
+
+instance FromJSON RecipientDeliveryType where
+    parseJSON = parseJSONText "RecipientDeliveryType"
+
+instance ToJSON RecipientDeliveryType where
+    toJSON = toJSONText
 
 -- | Product from which this remarketing list was originated.
 data RemarketingListListSource
@@ -3443,6 +3929,12 @@ instance ToText RemarketingListListSource where
         RLLSRemarketingListSourceGa -> "REMARKETING_LIST_SOURCE_GA"
         RLLSRemarketingListSourceOther -> "REMARKETING_LIST_SOURCE_OTHER"
 
+instance FromJSON RemarketingListListSource where
+    parseJSON = parseJSONText "RemarketingListListSource"
+
+instance ToJSON RemarketingListListSource where
+    toJSON = toJSONText
+
 -- | The dimension option.
 data ReportDimensionCrossDimensionReachCriteria
     = RDCDRCAdvertiser
@@ -3472,6 +3964,12 @@ instance ToText ReportDimensionCrossDimensionReachCriteria where
         RDCDRCSiteByAdvertiser -> "SITE_BY_ADVERTISER"
         RDCDRCSiteByCampaign -> "SITE_BY_CAMPAIGN"
 
+instance FromJSON ReportDimensionCrossDimensionReachCriteria where
+    parseJSON = parseJSONText "ReportDimensionCrossDimensionReachCriteria"
+
+instance ToJSON ReportDimensionCrossDimensionReachCriteria where
+    toJSON = toJSONText
+
 -- | The type of delivery for the owner to receive, if enabled.
 data ReportEmailOwnerDeliveryTypeDelivery
     = REODTDAttachment
@@ -3492,6 +3990,12 @@ instance ToText ReportEmailOwnerDeliveryTypeDelivery where
     toText = \case
         REODTDAttachment -> "ATTACHMENT"
         REODTDLink -> "LINK"
+
+instance FromJSON ReportEmailOwnerDeliveryTypeDelivery where
+    parseJSON = parseJSONText "ReportEmailOwnerDeliveryTypeDelivery"
+
+instance ToJSON ReportEmailOwnerDeliveryTypeDelivery where
+    toJSON = toJSONText
 
 -- | The output format of the report. If not specified, default format is
 -- \"CSV\". Note that the actual format in the completed report file might
@@ -3516,6 +4020,12 @@ instance ToText ReportFormat where
     toText = \case
         RFCSV -> "CSV"
         RFExcel -> "EXCEL"
+
+instance FromJSON ReportFormat where
+    parseJSON = parseJSONText "ReportFormat"
+
+instance ToJSON ReportFormat where
+    toJSON = toJSONText
 
 data ReportItemRepeatsOnWeekDaysSchedule
     = RIROWDSFriday
@@ -3557,6 +4067,12 @@ instance ToText ReportItemRepeatsOnWeekDaysSchedule where
         RIROWDSTuesday -> "TUESDAY"
         RIROWDSWednesday -> "WEDNESDAY"
 
+instance FromJSON ReportItemRepeatsOnWeekDaysSchedule where
+    parseJSON = parseJSONText "ReportItemRepeatsOnWeekDaysSchedule"
+
+instance ToJSON ReportItemRepeatsOnWeekDaysSchedule where
+    toJSON = toJSONText
+
 -- | Enum to define for \"MONTHLY\" scheduled reports whether reports should
 -- be repeated on the same day of the month as \"startDate\" or the same
 -- day of the week of the month. Example: If \'startDate\' is Monday, April
@@ -3582,6 +4098,12 @@ instance ToText ReportRunsOnDayOfMonthSchedule where
     toText = \case
         RRODOMSDayOfMonth -> "DAY_OF_MONTH"
         RRODOMSWeekOfMonth -> "WEEK_OF_MONTH"
+
+instance FromJSON ReportRunsOnDayOfMonthSchedule where
+    parseJSON = parseJSONText "ReportRunsOnDayOfMonthSchedule"
+
+instance ToJSON ReportRunsOnDayOfMonthSchedule where
+    toJSON = toJSONText
 
 -- | The type of the report.
 data ReportType
@@ -3616,6 +4138,12 @@ instance ToText ReportType where
         RTReach -> "REACH"
         RTStandard -> "STANDARD"
 
+instance FromJSON ReportType where
+    parseJSON = parseJSONText "ReportType"
+
+instance ToJSON ReportType where
+    toJSON = toJSONText
+
 -- | Site contact type.
 data SiteContactContactType
     = SCCTSalesPerson
@@ -3637,6 +4165,12 @@ instance ToText SiteContactContactType where
         SCCTSalesPerson -> "SALES_PERSON"
         SCCTTrafficker -> "TRAFFICKER"
 
+instance FromJSON SiteContactContactType where
+    parseJSON = parseJSONText "SiteContactContactType"
+
+instance ToJSON SiteContactContactType where
+    toJSON = toJSONText
+
 -- | An optional sort order for the dimension column.
 data SortedDimensionSortOrder
     = SDSOAscending
@@ -3657,6 +4191,12 @@ instance ToText SortedDimensionSortOrder where
     toText = \case
         SDSOAscending -> "ASCENDING"
         SDSODescending -> "DESCENDING"
+
+instance FromJSON SortedDimensionSortOrder where
+    parseJSON = parseJSONText "SortedDimensionSortOrder"
+
+instance ToJSON SortedDimensionSortOrder where
+    toJSON = toJSONText
 
 -- | TagData tag format of this tag.
 data TagDataFormat
@@ -3743,6 +4283,12 @@ instance ToText TagDataFormat where
         TDFPlacementTagTrackingIframe -> "PLACEMENT_TAG_TRACKING_IFRAME"
         TDFPlacementTagTrackingJavascript -> "PLACEMENT_TAG_TRACKING_JAVASCRIPT"
 
+instance FromJSON TagDataFormat where
+    parseJSON = parseJSONText "TagDataFormat"
+
+instance ToJSON TagDataFormat where
+    toJSON = toJSONText
+
 -- | Option specifying how keywords are embedded in ad tags. This setting can
 -- be used to specify whether keyword placeholders are inserted in
 -- placement tags for this site. Publishers can then add keywords to those
@@ -3771,6 +4317,12 @@ instance ToText TagSettingKeywordOption where
         TSKOIgnore -> "IGNORE"
         TSKOPlaceholderWithListOfKeywords -> "PLACEHOLDER_WITH_LIST_OF_KEYWORDS"
 
+instance FromJSON TagSettingKeywordOption where
+    parseJSON = parseJSONText "TagSettingKeywordOption"
+
+instance ToJSON TagSettingKeywordOption where
+    toJSON = toJSONText
+
 -- | Type of browser window for which the backup image of the flash creative
 -- can be displayed.
 data TargetWindowTargetWindowOption
@@ -3796,6 +4348,12 @@ instance ToText TargetWindowTargetWindowOption where
         TWTWOCurrentWindow -> "CURRENT_WINDOW"
         TWTWOCustom -> "CUSTOM"
         TWTWONewWindow -> "NEW_WINDOW"
+
+instance FromJSON TargetWindowTargetWindowOption where
+    parseJSON = parseJSONText "TargetWindowTargetWindowOption"
+
+instance ToJSON TargetWindowTargetWindowOption where
+    toJSON = toJSONText
 
 -- | Product from which this targetable remarketing list was originated.
 data TargetableRemarketingListListSource
@@ -3829,6 +4387,12 @@ instance ToText TargetableRemarketingListListSource where
         TRLLSRemarketingListSourceDmp -> "REMARKETING_LIST_SOURCE_DMP"
         TRLLSRemarketingListSourceGa -> "REMARKETING_LIST_SOURCE_GA"
         TRLLSRemarketingListSourceOther -> "REMARKETING_LIST_SOURCE_OTHER"
+
+instance FromJSON TargetableRemarketingListListSource where
+    parseJSON = parseJSONText "TargetableRemarketingListListSource"
+
+instance ToJSON TargetableRemarketingListListSource where
+    toJSON = toJSONText
 
 -- | Third-party URL type for in-stream video creatives.
 data ThirdPartyTrackingUrlThirdPartyUrlType
@@ -3911,6 +4475,12 @@ instance ToText ThirdPartyTrackingUrlThirdPartyUrlType where
         TPTUTPUTVideoStop -> "VIDEO_STOP"
         TPTUTPUTVideoThirdQuartile -> "VIDEO_THIRD_QUARTILE"
 
+instance FromJSON ThirdPartyTrackingUrlThirdPartyUrlType where
+    parseJSON = parseJSONText "ThirdPartyTrackingUrlThirdPartyUrlType"
+
+instance ToJSON ThirdPartyTrackingUrlThirdPartyUrlType where
+    toJSON = toJSONText
+
 -- | Data type for the variable. This is a required field.
 data UserDefinedVariableConfigurationDataType
     = UDVCDTNumber
@@ -3931,6 +4501,12 @@ instance ToText UserDefinedVariableConfigurationDataType where
     toText = \case
         UDVCDTNumber -> "NUMBER"
         UDVCDTString -> "STRING"
+
+instance FromJSON UserDefinedVariableConfigurationDataType where
+    parseJSON = parseJSONText "UserDefinedVariableConfigurationDataType"
+
+instance ToJSON UserDefinedVariableConfigurationDataType where
+    toJSON = toJSONText
 
 -- | Variable name in the tag. This is a required field.
 data UserDefinedVariableConfigurationVariableType
@@ -4025,6 +4601,12 @@ instance ToText UserDefinedVariableConfigurationVariableType where
         UDVCVTU8 -> "U8"
         UDVCVTU9 -> "U9"
 
+instance FromJSON UserDefinedVariableConfigurationVariableType where
+    parseJSON = parseJSONText "UserDefinedVariableConfigurationVariableType"
+
+instance ToJSON UserDefinedVariableConfigurationVariableType where
+    toJSON = toJSONText
+
 -- | Levels of availability for a user role permission.
 data UserRolePermissionAvailability
     = URPAAccountAlways
@@ -4057,3 +4639,9 @@ instance ToText UserRolePermissionAvailability where
         URPANotAvailableByDefault -> "NOT_AVAILABLE_BY_DEFAULT"
         URPASubaccountAndAccountAlways -> "SUBACCOUNT_AND_ACCOUNT_ALWAYS"
         URPASubaccountAndAccountByDefault -> "SUBACCOUNT_AND_ACCOUNT_BY_DEFAULT"
+
+instance FromJSON UserRolePermissionAvailability where
+    parseJSON = parseJSONText "UserRolePermissionAvailability"
+
+instance ToJSON UserRolePermissionAvailability where
+    toJSON = toJSONText

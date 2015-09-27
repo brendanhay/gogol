@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -47,6 +48,17 @@ dId = lens _dId (\ s a -> s{_dId = a})
 -- | The message content of the draft.
 dMessage :: Lens' Draft (Maybe (Maybe Message))
 dMessage = lens _dMessage (\ s a -> s{_dMessage = a})
+
+instance FromJSON Draft where
+        parseJSON
+          = withObject "Draft"
+              (\ o -> Draft <$> (o .:? "id") <*> (o .:? "message"))
+
+instance ToJSON Draft where
+        toJSON Draft{..}
+          = object
+              (catMaybes
+                 [("id" .=) <$> _dId, ("message" .=) <$> _dMessage])
 
 -- | A record of a change to the user\'s mailbox. Each history change may
 -- affect multiple messages in multiple ways.
@@ -133,6 +145,28 @@ hMessages
       _Default
       . _Coerce
 
+instance FromJSON History where
+        parseJSON
+          = withObject "History"
+              (\ o ->
+                 History <$>
+                   (o .:? "labelsRemoved" .!= mempty) <*>
+                     (o .:? "messagesDeleted" .!= mempty)
+                     <*> (o .:? "messagesAdded" .!= mempty)
+                     <*> (o .:? "labelsAdded" .!= mempty)
+                     <*> (o .:? "id")
+                     <*> (o .:? "messages" .!= mempty))
+
+instance ToJSON History where
+        toJSON History{..}
+          = object
+              (catMaybes
+                 [("labelsRemoved" .=) <$> _hLabelsRemoved,
+                  ("messagesDeleted" .=) <$> _hMessagesDeleted,
+                  ("messagesAdded" .=) <$> _hMessagesAdded,
+                  ("labelsAdded" .=) <$> _hLabelsAdded,
+                  ("id" .=) <$> _hId, ("messages" .=) <$> _hMessages])
+
 --
 -- /See:/ 'historyLabelAdded' smart constructor.
 data HistoryLabelAdded = HistoryLabelAdded
@@ -165,6 +199,20 @@ hlaLabelIds
 hlaMessage :: Lens' HistoryLabelAdded (Maybe (Maybe Message))
 hlaMessage
   = lens _hlaMessage (\ s a -> s{_hlaMessage = a})
+
+instance FromJSON HistoryLabelAdded where
+        parseJSON
+          = withObject "HistoryLabelAdded"
+              (\ o ->
+                 HistoryLabelAdded <$>
+                   (o .:? "labelIds" .!= mempty) <*> (o .:? "message"))
+
+instance ToJSON HistoryLabelAdded where
+        toJSON HistoryLabelAdded{..}
+          = object
+              (catMaybes
+                 [("labelIds" .=) <$> _hlaLabelIds,
+                  ("message" .=) <$> _hlaMessage])
 
 --
 -- /See:/ 'historyLabelRemoved' smart constructor.
@@ -199,6 +247,20 @@ hlrMessage :: Lens' HistoryLabelRemoved (Maybe (Maybe Message))
 hlrMessage
   = lens _hlrMessage (\ s a -> s{_hlrMessage = a})
 
+instance FromJSON HistoryLabelRemoved where
+        parseJSON
+          = withObject "HistoryLabelRemoved"
+              (\ o ->
+                 HistoryLabelRemoved <$>
+                   (o .:? "labelIds" .!= mempty) <*> (o .:? "message"))
+
+instance ToJSON HistoryLabelRemoved where
+        toJSON HistoryLabelRemoved{..}
+          = object
+              (catMaybes
+                 [("labelIds" .=) <$> _hlrLabelIds,
+                  ("message" .=) <$> _hlrMessage])
+
 --
 -- /See:/ 'historyMessageAdded' smart constructor.
 newtype HistoryMessageAdded = HistoryMessageAdded
@@ -221,6 +283,15 @@ hmaMessage :: Lens' HistoryMessageAdded (Maybe (Maybe Message))
 hmaMessage
   = lens _hmaMessage (\ s a -> s{_hmaMessage = a})
 
+instance FromJSON HistoryMessageAdded where
+        parseJSON
+          = withObject "HistoryMessageAdded"
+              (\ o -> HistoryMessageAdded <$> (o .:? "message"))
+
+instance ToJSON HistoryMessageAdded where
+        toJSON HistoryMessageAdded{..}
+          = object (catMaybes [("message" .=) <$> _hmaMessage])
+
 --
 -- /See:/ 'historyMessageDeleted' smart constructor.
 newtype HistoryMessageDeleted = HistoryMessageDeleted
@@ -242,6 +313,15 @@ historyMessageDeleted =
 hmdMessage :: Lens' HistoryMessageDeleted (Maybe (Maybe Message))
 hmdMessage
   = lens _hmdMessage (\ s a -> s{_hmdMessage = a})
+
+instance FromJSON HistoryMessageDeleted where
+        parseJSON
+          = withObject "HistoryMessageDeleted"
+              (\ o -> HistoryMessageDeleted <$> (o .:? "message"))
+
+instance ToJSON HistoryMessageDeleted where
+        toJSON HistoryMessageDeleted{..}
+          = object (catMaybes [("message" .=) <$> _hmdMessage])
 
 -- | Labels are used to categorize messages and threads within the user\'s
 -- mailbox.
@@ -352,6 +432,35 @@ lId = lens _lId (\ s a -> s{_lId = a})
 lType :: Lens' Label (Maybe LabelType)
 lType = lens _lType (\ s a -> s{_lType = a})
 
+instance FromJSON Label where
+        parseJSON
+          = withObject "Label"
+              (\ o ->
+                 Label <$>
+                   (o .:? "threadsUnread") <*>
+                     (o .:? "messageListVisibility")
+                     <*> (o .:? "messagesTotal")
+                     <*> (o .:? "messagesUnread")
+                     <*> (o .:? "name")
+                     <*> (o .:? "threadsTotal")
+                     <*> (o .:? "labelListVisibility")
+                     <*> (o .:? "id")
+                     <*> (o .:? "type"))
+
+instance ToJSON Label where
+        toJSON Label{..}
+          = object
+              (catMaybes
+                 [("threadsUnread" .=) <$> _lThreadsUnread,
+                  ("messageListVisibility" .=) <$>
+                    _lMessageListVisibility,
+                  ("messagesTotal" .=) <$> _lMessagesTotal,
+                  ("messagesUnread" .=) <$> _lMessagesUnread,
+                  ("name" .=) <$> _lName,
+                  ("threadsTotal" .=) <$> _lThreadsTotal,
+                  ("labelListVisibility" .=) <$> _lLabelListVisibility,
+                  ("id" .=) <$> _lId, ("type" .=) <$> _lType])
+
 --
 -- /See:/ 'listDraftsResponse' smart constructor.
 data ListDraftsResponse = ListDraftsResponse
@@ -396,6 +505,23 @@ ldrDrafts
   = lens _ldrDrafts (\ s a -> s{_ldrDrafts = a}) .
       _Default
       . _Coerce
+
+instance FromJSON ListDraftsResponse where
+        parseJSON
+          = withObject "ListDraftsResponse"
+              (\ o ->
+                 ListDraftsResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "resultSizeEstimate")
+                     <*> (o .:? "drafts" .!= mempty))
+
+instance ToJSON ListDraftsResponse where
+        toJSON ListDraftsResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _ldrNextPageToken,
+                  ("resultSizeEstimate" .=) <$> _ldrResultSizeEstimate,
+                  ("drafts" .=) <$> _ldrDrafts])
 
 --
 -- /See:/ 'listHistoryResponse' smart constructor.
@@ -442,6 +568,23 @@ lhrHistoryId :: Lens' ListHistoryResponse (Maybe Word64)
 lhrHistoryId
   = lens _lhrHistoryId (\ s a -> s{_lhrHistoryId = a})
 
+instance FromJSON ListHistoryResponse where
+        parseJSON
+          = withObject "ListHistoryResponse"
+              (\ o ->
+                 ListHistoryResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "history" .!= mempty)
+                     <*> (o .:? "historyId"))
+
+instance ToJSON ListHistoryResponse where
+        toJSON ListHistoryResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lhrNextPageToken,
+                  ("history" .=) <$> _lhrHistory,
+                  ("historyId" .=) <$> _lhrHistoryId])
+
 --
 -- /See:/ 'listLabelsResponse' smart constructor.
 newtype ListLabelsResponse = ListLabelsResponse
@@ -466,6 +609,16 @@ llrLabels
   = lens _llrLabels (\ s a -> s{_llrLabels = a}) .
       _Default
       . _Coerce
+
+instance FromJSON ListLabelsResponse where
+        parseJSON
+          = withObject "ListLabelsResponse"
+              (\ o ->
+                 ListLabelsResponse <$> (o .:? "labels" .!= mempty))
+
+instance ToJSON ListLabelsResponse where
+        toJSON ListLabelsResponse{..}
+          = object (catMaybes [("labels" .=) <$> _llrLabels])
 
 --
 -- /See:/ 'listMessagesResponse' smart constructor.
@@ -512,6 +665,23 @@ lmrMessages
       _Default
       . _Coerce
 
+instance FromJSON ListMessagesResponse where
+        parseJSON
+          = withObject "ListMessagesResponse"
+              (\ o ->
+                 ListMessagesResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "resultSizeEstimate")
+                     <*> (o .:? "messages" .!= mempty))
+
+instance ToJSON ListMessagesResponse where
+        toJSON ListMessagesResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lmrNextPageToken,
+                  ("resultSizeEstimate" .=) <$> _lmrResultSizeEstimate,
+                  ("messages" .=) <$> _lmrMessages])
+
 --
 -- /See:/ 'listThreadsResponse' smart constructor.
 data ListThreadsResponse = ListThreadsResponse
@@ -556,6 +726,23 @@ ltrThreads
   = lens _ltrThreads (\ s a -> s{_ltrThreads = a}) .
       _Default
       . _Coerce
+
+instance FromJSON ListThreadsResponse where
+        parseJSON
+          = withObject "ListThreadsResponse"
+              (\ o ->
+                 ListThreadsResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "resultSizeEstimate")
+                     <*> (o .:? "threads" .!= mempty))
+
+instance ToJSON ListThreadsResponse where
+        toJSON ListThreadsResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _ltrNextPageToken,
+                  ("resultSizeEstimate" .=) <$> _ltrResultSizeEstimate,
+                  ("threads" .=) <$> _ltrThreads])
 
 -- | An email message.
 --
@@ -664,6 +851,32 @@ mInternalDate
   = lens _mInternalDate
       (\ s a -> s{_mInternalDate = a})
 
+instance FromJSON Message where
+        parseJSON
+          = withObject "Message"
+              (\ o ->
+                 Message <$>
+                   (o .:? "raw") <*> (o .:? "snippet") <*>
+                     (o .:? "sizeEstimate")
+                     <*> (o .:? "payload")
+                     <*> (o .:? "historyId")
+                     <*> (o .:? "id")
+                     <*> (o .:? "labelIds" .!= mempty)
+                     <*> (o .:? "threadId")
+                     <*> (o .:? "internalDate"))
+
+instance ToJSON Message where
+        toJSON Message{..}
+          = object
+              (catMaybes
+                 [("raw" .=) <$> _mRaw, ("snippet" .=) <$> _mSnippet,
+                  ("sizeEstimate" .=) <$> _mSizeEstimate,
+                  ("payload" .=) <$> _mPayload,
+                  ("historyId" .=) <$> _mHistoryId, ("id" .=) <$> _mId,
+                  ("labelIds" .=) <$> _mLabelIds,
+                  ("threadId" .=) <$> _mThreadId,
+                  ("internalDate" .=) <$> _mInternalDate])
+
 -- | A single MIME message part.
 --
 -- /See:/ 'messagePart' smart constructor.
@@ -741,6 +954,27 @@ mpFilename :: Lens' MessagePart (Maybe Text)
 mpFilename
   = lens _mpFilename (\ s a -> s{_mpFilename = a})
 
+instance FromJSON MessagePart where
+        parseJSON
+          = withObject "MessagePart"
+              (\ o ->
+                 MessagePart <$>
+                   (o .:? "parts" .!= mempty) <*> (o .:? "body") <*>
+                     (o .:? "mimeType")
+                     <*> (o .:? "headers" .!= mempty)
+                     <*> (o .:? "partId")
+                     <*> (o .:? "filename"))
+
+instance ToJSON MessagePart where
+        toJSON MessagePart{..}
+          = object
+              (catMaybes
+                 [("parts" .=) <$> _mpParts, ("body" .=) <$> _mpBody,
+                  ("mimeType" .=) <$> _mpMimeType,
+                  ("headers" .=) <$> _mpHeaders,
+                  ("partId" .=) <$> _mpPartId,
+                  ("filename" .=) <$> _mpFilename])
+
 -- | The body of a single MIME message part.
 --
 -- /See:/ 'messagePartBody' smart constructor.
@@ -788,6 +1022,21 @@ mpbAttachmentId
   = lens _mpbAttachmentId
       (\ s a -> s{_mpbAttachmentId = a})
 
+instance FromJSON MessagePartBody where
+        parseJSON
+          = withObject "MessagePartBody"
+              (\ o ->
+                 MessagePartBody <$>
+                   (o .:? "size") <*> (o .:? "data") <*>
+                     (o .:? "attachmentId"))
+
+instance ToJSON MessagePartBody where
+        toJSON MessagePartBody{..}
+          = object
+              (catMaybes
+                 [("size" .=) <$> _mpbSize, ("data" .=) <$> _mpbData,
+                  ("attachmentId" .=) <$> _mpbAttachmentId])
+
 --
 -- /See:/ 'messagePartHeader' smart constructor.
 data MessagePartHeader = MessagePartHeader
@@ -818,6 +1067,20 @@ mphValue = lens _mphValue (\ s a -> s{_mphValue = a})
 -- | The name of the header before the : separator. For example, To.
 mphName :: Lens' MessagePartHeader (Maybe Text)
 mphName = lens _mphName (\ s a -> s{_mphName = a})
+
+instance FromJSON MessagePartHeader where
+        parseJSON
+          = withObject "MessagePartHeader"
+              (\ o ->
+                 MessagePartHeader <$>
+                   (o .:? "value") <*> (o .:? "name"))
+
+instance ToJSON MessagePartHeader where
+        toJSON MessagePartHeader{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _mphValue,
+                  ("name" .=) <$> _mphName])
 
 --
 -- /See:/ 'modifyMessageRequest' smart constructor.
@@ -857,6 +1120,21 @@ mmrAddLabelIds
       . _Default
       . _Coerce
 
+instance FromJSON ModifyMessageRequest where
+        parseJSON
+          = withObject "ModifyMessageRequest"
+              (\ o ->
+                 ModifyMessageRequest <$>
+                   (o .:? "removeLabelIds" .!= mempty) <*>
+                     (o .:? "addLabelIds" .!= mempty))
+
+instance ToJSON ModifyMessageRequest where
+        toJSON ModifyMessageRequest{..}
+          = object
+              (catMaybes
+                 [("removeLabelIds" .=) <$> _mmrRemoveLabelIds,
+                  ("addLabelIds" .=) <$> _mmrAddLabelIds])
+
 --
 -- /See:/ 'modifyThreadRequest' smart constructor.
 data ModifyThreadRequest = ModifyThreadRequest
@@ -894,6 +1172,21 @@ mtrAddLabelIds
       (\ s a -> s{_mtrAddLabelIds = a})
       . _Default
       . _Coerce
+
+instance FromJSON ModifyThreadRequest where
+        parseJSON
+          = withObject "ModifyThreadRequest"
+              (\ o ->
+                 ModifyThreadRequest <$>
+                   (o .:? "removeLabelIds" .!= mempty) <*>
+                     (o .:? "addLabelIds" .!= mempty))
+
+instance ToJSON ModifyThreadRequest where
+        toJSON ModifyThreadRequest{..}
+          = object
+              (catMaybes
+                 [("removeLabelIds" .=) <$> _mtrRemoveLabelIds,
+                  ("addLabelIds" .=) <$> _mtrAddLabelIds])
 
 -- | Profile for a Gmail user.
 --
@@ -949,6 +1242,24 @@ pEmailAddress
   = lens _pEmailAddress
       (\ s a -> s{_pEmailAddress = a})
 
+instance FromJSON Profile where
+        parseJSON
+          = withObject "Profile"
+              (\ o ->
+                 Profile <$>
+                   (o .:? "messagesTotal") <*> (o .:? "threadsTotal")
+                     <*> (o .:? "historyId")
+                     <*> (o .:? "emailAddress"))
+
+instance ToJSON Profile where
+        toJSON Profile{..}
+          = object
+              (catMaybes
+                 [("messagesTotal" .=) <$> _pMessagesTotal,
+                  ("threadsTotal" .=) <$> _pThreadsTotal,
+                  ("historyId" .=) <$> _pHistoryId,
+                  ("emailAddress" .=) <$> _pEmailAddress])
+
 -- | A collection of messages representing a conversation.
 --
 -- /See:/ 'thread' smart constructor.
@@ -999,6 +1310,23 @@ tMessages
   = lens _tMessages (\ s a -> s{_tMessages = a}) .
       _Default
       . _Coerce
+
+instance FromJSON Thread where
+        parseJSON
+          = withObject "Thread"
+              (\ o ->
+                 Thread <$>
+                   (o .:? "snippet") <*> (o .:? "historyId") <*>
+                     (o .:? "id")
+                     <*> (o .:? "messages" .!= mempty))
+
+instance ToJSON Thread where
+        toJSON Thread{..}
+          = object
+              (catMaybes
+                 [("snippet" .=) <$> _tSnippet,
+                  ("historyId" .=) <$> _tHistoryId, ("id" .=) <$> _tId,
+                  ("messages" .=) <$> _tMessages])
 
 -- | Set up or update a new push notification watch on this user\'s mailbox.
 --
@@ -1053,6 +1381,22 @@ wrLabelIds
       _Default
       . _Coerce
 
+instance FromJSON WatchRequest where
+        parseJSON
+          = withObject "WatchRequest"
+              (\ o ->
+                 WatchRequest <$>
+                   (o .:? "labelFilterAction") <*> (o .:? "topicName")
+                     <*> (o .:? "labelIds" .!= mempty))
+
+instance ToJSON WatchRequest where
+        toJSON WatchRequest{..}
+          = object
+              (catMaybes
+                 [("labelFilterAction" .=) <$> _wrLabelFilterAction,
+                  ("topicName" .=) <$> _wrTopicName,
+                  ("labelIds" .=) <$> _wrLabelIds])
+
 -- | Push notification watch response.
 --
 -- /See:/ 'watchResponse' smart constructor.
@@ -1086,3 +1430,17 @@ wrExpiration
 wrHistoryId :: Lens' WatchResponse (Maybe Word64)
 wrHistoryId
   = lens _wrHistoryId (\ s a -> s{_wrHistoryId = a})
+
+instance FromJSON WatchResponse where
+        parseJSON
+          = withObject "WatchResponse"
+              (\ o ->
+                 WatchResponse <$>
+                   (o .:? "expiration") <*> (o .:? "historyId"))
+
+instance ToJSON WatchResponse where
+        toJSON WatchResponse{..}
+          = object
+              (catMaybes
+                 [("expiration" .=) <$> _wrExpiration,
+                  ("historyId" .=) <$> _wrHistoryId])

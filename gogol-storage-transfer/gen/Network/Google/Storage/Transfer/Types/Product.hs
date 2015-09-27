@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -54,6 +55,20 @@ aakAccessKeyId
   = lens _aakAccessKeyId
       (\ s a -> s{_aakAccessKeyId = a})
 
+instance FromJSON AwsAccessKey where
+        parseJSON
+          = withObject "AwsAccessKey"
+              (\ o ->
+                 AwsAccessKey <$>
+                   (o .:? "secretAccessKey") <*> (o .:? "accessKeyId"))
+
+instance ToJSON AwsAccessKey where
+        toJSON AwsAccessKey{..}
+          = object
+              (catMaybes
+                 [("secretAccessKey" .=) <$> _aakSecretAccessKey,
+                  ("accessKeyId" .=) <$> _aakAccessKeyId])
+
 -- | An AwsS3Data can be a data source, but not a data sink. In an AwsS3Data,
 -- an object\'s name is the S3 object\'s key name.
 --
@@ -93,6 +108,20 @@ asdAwsAccessKey :: Lens' AwsS3Data (Maybe (Maybe AwsAccessKey))
 asdAwsAccessKey
   = lens _asdAwsAccessKey
       (\ s a -> s{_asdAwsAccessKey = a})
+
+instance FromJSON AwsS3Data where
+        parseJSON
+          = withObject "AwsS3Data"
+              (\ o ->
+                 AwsS3Data <$>
+                   (o .:? "bucketName") <*> (o .:? "awsAccessKey"))
+
+instance ToJSON AwsS3Data where
+        toJSON AwsS3Data{..}
+          = object
+              (catMaybes
+                 [("bucketName" .=) <$> _asdBucketName,
+                  ("awsAccessKey" .=) <$> _asdAwsAccessKey])
 
 -- | Represents a whole calendar date, e.g. date of birth. The time of day
 -- and time zone are either specified elsewhere or are not significant. The
@@ -142,6 +171,20 @@ dYear = lens _dYear (\ s a -> s{_dYear = a})
 dMonth :: Lens' Date (Maybe Int32)
 dMonth = lens _dMonth (\ s a -> s{_dMonth = a})
 
+instance FromJSON Date where
+        parseJSON
+          = withObject "Date"
+              (\ o ->
+                 Date <$>
+                   (o .:? "day") <*> (o .:? "year") <*> (o .:? "month"))
+
+instance ToJSON Date where
+        toJSON Date{..}
+          = object
+              (catMaybes
+                 [("day" .=) <$> _dDay, ("year" .=) <$> _dYear,
+                  ("month" .=) <$> _dMonth])
+
 -- | A generic empty message that you can re-use to avoid defining duplicated
 -- empty messages in your APIs. A typical example is to use it as the
 -- request or the response type of an API method. For instance: service Foo
@@ -158,6 +201,12 @@ data Empty =
 empty
     :: Empty
 empty = Empty
+
+instance FromJSON Empty where
+        parseJSON = withObject "Empty" (\ o -> pure Empty)
+
+instance ToJSON Empty where
+        toJSON = const (Object mempty)
 
 -- | An entry describing an error that has occurred.
 --
@@ -194,6 +243,20 @@ eleErrorDetails
       (\ s a -> s{_eleErrorDetails = a})
       . _Default
       . _Coerce
+
+instance FromJSON ErrorLogEntry where
+        parseJSON
+          = withObject "ErrorLogEntry"
+              (\ o ->
+                 ErrorLogEntry <$>
+                   (o .:? "url") <*> (o .:? "errorDetails" .!= mempty))
+
+instance ToJSON ErrorLogEntry where
+        toJSON ErrorLogEntry{..}
+          = object
+              (catMaybes
+                 [("url" .=) <$> _eleUrl,
+                  ("errorDetails" .=) <$> _eleErrorDetails])
 
 -- | A summary of errors by error code, plus a count and sample error log
 -- entries.
@@ -241,6 +304,22 @@ esErrorLogEntries
       . _Default
       . _Coerce
 
+instance FromJSON ErrorSummary where
+        parseJSON
+          = withObject "ErrorSummary"
+              (\ o ->
+                 ErrorSummary <$>
+                   (o .:? "errorCount") <*> (o .:? "errorCode") <*>
+                     (o .:? "errorLogEntries" .!= mempty))
+
+instance ToJSON ErrorSummary where
+        toJSON ErrorSummary{..}
+          = object
+              (catMaybes
+                 [("errorCount" .=) <$> _esErrorCount,
+                  ("errorCode" .=) <$> _esErrorCode,
+                  ("errorLogEntries" .=) <$> _esErrorLogEntries])
+
 -- | In a GcsData, an object\'s name is the Google Cloud Storage object\'s
 -- name and its \`lastModificationTime\` refers to the object\'s updated
 -- time, which changes when the content or the metadata of the object is
@@ -270,6 +349,16 @@ gdBucketName :: Lens' GcsData (Maybe Text)
 gdBucketName
   = lens _gdBucketName (\ s a -> s{_gdBucketName = a})
 
+instance FromJSON GcsData where
+        parseJSON
+          = withObject "GcsData"
+              (\ o -> GcsData <$> (o .:? "bucketName"))
+
+instance ToJSON GcsData where
+        toJSON GcsData{..}
+          = object
+              (catMaybes [("bucketName" .=) <$> _gdBucketName])
+
 -- | Google service account
 --
 -- /See:/ 'googleServiceAccount' smart constructor.
@@ -294,6 +383,18 @@ gsaAccountEmail :: Lens' GoogleServiceAccount (Maybe Text)
 gsaAccountEmail
   = lens _gsaAccountEmail
       (\ s a -> s{_gsaAccountEmail = a})
+
+instance FromJSON GoogleServiceAccount where
+        parseJSON
+          = withObject "GoogleServiceAccount"
+              (\ o ->
+                 GoogleServiceAccount <$> (o .:? "accountEmail"))
+
+instance ToJSON GoogleServiceAccount where
+        toJSON GoogleServiceAccount{..}
+          = object
+              (catMaybes
+                 [("accountEmail" .=) <$> _gsaAccountEmail])
 
 -- | An HttpData specifies a list of objects on the web to be transferred
 -- over HTTP. The information of the objects to be transferred is contained
@@ -340,6 +441,15 @@ hdListUrl :: Lens' HttpData (Maybe Text)
 hdListUrl
   = lens _hdListUrl (\ s a -> s{_hdListUrl = a})
 
+instance FromJSON HttpData where
+        parseJSON
+          = withObject "HttpData"
+              (\ o -> HttpData <$> (o .:? "listUrl"))
+
+instance ToJSON HttpData where
+        toJSON HttpData{..}
+          = object (catMaybes [("listUrl" .=) <$> _hdListUrl])
+
 -- | The response message for
 -- [Operations.ListOperations][google.longrunning.Operations.ListOperations].
 --
@@ -378,6 +488,21 @@ lorOperations
       . _Default
       . _Coerce
 
+instance FromJSON ListOperationsResponse where
+        parseJSON
+          = withObject "ListOperationsResponse"
+              (\ o ->
+                 ListOperationsResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "operations" .!= mempty))
+
+instance ToJSON ListOperationsResponse where
+        toJSON ListOperationsResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lorNextPageToken,
+                  ("operations" .=) <$> _lorOperations])
+
 -- | Response from ListTransferJobs.
 --
 -- /See:/ 'listTransferJobsResponse' smart constructor.
@@ -414,6 +539,21 @@ ltjrTransferJobs
       (\ s a -> s{_ltjrTransferJobs = a})
       . _Default
       . _Coerce
+
+instance FromJSON ListTransferJobsResponse where
+        parseJSON
+          = withObject "ListTransferJobsResponse"
+              (\ o ->
+                 ListTransferJobsResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "transferJobs" .!= mempty))
+
+instance ToJSON ListTransferJobsResponse where
+        toJSON ListTransferJobsResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _ltjrNextPageToken,
+                  ("transferJobs" .=) <$> _ltjrTransferJobs])
 
 -- | Conditions that determine which objects will be transferred.
 --
@@ -501,6 +641,27 @@ ocExcludePrefixes
       . _Default
       . _Coerce
 
+instance FromJSON ObjectConditions where
+        parseJSON
+          = withObject "ObjectConditions"
+              (\ o ->
+                 ObjectConditions <$>
+                   (o .:? "minTimeElapsedSinceLastModification") <*>
+                     (o .:? "includePrefixes" .!= mempty)
+                     <*> (o .:? "maxTimeElapsedSinceLastModification")
+                     <*> (o .:? "excludePrefixes" .!= mempty))
+
+instance ToJSON ObjectConditions where
+        toJSON ObjectConditions{..}
+          = object
+              (catMaybes
+                 [("minTimeElapsedSinceLastModification" .=) <$>
+                    _ocMinTimeElapsedSinceLastModification,
+                  ("includePrefixes" .=) <$> _ocIncludePrefixes,
+                  ("maxTimeElapsedSinceLastModification" .=) <$>
+                    _ocMaxTimeElapsedSinceLastModification,
+                  ("excludePrefixes" .=) <$> _ocExcludePrefixes])
+
 -- | This resource represents a long-running operation that is the result of
 -- a network API call.
 --
@@ -570,6 +731,25 @@ oMetadata :: Lens' Operation (Maybe OperationMetadata)
 oMetadata
   = lens _oMetadata (\ s a -> s{_oMetadata = a})
 
+instance FromJSON Operation where
+        parseJSON
+          = withObject "Operation"
+              (\ o ->
+                 Operation <$>
+                   (o .:? "done") <*> (o .:? "error") <*>
+                     (o .:? "response")
+                     <*> (o .:? "name")
+                     <*> (o .:? "metadata"))
+
+instance ToJSON Operation where
+        toJSON Operation{..}
+          = object
+              (catMaybes
+                 [("done" .=) <$> _oDone, ("error" .=) <$> _oError,
+                  ("response" .=) <$> _oResponse,
+                  ("name" .=) <$> _oName,
+                  ("metadata" .=) <$> _oMetadata])
+
 -- | Represents the transfer operation object.
 --
 -- /See:/ 'operationMetadata' smart constructor.
@@ -582,6 +762,14 @@ data OperationMetadata =
 operationMetadata
     :: OperationMetadata
 operationMetadata = OperationMetadata
+
+instance FromJSON OperationMetadata where
+        parseJSON
+          = withObject "OperationMetadata"
+              (\ o -> pure OperationMetadata)
+
+instance ToJSON OperationMetadata where
+        toJSON = const (Object mempty)
 
 -- | The normal response of the operation in case of success. If the original
 -- method returns no data on success, such as \`Delete\`, the response is
@@ -603,6 +791,14 @@ operationResponse
     :: OperationResponse
 operationResponse = OperationResponse
 
+instance FromJSON OperationResponse where
+        parseJSON
+          = withObject "OperationResponse"
+              (\ o -> pure OperationResponse)
+
+instance ToJSON OperationResponse where
+        toJSON = const (Object mempty)
+
 -- | Request passed to PauseTransferOperation.
 --
 -- /See:/ 'pauseTransferOperationRequest' smart constructor.
@@ -616,6 +812,14 @@ pauseTransferOperationRequest
     :: PauseTransferOperationRequest
 pauseTransferOperationRequest = PauseTransferOperationRequest
 
+instance FromJSON PauseTransferOperationRequest where
+        parseJSON
+          = withObject "PauseTransferOperationRequest"
+              (\ o -> pure PauseTransferOperationRequest)
+
+instance ToJSON PauseTransferOperationRequest where
+        toJSON = const (Object mempty)
+
 -- | Request passed to ResumeTransferOperation.
 --
 -- /See:/ 'resumeTransferOperationRequest' smart constructor.
@@ -628,6 +832,15 @@ data ResumeTransferOperationRequest =
 resumeTransferOperationRequest
     :: ResumeTransferOperationRequest
 resumeTransferOperationRequest = ResumeTransferOperationRequest
+
+instance FromJSON ResumeTransferOperationRequest
+         where
+        parseJSON
+          = withObject "ResumeTransferOperationRequest"
+              (\ o -> pure ResumeTransferOperationRequest)
+
+instance ToJSON ResumeTransferOperationRequest where
+        toJSON = const (Object mempty)
 
 -- | Transfers can be scheduled to recur or to run just once.
 --
@@ -677,6 +890,23 @@ sStartTimeOfDay :: Lens' Schedule (Maybe (Maybe TimeOfDay))
 sStartTimeOfDay
   = lens _sStartTimeOfDay
       (\ s a -> s{_sStartTimeOfDay = a})
+
+instance FromJSON Schedule where
+        parseJSON
+          = withObject "Schedule"
+              (\ o ->
+                 Schedule <$>
+                   (o .:? "scheduleEndDate") <*>
+                     (o .:? "scheduleStartDate")
+                     <*> (o .:? "startTimeOfDay"))
+
+instance ToJSON Schedule where
+        toJSON Schedule{..}
+          = object
+              (catMaybes
+                 [("scheduleEndDate" .=) <$> _sScheduleEndDate,
+                  ("scheduleStartDate" .=) <$> _sScheduleStartDate,
+                  ("startTimeOfDay" .=) <$> _sStartTimeOfDay])
 
 -- | The \`Status\` type defines a logical error model that is suitable for
 -- different programming environments, including REST APIs and RPC APIs. It
@@ -760,6 +990,22 @@ sCode = lens _sCode (\ s a -> s{_sCode = a})
 sMessage :: Lens' Status (Maybe Text)
 sMessage = lens _sMessage (\ s a -> s{_sMessage = a})
 
+instance FromJSON Status where
+        parseJSON
+          = withObject "Status"
+              (\ o ->
+                 Status <$>
+                   (o .:? "details" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON Status where
+        toJSON Status{..}
+          = object
+              (catMaybes
+                 [("details" .=) <$> _sDetails,
+                  ("code" .=) <$> _sCode,
+                  ("message" .=) <$> _sMessage])
+
 --
 -- /See:/ 'statusItemDetails' smart constructor.
 data StatusItemDetails =
@@ -771,6 +1017,14 @@ data StatusItemDetails =
 statusItemDetails
     :: StatusItemDetails
 statusItemDetails = StatusItemDetails
+
+instance FromJSON StatusItemDetails where
+        parseJSON
+          = withObject "StatusItemDetails"
+              (\ o -> pure StatusItemDetails)
+
+instance ToJSON StatusItemDetails where
+        toJSON = const (Object mempty)
 
 -- | Represents a time of day. The date and time zone are either not
 -- significant or are specified elsewhere. An API may chose to allow leap
@@ -826,6 +1080,24 @@ todMinutes
 todSeconds :: Lens' TimeOfDay (Maybe Int32)
 todSeconds
   = lens _todSeconds (\ s a -> s{_todSeconds = a})
+
+instance FromJSON TimeOfDay where
+        parseJSON
+          = withObject "TimeOfDay"
+              (\ o ->
+                 TimeOfDay <$>
+                   (o .:? "nanos") <*> (o .:? "hours") <*>
+                     (o .:? "minutes")
+                     <*> (o .:? "seconds"))
+
+instance ToJSON TimeOfDay where
+        toJSON TimeOfDay{..}
+          = object
+              (catMaybes
+                 [("nanos" .=) <$> _todNanos,
+                  ("hours" .=) <$> _todHours,
+                  ("minutes" .=) <$> _todMinutes,
+                  ("seconds" .=) <$> _todSeconds])
 
 -- | A collection of counters that report the progress of a transfer
 -- operation.
@@ -1009,6 +1281,64 @@ tcObjectsFromSourceSkippedBySync
   = lens _tcObjectsFromSourceSkippedBySync
       (\ s a -> s{_tcObjectsFromSourceSkippedBySync = a})
 
+instance FromJSON TransferCounters where
+        parseJSON
+          = withObject "TransferCounters"
+              (\ o ->
+                 TransferCounters <$>
+                   (o .:? "bytesFoundOnlyFromSink") <*>
+                     (o .:? "bytesDeletedFromSink")
+                     <*> (o .:? "objectsDeletedFromSource")
+                     <*> (o .:? "objectsFoundFromSource")
+                     <*> (o .:? "bytesFailedToDeleteFromSink")
+                     <*> (o .:? "bytesFromSourceFailed")
+                     <*> (o .:? "bytesCopiedToSink")
+                     <*> (o .:? "bytesFoundFromSource")
+                     <*> (o .:? "bytesDeletedFromSource")
+                     <*> (o .:? "objectsDeletedFromSink")
+                     <*> (o .:? "objectsFoundOnlyFromSink")
+                     <*> (o .:? "bytesFromSourceSkippedBySync")
+                     <*> (o .:? "objectsCopiedToSink")
+                     <*> (o .:? "objectsFromSourceFailed")
+                     <*> (o .:? "objectsFailedToDeleteFromSink")
+                     <*> (o .:? "objectsFromSourceSkippedBySync"))
+
+instance ToJSON TransferCounters where
+        toJSON TransferCounters{..}
+          = object
+              (catMaybes
+                 [("bytesFoundOnlyFromSink" .=) <$>
+                    _tcBytesFoundOnlyFromSink,
+                  ("bytesDeletedFromSink" .=) <$>
+                    _tcBytesDeletedFromSink,
+                  ("objectsDeletedFromSource" .=) <$>
+                    _tcObjectsDeletedFromSource,
+                  ("objectsFoundFromSource" .=) <$>
+                    _tcObjectsFoundFromSource,
+                  ("bytesFailedToDeleteFromSink" .=) <$>
+                    _tcBytesFailedToDeleteFromSink,
+                  ("bytesFromSourceFailed" .=) <$>
+                    _tcBytesFromSourceFailed,
+                  ("bytesCopiedToSink" .=) <$> _tcBytesCopiedToSink,
+                  ("bytesFoundFromSource" .=) <$>
+                    _tcBytesFoundFromSource,
+                  ("bytesDeletedFromSource" .=) <$>
+                    _tcBytesDeletedFromSource,
+                  ("objectsDeletedFromSink" .=) <$>
+                    _tcObjectsDeletedFromSink,
+                  ("objectsFoundOnlyFromSink" .=) <$>
+                    _tcObjectsFoundOnlyFromSink,
+                  ("bytesFromSourceSkippedBySync" .=) <$>
+                    _tcBytesFromSourceSkippedBySync,
+                  ("objectsCopiedToSink" .=) <$>
+                    _tcObjectsCopiedToSink,
+                  ("objectsFromSourceFailed" .=) <$>
+                    _tcObjectsFromSourceFailed,
+                  ("objectsFailedToDeleteFromSink" .=) <$>
+                    _tcObjectsFailedToDeleteFromSink,
+                  ("objectsFromSourceSkippedBySync" .=) <$>
+                    _tcObjectsFromSourceSkippedBySync])
+
 -- | This resource represents the configuration of a transfer job that runs
 -- periodically.
 --
@@ -1119,6 +1449,35 @@ tjLastModificationTime
   = lens _tjLastModificationTime
       (\ s a -> s{_tjLastModificationTime = a})
 
+instance FromJSON TransferJob where
+        parseJSON
+          = withObject "TransferJob"
+              (\ o ->
+                 TransferJob <$>
+                   (o .:? "creationTime") <*> (o .:? "status") <*>
+                     (o .:? "schedule")
+                     <*> (o .:? "deletionTime")
+                     <*> (o .:? "name")
+                     <*> (o .:? "projectId")
+                     <*> (o .:? "transferSpec")
+                     <*> (o .:? "description")
+                     <*> (o .:? "lastModificationTime"))
+
+instance ToJSON TransferJob where
+        toJSON TransferJob{..}
+          = object
+              (catMaybes
+                 [("creationTime" .=) <$> _tjCreationTime,
+                  ("status" .=) <$> _tjStatus,
+                  ("schedule" .=) <$> _tjSchedule,
+                  ("deletionTime" .=) <$> _tjDeletionTime,
+                  ("name" .=) <$> _tjName,
+                  ("projectId" .=) <$> _tjProjectId,
+                  ("transferSpec" .=) <$> _tjTransferSpec,
+                  ("description" .=) <$> _tjDescription,
+                  ("lastModificationTime" .=) <$>
+                    _tjLastModificationTime])
+
 -- | A description of the execution of a transfer.
 --
 -- /See:/ 'transferOperation' smart constructor.
@@ -1219,6 +1578,34 @@ toErrorBreakdowns
       . _Default
       . _Coerce
 
+instance FromJSON TransferOperation where
+        parseJSON
+          = withObject "TransferOperation"
+              (\ o ->
+                 TransferOperation <$>
+                   (o .:? "status") <*> (o .:? "counters") <*>
+                     (o .:? "startTime")
+                     <*> (o .:? "transferJobName")
+                     <*> (o .:? "name")
+                     <*> (o .:? "endTime")
+                     <*> (o .:? "projectId")
+                     <*> (o .:? "transferSpec")
+                     <*> (o .:? "errorBreakdowns" .!= mempty))
+
+instance ToJSON TransferOperation where
+        toJSON TransferOperation{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _toStatus,
+                  ("counters" .=) <$> _toCounters,
+                  ("startTime" .=) <$> _toStartTime,
+                  ("transferJobName" .=) <$> _toTransferJobName,
+                  ("name" .=) <$> _toName,
+                  ("endTime" .=) <$> _toEndTime,
+                  ("projectId" .=) <$> _toProjectId,
+                  ("transferSpec" .=) <$> _toTransferSpec,
+                  ("errorBreakdowns" .=) <$> _toErrorBreakdowns])
+
 -- | TransferOptions uses three boolean parameters to define the actions to
 -- be performed on objects in a transfer.
 --
@@ -1267,6 +1654,26 @@ toOverwriteObjectsAlreadyExistingInSink
   = lens _toOverwriteObjectsAlreadyExistingInSink
       (\ s a ->
          s{_toOverwriteObjectsAlreadyExistingInSink = a})
+
+instance FromJSON TransferOptions where
+        parseJSON
+          = withObject "TransferOptions"
+              (\ o ->
+                 TransferOptions <$>
+                   (o .:? "deleteObjectsUniqueInSink") <*>
+                     (o .:? "deleteObjectsFromSourceAfterTransfer")
+                     <*> (o .:? "overwriteObjectsAlreadyExistingInSink"))
+
+instance ToJSON TransferOptions where
+        toJSON TransferOptions{..}
+          = object
+              (catMaybes
+                 [("deleteObjectsUniqueInSink" .=) <$>
+                    _toDeleteObjectsUniqueInSink,
+                  ("deleteObjectsFromSourceAfterTransfer" .=) <$>
+                    _toDeleteObjectsFromSourceAfterTransfer,
+                  ("overwriteObjectsAlreadyExistingInSink" .=) <$>
+                    _toOverwriteObjectsAlreadyExistingInSink])
 
 -- | Configuration for running a transfer.
 --
@@ -1348,6 +1755,29 @@ tsTransferOptions
   = lens _tsTransferOptions
       (\ s a -> s{_tsTransferOptions = a})
 
+instance FromJSON TransferSpec where
+        parseJSON
+          = withObject "TransferSpec"
+              (\ o ->
+                 TransferSpec <$>
+                   (o .:? "gcsDataSource") <*>
+                     (o .:? "objectConditions")
+                     <*> (o .:? "httpDataSource")
+                     <*> (o .:? "awsS3DataSource")
+                     <*> (o .:? "gcsDataSink")
+                     <*> (o .:? "transferOptions"))
+
+instance ToJSON TransferSpec where
+        toJSON TransferSpec{..}
+          = object
+              (catMaybes
+                 [("gcsDataSource" .=) <$> _tsGcsDataSource,
+                  ("objectConditions" .=) <$> _tsObjectConditions,
+                  ("httpDataSource" .=) <$> _tsHttpDataSource,
+                  ("awsS3DataSource" .=) <$> _tsAwsS3DataSource,
+                  ("gcsDataSink" .=) <$> _tsGcsDataSink,
+                  ("transferOptions" .=) <$> _tsTransferOptions])
+
 -- | Request passed to UpdateTransferJob.
 --
 -- /See:/ 'updateTransferJobRequest' smart constructor.
@@ -1398,3 +1828,20 @@ utjrUpdateTransferJobFieldMask :: Lens' UpdateTransferJobRequest (Maybe Text)
 utjrUpdateTransferJobFieldMask
   = lens _utjrUpdateTransferJobFieldMask
       (\ s a -> s{_utjrUpdateTransferJobFieldMask = a})
+
+instance FromJSON UpdateTransferJobRequest where
+        parseJSON
+          = withObject "UpdateTransferJobRequest"
+              (\ o ->
+                 UpdateTransferJobRequest <$>
+                   (o .:? "transferJob") <*> (o .:? "projectId") <*>
+                     (o .:? "updateTransferJobFieldMask"))
+
+instance ToJSON UpdateTransferJobRequest where
+        toJSON UpdateTransferJobRequest{..}
+          = object
+              (catMaybes
+                 [("transferJob" .=) <$> _utjrTransferJob,
+                  ("projectId" .=) <$> _utjrProjectId,
+                  ("updateTransferJobFieldMask" .=) <$>
+                    _utjrUpdateTransferJobFieldMask])

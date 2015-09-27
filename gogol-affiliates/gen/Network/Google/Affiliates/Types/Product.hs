@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -238,6 +239,59 @@ aDescription :: Lens' Advertiser (Maybe Text)
 aDescription
   = lens _aDescription (\ s a -> s{_aDescription = a})
 
+instance FromJSON Advertiser where
+        parseJSON
+          = withObject "Advertiser"
+              (\ o ->
+                 Advertiser <$>
+                   (o .:? "allowPublisherCreatedLinks") <*>
+                     (o .:? "contactPhone")
+                     <*> (o .:? "contactEmail")
+                     <*> (o .:? "status")
+                     <*> (o .:? "logoUrl")
+                     <*> (o .:? "kind" .!= "gan#advertiser")
+                     <*> (o .:? "category")
+                     <*> (o .:? "siteUrl")
+                     <*> (o .:? "payoutRank")
+                     <*> (o .:? "joinDate")
+                     <*> (o .:? "defaultLinkId")
+                     <*> (o .:? "redirectDomains" .!= mempty)
+                     <*> (o .:? "name")
+                     <*> (o .:? "productFeedsEnabled")
+                     <*> (o .:? "merchantCenterIds" .!= mempty)
+                     <*> (o .:? "epcSevenDayAverage")
+                     <*> (o .:? "item")
+                     <*> (o .:? "id")
+                     <*> (o .:? "epcNinetyDayAverage")
+                     <*> (o .:? "commissionDuration")
+                     <*> (o .:? "description"))
+
+instance ToJSON Advertiser where
+        toJSON Advertiser{..}
+          = object
+              (catMaybes
+                 [("allowPublisherCreatedLinks" .=) <$>
+                    _aAllowPublisherCreatedLinks,
+                  ("contactPhone" .=) <$> _aContactPhone,
+                  ("contactEmail" .=) <$> _aContactEmail,
+                  ("status" .=) <$> _aStatus,
+                  ("logoUrl" .=) <$> _aLogoUrl,
+                  Just ("kind" .= _aKind),
+                  ("category" .=) <$> _aCategory,
+                  ("siteUrl" .=) <$> _aSiteUrl,
+                  ("payoutRank" .=) <$> _aPayoutRank,
+                  ("joinDate" .=) <$> _aJoinDate,
+                  ("defaultLinkId" .=) <$> _aDefaultLinkId,
+                  ("redirectDomains" .=) <$> _aRedirectDomains,
+                  ("name" .=) <$> _aName,
+                  ("productFeedsEnabled" .=) <$> _aProductFeedsEnabled,
+                  ("merchantCenterIds" .=) <$> _aMerchantCenterIds,
+                  ("epcSevenDayAverage" .=) <$> _aEpcSevenDayAverage,
+                  ("item" .=) <$> _aItem, ("id" .=) <$> _aId,
+                  ("epcNinetyDayAverage" .=) <$> _aEpcNinetyDayAverage,
+                  ("commissionDuration" .=) <$> _aCommissionDuration,
+                  ("description" .=) <$> _aDescription])
+
 --
 -- /See:/ 'advertisers' smart constructor.
 data Advertisers = Advertisers
@@ -281,6 +335,23 @@ advItems
   = lens _advItems (\ s a -> s{_advItems = a}) .
       _Default
       . _Coerce
+
+instance FromJSON Advertisers where
+        parseJSON
+          = withObject "Advertisers"
+              (\ o ->
+                 Advertisers <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "gan#advertisers")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON Advertisers where
+        toJSON Advertisers{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _advNextPageToken,
+                  Just ("kind" .= _advKind),
+                  ("items" .=) <$> _advItems])
 
 -- | A credit card offer. There are many possible result fields. We provide
 -- two different views of the data, or \"projections.\" The \"full\"
@@ -965,6 +1036,162 @@ coPurchaseRateType
   = lens _coPurchaseRateType
       (\ s a -> s{_coPurchaseRateType = a})
 
+instance FromJSON CcOffer where
+        parseJSON
+          = withObject "CcOffer"
+              (\ o ->
+                 CcOffer <$>
+                   (o .:? "minimumFinanceCharge") <*>
+                     (o .:? "trackingUrl")
+                     <*> (o .:? "prohibitedCategories" .!= mempty)
+                     <*> (o .:? "balanceComputationMethod")
+                     <*> (o .:? "initialSetupAndProcessingFee")
+                     <*> (o .:? "returnedPaymentFee")
+                     <*> (o .:? "ageMinimumDetails")
+                     <*> (o .:? "variableRatesUpdateFrequency")
+                     <*> (o .:? "creditLimitMin")
+                     <*> (o .:? "travelInsurance")
+                     <*> (o .:? "approvedCategories" .!= mempty)
+                     <*> (o .:? "annualFeeDisplay")
+                     <*> (o .:? "overLimitFee")
+                     <*> (o .:? "maxPurchaseRate")
+                     <*> (o .:? "ageMinimum")
+                     <*> (o .:? "variableRatesLastUpdated")
+                     <*> (o .:? "introCashAdvanceTerms")
+                     <*> (o .:? "issuerWebsite")
+                     <*> (o .:? "luggageInsurance")
+                     <*> (o .:? "kind" .!= "gan#ccOffer")
+                     <*> (o .:? "rewardsHaveBlackoutDates")
+                     <*> (o .:? "disclaimer")
+                     <*> (o .:? "additionalCardHolderFee")
+                     <*> (o .:? "existingCustomerOnly")
+                     <*> (o .:? "emergencyInsurance")
+                     <*> (o .:? "network")
+                     <*> (o .:? "cashAdvanceTerms")
+                     <*> (o .:? "statementCopyFee")
+                     <*> (o .:? "aprDisplay")
+                     <*> (o .:? "offersImmediateCashReward")
+                     <*> (o .:? "rewards" .!= mempty)
+                     <*> (o .:? "cardType")
+                     <*> (o .:? "imageUrl")
+                     <*> (o .:? "creditLimitMax")
+                     <*> (o .:? "landingPageUrl")
+                     <*> (o .:? "annualFee")
+                     <*> (o .:? "rewardsExpire")
+                     <*> (o .:? "firstYearAnnualFee")
+                     <*> (o .:? "carRentalInsurance")
+                     <*> (o .:? "purchaseRateAdditionalDetails")
+                     <*> (o .:? "offerId")
+                     <*> (o .:? "gracePeriodDisplay")
+                     <*> (o .:? "introPurchaseTerms")
+                     <*> (o .:? "creditRatingDisplay")
+                     <*> (o .:? "balanceTransferTerms")
+                     <*> (o .:? "latePaymentFee")
+                     <*> (o .:? "cardBenefits" .!= mempty)
+                     <*> (o .:? "issuer")
+                     <*> (o .:? "cardName")
+                     <*> (o .:? "minPurchaseRate")
+                     <*> (o .:? "fraudLiability")
+                     <*> (o .:? "foreignCurrencyTransactionFee")
+                     <*> (o .:? "extendedWarranty")
+                     <*> (o .:? "annualRewardMaximum")
+                     <*> (o .:? "issuerId")
+                     <*> (o .:? "introBalanceTransferTerms")
+                     <*> (o .:? "defaultFees" .!= mempty)
+                     <*> (o .:? "additionalCardBenefits" .!= mempty)
+                     <*> (o .:? "rewardUnit")
+                     <*> (o .:? "bonusRewards" .!= mempty)
+                     <*> (o .:? "flightAccidentInsurance")
+                     <*> (o .:? "rewardPartner")
+                     <*> (o .:? "purchaseRateType"))
+
+instance ToJSON CcOffer where
+        toJSON CcOffer{..}
+          = object
+              (catMaybes
+                 [("minimumFinanceCharge" .=) <$>
+                    _coMinimumFinanceCharge,
+                  ("trackingUrl" .=) <$> _coTrackingUrl,
+                  ("prohibitedCategories" .=) <$>
+                    _coProhibitedCategories,
+                  ("balanceComputationMethod" .=) <$>
+                    _coBalanceComputationMethod,
+                  ("initialSetupAndProcessingFee" .=) <$>
+                    _coInitialSetupAndProcessingFee,
+                  ("returnedPaymentFee" .=) <$> _coReturnedPaymentFee,
+                  ("ageMinimumDetails" .=) <$> _coAgeMinimumDetails,
+                  ("variableRatesUpdateFrequency" .=) <$>
+                    _coVariableRatesUpdateFrequency,
+                  ("creditLimitMin" .=) <$> _coCreditLimitMin,
+                  ("travelInsurance" .=) <$> _coTravelInsurance,
+                  ("approvedCategories" .=) <$> _coApprovedCategories,
+                  ("annualFeeDisplay" .=) <$> _coAnnualFeeDisplay,
+                  ("overLimitFee" .=) <$> _coOverLimitFee,
+                  ("maxPurchaseRate" .=) <$> _coMaxPurchaseRate,
+                  ("ageMinimum" .=) <$> _coAgeMinimum,
+                  ("variableRatesLastUpdated" .=) <$>
+                    _coVariableRatesLastUpdated,
+                  ("introCashAdvanceTerms" .=) <$>
+                    _coIntroCashAdvanceTerms,
+                  ("issuerWebsite" .=) <$> _coIssuerWebsite,
+                  ("luggageInsurance" .=) <$> _coLuggageInsurance,
+                  Just ("kind" .= _coKind),
+                  ("rewardsHaveBlackoutDates" .=) <$>
+                    _coRewardsHaveBlackoutDates,
+                  ("disclaimer" .=) <$> _coDisclaimer,
+                  ("additionalCardHolderFee" .=) <$>
+                    _coAdditionalCardHolderFee,
+                  ("existingCustomerOnly" .=) <$>
+                    _coExistingCustomerOnly,
+                  ("emergencyInsurance" .=) <$> _coEmergencyInsurance,
+                  ("network" .=) <$> _coNetwork,
+                  ("cashAdvanceTerms" .=) <$> _coCashAdvanceTerms,
+                  ("statementCopyFee" .=) <$> _coStatementCopyFee,
+                  ("aprDisplay" .=) <$> _coAprDisplay,
+                  ("offersImmediateCashReward" .=) <$>
+                    _coOffersImmediateCashReward,
+                  ("rewards" .=) <$> _coRewards,
+                  ("cardType" .=) <$> _coCardType,
+                  ("imageUrl" .=) <$> _coImageUrl,
+                  ("creditLimitMax" .=) <$> _coCreditLimitMax,
+                  ("landingPageUrl" .=) <$> _coLandingPageUrl,
+                  ("annualFee" .=) <$> _coAnnualFee,
+                  ("rewardsExpire" .=) <$> _coRewardsExpire,
+                  ("firstYearAnnualFee" .=) <$> _coFirstYearAnnualFee,
+                  ("carRentalInsurance" .=) <$> _coCarRentalInsurance,
+                  ("purchaseRateAdditionalDetails" .=) <$>
+                    _coPurchaseRateAdditionalDetails,
+                  ("offerId" .=) <$> _coOfferId,
+                  ("gracePeriodDisplay" .=) <$> _coGracePeriodDisplay,
+                  ("introPurchaseTerms" .=) <$> _coIntroPurchaseTerms,
+                  ("creditRatingDisplay" .=) <$>
+                    _coCreditRatingDisplay,
+                  ("balanceTransferTerms" .=) <$>
+                    _coBalanceTransferTerms,
+                  ("latePaymentFee" .=) <$> _coLatePaymentFee,
+                  ("cardBenefits" .=) <$> _coCardBenefits,
+                  ("issuer" .=) <$> _coIssuer,
+                  ("cardName" .=) <$> _coCardName,
+                  ("minPurchaseRate" .=) <$> _coMinPurchaseRate,
+                  ("fraudLiability" .=) <$> _coFraudLiability,
+                  ("foreignCurrencyTransactionFee" .=) <$>
+                    _coForeignCurrencyTransactionFee,
+                  ("extendedWarranty" .=) <$> _coExtendedWarranty,
+                  ("annualRewardMaximum" .=) <$>
+                    _coAnnualRewardMaximum,
+                  ("issuerId" .=) <$> _coIssuerId,
+                  ("introBalanceTransferTerms" .=) <$>
+                    _coIntroBalanceTransferTerms,
+                  ("defaultFees" .=) <$> _coDefaultFees,
+                  ("additionalCardBenefits" .=) <$>
+                    _coAdditionalCardBenefits,
+                  ("rewardUnit" .=) <$> _coRewardUnit,
+                  ("bonusRewards" .=) <$> _coBonusRewards,
+                  ("flightAccidentInsurance" .=) <$>
+                    _coFlightAccidentInsurance,
+                  ("rewardPartner" .=) <$> _coRewardPartner,
+                  ("purchaseRateType" .=) <$> _coPurchaseRateType])
+
 --
 -- /See:/ 'ccOfferItemBonusRewards' smart constructor.
 data CcOfferItemBonusRewards = CcOfferItemBonusRewards
@@ -997,6 +1224,20 @@ coibrAmount
 coibrDetails :: Lens' CcOfferItemBonusRewards (Maybe Text)
 coibrDetails
   = lens _coibrDetails (\ s a -> s{_coibrDetails = a})
+
+instance FromJSON CcOfferItemBonusRewards where
+        parseJSON
+          = withObject "CcOfferItemBonusRewards"
+              (\ o ->
+                 CcOfferItemBonusRewards <$>
+                   (o .:? "amount") <*> (o .:? "details"))
+
+instance ToJSON CcOfferItemBonusRewards where
+        toJSON CcOfferItemBonusRewards{..}
+          = object
+              (catMaybes
+                 [("amount" .=) <$> _coibrAmount,
+                  ("details" .=) <$> _coibrDetails])
 
 --
 -- /See:/ 'ccOfferItemDefaultFees' smart constructor.
@@ -1051,6 +1292,24 @@ coidfCategory
 coidfMaxRate :: Lens' CcOfferItemDefaultFees (Maybe Double)
 coidfMaxRate
   = lens _coidfMaxRate (\ s a -> s{_coidfMaxRate = a})
+
+instance FromJSON CcOfferItemDefaultFees where
+        parseJSON
+          = withObject "CcOfferItemDefaultFees"
+              (\ o ->
+                 CcOfferItemDefaultFees <$>
+                   (o .:? "rateType") <*> (o .:? "minRate") <*>
+                     (o .:? "category")
+                     <*> (o .:? "maxRate"))
+
+instance ToJSON CcOfferItemDefaultFees where
+        toJSON CcOfferItemDefaultFees{..}
+          = object
+              (catMaybes
+                 [("rateType" .=) <$> _coidfRateType,
+                  ("minRate" .=) <$> _coidfMinRate,
+                  ("category" .=) <$> _coidfCategory,
+                  ("maxRate" .=) <$> _coidfMaxRate])
 
 --
 -- /See:/ 'ccOfferItemRewards' smart constructor.
@@ -1127,6 +1386,28 @@ coirMinRewardTier
   = lens _coirMinRewardTier
       (\ s a -> s{_coirMinRewardTier = a})
 
+instance FromJSON CcOfferItemRewards where
+        parseJSON
+          = withObject "CcOfferItemRewards"
+              (\ o ->
+                 CcOfferItemRewards <$>
+                   (o .:? "amount") <*> (o .:? "expirationMonths") <*>
+                     (o .:? "category")
+                     <*> (o .:? "additionalDetails")
+                     <*> (o .:? "maxRewardTier")
+                     <*> (o .:? "minRewardTier"))
+
+instance ToJSON CcOfferItemRewards where
+        toJSON CcOfferItemRewards{..}
+          = object
+              (catMaybes
+                 [("amount" .=) <$> _coirAmount,
+                  ("expirationMonths" .=) <$> _coirExpirationMonths,
+                  ("category" .=) <$> _coirCategory,
+                  ("additionalDetails" .=) <$> _coirAdditionalDetails,
+                  ("maxRewardTier" .=) <$> _coirMaxRewardTier,
+                  ("minRewardTier" .=) <$> _coirMinRewardTier])
+
 --
 -- /See:/ 'ccOffers' smart constructor.
 data CcOffers = CcOffers
@@ -1158,6 +1439,20 @@ cItems :: Lens' CcOffers [Maybe CcOffer]
 cItems
   = lens _cItems (\ s a -> s{_cItems = a}) . _Default .
       _Coerce
+
+instance FromJSON CcOffers where
+        parseJSON
+          = withObject "CcOffers"
+              (\ o ->
+                 CcOffers <$>
+                   (o .:? "kind" .!= "gan#ccOffers") <*>
+                     (o .:? "items" .!= mempty))
+
+instance ToJSON CcOffers where
+        toJSON CcOffers{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _cKind), ("items" .=) <$> _cItems])
 
 -- | An EventResource.
 --
@@ -1351,6 +1646,53 @@ evePublisherName
   = lens _evePublisherName
       (\ s a -> s{_evePublisherName = a})
 
+instance FromJSON Event where
+        parseJSON
+          = withObject "Event"
+              (\ o ->
+                 Event <$>
+                   (o .:? "modifyDate") <*> (o .:? "status") <*>
+                     (o .:? "commissionableSales")
+                     <*> (o .:? "chargeId")
+                     <*> (o .:? "advertiserName")
+                     <*> (o .:? "chargeType")
+                     <*> (o .:? "memberId")
+                     <*> (o .:? "kind" .!= "gan#event")
+                     <*> (o .:? "networkFee")
+                     <*> (o .:? "advertiserId")
+                     <*> (o .:? "eventDate")
+                     <*> (o .:? "products" .!= mempty)
+                     <*> (o .:? "publisherFee")
+                     <*> (o .:? "type")
+                     <*> (o .:? "orderId")
+                     <*> (o .:? "publisherId")
+                     <*> (o .:? "earnings")
+                     <*> (o .:? "publisherName"))
+
+instance ToJSON Event where
+        toJSON Event{..}
+          = object
+              (catMaybes
+                 [("modifyDate" .=) <$> _eveModifyDate,
+                  ("status" .=) <$> _eveStatus,
+                  ("commissionableSales" .=) <$>
+                    _eveCommissionableSales,
+                  ("chargeId" .=) <$> _eveChargeId,
+                  ("advertiserName" .=) <$> _eveAdvertiserName,
+                  ("chargeType" .=) <$> _eveChargeType,
+                  ("memberId" .=) <$> _eveMemberId,
+                  Just ("kind" .= _eveKind),
+                  ("networkFee" .=) <$> _eveNetworkFee,
+                  ("advertiserId" .=) <$> _eveAdvertiserId,
+                  ("eventDate" .=) <$> _eveEventDate,
+                  ("products" .=) <$> _eveProducts,
+                  ("publisherFee" .=) <$> _evePublisherFee,
+                  ("type" .=) <$> _eveType,
+                  ("orderId" .=) <$> _eveOrderId,
+                  ("publisherId" .=) <$> _evePublisherId,
+                  ("earnings" .=) <$> _eveEarnings,
+                  ("publisherName" .=) <$> _evePublisherName])
+
 --
 -- /See:/ 'eventItemProducts' smart constructor.
 data EventItemProducts = EventItemProducts
@@ -1450,6 +1792,34 @@ eipEarnings :: Lens' EventItemProducts (Maybe (Maybe Money))
 eipEarnings
   = lens _eipEarnings (\ s a -> s{_eipEarnings = a})
 
+instance FromJSON EventItemProducts where
+        parseJSON
+          = withObject "EventItemProducts"
+              (\ o ->
+                 EventItemProducts <$>
+                   (o .:? "skuName") <*> (o .:? "networkFee") <*>
+                     (o .:? "quantity")
+                     <*> (o .:? "categoryName")
+                     <*> (o .:? "categoryId")
+                     <*> (o .:? "sku")
+                     <*> (o .:? "publisherFee")
+                     <*> (o .:? "unitPrice")
+                     <*> (o .:? "earnings"))
+
+instance ToJSON EventItemProducts where
+        toJSON EventItemProducts{..}
+          = object
+              (catMaybes
+                 [("skuName" .=) <$> _eipSkuName,
+                  ("networkFee" .=) <$> _eipNetworkFee,
+                  ("quantity" .=) <$> _eipQuantity,
+                  ("categoryName" .=) <$> _eipCategoryName,
+                  ("categoryId" .=) <$> _eipCategoryId,
+                  ("sku" .=) <$> _eipSku,
+                  ("publisherFee" .=) <$> _eipPublisherFee,
+                  ("unitPrice" .=) <$> _eipUnitPrice,
+                  ("earnings" .=) <$> _eipEarnings])
+
 --
 -- /See:/ 'events' smart constructor.
 data Events = Events
@@ -1492,6 +1862,22 @@ eItems :: Lens' Events [Maybe Event]
 eItems
   = lens _eItems (\ s a -> s{_eItems = a}) . _Default .
       _Coerce
+
+instance FromJSON Events where
+        parseJSON
+          = withObject "Events"
+              (\ o ->
+                 Events <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "gan#events")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON Events where
+        toJSON Events{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _eNextPageToken,
+                  Just ("kind" .= _eKind), ("items" .=) <$> _eItems])
 
 -- | A LinkResource.
 --
@@ -1711,6 +2097,60 @@ linDescription
   = lens _linDescription
       (\ s a -> s{_linDescription = a})
 
+instance FromJSON Link where
+        parseJSON
+          = withObject "Link"
+              (\ o ->
+                 Link <$>
+                   (o .:? "authorship") <*> (o .:? "destinationUrl") <*>
+                     (o .:? "clickTrackingUrl")
+                     <*> (o .:? "createDate")
+                     <*> (o .:? "kind" .!= "gan#link")
+                     <*> (o .:? "advertiserId")
+                     <*> (o .:? "endDate")
+                     <*> (o .:? "imageAltText")
+                     <*> (o .:? "promotionType")
+                     <*> (o .:? "availability")
+                     <*> (o .:? "startDate")
+                     <*> (o .:? "name")
+                     <*> (o .:? "impressionTrackingUrl")
+                     <*> (o .:? "specialOffers")
+                     <*> (o .:? "epcSevenDayAverage")
+                     <*> (o .:? "id")
+                     <*> (o .:? "epcNinetyDayAverage")
+                     <*> (o .:? "linkType")
+                     <*> (o .:? "isActive")
+                     <*> (o .:? "duration")
+                     <*> (o .:? "description"))
+
+instance ToJSON Link where
+        toJSON Link{..}
+          = object
+              (catMaybes
+                 [("authorship" .=) <$> _linAuthorship,
+                  ("destinationUrl" .=) <$> _linDestinationUrl,
+                  ("clickTrackingUrl" .=) <$> _linClickTrackingUrl,
+                  ("createDate" .=) <$> _linCreateDate,
+                  Just ("kind" .= _linKind),
+                  ("advertiserId" .=) <$> _linAdvertiserId,
+                  ("endDate" .=) <$> _linEndDate,
+                  ("imageAltText" .=) <$> _linImageAltText,
+                  ("promotionType" .=) <$> _linPromotionType,
+                  ("availability" .=) <$> _linAvailability,
+                  ("startDate" .=) <$> _linStartDate,
+                  ("name" .=) <$> _linName,
+                  ("impressionTrackingUrl" .=) <$>
+                    _linImpressionTrackingUrl,
+                  ("specialOffers" .=) <$> _linSpecialOffers,
+                  ("epcSevenDayAverage" .=) <$> _linEpcSevenDayAverage,
+                  ("id" .=) <$> _linId,
+                  ("epcNinetyDayAverage" .=) <$>
+                    _linEpcNinetyDayAverage,
+                  ("linkType" .=) <$> _linLinkType,
+                  ("isActive" .=) <$> _linIsActive,
+                  ("duration" .=) <$> _linDuration,
+                  ("description" .=) <$> _linDescription])
+
 -- | Special offers on the link.
 --
 -- /See:/ 'linkSpecialOffers' smart constructor.
@@ -1806,6 +2246,32 @@ lsoFreeGift :: Lens' LinkSpecialOffers (Maybe Bool)
 lsoFreeGift
   = lens _lsoFreeGift (\ s a -> s{_lsoFreeGift = a})
 
+instance FromJSON LinkSpecialOffers where
+        parseJSON
+          = withObject "LinkSpecialOffers"
+              (\ o ->
+                 LinkSpecialOffers <$>
+                   (o .:? "freeShippingMin") <*> (o .:? "percentOff")
+                     <*> (o .:? "priceCut")
+                     <*> (o .:? "priceCutMin")
+                     <*> (o .:? "percentOffMin")
+                     <*> (o .:? "freeShipping")
+                     <*> (o .:? "promotionCodes" .!= mempty)
+                     <*> (o .:? "freeGift"))
+
+instance ToJSON LinkSpecialOffers where
+        toJSON LinkSpecialOffers{..}
+          = object
+              (catMaybes
+                 [("freeShippingMin" .=) <$> _lsoFreeShippingMin,
+                  ("percentOff" .=) <$> _lsoPercentOff,
+                  ("priceCut" .=) <$> _lsoPriceCut,
+                  ("priceCutMin" .=) <$> _lsoPriceCutMin,
+                  ("percentOffMin" .=) <$> _lsoPercentOffMin,
+                  ("freeShipping" .=) <$> _lsoFreeShipping,
+                  ("promotionCodes" .=) <$> _lsoPromotionCodes,
+                  ("freeGift" .=) <$> _lsoFreeGift])
+
 --
 -- /See:/ 'links' smart constructor.
 data Links = Links
@@ -1848,6 +2314,22 @@ lItems
   = lens _lItems (\ s a -> s{_lItems = a}) . _Default .
       _Coerce
 
+instance FromJSON Links where
+        parseJSON
+          = withObject "Links"
+              (\ o ->
+                 Links <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "gan#links")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON Links where
+        toJSON Links{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lNextPageToken,
+                  Just ("kind" .= _lKind), ("items" .=) <$> _lItems])
+
 -- | An ApiMoneyProto.
 --
 -- /See:/ 'money' smart constructor.
@@ -1880,6 +2362,20 @@ mCurrencyCode :: Lens' Money (Maybe Text)
 mCurrencyCode
   = lens _mCurrencyCode
       (\ s a -> s{_mCurrencyCode = a})
+
+instance FromJSON Money where
+        parseJSON
+          = withObject "Money"
+              (\ o ->
+                 Money <$>
+                   (o .:? "amount") <*> (o .:? "currencyCode"))
+
+instance ToJSON Money where
+        toJSON Money{..}
+          = object
+              (catMaybes
+                 [("amount" .=) <$> _mAmount,
+                  ("currencyCode" .=) <$> _mCurrencyCode])
 
 -- | A PublisherResource.
 --
@@ -2007,6 +2503,39 @@ pubSites
       _Default
       . _Coerce
 
+instance FromJSON Publisher where
+        parseJSON
+          = withObject "Publisher"
+              (\ o ->
+                 Publisher <$>
+                   (o .:? "status") <*>
+                     (o .:? "kind" .!= "gan#publisher")
+                     <*> (o .:? "payoutRank")
+                     <*> (o .:? "joinDate")
+                     <*> (o .:? "classification")
+                     <*> (o .:? "name")
+                     <*> (o .:? "epcSevenDayAverage")
+                     <*> (o .:? "item")
+                     <*> (o .:? "id")
+                     <*> (o .:? "epcNinetyDayAverage")
+                     <*> (o .:? "sites" .!= mempty))
+
+instance ToJSON Publisher where
+        toJSON Publisher{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _pubStatus,
+                  Just ("kind" .= _pubKind),
+                  ("payoutRank" .=) <$> _pubPayoutRank,
+                  ("joinDate" .=) <$> _pubJoinDate,
+                  ("classification" .=) <$> _pubClassification,
+                  ("name" .=) <$> _pubName,
+                  ("epcSevenDayAverage" .=) <$> _pubEpcSevenDayAverage,
+                  ("item" .=) <$> _pubItem, ("id" .=) <$> _pubId,
+                  ("epcNinetyDayAverage" .=) <$>
+                    _pubEpcNinetyDayAverage,
+                  ("sites" .=) <$> _pubSites])
+
 --
 -- /See:/ 'publishers' smart constructor.
 data Publishers = Publishers
@@ -2049,6 +2578,22 @@ pItems :: Lens' Publishers [Maybe Publisher]
 pItems
   = lens _pItems (\ s a -> s{_pItems = a}) . _Default .
       _Coerce
+
+instance FromJSON Publishers where
+        parseJSON
+          = withObject "Publishers"
+              (\ o ->
+                 Publishers <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "gan#publishers")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON Publishers where
+        toJSON Publishers{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _pNextPageToken,
+                  Just ("kind" .= _pKind), ("items" .=) <$> _pItems])
 
 -- | A ReportResource representing a report of a certain type either for an
 -- advertiser or publisher.
@@ -2140,3 +2685,30 @@ rColumnNames
 -- | The report type.
 rType :: Lens' Report (Maybe Text)
 rType = lens _rType (\ s a -> s{_rType = a})
+
+instance FromJSON Report where
+        parseJSON
+          = withObject "Report"
+              (\ o ->
+                 Report <$>
+                   (o .:? "end_date") <*>
+                     (o .:? "totals_rows" .!= mempty)
+                     <*> (o .:? "kind" .!= "gan#report")
+                     <*> (o .:? "start_date")
+                     <*> (o .:? "rows" .!= mempty)
+                     <*> (o .:? "matching_row_count")
+                     <*> (o .:? "column_names" .!= mempty)
+                     <*> (o .:? "type"))
+
+instance ToJSON Report where
+        toJSON Report{..}
+          = object
+              (catMaybes
+                 [("end_date" .=) <$> _rEndDate,
+                  ("totals_rows" .=) <$> _rTotalsRows,
+                  Just ("kind" .= _rKind),
+                  ("start_date" .=) <$> _rStartDate,
+                  ("rows" .=) <$> _rRows,
+                  ("matching_row_count" .=) <$> _rMatchingRowCount,
+                  ("column_names" .=) <$> _rColumnNames,
+                  ("type" .=) <$> _rType])

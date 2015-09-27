@@ -73,6 +73,12 @@ instance ToText EventItemAdditionalEventTypes where
         EIAETUntrash -> "untrash"
         EIAETUpload -> "upload"
 
+instance FromJSON EventItemAdditionalEventTypes where
+    parseJSON = parseJSONText "EventItemAdditionalEventTypes"
+
+instance ToJSON EventItemAdditionalEventTypes where
+    toJSON = toJSONText
+
 -- | The main type of event that occurred.
 data EventPrimaryEventType
     = EPETComment
@@ -130,6 +136,12 @@ instance ToText EventPrimaryEventType where
         EPETUntrash -> "untrash"
         EPETUpload -> "upload"
 
+instance FromJSON EventPrimaryEventType where
+    parseJSON = parseJSONText "EventPrimaryEventType"
+
+instance ToJSON EventPrimaryEventType where
+    toJSON = toJSONText
+
 -- | Indicates the Google Drive permissions role. The role determines a
 -- user\'s ability to read, write, or comment on the file.
 data PermissionRole
@@ -160,6 +172,12 @@ instance ToText PermissionRole where
         PRReader -> "reader"
         PRWriter -> "writer"
 
+instance FromJSON PermissionRole where
+    parseJSON = parseJSONText "PermissionRole"
+
+instance ToJSON PermissionRole where
+    toJSON = toJSONText
+
 -- | Indicates how widely permissions are granted.
 data PermissionType
     = PTAnyone
@@ -188,3 +206,9 @@ instance ToText PermissionType where
         PTDomain -> "domain"
         PTGroup -> "group"
         PTUser -> "user"
+
+instance FromJSON PermissionType where
+    parseJSON = parseJSONText "PermissionType"
+
+instance ToJSON PermissionType where
+    toJSON = toJSONText

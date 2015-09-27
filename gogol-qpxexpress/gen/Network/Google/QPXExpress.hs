@@ -270,11 +270,15 @@ type TripsAPI = TripsSearch
 
 -- | Returns a list of flights.
 type TripsSearch =
-     "qpxExpress" :> "v1" :> "trips" :> "search" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "qpxExpress" :>
+       "v1" :>
+         "trips" :>
+           "search" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :>
+                           Post '[JSON] TripsSearchResponse

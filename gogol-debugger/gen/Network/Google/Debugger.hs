@@ -239,23 +239,27 @@ type BreakpointsAPI =
 -- complete until the controller removes them from the active list to avoid
 -- setting those breakpoints again.
 type BreakpointsList =
-     "v2" :> "controller" :> "debuggees" :>
-       Capture "debuggeeId" Text
-       :> "breakpoints"
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "waitToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v2" :>
+       "controller" :>
+         "debuggees" :>
+           Capture "debuggeeId" Text :>
+             "breakpoints" :>
+               QueryParam "$.xgafv" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "bearer_token" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "waitToken" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" Text :>
+                                           Get '[JSON]
+                                             ListActiveBreakpointsResponse
 
 -- | Updates the breakpoint state or mutable fields. The entire Breakpoint
 -- protobuf must be sent back to the controller. Updates to active
@@ -265,23 +269,27 @@ type BreakpointsList =
 -- are restricted to changes such as canonicalizing a value or snapping the
 -- location to the correct line of code.
 type BreakpointsUpdate =
-     "v2" :> "controller" :> "debuggees" :>
-       Capture "debuggeeId" Text
-       :> "breakpoints"
-       :> Capture "id" Text
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v2" :>
+       "controller" :>
+         "debuggees" :>
+           Capture "debuggeeId" Text :>
+             "breakpoints" :>
+               Capture "id" Text :>
+                 QueryParam "$.xgafv" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "pp" Bool :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "bearer_token" Text :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" Text :>
+                                           Put '[JSON]
+                                             UpdateActiveBreakpointResponse
 
 type DebuggerAPI = DebuggeesAPI
 
@@ -294,84 +302,97 @@ type BreakpointsAPI =
 
 -- | Sets the breakpoint to the debuggee.
 type BreakpointsSet =
-     "v2" :> "debugger" :> "debuggees" :>
-       Capture "debuggeeId" Text
-       :> "breakpoints"
-       :> "set"
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v2" :>
+       "debugger" :>
+         "debuggees" :>
+           Capture "debuggeeId" Text :>
+             "breakpoints" :>
+               "set" :>
+                 QueryParam "$.xgafv" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "pp" Bool :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "bearer_token" Text :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" Text :>
+                                           Post '[JSON] SetBreakpointResponse
 
 -- | Lists all breakpoints of the debuggee that the user has access to.
 type BreakpointsList =
-     "v2" :> "debugger" :> "debuggees" :>
-       Capture "debuggeeId" Text
-       :> "breakpoints"
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "includeInactive" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "action.value" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "stripResults" Bool
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "includeAllUsers" Bool
-       :> QueryParam "waitToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v2" :>
+       "debugger" :>
+         "debuggees" :>
+           Capture "debuggeeId" Text :>
+             "breakpoints" :>
+               QueryParam "$.xgafv" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "includeInactive" Bool :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "pp" Bool :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "action.value" Text :>
+                               QueryParam "uploadType" Text :>
+                                 QueryParam "stripResults" Bool :>
+                                   QueryParam "bearer_token" Text :>
+                                     QueryParam "key" Text :>
+                                       QueryParam "includeAllUsers" Bool :>
+                                         QueryParam "waitToken" Text :>
+                                           QueryParam "oauth_token" Text :>
+                                             QueryParam "fields" Text :>
+                                               QueryParam "callback" Text :>
+                                                 QueryParam "alt" Text :>
+                                                   Get '[JSON]
+                                                     ListBreakpointsResponse
 
 -- | Gets breakpoint information.
 type BreakpointsGet =
-     "v2" :> "debugger" :> "debuggees" :>
-       Capture "debuggeeId" Text
-       :> "breakpoints"
-       :> Capture "breakpointId" Text
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v2" :>
+       "debugger" :>
+         "debuggees" :>
+           Capture "debuggeeId" Text :>
+             "breakpoints" :>
+               Capture "breakpointId" Text :>
+                 QueryParam "$.xgafv" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "pp" Bool :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "bearer_token" Text :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" Text :>
+                                           Get '[JSON] GetBreakpointResponse
 
 -- | Deletes the breakpoint from the debuggee.
 type BreakpointsDelete =
-     "v2" :> "debugger" :> "debuggees" :>
-       Capture "debuggeeId" Text
-       :> "breakpoints"
-       :> Capture "breakpointId" Text
-       :> QueryParam "$.xgafv" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "upload_protocol" Text
-       :> QueryParam "pp" Bool
-       :> QueryParam "access_token" Text
-       :> QueryParam "uploadType" Text
-       :> QueryParam "bearer_token" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "callback" Text
-       :> QueryParam "alt" Text
+     "v2" :>
+       "debugger" :>
+         "debuggees" :>
+           Capture "debuggeeId" Text :>
+             "breakpoints" :>
+               Capture "breakpointId" Text :>
+                 QueryParam "$.xgafv" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "pp" Bool :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "bearer_token" Text :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" Text :>
+                                           Delete '[JSON] Empty

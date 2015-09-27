@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -74,6 +75,25 @@ aPrimaryEmail
   = lens _aPrimaryEmail
       (\ s a -> s{_aPrimaryEmail = a})
 
+instance FromJSON Alias where
+        parseJSON
+          = withObject "Alias"
+              (\ o ->
+                 Alias <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!= "admin#directory#alias")
+                     <*> (o .:? "alias")
+                     <*> (o .:? "id")
+                     <*> (o .:? "primaryEmail"))
+
+instance ToJSON Alias where
+        toJSON Alias{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _aEtag, Just ("kind" .= _aKind),
+                  ("alias" .=) <$> _aAlias, ("id" .=) <$> _aId,
+                  ("primaryEmail" .=) <$> _aPrimaryEmail])
+
 -- | JSON response template to list aliases in Directory API.
 --
 -- /See:/ 'aliases' smart constructor.
@@ -115,6 +135,22 @@ aliAliases
   = lens _aliAliases (\ s a -> s{_aliAliases = a}) .
       _Default
       . _Coerce
+
+instance FromJSON Aliases where
+        parseJSON
+          = withObject "Aliases"
+              (\ o ->
+                 Aliases <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!= "admin#directory#aliases")
+                     <*> (o .:? "aliases" .!= mempty))
+
+instance ToJSON Aliases where
+        toJSON Aliases{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _aliEtag, Just ("kind" .= _aliKind),
+                  ("aliases" .=) <$> _aliAliases])
 
 -- | The template that returns individual ASP (Access Code) data.
 --
@@ -194,6 +230,29 @@ aspUserKey :: Lens' Asp (Maybe Text)
 aspUserKey
   = lens _aspUserKey (\ s a -> s{_aspUserKey = a})
 
+instance FromJSON Asp where
+        parseJSON
+          = withObject "Asp"
+              (\ o ->
+                 Asp <$>
+                   (o .:? "creationTime") <*> (o .:? "etag") <*>
+                     (o .:? "codeId")
+                     <*> (o .:? "kind" .!= "admin#directory#asp")
+                     <*> (o .:? "name")
+                     <*> (o .:? "lastTimeUsed")
+                     <*> (o .:? "userKey"))
+
+instance ToJSON Asp where
+        toJSON Asp{..}
+          = object
+              (catMaybes
+                 [("creationTime" .=) <$> _aspCreationTime,
+                  ("etag" .=) <$> _aspEtag,
+                  ("codeId" .=) <$> _aspCodeId,
+                  Just ("kind" .= _aspKind), ("name" .=) <$> _aspName,
+                  ("lastTimeUsed" .=) <$> _aspLastTimeUsed,
+                  ("userKey" .=) <$> _aspUserKey])
+
 --
 -- /See:/ 'asps' smart constructor.
 data Asps = Asps
@@ -233,6 +292,22 @@ aaItems :: Lens' Asps [Maybe Asp]
 aaItems
   = lens _aaItems (\ s a -> s{_aaItems = a}) . _Default
       . _Coerce
+
+instance FromJSON Asps where
+        parseJSON
+          = withObject "Asps"
+              (\ o ->
+                 Asps <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!= "admin#directory#aspList")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON Asps where
+        toJSON Asps{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _aaEtag, Just ("kind" .= _aaKind),
+                  ("items" .=) <$> _aaItems])
 
 -- | An notification channel used to watch for resource changes.
 --
@@ -342,6 +417,35 @@ chaId = lens _chaId (\ s a -> s{_chaId = a})
 chaType :: Lens' Channel (Maybe Text)
 chaType = lens _chaType (\ s a -> s{_chaType = a})
 
+instance FromJSON Channel where
+        parseJSON
+          = withObject "Channel"
+              (\ o ->
+                 Channel <$>
+                   (o .:? "resourceUri") <*> (o .:? "resourceId") <*>
+                     (o .:? "kind" .!= "api#channel")
+                     <*> (o .:? "expiration")
+                     <*> (o .:? "token")
+                     <*> (o .:? "address")
+                     <*> (o .:? "payload")
+                     <*> (o .:? "params")
+                     <*> (o .:? "id")
+                     <*> (o .:? "type"))
+
+instance ToJSON Channel where
+        toJSON Channel{..}
+          = object
+              (catMaybes
+                 [("resourceUri" .=) <$> _chaResourceUri,
+                  ("resourceId" .=) <$> _chaResourceId,
+                  Just ("kind" .= _chaKind),
+                  ("expiration" .=) <$> _chaExpiration,
+                  ("token" .=) <$> _chaToken,
+                  ("address" .=) <$> _chaAddress,
+                  ("payload" .=) <$> _chaPayload,
+                  ("params" .=) <$> _chaParams, ("id" .=) <$> _chaId,
+                  ("type" .=) <$> _chaType])
+
 -- | Additional parameters controlling delivery channel behavior. Optional.
 --
 -- /See:/ 'channelParams' smart constructor.
@@ -354,6 +458,14 @@ data ChannelParams =
 channelParams
     :: ChannelParams
 channelParams = ChannelParams
+
+instance FromJSON ChannelParams where
+        parseJSON
+          = withObject "ChannelParams"
+              (\ o -> pure ChannelParams)
+
+instance ToJSON ChannelParams where
+        toJSON = const (Object mempty)
 
 -- | JSON template for Chrome Os Device resource in Directory API.
 --
@@ -612,6 +724,67 @@ codOsVersion :: Lens' ChromeOsDevice (Maybe Text)
 codOsVersion
   = lens _codOsVersion (\ s a -> s{_codOsVersion = a})
 
+instance FromJSON ChromeOsDevice where
+        parseJSON
+          = withObject "ChromeOsDevice"
+              (\ o ->
+                 ChromeOsDevice <$>
+                   (o .:? "status") <*> (o .:? "etag") <*>
+                     (o .:? "annotatedUser")
+                     <*> (o .:? "platformVersion")
+                     <*> (o .:? "lastSync")
+                     <*> (o .:? "activeTimeRanges" .!= mempty)
+                     <*>
+                     (o .:? "kind" .!= "admin#directory#chromeosdevice")
+                     <*> (o .:? "ethernetMacAddress")
+                     <*> (o .:? "lastEnrollmentTime")
+                     <*> (o .:? "annotatedLocation")
+                     <*> (o .:? "macAddress")
+                     <*> (o .:? "orgUnitPath")
+                     <*> (o .:? "recentUsers" .!= mempty)
+                     <*> (o .:? "supportEndDate")
+                     <*> (o .:? "model")
+                     <*> (o .:? "willAutoRenew")
+                     <*> (o .:? "meid")
+                     <*> (o .:? "deviceId")
+                     <*> (o .:? "bootMode")
+                     <*> (o .:? "orderNumber")
+                     <*> (o .:? "annotatedAssetId")
+                     <*> (o .:? "notes")
+                     <*> (o .:? "serialNumber")
+                     <*> (o .:? "firmwareVersion")
+                     <*> (o .:? "osVersion"))
+
+instance ToJSON ChromeOsDevice where
+        toJSON ChromeOsDevice{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _codStatus,
+                  ("etag" .=) <$> _codEtag,
+                  ("annotatedUser" .=) <$> _codAnnotatedUser,
+                  ("platformVersion" .=) <$> _codPlatformVersion,
+                  ("lastSync" .=) <$> _codLastSync,
+                  ("activeTimeRanges" .=) <$> _codActiveTimeRanges,
+                  Just ("kind" .= _codKind),
+                  ("ethernetMacAddress" .=) <$> _codEthernetMacAddress,
+                  ("lastEnrollmentTime" .=) <$> _codLastEnrollmentTime,
+                  ("annotatedLocation" .=) <$> _codAnnotatedLocation,
+                  ("macAddress" .=) <$> _codMacAddress,
+                  ("orgUnitPath" .=) <$> _codOrgUnitPath,
+                  ("recentUsers" .=) <$> _codRecentUsers,
+                  ("supportEndDate" .=) <$> _codSupportEndDate,
+                  ("model" .=) <$> _codModel,
+                  ("willAutoRenew" .=) <$> _codWillAutoRenew,
+                  ("meid" .=) <$> _codMeid,
+                  ("deviceId" .=) <$> _codDeviceId,
+                  ("bootMode" .=) <$> _codBootMode,
+                  ("orderNumber" .=) <$> _codOrderNumber,
+                  ("annotatedAssetId" .=) <$> _codAnnotatedAssetId,
+                  ("notes" .=) <$> _codNotes,
+                  ("serialNumber" .=) <$> _codSerialNumber,
+                  ("firmwareVersion" .=) <$> _codFirmwareVersion,
+                  ("osVersion" .=) <$> _codOsVersion])
+
 --
 -- /See:/ 'chromeOsDeviceItemActiveTimeRanges' smart constructor.
 data ChromeOsDeviceItemActiveTimeRanges = ChromeOsDeviceItemActiveTimeRanges
@@ -645,6 +818,22 @@ codiatrActiveTime
   = lens _codiatrActiveTime
       (\ s a -> s{_codiatrActiveTime = a})
 
+instance FromJSON ChromeOsDeviceItemActiveTimeRanges
+         where
+        parseJSON
+          = withObject "ChromeOsDeviceItemActiveTimeRanges"
+              (\ o ->
+                 ChromeOsDeviceItemActiveTimeRanges <$>
+                   (o .:? "date") <*> (o .:? "activeTime"))
+
+instance ToJSON ChromeOsDeviceItemActiveTimeRanges
+         where
+        toJSON ChromeOsDeviceItemActiveTimeRanges{..}
+          = object
+              (catMaybes
+                 [("date" .=) <$> _codiatrDate,
+                  ("activeTime" .=) <$> _codiatrActiveTime])
+
 --
 -- /See:/ 'chromeOsDeviceItemRecentUsers' smart constructor.
 data ChromeOsDeviceItemRecentUsers = ChromeOsDeviceItemRecentUsers
@@ -676,6 +865,20 @@ codiruEmail
 codiruType :: Lens' ChromeOsDeviceItemRecentUsers (Maybe Text)
 codiruType
   = lens _codiruType (\ s a -> s{_codiruType = a})
+
+instance FromJSON ChromeOsDeviceItemRecentUsers where
+        parseJSON
+          = withObject "ChromeOsDeviceItemRecentUsers"
+              (\ o ->
+                 ChromeOsDeviceItemRecentUsers <$>
+                   (o .:? "email") <*> (o .:? "type"))
+
+instance ToJSON ChromeOsDeviceItemRecentUsers where
+        toJSON ChromeOsDeviceItemRecentUsers{..}
+          = object
+              (catMaybes
+                 [("email" .=) <$> _codiruEmail,
+                  ("type" .=) <$> _codiruType])
 
 -- | JSON response template for List Chrome OS Devices operation in Directory
 -- API.
@@ -730,6 +933,24 @@ cChromeosdevices
       (\ s a -> s{_cChromeosdevices = a})
       . _Default
       . _Coerce
+
+instance FromJSON ChromeOsDevices where
+        parseJSON
+          = withObject "ChromeOsDevices"
+              (\ o ->
+                 ChromeOsDevices <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "admin#directory#chromeosdevices")
+                     <*> (o .:? "chromeosdevices" .!= mempty))
+
+instance ToJSON ChromeOsDevices where
+        toJSON ChromeOsDevices{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _cEtag,
+                  ("nextPageToken" .=) <$> _cNextPageToken,
+                  Just ("kind" .= _cKind),
+                  ("chromeosdevices" .=) <$> _cChromeosdevices])
 
 -- | JSON template for Group resource in Directory API.
 --
@@ -839,6 +1060,36 @@ groDescription
   = lens _groDescription
       (\ s a -> s{_groDescription = a})
 
+instance FromJSON Group where
+        parseJSON
+          = withObject "Group"
+              (\ o ->
+                 Group <$>
+                   (o .:? "email") <*> (o .:? "etag") <*>
+                     (o .:? "directMembersCount")
+                     <*> (o .:? "kind" .!= "admin#directory#group")
+                     <*> (o .:? "aliases" .!= mempty)
+                     <*> (o .:? "nonEditableAliases" .!= mempty)
+                     <*> (o .:? "name")
+                     <*> (o .:? "adminCreated")
+                     <*> (o .:? "id")
+                     <*> (o .:? "description"))
+
+instance ToJSON Group where
+        toJSON Group{..}
+          = object
+              (catMaybes
+                 [("email" .=) <$> _groEmail,
+                  ("etag" .=) <$> _groEtag,
+                  ("directMembersCount" .=) <$> _groDirectMembersCount,
+                  Just ("kind" .= _groKind),
+                  ("aliases" .=) <$> _groAliases,
+                  ("nonEditableAliases" .=) <$> _groNonEditableAliases,
+                  ("name" .=) <$> _groName,
+                  ("adminCreated" .=) <$> _groAdminCreated,
+                  ("id" .=) <$> _groId,
+                  ("description" .=) <$> _groDescription])
+
 -- | JSON response template for List Groups operation in Directory API.
 --
 -- /See:/ 'groups' smart constructor.
@@ -889,6 +1140,23 @@ gNextPageToken
 -- | Kind of resource this is.
 gKind :: Lens' Groups Text
 gKind = lens _gKind (\ s a -> s{_gKind = a})
+
+instance FromJSON Groups where
+        parseJSON
+          = withObject "Groups"
+              (\ o ->
+                 Groups <$>
+                   (o .:? "groups" .!= mempty) <*> (o .:? "etag") <*>
+                     (o .:? "nextPageToken")
+                     <*> (o .:? "kind" .!= "admin#directory#groups"))
+
+instance ToJSON Groups where
+        toJSON Groups{..}
+          = object
+              (catMaybes
+                 [("groups" .=) <$> _gGroups, ("etag" .=) <$> _gEtag,
+                  ("nextPageToken" .=) <$> _gNextPageToken,
+                  Just ("kind" .= _gKind)])
 
 -- | JSON template for Member resource in Directory API.
 --
@@ -954,6 +1222,25 @@ mId = lens _mId (\ s a -> s{_mId = a})
 mType :: Lens' Member (Maybe Text)
 mType = lens _mType (\ s a -> s{_mType = a})
 
+instance FromJSON Member where
+        parseJSON
+          = withObject "Member"
+              (\ o ->
+                 Member <$>
+                   (o .:? "email") <*> (o .:? "etag") <*>
+                     (o .:? "kind" .!= "admin#directory#member")
+                     <*> (o .:? "role")
+                     <*> (o .:? "id")
+                     <*> (o .:? "type"))
+
+instance ToJSON Member where
+        toJSON Member{..}
+          = object
+              (catMaybes
+                 [("email" .=) <$> _mEmail, ("etag" .=) <$> _mEtag,
+                  Just ("kind" .= _mKind), ("role" .=) <$> _mRole,
+                  ("id" .=) <$> _mId, ("type" .=) <$> _mType])
+
 -- | JSON response template for List Members operation in Directory API.
 --
 -- /See:/ 'members' smart constructor.
@@ -1005,6 +1292,24 @@ memMembers
   = lens _memMembers (\ s a -> s{_memMembers = a}) .
       _Default
       . _Coerce
+
+instance FromJSON Members where
+        parseJSON
+          = withObject "Members"
+              (\ o ->
+                 Members <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "admin#directory#members")
+                     <*> (o .:? "members" .!= mempty))
+
+instance ToJSON Members where
+        toJSON Members{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _memEtag,
+                  ("nextPageToken" .=) <$> _memNextPageToken,
+                  Just ("kind" .= _memKind),
+                  ("members" .=) <$> _memMembers])
 
 -- | JSON template for Mobile Device resource in Directory API.
 --
@@ -1315,6 +1620,80 @@ mdDefaultLanguage
   = lens _mdDefaultLanguage
       (\ s a -> s{_mdDefaultLanguage = a})
 
+instance FromJSON MobileDevice where
+        parseJSON
+          = withObject "MobileDevice"
+              (\ o ->
+                 MobileDevice <$>
+                   (o .:? "email" .!= mempty) <*> (o .:? "status") <*>
+                     (o .:? "etag")
+                     <*> (o .:? "resourceId")
+                     <*> (o .:? "buildNumber")
+                     <*> (o .:? "managedAccountIsOnOwnerProfile")
+                     <*> (o .:? "lastSync")
+                     <*> (o .:? "otherAccountsInfo" .!= mempty)
+                     <*> (o .:? "kind" .!= "admin#directory#mobiledevice")
+                     <*> (o .:? "adbStatus")
+                     <*> (o .:? "networkOperator")
+                     <*> (o .:? "kernelVersion")
+                     <*> (o .:? "os")
+                     <*> (o .:? "name" .!= mempty)
+                     <*> (o .:? "model")
+                     <*> (o .:? "developerOptionsStatus")
+                     <*> (o .:? "unknownSourcesStatus")
+                     <*> (o .:? "meid")
+                     <*> (o .:? "deviceId")
+                     <*> (o .:? "firstSync")
+                     <*> (o .:? "userAgent")
+                     <*> (o .:? "imei")
+                     <*> (o .:? "type")
+                     <*> (o .:? "wifiMacAddress")
+                     <*> (o .:? "serialNumber")
+                     <*> (o .:? "hardwareId")
+                     <*> (o .:? "basebandVersion")
+                     <*> (o .:? "supportsWorkProfile")
+                     <*> (o .:? "deviceCompromisedStatus")
+                     <*> (o .:? "applications" .!= mempty)
+                     <*> (o .:? "defaultLanguage"))
+
+instance ToJSON MobileDevice where
+        toJSON MobileDevice{..}
+          = object
+              (catMaybes
+                 [("email" .=) <$> _mdEmail,
+                  ("status" .=) <$> _mdStatus, ("etag" .=) <$> _mdEtag,
+                  ("resourceId" .=) <$> _mdResourceId,
+                  ("buildNumber" .=) <$> _mdBuildNumber,
+                  ("managedAccountIsOnOwnerProfile" .=) <$>
+                    _mdManagedAccountIsOnOwnerProfile,
+                  ("lastSync" .=) <$> _mdLastSync,
+                  ("otherAccountsInfo" .=) <$> _mdOtherAccountsInfo,
+                  Just ("kind" .= _mdKind),
+                  ("adbStatus" .=) <$> _mdAdbStatus,
+                  ("networkOperator" .=) <$> _mdNetworkOperator,
+                  ("kernelVersion" .=) <$> _mdKernelVersion,
+                  ("os" .=) <$> _mdOs, ("name" .=) <$> _mdName,
+                  ("model" .=) <$> _mdModel,
+                  ("developerOptionsStatus" .=) <$>
+                    _mdDeveloperOptionsStatus,
+                  ("unknownSourcesStatus" .=) <$>
+                    _mdUnknownSourcesStatus,
+                  ("meid" .=) <$> _mdMeid,
+                  ("deviceId" .=) <$> _mdDeviceId,
+                  ("firstSync" .=) <$> _mdFirstSync,
+                  ("userAgent" .=) <$> _mdUserAgent,
+                  ("imei" .=) <$> _mdImei, ("type" .=) <$> _mdType,
+                  ("wifiMacAddress" .=) <$> _mdWifiMacAddress,
+                  ("serialNumber" .=) <$> _mdSerialNumber,
+                  ("hardwareId" .=) <$> _mdHardwareId,
+                  ("basebandVersion" .=) <$> _mdBasebandVersion,
+                  ("supportsWorkProfile" .=) <$>
+                    _mdSupportsWorkProfile,
+                  ("deviceCompromisedStatus" .=) <$>
+                    _mdDeviceCompromisedStatus,
+                  ("applications" .=) <$> _mdApplications,
+                  ("defaultLanguage" .=) <$> _mdDefaultLanguage])
+
 -- | JSON request template for firing commands on Mobile Device in Directory
 -- Devices API.
 --
@@ -1339,6 +1718,15 @@ mobileDeviceAction =
 mdaAction :: Lens' MobileDeviceAction (Maybe Text)
 mdaAction
   = lens _mdaAction (\ s a -> s{_mdaAction = a})
+
+instance FromJSON MobileDeviceAction where
+        parseJSON
+          = withObject "MobileDeviceAction"
+              (\ o -> MobileDeviceAction <$> (o .:? "action"))
+
+instance ToJSON MobileDeviceAction where
+        toJSON MobileDeviceAction{..}
+          = object (catMaybes [("action" .=) <$> _mdaAction])
 
 --
 -- /See:/ 'mobileDeviceItemApplications' smart constructor.
@@ -1406,6 +1794,26 @@ mdiaPermission
       . _Default
       . _Coerce
 
+instance FromJSON MobileDeviceItemApplications where
+        parseJSON
+          = withObject "MobileDeviceItemApplications"
+              (\ o ->
+                 MobileDeviceItemApplications <$>
+                   (o .:? "versionCode") <*> (o .:? "versionName") <*>
+                     (o .:? "packageName")
+                     <*> (o .:? "displayName")
+                     <*> (o .:? "permission" .!= mempty))
+
+instance ToJSON MobileDeviceItemApplications where
+        toJSON MobileDeviceItemApplications{..}
+          = object
+              (catMaybes
+                 [("versionCode" .=) <$> _mdiaVersionCode,
+                  ("versionName" .=) <$> _mdiaVersionName,
+                  ("packageName" .=) <$> _mdiaPackageName,
+                  ("displayName" .=) <$> _mdiaDisplayName,
+                  ("permission" .=) <$> _mdiaPermission])
+
 -- | JSON response template for List Mobile Devices operation in Directory
 -- API.
 --
@@ -1459,6 +1867,24 @@ mdsMobiledevices
       (\ s a -> s{_mdsMobiledevices = a})
       . _Default
       . _Coerce
+
+instance FromJSON MobileDevices where
+        parseJSON
+          = withObject "MobileDevices"
+              (\ o ->
+                 MobileDevices <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "admin#directory#mobiledevices")
+                     <*> (o .:? "mobiledevices" .!= mempty))
+
+instance ToJSON MobileDevices where
+        toJSON MobileDevices{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _mdsEtag,
+                  ("nextPageToken" .=) <$> _mdsNextPageToken,
+                  Just ("kind" .= _mdsKind),
+                  ("mobiledevices" .=) <$> _mdsMobiledevices])
 
 -- | Template for a notification resource.
 --
@@ -1543,6 +1969,31 @@ nSendTime :: Lens' Notification (Maybe UTCTime)
 nSendTime
   = lens _nSendTime (\ s a -> s{_nSendTime = a})
 
+instance FromJSON Notification where
+        parseJSON
+          = withObject "Notification"
+              (\ o ->
+                 Notification <$>
+                   (o .:? "subject") <*> (o .:? "etag") <*>
+                     (o .:? "kind" .!= "admin#directory#notification")
+                     <*> (o .:? "body")
+                     <*> (o .:? "fromAddress")
+                     <*> (o .:? "isUnread")
+                     <*> (o .:? "notificationId")
+                     <*> (o .:? "sendTime"))
+
+instance ToJSON Notification where
+        toJSON Notification{..}
+          = object
+              (catMaybes
+                 [("subject" .=) <$> _nSubject,
+                  ("etag" .=) <$> _nEtag, Just ("kind" .= _nKind),
+                  ("body" .=) <$> _nBody,
+                  ("fromAddress" .=) <$> _nFromAddress,
+                  ("isUnread" .=) <$> _nIsUnread,
+                  ("notificationId" .=) <$> _nNotificationId,
+                  ("sendTime" .=) <$> _nSendTime])
+
 -- | Template for notifications list response.
 --
 -- /See:/ 'notifications' smart constructor.
@@ -1604,6 +2055,27 @@ notUnreadNotificationsCount :: Lens' Notifications (Maybe Int32)
 notUnreadNotificationsCount
   = lens _notUnreadNotificationsCount
       (\ s a -> s{_notUnreadNotificationsCount = a})
+
+instance FromJSON Notifications where
+        parseJSON
+          = withObject "Notifications"
+              (\ o ->
+                 Notifications <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "admin#directory#notifications")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "unreadNotificationsCount"))
+
+instance ToJSON Notifications where
+        toJSON Notifications{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _notEtag,
+                  ("nextPageToken" .=) <$> _notNextPageToken,
+                  Just ("kind" .= _notKind),
+                  ("items" .=) <$> _notItems,
+                  ("unreadNotificationsCount" .=) <$>
+                    _notUnreadNotificationsCount])
 
 -- | JSON template for Org Unit resource in Directory API.
 --
@@ -1701,6 +2173,34 @@ oOrgUnitId :: Lens' OrgUnit (Maybe Text)
 oOrgUnitId
   = lens _oOrgUnitId (\ s a -> s{_oOrgUnitId = a})
 
+instance FromJSON OrgUnit where
+        parseJSON
+          = withObject "OrgUnit"
+              (\ o ->
+                 OrgUnit <$>
+                   (o .:? "etag") <*> (o .:? "parentOrgUnitPath") <*>
+                     (o .:? "kind" .!= "admin#directory#orgUnit")
+                     <*> (o .:? "orgUnitPath")
+                     <*> (o .:? "name")
+                     <*> (o .:? "blockInheritance")
+                     <*> (o .:? "parentOrgUnitId")
+                     <*> (o .:? "description")
+                     <*> (o .:? "orgUnitId"))
+
+instance ToJSON OrgUnit where
+        toJSON OrgUnit{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _oEtag,
+                  ("parentOrgUnitPath" .=) <$> _oParentOrgUnitPath,
+                  Just ("kind" .= _oKind),
+                  ("orgUnitPath" .=) <$> _oOrgUnitPath,
+                  ("name" .=) <$> _oName,
+                  ("blockInheritance" .=) <$> _oBlockInheritance,
+                  ("parentOrgUnitId" .=) <$> _oParentOrgUnitId,
+                  ("description" .=) <$> _oDescription,
+                  ("orgUnitId" .=) <$> _oOrgUnitId])
+
 -- | JSON response template for List Organization Units operation in
 -- Directory API.
 --
@@ -1744,6 +2244,22 @@ ouOrganizationUnits
       (\ s a -> s{_ouOrganizationUnits = a})
       . _Default
       . _Coerce
+
+instance FromJSON OrgUnits where
+        parseJSON
+          = withObject "OrgUnits"
+              (\ o ->
+                 OrgUnits <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!= "admin#directory#orgUnits")
+                     <*> (o .:? "organizationUnits" .!= mempty))
+
+instance ToJSON OrgUnits where
+        toJSON OrgUnits{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _ouEtag, Just ("kind" .= _ouKind),
+                  ("organizationUnits" .=) <$> _ouOrganizationUnits])
 
 -- | JSON template for Schema resource in Directory API.
 --
@@ -1805,6 +2321,26 @@ schFields
   = lens _schFields (\ s a -> s{_schFields = a}) .
       _Default
       . _Coerce
+
+instance FromJSON Schema where
+        parseJSON
+          = withObject "Schema"
+              (\ o ->
+                 Schema <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!= "admin#directory#schema")
+                     <*> (o .:? "schemaName")
+                     <*> (o .:? "schemaId")
+                     <*> (o .:? "fields" .!= mempty))
+
+instance ToJSON Schema where
+        toJSON Schema{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _schEtag, Just ("kind" .= _schKind),
+                  ("schemaName" .=) <$> _schSchemaName,
+                  ("schemaId" .=) <$> _schSchemaId,
+                  ("fields" .=) <$> _schFields])
 
 -- | JSON template for FieldSpec resource for Schemas in Directory API.
 --
@@ -1906,6 +2442,35 @@ sfsMultiValued
   = lens _sfsMultiValued
       (\ s a -> s{_sfsMultiValued = a})
 
+instance FromJSON SchemaFieldSpec where
+        parseJSON
+          = withObject "SchemaFieldSpec"
+              (\ o ->
+                 SchemaFieldSpec <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!= "admin#directory#schema#fieldspec")
+                     <*> (o .:? "numericIndexingSpec")
+                     <*> (o .:? "readAccessType" .!= "ALL_DOMAIN_USERS")
+                     <*> (o .:? "fieldId")
+                     <*> (o .:? "indexed" .!= True)
+                     <*> (o .:? "fieldType")
+                     <*> (o .:? "fieldName")
+                     <*> (o .:? "multiValued"))
+
+instance ToJSON SchemaFieldSpec where
+        toJSON SchemaFieldSpec{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _sfsEtag, Just ("kind" .= _sfsKind),
+                  ("numericIndexingSpec" .=) <$>
+                    _sfsNumericIndexingSpec,
+                  Just ("readAccessType" .= _sfsReadAccessType),
+                  ("fieldId" .=) <$> _sfsFieldId,
+                  Just ("indexed" .= _sfsIndexed),
+                  ("fieldType" .=) <$> _sfsFieldType,
+                  ("fieldName" .=) <$> _sfsFieldName,
+                  ("multiValued" .=) <$> _sfsMultiValued])
+
 -- | Indexing spec for a numeric field. By default, only exact match queries
 -- will be supported for numeric fields. Setting the numericIndexingSpec
 -- allows range queries to be supported.
@@ -1946,6 +2511,22 @@ sfsnisMinValue :: Lens' SchemaFieldSpecNumericIndexingSpec (Maybe Double)
 sfsnisMinValue
   = lens _sfsnisMinValue
       (\ s a -> s{_sfsnisMinValue = a})
+
+instance FromJSON SchemaFieldSpecNumericIndexingSpec
+         where
+        parseJSON
+          = withObject "SchemaFieldSpecNumericIndexingSpec"
+              (\ o ->
+                 SchemaFieldSpecNumericIndexingSpec <$>
+                   (o .:? "maxValue") <*> (o .:? "minValue"))
+
+instance ToJSON SchemaFieldSpecNumericIndexingSpec
+         where
+        toJSON SchemaFieldSpecNumericIndexingSpec{..}
+          = object
+              (catMaybes
+                 [("maxValue" .=) <$> _sfsnisMaxValue,
+                  ("minValue" .=) <$> _sfsnisMinValue])
 
 -- | JSON response template for List Schema operation in Directory API.
 --
@@ -1988,6 +2569,22 @@ sSchemas
 -- | Kind of resource this is.
 sKind :: Lens' Schemas Text
 sKind = lens _sKind (\ s a -> s{_sKind = a})
+
+instance FromJSON Schemas where
+        parseJSON
+          = withObject "Schemas"
+              (\ o ->
+                 Schemas <$>
+                   (o .:? "etag") <*> (o .:? "schemas" .!= mempty) <*>
+                     (o .:? "kind" .!= "admin#directory#schemas"))
+
+instance ToJSON Schemas where
+        toJSON Schemas{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _sEtag,
+                  ("schemas" .=) <$> _sSchemas,
+                  Just ("kind" .= _sKind)])
 
 -- | JSON template for token resource in Directory API.
 --
@@ -2079,6 +2676,32 @@ tokUserKey :: Lens' Token (Maybe Text)
 tokUserKey
   = lens _tokUserKey (\ s a -> s{_tokUserKey = a})
 
+instance FromJSON Token where
+        parseJSON
+          = withObject "Token"
+              (\ o ->
+                 Token <$>
+                   (o .:? "clientId") <*> (o .:? "etag") <*>
+                     (o .:? "displayText")
+                     <*> (o .:? "kind" .!= "admin#directory#token")
+                     <*> (o .:? "scopes" .!= mempty)
+                     <*> (o .:? "nativeApp")
+                     <*> (o .:? "anonymous")
+                     <*> (o .:? "userKey"))
+
+instance ToJSON Token where
+        toJSON Token{..}
+          = object
+              (catMaybes
+                 [("clientId" .=) <$> _tokClientId,
+                  ("etag" .=) <$> _tokEtag,
+                  ("displayText" .=) <$> _tokDisplayText,
+                  Just ("kind" .= _tokKind),
+                  ("scopes" .=) <$> _tokScopes,
+                  ("nativeApp" .=) <$> _tokNativeApp,
+                  ("anonymous" .=) <$> _tokAnonymous,
+                  ("userKey" .=) <$> _tokUserKey])
+
 -- | JSON response template for List tokens operation in Directory API.
 --
 -- /See:/ 'tokens' smart constructor.
@@ -2119,6 +2742,22 @@ tItems :: Lens' Tokens [Maybe Token]
 tItems
   = lens _tItems (\ s a -> s{_tItems = a}) . _Default .
       _Coerce
+
+instance FromJSON Tokens where
+        parseJSON
+          = withObject "Tokens"
+              (\ o ->
+                 Tokens <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!= "admin#directory#tokenList")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON Tokens where
+        toJSON Tokens{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _tEtag, Just ("kind" .= _tKind),
+                  ("items" .=) <$> _tItems])
 
 -- | JSON template for User object in Directory API.
 --
@@ -2458,6 +3097,86 @@ useSuspensionReason
   = lens _useSuspensionReason
       (\ s a -> s{_useSuspensionReason = a})
 
+instance FromJSON User where
+        parseJSON
+          = withObject "User"
+              (\ o ->
+                 User <$>
+                   (o .:? "creationTime") <*> (o .:? "lastLoginTime")
+                     <*> (o .:? "thumbnailPhotoEtag")
+                     <*> (o .:? "etag")
+                     <*> (o .:? "ipWhitelisted")
+                     <*> (o .:? "relations")
+                     <*> (o .:? "hashFunction")
+                     <*> (o .:? "kind" .!= "admin#directory#user")
+                     <*> (o .:? "changePasswordAtNextLogin")
+                     <*> (o .:? "websites")
+                     <*> (o .:? "addresses")
+                     <*> (o .:? "aliases" .!= mempty)
+                     <*> (o .:? "thumbnailPhotoUrl")
+                     <*> (o .:? "externalIds")
+                     <*> (o .:? "suspended")
+                     <*> (o .:? "agreedToTerms")
+                     <*> (o .:? "deletionTime")
+                     <*> (o .:? "nonEditableAliases" .!= mempty)
+                     <*> (o .:? "orgUnitPath")
+                     <*> (o .:? "customerId")
+                     <*> (o .:? "includeInGlobalAddressList")
+                     <*> (o .:? "phones")
+                     <*> (o .:? "name")
+                     <*> (o .:? "password")
+                     <*> (o .:? "emails")
+                     <*> (o .:? "ims")
+                     <*> (o .:? "isAdmin")
+                     <*> (o .:? "id")
+                     <*> (o .:? "organizations")
+                     <*> (o .:? "primaryEmail")
+                     <*> (o .:? "notes")
+                     <*> (o .:? "isDelegatedAdmin")
+                     <*> (o .:? "isMailboxSetup")
+                     <*> (o .:? "customSchemas")
+                     <*> (o .:? "suspensionReason"))
+
+instance ToJSON User where
+        toJSON User{..}
+          = object
+              (catMaybes
+                 [("creationTime" .=) <$> _useCreationTime,
+                  ("lastLoginTime" .=) <$> _useLastLoginTime,
+                  ("thumbnailPhotoEtag" .=) <$> _useThumbnailPhotoEtag,
+                  ("etag" .=) <$> _useEtag,
+                  ("ipWhitelisted" .=) <$> _useIpWhitelisted,
+                  ("relations" .=) <$> _useRelations,
+                  ("hashFunction" .=) <$> _useHashFunction,
+                  Just ("kind" .= _useKind),
+                  ("changePasswordAtNextLogin" .=) <$>
+                    _useChangePasswordAtNextLogin,
+                  ("websites" .=) <$> _useWebsites,
+                  ("addresses" .=) <$> _useAddresses,
+                  ("aliases" .=) <$> _useAliases,
+                  ("thumbnailPhotoUrl" .=) <$> _useThumbnailPhotoUrl,
+                  ("externalIds" .=) <$> _useExternalIds,
+                  ("suspended" .=) <$> _useSuspended,
+                  ("agreedToTerms" .=) <$> _useAgreedToTerms,
+                  ("deletionTime" .=) <$> _useDeletionTime,
+                  ("nonEditableAliases" .=) <$> _useNonEditableAliases,
+                  ("orgUnitPath" .=) <$> _useOrgUnitPath,
+                  ("customerId" .=) <$> _useCustomerId,
+                  ("includeInGlobalAddressList" .=) <$>
+                    _useIncludeInGlobalAddressList,
+                  ("phones" .=) <$> _usePhones,
+                  ("name" .=) <$> _useName,
+                  ("password" .=) <$> _usePassword,
+                  ("emails" .=) <$> _useEmails, ("ims" .=) <$> _useIms,
+                  ("isAdmin" .=) <$> _useIsAdmin, ("id" .=) <$> _useId,
+                  ("organizations" .=) <$> _useOrganizations,
+                  ("primaryEmail" .=) <$> _usePrimaryEmail,
+                  ("notes" .=) <$> _useNotes,
+                  ("isDelegatedAdmin" .=) <$> _useIsDelegatedAdmin,
+                  ("isMailboxSetup" .=) <$> _useIsMailboxSetup,
+                  ("customSchemas" .=) <$> _useCustomSchemas,
+                  ("suspensionReason" .=) <$> _useSuspensionReason])
+
 -- | JSON template for About (notes) of a user in Directory API.
 --
 -- /See:/ 'userAbout' smart constructor.
@@ -2492,6 +3211,20 @@ uaContentType :: Lens' UserAbout (Maybe Text)
 uaContentType
   = lens _uaContentType
       (\ s a -> s{_uaContentType = a})
+
+instance FromJSON UserAbout where
+        parseJSON
+          = withObject "UserAbout"
+              (\ o ->
+                 UserAbout <$>
+                   (o .:? "value") <*> (o .:? "contentType"))
+
+instance ToJSON UserAbout where
+        toJSON UserAbout{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _uaValue,
+                  ("contentType" .=) <$> _uaContentType])
 
 -- | JSON template for address.
 --
@@ -2633,6 +3366,41 @@ uaSourceIsStructured
   = lens _uaSourceIsStructured
       (\ s a -> s{_uaSourceIsStructured = a})
 
+instance FromJSON UserAddress where
+        parseJSON
+          = withObject "UserAddress"
+              (\ o ->
+                 UserAddress <$>
+                   (o .:? "streetAddress") <*> (o .:? "poBox") <*>
+                     (o .:? "country")
+                     <*> (o .:? "postalCode")
+                     <*> (o .:? "formatted")
+                     <*> (o .:? "extendedAddress")
+                     <*> (o .:? "locality")
+                     <*> (o .:? "primary")
+                     <*> (o .:? "countryCode")
+                     <*> (o .:? "region")
+                     <*> (o .:? "type")
+                     <*> (o .:? "customType")
+                     <*> (o .:? "sourceIsStructured"))
+
+instance ToJSON UserAddress where
+        toJSON UserAddress{..}
+          = object
+              (catMaybes
+                 [("streetAddress" .=) <$> _uaStreetAddress,
+                  ("poBox" .=) <$> _uaPoBox,
+                  ("country" .=) <$> _uaCountry,
+                  ("postalCode" .=) <$> _uaPostalCode,
+                  ("formatted" .=) <$> _uaFormatted,
+                  ("extendedAddress" .=) <$> _uaExtendedAddress,
+                  ("locality" .=) <$> _uaLocality,
+                  ("primary" .=) <$> _uaPrimary,
+                  ("countryCode" .=) <$> _uaCountryCode,
+                  ("region" .=) <$> _uaRegion, ("type" .=) <$> _uaType,
+                  ("customType" .=) <$> _uaCustomType,
+                  ("sourceIsStructured" .=) <$> _uaSourceIsStructured])
+
 -- | JSON template for a set of custom properties (i.e. all fields in a
 -- particular schema)
 --
@@ -2647,6 +3415,14 @@ userCustomProperties
     :: UserCustomProperties
 userCustomProperties = UserCustomProperties
 
+instance FromJSON UserCustomProperties where
+        parseJSON
+          = withObject "UserCustomProperties"
+              (\ o -> pure UserCustomProperties)
+
+instance ToJSON UserCustomProperties where
+        toJSON = const (Object mempty)
+
 -- | Custom fields of the user.
 --
 -- /See:/ 'userCustomSchemas' smart constructor.
@@ -2659,6 +3435,14 @@ data UserCustomSchemas =
 userCustomSchemas
     :: UserCustomSchemas
 userCustomSchemas = UserCustomSchemas
+
+instance FromJSON UserCustomSchemas where
+        parseJSON
+          = withObject "UserCustomSchemas"
+              (\ o -> pure UserCustomSchemas)
+
+instance ToJSON UserCustomSchemas where
+        toJSON = const (Object mempty)
 
 -- | JSON template for an email.
 --
@@ -2715,6 +3499,24 @@ ueCustomType :: Lens' UserEmail (Maybe Text)
 ueCustomType
   = lens _ueCustomType (\ s a -> s{_ueCustomType = a})
 
+instance FromJSON UserEmail where
+        parseJSON
+          = withObject "UserEmail"
+              (\ o ->
+                 UserEmail <$>
+                   (o .:? "address") <*> (o .:? "primary") <*>
+                     (o .:? "type")
+                     <*> (o .:? "customType"))
+
+instance ToJSON UserEmail where
+        toJSON UserEmail{..}
+          = object
+              (catMaybes
+                 [("address" .=) <$> _ueAddress,
+                  ("primary" .=) <$> _uePrimary,
+                  ("type" .=) <$> _ueType,
+                  ("customType" .=) <$> _ueCustomType])
+
 -- | JSON template for an externalId entry.
 --
 -- /See:/ 'userExternalId' smart constructor.
@@ -2755,6 +3557,22 @@ ueiCustomType :: Lens' UserExternalId (Maybe Text)
 ueiCustomType
   = lens _ueiCustomType
       (\ s a -> s{_ueiCustomType = a})
+
+instance FromJSON UserExternalId where
+        parseJSON
+          = withObject "UserExternalId"
+              (\ o ->
+                 UserExternalId <$>
+                   (o .:? "value") <*> (o .:? "type") <*>
+                     (o .:? "customType"))
+
+instance ToJSON UserExternalId where
+        toJSON UserExternalId{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _ueiValue,
+                  ("type" .=) <$> _ueiType,
+                  ("customType" .=) <$> _ueiCustomType])
 
 -- | JSON template for instant messenger of an user.
 --
@@ -2831,6 +3649,28 @@ uiCustomType :: Lens' UserIm (Maybe Text)
 uiCustomType
   = lens _uiCustomType (\ s a -> s{_uiCustomType = a})
 
+instance FromJSON UserIm where
+        parseJSON
+          = withObject "UserIm"
+              (\ o ->
+                 UserIm <$>
+                   (o .:? "im") <*> (o .:? "protocol") <*>
+                     (o .:? "primary")
+                     <*> (o .:? "customProtocol")
+                     <*> (o .:? "type")
+                     <*> (o .:? "customType"))
+
+instance ToJSON UserIm where
+        toJSON UserIm{..}
+          = object
+              (catMaybes
+                 [("im" .=) <$> _uiIm,
+                  ("protocol" .=) <$> _uiProtocol,
+                  ("primary" .=) <$> _uiPrimary,
+                  ("customProtocol" .=) <$> _uiCustomProtocol,
+                  ("type" .=) <$> _uiType,
+                  ("customType" .=) <$> _uiCustomType])
+
 -- | JSON request template for setting\/revoking admin status of a user in
 -- Directory API.
 --
@@ -2855,6 +3695,15 @@ userMakeAdmin =
 umaStatus :: Lens' UserMakeAdmin (Maybe Bool)
 umaStatus
   = lens _umaStatus (\ s a -> s{_umaStatus = a})
+
+instance FromJSON UserMakeAdmin where
+        parseJSON
+          = withObject "UserMakeAdmin"
+              (\ o -> UserMakeAdmin <$> (o .:? "status"))
+
+instance ToJSON UserMakeAdmin where
+        toJSON UserMakeAdmin{..}
+          = object (catMaybes [("status" .=) <$> _umaStatus])
 
 -- | JSON template for name of a user in Directory API.
 --
@@ -2897,6 +3746,22 @@ unFullName
 unFamilyName :: Lens' UserName (Maybe Text)
 unFamilyName
   = lens _unFamilyName (\ s a -> s{_unFamilyName = a})
+
+instance FromJSON UserName where
+        parseJSON
+          = withObject "UserName"
+              (\ o ->
+                 UserName <$>
+                   (o .:? "givenName") <*> (o .:? "fullName") <*>
+                     (o .:? "familyName"))
+
+instance ToJSON UserName where
+        toJSON UserName{..}
+          = object
+              (catMaybes
+                 [("givenName" .=) <$> _unGivenName,
+                  ("fullName" .=) <$> _unFullName,
+                  ("familyName" .=) <$> _unFamilyName])
 
 -- | JSON template for an organization entry.
 --
@@ -3012,6 +3877,37 @@ uoDescription
   = lens _uoDescription
       (\ s a -> s{_uoDescription = a})
 
+instance FromJSON UserOrganization where
+        parseJSON
+          = withObject "UserOrganization"
+              (\ o ->
+                 UserOrganization <$>
+                   (o .:? "department") <*> (o .:? "location") <*>
+                     (o .:? "costCenter")
+                     <*> (o .:? "domain")
+                     <*> (o .:? "symbol")
+                     <*> (o .:? "primary")
+                     <*> (o .:? "name")
+                     <*> (o .:? "title")
+                     <*> (o .:? "type")
+                     <*> (o .:? "customType")
+                     <*> (o .:? "description"))
+
+instance ToJSON UserOrganization where
+        toJSON UserOrganization{..}
+          = object
+              (catMaybes
+                 [("department" .=) <$> _uoDepartment,
+                  ("location" .=) <$> _uoLocation,
+                  ("costCenter" .=) <$> _uoCostCenter,
+                  ("domain" .=) <$> _uoDomain,
+                  ("symbol" .=) <$> _uoSymbol,
+                  ("primary" .=) <$> _uoPrimary,
+                  ("name" .=) <$> _uoName, ("title" .=) <$> _uoTitle,
+                  ("type" .=) <$> _uoType,
+                  ("customType" .=) <$> _uoCustomType,
+                  ("description" .=) <$> _uoDescription])
+
 -- | JSON template for a phone entry.
 --
 -- /See:/ 'userPhone' smart constructor.
@@ -3064,6 +3960,24 @@ upType = lens _upType (\ s a -> s{_upType = a})
 upCustomType :: Lens' UserPhone (Maybe Text)
 upCustomType
   = lens _upCustomType (\ s a -> s{_upCustomType = a})
+
+instance FromJSON UserPhone where
+        parseJSON
+          = withObject "UserPhone"
+              (\ o ->
+                 UserPhone <$>
+                   (o .:? "value") <*> (o .:? "primary") <*>
+                     (o .:? "type")
+                     <*> (o .:? "customType"))
+
+instance ToJSON UserPhone where
+        toJSON UserPhone{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _upValue,
+                  ("primary" .=) <$> _upPrimary,
+                  ("type" .=) <$> _upType,
+                  ("customType" .=) <$> _upCustomType])
 
 -- | JSON template for Photo object in Directory API.
 --
@@ -3148,6 +4062,29 @@ upPrimaryEmail
   = lens _upPrimaryEmail
       (\ s a -> s{_upPrimaryEmail = a})
 
+instance FromJSON UserPhoto where
+        parseJSON
+          = withObject "UserPhoto"
+              (\ o ->
+                 UserPhoto <$>
+                   (o .:? "photoData") <*> (o .:? "etag") <*>
+                     (o .:? "height")
+                     <*> (o .:? "kind" .!= "admin#directory#user#photo")
+                     <*> (o .:? "width")
+                     <*> (o .:? "mimeType")
+                     <*> (o .:? "id")
+                     <*> (o .:? "primaryEmail"))
+
+instance ToJSON UserPhoto where
+        toJSON UserPhoto{..}
+          = object
+              (catMaybes
+                 [("photoData" .=) <$> _upPhotoData,
+                  ("etag" .=) <$> _upEtag, ("height" .=) <$> _upHeight,
+                  Just ("kind" .= _upKind), ("width" .=) <$> _upWidth,
+                  ("mimeType" .=) <$> _upMimeType, ("id" .=) <$> _upId,
+                  ("primaryEmail" .=) <$> _upPrimaryEmail])
+
 -- | JSON template for a relation entry.
 --
 -- /See:/ 'userRelation' smart constructor.
@@ -3189,6 +4126,21 @@ urCustomType :: Lens' UserRelation (Maybe Text)
 urCustomType
   = lens _urCustomType (\ s a -> s{_urCustomType = a})
 
+instance FromJSON UserRelation where
+        parseJSON
+          = withObject "UserRelation"
+              (\ o ->
+                 UserRelation <$>
+                   (o .:? "value") <*> (o .:? "type") <*>
+                     (o .:? "customType"))
+
+instance ToJSON UserRelation where
+        toJSON UserRelation{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _urValue, ("type" .=) <$> _urType,
+                  ("customType" .=) <$> _urCustomType])
+
 -- | JSON request template to undelete a user in Directory API.
 --
 -- /See:/ 'userUndelete' smart constructor.
@@ -3213,6 +4165,16 @@ uuOrgUnitPath :: Lens' UserUndelete (Maybe Text)
 uuOrgUnitPath
   = lens _uuOrgUnitPath
       (\ s a -> s{_uuOrgUnitPath = a})
+
+instance FromJSON UserUndelete where
+        parseJSON
+          = withObject "UserUndelete"
+              (\ o -> UserUndelete <$> (o .:? "orgUnitPath"))
+
+instance ToJSON UserUndelete where
+        toJSON UserUndelete{..}
+          = object
+              (catMaybes [("orgUnitPath" .=) <$> _uuOrgUnitPath])
 
 -- | JSON template for a website entry.
 --
@@ -3266,6 +4228,24 @@ uwType = lens _uwType (\ s a -> s{_uwType = a})
 uwCustomType :: Lens' UserWebsite (Maybe Text)
 uwCustomType
   = lens _uwCustomType (\ s a -> s{_uwCustomType = a})
+
+instance FromJSON UserWebsite where
+        parseJSON
+          = withObject "UserWebsite"
+              (\ o ->
+                 UserWebsite <$>
+                   (o .:? "value") <*> (o .:? "primary") <*>
+                     (o .:? "type")
+                     <*> (o .:? "customType"))
+
+instance ToJSON UserWebsite where
+        toJSON UserWebsite{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _uwValue,
+                  ("primary" .=) <$> _uwPrimary,
+                  ("type" .=) <$> _uwType,
+                  ("customType" .=) <$> _uwCustomType])
 
 -- | JSON response template for List Users operation in Apps Directory API.
 --
@@ -3328,6 +4308,25 @@ uTriggerEvent
   = lens _uTriggerEvent
       (\ s a -> s{_uTriggerEvent = a})
 
+instance FromJSON Users where
+        parseJSON
+          = withObject "Users"
+              (\ o ->
+                 Users <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "users" .!= mempty)
+                     <*> (o .:? "kind" .!= "admin#directory#users")
+                     <*> (o .:? "trigger_event"))
+
+instance ToJSON Users where
+        toJSON Users{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _uEtag,
+                  ("nextPageToken" .=) <$> _uNextPageToken,
+                  ("users" .=) <$> _uUsers, Just ("kind" .= _uKind),
+                  ("trigger_event" .=) <$> _uTriggerEvent])
+
 -- | JSON template for verification codes in Directory API.
 --
 -- /See:/ 'verificationCode' smart constructor.
@@ -3379,6 +4378,23 @@ vKind = lens _vKind (\ s a -> s{_vKind = a})
 vUserId :: Lens' VerificationCode (Maybe Text)
 vUserId = lens _vUserId (\ s a -> s{_vUserId = a})
 
+instance FromJSON VerificationCode where
+        parseJSON
+          = withObject "VerificationCode"
+              (\ o ->
+                 VerificationCode <$>
+                   (o .:? "verificationCode") <*> (o .:? "etag") <*>
+                     (o .:? "kind" .!= "admin#directory#verificationCode")
+                     <*> (o .:? "userId"))
+
+instance ToJSON VerificationCode where
+        toJSON VerificationCode{..}
+          = object
+              (catMaybes
+                 [("verificationCode" .=) <$> _vVerificationCode,
+                  ("etag" .=) <$> _vEtag, Just ("kind" .= _vKind),
+                  ("userId" .=) <$> _vUserId])
+
 -- | JSON response template for List verification codes operation in
 -- Directory API.
 --
@@ -3421,3 +4437,20 @@ vcItems :: Lens' VerificationCodes [Maybe VerificationCode]
 vcItems
   = lens _vcItems (\ s a -> s{_vcItems = a}) . _Default
       . _Coerce
+
+instance FromJSON VerificationCodes where
+        parseJSON
+          = withObject "VerificationCodes"
+              (\ o ->
+                 VerificationCodes <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!=
+                        "admin#directory#verificationCodesList")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON VerificationCodes where
+        toJSON VerificationCodes{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _vcEtag, Just ("kind" .= _vcKind),
+                  ("items" .=) <$> _vcItems])

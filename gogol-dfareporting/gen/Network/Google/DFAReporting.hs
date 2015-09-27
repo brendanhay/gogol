@@ -2584,42 +2584,49 @@ type InventoryItemsAPI =
 
 -- | Retrieves a list of inventory items, possibly filtered.
 type InventoryItemsList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "projects"
-       :> Capture "projectId" Int64
-       :> "inventoryItems"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "ids" Int64
-       :> QueryParam "sortOrder" Text
-       :> QueryParam "inPlan" Bool
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "sortField" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "orderId" Int64
-       :> QueryParam "siteId" Int64
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "projects" :>
+               Capture "projectId" Int64 :>
+                 "inventoryItems" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "ids" Int64 :>
+                           QueryParam "sortOrder" Text :>
+                             QueryParam "inPlan" Bool :>
+                               QueryParam "key" Text :>
+                                 QueryParam "pageToken" Text :>
+                                   QueryParam "sortField" Text :>
+                                     QueryParam "oauth_token" Text :>
+                                       QueryParam "orderId" Int64 :>
+                                         QueryParam "siteId" Int64 :>
+                                           QueryParam "maxResults" Int32 :>
+                                             QueryParam "fields" Text :>
+                                               QueryParam "alt" Text :>
+                                                 Get '[JSON]
+                                                   InventoryItemsListResponse
 
 -- | Gets one inventory item by ID.
 type InventoryItemsGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "projects"
-       :> Capture "projectId" Int64
-       :> "inventoryItems"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "projects" :>
+               Capture "projectId" Int64 :>
+                 "inventoryItems" :>
+                   Capture "id" Int64 :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Get '[JSON] InventoryItem
 
 type PlacementStrategiesAPI =
      PlacementStrategiesInsert :<|>
@@ -2631,91 +2638,109 @@ type PlacementStrategiesAPI =
 
 -- | Inserts a new placement strategy.
 type PlacementStrategiesInsert =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "placementStrategies"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "placementStrategies" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Post '[JSON] PlacementStrategy
 
 -- | Retrieves a list of placement strategies, possibly filtered.
 type PlacementStrategiesList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "placementStrategies"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "searchString" Text
-       :> QueryParam "ids" Int64
-       :> QueryParam "sortOrder" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "sortField" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "placementStrategies" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "searchString" Text :>
+                       QueryParam "ids" Int64 :>
+                         QueryParam "sortOrder" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "sortField" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "maxResults" Int32 :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Text :>
+                                         Get '[JSON]
+                                           PlacementStrategiesListResponse
 
 -- | Updates an existing placement strategy. This method supports patch
 -- semantics.
 type PlacementStrategiesPatch =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "placementStrategies"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "id" Int64
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "placementStrategies" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "id" Int64 :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Patch '[JSON] PlacementStrategy
 
 -- | Gets one placement strategy by ID.
 type PlacementStrategiesGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "placementStrategies"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "placementStrategies" :>
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Get '[JSON] PlacementStrategy
 
 -- | Deletes an existing placement strategy.
 type PlacementStrategiesDelete =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "placementStrategies"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "placementStrategies" :>
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Updates an existing placement strategy.
 type PlacementStrategiesUpdate =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "placementStrategies"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "placementStrategies" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Put '[JSON] PlacementStrategy
 
 type CampaignCreativeAssociationsAPI =
      CampaignCreativeAssociationsInsert :<|>
@@ -2725,37 +2750,44 @@ type CampaignCreativeAssociationsAPI =
 -- default ad with dimensions matching the creative in the campaign if such
 -- a default ad does not exist already.
 type CampaignCreativeAssociationsInsert =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "campaigns"
-       :> Capture "campaignId" Int64
-       :> "campaignCreativeAssociations"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "campaigns" :>
+               Capture "campaignId" Int64 :>
+                 "campaignCreativeAssociations" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :>
+                                 Post '[JSON] CampaignCreativeAssociation
 
 -- | Retrieves the list of creative IDs associated with the specified
 -- campaign.
 type CampaignCreativeAssociationsList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "campaigns"
-       :> Capture "campaignId" Int64
-       :> "campaignCreativeAssociations"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "sortOrder" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "campaigns" :>
+               Capture "campaignId" Int64 :>
+                 "campaignCreativeAssociations" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "sortOrder" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "maxResults" Int32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :>
+                                       Get '[JSON]
+                                         CampaignCreativeAssociationsListResponse
 
 type CreativeGroupsAPI =
      CreativeGroupsInsert :<|> CreativeGroupsList :<|>
@@ -2765,109 +2797,127 @@ type CreativeGroupsAPI =
 
 -- | Inserts a new creative group.
 type CreativeGroupsInsert =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "creativeGroups"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "creativeGroups" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] CreativeGroup
 
 -- | Retrieves a list of creative groups, possibly filtered.
 type CreativeGroupsList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "creativeGroups"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "searchString" Text
-       :> QueryParam "ids" Int64
-       :> QueryParam "sortOrder" Text
-       :> QueryParam "groupNumber" Int32
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "sortField" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "advertiserIds" Int64
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "creativeGroups" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "searchString" Text :>
+                       QueryParam "ids" Int64 :>
+                         QueryParam "sortOrder" Text :>
+                           QueryParam "groupNumber" Int32 :>
+                             QueryParam "key" Text :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "sortField" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "advertiserIds" Int64 :>
+                                       QueryParam "maxResults" Int32 :>
+                                         QueryParam "fields" Text :>
+                                           QueryParam "alt" Text :>
+                                             Get '[JSON]
+                                               CreativeGroupsListResponse
 
 -- | Updates an existing creative group. This method supports patch
 -- semantics.
 type CreativeGroupsPatch =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "creativeGroups"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "id" Int64
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "creativeGroups" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "id" Int64 :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Patch '[JSON] CreativeGroup
 
 -- | Gets one creative group by ID.
 type CreativeGroupsGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "creativeGroups"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "creativeGroups" :>
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] CreativeGroup
 
 -- | Updates an existing creative group.
 type CreativeGroupsUpdate =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "creativeGroups"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "creativeGroups" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Put '[JSON] CreativeGroup
 
 type MobileCarriersAPI =
      MobileCarriersList :<|> MobileCarriersGet
 
 -- | Retrieves a list of mobile carriers.
 type MobileCarriersList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "mobileCarriers"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "mobileCarriers" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Get '[JSON] MobileCarriersListResponse
 
 -- | Gets one mobile carrier by ID.
 type MobileCarriersGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "mobileCarriers"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "mobileCarriers" :>
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] MobileCarrier
 
 type LandingPagesAPI =
      LandingPagesInsert :<|> LandingPagesList :<|>
@@ -2878,97 +2928,112 @@ type LandingPagesAPI =
 
 -- | Inserts a new landing page for the specified campaign.
 type LandingPagesInsert =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "campaigns"
-       :> Capture "campaignId" Int64
-       :> "landingPages"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "campaigns" :>
+               Capture "campaignId" Int64 :>
+                 "landingPages" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Post '[JSON] LandingPage
 
 -- | Retrieves the list of landing pages for the specified campaign.
 type LandingPagesList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "campaigns"
-       :> Capture "campaignId" Int64
-       :> "landingPages"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "campaigns" :>
+               Capture "campaignId" Int64 :>
+                 "landingPages" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :>
+                                 Get '[JSON] LandingPagesListResponse
 
 -- | Updates an existing campaign landing page. This method supports patch
 -- semantics.
 type LandingPagesPatch =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "campaigns"
-       :> Capture "campaignId" Int64
-       :> "landingPages"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "id" Int64
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "campaigns" :>
+               Capture "campaignId" Int64 :>
+                 "landingPages" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "id" Int64 :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Patch '[JSON] LandingPage
 
 -- | Gets one campaign landing page by ID.
 type LandingPagesGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "campaigns"
-       :> Capture "campaignId" Int64
-       :> "landingPages"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "campaigns" :>
+               Capture "campaignId" Int64 :>
+                 "landingPages" :>
+                   Capture "id" Int64 :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Get '[JSON] LandingPage
 
 -- | Deletes an existing campaign landing page.
 type LandingPagesDelete =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "campaigns"
-       :> Capture "campaignId" Int64
-       :> "landingPages"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "campaigns" :>
+               Capture "campaignId" Int64 :>
+                 "landingPages" :>
+                   Capture "id" Int64 :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Updates an existing campaign landing page.
 type LandingPagesUpdate =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "campaigns"
-       :> Capture "campaignId" Int64
-       :> "landingPages"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "campaigns" :>
+               Capture "campaignId" Int64 :>
+                 "landingPages" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Put '[JSON] LandingPage
 
 type RemarketingListSharesAPI =
      RemarketingListSharesPatch :<|>
@@ -2978,61 +3043,73 @@ type RemarketingListSharesAPI =
 -- | Updates an existing remarketing list share. This method supports patch
 -- semantics.
 type RemarketingListSharesPatch =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "remarketingListShares"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "remarketingListId" Int64
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "remarketingListShares" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "remarketingListId" Int64 :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Patch '[JSON] RemarketingListShare
 
 -- | Gets one remarketing list share by remarketing list ID.
 type RemarketingListSharesGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "remarketingListShares"
-       :> Capture "remarketingListId" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "remarketingListShares" :>
+               Capture "remarketingListId" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Get '[JSON] RemarketingListShare
 
 -- | Updates an existing remarketing list share.
 type RemarketingListSharesUpdate =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "remarketingListShares"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "remarketingListShares" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Put '[JSON] RemarketingListShare
 
 type AccountActiveAdSummariesAPI =
      AccountActiveAdSummariesGet
 
 -- | Gets the account\'s active ad summary by account ID.
 type AccountActiveAdSummariesGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "accountActiveAdSummaries"
-       :> Capture "summaryAccountId" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "accountActiveAdSummaries" :>
+               Capture "summaryAccountId" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Get '[JSON] AccountActiveAdSummary
 
 type UserRolePermissionGroupsAPI =
      UserRolePermissionGroupsList :<|>
@@ -3040,30 +3117,36 @@ type UserRolePermissionGroupsAPI =
 
 -- | Gets a list of all supported user role permission groups.
 type UserRolePermissionGroupsList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "userRolePermissionGroups"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "userRolePermissionGroups" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Get '[JSON] UserRolePermissionGroupsListResponse
 
 -- | Gets one user role permission group by ID.
 type UserRolePermissionGroupsGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "userRolePermissionGroups"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "userRolePermissionGroups" :>
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Get '[JSON] UserRolePermissionGroup
 
 type RemarketingListsAPI =
      RemarketingListsInsert :<|> RemarketingListsList :<|>
@@ -3073,79 +3156,93 @@ type RemarketingListsAPI =
 
 -- | Inserts a new remarketing list.
 type RemarketingListsInsert =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "remarketingLists"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "remarketingLists" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] RemarketingList
 
 -- | Retrieves a list of remarketing lists, possibly filtered.
 type RemarketingListsList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "remarketingLists"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "floodlightActivityId" Int64
-       :> QueryParam "advertiserId" Int64
-       :> QueryParam "sortOrder" Text
-       :> QueryParam "active" Bool
-       :> QueryParam "key" Text
-       :> QueryParam "name" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "sortField" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "remarketingLists" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "floodlightActivityId" Int64 :>
+                       QueryParam "advertiserId" Int64 :>
+                         QueryParam "sortOrder" Text :>
+                           QueryParam "active" Bool :>
+                             QueryParam "key" Text :>
+                               QueryParam "name" Text :>
+                                 QueryParam "pageToken" Text :>
+                                   QueryParam "sortField" Text :>
+                                     QueryParam "oauth_token" Text :>
+                                       QueryParam "maxResults" Int32 :>
+                                         QueryParam "fields" Text :>
+                                           QueryParam "alt" Text :>
+                                             Get '[JSON]
+                                               RemarketingListsListResponse
 
 -- | Updates an existing remarketing list. This method supports patch
 -- semantics.
 type RemarketingListsPatch =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "remarketingLists"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "id" Int64
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "remarketingLists" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "id" Int64 :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Patch '[JSON] RemarketingList
 
 -- | Gets one remarketing list by ID.
 type RemarketingListsGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "remarketingLists"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "remarketingLists" :>
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Get '[JSON] RemarketingList
 
 -- | Updates an existing remarketing list.
 type RemarketingListsUpdate =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "remarketingLists"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "remarketingLists" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Put '[JSON] RemarketingList
 
 type AccountsAPI =
      AccountsList :<|> AccountsPatch :<|> AccountsGet :<|>
@@ -3153,64 +3250,73 @@ type AccountsAPI =
 
 -- | Retrieves the list of accounts, possibly filtered.
 type AccountsList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "accounts"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "searchString" Text
-       :> QueryParam "ids" Int64
-       :> QueryParam "sortOrder" Text
-       :> QueryParam "active" Bool
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "sortField" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "accounts" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "searchString" Text :>
+                       QueryParam "ids" Int64 :>
+                         QueryParam "sortOrder" Text :>
+                           QueryParam "active" Bool :>
+                             QueryParam "key" Text :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "sortField" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "maxResults" Int32 :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "alt" Text :>
+                                           Get '[JSON] AccountsListResponse
 
 -- | Updates an existing account. This method supports patch semantics.
 type AccountsPatch =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "accounts"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "id" Int64
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "accounts" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "id" Int64 :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Patch '[JSON] Account
 
 -- | Gets one account by ID.
 type AccountsGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "accounts"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "accounts" :>
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] Account
 
 -- | Updates an existing account.
 type AccountsUpdate =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "accounts"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "accounts" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Put '[JSON] Account
 
 type ReportsAPI = CompatibleFieldsAPI :<|> FilesAPI
 
@@ -3220,55 +3326,63 @@ type CompatibleFieldsAPI = CompatibleFieldsQuery
 -- sections of a report criteria, given the fields already selected in the
 -- input report and user permissions.
 type CompatibleFieldsQuery =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "reports"
-       :> "compatiblefields"
-       :> "query"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "reports" :>
+               "compatiblefields" :>
+                 "query" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :>
+                                 Post '[JSON] CompatibleFields
 
 type FilesAPI = FilesList :<|> FilesGet
 
 -- | Lists files for a report.
 type FilesList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "reports"
-       :> Capture "reportId" Int64
-       :> "files"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "sortOrder" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "sortField" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "reports" :>
+               Capture "reportId" Int64 :>
+                 "files" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "sortOrder" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "sortField" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "maxResults" Int32 :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Text :>
+                                         Get '[JSON] FileList
 
 -- | Retrieves a report file.
 type FilesGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "reports"
-       :> Capture "reportId" Int64
-       :> "files"
-       :> Capture "fileId" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "reports" :>
+               Capture "reportId" Int64 :>
+                 "files" :>
+                   Capture "fileId" Int64 :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :> Get '[JSON] File
 
 type CampaignsAPI =
      CampaignsInsert :<|> CampaignsList :<|>
@@ -3278,85 +3392,100 @@ type CampaignsAPI =
 
 -- | Inserts a new campaign.
 type CampaignsInsert =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "campaigns"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "defaultLandingPageUrl" Text
-       :> QueryParam "key" Text
-       :> QueryParam "defaultLandingPageName" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "campaigns" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "defaultLandingPageUrl" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "defaultLandingPageName" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Post '[JSON] Campaign
 
 -- | Retrieves a list of campaigns, possibly filtered.
 type CampaignsList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "campaigns"
-       :> QueryParam "excludedIds" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "searchString" Text
-       :> QueryParam "ids" Int64
-       :> QueryParam "sortOrder" Text
-       :> QueryParam "advertiserGroupIds" Int64
-       :> QueryParam "key" Text
-       :> QueryParam "atLeastOneOptimizationActivity" Bool
-       :> QueryParam "overriddenEventTagId" Int64
-       :> QueryParam "pageToken" Text
-       :> QueryParam "sortField" Text
-       :> QueryParam "subaccountId" Int64
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "advertiserIds" Int64
-       :> QueryParam "archived" Bool
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "campaigns" :>
+               QueryParam "excludedIds" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "searchString" Text :>
+                         QueryParam "ids" Int64 :>
+                           QueryParam "sortOrder" Text :>
+                             QueryParam "advertiserGroupIds" Int64 :>
+                               QueryParam "key" Text :>
+                                 QueryParam "atLeastOneOptimizationActivity"
+                                   Bool
+                                   :>
+                                   QueryParam "overriddenEventTagId" Int64 :>
+                                     QueryParam "pageToken" Text :>
+                                       QueryParam "sortField" Text :>
+                                         QueryParam "subaccountId" Int64 :>
+                                           QueryParam "oauth_token" Text :>
+                                             QueryParam "advertiserIds" Int64 :>
+                                               QueryParam "archived" Bool :>
+                                                 QueryParam "maxResults" Int32
+                                                   :>
+                                                   QueryParam "fields" Text :>
+                                                     QueryParam "alt" Text :>
+                                                       Get '[JSON]
+                                                         CampaignsListResponse
 
 -- | Updates an existing campaign. This method supports patch semantics.
 type CampaignsPatch =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "campaigns"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "id" Int64
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "campaigns" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "id" Int64 :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Patch '[JSON] Campaign
 
 -- | Gets one campaign by ID.
 type CampaignsGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "campaigns"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "campaigns" :>
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] Campaign
 
 -- | Updates an existing campaign.
 type CampaignsUpdate =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "campaigns"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "campaigns" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Put '[JSON] Campaign
 
 type AccountUserProfilesAPI =
      AccountUserProfilesInsert :<|>
@@ -3367,80 +3496,96 @@ type AccountUserProfilesAPI =
 
 -- | Inserts a new account user profile.
 type AccountUserProfilesInsert =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "accountUserProfiles"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "accountUserProfiles" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Post '[JSON] AccountUserProfile
 
 -- | Retrieves a list of account user profiles, possibly filtered.
 type AccountUserProfilesList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "accountUserProfiles"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userRoleId" Int64
-       :> QueryParam "userIp" Text
-       :> QueryParam "searchString" Text
-       :> QueryParam "ids" Int64
-       :> QueryParam "sortOrder" Text
-       :> QueryParam "active" Bool
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "sortField" Text
-       :> QueryParam "subaccountId" Int64
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "accountUserProfiles" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userRoleId" Int64 :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "searchString" Text :>
+                         QueryParam "ids" Int64 :>
+                           QueryParam "sortOrder" Text :>
+                             QueryParam "active" Bool :>
+                               QueryParam "key" Text :>
+                                 QueryParam "pageToken" Text :>
+                                   QueryParam "sortField" Text :>
+                                     QueryParam "subaccountId" Int64 :>
+                                       QueryParam "oauth_token" Text :>
+                                         QueryParam "maxResults" Int32 :>
+                                           QueryParam "fields" Text :>
+                                             QueryParam "alt" Text :>
+                                               Get '[JSON]
+                                                 AccountUserProfilesListResponse
 
 -- | Updates an existing account user profile. This method supports patch
 -- semantics.
 type AccountUserProfilesPatch =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "accountUserProfiles"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "id" Int64
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "accountUserProfiles" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "id" Int64 :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Patch '[JSON] AccountUserProfile
 
 -- | Gets one account user profile by ID.
 type AccountUserProfilesGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "accountUserProfiles"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "accountUserProfiles" :>
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Get '[JSON] AccountUserProfile
 
 -- | Updates an existing account user profile.
 type AccountUserProfilesUpdate =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "accountUserProfiles"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "accountUserProfiles" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Put '[JSON] AccountUserProfile
 
 type CreativesAPI =
      CreativesInsert :<|> CreativesList :<|>
@@ -3450,104 +3595,129 @@ type CreativesAPI =
 
 -- | Inserts a new creative.
 type CreativesInsert =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "creatives"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "creatives" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] Creative
 
 -- | Retrieves a list of creatives, possibly filtered.
 type CreativesList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "creatives"
-       :> QueryParam "renderingIds" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "advertiserId" Int64
-       :> QueryParam "searchString" Text
-       :> QueryParam "sizeIds" Int64
-       :> QueryParam "companionCreativeIds" Int64
-       :> QueryParam "campaignId" Int64
-       :> QueryParam "types" Text
-       :> QueryParam "ids" Int64
-       :> QueryParam "sortOrder" Text
-       :> QueryParam "active" Bool
-       :> QueryParam "key" Text
-       :> QueryParam "creativeFieldIds" Int64
-       :> QueryParam "pageToken" Text
-       :> QueryParam "sortField" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "studioCreativeId" Int64
-       :> QueryParam "archived" Bool
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "creatives" :>
+               QueryParam "renderingIds" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "advertiserId" Int64 :>
+                         QueryParam "searchString" Text :>
+                           QueryParam "sizeIds" Int64 :>
+                             QueryParam "companionCreativeIds" Int64 :>
+                               QueryParam "campaignId" Int64 :>
+                                 QueryParam "types" Text :>
+                                   QueryParam "ids" Int64 :>
+                                     QueryParam "sortOrder" Text :>
+                                       QueryParam "active" Bool :>
+                                         QueryParam "key" Text :>
+                                           QueryParam "creativeFieldIds" Int64
+                                             :>
+                                             QueryParam "pageToken" Text :>
+                                               QueryParam "sortField" Text :>
+                                                 QueryParam "oauth_token" Text
+                                                   :>
+                                                   QueryParam "studioCreativeId"
+                                                     Int64
+                                                     :>
+                                                     QueryParam "archived" Bool
+                                                       :>
+                                                       QueryParam "maxResults"
+                                                         Int32
+                                                         :>
+                                                         QueryParam "fields"
+                                                           Text
+                                                           :>
+                                                           QueryParam "alt" Text
+                                                             :>
+                                                             Get '[JSON]
+                                                               CreativesListResponse
 
 -- | Updates an existing creative. This method supports patch semantics.
 type CreativesPatch =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "creatives"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "id" Int64
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "creatives" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "id" Int64 :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Patch '[JSON] Creative
 
 -- | Gets one creative by ID.
 type CreativesGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "creatives"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "creatives" :>
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] Creative
 
 -- | Updates an existing creative.
 type CreativesUpdate =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "creatives"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "creatives" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Put '[JSON] Creative
 
 type DimensionValuesAPI = DimensionValuesQuery
 
 -- | Retrieves list of report dimension values for a list of filters.
 type DimensionValuesQuery =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "dimensionvalues"
-       :> "query"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "dimensionvalues" :>
+               "query" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "maxResults" Int32 :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Post '[JSON] DimensionValueList
 
 type FloodlightConfigurationsAPI =
      FloodlightConfigurationsList :<|>
@@ -3557,74 +3727,89 @@ type FloodlightConfigurationsAPI =
 
 -- | Retrieves a list of floodlight configurations, possibly filtered.
 type FloodlightConfigurationsList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "floodlightConfigurations"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "ids" Int64
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "floodlightConfigurations" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "ids" Int64 :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Get '[JSON] FloodlightConfigurationsListResponse
 
 -- | Updates an existing floodlight configuration. This method supports patch
 -- semantics.
 type FloodlightConfigurationsPatch =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "floodlightConfigurations"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "id" Int64
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "floodlightConfigurations" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "id" Int64 :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Patch '[JSON] FloodlightConfiguration
 
 -- | Gets one floodlight configuration by ID.
 type FloodlightConfigurationsGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "floodlightConfigurations"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "floodlightConfigurations" :>
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Get '[JSON] FloodlightConfiguration
 
 -- | Updates an existing floodlight configuration.
 type FloodlightConfigurationsUpdate =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "floodlightConfigurations"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "floodlightConfigurations" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Put '[JSON] FloodlightConfiguration
 
 type RegionsAPI = RegionsList
 
 -- | Retrieves a list of regions.
 type RegionsList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "regions"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "regions" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Get '[JSON] RegionsListResponse
 
 type FloodlightActivitiesAPI =
      FloodlightActivitiesInsert :<|>
@@ -3637,113 +3822,142 @@ type FloodlightActivitiesAPI =
 
 -- | Inserts a new floodlight activity.
 type FloodlightActivitiesInsert =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "floodlightActivities"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "floodlightActivities" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Post '[JSON] FloodlightActivity
 
 -- | Retrieves a list of floodlight activities, possibly filtered.
 type FloodlightActivitiesList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "floodlightActivities"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "tagString" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "floodlightActivityGroupTagString" Text
-       :> QueryParam "floodlightConfigurationId" Int64
-       :> QueryParam "userIp" Text
-       :> QueryParam "advertiserId" Int64
-       :> QueryParam "searchString" Text
-       :> QueryParam "ids" Int64
-       :> QueryParam "floodlightActivityGroupIds" Int64
-       :> QueryParam "sortOrder" Text
-       :> QueryParam "key" Text
-       :> QueryParam "floodlightActivityGroupType" Text
-       :> QueryParam "floodlightActivityGroupName" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "sortField" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "floodlightActivities" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "tagString" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "floodlightActivityGroupTagString" Text :>
+                       QueryParam "floodlightConfigurationId" Int64 :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "advertiserId" Int64 :>
+                             QueryParam "searchString" Text :>
+                               QueryParam "ids" Int64 :>
+                                 QueryParam "floodlightActivityGroupIds" Int64
+                                   :>
+                                   QueryParam "sortOrder" Text :>
+                                     QueryParam "key" Text :>
+                                       QueryParam "floodlightActivityGroupType"
+                                         Text
+                                         :>
+                                         QueryParam
+                                           "floodlightActivityGroupName"
+                                           Text
+                                           :>
+                                           QueryParam "pageToken" Text :>
+                                             QueryParam "sortField" Text :>
+                                               QueryParam "oauth_token" Text :>
+                                                 QueryParam "maxResults" Int32
+                                                   :>
+                                                   QueryParam "fields" Text :>
+                                                     QueryParam "alt" Text :>
+                                                       Get '[JSON]
+                                                         FloodlightActivitiesListResponse
 
 -- | Updates an existing floodlight activity. This method supports patch
 -- semantics.
 type FloodlightActivitiesPatch =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "floodlightActivities"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "id" Int64
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "floodlightActivities" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "id" Int64 :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Patch '[JSON] FloodlightActivity
 
 -- | Gets one floodlight activity by ID.
 type FloodlightActivitiesGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "floodlightActivities"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "floodlightActivities" :>
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Get '[JSON] FloodlightActivity
 
 -- | Generates a tag for a floodlight activity.
 type FloodlightActivitiesGeneratetag =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "floodlightActivities"
-       :> "generatetag"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "floodlightActivityId" Int64
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "floodlightActivities" :>
+               "generatetag" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "floodlightActivityId" Int64 :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :>
+                                 Post '[JSON]
+                                   FloodlightActivitiesGenerateTagResponse
 
 -- | Deletes an existing floodlight activity.
 type FloodlightActivitiesDelete =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "floodlightActivities"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "floodlightActivities" :>
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Updates an existing floodlight activity.
 type FloodlightActivitiesUpdate =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "floodlightActivities"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "floodlightActivities" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Put '[JSON] FloodlightActivity
 
 type AccountPermissionGroupsAPI =
      AccountPermissionGroupsList :<|>
@@ -3751,30 +3965,36 @@ type AccountPermissionGroupsAPI =
 
 -- | Retrieves the list of account permission groups.
 type AccountPermissionGroupsList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "accountPermissionGroups"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "accountPermissionGroups" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Get '[JSON] AccountPermissionGroupsListResponse
 
 -- | Gets one account permission group by ID.
 type AccountPermissionGroupsGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "accountPermissionGroups"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "accountPermissionGroups" :>
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Get '[JSON] AccountPermissionGroup
 
 type AdvertisersAPI =
      AdvertisersInsert :<|> AdvertisersList :<|>
@@ -3784,112 +4004,133 @@ type AdvertisersAPI =
 
 -- | Inserts a new advertiser.
 type AdvertisersInsert =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "advertisers"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "advertisers" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] Advertiser
 
 -- | Retrieves a list of advertisers, possibly filtered.
 type AdvertisersList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "advertisers"
-       :> QueryParam "status" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "onlyParent" Bool
-       :> QueryParam "searchString" Text
-       :> QueryParam "ids" Int64
-       :>
-       QueryParam "includeAdvertisersWithoutGroupsOnly" Bool
-       :> QueryParam "sortOrder" Text
-       :> QueryParam "advertiserGroupIds" Int64
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "sortField" Text
-       :> QueryParam "subaccountId" Int64
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "floodlightConfigurationIds" Int64
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "advertisers" :>
+               QueryParam "status" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "onlyParent" Bool :>
+                         QueryParam "searchString" Text :>
+                           QueryParam "ids" Int64 :>
+                             QueryParam "includeAdvertisersWithoutGroupsOnly"
+                               Bool
+                               :>
+                               QueryParam "sortOrder" Text :>
+                                 QueryParam "advertiserGroupIds" Int64 :>
+                                   QueryParam "key" Text :>
+                                     QueryParam "pageToken" Text :>
+                                       QueryParam "sortField" Text :>
+                                         QueryParam "subaccountId" Int64 :>
+                                           QueryParam "oauth_token" Text :>
+                                             QueryParam
+                                               "floodlightConfigurationIds"
+                                               Int64
+                                               :>
+                                               QueryParam "maxResults" Int32 :>
+                                                 QueryParam "fields" Text :>
+                                                   QueryParam "alt" Text :>
+                                                     Get '[JSON]
+                                                       AdvertisersListResponse
 
 -- | Updates an existing advertiser. This method supports patch semantics.
 type AdvertisersPatch =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "advertisers"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "id" Int64
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "advertisers" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "id" Int64 :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Patch '[JSON] Advertiser
 
 -- | Gets one advertiser by ID.
 type AdvertisersGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "advertisers"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "advertisers" :>
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] Advertiser
 
 -- | Updates an existing advertiser.
 type AdvertisersUpdate =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "advertisers"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "advertisers" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Put '[JSON] Advertiser
 
 type CountriesAPI = CountriesList :<|> CountriesGet
 
 -- | Retrieves a list of countries.
 type CountriesList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "countries"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "countries" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Get '[JSON] CountriesListResponse
 
 -- | Gets one country by ID.
 type CountriesGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "countries"
-       :> Capture "dartId" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "countries" :>
+               Capture "dartId" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] Country
 
 type UserRolesAPI =
      UserRolesInsert :<|> UserRolesList :<|>
@@ -3900,118 +4141,135 @@ type UserRolesAPI =
 
 -- | Inserts a new user role.
 type UserRolesInsert =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "userRoles"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "userRoles" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] UserRole
 
 -- | Retrieves a list of user roles, possibly filtered.
 type UserRolesList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "userRoles"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "searchString" Text
-       :> QueryParam "ids" Int64
-       :> QueryParam "sortOrder" Text
-       :> QueryParam "key" Text
-       :> QueryParam "accountUserRoleOnly" Bool
-       :> QueryParam "pageToken" Text
-       :> QueryParam "sortField" Text
-       :> QueryParam "subaccountId" Int64
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "userRoles" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "searchString" Text :>
+                       QueryParam "ids" Int64 :>
+                         QueryParam "sortOrder" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "accountUserRoleOnly" Bool :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "sortField" Text :>
+                                   QueryParam "subaccountId" Int64 :>
+                                     QueryParam "oauth_token" Text :>
+                                       QueryParam "maxResults" Int32 :>
+                                         QueryParam "fields" Text :>
+                                           QueryParam "alt" Text :>
+                                             Get '[JSON] UserRolesListResponse
 
 -- | Updates an existing user role. This method supports patch semantics.
 type UserRolesPatch =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "userRoles"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "id" Int64
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "userRoles" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "id" Int64 :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Patch '[JSON] UserRole
 
 -- | Gets one user role by ID.
 type UserRolesGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "userRoles"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "userRoles" :>
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] UserRole
 
 -- | Deletes an existing user role.
 type UserRolesDelete =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "userRoles"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "userRoles" :>
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Updates an existing user role.
 type UserRolesUpdate =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "userRoles"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "userRoles" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Put '[JSON] UserRole
 
 type UserProfilesAPI =
      UserProfilesList :<|> UserProfilesGet
 
 -- | Retrieves list of user profiles for a user.
 type UserProfilesList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Text :> Get '[JSON] UserProfileList
 
 -- | Gets one user profile by ID.
 type UserProfilesGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Get '[JSON] UserProfile
 
 type OperatingSystemVersionsAPI =
      OperatingSystemVersionsList :<|>
@@ -4019,119 +4277,140 @@ type OperatingSystemVersionsAPI =
 
 -- | Retrieves a list of operating system versions.
 type OperatingSystemVersionsList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "operatingSystemVersions"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "operatingSystemVersions" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Get '[JSON] OperatingSystemVersionsListResponse
 
 -- | Gets one operating system version by ID.
 type OperatingSystemVersionsGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "operatingSystemVersions"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "operatingSystemVersions" :>
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Get '[JSON] OperatingSystemVersion
 
 type AccountPermissionsAPI =
      AccountPermissionsList :<|> AccountPermissionsGet
 
 -- | Retrieves the list of account permissions.
 type AccountPermissionsList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "accountPermissions"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "accountPermissions" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Get '[JSON] AccountPermissionsListResponse
 
 -- | Gets one account permission by ID.
 type AccountPermissionsGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "accountPermissions"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "accountPermissions" :>
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Get '[JSON] AccountPermission
 
 type CitiesAPI = CitiesList
 
 -- | Retrieves a list of cities, possibly filtered.
 type CitiesList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "cities"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "regionDartIds" Int64
-       :> QueryParam "userIp" Text
-       :> QueryParam "namePrefix" Text
-       :> QueryParam "key" Text
-       :> QueryParam "countryDartIds" Int64
-       :> QueryParam "dartIds" Int64
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "cities" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "regionDartIds" Int64 :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "namePrefix" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "countryDartIds" Int64 :>
+                             QueryParam "dartIds" Int64 :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON] CitiesListResponse
 
 type ChangeLogsAPI =
      ChangeLogsList :<|> ChangeLogsGet
 
 -- | Retrieves a list of change logs.
 type ChangeLogsList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "changeLogs"
-       :> QueryParam "userProfileIds" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "objectType" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "searchString" Text
-       :> QueryParam "ids" Int64
-       :> QueryParam "action" Text
-       :> QueryParam "minChangeTime" Text
-       :> QueryParam "key" Text
-       :> QueryParam "maxChangeTime" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "objectIds" Int64
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "changeLogs" :>
+               QueryParam "userProfileIds" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "objectType" Text :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "searchString" Text :>
+                           QueryParam "ids" Int64 :>
+                             QueryParam "action" Text :>
+                               QueryParam "minChangeTime" Text :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "maxChangeTime" Text :>
+                                     QueryParam "pageToken" Text :>
+                                       QueryParam "oauth_token" Text :>
+                                         QueryParam "objectIds" Int64 :>
+                                           QueryParam "maxResults" Int32 :>
+                                             QueryParam "fields" Text :>
+                                               QueryParam "alt" Text :>
+                                                 Get '[JSON]
+                                                   ChangeLogsListResponse
 
 -- | Gets one change log by ID.
 type ChangeLogsGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "changeLogs"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "changeLogs" :>
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] ChangeLog
 
 type TargetableRemarketingListsAPI =
      TargetableRemarketingListsList :<|>
@@ -4139,67 +4418,79 @@ type TargetableRemarketingListsAPI =
 
 -- | Retrieves a list of targetable remarketing lists, possibly filtered.
 type TargetableRemarketingListsList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "targetableRemarketingLists"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "advertiserId" Int64
-       :> QueryParam "sortOrder" Text
-       :> QueryParam "active" Bool
-       :> QueryParam "key" Text
-       :> QueryParam "name" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "sortField" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "targetableRemarketingLists" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "advertiserId" Int64 :>
+                       QueryParam "sortOrder" Text :>
+                         QueryParam "active" Bool :>
+                           QueryParam "key" Text :>
+                             QueryParam "name" Text :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "sortField" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "maxResults" Int32 :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "alt" Text :>
+                                           Get '[JSON]
+                                             TargetableRemarketingListsListResponse
 
 -- | Gets one remarketing list by ID.
 type TargetableRemarketingListsGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "targetableRemarketingLists"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "targetableRemarketingLists" :>
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Get '[JSON] TargetableRemarketingList
 
 type PlatformTypesAPI =
      PlatformTypesList :<|> PlatformTypesGet
 
 -- | Retrieves a list of platform types.
 type PlatformTypesList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "platformTypes"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "platformTypes" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Get '[JSON] PlatformTypesListResponse
 
 -- | Gets one platform type by ID.
 type PlatformTypesGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "platformTypes"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "platformTypes" :>
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] PlatformType
 
 type ContentCategoriesAPI =
      ContentCategoriesInsert :<|> ContentCategoriesList
@@ -4210,106 +4501,125 @@ type ContentCategoriesAPI =
 
 -- | Inserts a new content category.
 type ContentCategoriesInsert =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "contentCategories"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "contentCategories" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] ContentCategory
 
 -- | Retrieves a list of content categories, possibly filtered.
 type ContentCategoriesList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "contentCategories"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "searchString" Text
-       :> QueryParam "ids" Int64
-       :> QueryParam "sortOrder" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "sortField" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "contentCategories" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "searchString" Text :>
+                       QueryParam "ids" Int64 :>
+                         QueryParam "sortOrder" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "sortField" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "maxResults" Int32 :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Text :>
+                                         Get '[JSON]
+                                           ContentCategoriesListResponse
 
 -- | Updates an existing content category. This method supports patch
 -- semantics.
 type ContentCategoriesPatch =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "contentCategories"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "id" Int64
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "contentCategories" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "id" Int64 :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Patch '[JSON] ContentCategory
 
 -- | Gets one content category by ID.
 type ContentCategoriesGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "contentCategories"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "contentCategories" :>
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Get '[JSON] ContentCategory
 
 -- | Deletes an existing content category.
 type ContentCategoriesDelete =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "contentCategories"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "contentCategories" :>
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Updates an existing content category.
 type ContentCategoriesUpdate =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "contentCategories"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "contentCategories" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Put '[JSON] ContentCategory
 
 type BrowsersAPI = BrowsersList
 
 -- | Retrieves a list of browsers.
 type BrowsersList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "browsers"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "browsers" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Get '[JSON] BrowsersListResponse
 
 type PlacementsAPI =
      PlacementsInsert :<|> PlacementsGeneratetags :<|>
@@ -4320,124 +4630,173 @@ type PlacementsAPI =
 
 -- | Inserts a new placement.
 type PlacementsInsert =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "placements"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "placements" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] Placement
 
 -- | Generates tags for a placement.
 type PlacementsGeneratetags =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "placements"
-       :> "generatetags"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "tagFormats" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "campaignId" Int64
-       :> QueryParam "key" Text
-       :> QueryParam "placementIds" Int64
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "placements" :>
+               "generatetags" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "tagFormats" Text :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "campaignId" Int64 :>
+                           QueryParam "key" Text :>
+                             QueryParam "placementIds" Int64 :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Post '[JSON] PlacementsGenerateTagsResponse
 
 -- | Retrieves a list of placements, possibly filtered.
 type PlacementsList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "placements"
-       :> QueryParam "placementStrategyIds" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "contentCategoryIds" Int64
-       :> QueryParam "maxEndDate" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "campaignIds" Int64
-       :> QueryParam "pricingTypes" Text
-       :> QueryParam "searchString" Text
-       :> QueryParam "sizeIds" Int64
-       :> QueryParam "ids" Int64
-       :> QueryParam "groupIds" Int64
-       :> QueryParam "directorySiteIds" Int64
-       :> QueryParam "sortOrder" Text
-       :> QueryParam "paymentSource" Text
-       :> QueryParam "key" Text
-       :> QueryParam "siteIds" Int64
-       :> QueryParam "pageToken" Text
-       :> QueryParam "sortField" Text
-       :> QueryParam "compatibilities" Text
-       :> QueryParam "maxStartDate" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "advertiserIds" Int64
-       :> QueryParam "minStartDate" Text
-       :> QueryParam "archived" Bool
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "minEndDate" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "placements" :>
+               QueryParam "placementStrategyIds" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "contentCategoryIds" Int64 :>
+                       QueryParam "maxEndDate" Text :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "campaignIds" Int64 :>
+                             QueryParam "pricingTypes" Text :>
+                               QueryParam "searchString" Text :>
+                                 QueryParam "sizeIds" Int64 :>
+                                   QueryParam "ids" Int64 :>
+                                     QueryParam "groupIds" Int64 :>
+                                       QueryParam "directorySiteIds" Int64 :>
+                                         QueryParam "sortOrder" Text :>
+                                           QueryParam "paymentSource" Text :>
+                                             QueryParam "key" Text :>
+                                               QueryParam "siteIds" Int64 :>
+                                                 QueryParam "pageToken" Text :>
+                                                   QueryParam "sortField" Text
+                                                     :>
+                                                     QueryParam
+                                                       "compatibilities"
+                                                       Text
+                                                       :>
+                                                       QueryParam "maxStartDate"
+                                                         Text
+                                                         :>
+                                                         QueryParam
+                                                           "oauth_token"
+                                                           Text
+                                                           :>
+                                                           QueryParam
+                                                             "advertiserIds"
+                                                             Int64
+                                                             :>
+                                                             QueryParam
+                                                               "minStartDate"
+                                                               Text
+                                                               :>
+                                                               QueryParam
+                                                                 "archived"
+                                                                 Bool
+                                                                 :>
+                                                                 QueryParam
+                                                                   "maxResults"
+                                                                   Int32
+                                                                   :>
+                                                                   QueryParam
+                                                                     "minEndDate"
+                                                                     Text
+                                                                     :>
+                                                                     QueryParam
+                                                                       "fields"
+                                                                       Text
+                                                                       :>
+                                                                       QueryParam
+                                                                         "alt"
+                                                                         Text
+                                                                         :>
+                                                                         Get
+                                                                           '[JSON]
+                                                                           PlacementsListResponse
 
 -- | Updates an existing placement. This method supports patch semantics.
 type PlacementsPatch =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "placements"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "id" Int64
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "placements" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "id" Int64 :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Patch '[JSON] Placement
 
 -- | Gets one placement by ID.
 type PlacementsGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "placements"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "placements" :>
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] Placement
 
 -- | Updates an existing placement.
 type PlacementsUpdate =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "placements"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "placements" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Put '[JSON] Placement
 
 type MetrosAPI = MetrosList
 
 -- | Retrieves a list of metros.
 type MetrosList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "metros"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "metros" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Get '[JSON] MetrosListResponse
 
 type CreativeFieldsAPI =
      CreativeFieldsInsert :<|> CreativeFieldsList :<|>
@@ -4448,199 +4807,231 @@ type CreativeFieldsAPI =
 
 -- | Inserts a new creative field.
 type CreativeFieldsInsert =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "creativeFields"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "creativeFields" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] CreativeField
 
 -- | Retrieves a list of creative fields, possibly filtered.
 type CreativeFieldsList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "creativeFields"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "searchString" Text
-       :> QueryParam "ids" Int64
-       :> QueryParam "sortOrder" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "sortField" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "advertiserIds" Int64
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "creativeFields" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "searchString" Text :>
+                       QueryParam "ids" Int64 :>
+                         QueryParam "sortOrder" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "sortField" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "advertiserIds" Int64 :>
+                                     QueryParam "maxResults" Int32 :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "alt" Text :>
+                                           Get '[JSON]
+                                             CreativeFieldsListResponse
 
 -- | Updates an existing creative field. This method supports patch
 -- semantics.
 type CreativeFieldsPatch =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "creativeFields"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "id" Int64
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "creativeFields" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "id" Int64 :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Patch '[JSON] CreativeField
 
 -- | Gets one creative field by ID.
 type CreativeFieldsGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "creativeFields"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "creativeFields" :>
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] CreativeField
 
 -- | Deletes an existing creative field.
 type CreativeFieldsDelete =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "creativeFields"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "creativeFields" :>
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Updates an existing creative field.
 type CreativeFieldsUpdate =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "creativeFields"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "creativeFields" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Put '[JSON] CreativeField
 
 type OrderDocumentsAPI =
      OrderDocumentsList :<|> OrderDocumentsGet
 
 -- | Retrieves a list of order documents, possibly filtered.
 type OrderDocumentsList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "projects"
-       :> Capture "projectId" Int64
-       :> "orderDocuments"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "searchString" Text
-       :> QueryParam "ids" Int64
-       :> QueryParam "sortOrder" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "sortField" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "orderId" Int64
-       :> QueryParam "approved" Bool
-       :> QueryParam "siteId" Int64
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "projects" :>
+               Capture "projectId" Int64 :>
+                 "orderDocuments" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "searchString" Text :>
+                           QueryParam "ids" Int64 :>
+                             QueryParam "sortOrder" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "pageToken" Text :>
+                                   QueryParam "sortField" Text :>
+                                     QueryParam "oauth_token" Text :>
+                                       QueryParam "orderId" Int64 :>
+                                         QueryParam "approved" Bool :>
+                                           QueryParam "siteId" Int64 :>
+                                             QueryParam "maxResults" Int32 :>
+                                               QueryParam "fields" Text :>
+                                                 QueryParam "alt" Text :>
+                                                   Get '[JSON]
+                                                     OrderDocumentsListResponse
 
 -- | Gets one order document by ID.
 type OrderDocumentsGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "projects"
-       :> Capture "projectId" Int64
-       :> "orderDocuments"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "projects" :>
+               Capture "projectId" Int64 :>
+                 "orderDocuments" :>
+                   Capture "id" Int64 :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Get '[JSON] OrderDocument
 
 type FilesAPI = FilesList :<|> FilesGet
 
 -- | Lists files for a user profile.
 type FilesList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "files"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "sortOrder" Text
-       :> QueryParam "key" Text
-       :> QueryParam "scope" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "sortField" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "files" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "sortOrder" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "scope" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "sortField" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "maxResults" Int32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :>
+                                       Get '[JSON] FileList
 
 -- | Retrieves a report file by its report ID and file ID.
 type FilesGet =
-     "dfareporting" :> "v2.2" :> "reports" :>
-       Capture "reportId" Int64
-       :> "files"
-       :> Capture "fileId" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "reports" :>
+           Capture "reportId" Int64 :>
+             "files" :>
+               Capture "fileId" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] File
 
 type ConnectionTypesAPI =
      ConnectionTypesList :<|> ConnectionTypesGet
 
 -- | Retrieves a list of connection types.
 type ConnectionTypesList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "connectionTypes"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "connectionTypes" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Get '[JSON] ConnectionTypesListResponse
 
 -- | Gets one connection type by ID.
 type ConnectionTypesGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "connectionTypes"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "connectionTypes" :>
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] ConnectionType
 
 type PlacementGroupsAPI =
      PlacementGroupsInsert :<|> PlacementGroupsList :<|>
@@ -4650,90 +5041,123 @@ type PlacementGroupsAPI =
 
 -- | Inserts a new placement group.
 type PlacementGroupsInsert =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "placementGroups"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "placementGroups" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] PlacementGroup
 
 -- | Retrieves a list of placement groups, possibly filtered.
 type PlacementGroupsList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "placementGroups"
-       :> QueryParam "placementStrategyIds" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "contentCategoryIds" Int64
-       :> QueryParam "maxEndDate" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "campaignIds" Int64
-       :> QueryParam "pricingTypes" Text
-       :> QueryParam "searchString" Text
-       :> QueryParam "ids" Int64
-       :> QueryParam "placementGroupType" Text
-       :> QueryParam "directorySiteIds" Int64
-       :> QueryParam "sortOrder" Text
-       :> QueryParam "key" Text
-       :> QueryParam "siteIds" Int64
-       :> QueryParam "pageToken" Text
-       :> QueryParam "sortField" Text
-       :> QueryParam "maxStartDate" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "advertiserIds" Int64
-       :> QueryParam "minStartDate" Text
-       :> QueryParam "archived" Bool
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "minEndDate" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "placementGroups" :>
+               QueryParam "placementStrategyIds" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "contentCategoryIds" Int64 :>
+                       QueryParam "maxEndDate" Text :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "campaignIds" Int64 :>
+                             QueryParam "pricingTypes" Text :>
+                               QueryParam "searchString" Text :>
+                                 QueryParam "ids" Int64 :>
+                                   QueryParam "placementGroupType" Text :>
+                                     QueryParam "directorySiteIds" Int64 :>
+                                       QueryParam "sortOrder" Text :>
+                                         QueryParam "key" Text :>
+                                           QueryParam "siteIds" Int64 :>
+                                             QueryParam "pageToken" Text :>
+                                               QueryParam "sortField" Text :>
+                                                 QueryParam "maxStartDate" Text
+                                                   :>
+                                                   QueryParam "oauth_token" Text
+                                                     :>
+                                                     QueryParam "advertiserIds"
+                                                       Int64
+                                                       :>
+                                                       QueryParam "minStartDate"
+                                                         Text
+                                                         :>
+                                                         QueryParam "archived"
+                                                           Bool
+                                                           :>
+                                                           QueryParam
+                                                             "maxResults"
+                                                             Int32
+                                                             :>
+                                                             QueryParam
+                                                               "minEndDate"
+                                                               Text
+                                                               :>
+                                                               QueryParam
+                                                                 "fields"
+                                                                 Text
+                                                                 :>
+                                                                 QueryParam
+                                                                   "alt"
+                                                                   Text
+                                                                   :>
+                                                                   Get '[JSON]
+                                                                     PlacementGroupsListResponse
 
 -- | Updates an existing placement group. This method supports patch
 -- semantics.
 type PlacementGroupsPatch =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "placementGroups"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "id" Int64
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "placementGroups" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "id" Int64 :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Patch '[JSON] PlacementGroup
 
 -- | Gets one placement group by ID.
 type PlacementGroupsGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "placementGroups"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "placementGroups" :>
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] PlacementGroup
 
 -- | Updates an existing placement group.
 type PlacementGroupsUpdate =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "placementGroups"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "placementGroups" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Put '[JSON] PlacementGroup
 
 type EventTagsAPI =
      EventTagsInsert :<|> EventTagsList :<|>
@@ -4744,182 +5168,210 @@ type EventTagsAPI =
 
 -- | Inserts a new event tag.
 type EventTagsInsert =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "eventTags"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "eventTags" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] EventTag
 
 -- | Retrieves a list of event tags, possibly filtered.
 type EventTagsList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "eventTags"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "definitionsOnly" Bool
-       :> QueryParam "eventTagTypes" Text
-       :> QueryParam "enabled" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "advertiserId" Int64
-       :> QueryParam "searchString" Text
-       :> QueryParam "campaignId" Int64
-       :> QueryParam "ids" Int64
-       :> QueryParam "sortOrder" Text
-       :> QueryParam "key" Text
-       :> QueryParam "adId" Int64
-       :> QueryParam "sortField" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "eventTags" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "definitionsOnly" Bool :>
+                     QueryParam "eventTagTypes" Text :>
+                       QueryParam "enabled" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "advertiserId" Int64 :>
+                             QueryParam "searchString" Text :>
+                               QueryParam "campaignId" Int64 :>
+                                 QueryParam "ids" Int64 :>
+                                   QueryParam "sortOrder" Text :>
+                                     QueryParam "key" Text :>
+                                       QueryParam "adId" Int64 :>
+                                         QueryParam "sortField" Text :>
+                                           QueryParam "oauth_token" Text :>
+                                             QueryParam "fields" Text :>
+                                               QueryParam "alt" Text :>
+                                                 Get '[JSON]
+                                                   EventTagsListResponse
 
 -- | Updates an existing event tag. This method supports patch semantics.
 type EventTagsPatch =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "eventTags"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "id" Int64
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "eventTags" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "id" Int64 :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Patch '[JSON] EventTag
 
 -- | Gets one event tag by ID.
 type EventTagsGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "eventTags"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "eventTags" :>
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] EventTag
 
 -- | Deletes an existing event tag.
 type EventTagsDelete =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "eventTags"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "eventTags" :>
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Updates an existing event tag.
 type EventTagsUpdate =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "eventTags"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "eventTags" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Put '[JSON] EventTag
 
 type OrdersAPI = OrdersList :<|> OrdersGet
 
 -- | Retrieves a list of orders, possibly filtered.
 type OrdersList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "projects"
-       :> Capture "projectId" Int64
-       :> "orders"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "searchString" Text
-       :> QueryParam "ids" Int64
-       :> QueryParam "sortOrder" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "sortField" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "siteId" Int64
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "projects" :>
+               Capture "projectId" Int64 :>
+                 "orders" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "searchString" Text :>
+                           QueryParam "ids" Int64 :>
+                             QueryParam "sortOrder" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "pageToken" Text :>
+                                   QueryParam "sortField" Text :>
+                                     QueryParam "oauth_token" Text :>
+                                       QueryParam "siteId" Int64 :>
+                                         QueryParam "maxResults" Int32 :>
+                                           QueryParam "fields" Text :>
+                                             QueryParam "alt" Text :>
+                                               Get '[JSON] OrdersListResponse
 
 -- | Gets one order by ID.
 type OrdersGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "projects"
-       :> Capture "projectId" Int64
-       :> "orders"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "projects" :>
+               Capture "projectId" Int64 :>
+                 "orders" :>
+                   Capture "id" Int64 :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :> Get '[JSON] Order
 
 type UserRolePermissionsAPI =
      UserRolePermissionsList :<|> UserRolePermissionsGet
 
 -- | Gets a list of user role permissions, possibly filtered.
 type UserRolePermissionsList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "userRolePermissions"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "ids" Int64
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "userRolePermissions" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "ids" Int64 :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Get '[JSON] UserRolePermissionsListResponse
 
 -- | Gets one user role permission by ID.
 type UserRolePermissionsGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "userRolePermissions"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "userRolePermissions" :>
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Get '[JSON] UserRolePermission
 
 type CreativeAssetsAPI = CreativeAssetsInsert
 
 -- | Inserts a new creative asset.
 type CreativeAssetsInsert =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "creativeAssets"
-       :> Capture "advertiserId" Int64
-       :> "creativeAssets"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "creativeAssets" :>
+               Capture "advertiserId" Int64 :>
+                 "creativeAssets" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :>
+                                 Post '[JSON] CreativeAssetMetadata
 
 type SitesAPI =
      SitesInsert :<|> SitesList :<|> SitesPatch :<|>
@@ -4928,192 +5380,230 @@ type SitesAPI =
 
 -- | Inserts a new site.
 type SitesInsert =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "sites"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "sites" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] Site
 
 -- | Retrieves a list of sites, possibly filtered.
 type SitesList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "sites"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "unmappedSite" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "campaignIds" Int64
-       :> QueryParam "searchString" Text
-       :> QueryParam "acceptsInterstitialPlacements" Bool
-       :> QueryParam "acceptsPublisherPaidPlacements" Bool
-       :> QueryParam "ids" Int64
-       :> QueryParam "directorySiteIds" Int64
-       :> QueryParam "sortOrder" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "sortField" Text
-       :> QueryParam "subaccountId" Int64
-       :> QueryParam "acceptsInStreamVideoPlacements" Bool
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "approved" Bool
-       :> QueryParam "adWordsSite" Bool
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "sites" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "unmappedSite" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "campaignIds" Int64 :>
+                         QueryParam "searchString" Text :>
+                           QueryParam "acceptsInterstitialPlacements" Bool :>
+                             QueryParam "acceptsPublisherPaidPlacements" Bool :>
+                               QueryParam "ids" Int64 :>
+                                 QueryParam "directorySiteIds" Int64 :>
+                                   QueryParam "sortOrder" Text :>
+                                     QueryParam "key" Text :>
+                                       QueryParam "pageToken" Text :>
+                                         QueryParam "sortField" Text :>
+                                           QueryParam "subaccountId" Int64 :>
+                                             QueryParam
+                                               "acceptsInStreamVideoPlacements"
+                                               Bool
+                                               :>
+                                               QueryParam "oauth_token" Text :>
+                                                 QueryParam "approved" Bool :>
+                                                   QueryParam "adWordsSite" Bool
+                                                     :>
+                                                     QueryParam "maxResults"
+                                                       Int32
+                                                       :>
+                                                       QueryParam "fields" Text
+                                                         :>
+                                                         QueryParam "alt" Text
+                                                           :>
+                                                           Get '[JSON]
+                                                             SitesListResponse
 
 -- | Updates an existing site. This method supports patch semantics.
 type SitesPatch =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "sites"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "id" Int64
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "sites" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "id" Int64 :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Patch '[JSON] Site
 
 -- | Gets one site by ID.
 type SitesGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "sites"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "sites" :>
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] Site
 
 -- | Updates an existing site.
 type SitesUpdate =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "sites"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "sites" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Put '[JSON] Site
 
 type OperatingSystemsAPI =
      OperatingSystemsList :<|> OperatingSystemsGet
 
 -- | Retrieves a list of operating systems.
 type OperatingSystemsList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "operatingSystems"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "operatingSystems" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Get '[JSON] OperatingSystemsListResponse
 
 -- | Gets one operating system by DART ID.
 type OperatingSystemsGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "operatingSystems"
-       :> Capture "dartId" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "operatingSystems" :>
+               Capture "dartId" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Get '[JSON] OperatingSystem
 
 type PostalCodesAPI =
      PostalCodesList :<|> PostalCodesGet
 
 -- | Retrieves a list of postal codes.
 type PostalCodesList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "postalCodes"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "postalCodes" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Get '[JSON] PostalCodesListResponse
 
 -- | Gets one postal code by ID.
 type PostalCodesGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "postalCodes"
-       :> Capture "code" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "postalCodes" :>
+               Capture "code" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] PostalCode
 
 type SizesAPI =
      SizesInsert :<|> SizesList :<|> SizesGet
 
 -- | Inserts a new size.
 type SizesInsert =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "sizes"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "sizes" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] Size
 
 -- | Retrieves a list of sizes, possibly filtered.
 type SizesList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "sizes"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "height" Int32
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "ids" Int64
-       :> QueryParam "width" Int32
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "iabStandard" Bool
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "sizes" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "height" Int32 :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "ids" Int64 :>
+                         QueryParam "width" Int32 :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "iabStandard" Bool :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON] SizesListResponse
 
 -- | Gets one size by ID.
 type SizesGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "sizes"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "sizes" :>
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] Size
 
 type AdsAPI =
      AdsInsert :<|> AdsList :<|> AdsPatch :<|> AdsGet :<|>
@@ -5121,132 +5611,187 @@ type AdsAPI =
 
 -- | Inserts a new ad.
 type AdsInsert =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "ads"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "ads" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] Ad
 
 -- | Retrieves a list of ads, possibly filtered.
 type AdsList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "ads"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "remarketingListIds" Int64
-       :> QueryParam "landingPageIds" Int64
-       :> QueryParam "creativeIds" Int64
-       :> QueryParam "userIp" Text
-       :> QueryParam "advertiserId" Int64
-       :> QueryParam "campaignIds" Int64
-       :> QueryParam "searchString" Text
-       :> QueryParam "sizeIds" Int64
-       :> QueryParam "sslCompliant" Bool
-       :> QueryParam "ids" Int64
-       :> QueryParam "sortOrder" Text
-       :> QueryParam "active" Bool
-       :>
-       QueryParam "creativeOptimizationConfigurationIds"
-         Int64
-       :> QueryParam "key" Text
-       :> QueryParam "placementIds" Int64
-       :> QueryParam "sslRequired" Bool
-       :> QueryParam "overriddenEventTagId" Int64
-       :> QueryParam "pageToken" Text
-       :> QueryParam "sortField" Text
-       :> QueryParam "type" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "creativeType" Text
-       :> QueryParam "dynamicClickTracker" Bool
-       :> QueryParam "compatibility" Text
-       :> QueryParam "archived" Bool
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
-       :> QueryParam "audienceSegmentIds" Int64
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "ads" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "remarketingListIds" Int64 :>
+                     QueryParam "landingPageIds" Int64 :>
+                       QueryParam "creativeIds" Int64 :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "advertiserId" Int64 :>
+                             QueryParam "campaignIds" Int64 :>
+                               QueryParam "searchString" Text :>
+                                 QueryParam "sizeIds" Int64 :>
+                                   QueryParam "sslCompliant" Bool :>
+                                     QueryParam "ids" Int64 :>
+                                       QueryParam "sortOrder" Text :>
+                                         QueryParam "active" Bool :>
+                                           QueryParam
+                                             "creativeOptimizationConfigurationIds"
+                                             Int64
+                                             :>
+                                             QueryParam "key" Text :>
+                                               QueryParam "placementIds" Int64
+                                                 :>
+                                                 QueryParam "sslRequired" Bool
+                                                   :>
+                                                   QueryParam
+                                                     "overriddenEventTagId"
+                                                     Int64
+                                                     :>
+                                                     QueryParam "pageToken" Text
+                                                       :>
+                                                       QueryParam "sortField"
+                                                         Text
+                                                         :>
+                                                         QueryParam "type" Text
+                                                           :>
+                                                           QueryParam
+                                                             "oauth_token"
+                                                             Text
+                                                             :>
+                                                             QueryParam
+                                                               "creativeType"
+                                                               Text
+                                                               :>
+                                                               QueryParam
+                                                                 "dynamicClickTracker"
+                                                                 Bool
+                                                                 :>
+                                                                 QueryParam
+                                                                   "compatibility"
+                                                                   Text
+                                                                   :>
+                                                                   QueryParam
+                                                                     "archived"
+                                                                     Bool
+                                                                     :>
+                                                                     QueryParam
+                                                                       "maxResults"
+                                                                       Int32
+                                                                       :>
+                                                                       QueryParam
+                                                                         "fields"
+                                                                         Text
+                                                                         :>
+                                                                         QueryParam
+                                                                           "alt"
+                                                                           Text
+                                                                           :>
+                                                                           QueryParam
+                                                                             "audienceSegmentIds"
+                                                                             Int64
+                                                                             :>
+                                                                             Get
+                                                                               '[JSON]
+                                                                               AdsListResponse
 
 -- | Updates an existing ad. This method supports patch semantics.
 type AdsPatch =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "ads"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "id" Int64
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "ads" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "id" Int64 :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Patch '[JSON] Ad
 
 -- | Gets one ad by ID.
 type AdsGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "ads"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "ads" :>
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] Ad
 
 -- | Updates an existing ad.
 type AdsUpdate =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "ads"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "ads" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Put '[JSON] Ad
 
 type ProjectsAPI = ProjectsList :<|> ProjectsGet
 
 -- | Retrieves a list of projects, possibly filtered.
 type ProjectsList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "projects"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "searchString" Text
-       :> QueryParam "ids" Int64
-       :> QueryParam "sortOrder" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "sortField" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "advertiserIds" Int64
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "projects" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "searchString" Text :>
+                       QueryParam "ids" Int64 :>
+                         QueryParam "sortOrder" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "sortField" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "advertiserIds" Int64 :>
+                                     QueryParam "maxResults" Int32 :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "alt" Text :>
+                                           Get '[JSON] ProjectsListResponse
 
 -- | Gets one project by ID.
 type ProjectsGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "projects"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "projects" :>
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] Project
 
 type SubaccountsAPI =
      SubaccountsInsert :<|> SubaccountsList :<|>
@@ -5256,76 +5801,87 @@ type SubaccountsAPI =
 
 -- | Inserts a new subaccount.
 type SubaccountsInsert =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "subaccounts"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "subaccounts" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] Subaccount
 
 -- | Gets a list of subaccounts, possibly filtered.
 type SubaccountsList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "subaccounts"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "searchString" Text
-       :> QueryParam "ids" Int64
-       :> QueryParam "sortOrder" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "sortField" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "subaccounts" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "searchString" Text :>
+                       QueryParam "ids" Int64 :>
+                         QueryParam "sortOrder" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "sortField" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "maxResults" Int32 :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Text :>
+                                         Get '[JSON] SubaccountsListResponse
 
 -- | Updates an existing subaccount. This method supports patch semantics.
 type SubaccountsPatch =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "subaccounts"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "id" Int64
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "subaccounts" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "id" Int64 :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Patch '[JSON] Subaccount
 
 -- | Gets one subaccount by ID.
 type SubaccountsGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "subaccounts"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "subaccounts" :>
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] Subaccount
 
 -- | Updates an existing subaccount.
 type SubaccountsUpdate =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "subaccounts"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "subaccounts" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Put '[JSON] Subaccount
 
 type AdvertiserGroupsAPI =
      AdvertiserGroupsInsert :<|> AdvertiserGroupsList :<|>
@@ -5336,91 +5892,107 @@ type AdvertiserGroupsAPI =
 
 -- | Inserts a new advertiser group.
 type AdvertiserGroupsInsert =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "advertiserGroups"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "advertiserGroups" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] AdvertiserGroup
 
 -- | Retrieves a list of advertiser groups, possibly filtered.
 type AdvertiserGroupsList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "advertiserGroups"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "searchString" Text
-       :> QueryParam "ids" Int64
-       :> QueryParam "sortOrder" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "sortField" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "advertiserGroups" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "searchString" Text :>
+                       QueryParam "ids" Int64 :>
+                         QueryParam "sortOrder" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "sortField" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "maxResults" Int32 :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Text :>
+                                         Get '[JSON]
+                                           AdvertiserGroupsListResponse
 
 -- | Updates an existing advertiser group. This method supports patch
 -- semantics.
 type AdvertiserGroupsPatch =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "advertiserGroups"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "id" Int64
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "advertiserGroups" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "id" Int64 :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Patch '[JSON] AdvertiserGroup
 
 -- | Gets one advertiser group by ID.
 type AdvertiserGroupsGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "advertiserGroups"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "advertiserGroups" :>
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Get '[JSON] AdvertiserGroup
 
 -- | Deletes an existing advertiser group.
 type AdvertiserGroupsDelete =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "advertiserGroups"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "advertiserGroups" :>
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Updates an existing advertiser group.
 type AdvertiserGroupsUpdate =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "advertiserGroups"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "advertiserGroups" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Put '[JSON] AdvertiserGroup
 
 type CreativeFieldValuesAPI =
      CreativeFieldValuesInsert :<|>
@@ -5432,103 +6004,121 @@ type CreativeFieldValuesAPI =
 
 -- | Inserts a new creative field value.
 type CreativeFieldValuesInsert =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "creativeFields"
-       :> Capture "creativeFieldId" Int64
-       :> "creativeFieldValues"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "creativeFields" :>
+               Capture "creativeFieldId" Int64 :>
+                 "creativeFieldValues" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :>
+                                 Post '[JSON] CreativeFieldValue
 
 -- | Retrieves a list of creative field values, possibly filtered.
 type CreativeFieldValuesList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "creativeFields"
-       :> Capture "creativeFieldId" Int64
-       :> "creativeFieldValues"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "searchString" Text
-       :> QueryParam "ids" Int64
-       :> QueryParam "sortOrder" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "sortField" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "creativeFields" :>
+               Capture "creativeFieldId" Int64 :>
+                 "creativeFieldValues" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "searchString" Text :>
+                           QueryParam "ids" Int64 :>
+                             QueryParam "sortOrder" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "pageToken" Text :>
+                                   QueryParam "sortField" Text :>
+                                     QueryParam "oauth_token" Text :>
+                                       QueryParam "maxResults" Int32 :>
+                                         QueryParam "fields" Text :>
+                                           QueryParam "alt" Text :>
+                                             Get '[JSON]
+                                               CreativeFieldValuesListResponse
 
 -- | Updates an existing creative field value. This method supports patch
 -- semantics.
 type CreativeFieldValuesPatch =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "creativeFields"
-       :> Capture "creativeFieldId" Int64
-       :> "creativeFieldValues"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "id" Int64
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "creativeFields" :>
+               Capture "creativeFieldId" Int64 :>
+                 "creativeFieldValues" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "id" Int64 :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Patch '[JSON] CreativeFieldValue
 
 -- | Gets one creative field value by ID.
 type CreativeFieldValuesGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "creativeFields"
-       :> Capture "creativeFieldId" Int64
-       :> "creativeFieldValues"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "creativeFields" :>
+               Capture "creativeFieldId" Int64 :>
+                 "creativeFieldValues" :>
+                   Capture "id" Int64 :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Get '[JSON] CreativeFieldValue
 
 -- | Deletes an existing creative field value.
 type CreativeFieldValuesDelete =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "creativeFields"
-       :> Capture "creativeFieldId" Int64
-       :> "creativeFieldValues"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "creativeFields" :>
+               Capture "creativeFieldId" Int64 :>
+                 "creativeFieldValues" :>
+                   Capture "id" Int64 :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Updates an existing creative field value.
 type CreativeFieldValuesUpdate =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "creativeFields"
-       :> Capture "creativeFieldId" Int64
-       :> "creativeFieldValues"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "creativeFields" :>
+               Capture "creativeFieldId" Int64 :>
+                 "creativeFieldValues" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :>
+                                 Put '[JSON] CreativeFieldValue
 
 type DirectorySiteContactsAPI =
      DirectorySiteContactsList :<|>
@@ -5536,37 +6126,44 @@ type DirectorySiteContactsAPI =
 
 -- | Retrieves a list of directory site contacts, possibly filtered.
 type DirectorySiteContactsList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "directorySiteContacts"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "searchString" Text
-       :> QueryParam "ids" Int64
-       :> QueryParam "directorySiteIds" Int64
-       :> QueryParam "sortOrder" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "sortField" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "directorySiteContacts" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "searchString" Text :>
+                       QueryParam "ids" Int64 :>
+                         QueryParam "directorySiteIds" Int64 :>
+                           QueryParam "sortOrder" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "sortField" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "maxResults" Int32 :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "alt" Text :>
+                                           Get '[JSON]
+                                             DirectorySiteContactsListResponse
 
 -- | Gets one directory site contact by ID.
 type DirectorySiteContactsGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "directorySiteContacts"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "directorySiteContacts" :>
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Get '[JSON] DirectorySiteContact
 
 type DirectorySitesAPI =
      DirectorySitesInsert :<|> DirectorySitesList :<|>
@@ -5574,56 +6171,69 @@ type DirectorySitesAPI =
 
 -- | Inserts a new directory site.
 type DirectorySitesInsert =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "directorySites"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "directorySites" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Post '[JSON] DirectorySite
 
 -- | Retrieves a list of directory sites, possibly filtered.
 type DirectorySitesList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "directorySites"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "searchString" Text
-       :> QueryParam "acceptsInterstitialPlacements" Bool
-       :> QueryParam "acceptsPublisherPaidPlacements" Bool
-       :> QueryParam "ids" Int64
-       :> QueryParam "sortOrder" Text
-       :> QueryParam "active" Bool
-       :> QueryParam "key" Text
-       :> QueryParam "countryId" Int64
-       :> QueryParam "pageToken" Text
-       :> QueryParam "sortField" Text
-       :> QueryParam "acceptsInStreamVideoPlacements" Bool
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "parentId" Int64
-       :> QueryParam "dfp_network_code" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "directorySites" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "searchString" Text :>
+                       QueryParam "acceptsInterstitialPlacements" Bool :>
+                         QueryParam "acceptsPublisherPaidPlacements" Bool :>
+                           QueryParam "ids" Int64 :>
+                             QueryParam "sortOrder" Text :>
+                               QueryParam "active" Bool :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "countryId" Int64 :>
+                                     QueryParam "pageToken" Text :>
+                                       QueryParam "sortField" Text :>
+                                         QueryParam
+                                           "acceptsInStreamVideoPlacements"
+                                           Bool
+                                           :>
+                                           QueryParam "oauth_token" Text :>
+                                             QueryParam "maxResults" Int32 :>
+                                               QueryParam "parentId" Int64 :>
+                                                 QueryParam "dfp_network_code"
+                                                   Text
+                                                   :>
+                                                   QueryParam "fields" Text :>
+                                                     QueryParam "alt" Text :>
+                                                       Get '[JSON]
+                                                         DirectorySitesListResponse
 
 -- | Gets one directory site by ID.
 type DirectorySitesGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "directorySites"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "directorySites" :>
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] DirectorySite
 
 type FloodlightActivityGroupsAPI =
      FloodlightActivityGroupsInsert :<|>
@@ -5635,91 +6245,109 @@ type FloodlightActivityGroupsAPI =
 
 -- | Inserts a new floodlight activity group.
 type FloodlightActivityGroupsInsert =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "floodlightActivityGroups"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "floodlightActivityGroups" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Post '[JSON] FloodlightActivityGroup
 
 -- | Retrieves a list of floodlight activity groups, possibly filtered.
 type FloodlightActivityGroupsList =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "floodlightActivityGroups"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "floodlightConfigurationId" Int64
-       :> QueryParam "userIp" Text
-       :> QueryParam "advertiserId" Int64
-       :> QueryParam "searchString" Text
-       :> QueryParam "ids" Int64
-       :> QueryParam "sortOrder" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "sortField" Text
-       :> QueryParam "type" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "floodlightActivityGroups" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "floodlightConfigurationId" Int64 :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "advertiserId" Int64 :>
+                         QueryParam "searchString" Text :>
+                           QueryParam "ids" Int64 :>
+                             QueryParam "sortOrder" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "pageToken" Text :>
+                                   QueryParam "sortField" Text :>
+                                     QueryParam "type" Text :>
+                                       QueryParam "oauth_token" Text :>
+                                         QueryParam "maxResults" Int32 :>
+                                           QueryParam "fields" Text :>
+                                             QueryParam "alt" Text :>
+                                               Get '[JSON]
+                                                 FloodlightActivityGroupsListResponse
 
 -- | Updates an existing floodlight activity group. This method supports
 -- patch semantics.
 type FloodlightActivityGroupsPatch =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "floodlightActivityGroups"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "id" Int64
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "floodlightActivityGroups" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "id" Int64 :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Patch '[JSON] FloodlightActivityGroup
 
 -- | Gets one floodlight activity group by ID.
 type FloodlightActivityGroupsGet =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "floodlightActivityGroups"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "floodlightActivityGroups" :>
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :>
+                               Get '[JSON] FloodlightActivityGroup
 
 -- | Deletes an existing floodlight activity group.
 type FloodlightActivityGroupsDelete =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "floodlightActivityGroups"
-       :> Capture "id" Int64
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "floodlightActivityGroups" :>
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Updates an existing floodlight activity group.
 type FloodlightActivityGroupsUpdate =
-     "dfareporting" :> "v2.2" :> "userprofiles" :>
-       Capture "profileId" Int64
-       :> "floodlightActivityGroups"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "dfareporting" :>
+       "v2.2" :>
+         "userprofiles" :>
+           Capture "profileId" Int64 :>
+             "floodlightActivityGroups" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :>
+                             Put '[JSON] FloodlightActivityGroup

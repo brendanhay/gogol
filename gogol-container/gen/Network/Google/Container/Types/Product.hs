@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -238,6 +239,55 @@ cNodeRoutingPrefixSize
   = lens _cNodeRoutingPrefixSize
       (\ s a -> s{_cNodeRoutingPrefixSize = a})
 
+instance FromJSON Cluster where
+        parseJSON
+          = withObject "Cluster"
+              (\ o ->
+                 Cluster <$>
+                   (o .:? "status") <*> (o .:? "nodeConfig") <*>
+                     (o .:? "numNodes")
+                     <*> (o .:? "clusterApiVersion")
+                     <*> (o .:? "network")
+                     <*> (o .:? "zone")
+                     <*> (o .:? "servicesIpv4Cidr")
+                     <*> (o .:? "masterAuth")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "enableCloudMonitoring")
+                     <*> (o .:? "name")
+                     <*> (o .:? "statusMessage")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "containerIpv4Cidr")
+                     <*> (o .:? "endpoint")
+                     <*> (o .:? "enableCloudLogging")
+                     <*> (o .:? "description")
+                     <*> (o .:? "instanceGroupUrls" .!= mempty)
+                     <*> (o .:? "nodeRoutingPrefixSize"))
+
+instance ToJSON Cluster where
+        toJSON Cluster{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _cStatus,
+                  ("nodeConfig" .=) <$> _cNodeConfig,
+                  ("numNodes" .=) <$> _cNumNodes,
+                  ("clusterApiVersion" .=) <$> _cClusterApiVersion,
+                  ("network" .=) <$> _cNetwork, ("zone" .=) <$> _cZone,
+                  ("servicesIpv4Cidr" .=) <$> _cServicesIpv4Cidr,
+                  ("masterAuth" .=) <$> _cMasterAuth,
+                  ("selfLink" .=) <$> _cSelfLink,
+                  ("enableCloudMonitoring" .=) <$>
+                    _cEnableCloudMonitoring,
+                  ("name" .=) <$> _cName,
+                  ("statusMessage" .=) <$> _cStatusMessage,
+                  ("creationTimestamp" .=) <$> _cCreationTimestamp,
+                  ("containerIpv4Cidr" .=) <$> _cContainerIpv4Cidr,
+                  ("endpoint" .=) <$> _cEndpoint,
+                  ("enableCloudLogging" .=) <$> _cEnableCloudLogging,
+                  ("description" .=) <$> _cDescription,
+                  ("instanceGroupUrls" .=) <$> _cInstanceGroupUrls,
+                  ("nodeRoutingPrefixSize" .=) <$>
+                    _cNodeRoutingPrefixSize])
+
 --
 -- /See:/ 'createClusterRequest' smart constructor.
 newtype CreateClusterRequest = CreateClusterRequest
@@ -260,6 +310,15 @@ createClusterRequest =
 ccrCluster :: Lens' CreateClusterRequest (Maybe (Maybe Cluster))
 ccrCluster
   = lens _ccrCluster (\ s a -> s{_ccrCluster = a})
+
+instance FromJSON CreateClusterRequest where
+        parseJSON
+          = withObject "CreateClusterRequest"
+              (\ o -> CreateClusterRequest <$> (o .:? "cluster"))
+
+instance ToJSON CreateClusterRequest where
+        toJSON CreateClusterRequest{..}
+          = object (catMaybes [("cluster" .=) <$> _ccrCluster])
 
 --
 -- /See:/ 'listAggregatedClustersResponse' smart constructor.
@@ -285,6 +344,19 @@ lacrClusters
   = lens _lacrClusters (\ s a -> s{_lacrClusters = a})
       . _Default
       . _Coerce
+
+instance FromJSON ListAggregatedClustersResponse
+         where
+        parseJSON
+          = withObject "ListAggregatedClustersResponse"
+              (\ o ->
+                 ListAggregatedClustersResponse <$>
+                   (o .:? "clusters" .!= mempty))
+
+instance ToJSON ListAggregatedClustersResponse where
+        toJSON ListAggregatedClustersResponse{..}
+          = object
+              (catMaybes [("clusters" .=) <$> _lacrClusters])
 
 --
 -- /See:/ 'listAggregatedOperationsResponse' smart constructor.
@@ -312,6 +384,20 @@ laorOperations
       . _Default
       . _Coerce
 
+instance FromJSON ListAggregatedOperationsResponse
+         where
+        parseJSON
+          = withObject "ListAggregatedOperationsResponse"
+              (\ o ->
+                 ListAggregatedOperationsResponse <$>
+                   (o .:? "operations" .!= mempty))
+
+instance ToJSON ListAggregatedOperationsResponse
+         where
+        toJSON ListAggregatedOperationsResponse{..}
+          = object
+              (catMaybes [("operations" .=) <$> _laorOperations])
+
 --
 -- /See:/ 'listClustersResponse' smart constructor.
 newtype ListClustersResponse = ListClustersResponse
@@ -336,6 +422,18 @@ lcrClusters
   = lens _lcrClusters (\ s a -> s{_lcrClusters = a}) .
       _Default
       . _Coerce
+
+instance FromJSON ListClustersResponse where
+        parseJSON
+          = withObject "ListClustersResponse"
+              (\ o ->
+                 ListClustersResponse <$>
+                   (o .:? "clusters" .!= mempty))
+
+instance ToJSON ListClustersResponse where
+        toJSON ListClustersResponse{..}
+          = object
+              (catMaybes [("clusters" .=) <$> _lcrClusters])
 
 --
 -- /See:/ 'listOperationsResponse' smart constructor.
@@ -362,6 +460,18 @@ lorOperations
       (\ s a -> s{_lorOperations = a})
       . _Default
       . _Coerce
+
+instance FromJSON ListOperationsResponse where
+        parseJSON
+          = withObject "ListOperationsResponse"
+              (\ o ->
+                 ListOperationsResponse <$>
+                   (o .:? "operations" .!= mempty))
+
+instance ToJSON ListOperationsResponse where
+        toJSON ListOperationsResponse{..}
+          = object
+              (catMaybes [("operations" .=) <$> _lorOperations])
 
 -- | The authentication information for accessing the master. Authentication
 -- is either done using HTTP basic authentication or using a bearer token.
@@ -444,6 +554,29 @@ maClusterCaCertificate
   = lens _maClusterCaCertificate
       (\ s a -> s{_maClusterCaCertificate = a})
 
+instance FromJSON MasterAuth where
+        parseJSON
+          = withObject "MasterAuth"
+              (\ o ->
+                 MasterAuth <$>
+                   (o .:? "bearerToken") <*> (o .:? "clientKey") <*>
+                     (o .:? "user")
+                     <*> (o .:? "clientCertificate")
+                     <*> (o .:? "password")
+                     <*> (o .:? "clusterCaCertificate"))
+
+instance ToJSON MasterAuth where
+        toJSON MasterAuth{..}
+          = object
+              (catMaybes
+                 [("bearerToken" .=) <$> _maBearerToken,
+                  ("clientKey" .=) <$> _maClientKey,
+                  ("user" .=) <$> _maUser,
+                  ("clientCertificate" .=) <$> _maClientCertificate,
+                  ("password" .=) <$> _maPassword,
+                  ("clusterCaCertificate" .=) <$>
+                    _maClusterCaCertificate])
+
 --
 -- /See:/ 'nodeConfig' smart constructor.
 data NodeConfig = NodeConfig
@@ -500,6 +633,23 @@ ncMachineType :: Lens' NodeConfig (Maybe Text)
 ncMachineType
   = lens _ncMachineType
       (\ s a -> s{_ncMachineType = a})
+
+instance FromJSON NodeConfig where
+        parseJSON
+          = withObject "NodeConfig"
+              (\ o ->
+                 NodeConfig <$>
+                   (o .:? "serviceAccounts" .!= mempty) <*>
+                     (o .:? "sourceImage")
+                     <*> (o .:? "machineType"))
+
+instance ToJSON NodeConfig where
+        toJSON NodeConfig{..}
+          = object
+              (catMaybes
+                 [("serviceAccounts" .=) <$> _ncServiceAccounts,
+                  ("sourceImage" .=) <$> _ncSourceImage,
+                  ("machineType" .=) <$> _ncMachineType])
 
 -- | Defines the operation resource. All fields are output only.
 --
@@ -588,6 +738,31 @@ oTargetLink
 oTarget :: Lens' Operation (Maybe Text)
 oTarget = lens _oTarget (\ s a -> s{_oTarget = a})
 
+instance FromJSON Operation where
+        parseJSON
+          = withObject "Operation"
+              (\ o ->
+                 Operation <$>
+                   (o .:? "status") <*> (o .:? "zone") <*>
+                     (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "operationType")
+                     <*> (o .:? "errorMessage")
+                     <*> (o .:? "targetLink")
+                     <*> (o .:? "target"))
+
+instance ToJSON Operation where
+        toJSON Operation{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _oStatus, ("zone" .=) <$> _oZone,
+                  ("selfLink" .=) <$> _oSelfLink,
+                  ("name" .=) <$> _oName,
+                  ("operationType" .=) <$> _oOperationType,
+                  ("errorMessage" .=) <$> _oErrorMessage,
+                  ("targetLink" .=) <$> _oTargetLink,
+                  ("target" .=) <$> _oTarget])
+
 -- | A Compute Engine service account.
 --
 -- /See:/ 'serviceAccount' smart constructor.
@@ -621,3 +796,17 @@ saScopes
   = lens _saScopes (\ s a -> s{_saScopes = a}) .
       _Default
       . _Coerce
+
+instance FromJSON ServiceAccount where
+        parseJSON
+          = withObject "ServiceAccount"
+              (\ o ->
+                 ServiceAccount <$>
+                   (o .:? "email") <*> (o .:? "scopes" .!= mempty))
+
+instance ToJSON ServiceAccount where
+        toJSON ServiceAccount{..}
+          = object
+              (catMaybes
+                 [("email" .=) <$> _saEmail,
+                  ("scopes" .=) <$> _saScopes])

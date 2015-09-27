@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -187,6 +188,45 @@ igmDescription
   = lens _igmDescription
       (\ s a -> s{_igmDescription = a})
 
+instance FromJSON InstanceGroupManager where
+        parseJSON
+          = withObject "InstanceGroupManager"
+              (\ o ->
+                 InstanceGroupManager <$>
+                   (o .:? "currentSize") <*> (o .:? "group") <*>
+                     (o .:? "kind" .!= "replicapool#instanceGroupManager")
+                     <*> (o .:? "fingerprint")
+                     <*> (o .:? "baseInstanceName")
+                     <*> (o .:? "autoHealingPolicies" .!= mempty)
+                     <*> (o .:? "instanceTemplate")
+                     <*> (o .:? "targetSize")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "id")
+                     <*> (o .:? "targetPools" .!= mempty)
+                     <*> (o .:? "description"))
+
+instance ToJSON InstanceGroupManager where
+        toJSON InstanceGroupManager{..}
+          = object
+              (catMaybes
+                 [("currentSize" .=) <$> _igmCurrentSize,
+                  ("group" .=) <$> _igmGroup,
+                  Just ("kind" .= _igmKind),
+                  ("fingerprint" .=) <$> _igmFingerprint,
+                  ("baseInstanceName" .=) <$> _igmBaseInstanceName,
+                  ("autoHealingPolicies" .=) <$>
+                    _igmAutoHealingPolicies,
+                  ("instanceTemplate" .=) <$> _igmInstanceTemplate,
+                  ("targetSize" .=) <$> _igmTargetSize,
+                  ("selfLink" .=) <$> _igmSelfLink,
+                  ("name" .=) <$> _igmName,
+                  ("creationTimestamp" .=) <$> _igmCreationTimestamp,
+                  ("id" .=) <$> _igmId,
+                  ("targetPools" .=) <$> _igmTargetPools,
+                  ("description" .=) <$> _igmDescription])
+
 --
 -- /See:/ 'instanceGroupManagerList' smart constructor.
 data InstanceGroupManagerList = InstanceGroupManagerList
@@ -247,6 +287,28 @@ igmlSelfLink
 igmlId :: Lens' InstanceGroupManagerList (Maybe Text)
 igmlId = lens _igmlId (\ s a -> s{_igmlId = a})
 
+instance FromJSON InstanceGroupManagerList where
+        parseJSON
+          = withObject "InstanceGroupManagerList"
+              (\ o ->
+                 InstanceGroupManagerList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!=
+                        "replicapool#instanceGroupManagerList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON InstanceGroupManagerList where
+        toJSON InstanceGroupManagerList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _igmlNextPageToken,
+                  Just ("kind" .= _igmlKind),
+                  ("items" .=) <$> _igmlItems,
+                  ("selfLink" .=) <$> _igmlSelfLink,
+                  ("id" .=) <$> _igmlId])
+
 --
 -- /See:/ 'instanceGroupManagersAbandonInstancesRequest' smart constructor.
 newtype InstanceGroupManagersAbandonInstancesRequest = InstanceGroupManagersAbandonInstancesRequest
@@ -273,6 +335,22 @@ igmairInstances
       (\ s a -> s{_igmairInstances = a})
       . _Default
       . _Coerce
+
+instance FromJSON
+         InstanceGroupManagersAbandonInstancesRequest where
+        parseJSON
+          = withObject
+              "InstanceGroupManagersAbandonInstancesRequest"
+              (\ o ->
+                 InstanceGroupManagersAbandonInstancesRequest <$>
+                   (o .:? "instances" .!= mempty))
+
+instance ToJSON
+         InstanceGroupManagersAbandonInstancesRequest where
+        toJSON
+          InstanceGroupManagersAbandonInstancesRequest{..}
+          = object
+              (catMaybes [("instances" .=) <$> _igmairInstances])
 
 --
 -- /See:/ 'instanceGroupManagersDeleteInstancesRequest' smart constructor.
@@ -301,6 +379,22 @@ igmdirInstances
       . _Default
       . _Coerce
 
+instance FromJSON
+         InstanceGroupManagersDeleteInstancesRequest where
+        parseJSON
+          = withObject
+              "InstanceGroupManagersDeleteInstancesRequest"
+              (\ o ->
+                 InstanceGroupManagersDeleteInstancesRequest <$>
+                   (o .:? "instances" .!= mempty))
+
+instance ToJSON
+         InstanceGroupManagersDeleteInstancesRequest where
+        toJSON
+          InstanceGroupManagersDeleteInstancesRequest{..}
+          = object
+              (catMaybes [("instances" .=) <$> _igmdirInstances])
+
 --
 -- /See:/ 'instanceGroupManagersRecreateInstancesRequest' smart constructor.
 newtype InstanceGroupManagersRecreateInstancesRequest = InstanceGroupManagersRecreateInstancesRequest
@@ -328,6 +422,22 @@ igmrirInstances
       . _Default
       . _Coerce
 
+instance FromJSON
+         InstanceGroupManagersRecreateInstancesRequest where
+        parseJSON
+          = withObject
+              "InstanceGroupManagersRecreateInstancesRequest"
+              (\ o ->
+                 InstanceGroupManagersRecreateInstancesRequest <$>
+                   (o .:? "instances" .!= mempty))
+
+instance ToJSON
+         InstanceGroupManagersRecreateInstancesRequest where
+        toJSON
+          InstanceGroupManagersRecreateInstancesRequest{..}
+          = object
+              (catMaybes [("instances" .=) <$> _igmrirInstances])
+
 --
 -- /See:/ 'instanceGroupManagersSetInstanceTemplateRequest' smart constructor.
 newtype InstanceGroupManagersSetInstanceTemplateRequest = InstanceGroupManagersSetInstanceTemplateRequest
@@ -352,6 +462,24 @@ igmsitrInstanceTemplate :: Lens' InstanceGroupManagersSetInstanceTemplateRequest
 igmsitrInstanceTemplate
   = lens _igmsitrInstanceTemplate
       (\ s a -> s{_igmsitrInstanceTemplate = a})
+
+instance FromJSON
+         InstanceGroupManagersSetInstanceTemplateRequest where
+        parseJSON
+          = withObject
+              "InstanceGroupManagersSetInstanceTemplateRequest"
+              (\ o ->
+                 InstanceGroupManagersSetInstanceTemplateRequest <$>
+                   (o .:? "instanceTemplate"))
+
+instance ToJSON
+         InstanceGroupManagersSetInstanceTemplateRequest where
+        toJSON
+          InstanceGroupManagersSetInstanceTemplateRequest{..}
+          = object
+              (catMaybes
+                 [("instanceTemplate" .=) <$>
+                    _igmsitrInstanceTemplate])
 
 --
 -- /See:/ 'instanceGroupManagersSetTargetPoolsRequest' smart constructor.
@@ -392,6 +520,24 @@ igmstprTargetPools
       (\ s a -> s{_igmstprTargetPools = a})
       . _Default
       . _Coerce
+
+instance FromJSON
+         InstanceGroupManagersSetTargetPoolsRequest where
+        parseJSON
+          = withObject
+              "InstanceGroupManagersSetTargetPoolsRequest"
+              (\ o ->
+                 InstanceGroupManagersSetTargetPoolsRequest <$>
+                   (o .:? "fingerprint") <*>
+                     (o .:? "targetPools" .!= mempty))
+
+instance ToJSON
+         InstanceGroupManagersSetTargetPoolsRequest where
+        toJSON InstanceGroupManagersSetTargetPoolsRequest{..}
+          = object
+              (catMaybes
+                 [("fingerprint" .=) <$> _igmstprFingerprint,
+                  ("targetPools" .=) <$> _igmstprTargetPools])
 
 -- | An operation resource, used to manage asynchronous API requests.
 --
@@ -624,6 +770,58 @@ oClientOperationId
   = lens _oClientOperationId
       (\ s a -> s{_oClientOperationId = a})
 
+instance FromJSON Operation where
+        parseJSON
+          = withObject "Operation"
+              (\ o ->
+                 Operation <$>
+                   (o .:? "targetId") <*> (o .:? "status") <*>
+                     (o .:? "insertTime")
+                     <*> (o .:? "progress")
+                     <*> (o .:? "startTime")
+                     <*> (o .:? "kind" .!= "replicapool#operation")
+                     <*> (o .:? "error")
+                     <*> (o .:? "httpErrorMessage")
+                     <*> (o .:? "zone")
+                     <*> (o .:? "warnings" .!= mempty)
+                     <*> (o .:? "httpErrorStatusCode")
+                     <*> (o .:? "user")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "statusMessage")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "endTime")
+                     <*> (o .:? "id")
+                     <*> (o .:? "operationType")
+                     <*> (o .:? "region")
+                     <*> (o .:? "targetLink")
+                     <*> (o .:? "clientOperationId"))
+
+instance ToJSON Operation where
+        toJSON Operation{..}
+          = object
+              (catMaybes
+                 [("targetId" .=) <$> _oTargetId,
+                  ("status" .=) <$> _oStatus,
+                  ("insertTime" .=) <$> _oInsertTime,
+                  ("progress" .=) <$> _oProgress,
+                  ("startTime" .=) <$> _oStartTime,
+                  Just ("kind" .= _oKind), ("error" .=) <$> _oError,
+                  ("httpErrorMessage" .=) <$> _oHttpErrorMessage,
+                  ("zone" .=) <$> _oZone,
+                  ("warnings" .=) <$> _oWarnings,
+                  ("httpErrorStatusCode" .=) <$> _oHttpErrorStatusCode,
+                  ("user" .=) <$> _oUser,
+                  ("selfLink" .=) <$> _oSelfLink,
+                  ("name" .=) <$> _oName,
+                  ("statusMessage" .=) <$> _oStatusMessage,
+                  ("creationTimestamp" .=) <$> _oCreationTimestamp,
+                  ("endTime" .=) <$> _oEndTime, ("id" .=) <$> _oId,
+                  ("operationType" .=) <$> _oOperationType,
+                  ("region" .=) <$> _oRegion,
+                  ("targetLink" .=) <$> _oTargetLink,
+                  ("clientOperationId" .=) <$> _oClientOperationId])
+
 -- | [Output Only] If errors occurred during processing of this operation,
 -- this field will be populated.
 --
@@ -651,6 +849,16 @@ oeErrors
   = lens _oeErrors (\ s a -> s{_oeErrors = a}) .
       _Default
       . _Coerce
+
+instance FromJSON OperationError where
+        parseJSON
+          = withObject "OperationError"
+              (\ o ->
+                 OperationError <$> (o .:? "errors" .!= mempty))
+
+instance ToJSON OperationError where
+        toJSON OperationError{..}
+          = object (catMaybes [("errors" .=) <$> _oeErrors])
 
 --
 -- /See:/ 'operationItemDataItemWarnings' smart constructor.
@@ -682,6 +890,20 @@ oidiwValue
 -- | [Output Only] Metadata key for this warning.
 oidiwKey :: Lens' OperationItemDataItemWarnings (Maybe Text)
 oidiwKey = lens _oidiwKey (\ s a -> s{_oidiwKey = a})
+
+instance FromJSON OperationItemDataItemWarnings where
+        parseJSON
+          = withObject "OperationItemDataItemWarnings"
+              (\ o ->
+                 OperationItemDataItemWarnings <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON OperationItemDataItemWarnings where
+        toJSON OperationItemDataItemWarnings{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _oidiwValue,
+                  ("key" .=) <$> _oidiwKey])
 
 --
 -- /See:/ 'operationItemErrorsError' smart constructor.
@@ -724,6 +946,22 @@ oieeMessage :: Lens' OperationItemErrorsError (Maybe Text)
 oieeMessage
   = lens _oieeMessage (\ s a -> s{_oieeMessage = a})
 
+instance FromJSON OperationItemErrorsError where
+        parseJSON
+          = withObject "OperationItemErrorsError"
+              (\ o ->
+                 OperationItemErrorsError <$>
+                   (o .:? "location") <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON OperationItemErrorsError where
+        toJSON OperationItemErrorsError{..}
+          = object
+              (catMaybes
+                 [("location" .=) <$> _oieeLocation,
+                  ("code" .=) <$> _oieeCode,
+                  ("message" .=) <$> _oieeMessage])
+
 --
 -- /See:/ 'operationItemWarnings' smart constructor.
 data OperationItemWarnings = OperationItemWarnings
@@ -764,6 +1002,21 @@ oiwCode = lens _oiwCode (\ s a -> s{_oiwCode = a})
 oiwMessage :: Lens' OperationItemWarnings (Maybe Text)
 oiwMessage
   = lens _oiwMessage (\ s a -> s{_oiwMessage = a})
+
+instance FromJSON OperationItemWarnings where
+        parseJSON
+          = withObject "OperationItemWarnings"
+              (\ o ->
+                 OperationItemWarnings <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON OperationItemWarnings where
+        toJSON OperationItemWarnings{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _oiwData, ("code" .=) <$> _oiwCode,
+                  ("message" .=) <$> _oiwMessage])
 
 --
 -- /See:/ 'operationList' smart constructor.
@@ -824,6 +1077,26 @@ olSelfLink
 olId :: Lens' OperationList (Maybe Text)
 olId = lens _olId (\ s a -> s{_olId = a})
 
+instance FromJSON OperationList where
+        parseJSON
+          = withObject "OperationList"
+              (\ o ->
+                 OperationList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "replicapool#operationList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON OperationList where
+        toJSON OperationList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _olNextPageToken,
+                  Just ("kind" .= _olKind), ("items" .=) <$> _olItems,
+                  ("selfLink" .=) <$> _olSelfLink,
+                  ("id" .=) <$> _olId])
+
 --
 -- /See:/ 'replicaPoolAutoHealingPolicy' smart constructor.
 data ReplicaPoolAutoHealingPolicy = ReplicaPoolAutoHealingPolicy
@@ -861,3 +1134,17 @@ rpahpActionType :: Lens' ReplicaPoolAutoHealingPolicy (Maybe ReplicaPoolAutoHeal
 rpahpActionType
   = lens _rpahpActionType
       (\ s a -> s{_rpahpActionType = a})
+
+instance FromJSON ReplicaPoolAutoHealingPolicy where
+        parseJSON
+          = withObject "ReplicaPoolAutoHealingPolicy"
+              (\ o ->
+                 ReplicaPoolAutoHealingPolicy <$>
+                   (o .:? "healthCheck") <*> (o .:? "actionType"))
+
+instance ToJSON ReplicaPoolAutoHealingPolicy where
+        toJSON ReplicaPoolAutoHealingPolicy{..}
+          = object
+              (catMaybes
+                 [("healthCheck" .=) <$> _rpahpHealthCheck,
+                  ("actionType" .=) <$> _rpahpActionType])

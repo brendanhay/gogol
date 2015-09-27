@@ -182,37 +182,42 @@ type ZoneOperationsAPI =
 -- | Retrieves the list of operation resources contained within the specified
 -- zone.
 type ZoneOperationsList =
-     "replicapool" :> "v1beta2" :> "projects" :>
-       Capture "project" Text
-       :> "zones"
-       :> Capture "zone" Text
-       :> "operations"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "filter" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Word32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "replicapool" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "operations" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "filter" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "maxResults" Word32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :>
+                                       Get '[JSON] OperationList
 
 -- | Retrieves the specified zone-specific operation resource.
 type ZoneOperationsGet =
-     "replicapool" :> "v1beta2" :> "projects" :>
-       Capture "project" Text
-       :> "zones"
-       :> Capture "zone" Text
-       :> "operations"
-       :> Capture "operation" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "replicapool" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "operations" :>
+                   Capture "operation" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :> Get '[JSON] Operation
 
 type InstanceGroupManagersAPI =
      InstanceGroupManagersSetTargetPools :<|>
@@ -229,183 +234,212 @@ type InstanceGroupManagersAPI =
 -- | Modifies the target pools to which all new instances in this group are
 -- assigned. Existing instances in the group are not affected.
 type InstanceGroupManagersSetTargetPools =
-     "replicapool" :> "v1beta2" :> "projects" :>
-       Capture "project" Text
-       :> "zones"
-       :> Capture "zone" Text
-       :> "instanceGroupManagers"
-       :> Capture "instanceGroupManager" Text
-       :> "setTargetPools"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "replicapool" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instanceGroupManagers" :>
+                   Capture "instanceGroupManager" Text :>
+                     "setTargetPools" :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Post '[JSON] Operation
 
 -- | Creates an instance group manager, as well as the instance group and the
 -- specified number of instances.
 type InstanceGroupManagersInsert =
-     "replicapool" :> "v1beta2" :> "projects" :>
-       Capture "project" Text
-       :> "zones"
-       :> Capture "zone" Text
-       :> "instanceGroupManagers"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "size" Int32
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "replicapool" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instanceGroupManagers" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "size" Int32 :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :> Post '[JSON] Operation
 
 -- | Resizes the managed instance group up or down. If resized up, new
 -- instances are created using the current instance template. If resized
 -- down, instances are removed in the order outlined in Resizing a managed
 -- instance group.
 type InstanceGroupManagersResize =
-     "replicapool" :> "v1beta2" :> "projects" :>
-       Capture "project" Text
-       :> "zones"
-       :> Capture "zone" Text
-       :> "instanceGroupManagers"
-       :> Capture "instanceGroupManager" Text
-       :> "resize"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "size" Int32
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "replicapool" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instanceGroupManagers" :>
+                   Capture "instanceGroupManager" Text :>
+                     "resize" :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "size" Int32 :>
+                             QueryParam "userIp" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :>
+                                       Post '[JSON] Operation
 
 -- | Retrieves the list of Instance Group Manager resources contained within
 -- the specified zone.
 type InstanceGroupManagersList =
-     "replicapool" :> "v1beta2" :> "projects" :>
-       Capture "project" Text
-       :> "zones"
-       :> Capture "zone" Text
-       :> "instanceGroupManagers"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "filter" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Word32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "replicapool" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instanceGroupManagers" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "filter" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "maxResults" Word32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :>
+                                       Get '[JSON] InstanceGroupManagerList
 
 -- | Removes the specified instances from the managed instance group, and
 -- from any target pools of which they were members, without deleting the
 -- instances.
 type InstanceGroupManagersAbandonInstances =
-     "replicapool" :> "v1beta2" :> "projects" :>
-       Capture "project" Text
-       :> "zones"
-       :> Capture "zone" Text
-       :> "instanceGroupManagers"
-       :> Capture "instanceGroupManager" Text
-       :> "abandonInstances"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "replicapool" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instanceGroupManagers" :>
+                   Capture "instanceGroupManager" Text :>
+                     "abandonInstances" :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Post '[JSON] Operation
 
 -- | Sets the instance template to use when creating new instances in this
 -- group. Existing instances are not affected.
 type InstanceGroupManagersSetInstanceTemplate =
-     "replicapool" :> "v1beta2" :> "projects" :>
-       Capture "project" Text
-       :> "zones"
-       :> Capture "zone" Text
-       :> "instanceGroupManagers"
-       :> Capture "instanceGroupManager" Text
-       :> "setInstanceTemplate"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "replicapool" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instanceGroupManagers" :>
+                   Capture "instanceGroupManager" Text :>
+                     "setInstanceTemplate" :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Post '[JSON] Operation
 
 -- | Returns the specified Instance Group Manager resource.
 type InstanceGroupManagersGet =
-     "replicapool" :> "v1beta2" :> "projects" :>
-       Capture "project" Text
-       :> "zones"
-       :> Capture "zone" Text
-       :> "instanceGroupManagers"
-       :> Capture "instanceGroupManager" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "replicapool" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instanceGroupManagers" :>
+                   Capture "instanceGroupManager" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Get '[JSON] InstanceGroupManager
 
 -- | Deletes the specified instances. The instances are deleted, then removed
 -- from the instance group and any target pools of which they were a
 -- member. The targetSize of the instance group manager is reduced by the
 -- number of instances deleted.
 type InstanceGroupManagersDeleteInstances =
-     "replicapool" :> "v1beta2" :> "projects" :>
-       Capture "project" Text
-       :> "zones"
-       :> Capture "zone" Text
-       :> "instanceGroupManagers"
-       :> Capture "instanceGroupManager" Text
-       :> "deleteInstances"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "replicapool" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instanceGroupManagers" :>
+                   Capture "instanceGroupManager" Text :>
+                     "deleteInstances" :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Post '[JSON] Operation
 
 -- | Deletes the instance group manager and all instances contained within.
 -- If you\'d like to delete the manager without deleting the instances, you
 -- must first abandon the instances to remove them from the group.
 type InstanceGroupManagersDelete =
-     "replicapool" :> "v1beta2" :> "projects" :>
-       Capture "project" Text
-       :> "zones"
-       :> Capture "zone" Text
-       :> "instanceGroupManagers"
-       :> Capture "instanceGroupManager" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "replicapool" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instanceGroupManagers" :>
+                   Capture "instanceGroupManager" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Delete '[JSON] Operation
 
 -- | Recreates the specified instances. The instances are deleted, then
 -- recreated using the instance group manager\'s current instance template.
 type InstanceGroupManagersRecreateInstances =
-     "replicapool" :> "v1beta2" :> "projects" :>
-       Capture "project" Text
-       :> "zones"
-       :> Capture "zone" Text
-       :> "instanceGroupManagers"
-       :> Capture "instanceGroupManager" Text
-       :> "recreateInstances"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "replicapool" :>
+       "v1beta2" :>
+         "projects" :>
+           Capture "project" Text :>
+             "zones" :>
+               Capture "zone" Text :>
+                 "instanceGroupManagers" :>
+                   Capture "instanceGroupManager" Text :>
+                     "recreateInstances" :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Post '[JSON] Operation

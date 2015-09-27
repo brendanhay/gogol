@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -59,6 +60,22 @@ errMessage :: Lens' Error (Maybe Text)
 errMessage
   = lens _errMessage (\ s a -> s{_errMessage = a})
 
+instance FromJSON Error where
+        parseJSON
+          = withObject "Error"
+              (\ o ->
+                 Error <$>
+                   (o .:? "domain") <*> (o .:? "reason") <*>
+                     (o .:? "message"))
+
+instance ToJSON Error where
+        toJSON Error{..}
+          = object
+              (catMaybes
+                 [("domain" .=) <$> _errDomain,
+                  ("reason" .=) <$> _errReason,
+                  ("message" .=) <$> _errMessage])
+
 -- | A list of errors returned by a failed batch entry.
 --
 -- /See:/ 'errors' smart constructor.
@@ -99,6 +116,22 @@ eErrors :: Lens' Errors [Maybe Error]
 eErrors
   = lens _eErrors (\ s a -> s{_eErrors = a}) . _Default
       . _Coerce
+
+instance FromJSON Errors where
+        parseJSON
+          = withObject "Errors"
+              (\ o ->
+                 Errors <$>
+                   (o .:? "code") <*> (o .:? "message") <*>
+                     (o .:? "errors" .!= mempty))
+
+instance ToJSON Errors where
+        toJSON Errors{..}
+          = object
+              (catMaybes
+                 [("code" .=) <$> _eCode,
+                  ("message" .=) <$> _eMessage,
+                  ("errors" .=) <$> _eErrors])
 
 --
 -- /See:/ 'order' smart constructor.
@@ -292,6 +325,52 @@ ordShippingCost
   = lens _ordShippingCost
       (\ s a -> s{_ordShippingCost = a})
 
+instance FromJSON Order where
+        parseJSON
+          = withObject "Order"
+              (\ o ->
+                 Order <$>
+                   (o .:? "status") <*> (o .:? "merchantId") <*>
+                     (o .:? "refunds" .!= mempty)
+                     <*> (o .:? "kind" .!= "content#order")
+                     <*> (o .:? "lineItems" .!= mempty)
+                     <*> (o .:? "shipments" .!= mempty)
+                     <*> (o .:? "netAmount")
+                     <*> (o .:? "placedDate")
+                     <*> (o .:? "deliveryDetails")
+                     <*> (o .:? "shippingOption")
+                     <*> (o .:? "merchantOrderId")
+                     <*> (o .:? "acknowledged")
+                     <*> (o .:? "shippingCostTax")
+                     <*> (o .:? "customer")
+                     <*> (o .:? "id")
+                     <*> (o .:? "paymentMethod")
+                     <*> (o .:? "paymentStatus")
+                     <*> (o .:? "shippingCost"))
+
+instance ToJSON Order where
+        toJSON Order{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _ordStatus,
+                  ("merchantId" .=) <$> _ordMerchantId,
+                  ("refunds" .=) <$> _ordRefunds,
+                  Just ("kind" .= _ordKind),
+                  ("lineItems" .=) <$> _ordLineItems,
+                  ("shipments" .=) <$> _ordShipments,
+                  ("netAmount" .=) <$> _ordNetAmount,
+                  ("placedDate" .=) <$> _ordPlacedDate,
+                  ("deliveryDetails" .=) <$> _ordDeliveryDetails,
+                  ("shippingOption" .=) <$> _ordShippingOption,
+                  ("merchantOrderId" .=) <$> _ordMerchantOrderId,
+                  ("acknowledged" .=) <$> _ordAcknowledged,
+                  ("shippingCostTax" .=) <$> _ordShippingCostTax,
+                  ("customer" .=) <$> _ordCustomer,
+                  ("id" .=) <$> _ordId,
+                  ("paymentMethod" .=) <$> _ordPaymentMethod,
+                  ("paymentStatus" .=) <$> _ordPaymentStatus,
+                  ("shippingCost" .=) <$> _ordShippingCost])
+
 --
 -- /See:/ 'orderAddress' smart constructor.
 data OrderAddress = OrderAddress
@@ -388,6 +467,33 @@ oaFullAddress
 oaRegion :: Lens' OrderAddress (Maybe Text)
 oaRegion = lens _oaRegion (\ s a -> s{_oaRegion = a})
 
+instance FromJSON OrderAddress where
+        parseJSON
+          = withObject "OrderAddress"
+              (\ o ->
+                 OrderAddress <$>
+                   (o .:? "recipientName") <*>
+                     (o .:? "streetAddress" .!= mempty)
+                     <*> (o .:? "country")
+                     <*> (o .:? "postalCode")
+                     <*> (o .:? "locality")
+                     <*> (o .:? "isPostOfficeBox")
+                     <*> (o .:? "fullAddress" .!= mempty)
+                     <*> (o .:? "region"))
+
+instance ToJSON OrderAddress where
+        toJSON OrderAddress{..}
+          = object
+              (catMaybes
+                 [("recipientName" .=) <$> _oaRecipientName,
+                  ("streetAddress" .=) <$> _oaStreetAddress,
+                  ("country" .=) <$> _oaCountry,
+                  ("postalCode" .=) <$> _oaPostalCode,
+                  ("locality" .=) <$> _oaLocality,
+                  ("isPostOfficeBox" .=) <$> _oaIsPostOfficeBox,
+                  ("fullAddress" .=) <$> _oaFullAddress,
+                  ("region" .=) <$> _oaRegion])
+
 --
 -- /See:/ 'orderCancellation' smart constructor.
 data OrderCancellation = OrderCancellation
@@ -446,6 +552,26 @@ ocReasonText :: Lens' OrderCancellation (Maybe Text)
 ocReasonText
   = lens _ocReasonText (\ s a -> s{_ocReasonText = a})
 
+instance FromJSON OrderCancellation where
+        parseJSON
+          = withObject "OrderCancellation"
+              (\ o ->
+                 OrderCancellation <$>
+                   (o .:? "quantity") <*> (o .:? "actor") <*>
+                     (o .:? "reason")
+                     <*> (o .:? "creationDate")
+                     <*> (o .:? "reasonText"))
+
+instance ToJSON OrderCancellation where
+        toJSON OrderCancellation{..}
+          = object
+              (catMaybes
+                 [("quantity" .=) <$> _ocQuantity,
+                  ("actor" .=) <$> _ocActor,
+                  ("reason" .=) <$> _ocReason,
+                  ("creationDate" .=) <$> _ocCreationDate,
+                  ("reasonText" .=) <$> _ocReasonText])
+
 --
 -- /See:/ 'orderCustomer' smart constructor.
 data OrderCustomer = OrderCustomer
@@ -491,6 +617,23 @@ ocExplicitMarketingPreference
   = lens _ocExplicitMarketingPreference
       (\ s a -> s{_ocExplicitMarketingPreference = a})
 
+instance FromJSON OrderCustomer where
+        parseJSON
+          = withObject "OrderCustomer"
+              (\ o ->
+                 OrderCustomer <$>
+                   (o .:? "fullName") <*> (o .:? "email") <*>
+                     (o .:? "explicitMarketingPreference"))
+
+instance ToJSON OrderCustomer where
+        toJSON OrderCustomer{..}
+          = object
+              (catMaybes
+                 [("fullName" .=) <$> _ocFullName,
+                  ("email" .=) <$> _ocEmail,
+                  ("explicitMarketingPreference" .=) <$>
+                    _ocExplicitMarketingPreference])
+
 --
 -- /See:/ 'orderDeliveryDetails' smart constructor.
 data OrderDeliveryDetails = OrderDeliveryDetails
@@ -523,6 +666,20 @@ oddPhoneNumber :: Lens' OrderDeliveryDetails (Maybe Text)
 oddPhoneNumber
   = lens _oddPhoneNumber
       (\ s a -> s{_oddPhoneNumber = a})
+
+instance FromJSON OrderDeliveryDetails where
+        parseJSON
+          = withObject "OrderDeliveryDetails"
+              (\ o ->
+                 OrderDeliveryDetails <$>
+                   (o .:? "address") <*> (o .:? "phoneNumber"))
+
+instance ToJSON OrderDeliveryDetails where
+        toJSON OrderDeliveryDetails{..}
+          = object
+              (catMaybes
+                 [("address" .=) <$> _oddAddress,
+                  ("phoneNumber" .=) <$> _oddPhoneNumber])
 
 --
 -- /See:/ 'orderLineItem' smart constructor.
@@ -676,6 +833,43 @@ oliReturns
   = lens _oliReturns (\ s a -> s{_oliReturns = a}) .
       _Default
       . _Coerce
+
+instance FromJSON OrderLineItem where
+        parseJSON
+          = withObject "OrderLineItem"
+              (\ o ->
+                 OrderLineItem <$>
+                   (o .:? "quantityOrdered") <*> (o .:? "returnInfo")
+                     <*> (o .:? "quantityDelivered")
+                     <*> (o .:? "shippingDetails")
+                     <*> (o .:? "quantityPending")
+                     <*> (o .:? "cancellations" .!= mempty)
+                     <*> (o .:? "quantityCanceled")
+                     <*> (o .:? "id")
+                     <*> (o .:? "tax")
+                     <*> (o .:? "price")
+                     <*> (o .:? "quantityShipped")
+                     <*> (o .:? "quantityReturned")
+                     <*> (o .:? "product")
+                     <*> (o .:? "returns" .!= mempty))
+
+instance ToJSON OrderLineItem where
+        toJSON OrderLineItem{..}
+          = object
+              (catMaybes
+                 [("quantityOrdered" .=) <$> _oliQuantityOrdered,
+                  ("returnInfo" .=) <$> _oliReturnInfo,
+                  ("quantityDelivered" .=) <$> _oliQuantityDelivered,
+                  ("shippingDetails" .=) <$> _oliShippingDetails,
+                  ("quantityPending" .=) <$> _oliQuantityPending,
+                  ("cancellations" .=) <$> _oliCancellations,
+                  ("quantityCanceled" .=) <$> _oliQuantityCanceled,
+                  ("id" .=) <$> _oliId, ("tax" .=) <$> _oliTax,
+                  ("price" .=) <$> _oliPrice,
+                  ("quantityShipped" .=) <$> _oliQuantityShipped,
+                  ("quantityReturned" .=) <$> _oliQuantityReturned,
+                  ("product" .=) <$> _oliProduct,
+                  ("returns" .=) <$> _oliReturns])
 
 --
 -- /See:/ 'orderLineItemProduct' smart constructor.
@@ -834,6 +1028,45 @@ olipCondition
   = lens _olipCondition
       (\ s a -> s{_olipCondition = a})
 
+instance FromJSON OrderLineItemProduct where
+        parseJSON
+          = withObject "OrderLineItemProduct"
+              (\ o ->
+                 OrderLineItemProduct <$>
+                   (o .:? "imageLink") <*> (o .:? "shownImage") <*>
+                     (o .:? "channel")
+                     <*> (o .:? "brand")
+                     <*> (o .:? "targetCountry")
+                     <*> (o .:? "gtin")
+                     <*> (o .:? "itemGroupId")
+                     <*> (o .:? "offerId")
+                     <*> (o .:? "id")
+                     <*> (o .:? "price")
+                     <*> (o .:? "variantAttributes" .!= mempty)
+                     <*> (o .:? "title")
+                     <*> (o .:? "contentLanguage")
+                     <*> (o .:? "mpn")
+                     <*> (o .:? "condition"))
+
+instance ToJSON OrderLineItemProduct where
+        toJSON OrderLineItemProduct{..}
+          = object
+              (catMaybes
+                 [("imageLink" .=) <$> _olipImageLink,
+                  ("shownImage" .=) <$> _olipShownImage,
+                  ("channel" .=) <$> _olipChannel,
+                  ("brand" .=) <$> _olipBrand,
+                  ("targetCountry" .=) <$> _olipTargetCountry,
+                  ("gtin" .=) <$> _olipGtin,
+                  ("itemGroupId" .=) <$> _olipItemGroupId,
+                  ("offerId" .=) <$> _olipOfferId,
+                  ("id" .=) <$> _olipId, ("price" .=) <$> _olipPrice,
+                  ("variantAttributes" .=) <$> _olipVariantAttributes,
+                  ("title" .=) <$> _olipTitle,
+                  ("contentLanguage" .=) <$> _olipContentLanguage,
+                  ("mpn" .=) <$> _olipMpn,
+                  ("condition" .=) <$> _olipCondition])
+
 --
 -- /See:/ 'orderLineItemProductVariantAttribute' smart constructor.
 data OrderLineItemProductVariantAttribute = OrderLineItemProductVariantAttribute
@@ -866,6 +1099,22 @@ olipvaDimension
 olipvaValue :: Lens' OrderLineItemProductVariantAttribute (Maybe Text)
 olipvaValue
   = lens _olipvaValue (\ s a -> s{_olipvaValue = a})
+
+instance FromJSON
+         OrderLineItemProductVariantAttribute where
+        parseJSON
+          = withObject "OrderLineItemProductVariantAttribute"
+              (\ o ->
+                 OrderLineItemProductVariantAttribute <$>
+                   (o .:? "dimension") <*> (o .:? "value"))
+
+instance ToJSON OrderLineItemProductVariantAttribute
+         where
+        toJSON OrderLineItemProductVariantAttribute{..}
+          = object
+              (catMaybes
+                 [("dimension" .=) <$> _olipvaDimension,
+                  ("value" .=) <$> _olipvaValue])
 
 --
 -- /See:/ 'orderLineItemReturnInfo' smart constructor.
@@ -911,6 +1160,22 @@ oliriDaysToReturn
   = lens _oliriDaysToReturn
       (\ s a -> s{_oliriDaysToReturn = a})
 
+instance FromJSON OrderLineItemReturnInfo where
+        parseJSON
+          = withObject "OrderLineItemReturnInfo"
+              (\ o ->
+                 OrderLineItemReturnInfo <$>
+                   (o .:? "isReturnable") <*> (o .:? "policyUrl") <*>
+                     (o .:? "daysToReturn"))
+
+instance ToJSON OrderLineItemReturnInfo where
+        toJSON OrderLineItemReturnInfo{..}
+          = object
+              (catMaybes
+                 [("isReturnable" .=) <$> _oliriIsReturnable,
+                  ("policyUrl" .=) <$> _oliriPolicyUrl,
+                  ("daysToReturn" .=) <$> _oliriDaysToReturn])
+
 --
 -- /See:/ 'orderLineItemShippingDetails' smart constructor.
 data OrderLineItemShippingDetails = OrderLineItemShippingDetails
@@ -953,6 +1218,22 @@ olisdDeliverByDate :: Lens' OrderLineItemShippingDetails (Maybe Text)
 olisdDeliverByDate
   = lens _olisdDeliverByDate
       (\ s a -> s{_olisdDeliverByDate = a})
+
+instance FromJSON OrderLineItemShippingDetails where
+        parseJSON
+          = withObject "OrderLineItemShippingDetails"
+              (\ o ->
+                 OrderLineItemShippingDetails <$>
+                   (o .:? "shipByDate") <*> (o .:? "method") <*>
+                     (o .:? "deliverByDate"))
+
+instance ToJSON OrderLineItemShippingDetails where
+        toJSON OrderLineItemShippingDetails{..}
+          = object
+              (catMaybes
+                 [("shipByDate" .=) <$> _olisdShipByDate,
+                  ("method" .=) <$> _olisdMethod,
+                  ("deliverByDate" .=) <$> _olisdDeliverByDate])
 
 --
 -- /See:/ 'orderLineItemShippingDetailsMethod' smart constructor.
@@ -1007,6 +1288,26 @@ olisdmMinDaysInTransit :: Lens' OrderLineItemShippingDetailsMethod (Maybe Word32
 olisdmMinDaysInTransit
   = lens _olisdmMinDaysInTransit
       (\ s a -> s{_olisdmMinDaysInTransit = a})
+
+instance FromJSON OrderLineItemShippingDetailsMethod
+         where
+        parseJSON
+          = withObject "OrderLineItemShippingDetailsMethod"
+              (\ o ->
+                 OrderLineItemShippingDetailsMethod <$>
+                   (o .:? "carrier") <*> (o .:? "methodName") <*>
+                     (o .:? "maxDaysInTransit")
+                     <*> (o .:? "minDaysInTransit"))
+
+instance ToJSON OrderLineItemShippingDetailsMethod
+         where
+        toJSON OrderLineItemShippingDetailsMethod{..}
+          = object
+              (catMaybes
+                 [("carrier" .=) <$> _olisdmCarrier,
+                  ("methodName" .=) <$> _olisdmMethodName,
+                  ("maxDaysInTransit" .=) <$> _olisdmMaxDaysInTransit,
+                  ("minDaysInTransit" .=) <$> _olisdmMinDaysInTransit])
 
 --
 -- /See:/ 'orderPaymentMethod' smart constructor.
@@ -1080,6 +1381,29 @@ opmLastFourDigits
 opmType :: Lens' OrderPaymentMethod (Maybe Text)
 opmType = lens _opmType (\ s a -> s{_opmType = a})
 
+instance FromJSON OrderPaymentMethod where
+        parseJSON
+          = withObject "OrderPaymentMethod"
+              (\ o ->
+                 OrderPaymentMethod <$>
+                   (o .:? "expirationMonth") <*>
+                     (o .:? "expirationYear")
+                     <*> (o .:? "phoneNumber")
+                     <*> (o .:? "billingAddress")
+                     <*> (o .:? "lastFourDigits")
+                     <*> (o .:? "type"))
+
+instance ToJSON OrderPaymentMethod where
+        toJSON OrderPaymentMethod{..}
+          = object
+              (catMaybes
+                 [("expirationMonth" .=) <$> _opmExpirationMonth,
+                  ("expirationYear" .=) <$> _opmExpirationYear,
+                  ("phoneNumber" .=) <$> _opmPhoneNumber,
+                  ("billingAddress" .=) <$> _opmBillingAddress,
+                  ("lastFourDigits" .=) <$> _opmLastFourDigits,
+                  ("type" .=) <$> _opmType])
+
 --
 -- /See:/ 'orderRefund' smart constructor.
 data OrderRefund = OrderRefund
@@ -1136,6 +1460,26 @@ orCreationDate
 orReasonText :: Lens' OrderRefund (Maybe Text)
 orReasonText
   = lens _orReasonText (\ s a -> s{_orReasonText = a})
+
+instance FromJSON OrderRefund where
+        parseJSON
+          = withObject "OrderRefund"
+              (\ o ->
+                 OrderRefund <$>
+                   (o .:? "amount") <*> (o .:? "actor") <*>
+                     (o .:? "reason")
+                     <*> (o .:? "creationDate")
+                     <*> (o .:? "reasonText"))
+
+instance ToJSON OrderRefund where
+        toJSON OrderRefund{..}
+          = object
+              (catMaybes
+                 [("amount" .=) <$> _orAmount,
+                  ("actor" .=) <$> _orActor,
+                  ("reason" .=) <$> _orReason,
+                  ("creationDate" .=) <$> _orCreationDate,
+                  ("reasonText" .=) <$> _orReasonText])
 
 --
 -- /See:/ 'orderReturn' smart constructor.
@@ -1194,6 +1538,25 @@ oCreationDate
 oReasonText :: Lens' OrderReturn (Maybe Text)
 oReasonText
   = lens _oReasonText (\ s a -> s{_oReasonText = a})
+
+instance FromJSON OrderReturn where
+        parseJSON
+          = withObject "OrderReturn"
+              (\ o ->
+                 OrderReturn <$>
+                   (o .:? "quantity") <*> (o .:? "actor") <*>
+                     (o .:? "reason")
+                     <*> (o .:? "creationDate")
+                     <*> (o .:? "reasonText"))
+
+instance ToJSON OrderReturn where
+        toJSON OrderReturn{..}
+          = object
+              (catMaybes
+                 [("quantity" .=) <$> _oQuantity,
+                  ("actor" .=) <$> _oActor, ("reason" .=) <$> _oReason,
+                  ("creationDate" .=) <$> _oCreationDate,
+                  ("reasonText" .=) <$> _oReasonText])
 
 --
 -- /See:/ 'orderShipment' smart constructor.
@@ -1275,6 +1638,30 @@ osDeliveryDate
   = lens _osDeliveryDate
       (\ s a -> s{_osDeliveryDate = a})
 
+instance FromJSON OrderShipment where
+        parseJSON
+          = withObject "OrderShipment"
+              (\ o ->
+                 OrderShipment <$>
+                   (o .:? "carrier") <*> (o .:? "status") <*>
+                     (o .:? "trackingId")
+                     <*> (o .:? "lineItems" .!= mempty)
+                     <*> (o .:? "id")
+                     <*> (o .:? "creationDate")
+                     <*> (o .:? "deliveryDate"))
+
+instance ToJSON OrderShipment where
+        toJSON OrderShipment{..}
+          = object
+              (catMaybes
+                 [("carrier" .=) <$> _osCarrier,
+                  ("status" .=) <$> _osStatus,
+                  ("trackingId" .=) <$> _osTrackingId,
+                  ("lineItems" .=) <$> _osLineItems,
+                  ("id" .=) <$> _osId,
+                  ("creationDate" .=) <$> _osCreationDate,
+                  ("deliveryDate" .=) <$> _osDeliveryDate])
+
 --
 -- /See:/ 'orderShipmentLineItemShipment' smart constructor.
 data OrderShipmentLineItemShipment = OrderShipmentLineItemShipment
@@ -1309,6 +1696,20 @@ oslisLineItemId
   = lens _oslisLineItemId
       (\ s a -> s{_oslisLineItemId = a})
 
+instance FromJSON OrderShipmentLineItemShipment where
+        parseJSON
+          = withObject "OrderShipmentLineItemShipment"
+              (\ o ->
+                 OrderShipmentLineItemShipment <$>
+                   (o .:? "quantity") <*> (o .:? "lineItemId"))
+
+instance ToJSON OrderShipmentLineItemShipment where
+        toJSON OrderShipmentLineItemShipment{..}
+          = object
+              (catMaybes
+                 [("quantity" .=) <$> _oslisQuantity,
+                  ("lineItemId" .=) <$> _oslisLineItemId])
+
 --
 -- /See:/ 'ordersAcknowledgeRequest' smart constructor.
 newtype OrdersAcknowledgeRequest = OrdersAcknowledgeRequest
@@ -1332,6 +1733,17 @@ oarOperationId :: Lens' OrdersAcknowledgeRequest (Maybe Text)
 oarOperationId
   = lens _oarOperationId
       (\ s a -> s{_oarOperationId = a})
+
+instance FromJSON OrdersAcknowledgeRequest where
+        parseJSON
+          = withObject "OrdersAcknowledgeRequest"
+              (\ o ->
+                 OrdersAcknowledgeRequest <$> (o .:? "operationId"))
+
+instance ToJSON OrdersAcknowledgeRequest where
+        toJSON OrdersAcknowledgeRequest{..}
+          = object
+              (catMaybes [("operationId" .=) <$> _oarOperationId])
 
 --
 -- /See:/ 'ordersAcknowledgeResponse' smart constructor.
@@ -1366,6 +1778,22 @@ oarExecutionStatus
   = lens _oarExecutionStatus
       (\ s a -> s{_oarExecutionStatus = a})
 
+instance FromJSON OrdersAcknowledgeResponse where
+        parseJSON
+          = withObject "OrdersAcknowledgeResponse"
+              (\ o ->
+                 OrdersAcknowledgeResponse <$>
+                   (o .:? "kind" .!=
+                      "content#ordersAcknowledgeResponse")
+                     <*> (o .:? "executionStatus"))
+
+instance ToJSON OrdersAcknowledgeResponse where
+        toJSON OrdersAcknowledgeResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _oarKind),
+                  ("executionStatus" .=) <$> _oarExecutionStatus])
+
 --
 -- /See:/ 'ordersAdvanceTestOrderResponse' smart constructor.
 newtype OrdersAdvanceTestOrderResponse = OrdersAdvanceTestOrderResponse
@@ -1389,6 +1817,19 @@ ordersAdvanceTestOrderResponse =
 oatorKind :: Lens' OrdersAdvanceTestOrderResponse Text
 oatorKind
   = lens _oatorKind (\ s a -> s{_oatorKind = a})
+
+instance FromJSON OrdersAdvanceTestOrderResponse
+         where
+        parseJSON
+          = withObject "OrdersAdvanceTestOrderResponse"
+              (\ o ->
+                 OrdersAdvanceTestOrderResponse <$>
+                   (o .:? "kind" .!=
+                      "content#ordersAdvanceTestOrderResponse"))
+
+instance ToJSON OrdersAdvanceTestOrderResponse where
+        toJSON OrdersAdvanceTestOrderResponse{..}
+          = object (catMaybes [Just ("kind" .= _oatorKind)])
 
 --
 -- /See:/ 'ordersCancelLineItemRequest' smart constructor.
@@ -1453,6 +1894,26 @@ oclirReasonText
   = lens _oclirReasonText
       (\ s a -> s{_oclirReasonText = a})
 
+instance FromJSON OrdersCancelLineItemRequest where
+        parseJSON
+          = withObject "OrdersCancelLineItemRequest"
+              (\ o ->
+                 OrdersCancelLineItemRequest <$>
+                   (o .:? "quantity") <*> (o .:? "lineItemId") <*>
+                     (o .:? "reason")
+                     <*> (o .:? "operationId")
+                     <*> (o .:? "reasonText"))
+
+instance ToJSON OrdersCancelLineItemRequest where
+        toJSON OrdersCancelLineItemRequest{..}
+          = object
+              (catMaybes
+                 [("quantity" .=) <$> _oclirQuantity,
+                  ("lineItemId" .=) <$> _oclirLineItemId,
+                  ("reason" .=) <$> _oclirReason,
+                  ("operationId" .=) <$> _oclirOperationId,
+                  ("reasonText" .=) <$> _oclirReasonText])
+
 --
 -- /See:/ 'ordersCancelLineItemResponse' smart constructor.
 data OrdersCancelLineItemResponse = OrdersCancelLineItemResponse
@@ -1486,6 +1947,22 @@ oclirExecutionStatus :: Lens' OrdersCancelLineItemResponse (Maybe Text)
 oclirExecutionStatus
   = lens _oclirExecutionStatus
       (\ s a -> s{_oclirExecutionStatus = a})
+
+instance FromJSON OrdersCancelLineItemResponse where
+        parseJSON
+          = withObject "OrdersCancelLineItemResponse"
+              (\ o ->
+                 OrdersCancelLineItemResponse <$>
+                   (o .:? "kind" .!=
+                      "content#ordersCancelLineItemResponse")
+                     <*> (o .:? "executionStatus"))
+
+instance ToJSON OrdersCancelLineItemResponse where
+        toJSON OrdersCancelLineItemResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _oclirKind),
+                  ("executionStatus" .=) <$> _oclirExecutionStatus])
 
 --
 -- /See:/ 'ordersCancelRequest' smart constructor.
@@ -1530,6 +2007,22 @@ ocrReasonText
   = lens _ocrReasonText
       (\ s a -> s{_ocrReasonText = a})
 
+instance FromJSON OrdersCancelRequest where
+        parseJSON
+          = withObject "OrdersCancelRequest"
+              (\ o ->
+                 OrdersCancelRequest <$>
+                   (o .:? "reason") <*> (o .:? "operationId") <*>
+                     (o .:? "reasonText"))
+
+instance ToJSON OrdersCancelRequest where
+        toJSON OrdersCancelRequest{..}
+          = object
+              (catMaybes
+                 [("reason" .=) <$> _ocrReason,
+                  ("operationId" .=) <$> _ocrOperationId,
+                  ("reasonText" .=) <$> _ocrReasonText])
+
 --
 -- /See:/ 'ordersCancelResponse' smart constructor.
 data OrdersCancelResponse = OrdersCancelResponse
@@ -1562,6 +2055,21 @@ ocrExecutionStatus :: Lens' OrdersCancelResponse (Maybe Text)
 ocrExecutionStatus
   = lens _ocrExecutionStatus
       (\ s a -> s{_ocrExecutionStatus = a})
+
+instance FromJSON OrdersCancelResponse where
+        parseJSON
+          = withObject "OrdersCancelResponse"
+              (\ o ->
+                 OrdersCancelResponse <$>
+                   (o .:? "kind" .!= "content#ordersCancelResponse") <*>
+                     (o .:? "executionStatus"))
+
+instance ToJSON OrdersCancelResponse where
+        toJSON OrdersCancelResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _ocrKind),
+                  ("executionStatus" .=) <$> _ocrExecutionStatus])
 
 --
 -- /See:/ 'ordersCreateTestOrderRequest' smart constructor.
@@ -1599,6 +2107,20 @@ octorTestOrder
   = lens _octorTestOrder
       (\ s a -> s{_octorTestOrder = a})
 
+instance FromJSON OrdersCreateTestOrderRequest where
+        parseJSON
+          = withObject "OrdersCreateTestOrderRequest"
+              (\ o ->
+                 OrdersCreateTestOrderRequest <$>
+                   (o .:? "templateName") <*> (o .:? "testOrder"))
+
+instance ToJSON OrdersCreateTestOrderRequest where
+        toJSON OrdersCreateTestOrderRequest{..}
+          = object
+              (catMaybes
+                 [("templateName" .=) <$> _octorTemplateName,
+                  ("testOrder" .=) <$> _octorTestOrder])
+
 --
 -- /See:/ 'ordersCreateTestOrderResponse' smart constructor.
 data OrdersCreateTestOrderResponse = OrdersCreateTestOrderResponse
@@ -1632,6 +2154,22 @@ octorOrderId :: Lens' OrdersCreateTestOrderResponse (Maybe Text)
 octorOrderId
   = lens _octorOrderId (\ s a -> s{_octorOrderId = a})
 
+instance FromJSON OrdersCreateTestOrderResponse where
+        parseJSON
+          = withObject "OrdersCreateTestOrderResponse"
+              (\ o ->
+                 OrdersCreateTestOrderResponse <$>
+                   (o .:? "kind" .!=
+                      "content#ordersCreateTestOrderResponse")
+                     <*> (o .:? "orderId"))
+
+instance ToJSON OrdersCreateTestOrderResponse where
+        toJSON OrdersCreateTestOrderResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _octorKind),
+                  ("orderId" .=) <$> _octorOrderId])
+
 --
 -- /See:/ 'ordersCustomBatchRequest' smart constructor.
 newtype OrdersCustomBatchRequest = OrdersCustomBatchRequest
@@ -1656,6 +2194,17 @@ oEntries
   = lens _oEntries (\ s a -> s{_oEntries = a}) .
       _Default
       . _Coerce
+
+instance FromJSON OrdersCustomBatchRequest where
+        parseJSON
+          = withObject "OrdersCustomBatchRequest"
+              (\ o ->
+                 OrdersCustomBatchRequest <$>
+                   (o .:? "entries" .!= mempty))
+
+instance ToJSON OrdersCustomBatchRequest where
+        toJSON OrdersCustomBatchRequest{..}
+          = object (catMaybes [("entries" .=) <$> _oEntries])
 
 --
 -- /See:/ 'ordersCustomBatchRequestEntry' smart constructor.
@@ -1782,6 +2331,40 @@ oCancel = lens _oCancel (\ s a -> s{_oCancel = a})
 oBatchId :: Lens' OrdersCustomBatchRequestEntry (Maybe Word32)
 oBatchId = lens _oBatchId (\ s a -> s{_oBatchId = a})
 
+instance FromJSON OrdersCustomBatchRequestEntry where
+        parseJSON
+          = withObject "OrdersCustomBatchRequestEntry"
+              (\ o ->
+                 OrdersCustomBatchRequestEntry <$>
+                   (o .:? "merchantId") <*> (o .:? "cancelLineItem") <*>
+                     (o .:? "refund")
+                     <*> (o .:? "updateShipment")
+                     <*> (o .:? "returnLineItem")
+                     <*> (o .:? "merchantOrderId")
+                     <*> (o .:? "method")
+                     <*> (o .:? "shipLineItems")
+                     <*> (o .:? "operationId")
+                     <*> (o .:? "orderId")
+                     <*> (o .:? "cancel")
+                     <*> (o .:? "batchId"))
+
+instance ToJSON OrdersCustomBatchRequestEntry where
+        toJSON OrdersCustomBatchRequestEntry{..}
+          = object
+              (catMaybes
+                 [("merchantId" .=) <$> _oMerchantId,
+                  ("cancelLineItem" .=) <$> _oCancelLineItem,
+                  ("refund" .=) <$> _oRefund,
+                  ("updateShipment" .=) <$> _oUpdateShipment,
+                  ("returnLineItem" .=) <$> _oReturnLineItem,
+                  ("merchantOrderId" .=) <$> _oMerchantOrderId,
+                  ("method" .=) <$> _oMethod,
+                  ("shipLineItems" .=) <$> _oShipLineItems,
+                  ("operationId" .=) <$> _oOperationId,
+                  ("orderId" .=) <$> _oOrderId,
+                  ("cancel" .=) <$> _oCancel,
+                  ("batchId" .=) <$> _oBatchId])
+
 --
 -- /See:/ 'ordersCustomBatchRequestEntryCancel' smart constructor.
 data OrdersCustomBatchRequestEntryCancel = OrdersCustomBatchRequestEntryCancel
@@ -1814,6 +2397,22 @@ ocbrecReasonText :: Lens' OrdersCustomBatchRequestEntryCancel (Maybe Text)
 ocbrecReasonText
   = lens _ocbrecReasonText
       (\ s a -> s{_ocbrecReasonText = a})
+
+instance FromJSON OrdersCustomBatchRequestEntryCancel
+         where
+        parseJSON
+          = withObject "OrdersCustomBatchRequestEntryCancel"
+              (\ o ->
+                 OrdersCustomBatchRequestEntryCancel <$>
+                   (o .:? "reason") <*> (o .:? "reasonText"))
+
+instance ToJSON OrdersCustomBatchRequestEntryCancel
+         where
+        toJSON OrdersCustomBatchRequestEntryCancel{..}
+          = object
+              (catMaybes
+                 [("reason" .=) <$> _ocbrecReason,
+                  ("reasonText" .=) <$> _ocbrecReasonText])
 
 --
 -- /See:/ 'ordersCustomBatchRequestEntryCancelLineItem' smart constructor.
@@ -1869,6 +2468,28 @@ ocbrecliReasonText
   = lens _ocbrecliReasonText
       (\ s a -> s{_ocbrecliReasonText = a})
 
+instance FromJSON
+         OrdersCustomBatchRequestEntryCancelLineItem where
+        parseJSON
+          = withObject
+              "OrdersCustomBatchRequestEntryCancelLineItem"
+              (\ o ->
+                 OrdersCustomBatchRequestEntryCancelLineItem <$>
+                   (o .:? "quantity") <*> (o .:? "lineItemId") <*>
+                     (o .:? "reason")
+                     <*> (o .:? "reasonText"))
+
+instance ToJSON
+         OrdersCustomBatchRequestEntryCancelLineItem where
+        toJSON
+          OrdersCustomBatchRequestEntryCancelLineItem{..}
+          = object
+              (catMaybes
+                 [("quantity" .=) <$> _ocbrecliQuantity,
+                  ("lineItemId" .=) <$> _ocbrecliLineItemId,
+                  ("reason" .=) <$> _ocbrecliReason,
+                  ("reasonText" .=) <$> _ocbrecliReasonText])
+
 --
 -- /See:/ 'ordersCustomBatchRequestEntryRefund' smart constructor.
 data OrdersCustomBatchRequestEntryRefund = OrdersCustomBatchRequestEntryRefund
@@ -1910,6 +2531,24 @@ ocbrerReasonText :: Lens' OrdersCustomBatchRequestEntryRefund (Maybe Text)
 ocbrerReasonText
   = lens _ocbrerReasonText
       (\ s a -> s{_ocbrerReasonText = a})
+
+instance FromJSON OrdersCustomBatchRequestEntryRefund
+         where
+        parseJSON
+          = withObject "OrdersCustomBatchRequestEntryRefund"
+              (\ o ->
+                 OrdersCustomBatchRequestEntryRefund <$>
+                   (o .:? "amount") <*> (o .:? "reason") <*>
+                     (o .:? "reasonText"))
+
+instance ToJSON OrdersCustomBatchRequestEntryRefund
+         where
+        toJSON OrdersCustomBatchRequestEntryRefund{..}
+          = object
+              (catMaybes
+                 [("amount" .=) <$> _ocbrerAmount,
+                  ("reason" .=) <$> _ocbrerReason,
+                  ("reasonText" .=) <$> _ocbrerReasonText])
 
 --
 -- /See:/ 'ordersCustomBatchRequestEntryReturnLineItem' smart constructor.
@@ -1964,6 +2603,28 @@ ocbrerliReasonText :: Lens' OrdersCustomBatchRequestEntryReturnLineItem (Maybe T
 ocbrerliReasonText
   = lens _ocbrerliReasonText
       (\ s a -> s{_ocbrerliReasonText = a})
+
+instance FromJSON
+         OrdersCustomBatchRequestEntryReturnLineItem where
+        parseJSON
+          = withObject
+              "OrdersCustomBatchRequestEntryReturnLineItem"
+              (\ o ->
+                 OrdersCustomBatchRequestEntryReturnLineItem <$>
+                   (o .:? "quantity") <*> (o .:? "lineItemId") <*>
+                     (o .:? "reason")
+                     <*> (o .:? "reasonText"))
+
+instance ToJSON
+         OrdersCustomBatchRequestEntryReturnLineItem where
+        toJSON
+          OrdersCustomBatchRequestEntryReturnLineItem{..}
+          = object
+              (catMaybes
+                 [("quantity" .=) <$> _ocbrerliQuantity,
+                  ("lineItemId" .=) <$> _ocbrerliLineItemId,
+                  ("reason" .=) <$> _ocbrerliReason,
+                  ("reasonText" .=) <$> _ocbrerliReasonText])
 
 --
 -- /See:/ 'ordersCustomBatchRequestEntryShipLineItems' smart constructor.
@@ -2021,6 +2682,27 @@ ocbresliLineItems
       . _Default
       . _Coerce
 
+instance FromJSON
+         OrdersCustomBatchRequestEntryShipLineItems where
+        parseJSON
+          = withObject
+              "OrdersCustomBatchRequestEntryShipLineItems"
+              (\ o ->
+                 OrdersCustomBatchRequestEntryShipLineItems <$>
+                   (o .:? "carrier") <*> (o .:? "trackingId") <*>
+                     (o .:? "shipmentId")
+                     <*> (o .:? "lineItems" .!= mempty))
+
+instance ToJSON
+         OrdersCustomBatchRequestEntryShipLineItems where
+        toJSON OrdersCustomBatchRequestEntryShipLineItems{..}
+          = object
+              (catMaybes
+                 [("carrier" .=) <$> _ocbresliCarrier,
+                  ("trackingId" .=) <$> _ocbresliTrackingId,
+                  ("shipmentId" .=) <$> _ocbresliShipmentId,
+                  ("lineItems" .=) <$> _ocbresliLineItems])
+
 --
 -- /See:/ 'ordersCustomBatchRequestEntryUpdateShipment' smart constructor.
 data OrdersCustomBatchRequestEntryUpdateShipment = OrdersCustomBatchRequestEntryUpdateShipment
@@ -2075,6 +2757,28 @@ ocbreusShipmentId
   = lens _ocbreusShipmentId
       (\ s a -> s{_ocbreusShipmentId = a})
 
+instance FromJSON
+         OrdersCustomBatchRequestEntryUpdateShipment where
+        parseJSON
+          = withObject
+              "OrdersCustomBatchRequestEntryUpdateShipment"
+              (\ o ->
+                 OrdersCustomBatchRequestEntryUpdateShipment <$>
+                   (o .:? "carrier") <*> (o .:? "status") <*>
+                     (o .:? "trackingId")
+                     <*> (o .:? "shipmentId"))
+
+instance ToJSON
+         OrdersCustomBatchRequestEntryUpdateShipment where
+        toJSON
+          OrdersCustomBatchRequestEntryUpdateShipment{..}
+          = object
+              (catMaybes
+                 [("carrier" .=) <$> _ocbreusCarrier,
+                  ("status" .=) <$> _ocbreusStatus,
+                  ("trackingId" .=) <$> _ocbreusTrackingId,
+                  ("shipmentId" .=) <$> _ocbreusShipmentId])
+
 --
 -- /See:/ 'ordersCustomBatchResponse' smart constructor.
 data OrdersCustomBatchResponse = OrdersCustomBatchResponse
@@ -2108,6 +2812,22 @@ ocbrEntries
 -- \"content#ordersCustomBatchResponse\".
 ocbrKind :: Lens' OrdersCustomBatchResponse Text
 ocbrKind = lens _ocbrKind (\ s a -> s{_ocbrKind = a})
+
+instance FromJSON OrdersCustomBatchResponse where
+        parseJSON
+          = withObject "OrdersCustomBatchResponse"
+              (\ o ->
+                 OrdersCustomBatchResponse <$>
+                   (o .:? "entries" .!= mempty) <*>
+                     (o .:? "kind" .!=
+                        "content#ordersCustomBatchResponse"))
+
+instance ToJSON OrdersCustomBatchResponse where
+        toJSON OrdersCustomBatchResponse{..}
+          = object
+              (catMaybes
+                 [("entries" .=) <$> _ocbrEntries,
+                  Just ("kind" .= _ocbrKind)])
 
 --
 -- /See:/ 'ordersCustomBatchResponseEntry' smart constructor.
@@ -2172,6 +2892,29 @@ ocbreBatchId :: Lens' OrdersCustomBatchResponseEntry (Maybe Word32)
 ocbreBatchId
   = lens _ocbreBatchId (\ s a -> s{_ocbreBatchId = a})
 
+instance FromJSON OrdersCustomBatchResponseEntry
+         where
+        parseJSON
+          = withObject "OrdersCustomBatchResponseEntry"
+              (\ o ->
+                 OrdersCustomBatchResponseEntry <$>
+                   (o .:? "kind" .!=
+                      "content#ordersCustomBatchResponseEntry")
+                     <*> (o .:? "executionStatus")
+                     <*> (o .:? "errors")
+                     <*> (o .:? "order")
+                     <*> (o .:? "batchId"))
+
+instance ToJSON OrdersCustomBatchResponseEntry where
+        toJSON OrdersCustomBatchResponseEntry{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _ocbreKind),
+                  ("executionStatus" .=) <$> _ocbreExecutionStatus,
+                  ("errors" .=) <$> _ocbreErrors,
+                  ("order" .=) <$> _ocbreOrder,
+                  ("batchId" .=) <$> _ocbreBatchId])
+
 --
 -- /See:/ 'ordersGetByMerchantOrderIdResponse' smart constructor.
 data OrdersGetByMerchantOrderIdResponse = OrdersGetByMerchantOrderIdResponse
@@ -2204,6 +2947,24 @@ ogbmoirKind
 ogbmoirOrder :: Lens' OrdersGetByMerchantOrderIdResponse (Maybe (Maybe Order))
 ogbmoirOrder
   = lens _ogbmoirOrder (\ s a -> s{_ogbmoirOrder = a})
+
+instance FromJSON OrdersGetByMerchantOrderIdResponse
+         where
+        parseJSON
+          = withObject "OrdersGetByMerchantOrderIdResponse"
+              (\ o ->
+                 OrdersGetByMerchantOrderIdResponse <$>
+                   (o .:? "kind" .!=
+                      "content#ordersGetByMerchantOrderIdResponse")
+                     <*> (o .:? "order"))
+
+instance ToJSON OrdersGetByMerchantOrderIdResponse
+         where
+        toJSON OrdersGetByMerchantOrderIdResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _ogbmoirKind),
+                  ("order" .=) <$> _ogbmoirOrder])
 
 --
 -- /See:/ 'ordersGetTestOrderTemplateResponse' smart constructor.
@@ -2238,6 +2999,24 @@ ogtotrTemplate :: Lens' OrdersGetTestOrderTemplateResponse (Maybe (Maybe TestOrd
 ogtotrTemplate
   = lens _ogtotrTemplate
       (\ s a -> s{_ogtotrTemplate = a})
+
+instance FromJSON OrdersGetTestOrderTemplateResponse
+         where
+        parseJSON
+          = withObject "OrdersGetTestOrderTemplateResponse"
+              (\ o ->
+                 OrdersGetTestOrderTemplateResponse <$>
+                   (o .:? "kind" .!=
+                      "content#ordersGetTestOrderTemplateResponse")
+                     <*> (o .:? "template"))
+
+instance ToJSON OrdersGetTestOrderTemplateResponse
+         where
+        toJSON OrdersGetTestOrderTemplateResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _ogtotrKind),
+                  ("template" .=) <$> _ogtotrTemplate])
 
 --
 -- /See:/ 'ordersListResponse' smart constructor.
@@ -2281,6 +3060,23 @@ olrResources
   = lens _olrResources (\ s a -> s{_olrResources = a})
       . _Default
       . _Coerce
+
+instance FromJSON OrdersListResponse where
+        parseJSON
+          = withObject "OrdersListResponse"
+              (\ o ->
+                 OrdersListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "content#ordersListResponse")
+                     <*> (o .:? "resources" .!= mempty))
+
+instance ToJSON OrdersListResponse where
+        toJSON OrdersListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _olrNextPageToken,
+                  Just ("kind" .= _olrKind),
+                  ("resources" .=) <$> _olrResources])
 
 --
 -- /See:/ 'ordersRefundRequest' smart constructor.
@@ -2334,6 +3130,24 @@ orrReasonText
   = lens _orrReasonText
       (\ s a -> s{_orrReasonText = a})
 
+instance FromJSON OrdersRefundRequest where
+        parseJSON
+          = withObject "OrdersRefundRequest"
+              (\ o ->
+                 OrdersRefundRequest <$>
+                   (o .:? "amount") <*> (o .:? "reason") <*>
+                     (o .:? "operationId")
+                     <*> (o .:? "reasonText"))
+
+instance ToJSON OrdersRefundRequest where
+        toJSON OrdersRefundRequest{..}
+          = object
+              (catMaybes
+                 [("amount" .=) <$> _orrAmount,
+                  ("reason" .=) <$> _orrReason,
+                  ("operationId" .=) <$> _orrOperationId,
+                  ("reasonText" .=) <$> _orrReasonText])
+
 --
 -- /See:/ 'ordersRefundResponse' smart constructor.
 data OrdersRefundResponse = OrdersRefundResponse
@@ -2366,6 +3180,21 @@ orrExecutionStatus :: Lens' OrdersRefundResponse (Maybe Text)
 orrExecutionStatus
   = lens _orrExecutionStatus
       (\ s a -> s{_orrExecutionStatus = a})
+
+instance FromJSON OrdersRefundResponse where
+        parseJSON
+          = withObject "OrdersRefundResponse"
+              (\ o ->
+                 OrdersRefundResponse <$>
+                   (o .:? "kind" .!= "content#ordersRefundResponse") <*>
+                     (o .:? "executionStatus"))
+
+instance ToJSON OrdersRefundResponse where
+        toJSON OrdersRefundResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _orrKind),
+                  ("executionStatus" .=) <$> _orrExecutionStatus])
 
 --
 -- /See:/ 'ordersReturnLineItemRequest' smart constructor.
@@ -2430,6 +3259,26 @@ orlirReasonText
   = lens _orlirReasonText
       (\ s a -> s{_orlirReasonText = a})
 
+instance FromJSON OrdersReturnLineItemRequest where
+        parseJSON
+          = withObject "OrdersReturnLineItemRequest"
+              (\ o ->
+                 OrdersReturnLineItemRequest <$>
+                   (o .:? "quantity") <*> (o .:? "lineItemId") <*>
+                     (o .:? "reason")
+                     <*> (o .:? "operationId")
+                     <*> (o .:? "reasonText"))
+
+instance ToJSON OrdersReturnLineItemRequest where
+        toJSON OrdersReturnLineItemRequest{..}
+          = object
+              (catMaybes
+                 [("quantity" .=) <$> _orlirQuantity,
+                  ("lineItemId" .=) <$> _orlirLineItemId,
+                  ("reason" .=) <$> _orlirReason,
+                  ("operationId" .=) <$> _orlirOperationId,
+                  ("reasonText" .=) <$> _orlirReasonText])
+
 --
 -- /See:/ 'ordersReturnLineItemResponse' smart constructor.
 data OrdersReturnLineItemResponse = OrdersReturnLineItemResponse
@@ -2463,6 +3312,22 @@ orlirExecutionStatus :: Lens' OrdersReturnLineItemResponse (Maybe Text)
 orlirExecutionStatus
   = lens _orlirExecutionStatus
       (\ s a -> s{_orlirExecutionStatus = a})
+
+instance FromJSON OrdersReturnLineItemResponse where
+        parseJSON
+          = withObject "OrdersReturnLineItemResponse"
+              (\ o ->
+                 OrdersReturnLineItemResponse <$>
+                   (o .:? "kind" .!=
+                      "content#ordersReturnLineItemResponse")
+                     <*> (o .:? "executionStatus"))
+
+instance ToJSON OrdersReturnLineItemResponse where
+        toJSON OrdersReturnLineItemResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _orlirKind),
+                  ("executionStatus" .=) <$> _orlirExecutionStatus])
 
 --
 -- /See:/ 'ordersShipLineItemsRequest' smart constructor.
@@ -2529,6 +3394,26 @@ oslirOperationId
   = lens _oslirOperationId
       (\ s a -> s{_oslirOperationId = a})
 
+instance FromJSON OrdersShipLineItemsRequest where
+        parseJSON
+          = withObject "OrdersShipLineItemsRequest"
+              (\ o ->
+                 OrdersShipLineItemsRequest <$>
+                   (o .:? "carrier") <*> (o .:? "trackingId") <*>
+                     (o .:? "shipmentId")
+                     <*> (o .:? "lineItems" .!= mempty)
+                     <*> (o .:? "operationId"))
+
+instance ToJSON OrdersShipLineItemsRequest where
+        toJSON OrdersShipLineItemsRequest{..}
+          = object
+              (catMaybes
+                 [("carrier" .=) <$> _oslirCarrier,
+                  ("trackingId" .=) <$> _oslirTrackingId,
+                  ("shipmentId" .=) <$> _oslirShipmentId,
+                  ("lineItems" .=) <$> _oslirLineItems,
+                  ("operationId" .=) <$> _oslirOperationId])
+
 --
 -- /See:/ 'ordersShipLineItemsResponse' smart constructor.
 data OrdersShipLineItemsResponse = OrdersShipLineItemsResponse
@@ -2562,6 +3447,22 @@ oslirExecutionStatus :: Lens' OrdersShipLineItemsResponse (Maybe Text)
 oslirExecutionStatus
   = lens _oslirExecutionStatus
       (\ s a -> s{_oslirExecutionStatus = a})
+
+instance FromJSON OrdersShipLineItemsResponse where
+        parseJSON
+          = withObject "OrdersShipLineItemsResponse"
+              (\ o ->
+                 OrdersShipLineItemsResponse <$>
+                   (o .:? "kind" .!=
+                      "content#ordersShipLineItemsResponse")
+                     <*> (o .:? "executionStatus"))
+
+instance ToJSON OrdersShipLineItemsResponse where
+        toJSON OrdersShipLineItemsResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _oslirKind),
+                  ("executionStatus" .=) <$> _oslirExecutionStatus])
 
 --
 -- /See:/ 'ordersUpdateMerchantOrderIdRequest' smart constructor.
@@ -2598,6 +3499,22 @@ oumoirOperationId
   = lens _oumoirOperationId
       (\ s a -> s{_oumoirOperationId = a})
 
+instance FromJSON OrdersUpdateMerchantOrderIdRequest
+         where
+        parseJSON
+          = withObject "OrdersUpdateMerchantOrderIdRequest"
+              (\ o ->
+                 OrdersUpdateMerchantOrderIdRequest <$>
+                   (o .:? "merchantOrderId") <*> (o .:? "operationId"))
+
+instance ToJSON OrdersUpdateMerchantOrderIdRequest
+         where
+        toJSON OrdersUpdateMerchantOrderIdRequest{..}
+          = object
+              (catMaybes
+                 [("merchantOrderId" .=) <$> _oumoirMerchantOrderId,
+                  ("operationId" .=) <$> _oumoirOperationId])
+
 --
 -- /See:/ 'ordersUpdateMerchantOrderIdResponse' smart constructor.
 data OrdersUpdateMerchantOrderIdResponse = OrdersUpdateMerchantOrderIdResponse
@@ -2631,6 +3548,24 @@ oumoirExecutionStatus :: Lens' OrdersUpdateMerchantOrderIdResponse (Maybe Text)
 oumoirExecutionStatus
   = lens _oumoirExecutionStatus
       (\ s a -> s{_oumoirExecutionStatus = a})
+
+instance FromJSON OrdersUpdateMerchantOrderIdResponse
+         where
+        parseJSON
+          = withObject "OrdersUpdateMerchantOrderIdResponse"
+              (\ o ->
+                 OrdersUpdateMerchantOrderIdResponse <$>
+                   (o .:? "kind" .!=
+                      "content#ordersUpdateMerchantOrderIdResponse")
+                     <*> (o .:? "executionStatus"))
+
+instance ToJSON OrdersUpdateMerchantOrderIdResponse
+         where
+        toJSON OrdersUpdateMerchantOrderIdResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _oumoirKind),
+                  ("executionStatus" .=) <$> _oumoirExecutionStatus])
 
 --
 -- /See:/ 'ordersUpdateShipmentRequest' smart constructor.
@@ -2694,6 +3629,26 @@ ousrOperationId
   = lens _ousrOperationId
       (\ s a -> s{_ousrOperationId = a})
 
+instance FromJSON OrdersUpdateShipmentRequest where
+        parseJSON
+          = withObject "OrdersUpdateShipmentRequest"
+              (\ o ->
+                 OrdersUpdateShipmentRequest <$>
+                   (o .:? "carrier") <*> (o .:? "status") <*>
+                     (o .:? "trackingId")
+                     <*> (o .:? "shipmentId")
+                     <*> (o .:? "operationId"))
+
+instance ToJSON OrdersUpdateShipmentRequest where
+        toJSON OrdersUpdateShipmentRequest{..}
+          = object
+              (catMaybes
+                 [("carrier" .=) <$> _ousrCarrier,
+                  ("status" .=) <$> _ousrStatus,
+                  ("trackingId" .=) <$> _ousrTrackingId,
+                  ("shipmentId" .=) <$> _ousrShipmentId,
+                  ("operationId" .=) <$> _ousrOperationId])
+
 --
 -- /See:/ 'ordersUpdateShipmentResponse' smart constructor.
 data OrdersUpdateShipmentResponse = OrdersUpdateShipmentResponse
@@ -2727,6 +3682,22 @@ ousrExecutionStatus
   = lens _ousrExecutionStatus
       (\ s a -> s{_ousrExecutionStatus = a})
 
+instance FromJSON OrdersUpdateShipmentResponse where
+        parseJSON
+          = withObject "OrdersUpdateShipmentResponse"
+              (\ o ->
+                 OrdersUpdateShipmentResponse <$>
+                   (o .:? "kind" .!=
+                      "content#ordersUpdateShipmentResponse")
+                     <*> (o .:? "executionStatus"))
+
+instance ToJSON OrdersUpdateShipmentResponse where
+        toJSON OrdersUpdateShipmentResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _ousrKind),
+                  ("executionStatus" .=) <$> _ousrExecutionStatus])
+
 --
 -- /See:/ 'price' smart constructor.
 data Price = Price
@@ -2757,6 +3728,19 @@ pValue = lens _pValue (\ s a -> s{_pValue = a})
 pCurrency :: Lens' Price (Maybe Text)
 pCurrency
   = lens _pCurrency (\ s a -> s{_pCurrency = a})
+
+instance FromJSON Price where
+        parseJSON
+          = withObject "Price"
+              (\ o ->
+                 Price <$> (o .:? "value") <*> (o .:? "currency"))
+
+instance ToJSON Price where
+        toJSON Price{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _pValue,
+                  ("currency" .=) <$> _pCurrency])
 
 --
 -- /See:/ 'testOrder' smart constructor.
@@ -2851,6 +3835,34 @@ toShippingCost
   = lens _toShippingCost
       (\ s a -> s{_toShippingCost = a})
 
+instance FromJSON TestOrder where
+        parseJSON
+          = withObject "TestOrder"
+              (\ o ->
+                 TestOrder <$>
+                   (o .:? "kind" .!= "content#testOrder") <*>
+                     (o .:? "lineItems" .!= mempty)
+                     <*> (o .:? "shippingOption")
+                     <*> (o .:? "predefinedDeliveryAddress")
+                     <*> (o .:? "shippingCostTax")
+                     <*> (o .:? "customer")
+                     <*> (o .:? "paymentMethod")
+                     <*> (o .:? "shippingCost"))
+
+instance ToJSON TestOrder where
+        toJSON TestOrder{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _toKind),
+                  ("lineItems" .=) <$> _toLineItems,
+                  ("shippingOption" .=) <$> _toShippingOption,
+                  ("predefinedDeliveryAddress" .=) <$>
+                    _toPredefinedDeliveryAddress,
+                  ("shippingCostTax" .=) <$> _toShippingCostTax,
+                  ("customer" .=) <$> _toCustomer,
+                  ("paymentMethod" .=) <$> _toPaymentMethod,
+                  ("shippingCost" .=) <$> _toShippingCost])
+
 --
 -- /See:/ 'testOrderCustomer' smart constructor.
 data TestOrderCustomer = TestOrderCustomer
@@ -2895,6 +3907,23 @@ tocExplicitMarketingPreference :: Lens' TestOrderCustomer (Maybe Bool)
 tocExplicitMarketingPreference
   = lens _tocExplicitMarketingPreference
       (\ s a -> s{_tocExplicitMarketingPreference = a})
+
+instance FromJSON TestOrderCustomer where
+        parseJSON
+          = withObject "TestOrderCustomer"
+              (\ o ->
+                 TestOrderCustomer <$>
+                   (o .:? "fullName") <*> (o .:? "email") <*>
+                     (o .:? "explicitMarketingPreference"))
+
+instance ToJSON TestOrderCustomer where
+        toJSON TestOrderCustomer{..}
+          = object
+              (catMaybes
+                 [("fullName" .=) <$> _tocFullName,
+                  ("email" .=) <$> _tocEmail,
+                  ("explicitMarketingPreference" .=) <$>
+                    _tocExplicitMarketingPreference])
 
 --
 -- /See:/ 'testOrderLineItem' smart constructor.
@@ -2957,6 +3986,26 @@ toliProduct
 toliUnitTax :: Lens' TestOrderLineItem (Maybe (Maybe Price))
 toliUnitTax
   = lens _toliUnitTax (\ s a -> s{_toliUnitTax = a})
+
+instance FromJSON TestOrderLineItem where
+        parseJSON
+          = withObject "TestOrderLineItem"
+              (\ o ->
+                 TestOrderLineItem <$>
+                   (o .:? "quantityOrdered") <*> (o .:? "returnInfo")
+                     <*> (o .:? "shippingDetails")
+                     <*> (o .:? "product")
+                     <*> (o .:? "unitTax"))
+
+instance ToJSON TestOrderLineItem where
+        toJSON TestOrderLineItem{..}
+          = object
+              (catMaybes
+                 [("quantityOrdered" .=) <$> _toliQuantityOrdered,
+                  ("returnInfo" .=) <$> _toliReturnInfo,
+                  ("shippingDetails" .=) <$> _toliShippingDetails,
+                  ("product" .=) <$> _toliProduct,
+                  ("unitTax" .=) <$> _toliUnitTax])
 
 --
 -- /See:/ 'testOrderLineItemProduct' smart constructor.
@@ -3096,6 +4145,42 @@ tolipCondition
   = lens _tolipCondition
       (\ s a -> s{_tolipCondition = a})
 
+instance FromJSON TestOrderLineItemProduct where
+        parseJSON
+          = withObject "TestOrderLineItemProduct"
+              (\ o ->
+                 TestOrderLineItemProduct <$>
+                   (o .:? "imageLink") <*> (o .:? "channel") <*>
+                     (o .:? "brand")
+                     <*> (o .:? "targetCountry")
+                     <*> (o .:? "gtin")
+                     <*> (o .:? "itemGroupId")
+                     <*> (o .:? "offerId")
+                     <*> (o .:? "price")
+                     <*> (o .:? "variantAttributes" .!= mempty)
+                     <*> (o .:? "title")
+                     <*> (o .:? "contentLanguage")
+                     <*> (o .:? "mpn")
+                     <*> (o .:? "condition"))
+
+instance ToJSON TestOrderLineItemProduct where
+        toJSON TestOrderLineItemProduct{..}
+          = object
+              (catMaybes
+                 [("imageLink" .=) <$> _tolipImageLink,
+                  ("channel" .=) <$> _tolipChannel,
+                  ("brand" .=) <$> _tolipBrand,
+                  ("targetCountry" .=) <$> _tolipTargetCountry,
+                  ("gtin" .=) <$> _tolipGtin,
+                  ("itemGroupId" .=) <$> _tolipItemGroupId,
+                  ("offerId" .=) <$> _tolipOfferId,
+                  ("price" .=) <$> _tolipPrice,
+                  ("variantAttributes" .=) <$> _tolipVariantAttributes,
+                  ("title" .=) <$> _tolipTitle,
+                  ("contentLanguage" .=) <$> _tolipContentLanguage,
+                  ("mpn" .=) <$> _tolipMpn,
+                  ("condition" .=) <$> _tolipCondition])
+
 --
 -- /See:/ 'testOrderPaymentMethod' smart constructor.
 data TestOrderPaymentMethod = TestOrderPaymentMethod
@@ -3158,3 +4243,25 @@ topmPredefinedBillingAddress :: Lens' TestOrderPaymentMethod (Maybe Text)
 topmPredefinedBillingAddress
   = lens _topmPredefinedBillingAddress
       (\ s a -> s{_topmPredefinedBillingAddress = a})
+
+instance FromJSON TestOrderPaymentMethod where
+        parseJSON
+          = withObject "TestOrderPaymentMethod"
+              (\ o ->
+                 TestOrderPaymentMethod <$>
+                   (o .:? "expirationMonth") <*>
+                     (o .:? "expirationYear")
+                     <*> (o .:? "lastFourDigits")
+                     <*> (o .:? "type")
+                     <*> (o .:? "predefinedBillingAddress"))
+
+instance ToJSON TestOrderPaymentMethod where
+        toJSON TestOrderPaymentMethod{..}
+          = object
+              (catMaybes
+                 [("expirationMonth" .=) <$> _topmExpirationMonth,
+                  ("expirationYear" .=) <$> _topmExpirationYear,
+                  ("lastFourDigits" .=) <$> _topmLastFourDigits,
+                  ("type" .=) <$> _topmType,
+                  ("predefinedBillingAddress" .=) <$>
+                    _topmPredefinedBillingAddress])

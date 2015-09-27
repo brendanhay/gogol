@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -41,6 +42,19 @@ deleteMetricDescriptorResponse =
 dmdrKind :: Lens' DeleteMetricDescriptorResponse Text
 dmdrKind = lens _dmdrKind (\ s a -> s{_dmdrKind = a})
 
+instance FromJSON DeleteMetricDescriptorResponse
+         where
+        parseJSON
+          = withObject "DeleteMetricDescriptorResponse"
+              (\ o ->
+                 DeleteMetricDescriptorResponse <$>
+                   (o .:? "kind" .!=
+                      "cloudmonitoring#deleteMetricDescriptorResponse"))
+
+instance ToJSON DeleteMetricDescriptorResponse where
+        toJSON DeleteMetricDescriptorResponse{..}
+          = object (catMaybes [Just ("kind" .= _dmdrKind)])
+
 -- | The request of cloudmonitoring.metricDescriptors.list.
 --
 -- /See:/ 'listMetricDescriptorsRequest' smart constructor.
@@ -64,6 +78,18 @@ listMetricDescriptorsRequest =
 -- \"cloudmonitoring#listMetricDescriptorsRequest\".
 lmdrKind :: Lens' ListMetricDescriptorsRequest Text
 lmdrKind = lens _lmdrKind (\ s a -> s{_lmdrKind = a})
+
+instance FromJSON ListMetricDescriptorsRequest where
+        parseJSON
+          = withObject "ListMetricDescriptorsRequest"
+              (\ o ->
+                 ListMetricDescriptorsRequest <$>
+                   (o .:? "kind" .!=
+                      "cloudmonitoring#listMetricDescriptorsRequest"))
+
+instance ToJSON ListMetricDescriptorsRequest where
+        toJSON ListMetricDescriptorsRequest{..}
+          = object (catMaybes [Just ("kind" .= _lmdrKind)])
 
 -- | The response of cloudmonitoring.metricDescriptors.list.
 --
@@ -112,6 +138,25 @@ lisNextPageToken
 lisKind :: Lens' ListMetricDescriptorsResponse Text
 lisKind = lens _lisKind (\ s a -> s{_lisKind = a})
 
+instance FromJSON ListMetricDescriptorsResponse where
+        parseJSON
+          = withObject "ListMetricDescriptorsResponse"
+              (\ o ->
+                 ListMetricDescriptorsResponse <$>
+                   (o .:? "metrics" .!= mempty) <*>
+                     (o .:? "nextPageToken")
+                     <*>
+                     (o .:? "kind" .!=
+                        "cloudmonitoring#listMetricDescriptorsResponse"))
+
+instance ToJSON ListMetricDescriptorsResponse where
+        toJSON ListMetricDescriptorsResponse{..}
+          = object
+              (catMaybes
+                 [("metrics" .=) <$> _lisMetrics,
+                  ("nextPageToken" .=) <$> _lisNextPageToken,
+                  Just ("kind" .= _lisKind)])
+
 -- | The request of cloudmonitoring.timeseriesDescriptors.list
 --
 -- /See:/ 'listTimeseriesDescriptorsRequest' smart constructor.
@@ -136,6 +181,20 @@ listTimeseriesDescriptorsRequest =
 ltdrtKind :: Lens' ListTimeseriesDescriptorsRequest Text
 ltdrtKind
   = lens _ltdrtKind (\ s a -> s{_ltdrtKind = a})
+
+instance FromJSON ListTimeseriesDescriptorsRequest
+         where
+        parseJSON
+          = withObject "ListTimeseriesDescriptorsRequest"
+              (\ o ->
+                 ListTimeseriesDescriptorsRequest <$>
+                   (o .:? "kind" .!=
+                      "cloudmonitoring#listTimeseriesDescriptorsRequest"))
+
+instance ToJSON ListTimeseriesDescriptorsRequest
+         where
+        toJSON ListTimeseriesDescriptorsRequest{..}
+          = object (catMaybes [Just ("kind" .= _ltdrtKind)])
 
 -- | The response of cloudmonitoring.timeseriesDescriptors.list
 --
@@ -205,6 +264,30 @@ ltdrTimeseries
       . _Default
       . _Coerce
 
+instance FromJSON ListTimeseriesDescriptorsResponse
+         where
+        parseJSON
+          = withObject "ListTimeseriesDescriptorsResponse"
+              (\ o ->
+                 ListTimeseriesDescriptorsResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!=
+                        "cloudmonitoring#listTimeseriesDescriptorsResponse")
+                     <*> (o .:? "oldest")
+                     <*> (o .:? "youngest")
+                     <*> (o .:? "timeseries" .!= mempty))
+
+instance ToJSON ListTimeseriesDescriptorsResponse
+         where
+        toJSON ListTimeseriesDescriptorsResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _ltdrNextPageToken,
+                  Just ("kind" .= _ltdrKind),
+                  ("oldest" .=) <$> _ltdrOldest,
+                  ("youngest" .=) <$> _ltdrYoungest,
+                  ("timeseries" .=) <$> _ltdrTimeseries])
+
 -- | The request of cloudmonitoring.timeseries.list
 --
 -- /See:/ 'listTimeseriesRequest' smart constructor.
@@ -228,6 +311,18 @@ listTimeseriesRequest =
 -- \"cloudmonitoring#listTimeseriesRequest\".
 ltrKind :: Lens' ListTimeseriesRequest Text
 ltrKind = lens _ltrKind (\ s a -> s{_ltrKind = a})
+
+instance FromJSON ListTimeseriesRequest where
+        parseJSON
+          = withObject "ListTimeseriesRequest"
+              (\ o ->
+                 ListTimeseriesRequest <$>
+                   (o .:? "kind" .!=
+                      "cloudmonitoring#listTimeseriesRequest"))
+
+instance ToJSON ListTimeseriesRequest where
+        toJSON ListTimeseriesRequest{..}
+          = object (catMaybes [Just ("kind" .= _ltrKind)])
 
 -- | The response of cloudmonitoring.timeseries.list
 --
@@ -297,6 +392,27 @@ lTimeseries
       _Default
       . _Coerce
 
+instance FromJSON ListTimeseriesResponse where
+        parseJSON
+          = withObject "ListTimeseriesResponse"
+              (\ o ->
+                 ListTimeseriesResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!=
+                        "cloudmonitoring#listTimeseriesResponse")
+                     <*> (o .:? "oldest")
+                     <*> (o .:? "youngest")
+                     <*> (o .:? "timeseries" .!= mempty))
+
+instance ToJSON ListTimeseriesResponse where
+        toJSON ListTimeseriesResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lNextPageToken,
+                  Just ("kind" .= _lKind), ("oldest" .=) <$> _lOldest,
+                  ("youngest" .=) <$> _lYoungest,
+                  ("timeseries" .=) <$> _lTimeseries])
+
 -- | A metricDescriptor defines the name, label keys, and data type of a
 -- particular metric.
 --
@@ -361,6 +477,25 @@ mdDescription
   = lens _mdDescription
       (\ s a -> s{_mdDescription = a})
 
+instance FromJSON MetricDescriptor where
+        parseJSON
+          = withObject "MetricDescriptor"
+              (\ o ->
+                 MetricDescriptor <$>
+                   (o .:? "project") <*> (o .:? "typeDescriptor") <*>
+                     (o .:? "name")
+                     <*> (o .:? "labels" .!= mempty)
+                     <*> (o .:? "description"))
+
+instance ToJSON MetricDescriptor where
+        toJSON MetricDescriptor{..}
+          = object
+              (catMaybes
+                 [("project" .=) <$> _mdProject,
+                  ("typeDescriptor" .=) <$> _mdTypeDescriptor,
+                  ("name" .=) <$> _mdName, ("labels" .=) <$> _mdLabels,
+                  ("description" .=) <$> _mdDescription])
+
 -- | A label in a metric is a description of this metric, including the key
 -- of this description (what the description is), and the value for this
 -- description.
@@ -395,6 +530,21 @@ mdldDescription :: Lens' MetricDescriptorLabelDescriptor (Maybe Text)
 mdldDescription
   = lens _mdldDescription
       (\ s a -> s{_mdldDescription = a})
+
+instance FromJSON MetricDescriptorLabelDescriptor
+         where
+        parseJSON
+          = withObject "MetricDescriptorLabelDescriptor"
+              (\ o ->
+                 MetricDescriptorLabelDescriptor <$>
+                   (o .:? "key") <*> (o .:? "description"))
+
+instance ToJSON MetricDescriptorLabelDescriptor where
+        toJSON MetricDescriptorLabelDescriptor{..}
+          = object
+              (catMaybes
+                 [("key" .=) <$> _mdldKey,
+                  ("description" .=) <$> _mdldDescription])
 
 -- | A type in a metric contains information about how the metric is
 -- collected and what its data points look like.
@@ -432,6 +582,21 @@ mdtdValueType :: Lens' MetricDescriptorTypeDescriptor (Maybe Text)
 mdtdValueType
   = lens _mdtdValueType
       (\ s a -> s{_mdtdValueType = a})
+
+instance FromJSON MetricDescriptorTypeDescriptor
+         where
+        parseJSON
+          = withObject "MetricDescriptorTypeDescriptor"
+              (\ o ->
+                 MetricDescriptorTypeDescriptor <$>
+                   (o .:? "metricType") <*> (o .:? "valueType"))
+
+instance ToJSON MetricDescriptorTypeDescriptor where
+        toJSON MetricDescriptorTypeDescriptor{..}
+          = object
+              (catMaybes
+                 [("metricType" .=) <$> _mdtdMetricType,
+                  ("valueType" .=) <$> _mdtdValueType])
 
 -- | Point is a single point in a time series. It consists of a start time,
 -- an end time, and a value.
@@ -523,6 +688,30 @@ pInt64Value :: Lens' Point (Maybe Int64)
 pInt64Value
   = lens _pInt64Value (\ s a -> s{_pInt64Value = a})
 
+instance FromJSON Point where
+        parseJSON
+          = withObject "Point"
+              (\ o ->
+                 Point <$>
+                   (o .:? "boolValue") <*> (o .:? "start") <*>
+                     (o .:? "doubleValue")
+                     <*> (o .:? "stringValue")
+                     <*> (o .:? "distributionValue")
+                     <*> (o .:? "end")
+                     <*> (o .:? "int64Value"))
+
+instance ToJSON Point where
+        toJSON Point{..}
+          = object
+              (catMaybes
+                 [("boolValue" .=) <$> _pBoolValue,
+                  ("start" .=) <$> _pStart,
+                  ("doubleValue" .=) <$> _pDoubleValue,
+                  ("stringValue" .=) <$> _pStringValue,
+                  ("distributionValue" .=) <$> _pDistributionValue,
+                  ("end" .=) <$> _pEnd,
+                  ("int64Value" .=) <$> _pInt64Value])
+
 -- | Distribution data point value type. When writing distribution points,
 -- try to be consistent with the boundaries of your buckets. If you must
 -- modify the bucket boundaries, then do so by merging, partitioning, or
@@ -572,6 +761,23 @@ pdUnderflowBucket
   = lens _pdUnderflowBucket
       (\ s a -> s{_pdUnderflowBucket = a})
 
+instance FromJSON PointDistribution where
+        parseJSON
+          = withObject "PointDistribution"
+              (\ o ->
+                 PointDistribution <$>
+                   (o .:? "overflowBucket") <*>
+                     (o .:? "buckets" .!= mempty)
+                     <*> (o .:? "underflowBucket"))
+
+instance ToJSON PointDistribution where
+        toJSON PointDistribution{..}
+          = object
+              (catMaybes
+                 [("overflowBucket" .=) <$> _pdOverflowBucket,
+                  ("buckets" .=) <$> _pdBuckets,
+                  ("underflowBucket" .=) <$> _pdUnderflowBucket])
+
 -- | The histogram\'s bucket. Buckets that form the histogram of a
 -- distribution value. If the upper bound of a bucket, say U1, does not
 -- equal the lower bound of the next bucket, say L2, this means that there
@@ -619,6 +825,22 @@ pdbLowerBound
   = lens _pdbLowerBound
       (\ s a -> s{_pdbLowerBound = a})
 
+instance FromJSON PointDistributionBucket where
+        parseJSON
+          = withObject "PointDistributionBucket"
+              (\ o ->
+                 PointDistributionBucket <$>
+                   (o .:? "upperBound") <*> (o .:? "count") <*>
+                     (o .:? "lowerBound"))
+
+instance ToJSON PointDistributionBucket where
+        toJSON PointDistributionBucket{..}
+          = object
+              (catMaybes
+                 [("upperBound" .=) <$> _pdbUpperBound,
+                  ("count" .=) <$> _pdbCount,
+                  ("lowerBound" .=) <$> _pdbLowerBound])
+
 -- | The overflow bucket is a special bucket that does not have the
 -- upperBound field; it includes all of the events that are no less than
 -- its lower bound.
@@ -656,6 +878,21 @@ pdobLowerBound
   = lens _pdobLowerBound
       (\ s a -> s{_pdobLowerBound = a})
 
+instance FromJSON PointDistributionOverflowBucket
+         where
+        parseJSON
+          = withObject "PointDistributionOverflowBucket"
+              (\ o ->
+                 PointDistributionOverflowBucket <$>
+                   (o .:? "count") <*> (o .:? "lowerBound"))
+
+instance ToJSON PointDistributionOverflowBucket where
+        toJSON PointDistributionOverflowBucket{..}
+          = object
+              (catMaybes
+                 [("count" .=) <$> _pdobCount,
+                  ("lowerBound" .=) <$> _pdobLowerBound])
+
 -- | The underflow bucket is a special bucket that does not have the
 -- lowerBound field; it includes all of the events that are less than its
 -- upper bound.
@@ -692,6 +929,22 @@ pdubUpperBound
 pdubCount :: Lens' PointDistributionUnderflowBucket (Maybe Int64)
 pdubCount
   = lens _pdubCount (\ s a -> s{_pdubCount = a})
+
+instance FromJSON PointDistributionUnderflowBucket
+         where
+        parseJSON
+          = withObject "PointDistributionUnderflowBucket"
+              (\ o ->
+                 PointDistributionUnderflowBucket <$>
+                   (o .:? "upperBound") <*> (o .:? "count"))
+
+instance ToJSON PointDistributionUnderflowBucket
+         where
+        toJSON PointDistributionUnderflowBucket{..}
+          = object
+              (catMaybes
+                 [("upperBound" .=) <$> _pdubUpperBound,
+                  ("count" .=) <$> _pdubCount])
 
 -- | The monitoring data is organized as metrics and stored as data points
 -- that are recorded over time. Each data point represents information like
@@ -731,6 +984,21 @@ tTimeseriesDesc :: Lens' Timeseries (Maybe (Maybe TimeseriesDescriptor))
 tTimeseriesDesc
   = lens _tTimeseriesDesc
       (\ s a -> s{_tTimeseriesDesc = a})
+
+instance FromJSON Timeseries where
+        parseJSON
+          = withObject "Timeseries"
+              (\ o ->
+                 Timeseries <$>
+                   (o .:? "points" .!= mempty) <*>
+                     (o .:? "timeseriesDesc"))
+
+instance ToJSON Timeseries where
+        toJSON Timeseries{..}
+          = object
+              (catMaybes
+                 [("points" .=) <$> _tPoints,
+                  ("timeseriesDesc" .=) <$> _tTimeseriesDesc])
 
 -- | TimeseriesDescriptor identifies a single time series.
 --
@@ -772,6 +1040,22 @@ tdMetric = lens _tdMetric (\ s a -> s{_tdMetric = a})
 tdLabels :: Lens' TimeseriesDescriptor (Maybe TimeseriesDescriptorLabels)
 tdLabels = lens _tdLabels (\ s a -> s{_tdLabels = a})
 
+instance FromJSON TimeseriesDescriptor where
+        parseJSON
+          = withObject "TimeseriesDescriptor"
+              (\ o ->
+                 TimeseriesDescriptor <$>
+                   (o .:? "project") <*> (o .:? "metric") <*>
+                     (o .:? "labels"))
+
+instance ToJSON TimeseriesDescriptor where
+        toJSON TimeseriesDescriptor{..}
+          = object
+              (catMaybes
+                 [("project" .=) <$> _tdProject,
+                  ("metric" .=) <$> _tdMetric,
+                  ("labels" .=) <$> _tdLabels])
+
 --
 -- /See:/ 'timeseriesDescriptorLabel' smart constructor.
 data TimeseriesDescriptorLabel = TimeseriesDescriptorLabel
@@ -802,6 +1086,19 @@ tdlValue = lens _tdlValue (\ s a -> s{_tdlValue = a})
 tdlKey :: Lens' TimeseriesDescriptorLabel (Maybe Text)
 tdlKey = lens _tdlKey (\ s a -> s{_tdlKey = a})
 
+instance FromJSON TimeseriesDescriptorLabel where
+        parseJSON
+          = withObject "TimeseriesDescriptorLabel"
+              (\ o ->
+                 TimeseriesDescriptorLabel <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON TimeseriesDescriptorLabel where
+        toJSON TimeseriesDescriptorLabel{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _tdlValue, ("key" .=) <$> _tdlKey])
+
 -- | The label\'s name.
 --
 -- /See:/ 'timeseriesDescriptorLabels' smart constructor.
@@ -814,6 +1111,14 @@ data TimeseriesDescriptorLabels =
 timeseriesDescriptorLabels
     :: TimeseriesDescriptorLabels
 timeseriesDescriptorLabels = TimeseriesDescriptorLabels
+
+instance FromJSON TimeseriesDescriptorLabels where
+        parseJSON
+          = withObject "TimeseriesDescriptorLabels"
+              (\ o -> pure TimeseriesDescriptorLabels)
+
+instance ToJSON TimeseriesDescriptorLabels where
+        toJSON = const (Object mempty)
 
 -- | When writing time series, TimeseriesPoint should be used instead of
 -- Timeseries, to enforce single point for each time series in the
@@ -849,6 +1154,20 @@ tpTimeseriesDesc :: Lens' TimeseriesPoint (Maybe (Maybe TimeseriesDescriptor))
 tpTimeseriesDesc
   = lens _tpTimeseriesDesc
       (\ s a -> s{_tpTimeseriesDesc = a})
+
+instance FromJSON TimeseriesPoint where
+        parseJSON
+          = withObject "TimeseriesPoint"
+              (\ o ->
+                 TimeseriesPoint <$>
+                   (o .:? "point") <*> (o .:? "timeseriesDesc"))
+
+instance ToJSON TimeseriesPoint where
+        toJSON TimeseriesPoint{..}
+          = object
+              (catMaybes
+                 [("point" .=) <$> _tpPoint,
+                  ("timeseriesDesc" .=) <$> _tpTimeseriesDesc])
 
 -- | The request of cloudmonitoring.timeseries.write
 --
@@ -889,6 +1208,21 @@ wtrTimeseries
       . _Default
       . _Coerce
 
+instance FromJSON WriteTimeseriesRequest where
+        parseJSON
+          = withObject "WriteTimeseriesRequest"
+              (\ o ->
+                 WriteTimeseriesRequest <$>
+                   (o .:? "commonLabels") <*>
+                     (o .:? "timeseries" .!= mempty))
+
+instance ToJSON WriteTimeseriesRequest where
+        toJSON WriteTimeseriesRequest{..}
+          = object
+              (catMaybes
+                 [("commonLabels" .=) <$> _wtrCommonLabels,
+                  ("timeseries" .=) <$> _wtrTimeseries])
+
 -- | The label\'s name.
 --
 -- /See:/ 'writeTimeseriesRequestCommonLabels' smart constructor.
@@ -901,6 +1235,16 @@ data WriteTimeseriesRequestCommonLabels =
 writeTimeseriesRequestCommonLabels
     :: WriteTimeseriesRequestCommonLabels
 writeTimeseriesRequestCommonLabels = WriteTimeseriesRequestCommonLabels
+
+instance FromJSON WriteTimeseriesRequestCommonLabels
+         where
+        parseJSON
+          = withObject "WriteTimeseriesRequestCommonLabels"
+              (\ o -> pure WriteTimeseriesRequestCommonLabels)
+
+instance ToJSON WriteTimeseriesRequestCommonLabels
+         where
+        toJSON = const (Object mempty)
 
 -- | The response of cloudmonitoring.timeseries.write
 --
@@ -925,3 +1269,15 @@ writeTimeseriesResponse =
 -- \"cloudmonitoring#writeTimeseriesResponse\".
 wtrKind :: Lens' WriteTimeseriesResponse Text
 wtrKind = lens _wtrKind (\ s a -> s{_wtrKind = a})
+
+instance FromJSON WriteTimeseriesResponse where
+        parseJSON
+          = withObject "WriteTimeseriesResponse"
+              (\ o ->
+                 WriteTimeseriesResponse <$>
+                   (o .:? "kind" .!=
+                      "cloudmonitoring#writeTimeseriesResponse"))
+
+instance ToJSON WriteTimeseriesResponse where
+        toJSON WriteTimeseriesResponse{..}
+          = object (catMaybes [Just ("kind" .= _wtrKind)])

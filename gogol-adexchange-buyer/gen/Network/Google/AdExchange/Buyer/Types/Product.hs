@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -117,6 +118,35 @@ aBidderLocation
       . _Default
       . _Coerce
 
+instance FromJSON Account where
+        parseJSON
+          = withObject "Account"
+              (\ o ->
+                 Account <$>
+                   (o .:? "maximumTotalQps") <*>
+                     (o .:? "kind" .!= "adexchangebuyer#account")
+                     <*> (o .:? "cookieMatchingUrl")
+                     <*> (o .:? "maximumActiveCreatives")
+                     <*> (o .:? "cookieMatchingNid")
+                     <*> (o .:? "numberActiveCreatives")
+                     <*> (o .:? "id")
+                     <*> (o .:? "bidderLocation" .!= mempty))
+
+instance ToJSON Account where
+        toJSON Account{..}
+          = object
+              (catMaybes
+                 [("maximumTotalQps" .=) <$> _aMaximumTotalQps,
+                  Just ("kind" .= _aKind),
+                  ("cookieMatchingUrl" .=) <$> _aCookieMatchingUrl,
+                  ("maximumActiveCreatives" .=) <$>
+                    _aMaximumActiveCreatives,
+                  ("cookieMatchingNid" .=) <$> _aCookieMatchingNid,
+                  ("numberActiveCreatives" .=) <$>
+                    _aNumberActiveCreatives,
+                  ("id" .=) <$> _aId,
+                  ("bidderLocation" .=) <$> _aBidderLocation])
+
 --
 -- /See:/ 'accountItemBidderLocation' smart constructor.
 data AccountItemBidderLocation = AccountItemBidderLocation
@@ -160,6 +190,22 @@ aiblRegion :: Lens' AccountItemBidderLocation (Maybe Text)
 aiblRegion
   = lens _aiblRegion (\ s a -> s{_aiblRegion = a})
 
+instance FromJSON AccountItemBidderLocation where
+        parseJSON
+          = withObject "AccountItemBidderLocation"
+              (\ o ->
+                 AccountItemBidderLocation <$>
+                   (o .:? "url") <*> (o .:? "maximumQps") <*>
+                     (o .:? "region"))
+
+instance ToJSON AccountItemBidderLocation where
+        toJSON AccountItemBidderLocation{..}
+          = object
+              (catMaybes
+                 [("url" .=) <$> _aiblUrl,
+                  ("maximumQps" .=) <$> _aiblMaximumQps,
+                  ("region" .=) <$> _aiblRegion])
+
 -- | An account feed lists Ad Exchange buyer accounts that the user has
 -- access to. Each entry in the feed corresponds to a single buyer account.
 --
@@ -194,6 +240,21 @@ alItems
   = lens _alItems (\ s a -> s{_alItems = a}) . _Default
       . _Coerce
 
+instance FromJSON AccountsList where
+        parseJSON
+          = withObject "AccountsList"
+              (\ o ->
+                 AccountsList <$>
+                   (o .:? "kind" .!= "adexchangebuyer#accountsList") <*>
+                     (o .:? "items" .!= mempty))
+
+instance ToJSON AccountsList where
+        toJSON AccountsList{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _alKind),
+                  ("items" .=) <$> _alItems])
+
 --
 -- /See:/ 'adSize' smart constructor.
 data AdSize = AdSize
@@ -221,6 +282,19 @@ asHeight = lens _asHeight (\ s a -> s{_asHeight = a})
 
 asWidth :: Lens' AdSize (Maybe Int32)
 asWidth = lens _asWidth (\ s a -> s{_asWidth = a})
+
+instance FromJSON AdSize where
+        parseJSON
+          = withObject "AdSize"
+              (\ o ->
+                 AdSize <$> (o .:? "height") <*> (o .:? "width"))
+
+instance ToJSON AdSize where
+        toJSON AdSize{..}
+          = object
+              (catMaybes
+                 [("height" .=) <$> _asHeight,
+                  ("width" .=) <$> _asWidth])
 
 --
 -- /See:/ 'adSlotDto' smart constructor.
@@ -285,6 +359,28 @@ asdDescription
   = lens _asdDescription
       (\ s a -> s{_asdDescription = a})
 
+instance FromJSON AdSlotDto where
+        parseJSON
+          = withObject "AdSlotDto"
+              (\ o ->
+                 AdSlotDto <$>
+                   (o .:? "webPropertyId") <*> (o .:? "size") <*>
+                     (o .:? "channelCode")
+                     <*> (o .:? "channelId")
+                     <*> (o .:? "name")
+                     <*> (o .:? "description"))
+
+instance ToJSON AdSlotDto where
+        toJSON AdSlotDto{..}
+          = object
+              (catMaybes
+                 [("webPropertyId" .=) <$> _asdWebPropertyId,
+                  ("size" .=) <$> _asdSize,
+                  ("channelCode" .=) <$> _asdChannelCode,
+                  ("channelId" .=) <$> _asdChannelId,
+                  ("name" .=) <$> _asdName,
+                  ("description" .=) <$> _asdDescription])
+
 --
 -- /See:/ 'addOrderDealsRequest' smart constructor.
 data AddOrderDealsRequest = AddOrderDealsRequest
@@ -330,6 +426,23 @@ aodrOrderRevisionNumber
   = lens _aodrOrderRevisionNumber
       (\ s a -> s{_aodrOrderRevisionNumber = a})
 
+instance FromJSON AddOrderDealsRequest where
+        parseJSON
+          = withObject "AddOrderDealsRequest"
+              (\ o ->
+                 AddOrderDealsRequest <$>
+                   (o .:? "updateAction") <*> (o .:? "deals" .!= mempty)
+                     <*> (o .:? "orderRevisionNumber"))
+
+instance ToJSON AddOrderDealsRequest where
+        toJSON AddOrderDealsRequest{..}
+          = object
+              (catMaybes
+                 [("updateAction" .=) <$> _aodrUpdateAction,
+                  ("deals" .=) <$> _aodrDeals,
+                  ("orderRevisionNumber" .=) <$>
+                    _aodrOrderRevisionNumber])
+
 --
 -- /See:/ 'addOrderDealsResponse' smart constructor.
 data AddOrderDealsResponse = AddOrderDealsResponse
@@ -364,6 +477,22 @@ aOrderRevisionNumber
   = lens _aOrderRevisionNumber
       (\ s a -> s{_aOrderRevisionNumber = a})
 
+instance FromJSON AddOrderDealsResponse where
+        parseJSON
+          = withObject "AddOrderDealsResponse"
+              (\ o ->
+                 AddOrderDealsResponse <$>
+                   (o .:? "deals" .!= mempty) <*>
+                     (o .:? "orderRevisionNumber"))
+
+instance ToJSON AddOrderDealsResponse where
+        toJSON AddOrderDealsResponse{..}
+          = object
+              (catMaybes
+                 [("deals" .=) <$> _aDeals,
+                  ("orderRevisionNumber" .=) <$>
+                    _aOrderRevisionNumber])
+
 --
 -- /See:/ 'addOrderNotesRequest' smart constructor.
 newtype AddOrderNotesRequest = AddOrderNotesRequest
@@ -388,6 +517,16 @@ aNotes
   = lens _aNotes (\ s a -> s{_aNotes = a}) . _Default .
       _Coerce
 
+instance FromJSON AddOrderNotesRequest where
+        parseJSON
+          = withObject "AddOrderNotesRequest"
+              (\ o ->
+                 AddOrderNotesRequest <$> (o .:? "notes" .!= mempty))
+
+instance ToJSON AddOrderNotesRequest where
+        toJSON AddOrderNotesRequest{..}
+          = object (catMaybes [("notes" .=) <$> _aNotes])
+
 --
 -- /See:/ 'addOrderNotesResponse' smart constructor.
 newtype AddOrderNotesResponse = AddOrderNotesResponse
@@ -411,6 +550,16 @@ aonrNotes
   = lens _aonrNotes (\ s a -> s{_aonrNotes = a}) .
       _Default
       . _Coerce
+
+instance FromJSON AddOrderNotesResponse where
+        parseJSON
+          = withObject "AddOrderNotesResponse"
+              (\ o ->
+                 AddOrderNotesResponse <$> (o .:? "notes" .!= mempty))
+
+instance ToJSON AddOrderNotesResponse where
+        toJSON AddOrderNotesResponse{..}
+          = object (catMaybes [("notes" .=) <$> _aonrNotes])
 
 --
 -- /See:/ 'advertiserDto' smart constructor.
@@ -457,6 +606,23 @@ adName = lens _adName (\ s a -> s{_adName = a})
 adId :: Lens' AdvertiserDto (Maybe Int64)
 adId = lens _adId (\ s a -> s{_adId = a})
 
+instance FromJSON AdvertiserDto where
+        parseJSON
+          = withObject "AdvertiserDto"
+              (\ o ->
+                 AdvertiserDto <$>
+                   (o .:? "status") <*> (o .:? "brands" .!= mempty) <*>
+                     (o .:? "name")
+                     <*> (o .:? "id"))
+
+instance ToJSON AdvertiserDto where
+        toJSON AdvertiserDto{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _adStatus,
+                  ("brands" .=) <$> _adBrands, ("name" .=) <$> _adName,
+                  ("id" .=) <$> _adId])
+
 --
 -- /See:/ 'audienceSegment' smart constructor.
 data AudienceSegment = AudienceSegment
@@ -501,6 +667,23 @@ asDescription :: Lens' AudienceSegment (Maybe Text)
 asDescription
   = lens _asDescription
       (\ s a -> s{_asDescription = a})
+
+instance FromJSON AudienceSegment where
+        parseJSON
+          = withObject "AudienceSegment"
+              (\ o ->
+                 AudienceSegment <$>
+                   (o .:? "numCookies") <*> (o .:? "name") <*>
+                     (o .:? "id")
+                     <*> (o .:? "description"))
+
+instance ToJSON AudienceSegment where
+        toJSON AudienceSegment{..}
+          = object
+              (catMaybes
+                 [("numCookies" .=) <$> _asNumCookies,
+                  ("name" .=) <$> _asName, ("id" .=) <$> _asId,
+                  ("description" .=) <$> _asDescription])
 
 -- | The configuration data for an Ad Exchange billing info.
 --
@@ -557,6 +740,25 @@ biBillingId
       _Default
       . _Coerce
 
+instance FromJSON BillingInfo where
+        parseJSON
+          = withObject "BillingInfo"
+              (\ o ->
+                 BillingInfo <$>
+                   (o .:? "kind" .!= "adexchangebuyer#billingInfo") <*>
+                     (o .:? "accountName")
+                     <*> (o .:? "accountId")
+                     <*> (o .:? "billingId" .!= mempty))
+
+instance ToJSON BillingInfo where
+        toJSON BillingInfo{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _biKind),
+                  ("accountName" .=) <$> _biAccountName,
+                  ("accountId" .=) <$> _biAccountId,
+                  ("billingId" .=) <$> _biBillingId])
+
 -- | A billing info feed lists Billing Info the Ad Exchange buyer account has
 -- access to. Each entry in the feed corresponds to a single billing info.
 --
@@ -591,6 +793,21 @@ bilItems
   = lens _bilItems (\ s a -> s{_bilItems = a}) .
       _Default
       . _Coerce
+
+instance FromJSON BillingInfoList where
+        parseJSON
+          = withObject "BillingInfoList"
+              (\ o ->
+                 BillingInfoList <$>
+                   (o .:? "kind" .!= "adexchangebuyer#billingInfoList")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON BillingInfoList where
+        toJSON BillingInfoList{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _bilKind),
+                  ("items" .=) <$> _bilItems])
 
 --
 -- /See:/ 'brandDto' smart constructor.
@@ -628,6 +845,21 @@ bName = lens _bName (\ s a -> s{_bName = a})
 
 bId :: Lens' BrandDto (Maybe Int64)
 bId = lens _bId (\ s a -> s{_bId = a})
+
+instance FromJSON BrandDto where
+        parseJSON
+          = withObject "BrandDto"
+              (\ o ->
+                 BrandDto <$>
+                   (o .:? "advertiserId") <*> (o .:? "name") <*>
+                     (o .:? "id"))
+
+instance ToJSON BrandDto where
+        toJSON BrandDto{..}
+          = object
+              (catMaybes
+                 [("advertiserId" .=) <$> _bAdvertiserId,
+                  ("name" .=) <$> _bName, ("id" .=) <$> _bId])
 
 -- | The configuration data for Ad Exchange RTB - Budget API.
 --
@@ -700,6 +932,29 @@ budBillingId :: Lens' Budget (Maybe Int64)
 budBillingId
   = lens _budBillingId (\ s a -> s{_budBillingId = a})
 
+instance FromJSON Budget where
+        parseJSON
+          = withObject "Budget"
+              (\ o ->
+                 Budget <$>
+                   (o .:? "currencyCode") <*>
+                     (o .:? "kind" .!= "adexchangebuyer#budget")
+                     <*> (o .:? "budgetAmount")
+                     <*> (o .:? "accountId")
+                     <*> (o .:? "id")
+                     <*> (o .:? "billingId"))
+
+instance ToJSON Budget where
+        toJSON Budget{..}
+          = object
+              (catMaybes
+                 [("currencyCode" .=) <$> _budCurrencyCode,
+                  Just ("kind" .= _budKind),
+                  ("budgetAmount" .=) <$> _budBudgetAmount,
+                  ("accountId" .=) <$> _budAccountId,
+                  ("id" .=) <$> _budId,
+                  ("billingId" .=) <$> _budBillingId])
+
 --
 -- /See:/ 'buyer' smart constructor.
 newtype Buyer = Buyer
@@ -722,6 +977,16 @@ buyer =
 bAccountId :: Lens' Buyer (Maybe Text)
 bAccountId
   = lens _bAccountId (\ s a -> s{_bAccountId = a})
+
+instance FromJSON Buyer where
+        parseJSON
+          = withObject "Buyer"
+              (\ o -> Buyer <$> (o .:? "accountId"))
+
+instance ToJSON Buyer where
+        toJSON Buyer{..}
+          = object
+              (catMaybes [("accountId" .=) <$> _bAccountId])
 
 --
 -- /See:/ 'buyerDto' smart constructor.
@@ -796,6 +1061,33 @@ bdDisplayName
 bdId :: Lens' BuyerDto (Maybe Int32)
 bdId = lens _bdId (\ s a -> s{_bdId = a})
 
+instance FromJSON BuyerDto where
+        parseJSON
+          = withObject "BuyerDto"
+              (\ o ->
+                 BuyerDto <$>
+                   (o .:? "sponsorAccountId") <*>
+                     (o .:? "enabledForInterestTargetingDeals")
+                     <*> (o .:? "customerId")
+                     <*> (o .:? "enabledForPreferredDeals")
+                     <*> (o .:? "accountId")
+                     <*> (o .:? "displayName")
+                     <*> (o .:? "id"))
+
+instance ToJSON BuyerDto where
+        toJSON BuyerDto{..}
+          = object
+              (catMaybes
+                 [("sponsorAccountId" .=) <$> _bdSponsorAccountId,
+                  ("enabledForInterestTargetingDeals" .=) <$>
+                    _bdEnabledForInterestTargetingDeals,
+                  ("customerId" .=) <$> _bdCustomerId,
+                  ("enabledForPreferredDeals" .=) <$>
+                    _bdEnabledForPreferredDeals,
+                  ("accountId" .=) <$> _bdAccountId,
+                  ("displayName" .=) <$> _bdDisplayName,
+                  ("id" .=) <$> _bdId])
+
 --
 -- /See:/ 'clientAccessCapabilities' smart constructor.
 data ClientAccessCapabilities = ClientAccessCapabilities
@@ -830,6 +1122,21 @@ cacCapabilities
       . _Default
       . _Coerce
 
+instance FromJSON ClientAccessCapabilities where
+        parseJSON
+          = withObject "ClientAccessCapabilities"
+              (\ o ->
+                 ClientAccessCapabilities <$>
+                   (o .:? "clientAccountId") <*>
+                     (o .:? "capabilities" .!= mempty))
+
+instance ToJSON ClientAccessCapabilities where
+        toJSON ClientAccessCapabilities{..}
+          = object
+              (catMaybes
+                 [("clientAccountId" .=) <$> _cacClientAccountId,
+                  ("capabilities" .=) <$> _cacCapabilities])
+
 --
 -- /See:/ 'contactInformation' smart constructor.
 data ContactInformation = ContactInformation
@@ -859,6 +1166,19 @@ ciEmail = lens _ciEmail (\ s a -> s{_ciEmail = a})
 -- | The name of the contact.
 ciName :: Lens' ContactInformation (Maybe Text)
 ciName = lens _ciName (\ s a -> s{_ciName = a})
+
+instance FromJSON ContactInformation where
+        parseJSON
+          = withObject "ContactInformation"
+              (\ o ->
+                 ContactInformation <$>
+                   (o .:? "email") <*> (o .:? "name"))
+
+instance ToJSON ContactInformation where
+        toJSON ContactInformation{..}
+          = object
+              (catMaybes
+                 [("email" .=) <$> _ciEmail, ("name" .=) <$> _ciName])
 
 --
 -- /See:/ 'createOrdersRequest' smart constructor.
@@ -893,6 +1213,21 @@ cOrders
   = lens _cOrders (\ s a -> s{_cOrders = a}) . _Default
       . _Coerce
 
+instance FromJSON CreateOrdersRequest where
+        parseJSON
+          = withObject "CreateOrdersRequest"
+              (\ o ->
+                 CreateOrdersRequest <$>
+                   (o .:? "webPropertyCode") <*>
+                     (o .:? "orders" .!= mempty))
+
+instance ToJSON CreateOrdersRequest where
+        toJSON CreateOrdersRequest{..}
+          = object
+              (catMaybes
+                 [("webPropertyCode" .=) <$> _cWebPropertyCode,
+                  ("orders" .=) <$> _cOrders])
+
 --
 -- /See:/ 'createOrdersResponse' smart constructor.
 newtype CreateOrdersResponse = CreateOrdersResponse
@@ -917,6 +1252,16 @@ corOrders
   = lens _corOrders (\ s a -> s{_corOrders = a}) .
       _Default
       . _Coerce
+
+instance FromJSON CreateOrdersResponse where
+        parseJSON
+          = withObject "CreateOrdersResponse"
+              (\ o ->
+                 CreateOrdersResponse <$> (o .:? "orders" .!= mempty))
+
+instance ToJSON CreateOrdersResponse where
+        toJSON CreateOrdersResponse{..}
+          = object (catMaybes [("orders" .=) <$> _corOrders])
 
 -- | A creative and its classification data.
 --
@@ -1207,6 +1552,68 @@ cOpenAuctionStatus
   = lens _cOpenAuctionStatus
       (\ s a -> s{_cOpenAuctionStatus = a})
 
+instance FromJSON Creative where
+        parseJSON
+          = withObject "Creative"
+              (\ o ->
+                 Creative <$>
+                   (o .:? "attribute" .!= mempty) <*> (o .:? "nativeAd")
+                     <*> (o .:? "height")
+                     <*> (o .:? "buyerCreativeId")
+                     <*> (o .:? "advertiserName")
+                     <*> (o .:? "agencyId")
+                     <*> (o .:? "corrections" .!= mempty)
+                     <*> (o .:? "productCategories" .!= mempty)
+                     <*> (o .:? "kind" .!= "adexchangebuyer#creative")
+                     <*> (o .:? "HTMLSnippet")
+                     <*> (o .:? "advertiserId" .!= mempty)
+                     <*> (o .:? "restrictedCategories" .!= mempty)
+                     <*> (o .:? "dealsStatus")
+                     <*> (o .:? "width")
+                     <*> (o .:? "clickThroughUrl" .!= mempty)
+                     <*> (o .:? "vendorType" .!= mempty)
+                     <*> (o .:? "accountId")
+                     <*> (o .:? "impressionTrackingUrl" .!= mempty)
+                     <*> (o .:? "filteringReasons")
+                     <*> (o .:? "version")
+                     <*> (o .:? "sensitiveCategories" .!= mempty)
+                     <*> (o .:? "videoURL")
+                     <*> (o .:? "api_upload_timestamp")
+                     <*> (o .:? "servingRestrictions" .!= mempty)
+                     <*> (o .:? "openAuctionStatus"))
+
+instance ToJSON Creative where
+        toJSON Creative{..}
+          = object
+              (catMaybes
+                 [("attribute" .=) <$> _cAttribute,
+                  ("nativeAd" .=) <$> _cNativeAd,
+                  ("height" .=) <$> _cHeight,
+                  ("buyerCreativeId" .=) <$> _cBuyerCreativeId,
+                  ("advertiserName" .=) <$> _cAdvertiserName,
+                  ("agencyId" .=) <$> _cAgencyId,
+                  ("corrections" .=) <$> _cCorrections,
+                  ("productCategories" .=) <$> _cProductCategories,
+                  Just ("kind" .= _cKind),
+                  ("HTMLSnippet" .=) <$> _cHTMLSnippet,
+                  ("advertiserId" .=) <$> _cAdvertiserId,
+                  ("restrictedCategories" .=) <$>
+                    _cRestrictedCategories,
+                  ("dealsStatus" .=) <$> _cDealsStatus,
+                  ("width" .=) <$> _cWidth,
+                  ("clickThroughUrl" .=) <$> _cClickThroughUrl,
+                  ("vendorType" .=) <$> _cVendorType,
+                  ("accountId" .=) <$> _cAccountId,
+                  ("impressionTrackingUrl" .=) <$>
+                    _cImpressionTrackingUrl,
+                  ("filteringReasons" .=) <$> _cFilteringReasons,
+                  ("version" .=) <$> _cVersion,
+                  ("sensitiveCategories" .=) <$> _cSensitiveCategories,
+                  ("videoURL" .=) <$> _cVideoURL,
+                  ("api_upload_timestamp" .=) <$> _cApiUploadTimestamp,
+                  ("servingRestrictions" .=) <$> _cServingRestrictions,
+                  ("openAuctionStatus" .=) <$> _cOpenAuctionStatus])
+
 -- | The app icon, for app download ads.
 --
 -- /See:/ 'creativeAppIconNativeAd' smart constructor.
@@ -1245,6 +1652,22 @@ cainaWidth :: Lens' CreativeAppIconNativeAd (Maybe Int32)
 cainaWidth
   = lens _cainaWidth (\ s a -> s{_cainaWidth = a})
 
+instance FromJSON CreativeAppIconNativeAd where
+        parseJSON
+          = withObject "CreativeAppIconNativeAd"
+              (\ o ->
+                 CreativeAppIconNativeAd <$>
+                   (o .:? "height") <*> (o .:? "url") <*>
+                     (o .:? "width"))
+
+instance ToJSON CreativeAppIconNativeAd where
+        toJSON CreativeAppIconNativeAd{..}
+          = object
+              (catMaybes
+                 [("height" .=) <$> _cainaHeight,
+                  ("url" .=) <$> _cainaUrl,
+                  ("width" .=) <$> _cainaWidth])
+
 -- | The filtering reasons for the creative. Read-only. This field should not
 -- be set in requests.
 --
@@ -1280,6 +1703,20 @@ cfrReasons
 -- 00:00:00 to 23:59:59 in PST.
 cfrDate :: Lens' CreativeFilteringReasons (Maybe Text)
 cfrDate = lens _cfrDate (\ s a -> s{_cfrDate = a})
+
+instance FromJSON CreativeFilteringReasons where
+        parseJSON
+          = withObject "CreativeFilteringReasons"
+              (\ o ->
+                 CreativeFilteringReasons <$>
+                   (o .:? "reasons" .!= mempty) <*> (o .:? "date"))
+
+instance ToJSON CreativeFilteringReasons where
+        toJSON CreativeFilteringReasons{..}
+          = object
+              (catMaybes
+                 [("reasons" .=) <$> _cfrReasons,
+                  ("date" .=) <$> _cfrDate])
 
 -- | A large image.
 --
@@ -1318,6 +1755,22 @@ cinaUrl = lens _cinaUrl (\ s a -> s{_cinaUrl = a})
 cinaWidth :: Lens' CreativeImageNativeAd (Maybe Int32)
 cinaWidth
   = lens _cinaWidth (\ s a -> s{_cinaWidth = a})
+
+instance FromJSON CreativeImageNativeAd where
+        parseJSON
+          = withObject "CreativeImageNativeAd"
+              (\ o ->
+                 CreativeImageNativeAd <$>
+                   (o .:? "height") <*> (o .:? "url") <*>
+                     (o .:? "width"))
+
+instance ToJSON CreativeImageNativeAd where
+        toJSON CreativeImageNativeAd{..}
+          = object
+              (catMaybes
+                 [("height" .=) <$> _cinaHeight,
+                  ("url" .=) <$> _cinaUrl,
+                  ("width" .=) <$> _cinaWidth])
 
 --
 -- /See:/ 'creativeItemContextsItemServingRestrictions' smart constructor.
@@ -1382,6 +1835,29 @@ cicisrGeoCriteriaId
       . _Default
       . _Coerce
 
+instance FromJSON
+         CreativeItemContextsItemServingRestrictions where
+        parseJSON
+          = withObject
+              "CreativeItemContextsItemServingRestrictions"
+              (\ o ->
+                 CreativeItemContextsItemServingRestrictions <$>
+                   (o .:? "platform" .!= mempty) <*>
+                     (o .:? "contextType")
+                     <*> (o .:? "auctionType" .!= mempty)
+                     <*> (o .:? "geoCriteriaId" .!= mempty))
+
+instance ToJSON
+         CreativeItemContextsItemServingRestrictions where
+        toJSON
+          CreativeItemContextsItemServingRestrictions{..}
+          = object
+              (catMaybes
+                 [("platform" .=) <$> _cicisrPlatform,
+                  ("contextType" .=) <$> _cicisrContextType,
+                  ("auctionType" .=) <$> _cicisrAuctionType,
+                  ("geoCriteriaId" .=) <$> _cicisrGeoCriteriaId])
+
 --
 -- /See:/ 'creativeItemCorrections' smart constructor.
 data CreativeItemCorrections = CreativeItemCorrections
@@ -1415,6 +1891,20 @@ cicDetails
   = lens _cicDetails (\ s a -> s{_cicDetails = a}) .
       _Default
       . _Coerce
+
+instance FromJSON CreativeItemCorrections where
+        parseJSON
+          = withObject "CreativeItemCorrections"
+              (\ o ->
+                 CreativeItemCorrections <$>
+                   (o .:? "reason") <*> (o .:? "details" .!= mempty))
+
+instance ToJSON CreativeItemCorrections where
+        toJSON CreativeItemCorrections{..}
+          = object
+              (catMaybes
+                 [("reason" .=) <$> _cicReason,
+                  ("details" .=) <$> _cicDetails])
 
 --
 -- /See:/ 'creativeItemDisapprovalReasonsItemServingRestrictions' smart constructor.
@@ -1452,6 +1942,27 @@ cidrisrDetails
       . _Default
       . _Coerce
 
+instance FromJSON
+         CreativeItemDisapprovalReasonsItemServingRestrictions
+         where
+        parseJSON
+          = withObject
+              "CreativeItemDisapprovalReasonsItemServingRestrictions"
+              (\ o ->
+                 CreativeItemDisapprovalReasonsItemServingRestrictions
+                   <$>
+                   (o .:? "reason") <*> (o .:? "details" .!= mempty))
+
+instance ToJSON
+         CreativeItemDisapprovalReasonsItemServingRestrictions
+         where
+        toJSON
+          CreativeItemDisapprovalReasonsItemServingRestrictions{..}
+          = object
+              (catMaybes
+                 [("reason" .=) <$> _cidrisrReason,
+                  ("details" .=) <$> _cidrisrDetails])
+
 --
 -- /See:/ 'creativeItemReasonsFilteringReasons' smart constructor.
 data CreativeItemReasonsFilteringReasons = CreativeItemReasonsFilteringReasons
@@ -1487,6 +1998,23 @@ cirfrFilteringCount :: Lens' CreativeItemReasonsFilteringReasons (Maybe Int64)
 cirfrFilteringCount
   = lens _cirfrFilteringCount
       (\ s a -> s{_cirfrFilteringCount = a})
+
+instance FromJSON CreativeItemReasonsFilteringReasons
+         where
+        parseJSON
+          = withObject "CreativeItemReasonsFilteringReasons"
+              (\ o ->
+                 CreativeItemReasonsFilteringReasons <$>
+                   (o .:? "filteringStatus") <*>
+                     (o .:? "filteringCount"))
+
+instance ToJSON CreativeItemReasonsFilteringReasons
+         where
+        toJSON CreativeItemReasonsFilteringReasons{..}
+          = object
+              (catMaybes
+                 [("filteringStatus" .=) <$> _cirfrFilteringStatus,
+                  ("filteringCount" .=) <$> _cirfrFilteringCount])
 
 --
 -- /See:/ 'creativeItemServingRestrictions' smart constructor.
@@ -1539,6 +2067,24 @@ cisrDisapprovalReasons
       . _Default
       . _Coerce
 
+instance FromJSON CreativeItemServingRestrictions
+         where
+        parseJSON
+          = withObject "CreativeItemServingRestrictions"
+              (\ o ->
+                 CreativeItemServingRestrictions <$>
+                   (o .:? "contexts" .!= mempty) <*> (o .:? "reason")
+                     <*> (o .:? "disapprovalReasons" .!= mempty))
+
+instance ToJSON CreativeItemServingRestrictions where
+        toJSON CreativeItemServingRestrictions{..}
+          = object
+              (catMaybes
+                 [("contexts" .=) <$> _cisrContexts,
+                  ("reason" .=) <$> _cisrReason,
+                  ("disapprovalReasons" .=) <$>
+                    _cisrDisapprovalReasons])
+
 -- | A smaller image, for the advertiser logo.
 --
 -- /See:/ 'creativeLogoNativeAd' smart constructor.
@@ -1576,6 +2122,22 @@ clnaUrl = lens _clnaUrl (\ s a -> s{_clnaUrl = a})
 clnaWidth :: Lens' CreativeLogoNativeAd (Maybe Int32)
 clnaWidth
   = lens _clnaWidth (\ s a -> s{_clnaWidth = a})
+
+instance FromJSON CreativeLogoNativeAd where
+        parseJSON
+          = withObject "CreativeLogoNativeAd"
+              (\ o ->
+                 CreativeLogoNativeAd <$>
+                   (o .:? "height") <*> (o .:? "url") <*>
+                     (o .:? "width"))
+
+instance ToJSON CreativeLogoNativeAd where
+        toJSON CreativeLogoNativeAd{..}
+          = object
+              (catMaybes
+                 [("height" .=) <$> _clnaHeight,
+                  ("url" .=) <$> _clnaUrl,
+                  ("width" .=) <$> _clnaWidth])
 
 -- | If nativeAd is set, HTMLSnippet and videoURL should not be set.
 --
@@ -1701,6 +2263,41 @@ cnaStarRating
 cnaLogo :: Lens' CreativeNativeAd (Maybe CreativeLogoNativeAd)
 cnaLogo = lens _cnaLogo (\ s a -> s{_cnaLogo = a})
 
+instance FromJSON CreativeNativeAd where
+        parseJSON
+          = withObject "CreativeNativeAd"
+              (\ o ->
+                 CreativeNativeAd <$>
+                   (o .:? "image") <*> (o .:? "appIcon") <*>
+                     (o .:? "clickTrackingUrl")
+                     <*> (o .:? "body")
+                     <*> (o .:? "headline")
+                     <*> (o .:? "impressionTrackingUrl" .!= mempty)
+                     <*> (o .:? "callToAction")
+                     <*> (o .:? "store")
+                     <*> (o .:? "price")
+                     <*> (o .:? "advertiser")
+                     <*> (o .:? "starRating")
+                     <*> (o .:? "logo"))
+
+instance ToJSON CreativeNativeAd where
+        toJSON CreativeNativeAd{..}
+          = object
+              (catMaybes
+                 [("image" .=) <$> _cnaImage,
+                  ("appIcon" .=) <$> _cnaAppIcon,
+                  ("clickTrackingUrl" .=) <$> _cnaClickTrackingUrl,
+                  ("body" .=) <$> _cnaBody,
+                  ("headline" .=) <$> _cnaHeadline,
+                  ("impressionTrackingUrl" .=) <$>
+                    _cnaImpressionTrackingUrl,
+                  ("callToAction" .=) <$> _cnaCallToAction,
+                  ("store" .=) <$> _cnaStore,
+                  ("price" .=) <$> _cnaPrice,
+                  ("advertiser" .=) <$> _cnaAdvertiser,
+                  ("starRating" .=) <$> _cnaStarRating,
+                  ("logo" .=) <$> _cnaLogo])
+
 -- | The creatives feed lists the active creatives for the Ad Exchange buyer
 -- accounts that the user has access to. Each entry in the feed corresponds
 -- to a single creative.
@@ -1746,6 +2343,22 @@ clItems :: Lens' CreativesList [Maybe Creative]
 clItems
   = lens _clItems (\ s a -> s{_clItems = a}) . _Default
       . _Coerce
+
+instance FromJSON CreativesList where
+        parseJSON
+          = withObject "CreativesList"
+              (\ o ->
+                 CreativesList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "adexchangebuyer#creativesList")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON CreativesList where
+        toJSON CreativesList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _clNextPageToken,
+                  Just ("kind" .= _clKind), ("items" .=) <$> _clItems])
 
 --
 -- /See:/ 'dateTime' smart constructor.
@@ -1811,6 +2424,27 @@ dtTimeZoneId :: Lens' DateTime (Maybe Text)
 dtTimeZoneId
   = lens _dtTimeZoneId (\ s a -> s{_dtTimeZoneId = a})
 
+instance FromJSON DateTime where
+        parseJSON
+          = withObject "DateTime"
+              (\ o ->
+                 DateTime <$>
+                   (o .:? "second") <*> (o .:? "day") <*> (o .:? "year")
+                     <*> (o .:? "hour")
+                     <*> (o .:? "month")
+                     <*> (o .:? "minute")
+                     <*> (o .:? "timeZoneId"))
+
+instance ToJSON DateTime where
+        toJSON DateTime{..}
+          = object
+              (catMaybes
+                 [("second" .=) <$> _dtSecond, ("day" .=) <$> _dtDay,
+                  ("year" .=) <$> _dtYear, ("hour" .=) <$> _dtHour,
+                  ("month" .=) <$> _dtMonth,
+                  ("minute" .=) <$> _dtMinute,
+                  ("timeZoneId" .=) <$> _dtTimeZoneId])
+
 --
 -- /See:/ 'dealPartyDto' smart constructor.
 data DealPartyDto = DealPartyDto
@@ -1866,6 +2500,26 @@ dpdWebProperty
 dpdBuyer :: Lens' DealPartyDto (Maybe (Maybe BuyerDto))
 dpdBuyer = lens _dpdBuyer (\ s a -> s{_dpdBuyer = a})
 
+instance FromJSON DealPartyDto where
+        parseJSON
+          = withObject "DealPartyDto"
+              (\ o ->
+                 DealPartyDto <$>
+                   (o .:? "buyerSellerRole") <*> (o .:? "customerId")
+                     <*> (o .:? "name")
+                     <*> (o .:? "webProperty")
+                     <*> (o .:? "buyer"))
+
+instance ToJSON DealPartyDto where
+        toJSON DealPartyDto{..}
+          = object
+              (catMaybes
+                 [("buyerSellerRole" .=) <$> _dpdBuyerSellerRole,
+                  ("customerId" .=) <$> _dpdCustomerId,
+                  ("name" .=) <$> _dpdName,
+                  ("webProperty" .=) <$> _dpdWebProperty,
+                  ("buyer" .=) <$> _dpdBuyer])
+
 --
 -- /See:/ 'dealTerms' smart constructor.
 data DealTerms = DealTerms
@@ -1920,6 +2574,28 @@ dtDescription
   = lens _dtDescription
       (\ s a -> s{_dtDescription = a})
 
+instance FromJSON DealTerms where
+        parseJSON
+          = withObject "DealTerms"
+              (\ o ->
+                 DealTerms <$>
+                   (o .:? "nonGuaranteedFixedPriceTerms") <*>
+                     (o .:? "nonGuaranteedAuctionTerms")
+                     <*> (o .:? "guaranteedFixedPriceTerms")
+                     <*> (o .:? "description"))
+
+instance ToJSON DealTerms where
+        toJSON DealTerms{..}
+          = object
+              (catMaybes
+                 [("nonGuaranteedFixedPriceTerms" .=) <$>
+                    _dtNonGuaranteedFixedPriceTerms,
+                  ("nonGuaranteedAuctionTerms" .=) <$>
+                    _dtNonGuaranteedAuctionTerms,
+                  ("guaranteedFixedPriceTerms" .=) <$>
+                    _dtGuaranteedFixedPriceTerms,
+                  ("description" .=) <$> _dtDescription])
+
 --
 -- /See:/ 'dealTermsGuaranteedFixedPriceTerms' smart constructor.
 data DealTermsGuaranteedFixedPriceTerms = DealTermsGuaranteedFixedPriceTerms
@@ -1967,6 +2643,26 @@ dtgfptFixedPrices
       . _Default
       . _Coerce
 
+instance FromJSON DealTermsGuaranteedFixedPriceTerms
+         where
+        parseJSON
+          = withObject "DealTermsGuaranteedFixedPriceTerms"
+              (\ o ->
+                 DealTermsGuaranteedFixedPriceTerms <$>
+                   (o .:? "guaranteedLooks") <*>
+                     (o .:? "guaranteedImpressions")
+                     <*> (o .:? "fixedPrices" .!= mempty))
+
+instance ToJSON DealTermsGuaranteedFixedPriceTerms
+         where
+        toJSON DealTermsGuaranteedFixedPriceTerms{..}
+          = object
+              (catMaybes
+                 [("guaranteedLooks" .=) <$> _dtgfptGuaranteedLooks,
+                  ("guaranteedImpressions" .=) <$>
+                    _dtgfptGuaranteedImpressions,
+                  ("fixedPrices" .=) <$> _dtgfptFixedPrices])
+
 --
 -- /See:/ 'dealTermsNonGuaranteedAuctionTerms' smart constructor.
 data DealTermsNonGuaranteedAuctionTerms = DealTermsNonGuaranteedAuctionTerms
@@ -2003,6 +2699,24 @@ dtngatPrivateAuctionId
   = lens _dtngatPrivateAuctionId
       (\ s a -> s{_dtngatPrivateAuctionId = a})
 
+instance FromJSON DealTermsNonGuaranteedAuctionTerms
+         where
+        parseJSON
+          = withObject "DealTermsNonGuaranteedAuctionTerms"
+              (\ o ->
+                 DealTermsNonGuaranteedAuctionTerms <$>
+                   (o .:? "reservePricePerBuyers" .!= mempty) <*>
+                     (o .:? "privateAuctionId"))
+
+instance ToJSON DealTermsNonGuaranteedAuctionTerms
+         where
+        toJSON DealTermsNonGuaranteedAuctionTerms{..}
+          = object
+              (catMaybes
+                 [("reservePricePerBuyers" .=) <$>
+                    _dtngatReservePricePerBuyers,
+                  ("privateAuctionId" .=) <$> _dtngatPrivateAuctionId])
+
 --
 -- /See:/ 'dealTermsNonGuaranteedFixedPriceTerms' smart constructor.
 newtype DealTermsNonGuaranteedFixedPriceTerms = DealTermsNonGuaranteedFixedPriceTerms
@@ -2028,6 +2742,21 @@ dtngfptFixedPrices
       (\ s a -> s{_dtngfptFixedPrices = a})
       . _Default
       . _Coerce
+
+instance FromJSON
+         DealTermsNonGuaranteedFixedPriceTerms where
+        parseJSON
+          = withObject "DealTermsNonGuaranteedFixedPriceTerms"
+              (\ o ->
+                 DealTermsNonGuaranteedFixedPriceTerms <$>
+                   (o .:? "fixedPrices" .!= mempty))
+
+instance ToJSON DealTermsNonGuaranteedFixedPriceTerms
+         where
+        toJSON DealTermsNonGuaranteedFixedPriceTerms{..}
+          = object
+              (catMaybes
+                 [("fixedPrices" .=) <$> _dtngfptFixedPrices])
 
 --
 -- /See:/ 'deleteOrderDealsRequest' smart constructor.
@@ -2073,6 +2802,24 @@ dOrderRevisionNumber
   = lens _dOrderRevisionNumber
       (\ s a -> s{_dOrderRevisionNumber = a})
 
+instance FromJSON DeleteOrderDealsRequest where
+        parseJSON
+          = withObject "DeleteOrderDealsRequest"
+              (\ o ->
+                 DeleteOrderDealsRequest <$>
+                   (o .:? "updateAction") <*>
+                     (o .:? "dealIds" .!= mempty)
+                     <*> (o .:? "orderRevisionNumber"))
+
+instance ToJSON DeleteOrderDealsRequest where
+        toJSON DeleteOrderDealsRequest{..}
+          = object
+              (catMaybes
+                 [("updateAction" .=) <$> _dUpdateAction,
+                  ("dealIds" .=) <$> _dDealIds,
+                  ("orderRevisionNumber" .=) <$>
+                    _dOrderRevisionNumber])
+
 --
 -- /See:/ 'deleteOrderDealsResponse' smart constructor.
 data DeleteOrderDealsResponse = DeleteOrderDealsResponse
@@ -2108,6 +2855,22 @@ dodrOrderRevisionNumber
   = lens _dodrOrderRevisionNumber
       (\ s a -> s{_dodrOrderRevisionNumber = a})
 
+instance FromJSON DeleteOrderDealsResponse where
+        parseJSON
+          = withObject "DeleteOrderDealsResponse"
+              (\ o ->
+                 DeleteOrderDealsResponse <$>
+                   (o .:? "deals" .!= mempty) <*>
+                     (o .:? "orderRevisionNumber"))
+
+instance ToJSON DeleteOrderDealsResponse where
+        toJSON DeleteOrderDealsResponse{..}
+          = object
+              (catMaybes
+                 [("deals" .=) <$> _dodrDeals,
+                  ("orderRevisionNumber" .=) <$>
+                    _dodrOrderRevisionNumber])
+
 --
 -- /See:/ 'deliveryControl' smart constructor.
 data DeliveryControl = DeliveryControl
@@ -2141,6 +2904,21 @@ dcDeliveryRateType :: Lens' DeliveryControl (Maybe Text)
 dcDeliveryRateType
   = lens _dcDeliveryRateType
       (\ s a -> s{_dcDeliveryRateType = a})
+
+instance FromJSON DeliveryControl where
+        parseJSON
+          = withObject "DeliveryControl"
+              (\ o ->
+                 DeliveryControl <$>
+                   (o .:? "frequencyCaps" .!= mempty) <*>
+                     (o .:? "deliveryRateType"))
+
+instance ToJSON DeliveryControl where
+        toJSON DeliveryControl{..}
+          = object
+              (catMaybes
+                 [("frequencyCaps" .=) <$> _dcFrequencyCaps,
+                  ("deliveryRateType" .=) <$> _dcDeliveryRateType])
 
 --
 -- /See:/ 'deliveryControlFrequencyCap' smart constructor.
@@ -2182,6 +2960,22 @@ dcfcTimeUnitType :: Lens' DeliveryControlFrequencyCap (Maybe Text)
 dcfcTimeUnitType
   = lens _dcfcTimeUnitType
       (\ s a -> s{_dcfcTimeUnitType = a})
+
+instance FromJSON DeliveryControlFrequencyCap where
+        parseJSON
+          = withObject "DeliveryControlFrequencyCap"
+              (\ o ->
+                 DeliveryControlFrequencyCap <$>
+                   (o .:? "maxImpressions") <*> (o .:? "numTimeUnits")
+                     <*> (o .:? "timeUnitType"))
+
+instance ToJSON DeliveryControlFrequencyCap where
+        toJSON DeliveryControlFrequencyCap{..}
+          = object
+              (catMaybes
+                 [("maxImpressions" .=) <$> _dcfcMaxImpressions,
+                  ("numTimeUnits" .=) <$> _dcfcNumTimeUnits,
+                  ("timeUnitType" .=) <$> _dcfcTimeUnitType])
 
 --
 -- /See:/ 'editAllOrderDealsRequest' smart constructor.
@@ -2249,6 +3043,25 @@ eaodrOrderRevisionNumber
   = lens _eaodrOrderRevisionNumber
       (\ s a -> s{_eaodrOrderRevisionNumber = a})
 
+instance FromJSON EditAllOrderDealsRequest where
+        parseJSON
+          = withObject "EditAllOrderDealsRequest"
+              (\ o ->
+                 EditAllOrderDealsRequest <$>
+                   (o .:? "updateAction") <*> (o .:? "deals" .!= mempty)
+                     <*> (o .:? "order")
+                     <*> (o .:? "orderRevisionNumber"))
+
+instance ToJSON EditAllOrderDealsRequest where
+        toJSON EditAllOrderDealsRequest{..}
+          = object
+              (catMaybes
+                 [("updateAction" .=) <$> _eaodrUpdateAction,
+                  ("deals" .=) <$> _eaodrDeals,
+                  ("order" .=) <$> _eaodrOrder,
+                  ("orderRevisionNumber" .=) <$>
+                    _eaodrOrderRevisionNumber])
+
 --
 -- /See:/ 'editAllOrderDealsResponse' smart constructor.
 newtype EditAllOrderDealsResponse = EditAllOrderDealsResponse
@@ -2272,6 +3085,17 @@ eDeals :: Lens' EditAllOrderDealsResponse [Maybe MarketplaceDeal]
 eDeals
   = lens _eDeals (\ s a -> s{_eDeals = a}) . _Default .
       _Coerce
+
+instance FromJSON EditAllOrderDealsResponse where
+        parseJSON
+          = withObject "EditAllOrderDealsResponse"
+              (\ o ->
+                 EditAllOrderDealsResponse <$>
+                   (o .:? "deals" .!= mempty))
+
+instance ToJSON EditAllOrderDealsResponse where
+        toJSON EditAllOrderDealsResponse{..}
+          = object (catMaybes [("deals" .=) <$> _eDeals])
 
 --
 -- /See:/ 'editHistoryDto' smart constructor.
@@ -2323,6 +3147,27 @@ ehdCreatedTimeStamp
   = lens _ehdCreatedTimeStamp
       (\ s a -> s{_ehdCreatedTimeStamp = a})
 
+instance FromJSON EditHistoryDto where
+        parseJSON
+          = withObject "EditHistoryDto"
+              (\ o ->
+                 EditHistoryDto <$>
+                   (o .:? "lastUpdatedByLoginName") <*>
+                     (o .:? "createdByLoginName")
+                     <*> (o .:? "lastUpdateTimeStamp")
+                     <*> (o .:? "createdTimeStamp"))
+
+instance ToJSON EditHistoryDto where
+        toJSON EditHistoryDto{..}
+          = object
+              (catMaybes
+                 [("lastUpdatedByLoginName" .=) <$>
+                    _ehdLastUpdatedByLoginName,
+                  ("createdByLoginName" .=) <$> _ehdCreatedByLoginName,
+                  ("lastUpdateTimeStamp" .=) <$>
+                    _ehdLastUpdateTimeStamp,
+                  ("createdTimeStamp" .=) <$> _ehdCreatedTimeStamp])
+
 --
 -- /See:/ 'getFinalizedNegotiationByExternalDealIdRequest' smart constructor.
 newtype GetFinalizedNegotiationByExternalDealIdRequest = GetFinalizedNegotiationByExternalDealIdRequest
@@ -2346,6 +3191,24 @@ gfnbedirIncludePrivateAuctions
   = lens _gfnbedirIncludePrivateAuctions
       (\ s a -> s{_gfnbedirIncludePrivateAuctions = a})
 
+instance FromJSON
+         GetFinalizedNegotiationByExternalDealIdRequest where
+        parseJSON
+          = withObject
+              "GetFinalizedNegotiationByExternalDealIdRequest"
+              (\ o ->
+                 GetFinalizedNegotiationByExternalDealIdRequest <$>
+                   (o .:? "includePrivateAuctions"))
+
+instance ToJSON
+         GetFinalizedNegotiationByExternalDealIdRequest where
+        toJSON
+          GetFinalizedNegotiationByExternalDealIdRequest{..}
+          = object
+              (catMaybes
+                 [("includePrivateAuctions" .=) <$>
+                    _gfnbedirIncludePrivateAuctions])
+
 --
 -- /See:/ 'getNegotiationByIdRequest' smart constructor.
 newtype GetNegotiationByIdRequest = GetNegotiationByIdRequest
@@ -2368,6 +3231,20 @@ gnbirIncludePrivateAuctions :: Lens' GetNegotiationByIdRequest (Maybe Bool)
 gnbirIncludePrivateAuctions
   = lens _gnbirIncludePrivateAuctions
       (\ s a -> s{_gnbirIncludePrivateAuctions = a})
+
+instance FromJSON GetNegotiationByIdRequest where
+        parseJSON
+          = withObject "GetNegotiationByIdRequest"
+              (\ o ->
+                 GetNegotiationByIdRequest <$>
+                   (o .:? "includePrivateAuctions"))
+
+instance ToJSON GetNegotiationByIdRequest where
+        toJSON GetNegotiationByIdRequest{..}
+          = object
+              (catMaybes
+                 [("includePrivateAuctions" .=) <$>
+                    _gnbirIncludePrivateAuctions])
 
 --
 -- /See:/ 'getNegotiationsRequest' smart constructor.
@@ -2409,6 +3286,25 @@ gnrIncludePrivateAuctions
   = lens _gnrIncludePrivateAuctions
       (\ s a -> s{_gnrIncludePrivateAuctions = a})
 
+instance FromJSON GetNegotiationsRequest where
+        parseJSON
+          = withObject "GetNegotiationsRequest"
+              (\ o ->
+                 GetNegotiationsRequest <$>
+                   (o .:? "sinceTimestampMillis") <*>
+                     (o .:? "finalized")
+                     <*> (o .:? "includePrivateAuctions"))
+
+instance ToJSON GetNegotiationsRequest where
+        toJSON GetNegotiationsRequest{..}
+          = object
+              (catMaybes
+                 [("sinceTimestampMillis" .=) <$>
+                    _gnrSinceTimestampMillis,
+                  ("finalized" .=) <$> _gnrFinalized,
+                  ("includePrivateAuctions" .=) <$>
+                    _gnrIncludePrivateAuctions])
+
 --
 -- /See:/ 'getNegotiationsResponse' smart constructor.
 data GetNegotiationsResponse = GetNegotiationsResponse
@@ -2441,6 +3337,21 @@ gnrNegotiations
       . _Default
       . _Coerce
 
+instance FromJSON GetNegotiationsResponse where
+        parseJSON
+          = withObject "GetNegotiationsResponse"
+              (\ o ->
+                 GetNegotiationsResponse <$>
+                   (o .:? "kind" .!= "adexchangebuyer#negotiationsList")
+                     <*> (o .:? "negotiations" .!= mempty))
+
+instance ToJSON GetNegotiationsResponse where
+        toJSON GetNegotiationsResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _gnrKind),
+                  ("negotiations" .=) <$> _gnrNegotiations])
+
 --
 -- /See:/ 'getOffersResponse' smart constructor.
 newtype GetOffersResponse = GetOffersResponse
@@ -2465,6 +3376,16 @@ gorOffers
   = lens _gorOffers (\ s a -> s{_gorOffers = a}) .
       _Default
       . _Coerce
+
+instance FromJSON GetOffersResponse where
+        parseJSON
+          = withObject "GetOffersResponse"
+              (\ o ->
+                 GetOffersResponse <$> (o .:? "offers" .!= mempty))
+
+instance ToJSON GetOffersResponse where
+        toJSON GetOffersResponse{..}
+          = object (catMaybes [("offers" .=) <$> _gorOffers])
 
 --
 -- /See:/ 'getOrderDealsResponse' smart constructor.
@@ -2491,6 +3412,16 @@ godrDeals
       _Default
       . _Coerce
 
+instance FromJSON GetOrderDealsResponse where
+        parseJSON
+          = withObject "GetOrderDealsResponse"
+              (\ o ->
+                 GetOrderDealsResponse <$> (o .:? "deals" .!= mempty))
+
+instance ToJSON GetOrderDealsResponse where
+        toJSON GetOrderDealsResponse{..}
+          = object (catMaybes [("deals" .=) <$> _godrDeals])
+
 --
 -- /See:/ 'getOrderNotesResponse' smart constructor.
 newtype GetOrderNotesResponse = GetOrderNotesResponse
@@ -2516,6 +3447,16 @@ gonrNotes
       _Default
       . _Coerce
 
+instance FromJSON GetOrderNotesResponse where
+        parseJSON
+          = withObject "GetOrderNotesResponse"
+              (\ o ->
+                 GetOrderNotesResponse <$> (o .:? "notes" .!= mempty))
+
+instance ToJSON GetOrderNotesResponse where
+        toJSON GetOrderNotesResponse{..}
+          = object (catMaybes [("notes" .=) <$> _gonrNotes])
+
 --
 -- /See:/ 'getOrdersResponse' smart constructor.
 newtype GetOrdersResponse = GetOrdersResponse
@@ -2540,6 +3481,16 @@ gorOrders
   = lens _gorOrders (\ s a -> s{_gorOrders = a}) .
       _Default
       . _Coerce
+
+instance FromJSON GetOrdersResponse where
+        parseJSON
+          = withObject "GetOrdersResponse"
+              (\ o ->
+                 GetOrdersResponse <$> (o .:? "orders" .!= mempty))
+
+instance ToJSON GetOrdersResponse where
+        toJSON GetOrdersResponse{..}
+          = object (catMaybes [("orders" .=) <$> _gorOrders])
 
 --
 -- /See:/ 'inventorySegmentTargeting' smart constructor.
@@ -2951,6 +3902,114 @@ istNegativeIcmInterests
       . _Default
       . _Coerce
 
+instance FromJSON InventorySegmentTargeting where
+        parseJSON
+          = withObject "InventorySegmentTargeting"
+              (\ o ->
+                 InventorySegmentTargeting <$>
+                   (o .:? "negativeVideoDurationSegments" .!= mempty)
+                     <*> (o .:? "negativeIcmBrands" .!= mempty)
+                     <*> (o .:? "negativeKeyValues" .!= mempty)
+                     <*> (o .:? "positiveAudienceSegments" .!= mempty)
+                     <*> (o .:? "positiveXfpPlacements" .!= mempty)
+                     <*> (o .:? "negativeXfpAdSlots" .!= mempty)
+                     <*>
+                     (o .:? "positiveOperatingSystemVersions" .!= mempty)
+                     <*> (o .:? "positiveSizes" .!= mempty)
+                     <*> (o .:? "positiveDeviceCategories" .!= mempty)
+                     <*> (o .:? "positiveLocations" .!= mempty)
+                     <*> (o .:? "negativeAdSizes" .!= mempty)
+                     <*> (o .:? "positiveOperatingSystems" .!= mempty)
+                     <*> (o .:? "positiveSiteUrls" .!= mempty)
+                     <*> (o .:? "negativeInventorySlots" .!= mempty)
+                     <*>
+                     (o .:? "negativeVideoAdPositionSegments" .!= mempty)
+                     <*> (o .:? "positiveAdTypeSegments" .!= mempty)
+                     <*> (o .:? "positiveIcmInterests" .!= mempty)
+                     <*> (o .:? "positiveMobileApps" .!= mempty)
+                     <*> (o .:? "positiveKeyValues" .!= mempty)
+                     <*> (o .:? "positiveIcmBrands" .!= mempty)
+                     <*>
+                     (o .:? "positiveVideoDurationSegments" .!= mempty)
+                     <*> (o .:? "negativeAudienceSegments" .!= mempty)
+                     <*> (o .:? "negativeXfpPlacements" .!= mempty)
+                     <*> (o .:? "positiveXfpAdSlots" .!= mempty)
+                     <*>
+                     (o .:? "negativeOperatingSystemVersions" .!= mempty)
+                     <*> (o .:? "negativeSizes" .!= mempty)
+                     <*> (o .:? "negativeLocations" .!= mempty)
+                     <*> (o .:? "negativeDeviceCategories" .!= mempty)
+                     <*> (o .:? "negativeOperatingSystems" .!= mempty)
+                     <*> (o .:? "positiveAdSizes" .!= mempty)
+                     <*> (o .:? "negativeSiteUrls" .!= mempty)
+                     <*> (o .:? "negativeAdTypeSegments" .!= mempty)
+                     <*>
+                     (o .:? "positiveVideoAdPositionSegments" .!= mempty)
+                     <*> (o .:? "positiveInventorySlots" .!= mempty)
+                     <*> (o .:? "negativeMobileApps" .!= mempty)
+                     <*> (o .:? "negativeIcmInterests" .!= mempty))
+
+instance ToJSON InventorySegmentTargeting where
+        toJSON InventorySegmentTargeting{..}
+          = object
+              (catMaybes
+                 [("negativeVideoDurationSegments" .=) <$>
+                    _istNegativeVideoDurationSegments,
+                  ("negativeIcmBrands" .=) <$> _istNegativeIcmBrands,
+                  ("negativeKeyValues" .=) <$> _istNegativeKeyValues,
+                  ("positiveAudienceSegments" .=) <$>
+                    _istPositiveAudienceSegments,
+                  ("positiveXfpPlacements" .=) <$>
+                    _istPositiveXfpPlacements,
+                  ("negativeXfpAdSlots" .=) <$> _istNegativeXfpAdSlots,
+                  ("positiveOperatingSystemVersions" .=) <$>
+                    _istPositiveOperatingSystemVersions,
+                  ("positiveSizes" .=) <$> _istPositiveSizes,
+                  ("positiveDeviceCategories" .=) <$>
+                    _istPositiveDeviceCategories,
+                  ("positiveLocations" .=) <$> _istPositiveLocations,
+                  ("negativeAdSizes" .=) <$> _istNegativeAdSizes,
+                  ("positiveOperatingSystems" .=) <$>
+                    _istPositiveOperatingSystems,
+                  ("positiveSiteUrls" .=) <$> _istPositiveSiteUrls,
+                  ("negativeInventorySlots" .=) <$>
+                    _istNegativeInventorySlots,
+                  ("negativeVideoAdPositionSegments" .=) <$>
+                    _istNegativeVideoAdPositionSegments,
+                  ("positiveAdTypeSegments" .=) <$>
+                    _istPositiveAdTypeSegments,
+                  ("positiveIcmInterests" .=) <$>
+                    _istPositiveIcmInterests,
+                  ("positiveMobileApps" .=) <$> _istPositiveMobileApps,
+                  ("positiveKeyValues" .=) <$> _istPositiveKeyValues,
+                  ("positiveIcmBrands" .=) <$> _istPositiveIcmBrands,
+                  ("positiveVideoDurationSegments" .=) <$>
+                    _istPositiveVideoDurationSegments,
+                  ("negativeAudienceSegments" .=) <$>
+                    _istNegativeAudienceSegments,
+                  ("negativeXfpPlacements" .=) <$>
+                    _istNegativeXfpPlacements,
+                  ("positiveXfpAdSlots" .=) <$> _istPositiveXfpAdSlots,
+                  ("negativeOperatingSystemVersions" .=) <$>
+                    _istNegativeOperatingSystemVersions,
+                  ("negativeSizes" .=) <$> _istNegativeSizes,
+                  ("negativeLocations" .=) <$> _istNegativeLocations,
+                  ("negativeDeviceCategories" .=) <$>
+                    _istNegativeDeviceCategories,
+                  ("negativeOperatingSystems" .=) <$>
+                    _istNegativeOperatingSystems,
+                  ("positiveAdSizes" .=) <$> _istPositiveAdSizes,
+                  ("negativeSiteUrls" .=) <$> _istNegativeSiteUrls,
+                  ("negativeAdTypeSegments" .=) <$>
+                    _istNegativeAdTypeSegments,
+                  ("positiveVideoAdPositionSegments" .=) <$>
+                    _istPositiveVideoAdPositionSegments,
+                  ("positiveInventorySlots" .=) <$>
+                    _istPositiveInventorySlots,
+                  ("negativeMobileApps" .=) <$> _istNegativeMobileApps,
+                  ("negativeIcmInterests" .=) <$>
+                    _istNegativeIcmInterests])
+
 --
 -- /See:/ 'listClientAccessCapabilitiesRequest' smart constructor.
 newtype ListClientAccessCapabilitiesRequest = ListClientAccessCapabilitiesRequest
@@ -2973,6 +4032,21 @@ lcacrSponsorAccountId :: Lens' ListClientAccessCapabilitiesRequest (Maybe Int64)
 lcacrSponsorAccountId
   = lens _lcacrSponsorAccountId
       (\ s a -> s{_lcacrSponsorAccountId = a})
+
+instance FromJSON ListClientAccessCapabilitiesRequest
+         where
+        parseJSON
+          = withObject "ListClientAccessCapabilitiesRequest"
+              (\ o ->
+                 ListClientAccessCapabilitiesRequest <$>
+                   (o .:? "sponsorAccountId"))
+
+instance ToJSON ListClientAccessCapabilitiesRequest
+         where
+        toJSON ListClientAccessCapabilitiesRequest{..}
+          = object
+              (catMaybes
+                 [("sponsorAccountId" .=) <$> _lcacrSponsorAccountId])
 
 --
 -- /See:/ 'listClientAccessCapabilitiesResponse' smart constructor.
@@ -2999,6 +4073,22 @@ lcacrClientAccessPermissions
       . _Default
       . _Coerce
 
+instance FromJSON
+         ListClientAccessCapabilitiesResponse where
+        parseJSON
+          = withObject "ListClientAccessCapabilitiesResponse"
+              (\ o ->
+                 ListClientAccessCapabilitiesResponse <$>
+                   (o .:? "clientAccessPermissions" .!= mempty))
+
+instance ToJSON ListClientAccessCapabilitiesResponse
+         where
+        toJSON ListClientAccessCapabilitiesResponse{..}
+          = object
+              (catMaybes
+                 [("clientAccessPermissions" .=) <$>
+                    _lcacrClientAccessPermissions])
+
 --
 -- /See:/ 'listOffersRequest' smart constructor.
 newtype ListOffersRequest = ListOffersRequest
@@ -3021,6 +4111,19 @@ lorSinceTimestampMillis :: Lens' ListOffersRequest (Maybe Int64)
 lorSinceTimestampMillis
   = lens _lorSinceTimestampMillis
       (\ s a -> s{_lorSinceTimestampMillis = a})
+
+instance FromJSON ListOffersRequest where
+        parseJSON
+          = withObject "ListOffersRequest"
+              (\ o ->
+                 ListOffersRequest <$> (o .:? "sinceTimestampMillis"))
+
+instance ToJSON ListOffersRequest where
+        toJSON ListOffersRequest{..}
+          = object
+              (catMaybes
+                 [("sinceTimestampMillis" .=) <$>
+                    _lorSinceTimestampMillis])
 
 --
 -- /See:/ 'listOffersResponse' smart constructor.
@@ -3052,6 +4155,21 @@ lorOffers
   = lens _lorOffers (\ s a -> s{_lorOffers = a}) .
       _Default
       . _Coerce
+
+instance FromJSON ListOffersResponse where
+        parseJSON
+          = withObject "ListOffersResponse"
+              (\ o ->
+                 ListOffersResponse <$>
+                   (o .:? "kind" .!= "adexchangebuyer#offersList") <*>
+                     (o .:? "offers" .!= mempty))
+
+instance ToJSON ListOffersResponse where
+        toJSON ListOffersResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _lorKind),
+                  ("offers" .=) <$> _lorOffers])
 
 -- | An order can contain multiple deals. A deal contains the terms and
 -- targeting information that is used for serving.
@@ -3261,6 +4379,58 @@ mdOrderId :: Lens' MarketplaceDeal (Maybe Text)
 mdOrderId
   = lens _mdOrderId (\ s a -> s{_mdOrderId = a})
 
+instance FromJSON MarketplaceDeal where
+        parseJSON
+          = withObject "MarketplaceDeal"
+              (\ o ->
+                 MarketplaceDeal <$>
+                   (o .:? "externalDealId") <*>
+                     (o .:? "buyerPrivateData")
+                     <*> (o .:? "webPropertyCode")
+                     <*> (o .:? "creationTimeMs")
+                     <*> (o .:? "terms")
+                     <*> (o .:? "offerRevisionNumber")
+                     <*> (o .:? "lastUpdateTimeMs")
+                     <*>
+                     (o .:? "kind" .!= "adexchangebuyer#marketplaceDeal")
+                     <*> (o .:? "deliveryControl")
+                     <*> (o .:? "flightStartTimeMs")
+                     <*> (o .:? "sharedTargetings" .!= mempty)
+                     <*> (o .:? "dealId")
+                     <*> (o .:? "inventoryDescription")
+                     <*> (o .:? "syndicationProduct")
+                     <*> (o .:? "flightEndTimeMs")
+                     <*> (o .:? "name")
+                     <*> (o .:? "sellerContacts" .!= mempty)
+                     <*> (o .:? "offerId")
+                     <*> (o .:? "orderId"))
+
+instance ToJSON MarketplaceDeal where
+        toJSON MarketplaceDeal{..}
+          = object
+              (catMaybes
+                 [("externalDealId" .=) <$> _mdExternalDealId,
+                  ("buyerPrivateData" .=) <$> _mdBuyerPrivateData,
+                  ("webPropertyCode" .=) <$> _mdWebPropertyCode,
+                  ("creationTimeMs" .=) <$> _mdCreationTimeMs,
+                  ("terms" .=) <$> _mdTerms,
+                  ("offerRevisionNumber" .=) <$>
+                    _mdOfferRevisionNumber,
+                  ("lastUpdateTimeMs" .=) <$> _mdLastUpdateTimeMs,
+                  Just ("kind" .= _mdKind),
+                  ("deliveryControl" .=) <$> _mdDeliveryControl,
+                  ("flightStartTimeMs" .=) <$> _mdFlightStartTimeMs,
+                  ("sharedTargetings" .=) <$> _mdSharedTargetings,
+                  ("dealId" .=) <$> _mdDealId,
+                  ("inventoryDescription" .=) <$>
+                    _mdInventoryDescription,
+                  ("syndicationProduct" .=) <$> _mdSyndicationProduct,
+                  ("flightEndTimeMs" .=) <$> _mdFlightEndTimeMs,
+                  ("name" .=) <$> _mdName,
+                  ("sellerContacts" .=) <$> _mdSellerContacts,
+                  ("offerId" .=) <$> _mdOfferId,
+                  ("orderId" .=) <$> _mdOrderId])
+
 --
 -- /See:/ 'marketplaceDealParty' smart constructor.
 data MarketplaceDealParty = MarketplaceDealParty
@@ -3293,6 +4463,20 @@ mdpSeller
 -- specified for a deal-party.
 mdpBuyer :: Lens' MarketplaceDealParty (Maybe (Maybe Buyer))
 mdpBuyer = lens _mdpBuyer (\ s a -> s{_mdpBuyer = a})
+
+instance FromJSON MarketplaceDealParty where
+        parseJSON
+          = withObject "MarketplaceDealParty"
+              (\ o ->
+                 MarketplaceDealParty <$>
+                   (o .:? "seller") <*> (o .:? "buyer"))
+
+instance ToJSON MarketplaceDealParty where
+        toJSON MarketplaceDealParty{..}
+          = object
+              (catMaybes
+                 [("seller" .=) <$> _mdpSeller,
+                  ("buyer" .=) <$> _mdpBuyer])
 
 --
 -- /See:/ 'marketplaceLabel' smart constructor.
@@ -3344,6 +4528,26 @@ mlCreateTimeMs
 -- | The label to use.
 mlLabel :: Lens' MarketplaceLabel (Maybe Text)
 mlLabel = lens _mlLabel (\ s a -> s{_mlLabel = a})
+
+instance FromJSON MarketplaceLabel where
+        parseJSON
+          = withObject "MarketplaceLabel"
+              (\ o ->
+                 MarketplaceLabel <$>
+                   (o .:? "deprecatedMarketplaceDealParty") <*>
+                     (o .:? "accountId")
+                     <*> (o .:? "createTimeMs")
+                     <*> (o .:? "label"))
+
+instance ToJSON MarketplaceLabel where
+        toJSON MarketplaceLabel{..}
+          = object
+              (catMaybes
+                 [("deprecatedMarketplaceDealParty" .=) <$>
+                    _mlDeprecatedMarketplaceDealParty,
+                  ("accountId" .=) <$> _mlAccountId,
+                  ("createTimeMs" .=) <$> _mlCreateTimeMs,
+                  ("label" .=) <$> _mlLabel])
 
 -- | An order is associated with a bunch of notes which may optionally be
 -- associated with a deal and\/or revision number.
@@ -3434,6 +4638,33 @@ mnOrderRevisionNumber :: Lens' MarketplaceNote (Maybe Int64)
 mnOrderRevisionNumber
   = lens _mnOrderRevisionNumber
       (\ s a -> s{_mnOrderRevisionNumber = a})
+
+instance FromJSON MarketplaceNote where
+        parseJSON
+          = withObject "MarketplaceNote"
+              (\ o ->
+                 MarketplaceNote <$>
+                   (o .:? "note") <*>
+                     (o .:? "kind" .!= "adexchangebuyer#marketplaceNote")
+                     <*> (o .:? "timestampMs")
+                     <*> (o .:? "dealId")
+                     <*> (o .:? "noteId")
+                     <*> (o .:? "creatorRole")
+                     <*> (o .:? "orderId")
+                     <*> (o .:? "orderRevisionNumber"))
+
+instance ToJSON MarketplaceNote where
+        toJSON MarketplaceNote{..}
+          = object
+              (catMaybes
+                 [("note" .=) <$> _mnNote, Just ("kind" .= _mnKind),
+                  ("timestampMs" .=) <$> _mnTimestampMs,
+                  ("dealId" .=) <$> _mnDealId,
+                  ("noteId" .=) <$> _mnNoteId,
+                  ("creatorRole" .=) <$> _mnCreatorRole,
+                  ("orderId" .=) <$> _mnOrderId,
+                  ("orderRevisionNumber" .=) <$>
+                    _mnOrderRevisionNumber])
 
 -- | An offer is segment of inventory that a seller wishes to sell. It is
 -- associated with certain terms and targeting information which helps
@@ -3628,6 +4859,52 @@ moLabels
   = lens _moLabels (\ s a -> s{_moLabels = a}) .
       _Default
       . _Coerce
+
+instance FromJSON MarketplaceOffer where
+        parseJSON
+          = withObject "MarketplaceOffer"
+              (\ o ->
+                 MarketplaceOffer <$>
+                   (o .:? "state") <*> (o .:? "webPropertyCode") <*>
+                     (o .:? "creationTimeMs")
+                     <*> (o .:? "terms")
+                     <*> (o .:? "lastUpdateTimeMs")
+                     <*>
+                     (o .:? "kind" .!= "adexchangebuyer#marketplaceOffer")
+                     <*> (o .:? "revisionNumber")
+                     <*> (o .:? "hasCreatorSignedOff")
+                     <*> (o .:? "flightStartTimeMs")
+                     <*> (o .:? "sharedTargetings" .!= mempty)
+                     <*> (o .:? "seller")
+                     <*> (o .:? "syndicationProduct")
+                     <*> (o .:? "flightEndTimeMs")
+                     <*> (o .:? "name")
+                     <*> (o .:? "creatorContacts" .!= mempty)
+                     <*> (o .:? "offerId")
+                     <*> (o .:? "labels" .!= mempty))
+
+instance ToJSON MarketplaceOffer where
+        toJSON MarketplaceOffer{..}
+          = object
+              (catMaybes
+                 [("state" .=) <$> _moState,
+                  ("webPropertyCode" .=) <$> _moWebPropertyCode,
+                  ("creationTimeMs" .=) <$> _moCreationTimeMs,
+                  ("terms" .=) <$> _moTerms,
+                  ("lastUpdateTimeMs" .=) <$> _moLastUpdateTimeMs,
+                  Just ("kind" .= _moKind),
+                  ("revisionNumber" .=) <$> _moRevisionNumber,
+                  ("hasCreatorSignedOff" .=) <$>
+                    _moHasCreatorSignedOff,
+                  ("flightStartTimeMs" .=) <$> _moFlightStartTimeMs,
+                  ("sharedTargetings" .=) <$> _moSharedTargetings,
+                  ("seller" .=) <$> _moSeller,
+                  ("syndicationProduct" .=) <$> _moSyndicationProduct,
+                  ("flightEndTimeMs" .=) <$> _moFlightEndTimeMs,
+                  ("name" .=) <$> _moName,
+                  ("creatorContacts" .=) <$> _moCreatorContacts,
+                  ("offerId" .=) <$> _moOfferId,
+                  ("labels" .=) <$> _moLabels])
 
 -- | Represents an order in the marketplace. An order is the unit of
 -- negotiation between a seller and a buyer and contains deals which are
@@ -3848,6 +5125,59 @@ mHasBuyerSignedOff
 mBuyer :: Lens' MarketplaceOrder (Maybe (Maybe Buyer))
 mBuyer = lens _mBuyer (\ s a -> s{_mBuyer = a})
 
+instance FromJSON MarketplaceOrder where
+        parseJSON
+          = withObject "MarketplaceOrder"
+              (\ o ->
+                 MarketplaceOrder <$>
+                   (o .:? "buyerPrivateData") <*>
+                     (o .:? "isSetupComplete")
+                     <*> (o .:? "buyerContacts" .!= mempty)
+                     <*>
+                     (o .:? "kind" .!= "adexchangebuyer#marketplaceOrder")
+                     <*> (o .:? "originatorRole")
+                     <*> (o .:? "revisionNumber")
+                     <*> (o .:? "billedBuyer")
+                     <*> (o .:? "isRenegotiating")
+                     <*> (o .:? "hasSellerSignedOff")
+                     <*> (o .:? "seller")
+                     <*> (o .:? "orderState")
+                     <*> (o .:? "name")
+                     <*> (o .:? "sellerContacts" .!= mempty)
+                     <*> (o .:? "lastUpdaterRole")
+                     <*> (o .:? "labels" .!= mempty)
+                     <*> (o .:? "revisionTimeMs")
+                     <*> (o .:? "orderId")
+                     <*> (o .:? "lastUpdaterOrCommentorRole")
+                     <*> (o .:? "hasBuyerSignedOff")
+                     <*> (o .:? "buyer"))
+
+instance ToJSON MarketplaceOrder where
+        toJSON MarketplaceOrder{..}
+          = object
+              (catMaybes
+                 [("buyerPrivateData" .=) <$> _mBuyerPrivateData,
+                  ("isSetupComplete" .=) <$> _mIsSetupComplete,
+                  ("buyerContacts" .=) <$> _mBuyerContacts,
+                  Just ("kind" .= _mKind),
+                  ("originatorRole" .=) <$> _mOriginatorRole,
+                  ("revisionNumber" .=) <$> _mRevisionNumber,
+                  ("billedBuyer" .=) <$> _mBilledBuyer,
+                  ("isRenegotiating" .=) <$> _mIsRenegotiating,
+                  ("hasSellerSignedOff" .=) <$> _mHasSellerSignedOff,
+                  ("seller" .=) <$> _mSeller,
+                  ("orderState" .=) <$> _mOrderState,
+                  ("name" .=) <$> _mName,
+                  ("sellerContacts" .=) <$> _mSellerContacts,
+                  ("lastUpdaterRole" .=) <$> _mLastUpdaterRole,
+                  ("labels" .=) <$> _mLabels,
+                  ("revisionTimeMs" .=) <$> _mRevisionTimeMs,
+                  ("orderId" .=) <$> _mOrderId,
+                  ("lastUpdaterOrCommentorRole" .=) <$>
+                    _mLastUpdaterOrCommentorRole,
+                  ("hasBuyerSignedOff" .=) <$> _mHasBuyerSignedOff,
+                  ("buyer" .=) <$> _mBuyer])
+
 --
 -- /See:/ 'moneyDto' smart constructor.
 data MoneyDto = MoneyDto
@@ -3877,6 +5207,20 @@ mdCurrencyCode
 
 mdMicros :: Lens' MoneyDto (Maybe Int64)
 mdMicros = lens _mdMicros (\ s a -> s{_mdMicros = a})
+
+instance FromJSON MoneyDto where
+        parseJSON
+          = withObject "MoneyDto"
+              (\ o ->
+                 MoneyDto <$>
+                   (o .:? "currencyCode") <*> (o .:? "micros"))
+
+instance ToJSON MoneyDto where
+        toJSON MoneyDto{..}
+          = object
+              (catMaybes
+                 [("currencyCode" .=) <$> _mdCurrencyCode,
+                  ("micros" .=) <$> _mdMicros])
 
 --
 -- /See:/ 'negotiationDto' smart constructor.
@@ -4036,6 +5380,48 @@ ndSellerEmailContacts
 ndBuyer :: Lens' NegotiationDto (Maybe (Maybe DealPartyDto))
 ndBuyer = lens _ndBuyer (\ s a -> s{_ndBuyer = a})
 
+instance FromJSON NegotiationDto where
+        parseJSON
+          = withObject "NegotiationDto"
+              (\ o ->
+                 NegotiationDto <$>
+                   (o .:? "negotiationState") <*>
+                     (o .:? "externalDealId")
+                     <*> (o .:? "status")
+                     <*> (o .:? "dealType")
+                     <*> (o .:? "negotiationRounds" .!= mempty)
+                     <*> (o .:? "kind" .!= "adexchangebuyer#negotiation")
+                     <*> (o .:? "billedBuyer")
+                     <*> (o .:? "buyerEmailContacts" .!= mempty)
+                     <*> (o .:? "stats")
+                     <*> (o .:? "seller")
+                     <*> (o .:? "labelNames" .!= mempty)
+                     <*> (o .:? "offerId")
+                     <*> (o .:? "negotiationId")
+                     <*> (o .:? "sellerEmailContacts" .!= mempty)
+                     <*> (o .:? "buyer"))
+
+instance ToJSON NegotiationDto where
+        toJSON NegotiationDto{..}
+          = object
+              (catMaybes
+                 [("negotiationState" .=) <$> _ndNegotiationState,
+                  ("externalDealId" .=) <$> _ndExternalDealId,
+                  ("status" .=) <$> _ndStatus,
+                  ("dealType" .=) <$> _ndDealType,
+                  ("negotiationRounds" .=) <$> _ndNegotiationRounds,
+                  Just ("kind" .= _ndKind),
+                  ("billedBuyer" .=) <$> _ndBilledBuyer,
+                  ("buyerEmailContacts" .=) <$> _ndBuyerEmailContacts,
+                  ("stats" .=) <$> _ndStats,
+                  ("seller" .=) <$> _ndSeller,
+                  ("labelNames" .=) <$> _ndLabelNames,
+                  ("offerId" .=) <$> _ndOfferId,
+                  ("negotiationId" .=) <$> _ndNegotiationId,
+                  ("sellerEmailContacts" .=) <$>
+                    _ndSellerEmailContacts,
+                  ("buyer" .=) <$> _ndBuyer])
+
 --
 -- /See:/ 'negotiationRoundDto' smart constructor.
 data NegotiationRoundDto = NegotiationRoundDto
@@ -4131,6 +5517,35 @@ nrdRoundNumber :: Lens' NegotiationRoundDto (Maybe Int64)
 nrdRoundNumber
   = lens _nrdRoundNumber
       (\ s a -> s{_nrdRoundNumber = a})
+
+instance FromJSON NegotiationRoundDto where
+        parseJSON
+          = withObject "NegotiationRoundDto"
+              (\ o ->
+                 NegotiationRoundDto <$>
+                   (o .:? "terms") <*>
+                     (o .:? "kind" .!= "adexchangebuyer#negotiationRound")
+                     <*> (o .:? "originatorRole")
+                     <*> (o .:? "action")
+                     <*> (o .:? "dbmPartnerId")
+                     <*> (o .:? "notes")
+                     <*> (o .:? "negotiationId")
+                     <*> (o .:? "editHistory")
+                     <*> (o .:? "roundNumber"))
+
+instance ToJSON NegotiationRoundDto where
+        toJSON NegotiationRoundDto{..}
+          = object
+              (catMaybes
+                 [("terms" .=) <$> _nrdTerms,
+                  Just ("kind" .= _nrdKind),
+                  ("originatorRole" .=) <$> _nrdOriginatorRole,
+                  ("action" .=) <$> _nrdAction,
+                  ("dbmPartnerId" .=) <$> _nrdDbmPartnerId,
+                  ("notes" .=) <$> _nrdNotes,
+                  ("negotiationId" .=) <$> _nrdNegotiationId,
+                  ("editHistory" .=) <$> _nrdEditHistory,
+                  ("roundNumber" .=) <$> _nrdRoundNumber])
 
 --
 -- /See:/ 'offerDto' smart constructor.
@@ -4280,6 +5695,44 @@ odAnonymous
 -- | Whether this offer is open.
 odIsOpen :: Lens' OfferDto (Maybe Bool)
 odIsOpen = lens _odIsOpen (\ s a -> s{_odIsOpen = a})
+
+instance FromJSON OfferDto where
+        parseJSON
+          = withObject "OfferDto"
+              (\ o ->
+                 OfferDto <$>
+                   (o .:? "creator") <*> (o .:? "status") <*>
+                     (o .:? "offerState")
+                     <*> (o .:? "pointOfContact")
+                     <*> (o .:? "terms")
+                     <*> (o .:? "kind" .!= "adexchangebuyer#offer")
+                     <*> (o .:? "billedBuyer")
+                     <*> (o .:? "openToDealParties" .!= mempty)
+                     <*> (o .:? "emailContacts" .!= mempty)
+                     <*> (o .:? "labelNames" .!= mempty)
+                     <*> (o .:? "offerId")
+                     <*> (o .:? "closedToDealParties" .!= mempty)
+                     <*> (o .:? "anonymous")
+                     <*> (o .:? "isOpen"))
+
+instance ToJSON OfferDto where
+        toJSON OfferDto{..}
+          = object
+              (catMaybes
+                 [("creator" .=) <$> _odCreator,
+                  ("status" .=) <$> _odStatus,
+                  ("offerState" .=) <$> _odOfferState,
+                  ("pointOfContact" .=) <$> _odPointOfContact,
+                  ("terms" .=) <$> _odTerms, Just ("kind" .= _odKind),
+                  ("billedBuyer" .=) <$> _odBilledBuyer,
+                  ("openToDealParties" .=) <$> _odOpenToDealParties,
+                  ("emailContacts" .=) <$> _odEmailContacts,
+                  ("labelNames" .=) <$> _odLabelNames,
+                  ("offerId" .=) <$> _odOfferId,
+                  ("closedToDealParties" .=) <$>
+                    _odClosedToDealParties,
+                  ("anonymous" .=) <$> _odAnonymous,
+                  ("isOpen" .=) <$> _odIsOpen])
 
 -- | The configuration data for an Ad Exchange performance report list.
 --
@@ -4525,6 +5978,72 @@ prOutOfQuota :: Lens' PerformanceReport (Maybe Double)
 prOutOfQuota
   = lens _prOutOfQuota (\ s a -> s{_prOutOfQuota = a})
 
+instance FromJSON PerformanceReport where
+        parseJSON
+          = withObject "PerformanceReport"
+              (\ o ->
+                 PerformanceReport <$>
+                   (o .:? "filteredBidRate") <*>
+                     (o .:? "kind" .!=
+                        "adexchangebuyer#performanceReport")
+                     <*> (o .:? "latency95thPercentile")
+                     <*> (o .:? "cookieMatcherStatusRate" .!= mempty)
+                     <*> (o .:? "hostedMatchStatusRate" .!= mempty)
+                     <*> (o .:? "unsuccessfulRequestRate")
+                     <*> (o .:? "bidRequestRate")
+                     <*> (o .:? "quotaThrottledLimit")
+                     <*> (o .:? "quotaConfiguredLimit")
+                     <*> (o .:? "successfulRequestRate")
+                     <*> (o .:? "latency85thPercentile")
+                     <*> (o .:? "calloutStatusRate" .!= mempty)
+                     <*> (o .:? "latency50thPercentile")
+                     <*> (o .:? "bidRate")
+                     <*> (o .:? "creativeStatusRate" .!= mempty)
+                     <*> (o .:? "noQuotaInRegion")
+                     <*> (o .:? "region")
+                     <*> (o .:? "inventoryMatchRate")
+                     <*> (o .:? "pixelMatchResponses")
+                     <*> (o .:? "timestamp")
+                     <*> (o .:? "pixelMatchRequests")
+                     <*> (o .:? "outOfQuota"))
+
+instance ToJSON PerformanceReport where
+        toJSON PerformanceReport{..}
+          = object
+              (catMaybes
+                 [("filteredBidRate" .=) <$> _prFilteredBidRate,
+                  Just ("kind" .= _prKind),
+                  ("latency95thPercentile" .=) <$>
+                    _prLatency95thPercentile,
+                  ("cookieMatcherStatusRate" .=) <$>
+                    _prCookieMatcherStatusRate,
+                  ("hostedMatchStatusRate" .=) <$>
+                    _prHostedMatchStatusRate,
+                  ("unsuccessfulRequestRate" .=) <$>
+                    _prUnsuccessfulRequestRate,
+                  ("bidRequestRate" .=) <$> _prBidRequestRate,
+                  ("quotaThrottledLimit" .=) <$>
+                    _prQuotaThrottledLimit,
+                  ("quotaConfiguredLimit" .=) <$>
+                    _prQuotaConfiguredLimit,
+                  ("successfulRequestRate" .=) <$>
+                    _prSuccessfulRequestRate,
+                  ("latency85thPercentile" .=) <$>
+                    _prLatency85thPercentile,
+                  ("calloutStatusRate" .=) <$> _prCalloutStatusRate,
+                  ("latency50thPercentile" .=) <$>
+                    _prLatency50thPercentile,
+                  ("bidRate" .=) <$> _prBidRate,
+                  ("creativeStatusRate" .=) <$> _prCreativeStatusRate,
+                  ("noQuotaInRegion" .=) <$> _prNoQuotaInRegion,
+                  ("region" .=) <$> _prRegion,
+                  ("inventoryMatchRate" .=) <$> _prInventoryMatchRate,
+                  ("pixelMatchResponses" .=) <$>
+                    _prPixelMatchResponses,
+                  ("timestamp" .=) <$> _prTimestamp,
+                  ("pixelMatchRequests" .=) <$> _prPixelMatchRequests,
+                  ("outOfQuota" .=) <$> _prOutOfQuota])
+
 -- | The configuration data for an Ad Exchange performance report list.
 -- https:\/\/sites.google.com\/a\/google.com\/adx-integration\/Home\/engineering\/binary-releases\/rtb-api-release
 -- https:\/\/cs.corp.google.com\/#piper\/\/\/depot\/google3\/contentads\/adx\/tools\/rtb_api\/adxrtb.py
@@ -4561,6 +6080,22 @@ prlPerformanceReport
       (\ s a -> s{_prlPerformanceReport = a})
       . _Default
       . _Coerce
+
+instance FromJSON PerformanceReportList where
+        parseJSON
+          = withObject "PerformanceReportList"
+              (\ o ->
+                 PerformanceReportList <$>
+                   (o .:? "kind" .!=
+                      "adexchangebuyer#performanceReportList")
+                     <*> (o .:? "performanceReport" .!= mempty))
+
+instance ToJSON PerformanceReportList where
+        toJSON PerformanceReportList{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _prlKind),
+                  ("performanceReport" .=) <$> _prlPerformanceReport])
 
 --
 -- /See:/ 'pretargetingConfig' smart constructor.
@@ -4846,6 +6381,70 @@ pcMobileOperatingSystemVersions
       . _Default
       . _Coerce
 
+instance FromJSON PretargetingConfig where
+        parseJSON
+          = withObject "PretargetingConfig"
+              (\ o ->
+                 PretargetingConfig <$>
+                   (o .:? "platforms" .!= mempty) <*>
+                     (o .:? "mobileCarriers" .!= mempty)
+                     <*> (o .:? "vendorTypes" .!= mempty)
+                     <*> (o .:? "excludedGeoCriteriaIds" .!= mempty)
+                     <*> (o .:? "supportedCreativeAttributes" .!= mempty)
+                     <*> (o .:? "userLists" .!= mempty)
+                     <*>
+                     (o .:? "kind" .!=
+                        "adexchangebuyer#pretargetingConfig")
+                     <*> (o .:? "excludedPlacements" .!= mempty)
+                     <*> (o .:? "mobileDevices" .!= mempty)
+                     <*> (o .:? "languages" .!= mempty)
+                     <*> (o .:? "verticals" .!= mempty)
+                     <*> (o .:? "configId")
+                     <*> (o .:? "placements" .!= mempty)
+                     <*> (o .:? "excludedUserLists" .!= mempty)
+                     <*> (o .:? "configName")
+                     <*> (o .:? "geoCriteriaIds" .!= mempty)
+                     <*> (o .:? "dimensions" .!= mempty)
+                     <*> (o .:? "excludedVerticals" .!= mempty)
+                     <*> (o .:? "creativeType" .!= mempty)
+                     <*> (o .:? "isActive")
+                     <*> (o .:? "excludedContentLabels" .!= mempty)
+                     <*> (o .:? "billingId")
+                     <*>
+                     (o .:? "mobileOperatingSystemVersions" .!= mempty))
+
+instance ToJSON PretargetingConfig where
+        toJSON PretargetingConfig{..}
+          = object
+              (catMaybes
+                 [("platforms" .=) <$> _pcPlatforms,
+                  ("mobileCarriers" .=) <$> _pcMobileCarriers,
+                  ("vendorTypes" .=) <$> _pcVendorTypes,
+                  ("excludedGeoCriteriaIds" .=) <$>
+                    _pcExcludedGeoCriteriaIds,
+                  ("supportedCreativeAttributes" .=) <$>
+                    _pcSupportedCreativeAttributes,
+                  ("userLists" .=) <$> _pcUserLists,
+                  Just ("kind" .= _pcKind),
+                  ("excludedPlacements" .=) <$> _pcExcludedPlacements,
+                  ("mobileDevices" .=) <$> _pcMobileDevices,
+                  ("languages" .=) <$> _pcLanguages,
+                  ("verticals" .=) <$> _pcVerticals,
+                  ("configId" .=) <$> _pcConfigId,
+                  ("placements" .=) <$> _pcPlacements,
+                  ("excludedUserLists" .=) <$> _pcExcludedUserLists,
+                  ("configName" .=) <$> _pcConfigName,
+                  ("geoCriteriaIds" .=) <$> _pcGeoCriteriaIds,
+                  ("dimensions" .=) <$> _pcDimensions,
+                  ("excludedVerticals" .=) <$> _pcExcludedVerticals,
+                  ("creativeType" .=) <$> _pcCreativeType,
+                  ("isActive" .=) <$> _pcIsActive,
+                  ("excludedContentLabels" .=) <$>
+                    _pcExcludedContentLabels,
+                  ("billingId" .=) <$> _pcBillingId,
+                  ("mobileOperatingSystemVersions" .=) <$>
+                    _pcMobileOperatingSystemVersions])
+
 --
 -- /See:/ 'pretargetingConfigItemDimensions' smart constructor.
 data PretargetingConfigItemDimensions = PretargetingConfigItemDimensions
@@ -4877,6 +6476,22 @@ pcidHeight
 pcidWidth :: Lens' PretargetingConfigItemDimensions (Maybe Int64)
 pcidWidth
   = lens _pcidWidth (\ s a -> s{_pcidWidth = a})
+
+instance FromJSON PretargetingConfigItemDimensions
+         where
+        parseJSON
+          = withObject "PretargetingConfigItemDimensions"
+              (\ o ->
+                 PretargetingConfigItemDimensions <$>
+                   (o .:? "height") <*> (o .:? "width"))
+
+instance ToJSON PretargetingConfigItemDimensions
+         where
+        toJSON PretargetingConfigItemDimensions{..}
+          = object
+              (catMaybes
+                 [("height" .=) <$> _pcidHeight,
+                  ("width" .=) <$> _pcidWidth])
 
 --
 -- /See:/ 'pretargetingConfigItemExcludedPlacements' smart constructor.
@@ -4912,6 +6527,23 @@ pciepType :: Lens' PretargetingConfigItemExcludedPlacements (Maybe Text)
 pciepType
   = lens _pciepType (\ s a -> s{_pciepType = a})
 
+instance FromJSON
+         PretargetingConfigItemExcludedPlacements where
+        parseJSON
+          = withObject
+              "PretargetingConfigItemExcludedPlacements"
+              (\ o ->
+                 PretargetingConfigItemExcludedPlacements <$>
+                   (o .:? "token") <*> (o .:? "type"))
+
+instance ToJSON
+         PretargetingConfigItemExcludedPlacements where
+        toJSON PretargetingConfigItemExcludedPlacements{..}
+          = object
+              (catMaybes
+                 [("token" .=) <$> _pciepToken,
+                  ("type" .=) <$> _pciepType])
+
 --
 -- /See:/ 'pretargetingConfigItemPlacements' smart constructor.
 data PretargetingConfigItemPlacements = PretargetingConfigItemPlacements
@@ -4944,6 +6576,22 @@ pcipToken
 -- | The type of the placement.
 pcipType :: Lens' PretargetingConfigItemPlacements (Maybe Text)
 pcipType = lens _pcipType (\ s a -> s{_pcipType = a})
+
+instance FromJSON PretargetingConfigItemPlacements
+         where
+        parseJSON
+          = withObject "PretargetingConfigItemPlacements"
+              (\ o ->
+                 PretargetingConfigItemPlacements <$>
+                   (o .:? "token") <*> (o .:? "type"))
+
+instance ToJSON PretargetingConfigItemPlacements
+         where
+        toJSON PretargetingConfigItemPlacements{..}
+          = object
+              (catMaybes
+                 [("token" .=) <$> _pcipToken,
+                  ("type" .=) <$> _pcipType])
 
 --
 -- /See:/ 'pretargetingConfigList' smart constructor.
@@ -4978,6 +6626,22 @@ pclItems
       _Default
       . _Coerce
 
+instance FromJSON PretargetingConfigList where
+        parseJSON
+          = withObject "PretargetingConfigList"
+              (\ o ->
+                 PretargetingConfigList <$>
+                   (o .:? "kind" .!=
+                      "adexchangebuyer#pretargetingConfigList")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON PretargetingConfigList where
+        toJSON PretargetingConfigList{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _pclKind),
+                  ("items" .=) <$> _pclItems])
+
 --
 -- /See:/ 'price' smart constructor.
 data Price = Price
@@ -5011,6 +6675,20 @@ pAmountMicros :: Lens' Price (Maybe Double)
 pAmountMicros
   = lens _pAmountMicros
       (\ s a -> s{_pAmountMicros = a})
+
+instance FromJSON Price where
+        parseJSON
+          = withObject "Price"
+              (\ o ->
+                 Price <$>
+                   (o .:? "currencyCode") <*> (o .:? "amountMicros"))
+
+instance ToJSON Price where
+        toJSON Price{..}
+          = object
+              (catMaybes
+                 [("currencyCode" .=) <$> _pCurrencyCode,
+                  ("amountMicros" .=) <$> _pAmountMicros])
 
 -- | Used to specify pricing rules for buyers\/advertisers. Each
 -- PricePerBuyer in an offer can become [0,1] deals. To check if there is a
@@ -5051,6 +6729,20 @@ ppbPrice = lens _ppbPrice (\ s a -> s{_ppbPrice = a})
 ppbBuyer :: Lens' PricePerBuyer (Maybe (Maybe Buyer))
 ppbBuyer = lens _ppbBuyer (\ s a -> s{_ppbBuyer = a})
 
+instance FromJSON PricePerBuyer where
+        parseJSON
+          = withObject "PricePerBuyer"
+              (\ o ->
+                 PricePerBuyer <$>
+                   (o .:? "price") <*> (o .:? "buyer"))
+
+instance ToJSON PricePerBuyer where
+        toJSON PricePerBuyer{..}
+          = object
+              (catMaybes
+                 [("price" .=) <$> _ppbPrice,
+                  ("buyer" .=) <$> _ppbBuyer])
+
 --
 -- /See:/ 'privateData' smart constructor.
 data PrivateData = PrivateData
@@ -5083,6 +6775,20 @@ pdReferenceId
   = lens _pdReferenceId
       (\ s a -> s{_pdReferenceId = a})
 
+instance FromJSON PrivateData where
+        parseJSON
+          = withObject "PrivateData"
+              (\ o ->
+                 PrivateData <$>
+                   (o .:? "referencePayload") <*> (o .:? "referenceId"))
+
+instance ToJSON PrivateData where
+        toJSON PrivateData{..}
+          = object
+              (catMaybes
+                 [("referencePayload" .=) <$> _pdReferencePayload,
+                  ("referenceId" .=) <$> _pdReferenceId])
+
 --
 -- /See:/ 'ruleKeyValuePair' smart constructor.
 data RuleKeyValuePair = RuleKeyValuePair
@@ -5112,6 +6818,20 @@ rkvpKeyName
 rkvpValue :: Lens' RuleKeyValuePair (Maybe Text)
 rkvpValue
   = lens _rkvpValue (\ s a -> s{_rkvpValue = a})
+
+instance FromJSON RuleKeyValuePair where
+        parseJSON
+          = withObject "RuleKeyValuePair"
+              (\ o ->
+                 RuleKeyValuePair <$>
+                   (o .:? "keyName") <*> (o .:? "value"))
+
+instance ToJSON RuleKeyValuePair where
+        toJSON RuleKeyValuePair{..}
+          = object
+              (catMaybes
+                 [("keyName" .=) <$> _rkvpKeyName,
+                  ("value" .=) <$> _rkvpValue])
 
 --
 -- /See:/ 'seller' smart constructor.
@@ -5146,6 +6866,20 @@ sSubAccountId :: Lens' Seller (Maybe Text)
 sSubAccountId
   = lens _sSubAccountId
       (\ s a -> s{_sSubAccountId = a})
+
+instance FromJSON Seller where
+        parseJSON
+          = withObject "Seller"
+              (\ o ->
+                 Seller <$>
+                   (o .:? "accountId") <*> (o .:? "subAccountId"))
+
+instance ToJSON Seller where
+        toJSON Seller{..}
+          = object
+              (catMaybes
+                 [("accountId" .=) <$> _sAccountId,
+                  ("subAccountId" .=) <$> _sSubAccountId])
 
 --
 -- /See:/ 'sharedTargeting' smart constructor.
@@ -5190,6 +6924,22 @@ stInclusions
   = lens _stInclusions (\ s a -> s{_stInclusions = a})
       . _Default
       . _Coerce
+
+instance FromJSON SharedTargeting where
+        parseJSON
+          = withObject "SharedTargeting"
+              (\ o ->
+                 SharedTargeting <$>
+                   (o .:? "key") <*> (o .:? "exclusions" .!= mempty) <*>
+                     (o .:? "inclusions" .!= mempty))
+
+instance ToJSON SharedTargeting where
+        toJSON SharedTargeting{..}
+          = object
+              (catMaybes
+                 [("key" .=) <$> _stKey,
+                  ("exclusions" .=) <$> _stExclusions,
+                  ("inclusions" .=) <$> _stInclusions])
 
 --
 -- /See:/ 'statsDto' smart constructor.
@@ -5252,6 +7002,27 @@ sdRequests :: Lens' StatsDto (Maybe Int64)
 sdRequests
   = lens _sdRequests (\ s a -> s{_sdRequests = a})
 
+instance FromJSON StatsDto where
+        parseJSON
+          = withObject "StatsDto"
+              (\ o ->
+                 StatsDto <$>
+                   (o .:? "bids") <*> (o .:? "spend") <*>
+                     (o .:? "impressions")
+                     <*> (o .:? "goodBids")
+                     <*> (o .:? "revenue")
+                     <*> (o .:? "requests"))
+
+instance ToJSON StatsDto where
+        toJSON StatsDto{..}
+          = object
+              (catMaybes
+                 [("bids" .=) <$> _sdBids, ("spend" .=) <$> _sdSpend,
+                  ("impressions" .=) <$> _sdImpressions,
+                  ("goodBids" .=) <$> _sdGoodBids,
+                  ("revenue" .=) <$> _sdRevenue,
+                  ("requests" .=) <$> _sdRequests])
+
 --
 -- /See:/ 'targetingValue' smart constructor.
 data TargetingValue = TargetingValue
@@ -5306,6 +7077,25 @@ tvDayPartTargetingValue
   = lens _tvDayPartTargetingValue
       (\ s a -> s{_tvDayPartTargetingValue = a})
 
+instance FromJSON TargetingValue where
+        parseJSON
+          = withObject "TargetingValue"
+              (\ o ->
+                 TargetingValue <$>
+                   (o .:? "creativeSizeValue") <*> (o .:? "stringValue")
+                     <*> (o .:? "longValue")
+                     <*> (o .:? "dayPartTargetingValue"))
+
+instance ToJSON TargetingValue where
+        toJSON TargetingValue{..}
+          = object
+              (catMaybes
+                 [("creativeSizeValue" .=) <$> _tvCreativeSizeValue,
+                  ("stringValue" .=) <$> _tvStringValue,
+                  ("longValue" .=) <$> _tvLongValue,
+                  ("dayPartTargetingValue" .=) <$>
+                    _tvDayPartTargetingValue])
+
 --
 -- /See:/ 'targetingValueCreativeSize' smart constructor.
 data TargetingValueCreativeSize = TargetingValueCreativeSize
@@ -5350,6 +7140,23 @@ tvcsCreativeSizeType
   = lens _tvcsCreativeSizeType
       (\ s a -> s{_tvcsCreativeSizeType = a})
 
+instance FromJSON TargetingValueCreativeSize where
+        parseJSON
+          = withObject "TargetingValueCreativeSize"
+              (\ o ->
+                 TargetingValueCreativeSize <$>
+                   (o .:? "size") <*>
+                     (o .:? "companionSizes" .!= mempty)
+                     <*> (o .:? "creativeSizeType"))
+
+instance ToJSON TargetingValueCreativeSize where
+        toJSON TargetingValueCreativeSize{..}
+          = object
+              (catMaybes
+                 [("size" .=) <$> _tvcsSize,
+                  ("companionSizes" .=) <$> _tvcsCompanionSizes,
+                  ("creativeSizeType" .=) <$> _tvcsCreativeSizeType])
+
 --
 -- /See:/ 'targetingValueDayPartTargeting' smart constructor.
 data TargetingValueDayPartTargeting = TargetingValueDayPartTargeting
@@ -5383,6 +7190,22 @@ tvdptDayParts
       (\ s a -> s{_tvdptDayParts = a})
       . _Default
       . _Coerce
+
+instance FromJSON TargetingValueDayPartTargeting
+         where
+        parseJSON
+          = withObject "TargetingValueDayPartTargeting"
+              (\ o ->
+                 TargetingValueDayPartTargeting <$>
+                   (o .:? "timeZoneType") <*>
+                     (o .:? "dayParts" .!= mempty))
+
+instance ToJSON TargetingValueDayPartTargeting where
+        toJSON TargetingValueDayPartTargeting{..}
+          = object
+              (catMaybes
+                 [("timeZoneType" .=) <$> _tvdptTimeZoneType,
+                  ("dayParts" .=) <$> _tvdptDayParts])
 
 --
 -- /See:/ 'targetingValueDayPartTargetingDayPart' smart constructor.
@@ -5443,6 +7266,28 @@ tvdptdpEndMinute
   = lens _tvdptdpEndMinute
       (\ s a -> s{_tvdptdpEndMinute = a})
 
+instance FromJSON
+         TargetingValueDayPartTargetingDayPart where
+        parseJSON
+          = withObject "TargetingValueDayPartTargetingDayPart"
+              (\ o ->
+                 TargetingValueDayPartTargetingDayPart <$>
+                   (o .:? "endHour") <*> (o .:? "startHour") <*>
+                     (o .:? "startMinute")
+                     <*> (o .:? "dayOfWeek")
+                     <*> (o .:? "endMinute"))
+
+instance ToJSON TargetingValueDayPartTargetingDayPart
+         where
+        toJSON TargetingValueDayPartTargetingDayPart{..}
+          = object
+              (catMaybes
+                 [("endHour" .=) <$> _tvdptdpEndHour,
+                  ("startHour" .=) <$> _tvdptdpStartHour,
+                  ("startMinute" .=) <$> _tvdptdpStartMinute,
+                  ("dayOfWeek" .=) <$> _tvdptdpDayOfWeek,
+                  ("endMinute" .=) <$> _tvdptdpEndMinute])
+
 --
 -- /See:/ 'targetingValueSize' smart constructor.
 data TargetingValueSize = TargetingValueSize
@@ -5473,6 +7318,20 @@ tvsHeight
 -- | The width of the creative.
 tvsWidth :: Lens' TargetingValueSize (Maybe Int32)
 tvsWidth = lens _tvsWidth (\ s a -> s{_tvsWidth = a})
+
+instance FromJSON TargetingValueSize where
+        parseJSON
+          = withObject "TargetingValueSize"
+              (\ o ->
+                 TargetingValueSize <$>
+                   (o .:? "height") <*> (o .:? "width"))
+
+instance ToJSON TargetingValueSize where
+        toJSON TargetingValueSize{..}
+          = object
+              (catMaybes
+                 [("height" .=) <$> _tvsHeight,
+                  ("width" .=) <$> _tvsWidth])
 
 --
 -- /See:/ 'termsDto' smart constructor.
@@ -5759,6 +7618,77 @@ tdDescription
   = lens _tdDescription
       (\ s a -> s{_tdDescription = a})
 
+instance FromJSON TermsDto where
+        parseJSON
+          = withObject "TermsDto"
+              (\ o ->
+                 TermsDto <$>
+                   (o .:? "finalizeAutomatically") <*>
+                     (o .:? "buyerBillingType")
+                     <*> (o .:? "targetingAllAdSlots")
+                     <*> (o .:? "urls" .!= mempty)
+                     <*> (o .:? "endDate")
+                     <*> (o .:? "cpm")
+                     <*> (o .:? "estimatedSpend")
+                     <*> (o .:? "advertisers" .!= mempty)
+                     <*> (o .:? "estimatedImpressionsPerDay")
+                     <*> (o .:? "monetizerType")
+                     <*> (o .:? "audienceSegmentDescription")
+                     <*> (o .:? "creativeReviewPolicy")
+                     <*> (o .:? "minimumTrueLooks")
+                     <*> (o .:? "startDate")
+                     <*> (o .:? "creativeBlockingLevel")
+                     <*> (o .:? "semiTransparent")
+                     <*> (o .:? "audienceSegment")
+                     <*> (o .:? "dealPremium")
+                     <*> (o .:? "isReservation")
+                     <*> (o .:? "adSlots" .!= mempty)
+                     <*> (o .:? "termsAttributes" .!= mempty)
+                     <*> (o .:? "inventorySegmentTargeting")
+                     <*> (o .:? "descriptiveName")
+                     <*> (o .:? "minimumSpendMicros")
+                     <*> (o .:? "targetByDealId")
+                     <*> (o .:? "billingTerms")
+                     <*> (o .:? "description"))
+
+instance ToJSON TermsDto where
+        toJSON TermsDto{..}
+          = object
+              (catMaybes
+                 [("finalizeAutomatically" .=) <$>
+                    _tdFinalizeAutomatically,
+                  ("buyerBillingType" .=) <$> _tdBuyerBillingType,
+                  ("targetingAllAdSlots" .=) <$>
+                    _tdTargetingAllAdSlots,
+                  ("urls" .=) <$> _tdUrls,
+                  ("endDate" .=) <$> _tdEndDate, ("cpm" .=) <$> _tdCpm,
+                  ("estimatedSpend" .=) <$> _tdEstimatedSpend,
+                  ("advertisers" .=) <$> _tdAdvertisers,
+                  ("estimatedImpressionsPerDay" .=) <$>
+                    _tdEstimatedImpressionsPerDay,
+                  ("monetizerType" .=) <$> _tdMonetizerType,
+                  ("audienceSegmentDescription" .=) <$>
+                    _tdAudienceSegmentDescription,
+                  ("creativeReviewPolicy" .=) <$>
+                    _tdCreativeReviewPolicy,
+                  ("minimumTrueLooks" .=) <$> _tdMinimumTrueLooks,
+                  ("startDate" .=) <$> _tdStartDate,
+                  ("creativeBlockingLevel" .=) <$>
+                    _tdCreativeBlockingLevel,
+                  ("semiTransparent" .=) <$> _tdSemiTransparent,
+                  ("audienceSegment" .=) <$> _tdAudienceSegment,
+                  ("dealPremium" .=) <$> _tdDealPremium,
+                  ("isReservation" .=) <$> _tdIsReservation,
+                  ("adSlots" .=) <$> _tdAdSlots,
+                  ("termsAttributes" .=) <$> _tdTermsAttributes,
+                  ("inventorySegmentTargeting" .=) <$>
+                    _tdInventorySegmentTargeting,
+                  ("descriptiveName" .=) <$> _tdDescriptiveName,
+                  ("minimumSpendMicros" .=) <$> _tdMinimumSpendMicros,
+                  ("targetByDealId" .=) <$> _tdTargetByDealId,
+                  ("billingTerms" .=) <$> _tdBillingTerms,
+                  ("description" .=) <$> _tdDescription])
+
 --
 -- /See:/ 'webPropertyDto' smart constructor.
 data WebPropertyDto = WebPropertyDto
@@ -5832,3 +7762,30 @@ wpdAllowInterestTargetedAds :: Lens' WebPropertyDto (Maybe Bool)
 wpdAllowInterestTargetedAds
   = lens _wpdAllowInterestTargetedAds
       (\ s a -> s{_wpdAllowInterestTargetedAds = a})
+
+instance FromJSON WebPropertyDto where
+        parseJSON
+          = withObject "WebPropertyDto"
+              (\ o ->
+                 WebPropertyDto <$>
+                   (o .:? "enabledForPreferredDeals") <*>
+                     (o .:? "syndicationProduct")
+                     <*> (o .:? "name")
+                     <*> (o .:? "propertyCode")
+                     <*> (o .:? "id")
+                     <*> (o .:? "siteUrls" .!= mempty)
+                     <*> (o .:? "allowInterestTargetedAds"))
+
+instance ToJSON WebPropertyDto where
+        toJSON WebPropertyDto{..}
+          = object
+              (catMaybes
+                 [("enabledForPreferredDeals" .=) <$>
+                    _wpdEnabledForPreferredDeals,
+                  ("syndicationProduct" .=) <$> _wpdSyndicationProduct,
+                  ("name" .=) <$> _wpdName,
+                  ("propertyCode" .=) <$> _wpdPropertyCode,
+                  ("id" .=) <$> _wpdId,
+                  ("siteUrls" .=) <$> _wpdSiteUrls,
+                  ("allowInterestTargetedAds" .=) <$>
+                    _wpdAllowInterestTargetedAds])

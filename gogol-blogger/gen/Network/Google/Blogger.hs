@@ -371,117 +371,140 @@ type PostUserInfosAPI =
 -- The post user info contains per-user information about the post, such as
 -- access rights, specific to the user.
 type PostUserInfosList =
-     "blogger" :> "v3" :> "users" :> Capture "userId" Text
-       :> "blogs"
-       :> Capture "blogId" Text
-       :> "posts"
-       :> QueryParam "status" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "orderBy" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "endDate" UTCTime
-       :> QueryParam "startDate" UTCTime
-       :> QueryParam "key" Text
-       :> QueryParam "fetchBodies" Bool
-       :> QueryParam "view" Text
-       :> QueryParam "labels" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Word32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "blogger" :>
+       "v3" :>
+         "users" :>
+           Capture "userId" Text :>
+             "blogs" :>
+               Capture "blogId" Text :>
+                 "posts" :>
+                   QueryParam "status" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "orderBy" Text :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "endDate" UTCTime :>
+                               QueryParam "startDate" UTCTime :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "fetchBodies" Bool :>
+                                     QueryParam "view" Text :>
+                                       QueryParam "labels" Text :>
+                                         QueryParam "pageToken" Text :>
+                                           QueryParam "oauth_token" Text :>
+                                             QueryParam "maxResults" Word32 :>
+                                               QueryParam "fields" Text :>
+                                                 QueryParam "alt" Text :>
+                                                   Get '[JSON] PostUserInfosList
 
 -- | Gets one post and user info pair, by post ID and user ID. The post user
 -- info contains per-user information about the post, such as access
 -- rights, specific to the user.
 type PostUserInfosGet =
-     "blogger" :> "v3" :> "users" :> Capture "userId" Text
-       :> "blogs"
-       :> Capture "blogId" Text
-       :> "posts"
-       :> Capture "postId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "maxComments" Word32
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "blogger" :>
+       "v3" :>
+         "users" :>
+           Capture "userId" Text :>
+             "blogs" :>
+               Capture "blogId" Text :>
+                 "posts" :>
+                   Capture "postId" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "maxComments" Word32 :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON] PostUserInfo
 
 type UsersAPI = UsersGet
 
 -- | Gets one user by ID.
 type UsersGet =
-     "blogger" :> "v3" :> "users" :> Capture "userId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "blogger" :>
+       "v3" :>
+         "users" :>
+           Capture "userId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Text :> Get '[JSON] User
 
 type PageViewsAPI = PageViewsGet
 
 -- | Retrieve pageview stats for a Blog.
 type PageViewsGet =
-     "blogger" :> "v3" :> "blogs" :> Capture "blogId" Text
-       :> "pageviews"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "range" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "pageviews" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "range" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] Pageviews
 
 type BlogsAPI =
      BlogsListByUser :<|> BlogsGet :<|> BlogsGetByUrl
 
 -- | Retrieves a list of blogs, possibly filtered.
 type BlogsListByUser =
-     "blogger" :> "v3" :> "users" :> Capture "userId" Text
-       :> "blogs"
-       :> QueryParam "status" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "fetchUserInfo" Bool
-       :> QueryParam "role" Text
-       :> QueryParam "key" Text
-       :> QueryParam "view" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "blogger" :>
+       "v3" :>
+         "users" :>
+           Capture "userId" Text :>
+             "blogs" :>
+               QueryParam "status" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fetchUserInfo" Bool :>
+                         QueryParam "role" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "view" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :> Get '[JSON] BlogList
 
 -- | Gets one blog by ID.
 type BlogsGet =
-     "blogger" :> "v3" :> "blogs" :> Capture "blogId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "maxPosts" Word32
-       :> QueryParam "view" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "maxPosts" Word32 :>
+                       QueryParam "view" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] Blog
 
 -- | Retrieve a Blog by URL.
 type BlogsGetByUrl =
-     "blogger" :> "v3" :> "blogs" :> "byurl" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "url" Text
-       :> QueryParam "key" Text
-       :> QueryParam "view" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           "byurl" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "url" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "view" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] Blog
 
 type PagesAPI =
      PagesInsert :<|> PagesList :<|> PagesPatch :<|>
@@ -493,134 +516,162 @@ type PagesAPI =
 
 -- | Add a page.
 type PagesInsert =
-     "blogger" :> "v3" :> "blogs" :> Capture "blogId" Text
-       :> "pages"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "isDraft" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "pages" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "isDraft" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Post '[JSON] Page
 
 -- | Retrieves the pages for a blog, optionally including non-LIVE statuses.
 type PagesList =
-     "blogger" :> "v3" :> "blogs" :> Capture "blogId" Text
-       :> "pages"
-       :> QueryParam "status" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "fetchBodies" Bool
-       :> QueryParam "view" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Word32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "pages" :>
+               QueryParam "status" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "fetchBodies" Bool :>
+                           QueryParam "view" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "maxResults" Word32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :>
+                                       Get '[JSON] PageList
 
 -- | Update a page. This method supports patch semantics.
 type PagesPatch =
-     "blogger" :> "v3" :> "blogs" :> Capture "blogId" Text
-       :> "pages"
-       :> Capture "pageId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "revert" Bool
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "publish" Bool
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "pages" :>
+               Capture "pageId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "revert" Bool :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "publish" Bool :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :> Patch '[JSON] Page
 
 -- | Gets one blog page by ID.
 type PagesGet =
-     "blogger" :> "v3" :> "blogs" :> Capture "blogId" Text
-       :> "pages"
-       :> Capture "pageId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "view" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "pages" :>
+               Capture "pageId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "view" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Get '[JSON] Page
 
 -- | Revert a published or scheduled page to draft state.
 type PagesRevert =
-     "blogger" :> "v3" :> "blogs" :> Capture "blogId" Text
-       :> "pages"
-       :> Capture "pageId" Text
-       :> "revert"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "pages" :>
+               Capture "pageId" Text :>
+                 "revert" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Post '[JSON] Page
 
 -- | Delete a page by ID.
 type PagesDelete =
-     "blogger" :> "v3" :> "blogs" :> Capture "blogId" Text
-       :> "pages"
-       :> Capture "pageId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "pages" :>
+               Capture "pageId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Update a page.
 type PagesUpdate =
-     "blogger" :> "v3" :> "blogs" :> Capture "blogId" Text
-       :> "pages"
-       :> Capture "pageId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "revert" Bool
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "publish" Bool
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "pages" :>
+               Capture "pageId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "revert" Bool :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "publish" Bool :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :> Put '[JSON] Page
 
 -- | Publishes a draft page.
 type PagesPublish =
-     "blogger" :> "v3" :> "blogs" :> Capture "blogId" Text
-       :> "pages"
-       :> Capture "pageId" Text
-       :> "publish"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "pages" :>
+               Capture "pageId" Text :>
+                 "publish" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Post '[JSON] Page
 
 type BlogUserInfosAPI = BlogUserInfosGet
 
 -- | Gets one blog and user info pair by blogId and userId.
 type BlogUserInfosGet =
-     "blogger" :> "v3" :> "users" :> Capture "userId" Text
-       :> "blogs"
-       :> Capture "blogId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "maxPosts" Word32
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "blogger" :>
+       "v3" :>
+         "users" :>
+           Capture "userId" Text :>
+             "blogs" :>
+               Capture "blogId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "maxPosts" Word32 :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Get '[JSON] BlogUserInfo
 
 type CommentsAPI =
      CommentsList :<|> CommentsGet :<|> CommentsListByBlog
@@ -631,121 +682,144 @@ type CommentsAPI =
 
 -- | Retrieves the comments for a post, possibly filtered.
 type CommentsList =
-     "blogger" :> "v3" :> "blogs" :> Capture "blogId" Text
-       :> "posts"
-       :> Capture "postId" Text
-       :> "comments"
-       :> QueryParam "status" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "endDate" UTCTime
-       :> QueryParam "startDate" UTCTime
-       :> QueryParam "key" Text
-       :> QueryParam "fetchBodies" Bool
-       :> QueryParam "view" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Word32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "posts" :>
+               Capture "postId" Text :>
+                 "comments" :>
+                   QueryParam "status" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "endDate" UTCTime :>
+                             QueryParam "startDate" UTCTime :>
+                               QueryParam "key" Text :>
+                                 QueryParam "fetchBodies" Bool :>
+                                   QueryParam "view" Text :>
+                                     QueryParam "pageToken" Text :>
+                                       QueryParam "oauth_token" Text :>
+                                         QueryParam "maxResults" Word32 :>
+                                           QueryParam "fields" Text :>
+                                             QueryParam "alt" Text :>
+                                               Get '[JSON] CommentList
 
 -- | Gets one comment by ID.
 type CommentsGet =
-     "blogger" :> "v3" :> "blogs" :> Capture "blogId" Text
-       :> "posts"
-       :> Capture "postId" Text
-       :> "comments"
-       :> Capture "commentId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "view" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "posts" :>
+               Capture "postId" Text :>
+                 "comments" :>
+                   Capture "commentId" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "view" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :> Get '[JSON] Comment
 
 -- | Retrieves the comments for a blog, across all posts, possibly filtered.
 type CommentsListByBlog =
-     "blogger" :> "v3" :> "blogs" :> Capture "blogId" Text
-       :> "comments"
-       :> QueryParam "status" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "endDate" UTCTime
-       :> QueryParam "startDate" UTCTime
-       :> QueryParam "key" Text
-       :> QueryParam "fetchBodies" Bool
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Word32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "comments" :>
+               QueryParam "status" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "endDate" UTCTime :>
+                         QueryParam "startDate" UTCTime :>
+                           QueryParam "key" Text :>
+                             QueryParam "fetchBodies" Bool :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "maxResults" Word32 :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Text :>
+                                         Get '[JSON] CommentList
 
 -- | Removes the content of a comment.
 type CommentsRemoveContent =
-     "blogger" :> "v3" :> "blogs" :> Capture "blogId" Text
-       :> "posts"
-       :> Capture "postId" Text
-       :> "comments"
-       :> Capture "commentId" Text
-       :> "removecontent"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "posts" :>
+               Capture "postId" Text :>
+                 "comments" :>
+                   Capture "commentId" Text :>
+                     "removecontent" :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :> Post '[JSON] Comment
 
 -- | Marks a comment as not spam.
 type CommentsApprove =
-     "blogger" :> "v3" :> "blogs" :> Capture "blogId" Text
-       :> "posts"
-       :> Capture "postId" Text
-       :> "comments"
-       :> Capture "commentId" Text
-       :> "approve"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "posts" :>
+               Capture "postId" Text :>
+                 "comments" :>
+                   Capture "commentId" Text :>
+                     "approve" :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :> Post '[JSON] Comment
 
 -- | Marks a comment as spam.
 type CommentsMarkAsSpam =
-     "blogger" :> "v3" :> "blogs" :> Capture "blogId" Text
-       :> "posts"
-       :> Capture "postId" Text
-       :> "comments"
-       :> Capture "commentId" Text
-       :> "spam"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "posts" :>
+               Capture "postId" Text :>
+                 "comments" :>
+                   Capture "commentId" Text :>
+                     "spam" :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :> Post '[JSON] Comment
 
 -- | Delete a comment by ID.
 type CommentsDelete =
-     "blogger" :> "v3" :> "blogs" :> Capture "blogId" Text
-       :> "posts"
-       :> Capture "postId" Text
-       :> "comments"
-       :> Capture "commentId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "posts" :>
+               Capture "postId" Text :>
+                 "comments" :>
+                   Capture "commentId" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :> Delete '[JSON] ()
 
 type PostsAPI =
      PostsInsert :<|> PostsList :<|> PostsPatch :<|>
@@ -759,165 +833,197 @@ type PostsAPI =
 
 -- | Add a post.
 type PostsInsert =
-     "blogger" :> "v3" :> "blogs" :> Capture "blogId" Text
-       :> "posts"
-       :> QueryParam "fetchBody" Bool
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "isDraft" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "fetchImages" Bool
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "posts" :>
+               QueryParam "fetchBody" Bool :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "isDraft" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fetchImages" Bool :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :> Post '[JSON] Post
 
 -- | Retrieves a list of posts, possibly filtered.
 type PostsList =
-     "blogger" :> "v3" :> "blogs" :> Capture "blogId" Text
-       :> "posts"
-       :> QueryParam "status" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "orderBy" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "fetchImages" Bool
-       :> QueryParam "endDate" UTCTime
-       :> QueryParam "startDate" UTCTime
-       :> QueryParam "key" Text
-       :> QueryParam "fetchBodies" Bool
-       :> QueryParam "view" Text
-       :> QueryParam "labels" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Word32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "posts" :>
+               QueryParam "status" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "orderBy" Text :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fetchImages" Bool :>
+                           QueryParam "endDate" UTCTime :>
+                             QueryParam "startDate" UTCTime :>
+                               QueryParam "key" Text :>
+                                 QueryParam "fetchBodies" Bool :>
+                                   QueryParam "view" Text :>
+                                     QueryParam "labels" Text :>
+                                       QueryParam "pageToken" Text :>
+                                         QueryParam "oauth_token" Text :>
+                                           QueryParam "maxResults" Word32 :>
+                                             QueryParam "fields" Text :>
+                                               QueryParam "alt" Text :>
+                                                 Get '[JSON] PostList
 
 -- | Update a post. This method supports patch semantics.
 type PostsPatch =
-     "blogger" :> "v3" :> "blogs" :> Capture "blogId" Text
-       :> "posts"
-       :> Capture "postId" Text
-       :> QueryParam "fetchBody" Bool
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "fetchImages" Bool
-       :> QueryParam "maxComments" Word32
-       :> QueryParam "key" Text
-       :> QueryParam "revert" Bool
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "publish" Bool
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "posts" :>
+               Capture "postId" Text :>
+                 QueryParam "fetchBody" Bool :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fetchImages" Bool :>
+                           QueryParam "maxComments" Word32 :>
+                             QueryParam "key" Text :>
+                               QueryParam "revert" Bool :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "publish" Bool :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Text :>
+                                         Patch '[JSON] Post
 
 -- | Get a post by ID.
 type PostsGet =
-     "blogger" :> "v3" :> "blogs" :> Capture "blogId" Text
-       :> "posts"
-       :> Capture "postId" Text
-       :> QueryParam "fetchBody" Bool
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "fetchImages" Bool
-       :> QueryParam "maxComments" Word32
-       :> QueryParam "key" Text
-       :> QueryParam "view" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "posts" :>
+               Capture "postId" Text :>
+                 QueryParam "fetchBody" Bool :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fetchImages" Bool :>
+                           QueryParam "maxComments" Word32 :>
+                             QueryParam "key" Text :>
+                               QueryParam "view" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :> Get '[JSON] Post
 
 -- | Revert a published or scheduled post to draft state.
 type PostsRevert =
-     "blogger" :> "v3" :> "blogs" :> Capture "blogId" Text
-       :> "posts"
-       :> Capture "postId" Text
-       :> "revert"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "posts" :>
+               Capture "postId" Text :>
+                 "revert" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Post '[JSON] Post
 
 -- | Retrieve a Post by Path.
 type PostsGetByPath =
-     "blogger" :> "v3" :> "blogs" :> Capture "blogId" Text
-       :> "posts"
-       :> "bypath"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "path" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "maxComments" Word32
-       :> QueryParam "key" Text
-       :> QueryParam "view" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "posts" :>
+               "bypath" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "path" Text :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "maxComments" Word32 :>
+                           QueryParam "key" Text :>
+                             QueryParam "view" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :> Get '[JSON] Post
 
 -- | Search for a post.
 type PostsSearch =
-     "blogger" :> "v3" :> "blogs" :> Capture "blogId" Text
-       :> "posts"
-       :> "search"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "orderBy" Text
-       :> QueryParam "userIp" Text
-       :> QueryParam "q" Text
-       :> QueryParam "key" Text
-       :> QueryParam "fetchBodies" Bool
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "posts" :>
+               "search" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "orderBy" Text :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "q" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "fetchBodies" Bool :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :> Get '[JSON] PostList
 
 -- | Delete a post by ID.
 type PostsDelete =
-     "blogger" :> "v3" :> "blogs" :> Capture "blogId" Text
-       :> "posts"
-       :> Capture "postId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "posts" :>
+               Capture "postId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Delete '[JSON] ()
 
 -- | Update a post.
 type PostsUpdate =
-     "blogger" :> "v3" :> "blogs" :> Capture "blogId" Text
-       :> "posts"
-       :> Capture "postId" Text
-       :> QueryParam "fetchBody" Bool
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "fetchImages" Bool
-       :> QueryParam "maxComments" Word32
-       :> QueryParam "key" Text
-       :> QueryParam "revert" Bool
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "publish" Bool
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "posts" :>
+               Capture "postId" Text :>
+                 QueryParam "fetchBody" Bool :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fetchImages" Bool :>
+                           QueryParam "maxComments" Word32 :>
+                             QueryParam "key" Text :>
+                               QueryParam "revert" Bool :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "publish" Bool :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Text :> Put '[JSON] Post
 
 -- | Publishes a draft post, optionally at the specific time of the given
 -- publishDate parameter.
 type PostsPublish =
-     "blogger" :> "v3" :> "blogs" :> Capture "blogId" Text
-       :> "posts"
-       :> Capture "postId" Text
-       :> "publish"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "publishDate" UTCTime
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "blogger" :>
+       "v3" :>
+         "blogs" :>
+           Capture "blogId" Text :>
+             "posts" :>
+               Capture "postId" Text :>
+                 "publish" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "publishDate" UTCTime :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :> Post '[JSON] Post

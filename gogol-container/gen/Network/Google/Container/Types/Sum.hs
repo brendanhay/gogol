@@ -46,6 +46,12 @@ instance ToText ClusterStatus where
         CSRunning -> "running"
         CSStopping -> "stopping"
 
+instance FromJSON ClusterStatus where
+    parseJSON = parseJSONText "ClusterStatus"
+
+instance ToJSON ClusterStatus where
+    toJSON = toJSONText
+
 -- | The operation type.
 data OperationOperationType
     = OOTCreateCluster
@@ -66,6 +72,12 @@ instance ToText OperationOperationType where
     toText = \case
         OOTCreateCluster -> "createCluster"
         OOTDeleteCluster -> "deleteCluster"
+
+instance FromJSON OperationOperationType where
+    parseJSON = parseJSONText "OperationOperationType"
+
+instance ToJSON OperationOperationType where
+    toJSON = toJSONText
 
 -- | The current status of the operation.
 data OperationStatus
@@ -91,3 +103,9 @@ instance ToText OperationStatus where
         OSDone -> "done"
         OSPending -> "pending"
         OSRunning -> "running"
+
+instance FromJSON OperationStatus where
+    parseJSON = parseJSONText "OperationStatus"
+
+instance ToJSON OperationStatus where
+    toJSON = toJSONText

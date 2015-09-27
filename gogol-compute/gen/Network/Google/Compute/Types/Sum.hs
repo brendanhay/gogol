@@ -35,6 +35,12 @@ instance ToText AccessConfigType where
     toText = \case
         ACTOneToOneNAT -> "ONE_TO_ONE_NAT"
 
+instance FromJSON AccessConfigType where
+    parseJSON = parseJSONText "AccessConfigType"
+
+instance ToJSON AccessConfigType where
+    toJSON = toJSONText
+
 -- | [Output Only] The status of the address, which can be either IN_USE or
 -- RESERVED. An address that is RESERVED is currently reserved and
 -- available to use. An IN_USE address is currently being used by another
@@ -58,6 +64,12 @@ instance ToText AddressStatus where
     toText = \case
         ASInUse -> "IN_USE"
         ASReserved -> "RESERVED"
+
+instance FromJSON AddressStatus where
+    parseJSON = parseJSONText "AddressStatus"
+
+instance ToJSON AddressStatus where
+    toJSON = toJSONText
 
 -- | [Output Only] The warning type identifier for this warning.
 data AddressesScopedListCodeWarning
@@ -128,6 +140,12 @@ instance ToText AddressesScopedListCodeWarning where
         ASLCWSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
         ASLCWUnreachable -> "UNREACHABLE"
 
+instance FromJSON AddressesScopedListCodeWarning where
+    parseJSON = parseJSONText "AddressesScopedListCodeWarning"
+
+instance ToJSON AddressesScopedListCodeWarning where
+    toJSON = toJSONText
+
 data AttachedDiskInterface
     = ADINvme
       -- ^ @NVME@
@@ -147,6 +165,12 @@ instance ToText AttachedDiskInterface where
     toText = \case
         ADINvme -> "NVME"
         ADIScsi -> "SCSI"
+
+instance FromJSON AttachedDiskInterface where
+    parseJSON = parseJSONText "AttachedDiskInterface"
+
+instance ToJSON AttachedDiskInterface where
+    toJSON = toJSONText
 
 -- | The mode in which to attach this disk, either READ_WRITE or READ_ONLY.
 -- If not specified, the default is to attach the disk in READ_WRITE mode.
@@ -170,6 +194,12 @@ instance ToText AttachedDiskMode where
         ADMReadOnly -> "READ_ONLY"
         ADMReadWrite -> "READ_WRITE"
 
+instance FromJSON AttachedDiskMode where
+    parseJSON = parseJSONText "AttachedDiskMode"
+
+instance ToJSON AttachedDiskMode where
+    toJSON = toJSONText
+
 -- | Specifies the type of the disk, either SCRATCH or PERSISTENT. If not
 -- specified, the default is PERSISTENT.
 data AttachedDiskType
@@ -191,6 +221,12 @@ instance ToText AttachedDiskType where
     toText = \case
         ADTPersistent -> "PERSISTENT"
         ADTScratch -> "SCRATCH"
+
+instance FromJSON AttachedDiskType where
+    parseJSON = parseJSONText "AttachedDiskType"
+
+instance ToJSON AttachedDiskType where
+    toJSON = toJSONText
 
 -- | [Output Only] The warning type identifier for this warning.
 data AutoscalersScopedListCodeWarning
@@ -261,6 +297,12 @@ instance ToText AutoscalersScopedListCodeWarning where
         ASingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
         AUnreachable -> "UNREACHABLE"
 
+instance FromJSON AutoscalersScopedListCodeWarning where
+    parseJSON = parseJSONText "AutoscalersScopedListCodeWarning"
+
+instance ToJSON AutoscalersScopedListCodeWarning where
+    toJSON = toJSONText
+
 -- | Defines type in which utilization_target is expressed.
 data AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType
     = APCMUUTTDeltaPerMinute
@@ -286,6 +328,12 @@ instance ToText AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType wh
         APCMUUTTDeltaPerSecond -> "DELTA_PER_SECOND"
         APCMUUTTGauge -> "GAUGE"
 
+instance FromJSON AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType where
+    parseJSON = parseJSONText "AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType"
+
+instance ToJSON AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType where
+    toJSON = toJSONText
+
 -- | Specifies the balancing mode for this backend. The default is
 -- UTILIZATION but available values are UTILIZATION and RATE.
 data BackendBalancingMode
@@ -308,6 +356,12 @@ instance ToText BackendBalancingMode where
         BBMRate -> "RATE"
         BBMUtilization -> "UTILIZATION"
 
+instance FromJSON BackendBalancingMode where
+    parseJSON = parseJSONText "BackendBalancingMode"
+
+instance ToJSON BackendBalancingMode where
+    toJSON = toJSONText
+
 data BackendServiceProtocol
     = BSPHTTP
       -- ^ @HTTP@
@@ -323,6 +377,12 @@ instance FromText BackendServiceProtocol where
 instance ToText BackendServiceProtocol where
     toText = \case
         BSPHTTP -> "HTTP"
+
+instance FromJSON BackendServiceProtocol where
+    parseJSON = parseJSONText "BackendServiceProtocol"
+
+instance ToJSON BackendServiceProtocol where
+    toJSON = toJSONText
 
 -- | The deprecation state of this resource. This can be DEPRECATED,
 -- OBSOLETE, or DELETED. Operations which create a new resource using a
@@ -354,6 +414,12 @@ instance ToText DeprecationStatusState where
         DSSDeprecated -> "DEPRECATED"
         DSSObsolete -> "OBSOLETE"
 
+instance FromJSON DeprecationStatusState where
+    parseJSON = parseJSONText "DeprecationStatusState"
+
+instance ToJSON DeprecationStatusState where
+    toJSON = toJSONText
+
 -- | [Output Only] The status of disk creation. Applicable statuses includes:
 -- CREATING, FAILED, READY, RESTORING.
 data DiskStatus
@@ -383,6 +449,12 @@ instance ToText DiskStatus where
         DSFailed -> "FAILED"
         DSReady -> "READY"
         DSRestoring -> "RESTORING"
+
+instance FromJSON DiskStatus where
+    parseJSON = parseJSONText "DiskStatus"
+
+instance ToJSON DiskStatus where
+    toJSON = toJSONText
 
 -- | [Output Only] The warning type identifier for this warning.
 data DiskTypesScopedListCodeWarning
@@ -453,6 +525,12 @@ instance ToText DiskTypesScopedListCodeWarning where
         DTSLCWSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
         DTSLCWUnreachable -> "UNREACHABLE"
 
+instance FromJSON DiskTypesScopedListCodeWarning where
+    parseJSON = parseJSONText "DiskTypesScopedListCodeWarning"
+
+instance ToJSON DiskTypesScopedListCodeWarning where
+    toJSON = toJSONText
+
 -- | [Output Only] The warning type identifier for this warning.
 data DisksScopedListCodeWarning
     = DSLCWDeprecatedResourceUsed
@@ -522,6 +600,12 @@ instance ToText DisksScopedListCodeWarning where
         DSLCWSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
         DSLCWUnreachable -> "UNREACHABLE"
 
+instance FromJSON DisksScopedListCodeWarning where
+    parseJSON = parseJSONText "DisksScopedListCodeWarning"
+
+instance ToJSON DisksScopedListCodeWarning where
+    toJSON = toJSONText
+
 -- | The IP protocol to which this rule applies. Valid options are TCP, UDP,
 -- ESP, AH or SCTP.
 data ForwardingRuleIPProtocol
@@ -555,6 +639,12 @@ instance ToText ForwardingRuleIPProtocol where
         FRIPSctp -> "SCTP"
         FRIPTCP -> "TCP"
         FRIPUdp -> "UDP"
+
+instance FromJSON ForwardingRuleIPProtocol where
+    parseJSON = parseJSONText "ForwardingRuleIPProtocol"
+
+instance ToJSON ForwardingRuleIPProtocol where
+    toJSON = toJSONText
 
 -- | [Output Only] The warning type identifier for this warning.
 data ForwardingRulesScopedListCodeWarning
@@ -625,6 +715,12 @@ instance ToText ForwardingRulesScopedListCodeWarning where
         FRSLCWSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
         FRSLCWUnreachable -> "UNREACHABLE"
 
+instance FromJSON ForwardingRulesScopedListCodeWarning where
+    parseJSON = parseJSONText "ForwardingRulesScopedListCodeWarning"
+
+instance ToJSON ForwardingRulesScopedListCodeWarning where
+    toJSON = toJSONText
+
 -- | Health state of the instance.
 data HealthStatusHealthState
     = HSHSHealthy
@@ -646,6 +742,12 @@ instance ToText HealthStatusHealthState where
         HSHSHealthy -> "HEALTHY"
         HSHSUnhealthy -> "UNHEALTHY"
 
+instance FromJSON HealthStatusHealthState where
+    parseJSON = parseJSONText "HealthStatusHealthState"
+
+instance ToJSON HealthStatusHealthState where
+    toJSON = toJSONText
+
 -- | The format used to encode and transmit the block device, which should be
 -- TAR. This is just a container and transmission format and not a runtime
 -- format. Provided by the client when the disk image is created.
@@ -665,6 +767,12 @@ instance ToText ImageContainerTypeRawDisk where
     toText = \case
         ICTRDTAR -> "TAR"
 
+instance FromJSON ImageContainerTypeRawDisk where
+    parseJSON = parseJSONText "ImageContainerTypeRawDisk"
+
+instance ToJSON ImageContainerTypeRawDisk where
+    toJSON = toJSONText
+
 -- | The type of the image used to create this disk. The default and only
 -- value is RAW
 data ImageSourceType
@@ -682,6 +790,12 @@ instance FromText ImageSourceType where
 instance ToText ImageSourceType where
     toText = \case
         ISTRaw -> "RAW"
+
+instance FromJSON ImageSourceType where
+    parseJSON = parseJSONText "ImageSourceType"
+
+instance ToJSON ImageSourceType where
+    toJSON = toJSONText
 
 -- | [Output Only] The status of the image. An image can be used to create
 -- other resources, such as instances, only after the image has been
@@ -710,6 +824,12 @@ instance ToText ImageStatus where
         ISFailed -> "FAILED"
         ISPending -> "PENDING"
         ISReady -> "READY"
+
+instance FromJSON ImageStatus where
+    parseJSON = parseJSONText "ImageStatus"
+
+instance ToJSON ImageStatus where
+    toJSON = toJSONText
 
 -- | [Output Only] The warning type identifier for this warning.
 data InstanceGroupManagersScopedListCodeWarning
@@ -780,6 +900,12 @@ instance ToText InstanceGroupManagersScopedListCodeWarning where
         IGMSLCWSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
         IGMSLCWUnreachable -> "UNREACHABLE"
 
+instance FromJSON InstanceGroupManagersScopedListCodeWarning where
+    parseJSON = parseJSONText "InstanceGroupManagersScopedListCodeWarning"
+
+instance ToJSON InstanceGroupManagersScopedListCodeWarning where
+    toJSON = toJSONText
+
 -- | A filter for the state of the instances in the instance group. Valid
 -- options are ALL or RUNNING. If you do not specify this parameter the
 -- list includes all instances regardless of their state.
@@ -802,6 +928,12 @@ instance ToText InstanceGroupsListInstancesRequestInstanceState where
     toText = \case
         IGLIRISAll -> "ALL"
         IGLIRISRunning -> "RUNNING"
+
+instance FromJSON InstanceGroupsListInstancesRequestInstanceState where
+    parseJSON = parseJSONText "InstanceGroupsListInstancesRequestInstanceState"
+
+instance ToJSON InstanceGroupsListInstancesRequestInstanceState where
+    toJSON = toJSONText
 
 -- | [Output Only] The warning type identifier for this warning.
 data InstanceGroupsScopedListCodeWarning
@@ -872,6 +1004,12 @@ instance ToText InstanceGroupsScopedListCodeWarning where
         IGSLCWSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
         IGSLCWUnreachable -> "UNREACHABLE"
 
+instance FromJSON InstanceGroupsScopedListCodeWarning where
+    parseJSON = parseJSONText "InstanceGroupsScopedListCodeWarning"
+
+instance ToJSON InstanceGroupsScopedListCodeWarning where
+    toJSON = toJSONText
+
 -- | [Output Only] The status of the instance. One of the following values:
 -- PROVISIONING, STAGING, RUNNING, STOPPING, and TERMINATED.
 data InstanceStatus
@@ -918,6 +1056,12 @@ instance ToText InstanceStatus where
         ISSuspending -> "SUSPENDING"
         ISTerminated -> "TERMINATED"
 
+instance FromJSON InstanceStatus where
+    parseJSON = parseJSONText "InstanceStatus"
+
+instance ToJSON InstanceStatus where
+    toJSON = toJSONText
+
 -- | The status of the instance.
 data InstanceWithNamedPortsStatus
     = IWNPSProvisioning
@@ -962,6 +1106,12 @@ instance ToText InstanceWithNamedPortsStatus where
         IWNPSSuspended -> "SUSPENDED"
         IWNPSSuspending -> "SUSPENDING"
         IWNPSTerminated -> "TERMINATED"
+
+instance FromJSON InstanceWithNamedPortsStatus where
+    parseJSON = parseJSONText "InstanceWithNamedPortsStatus"
+
+instance ToJSON InstanceWithNamedPortsStatus where
+    toJSON = toJSONText
 
 -- | [Output Only] The warning type identifier for this warning.
 data InstancesScopedListCodeWarning
@@ -1032,6 +1182,12 @@ instance ToText InstancesScopedListCodeWarning where
         ISLCWSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
         ISLCWUnreachable -> "UNREACHABLE"
 
+instance FromJSON InstancesScopedListCodeWarning where
+    parseJSON = parseJSONText "InstancesScopedListCodeWarning"
+
+instance ToJSON InstancesScopedListCodeWarning where
+    toJSON = toJSONText
+
 -- | [Output Only] The warning type identifier for this warning.
 data MachineTypesScopedListCodeWarning
     = MTSLCWDeprecatedResourceUsed
@@ -1101,6 +1257,12 @@ instance ToText MachineTypesScopedListCodeWarning where
         MTSLCWSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
         MTSLCWUnreachable -> "UNREACHABLE"
 
+instance FromJSON MachineTypesScopedListCodeWarning where
+    parseJSON = parseJSONText "MachineTypesScopedListCodeWarning"
+
+instance ToJSON MachineTypesScopedListCodeWarning where
+    toJSON = toJSONText
+
 -- | The current action that the managed instance group has scheduled for the
 -- instance.
 data ManagedInstanceCurrentAction
@@ -1142,6 +1304,12 @@ instance ToText ManagedInstanceCurrentAction where
         MICARecreating -> "RECREATING"
         MICARefreshing -> "REFRESHING"
         MICARestarting -> "RESTARTING"
+
+instance FromJSON ManagedInstanceCurrentAction where
+    parseJSON = parseJSONText "ManagedInstanceCurrentAction"
+
+instance ToJSON ManagedInstanceCurrentAction where
+    toJSON = toJSONText
 
 -- | The status of the instance (empty when instance does not exist).
 data ManagedInstanceInstanceStatus
@@ -1187,6 +1355,12 @@ instance ToText ManagedInstanceInstanceStatus where
         MIISSuspended -> "SUSPENDED"
         MIISSuspending -> "SUSPENDING"
         MIISTerminated -> "TERMINATED"
+
+instance FromJSON ManagedInstanceInstanceStatus where
+    parseJSON = parseJSONText "ManagedInstanceInstanceStatus"
+
+instance ToJSON ManagedInstanceInstanceStatus where
+    toJSON = toJSONText
 
 -- | [Output Only] The warning type identifier for this warning.
 data OperationCodeItemWarnings
@@ -1257,6 +1431,12 @@ instance ToText OperationCodeItemWarnings where
         OCIWSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
         OCIWUnreachable -> "UNREACHABLE"
 
+instance FromJSON OperationCodeItemWarnings where
+    parseJSON = parseJSONText "OperationCodeItemWarnings"
+
+instance ToJSON OperationCodeItemWarnings where
+    toJSON = toJSONText
+
 -- | [Output Only] Status of the operation. Can be one of the following:
 -- PENDING, RUNNING, or DONE.
 data OperationStatus
@@ -1282,6 +1462,12 @@ instance ToText OperationStatus where
         OSDone -> "DONE"
         OSPending -> "PENDING"
         OSRunning -> "RUNNING"
+
+instance FromJSON OperationStatus where
+    parseJSON = parseJSONText "OperationStatus"
+
+instance ToJSON OperationStatus where
+    toJSON = toJSONText
 
 -- | [Output Only] The warning type identifier for this warning.
 data OperationsScopedListCodeWarning
@@ -1351,6 +1537,12 @@ instance ToText OperationsScopedListCodeWarning where
         OSLCWResourceNotDeleted -> "RESOURCE_NOT_DELETED"
         OSLCWSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
         OSLCWUnreachable -> "UNREACHABLE"
+
+instance FromJSON OperationsScopedListCodeWarning where
+    parseJSON = parseJSONText "OperationsScopedListCodeWarning"
+
+instance ToJSON OperationsScopedListCodeWarning where
+    toJSON = toJSONText
 
 -- | [Output Only] Name of the quota metric.
 data QuotaMetric
@@ -1461,6 +1653,12 @@ instance ToText QuotaMetric where
         QMURLMaps -> "URL_MAPS"
         QMVPNTunnels -> "VPN_TUNNELS"
 
+instance FromJSON QuotaMetric where
+    parseJSON = parseJSONText "QuotaMetric"
+
+instance ToJSON QuotaMetric where
+    toJSON = toJSONText
+
 -- | [Output Only] Status of the region, either UP or DOWN.
 data RegionStatus
     = RSDown
@@ -1481,6 +1679,12 @@ instance ToText RegionStatus where
     toText = \case
         RSDown -> "DOWN"
         RSUP -> "UP"
+
+instance FromJSON RegionStatus where
+    parseJSON = parseJSONText "RegionStatus"
+
+instance ToJSON RegionStatus where
+    toJSON = toJSONText
 
 -- | [Output Only] The warning type identifier for this warning.
 data RouteCodeItemWarnings
@@ -1551,6 +1755,12 @@ instance ToText RouteCodeItemWarnings where
         RCIWSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
         RCIWUnreachable -> "UNREACHABLE"
 
+instance FromJSON RouteCodeItemWarnings where
+    parseJSON = parseJSONText "RouteCodeItemWarnings"
+
+instance ToJSON RouteCodeItemWarnings where
+    toJSON = toJSONText
+
 -- | Defines the maintenance behavior for this instance. For standard
 -- instances, the default behavior is MIGRATE. For preemptible instances,
 -- the default and only possible behavior is TERMINATE. For more
@@ -1574,6 +1784,12 @@ instance ToText SchedulingOnHostMaintenance where
     toText = \case
         SOHMMigrate -> "MIGRATE"
         SOHMTerminate -> "TERMINATE"
+
+instance FromJSON SchedulingOnHostMaintenance where
+    parseJSON = parseJSONText "SchedulingOnHostMaintenance"
+
+instance ToJSON SchedulingOnHostMaintenance where
+    toJSON = toJSONText
 
 -- | [Output Only] The status of the snapshot.
 data SnapshotStatus
@@ -1608,6 +1824,12 @@ instance ToText SnapshotStatus where
         SSReady -> "READY"
         SSUploading -> "UPLOADING"
 
+instance FromJSON SnapshotStatus where
+    parseJSON = parseJSONText "SnapshotStatus"
+
+instance ToJSON SnapshotStatus where
+    toJSON = toJSONText
+
 -- | [Output Only] An indicator whether storageBytes is in a stable state or
 -- it is being adjusted as a result of shared storage reallocation.
 data SnapshotStorageBytesStatus
@@ -1630,6 +1852,12 @@ instance ToText SnapshotStorageBytesStatus where
         SSBSUpdating -> "UPDATING"
         SSBSUpToDate -> "UP_TO_DATE"
 
+instance FromJSON SnapshotStorageBytesStatus where
+    parseJSON = parseJSONText "SnapshotStorageBytesStatus"
+
+instance ToJSON SnapshotStorageBytesStatus where
+    toJSON = toJSONText
+
 -- | NAT option controlling how IPs are NAT\'ed to the instance. Currently
 -- only NO_NAT (default value) is supported.
 data TargetInstanceNatPolicy
@@ -1647,6 +1875,12 @@ instance FromText TargetInstanceNatPolicy where
 instance ToText TargetInstanceNatPolicy where
     toText = \case
         TINPNoNAT -> "NO_NAT"
+
+instance FromJSON TargetInstanceNatPolicy where
+    parseJSON = parseJSONText "TargetInstanceNatPolicy"
+
+instance ToJSON TargetInstanceNatPolicy where
+    toJSON = toJSONText
 
 -- | [Output Only] The warning type identifier for this warning.
 data TargetInstancesScopedListCodeWarning
@@ -1717,6 +1951,12 @@ instance ToText TargetInstancesScopedListCodeWarning where
         TISLCWSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
         TISLCWUnreachable -> "UNREACHABLE"
 
+instance FromJSON TargetInstancesScopedListCodeWarning where
+    parseJSON = parseJSONText "TargetInstancesScopedListCodeWarning"
+
+instance ToJSON TargetInstancesScopedListCodeWarning where
+    toJSON = toJSONText
+
 -- | Sesssion affinity option, must be one of the following values: NONE:
 -- Connections from the same client IP may go to any instance in the pool;
 -- CLIENT_IP: Connections from the same client IP will go to the same
@@ -1747,6 +1987,12 @@ instance ToText TargetPoolSessionAffinity where
         TPSAClientIP -> "CLIENT_IP"
         TPSAClientIPProto -> "CLIENT_IP_PROTO"
         TPSANone -> "NONE"
+
+instance FromJSON TargetPoolSessionAffinity where
+    parseJSON = parseJSONText "TargetPoolSessionAffinity"
+
+instance ToJSON TargetPoolSessionAffinity where
+    toJSON = toJSONText
 
 -- | [Output Only] The warning type identifier for this warning.
 data TargetPoolsScopedListCodeWarning
@@ -1817,6 +2063,12 @@ instance ToText TargetPoolsScopedListCodeWarning where
         TPSLCWSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
         TPSLCWUnreachable -> "UNREACHABLE"
 
+instance FromJSON TargetPoolsScopedListCodeWarning where
+    parseJSON = parseJSONText "TargetPoolsScopedListCodeWarning"
+
+instance ToJSON TargetPoolsScopedListCodeWarning where
+    toJSON = toJSONText
+
 -- | [Output Only] The status of the VPN gateway.
 data TargetVpnGatewayStatus
     = TVGSCreating
@@ -1845,6 +2097,12 @@ instance ToText TargetVpnGatewayStatus where
         TVGSDeleting -> "DELETING"
         TVGSFailed -> "FAILED"
         TVGSReady -> "READY"
+
+instance FromJSON TargetVpnGatewayStatus where
+    parseJSON = parseJSONText "TargetVpnGatewayStatus"
+
+instance ToJSON TargetVpnGatewayStatus where
+    toJSON = toJSONText
 
 -- | [Output Only] The warning type identifier for this warning.
 data TargetVpnGatewaysScopedListCodeWarning
@@ -1915,6 +2173,12 @@ instance ToText TargetVpnGatewaysScopedListCodeWarning where
         TVGSLCWSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
         TVGSLCWUnreachable -> "UNREACHABLE"
 
+instance FromJSON TargetVpnGatewaysScopedListCodeWarning where
+    parseJSON = parseJSONText "TargetVpnGatewaysScopedListCodeWarning"
+
+instance ToJSON TargetVpnGatewaysScopedListCodeWarning where
+    toJSON = toJSONText
+
 -- | [Output Only] The status of the VPN tunnel.
 data VpnTunnelStatus
     = VTSAuthorizationError
@@ -1971,6 +2235,12 @@ instance ToText VpnTunnelStatus where
         VTSProvisioning -> "PROVISIONING"
         VTSRejected -> "REJECTED"
         VTSWaitingForFullConfig -> "WAITING_FOR_FULL_CONFIG"
+
+instance FromJSON VpnTunnelStatus where
+    parseJSON = parseJSONText "VpnTunnelStatus"
+
+instance ToJSON VpnTunnelStatus where
+    toJSON = toJSONText
 
 -- | [Output Only] The warning type identifier for this warning.
 data VpnTunnelsScopedListCodeWarning
@@ -2041,6 +2311,12 @@ instance ToText VpnTunnelsScopedListCodeWarning where
         VTSLCWSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
         VTSLCWUnreachable -> "UNREACHABLE"
 
+instance FromJSON VpnTunnelsScopedListCodeWarning where
+    parseJSON = parseJSONText "VpnTunnelsScopedListCodeWarning"
+
+instance ToJSON VpnTunnelsScopedListCodeWarning where
+    toJSON = toJSONText
+
 -- | [Output Only] Status of the zone, either UP or DOWN.
 data ZoneStatus
     = ZSDown
@@ -2061,3 +2337,9 @@ instance ToText ZoneStatus where
     toText = \case
         ZSDown -> "DOWN"
         ZSUP -> "UP"
+
+instance FromJSON ZoneStatus where
+    parseJSON = parseJSONText "ZoneStatus"
+
+instance ToJSON ZoneStatus where
+    toJSON = toJSONText

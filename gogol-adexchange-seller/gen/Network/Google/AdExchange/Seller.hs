@@ -221,18 +221,20 @@ type AdclientsAPI = AdclientsList
 
 -- | List all ad clients in this Ad Exchange account.
 type AdclientsList =
-     "adexchangeseller" :> "v2.0" :> "accounts" :>
-       Capture "accountId" Text
-       :> "adclients"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Word32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangeseller" :>
+       "v2.0" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "adclients" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Word32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Text :> Get '[JSON] AdClients
 
 type ReportsAPI = SavedAPI
 
@@ -240,73 +242,83 @@ type SavedAPI = SavedList :<|> SavedGenerate
 
 -- | List all saved reports in this Ad Exchange account.
 type SavedList =
-     "adexchangeseller" :> "v2.0" :> "accounts" :>
-       Capture "accountId" Text
-       :> "reports"
-       :> "saved"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangeseller" :>
+       "v2.0" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "reports" :>
+               "saved" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "maxResults" Int32 :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Get '[JSON] SavedReports
 
 -- | Generate an Ad Exchange report based on the saved report ID sent in the
 -- query parameters.
 type SavedGenerate =
-     "adexchangeseller" :> "v2.0" :> "accounts" :>
-       Capture "accountId" Text
-       :> "reports"
-       :> Capture "savedReportId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "locale" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "startIndex" Int32
-       :> QueryParam "maxResults" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangeseller" :>
+       "v2.0" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "reports" :>
+               Capture "savedReportId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "locale" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "startIndex" Int32 :>
+                               QueryParam "maxResults" Int32 :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :> Get '[JSON] Report
 
 type AlertsAPI = AlertsList
 
 -- | List the alerts for this Ad Exchange account.
 type AlertsList =
-     "adexchangeseller" :> "v2.0" :> "accounts" :>
-       Capture "accountId" Text
-       :> "alerts"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "locale" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangeseller" :>
+       "v2.0" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "alerts" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "locale" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] Alerts
 
 type UrlchannelsAPI = UrlchannelsList
 
 -- | List all URL channels in the specified ad client for this Ad Exchange
 -- account.
 type UrlchannelsList =
-     "adexchangeseller" :> "v2.0" :> "accounts" :>
-       Capture "accountId" Text
-       :> "adclients"
-       :> Capture "adClientId" Text
-       :> "urlchannels"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Word32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangeseller" :>
+       "v2.0" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "adclients" :>
+               Capture "adClientId" Text :>
+                 "urlchannels" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "maxResults" Word32 :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON] UrlChannels
 
 type CustomchannelsAPI =
      CustomchannelsList :<|> CustomchannelsGet
@@ -314,66 +326,76 @@ type CustomchannelsAPI =
 -- | List all custom channels in the specified ad client for this Ad Exchange
 -- account.
 type CustomchannelsList =
-     "adexchangeseller" :> "v2.0" :> "accounts" :>
-       Capture "accountId" Text
-       :> "adclients"
-       :> Capture "adClientId" Text
-       :> "customchannels"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "maxResults" Word32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangeseller" :>
+       "v2.0" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "adclients" :>
+               Capture "adClientId" Text :>
+                 "customchannels" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "maxResults" Word32 :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON] CustomChannels
 
 -- | Get the specified custom channel from the specified ad client.
 type CustomchannelsGet =
-     "adexchangeseller" :> "v2.0" :> "accounts" :>
-       Capture "accountId" Text
-       :> "adclients"
-       :> Capture "adClientId" Text
-       :> "customchannels"
-       :> Capture "customChannelId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangeseller" :>
+       "v2.0" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "adclients" :>
+               Capture "adClientId" Text :>
+                 "customchannels" :>
+                   Capture "customChannelId" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Text :>
+                                   Get '[JSON] CustomChannel
 
 type PreferreddealsAPI =
      PreferreddealsList :<|> PreferreddealsGet
 
 -- | List the preferred deals for this Ad Exchange account.
 type PreferreddealsList =
-     "adexchangeseller" :> "v2.0" :> "accounts" :>
-       Capture "accountId" Text
-       :> "preferreddeals"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangeseller" :>
+       "v2.0" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "preferreddeals" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Text :> Get '[JSON] PreferredDeals
 
 -- | Get information about the selected Ad Exchange Preferred Deal.
 type PreferreddealsGet =
-     "adexchangeseller" :> "v2.0" :> "accounts" :>
-       Capture "accountId" Text
-       :> "preferreddeals"
-       :> Capture "dealId" Text
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangeseller" :>
+       "v2.0" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "preferreddeals" :>
+               Capture "dealId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] PreferredDeal
 
 type MetadataAPI = MetricsAPI :<|> DimensionsAPI
 
@@ -381,31 +403,35 @@ type MetricsAPI = MetricsList
 
 -- | List the metadata for the metrics available to this AdExchange account.
 type MetricsList =
-     "adexchangeseller" :> "v2.0" :> "accounts" :>
-       Capture "accountId" Text
-       :> "metadata"
-       :> "metrics"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangeseller" :>
+       "v2.0" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "metadata" :>
+               "metrics" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] Metadata
 
 type DimensionsAPI = DimensionsList
 
 -- | List the metadata for the dimensions available to this AdExchange
 -- account.
 type DimensionsList =
-     "adexchangeseller" :> "v2.0" :> "accounts" :>
-       Capture "accountId" Text
-       :> "metadata"
-       :> "dimensions"
-       :> QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "key" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "adexchangeseller" :>
+       "v2.0" :>
+         "accounts" :>
+           Capture "accountId" Text :>
+             "metadata" :>
+               "dimensions" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Text :> Get '[JSON] Metadata

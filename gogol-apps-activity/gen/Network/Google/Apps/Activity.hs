@@ -133,18 +133,21 @@ type ActivitiesAPI = ActivitiesList
 -- similar. A request is scoped to activities from a given Google service
 -- using the source parameter.
 type ActivitiesList =
-     "appsactivity" :> "v1" :> "activities" :>
-       QueryParam "quotaUser" Text
-       :> QueryParam "prettyPrint" Bool
-       :> QueryParam "userIp" Text
-       :> QueryParam "drive.fileId" Text
-       :> QueryParam "drive.ancestorId" Text
-       :> QueryParam "groupingStrategy" Text
-       :> QueryParam "userId" Text
-       :> QueryParam "key" Text
-       :> QueryParam "source" Text
-       :> QueryParam "pageToken" Text
-       :> QueryParam "oauth_token" Text
-       :> QueryParam "pageSize" Int32
-       :> QueryParam "fields" Text
-       :> QueryParam "alt" Text
+     "appsactivity" :>
+       "v1" :>
+         "activities" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "drive.fileId" Text :>
+                   QueryParam "drive.ancestorId" Text :>
+                     QueryParam "groupingStrategy" Text :>
+                       QueryParam "userId" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "source" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "pageSize" Int32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Text :>
+                                       Get '[JSON] ListActivitiesResponse
