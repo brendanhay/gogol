@@ -5,3 +5,14 @@
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 
 {% include "_include/license.ede" %}
+--
+module {{ action.ns }}
+    (
+    -- * Resource
+      {{ action.name }}
+
+    ) where
+
+{{ action.alias }}
+
+{% include "_include/prod.ede" with type = action.type %}

@@ -28,50 +28,46 @@ import           Control.Monad.Except
 import           Control.Monad.State.Strict
 import           Data.Char
 import qualified Data.HashMap.Strict          as Map
+import           Data.Maybe
 import           Data.Semigroup               ((<>))
 import qualified Data.Text                    as Text
 import qualified Data.Text.Lazy               as LText
 import qualified Data.Text.Lazy.Builder       as Build
-import           Data.Traversable             (for)
+import           Debug.Trace
 import           Gen.Formatting
 import           Gen.Solve
 import           Gen.Syntax
 import           Gen.Types
 import           HIndent
-import           Language.Haskell.Exts        (Name)
 import           Language.Haskell.Exts.Build  (name)
 import           Language.Haskell.Exts.Pretty
 import           Prelude                      hiding (sum)
 
-runAST :: Service (Fix Schema) Resource -> Either Error (Service Data API)
-runAST svc =  evalState (runExceptT (render ss)) (initial (_svcSchemas ss))
+runAST :: Parsed -> Either Error Printed
+runAST svc = evalState (runExceptT (go svc)) initial
   where
-    ss = flatten svc
+    go = flatten >=> solveAll >=> render
 
-render :: Service (Schema Id) Resource -> AST (Service Data API)
+render :: Typed -> AST Printed
 render svc = do
-    x <- kvTraverseMaybe typ (_svcSchemas svc)
+    x <- traverse typ (_svcSchemas svc)
     y <- api (_svcApi svc)
-    return $! svc { _svcSchemas = x, _svcApi = y }
+    return $! svc { _svcSchemas = catMaybes x, _svcParameters = (), _svcApi = y }
   where
-    typ :: Id -> Schema Id -> AST (Maybe Data)
-    typ k = \case
+    typ :: Solved -> AST (Maybe Data)
+    typ Solved{..} = case _schema of
         Arr  {}      -> pure Nothing
         Ref  {}      -> pure Nothing
         Any  {}      -> pure Nothing
         Lit  {}      -> pure Nothing
-        Enum i vs ds -> Just . sum' <$> prefix k
+        Enum i vs ds -> pure . Just $
+            Sum (dname _ident) (i ^. description) (zipWith branch vs (ds ++ repeat ""))
           where
-            sum' p = Sum (dname k) (i ^. description) $
-                zipWith (branch p) vs (ds ++ repeat "")
+            branch v = Branch (bname _prefix v) v
 
-            branch p v = Branch (bname p v) v
-
-        Obj i rs -> do
-            p  <- prefix k
-            ds <- derive k
-            dd <- Map.traverseWithKey (const . solve . mkProp k) rs
-            Just <$> prod k p i ds dd
+        Obj i rs -> fmap Just $
+            prod _ident _prefix i _deriving
+                =<< traverse solve rs
 
     prod :: Id -> Pre -> Info -> [Derive] -> Map Local Solved -> AST Data
     prod k p i ds ts = Prod (dname k) (i ^. description)
@@ -93,7 +89,7 @@ render svc = do
                      "' with the minimum fields required to make a request.\n")
                      k
 
-    api :: Resource -> AST API
+    api :: Resource Solved -> AST API
     api x = do
         as <- Map.fromList <$> top x
         API n <$> pp Print (apiAlias n (Map.keys as))
@@ -112,20 +108,33 @@ render svc = do
         verb p l m = do
             let (k, i) = vname p l
             s      <- solve i
-            Just d <- typ i (_schema s)
+            Just d <- typ s
             fmap (k,) $
                 Action k (actionNS svc p l) (_mDescription m)
                     <$> pp Print (verbAlias svc k m)
-                    <*> pure d
+                    <*> pure (reset d)
 
-flatten :: Service (Fix Schema) Resource -> Service (Schema Id) Resource
-flatten svc = svc { _svcSchemas = execState run mempty }
+        reset = \case
+            Prod n' h r c ls _ -> Prod n' h r c ls []
+            d                  -> d
+
+solveAll :: Flattened -> AST Typed
+solveAll svc = do
+    ss <- traverse solve (_svcSchemas svc)
+    ps <- traverse (traverse solve) (_svcParameters svc)
+    a  <- traverse solve (_svcApi svc)
+    pure $! svc { _svcSchemas = ss, _svcParameters = ps, _svcApi = a }
+
+flatten :: Parsed -> AST Flattened
+flatten svc = do
+    _  <- Map.traverseWithKey typ (_svcSchemas svc)
+    ps <- Map.traverseWithKey (prm "") (_svcParameters svc)
+    a  <- api ps (_svcApi svc)
+    ss <- uses schemas Map.keys
+    pure $! svc { _svcSchemas = ss, _svcParameters = Map.elems ps, _svcApi = a }
   where
-    run = mapM_ (uncurry sch) (Map.toList (_svcSchemas svc))
-       >> api (_svcApi svc)
-
-    sch :: Id -> Fix Schema -> State (Map Id (Schema Id)) Id
-    sch n (Fix f) = go f >>= ins n
+    typ :: Id -> Fix Schema -> AST Id
+    typ n (Fix f) = go f >>= ins n
       where
         go = \case
             Obj i ps      -> Obj i <$> Map.traverseWithKey (prop n) ps
@@ -136,43 +145,51 @@ flatten svc = svc { _svcSchemas = execState run mempty }
             Ref  i r      -> pure (Ref  i r)
             Any  i        -> pure (Any  i)
 
-    prop :: Id -> Local -> Fix Schema -> State (Map Id (Schema Id)) Id
-    prop n l (Fix f) = go f >>= ins this
+    prop :: Id -> Local -> Fix Schema -> AST Id
+    prop p l (Fix f) = go f >>= ins this
       where
         go = \case
             Obj i ps      -> Obj i <$> Map.traverseWithKey (prop this) ps
             Arr i (Fix e) -> Arr i <$> prop this "item" (Fix (e & required .~ True))
 
-            Enum i vs ds -> pure (Enum i vs ds)
-            Lit  i x     -> pure (Lit  i x)
-            Ref  i r     -> pure (Ref  i r)
-            Any  i       -> pure (Any  i)
+            Enum i vs ds  -> pure (Enum i vs ds)
+            Lit  i x      -> pure (Lit  i x)
+            Ref  i r      -> pure (Ref  i r)
+            Any  i        -> pure (Any  i)
 
-        this = mkProp n l
+        this = mkProp p l
 
-    api :: Resource -> State (Map Id (Schema Id)) ()
-    api = \case
-        Top rs -> mapM_ (uncurry sub)       (Map.toList rs)
-        Sub ms -> mapM_ (uncurry (verb "")) (Map.toList ms)
+    prm :: Id -> Local -> Param (Fix Schema) -> AST (Param Id)
+    prm p l x = do
+        n <- prop p l (_prmSchema x)
+        pure $! x { _prmSchema = n }
+
+    api :: Map Local (Param Id) -> Resource (Fix Schema) -> AST (Resource Id)
+    api qs = \case
+        Top rs -> Top <$> Map.traverseWithKey sub rs
+        Sub ms -> Sub <$> Map.traverseWithKey (verb "") ms
       where
         sub l = \case
-            Top rs -> mapM_ (uncurry sub)      (Map.toList rs)
-            Sub ms -> mapM_ (uncurry (verb l)) (Map.toList ms)
+            Top rs -> Top <$> Map.traverseWithKey sub rs
+            Sub ms -> Sub <$> Map.traverseWithKey (verb l) ms
 
-        -- FIXME: Global parameters
         verb p l m = do
             let (_, i) = vname p l
-            rs <- Map.traverseWithKey (\k v -> prop i k (paramSchema v)) (_mParameters m)
-            void . ins i $
-                Obj (Info (_mDescription m) Nothing False Nothing) rs
+            rs <- Map.traverseWithKey (prm i) (_mParameters m)
+            _  <- ins i $
+                Obj (Info (_mDescription m) Nothing False Nothing) (Map.map _prmSchema (rs <> qs))
+            pure $! m { _mParameters = rs <> qs }
 
-    ins :: Id -> Schema Id -> State (Map Id (Schema Id)) Id
+    ins :: Id -> Schema Id -> AST Id
     ins n x = do
-        s <- gets (Map.lookup n)
-        case s of
-            Nothing -> modify (Map.insert n x) >> pure n
-            -- FIXME:
-            Just e  -> error $ "Already exists: " ++ show (n, e, x)
+        ms <- uses schemas (Map.lookup n)
+        case ms of
+            Just y | x /= y -> throwError $
+                format ("Schema exists: " % shown % "\nTried inserting: " % shown)
+                       y x
+            _ -> schemas %= Map.insert n x
+
+        return n
 
 data PP
     = Indent

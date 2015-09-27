@@ -42,44 +42,6 @@ import           Gen.Text
 import           Gen.Types
 import           Prelude                    hiding (sum)
 
-data TType
-    = TType   Id
-    | TLit    Lit
-    | TMaybe  TType
-    | TEither TType TType
-    | TList   TType
-
-data Derive
-    = DEq
-    | DOrd
-    | DRead
-    | DShow
-    | DEnum
-    | DNum
-    | DIntegral
-    | DReal
-    | DMonoid
-    | DIsString
-    | DData
-    | DTypeable
-    | DGeneric
-      deriving (Eq, Show)
-
-data Solved = Solved
-    { _prefix   :: Pre
-    , _schema   :: Schema Id
-    , _type     :: TType
-    , _deriving :: [Derive]
-    }
-
-instance HasInfo Solved where
-    info = f . info
-      where
-        f = lens _schema (\s a -> s { _schema = a })
-
-monoid :: Solved -> Bool
-monoid = elem DMonoid . _deriving
-
 type Seen = Map (CI Text) (Set (CI Text))
 
 data Memo = Memo
@@ -91,8 +53,8 @@ data Memo = Memo
     , _schemas  :: Map Id (Schema Id)
     }
 
-initial :: Map Id (Schema Id) -> Memo
-initial = Memo mempty mempty mempty mempty mempty
+initial :: Memo
+initial = Memo mempty mempty mempty mempty mempty mempty
 
 makeLenses ''Memo
 
@@ -116,7 +78,7 @@ memo l k f = do
             return x
 
 solve :: Id -> AST Solved
-solve k = Solved <$> prefix k <*> schema k <*> typeOf k <*> derive k
+solve k = loc "solve" k $ Solved k <$> prefix k <*> schema k <*> typeOf k <*> derive k
 
 typeOf :: Id -> AST TType
 typeOf k = loc "typeof" k $ memo typed k go
@@ -246,4 +208,4 @@ acronymPrefixes (idToText -> n) = map CI.mk (xs ++ map suffix ys ++ zs)
     r6 = Text.take limit <$> listToMaybe (splitWords a)
 
 loc :: String -> Id -> a -> a
-loc n r = id -- trace (n ++ ": " ++ Text.unpack (idToText r))
+loc n r = id --trace (n ++ ": " ++ Text.unpack (idToText r))

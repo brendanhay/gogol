@@ -40,40 +40,40 @@ apiAlias n ls = TypeDecl noLoc n [] alias
         x:xs -> foldl' (\l r -> TyInfix l (UnQual (sym ":<|>")) r) x xs
 
 -- type Method = :> ...
-verbAlias :: Service s r -> Name -> Method -> Decl
+verbAlias :: Typed -> Name -> Method Solved -> Decl
 verbAlias s n m = TypeDecl noLoc n [] alias
   where
     alias = foldr' (\l r -> TyInfix l (UnQual (sym ":>")) r) verb (path ++ qry)
 
     path :: [Type]
-    path = map match
-         . filter (not . Text.null)
-         $ Text.split (== '/') (_svcServicePath s)
-        <> Text.split (== '/') (_mPath m)
-      where
-        match x
-            | Just (c, t) <- Text.uncons x
-            , c == '{'
-            , Just k <- Map.lookup (Local (Text.init t)) params
-            , _prmLocation k == Path
-                        = TyApp (TyApp (tycon "Capture")
-                                       (sing (Text.init t)))
-                                (literal (_prmLiteral k))
-            | otherwise = sing x
+    path = [] -- map match
+      --    . filter (not . Text.null)
+      --    $ Text.split (== '/') (_svcServicePath s)
+      --   <> Text.split (== '/') (_mPath m)
+      -- where
+      --   match x
+      --       | Just (c, t) <- Text.uncons x
+      --       , c == '{'
+      --       , Just k <- Map.lookup (Local (Text.init t)) params
+      --       , _prmLocation k == Path
+      --                   = TyApp (TyApp (tycon "Capture")
+      --                                  (sing (Text.init t)))
+      --                           (literal (_prmLiteral k))
+      --       | otherwise = sing x
 
     -- FIXME: order by _mParameterOrder
     qry :: [Type]
-    qry = mapMaybe f (Map.toList params)
-      where
-        f (k, p) =
-           -- FIXME: types, many/repeated
-           let t = literal (_prmLiteral p)
-               n = sing (local k)
-            in case _prmLocation p of
-                Query -> Just $ TyApp (TyApp (tycon "QueryParam") n) t
-                Path  -> Nothing
+    qry = [] -- mapMaybe f (Map.toList params)
+      -- where
+      --   f (k, p) =
+      --      -- FIXME: types, many/repeated
+      --      let t = literal (_prmLiteral p)
+      --          n = sing (local k)
+      --       in case _prmLocation p of
+      --           Query -> Just $ TyApp (TyApp (tycon "QueryParam") n) t
+      --           Path  -> Nothing
 
-    params = _svcParameters s <> _mParameters m
+--    params = _svcParameters s <> _mParameters m
 
     verb :: Type
     verb = TyApp (TyApp meth typ) res
@@ -231,6 +231,7 @@ def s
         Lit  _ Bool -> lit (upperHead x)
         Lit  _ Text -> str x
         Lit  {}     -> lit x
+        e           -> error $ "Unsupported default value: " ++ show e
 
     lit = var . name . Text.unpack
 

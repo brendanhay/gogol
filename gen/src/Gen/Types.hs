@@ -266,28 +266,65 @@ instance HasInfo (Schema a) where
             Ref  _ r   -> Ref  i r
             Any  {}    -> Any  i
 
-data Param = Param
+data Param a = Param
     { _prmLocation :: !Location
     , _prmRepeated :: !Bool
     , _prmInfo     :: Info
-    , _prmLiteral  :: !Lit
-    }
+    , _prmSchema   :: a
+    } deriving (Show, Functor, Foldable, Traversable)
 
-paramSchema :: Param -> Fix Schema
-paramSchema p
-    | _prmRepeated p = Fix $ Arr (_prmInfo p) lit
-    | otherwise      = lit
-  where
-    lit = Fix $ Lit (_prmInfo p) (_prmLiteral p)
+-- paramSchema :: Param -> Fix Schema
+-- paramSchema p
+--     | _prmRepeated p = Fix $ Arr (_prmInfo p) lit
+--     | otherwise      = lit
+--   where
+--     lit = Fix $ Lit (_prmInfo p) (_prmLiteral p)
 
-instance FromJSON Param where
+instance FromJSON a => FromJSON (Param a) where
     parseJSON = withObject "parameter" $ \o -> Param
         <$> o .:  "location"
         <*> o .:? "repeated" .!= False
         <*> parseJSON (Object o)
         <*> parseJSON (Object o)
 
-deriveToJSON (js "") ''Param
+data TType
+    = TType   Id
+    | TLit    Lit
+    | TMaybe  TType
+    | TEither TType TType
+    | TList   TType
+
+data Derive
+    = DEq
+    | DOrd
+    | DRead
+    | DShow
+    | DEnum
+    | DNum
+    | DIntegral
+    | DReal
+    | DMonoid
+    | DIsString
+    | DData
+    | DTypeable
+    | DGeneric
+      deriving (Eq, Show)
+
+data Solved = Solved
+    { _ident    :: Id
+    , _prefix   :: Pre
+    , _schema   :: Schema Id
+    , _type     :: TType
+    , _deriving :: [Derive]
+    }
+
+instance HasInfo Solved where
+    info = f . info
+      where
+        f = lens _schema (\s a -> s { _schema = a })
+
+monoid :: Solved -> Bool
+monoid = elem DMonoid . _deriving
 
 data Syn a = Syn { syntax :: a }
 
@@ -345,11 +382,12 @@ data Action = Action
     }
 
 instance ToJSON Action where
-    toJSON (Action n _ h a d) = object
-        [ "name"  .= Syn n
-        , "help"  .= h
-        , "alias" .= a
-        , "data"  .= d
+    toJSON Action {..} = object
+        [ "name"  .= Syn _actName
+        , "ns"    .= _actNS
+        , "help"  .= _actHelp
+        , "alias" .= _actAlias
+        , "type"  .= _actData
         ]
 
 data API = API
@@ -359,25 +397,25 @@ data API = API
     }
 
 instance ToJSON API where
-    toJSON (API n d as) = object
-         [ "name"    .= Syn n
-         , "decl"    .= d
-         , "actions" .= Map.elems as
+    toJSON API {..} = object
+         [ "name"    .= Syn _apiName
+         , "decl"    .= _apiDecl
+         , "actions" .= Map.elems _apiActions
          ]
 
-data Method = Method
+data Method a = Method
     { _mId             :: Text
     , _mPath           :: Text
     , _mMethod         :: Text
     , _mDescription    :: Maybe Help
-    , _mParameters     :: Map Local Param
+    , _mParameters     :: Map Local (Param a)
     , _mParameterOrder :: [Local]
     , _mScopes         :: [Text]
     , _mRequest        :: Maybe Global
     , _mResponse       :: Maybe Global
-    } deriving (Generic)
+    } deriving (Generic, Functor, Foldable, Traversable)
 
-instance FromJSON Method where
+instance FromJSON a => FromJSON (Method a) where
     parseJSON = withObject "method" $ \o -> Method
         <$> o .:  "id"
         <*> o .:  "path"
@@ -392,18 +430,17 @@ instance FromJSON Method where
         ref o k = Just <$> (o .: k >>= (.: "$ref"))
               <|> pure Nothing
 
-deriveToJSON (js "_m") ''Method
+data Resource a
+    = Top (Map Local (Resource a))
+    | Sub (Map Local (Method   a))
+      deriving (Functor, Foldable, Traversable)
 
-data Resource
-    = Top (Map Local Resource)
-    | Sub (Map Local Method)
-
-instance FromJSON Resource where
+instance FromJSON a => FromJSON (Resource a) where
     parseJSON = withObject "resource" $ \o ->
             Top <$> o .: "resources"
         <|> Sub <$> o .: "methods"
 
-data Service s r = Service
+data Service s p r = Service
     { _svcLibrary           :: Text
     , _svcTitle             :: Text
     , _svcName              :: Text
@@ -421,12 +458,12 @@ data Service s r = Service
     , _svcServicePath       :: Text
     , _svcBatchPath         :: Text
     , _svcAuth              :: Maybe Object
-    , _svcParameters        :: Map Local Param
-    , _svcSchemas           :: Map Id s
+    , _svcParameters        :: p
+    , _svcSchemas           :: s
     , _svcApi               :: r
     } deriving (Generic)
 
-instance FromJSON s => FromJSON (Service s Resource) where
+instance (FromJSON s, FromJSON p, FromJSON r) => FromJSON (Service s p r) where
     parseJSON = withObject "service" $ \o -> Service
         <$> o .:  "library"
         <*> o .:  "title"
@@ -449,7 +486,7 @@ instance FromJSON s => FromJSON (Service s Resource) where
         <*> o .:  "schemas"
         <*> parseJSON (Object o)
 
-instance ToJSON (Service Data API) where
+instance (ToJSON s, ToJSON p) => ToJSON (Service s p API) where
     toJSON s = Object (x <> y)
       where
         Object x = genericToJSON (js "_svc") s
@@ -457,38 +494,46 @@ instance ToJSON (Service Data API) where
             [ "exposedModules" .= exposedModules s
             ]
 
-svcAbbrev :: Service s r -> Text
+type Parsed    = Service (Map Id    (Fix Schema))
+                         (Map Local (Param (Fix Schema)))
+                         (Resource  (Fix Schema))
+
+type Flattened = Service [Id]     [Param Id]     (Resource Id)
+type Typed     = Service [Solved] [Param Solved] (Resource Solved)
+type Printed   = Service [Data]   ()             API
+
+svcAbbrev :: Service s p r -> Text
 svcAbbrev = upperHead . renameAbbrev . _svcCanonicalName
 
-svcActions :: Service s API -> [NS]
-svcActions = map _actNS . Map.elems . _apiActions . _svcApi
+svcActions :: Service s p API -> [Action]
+svcActions = Map.elems . _apiActions . _svcApi
 
-typeImports, prodImports, sumImports, actionImports :: Service s r -> [NS]
+typeImports, prodImports, sumImports, actionImports :: Service s p r -> [NS]
 typeImports s = sort ["Network.Google.Prelude", prodNS s, sumNS s]
 prodImports s = sort ["Network.Google.Prelude", sumNS s]
 sumImports  _ = sort ["Network.Google.Prelude"]
 actionImports = typeImports
 
-tocNS, typesNS, prodNS, sumNS :: Service s r -> NS
+tocNS, typesNS, prodNS, sumNS :: Service s p r -> NS
 tocNS s = NS $ "Network" : "Google" : Text.split (== '.') (_svcCanonicalName s)
 typesNS = (<> "Types")   . tocNS
 prodNS  = (<> "Product") . typesNS
 sumNS   = (<> "Sum")     . typesNS
 
-actionNS :: Service s r -> Local -> Local -> NS
+actionNS :: Service s p r -> Local -> Local -> NS
 actionNS s x y = tocNS s <> NS [upperHead (local x), upperHead (local y)]
 
-exposedModules :: Service s API -> [NS]
-exposedModules s = sort (tocNS s : typesNS s : svcActions s)
+exposedModules :: Service s p API -> [NS]
+exposedModules s = sort (tocNS s : typesNS s : map _actNS (svcActions s))
 
-otherModules :: Service s r -> [NS]
+otherModules :: Service s p r -> [NS]
 otherModules s = sort [prodNS s, sumNS s]
 
 data Library = Library
     { _libName     :: Text
     , _libTitle    :: Text
     , _libVersions :: Versions
-    , _libServices :: NonEmpty (Service Data API)
+    , _libServices :: NonEmpty Printed
     }
 
 instance ToJSON Library where
@@ -503,7 +548,7 @@ instance ToJSON Library where
         , "otherModules"        .= concatMap otherModules   (NE.toList _libServices)
         ]
 
-merge :: Versions -> [Service Data API] -> [Library]
+merge :: Versions -> [Printed] -> [Library]
 merge v = map go . groupBy (on (==) _svcLibrary)
   where
     go [x]    = mk x

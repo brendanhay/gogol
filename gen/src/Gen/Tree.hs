@@ -87,7 +87,13 @@ populate d Templates{..} l = (encodeString d :/) . dir lib <$> layout
         , mod' (sumNS   s) (sumImports  s) sumTemplate   (pure svc)
         ] ++ map action (svcActions s)
       where
-        action n = mod' n (actionImports s) actionTemplate (pure svc)
+        action a =
+            mod' (_actNS a) (actionImports s) actionTemplate
+                . pure . Object $
+                    act <> svc'
+          where
+            Object act  = object [ "action" .= a ]
+            Object svc' = svc
 
         svc = toJSON s
 
