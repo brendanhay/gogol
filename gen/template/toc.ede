@@ -48,10 +48,3 @@ TODO
 -}
 
 {{ api.decl }}
-{% for action in api.actions %}
-
-{% if action.value.help %}
-{{ action.value.help }}
-{% endif %}
-{{ action.value.decl }}
-{% endfor %}

@@ -45,10 +45,11 @@ import           Language.Haskell.Exts.Syntax (Name)
 nname :: Local -> Name
 nname = name . Text.unpack . (<> "API") . upperHead . local
 
-vname :: Local -> Local -> Name
-vname p l = name (f p <> f l)
+vname :: Local -> Local -> (Name, Id)
+vname p l = (dname n, n)
   where
-    f = Text.unpack . upperHead . local
+    n = Free (Global (f p <> f l))
+    f = upperHead . local
 
 dname, cname :: Id -> Name
 dname = name . Text.unpack . upperHead . idToText
@@ -63,7 +64,7 @@ bname (Pre p) = name
 fname, lname, pname :: Pre -> Local -> Name
 fname = pre (Text.cons '_' . renameField)
 lname = pre renameField
-pname = pre (flip Text.snoc '_' . Text.cons 'p' . upperHead)
+pname = pre (flip Text.snoc '_' . Text.cons 'p' . upperHead . renameField)
 
 pre :: (Text -> Text) -> Pre -> Local -> Name
 pre f (Pre p) = name . Text.unpack . f . mappend p . upperHead . local

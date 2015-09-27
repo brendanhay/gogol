@@ -27,6 +27,7 @@ import           Control.Monad.Except
 import           Data.Aeson                hiding (json)
 import           Data.Bifunctor
 import           Data.Foldable             (foldr')
+import qualified Data.HashMap.Strict       as Map
 import qualified Data.List.NonEmpty        as NE
 import           Data.Monoid
 import           Data.Text                 (Text)
@@ -84,8 +85,10 @@ populate d Templates{..} l = (encodeString d :/) . dir lib <$> layout
         , mod' (typesNS s) (typeImports s) typesTemplate (pure svc)
         , mod' (prodNS  s) (prodImports s) prodTemplate  (pure svc)
         , mod' (sumNS   s) (sumImports  s) sumTemplate   (pure svc)
-        ]
+        ] ++ map action (svcActions s)
       where
+        action n = mod' n (actionImports s) actionTemplate (pure svc)
+
         svc = toJSON s
 
     lib = fromText (_libName l)

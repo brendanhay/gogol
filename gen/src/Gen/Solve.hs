@@ -137,25 +137,25 @@ derive :: Id -> AST [Derive]
 derive k = loc "derive" k $ memo derived k go
   where
     go = \case
-        Obj  _ rs -> foldM props base (Map.elems rs)
-        Arr  _ r  -> mappend monoid . intersect base <$> derive r
-        Enum {}   -> pure (base <> enum)
-        Ref  _ r  -> pure base
-        Any  _    -> pure base
+        Obj  _ rs -> foldM props dbase (Map.elems rs)
+        Arr  _ r  -> mappend dmonoid . intersect dbase <$> derive r
+        Enum {}   -> pure denum
+        Ref  _ r  -> pure dbase
+        Any  _    -> pure dbase
         Lit  _ l  -> pure $
             case l of
-                Text -> base <> [DOrd, DIsString]
-                Bool -> base <> enum
-                Time -> base
-                Date -> base
-                Nat  -> base
-                _    -> base <> [DNum, DIntegral, DReal] <> enum
+                Text -> dbase <> [DOrd, DIsString]
+                Bool -> denum
+                Time -> dbase
+                Date -> dbase
+                Nat  -> dbase
+                _    -> [DNum, DIntegral, DReal] <> denum
 
     props ds x = intersect ds <$> derive x
 
-    monoid = [DMonoid]
-    enum   = [DOrd, DEnum]
-    base   = [DEq, DRead, DShow, DData, DTypeable, DGeneric]
+dmonoid = [DMonoid]
+denum   = [DOrd, DEnum] <> dbase
+dbase   = [DEq, DRead, DShow, DData, DTypeable, DGeneric]
 
 prefix :: Id -> AST Pre
 prefix n = loc "prefix" n $ memo prefixed n typ

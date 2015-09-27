@@ -32,6 +32,7 @@ import           Data.Semigroup               ((<>))
 import qualified Data.Text                    as Text
 import qualified Data.Text.Lazy               as LText
 import qualified Data.Text.Lazy.Builder       as Build
+import           Data.Traversable             (for)
 import           Gen.Formatting
 import           Gen.Solve
 import           Gen.Syntax
@@ -67,69 +68,64 @@ render svc = do
             branch p v = Branch (bname p v) v
 
         Obj i rs -> do
-            p <- prefix k
-            Just <$> (Map.traverseWithKey (const . solve . mkProp k) rs >>= prod p)
-          where
-            prod p ts = Prod (dname k) (i ^. description)
-                <$> (objDecl k p ts >>= pp Indent)
-                <*> ctor p ts
-                <*> traverse (lens p) (Map.toList ts)
-                <*> traverse (pp Print) (jsonDecls k p ts)
+            p  <- prefix k
+            ds <- derive k
+            dd <- Map.traverseWithKey (const . solve . mkProp k) rs
+            Just <$> prod k p i ds dd
 
-            ctor p ts = Fun' (cname k) (Just help)
-                <$> (pp None   (ctorSig  k   ts) <&> comments ts)
-                <*>  pp Indent (ctorDecl k p ts)
+    prod :: Id -> Pre -> Info -> [Derive] -> Map Local Solved -> AST Data
+    prod k p i ds ts = Prod (dname k) (i ^. description)
+        <$> pp Indent (objDecl k p ds ts)
+        <*> ctor
+        <*> traverse lens (Map.toList ts)
+        <*> traverse (pp Print) (jsonDecls k p ts)
+      where
+        ctor = Fun' (cname k) (Just help)
+            <$> (pp None   (ctorSig  k   ts) <&> comments ts)
+            <*>  pp Indent (ctorDecl k p ts)
 
-            lens p (l, v) = Fun' (lname p l) (v ^. description)
-                <$> pp None  (lensSig k p l v)
-                <*> pp Print (lensDecl  p l v)
+        lens (l, v) = Fun' (lname p l) (v ^. description)
+            <$> pp None  (lensSig k p l v)
+            <*> pp Print (lensDecl  p l v)
 
-            help = rawHelpText $
-                sformat ("Creates a value of '" % fid %
-                         "' with the minimum fields required to make a request.\n")
-                         k
+        help = rawHelpText $
+            sformat ("Creates a value of '" % fid %
+                     "' with the minimum fields required to make a request.\n")
+                     k
 
     api :: Resource -> AST API
-    api x = API n <$> pp Print (apiAlias n (nouns x)) <*> top x
+    api x = do
+        as <- Map.fromList <$> top x
+        API n <$> pp Print (apiAlias n (Map.keys as))
+              <*> pure as
       where
         n = name (Text.unpack (svcAbbrev svc))
 
-        nouns = map nname . \case
-            Top rs -> Map.keys rs
-            Sub ms -> Map.keys ms
-
-        top :: Resource -> AST [Action]
         top = \case
            Top rs -> traverse (uncurry sub)       (Map.toList rs) <&> concat
            Sub ms -> traverse (uncurry (verb "")) (Map.toList ms)
 
-        sub :: Local -> Resource -> AST [Action]
         sub l = \case
-            t@(Top rs) -> do
-                let k = nname l
-                t  <- Action k Nothing
-                    <$> pp Print (apiAlias k (nouns t))
-                as <- traverse (uncurry sub) (Map.toList rs) <&> concat
-                return (t : as)
+            Top rs -> traverse (uncurry  sub)     (Map.toList rs) <&> concat
+            Sub ms -> traverse (uncurry (verb l)) (Map.toList ms)
 
-            Sub ms -> do
-                let k = nname l
-                t  <- Action k Nothing
-                    <$> pp Print (apiAlias k (map (vname l) $ Map.keys ms))
-                as <- traverse (uncurry (verb l)) (Map.toList ms)
-                return (t : as)
-
-        verb :: Local -> Local -> Method -> AST Action
-        verb p l m = Action (vname p l) (_mDescription m)
-            <$> pp Print (verbDecl svc p l m)
+        verb p l m = do
+            let (k, i) = vname p l
+            s      <- solve i
+            Just d <- typ i (_schema s)
+            fmap (k,) $
+                Action k (actionNS svc p l) (_mDescription m)
+                    <$> pp Print (verbAlias svc k m)
+                    <*> pure d
 
 flatten :: Service (Fix Schema) Resource -> Service (Schema Id) Resource
 flatten svc = svc { _svcSchemas = execState run mempty }
   where
-    run = mapM_ (uncurry top) (Map.toList (_svcSchemas svc))
+    run = mapM_ (uncurry sch) (Map.toList (_svcSchemas svc))
+       >> api (_svcApi svc)
 
-    top :: Id -> Fix Schema -> State (Map Id (Schema Id)) Id
-    top n (Fix f) = go f >>= ins n
+    sch :: Id -> Fix Schema -> State (Map Id (Schema Id)) Id
+    sch n (Fix f) = go f >>= ins n
       where
         go = \case
             Obj i ps      -> Obj i <$> Map.traverseWithKey (prop n) ps
@@ -153,6 +149,22 @@ flatten svc = svc { _svcSchemas = execState run mempty }
             Any  i       -> pure (Any  i)
 
         this = mkProp n l
+
+    api :: Resource -> State (Map Id (Schema Id)) ()
+    api = \case
+        Top rs -> mapM_ (uncurry sub)       (Map.toList rs)
+        Sub ms -> mapM_ (uncurry (verb "")) (Map.toList ms)
+      where
+        sub l = \case
+            Top rs -> mapM_ (uncurry sub)      (Map.toList rs)
+            Sub ms -> mapM_ (uncurry (verb l)) (Map.toList ms)
+
+        -- FIXME: Global parameters
+        verb p l m = do
+            let (_, i) = vname p l
+            rs <- Map.traverseWithKey (\k v -> prop i k (paramSchema v)) (_mParameters m)
+            void . ins i $
+                Obj (Info (_mDescription m) Nothing False Nothing) rs
 
     ins :: Id -> Schema Id -> State (Map Id (Schema Id)) Id
     ins n x = do

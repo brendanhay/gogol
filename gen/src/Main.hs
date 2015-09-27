@@ -138,6 +138,7 @@ main = do
             <*> load "types.ede"
             <*> load "prod.ede"
             <*> load "sum.ede"
+            <*> load "action.ede"
             <*  done
 
         title "Selecting new service models..."

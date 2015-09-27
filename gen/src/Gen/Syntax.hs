@@ -40,8 +40,8 @@ apiAlias n ls = TypeDecl noLoc n [] alias
         x:xs -> foldl' (\l r -> TyInfix l (UnQual (sym ":<|>")) r) x xs
 
 -- type Method = :> ...
-verbDecl :: Service s r -> Local -> Local -> Method -> Decl
-verbDecl s p l m = TypeDecl noLoc (vname p l) [] alias
+verbAlias :: Service s r -> Name -> Method -> Decl
+verbAlias s n m = TypeDecl noLoc n [] alias
   where
     alias = foldr' (\l r -> TyInfix l (UnQual (sym ":>")) r) verb (path ++ qry)
 
@@ -154,13 +154,15 @@ seqE :: Exp -> [Exp] -> Exp
 seqE l []     = app (var "pure") l
 seqE l (r:rs) = infixApp l "<$>" (infixE r "<*>" rs)
 
-objDecl :: Id -> Pre -> Map Local Solved -> AST Decl
-objDecl n p rs = DataDecl noLoc arity [] d [] [conDecl d p rs] <$> derivings n
+objDecl :: Id -> Pre -> [Derive] -> Map Local Solved -> Decl
+objDecl n p ds rs = DataDecl noLoc arity [] d [] [conDecl d p rs] (der ds)
   where
     d = dname n
 
     arity | Map.size rs == 1 = NewType
           | otherwise        = DataType
+
+    der = map ((,[]) . unqual . drop 1 . show)
 
 conDecl :: Name -> Pre -> Map Local Solved -> QualConDecl
 conDecl n p rs = QualConDecl noLoc [] [] body
@@ -215,9 +217,6 @@ lensDecl p l s = sfun noLoc (lname p l) [] (UnGuardedRhs rhs) noBinds
         app (app (var "lens") (var f))
             (paren (lamE noLoc [pvar "s", pvar "a"]
                    (RecUpdate (var "s") [FieldUpdate (UnQual f) (var "a")])))
-
-derivings :: Id -> AST [Deriving]
-derivings k = map ((,[]) . unqual . drop 1 . show) <$> derive k
 
 parameters :: [Solved] -> [Type]
 parameters = map (external . _type) . filter (view required)

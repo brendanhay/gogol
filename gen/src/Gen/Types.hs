@@ -36,8 +36,9 @@ import           Data.Aeson                   hiding (Bool, String)
 import           Data.Aeson.TH
 import           Data.Char
 import           Data.Function                (on)
+import qualified Data.HashMap.Strict          as Map
 import qualified Data.HashSet                 as Set
-import           Data.List                    (groupBy)
+import           Data.List                    (groupBy, sort)
 import           Data.List.NonEmpty           (NonEmpty (..))
 import qualified Data.List.NonEmpty           as NE
 import           Data.Maybe
@@ -82,6 +83,7 @@ data Templates = Templates
     , typesTemplate  :: Template
     , prodTemplate   :: Template
     , sumTemplate    :: Template
+    , actionTemplate :: Template
     }
 
 newtype Version (v :: Symbol) = Version Text
@@ -271,6 +273,13 @@ data Param = Param
     , _prmLiteral  :: !Lit
     }
 
+paramSchema :: Param -> Fix Schema
+paramSchema p
+    | _prmRepeated p = Fix $ Arr (_prmInfo p) lit
+    | otherwise      = lit
+  where
+    lit = Fix $ Lit (_prmInfo p) (_prmLiteral p)
+
 instance FromJSON Param where
     parseJSON = withObject "parameter" $ \o -> Param
         <$> o .:  "location"
@@ -327,22 +336,33 @@ instance ToJSON Data where
             , "instances" .= is
             ]
 
-data Action = Action Name (Maybe Help) Rendered
+data Action = Action
+    { _actName  :: Name
+    , _actNS    :: NS
+    , _actHelp  :: Maybe Help
+    , _actAlias :: Rendered
+    , _actData  :: Data
+    }
 
 instance ToJSON Action where
-    toJSON (Action n h d) = object
-        [ "name" .= Syn n
-        , "help" .= h
-        , "decl" .= d
+    toJSON (Action n _ h a d) = object
+        [ "name"  .= Syn n
+        , "help"  .= h
+        , "alias" .= a
+        , "data"  .= d
         ]
 
-data API = API Name Rendered [Action]
+data API = API
+    { _apiName    :: Name
+    , _apiDecl    :: Rendered
+    , _apiActions :: Map Name Action
+    }
 
 instance ToJSON API where
     toJSON (API n d as) = object
          [ "name"    .= Syn n
          , "decl"    .= d
-         , "actions" .= as
+         , "actions" .= Map.elems as
          ]
 
 data Method = Method
@@ -440,10 +460,14 @@ instance ToJSON (Service Data API) where
 svcAbbrev :: Service s r -> Text
 svcAbbrev = upperHead . renameAbbrev . _svcCanonicalName
 
-typeImports, prodImports, sumImports :: Service s r -> [NS]
-typeImports s = ["Network.Google.Prelude", prodNS s, sumNS s]
-prodImports s = ["Network.Google.Prelude", sumNS s]
-sumImports  _ = ["Network.Google.Prelude"]
+svcActions :: Service s API -> [NS]
+svcActions = map _actNS . Map.elems . _apiActions . _svcApi
+
+typeImports, prodImports, sumImports, actionImports :: Service s r -> [NS]
+typeImports s = sort ["Network.Google.Prelude", prodNS s, sumNS s]
+prodImports s = sort ["Network.Google.Prelude", sumNS s]
+sumImports  _ = sort ["Network.Google.Prelude"]
+actionImports = typeImports
 
 tocNS, typesNS, prodNS, sumNS :: Service s r -> NS
 tocNS s = NS $ "Network" : "Google" : Text.split (== '.') (_svcCanonicalName s)
@@ -451,11 +475,14 @@ typesNS = (<> "Types")   . tocNS
 prodNS  = (<> "Product") . typesNS
 sumNS   = (<> "Sum")     . typesNS
 
-exposedModules :: Service s r -> [NS]
-exposedModules s = [tocNS s, typesNS s]
+actionNS :: Service s r -> Local -> Local -> NS
+actionNS s x y = tocNS s <> NS [upperHead (local x), upperHead (local y)]
+
+exposedModules :: Service s API -> [NS]
+exposedModules s = sort (tocNS s : typesNS s : svcActions s)
 
 otherModules :: Service s r -> [NS]
-otherModules s = [prodNS s, sumNS s]
+otherModules s = sort [prodNS s, sumNS s]
 
 data Library = Library
     { _libName     :: Text
