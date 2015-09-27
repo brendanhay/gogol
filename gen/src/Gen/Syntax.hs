@@ -44,11 +44,7 @@ apiAlias n ls = TypeDecl noLoc n [] alias
 verbDecl :: Service s r -> Local -> Local -> Method -> Decl
 verbDecl s p l m = TypeDecl noLoc (vname p l) [] alias
   where
-    alias = case path ++ qry of
-        []   -> unit_tycon
-        x:xs -> foldl' (\l r -> TyInfix l (UnQual (sym ":>")) r) x xs
-
--- Need to deal with interpolation?
+    alias = foldr' (\l r -> TyInfix l (UnQual (sym ":>")) r) verb (path ++ qry)
 
     path :: [Type]
     path = map match
@@ -86,6 +82,99 @@ verbDecl s p l m = TypeDecl noLoc (vname p l) [] alias
         meth = TyCon . unqual . Text.unpack $ Text.toTitle (_mMethod m)
         typ  = tycon "'[JSON]"
         res  = maybe (tycon "()") (tycon . Free) (_mResponse m)
+
+jsonDecls :: Id -> Pre -> Map Local Solved -> [Decl]
+jsonDecls n p rs = [from, to]
+  where
+    from = InstDecl noLoc Nothing [] [] (unqual "FromJSON") [tycon n]
+        [ funD "parseJSON" $
+            app (app (var "withObject") (str (idToText n))) $
+                lamE noLoc [pvar "o"] $
+                    ctorE n (map decode (Map.toList rs))
+        ]
+
+    decode (l, s)
+        | Just x <- def s = defJS l x
+        | s ^. required   = reqJS l
+        | monoid s        = defJS l (var "mempty")
+        | otherwise       = optJS l
+
+    to = InstDecl noLoc Nothing [] [] (unqual "ToJSON") [tycon n]
+        [ wildcardD "toJSON" n omit none (map encode (Map.toList rs))
+        ]
+
+    omit = app (var "object")
+         . app (var "catMaybes")
+         . listE
+
+    none = paren $ app (var "Object") (var "mempty")
+
+    encode (l, s)
+        | TMaybe {} <- _type s = infixApp (paren (app n o)) "<$>" a
+        | otherwise            = app (var "Just") (infixApp n ".=" a)
+      where
+        n = str (local l)
+        a = var (fname p l)
+        o = var ".="
+
+wildcardD :: String
+          -> Id
+          -> ([Exp] -> Exp)
+          -> Exp
+          -> [Exp]
+          -> InstDecl
+wildcardD f n enc x = \case
+    [] -> constD f x
+    xs -> InsDecl (FunBind [match prec xs])
+  where
+    match p es =
+        Match noLoc (name f) [p] Nothing (UnGuardedRhs (enc es)) noBinds
+
+    prec = PRec (UnQual (dname n)) [PFieldWildcard]
+
+defJS :: Local -> Exp -> Exp
+defJS n x = infixApp (infixApp (var "o") ".:?" (str (local n))) ".!=" x
+
+reqJS :: Local -> Exp
+reqJS = infixApp (var "o") ".:" . str . local
+
+optJS :: Local -> Exp
+optJS = infixApp (var "o") ".:?" . str . local
+
+funD :: String -> Exp -> InstDecl
+funD f = InsDecl . patBind noLoc (pvar (name f))
+
+constD :: String -> Exp -> InstDecl
+constD f x = InsDecl $
+    sfun noLoc (name f) [] (UnGuardedRhs (app (var "const") x)) noBinds
+
+ctorE :: Id -> [Exp] -> Exp
+ctorE n = seqE (var (dname n)) . map paren
+
+seqE :: Exp -> [Exp] -> Exp
+seqE l []     = app (var "pure") l
+seqE l (r:rs) = infixApp l "<$>" (infixE r "<*>" rs)
+
+-- toJSOND :: Protocol -> Id -> [Field] -> Decl
+-- toJSOND p n = instD1 "ToJSON" n
+--     . wildcardD n "toJSON" enc (paren $ app (var "Object") memptyE)
+--     . map (Right . toJSONE p)
+--   where
+--     enc = app (var "object")
+--         . app (var "catMaybes")
+--         . listE
+--         . map (either id id)
+
+-- instD1 :: Text -> Id -> InstDecl -> Decl
+-- instD1 c n = instD c n . (:[])
+
+-- instD :: Text -> Id -> [InstDecl] -> Decl
+-- instD c n = InstDecl noLoc Nothing [] [] (unqual c) [tycon (typeId n)]
+
+-- memptyE :: Exp
+-- memptyE = var "mempty"
+
+
 
 objDecl :: Id -> Pre -> Map Local Solved -> AST Decl
 objDecl n p rs = DataDecl noLoc arity [] d [] [conDecl d p rs] <$> derivings n
@@ -126,22 +215,12 @@ ctorDecl n p rs = sfun noLoc c ps (UnGuardedRhs rhs) noBinds
 fieldUpdate :: Pre -> Local -> Solved -> FieldUpdate
 fieldUpdate p l s = FieldUpdate (UnQual (fname p l)) rhs
   where
-    rhs | s ^. required            = v
-        | Just x <- s ^. defaulted = def x (_schema s)
-        | Just x <- iso (_type s)  = infixApp x "#" v
-        | otherwise                = var (name "Nothing")
+    rhs | s ^. required           = v
+        | Just x <- def s         = x
+        | Just x <- iso (_type s) = infixApp x "#" v
+        | otherwise               = var (name "Nothing")
 
     v = var (pname p l)
-
-    def x = \case
-        Enum {}     -> var (bname (_prefix s) x)
-        Lit  _ Bool -> lit (upperHead x)
-        Lit  _ Text -> str x
-        Lit  _ _    -> lit x
-        --- FIXME: lift to AST
-        s           -> error $ "Unmatched fieldUpdate:\n" ++ show s
-
-    lit = var . name . Text.unpack
 
 lensSig :: Id -> Pre -> Local -> Solved -> Decl
 lensSig n p l s = TypeSig noLoc [lname p l] $
@@ -164,6 +243,19 @@ derivings k = map ((,[]) . unqual . drop 1 . show) <$> derive k
 
 parameters :: [Solved] -> [Type]
 parameters = map (external . _type) . filter (view required)
+
+def :: Solved -> Maybe Exp
+def s
+    | Just x <- s ^. defaulted = Just (go x (_prefix s) (_schema s))
+    | otherwise                = Nothing
+  where
+    go x p = \case
+        Enum {}     -> var (bname p x)
+        Lit  _ Bool -> lit (upperHead x)
+        Lit  _ Text -> str x
+        Lit  {}     -> lit x
+
+    lit = var . name . Text.unpack
 
 external, internal :: TType -> Type
 external = internal . \case

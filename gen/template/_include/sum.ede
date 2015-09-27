@@ -26,3 +26,9 @@ instance ToText {{ type.name }} where
   {% for branch in type.branches %}
         {{ branch.value.name }} -> "{{ branch.value.value }}"
   {% endfor %}
+
+instance FromJSON {{ type.name }} where
+    parseJSON = parseJSONText "{{ type.name }}"
+
+instance ToJSON {{ type.name }} where
+    toJSON = toJSONText

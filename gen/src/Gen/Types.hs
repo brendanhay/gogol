@@ -306,7 +306,7 @@ instance ToJSON Branch where
 
 data Data
     = Sum  Name (Maybe Help) [Branch]
-    | Prod Name (Maybe Help) Rendered Fun [Fun]
+    | Prod Name (Maybe Help) Rendered Fun [Fun] [Rendered]
 
 instance ToJSON Data where
     toJSON = \case
@@ -317,13 +317,14 @@ instance ToJSON Data where
             , "branches" .= bs
             ]
 
-        Prod n h d c ls -> object
-            [ "name"   .= Syn n
-            , "type"   .= "prod"
-            , "decl"   .= d
-            , "help"   .= h
-            , "ctor"   .= c
-            , "lenses" .= ls
+        Prod n h d c ls is -> object
+            [ "name"      .= Syn n
+            , "type"      .= "prod"
+            , "decl"      .= d
+            , "help"      .= h
+            , "ctor"      .= c
+            , "lenses"    .= ls
+            , "instances" .= is
             ]
 
 data Action = Action Name (Maybe Help) Rendered

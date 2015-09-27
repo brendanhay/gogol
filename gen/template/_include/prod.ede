@@ -26,3 +26,7 @@
 {{ lens.value.sig }}
 {{ lens.value.decl }}
 {% endfor %}
+{% for class in type.instances %}
+
+{{ class.value }}
+{% endfor %}

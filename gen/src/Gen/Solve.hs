@@ -77,6 +77,9 @@ instance HasInfo Solved where
       where
         f = lens _schema (\s a -> s { _schema = a })
 
+monoid :: Solved -> Bool
+monoid = elem DMonoid . _deriving
+
 type Seen = Map (CI Text) (Set (CI Text))
 
 data Memo = Memo
