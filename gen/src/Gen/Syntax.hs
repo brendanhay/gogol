@@ -1,8 +1,7 @@
 {-# LANGUAGE LambdaCase        #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TupleSections     #-}
-
-{-# OPTIONS_GHC -fno-warn-orphans #-}
+{-# LANGUAGE ViewPatterns      #-}
 
 -- Module      : Gen.Syntax
 -- Copyright   : (c) 2015 Brendan Hay

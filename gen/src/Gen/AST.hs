@@ -74,7 +74,7 @@ render svc = do
                 <$> (objDecl k p ts >>= pp Indent)
                 <*> ctor p ts
                 <*> traverse (lens p) (Map.toList ts)
-                <*> traverse (pp Indent) (jsonDecls k p ts)
+                <*> traverse (pp Print) (jsonDecls k p ts)
 
             ctor p ts = Fun' (cname k) (Just help)
                 <$> (pp None   (ctorSig  k   ts) <&> comments ts)
