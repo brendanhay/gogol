@@ -185,8 +185,9 @@ flatten svc = do
         ms <- uses schemas (Map.lookup n)
         case ms of
             Just y | x /= y -> throwError $
-                format ("Schema exists: " % shown % "\nTried inserting: " % shown)
-                       y x
+                format ("Schema exists: " % fid %
+                       "\nCurrent: " % shown % "\nTried: " % shown)
+                        n y x
             _ -> schemas %= Map.insert n x
 
         return n

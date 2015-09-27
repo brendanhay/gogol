@@ -14,7 +14,7 @@ module Gen.Syntax where
 
 import           Control.Lens                 hiding (iso, mapping, op, pre,
                                                strict)
-import           Data.Foldable                (foldl', foldr')
+import           Data.Foldable                (find, foldl', foldr')
 import           Data.Hashable
 import qualified Data.HashMap.Strict          as Map
 import           Data.Maybe
@@ -46,34 +46,35 @@ verbAlias s n m = TypeDecl noLoc n [] alias
     alias = foldr' (\l r -> TyInfix l (UnQual (sym ":>")) r) verb (path ++ qry)
 
     path :: [Type]
-    path = [] -- map match
-      --    . filter (not . Text.null)
-      --    $ Text.split (== '/') (_svcServicePath s)
-      --   <> Text.split (== '/') (_mPath m)
-      -- where
-      --   match x
-      --       | Just (c, t) <- Text.uncons x
-      --       , c == '{'
-      --       , Just k <- Map.lookup (Local (Text.init t)) params
-      --       , _prmLocation k == Path
-      --                   = TyApp (TyApp (tycon "Capture")
-      --                                  (sing (Text.init t)))
-      --                           (literal (_prmLiteral k))
-      --       | otherwise = sing x
+    path = map match
+         . filter (not . Text.null)
+         $ Text.split (== '/') (_svcServicePath s)
+        <> Text.split (== '/') (_mPath m)
+      where
+        -- FIXME: should error if '{' '}' is found and cannot find the ref.
+        match x
+            | Just (c, t) <- Text.uncons x
+            , c == '{'
+            , Just k <- Map.lookup (Local (Text.init t)) params
+            , _prmLocation k == Path
+                        = TyApp (TyApp (tycon "Capture")
+                                       (sing (Text.init t)))
+                                (external (_type (_prmSchema k)))
+            | otherwise = sing x
 
     -- FIXME: order by _mParameterOrder
     qry :: [Type]
-    qry = [] -- mapMaybe f (Map.toList params)
-      -- where
-      --   f (k, p) =
-      --      -- FIXME: types, many/repeated
-      --      let t = literal (_prmLiteral p)
-      --          n = sing (local k)
-      --       in case _prmLocation p of
-      --           Query -> Just $ TyApp (TyApp (tycon "QueryParam") n) t
-      --           Path  -> Nothing
+    qry = mapMaybe f (Map.toList params)
+      where
+        f (k, x) =
+           -- FIXME: types, many/repeated
+           let t = external (_type (_prmSchema x))
+               n = sing (local k)
+            in case _prmLocation x of
+                Query -> Just $ TyApp (TyApp (tycon "QueryParam") n) t
+                Path  -> Nothing
 
---    params = _svcParameters s <> _mParameters m
+    params = _mParameters m
 
     verb :: Type
     verb = TyApp (TyApp meth typ) res
