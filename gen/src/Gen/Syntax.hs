@@ -84,13 +84,13 @@ verbDecl s p l m = TypeDecl noLoc (vname p l) [] alias
         res  = maybe (tycon "()") (tycon . Free) (_mResponse m)
 
 jsonDecls :: Id -> Pre -> Map Local Solved -> [Decl]
-jsonDecls n p rs = [from, to]
+jsonDecls n p (Map.toList -> rs) = [from, to]
   where
     from = InstDecl noLoc Nothing [] [] (unqual "FromJSON") [tycon n]
         [ funD "parseJSON" $
             app (app (var "withObject") (str (idToText n))) $
                 lamE noLoc [pvar "o"] $
-                    ctorE n (map decode (Map.toList rs))
+                    ctorE n (map decode rs)
         ]
 
     decode (l, s)
@@ -100,7 +100,7 @@ jsonDecls n p rs = [from, to]
         | otherwise       = optJS l
 
     to = InstDecl noLoc Nothing [] [] (unqual "ToJSON") [tycon n]
-        [ wildcardD "toJSON" n omit none (map encode (Map.toList rs))
+        [ wildcardD "toJSON" n omit none (map encode rs)
         ]
 
     omit = app (var "object")
@@ -154,27 +154,6 @@ ctorE n = seqE (var (dname n)) . map paren
 seqE :: Exp -> [Exp] -> Exp
 seqE l []     = app (var "pure") l
 seqE l (r:rs) = infixApp l "<$>" (infixE r "<*>" rs)
-
--- toJSOND :: Protocol -> Id -> [Field] -> Decl
--- toJSOND p n = instD1 "ToJSON" n
---     . wildcardD n "toJSON" enc (paren $ app (var "Object") memptyE)
---     . map (Right . toJSONE p)
---   where
---     enc = app (var "object")
---         . app (var "catMaybes")
---         . listE
---         . map (either id id)
-
--- instD1 :: Text -> Id -> InstDecl -> Decl
--- instD1 c n = instD c n . (:[])
-
--- instD :: Text -> Id -> [InstDecl] -> Decl
--- instD c n = InstDecl noLoc Nothing [] [] (unqual c) [tycon (typeId n)]
-
--- memptyE :: Exp
--- memptyE = var "mempty"
-
-
 
 objDecl :: Id -> Pre -> Map Local Solved -> AST Decl
 objDecl n p rs = DataDecl noLoc arity [] d [] [conDecl d p rs] <$> derivings n
