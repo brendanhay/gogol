@@ -41,15 +41,15 @@ library
     other-modules:
 
     build-depends:
-          aeson
-        , base                 >= 4.7 && < 5
-        , hashable
-        , lens
-        , servant
+          aeson      >= 0.8
+        , base       >= 4.7 && < 5
+        , hashable   >= 1.2
+        , lens       >= 4.4
+        , servant    >= 0.4.4
         , servant-client
-        , text
+        , text       >= 1.1
         , either
-        , scientific
+        , scientific >= 0.3
 
     if !impl(ghc>=7.9)
         build-depends:
