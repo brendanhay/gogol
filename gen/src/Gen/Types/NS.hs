@@ -18,6 +18,7 @@ import           Data.String
 import           Data.Text                 (Text)
 import qualified Data.Text                 as Text
 import qualified Filesystem.Path.CurrentOS as Path
+import           Gen.Text
 
 newtype NS = NS [Text]
     deriving (Eq, Ord, Show)

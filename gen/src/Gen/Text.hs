@@ -191,6 +191,7 @@ upperAcronym x = Fold.foldl' (flip (uncurry RE.replaceAll)) x xs
          , ("Lt$",           "LT")
          , ("Gt$",           "GT")
          , ("Nat",           "NAT")
+         , ("Youtube",       "YouTube")
          ]
 
 acronyms :: [(String, String)]

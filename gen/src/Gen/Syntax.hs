@@ -31,6 +31,14 @@ import           Language.Haskell.Exts.Build
 import           Language.Haskell.Exts.SrcLoc
 import           Language.Haskell.Exts.Syntax hiding (Int, Lit)
 
+urlSig :: Name -> Decl
+urlSig n = TypeSig noLoc [n] (tycon "BaseUrl")
+
+urlDecl :: Name -> String -> Text -> Integer -> Decl
+urlDecl n s u p = sfun noLoc n [] (UnGuardedRhs rhs) noBinds
+  where
+    rhs = appFun (var "BaseUrl") [var (name s), str u, intE p]
+
  -- type API = :<|> ...
 apiAlias :: Name -> [Name] -> Decl
 apiAlias n ls = TypeDecl noLoc n [] alias
@@ -40,8 +48,8 @@ apiAlias n ls = TypeDecl noLoc n [] alias
         x:xs -> foldl' (\l r -> TyInfix l (UnQual (sym ":<|>")) r) x xs
 
 -- type Method = :> ...
-verbAlias :: Typed -> Name -> Method Solved -> Decl
-verbAlias s n m = TypeDecl noLoc n [] alias
+verbAlias :: Name -> Method Solved -> Decl
+verbAlias n m = TypeDecl noLoc n [] alias
   where
     alias = foldr' (\l r -> TyInfix l (UnQual (sym ":>")) r) verb (path ++ qry)
 
@@ -51,8 +59,7 @@ verbAlias s n m = TypeDecl noLoc n [] alias
     path :: [Type]
     path = map match
          . filter (not . Text.null)
-         $ Text.split (== '/') (_svcServicePath s)
-        <> Text.split (== '/') (_mPath m)
+         $ Text.split (== '/') (_mPath m)
       where
         -- FIXME: should error if '{' '}' is found and cannot find the ref.
         match x
@@ -87,8 +94,8 @@ verbAlias s n m = TypeDecl noLoc n [] alias
         typ  = tycon "'[JSON]"
         res  = maybe (tycon "()") (tycon . Free) (_mResponse m)
 
-requestDecl :: Id -> Pre -> [Local] -> Maybe Id -> Decl
-requestDecl n p fs r =
+requestDecl :: Id -> Pre -> Name -> Name -> [Local] -> Maybe Id -> Decl
+requestDecl n p api url fs rq =
     -- FIXME: associated Rs type
     InstDecl noLoc Nothing [] [] (unqual "GoogleRequest") [tycon n]
         [ response
@@ -97,23 +104,28 @@ requestDecl n p fs r =
         ]
   where
     response = InsType noLoc (TyApp (tycon "Rs") (tycon n)) $
-        maybe unit_tycon tycon r
+        maybe unit_tycon tycon rq
 
     request = funD "request" $
-        appFun (var "requestWithRoute") [var "defReq", var "serviceURL"]
+        appFun (var "requestWithRoute") [var "defReq", var url]
 
-    requestWithRoute =
-        InsDecl (FunBind [match "requestWithRoute" e])
+    requestWithRoute = InsDecl (FunBind [match])
       where
-        e = appFun (var "clientWithRoute") $
-            [ ExpTypeSig noLoc (var "Proxy") (TyApp (tycon "Proxy") (tycon n))
-            , var "r"
-            , var "u"
-            ] ++ map (var . fname p) fs
+        match = Match noLoc (name "requestWithRoute") pats Nothing rhs decls
 
-    match f e = Match noLoc (name f) pats Nothing (UnGuardedRhs e) noBinds
+        decls = BDecls
+            [ patBind noLoc (pvar "go") $
+                appFun (var "clientWithRoute") $
+                    [ ExpTypeSig noLoc (var "Proxy") $
+                        TyApp (tycon "Proxy") (TyCon (UnQual api))
+                    , var "r"
+                    , var "u"
+                    ]
+            ]
 
-    pats = [prec, pvar "r", pvar "u"]
+        rhs = UnGuardedRhs . appFun (var "go") $ map (var . fname p) fs
+
+    pats = [pvar "r", pvar "u", prec]
     prec = PRec (UnQual (dname n)) [PFieldWildcard]
 
 jsonDecls :: Id -> Pre -> Map Local Solved -> [Decl]

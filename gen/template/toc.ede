@@ -12,8 +12,11 @@
 module {{ moduleName }}
     (
     -- * REST Resources
+
+    -- ** {{ title }}
       {{ api.name }}
     , {{ api.name | lowerHead }}
+    , {{ api.url.name }}
   {% for action in api.actions %}
 
     -- ** {{ action.value.prettyName }}
@@ -39,7 +42,9 @@ module {{ moduleName }}
   {% endfor %}
     ) where
 
-import Network.Google.Prelude
+{% for import in moduleImports %}
+import {{ import.value }}
+{% endfor %}
 {% for module in exposedModules %}
   {% if module.value != moduleName %}
 import {{ module.value }}

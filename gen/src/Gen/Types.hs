@@ -373,6 +373,11 @@ instance ToJSON Data where
             , "instances" .= is
             ]
 
+dataName :: Data -> Name
+dataName = \case
+    Sum  n _ _       -> n
+    Prod n _ _ _ _ _ -> n
+
 data Action = Action
     { _actName       :: Name
     , _actPrettyName :: Text
@@ -381,6 +386,9 @@ data Action = Action
     , _actAlias      :: Rendered
     , _actData       :: Data
     }
+
+actionTypeName :: Action -> Name
+actionTypeName = dataName . _actData
 
 instance ToJSON Action where
     toJSON Action {..} = object
@@ -396,6 +404,7 @@ data API = API
     { _apiName    :: Name
     , _apiDecl    :: Rendered
     , _apiActions :: Map Name Action
+    , _apiURL     :: Fun
     }
 
 instance ToJSON API where
@@ -403,6 +412,7 @@ instance ToJSON API where
          [ "name"    .= Syn _apiName
          , "decl"    .= _apiDecl
          , "actions" .= sortOn _actName (Map.elems _apiActions)
+         , "url"     .= _apiURL
          ]
 
 data Method a = Method
@@ -504,17 +514,18 @@ type Flattened = Service [Id]     [Param Id]     (Resource Id)
 type Typed     = Service [Solved] [Param Solved] (Resource Solved)
 type Printed   = Service [Data]   ()             API
 
-svcAbbrev :: Service s p r -> Text
+svcAbbrev, svcURL :: Service s p r -> Text
 svcAbbrev = upperHead . renameAbbrev . _svcCanonicalName
+svcURL    = (<> "URL") . lowerHead . svcAbbrev
 
 svcActions :: Service s p API -> [Action]
 svcActions = Map.elems . _apiActions . _svcApi
 
 typeImports, prodImports, sumImports, actionImports :: Service s p r -> [NS]
-typeImports s = sort ["Network.Google.Prelude", prodNS s, sumNS s]
-prodImports s = sort ["Network.Google.Prelude", sumNS s]
-sumImports  _ = sort ["Network.Google.Prelude"]
-actionImports = typeImports
+typeImports   s = sort ["Network.Google.Prelude", prodNS s, sumNS s]
+prodImports   s = sort ["Network.Google.Prelude", sumNS s]
+sumImports    _ = sort ["Network.Google.Prelude"]
+actionImports s = sort ["Network.Google.Prelude", typesNS s]
 
 tocNS, typesNS, prodNS, sumNS :: Service s p r -> NS
 tocNS s = NS $ "Network" : "Google" : Text.split (== '.') (_svcCanonicalName s)
@@ -522,8 +533,8 @@ typesNS = (<> "Types")   . tocNS
 prodNS  = (<> "Product") . typesNS
 sumNS   = (<> "Sum")     . typesNS
 
-actionNS :: Service s p r -> Local -> Local -> NS
-actionNS s x y = tocNS s <> NS [upperHead (local x), upperHead (local y)]
+actionNS :: [Text] -> NS
+actionNS = mappend (NS ["Network", "Google", "API"]) . NS
 
 exposedModules :: Service s p API -> [NS]
 exposedModules s = sort (tocNS s : typesNS s : map _actNS (svcActions s))

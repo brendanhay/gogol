@@ -52,7 +52,12 @@ render :: Typed -> AST Printed
 render svc = do
     x <- traverse typ (_svcSchemas svc)
     y <- api (_svcApi svc)
-    return $! svc { _svcSchemas = catMaybes x, _svcParameters = (), _svcApi = y }
+
+    let as  = map actionTypeName (Map.elems (_apiActions y))
+        f d = elem (dataName d) as
+        z   = filter (not . f) (catMaybes x)
+
+    return $! svc { _svcSchemas = z, _svcParameters = (), _svcApi = y }
   where
     typ :: Solved -> AST (Maybe Data)
     typ Solved{..} = case _schema of
@@ -94,31 +99,46 @@ render svc = do
         as <- Map.fromList <$> top x
         API n <$> pp Print (apiAlias n (Map.keys as))
               <*> pure as
+              <*> url
       where
-        n = name (Text.unpack (svcAbbrev svc))
+        n  = name (Text.unpack (svcAbbrev svc))
+        un = name (Text.unpack (svcURL    svc))
+
+        url = Fun' un (Just (rawHelpText h))
+            <$> pp None (urlSig un)
+            <*> pp Print url
+          where
+            url | "http://" `Text.isPrefixOf` u = urlDecl un "Http"  u 80
+                | otherwise                     = urlDecl un "Https" u 443
+
+            u = _svcBaseUrl svc
+
+            h = sformat ("URL referring to version @" % stext %
+                         "@ of the " % stext % ".")
+                         (_svcVersion svc) (_svcTitle svc)
 
         top = \case
-           Top rs -> traverse (uncurry sub)       (Map.toList rs) <&> concat
-           Sub ms -> traverse (uncurry (verb "")) (Map.toList ms)
+           Top rs -> traverse (uncurry sub)  (Map.toList rs) <&> concat
+           Sub ms -> traverse (uncurry verb) (Map.toList ms)
 
         sub l = \case
-            Top rs -> traverse (uncurry  sub)     (Map.toList rs) <&> concat
-            Sub ms -> traverse (uncurry (verb l)) (Map.toList ms)
+            Top rs -> traverse (uncurry sub)  (Map.toList rs) <&> concat
+            Sub ms -> traverse (uncurry verb) (Map.toList ms)
 
-        verb p l m = do
-            let (k, i) = vname p l
+        verb l m = do
+            let (k, i, ns) = vname (_mId m)
             s      <- solve i
             Just d <- typ s
             fmap (k,) $
-                Action k (apretty p l) (actionNS svc p l) (_mDescription m)
-                    <$> pp Print (verbAlias svc k m)
-                    <*> reset m s d
+                Action k (_mId m) (actionNS ns) (_mDescription m)
+                    <$> pp Print (verbAlias k m)
+                    <*> reset k m s d
 
-        reset m s = \case
+        reset k m s = \case
             d@Sum {}           -> pure d
             Prod n' h r c ls _ ->
                 Prod n' h r c ls . (:[]) <$> pp Print
-                    (requestDecl (_ident s) (_prefix s) (fields (_schema s))
+                    (requestDecl (_ident s) (_prefix s) k un (fields (_schema s))
                          (fmap Free (_mResponse m)))
 
         fields  = \case
@@ -181,7 +201,7 @@ flatten svc = do
             Sub ms -> Sub <$> Map.traverseWithKey (verb l) ms
 
         verb p l m = do
-            let (_, i) = vname p l
+            let (_, i, _) = vname (_mId m)
             rs <- Map.traverseWithKey (prm i) (_mParameters m)
             _  <- ins i $
                 Obj (Info (_mDescription m) Nothing False Nothing) (Map.map _prmSchema (rs <> qs))
@@ -192,9 +212,9 @@ flatten svc = do
         ms <- uses schemas (Map.lookup n)
         case ms of
             Just y | x /= y -> throwError $
-                format ("Schema exists: " % fid %
+                format ("Schema exists: " % stext % " - " % fid %
                        "\nCurrent: " % shown % "\nTried: " % shown)
-                        n y x
+                        (_svcCanonicalName svc) n y x
             _ -> schemas %= Map.insert n x
 
         return n

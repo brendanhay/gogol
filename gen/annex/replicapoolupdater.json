@@ -1,5 +1,5 @@
 {
-    "library": "compute-instancegroups-updater",
-    "canonicalName": "Compute.InstanceGroups.Updater"
+    "library": "instancegroups-updater",
+    "canonicalName": "InstanceGroups.Updater"
 }
 

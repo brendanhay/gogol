@@ -1,5 +1,5 @@
 {
-    "library": "compute-instancegroups",
-    "canonicalName": "Compute.InstanceGroups"
+    "library": "instancegroups",
+    "canonicalName": "InstanceGroups"
 }
 

@@ -42,12 +42,12 @@ import           Language.Haskell.Exts.Build
 import           Language.Haskell.Exts.Pretty (prettyPrint)
 import           Language.Haskell.Exts.Syntax (Name)
 
-vname :: Local -> Local -> (Name, Id)
-vname p l = (dname (g (n <> "'")), g n)
+vname :: Text -> (Name, Id, [Text])
+vname n = (dname (g (x <> "API")), g x, ns)
   where
-    g = Free . Global
-    n = f p <> f l
-    f = upperHead . local
+    g  = Free . Global
+    x  = mconcat (drop 1 ns)
+    ns = map (upperAcronym . upperHead) $ Text.split (== '.') n
 
 dname, cname :: Id -> Name
 dname = name . Text.unpack . upperHead . idToText

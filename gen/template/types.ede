@@ -8,12 +8,14 @@
 --
 module {{ moduleName }}
     (
+    -- * Service URL
+      {{ api.url.name }}
   {% for schema in schemas %}
     {% case schema.value.type %}
     {% when "prod" %}
 
     -- * {{ schema.value.name }}
-    {% if schema.first %} {% else %},{% endif %} {{ schema.value.name }}
+    , {{ schema.value.name }}
     , {{ schema.value.ctor.name }}
       {% for lens in schema.value.lenses %}
     , {{ lens.value.name }}
@@ -29,3 +31,9 @@ module {{ moduleName }}
 {% for import in moduleImports %}
 import {{ import.value }}
 {% endfor %}
+
+{% if api.url.help %}
+{{ api.url.help }}
+{% endif %}
+{{ api.url.sig }}
+{{ api.url.decl }}
