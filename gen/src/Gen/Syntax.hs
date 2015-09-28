@@ -18,6 +18,7 @@ import           Data.Foldable                (find, foldl', foldr')
 import           Data.Hashable
 import qualified Data.HashMap.Strict          as Map
 import           Data.Maybe
+import           Data.Maybe
 import           Data.Semigroup               ((<>))
 import           Data.String
 import           Data.Text                    (Text)
@@ -94,8 +95,8 @@ verbAlias n m = TypeDecl noLoc n [] alias
         typ  = tycon "'[JSON]"
         res  = maybe (tycon "()") (tycon . Free) (_mResponse m)
 
-requestDecl :: Id -> Pre -> Name -> Name -> [Local] -> Maybe Id -> Decl
-requestDecl n p api url fs rq =
+requestDecl :: Id -> Pre -> Name -> Name -> [Local] -> Method a -> Decl
+requestDecl n p api url fs m =
     -- FIXME: associated Rs type
     InstDecl noLoc Nothing [] [] (unqual "GoogleRequest") [tycon n]
         [ response
@@ -104,7 +105,7 @@ requestDecl n p api url fs rq =
         ]
   where
     response = InsType noLoc (TyApp (tycon "Rs") (tycon n)) $
-        maybe unit_tycon tycon rq
+        maybe unit_tycon tycon (Free <$> _mResponse m)
 
     request = funD "request" $
         appFun (var "requestWithRoute") [var "defReq", var url]
@@ -123,7 +124,16 @@ requestDecl n p api url fs rq =
                     ]
             ]
 
-        rhs = UnGuardedRhs . appFun (var "go") $ map (var . fname p) fs
+        rhs = UnGuardedRhs $ appFun (var "go") (map go fs)
+          where
+            go l | Just p <- Map.lookup l ps
+                 , _prmLocation p == Query
+                 , parameter p || isJust (p ^. defaulted)
+                             = app (var "Just") (v l)
+                 | otherwise = v l
+
+            ps = _mParameters m
+            v  = var . fname p
 
     pats = [pvar "r", pvar "u", prec]
     prec = PRec (UnQual (dname n)) [PFieldWildcard]

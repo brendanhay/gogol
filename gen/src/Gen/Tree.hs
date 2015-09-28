@@ -81,7 +81,7 @@ populate d Templates{..} l = (encodeString d :/) . dir lib <$> layout
         ]
 
     service s =
-        [ mod' (tocNS   s) mempty tocTemplate (pure svc)
+        [ mod' (tocNS   s) (tocImports  s) tocTemplate (pure svc)
         , mod' (typesNS s) (typeImports s) typesTemplate (pure svc)
         , mod' (prodNS  s) (prodImports s) prodTemplate  (pure svc)
         , mod' (sumNS   s) (sumImports  s) sumTemplate   (pure svc)

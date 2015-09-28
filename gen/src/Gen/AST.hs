@@ -44,9 +44,12 @@ import           Language.Haskell.Exts.Pretty
 import           Prelude                      hiding (sum)
 
 runAST :: Parsed -> Either Error Printed
-runAST svc = evalState (runExceptT (go svc)) initial
+runAST svc = evalState (runExceptT go) initial
   where
-    go = flatten >=> solveAll >=> render
+    go = do
+       x <- flatten svc
+       reserve x
+       solveAll x >>= render
 
 render :: Typed -> AST Printed
 render svc = do
@@ -55,7 +58,7 @@ render svc = do
 
     let as  = map actionTypeName (Map.elems (_apiActions y))
         f d = elem (dataName d) as
-        z   = filter (not . f) (catMaybes x)
+        z   = trace (show as) $ filter (not . f) (catMaybes x)
 
     return $! svc { _svcSchemas = z, _svcParameters = (), _svcApi = y }
   where
@@ -66,7 +69,8 @@ render svc = do
         Any  {}      -> pure Nothing
         Lit  {}      -> pure Nothing
         Enum i vs ds -> pure . Just $
-            Sum (dname _ident) (i ^. description) (zipWith branch vs (ds ++ repeat ""))
+            Sum (dname _ident) (i ^. description) $
+                zipWith branch vs (ds ++ repeat mempty)
           where
             branch v = Branch (bname _prefix v) v
 
@@ -138,8 +142,7 @@ render svc = do
             d@Sum {}           -> pure d
             Prod n' h r c ls _ ->
                 Prod n' h r c ls . (:[]) <$> pp Print
-                    (requestDecl (_ident s) (_prefix s) k un (fields (_schema s))
-                         (fmap Free (_mResponse m)))
+                    (requestDecl (_ident s) (_prefix s) k un (fields (_schema s)) m)
 
         fields  = \case
             Obj _ rs -> Map.keys rs

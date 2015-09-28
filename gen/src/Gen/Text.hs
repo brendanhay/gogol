@@ -118,6 +118,9 @@ renameReserved x
         , "get"
         , "group"
         , "error"
+        , "True"
+        , "False"
+        , "Error"
         ] ++ map Text.pack (reservedNames haskellDef)
 
 camelAcronym :: Text -> Text
@@ -192,6 +195,7 @@ upperAcronym x = Fold.foldl' (flip (uncurry RE.replaceAll)) x xs
          , ("Gt$",           "GT")
          , ("Nat",           "NAT")
          , ("Youtube",       "YouTube")
+         , ("Cnc",           "CNC")
          ]
 
 acronyms :: [(String, String)]

@@ -60,6 +60,11 @@ makeLenses ''Memo
 
 type AST = ExceptT Error (State Memo)
 
+reserve :: Flattened -> AST ()
+reserve svc = do
+    let bs = Set.fromList $ map (CI.mk . idToText) (_svcSchemas svc)
+    branches %= Map.insert mempty bs
+
 schema :: Id -> AST (Schema Id)
 schema k = do
     m <- uses schemas (Map.lookup k)
@@ -128,7 +133,7 @@ prefix n = loc "prefix" n $ memo prefixed n typ
         _           -> pure mempty
 
     branch vs = do
-        p <- uniq branches (acronymPrefixes n) $
+        p <- uniq branches ("" : acronymPrefixes n) $
             Set.fromList (map CI.mk vs)
         pure (Pre p)
 

@@ -225,7 +225,7 @@ deriveToJSON (js "") ''Lit
 data Schema a
     = Obj  Info (Map Local a)
     | Arr  Info a
-    | Enum Info [Text] [Text]
+    | Enum Info [Text] [Help]
     | Lit  Info Lit
     | Ref  Info Global
     | Any  Info -- String or Number
@@ -287,6 +287,9 @@ instance FromJSON a => FromJSON (Param a) where
         <*> parseJSON (Object o)
         <*> parseJSON (Object o)
 
+instance HasInfo (Param a) where
+    info = lens _prmInfo (\s a -> s { _prmInfo = a })
+
 data TType
     = TType   Id
     | TLit    Lit
@@ -341,13 +344,13 @@ instance ToJSON Fun where
         , "decl" .= d
         ]
 
-data Branch = Branch Name Text Text
+data Branch = Branch Name Text Help
 
 instance ToJSON Branch where
     toJSON (Branch n v h) = object
         [ "name"  .= Syn n
         , "value" .= v
-        , "help"  .= h
+        , "help"  .= Below 6 h
         ]
 
 data Data
@@ -521,7 +524,9 @@ svcURL    = (<> "URL") . lowerHead . svcAbbrev
 svcActions :: Service s p API -> [Action]
 svcActions = Map.elems . _apiActions . _svcApi
 
-typeImports, prodImports, sumImports, actionImports :: Service s p r -> [NS]
+tocImports, typeImports, prodImports, sumImports, actionImports
+ :: Service s p r -> [NS]
+tocImports    _ = ["Network.Google.Prelude"]
 typeImports   s = sort ["Network.Google.Prelude", prodNS s, sumNS s]
 prodImports   s = sort ["Network.Google.Prelude", sumNS s]
 sumImports    _ = sort ["Network.Google.Prelude"]

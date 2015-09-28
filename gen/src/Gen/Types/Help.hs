@@ -11,6 +11,7 @@
 module Gen.Types.Help
     ( Help
     , Desc (..)
+    , Below (..)
     , rawHelpText
     ) where
 
@@ -71,6 +72,11 @@ data Desc = Desc !Int Help
 
 instance ToJSON Desc where
     toJSON (Desc n h) = toJSON . wrap (replicate n ' ') $ flatten h
+
+data Below = Below !Int Help
+
+instance ToJSON Below where
+    toJSON (Below n h) = toJSON . wrap (replicate n ' ' <> "-- ") $ flatten h
 
 flatten :: Help -> String
 flatten = \case

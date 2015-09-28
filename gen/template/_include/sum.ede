@@ -7,7 +7,8 @@ data {{ type.name }}
     {% if branch.value.help == "" %}
       -- ^ @{{ branch.value.value }}@
     {% else %}
-      -- ^ @{{ branch.value.value }}@ - {{ branch.value.help }}
+      -- ^ @{{ branch.value.value }}@
+{{ branch.value.help }}
     {% endif %}
   {% endfor %}
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
