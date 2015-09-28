@@ -14,9 +14,58 @@
 --
 module Network.Google.Play.Movies.Partner.Types
     (
+    -- * Service URL
+      playMoviesPartnerURL
+
+    -- * ListExperienceLocalesResponse
+    , ListExperienceLocalesResponse
+    , listExperienceLocalesResponse
+    , lelrNextPageToken
+    , lelrExperienceLocales
+
+    -- * ListOrdersResponse
+    , ListOrdersResponse
+    , listOrdersResponse
+    , lorNextPageToken
+    , lorOrders
+
+    -- * ListStoreInfosResponse
+    , ListStoreInfosResponse
+    , listStoreInfosResponse
+    , lsirNextPageToken
+    , lsirStoreInfos
+
+    -- * StoreInfo
+    , StoreInfo
+    , storeInfo
+    , siTitleLevelEidr
+    , siPphNames
+    , siShowName
+    , siSubtitles
+    , siStudioName
+    , siAudioTracks
+    , siEpisodeNumber
+    , siCountry
+    , siTrailerId
+    , siHasInfoCards
+    , siLiveTime
+    , siSeasonNumber
+    , siHasHdOffer
+    , siVideoId
+    , siName
+    , siHasVodOffer
+    , siSeasonName
+    , siHasSdOffer
+    , siMid
+    , siEditLevelEidr
+    , siType
+    , siHasEstOffer
+    , siHasAudio51
+    , siSeasonId
+    , siShowId
 
     -- * Avail
-      Avail
+    , Avail
     , avail
     , aAltId
     , aPphNames
@@ -51,6 +100,33 @@ module Network.Google.Play.Movies.Partner.Types
     , aSeasonAltId
     , aTitleInternalAlias
 
+    -- * Order
+    , Order
+    , order
+    , oStatus
+    , oShowName
+    , oPphName
+    , oEarliestAvailStartTime
+    , oStudioName
+    , oReceivedTime
+    , oPriority
+    , oChannelId
+    , oCustomId
+    , oApprovedTime
+    , oCountries
+    , oChannelName
+    , oVideoId
+    , oLegacyPriority
+    , oName
+    , oRejectionNote
+    , oOrderedTime
+    , oSeasonName
+    , oStatusDetail
+    , oType
+    , oNormalizedPriority
+    , oOrderId
+    , oEpisodeName
+
     -- * ExperienceLocale
     , ExperienceLocale
     , experienceLocale
@@ -83,82 +159,15 @@ module Network.Google.Play.Movies.Partner.Types
     , listAvailsResponse
     , larNextPageToken
     , larAvails
-
-    -- * ListExperienceLocalesResponse
-    , ListExperienceLocalesResponse
-    , listExperienceLocalesResponse
-    , lelrNextPageToken
-    , lelrExperienceLocales
-
-    -- * ListOrdersResponse
-    , ListOrdersResponse
-    , listOrdersResponse
-    , lorNextPageToken
-    , lorOrders
-
-    -- * ListStoreInfosResponse
-    , ListStoreInfosResponse
-    , listStoreInfosResponse
-    , lsirNextPageToken
-    , lsirStoreInfos
-
-    -- * Order
-    , Order
-    , order
-    , oStatus
-    , oShowName
-    , oPphName
-    , oEarliestAvailStartTime
-    , oStudioName
-    , oReceivedTime
-    , oPriority
-    , oChannelId
-    , oCustomId
-    , oApprovedTime
-    , oCountries
-    , oChannelName
-    , oVideoId
-    , oLegacyPriority
-    , oName
-    , oRejectionNote
-    , oOrderedTime
-    , oSeasonName
-    , oStatusDetail
-    , oType
-    , oNormalizedPriority
-    , oOrderId
-    , oEpisodeName
-
-    -- * StoreInfo
-    , StoreInfo
-    , storeInfo
-    , siTitleLevelEidr
-    , siPphNames
-    , siShowName
-    , siSubtitles
-    , siStudioName
-    , siAudioTracks
-    , siEpisodeNumber
-    , siCountry
-    , siTrailerId
-    , siHasInfoCards
-    , siLiveTime
-    , siSeasonNumber
-    , siHasHdOffer
-    , siVideoId
-    , siName
-    , siHasVodOffer
-    , siSeasonName
-    , siHasSdOffer
-    , siMid
-    , siEditLevelEidr
-    , siType
-    , siHasEstOffer
-    , siHasAudio51
-    , siSeasonId
-    , siShowId
     ) where
 
 import           Network.Google.Play.Movies.Partner.Types.Product
 import           Network.Google.Play.Movies.Partner.Types.Sum
 import           Network.Google.Prelude
+
+-- | URL referring to version 'v1' of the Google Play Movies Partner API.
+playMoviesPartnerURL :: BaseUrl
+playMoviesPartnerURL
+  = BaseUrl Https
+      "https://playmoviespartner.googleapis.com/"
+      443

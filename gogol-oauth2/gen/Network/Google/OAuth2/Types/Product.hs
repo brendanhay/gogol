@@ -19,6 +19,141 @@ import           Network.Google.OAuth2.Types.Sum
 import           Network.Google.Prelude
 
 --
+-- /See:/ 'userinfoplus' smart constructor.
+data Userinfoplus = Userinfoplus
+    { _uHd            :: !(Maybe Text)
+    , _uEmail         :: !(Maybe Text)
+    , _uLink          :: !(Maybe Text)
+    , _uLocale        :: !(Maybe Text)
+    , _uGivenName     :: !(Maybe Text)
+    , _uFamilyName    :: !(Maybe Text)
+    , _uPicture       :: !(Maybe Text)
+    , _uGender        :: !(Maybe Text)
+    , _uName          :: !(Maybe Text)
+    , _uVerifiedEmail :: !Bool
+    , _uId            :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Userinfoplus' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'uHd'
+--
+-- * 'uEmail'
+--
+-- * 'uLink'
+--
+-- * 'uLocale'
+--
+-- * 'uGivenName'
+--
+-- * 'uFamilyName'
+--
+-- * 'uPicture'
+--
+-- * 'uGender'
+--
+-- * 'uName'
+--
+-- * 'uVerifiedEmail'
+--
+-- * 'uId'
+userinfoplus
+    :: Userinfoplus
+userinfoplus =
+    Userinfoplus
+    { _uHd = Nothing
+    , _uEmail = Nothing
+    , _uLink = Nothing
+    , _uLocale = Nothing
+    , _uGivenName = Nothing
+    , _uFamilyName = Nothing
+    , _uPicture = Nothing
+    , _uGender = Nothing
+    , _uName = Nothing
+    , _uVerifiedEmail = True
+    , _uId = Nothing
+    }
+
+-- | The hosted domain e.g. example.com if the user is Google apps user.
+uHd :: Lens' Userinfoplus (Maybe Text)
+uHd = lens _uHd (\ s a -> s{_uHd = a})
+
+-- | The user\'s email address.
+uEmail :: Lens' Userinfoplus (Maybe Text)
+uEmail = lens _uEmail (\ s a -> s{_uEmail = a})
+
+-- | URL of the profile page.
+uLink :: Lens' Userinfoplus (Maybe Text)
+uLink = lens _uLink (\ s a -> s{_uLink = a})
+
+-- | The user\'s preferred locale.
+uLocale :: Lens' Userinfoplus (Maybe Text)
+uLocale = lens _uLocale (\ s a -> s{_uLocale = a})
+
+-- | The user\'s first name.
+uGivenName :: Lens' Userinfoplus (Maybe Text)
+uGivenName
+  = lens _uGivenName (\ s a -> s{_uGivenName = a})
+
+-- | The user\'s last name.
+uFamilyName :: Lens' Userinfoplus (Maybe Text)
+uFamilyName
+  = lens _uFamilyName (\ s a -> s{_uFamilyName = a})
+
+-- | URL of the user\'s picture image.
+uPicture :: Lens' Userinfoplus (Maybe Text)
+uPicture = lens _uPicture (\ s a -> s{_uPicture = a})
+
+-- | The user\'s gender.
+uGender :: Lens' Userinfoplus (Maybe Text)
+uGender = lens _uGender (\ s a -> s{_uGender = a})
+
+-- | The user\'s full name.
+uName :: Lens' Userinfoplus (Maybe Text)
+uName = lens _uName (\ s a -> s{_uName = a})
+
+-- | Boolean flag which is true if the email address is verified. Always
+-- verified because we only return the user\'s primary email address.
+uVerifiedEmail :: Lens' Userinfoplus Bool
+uVerifiedEmail
+  = lens _uVerifiedEmail
+      (\ s a -> s{_uVerifiedEmail = a})
+
+-- | The obfuscated ID of the user.
+uId :: Lens' Userinfoplus (Maybe Text)
+uId = lens _uId (\ s a -> s{_uId = a})
+
+instance FromJSON Userinfoplus where
+        parseJSON
+          = withObject "Userinfoplus"
+              (\ o ->
+                 Userinfoplus <$>
+                   (o .:? "hd") <*> (o .:? "email") <*> (o .:? "link")
+                     <*> (o .:? "locale")
+                     <*> (o .:? "given_name")
+                     <*> (o .:? "family_name")
+                     <*> (o .:? "picture")
+                     <*> (o .:? "gender")
+                     <*> (o .:? "name")
+                     <*> (o .:? "verified_email" .!= True)
+                     <*> (o .:? "id"))
+
+instance ToJSON Userinfoplus where
+        toJSON Userinfoplus{..}
+          = object
+              (catMaybes
+                 [("hd" .=) <$> _uHd, ("email" .=) <$> _uEmail,
+                  ("link" .=) <$> _uLink, ("locale" .=) <$> _uLocale,
+                  ("given_name" .=) <$> _uGivenName,
+                  ("family_name" .=) <$> _uFamilyName,
+                  ("picture" .=) <$> _uPicture,
+                  ("gender" .=) <$> _uGender, ("name" .=) <$> _uName,
+                  Just ("verified_email" .= _uVerifiedEmail),
+                  ("id" .=) <$> _uId])
+
+--
 -- /See:/ 'jwk' smart constructor.
 newtype Jwk = Jwk
     { _jwkKeys :: Maybe [JwkItemKeys]
@@ -248,138 +383,3 @@ instance ToJSON Tokeninfo where
                   ("user_id" .=) <$> _tUserId,
                   ("token_handle" .=) <$> _tTokenHandle,
                   ("issued_to" .=) <$> _tIssuedTo])
-
---
--- /See:/ 'userinfoplus' smart constructor.
-data Userinfoplus = Userinfoplus
-    { _uHd            :: !(Maybe Text)
-    , _uEmail         :: !(Maybe Text)
-    , _uLink          :: !(Maybe Text)
-    , _uLocale        :: !(Maybe Text)
-    , _uGivenName     :: !(Maybe Text)
-    , _uFamilyName    :: !(Maybe Text)
-    , _uPicture       :: !(Maybe Text)
-    , _uGender        :: !(Maybe Text)
-    , _uName          :: !(Maybe Text)
-    , _uVerifiedEmail :: !Bool
-    , _uId            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Userinfoplus' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'uHd'
---
--- * 'uEmail'
---
--- * 'uLink'
---
--- * 'uLocale'
---
--- * 'uGivenName'
---
--- * 'uFamilyName'
---
--- * 'uPicture'
---
--- * 'uGender'
---
--- * 'uName'
---
--- * 'uVerifiedEmail'
---
--- * 'uId'
-userinfoplus
-    :: Userinfoplus
-userinfoplus =
-    Userinfoplus
-    { _uHd = Nothing
-    , _uEmail = Nothing
-    , _uLink = Nothing
-    , _uLocale = Nothing
-    , _uGivenName = Nothing
-    , _uFamilyName = Nothing
-    , _uPicture = Nothing
-    , _uGender = Nothing
-    , _uName = Nothing
-    , _uVerifiedEmail = True
-    , _uId = Nothing
-    }
-
--- | The hosted domain e.g. example.com if the user is Google apps user.
-uHd :: Lens' Userinfoplus (Maybe Text)
-uHd = lens _uHd (\ s a -> s{_uHd = a})
-
--- | The user\'s email address.
-uEmail :: Lens' Userinfoplus (Maybe Text)
-uEmail = lens _uEmail (\ s a -> s{_uEmail = a})
-
--- | URL of the profile page.
-uLink :: Lens' Userinfoplus (Maybe Text)
-uLink = lens _uLink (\ s a -> s{_uLink = a})
-
--- | The user\'s preferred locale.
-uLocale :: Lens' Userinfoplus (Maybe Text)
-uLocale = lens _uLocale (\ s a -> s{_uLocale = a})
-
--- | The user\'s first name.
-uGivenName :: Lens' Userinfoplus (Maybe Text)
-uGivenName
-  = lens _uGivenName (\ s a -> s{_uGivenName = a})
-
--- | The user\'s last name.
-uFamilyName :: Lens' Userinfoplus (Maybe Text)
-uFamilyName
-  = lens _uFamilyName (\ s a -> s{_uFamilyName = a})
-
--- | URL of the user\'s picture image.
-uPicture :: Lens' Userinfoplus (Maybe Text)
-uPicture = lens _uPicture (\ s a -> s{_uPicture = a})
-
--- | The user\'s gender.
-uGender :: Lens' Userinfoplus (Maybe Text)
-uGender = lens _uGender (\ s a -> s{_uGender = a})
-
--- | The user\'s full name.
-uName :: Lens' Userinfoplus (Maybe Text)
-uName = lens _uName (\ s a -> s{_uName = a})
-
--- | Boolean flag which is true if the email address is verified. Always
--- verified because we only return the user\'s primary email address.
-uVerifiedEmail :: Lens' Userinfoplus Bool
-uVerifiedEmail
-  = lens _uVerifiedEmail
-      (\ s a -> s{_uVerifiedEmail = a})
-
--- | The obfuscated ID of the user.
-uId :: Lens' Userinfoplus (Maybe Text)
-uId = lens _uId (\ s a -> s{_uId = a})
-
-instance FromJSON Userinfoplus where
-        parseJSON
-          = withObject "Userinfoplus"
-              (\ o ->
-                 Userinfoplus <$>
-                   (o .:? "hd") <*> (o .:? "email") <*> (o .:? "link")
-                     <*> (o .:? "locale")
-                     <*> (o .:? "given_name")
-                     <*> (o .:? "family_name")
-                     <*> (o .:? "picture")
-                     <*> (o .:? "gender")
-                     <*> (o .:? "name")
-                     <*> (o .:? "verified_email" .!= True)
-                     <*> (o .:? "id"))
-
-instance ToJSON Userinfoplus where
-        toJSON Userinfoplus{..}
-          = object
-              (catMaybes
-                 [("hd" .=) <$> _uHd, ("email" .=) <$> _uEmail,
-                  ("link" .=) <$> _uLink, ("locale" .=) <$> _uLocale,
-                  ("given_name" .=) <$> _uGivenName,
-                  ("family_name" .=) <$> _uFamilyName,
-                  ("picture" .=) <$> _uPicture,
-                  ("gender" .=) <$> _uGender, ("name" .=) <$> _uName,
-                  Just ("verified_email" .= _uVerifiedEmail),
-                  ("id" .=) <$> _uId])

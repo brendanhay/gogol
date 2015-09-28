@@ -14,62 +14,30 @@
 --
 module Network.Google.Logging.Types
     (
-
-    -- * Empty
-      Empty
-    , empty
-
-    -- * HttpRequest
-    , HttpRequest
-    , httpRequest
-    , hrStatus
-    , hrRequestUrl
-    , hrRemoteIp
-    , hrRequestSize
-    , hrUserAgent
-    , hrResponseSize
-    , hrRequestMethod
-    , hrReferer
-
-    -- * ListLogServiceIndexesResponse
-    , ListLogServiceIndexesResponse
-    , listLogServiceIndexesResponse
-    , llsirNextPageToken
-    , llsirServiceIndexPrefixes
+    -- * Service URL
+      loggingURL
 
     -- * ListLogServiceSinksResponse
     , ListLogServiceSinksResponse
     , listLogServiceSinksResponse
     , llssrSinks
 
-    -- * ListLogServicesResponse
-    , ListLogServicesResponse
-    , listLogServicesResponse
-    , llsrNextPageToken
-    , llsrLogServices
+    -- * LogEntryStructPayload
+    , LogEntryStructPayload
+    , logEntryStructPayload
 
-    -- * ListLogSinksResponse
-    , ListLogSinksResponse
-    , listLogSinksResponse
-    , llsrSinks
+    -- * WriteLogEntriesRequest
+    , WriteLogEntriesRequest
+    , writeLogEntriesRequest
+    , wlerEntries
+    , wlerCommonLabels
 
-    -- * ListLogsResponse
-    , ListLogsResponse
-    , listLogsResponse
-    , llrNextPageToken
-    , llrLogs
-
-    -- * ListSinksResponse
-    , ListSinksResponse
-    , listSinksResponse
-    , lsrSinks
-
-    -- * Log
-    , Log
-    , log
-    , logName
-    , logDisplayName
-    , logPayloadType
+    -- * SourceLocation
+    , SourceLocation
+    , sourceLocation
+    , slLine
+    , slFunctionName
+    , slFile
 
     -- * LogEntry
     , LogEntry
@@ -82,29 +50,29 @@ module Network.Google.Logging.Types
     , leMetadata
     , leProtoPayload
 
-    -- * LogEntryMetadata
-    , LogEntryMetadata
-    , logEntryMetadata
-    , lemSeverity
-    , lemZone
-    , lemUserId
-    , lemServiceName
-    , lemLabels
-    , lemRegion
-    , lemProjectId
-    , lemTimestamp
-
     -- * LogEntryMetadataLabels
     , LogEntryMetadataLabels
     , logEntryMetadataLabels
 
-    -- * LogEntryProtoPayload
-    , LogEntryProtoPayload
-    , logEntryProtoPayload
+    -- * ListLogsResponse
+    , ListLogsResponse
+    , listLogsResponse
+    , llrNextPageToken
+    , llrLogs
 
-    -- * LogEntryStructPayload
-    , LogEntryStructPayload
-    , logEntryStructPayload
+    -- * Status
+    , Status
+    , status
+    , sDetails
+    , sCode
+    , sMessage
+
+    -- * Log
+    , Log
+    , log
+    , logName
+    , logDisplayName
+    , logPayloadType
 
     -- * LogError
     , LogError
@@ -121,19 +89,26 @@ module Network.Google.Logging.Types
     , llLogMessage
     , llSourceLocation
 
-    -- * LogService
-    , LogService
-    , logService
-    , lName
-    , lIndexKeys
+    -- * ListSinksResponse
+    , ListSinksResponse
+    , listSinksResponse
+    , lsrSinks
 
-    -- * LogSink
-    , LogSink
-    , logSink
-    , lsDestination
-    , lsName
-    , lsFilter
-    , lsErrors
+    -- * LogEntryMetadata
+    , LogEntryMetadata
+    , logEntryMetadata
+    , lemSeverity
+    , lemZone
+    , lemUserId
+    , lemServiceName
+    , lemLabels
+    , lemRegion
+    , lemProjectId
+    , lemTimestamp
+
+    -- * Empty
+    , Empty
+    , empty
 
     -- * RequestLog
     , RequestLog
@@ -170,12 +145,37 @@ module Network.Google.Logging.Types
     , rlSourceReference
     , rlAppEngineRelease
 
-    -- * SourceLocation
-    , SourceLocation
-    , sourceLocation
-    , slLine
-    , slFunctionName
-    , slFile
+    -- * WriteLogEntriesResponse
+    , WriteLogEntriesResponse
+    , writeLogEntriesResponse
+
+    -- * ListLogServiceIndexesResponse
+    , ListLogServiceIndexesResponse
+    , listLogServiceIndexesResponse
+    , llsirNextPageToken
+    , llsirServiceIndexPrefixes
+
+    -- * StatusItemDetails
+    , StatusItemDetails
+    , statusItemDetails
+
+    -- * LogSink
+    , LogSink
+    , logSink
+    , lsDestination
+    , lsName
+    , lsFilter
+    , lsErrors
+
+    -- * ListLogServicesResponse
+    , ListLogServicesResponse
+    , listLogServicesResponse
+    , llsrNextPageToken
+    , llsrLogServices
+
+    -- * LogEntryProtoPayload
+    , LogEntryProtoPayload
+    , logEntryProtoPayload
 
     -- * SourceReference
     , SourceReference
@@ -183,32 +183,39 @@ module Network.Google.Logging.Types
     , srRepository
     , srRevisionId
 
-    -- * Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
-
-    -- * StatusItemDetails
-    , StatusItemDetails
-    , statusItemDetails
-
-    -- * WriteLogEntriesRequest
-    , WriteLogEntriesRequest
-    , writeLogEntriesRequest
-    , wlerEntries
-    , wlerCommonLabels
+    -- * HttpRequest
+    , HttpRequest
+    , httpRequest
+    , hrStatus
+    , hrRequestUrl
+    , hrRemoteIp
+    , hrRequestSize
+    , hrUserAgent
+    , hrResponseSize
+    , hrRequestMethod
+    , hrReferer
 
     -- * WriteLogEntriesRequestCommonLabels
     , WriteLogEntriesRequestCommonLabels
     , writeLogEntriesRequestCommonLabels
 
-    -- * WriteLogEntriesResponse
-    , WriteLogEntriesResponse
-    , writeLogEntriesResponse
+    -- * ListLogSinksResponse
+    , ListLogSinksResponse
+    , listLogSinksResponse
+    , llsrSinks
+
+    -- * LogService
+    , LogService
+    , logService
+    , lName
+    , lIndexKeys
     ) where
 
 import           Network.Google.Logging.Types.Product
 import           Network.Google.Logging.Types.Sum
 import           Network.Google.Prelude
+
+-- | URL referring to version 'v1beta3' of the Google Cloud Logging API.
+loggingURL :: BaseUrl
+loggingURL
+  = BaseUrl Https "https://logging.googleapis.com/" 443

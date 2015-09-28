@@ -17,16 +17,71 @@ module Network.Google.TagManager.Types.Sum where
 
 import           Network.Google.Prelude
 
+-- | Data format for the response.
+data Alt
+    = JSON
+      -- ^ @json@
+      -- Responses with Content-Type of application\/json
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable Alt
+
+instance FromText Alt where
+    fromText = \case
+        "json" -> Just JSON
+        _ -> Nothing
+
+instance ToText Alt where
+    toText = \case
+        JSON -> "json"
+
+instance FromJSON Alt where
+    parseJSON = parseJSONText "Alt"
+
+instance ToJSON Alt where
+    toJSON = toJSONText
+
+-- | Option to fire this tag.
+data TagTagFiringOption
+    = OncePerEvent
+      -- ^ @oncePerEvent@
+    | OncePerLoad
+      -- ^ @oncePerLoad@
+    | Unlimited
+      -- ^ @unlimited@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable TagTagFiringOption
+
+instance FromText TagTagFiringOption where
+    fromText = \case
+        "oncePerEvent" -> Just OncePerEvent
+        "oncePerLoad" -> Just OncePerLoad
+        "unlimited" -> Just Unlimited
+        _ -> Nothing
+
+instance ToText TagTagFiringOption where
+    toText = \case
+        OncePerEvent -> "oncePerEvent"
+        OncePerLoad -> "oncePerLoad"
+        Unlimited -> "unlimited"
+
+instance FromJSON TagTagFiringOption where
+    parseJSON = parseJSONText "TagTagFiringOption"
+
+instance ToJSON TagTagFiringOption where
+    toJSON = toJSONText
+
 data AccountAccessItemPermission
-    = AAIPDelete
+    = Delete
       -- ^ @delete@
-    | AAIPEdit
+    | Edit
       -- ^ @edit@
-    | AAIPManage
+    | Manage
       -- ^ @manage@
-    | AAIPPublish
+    | Publish
       -- ^ @publish@
-    | AAIPRead
+    | Read
       -- ^ @read@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -34,20 +89,20 @@ instance Hashable AccountAccessItemPermission
 
 instance FromText AccountAccessItemPermission where
     fromText = \case
-        "delete" -> Just AAIPDelete
-        "edit" -> Just AAIPEdit
-        "manage" -> Just AAIPManage
-        "publish" -> Just AAIPPublish
-        "read" -> Just AAIPRead
+        "delete" -> Just Delete
+        "edit" -> Just Edit
+        "manage" -> Just Manage
+        "publish" -> Just Publish
+        "read" -> Just Read
         _ -> Nothing
 
 instance ToText AccountAccessItemPermission where
     toText = \case
-        AAIPDelete -> "delete"
-        AAIPEdit -> "edit"
-        AAIPManage -> "manage"
-        AAIPPublish -> "publish"
-        AAIPRead -> "read"
+        Delete -> "delete"
+        Edit -> "edit"
+        Manage -> "manage"
+        Publish -> "publish"
+        Read -> "read"
 
 instance FromJSON AccountAccessItemPermission where
     parseJSON = parseJSONText "AccountAccessItemPermission"
@@ -57,27 +112,27 @@ instance ToJSON AccountAccessItemPermission where
 
 -- | The type of operator for this condition.
 data ConditionType
-    = CTContains
+    = Contains
       -- ^ @contains@
-    | CTCssSelector
+    | CssSelector
       -- ^ @cssSelector@
-    | CTEndsWith
+    | EndsWith
       -- ^ @endsWith@
-    | CTEquals
+    | Equals
       -- ^ @equals@
-    | CTGreater
+    | Greater
       -- ^ @greater@
-    | CTGreaterOrEquals
+    | GreaterOrEquals
       -- ^ @greaterOrEquals@
-    | CTLess
+    | Less
       -- ^ @less@
-    | CTLessOrEquals
+    | LessOrEquals
       -- ^ @lessOrEquals@
-    | CTMatchRegex
+    | MatchRegex
       -- ^ @matchRegex@
-    | CTStartsWith
+    | StartsWith
       -- ^ @startsWith@
-    | CTURLMatches
+    | URLMatches
       -- ^ @urlMatches@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -85,75 +140,37 @@ instance Hashable ConditionType
 
 instance FromText ConditionType where
     fromText = \case
-        "contains" -> Just CTContains
-        "cssSelector" -> Just CTCssSelector
-        "endsWith" -> Just CTEndsWith
-        "equals" -> Just CTEquals
-        "greater" -> Just CTGreater
-        "greaterOrEquals" -> Just CTGreaterOrEquals
-        "less" -> Just CTLess
-        "lessOrEquals" -> Just CTLessOrEquals
-        "matchRegex" -> Just CTMatchRegex
-        "startsWith" -> Just CTStartsWith
-        "urlMatches" -> Just CTURLMatches
+        "contains" -> Just Contains
+        "cssSelector" -> Just CssSelector
+        "endsWith" -> Just EndsWith
+        "equals" -> Just Equals
+        "greater" -> Just Greater
+        "greaterOrEquals" -> Just GreaterOrEquals
+        "less" -> Just Less
+        "lessOrEquals" -> Just LessOrEquals
+        "matchRegex" -> Just MatchRegex
+        "startsWith" -> Just StartsWith
+        "urlMatches" -> Just URLMatches
         _ -> Nothing
 
 instance ToText ConditionType where
     toText = \case
-        CTContains -> "contains"
-        CTCssSelector -> "cssSelector"
-        CTEndsWith -> "endsWith"
-        CTEquals -> "equals"
-        CTGreater -> "greater"
-        CTGreaterOrEquals -> "greaterOrEquals"
-        CTLess -> "less"
-        CTLessOrEquals -> "lessOrEquals"
-        CTMatchRegex -> "matchRegex"
-        CTStartsWith -> "startsWith"
-        CTURLMatches -> "urlMatches"
+        Contains -> "contains"
+        CssSelector -> "cssSelector"
+        EndsWith -> "endsWith"
+        Equals -> "equals"
+        Greater -> "greater"
+        GreaterOrEquals -> "greaterOrEquals"
+        Less -> "less"
+        LessOrEquals -> "lessOrEquals"
+        MatchRegex -> "matchRegex"
+        StartsWith -> "startsWith"
+        URLMatches -> "urlMatches"
 
 instance FromJSON ConditionType where
     parseJSON = parseJSONText "ConditionType"
 
 instance ToJSON ConditionType where
-    toJSON = toJSONText
-
-data ContainerAccessItemPermission
-    = CAIPDelete
-      -- ^ @delete@
-    | CAIPEdit
-      -- ^ @edit@
-    | CAIPManage
-      -- ^ @manage@
-    | CAIPPublish
-      -- ^ @publish@
-    | CAIPRead
-      -- ^ @read@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContainerAccessItemPermission
-
-instance FromText ContainerAccessItemPermission where
-    fromText = \case
-        "delete" -> Just CAIPDelete
-        "edit" -> Just CAIPEdit
-        "manage" -> Just CAIPManage
-        "publish" -> Just CAIPPublish
-        "read" -> Just CAIPRead
-        _ -> Nothing
-
-instance ToText ContainerAccessItemPermission where
-    toText = \case
-        CAIPDelete -> "delete"
-        CAIPEdit -> "edit"
-        CAIPManage -> "manage"
-        CAIPPublish -> "publish"
-        CAIPRead -> "read"
-
-instance FromJSON ContainerAccessItemPermission where
-    parseJSON = parseJSONText "ContainerAccessItemPermission"
-
-instance ToJSON ContainerAccessItemPermission where
     toJSON = toJSONText
 
 data ContainerItemEnabledBuiltInVariable
@@ -342,12 +359,83 @@ instance FromJSON ContainerItemEnabledBuiltInVariable where
 instance ToJSON ContainerItemEnabledBuiltInVariable where
     toJSON = toJSONText
 
+-- | Defines the data layer event that causes this trigger.
+data TriggerType
+    = AjaxSubmission
+      -- ^ @ajaxSubmission@
+    | Always
+      -- ^ @always@
+    | Click
+      -- ^ @click@
+    | CustomEvent
+      -- ^ @customEvent@
+    | DomReady
+      -- ^ @domReady@
+    | FormSubmission
+      -- ^ @formSubmission@
+    | HistoryChange
+      -- ^ @historyChange@
+    | JsError
+      -- ^ @jsError@
+    | LinkClick
+      -- ^ @linkClick@
+    | Pageview
+      -- ^ @pageview@
+    | Timer
+      -- ^ @timer@
+    | WindowLoaded
+      -- ^ @windowLoaded@
+    | YouTube
+      -- ^ @youTube@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable TriggerType
+
+instance FromText TriggerType where
+    fromText = \case
+        "ajaxSubmission" -> Just AjaxSubmission
+        "always" -> Just Always
+        "click" -> Just Click
+        "customEvent" -> Just CustomEvent
+        "domReady" -> Just DomReady
+        "formSubmission" -> Just FormSubmission
+        "historyChange" -> Just HistoryChange
+        "jsError" -> Just JsError
+        "linkClick" -> Just LinkClick
+        "pageview" -> Just Pageview
+        "timer" -> Just Timer
+        "windowLoaded" -> Just WindowLoaded
+        "youTube" -> Just YouTube
+        _ -> Nothing
+
+instance ToText TriggerType where
+    toText = \case
+        AjaxSubmission -> "ajaxSubmission"
+        Always -> "always"
+        Click -> "click"
+        CustomEvent -> "customEvent"
+        DomReady -> "domReady"
+        FormSubmission -> "formSubmission"
+        HistoryChange -> "historyChange"
+        JsError -> "jsError"
+        LinkClick -> "linkClick"
+        Pageview -> "pageview"
+        Timer -> "timer"
+        WindowLoaded -> "windowLoaded"
+        YouTube -> "youTube"
+
+instance FromJSON TriggerType where
+    parseJSON = parseJSONText "TriggerType"
+
+instance ToJSON TriggerType where
+    toJSON = toJSONText
+
 data ContainerItemUsageContext
-    = CIUCAndroid
+    = Android
       -- ^ @android@
-    | CIUCIos
+    | Ios
       -- ^ @ios@
-    | CIUCWeb
+    | Web
       -- ^ @web@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -355,16 +443,16 @@ instance Hashable ContainerItemUsageContext
 
 instance FromText ContainerItemUsageContext where
     fromText = \case
-        "android" -> Just CIUCAndroid
-        "ios" -> Just CIUCIos
-        "web" -> Just CIUCWeb
+        "android" -> Just Android
+        "ios" -> Just Ios
+        "web" -> Just Web
         _ -> Nothing
 
 instance ToText ContainerItemUsageContext where
     toText = \case
-        CIUCAndroid -> "android"
-        CIUCIos -> "ios"
-        CIUCWeb -> "web"
+        Android -> "android"
+        Ios -> "ios"
+        Web -> "web"
 
 instance FromJSON ContainerItemUsageContext where
     parseJSON = parseJSONText "ContainerItemUsageContext"
@@ -380,15 +468,15 @@ instance ToJSON ContainerItemUsageContext where
 -- macro references (even macro references that might return non-string
 -- types)
 data ParameterType
-    = PTBoolean
+    = Boolean
       -- ^ @boolean@
-    | PTInteger
+    | Integer
       -- ^ @integer@
-    | PTList
+    | List
       -- ^ @list@
-    | PTMap
+    | Map
       -- ^ @map@
-    | PTTemplate
+    | Template
       -- ^ @template@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -396,20 +484,20 @@ instance Hashable ParameterType
 
 instance FromText ParameterType where
     fromText = \case
-        "boolean" -> Just PTBoolean
-        "integer" -> Just PTInteger
-        "list" -> Just PTList
-        "map" -> Just PTMap
-        "template" -> Just PTTemplate
+        "boolean" -> Just Boolean
+        "integer" -> Just Integer
+        "list" -> Just List
+        "map" -> Just Map
+        "template" -> Just Template
         _ -> Nothing
 
 instance ToText ParameterType where
     toText = \case
-        PTBoolean -> "boolean"
-        PTInteger -> "integer"
-        PTList -> "list"
-        PTMap -> "map"
-        PTTemplate -> "template"
+        Boolean -> "boolean"
+        Integer -> "integer"
+        List -> "list"
+        Map -> "map"
+        Template -> "template"
 
 instance FromJSON ParameterType where
     parseJSON = parseJSONText "ParameterType"
@@ -417,104 +505,40 @@ instance FromJSON ParameterType where
 instance ToJSON ParameterType where
     toJSON = toJSONText
 
--- | Option to fire this tag.
-data TagTagFiringOption
-    = TTFOOncePerEvent
-      -- ^ @oncePerEvent@
-    | TTFOOncePerLoad
-      -- ^ @oncePerLoad@
-    | TTFOUnlimited
-      -- ^ @unlimited@
+data ContainerAccessItemPermission
+    = CAIPDelete
+      -- ^ @delete@
+    | CAIPEdit
+      -- ^ @edit@
+    | CAIPManage
+      -- ^ @manage@
+    | CAIPPublish
+      -- ^ @publish@
+    | CAIPRead
+      -- ^ @read@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable TagTagFiringOption
+instance Hashable ContainerAccessItemPermission
 
-instance FromText TagTagFiringOption where
+instance FromText ContainerAccessItemPermission where
     fromText = \case
-        "oncePerEvent" -> Just TTFOOncePerEvent
-        "oncePerLoad" -> Just TTFOOncePerLoad
-        "unlimited" -> Just TTFOUnlimited
+        "delete" -> Just CAIPDelete
+        "edit" -> Just CAIPEdit
+        "manage" -> Just CAIPManage
+        "publish" -> Just CAIPPublish
+        "read" -> Just CAIPRead
         _ -> Nothing
 
-instance ToText TagTagFiringOption where
+instance ToText ContainerAccessItemPermission where
     toText = \case
-        TTFOOncePerEvent -> "oncePerEvent"
-        TTFOOncePerLoad -> "oncePerLoad"
-        TTFOUnlimited -> "unlimited"
+        CAIPDelete -> "delete"
+        CAIPEdit -> "edit"
+        CAIPManage -> "manage"
+        CAIPPublish -> "publish"
+        CAIPRead -> "read"
 
-instance FromJSON TagTagFiringOption where
-    parseJSON = parseJSONText "TagTagFiringOption"
+instance FromJSON ContainerAccessItemPermission where
+    parseJSON = parseJSONText "ContainerAccessItemPermission"
 
-instance ToJSON TagTagFiringOption where
-    toJSON = toJSONText
-
--- | Defines the data layer event that causes this trigger.
-data TriggerType
-    = TTAjaxSubmission
-      -- ^ @ajaxSubmission@
-    | TTAlways
-      -- ^ @always@
-    | TTClick
-      -- ^ @click@
-    | TTCustomEvent
-      -- ^ @customEvent@
-    | TTDomReady
-      -- ^ @domReady@
-    | TTFormSubmission
-      -- ^ @formSubmission@
-    | TTHistoryChange
-      -- ^ @historyChange@
-    | TTJsError
-      -- ^ @jsError@
-    | TTLinkClick
-      -- ^ @linkClick@
-    | TTPageview
-      -- ^ @pageview@
-    | TTTimer
-      -- ^ @timer@
-    | TTWindowLoaded
-      -- ^ @windowLoaded@
-    | TTYouTube
-      -- ^ @youTube@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable TriggerType
-
-instance FromText TriggerType where
-    fromText = \case
-        "ajaxSubmission" -> Just TTAjaxSubmission
-        "always" -> Just TTAlways
-        "click" -> Just TTClick
-        "customEvent" -> Just TTCustomEvent
-        "domReady" -> Just TTDomReady
-        "formSubmission" -> Just TTFormSubmission
-        "historyChange" -> Just TTHistoryChange
-        "jsError" -> Just TTJsError
-        "linkClick" -> Just TTLinkClick
-        "pageview" -> Just TTPageview
-        "timer" -> Just TTTimer
-        "windowLoaded" -> Just TTWindowLoaded
-        "youTube" -> Just TTYouTube
-        _ -> Nothing
-
-instance ToText TriggerType where
-    toText = \case
-        TTAjaxSubmission -> "ajaxSubmission"
-        TTAlways -> "always"
-        TTClick -> "click"
-        TTCustomEvent -> "customEvent"
-        TTDomReady -> "domReady"
-        TTFormSubmission -> "formSubmission"
-        TTHistoryChange -> "historyChange"
-        TTJsError -> "jsError"
-        TTLinkClick -> "linkClick"
-        TTPageview -> "pageview"
-        TTTimer -> "timer"
-        TTWindowLoaded -> "windowLoaded"
-        TTYouTube -> "youTube"
-
-instance FromJSON TriggerType where
-    parseJSON = parseJSONText "TriggerType"
-
-instance ToJSON TriggerType where
+instance ToJSON ContainerAccessItemPermission where
     toJSON = toJSONText

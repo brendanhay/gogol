@@ -1,6 +1,6 @@
 name:                  gogol-genomics
 version:               0.0.1
-synopsis:              Google Genomics API.
+synopsis:              Google Genomics API Client.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -16,8 +16,8 @@ extra-source-files:    README.md
 description:
     Provides access to Genomics data.
     .
-    /Warning:/ This is an experimental preview release which is still under
-    heavy development and not intended for public consumption, caveat emptor!
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
 
 source-repository head
     type:     git
@@ -30,7 +30,56 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.Genomics
+          Network.Google.API.Genomics.AnnotationSets.Create
+        , Network.Google.API.Genomics.AnnotationSets.Delete
+        , Network.Google.API.Genomics.AnnotationSets.Get
+        , Network.Google.API.Genomics.AnnotationSets.Patch
+        , Network.Google.API.Genomics.AnnotationSets.Search
+        , Network.Google.API.Genomics.AnnotationSets.Update
+        , Network.Google.API.Genomics.Annotations.BatchCreate
+        , Network.Google.API.Genomics.Annotations.Create
+        , Network.Google.API.Genomics.Annotations.Delete
+        , Network.Google.API.Genomics.Annotations.Get
+        , Network.Google.API.Genomics.Annotations.Patch
+        , Network.Google.API.Genomics.Annotations.Search
+        , Network.Google.API.Genomics.Annotations.Update
+        , Network.Google.API.Genomics.Callsets.Create
+        , Network.Google.API.Genomics.Callsets.Delete
+        , Network.Google.API.Genomics.Callsets.Get
+        , Network.Google.API.Genomics.Callsets.Patch
+        , Network.Google.API.Genomics.Callsets.Search
+        , Network.Google.API.Genomics.Callsets.Update
+        , Network.Google.API.Genomics.Datasets.Create
+        , Network.Google.API.Genomics.Datasets.Delete
+        , Network.Google.API.Genomics.Datasets.Get
+        , Network.Google.API.Genomics.Datasets.List
+        , Network.Google.API.Genomics.Datasets.Patch
+        , Network.Google.API.Genomics.Datasets.Undelete
+        , Network.Google.API.Genomics.Datasets.Update
+        , Network.Google.API.Genomics.Experimental.Jobs.Create
+        , Network.Google.API.Genomics.Jobs.Cancel
+        , Network.Google.API.Genomics.Jobs.Get
+        , Network.Google.API.Genomics.Jobs.Search
+        , Network.Google.API.Genomics.Readgroupsets.Coveragebuckets.List
+        , Network.Google.API.Genomics.Reads.Search
+        , Network.Google.API.Genomics.References.Bases.List
+        , Network.Google.API.Genomics.Referencesets.Get
+        , Network.Google.API.Genomics.Referencesets.Search
+        , Network.Google.API.Genomics.Variants.Create
+        , Network.Google.API.Genomics.Variants.Delete
+        , Network.Google.API.Genomics.Variants.Get
+        , Network.Google.API.Genomics.Variants.Search
+        , Network.Google.API.Genomics.Variants.Update
+        , Network.Google.API.Genomics.Variantsets.Create
+        , Network.Google.API.Genomics.Variantsets.Delete
+        , Network.Google.API.Genomics.Variantsets.Export
+        , Network.Google.API.Genomics.Variantsets.Get
+        , Network.Google.API.Genomics.Variantsets.ImportVariants
+        , Network.Google.API.Genomics.Variantsets.MergeVariants
+        , Network.Google.API.Genomics.Variantsets.Patch
+        , Network.Google.API.Genomics.Variantsets.Search
+        , Network.Google.API.Genomics.Variantsets.Update
+        , Network.Google.Genomics
         , Network.Google.Genomics.Types
 
     other-modules:

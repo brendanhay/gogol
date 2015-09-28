@@ -1,6 +1,6 @@
 name:                  gogol-pubsub
 version:               0.0.1
-synopsis:              Google Cloud Pub/Sub API.
+synopsis:              Google Cloud Pub/Sub API Client.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -17,8 +17,8 @@ description:
     Provides reliable, many-to-many, asynchronous messaging between
     applications.
     .
-    /Warning:/ This is an experimental preview release which is still under
-    heavy development and not intended for public consumption, caveat emptor!
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
 
 source-repository head
     type:     git
@@ -31,7 +31,19 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.PubSub
+          Network.Google.API.PubSub.Projects.Subscriptions.Acknowledge
+        , Network.Google.API.PubSub.Projects.Subscriptions.Create
+        , Network.Google.API.PubSub.Projects.Subscriptions.Delete
+        , Network.Google.API.PubSub.Projects.Subscriptions.Get
+        , Network.Google.API.PubSub.Projects.Subscriptions.GetIAMPolicy
+        , Network.Google.API.PubSub.Projects.Subscriptions.List
+        , Network.Google.API.PubSub.Projects.Subscriptions.ModifyAckDeadline
+        , Network.Google.API.PubSub.Projects.Subscriptions.ModifyPushConfig
+        , Network.Google.API.PubSub.Projects.Subscriptions.Pull
+        , Network.Google.API.PubSub.Projects.Subscriptions.SetIAMPolicy
+        , Network.Google.API.PubSub.Projects.Subscriptions.TestIAMPermissions
+        , Network.Google.API.PubSub.Projects.Topics.Subscriptions.List
+        , Network.Google.PubSub
         , Network.Google.PubSub.Types
 
     other-modules:

@@ -19,33 +19,33 @@ import           Network.Google.Prelude
 
 -- | [Output Only] The warning type identifier for this warning.
 data OperationCodeItemWarnings
-    = OCIWDeprecatedResourceUsed
+    = DeprecatedResourceUsed
       -- ^ @DEPRECATED_RESOURCE_USED@
-    | OCIWDiskSizeLargerThanImageSize
+    | DiskSizeLargerThanImageSize
       -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
-    | OCIWInjectedKernelsDeprecated
+    | InjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
-    | OCIWNextHopAddressNotAssigned
+    | NextHopAddressNotAssigned
       -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
-    | OCIWNextHopCannotIPForward
+    | NextHopCannotIPForward
       -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
-    | OCIWNextHopInstanceNotFound
+    | NextHopInstanceNotFound
       -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
-    | OCIWNextHopInstanceNotOnNetwork
+    | NextHopInstanceNotOnNetwork
       -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
-    | OCIWNextHopNotRunning
+    | NextHopNotRunning
       -- ^ @NEXT_HOP_NOT_RUNNING@
-    | OCIWNotCriticalError
+    | NotCriticalError
       -- ^ @NOT_CRITICAL_ERROR@
-    | OCIWNoResultsOnPage
+    | NoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
-    | OCIWRequiredTosAgreement
+    | RequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
-    | OCIWResourceNotDeleted
+    | ResourceNotDeleted
       -- ^ @RESOURCE_NOT_DELETED@
-    | OCIWSingleInstancePropertyTemplate
+    | SingleInstancePropertyTemplate
       -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
-    | OCIWUnreachable
+    | Unreachable
       -- ^ @UNREACHABLE@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -53,38 +53,38 @@ instance Hashable OperationCodeItemWarnings
 
 instance FromText OperationCodeItemWarnings where
     fromText = \case
-        "DEPRECATED_RESOURCE_USED" -> Just OCIWDeprecatedResourceUsed
-        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just OCIWDiskSizeLargerThanImageSize
-        "INJECTED_KERNELS_DEPRECATED" -> Just OCIWInjectedKernelsDeprecated
-        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Just OCIWNextHopAddressNotAssigned
-        "NEXT_HOP_CANNOT_IP_FORWARD" -> Just OCIWNextHopCannotIPForward
-        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Just OCIWNextHopInstanceNotFound
-        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Just OCIWNextHopInstanceNotOnNetwork
-        "NEXT_HOP_NOT_RUNNING" -> Just OCIWNextHopNotRunning
-        "NOT_CRITICAL_ERROR" -> Just OCIWNotCriticalError
-        "NO_RESULTS_ON_PAGE" -> Just OCIWNoResultsOnPage
-        "REQUIRED_TOS_AGREEMENT" -> Just OCIWRequiredTosAgreement
-        "RESOURCE_NOT_DELETED" -> Just OCIWResourceNotDeleted
-        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Just OCIWSingleInstancePropertyTemplate
-        "UNREACHABLE" -> Just OCIWUnreachable
+        "DEPRECATED_RESOURCE_USED" -> Just DeprecatedResourceUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just DiskSizeLargerThanImageSize
+        "INJECTED_KERNELS_DEPRECATED" -> Just InjectedKernelsDeprecated
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Just NextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Just NextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Just NextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Just NextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Just NextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Just NotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Just NoResultsOnPage
+        "REQUIRED_TOS_AGREEMENT" -> Just RequiredTosAgreement
+        "RESOURCE_NOT_DELETED" -> Just ResourceNotDeleted
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Just SingleInstancePropertyTemplate
+        "UNREACHABLE" -> Just Unreachable
         _ -> Nothing
 
 instance ToText OperationCodeItemWarnings where
     toText = \case
-        OCIWDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
-        OCIWDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
-        OCIWInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
-        OCIWNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
-        OCIWNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
-        OCIWNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
-        OCIWNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
-        OCIWNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
-        OCIWNotCriticalError -> "NOT_CRITICAL_ERROR"
-        OCIWNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
-        OCIWRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
-        OCIWResourceNotDeleted -> "RESOURCE_NOT_DELETED"
-        OCIWSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
-        OCIWUnreachable -> "UNREACHABLE"
+        DeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        DiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        InjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        NextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        NextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        NextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        NextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        NextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        NotCriticalError -> "NOT_CRITICAL_ERROR"
+        NoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        RequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        ResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        SingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        Unreachable -> "UNREACHABLE"
 
 instance FromJSON OperationCodeItemWarnings where
     parseJSON = parseJSONText "OperationCodeItemWarnings"
@@ -92,14 +92,38 @@ instance FromJSON OperationCodeItemWarnings where
 instance ToJSON OperationCodeItemWarnings where
     toJSON = toJSONText
 
+-- | Data format for the response.
+data Alt
+    = JSON
+      -- ^ @json@
+      -- Responses with Content-Type of application\/json
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable Alt
+
+instance FromText Alt where
+    fromText = \case
+        "json" -> Just JSON
+        _ -> Nothing
+
+instance ToText Alt where
+    toText = \case
+        JSON -> "json"
+
+instance FromJSON Alt where
+    parseJSON = parseJSONText "Alt"
+
+instance ToJSON Alt where
+    toJSON = toJSONText
+
 -- | [Output Only] Status of the operation. Can be one of the following:
 -- PENDING, RUNNING, or DONE.
 data OperationStatus
-    = OSDone
+    = Done
       -- ^ @DONE@
-    | OSPending
+    | Pending
       -- ^ @PENDING@
-    | OSRunning
+    | Running
       -- ^ @RUNNING@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -107,16 +131,16 @@ instance Hashable OperationStatus
 
 instance FromText OperationStatus where
     fromText = \case
-        "DONE" -> Just OSDone
-        "PENDING" -> Just OSPending
-        "RUNNING" -> Just OSRunning
+        "DONE" -> Just Done
+        "PENDING" -> Just Pending
+        "RUNNING" -> Just Running
         _ -> Nothing
 
 instance ToText OperationStatus where
     toText = \case
-        OSDone -> "DONE"
-        OSPending -> "PENDING"
-        OSRunning -> "RUNNING"
+        Done -> "DONE"
+        Pending -> "PENDING"
+        Running -> "RUNNING"
 
 instance FromJSON OperationStatus where
     parseJSON = parseJSONText "OperationStatus"

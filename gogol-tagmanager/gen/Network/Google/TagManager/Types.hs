@@ -14,31 +14,8 @@
 --
 module Network.Google.TagManager.Types
     (
-
-    -- * Account
-      Account
-    , account
-    , aShareData
-    , aFingerprint
-    , aAccountId
-    , aName
-
-    -- * AccountAccess
-    , AccountAccess
-    , accountAccess
-    , aaPermission
-
-    -- * AccountAccessItemPermission
-    , AccountAccessItemPermission (..)
-
-    -- * Condition
-    , Condition
-    , condition
-    , cType
-    , cParameter
-
-    -- * ConditionType
-    , ConditionType (..)
+    -- * Service URL
+      tagManagerURL
 
     -- * Container
     , Container
@@ -55,132 +32,16 @@ module Network.Google.TagManager.Types
     , cNotes
     , cTimeZoneId
 
-    -- * ContainerAccess
-    , ContainerAccess
-    , containerAccess
-    , caContainerId
-    , caPermission
-
-    -- * ContainerAccessItemPermission
-    , ContainerAccessItemPermission (..)
-
-    -- * ContainerItemEnabledBuiltInVariable
-    , ContainerItemEnabledBuiltInVariable (..)
-
-    -- * ContainerItemUsageContext
-    , ContainerItemUsageContext (..)
-
-    -- * ContainerVersion
-    , ContainerVersion
-    , containerVersion
-    , cvMacro
-    , cvTag
-    , cvContainerId
-    , cvFingerprint
-    , cvContainerVersionId
-    , cvRule
-    , cvFolder
-    , cvVariable
-    , cvAccountId
-    , cvName
-    , cvContainer
-    , cvDeleted
-    , cvTrigger
-    , cvNotes
-
-    -- * ContainerVersionHeader
-    , ContainerVersionHeader
-    , containerVersionHeader
-    , cvhNumTags
-    , cvhNumMacros
-    , cvhContainerId
-    , cvhContainerVersionId
-    , cvhAccountId
-    , cvhName
-    , cvhNumTriggers
-    , cvhDeleted
-    , cvhNumRules
-    , cvhNumVariables
-
-    -- * CreateContainerVersionRequestVersionOptions
-    , CreateContainerVersionRequestVersionOptions
-    , createContainerVersionRequestVersionOptions
-    , ccvrvoName
-    , ccvrvoQuickPreview
-    , ccvrvoNotes
-
-    -- * CreateContainerVersionResponse
-    , CreateContainerVersionResponse
-    , createContainerVersionResponse
-    , ccvrCompilerError
-    , ccvrContainerVersion
-
-    -- * Folder
-    , Folder
-    , folder
-    , fContainerId
-    , fFingerprint
-    , fFolderId
-    , fAccountId
-    , fName
-
-    -- * FolderEntities
-    , FolderEntities
-    , folderEntities
-    , feTag
-    , feVariable
-    , feTrigger
-
-    -- * ListAccountUsersResponse
-    , ListAccountUsersResponse
-    , listAccountUsersResponse
-    , laurUserAccess
-
-    -- * ListAccountsResponse
-    , ListAccountsResponse
-    , listAccountsResponse
-    , larAccounts
-
     -- * ListContainerVersionsResponse
     , ListContainerVersionsResponse
     , listContainerVersionsResponse
     , lcvrContainerVersionHeader
     , lcvrContainerVersion
 
-    -- * ListContainersResponse
-    , ListContainersResponse
-    , listContainersResponse
-    , lcrContainers
-
-    -- * ListFoldersResponse
-    , ListFoldersResponse
-    , listFoldersResponse
-    , lfrFolders
-
-    -- * ListMacrosResponse
-    , ListMacrosResponse
-    , listMacrosResponse
-    , lmrMacros
-
-    -- * ListRulesResponse
-    , ListRulesResponse
-    , listRulesResponse
-    , lrrRules
-
-    -- * ListTagsResponse
-    , ListTagsResponse
-    , listTagsResponse
-    , ltrTags
-
     -- * ListTriggersResponse
     , ListTriggersResponse
     , listTriggersResponse
     , ltrTriggers
-
-    -- * ListVariablesResponse
-    , ListVariablesResponse
-    , listVariablesResponse
-    , lvrVariables
 
     -- * Macro
     , Macro
@@ -199,40 +60,19 @@ module Network.Google.TagManager.Types
     , macNotes
     , macParameter
 
-    -- * Parameter
-    , Parameter
-    , parameter
-    , pList
-    , pValue
-    , pMap
-    , pKey
-    , pType
-
-    -- * ParameterType
-    , ParameterType (..)
-
-    -- * PublishContainerVersionResponse
-    , PublishContainerVersionResponse
-    , publishContainerVersionResponse
-    , pcvrCompilerError
-    , pcvrContainerVersion
-
-    -- * Rule
-    , Rule
-    , rule
-    , rContainerId
-    , rFingerprint
-    , rRuleId
-    , rAccountId
-    , rName
-    , rNotes
-    , rCondition
-
-    -- * SetupTag
-    , SetupTag
-    , setupTag
-    , stTagName
-    , stStopOnSetupFailure
+    -- * ContainerVersionHeader
+    , ContainerVersionHeader
+    , containerVersionHeader
+    , cvhNumTags
+    , cvhNumMacros
+    , cvhContainerId
+    , cvhContainerVersionId
+    , cvhAccountId
+    , cvhName
+    , cvhNumTriggers
+    , cvhDeleted
+    , cvhNumRules
+    , cvhNumVariables
 
     -- * Tag
     , Tag
@@ -258,14 +98,62 @@ module Network.Google.TagManager.Types
     , tagFiringRuleId
     , tagParameter
 
-    -- * TagTagFiringOption
-    , TagTagFiringOption (..)
-
     -- * TeardownTag
     , TeardownTag
     , teardownTag
     , ttStopTeardownOnFailure
     , ttTagName
+
+    -- * CreateContainerVersionRequestVersionOptions
+    , CreateContainerVersionRequestVersionOptions
+    , createContainerVersionRequestVersionOptions
+    , ccvrvoName
+    , ccvrvoQuickPreview
+    , ccvrvoNotes
+
+    -- * Alt
+    , Alt (..)
+
+    -- * CreateContainerVersionResponse
+    , CreateContainerVersionResponse
+    , createContainerVersionResponse
+    , ccvrCompilerError
+    , ccvrContainerVersion
+
+    -- * SetupTag
+    , SetupTag
+    , setupTag
+    , stTagName
+    , stStopOnSetupFailure
+
+    -- * ContainerVersion
+    , ContainerVersion
+    , containerVersion
+    , cvMacro
+    , cvTag
+    , cvContainerId
+    , cvFingerprint
+    , cvContainerVersionId
+    , cvRule
+    , cvFolder
+    , cvVariable
+    , cvAccountId
+    , cvName
+    , cvContainer
+    , cvDeleted
+    , cvTrigger
+    , cvNotes
+
+    -- * ListContainersResponse
+    , ListContainersResponse
+    , listContainersResponse
+    , lcrContainers
+
+    -- * TagTagFiringOption
+    , TagTagFiringOption (..)
+
+    -- * AccountAccessItemPermission
+    , AccountAccessItemPermission (..)
 
     -- * Trigger
     , Trigger
@@ -290,17 +178,57 @@ module Network.Google.TagManager.Types
     , tEventName
     , tWaitForTags
 
+    -- * ConditionType
+    , ConditionType (..)
+
+    -- * ListMacrosResponse
+    , ListMacrosResponse
+    , listMacrosResponse
+    , lmrMacros
+
+    -- * ListTagsResponse
+    , ListTagsResponse
+    , listTagsResponse
+    , ltrTags
+
+    -- * ContainerItemEnabledBuiltInVariable
+    , ContainerItemEnabledBuiltInVariable (..)
+
+    -- * Condition
+    , Condition
+    , condition
+    , cType
+    , cParameter
+
+    -- * ContainerAccess
+    , ContainerAccess
+    , containerAccess
+    , caContainerId
+    , caPermission
+
     -- * TriggerType
     , TriggerType (..)
 
-    -- * UserAccess
-    , UserAccess
-    , userAccess
-    , uaAccountAccess
-    , uaAccountId
-    , uaEmailAddress
-    , uaContainerAccess
-    , uaPermissionId
+    -- * ContainerItemUsageContext
+    , ContainerItemUsageContext (..)
+
+    -- * FolderEntities
+    , FolderEntities
+    , folderEntities
+    , feTag
+    , feVariable
+    , feTrigger
+
+    -- * Rule
+    , Rule
+    , rule
+    , rContainerId
+    , rFingerprint
+    , rRuleId
+    , rAccountId
+    , rName
+    , rNotes
+    , rCondition
 
     -- * Variable
     , Variable
@@ -318,8 +246,92 @@ module Network.Google.TagManager.Types
     , vNotes
     , vEnablingTriggerId
     , vParameter
+
+    -- * Folder
+    , Folder
+    , folder
+    , fContainerId
+    , fFingerprint
+    , fFolderId
+    , fAccountId
+    , fName
+
+    -- * Parameter
+    , Parameter
+    , parameter
+    , pList
+    , pValue
+    , pMap
+    , pKey
+    , pType
+
+    -- * ListFoldersResponse
+    , ListFoldersResponse
+    , listFoldersResponse
+    , lfrFolders
+
+    -- * ListVariablesResponse
+    , ListVariablesResponse
+    , listVariablesResponse
+    , lvrVariables
+
+    -- * ListRulesResponse
+    , ListRulesResponse
+    , listRulesResponse
+    , lrrRules
+
+    -- * PublishContainerVersionResponse
+    , PublishContainerVersionResponse
+    , publishContainerVersionResponse
+    , pcvrCompilerError
+    , pcvrContainerVersion
+
+    -- * ListAccountUsersResponse
+    , ListAccountUsersResponse
+    , listAccountUsersResponse
+    , laurUserAccess
+
+    -- * ParameterType
+    , ParameterType (..)
+
+    -- * UserAccess
+    , UserAccess
+    , userAccess
+    , uaAccountAccess
+    , uaAccountId
+    , uaEmailAddress
+    , uaContainerAccess
+    , uaPermissionId
+
+    -- * AccountAccess
+    , AccountAccess
+    , accountAccess
+    , aaPermission
+
+    -- * ListAccountsResponse
+    , ListAccountsResponse
+    , listAccountsResponse
+    , larAccounts
+
+    -- * ContainerAccessItemPermission
+    , ContainerAccessItemPermission (..)
+
+    -- * Account
+    , Account
+    , account
+    , aaShareData
+    , aaFingerprint
+    , aaAccountId
+    , aaName
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types.Product
 import           Network.Google.TagManager.Types.Sum
+
+-- | URL referring to version 'v1' of the Tag Manager API.
+tagManagerURL :: BaseUrl
+tagManagerURL
+  = BaseUrl Https
+      "https://www.googleapis.com/tagmanager/v1/"
+      443

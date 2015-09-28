@@ -19,522 +19,73 @@ import           Network.Google.Fitness.Types.Sum
 import           Network.Google.Prelude
 
 --
--- /See:/ 'aggregateBucket' smart constructor.
-data AggregateBucket = AggregateBucket
-    { _abEndTimeMillis   :: !(Maybe Int64)
-    , _abDataset         :: !(Maybe [Maybe Dataset])
-    , _abActivity        :: !(Maybe Int32)
-    , _abType            :: !(Maybe AggregateBucketType)
-    , _abStartTimeMillis :: !(Maybe Int64)
-    , _abSession         :: !(Maybe (Maybe Session))
+-- /See:/ 'listSessionsResponse' smart constructor.
+data ListSessionsResponse = ListSessionsResponse
+    { _lsrNextPageToken  :: !(Maybe Text)
+    , _lsrDeletedSession :: !(Maybe [Maybe Session])
+    , _lsrSession        :: !(Maybe [Maybe Session])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AggregateBucket' with the minimum fields required to make a request.
+-- | Creates a value of 'ListSessionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'abEndTimeMillis'
+-- * 'lsrNextPageToken'
 --
--- * 'abDataset'
+-- * 'lsrDeletedSession'
 --
--- * 'abActivity'
---
--- * 'abType'
---
--- * 'abStartTimeMillis'
---
--- * 'abSession'
-aggregateBucket
-    :: AggregateBucket
-aggregateBucket =
-    AggregateBucket
-    { _abEndTimeMillis = Nothing
-    , _abDataset = Nothing
-    , _abActivity = Nothing
-    , _abType = Nothing
-    , _abStartTimeMillis = Nothing
-    , _abSession = Nothing
+-- * 'lsrSession'
+listSessionsResponse
+    :: ListSessionsResponse
+listSessionsResponse =
+    ListSessionsResponse
+    { _lsrNextPageToken = Nothing
+    , _lsrDeletedSession = Nothing
+    , _lsrSession = Nothing
     }
 
--- | The end time for the aggregated data, in milliseconds since epoch,
--- inclusive.
-abEndTimeMillis :: Lens' AggregateBucket (Maybe Int64)
-abEndTimeMillis
-  = lens _abEndTimeMillis
-      (\ s a -> s{_abEndTimeMillis = a})
+-- | The continuation token, which is used to page through large result sets.
+-- Provide this value in a subsequent request to return the next page of
+-- results.
+lsrNextPageToken :: Lens' ListSessionsResponse (Maybe Text)
+lsrNextPageToken
+  = lens _lsrNextPageToken
+      (\ s a -> s{_lsrNextPageToken = a})
 
--- | There will be one dataset per AggregateBy in the request.
-abDataset :: Lens' AggregateBucket [Maybe Dataset]
-abDataset
-  = lens _abDataset (\ s a -> s{_abDataset = a}) .
-      _Default
-      . _Coerce
-
--- | Available for Bucket.Type.ACTIVITY_TYPE, Bucket.Type.ACTIVITY_SEGMENT
-abActivity :: Lens' AggregateBucket (Maybe Int32)
-abActivity
-  = lens _abActivity (\ s a -> s{_abActivity = a})
-
--- | The type of a bucket signifies how the data aggregation is performed in
--- the bucket.
-abType :: Lens' AggregateBucket (Maybe AggregateBucketType)
-abType = lens _abType (\ s a -> s{_abType = a})
-
--- | The start time for the aggregated data, in milliseconds since epoch,
--- inclusive.
-abStartTimeMillis :: Lens' AggregateBucket (Maybe Int64)
-abStartTimeMillis
-  = lens _abStartTimeMillis
-      (\ s a -> s{_abStartTimeMillis = a})
-
--- | Available for Bucket.Type.SESSION
-abSession :: Lens' AggregateBucket (Maybe (Maybe Session))
-abSession
-  = lens _abSession (\ s a -> s{_abSession = a})
-
-instance FromJSON AggregateBucket where
-        parseJSON
-          = withObject "AggregateBucket"
-              (\ o ->
-                 AggregateBucket <$>
-                   (o .:? "endTimeMillis") <*>
-                     (o .:? "dataset" .!= mempty)
-                     <*> (o .:? "activity")
-                     <*> (o .:? "type")
-                     <*> (o .:? "startTimeMillis")
-                     <*> (o .:? "session"))
-
-instance ToJSON AggregateBucket where
-        toJSON AggregateBucket{..}
-          = object
-              (catMaybes
-                 [("endTimeMillis" .=) <$> _abEndTimeMillis,
-                  ("dataset" .=) <$> _abDataset,
-                  ("activity" .=) <$> _abActivity,
-                  ("type" .=) <$> _abType,
-                  ("startTimeMillis" .=) <$> _abStartTimeMillis,
-                  ("session" .=) <$> _abSession])
-
--- | The specification of which data to aggregate.
---
--- /See:/ 'aggregateBy' smart constructor.
-data AggregateBy = AggregateBy
-    { _abDataTypeName :: !(Maybe Text)
-    , _abDataSourceId :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AggregateBy' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'abDataTypeName'
---
--- * 'abDataSourceId'
-aggregateBy
-    :: AggregateBy
-aggregateBy =
-    AggregateBy
-    { _abDataTypeName = Nothing
-    , _abDataSourceId = Nothing
-    }
-
--- | The data type to aggregate. All data sources providing this data type
--- will contribute data to the aggregation. The response will contain a
--- single dataset for this data type name. The dataset will have a data
--- source ID of derived:com.google.:com.google.android.gms:aggregated
-abDataTypeName :: Lens' AggregateBy (Maybe Text)
-abDataTypeName
-  = lens _abDataTypeName
-      (\ s a -> s{_abDataTypeName = a})
-
--- | A data source ID to aggregate. Mutually exclusive of dataTypeName. Only
--- data from the specified data source ID will be included in the
--- aggregation. The dataset in the response will have the same data source
--- ID.
-abDataSourceId :: Lens' AggregateBy (Maybe Text)
-abDataSourceId
-  = lens _abDataSourceId
-      (\ s a -> s{_abDataSourceId = a})
-
-instance FromJSON AggregateBy where
-        parseJSON
-          = withObject "AggregateBy"
-              (\ o ->
-                 AggregateBy <$>
-                   (o .:? "dataTypeName") <*> (o .:? "dataSourceId"))
-
-instance ToJSON AggregateBy where
-        toJSON AggregateBy{..}
-          = object
-              (catMaybes
-                 [("dataTypeName" .=) <$> _abDataTypeName,
-                  ("dataSourceId" .=) <$> _abDataSourceId])
-
---
--- /See:/ 'aggregateRequest' smart constructor.
-data AggregateRequest = AggregateRequest
-    { _arEndTimeMillis           :: !(Maybe Int64)
-    , _arAggregateBy             :: !(Maybe [Maybe AggregateBy])
-    , _arBucketBySession         :: !(Maybe (Maybe BucketBySession))
-    , _arBucketByActivityType    :: !(Maybe (Maybe BucketByActivity))
-    , _arBucketByTime            :: !(Maybe (Maybe BucketByTime))
-    , _arStartTimeMillis         :: !(Maybe Int64)
-    , _arBucketByActivitySegment :: !(Maybe (Maybe BucketByActivity))
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AggregateRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'arEndTimeMillis'
---
--- * 'arAggregateBy'
---
--- * 'arBucketBySession'
---
--- * 'arBucketByActivityType'
---
--- * 'arBucketByTime'
---
--- * 'arStartTimeMillis'
---
--- * 'arBucketByActivitySegment'
-aggregateRequest
-    :: AggregateRequest
-aggregateRequest =
-    AggregateRequest
-    { _arEndTimeMillis = Nothing
-    , _arAggregateBy = Nothing
-    , _arBucketBySession = Nothing
-    , _arBucketByActivityType = Nothing
-    , _arBucketByTime = Nothing
-    , _arStartTimeMillis = Nothing
-    , _arBucketByActivitySegment = Nothing
-    }
-
--- | The end of a window of time. Data that intersects with this time window
--- will be aggregated. The time is in milliseconds since epoch, inclusive.
-arEndTimeMillis :: Lens' AggregateRequest (Maybe Int64)
-arEndTimeMillis
-  = lens _arEndTimeMillis
-      (\ s a -> s{_arEndTimeMillis = a})
-
--- | The specification of data to be aggregated. At least one aggregateBy
--- spec must be provided. All data that is specified will be aggregated
--- using the same bucketing criteria. There will be one dataset in the
--- response for every aggregateBy spec.
-arAggregateBy :: Lens' AggregateRequest [Maybe AggregateBy]
-arAggregateBy
-  = lens _arAggregateBy
-      (\ s a -> s{_arAggregateBy = a})
+-- | If includeDeleted is set to true in the request, this list will contain
+-- sessions deleted with original end times that are within the startTime
+-- and endTime frame.
+lsrDeletedSession :: Lens' ListSessionsResponse [Maybe Session]
+lsrDeletedSession
+  = lens _lsrDeletedSession
+      (\ s a -> s{_lsrDeletedSession = a})
       . _Default
       . _Coerce
 
--- | Specifies that data be aggregated by user sessions. Data that does not
--- fall within the time range of a session will not be included in the
--- response. Mutually exclusive of other bucketing specifications.
-arBucketBySession :: Lens' AggregateRequest (Maybe (Maybe BucketBySession))
-arBucketBySession
-  = lens _arBucketBySession
-      (\ s a -> s{_arBucketBySession = a})
-
--- | Specifies that data be aggregated by the type of activity being
--- performed when the data was recorded. All data that was recorded during
--- a certain activity type (for the given time range) will be aggregated
--- into the same bucket. Data that was recorded while the user was not
--- active will not be included in the response. Mutually exclusive of other
--- bucketing specifications.
-arBucketByActivityType :: Lens' AggregateRequest (Maybe (Maybe BucketByActivity))
-arBucketByActivityType
-  = lens _arBucketByActivityType
-      (\ s a -> s{_arBucketByActivityType = a})
-
--- | Specifies that data be aggregated by a single time interval. Mutually
--- exclusive of other bucketing specifications.
-arBucketByTime :: Lens' AggregateRequest (Maybe (Maybe BucketByTime))
-arBucketByTime
-  = lens _arBucketByTime
-      (\ s a -> s{_arBucketByTime = a})
-
--- | The start of a window of time. Data that intersects with this time
--- window will be aggregated. The time is in milliseconds since epoch,
--- inclusive.
-arStartTimeMillis :: Lens' AggregateRequest (Maybe Int64)
-arStartTimeMillis
-  = lens _arStartTimeMillis
-      (\ s a -> s{_arStartTimeMillis = a})
-
--- | Specifies that data be aggregated each activity segment recored for a
--- user. Similar to bucketByActivitySegment, but bucketing is done for each
--- activity segment rather than all segments of the same type. Mutually
--- exclusive of other bucketing specifications.
-arBucketByActivitySegment :: Lens' AggregateRequest (Maybe (Maybe BucketByActivity))
-arBucketByActivitySegment
-  = lens _arBucketByActivitySegment
-      (\ s a -> s{_arBucketByActivitySegment = a})
-
-instance FromJSON AggregateRequest where
-        parseJSON
-          = withObject "AggregateRequest"
-              (\ o ->
-                 AggregateRequest <$>
-                   (o .:? "endTimeMillis") <*>
-                     (o .:? "aggregateBy" .!= mempty)
-                     <*> (o .:? "bucketBySession")
-                     <*> (o .:? "bucketByActivityType")
-                     <*> (o .:? "bucketByTime")
-                     <*> (o .:? "startTimeMillis")
-                     <*> (o .:? "bucketByActivitySegment"))
-
-instance ToJSON AggregateRequest where
-        toJSON AggregateRequest{..}
-          = object
-              (catMaybes
-                 [("endTimeMillis" .=) <$> _arEndTimeMillis,
-                  ("aggregateBy" .=) <$> _arAggregateBy,
-                  ("bucketBySession" .=) <$> _arBucketBySession,
-                  ("bucketByActivityType" .=) <$>
-                    _arBucketByActivityType,
-                  ("bucketByTime" .=) <$> _arBucketByTime,
-                  ("startTimeMillis" .=) <$> _arStartTimeMillis,
-                  ("bucketByActivitySegment" .=) <$>
-                    _arBucketByActivitySegment])
-
---
--- /See:/ 'aggregateResponse' smart constructor.
-newtype AggregateResponse = AggregateResponse
-    { _arBucket :: Maybe [Maybe AggregateBucket]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AggregateResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'arBucket'
-aggregateResponse
-    :: AggregateResponse
-aggregateResponse =
-    AggregateResponse
-    { _arBucket = Nothing
-    }
-
--- | A list of buckets containing the aggregated data.
-arBucket :: Lens' AggregateResponse [Maybe AggregateBucket]
-arBucket
-  = lens _arBucket (\ s a -> s{_arBucket = a}) .
+-- | Sessions with an end time that is between startTime and endTime of the
+-- request.
+lsrSession :: Lens' ListSessionsResponse [Maybe Session]
+lsrSession
+  = lens _lsrSession (\ s a -> s{_lsrSession = a}) .
       _Default
       . _Coerce
 
-instance FromJSON AggregateResponse where
+instance FromJSON ListSessionsResponse where
         parseJSON
-          = withObject "AggregateResponse"
+          = withObject "ListSessionsResponse"
               (\ o ->
-                 AggregateResponse <$> (o .:? "bucket" .!= mempty))
+                 ListSessionsResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "deletedSession" .!= mempty)
+                     <*> (o .:? "session" .!= mempty))
 
-instance ToJSON AggregateResponse where
-        toJSON AggregateResponse{..}
-          = object (catMaybes [("bucket" .=) <$> _arBucket])
-
--- | See:
--- google3\/java\/com\/google\/android\/apps\/heart\/platform\/api\/Application.java
---
--- /See:/ 'application' smart constructor.
-data Application = Application
-    { _aPackageName :: !(Maybe Text)
-    , _aName        :: !(Maybe Text)
-    , _aVersion     :: !(Maybe Text)
-    , _aDetailsUrl  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Application' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aPackageName'
---
--- * 'aName'
---
--- * 'aVersion'
---
--- * 'aDetailsUrl'
-application
-    :: Application
-application =
-    Application
-    { _aPackageName = Nothing
-    , _aName = Nothing
-    , _aVersion = Nothing
-    , _aDetailsUrl = Nothing
-    }
-
--- | Package name for this application. This is used as a unique identifier
--- when created by Android applications, but cannot be specified by REST
--- clients. REST clients will have their developer project number reflected
--- into the Data Source data stream IDs, instead of the packageName.
-aPackageName :: Lens' Application (Maybe Text)
-aPackageName
-  = lens _aPackageName (\ s a -> s{_aPackageName = a})
-
--- | The name of this application. This is required for REST clients, but we
--- do not enforce uniqueness of this name. It is provided as a matter of
--- convenience for other developers who would like to identify which REST
--- created an Application or Data Source.
-aName :: Lens' Application (Maybe Text)
-aName = lens _aName (\ s a -> s{_aName = a})
-
--- | Version of the application. You should update this field whenever the
--- application changes in a way that affects the computation of the data.
-aVersion :: Lens' Application (Maybe Text)
-aVersion = lens _aVersion (\ s a -> s{_aVersion = a})
-
--- | An optional URI that can be used to link back to the application.
-aDetailsUrl :: Lens' Application (Maybe Text)
-aDetailsUrl
-  = lens _aDetailsUrl (\ s a -> s{_aDetailsUrl = a})
-
-instance FromJSON Application where
-        parseJSON
-          = withObject "Application"
-              (\ o ->
-                 Application <$>
-                   (o .:? "packageName") <*> (o .:? "name") <*>
-                     (o .:? "version")
-                     <*> (o .:? "detailsUrl"))
-
-instance ToJSON Application where
-        toJSON Application{..}
+instance ToJSON ListSessionsResponse where
+        toJSON ListSessionsResponse{..}
           = object
               (catMaybes
-                 [("packageName" .=) <$> _aPackageName,
-                  ("name" .=) <$> _aName, ("version" .=) <$> _aVersion,
-                  ("detailsUrl" .=) <$> _aDetailsUrl])
-
---
--- /See:/ 'bucketByActivity' smart constructor.
-data BucketByActivity = BucketByActivity
-    { _bbaMinDurationMillis    :: !(Maybe Int64)
-    , _bbaActivityDataSourceId :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'BucketByActivity' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'bbaMinDurationMillis'
---
--- * 'bbaActivityDataSourceId'
-bucketByActivity
-    :: BucketByActivity
-bucketByActivity =
-    BucketByActivity
-    { _bbaMinDurationMillis = Nothing
-    , _bbaActivityDataSourceId = Nothing
-    }
-
--- | Specifies that only activity segments of duration longer than
--- minDurationMillis are considered and used as a container for aggregated
--- data.
-bbaMinDurationMillis :: Lens' BucketByActivity (Maybe Int64)
-bbaMinDurationMillis
-  = lens _bbaMinDurationMillis
-      (\ s a -> s{_bbaMinDurationMillis = a})
-
--- | The default activity stream will be used if a specific
--- activityDataSourceId is not specified.
-bbaActivityDataSourceId :: Lens' BucketByActivity (Maybe Text)
-bbaActivityDataSourceId
-  = lens _bbaActivityDataSourceId
-      (\ s a -> s{_bbaActivityDataSourceId = a})
-
-instance FromJSON BucketByActivity where
-        parseJSON
-          = withObject "BucketByActivity"
-              (\ o ->
-                 BucketByActivity <$>
-                   (o .:? "minDurationMillis") <*>
-                     (o .:? "activityDataSourceId"))
-
-instance ToJSON BucketByActivity where
-        toJSON BucketByActivity{..}
-          = object
-              (catMaybes
-                 [("minDurationMillis" .=) <$> _bbaMinDurationMillis,
-                  ("activityDataSourceId" .=) <$>
-                    _bbaActivityDataSourceId])
-
---
--- /See:/ 'bucketBySession' smart constructor.
-newtype BucketBySession = BucketBySession
-    { _bbsMinDurationMillis :: Maybe Int64
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'BucketBySession' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'bbsMinDurationMillis'
-bucketBySession
-    :: BucketBySession
-bucketBySession =
-    BucketBySession
-    { _bbsMinDurationMillis = Nothing
-    }
-
--- | Specifies that only sessions of duration longer than minDurationMillis
--- are considered and used as a container for aggregated data.
-bbsMinDurationMillis :: Lens' BucketBySession (Maybe Int64)
-bbsMinDurationMillis
-  = lens _bbsMinDurationMillis
-      (\ s a -> s{_bbsMinDurationMillis = a})
-
-instance FromJSON BucketBySession where
-        parseJSON
-          = withObject "BucketBySession"
-              (\ o ->
-                 BucketBySession <$> (o .:? "minDurationMillis"))
-
-instance ToJSON BucketBySession where
-        toJSON BucketBySession{..}
-          = object
-              (catMaybes
-                 [("minDurationMillis" .=) <$> _bbsMinDurationMillis])
-
---
--- /See:/ 'bucketByTime' smart constructor.
-newtype BucketByTime = BucketByTime
-    { _bbtDurationMillis :: Maybe Int64
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'BucketByTime' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'bbtDurationMillis'
-bucketByTime
-    :: BucketByTime
-bucketByTime =
-    BucketByTime
-    { _bbtDurationMillis = Nothing
-    }
-
--- | Specifies that result buckets aggregate data by exactly durationMillis
--- time frames. Time frames that contain no data will be included in the
--- response with an empty dataset.
-bbtDurationMillis :: Lens' BucketByTime (Maybe Int64)
-bbtDurationMillis
-  = lens _bbtDurationMillis
-      (\ s a -> s{_bbtDurationMillis = a})
-
-instance FromJSON BucketByTime where
-        parseJSON
-          = withObject "BucketByTime"
-              (\ o -> BucketByTime <$> (o .:? "durationMillis"))
-
-instance ToJSON BucketByTime where
-        toJSON BucketByTime{..}
-          = object
-              (catMaybes
-                 [("durationMillis" .=) <$> _bbtDurationMillis])
+                 [("nextPageToken" .=) <$> _lsrNextPageToken,
+                  ("deletedSession" .=) <$> _lsrDeletedSession,
+                  ("session" .=) <$> _lsrSession])
 
 -- | Represents a single data point, generated by a particular data source. A
 -- data point holds a value for each field, an end timestamp and an
@@ -678,6 +229,438 @@ instance ToJSON DataPoint where
                   ("endTimeNanos" .=) <$> _dpEndTimeNanos,
                   ("modifiedTimeMillis" .=) <$> _dpModifiedTimeMillis,
                   ("startTimeNanos" .=) <$> _dpStartTimeNanos])
+
+--
+-- /See:/ 'aggregateBucket' smart constructor.
+data AggregateBucket = AggregateBucket
+    { _abEndTimeMillis   :: !(Maybe Int64)
+    , _abDataset         :: !(Maybe [Maybe Dataset])
+    , _abActivity        :: !(Maybe Int32)
+    , _abType            :: !(Maybe AggregateBucketType)
+    , _abStartTimeMillis :: !(Maybe Int64)
+    , _abSession         :: !(Maybe (Maybe Session))
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AggregateBucket' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'abEndTimeMillis'
+--
+-- * 'abDataset'
+--
+-- * 'abActivity'
+--
+-- * 'abType'
+--
+-- * 'abStartTimeMillis'
+--
+-- * 'abSession'
+aggregateBucket
+    :: AggregateBucket
+aggregateBucket =
+    AggregateBucket
+    { _abEndTimeMillis = Nothing
+    , _abDataset = Nothing
+    , _abActivity = Nothing
+    , _abType = Nothing
+    , _abStartTimeMillis = Nothing
+    , _abSession = Nothing
+    }
+
+-- | The end time for the aggregated data, in milliseconds since epoch,
+-- inclusive.
+abEndTimeMillis :: Lens' AggregateBucket (Maybe Int64)
+abEndTimeMillis
+  = lens _abEndTimeMillis
+      (\ s a -> s{_abEndTimeMillis = a})
+
+-- | There will be one dataset per AggregateBy in the request.
+abDataset :: Lens' AggregateBucket [Maybe Dataset]
+abDataset
+  = lens _abDataset (\ s a -> s{_abDataset = a}) .
+      _Default
+      . _Coerce
+
+-- | Available for Bucket.Type.ACTIVITY_TYPE, Bucket.Type.ACTIVITY_SEGMENT
+abActivity :: Lens' AggregateBucket (Maybe Int32)
+abActivity
+  = lens _abActivity (\ s a -> s{_abActivity = a})
+
+-- | The type of a bucket signifies how the data aggregation is performed in
+-- the bucket.
+abType :: Lens' AggregateBucket (Maybe AggregateBucketType)
+abType = lens _abType (\ s a -> s{_abType = a})
+
+-- | The start time for the aggregated data, in milliseconds since epoch,
+-- inclusive.
+abStartTimeMillis :: Lens' AggregateBucket (Maybe Int64)
+abStartTimeMillis
+  = lens _abStartTimeMillis
+      (\ s a -> s{_abStartTimeMillis = a})
+
+-- | Available for Bucket.Type.SESSION
+abSession :: Lens' AggregateBucket (Maybe (Maybe Session))
+abSession
+  = lens _abSession (\ s a -> s{_abSession = a})
+
+instance FromJSON AggregateBucket where
+        parseJSON
+          = withObject "AggregateBucket"
+              (\ o ->
+                 AggregateBucket <$>
+                   (o .:? "endTimeMillis") <*>
+                     (o .:? "dataset" .!= mempty)
+                     <*> (o .:? "activity")
+                     <*> (o .:? "type")
+                     <*> (o .:? "startTimeMillis")
+                     <*> (o .:? "session"))
+
+instance ToJSON AggregateBucket where
+        toJSON AggregateBucket{..}
+          = object
+              (catMaybes
+                 [("endTimeMillis" .=) <$> _abEndTimeMillis,
+                  ("dataset" .=) <$> _abDataset,
+                  ("activity" .=) <$> _abActivity,
+                  ("type" .=) <$> _abType,
+                  ("startTimeMillis" .=) <$> _abStartTimeMillis,
+                  ("session" .=) <$> _abSession])
+
+-- | Holder object for the value of an entry in a map field of a data point.
+-- A map value supports a subset of the formats that the regular Value
+-- supports.
+--
+-- /See:/ 'mapValue' smart constructor.
+newtype MapValue = MapValue
+    { _mvFpVal :: Maybe Double
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'MapValue' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mvFpVal'
+mapValue
+    :: MapValue
+mapValue =
+    MapValue
+    { _mvFpVal = Nothing
+    }
+
+-- | Floating point value.
+mvFpVal :: Lens' MapValue (Maybe Double)
+mvFpVal = lens _mvFpVal (\ s a -> s{_mvFpVal = a})
+
+instance FromJSON MapValue where
+        parseJSON
+          = withObject "MapValue"
+              (\ o -> MapValue <$> (o .:? "fpVal"))
+
+instance ToJSON MapValue where
+        toJSON MapValue{..}
+          = object (catMaybes [("fpVal" .=) <$> _mvFpVal])
+
+--
+-- /See:/ 'listDataSourcesResponse' smart constructor.
+newtype ListDataSourcesResponse = ListDataSourcesResponse
+    { _ldsrDataSource :: Maybe [Maybe DataSource]
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListDataSourcesResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ldsrDataSource'
+listDataSourcesResponse
+    :: ListDataSourcesResponse
+listDataSourcesResponse =
+    ListDataSourcesResponse
+    { _ldsrDataSource = Nothing
+    }
+
+-- | A previously created data source.
+ldsrDataSource :: Lens' ListDataSourcesResponse [Maybe DataSource]
+ldsrDataSource
+  = lens _ldsrDataSource
+      (\ s a -> s{_ldsrDataSource = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListDataSourcesResponse where
+        parseJSON
+          = withObject "ListDataSourcesResponse"
+              (\ o ->
+                 ListDataSourcesResponse <$>
+                   (o .:? "dataSource" .!= mempty))
+
+instance ToJSON ListDataSourcesResponse where
+        toJSON ListDataSourcesResponse{..}
+          = object
+              (catMaybes [("dataSource" .=) <$> _ldsrDataSource])
+
+-- | The specification of which data to aggregate.
+--
+-- /See:/ 'aggregateBy' smart constructor.
+data AggregateBy = AggregateBy
+    { _abDataTypeName :: !(Maybe Text)
+    , _abDataSourceId :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AggregateBy' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'abDataTypeName'
+--
+-- * 'abDataSourceId'
+aggregateBy
+    :: AggregateBy
+aggregateBy =
+    AggregateBy
+    { _abDataTypeName = Nothing
+    , _abDataSourceId = Nothing
+    }
+
+-- | The data type to aggregate. All data sources providing this data type
+-- will contribute data to the aggregation. The response will contain a
+-- single dataset for this data type name. The dataset will have a data
+-- source ID of derived:com.google.:com.google.android.gms:aggregated
+abDataTypeName :: Lens' AggregateBy (Maybe Text)
+abDataTypeName
+  = lens _abDataTypeName
+      (\ s a -> s{_abDataTypeName = a})
+
+-- | A data source ID to aggregate. Mutually exclusive of dataTypeName. Only
+-- data from the specified data source ID will be included in the
+-- aggregation. The dataset in the response will have the same data source
+-- ID.
+abDataSourceId :: Lens' AggregateBy (Maybe Text)
+abDataSourceId
+  = lens _abDataSourceId
+      (\ s a -> s{_abDataSourceId = a})
+
+instance FromJSON AggregateBy where
+        parseJSON
+          = withObject "AggregateBy"
+              (\ o ->
+                 AggregateBy <$>
+                   (o .:? "dataTypeName") <*> (o .:? "dataSourceId"))
+
+instance ToJSON AggregateBy where
+        toJSON AggregateBy{..}
+          = object
+              (catMaybes
+                 [("dataTypeName" .=) <$> _abDataTypeName,
+                  ("dataSourceId" .=) <$> _abDataSourceId])
+
+-- | A dataset represents a projection container for data points. They do not
+-- carry any info of their own. Datasets represent a set of data points
+-- from a particular data source. A data point can be found in more than
+-- one dataset.
+--
+-- /See:/ 'dataset' smart constructor.
+data Dataset = Dataset
+    { _dNextPageToken  :: !(Maybe Text)
+    , _dDataSourceId   :: !(Maybe Text)
+    , _dPoint          :: !(Maybe [Maybe DataPoint])
+    , _dMinStartTimeNs :: !(Maybe Int64)
+    , _dMaxEndTimeNs   :: !(Maybe Int64)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Dataset' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dNextPageToken'
+--
+-- * 'dDataSourceId'
+--
+-- * 'dPoint'
+--
+-- * 'dMinStartTimeNs'
+--
+-- * 'dMaxEndTimeNs'
+dataset
+    :: Dataset
+dataset =
+    Dataset
+    { _dNextPageToken = Nothing
+    , _dDataSourceId = Nothing
+    , _dPoint = Nothing
+    , _dMinStartTimeNs = Nothing
+    , _dMaxEndTimeNs = Nothing
+    }
+
+-- | This token will be set when a dataset is received in response to a GET
+-- request and the dataset is too large to be included in a single
+-- response. Provide this value in a subsequent GET request to return the
+-- next page of data points within this dataset.
+dNextPageToken :: Lens' Dataset (Maybe Text)
+dNextPageToken
+  = lens _dNextPageToken
+      (\ s a -> s{_dNextPageToken = a})
+
+-- | The data stream ID of the data source that created the points in this
+-- dataset.
+dDataSourceId :: Lens' Dataset (Maybe Text)
+dDataSourceId
+  = lens _dDataSourceId
+      (\ s a -> s{_dDataSourceId = a})
+
+-- | A partial list of data points contained in the dataset, ordered by
+-- largest endTimeNanos first. This list is considered complete when
+-- retrieving a small dataset and partial when patching a dataset or
+-- retrieving a dataset that is too large to include in a single response.
+dPoint :: Lens' Dataset [Maybe DataPoint]
+dPoint
+  = lens _dPoint (\ s a -> s{_dPoint = a}) . _Default .
+      _Coerce
+
+-- | The smallest start time of all data points in this possibly partial
+-- representation of the dataset. Time is in nanoseconds from epoch. This
+-- should also match the first part of the dataset identifier.
+dMinStartTimeNs :: Lens' Dataset (Maybe Int64)
+dMinStartTimeNs
+  = lens _dMinStartTimeNs
+      (\ s a -> s{_dMinStartTimeNs = a})
+
+-- | The largest end time of all data points in this possibly partial
+-- representation of the dataset. Time is in nanoseconds from epoch. This
+-- should also match the first part of the dataset identifier.
+dMaxEndTimeNs :: Lens' Dataset (Maybe Int64)
+dMaxEndTimeNs
+  = lens _dMaxEndTimeNs
+      (\ s a -> s{_dMaxEndTimeNs = a})
+
+instance FromJSON Dataset where
+        parseJSON
+          = withObject "Dataset"
+              (\ o ->
+                 Dataset <$>
+                   (o .:? "nextPageToken") <*> (o .:? "dataSourceId")
+                     <*> (o .:? "point" .!= mempty)
+                     <*> (o .:? "minStartTimeNs")
+                     <*> (o .:? "maxEndTimeNs"))
+
+instance ToJSON Dataset where
+        toJSON Dataset{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _dNextPageToken,
+                  ("dataSourceId" .=) <$> _dDataSourceId,
+                  ("point" .=) <$> _dPoint,
+                  ("minStartTimeNs" .=) <$> _dMinStartTimeNs,
+                  ("maxEndTimeNs" .=) <$> _dMaxEndTimeNs])
+
+-- | See:
+-- google3\/java\/com\/google\/android\/apps\/heart\/platform\/api\/Application.java
+--
+-- /See:/ 'application' smart constructor.
+data Application = Application
+    { _aPackageName :: !(Maybe Text)
+    , _aName        :: !(Maybe Text)
+    , _aVersion     :: !(Maybe Text)
+    , _aDetailsUrl  :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Application' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aPackageName'
+--
+-- * 'aName'
+--
+-- * 'aVersion'
+--
+-- * 'aDetailsUrl'
+application
+    :: Application
+application =
+    Application
+    { _aPackageName = Nothing
+    , _aName = Nothing
+    , _aVersion = Nothing
+    , _aDetailsUrl = Nothing
+    }
+
+-- | Package name for this application. This is used as a unique identifier
+-- when created by Android applications, but cannot be specified by REST
+-- clients. REST clients will have their developer project number reflected
+-- into the Data Source data stream IDs, instead of the packageName.
+aPackageName :: Lens' Application (Maybe Text)
+aPackageName
+  = lens _aPackageName (\ s a -> s{_aPackageName = a})
+
+-- | The name of this application. This is required for REST clients, but we
+-- do not enforce uniqueness of this name. It is provided as a matter of
+-- convenience for other developers who would like to identify which REST
+-- created an Application or Data Source.
+aName :: Lens' Application (Maybe Text)
+aName = lens _aName (\ s a -> s{_aName = a})
+
+-- | Version of the application. You should update this field whenever the
+-- application changes in a way that affects the computation of the data.
+aVersion :: Lens' Application (Maybe Text)
+aVersion = lens _aVersion (\ s a -> s{_aVersion = a})
+
+-- | An optional URI that can be used to link back to the application.
+aDetailsUrl :: Lens' Application (Maybe Text)
+aDetailsUrl
+  = lens _aDetailsUrl (\ s a -> s{_aDetailsUrl = a})
+
+instance FromJSON Application where
+        parseJSON
+          = withObject "Application"
+              (\ o ->
+                 Application <$>
+                   (o .:? "packageName") <*> (o .:? "name") <*>
+                     (o .:? "version")
+                     <*> (o .:? "detailsUrl"))
+
+instance ToJSON Application where
+        toJSON Application{..}
+          = object
+              (catMaybes
+                 [("packageName" .=) <$> _aPackageName,
+                  ("name" .=) <$> _aName, ("version" .=) <$> _aVersion,
+                  ("detailsUrl" .=) <$> _aDetailsUrl])
+
+--
+-- /See:/ 'aggregateResponse' smart constructor.
+newtype AggregateResponse = AggregateResponse
+    { _arBucket :: Maybe [Maybe AggregateBucket]
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AggregateResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'arBucket'
+aggregateResponse
+    :: AggregateResponse
+aggregateResponse =
+    AggregateResponse
+    { _arBucket = Nothing
+    }
+
+-- | A list of buckets containing the aggregated data.
+arBucket :: Lens' AggregateResponse [Maybe AggregateBucket]
+arBucket
+  = lens _arBucket (\ s a -> s{_arBucket = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON AggregateResponse where
+        parseJSON
+          = withObject "AggregateResponse"
+              (\ o ->
+                 AggregateResponse <$> (o .:? "bucket" .!= mempty))
+
+instance ToJSON AggregateResponse where
+        toJSON AggregateResponse{..}
+          = object (catMaybes [("bucket" .=) <$> _arBucket])
 
 -- | Definition of a unique source of sensor data. Data sources can expose
 -- raw data coming from hardware sensors on local or companion devices.
@@ -872,6 +855,86 @@ instance ToJSON DataType where
               (catMaybes
                  [("field" .=) <$> _dtField, ("name" .=) <$> _dtName])
 
+--
+-- /See:/ 'bucketByTime' smart constructor.
+newtype BucketByTime = BucketByTime
+    { _bbtDurationMillis :: Maybe Int64
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BucketByTime' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bbtDurationMillis'
+bucketByTime
+    :: BucketByTime
+bucketByTime =
+    BucketByTime
+    { _bbtDurationMillis = Nothing
+    }
+
+-- | Specifies that result buckets aggregate data by exactly durationMillis
+-- time frames. Time frames that contain no data will be included in the
+-- response with an empty dataset.
+bbtDurationMillis :: Lens' BucketByTime (Maybe Int64)
+bbtDurationMillis
+  = lens _bbtDurationMillis
+      (\ s a -> s{_bbtDurationMillis = a})
+
+instance FromJSON BucketByTime where
+        parseJSON
+          = withObject "BucketByTime"
+              (\ o -> BucketByTime <$> (o .:? "durationMillis"))
+
+instance ToJSON BucketByTime where
+        toJSON BucketByTime{..}
+          = object
+              (catMaybes
+                 [("durationMillis" .=) <$> _bbtDurationMillis])
+
+--
+-- /See:/ 'valueMapValEntry' smart constructor.
+data ValueMapValEntry = ValueMapValEntry
+    { _vmveValue :: !(Maybe (Maybe MapValue))
+    , _vmveKey   :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ValueMapValEntry' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vmveValue'
+--
+-- * 'vmveKey'
+valueMapValEntry
+    :: ValueMapValEntry
+valueMapValEntry =
+    ValueMapValEntry
+    { _vmveValue = Nothing
+    , _vmveKey = Nothing
+    }
+
+vmveValue :: Lens' ValueMapValEntry (Maybe (Maybe MapValue))
+vmveValue
+  = lens _vmveValue (\ s a -> s{_vmveValue = a})
+
+vmveKey :: Lens' ValueMapValEntry (Maybe Text)
+vmveKey = lens _vmveKey (\ s a -> s{_vmveKey = a})
+
+instance FromJSON ValueMapValEntry where
+        parseJSON
+          = withObject "ValueMapValEntry"
+              (\ o ->
+                 ValueMapValEntry <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON ValueMapValEntry where
+        toJSON ValueMapValEntry{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _vmveValue,
+                  ("key" .=) <$> _vmveKey])
+
 -- | In case of multi-dimensional data (such as an accelerometer with x, y,
 -- and z axes) each field represents one dimension. Each data type field
 -- has a unique name which identifies it. The field also defines the format
@@ -933,104 +996,188 @@ instance ToJSON DataTypeField where
                   ("name" .=) <$> _dtfName,
                   ("optional" .=) <$> _dtfOptional])
 
--- | A dataset represents a projection container for data points. They do not
--- carry any info of their own. Datasets represent a set of data points
--- from a particular data source. A data point can be found in more than
--- one dataset.
 --
--- /See:/ 'dataset' smart constructor.
-data Dataset = Dataset
-    { _dNextPageToken  :: !(Maybe Text)
-    , _dDataSourceId   :: !(Maybe Text)
-    , _dPoint          :: !(Maybe [Maybe DataPoint])
-    , _dMinStartTimeNs :: !(Maybe Int64)
-    , _dMaxEndTimeNs   :: !(Maybe Int64)
+-- /See:/ 'aggregateRequest' smart constructor.
+data AggregateRequest = AggregateRequest
+    { _arEndTimeMillis           :: !(Maybe Int64)
+    , _arAggregateBy             :: !(Maybe [Maybe AggregateBy])
+    , _arBucketBySession         :: !(Maybe (Maybe BucketBySession))
+    , _arBucketByActivityType    :: !(Maybe (Maybe BucketByActivity))
+    , _arBucketByTime            :: !(Maybe (Maybe BucketByTime))
+    , _arStartTimeMillis         :: !(Maybe Int64)
+    , _arBucketByActivitySegment :: !(Maybe (Maybe BucketByActivity))
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Dataset' with the minimum fields required to make a request.
+-- | Creates a value of 'AggregateRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dNextPageToken'
+-- * 'arEndTimeMillis'
 --
--- * 'dDataSourceId'
+-- * 'arAggregateBy'
 --
--- * 'dPoint'
+-- * 'arBucketBySession'
 --
--- * 'dMinStartTimeNs'
+-- * 'arBucketByActivityType'
 --
--- * 'dMaxEndTimeNs'
-dataset
-    :: Dataset
-dataset =
-    Dataset
-    { _dNextPageToken = Nothing
-    , _dDataSourceId = Nothing
-    , _dPoint = Nothing
-    , _dMinStartTimeNs = Nothing
-    , _dMaxEndTimeNs = Nothing
+-- * 'arBucketByTime'
+--
+-- * 'arStartTimeMillis'
+--
+-- * 'arBucketByActivitySegment'
+aggregateRequest
+    :: AggregateRequest
+aggregateRequest =
+    AggregateRequest
+    { _arEndTimeMillis = Nothing
+    , _arAggregateBy = Nothing
+    , _arBucketBySession = Nothing
+    , _arBucketByActivityType = Nothing
+    , _arBucketByTime = Nothing
+    , _arStartTimeMillis = Nothing
+    , _arBucketByActivitySegment = Nothing
     }
 
--- | This token will be set when a dataset is received in response to a GET
--- request and the dataset is too large to be included in a single
--- response. Provide this value in a subsequent GET request to return the
--- next page of data points within this dataset.
-dNextPageToken :: Lens' Dataset (Maybe Text)
-dNextPageToken
-  = lens _dNextPageToken
-      (\ s a -> s{_dNextPageToken = a})
+-- | The end of a window of time. Data that intersects with this time window
+-- will be aggregated. The time is in milliseconds since epoch, inclusive.
+arEndTimeMillis :: Lens' AggregateRequest (Maybe Int64)
+arEndTimeMillis
+  = lens _arEndTimeMillis
+      (\ s a -> s{_arEndTimeMillis = a})
 
--- | The data stream ID of the data source that created the points in this
--- dataset.
-dDataSourceId :: Lens' Dataset (Maybe Text)
-dDataSourceId
-  = lens _dDataSourceId
-      (\ s a -> s{_dDataSourceId = a})
+-- | The specification of data to be aggregated. At least one aggregateBy
+-- spec must be provided. All data that is specified will be aggregated
+-- using the same bucketing criteria. There will be one dataset in the
+-- response for every aggregateBy spec.
+arAggregateBy :: Lens' AggregateRequest [Maybe AggregateBy]
+arAggregateBy
+  = lens _arAggregateBy
+      (\ s a -> s{_arAggregateBy = a})
+      . _Default
+      . _Coerce
 
--- | A partial list of data points contained in the dataset, ordered by
--- largest endTimeNanos first. This list is considered complete when
--- retrieving a small dataset and partial when patching a dataset or
--- retrieving a dataset that is too large to include in a single response.
-dPoint :: Lens' Dataset [Maybe DataPoint]
-dPoint
-  = lens _dPoint (\ s a -> s{_dPoint = a}) . _Default .
-      _Coerce
+-- | Specifies that data be aggregated by user sessions. Data that does not
+-- fall within the time range of a session will not be included in the
+-- response. Mutually exclusive of other bucketing specifications.
+arBucketBySession :: Lens' AggregateRequest (Maybe (Maybe BucketBySession))
+arBucketBySession
+  = lens _arBucketBySession
+      (\ s a -> s{_arBucketBySession = a})
 
--- | The smallest start time of all data points in this possibly partial
--- representation of the dataset. Time is in nanoseconds from epoch. This
--- should also match the first part of the dataset identifier.
-dMinStartTimeNs :: Lens' Dataset (Maybe Int64)
-dMinStartTimeNs
-  = lens _dMinStartTimeNs
-      (\ s a -> s{_dMinStartTimeNs = a})
+-- | Specifies that data be aggregated by the type of activity being
+-- performed when the data was recorded. All data that was recorded during
+-- a certain activity type (for the given time range) will be aggregated
+-- into the same bucket. Data that was recorded while the user was not
+-- active will not be included in the response. Mutually exclusive of other
+-- bucketing specifications.
+arBucketByActivityType :: Lens' AggregateRequest (Maybe (Maybe BucketByActivity))
+arBucketByActivityType
+  = lens _arBucketByActivityType
+      (\ s a -> s{_arBucketByActivityType = a})
 
--- | The largest end time of all data points in this possibly partial
--- representation of the dataset. Time is in nanoseconds from epoch. This
--- should also match the first part of the dataset identifier.
-dMaxEndTimeNs :: Lens' Dataset (Maybe Int64)
-dMaxEndTimeNs
-  = lens _dMaxEndTimeNs
-      (\ s a -> s{_dMaxEndTimeNs = a})
+-- | Specifies that data be aggregated by a single time interval. Mutually
+-- exclusive of other bucketing specifications.
+arBucketByTime :: Lens' AggregateRequest (Maybe (Maybe BucketByTime))
+arBucketByTime
+  = lens _arBucketByTime
+      (\ s a -> s{_arBucketByTime = a})
 
-instance FromJSON Dataset where
+-- | The start of a window of time. Data that intersects with this time
+-- window will be aggregated. The time is in milliseconds since epoch,
+-- inclusive.
+arStartTimeMillis :: Lens' AggregateRequest (Maybe Int64)
+arStartTimeMillis
+  = lens _arStartTimeMillis
+      (\ s a -> s{_arStartTimeMillis = a})
+
+-- | Specifies that data be aggregated each activity segment recored for a
+-- user. Similar to bucketByActivitySegment, but bucketing is done for each
+-- activity segment rather than all segments of the same type. Mutually
+-- exclusive of other bucketing specifications.
+arBucketByActivitySegment :: Lens' AggregateRequest (Maybe (Maybe BucketByActivity))
+arBucketByActivitySegment
+  = lens _arBucketByActivitySegment
+      (\ s a -> s{_arBucketByActivitySegment = a})
+
+instance FromJSON AggregateRequest where
         parseJSON
-          = withObject "Dataset"
+          = withObject "AggregateRequest"
               (\ o ->
-                 Dataset <$>
-                   (o .:? "nextPageToken") <*> (o .:? "dataSourceId")
-                     <*> (o .:? "point" .!= mempty)
-                     <*> (o .:? "minStartTimeNs")
-                     <*> (o .:? "maxEndTimeNs"))
+                 AggregateRequest <$>
+                   (o .:? "endTimeMillis") <*>
+                     (o .:? "aggregateBy" .!= mempty)
+                     <*> (o .:? "bucketBySession")
+                     <*> (o .:? "bucketByActivityType")
+                     <*> (o .:? "bucketByTime")
+                     <*> (o .:? "startTimeMillis")
+                     <*> (o .:? "bucketByActivitySegment"))
 
-instance ToJSON Dataset where
-        toJSON Dataset{..}
+instance ToJSON AggregateRequest where
+        toJSON AggregateRequest{..}
           = object
               (catMaybes
-                 [("nextPageToken" .=) <$> _dNextPageToken,
-                  ("dataSourceId" .=) <$> _dDataSourceId,
-                  ("point" .=) <$> _dPoint,
-                  ("minStartTimeNs" .=) <$> _dMinStartTimeNs,
-                  ("maxEndTimeNs" .=) <$> _dMaxEndTimeNs])
+                 [("endTimeMillis" .=) <$> _arEndTimeMillis,
+                  ("aggregateBy" .=) <$> _arAggregateBy,
+                  ("bucketBySession" .=) <$> _arBucketBySession,
+                  ("bucketByActivityType" .=) <$>
+                    _arBucketByActivityType,
+                  ("bucketByTime" .=) <$> _arBucketByTime,
+                  ("startTimeMillis" .=) <$> _arStartTimeMillis,
+                  ("bucketByActivitySegment" .=) <$>
+                    _arBucketByActivitySegment])
+
+--
+-- /See:/ 'bucketByActivity' smart constructor.
+data BucketByActivity = BucketByActivity
+    { _bbaMinDurationMillis    :: !(Maybe Int64)
+    , _bbaActivityDataSourceId :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BucketByActivity' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bbaMinDurationMillis'
+--
+-- * 'bbaActivityDataSourceId'
+bucketByActivity
+    :: BucketByActivity
+bucketByActivity =
+    BucketByActivity
+    { _bbaMinDurationMillis = Nothing
+    , _bbaActivityDataSourceId = Nothing
+    }
+
+-- | Specifies that only activity segments of duration longer than
+-- minDurationMillis are considered and used as a container for aggregated
+-- data.
+bbaMinDurationMillis :: Lens' BucketByActivity (Maybe Int64)
+bbaMinDurationMillis
+  = lens _bbaMinDurationMillis
+      (\ s a -> s{_bbaMinDurationMillis = a})
+
+-- | The default activity stream will be used if a specific
+-- activityDataSourceId is not specified.
+bbaActivityDataSourceId :: Lens' BucketByActivity (Maybe Text)
+bbaActivityDataSourceId
+  = lens _bbaActivityDataSourceId
+      (\ s a -> s{_bbaActivityDataSourceId = a})
+
+instance FromJSON BucketByActivity where
+        parseJSON
+          = withObject "BucketByActivity"
+              (\ o ->
+                 BucketByActivity <$>
+                   (o .:? "minDurationMillis") <*>
+                     (o .:? "activityDataSourceId"))
+
+instance ToJSON BucketByActivity where
+        toJSON BucketByActivity{..}
+          = object
+              (catMaybes
+                 [("minDurationMillis" .=) <$> _bbaMinDurationMillis,
+                  ("activityDataSourceId" .=) <$>
+                    _bbaActivityDataSourceId])
 
 -- | Representation of an integrated device (such as a phone or a wearable)
 -- that can hold sensors. Each sensor is exposed as a data source. The main
@@ -1120,146 +1267,116 @@ instance ToJSON Device where
                   ("version" .=) <$> _dVersion,
                   ("type" .=) <$> _dType])
 
+-- | Holder object for the value of a single field in a data point. A field
+-- value has a particular format and is only ever set to one of an integer
+-- or a floating point value.
 --
--- /See:/ 'listDataSourcesResponse' smart constructor.
-newtype ListDataSourcesResponse = ListDataSourcesResponse
-    { _ldsrDataSource :: Maybe [Maybe DataSource]
+-- /See:/ 'value' smart constructor.
+data Value = Value
+    { _vMapVal    :: !(Maybe [Maybe ValueMapValEntry])
+    , _vFpVal     :: !(Maybe Double)
+    , _vIntVal    :: !(Maybe Int32)
+    , _vStringVal :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ListDataSourcesResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'Value' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ldsrDataSource'
-listDataSourcesResponse
-    :: ListDataSourcesResponse
-listDataSourcesResponse =
-    ListDataSourcesResponse
-    { _ldsrDataSource = Nothing
+-- * 'vMapVal'
+--
+-- * 'vFpVal'
+--
+-- * 'vIntVal'
+--
+-- * 'vStringVal'
+value
+    :: Value
+value =
+    Value
+    { _vMapVal = Nothing
+    , _vFpVal = Nothing
+    , _vIntVal = Nothing
+    , _vStringVal = Nothing
     }
 
--- | A previously created data source.
-ldsrDataSource :: Lens' ListDataSourcesResponse [Maybe DataSource]
-ldsrDataSource
-  = lens _ldsrDataSource
-      (\ s a -> s{_ldsrDataSource = a})
-      . _Default
+-- | Map value. The valid key space and units for the corresponding value of
+-- each entry should be documented as part of the data type definition.
+-- Keys should be kept small whenever possible. Data streams with large
+-- keys and high data frequency may be down sampled.
+vMapVal :: Lens' Value [Maybe ValueMapValEntry]
+vMapVal
+  = lens _vMapVal (\ s a -> s{_vMapVal = a}) . _Default
       . _Coerce
 
-instance FromJSON ListDataSourcesResponse where
+-- | Floating point value. When this is set, other values must not be set.
+vFpVal :: Lens' Value (Maybe Double)
+vFpVal = lens _vFpVal (\ s a -> s{_vFpVal = a})
+
+-- | Integer value. When this is set, other values must not be set.
+vIntVal :: Lens' Value (Maybe Int32)
+vIntVal = lens _vIntVal (\ s a -> s{_vIntVal = a})
+
+-- | String value. When this is set, other values must not be set. Strings
+-- should be kept small whenever possible. Data streams with large string
+-- values and high data frequency may be down sampled.
+vStringVal :: Lens' Value (Maybe Text)
+vStringVal
+  = lens _vStringVal (\ s a -> s{_vStringVal = a})
+
+instance FromJSON Value where
         parseJSON
-          = withObject "ListDataSourcesResponse"
+          = withObject "Value"
               (\ o ->
-                 ListDataSourcesResponse <$>
-                   (o .:? "dataSource" .!= mempty))
+                 Value <$>
+                   (o .:? "mapVal" .!= mempty) <*> (o .:? "fpVal") <*>
+                     (o .:? "intVal")
+                     <*> (o .:? "stringVal"))
 
-instance ToJSON ListDataSourcesResponse where
-        toJSON ListDataSourcesResponse{..}
-          = object
-              (catMaybes [("dataSource" .=) <$> _ldsrDataSource])
-
---
--- /See:/ 'listSessionsResponse' smart constructor.
-data ListSessionsResponse = ListSessionsResponse
-    { _lsrNextPageToken  :: !(Maybe Text)
-    , _lsrDeletedSession :: !(Maybe [Maybe Session])
-    , _lsrSession        :: !(Maybe [Maybe Session])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ListSessionsResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lsrNextPageToken'
---
--- * 'lsrDeletedSession'
---
--- * 'lsrSession'
-listSessionsResponse
-    :: ListSessionsResponse
-listSessionsResponse =
-    ListSessionsResponse
-    { _lsrNextPageToken = Nothing
-    , _lsrDeletedSession = Nothing
-    , _lsrSession = Nothing
-    }
-
--- | The continuation token, which is used to page through large result sets.
--- Provide this value in a subsequent request to return the next page of
--- results.
-lsrNextPageToken :: Lens' ListSessionsResponse (Maybe Text)
-lsrNextPageToken
-  = lens _lsrNextPageToken
-      (\ s a -> s{_lsrNextPageToken = a})
-
--- | If includeDeleted is set to true in the request, this list will contain
--- sessions deleted with original end times that are within the startTime
--- and endTime frame.
-lsrDeletedSession :: Lens' ListSessionsResponse [Maybe Session]
-lsrDeletedSession
-  = lens _lsrDeletedSession
-      (\ s a -> s{_lsrDeletedSession = a})
-      . _Default
-      . _Coerce
-
--- | Sessions with an end time that is between startTime and endTime of the
--- request.
-lsrSession :: Lens' ListSessionsResponse [Maybe Session]
-lsrSession
-  = lens _lsrSession (\ s a -> s{_lsrSession = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON ListSessionsResponse where
-        parseJSON
-          = withObject "ListSessionsResponse"
-              (\ o ->
-                 ListSessionsResponse <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "deletedSession" .!= mempty)
-                     <*> (o .:? "session" .!= mempty))
-
-instance ToJSON ListSessionsResponse where
-        toJSON ListSessionsResponse{..}
+instance ToJSON Value where
+        toJSON Value{..}
           = object
               (catMaybes
-                 [("nextPageToken" .=) <$> _lsrNextPageToken,
-                  ("deletedSession" .=) <$> _lsrDeletedSession,
-                  ("session" .=) <$> _lsrSession])
+                 [("mapVal" .=) <$> _vMapVal,
+                  ("fpVal" .=) <$> _vFpVal, ("intVal" .=) <$> _vIntVal,
+                  ("stringVal" .=) <$> _vStringVal])
 
--- | Holder object for the value of an entry in a map field of a data point.
--- A map value supports a subset of the formats that the regular Value
--- supports.
 --
--- /See:/ 'mapValue' smart constructor.
-newtype MapValue = MapValue
-    { _mvFpVal :: Maybe Double
+-- /See:/ 'bucketBySession' smart constructor.
+newtype BucketBySession = BucketBySession
+    { _bbsMinDurationMillis :: Maybe Int64
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MapValue' with the minimum fields required to make a request.
+-- | Creates a value of 'BucketBySession' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mvFpVal'
-mapValue
-    :: MapValue
-mapValue =
-    MapValue
-    { _mvFpVal = Nothing
+-- * 'bbsMinDurationMillis'
+bucketBySession
+    :: BucketBySession
+bucketBySession =
+    BucketBySession
+    { _bbsMinDurationMillis = Nothing
     }
 
--- | Floating point value.
-mvFpVal :: Lens' MapValue (Maybe Double)
-mvFpVal = lens _mvFpVal (\ s a -> s{_mvFpVal = a})
+-- | Specifies that only sessions of duration longer than minDurationMillis
+-- are considered and used as a container for aggregated data.
+bbsMinDurationMillis :: Lens' BucketBySession (Maybe Int64)
+bbsMinDurationMillis
+  = lens _bbsMinDurationMillis
+      (\ s a -> s{_bbsMinDurationMillis = a})
 
-instance FromJSON MapValue where
+instance FromJSON BucketBySession where
         parseJSON
-          = withObject "MapValue"
-              (\ o -> MapValue <$> (o .:? "fpVal"))
+          = withObject "BucketBySession"
+              (\ o ->
+                 BucketBySession <$> (o .:? "minDurationMillis"))
 
-instance ToJSON MapValue where
-        toJSON MapValue{..}
-          = object (catMaybes [("fpVal" .=) <$> _mvFpVal])
+instance ToJSON BucketBySession where
+        toJSON BucketBySession{..}
+          = object
+              (catMaybes
+                 [("minDurationMillis" .=) <$> _bbsMinDurationMillis])
 
 -- | Sessions contain metadata, such as a user-friendly name and time
 -- interval information.
@@ -1394,120 +1511,3 @@ instance ToJSON Session where
                   ("id" .=) <$> _sId,
                   ("startTimeMillis" .=) <$> _sStartTimeMillis,
                   ("description" .=) <$> _sDescription])
-
--- | Holder object for the value of a single field in a data point. A field
--- value has a particular format and is only ever set to one of an integer
--- or a floating point value.
---
--- /See:/ 'value' smart constructor.
-data Value = Value
-    { _vMapVal    :: !(Maybe [Maybe ValueMapValEntry])
-    , _vFpVal     :: !(Maybe Double)
-    , _vIntVal    :: !(Maybe Int32)
-    , _vStringVal :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Value' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'vMapVal'
---
--- * 'vFpVal'
---
--- * 'vIntVal'
---
--- * 'vStringVal'
-value
-    :: Value
-value =
-    Value
-    { _vMapVal = Nothing
-    , _vFpVal = Nothing
-    , _vIntVal = Nothing
-    , _vStringVal = Nothing
-    }
-
--- | Map value. The valid key space and units for the corresponding value of
--- each entry should be documented as part of the data type definition.
--- Keys should be kept small whenever possible. Data streams with large
--- keys and high data frequency may be down sampled.
-vMapVal :: Lens' Value [Maybe ValueMapValEntry]
-vMapVal
-  = lens _vMapVal (\ s a -> s{_vMapVal = a}) . _Default
-      . _Coerce
-
--- | Floating point value. When this is set, other values must not be set.
-vFpVal :: Lens' Value (Maybe Double)
-vFpVal = lens _vFpVal (\ s a -> s{_vFpVal = a})
-
--- | Integer value. When this is set, other values must not be set.
-vIntVal :: Lens' Value (Maybe Int32)
-vIntVal = lens _vIntVal (\ s a -> s{_vIntVal = a})
-
--- | String value. When this is set, other values must not be set. Strings
--- should be kept small whenever possible. Data streams with large string
--- values and high data frequency may be down sampled.
-vStringVal :: Lens' Value (Maybe Text)
-vStringVal
-  = lens _vStringVal (\ s a -> s{_vStringVal = a})
-
-instance FromJSON Value where
-        parseJSON
-          = withObject "Value"
-              (\ o ->
-                 Value <$>
-                   (o .:? "mapVal" .!= mempty) <*> (o .:? "fpVal") <*>
-                     (o .:? "intVal")
-                     <*> (o .:? "stringVal"))
-
-instance ToJSON Value where
-        toJSON Value{..}
-          = object
-              (catMaybes
-                 [("mapVal" .=) <$> _vMapVal,
-                  ("fpVal" .=) <$> _vFpVal, ("intVal" .=) <$> _vIntVal,
-                  ("stringVal" .=) <$> _vStringVal])
-
---
--- /See:/ 'valueMapValEntry' smart constructor.
-data ValueMapValEntry = ValueMapValEntry
-    { _vmveValue :: !(Maybe (Maybe MapValue))
-    , _vmveKey   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ValueMapValEntry' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'vmveValue'
---
--- * 'vmveKey'
-valueMapValEntry
-    :: ValueMapValEntry
-valueMapValEntry =
-    ValueMapValEntry
-    { _vmveValue = Nothing
-    , _vmveKey = Nothing
-    }
-
-vmveValue :: Lens' ValueMapValEntry (Maybe (Maybe MapValue))
-vmveValue
-  = lens _vmveValue (\ s a -> s{_vmveValue = a})
-
-vmveKey :: Lens' ValueMapValEntry (Maybe Text)
-vmveKey = lens _vmveKey (\ s a -> s{_vmveKey = a})
-
-instance FromJSON ValueMapValEntry where
-        parseJSON
-          = withObject "ValueMapValEntry"
-              (\ o ->
-                 ValueMapValEntry <$>
-                   (o .:? "value") <*> (o .:? "key"))
-
-instance ToJSON ValueMapValEntry where
-        toJSON ValueMapValEntry{..}
-          = object
-              (catMaybes
-                 [("value" .=) <$> _vmveValue,
-                  ("key" .=) <$> _vmveKey])

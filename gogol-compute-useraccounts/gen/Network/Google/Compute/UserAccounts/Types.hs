@@ -14,12 +14,70 @@
 --
 module Network.Google.Compute.UserAccounts.Types
     (
+    -- * Service URL
+      computeUserAccountsURL
 
-    -- * AuthorizedKeysView
-      AuthorizedKeysView
-    , authorizedKeysView
-    , akvSudoer
-    , akvKeys
+    -- * GroupsAddMemberRequest
+    , GroupsAddMemberRequest
+    , groupsAddMemberRequest
+    , gamrUsers
+
+    -- * LinuxGroupView
+    , LinuxGroupView
+    , linuxGroupView
+    , lgvMembers
+    , lgvGid
+    , lgvGroupName
+
+    -- * OperationItemDataItemWarnings
+    , OperationItemDataItemWarnings
+    , operationItemDataItemWarnings
+    , oidiwValue
+    , oidiwKey
+
+    -- * OperationCodeItemWarnings
+    , OperationCodeItemWarnings (..)
+
+    -- * OperationItemWarnings
+    , OperationItemWarnings
+    , operationItemWarnings
+    , oiwData
+    , oiwCode
+    , oiwMessage
+
+    -- * Alt
+    , Alt (..)
+
+    -- * LinuxGetAuthorizedKeysViewResponse
+    , LinuxGetAuthorizedKeysViewResponse
+    , linuxGetAuthorizedKeysViewResponse
+    , lgakvrResource
+
+    -- * OperationItemErrorsError
+    , OperationItemErrorsError
+    , operationItemErrorsError
+    , oieeLocation
+    , oieeCode
+    , oieeMessage
+
+    -- * GroupsRemoveMemberRequest
+    , GroupsRemoveMemberRequest
+    , groupsRemoveMemberRequest
+    , grmrUsers
+
+    -- * PublicKey
+    , PublicKey
+    , publicKey
+    , pkFingerprint
+    , pkKey
+    , pkCreationTimestamp
+    , pkExpirationTimestamp
+    , pkDescription
+
+    -- * OperationError
+    , OperationError
+    , operationError
+    , oeErrors
 
     -- * Group
     , Group
@@ -32,48 +90,19 @@ module Network.Google.Compute.UserAccounts.Types
     , gId
     , gDescription
 
-    -- * GroupList
-    , GroupList
-    , groupList
-    , glNextPageToken
-    , glKind
-    , glItems
-    , glSelfLink
-    , glId
-
-    -- * GroupsAddMemberRequest
-    , GroupsAddMemberRequest
-    , groupsAddMemberRequest
-    , gamrUsers
-
-    -- * GroupsRemoveMemberRequest
-    , GroupsRemoveMemberRequest
-    , groupsRemoveMemberRequest
-    , grmrUsers
-
-    -- * LinuxAccountViews
-    , LinuxAccountViews
-    , linuxAccountViews
-    , lavUserViews
-    , lavKind
-    , lavGroupViews
-
-    -- * LinuxGetAuthorizedKeysViewResponse
-    , LinuxGetAuthorizedKeysViewResponse
-    , linuxGetAuthorizedKeysViewResponse
-    , lgakvrResource
+    -- * OperationList
+    , OperationList
+    , operationList
+    , olNextPageToken
+    , olKind
+    , olItems
+    , olSelfLink
+    , olId
 
     -- * LinuxGetLinuxAccountViewsResponse
     , LinuxGetLinuxAccountViewsResponse
     , linuxGetLinuxAccountViewsResponse
     , lglavrResource
-
-    -- * LinuxGroupView
-    , LinuxGroupView
-    , linuxGroupView
-    , lgvMembers
-    , lgvGid
-    , lgvGroupName
 
     -- * LinuxUserView
     , LinuxUserView
@@ -84,6 +113,18 @@ module Network.Google.Compute.UserAccounts.Types
     , luvShell
     , luvGid
     , luvHomeDirectory
+
+    -- * OperationStatus
+    , OperationStatus (..)
+
+    -- * GroupList
+    , GroupList
+    , groupList
+    , glNextPageToken
+    , glKind
+    , glItems
+    , glSelfLink
+    , glId
 
     -- * Operation
     , Operation
@@ -111,54 +152,27 @@ module Network.Google.Compute.UserAccounts.Types
     , oTargetLink
     , oClientOperationId
 
-    -- * OperationCodeItemWarnings
-    , OperationCodeItemWarnings (..)
+    -- * UserList
+    , UserList
+    , userList
+    , ulNextPageToken
+    , ulKind
+    , ulItems
+    , ulSelfLink
+    , ulId
 
-    -- * OperationError
-    , OperationError
-    , operationError
-    , oeErrors
+    -- * AuthorizedKeysView
+    , AuthorizedKeysView
+    , authorizedKeysView
+    , akvSudoer
+    , akvKeys
 
-    -- * OperationItemDataItemWarnings
-    , OperationItemDataItemWarnings
-    , operationItemDataItemWarnings
-    , oidiwValue
-    , oidiwKey
-
-    -- * OperationItemErrorsError
-    , OperationItemErrorsError
-    , operationItemErrorsError
-    , oieeLocation
-    , oieeCode
-    , oieeMessage
-
-    -- * OperationItemWarnings
-    , OperationItemWarnings
-    , operationItemWarnings
-    , oiwData
-    , oiwCode
-    , oiwMessage
-
-    -- * OperationList
-    , OperationList
-    , operationList
-    , olNextPageToken
-    , olKind
-    , olItems
-    , olSelfLink
-    , olId
-
-    -- * OperationStatus
-    , OperationStatus (..)
-
-    -- * PublicKey
-    , PublicKey
-    , publicKey
-    , pkFingerprint
-    , pkKey
-    , pkCreationTimestamp
-    , pkExpirationTimestamp
-    , pkDescription
+    -- * LinuxAccountViews
+    , LinuxAccountViews
+    , linuxAccountViews
+    , lavUserViews
+    , lavKind
+    , lavGroupViews
 
     -- * User
     , User
@@ -172,17 +186,15 @@ module Network.Google.Compute.UserAccounts.Types
     , uCreationTimestamp
     , uId
     , uDescription
-
-    -- * UserList
-    , UserList
-    , userList
-    , ulNextPageToken
-    , ulKind
-    , ulItems
-    , ulSelfLink
-    , ulId
     ) where
 
 import           Network.Google.Compute.UserAccounts.Types.Product
 import           Network.Google.Compute.UserAccounts.Types.Sum
 import           Network.Google.Prelude
+
+-- | URL referring to version 'vm_beta' of the Cloud User Accounts API.
+computeUserAccountsURL :: BaseUrl
+computeUserAccountsURL
+  = BaseUrl Https
+      "https://www.googleapis.com/clouduseraccounts/vm_beta/projects/"
+      443

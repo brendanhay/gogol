@@ -14,13 +14,47 @@
 --
 module Network.Google.Maps.Coordinate.Types
     (
+    -- * Service URL
+      mapsCoordinateURL
 
-    -- * CustomField
-      CustomField
-    , customField
-    , cfCustomFieldId
-    , cfKind
-    , cfValue
+    -- * TeamListResponse
+    , TeamListResponse
+    , teamListResponse
+    , tlrKind
+    , tlrItems
+
+    -- * Job
+    , Job
+    , job
+    , jobState
+    , jobKind
+    , jobJobChange
+    , jobId
+
+    -- * CustomFieldDefListResponse
+    , CustomFieldDefListResponse
+    , customFieldDefListResponse
+    , cfdlrKind
+    , cfdlrItems
+
+    -- * Alt
+    , Alt (..)
+
+    -- * Team
+    , Team
+    , team
+    , tKind
+    , tName
+    , tId
+
+    -- * LocationRecord
+    , LocationRecord
+    , locationRecord
+    , lrKind
+    , lrLatitude
+    , lrConfidenceRadius
+    , lrLongitude
+    , lrCollectionTime
 
     -- * CustomFieldDef
     , CustomFieldDef
@@ -33,17 +67,12 @@ module Network.Google.Maps.Coordinate.Types
     , cfdEnumitems
     , cfdType
 
-    -- * CustomFieldDefListResponse
-    , CustomFieldDefListResponse
-    , customFieldDefListResponse
-    , cfdlrKind
-    , cfdlrItems
-
-    -- * CustomFields
-    , CustomFields
-    , customFields
-    , cKind
-    , cCustomField
+    -- * JobListResponse
+    , JobListResponse
+    , jobListResponse
+    , jlrNextPageToken
+    , jlrKind
+    , jlrItems
 
     -- * EnumItemDef
     , EnumItemDef
@@ -52,27 +81,59 @@ module Network.Google.Maps.Coordinate.Types
     , eidValue
     , eidActive
 
-    -- * Job
-    , Job
-    , job
-    , jobState
-    , jobKind
-    , jobJobChange
-    , jobId
+    -- * CustomField
+    , CustomField
+    , customField
+    , cfCustomFieldId
+    , cfKind
+    , cfValue
 
-    -- * JobChange
-    , JobChange
-    , jobChange
-    , jcState
-    , jcKind
-    , jcTimestamp
+    -- * LocationListResponse
+    , LocationListResponse
+    , locationListResponse
+    , llrTokenPagination
+    , llrNextPageToken
+    , llrKind
+    , llrItems
 
-    -- * JobListResponse
-    , JobListResponse
-    , jobListResponse
-    , jlrNextPageToken
-    , jlrKind
-    , jlrItems
+    -- * JobsUpdate'Progress
+    , JobsUpdate'Progress (..)
+
+    -- * TokenPagination
+    , TokenPagination
+    , tokenPagination
+    , tpNextPageToken
+    , tpKind
+    , tpPreviousPageToken
+
+    -- * WorkerListResponse
+    , WorkerListResponse
+    , workerListResponse
+    , wlrKind
+    , wlrItems
+
+    -- * CustomFields
+    , CustomFields
+    , customFields
+    , cKind
+    , cCustomField
+
+    -- * Location
+    , Location
+    , location
+    , lAddressLine
+    , lKind
+    , lLat
+    , lLng
+
+    -- * Schedule
+    , Schedule
+    , schedule
+    , sAllDay
+    , sStartTime
+    , sKind
+    , sEndTime
+    , sDuration
 
     -- * JobState
     , JobState
@@ -87,59 +148,8 @@ module Network.Google.Maps.Coordinate.Types
     , jsCustomFields
     , jsTitle
 
-    -- * Location
-    , Location
-    , location
-    , lAddressLine
-    , lKind
-    , lLat
-    , lLng
-
-    -- * LocationListResponse
-    , LocationListResponse
-    , locationListResponse
-    , llrTokenPagination
-    , llrNextPageToken
-    , llrKind
-    , llrItems
-
-    -- * LocationRecord
-    , LocationRecord
-    , locationRecord
-    , lrKind
-    , lrLatitude
-    , lrConfidenceRadius
-    , lrLongitude
-    , lrCollectionTime
-
-    -- * Schedule
-    , Schedule
-    , schedule
-    , sAllDay
-    , sStartTime
-    , sKind
-    , sEndTime
-    , sDuration
-
-    -- * Team
-    , Team
-    , team
-    , tKind
-    , tName
-    , tId
-
-    -- * TeamListResponse
-    , TeamListResponse
-    , teamListResponse
-    , tlrKind
-    , tlrItems
-
-    -- * TokenPagination
-    , TokenPagination
-    , tokenPagination
-    , tpNextPageToken
-    , tpKind
-    , tpPreviousPageToken
+    -- * JobsPatch'Progress
+    , JobsPatch'Progress (..)
 
     -- * Worker
     , Worker
@@ -147,13 +157,21 @@ module Network.Google.Maps.Coordinate.Types
     , wKind
     , wId
 
-    -- * WorkerListResponse
-    , WorkerListResponse
-    , workerListResponse
-    , wlrKind
-    , wlrItems
+    -- * JobChange
+    , JobChange
+    , jobChange
+    , jcState
+    , jcKind
+    , jcTimestamp
     ) where
 
 import           Network.Google.Maps.Coordinate.Types.Product
 import           Network.Google.Maps.Coordinate.Types.Sum
 import           Network.Google.Prelude
+
+-- | URL referring to version 'v1' of the Google Maps Coordinate API.
+mapsCoordinateURL :: BaseUrl
+mapsCoordinateURL
+  = BaseUrl Https
+      "https://www.googleapis.com/coordinate/v1/"
+      443

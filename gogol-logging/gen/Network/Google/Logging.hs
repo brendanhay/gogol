@@ -18,91 +18,87 @@
 -- /See:/ <https://cloud.google.com/logging/docs/ Google Cloud Logging API Reference>
 module Network.Google.Logging
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** Google Cloud Logging API
       Logging
-    , ProjectsAPI
-    , SinksAPI
-    , SinksList
-    , SinksGet
-    , SinksCreate
-    , SinksDelete
-    , SinksUpdate
-    , LogServicesAPI
-    , SinksAPI
-    , SinksList
-    , SinksGet
-    , SinksCreate
-    , SinksDelete
-    , SinksUpdate
-    , IndexesAPI
-    , IndexesList
-    , LogsAPI
-    , SinksAPI
-    , SinksList
-    , SinksGet
-    , SinksCreate
-    , SinksDelete
-    , SinksUpdate
-    , EntriesAPI
-    , EntriesWrite
+    , logging
+    , loggingURL
+
+    -- ** logging.projects.logServices.indexes.list
+    , module Network.Google.API.Logging.Projects.LogServices.Indexes.List
+
+    -- ** logging.projects.logServices.sinks.create
+    , module Network.Google.API.Logging.Projects.LogServices.Sinks.Create
+
+    -- ** logging.projects.logServices.sinks.delete
+    , module Network.Google.API.Logging.Projects.LogServices.Sinks.Delete
+
+    -- ** logging.projects.logServices.sinks.get
+    , module Network.Google.API.Logging.Projects.LogServices.Sinks.Get
+
+    -- ** logging.projects.logServices.sinks.list
+    , module Network.Google.API.Logging.Projects.LogServices.Sinks.List
+
+    -- ** logging.projects.logServices.sinks.update
+    , module Network.Google.API.Logging.Projects.LogServices.Sinks.Update
+
+    -- ** logging.projects.logs.entries.write
+    , module Network.Google.API.Logging.Projects.Logs.Entries.Write
+
+    -- ** logging.projects.logs.sinks.create
+    , module Network.Google.API.Logging.Projects.Logs.Sinks.Create
+
+    -- ** logging.projects.logs.sinks.delete
+    , module Network.Google.API.Logging.Projects.Logs.Sinks.Delete
+
+    -- ** logging.projects.logs.sinks.get
+    , module Network.Google.API.Logging.Projects.Logs.Sinks.Get
+
+    -- ** logging.projects.logs.sinks.list
+    , module Network.Google.API.Logging.Projects.Logs.Sinks.List
+
+    -- ** logging.projects.logs.sinks.update
+    , module Network.Google.API.Logging.Projects.Logs.Sinks.Update
+
+    -- ** logging.projects.sinks.create
+    , module Network.Google.API.Logging.Projects.Sinks.Create
+
+    -- ** logging.projects.sinks.delete
+    , module Network.Google.API.Logging.Projects.Sinks.Delete
+
+    -- ** logging.projects.sinks.get
+    , module Network.Google.API.Logging.Projects.Sinks.Get
+
+    -- ** logging.projects.sinks.list
+    , module Network.Google.API.Logging.Projects.Sinks.List
+
+    -- ** logging.projects.sinks.update
+    , module Network.Google.API.Logging.Projects.Sinks.Update
 
     -- * Types
-
-    -- ** Empty
-    , Empty
-    , empty
-
-    -- ** HttpRequest
-    , HttpRequest
-    , httpRequest
-    , hrStatus
-    , hrRequestUrl
-    , hrRemoteIp
-    , hrRequestSize
-    , hrUserAgent
-    , hrResponseSize
-    , hrRequestMethod
-    , hrReferer
-
-    -- ** ListLogServiceIndexesResponse
-    , ListLogServiceIndexesResponse
-    , listLogServiceIndexesResponse
-    , llsirNextPageToken
-    , llsirServiceIndexPrefixes
 
     -- ** ListLogServiceSinksResponse
     , ListLogServiceSinksResponse
     , listLogServiceSinksResponse
     , llssrSinks
 
-    -- ** ListLogServicesResponse
-    , ListLogServicesResponse
-    , listLogServicesResponse
-    , llsrNextPageToken
-    , llsrLogServices
+    -- ** LogEntryStructPayload
+    , LogEntryStructPayload
+    , logEntryStructPayload
 
-    -- ** ListLogSinksResponse
-    , ListLogSinksResponse
-    , listLogSinksResponse
-    , llsrSinks
+    -- ** WriteLogEntriesRequest
+    , WriteLogEntriesRequest
+    , writeLogEntriesRequest
+    , wlerEntries
+    , wlerCommonLabels
 
-    -- ** ListLogsResponse
-    , ListLogsResponse
-    , listLogsResponse
-    , llrNextPageToken
-    , llrLogs
-
-    -- ** ListSinksResponse
-    , ListSinksResponse
-    , listSinksResponse
-    , lsrSinks
-
-    -- ** Log
-    , Log
-    , log
-    , logName
-    , logDisplayName
-    , logPayloadType
+    -- ** SourceLocation
+    , SourceLocation
+    , sourceLocation
+    , slLine
+    , slFunctionName
+    , slFile
 
     -- ** LogEntry
     , LogEntry
@@ -115,29 +111,29 @@ module Network.Google.Logging
     , leMetadata
     , leProtoPayload
 
-    -- ** LogEntryMetadata
-    , LogEntryMetadata
-    , logEntryMetadata
-    , lemSeverity
-    , lemZone
-    , lemUserId
-    , lemServiceName
-    , lemLabels
-    , lemRegion
-    , lemProjectId
-    , lemTimestamp
-
     -- ** LogEntryMetadataLabels
     , LogEntryMetadataLabels
     , logEntryMetadataLabels
 
-    -- ** LogEntryProtoPayload
-    , LogEntryProtoPayload
-    , logEntryProtoPayload
+    -- ** ListLogsResponse
+    , ListLogsResponse
+    , listLogsResponse
+    , llrNextPageToken
+    , llrLogs
 
-    -- ** LogEntryStructPayload
-    , LogEntryStructPayload
-    , logEntryStructPayload
+    -- ** Status
+    , Status
+    , status
+    , sDetails
+    , sCode
+    , sMessage
+
+    -- ** Log
+    , Log
+    , log
+    , logName
+    , logDisplayName
+    , logPayloadType
 
     -- ** LogError
     , LogError
@@ -154,19 +150,26 @@ module Network.Google.Logging
     , llLogMessage
     , llSourceLocation
 
-    -- ** LogService
-    , LogService
-    , logService
-    , lName
-    , lIndexKeys
+    -- ** ListSinksResponse
+    , ListSinksResponse
+    , listSinksResponse
+    , lsrSinks
 
-    -- ** LogSink
-    , LogSink
-    , logSink
-    , lsDestination
-    , lsName
-    , lsFilter
-    , lsErrors
+    -- ** LogEntryMetadata
+    , LogEntryMetadata
+    , logEntryMetadata
+    , lemSeverity
+    , lemZone
+    , lemUserId
+    , lemServiceName
+    , lemLabels
+    , lemRegion
+    , lemProjectId
+    , lemTimestamp
+
+    -- ** Empty
+    , Empty
+    , empty
 
     -- ** RequestLog
     , RequestLog
@@ -203,12 +206,37 @@ module Network.Google.Logging
     , rlSourceReference
     , rlAppEngineRelease
 
-    -- ** SourceLocation
-    , SourceLocation
-    , sourceLocation
-    , slLine
-    , slFunctionName
-    , slFile
+    -- ** WriteLogEntriesResponse
+    , WriteLogEntriesResponse
+    , writeLogEntriesResponse
+
+    -- ** ListLogServiceIndexesResponse
+    , ListLogServiceIndexesResponse
+    , listLogServiceIndexesResponse
+    , llsirNextPageToken
+    , llsirServiceIndexPrefixes
+
+    -- ** StatusItemDetails
+    , StatusItemDetails
+    , statusItemDetails
+
+    -- ** LogSink
+    , LogSink
+    , logSink
+    , lsDestination
+    , lsName
+    , lsFilter
+    , lsErrors
+
+    -- ** ListLogServicesResponse
+    , ListLogServicesResponse
+    , listLogServicesResponse
+    , llsrNextPageToken
+    , llsrLogServices
+
+    -- ** LogEntryProtoPayload
+    , LogEntryProtoPayload
+    , logEntryProtoPayload
 
     -- ** SourceReference
     , SourceReference
@@ -216,32 +244,51 @@ module Network.Google.Logging
     , srRepository
     , srRevisionId
 
-    -- ** Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
-
-    -- ** StatusItemDetails
-    , StatusItemDetails
-    , statusItemDetails
-
-    -- ** WriteLogEntriesRequest
-    , WriteLogEntriesRequest
-    , writeLogEntriesRequest
-    , wlerEntries
-    , wlerCommonLabels
+    -- ** HttpRequest
+    , HttpRequest
+    , httpRequest
+    , hrStatus
+    , hrRequestUrl
+    , hrRemoteIp
+    , hrRequestSize
+    , hrUserAgent
+    , hrResponseSize
+    , hrRequestMethod
+    , hrReferer
 
     -- ** WriteLogEntriesRequestCommonLabels
     , WriteLogEntriesRequestCommonLabels
     , writeLogEntriesRequestCommonLabels
 
-    -- ** WriteLogEntriesResponse
-    , WriteLogEntriesResponse
-    , writeLogEntriesResponse
+    -- ** ListLogSinksResponse
+    , ListLogSinksResponse
+    , listLogSinksResponse
+    , llsrSinks
+
+    -- ** LogService
+    , LogService
+    , logService
+    , lName
+    , lIndexKeys
     ) where
 
+import           Network.Google.API.Logging.Projects.Logs.Entries.Write
+import           Network.Google.API.Logging.Projects.Logs.Sinks.Create
+import           Network.Google.API.Logging.Projects.Logs.Sinks.Delete
+import           Network.Google.API.Logging.Projects.Logs.Sinks.Get
+import           Network.Google.API.Logging.Projects.Logs.Sinks.List
+import           Network.Google.API.Logging.Projects.Logs.Sinks.Update
+import           Network.Google.API.Logging.Projects.LogServices.Indexes.List
+import           Network.Google.API.Logging.Projects.LogServices.Sinks.Create
+import           Network.Google.API.Logging.Projects.LogServices.Sinks.Delete
+import           Network.Google.API.Logging.Projects.LogServices.Sinks.Get
+import           Network.Google.API.Logging.Projects.LogServices.Sinks.List
+import           Network.Google.API.Logging.Projects.LogServices.Sinks.Update
+import           Network.Google.API.Logging.Projects.Sinks.Create
+import           Network.Google.API.Logging.Projects.Sinks.Delete
+import           Network.Google.API.Logging.Projects.Sinks.Get
+import           Network.Google.API.Logging.Projects.Sinks.List
+import           Network.Google.API.Logging.Projects.Sinks.Update
 import           Network.Google.Logging.Types
 import           Network.Google.Prelude
 
@@ -249,439 +296,24 @@ import           Network.Google.Prelude
 TODO
 -}
 
-type Logging = ProjectsAPI
+type Logging =
+     ProjectsLogServicesSinksCreateAPI :<|>
+       ProjectsLogsSinksDeleteAPI
+       :<|> ProjectsLogsSinksUpdateAPI
+       :<|> ProjectsLogsSinksListAPI
+       :<|> ProjectsLogsSinksCreateAPI
+       :<|> ProjectsLogServicesIndexesListAPI
+       :<|> ProjectsSinksDeleteAPI
+       :<|> ProjectsLogsEntriesWriteAPI
+       :<|> ProjectsLogServicesSinksDeleteAPI
+       :<|> ProjectsLogServicesSinksGetAPI
+       :<|> ProjectsSinksUpdateAPI
+       :<|> ProjectsLogServicesSinksListAPI
+       :<|> ProjectsLogsSinksGetAPI
+       :<|> ProjectsLogServicesSinksUpdateAPI
+       :<|> ProjectsSinksCreateAPI
+       :<|> ProjectsSinksGetAPI
+       :<|> ProjectsSinksListAPI
 
-type ProjectsAPI =
-     SinksAPI :<|> LogServicesAPI :<|> LogsAPI
-
-type SinksAPI =
-     SinksList :<|> SinksGet :<|> SinksCreate :<|>
-       SinksDelete
-       :<|> SinksUpdate
-
--- | Lists project sinks associated with a project.
-type SinksList =
-     "v1beta3" :>
-       "projects" :>
-         Capture "projectsId" Text :>
-           "sinks" :>
-             QueryParam "$.xgafv" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "upload_protocol" Text :>
-                     QueryParam "pp" Bool :>
-                       QueryParam "access_token" Text :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "bearer_token" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "callback" Text :>
-                                     QueryParam "alt" Text :>
-                                       Get '[JSON] ListSinksResponse
-
--- | Gets a project sink.
-type SinksGet =
-     "v1beta3" :>
-       "projects" :>
-         Capture "projectsId" Text :>
-           "sinks" :>
-             Capture "sinksId" Text :>
-               QueryParam "$.xgafv" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "upload_protocol" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "access_token" Text :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "bearer_token" Text :>
-                               QueryParam "key" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "callback" Text :>
-                                       QueryParam "alt" Text :>
-                                         Get '[JSON] LogSink
-
--- | Creates a project sink. A logs filter determines which log entries are
--- written to the destination.
-type SinksCreate =
-     "v1beta3" :>
-       "projects" :>
-         Capture "projectsId" Text :>
-           "sinks" :>
-             QueryParam "$.xgafv" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "upload_protocol" Text :>
-                     QueryParam "pp" Bool :>
-                       QueryParam "access_token" Text :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "bearer_token" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "callback" Text :>
-                                     QueryParam "alt" Text :>
-                                       Post '[JSON] LogSink
-
--- | Deletes a project sink. After deletion, no new log entries are written
--- to the destination.
-type SinksDelete =
-     "v1beta3" :>
-       "projects" :>
-         Capture "projectsId" Text :>
-           "sinks" :>
-             Capture "sinksId" Text :>
-               QueryParam "$.xgafv" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "upload_protocol" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "access_token" Text :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "bearer_token" Text :>
-                               QueryParam "key" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "callback" Text :>
-                                       QueryParam "alt" Text :>
-                                         Delete '[JSON] Empty
-
--- | Updates a project sink. If the sink does not exist, it is created. The
--- destination, filter, or both may be updated.
-type SinksUpdate =
-     "v1beta3" :>
-       "projects" :>
-         Capture "projectsId" Text :>
-           "sinks" :>
-             Capture "sinksId" Text :>
-               QueryParam "$.xgafv" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "upload_protocol" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "access_token" Text :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "bearer_token" Text :>
-                               QueryParam "key" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "callback" Text :>
-                                       QueryParam "alt" Text :>
-                                         Put '[JSON] LogSink
-
-type LogServicesAPI = SinksAPI :<|> IndexesAPI
-
-type SinksAPI =
-     SinksList :<|> SinksGet :<|> SinksCreate :<|>
-       SinksDelete
-       :<|> SinksUpdate
-
--- | Lists log service sinks associated with a log service.
-type SinksList =
-     "v1beta3" :>
-       "projects" :>
-         Capture "projectsId" Text :>
-           "logServices" :>
-             Capture "logServicesId" Text :>
-               "sinks" :>
-                 QueryParam "$.xgafv" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "upload_protocol" Text :>
-                         QueryParam "pp" Bool :>
-                           QueryParam "access_token" Text :>
-                             QueryParam "uploadType" Text :>
-                               QueryParam "bearer_token" Text :>
-                                 QueryParam "key" Text :>
-                                   QueryParam "oauth_token" Text :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "callback" Text :>
-                                         QueryParam "alt" Text :>
-                                           Get '[JSON]
-                                             ListLogServiceSinksResponse
-
--- | Gets a log service sink.
-type SinksGet =
-     "v1beta3" :>
-       "projects" :>
-         Capture "projectsId" Text :>
-           "logServices" :>
-             Capture "logServicesId" Text :>
-               "sinks" :>
-                 Capture "sinksId" Text :>
-                   QueryParam "$.xgafv" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "upload_protocol" Text :>
-                           QueryParam "pp" Bool :>
-                             QueryParam "access_token" Text :>
-                               QueryParam "uploadType" Text :>
-                                 QueryParam "bearer_token" Text :>
-                                   QueryParam "key" Text :>
-                                     QueryParam "oauth_token" Text :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "callback" Text :>
-                                           QueryParam "alt" Text :>
-                                             Get '[JSON] LogSink
-
--- | Creates a log service sink. All log entries from a specified log service
--- are written to the destination.
-type SinksCreate =
-     "v1beta3" :>
-       "projects" :>
-         Capture "projectsId" Text :>
-           "logServices" :>
-             Capture "logServicesId" Text :>
-               "sinks" :>
-                 QueryParam "$.xgafv" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "upload_protocol" Text :>
-                         QueryParam "pp" Bool :>
-                           QueryParam "access_token" Text :>
-                             QueryParam "uploadType" Text :>
-                               QueryParam "bearer_token" Text :>
-                                 QueryParam "key" Text :>
-                                   QueryParam "oauth_token" Text :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "callback" Text :>
-                                         QueryParam "alt" Text :>
-                                           Post '[JSON] LogSink
-
--- | Deletes a log service sink. After deletion, no new log entries are
--- written to the destination.
-type SinksDelete =
-     "v1beta3" :>
-       "projects" :>
-         Capture "projectsId" Text :>
-           "logServices" :>
-             Capture "logServicesId" Text :>
-               "sinks" :>
-                 Capture "sinksId" Text :>
-                   QueryParam "$.xgafv" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "upload_protocol" Text :>
-                           QueryParam "pp" Bool :>
-                             QueryParam "access_token" Text :>
-                               QueryParam "uploadType" Text :>
-                                 QueryParam "bearer_token" Text :>
-                                   QueryParam "key" Text :>
-                                     QueryParam "oauth_token" Text :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "callback" Text :>
-                                           QueryParam "alt" Text :>
-                                             Delete '[JSON] Empty
-
--- | Updates a log service sink. If the sink does not exist, it is created.
-type SinksUpdate =
-     "v1beta3" :>
-       "projects" :>
-         Capture "projectsId" Text :>
-           "logServices" :>
-             Capture "logServicesId" Text :>
-               "sinks" :>
-                 Capture "sinksId" Text :>
-                   QueryParam "$.xgafv" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "upload_protocol" Text :>
-                           QueryParam "pp" Bool :>
-                             QueryParam "access_token" Text :>
-                               QueryParam "uploadType" Text :>
-                                 QueryParam "bearer_token" Text :>
-                                   QueryParam "key" Text :>
-                                     QueryParam "oauth_token" Text :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "callback" Text :>
-                                           QueryParam "alt" Text :>
-                                             Put '[JSON] LogSink
-
-type IndexesAPI = IndexesList
-
--- | Lists the current index values for a log service.
-type IndexesList =
-     "v1beta3" :>
-       "projects" :>
-         Capture "projectsId" Text :>
-           "logServices" :>
-             Capture "logServicesId" Text :>
-               "indexes" :>
-                 QueryParam "log" Text :>
-                   QueryParam "$.xgafv" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "upload_protocol" Text :>
-                           QueryParam "pp" Bool :>
-                             QueryParam "access_token" Text :>
-                               QueryParam "uploadType" Text :>
-                                 QueryParam "bearer_token" Text :>
-                                   QueryParam "key" Text :>
-                                     QueryParam "depth" Int32 :>
-                                       QueryParam "pageToken" Text :>
-                                         QueryParam "oauth_token" Text :>
-                                           QueryParam "pageSize" Int32 :>
-                                             QueryParam "indexPrefix" Text :>
-                                               QueryParam "fields" Text :>
-                                                 QueryParam "callback" Text :>
-                                                   QueryParam "alt" Text :>
-                                                     Get '[JSON]
-                                                       ListLogServiceIndexesResponse
-
-type LogsAPI = SinksAPI :<|> EntriesAPI
-
-type SinksAPI =
-     SinksList :<|> SinksGet :<|> SinksCreate :<|>
-       SinksDelete
-       :<|> SinksUpdate
-
--- | Lists log sinks associated with a log.
-type SinksList =
-     "v1beta3" :>
-       "projects" :>
-         Capture "projectsId" Text :>
-           "logs" :>
-             Capture "logsId" Text :>
-               "sinks" :>
-                 QueryParam "$.xgafv" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "upload_protocol" Text :>
-                         QueryParam "pp" Bool :>
-                           QueryParam "access_token" Text :>
-                             QueryParam "uploadType" Text :>
-                               QueryParam "bearer_token" Text :>
-                                 QueryParam "key" Text :>
-                                   QueryParam "oauth_token" Text :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "callback" Text :>
-                                         QueryParam "alt" Text :>
-                                           Get '[JSON] ListLogSinksResponse
-
--- | Gets a log sink.
-type SinksGet =
-     "v1beta3" :>
-       "projects" :>
-         Capture "projectsId" Text :>
-           "logs" :>
-             Capture "logsId" Text :>
-               "sinks" :>
-                 Capture "sinksId" Text :>
-                   QueryParam "$.xgafv" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "upload_protocol" Text :>
-                           QueryParam "pp" Bool :>
-                             QueryParam "access_token" Text :>
-                               QueryParam "uploadType" Text :>
-                                 QueryParam "bearer_token" Text :>
-                                   QueryParam "key" Text :>
-                                     QueryParam "oauth_token" Text :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "callback" Text :>
-                                           QueryParam "alt" Text :>
-                                             Get '[JSON] LogSink
-
--- | Creates a log sink. All log entries for a specified log are written to
--- the destination.
-type SinksCreate =
-     "v1beta3" :>
-       "projects" :>
-         Capture "projectsId" Text :>
-           "logs" :>
-             Capture "logsId" Text :>
-               "sinks" :>
-                 QueryParam "$.xgafv" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "upload_protocol" Text :>
-                         QueryParam "pp" Bool :>
-                           QueryParam "access_token" Text :>
-                             QueryParam "uploadType" Text :>
-                               QueryParam "bearer_token" Text :>
-                                 QueryParam "key" Text :>
-                                   QueryParam "oauth_token" Text :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "callback" Text :>
-                                         QueryParam "alt" Text :>
-                                           Post '[JSON] LogSink
-
--- | Deletes a log sink. After deletion, no new log entries are written to
--- the destination.
-type SinksDelete =
-     "v1beta3" :>
-       "projects" :>
-         Capture "projectsId" Text :>
-           "logs" :>
-             Capture "logsId" Text :>
-               "sinks" :>
-                 Capture "sinksId" Text :>
-                   QueryParam "$.xgafv" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "upload_protocol" Text :>
-                           QueryParam "pp" Bool :>
-                             QueryParam "access_token" Text :>
-                               QueryParam "uploadType" Text :>
-                                 QueryParam "bearer_token" Text :>
-                                   QueryParam "key" Text :>
-                                     QueryParam "oauth_token" Text :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "callback" Text :>
-                                           QueryParam "alt" Text :>
-                                             Delete '[JSON] Empty
-
--- | Updates a log sink. If the sink does not exist, it is created.
-type SinksUpdate =
-     "v1beta3" :>
-       "projects" :>
-         Capture "projectsId" Text :>
-           "logs" :>
-             Capture "logsId" Text :>
-               "sinks" :>
-                 Capture "sinksId" Text :>
-                   QueryParam "$.xgafv" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "upload_protocol" Text :>
-                           QueryParam "pp" Bool :>
-                             QueryParam "access_token" Text :>
-                               QueryParam "uploadType" Text :>
-                                 QueryParam "bearer_token" Text :>
-                                   QueryParam "key" Text :>
-                                     QueryParam "oauth_token" Text :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "callback" Text :>
-                                           QueryParam "alt" Text :>
-                                             Put '[JSON] LogSink
-
-type EntriesAPI = EntriesWrite
-
--- | Writes log entries to Cloud Logging. Each entry consists of a
--- \`LogEntry\` object. You must fill in all the fields of the object,
--- including one of the payload fields. You may supply a map,
--- \`commonLabels\`, that holds default (key, value) data for the
--- \`entries[].metadata.labels\` map in each entry, saving you the trouble
--- of creating identical copies for each entry.
-type EntriesWrite =
-     "v1beta3" :>
-       "projects" :>
-         Capture "projectsId" Text :>
-           "logs" :>
-             Capture "logsId" Text :>
-               "entries:write" :>
-                 QueryParam "$.xgafv" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "upload_protocol" Text :>
-                         QueryParam "pp" Bool :>
-                           QueryParam "access_token" Text :>
-                             QueryParam "uploadType" Text :>
-                               QueryParam "bearer_token" Text :>
-                                 QueryParam "key" Text :>
-                                   QueryParam "oauth_token" Text :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "callback" Text :>
-                                         QueryParam "alt" Text :>
-                                           Post '[JSON] WriteLogEntriesResponse
+logging :: Proxy Logging
+logging = Proxy

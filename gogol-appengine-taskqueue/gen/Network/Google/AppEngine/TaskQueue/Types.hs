@@ -14,9 +14,14 @@
 --
 module Network.Google.AppEngine.TaskQueue.Types
     (
+    -- * Service URL
+      appEngineTaskQueueURL
+
+    -- * Alt
+    , Alt (..)
 
     -- * Task
-      Task
+    , Task
     , task
     , tRetryCount
     , tEnqueueTimestamp
@@ -26,30 +31,6 @@ module Network.Google.AppEngine.TaskQueue.Types
     , tPayloadBase64
     , tId
     , tLeaseTimestamp
-
-    -- * TaskQueue
-    , TaskQueue
-    , taskQueue
-    , tqKind
-    , tqStats
-    , tqMaxLeases
-    , tqId
-    , tqAcl
-
-    -- * TaskQueueAcl
-    , TaskQueueAcl
-    , taskQueueAcl
-    , tqaProducerEmails
-    , tqaAdminEmails
-    , tqaConsumerEmails
-
-    -- * TaskQueueStats
-    , TaskQueueStats
-    , taskQueueStats
-    , tqsTotalTasks
-    , tqsOldestTask
-    , tqsLeasedLastHour
-    , tqsLeasedLastMinute
 
     -- * Tasks
     , Tasks
@@ -62,8 +43,39 @@ module Network.Google.AppEngine.TaskQueue.Types
     , tasks2
     , ttKind
     , ttItems
+
+    -- * TaskQueue
+    , TaskQueue
+    , taskQueue
+    , tqKind
+    , tqStats
+    , tqMaxLeases
+    , tqId
+    , tqAcl
+
+    -- * TaskQueueStats
+    , TaskQueueStats
+    , taskQueueStats
+    , tqsTotalTasks
+    , tqsOldestTask
+    , tqsLeasedLastHour
+    , tqsLeasedLastMinute
+
+    -- * TaskQueueAcl
+    , TaskQueueAcl
+    , taskQueueAcl
+    , tqaProducerEmails
+    , tqaAdminEmails
+    , tqaConsumerEmails
     ) where
 
 import           Network.Google.AppEngine.TaskQueue.Types.Product
 import           Network.Google.AppEngine.TaskQueue.Types.Sum
 import           Network.Google.Prelude
+
+-- | URL referring to version 'v1beta2' of the TaskQueue API.
+appEngineTaskQueueURL :: BaseUrl
+appEngineTaskQueueURL
+  = BaseUrl Https
+      "https://www.googleapis.com/taskqueue/v1beta2/projects/"
+      443

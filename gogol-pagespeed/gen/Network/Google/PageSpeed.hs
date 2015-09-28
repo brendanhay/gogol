@@ -18,18 +18,17 @@
 -- /See:/ <https://developers.google.com/speed/docs/insights/v2/getting-started PageSpeed Insights API Reference>
 module Network.Google.PageSpeed
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** PageSpeed Insights API
       PageSpeed
-    , PagespeedapiAPI
-    , PagespeedapiRunpagespeed
+    , pageSpeed
+    , pageSpeedURL
+
+    -- ** pagespeedonline.pagespeedapi.runpagespeed
+    , module Network.Google.API.Pagespeedonline.Pagespeedapi.Runpagespeed
 
     -- * Types
-
-    -- ** PagespeedApiFormatStringV2
-    , PagespeedApiFormatStringV2
-    , pagespeedApiFormatStringV2
-    , pafsvArgs
-    , pafsvFormat
 
     -- ** PagespeedApiFormatStringV2ItemArgs
     , PagespeedApiFormatStringV2ItemArgs
@@ -40,13 +39,45 @@ module Network.Google.PageSpeed
     , pafsviaType
     , pafsviaSecondaryRects
 
-    -- ** PagespeedApiFormatStringV2ItemRectsItemArgs
-    , PagespeedApiFormatStringV2ItemRectsItemArgs
-    , pagespeedApiFormatStringV2ItemRectsItemArgs
-    , pafsviriaHeight
-    , pafsviriaLeft
-    , pafsviriaWidth
-    , pafsviriaTop
+    -- ** ResultRuleResultsFormattedResults
+    , ResultRuleResultsFormattedResults
+    , resultRuleResultsFormattedResults
+
+    -- ** Alt
+    , Alt (..)
+
+    -- ** ResultPageStats
+    , ResultPageStats
+    , resultPageStats
+    , rpsHtmlResponseBytes
+    , rpsTotalRequestBytes
+    , rpsNumberResources
+    , rpsNumberStaticResources
+    , rpsNumberHosts
+    , rpsNumberJsResources
+    , rpsNumberCssResources
+    , rpsTextResponseBytes
+    , rpsFlashResponseBytes
+    , rpsImageResponseBytes
+    , rpsOtherResponseBytes
+    , rpsJavascriptResponseBytes
+    , rpsCssResponseBytes
+
+    -- ** ResultVersion
+    , ResultVersion
+    , resultVersion
+    , rvMinor
+    , rvMajor
+
+    -- ** ResultRuleGroups
+    , ResultRuleGroups
+    , resultRuleGroups
+
+    -- ** ResultFormattedResults
+    , ResultFormattedResults
+    , resultFormattedResults
+    , rfrLocale
+    , rfrRuleResults
 
     -- ** PagespeedApiFormatStringV2ItemSecondary_rectsItemArgs
     , PagespeedApiFormatStringV2ItemSecondary_rectsItemArgs
@@ -74,6 +105,15 @@ module Network.Google.PageSpeed
     , paivpWidth
     , paivpTop
 
+    -- ** PagespeedApiFormatStringV2
+    , PagespeedApiFormatStringV2
+    , pagespeedApiFormatStringV2
+    , pafsvArgs
+    , pafsvFormat
+
+    -- ** PagespeedapiRunpagespeed'Strategy
+    , PagespeedapiRunpagespeed'Strategy (..)
+
     -- ** Result
     , Result
     , result
@@ -88,44 +128,16 @@ module Network.Google.PageSpeed
     , rId
     , rTitle
 
-    -- ** ResultFormattedResults
-    , ResultFormattedResults
-    , resultFormattedResults
-    , rfrLocale
-    , rfrRuleResults
-
-    -- ** ResultPageStats
-    , ResultPageStats
-    , resultPageStats
-    , rpsHtmlResponseBytes
-    , rpsTotalRequestBytes
-    , rpsNumberResources
-    , rpsNumberStaticResources
-    , rpsNumberHosts
-    , rpsNumberJsResources
-    , rpsNumberCssResources
-    , rpsTextResponseBytes
-    , rpsFlashResponseBytes
-    , rpsImageResponseBytes
-    , rpsOtherResponseBytes
-    , rpsJavascriptResponseBytes
-    , rpsCssResponseBytes
-
-    -- ** ResultRuleGroups
-    , ResultRuleGroups
-    , resultRuleGroups
-
-    -- ** ResultRuleResultsFormattedResults
-    , ResultRuleResultsFormattedResults
-    , resultRuleResultsFormattedResults
-
-    -- ** ResultVersion
-    , ResultVersion
-    , resultVersion
-    , rvMinor
-    , rvMajor
+    -- ** PagespeedApiFormatStringV2ItemRectsItemArgs
+    , PagespeedApiFormatStringV2ItemRectsItemArgs
+    , pagespeedApiFormatStringV2ItemRectsItemArgs
+    , pafsviriaHeight
+    , pafsviriaLeft
+    , pafsviriaWidth
+    , pafsviriaTop
     ) where
 
+import           Network.Google.API.Pagespeedonline.Pagespeedapi.Runpagespeed
 import           Network.Google.PageSpeed.Types
 import           Network.Google.Prelude
 
@@ -133,27 +145,7 @@ import           Network.Google.Prelude
 TODO
 -}
 
-type PageSpeed = PagespeedapiAPI
+type PageSpeed = PagespeedapiRunpagespeedAPI
 
-type PagespeedapiAPI = PagespeedapiRunpagespeed
-
--- | Runs PageSpeed analysis on the page at the specified URL, and returns
--- PageSpeed scores, a list of suggestions to make that page faster, and
--- other information.
-type PagespeedapiRunpagespeed =
-     "pagespeedonline" :>
-       "v2" :>
-         "runPagespeed" :>
-           QueryParam "screenshot" Bool :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "locale" Text :>
-                     QueryParam "url" Text :>
-                       QueryParam "filter_third_party_resources" Bool :>
-                         QueryParam "strategy" Text :>
-                           QueryParam "rule" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :> Get '[JSON] Result
+pageSpeed :: Proxy PageSpeed
+pageSpeed = Proxy

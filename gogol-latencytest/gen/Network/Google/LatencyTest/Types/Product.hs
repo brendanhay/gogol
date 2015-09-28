@@ -52,36 +52,36 @@ instance ToJSON AggregatedStats where
           = object (catMaybes [("stats" .=) <$> _asStats])
 
 --
--- /See:/ 'aggregatedStatsReply' smart constructor.
-newtype AggregatedStatsReply = AggregatedStatsReply
-    { _asrTestValue :: Maybe Text
+-- /See:/ 'statsReply' smart constructor.
+newtype StatsReply = StatsReply
+    { _srTestValue :: Maybe Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AggregatedStatsReply' with the minimum fields required to make a request.
+-- | Creates a value of 'StatsReply' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'asrTestValue'
-aggregatedStatsReply
-    :: AggregatedStatsReply
-aggregatedStatsReply =
-    AggregatedStatsReply
-    { _asrTestValue = Nothing
+-- * 'srTestValue'
+statsReply
+    :: StatsReply
+statsReply =
+    StatsReply
+    { _srTestValue = Nothing
     }
 
-asrTestValue :: Lens' AggregatedStatsReply (Maybe Text)
-asrTestValue
-  = lens _asrTestValue (\ s a -> s{_asrTestValue = a})
+srTestValue :: Lens' StatsReply (Maybe Text)
+srTestValue
+  = lens _srTestValue (\ s a -> s{_srTestValue = a})
 
-instance FromJSON AggregatedStatsReply where
+instance FromJSON StatsReply where
         parseJSON
-          = withObject "AggregatedStatsReply"
-              (\ o -> AggregatedStatsReply <$> (o .:? "testValue"))
+          = withObject "StatsReply"
+              (\ o -> StatsReply <$> (o .:? "testValue"))
 
-instance ToJSON AggregatedStatsReply where
-        toJSON AggregatedStatsReply{..}
+instance ToJSON StatsReply where
+        toJSON StatsReply{..}
           = object
-              (catMaybes [("testValue" .=) <$> _asrTestValue])
+              (catMaybes [("testValue" .=) <$> _srTestValue])
 
 --
 -- /See:/ 'doubleValue' smart constructor.
@@ -123,6 +123,79 @@ instance ToJSON DoubleValue where
               (catMaybes
                  [("value" .=) <$> _dvValue,
                   ("label" .=) <$> _dvLabel])
+
+--
+-- /See:/ 'stringValue' smart constructor.
+data StringValue = StringValue
+    { _svValue :: !(Maybe Text)
+    , _svLabel :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'StringValue' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'svValue'
+--
+-- * 'svLabel'
+stringValue
+    :: StringValue
+stringValue =
+    StringValue
+    { _svValue = Nothing
+    , _svLabel = Nothing
+    }
+
+svValue :: Lens' StringValue (Maybe Text)
+svValue = lens _svValue (\ s a -> s{_svValue = a})
+
+svLabel :: Lens' StringValue (Maybe Text)
+svLabel = lens _svLabel (\ s a -> s{_svLabel = a})
+
+instance FromJSON StringValue where
+        parseJSON
+          = withObject "StringValue"
+              (\ o ->
+                 StringValue <$> (o .:? "value") <*> (o .:? "label"))
+
+instance ToJSON StringValue where
+        toJSON StringValue{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _svValue,
+                  ("label" .=) <$> _svLabel])
+
+--
+-- /See:/ 'aggregatedStatsReply' smart constructor.
+newtype AggregatedStatsReply = AggregatedStatsReply
+    { _asrTestValue :: Maybe Text
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AggregatedStatsReply' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'asrTestValue'
+aggregatedStatsReply
+    :: AggregatedStatsReply
+aggregatedStatsReply =
+    AggregatedStatsReply
+    { _asrTestValue = Nothing
+    }
+
+asrTestValue :: Lens' AggregatedStatsReply (Maybe Text)
+asrTestValue
+  = lens _asrTestValue (\ s a -> s{_asrTestValue = a})
+
+instance FromJSON AggregatedStatsReply where
+        parseJSON
+          = withObject "AggregatedStatsReply"
+              (\ o -> AggregatedStatsReply <$> (o .:? "testValue"))
+
+instance ToJSON AggregatedStatsReply where
+        toJSON AggregatedStatsReply{..}
+          = object
+              (catMaybes [("testValue" .=) <$> _asrTestValue])
 
 --
 -- /See:/ 'intValue' smart constructor.
@@ -235,76 +308,3 @@ instance ToJSON Stats where
                   ("doubleValues" .=) <$> _sDoubleValues,
                   ("stringValues" .=) <$> _sStringValues,
                   ("intValues" .=) <$> _sIntValues])
-
---
--- /See:/ 'statsReply' smart constructor.
-newtype StatsReply = StatsReply
-    { _srTestValue :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'StatsReply' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'srTestValue'
-statsReply
-    :: StatsReply
-statsReply =
-    StatsReply
-    { _srTestValue = Nothing
-    }
-
-srTestValue :: Lens' StatsReply (Maybe Text)
-srTestValue
-  = lens _srTestValue (\ s a -> s{_srTestValue = a})
-
-instance FromJSON StatsReply where
-        parseJSON
-          = withObject "StatsReply"
-              (\ o -> StatsReply <$> (o .:? "testValue"))
-
-instance ToJSON StatsReply where
-        toJSON StatsReply{..}
-          = object
-              (catMaybes [("testValue" .=) <$> _srTestValue])
-
---
--- /See:/ 'stringValue' smart constructor.
-data StringValue = StringValue
-    { _svValue :: !(Maybe Text)
-    , _svLabel :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'StringValue' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'svValue'
---
--- * 'svLabel'
-stringValue
-    :: StringValue
-stringValue =
-    StringValue
-    { _svValue = Nothing
-    , _svLabel = Nothing
-    }
-
-svValue :: Lens' StringValue (Maybe Text)
-svValue = lens _svValue (\ s a -> s{_svValue = a})
-
-svLabel :: Lens' StringValue (Maybe Text)
-svLabel = lens _svLabel (\ s a -> s{_svLabel = a})
-
-instance FromJSON StringValue where
-        parseJSON
-          = withObject "StringValue"
-              (\ o ->
-                 StringValue <$> (o .:? "value") <*> (o .:? "label"))
-
-instance ToJSON StringValue where
-        toJSON StringValue{..}
-          = object
-              (catMaybes
-                 [("value" .=) <$> _svValue,
-                  ("label" .=) <$> _svLabel])

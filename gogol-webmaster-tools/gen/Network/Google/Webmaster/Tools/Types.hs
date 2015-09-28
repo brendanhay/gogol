@@ -14,9 +14,22 @@
 --
 module Network.Google.Webmaster.Tools.Types
     (
+    -- * Service URL
+      webmasterToolsURL
+
+    -- * URLcrawlerrorssamplesGet'Category
+    , URLcrawlerrorssamplesGet'Category (..)
+
+    -- * URLcrawlerrorssamplesList'Platform
+    , URLcrawlerrorssamplesList'Platform (..)
+
+    -- * UrlCrawlErrorsSamplesListResponse
+    , UrlCrawlErrorsSamplesListResponse
+    , urlCrawlErrorsSamplesListResponse
+    , uceslrUrlCrawlErrorSample
 
     -- * ApiDataRow
-      ApiDataRow
+    , ApiDataRow
     , apiDataRow
     , adrImpressions
     , adrKeys
@@ -24,63 +37,11 @@ module Network.Google.Webmaster.Tools.Types
     , adrClicks
     , adrPosition
 
-    -- * ApiDimensionFilter
-    , ApiDimensionFilter
-    , apiDimensionFilter
-    , adfOperator
-    , adfDimension
-    , adfExpression
+    -- * URLcrawlerrorscountsQuery'Platform
+    , URLcrawlerrorscountsQuery'Platform (..)
 
-    -- * ApiDimensionFilterGroup
-    , ApiDimensionFilterGroup
-    , apiDimensionFilterGroup
-    , adfgFilters
-    , adfgGroupType
-
-    -- * SearchAnalyticsQueryRequest
-    , SearchAnalyticsQueryRequest
-    , searchAnalyticsQueryRequest
-    , saqrAggregationType
-    , saqrRowLimit
-    , saqrEndDate
-    , saqrSearchType
-    , saqrDimensionFilterGroups
-    , saqrStartDate
-    , saqrDimensions
-
-    -- * SearchAnalyticsQueryResponse
-    , SearchAnalyticsQueryResponse
-    , searchAnalyticsQueryResponse
-    , saqrRows
-    , saqrResponseAggregationType
-
-    -- * SitemapsListResponse
-    , SitemapsListResponse
-    , sitemapsListResponse
-    , slrSitemap
-
-    -- * SitesListResponse
-    , SitesListResponse
-    , sitesListResponse
-    , slrSiteEntry
-
-    -- * UrlCrawlErrorCount
-    , UrlCrawlErrorCount
-    , urlCrawlErrorCount
-    , ucecCount
-    , ucecTimestamp
-
-    -- * UrlCrawlErrorCountsPerType
-    , UrlCrawlErrorCountsPerType
-    , urlCrawlErrorCountsPerType
-    , ucecptPlatform
-    , ucecptEntries
-    , ucecptCategory
-
-    -- * UrlCrawlErrorsCountsQueryResponse
-    , UrlCrawlErrorsCountsQueryResponse
-    , urlCrawlErrorsCountsQueryResponse
-    , ucecqrCountPerTypes
+    -- * Alt
+    , Alt (..)
 
     -- * UrlCrawlErrorsSample
     , UrlCrawlErrorsSample
@@ -91,22 +52,10 @@ module Network.Google.Webmaster.Tools.Types
     , ucesPageUrl
     , ucesFirstDetected
 
-    -- * UrlCrawlErrorsSamplesListResponse
-    , UrlCrawlErrorsSamplesListResponse
-    , urlCrawlErrorsSamplesListResponse
-    , uceslrUrlCrawlErrorSample
-
-    -- * UrlSampleDetails
-    , UrlSampleDetails
-    , urlSampleDetails
-    , usdLinkedFromUrls
-    , usdContainingSitemaps
-
-    -- * WmxSite
-    , WmxSite
-    , wmxSite
-    , wsPermissionLevel
-    , wsSiteUrl
+    -- * SitemapsListResponse
+    , SitemapsListResponse
+    , sitemapsListResponse
+    , slrSitemap
 
     -- * WmxSitemap
     , WmxSitemap
@@ -121,14 +70,101 @@ module Network.Google.Webmaster.Tools.Types
     , wsType
     , wsErrors
 
+    -- * URLcrawlerrorssamplesList'Category
+    , URLcrawlerrorssamplesList'Category (..)
+
+    -- * SearchAnalyticsQueryRequest
+    , SearchAnalyticsQueryRequest
+    , searchAnalyticsQueryRequest
+    , saqrAggregationType
+    , saqrRowLimit
+    , saqrEndDate
+    , saqrSearchType
+    , saqrDimensionFilterGroups
+    , saqrStartDate
+    , saqrDimensions
+
+    -- * URLcrawlerrorssamplesGet'Platform
+    , URLcrawlerrorssamplesGet'Platform (..)
+
+    -- * WmxSite
+    , WmxSite
+    , wmxSite
+    , wsPermissionLevel
+    , wsSiteUrl
+
+    -- * SitesListResponse
+    , SitesListResponse
+    , sitesListResponse
+    , slrSiteEntry
+
     -- * WmxSitemapContent
     , WmxSitemapContent
     , wmxSitemapContent
     , wscIndexed
     , wscType
     , wscSubmitted
+
+    -- * URLcrawlerrorssamplesMarkAsFixed'Platform
+    , URLcrawlerrorssamplesMarkAsFixed'Platform (..)
+
+    -- * UrlSampleDetails
+    , UrlSampleDetails
+    , urlSampleDetails
+    , usdLinkedFromUrls
+    , usdContainingSitemaps
+
+    -- * UrlCrawlErrorCountsPerType
+    , UrlCrawlErrorCountsPerType
+    , urlCrawlErrorCountsPerType
+    , ucecptPlatform
+    , ucecptEntries
+    , ucecptCategory
+
+    -- * ApiDimensionFilterGroup
+    , ApiDimensionFilterGroup
+    , apiDimensionFilterGroup
+    , adfgFilters
+    , adfgGroupType
+
+    -- * UrlCrawlErrorsCountsQueryResponse
+    , UrlCrawlErrorsCountsQueryResponse
+    , urlCrawlErrorsCountsQueryResponse
+    , ucecqrCountPerTypes
+
+    -- * URLcrawlerrorscountsQuery'Category
+    , URLcrawlerrorscountsQuery'Category (..)
+
+    -- * ApiDimensionFilter
+    , ApiDimensionFilter
+    , apiDimensionFilter
+    , adfOperator
+    , adfDimension
+    , adfExpression
+
+    -- * URLcrawlerrorssamplesMarkAsFixed'Category
+    , URLcrawlerrorssamplesMarkAsFixed'Category (..)
+
+    -- * UrlCrawlErrorCount
+    , UrlCrawlErrorCount
+    , urlCrawlErrorCount
+    , ucecCount
+    , ucecTimestamp
+
+    -- * SearchAnalyticsQueryResponse
+    , SearchAnalyticsQueryResponse
+    , searchAnalyticsQueryResponse
+    , saqrRows
+    , saqrResponseAggregationType
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.Webmaster.Tools.Types.Product
 import           Network.Google.Webmaster.Tools.Types.Sum
+
+-- | URL referring to version 'v3' of the Webmaster Tools API.
+webmasterToolsURL :: BaseUrl
+webmasterToolsURL
+  = BaseUrl Https
+      "https://www.googleapis.com/webmasters/v3/"
+      443

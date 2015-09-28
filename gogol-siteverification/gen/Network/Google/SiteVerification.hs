@@ -18,16 +18,33 @@
 -- /See:/ <https://developers.google.com/site-verification/ Google Site Verification API Reference>
 module Network.Google.SiteVerification
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** Google Site Verification API
       SiteVerification
-    , WebResourceAPI
-    , WebResourceInsert
-    , WebResourceList
-    , WebResourcePatch
-    , WebResourceGet
-    , WebResourceGetToken
-    , WebResourceDelete
-    , WebResourceUpdate
+    , siteVerification
+    , siteVerificationURL
+
+    -- ** siteVerification.webResource.delete
+    , module Network.Google.API.SiteVerification.WebResource.Delete
+
+    -- ** siteVerification.webResource.get
+    , module Network.Google.API.SiteVerification.WebResource.Get
+
+    -- ** siteVerification.webResource.getToken
+    , module Network.Google.API.SiteVerification.WebResource.GetToken
+
+    -- ** siteVerification.webResource.insert
+    , module Network.Google.API.SiteVerification.WebResource.Insert
+
+    -- ** siteVerification.webResource.list
+    , module Network.Google.API.SiteVerification.WebResource.List
+
+    -- ** siteVerification.webResource.patch
+    , module Network.Google.API.SiteVerification.WebResource.Patch
+
+    -- ** siteVerification.webResource.update
+    , module Network.Google.API.SiteVerification.WebResource.Update
 
     -- * Types
 
@@ -37,11 +54,8 @@ module Network.Google.SiteVerification
     , svwrgrSite
     , svwrgrVerificationMethod
 
-    -- ** SiteVerificationWebResourceGettokenRequestSite
-    , SiteVerificationWebResourceGettokenRequestSite
-    , siteVerificationWebResourceGettokenRequestSite
-    , svwrgrsIdentifier
-    , svwrgrsType
+    -- ** Alt
+    , Alt (..)
 
     -- ** SiteVerificationWebResourceGettokenResponse
     , SiteVerificationWebResourceGettokenResponse
@@ -49,10 +63,11 @@ module Network.Google.SiteVerification
     , svwrgrToken
     , svwrgrMethod
 
-    -- ** SiteVerificationWebResourceListResponse
-    , SiteVerificationWebResourceListResponse
-    , siteVerificationWebResourceListResponse
-    , svwrlrItems
+    -- ** SiteVerificationWebResourceGettokenRequestSite
+    , SiteVerificationWebResourceGettokenRequestSite
+    , siteVerificationWebResourceGettokenRequestSite
+    , svwrgrsIdentifier
+    , svwrgrsType
 
     -- ** SiteVerificationWebResourceResource
     , SiteVerificationWebResourceResource
@@ -66,8 +81,20 @@ module Network.Google.SiteVerification
     , siteVerificationWebResourceResourceSite
     , svwrrsIdentifier
     , svwrrsType
+
+    -- ** SiteVerificationWebResourceListResponse
+    , SiteVerificationWebResourceListResponse
+    , siteVerificationWebResourceListResponse
+    , svwrlrItems
     ) where
 
+import           Network.Google.API.SiteVerification.WebResource.Delete
+import           Network.Google.API.SiteVerification.WebResource.Get
+import           Network.Google.API.SiteVerification.WebResource.GetToken
+import           Network.Google.API.SiteVerification.WebResource.Insert
+import           Network.Google.API.SiteVerification.WebResource.List
+import           Network.Google.API.SiteVerification.WebResource.Patch
+import           Network.Google.API.SiteVerification.WebResource.Update
 import           Network.Google.Prelude
 import           Network.Google.SiteVerification.Types
 
@@ -75,116 +102,13 @@ import           Network.Google.SiteVerification.Types
 TODO
 -}
 
-type SiteVerification = WebResourceAPI
+type SiteVerification =
+     WebResourceUpdateAPI :<|> WebResourceGetAPI :<|>
+       WebResourceListAPI
+       :<|> WebResourcePatchAPI
+       :<|> WebResourceGetTokenAPI
+       :<|> WebResourceInsertAPI
+       :<|> WebResourceDeleteAPI
 
-type WebResourceAPI =
-     WebResourceInsert :<|> WebResourceList :<|>
-       WebResourcePatch
-       :<|> WebResourceGet
-       :<|> WebResourceGetToken
-       :<|> WebResourceDelete
-       :<|> WebResourceUpdate
-
--- | Attempt verification of a website or domain.
-type WebResourceInsert =
-     "siteVerification" :>
-       "v1" :>
-         "webResource" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
-                     QueryParam "verificationMethod" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :>
-                           Post '[JSON] SiteVerificationWebResourceResource
-
--- | Get the list of your verified websites and domains.
-type WebResourceList =
-     "siteVerification" :>
-       "v1" :>
-         "webResource" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "alt" Text :>
-                         Get '[JSON] SiteVerificationWebResourceListResponse
-
--- | Modify the list of owners for your website or domain. This method
--- supports patch semantics.
-type WebResourcePatch =
-     "siteVerification" :>
-       "v1" :>
-         "webResource" :>
-           Capture "id" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :>
-                           Patch '[JSON] SiteVerificationWebResourceResource
-
--- | Get the most current data for a website or domain.
-type WebResourceGet =
-     "siteVerification" :>
-       "v1" :>
-         "webResource" :>
-           Capture "id" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :>
-                           Get '[JSON] SiteVerificationWebResourceResource
-
--- | Get a verification token for placing on a website or domain.
-type WebResourceGetToken =
-     "siteVerification" :>
-       "v1" :>
-         "token" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "alt" Text :>
-                         Post '[JSON]
-                           SiteVerificationWebResourceGettokenResponse
-
--- | Relinquish ownership of a website or domain.
-type WebResourceDelete =
-     "siteVerification" :>
-       "v1" :>
-         "webResource" :>
-           Capture "id" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Modify the list of owners for your website or domain.
-type WebResourceUpdate =
-     "siteVerification" :>
-       "v1" :>
-         "webResource" :>
-           Capture "id" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :>
-                           Put '[JSON] SiteVerificationWebResourceResource
+siteVerification :: Proxy SiteVerification
+siteVerification = Proxy

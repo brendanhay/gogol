@@ -14,16 +14,71 @@
 --
 module Network.Google.BigQuery.Types
     (
+    -- * Service URL
+      bigQueryURL
 
-    -- * CsvOptions
-      CsvOptions
-    , csvOptions
-    , coSkipLeadingRows
-    , coAllowJaggedRows
-    , coAllowQuotedNewlines
-    , coQuote
-    , coEncoding
-    , coFieldDelimiter
+    -- * Streamingbuffer
+    , Streamingbuffer
+    , streamingbuffer
+    , sEstimatedBytes
+    , sOldestEntryTime
+    , sEstimatedRows
+
+    -- * TableRow
+    , TableRow
+    , tableRow
+    , trF
+
+    -- * JobsList'Projection
+    , JobsList'Projection (..)
+
+    -- * JobConfiguration
+    , JobConfiguration
+    , jobConfiguration
+    , jcCopy
+    , jcLink
+    , jcLoad
+    , jcQuery
+    , jcExtract
+    , jcDryRun
+
+    -- * Job
+    , Job
+    , job
+    , jobJobReference
+    , jobStatus
+    , jobEtag
+    , jobUserEmail
+    , jobKind
+    , jobSelfLink
+    , jobId
+    , jobStatistics
+    , jobConfiguration
+
+    -- * JobConfigurationLink
+    , JobConfigurationLink
+    , jobConfigurationLink
+    , jclDestinationTable
+    , jclWriteDisposition
+    , jclCreateDisposition
+    , jclSourceUri
+
+    -- * TableListItemTables
+    , TableListItemTables
+    , tableListItemTables
+    , tlitTableReference
+    , tlitFriendlyName
+    , tlitKind
+    , tlitId
+    , tlitType
+
+    -- * DatasetListItemDatasets
+    , DatasetListItemDatasets
+    , datasetListItemDatasets
+    , dlidFriendlyName
+    , dlidKind
+    , dlidDatasetReference
+    , dlidId
 
     -- * Dataset
     , Dataset
@@ -41,140 +96,23 @@ module Network.Google.BigQuery.Types
     , dDefaultTableExpirationMs
     , dDescription
 
-    -- * DatasetItemAccess
-    , DatasetItemAccess
-    , datasetItemAccess
-    , diaGroupByEmail
-    , diaDomain
-    , diaSpecialGroup
-    , diaRole
-    , diaView
-    , diaUserByEmail
+    -- * Alt
+    , Alt (..)
 
-    -- * DatasetList
-    , DatasetList
-    , datasetList
-    , dlEtag
-    , dlNextPageToken
-    , dlKind
-    , dlDatasets
-
-    -- * DatasetListItemDatasets
-    , DatasetListItemDatasets
-    , datasetListItemDatasets
-    , dlidFriendlyName
-    , dlidKind
-    , dlidDatasetReference
-    , dlidId
-
-    -- * DatasetReference
-    , DatasetReference
-    , datasetReference
-    , drDatasetId
-    , drProjectId
-
-    -- * ErrorProto
-    , ErrorProto
-    , errorProto
-    , epDebugInfo
-    , epLocation
-    , epReason
-    , epMessage
-
-    -- * ExternalDataConfiguration
-    , ExternalDataConfiguration
-    , externalDataConfiguration
-    , edcIgnoreUnknownValues
-    , edcCompression
-    , edcSourceFormat
-    , edcSchema
-    , edcMaxBadRecords
-    , edcSourceUris
-    , edcCsvOptions
-
-    -- * GetQueryResultsResponse
-    , GetQueryResultsResponse
-    , getQueryResultsResponse
-    , gqrrJobReference
-    , gqrrEtag
-    , gqrrKind
-    , gqrrSchema
-    , gqrrTotalBytesProcessed
-    , gqrrRows
-    , gqrrPageToken
-    , gqrrTotalRows
-    , gqrrErrors
-    , gqrrJobComplete
-    , gqrrCacheHit
-
-    -- * Job
-    , Job
-    , job
-    , jobJobReference
-    , jobStatus
-    , jobEtag
-    , jobUserEmail
-    , jobKind
-    , jobSelfLink
-    , jobId
+    -- * JobStatistics
+    , JobStatistics
     , jobStatistics
-    , jobConfiguration
+    , jsCreationTime
+    , jsStartTime
+    , jsLoad
+    , jsTotalBytesProcessed
+    , jsEndTime
+    , jsQuery
+    , jsExtract
 
-    -- * JobCancelResponse
-    , JobCancelResponse
-    , jobCancelResponse
-    , jcrKind
-    , jcrJob
-
-    -- * JobConfiguration
-    , JobConfiguration
-    , jobConfiguration
-    , jcCopy
-    , jcLink
-    , jcLoad
-    , jcQuery
-    , jcExtract
-    , jcDryRun
-
-    -- * JobConfigurationExtract
-    , JobConfigurationExtract
-    , jobConfigurationExtract
-    , jceDestinationFormat
-    , jceSourceTable
-    , jcePrintHeader
-    , jceCompression
-    , jceDestinationUris
-    , jceDestinationUri
-    , jceFieldDelimiter
-
-    -- * JobConfigurationLink
-    , JobConfigurationLink
-    , jobConfigurationLink
-    , jclDestinationTable
-    , jclWriteDisposition
-    , jclCreateDisposition
-    , jclSourceUri
-
-    -- * JobConfigurationLoad
-    , JobConfigurationLoad
-    , jobConfigurationLoad
-    , jSkipLeadingRows
-    , jProjectionFields
-    , jDestinationTable
-    , jWriteDisposition
-    , jAllowJaggedRows
-    , jSchemaInline
-    , jIgnoreUnknownValues
-    , jCreateDisposition
-    , jSchemaInlineFormat
-    , jAllowQuotedNewlines
-    , jSourceFormat
-    , jSchema
-    , jQuote
-    , jMaxBadRecords
-    , jSourceUris
-    , jEncoding
-    , jFieldDelimiter
+    -- * JsonObject
+    , JsonObject
+    , jsonObject
 
     -- * JobConfigurationQuery
     , JobConfigurationQuery
@@ -192,19 +130,6 @@ module Network.Google.BigQuery.Types
     , jcqFlattenResults
     , jcqDefaultDataset
 
-    -- * JobConfigurationQueryTableDefinitions
-    , JobConfigurationQueryTableDefinitions
-    , jobConfigurationQueryTableDefinitions
-
-    -- * JobConfigurationTableCopy
-    , JobConfigurationTableCopy
-    , jobConfigurationTableCopy
-    , jctcDestinationTable
-    , jctcWriteDisposition
-    , jctcSourceTables
-    , jctcCreateDisposition
-    , jctcSourceTable
-
     -- * JobList
     , JobList
     , jobList
@@ -213,35 +138,18 @@ module Network.Google.BigQuery.Types
     , jlKind
     , jlJobs
 
-    -- * JobListItemJobs
-    , JobListItemJobs
-    , jobListItemJobs
-    , jlijJobReference
-    , jlijStatus
-    , jlijState
-    , jlijUserEmail
-    , jlijKind
-    , jlijErrorResult
-    , jlijId
-    , jlijStatistics
-    , jlijConfiguration
+    -- * JobsList'StateFilter
+    , JobsList'StateFilter (..)
 
-    -- * JobReference
-    , JobReference
-    , jobReference
-    , jrJobId
-    , jrProjectId
+    -- * ViewDefinition
+    , ViewDefinition
+    , viewDefinition
+    , vdQuery
 
-    -- * JobStatistics
-    , JobStatistics
-    , jobStatistics
-    , jsCreationTime
-    , jsStartTime
-    , jsLoad
-    , jsTotalBytesProcessed
-    , jsEndTime
-    , jsQuery
-    , jsExtract
+    -- * TableCell
+    , TableCell
+    , tableCell
+    , tcV
 
     -- * JobStatistics2
     , JobStatistics2
@@ -251,18 +159,11 @@ module Network.Google.BigQuery.Types
     , jCacheHit
     , jTotalBytesBilled
 
-    -- * JobStatistics3
-    , JobStatistics3
-    , jobStatistics3
-    , jsInputFiles
-    , jsOutputRows
-    , jsOutputBytes
-    , jsInputFileBytes
-
-    -- * JobStatistics4
-    , JobStatistics4
-    , jobStatistics4
-    , jsDestinationUriFileCounts
+    -- * UserDefinedFunctionResource
+    , UserDefinedFunctionResource
+    , userDefinedFunctionResource
+    , udfrResourceUri
+    , udfrInlineCode
 
     -- * JobStatus
     , JobStatus
@@ -271,44 +172,21 @@ module Network.Google.BigQuery.Types
     , jsErrorResult
     , jsErrors
 
-    -- * JsonObject
-    , JsonObject
-    , jsonObject
-
-    -- * ProjectList
-    , ProjectList
-    , projectList
-    , plTotalItems
-    , plEtag
-    , plNextPageToken
-    , plKind
-    , plProjects
-
-    -- * ProjectListItemProjects
-    , ProjectListItemProjects
-    , projectListItemProjects
-    , plipFriendlyName
-    , plipKind
-    , plipProjectReference
-    , plipId
-    , plipNumericId
+    -- * TableDataInsertAllResponse
+    , TableDataInsertAllResponse
+    , tableDataInsertAllResponse
+    , tdiarKind
+    , tdiarInsertErrors
 
     -- * ProjectReference
     , ProjectReference
     , projectReference
     , prProjectId
 
-    -- * QueryRequest
-    , QueryRequest
-    , queryRequest
-    , qUseQueryCache
-    , qPreserveNulls
-    , qKind
-    , qQuery
-    , qTimeoutMs
-    , qDryRun
-    , qMaxResults
-    , qDefaultDataset
+    -- * JobStatistics4
+    , JobStatistics4
+    , jobStatistics4
+    , jsDestinationUriFileCounts
 
     -- * QueryResponse
     , QueryResponse
@@ -324,12 +202,177 @@ module Network.Google.BigQuery.Types
     , qrJobComplete
     , qrCacheHit
 
-    -- * Streamingbuffer
-    , Streamingbuffer
-    , streamingbuffer
-    , sEstimatedBytes
-    , sOldestEntryTime
-    , sEstimatedRows
+    -- * JobStatistics3
+    , JobStatistics3
+    , jobStatistics3
+    , jsInputFiles
+    , jsOutputRows
+    , jsOutputBytes
+    , jsInputFileBytes
+
+    -- * TableDataInsertAllResponseItemInsertErrors
+    , TableDataInsertAllResponseItemInsertErrors
+    , tableDataInsertAllResponseItemInsertErrors
+    , tdiariieErrors
+    , tdiariieIndex
+
+    -- * JobConfigurationTableCopy
+    , JobConfigurationTableCopy
+    , jobConfigurationTableCopy
+    , jctcDestinationTable
+    , jctcWriteDisposition
+    , jctcSourceTables
+    , jctcCreateDisposition
+    , jctcSourceTable
+
+    -- * TableDataList
+    , TableDataList
+    , tableDataList
+    , tdlEtag
+    , tdlKind
+    , tdlRows
+    , tdlPageToken
+    , tdlTotalRows
+
+    -- * JobReference
+    , JobReference
+    , jobReference
+    , jrJobId
+    , jrProjectId
+
+    -- * TableList
+    , TableList
+    , tableList
+    , tlTotalItems
+    , tlEtag
+    , tlNextPageToken
+    , tlKind
+    , tlTables
+
+    -- * ProjectListItemProjects
+    , ProjectListItemProjects
+    , projectListItemProjects
+    , plipFriendlyName
+    , plipKind
+    , plipProjectReference
+    , plipId
+    , plipNumericId
+
+    -- * ProjectList
+    , ProjectList
+    , projectList
+    , plTotalItems
+    , plEtag
+    , plNextPageToken
+    , plKind
+    , plProjects
+
+    -- * TableSchema
+    , TableSchema
+    , tableSchema
+    , tsFields
+
+    -- * JobListItemJobs
+    , JobListItemJobs
+    , jobListItemJobs
+    , jlijJobReference
+    , jlijStatus
+    , jlijState
+    , jlijUserEmail
+    , jlijKind
+    , jlijErrorResult
+    , jlijId
+    , jlijStatistics
+    , jlijConfiguration
+
+    -- * JobCancelResponse
+    , JobCancelResponse
+    , jobCancelResponse
+    , jcrKind
+    , jcrJob
+
+    -- * JobConfigurationExtract
+    , JobConfigurationExtract
+    , jobConfigurationExtract
+    , jceDestinationFormat
+    , jceSourceTable
+    , jcePrintHeader
+    , jceCompression
+    , jceDestinationUris
+    , jceDestinationUri
+    , jceFieldDelimiter
+
+    -- * GetQueryResultsResponse
+    , GetQueryResultsResponse
+    , getQueryResultsResponse
+    , gqrrJobReference
+    , gqrrEtag
+    , gqrrKind
+    , gqrrSchema
+    , gqrrTotalBytesProcessed
+    , gqrrRows
+    , gqrrPageToken
+    , gqrrTotalRows
+    , gqrrErrors
+    , gqrrJobComplete
+    , gqrrCacheHit
+
+    -- * TableReference
+    , TableReference
+    , tableReference
+    , trDatasetId
+    , trProjectId
+    , trTableId
+
+    -- * ExternalDataConfiguration
+    , ExternalDataConfiguration
+    , externalDataConfiguration
+    , edcIgnoreUnknownValues
+    , edcCompression
+    , edcSourceFormat
+    , edcSchema
+    , edcMaxBadRecords
+    , edcSourceUris
+    , edcCsvOptions
+
+    -- * TableFieldSchema
+    , TableFieldSchema
+    , tableFieldSchema
+    , tfsMode
+    , tfsName
+    , tfsType
+    , tfsDescription
+    , tfsFields
+
+    -- * DatasetList
+    , DatasetList
+    , datasetList
+    , dlEtag
+    , dlNextPageToken
+    , dlKind
+    , dlDatasets
+
+    -- * DatasetItemAccess
+    , DatasetItemAccess
+    , datasetItemAccess
+    , diaGroupByEmail
+    , diaDomain
+    , diaSpecialGroup
+    , diaRole
+    , diaView
+    , diaUserByEmail
+
+    -- * QueryRequest
+    , QueryRequest
+    , queryRequest
+    , qUseQueryCache
+    , qPreserveNulls
+    , qKind
+    , qQuery
+    , qTimeoutMs
+    , qDryRun
+    , qMaxResults
+    , qDefaultDataset
 
     -- * Table
     , Table
@@ -353,10 +396,33 @@ module Network.Google.BigQuery.Types
     , tExpirationTime
     , tDescription
 
-    -- * TableCell
-    , TableCell
-    , tableCell
-    , tcV
+    -- * JobConfigurationQueryTableDefinitions
+    , JobConfigurationQueryTableDefinitions
+    , jobConfigurationQueryTableDefinitions
+
+    -- * CsvOptions
+    , CsvOptions
+    , csvOptions
+    , coSkipLeadingRows
+    , coAllowJaggedRows
+    , coAllowQuotedNewlines
+    , coQuote
+    , coEncoding
+    , coFieldDelimiter
+
+    -- * TableDataInsertAllRequestItemRows
+    , TableDataInsertAllRequestItemRows
+    , tableDataInsertAllRequestItemRows
+    , tdiarirJson
+    , tdiarirInsertId
+
+    -- * ErrorProto
+    , ErrorProto
+    , errorProto
+    , epDebugInfo
+    , epLocation
+    , epReason
+    , epMessage
 
     -- * TableDataInsertAllRequest
     , TableDataInsertAllRequest
@@ -366,89 +432,41 @@ module Network.Google.BigQuery.Types
     , tabRows
     , tabSkipInvalidRows
 
-    -- * TableDataInsertAllRequestItemRows
-    , TableDataInsertAllRequestItemRows
-    , tableDataInsertAllRequestItemRows
-    , tdiarirJson
-    , tdiarirInsertId
+    -- * DatasetReference
+    , DatasetReference
+    , datasetReference
+    , drDatasetId
+    , drProjectId
 
-    -- * TableDataInsertAllResponse
-    , TableDataInsertAllResponse
-    , tableDataInsertAllResponse
-    , tdiarKind
-    , tdiarInsertErrors
-
-    -- * TableDataInsertAllResponseItemInsertErrors
-    , TableDataInsertAllResponseItemInsertErrors
-    , tableDataInsertAllResponseItemInsertErrors
-    , tdiariieErrors
-    , tdiariieIndex
-
-    -- * TableDataList
-    , TableDataList
-    , tableDataList
-    , tdlEtag
-    , tdlKind
-    , tdlRows
-    , tdlPageToken
-    , tdlTotalRows
-
-    -- * TableFieldSchema
-    , TableFieldSchema
-    , tableFieldSchema
-    , tfsMode
-    , tfsName
-    , tfsType
-    , tfsDescription
-    , tfsFields
-
-    -- * TableList
-    , TableList
-    , tableList
-    , tlTotalItems
-    , tlEtag
-    , tlNextPageToken
-    , tlKind
-    , tlTables
-
-    -- * TableListItemTables
-    , TableListItemTables
-    , tableListItemTables
-    , tlitTableReference
-    , tlitFriendlyName
-    , tlitKind
-    , tlitId
-    , tlitType
-
-    -- * TableReference
-    , TableReference
-    , tableReference
-    , trDatasetId
-    , trProjectId
-    , trTableId
-
-    -- * TableRow
-    , TableRow
-    , tableRow
-    , trF
-
-    -- * TableSchema
-    , TableSchema
-    , tableSchema
-    , tsFields
-
-    -- * UserDefinedFunctionResource
-    , UserDefinedFunctionResource
-    , userDefinedFunctionResource
-    , udfrResourceUri
-    , udfrInlineCode
-
-    -- * ViewDefinition
-    , ViewDefinition
-    , viewDefinition
-    , vdQuery
+    -- * JobConfigurationLoad
+    , JobConfigurationLoad
+    , jobConfigurationLoad
+    , jSkipLeadingRows
+    , jProjectionFields
+    , jDestinationTable
+    , jWriteDisposition
+    , jAllowJaggedRows
+    , jSchemaInline
+    , jIgnoreUnknownValues
+    , jCreateDisposition
+    , jSchemaInlineFormat
+    , jAllowQuotedNewlines
+    , jSourceFormat
+    , jSchema
+    , jQuote
+    , jMaxBadRecords
+    , jSourceUris
+    , jEncoding
+    , jFieldDelimiter
     ) where
 
 import           Network.Google.BigQuery.Types.Product
 import           Network.Google.BigQuery.Types.Sum
 import           Network.Google.Prelude
+
+-- | URL referring to version 'v2' of the BigQuery API.
+bigQueryURL :: BaseUrl
+bigQueryURL
+  = BaseUrl Https
+      "https://www.googleapis.com/bigquery/v2/"
+      443

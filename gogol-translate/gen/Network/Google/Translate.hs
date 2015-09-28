@@ -17,33 +17,32 @@
 -- /See:/ <https://developers.google.com/translate/v2/using_rest Translate API Reference>
 module Network.Google.Translate
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** Translate API
       Translate
-    , DetectionsAPI
-    , DetectionsList
-    , LanguagesAPI
-    , LanguagesList
-    , TranslationsAPI
-    , TranslationsList
+    , translate
+    , translateURL
+
+    -- ** language.detections.list
+    , module Network.Google.API.Language.Detections.List
+
+    -- ** language.languages.list
+    , module Network.Google.API.Language.Languages.List
+
+    -- ** language.translations.list
+    , module Network.Google.API.Language.Translations.List
 
     -- * Types
 
-    -- ** DetectionsListResponse
-    , DetectionsListResponse
-    , detectionsListResponse
-    , dlrDetections
+    -- ** TranslationsResource
+    , TranslationsResource
+    , translationsResource
+    , trDetectedSourceLanguage
+    , trTranslatedText
 
-    -- ** DetectionsResourceItem
-    , DetectionsResourceItem
-    , detectionsResourceItem
-    , driConfidence
-    , driIsReliable
-    , driLanguage
-
-    -- ** LanguagesListResponse
-    , LanguagesListResponse
-    , languagesListResponse
-    , llrLanguages
+    -- ** Alt
+    , Alt (..)
 
     -- ** LanguagesResource
     , LanguagesResource
@@ -56,13 +55,30 @@ module Network.Google.Translate
     , translationsListResponse
     , tlrTranslations
 
-    -- ** TranslationsResource
-    , TranslationsResource
-    , translationsResource
-    , trDetectedSourceLanguage
-    , trTranslatedText
+    -- ** TranslationsList'Format
+    , TranslationsList'Format (..)
+
+    -- ** DetectionsListResponse
+    , DetectionsListResponse
+    , detectionsListResponse
+    , dlrDetections
+
+    -- ** LanguagesListResponse
+    , LanguagesListResponse
+    , languagesListResponse
+    , llrLanguages
+
+    -- ** DetectionsResourceItem
+    , DetectionsResourceItem
+    , detectionsResourceItem
+    , driConfidence
+    , driIsReliable
+    , driLanguage
     ) where
 
+import           Network.Google.API.Language.Detections.List
+import           Network.Google.API.Language.Languages.List
+import           Network.Google.API.Language.Translations.List
 import           Network.Google.Prelude
 import           Network.Google.Translate.Types
 
@@ -71,61 +87,8 @@ TODO
 -}
 
 type Translate =
-     DetectionsAPI :<|> LanguagesAPI :<|> TranslationsAPI
+     TranslationsListAPI :<|> LanguagesListAPI :<|>
+       DetectionsListAPI
 
-type DetectionsAPI = DetectionsList
-
--- | Detect the language of text.
-type DetectionsList =
-     "language" :>
-       "translate" :>
-         "v2" :>
-           "detect" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "q" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Get '[JSON] DetectionsListResponse
-
-type LanguagesAPI = LanguagesList
-
--- | List the source\/target languages supported by the API
-type LanguagesList =
-     "language" :>
-       "translate" :>
-         "v2" :>
-           "languages" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "target" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Get '[JSON] LanguagesListResponse
-
-type TranslationsAPI = TranslationsList
-
--- | Returns text translations from one language to another.
-type TranslationsList =
-     "language" :>
-       "translate" :>
-         "v2" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "format" Text :>
-                   QueryParam "q" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "source" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "cid" Text :>
-                             QueryParam "target" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   Get '[JSON] TranslationsListResponse
+translate :: Proxy Translate
+translate = Proxy

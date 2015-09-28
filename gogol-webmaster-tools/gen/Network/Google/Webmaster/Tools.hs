@@ -17,28 +17,64 @@
 -- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference>
 module Network.Google.Webmaster.Tools
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** Webmaster Tools API
       WebmasterTools
-    , UrlcrawlerrorssamplesAPI
-    , UrlcrawlerrorssamplesList
-    , UrlcrawlerrorssamplesGet
-    , UrlcrawlerrorssamplesMarkAsFixed
-    , SitemapsAPI
-    , SitemapsList
-    , SitemapsGet
-    , SitemapsSubmit
-    , SitemapsDelete
-    , SearchanalyticsAPI
-    , SearchanalyticsQuery
-    , SitesAPI
-    , SitesList
-    , SitesGet
-    , SitesAdd
-    , SitesDelete
-    , UrlcrawlerrorscountsAPI
-    , UrlcrawlerrorscountsQuery
+    , webmasterTools
+    , webmasterToolsURL
+
+    -- ** webmasters.searchanalytics.query
+    , module Network.Google.API.Webmasters.Searchanalytics.Query
+
+    -- ** webmasters.sitemaps.delete
+    , module Network.Google.API.Webmasters.Sitemaps.Delete
+
+    -- ** webmasters.sitemaps.get
+    , module Network.Google.API.Webmasters.Sitemaps.Get
+
+    -- ** webmasters.sitemaps.list
+    , module Network.Google.API.Webmasters.Sitemaps.List
+
+    -- ** webmasters.sitemaps.submit
+    , module Network.Google.API.Webmasters.Sitemaps.Submit
+
+    -- ** webmasters.sites.add
+    , module Network.Google.API.Webmasters.Sites.Add
+
+    -- ** webmasters.sites.delete
+    , module Network.Google.API.Webmasters.Sites.Delete
+
+    -- ** webmasters.sites.get
+    , module Network.Google.API.Webmasters.Sites.Get
+
+    -- ** webmasters.sites.list
+    , module Network.Google.API.Webmasters.Sites.List
+
+    -- ** webmasters.urlcrawlerrorscounts.query
+    , module Network.Google.API.Webmasters.URLcrawlerrorscounts.Query
+
+    -- ** webmasters.urlcrawlerrorssamples.get
+    , module Network.Google.API.Webmasters.URLcrawlerrorssamples.Get
+
+    -- ** webmasters.urlcrawlerrorssamples.list
+    , module Network.Google.API.Webmasters.URLcrawlerrorssamples.List
+
+    -- ** webmasters.urlcrawlerrorssamples.markAsFixed
+    , module Network.Google.API.Webmasters.URLcrawlerrorssamples.MarkAsFixed
 
     -- * Types
+
+    -- ** URLcrawlerrorssamplesGet'Category
+    , URLcrawlerrorssamplesGet'Category (..)
+
+    -- ** URLcrawlerrorssamplesList'Platform
+    , URLcrawlerrorssamplesList'Platform (..)
+
+    -- ** UrlCrawlErrorsSamplesListResponse
+    , UrlCrawlErrorsSamplesListResponse
+    , urlCrawlErrorsSamplesListResponse
+    , uceslrUrlCrawlErrorSample
 
     -- ** ApiDataRow
     , ApiDataRow
@@ -49,63 +85,11 @@ module Network.Google.Webmaster.Tools
     , adrClicks
     , adrPosition
 
-    -- ** ApiDimensionFilter
-    , ApiDimensionFilter
-    , apiDimensionFilter
-    , adfOperator
-    , adfDimension
-    , adfExpression
+    -- ** URLcrawlerrorscountsQuery'Platform
+    , URLcrawlerrorscountsQuery'Platform (..)
 
-    -- ** ApiDimensionFilterGroup
-    , ApiDimensionFilterGroup
-    , apiDimensionFilterGroup
-    , adfgFilters
-    , adfgGroupType
-
-    -- ** SearchAnalyticsQueryRequest
-    , SearchAnalyticsQueryRequest
-    , searchAnalyticsQueryRequest
-    , saqrAggregationType
-    , saqrRowLimit
-    , saqrEndDate
-    , saqrSearchType
-    , saqrDimensionFilterGroups
-    , saqrStartDate
-    , saqrDimensions
-
-    -- ** SearchAnalyticsQueryResponse
-    , SearchAnalyticsQueryResponse
-    , searchAnalyticsQueryResponse
-    , saqrRows
-    , saqrResponseAggregationType
-
-    -- ** SitemapsListResponse
-    , SitemapsListResponse
-    , sitemapsListResponse
-    , slrSitemap
-
-    -- ** SitesListResponse
-    , SitesListResponse
-    , sitesListResponse
-    , slrSiteEntry
-
-    -- ** UrlCrawlErrorCount
-    , UrlCrawlErrorCount
-    , urlCrawlErrorCount
-    , ucecCount
-    , ucecTimestamp
-
-    -- ** UrlCrawlErrorCountsPerType
-    , UrlCrawlErrorCountsPerType
-    , urlCrawlErrorCountsPerType
-    , ucecptPlatform
-    , ucecptEntries
-    , ucecptCategory
-
-    -- ** UrlCrawlErrorsCountsQueryResponse
-    , UrlCrawlErrorsCountsQueryResponse
-    , urlCrawlErrorsCountsQueryResponse
-    , ucecqrCountPerTypes
+    -- ** Alt
+    , Alt (..)
 
     -- ** UrlCrawlErrorsSample
     , UrlCrawlErrorsSample
@@ -116,22 +100,10 @@ module Network.Google.Webmaster.Tools
     , ucesPageUrl
     , ucesFirstDetected
 
-    -- ** UrlCrawlErrorsSamplesListResponse
-    , UrlCrawlErrorsSamplesListResponse
-    , urlCrawlErrorsSamplesListResponse
-    , uceslrUrlCrawlErrorSample
-
-    -- ** UrlSampleDetails
-    , UrlSampleDetails
-    , urlSampleDetails
-    , usdLinkedFromUrls
-    , usdContainingSitemaps
-
-    -- ** WmxSite
-    , WmxSite
-    , wmxSite
-    , wsPermissionLevel
-    , wsSiteUrl
+    -- ** SitemapsListResponse
+    , SitemapsListResponse
+    , sitemapsListResponse
+    , slrSitemap
 
     -- ** WmxSitemap
     , WmxSitemap
@@ -146,14 +118,107 @@ module Network.Google.Webmaster.Tools
     , wsType
     , wsErrors
 
+    -- ** URLcrawlerrorssamplesList'Category
+    , URLcrawlerrorssamplesList'Category (..)
+
+    -- ** SearchAnalyticsQueryRequest
+    , SearchAnalyticsQueryRequest
+    , searchAnalyticsQueryRequest
+    , saqrAggregationType
+    , saqrRowLimit
+    , saqrEndDate
+    , saqrSearchType
+    , saqrDimensionFilterGroups
+    , saqrStartDate
+    , saqrDimensions
+
+    -- ** URLcrawlerrorssamplesGet'Platform
+    , URLcrawlerrorssamplesGet'Platform (..)
+
+    -- ** WmxSite
+    , WmxSite
+    , wmxSite
+    , wsPermissionLevel
+    , wsSiteUrl
+
+    -- ** SitesListResponse
+    , SitesListResponse
+    , sitesListResponse
+    , slrSiteEntry
+
     -- ** WmxSitemapContent
     , WmxSitemapContent
     , wmxSitemapContent
     , wscIndexed
     , wscType
     , wscSubmitted
+
+    -- ** URLcrawlerrorssamplesMarkAsFixed'Platform
+    , URLcrawlerrorssamplesMarkAsFixed'Platform (..)
+
+    -- ** UrlSampleDetails
+    , UrlSampleDetails
+    , urlSampleDetails
+    , usdLinkedFromUrls
+    , usdContainingSitemaps
+
+    -- ** UrlCrawlErrorCountsPerType
+    , UrlCrawlErrorCountsPerType
+    , urlCrawlErrorCountsPerType
+    , ucecptPlatform
+    , ucecptEntries
+    , ucecptCategory
+
+    -- ** ApiDimensionFilterGroup
+    , ApiDimensionFilterGroup
+    , apiDimensionFilterGroup
+    , adfgFilters
+    , adfgGroupType
+
+    -- ** UrlCrawlErrorsCountsQueryResponse
+    , UrlCrawlErrorsCountsQueryResponse
+    , urlCrawlErrorsCountsQueryResponse
+    , ucecqrCountPerTypes
+
+    -- ** URLcrawlerrorscountsQuery'Category
+    , URLcrawlerrorscountsQuery'Category (..)
+
+    -- ** ApiDimensionFilter
+    , ApiDimensionFilter
+    , apiDimensionFilter
+    , adfOperator
+    , adfDimension
+    , adfExpression
+
+    -- ** URLcrawlerrorssamplesMarkAsFixed'Category
+    , URLcrawlerrorssamplesMarkAsFixed'Category (..)
+
+    -- ** UrlCrawlErrorCount
+    , UrlCrawlErrorCount
+    , urlCrawlErrorCount
+    , ucecCount
+    , ucecTimestamp
+
+    -- ** SearchAnalyticsQueryResponse
+    , SearchAnalyticsQueryResponse
+    , searchAnalyticsQueryResponse
+    , saqrRows
+    , saqrResponseAggregationType
     ) where
 
+import           Network.Google.API.Webmasters.Searchanalytics.Query
+import           Network.Google.API.Webmasters.Sitemaps.Delete
+import           Network.Google.API.Webmasters.Sitemaps.Get
+import           Network.Google.API.Webmasters.Sitemaps.List
+import           Network.Google.API.Webmasters.Sitemaps.Submit
+import           Network.Google.API.Webmasters.Sites.Add
+import           Network.Google.API.Webmasters.Sites.Delete
+import           Network.Google.API.Webmasters.Sites.Get
+import           Network.Google.API.Webmasters.Sites.List
+import           Network.Google.API.Webmasters.URLcrawlerrorscounts.Query
+import           Network.Google.API.Webmasters.URLcrawlerrorssamples.Get
+import           Network.Google.API.Webmasters.URLcrawlerrorssamples.List
+import           Network.Google.API.Webmasters.URLcrawlerrorssamples.MarkAsFixed
 import           Network.Google.Prelude
 import           Network.Google.Webmaster.Tools.Types
 
@@ -162,248 +227,19 @@ TODO
 -}
 
 type WebmasterTools =
-     UrlcrawlerrorssamplesAPI :<|> SitemapsAPI :<|>
-       SearchanalyticsAPI
-       :<|> SitesAPI
-       :<|> UrlcrawlerrorscountsAPI
+     URLcrawlerrorssamplesMarkAsFixedAPI :<|>
+       URLcrawlerrorscountsQueryAPI
+       :<|> URLcrawlerrorssamplesGetAPI
+       :<|> URLcrawlerrorssamplesListAPI
+       :<|> SitesDeleteAPI
+       :<|> SitemapsDeleteAPI
+       :<|> SitesGetAPI
+       :<|> SitemapsGetAPI
+       :<|> SitemapsSubmitAPI
+       :<|> SitesListAPI
+       :<|> SitemapsListAPI
+       :<|> SearchanalyticsQueryAPI
+       :<|> SitesAddAPI
 
-type UrlcrawlerrorssamplesAPI =
-     UrlcrawlerrorssamplesList :<|>
-       UrlcrawlerrorssamplesGet
-       :<|> UrlcrawlerrorssamplesMarkAsFixed
-
--- | Lists a site\'s sample URLs for the specified crawl error category and
--- platform.
-type UrlcrawlerrorssamplesList =
-     "webmasters" :>
-       "v3" :>
-         "sites" :>
-           Capture "siteUrl" Text :>
-             "urlCrawlErrorsSamples" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "platform" Text :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "category" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Get '[JSON] UrlCrawlErrorsSamplesListResponse
-
--- | Retrieves details about crawl errors for a site\'s sample URL.
-type UrlcrawlerrorssamplesGet =
-     "webmasters" :>
-       "v3" :>
-         "sites" :>
-           Capture "siteUrl" Text :>
-             "urlCrawlErrorsSamples" :>
-               Capture "url" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "platform" Text :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "category" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   Get '[JSON] UrlCrawlErrorsSample
-
--- | Marks the provided site\'s sample URL as fixed, and removes it from the
--- samples list.
-type UrlcrawlerrorssamplesMarkAsFixed =
-     "webmasters" :>
-       "v3" :>
-         "sites" :>
-           Capture "siteUrl" Text :>
-             "urlCrawlErrorsSamples" :>
-               Capture "url" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "platform" Text :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "category" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Delete '[JSON] ()
-
-type SitemapsAPI =
-     SitemapsList :<|> SitemapsGet :<|> SitemapsSubmit
-       :<|> SitemapsDelete
-
--- | Lists the sitemaps-entries submitted for this site, or included in the
--- sitemap index file (if sitemapIndex is specified in the request).
-type SitemapsList =
-     "webmasters" :>
-       "v3" :>
-         "sites" :>
-           Capture "siteUrl" Text :>
-             "sitemaps" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "sitemapIndex" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Get '[JSON] SitemapsListResponse
-
--- | Retrieves information about a specific sitemap.
-type SitemapsGet =
-     "webmasters" :>
-       "v3" :>
-         "sites" :>
-           Capture "siteUrl" Text :>
-             "sitemaps" :>
-               Capture "feedpath" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] WmxSitemap
-
--- | Submits a sitemap for a site.
-type SitemapsSubmit =
-     "webmasters" :>
-       "v3" :>
-         "sites" :>
-           Capture "siteUrl" Text :>
-             "sitemaps" :>
-               Capture "feedpath" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Put '[JSON] ()
-
--- | Deletes a sitemap from this site.
-type SitemapsDelete =
-     "webmasters" :>
-       "v3" :>
-         "sites" :>
-           Capture "siteUrl" Text :>
-             "sitemaps" :>
-               Capture "feedpath" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Delete '[JSON] ()
-
-type SearchanalyticsAPI = SearchanalyticsQuery
-
--- | Query your data with filters and parameters that you define. Returns
--- zero or more rows grouped by the row keys that you define. You must
--- define a date range of one or more days. When date is one of the group
--- by values, any days without data are omitted from the result list. If
--- you need to know which days have data, issue a broad date range query
--- grouped by date for any metric, and see which day rows are returned.
-type SearchanalyticsQuery =
-     "webmasters" :>
-       "v3" :>
-         "sites" :>
-           Capture "siteUrl" Text :>
-             "searchAnalytics" :>
-               "query" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Post '[JSON] SearchAnalyticsQueryResponse
-
-type SitesAPI =
-     SitesList :<|> SitesGet :<|> SitesAdd :<|>
-       SitesDelete
-
--- | Lists the user\'s Webmaster Tools sites.
-type SitesList =
-     "webmasters" :>
-       "v3" :>
-         "sites" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "alt" Text :>
-                         Get '[JSON] SitesListResponse
-
--- | Retrieves information about specific site.
-type SitesGet =
-     "webmasters" :>
-       "v3" :>
-         "sites" :>
-           Capture "siteUrl" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Get '[JSON] WmxSite
-
--- | Adds a site to the set of the user\'s sites in Webmaster Tools.
-type SitesAdd =
-     "webmasters" :>
-       "v3" :>
-         "sites" :>
-           Capture "siteUrl" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Put '[JSON] ()
-
--- | Removes a site from the set of the user\'s Webmaster Tools sites.
-type SitesDelete =
-     "webmasters" :>
-       "v3" :>
-         "sites" :>
-           Capture "siteUrl" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Delete '[JSON] ()
-
-type UrlcrawlerrorscountsAPI =
-     UrlcrawlerrorscountsQuery
-
--- | Retrieves a time series of the number of URL crawl errors per error
--- category and platform.
-type UrlcrawlerrorscountsQuery =
-     "webmasters" :>
-       "v3" :>
-         "sites" :>
-           Capture "siteUrl" Text :>
-             "urlCrawlErrorsCounts" :>
-               "query" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "platform" Text :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "category" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "latestCountsOnly" Bool :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Get '[JSON]
-                                       UrlCrawlErrorsCountsQueryResponse
+webmasterTools :: Proxy WebmasterTools
+webmasterTools = Proxy

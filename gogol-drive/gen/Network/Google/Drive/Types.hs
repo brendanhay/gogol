@@ -14,9 +14,49 @@
 --
 module Network.Google.Drive.Types
     (
+    -- * Service URL
+      driveURL
+
+    -- * ChangeList
+    , ChangeList
+    , changeList
+    , clEtag
+    , clNextPageToken
+    , clNextLink
+    , clKind
+    , clItems
+    , clSelfLink
+    , clLargestChangeId
+
+    -- * AppItemIcons
+    , AppItemIcons
+    , appItemIcons
+    , aiiSize
+    , aiiCategory
+    , aiiIconUrl
+
+    -- * FilesGet'Projection
+    , FilesGet'Projection (..)
+
+    -- * FilesCopy'Visibility
+    , FilesCopy'Visibility (..)
+
+    -- * FileExportLinks
+    , FileExportLinks
+    , fileExportLinks
+
+    -- * Alt
+    , Alt (..)
+
+    -- * FileVideoMediaMetadata
+    , FileVideoMediaMetadata
+    , fileVideoMediaMetadata
+    , fvmmHeight
+    , fvmmWidth
+    , fvmmDurationMillis
 
     -- * About
-      About
+    , About
     , about
     , aExportFormats
     , aRemainingChangeIds
@@ -43,41 +83,8 @@ module Network.Google.Drive.Types
     , aQuotaBytesByService
     , aLargestChangeId
 
-    -- * AboutItemAdditionalRoleInfo
-    , AboutItemAdditionalRoleInfo
-    , aboutItemAdditionalRoleInfo
-    , aiariRoleSets
-    , aiariType
-
-    -- * AboutItemExportFormats
-    , AboutItemExportFormats
-    , aboutItemExportFormats
-    , aiefTargets
-    , aiefSource
-
-    -- * AboutItemFeatures
-    , AboutItemFeatures
-    , aboutItemFeatures
-    , aifFeatureRate
-    , aifFeatureName
-
-    -- * AboutItemImportFormats
-    , AboutItemImportFormats
-    , aboutItemImportFormats
-    , aiifTargets
-    , aiifSource
-
-    -- * AboutItemMaxUploadSizes
-    , AboutItemMaxUploadSizes
-    , aboutItemMaxUploadSizes
-    , aimusSize
-    , aimusType
-
-    -- * AboutItemQuotaBytesByService
-    , AboutItemQuotaBytesByService
-    , aboutItemQuotaBytesByService
-    , aiqbbsBytesUsed
-    , aiqbbsServiceName
+    -- * FilesWatch'Projection
+    , FilesWatch'Projection (..)
 
     -- * AboutItemRoleSetsItemAdditionalRoleInfo
     , AboutItemRoleSetsItemAdditionalRoleInfo
@@ -85,107 +92,46 @@ module Network.Google.Drive.Types
     , airsiariPrimaryRole
     , airsiariAdditionalRoles
 
-    -- * App
-    , App
-    , app
-    , appLongDescription
-    , appOpenUrlTemplate
-    , appAuthorized
-    , appObjectType
-    , appSecondaryMimeTypes
-    , appCreateInFolderTemplate
-    , appKind
-    , appIcons
-    , appProductUrl
-    , appUseByDefault
-    , appShortDescription
-    , appName
-    , appCreateUrl
-    , appId
-    , appPrimaryFileExtensions
-    , appInstalled
-    , appSupportsCreate
-    , appPrimaryMimeTypes
-    , appHasDriveWideScope
-    , appProductId
-    , appSecondaryFileExtensions
-    , appSupportsMultiOpen
-    , appSupportsImport
-    , appSupportsOfflineCreate
+    -- * FileLabels
+    , FileLabels
+    , fileLabels
+    , flViewed
+    , flTrashed
+    , flStarred
+    , flHidden
+    , flRestricted
 
-    -- * AppItemIcons
-    , AppItemIcons
-    , appItemIcons
-    , aiiSize
-    , aiiCategory
-    , aiiIconUrl
+    -- * FileOpenWithLinks
+    , FileOpenWithLinks
+    , fileOpenWithLinks
 
-    -- * AppList
-    , AppList
-    , appList
-    , alDefaultAppIds
-    , alEtag
-    , alKind
-    , alItems
-    , alSelfLink
+    -- * FileImageMediaMetadata
+    , FileImageMediaMetadata
+    , fileImageMediaMetadata
+    , fimmRotation
+    , fimmHeight
+    , fimmSubjectDistance
+    , fimmMaxApertureValue
+    , fimmIsoSpeed
+    , fimmLocation
+    , fimmAperture
+    , fimmFocalLength
+    , fimmCameraMake
+    , fimmWidth
+    , fimmExposureTime
+    , fimmCameraModel
+    , fimmWhiteBalance
+    , fimmDate
+    , fimmLens
+    , fimmFlashUsed
+    , fimmExposureBias
+    , fimmMeteringMode
+    , fimmExposureMode
+    , fimmSensor
+    , fimmColorSpace
 
-    -- * Change
-    , Change
-    , change
-    , chaKind
-    , chaSelfLink
-    , chaModificationDate
-    , chaId
-    , chaDeleted
-    , chaFileId
-    , chaFile
-
-    -- * ChangeList
-    , ChangeList
-    , changeList
-    , clEtag
-    , clNextPageToken
-    , clNextLink
-    , clKind
-    , clItems
-    , clSelfLink
-    , clLargestChangeId
-
-    -- * Channel
-    , Channel
-    , channel
-    , chahResourceUri
-    , chahResourceId
-    , chahKind
-    , chahExpiration
-    , chahToken
-    , chahAddress
-    , chahPayload
-    , chahParams
-    , chahId
-    , chahType
-
-    -- * ChannelParams
-    , ChannelParams
-    , channelParams
-
-    -- * ChildList
-    , ChildList
-    , childList
-    , chiEtag
-    , chiNextPageToken
-    , chiNextLink
-    , chiKind
-    , chiItems
-    , chiSelfLink
-
-    -- * ChildReference
-    , ChildReference
-    , childReference
-    , crChildLink
-    , crKind
-    , crSelfLink
-    , crId
+    -- * FilesList'Corpus
+    , FilesList'Corpus (..)
 
     -- * Comment
     , Comment
@@ -206,11 +152,103 @@ module Network.Google.Drive.Types
     , cFileId
     , cCommentId
 
-    -- * CommentContext
-    , CommentContext
-    , commentContext
-    , ccValue
-    , ccType
+    -- * Permission
+    , Permission
+    , permission
+    , pPhotoLink
+    , pEtag
+    , pWithLink
+    , pKind
+    , pDomain
+    , pValue
+    , pAdditionalRoles
+    , pRole
+    , pSelfLink
+    , pName
+    , pAuthKey
+    , pEmailAddress
+    , pId
+    , pType
+
+    -- * Revision
+    , Revision
+    , revision
+    , rEtag
+    , rOriginalFilename
+    , rKind
+    , rPublishedLink
+    , rPinned
+    , rPublished
+    , rLastModifyingUser
+    , rFileSize
+    , rPublishAuto
+    , rMd5Checksum
+    , rMimeType
+    , rSelfLink
+    , rLastModifyingUserName
+    , rDownloadUrl
+    , rExportLinks
+    , rPublishedOutsideDomain
+    , rId
+    , rModifiedDate
+
+    -- * Change
+    , Change
+    , change
+    , chaKind
+    , chaSelfLink
+    , chaModificationDate
+    , chaId
+    , chaDeleted
+    , chaFileId
+    , chaFile
+
+    -- * FilesList'Projection
+    , FilesList'Projection (..)
+
+    -- * FilesPatch'ModifiedDateBehavior
+    , FilesPatch'ModifiedDateBehavior (..)
+
+    -- * UserPicture
+    , UserPicture
+    , userPicture
+    , upUrl
+
+    -- * FileLocationImageMediaMetadata
+    , FileLocationImageMediaMetadata
+    , fileLocationImageMediaMetadata
+    , flimmLatitude
+    , flimmAltitude
+    , flimmLongitude
+
+    -- * RevisionList
+    , RevisionList
+    , revisionList
+    , rlEtag
+    , rlKind
+    , rlItems
+    , rlSelfLink
+
+    -- * FileThumbnail
+    , FileThumbnail
+    , fileThumbnail
+    , ftImage
+    , ftMimeType
+
+    -- * PermissionList
+    , PermissionList
+    , permissionList
+    , plEtag
+    , plKind
+    , plItems
+    , plSelfLink
+
+    -- * GeneratedIds
+    , GeneratedIds
+    , generatedIds
+    , giSpace
+    , giKind
+    , giIds
 
     -- * CommentList
     , CommentList
@@ -221,18 +259,113 @@ module Network.Google.Drive.Types
     , comItems
     , comSelfLink
 
-    -- * CommentReply
-    , CommentReply
-    , commentReply
-    , crrHtmlContent
-    , crrKind
-    , crrContent
-    , crrCreatedDate
-    , crrReplyId
-    , crrAuthor
-    , crrModifiedDate
-    , crrDeleted
-    , crrVerb
+    -- * FileList
+    , FileList
+    , fileList
+    , flEtag
+    , flNextPageToken
+    , flNextLink
+    , flKind
+    , flItems
+    , flSelfLink
+
+    -- * AboutItemFeatures
+    , AboutItemFeatures
+    , aboutItemFeatures
+    , aifFeatureRate
+    , aifFeatureName
+
+    -- * ChannelParams
+    , ChannelParams
+    , channelParams
+
+    -- * FileIndexableText
+    , FileIndexableText
+    , fileIndexableText
+    , fitText
+
+    -- * AboutItemExportFormats
+    , AboutItemExportFormats
+    , aboutItemExportFormats
+    , aiefTargets
+    , aiefSource
+
+    -- * ParentReference
+    , ParentReference
+    , parentReference
+    , prParentLink
+    , prIsRoot
+    , prKind
+    , prSelfLink
+    , prId
+
+    -- * CommentContext
+    , CommentContext
+    , commentContext
+    , ccValue
+    , ccType
+
+    -- * RevisionExportLinks
+    , RevisionExportLinks
+    , revisionExportLinks
+
+    -- * Property
+    , Property
+    , property
+    , ppEtag
+    , ppKind
+    , ppValue
+    , ppVisibility
+    , ppSelfLink
+    , ppKey
+
+    -- * AboutItemMaxUploadSizes
+    , AboutItemMaxUploadSizes
+    , aboutItemMaxUploadSizes
+    , aimusSize
+    , aimusType
+
+    -- * AboutItemQuotaBytesByService
+    , AboutItemQuotaBytesByService
+    , aboutItemQuotaBytesByService
+    , aiqbbsBytesUsed
+    , aiqbbsServiceName
+
+    -- * PropertyList
+    , PropertyList
+    , propertyList
+    , proEtag
+    , proKind
+    , proItems
+    , proSelfLink
+
+    -- * AboutItemAdditionalRoleInfo
+    , AboutItemAdditionalRoleInfo
+    , aboutItemAdditionalRoleInfo
+    , aiariRoleSets
+    , aiariType
+
+    -- * ChildList
+    , ChildList
+    , childList
+    , chiEtag
+    , chiNextPageToken
+    , chiNextLink
+    , chiKind
+    , chiItems
+    , chiSelfLink
+
+    -- * FilesInsert'Visibility
+    , FilesInsert'Visibility (..)
+
+    -- * AppList
+    , AppList
+    , appList
+    , alDefaultAppIds
+    , alEtag
+    , alKind
+    , alItems
+    , alSelfLink
 
     -- * CommentReplyList
     , CommentReplyList
@@ -242,6 +375,40 @@ module Network.Google.Drive.Types
     , crlKind
     , crlItems
     , crlSelfLink
+
+    -- * Channel
+    , Channel
+    , channel
+    , chahResourceUri
+    , chahResourceId
+    , chahKind
+    , chahExpiration
+    , chahToken
+    , chahAddress
+    , chahPayload
+    , chahParams
+    , chahId
+    , chahType
+
+    -- * PermissionId
+    , PermissionId
+    , permissionId
+    , piKind
+    , piId
+
+    -- * AboutItemImportFormats
+    , AboutItemImportFormats
+    , aboutItemImportFormats
+    , aiifTargets
+    , aiifSource
+
+    -- * ParentList
+    , ParentList
+    , parentList
+    , parEtag
+    , parKind
+    , parItems
+    , parSelfLink
 
     -- * File
     , File
@@ -303,190 +470,8 @@ module Network.Google.Drive.Types
     , fProperties
     , fIndexableText
 
-    -- * FileExportLinks
-    , FileExportLinks
-    , fileExportLinks
-
-    -- * FileImageMediaMetadata
-    , FileImageMediaMetadata
-    , fileImageMediaMetadata
-    , fimmRotation
-    , fimmHeight
-    , fimmSubjectDistance
-    , fimmMaxApertureValue
-    , fimmIsoSpeed
-    , fimmLocation
-    , fimmAperture
-    , fimmFocalLength
-    , fimmCameraMake
-    , fimmWidth
-    , fimmExposureTime
-    , fimmCameraModel
-    , fimmWhiteBalance
-    , fimmDate
-    , fimmLens
-    , fimmFlashUsed
-    , fimmExposureBias
-    , fimmMeteringMode
-    , fimmExposureMode
-    , fimmSensor
-    , fimmColorSpace
-
-    -- * FileIndexableText
-    , FileIndexableText
-    , fileIndexableText
-    , fitText
-
-    -- * FileLabels
-    , FileLabels
-    , fileLabels
-    , flViewed
-    , flTrashed
-    , flStarred
-    , flHidden
-    , flRestricted
-
-    -- * FileList
-    , FileList
-    , fileList
-    , flEtag
-    , flNextPageToken
-    , flNextLink
-    , flKind
-    , flItems
-    , flSelfLink
-
-    -- * FileLocationImageMediaMetadata
-    , FileLocationImageMediaMetadata
-    , fileLocationImageMediaMetadata
-    , flimmLatitude
-    , flimmAltitude
-    , flimmLongitude
-
-    -- * FileOpenWithLinks
-    , FileOpenWithLinks
-    , fileOpenWithLinks
-
-    -- * FileThumbnail
-    , FileThumbnail
-    , fileThumbnail
-    , ftImage
-    , ftMimeType
-
-    -- * FileVideoMediaMetadata
-    , FileVideoMediaMetadata
-    , fileVideoMediaMetadata
-    , fvmmHeight
-    , fvmmWidth
-    , fvmmDurationMillis
-
-    -- * GeneratedIds
-    , GeneratedIds
-    , generatedIds
-    , giSpace
-    , giKind
-    , giIds
-
-    -- * ParentList
-    , ParentList
-    , parentList
-    , parEtag
-    , parKind
-    , parItems
-    , parSelfLink
-
-    -- * ParentReference
-    , ParentReference
-    , parentReference
-    , prParentLink
-    , prIsRoot
-    , prKind
-    , prSelfLink
-    , prId
-
-    -- * Permission
-    , Permission
-    , permission
-    , pPhotoLink
-    , pEtag
-    , pWithLink
-    , pKind
-    , pDomain
-    , pValue
-    , pAdditionalRoles
-    , pRole
-    , pSelfLink
-    , pName
-    , pAuthKey
-    , pEmailAddress
-    , pId
-    , pType
-
-    -- * PermissionId
-    , PermissionId
-    , permissionId
-    , piKind
-    , piId
-
-    -- * PermissionList
-    , PermissionList
-    , permissionList
-    , plEtag
-    , plKind
-    , plItems
-    , plSelfLink
-
-    -- * Property
-    , Property
-    , property
-    , proEtag
-    , proKind
-    , proValue
-    , proVisibility
-    , proSelfLink
-    , proKey
-
-    -- * PropertyList
-    , PropertyList
-    , propertyList
-    , pllEtag
-    , pllKind
-    , pllItems
-    , pllSelfLink
-
-    -- * Revision
-    , Revision
-    , revision
-    , rEtag
-    , rOriginalFilename
-    , rKind
-    , rPublishedLink
-    , rPinned
-    , rPublished
-    , rLastModifyingUser
-    , rFileSize
-    , rPublishAuto
-    , rMd5Checksum
-    , rMimeType
-    , rSelfLink
-    , rLastModifyingUserName
-    , rDownloadUrl
-    , rExportLinks
-    , rPublishedOutsideDomain
-    , rId
-    , rModifiedDate
-
-    -- * RevisionExportLinks
-    , RevisionExportLinks
-    , revisionExportLinks
-
-    -- * RevisionList
-    , RevisionList
-    , revisionList
-    , rlEtag
-    , rlKind
-    , rlItems
-    , rlSelfLink
+    -- * FilesUpdate'ModifiedDateBehavior
+    , FilesUpdate'ModifiedDateBehavior (..)
 
     -- * User
     , User
@@ -498,12 +483,63 @@ module Network.Google.Drive.Types
     , uDisplayName
     , uPermissionId
 
-    -- * UserPicture
-    , UserPicture
-    , userPicture
-    , upUrl
+    -- * ChildReference
+    , ChildReference
+    , childReference
+    , crChildLink
+    , crKind
+    , crSelfLink
+    , crId
+
+    -- * App
+    , App
+    , app
+    , appLongDescription
+    , appOpenUrlTemplate
+    , appAuthorized
+    , appObjectType
+    , appSecondaryMimeTypes
+    , appCreateInFolderTemplate
+    , appKind
+    , appIcons
+    , appProductUrl
+    , appUseByDefault
+    , appShortDescription
+    , appName
+    , appCreateUrl
+    , appId
+    , appPrimaryFileExtensions
+    , appInstalled
+    , appSupportsCreate
+    , appPrimaryMimeTypes
+    , appHasDriveWideScope
+    , appProductId
+    , appSecondaryFileExtensions
+    , appSupportsMultiOpen
+    , appSupportsImport
+    , appSupportsOfflineCreate
+
+    -- * CommentReply
+    , CommentReply
+    , commentReply
+    , crrHtmlContent
+    , crrKind
+    , crrContent
+    , crrCreatedDate
+    , crrReplyId
+    , crrAuthor
+    , crrModifiedDate
+    , crrDeleted
+    , crrVerb
     ) where
 
 import           Network.Google.Drive.Types.Product
 import           Network.Google.Drive.Types.Sum
 import           Network.Google.Prelude
+
+-- | URL referring to version 'v2' of the Drive API.
+driveURL :: BaseUrl
+driveURL
+  = BaseUrl Https
+      "https://www.googleapis.com/drive/v2/"
+      443

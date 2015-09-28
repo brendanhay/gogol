@@ -14,21 +14,25 @@
 --
 module Network.Google.QPXExpress.Types
     (
+    -- * Service URL
+      qPXExpressURL
 
-    -- * AircraftData
-      AircraftData
-    , aircraftData
-    , adKind
-    , adName
-    , adCode
+    -- * TripOption
+    , TripOption
+    , tripOption
+    , toPricing
+    , toKind
+    , toId
+    , toSlice
+    , toSaleTotal
 
-    -- * AirportData
-    , AirportData
-    , airportData
-    , aKind
-    , aName
-    , aCity
-    , aCode
+    -- * CityData
+    , CityData
+    , cityData
+    , cdCountry
+    , cdKind
+    , cdName
+    , cdCode
 
     -- * BagDescriptor
     , BagDescriptor
@@ -39,47 +43,52 @@ module Network.Google.QPXExpress.Types
     , bdDescription
     , bdSubcode
 
-    -- * CarrierData
-    , CarrierData
-    , carrierData
-    , cKind
-    , cName
-    , cCode
+    -- * Alt
+    , Alt (..)
 
-    -- * CityData
-    , CityData
-    , cityData
-    , cdCountry
-    , cdKind
-    , cdName
-    , cdCode
+    -- * SegmentInfo
+    , SegmentInfo
+    , segmentInfo
+    , siBookingCode
+    , siCabin
+    , siBookingCodeCount
+    , siSubjectToGovernmentApproval
+    , siKind
+    , siFlight
+    , siId
+    , siMarriedSegmentGroup
+    , siConnectionDuration
+    , siDuration
+    , siLeg
 
-    -- * Data
-    , Data
-    , data'
-    , dCarrier
-    , dKind
-    , dAircraft
-    , dAirport
-    , dCity
-    , dTax
+    -- * TaxData
+    , TaxData
+    , taxData
+    , tdKind
+    , tdName
+    , tdId
 
-    -- * FareInfo
-    , FareInfo
-    , fareInfo
-    , fiCarrier
-    , fiDestination
-    , fiOrigin
-    , fiPrivate
-    , fiKind
-    , fiBasisCode
-    , fiId
+    -- * TaxInfo
+    , TaxInfo
+    , taxInfo
+    , tiChargeType
+    , tiCountry
+    , tiKind
+    , tiSalePrice
+    , tiCode
+    , tiId
 
-    -- * FlightInfo
-    , FlightInfo
-    , flightInfo
-    , fCarrier
-    , fNumber
+    -- * TripsSearchRequest
+    , TripsSearchRequest
+    , tripsSearchRequest
+    , tsrRequest
+
+    -- * SliceInfo
+    , SliceInfo
+    , sliceInfo
+    , sKind
+    , sSegment
+    , sDuration
 
     -- * FreeBaggageAllowance
     , FreeBaggageAllowance
@@ -90,6 +99,38 @@ module Network.Google.QPXExpress.Types
     , fbaKilosPerPiece
     , fbaKilos
     , fbaPieces
+
+    -- * TripOptionsResponse
+    , TripOptionsResponse
+    , tripOptionsResponse
+    , torRequestId
+    , torKind
+    , torData
+    , torTripOption
+
+    -- * CarrierData
+    , CarrierData
+    , carrierData
+    , cKind
+    , cName
+    , cCode
+
+    -- * TimeOfDayRange
+    , TimeOfDayRange
+    , timeOfDayRange
+    , todrKind
+    , todrLatestTime
+    , todrEarliestTime
+
+    -- * PassengerCounts
+    , PassengerCounts
+    , passengerCounts
+    , pcSeniorCount
+    , pcKind
+    , pcInfantInLapCount
+    , pcChildCount
+    , pcInfantInSeatCount
+    , pcAdultCount
 
     -- * LegInfo
     , LegInfo
@@ -112,15 +153,74 @@ module Network.Google.QPXExpress.Types
     , liMileage
     , liDepartureTime
 
-    -- * PassengerCounts
-    , PassengerCounts
-    , passengerCounts
-    , pcSeniorCount
-    , pcKind
-    , pcInfantInLapCount
-    , pcChildCount
-    , pcInfantInSeatCount
-    , pcAdultCount
+    -- * Data
+    , Data
+    , data'
+    , dCarrier
+    , dKind
+    , dAircraft
+    , dAirport
+    , dCity
+    , dTax
+
+    -- * AircraftData
+    , AircraftData
+    , aircraftData
+    , adKind
+    , adName
+    , adCode
+
+    -- * AirportData
+    , AirportData
+    , airportData
+    , aKind
+    , aName
+    , aCity
+    , aCode
+
+    -- * SegmentPricing
+    , SegmentPricing
+    , segmentPricing
+    , spFreeBaggageOption
+    , spKind
+    , spFareId
+    , spSegmentId
+
+    -- * FareInfo
+    , FareInfo
+    , fareInfo
+    , fiCarrier
+    , fiDestination
+    , fiOrigin
+    , fiPrivate
+    , fiKind
+    , fiBasisCode
+    , fiId
+
+    -- * SliceInput
+    , SliceInput
+    , sliceInput
+    , sliDestination
+    , sliOrigin
+    , sliMaxStops
+    , sliKind
+    , sliProhibitedCarrier
+    , sliDate
+    , sliMaxConnectionDuration
+    , sliPreferredCabin
+    , sliPermittedDepartureTime
+    , sliPermittedCarrier
+    , sliAlliance
+
+    -- * TripOptionsRequest
+    , TripOptionsRequest
+    , tripOptionsRequest
+    , torRefundable
+    , torSaleCountry
+    , torPassengers
+    , torSolutions
+    , torSlice
+    , torMaxPrice
 
     -- * PricingInfo
     , PricingInfo
@@ -139,106 +239,11 @@ module Network.Google.QPXExpress.Types
     , piSaleTotal
     , piSaleFareTotal
 
-    -- * SegmentInfo
-    , SegmentInfo
-    , segmentInfo
-    , siBookingCode
-    , siCabin
-    , siBookingCodeCount
-    , siSubjectToGovernmentApproval
-    , siKind
-    , siFlight
-    , siId
-    , siMarriedSegmentGroup
-    , siConnectionDuration
-    , siDuration
-    , siLeg
-
-    -- * SegmentPricing
-    , SegmentPricing
-    , segmentPricing
-    , spFreeBaggageOption
-    , spKind
-    , spFareId
-    , spSegmentId
-
-    -- * SliceInfo
-    , SliceInfo
-    , sliceInfo
-    , sKind
-    , sSegment
-    , sDuration
-
-    -- * SliceInput
-    , SliceInput
-    , sliceInput
-    , sliDestination
-    , sliOrigin
-    , sliMaxStops
-    , sliKind
-    , sliProhibitedCarrier
-    , sliDate
-    , sliMaxConnectionDuration
-    , sliPreferredCabin
-    , sliPermittedDepartureTime
-    , sliPermittedCarrier
-    , sliAlliance
-
-    -- * TaxData
-    , TaxData
-    , taxData
-    , tdKind
-    , tdName
-    , tdId
-
-    -- * TaxInfo
-    , TaxInfo
-    , taxInfo
-    , tiChargeType
-    , tiCountry
-    , tiKind
-    , tiSalePrice
-    , tiCode
-    , tiId
-
-    -- * TimeOfDayRange
-    , TimeOfDayRange
-    , timeOfDayRange
-    , todrKind
-    , todrLatestTime
-    , todrEarliestTime
-
-    -- * TripOption
-    , TripOption
-    , tripOption
-    , toPricing
-    , toKind
-    , toId
-    , toSlice
-    , toSaleTotal
-
-    -- * TripOptionsRequest
-    , TripOptionsRequest
-    , tripOptionsRequest
-    , torRefundable
-    , torSaleCountry
-    , torPassengers
-    , torSolutions
-    , torSlice
-    , torMaxPrice
-
-    -- * TripOptionsResponse
-    , TripOptionsResponse
-    , tripOptionsResponse
-    , torRequestId
-    , torKind
-    , torData
-    , torTripOption
-
-    -- * TripsSearchRequest
-    , TripsSearchRequest
-    , tripsSearchRequest
-    , tsrRequest
+    -- * FlightInfo
+    , FlightInfo
+    , flightInfo
+    , fCarrier
+    , fNumber
 
     -- * TripsSearchResponse
     , TripsSearchResponse
@@ -250,3 +255,10 @@ module Network.Google.QPXExpress.Types
 import           Network.Google.Prelude
 import           Network.Google.QPXExpress.Types.Product
 import           Network.Google.QPXExpress.Types.Sum
+
+-- | URL referring to version 'v1' of the QPX Express API.
+qPXExpressURL :: BaseUrl
+qPXExpressURL
+  = BaseUrl Https
+      "https://www.googleapis.com/qpxExpress/v1/trips/"
+      443

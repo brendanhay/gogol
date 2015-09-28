@@ -14,23 +14,17 @@
 --
 module Network.Google.Translate.Types
     (
+    -- * Service URL
+      translateURL
 
-    -- * DetectionsListResponse
-      DetectionsListResponse
-    , detectionsListResponse
-    , dlrDetections
+    -- * TranslationsResource
+    , TranslationsResource
+    , translationsResource
+    , trDetectedSourceLanguage
+    , trTranslatedText
 
-    -- * DetectionsResourceItem
-    , DetectionsResourceItem
-    , detectionsResourceItem
-    , driConfidence
-    , driIsReliable
-    , driLanguage
-
-    -- * LanguagesListResponse
-    , LanguagesListResponse
-    , languagesListResponse
-    , llrLanguages
+    -- * Alt
+    , Alt (..)
 
     -- * LanguagesResource
     , LanguagesResource
@@ -43,13 +37,34 @@ module Network.Google.Translate.Types
     , translationsListResponse
     , tlrTranslations
 
-    -- * TranslationsResource
-    , TranslationsResource
-    , translationsResource
-    , trDetectedSourceLanguage
-    , trTranslatedText
+    -- * TranslationsList'Format
+    , TranslationsList'Format (..)
+
+    -- * DetectionsListResponse
+    , DetectionsListResponse
+    , detectionsListResponse
+    , dlrDetections
+
+    -- * LanguagesListResponse
+    , LanguagesListResponse
+    , languagesListResponse
+    , llrLanguages
+
+    -- * DetectionsResourceItem
+    , DetectionsResourceItem
+    , detectionsResourceItem
+    , driConfidence
+    , driIsReliable
+    , driLanguage
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.Translate.Types.Product
 import           Network.Google.Translate.Types.Sum
+
+-- | URL referring to version 'v2' of the Translate API.
+translateURL :: BaseUrl
+translateURL
+  = BaseUrl Https
+      "https://www.googleapis.com/language/translate/"
+      443

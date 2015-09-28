@@ -18,68 +18,80 @@ module Network.Google.DoubleClick.Bids.Types.Product where
 import           Network.Google.DoubleClick.Bids.Types.Sum
 import           Network.Google.Prelude
 
--- | Request to fetch stored line items.
+-- | Information on how frequently and when to run a query.
 --
--- /See:/ 'downloadLineItemsRequest' smart constructor.
-data DownloadLineItemsRequest = DownloadLineItemsRequest
-    { _dlirFilterType :: !(Maybe DownloadLineItemsRequestFilterType)
-    , _dlirFormat     :: !(Maybe DownloadLineItemsRequestFormat)
-    , _dlirFilterIds  :: !(Maybe [Int64])
+-- /See:/ 'querySchedule' smart constructor.
+data QuerySchedule = QuerySchedule
+    { _qsFrequency           :: !(Maybe QueryScheduleFrequency)
+    , _qsEndTimeMs           :: !(Maybe Int64)
+    , _qsNextRunMinuteOfDay  :: !(Maybe Int32)
+    , _qsNextRunTimezoneCode :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DownloadLineItemsRequest' with the minimum fields required to make a request.
+-- | Creates a value of 'QuerySchedule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dlirFilterType'
+-- * 'qsFrequency'
 --
--- * 'dlirFormat'
+-- * 'qsEndTimeMs'
 --
--- * 'dlirFilterIds'
-downloadLineItemsRequest
-    :: DownloadLineItemsRequest
-downloadLineItemsRequest =
-    DownloadLineItemsRequest
-    { _dlirFilterType = Nothing
-    , _dlirFormat = Nothing
-    , _dlirFilterIds = Nothing
+-- * 'qsNextRunMinuteOfDay'
+--
+-- * 'qsNextRunTimezoneCode'
+querySchedule
+    :: QuerySchedule
+querySchedule =
+    QuerySchedule
+    { _qsFrequency = Nothing
+    , _qsEndTimeMs = Nothing
+    , _qsNextRunMinuteOfDay = Nothing
+    , _qsNextRunTimezoneCode = Nothing
     }
 
--- | Filter type used to filter line items to fetch.
-dlirFilterType :: Lens' DownloadLineItemsRequest (Maybe DownloadLineItemsRequestFilterType)
-dlirFilterType
-  = lens _dlirFilterType
-      (\ s a -> s{_dlirFilterType = a})
+-- | How often the query is run.
+qsFrequency :: Lens' QuerySchedule (Maybe QueryScheduleFrequency)
+qsFrequency
+  = lens _qsFrequency (\ s a -> s{_qsFrequency = a})
 
--- | Format in which the line items will be returned. Default to CSV.
-dlirFormat :: Lens' DownloadLineItemsRequest (Maybe DownloadLineItemsRequestFormat)
-dlirFormat
-  = lens _dlirFormat (\ s a -> s{_dlirFormat = a})
+-- | Datetime to periodically run the query until.
+qsEndTimeMs :: Lens' QuerySchedule (Maybe Int64)
+qsEndTimeMs
+  = lens _qsEndTimeMs (\ s a -> s{_qsEndTimeMs = a})
 
--- | Ids of the specified filter type used to filter line items to fetch. If
--- omitted, all the line items will be returned.
-dlirFilterIds :: Lens' DownloadLineItemsRequest [Int64]
-dlirFilterIds
-  = lens _dlirFilterIds
-      (\ s a -> s{_dlirFilterIds = a})
-      . _Default
-      . _Coerce
+-- | Time of day at which a new report will be generated, represented as
+-- minutes past midnight. Range is 0 to 1439. Only applies to scheduled
+-- reports.
+qsNextRunMinuteOfDay :: Lens' QuerySchedule (Maybe Int32)
+qsNextRunMinuteOfDay
+  = lens _qsNextRunMinuteOfDay
+      (\ s a -> s{_qsNextRunMinuteOfDay = a})
 
-instance FromJSON DownloadLineItemsRequest where
+-- | Canonical timezone code for report generation time. Defaults to
+-- America\/New_York.
+qsNextRunTimezoneCode :: Lens' QuerySchedule (Maybe Text)
+qsNextRunTimezoneCode
+  = lens _qsNextRunTimezoneCode
+      (\ s a -> s{_qsNextRunTimezoneCode = a})
+
+instance FromJSON QuerySchedule where
         parseJSON
-          = withObject "DownloadLineItemsRequest"
+          = withObject "QuerySchedule"
               (\ o ->
-                 DownloadLineItemsRequest <$>
-                   (o .:? "filterType") <*> (o .:? "format") <*>
-                     (o .:? "filterIds" .!= mempty))
+                 QuerySchedule <$>
+                   (o .:? "frequency") <*> (o .:? "endTimeMs") <*>
+                     (o .:? "nextRunMinuteOfDay")
+                     <*> (o .:? "nextRunTimezoneCode"))
 
-instance ToJSON DownloadLineItemsRequest where
-        toJSON DownloadLineItemsRequest{..}
+instance ToJSON QuerySchedule where
+        toJSON QuerySchedule{..}
           = object
               (catMaybes
-                 [("filterType" .=) <$> _dlirFilterType,
-                  ("format" .=) <$> _dlirFormat,
-                  ("filterIds" .=) <$> _dlirFilterIds])
+                 [("frequency" .=) <$> _qsFrequency,
+                  ("endTimeMs" .=) <$> _qsEndTimeMs,
+                  ("nextRunMinuteOfDay" .=) <$> _qsNextRunMinuteOfDay,
+                  ("nextRunTimezoneCode" .=) <$>
+                    _qsNextRunTimezoneCode])
 
 -- | Download line items response.
 --
@@ -117,6 +129,198 @@ instance ToJSON DownloadLineItemsResponse where
         toJSON DownloadLineItemsResponse{..}
           = object
               (catMaybes [("lineItems" .=) <$> _dlirLineItems])
+
+-- | Represents the status of upload.
+--
+-- /See:/ 'uploadStatus' smart constructor.
+data UploadStatus = UploadStatus
+    { _usRowStatus :: !(Maybe [Maybe RowStatus])
+    , _usErrors    :: !(Maybe [Text])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UploadStatus' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'usRowStatus'
+--
+-- * 'usErrors'
+uploadStatus
+    :: UploadStatus
+uploadStatus =
+    UploadStatus
+    { _usRowStatus = Nothing
+    , _usErrors = Nothing
+    }
+
+-- | Per-row upload status.
+usRowStatus :: Lens' UploadStatus [Maybe RowStatus]
+usRowStatus
+  = lens _usRowStatus (\ s a -> s{_usRowStatus = a}) .
+      _Default
+      . _Coerce
+
+-- | Reasons why upload can\'t be completed.
+usErrors :: Lens' UploadStatus [Text]
+usErrors
+  = lens _usErrors (\ s a -> s{_usErrors = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON UploadStatus where
+        parseJSON
+          = withObject "UploadStatus"
+              (\ o ->
+                 UploadStatus <$>
+                   (o .:? "rowStatus" .!= mempty) <*>
+                     (o .:? "errors" .!= mempty))
+
+instance ToJSON UploadStatus where
+        toJSON UploadStatus{..}
+          = object
+              (catMaybes
+                 [("rowStatus" .=) <$> _usRowStatus,
+                  ("errors" .=) <$> _usErrors])
+
+-- | Request to run a stored query to generate a report.
+--
+-- /See:/ 'runQueryRequest' smart constructor.
+data RunQueryRequest = RunQueryRequest
+    { _rqrReportDataEndTimeMs   :: !(Maybe Int64)
+    , _rqrDataRange             :: !(Maybe RunQueryRequestDataRange)
+    , _rqrReportDataStartTimeMs :: !(Maybe Int64)
+    , _rqrTimezoneCode          :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RunQueryRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rqrReportDataEndTimeMs'
+--
+-- * 'rqrDataRange'
+--
+-- * 'rqrReportDataStartTimeMs'
+--
+-- * 'rqrTimezoneCode'
+runQueryRequest
+    :: RunQueryRequest
+runQueryRequest =
+    RunQueryRequest
+    { _rqrReportDataEndTimeMs = Nothing
+    , _rqrDataRange = Nothing
+    , _rqrReportDataStartTimeMs = Nothing
+    , _rqrTimezoneCode = Nothing
+    }
+
+-- | The ending time for the data that is shown in the report. Note,
+-- reportDataEndTimeMs is required if dataRange is CUSTOM_DATES and ignored
+-- otherwise.
+rqrReportDataEndTimeMs :: Lens' RunQueryRequest (Maybe Int64)
+rqrReportDataEndTimeMs
+  = lens _rqrReportDataEndTimeMs
+      (\ s a -> s{_rqrReportDataEndTimeMs = a})
+
+-- | Report data range used to generate the report.
+rqrDataRange :: Lens' RunQueryRequest (Maybe RunQueryRequestDataRange)
+rqrDataRange
+  = lens _rqrDataRange (\ s a -> s{_rqrDataRange = a})
+
+-- | The starting time for the data that is shown in the report. Note,
+-- reportDataStartTimeMs is required if dataRange is CUSTOM_DATES and
+-- ignored otherwise.
+rqrReportDataStartTimeMs :: Lens' RunQueryRequest (Maybe Int64)
+rqrReportDataStartTimeMs
+  = lens _rqrReportDataStartTimeMs
+      (\ s a -> s{_rqrReportDataStartTimeMs = a})
+
+-- | Canonical timezone code for report data time. Defaults to
+-- America\/New_York.
+rqrTimezoneCode :: Lens' RunQueryRequest (Maybe Text)
+rqrTimezoneCode
+  = lens _rqrTimezoneCode
+      (\ s a -> s{_rqrTimezoneCode = a})
+
+instance FromJSON RunQueryRequest where
+        parseJSON
+          = withObject "RunQueryRequest"
+              (\ o ->
+                 RunQueryRequest <$>
+                   (o .:? "reportDataEndTimeMs") <*> (o .:? "dataRange")
+                     <*> (o .:? "reportDataStartTimeMs")
+                     <*> (o .:? "timezoneCode"))
+
+instance ToJSON RunQueryRequest where
+        toJSON RunQueryRequest{..}
+          = object
+              (catMaybes
+                 [("reportDataEndTimeMs" .=) <$>
+                    _rqrReportDataEndTimeMs,
+                  ("dataRange" .=) <$> _rqrDataRange,
+                  ("reportDataStartTimeMs" .=) <$>
+                    _rqrReportDataStartTimeMs,
+                  ("timezoneCode" .=) <$> _rqrTimezoneCode])
+
+-- | Request to upload line items.
+--
+-- /See:/ 'uploadLineItemsRequest' smart constructor.
+data UploadLineItemsRequest = UploadLineItemsRequest
+    { _ulirLineItems :: !(Maybe Text)
+    , _ulirFormat    :: !(Maybe UploadLineItemsRequestFormat)
+    , _ulirDryRun    :: !(Maybe Bool)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UploadLineItemsRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ulirLineItems'
+--
+-- * 'ulirFormat'
+--
+-- * 'ulirDryRun'
+uploadLineItemsRequest
+    :: UploadLineItemsRequest
+uploadLineItemsRequest =
+    UploadLineItemsRequest
+    { _ulirLineItems = Nothing
+    , _ulirFormat = Nothing
+    , _ulirDryRun = Nothing
+    }
+
+-- | Line items in CSV to upload. Refer to Entity Write File Format for more
+-- information on file format.
+ulirLineItems :: Lens' UploadLineItemsRequest (Maybe Text)
+ulirLineItems
+  = lens _ulirLineItems
+      (\ s a -> s{_ulirLineItems = a})
+
+-- | Format the line items are in. Default to CSV.
+ulirFormat :: Lens' UploadLineItemsRequest (Maybe UploadLineItemsRequestFormat)
+ulirFormat
+  = lens _ulirFormat (\ s a -> s{_ulirFormat = a})
+
+-- | Set to true to get upload status without actually persisting the line
+-- items.
+ulirDryRun :: Lens' UploadLineItemsRequest (Maybe Bool)
+ulirDryRun
+  = lens _ulirDryRun (\ s a -> s{_ulirDryRun = a})
+
+instance FromJSON UploadLineItemsRequest where
+        parseJSON
+          = withObject "UploadLineItemsRequest"
+              (\ o ->
+                 UploadLineItemsRequest <$>
+                   (o .:? "lineItems") <*> (o .:? "format") <*>
+                     (o .:? "dryRun"))
+
+instance ToJSON UploadLineItemsRequest where
+        toJSON UploadLineItemsRequest{..}
+          = object
+              (catMaybes
+                 [("lineItems" .=) <$> _ulirLineItems,
+                  ("format" .=) <$> _ulirFormat,
+                  ("dryRun" .=) <$> _ulirDryRun])
 
 -- | Filter used to match traffic data in your report.
 --
@@ -161,56 +365,153 @@ instance ToJSON FilterPair where
               (catMaybes
                  [("value" .=) <$> _fpValue, ("type" .=) <$> _fpType])
 
--- | List queries response.
+-- | Represents a report.
 --
--- /See:/ 'listQueriesResponse' smart constructor.
-data ListQueriesResponse = ListQueriesResponse
-    { _lqrQueries :: !(Maybe [Maybe Query])
-    , _lqrKind    :: !Text
+-- /See:/ 'report' smart constructor.
+data Report = Report
+    { _rParams   :: !(Maybe (Maybe Parameters))
+    , _rKey      :: !(Maybe (Maybe ReportKey))
+    , _rMetadata :: !(Maybe (Maybe ReportMetadata))
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ListQueriesResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'Report' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lqrQueries'
+-- * 'rParams'
 --
--- * 'lqrKind'
-listQueriesResponse
-    :: ListQueriesResponse
-listQueriesResponse =
-    ListQueriesResponse
-    { _lqrQueries = Nothing
-    , _lqrKind = "doubleclickbidmanager#listQueriesResponse"
+-- * 'rKey'
+--
+-- * 'rMetadata'
+report
+    :: Report
+report =
+    Report
+    { _rParams = Nothing
+    , _rKey = Nothing
+    , _rMetadata = Nothing
     }
 
--- | Retrieved queries.
-lqrQueries :: Lens' ListQueriesResponse [Maybe Query]
-lqrQueries
-  = lens _lqrQueries (\ s a -> s{_lqrQueries = a}) .
+-- | Report parameters.
+rParams :: Lens' Report (Maybe (Maybe Parameters))
+rParams = lens _rParams (\ s a -> s{_rParams = a})
+
+-- | Key used to identify a report.
+rKey :: Lens' Report (Maybe (Maybe ReportKey))
+rKey = lens _rKey (\ s a -> s{_rKey = a})
+
+-- | Report metadata.
+rMetadata :: Lens' Report (Maybe (Maybe ReportMetadata))
+rMetadata
+  = lens _rMetadata (\ s a -> s{_rMetadata = a})
+
+instance FromJSON Report where
+        parseJSON
+          = withObject "Report"
+              (\ o ->
+                 Report <$>
+                   (o .:? "params") <*> (o .:? "key") <*>
+                     (o .:? "metadata"))
+
+instance ToJSON Report where
+        toJSON Report{..}
+          = object
+              (catMaybes
+                 [("params" .=) <$> _rParams, ("key" .=) <$> _rKey,
+                  ("metadata" .=) <$> _rMetadata])
+
+-- | Represents the upload status of a row in the request.
+--
+-- /See:/ 'rowStatus' smart constructor.
+data RowStatus = RowStatus
+    { _rsEntityName :: !(Maybe Text)
+    , _rsChanged    :: !(Maybe Bool)
+    , _rsPersisted  :: !(Maybe Bool)
+    , _rsRowNumber  :: !(Maybe Int32)
+    , _rsErrors     :: !(Maybe [Text])
+    , _rsEntityId   :: !(Maybe Int64)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RowStatus' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rsEntityName'
+--
+-- * 'rsChanged'
+--
+-- * 'rsPersisted'
+--
+-- * 'rsRowNumber'
+--
+-- * 'rsErrors'
+--
+-- * 'rsEntityId'
+rowStatus
+    :: RowStatus
+rowStatus =
+    RowStatus
+    { _rsEntityName = Nothing
+    , _rsChanged = Nothing
+    , _rsPersisted = Nothing
+    , _rsRowNumber = Nothing
+    , _rsErrors = Nothing
+    , _rsEntityId = Nothing
+    }
+
+-- | Entity name.
+rsEntityName :: Lens' RowStatus (Maybe Text)
+rsEntityName
+  = lens _rsEntityName (\ s a -> s{_rsEntityName = a})
+
+-- | Whether the stored entity is changed as a result of upload.
+rsChanged :: Lens' RowStatus (Maybe Bool)
+rsChanged
+  = lens _rsChanged (\ s a -> s{_rsChanged = a})
+
+-- | Whether the entity is persisted.
+rsPersisted :: Lens' RowStatus (Maybe Bool)
+rsPersisted
+  = lens _rsPersisted (\ s a -> s{_rsPersisted = a})
+
+-- | Row number.
+rsRowNumber :: Lens' RowStatus (Maybe Int32)
+rsRowNumber
+  = lens _rsRowNumber (\ s a -> s{_rsRowNumber = a})
+
+-- | Reasons why the entity can\'t be uploaded.
+rsErrors :: Lens' RowStatus [Text]
+rsErrors
+  = lens _rsErrors (\ s a -> s{_rsErrors = a}) .
       _Default
       . _Coerce
 
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"doubleclickbidmanager#listQueriesResponse\".
-lqrKind :: Lens' ListQueriesResponse Text
-lqrKind = lens _lqrKind (\ s a -> s{_lqrKind = a})
+-- | Entity Id.
+rsEntityId :: Lens' RowStatus (Maybe Int64)
+rsEntityId
+  = lens _rsEntityId (\ s a -> s{_rsEntityId = a})
 
-instance FromJSON ListQueriesResponse where
+instance FromJSON RowStatus where
         parseJSON
-          = withObject "ListQueriesResponse"
+          = withObject "RowStatus"
               (\ o ->
-                 ListQueriesResponse <$>
-                   (o .:? "queries" .!= mempty) <*>
-                     (o .:? "kind" .!=
-                        "doubleclickbidmanager#listQueriesResponse"))
+                 RowStatus <$>
+                   (o .:? "entityName") <*> (o .:? "changed") <*>
+                     (o .:? "persisted")
+                     <*> (o .:? "rowNumber")
+                     <*> (o .:? "errors" .!= mempty)
+                     <*> (o .:? "entityId"))
 
-instance ToJSON ListQueriesResponse where
-        toJSON ListQueriesResponse{..}
+instance ToJSON RowStatus where
+        toJSON RowStatus{..}
           = object
               (catMaybes
-                 [("queries" .=) <$> _lqrQueries,
-                  Just ("kind" .= _lqrKind)])
+                 [("entityName" .=) <$> _rsEntityName,
+                  ("changed" .=) <$> _rsChanged,
+                  ("persisted" .=) <$> _rsPersisted,
+                  ("rowNumber" .=) <$> _rsRowNumber,
+                  ("errors" .=) <$> _rsErrors,
+                  ("entityId" .=) <$> _rsEntityId])
 
 -- | List reports response.
 --
@@ -262,212 +563,6 @@ instance ToJSON ListReportsResponse where
               (catMaybes
                  [("reports" .=) <$> _lrrReports,
                   Just ("kind" .= _lrrKind)])
-
--- | Parameters of a query or report.
---
--- /See:/ 'parameters' smart constructor.
-data Parameters = Parameters
-    { _pMetrics           :: !(Maybe [ParametersItemMetrics])
-    , _pIncludeInviteData :: !(Maybe Bool)
-    , _pFilters           :: !(Maybe [Maybe FilterPair])
-    , _pGroupBys          :: !(Maybe [ParametersItemGroupBys])
-    , _pType              :: !(Maybe ParametersType)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Parameters' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'pMetrics'
---
--- * 'pIncludeInviteData'
---
--- * 'pFilters'
---
--- * 'pGroupBys'
---
--- * 'pType'
-parameters
-    :: Parameters
-parameters =
-    Parameters
-    { _pMetrics = Nothing
-    , _pIncludeInviteData = Nothing
-    , _pFilters = Nothing
-    , _pGroupBys = Nothing
-    , _pType = Nothing
-    }
-
--- | Metrics to include as columns in your report.
-pMetrics :: Lens' Parameters [ParametersItemMetrics]
-pMetrics
-  = lens _pMetrics (\ s a -> s{_pMetrics = a}) .
-      _Default
-      . _Coerce
-
--- | Whether to include data from Invite Media.
-pIncludeInviteData :: Lens' Parameters (Maybe Bool)
-pIncludeInviteData
-  = lens _pIncludeInviteData
-      (\ s a -> s{_pIncludeInviteData = a})
-
--- | Filters used to match traffic data in your report.
-pFilters :: Lens' Parameters [Maybe FilterPair]
-pFilters
-  = lens _pFilters (\ s a -> s{_pFilters = a}) .
-      _Default
-      . _Coerce
-
--- | Data is grouped by the filters listed in this field.
-pGroupBys :: Lens' Parameters [ParametersItemGroupBys]
-pGroupBys
-  = lens _pGroupBys (\ s a -> s{_pGroupBys = a}) .
-      _Default
-      . _Coerce
-
--- | Report type.
-pType :: Lens' Parameters (Maybe ParametersType)
-pType = lens _pType (\ s a -> s{_pType = a})
-
-instance FromJSON Parameters where
-        parseJSON
-          = withObject "Parameters"
-              (\ o ->
-                 Parameters <$>
-                   (o .:? "metrics" .!= mempty) <*>
-                     (o .:? "includeInviteData")
-                     <*> (o .:? "filters" .!= mempty)
-                     <*> (o .:? "groupBys" .!= mempty)
-                     <*> (o .:? "type"))
-
-instance ToJSON Parameters where
-        toJSON Parameters{..}
-          = object
-              (catMaybes
-                 [("metrics" .=) <$> _pMetrics,
-                  ("includeInviteData" .=) <$> _pIncludeInviteData,
-                  ("filters" .=) <$> _pFilters,
-                  ("groupBys" .=) <$> _pGroupBys,
-                  ("type" .=) <$> _pType])
-
--- | Represents a query.
---
--- /See:/ 'query' smart constructor.
-data Query = Query
-    { _qQueryId               :: !(Maybe Int64)
-    , _qReportDataEndTimeMs   :: !(Maybe Int64)
-    , _qSchedule              :: !(Maybe (Maybe QuerySchedule))
-    , _qKind                  :: !Text
-    , _qParams                :: !(Maybe (Maybe Parameters))
-    , _qMetadata              :: !(Maybe (Maybe QueryMetadata))
-    , _qReportDataStartTimeMs :: !(Maybe Int64)
-    , _qTimezoneCode          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Query' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'qQueryId'
---
--- * 'qReportDataEndTimeMs'
---
--- * 'qSchedule'
---
--- * 'qKind'
---
--- * 'qParams'
---
--- * 'qMetadata'
---
--- * 'qReportDataStartTimeMs'
---
--- * 'qTimezoneCode'
-query
-    :: Query
-query =
-    Query
-    { _qQueryId = Nothing
-    , _qReportDataEndTimeMs = Nothing
-    , _qSchedule = Nothing
-    , _qKind = "doubleclickbidmanager#query"
-    , _qParams = Nothing
-    , _qMetadata = Nothing
-    , _qReportDataStartTimeMs = Nothing
-    , _qTimezoneCode = Nothing
-    }
-
--- | Query ID.
-qQueryId :: Lens' Query (Maybe Int64)
-qQueryId = lens _qQueryId (\ s a -> s{_qQueryId = a})
-
--- | The ending time for the data that is shown in the report. Note,
--- reportDataEndTimeMs is required if metadata.dataRange is CUSTOM_DATES
--- and ignored otherwise.
-qReportDataEndTimeMs :: Lens' Query (Maybe Int64)
-qReportDataEndTimeMs
-  = lens _qReportDataEndTimeMs
-      (\ s a -> s{_qReportDataEndTimeMs = a})
-
--- | Information on how often and when to run a query.
-qSchedule :: Lens' Query (Maybe (Maybe QuerySchedule))
-qSchedule
-  = lens _qSchedule (\ s a -> s{_qSchedule = a})
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"doubleclickbidmanager#query\".
-qKind :: Lens' Query Text
-qKind = lens _qKind (\ s a -> s{_qKind = a})
-
--- | Query parameters.
-qParams :: Lens' Query (Maybe (Maybe Parameters))
-qParams = lens _qParams (\ s a -> s{_qParams = a})
-
--- | Query metadata.
-qMetadata :: Lens' Query (Maybe (Maybe QueryMetadata))
-qMetadata
-  = lens _qMetadata (\ s a -> s{_qMetadata = a})
-
--- | The starting time for the data that is shown in the report. Note,
--- reportDataStartTimeMs is required if metadata.dataRange is CUSTOM_DATES
--- and ignored otherwise.
-qReportDataStartTimeMs :: Lens' Query (Maybe Int64)
-qReportDataStartTimeMs
-  = lens _qReportDataStartTimeMs
-      (\ s a -> s{_qReportDataStartTimeMs = a})
-
--- | Canonical timezone code for report data time. Defaults to
--- America\/New_York.
-qTimezoneCode :: Lens' Query (Maybe Text)
-qTimezoneCode
-  = lens _qTimezoneCode
-      (\ s a -> s{_qTimezoneCode = a})
-
-instance FromJSON Query where
-        parseJSON
-          = withObject "Query"
-              (\ o ->
-                 Query <$>
-                   (o .:? "queryId") <*> (o .:? "reportDataEndTimeMs")
-                     <*> (o .:? "schedule")
-                     <*> (o .:? "kind" .!= "doubleclickbidmanager#query")
-                     <*> (o .:? "params")
-                     <*> (o .:? "metadata")
-                     <*> (o .:? "reportDataStartTimeMs")
-                     <*> (o .:? "timezoneCode"))
-
-instance ToJSON Query where
-        toJSON Query{..}
-          = object
-              (catMaybes
-                 [("queryId" .=) <$> _qQueryId,
-                  ("reportDataEndTimeMs" .=) <$> _qReportDataEndTimeMs,
-                  ("schedule" .=) <$> _qSchedule,
-                  Just ("kind" .= _qKind), ("params" .=) <$> _qParams,
-                  ("metadata" .=) <$> _qMetadata,
-                  ("reportDataStartTimeMs" .=) <$>
-                    _qReportDataStartTimeMs,
-                  ("timezoneCode" .=) <$> _qTimezoneCode])
 
 -- | Query metadata.
 --
@@ -632,135 +727,505 @@ instance ToJSON QueryMetadata where
                   ("title" .=) <$> _qmTitle,
                   ("sendNotification" .=) <$> _qmSendNotification])
 
--- | Information on how frequently and when to run a query.
+-- | Parameters of a query or report.
 --
--- /See:/ 'querySchedule' smart constructor.
-data QuerySchedule = QuerySchedule
-    { _qsFrequency           :: !(Maybe QueryScheduleFrequency)
-    , _qsEndTimeMs           :: !(Maybe Int64)
-    , _qsNextRunMinuteOfDay  :: !(Maybe Int32)
-    , _qsNextRunTimezoneCode :: !(Maybe Text)
+-- /See:/ 'parameters' smart constructor.
+data Parameters = Parameters
+    { _pMetrics           :: !(Maybe [ParametersItemMetrics])
+    , _pIncludeInviteData :: !(Maybe Bool)
+    , _pFilters           :: !(Maybe [Maybe FilterPair])
+    , _pGroupBys          :: !(Maybe [ParametersItemGroupBys])
+    , _pType              :: !(Maybe ParametersType)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'QuerySchedule' with the minimum fields required to make a request.
+-- | Creates a value of 'Parameters' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'qsFrequency'
+-- * 'pMetrics'
 --
--- * 'qsEndTimeMs'
+-- * 'pIncludeInviteData'
 --
--- * 'qsNextRunMinuteOfDay'
+-- * 'pFilters'
 --
--- * 'qsNextRunTimezoneCode'
-querySchedule
-    :: QuerySchedule
-querySchedule =
-    QuerySchedule
-    { _qsFrequency = Nothing
-    , _qsEndTimeMs = Nothing
-    , _qsNextRunMinuteOfDay = Nothing
-    , _qsNextRunTimezoneCode = Nothing
+-- * 'pGroupBys'
+--
+-- * 'pType'
+parameters
+    :: Parameters
+parameters =
+    Parameters
+    { _pMetrics = Nothing
+    , _pIncludeInviteData = Nothing
+    , _pFilters = Nothing
+    , _pGroupBys = Nothing
+    , _pType = Nothing
     }
 
--- | How often the query is run.
-qsFrequency :: Lens' QuerySchedule (Maybe QueryScheduleFrequency)
-qsFrequency
-  = lens _qsFrequency (\ s a -> s{_qsFrequency = a})
+-- | Metrics to include as columns in your report.
+pMetrics :: Lens' Parameters [ParametersItemMetrics]
+pMetrics
+  = lens _pMetrics (\ s a -> s{_pMetrics = a}) .
+      _Default
+      . _Coerce
 
--- | Datetime to periodically run the query until.
-qsEndTimeMs :: Lens' QuerySchedule (Maybe Int64)
-qsEndTimeMs
-  = lens _qsEndTimeMs (\ s a -> s{_qsEndTimeMs = a})
+-- | Whether to include data from Invite Media.
+pIncludeInviteData :: Lens' Parameters (Maybe Bool)
+pIncludeInviteData
+  = lens _pIncludeInviteData
+      (\ s a -> s{_pIncludeInviteData = a})
 
--- | Time of day at which a new report will be generated, represented as
--- minutes past midnight. Range is 0 to 1439. Only applies to scheduled
--- reports.
-qsNextRunMinuteOfDay :: Lens' QuerySchedule (Maybe Int32)
-qsNextRunMinuteOfDay
-  = lens _qsNextRunMinuteOfDay
-      (\ s a -> s{_qsNextRunMinuteOfDay = a})
+-- | Filters used to match traffic data in your report.
+pFilters :: Lens' Parameters [Maybe FilterPair]
+pFilters
+  = lens _pFilters (\ s a -> s{_pFilters = a}) .
+      _Default
+      . _Coerce
 
--- | Canonical timezone code for report generation time. Defaults to
--- America\/New_York.
-qsNextRunTimezoneCode :: Lens' QuerySchedule (Maybe Text)
-qsNextRunTimezoneCode
-  = lens _qsNextRunTimezoneCode
-      (\ s a -> s{_qsNextRunTimezoneCode = a})
+-- | Data is grouped by the filters listed in this field.
+pGroupBys :: Lens' Parameters [ParametersItemGroupBys]
+pGroupBys
+  = lens _pGroupBys (\ s a -> s{_pGroupBys = a}) .
+      _Default
+      . _Coerce
 
-instance FromJSON QuerySchedule where
+-- | Report type.
+pType :: Lens' Parameters (Maybe ParametersType)
+pType = lens _pType (\ s a -> s{_pType = a})
+
+instance FromJSON Parameters where
         parseJSON
-          = withObject "QuerySchedule"
+          = withObject "Parameters"
               (\ o ->
-                 QuerySchedule <$>
-                   (o .:? "frequency") <*> (o .:? "endTimeMs") <*>
-                     (o .:? "nextRunMinuteOfDay")
-                     <*> (o .:? "nextRunTimezoneCode"))
+                 Parameters <$>
+                   (o .:? "metrics" .!= mempty) <*>
+                     (o .:? "includeInviteData")
+                     <*> (o .:? "filters" .!= mempty)
+                     <*> (o .:? "groupBys" .!= mempty)
+                     <*> (o .:? "type"))
 
-instance ToJSON QuerySchedule where
-        toJSON QuerySchedule{..}
+instance ToJSON Parameters where
+        toJSON Parameters{..}
           = object
               (catMaybes
-                 [("frequency" .=) <$> _qsFrequency,
-                  ("endTimeMs" .=) <$> _qsEndTimeMs,
-                  ("nextRunMinuteOfDay" .=) <$> _qsNextRunMinuteOfDay,
-                  ("nextRunTimezoneCode" .=) <$>
-                    _qsNextRunTimezoneCode])
+                 [("metrics" .=) <$> _pMetrics,
+                  ("includeInviteData" .=) <$> _pIncludeInviteData,
+                  ("filters" .=) <$> _pFilters,
+                  ("groupBys" .=) <$> _pGroupBys,
+                  ("type" .=) <$> _pType])
 
--- | Represents a report.
+-- | Report status.
 --
--- /See:/ 'report' smart constructor.
-data Report = Report
-    { _rParams   :: !(Maybe (Maybe Parameters))
-    , _rKey      :: !(Maybe (Maybe ReportKey))
-    , _rMetadata :: !(Maybe (Maybe ReportMetadata))
+-- /See:/ 'reportStatus' smart constructor.
+data ReportStatus = ReportStatus
+    { _rsState        :: !(Maybe ReportStatusState)
+    , _rsFinishTimeMs :: !(Maybe Int64)
+    , _rsFormat       :: !(Maybe ReportStatusFormat)
+    , _rsFailure      :: !(Maybe (Maybe ReportFailure))
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Report' with the minimum fields required to make a request.
+-- | Creates a value of 'ReportStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rParams'
+-- * 'rsState'
 --
--- * 'rKey'
+-- * 'rsFinishTimeMs'
 --
--- * 'rMetadata'
-report
-    :: Report
-report =
-    Report
-    { _rParams = Nothing
-    , _rKey = Nothing
-    , _rMetadata = Nothing
+-- * 'rsFormat'
+--
+-- * 'rsFailure'
+reportStatus
+    :: ReportStatus
+reportStatus =
+    ReportStatus
+    { _rsState = Nothing
+    , _rsFinishTimeMs = Nothing
+    , _rsFormat = Nothing
+    , _rsFailure = Nothing
     }
 
--- | Report parameters.
-rParams :: Lens' Report (Maybe (Maybe Parameters))
-rParams = lens _rParams (\ s a -> s{_rParams = a})
+-- | The state of the report.
+rsState :: Lens' ReportStatus (Maybe ReportStatusState)
+rsState = lens _rsState (\ s a -> s{_rsState = a})
 
--- | Key used to identify a report.
-rKey :: Lens' Report (Maybe (Maybe ReportKey))
-rKey = lens _rKey (\ s a -> s{_rKey = a})
+-- | The time when this report either completed successfully or failed.
+rsFinishTimeMs :: Lens' ReportStatus (Maybe Int64)
+rsFinishTimeMs
+  = lens _rsFinishTimeMs
+      (\ s a -> s{_rsFinishTimeMs = a})
+
+-- | The file type of the report.
+rsFormat :: Lens' ReportStatus (Maybe ReportStatusFormat)
+rsFormat = lens _rsFormat (\ s a -> s{_rsFormat = a})
+
+-- | If the report failed, this records the cause.
+rsFailure :: Lens' ReportStatus (Maybe (Maybe ReportFailure))
+rsFailure
+  = lens _rsFailure (\ s a -> s{_rsFailure = a})
+
+instance FromJSON ReportStatus where
+        parseJSON
+          = withObject "ReportStatus"
+              (\ o ->
+                 ReportStatus <$>
+                   (o .:? "state") <*> (o .:? "finishTimeMs") <*>
+                     (o .:? "format")
+                     <*> (o .:? "failure"))
+
+instance ToJSON ReportStatus where
+        toJSON ReportStatus{..}
+          = object
+              (catMaybes
+                 [("state" .=) <$> _rsState,
+                  ("finishTimeMs" .=) <$> _rsFinishTimeMs,
+                  ("format" .=) <$> _rsFormat,
+                  ("failure" .=) <$> _rsFailure])
+
+-- | Represents a query.
+--
+-- /See:/ 'query' smart constructor.
+data Query = Query
+    { _qQueryId               :: !(Maybe Int64)
+    , _qReportDataEndTimeMs   :: !(Maybe Int64)
+    , _qSchedule              :: !(Maybe (Maybe QuerySchedule))
+    , _qKind                  :: !Text
+    , _qParams                :: !(Maybe (Maybe Parameters))
+    , _qMetadata              :: !(Maybe (Maybe QueryMetadata))
+    , _qReportDataStartTimeMs :: !(Maybe Int64)
+    , _qTimezoneCode          :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Query' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'qQueryId'
+--
+-- * 'qReportDataEndTimeMs'
+--
+-- * 'qSchedule'
+--
+-- * 'qKind'
+--
+-- * 'qParams'
+--
+-- * 'qMetadata'
+--
+-- * 'qReportDataStartTimeMs'
+--
+-- * 'qTimezoneCode'
+query
+    :: Query
+query =
+    Query
+    { _qQueryId = Nothing
+    , _qReportDataEndTimeMs = Nothing
+    , _qSchedule = Nothing
+    , _qKind = "doubleclickbidmanager#query"
+    , _qParams = Nothing
+    , _qMetadata = Nothing
+    , _qReportDataStartTimeMs = Nothing
+    , _qTimezoneCode = Nothing
+    }
+
+-- | Query ID.
+qQueryId :: Lens' Query (Maybe Int64)
+qQueryId = lens _qQueryId (\ s a -> s{_qQueryId = a})
+
+-- | The ending time for the data that is shown in the report. Note,
+-- reportDataEndTimeMs is required if metadata.dataRange is CUSTOM_DATES
+-- and ignored otherwise.
+qReportDataEndTimeMs :: Lens' Query (Maybe Int64)
+qReportDataEndTimeMs
+  = lens _qReportDataEndTimeMs
+      (\ s a -> s{_qReportDataEndTimeMs = a})
+
+-- | Information on how often and when to run a query.
+qSchedule :: Lens' Query (Maybe (Maybe QuerySchedule))
+qSchedule
+  = lens _qSchedule (\ s a -> s{_qSchedule = a})
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"doubleclickbidmanager#query\".
+qKind :: Lens' Query Text
+qKind = lens _qKind (\ s a -> s{_qKind = a})
+
+-- | Query parameters.
+qParams :: Lens' Query (Maybe (Maybe Parameters))
+qParams = lens _qParams (\ s a -> s{_qParams = a})
+
+-- | Query metadata.
+qMetadata :: Lens' Query (Maybe (Maybe QueryMetadata))
+qMetadata
+  = lens _qMetadata (\ s a -> s{_qMetadata = a})
+
+-- | The starting time for the data that is shown in the report. Note,
+-- reportDataStartTimeMs is required if metadata.dataRange is CUSTOM_DATES
+-- and ignored otherwise.
+qReportDataStartTimeMs :: Lens' Query (Maybe Int64)
+qReportDataStartTimeMs
+  = lens _qReportDataStartTimeMs
+      (\ s a -> s{_qReportDataStartTimeMs = a})
+
+-- | Canonical timezone code for report data time. Defaults to
+-- America\/New_York.
+qTimezoneCode :: Lens' Query (Maybe Text)
+qTimezoneCode
+  = lens _qTimezoneCode
+      (\ s a -> s{_qTimezoneCode = a})
+
+instance FromJSON Query where
+        parseJSON
+          = withObject "Query"
+              (\ o ->
+                 Query <$>
+                   (o .:? "queryId") <*> (o .:? "reportDataEndTimeMs")
+                     <*> (o .:? "schedule")
+                     <*> (o .:? "kind" .!= "doubleclickbidmanager#query")
+                     <*> (o .:? "params")
+                     <*> (o .:? "metadata")
+                     <*> (o .:? "reportDataStartTimeMs")
+                     <*> (o .:? "timezoneCode"))
+
+instance ToJSON Query where
+        toJSON Query{..}
+          = object
+              (catMaybes
+                 [("queryId" .=) <$> _qQueryId,
+                  ("reportDataEndTimeMs" .=) <$> _qReportDataEndTimeMs,
+                  ("schedule" .=) <$> _qSchedule,
+                  Just ("kind" .= _qKind), ("params" .=) <$> _qParams,
+                  ("metadata" .=) <$> _qMetadata,
+                  ("reportDataStartTimeMs" .=) <$>
+                    _qReportDataStartTimeMs,
+                  ("timezoneCode" .=) <$> _qTimezoneCode])
+
+-- | Request to fetch stored line items.
+--
+-- /See:/ 'downloadLineItemsRequest' smart constructor.
+data DownloadLineItemsRequest = DownloadLineItemsRequest
+    { _dlirFilterType :: !(Maybe DownloadLineItemsRequestFilterType)
+    , _dlirFormat     :: !(Maybe DownloadLineItemsRequestFormat)
+    , _dlirFilterIds  :: !(Maybe [Int64])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DownloadLineItemsRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dlirFilterType'
+--
+-- * 'dlirFormat'
+--
+-- * 'dlirFilterIds'
+downloadLineItemsRequest
+    :: DownloadLineItemsRequest
+downloadLineItemsRequest =
+    DownloadLineItemsRequest
+    { _dlirFilterType = Nothing
+    , _dlirFormat = Nothing
+    , _dlirFilterIds = Nothing
+    }
+
+-- | Filter type used to filter line items to fetch.
+dlirFilterType :: Lens' DownloadLineItemsRequest (Maybe DownloadLineItemsRequestFilterType)
+dlirFilterType
+  = lens _dlirFilterType
+      (\ s a -> s{_dlirFilterType = a})
+
+-- | Format in which the line items will be returned. Default to CSV.
+dlirFormat :: Lens' DownloadLineItemsRequest (Maybe DownloadLineItemsRequestFormat)
+dlirFormat
+  = lens _dlirFormat (\ s a -> s{_dlirFormat = a})
+
+-- | Ids of the specified filter type used to filter line items to fetch. If
+-- omitted, all the line items will be returned.
+dlirFilterIds :: Lens' DownloadLineItemsRequest [Int64]
+dlirFilterIds
+  = lens _dlirFilterIds
+      (\ s a -> s{_dlirFilterIds = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON DownloadLineItemsRequest where
+        parseJSON
+          = withObject "DownloadLineItemsRequest"
+              (\ o ->
+                 DownloadLineItemsRequest <$>
+                   (o .:? "filterType") <*> (o .:? "format") <*>
+                     (o .:? "filterIds" .!= mempty))
+
+instance ToJSON DownloadLineItemsRequest where
+        toJSON DownloadLineItemsRequest{..}
+          = object
+              (catMaybes
+                 [("filterType" .=) <$> _dlirFilterType,
+                  ("format" .=) <$> _dlirFormat,
+                  ("filterIds" .=) <$> _dlirFilterIds])
+
+-- | List queries response.
+--
+-- /See:/ 'listQueriesResponse' smart constructor.
+data ListQueriesResponse = ListQueriesResponse
+    { _lqrQueries :: !(Maybe [Maybe Query])
+    , _lqrKind    :: !Text
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListQueriesResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lqrQueries'
+--
+-- * 'lqrKind'
+listQueriesResponse
+    :: ListQueriesResponse
+listQueriesResponse =
+    ListQueriesResponse
+    { _lqrQueries = Nothing
+    , _lqrKind = "doubleclickbidmanager#listQueriesResponse"
+    }
+
+-- | Retrieved queries.
+lqrQueries :: Lens' ListQueriesResponse [Maybe Query]
+lqrQueries
+  = lens _lqrQueries (\ s a -> s{_lqrQueries = a}) .
+      _Default
+      . _Coerce
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"doubleclickbidmanager#listQueriesResponse\".
+lqrKind :: Lens' ListQueriesResponse Text
+lqrKind = lens _lqrKind (\ s a -> s{_lqrKind = a})
+
+instance FromJSON ListQueriesResponse where
+        parseJSON
+          = withObject "ListQueriesResponse"
+              (\ o ->
+                 ListQueriesResponse <$>
+                   (o .:? "queries" .!= mempty) <*>
+                     (o .:? "kind" .!=
+                        "doubleclickbidmanager#listQueriesResponse"))
+
+instance ToJSON ListQueriesResponse where
+        toJSON ListQueriesResponse{..}
+          = object
+              (catMaybes
+                 [("queries" .=) <$> _lqrQueries,
+                  Just ("kind" .= _lqrKind)])
+
+-- | Upload line items response.
+--
+-- /See:/ 'uploadLineItemsResponse' smart constructor.
+newtype UploadLineItemsResponse = UploadLineItemsResponse
+    { _ulirUploadStatus :: Maybe (Maybe UploadStatus)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UploadLineItemsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ulirUploadStatus'
+uploadLineItemsResponse
+    :: UploadLineItemsResponse
+uploadLineItemsResponse =
+    UploadLineItemsResponse
+    { _ulirUploadStatus = Nothing
+    }
+
+-- | Status of upload.
+ulirUploadStatus :: Lens' UploadLineItemsResponse (Maybe (Maybe UploadStatus))
+ulirUploadStatus
+  = lens _ulirUploadStatus
+      (\ s a -> s{_ulirUploadStatus = a})
+
+instance FromJSON UploadLineItemsResponse where
+        parseJSON
+          = withObject "UploadLineItemsResponse"
+              (\ o ->
+                 UploadLineItemsResponse <$> (o .:? "uploadStatus"))
+
+instance ToJSON UploadLineItemsResponse where
+        toJSON UploadLineItemsResponse{..}
+          = object
+              (catMaybes
+                 [("uploadStatus" .=) <$> _ulirUploadStatus])
 
 -- | Report metadata.
-rMetadata :: Lens' Report (Maybe (Maybe ReportMetadata))
-rMetadata
-  = lens _rMetadata (\ s a -> s{_rMetadata = a})
+--
+-- /See:/ 'reportMetadata' smart constructor.
+data ReportMetadata = ReportMetadata
+    { _rmStatus                 :: !(Maybe (Maybe ReportStatus))
+    , _rmReportDataEndTimeMs    :: !(Maybe Int64)
+    , _rmGoogleCloudStoragePath :: !(Maybe Text)
+    , _rmReportDataStartTimeMs  :: !(Maybe Int64)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
-instance FromJSON Report where
+-- | Creates a value of 'ReportMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rmStatus'
+--
+-- * 'rmReportDataEndTimeMs'
+--
+-- * 'rmGoogleCloudStoragePath'
+--
+-- * 'rmReportDataStartTimeMs'
+reportMetadata
+    :: ReportMetadata
+reportMetadata =
+    ReportMetadata
+    { _rmStatus = Nothing
+    , _rmReportDataEndTimeMs = Nothing
+    , _rmGoogleCloudStoragePath = Nothing
+    , _rmReportDataStartTimeMs = Nothing
+    }
+
+-- | Report status.
+rmStatus :: Lens' ReportMetadata (Maybe (Maybe ReportStatus))
+rmStatus = lens _rmStatus (\ s a -> s{_rmStatus = a})
+
+-- | The ending time for the data that is shown in the report.
+rmReportDataEndTimeMs :: Lens' ReportMetadata (Maybe Int64)
+rmReportDataEndTimeMs
+  = lens _rmReportDataEndTimeMs
+      (\ s a -> s{_rmReportDataEndTimeMs = a})
+
+-- | The path to the location in Google Cloud Storage where the report is
+-- stored.
+rmGoogleCloudStoragePath :: Lens' ReportMetadata (Maybe Text)
+rmGoogleCloudStoragePath
+  = lens _rmGoogleCloudStoragePath
+      (\ s a -> s{_rmGoogleCloudStoragePath = a})
+
+-- | The starting time for the data that is shown in the report.
+rmReportDataStartTimeMs :: Lens' ReportMetadata (Maybe Int64)
+rmReportDataStartTimeMs
+  = lens _rmReportDataStartTimeMs
+      (\ s a -> s{_rmReportDataStartTimeMs = a})
+
+instance FromJSON ReportMetadata where
         parseJSON
-          = withObject "Report"
+          = withObject "ReportMetadata"
               (\ o ->
-                 Report <$>
-                   (o .:? "params") <*> (o .:? "key") <*>
-                     (o .:? "metadata"))
+                 ReportMetadata <$>
+                   (o .:? "status") <*> (o .:? "reportDataEndTimeMs")
+                     <*> (o .:? "googleCloudStoragePath")
+                     <*> (o .:? "reportDataStartTimeMs"))
 
-instance ToJSON Report where
-        toJSON Report{..}
+instance ToJSON ReportMetadata where
+        toJSON ReportMetadata{..}
           = object
               (catMaybes
-                 [("params" .=) <$> _rParams, ("key" .=) <$> _rKey,
-                  ("metadata" .=) <$> _rMetadata])
+                 [("status" .=) <$> _rmStatus,
+                  ("reportDataEndTimeMs" .=) <$>
+                    _rmReportDataEndTimeMs,
+                  ("googleCloudStoragePath" .=) <$>
+                    _rmGoogleCloudStoragePath,
+                  ("reportDataStartTimeMs" .=) <$>
+                    _rmReportDataStartTimeMs])
 
 -- | An explanation of a report failure.
 --
@@ -842,468 +1307,3 @@ instance ToJSON ReportKey where
               (catMaybes
                  [("queryId" .=) <$> _rkQueryId,
                   ("reportId" .=) <$> _rkReportId])
-
--- | Report metadata.
---
--- /See:/ 'reportMetadata' smart constructor.
-data ReportMetadata = ReportMetadata
-    { _rmStatus                 :: !(Maybe (Maybe ReportStatus))
-    , _rmReportDataEndTimeMs    :: !(Maybe Int64)
-    , _rmGoogleCloudStoragePath :: !(Maybe Text)
-    , _rmReportDataStartTimeMs  :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ReportMetadata' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rmStatus'
---
--- * 'rmReportDataEndTimeMs'
---
--- * 'rmGoogleCloudStoragePath'
---
--- * 'rmReportDataStartTimeMs'
-reportMetadata
-    :: ReportMetadata
-reportMetadata =
-    ReportMetadata
-    { _rmStatus = Nothing
-    , _rmReportDataEndTimeMs = Nothing
-    , _rmGoogleCloudStoragePath = Nothing
-    , _rmReportDataStartTimeMs = Nothing
-    }
-
--- | Report status.
-rmStatus :: Lens' ReportMetadata (Maybe (Maybe ReportStatus))
-rmStatus = lens _rmStatus (\ s a -> s{_rmStatus = a})
-
--- | The ending time for the data that is shown in the report.
-rmReportDataEndTimeMs :: Lens' ReportMetadata (Maybe Int64)
-rmReportDataEndTimeMs
-  = lens _rmReportDataEndTimeMs
-      (\ s a -> s{_rmReportDataEndTimeMs = a})
-
--- | The path to the location in Google Cloud Storage where the report is
--- stored.
-rmGoogleCloudStoragePath :: Lens' ReportMetadata (Maybe Text)
-rmGoogleCloudStoragePath
-  = lens _rmGoogleCloudStoragePath
-      (\ s a -> s{_rmGoogleCloudStoragePath = a})
-
--- | The starting time for the data that is shown in the report.
-rmReportDataStartTimeMs :: Lens' ReportMetadata (Maybe Int64)
-rmReportDataStartTimeMs
-  = lens _rmReportDataStartTimeMs
-      (\ s a -> s{_rmReportDataStartTimeMs = a})
-
-instance FromJSON ReportMetadata where
-        parseJSON
-          = withObject "ReportMetadata"
-              (\ o ->
-                 ReportMetadata <$>
-                   (o .:? "status") <*> (o .:? "reportDataEndTimeMs")
-                     <*> (o .:? "googleCloudStoragePath")
-                     <*> (o .:? "reportDataStartTimeMs"))
-
-instance ToJSON ReportMetadata where
-        toJSON ReportMetadata{..}
-          = object
-              (catMaybes
-                 [("status" .=) <$> _rmStatus,
-                  ("reportDataEndTimeMs" .=) <$>
-                    _rmReportDataEndTimeMs,
-                  ("googleCloudStoragePath" .=) <$>
-                    _rmGoogleCloudStoragePath,
-                  ("reportDataStartTimeMs" .=) <$>
-                    _rmReportDataStartTimeMs])
-
--- | Report status.
---
--- /See:/ 'reportStatus' smart constructor.
-data ReportStatus = ReportStatus
-    { _rsState        :: !(Maybe ReportStatusState)
-    , _rsFinishTimeMs :: !(Maybe Int64)
-    , _rsFormat       :: !(Maybe ReportStatusFormat)
-    , _rsFailure      :: !(Maybe (Maybe ReportFailure))
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ReportStatus' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rsState'
---
--- * 'rsFinishTimeMs'
---
--- * 'rsFormat'
---
--- * 'rsFailure'
-reportStatus
-    :: ReportStatus
-reportStatus =
-    ReportStatus
-    { _rsState = Nothing
-    , _rsFinishTimeMs = Nothing
-    , _rsFormat = Nothing
-    , _rsFailure = Nothing
-    }
-
--- | The state of the report.
-rsState :: Lens' ReportStatus (Maybe ReportStatusState)
-rsState = lens _rsState (\ s a -> s{_rsState = a})
-
--- | The time when this report either completed successfully or failed.
-rsFinishTimeMs :: Lens' ReportStatus (Maybe Int64)
-rsFinishTimeMs
-  = lens _rsFinishTimeMs
-      (\ s a -> s{_rsFinishTimeMs = a})
-
--- | The file type of the report.
-rsFormat :: Lens' ReportStatus (Maybe ReportStatusFormat)
-rsFormat = lens _rsFormat (\ s a -> s{_rsFormat = a})
-
--- | If the report failed, this records the cause.
-rsFailure :: Lens' ReportStatus (Maybe (Maybe ReportFailure))
-rsFailure
-  = lens _rsFailure (\ s a -> s{_rsFailure = a})
-
-instance FromJSON ReportStatus where
-        parseJSON
-          = withObject "ReportStatus"
-              (\ o ->
-                 ReportStatus <$>
-                   (o .:? "state") <*> (o .:? "finishTimeMs") <*>
-                     (o .:? "format")
-                     <*> (o .:? "failure"))
-
-instance ToJSON ReportStatus where
-        toJSON ReportStatus{..}
-          = object
-              (catMaybes
-                 [("state" .=) <$> _rsState,
-                  ("finishTimeMs" .=) <$> _rsFinishTimeMs,
-                  ("format" .=) <$> _rsFormat,
-                  ("failure" .=) <$> _rsFailure])
-
--- | Represents the upload status of a row in the request.
---
--- /See:/ 'rowStatus' smart constructor.
-data RowStatus = RowStatus
-    { _rsEntityName :: !(Maybe Text)
-    , _rsChanged    :: !(Maybe Bool)
-    , _rsPersisted  :: !(Maybe Bool)
-    , _rsRowNumber  :: !(Maybe Int32)
-    , _rsErrors     :: !(Maybe [Text])
-    , _rsEntityId   :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'RowStatus' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rsEntityName'
---
--- * 'rsChanged'
---
--- * 'rsPersisted'
---
--- * 'rsRowNumber'
---
--- * 'rsErrors'
---
--- * 'rsEntityId'
-rowStatus
-    :: RowStatus
-rowStatus =
-    RowStatus
-    { _rsEntityName = Nothing
-    , _rsChanged = Nothing
-    , _rsPersisted = Nothing
-    , _rsRowNumber = Nothing
-    , _rsErrors = Nothing
-    , _rsEntityId = Nothing
-    }
-
--- | Entity name.
-rsEntityName :: Lens' RowStatus (Maybe Text)
-rsEntityName
-  = lens _rsEntityName (\ s a -> s{_rsEntityName = a})
-
--- | Whether the stored entity is changed as a result of upload.
-rsChanged :: Lens' RowStatus (Maybe Bool)
-rsChanged
-  = lens _rsChanged (\ s a -> s{_rsChanged = a})
-
--- | Whether the entity is persisted.
-rsPersisted :: Lens' RowStatus (Maybe Bool)
-rsPersisted
-  = lens _rsPersisted (\ s a -> s{_rsPersisted = a})
-
--- | Row number.
-rsRowNumber :: Lens' RowStatus (Maybe Int32)
-rsRowNumber
-  = lens _rsRowNumber (\ s a -> s{_rsRowNumber = a})
-
--- | Reasons why the entity can\'t be uploaded.
-rsErrors :: Lens' RowStatus [Text]
-rsErrors
-  = lens _rsErrors (\ s a -> s{_rsErrors = a}) .
-      _Default
-      . _Coerce
-
--- | Entity Id.
-rsEntityId :: Lens' RowStatus (Maybe Int64)
-rsEntityId
-  = lens _rsEntityId (\ s a -> s{_rsEntityId = a})
-
-instance FromJSON RowStatus where
-        parseJSON
-          = withObject "RowStatus"
-              (\ o ->
-                 RowStatus <$>
-                   (o .:? "entityName") <*> (o .:? "changed") <*>
-                     (o .:? "persisted")
-                     <*> (o .:? "rowNumber")
-                     <*> (o .:? "errors" .!= mempty)
-                     <*> (o .:? "entityId"))
-
-instance ToJSON RowStatus where
-        toJSON RowStatus{..}
-          = object
-              (catMaybes
-                 [("entityName" .=) <$> _rsEntityName,
-                  ("changed" .=) <$> _rsChanged,
-                  ("persisted" .=) <$> _rsPersisted,
-                  ("rowNumber" .=) <$> _rsRowNumber,
-                  ("errors" .=) <$> _rsErrors,
-                  ("entityId" .=) <$> _rsEntityId])
-
--- | Request to run a stored query to generate a report.
---
--- /See:/ 'runQueryRequest' smart constructor.
-data RunQueryRequest = RunQueryRequest
-    { _rqrReportDataEndTimeMs   :: !(Maybe Int64)
-    , _rqrDataRange             :: !(Maybe RunQueryRequestDataRange)
-    , _rqrReportDataStartTimeMs :: !(Maybe Int64)
-    , _rqrTimezoneCode          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'RunQueryRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rqrReportDataEndTimeMs'
---
--- * 'rqrDataRange'
---
--- * 'rqrReportDataStartTimeMs'
---
--- * 'rqrTimezoneCode'
-runQueryRequest
-    :: RunQueryRequest
-runQueryRequest =
-    RunQueryRequest
-    { _rqrReportDataEndTimeMs = Nothing
-    , _rqrDataRange = Nothing
-    , _rqrReportDataStartTimeMs = Nothing
-    , _rqrTimezoneCode = Nothing
-    }
-
--- | The ending time for the data that is shown in the report. Note,
--- reportDataEndTimeMs is required if dataRange is CUSTOM_DATES and ignored
--- otherwise.
-rqrReportDataEndTimeMs :: Lens' RunQueryRequest (Maybe Int64)
-rqrReportDataEndTimeMs
-  = lens _rqrReportDataEndTimeMs
-      (\ s a -> s{_rqrReportDataEndTimeMs = a})
-
--- | Report data range used to generate the report.
-rqrDataRange :: Lens' RunQueryRequest (Maybe RunQueryRequestDataRange)
-rqrDataRange
-  = lens _rqrDataRange (\ s a -> s{_rqrDataRange = a})
-
--- | The starting time for the data that is shown in the report. Note,
--- reportDataStartTimeMs is required if dataRange is CUSTOM_DATES and
--- ignored otherwise.
-rqrReportDataStartTimeMs :: Lens' RunQueryRequest (Maybe Int64)
-rqrReportDataStartTimeMs
-  = lens _rqrReportDataStartTimeMs
-      (\ s a -> s{_rqrReportDataStartTimeMs = a})
-
--- | Canonical timezone code for report data time. Defaults to
--- America\/New_York.
-rqrTimezoneCode :: Lens' RunQueryRequest (Maybe Text)
-rqrTimezoneCode
-  = lens _rqrTimezoneCode
-      (\ s a -> s{_rqrTimezoneCode = a})
-
-instance FromJSON RunQueryRequest where
-        parseJSON
-          = withObject "RunQueryRequest"
-              (\ o ->
-                 RunQueryRequest <$>
-                   (o .:? "reportDataEndTimeMs") <*> (o .:? "dataRange")
-                     <*> (o .:? "reportDataStartTimeMs")
-                     <*> (o .:? "timezoneCode"))
-
-instance ToJSON RunQueryRequest where
-        toJSON RunQueryRequest{..}
-          = object
-              (catMaybes
-                 [("reportDataEndTimeMs" .=) <$>
-                    _rqrReportDataEndTimeMs,
-                  ("dataRange" .=) <$> _rqrDataRange,
-                  ("reportDataStartTimeMs" .=) <$>
-                    _rqrReportDataStartTimeMs,
-                  ("timezoneCode" .=) <$> _rqrTimezoneCode])
-
--- | Request to upload line items.
---
--- /See:/ 'uploadLineItemsRequest' smart constructor.
-data UploadLineItemsRequest = UploadLineItemsRequest
-    { _ulirLineItems :: !(Maybe Text)
-    , _ulirFormat    :: !(Maybe UploadLineItemsRequestFormat)
-    , _ulirDryRun    :: !(Maybe Bool)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'UploadLineItemsRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ulirLineItems'
---
--- * 'ulirFormat'
---
--- * 'ulirDryRun'
-uploadLineItemsRequest
-    :: UploadLineItemsRequest
-uploadLineItemsRequest =
-    UploadLineItemsRequest
-    { _ulirLineItems = Nothing
-    , _ulirFormat = Nothing
-    , _ulirDryRun = Nothing
-    }
-
--- | Line items in CSV to upload. Refer to Entity Write File Format for more
--- information on file format.
-ulirLineItems :: Lens' UploadLineItemsRequest (Maybe Text)
-ulirLineItems
-  = lens _ulirLineItems
-      (\ s a -> s{_ulirLineItems = a})
-
--- | Format the line items are in. Default to CSV.
-ulirFormat :: Lens' UploadLineItemsRequest (Maybe UploadLineItemsRequestFormat)
-ulirFormat
-  = lens _ulirFormat (\ s a -> s{_ulirFormat = a})
-
--- | Set to true to get upload status without actually persisting the line
--- items.
-ulirDryRun :: Lens' UploadLineItemsRequest (Maybe Bool)
-ulirDryRun
-  = lens _ulirDryRun (\ s a -> s{_ulirDryRun = a})
-
-instance FromJSON UploadLineItemsRequest where
-        parseJSON
-          = withObject "UploadLineItemsRequest"
-              (\ o ->
-                 UploadLineItemsRequest <$>
-                   (o .:? "lineItems") <*> (o .:? "format") <*>
-                     (o .:? "dryRun"))
-
-instance ToJSON UploadLineItemsRequest where
-        toJSON UploadLineItemsRequest{..}
-          = object
-              (catMaybes
-                 [("lineItems" .=) <$> _ulirLineItems,
-                  ("format" .=) <$> _ulirFormat,
-                  ("dryRun" .=) <$> _ulirDryRun])
-
--- | Upload line items response.
---
--- /See:/ 'uploadLineItemsResponse' smart constructor.
-newtype UploadLineItemsResponse = UploadLineItemsResponse
-    { _ulirUploadStatus :: Maybe (Maybe UploadStatus)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'UploadLineItemsResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ulirUploadStatus'
-uploadLineItemsResponse
-    :: UploadLineItemsResponse
-uploadLineItemsResponse =
-    UploadLineItemsResponse
-    { _ulirUploadStatus = Nothing
-    }
-
--- | Status of upload.
-ulirUploadStatus :: Lens' UploadLineItemsResponse (Maybe (Maybe UploadStatus))
-ulirUploadStatus
-  = lens _ulirUploadStatus
-      (\ s a -> s{_ulirUploadStatus = a})
-
-instance FromJSON UploadLineItemsResponse where
-        parseJSON
-          = withObject "UploadLineItemsResponse"
-              (\ o ->
-                 UploadLineItemsResponse <$> (o .:? "uploadStatus"))
-
-instance ToJSON UploadLineItemsResponse where
-        toJSON UploadLineItemsResponse{..}
-          = object
-              (catMaybes
-                 [("uploadStatus" .=) <$> _ulirUploadStatus])
-
--- | Represents the status of upload.
---
--- /See:/ 'uploadStatus' smart constructor.
-data UploadStatus = UploadStatus
-    { _usRowStatus :: !(Maybe [Maybe RowStatus])
-    , _usErrors    :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'UploadStatus' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'usRowStatus'
---
--- * 'usErrors'
-uploadStatus
-    :: UploadStatus
-uploadStatus =
-    UploadStatus
-    { _usRowStatus = Nothing
-    , _usErrors = Nothing
-    }
-
--- | Per-row upload status.
-usRowStatus :: Lens' UploadStatus [Maybe RowStatus]
-usRowStatus
-  = lens _usRowStatus (\ s a -> s{_usRowStatus = a}) .
-      _Default
-      . _Coerce
-
--- | Reasons why upload can\'t be completed.
-usErrors :: Lens' UploadStatus [Text]
-usErrors
-  = lens _usErrors (\ s a -> s{_usErrors = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON UploadStatus where
-        parseJSON
-          = withObject "UploadStatus"
-              (\ o ->
-                 UploadStatus <$>
-                   (o .:? "rowStatus" .!= mempty) <*>
-                     (o .:? "errors" .!= mempty))
-
-instance ToJSON UploadStatus where
-        toJSON UploadStatus{..}
-          = object
-              (catMaybes
-                 [("rowStatus" .=) <$> _usRowStatus,
-                  ("errors" .=) <$> _usErrors])

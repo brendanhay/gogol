@@ -14,115 +14,18 @@
 --
 module Network.Google.Spectrum.Types
     (
+    -- * Service URL
+      spectrumURL
 
-    -- * AntennaCharacteristics
-      AntennaCharacteristics
-    , antennaCharacteristics
-    , acHeight
-    , acHeightType
-    , acHeightUncertainty
-
-    -- * DatabaseSpec
-    , DatabaseSpec
-    , databaseSpec
-    , dsUri
-    , dsName
-
-    -- * DbUpdateSpec
-    , DbUpdateSpec
-    , dbUpdateSpec
-    , dusDatabases
-
-    -- * DeviceCapabilities
-    , DeviceCapabilities
-    , deviceCapabilities
-    , dcFrequencyRanges
-
-    -- * DeviceDescriptor
-    , DeviceDescriptor
-    , deviceDescriptor
-    , ddEtsiEnDeviceEmissionsClass
-    , ddRulesetIds
-    , ddModelId
-    , ddEtsiEnDeviceType
-    , ddEtsiEnTechnologyId
-    , ddFccId
-    , ddManufacturerId
-    , ddFccTvbdDeviceType
-    , ddEtsiEnDeviceCategory
-    , ddSerialNumber
-
-    -- * DeviceOwner
-    , DeviceOwner
-    , deviceOwner
-    , doOperator
-    , doOwner
-
-    -- * DeviceValidity
-    , DeviceValidity
-    , deviceValidity
-    , dvIsValid
-    , dvReason
-    , dvDeviceDesc
-
-    -- * EventTime
-    , EventTime
-    , eventTime
-    , etStartTime
-    , etStopTime
-
-    -- * FrequencyRange
-    , FrequencyRange
-    , frequencyRange
-    , frStopHz
-    , frMaxPowerDBm
-    , frChannelId
-    , frStartHz
-
-    -- * GeoLocation
-    , GeoLocation
-    , geoLocation
-    , glConfidence
-    , glPoint
-    , glRegion
-
-    -- * GeoLocationEllipse
-    , GeoLocationEllipse
-    , geoLocationEllipse
-    , gleSemiMajorAxis
-    , gleCenter
-    , gleOrientation
-    , gleSemiMinorAxis
-
-    -- * GeoLocationPoint
-    , GeoLocationPoint
-    , geoLocationPoint
-    , glpLatitude
-    , glpLongitude
-
-    -- * GeoLocationPolygon
-    , GeoLocationPolygon
-    , geoLocationPolygon
-    , glpExterior
-
-    -- * GeoSpectrumSchedule
-    , GeoSpectrumSchedule
-    , geoSpectrumSchedule
-    , gssLocation
-    , gssSpectrumSchedules
-
-    -- * PawsGetSpectrumBatchRequest
-    , PawsGetSpectrumBatchRequest
-    , pawsGetSpectrumBatchRequest
-    , pgsbrgAntenna
-    , pgsbrgMasterDeviceDesc
-    , pgsbrgOwner
-    , pgsbrgRequestType
-    , pgsbrgVersion
-    , pgsbrgType
-    , pgsbrgLocations
-    , pgsbrgCapabilities
-    , pgsbrgDeviceDesc
+    -- * VcardAddress
+    , VcardAddress
+    , vcardAddress
+    , vaPobox
+    , vaCountry
+    , vaStreet
+    , vaLocality
+    , vaCode
+    , vaRegion
 
     -- * PawsGetSpectrumBatchResponse
     , PawsGetSpectrumBatchResponse
@@ -139,18 +42,87 @@ module Network.Google.Spectrum.Types
     , pgsbrDeviceDesc
     , pgsbrMaxTotalBwHz
 
-    -- * PawsGetSpectrumRequest
-    , PawsGetSpectrumRequest
-    , pawsGetSpectrumRequest
-    , pgsrgAntenna
-    , pgsrgMasterDeviceDesc
-    , pgsrgLocation
-    , pgsrgOwner
-    , pgsrgRequestType
-    , pgsrgVersion
-    , pgsrgType
-    , pgsrgCapabilities
-    , pgsrgDeviceDesc
+    -- * DbUpdateSpec
+    , DbUpdateSpec
+    , dbUpdateSpec
+    , dusDatabases
+
+    -- * Vcard
+    , Vcard
+    , vcard
+    , vEmail
+    , vAdr
+    , vOrg
+    , vTel
+    , vFn
+
+    -- * Alt
+    , Alt (..)
+
+    -- * PawsRegisterRequest
+    , PawsRegisterRequest
+    , pawsRegisterRequest
+    , prrAntenna
+    , prrLocation
+    , prrDeviceOwner
+    , prrVersion
+    , prrType
+    , prrDeviceDesc
+
+    -- * PawsNotifySpectrumUseResponse
+    , PawsNotifySpectrumUseResponse
+    , pawsNotifySpectrumUseResponse
+    , pnsurKind
+    , pnsurVersion
+    , pnsurType
+
+    -- * DatabaseSpec
+    , DatabaseSpec
+    , databaseSpec
+    , dsUri
+    , dsName
+
+    -- * GeoLocation
+    , GeoLocation
+    , geoLocation
+    , glConfidence
+    , glPoint
+    , glRegion
+
+    -- * SpectrumMessage
+    , SpectrumMessage
+    , spectrumMessage
+    , smBandwidth
+    , smFrequencyRanges
+
+    -- * DeviceDescriptor
+    , DeviceDescriptor
+    , deviceDescriptor
+    , ddEtsiEnDeviceEmissionsClass
+    , ddRulesetIds
+    , ddModelId
+    , ddEtsiEnDeviceType
+    , ddEtsiEnTechnologyId
+    , ddFccId
+    , ddManufacturerId
+    , ddFccTvbdDeviceType
+    , ddEtsiEnDeviceCategory
+    , ddSerialNumber
+
+    -- * FrequencyRange
+    , FrequencyRange
+    , frequencyRange
+    , frStopHz
+    , frMaxPowerDBm
+    , frChannelId
+    , frStartHz
+
+    -- * PawsVerifyDeviceRequest
+    , PawsVerifyDeviceRequest
+    , pawsVerifyDeviceRequest
+    , pvdrVersion
+    , pvdrDeviceDescs
+    , pvdrType
 
     -- * PawsGetSpectrumResponse
     , PawsGetSpectrumResponse
@@ -167,13 +139,27 @@ module Network.Google.Spectrum.Types
     , pgsrDeviceDesc
     , pgsrMaxTotalBwHz
 
-    -- * PawsInitRequest
-    , PawsInitRequest
-    , pawsInitRequest
-    , piriLocation
-    , piriVersion
-    , piriType
-    , piriDeviceDesc
+    -- * VcardTelephone
+    , VcardTelephone
+    , vcardTelephone
+    , vtUri
+
+    -- * SpectrumSchedule
+    , SpectrumSchedule
+    , spectrumSchedule
+    , ssSpectra
+    , ssEventTime
+
+    -- * GeoLocationPolygon
+    , GeoLocationPolygon
+    , geoLocationPolygon
+    , glpExterior
+
+    -- * GeoLocationPoint
+    , GeoLocationPoint
+    , geoLocationPoint
+    , glpLatitude
+    , glpLongitude
 
     -- * PawsInitResponse
     , PawsInitResponse
@@ -193,23 +179,6 @@ module Network.Google.Spectrum.Types
     , pType
     , pDeviceDesc
 
-    -- * PawsNotifySpectrumUseResponse
-    , PawsNotifySpectrumUseResponse
-    , pawsNotifySpectrumUseResponse
-    , pnsurKind
-    , pnsurVersion
-    , pnsurType
-
-    -- * PawsRegisterRequest
-    , PawsRegisterRequest
-    , pawsRegisterRequest
-    , prrAntenna
-    , prrLocation
-    , prrDeviceOwner
-    , prrVersion
-    , prrType
-    , prrDeviceDesc
-
     -- * PawsRegisterResponse
     , PawsRegisterResponse
     , pawsRegisterResponse
@@ -218,12 +187,65 @@ module Network.Google.Spectrum.Types
     , pawType
     , pawDatabaseChange
 
-    -- * PawsVerifyDeviceRequest
-    , PawsVerifyDeviceRequest
-    , pawsVerifyDeviceRequest
-    , pvdrVersion
-    , pvdrDeviceDescs
-    , pvdrType
+    -- * RulesetInfo
+    , RulesetInfo
+    , rulesetInfo
+    , riRulesetIds
+    , riMaxPollingSecs
+    , riMaxLocationChange
+    , riAuthority
+
+    -- * GeoLocationEllipse
+    , GeoLocationEllipse
+    , geoLocationEllipse
+    , gleSemiMajorAxis
+    , gleCenter
+    , gleOrientation
+    , gleSemiMinorAxis
+
+    -- * DeviceValidity
+    , DeviceValidity
+    , deviceValidity
+    , dvIsValid
+    , dvReason
+    , dvDeviceDesc
+
+    -- * PawsGetSpectrumBatchRequest
+    , PawsGetSpectrumBatchRequest
+    , pawsGetSpectrumBatchRequest
+    , pgsbrgAntenna
+    , pgsbrgMasterDeviceDesc
+    , pgsbrgOwner
+    , pgsbrgRequestType
+    , pgsbrgVersion
+    , pgsbrgType
+    , pgsbrgLocations
+    , pgsbrgCapabilities
+    , pgsbrgDeviceDesc
+
+    -- * GeoSpectrumSchedule
+    , GeoSpectrumSchedule
+    , geoSpectrumSchedule
+    , gssLocation
+    , gssSpectrumSchedules
+
+    -- * VcardTypedText
+    , VcardTypedText
+    , vcardTypedText
+    , vttText
+
+    -- * DeviceCapabilities
+    , DeviceCapabilities
+    , deviceCapabilities
+    , dcFrequencyRanges
+
+    -- * PawsInitRequest
+    , PawsInitRequest
+    , pawsInitRequest
+    , piriLocation
+    , piriVersion
+    , piriType
+    , piriDeviceDesc
 
     -- * PawsVerifyDeviceResponse
     , PawsVerifyDeviceResponse
@@ -234,56 +256,46 @@ module Network.Google.Spectrum.Types
     , pvdrvType
     , pvdrvDatabaseChange
 
-    -- * RulesetInfo
-    , RulesetInfo
-    , rulesetInfo
-    , riRulesetIds
-    , riMaxPollingSecs
-    , riMaxLocationChange
-    , riAuthority
+    -- * PawsGetSpectrumRequest
+    , PawsGetSpectrumRequest
+    , pawsGetSpectrumRequest
+    , pgsrgAntenna
+    , pgsrgMasterDeviceDesc
+    , pgsrgLocation
+    , pgsrgOwner
+    , pgsrgRequestType
+    , pgsrgVersion
+    , pgsrgType
+    , pgsrgCapabilities
+    , pgsrgDeviceDesc
 
-    -- * SpectrumMessage
-    , SpectrumMessage
-    , spectrumMessage
-    , smBandwidth
-    , smFrequencyRanges
+    -- * AntennaCharacteristics
+    , AntennaCharacteristics
+    , antennaCharacteristics
+    , acHeight
+    , acHeightType
+    , acHeightUncertainty
 
-    -- * SpectrumSchedule
-    , SpectrumSchedule
-    , spectrumSchedule
-    , ssSpectra
-    , ssEventTime
+    -- * DeviceOwner
+    , DeviceOwner
+    , deviceOwner
+    , doOperator
+    , doOwner
 
-    -- * Vcard
-    , Vcard
-    , vcard
-    , vEmail
-    , vAdr
-    , vOrg
-    , vTel
-    , vFn
-
-    -- * VcardAddress
-    , VcardAddress
-    , vcardAddress
-    , vaPobox
-    , vaCountry
-    , vaStreet
-    , vaLocality
-    , vaCode
-    , vaRegion
-
-    -- * VcardTelephone
-    , VcardTelephone
-    , vcardTelephone
-    , vtUri
-
-    -- * VcardTypedText
-    , VcardTypedText
-    , vcardTypedText
-    , vttText
+    -- * EventTime
+    , EventTime
+    , eventTime
+    , etStartTime
+    , etStopTime
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.Spectrum.Types.Product
 import           Network.Google.Spectrum.Types.Sum
+
+-- | URL referring to version 'v1explorer' of the Google Spectrum Database API.
+spectrumURL :: BaseUrl
+spectrumURL
+  = BaseUrl Https
+      "https://www.googleapis.com/spectrum/v1explorer/paws/"
+      443

@@ -14,21 +14,8 @@
 --
 module Network.Google.Apps.Licensing.Types
     (
-
-    -- * LicenseAssignment
-      LicenseAssignment
-    , licenseAssignment
-    , laEtags
-    , laKind
-    , laSkuId
-    , laUserId
-    , laSelfLink
-    , laProductId
-
-    -- * LicenseAssignmentInsert
-    , LicenseAssignmentInsert
-    , licenseAssignmentInsert
-    , laiUserId
+    -- * Service URL
+      appsLicensingURL
 
     -- * LicenseAssignmentList
     , LicenseAssignmentList
@@ -37,8 +24,33 @@ module Network.Google.Apps.Licensing.Types
     , lalNextPageToken
     , lalKind
     , lalItems
+
+    -- * Alt
+    , Alt (..)
+
+    -- * LicenseAssignmentInsert
+    , LicenseAssignmentInsert
+    , licenseAssignmentInsert
+    , laiUserId
+
+    -- * LicenseAssignment
+    , LicenseAssignment
+    , licenseAssignment
+    , laEtags
+    , laKind
+    , laSkuId
+    , laUserId
+    , laSelfLink
+    , laProductId
     ) where
 
 import           Network.Google.Apps.Licensing.Types.Product
 import           Network.Google.Apps.Licensing.Types.Sum
 import           Network.Google.Prelude
+
+-- | URL referring to version 'v1' of the Enterprise License Manager API.
+appsLicensingURL :: BaseUrl
+appsLicensingURL
+  = BaseUrl Https
+      "https://www.googleapis.com/apps/licensing/v1/product/"
+      443

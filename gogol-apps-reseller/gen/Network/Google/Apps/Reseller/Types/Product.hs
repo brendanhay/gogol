@@ -18,216 +18,6 @@ module Network.Google.Apps.Reseller.Types.Product where
 import           Network.Google.Apps.Reseller.Types.Sum
 import           Network.Google.Prelude
 
--- | JSON template for address of a customer.
---
--- /See:/ 'address' smart constructor.
-data Address = Address
-    { _aOrganizationName :: !(Maybe Text)
-    , _aKind             :: !Text
-    , _aPostalCode       :: !(Maybe Text)
-    , _aAddressLine1     :: !(Maybe Text)
-    , _aLocality         :: !(Maybe Text)
-    , _aContactName      :: !(Maybe Text)
-    , _aAddressLine2     :: !(Maybe Text)
-    , _aCountryCode      :: !(Maybe Text)
-    , _aRegion           :: !(Maybe Text)
-    , _aAddressLine3     :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Address' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aOrganizationName'
---
--- * 'aKind'
---
--- * 'aPostalCode'
---
--- * 'aAddressLine1'
---
--- * 'aLocality'
---
--- * 'aContactName'
---
--- * 'aAddressLine2'
---
--- * 'aCountryCode'
---
--- * 'aRegion'
---
--- * 'aAddressLine3'
-address
-    :: Address
-address =
-    Address
-    { _aOrganizationName = Nothing
-    , _aKind = "customers#address"
-    , _aPostalCode = Nothing
-    , _aAddressLine1 = Nothing
-    , _aLocality = Nothing
-    , _aContactName = Nothing
-    , _aAddressLine2 = Nothing
-    , _aCountryCode = Nothing
-    , _aRegion = Nothing
-    , _aAddressLine3 = Nothing
-    }
-
--- | Name of the organization.
-aOrganizationName :: Lens' Address (Maybe Text)
-aOrganizationName
-  = lens _aOrganizationName
-      (\ s a -> s{_aOrganizationName = a})
-
--- | Identifies the resource as a customer address.
-aKind :: Lens' Address Text
-aKind = lens _aKind (\ s a -> s{_aKind = a})
-
--- | The postal code. This is in accordance with -
--- http:\/\/portablecontacts.net\/draft-spec.html#address_element.
-aPostalCode :: Lens' Address (Maybe Text)
-aPostalCode
-  = lens _aPostalCode (\ s a -> s{_aPostalCode = a})
-
--- | Address line 1 of the address.
-aAddressLine1 :: Lens' Address (Maybe Text)
-aAddressLine1
-  = lens _aAddressLine1
-      (\ s a -> s{_aAddressLine1 = a})
-
--- | Name of the locality. This is in accordance with -
--- http:\/\/portablecontacts.net\/draft-spec.html#address_element.
-aLocality :: Lens' Address (Maybe Text)
-aLocality
-  = lens _aLocality (\ s a -> s{_aLocality = a})
-
--- | Name of the contact person.
-aContactName :: Lens' Address (Maybe Text)
-aContactName
-  = lens _aContactName (\ s a -> s{_aContactName = a})
-
--- | Address line 2 of the address.
-aAddressLine2 :: Lens' Address (Maybe Text)
-aAddressLine2
-  = lens _aAddressLine2
-      (\ s a -> s{_aAddressLine2 = a})
-
--- | ISO 3166 country code.
-aCountryCode :: Lens' Address (Maybe Text)
-aCountryCode
-  = lens _aCountryCode (\ s a -> s{_aCountryCode = a})
-
--- | Name of the region. This is in accordance with -
--- http:\/\/portablecontacts.net\/draft-spec.html#address_element.
-aRegion :: Lens' Address (Maybe Text)
-aRegion = lens _aRegion (\ s a -> s{_aRegion = a})
-
--- | Address line 3 of the address.
-aAddressLine3 :: Lens' Address (Maybe Text)
-aAddressLine3
-  = lens _aAddressLine3
-      (\ s a -> s{_aAddressLine3 = a})
-
-instance FromJSON Address where
-        parseJSON
-          = withObject "Address"
-              (\ o ->
-                 Address <$>
-                   (o .:? "organizationName") <*>
-                     (o .:? "kind" .!= "customers#address")
-                     <*> (o .:? "postalCode")
-                     <*> (o .:? "addressLine1")
-                     <*> (o .:? "locality")
-                     <*> (o .:? "contactName")
-                     <*> (o .:? "addressLine2")
-                     <*> (o .:? "countryCode")
-                     <*> (o .:? "region")
-                     <*> (o .:? "addressLine3"))
-
-instance ToJSON Address where
-        toJSON Address{..}
-          = object
-              (catMaybes
-                 [("organizationName" .=) <$> _aOrganizationName,
-                  Just ("kind" .= _aKind),
-                  ("postalCode" .=) <$> _aPostalCode,
-                  ("addressLine1" .=) <$> _aAddressLine1,
-                  ("locality" .=) <$> _aLocality,
-                  ("contactName" .=) <$> _aContactName,
-                  ("addressLine2" .=) <$> _aAddressLine2,
-                  ("countryCode" .=) <$> _aCountryCode,
-                  ("region" .=) <$> _aRegion,
-                  ("addressLine3" .=) <$> _aAddressLine3])
-
--- | JSON template for the ChangePlan rpc request.
---
--- /See:/ 'changePlanRequest' smart constructor.
-data ChangePlanRequest = ChangePlanRequest
-    { _cprKind            :: !Text
-    , _cprPlanName        :: !(Maybe Text)
-    , _cprPurchaseOrderId :: !(Maybe Text)
-    , _cprSeats           :: !(Maybe (Maybe Seats))
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ChangePlanRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'cprKind'
---
--- * 'cprPlanName'
---
--- * 'cprPurchaseOrderId'
---
--- * 'cprSeats'
-changePlanRequest
-    :: ChangePlanRequest
-changePlanRequest =
-    ChangePlanRequest
-    { _cprKind = "subscriptions#changePlanRequest"
-    , _cprPlanName = Nothing
-    , _cprPurchaseOrderId = Nothing
-    , _cprSeats = Nothing
-    }
-
--- | Identifies the resource as a subscription change plan request.
-cprKind :: Lens' ChangePlanRequest Text
-cprKind = lens _cprKind (\ s a -> s{_cprKind = a})
-
--- | Name of the plan to change to.
-cprPlanName :: Lens' ChangePlanRequest (Maybe Text)
-cprPlanName
-  = lens _cprPlanName (\ s a -> s{_cprPlanName = a})
-
--- | Purchase order id for your order tracking purposes.
-cprPurchaseOrderId :: Lens' ChangePlanRequest (Maybe Text)
-cprPurchaseOrderId
-  = lens _cprPurchaseOrderId
-      (\ s a -> s{_cprPurchaseOrderId = a})
-
--- | Number\/Limit of seats in the new plan.
-cprSeats :: Lens' ChangePlanRequest (Maybe (Maybe Seats))
-cprSeats = lens _cprSeats (\ s a -> s{_cprSeats = a})
-
-instance FromJSON ChangePlanRequest where
-        parseJSON
-          = withObject "ChangePlanRequest"
-              (\ o ->
-                 ChangePlanRequest <$>
-                   (o .:? "kind" .!= "subscriptions#changePlanRequest")
-                     <*> (o .:? "planName")
-                     <*> (o .:? "purchaseOrderId")
-                     <*> (o .:? "seats"))
-
-instance ToJSON ChangePlanRequest where
-        toJSON ChangePlanRequest{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _cprKind),
-                  ("planName" .=) <$> _cprPlanName,
-                  ("purchaseOrderId" .=) <$> _cprPurchaseOrderId,
-                  ("seats" .=) <$> _cprSeats])
-
 -- | JSON template for a customer.
 --
 -- /See:/ 'customer' smart constructor.
@@ -334,53 +124,172 @@ instance ToJSON Customer where
                   ("phoneNumber" .=) <$> _cPhoneNumber,
                   ("postalAddress" .=) <$> _cPostalAddress])
 
--- | JSON template for a subscription renewal settings.
+-- | JSON template for the ChangePlan rpc request.
 --
--- /See:/ 'renewalSettings' smart constructor.
-data RenewalSettings = RenewalSettings
-    { _rsKind        :: !Text
-    , _rsRenewalType :: !(Maybe Text)
+-- /See:/ 'changePlanRequest' smart constructor.
+data ChangePlanRequest = ChangePlanRequest
+    { _cprKind            :: !Text
+    , _cprPlanName        :: !(Maybe Text)
+    , _cprPurchaseOrderId :: !(Maybe Text)
+    , _cprSeats           :: !(Maybe (Maybe Seats))
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RenewalSettings' with the minimum fields required to make a request.
+-- | Creates a value of 'ChangePlanRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rsKind'
+-- * 'cprKind'
 --
--- * 'rsRenewalType'
-renewalSettings
-    :: RenewalSettings
-renewalSettings =
-    RenewalSettings
-    { _rsKind = "subscriptions#renewalSettings"
-    , _rsRenewalType = Nothing
+-- * 'cprPlanName'
+--
+-- * 'cprPurchaseOrderId'
+--
+-- * 'cprSeats'
+changePlanRequest
+    :: ChangePlanRequest
+changePlanRequest =
+    ChangePlanRequest
+    { _cprKind = "subscriptions#changePlanRequest"
+    , _cprPlanName = Nothing
+    , _cprPurchaseOrderId = Nothing
+    , _cprSeats = Nothing
     }
 
--- | Identifies the resource as a subscription renewal setting.
-rsKind :: Lens' RenewalSettings Text
-rsKind = lens _rsKind (\ s a -> s{_rsKind = a})
+-- | Identifies the resource as a subscription change plan request.
+cprKind :: Lens' ChangePlanRequest Text
+cprKind = lens _cprKind (\ s a -> s{_cprKind = a})
 
--- | Subscription renewal type.
-rsRenewalType :: Lens' RenewalSettings (Maybe Text)
-rsRenewalType
-  = lens _rsRenewalType
-      (\ s a -> s{_rsRenewalType = a})
+-- | Name of the plan to change to.
+cprPlanName :: Lens' ChangePlanRequest (Maybe Text)
+cprPlanName
+  = lens _cprPlanName (\ s a -> s{_cprPlanName = a})
 
-instance FromJSON RenewalSettings where
+-- | Purchase order id for your order tracking purposes.
+cprPurchaseOrderId :: Lens' ChangePlanRequest (Maybe Text)
+cprPurchaseOrderId
+  = lens _cprPurchaseOrderId
+      (\ s a -> s{_cprPurchaseOrderId = a})
+
+-- | Number\/Limit of seats in the new plan.
+cprSeats :: Lens' ChangePlanRequest (Maybe (Maybe Seats))
+cprSeats = lens _cprSeats (\ s a -> s{_cprSeats = a})
+
+instance FromJSON ChangePlanRequest where
         parseJSON
-          = withObject "RenewalSettings"
+          = withObject "ChangePlanRequest"
               (\ o ->
-                 RenewalSettings <$>
-                   (o .:? "kind" .!= "subscriptions#renewalSettings")
-                     <*> (o .:? "renewalType"))
+                 ChangePlanRequest <$>
+                   (o .:? "kind" .!= "subscriptions#changePlanRequest")
+                     <*> (o .:? "planName")
+                     <*> (o .:? "purchaseOrderId")
+                     <*> (o .:? "seats"))
 
-instance ToJSON RenewalSettings where
-        toJSON RenewalSettings{..}
+instance ToJSON ChangePlanRequest where
+        toJSON ChangePlanRequest{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _rsKind),
-                  ("renewalType" .=) <$> _rsRenewalType])
+                 [Just ("kind" .= _cprKind),
+                  ("planName" .=) <$> _cprPlanName,
+                  ("purchaseOrderId" .=) <$> _cprPurchaseOrderId,
+                  ("seats" .=) <$> _cprSeats])
+
+-- | Interval of the commitment if it is a commitment plan.
+--
+-- /See:/ 'subscriptionCommitmentIntervalPlan' smart constructor.
+data SubscriptionCommitmentIntervalPlan = SubscriptionCommitmentIntervalPlan
+    { _scipStartTime :: !(Maybe Int64)
+    , _scipEndTime   :: !(Maybe Int64)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SubscriptionCommitmentIntervalPlan' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'scipStartTime'
+--
+-- * 'scipEndTime'
+subscriptionCommitmentIntervalPlan
+    :: SubscriptionCommitmentIntervalPlan
+subscriptionCommitmentIntervalPlan =
+    SubscriptionCommitmentIntervalPlan
+    { _scipStartTime = Nothing
+    , _scipEndTime = Nothing
+    }
+
+-- | Start time of the commitment interval in milliseconds since Unix epoch.
+scipStartTime :: Lens' SubscriptionCommitmentIntervalPlan (Maybe Int64)
+scipStartTime
+  = lens _scipStartTime
+      (\ s a -> s{_scipStartTime = a})
+
+-- | End time of the commitment interval in milliseconds since Unix epoch.
+scipEndTime :: Lens' SubscriptionCommitmentIntervalPlan (Maybe Int64)
+scipEndTime
+  = lens _scipEndTime (\ s a -> s{_scipEndTime = a})
+
+instance FromJSON SubscriptionCommitmentIntervalPlan
+         where
+        parseJSON
+          = withObject "SubscriptionCommitmentIntervalPlan"
+              (\ o ->
+                 SubscriptionCommitmentIntervalPlan <$>
+                   (o .:? "startTime") <*> (o .:? "endTime"))
+
+instance ToJSON SubscriptionCommitmentIntervalPlan
+         where
+        toJSON SubscriptionCommitmentIntervalPlan{..}
+          = object
+              (catMaybes
+                 [("startTime" .=) <$> _scipStartTime,
+                  ("endTime" .=) <$> _scipEndTime])
+
+-- | Trial Settings of the subscription.
+--
+-- /See:/ 'subscriptionTrialSettings' smart constructor.
+data SubscriptionTrialSettings = SubscriptionTrialSettings
+    { _stsIsInTrial    :: !(Maybe Bool)
+    , _stsTrialEndTime :: !(Maybe Int64)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SubscriptionTrialSettings' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'stsIsInTrial'
+--
+-- * 'stsTrialEndTime'
+subscriptionTrialSettings
+    :: SubscriptionTrialSettings
+subscriptionTrialSettings =
+    SubscriptionTrialSettings
+    { _stsIsInTrial = Nothing
+    , _stsTrialEndTime = Nothing
+    }
+
+-- | Whether the subscription is in trial.
+stsIsInTrial :: Lens' SubscriptionTrialSettings (Maybe Bool)
+stsIsInTrial
+  = lens _stsIsInTrial (\ s a -> s{_stsIsInTrial = a})
+
+-- | End time of the trial in milliseconds since Unix epoch.
+stsTrialEndTime :: Lens' SubscriptionTrialSettings (Maybe Int64)
+stsTrialEndTime
+  = lens _stsTrialEndTime
+      (\ s a -> s{_stsTrialEndTime = a})
+
+instance FromJSON SubscriptionTrialSettings where
+        parseJSON
+          = withObject "SubscriptionTrialSettings"
+              (\ o ->
+                 SubscriptionTrialSettings <$>
+                   (o .:? "isInTrial") <*> (o .:? "trialEndTime"))
+
+instance ToJSON SubscriptionTrialSettings where
+        toJSON SubscriptionTrialSettings{..}
+          = object
+              (catMaybes
+                 [("isInTrial" .=) <$> _stsIsInTrial,
+                  ("trialEndTime" .=) <$> _stsTrialEndTime])
 
 -- | JSON template for subscription seats.
 --
@@ -460,6 +369,69 @@ instance ToJSON Seats where
                   ("licensedNumberOfSeats" .=) <$>
                     _sLicensedNumberOfSeats,
                   Just ("kind" .= _sKind)])
+
+-- | JSON template for a subscription list.
+--
+-- /See:/ 'subscriptions' smart constructor.
+data Subscriptions = Subscriptions
+    { _subNextPageToken :: !(Maybe Text)
+    , _subKind          :: !Text
+    , _subSubscriptions :: !(Maybe [Maybe Subscription])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Subscriptions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'subNextPageToken'
+--
+-- * 'subKind'
+--
+-- * 'subSubscriptions'
+subscriptions
+    :: Subscriptions
+subscriptions =
+    Subscriptions
+    { _subNextPageToken = Nothing
+    , _subKind = "reseller#subscriptions"
+    , _subSubscriptions = Nothing
+    }
+
+-- | The continuation token, used to page through large result sets. Provide
+-- this value in a subsequent request to return the next page of results.
+subNextPageToken :: Lens' Subscriptions (Maybe Text)
+subNextPageToken
+  = lens _subNextPageToken
+      (\ s a -> s{_subNextPageToken = a})
+
+-- | Identifies the resource as a collection of subscriptions.
+subKind :: Lens' Subscriptions Text
+subKind = lens _subKind (\ s a -> s{_subKind = a})
+
+-- | The subscriptions in this page of results.
+subSubscriptions :: Lens' Subscriptions [Maybe Subscription]
+subSubscriptions
+  = lens _subSubscriptions
+      (\ s a -> s{_subSubscriptions = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON Subscriptions where
+        parseJSON
+          = withObject "Subscriptions"
+              (\ o ->
+                 Subscriptions <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "reseller#subscriptions")
+                     <*> (o .:? "subscriptions" .!= mempty))
+
+instance ToJSON Subscriptions where
+        toJSON Subscriptions{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _subNextPageToken,
+                  Just ("kind" .= _subKind),
+                  ("subscriptions" .=) <$> _subSubscriptions])
 
 -- | JSON template for a subscription.
 --
@@ -656,56 +628,6 @@ instance ToJSON Subscription where
                   ("renewalSettings" .=) <$> _ssRenewalSettings,
                   ("subscriptionId" .=) <$> _ssSubscriptionId])
 
--- | Interval of the commitment if it is a commitment plan.
---
--- /See:/ 'subscriptionCommitmentIntervalPlan' smart constructor.
-data SubscriptionCommitmentIntervalPlan = SubscriptionCommitmentIntervalPlan
-    { _scipStartTime :: !(Maybe Int64)
-    , _scipEndTime   :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'SubscriptionCommitmentIntervalPlan' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'scipStartTime'
---
--- * 'scipEndTime'
-subscriptionCommitmentIntervalPlan
-    :: SubscriptionCommitmentIntervalPlan
-subscriptionCommitmentIntervalPlan =
-    SubscriptionCommitmentIntervalPlan
-    { _scipStartTime = Nothing
-    , _scipEndTime = Nothing
-    }
-
--- | Start time of the commitment interval in milliseconds since Unix epoch.
-scipStartTime :: Lens' SubscriptionCommitmentIntervalPlan (Maybe Int64)
-scipStartTime
-  = lens _scipStartTime
-      (\ s a -> s{_scipStartTime = a})
-
--- | End time of the commitment interval in milliseconds since Unix epoch.
-scipEndTime :: Lens' SubscriptionCommitmentIntervalPlan (Maybe Int64)
-scipEndTime
-  = lens _scipEndTime (\ s a -> s{_scipEndTime = a})
-
-instance FromJSON SubscriptionCommitmentIntervalPlan
-         where
-        parseJSON
-          = withObject "SubscriptionCommitmentIntervalPlan"
-              (\ o ->
-                 SubscriptionCommitmentIntervalPlan <$>
-                   (o .:? "startTime") <*> (o .:? "endTime"))
-
-instance ToJSON SubscriptionCommitmentIntervalPlan
-         where
-        toJSON SubscriptionCommitmentIntervalPlan{..}
-          = object
-              (catMaybes
-                 [("startTime" .=) <$> _scipStartTime,
-                  ("endTime" .=) <$> _scipEndTime])
-
 -- | Plan details of the subscription
 --
 -- /See:/ 'subscriptionPlan' smart constructor.
@@ -767,6 +689,195 @@ instance ToJSON SubscriptionPlan where
                   ("isCommitmentPlan" .=) <$> _spIsCommitmentPlan,
                   ("planName" .=) <$> _spPlanName])
 
+-- | JSON template for a subscription renewal settings.
+--
+-- /See:/ 'renewalSettings' smart constructor.
+data RenewalSettings = RenewalSettings
+    { _rsKind        :: !Text
+    , _rsRenewalType :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RenewalSettings' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rsKind'
+--
+-- * 'rsRenewalType'
+renewalSettings
+    :: RenewalSettings
+renewalSettings =
+    RenewalSettings
+    { _rsKind = "subscriptions#renewalSettings"
+    , _rsRenewalType = Nothing
+    }
+
+-- | Identifies the resource as a subscription renewal setting.
+rsKind :: Lens' RenewalSettings Text
+rsKind = lens _rsKind (\ s a -> s{_rsKind = a})
+
+-- | Subscription renewal type.
+rsRenewalType :: Lens' RenewalSettings (Maybe Text)
+rsRenewalType
+  = lens _rsRenewalType
+      (\ s a -> s{_rsRenewalType = a})
+
+instance FromJSON RenewalSettings where
+        parseJSON
+          = withObject "RenewalSettings"
+              (\ o ->
+                 RenewalSettings <$>
+                   (o .:? "kind" .!= "subscriptions#renewalSettings")
+                     <*> (o .:? "renewalType"))
+
+instance ToJSON RenewalSettings where
+        toJSON RenewalSettings{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _rsKind),
+                  ("renewalType" .=) <$> _rsRenewalType])
+
+-- | JSON template for address of a customer.
+--
+-- /See:/ 'address' smart constructor.
+data Address = Address
+    { _aOrganizationName :: !(Maybe Text)
+    , _aKind             :: !Text
+    , _aPostalCode       :: !(Maybe Text)
+    , _aAddressLine1     :: !(Maybe Text)
+    , _aLocality         :: !(Maybe Text)
+    , _aContactName      :: !(Maybe Text)
+    , _aAddressLine2     :: !(Maybe Text)
+    , _aCountryCode      :: !(Maybe Text)
+    , _aRegion           :: !(Maybe Text)
+    , _aAddressLine3     :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Address' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aOrganizationName'
+--
+-- * 'aKind'
+--
+-- * 'aPostalCode'
+--
+-- * 'aAddressLine1'
+--
+-- * 'aLocality'
+--
+-- * 'aContactName'
+--
+-- * 'aAddressLine2'
+--
+-- * 'aCountryCode'
+--
+-- * 'aRegion'
+--
+-- * 'aAddressLine3'
+address
+    :: Address
+address =
+    Address
+    { _aOrganizationName = Nothing
+    , _aKind = "customers#address"
+    , _aPostalCode = Nothing
+    , _aAddressLine1 = Nothing
+    , _aLocality = Nothing
+    , _aContactName = Nothing
+    , _aAddressLine2 = Nothing
+    , _aCountryCode = Nothing
+    , _aRegion = Nothing
+    , _aAddressLine3 = Nothing
+    }
+
+-- | Name of the organization.
+aOrganizationName :: Lens' Address (Maybe Text)
+aOrganizationName
+  = lens _aOrganizationName
+      (\ s a -> s{_aOrganizationName = a})
+
+-- | Identifies the resource as a customer address.
+aKind :: Lens' Address Text
+aKind = lens _aKind (\ s a -> s{_aKind = a})
+
+-- | The postal code. This is in accordance with -
+-- http:\/\/portablecontacts.net\/draft-spec.html#address_element.
+aPostalCode :: Lens' Address (Maybe Text)
+aPostalCode
+  = lens _aPostalCode (\ s a -> s{_aPostalCode = a})
+
+-- | Address line 1 of the address.
+aAddressLine1 :: Lens' Address (Maybe Text)
+aAddressLine1
+  = lens _aAddressLine1
+      (\ s a -> s{_aAddressLine1 = a})
+
+-- | Name of the locality. This is in accordance with -
+-- http:\/\/portablecontacts.net\/draft-spec.html#address_element.
+aLocality :: Lens' Address (Maybe Text)
+aLocality
+  = lens _aLocality (\ s a -> s{_aLocality = a})
+
+-- | Name of the contact person.
+aContactName :: Lens' Address (Maybe Text)
+aContactName
+  = lens _aContactName (\ s a -> s{_aContactName = a})
+
+-- | Address line 2 of the address.
+aAddressLine2 :: Lens' Address (Maybe Text)
+aAddressLine2
+  = lens _aAddressLine2
+      (\ s a -> s{_aAddressLine2 = a})
+
+-- | ISO 3166 country code.
+aCountryCode :: Lens' Address (Maybe Text)
+aCountryCode
+  = lens _aCountryCode (\ s a -> s{_aCountryCode = a})
+
+-- | Name of the region. This is in accordance with -
+-- http:\/\/portablecontacts.net\/draft-spec.html#address_element.
+aRegion :: Lens' Address (Maybe Text)
+aRegion = lens _aRegion (\ s a -> s{_aRegion = a})
+
+-- | Address line 3 of the address.
+aAddressLine3 :: Lens' Address (Maybe Text)
+aAddressLine3
+  = lens _aAddressLine3
+      (\ s a -> s{_aAddressLine3 = a})
+
+instance FromJSON Address where
+        parseJSON
+          = withObject "Address"
+              (\ o ->
+                 Address <$>
+                   (o .:? "organizationName") <*>
+                     (o .:? "kind" .!= "customers#address")
+                     <*> (o .:? "postalCode")
+                     <*> (o .:? "addressLine1")
+                     <*> (o .:? "locality")
+                     <*> (o .:? "contactName")
+                     <*> (o .:? "addressLine2")
+                     <*> (o .:? "countryCode")
+                     <*> (o .:? "region")
+                     <*> (o .:? "addressLine3"))
+
+instance ToJSON Address where
+        toJSON Address{..}
+          = object
+              (catMaybes
+                 [("organizationName" .=) <$> _aOrganizationName,
+                  Just ("kind" .= _aKind),
+                  ("postalCode" .=) <$> _aPostalCode,
+                  ("addressLine1" .=) <$> _aAddressLine1,
+                  ("locality" .=) <$> _aLocality,
+                  ("contactName" .=) <$> _aContactName,
+                  ("addressLine2" .=) <$> _aAddressLine2,
+                  ("countryCode" .=) <$> _aCountryCode,
+                  ("region" .=) <$> _aRegion,
+                  ("addressLine3" .=) <$> _aAddressLine3])
+
 -- | Transfer related information for the subscription.
 --
 -- /See:/ 'subscriptionTransferInfo' smart constructor.
@@ -817,114 +928,3 @@ instance ToJSON SubscriptionTransferInfo where
                     _stiTransferabilityExpirationTime,
                   ("minimumTransferableSeats" .=) <$>
                     _stiMinimumTransferableSeats])
-
--- | Trial Settings of the subscription.
---
--- /See:/ 'subscriptionTrialSettings' smart constructor.
-data SubscriptionTrialSettings = SubscriptionTrialSettings
-    { _stsIsInTrial    :: !(Maybe Bool)
-    , _stsTrialEndTime :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'SubscriptionTrialSettings' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'stsIsInTrial'
---
--- * 'stsTrialEndTime'
-subscriptionTrialSettings
-    :: SubscriptionTrialSettings
-subscriptionTrialSettings =
-    SubscriptionTrialSettings
-    { _stsIsInTrial = Nothing
-    , _stsTrialEndTime = Nothing
-    }
-
--- | Whether the subscription is in trial.
-stsIsInTrial :: Lens' SubscriptionTrialSettings (Maybe Bool)
-stsIsInTrial
-  = lens _stsIsInTrial (\ s a -> s{_stsIsInTrial = a})
-
--- | End time of the trial in milliseconds since Unix epoch.
-stsTrialEndTime :: Lens' SubscriptionTrialSettings (Maybe Int64)
-stsTrialEndTime
-  = lens _stsTrialEndTime
-      (\ s a -> s{_stsTrialEndTime = a})
-
-instance FromJSON SubscriptionTrialSettings where
-        parseJSON
-          = withObject "SubscriptionTrialSettings"
-              (\ o ->
-                 SubscriptionTrialSettings <$>
-                   (o .:? "isInTrial") <*> (o .:? "trialEndTime"))
-
-instance ToJSON SubscriptionTrialSettings where
-        toJSON SubscriptionTrialSettings{..}
-          = object
-              (catMaybes
-                 [("isInTrial" .=) <$> _stsIsInTrial,
-                  ("trialEndTime" .=) <$> _stsTrialEndTime])
-
--- | JSON template for a subscription list.
---
--- /See:/ 'subscriptions' smart constructor.
-data Subscriptions = Subscriptions
-    { _subNextPageToken :: !(Maybe Text)
-    , _subKind          :: !Text
-    , _subSubscriptions :: !(Maybe [Maybe Subscription])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Subscriptions' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'subNextPageToken'
---
--- * 'subKind'
---
--- * 'subSubscriptions'
-subscriptions
-    :: Subscriptions
-subscriptions =
-    Subscriptions
-    { _subNextPageToken = Nothing
-    , _subKind = "reseller#subscriptions"
-    , _subSubscriptions = Nothing
-    }
-
--- | The continuation token, used to page through large result sets. Provide
--- this value in a subsequent request to return the next page of results.
-subNextPageToken :: Lens' Subscriptions (Maybe Text)
-subNextPageToken
-  = lens _subNextPageToken
-      (\ s a -> s{_subNextPageToken = a})
-
--- | Identifies the resource as a collection of subscriptions.
-subKind :: Lens' Subscriptions Text
-subKind = lens _subKind (\ s a -> s{_subKind = a})
-
--- | The subscriptions in this page of results.
-subSubscriptions :: Lens' Subscriptions [Maybe Subscription]
-subSubscriptions
-  = lens _subSubscriptions
-      (\ s a -> s{_subSubscriptions = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON Subscriptions where
-        parseJSON
-          = withObject "Subscriptions"
-              (\ o ->
-                 Subscriptions <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!= "reseller#subscriptions")
-                     <*> (o .:? "subscriptions" .!= mempty))
-
-instance ToJSON Subscriptions where
-        toJSON Subscriptions{..}
-          = object
-              (catMaybes
-                 [("nextPageToken" .=) <$> _subNextPageToken,
-                  Just ("kind" .= _subKind),
-                  ("subscriptions" .=) <$> _subSubscriptions])

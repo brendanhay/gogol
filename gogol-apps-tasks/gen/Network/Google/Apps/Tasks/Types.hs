@@ -14,9 +14,32 @@
 --
 module Network.Google.Apps.Tasks.Types
     (
+    -- * Service URL
+      appsTasksURL
+
+    -- * TaskLists
+    , TaskLists
+    , taskLists
+    , tlEtag
+    , tlNextPageToken
+    , tlKind
+    , tlItems
+
+    -- * TaskList
+    , TaskList
+    , taskList
+    , tEtag
+    , tKind
+    , tSelfLink
+    , tId
+    , tUpdated
+    , tTitle
+
+    -- * Alt
+    , Alt (..)
 
     -- * Task
-      Task
+    , Task
     , task
     , tasParent
     , tasStatus
@@ -34,31 +57,6 @@ module Network.Google.Apps.Tasks.Types
     , tasNotes
     , tasPosition
 
-    -- * TaskItemLinks
-    , TaskItemLinks
-    , taskItemLinks
-    , tilLink
-    , tilType
-    , tilDescription
-
-    -- * TaskList
-    , TaskList
-    , taskList
-    , tEtag
-    , tKind
-    , tSelfLink
-    , tId
-    , tUpdated
-    , tTitle
-
-    -- * TaskLists
-    , TaskLists
-    , taskLists
-    , tlEtag
-    , tlNextPageToken
-    , tlKind
-    , tlItems
-
     -- * Tasks
     , Tasks
     , tasks
@@ -66,8 +64,22 @@ module Network.Google.Apps.Tasks.Types
     , ttNextPageToken
     , ttKind
     , ttItems
+
+    -- * TaskItemLinks
+    , TaskItemLinks
+    , taskItemLinks
+    , tilLink
+    , tilType
+    , tilDescription
     ) where
 
 import           Network.Google.Apps.Tasks.Types.Product
 import           Network.Google.Apps.Tasks.Types.Sum
 import           Network.Google.Prelude
+
+-- | URL referring to version 'v1' of the Tasks API.
+appsTasksURL :: BaseUrl
+appsTasksURL
+  = BaseUrl Https
+      "https://www.googleapis.com/tasks/v1/"
+      443

@@ -18,6 +18,303 @@ module Network.Google.Compute.Autoscaler.Types.Product where
 import           Network.Google.Compute.Autoscaler.Types.Sum
 import           Network.Google.Prelude
 
+--
+-- /See:/ 'autoscalerListResponse' smart constructor.
+data AutoscalerListResponse = AutoscalerListResponse
+    { _alrNextPageToken :: !(Maybe Text)
+    , _alrKind          :: !Text
+    , _alrItems         :: !(Maybe [Maybe Autoscaler])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AutoscalerListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'alrNextPageToken'
+--
+-- * 'alrKind'
+--
+-- * 'alrItems'
+autoscalerListResponse
+    :: AutoscalerListResponse
+autoscalerListResponse =
+    AutoscalerListResponse
+    { _alrNextPageToken = Nothing
+    , _alrKind = "compute#autoscalerList"
+    , _alrItems = Nothing
+    }
+
+-- | [Output only] A token used to continue a truncated list request.
+alrNextPageToken :: Lens' AutoscalerListResponse (Maybe Text)
+alrNextPageToken
+  = lens _alrNextPageToken
+      (\ s a -> s{_alrNextPageToken = a})
+
+-- | Type of resource.
+alrKind :: Lens' AutoscalerListResponse Text
+alrKind = lens _alrKind (\ s a -> s{_alrKind = a})
+
+-- | Autoscaler resources.
+alrItems :: Lens' AutoscalerListResponse [Maybe Autoscaler]
+alrItems
+  = lens _alrItems (\ s a -> s{_alrItems = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON AutoscalerListResponse where
+        parseJSON
+          = withObject "AutoscalerListResponse"
+              (\ o ->
+                 AutoscalerListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#autoscalerList")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON AutoscalerListResponse where
+        toJSON AutoscalerListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _alrNextPageToken,
+                  Just ("kind" .= _alrKind),
+                  ("items" .=) <$> _alrItems])
+
+--
+-- /See:/ 'zoneList' smart constructor.
+data ZoneList = ZoneList
+    { _zlNextPageToken :: !(Maybe Text)
+    , _zlKind          :: !Text
+    , _zlItems         :: !(Maybe [Maybe Zone])
+    , _zlSelfLink      :: !(Maybe Text)
+    , _zlId            :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ZoneList' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'zlNextPageToken'
+--
+-- * 'zlKind'
+--
+-- * 'zlItems'
+--
+-- * 'zlSelfLink'
+--
+-- * 'zlId'
+zoneList
+    :: ZoneList
+zoneList =
+    ZoneList
+    { _zlNextPageToken = Nothing
+    , _zlKind = "autoscaler#zoneList"
+    , _zlItems = Nothing
+    , _zlSelfLink = Nothing
+    , _zlId = Nothing
+    }
+
+zlNextPageToken :: Lens' ZoneList (Maybe Text)
+zlNextPageToken
+  = lens _zlNextPageToken
+      (\ s a -> s{_zlNextPageToken = a})
+
+-- | Type of resource.
+zlKind :: Lens' ZoneList Text
+zlKind = lens _zlKind (\ s a -> s{_zlKind = a})
+
+zlItems :: Lens' ZoneList [Maybe Zone]
+zlItems
+  = lens _zlItems (\ s a -> s{_zlItems = a}) . _Default
+      . _Coerce
+
+-- | Server defined URL for this resource (output only).
+zlSelfLink :: Lens' ZoneList (Maybe Text)
+zlSelfLink
+  = lens _zlSelfLink (\ s a -> s{_zlSelfLink = a})
+
+zlId :: Lens' ZoneList (Maybe Text)
+zlId = lens _zlId (\ s a -> s{_zlId = a})
+
+instance FromJSON ZoneList where
+        parseJSON
+          = withObject "ZoneList"
+              (\ o ->
+                 ZoneList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "autoscaler#zoneList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON ZoneList where
+        toJSON ZoneList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _zlNextPageToken,
+                  Just ("kind" .= _zlKind), ("items" .=) <$> _zlItems,
+                  ("selfLink" .=) <$> _zlSelfLink,
+                  ("id" .=) <$> _zlId])
+
+--
+-- /See:/ 'operationItemDataItemWarnings' smart constructor.
+data OperationItemDataItemWarnings = OperationItemDataItemWarnings
+    { _oidiwValue :: !(Maybe Text)
+    , _oidiwKey   :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OperationItemDataItemWarnings' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oidiwValue'
+--
+-- * 'oidiwKey'
+operationItemDataItemWarnings
+    :: OperationItemDataItemWarnings
+operationItemDataItemWarnings =
+    OperationItemDataItemWarnings
+    { _oidiwValue = Nothing
+    , _oidiwKey = Nothing
+    }
+
+oidiwValue :: Lens' OperationItemDataItemWarnings (Maybe Text)
+oidiwValue
+  = lens _oidiwValue (\ s a -> s{_oidiwValue = a})
+
+oidiwKey :: Lens' OperationItemDataItemWarnings (Maybe Text)
+oidiwKey = lens _oidiwKey (\ s a -> s{_oidiwKey = a})
+
+instance FromJSON OperationItemDataItemWarnings where
+        parseJSON
+          = withObject "OperationItemDataItemWarnings"
+              (\ o ->
+                 OperationItemDataItemWarnings <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON OperationItemDataItemWarnings where
+        toJSON OperationItemDataItemWarnings{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _oidiwValue,
+                  ("key" .=) <$> _oidiwKey])
+
+--
+-- /See:/ 'operationItemWarnings' smart constructor.
+data OperationItemWarnings = OperationItemWarnings
+    { _oiwData    :: !(Maybe [OperationItemDataItemWarnings])
+    , _oiwCode    :: !(Maybe Text)
+    , _oiwMessage :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OperationItemWarnings' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oiwData'
+--
+-- * 'oiwCode'
+--
+-- * 'oiwMessage'
+operationItemWarnings
+    :: OperationItemWarnings
+operationItemWarnings =
+    OperationItemWarnings
+    { _oiwData = Nothing
+    , _oiwCode = Nothing
+    , _oiwMessage = Nothing
+    }
+
+oiwData :: Lens' OperationItemWarnings [OperationItemDataItemWarnings]
+oiwData
+  = lens _oiwData (\ s a -> s{_oiwData = a}) . _Default
+      . _Coerce
+
+oiwCode :: Lens' OperationItemWarnings (Maybe Text)
+oiwCode = lens _oiwCode (\ s a -> s{_oiwCode = a})
+
+oiwMessage :: Lens' OperationItemWarnings (Maybe Text)
+oiwMessage
+  = lens _oiwMessage (\ s a -> s{_oiwMessage = a})
+
+instance FromJSON OperationItemWarnings where
+        parseJSON
+          = withObject "OperationItemWarnings"
+              (\ o ->
+                 OperationItemWarnings <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON OperationItemWarnings where
+        toJSON OperationItemWarnings{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _oiwData, ("code" .=) <$> _oiwCode,
+                  ("message" .=) <$> _oiwMessage])
+
+--
+-- /See:/ 'zoneItemMaintenanceWindows' smart constructor.
+data ZoneItemMaintenanceWindows = ZoneItemMaintenanceWindows
+    { _zimwBeginTime   :: !(Maybe Text)
+    , _zimwName        :: !(Maybe Text)
+    , _zimwEndTime     :: !(Maybe Text)
+    , _zimwDescription :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ZoneItemMaintenanceWindows' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'zimwBeginTime'
+--
+-- * 'zimwName'
+--
+-- * 'zimwEndTime'
+--
+-- * 'zimwDescription'
+zoneItemMaintenanceWindows
+    :: ZoneItemMaintenanceWindows
+zoneItemMaintenanceWindows =
+    ZoneItemMaintenanceWindows
+    { _zimwBeginTime = Nothing
+    , _zimwName = Nothing
+    , _zimwEndTime = Nothing
+    , _zimwDescription = Nothing
+    }
+
+zimwBeginTime :: Lens' ZoneItemMaintenanceWindows (Maybe Text)
+zimwBeginTime
+  = lens _zimwBeginTime
+      (\ s a -> s{_zimwBeginTime = a})
+
+zimwName :: Lens' ZoneItemMaintenanceWindows (Maybe Text)
+zimwName = lens _zimwName (\ s a -> s{_zimwName = a})
+
+zimwEndTime :: Lens' ZoneItemMaintenanceWindows (Maybe Text)
+zimwEndTime
+  = lens _zimwEndTime (\ s a -> s{_zimwEndTime = a})
+
+zimwDescription :: Lens' ZoneItemMaintenanceWindows (Maybe Text)
+zimwDescription
+  = lens _zimwDescription
+      (\ s a -> s{_zimwDescription = a})
+
+instance FromJSON ZoneItemMaintenanceWindows where
+        parseJSON
+          = withObject "ZoneItemMaintenanceWindows"
+              (\ o ->
+                 ZoneItemMaintenanceWindows <$>
+                   (o .:? "beginTime") <*> (o .:? "name") <*>
+                     (o .:? "endTime")
+                     <*> (o .:? "description"))
+
+instance ToJSON ZoneItemMaintenanceWindows where
+        toJSON ZoneItemMaintenanceWindows{..}
+          = object
+              (catMaybes
+                 [("beginTime" .=) <$> _zimwBeginTime,
+                  ("name" .=) <$> _zimwName,
+                  ("endTime" .=) <$> _zimwEndTime,
+                  ("description" .=) <$> _zimwDescription])
+
 -- | Cloud Autoscaler resource.
 --
 -- /See:/ 'autoscaler' smart constructor.
@@ -133,64 +430,436 @@ instance ToJSON Autoscaler where
                   ("target" .=) <$> _aTarget])
 
 --
--- /See:/ 'autoscalerListResponse' smart constructor.
-data AutoscalerListResponse = AutoscalerListResponse
-    { _alrNextPageToken :: !(Maybe Text)
-    , _alrKind          :: !Text
-    , _alrItems         :: !(Maybe [Maybe Autoscaler])
+-- /See:/ 'operationItemErrorsError' smart constructor.
+data OperationItemErrorsError = OperationItemErrorsError
+    { _oieeLocation :: !(Maybe Text)
+    , _oieeCode     :: !(Maybe Text)
+    , _oieeMessage  :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AutoscalerListResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'OperationItemErrorsError' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'alrNextPageToken'
+-- * 'oieeLocation'
 --
--- * 'alrKind'
+-- * 'oieeCode'
 --
--- * 'alrItems'
-autoscalerListResponse
-    :: AutoscalerListResponse
-autoscalerListResponse =
-    AutoscalerListResponse
-    { _alrNextPageToken = Nothing
-    , _alrKind = "compute#autoscalerList"
-    , _alrItems = Nothing
+-- * 'oieeMessage'
+operationItemErrorsError
+    :: OperationItemErrorsError
+operationItemErrorsError =
+    OperationItemErrorsError
+    { _oieeLocation = Nothing
+    , _oieeCode = Nothing
+    , _oieeMessage = Nothing
     }
 
--- | [Output only] A token used to continue a truncated list request.
-alrNextPageToken :: Lens' AutoscalerListResponse (Maybe Text)
-alrNextPageToken
-  = lens _alrNextPageToken
-      (\ s a -> s{_alrNextPageToken = a})
+oieeLocation :: Lens' OperationItemErrorsError (Maybe Text)
+oieeLocation
+  = lens _oieeLocation (\ s a -> s{_oieeLocation = a})
 
--- | Type of resource.
-alrKind :: Lens' AutoscalerListResponse Text
-alrKind = lens _alrKind (\ s a -> s{_alrKind = a})
+oieeCode :: Lens' OperationItemErrorsError (Maybe Text)
+oieeCode = lens _oieeCode (\ s a -> s{_oieeCode = a})
 
--- | Autoscaler resources.
-alrItems :: Lens' AutoscalerListResponse [Maybe Autoscaler]
-alrItems
-  = lens _alrItems (\ s a -> s{_alrItems = a}) .
+oieeMessage :: Lens' OperationItemErrorsError (Maybe Text)
+oieeMessage
+  = lens _oieeMessage (\ s a -> s{_oieeMessage = a})
+
+instance FromJSON OperationItemErrorsError where
+        parseJSON
+          = withObject "OperationItemErrorsError"
+              (\ o ->
+                 OperationItemErrorsError <$>
+                   (o .:? "location") <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON OperationItemErrorsError where
+        toJSON OperationItemErrorsError{..}
+          = object
+              (catMaybes
+                 [("location" .=) <$> _oieeLocation,
+                  ("code" .=) <$> _oieeCode,
+                  ("message" .=) <$> _oieeMessage])
+
+--
+-- /See:/ 'operationError' smart constructor.
+newtype OperationError = OperationError
+    { _oeErrors :: Maybe [OperationItemErrorsError]
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OperationError' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oeErrors'
+operationError
+    :: OperationError
+operationError =
+    OperationError
+    { _oeErrors = Nothing
+    }
+
+oeErrors :: Lens' OperationError [OperationItemErrorsError]
+oeErrors
+  = lens _oeErrors (\ s a -> s{_oeErrors = a}) .
       _Default
       . _Coerce
 
-instance FromJSON AutoscalerListResponse where
+instance FromJSON OperationError where
         parseJSON
-          = withObject "AutoscalerListResponse"
+          = withObject "OperationError"
               (\ o ->
-                 AutoscalerListResponse <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!= "compute#autoscalerList")
-                     <*> (o .:? "items" .!= mempty))
+                 OperationError <$> (o .:? "errors" .!= mempty))
 
-instance ToJSON AutoscalerListResponse where
-        toJSON AutoscalerListResponse{..}
+instance ToJSON OperationError where
+        toJSON OperationError{..}
+          = object (catMaybes [("errors" .=) <$> _oeErrors])
+
+--
+-- /See:/ 'zone' smart constructor.
+data Zone = Zone
+    { _zStatus             :: !(Maybe Text)
+    , _zMaintenanceWindows :: !(Maybe [ZoneItemMaintenanceWindows])
+    , _zKind               :: !Text
+    , _zSelfLink           :: !(Maybe Text)
+    , _zName               :: !(Maybe Text)
+    , _zCreationTimestamp  :: !(Maybe Text)
+    , _zId                 :: !(Maybe Word64)
+    , _zRegion             :: !(Maybe Text)
+    , _zDescription        :: !(Maybe Text)
+    , _zDeprecated         :: !(Maybe (Maybe DeprecationStatus))
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Zone' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'zStatus'
+--
+-- * 'zMaintenanceWindows'
+--
+-- * 'zKind'
+--
+-- * 'zSelfLink'
+--
+-- * 'zName'
+--
+-- * 'zCreationTimestamp'
+--
+-- * 'zId'
+--
+-- * 'zRegion'
+--
+-- * 'zDescription'
+--
+-- * 'zDeprecated'
+zone
+    :: Zone
+zone =
+    Zone
+    { _zStatus = Nothing
+    , _zMaintenanceWindows = Nothing
+    , _zKind = "autoscaler#zone"
+    , _zSelfLink = Nothing
+    , _zName = Nothing
+    , _zCreationTimestamp = Nothing
+    , _zId = Nothing
+    , _zRegion = Nothing
+    , _zDescription = Nothing
+    , _zDeprecated = Nothing
+    }
+
+zStatus :: Lens' Zone (Maybe Text)
+zStatus = lens _zStatus (\ s a -> s{_zStatus = a})
+
+zMaintenanceWindows :: Lens' Zone [ZoneItemMaintenanceWindows]
+zMaintenanceWindows
+  = lens _zMaintenanceWindows
+      (\ s a -> s{_zMaintenanceWindows = a})
+      . _Default
+      . _Coerce
+
+-- | [Output Only] Type of the resource. Always kind#zone for zones.
+zKind :: Lens' Zone Text
+zKind = lens _zKind (\ s a -> s{_zKind = a})
+
+-- | [Output Only] Server defined URL for the resource.
+zSelfLink :: Lens' Zone (Maybe Text)
+zSelfLink
+  = lens _zSelfLink (\ s a -> s{_zSelfLink = a})
+
+zName :: Lens' Zone (Maybe Text)
+zName = lens _zName (\ s a -> s{_zName = a})
+
+zCreationTimestamp :: Lens' Zone (Maybe Text)
+zCreationTimestamp
+  = lens _zCreationTimestamp
+      (\ s a -> s{_zCreationTimestamp = a})
+
+zId :: Lens' Zone (Maybe Word64)
+zId = lens _zId (\ s a -> s{_zId = a})
+
+zRegion :: Lens' Zone (Maybe Text)
+zRegion = lens _zRegion (\ s a -> s{_zRegion = a})
+
+zDescription :: Lens' Zone (Maybe Text)
+zDescription
+  = lens _zDescription (\ s a -> s{_zDescription = a})
+
+zDeprecated :: Lens' Zone (Maybe (Maybe DeprecationStatus))
+zDeprecated
+  = lens _zDeprecated (\ s a -> s{_zDeprecated = a})
+
+instance FromJSON Zone where
+        parseJSON
+          = withObject "Zone"
+              (\ o ->
+                 Zone <$>
+                   (o .:? "status") <*>
+                     (o .:? "maintenanceWindows" .!= mempty)
+                     <*> (o .:? "kind" .!= "autoscaler#zone")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "id")
+                     <*> (o .:? "region")
+                     <*> (o .:? "description")
+                     <*> (o .:? "deprecated"))
+
+instance ToJSON Zone where
+        toJSON Zone{..}
           = object
               (catMaybes
-                 [("nextPageToken" .=) <$> _alrNextPageToken,
-                  Just ("kind" .= _alrKind),
-                  ("items" .=) <$> _alrItems])
+                 [("status" .=) <$> _zStatus,
+                  ("maintenanceWindows" .=) <$> _zMaintenanceWindows,
+                  Just ("kind" .= _zKind),
+                  ("selfLink" .=) <$> _zSelfLink,
+                  ("name" .=) <$> _zName,
+                  ("creationTimestamp" .=) <$> _zCreationTimestamp,
+                  ("id" .=) <$> _zId, ("region" .=) <$> _zRegion,
+                  ("description" .=) <$> _zDescription,
+                  ("deprecated" .=) <$> _zDeprecated])
+
+--
+-- /See:/ 'deprecationStatus' smart constructor.
+data DeprecationStatus = DeprecationStatus
+    { _dsState       :: !(Maybe Text)
+    , _dsDeleted     :: !(Maybe Text)
+    , _dsReplacement :: !(Maybe Text)
+    , _dsObsolete    :: !(Maybe Text)
+    , _dsDeprecated  :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DeprecationStatus' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dsState'
+--
+-- * 'dsDeleted'
+--
+-- * 'dsReplacement'
+--
+-- * 'dsObsolete'
+--
+-- * 'dsDeprecated'
+deprecationStatus
+    :: DeprecationStatus
+deprecationStatus =
+    DeprecationStatus
+    { _dsState = Nothing
+    , _dsDeleted = Nothing
+    , _dsReplacement = Nothing
+    , _dsObsolete = Nothing
+    , _dsDeprecated = Nothing
+    }
+
+dsState :: Lens' DeprecationStatus (Maybe Text)
+dsState = lens _dsState (\ s a -> s{_dsState = a})
+
+dsDeleted :: Lens' DeprecationStatus (Maybe Text)
+dsDeleted
+  = lens _dsDeleted (\ s a -> s{_dsDeleted = a})
+
+dsReplacement :: Lens' DeprecationStatus (Maybe Text)
+dsReplacement
+  = lens _dsReplacement
+      (\ s a -> s{_dsReplacement = a})
+
+dsObsolete :: Lens' DeprecationStatus (Maybe Text)
+dsObsolete
+  = lens _dsObsolete (\ s a -> s{_dsObsolete = a})
+
+dsDeprecated :: Lens' DeprecationStatus (Maybe Text)
+dsDeprecated
+  = lens _dsDeprecated (\ s a -> s{_dsDeprecated = a})
+
+instance FromJSON DeprecationStatus where
+        parseJSON
+          = withObject "DeprecationStatus"
+              (\ o ->
+                 DeprecationStatus <$>
+                   (o .:? "state") <*> (o .:? "deleted") <*>
+                     (o .:? "replacement")
+                     <*> (o .:? "obsolete")
+                     <*> (o .:? "deprecated"))
+
+instance ToJSON DeprecationStatus where
+        toJSON DeprecationStatus{..}
+          = object
+              (catMaybes
+                 [("state" .=) <$> _dsState,
+                  ("deleted" .=) <$> _dsDeleted,
+                  ("replacement" .=) <$> _dsReplacement,
+                  ("obsolete" .=) <$> _dsObsolete,
+                  ("deprecated" .=) <$> _dsDeprecated])
+
+-- | Custom utilization metric policy.
+--
+-- /See:/ 'autoscalingPolicyCustomMetricUtilization' smart constructor.
+data AutoscalingPolicyCustomMetricUtilization = AutoscalingPolicyCustomMetricUtilization
+    { _apcmuUtilizationTarget     :: !(Maybe Double)
+    , _apcmuMetric                :: !(Maybe Text)
+    , _apcmuUtilizationTargetType :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AutoscalingPolicyCustomMetricUtilization' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'apcmuUtilizationTarget'
+--
+-- * 'apcmuMetric'
+--
+-- * 'apcmuUtilizationTargetType'
+autoscalingPolicyCustomMetricUtilization
+    :: AutoscalingPolicyCustomMetricUtilization
+autoscalingPolicyCustomMetricUtilization =
+    AutoscalingPolicyCustomMetricUtilization
+    { _apcmuUtilizationTarget = Nothing
+    , _apcmuMetric = Nothing
+    , _apcmuUtilizationTargetType = Nothing
+    }
+
+-- | Target value of the metric which Autoscaler should maintain. Must be a
+-- positive value.
+apcmuUtilizationTarget :: Lens' AutoscalingPolicyCustomMetricUtilization (Maybe Double)
+apcmuUtilizationTarget
+  = lens _apcmuUtilizationTarget
+      (\ s a -> s{_apcmuUtilizationTarget = a})
+
+-- | Identifier of the metric. It should be a Cloud Monitoring metric. The
+-- metric can not have negative values. The metric should be an utilization
+-- metric (increasing number of VMs handling requests x times should reduce
+-- average value of the metric roughly x times). For example you could use:
+-- compute.googleapis.com\/instance\/network\/received_bytes_count.
+apcmuMetric :: Lens' AutoscalingPolicyCustomMetricUtilization (Maybe Text)
+apcmuMetric
+  = lens _apcmuMetric (\ s a -> s{_apcmuMetric = a})
+
+-- | Defines type in which utilization_target is expressed.
+apcmuUtilizationTargetType :: Lens' AutoscalingPolicyCustomMetricUtilization (Maybe Text)
+apcmuUtilizationTargetType
+  = lens _apcmuUtilizationTargetType
+      (\ s a -> s{_apcmuUtilizationTargetType = a})
+
+instance FromJSON
+         AutoscalingPolicyCustomMetricUtilization where
+        parseJSON
+          = withObject
+              "AutoscalingPolicyCustomMetricUtilization"
+              (\ o ->
+                 AutoscalingPolicyCustomMetricUtilization <$>
+                   (o .:? "utilizationTarget") <*> (o .:? "metric") <*>
+                     (o .:? "utilizationTargetType"))
+
+instance ToJSON
+         AutoscalingPolicyCustomMetricUtilization where
+        toJSON AutoscalingPolicyCustomMetricUtilization{..}
+          = object
+              (catMaybes
+                 [("utilizationTarget" .=) <$>
+                    _apcmuUtilizationTarget,
+                  ("metric" .=) <$> _apcmuMetric,
+                  ("utilizationTargetType" .=) <$>
+                    _apcmuUtilizationTargetType])
+
+--
+-- /See:/ 'operationList' smart constructor.
+data OperationList = OperationList
+    { _olNextPageToken :: !(Maybe Text)
+    , _olKind          :: !Text
+    , _olItems         :: !(Maybe [Maybe Operation])
+    , _olSelfLink      :: !(Maybe Text)
+    , _olId            :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OperationList' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'olNextPageToken'
+--
+-- * 'olKind'
+--
+-- * 'olItems'
+--
+-- * 'olSelfLink'
+--
+-- * 'olId'
+operationList
+    :: OperationList
+operationList =
+    OperationList
+    { _olNextPageToken = Nothing
+    , _olKind = "autoscaler#operationList"
+    , _olItems = Nothing
+    , _olSelfLink = Nothing
+    , _olId = Nothing
+    }
+
+olNextPageToken :: Lens' OperationList (Maybe Text)
+olNextPageToken
+  = lens _olNextPageToken
+      (\ s a -> s{_olNextPageToken = a})
+
+-- | [Output Only] Type of resource. Always compute#operations for Operations
+-- resource.
+olKind :: Lens' OperationList Text
+olKind = lens _olKind (\ s a -> s{_olKind = a})
+
+olItems :: Lens' OperationList [Maybe Operation]
+olItems
+  = lens _olItems (\ s a -> s{_olItems = a}) . _Default
+      . _Coerce
+
+olSelfLink :: Lens' OperationList (Maybe Text)
+olSelfLink
+  = lens _olSelfLink (\ s a -> s{_olSelfLink = a})
+
+olId :: Lens' OperationList (Maybe Text)
+olId = lens _olId (\ s a -> s{_olId = a})
+
+instance FromJSON OperationList where
+        parseJSON
+          = withObject "OperationList"
+              (\ o ->
+                 OperationList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "autoscaler#operationList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON OperationList where
+        toJSON OperationList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _olNextPageToken,
+                  Just ("kind" .= _olKind), ("items" .=) <$> _olItems,
+                  ("selfLink" .=) <$> _olSelfLink,
+                  ("id" .=) <$> _olId])
 
 -- | Cloud Autoscaler policy.
 --
@@ -299,119 +968,6 @@ instance ToJSON AutoscalingPolicy where
                   ("minNumReplicas" .=) <$> _apMinNumReplicas,
                   ("coolDownPeriodSec" .=) <$> _apCoolDownPeriodSec])
 
--- | CPU utilization policy.
---
--- /See:/ 'autoscalingPolicyCpuUtilization' smart constructor.
-newtype AutoscalingPolicyCpuUtilization = AutoscalingPolicyCpuUtilization
-    { _apcuUtilizationTarget :: Maybe Double
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AutoscalingPolicyCpuUtilization' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'apcuUtilizationTarget'
-autoscalingPolicyCpuUtilization
-    :: AutoscalingPolicyCpuUtilization
-autoscalingPolicyCpuUtilization =
-    AutoscalingPolicyCpuUtilization
-    { _apcuUtilizationTarget = Nothing
-    }
-
--- | The target utilization that the Autoscaler should maintain. It is
--- represented as a fraction of used cores. For example: 6 cores used in
--- 8-core VM are represented here as 0.75. Must be a float value between
--- (0, 1]. If not defined, the default is 0.8.
-apcuUtilizationTarget :: Lens' AutoscalingPolicyCpuUtilization (Maybe Double)
-apcuUtilizationTarget
-  = lens _apcuUtilizationTarget
-      (\ s a -> s{_apcuUtilizationTarget = a})
-
-instance FromJSON AutoscalingPolicyCpuUtilization
-         where
-        parseJSON
-          = withObject "AutoscalingPolicyCpuUtilization"
-              (\ o ->
-                 AutoscalingPolicyCpuUtilization <$>
-                   (o .:? "utilizationTarget"))
-
-instance ToJSON AutoscalingPolicyCpuUtilization where
-        toJSON AutoscalingPolicyCpuUtilization{..}
-          = object
-              (catMaybes
-                 [("utilizationTarget" .=) <$>
-                    _apcuUtilizationTarget])
-
--- | Custom utilization metric policy.
---
--- /See:/ 'autoscalingPolicyCustomMetricUtilization' smart constructor.
-data AutoscalingPolicyCustomMetricUtilization = AutoscalingPolicyCustomMetricUtilization
-    { _apcmuUtilizationTarget     :: !(Maybe Double)
-    , _apcmuMetric                :: !(Maybe Text)
-    , _apcmuUtilizationTargetType :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AutoscalingPolicyCustomMetricUtilization' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'apcmuUtilizationTarget'
---
--- * 'apcmuMetric'
---
--- * 'apcmuUtilizationTargetType'
-autoscalingPolicyCustomMetricUtilization
-    :: AutoscalingPolicyCustomMetricUtilization
-autoscalingPolicyCustomMetricUtilization =
-    AutoscalingPolicyCustomMetricUtilization
-    { _apcmuUtilizationTarget = Nothing
-    , _apcmuMetric = Nothing
-    , _apcmuUtilizationTargetType = Nothing
-    }
-
--- | Target value of the metric which Autoscaler should maintain. Must be a
--- positive value.
-apcmuUtilizationTarget :: Lens' AutoscalingPolicyCustomMetricUtilization (Maybe Double)
-apcmuUtilizationTarget
-  = lens _apcmuUtilizationTarget
-      (\ s a -> s{_apcmuUtilizationTarget = a})
-
--- | Identifier of the metric. It should be a Cloud Monitoring metric. The
--- metric can not have negative values. The metric should be an utilization
--- metric (increasing number of VMs handling requests x times should reduce
--- average value of the metric roughly x times). For example you could use:
--- compute.googleapis.com\/instance\/network\/received_bytes_count.
-apcmuMetric :: Lens' AutoscalingPolicyCustomMetricUtilization (Maybe Text)
-apcmuMetric
-  = lens _apcmuMetric (\ s a -> s{_apcmuMetric = a})
-
--- | Defines type in which utilization_target is expressed.
-apcmuUtilizationTargetType :: Lens' AutoscalingPolicyCustomMetricUtilization (Maybe Text)
-apcmuUtilizationTargetType
-  = lens _apcmuUtilizationTargetType
-      (\ s a -> s{_apcmuUtilizationTargetType = a})
-
-instance FromJSON
-         AutoscalingPolicyCustomMetricUtilization where
-        parseJSON
-          = withObject
-              "AutoscalingPolicyCustomMetricUtilization"
-              (\ o ->
-                 AutoscalingPolicyCustomMetricUtilization <$>
-                   (o .:? "utilizationTarget") <*> (o .:? "metric") <*>
-                     (o .:? "utilizationTargetType"))
-
-instance ToJSON
-         AutoscalingPolicyCustomMetricUtilization where
-        toJSON AutoscalingPolicyCustomMetricUtilization{..}
-          = object
-              (catMaybes
-                 [("utilizationTarget" .=) <$>
-                    _apcmuUtilizationTarget,
-                  ("metric" .=) <$> _apcmuMetric,
-                  ("utilizationTargetType" .=) <$>
-                    _apcmuUtilizationTargetType])
-
 -- | Load balancing utilization policy.
 --
 -- /See:/ 'autoscalingPolicyLoadBalancingUtilization' smart constructor.
@@ -458,80 +1014,6 @@ instance ToJSON
               (catMaybes
                  [("utilizationTarget" .=) <$>
                     _aplbuUtilizationTarget])
-
---
--- /See:/ 'deprecationStatus' smart constructor.
-data DeprecationStatus = DeprecationStatus
-    { _dsState       :: !(Maybe Text)
-    , _dsDeleted     :: !(Maybe Text)
-    , _dsReplacement :: !(Maybe Text)
-    , _dsObsolete    :: !(Maybe Text)
-    , _dsDeprecated  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'DeprecationStatus' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'dsState'
---
--- * 'dsDeleted'
---
--- * 'dsReplacement'
---
--- * 'dsObsolete'
---
--- * 'dsDeprecated'
-deprecationStatus
-    :: DeprecationStatus
-deprecationStatus =
-    DeprecationStatus
-    { _dsState = Nothing
-    , _dsDeleted = Nothing
-    , _dsReplacement = Nothing
-    , _dsObsolete = Nothing
-    , _dsDeprecated = Nothing
-    }
-
-dsState :: Lens' DeprecationStatus (Maybe Text)
-dsState = lens _dsState (\ s a -> s{_dsState = a})
-
-dsDeleted :: Lens' DeprecationStatus (Maybe Text)
-dsDeleted
-  = lens _dsDeleted (\ s a -> s{_dsDeleted = a})
-
-dsReplacement :: Lens' DeprecationStatus (Maybe Text)
-dsReplacement
-  = lens _dsReplacement
-      (\ s a -> s{_dsReplacement = a})
-
-dsObsolete :: Lens' DeprecationStatus (Maybe Text)
-dsObsolete
-  = lens _dsObsolete (\ s a -> s{_dsObsolete = a})
-
-dsDeprecated :: Lens' DeprecationStatus (Maybe Text)
-dsDeprecated
-  = lens _dsDeprecated (\ s a -> s{_dsDeprecated = a})
-
-instance FromJSON DeprecationStatus where
-        parseJSON
-          = withObject "DeprecationStatus"
-              (\ o ->
-                 DeprecationStatus <$>
-                   (o .:? "state") <*> (o .:? "deleted") <*>
-                     (o .:? "replacement")
-                     <*> (o .:? "obsolete")
-                     <*> (o .:? "deprecated"))
-
-instance ToJSON DeprecationStatus where
-        toJSON DeprecationStatus{..}
-          = object
-              (catMaybes
-                 [("state" .=) <$> _dsState,
-                  ("deleted" .=) <$> _dsDeleted,
-                  ("replacement" .=) <$> _dsReplacement,
-                  ("obsolete" .=) <$> _dsObsolete,
-                  ("deprecated" .=) <$> _dsDeprecated])
 
 --
 -- /See:/ 'operation' smart constructor.
@@ -776,527 +1258,45 @@ instance ToJSON Operation where
                   ("targetLink" .=) <$> _oTargetLink,
                   ("clientOperationId" .=) <$> _oClientOperationId])
 
+-- | CPU utilization policy.
 --
--- /See:/ 'operationError' smart constructor.
-newtype OperationError = OperationError
-    { _oeErrors :: Maybe [OperationItemErrorsError]
+-- /See:/ 'autoscalingPolicyCpuUtilization' smart constructor.
+newtype AutoscalingPolicyCpuUtilization = AutoscalingPolicyCpuUtilization
+    { _apcuUtilizationTarget :: Maybe Double
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OperationError' with the minimum fields required to make a request.
+-- | Creates a value of 'AutoscalingPolicyCpuUtilization' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'oeErrors'
-operationError
-    :: OperationError
-operationError =
-    OperationError
-    { _oeErrors = Nothing
+-- * 'apcuUtilizationTarget'
+autoscalingPolicyCpuUtilization
+    :: AutoscalingPolicyCpuUtilization
+autoscalingPolicyCpuUtilization =
+    AutoscalingPolicyCpuUtilization
+    { _apcuUtilizationTarget = Nothing
     }
 
-oeErrors :: Lens' OperationError [OperationItemErrorsError]
-oeErrors
-  = lens _oeErrors (\ s a -> s{_oeErrors = a}) .
-      _Default
-      . _Coerce
+-- | The target utilization that the Autoscaler should maintain. It is
+-- represented as a fraction of used cores. For example: 6 cores used in
+-- 8-core VM are represented here as 0.75. Must be a float value between
+-- (0, 1]. If not defined, the default is 0.8.
+apcuUtilizationTarget :: Lens' AutoscalingPolicyCpuUtilization (Maybe Double)
+apcuUtilizationTarget
+  = lens _apcuUtilizationTarget
+      (\ s a -> s{_apcuUtilizationTarget = a})
 
-instance FromJSON OperationError where
+instance FromJSON AutoscalingPolicyCpuUtilization
+         where
         parseJSON
-          = withObject "OperationError"
+          = withObject "AutoscalingPolicyCpuUtilization"
               (\ o ->
-                 OperationError <$> (o .:? "errors" .!= mempty))
+                 AutoscalingPolicyCpuUtilization <$>
+                   (o .:? "utilizationTarget"))
 
-instance ToJSON OperationError where
-        toJSON OperationError{..}
-          = object (catMaybes [("errors" .=) <$> _oeErrors])
-
---
--- /See:/ 'operationItemDataItemWarnings' smart constructor.
-data OperationItemDataItemWarnings = OperationItemDataItemWarnings
-    { _oidiwValue :: !(Maybe Text)
-    , _oidiwKey   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'OperationItemDataItemWarnings' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'oidiwValue'
---
--- * 'oidiwKey'
-operationItemDataItemWarnings
-    :: OperationItemDataItemWarnings
-operationItemDataItemWarnings =
-    OperationItemDataItemWarnings
-    { _oidiwValue = Nothing
-    , _oidiwKey = Nothing
-    }
-
-oidiwValue :: Lens' OperationItemDataItemWarnings (Maybe Text)
-oidiwValue
-  = lens _oidiwValue (\ s a -> s{_oidiwValue = a})
-
-oidiwKey :: Lens' OperationItemDataItemWarnings (Maybe Text)
-oidiwKey = lens _oidiwKey (\ s a -> s{_oidiwKey = a})
-
-instance FromJSON OperationItemDataItemWarnings where
-        parseJSON
-          = withObject "OperationItemDataItemWarnings"
-              (\ o ->
-                 OperationItemDataItemWarnings <$>
-                   (o .:? "value") <*> (o .:? "key"))
-
-instance ToJSON OperationItemDataItemWarnings where
-        toJSON OperationItemDataItemWarnings{..}
+instance ToJSON AutoscalingPolicyCpuUtilization where
+        toJSON AutoscalingPolicyCpuUtilization{..}
           = object
               (catMaybes
-                 [("value" .=) <$> _oidiwValue,
-                  ("key" .=) <$> _oidiwKey])
-
---
--- /See:/ 'operationItemErrorsError' smart constructor.
-data OperationItemErrorsError = OperationItemErrorsError
-    { _oieeLocation :: !(Maybe Text)
-    , _oieeCode     :: !(Maybe Text)
-    , _oieeMessage  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'OperationItemErrorsError' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'oieeLocation'
---
--- * 'oieeCode'
---
--- * 'oieeMessage'
-operationItemErrorsError
-    :: OperationItemErrorsError
-operationItemErrorsError =
-    OperationItemErrorsError
-    { _oieeLocation = Nothing
-    , _oieeCode = Nothing
-    , _oieeMessage = Nothing
-    }
-
-oieeLocation :: Lens' OperationItemErrorsError (Maybe Text)
-oieeLocation
-  = lens _oieeLocation (\ s a -> s{_oieeLocation = a})
-
-oieeCode :: Lens' OperationItemErrorsError (Maybe Text)
-oieeCode = lens _oieeCode (\ s a -> s{_oieeCode = a})
-
-oieeMessage :: Lens' OperationItemErrorsError (Maybe Text)
-oieeMessage
-  = lens _oieeMessage (\ s a -> s{_oieeMessage = a})
-
-instance FromJSON OperationItemErrorsError where
-        parseJSON
-          = withObject "OperationItemErrorsError"
-              (\ o ->
-                 OperationItemErrorsError <$>
-                   (o .:? "location") <*> (o .:? "code") <*>
-                     (o .:? "message"))
-
-instance ToJSON OperationItemErrorsError where
-        toJSON OperationItemErrorsError{..}
-          = object
-              (catMaybes
-                 [("location" .=) <$> _oieeLocation,
-                  ("code" .=) <$> _oieeCode,
-                  ("message" .=) <$> _oieeMessage])
-
---
--- /See:/ 'operationItemWarnings' smart constructor.
-data OperationItemWarnings = OperationItemWarnings
-    { _oiwData    :: !(Maybe [OperationItemDataItemWarnings])
-    , _oiwCode    :: !(Maybe Text)
-    , _oiwMessage :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'OperationItemWarnings' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'oiwData'
---
--- * 'oiwCode'
---
--- * 'oiwMessage'
-operationItemWarnings
-    :: OperationItemWarnings
-operationItemWarnings =
-    OperationItemWarnings
-    { _oiwData = Nothing
-    , _oiwCode = Nothing
-    , _oiwMessage = Nothing
-    }
-
-oiwData :: Lens' OperationItemWarnings [OperationItemDataItemWarnings]
-oiwData
-  = lens _oiwData (\ s a -> s{_oiwData = a}) . _Default
-      . _Coerce
-
-oiwCode :: Lens' OperationItemWarnings (Maybe Text)
-oiwCode = lens _oiwCode (\ s a -> s{_oiwCode = a})
-
-oiwMessage :: Lens' OperationItemWarnings (Maybe Text)
-oiwMessage
-  = lens _oiwMessage (\ s a -> s{_oiwMessage = a})
-
-instance FromJSON OperationItemWarnings where
-        parseJSON
-          = withObject "OperationItemWarnings"
-              (\ o ->
-                 OperationItemWarnings <$>
-                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
-                     (o .:? "message"))
-
-instance ToJSON OperationItemWarnings where
-        toJSON OperationItemWarnings{..}
-          = object
-              (catMaybes
-                 [("data" .=) <$> _oiwData, ("code" .=) <$> _oiwCode,
-                  ("message" .=) <$> _oiwMessage])
-
---
--- /See:/ 'operationList' smart constructor.
-data OperationList = OperationList
-    { _olNextPageToken :: !(Maybe Text)
-    , _olKind          :: !Text
-    , _olItems         :: !(Maybe [Maybe Operation])
-    , _olSelfLink      :: !(Maybe Text)
-    , _olId            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'OperationList' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'olNextPageToken'
---
--- * 'olKind'
---
--- * 'olItems'
---
--- * 'olSelfLink'
---
--- * 'olId'
-operationList
-    :: OperationList
-operationList =
-    OperationList
-    { _olNextPageToken = Nothing
-    , _olKind = "autoscaler#operationList"
-    , _olItems = Nothing
-    , _olSelfLink = Nothing
-    , _olId = Nothing
-    }
-
-olNextPageToken :: Lens' OperationList (Maybe Text)
-olNextPageToken
-  = lens _olNextPageToken
-      (\ s a -> s{_olNextPageToken = a})
-
--- | [Output Only] Type of resource. Always compute#operations for Operations
--- resource.
-olKind :: Lens' OperationList Text
-olKind = lens _olKind (\ s a -> s{_olKind = a})
-
-olItems :: Lens' OperationList [Maybe Operation]
-olItems
-  = lens _olItems (\ s a -> s{_olItems = a}) . _Default
-      . _Coerce
-
-olSelfLink :: Lens' OperationList (Maybe Text)
-olSelfLink
-  = lens _olSelfLink (\ s a -> s{_olSelfLink = a})
-
-olId :: Lens' OperationList (Maybe Text)
-olId = lens _olId (\ s a -> s{_olId = a})
-
-instance FromJSON OperationList where
-        parseJSON
-          = withObject "OperationList"
-              (\ o ->
-                 OperationList <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!= "autoscaler#operationList")
-                     <*> (o .:? "items" .!= mempty)
-                     <*> (o .:? "selfLink")
-                     <*> (o .:? "id"))
-
-instance ToJSON OperationList where
-        toJSON OperationList{..}
-          = object
-              (catMaybes
-                 [("nextPageToken" .=) <$> _olNextPageToken,
-                  Just ("kind" .= _olKind), ("items" .=) <$> _olItems,
-                  ("selfLink" .=) <$> _olSelfLink,
-                  ("id" .=) <$> _olId])
-
---
--- /See:/ 'zone' smart constructor.
-data Zone = Zone
-    { _zStatus             :: !(Maybe Text)
-    , _zMaintenanceWindows :: !(Maybe [ZoneItemMaintenanceWindows])
-    , _zKind               :: !Text
-    , _zSelfLink           :: !(Maybe Text)
-    , _zName               :: !(Maybe Text)
-    , _zCreationTimestamp  :: !(Maybe Text)
-    , _zId                 :: !(Maybe Word64)
-    , _zRegion             :: !(Maybe Text)
-    , _zDescription        :: !(Maybe Text)
-    , _zDeprecated         :: !(Maybe (Maybe DeprecationStatus))
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Zone' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'zStatus'
---
--- * 'zMaintenanceWindows'
---
--- * 'zKind'
---
--- * 'zSelfLink'
---
--- * 'zName'
---
--- * 'zCreationTimestamp'
---
--- * 'zId'
---
--- * 'zRegion'
---
--- * 'zDescription'
---
--- * 'zDeprecated'
-zone
-    :: Zone
-zone =
-    Zone
-    { _zStatus = Nothing
-    , _zMaintenanceWindows = Nothing
-    , _zKind = "autoscaler#zone"
-    , _zSelfLink = Nothing
-    , _zName = Nothing
-    , _zCreationTimestamp = Nothing
-    , _zId = Nothing
-    , _zRegion = Nothing
-    , _zDescription = Nothing
-    , _zDeprecated = Nothing
-    }
-
-zStatus :: Lens' Zone (Maybe Text)
-zStatus = lens _zStatus (\ s a -> s{_zStatus = a})
-
-zMaintenanceWindows :: Lens' Zone [ZoneItemMaintenanceWindows]
-zMaintenanceWindows
-  = lens _zMaintenanceWindows
-      (\ s a -> s{_zMaintenanceWindows = a})
-      . _Default
-      . _Coerce
-
--- | [Output Only] Type of the resource. Always kind#zone for zones.
-zKind :: Lens' Zone Text
-zKind = lens _zKind (\ s a -> s{_zKind = a})
-
--- | [Output Only] Server defined URL for the resource.
-zSelfLink :: Lens' Zone (Maybe Text)
-zSelfLink
-  = lens _zSelfLink (\ s a -> s{_zSelfLink = a})
-
-zName :: Lens' Zone (Maybe Text)
-zName = lens _zName (\ s a -> s{_zName = a})
-
-zCreationTimestamp :: Lens' Zone (Maybe Text)
-zCreationTimestamp
-  = lens _zCreationTimestamp
-      (\ s a -> s{_zCreationTimestamp = a})
-
-zId :: Lens' Zone (Maybe Word64)
-zId = lens _zId (\ s a -> s{_zId = a})
-
-zRegion :: Lens' Zone (Maybe Text)
-zRegion = lens _zRegion (\ s a -> s{_zRegion = a})
-
-zDescription :: Lens' Zone (Maybe Text)
-zDescription
-  = lens _zDescription (\ s a -> s{_zDescription = a})
-
-zDeprecated :: Lens' Zone (Maybe (Maybe DeprecationStatus))
-zDeprecated
-  = lens _zDeprecated (\ s a -> s{_zDeprecated = a})
-
-instance FromJSON Zone where
-        parseJSON
-          = withObject "Zone"
-              (\ o ->
-                 Zone <$>
-                   (o .:? "status") <*>
-                     (o .:? "maintenanceWindows" .!= mempty)
-                     <*> (o .:? "kind" .!= "autoscaler#zone")
-                     <*> (o .:? "selfLink")
-                     <*> (o .:? "name")
-                     <*> (o .:? "creationTimestamp")
-                     <*> (o .:? "id")
-                     <*> (o .:? "region")
-                     <*> (o .:? "description")
-                     <*> (o .:? "deprecated"))
-
-instance ToJSON Zone where
-        toJSON Zone{..}
-          = object
-              (catMaybes
-                 [("status" .=) <$> _zStatus,
-                  ("maintenanceWindows" .=) <$> _zMaintenanceWindows,
-                  Just ("kind" .= _zKind),
-                  ("selfLink" .=) <$> _zSelfLink,
-                  ("name" .=) <$> _zName,
-                  ("creationTimestamp" .=) <$> _zCreationTimestamp,
-                  ("id" .=) <$> _zId, ("region" .=) <$> _zRegion,
-                  ("description" .=) <$> _zDescription,
-                  ("deprecated" .=) <$> _zDeprecated])
-
---
--- /See:/ 'zoneItemMaintenanceWindows' smart constructor.
-data ZoneItemMaintenanceWindows = ZoneItemMaintenanceWindows
-    { _zimwBeginTime   :: !(Maybe Text)
-    , _zimwName        :: !(Maybe Text)
-    , _zimwEndTime     :: !(Maybe Text)
-    , _zimwDescription :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ZoneItemMaintenanceWindows' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'zimwBeginTime'
---
--- * 'zimwName'
---
--- * 'zimwEndTime'
---
--- * 'zimwDescription'
-zoneItemMaintenanceWindows
-    :: ZoneItemMaintenanceWindows
-zoneItemMaintenanceWindows =
-    ZoneItemMaintenanceWindows
-    { _zimwBeginTime = Nothing
-    , _zimwName = Nothing
-    , _zimwEndTime = Nothing
-    , _zimwDescription = Nothing
-    }
-
-zimwBeginTime :: Lens' ZoneItemMaintenanceWindows (Maybe Text)
-zimwBeginTime
-  = lens _zimwBeginTime
-      (\ s a -> s{_zimwBeginTime = a})
-
-zimwName :: Lens' ZoneItemMaintenanceWindows (Maybe Text)
-zimwName = lens _zimwName (\ s a -> s{_zimwName = a})
-
-zimwEndTime :: Lens' ZoneItemMaintenanceWindows (Maybe Text)
-zimwEndTime
-  = lens _zimwEndTime (\ s a -> s{_zimwEndTime = a})
-
-zimwDescription :: Lens' ZoneItemMaintenanceWindows (Maybe Text)
-zimwDescription
-  = lens _zimwDescription
-      (\ s a -> s{_zimwDescription = a})
-
-instance FromJSON ZoneItemMaintenanceWindows where
-        parseJSON
-          = withObject "ZoneItemMaintenanceWindows"
-              (\ o ->
-                 ZoneItemMaintenanceWindows <$>
-                   (o .:? "beginTime") <*> (o .:? "name") <*>
-                     (o .:? "endTime")
-                     <*> (o .:? "description"))
-
-instance ToJSON ZoneItemMaintenanceWindows where
-        toJSON ZoneItemMaintenanceWindows{..}
-          = object
-              (catMaybes
-                 [("beginTime" .=) <$> _zimwBeginTime,
-                  ("name" .=) <$> _zimwName,
-                  ("endTime" .=) <$> _zimwEndTime,
-                  ("description" .=) <$> _zimwDescription])
-
---
--- /See:/ 'zoneList' smart constructor.
-data ZoneList = ZoneList
-    { _zlNextPageToken :: !(Maybe Text)
-    , _zlKind          :: !Text
-    , _zlItems         :: !(Maybe [Maybe Zone])
-    , _zlSelfLink      :: !(Maybe Text)
-    , _zlId            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ZoneList' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'zlNextPageToken'
---
--- * 'zlKind'
---
--- * 'zlItems'
---
--- * 'zlSelfLink'
---
--- * 'zlId'
-zoneList
-    :: ZoneList
-zoneList =
-    ZoneList
-    { _zlNextPageToken = Nothing
-    , _zlKind = "autoscaler#zoneList"
-    , _zlItems = Nothing
-    , _zlSelfLink = Nothing
-    , _zlId = Nothing
-    }
-
-zlNextPageToken :: Lens' ZoneList (Maybe Text)
-zlNextPageToken
-  = lens _zlNextPageToken
-      (\ s a -> s{_zlNextPageToken = a})
-
--- | Type of resource.
-zlKind :: Lens' ZoneList Text
-zlKind = lens _zlKind (\ s a -> s{_zlKind = a})
-
-zlItems :: Lens' ZoneList [Maybe Zone]
-zlItems
-  = lens _zlItems (\ s a -> s{_zlItems = a}) . _Default
-      . _Coerce
-
--- | Server defined URL for this resource (output only).
-zlSelfLink :: Lens' ZoneList (Maybe Text)
-zlSelfLink
-  = lens _zlSelfLink (\ s a -> s{_zlSelfLink = a})
-
-zlId :: Lens' ZoneList (Maybe Text)
-zlId = lens _zlId (\ s a -> s{_zlId = a})
-
-instance FromJSON ZoneList where
-        parseJSON
-          = withObject "ZoneList"
-              (\ o ->
-                 ZoneList <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!= "autoscaler#zoneList")
-                     <*> (o .:? "items" .!= mempty)
-                     <*> (o .:? "selfLink")
-                     <*> (o .:? "id"))
-
-instance ToJSON ZoneList where
-        toJSON ZoneList{..}
-          = object
-              (catMaybes
-                 [("nextPageToken" .=) <$> _zlNextPageToken,
-                  Just ("kind" .= _zlKind), ("items" .=) <$> _zlItems,
-                  ("selfLink" .=) <$> _zlSelfLink,
-                  ("id" .=) <$> _zlId])
+                 [("utilizationTarget" .=) <$>
+                    _apcuUtilizationTarget])

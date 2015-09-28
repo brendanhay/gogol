@@ -17,37 +17,127 @@
 -- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference>
 module Network.Google.Compute.UserAccounts
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** Cloud User Accounts API
       ComputeUserAccounts
-    , GroupsAPI
-    , GroupsInsert
-    , GroupsList
-    , GroupsGet
-    , GroupsRemoveMember
-    , GroupsDelete
-    , GroupsAddMember
-    , UsersAPI
-    , UsersAddPublicKey
-    , UsersInsert
-    , UsersList
-    , UsersRemovePublicKey
-    , UsersGet
-    , UsersDelete
-    , GlobalAccountsOperationsAPI
-    , GlobalAccountsOperationsList
-    , GlobalAccountsOperationsGet
-    , GlobalAccountsOperationsDelete
-    , LinuxAPI
-    , LinuxGetLinuxAccountViews
-    , LinuxGetAuthorizedKeysView
+    , computeUserAccounts
+    , computeUserAccountsURL
+
+    -- ** clouduseraccounts.globalAccountsOperations.delete
+    , module Network.Google.API.Clouduseraccounts.GlobalAccountsOperations.Delete
+
+    -- ** clouduseraccounts.globalAccountsOperations.get
+    , module Network.Google.API.Clouduseraccounts.GlobalAccountsOperations.Get
+
+    -- ** clouduseraccounts.globalAccountsOperations.list
+    , module Network.Google.API.Clouduseraccounts.GlobalAccountsOperations.List
+
+    -- ** clouduseraccounts.groups.addMember
+    , module Network.Google.API.Clouduseraccounts.Groups.AddMember
+
+    -- ** clouduseraccounts.groups.delete
+    , module Network.Google.API.Clouduseraccounts.Groups.Delete
+
+    -- ** clouduseraccounts.groups.get
+    , module Network.Google.API.Clouduseraccounts.Groups.Get
+
+    -- ** clouduseraccounts.groups.insert
+    , module Network.Google.API.Clouduseraccounts.Groups.Insert
+
+    -- ** clouduseraccounts.groups.list
+    , module Network.Google.API.Clouduseraccounts.Groups.List
+
+    -- ** clouduseraccounts.groups.removeMember
+    , module Network.Google.API.Clouduseraccounts.Groups.RemoveMember
+
+    -- ** clouduseraccounts.linux.getAuthorizedKeysView
+    , module Network.Google.API.Clouduseraccounts.Linux.GetAuthorizedKeysView
+
+    -- ** clouduseraccounts.linux.getLinuxAccountViews
+    , module Network.Google.API.Clouduseraccounts.Linux.GetLinuxAccountViews
+
+    -- ** clouduseraccounts.users.addPublicKey
+    , module Network.Google.API.Clouduseraccounts.Users.AddPublicKey
+
+    -- ** clouduseraccounts.users.delete
+    , module Network.Google.API.Clouduseraccounts.Users.Delete
+
+    -- ** clouduseraccounts.users.get
+    , module Network.Google.API.Clouduseraccounts.Users.Get
+
+    -- ** clouduseraccounts.users.insert
+    , module Network.Google.API.Clouduseraccounts.Users.Insert
+
+    -- ** clouduseraccounts.users.list
+    , module Network.Google.API.Clouduseraccounts.Users.List
+
+    -- ** clouduseraccounts.users.removePublicKey
+    , module Network.Google.API.Clouduseraccounts.Users.RemovePublicKey
 
     -- * Types
 
-    -- ** AuthorizedKeysView
-    , AuthorizedKeysView
-    , authorizedKeysView
-    , akvSudoer
-    , akvKeys
+    -- ** GroupsAddMemberRequest
+    , GroupsAddMemberRequest
+    , groupsAddMemberRequest
+    , gamrUsers
+
+    -- ** LinuxGroupView
+    , LinuxGroupView
+    , linuxGroupView
+    , lgvMembers
+    , lgvGid
+    , lgvGroupName
+
+    -- ** OperationItemDataItemWarnings
+    , OperationItemDataItemWarnings
+    , operationItemDataItemWarnings
+    , oidiwValue
+    , oidiwKey
+
+    -- ** OperationCodeItemWarnings
+    , OperationCodeItemWarnings (..)
+
+    -- ** OperationItemWarnings
+    , OperationItemWarnings
+    , operationItemWarnings
+    , oiwData
+    , oiwCode
+    , oiwMessage
+
+    -- ** Alt
+    , Alt (..)
+
+    -- ** LinuxGetAuthorizedKeysViewResponse
+    , LinuxGetAuthorizedKeysViewResponse
+    , linuxGetAuthorizedKeysViewResponse
+    , lgakvrResource
+
+    -- ** OperationItemErrorsError
+    , OperationItemErrorsError
+    , operationItemErrorsError
+    , oieeLocation
+    , oieeCode
+    , oieeMessage
+
+    -- ** GroupsRemoveMemberRequest
+    , GroupsRemoveMemberRequest
+    , groupsRemoveMemberRequest
+    , grmrUsers
+
+    -- ** PublicKey
+    , PublicKey
+    , publicKey
+    , pkFingerprint
+    , pkKey
+    , pkCreationTimestamp
+    , pkExpirationTimestamp
+    , pkDescription
+
+    -- ** OperationError
+    , OperationError
+    , operationError
+    , oeErrors
 
     -- ** Group
     , Group
@@ -60,48 +150,19 @@ module Network.Google.Compute.UserAccounts
     , gId
     , gDescription
 
-    -- ** GroupList
-    , GroupList
-    , groupList
-    , glNextPageToken
-    , glKind
-    , glItems
-    , glSelfLink
-    , glId
-
-    -- ** GroupsAddMemberRequest
-    , GroupsAddMemberRequest
-    , groupsAddMemberRequest
-    , gamrUsers
-
-    -- ** GroupsRemoveMemberRequest
-    , GroupsRemoveMemberRequest
-    , groupsRemoveMemberRequest
-    , grmrUsers
-
-    -- ** LinuxAccountViews
-    , LinuxAccountViews
-    , linuxAccountViews
-    , lavUserViews
-    , lavKind
-    , lavGroupViews
-
-    -- ** LinuxGetAuthorizedKeysViewResponse
-    , LinuxGetAuthorizedKeysViewResponse
-    , linuxGetAuthorizedKeysViewResponse
-    , lgakvrResource
+    -- ** OperationList
+    , OperationList
+    , operationList
+    , olNextPageToken
+    , olKind
+    , olItems
+    , olSelfLink
+    , olId
 
     -- ** LinuxGetLinuxAccountViewsResponse
     , LinuxGetLinuxAccountViewsResponse
     , linuxGetLinuxAccountViewsResponse
     , lglavrResource
-
-    -- ** LinuxGroupView
-    , LinuxGroupView
-    , linuxGroupView
-    , lgvMembers
-    , lgvGid
-    , lgvGroupName
 
     -- ** LinuxUserView
     , LinuxUserView
@@ -112,6 +173,18 @@ module Network.Google.Compute.UserAccounts
     , luvShell
     , luvGid
     , luvHomeDirectory
+
+    -- ** OperationStatus
+    , OperationStatus (..)
+
+    -- ** GroupList
+    , GroupList
+    , groupList
+    , glNextPageToken
+    , glKind
+    , glItems
+    , glSelfLink
+    , glId
 
     -- ** Operation
     , Operation
@@ -139,54 +212,27 @@ module Network.Google.Compute.UserAccounts
     , oTargetLink
     , oClientOperationId
 
-    -- ** OperationCodeItemWarnings
-    , OperationCodeItemWarnings (..)
+    -- ** UserList
+    , UserList
+    , userList
+    , ulNextPageToken
+    , ulKind
+    , ulItems
+    , ulSelfLink
+    , ulId
 
-    -- ** OperationError
-    , OperationError
-    , operationError
-    , oeErrors
+    -- ** AuthorizedKeysView
+    , AuthorizedKeysView
+    , authorizedKeysView
+    , akvSudoer
+    , akvKeys
 
-    -- ** OperationItemDataItemWarnings
-    , OperationItemDataItemWarnings
-    , operationItemDataItemWarnings
-    , oidiwValue
-    , oidiwKey
-
-    -- ** OperationItemErrorsError
-    , OperationItemErrorsError
-    , operationItemErrorsError
-    , oieeLocation
-    , oieeCode
-    , oieeMessage
-
-    -- ** OperationItemWarnings
-    , OperationItemWarnings
-    , operationItemWarnings
-    , oiwData
-    , oiwCode
-    , oiwMessage
-
-    -- ** OperationList
-    , OperationList
-    , operationList
-    , olNextPageToken
-    , olKind
-    , olItems
-    , olSelfLink
-    , olId
-
-    -- ** OperationStatus
-    , OperationStatus (..)
-
-    -- ** PublicKey
-    , PublicKey
-    , publicKey
-    , pkFingerprint
-    , pkKey
-    , pkCreationTimestamp
-    , pkExpirationTimestamp
-    , pkDescription
+    -- ** LinuxAccountViews
+    , LinuxAccountViews
+    , linuxAccountViews
+    , lavUserViews
+    , lavKind
+    , lavGroupViews
 
     -- ** User
     , User
@@ -200,17 +246,25 @@ module Network.Google.Compute.UserAccounts
     , uCreationTimestamp
     , uId
     , uDescription
-
-    -- ** UserList
-    , UserList
-    , userList
-    , ulNextPageToken
-    , ulKind
-    , ulItems
-    , ulSelfLink
-    , ulId
     ) where
 
+import           Network.Google.API.Clouduseraccounts.GlobalAccountsOperations.Delete
+import           Network.Google.API.Clouduseraccounts.GlobalAccountsOperations.Get
+import           Network.Google.API.Clouduseraccounts.GlobalAccountsOperations.List
+import           Network.Google.API.Clouduseraccounts.Groups.AddMember
+import           Network.Google.API.Clouduseraccounts.Groups.Delete
+import           Network.Google.API.Clouduseraccounts.Groups.Get
+import           Network.Google.API.Clouduseraccounts.Groups.Insert
+import           Network.Google.API.Clouduseraccounts.Groups.List
+import           Network.Google.API.Clouduseraccounts.Groups.RemoveMember
+import           Network.Google.API.Clouduseraccounts.Linux.GetAuthorizedKeysView
+import           Network.Google.API.Clouduseraccounts.Linux.GetLinuxAccountViews
+import           Network.Google.API.Clouduseraccounts.Users.AddPublicKey
+import           Network.Google.API.Clouduseraccounts.Users.Delete
+import           Network.Google.API.Clouduseraccounts.Users.Get
+import           Network.Google.API.Clouduseraccounts.Users.Insert
+import           Network.Google.API.Clouduseraccounts.Users.List
+import           Network.Google.API.Clouduseraccounts.Users.RemovePublicKey
 import           Network.Google.Compute.UserAccounts.Types
 import           Network.Google.Prelude
 
@@ -219,349 +273,22 @@ TODO
 -}
 
 type ComputeUserAccounts =
-     GroupsAPI :<|> UsersAPI :<|>
-       GlobalAccountsOperationsAPI
-       :<|> LinuxAPI
+     GroupsGetAPI :<|> UsersGetAPI :<|>
+       GlobalAccountsOperationsListAPI
+       :<|> UsersInsertAPI
+       :<|> UsersAddPublicKeyAPI
+       :<|> GroupsInsertAPI
+       :<|> GlobalAccountsOperationsDeleteAPI
+       :<|> GroupsListAPI
+       :<|> UsersListAPI
+       :<|> GroupsAddMemberAPI
+       :<|> GroupsRemoveMemberAPI
+       :<|> LinuxGetLinuxAccountViewsAPI
+       :<|> LinuxGetAuthorizedKeysViewAPI
+       :<|> UsersRemovePublicKeyAPI
+       :<|> GroupsDeleteAPI
+       :<|> GlobalAccountsOperationsGetAPI
+       :<|> UsersDeleteAPI
 
-type GroupsAPI =
-     GroupsInsert :<|> GroupsList :<|> GroupsGet :<|>
-       GroupsRemoveMember
-       :<|> GroupsDelete
-       :<|> GroupsAddMember
-
--- | Creates a Group resource in the specified project using the data
--- included in the request.
-type GroupsInsert =
-     "clouduseraccounts" :>
-       "vm_beta" :>
-         "projects" :>
-           Capture "project" Text :>
-             "global" :>
-               "groups" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Post '[JSON] Operation
-
--- | Retrieves the list of groups contained within the specified project.
-type GroupsList =
-     "clouduseraccounts" :>
-       "vm_beta" :>
-         "projects" :>
-           Capture "project" Text :>
-             "global" :>
-               "groups" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "orderBy" Text :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "filter" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "maxResults" Word32 :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "alt" Text :>
-                                       Get '[JSON] GroupList
-
--- | Returns the specified Group resource.
-type GroupsGet =
-     "clouduseraccounts" :>
-       "vm_beta" :>
-         "projects" :>
-           Capture "project" Text :>
-             "global" :>
-               "groups" :>
-                 Capture "groupName" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Get '[JSON] Group
-
--- | Removes users from the specified group.
-type GroupsRemoveMember =
-     "clouduseraccounts" :>
-       "vm_beta" :>
-         "projects" :>
-           Capture "project" Text :>
-             "global" :>
-               "groups" :>
-                 Capture "groupName" Text :>
-                   "removeMember" :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Post '[JSON] Operation
-
--- | Deletes the specified Group resource.
-type GroupsDelete =
-     "clouduseraccounts" :>
-       "vm_beta" :>
-         "projects" :>
-           Capture "project" Text :>
-             "global" :>
-               "groups" :>
-                 Capture "groupName" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Delete '[JSON] Operation
-
--- | Adds users to the specified group.
-type GroupsAddMember =
-     "clouduseraccounts" :>
-       "vm_beta" :>
-         "projects" :>
-           Capture "project" Text :>
-             "global" :>
-               "groups" :>
-                 Capture "groupName" Text :>
-                   "addMember" :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Post '[JSON] Operation
-
-type UsersAPI =
-     UsersAddPublicKey :<|> UsersInsert :<|> UsersList
-       :<|> UsersRemovePublicKey
-       :<|> UsersGet
-       :<|> UsersDelete
-
--- | Adds a public key to the specified User resource with the data included
--- in the request.
-type UsersAddPublicKey =
-     "clouduseraccounts" :>
-       "vm_beta" :>
-         "projects" :>
-           Capture "project" Text :>
-             "global" :>
-               "users" :>
-                 Capture "user" Text :>
-                   "addPublicKey" :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Post '[JSON] Operation
-
--- | Creates a User resource in the specified project using the data included
--- in the request.
-type UsersInsert =
-     "clouduseraccounts" :>
-       "vm_beta" :>
-         "projects" :>
-           Capture "project" Text :>
-             "global" :>
-               "users" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Post '[JSON] Operation
-
--- | Retrieves a list of users contained within the specified project.
-type UsersList =
-     "clouduseraccounts" :>
-       "vm_beta" :>
-         "projects" :>
-           Capture "project" Text :>
-             "global" :>
-               "users" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "orderBy" Text :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "filter" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "maxResults" Word32 :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "alt" Text :>
-                                       Get '[JSON] UserList
-
--- | Removes the specified public key from the user.
-type UsersRemovePublicKey =
-     "clouduseraccounts" :>
-       "vm_beta" :>
-         "projects" :>
-           Capture "project" Text :>
-             "global" :>
-               "users" :>
-                 Capture "user" Text :>
-                   "removePublicKey" :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "fingerprint" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Post '[JSON] Operation
-
--- | Returns the specified User resource.
-type UsersGet =
-     "clouduseraccounts" :>
-       "vm_beta" :>
-         "projects" :>
-           Capture "project" Text :>
-             "global" :>
-               "users" :>
-                 Capture "user" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Get '[JSON] User
-
--- | Deletes the specified User resource.
-type UsersDelete =
-     "clouduseraccounts" :>
-       "vm_beta" :>
-         "projects" :>
-           Capture "project" Text :>
-             "global" :>
-               "users" :>
-                 Capture "user" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Delete '[JSON] Operation
-
-type GlobalAccountsOperationsAPI =
-     GlobalAccountsOperationsList :<|>
-       GlobalAccountsOperationsGet
-       :<|> GlobalAccountsOperationsDelete
-
--- | Retrieves the list of operation resources contained within the specified
--- project.
-type GlobalAccountsOperationsList =
-     "clouduseraccounts" :>
-       "vm_beta" :>
-         "projects" :>
-           Capture "project" Text :>
-             "global" :>
-               "operations" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "orderBy" Text :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "filter" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "maxResults" Word32 :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "alt" Text :>
-                                       Get '[JSON] OperationList
-
--- | Retrieves the specified operation resource.
-type GlobalAccountsOperationsGet =
-     "clouduseraccounts" :>
-       "vm_beta" :>
-         "projects" :>
-           Capture "project" Text :>
-             "global" :>
-               "operations" :>
-                 Capture "operation" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Get '[JSON] Operation
-
--- | Deletes the specified operation resource.
-type GlobalAccountsOperationsDelete =
-     "clouduseraccounts" :>
-       "vm_beta" :>
-         "projects" :>
-           Capture "project" Text :>
-             "global" :>
-               "operations" :>
-                 Capture "operation" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Delete '[JSON] ()
-
-type LinuxAPI =
-     LinuxGetLinuxAccountViews :<|>
-       LinuxGetAuthorizedKeysView
-
--- | Retrieves a list of user accounts for an instance within a specific
--- project.
-type LinuxGetLinuxAccountViews =
-     "clouduseraccounts" :>
-       "vm_beta" :>
-         "projects" :>
-           Capture "project" Text :>
-             "zones" :>
-               Capture "zone" Text :>
-                 "linuxAccountViews" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "orderBy" Text :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "filter" Text :>
-                               QueryParam "pageToken" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "maxResults" Word32 :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "alt" Text :>
-                                         QueryParam "instance" Text :>
-                                           Post '[JSON]
-                                             LinuxGetLinuxAccountViewsResponse
-
--- | Returns a list of authorized public keys for a specific user account.
-type LinuxGetAuthorizedKeysView =
-     "clouduseraccounts" :>
-       "vm_beta" :>
-         "projects" :>
-           Capture "project" Text :>
-             "zones" :>
-               Capture "zone" Text :>
-                 "authorizedKeysView" :>
-                   Capture "user" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "login" Bool :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     QueryParam "instance" Text :>
-                                       Post '[JSON]
-                                         LinuxGetAuthorizedKeysViewResponse
+computeUserAccounts :: Proxy ComputeUserAccounts
+computeUserAccounts = Proxy

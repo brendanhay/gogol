@@ -1,6 +1,6 @@
 name:                  gogol-affiliates
 version:               0.0.1
-synopsis:              Google Affiliate Network API.
+synopsis:              Google Affiliate Network API Client.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -16,8 +16,8 @@ extra-source-files:    README.md
 description:
     Lets you have programmatic access to your Google Affiliate Network data.
     .
-    /Warning:/ This is an experimental preview release which is still under
-    heavy development and not intended for public consumption, caveat emptor!
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
 
 source-repository head
     type:     git
@@ -30,7 +30,17 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.Affiliates
+          Network.Google.API.Gan.Advertisers.Get
+        , Network.Google.API.Gan.Advertisers.List
+        , Network.Google.API.Gan.CcOffers.List
+        , Network.Google.API.Gan.Events.List
+        , Network.Google.API.Gan.Links.Get
+        , Network.Google.API.Gan.Links.Insert
+        , Network.Google.API.Gan.Links.List
+        , Network.Google.API.Gan.Publishers.Get
+        , Network.Google.API.Gan.Publishers.List
+        , Network.Google.API.Gan.Reports.Get
+        , Network.Google.Affiliates
         , Network.Google.Affiliates.Types
 
     other-modules:

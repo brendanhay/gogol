@@ -17,46 +17,140 @@
 -- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference>
 module Network.Google.BigQuery
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** BigQuery API
       BigQuery
-    , JobsAPI
-    , JobsInsert
-    , JobsList
-    , JobsGet
-    , JobsQuery
-    , JobsCancel
-    , JobsGetQueryResults
-    , TablesAPI
-    , TablesInsert
-    , TablesList
-    , TablesPatch
-    , TablesGet
-    , TablesDelete
-    , TablesUpdate
-    , TabledataAPI
-    , TabledataList
-    , TabledataInsertAll
-    , ProjectsAPI
-    , ProjectsList
-    , DatasetsAPI
-    , DatasetsInsert
-    , DatasetsList
-    , DatasetsPatch
-    , DatasetsGet
-    , DatasetsDelete
-    , DatasetsUpdate
+    , bigQuery
+    , bigQueryURL
+
+    -- ** bigquery.datasets.delete
+    , module Network.Google.API.BigQuery.Datasets.Delete
+
+    -- ** bigquery.datasets.get
+    , module Network.Google.API.BigQuery.Datasets.Get
+
+    -- ** bigquery.datasets.insert
+    , module Network.Google.API.BigQuery.Datasets.Insert
+
+    -- ** bigquery.datasets.list
+    , module Network.Google.API.BigQuery.Datasets.List
+
+    -- ** bigquery.datasets.patch
+    , module Network.Google.API.BigQuery.Datasets.Patch
+
+    -- ** bigquery.datasets.update
+    , module Network.Google.API.BigQuery.Datasets.Update
+
+    -- ** bigquery.jobs.cancel
+    , module Network.Google.API.BigQuery.Jobs.Cancel
+
+    -- ** bigquery.jobs.get
+    , module Network.Google.API.BigQuery.Jobs.Get
+
+    -- ** bigquery.jobs.getQueryResults
+    , module Network.Google.API.BigQuery.Jobs.GetQueryResults
+
+    -- ** bigquery.jobs.insert
+    , module Network.Google.API.BigQuery.Jobs.Insert
+
+    -- ** bigquery.jobs.list
+    , module Network.Google.API.BigQuery.Jobs.List
+
+    -- ** bigquery.jobs.query
+    , module Network.Google.API.BigQuery.Jobs.Query
+
+    -- ** bigquery.projects.list
+    , module Network.Google.API.BigQuery.Projects.List
+
+    -- ** bigquery.tabledata.insertAll
+    , module Network.Google.API.BigQuery.Tabledata.InsertAll
+
+    -- ** bigquery.tabledata.list
+    , module Network.Google.API.BigQuery.Tabledata.List
+
+    -- ** bigquery.tables.delete
+    , module Network.Google.API.BigQuery.Tables.Delete
+
+    -- ** bigquery.tables.get
+    , module Network.Google.API.BigQuery.Tables.Get
+
+    -- ** bigquery.tables.insert
+    , module Network.Google.API.BigQuery.Tables.Insert
+
+    -- ** bigquery.tables.list
+    , module Network.Google.API.BigQuery.Tables.List
+
+    -- ** bigquery.tables.patch
+    , module Network.Google.API.BigQuery.Tables.Patch
+
+    -- ** bigquery.tables.update
+    , module Network.Google.API.BigQuery.Tables.Update
 
     -- * Types
 
-    -- ** CsvOptions
-    , CsvOptions
-    , csvOptions
-    , coSkipLeadingRows
-    , coAllowJaggedRows
-    , coAllowQuotedNewlines
-    , coQuote
-    , coEncoding
-    , coFieldDelimiter
+    -- ** Streamingbuffer
+    , Streamingbuffer
+    , streamingbuffer
+    , sEstimatedBytes
+    , sOldestEntryTime
+    , sEstimatedRows
+
+    -- ** TableRow
+    , TableRow
+    , tableRow
+    , trF
+
+    -- ** JobsList'Projection
+    , JobsList'Projection (..)
+
+    -- ** JobConfiguration
+    , JobConfiguration
+    , jobConfiguration
+    , jcCopy
+    , jcLink
+    , jcLoad
+    , jcQuery
+    , jcExtract
+    , jcDryRun
+
+    -- ** Job
+    , Job
+    , job
+    , jobJobReference
+    , jobStatus
+    , jobEtag
+    , jobUserEmail
+    , jobKind
+    , jobSelfLink
+    , jobId
+    , jobStatistics
+    , jobConfiguration
+
+    -- ** JobConfigurationLink
+    , JobConfigurationLink
+    , jobConfigurationLink
+    , jclDestinationTable
+    , jclWriteDisposition
+    , jclCreateDisposition
+    , jclSourceUri
+
+    -- ** TableListItemTables
+    , TableListItemTables
+    , tableListItemTables
+    , tlitTableReference
+    , tlitFriendlyName
+    , tlitKind
+    , tlitId
+    , tlitType
+
+    -- ** DatasetListItemDatasets
+    , DatasetListItemDatasets
+    , datasetListItemDatasets
+    , dlidFriendlyName
+    , dlidKind
+    , dlidDatasetReference
+    , dlidId
 
     -- ** Dataset
     , Dataset
@@ -74,140 +168,23 @@ module Network.Google.BigQuery
     , dDefaultTableExpirationMs
     , dDescription
 
-    -- ** DatasetItemAccess
-    , DatasetItemAccess
-    , datasetItemAccess
-    , diaGroupByEmail
-    , diaDomain
-    , diaSpecialGroup
-    , diaRole
-    , diaView
-    , diaUserByEmail
+    -- ** Alt
+    , Alt (..)
 
-    -- ** DatasetList
-    , DatasetList
-    , datasetList
-    , dlEtag
-    , dlNextPageToken
-    , dlKind
-    , dlDatasets
-
-    -- ** DatasetListItemDatasets
-    , DatasetListItemDatasets
-    , datasetListItemDatasets
-    , dlidFriendlyName
-    , dlidKind
-    , dlidDatasetReference
-    , dlidId
-
-    -- ** DatasetReference
-    , DatasetReference
-    , datasetReference
-    , drDatasetId
-    , drProjectId
-
-    -- ** ErrorProto
-    , ErrorProto
-    , errorProto
-    , epDebugInfo
-    , epLocation
-    , epReason
-    , epMessage
-
-    -- ** ExternalDataConfiguration
-    , ExternalDataConfiguration
-    , externalDataConfiguration
-    , edcIgnoreUnknownValues
-    , edcCompression
-    , edcSourceFormat
-    , edcSchema
-    , edcMaxBadRecords
-    , edcSourceUris
-    , edcCsvOptions
-
-    -- ** GetQueryResultsResponse
-    , GetQueryResultsResponse
-    , getQueryResultsResponse
-    , gqrrJobReference
-    , gqrrEtag
-    , gqrrKind
-    , gqrrSchema
-    , gqrrTotalBytesProcessed
-    , gqrrRows
-    , gqrrPageToken
-    , gqrrTotalRows
-    , gqrrErrors
-    , gqrrJobComplete
-    , gqrrCacheHit
-
-    -- ** Job
-    , Job
-    , job
-    , jobJobReference
-    , jobStatus
-    , jobEtag
-    , jobUserEmail
-    , jobKind
-    , jobSelfLink
-    , jobId
+    -- ** JobStatistics
+    , JobStatistics
     , jobStatistics
-    , jobConfiguration
+    , jsCreationTime
+    , jsStartTime
+    , jsLoad
+    , jsTotalBytesProcessed
+    , jsEndTime
+    , jsQuery
+    , jsExtract
 
-    -- ** JobCancelResponse
-    , JobCancelResponse
-    , jobCancelResponse
-    , jcrKind
-    , jcrJob
-
-    -- ** JobConfiguration
-    , JobConfiguration
-    , jobConfiguration
-    , jcCopy
-    , jcLink
-    , jcLoad
-    , jcQuery
-    , jcExtract
-    , jcDryRun
-
-    -- ** JobConfigurationExtract
-    , JobConfigurationExtract
-    , jobConfigurationExtract
-    , jceDestinationFormat
-    , jceSourceTable
-    , jcePrintHeader
-    , jceCompression
-    , jceDestinationUris
-    , jceDestinationUri
-    , jceFieldDelimiter
-
-    -- ** JobConfigurationLink
-    , JobConfigurationLink
-    , jobConfigurationLink
-    , jclDestinationTable
-    , jclWriteDisposition
-    , jclCreateDisposition
-    , jclSourceUri
-
-    -- ** JobConfigurationLoad
-    , JobConfigurationLoad
-    , jobConfigurationLoad
-    , jSkipLeadingRows
-    , jProjectionFields
-    , jDestinationTable
-    , jWriteDisposition
-    , jAllowJaggedRows
-    , jSchemaInline
-    , jIgnoreUnknownValues
-    , jCreateDisposition
-    , jSchemaInlineFormat
-    , jAllowQuotedNewlines
-    , jSourceFormat
-    , jSchema
-    , jQuote
-    , jMaxBadRecords
-    , jSourceUris
-    , jEncoding
-    , jFieldDelimiter
+    -- ** JsonObject
+    , JsonObject
+    , jsonObject
 
     -- ** JobConfigurationQuery
     , JobConfigurationQuery
@@ -225,19 +202,6 @@ module Network.Google.BigQuery
     , jcqFlattenResults
     , jcqDefaultDataset
 
-    -- ** JobConfigurationQueryTableDefinitions
-    , JobConfigurationQueryTableDefinitions
-    , jobConfigurationQueryTableDefinitions
-
-    -- ** JobConfigurationTableCopy
-    , JobConfigurationTableCopy
-    , jobConfigurationTableCopy
-    , jctcDestinationTable
-    , jctcWriteDisposition
-    , jctcSourceTables
-    , jctcCreateDisposition
-    , jctcSourceTable
-
     -- ** JobList
     , JobList
     , jobList
@@ -246,35 +210,18 @@ module Network.Google.BigQuery
     , jlKind
     , jlJobs
 
-    -- ** JobListItemJobs
-    , JobListItemJobs
-    , jobListItemJobs
-    , jlijJobReference
-    , jlijStatus
-    , jlijState
-    , jlijUserEmail
-    , jlijKind
-    , jlijErrorResult
-    , jlijId
-    , jlijStatistics
-    , jlijConfiguration
+    -- ** JobsList'StateFilter
+    , JobsList'StateFilter (..)
 
-    -- ** JobReference
-    , JobReference
-    , jobReference
-    , jrJobId
-    , jrProjectId
+    -- ** ViewDefinition
+    , ViewDefinition
+    , viewDefinition
+    , vdQuery
 
-    -- ** JobStatistics
-    , JobStatistics
-    , jobStatistics
-    , jsCreationTime
-    , jsStartTime
-    , jsLoad
-    , jsTotalBytesProcessed
-    , jsEndTime
-    , jsQuery
-    , jsExtract
+    -- ** TableCell
+    , TableCell
+    , tableCell
+    , tcV
 
     -- ** JobStatistics2
     , JobStatistics2
@@ -284,18 +231,11 @@ module Network.Google.BigQuery
     , jCacheHit
     , jTotalBytesBilled
 
-    -- ** JobStatistics3
-    , JobStatistics3
-    , jobStatistics3
-    , jsInputFiles
-    , jsOutputRows
-    , jsOutputBytes
-    , jsInputFileBytes
-
-    -- ** JobStatistics4
-    , JobStatistics4
-    , jobStatistics4
-    , jsDestinationUriFileCounts
+    -- ** UserDefinedFunctionResource
+    , UserDefinedFunctionResource
+    , userDefinedFunctionResource
+    , udfrResourceUri
+    , udfrInlineCode
 
     -- ** JobStatus
     , JobStatus
@@ -304,44 +244,21 @@ module Network.Google.BigQuery
     , jsErrorResult
     , jsErrors
 
-    -- ** JsonObject
-    , JsonObject
-    , jsonObject
-
-    -- ** ProjectList
-    , ProjectList
-    , projectList
-    , plTotalItems
-    , plEtag
-    , plNextPageToken
-    , plKind
-    , plProjects
-
-    -- ** ProjectListItemProjects
-    , ProjectListItemProjects
-    , projectListItemProjects
-    , plipFriendlyName
-    , plipKind
-    , plipProjectReference
-    , plipId
-    , plipNumericId
+    -- ** TableDataInsertAllResponse
+    , TableDataInsertAllResponse
+    , tableDataInsertAllResponse
+    , tdiarKind
+    , tdiarInsertErrors
 
     -- ** ProjectReference
     , ProjectReference
     , projectReference
     , prProjectId
 
-    -- ** QueryRequest
-    , QueryRequest
-    , queryRequest
-    , qUseQueryCache
-    , qPreserveNulls
-    , qKind
-    , qQuery
-    , qTimeoutMs
-    , qDryRun
-    , qMaxResults
-    , qDefaultDataset
+    -- ** JobStatistics4
+    , JobStatistics4
+    , jobStatistics4
+    , jsDestinationUriFileCounts
 
     -- ** QueryResponse
     , QueryResponse
@@ -357,12 +274,177 @@ module Network.Google.BigQuery
     , qrJobComplete
     , qrCacheHit
 
-    -- ** Streamingbuffer
-    , Streamingbuffer
-    , streamingbuffer
-    , sEstimatedBytes
-    , sOldestEntryTime
-    , sEstimatedRows
+    -- ** JobStatistics3
+    , JobStatistics3
+    , jobStatistics3
+    , jsInputFiles
+    , jsOutputRows
+    , jsOutputBytes
+    , jsInputFileBytes
+
+    -- ** TableDataInsertAllResponseItemInsertErrors
+    , TableDataInsertAllResponseItemInsertErrors
+    , tableDataInsertAllResponseItemInsertErrors
+    , tdiariieErrors
+    , tdiariieIndex
+
+    -- ** JobConfigurationTableCopy
+    , JobConfigurationTableCopy
+    , jobConfigurationTableCopy
+    , jctcDestinationTable
+    , jctcWriteDisposition
+    , jctcSourceTables
+    , jctcCreateDisposition
+    , jctcSourceTable
+
+    -- ** TableDataList
+    , TableDataList
+    , tableDataList
+    , tdlEtag
+    , tdlKind
+    , tdlRows
+    , tdlPageToken
+    , tdlTotalRows
+
+    -- ** JobReference
+    , JobReference
+    , jobReference
+    , jrJobId
+    , jrProjectId
+
+    -- ** TableList
+    , TableList
+    , tableList
+    , tlTotalItems
+    , tlEtag
+    , tlNextPageToken
+    , tlKind
+    , tlTables
+
+    -- ** ProjectListItemProjects
+    , ProjectListItemProjects
+    , projectListItemProjects
+    , plipFriendlyName
+    , plipKind
+    , plipProjectReference
+    , plipId
+    , plipNumericId
+
+    -- ** ProjectList
+    , ProjectList
+    , projectList
+    , plTotalItems
+    , plEtag
+    , plNextPageToken
+    , plKind
+    , plProjects
+
+    -- ** TableSchema
+    , TableSchema
+    , tableSchema
+    , tsFields
+
+    -- ** JobListItemJobs
+    , JobListItemJobs
+    , jobListItemJobs
+    , jlijJobReference
+    , jlijStatus
+    , jlijState
+    , jlijUserEmail
+    , jlijKind
+    , jlijErrorResult
+    , jlijId
+    , jlijStatistics
+    , jlijConfiguration
+
+    -- ** JobCancelResponse
+    , JobCancelResponse
+    , jobCancelResponse
+    , jcrKind
+    , jcrJob
+
+    -- ** JobConfigurationExtract
+    , JobConfigurationExtract
+    , jobConfigurationExtract
+    , jceDestinationFormat
+    , jceSourceTable
+    , jcePrintHeader
+    , jceCompression
+    , jceDestinationUris
+    , jceDestinationUri
+    , jceFieldDelimiter
+
+    -- ** GetQueryResultsResponse
+    , GetQueryResultsResponse
+    , getQueryResultsResponse
+    , gqrrJobReference
+    , gqrrEtag
+    , gqrrKind
+    , gqrrSchema
+    , gqrrTotalBytesProcessed
+    , gqrrRows
+    , gqrrPageToken
+    , gqrrTotalRows
+    , gqrrErrors
+    , gqrrJobComplete
+    , gqrrCacheHit
+
+    -- ** TableReference
+    , TableReference
+    , tableReference
+    , trDatasetId
+    , trProjectId
+    , trTableId
+
+    -- ** ExternalDataConfiguration
+    , ExternalDataConfiguration
+    , externalDataConfiguration
+    , edcIgnoreUnknownValues
+    , edcCompression
+    , edcSourceFormat
+    , edcSchema
+    , edcMaxBadRecords
+    , edcSourceUris
+    , edcCsvOptions
+
+    -- ** TableFieldSchema
+    , TableFieldSchema
+    , tableFieldSchema
+    , tfsMode
+    , tfsName
+    , tfsType
+    , tfsDescription
+    , tfsFields
+
+    -- ** DatasetList
+    , DatasetList
+    , datasetList
+    , dlEtag
+    , dlNextPageToken
+    , dlKind
+    , dlDatasets
+
+    -- ** DatasetItemAccess
+    , DatasetItemAccess
+    , datasetItemAccess
+    , diaGroupByEmail
+    , diaDomain
+    , diaSpecialGroup
+    , diaRole
+    , diaView
+    , diaUserByEmail
+
+    -- ** QueryRequest
+    , QueryRequest
+    , queryRequest
+    , qUseQueryCache
+    , qPreserveNulls
+    , qKind
+    , qQuery
+    , qTimeoutMs
+    , qDryRun
+    , qMaxResults
+    , qDefaultDataset
 
     -- ** Table
     , Table
@@ -386,10 +468,33 @@ module Network.Google.BigQuery
     , tExpirationTime
     , tDescription
 
-    -- ** TableCell
-    , TableCell
-    , tableCell
-    , tcV
+    -- ** JobConfigurationQueryTableDefinitions
+    , JobConfigurationQueryTableDefinitions
+    , jobConfigurationQueryTableDefinitions
+
+    -- ** CsvOptions
+    , CsvOptions
+    , csvOptions
+    , coSkipLeadingRows
+    , coAllowJaggedRows
+    , coAllowQuotedNewlines
+    , coQuote
+    , coEncoding
+    , coFieldDelimiter
+
+    -- ** TableDataInsertAllRequestItemRows
+    , TableDataInsertAllRequestItemRows
+    , tableDataInsertAllRequestItemRows
+    , tdiarirJson
+    , tdiarirInsertId
+
+    -- ** ErrorProto
+    , ErrorProto
+    , errorProto
+    , epDebugInfo
+    , epLocation
+    , epReason
+    , epMessage
 
     -- ** TableDataInsertAllRequest
     , TableDataInsertAllRequest
@@ -399,89 +504,55 @@ module Network.Google.BigQuery
     , tabRows
     , tabSkipInvalidRows
 
-    -- ** TableDataInsertAllRequestItemRows
-    , TableDataInsertAllRequestItemRows
-    , tableDataInsertAllRequestItemRows
-    , tdiarirJson
-    , tdiarirInsertId
+    -- ** DatasetReference
+    , DatasetReference
+    , datasetReference
+    , drDatasetId
+    , drProjectId
 
-    -- ** TableDataInsertAllResponse
-    , TableDataInsertAllResponse
-    , tableDataInsertAllResponse
-    , tdiarKind
-    , tdiarInsertErrors
-
-    -- ** TableDataInsertAllResponseItemInsertErrors
-    , TableDataInsertAllResponseItemInsertErrors
-    , tableDataInsertAllResponseItemInsertErrors
-    , tdiariieErrors
-    , tdiariieIndex
-
-    -- ** TableDataList
-    , TableDataList
-    , tableDataList
-    , tdlEtag
-    , tdlKind
-    , tdlRows
-    , tdlPageToken
-    , tdlTotalRows
-
-    -- ** TableFieldSchema
-    , TableFieldSchema
-    , tableFieldSchema
-    , tfsMode
-    , tfsName
-    , tfsType
-    , tfsDescription
-    , tfsFields
-
-    -- ** TableList
-    , TableList
-    , tableList
-    , tlTotalItems
-    , tlEtag
-    , tlNextPageToken
-    , tlKind
-    , tlTables
-
-    -- ** TableListItemTables
-    , TableListItemTables
-    , tableListItemTables
-    , tlitTableReference
-    , tlitFriendlyName
-    , tlitKind
-    , tlitId
-    , tlitType
-
-    -- ** TableReference
-    , TableReference
-    , tableReference
-    , trDatasetId
-    , trProjectId
-    , trTableId
-
-    -- ** TableRow
-    , TableRow
-    , tableRow
-    , trF
-
-    -- ** TableSchema
-    , TableSchema
-    , tableSchema
-    , tsFields
-
-    -- ** UserDefinedFunctionResource
-    , UserDefinedFunctionResource
-    , userDefinedFunctionResource
-    , udfrResourceUri
-    , udfrInlineCode
-
-    -- ** ViewDefinition
-    , ViewDefinition
-    , viewDefinition
-    , vdQuery
+    -- ** JobConfigurationLoad
+    , JobConfigurationLoad
+    , jobConfigurationLoad
+    , jSkipLeadingRows
+    , jProjectionFields
+    , jDestinationTable
+    , jWriteDisposition
+    , jAllowJaggedRows
+    , jSchemaInline
+    , jIgnoreUnknownValues
+    , jCreateDisposition
+    , jSchemaInlineFormat
+    , jAllowQuotedNewlines
+    , jSourceFormat
+    , jSchema
+    , jQuote
+    , jMaxBadRecords
+    , jSourceUris
+    , jEncoding
+    , jFieldDelimiter
     ) where
 
+import           Network.Google.API.BigQuery.Datasets.Delete
+import           Network.Google.API.BigQuery.Datasets.Get
+import           Network.Google.API.BigQuery.Datasets.Insert
+import           Network.Google.API.BigQuery.Datasets.List
+import           Network.Google.API.BigQuery.Datasets.Patch
+import           Network.Google.API.BigQuery.Datasets.Update
+import           Network.Google.API.BigQuery.Jobs.Cancel
+import           Network.Google.API.BigQuery.Jobs.Get
+import           Network.Google.API.BigQuery.Jobs.GetQueryResults
+import           Network.Google.API.BigQuery.Jobs.Insert
+import           Network.Google.API.BigQuery.Jobs.List
+import           Network.Google.API.BigQuery.Jobs.Query
+import           Network.Google.API.BigQuery.Projects.List
+import           Network.Google.API.BigQuery.Tabledata.InsertAll
+import           Network.Google.API.BigQuery.Tabledata.List
+import           Network.Google.API.BigQuery.Tables.Delete
+import           Network.Google.API.BigQuery.Tables.Get
+import           Network.Google.API.BigQuery.Tables.Insert
+import           Network.Google.API.BigQuery.Tables.List
+import           Network.Google.API.BigQuery.Tables.Patch
+import           Network.Google.API.BigQuery.Tables.Update
 import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
@@ -490,429 +561,25 @@ TODO
 -}
 
 type BigQuery =
-     JobsAPI :<|> TablesAPI :<|> TabledataAPI :<|>
-       ProjectsAPI
-       :<|> DatasetsAPI
+     JobsGetAPI :<|> DatasetsInsertAPI :<|> JobsInsertAPI
+       :<|> DatasetsPatchAPI
+       :<|> ProjectsListAPI
+       :<|> TablesGetAPI
+       :<|> TablesInsertAPI
+       :<|> JobsListAPI
+       :<|> TablesListAPI
+       :<|> JobsCancelAPI
+       :<|> TablesDeleteAPI
+       :<|> DatasetsGetAPI
+       :<|> TablesUpdateAPI
+       :<|> JobsQueryAPI
+       :<|> TabledataListAPI
+       :<|> DatasetsListAPI
+       :<|> DatasetsDeleteAPI
+       :<|> JobsGetQueryResultsAPI
+       :<|> TabledataInsertAllAPI
+       :<|> DatasetsUpdateAPI
+       :<|> TablesPatchAPI
 
-type JobsAPI =
-     JobsInsert :<|> JobsList :<|> JobsGet :<|> JobsQuery
-       :<|> JobsCancel
-       :<|> JobsGetQueryResults
-
--- | Starts a new asynchronous job. Requires the Can View project role.
-type JobsInsert =
-     "bigquery" :>
-       "v2" :>
-         "projects" :>
-           Capture "projectId" Text :>
-             "jobs" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] Job
-
--- | Lists all jobs that you started in the specified project. Job
--- information is available for a six month period after creation. The job
--- list is sorted in reverse chronological order, by job creation time.
--- Requires the Can View project role, or the Is Owner project role if you
--- set the allUsers property.
-type JobsList =
-     "bigquery" :>
-       "v2" :>
-         "projects" :>
-           Capture "projectId" Text :>
-             "jobs" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "stateFilter" Text :>
-                         QueryParam "projection" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "allUsers" Bool :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "maxResults" Word32 :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "alt" Text :>
-                                       Get '[JSON] JobList
-
--- | Returns information about a specific job. Job information is available
--- for a six month period after creation. Requires that you\'re the person
--- who ran the job, or have the Is Owner project role.
-type JobsGet =
-     "bigquery" :>
-       "v2" :>
-         "projects" :>
-           Capture "projectId" Text :>
-             "jobs" :>
-               Capture "jobId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] Job
-
--- | Runs a BigQuery SQL query synchronously and returns query results if the
--- query completes within a specified timeout.
-type JobsQuery =
-     "bigquery" :>
-       "v2" :>
-         "projects" :>
-           Capture "projectId" Text :>
-             "queries" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] QueryResponse
-
--- | Requests that a job be cancelled. This call will return immediately, and
--- the client will need to poll for the job status to see if the cancel
--- completed successfully. Cancelled jobs may still incur costs.
-type JobsCancel =
-     "bigquery" :>
-       "v2" :>
-         "project" :>
-           Capture "projectId" Text :>
-             "jobs" :>
-               Capture "jobId" Text :>
-                 "cancel" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Post '[JSON] JobCancelResponse
-
--- | Retrieves the results of a query job.
-type JobsGetQueryResults =
-     "bigquery" :>
-       "v2" :>
-         "projects" :>
-           Capture "projectId" Text :>
-             "queries" :>
-               Capture "jobId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "timeoutMs" Word32 :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "startIndex" Word64 :>
-                                 QueryParam "maxResults" Word32 :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "alt" Text :>
-                                       Get '[JSON] GetQueryResultsResponse
-
-type TablesAPI =
-     TablesInsert :<|> TablesList :<|> TablesPatch :<|>
-       TablesGet
-       :<|> TablesDelete
-       :<|> TablesUpdate
-
--- | Creates a new, empty table in the dataset.
-type TablesInsert =
-     "bigquery" :>
-       "v2" :>
-         "projects" :>
-           Capture "projectId" Text :>
-             "datasets" :>
-               Capture "datasetId" Text :>
-                 "tables" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Post '[JSON] Table
-
--- | Lists all tables in the specified dataset. Requires the READER dataset
--- role.
-type TablesList =
-     "bigquery" :>
-       "v2" :>
-         "projects" :>
-           Capture "projectId" Text :>
-             "datasets" :>
-               Capture "datasetId" Text :>
-                 "tables" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "maxResults" Word32 :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Get '[JSON] TableList
-
--- | Updates information in an existing table. The update method replaces the
--- entire table resource, whereas the patch method only replaces fields
--- that are provided in the submitted table resource. This method supports
--- patch semantics.
-type TablesPatch =
-     "bigquery" :>
-       "v2" :>
-         "projects" :>
-           Capture "projectId" Text :>
-             "datasets" :>
-               Capture "datasetId" Text :>
-                 "tables" :>
-                   Capture "tableId" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Patch '[JSON] Table
-
--- | Gets the specified table resource by table ID. This method does not
--- return the data in the table, it only returns the table resource, which
--- describes the structure of this table.
-type TablesGet =
-     "bigquery" :>
-       "v2" :>
-         "projects" :>
-           Capture "projectId" Text :>
-             "datasets" :>
-               Capture "datasetId" Text :>
-                 "tables" :>
-                   Capture "tableId" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Get '[JSON] Table
-
--- | Deletes the table specified by tableId from the dataset. If the table
--- contains data, all the data will be deleted.
-type TablesDelete =
-     "bigquery" :>
-       "v2" :>
-         "projects" :>
-           Capture "projectId" Text :>
-             "datasets" :>
-               Capture "datasetId" Text :>
-                 "tables" :>
-                   Capture "tableId" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Updates information in an existing table. The update method replaces the
--- entire table resource, whereas the patch method only replaces fields
--- that are provided in the submitted table resource.
-type TablesUpdate =
-     "bigquery" :>
-       "v2" :>
-         "projects" :>
-           Capture "projectId" Text :>
-             "datasets" :>
-               Capture "datasetId" Text :>
-                 "tables" :>
-                   Capture "tableId" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Put '[JSON] Table
-
-type TabledataAPI =
-     TabledataList :<|> TabledataInsertAll
-
--- | Retrieves table data from a specified set of rows. Requires the READER
--- dataset role.
-type TabledataList =
-     "bigquery" :>
-       "v2" :>
-         "projects" :>
-           Capture "projectId" Text :>
-             "datasets" :>
-               Capture "datasetId" Text :>
-                 "tables" :>
-                   Capture "tableId" Text :>
-                     "data" :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "userIp" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "pageToken" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "startIndex" Word64 :>
-                                     QueryParam "maxResults" Word32 :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "alt" Text :>
-                                           Get '[JSON] TableDataList
-
--- | Streams data into BigQuery one record at a time without needing to run a
--- load job. Requires the WRITER dataset role.
-type TabledataInsertAll =
-     "bigquery" :>
-       "v2" :>
-         "projects" :>
-           Capture "projectId" Text :>
-             "datasets" :>
-               Capture "datasetId" Text :>
-                 "tables" :>
-                   Capture "tableId" Text :>
-                     "insertAll" :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "userIp" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Post '[JSON] TableDataInsertAllResponse
-
-type ProjectsAPI = ProjectsList
-
--- | Lists all projects to which you have been granted any project role.
-type ProjectsList =
-     "bigquery" :>
-       "v2" :>
-         "projects" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "maxResults" Word32 :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Get '[JSON] ProjectList
-
-type DatasetsAPI =
-     DatasetsInsert :<|> DatasetsList :<|> DatasetsPatch
-       :<|> DatasetsGet
-       :<|> DatasetsDelete
-       :<|> DatasetsUpdate
-
--- | Creates a new empty dataset.
-type DatasetsInsert =
-     "bigquery" :>
-       "v2" :>
-         "projects" :>
-           Capture "projectId" Text :>
-             "datasets" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] Dataset
-
--- | Lists all datasets in the specified project to which you have been
--- granted the READER dataset role.
-type DatasetsList =
-     "bigquery" :>
-       "v2" :>
-         "projects" :>
-           Capture "projectId" Text :>
-             "datasets" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "all" Bool :>
-                       QueryParam "key" Text :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "maxResults" Word32 :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   Get '[JSON] DatasetList
-
--- | Updates information in an existing dataset. The update method replaces
--- the entire dataset resource, whereas the patch method only replaces
--- fields that are provided in the submitted dataset resource. This method
--- supports patch semantics.
-type DatasetsPatch =
-     "bigquery" :>
-       "v2" :>
-         "projects" :>
-           Capture "projectId" Text :>
-             "datasets" :>
-               Capture "datasetId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Patch '[JSON] Dataset
-
--- | Returns the dataset specified by datasetID.
-type DatasetsGet =
-     "bigquery" :>
-       "v2" :>
-         "projects" :>
-           Capture "projectId" Text :>
-             "datasets" :>
-               Capture "datasetId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] Dataset
-
--- | Deletes the dataset specified by the datasetId value. Before you can
--- delete a dataset, you must delete all its tables, either manually or by
--- specifying deleteContents. Immediately after deletion, you can create
--- another dataset with the same name.
-type DatasetsDelete =
-     "bigquery" :>
-       "v2" :>
-         "projects" :>
-           Capture "projectId" Text :>
-             "datasets" :>
-               Capture "datasetId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "deleteContents" Bool :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Updates information in an existing dataset. The update method replaces
--- the entire dataset resource, whereas the patch method only replaces
--- fields that are provided in the submitted dataset resource.
-type DatasetsUpdate =
-     "bigquery" :>
-       "v2" :>
-         "projects" :>
-           Capture "projectId" Text :>
-             "datasets" :>
-               Capture "datasetId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Put '[JSON] Dataset
+bigQuery :: Proxy BigQuery
+bigQuery = Proxy

@@ -1,6 +1,6 @@
 name:                  gogol-apps-tasks
 version:               0.0.1
-synopsis:              Google Tasks API.
+synopsis:              Google Tasks API Client.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -16,8 +16,8 @@ extra-source-files:    README.md
 description:
     Lets you manage your tasks and task lists.
     .
-    /Warning:/ This is an experimental preview release which is still under
-    heavy development and not intended for public consumption, caveat emptor!
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
 
 source-repository head
     type:     git
@@ -30,7 +30,21 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.Apps.Tasks
+          Network.Google.API.Tasks.Tasklists.Delete
+        , Network.Google.API.Tasks.Tasklists.Get
+        , Network.Google.API.Tasks.Tasklists.Insert
+        , Network.Google.API.Tasks.Tasklists.List
+        , Network.Google.API.Tasks.Tasklists.Patch
+        , Network.Google.API.Tasks.Tasklists.Update
+        , Network.Google.API.Tasks.Tasks.Clear
+        , Network.Google.API.Tasks.Tasks.Delete
+        , Network.Google.API.Tasks.Tasks.Get
+        , Network.Google.API.Tasks.Tasks.Insert
+        , Network.Google.API.Tasks.Tasks.List
+        , Network.Google.API.Tasks.Tasks.Move
+        , Network.Google.API.Tasks.Tasks.Patch
+        , Network.Google.API.Tasks.Tasks.Update
+        , Network.Google.Apps.Tasks
         , Network.Google.Apps.Tasks.Types
 
     other-modules:

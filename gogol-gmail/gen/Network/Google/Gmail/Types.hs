@@ -14,12 +14,64 @@
 --
 module Network.Google.Gmail.Types
     (
+    -- * Service URL
+      gmailURL
 
-    -- * Draft
-      Draft
-    , draft
-    , dId
-    , dMessage
+    -- * HistoryMessageDeleted
+    , HistoryMessageDeleted
+    , historyMessageDeleted
+    , hmdMessage
+
+    -- * ListLabelsResponse
+    , ListLabelsResponse
+    , listLabelsResponse
+    , llrLabels
+
+    -- * HistoryLabelAdded
+    , HistoryLabelAdded
+    , historyLabelAdded
+    , hlaLabelIds
+    , hlaMessage
+
+    -- * MessagePart
+    , MessagePart
+    , messagePart
+    , mpParts
+    , mpBody
+    , mpMimeType
+    , mpHeaders
+    , mpPartId
+    , mpFilename
+
+    -- * ListThreadsResponse
+    , ListThreadsResponse
+    , listThreadsResponse
+    , ltrNextPageToken
+    , ltrResultSizeEstimate
+    , ltrThreads
+
+    -- * MessagePartBody
+    , MessagePartBody
+    , messagePartBody
+    , mpbSize
+    , mpbData
+    , mpbAttachmentId
+
+    -- * LabelLabelListVisibility
+    , LabelLabelListVisibility (..)
+
+    -- * ListDraftsResponse
+    , ListDraftsResponse
+    , listDraftsResponse
+    , ldrNextPageToken
+    , ldrResultSizeEstimate
+    , ldrDrafts
+
+    -- * ModifyMessageRequest
+    , ModifyMessageRequest
+    , modifyMessageRequest
+    , mmrRemoveLabelIds
+    , mmrAddLabelIds
 
     -- * History
     , History
@@ -31,82 +83,27 @@ module Network.Google.Gmail.Types
     , hId
     , hMessages
 
-    -- * HistoryLabelAdded
-    , HistoryLabelAdded
-    , historyLabelAdded
-    , hlaLabelIds
-    , hlaMessage
-
-    -- * HistoryLabelRemoved
-    , HistoryLabelRemoved
-    , historyLabelRemoved
-    , hlrLabelIds
-    , hlrMessage
-
-    -- * HistoryMessageAdded
-    , HistoryMessageAdded
-    , historyMessageAdded
-    , hmaMessage
-
-    -- * HistoryMessageDeleted
-    , HistoryMessageDeleted
-    , historyMessageDeleted
-    , hmdMessage
-
-    -- * Label
-    , Label
-    , label
-    , lThreadsUnread
-    , lMessageListVisibility
-    , lMessagesTotal
-    , lMessagesUnread
-    , lName
-    , lThreadsTotal
-    , lLabelListVisibility
-    , lId
-    , lType
-
-    -- * LabelLabelListVisibility
-    , LabelLabelListVisibility (..)
-
     -- * LabelMessageListVisibility
     , LabelMessageListVisibility (..)
 
-    -- * LabelType
-    , LabelType (..)
+    -- * Alt
+    , Alt (..)
 
-    -- * ListDraftsResponse
-    , ListDraftsResponse
-    , listDraftsResponse
-    , ldrNextPageToken
-    , ldrResultSizeEstimate
-    , ldrDrafts
+    -- * Draft
+    , Draft
+    , draft
+    , dId
+    , dMessage
 
-    -- * ListHistoryResponse
-    , ListHistoryResponse
-    , listHistoryResponse
-    , lhrNextPageToken
-    , lhrHistory
-    , lhrHistoryId
+    -- * UsersDraftsGet'Format
+    , UsersDraftsGet'Format (..)
 
-    -- * ListLabelsResponse
-    , ListLabelsResponse
-    , listLabelsResponse
-    , llrLabels
-
-    -- * ListMessagesResponse
-    , ListMessagesResponse
-    , listMessagesResponse
-    , lmrNextPageToken
-    , lmrResultSizeEstimate
-    , lmrMessages
-
-    -- * ListThreadsResponse
-    , ListThreadsResponse
-    , listThreadsResponse
-    , ltrNextPageToken
-    , ltrResultSizeEstimate
-    , ltrThreads
+    -- * WatchRequest
+    , WatchRequest
+    , watchRequest
+    , wrLabelFilterAction
+    , wrTopicName
+    , wrLabelIds
 
     -- * Message
     , Message
@@ -121,40 +118,38 @@ module Network.Google.Gmail.Types
     , mThreadId
     , mInternalDate
 
-    -- * MessagePart
-    , MessagePart
-    , messagePart
-    , mpParts
-    , mpBody
-    , mpMimeType
-    , mpHeaders
-    , mpPartId
-    , mpFilename
+    -- * ListMessagesResponse
+    , ListMessagesResponse
+    , listMessagesResponse
+    , lmrNextPageToken
+    , lmrResultSizeEstimate
+    , lmrMessages
 
-    -- * MessagePartBody
-    , MessagePartBody
-    , messagePartBody
-    , mpbSize
-    , mpbData
-    , mpbAttachmentId
-
-    -- * MessagePartHeader
-    , MessagePartHeader
-    , messagePartHeader
-    , mphValue
-    , mphName
-
-    -- * ModifyMessageRequest
-    , ModifyMessageRequest
-    , modifyMessageRequest
-    , mmrRemoveLabelIds
-    , mmrAddLabelIds
+    -- * HistoryMessageAdded
+    , HistoryMessageAdded
+    , historyMessageAdded
+    , hmaMessage
 
     -- * ModifyThreadRequest
     , ModifyThreadRequest
     , modifyThreadRequest
     , mtrRemoveLabelIds
     , mtrAddLabelIds
+
+    -- * WatchResponse
+    , WatchResponse
+    , watchResponse
+    , wrExpiration
+    , wrHistoryId
+
+    -- * LabelType
+    , LabelType (..)
+
+    -- * MessagePartHeader
+    , MessagePartHeader
+    , messagePartHeader
+    , mphValue
+    , mphName
 
     -- * Profile
     , Profile
@@ -164,6 +159,32 @@ module Network.Google.Gmail.Types
     , pHistoryId
     , pEmailAddress
 
+    -- * ListHistoryResponse
+    , ListHistoryResponse
+    , listHistoryResponse
+    , lhrNextPageToken
+    , lhrHistory
+    , lhrHistoryId
+
+    -- * WatchRequestLabelFilterAction
+    , WatchRequestLabelFilterAction (..)
+
+    -- * UsersThreadsGet'Format
+    , UsersThreadsGet'Format (..)
+
+    -- * Label
+    , Label
+    , label
+    , lThreadsUnread
+    , lMessageListVisibility
+    , lMessagesTotal
+    , lMessagesUnread
+    , lName
+    , lThreadsTotal
+    , lLabelListVisibility
+    , lId
+    , lType
+
     -- * Thread
     , Thread
     , thread
@@ -172,23 +193,20 @@ module Network.Google.Gmail.Types
     , tId
     , tMessages
 
-    -- * WatchRequest
-    , WatchRequest
-    , watchRequest
-    , wrLabelFilterAction
-    , wrTopicName
-    , wrLabelIds
-
-    -- * WatchRequestLabelFilterAction
-    , WatchRequestLabelFilterAction (..)
-
-    -- * WatchResponse
-    , WatchResponse
-    , watchResponse
-    , wrExpiration
-    , wrHistoryId
+    -- * HistoryLabelRemoved
+    , HistoryLabelRemoved
+    , historyLabelRemoved
+    , hlrLabelIds
+    , hlrMessage
     ) where
 
 import           Network.Google.Gmail.Types.Product
 import           Network.Google.Gmail.Types.Sum
 import           Network.Google.Prelude
+
+-- | URL referring to version 'v1' of the Gmail API.
+gmailURL :: BaseUrl
+gmailURL
+  = BaseUrl Https
+      "https://www.googleapis.com/gmail/v1/users/"
+      443

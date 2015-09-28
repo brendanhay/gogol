@@ -14,15 +14,48 @@
 --
 module Network.Google.Freebase.Search.Types
     (
+    -- * Service URL
+      freebaseSearchURL
+
+    -- * Search'Spell
+    , Search'Spell (..)
+
+    -- * Search'Encode
+    , Search'Encode (..)
+
+    -- * Alt
+    , Alt (..)
 
     -- * ReconcileCandidate
-      ReconcileCandidate
+    , ReconcileCandidate
     , reconcileCandidate
     , rcLang
     , rcConfidence
     , rcName
     , rcNotable
     , rcMid
+
+    -- * Search'Help
+    , Search'Help (..)
+
+    -- * ReconcileGetCosts
+    , ReconcileGetCosts
+    , reconcileGetCosts
+    , rgcHits
+    , rgcMs
+
+    -- * Search'Format
+    , Search'Format (..)
+
+    -- * ReconcileGetItemWarning
+    , ReconcileGetItemWarning
+    , reconcileGetItemWarning
+    , rgiwLocation
+    , rgiwReason
+    , rgiwMessage
+
+    -- * Search'Scoring
+    , Search'Scoring (..)
 
     -- * ReconcileCandidateNotable
     , ReconcileCandidateNotable
@@ -37,21 +70,15 @@ module Network.Google.Freebase.Search.Types
     , rgCosts
     , rgWarning
     , rgMatch
-
-    -- * ReconcileGetCosts
-    , ReconcileGetCosts
-    , reconcileGetCosts
-    , rgcHits
-    , rgcMs
-
-    -- * ReconcileGetItemWarning
-    , ReconcileGetItemWarning
-    , reconcileGetItemWarning
-    , rgiwLocation
-    , rgiwReason
-    , rgiwMessage
     ) where
 
 import           Network.Google.Freebase.Search.Types.Product
 import           Network.Google.Freebase.Search.Types.Sum
 import           Network.Google.Prelude
+
+-- | URL referring to version 'v1' of the Freebase Search.
+freebaseSearchURL :: BaseUrl
+freebaseSearchURL
+  = BaseUrl Https
+      "https://www.googleapis.com/freebase/v1/"
+      443

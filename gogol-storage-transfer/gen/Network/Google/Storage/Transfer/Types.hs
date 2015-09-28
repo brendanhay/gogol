@@ -14,18 +14,21 @@
 --
 module Network.Google.Storage.Transfer.Types
     (
+    -- * Service URL
+      storageTransferURL
 
-    -- * AwsAccessKey
-      AwsAccessKey
-    , awsAccessKey
-    , aakSecretAccessKey
-    , aakAccessKeyId
-
-    -- * AwsS3Data
-    , AwsS3Data
-    , awsS3Data
-    , asdBucketName
-    , asdAwsAccessKey
+    -- * TransferJob
+    , TransferJob
+    , transferJob
+    , tjCreationTime
+    , tjStatus
+    , tjSchedule
+    , tjDeletionTime
+    , tjName
+    , tjProjectId
+    , tjTransferSpec
+    , tjDescription
+    , tjLastModificationTime
 
     -- * Date
     , Date
@@ -34,108 +37,12 @@ module Network.Google.Storage.Transfer.Types
     , dYear
     , dMonth
 
-    -- * Empty
-    , Empty
-    , empty
-
-    -- * ErrorLogEntry
-    , ErrorLogEntry
-    , errorLogEntry
-    , eleUrl
-    , eleErrorDetails
-
-    -- * ErrorSummary
-    , ErrorSummary
-    , errorSummary
-    , esErrorCount
-    , esErrorCode
-    , esErrorLogEntries
-
-    -- * GcsData
-    , GcsData
-    , gcsData
-    , gdBucketName
-
-    -- * GoogleServiceAccount
-    , GoogleServiceAccount
-    , googleServiceAccount
-    , gsaAccountEmail
-
-    -- * HttpData
-    , HttpData
-    , httpData
-    , hdListUrl
-
-    -- * ListOperationsResponse
-    , ListOperationsResponse
-    , listOperationsResponse
-    , lorNextPageToken
-    , lorOperations
-
-    -- * ListTransferJobsResponse
-    , ListTransferJobsResponse
-    , listTransferJobsResponse
-    , ltjrNextPageToken
-    , ltjrTransferJobs
-
-    -- * ObjectConditions
-    , ObjectConditions
-    , objectConditions
-    , ocMinTimeElapsedSinceLastModification
-    , ocIncludePrefixes
-    , ocMaxTimeElapsedSinceLastModification
-    , ocExcludePrefixes
-
-    -- * Operation
-    , Operation
-    , operation
-    , oDone
-    , oError
-    , oResponse
-    , oName
-    , oMetadata
-
-    -- * OperationMetadata
-    , OperationMetadata
-    , operationMetadata
-
-    -- * OperationResponse
-    , OperationResponse
-    , operationResponse
-
-    -- * PauseTransferOperationRequest
-    , PauseTransferOperationRequest
-    , pauseTransferOperationRequest
-
-    -- * ResumeTransferOperationRequest
-    , ResumeTransferOperationRequest
-    , resumeTransferOperationRequest
-
-    -- * Schedule
-    , Schedule
-    , schedule
-    , sScheduleEndDate
-    , sScheduleStartDate
-    , sStartTimeOfDay
-
-    -- * Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
-
-    -- * StatusItemDetails
-    , StatusItemDetails
-    , statusItemDetails
-
-    -- * TimeOfDay
-    , TimeOfDay
-    , timeOfDay
-    , todNanos
-    , todHours
-    , todMinutes
-    , todSeconds
+    -- * UpdateTransferJobRequest
+    , UpdateTransferJobRequest
+    , updateTransferJobRequest
+    , utjrTransferJob
+    , utjrProjectId
+    , utjrUpdateTransferJobFieldMask
 
     -- * TransferCounters
     , TransferCounters
@@ -157,18 +64,137 @@ module Network.Google.Storage.Transfer.Types
     , tcObjectsFailedToDeleteFromSink
     , tcObjectsFromSourceSkippedBySync
 
-    -- * TransferJob
-    , TransferJob
-    , transferJob
-    , tjCreationTime
-    , tjStatus
-    , tjSchedule
-    , tjDeletionTime
-    , tjName
-    , tjProjectId
-    , tjTransferSpec
-    , tjDescription
-    , tjLastModificationTime
+    -- * GcsData
+    , GcsData
+    , gcsData
+    , gdBucketName
+
+    -- * AwsS3Data
+    , AwsS3Data
+    , awsS3Data
+    , asdBucketName
+    , asdAwsAccessKey
+
+    -- * OperationResponse
+    , OperationResponse
+    , operationResponse
+
+    -- * ErrorLogEntry
+    , ErrorLogEntry
+    , errorLogEntry
+    , eleUrl
+    , eleErrorDetails
+
+    -- * TimeOfDay
+    , TimeOfDay
+    , timeOfDay
+    , todNanos
+    , todHours
+    , todMinutes
+    , todSeconds
+
+    -- * HttpData
+    , HttpData
+    , httpData
+    , hdListUrl
+
+    -- * TransferOptions
+    , TransferOptions
+    , transferOptions
+    , toDeleteObjectsUniqueInSink
+    , toDeleteObjectsFromSourceAfterTransfer
+    , toOverwriteObjectsAlreadyExistingInSink
+
+    -- * ErrorSummary
+    , ErrorSummary
+    , errorSummary
+    , esErrorCount
+    , esErrorCode
+    , esErrorLogEntries
+
+    -- * Status
+    , Status
+    , status
+    , sDetails
+    , sCode
+    , sMessage
+
+    -- * ListOperationsResponse
+    , ListOperationsResponse
+    , listOperationsResponse
+    , lorNextPageToken
+    , lorOperations
+
+    -- * Empty
+    , Empty
+    , empty
+
+    -- * PauseTransferOperationRequest
+    , PauseTransferOperationRequest
+    , pauseTransferOperationRequest
+
+    -- * Schedule
+    , Schedule
+    , schedule
+    , sScheduleEndDate
+    , sScheduleStartDate
+    , sStartTimeOfDay
+
+    -- * ObjectConditions
+    , ObjectConditions
+    , objectConditions
+    , ocMinTimeElapsedSinceLastModification
+    , ocIncludePrefixes
+    , ocMaxTimeElapsedSinceLastModification
+    , ocExcludePrefixes
+
+    -- * Operation
+    , Operation
+    , operation
+    , oDone
+    , oError
+    , oResponse
+    , oName
+    , oMetadata
+
+    -- * GoogleServiceAccount
+    , GoogleServiceAccount
+    , googleServiceAccount
+    , gsaAccountEmail
+
+    -- * StatusItemDetails
+    , StatusItemDetails
+    , statusItemDetails
+
+    -- * OperationMetadata
+    , OperationMetadata
+    , operationMetadata
+
+    -- * AwsAccessKey
+    , AwsAccessKey
+    , awsAccessKey
+    , aakSecretAccessKey
+    , aakAccessKeyId
+
+    -- * TransferSpec
+    , TransferSpec
+    , transferSpec
+    , tsGcsDataSource
+    , tsObjectConditions
+    , tsHttpDataSource
+    , tsAwsS3DataSource
+    , tsGcsDataSink
+    , tsTransferOptions
+
+    -- * ResumeTransferOperationRequest
+    , ResumeTransferOperationRequest
+    , resumeTransferOperationRequest
+
+    -- * ListTransferJobsResponse
+    , ListTransferJobsResponse
+    , listTransferJobsResponse
+    , ltjrNextPageToken
+    , ltjrTransferJobs
 
     -- * TransferOperation
     , TransferOperation
@@ -182,32 +208,15 @@ module Network.Google.Storage.Transfer.Types
     , toProjectId
     , toTransferSpec
     , toErrorBreakdowns
-
-    -- * TransferOptions
-    , TransferOptions
-    , transferOptions
-    , toDeleteObjectsUniqueInSink
-    , toDeleteObjectsFromSourceAfterTransfer
-    , toOverwriteObjectsAlreadyExistingInSink
-
-    -- * TransferSpec
-    , TransferSpec
-    , transferSpec
-    , tsGcsDataSource
-    , tsObjectConditions
-    , tsHttpDataSource
-    , tsAwsS3DataSource
-    , tsGcsDataSink
-    , tsTransferOptions
-
-    -- * UpdateTransferJobRequest
-    , UpdateTransferJobRequest
-    , updateTransferJobRequest
-    , utjrTransferJob
-    , utjrProjectId
-    , utjrUpdateTransferJobFieldMask
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.Storage.Transfer.Types.Product
 import           Network.Google.Storage.Transfer.Types.Sum
+
+-- | URL referring to version 'v1' of the Google Storage Transfer API.
+storageTransferURL :: BaseUrl
+storageTransferURL
+  = BaseUrl Https
+      "https://storagetransfer.googleapis.com/"
+      443

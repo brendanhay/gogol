@@ -17,62 +17,471 @@
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference>
 module Network.Google.Books
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** Books API
       Books
-    , OnboardingAPI
-    , OnboardingListCategories
-    , OnboardingListCategoryVolumes
-    , MylibraryAPI
-    , AnnotationsAPI
-    , AnnotationsSummary
-    , AnnotationsInsert
-    , AnnotationsList
-    , AnnotationsDelete
-    , AnnotationsUpdate
-    , ReadingpositionsAPI
-    , ReadingpositionsGet
-    , ReadingpositionsSetPosition
-    , BookshelvesAPI
-    , VolumesAPI
-    , VolumesList
-    , PromoofferAPI
-    , PromoofferAccept
-    , PromoofferGet
-    , PromoofferDismiss
-    , CloudloadingAPI
-    , CloudloadingAddBook
-    , CloudloadingUpdateBook
-    , CloudloadingDeleteBook
-    , LayersAPI
-    , VolumeAnnotationsAPI
-    , VolumeAnnotationsList
-    , VolumeAnnotationsGet
-    , AnnotationDataAPI
-    , AnnotationDataList
-    , AnnotationDataGet
-    , DictionaryAPI
-    , DictionaryListOfflineMetadata
-    , VolumesAPI
-    , UseruploadedAPI
-    , UseruploadedList
-    , RecommendedAPI
-    , RecommendedList
-    , RecommendedRate
-    , AssociatedAPI
-    , AssociatedList
-    , MybooksAPI
-    , MybooksList
-    , BookshelvesAPI
-    , VolumesAPI
-    , VolumesList
-    , MyconfigAPI
-    , MyconfigSyncVolumeLicenses
-    , MyconfigGetUserSettings
-    , MyconfigRequestAccess
-    , MyconfigUpdateUserSettings
-    , MyconfigReleaseDownloadAccess
+    , books
+    , booksURL
+
+    -- ** books.bookshelves.volumes.list
+    , module Network.Google.API.Books.Bookshelves.Volumes.List
+
+    -- ** books.cloudloading.addBook
+    , module Network.Google.API.Books.Cloudloading.AddBook
+
+    -- ** books.cloudloading.deleteBook
+    , module Network.Google.API.Books.Cloudloading.DeleteBook
+
+    -- ** books.cloudloading.updateBook
+    , module Network.Google.API.Books.Cloudloading.UpdateBook
+
+    -- ** books.dictionary.listOfflineMetadata
+    , module Network.Google.API.Books.Dictionary.ListOfflineMetadata
+
+    -- ** books.layers.annotationData.get
+    , module Network.Google.API.Books.Layers.AnnotationData.Get
+
+    -- ** books.layers.annotationData.list
+    , module Network.Google.API.Books.Layers.AnnotationData.List
+
+    -- ** books.layers.volumeAnnotations.get
+    , module Network.Google.API.Books.Layers.VolumeAnnotations.Get
+
+    -- ** books.layers.volumeAnnotations.list
+    , module Network.Google.API.Books.Layers.VolumeAnnotations.List
+
+    -- ** books.myconfig.getUserSettings
+    , module Network.Google.API.Books.Myconfig.GetUserSettings
+
+    -- ** books.myconfig.releaseDownloadAccess
+    , module Network.Google.API.Books.Myconfig.ReleaseDownloadAccess
+
+    -- ** books.myconfig.requestAccess
+    , module Network.Google.API.Books.Myconfig.RequestAccess
+
+    -- ** books.myconfig.syncVolumeLicenses
+    , module Network.Google.API.Books.Myconfig.SyncVolumeLicenses
+
+    -- ** books.myconfig.updateUserSettings
+    , module Network.Google.API.Books.Myconfig.UpdateUserSettings
+
+    -- ** books.mylibrary.annotations.delete
+    , module Network.Google.API.Books.Mylibrary.Annotations.Delete
+
+    -- ** books.mylibrary.annotations.insert
+    , module Network.Google.API.Books.Mylibrary.Annotations.Insert
+
+    -- ** books.mylibrary.annotations.list
+    , module Network.Google.API.Books.Mylibrary.Annotations.List
+
+    -- ** books.mylibrary.annotations.summary
+    , module Network.Google.API.Books.Mylibrary.Annotations.Summary
+
+    -- ** books.mylibrary.annotations.update
+    , module Network.Google.API.Books.Mylibrary.Annotations.Update
+
+    -- ** books.mylibrary.bookshelves.volumes.list
+    , module Network.Google.API.Books.Mylibrary.Bookshelves.Volumes.List
+
+    -- ** books.mylibrary.readingpositions.get
+    , module Network.Google.API.Books.Mylibrary.Readingpositions.Get
+
+    -- ** books.mylibrary.readingpositions.setPosition
+    , module Network.Google.API.Books.Mylibrary.Readingpositions.SetPosition
+
+    -- ** books.onboarding.listCategories
+    , module Network.Google.API.Books.Onboarding.ListCategories
+
+    -- ** books.onboarding.listCategoryVolumes
+    , module Network.Google.API.Books.Onboarding.ListCategoryVolumes
+
+    -- ** books.promooffer.accept
+    , module Network.Google.API.Books.Promooffer.Accept
+
+    -- ** books.promooffer.dismiss
+    , module Network.Google.API.Books.Promooffer.Dismiss
+
+    -- ** books.promooffer.get
+    , module Network.Google.API.Books.Promooffer.Get
+
+    -- ** books.volumes.associated.list
+    , module Network.Google.API.Books.Volumes.Associated.List
+
+    -- ** books.volumes.mybooks.list
+    , module Network.Google.API.Books.Volumes.Mybooks.List
+
+    -- ** books.volumes.recommended.list
+    , module Network.Google.API.Books.Volumes.Recommended.List
+
+    -- ** books.volumes.recommended.rate
+    , module Network.Google.API.Books.Volumes.Recommended.Rate
+
+    -- ** books.volumes.useruploaded.list
+    , module Network.Google.API.Books.Volumes.Useruploaded.List
 
     -- * Types
+
+    -- ** DownloadAccessRestriction
+    , DownloadAccessRestriction
+    , downloadAccessRestriction
+    , darJustAcquired
+    , darSignature
+    , darKind
+    , darMaxDownloadDevices
+    , darDownloadsAcquired
+    , darReasonCode
+    , darVolumeId
+    , darRestricted
+    , darSource
+    , darDeviceAllowed
+    , darMessage
+    , darNonce
+
+    -- ** GeolayerdataViewportGeo
+    , GeolayerdataViewportGeo
+    , geolayerdataViewportGeo
+    , gvgHi
+    , gvgLo
+
+    -- ** VolumesMybooksList'AcquireMethod
+    , VolumesMybooksList'AcquireMethod (..)
+
+    -- ** VolumesAssociatedList'Association
+    , VolumesAssociatedList'Association (..)
+
+    -- ** VolumeRetailPriceSaleInfo
+    , VolumeRetailPriceSaleInfo
+    , volumeRetailPriceSaleInfo
+    , vrpsiAmount
+    , vrpsiCurrencyCode
+
+    -- ** VolumesMybooksList'ProcessingState
+    , VolumesMybooksList'ProcessingState (..)
+
+    -- ** GeolayerdataLoViewportGeo
+    , GeolayerdataLoViewportGeo
+    , geolayerdataLoViewportGeo
+    , glvgLatitude
+    , glvgLongitude
+
+    -- ** VolumesRecommendedRate'Rating
+    , VolumesRecommendedRate'Rating (..)
+
+    -- ** DictlayerdataItemSynonymsItemSensesItemWordsDict
+    , DictlayerdataItemSynonymsItemSensesItemWordsDict
+    , dictlayerdataItemSynonymsItemSensesItemWordsDict
+    , disisiwdText
+    , disisiwdSource
+
+    -- ** VolumeListPriceItemOffersSaleInfo
+    , VolumeListPriceItemOffersSaleInfo
+    , volumeListPriceItemOffersSaleInfo
+    , vlpiosiCurrencyCode
+    , vlpiosiAmountInMicros
+
+    -- ** Alt
+    , Alt (..)
+
+    -- ** DictlayerdataSourceDict
+    , DictlayerdataSourceDict
+    , dictlayerdataSourceDict
+    , dsdUrl
+    , dsdAttribution
+
+    -- ** VolumesAssociatedList'MaxAllowedMaturityRating
+    , VolumesAssociatedList'MaxAllowedMaturityRating (..)
+
+    -- ** DictlayerdataSourceItemWordsDict
+    , DictlayerdataSourceItemWordsDict
+    , dictlayerdataSourceItemWordsDict
+    , dsiwdUrl
+    , dsiwdAttribution
+
+    -- ** RequestAccess
+    , RequestAccess
+    , requestAccess
+    , raConcurrentAccess
+    , raKind
+    , raDownloadAccess
+
+    -- ** DictlayerdataItemDerivativesItemWordsDict
+    , DictlayerdataItemDerivativesItemWordsDict
+    , dictlayerdataItemDerivativesItemWordsDict
+    , didiwdText
+    , didiwdSource
+
+    -- ** DictlayerdataItemExamplesItemDefinitionsItemSensesItemWordsDict
+    , DictlayerdataItemExamplesItemDefinitionsItemSensesItemWordsDict
+    , dictlayerdataItemExamplesItemDefinitionsItemSensesItemWordsDict
+    , dieidisiwdText
+    , dieidisiwdSource
+
+    -- ** Metadata
+    , Metadata
+    , metadata
+    , mKind
+    , mItems
+
+    -- ** MylibraryBookshelvesVolumesList'Projection
+    , MylibraryBookshelvesVolumesList'Projection (..)
+
+    -- ** GeolayerdataGeo
+    , GeolayerdataGeo
+    , geolayerdataGeo
+    , ggMapType
+    , ggCachePolicy
+    , ggViewport
+    , ggBoundary
+    , ggLatitude
+    , ggZoom
+    , ggCountryCode
+    , ggLongitude
+
+    -- ** GeolayerdataItemItemBoundaryGeo
+    , GeolayerdataItemItemBoundaryGeo
+    , geolayerdataItemItemBoundaryGeo
+    , giibgLatitude
+    , giibgLongitude
+
+    -- ** DictlayerdataItemWordsDict
+    , DictlayerdataItemWordsDict
+    , dictlayerdataItemWordsDict
+    , diwdSenses
+    , diwdSource
+    , diwdDerivatives
+    , diwdExamples
+
+    -- ** VolumeItemOffersSaleInfo
+    , VolumeItemOffersSaleInfo
+    , volumeItemOffersSaleInfo
+    , viosiFinskyOfferType
+    , viosiRentalDuration
+    , viosiListPrice
+    , viosiRetailPrice
+
+    -- ** Bookshelves
+    , Bookshelves
+    , bookshelves
+    , bKind
+    , bItems
+
+    -- ** VolumeItemLayersLayerInfo
+    , VolumeItemLayersLayerInfo
+    , volumeItemLayersLayerInfo
+    , villiVolumeAnnotationsVersion
+    , villiLayerId
+
+    -- ** DictlayerdataSourceItemExamplesItemWordsDict
+    , DictlayerdataSourceItemExamplesItemWordsDict
+    , dictlayerdataSourceItemExamplesItemWordsDict
+    , dsieiwdUrl
+    , dsieiwdAttribution
+
+    -- ** ConcurrentAccessRestriction
+    , ConcurrentAccessRestriction
+    , concurrentAccessRestriction
+    , carMaxConcurrentDevices
+    , carSignature
+    , carTimeWindowSeconds
+    , carKind
+    , carReasonCode
+    , carVolumeId
+    , carRestricted
+    , carSource
+    , carDeviceAllowed
+    , carMessage
+    , carNonce
+
+    -- ** AnnotationCurrentVersionRanges
+    , AnnotationCurrentVersionRanges
+    , annotationCurrentVersionRanges
+    , acvrGbImageRange
+    , acvrContentVersion
+    , acvrImageCfiRange
+    , acvrGbTextRange
+    , acvrCfiRange
+
+    -- ** VolumeEpubAccessInfo
+    , VolumeEpubAccessInfo
+    , volumeEpubAccessInfo
+    , veaiAcsTokenLink
+    , veaiIsAvailable
+    , veaiDownloadLink
+
+    -- ** Volumes
+    , Volumes
+    , volumes
+    , vTotalItems
+    , vKind
+    , vItems
+
+    -- ** DictlayerdataItemDefinitionsItemSensesItemWordsDict
+    , DictlayerdataItemDefinitionsItemSensesItemWordsDict
+    , dictlayerdataItemDefinitionsItemSensesItemWordsDict
+    , didisiwdDefinition
+    , didisiwdExamples
+
+    -- ** ReadingPosition
+    , ReadingPosition
+    , readingPosition
+    , rpEpubCfiPosition
+    , rpKind
+    , rpGbImagePosition
+    , rpPdfPosition
+    , rpVolumeId
+    , rpUpdated
+    , rpGbTextPosition
+
+    -- ** Offers
+    , Offers
+    , offers
+    , oKind
+    , oItems
+
+    -- ** VolumeSaleInfo
+    , VolumeSaleInfo
+    , volumeSaleInfo
+    , vsiCountry
+    , vsiOnSaleDate
+    , vsiListPrice
+    , vsiRetailPrice
+    , vsiOffers
+    , vsiBuyLink
+    , vsiIsEbook
+    , vsiSaleability
+
+    -- ** DictlayerdataItemExamplesItemWordsDict
+    , DictlayerdataItemExamplesItemWordsDict
+    , dictlayerdataItemExamplesItemWordsDict
+    , dieiwdText
+    , dieiwdSource
+
+    -- ** Geolayerdata
+    , Geolayerdata
+    , geolayerdata
+    , gKind
+    , gGeo
+    , gCommon
+
+    -- ** VolumeDimensionsVolumeInfo
+    , VolumeDimensionsVolumeInfo
+    , volumeDimensionsVolumeInfo
+    , vdviHeight
+    , vdviWidth
+    , vdviThickness
+
+    -- ** BooksAnnotationsRange
+    , BooksAnnotationsRange
+    , booksAnnotationsRange
+    , barStartOffset
+    , barEndOffset
+    , barEndPosition
+    , barStartPosition
+
+    -- ** VolumeListPriceSaleInfo
+    , VolumeListPriceSaleInfo
+    , volumeListPriceSaleInfo
+    , vlpsiAmount
+    , vlpsiCurrencyCode
+
+    -- ** VolumeannotationContentRanges
+    , VolumeannotationContentRanges
+    , volumeannotationContentRanges
+    , vcrGbImageRange
+    , vcrContentVersion
+    , vcrGbTextRange
+    , vcrCfiRange
+
+    -- ** DictlayerdataItemConjugationsItemSensesItemWordsDict
+    , DictlayerdataItemConjugationsItemSensesItemWordsDict
+    , dictlayerdataItemConjugationsItemSensesItemWordsDict
+    , dicisiwdValue
+    , dicisiwdType
+
+    -- ** VolumeRentalPeriodUserInfo
+    , VolumeRentalPeriodUserInfo
+    , volumeRentalPeriodUserInfo
+    , vrpuiEndUtcSec
+    , vrpuiStartUtcSec
+
+    -- ** Layersummaries
+    , Layersummaries
+    , layersummaries
+    , lTotalItems
+    , lKind
+    , lItems
+
+    -- ** VolumeUserInfo
+    , VolumeUserInfo
+    , volumeUserInfo
+    , vuiCopy
+    , vuiUserUploadedVolumeInfo
+    , vuiIsPurchased
+    , vuiRentalState
+    , vuiIsPreordered
+    , vuiReview
+    , vuiRentalPeriod
+    , vuiUpdated
+    , vuiIsUploaded
+    , vuiIsInMyBooks
+    , vuiReadingPosition
+
+    -- ** Annotationsdata
+    , Annotationsdata
+    , annotationsdata
+    , aTotalItems
+    , aNextPageToken
+    , aKind
+    , aItems
+
+    -- ** Annotations
+    , Annotations
+    , annotations
+    , annTotalItems
+    , annNextPageToken
+    , annKind
+    , annItems
+
+    -- ** ReviewSource
+    , ReviewSource
+    , reviewSource
+    , rsExtraDescription
+    , rsUrl
+    , rsDescription
+
+    -- ** ReviewAuthor
+    , ReviewAuthor
+    , reviewAuthor
+    , raDisplayName
+
+    -- ** Usersettings
+    , Usersettings
+    , usersettings
+    , uKind
+    , uNotesExport
+
+    -- ** Volumeannotations
+    , Volumeannotations
+    , volumeannotations
+    , volTotalItems
+    , volNextPageToken
+    , volKind
+    , volItems
+    , volVersion
+
+    -- ** DictlayerdataCommon
+    , DictlayerdataCommon
+    , dictlayerdataCommon
+    , dcTitle
+
+    -- ** BooksCloudloadingResource
+    , BooksCloudloadingResource
+    , booksCloudloadingResource
+    , bcrProcessingState
+    , bcrVolumeId
+    , bcrAuthor
+    , bcrTitle
 
     -- ** Annotation
     , Annotation
@@ -95,340 +504,26 @@ module Network.Google.Books
     , aaUpdated
     , aaLayerId
 
-    -- ** AnnotationClientVersionRanges
-    , AnnotationClientVersionRanges
-    , annotationClientVersionRanges
-    , aGbImageRange
-    , aContentVersion
-    , aImageCfiRange
-    , aGbTextRange
-    , aCfiRange
+    -- ** MyconfigRequestAccess'LicenseTypes
+    , MyconfigRequestAccess'LicenseTypes (..)
 
-    -- ** AnnotationCurrentVersionRanges
-    , AnnotationCurrentVersionRanges
-    , annotationCurrentVersionRanges
-    , acvrGbImageRange
-    , acvrContentVersion
-    , acvrImageCfiRange
-    , acvrGbTextRange
-    , acvrCfiRange
-
-    -- ** AnnotationLayerSummary
-    , AnnotationLayerSummary
-    , annotationLayerSummary
-    , alsLimitType
-    , alsAllowedCharacterCount
-    , alsRemainingCharacterCount
-
-    -- ** Annotationdata
-    , Annotationdata
-    , annotationdata
-    , annnEncodedData
-    , annnKind
-    , annnData
-    , annnSelfLink
-    , annnAnnotationType
-    , annnVolumeId
-    , annnId
-    , annnUpdated
-    , annnLayerId
-
-    -- ** Annotations
-    , Annotations
-    , annotations
-    , annTotalItems
-    , annNextPageToken
-    , annKind
-    , annItems
-
-    -- ** AnnotationsSummary
-    , AnnotationsSummary
-    , annotationsSummary
-    , asKind
-    , asLayers
-
-    -- ** AnnotationsSummaryItemLayers
-    , AnnotationsSummaryItemLayers
-    , annotationsSummaryItemLayers
-    , asilLimitType
-    , asilAllowedCharacterCount
-    , asilUpdated
-    , asilLayerId
-    , asilRemainingCharacterCount
-
-    -- ** Annotationsdata
-    , Annotationsdata
-    , annotationsdata
-    , aTotalItems
-    , aNextPageToken
-    , aKind
-    , aItems
-
-    -- ** BooksAnnotationsRange
-    , BooksAnnotationsRange
-    , booksAnnotationsRange
-    , barStartOffset
-    , barEndOffset
-    , barEndPosition
-    , barStartPosition
-
-    -- ** BooksCloudloadingResource
-    , BooksCloudloadingResource
-    , booksCloudloadingResource
-    , bcrProcessingState
-    , bcrVolumeId
-    , bcrAuthor
-    , bcrTitle
-
-    -- ** BooksVolumesRecommendedRateResponse
-    , BooksVolumesRecommendedRateResponse
-    , booksVolumesRecommendedRateResponse
-    , bvrrrConsistencyToken
-
-    -- ** Bookshelf
-    , Bookshelf
-    , bookshelf
-    , booAccess
-    , booVolumesLastUpdated
-    , booKind
-    , booCreated
-    , booVolumeCount
-    , booSelfLink
-    , booId
-    , booUpdated
-    , booTitle
-    , booDescription
-
-    -- ** Bookshelves
-    , Bookshelves
-    , bookshelves
-    , bKind
-    , bItems
-
-    -- ** Category
-    , Category
-    , category
-    , cKind
-    , cItems
-
-    -- ** CategoryItemItems
-    , CategoryItemItems
-    , categoryItemItems
-    , ciiName
-    , ciiCategoryId
-    , ciiBadgeUrl
-
-    -- ** ConcurrentAccessRestriction
-    , ConcurrentAccessRestriction
-    , concurrentAccessRestriction
-    , carMaxConcurrentDevices
-    , carSignature
-    , carTimeWindowSeconds
-    , carKind
-    , carReasonCode
-    , carVolumeId
-    , carRestricted
-    , carSource
-    , carDeviceAllowed
-    , carMessage
-    , carNonce
-
-    -- ** Dictlayerdata
-    , Dictlayerdata
-    , dictlayerdata
-    , dKind
-    , dDict
-    , dCommon
-
-    -- ** DictlayerdataCommon
-    , DictlayerdataCommon
-    , dictlayerdataCommon
-    , dcTitle
-
-    -- ** DictlayerdataDict
-    , DictlayerdataDict
-    , dictlayerdataDict
-    , ddSource
-    , ddWords
-
-    -- ** DictlayerdataItemConjugationsItemSensesItemWordsDict
-    , DictlayerdataItemConjugationsItemSensesItemWordsDict
-    , dictlayerdataItemConjugationsItemSensesItemWordsDict
-    , dicisiwdValue
-    , dicisiwdType
-
-    -- ** DictlayerdataItemDefinitionsItemSensesItemWordsDict
-    , DictlayerdataItemDefinitionsItemSensesItemWordsDict
-    , dictlayerdataItemDefinitionsItemSensesItemWordsDict
-    , didisiwdDefinition
-    , didisiwdExamples
-
-    -- ** DictlayerdataItemDerivativesItemWordsDict
-    , DictlayerdataItemDerivativesItemWordsDict
-    , dictlayerdataItemDerivativesItemWordsDict
-    , didiwdText
-    , didiwdSource
-
-    -- ** DictlayerdataItemExamplesItemDefinitionsItemSensesItemWordsDict
-    , DictlayerdataItemExamplesItemDefinitionsItemSensesItemWordsDict
-    , dictlayerdataItemExamplesItemDefinitionsItemSensesItemWordsDict
-    , dieidisiwdText
-    , dieidisiwdSource
-
-    -- ** DictlayerdataItemExamplesItemWordsDict
-    , DictlayerdataItemExamplesItemWordsDict
-    , dictlayerdataItemExamplesItemWordsDict
-    , dieiwdText
-    , dieiwdSource
-
-    -- ** DictlayerdataItemSensesItemWordsDict
-    , DictlayerdataItemSensesItemWordsDict
-    , dictlayerdataItemSensesItemWordsDict
-    , disiwdPronunciationUrl
-    , disiwdConjugations
-    , disiwdPronunciation
-    , disiwdSynonyms
-    , disiwdSource
-    , disiwdPartOfSpeech
-    , disiwdDefinitions
-    , disiwdSyllabification
-
-    -- ** DictlayerdataItemSynonymsItemSensesItemWordsDict
-    , DictlayerdataItemSynonymsItemSensesItemWordsDict
-    , dictlayerdataItemSynonymsItemSensesItemWordsDict
-    , disisiwdText
-    , disisiwdSource
-
-    -- ** DictlayerdataItemWordsDict
-    , DictlayerdataItemWordsDict
-    , dictlayerdataItemWordsDict
-    , diwdSenses
-    , diwdSource
-    , diwdDerivatives
-    , diwdExamples
-
-    -- ** DictlayerdataSourceDict
-    , DictlayerdataSourceDict
-    , dictlayerdataSourceDict
-    , dsdUrl
-    , dsdAttribution
-
-    -- ** DictlayerdataSourceItemDerivativesItemWordsDict
-    , DictlayerdataSourceItemDerivativesItemWordsDict
-    , dictlayerdataSourceItemDerivativesItemWordsDict
-    , dsidiwdUrl
-    , dsidiwdAttribution
-
-    -- ** DictlayerdataSourceItemExamplesItemDefinitionsItemSensesItemWordsDict
-    , DictlayerdataSourceItemExamplesItemDefinitionsItemSensesItemWordsDict
-    , dictlayerdataSourceItemExamplesItemDefinitionsItemSensesItemWordsDict
-    , dsieidisiwdUrl
-    , dsieidisiwdAttribution
-
-    -- ** DictlayerdataSourceItemExamplesItemWordsDict
-    , DictlayerdataSourceItemExamplesItemWordsDict
-    , dictlayerdataSourceItemExamplesItemWordsDict
-    , dsieiwdUrl
-    , dsieiwdAttribution
-
-    -- ** DictlayerdataSourceItemSensesItemWordsDict
-    , DictlayerdataSourceItemSensesItemWordsDict
-    , dictlayerdataSourceItemSensesItemWordsDict
-    , dsisiwdUrl
-    , dsisiwdAttribution
-
-    -- ** DictlayerdataSourceItemSynonymsItemSensesItemWordsDict
-    , DictlayerdataSourceItemSynonymsItemSensesItemWordsDict
-    , dictlayerdataSourceItemSynonymsItemSensesItemWordsDict
-    , dsisisiwdUrl
-    , dsisisiwdAttribution
-
-    -- ** DictlayerdataSourceItemWordsDict
-    , DictlayerdataSourceItemWordsDict
-    , dictlayerdataSourceItemWordsDict
-    , dsiwdUrl
-    , dsiwdAttribution
-
-    -- ** DownloadAccessRestriction
-    , DownloadAccessRestriction
-    , downloadAccessRestriction
-    , darJustAcquired
-    , darSignature
-    , darKind
-    , darMaxDownloadDevices
-    , darDownloadsAcquired
-    , darReasonCode
-    , darVolumeId
-    , darRestricted
-    , darSource
-    , darDeviceAllowed
-    , darMessage
-    , darNonce
-
-    -- ** DownloadAccesses
-    , DownloadAccesses
-    , downloadAccesses
-    , daKind
-    , daDownloadAccessList
-
-    -- ** Geolayerdata
-    , Geolayerdata
-    , geolayerdata
-    , gKind
-    , gGeo
-    , gCommon
-
-    -- ** GeolayerdataCommon
-    , GeolayerdataCommon
-    , geolayerdataCommon
-    , gcSnippet
-    , gcSnippetUrl
-    , gcLang
-    , gcTitle
-    , gcPreviewImageUrl
-
-    -- ** GeolayerdataGeo
-    , GeolayerdataGeo
-    , geolayerdataGeo
-    , ggMapType
-    , ggCachePolicy
-    , ggViewport
-    , ggBoundary
-    , ggLatitude
-    , ggZoom
-    , ggCountryCode
-    , ggLongitude
-
-    -- ** GeolayerdataHiViewportGeo
-    , GeolayerdataHiViewportGeo
-    , geolayerdataHiViewportGeo
-    , ghvgLatitude
-    , ghvgLongitude
-
-    -- ** GeolayerdataItemItemBoundaryGeo
-    , GeolayerdataItemItemBoundaryGeo
-    , geolayerdataItemItemBoundaryGeo
-    , giibgLatitude
-    , giibgLongitude
-
-    -- ** GeolayerdataLoViewportGeo
-    , GeolayerdataLoViewportGeo
-    , geolayerdataLoViewportGeo
-    , glvgLatitude
-    , glvgLongitude
-
-    -- ** GeolayerdataViewportGeo
-    , GeolayerdataViewportGeo
-    , geolayerdataViewportGeo
-    , gvgHi
-    , gvgLo
-
-    -- ** Layersummaries
-    , Layersummaries
-    , layersummaries
-    , lTotalItems
-    , lKind
-    , lItems
+    -- ** Volumeannotation
+    , Volumeannotation
+    , volumeannotation
+    , vvSelectedText
+    , vvAnnotationDataLink
+    , vvPageIds
+    , vvKind
+    , vvData
+    , vvSelfLink
+    , vvAnnotationType
+    , vvAnnotationDataId
+    , vvContentRanges
+    , vvVolumeId
+    , vvId
+    , vvDeleted
+    , vvUpdated
+    , vvLayerId
 
     -- ** Layersummary
     , Layersummary
@@ -447,62 +542,49 @@ module Network.Google.Books
     , layUpdated
     , layLayerId
 
-    -- ** Metadata
-    , Metadata
-    , metadata
-    , mKind
-    , mItems
+    -- ** Annotationdata
+    , Annotationdata
+    , annotationdata
+    , annnEncodedData
+    , annnKind
+    , annnData
+    , annnSelfLink
+    , annnAnnotationType
+    , annnVolumeId
+    , annnId
+    , annnUpdated
+    , annnLayerId
 
-    -- ** MetadataItemItems
-    , MetadataItemItems
-    , metadataItemItems
-    , miiSize
-    , miiVersion
-    , miiLanguage
-    , miiDownloadUrl
-    , miiEncryptedKey
+    -- ** Volume2
+    , Volume2
+    , volume2
+    , voloNextPageToken
+    , voloKind
+    , voloItems
 
-    -- ** Offers
-    , Offers
-    , offers
-    , oKind
-    , oItems
+    -- ** DictlayerdataSourceItemSynonymsItemSensesItemWordsDict
+    , DictlayerdataSourceItemSynonymsItemSensesItemWordsDict
+    , dictlayerdataSourceItemSynonymsItemSensesItemWordsDict
+    , dsisisiwdUrl
+    , dsisisiwdAttribution
 
-    -- ** OffersItemItems
-    , OffersItemItems
-    , offersItemItems
-    , oiiItems
-    , oiiArtUrl
-    , oiiId
-    , oiiGservicesKey
+    -- ** VolumeItemIndustryIdentifiersVolumeInfo
+    , VolumeItemIndustryIdentifiersVolumeInfo
+    , volumeItemIndustryIdentifiersVolumeInfo
+    , viiiviIdentifier
+    , viiiviType
 
-    -- ** OffersItemItemsItemItems
-    , OffersItemItemsItemItems
-    , offersItemItemsItemItems
-    , oiiiiCanonicalVolumeLink
-    , oiiiiCoverUrl
-    , oiiiiVolumeId
-    , oiiiiAuthor
-    , oiiiiTitle
-    , oiiiiDescription
+    -- ** MyconfigSyncVolumeLicenses'Features
+    , MyconfigSyncVolumeLicenses'Features (..)
 
-    -- ** ReadingPosition
-    , ReadingPosition
-    , readingPosition
-    , rpEpubCfiPosition
-    , rpKind
-    , rpGbImagePosition
-    , rpPdfPosition
-    , rpVolumeId
-    , rpUpdated
-    , rpGbTextPosition
+    -- ** VolumeRetailPriceItemOffersSaleInfo
+    , VolumeRetailPriceItemOffersSaleInfo
+    , volumeRetailPriceItemOffersSaleInfo
+    , vrpiosiCurrencyCode
+    , vrpiosiAmountInMicros
 
-    -- ** RequestAccess
-    , RequestAccess
-    , requestAccess
-    , raConcurrentAccess
-    , raKind
-    , raDownloadAccess
+    -- ** MylibraryReadingpositionsSetPosition'Action
+    , MylibraryReadingpositionsSetPosition'Action (..)
 
     -- ** Review
     , Review
@@ -518,211 +600,31 @@ module Network.Google.Books
     , rTitle
     , rType
 
-    -- ** ReviewAuthor
-    , ReviewAuthor
-    , reviewAuthor
-    , raDisplayName
+    -- ** VolumesUseruploadedList'ProcessingState
+    , VolumesUseruploadedList'ProcessingState (..)
 
-    -- ** ReviewSource
-    , ReviewSource
-    , reviewSource
-    , rsExtraDescription
-    , rsUrl
-    , rsDescription
+    -- ** MetadataItemItems
+    , MetadataItemItems
+    , metadataItemItems
+    , miiSize
+    , miiVersion
+    , miiLanguage
+    , miiDownloadUrl
+    , miiEncryptedKey
 
-    -- ** Usersettings
-    , Usersettings
-    , usersettings
-    , uKind
-    , uNotesExport
-
-    -- ** UsersettingsNotesExport
-    , UsersettingsNotesExport
-    , usersettingsNotesExport
-    , uneFolderName
-    , uneIsEnabled
-
-    -- ** Volume
-    , Volume
-    , volume
-    , v1UserInfo
-    , v1Etag
-    , v1AccessInfo
-    , v1Kind
-    , v1SearchInfo
-    , v1SelfLink
-    , v1LayerInfo
-    , v1SaleInfo
-    , v1Id
-    , v1RecommendedInfo
-    , v1VolumeInfo
-
-    -- ** Volume2
-    , Volume2
-    , volume2
-    , voloNextPageToken
-    , voloKind
-    , voloItems
-
-    -- ** VolumeAccessInfo
-    , VolumeAccessInfo
-    , volumeAccessInfo
-    , vaiWebReaderLink
-    , vaiCountry
-    , vaiDriveImportedContentLink
-    , vaiExplicitOfflineLicenseManagement
-    , vaiViewability
-    , vaiQuoteSharingAllowed
-    , vaiEpub
-    , vaiPdf
-    , vaiTextToSpeechPermission
-    , vaiEmbeddable
-    , vaiAccessViewStatus
-    , vaiDownloadAccess
-    , vaiViewOrderUrl
-    , vaiPublicDomain
-
-    -- ** VolumeCopyUserInfo
-    , VolumeCopyUserInfo
-    , volumeCopyUserInfo
-    , vcuiLimitType
-    , vcuiAllowedCharacterCount
-    , vcuiUpdated
-    , vcuiRemainingCharacterCount
-
-    -- ** VolumeDimensionsVolumeInfo
-    , VolumeDimensionsVolumeInfo
-    , volumeDimensionsVolumeInfo
-    , vdviHeight
-    , vdviWidth
-    , vdviThickness
-
-    -- ** VolumeEpubAccessInfo
-    , VolumeEpubAccessInfo
-    , volumeEpubAccessInfo
-    , veaiAcsTokenLink
-    , veaiIsAvailable
-    , veaiDownloadLink
-
-    -- ** VolumeImageLinksVolumeInfo
-    , VolumeImageLinksVolumeInfo
-    , volumeImageLinksVolumeInfo
-    , vilviThumbnail
-    , vilviSmall
-    , vilviExtraLarge
-    , vilviLarge
-    , vilviMedium
-    , vilviSmallThumbnail
-
-    -- ** VolumeItemIndustryIdentifiersVolumeInfo
-    , VolumeItemIndustryIdentifiersVolumeInfo
-    , volumeItemIndustryIdentifiersVolumeInfo
-    , viiiviIdentifier
-    , viiiviType
-
-    -- ** VolumeItemLayersLayerInfo
-    , VolumeItemLayersLayerInfo
-    , volumeItemLayersLayerInfo
-    , villiVolumeAnnotationsVersion
-    , villiLayerId
-
-    -- ** VolumeItemOffersSaleInfo
-    , VolumeItemOffersSaleInfo
-    , volumeItemOffersSaleInfo
-    , viosiFinskyOfferType
-    , viosiRentalDuration
-    , viosiListPrice
-    , viosiRetailPrice
-
-    -- ** VolumeLayerInfo
-    , VolumeLayerInfo
-    , volumeLayerInfo
-    , vliLayers
-
-    -- ** VolumeListPriceItemOffersSaleInfo
-    , VolumeListPriceItemOffersSaleInfo
-    , volumeListPriceItemOffersSaleInfo
-    , vlpiosiCurrencyCode
-    , vlpiosiAmountInMicros
-
-    -- ** VolumeListPriceSaleInfo
-    , VolumeListPriceSaleInfo
-    , volumeListPriceSaleInfo
-    , vlpsiAmount
-    , vlpsiCurrencyCode
-
-    -- ** VolumePdfAccessInfo
-    , VolumePdfAccessInfo
-    , volumePdfAccessInfo
-    , vpaiAcsTokenLink
-    , vpaiIsAvailable
-    , vpaiDownloadLink
-
-    -- ** VolumeRecommendedInfo
-    , VolumeRecommendedInfo
-    , volumeRecommendedInfo
-    , vriExplanation
-
-    -- ** VolumeRentalDurationItemOffersSaleInfo
-    , VolumeRentalDurationItemOffersSaleInfo
-    , volumeRentalDurationItemOffersSaleInfo
-    , vrdiosiCount
-    , vrdiosiUnit
-
-    -- ** VolumeRentalPeriodUserInfo
-    , VolumeRentalPeriodUserInfo
-    , volumeRentalPeriodUserInfo
-    , vrpuiEndUtcSec
-    , vrpuiStartUtcSec
-
-    -- ** VolumeRetailPriceItemOffersSaleInfo
-    , VolumeRetailPriceItemOffersSaleInfo
-    , volumeRetailPriceItemOffersSaleInfo
-    , vrpiosiCurrencyCode
-    , vrpiosiAmountInMicros
-
-    -- ** VolumeRetailPriceSaleInfo
-    , VolumeRetailPriceSaleInfo
-    , volumeRetailPriceSaleInfo
-    , vrpsiAmount
-    , vrpsiCurrencyCode
-
-    -- ** VolumeSaleInfo
-    , VolumeSaleInfo
-    , volumeSaleInfo
-    , vsiCountry
-    , vsiOnSaleDate
-    , vsiListPrice
-    , vsiRetailPrice
-    , vsiOffers
-    , vsiBuyLink
-    , vsiIsEbook
-    , vsiSaleability
-
-    -- ** VolumeSearchInfo
-    , VolumeSearchInfo
-    , volumeSearchInfo
-    , vsiTextSnippet
-
-    -- ** VolumeUserInfo
-    , VolumeUserInfo
-    , volumeUserInfo
-    , vuiCopy
-    , vuiUserUploadedVolumeInfo
-    , vuiIsPurchased
-    , vuiRentalState
-    , vuiIsPreordered
-    , vuiReview
-    , vuiRentalPeriod
-    , vuiUpdated
-    , vuiIsUploaded
-    , vuiIsInMyBooks
-    , vuiReadingPosition
-
-    -- ** VolumeUserUploadedVolumeInfoUserInfo
-    , VolumeUserUploadedVolumeInfoUserInfo
-    , volumeUserUploadedVolumeInfoUserInfo
-    , vuuviuiProcessingState
+    -- ** Bookshelf
+    , Bookshelf
+    , bookshelf
+    , booAccess
+    , booVolumesLastUpdated
+    , booKind
+    , booCreated
+    , booVolumeCount
+    , booSelfLink
+    , booId
+    , booUpdated
+    , booTitle
+    , booDescription
 
     -- ** VolumeVolumeInfo
     , VolumeVolumeInfo
@@ -753,49 +655,266 @@ module Network.Google.Books
     , vviDescription
     , vviPrintType
 
-    -- ** Volumeannotation
-    , Volumeannotation
-    , volumeannotation
-    , vvSelectedText
-    , vvAnnotationDataLink
-    , vvPageIds
-    , vvKind
-    , vvData
-    , vvSelfLink
-    , vvAnnotationType
-    , vvAnnotationDataId
-    , vvContentRanges
-    , vvVolumeId
-    , vvId
-    , vvDeleted
-    , vvUpdated
-    , vvLayerId
+    -- ** GeolayerdataHiViewportGeo
+    , GeolayerdataHiViewportGeo
+    , geolayerdataHiViewportGeo
+    , ghvgLatitude
+    , ghvgLongitude
 
-    -- ** VolumeannotationContentRanges
-    , VolumeannotationContentRanges
-    , volumeannotationContentRanges
-    , vcrGbImageRange
-    , vcrContentVersion
-    , vcrGbTextRange
-    , vcrCfiRange
+    -- ** DictlayerdataSourceItemSensesItemWordsDict
+    , DictlayerdataSourceItemSensesItemWordsDict
+    , dictlayerdataSourceItemSensesItemWordsDict
+    , dsisiwdUrl
+    , dsisiwdAttribution
 
-    -- ** Volumeannotations
-    , Volumeannotations
-    , volumeannotations
-    , volTotalItems
-    , volNextPageToken
-    , volKind
-    , volItems
-    , volVersion
+    -- ** BooksVolumesRecommendedRateResponse
+    , BooksVolumesRecommendedRateResponse
+    , booksVolumesRecommendedRateResponse
+    , bvrrrConsistencyToken
 
-    -- ** Volumes
-    , Volumes
-    , volumes
-    , vTotalItems
-    , vKind
-    , vItems
+    -- ** CategoryItemItems
+    , CategoryItemItems
+    , categoryItemItems
+    , ciiName
+    , ciiCategoryId
+    , ciiBadgeUrl
+
+    -- ** DictlayerdataSourceItemDerivativesItemWordsDict
+    , DictlayerdataSourceItemDerivativesItemWordsDict
+    , dictlayerdataSourceItemDerivativesItemWordsDict
+    , dsidiwdUrl
+    , dsidiwdAttribution
+
+    -- ** AnnotationsSummary
+    , AnnotationsSummary
+    , annotationsSummary
+    , asKind
+    , asLayers
+
+    -- ** OffersItemItemsItemItems
+    , OffersItemItemsItemItems
+    , offersItemItemsItemItems
+    , oiiiiCanonicalVolumeLink
+    , oiiiiCoverUrl
+    , oiiiiVolumeId
+    , oiiiiAuthor
+    , oiiiiTitle
+    , oiiiiDescription
+
+    -- ** UsersettingsNotesExport
+    , UsersettingsNotesExport
+    , usersettingsNotesExport
+    , uneFolderName
+    , uneIsEnabled
+
+    -- ** GeolayerdataCommon
+    , GeolayerdataCommon
+    , geolayerdataCommon
+    , gcSnippet
+    , gcSnippetUrl
+    , gcLang
+    , gcTitle
+    , gcPreviewImageUrl
+
+    -- ** VolumesRecommendedList'MaxAllowedMaturityRating
+    , VolumesRecommendedList'MaxAllowedMaturityRating (..)
+
+    -- ** VolumeRecommendedInfo
+    , VolumeRecommendedInfo
+    , volumeRecommendedInfo
+    , vriExplanation
+
+    -- ** Category
+    , Category
+    , category
+    , cKind
+    , cItems
+
+    -- ** DictlayerdataItemSensesItemWordsDict
+    , DictlayerdataItemSensesItemWordsDict
+    , dictlayerdataItemSensesItemWordsDict
+    , disiwdPronunciationUrl
+    , disiwdConjugations
+    , disiwdPronunciation
+    , disiwdSynonyms
+    , disiwdSource
+    , disiwdPartOfSpeech
+    , disiwdDefinitions
+    , disiwdSyllabification
+
+    -- ** Volume
+    , Volume
+    , volume
+    , v1UserInfo
+    , v1Etag
+    , v1AccessInfo
+    , v1Kind
+    , v1SearchInfo
+    , v1SelfLink
+    , v1LayerInfo
+    , v1SaleInfo
+    , v1Id
+    , v1RecommendedInfo
+    , v1VolumeInfo
+
+    -- ** DictlayerdataDict
+    , DictlayerdataDict
+    , dictlayerdataDict
+    , ddSource
+    , ddWords
+
+    -- ** DictlayerdataSourceItemExamplesItemDefinitionsItemSensesItemWordsDict
+    , DictlayerdataSourceItemExamplesItemDefinitionsItemSensesItemWordsDict
+    , dictlayerdataSourceItemExamplesItemDefinitionsItemSensesItemWordsDict
+    , dsieidisiwdUrl
+    , dsieidisiwdAttribution
+
+    -- ** VolumePdfAccessInfo
+    , VolumePdfAccessInfo
+    , volumePdfAccessInfo
+    , vpaiAcsTokenLink
+    , vpaiIsAvailable
+    , vpaiDownloadLink
+
+    -- ** AnnotationClientVersionRanges
+    , AnnotationClientVersionRanges
+    , annotationClientVersionRanges
+    , aGbImageRange
+    , aContentVersion
+    , aImageCfiRange
+    , aGbTextRange
+    , aCfiRange
+
+    -- ** AnnotationLayerSummary
+    , AnnotationLayerSummary
+    , annotationLayerSummary
+    , alsLimitType
+    , alsAllowedCharacterCount
+    , alsRemainingCharacterCount
+
+    -- ** VolumeSearchInfo
+    , VolumeSearchInfo
+    , volumeSearchInfo
+    , vsiTextSnippet
+
+    -- ** OffersItemItems
+    , OffersItemItems
+    , offersItemItems
+    , oiiItems
+    , oiiArtUrl
+    , oiiId
+    , oiiGservicesKey
+
+    -- ** VolumeLayerInfo
+    , VolumeLayerInfo
+    , volumeLayerInfo
+    , vliLayers
+
+    -- ** AnnotationsSummaryItemLayers
+    , AnnotationsSummaryItemLayers
+    , annotationsSummaryItemLayers
+    , asilLimitType
+    , asilAllowedCharacterCount
+    , asilUpdated
+    , asilLayerId
+    , asilRemainingCharacterCount
+
+    -- ** DownloadAccesses
+    , DownloadAccesses
+    , downloadAccesses
+    , daKind
+    , daDownloadAccessList
+
+    -- ** VolumeRentalDurationItemOffersSaleInfo
+    , VolumeRentalDurationItemOffersSaleInfo
+    , volumeRentalDurationItemOffersSaleInfo
+    , vrdiosiCount
+    , vrdiosiUnit
+
+    -- ** OnboardingListCategoryVolumes'MaxAllowedMaturityRating
+    , OnboardingListCategoryVolumes'MaxAllowedMaturityRating (..)
+
+    -- ** VolumeAccessInfo
+    , VolumeAccessInfo
+    , volumeAccessInfo
+    , vaiWebReaderLink
+    , vaiCountry
+    , vaiDriveImportedContentLink
+    , vaiExplicitOfflineLicenseManagement
+    , vaiViewability
+    , vaiQuoteSharingAllowed
+    , vaiEpub
+    , vaiPdf
+    , vaiTextToSpeechPermission
+    , vaiEmbeddable
+    , vaiAccessViewStatus
+    , vaiDownloadAccess
+    , vaiViewOrderUrl
+    , vaiPublicDomain
+
+    -- ** VolumeCopyUserInfo
+    , VolumeCopyUserInfo
+    , volumeCopyUserInfo
+    , vcuiLimitType
+    , vcuiAllowedCharacterCount
+    , vcuiUpdated
+    , vcuiRemainingCharacterCount
+
+    -- ** VolumeImageLinksVolumeInfo
+    , VolumeImageLinksVolumeInfo
+    , volumeImageLinksVolumeInfo
+    , vilviThumbnail
+    , vilviSmall
+    , vilviExtraLarge
+    , vilviLarge
+    , vilviMedium
+    , vilviSmallThumbnail
+
+    -- ** VolumeUserUploadedVolumeInfoUserInfo
+    , VolumeUserUploadedVolumeInfoUserInfo
+    , volumeUserUploadedVolumeInfoUserInfo
+    , vuuviuiProcessingState
+
+    -- ** Dictlayerdata
+    , Dictlayerdata
+    , dictlayerdata
+    , dKind
+    , dDict
+    , dCommon
     ) where
 
+import           Network.Google.API.Books.Bookshelves.Volumes.List
+import           Network.Google.API.Books.Cloudloading.AddBook
+import           Network.Google.API.Books.Cloudloading.DeleteBook
+import           Network.Google.API.Books.Cloudloading.UpdateBook
+import           Network.Google.API.Books.Dictionary.ListOfflineMetadata
+import           Network.Google.API.Books.Layers.AnnotationData.Get
+import           Network.Google.API.Books.Layers.AnnotationData.List
+import           Network.Google.API.Books.Layers.VolumeAnnotations.Get
+import           Network.Google.API.Books.Layers.VolumeAnnotations.List
+import           Network.Google.API.Books.Myconfig.GetUserSettings
+import           Network.Google.API.Books.Myconfig.ReleaseDownloadAccess
+import           Network.Google.API.Books.Myconfig.RequestAccess
+import           Network.Google.API.Books.Myconfig.SyncVolumeLicenses
+import           Network.Google.API.Books.Myconfig.UpdateUserSettings
+import           Network.Google.API.Books.Mylibrary.Annotations.Delete
+import           Network.Google.API.Books.Mylibrary.Annotations.Insert
+import           Network.Google.API.Books.Mylibrary.Annotations.List
+import           Network.Google.API.Books.Mylibrary.Annotations.Summary
+import           Network.Google.API.Books.Mylibrary.Annotations.Update
+import           Network.Google.API.Books.Mylibrary.Bookshelves.Volumes.List
+import           Network.Google.API.Books.Mylibrary.Readingpositions.Get
+import           Network.Google.API.Books.Mylibrary.Readingpositions.SetPosition
+import           Network.Google.API.Books.Onboarding.ListCategories
+import           Network.Google.API.Books.Onboarding.ListCategoryVolumes
+import           Network.Google.API.Books.Promooffer.Accept
+import           Network.Google.API.Books.Promooffer.Dismiss
+import           Network.Google.API.Books.Promooffer.Get
+import           Network.Google.API.Books.Volumes.Associated.List
+import           Network.Google.API.Books.Volumes.Mybooks.List
+import           Network.Google.API.Books.Volumes.Recommended.List
+import           Network.Google.API.Books.Volumes.Recommended.Rate
+import           Network.Google.API.Books.Volumes.Useruploaded.List
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
@@ -804,721 +923,38 @@ TODO
 -}
 
 type Books =
-     OnboardingAPI :<|> MylibraryAPI :<|> PromoofferAPI
-       :<|> CloudloadingAPI
-       :<|> LayersAPI
-       :<|> DictionaryAPI
-       :<|> VolumesAPI
-       :<|> BookshelvesAPI
-       :<|> MyconfigAPI
+     MylibraryReadingpositionsSetPositionAPI :<|>
+       VolumesRecommendedRateAPI
+       :<|> CloudloadingDeleteBookAPI
+       :<|> MylibraryAnnotationsListAPI
+       :<|> OnboardingListCategoriesAPI
+       :<|> MyconfigGetUserSettingsAPI
+       :<|> MylibraryAnnotationsDeleteAPI
+       :<|> CloudloadingUpdateBookAPI
+       :<|> PromoofferAcceptAPI
+       :<|> MylibraryAnnotationsSummaryAPI
+       :<|> MyconfigUpdateUserSettingsAPI
+       :<|> MylibraryAnnotationsUpdateAPI
+       :<|> MyconfigSyncVolumeLicensesAPI
+       :<|> VolumesRecommendedListAPI
+       :<|> MyconfigRequestAccessAPI
+       :<|> MylibraryAnnotationsInsertAPI
+       :<|> PromoofferGetAPI
+       :<|> VolumesAssociatedListAPI
+       :<|> LayersAnnotationDataGetAPI
+       :<|> DictionaryListOfflineMetadataAPI
+       :<|> BookshelvesVolumesListAPI
+       :<|> OnboardingListCategoryVolumesAPI
+       :<|> VolumesUseruploadedListAPI
+       :<|> PromoofferDismissAPI
+       :<|> VolumesMybooksListAPI
+       :<|> LayersVolumeAnnotationsListAPI
+       :<|> LayersVolumeAnnotationsGetAPI
+       :<|> CloudloadingAddBookAPI
+       :<|> LayersAnnotationDataListAPI
+       :<|> MylibraryBookshelvesVolumesListAPI
+       :<|> MyconfigReleaseDownloadAccessAPI
+       :<|> MylibraryReadingpositionsGetAPI
 
-type OnboardingAPI =
-     OnboardingListCategories :<|>
-       OnboardingListCategoryVolumes
-
--- | List categories for onboarding experience.
-type OnboardingListCategories =
-     "books" :>
-       "v1" :>
-         "onboarding" :>
-           "listCategories" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "locale" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Get '[JSON] Category
-
--- | List available volumes under categories for onboarding experience.
-type OnboardingListCategoryVolumes =
-     "books" :>
-       "v1" :>
-         "onboarding" :>
-           "listCategoryVolumes" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "locale" Text :>
-                     QueryParam "maxAllowedMaturityRating" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "categoryId" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "pageSize" Word32 :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :> Get '[JSON] Volume2
-
-type MylibraryAPI =
-     AnnotationsAPI :<|> ReadingpositionsAPI :<|>
-       BookshelvesAPI
-
-type AnnotationsAPI =
-     AnnotationsSummary :<|> AnnotationsInsert :<|>
-       AnnotationsList
-       :<|> AnnotationsDelete
-       :<|> AnnotationsUpdate
-
--- | Gets the summary of specified layers.
-type AnnotationsSummary =
-     "books" :>
-       "v1" :>
-         "mylibrary" :>
-           "annotations" :>
-             "summary" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "layerIds" Text :>
-                         QueryParam "volumeId" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Post '[JSON] AnnotationsSummary
-
--- | Inserts a new annotation.
-type AnnotationsInsert =
-     "books" :>
-       "v1" :>
-         "mylibrary" :>
-           "annotations" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "country" Text :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "showOnlySummaryInResponse" Bool :>
-                         QueryParam "source" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Post '[JSON] Annotation
-
--- | Retrieves a list of annotations, possibly filtered.
-type AnnotationsList =
-     "books" :>
-       "v1" :>
-         "mylibrary" :>
-           "annotations" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "contentVersion" Text :>
-                     QueryParam "showDeleted" Bool :>
-                       QueryParam "updatedMax" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "updatedMin" Text :>
-                             QueryParam "layerIds" Text :>
-                               QueryParam "volumeId" Text :>
-                                 QueryParam "source" Text :>
-                                   QueryParam "pageToken" Text :>
-                                     QueryParam "oauth_token" Text :>
-                                       QueryParam "layerId" Text :>
-                                         QueryParam "maxResults" Word32 :>
-                                           QueryParam "fields" Text :>
-                                             QueryParam "alt" Text :>
-                                               Get '[JSON] Annotations
-
--- | Deletes an annotation.
-type AnnotationsDelete =
-     "books" :>
-       "v1" :>
-         "mylibrary" :>
-           "annotations" :>
-             Capture "annotationId" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "source" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Updates an existing annotation.
-type AnnotationsUpdate =
-     "books" :>
-       "v1" :>
-         "mylibrary" :>
-           "annotations" :>
-             Capture "annotationId" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "source" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Put '[JSON] Annotation
-
-type ReadingpositionsAPI =
-     ReadingpositionsGet :<|> ReadingpositionsSetPosition
-
--- | Retrieves my reading position information for a volume.
-type ReadingpositionsGet =
-     "books" :>
-       "v1" :>
-         "mylibrary" :>
-           "readingpositions" :>
-             Capture "volumeId" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "contentVersion" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "source" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Get '[JSON] ReadingPosition
-
--- | Sets my reading position information for a volume.
-type ReadingpositionsSetPosition =
-     "books" :>
-       "v1" :>
-         "mylibrary" :>
-           "readingpositions" :>
-             Capture "volumeId" Text :>
-               "setPosition" :>
-                 QueryParam "deviceCookie" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "contentVersion" Text :>
-                           QueryParam "action" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "source" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "timestamp" Text :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "alt" Text :>
-                                         QueryParam "position" Text :>
-                                           Post '[JSON] ()
-
-type BookshelvesAPI = VolumesAPI
-
-type VolumesAPI = VolumesList
-
--- | Gets volume information for volumes on a bookshelf.
-type VolumesList =
-     "books" :>
-       "v1" :>
-         "mylibrary" :>
-           "bookshelves" :>
-             Capture "shelf" Text :>
-               "volumes" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "country" Text :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "q" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "source" Text :>
-                               QueryParam "projection" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "startIndex" Word32 :>
-                                     QueryParam "maxResults" Word32 :>
-                                       QueryParam "showPreorders" Bool :>
-                                         QueryParam "fields" Text :>
-                                           QueryParam "alt" Text :>
-                                             Get '[JSON] Volumes
-
-type PromoofferAPI =
-     PromoofferAccept :<|> PromoofferGet :<|>
-       PromoofferDismiss
-
--- |
-type PromoofferAccept =
-     "books" :>
-       "v1" :>
-         "promooffer" :>
-           "accept" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "manufacturer" Text :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "serial" Text :>
-                       QueryParam "device" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "model" Text :>
-                             QueryParam "volumeId" Text :>
-                               QueryParam "offerId" Text :>
-                                 QueryParam "product" Text :>
-                                   QueryParam "oauth_token" Text :>
-                                     QueryParam "androidId" Text :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "alt" Text :>
-                                           Post '[JSON] ()
-
--- | Returns a list of promo offers available to the user
-type PromoofferGet =
-     "books" :>
-       "v1" :>
-         "promooffer" :>
-           "get" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "manufacturer" Text :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "serial" Text :>
-                       QueryParam "device" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "model" Text :>
-                             QueryParam "product" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "androidId" Text :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "alt" Text :> Get '[JSON] Offers
-
--- |
-type PromoofferDismiss =
-     "books" :>
-       "v1" :>
-         "promooffer" :>
-           "dismiss" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "manufacturer" Text :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "serial" Text :>
-                       QueryParam "device" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "model" Text :>
-                             QueryParam "offerId" Text :>
-                               QueryParam "product" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "androidId" Text :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "alt" Text :> Post '[JSON] ()
-
-type CloudloadingAPI =
-     CloudloadingAddBook :<|> CloudloadingUpdateBook :<|>
-       CloudloadingDeleteBook
-
--- |
-type CloudloadingAddBook =
-     "books" :>
-       "v1" :>
-         "cloudloading" :>
-           "addBook" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "mime_type" Text :>
-                     QueryParam "upload_client_token" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "name" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "drive_document_id" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   Post '[JSON] BooksCloudloadingResource
-
--- |
-type CloudloadingUpdateBook =
-     "books" :>
-       "v1" :>
-         "cloudloading" :>
-           "updateBook" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :>
-                           Post '[JSON] BooksCloudloadingResource
-
--- | Remove the book and its contents
-type CloudloadingDeleteBook =
-     "books" :>
-       "v1" :>
-         "cloudloading" :>
-           "deleteBook" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "volumeId" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] ()
-
-type LayersAPI =
-     VolumeAnnotationsAPI :<|> AnnotationDataAPI
-
-type VolumeAnnotationsAPI =
-     VolumeAnnotationsList :<|> VolumeAnnotationsGet
-
--- | Gets the volume annotations for a volume and layer.
-type VolumeAnnotationsList =
-     "books" :>
-       "v1" :>
-         "volumes" :>
-           Capture "volumeId" Text :>
-             "layers" :>
-               Capture "layerId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "startOffset" Text :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "locale" Text :>
-                           QueryParam "contentVersion" Text :>
-                             QueryParam "showDeleted" Bool :>
-                               QueryParam "volumeAnnotationsVersion" Text :>
-                                 QueryParam "updatedMax" Text :>
-                                   QueryParam "key" Text :>
-                                     QueryParam "updatedMin" Text :>
-                                       QueryParam "endOffset" Text :>
-                                         QueryParam "source" Text :>
-                                           QueryParam "pageToken" Text :>
-                                             QueryParam "oauth_token" Text :>
-                                               QueryParam "endPosition" Text :>
-                                                 QueryParam "maxResults" Word32
-                                                   :>
-                                                   QueryParam "startPosition"
-                                                     Text
-                                                     :>
-                                                     QueryParam "fields" Text :>
-                                                       QueryParam "alt" Text :>
-                                                         Get '[JSON]
-                                                           Volumeannotations
-
--- | Gets the volume annotation.
-type VolumeAnnotationsGet =
-     "books" :>
-       "v1" :>
-         "volumes" :>
-           Capture "volumeId" Text :>
-             "layers" :>
-               Capture "layerId" Text :>
-                 "annotations" :>
-                   Capture "annotationId" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "locale" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "source" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "alt" Text :>
-                                       Get '[JSON] Volumeannotation
-
-type AnnotationDataAPI =
-     AnnotationDataList :<|> AnnotationDataGet
-
--- | Gets the annotation data for a volume and layer.
-type AnnotationDataList =
-     "books" :>
-       "v1" :>
-         "volumes" :>
-           Capture "volumeId" Text :>
-             "layers" :>
-               Capture "layerId" Text :>
-                 "data" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "w" Int32 :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "scale" Int32 :>
-                           QueryParam "userIp" Text :>
-                             QueryParam "locale" Text :>
-                               QueryParam "contentVersion" Text :>
-                                 QueryParam "updatedMax" Text :>
-                                   QueryParam "key" Text :>
-                                     QueryParam "updatedMin" Text :>
-                                       QueryParam "annotationDataId" Text :>
-                                         QueryParam "source" Text :>
-                                           QueryParam "h" Int32 :>
-                                             QueryParam "pageToken" Text :>
-                                               QueryParam "oauth_token" Text :>
-                                                 QueryParam "maxResults" Word32
-                                                   :>
-                                                   QueryParam "fields" Text :>
-                                                     QueryParam "alt" Text :>
-                                                       Get '[JSON]
-                                                         Annotationsdata
-
--- | Gets the annotation data.
-type AnnotationDataGet =
-     "books" :>
-       "v1" :>
-         "volumes" :>
-           Capture "volumeId" Text :>
-             "layers" :>
-               Capture "layerId" Text :>
-                 "data" :>
-                   Capture "annotationDataId" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "w" Int32 :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "scale" Int32 :>
-                             QueryParam "userIp" Text :>
-                               QueryParam "locale" Text :>
-                                 QueryParam "contentVersion" Text :>
-                                   QueryParam "key" Text :>
-                                     QueryParam "allowWebDefinitions" Bool :>
-                                       QueryParam "source" Text :>
-                                         QueryParam "h" Int32 :>
-                                           QueryParam "oauth_token" Text :>
-                                             QueryParam "fields" Text :>
-                                               QueryParam "alt" Text :>
-                                                 Get '[JSON] Annotationdata
-
-type DictionaryAPI = DictionaryListOfflineMetadata
-
--- | Returns a list of offline dictionary meatadata available
-type DictionaryListOfflineMetadata =
-     "books" :>
-       "v1" :>
-         "dictionary" :>
-           "listOfflineMetadata" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "cpksver" Text :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Get '[JSON] Metadata
-
-type VolumesAPI =
-     UseruploadedAPI :<|> RecommendedAPI :<|>
-       AssociatedAPI
-       :<|> MybooksAPI
-
-type UseruploadedAPI = UseruploadedList
-
--- | Return a list of books uploaded by the current user.
-type UseruploadedList =
-     "books" :>
-       "v1" :>
-         "volumes" :>
-           "useruploaded" :>
-             QueryParam "processingState" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "locale" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "volumeId" Text :>
-                           QueryParam "source" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "startIndex" Word32 :>
-                                 QueryParam "maxResults" Word32 :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "alt" Text :>
-                                       Get '[JSON] Volumes
-
-type RecommendedAPI =
-     RecommendedList :<|> RecommendedRate
-
--- | Return a list of recommended books for the current user.
-type RecommendedList =
-     "books" :>
-       "v1" :>
-         "volumes" :>
-           "recommended" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "locale" Text :>
-                     QueryParam "maxAllowedMaturityRating" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "source" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Get '[JSON] Volumes
-
--- | Rate a recommended book for the current user.
-type RecommendedRate =
-     "books" :>
-       "v1" :>
-         "volumes" :>
-           "recommended" :>
-             "rate" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "rating" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "locale" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "volumeId" Text :>
-                             QueryParam "source" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Post '[JSON]
-                                       BooksVolumesRecommendedRateResponse
-
-type AssociatedAPI = AssociatedList
-
--- | Return a list of associated books.
-type AssociatedList =
-     "books" :>
-       "v1" :>
-         "volumes" :>
-           Capture "volumeId" Text :>
-             "associated" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "locale" Text :>
-                       QueryParam "maxAllowedMaturityRating" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "source" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   QueryParam "association" Text :>
-                                     Get '[JSON] Volumes
-
-type MybooksAPI = MybooksList
-
--- | Return a list of books in My Library.
-type MybooksList =
-     "books" :>
-       "v1" :>
-         "volumes" :>
-           "mybooks" :>
-             QueryParam "processingState" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "acquireMethod" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "locale" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "source" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "startIndex" Word32 :>
-                                 QueryParam "maxResults" Word32 :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "alt" Text :>
-                                       Get '[JSON] Volumes
-
-type BookshelvesAPI = VolumesAPI
-
-type VolumesAPI = VolumesList
-
--- | Retrieves volumes in a specific bookshelf for the specified user.
-type VolumesList =
-     "books" :>
-       "v1" :>
-         "users" :>
-           Capture "userId" Text :>
-             "bookshelves" :>
-               Capture "shelf" Text :>
-                 "volumes" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "source" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "startIndex" Word32 :>
-                                 QueryParam "maxResults" Word32 :>
-                                   QueryParam "showPreorders" Bool :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "alt" Text :>
-                                         Get '[JSON] Volumes
-
-type MyconfigAPI =
-     MyconfigSyncVolumeLicenses :<|>
-       MyconfigGetUserSettings
-       :<|> MyconfigRequestAccess
-       :<|> MyconfigUpdateUserSettings
-       :<|> MyconfigReleaseDownloadAccess
-
--- | Request downloaded content access for specified volumes on the My eBooks
--- shelf.
-type MyconfigSyncVolumeLicenses =
-     "books" :>
-       "v1" :>
-         "myconfig" :>
-           "syncVolumeLicenses" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "cpksver" Text :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "locale" Text :>
-                       QueryParam "volumeIds" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "features" Text :>
-                             QueryParam "source" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "showPreorders" Bool :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "nonce" Text :>
-                                       QueryParam "alt" Text :>
-                                         Post '[JSON] Volumes
-
--- | Gets the current settings for the user.
-type MyconfigGetUserSettings =
-     "books" :>
-       "v1" :>
-         "myconfig" :>
-           "getUserSettings" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Get '[JSON] Usersettings
-
--- | Request concurrent and download access restrictions.
-type MyconfigRequestAccess =
-     "books" :>
-       "v1" :>
-         "myconfig" :>
-           "requestAccess" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "cpksver" Text :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "locale" Text :>
-                       QueryParam "licenseTypes" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "volumeId" Text :>
-                             QueryParam "source" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "nonce" Text :>
-                                     QueryParam "alt" Text :>
-                                       Post '[JSON] RequestAccess
-
--- | Sets the settings for the user. If a sub-object is specified, it will
--- overwrite the existing sub-object stored in the server. Unspecified
--- sub-objects will retain the existing value.
-type MyconfigUpdateUserSettings =
-     "books" :>
-       "v1" :>
-         "myconfig" :>
-           "updateUserSettings" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Post '[JSON] Usersettings
-
--- | Release downloaded content access restriction.
-type MyconfigReleaseDownloadAccess =
-     "books" :>
-       "v1" :>
-         "myconfig" :>
-           "releaseDownloadAccess" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "cpksver" Text :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "locale" Text :>
-                       QueryParam "volumeIds" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "source" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   Post '[JSON] DownloadAccesses
+books :: Proxy Books
+books = Proxy

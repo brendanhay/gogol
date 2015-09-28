@@ -14,16 +14,120 @@
 --
 module Network.Google.Monitoring.Types
     (
+    -- * Service URL
+      monitoringURL
 
-    -- * DeleteMetricDescriptorResponse
-      DeleteMetricDescriptorResponse
-    , deleteMetricDescriptorResponse
-    , dmdrKind
+    -- * PointDistributionOverflowBucket
+    , PointDistributionOverflowBucket
+    , pointDistributionOverflowBucket
+    , pdobCount
+    , pdobLowerBound
+
+    -- * Point
+    , Point
+    , point
+    , pBoolValue
+    , pStart
+    , pDoubleValue
+    , pStringValue
+    , pDistributionValue
+    , pEnd
+    , pInt64Value
 
     -- * ListMetricDescriptorsRequest
     , ListMetricDescriptorsRequest
     , listMetricDescriptorsRequest
     , lmdrKind
+
+    -- * ListTimeseriesDescriptorsResponse
+    , ListTimeseriesDescriptorsResponse
+    , listTimeseriesDescriptorsResponse
+    , ltdrNextPageToken
+    , ltdrKind
+    , ltdrOldest
+    , ltdrYoungest
+    , ltdrTimeseries
+
+    -- * MetricDescriptorLabelDescriptor
+    , MetricDescriptorLabelDescriptor
+    , metricDescriptorLabelDescriptor
+    , mdldKey
+    , mdldDescription
+
+    -- * WriteTimeseriesRequest
+    , WriteTimeseriesRequest
+    , writeTimeseriesRequest
+    , wtrCommonLabels
+    , wtrTimeseries
+
+    -- * Alt
+    , Alt (..)
+
+    -- * PointDistributionUnderflowBucket
+    , PointDistributionUnderflowBucket
+    , pointDistributionUnderflowBucket
+    , pdubUpperBound
+    , pdubCount
+
+    -- * DeleteMetricDescriptorResponse
+    , DeleteMetricDescriptorResponse
+    , deleteMetricDescriptorResponse
+    , dmdrKind
+
+    -- * TimeseriesDescriptor
+    , TimeseriesDescriptor
+    , timeseriesDescriptor
+    , tdProject
+    , tdMetric
+    , tdLabels
+
+    -- * ListTimeseriesRequest
+    , ListTimeseriesRequest
+    , listTimeseriesRequest
+    , ltrKind
+
+    -- * PointDistribution
+    , PointDistribution
+    , pointDistribution
+    , pdOverflowBucket
+    , pdBuckets
+    , pdUnderflowBucket
+
+    -- * TimeseriesList'Aggregator
+    , TimeseriesList'Aggregator (..)
+
+    -- * TimeseriesDescriptorsList'Aggregator
+    , TimeseriesDescriptorsList'Aggregator (..)
+
+    -- * MetricDescriptorTypeDescriptor
+    , MetricDescriptorTypeDescriptor
+    , metricDescriptorTypeDescriptor
+    , mdtdMetricType
+    , mdtdValueType
+
+    -- * MetricDescriptor
+    , MetricDescriptor
+    , metricDescriptor
+    , mdProject
+    , mdTypeDescriptor
+    , mdName
+    , mdLabels
+    , mdDescription
+
+    -- * ListTimeseriesResponse
+    , ListTimeseriesResponse
+    , listTimeseriesResponse
+    , lNextPageToken
+    , lKind
+    , lOldest
+    , lYoungest
+    , lTimeseries
+
+    -- * TimeseriesPoint
+    , TimeseriesPoint
+    , timeseriesPoint
+    , tpPoint
+    , tpTimeseriesDesc
 
     -- * ListMetricDescriptorsResponse
     , ListMetricDescriptorsResponse
@@ -37,67 +141,10 @@ module Network.Google.Monitoring.Types
     , listTimeseriesDescriptorsRequest
     , ltdrtKind
 
-    -- * ListTimeseriesDescriptorsResponse
-    , ListTimeseriesDescriptorsResponse
-    , listTimeseriesDescriptorsResponse
-    , ltdrNextPageToken
-    , ltdrKind
-    , ltdrOldest
-    , ltdrYoungest
-    , ltdrTimeseries
-
-    -- * ListTimeseriesRequest
-    , ListTimeseriesRequest
-    , listTimeseriesRequest
-    , ltrKind
-
-    -- * ListTimeseriesResponse
-    , ListTimeseriesResponse
-    , listTimeseriesResponse
-    , lNextPageToken
-    , lKind
-    , lOldest
-    , lYoungest
-    , lTimeseries
-
-    -- * MetricDescriptor
-    , MetricDescriptor
-    , metricDescriptor
-    , mdProject
-    , mdTypeDescriptor
-    , mdName
-    , mdLabels
-    , mdDescription
-
-    -- * MetricDescriptorLabelDescriptor
-    , MetricDescriptorLabelDescriptor
-    , metricDescriptorLabelDescriptor
-    , mdldKey
-    , mdldDescription
-
-    -- * MetricDescriptorTypeDescriptor
-    , MetricDescriptorTypeDescriptor
-    , metricDescriptorTypeDescriptor
-    , mdtdMetricType
-    , mdtdValueType
-
-    -- * Point
-    , Point
-    , point
-    , pBoolValue
-    , pStart
-    , pDoubleValue
-    , pStringValue
-    , pDistributionValue
-    , pEnd
-    , pInt64Value
-
-    -- * PointDistribution
-    , PointDistribution
-    , pointDistribution
-    , pdOverflowBucket
-    , pdBuckets
-    , pdUnderflowBucket
+    -- * WriteTimeseriesResponse
+    , WriteTimeseriesResponse
+    , writeTimeseriesResponse
+    , wtrKind
 
     -- * PointDistributionBucket
     , PointDistributionBucket
@@ -106,17 +153,15 @@ module Network.Google.Monitoring.Types
     , pdbCount
     , pdbLowerBound
 
-    -- * PointDistributionOverflowBucket
-    , PointDistributionOverflowBucket
-    , pointDistributionOverflowBucket
-    , pdobCount
-    , pdobLowerBound
+    -- * TimeseriesDescriptorLabels
+    , TimeseriesDescriptorLabels
+    , timeseriesDescriptorLabels
 
-    -- * PointDistributionUnderflowBucket
-    , PointDistributionUnderflowBucket
-    , pointDistributionUnderflowBucket
-    , pdubUpperBound
-    , pdubCount
+    -- * TimeseriesDescriptorLabel
+    , TimeseriesDescriptorLabel
+    , timeseriesDescriptorLabel
+    , tValue
+    , tKey
 
     -- * Timeseries
     , Timeseries
@@ -124,45 +169,18 @@ module Network.Google.Monitoring.Types
     , tPoints
     , tTimeseriesDesc
 
-    -- * TimeseriesDescriptor
-    , TimeseriesDescriptor
-    , timeseriesDescriptor
-    , tdProject
-    , tdMetric
-    , tdLabels
-
-    -- * TimeseriesDescriptorLabel
-    , TimeseriesDescriptorLabel
-    , timeseriesDescriptorLabel
-    , tdlValue
-    , tdlKey
-
-    -- * TimeseriesDescriptorLabels
-    , TimeseriesDescriptorLabels
-    , timeseriesDescriptorLabels
-
-    -- * TimeseriesPoint
-    , TimeseriesPoint
-    , timeseriesPoint
-    , tpPoint
-    , tpTimeseriesDesc
-
-    -- * WriteTimeseriesRequest
-    , WriteTimeseriesRequest
-    , writeTimeseriesRequest
-    , wtrCommonLabels
-    , wtrTimeseries
-
     -- * WriteTimeseriesRequestCommonLabels
     , WriteTimeseriesRequestCommonLabels
     , writeTimeseriesRequestCommonLabels
-
-    -- * WriteTimeseriesResponse
-    , WriteTimeseriesResponse
-    , writeTimeseriesResponse
-    , wtrKind
     ) where
 
 import           Network.Google.Monitoring.Types.Product
 import           Network.Google.Monitoring.Types.Sum
 import           Network.Google.Prelude
+
+-- | URL referring to version 'v2beta2' of the Cloud Monitoring API.
+monitoringURL :: BaseUrl
+monitoringURL
+  = BaseUrl Https
+      "https://www.googleapis.com/cloudmonitoring/v2beta2/projects/"
+      443

@@ -14,9 +14,83 @@
 --
 module Network.Google.FusionTables.Types
     (
+    -- * Service URL
+      fusionTablesURL
+
+    -- * Polygon
+    , Polygon
+    , polygon
+    , pCoordinates
+    , pType
+
+    -- * Point
+    , Point
+    , point
+    , poiCoordinates
+    , poiType
+
+    -- * TaskList
+    , TaskList
+    , taskList
+    , tlTotalItems
+    , tlNextPageToken
+    , tlKind
+    , tlItems
+
+    -- * Alt
+    , Alt (..)
+
+    -- * Import
+    , Import
+    , import'
+    , iKind
+    , iNumRowsReceived
+
+    -- * Task
+    , Task
+    , task
+    , tProgress
+    , tTaskId
+    , tKind
+    , tType
+    , tStarted
+
+    -- * Template
+    , Template
+    , template
+    , temAutomaticColumnNames
+    , temTemplateId
+    , temKind
+    , temBody
+    , temName
+    , temTableId
+
+    -- * StyleFunctionItemColorsGradient
+    , StyleFunctionItemColorsGradient
+    , styleFunctionItemColorsGradient
+    , sficgColor
+    , sficgOpacity
+
+    -- * PointStyle
+    , PointStyle
+    , pointStyle
+    , psIconName
+    , psIconStyler
+
+    -- * PolygonStyle
+    , PolygonStyle
+    , polygonStyle
+    , psFillColorStyler
+    , psFillColor
+    , psStrokeColorStyler
+    , psStrokeWeight
+    , psStrokeOpacity
+    , psFillOpacity
+    , psStrokeWeightStyler
+    , psStrokeColor
 
     -- * Bucket
-      Bucket
+    , Bucket
     , bucket
     , bMax
     , bColor
@@ -24,49 +98,6 @@ module Network.Google.FusionTables.Types
     , bIcon
     , bOpacity
     , bMin
-
-    -- * Column
-    , Column
-    , column
-    , cColumnJsonSchema
-    , cGraphPredicate
-    , cKind
-    , cBaseColumn
-    , cColumnPropertiesJson
-    , cName
-    , cType
-    , cFormatPattern
-    , cColumnId
-    , cValidValues
-    , cValidateData
-    , cDescription
-
-    -- * ColumnBaseColumn
-    , ColumnBaseColumn
-    , columnBaseColumn
-    , cbcTableIndex
-    , cbcColumnId
-
-    -- * ColumnList
-    , ColumnList
-    , columnList
-    , clTotalItems
-    , clNextPageToken
-    , clKind
-    , clItems
-
-    -- * Geometry
-    , Geometry
-    , geometry
-    , gGeometries
-    , gGeometry
-    , gType
-
-    -- * Import
-    , Import
-    , import'
-    , iKind
-    , iNumRowsReceived
 
     -- * Line
     , Line
@@ -83,42 +114,35 @@ module Network.Google.FusionTables.Types
     , lsStrokeWeightStyler
     , lsStrokeColor
 
-    -- * Point
-    , Point
-    , point
-    , poiCoordinates
-    , poiType
+    -- * ColumnList
+    , ColumnList
+    , columnList
+    , clTotalItems
+    , clNextPageToken
+    , clKind
+    , clItems
 
-    -- * PointStyle
-    , PointStyle
-    , pointStyle
-    , psIconName
-    , psIconStyler
+    -- * TableList
+    , TableList
+    , tableList
+    , tabNextPageToken
+    , tabKind
+    , tabItems
 
-    -- * Polygon
-    , Polygon
-    , polygon
-    , pCoordinates
-    , pType
+    -- * TemplateList
+    , TemplateList
+    , templateList
+    , tllTotalItems
+    , tllNextPageToken
+    , tllKind
+    , tllItems
 
-    -- * PolygonStyle
-    , PolygonStyle
-    , polygonStyle
-    , psFillColorStyler
-    , psFillColor
-    , psStrokeColorStyler
-    , psStrokeWeight
-    , psStrokeOpacity
-    , psFillOpacity
-    , psStrokeWeightStyler
-    , psStrokeColor
-
-    -- * Sqlresponse
-    , Sqlresponse
-    , sqlresponse
-    , sKind
-    , sRows
-    , sColumns
+    -- * Geometry
+    , Geometry
+    , geometry
+    , gGeometries
+    , gGeometry
+    , gType
 
     -- * StyleFunction
     , StyleFunction
@@ -128,29 +152,19 @@ module Network.Google.FusionTables.Types
     , sfGradient
     , sfColumnName
 
+    -- * Sqlresponse
+    , Sqlresponse
+    , sqlresponse
+    , sKind
+    , sRows
+    , sColumns
+
     -- * StyleFunctionGradient
     , StyleFunctionGradient
     , styleFunctionGradient
     , sfgMax
     , sfgMin
     , sfgColors
-
-    -- * StyleFunctionItemColorsGradient
-    , StyleFunctionItemColorsGradient
-    , styleFunctionItemColorsGradient
-    , sficgColor
-    , sficgOpacity
-
-    -- * StyleSetting
-    , StyleSetting
-    , styleSetting
-    , ssPolylineOptions
-    , ssPolygonOptions
-    , ssMarkerOptions
-    , ssKind
-    , ssName
-    , ssStyleId
-    , ssTableId
 
     -- * StyleSettingList
     , StyleSettingList
@@ -177,49 +191,47 @@ module Network.Google.FusionTables.Types
     , ttAttribution
     , ttAttributionLink
 
-    -- * TableList
-    , TableList
-    , tableList
-    , tabNextPageToken
-    , tabKind
-    , tabItems
+    -- * ColumnBaseColumn
+    , ColumnBaseColumn
+    , columnBaseColumn
+    , cbcTableIndex
+    , cbcColumnId
 
-    -- * Task
-    , Task
-    , task
-    , tProgress
-    , tTaskId
-    , tKind
-    , tType
-    , tStarted
+    -- * Column
+    , Column
+    , column
+    , cColumnJsonSchema
+    , cGraphPredicate
+    , cKind
+    , cBaseColumn
+    , cColumnPropertiesJson
+    , cName
+    , cType
+    , cFormatPattern
+    , cColumnId
+    , cValidValues
+    , cValidateData
+    , cDescription
 
-    -- * TaskList
-    , TaskList
-    , taskList
-    , tlTotalItems
-    , tlNextPageToken
-    , tlKind
-    , tlItems
-
-    -- * Template
-    , Template
-    , template
-    , temAutomaticColumnNames
-    , temTemplateId
-    , temKind
-    , temBody
-    , temName
-    , temTableId
-
-    -- * TemplateList
-    , TemplateList
-    , templateList
-    , tllTotalItems
-    , tllNextPageToken
-    , tllKind
-    , tllItems
+    -- * StyleSetting
+    , StyleSetting
+    , styleSetting
+    , ssPolylineOptions
+    , ssPolygonOptions
+    , ssMarkerOptions
+    , ssKind
+    , ssName
+    , ssStyleId
+    , ssTableId
     ) where
 
 import           Network.Google.FusionTables.Types.Product
 import           Network.Google.FusionTables.Types.Sum
 import           Network.Google.Prelude
+
+-- | URL referring to version 'v2' of the Fusion Tables API.
+fusionTablesURL :: BaseUrl
+fusionTablesURL
+  = BaseUrl Https
+      "https://www.googleapis.com/fusiontables/v2/"
+      443

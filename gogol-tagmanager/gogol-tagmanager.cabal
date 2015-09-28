@@ -1,6 +1,6 @@
 name:                  gogol-tagmanager
 version:               0.0.1
-synopsis:              Google Tag Manager API.
+synopsis:              Google Tag Manager API Client.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -16,8 +16,8 @@ extra-source-files:    README.md
 description:
     API for accessing Tag Manager accounts and containers.
     .
-    /Warning:/ This is an experimental preview release which is still under
-    heavy development and not intended for public consumption, caveat emptor!
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
 
 source-repository head
     type:     git
@@ -30,7 +30,47 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.TagManager
+          Network.Google.API.TagManager.Accounts.Containers.Folders.Entities.List
+        , Network.Google.API.TagManager.Accounts.Containers.MACros.Create
+        , Network.Google.API.TagManager.Accounts.Containers.MACros.Delete
+        , Network.Google.API.TagManager.Accounts.Containers.MACros.Get
+        , Network.Google.API.TagManager.Accounts.Containers.MACros.List
+        , Network.Google.API.TagManager.Accounts.Containers.MACros.Update
+        , Network.Google.API.TagManager.Accounts.Containers.Move_folders.Update
+        , Network.Google.API.TagManager.Accounts.Containers.Rules.Create
+        , Network.Google.API.TagManager.Accounts.Containers.Rules.Delete
+        , Network.Google.API.TagManager.Accounts.Containers.Rules.Get
+        , Network.Google.API.TagManager.Accounts.Containers.Rules.List
+        , Network.Google.API.TagManager.Accounts.Containers.Rules.Update
+        , Network.Google.API.TagManager.Accounts.Containers.Tags.Create
+        , Network.Google.API.TagManager.Accounts.Containers.Tags.Delete
+        , Network.Google.API.TagManager.Accounts.Containers.Tags.Get
+        , Network.Google.API.TagManager.Accounts.Containers.Tags.List
+        , Network.Google.API.TagManager.Accounts.Containers.Tags.Update
+        , Network.Google.API.TagManager.Accounts.Containers.Triggers.Create
+        , Network.Google.API.TagManager.Accounts.Containers.Triggers.Delete
+        , Network.Google.API.TagManager.Accounts.Containers.Triggers.Get
+        , Network.Google.API.TagManager.Accounts.Containers.Triggers.List
+        , Network.Google.API.TagManager.Accounts.Containers.Triggers.Update
+        , Network.Google.API.TagManager.Accounts.Containers.Variables.Create
+        , Network.Google.API.TagManager.Accounts.Containers.Variables.Delete
+        , Network.Google.API.TagManager.Accounts.Containers.Variables.Get
+        , Network.Google.API.TagManager.Accounts.Containers.Variables.List
+        , Network.Google.API.TagManager.Accounts.Containers.Variables.Update
+        , Network.Google.API.TagManager.Accounts.Containers.Versions.Create
+        , Network.Google.API.TagManager.Accounts.Containers.Versions.Delete
+        , Network.Google.API.TagManager.Accounts.Containers.Versions.Get
+        , Network.Google.API.TagManager.Accounts.Containers.Versions.List
+        , Network.Google.API.TagManager.Accounts.Containers.Versions.Publish
+        , Network.Google.API.TagManager.Accounts.Containers.Versions.Restore
+        , Network.Google.API.TagManager.Accounts.Containers.Versions.Undelete
+        , Network.Google.API.TagManager.Accounts.Containers.Versions.Update
+        , Network.Google.API.TagManager.Accounts.Permissions.Create
+        , Network.Google.API.TagManager.Accounts.Permissions.Delete
+        , Network.Google.API.TagManager.Accounts.Permissions.Get
+        , Network.Google.API.TagManager.Accounts.Permissions.List
+        , Network.Google.API.TagManager.Accounts.Permissions.Update
+        , Network.Google.TagManager
         , Network.Google.TagManager.Types
 
     other-modules:

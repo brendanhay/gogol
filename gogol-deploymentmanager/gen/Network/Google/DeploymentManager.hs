@@ -18,28 +18,140 @@
 -- /See:/ <https://developers.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference>
 module Network.Google.DeploymentManager
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** Google Cloud Deployment Manager API
       DeploymentManager
-    , TypesAPI
-    , TypesList
-    , ResourcesAPI
-    , ResourcesList
-    , ResourcesGet
-    , ManifestsAPI
-    , ManifestsList
-    , ManifestsGet
-    , DeploymentsAPI
-    , DeploymentsInsert
-    , DeploymentsList
-    , DeploymentsPatch
-    , DeploymentsGet
-    , DeploymentsDelete
-    , DeploymentsUpdate
-    , OperationsAPI
-    , OperationsList
-    , OperationsGet
+    , deploymentManager
+    , deploymentManagerURL
+
+    -- ** deploymentmanager.deployments.delete
+    , module Network.Google.API.DeploymentManager.Deployments.Delete
+
+    -- ** deploymentmanager.deployments.get
+    , module Network.Google.API.DeploymentManager.Deployments.Get
+
+    -- ** deploymentmanager.deployments.insert
+    , module Network.Google.API.DeploymentManager.Deployments.Insert
+
+    -- ** deploymentmanager.deployments.list
+    , module Network.Google.API.DeploymentManager.Deployments.List
+
+    -- ** deploymentmanager.deployments.patch
+    , module Network.Google.API.DeploymentManager.Deployments.Patch
+
+    -- ** deploymentmanager.deployments.update
+    , module Network.Google.API.DeploymentManager.Deployments.Update
+
+    -- ** deploymentmanager.manifests.get
+    , module Network.Google.API.DeploymentManager.Manifests.Get
+
+    -- ** deploymentmanager.manifests.list
+    , module Network.Google.API.DeploymentManager.Manifests.List
+
+    -- ** deploymentmanager.operations.get
+    , module Network.Google.API.DeploymentManager.Operations.Get
+
+    -- ** deploymentmanager.operations.list
+    , module Network.Google.API.DeploymentManager.Operations.List
+
+    -- ** deploymentmanager.resources.get
+    , module Network.Google.API.DeploymentManager.Resources.Get
+
+    -- ** deploymentmanager.resources.list
+    , module Network.Google.API.DeploymentManager.Resources.List
+
+    -- ** deploymentmanager.types.list
+    , module Network.Google.API.DeploymentManager.Types.List
 
     -- * Types
+
+    -- ** DeploymentsPatch'CreatePolicy
+    , DeploymentsPatch'CreatePolicy (..)
+
+    -- ** OperationItemDataItemWarnings
+    , OperationItemDataItemWarnings
+    , operationItemDataItemWarnings
+    , oidiwValue
+    , oidiwKey
+
+    -- ** Manifest
+    , Manifest
+    , manifest
+    , mInsertTime
+    , mLayout
+    , mConfig
+    , mImports
+    , mSelfLink
+    , mName
+    , mEvaluatedConfig
+    , mId
+
+    -- ** TypesListResponse
+    , TypesListResponse
+    , typesListResponse
+    , tlrNextPageToken
+    , tlrTypes
+
+    -- ** OperationItemWarnings
+    , OperationItemWarnings
+    , operationItemWarnings
+    , oiwData
+    , oiwCode
+    , oiwMessage
+
+    -- ** Alt
+    , Alt (..)
+
+    -- ** ManifestsListResponse
+    , ManifestsListResponse
+    , manifestsListResponse
+    , mlrNextPageToken
+    , mlrManifests
+
+    -- ** Type
+    , Type
+    , type'
+    , tInsertTime
+    , tSelfLink
+    , tName
+    , tId
+
+    -- ** OperationItemErrorsError
+    , OperationItemErrorsError
+    , operationItemErrorsError
+    , oieeLocation
+    , oieeCode
+    , oieeMessage
+
+    -- ** ImportFile
+    , ImportFile
+    , importFile
+    , ifContent
+    , ifName
+
+    -- ** DeploymentsListResponse
+    , DeploymentsListResponse
+    , deploymentsListResponse
+    , dlrNextPageToken
+    , dlrDeployments
+
+    -- ** DeploymentsUpdate'CreatePolicy
+    , DeploymentsUpdate'CreatePolicy (..)
+
+    -- ** OperationError
+    , OperationError
+    , operationError
+    , oeErrors
+
+    -- ** DeploymentsUpdate'UpdatePolicy
+    , DeploymentsUpdate'UpdatePolicy (..)
+
+    -- ** DeploymentsUpdate'DeletePolicy
+    , DeploymentsUpdate'DeletePolicy (..)
+
+    -- ** DeploymentsPatch'UpdatePolicy
+    , DeploymentsPatch'UpdatePolicy (..)
 
     -- ** Deployment
     , Deployment
@@ -56,41 +168,34 @@ module Network.Google.DeploymentManager
     , dUpdate
     , dTarget
 
-    -- ** DeploymentUpdate
-    , DeploymentUpdate
-    , deploymentUpdate
-    , duManifest
-    , duErrors
+    -- ** DeploymentsPatch'DeletePolicy
+    , DeploymentsPatch'DeletePolicy (..)
 
-    -- ** DeploymentsListResponse
-    , DeploymentsListResponse
-    , deploymentsListResponse
-    , dlrNextPageToken
-    , dlrDeployments
+    -- ** TargetConfiguration
+    , TargetConfiguration
+    , targetConfiguration
+    , tcConfig
+    , tcImports
 
-    -- ** ImportFile
-    , ImportFile
-    , importFile
-    , ifContent
-    , ifName
+    -- ** OperationsListResponse
+    , OperationsListResponse
+    , operationsListResponse
+    , olrNextPageToken
+    , olrOperations
 
-    -- ** Manifest
-    , Manifest
-    , manifest
-    , mInsertTime
-    , mLayout
-    , mConfig
-    , mImports
-    , mSelfLink
-    , mName
-    , mEvaluatedConfig
-    , mId
-
-    -- ** ManifestsListResponse
-    , ManifestsListResponse
-    , manifestsListResponse
-    , mlrNextPageToken
-    , mlrManifests
+    -- ** Resource
+    , Resource
+    , resource
+    , rInsertTime
+    , rUrl
+    , rUpdateTime
+    , rName
+    , rManifest
+    , rFinalProperties
+    , rId
+    , rType
+    , rUpdate
+    , rProperties
 
     -- ** Operation
     , Operation
@@ -118,50 +223,17 @@ module Network.Google.DeploymentManager
     , oTargetLink
     , oClientOperationId
 
-    -- ** OperationError
-    , OperationError
-    , operationError
-    , oeErrors
+    -- ** ResourcesListResponse
+    , ResourcesListResponse
+    , resourcesListResponse
+    , rlrNextPageToken
+    , rlrResources
 
-    -- ** OperationItemDataItemWarnings
-    , OperationItemDataItemWarnings
-    , operationItemDataItemWarnings
-    , oidiwValue
-    , oidiwKey
-
-    -- ** OperationItemErrorsError
-    , OperationItemErrorsError
-    , operationItemErrorsError
-    , oieeLocation
-    , oieeCode
-    , oieeMessage
-
-    -- ** OperationItemWarnings
-    , OperationItemWarnings
-    , operationItemWarnings
-    , oiwData
-    , oiwCode
-    , oiwMessage
-
-    -- ** OperationsListResponse
-    , OperationsListResponse
-    , operationsListResponse
-    , olrNextPageToken
-    , olrOperations
-
-    -- ** Resource
-    , Resource
-    , resource
-    , rInsertTime
-    , rUrl
-    , rUpdateTime
-    , rName
-    , rManifest
-    , rFinalProperties
-    , rId
-    , rType
-    , rUpdate
-    , rProperties
+    -- ** DeploymentUpdate
+    , DeploymentUpdate
+    , deploymentUpdate
+    , duManifest
+    , duErrors
 
     -- ** ResourceUpdate
     , ResourceUpdate
@@ -172,34 +244,21 @@ module Network.Google.DeploymentManager
     , ruFinalProperties
     , ruErrors
     , ruProperties
-
-    -- ** ResourcesListResponse
-    , ResourcesListResponse
-    , resourcesListResponse
-    , rlrNextPageToken
-    , rlrResources
-
-    -- ** TargetConfiguration
-    , TargetConfiguration
-    , targetConfiguration
-    , tcConfig
-    , tcImports
-
-    -- ** Type
-    , Type
-    , type'
-    , tInsertTime
-    , tSelfLink
-    , tName
-    , tId
-
-    -- ** TypesListResponse
-    , TypesListResponse
-    , typesListResponse
-    , tlrNextPageToken
-    , tlrTypes
     ) where
 
+import           Network.Google.API.DeploymentManager.Deployments.Delete
+import           Network.Google.API.DeploymentManager.Deployments.Get
+import           Network.Google.API.DeploymentManager.Deployments.Insert
+import           Network.Google.API.DeploymentManager.Deployments.List
+import           Network.Google.API.DeploymentManager.Deployments.Patch
+import           Network.Google.API.DeploymentManager.Deployments.Update
+import           Network.Google.API.DeploymentManager.Manifests.Get
+import           Network.Google.API.DeploymentManager.Manifests.List
+import           Network.Google.API.DeploymentManager.Operations.Get
+import           Network.Google.API.DeploymentManager.Operations.List
+import           Network.Google.API.DeploymentManager.Resources.Get
+import           Network.Google.API.DeploymentManager.Resources.List
+import           Network.Google.API.DeploymentManager.Types.List
 import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
@@ -208,276 +267,18 @@ TODO
 -}
 
 type DeploymentManager =
-     TypesAPI :<|> ResourcesAPI :<|> ManifestsAPI :<|>
-       DeploymentsAPI
-       :<|> OperationsAPI
+     ManifestsListAPI :<|> ManifestsGetAPI :<|>
+       DeploymentsDeleteAPI
+       :<|> ResourcesGetAPI
+       :<|> DeploymentsGetAPI
+       :<|> ResourcesListAPI
+       :<|> DeploymentsPatchAPI
+       :<|> OperationsGetAPI
+       :<|> OperationsListAPI
+       :<|> DeploymentsListAPI
+       :<|> TypesListAPI
+       :<|> DeploymentsUpdateAPI
+       :<|> DeploymentsInsertAPI
 
-type TypesAPI = TypesList
-
--- | Lists all resource types for Deployment Manager.
-type TypesList =
-     "deploymentmanager" :>
-       "v2beta2" :>
-         "projects" :>
-           Capture "project" Text :>
-             "global" :>
-               "types" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "filter" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "maxResults" Word32 :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Get '[JSON] TypesListResponse
-
-type ResourcesAPI = ResourcesList :<|> ResourcesGet
-
--- | Lists all resources in a given deployment.
-type ResourcesList =
-     "deploymentmanager" :>
-       "v2beta2" :>
-         "projects" :>
-           Capture "project" Text :>
-             "global" :>
-               "deployments" :>
-                 Capture "deployment" Text :>
-                   "resources" :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "filter" Text :>
-                               QueryParam "pageToken" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "maxResults" Word32 :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "alt" Text :>
-                                         Get '[JSON] ResourcesListResponse
-
--- | Gets information about a single resource.
-type ResourcesGet =
-     "deploymentmanager" :>
-       "v2beta2" :>
-         "projects" :>
-           Capture "project" Text :>
-             "global" :>
-               "deployments" :>
-                 Capture "deployment" Text :>
-                   "resources" :>
-                     Capture "resource" Text :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "userIp" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :> Get '[JSON] Resource
-
-type ManifestsAPI = ManifestsList :<|> ManifestsGet
-
--- | Lists all manifests for a given deployment.
-type ManifestsList =
-     "deploymentmanager" :>
-       "v2beta2" :>
-         "projects" :>
-           Capture "project" Text :>
-             "global" :>
-               "deployments" :>
-                 Capture "deployment" Text :>
-                   "manifests" :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "filter" Text :>
-                               QueryParam "pageToken" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "maxResults" Word32 :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "alt" Text :>
-                                         Get '[JSON] ManifestsListResponse
-
--- | Gets information about a specific manifest.
-type ManifestsGet =
-     "deploymentmanager" :>
-       "v2beta2" :>
-         "projects" :>
-           Capture "project" Text :>
-             "global" :>
-               "deployments" :>
-                 Capture "deployment" Text :>
-                   "manifests" :>
-                     Capture "manifest" Text :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "userIp" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :> Get '[JSON] Manifest
-
-type DeploymentsAPI =
-     DeploymentsInsert :<|> DeploymentsList :<|>
-       DeploymentsPatch
-       :<|> DeploymentsGet
-       :<|> DeploymentsDelete
-       :<|> DeploymentsUpdate
-
--- | Creates a deployment and all of the resources described by the
--- deployment manifest.
-type DeploymentsInsert =
-     "deploymentmanager" :>
-       "v2beta2" :>
-         "projects" :>
-           Capture "project" Text :>
-             "global" :>
-               "deployments" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Post '[JSON] Operation
-
--- | Lists all deployments for a given project.
-type DeploymentsList =
-     "deploymentmanager" :>
-       "v2beta2" :>
-         "projects" :>
-           Capture "project" Text :>
-             "global" :>
-               "deployments" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "filter" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "maxResults" Word32 :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Get '[JSON] DeploymentsListResponse
-
--- | Updates a deployment and all of the resources described by the
--- deployment manifest. This method supports patch semantics.
-type DeploymentsPatch =
-     "deploymentmanager" :>
-       "v2beta2" :>
-         "projects" :>
-           Capture "project" Text :>
-             "global" :>
-               "deployments" :>
-                 Capture "deployment" Text :>
-                   QueryParam "createPolicy" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "updatePolicy" Text :>
-                             QueryParam "deletePolicy" Text :>
-                               QueryParam "key" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "alt" Text :>
-                                       Patch '[JSON] Operation
-
--- | Gets information about a specific deployment.
-type DeploymentsGet =
-     "deploymentmanager" :>
-       "v2beta2" :>
-         "projects" :>
-           Capture "project" Text :>
-             "global" :>
-               "deployments" :>
-                 Capture "deployment" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Get '[JSON] Deployment
-
--- | Deletes a deployment and all of the resources in the deployment.
-type DeploymentsDelete =
-     "deploymentmanager" :>
-       "v2beta2" :>
-         "projects" :>
-           Capture "project" Text :>
-             "global" :>
-               "deployments" :>
-                 Capture "deployment" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Delete '[JSON] Operation
-
--- | Updates a deployment and all of the resources described by the
--- deployment manifest.
-type DeploymentsUpdate =
-     "deploymentmanager" :>
-       "v2beta2" :>
-         "projects" :>
-           Capture "project" Text :>
-             "global" :>
-               "deployments" :>
-                 Capture "deployment" Text :>
-                   QueryParam "createPolicy" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "updatePolicy" Text :>
-                             QueryParam "deletePolicy" Text :>
-                               QueryParam "key" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "alt" Text :>
-                                       Put '[JSON] Operation
-
-type OperationsAPI =
-     OperationsList :<|> OperationsGet
-
--- | Lists all operations for a project.
-type OperationsList =
-     "deploymentmanager" :>
-       "v2beta2" :>
-         "projects" :>
-           Capture "project" Text :>
-             "global" :>
-               "operations" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "filter" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "maxResults" Word32 :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Get '[JSON] OperationsListResponse
-
--- | Gets information about a specific operation.
-type OperationsGet =
-     "deploymentmanager" :>
-       "v2beta2" :>
-         "projects" :>
-           Capture "project" Text :>
-             "global" :>
-               "operations" :>
-                 Capture "operation" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Get '[JSON] Operation
+deploymentManager :: Proxy DeploymentManager
+deploymentManager = Proxy

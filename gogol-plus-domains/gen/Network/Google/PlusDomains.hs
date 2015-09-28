@@ -18,44 +18,172 @@
 -- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference>
 module Network.Google.PlusDomains
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** Google+ Domains API
       PlusDomains
-    , ActivitiesAPI
-    , ActivitiesInsert
-    , ActivitiesList
-    , ActivitiesGet
-    , PeopleAPI
-    , PeopleList
-    , PeopleListByCircle
-    , PeopleGet
-    , PeopleListByActivity
-    , MediaAPI
-    , MediaInsert
-    , AudiencesAPI
-    , AudiencesList
-    , CommentsAPI
-    , CommentsInsert
-    , CommentsList
-    , CommentsGet
-    , CirclesAPI
-    , CirclesInsert
-    , CirclesAddPeople
-    , CirclesList
-    , CirclesPatch
-    , CirclesGet
-    , CirclesRemove
-    , CirclesRemovePeople
-    , CirclesUpdate
+    , plusDomains
+    , plusDomainsURL
+
+    -- ** plusDomains.activities.get
+    , module Network.Google.API.PlusDomains.Activities.Get
+
+    -- ** plusDomains.activities.insert
+    , module Network.Google.API.PlusDomains.Activities.Insert
+
+    -- ** plusDomains.activities.list
+    , module Network.Google.API.PlusDomains.Activities.List
+
+    -- ** plusDomains.audiences.list
+    , module Network.Google.API.PlusDomains.Audiences.List
+
+    -- ** plusDomains.circles.addPeople
+    , module Network.Google.API.PlusDomains.Circles.AddPeople
+
+    -- ** plusDomains.circles.get
+    , module Network.Google.API.PlusDomains.Circles.Get
+
+    -- ** plusDomains.circles.insert
+    , module Network.Google.API.PlusDomains.Circles.Insert
+
+    -- ** plusDomains.circles.list
+    , module Network.Google.API.PlusDomains.Circles.List
+
+    -- ** plusDomains.circles.patch
+    , module Network.Google.API.PlusDomains.Circles.Patch
+
+    -- ** plusDomains.circles.remove
+    , module Network.Google.API.PlusDomains.Circles.Remove
+
+    -- ** plusDomains.circles.removePeople
+    , module Network.Google.API.PlusDomains.Circles.RemovePeople
+
+    -- ** plusDomains.circles.update
+    , module Network.Google.API.PlusDomains.Circles.Update
+
+    -- ** plusDomains.comments.get
+    , module Network.Google.API.PlusDomains.Comments.Get
+
+    -- ** plusDomains.comments.insert
+    , module Network.Google.API.PlusDomains.Comments.Insert
+
+    -- ** plusDomains.comments.list
+    , module Network.Google.API.PlusDomains.Comments.List
+
+    -- ** plusDomains.media.insert
+    , module Network.Google.API.PlusDomains.Media.Insert
+
+    -- ** plusDomains.people.get
+    , module Network.Google.API.PlusDomains.People.Get
+
+    -- ** plusDomains.people.list
+    , module Network.Google.API.PlusDomains.People.List
+
+    -- ** plusDomains.people.listByActivity
+    , module Network.Google.API.PlusDomains.People.ListByActivity
+
+    -- ** plusDomains.people.listByCircle
+    , module Network.Google.API.PlusDomains.People.ListByCircle
 
     -- * Types
 
-    -- ** Acl
-    , Acl
-    , acl
-    , aclKind
-    , aclItems
-    , aclDomainRestricted
-    , aclDescription
+    -- ** ActivityVerificationActor
+    , ActivityVerificationActor
+    , activityVerificationActor
+    , avaAdHocVerified
+
+    -- ** Media
+    , Media
+    , media
+    , mSizeBytes
+    , mSummary
+    , mEtag
+    , mHeight
+    , mVideoDuration
+    , mVideoStatus
+    , mKind
+    , mPublished
+    , mUrl
+    , mWidth
+    , mMediaUrl
+    , mStreams
+    , mExif
+    , mDisplayName
+    , mAuthor
+    , mId
+    , mUpdated
+    , mMediaCreatedTime
+
+    -- ** CommentImageActor
+    , CommentImageActor
+    , commentImageActor
+    , ciaUrl
+
+    -- ** ActivityEmbedItemAttachmentsObject
+    , ActivityEmbedItemAttachmentsObject
+    , activityEmbedItemAttachmentsObject
+    , aeiaoUrl
+    , aeiaoType
+
+    -- ** ActivityImageActorObject
+    , ActivityImageActorObject
+    , activityImageActorObject
+    , aiaoUrl
+
+    -- ** ActivityRepliesObject
+    , ActivityRepliesObject
+    , activityRepliesObject
+    , aroTotalItems
+    , aroSelfLink
+
+    -- ** ActivityFeed
+    , ActivityFeed
+    , activityFeed
+    , afEtag
+    , afNextPageToken
+    , afNextLink
+    , afKind
+    , afItems
+    , afSelfLink
+    , afId
+    , afUpdated
+    , afTitle
+
+    -- ** PersonCoverPhotoCover
+    , PersonCoverPhotoCover
+    , personCoverPhotoCover
+    , pcpcHeight
+    , pcpcUrl
+    , pcpcWidth
+
+    -- ** CirclePeople
+    , CirclePeople
+    , circlePeople
+    , cpTotalItems
+
+    -- ** Circle
+    , Circle
+    , circle
+    , cEtag
+    , cKind
+    , cPeople
+    , cSelfLink
+    , cDisplayName
+    , cId
+    , cDescription
+
+    -- ** Alt
+    , Alt (..)
+
+    -- ** ActivityImageActor
+    , ActivityImageActor
+    , activityImageActor
+    , aiaUrl
+
+    -- ** CommentVerificationActor
+    , CommentVerificationActor
+    , commentVerificationActor
+    , cvaAdHocVerified
 
     -- ** Activity
     , Activity
@@ -91,51 +219,78 @@ module Network.Google.PlusDomains
     , aaId
     , aaVerification
 
-    -- ** ActivityActorObject
-    , ActivityActorObject
-    , activityActorObject
-    , aaoImage
-    , aaoUrl
-    , aaoDisplayName
-    , aaoId
-    , aaoVerification
+    -- ** AudiencesFeed
+    , AudiencesFeed
+    , audiencesFeed
+    , audTotalItems
+    , audEtag
+    , audNextPageToken
+    , audKind
+    , audItems
 
-    -- ** ActivityEmbedItemAttachmentsObject
-    , ActivityEmbedItemAttachmentsObject
-    , activityEmbedItemAttachmentsObject
-    , aeiaoUrl
-    , aeiaoType
+    -- ** MediaExif
+    , MediaExif
+    , mediaExif
+    , meTime
 
-    -- ** ActivityFeed
-    , ActivityFeed
-    , activityFeed
-    , afEtag
-    , afNextPageToken
-    , afNextLink
-    , afKind
-    , afItems
-    , afSelfLink
-    , afId
-    , afUpdated
-    , afTitle
+    -- ** CommentObject
+    , CommentObject
+    , commentObject
+    , coObjectType
+    , coOriginalContent
+    , coContent
 
-    -- ** ActivityFullImageItemAttachmentsObject
-    , ActivityFullImageItemAttachmentsObject
-    , activityFullImageItemAttachmentsObject
-    , afiiaoHeight
-    , afiiaoUrl
-    , afiiaoWidth
-    , afiiaoType
+    -- ** PeopleList'OrderBy
+    , PeopleList'OrderBy (..)
 
-    -- ** ActivityImageActor
-    , ActivityImageActor
-    , activityImageActor
-    , aiaUrl
+    -- ** ActivityResharersObject
+    , ActivityResharersObject
+    , activityResharersObject
+    , aTotalItems
+    , aSelfLink
 
-    -- ** ActivityImageActorObject
-    , ActivityImageActorObject
-    , activityImageActorObject
-    , aiaoUrl
+    -- ** PersonCoverInfoCover
+    , PersonCoverInfoCover
+    , personCoverInfoCover
+    , pcicTopImageOffset
+    , pcicLeftImageOffset
+
+    -- ** PersonItemUrls
+    , PersonItemUrls
+    , personItemUrls
+    , piuValue
+    , piuType
+    , piuLabel
+
+    -- ** PeopleList'Collection
+    , PeopleList'Collection (..)
+
+    -- ** Place
+    , Place
+    , place
+    , pKind
+    , pAddress
+    , pDisplayName
+    , pId
+    , pPosition
+
+    -- ** ActivitiesList'Collection
+    , ActivitiesList'Collection (..)
+
+    -- ** Comment
+    , Comment
+    , comment
+    , comEtag
+    , comPlusoners
+    , comKind
+    , comPublished
+    , comActor
+    , comSelfLink
+    , comObject
+    , comId
+    , comUpdated
+    , comVerb
+    , comInReplyTo
 
     -- ** ActivityImageItemAttachmentsObject
     , ActivityImageItemAttachmentsObject
@@ -145,6 +300,45 @@ module Network.Google.PlusDomains
     , aiiaoWidth
     , aiiaoType
 
+    -- ** PersonItemOrganizations
+    , PersonItemOrganizations
+    , personItemOrganizations
+    , pioDepartment
+    , pioLocation
+    , pioEndDate
+    , pioPrimary
+    , pioStartDate
+    , pioName
+    , pioTitle
+    , pioType
+    , pioDescription
+
+    -- ** PlaceAddress
+    , PlaceAddress
+    , placeAddress
+    , paFormatted
+
+    -- ** ActivityStatusForViewerObject
+    , ActivityStatusForViewerObject
+    , activityStatusForViewerObject
+    , asfvoCanComment
+    , asfvoResharingDisabled
+    , asfvoCanUpdate
+    , asfvoIsPlusOned
+    , asfvoCanPlusone
+
+    -- ** CommentFeed
+    , CommentFeed
+    , commentFeed
+    , cfEtag
+    , cfNextPageToken
+    , cfNextLink
+    , cfKind
+    , cfItems
+    , cfId
+    , cfUpdated
+    , cfTitle
+
     -- ** ActivityImageItemThumbnailsItemAttachmentsObject
     , ActivityImageItemThumbnailsItemAttachmentsObject
     , activityImageItemThumbnailsItemAttachmentsObject
@@ -152,6 +346,40 @@ module Network.Google.PlusDomains
     , aiitiaoUrl
     , aiitiaoWidth
     , aiitiaoType
+
+    -- ** PlacePosition
+    , PlacePosition
+    , placePosition
+    , ppLatitude
+    , ppLongitude
+
+    -- ** MediaInsert'Collection
+    , MediaInsert'Collection (..)
+
+    -- ** PersonName
+    , PersonName
+    , personName
+    , pnGivenName
+    , pnMiddleName
+    , pnFormatted
+    , pnHonorificPrefix
+    , pnFamilyName
+    , pnHonorificSuffix
+
+    -- ** PersonItemEmails
+    , PersonItemEmails
+    , personItemEmails
+    , pieValue
+    , pieType
+
+    -- ** Audience
+    , Audience
+    , audience
+    , aaEtag
+    , aaKind
+    , aaVisibility
+    , aaItem
+    , aaMemberCount
 
     -- ** ActivityItemAttachmentsObject
     , ActivityItemAttachmentsObject
@@ -172,207 +400,24 @@ module Network.Google.PlusDomains
     , activityItemPreviewThumbnailsItemAttachmentsObject
     , aiptiaoUrl
 
-    -- ** ActivityItemThumbnailsItemAttachmentsObject
-    , ActivityItemThumbnailsItemAttachmentsObject
-    , activityItemThumbnailsItemAttachmentsObject
-    , aitiaoImage
-    , aitiaoUrl
-    , aitiaoDescription
-
-    -- ** ActivityNameActor
-    , ActivityNameActor
-    , activityNameActor
-    , anaGivenName
-    , anaFamilyName
-
-    -- ** ActivityObject
-    , ActivityObject
-    , activityObject
-    , aoPlusoners
-    , aoAttachments
-    , aoObjectType
-    , aoOriginalContent
-    , aoUrl
-    , aoActor
-    , aoContent
-    , aoReplies
-    , aoId
-    , aoStatusForViewer
-    , aoResharers
-
     -- ** ActivityPlusonersObject
     , ActivityPlusonersObject
     , activityPlusonersObject
     , apoTotalItems
     , apoSelfLink
 
-    -- ** ActivityProvider
-    , ActivityProvider
-    , activityProvider
-    , apTitle
-
-    -- ** ActivityRepliesObject
-    , ActivityRepliesObject
-    , activityRepliesObject
-    , aroTotalItems
-    , aroSelfLink
-
-    -- ** ActivityResharersObject
-    , ActivityResharersObject
-    , activityResharersObject
-    , aTotalItems
-    , aSelfLink
-
-    -- ** ActivityStatusForViewerObject
-    , ActivityStatusForViewerObject
-    , activityStatusForViewerObject
-    , asfvoCanComment
-    , asfvoResharingDisabled
-    , asfvoCanUpdate
-    , asfvoIsPlusOned
-    , asfvoCanPlusone
-
-    -- ** ActivityVerificationActor
-    , ActivityVerificationActor
-    , activityVerificationActor
-    , avaAdHocVerified
-
-    -- ** ActivityVerificationActorObject
-    , ActivityVerificationActorObject
-    , activityVerificationActorObject
-    , avaoAdHocVerified
-
-    -- ** Audience
-    , Audience
-    , audience
-    , aaEtag
-    , aaKind
-    , aaVisibility
-    , aaItem
-    , aaMemberCount
-
-    -- ** AudiencesFeed
-    , AudiencesFeed
-    , audiencesFeed
-    , audTotalItems
-    , audEtag
-    , audNextPageToken
-    , audKind
-    , audItems
-
-    -- ** Circle
-    , Circle
-    , circle
-    , cEtag
-    , cKind
-    , cPeople
-    , cSelfLink
-    , cDisplayName
-    , cId
-    , cDescription
-
-    -- ** CircleFeed
-    , CircleFeed
-    , circleFeed
-    , cirTotalItems
-    , cirEtag
-    , cirNextPageToken
-    , cirNextLink
-    , cirKind
-    , cirItems
-    , cirSelfLink
-    , cirTitle
-
-    -- ** CirclePeople
-    , CirclePeople
-    , circlePeople
-    , cpTotalItems
-
-    -- ** Comment
-    , Comment
-    , comment
-    , comEtag
-    , comPlusoners
-    , comKind
-    , comPublished
-    , comActor
-    , comSelfLink
-    , comObject
-    , comId
-    , comUpdated
-    , comVerb
-    , comInReplyTo
-
-    -- ** CommentActor
-    , CommentActor
-    , commentActor
-    , caImage
-    , caUrl
-    , caDisplayName
-    , caId
-    , caVerification
-
-    -- ** CommentFeed
-    , CommentFeed
-    , commentFeed
-    , cfEtag
-    , cfNextPageToken
-    , cfNextLink
-    , cfKind
-    , cfItems
-    , cfId
-    , cfUpdated
-    , cfTitle
-
-    -- ** CommentImageActor
-    , CommentImageActor
-    , commentImageActor
-    , ciaUrl
-
-    -- ** CommentItemInReplyTo
-    , CommentItemInReplyTo
-    , commentItemInReplyTo
-    , ciirtUrl
-    , ciirtId
-
-    -- ** CommentObject
-    , CommentObject
-    , commentObject
-    , coObjectType
-    , coOriginalContent
-    , coContent
-
     -- ** CommentPlusoners
     , CommentPlusoners
     , commentPlusoners
     , cTotalItems
 
-    -- ** CommentVerificationActor
-    , CommentVerificationActor
-    , commentVerificationActor
-    , cvaAdHocVerified
+    -- ** ActivityProvider
+    , ActivityProvider
+    , activityProvider
+    , apTitle
 
-    -- ** Media
-    , Media
-    , media
-    , mSizeBytes
-    , mSummary
-    , mEtag
-    , mHeight
-    , mVideoDuration
-    , mVideoStatus
-    , mKind
-    , mPublished
-    , mUrl
-    , mWidth
-    , mMediaUrl
-    , mStreams
-    , mExif
-    , mDisplayName
-    , mAuthor
-    , mId
-    , mUpdated
-    , mMediaCreatedTime
+    -- ** CommentsList'SortOrder
+    , CommentsList'SortOrder (..)
 
     -- ** MediaAuthor
     , MediaAuthor
@@ -382,26 +427,16 @@ module Network.Google.PlusDomains
     , maDisplayName
     , maId
 
-    -- ** MediaExif
-    , MediaExif
-    , mediaExif
-    , meTime
+    -- ** ActivityNameActor
+    , ActivityNameActor
+    , activityNameActor
+    , anaGivenName
+    , anaFamilyName
 
     -- ** MediaImageAuthor
     , MediaImageAuthor
     , mediaImageAuthor
     , miaUrl
-
-    -- ** PeopleFeed
-    , PeopleFeed
-    , peopleFeed
-    , pfTotalItems
-    , pfEtag
-    , pfNextPageToken
-    , pfKind
-    , pfItems
-    , pfSelfLink
-    , pfTitle
 
     -- ** Person
     , Person
@@ -435,6 +470,76 @@ module Network.Google.PlusDomains
     , perOrganizations
     , perCircledByCount
 
+    -- ** Videostream
+    , Videostream
+    , videostream
+    , vHeight
+    , vUrl
+    , vWidth
+    , vType
+
+    -- ** PeopleListByActivity'Collection
+    , PeopleListByActivity'Collection (..)
+
+    -- ** ActivityFullImageItemAttachmentsObject
+    , ActivityFullImageItemAttachmentsObject
+    , activityFullImageItemAttachmentsObject
+    , afiiaoHeight
+    , afiiaoUrl
+    , afiiaoWidth
+    , afiiaoType
+
+    -- ** ActivityActorObject
+    , ActivityActorObject
+    , activityActorObject
+    , aaoImage
+    , aaoUrl
+    , aaoDisplayName
+    , aaoId
+    , aaoVerification
+
+    -- ** CircleFeed
+    , CircleFeed
+    , circleFeed
+    , cirTotalItems
+    , cirEtag
+    , cirNextPageToken
+    , cirNextLink
+    , cirKind
+    , cirItems
+    , cirSelfLink
+    , cirTitle
+
+    -- ** ActivityObject
+    , ActivityObject
+    , activityObject
+    , aoPlusoners
+    , aoAttachments
+    , aoObjectType
+    , aoOriginalContent
+    , aoUrl
+    , aoActor
+    , aoContent
+    , aoReplies
+    , aoId
+    , aoStatusForViewer
+    , aoResharers
+
+    -- ** CommentActor
+    , CommentActor
+    , commentActor
+    , caImage
+    , caUrl
+    , caDisplayName
+    , caId
+    , caVerification
+
+    -- ** CommentItemInReplyTo
+    , CommentItemInReplyTo
+    , commentItemInReplyTo
+    , ciirtUrl
+    , ciirtId
+
     -- ** PersonCover
     , PersonCover
     , personCover
@@ -442,86 +547,20 @@ module Network.Google.PlusDomains
     , pcCoverInfo
     , pcCoverPhoto
 
-    -- ** PersonCoverInfoCover
-    , PersonCoverInfoCover
-    , personCoverInfoCover
-    , pcicTopImageOffset
-    , pcicLeftImageOffset
+    -- ** Acl
+    , Acl
+    , acl
+    , aclKind
+    , aclItems
+    , aclDomainRestricted
+    , aclDescription
 
-    -- ** PersonCoverPhotoCover
-    , PersonCoverPhotoCover
-    , personCoverPhotoCover
-    , pcpcHeight
-    , pcpcUrl
-    , pcpcWidth
-
-    -- ** PersonImage
-    , PersonImage
-    , personImage
-    , piUrl
-    , piIsDefault
-
-    -- ** PersonItemEmails
-    , PersonItemEmails
-    , personItemEmails
-    , pieValue
-    , pieType
-
-    -- ** PersonItemOrganizations
-    , PersonItemOrganizations
-    , personItemOrganizations
-    , pioDepartment
-    , pioLocation
-    , pioEndDate
-    , pioPrimary
-    , pioStartDate
-    , pioName
-    , pioTitle
-    , pioType
-    , pioDescription
-
-    -- ** PersonItemPlacesLived
-    , PersonItemPlacesLived
-    , personItemPlacesLived
-    , piplValue
-    , piplPrimary
-
-    -- ** PersonItemUrls
-    , PersonItemUrls
-    , personItemUrls
-    , piuValue
-    , piuType
-    , piuLabel
-
-    -- ** PersonName
-    , PersonName
-    , personName
-    , pnGivenName
-    , pnMiddleName
-    , pnFormatted
-    , pnHonorificPrefix
-    , pnFamilyName
-    , pnHonorificSuffix
-
-    -- ** Place
-    , Place
-    , place
-    , pKind
-    , pAddress
-    , pDisplayName
-    , pId
-    , pPosition
-
-    -- ** PlaceAddress
-    , PlaceAddress
-    , placeAddress
-    , paFormatted
-
-    -- ** PlacePosition
-    , PlacePosition
-    , placePosition
-    , ppLatitude
-    , ppLongitude
+    -- ** ActivityItemThumbnailsItemAttachmentsObject
+    , ActivityItemThumbnailsItemAttachmentsObject
+    , activityItemThumbnailsItemAttachmentsObject
+    , aitiaoImage
+    , aitiaoUrl
+    , aitiaoDescription
 
     -- ** PlusDomainsAclentryResource
     , PlusDomainsAclentryResource
@@ -530,15 +569,55 @@ module Network.Google.PlusDomains
     , pdarId
     , pdarType
 
-    -- ** Videostream
-    , Videostream
-    , videostream
-    , vHeight
-    , vUrl
-    , vWidth
-    , vType
+    -- ** PersonImage
+    , PersonImage
+    , personImage
+    , piUrl
+    , piIsDefault
+
+    -- ** ActivityVerificationActorObject
+    , ActivityVerificationActorObject
+    , activityVerificationActorObject
+    , avaoAdHocVerified
+
+    -- ** PersonItemPlacesLived
+    , PersonItemPlacesLived
+    , personItemPlacesLived
+    , piplValue
+    , piplPrimary
+
+    -- ** PeopleFeed
+    , PeopleFeed
+    , peopleFeed
+    , pfTotalItems
+    , pfEtag
+    , pfNextPageToken
+    , pfKind
+    , pfItems
+    , pfSelfLink
+    , pfTitle
     ) where
 
+import           Network.Google.API.PlusDomains.Activities.Get
+import           Network.Google.API.PlusDomains.Activities.Insert
+import           Network.Google.API.PlusDomains.Activities.List
+import           Network.Google.API.PlusDomains.Audiences.List
+import           Network.Google.API.PlusDomains.Circles.AddPeople
+import           Network.Google.API.PlusDomains.Circles.Get
+import           Network.Google.API.PlusDomains.Circles.Insert
+import           Network.Google.API.PlusDomains.Circles.List
+import           Network.Google.API.PlusDomains.Circles.Patch
+import           Network.Google.API.PlusDomains.Circles.Remove
+import           Network.Google.API.PlusDomains.Circles.RemovePeople
+import           Network.Google.API.PlusDomains.Circles.Update
+import           Network.Google.API.PlusDomains.Comments.Get
+import           Network.Google.API.PlusDomains.Comments.Insert
+import           Network.Google.API.PlusDomains.Comments.List
+import           Network.Google.API.PlusDomains.Media.Insert
+import           Network.Google.API.PlusDomains.People.Get
+import           Network.Google.API.PlusDomains.People.List
+import           Network.Google.API.PlusDomains.People.ListByActivity
+import           Network.Google.API.PlusDomains.People.ListByCircle
 import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
@@ -547,358 +626,25 @@ TODO
 -}
 
 type PlusDomains =
-     ActivitiesAPI :<|> PeopleAPI :<|> MediaAPI :<|>
-       AudiencesAPI
-       :<|> CommentsAPI
-       :<|> CirclesAPI
+     ActivitiesInsertAPI :<|> PeopleListByCircleAPI :<|>
+       CommentsGetAPI
+       :<|> CommentsListAPI
+       :<|> CirclesAddPeopleAPI
+       :<|> CirclesGetAPI
+       :<|> CirclesInsertAPI
+       :<|> MediaInsertAPI
+       :<|> CirclesListAPI
+       :<|> ActivitiesGetAPI
+       :<|> CirclesUpdateAPI
+       :<|> ActivitiesListAPI
+       :<|> PeopleGetAPI
+       :<|> CirclesRemoveAPI
+       :<|> CirclesRemovePeopleAPI
+       :<|> AudiencesListAPI
+       :<|> CirclesPatchAPI
+       :<|> PeopleListByActivityAPI
+       :<|> PeopleListAPI
+       :<|> CommentsInsertAPI
 
-type ActivitiesAPI =
-     ActivitiesInsert :<|> ActivitiesList :<|>
-       ActivitiesGet
-
--- | Create a new activity for the authenticated user.
-type ActivitiesInsert =
-     "plusDomains" :>
-       "v1" :>
-         "people" :>
-           Capture "userId" Text :>
-             "activities" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "preview" Bool :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Post '[JSON] Activity
-
--- | List all of the activities in the specified collection for a particular
--- user.
-type ActivitiesList =
-     "plusDomains" :>
-       "v1" :>
-         "people" :>
-           Capture "userId" Text :>
-             "activities" :>
-               Capture "collection" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "maxResults" Natural :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   Get '[JSON] ActivityFeed
-
--- | Get an activity.
-type ActivitiesGet =
-     "plusDomains" :>
-       "v1" :>
-         "activities" :>
-           Capture "activityId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Get '[JSON] Activity
-
-type PeopleAPI =
-     PeopleList :<|> PeopleListByCircle :<|> PeopleGet
-       :<|> PeopleListByActivity
-
--- | List all of the people in the specified collection.
-type PeopleList =
-     "plusDomains" :>
-       "v1" :>
-         "people" :>
-           Capture "userId" Text :>
-             "people" :>
-               Capture "collection" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "orderBy" Text :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "maxResults" Natural :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Get '[JSON] PeopleFeed
-
--- | List all of the people who are members of a circle.
-type PeopleListByCircle =
-     "plusDomains" :>
-       "v1" :>
-         "circles" :>
-           Capture "circleId" Text :>
-             "people" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "maxResults" Natural :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Get '[JSON] PeopleFeed
-
--- | Get a person\'s profile.
-type PeopleGet =
-     "plusDomains" :>
-       "v1" :>
-         "people" :>
-           Capture "userId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Get '[JSON] Person
-
--- | List all of the people in the specified collection for a particular
--- activity.
-type PeopleListByActivity =
-     "plusDomains" :>
-       "v1" :>
-         "activities" :>
-           Capture "activityId" Text :>
-             "people" :>
-               Capture "collection" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "maxResults" Natural :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Get '[JSON] PeopleFeed
-
-type MediaAPI = MediaInsert
-
--- | Add a new media item to an album. The current upload size limitations
--- are 36MB for a photo and 1GB for a video. Uploads do not count against
--- quota if photos are less than 2048 pixels on their longest side or
--- videos are less than 15 minutes in length.
-type MediaInsert =
-     "plusDomains" :>
-       "v1" :>
-         "people" :>
-           Capture "userId" Text :>
-             "media" :>
-               Capture "collection" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Post '[JSON] Media
-
-type AudiencesAPI = AudiencesList
-
--- | List all of the audiences to which a user can share.
-type AudiencesList =
-     "plusDomains" :>
-       "v1" :>
-         "people" :>
-           Capture "userId" Text :>
-             "audiences" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "maxResults" Natural :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Get '[JSON] AudiencesFeed
-
-type CommentsAPI =
-     CommentsInsert :<|> CommentsList :<|> CommentsGet
-
--- | Create a new comment in reply to an activity.
-type CommentsInsert =
-     "plusDomains" :>
-       "v1" :>
-         "activities" :>
-           Capture "activityId" Text :>
-             "comments" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] Comment
-
--- | List all of the comments for an activity.
-type CommentsList =
-     "plusDomains" :>
-       "v1" :>
-         "activities" :>
-           Capture "activityId" Text :>
-             "comments" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "sortOrder" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "maxResults" Word32 :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   Get '[JSON] CommentFeed
-
--- | Get a comment.
-type CommentsGet =
-     "plusDomains" :>
-       "v1" :>
-         "comments" :>
-           Capture "commentId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Get '[JSON] Comment
-
-type CirclesAPI =
-     CirclesInsert :<|> CirclesAddPeople :<|> CirclesList
-       :<|> CirclesPatch
-       :<|> CirclesGet
-       :<|> CirclesRemove
-       :<|> CirclesRemovePeople
-       :<|> CirclesUpdate
-
--- | Create a new circle for the authenticated user.
-type CirclesInsert =
-     "plusDomains" :>
-       "v1" :>
-         "people" :>
-           Capture "userId" Text :>
-             "circles" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] Circle
-
--- | Add a person to a circle. Google+ limits certain circle operations,
--- including the number of circle adds. Learn More.
-type CirclesAddPeople =
-     "plusDomains" :>
-       "v1" :>
-         "circles" :>
-           Capture "circleId" Text :>
-             "people" :>
-               QueryParam "email" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "userId" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Put '[JSON] Circle
-
--- | List all of the circles for a user.
-type CirclesList =
-     "plusDomains" :>
-       "v1" :>
-         "people" :>
-           Capture "userId" Text :>
-             "circles" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "maxResults" Natural :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Get '[JSON] CircleFeed
-
--- | Update a circle\'s description. This method supports patch semantics.
-type CirclesPatch =
-     "plusDomains" :>
-       "v1" :>
-         "circles" :>
-           Capture "circleId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Patch '[JSON] Circle
-
--- | Get a circle.
-type CirclesGet =
-     "plusDomains" :>
-       "v1" :>
-         "circles" :>
-           Capture "circleId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Get '[JSON] Circle
-
--- | Delete a circle.
-type CirclesRemove =
-     "plusDomains" :>
-       "v1" :>
-         "circles" :>
-           Capture "circleId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Remove a person from a circle.
-type CirclesRemovePeople =
-     "plusDomains" :>
-       "v1" :>
-         "circles" :>
-           Capture "circleId" Text :>
-             "people" :>
-               QueryParam "email" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "userId" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Update a circle\'s description.
-type CirclesUpdate =
-     "plusDomains" :>
-       "v1" :>
-         "circles" :>
-           Capture "circleId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Put '[JSON] Circle
+plusDomains :: Proxy PlusDomains
+plusDomains = Proxy

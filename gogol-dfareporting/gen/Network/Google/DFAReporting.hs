@@ -17,279 +17,677 @@
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference>
 module Network.Google.DFAReporting
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** DCM/DFA Reporting And Trafficking API
       DFAReporting
-    , InventoryItemsAPI
-    , InventoryItemsList
-    , InventoryItemsGet
-    , PlacementStrategiesAPI
-    , PlacementStrategiesInsert
-    , PlacementStrategiesList
-    , PlacementStrategiesPatch
-    , PlacementStrategiesGet
-    , PlacementStrategiesDelete
-    , PlacementStrategiesUpdate
-    , CampaignCreativeAssociationsAPI
-    , CampaignCreativeAssociationsInsert
-    , CampaignCreativeAssociationsList
-    , CreativeGroupsAPI
-    , CreativeGroupsInsert
-    , CreativeGroupsList
-    , CreativeGroupsPatch
-    , CreativeGroupsGet
-    , CreativeGroupsUpdate
-    , MobileCarriersAPI
-    , MobileCarriersList
-    , MobileCarriersGet
-    , LandingPagesAPI
-    , LandingPagesInsert
-    , LandingPagesList
-    , LandingPagesPatch
-    , LandingPagesGet
-    , LandingPagesDelete
-    , LandingPagesUpdate
-    , RemarketingListSharesAPI
-    , RemarketingListSharesPatch
-    , RemarketingListSharesGet
-    , RemarketingListSharesUpdate
-    , AccountActiveAdSummariesAPI
-    , AccountActiveAdSummariesGet
-    , UserRolePermissionGroupsAPI
-    , UserRolePermissionGroupsList
-    , UserRolePermissionGroupsGet
-    , RemarketingListsAPI
-    , RemarketingListsInsert
-    , RemarketingListsList
-    , RemarketingListsPatch
-    , RemarketingListsGet
-    , RemarketingListsUpdate
-    , AccountsAPI
-    , AccountsList
-    , AccountsPatch
-    , AccountsGet
-    , AccountsUpdate
-    , ReportsAPI
-    , CompatibleFieldsAPI
-    , CompatibleFieldsQuery
-    , FilesAPI
-    , FilesList
-    , FilesGet
-    , CampaignsAPI
-    , CampaignsInsert
-    , CampaignsList
-    , CampaignsPatch
-    , CampaignsGet
-    , CampaignsUpdate
-    , AccountUserProfilesAPI
-    , AccountUserProfilesInsert
-    , AccountUserProfilesList
-    , AccountUserProfilesPatch
-    , AccountUserProfilesGet
-    , AccountUserProfilesUpdate
-    , CreativesAPI
-    , CreativesInsert
-    , CreativesList
-    , CreativesPatch
-    , CreativesGet
-    , CreativesUpdate
-    , DimensionValuesAPI
-    , DimensionValuesQuery
-    , FloodlightConfigurationsAPI
-    , FloodlightConfigurationsList
-    , FloodlightConfigurationsPatch
-    , FloodlightConfigurationsGet
-    , FloodlightConfigurationsUpdate
-    , RegionsAPI
-    , RegionsList
-    , FloodlightActivitiesAPI
-    , FloodlightActivitiesInsert
-    , FloodlightActivitiesList
-    , FloodlightActivitiesPatch
-    , FloodlightActivitiesGet
-    , FloodlightActivitiesGeneratetag
-    , FloodlightActivitiesDelete
-    , FloodlightActivitiesUpdate
-    , AccountPermissionGroupsAPI
-    , AccountPermissionGroupsList
-    , AccountPermissionGroupsGet
-    , AdvertisersAPI
-    , AdvertisersInsert
-    , AdvertisersList
-    , AdvertisersPatch
-    , AdvertisersGet
-    , AdvertisersUpdate
-    , CountriesAPI
-    , CountriesList
-    , CountriesGet
-    , UserRolesAPI
-    , UserRolesInsert
-    , UserRolesList
-    , UserRolesPatch
-    , UserRolesGet
-    , UserRolesDelete
-    , UserRolesUpdate
-    , UserProfilesAPI
-    , UserProfilesList
-    , UserProfilesGet
-    , OperatingSystemVersionsAPI
-    , OperatingSystemVersionsList
-    , OperatingSystemVersionsGet
-    , AccountPermissionsAPI
-    , AccountPermissionsList
-    , AccountPermissionsGet
-    , CitiesAPI
-    , CitiesList
-    , ChangeLogsAPI
-    , ChangeLogsList
-    , ChangeLogsGet
-    , TargetableRemarketingListsAPI
-    , TargetableRemarketingListsList
-    , TargetableRemarketingListsGet
-    , PlatformTypesAPI
-    , PlatformTypesList
-    , PlatformTypesGet
-    , ContentCategoriesAPI
-    , ContentCategoriesInsert
-    , ContentCategoriesList
-    , ContentCategoriesPatch
-    , ContentCategoriesGet
-    , ContentCategoriesDelete
-    , ContentCategoriesUpdate
-    , BrowsersAPI
-    , BrowsersList
-    , PlacementsAPI
-    , PlacementsInsert
-    , PlacementsGeneratetags
-    , PlacementsList
-    , PlacementsPatch
-    , PlacementsGet
-    , PlacementsUpdate
-    , MetrosAPI
-    , MetrosList
-    , CreativeFieldsAPI
-    , CreativeFieldsInsert
-    , CreativeFieldsList
-    , CreativeFieldsPatch
-    , CreativeFieldsGet
-    , CreativeFieldsDelete
-    , CreativeFieldsUpdate
-    , OrderDocumentsAPI
-    , OrderDocumentsList
-    , OrderDocumentsGet
-    , FilesAPI
-    , FilesList
-    , FilesGet
-    , ConnectionTypesAPI
-    , ConnectionTypesList
-    , ConnectionTypesGet
-    , PlacementGroupsAPI
-    , PlacementGroupsInsert
-    , PlacementGroupsList
-    , PlacementGroupsPatch
-    , PlacementGroupsGet
-    , PlacementGroupsUpdate
-    , EventTagsAPI
-    , EventTagsInsert
-    , EventTagsList
-    , EventTagsPatch
-    , EventTagsGet
-    , EventTagsDelete
-    , EventTagsUpdate
-    , OrdersAPI
-    , OrdersList
-    , OrdersGet
-    , UserRolePermissionsAPI
-    , UserRolePermissionsList
-    , UserRolePermissionsGet
-    , CreativeAssetsAPI
-    , CreativeAssetsInsert
-    , SitesAPI
-    , SitesInsert
-    , SitesList
-    , SitesPatch
-    , SitesGet
-    , SitesUpdate
-    , OperatingSystemsAPI
-    , OperatingSystemsList
-    , OperatingSystemsGet
-    , PostalCodesAPI
-    , PostalCodesList
-    , PostalCodesGet
-    , SizesAPI
-    , SizesInsert
-    , SizesList
-    , SizesGet
-    , AdsAPI
-    , AdsInsert
-    , AdsList
-    , AdsPatch
-    , AdsGet
-    , AdsUpdate
-    , ProjectsAPI
-    , ProjectsList
-    , ProjectsGet
-    , SubaccountsAPI
-    , SubaccountsInsert
-    , SubaccountsList
-    , SubaccountsPatch
-    , SubaccountsGet
-    , SubaccountsUpdate
-    , AdvertiserGroupsAPI
-    , AdvertiserGroupsInsert
-    , AdvertiserGroupsList
-    , AdvertiserGroupsPatch
-    , AdvertiserGroupsGet
-    , AdvertiserGroupsDelete
-    , AdvertiserGroupsUpdate
-    , CreativeFieldValuesAPI
-    , CreativeFieldValuesInsert
-    , CreativeFieldValuesList
-    , CreativeFieldValuesPatch
-    , CreativeFieldValuesGet
-    , CreativeFieldValuesDelete
-    , CreativeFieldValuesUpdate
-    , DirectorySiteContactsAPI
-    , DirectorySiteContactsList
-    , DirectorySiteContactsGet
-    , DirectorySitesAPI
-    , DirectorySitesInsert
-    , DirectorySitesList
-    , DirectorySitesGet
-    , FloodlightActivityGroupsAPI
-    , FloodlightActivityGroupsInsert
-    , FloodlightActivityGroupsList
-    , FloodlightActivityGroupsPatch
-    , FloodlightActivityGroupsGet
-    , FloodlightActivityGroupsDelete
-    , FloodlightActivityGroupsUpdate
+    , dFAReporting
+    , dFAReportingURL
+
+    -- ** dfareporting.accountActiveAdSummaries.get
+    , module Network.Google.API.DFAReporting.AccountActiveAdSummaries.Get
+
+    -- ** dfareporting.accountPermissionGroups.get
+    , module Network.Google.API.DFAReporting.AccountPermissionGroups.Get
+
+    -- ** dfareporting.accountPermissionGroups.list
+    , module Network.Google.API.DFAReporting.AccountPermissionGroups.List
+
+    -- ** dfareporting.accountPermissions.get
+    , module Network.Google.API.DFAReporting.AccountPermissions.Get
+
+    -- ** dfareporting.accountPermissions.list
+    , module Network.Google.API.DFAReporting.AccountPermissions.List
+
+    -- ** dfareporting.accountUserProfiles.get
+    , module Network.Google.API.DFAReporting.AccountUserProfiles.Get
+
+    -- ** dfareporting.accountUserProfiles.insert
+    , module Network.Google.API.DFAReporting.AccountUserProfiles.Insert
+
+    -- ** dfareporting.accountUserProfiles.list
+    , module Network.Google.API.DFAReporting.AccountUserProfiles.List
+
+    -- ** dfareporting.accountUserProfiles.patch
+    , module Network.Google.API.DFAReporting.AccountUserProfiles.Patch
+
+    -- ** dfareporting.accountUserProfiles.update
+    , module Network.Google.API.DFAReporting.AccountUserProfiles.Update
+
+    -- ** dfareporting.accounts.get
+    , module Network.Google.API.DFAReporting.Accounts.Get
+
+    -- ** dfareporting.accounts.list
+    , module Network.Google.API.DFAReporting.Accounts.List
+
+    -- ** dfareporting.accounts.patch
+    , module Network.Google.API.DFAReporting.Accounts.Patch
+
+    -- ** dfareporting.accounts.update
+    , module Network.Google.API.DFAReporting.Accounts.Update
+
+    -- ** dfareporting.ads.get
+    , module Network.Google.API.DFAReporting.Ads.Get
+
+    -- ** dfareporting.ads.insert
+    , module Network.Google.API.DFAReporting.Ads.Insert
+
+    -- ** dfareporting.ads.list
+    , module Network.Google.API.DFAReporting.Ads.List
+
+    -- ** dfareporting.ads.patch
+    , module Network.Google.API.DFAReporting.Ads.Patch
+
+    -- ** dfareporting.ads.update
+    , module Network.Google.API.DFAReporting.Ads.Update
+
+    -- ** dfareporting.advertiserGroups.delete
+    , module Network.Google.API.DFAReporting.AdvertiserGroups.Delete
+
+    -- ** dfareporting.advertiserGroups.get
+    , module Network.Google.API.DFAReporting.AdvertiserGroups.Get
+
+    -- ** dfareporting.advertiserGroups.insert
+    , module Network.Google.API.DFAReporting.AdvertiserGroups.Insert
+
+    -- ** dfareporting.advertiserGroups.list
+    , module Network.Google.API.DFAReporting.AdvertiserGroups.List
+
+    -- ** dfareporting.advertiserGroups.patch
+    , module Network.Google.API.DFAReporting.AdvertiserGroups.Patch
+
+    -- ** dfareporting.advertiserGroups.update
+    , module Network.Google.API.DFAReporting.AdvertiserGroups.Update
+
+    -- ** dfareporting.advertisers.get
+    , module Network.Google.API.DFAReporting.Advertisers.Get
+
+    -- ** dfareporting.advertisers.insert
+    , module Network.Google.API.DFAReporting.Advertisers.Insert
+
+    -- ** dfareporting.advertisers.list
+    , module Network.Google.API.DFAReporting.Advertisers.List
+
+    -- ** dfareporting.advertisers.patch
+    , module Network.Google.API.DFAReporting.Advertisers.Patch
+
+    -- ** dfareporting.advertisers.update
+    , module Network.Google.API.DFAReporting.Advertisers.Update
+
+    -- ** dfareporting.browsers.list
+    , module Network.Google.API.DFAReporting.Browsers.List
+
+    -- ** dfareporting.campaignCreativeAssociations.insert
+    , module Network.Google.API.DFAReporting.CampaignCreativeAssociations.Insert
+
+    -- ** dfareporting.campaignCreativeAssociations.list
+    , module Network.Google.API.DFAReporting.CampaignCreativeAssociations.List
+
+    -- ** dfareporting.campaigns.get
+    , module Network.Google.API.DFAReporting.Campaigns.Get
+
+    -- ** dfareporting.campaigns.insert
+    , module Network.Google.API.DFAReporting.Campaigns.Insert
+
+    -- ** dfareporting.campaigns.list
+    , module Network.Google.API.DFAReporting.Campaigns.List
+
+    -- ** dfareporting.campaigns.patch
+    , module Network.Google.API.DFAReporting.Campaigns.Patch
+
+    -- ** dfareporting.campaigns.update
+    , module Network.Google.API.DFAReporting.Campaigns.Update
+
+    -- ** dfareporting.changeLogs.get
+    , module Network.Google.API.DFAReporting.ChangeLogs.Get
+
+    -- ** dfareporting.changeLogs.list
+    , module Network.Google.API.DFAReporting.ChangeLogs.List
+
+    -- ** dfareporting.cities.list
+    , module Network.Google.API.DFAReporting.Cities.List
+
+    -- ** dfareporting.connectionTypes.get
+    , module Network.Google.API.DFAReporting.ConnectionTypes.Get
+
+    -- ** dfareporting.connectionTypes.list
+    , module Network.Google.API.DFAReporting.ConnectionTypes.List
+
+    -- ** dfareporting.contentCategories.delete
+    , module Network.Google.API.DFAReporting.ContentCategories.Delete
+
+    -- ** dfareporting.contentCategories.get
+    , module Network.Google.API.DFAReporting.ContentCategories.Get
+
+    -- ** dfareporting.contentCategories.insert
+    , module Network.Google.API.DFAReporting.ContentCategories.Insert
+
+    -- ** dfareporting.contentCategories.list
+    , module Network.Google.API.DFAReporting.ContentCategories.List
+
+    -- ** dfareporting.contentCategories.patch
+    , module Network.Google.API.DFAReporting.ContentCategories.Patch
+
+    -- ** dfareporting.contentCategories.update
+    , module Network.Google.API.DFAReporting.ContentCategories.Update
+
+    -- ** dfareporting.countries.get
+    , module Network.Google.API.DFAReporting.Countries.Get
+
+    -- ** dfareporting.countries.list
+    , module Network.Google.API.DFAReporting.Countries.List
+
+    -- ** dfareporting.creativeAssets.insert
+    , module Network.Google.API.DFAReporting.CreativeAssets.Insert
+
+    -- ** dfareporting.creativeFieldValues.delete
+    , module Network.Google.API.DFAReporting.CreativeFieldValues.Delete
+
+    -- ** dfareporting.creativeFieldValues.get
+    , module Network.Google.API.DFAReporting.CreativeFieldValues.Get
+
+    -- ** dfareporting.creativeFieldValues.insert
+    , module Network.Google.API.DFAReporting.CreativeFieldValues.Insert
+
+    -- ** dfareporting.creativeFieldValues.list
+    , module Network.Google.API.DFAReporting.CreativeFieldValues.List
+
+    -- ** dfareporting.creativeFieldValues.patch
+    , module Network.Google.API.DFAReporting.CreativeFieldValues.Patch
+
+    -- ** dfareporting.creativeFieldValues.update
+    , module Network.Google.API.DFAReporting.CreativeFieldValues.Update
+
+    -- ** dfareporting.creativeFields.delete
+    , module Network.Google.API.DFAReporting.CreativeFields.Delete
+
+    -- ** dfareporting.creativeFields.get
+    , module Network.Google.API.DFAReporting.CreativeFields.Get
+
+    -- ** dfareporting.creativeFields.insert
+    , module Network.Google.API.DFAReporting.CreativeFields.Insert
+
+    -- ** dfareporting.creativeFields.list
+    , module Network.Google.API.DFAReporting.CreativeFields.List
+
+    -- ** dfareporting.creativeFields.patch
+    , module Network.Google.API.DFAReporting.CreativeFields.Patch
+
+    -- ** dfareporting.creativeFields.update
+    , module Network.Google.API.DFAReporting.CreativeFields.Update
+
+    -- ** dfareporting.creativeGroups.get
+    , module Network.Google.API.DFAReporting.CreativeGroups.Get
+
+    -- ** dfareporting.creativeGroups.insert
+    , module Network.Google.API.DFAReporting.CreativeGroups.Insert
+
+    -- ** dfareporting.creativeGroups.list
+    , module Network.Google.API.DFAReporting.CreativeGroups.List
+
+    -- ** dfareporting.creativeGroups.patch
+    , module Network.Google.API.DFAReporting.CreativeGroups.Patch
+
+    -- ** dfareporting.creativeGroups.update
+    , module Network.Google.API.DFAReporting.CreativeGroups.Update
+
+    -- ** dfareporting.creatives.get
+    , module Network.Google.API.DFAReporting.Creatives.Get
+
+    -- ** dfareporting.creatives.insert
+    , module Network.Google.API.DFAReporting.Creatives.Insert
+
+    -- ** dfareporting.creatives.list
+    , module Network.Google.API.DFAReporting.Creatives.List
+
+    -- ** dfareporting.creatives.patch
+    , module Network.Google.API.DFAReporting.Creatives.Patch
+
+    -- ** dfareporting.creatives.update
+    , module Network.Google.API.DFAReporting.Creatives.Update
+
+    -- ** dfareporting.dimensionValues.query
+    , module Network.Google.API.DFAReporting.DimensionValues.Query
+
+    -- ** dfareporting.directorySiteContacts.get
+    , module Network.Google.API.DFAReporting.DirectorySiteContacts.Get
+
+    -- ** dfareporting.directorySiteContacts.list
+    , module Network.Google.API.DFAReporting.DirectorySiteContacts.List
+
+    -- ** dfareporting.directorySites.get
+    , module Network.Google.API.DFAReporting.DirectorySites.Get
+
+    -- ** dfareporting.directorySites.insert
+    , module Network.Google.API.DFAReporting.DirectorySites.Insert
+
+    -- ** dfareporting.directorySites.list
+    , module Network.Google.API.DFAReporting.DirectorySites.List
+
+    -- ** dfareporting.eventTags.delete
+    , module Network.Google.API.DFAReporting.EventTags.Delete
+
+    -- ** dfareporting.eventTags.get
+    , module Network.Google.API.DFAReporting.EventTags.Get
+
+    -- ** dfareporting.eventTags.insert
+    , module Network.Google.API.DFAReporting.EventTags.Insert
+
+    -- ** dfareporting.eventTags.list
+    , module Network.Google.API.DFAReporting.EventTags.List
+
+    -- ** dfareporting.eventTags.patch
+    , module Network.Google.API.DFAReporting.EventTags.Patch
+
+    -- ** dfareporting.eventTags.update
+    , module Network.Google.API.DFAReporting.EventTags.Update
+
+    -- ** dfareporting.files.get
+    , module Network.Google.API.DFAReporting.Files.Get
+
+    -- ** dfareporting.files.list
+    , module Network.Google.API.DFAReporting.Files.List
+
+    -- ** dfareporting.floodlightActivities.delete
+    , module Network.Google.API.DFAReporting.FloodlightActivities.Delete
+
+    -- ** dfareporting.floodlightActivities.generatetag
+    , module Network.Google.API.DFAReporting.FloodlightActivities.Generatetag
+
+    -- ** dfareporting.floodlightActivities.get
+    , module Network.Google.API.DFAReporting.FloodlightActivities.Get
+
+    -- ** dfareporting.floodlightActivities.insert
+    , module Network.Google.API.DFAReporting.FloodlightActivities.Insert
+
+    -- ** dfareporting.floodlightActivities.list
+    , module Network.Google.API.DFAReporting.FloodlightActivities.List
+
+    -- ** dfareporting.floodlightActivities.patch
+    , module Network.Google.API.DFAReporting.FloodlightActivities.Patch
+
+    -- ** dfareporting.floodlightActivities.update
+    , module Network.Google.API.DFAReporting.FloodlightActivities.Update
+
+    -- ** dfareporting.floodlightActivityGroups.delete
+    , module Network.Google.API.DFAReporting.FloodlightActivityGroups.Delete
+
+    -- ** dfareporting.floodlightActivityGroups.get
+    , module Network.Google.API.DFAReporting.FloodlightActivityGroups.Get
+
+    -- ** dfareporting.floodlightActivityGroups.insert
+    , module Network.Google.API.DFAReporting.FloodlightActivityGroups.Insert
+
+    -- ** dfareporting.floodlightActivityGroups.list
+    , module Network.Google.API.DFAReporting.FloodlightActivityGroups.List
+
+    -- ** dfareporting.floodlightActivityGroups.patch
+    , module Network.Google.API.DFAReporting.FloodlightActivityGroups.Patch
+
+    -- ** dfareporting.floodlightActivityGroups.update
+    , module Network.Google.API.DFAReporting.FloodlightActivityGroups.Update
+
+    -- ** dfareporting.floodlightConfigurations.get
+    , module Network.Google.API.DFAReporting.FloodlightConfigurations.Get
+
+    -- ** dfareporting.floodlightConfigurations.list
+    , module Network.Google.API.DFAReporting.FloodlightConfigurations.List
+
+    -- ** dfareporting.floodlightConfigurations.patch
+    , module Network.Google.API.DFAReporting.FloodlightConfigurations.Patch
+
+    -- ** dfareporting.floodlightConfigurations.update
+    , module Network.Google.API.DFAReporting.FloodlightConfigurations.Update
+
+    -- ** dfareporting.inventoryItems.get
+    , module Network.Google.API.DFAReporting.InventoryItems.Get
+
+    -- ** dfareporting.inventoryItems.list
+    , module Network.Google.API.DFAReporting.InventoryItems.List
+
+    -- ** dfareporting.landingPages.delete
+    , module Network.Google.API.DFAReporting.LandingPages.Delete
+
+    -- ** dfareporting.landingPages.get
+    , module Network.Google.API.DFAReporting.LandingPages.Get
+
+    -- ** dfareporting.landingPages.insert
+    , module Network.Google.API.DFAReporting.LandingPages.Insert
+
+    -- ** dfareporting.landingPages.list
+    , module Network.Google.API.DFAReporting.LandingPages.List
+
+    -- ** dfareporting.landingPages.patch
+    , module Network.Google.API.DFAReporting.LandingPages.Patch
+
+    -- ** dfareporting.landingPages.update
+    , module Network.Google.API.DFAReporting.LandingPages.Update
+
+    -- ** dfareporting.metros.list
+    , module Network.Google.API.DFAReporting.Metros.List
+
+    -- ** dfareporting.mobileCarriers.get
+    , module Network.Google.API.DFAReporting.MobileCarriers.Get
+
+    -- ** dfareporting.mobileCarriers.list
+    , module Network.Google.API.DFAReporting.MobileCarriers.List
+
+    -- ** dfareporting.operatingSystemVersions.get
+    , module Network.Google.API.DFAReporting.OperatingSystemVersions.Get
+
+    -- ** dfareporting.operatingSystemVersions.list
+    , module Network.Google.API.DFAReporting.OperatingSystemVersions.List
+
+    -- ** dfareporting.operatingSystems.get
+    , module Network.Google.API.DFAReporting.OperatingSystems.Get
+
+    -- ** dfareporting.operatingSystems.list
+    , module Network.Google.API.DFAReporting.OperatingSystems.List
+
+    -- ** dfareporting.orderDocuments.get
+    , module Network.Google.API.DFAReporting.OrderDocuments.Get
+
+    -- ** dfareporting.orderDocuments.list
+    , module Network.Google.API.DFAReporting.OrderDocuments.List
+
+    -- ** dfareporting.orders.get
+    , module Network.Google.API.DFAReporting.Orders.Get
+
+    -- ** dfareporting.orders.list
+    , module Network.Google.API.DFAReporting.Orders.List
+
+    -- ** dfareporting.placementGroups.get
+    , module Network.Google.API.DFAReporting.PlacementGroups.Get
+
+    -- ** dfareporting.placementGroups.insert
+    , module Network.Google.API.DFAReporting.PlacementGroups.Insert
+
+    -- ** dfareporting.placementGroups.list
+    , module Network.Google.API.DFAReporting.PlacementGroups.List
+
+    -- ** dfareporting.placementGroups.patch
+    , module Network.Google.API.DFAReporting.PlacementGroups.Patch
+
+    -- ** dfareporting.placementGroups.update
+    , module Network.Google.API.DFAReporting.PlacementGroups.Update
+
+    -- ** dfareporting.placementStrategies.delete
+    , module Network.Google.API.DFAReporting.PlacementStrategies.Delete
+
+    -- ** dfareporting.placementStrategies.get
+    , module Network.Google.API.DFAReporting.PlacementStrategies.Get
+
+    -- ** dfareporting.placementStrategies.insert
+    , module Network.Google.API.DFAReporting.PlacementStrategies.Insert
+
+    -- ** dfareporting.placementStrategies.list
+    , module Network.Google.API.DFAReporting.PlacementStrategies.List
+
+    -- ** dfareporting.placementStrategies.patch
+    , module Network.Google.API.DFAReporting.PlacementStrategies.Patch
+
+    -- ** dfareporting.placementStrategies.update
+    , module Network.Google.API.DFAReporting.PlacementStrategies.Update
+
+    -- ** dfareporting.placements.generatetags
+    , module Network.Google.API.DFAReporting.Placements.Generatetags
+
+    -- ** dfareporting.placements.get
+    , module Network.Google.API.DFAReporting.Placements.Get
+
+    -- ** dfareporting.placements.insert
+    , module Network.Google.API.DFAReporting.Placements.Insert
+
+    -- ** dfareporting.placements.list
+    , module Network.Google.API.DFAReporting.Placements.List
+
+    -- ** dfareporting.placements.patch
+    , module Network.Google.API.DFAReporting.Placements.Patch
+
+    -- ** dfareporting.placements.update
+    , module Network.Google.API.DFAReporting.Placements.Update
+
+    -- ** dfareporting.platformTypes.get
+    , module Network.Google.API.DFAReporting.PlatformTypes.Get
+
+    -- ** dfareporting.platformTypes.list
+    , module Network.Google.API.DFAReporting.PlatformTypes.List
+
+    -- ** dfareporting.postalCodes.get
+    , module Network.Google.API.DFAReporting.PostalCodes.Get
+
+    -- ** dfareporting.postalCodes.list
+    , module Network.Google.API.DFAReporting.PostalCodes.List
+
+    -- ** dfareporting.projects.get
+    , module Network.Google.API.DFAReporting.Projects.Get
+
+    -- ** dfareporting.projects.list
+    , module Network.Google.API.DFAReporting.Projects.List
+
+    -- ** dfareporting.regions.list
+    , module Network.Google.API.DFAReporting.Regions.List
+
+    -- ** dfareporting.remarketingListShares.get
+    , module Network.Google.API.DFAReporting.RemarketingListShares.Get
+
+    -- ** dfareporting.remarketingListShares.patch
+    , module Network.Google.API.DFAReporting.RemarketingListShares.Patch
+
+    -- ** dfareporting.remarketingListShares.update
+    , module Network.Google.API.DFAReporting.RemarketingListShares.Update
+
+    -- ** dfareporting.remarketingLists.get
+    , module Network.Google.API.DFAReporting.RemarketingLists.Get
+
+    -- ** dfareporting.remarketingLists.insert
+    , module Network.Google.API.DFAReporting.RemarketingLists.Insert
+
+    -- ** dfareporting.remarketingLists.list
+    , module Network.Google.API.DFAReporting.RemarketingLists.List
+
+    -- ** dfareporting.remarketingLists.patch
+    , module Network.Google.API.DFAReporting.RemarketingLists.Patch
+
+    -- ** dfareporting.remarketingLists.update
+    , module Network.Google.API.DFAReporting.RemarketingLists.Update
+
+    -- ** dfareporting.reports.compatibleFields.query
+    , module Network.Google.API.DFAReporting.Reports.CompatibleFields.Query
+
+    -- ** dfareporting.reports.files.get
+    , module Network.Google.API.DFAReporting.Reports.Files.Get
+
+    -- ** dfareporting.reports.files.list
+    , module Network.Google.API.DFAReporting.Reports.Files.List
+
+    -- ** dfareporting.sites.get
+    , module Network.Google.API.DFAReporting.Sites.Get
+
+    -- ** dfareporting.sites.insert
+    , module Network.Google.API.DFAReporting.Sites.Insert
+
+    -- ** dfareporting.sites.list
+    , module Network.Google.API.DFAReporting.Sites.List
+
+    -- ** dfareporting.sites.patch
+    , module Network.Google.API.DFAReporting.Sites.Patch
+
+    -- ** dfareporting.sites.update
+    , module Network.Google.API.DFAReporting.Sites.Update
+
+    -- ** dfareporting.sizes.get
+    , module Network.Google.API.DFAReporting.Sizes.Get
+
+    -- ** dfareporting.sizes.insert
+    , module Network.Google.API.DFAReporting.Sizes.Insert
+
+    -- ** dfareporting.sizes.list
+    , module Network.Google.API.DFAReporting.Sizes.List
+
+    -- ** dfareporting.subaccounts.get
+    , module Network.Google.API.DFAReporting.Subaccounts.Get
+
+    -- ** dfareporting.subaccounts.insert
+    , module Network.Google.API.DFAReporting.Subaccounts.Insert
+
+    -- ** dfareporting.subaccounts.list
+    , module Network.Google.API.DFAReporting.Subaccounts.List
+
+    -- ** dfareporting.subaccounts.patch
+    , module Network.Google.API.DFAReporting.Subaccounts.Patch
+
+    -- ** dfareporting.subaccounts.update
+    , module Network.Google.API.DFAReporting.Subaccounts.Update
+
+    -- ** dfareporting.targetableRemarketingLists.get
+    , module Network.Google.API.DFAReporting.TargetableRemarketingLists.Get
+
+    -- ** dfareporting.targetableRemarketingLists.list
+    , module Network.Google.API.DFAReporting.TargetableRemarketingLists.List
+
+    -- ** dfareporting.userProfiles.get
+    , module Network.Google.API.DFAReporting.UserProfiles.Get
+
+    -- ** dfareporting.userProfiles.list
+    , module Network.Google.API.DFAReporting.UserProfiles.List
+
+    -- ** dfareporting.userRolePermissionGroups.get
+    , module Network.Google.API.DFAReporting.UserRolePermissionGroups.Get
+
+    -- ** dfareporting.userRolePermissionGroups.list
+    , module Network.Google.API.DFAReporting.UserRolePermissionGroups.List
+
+    -- ** dfareporting.userRolePermissions.get
+    , module Network.Google.API.DFAReporting.UserRolePermissions.Get
+
+    -- ** dfareporting.userRolePermissions.list
+    , module Network.Google.API.DFAReporting.UserRolePermissions.List
+
+    -- ** dfareporting.userRoles.delete
+    , module Network.Google.API.DFAReporting.UserRoles.Delete
+
+    -- ** dfareporting.userRoles.get
+    , module Network.Google.API.DFAReporting.UserRoles.Get
+
+    -- ** dfareporting.userRoles.insert
+    , module Network.Google.API.DFAReporting.UserRoles.Insert
+
+    -- ** dfareporting.userRoles.list
+    , module Network.Google.API.DFAReporting.UserRoles.List
+
+    -- ** dfareporting.userRoles.patch
+    , module Network.Google.API.DFAReporting.UserRoles.Patch
+
+    -- ** dfareporting.userRoles.update
+    , module Network.Google.API.DFAReporting.UserRoles.Update
 
     -- * Types
 
-    -- ** Account
-    , Account
-    , account
-    , aaAccountPermissionIds
-    , aaMaximumImageSize
-    , aaCurrencyId
-    , aaReportsConfiguration
-    , aaNielsenOcrEnabled
-    , aaKind
-    , aaLocale
-    , aaActive
-    , aaAvailablePermissionIds
-    , aaTeaserSizeLimit
-    , aaComscoreVceEnabled
-    , aaActiveViewOptOut
-    , aaName
-    , aaAccountProfile
-    , aaId
-    , aaCountryId
-    , aaActiveAdsLimitTier
-    , aaDefaultCreativeSizeId
-    , aaDescription
+    -- ** CreativeGroup
+    , CreativeGroup
+    , creativeGroup
+    , cgKind
+    , cgAdvertiserId
+    , cgAdvertiserIdDimensionValue
+    , cgGroupNumber
+    , cgAccountId
+    , cgName
+    , cgId
+    , cgSubaccountId
 
-    -- ** AccountAccountProfile
-    , AccountAccountProfile (..)
+    -- ** Metric
+    , Metric
+    , metric
+    , mKind
+    , mName
+
+    -- ** RemarketingListShare
+    , RemarketingListShare
+    , remarketingListShare
+    , rlsSharedAdvertiserIds
+    , rlsKind
+    , rlsRemarketingListId
+    , rlsSharedAccountIds
+
+    -- ** PricingGroupType
+    , PricingGroupType (..)
+
+    -- ** PlacementGroupsListResponse
+    , PlacementGroupsListResponse
+    , placementGroupsListResponse
+    , pglrNextPageToken
+    , pglrKind
+    , pglrPlacementGroups
+
+    -- ** PlacementsList'Compatibilities
+    , PlacementsList'Compatibilities (..)
+
+    -- ** ListPopulationTermType
+    , ListPopulationTermType (..)
+
+    -- ** OffsetPosition
+    , OffsetPosition
+    , offsetPosition
+    , opLeft
+    , opTop
+
+    -- ** OrdersListResponse
+    , OrdersListResponse
+    , ordersListResponse
+    , olrNextPageToken
+    , olrKind
+    , olrOrders
+
+    -- ** CampaignCreativeAssociation
+    , CampaignCreativeAssociation
+    , campaignCreativeAssociation
+    , ccaKind
+    , ccaCreativeId
+
+    -- ** AdsList'SortOrder
+    , AdsList'SortOrder (..)
+
+    -- ** ReportList
+    , ReportList
+    , reportList
+    , rlEtag
+    , rlNextPageToken
+    , rlKind
+    , rlItems
+
+    -- ** CreativeFieldsList'SortField
+    , CreativeFieldsList'SortField (..)
+
+    -- ** CreativeAssetPositionTopUnit
+    , CreativeAssetPositionTopUnit (..)
+
+    -- ** CreativeAssetRole
+    , CreativeAssetRole (..)
+
+    -- ** MobileCarrier
+    , MobileCarrier
+    , mobileCarrier
+    , mcKind
+    , mcName
+    , mcCountryCode
+    , mcId
+    , mcCountryDartId
+
+    -- ** EventTagsListResponse
+    , EventTagsListResponse
+    , eventTagsListResponse
+    , etlrKind
+    , etlrEventTags
+
+    -- ** LandingPage
+    , LandingPage
+    , landingPage
+    , lpKind
+    , lpDefault
+    , lpUrl
+    , lpName
+    , lpId
 
     -- ** AccountActiveAdSummary
     , AccountActiveAdSummary
@@ -300,21 +698,468 @@ module Network.Google.DFAReporting
     , aaasActiveAds
     , aaasActiveAdsLimitTier
 
+    -- ** RecipientDeliveryType
+    , RecipientDeliveryType (..)
+
+    -- ** UserRolePermissionsListResponse
+    , UserRolePermissionsListResponse
+    , userRolePermissionsListResponse
+    , urplrKind
+    , urplrUserRolePermissions
+
+    -- ** AdvertisersList'Status
+    , AdvertisersList'Status (..)
+
+    -- ** SubaccountsList'SortOrder
+    , SubaccountsList'SortOrder (..)
+
+    -- ** AdSlotCompatibility
+    , AdSlotCompatibility (..)
+
+    -- ** FloodlightActivityPublisherDynamicTag
+    , FloodlightActivityPublisherDynamicTag
+    , floodlightActivityPublisherDynamicTag
+    , fapdtClickThrough
+    , fapdtSiteIdDimensionValue
+    , fapdtDynamicTag
+    , fapdtDirectorySiteId
+    , fapdtSiteId
+    , fapdtViewThrough
+
+    -- ** CreativeRotationType
+    , CreativeRotationType (..)
+
+    -- ** TagSetting
+    , TagSetting
+    , tagSetting
+    , tsKeywordOption
+    , tsIncludeClickThroughUrls
+    , tsIncludeClickTracking
+    , tsAdditionalKeyValues
+
+    -- ** LookbackConfiguration
+    , LookbackConfiguration
+    , lookbackConfiguration
+    , lcClickDuration
+    , lcPostImpressionActivitiesDuration
+
+    -- ** OrderDocumentsList'SortField
+    , OrderDocumentsList'SortField (..)
+
+    -- ** ConnectionTypesListResponse
+    , ConnectionTypesListResponse
+    , connectionTypesListResponse
+    , ctlrKind
+    , ctlrConnectionTypes
+
+    -- ** SortedDimensionSortOrder
+    , SortedDimensionSortOrder (..)
+
+    -- ** PlacementsList'SortField
+    , PlacementsList'SortField (..)
+
+    -- ** CreativeAssetPositionLeftUnit
+    , CreativeAssetPositionLeftUnit (..)
+
+    -- ** PopupWindowProperties
+    , PopupWindowProperties
+    , popupWindowProperties
+    , pwpOffset
+    , pwpDimension
+    , pwpShowStatusBar
+    , pwpShowMenuBar
+    , pwpPositionType
+    , pwpShowAddressBar
+    , pwpShowScrollBar
+    , pwpShowToolBar
+    , pwpTitle
+
+    -- ** AdvertiserGroupsList'SortField
+    , AdvertiserGroupsList'SortField (..)
+
+    -- ** KeyValueTargetingExpression
+    , KeyValueTargetingExpression
+    , keyValueTargetingExpression
+    , kvteExpression
+
+    -- ** CreativeAssetAlignment
+    , CreativeAssetAlignment (..)
+
+    -- ** FloodlightActivityTagFormat
+    , FloodlightActivityTagFormat (..)
+
+    -- ** DirectorySitesList'SortField
+    , DirectorySitesList'SortField (..)
+
+    -- ** AdvertisersListResponse
+    , AdvertisersListResponse
+    , advertisersListResponse
+    , alrNextPageToken
+    , alrKind
+    , alrAdvertisers
+
+    -- ** AudienceSegment
+    , AudienceSegment
+    , audienceSegment
+    , asName
+    , asId
+    , asAllocation
+
+    -- ** CreativeOptimizationConfigurationOptimizationModel
+    , CreativeOptimizationConfigurationOptimizationModel (..)
+
+    -- ** FloodlightActivityGroupsList'SortField
+    , FloodlightActivityGroupsList'SortField (..)
+
+    -- ** CampaignsList'SortOrder
+    , CampaignsList'SortOrder (..)
+
+    -- ** OrdersList'SortOrder
+    , OrdersList'SortOrder (..)
+
+    -- ** CompanionClickThroughOverride
+    , CompanionClickThroughOverride
+    , companionClickThroughOverride
+    , cctoCreativeId
+    , cctoClickThroughUrl
+
+    -- ** AccountPermissionGroupsListResponse
+    , AccountPermissionGroupsListResponse
+    , accountPermissionGroupsListResponse
+    , apglrKind
+    , apglrAccountPermissionGroups
+
+    -- ** AccountPermissionLevel
+    , AccountPermissionLevel (..)
+
+    -- ** PlatformType
+    , PlatformType
+    , platformType
+    , ptKind
+    , ptName
+    , ptId
+
+    -- ** ReportReportPropertiesPathToConversionCriteria
+    , ReportReportPropertiesPathToConversionCriteria
+    , reportReportPropertiesPathToConversionCriteria
+    , rrpptccMaximumInteractionGap
+    , rrpptccMaximumClickInteractions
+    , rrpptccPivotOnInteractionPath
+    , rrpptccMaximumImpressionInteractions
+    , rrpptccIncludeUnattributedIPConversions
+    , rrpptccImpressionsLookbackWindow
+    , rrpptccClicksLookbackWindow
+    , rrpptccIncludeUnattributedCookieConversions
+    , rrpptccIncludeAttributedIPConversions
+
+    -- ** CountriesListResponse
+    , CountriesListResponse
+    , countriesListResponse
+    , clrKind
+    , clrCountries
+
+    -- ** UserRolesListResponse
+    , UserRolesListResponse
+    , userRolesListResponse
+    , urlrNextPageToken
+    , urlrKind
+    , urlrUserRoles
+
+    -- ** PathToConversionReportCompatibleFields
+    , PathToConversionReportCompatibleFields
+    , pathToConversionReportCompatibleFields
+    , ptcrcfMetrics
+    , ptcrcfKind
+    , ptcrcfConversionDimensions
+    , ptcrcfCustomFloodlightVariables
+    , ptcrcfPerInteractionDimensions
+
+    -- ** CompatibleFields
+    , CompatibleFields
+    , compatibleFields
+    , cfReachReportCompatibleFields
+    , cfCrossDimensionReachReportCompatibleFields
+    , cfKind
+    , cfFloodlightReportCompatibleFields
+    , cfReportCompatibleFields
+    , cfPathToConversionReportCompatibleFields
+
+    -- ** City
+    , City
+    , city
+    , cMetroCode
+    , cRegionCode
+    , cKind
+    , cRegionDartId
+    , cMetroDmaId
+    , cName
+    , cCountryCode
+    , cCountryDartId
+    , cDartId
+
+    -- ** DfpSettings
+    , DfpSettings
+    , dfpSettings
+    , dsPubPaidPlacementAccepted
+    , dsDfpNetworkName
+    , dsPublisherPortalOnly
+    , dsProgrammaticPlacementAccepted
+    , dsDfpNetworkCode
+
+    -- ** DayPartTargeting
+    , DayPartTargeting
+    , dayPartTargeting
+    , dptDaysOfWeek
+    , dptHoursOfDay
+    , dptUserLocalTime
+
+    -- ** SitesList'SortOrder
+    , SitesList'SortOrder (..)
+
     -- ** AccountActiveAdSummaryActiveAdsLimitTier
     , AccountActiveAdSummaryActiveAdsLimitTier (..)
 
-    -- ** AccountActiveAdsLimitTier
-    , AccountActiveAdsLimitTier (..)
+    -- ** InventoryItemsList'SortField
+    , InventoryItemsList'SortField (..)
 
-    -- ** AccountPermission
-    , AccountPermission
-    , accountPermission
-    , apKind
-    , apAccountProfiles
-    , apName
-    , apId
-    , apLevel
-    , apPermissionGroupId
+    -- ** CrossDimensionReachReportCompatibleFields
+    , CrossDimensionReachReportCompatibleFields
+    , crossDimensionReachReportCompatibleFields
+    , cdrrcfMetrics
+    , cdrrcfBreakdown
+    , cdrrcfKind
+    , cdrrcfDimensionFilters
+    , cdrrcfOverlapMetrics
+
+    -- ** DirectorySiteContact
+    , DirectorySiteContact
+    , directorySiteContact
+    , dscEmail
+    , dscPhone
+    , dscLastName
+    , dscKind
+    , dscAddress
+    , dscRole
+    , dscFirstName
+    , dscId
+    , dscTitle
+    , dscType
+
+    -- ** ReportsFilesList'SortOrder
+    , ReportsFilesList'SortOrder (..)
+
+    -- ** FloodlightConfigurationsListResponse
+    , FloodlightConfigurationsListResponse
+    , floodlightConfigurationsListResponse
+    , fclrKind
+    , fclrFloodlightConfigurations
+
+    -- ** AdvertiserGroup
+    , AdvertiserGroup
+    , advertiserGroup
+    , aKind
+    , aAccountId
+    , aName
+    , aId
+
+    -- ** RegionsListResponse
+    , RegionsListResponse
+    , regionsListResponse
+    , rlrKind
+    , rlrRegions
+
+    -- ** CreativeFieldAssignment
+    , CreativeFieldAssignment
+    , creativeFieldAssignment
+    , cfaCreativeFieldId
+    , cfaCreativeFieldValueId
+
+    -- ** TagData
+    , TagData
+    , tagData
+    , tdClickTag
+    , tdFormat
+    , tdCreativeId
+    , tdAdId
+    , tdImpressionTag
+
+    -- ** FsCommand
+    , FsCommand
+    , fsCommand
+    , fcPositionOption
+    , fcLeft
+    , fcWindowHeight
+    , fcWindowWidth
+    , fcTop
+
+    -- ** CreativeFieldValue
+    , CreativeFieldValue
+    , creativeFieldValue
+    , cfvKind
+    , cfvValue
+    , cfvId
+
+    -- ** FloodlightActivityCacheBustingType
+    , FloodlightActivityCacheBustingType (..)
+
+    -- ** DimensionValueRequest
+    , DimensionValueRequest
+    , dimensionValueRequest
+    , dvrKind
+    , dvrEndDate
+    , dvrFilters
+    , dvrStartDate
+    , dvrDimensionName
+
+    -- ** FloodlightActivitiesListResponse
+    , FloodlightActivitiesListResponse
+    , floodlightActivitiesListResponse
+    , falrNextPageToken
+    , falrKind
+    , falrFloodlightActivities
+
+    -- ** ObjectFilterStatus
+    , ObjectFilterStatus (..)
+
+    -- ** FloodlightActivityDynamicTag
+    , FloodlightActivityDynamicTag
+    , floodlightActivityDynamicTag
+    , fadtTag
+    , fadtName
+    , fadtId
+
+    -- ** CreativeOptimizationConfiguration
+    , CreativeOptimizationConfiguration
+    , creativeOptimizationConfiguration
+    , cocOptimizationModel
+    , cocName
+    , cocOptimizationActivitys
+    , cocId
+
+    -- ** DirectorySite
+    , DirectorySite
+    , directorySite
+    , dsCurrencyId
+    , dsSettings
+    , dsInterstitialTagFormats
+    , dsKind
+    , dsUrl
+    , dsIdDimensionValue
+    , dsInpageTagFormats
+    , dsActive
+    , dsName
+    , dsId
+    , dsCountryId
+    , dsContactAssignments
+    , dsDescription
+    , dsParentId
+
+    -- ** FloodlightActivityGroup
+    , FloodlightActivityGroup
+    , floodlightActivityGroup
+    , fagTagString
+    , fagFloodlightConfigurationId
+    , fagKind
+    , fagAdvertiserId
+    , fagAdvertiserIdDimensionValue
+    , fagIdDimensionValue
+    , fagAccountId
+    , fagName
+    , fagId
+    , fagSubaccountId
+    , fagType
+    , fagFloodlightConfigurationIdDimensionValue
+
+    -- ** Alt
+    , Alt (..)
+
+    -- ** PlacementAssignment
+    , PlacementAssignment
+    , placementAssignment
+    , paPlacementId
+    , paPlacementIdDimensionValue
+    , paActive
+    , paSslRequired
+
+    -- ** ChangeLogsList'ObjectType
+    , ChangeLogsList'ObjectType (..)
+
+    -- ** UserRole
+    , UserRole
+    , userRole
+    , urParentUserRoleId
+    , urKind
+    , urDefaultUserRole
+    , urAccountId
+    , urName
+    , urId
+    , urPermissions
+    , urSubaccountId
+
+    -- ** PlacementItemTagFormats
+    , PlacementItemTagFormats (..)
+
+    -- ** PlatformTypesListResponse
+    , PlatformTypesListResponse
+    , platformTypesListResponse
+    , ptlrKind
+    , ptlrPlatformTypes
+
+    -- ** ReportCrossDimensionReachCriteria
+    , ReportCrossDimensionReachCriteria
+    , reportCrossDimensionReachCriteria
+    , rcdrcPivoted
+    , rcdrcBreakdown
+    , rcdrcDimension
+    , rcdrcMetricNames
+    , rcdrcDimensionFilters
+    , rcdrcDateRange
+    , rcdrcOverlapMetricNames
+
+    -- ** LastModifiedInfo
+    , LastModifiedInfo
+    , lastModifiedInfo
+    , lmiTime
+
+    -- ** EventTagType
+    , EventTagType (..)
+
+    -- ** TargetWindow
+    , TargetWindow
+    , targetWindow
+    , twCustomHtml
+    , twTargetWindowOption
+
+    -- ** Advertiser
+    , Advertiser
+    , advertiser
+    , advOriginalFloodlightConfigurationId
+    , advStatus
+    , advFloodlightConfigurationId
+    , advKind
+    , advSuspended
+    , advIdDimensionValue
+    , advAccountId
+    , advDefaultEmail
+    , advName
+    , advAdvertiserGroupId
+    , advDefaultClickThroughEventTagId
+    , advId
+    , advSubaccountId
+    , advFloodlightConfigurationIdDimensionValue
+    , advClickThroughUrlSuffix
+
+    -- ** AccountUserProfileUserAccessType
+    , AccountUserProfileUserAccessType (..)
+
+    -- ** AccountPermissionItemAccountProfiles
+    , AccountPermissionItemAccountProfiles (..)
+
+    -- ** CreativeAssetStartTimeType
+    , CreativeAssetStartTimeType (..)
+
+    -- ** UserDefinedVariableConfigurationDataType
+    , UserDefinedVariableConfigurationDataType (..)
 
     -- ** AccountPermissionGroup
     , AccountPermissionGroup
@@ -323,70 +1168,1131 @@ module Network.Google.DFAReporting
     , apgName
     , apgId
 
-    -- ** AccountPermissionGroupsListResponse
-    , AccountPermissionGroupsListResponse
-    , accountPermissionGroupsListResponse
-    , apglrKind
-    , apglrAccountPermissionGroups
+    -- ** FloodlightActivity
+    , FloodlightActivity
+    , floodlightActivity
+    , faCountingMethod
+    , faTagString
+    , faSecure
+    , faExpectedUrl
+    , faFloodlightActivityGroupTagString
+    , faFloodlightConfigurationId
+    , faKind
+    , faImageTagEnabled
+    , faAdvertiserId
+    , faAdvertiserIdDimensionValue
+    , faSslCompliant
+    , faIdDimensionValue
+    , faTagFormat
+    , faCacheBustingType
+    , faAccountId
+    , faName
+    , faPublisherTags
+    , faFloodlightActivityGroupId
+    , faHidden
+    , faFloodlightActivityGroupType
+    , faDefaultTags
+    , faFloodlightActivityGroupName
+    , faId
+    , faSslRequired
+    , faUserDefinedVariableTypes
+    , faSubaccountId
+    , faNotes
+    , faFloodlightConfigurationIdDimensionValue
 
-    -- ** AccountPermissionItemAccountProfiles
-    , AccountPermissionItemAccountProfiles (..)
+    -- ** CreativeAssetMetadataItemWarnedValidationRules
+    , CreativeAssetMetadataItemWarnedValidationRules (..)
 
-    -- ** AccountPermissionLevel
-    , AccountPermissionLevel (..)
+    -- ** AdSlotPaymentSourceType
+    , AdSlotPaymentSourceType (..)
 
-    -- ** AccountPermissionsListResponse
-    , AccountPermissionsListResponse
-    , accountPermissionsListResponse
-    , aplrKind
-    , aplrAccountPermissions
+    -- ** PlacementGroupsList'PlacementGroupType
+    , PlacementGroupsList'PlacementGroupType (..)
 
-    -- ** AccountUserProfile
-    , AccountUserProfile
-    , accountUserProfile
-    , aupEmail
-    , aupUserRoleFilter
-    , aupAdvertiserFilter
-    , aupUserRoleId
-    , aupKind
-    , aupLocale
-    , aupSiteFilter
-    , aupTraffickerType
-    , aupActive
-    , aupAccountId
-    , aupName
-    , aupId
-    , aupUserAccessType
-    , aupComments
-    , aupSubaccountId
-    , aupCampaignFilter
+    -- ** DirectorySiteContactRole
+    , DirectorySiteContactRole (..)
 
-    -- ** AccountUserProfileTraffickerType
-    , AccountUserProfileTraffickerType (..)
+    -- ** PlacementPaymentSource
+    , PlacementPaymentSource (..)
 
-    -- ** AccountUserProfileUserAccessType
-    , AccountUserProfileUserAccessType (..)
+    -- ** TargetWindowTargetWindowOption
+    , TargetWindowTargetWindowOption (..)
 
-    -- ** AccountUserProfilesListResponse
-    , AccountUserProfilesListResponse
-    , accountUserProfilesListResponse
-    , auplrNextPageToken
-    , auplrAccountUserProfiles
-    , auplrKind
+    -- ** RichMediaExitOverride
+    , RichMediaExitOverride
+    , richMediaExitOverride
+    , rmeoUseCustomExitUrl
+    , rmeoExitId
+    , rmeoCustomExitUrl
 
-    -- ** AccountsListResponse
-    , AccountsListResponse
-    , accountsListResponse
-    , accNextPageToken
-    , accAccounts
-    , accKind
+    -- ** PricingSchedulePricingPeriod
+    , PricingSchedulePricingPeriod
+    , pricingSchedulePricingPeriod
+    , psppEndDate
+    , psppRateOrCostNanos
+    , psppStartDate
+    , psppUnits
+    , psppPricingComment
 
-    -- ** Activities
-    , Activities
-    , activities
-    , actKind
-    , actMetricNames
-    , actFilters
+    -- ** FloodlightConfigurationItemStandardVariableTypes
+    , FloodlightConfigurationItemStandardVariableTypes (..)
+
+    -- ** DirectorySitesListResponse
+    , DirectorySitesListResponse
+    , directorySitesListResponse
+    , dslrNextPageToken
+    , dslrKind
+    , dslrDirectorySites
+
+    -- ** OrderDocumentsList'SortOrder
+    , OrderDocumentsList'SortOrder (..)
+
+    -- ** DimensionFilter
+    , DimensionFilter
+    , dimensionFilter
+    , dfKind
+    , dfValue
+    , dfDimensionName
+
+    -- ** ReportSchedule
+    , ReportSchedule
+    , reportSchedule
+    , rsEvery
+    , rsActive
+    , rsRepeats
+    , rsStartDate
+    , rsExpirationDate
+    , rsRunsOnDayOfMonth
+    , rsRepeatsOnWeekDays
+
+    -- ** UserProfileList
+    , UserProfileList
+    , userProfileList
+    , uplEtag
+    , uplKind
+    , uplItems
+
+    -- ** PlacementsList'SortOrder
+    , PlacementsList'SortOrder (..)
+
+    -- ** ReportPathToConversionCriteria
+    , ReportPathToConversionCriteria
+    , reportPathToConversionCriteria
+    , rptccReportProperties
+    , rptccMetricNames
+    , rptccCustomRichMediaEvents
+    , rptccDateRange
+    , rptccConversionDimensions
+    , rptccCustomFloodlightVariables
+    , rptccFloodlightConfigId
+    , rptccActivityFilters
+    , rptccPerInteractionDimensions
+
+    -- ** SubaccountsList'SortField
+    , SubaccountsList'SortField (..)
+
+    -- ** FloodlightConfiguration
+    , FloodlightConfiguration
+    , floodlightConfiguration
+    , fcTagSettings
+    , fcExposureToConversionEnabled
+    , fcInAppAttributionTrackingEnabled
+    , fcThirdPartyAuthenticationTokens
+    , fcKind
+    , fcAdvertiserId
+    , fcAnalyticsDataSharingEnabled
+    , fcAdvertiserIdDimensionValue
+    , fcIdDimensionValue
+    , fcLookbackConfiguration
+    , fcAccountId
+    , fcId
+    , fcSslRequired
+    , fcNaturalSearchConversionAttributionOption
+    , fcUserDefinedVariableConfigurations
+    , fcSubaccountId
+    , fcFirstDayOfWeek
+    , fcOmnitureSettings
+    , fcStandardVariableTypes
+
+    -- ** Region
+    , Region
+    , region
+    , rRegionCode
+    , rKind
+    , rName
+    , rCountryCode
+    , rCountryDartId
+    , rDartId
+
+    -- ** AdsList'Type
+    , AdsList'Type (..)
+
+    -- ** CreativeFieldValuesListResponse
+    , CreativeFieldValuesListResponse
+    , creativeFieldValuesListResponse
+    , cfvlrNextPageToken
+    , cfvlrKind
+    , cfvlrCreativeFieldValues
+
+    -- ** CreativeAssignment
+    , CreativeAssignment
+    , creativeAssignment
+    , caCreativeGroupAssignments
+    , caStartTime
+    , caWeight
+    , caRichMediaExitOverrides
+    , caSslCompliant
+    , caCreativeId
+    , caClickThroughUrl
+    , caApplyEventTags
+    , caActive
+    , caSequence
+    , caEndTime
+    , caCompanionCreativeOverrides
+    , caCreativeIdDimensionValue
+
+    -- ** AdvertiserGroupsListResponse
+    , AdvertiserGroupsListResponse
+    , advertiserGroupsListResponse
+    , aglrNextPageToken
+    , aglrKind
+    , aglrAdvertiserGroups
+
+    -- ** DirectorySiteContactsListResponse
+    , DirectorySiteContactsListResponse
+    , directorySiteContactsListResponse
+    , dsclrNextPageToken
+    , dsclrKind
+    , dsclrDirectorySiteContacts
+
+    -- ** FloodlightActivityGroupsListResponse
+    , FloodlightActivityGroupsListResponse
+    , floodlightActivityGroupsListResponse
+    , faglrNextPageToken
+    , faglrKind
+    , faglrFloodlightActivityGroups
+
+    -- ** CreativeFieldsList'SortOrder
+    , CreativeFieldsList'SortOrder (..)
+
+    -- ** FloodlightConfigurationFirstDayOfWeek
+    , FloodlightConfigurationFirstDayOfWeek (..)
+
+    -- ** CreativeType
+    , CreativeType (..)
+
+    -- ** AdsList'SortField
+    , AdsList'SortField (..)
+
+    -- ** PlacementsListResponse
+    , PlacementsListResponse
+    , placementsListResponse
+    , plrNextPageToken
+    , plrKind
+    , plrPlacements
+
+    -- ** Site
+    , Site
+    , site
+    , sitKind
+    , sitKeyName
+    , sitSiteContacts
+    , sitSiteSettings
+    , sitIdDimensionValue
+    , sitDirectorySiteIdDimensionValue
+    , sitAccountId
+    , sitName
+    , sitDirectorySiteId
+    , sitId
+    , sitSubaccountId
+    , sitApproved
+
+    -- ** Recipient
+    , Recipient
+    , recipient
+    , recEmail
+    , recKind
+    , recDeliveryType
+
+    -- ** OrderDocumentsListResponse
+    , OrderDocumentsListResponse
+    , orderDocumentsListResponse
+    , odlrNextPageToken
+    , odlrKind
+    , odlrOrderDocuments
+
+    -- ** PricingPricingType
+    , PricingPricingType (..)
+
+    -- ** CreativeGroupAssignmentCreativeGroupNumber
+    , CreativeGroupAssignmentCreativeGroupNumber (..)
+
+    -- ** PlacementsList'PaymentSource
+    , PlacementsList'PaymentSource (..)
+
+    -- ** PlacementsGenerateTagsResponse
+    , PlacementsGenerateTagsResponse
+    , placementsGenerateTagsResponse
+    , pgtrKind
+    , pgtrPlacementTags
+
+    -- ** CreativeFieldsListResponse
+    , CreativeFieldsListResponse
+    , creativeFieldsListResponse
+    , cflrNextPageToken
+    , cflrKind
+    , cflrCreativeFields
+
+    -- ** FloodlightActivityGroupsList'SortOrder
+    , FloodlightActivityGroupsList'SortOrder (..)
+
+    -- ** MetrosListResponse
+    , MetrosListResponse
+    , metrosListResponse
+    , mlrKind
+    , mlrMetros
+
+    -- ** AdvertiserGroupsList'SortOrder
+    , AdvertiserGroupsList'SortOrder (..)
+
+    -- ** CreativeAsset
+    , CreativeAsset
+    , creativeAsset
+    , creZIndex
+    , crePushdown
+    , creVideoDuration
+    , creOriginalBackup
+    , creWindowMode
+    , creFlashVersion
+    , crePushdownDuration
+    , creSize
+    , creVerticallyLocked
+    , creOffset
+    , creStreamingServingUrl
+    , creZipFilesize
+    , creTransparency
+    , creHideSelectionBoxes
+    , creSslCompliant
+    , creFileSize
+    , creAssetIdentifier
+    , creDurationType
+    , creProgressiveServingUrl
+    , creActive
+    , creRole
+    , creMimeType
+    , crePositionTopUnit
+    , crePositionLeftUnit
+    , creAlignment
+    , creExpandedDimension
+    , creZipFilename
+    , creActionScript3
+    , creDisplayType
+    , creChildAssetType
+    , creCollapsedSize
+    , creId
+    , creBitRate
+    , creCustomStartTimeValue
+    , creStartTimeType
+    , creDuration
+    , creArtworkType
+    , creHideFlashObjects
+    , creDetectedFeatures
+    , creBackupImageExit
+    , crePosition
+    , creHorizontallyLocked
+
+    -- ** PlacementGroupPlacementGroupType
+    , PlacementGroupPlacementGroupType (..)
+
+    -- ** SortedDimension
+    , SortedDimension
+    , sortedDimension
+    , sdKind
+    , sdSortOrder
+    , sdName
+
+    -- ** DirectorySitesList'SortOrder
+    , DirectorySitesList'SortOrder (..)
+
+    -- ** CampaignsList'SortField
+    , CampaignsList'SortField (..)
+
+    -- ** OrdersList'SortField
+    , OrdersList'SortField (..)
+
+    -- ** FsCommandPositionOption
+    , FsCommandPositionOption (..)
+
+    -- ** ReportReachCriteria
+    , ReportReachCriteria
+    , reportReachCriteria
+    , rrcReachByFrequencyMetricNames
+    , rrcEnableAllDimensionCombinations
+    , rrcMetricNames
+    , rrcCustomRichMediaEvents
+    , rrcDimensionFilters
+    , rrcActivities
+    , rrcDateRange
+    , rrcDimensions
+
+    -- ** AdsList'CreativeType
+    , AdsList'CreativeType (..)
+
+    -- ** Report
+    , Report
+    , report
+    , repDelivery
+    , repEtag
+    , repOwnerProfileId
+    , repSchedule
+    , repPathToConversionCriteria
+    , repKind
+    , repFormat
+    , repReachCriteria
+    , repLastModifiedTime
+    , repAccountId
+    , repName
+    , repId
+    , repCrossDimensionReachCriteria
+    , repType
+    , repSubAccountId
+    , repFloodlightCriteria
+    , repCriteria
+    , repFileName
+
+    -- ** TargetableRemarketingListListSource
+    , TargetableRemarketingListListSource (..)
+
+    -- ** CreativeCustomEventTargetType
+    , CreativeCustomEventTargetType (..)
+
+    -- ** CreativeAssetDurationType
+    , CreativeAssetDurationType (..)
+
+    -- ** ContentCategoriesListResponse
+    , ContentCategoriesListResponse
+    , contentCategoriesListResponse
+    , cclrNextPageToken
+    , cclrKind
+    , cclrContentCategories
+
+    -- ** FloodlightActivityItemUserDefinedVariableTypes
+    , FloodlightActivityItemUserDefinedVariableTypes (..)
+
+    -- ** ThirdPartyAuthenticationToken
+    , ThirdPartyAuthenticationToken
+    , thirdPartyAuthenticationToken
+    , tpatValue
+    , tpatName
+
+    -- ** Campaign
+    , Campaign
+    , campaign
+    , ccCreativeOptimizationConfiguration
+    , ccCreativeGroupIds
+    , ccNielsenOcrEnabled
+    , ccKind
+    , ccClickThroughUrlSuffixProperties
+    , ccAdvertiserId
+    , ccEndDate
+    , ccAdvertiserIdDimensionValue
+    , ccIdDimensionValue
+    , ccEventTagOverrides
+    , ccLookbackConfiguration
+    , ccStartDate
+    , ccAccountId
+    , ccComscoreVceEnabled
+    , ccName
+    , ccAdvertiserGroupId
+    , ccBillingInvoiceCode
+    , ccCreateInfo
+    , ccLastModifiedInfo
+    , ccId
+    , ccSubaccountId
+    , ccAdditionalCreativeOptimizationConfigurations
+    , ccExternalId
+    , ccComment
+    , ccAudienceSegmentGroups
+    , ccArchived
+    , ccTraffickerEmails
+    , ccDefaultClickThroughEventTagProperties
+
+    -- ** CreativesList'SortField
+    , CreativesList'SortField (..)
+
+    -- ** ReportRunsOnDayOfMonthSchedule
+    , ReportRunsOnDayOfMonthSchedule (..)
+
+    -- ** BrowsersListResponse
+    , BrowsersListResponse
+    , browsersListResponse
+    , blrKind
+    , blrBrowsers
+
+    -- ** DayPartTargetingItemDaysOfWeek
+    , DayPartTargetingItemDaysOfWeek (..)
+
+    -- ** FloodlightConfigurationNaturalSearchConversionAttributionOption
+    , FloodlightConfigurationNaturalSearchConversionAttributionOption (..)
+
+    -- ** PlacementStrategiesList'SortOrder
+    , PlacementStrategiesList'SortOrder (..)
+
+    -- ** SiteSettings
+    , SiteSettings
+    , siteSettings
+    , ssDisableNewCookie
+    , ssDisableBrandSafeAds
+    , ssLookbackConfiguration
+    , ssTagSetting
+    , ssActiveViewOptOut
+    , ssCreativeSettings
+
+    -- ** AdType
+    , AdType (..)
+
+    -- ** AccountUserProfilesList'SortField
+    , AccountUserProfilesList'SortField (..)
+
+    -- ** EventTagSiteFilterType
+    , EventTagSiteFilterType (..)
+
+    -- ** ClickThroughUrl
+    , ClickThroughUrl
+    , clickThroughUrl
+    , ctuDefaultLandingPage
+    , ctuComputedClickThroughUrl
+    , ctuCustomClickThroughUrl
+    , ctuLandingPageId
+
+    -- ** ReportFormat
+    , ReportFormat (..)
+
+    -- ** EventTagsList'EventTagTypes
+    , EventTagsList'EventTagTypes (..)
+
+    -- ** SitesListResponse
+    , SitesListResponse
+    , sitesListResponse
+    , slrNextPageToken
+    , slrKind
+    , slrSites
+
+    -- ** DirectorySiteContactAssignment
+    , DirectorySiteContactAssignment
+    , directorySiteContactAssignment
+    , dscaVisibility
+    , dscaContactId
+
+    -- ** Metro
+    , Metro
+    , metro
+    , metMetroCode
+    , metKind
+    , metName
+    , metCountryCode
+    , metDmaId
+    , metCountryDartId
+    , metDartId
+
+    -- ** DirectorySiteContactType
+    , DirectorySiteContactType (..)
+
+    -- ** CreativeAssetMetadataItemDetectedFeatures
+    , CreativeAssetMetadataItemDetectedFeatures (..)
+
+    -- ** FloodlightActivitiesGenerateTagResponse
+    , FloodlightActivitiesGenerateTagResponse
+    , floodlightActivitiesGenerateTagResponse
+    , fagtrFloodlightActivityTag
+    , fagtrKind
+
+    -- ** AdSlot
+    , AdSlot
+    , adSlot
+    , adHeight
+    , adPaymentSourceType
+    , adLinkedPlacementId
+    , adWidth
+    , adPrimary
+    , adName
+    , adComment
+    , adCompatibility
+
+    -- ** DefaultClickThroughEventTagProperties
+    , DefaultClickThroughEventTagProperties
+    , defaultClickThroughEventTagProperties
+    , dctetpOverrideInheritedEventTag
+    , dctetpDefaultClickThroughEventTagId
+
+    -- ** Placement
+    , Placement
+    , placement
+    , plaStatus
+    , plaPlacementStrategyId
+    , plaTagFormats
+    , plaSiteIdDimensionValue
+    , plaPricingSchedule
+    , plaSize
+    , plaKind
+    , plaKeyName
+    , plaCampaignIdDimensionValue
+    , plaAdvertiserId
+    , plaAdvertiserIdDimensionValue
+    , plaCampaignId
+    , plaIdDimensionValue
+    , plaPrimary
+    , plaLookbackConfiguration
+    , plaTagSetting
+    , plaContentCategoryId
+    , plaDirectorySiteIdDimensionValue
+    , plaAccountId
+    , plaPaymentSource
+    , plaName
+    , plaDirectorySiteId
+    , plaCreateInfo
+    , plaLastModifiedInfo
+    , plaId
+    , plaSslRequired
+    , plaSubaccountId
+    , plaPlacementGroupIdDimensionValue
+    , plaExternalId
+    , plaPlacementGroupId
+    , plaComment
+    , plaSiteId
+    , plaCompatibility
+    , plaArchived
+    , plaPaymentApproved
+    , plaPublisherUpdateInfo
+
+    -- ** ListTargetingExpression
+    , ListTargetingExpression
+    , listTargetingExpression
+    , lteExpression
+
+    -- ** ReportDelivery
+    , ReportDelivery
+    , reportDelivery
+    , rdEmailOwner
+    , rdRecipients
+    , rdMessage
+    , rdEmailOwnerDeliveryType
+
+    -- ** OrderDocument
+    , OrderDocument
+    , orderDocument
+    , odSigned
+    , odKind
+    , odAdvertiserId
+    , odLastSentTime
+    , odAmendedOrderDocumentId
+    , odLastSentRecipients
+    , odEffectiveDate
+    , odApprovedByUserProfileIds
+    , odAccountId
+    , odId
+    , odProjectId
+    , odTitle
+    , odSubaccountId
+    , odType
+    , odOrderId
+    , odCancelled
+    , odCreatedInfo
+
+    -- ** ChangeLogsList'Action
+    , ChangeLogsList'Action (..)
+
+    -- ** CreativeField
+    , CreativeField
+    , creativeField
+    , cffKind
+    , cffAdvertiserId
+    , cffAdvertiserIdDimensionValue
+    , cffAccountId
+    , cffName
+    , cffId
+    , cffSubaccountId
+
+    -- ** ThirdPartyTrackingUrl
+    , ThirdPartyTrackingUrl
+    , thirdPartyTrackingUrl
+    , tptuUrl
+    , tptuThirdPartyUrlType
+
+    -- ** ProjectsList'SortOrder
+    , ProjectsList'SortOrder (..)
+
+    -- ** AdvertisersList'SortOrder
+    , AdvertisersList'SortOrder (..)
+
+    -- ** DirectorySiteContactAssignmentVisibility
+    , DirectorySiteContactAssignmentVisibility (..)
+
+    -- ** GeoTargeting
+    , GeoTargeting
+    , geoTargeting
+    , gtRegions
+    , gtCountries
+    , gtCities
+    , gtMetros
+    , gtExcludeCountries
+    , gtPostalCodes
+
+    -- ** OptimizationActivity
+    , OptimizationActivity
+    , optimizationActivity
+    , oaWeight
+    , oaFloodlightActivityId
+    , oaFloodlightActivityIdDimensionValue
+
+    -- ** DirectorySiteItemInterstitialTagFormats
+    , DirectorySiteItemInterstitialTagFormats (..)
+
+    -- ** AccountsList'SortField
+    , AccountsList'SortField (..)
+
+    -- ** ReachReportCompatibleFields
+    , ReachReportCompatibleFields
+    , reachReportCompatibleFields
+    , rrcfMetrics
+    , rrcfReachByFrequencyMetrics
+    , rrcfKind
+    , rrcfDimensionFilters
+    , rrcfPivotedActivityMetrics
+    , rrcfDimensions
+
+    -- ** CampaignsListResponse
+    , CampaignsListResponse
+    , campaignsListResponse
+    , camNextPageToken
+    , camCampaigns
+    , camKind
+
+    -- ** ListPopulationTermOperator
+    , ListPopulationTermOperator (..)
+
+    -- ** RemarketingListsList'SortField
+    , RemarketingListsList'SortField (..)
+
+    -- ** FileList
+    , FileList
+    , fileList
+    , flEtag
+    , flNextPageToken
+    , flKind
+    , flItems
+
+    -- ** ClickTag
+    , ClickTag
+    , clickTag
+    , ctValue
+    , ctName
+    , ctEventName
+
+    -- ** PricingScheduleCapCostOption
+    , PricingScheduleCapCostOption (..)
+
+    -- ** CreativeCustomEvent
+    , CreativeCustomEvent
+    , creativeCustomEvent
+    , cceAdvertiserCustomEventType
+    , cceAdvertiserCustomEventName
+    , cceExitUrl
+    , cceTargetType
+    , ccePopupWindowProperties
+    , cceVideoReportingId
+    , cceId
+    , cceArtworkLabel
+    , cceArtworkType
+
+    -- ** Browser
+    , Browser
+    , browser
+    , bMinorVersion
+    , bKind
+    , bBrowserVersionId
+    , bMajorVersion
+    , bName
+    , bDartId
+
+    -- ** UserRolesList'SortOrder
+    , UserRolesList'SortOrder (..)
+
+    -- ** FloodlightActivityFloodlightActivityGroupType
+    , FloodlightActivityFloodlightActivityGroupType (..)
+
+    -- ** UserRolePermissionAvailability
+    , UserRolePermissionAvailability (..)
+
+    -- ** PlacementCompatibility
+    , PlacementCompatibility (..)
+
+    -- ** ThirdPartyTrackingUrlThirdPartyUrlType
+    , ThirdPartyTrackingUrlThirdPartyUrlType (..)
+
+    -- ** CreativeAssetItemDetectedFeatures
+    , CreativeAssetItemDetectedFeatures (..)
+
+    -- ** ListPopulationClause
+    , ListPopulationClause
+    , listPopulationClause
+    , lpcTerms
+
+    -- ** ProjectsListResponse
+    , ProjectsListResponse
+    , projectsListResponse
+    , pNextPageToken
+    , pKind
+    , pProjects
+
+    -- ** InventoryItem
+    , InventoryItem
+    , inventoryItem
+    , iiPlacementStrategyId
+    , iiEstimatedClickThroughRate
+    , iiPricing
+    , iiKind
+    , iiAdvertiserId
+    , iiRfpId
+    , iiContentCategoryId
+    , iiInPlan
+    , iiAccountId
+    , iiName
+    , iiAdSlots
+    , iiNegotiationChannelId
+    , iiLastModifiedInfo
+    , iiId
+    , iiEstimatedConversionRate
+    , iiProjectId
+    , iiSubaccountId
+    , iiOrderId
+    , iiSiteId
+
+    -- ** CreativeGroupAssignment
+    , CreativeGroupAssignment
+    , creativeGroupAssignment
+    , cgaCreativeGroupNumber
+    , cgaCreativeGroupId
+
+    -- ** FilesList'SortOrder
+    , FilesList'SortOrder (..)
+
+    -- ** FloodlightActivityGroupsList'Type
+    , FloodlightActivityGroupsList'Type (..)
+
+    -- ** DirectorySiteContactsList'SortField
+    , DirectorySiteContactsList'SortField (..)
+
+    -- ** ListPopulationTerm
+    , ListPopulationTerm
+    , listPopulationTerm
+    , lptOperator
+    , lptValue
+    , lptVariableFriendlyName
+    , lptNegation
+    , lptVariableName
+    , lptRemarketingListId
+    , lptType
+    , lptContains
+
+    -- ** SizesListResponse
+    , SizesListResponse
+    , sizesListResponse
+    , sKind
+    , sSizes
+
+    -- ** CreativeFieldValuesList'SortField
+    , CreativeFieldValuesList'SortField (..)
+
+    -- ** FloodlightActivitiesList'FloodlightActivityGroupType
+    , FloodlightActivitiesList'FloodlightActivityGroupType (..)
+
+    -- ** DirectorySiteSettings
+    , DirectorySiteSettings
+    , directorySiteSettings
+    , dssInterstitialPlacementAccepted
+    , dssDfpSettings
+    , dssVerificationTagOptOut
+    , dssActiveViewOptOut
+    , dssVideoActiveViewOptOut
+    , dssInstreamVideoPlacementAccepted
+    , dssNielsenOcrOptOut
+
+    -- ** TagSettings
+    , TagSettings
+    , tagSettings
+    , tsDynamicTagEnabled
+    , tsImageTagEnabled
+
+    -- ** AdsListResponse
+    , AdsListResponse
+    , adsListResponse
+    , adsNextPageToken
+    , adsKind
+    , adsAds
+
+    -- ** TargetableRemarketingListsList'SortField
+    , TargetableRemarketingListsList'SortField (..)
+
+    -- ** PlacementGroupsList'SortOrder
+    , PlacementGroupsList'SortOrder (..)
+
+    -- ** CreativeRotation
+    , CreativeRotation
+    , creativeRotation
+    , crWeightCalculationStrategy
+    , crCreativeAssignments
+    , crCreativeOptimizationConfigurationId
+    , crType
+
+    -- ** SubaccountsListResponse
+    , SubaccountsListResponse
+    , subaccountsListResponse
+    , subNextPageToken
+    , subKind
+    , subSubaccounts
+
+    -- ** AccountActiveAdsLimitTier
+    , AccountActiveAdsLimitTier (..)
+
+    -- ** TechnologyTargeting
+    , TechnologyTargeting
+    , technologyTargeting
+    , ttMobileCarriers
+    , ttOperatingSystemVersions
+    , ttPlatformTypes
+    , ttBrowsers
+    , ttConnectionTypes
+    , ttOperatingSystems
+
+    -- ** CreativeAssetWindowMode
+    , CreativeAssetWindowMode (..)
+
+    -- ** ListPopulationRule
+    , ListPopulationRule
+    , listPopulationRule
+    , lprFloodlightActivityName
+    , lprFloodlightActivityId
+    , lprListPopulationClauses
+
+    -- ** PlacementsList'PricingTypes
+    , PlacementsList'PricingTypes (..)
+
+    -- ** DateRangeRelativeDateRange
+    , DateRangeRelativeDateRange (..)
+
+    -- ** EventTagsList'SortOrder
+    , EventTagsList'SortOrder (..)
+
+    -- ** TagDataFormat
+    , TagDataFormat (..)
+
+    -- ** ChangeLog
+    , ChangeLog
+    , changeLog
+    , clUserProfileId
+    , clObjectType
+    , clUserProfileName
+    , clKind
+    , clObjectId
+    , clAction
+    , clTransactionId
+    , clOldValue
+    , clAccountId
+    , clNewValue
+    , clFieldName
+    , clId
+    , clSubaccountId
+    , clChangeTime
+
+    -- ** UserProfile
+    , UserProfile
+    , userProfile
+    , upEtag
+    , upKind
+    , upAccountName
+    , upProfileId
+    , upUserName
+    , upAccountId
+    , upSubAccountName
+    , upSubAccountId
+
+    -- ** OperatingSystemsListResponse
+    , OperatingSystemsListResponse
+    , operatingSystemsListResponse
+    , oslrKind
+    , oslrOperatingSystems
+
+    -- ** PostalCodesListResponse
+    , PostalCodesListResponse
+    , postalCodesListResponse
+    , pclrKind
+    , pclrPostalCodes
+
+    -- ** CreativeAssetDisplayType
+    , CreativeAssetDisplayType (..)
+
+    -- ** PlacementStrategiesList'SortField
+    , PlacementStrategiesList'SortField (..)
+
+    -- ** EventTagOverride
+    , EventTagOverride
+    , eventTagOverride
+    , etoEnabled
+    , etoId
+
+    -- ** AccountUserProfilesList'SortOrder
+    , AccountUserProfilesList'SortOrder (..)
+
+    -- ** AdvertiserStatus
+    , AdvertiserStatus (..)
+
+    -- ** CreativeAssetChildAssetType
+    , CreativeAssetChildAssetType (..)
+
+    -- ** PlacementStrategy
+    , PlacementStrategy
+    , placementStrategy
+    , psKind
+    , psAccountId
+    , psName
+    , psId
+
+    -- ** FloodlightActivityCountingMethod
+    , FloodlightActivityCountingMethod (..)
+
+    -- ** AccountPermission
+    , AccountPermission
+    , accountPermission
+    , acccKind
+    , acccAccountProfiles
+    , acccName
+    , acccId
+    , acccLevel
+    , acccPermissionGroupId
+
+    -- ** OrderDocumentType
+    , OrderDocumentType (..)
+
+    -- ** OperatingSystemVersion
+    , OperatingSystemVersion
+    , operatingSystemVersion
+    , osvMinorVersion
+    , osvKind
+    , osvOperatingSystem
+    , osvMajorVersion
+    , osvName
+    , osvId
+
+    -- ** TargetableRemarketingList
+    , TargetableRemarketingList
+    , targetableRemarketingList
+    , trlListSize
+    , trlLifeSpan
+    , trlKind
+    , trlAdvertiserId
+    , trlAdvertiserIdDimensionValue
+    , trlActive
+    , trlAccountId
+    , trlName
+    , trlListSource
+    , trlId
+    , trlSubaccountId
+    , trlDescription
+
+    -- ** DirectorySiteItemInpageTagFormats
+    , DirectorySiteItemInpageTagFormats (..)
+
+    -- ** PricingCapCostType
+    , PricingCapCostType (..)
+
+    -- ** CreativesList'SortOrder
+    , CreativesList'SortOrder (..)
+
+    -- ** TagSettingKeywordOption
+    , TagSettingKeywordOption (..)
+
+    -- ** ReportDimensionCrossDimensionReachCriteria
+    , ReportDimensionCrossDimensionReachCriteria (..)
+
+    -- ** Size
+    , Size
+    , size
+    , sizHeight
+    , sizKind
+    , sizWidth
+    , sizIab
+    , sizId
+
+    -- ** CreativeAuthoringTool
+    , CreativeAuthoringTool (..)
+
+    -- ** ReportsConfiguration
+    , ReportsConfiguration
+    , reportsConfiguration
+    , rcExposureToConversionEnabled
+    , rcReportGenerationTimeZoneId
+    , rcLookbackConfiguration
+
+    -- ** PlacementStrategiesListResponse
+    , PlacementStrategiesListResponse
+    , placementStrategiesListResponse
+    , pslrPlacementStrategies
+    , pslrNextPageToken
+    , pslrKind
+
+    -- ** CreativeGroupsList'SortOrder
+    , CreativeGroupsList'SortOrder (..)
+
+    -- ** CreativeAssetIdType
+    , CreativeAssetIdType (..)
+
+    -- ** Project
+    , Project
+    , project
+    , proTargetClicks
+    , proClientBillingCode
+    , proTargetCpmNanos
+    , proTargetConversions
+    , proBudget
+    , proKind
+    , proAdvertiserId
+    , proEndDate
+    , proOverview
+    , proTargetImpressions
+    , proStartDate
+    , proTargetCpcNanos
+    , proAccountId
+    , proName
+    , proLastModifiedInfo
+    , proId
+    , proAudienceAgeGroup
+    , proSubaccountId
+    , proAudienceGender
+    , proClientName
+    , proTargetCpaNanos
+
+    -- ** OrderContactContactType
+    , OrderContactContactType (..)
+
+    -- ** RemarketingListListSource
+    , RemarketingListListSource (..)
+
+    -- ** PricingSchedule
+    , PricingSchedule
+    , pricingSchedule
+    , psTestingStartDate
+    , psFloodlightActivityId
+    , psEndDate
+    , psDisregardOverdelivery
+    , psStartDate
+    , psCapCostOption
+    , psPricingType
+    , psPricingPeriods
+    , psFlighted
+
+    -- ** ContentCategoriesList'SortOrder
+    , ContentCategoriesList'SortOrder (..)
 
     -- ** Ad
     , Ad
@@ -429,180 +2335,55 @@ module Network.Google.DFAReporting
     , addDefaultClickThroughEventTagProperties
     , addPlacementAssignments
 
-    -- ** AdCompatibility
-    , AdCompatibility (..)
+    -- ** ReportType
+    , ReportType (..)
 
-    -- ** AdSlot
-    , AdSlot
-    , adSlot
-    , adHeight
-    , adPaymentSourceType
-    , adLinkedPlacementId
-    , adWidth
-    , adPrimary
-    , adName
-    , adComment
-    , adCompatibility
+    -- ** FloodlightActivitiesList'SortField
+    , FloodlightActivitiesList'SortField (..)
 
-    -- ** AdSlotCompatibility
-    , AdSlotCompatibility (..)
+    -- ** PopupWindowPropertiesPositionType
+    , PopupWindowPropertiesPositionType (..)
 
-    -- ** AdSlotPaymentSourceType
-    , AdSlotPaymentSourceType (..)
+    -- ** InventoryItemsListResponse
+    , InventoryItemsListResponse
+    , inventoryItemsListResponse
+    , iilrInventoryItems
+    , iilrNextPageToken
+    , iilrKind
 
-    -- ** AdType
-    , AdType (..)
+    -- ** ObjectFilter
+    , ObjectFilter
+    , objectFilter
+    , ofStatus
+    , ofKind
+    , ofObjectIds
 
-    -- ** AdsListResponse
-    , AdsListResponse
-    , adsListResponse
-    , adsNextPageToken
-    , adsKind
-    , adsAds
+    -- ** CreativesList'Types
+    , CreativesList'Types (..)
 
-    -- ** Advertiser
-    , Advertiser
-    , advertiser
-    , aOriginalFloodlightConfigurationId
-    , aStatus
-    , aFloodlightConfigurationId
-    , aKind
-    , aSuspended
-    , aIdDimensionValue
-    , aAccountId
-    , aDefaultEmail
-    , aName
-    , aAdvertiserGroupId
-    , aDefaultClickThroughEventTagId
-    , aId
-    , aSubaccountId
-    , aFloodlightConfigurationIdDimensionValue
-    , aClickThroughUrlSuffix
+    -- ** FileUrls
+    , FileUrls
+    , fileUrls
+    , fuBrowserUrl
+    , fuApiUrl
 
-    -- ** AdvertiserGroup
-    , AdvertiserGroup
-    , advertiserGroup
-    , agKind
-    , agAccountId
-    , agName
-    , agId
+    -- ** ProjectAudienceGender
+    , ProjectAudienceGender (..)
 
-    -- ** AdvertiserGroupsListResponse
-    , AdvertiserGroupsListResponse
-    , advertiserGroupsListResponse
-    , aglrNextPageToken
-    , aglrKind
-    , aglrAdvertiserGroups
+    -- ** CreativeCustomEventAdvertiserCustomEventType
+    , CreativeCustomEventAdvertiserCustomEventType (..)
 
-    -- ** AdvertiserStatus
-    , AdvertiserStatus (..)
+    -- ** Subaccount
+    , Subaccount
+    , subaccount
+    , ssKind
+    , ssAvailablePermissionIds
+    , ssAccountId
+    , ssName
+    , ssId
 
-    -- ** AdvertisersListResponse
-    , AdvertisersListResponse
-    , advertisersListResponse
-    , alrNextPageToken
-    , alrKind
-    , alrAdvertisers
-
-    -- ** AudienceSegment
-    , AudienceSegment
-    , audienceSegment
-    , asName
-    , asId
-    , asAllocation
-
-    -- ** AudienceSegmentGroup
-    , AudienceSegmentGroup
-    , audienceSegmentGroup
-    , asgAudienceSegments
-    , asgName
-    , asgId
-
-    -- ** Browser
-    , Browser
-    , browser
-    , bMinorVersion
-    , bKind
-    , bBrowserVersionId
-    , bMajorVersion
-    , bName
-    , bDartId
-
-    -- ** BrowsersListResponse
-    , BrowsersListResponse
-    , browsersListResponse
-    , blrKind
-    , blrBrowsers
-
-    -- ** Campaign
-    , Campaign
-    , campaign
-    , camCreativeOptimizationConfiguration
-    , camCreativeGroupIds
-    , camNielsenOcrEnabled
-    , camKind
-    , camClickThroughUrlSuffixProperties
-    , camAdvertiserId
-    , camEndDate
-    , camAdvertiserIdDimensionValue
-    , camIdDimensionValue
-    , camEventTagOverrides
-    , camLookbackConfiguration
-    , camStartDate
-    , camAccountId
-    , camComscoreVceEnabled
-    , camName
-    , camAdvertiserGroupId
-    , camBillingInvoiceCode
-    , camCreateInfo
-    , camLastModifiedInfo
-    , camId
-    , camSubaccountId
-    , camAdditionalCreativeOptimizationConfigurations
-    , camExternalId
-    , camComment
-    , camAudienceSegmentGroups
-    , camArchived
-    , camTraffickerEmails
-    , camDefaultClickThroughEventTagProperties
-
-    -- ** CampaignCreativeAssociation
-    , CampaignCreativeAssociation
-    , campaignCreativeAssociation
-    , ccaKind
-    , ccaCreativeId
-
-    -- ** CampaignCreativeAssociationsListResponse
-    , CampaignCreativeAssociationsListResponse
-    , campaignCreativeAssociationsListResponse
-    , ccalrCampaignCreativeAssociations
-    , ccalrNextPageToken
-    , ccalrKind
-
-    -- ** CampaignsListResponse
-    , CampaignsListResponse
-    , campaignsListResponse
-    , clrlNextPageToken
-    , clrlCampaigns
-    , clrlKind
-
-    -- ** ChangeLog
-    , ChangeLog
-    , changeLog
-    , clUserProfileId
-    , clObjectType
-    , clUserProfileName
-    , clKind
-    , clObjectId
-    , clAction
-    , clTransactionId
-    , clOldValue
-    , clAccountId
-    , clNewValue
-    , clFieldName
-    , clId
-    , clSubaccountId
-    , clChangeTime
+    -- ** CampaignCreativeAssociationsList'SortOrder
+    , CampaignCreativeAssociationsList'SortOrder (..)
 
     -- ** ChangeLogsListResponse
     , ChangeLogsListResponse
@@ -611,95 +2392,87 @@ module Network.Google.DFAReporting
     , cllrKind
     , cllrChangeLogs
 
+    -- ** AdCompatibility
+    , AdCompatibility (..)
+
+    -- ** OperatingSystem
+    , OperatingSystem
+    , operatingSystem
+    , osDesktop
+    , osKind
+    , osName
+    , osMobile
+    , osDartId
+
+    -- ** UserRolesList'SortField
+    , UserRolesList'SortField (..)
+
+    -- ** PostalCode
+    , PostalCode
+    , postalCode
+    , pcKind
+    , pcCode
+    , pcCountryCode
+    , pcId
+    , pcCountryDartId
+
+    -- ** DeliverySchedulePriority
+    , DeliverySchedulePriority (..)
+
+    -- ** AdvertisersList'SortField
+    , AdvertisersList'SortField (..)
+
+    -- ** ReportEmailOwnerDeliveryTypeDelivery
+    , ReportEmailOwnerDeliveryTypeDelivery (..)
+
+    -- ** ProjectsList'SortField
+    , ProjectsList'SortField (..)
+
+    -- ** AccountsList'SortOrder
+    , AccountsList'SortOrder (..)
+
+    -- ** TargetableRemarketingListsListResponse
+    , TargetableRemarketingListsListResponse
+    , targetableRemarketingListsListResponse
+    , trllrNextPageToken
+    , trllrKind
+    , trllrTargetableRemarketingLists
+
+    -- ** AudienceSegmentGroup
+    , AudienceSegmentGroup
+    , audienceSegmentGroup
+    , asgAudienceSegments
+    , asgName
+    , asgId
+
     -- ** CitiesListResponse
     , CitiesListResponse
     , citiesListResponse
     , citKind
     , citCities
 
-    -- ** City
-    , City
-    , city
-    , cMetroCode
-    , cRegionCode
-    , cKind
-    , cRegionDartId
-    , cMetroDmaId
-    , cName
-    , cCountryCode
-    , cCountryDartId
-    , cDartId
+    -- ** SiteContactContactType
+    , SiteContactContactType (..)
 
-    -- ** ClickTag
-    , ClickTag
-    , clickTag
-    , ctValue
-    , ctName
-    , ctEventName
+    -- ** CustomRichMediaEvents
+    , CustomRichMediaEvents
+    , customRichMediaEvents
+    , crmeKind
+    , crmeFilteredEventIds
 
-    -- ** ClickThroughUrl
-    , ClickThroughUrl
-    , clickThroughUrl
-    , ctuDefaultLandingPage
-    , ctuComputedClickThroughUrl
-    , ctuCustomClickThroughUrl
-    , ctuLandingPageId
+    -- ** AccountPermissionsListResponse
+    , AccountPermissionsListResponse
+    , accountPermissionsListResponse
+    , aplrKind
+    , aplrAccountPermissions
 
-    -- ** ClickThroughUrlSuffixProperties
-    , ClickThroughUrlSuffixProperties
-    , clickThroughUrlSuffixProperties
-    , ctuspOverrideInheritedSuffix
-    , ctuspClickThroughUrlSuffix
-
-    -- ** CompanionClickThroughOverride
-    , CompanionClickThroughOverride
-    , companionClickThroughOverride
-    , cctoCreativeId
-    , cctoClickThroughUrl
-
-    -- ** CompatibleFields
-    , CompatibleFields
-    , compatibleFields
-    , cfReachReportCompatibleFields
-    , cfCrossDimensionReachReportCompatibleFields
-    , cfKind
-    , cfFloodlightReportCompatibleFields
-    , cfReportCompatibleFields
-    , cfPathToConversionReportCompatibleFields
-
-    -- ** ConnectionType
-    , ConnectionType
-    , connectionType
-    , conKind
-    , conName
-    , conId
-
-    -- ** ConnectionTypesListResponse
-    , ConnectionTypesListResponse
-    , connectionTypesListResponse
-    , ctlrKind
-    , ctlrConnectionTypes
-
-    -- ** ContentCategoriesListResponse
-    , ContentCategoriesListResponse
-    , contentCategoriesListResponse
-    , cclrNextPageToken
-    , cclrKind
-    , cclrContentCategories
-
-    -- ** ContentCategory
-    , ContentCategory
-    , contentCategory
-    , cccKind
-    , cccAccountId
-    , cccName
-    , cccId
-
-    -- ** CountriesListResponse
-    , CountriesListResponse
-    , countriesListResponse
-    , clrKind
-    , clrCountries
+    -- ** Flight
+    , Flight
+    , flight
+    , fRateOrCost
+    , fEndDate
+    , fStartDate
+    , fUnits
 
     -- ** Country
     , Country
@@ -710,389 +2483,8 @@ module Network.Google.DFAReporting
     , couDartId
     , couSslEnabled
 
-    -- ** Creative
-    , Creative
-    , creative
-    , ccConvertFlashToHtml5
-    , ccBackupImageTargetWindow
-    , ccRenderingIdDimensionValue
-    , ccCustomKeyValues
-    , ccVideoDuration
-    , ccRenderingId
-    , ccThirdPartyBackupImageImpressionsUrl
-    , ccFsCommand
-    , ccAllowScriptAccess
-    , ccHtmlCodeLocked
-    , ccRequiredFlashPluginVersion
-    , ccAuthoringTool
-    , ccSize
-    , ccThirdPartyUrls
-    , ccCounterCustomEvents
-    , ccKind
-    , ccSslOverride
-    , ccHtmlCode
-    , ccAdvertiserId
-    , ccRequiredFlashVersion
-    , ccBackgroundColor
-    , ccAdTagKeys
-    , ccSkippable
-    , ccSslCompliant
-    , ccIdDimensionValue
-    , ccBackupImageReportingLabel
-    , ccCommercialId
-    , ccActive
-    , ccExitCustomEvents
-    , ccAccountId
-    , ccBackupImageClickThroughUrl
-    , ccName
-    , ccOverrideCss
-    , ccVideoDescription
-    , ccClickTags
-    , ccAdParameters
-    , ccVersion
-    , ccLatestTraffickedCreativeId
-    , ccThirdPartyRichMediaImpressionsUrl
-    , ccLastModifiedInfo
-    , ccId
-    , ccStudioAdvertiserId
-    , ccCreativeAssets
-    , ccSubaccountId
-    , ccType
-    , ccTimerCustomEvents
-    , ccStudioCreativeId
-    , ccCompatibility
-    , ccBackupImageFeatures
-    , ccArtworkType
-    , ccArchived
-    , ccCompanionCreatives
-    , ccTotalFileSize
-    , ccStudioTraffickedCreativeId
-    , ccRedirectUrl
-    , ccAutoAdvanceImages
-    , ccCreativeFieldAssignments
-
-    -- ** CreativeArtworkType
-    , CreativeArtworkType (..)
-
-    -- ** CreativeAsset
-    , CreativeAsset
-    , creativeAsset
-    , cZIndex
-    , cPushdown
-    , cVideoDuration
-    , cOriginalBackup
-    , cWindowMode
-    , cFlashVersion
-    , cPushdownDuration
-    , cSize
-    , cVerticallyLocked
-    , cOffset
-    , cStreamingServingUrl
-    , cZipFilesize
-    , cTransparency
-    , cHideSelectionBoxes
-    , cSslCompliant
-    , cFileSize
-    , cAssetIdentifier
-    , cDurationType
-    , cProgressiveServingUrl
-    , cActive
-    , cRole
-    , cMimeType
-    , cPositionTopUnit
-    , cPositionLeftUnit
-    , cAlignment
-    , cExpandedDimension
-    , cZipFilename
-    , cActionScript3
-    , cDisplayType
-    , cChildAssetType
-    , cCollapsedSize
-    , cId
-    , cBitRate
-    , cCustomStartTimeValue
-    , cStartTimeType
-    , cDuration
-    , cArtworkType
-    , cHideFlashObjects
-    , cDetectedFeatures
-    , cBackupImageExit
-    , cPosition
-    , cHorizontallyLocked
-
-    -- ** CreativeAssetAlignment
-    , CreativeAssetAlignment (..)
-
-    -- ** CreativeAssetArtworkType
-    , CreativeAssetArtworkType (..)
-
-    -- ** CreativeAssetChildAssetType
-    , CreativeAssetChildAssetType (..)
-
-    -- ** CreativeAssetDisplayType
-    , CreativeAssetDisplayType (..)
-
-    -- ** CreativeAssetDurationType
-    , CreativeAssetDurationType (..)
-
-    -- ** CreativeAssetId
-    , CreativeAssetId
-    , creativeAssetId
-    , caiName
-    , caiType
-
-    -- ** CreativeAssetIdType
-    , CreativeAssetIdType (..)
-
-    -- ** CreativeAssetItemDetectedFeatures
-    , CreativeAssetItemDetectedFeatures (..)
-
-    -- ** CreativeAssetMetadata
-    , CreativeAssetMetadata
-    , creativeAssetMetadata
-    , camaKind
-    , camaAssetIdentifier
-    , camaClickTags
-    , camaWarnedValidationRules
-    , camaDetectedFeatures
-
-    -- ** CreativeAssetMetadataItemDetectedFeatures
-    , CreativeAssetMetadataItemDetectedFeatures (..)
-
-    -- ** CreativeAssetMetadataItemWarnedValidationRules
-    , CreativeAssetMetadataItemWarnedValidationRules (..)
-
-    -- ** CreativeAssetPositionLeftUnit
-    , CreativeAssetPositionLeftUnit (..)
-
-    -- ** CreativeAssetPositionTopUnit
-    , CreativeAssetPositionTopUnit (..)
-
-    -- ** CreativeAssetRole
-    , CreativeAssetRole (..)
-
-    -- ** CreativeAssetStartTimeType
-    , CreativeAssetStartTimeType (..)
-
-    -- ** CreativeAssetWindowMode
-    , CreativeAssetWindowMode (..)
-
-    -- ** CreativeAssignment
-    , CreativeAssignment
-    , creativeAssignment
-    , caCreativeGroupAssignments
-    , caStartTime
-    , caWeight
-    , caRichMediaExitOverrides
-    , caSslCompliant
-    , caCreativeId
-    , caClickThroughUrl
-    , caApplyEventTags
-    , caActive
-    , caSequence
-    , caEndTime
-    , caCompanionCreativeOverrides
-    , caCreativeIdDimensionValue
-
-    -- ** CreativeAuthoringTool
-    , CreativeAuthoringTool (..)
-
-    -- ** CreativeCustomEvent
-    , CreativeCustomEvent
-    , creativeCustomEvent
-    , cceAdvertiserCustomEventType
-    , cceAdvertiserCustomEventName
-    , cceExitUrl
-    , cceTargetType
-    , ccePopupWindowProperties
-    , cceVideoReportingId
-    , cceId
-    , cceArtworkLabel
-    , cceArtworkType
-
-    -- ** CreativeCustomEventAdvertiserCustomEventType
-    , CreativeCustomEventAdvertiserCustomEventType (..)
-
-    -- ** CreativeCustomEventArtworkType
-    , CreativeCustomEventArtworkType (..)
-
-    -- ** CreativeCustomEventTargetType
-    , CreativeCustomEventTargetType (..)
-
-    -- ** CreativeField
-    , CreativeField
-    , creativeField
-    , creKind
-    , creAdvertiserId
-    , creAdvertiserIdDimensionValue
-    , creAccountId
-    , creName
-    , creId
-    , creSubaccountId
-
-    -- ** CreativeFieldAssignment
-    , CreativeFieldAssignment
-    , creativeFieldAssignment
-    , cfaCreativeFieldId
-    , cfaCreativeFieldValueId
-
-    -- ** CreativeFieldValue
-    , CreativeFieldValue
-    , creativeFieldValue
-    , cfvKind
-    , cfvValue
-    , cfvId
-
-    -- ** CreativeFieldValuesListResponse
-    , CreativeFieldValuesListResponse
-    , creativeFieldValuesListResponse
-    , cfvlrNextPageToken
-    , cfvlrKind
-    , cfvlrCreativeFieldValues
-
-    -- ** CreativeFieldsListResponse
-    , CreativeFieldsListResponse
-    , creativeFieldsListResponse
-    , cflrNextPageToken
-    , cflrKind
-    , cflrCreativeFields
-
-    -- ** CreativeGroup
-    , CreativeGroup
-    , creativeGroup
-    , cgKind
-    , cgAdvertiserId
-    , cgAdvertiserIdDimensionValue
-    , cgGroupNumber
-    , cgAccountId
-    , cgName
-    , cgId
-    , cgSubaccountId
-
-    -- ** CreativeGroupAssignment
-    , CreativeGroupAssignment
-    , creativeGroupAssignment
-    , cgaCreativeGroupNumber
-    , cgaCreativeGroupId
-
-    -- ** CreativeGroupAssignmentCreativeGroupNumber
-    , CreativeGroupAssignmentCreativeGroupNumber (..)
-
-    -- ** CreativeGroupsListResponse
-    , CreativeGroupsListResponse
-    , creativeGroupsListResponse
-    , cglrCreativeGroups
-    , cglrNextPageToken
-    , cglrKind
-
-    -- ** CreativeItemBackupImageFeatures
-    , CreativeItemBackupImageFeatures (..)
-
-    -- ** CreativeItemCompatibility
-    , CreativeItemCompatibility (..)
-
-    -- ** CreativeOptimizationConfiguration
-    , CreativeOptimizationConfiguration
-    , creativeOptimizationConfiguration
-    , cocOptimizationModel
-    , cocName
-    , cocOptimizationActivitys
-    , cocId
-
-    -- ** CreativeOptimizationConfigurationOptimizationModel
-    , CreativeOptimizationConfigurationOptimizationModel (..)
-
-    -- ** CreativeRotation
-    , CreativeRotation
-    , creativeRotation
-    , crWeightCalculationStrategy
-    , crCreativeAssignments
-    , crCreativeOptimizationConfigurationId
-    , crType
-
-    -- ** CreativeRotationType
-    , CreativeRotationType (..)
-
-    -- ** CreativeRotationWeightCalculationStrategy
-    , CreativeRotationWeightCalculationStrategy (..)
-
-    -- ** CreativeSettings
-    , CreativeSettings
-    , creativeSettings
-    , csIFrameHeader
-    , csIFrameFooter
-
-    -- ** CreativeType
-    , CreativeType (..)
-
-    -- ** CreativesListResponse
-    , CreativesListResponse
-    , creativesListResponse
-    , crerNextPageToken
-    , crerKind
-    , crerCreatives
-
-    -- ** CrossDimensionReachReportCompatibleFields
-    , CrossDimensionReachReportCompatibleFields
-    , crossDimensionReachReportCompatibleFields
-    , cdrrcfMetrics
-    , cdrrcfBreakdown
-    , cdrrcfKind
-    , cdrrcfDimensionFilters
-    , cdrrcfOverlapMetrics
-
-    -- ** CustomRichMediaEvents
-    , CustomRichMediaEvents
-    , customRichMediaEvents
-    , crmeKind
-    , crmeFilteredEventIds
-
-    -- ** DateRange
-    , DateRange
-    , dateRange
-    , drKind
-    , drEndDate
-    , drStartDate
-    , drRelativeDateRange
-
-    -- ** DateRangeRelativeDateRange
-    , DateRangeRelativeDateRange (..)
-
-    -- ** DayPartTargeting
-    , DayPartTargeting
-    , dayPartTargeting
-    , dptDaysOfWeek
-    , dptHoursOfDay
-    , dptUserLocalTime
-
-    -- ** DayPartTargetingItemDaysOfWeek
-    , DayPartTargetingItemDaysOfWeek (..)
-
-    -- ** DefaultClickThroughEventTagProperties
-    , DefaultClickThroughEventTagProperties
-    , defaultClickThroughEventTagProperties
-    , dctetpOverrideInheritedEventTag
-    , dctetpDefaultClickThroughEventTagId
-
-    -- ** DeliverySchedule
-    , DeliverySchedule
-    , deliverySchedule
-    , dsHardCutoff
-    , dsPriority
-    , dsImpressionRatio
-    , dsFrequencyCap
-
-    -- ** DeliverySchedulePriority
-    , DeliverySchedulePriority (..)
-
-    -- ** DfpSettings
-    , DfpSettings
-    , dfpSettings
-    , dsPubPaidPlacementAccepted
-    , dsDfpNetworkName
-    , dsPublisherPortalOnly
-    , dsProgrammaticPlacementAccepted
-    , dsDfpNetworkCode
+    -- ** RemarketingListsList'SortOrder
+    , RemarketingListsList'SortOrder (..)
 
     -- ** Dimension
     , Dimension
@@ -1100,12 +2492,134 @@ module Network.Google.DFAReporting
     , dKind
     , dName
 
-    -- ** DimensionFilter
-    , DimensionFilter
-    , dimensionFilter
-    , dfKind
-    , dfValue
-    , dfDimensionName
+    -- ** PlacementGroupsList'PricingTypes
+    , PlacementGroupsList'PricingTypes (..)
+
+    -- ** Pricing
+    , Pricing
+    , pricing
+    , pEndDate
+    , pStartDate
+    , pGroupType
+    , pPricingType
+    , pFlights
+    , pCapCostType
+
+    -- ** OperatingSystemVersionsListResponse
+    , OperatingSystemVersionsListResponse
+    , operatingSystemVersionsListResponse
+    , osvlrKind
+    , osvlrOperatingSystemVersions
+
+    -- ** AccountAccountProfile
+    , AccountAccountProfile (..)
+
+    -- ** ClickThroughUrlSuffixProperties
+    , ClickThroughUrlSuffixProperties
+    , clickThroughUrlSuffixProperties
+    , ctuspOverrideInheritedSuffix
+    , ctuspClickThroughUrlSuffix
+
+    -- ** AccountsListResponse
+    , AccountsListResponse
+    , accountsListResponse
+    , accNextPageToken
+    , accAccounts
+    , accKind
+
+    -- ** PlacementGroupsList'SortField
+    , PlacementGroupsList'SortField (..)
+
+    -- ** DimensionValueMatchType
+    , DimensionValueMatchType (..)
+
+    -- ** EventTagsList'SortField
+    , EventTagsList'SortField (..)
+
+    -- ** ReportItemRepeatsOnWeekDaysSchedule
+    , ReportItemRepeatsOnWeekDaysSchedule (..)
+
+    -- ** Creative
+    , Creative
+    , creative
+    , c1ConvertFlashToHtml5
+    , c1BackupImageTargetWindow
+    , c1RenderingIdDimensionValue
+    , c1CustomKeyValues
+    , c1VideoDuration
+    , c1RenderingId
+    , c1ThirdPartyBackupImageImpressionsUrl
+    , c1FsCommand
+    , c1AllowScriptAccess
+    , c1HtmlCodeLocked
+    , c1RequiredFlashPluginVersion
+    , c1AuthoringTool
+    , c1Size
+    , c1ThirdPartyUrls
+    , c1CounterCustomEvents
+    , c1Kind
+    , c1SslOverride
+    , c1HtmlCode
+    , c1AdvertiserId
+    , c1RequiredFlashVersion
+    , c1BackgroundColor
+    , c1AdTagKeys
+    , c1Skippable
+    , c1SslCompliant
+    , c1IdDimensionValue
+    , c1BackupImageReportingLabel
+    , c1CommercialId
+    , c1Active
+    , c1ExitCustomEvents
+    , c1AccountId
+    , c1BackupImageClickThroughUrl
+    , c1Name
+    , c1OverrideCss
+    , c1VideoDescription
+    , c1ClickTags
+    , c1AdParameters
+    , c1Version
+    , c1LatestTraffickedCreativeId
+    , c1ThirdPartyRichMediaImpressionsUrl
+    , c1LastModifiedInfo
+    , c1Id
+    , c1StudioAdvertiserId
+    , c1CreativeAssets
+    , c1SubaccountId
+    , c1Type
+    , c1TimerCustomEvents
+    , c1StudioCreativeId
+    , c1Compatibility
+    , c1BackupImageFeatures
+    , c1ArtworkType
+    , c1Archived
+    , c1CompanionCreatives
+    , c1TotalFileSize
+    , c1StudioTraffickedCreativeId
+    , c1RedirectUrl
+    , c1AutoAdvanceImages
+    , c1CreativeFieldAssignments
+
+    -- ** DirectorySiteContactsList'SortOrder
+    , DirectorySiteContactsList'SortOrder (..)
+
+    -- ** CreativeFieldValuesList'SortOrder
+    , CreativeFieldValuesList'SortOrder (..)
+
+    -- ** UserDefinedVariableConfigurationVariableType
+    , UserDefinedVariableConfigurationVariableType (..)
+
+    -- ** SiteContact
+    , SiteContact
+    , siteContact
+    , scEmail
+    , scPhone
+    , scLastName
+    , scAddress
+    , scFirstName
+    , scId
+    , scTitle
+    , scContactType
 
     -- ** DimensionValue
     , DimensionValue
@@ -1117,559 +2631,74 @@ module Network.Google.DFAReporting
     , dvDimensionName
     , dvId
 
-    -- ** DimensionValueList
-    , DimensionValueList
-    , dimensionValueList
-    , dvlEtag
-    , dvlNextPageToken
-    , dvlKind
-    , dvlItems
-
-    -- ** DimensionValueMatchType
-    , DimensionValueMatchType (..)
-
-    -- ** DimensionValueRequest
-    , DimensionValueRequest
-    , dimensionValueRequest
-    , dvrKind
-    , dvrEndDate
-    , dvrFilters
-    , dvrStartDate
-    , dvrDimensionName
-
-    -- ** DirectorySite
-    , DirectorySite
-    , directorySite
-    , dsCurrencyId
-    , dsSettings
-    , dsInterstitialTagFormats
-    , dsKind
-    , dsUrl
-    , dsIdDimensionValue
-    , dsInpageTagFormats
-    , dsActive
-    , dsName
-    , dsId
-    , dsCountryId
-    , dsContactAssignments
-    , dsDescription
-    , dsParentId
-
-    -- ** DirectorySiteContact
-    , DirectorySiteContact
-    , directorySiteContact
-    , dscEmail
-    , dscPhone
-    , dscLastName
-    , dscKind
-    , dscAddress
-    , dscRole
-    , dscFirstName
-    , dscId
-    , dscTitle
-    , dscType
-
-    -- ** DirectorySiteContactAssignment
-    , DirectorySiteContactAssignment
-    , directorySiteContactAssignment
-    , dscaVisibility
-    , dscaContactId
-
-    -- ** DirectorySiteContactAssignmentVisibility
-    , DirectorySiteContactAssignmentVisibility (..)
-
-    -- ** DirectorySiteContactRole
-    , DirectorySiteContactRole (..)
-
-    -- ** DirectorySiteContactType
-    , DirectorySiteContactType (..)
-
-    -- ** DirectorySiteContactsListResponse
-    , DirectorySiteContactsListResponse
-    , directorySiteContactsListResponse
-    , dsclrNextPageToken
-    , dsclrKind
-    , dsclrDirectorySiteContacts
-
-    -- ** DirectorySiteItemInpageTagFormats
-    , DirectorySiteItemInpageTagFormats (..)
-
-    -- ** DirectorySiteItemInterstitialTagFormats
-    , DirectorySiteItemInterstitialTagFormats (..)
-
-    -- ** DirectorySiteSettings
-    , DirectorySiteSettings
-    , directorySiteSettings
-    , dssInterstitialPlacementAccepted
-    , dssDfpSettings
-    , dssVerificationTagOptOut
-    , dssActiveViewOptOut
-    , dssVideoActiveViewOptOut
-    , dssInstreamVideoPlacementAccepted
-    , dssNielsenOcrOptOut
-
-    -- ** DirectorySitesListResponse
-    , DirectorySitesListResponse
-    , directorySitesListResponse
-    , dslrNextPageToken
-    , dslrKind
-    , dslrDirectorySites
-
-    -- ** EventTag
-    , EventTag
-    , eventTag
-    , etStatus
-    , etExcludeFromAdxRequests
-    , etEnabledByDefault
-    , etKind
-    , etCampaignIdDimensionValue
-    , etAdvertiserId
-    , etUrl
-    , etAdvertiserIdDimensionValue
-    , etSslCompliant
-    , etCampaignId
-    , etAccountId
-    , etName
-    , etUrlEscapeLevels
-    , etSiteIds
-    , etId
-    , etSubaccountId
-    , etType
-    , etSiteFilterType
-
-    -- ** EventTagOverride
-    , EventTagOverride
-    , eventTagOverride
-    , etoEnabled
-    , etoId
-
-    -- ** EventTagSiteFilterType
-    , EventTagSiteFilterType (..)
-
-    -- ** EventTagStatus
-    , EventTagStatus (..)
-
-    -- ** EventTagType
-    , EventTagType (..)
-
-    -- ** EventTagsListResponse
-    , EventTagsListResponse
-    , eventTagsListResponse
-    , etlrKind
-    , etlrEventTags
-
-    -- ** File
-    , File
-    , file
-    , fStatus
-    , fEtag
-    , fKind
-    , fUrls
-    , fReportId
-    , fDateRange
-    , fFormat
-    , fLastModifiedTime
-    , fId
-    , fFileName
-
-    -- ** FileFormat
-    , FileFormat (..)
-
-    -- ** FileList
-    , FileList
-    , fileList
-    , flEtag
-    , flNextPageToken
-    , flKind
-    , flItems
-
-    -- ** FileStatus
-    , FileStatus (..)
-
-    -- ** FileUrls
-    , FileUrls
-    , fileUrls
-    , fuBrowserUrl
-    , fuApiUrl
-
-    -- ** Flight
-    , Flight
-    , flight
-    , fRateOrCost
-    , fEndDate
-    , fStartDate
-    , fUnits
-
-    -- ** FloodlightActivitiesGenerateTagResponse
-    , FloodlightActivitiesGenerateTagResponse
-    , floodlightActivitiesGenerateTagResponse
-    , fagtrFloodlightActivityTag
-    , fagtrKind
-
-    -- ** FloodlightActivitiesListResponse
-    , FloodlightActivitiesListResponse
-    , floodlightActivitiesListResponse
-    , falrNextPageToken
-    , falrKind
-    , falrFloodlightActivities
-
-    -- ** FloodlightActivity
-    , FloodlightActivity
-    , floodlightActivity
-    , faCountingMethod
-    , faTagString
-    , faSecure
-    , faExpectedUrl
-    , faFloodlightActivityGroupTagString
-    , faFloodlightConfigurationId
-    , faKind
-    , faImageTagEnabled
-    , faAdvertiserId
-    , faAdvertiserIdDimensionValue
-    , faSslCompliant
-    , faIdDimensionValue
-    , faTagFormat
-    , faCacheBustingType
-    , faAccountId
-    , faName
-    , faPublisherTags
-    , faFloodlightActivityGroupId
-    , faHidden
-    , faFloodlightActivityGroupType
-    , faDefaultTags
-    , faFloodlightActivityGroupName
-    , faId
-    , faSslRequired
-    , faUserDefinedVariableTypes
-    , faSubaccountId
-    , faNotes
-    , faFloodlightConfigurationIdDimensionValue
-
-    -- ** FloodlightActivityCacheBustingType
-    , FloodlightActivityCacheBustingType (..)
-
-    -- ** FloodlightActivityCountingMethod
-    , FloodlightActivityCountingMethod (..)
-
-    -- ** FloodlightActivityDynamicTag
-    , FloodlightActivityDynamicTag
-    , floodlightActivityDynamicTag
-    , fadtTag
-    , fadtName
-    , fadtId
-
-    -- ** FloodlightActivityFloodlightActivityGroupType
-    , FloodlightActivityFloodlightActivityGroupType (..)
-
-    -- ** FloodlightActivityGroup
-    , FloodlightActivityGroup
-    , floodlightActivityGroup
-    , fagTagString
-    , fagFloodlightConfigurationId
-    , fagKind
-    , fagAdvertiserId
-    , fagAdvertiserIdDimensionValue
-    , fagIdDimensionValue
-    , fagAccountId
-    , fagName
-    , fagId
-    , fagSubaccountId
-    , fagType
-    , fagFloodlightConfigurationIdDimensionValue
-
-    -- ** FloodlightActivityGroupType
-    , FloodlightActivityGroupType (..)
-
-    -- ** FloodlightActivityGroupsListResponse
-    , FloodlightActivityGroupsListResponse
-    , floodlightActivityGroupsListResponse
-    , faglrNextPageToken
-    , faglrKind
-    , faglrFloodlightActivityGroups
-
-    -- ** FloodlightActivityItemUserDefinedVariableTypes
-    , FloodlightActivityItemUserDefinedVariableTypes (..)
-
-    -- ** FloodlightActivityPublisherDynamicTag
-    , FloodlightActivityPublisherDynamicTag
-    , floodlightActivityPublisherDynamicTag
-    , fapdtClickThrough
-    , fapdtSiteIdDimensionValue
-    , fapdtDynamicTag
-    , fapdtDirectorySiteId
-    , fapdtSiteId
-    , fapdtViewThrough
-
-    -- ** FloodlightActivityTagFormat
-    , FloodlightActivityTagFormat (..)
-
-    -- ** FloodlightConfiguration
-    , FloodlightConfiguration
-    , floodlightConfiguration
-    , fcTagSettings
-    , fcExposureToConversionEnabled
-    , fcInAppAttributionTrackingEnabled
-    , fcThirdPartyAuthenticationTokens
-    , fcKind
-    , fcAdvertiserId
-    , fcAnalyticsDataSharingEnabled
-    , fcAdvertiserIdDimensionValue
-    , fcIdDimensionValue
-    , fcLookbackConfiguration
-    , fcAccountId
-    , fcId
-    , fcSslRequired
-    , fcNaturalSearchConversionAttributionOption
-    , fcUserDefinedVariableConfigurations
-    , fcSubaccountId
-    , fcFirstDayOfWeek
-    , fcOmnitureSettings
-    , fcStandardVariableTypes
-
-    -- ** FloodlightConfigurationFirstDayOfWeek
-    , FloodlightConfigurationFirstDayOfWeek (..)
-
-    -- ** FloodlightConfigurationItemStandardVariableTypes
-    , FloodlightConfigurationItemStandardVariableTypes (..)
-
-    -- ** FloodlightConfigurationNaturalSearchConversionAttributionOption
-    , FloodlightConfigurationNaturalSearchConversionAttributionOption (..)
-
-    -- ** FloodlightConfigurationsListResponse
-    , FloodlightConfigurationsListResponse
-    , floodlightConfigurationsListResponse
-    , fclrKind
-    , fclrFloodlightConfigurations
-
-    -- ** FloodlightReportCompatibleFields
-    , FloodlightReportCompatibleFields
-    , floodlightReportCompatibleFields
-    , frcfMetrics
-    , frcfKind
-    , frcfDimensionFilters
-    , frcfDimensions
-
-    -- ** FrequencyCap
-    , FrequencyCap
-    , frequencyCap
-    , fcImpressions
-    , fcDuration
-
-    -- ** FsCommand
-    , FsCommand
-    , fsCommand
-    , fcPositionOption
-    , fcLeft
-    , fcWindowHeight
-    , fcWindowWidth
-    , fcTop
-
-    -- ** FsCommandPositionOption
-    , FsCommandPositionOption (..)
-
-    -- ** GeoTargeting
-    , GeoTargeting
-    , geoTargeting
-    , gtRegions
-    , gtCountries
-    , gtCities
-    , gtMetros
-    , gtExcludeCountries
-    , gtPostalCodes
-
-    -- ** InventoryItem
-    , InventoryItem
-    , inventoryItem
-    , iiPlacementStrategyId
-    , iiEstimatedClickThroughRate
-    , iiPricing
-    , iiKind
-    , iiAdvertiserId
-    , iiRfpId
-    , iiContentCategoryId
-    , iiInPlan
-    , iiAccountId
-    , iiName
-    , iiAdSlots
-    , iiNegotiationChannelId
-    , iiLastModifiedInfo
-    , iiId
-    , iiEstimatedConversionRate
-    , iiProjectId
-    , iiSubaccountId
-    , iiOrderId
-    , iiSiteId
-
-    -- ** InventoryItemsListResponse
-    , InventoryItemsListResponse
-    , inventoryItemsListResponse
-    , iilrInventoryItems
-    , iilrNextPageToken
-    , iilrKind
-
-    -- ** KeyValueTargetingExpression
-    , KeyValueTargetingExpression
-    , keyValueTargetingExpression
-    , kvteExpression
-
-    -- ** LandingPage
-    , LandingPage
-    , landingPage
-    , lpKind
-    , lpDefault
-    , lpUrl
-    , lpName
-    , lpId
-
-    -- ** LandingPagesListResponse
-    , LandingPagesListResponse
-    , landingPagesListResponse
-    , lplrLandingPages
-    , lplrKind
-
-    -- ** LastModifiedInfo
-    , LastModifiedInfo
-    , lastModifiedInfo
-    , lmiTime
-
-    -- ** ListPopulationClause
-    , ListPopulationClause
-    , listPopulationClause
-    , lpcTerms
-
-    -- ** ListPopulationRule
-    , ListPopulationRule
-    , listPopulationRule
-    , lprFloodlightActivityName
-    , lprFloodlightActivityId
-    , lprListPopulationClauses
-
-    -- ** ListPopulationTerm
-    , ListPopulationTerm
-    , listPopulationTerm
-    , lptOperator
-    , lptValue
-    , lptVariableFriendlyName
-    , lptNegation
-    , lptVariableName
-    , lptRemarketingListId
-    , lptType
-    , lptContains
-
-    -- ** ListPopulationTermOperator
-    , ListPopulationTermOperator (..)
-
-    -- ** ListPopulationTermType
-    , ListPopulationTermType (..)
-
-    -- ** ListTargetingExpression
-    , ListTargetingExpression
-    , listTargetingExpression
-    , lteExpression
-
-    -- ** LookbackConfiguration
-    , LookbackConfiguration
-    , lookbackConfiguration
-    , lcClickDuration
-    , lcPostImpressionActivitiesDuration
-
-    -- ** Metric
-    , Metric
-    , metric
-    , mKind
-    , mName
-
-    -- ** Metro
-    , Metro
-    , metro
-    , metMetroCode
-    , metKind
-    , metName
-    , metCountryCode
-    , metDmaId
-    , metCountryDartId
-    , metDartId
-
-    -- ** MetrosListResponse
-    , MetrosListResponse
-    , metrosListResponse
-    , mlrKind
-    , mlrMetros
-
-    -- ** MobileCarrier
-    , MobileCarrier
-    , mobileCarrier
-    , mcKind
-    , mcName
-    , mcCountryCode
-    , mcId
-    , mcCountryDartId
-
-    -- ** MobileCarriersListResponse
-    , MobileCarriersListResponse
-    , mobileCarriersListResponse
-    , mclrMobileCarriers
-    , mclrKind
-
-    -- ** ObjectFilter
-    , ObjectFilter
-    , objectFilter
-    , ofStatus
-    , ofKind
-    , ofObjectIds
-
-    -- ** ObjectFilterStatus
-    , ObjectFilterStatus (..)
-
-    -- ** OffsetPosition
-    , OffsetPosition
-    , offsetPosition
-    , opLeft
-    , opTop
-
-    -- ** OmnitureSettings
-    , OmnitureSettings
-    , omnitureSettings
-    , osOmnitureCostDataEnabled
-    , osOmnitureIntegrationEnabled
-
-    -- ** OperatingSystem
-    , OperatingSystem
-    , operatingSystem
-    , osDesktop
-    , osKind
-    , osName
-    , osMobile
-    , osDartId
-
-    -- ** OperatingSystemVersion
-    , OperatingSystemVersion
-    , operatingSystemVersion
-    , osvMinorVersion
-    , osvKind
-    , osvOperatingSystem
-    , osvMajorVersion
-    , osvName
-    , osvId
-
-    -- ** OperatingSystemVersionsListResponse
-    , OperatingSystemVersionsListResponse
-    , operatingSystemVersionsListResponse
-    , osvlrKind
-    , osvlrOperatingSystemVersions
-
-    -- ** OperatingSystemsListResponse
-    , OperatingSystemsListResponse
-    , operatingSystemsListResponse
-    , oslrKind
-    , oslrOperatingSystems
-
-    -- ** OptimizationActivity
-    , OptimizationActivity
-    , optimizationActivity
-    , oaWeight
-    , oaFloodlightActivityId
-    , oaFloodlightActivityIdDimensionValue
+    -- ** CreativeItemBackupImageFeatures
+    , CreativeItemBackupImageFeatures (..)
+
+    -- ** FilesList'SortField
+    , FilesList'SortField (..)
+
+    -- ** CreativeItemCompatibility
+    , CreativeItemCompatibility (..)
+
+    -- ** PlacementTag
+    , PlacementTag
+    , placementTag
+    , ptPlacementId
+    , ptTagDatas
+
+    -- ** RemarketingListsListResponse
+    , RemarketingListsListResponse
+    , remarketingListsListResponse
+    , rllrNextPageToken
+    , rllrRemarketingLists
+    , rllrKind
+
+    -- ** UserRolePermissionGroupsListResponse
+    , UserRolePermissionGroupsListResponse
+    , userRolePermissionGroupsListResponse
+    , urpglrUserRolePermissionGroups
+    , urpglrKind
+
+    -- ** TargetableRemarketingListsList'SortOrder
+    , TargetableRemarketingListsList'SortOrder (..)
+
+    -- ** Activities
+    , Activities
+    , activities
+    , actKind
+    , actMetricNames
+    , actFilters
+
+    -- ** AccountUserProfile
+    , AccountUserProfile
+    , accountUserProfile
+    , aupEmail
+    , aupUserRoleFilter
+    , aupAdvertiserFilter
+    , aupUserRoleId
+    , aupKind
+    , aupLocale
+    , aupSiteFilter
+    , aupTraffickerType
+    , aupActive
+    , aupAccountId
+    , aupName
+    , aupId
+    , aupUserAccessType
+    , aupComments
+    , aupSubaccountId
+    , aupCampaignFilter
+
+    -- ** DateRange
+    , DateRange
+    , dateRange
+    , drKind
+    , drEndDate
+    , drStartDate
+    , drRelativeDateRange
+
+    -- ** SitesList'SortField
+    , SitesList'SortField (..)
 
     -- ** Order
     , Order
@@ -1695,6 +2724,202 @@ module Network.Google.DFAReporting
     , oTermsAndConditions
     , oApproverUserProfileIds
 
+    -- ** ReportFloodlightCriteria
+    , ReportFloodlightCriteria
+    , reportFloodlightCriteria
+    , rfcReportProperties
+    , rfcMetricNames
+    , rfcCustomRichMediaEvents
+    , rfcDimensionFilters
+    , rfcDateRange
+    , rfcFloodlightConfigId
+    , rfcDimensions
+
+    -- ** PlacementStatus
+    , PlacementStatus (..)
+
+    -- ** CreativeGroupsListResponse
+    , CreativeGroupsListResponse
+    , creativeGroupsListResponse
+    , cglrCreativeGroups
+    , cglrNextPageToken
+    , cglrKind
+
+    -- ** CreativeAssetArtworkType
+    , CreativeAssetArtworkType (..)
+
+    -- ** PlacementsGeneratetags'TagFormats
+    , PlacementsGeneratetags'TagFormats (..)
+
+    -- ** InventoryItemsList'SortOrder
+    , InventoryItemsList'SortOrder (..)
+
+    -- ** CreativeAssetMetadata
+    , CreativeAssetMetadata
+    , creativeAssetMetadata
+    , camaKind
+    , camaAssetIdentifier
+    , camaClickTags
+    , camaWarnedValidationRules
+    , camaDetectedFeatures
+
+    -- ** PlacementGroup
+    , PlacementGroup
+    , placementGroup
+    , pg1PlacementStrategyId
+    , pg1SiteIdDimensionValue
+    , pg1PricingSchedule
+    , pg1Kind
+    , pg1CampaignIdDimensionValue
+    , pg1AdvertiserId
+    , pg1AdvertiserIdDimensionValue
+    , pg1CampaignId
+    , pg1IdDimensionValue
+    , pg1PlacementGroupType
+    , pg1ContentCategoryId
+    , pg1DirectorySiteIdDimensionValue
+    , pg1AccountId
+    , pg1Name
+    , pg1DirectorySiteId
+    , pg1CreateInfo
+    , pg1ChildPlacementIds
+    , pg1LastModifiedInfo
+    , pg1Id
+    , pg1PrimaryPlacementId
+    , pg1SubaccountId
+    , pg1ExternalId
+    , pg1Comment
+    , pg1PrimaryPlacementIdDimensionValue
+    , pg1SiteId
+    , pg1Archived
+
+    -- ** CampaignCreativeAssociationsListResponse
+    , CampaignCreativeAssociationsListResponse
+    , campaignCreativeAssociationsListResponse
+    , ccalrCampaignCreativeAssociations
+    , ccalrNextPageToken
+    , ccalrKind
+
+    -- ** CreativeArtworkType
+    , CreativeArtworkType (..)
+
+    -- ** LandingPagesListResponse
+    , LandingPagesListResponse
+    , landingPagesListResponse
+    , lplrLandingPages
+    , lplrKind
+
+    -- ** ConnectionType
+    , ConnectionType
+    , connectionType
+    , conKind
+    , conName
+    , conId
+
+    -- ** UserDefinedVariableConfiguration
+    , UserDefinedVariableConfiguration
+    , userDefinedVariableConfiguration
+    , udvcReportName
+    , udvcDataType
+    , udvcVariableType
+
+    -- ** OmnitureSettings
+    , OmnitureSettings
+    , omnitureSettings
+    , osOmnitureCostDataEnabled
+    , osOmnitureIntegrationEnabled
+
+    -- ** CreativeRotationWeightCalculationStrategy
+    , CreativeRotationWeightCalculationStrategy (..)
+
+    -- ** FrequencyCap
+    , FrequencyCap
+    , frequencyCap
+    , fcImpressions
+    , fcDuration
+
+    -- ** FileFormat
+    , FileFormat (..)
+
+    -- ** MobileCarriersListResponse
+    , MobileCarriersListResponse
+    , mobileCarriersListResponse
+    , mclrMobileCarriers
+    , mclrKind
+
+    -- ** ReportCriteria
+    , ReportCriteria
+    , reportCriteria
+    , rcMetricNames
+    , rcCustomRichMediaEvents
+    , rcDimensionFilters
+    , rcActivities
+    , rcDateRange
+    , rcDimensions
+
+    -- ** UserRolePermission
+    , UserRolePermission
+    , userRolePermission
+    , uKind
+    , uAvailability
+    , uName
+    , uId
+    , uPermissionGroupId
+
+    -- ** ReportsFilesList'SortField
+    , ReportsFilesList'SortField (..)
+
+    -- ** ProjectAudienceAgeGroup
+    , ProjectAudienceAgeGroup (..)
+
+    -- ** EventTag
+    , EventTag
+    , eventTag
+    , etStatus
+    , etExcludeFromAdxRequests
+    , etEnabledByDefault
+    , etKind
+    , etCampaignIdDimensionValue
+    , etAdvertiserId
+    , etUrl
+    , etAdvertiserIdDimensionValue
+    , etSslCompliant
+    , etCampaignId
+    , etAccountId
+    , etName
+    , etUrlEscapeLevels
+    , etSiteIds
+    , etId
+    , etSubaccountId
+    , etType
+    , etSiteFilterType
+
+    -- ** AdsList'Compatibility
+    , AdsList'Compatibility (..)
+
+    -- ** CreativeAssetId
+    , CreativeAssetId
+    , creativeAssetId
+    , caiName
+    , caiType
+
+    -- ** File
+    , File
+    , file
+    , filStatus
+    , filEtag
+    , filKind
+    , filUrls
+    , filReportId
+    , filDateRange
+    , filFormat
+    , filLastModifiedTime
+    , filId
+    , filFileName
+
+    -- ** PricingSchedulePricingType
+    , PricingSchedulePricingType (..)
+
     -- ** OrderContact
     , OrderContact
     , orderContact
@@ -1704,354 +2929,68 @@ module Network.Google.DFAReporting
     , ocContactType
     , ocContactInfo
 
-    -- ** OrderContactContactType
-    , OrderContactContactType (..)
+    -- ** CreativeSettings
+    , CreativeSettings
+    , creativeSettings
+    , csIFrameHeader
+    , csIFrameFooter
 
-    -- ** OrderDocument
-    , OrderDocument
-    , orderDocument
-    , odSigned
-    , odKind
-    , odAdvertiserId
-    , odLastSentTime
-    , odAmendedOrderDocumentId
-    , odLastSentRecipients
-    , odEffectiveDate
-    , odApprovedByUserProfileIds
-    , odAccountId
-    , odId
-    , odProjectId
-    , odTitle
-    , odSubaccountId
-    , odType
-    , odOrderId
-    , odCancelled
-    , odCreatedInfo
+    -- ** CreativeGroupsList'SortField
+    , CreativeGroupsList'SortField (..)
 
-    -- ** OrderDocumentType
-    , OrderDocumentType (..)
+    -- ** ContentCategory
+    , ContentCategory
+    , contentCategory
+    , cccKind
+    , cccAccountId
+    , cccName
+    , cccId
 
-    -- ** OrderDocumentsListResponse
-    , OrderDocumentsListResponse
-    , orderDocumentsListResponse
-    , odlrNextPageToken
-    , odlrKind
-    , odlrOrderDocuments
+    -- ** CreativesListResponse
+    , CreativesListResponse
+    , creativesListResponse
+    , creNextPageToken
+    , creKind
+    , creCreatives
 
-    -- ** OrdersListResponse
-    , OrdersListResponse
-    , ordersListResponse
-    , olrNextPageToken
-    , olrKind
-    , olrOrders
+    -- ** CreativeCustomEventArtworkType
+    , CreativeCustomEventArtworkType (..)
 
-    -- ** PathToConversionReportCompatibleFields
-    , PathToConversionReportCompatibleFields
-    , pathToConversionReportCompatibleFields
-    , ptcrcfMetrics
-    , ptcrcfKind
-    , ptcrcfConversionDimensions
-    , ptcrcfCustomFloodlightVariables
-    , ptcrcfPerInteractionDimensions
+    -- ** Account
+    , Account
+    , account
+    , a1AccountPermissionIds
+    , a1MaximumImageSize
+    , a1CurrencyId
+    , a1ReportsConfiguration
+    , a1NielsenOcrEnabled
+    , a1Kind
+    , a1Locale
+    , a1Active
+    , a1AvailablePermissionIds
+    , a1TeaserSizeLimit
+    , a1ComscoreVceEnabled
+    , a1ActiveViewOptOut
+    , a1Name
+    , a1AccountProfile
+    , a1Id
+    , a1CountryId
+    , a1ActiveAdsLimitTier
+    , a1DefaultCreativeSizeId
+    , a1Description
 
-    -- ** Placement
-    , Placement
-    , placement
-    , pStatus
-    , pPlacementStrategyId
-    , pTagFormats
-    , pSiteIdDimensionValue
-    , pPricingSchedule
-    , pSize
-    , pKind
-    , pKeyName
-    , pCampaignIdDimensionValue
-    , pAdvertiserId
-    , pAdvertiserIdDimensionValue
-    , pCampaignId
-    , pIdDimensionValue
-    , pPrimary
-    , pLookbackConfiguration
-    , pTagSetting
-    , pContentCategoryId
-    , pDirectorySiteIdDimensionValue
-    , pAccountId
-    , pPaymentSource
-    , pName
-    , pDirectorySiteId
-    , pCreateInfo
-    , pLastModifiedInfo
-    , pId
-    , pSslRequired
-    , pSubaccountId
-    , pPlacementGroupIdDimensionValue
-    , pExternalId
-    , pPlacementGroupId
-    , pComment
-    , pSiteId
-    , pCompatibility
-    , pArchived
-    , pPaymentApproved
-    , pPublisherUpdateInfo
+    -- ** AccountUserProfilesListResponse
+    , AccountUserProfilesListResponse
+    , accountUserProfilesListResponse
+    , auplrNextPageToken
+    , auplrAccountUserProfiles
+    , auplrKind
 
-    -- ** PlacementAssignment
-    , PlacementAssignment
-    , placementAssignment
-    , paPlacementId
-    , paPlacementIdDimensionValue
-    , paActive
-    , paSslRequired
+    -- ** AccountUserProfileTraffickerType
+    , AccountUserProfileTraffickerType (..)
 
-    -- ** PlacementCompatibility
-    , PlacementCompatibility (..)
-
-    -- ** PlacementGroup
-    , PlacementGroup
-    , placementGroup
-    , pgPlacementStrategyId
-    , pgSiteIdDimensionValue
-    , pgPricingSchedule
-    , pgKind
-    , pgCampaignIdDimensionValue
-    , pgAdvertiserId
-    , pgAdvertiserIdDimensionValue
-    , pgCampaignId
-    , pgIdDimensionValue
-    , pgPlacementGroupType
-    , pgContentCategoryId
-    , pgDirectorySiteIdDimensionValue
-    , pgAccountId
-    , pgName
-    , pgDirectorySiteId
-    , pgCreateInfo
-    , pgChildPlacementIds
-    , pgLastModifiedInfo
-    , pgId
-    , pgPrimaryPlacementId
-    , pgSubaccountId
-    , pgExternalId
-    , pgComment
-    , pgPrimaryPlacementIdDimensionValue
-    , pgSiteId
-    , pgArchived
-
-    -- ** PlacementGroupPlacementGroupType
-    , PlacementGroupPlacementGroupType (..)
-
-    -- ** PlacementGroupsListResponse
-    , PlacementGroupsListResponse
-    , placementGroupsListResponse
-    , pglrNextPageToken
-    , pglrKind
-    , pglrPlacementGroups
-
-    -- ** PlacementItemTagFormats
-    , PlacementItemTagFormats (..)
-
-    -- ** PlacementPaymentSource
-    , PlacementPaymentSource (..)
-
-    -- ** PlacementStatus
-    , PlacementStatus (..)
-
-    -- ** PlacementStrategiesListResponse
-    , PlacementStrategiesListResponse
-    , placementStrategiesListResponse
-    , pslrPlacementStrategies
-    , pslrNextPageToken
-    , pslrKind
-
-    -- ** PlacementStrategy
-    , PlacementStrategy
-    , placementStrategy
-    , psKind
-    , psAccountId
-    , psName
-    , psId
-
-    -- ** PlacementTag
-    , PlacementTag
-    , placementTag
-    , ptPlacementId
-    , ptTagDatas
-
-    -- ** PlacementsGenerateTagsResponse
-    , PlacementsGenerateTagsResponse
-    , placementsGenerateTagsResponse
-    , pgtrKind
-    , pgtrPlacementTags
-
-    -- ** PlacementsListResponse
-    , PlacementsListResponse
-    , placementsListResponse
-    , plrNextPageToken
-    , plrKind
-    , plrPlacements
-
-    -- ** PlatformType
-    , PlatformType
-    , platformType
-    , ptKind
-    , ptName
-    , ptId
-
-    -- ** PlatformTypesListResponse
-    , PlatformTypesListResponse
-    , platformTypesListResponse
-    , ptlrKind
-    , ptlrPlatformTypes
-
-    -- ** PopupWindowProperties
-    , PopupWindowProperties
-    , popupWindowProperties
-    , pwpOffset
-    , pwpDimension
-    , pwpShowStatusBar
-    , pwpShowMenuBar
-    , pwpPositionType
-    , pwpShowAddressBar
-    , pwpShowScrollBar
-    , pwpShowToolBar
-    , pwpTitle
-
-    -- ** PopupWindowPropertiesPositionType
-    , PopupWindowPropertiesPositionType (..)
-
-    -- ** PostalCode
-    , PostalCode
-    , postalCode
-    , pcKind
-    , pcCode
-    , pcCountryCode
-    , pcId
-    , pcCountryDartId
-
-    -- ** PostalCodesListResponse
-    , PostalCodesListResponse
-    , postalCodesListResponse
-    , pclrKind
-    , pclrPostalCodes
-
-    -- ** Pricing
-    , Pricing
-    , pricing
-    , pEndDate
-    , pStartDate
-    , pGroupType
-    , pPricingType
-    , pFlights
-    , pCapCostType
-
-    -- ** PricingCapCostType
-    , PricingCapCostType (..)
-
-    -- ** PricingGroupType
-    , PricingGroupType (..)
-
-    -- ** PricingPricingType
-    , PricingPricingType (..)
-
-    -- ** PricingSchedule
-    , PricingSchedule
-    , pricingSchedule
-    , psTestingStartDate
-    , psFloodlightActivityId
-    , psEndDate
-    , psDisregardOverdelivery
-    , psStartDate
-    , psCapCostOption
-    , psPricingType
-    , psPricingPeriods
-    , psFlighted
-
-    -- ** PricingScheduleCapCostOption
-    , PricingScheduleCapCostOption (..)
-
-    -- ** PricingSchedulePricingPeriod
-    , PricingSchedulePricingPeriod
-    , pricingSchedulePricingPeriod
-    , psppEndDate
-    , psppRateOrCostNanos
-    , psppStartDate
-    , psppUnits
-    , psppPricingComment
-
-    -- ** PricingSchedulePricingType
-    , PricingSchedulePricingType (..)
-
-    -- ** Project
-    , Project
-    , project
-    , ppTargetClicks
-    , ppClientBillingCode
-    , ppTargetCpmNanos
-    , ppTargetConversions
-    , ppBudget
-    , ppKind
-    , ppAdvertiserId
-    , ppEndDate
-    , ppOverview
-    , ppTargetImpressions
-    , ppStartDate
-    , ppTargetCpcNanos
-    , ppAccountId
-    , ppName
-    , ppLastModifiedInfo
-    , ppId
-    , ppAudienceAgeGroup
-    , ppSubaccountId
-    , ppAudienceGender
-    , ppClientName
-    , ppTargetCpaNanos
-
-    -- ** ProjectAudienceAgeGroup
-    , ProjectAudienceAgeGroup (..)
-
-    -- ** ProjectAudienceGender
-    , ProjectAudienceGender (..)
-
-    -- ** ProjectsListResponse
-    , ProjectsListResponse
-    , projectsListResponse
-    , proNextPageToken
-    , proKind
-    , proProjects
-
-    -- ** ReachReportCompatibleFields
-    , ReachReportCompatibleFields
-    , reachReportCompatibleFields
-    , rrcfMetrics
-    , rrcfReachByFrequencyMetrics
-    , rrcfKind
-    , rrcfDimensionFilters
-    , rrcfPivotedActivityMetrics
-    , rrcfDimensions
-
-    -- ** Recipient
-    , Recipient
-    , recipient
-    , recEmail
-    , recKind
-    , recDeliveryType
-
-    -- ** RecipientDeliveryType
-    , RecipientDeliveryType (..)
-
-    -- ** Region
-    , Region
-    , region
-    , rRegionCode
-    , rKind
-    , rName
-    , rCountryCode
-    , rCountryDartId
-    , rDartId
-
-    -- ** RegionsListResponse
-    , RegionsListResponse
-    , regionsListResponse
-    , rlrKind
-    , rlrRegions
+    -- ** FloodlightActivitiesList'SortOrder
+    , FloodlightActivitiesList'SortOrder (..)
 
     -- ** RemarketingList
     , RemarketingList
@@ -2070,45 +3009,35 @@ module Network.Google.DFAReporting
     , remSubaccountId
     , remDescription
 
-    -- ** RemarketingListListSource
-    , RemarketingListListSource (..)
+    -- ** UserRolePermissionGroup
+    , UserRolePermissionGroup
+    , userRolePermissionGroup
+    , useKind
+    , useName
+    , useId
 
-    -- ** RemarketingListShare
-    , RemarketingListShare
-    , remarketingListShare
-    , rlsSharedAdvertiserIds
-    , rlsKind
-    , rlsRemarketingListId
-    , rlsSharedAccountIds
+    -- ** DeliverySchedule
+    , DeliverySchedule
+    , deliverySchedule
+    , dsHardCutoff
+    , dsPriority
+    , dsImpressionRatio
+    , dsFrequencyCap
 
-    -- ** RemarketingListsListResponse
-    , RemarketingListsListResponse
-    , remarketingListsListResponse
-    , rllrNextPageToken
-    , rllrRemarketingLists
-    , rllrKind
+    -- ** ReportReportPropertiesFloodlightCriteria
+    , ReportReportPropertiesFloodlightCriteria
+    , reportReportPropertiesFloodlightCriteria
+    , rrpfcIncludeUnattributedIPConversions
+    , rrpfcIncludeUnattributedCookieConversions
+    , rrpfcIncludeAttributedIPConversions
 
-    -- ** Report
-    , Report
-    , report
-    , repDelivery
-    , repEtag
-    , repOwnerProfileId
-    , repSchedule
-    , repPathToConversionCriteria
-    , repKind
-    , repFormat
-    , repReachCriteria
-    , repLastModifiedTime
-    , repAccountId
-    , repName
-    , repId
-    , repCrossDimensionReachCriteria
-    , repType
-    , repSubAccountId
-    , repFloodlightCriteria
-    , repCriteria
-    , repFileName
+    -- ** FloodlightReportCompatibleFields
+    , FloodlightReportCompatibleFields
+    , floodlightReportCompatibleFields
+    , frcfMetrics
+    , frcfKind
+    , frcfDimensionFilters
+    , frcfDimensions
 
     -- ** ReportCompatibleFields
     , ReportCompatibleFields
@@ -2119,403 +3048,216 @@ module Network.Google.DFAReporting
     , rcfPivotedActivityMetrics
     , rcfDimensions
 
-    -- ** ReportCriteria
-    , ReportCriteria
-    , reportCriteria
-    , rcMetricNames
-    , rcCustomRichMediaEvents
-    , rcDimensionFilters
-    , rcActivities
-    , rcDateRange
-    , rcDimensions
+    -- ** FileStatus
+    , FileStatus (..)
 
-    -- ** ReportCrossDimensionReachCriteria
-    , ReportCrossDimensionReachCriteria
-    , reportCrossDimensionReachCriteria
-    , rcdrcPivoted
-    , rcdrcBreakdown
-    , rcdrcDimension
-    , rcdrcMetricNames
-    , rcdrcDimensionFilters
-    , rcdrcDateRange
-    , rcdrcOverlapMetricNames
+    -- ** ContentCategoriesList'SortField
+    , ContentCategoriesList'SortField (..)
 
-    -- ** ReportDelivery
-    , ReportDelivery
-    , reportDelivery
-    , rdEmailOwner
-    , rdRecipients
-    , rdMessage
-    , rdEmailOwnerDeliveryType
+    -- ** FloodlightActivityGroupType
+    , FloodlightActivityGroupType (..)
 
-    -- ** ReportDimensionCrossDimensionReachCriteria
-    , ReportDimensionCrossDimensionReachCriteria (..)
+    -- ** EventTagStatus
+    , EventTagStatus (..)
 
-    -- ** ReportEmailOwnerDeliveryTypeDelivery
-    , ReportEmailOwnerDeliveryTypeDelivery (..)
+    -- ** DimensionValueList
+    , DimensionValueList
+    , dimensionValueList
+    , dvlEtag
+    , dvlNextPageToken
+    , dvlKind
+    , dvlItems
 
-    -- ** ReportFloodlightCriteria
-    , ReportFloodlightCriteria
-    , reportFloodlightCriteria
-    , rfcReportProperties
-    , rfcMetricNames
-    , rfcCustomRichMediaEvents
-    , rfcDimensionFilters
-    , rfcDateRange
-    , rfcFloodlightConfigId
-    , rfcDimensions
-
-    -- ** ReportFormat
-    , ReportFormat (..)
-
-    -- ** ReportItemRepeatsOnWeekDaysSchedule
-    , ReportItemRepeatsOnWeekDaysSchedule (..)
-
-    -- ** ReportList
-    , ReportList
-    , reportList
-    , rlEtag
-    , rlNextPageToken
-    , rlKind
-    , rlItems
-
-    -- ** ReportPathToConversionCriteria
-    , ReportPathToConversionCriteria
-    , reportPathToConversionCriteria
-    , rptccReportProperties
-    , rptccMetricNames
-    , rptccCustomRichMediaEvents
-    , rptccDateRange
-    , rptccConversionDimensions
-    , rptccCustomFloodlightVariables
-    , rptccFloodlightConfigId
-    , rptccActivityFilters
-    , rptccPerInteractionDimensions
-
-    -- ** ReportReachCriteria
-    , ReportReachCriteria
-    , reportReachCriteria
-    , rrcReachByFrequencyMetricNames
-    , rrcEnableAllDimensionCombinations
-    , rrcMetricNames
-    , rrcCustomRichMediaEvents
-    , rrcDimensionFilters
-    , rrcActivities
-    , rrcDateRange
-    , rrcDimensions
-
-    -- ** ReportReportPropertiesFloodlightCriteria
-    , ReportReportPropertiesFloodlightCriteria
-    , reportReportPropertiesFloodlightCriteria
-    , rrpfcIncludeUnattributedIPConversions
-    , rrpfcIncludeUnattributedCookieConversions
-    , rrpfcIncludeAttributedIPConversions
-
-    -- ** ReportReportPropertiesPathToConversionCriteria
-    , ReportReportPropertiesPathToConversionCriteria
-    , reportReportPropertiesPathToConversionCriteria
-    , rrpptccMaximumInteractionGap
-    , rrpptccMaximumClickInteractions
-    , rrpptccPivotOnInteractionPath
-    , rrpptccMaximumImpressionInteractions
-    , rrpptccIncludeUnattributedIPConversions
-    , rrpptccImpressionsLookbackWindow
-    , rrpptccClicksLookbackWindow
-    , rrpptccIncludeUnattributedCookieConversions
-    , rrpptccIncludeAttributedIPConversions
-
-    -- ** ReportRunsOnDayOfMonthSchedule
-    , ReportRunsOnDayOfMonthSchedule (..)
-
-    -- ** ReportSchedule
-    , ReportSchedule
-    , reportSchedule
-    , rsEvery
-    , rsActive
-    , rsRepeats
-    , rsStartDate
-    , rsExpirationDate
-    , rsRunsOnDayOfMonth
-    , rsRepeatsOnWeekDays
-
-    -- ** ReportType
-    , ReportType (..)
-
-    -- ** ReportsConfiguration
-    , ReportsConfiguration
-    , reportsConfiguration
-    , rcExposureToConversionEnabled
-    , rcReportGenerationTimeZoneId
-    , rcLookbackConfiguration
-
-    -- ** RichMediaExitOverride
-    , RichMediaExitOverride
-    , richMediaExitOverride
-    , rmeoUseCustomExitUrl
-    , rmeoExitId
-    , rmeoCustomExitUrl
-
-    -- ** Site
-    , Site
-    , site
-    , sKind
-    , sKeyName
-    , sSiteContacts
-    , sSiteSettings
-    , sIdDimensionValue
-    , sDirectorySiteIdDimensionValue
-    , sAccountId
-    , sName
-    , sDirectorySiteId
-    , sId
-    , sSubaccountId
-    , sApproved
-
-    -- ** SiteContact
-    , SiteContact
-    , siteContact
-    , scEmail
-    , scPhone
-    , scLastName
-    , scAddress
-    , scFirstName
-    , scId
-    , scTitle
-    , scContactType
-
-    -- ** SiteContactContactType
-    , SiteContactContactType (..)
-
-    -- ** SiteSettings
-    , SiteSettings
-    , siteSettings
-    , ssDisableNewCookie
-    , ssDisableBrandSafeAds
-    , ssLookbackConfiguration
-    , ssTagSetting
-    , ssActiveViewOptOut
-    , ssCreativeSettings
-
-    -- ** SitesListResponse
-    , SitesListResponse
-    , sitesListResponse
-    , slrNextPageToken
-    , slrKind
-    , slrSites
-
-    -- ** Size
-    , Size
-    , size
-    , ssHeight
-    , ssKind
-    , ssWidth
-    , ssIab
-    , ssId
-
-    -- ** SizesListResponse
-    , SizesListResponse
-    , sizesListResponse
-    , sizKind
-    , sizSizes
-
-    -- ** SortedDimension
-    , SortedDimension
-    , sortedDimension
-    , sdKind
-    , sdSortOrder
-    , sdName
-
-    -- ** SortedDimensionSortOrder
-    , SortedDimensionSortOrder (..)
-
-    -- ** Subaccount
-    , Subaccount
-    , subaccount
-    , subuKind
-    , subuAvailablePermissionIds
-    , subuAccountId
-    , subuName
-    , subuId
-
-    -- ** SubaccountsListResponse
-    , SubaccountsListResponse
-    , subaccountsListResponse
-    , subNextPageToken
-    , subKind
-    , subSubaccounts
-
-    -- ** TagData
-    , TagData
-    , tagData
-    , tdClickTag
-    , tdFormat
-    , tdCreativeId
-    , tdAdId
-    , tdImpressionTag
-
-    -- ** TagDataFormat
-    , TagDataFormat (..)
-
-    -- ** TagSetting
-    , TagSetting
-    , tagSetting
-    , tsKeywordOption
-    , tsIncludeClickThroughUrls
-    , tsIncludeClickTracking
-    , tsAdditionalKeyValues
-
-    -- ** TagSettingKeywordOption
-    , TagSettingKeywordOption (..)
-
-    -- ** TagSettings
-    , TagSettings
-    , tagSettings
-    , tsDynamicTagEnabled
-    , tsImageTagEnabled
-
-    -- ** TargetWindow
-    , TargetWindow
-    , targetWindow
-    , twCustomHtml
-    , twTargetWindowOption
-
-    -- ** TargetWindowTargetWindowOption
-    , TargetWindowTargetWindowOption (..)
-
-    -- ** TargetableRemarketingList
-    , TargetableRemarketingList
-    , targetableRemarketingList
-    , trlListSize
-    , trlLifeSpan
-    , trlKind
-    , trlAdvertiserId
-    , trlAdvertiserIdDimensionValue
-    , trlActive
-    , trlAccountId
-    , trlName
-    , trlListSource
-    , trlId
-    , trlSubaccountId
-    , trlDescription
-
-    -- ** TargetableRemarketingListListSource
-    , TargetableRemarketingListListSource (..)
-
-    -- ** TargetableRemarketingListsListResponse
-    , TargetableRemarketingListsListResponse
-    , targetableRemarketingListsListResponse
-    , trllrNextPageToken
-    , trllrKind
-    , trllrTargetableRemarketingLists
-
-    -- ** TechnologyTargeting
-    , TechnologyTargeting
-    , technologyTargeting
-    , ttMobileCarriers
-    , ttOperatingSystemVersions
-    , ttPlatformTypes
-    , ttBrowsers
-    , ttConnectionTypes
-    , ttOperatingSystems
-
-    -- ** ThirdPartyAuthenticationToken
-    , ThirdPartyAuthenticationToken
-    , thirdPartyAuthenticationToken
-    , tpatValue
-    , tpatName
-
-    -- ** ThirdPartyTrackingUrl
-    , ThirdPartyTrackingUrl
-    , thirdPartyTrackingUrl
-    , tptuUrl
-    , tptuThirdPartyUrlType
-
-    -- ** ThirdPartyTrackingUrlThirdPartyUrlType
-    , ThirdPartyTrackingUrlThirdPartyUrlType (..)
-
-    -- ** UserDefinedVariableConfiguration
-    , UserDefinedVariableConfiguration
-    , userDefinedVariableConfiguration
-    , udvcReportName
-    , udvcDataType
-    , udvcVariableType
-
-    -- ** UserDefinedVariableConfigurationDataType
-    , UserDefinedVariableConfigurationDataType (..)
-
-    -- ** UserDefinedVariableConfigurationVariableType
-    , UserDefinedVariableConfigurationVariableType (..)
-
-    -- ** UserProfile
-    , UserProfile
-    , userProfile
-    , upEtag
-    , upKind
-    , upAccountName
-    , upProfileId
-    , upUserName
-    , upAccountId
-    , upSubAccountName
-    , upSubAccountId
-
-    -- ** UserProfileList
-    , UserProfileList
-    , userProfileList
-    , uplEtag
-    , uplKind
-    , uplItems
-
-    -- ** UserRole
-    , UserRole
-    , userRole
-    , urParentUserRoleId
-    , urKind
-    , urDefaultUserRole
-    , urAccountId
-    , urName
-    , urId
-    , urPermissions
-    , urSubaccountId
-
-    -- ** UserRolePermission
-    , UserRolePermission
-    , userRolePermission
-    , urpKind
-    , urpAvailability
-    , urpName
-    , urpId
-    , urpPermissionGroupId
-
-    -- ** UserRolePermissionAvailability
-    , UserRolePermissionAvailability (..)
-
-    -- ** UserRolePermissionGroup
-    , UserRolePermissionGroup
-    , userRolePermissionGroup
-    , urpgKind
-    , urpgName
-    , urpgId
-
-    -- ** UserRolePermissionGroupsListResponse
-    , UserRolePermissionGroupsListResponse
-    , userRolePermissionGroupsListResponse
-    , urpglrUserRolePermissionGroups
-    , urpglrKind
-
-    -- ** UserRolePermissionsListResponse
-    , UserRolePermissionsListResponse
-    , userRolePermissionsListResponse
-    , urplrKind
-    , urplrUserRolePermissions
-
-    -- ** UserRolesListResponse
-    , UserRolesListResponse
-    , userRolesListResponse
-    , urlrNextPageToken
-    , urlrKind
-    , urlrUserRoles
+    -- ** FilesList'Scope
+    , FilesList'Scope (..)
     ) where
 
+import           Network.Google.API.DFAReporting.AccountActiveAdSummaries.Get
+import           Network.Google.API.DFAReporting.AccountPermissionGroups.Get
+import           Network.Google.API.DFAReporting.AccountPermissionGroups.List
+import           Network.Google.API.DFAReporting.AccountPermissions.Get
+import           Network.Google.API.DFAReporting.AccountPermissions.List
+import           Network.Google.API.DFAReporting.Accounts.Get
+import           Network.Google.API.DFAReporting.Accounts.List
+import           Network.Google.API.DFAReporting.Accounts.Patch
+import           Network.Google.API.DFAReporting.Accounts.Update
+import           Network.Google.API.DFAReporting.AccountUserProfiles.Get
+import           Network.Google.API.DFAReporting.AccountUserProfiles.Insert
+import           Network.Google.API.DFAReporting.AccountUserProfiles.List
+import           Network.Google.API.DFAReporting.AccountUserProfiles.Patch
+import           Network.Google.API.DFAReporting.AccountUserProfiles.Update
+import           Network.Google.API.DFAReporting.Ads.Get
+import           Network.Google.API.DFAReporting.Ads.Insert
+import           Network.Google.API.DFAReporting.Ads.List
+import           Network.Google.API.DFAReporting.Ads.Patch
+import           Network.Google.API.DFAReporting.Ads.Update
+import           Network.Google.API.DFAReporting.AdvertiserGroups.Delete
+import           Network.Google.API.DFAReporting.AdvertiserGroups.Get
+import           Network.Google.API.DFAReporting.AdvertiserGroups.Insert
+import           Network.Google.API.DFAReporting.AdvertiserGroups.List
+import           Network.Google.API.DFAReporting.AdvertiserGroups.Patch
+import           Network.Google.API.DFAReporting.AdvertiserGroups.Update
+import           Network.Google.API.DFAReporting.Advertisers.Get
+import           Network.Google.API.DFAReporting.Advertisers.Insert
+import           Network.Google.API.DFAReporting.Advertisers.List
+import           Network.Google.API.DFAReporting.Advertisers.Patch
+import           Network.Google.API.DFAReporting.Advertisers.Update
+import           Network.Google.API.DFAReporting.Browsers.List
+import           Network.Google.API.DFAReporting.CampaignCreativeAssociations.Insert
+import           Network.Google.API.DFAReporting.CampaignCreativeAssociations.List
+import           Network.Google.API.DFAReporting.Campaigns.Get
+import           Network.Google.API.DFAReporting.Campaigns.Insert
+import           Network.Google.API.DFAReporting.Campaigns.List
+import           Network.Google.API.DFAReporting.Campaigns.Patch
+import           Network.Google.API.DFAReporting.Campaigns.Update
+import           Network.Google.API.DFAReporting.ChangeLogs.Get
+import           Network.Google.API.DFAReporting.ChangeLogs.List
+import           Network.Google.API.DFAReporting.Cities.List
+import           Network.Google.API.DFAReporting.ConnectionTypes.Get
+import           Network.Google.API.DFAReporting.ConnectionTypes.List
+import           Network.Google.API.DFAReporting.ContentCategories.Delete
+import           Network.Google.API.DFAReporting.ContentCategories.Get
+import           Network.Google.API.DFAReporting.ContentCategories.Insert
+import           Network.Google.API.DFAReporting.ContentCategories.List
+import           Network.Google.API.DFAReporting.ContentCategories.Patch
+import           Network.Google.API.DFAReporting.ContentCategories.Update
+import           Network.Google.API.DFAReporting.Countries.Get
+import           Network.Google.API.DFAReporting.Countries.List
+import           Network.Google.API.DFAReporting.CreativeAssets.Insert
+import           Network.Google.API.DFAReporting.CreativeFields.Delete
+import           Network.Google.API.DFAReporting.CreativeFields.Get
+import           Network.Google.API.DFAReporting.CreativeFields.Insert
+import           Network.Google.API.DFAReporting.CreativeFields.List
+import           Network.Google.API.DFAReporting.CreativeFields.Patch
+import           Network.Google.API.DFAReporting.CreativeFields.Update
+import           Network.Google.API.DFAReporting.CreativeFieldValues.Delete
+import           Network.Google.API.DFAReporting.CreativeFieldValues.Get
+import           Network.Google.API.DFAReporting.CreativeFieldValues.Insert
+import           Network.Google.API.DFAReporting.CreativeFieldValues.List
+import           Network.Google.API.DFAReporting.CreativeFieldValues.Patch
+import           Network.Google.API.DFAReporting.CreativeFieldValues.Update
+import           Network.Google.API.DFAReporting.CreativeGroups.Get
+import           Network.Google.API.DFAReporting.CreativeGroups.Insert
+import           Network.Google.API.DFAReporting.CreativeGroups.List
+import           Network.Google.API.DFAReporting.CreativeGroups.Patch
+import           Network.Google.API.DFAReporting.CreativeGroups.Update
+import           Network.Google.API.DFAReporting.Creatives.Get
+import           Network.Google.API.DFAReporting.Creatives.Insert
+import           Network.Google.API.DFAReporting.Creatives.List
+import           Network.Google.API.DFAReporting.Creatives.Patch
+import           Network.Google.API.DFAReporting.Creatives.Update
+import           Network.Google.API.DFAReporting.DimensionValues.Query
+import           Network.Google.API.DFAReporting.DirectorySiteContacts.Get
+import           Network.Google.API.DFAReporting.DirectorySiteContacts.List
+import           Network.Google.API.DFAReporting.DirectorySites.Get
+import           Network.Google.API.DFAReporting.DirectorySites.Insert
+import           Network.Google.API.DFAReporting.DirectorySites.List
+import           Network.Google.API.DFAReporting.EventTags.Delete
+import           Network.Google.API.DFAReporting.EventTags.Get
+import           Network.Google.API.DFAReporting.EventTags.Insert
+import           Network.Google.API.DFAReporting.EventTags.List
+import           Network.Google.API.DFAReporting.EventTags.Patch
+import           Network.Google.API.DFAReporting.EventTags.Update
+import           Network.Google.API.DFAReporting.Files.Get
+import           Network.Google.API.DFAReporting.Files.List
+import           Network.Google.API.DFAReporting.FloodlightActivities.Delete
+import           Network.Google.API.DFAReporting.FloodlightActivities.Generatetag
+import           Network.Google.API.DFAReporting.FloodlightActivities.Get
+import           Network.Google.API.DFAReporting.FloodlightActivities.Insert
+import           Network.Google.API.DFAReporting.FloodlightActivities.List
+import           Network.Google.API.DFAReporting.FloodlightActivities.Patch
+import           Network.Google.API.DFAReporting.FloodlightActivities.Update
+import           Network.Google.API.DFAReporting.FloodlightActivityGroups.Delete
+import           Network.Google.API.DFAReporting.FloodlightActivityGroups.Get
+import           Network.Google.API.DFAReporting.FloodlightActivityGroups.Insert
+import           Network.Google.API.DFAReporting.FloodlightActivityGroups.List
+import           Network.Google.API.DFAReporting.FloodlightActivityGroups.Patch
+import           Network.Google.API.DFAReporting.FloodlightActivityGroups.Update
+import           Network.Google.API.DFAReporting.FloodlightConfigurations.Get
+import           Network.Google.API.DFAReporting.FloodlightConfigurations.List
+import           Network.Google.API.DFAReporting.FloodlightConfigurations.Patch
+import           Network.Google.API.DFAReporting.FloodlightConfigurations.Update
+import           Network.Google.API.DFAReporting.InventoryItems.Get
+import           Network.Google.API.DFAReporting.InventoryItems.List
+import           Network.Google.API.DFAReporting.LandingPages.Delete
+import           Network.Google.API.DFAReporting.LandingPages.Get
+import           Network.Google.API.DFAReporting.LandingPages.Insert
+import           Network.Google.API.DFAReporting.LandingPages.List
+import           Network.Google.API.DFAReporting.LandingPages.Patch
+import           Network.Google.API.DFAReporting.LandingPages.Update
+import           Network.Google.API.DFAReporting.Metros.List
+import           Network.Google.API.DFAReporting.MobileCarriers.Get
+import           Network.Google.API.DFAReporting.MobileCarriers.List
+import           Network.Google.API.DFAReporting.OperatingSystems.Get
+import           Network.Google.API.DFAReporting.OperatingSystems.List
+import           Network.Google.API.DFAReporting.OperatingSystemVersions.Get
+import           Network.Google.API.DFAReporting.OperatingSystemVersions.List
+import           Network.Google.API.DFAReporting.OrderDocuments.Get
+import           Network.Google.API.DFAReporting.OrderDocuments.List
+import           Network.Google.API.DFAReporting.Orders.Get
+import           Network.Google.API.DFAReporting.Orders.List
+import           Network.Google.API.DFAReporting.PlacementGroups.Get
+import           Network.Google.API.DFAReporting.PlacementGroups.Insert
+import           Network.Google.API.DFAReporting.PlacementGroups.List
+import           Network.Google.API.DFAReporting.PlacementGroups.Patch
+import           Network.Google.API.DFAReporting.PlacementGroups.Update
+import           Network.Google.API.DFAReporting.Placements.Generatetags
+import           Network.Google.API.DFAReporting.Placements.Get
+import           Network.Google.API.DFAReporting.Placements.Insert
+import           Network.Google.API.DFAReporting.Placements.List
+import           Network.Google.API.DFAReporting.Placements.Patch
+import           Network.Google.API.DFAReporting.Placements.Update
+import           Network.Google.API.DFAReporting.PlacementStrategies.Delete
+import           Network.Google.API.DFAReporting.PlacementStrategies.Get
+import           Network.Google.API.DFAReporting.PlacementStrategies.Insert
+import           Network.Google.API.DFAReporting.PlacementStrategies.List
+import           Network.Google.API.DFAReporting.PlacementStrategies.Patch
+import           Network.Google.API.DFAReporting.PlacementStrategies.Update
+import           Network.Google.API.DFAReporting.PlatformTypes.Get
+import           Network.Google.API.DFAReporting.PlatformTypes.List
+import           Network.Google.API.DFAReporting.PostalCodes.Get
+import           Network.Google.API.DFAReporting.PostalCodes.List
+import           Network.Google.API.DFAReporting.Projects.Get
+import           Network.Google.API.DFAReporting.Projects.List
+import           Network.Google.API.DFAReporting.Regions.List
+import           Network.Google.API.DFAReporting.RemarketingLists.Get
+import           Network.Google.API.DFAReporting.RemarketingLists.Insert
+import           Network.Google.API.DFAReporting.RemarketingLists.List
+import           Network.Google.API.DFAReporting.RemarketingLists.Patch
+import           Network.Google.API.DFAReporting.RemarketingLists.Update
+import           Network.Google.API.DFAReporting.RemarketingListShares.Get
+import           Network.Google.API.DFAReporting.RemarketingListShares.Patch
+import           Network.Google.API.DFAReporting.RemarketingListShares.Update
+import           Network.Google.API.DFAReporting.Reports.CompatibleFields.Query
+import           Network.Google.API.DFAReporting.Reports.Files.Get
+import           Network.Google.API.DFAReporting.Reports.Files.List
+import           Network.Google.API.DFAReporting.Sites.Get
+import           Network.Google.API.DFAReporting.Sites.Insert
+import           Network.Google.API.DFAReporting.Sites.List
+import           Network.Google.API.DFAReporting.Sites.Patch
+import           Network.Google.API.DFAReporting.Sites.Update
+import           Network.Google.API.DFAReporting.Sizes.Get
+import           Network.Google.API.DFAReporting.Sizes.Insert
+import           Network.Google.API.DFAReporting.Sizes.List
+import           Network.Google.API.DFAReporting.Subaccounts.Get
+import           Network.Google.API.DFAReporting.Subaccounts.Insert
+import           Network.Google.API.DFAReporting.Subaccounts.List
+import           Network.Google.API.DFAReporting.Subaccounts.Patch
+import           Network.Google.API.DFAReporting.Subaccounts.Update
+import           Network.Google.API.DFAReporting.TargetableRemarketingLists.Get
+import           Network.Google.API.DFAReporting.TargetableRemarketingLists.List
+import           Network.Google.API.DFAReporting.UserProfiles.Get
+import           Network.Google.API.DFAReporting.UserProfiles.List
+import           Network.Google.API.DFAReporting.UserRolePermissionGroups.Get
+import           Network.Google.API.DFAReporting.UserRolePermissionGroups.List
+import           Network.Google.API.DFAReporting.UserRolePermissions.Get
+import           Network.Google.API.DFAReporting.UserRolePermissions.List
+import           Network.Google.API.DFAReporting.UserRoles.Delete
+import           Network.Google.API.DFAReporting.UserRoles.Get
+import           Network.Google.API.DFAReporting.UserRoles.Insert
+import           Network.Google.API.DFAReporting.UserRoles.List
+import           Network.Google.API.DFAReporting.UserRoles.Patch
+import           Network.Google.API.DFAReporting.UserRoles.Update
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
@@ -2524,3830 +3266,191 @@ TODO
 -}
 
 type DFAReporting =
-     InventoryItemsAPI :<|> PlacementStrategiesAPI :<|>
-       CampaignCreativeAssociationsAPI
-       :<|> CreativeGroupsAPI
-       :<|> MobileCarriersAPI
-       :<|> LandingPagesAPI
-       :<|> RemarketingListSharesAPI
-       :<|> AccountActiveAdSummariesAPI
-       :<|> UserRolePermissionGroupsAPI
-       :<|> RemarketingListsAPI
-       :<|> AccountsAPI
-       :<|> ReportsAPI
-       :<|> CampaignsAPI
-       :<|> AccountUserProfilesAPI
-       :<|> CreativesAPI
-       :<|> DimensionValuesAPI
-       :<|> FloodlightConfigurationsAPI
-       :<|> RegionsAPI
-       :<|> FloodlightActivitiesAPI
-       :<|> AccountPermissionGroupsAPI
-       :<|> AdvertisersAPI
-       :<|> CountriesAPI
-       :<|> UserRolesAPI
-       :<|> UserProfilesAPI
-       :<|> OperatingSystemVersionsAPI
-       :<|> AccountPermissionsAPI
-       :<|> CitiesAPI
-       :<|> ChangeLogsAPI
-       :<|> TargetableRemarketingListsAPI
-       :<|> PlatformTypesAPI
-       :<|> ContentCategoriesAPI
-       :<|> BrowsersAPI
-       :<|> PlacementsAPI
-       :<|> MetrosAPI
-       :<|> CreativeFieldsAPI
-       :<|> OrderDocumentsAPI
-       :<|> FilesAPI
-       :<|> ConnectionTypesAPI
-       :<|> PlacementGroupsAPI
-       :<|> EventTagsAPI
-       :<|> OrdersAPI
-       :<|> UserRolePermissionsAPI
-       :<|> CreativeAssetsAPI
-       :<|> SitesAPI
-       :<|> OperatingSystemsAPI
-       :<|> PostalCodesAPI
-       :<|> SizesAPI
-       :<|> AdsAPI
-       :<|> ProjectsAPI
-       :<|> SubaccountsAPI
-       :<|> AdvertiserGroupsAPI
-       :<|> CreativeFieldValuesAPI
-       :<|> DirectorySiteContactsAPI
-       :<|> DirectorySitesAPI
-       :<|> FloodlightActivityGroupsAPI
-
-type InventoryItemsAPI =
-     InventoryItemsList :<|> InventoryItemsGet
-
--- | Retrieves a list of inventory items, possibly filtered.
-type InventoryItemsList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "projects" :>
-               Capture "projectId" Int64 :>
-                 "inventoryItems" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "ids" Int64 :>
-                           QueryParam "sortOrder" Text :>
-                             QueryParam "inPlan" Bool :>
-                               QueryParam "key" Text :>
-                                 QueryParam "pageToken" Text :>
-                                   QueryParam "sortField" Text :>
-                                     QueryParam "oauth_token" Text :>
-                                       QueryParam "orderId" Int64 :>
-                                         QueryParam "siteId" Int64 :>
-                                           QueryParam "maxResults" Int32 :>
-                                             QueryParam "fields" Text :>
-                                               QueryParam "alt" Text :>
-                                                 Get '[JSON]
-                                                   InventoryItemsListResponse
-
--- | Gets one inventory item by ID.
-type InventoryItemsGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "projects" :>
-               Capture "projectId" Int64 :>
-                 "inventoryItems" :>
-                   Capture "id" Int64 :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   Get '[JSON] InventoryItem
-
-type PlacementStrategiesAPI =
-     PlacementStrategiesInsert :<|>
-       PlacementStrategiesList
-       :<|> PlacementStrategiesPatch
-       :<|> PlacementStrategiesGet
-       :<|> PlacementStrategiesDelete
-       :<|> PlacementStrategiesUpdate
-
--- | Inserts a new placement strategy.
-type PlacementStrategiesInsert =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "placementStrategies" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Post '[JSON] PlacementStrategy
-
--- | Retrieves a list of placement strategies, possibly filtered.
-type PlacementStrategiesList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "placementStrategies" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "searchString" Text :>
-                       QueryParam "ids" Int64 :>
-                         QueryParam "sortOrder" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "sortField" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "maxResults" Int32 :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "alt" Text :>
-                                         Get '[JSON]
-                                           PlacementStrategiesListResponse
-
--- | Updates an existing placement strategy. This method supports patch
--- semantics.
-type PlacementStrategiesPatch =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "placementStrategies" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "id" Int64 :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Patch '[JSON] PlacementStrategy
-
--- | Gets one placement strategy by ID.
-type PlacementStrategiesGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "placementStrategies" :>
-               Capture "id" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Get '[JSON] PlacementStrategy
-
--- | Deletes an existing placement strategy.
-type PlacementStrategiesDelete =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "placementStrategies" :>
-               Capture "id" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Updates an existing placement strategy.
-type PlacementStrategiesUpdate =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "placementStrategies" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Put '[JSON] PlacementStrategy
-
-type CampaignCreativeAssociationsAPI =
-     CampaignCreativeAssociationsInsert :<|>
-       CampaignCreativeAssociationsList
-
--- | Associates a creative with the specified campaign. This method creates a
--- default ad with dimensions matching the creative in the campaign if such
--- a default ad does not exist already.
-type CampaignCreativeAssociationsInsert =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "campaigns" :>
-               Capture "campaignId" Int64 :>
-                 "campaignCreativeAssociations" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Post '[JSON] CampaignCreativeAssociation
-
--- | Retrieves the list of creative IDs associated with the specified
--- campaign.
-type CampaignCreativeAssociationsList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "campaigns" :>
-               Capture "campaignId" Int64 :>
-                 "campaignCreativeAssociations" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "sortOrder" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "maxResults" Int32 :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "alt" Text :>
-                                       Get '[JSON]
-                                         CampaignCreativeAssociationsListResponse
-
-type CreativeGroupsAPI =
-     CreativeGroupsInsert :<|> CreativeGroupsList :<|>
-       CreativeGroupsPatch
-       :<|> CreativeGroupsGet
-       :<|> CreativeGroupsUpdate
-
--- | Inserts a new creative group.
-type CreativeGroupsInsert =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "creativeGroups" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] CreativeGroup
-
--- | Retrieves a list of creative groups, possibly filtered.
-type CreativeGroupsList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "creativeGroups" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "searchString" Text :>
-                       QueryParam "ids" Int64 :>
-                         QueryParam "sortOrder" Text :>
-                           QueryParam "groupNumber" Int32 :>
-                             QueryParam "key" Text :>
-                               QueryParam "pageToken" Text :>
-                                 QueryParam "sortField" Text :>
-                                   QueryParam "oauth_token" Text :>
-                                     QueryParam "advertiserIds" Int64 :>
-                                       QueryParam "maxResults" Int32 :>
-                                         QueryParam "fields" Text :>
-                                           QueryParam "alt" Text :>
-                                             Get '[JSON]
-                                               CreativeGroupsListResponse
-
--- | Updates an existing creative group. This method supports patch
--- semantics.
-type CreativeGroupsPatch =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "creativeGroups" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "id" Int64 :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Patch '[JSON] CreativeGroup
-
--- | Gets one creative group by ID.
-type CreativeGroupsGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "creativeGroups" :>
-               Capture "id" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] CreativeGroup
-
--- | Updates an existing creative group.
-type CreativeGroupsUpdate =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "creativeGroups" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Put '[JSON] CreativeGroup
-
-type MobileCarriersAPI =
-     MobileCarriersList :<|> MobileCarriersGet
-
--- | Retrieves a list of mobile carriers.
-type MobileCarriersList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "mobileCarriers" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Get '[JSON] MobileCarriersListResponse
-
--- | Gets one mobile carrier by ID.
-type MobileCarriersGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "mobileCarriers" :>
-               Capture "id" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] MobileCarrier
-
-type LandingPagesAPI =
-     LandingPagesInsert :<|> LandingPagesList :<|>
-       LandingPagesPatch
-       :<|> LandingPagesGet
-       :<|> LandingPagesDelete
-       :<|> LandingPagesUpdate
-
--- | Inserts a new landing page for the specified campaign.
-type LandingPagesInsert =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "campaigns" :>
-               Capture "campaignId" Int64 :>
-                 "landingPages" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Post '[JSON] LandingPage
-
--- | Retrieves the list of landing pages for the specified campaign.
-type LandingPagesList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "campaigns" :>
-               Capture "campaignId" Int64 :>
-                 "landingPages" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Get '[JSON] LandingPagesListResponse
-
--- | Updates an existing campaign landing page. This method supports patch
--- semantics.
-type LandingPagesPatch =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "campaigns" :>
-               Capture "campaignId" Int64 :>
-                 "landingPages" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "id" Int64 :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   Patch '[JSON] LandingPage
-
--- | Gets one campaign landing page by ID.
-type LandingPagesGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "campaigns" :>
-               Capture "campaignId" Int64 :>
-                 "landingPages" :>
-                   Capture "id" Int64 :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   Get '[JSON] LandingPage
-
--- | Deletes an existing campaign landing page.
-type LandingPagesDelete =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "campaigns" :>
-               Capture "campaignId" Int64 :>
-                 "landingPages" :>
-                   Capture "id" Int64 :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Updates an existing campaign landing page.
-type LandingPagesUpdate =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "campaigns" :>
-               Capture "campaignId" Int64 :>
-                 "landingPages" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Put '[JSON] LandingPage
-
-type RemarketingListSharesAPI =
-     RemarketingListSharesPatch :<|>
-       RemarketingListSharesGet
-       :<|> RemarketingListSharesUpdate
-
--- | Updates an existing remarketing list share. This method supports patch
--- semantics.
-type RemarketingListSharesPatch =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "remarketingListShares" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "remarketingListId" Int64 :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Patch '[JSON] RemarketingListShare
-
--- | Gets one remarketing list share by remarketing list ID.
-type RemarketingListSharesGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "remarketingListShares" :>
-               Capture "remarketingListId" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Get '[JSON] RemarketingListShare
-
--- | Updates an existing remarketing list share.
-type RemarketingListSharesUpdate =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "remarketingListShares" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Put '[JSON] RemarketingListShare
-
-type AccountActiveAdSummariesAPI =
-     AccountActiveAdSummariesGet
-
--- | Gets the account\'s active ad summary by account ID.
-type AccountActiveAdSummariesGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "accountActiveAdSummaries" :>
-               Capture "summaryAccountId" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Get '[JSON] AccountActiveAdSummary
-
-type UserRolePermissionGroupsAPI =
-     UserRolePermissionGroupsList :<|>
-       UserRolePermissionGroupsGet
-
--- | Gets a list of all supported user role permission groups.
-type UserRolePermissionGroupsList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "userRolePermissionGroups" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Get '[JSON] UserRolePermissionGroupsListResponse
-
--- | Gets one user role permission group by ID.
-type UserRolePermissionGroupsGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "userRolePermissionGroups" :>
-               Capture "id" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Get '[JSON] UserRolePermissionGroup
-
-type RemarketingListsAPI =
-     RemarketingListsInsert :<|> RemarketingListsList :<|>
-       RemarketingListsPatch
-       :<|> RemarketingListsGet
-       :<|> RemarketingListsUpdate
-
--- | Inserts a new remarketing list.
-type RemarketingListsInsert =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "remarketingLists" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] RemarketingList
-
--- | Retrieves a list of remarketing lists, possibly filtered.
-type RemarketingListsList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "remarketingLists" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "floodlightActivityId" Int64 :>
-                       QueryParam "advertiserId" Int64 :>
-                         QueryParam "sortOrder" Text :>
-                           QueryParam "active" Bool :>
-                             QueryParam "key" Text :>
-                               QueryParam "name" Text :>
-                                 QueryParam "pageToken" Text :>
-                                   QueryParam "sortField" Text :>
-                                     QueryParam "oauth_token" Text :>
-                                       QueryParam "maxResults" Int32 :>
-                                         QueryParam "fields" Text :>
-                                           QueryParam "alt" Text :>
-                                             Get '[JSON]
-                                               RemarketingListsListResponse
-
--- | Updates an existing remarketing list. This method supports patch
--- semantics.
-type RemarketingListsPatch =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "remarketingLists" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "id" Int64 :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Patch '[JSON] RemarketingList
-
--- | Gets one remarketing list by ID.
-type RemarketingListsGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "remarketingLists" :>
-               Capture "id" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Get '[JSON] RemarketingList
-
--- | Updates an existing remarketing list.
-type RemarketingListsUpdate =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "remarketingLists" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Put '[JSON] RemarketingList
-
-type AccountsAPI =
-     AccountsList :<|> AccountsPatch :<|> AccountsGet :<|>
-       AccountsUpdate
-
--- | Retrieves the list of accounts, possibly filtered.
-type AccountsList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "accounts" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "searchString" Text :>
-                       QueryParam "ids" Int64 :>
-                         QueryParam "sortOrder" Text :>
-                           QueryParam "active" Bool :>
-                             QueryParam "key" Text :>
-                               QueryParam "pageToken" Text :>
-                                 QueryParam "sortField" Text :>
-                                   QueryParam "oauth_token" Text :>
-                                     QueryParam "maxResults" Int32 :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "alt" Text :>
-                                           Get '[JSON] AccountsListResponse
-
--- | Updates an existing account. This method supports patch semantics.
-type AccountsPatch =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "accounts" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "id" Int64 :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Patch '[JSON] Account
-
--- | Gets one account by ID.
-type AccountsGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "accounts" :>
-               Capture "id" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] Account
-
--- | Updates an existing account.
-type AccountsUpdate =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "accounts" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Put '[JSON] Account
-
-type ReportsAPI = CompatibleFieldsAPI :<|> FilesAPI
-
-type CompatibleFieldsAPI = CompatibleFieldsQuery
-
--- | Returns the fields that are compatible to be selected in the respective
--- sections of a report criteria, given the fields already selected in the
--- input report and user permissions.
-type CompatibleFieldsQuery =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "reports" :>
-               "compatiblefields" :>
-                 "query" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Post '[JSON] CompatibleFields
-
-type FilesAPI = FilesList :<|> FilesGet
-
--- | Lists files for a report.
-type FilesList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "reports" :>
-               Capture "reportId" Int64 :>
-                 "files" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "sortOrder" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "sortField" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "maxResults" Int32 :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "alt" Text :>
-                                         Get '[JSON] FileList
-
--- | Retrieves a report file.
-type FilesGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "reports" :>
-               Capture "reportId" Int64 :>
-                 "files" :>
-                   Capture "fileId" Int64 :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Get '[JSON] File
-
-type CampaignsAPI =
-     CampaignsInsert :<|> CampaignsList :<|>
-       CampaignsPatch
-       :<|> CampaignsGet
-       :<|> CampaignsUpdate
-
--- | Inserts a new campaign.
-type CampaignsInsert =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "campaigns" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "defaultLandingPageUrl" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "defaultLandingPageName" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Post '[JSON] Campaign
-
--- | Retrieves a list of campaigns, possibly filtered.
-type CampaignsList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "campaigns" :>
-               QueryParam "excludedIds" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "searchString" Text :>
-                         QueryParam "ids" Int64 :>
-                           QueryParam "sortOrder" Text :>
-                             QueryParam "advertiserGroupIds" Int64 :>
-                               QueryParam "key" Text :>
-                                 QueryParam "atLeastOneOptimizationActivity"
-                                   Bool
-                                   :>
-                                   QueryParam "overriddenEventTagId" Int64 :>
-                                     QueryParam "pageToken" Text :>
-                                       QueryParam "sortField" Text :>
-                                         QueryParam "subaccountId" Int64 :>
-                                           QueryParam "oauth_token" Text :>
-                                             QueryParam "advertiserIds" Int64 :>
-                                               QueryParam "archived" Bool :>
-                                                 QueryParam "maxResults" Int32
-                                                   :>
-                                                   QueryParam "fields" Text :>
-                                                     QueryParam "alt" Text :>
-                                                       Get '[JSON]
-                                                         CampaignsListResponse
-
--- | Updates an existing campaign. This method supports patch semantics.
-type CampaignsPatch =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "campaigns" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "id" Int64 :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Patch '[JSON] Campaign
-
--- | Gets one campaign by ID.
-type CampaignsGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "campaigns" :>
-               Capture "id" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] Campaign
-
--- | Updates an existing campaign.
-type CampaignsUpdate =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "campaigns" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Put '[JSON] Campaign
-
-type AccountUserProfilesAPI =
-     AccountUserProfilesInsert :<|>
-       AccountUserProfilesList
-       :<|> AccountUserProfilesPatch
-       :<|> AccountUserProfilesGet
-       :<|> AccountUserProfilesUpdate
-
--- | Inserts a new account user profile.
-type AccountUserProfilesInsert =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "accountUserProfiles" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Post '[JSON] AccountUserProfile
-
--- | Retrieves a list of account user profiles, possibly filtered.
-type AccountUserProfilesList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "accountUserProfiles" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userRoleId" Int64 :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "searchString" Text :>
-                         QueryParam "ids" Int64 :>
-                           QueryParam "sortOrder" Text :>
-                             QueryParam "active" Bool :>
-                               QueryParam "key" Text :>
-                                 QueryParam "pageToken" Text :>
-                                   QueryParam "sortField" Text :>
-                                     QueryParam "subaccountId" Int64 :>
-                                       QueryParam "oauth_token" Text :>
-                                         QueryParam "maxResults" Int32 :>
-                                           QueryParam "fields" Text :>
-                                             QueryParam "alt" Text :>
-                                               Get '[JSON]
-                                                 AccountUserProfilesListResponse
-
--- | Updates an existing account user profile. This method supports patch
--- semantics.
-type AccountUserProfilesPatch =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "accountUserProfiles" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "id" Int64 :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Patch '[JSON] AccountUserProfile
-
--- | Gets one account user profile by ID.
-type AccountUserProfilesGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "accountUserProfiles" :>
-               Capture "id" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Get '[JSON] AccountUserProfile
-
--- | Updates an existing account user profile.
-type AccountUserProfilesUpdate =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "accountUserProfiles" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Put '[JSON] AccountUserProfile
-
-type CreativesAPI =
-     CreativesInsert :<|> CreativesList :<|>
-       CreativesPatch
-       :<|> CreativesGet
-       :<|> CreativesUpdate
-
--- | Inserts a new creative.
-type CreativesInsert =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "creatives" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] Creative
-
--- | Retrieves a list of creatives, possibly filtered.
-type CreativesList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "creatives" :>
-               QueryParam "renderingIds" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "advertiserId" Int64 :>
-                         QueryParam "searchString" Text :>
-                           QueryParam "sizeIds" Int64 :>
-                             QueryParam "companionCreativeIds" Int64 :>
-                               QueryParam "campaignId" Int64 :>
-                                 QueryParam "types" Text :>
-                                   QueryParam "ids" Int64 :>
-                                     QueryParam "sortOrder" Text :>
-                                       QueryParam "active" Bool :>
-                                         QueryParam "key" Text :>
-                                           QueryParam "creativeFieldIds" Int64
-                                             :>
-                                             QueryParam "pageToken" Text :>
-                                               QueryParam "sortField" Text :>
-                                                 QueryParam "oauth_token" Text
-                                                   :>
-                                                   QueryParam "studioCreativeId"
-                                                     Int64
-                                                     :>
-                                                     QueryParam "archived" Bool
-                                                       :>
-                                                       QueryParam "maxResults"
-                                                         Int32
-                                                         :>
-                                                         QueryParam "fields"
-                                                           Text
-                                                           :>
-                                                           QueryParam "alt" Text
-                                                             :>
-                                                             Get '[JSON]
-                                                               CreativesListResponse
-
--- | Updates an existing creative. This method supports patch semantics.
-type CreativesPatch =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "creatives" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "id" Int64 :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Patch '[JSON] Creative
-
--- | Gets one creative by ID.
-type CreativesGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "creatives" :>
-               Capture "id" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] Creative
-
--- | Updates an existing creative.
-type CreativesUpdate =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "creatives" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Put '[JSON] Creative
-
-type DimensionValuesAPI = DimensionValuesQuery
-
--- | Retrieves list of report dimension values for a list of filters.
-type DimensionValuesQuery =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "dimensionvalues" :>
-               "query" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "maxResults" Int32 :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   Post '[JSON] DimensionValueList
-
-type FloodlightConfigurationsAPI =
-     FloodlightConfigurationsList :<|>
-       FloodlightConfigurationsPatch
-       :<|> FloodlightConfigurationsGet
-       :<|> FloodlightConfigurationsUpdate
-
--- | Retrieves a list of floodlight configurations, possibly filtered.
-type FloodlightConfigurationsList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "floodlightConfigurations" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "ids" Int64 :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Get '[JSON] FloodlightConfigurationsListResponse
-
--- | Updates an existing floodlight configuration. This method supports patch
--- semantics.
-type FloodlightConfigurationsPatch =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "floodlightConfigurations" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "id" Int64 :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Patch '[JSON] FloodlightConfiguration
-
--- | Gets one floodlight configuration by ID.
-type FloodlightConfigurationsGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "floodlightConfigurations" :>
-               Capture "id" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Get '[JSON] FloodlightConfiguration
-
--- | Updates an existing floodlight configuration.
-type FloodlightConfigurationsUpdate =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "floodlightConfigurations" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Put '[JSON] FloodlightConfiguration
-
-type RegionsAPI = RegionsList
-
--- | Retrieves a list of regions.
-type RegionsList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "regions" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Get '[JSON] RegionsListResponse
-
-type FloodlightActivitiesAPI =
-     FloodlightActivitiesInsert :<|>
-       FloodlightActivitiesList
-       :<|> FloodlightActivitiesPatch
-       :<|> FloodlightActivitiesGet
-       :<|> FloodlightActivitiesGeneratetag
-       :<|> FloodlightActivitiesDelete
-       :<|> FloodlightActivitiesUpdate
-
--- | Inserts a new floodlight activity.
-type FloodlightActivitiesInsert =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "floodlightActivities" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Post '[JSON] FloodlightActivity
-
--- | Retrieves a list of floodlight activities, possibly filtered.
-type FloodlightActivitiesList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "floodlightActivities" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "tagString" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "floodlightActivityGroupTagString" Text :>
-                       QueryParam "floodlightConfigurationId" Int64 :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "advertiserId" Int64 :>
-                             QueryParam "searchString" Text :>
-                               QueryParam "ids" Int64 :>
-                                 QueryParam "floodlightActivityGroupIds" Int64
-                                   :>
-                                   QueryParam "sortOrder" Text :>
-                                     QueryParam "key" Text :>
-                                       QueryParam "floodlightActivityGroupType"
-                                         Text
-                                         :>
-                                         QueryParam
-                                           "floodlightActivityGroupName"
-                                           Text
-                                           :>
-                                           QueryParam "pageToken" Text :>
-                                             QueryParam "sortField" Text :>
-                                               QueryParam "oauth_token" Text :>
-                                                 QueryParam "maxResults" Int32
-                                                   :>
-                                                   QueryParam "fields" Text :>
-                                                     QueryParam "alt" Text :>
-                                                       Get '[JSON]
-                                                         FloodlightActivitiesListResponse
-
--- | Updates an existing floodlight activity. This method supports patch
--- semantics.
-type FloodlightActivitiesPatch =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "floodlightActivities" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "id" Int64 :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Patch '[JSON] FloodlightActivity
-
--- | Gets one floodlight activity by ID.
-type FloodlightActivitiesGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "floodlightActivities" :>
-               Capture "id" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Get '[JSON] FloodlightActivity
-
--- | Generates a tag for a floodlight activity.
-type FloodlightActivitiesGeneratetag =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "floodlightActivities" :>
-               "generatetag" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "floodlightActivityId" Int64 :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Post '[JSON]
-                                   FloodlightActivitiesGenerateTagResponse
-
--- | Deletes an existing floodlight activity.
-type FloodlightActivitiesDelete =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "floodlightActivities" :>
-               Capture "id" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Updates an existing floodlight activity.
-type FloodlightActivitiesUpdate =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "floodlightActivities" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Put '[JSON] FloodlightActivity
-
-type AccountPermissionGroupsAPI =
-     AccountPermissionGroupsList :<|>
-       AccountPermissionGroupsGet
-
--- | Retrieves the list of account permission groups.
-type AccountPermissionGroupsList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "accountPermissionGroups" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Get '[JSON] AccountPermissionGroupsListResponse
-
--- | Gets one account permission group by ID.
-type AccountPermissionGroupsGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "accountPermissionGroups" :>
-               Capture "id" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Get '[JSON] AccountPermissionGroup
-
-type AdvertisersAPI =
-     AdvertisersInsert :<|> AdvertisersList :<|>
-       AdvertisersPatch
-       :<|> AdvertisersGet
-       :<|> AdvertisersUpdate
-
--- | Inserts a new advertiser.
-type AdvertisersInsert =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "advertisers" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] Advertiser
-
--- | Retrieves a list of advertisers, possibly filtered.
-type AdvertisersList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "advertisers" :>
-               QueryParam "status" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "onlyParent" Bool :>
-                         QueryParam "searchString" Text :>
-                           QueryParam "ids" Int64 :>
-                             QueryParam "includeAdvertisersWithoutGroupsOnly"
-                               Bool
-                               :>
-                               QueryParam "sortOrder" Text :>
-                                 QueryParam "advertiserGroupIds" Int64 :>
-                                   QueryParam "key" Text :>
-                                     QueryParam "pageToken" Text :>
-                                       QueryParam "sortField" Text :>
-                                         QueryParam "subaccountId" Int64 :>
-                                           QueryParam "oauth_token" Text :>
-                                             QueryParam
-                                               "floodlightConfigurationIds"
-                                               Int64
-                                               :>
-                                               QueryParam "maxResults" Int32 :>
-                                                 QueryParam "fields" Text :>
-                                                   QueryParam "alt" Text :>
-                                                     Get '[JSON]
-                                                       AdvertisersListResponse
-
--- | Updates an existing advertiser. This method supports patch semantics.
-type AdvertisersPatch =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "advertisers" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "id" Int64 :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Patch '[JSON] Advertiser
-
--- | Gets one advertiser by ID.
-type AdvertisersGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "advertisers" :>
-               Capture "id" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] Advertiser
-
--- | Updates an existing advertiser.
-type AdvertisersUpdate =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "advertisers" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Put '[JSON] Advertiser
-
-type CountriesAPI = CountriesList :<|> CountriesGet
-
--- | Retrieves a list of countries.
-type CountriesList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "countries" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Get '[JSON] CountriesListResponse
-
--- | Gets one country by ID.
-type CountriesGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "countries" :>
-               Capture "dartId" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] Country
-
-type UserRolesAPI =
-     UserRolesInsert :<|> UserRolesList :<|>
-       UserRolesPatch
-       :<|> UserRolesGet
-       :<|> UserRolesDelete
-       :<|> UserRolesUpdate
-
--- | Inserts a new user role.
-type UserRolesInsert =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "userRoles" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] UserRole
-
--- | Retrieves a list of user roles, possibly filtered.
-type UserRolesList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "userRoles" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "searchString" Text :>
-                       QueryParam "ids" Int64 :>
-                         QueryParam "sortOrder" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "accountUserRoleOnly" Bool :>
-                               QueryParam "pageToken" Text :>
-                                 QueryParam "sortField" Text :>
-                                   QueryParam "subaccountId" Int64 :>
-                                     QueryParam "oauth_token" Text :>
-                                       QueryParam "maxResults" Int32 :>
-                                         QueryParam "fields" Text :>
-                                           QueryParam "alt" Text :>
-                                             Get '[JSON] UserRolesListResponse
-
--- | Updates an existing user role. This method supports patch semantics.
-type UserRolesPatch =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "userRoles" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "id" Int64 :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Patch '[JSON] UserRole
-
--- | Gets one user role by ID.
-type UserRolesGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "userRoles" :>
-               Capture "id" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] UserRole
-
--- | Deletes an existing user role.
-type UserRolesDelete =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "userRoles" :>
-               Capture "id" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Updates an existing user role.
-type UserRolesUpdate =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "userRoles" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Put '[JSON] UserRole
-
-type UserProfilesAPI =
-     UserProfilesList :<|> UserProfilesGet
-
--- | Retrieves list of user profiles for a user.
-type UserProfilesList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "alt" Text :> Get '[JSON] UserProfileList
-
--- | Gets one user profile by ID.
-type UserProfilesGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Get '[JSON] UserProfile
-
-type OperatingSystemVersionsAPI =
-     OperatingSystemVersionsList :<|>
-       OperatingSystemVersionsGet
-
--- | Retrieves a list of operating system versions.
-type OperatingSystemVersionsList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "operatingSystemVersions" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Get '[JSON] OperatingSystemVersionsListResponse
-
--- | Gets one operating system version by ID.
-type OperatingSystemVersionsGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "operatingSystemVersions" :>
-               Capture "id" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Get '[JSON] OperatingSystemVersion
-
-type AccountPermissionsAPI =
-     AccountPermissionsList :<|> AccountPermissionsGet
-
--- | Retrieves the list of account permissions.
-type AccountPermissionsList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "accountPermissions" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Get '[JSON] AccountPermissionsListResponse
-
--- | Gets one account permission by ID.
-type AccountPermissionsGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "accountPermissions" :>
-               Capture "id" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Get '[JSON] AccountPermission
-
-type CitiesAPI = CitiesList
-
--- | Retrieves a list of cities, possibly filtered.
-type CitiesList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "cities" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "regionDartIds" Int64 :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "namePrefix" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "countryDartIds" Int64 :>
-                             QueryParam "dartIds" Int64 :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Get '[JSON] CitiesListResponse
-
-type ChangeLogsAPI =
-     ChangeLogsList :<|> ChangeLogsGet
-
--- | Retrieves a list of change logs.
-type ChangeLogsList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "changeLogs" :>
-               QueryParam "userProfileIds" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "objectType" Text :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "searchString" Text :>
-                           QueryParam "ids" Int64 :>
-                             QueryParam "action" Text :>
-                               QueryParam "minChangeTime" Text :>
-                                 QueryParam "key" Text :>
-                                   QueryParam "maxChangeTime" Text :>
-                                     QueryParam "pageToken" Text :>
-                                       QueryParam "oauth_token" Text :>
-                                         QueryParam "objectIds" Int64 :>
-                                           QueryParam "maxResults" Int32 :>
-                                             QueryParam "fields" Text :>
-                                               QueryParam "alt" Text :>
-                                                 Get '[JSON]
-                                                   ChangeLogsListResponse
-
--- | Gets one change log by ID.
-type ChangeLogsGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "changeLogs" :>
-               Capture "id" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] ChangeLog
-
-type TargetableRemarketingListsAPI =
-     TargetableRemarketingListsList :<|>
-       TargetableRemarketingListsGet
-
--- | Retrieves a list of targetable remarketing lists, possibly filtered.
-type TargetableRemarketingListsList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "targetableRemarketingLists" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "advertiserId" Int64 :>
-                       QueryParam "sortOrder" Text :>
-                         QueryParam "active" Bool :>
-                           QueryParam "key" Text :>
-                             QueryParam "name" Text :>
-                               QueryParam "pageToken" Text :>
-                                 QueryParam "sortField" Text :>
-                                   QueryParam "oauth_token" Text :>
-                                     QueryParam "maxResults" Int32 :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "alt" Text :>
-                                           Get '[JSON]
-                                             TargetableRemarketingListsListResponse
-
--- | Gets one remarketing list by ID.
-type TargetableRemarketingListsGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "targetableRemarketingLists" :>
-               Capture "id" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Get '[JSON] TargetableRemarketingList
-
-type PlatformTypesAPI =
-     PlatformTypesList :<|> PlatformTypesGet
-
--- | Retrieves a list of platform types.
-type PlatformTypesList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "platformTypes" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Get '[JSON] PlatformTypesListResponse
-
--- | Gets one platform type by ID.
-type PlatformTypesGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "platformTypes" :>
-               Capture "id" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] PlatformType
-
-type ContentCategoriesAPI =
-     ContentCategoriesInsert :<|> ContentCategoriesList
-       :<|> ContentCategoriesPatch
-       :<|> ContentCategoriesGet
-       :<|> ContentCategoriesDelete
-       :<|> ContentCategoriesUpdate
-
--- | Inserts a new content category.
-type ContentCategoriesInsert =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "contentCategories" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] ContentCategory
-
--- | Retrieves a list of content categories, possibly filtered.
-type ContentCategoriesList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "contentCategories" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "searchString" Text :>
-                       QueryParam "ids" Int64 :>
-                         QueryParam "sortOrder" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "sortField" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "maxResults" Int32 :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "alt" Text :>
-                                         Get '[JSON]
-                                           ContentCategoriesListResponse
-
--- | Updates an existing content category. This method supports patch
--- semantics.
-type ContentCategoriesPatch =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "contentCategories" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "id" Int64 :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Patch '[JSON] ContentCategory
-
--- | Gets one content category by ID.
-type ContentCategoriesGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "contentCategories" :>
-               Capture "id" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Get '[JSON] ContentCategory
-
--- | Deletes an existing content category.
-type ContentCategoriesDelete =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "contentCategories" :>
-               Capture "id" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Updates an existing content category.
-type ContentCategoriesUpdate =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "contentCategories" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Put '[JSON] ContentCategory
-
-type BrowsersAPI = BrowsersList
-
--- | Retrieves a list of browsers.
-type BrowsersList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "browsers" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Get '[JSON] BrowsersListResponse
-
-type PlacementsAPI =
-     PlacementsInsert :<|> PlacementsGeneratetags :<|>
-       PlacementsList
-       :<|> PlacementsPatch
-       :<|> PlacementsGet
-       :<|> PlacementsUpdate
-
--- | Inserts a new placement.
-type PlacementsInsert =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "placements" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] Placement
-
--- | Generates tags for a placement.
-type PlacementsGeneratetags =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "placements" :>
-               "generatetags" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "tagFormats" Text :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "campaignId" Int64 :>
-                           QueryParam "key" Text :>
-                             QueryParam "placementIds" Int64 :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Post '[JSON] PlacementsGenerateTagsResponse
-
--- | Retrieves a list of placements, possibly filtered.
-type PlacementsList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "placements" :>
-               QueryParam "placementStrategyIds" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "contentCategoryIds" Int64 :>
-                       QueryParam "maxEndDate" Text :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "campaignIds" Int64 :>
-                             QueryParam "pricingTypes" Text :>
-                               QueryParam "searchString" Text :>
-                                 QueryParam "sizeIds" Int64 :>
-                                   QueryParam "ids" Int64 :>
-                                     QueryParam "groupIds" Int64 :>
-                                       QueryParam "directorySiteIds" Int64 :>
-                                         QueryParam "sortOrder" Text :>
-                                           QueryParam "paymentSource" Text :>
-                                             QueryParam "key" Text :>
-                                               QueryParam "siteIds" Int64 :>
-                                                 QueryParam "pageToken" Text :>
-                                                   QueryParam "sortField" Text
-                                                     :>
-                                                     QueryParam
-                                                       "compatibilities"
-                                                       Text
-                                                       :>
-                                                       QueryParam "maxStartDate"
-                                                         Text
-                                                         :>
-                                                         QueryParam
-                                                           "oauth_token"
-                                                           Text
-                                                           :>
-                                                           QueryParam
-                                                             "advertiserIds"
-                                                             Int64
-                                                             :>
-                                                             QueryParam
-                                                               "minStartDate"
-                                                               Text
-                                                               :>
-                                                               QueryParam
-                                                                 "archived"
-                                                                 Bool
-                                                                 :>
-                                                                 QueryParam
-                                                                   "maxResults"
-                                                                   Int32
-                                                                   :>
-                                                                   QueryParam
-                                                                     "minEndDate"
-                                                                     Text
-                                                                     :>
-                                                                     QueryParam
-                                                                       "fields"
-                                                                       Text
-                                                                       :>
-                                                                       QueryParam
-                                                                         "alt"
-                                                                         Text
-                                                                         :>
-                                                                         Get
-                                                                           '[JSON]
-                                                                           PlacementsListResponse
-
--- | Updates an existing placement. This method supports patch semantics.
-type PlacementsPatch =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "placements" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "id" Int64 :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Patch '[JSON] Placement
-
--- | Gets one placement by ID.
-type PlacementsGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "placements" :>
-               Capture "id" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] Placement
-
--- | Updates an existing placement.
-type PlacementsUpdate =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "placements" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Put '[JSON] Placement
-
-type MetrosAPI = MetrosList
-
--- | Retrieves a list of metros.
-type MetrosList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "metros" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Get '[JSON] MetrosListResponse
-
-type CreativeFieldsAPI =
-     CreativeFieldsInsert :<|> CreativeFieldsList :<|>
-       CreativeFieldsPatch
-       :<|> CreativeFieldsGet
-       :<|> CreativeFieldsDelete
-       :<|> CreativeFieldsUpdate
-
--- | Inserts a new creative field.
-type CreativeFieldsInsert =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "creativeFields" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] CreativeField
-
--- | Retrieves a list of creative fields, possibly filtered.
-type CreativeFieldsList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "creativeFields" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "searchString" Text :>
-                       QueryParam "ids" Int64 :>
-                         QueryParam "sortOrder" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "sortField" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "advertiserIds" Int64 :>
-                                     QueryParam "maxResults" Int32 :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "alt" Text :>
-                                           Get '[JSON]
-                                             CreativeFieldsListResponse
-
--- | Updates an existing creative field. This method supports patch
--- semantics.
-type CreativeFieldsPatch =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "creativeFields" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "id" Int64 :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Patch '[JSON] CreativeField
-
--- | Gets one creative field by ID.
-type CreativeFieldsGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "creativeFields" :>
-               Capture "id" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] CreativeField
-
--- | Deletes an existing creative field.
-type CreativeFieldsDelete =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "creativeFields" :>
-               Capture "id" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Updates an existing creative field.
-type CreativeFieldsUpdate =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "creativeFields" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Put '[JSON] CreativeField
-
-type OrderDocumentsAPI =
-     OrderDocumentsList :<|> OrderDocumentsGet
-
--- | Retrieves a list of order documents, possibly filtered.
-type OrderDocumentsList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "projects" :>
-               Capture "projectId" Int64 :>
-                 "orderDocuments" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "searchString" Text :>
-                           QueryParam "ids" Int64 :>
-                             QueryParam "sortOrder" Text :>
-                               QueryParam "key" Text :>
-                                 QueryParam "pageToken" Text :>
-                                   QueryParam "sortField" Text :>
-                                     QueryParam "oauth_token" Text :>
-                                       QueryParam "orderId" Int64 :>
-                                         QueryParam "approved" Bool :>
-                                           QueryParam "siteId" Int64 :>
-                                             QueryParam "maxResults" Int32 :>
-                                               QueryParam "fields" Text :>
-                                                 QueryParam "alt" Text :>
-                                                   Get '[JSON]
-                                                     OrderDocumentsListResponse
-
--- | Gets one order document by ID.
-type OrderDocumentsGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "projects" :>
-               Capture "projectId" Int64 :>
-                 "orderDocuments" :>
-                   Capture "id" Int64 :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   Get '[JSON] OrderDocument
-
-type FilesAPI = FilesList :<|> FilesGet
-
--- | Lists files for a user profile.
-type FilesList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "files" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "sortOrder" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "scope" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "sortField" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "maxResults" Int32 :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "alt" Text :>
-                                       Get '[JSON] FileList
-
--- | Retrieves a report file by its report ID and file ID.
-type FilesGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "reports" :>
-           Capture "reportId" Int64 :>
-             "files" :>
-               Capture "fileId" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] File
-
-type ConnectionTypesAPI =
-     ConnectionTypesList :<|> ConnectionTypesGet
-
--- | Retrieves a list of connection types.
-type ConnectionTypesList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "connectionTypes" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Get '[JSON] ConnectionTypesListResponse
-
--- | Gets one connection type by ID.
-type ConnectionTypesGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "connectionTypes" :>
-               Capture "id" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] ConnectionType
-
-type PlacementGroupsAPI =
-     PlacementGroupsInsert :<|> PlacementGroupsList :<|>
-       PlacementGroupsPatch
-       :<|> PlacementGroupsGet
-       :<|> PlacementGroupsUpdate
-
--- | Inserts a new placement group.
-type PlacementGroupsInsert =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "placementGroups" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] PlacementGroup
-
--- | Retrieves a list of placement groups, possibly filtered.
-type PlacementGroupsList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "placementGroups" :>
-               QueryParam "placementStrategyIds" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "contentCategoryIds" Int64 :>
-                       QueryParam "maxEndDate" Text :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "campaignIds" Int64 :>
-                             QueryParam "pricingTypes" Text :>
-                               QueryParam "searchString" Text :>
-                                 QueryParam "ids" Int64 :>
-                                   QueryParam "placementGroupType" Text :>
-                                     QueryParam "directorySiteIds" Int64 :>
-                                       QueryParam "sortOrder" Text :>
-                                         QueryParam "key" Text :>
-                                           QueryParam "siteIds" Int64 :>
-                                             QueryParam "pageToken" Text :>
-                                               QueryParam "sortField" Text :>
-                                                 QueryParam "maxStartDate" Text
-                                                   :>
-                                                   QueryParam "oauth_token" Text
-                                                     :>
-                                                     QueryParam "advertiserIds"
-                                                       Int64
-                                                       :>
-                                                       QueryParam "minStartDate"
-                                                         Text
-                                                         :>
-                                                         QueryParam "archived"
-                                                           Bool
-                                                           :>
-                                                           QueryParam
-                                                             "maxResults"
-                                                             Int32
-                                                             :>
-                                                             QueryParam
-                                                               "minEndDate"
-                                                               Text
-                                                               :>
-                                                               QueryParam
-                                                                 "fields"
-                                                                 Text
-                                                                 :>
-                                                                 QueryParam
-                                                                   "alt"
-                                                                   Text
-                                                                   :>
-                                                                   Get '[JSON]
-                                                                     PlacementGroupsListResponse
-
--- | Updates an existing placement group. This method supports patch
--- semantics.
-type PlacementGroupsPatch =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "placementGroups" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "id" Int64 :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Patch '[JSON] PlacementGroup
-
--- | Gets one placement group by ID.
-type PlacementGroupsGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "placementGroups" :>
-               Capture "id" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] PlacementGroup
-
--- | Updates an existing placement group.
-type PlacementGroupsUpdate =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "placementGroups" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Put '[JSON] PlacementGroup
-
-type EventTagsAPI =
-     EventTagsInsert :<|> EventTagsList :<|>
-       EventTagsPatch
-       :<|> EventTagsGet
-       :<|> EventTagsDelete
-       :<|> EventTagsUpdate
-
--- | Inserts a new event tag.
-type EventTagsInsert =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "eventTags" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] EventTag
-
--- | Retrieves a list of event tags, possibly filtered.
-type EventTagsList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "eventTags" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "definitionsOnly" Bool :>
-                     QueryParam "eventTagTypes" Text :>
-                       QueryParam "enabled" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "advertiserId" Int64 :>
-                             QueryParam "searchString" Text :>
-                               QueryParam "campaignId" Int64 :>
-                                 QueryParam "ids" Int64 :>
-                                   QueryParam "sortOrder" Text :>
-                                     QueryParam "key" Text :>
-                                       QueryParam "adId" Int64 :>
-                                         QueryParam "sortField" Text :>
-                                           QueryParam "oauth_token" Text :>
-                                             QueryParam "fields" Text :>
-                                               QueryParam "alt" Text :>
-                                                 Get '[JSON]
-                                                   EventTagsListResponse
-
--- | Updates an existing event tag. This method supports patch semantics.
-type EventTagsPatch =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "eventTags" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "id" Int64 :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Patch '[JSON] EventTag
-
--- | Gets one event tag by ID.
-type EventTagsGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "eventTags" :>
-               Capture "id" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] EventTag
-
--- | Deletes an existing event tag.
-type EventTagsDelete =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "eventTags" :>
-               Capture "id" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Updates an existing event tag.
-type EventTagsUpdate =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "eventTags" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Put '[JSON] EventTag
-
-type OrdersAPI = OrdersList :<|> OrdersGet
-
--- | Retrieves a list of orders, possibly filtered.
-type OrdersList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "projects" :>
-               Capture "projectId" Int64 :>
-                 "orders" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "searchString" Text :>
-                           QueryParam "ids" Int64 :>
-                             QueryParam "sortOrder" Text :>
-                               QueryParam "key" Text :>
-                                 QueryParam "pageToken" Text :>
-                                   QueryParam "sortField" Text :>
-                                     QueryParam "oauth_token" Text :>
-                                       QueryParam "siteId" Int64 :>
-                                         QueryParam "maxResults" Int32 :>
-                                           QueryParam "fields" Text :>
-                                             QueryParam "alt" Text :>
-                                               Get '[JSON] OrdersListResponse
-
--- | Gets one order by ID.
-type OrdersGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "projects" :>
-               Capture "projectId" Int64 :>
-                 "orders" :>
-                   Capture "id" Int64 :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Get '[JSON] Order
-
-type UserRolePermissionsAPI =
-     UserRolePermissionsList :<|> UserRolePermissionsGet
-
--- | Gets a list of user role permissions, possibly filtered.
-type UserRolePermissionsList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "userRolePermissions" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "ids" Int64 :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Get '[JSON] UserRolePermissionsListResponse
-
--- | Gets one user role permission by ID.
-type UserRolePermissionsGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "userRolePermissions" :>
-               Capture "id" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Get '[JSON] UserRolePermission
-
-type CreativeAssetsAPI = CreativeAssetsInsert
-
--- | Inserts a new creative asset.
-type CreativeAssetsInsert =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "creativeAssets" :>
-               Capture "advertiserId" Int64 :>
-                 "creativeAssets" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Post '[JSON] CreativeAssetMetadata
-
-type SitesAPI =
-     SitesInsert :<|> SitesList :<|> SitesPatch :<|>
-       SitesGet
-       :<|> SitesUpdate
-
--- | Inserts a new site.
-type SitesInsert =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "sites" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] Site
-
--- | Retrieves a list of sites, possibly filtered.
-type SitesList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "sites" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "unmappedSite" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "campaignIds" Int64 :>
-                         QueryParam "searchString" Text :>
-                           QueryParam "acceptsInterstitialPlacements" Bool :>
-                             QueryParam "acceptsPublisherPaidPlacements" Bool :>
-                               QueryParam "ids" Int64 :>
-                                 QueryParam "directorySiteIds" Int64 :>
-                                   QueryParam "sortOrder" Text :>
-                                     QueryParam "key" Text :>
-                                       QueryParam "pageToken" Text :>
-                                         QueryParam "sortField" Text :>
-                                           QueryParam "subaccountId" Int64 :>
-                                             QueryParam
-                                               "acceptsInStreamVideoPlacements"
-                                               Bool
-                                               :>
-                                               QueryParam "oauth_token" Text :>
-                                                 QueryParam "approved" Bool :>
-                                                   QueryParam "adWordsSite" Bool
-                                                     :>
-                                                     QueryParam "maxResults"
-                                                       Int32
-                                                       :>
-                                                       QueryParam "fields" Text
-                                                         :>
-                                                         QueryParam "alt" Text
-                                                           :>
-                                                           Get '[JSON]
-                                                             SitesListResponse
-
--- | Updates an existing site. This method supports patch semantics.
-type SitesPatch =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "sites" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "id" Int64 :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Patch '[JSON] Site
-
--- | Gets one site by ID.
-type SitesGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "sites" :>
-               Capture "id" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] Site
-
--- | Updates an existing site.
-type SitesUpdate =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "sites" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Put '[JSON] Site
-
-type OperatingSystemsAPI =
-     OperatingSystemsList :<|> OperatingSystemsGet
-
--- | Retrieves a list of operating systems.
-type OperatingSystemsList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "operatingSystems" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Get '[JSON] OperatingSystemsListResponse
-
--- | Gets one operating system by DART ID.
-type OperatingSystemsGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "operatingSystems" :>
-               Capture "dartId" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Get '[JSON] OperatingSystem
-
-type PostalCodesAPI =
-     PostalCodesList :<|> PostalCodesGet
-
--- | Retrieves a list of postal codes.
-type PostalCodesList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "postalCodes" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Get '[JSON] PostalCodesListResponse
-
--- | Gets one postal code by ID.
-type PostalCodesGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "postalCodes" :>
-               Capture "code" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] PostalCode
-
-type SizesAPI =
-     SizesInsert :<|> SizesList :<|> SizesGet
-
--- | Inserts a new size.
-type SizesInsert =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "sizes" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] Size
-
--- | Retrieves a list of sizes, possibly filtered.
-type SizesList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "sizes" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "height" Int32 :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "ids" Int64 :>
-                         QueryParam "width" Int32 :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "iabStandard" Bool :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Get '[JSON] SizesListResponse
-
--- | Gets one size by ID.
-type SizesGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "sizes" :>
-               Capture "id" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] Size
-
-type AdsAPI =
-     AdsInsert :<|> AdsList :<|> AdsPatch :<|> AdsGet :<|>
-       AdsUpdate
-
--- | Inserts a new ad.
-type AdsInsert =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "ads" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] Ad
-
--- | Retrieves a list of ads, possibly filtered.
-type AdsList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "ads" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "remarketingListIds" Int64 :>
-                     QueryParam "landingPageIds" Int64 :>
-                       QueryParam "creativeIds" Int64 :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "advertiserId" Int64 :>
-                             QueryParam "campaignIds" Int64 :>
-                               QueryParam "searchString" Text :>
-                                 QueryParam "sizeIds" Int64 :>
-                                   QueryParam "sslCompliant" Bool :>
-                                     QueryParam "ids" Int64 :>
-                                       QueryParam "sortOrder" Text :>
-                                         QueryParam "active" Bool :>
-                                           QueryParam
-                                             "creativeOptimizationConfigurationIds"
-                                             Int64
-                                             :>
-                                             QueryParam "key" Text :>
-                                               QueryParam "placementIds" Int64
-                                                 :>
-                                                 QueryParam "sslRequired" Bool
-                                                   :>
-                                                   QueryParam
-                                                     "overriddenEventTagId"
-                                                     Int64
-                                                     :>
-                                                     QueryParam "pageToken" Text
-                                                       :>
-                                                       QueryParam "sortField"
-                                                         Text
-                                                         :>
-                                                         QueryParam "type" Text
-                                                           :>
-                                                           QueryParam
-                                                             "oauth_token"
-                                                             Text
-                                                             :>
-                                                             QueryParam
-                                                               "creativeType"
-                                                               Text
-                                                               :>
-                                                               QueryParam
-                                                                 "dynamicClickTracker"
-                                                                 Bool
-                                                                 :>
-                                                                 QueryParam
-                                                                   "compatibility"
-                                                                   Text
-                                                                   :>
-                                                                   QueryParam
-                                                                     "archived"
-                                                                     Bool
-                                                                     :>
-                                                                     QueryParam
-                                                                       "maxResults"
-                                                                       Int32
-                                                                       :>
-                                                                       QueryParam
-                                                                         "fields"
-                                                                         Text
-                                                                         :>
-                                                                         QueryParam
-                                                                           "alt"
-                                                                           Text
-                                                                           :>
-                                                                           QueryParam
-                                                                             "audienceSegmentIds"
-                                                                             Int64
-                                                                             :>
-                                                                             Get
-                                                                               '[JSON]
-                                                                               AdsListResponse
-
--- | Updates an existing ad. This method supports patch semantics.
-type AdsPatch =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "ads" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "id" Int64 :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Patch '[JSON] Ad
-
--- | Gets one ad by ID.
-type AdsGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "ads" :>
-               Capture "id" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] Ad
-
--- | Updates an existing ad.
-type AdsUpdate =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "ads" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Put '[JSON] Ad
-
-type ProjectsAPI = ProjectsList :<|> ProjectsGet
-
--- | Retrieves a list of projects, possibly filtered.
-type ProjectsList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "projects" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "searchString" Text :>
-                       QueryParam "ids" Int64 :>
-                         QueryParam "sortOrder" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "sortField" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "advertiserIds" Int64 :>
-                                     QueryParam "maxResults" Int32 :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "alt" Text :>
-                                           Get '[JSON] ProjectsListResponse
-
--- | Gets one project by ID.
-type ProjectsGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "projects" :>
-               Capture "id" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] Project
-
-type SubaccountsAPI =
-     SubaccountsInsert :<|> SubaccountsList :<|>
-       SubaccountsPatch
-       :<|> SubaccountsGet
-       :<|> SubaccountsUpdate
-
--- | Inserts a new subaccount.
-type SubaccountsInsert =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "subaccounts" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] Subaccount
-
--- | Gets a list of subaccounts, possibly filtered.
-type SubaccountsList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "subaccounts" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "searchString" Text :>
-                       QueryParam "ids" Int64 :>
-                         QueryParam "sortOrder" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "sortField" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "maxResults" Int32 :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "alt" Text :>
-                                         Get '[JSON] SubaccountsListResponse
-
--- | Updates an existing subaccount. This method supports patch semantics.
-type SubaccountsPatch =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "subaccounts" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "id" Int64 :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Patch '[JSON] Subaccount
-
--- | Gets one subaccount by ID.
-type SubaccountsGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "subaccounts" :>
-               Capture "id" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] Subaccount
-
--- | Updates an existing subaccount.
-type SubaccountsUpdate =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "subaccounts" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Put '[JSON] Subaccount
-
-type AdvertiserGroupsAPI =
-     AdvertiserGroupsInsert :<|> AdvertiserGroupsList :<|>
-       AdvertiserGroupsPatch
-       :<|> AdvertiserGroupsGet
-       :<|> AdvertiserGroupsDelete
-       :<|> AdvertiserGroupsUpdate
-
--- | Inserts a new advertiser group.
-type AdvertiserGroupsInsert =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "advertiserGroups" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] AdvertiserGroup
-
--- | Retrieves a list of advertiser groups, possibly filtered.
-type AdvertiserGroupsList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "advertiserGroups" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "searchString" Text :>
-                       QueryParam "ids" Int64 :>
-                         QueryParam "sortOrder" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "sortField" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "maxResults" Int32 :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "alt" Text :>
-                                         Get '[JSON]
-                                           AdvertiserGroupsListResponse
-
--- | Updates an existing advertiser group. This method supports patch
--- semantics.
-type AdvertiserGroupsPatch =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "advertiserGroups" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "id" Int64 :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Patch '[JSON] AdvertiserGroup
-
--- | Gets one advertiser group by ID.
-type AdvertiserGroupsGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "advertiserGroups" :>
-               Capture "id" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Get '[JSON] AdvertiserGroup
-
--- | Deletes an existing advertiser group.
-type AdvertiserGroupsDelete =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "advertiserGroups" :>
-               Capture "id" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Updates an existing advertiser group.
-type AdvertiserGroupsUpdate =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "advertiserGroups" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Put '[JSON] AdvertiserGroup
-
-type CreativeFieldValuesAPI =
-     CreativeFieldValuesInsert :<|>
-       CreativeFieldValuesList
-       :<|> CreativeFieldValuesPatch
-       :<|> CreativeFieldValuesGet
-       :<|> CreativeFieldValuesDelete
-       :<|> CreativeFieldValuesUpdate
-
--- | Inserts a new creative field value.
-type CreativeFieldValuesInsert =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "creativeFields" :>
-               Capture "creativeFieldId" Int64 :>
-                 "creativeFieldValues" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Post '[JSON] CreativeFieldValue
-
--- | Retrieves a list of creative field values, possibly filtered.
-type CreativeFieldValuesList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "creativeFields" :>
-               Capture "creativeFieldId" Int64 :>
-                 "creativeFieldValues" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "searchString" Text :>
-                           QueryParam "ids" Int64 :>
-                             QueryParam "sortOrder" Text :>
-                               QueryParam "key" Text :>
-                                 QueryParam "pageToken" Text :>
-                                   QueryParam "sortField" Text :>
-                                     QueryParam "oauth_token" Text :>
-                                       QueryParam "maxResults" Int32 :>
-                                         QueryParam "fields" Text :>
-                                           QueryParam "alt" Text :>
-                                             Get '[JSON]
-                                               CreativeFieldValuesListResponse
-
--- | Updates an existing creative field value. This method supports patch
--- semantics.
-type CreativeFieldValuesPatch =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "creativeFields" :>
-               Capture "creativeFieldId" Int64 :>
-                 "creativeFieldValues" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "id" Int64 :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   Patch '[JSON] CreativeFieldValue
-
--- | Gets one creative field value by ID.
-type CreativeFieldValuesGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "creativeFields" :>
-               Capture "creativeFieldId" Int64 :>
-                 "creativeFieldValues" :>
-                   Capture "id" Int64 :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   Get '[JSON] CreativeFieldValue
-
--- | Deletes an existing creative field value.
-type CreativeFieldValuesDelete =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "creativeFields" :>
-               Capture "creativeFieldId" Int64 :>
-                 "creativeFieldValues" :>
-                   Capture "id" Int64 :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Updates an existing creative field value.
-type CreativeFieldValuesUpdate =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "creativeFields" :>
-               Capture "creativeFieldId" Int64 :>
-                 "creativeFieldValues" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Put '[JSON] CreativeFieldValue
-
-type DirectorySiteContactsAPI =
-     DirectorySiteContactsList :<|>
-       DirectorySiteContactsGet
-
--- | Retrieves a list of directory site contacts, possibly filtered.
-type DirectorySiteContactsList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "directorySiteContacts" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "searchString" Text :>
-                       QueryParam "ids" Int64 :>
-                         QueryParam "directorySiteIds" Int64 :>
-                           QueryParam "sortOrder" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "pageToken" Text :>
-                                 QueryParam "sortField" Text :>
-                                   QueryParam "oauth_token" Text :>
-                                     QueryParam "maxResults" Int32 :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "alt" Text :>
-                                           Get '[JSON]
-                                             DirectorySiteContactsListResponse
-
--- | Gets one directory site contact by ID.
-type DirectorySiteContactsGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "directorySiteContacts" :>
-               Capture "id" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Get '[JSON] DirectorySiteContact
-
-type DirectorySitesAPI =
-     DirectorySitesInsert :<|> DirectorySitesList :<|>
-       DirectorySitesGet
-
--- | Inserts a new directory site.
-type DirectorySitesInsert =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "directorySites" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] DirectorySite
-
--- | Retrieves a list of directory sites, possibly filtered.
-type DirectorySitesList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "directorySites" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "searchString" Text :>
-                       QueryParam "acceptsInterstitialPlacements" Bool :>
-                         QueryParam "acceptsPublisherPaidPlacements" Bool :>
-                           QueryParam "ids" Int64 :>
-                             QueryParam "sortOrder" Text :>
-                               QueryParam "active" Bool :>
-                                 QueryParam "key" Text :>
-                                   QueryParam "countryId" Int64 :>
-                                     QueryParam "pageToken" Text :>
-                                       QueryParam "sortField" Text :>
-                                         QueryParam
-                                           "acceptsInStreamVideoPlacements"
-                                           Bool
-                                           :>
-                                           QueryParam "oauth_token" Text :>
-                                             QueryParam "maxResults" Int32 :>
-                                               QueryParam "parentId" Int64 :>
-                                                 QueryParam "dfp_network_code"
-                                                   Text
-                                                   :>
-                                                   QueryParam "fields" Text :>
-                                                     QueryParam "alt" Text :>
-                                                       Get '[JSON]
-                                                         DirectorySitesListResponse
-
--- | Gets one directory site by ID.
-type DirectorySitesGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "directorySites" :>
-               Capture "id" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] DirectorySite
-
-type FloodlightActivityGroupsAPI =
-     FloodlightActivityGroupsInsert :<|>
-       FloodlightActivityGroupsList
-       :<|> FloodlightActivityGroupsPatch
-       :<|> FloodlightActivityGroupsGet
-       :<|> FloodlightActivityGroupsDelete
-       :<|> FloodlightActivityGroupsUpdate
-
--- | Inserts a new floodlight activity group.
-type FloodlightActivityGroupsInsert =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "floodlightActivityGroups" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Post '[JSON] FloodlightActivityGroup
-
--- | Retrieves a list of floodlight activity groups, possibly filtered.
-type FloodlightActivityGroupsList =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "floodlightActivityGroups" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "floodlightConfigurationId" Int64 :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "advertiserId" Int64 :>
-                         QueryParam "searchString" Text :>
-                           QueryParam "ids" Int64 :>
-                             QueryParam "sortOrder" Text :>
-                               QueryParam "key" Text :>
-                                 QueryParam "pageToken" Text :>
-                                   QueryParam "sortField" Text :>
-                                     QueryParam "type" Text :>
-                                       QueryParam "oauth_token" Text :>
-                                         QueryParam "maxResults" Int32 :>
-                                           QueryParam "fields" Text :>
-                                             QueryParam "alt" Text :>
-                                               Get '[JSON]
-                                                 FloodlightActivityGroupsListResponse
-
--- | Updates an existing floodlight activity group. This method supports
--- patch semantics.
-type FloodlightActivityGroupsPatch =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "floodlightActivityGroups" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "id" Int64 :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Patch '[JSON] FloodlightActivityGroup
-
--- | Gets one floodlight activity group by ID.
-type FloodlightActivityGroupsGet =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "floodlightActivityGroups" :>
-               Capture "id" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Get '[JSON] FloodlightActivityGroup
-
--- | Deletes an existing floodlight activity group.
-type FloodlightActivityGroupsDelete =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "floodlightActivityGroups" :>
-               Capture "id" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Updates an existing floodlight activity group.
-type FloodlightActivityGroupsUpdate =
-     "dfareporting" :>
-       "v2.2" :>
-         "userprofiles" :>
-           Capture "profileId" Int64 :>
-             "floodlightActivityGroups" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Put '[JSON] FloodlightActivityGroup
+     EventTagsInsertAPI :<|> AdvertisersPatchAPI :<|>
+       AccountActiveAdSummariesGetAPI
+       :<|> CreativeGroupsUpdateAPI
+       :<|> AdvertiserGroupsInsertAPI
+       :<|> AccountsListAPI
+       :<|> CreativeFieldValuesUpdateAPI
+       :<|> FloodlightActivitiesInsertAPI
+       :<|> ContentCategoriesUpdateAPI
+       :<|> AccountPermissionGroupsGetAPI
+       :<|> DirectorySitesInsertAPI
+       :<|> PlatformTypesGetAPI
+       :<|> ChangeLogsGetAPI
+       :<|> FloodlightActivitiesPatchAPI
+       :<|> CampaignsGetAPI
+       :<|> OperatingSystemVersionsGetAPI
+       :<|> LandingPagesListAPI
+       :<|> AccountPermissionsListAPI
+       :<|> EventTagsPatchAPI
+       :<|> MobileCarriersGetAPI
+       :<|> PlacementStrategiesDeleteAPI
+       :<|> AdvertiserGroupsPatchAPI
+       :<|> ConnectionTypesListAPI
+       :<|> AccountsUpdateAPI
+       :<|> AdsListAPI
+       :<|> ProjectsListAPI
+       :<|> FloodlightActivitiesGeneratetagAPI
+       :<|> CreativesListAPI
+       :<|> AdsGetAPI
+       :<|> CreativesGetAPI
+       :<|> ProjectsGetAPI
+       :<|> DimensionValuesQueryAPI
+       :<|> ReportsFilesListAPI
+       :<|> LandingPagesDeleteAPI
+       :<|> ReportsFilesGetAPI
+       :<|> CampaignCreativeAssociationsInsertAPI
+       :<|> PlacementsGeneratetagsAPI
+       :<|> PlacementGroupsInsertAPI
+       :<|> FloodlightActivityGroupsGetAPI
+       :<|> AdvertisersInsertAPI
+       :<|> TargetableRemarketingListsGetAPI
+       :<|> FloodlightConfigurationsPatchAPI
+       :<|> CreativeFieldsDeleteAPI
+       :<|> DirectorySiteContactsGetAPI
+       :<|> AccountUserProfilesUpdateAPI
+       :<|> PostalCodesListAPI
+       :<|> FilesListAPI
+       :<|> OperatingSystemsListAPI
+       :<|> UserRolesDeleteAPI
+       :<|> RemarketingListSharesPatchAPI
+       :<|> SizesInsertAPI
+       :<|> PlatformTypesListAPI
+       :<|> ReportsCompatibleFieldsQueryAPI
+       :<|> UserRolesGetAPI
+       :<|> PlacementsGetAPI
+       :<|> AdsPatchAPI
+       :<|> FloodlightActivityGroupsInsertAPI
+       :<|> AccountPermissionGroupsListAPI
+       :<|> LandingPagesUpdateAPI
+       :<|> CreativesPatchAPI
+       :<|> CreativeFieldsGetAPI
+       :<|> CreativeGroupsPatchAPI
+       :<|> CreativeFieldValuesPatchAPI
+       :<|> PlacementGroupsGetAPI
+       :<|> RegionsListAPI
+       :<|> FloodlightActivityGroupsListAPI
+       :<|> ContentCategoriesPatchAPI
+       :<|> TargetableRemarketingListsListAPI
+       :<|> DirectorySiteContactsListAPI
+       :<|> AccountUserProfilesListAPI
+       :<|> UserRolesPatchAPI
+       :<|> CampaignsUpdateAPI
+       :<|> FloodlightActivityGroupsDeleteAPI
+       :<|> MetrosListAPI
+       :<|> CampaignsInsertAPI
+       :<|> PlacementsPatchAPI
+       :<|> CreativeFieldsPatchAPI
+       :<|> AccountUserProfilesGetAPI
+       :<|> UserRolePermissionsGetAPI
+       :<|> FloodlightActivitiesGetAPI
+       :<|> CampaignsListAPI
+       :<|> EventTagsGetAPI
+       :<|> DirectorySitesGetAPI
+       :<|> PlacementStrategiesInsertAPI
+       :<|> PlacementStrategiesUpdateAPI
+       :<|> OrdersGetAPI
+       :<|> AdvertiserGroupsGetAPI
+       :<|> SubaccountsUpdateAPI
+       :<|> SubaccountsInsertAPI
+       :<|> MobileCarriersListAPI
+       :<|> OperatingSystemVersionsListAPI
+       :<|> ChangeLogsListAPI
+       :<|> LandingPagesInsertAPI
+       :<|> CreativeFieldsListAPI
+       :<|> PlacementsListAPI
+       :<|> SitesGetAPI
+       :<|> AccountUserProfilesPatchAPI
+       :<|> UserRolePermissionGroupsGetAPI
+       :<|> UserRolesListAPI
+       :<|> FloodlightActivityGroupsUpdateAPI
+       :<|> InventoryItemsGetAPI
+       :<|> RemarketingListsGetAPI
+       :<|> CreativeFieldsUpdateAPI
+       :<|> UserRolePermissionsListAPI
+       :<|> RemarketingListSharesGetAPI
+       :<|> FloodlightActivitiesListAPI
+       :<|> SitesInsertAPI
+       :<|> EventTagsListAPI
+       :<|> DirectorySitesListAPI
+       :<|> CreativeAssetsInsertAPI
+       :<|> UserRolesUpdateAPI
+       :<|> FloodlightConfigurationsGetAPI
+       :<|> AdvertiserGroupsListAPI
+       :<|> OrdersListAPI
+       :<|> PlacementsUpdateAPI
+       :<|> LandingPagesPatchAPI
+       :<|> BrowsersListAPI
+       :<|> RemarketingListsInsertAPI
+       :<|> PlacementGroupsUpdateAPI
+       :<|> SubaccountsGetAPI
+       :<|> SitesPatchAPI
+       :<|> SubaccountsListAPI
+       :<|> FloodlightActivitiesDeleteAPI
+       :<|> CountriesListAPI
+       :<|> EventTagsDeleteAPI
+       :<|> AdvertiserGroupsDeleteAPI
+       :<|> PlacementStrategiesListAPI
+       :<|> RemarketingListsPatchAPI
+       :<|> CountriesGetAPI
+       :<|> PlacementStrategiesGetAPI
+       :<|> UserProfilesGetAPI
+       :<|> ContentCategoriesGetAPI
+       :<|> AdvertisersUpdateAPI
+       :<|> CitiesListAPI
+       :<|> AccountUserProfilesInsertAPI
+       :<|> PlacementGroupsListAPI
+       :<|> CreativeGroupsGetAPI
+       :<|> CampaignCreativeAssociationsListAPI
+       :<|> CreativeFieldValuesGetAPI
+       :<|> CampaignsPatchAPI
+       :<|> AdvertiserGroupsUpdateAPI
+       :<|> AccountsGetAPI
+       :<|> SitesListAPI
+       :<|> RemarketingListsListAPI
+       :<|> UserRolePermissionGroupsListAPI
+       :<|> PlacementStrategiesPatchAPI
+       :<|> ContentCategoriesInsertAPI
+       :<|> FloodlightActivitiesUpdateAPI
+       :<|> CreativeFieldValuesInsertAPI
+       :<|> InventoryItemsListAPI
+       :<|> CreativeGroupsInsertAPI
+       :<|> EventTagsUpdateAPI
+       :<|> SubaccountsPatchAPI
+       :<|> UserRolesInsertAPI
+       :<|> PostalCodesGetAPI
+       :<|> CreativeFieldValuesListAPI
+       :<|> FilesGetAPI
+       :<|> OperatingSystemsGetAPI
+       :<|> FloodlightActivityGroupsPatchAPI
+       :<|> RemarketingListsUpdateAPI
+       :<|> ContentCategoriesListAPI
+       :<|> CreativeFieldsInsertAPI
+       :<|> UserProfilesListAPI
+       :<|> CreativeGroupsListAPI
+       :<|> SitesUpdateAPI
+       :<|> PlacementsInsertAPI
+       :<|> RemarketingListSharesUpdateAPI
+       :<|> OrderDocumentsListAPI
+       :<|> ContentCategoriesDeleteAPI
+       :<|> OrderDocumentsGetAPI
+       :<|> SizesListAPI
+       :<|> AdvertisersListAPI
+       :<|> SizesGetAPI
+       :<|> CreativeFieldValuesDeleteAPI
+       :<|> AccountsPatchAPI
+       :<|> FloodlightConfigurationsUpdateAPI
+       :<|> AdvertisersGetAPI
+       :<|> CreativesUpdateAPI
+       :<|> FloodlightConfigurationsListAPI
+       :<|> PlacementGroupsPatchAPI
+       :<|> LandingPagesGetAPI
+       :<|> AccountPermissionsGetAPI
+       :<|> AdsInsertAPI
+       :<|> CreativesInsertAPI
+       :<|> ConnectionTypesGetAPI
+       :<|> AdsUpdateAPI
+
+dFAReporting :: Proxy DFAReporting
+dFAReporting = Proxy

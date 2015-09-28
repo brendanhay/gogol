@@ -14,9 +14,51 @@
 --
 module Network.Google.Compute.Autoscaler.Types
     (
+    -- * Service URL
+      computeAutoscalerURL
+
+    -- * AutoscalerListResponse
+    , AutoscalerListResponse
+    , autoscalerListResponse
+    , alrNextPageToken
+    , alrKind
+    , alrItems
+
+    -- * ZoneList
+    , ZoneList
+    , zoneList
+    , zlNextPageToken
+    , zlKind
+    , zlItems
+    , zlSelfLink
+    , zlId
+
+    -- * OperationItemDataItemWarnings
+    , OperationItemDataItemWarnings
+    , operationItemDataItemWarnings
+    , oidiwValue
+    , oidiwKey
+
+    -- * OperationItemWarnings
+    , OperationItemWarnings
+    , operationItemWarnings
+    , oiwData
+    , oiwCode
+    , oiwMessage
+
+    -- * ZoneItemMaintenanceWindows
+    , ZoneItemMaintenanceWindows
+    , zoneItemMaintenanceWindows
+    , zimwBeginTime
+    , zimwName
+    , zimwEndTime
+    , zimwDescription
+
+    -- * Alt
+    , Alt (..)
 
     -- * Autoscaler
-      Autoscaler
+    , Autoscaler
     , autoscaler
     , aKind
     , aSelfLink
@@ -27,12 +69,56 @@ module Network.Google.Compute.Autoscaler.Types
     , aDescription
     , aTarget
 
-    -- * AutoscalerListResponse
-    , AutoscalerListResponse
-    , autoscalerListResponse
-    , alrNextPageToken
-    , alrKind
-    , alrItems
+    -- * OperationItemErrorsError
+    , OperationItemErrorsError
+    , operationItemErrorsError
+    , oieeLocation
+    , oieeCode
+    , oieeMessage
+
+    -- * OperationError
+    , OperationError
+    , operationError
+    , oeErrors
+
+    -- * Zone
+    , Zone
+    , zone
+    , zStatus
+    , zMaintenanceWindows
+    , zKind
+    , zSelfLink
+    , zName
+    , zCreationTimestamp
+    , zId
+    , zRegion
+    , zDescription
+    , zDeprecated
+
+    -- * DeprecationStatus
+    , DeprecationStatus
+    , deprecationStatus
+    , dsState
+    , dsDeleted
+    , dsReplacement
+    , dsObsolete
+    , dsDeprecated
+
+    -- * AutoscalingPolicyCustomMetricUtilization
+    , AutoscalingPolicyCustomMetricUtilization
+    , autoscalingPolicyCustomMetricUtilization
+    , apcmuUtilizationTarget
+    , apcmuMetric
+    , apcmuUtilizationTargetType
+
+    -- * OperationList
+    , OperationList
+    , operationList
+    , olNextPageToken
+    , olKind
+    , olItems
+    , olSelfLink
+    , olId
 
     -- * AutoscalingPolicy
     , AutoscalingPolicy
@@ -44,31 +130,10 @@ module Network.Google.Compute.Autoscaler.Types
     , apMinNumReplicas
     , apCoolDownPeriodSec
 
-    -- * AutoscalingPolicyCpuUtilization
-    , AutoscalingPolicyCpuUtilization
-    , autoscalingPolicyCpuUtilization
-    , apcuUtilizationTarget
-
-    -- * AutoscalingPolicyCustomMetricUtilization
-    , AutoscalingPolicyCustomMetricUtilization
-    , autoscalingPolicyCustomMetricUtilization
-    , apcmuUtilizationTarget
-    , apcmuMetric
-    , apcmuUtilizationTargetType
-
     -- * AutoscalingPolicyLoadBalancingUtilization
     , AutoscalingPolicyLoadBalancingUtilization
     , autoscalingPolicyLoadBalancingUtilization
     , aplbuUtilizationTarget
-
-    -- * DeprecationStatus
-    , DeprecationStatus
-    , deprecationStatus
-    , dsState
-    , dsDeleted
-    , dsReplacement
-    , dsObsolete
-    , dsDeprecated
 
     -- * Operation
     , Operation
@@ -96,72 +161,19 @@ module Network.Google.Compute.Autoscaler.Types
     , oTargetLink
     , oClientOperationId
 
-    -- * OperationError
-    , OperationError
-    , operationError
-    , oeErrors
-
-    -- * OperationItemDataItemWarnings
-    , OperationItemDataItemWarnings
-    , operationItemDataItemWarnings
-    , oidiwValue
-    , oidiwKey
-
-    -- * OperationItemErrorsError
-    , OperationItemErrorsError
-    , operationItemErrorsError
-    , oieeLocation
-    , oieeCode
-    , oieeMessage
-
-    -- * OperationItemWarnings
-    , OperationItemWarnings
-    , operationItemWarnings
-    , oiwData
-    , oiwCode
-    , oiwMessage
-
-    -- * OperationList
-    , OperationList
-    , operationList
-    , olNextPageToken
-    , olKind
-    , olItems
-    , olSelfLink
-    , olId
-
-    -- * Zone
-    , Zone
-    , zone
-    , zStatus
-    , zMaintenanceWindows
-    , zKind
-    , zSelfLink
-    , zName
-    , zCreationTimestamp
-    , zId
-    , zRegion
-    , zDescription
-    , zDeprecated
-
-    -- * ZoneItemMaintenanceWindows
-    , ZoneItemMaintenanceWindows
-    , zoneItemMaintenanceWindows
-    , zimwBeginTime
-    , zimwName
-    , zimwEndTime
-    , zimwDescription
-
-    -- * ZoneList
-    , ZoneList
-    , zoneList
-    , zlNextPageToken
-    , zlKind
-    , zlItems
-    , zlSelfLink
-    , zlId
+    -- * AutoscalingPolicyCpuUtilization
+    , AutoscalingPolicyCpuUtilization
+    , autoscalingPolicyCpuUtilization
+    , apcuUtilizationTarget
     ) where
 
 import           Network.Google.Compute.Autoscaler.Types.Product
 import           Network.Google.Compute.Autoscaler.Types.Sum
 import           Network.Google.Prelude
+
+-- | URL referring to version 'v1beta2' of the Google Compute Engine Autoscaler API.
+computeAutoscalerURL :: BaseUrl
+computeAutoscalerURL
+  = BaseUrl Https
+      "https://www.googleapis.com/autoscaler/v1beta2/"
+      443

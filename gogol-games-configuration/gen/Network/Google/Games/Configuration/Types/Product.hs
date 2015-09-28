@@ -136,100 +136,168 @@ instance ToJSON AchievementConfiguration where
                   ("initialState" .=) <$> _acInitialState,
                   ("draft" .=) <$> _acDraft, ("id" .=) <$> _acId])
 
--- | This is a JSON template for an achievement configuration detail.
+-- | This is a JSON template for a number format resource.
 --
--- /See:/ 'achievementConfigurationDetail' smart constructor.
-data AchievementConfigurationDetail = AchievementConfigurationDetail
-    { _acdKind        :: !Text
-    , _acdSortRank    :: !(Maybe Int32)
-    , _acdName        :: !(Maybe (Maybe LocalizedStringBundle))
-    , _acdPointValue  :: !(Maybe Int32)
-    , _acdIconUrl     :: !(Maybe Text)
-    , _acdDescription :: !(Maybe (Maybe LocalizedStringBundle))
+-- /See:/ 'gamesNumberFormatConfiguration' smart constructor.
+data GamesNumberFormatConfiguration = GamesNumberFormatConfiguration
+    { _gnfcSuffix           :: !(Maybe (Maybe GamesNumberAffixConfiguration))
+    , _gnfcCurrencyCode     :: !(Maybe Text)
+    , _gnfcNumberFormatType :: !(Maybe Text)
+    , _gnfcNumDecimalPlaces :: !(Maybe Int32)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AchievementConfigurationDetail' with the minimum fields required to make a request.
+-- | Creates a value of 'GamesNumberFormatConfiguration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'acdKind'
+-- * 'gnfcSuffix'
 --
--- * 'acdSortRank'
+-- * 'gnfcCurrencyCode'
 --
--- * 'acdName'
+-- * 'gnfcNumberFormatType'
 --
--- * 'acdPointValue'
+-- * 'gnfcNumDecimalPlaces'
+gamesNumberFormatConfiguration
+    :: GamesNumberFormatConfiguration
+gamesNumberFormatConfiguration =
+    GamesNumberFormatConfiguration
+    { _gnfcSuffix = Nothing
+    , _gnfcCurrencyCode = Nothing
+    , _gnfcNumberFormatType = Nothing
+    , _gnfcNumDecimalPlaces = Nothing
+    }
+
+-- | An optional suffix for the NUMERIC format type. These strings follow the
+-- same plural rules as all Android string resources.
+gnfcSuffix :: Lens' GamesNumberFormatConfiguration (Maybe (Maybe GamesNumberAffixConfiguration))
+gnfcSuffix
+  = lens _gnfcSuffix (\ s a -> s{_gnfcSuffix = a})
+
+-- | The curreny code string. Only used for CURRENCY format type.
+gnfcCurrencyCode :: Lens' GamesNumberFormatConfiguration (Maybe Text)
+gnfcCurrencyCode
+  = lens _gnfcCurrencyCode
+      (\ s a -> s{_gnfcCurrencyCode = a})
+
+-- | The formatting for the number. Possible values are: - \"NUMERIC\" -
+-- Numbers are formatted to have no digits or a fixed number of digits
+-- after the decimal point according to locale. An optional custom unit can
+-- be added. - \"TIME_DURATION\" - Numbers are formatted to hours, minutes
+-- and seconds. - \"CURRENCY\" - Numbers are formatted to currency
+-- according to locale.
+gnfcNumberFormatType :: Lens' GamesNumberFormatConfiguration (Maybe Text)
+gnfcNumberFormatType
+  = lens _gnfcNumberFormatType
+      (\ s a -> s{_gnfcNumberFormatType = a})
+
+-- | The number of decimal places for number. Only used for NUMERIC format
+-- type.
+gnfcNumDecimalPlaces :: Lens' GamesNumberFormatConfiguration (Maybe Int32)
+gnfcNumDecimalPlaces
+  = lens _gnfcNumDecimalPlaces
+      (\ s a -> s{_gnfcNumDecimalPlaces = a})
+
+instance FromJSON GamesNumberFormatConfiguration
+         where
+        parseJSON
+          = withObject "GamesNumberFormatConfiguration"
+              (\ o ->
+                 GamesNumberFormatConfiguration <$>
+                   (o .:? "suffix") <*> (o .:? "currencyCode") <*>
+                     (o .:? "numberFormatType")
+                     <*> (o .:? "numDecimalPlaces"))
+
+instance ToJSON GamesNumberFormatConfiguration where
+        toJSON GamesNumberFormatConfiguration{..}
+          = object
+              (catMaybes
+                 [("suffix" .=) <$> _gnfcSuffix,
+                  ("currencyCode" .=) <$> _gnfcCurrencyCode,
+                  ("numberFormatType" .=) <$> _gnfcNumberFormatType,
+                  ("numDecimalPlaces" .=) <$> _gnfcNumDecimalPlaces])
+
+-- | This is a JSON template for a leaderboard configuration detail.
 --
--- * 'acdIconUrl'
+-- /See:/ 'leaderboardConfigurationDetail' smart constructor.
+data LeaderboardConfigurationDetail = LeaderboardConfigurationDetail
+    { _lcdKind        :: !Text
+    , _lcdScoreFormat :: !(Maybe (Maybe GamesNumberFormatConfiguration))
+    , _lcdSortRank    :: !(Maybe Int32)
+    , _lcdName        :: !(Maybe (Maybe LocalizedStringBundle))
+    , _lcdIconUrl     :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LeaderboardConfigurationDetail' with the minimum fields required to make a request.
 --
--- * 'acdDescription'
-achievementConfigurationDetail
-    :: AchievementConfigurationDetail
-achievementConfigurationDetail =
-    AchievementConfigurationDetail
-    { _acdKind = "gamesConfiguration#achievementConfigurationDetail"
-    , _acdSortRank = Nothing
-    , _acdName = Nothing
-    , _acdPointValue = Nothing
-    , _acdIconUrl = Nothing
-    , _acdDescription = Nothing
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lcdKind'
+--
+-- * 'lcdScoreFormat'
+--
+-- * 'lcdSortRank'
+--
+-- * 'lcdName'
+--
+-- * 'lcdIconUrl'
+leaderboardConfigurationDetail
+    :: LeaderboardConfigurationDetail
+leaderboardConfigurationDetail =
+    LeaderboardConfigurationDetail
+    { _lcdKind = "gamesConfiguration#leaderboardConfigurationDetail"
+    , _lcdScoreFormat = Nothing
+    , _lcdSortRank = Nothing
+    , _lcdName = Nothing
+    , _lcdIconUrl = Nothing
     }
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
--- string gamesConfiguration#achievementConfigurationDetail.
-acdKind :: Lens' AchievementConfigurationDetail Text
-acdKind = lens _acdKind (\ s a -> s{_acdKind = a})
+-- string gamesConfiguration#leaderboardConfigurationDetail.
+lcdKind :: Lens' LeaderboardConfigurationDetail Text
+lcdKind = lens _lcdKind (\ s a -> s{_lcdKind = a})
 
--- | The sort rank of this achievement. Writes to this field are ignored.
-acdSortRank :: Lens' AchievementConfigurationDetail (Maybe Int32)
-acdSortRank
-  = lens _acdSortRank (\ s a -> s{_acdSortRank = a})
+-- | The score formatting for the leaderboard.
+lcdScoreFormat :: Lens' LeaderboardConfigurationDetail (Maybe (Maybe GamesNumberFormatConfiguration))
+lcdScoreFormat
+  = lens _lcdScoreFormat
+      (\ s a -> s{_lcdScoreFormat = a})
 
--- | Localized strings for the achievement name.
-acdName :: Lens' AchievementConfigurationDetail (Maybe (Maybe LocalizedStringBundle))
-acdName = lens _acdName (\ s a -> s{_acdName = a})
+-- | The sort rank of this leaderboard. Writes to this field are ignored.
+lcdSortRank :: Lens' LeaderboardConfigurationDetail (Maybe Int32)
+lcdSortRank
+  = lens _lcdSortRank (\ s a -> s{_lcdSortRank = a})
 
--- | Point value for the achievement.
-acdPointValue :: Lens' AchievementConfigurationDetail (Maybe Int32)
-acdPointValue
-  = lens _acdPointValue
-      (\ s a -> s{_acdPointValue = a})
+-- | Localized strings for the leaderboard name.
+lcdName :: Lens' LeaderboardConfigurationDetail (Maybe (Maybe LocalizedStringBundle))
+lcdName = lens _lcdName (\ s a -> s{_lcdName = a})
 
--- | The icon url of this achievement. Writes to this field are ignored.
-acdIconUrl :: Lens' AchievementConfigurationDetail (Maybe Text)
-acdIconUrl
-  = lens _acdIconUrl (\ s a -> s{_acdIconUrl = a})
+-- | The icon url of this leaderboard. Writes to this field are ignored.
+lcdIconUrl :: Lens' LeaderboardConfigurationDetail (Maybe Text)
+lcdIconUrl
+  = lens _lcdIconUrl (\ s a -> s{_lcdIconUrl = a})
 
--- | Localized strings for the achievement description.
-acdDescription :: Lens' AchievementConfigurationDetail (Maybe (Maybe LocalizedStringBundle))
-acdDescription
-  = lens _acdDescription
-      (\ s a -> s{_acdDescription = a})
-
-instance FromJSON AchievementConfigurationDetail
+instance FromJSON LeaderboardConfigurationDetail
          where
         parseJSON
-          = withObject "AchievementConfigurationDetail"
+          = withObject "LeaderboardConfigurationDetail"
               (\ o ->
-                 AchievementConfigurationDetail <$>
+                 LeaderboardConfigurationDetail <$>
                    (o .:? "kind" .!=
-                      "gamesConfiguration#achievementConfigurationDetail")
+                      "gamesConfiguration#leaderboardConfigurationDetail")
+                     <*> (o .:? "scoreFormat")
                      <*> (o .:? "sortRank")
                      <*> (o .:? "name")
-                     <*> (o .:? "pointValue")
-                     <*> (o .:? "iconUrl")
-                     <*> (o .:? "description"))
+                     <*> (o .:? "iconUrl"))
 
-instance ToJSON AchievementConfigurationDetail where
-        toJSON AchievementConfigurationDetail{..}
+instance ToJSON LeaderboardConfigurationDetail where
+        toJSON LeaderboardConfigurationDetail{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _acdKind),
-                  ("sortRank" .=) <$> _acdSortRank,
-                  ("name" .=) <$> _acdName,
-                  ("pointValue" .=) <$> _acdPointValue,
-                  ("iconUrl" .=) <$> _acdIconUrl,
-                  ("description" .=) <$> _acdDescription])
+                 [Just ("kind" .= _lcdKind),
+                  ("scoreFormat" .=) <$> _lcdScoreFormat,
+                  ("sortRank" .=) <$> _lcdSortRank,
+                  ("name" .=) <$> _lcdName,
+                  ("iconUrl" .=) <$> _lcdIconUrl])
 
 -- | This is a JSON template for a ListConfigurations response.
 --
@@ -387,86 +455,6 @@ instance ToJSON GamesNumberAffixConfiguration where
                   ("one" .=) <$> _gnacOne, ("zero" .=) <$> _gnacZero,
                   ("many" .=) <$> _gnacMany])
 
--- | This is a JSON template for a number format resource.
---
--- /See:/ 'gamesNumberFormatConfiguration' smart constructor.
-data GamesNumberFormatConfiguration = GamesNumberFormatConfiguration
-    { _gnfcSuffix           :: !(Maybe (Maybe GamesNumberAffixConfiguration))
-    , _gnfcCurrencyCode     :: !(Maybe Text)
-    , _gnfcNumberFormatType :: !(Maybe Text)
-    , _gnfcNumDecimalPlaces :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'GamesNumberFormatConfiguration' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'gnfcSuffix'
---
--- * 'gnfcCurrencyCode'
---
--- * 'gnfcNumberFormatType'
---
--- * 'gnfcNumDecimalPlaces'
-gamesNumberFormatConfiguration
-    :: GamesNumberFormatConfiguration
-gamesNumberFormatConfiguration =
-    GamesNumberFormatConfiguration
-    { _gnfcSuffix = Nothing
-    , _gnfcCurrencyCode = Nothing
-    , _gnfcNumberFormatType = Nothing
-    , _gnfcNumDecimalPlaces = Nothing
-    }
-
--- | An optional suffix for the NUMERIC format type. These strings follow the
--- same plural rules as all Android string resources.
-gnfcSuffix :: Lens' GamesNumberFormatConfiguration (Maybe (Maybe GamesNumberAffixConfiguration))
-gnfcSuffix
-  = lens _gnfcSuffix (\ s a -> s{_gnfcSuffix = a})
-
--- | The curreny code string. Only used for CURRENCY format type.
-gnfcCurrencyCode :: Lens' GamesNumberFormatConfiguration (Maybe Text)
-gnfcCurrencyCode
-  = lens _gnfcCurrencyCode
-      (\ s a -> s{_gnfcCurrencyCode = a})
-
--- | The formatting for the number. Possible values are: - \"NUMERIC\" -
--- Numbers are formatted to have no digits or a fixed number of digits
--- after the decimal point according to locale. An optional custom unit can
--- be added. - \"TIME_DURATION\" - Numbers are formatted to hours, minutes
--- and seconds. - \"CURRENCY\" - Numbers are formatted to currency
--- according to locale.
-gnfcNumberFormatType :: Lens' GamesNumberFormatConfiguration (Maybe Text)
-gnfcNumberFormatType
-  = lens _gnfcNumberFormatType
-      (\ s a -> s{_gnfcNumberFormatType = a})
-
--- | The number of decimal places for number. Only used for NUMERIC format
--- type.
-gnfcNumDecimalPlaces :: Lens' GamesNumberFormatConfiguration (Maybe Int32)
-gnfcNumDecimalPlaces
-  = lens _gnfcNumDecimalPlaces
-      (\ s a -> s{_gnfcNumDecimalPlaces = a})
-
-instance FromJSON GamesNumberFormatConfiguration
-         where
-        parseJSON
-          = withObject "GamesNumberFormatConfiguration"
-              (\ o ->
-                 GamesNumberFormatConfiguration <$>
-                   (o .:? "suffix") <*> (o .:? "currencyCode") <*>
-                     (o .:? "numberFormatType")
-                     <*> (o .:? "numDecimalPlaces"))
-
-instance ToJSON GamesNumberFormatConfiguration where
-        toJSON GamesNumberFormatConfiguration{..}
-          = object
-              (catMaybes
-                 [("suffix" .=) <$> _gnfcSuffix,
-                  ("currencyCode" .=) <$> _gnfcCurrencyCode,
-                  ("numberFormatType" .=) <$> _gnfcNumberFormatType,
-                  ("numDecimalPlaces" .=) <$> _gnfcNumDecimalPlaces])
-
 -- | This is a JSON template for an image configuration resource.
 --
 -- /See:/ 'imageConfiguration' smart constructor.
@@ -535,6 +523,276 @@ instance ToJSON ImageConfiguration where
                  [("resourceId" .=) <$> _icResourceId,
                   Just ("kind" .= _icKind), ("url" .=) <$> _icUrl,
                   ("imageType" .=) <$> _icImageType])
+
+-- | This is a JSON template for a localized string resource.
+--
+-- /See:/ 'localizedString' smart constructor.
+data LocalizedString = LocalizedString
+    { _lsKind   :: !Text
+    , _lsLocale :: !(Maybe Text)
+    , _lsValue  :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LocalizedString' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lsKind'
+--
+-- * 'lsLocale'
+--
+-- * 'lsValue'
+localizedString
+    :: LocalizedString
+localizedString =
+    LocalizedString
+    { _lsKind = "gamesConfiguration#localizedString"
+    , _lsLocale = Nothing
+    , _lsValue = Nothing
+    }
+
+-- | Uniquely identifies the type of this resource. Value is always the fixed
+-- string gamesConfiguration#localizedString.
+lsKind :: Lens' LocalizedString Text
+lsKind = lens _lsKind (\ s a -> s{_lsKind = a})
+
+-- | The locale string.
+lsLocale :: Lens' LocalizedString (Maybe Text)
+lsLocale = lens _lsLocale (\ s a -> s{_lsLocale = a})
+
+-- | The string value.
+lsValue :: Lens' LocalizedString (Maybe Text)
+lsValue = lens _lsValue (\ s a -> s{_lsValue = a})
+
+instance FromJSON LocalizedString where
+        parseJSON
+          = withObject "LocalizedString"
+              (\ o ->
+                 LocalizedString <$>
+                   (o .:? "kind" .!=
+                      "gamesConfiguration#localizedString")
+                     <*> (o .:? "locale")
+                     <*> (o .:? "value"))
+
+instance ToJSON LocalizedString where
+        toJSON LocalizedString{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _lsKind),
+                  ("locale" .=) <$> _lsLocale,
+                  ("value" .=) <$> _lsValue])
+
+-- | This is a JSON template for a ListConfigurations response.
+--
+-- /See:/ 'leaderboardConfigurationListResponse' smart constructor.
+data LeaderboardConfigurationListResponse = LeaderboardConfigurationListResponse
+    { _lclrNextPageToken :: !(Maybe Text)
+    , _lclrKind          :: !Text
+    , _lclrItems         :: !(Maybe [Maybe LeaderboardConfiguration])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LeaderboardConfigurationListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lclrNextPageToken'
+--
+-- * 'lclrKind'
+--
+-- * 'lclrItems'
+leaderboardConfigurationListResponse
+    :: LeaderboardConfigurationListResponse
+leaderboardConfigurationListResponse =
+    LeaderboardConfigurationListResponse
+    { _lclrNextPageToken = Nothing
+    , _lclrKind = "gamesConfiguration#leaderboardConfigurationListResponse"
+    , _lclrItems = Nothing
+    }
+
+-- | The pagination token for the next page of results.
+lclrNextPageToken :: Lens' LeaderboardConfigurationListResponse (Maybe Text)
+lclrNextPageToken
+  = lens _lclrNextPageToken
+      (\ s a -> s{_lclrNextPageToken = a})
+
+-- | Uniquely identifies the type of this resource. Value is always the fixed
+-- string games#leaderboardConfigurationListResponse.
+lclrKind :: Lens' LeaderboardConfigurationListResponse Text
+lclrKind = lens _lclrKind (\ s a -> s{_lclrKind = a})
+
+-- | The leaderboard configurations.
+lclrItems :: Lens' LeaderboardConfigurationListResponse [Maybe LeaderboardConfiguration]
+lclrItems
+  = lens _lclrItems (\ s a -> s{_lclrItems = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON
+         LeaderboardConfigurationListResponse where
+        parseJSON
+          = withObject "LeaderboardConfigurationListResponse"
+              (\ o ->
+                 LeaderboardConfigurationListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!=
+                        "gamesConfiguration#leaderboardConfigurationListResponse")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON LeaderboardConfigurationListResponse
+         where
+        toJSON LeaderboardConfigurationListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lclrNextPageToken,
+                  Just ("kind" .= _lclrKind),
+                  ("items" .=) <$> _lclrItems])
+
+-- | This is a JSON template for an achievement configuration detail.
+--
+-- /See:/ 'achievementConfigurationDetail' smart constructor.
+data AchievementConfigurationDetail = AchievementConfigurationDetail
+    { _acdKind        :: !Text
+    , _acdSortRank    :: !(Maybe Int32)
+    , _acdName        :: !(Maybe (Maybe LocalizedStringBundle))
+    , _acdPointValue  :: !(Maybe Int32)
+    , _acdIconUrl     :: !(Maybe Text)
+    , _acdDescription :: !(Maybe (Maybe LocalizedStringBundle))
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AchievementConfigurationDetail' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'acdKind'
+--
+-- * 'acdSortRank'
+--
+-- * 'acdName'
+--
+-- * 'acdPointValue'
+--
+-- * 'acdIconUrl'
+--
+-- * 'acdDescription'
+achievementConfigurationDetail
+    :: AchievementConfigurationDetail
+achievementConfigurationDetail =
+    AchievementConfigurationDetail
+    { _acdKind = "gamesConfiguration#achievementConfigurationDetail"
+    , _acdSortRank = Nothing
+    , _acdName = Nothing
+    , _acdPointValue = Nothing
+    , _acdIconUrl = Nothing
+    , _acdDescription = Nothing
+    }
+
+-- | Uniquely identifies the type of this resource. Value is always the fixed
+-- string gamesConfiguration#achievementConfigurationDetail.
+acdKind :: Lens' AchievementConfigurationDetail Text
+acdKind = lens _acdKind (\ s a -> s{_acdKind = a})
+
+-- | The sort rank of this achievement. Writes to this field are ignored.
+acdSortRank :: Lens' AchievementConfigurationDetail (Maybe Int32)
+acdSortRank
+  = lens _acdSortRank (\ s a -> s{_acdSortRank = a})
+
+-- | Localized strings for the achievement name.
+acdName :: Lens' AchievementConfigurationDetail (Maybe (Maybe LocalizedStringBundle))
+acdName = lens _acdName (\ s a -> s{_acdName = a})
+
+-- | Point value for the achievement.
+acdPointValue :: Lens' AchievementConfigurationDetail (Maybe Int32)
+acdPointValue
+  = lens _acdPointValue
+      (\ s a -> s{_acdPointValue = a})
+
+-- | The icon url of this achievement. Writes to this field are ignored.
+acdIconUrl :: Lens' AchievementConfigurationDetail (Maybe Text)
+acdIconUrl
+  = lens _acdIconUrl (\ s a -> s{_acdIconUrl = a})
+
+-- | Localized strings for the achievement description.
+acdDescription :: Lens' AchievementConfigurationDetail (Maybe (Maybe LocalizedStringBundle))
+acdDescription
+  = lens _acdDescription
+      (\ s a -> s{_acdDescription = a})
+
+instance FromJSON AchievementConfigurationDetail
+         where
+        parseJSON
+          = withObject "AchievementConfigurationDetail"
+              (\ o ->
+                 AchievementConfigurationDetail <$>
+                   (o .:? "kind" .!=
+                      "gamesConfiguration#achievementConfigurationDetail")
+                     <*> (o .:? "sortRank")
+                     <*> (o .:? "name")
+                     <*> (o .:? "pointValue")
+                     <*> (o .:? "iconUrl")
+                     <*> (o .:? "description"))
+
+instance ToJSON AchievementConfigurationDetail where
+        toJSON AchievementConfigurationDetail{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _acdKind),
+                  ("sortRank" .=) <$> _acdSortRank,
+                  ("name" .=) <$> _acdName,
+                  ("pointValue" .=) <$> _acdPointValue,
+                  ("iconUrl" .=) <$> _acdIconUrl,
+                  ("description" .=) <$> _acdDescription])
+
+-- | This is a JSON template for a localized string bundle resource.
+--
+-- /See:/ 'localizedStringBundle' smart constructor.
+data LocalizedStringBundle = LocalizedStringBundle
+    { _lsbKind         :: !Text
+    , _lsbTranslations :: !(Maybe [Maybe LocalizedString])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LocalizedStringBundle' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lsbKind'
+--
+-- * 'lsbTranslations'
+localizedStringBundle
+    :: LocalizedStringBundle
+localizedStringBundle =
+    LocalizedStringBundle
+    { _lsbKind = "gamesConfiguration#localizedStringBundle"
+    , _lsbTranslations = Nothing
+    }
+
+-- | Uniquely identifies the type of this resource. Value is always the fixed
+-- string gamesConfiguration#localizedStringBundle.
+lsbKind :: Lens' LocalizedStringBundle Text
+lsbKind = lens _lsbKind (\ s a -> s{_lsbKind = a})
+
+-- | The locale strings.
+lsbTranslations :: Lens' LocalizedStringBundle [Maybe LocalizedString]
+lsbTranslations
+  = lens _lsbTranslations
+      (\ s a -> s{_lsbTranslations = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON LocalizedStringBundle where
+        parseJSON
+          = withObject "LocalizedStringBundle"
+              (\ o ->
+                 LocalizedStringBundle <$>
+                   (o .:? "kind" .!=
+                      "gamesConfiguration#localizedStringBundle")
+                     <*> (o .:? "translations" .!= mempty))
+
+instance ToJSON LocalizedStringBundle where
+        toJSON LocalizedStringBundle{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _lsbKind),
+                  ("translations" .=) <$> _lsbTranslations])
 
 -- | This is a JSON template for an leaderboard configuration resource.
 --
@@ -648,261 +906,3 @@ instance ToJSON LeaderboardConfiguration where
                   ("scoreMin" .=) <$> _lcScoreMin,
                   ("draft" .=) <$> _lcDraft, ("id" .=) <$> _lcId,
                   ("scoreOrder" .=) <$> _lcScoreOrder])
-
--- | This is a JSON template for a leaderboard configuration detail.
---
--- /See:/ 'leaderboardConfigurationDetail' smart constructor.
-data LeaderboardConfigurationDetail = LeaderboardConfigurationDetail
-    { _lcdKind        :: !Text
-    , _lcdScoreFormat :: !(Maybe (Maybe GamesNumberFormatConfiguration))
-    , _lcdSortRank    :: !(Maybe Int32)
-    , _lcdName        :: !(Maybe (Maybe LocalizedStringBundle))
-    , _lcdIconUrl     :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'LeaderboardConfigurationDetail' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lcdKind'
---
--- * 'lcdScoreFormat'
---
--- * 'lcdSortRank'
---
--- * 'lcdName'
---
--- * 'lcdIconUrl'
-leaderboardConfigurationDetail
-    :: LeaderboardConfigurationDetail
-leaderboardConfigurationDetail =
-    LeaderboardConfigurationDetail
-    { _lcdKind = "gamesConfiguration#leaderboardConfigurationDetail"
-    , _lcdScoreFormat = Nothing
-    , _lcdSortRank = Nothing
-    , _lcdName = Nothing
-    , _lcdIconUrl = Nothing
-    }
-
--- | Uniquely identifies the type of this resource. Value is always the fixed
--- string gamesConfiguration#leaderboardConfigurationDetail.
-lcdKind :: Lens' LeaderboardConfigurationDetail Text
-lcdKind = lens _lcdKind (\ s a -> s{_lcdKind = a})
-
--- | The score formatting for the leaderboard.
-lcdScoreFormat :: Lens' LeaderboardConfigurationDetail (Maybe (Maybe GamesNumberFormatConfiguration))
-lcdScoreFormat
-  = lens _lcdScoreFormat
-      (\ s a -> s{_lcdScoreFormat = a})
-
--- | The sort rank of this leaderboard. Writes to this field are ignored.
-lcdSortRank :: Lens' LeaderboardConfigurationDetail (Maybe Int32)
-lcdSortRank
-  = lens _lcdSortRank (\ s a -> s{_lcdSortRank = a})
-
--- | Localized strings for the leaderboard name.
-lcdName :: Lens' LeaderboardConfigurationDetail (Maybe (Maybe LocalizedStringBundle))
-lcdName = lens _lcdName (\ s a -> s{_lcdName = a})
-
--- | The icon url of this leaderboard. Writes to this field are ignored.
-lcdIconUrl :: Lens' LeaderboardConfigurationDetail (Maybe Text)
-lcdIconUrl
-  = lens _lcdIconUrl (\ s a -> s{_lcdIconUrl = a})
-
-instance FromJSON LeaderboardConfigurationDetail
-         where
-        parseJSON
-          = withObject "LeaderboardConfigurationDetail"
-              (\ o ->
-                 LeaderboardConfigurationDetail <$>
-                   (o .:? "kind" .!=
-                      "gamesConfiguration#leaderboardConfigurationDetail")
-                     <*> (o .:? "scoreFormat")
-                     <*> (o .:? "sortRank")
-                     <*> (o .:? "name")
-                     <*> (o .:? "iconUrl"))
-
-instance ToJSON LeaderboardConfigurationDetail where
-        toJSON LeaderboardConfigurationDetail{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _lcdKind),
-                  ("scoreFormat" .=) <$> _lcdScoreFormat,
-                  ("sortRank" .=) <$> _lcdSortRank,
-                  ("name" .=) <$> _lcdName,
-                  ("iconUrl" .=) <$> _lcdIconUrl])
-
--- | This is a JSON template for a ListConfigurations response.
---
--- /See:/ 'leaderboardConfigurationListResponse' smart constructor.
-data LeaderboardConfigurationListResponse = LeaderboardConfigurationListResponse
-    { _lclrNextPageToken :: !(Maybe Text)
-    , _lclrKind          :: !Text
-    , _lclrItems         :: !(Maybe [Maybe LeaderboardConfiguration])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'LeaderboardConfigurationListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lclrNextPageToken'
---
--- * 'lclrKind'
---
--- * 'lclrItems'
-leaderboardConfigurationListResponse
-    :: LeaderboardConfigurationListResponse
-leaderboardConfigurationListResponse =
-    LeaderboardConfigurationListResponse
-    { _lclrNextPageToken = Nothing
-    , _lclrKind = "gamesConfiguration#leaderboardConfigurationListResponse"
-    , _lclrItems = Nothing
-    }
-
--- | The pagination token for the next page of results.
-lclrNextPageToken :: Lens' LeaderboardConfigurationListResponse (Maybe Text)
-lclrNextPageToken
-  = lens _lclrNextPageToken
-      (\ s a -> s{_lclrNextPageToken = a})
-
--- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#leaderboardConfigurationListResponse.
-lclrKind :: Lens' LeaderboardConfigurationListResponse Text
-lclrKind = lens _lclrKind (\ s a -> s{_lclrKind = a})
-
--- | The leaderboard configurations.
-lclrItems :: Lens' LeaderboardConfigurationListResponse [Maybe LeaderboardConfiguration]
-lclrItems
-  = lens _lclrItems (\ s a -> s{_lclrItems = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON
-         LeaderboardConfigurationListResponse where
-        parseJSON
-          = withObject "LeaderboardConfigurationListResponse"
-              (\ o ->
-                 LeaderboardConfigurationListResponse <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!=
-                        "gamesConfiguration#leaderboardConfigurationListResponse")
-                     <*> (o .:? "items" .!= mempty))
-
-instance ToJSON LeaderboardConfigurationListResponse
-         where
-        toJSON LeaderboardConfigurationListResponse{..}
-          = object
-              (catMaybes
-                 [("nextPageToken" .=) <$> _lclrNextPageToken,
-                  Just ("kind" .= _lclrKind),
-                  ("items" .=) <$> _lclrItems])
-
--- | This is a JSON template for a localized string resource.
---
--- /See:/ 'localizedString' smart constructor.
-data LocalizedString = LocalizedString
-    { _lsKind   :: !Text
-    , _lsLocale :: !(Maybe Text)
-    , _lsValue  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'LocalizedString' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lsKind'
---
--- * 'lsLocale'
---
--- * 'lsValue'
-localizedString
-    :: LocalizedString
-localizedString =
-    LocalizedString
-    { _lsKind = "gamesConfiguration#localizedString"
-    , _lsLocale = Nothing
-    , _lsValue = Nothing
-    }
-
--- | Uniquely identifies the type of this resource. Value is always the fixed
--- string gamesConfiguration#localizedString.
-lsKind :: Lens' LocalizedString Text
-lsKind = lens _lsKind (\ s a -> s{_lsKind = a})
-
--- | The locale string.
-lsLocale :: Lens' LocalizedString (Maybe Text)
-lsLocale = lens _lsLocale (\ s a -> s{_lsLocale = a})
-
--- | The string value.
-lsValue :: Lens' LocalizedString (Maybe Text)
-lsValue = lens _lsValue (\ s a -> s{_lsValue = a})
-
-instance FromJSON LocalizedString where
-        parseJSON
-          = withObject "LocalizedString"
-              (\ o ->
-                 LocalizedString <$>
-                   (o .:? "kind" .!=
-                      "gamesConfiguration#localizedString")
-                     <*> (o .:? "locale")
-                     <*> (o .:? "value"))
-
-instance ToJSON LocalizedString where
-        toJSON LocalizedString{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _lsKind),
-                  ("locale" .=) <$> _lsLocale,
-                  ("value" .=) <$> _lsValue])
-
--- | This is a JSON template for a localized string bundle resource.
---
--- /See:/ 'localizedStringBundle' smart constructor.
-data LocalizedStringBundle = LocalizedStringBundle
-    { _lsbKind         :: !Text
-    , _lsbTranslations :: !(Maybe [Maybe LocalizedString])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'LocalizedStringBundle' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lsbKind'
---
--- * 'lsbTranslations'
-localizedStringBundle
-    :: LocalizedStringBundle
-localizedStringBundle =
-    LocalizedStringBundle
-    { _lsbKind = "gamesConfiguration#localizedStringBundle"
-    , _lsbTranslations = Nothing
-    }
-
--- | Uniquely identifies the type of this resource. Value is always the fixed
--- string gamesConfiguration#localizedStringBundle.
-lsbKind :: Lens' LocalizedStringBundle Text
-lsbKind = lens _lsbKind (\ s a -> s{_lsbKind = a})
-
--- | The locale strings.
-lsbTranslations :: Lens' LocalizedStringBundle [Maybe LocalizedString]
-lsbTranslations
-  = lens _lsbTranslations
-      (\ s a -> s{_lsbTranslations = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON LocalizedStringBundle where
-        parseJSON
-          = withObject "LocalizedStringBundle"
-              (\ o ->
-                 LocalizedStringBundle <$>
-                   (o .:? "kind" .!=
-                      "gamesConfiguration#localizedStringBundle")
-                     <*> (o .:? "translations" .!= mempty))
-
-instance ToJSON LocalizedStringBundle where
-        toJSON LocalizedStringBundle{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _lsbKind),
-                  ("translations" .=) <$> _lsbTranslations])

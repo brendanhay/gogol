@@ -18,126 +18,30 @@ module Network.Google.DNS.Types.Product where
 import           Network.Google.DNS.Types.Sum
 import           Network.Google.Prelude
 
--- | An atomic update to a collection of ResourceRecordSets.
 --
--- /See:/ 'change' smart constructor.
-data Change = Change
-    { _cStatus    :: !(Maybe Text)
-    , _cAdditions :: !(Maybe [Maybe ResourceRecordSet])
-    , _cStartTime :: !(Maybe Text)
-    , _cKind      :: !Text
-    , _cDeletions :: !(Maybe [Maybe ResourceRecordSet])
-    , _cId        :: !(Maybe Text)
+-- /See:/ 'resourceRecordSetsListResponse' smart constructor.
+data ResourceRecordSetsListResponse = ResourceRecordSetsListResponse
+    { _rrslrNextPageToken :: !(Maybe Text)
+    , _rrslrKind          :: !Text
+    , _rrslrRrsets        :: !(Maybe [Maybe ResourceRecordSet])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Change' with the minimum fields required to make a request.
+-- | Creates a value of 'ResourceRecordSetsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cStatus'
+-- * 'rrslrNextPageToken'
 --
--- * 'cAdditions'
+-- * 'rrslrKind'
 --
--- * 'cStartTime'
---
--- * 'cKind'
---
--- * 'cDeletions'
---
--- * 'cId'
-change
-    :: Change
-change =
-    Change
-    { _cStatus = Nothing
-    , _cAdditions = Nothing
-    , _cStartTime = Nothing
-    , _cKind = "dns#change"
-    , _cDeletions = Nothing
-    , _cId = Nothing
-    }
-
--- | Status of the operation (output only).
-cStatus :: Lens' Change (Maybe Text)
-cStatus = lens _cStatus (\ s a -> s{_cStatus = a})
-
--- | Which ResourceRecordSets to add?
-cAdditions :: Lens' Change [Maybe ResourceRecordSet]
-cAdditions
-  = lens _cAdditions (\ s a -> s{_cAdditions = a}) .
-      _Default
-      . _Coerce
-
--- | The time that this operation was started by the server. This is in
--- RFC3339 text format.
-cStartTime :: Lens' Change (Maybe Text)
-cStartTime
-  = lens _cStartTime (\ s a -> s{_cStartTime = a})
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"dns#change\".
-cKind :: Lens' Change Text
-cKind = lens _cKind (\ s a -> s{_cKind = a})
-
--- | Which ResourceRecordSets to remove? Must match existing data exactly.
-cDeletions :: Lens' Change [Maybe ResourceRecordSet]
-cDeletions
-  = lens _cDeletions (\ s a -> s{_cDeletions = a}) .
-      _Default
-      . _Coerce
-
--- | Unique identifier for the resource; defined by the server (output only).
-cId :: Lens' Change (Maybe Text)
-cId = lens _cId (\ s a -> s{_cId = a})
-
-instance FromJSON Change where
-        parseJSON
-          = withObject "Change"
-              (\ o ->
-                 Change <$>
-                   (o .:? "status") <*> (o .:? "additions" .!= mempty)
-                     <*> (o .:? "startTime")
-                     <*> (o .:? "kind" .!= "dns#change")
-                     <*> (o .:? "deletions" .!= mempty)
-                     <*> (o .:? "id"))
-
-instance ToJSON Change where
-        toJSON Change{..}
-          = object
-              (catMaybes
-                 [("status" .=) <$> _cStatus,
-                  ("additions" .=) <$> _cAdditions,
-                  ("startTime" .=) <$> _cStartTime,
-                  Just ("kind" .= _cKind),
-                  ("deletions" .=) <$> _cDeletions,
-                  ("id" .=) <$> _cId])
-
--- | The response to a request to enumerate Changes to a ResourceRecordSets
--- collection.
---
--- /See:/ 'changesListResponse' smart constructor.
-data ChangesListResponse = ChangesListResponse
-    { _clrNextPageToken :: !(Maybe Text)
-    , _clrChanges       :: !(Maybe [Maybe Change])
-    , _clrKind          :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ChangesListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'clrNextPageToken'
---
--- * 'clrChanges'
---
--- * 'clrKind'
-changesListResponse
-    :: ChangesListResponse
-changesListResponse =
-    ChangesListResponse
-    { _clrNextPageToken = Nothing
-    , _clrChanges = Nothing
-    , _clrKind = "dns#changesListResponse"
+-- * 'rrslrRrsets'
+resourceRecordSetsListResponse
+    :: ResourceRecordSetsListResponse
+resourceRecordSetsListResponse =
+    ResourceRecordSetsListResponse
+    { _rrslrNextPageToken = Nothing
+    , _rrslrKind = "dns#resourceRecordSetsListResponse"
+    , _rrslrRrsets = Nothing
     }
 
 -- | The presence of this field indicates that there exist more results
@@ -147,40 +51,123 @@ changesListResponse =
 -- collections one page at a time. However, if the contents of the
 -- collection change between the first and last paginated list request, the
 -- set of all elements returned will be an inconsistent view of the
--- collection. There is no way to retrieve a \"snapshot\" of collections
--- larger than the maximum page size.
-clrNextPageToken :: Lens' ChangesListResponse (Maybe Text)
-clrNextPageToken
-  = lens _clrNextPageToken
-      (\ s a -> s{_clrNextPageToken = a})
+-- collection. There is no way to retrieve a consistent snapshot of a
+-- collection larger than the maximum page size.
+rrslrNextPageToken :: Lens' ResourceRecordSetsListResponse (Maybe Text)
+rrslrNextPageToken
+  = lens _rrslrNextPageToken
+      (\ s a -> s{_rrslrNextPageToken = a})
 
--- | The requested changes.
-clrChanges :: Lens' ChangesListResponse [Maybe Change]
-clrChanges
-  = lens _clrChanges (\ s a -> s{_clrChanges = a}) .
+-- | Type of resource.
+rrslrKind :: Lens' ResourceRecordSetsListResponse Text
+rrslrKind
+  = lens _rrslrKind (\ s a -> s{_rrslrKind = a})
+
+-- | The resource record set resources.
+rrslrRrsets :: Lens' ResourceRecordSetsListResponse [Maybe ResourceRecordSet]
+rrslrRrsets
+  = lens _rrslrRrsets (\ s a -> s{_rrslrRrsets = a}) .
       _Default
       . _Coerce
 
--- | Type of resource.
-clrKind :: Lens' ChangesListResponse Text
-clrKind = lens _clrKind (\ s a -> s{_clrKind = a})
-
-instance FromJSON ChangesListResponse where
+instance FromJSON ResourceRecordSetsListResponse
+         where
         parseJSON
-          = withObject "ChangesListResponse"
+          = withObject "ResourceRecordSetsListResponse"
               (\ o ->
-                 ChangesListResponse <$>
+                 ResourceRecordSetsListResponse <$>
                    (o .:? "nextPageToken") <*>
-                     (o .:? "changes" .!= mempty)
-                     <*> (o .:? "kind" .!= "dns#changesListResponse"))
+                     (o .:? "kind" .!=
+                        "dns#resourceRecordSetsListResponse")
+                     <*> (o .:? "rrsets" .!= mempty))
 
-instance ToJSON ChangesListResponse where
-        toJSON ChangesListResponse{..}
+instance ToJSON ResourceRecordSetsListResponse where
+        toJSON ResourceRecordSetsListResponse{..}
           = object
               (catMaybes
-                 [("nextPageToken" .=) <$> _clrNextPageToken,
-                  ("changes" .=) <$> _clrChanges,
-                  Just ("kind" .= _clrKind)])
+                 [("nextPageToken" .=) <$> _rrslrNextPageToken,
+                  Just ("kind" .= _rrslrKind),
+                  ("rrsets" .=) <$> _rrslrRrsets])
+
+-- | A unit of data that will be returned by the DNS servers.
+--
+-- /See:/ 'resourceRecordSet' smart constructor.
+data ResourceRecordSet = ResourceRecordSet
+    { _rrsTtl     :: !(Maybe Int32)
+    , _rrsKind    :: !Text
+    , _rrsName    :: !(Maybe Text)
+    , _rrsType    :: !(Maybe Text)
+    , _rrsRrdatas :: !(Maybe [Text])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ResourceRecordSet' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rrsTtl'
+--
+-- * 'rrsKind'
+--
+-- * 'rrsName'
+--
+-- * 'rrsType'
+--
+-- * 'rrsRrdatas'
+resourceRecordSet
+    :: ResourceRecordSet
+resourceRecordSet =
+    ResourceRecordSet
+    { _rrsTtl = Nothing
+    , _rrsKind = "dns#resourceRecordSet"
+    , _rrsName = Nothing
+    , _rrsType = Nothing
+    , _rrsRrdatas = Nothing
+    }
+
+-- | Number of seconds that this ResourceRecordSet can be cached by
+-- resolvers.
+rrsTtl :: Lens' ResourceRecordSet (Maybe Int32)
+rrsTtl = lens _rrsTtl (\ s a -> s{_rrsTtl = a})
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"dns#resourceRecordSet\".
+rrsKind :: Lens' ResourceRecordSet Text
+rrsKind = lens _rrsKind (\ s a -> s{_rrsKind = a})
+
+-- | For example, www.example.com.
+rrsName :: Lens' ResourceRecordSet (Maybe Text)
+rrsName = lens _rrsName (\ s a -> s{_rrsName = a})
+
+-- | The identifier of a supported record type, for example, A, AAAA, MX,
+-- TXT, and so on.
+rrsType :: Lens' ResourceRecordSet (Maybe Text)
+rrsType = lens _rrsType (\ s a -> s{_rrsType = a})
+
+-- | As defined in RFC 1035 (section 5) and RFC 1034 (section 3.6.1).
+rrsRrdatas :: Lens' ResourceRecordSet [Text]
+rrsRrdatas
+  = lens _rrsRrdatas (\ s a -> s{_rrsRrdatas = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ResourceRecordSet where
+        parseJSON
+          = withObject "ResourceRecordSet"
+              (\ o ->
+                 ResourceRecordSet <$>
+                   (o .:? "ttl") <*>
+                     (o .:? "kind" .!= "dns#resourceRecordSet")
+                     <*> (o .:? "name")
+                     <*> (o .:? "type")
+                     <*> (o .:? "rrdatas" .!= mempty))
+
+instance ToJSON ResourceRecordSet where
+        toJSON ResourceRecordSet{..}
+          = object
+              (catMaybes
+                 [("ttl" .=) <$> _rrsTtl, Just ("kind" .= _rrsKind),
+                  ("name" .=) <$> _rrsName, ("type" .=) <$> _rrsType,
+                  ("rrdatas" .=) <$> _rrsRrdatas])
 
 -- | A zone is a subtree of the DNS namespace under one administrative
 -- responsibility. A ManagedZone is a resource that represents a DNS zone
@@ -310,6 +297,100 @@ instance ToJSON ManagedZone where
                   ("description" .=) <$> _mzDescription,
                   ("nameServers" .=) <$> _mzNameServers])
 
+-- | An atomic update to a collection of ResourceRecordSets.
+--
+-- /See:/ 'change' smart constructor.
+data Change = Change
+    { _cStatus    :: !(Maybe Text)
+    , _cAdditions :: !(Maybe [Maybe ResourceRecordSet])
+    , _cStartTime :: !(Maybe Text)
+    , _cKind      :: !Text
+    , _cDeletions :: !(Maybe [Maybe ResourceRecordSet])
+    , _cId        :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Change' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cStatus'
+--
+-- * 'cAdditions'
+--
+-- * 'cStartTime'
+--
+-- * 'cKind'
+--
+-- * 'cDeletions'
+--
+-- * 'cId'
+change
+    :: Change
+change =
+    Change
+    { _cStatus = Nothing
+    , _cAdditions = Nothing
+    , _cStartTime = Nothing
+    , _cKind = "dns#change"
+    , _cDeletions = Nothing
+    , _cId = Nothing
+    }
+
+-- | Status of the operation (output only).
+cStatus :: Lens' Change (Maybe Text)
+cStatus = lens _cStatus (\ s a -> s{_cStatus = a})
+
+-- | Which ResourceRecordSets to add?
+cAdditions :: Lens' Change [Maybe ResourceRecordSet]
+cAdditions
+  = lens _cAdditions (\ s a -> s{_cAdditions = a}) .
+      _Default
+      . _Coerce
+
+-- | The time that this operation was started by the server. This is in
+-- RFC3339 text format.
+cStartTime :: Lens' Change (Maybe Text)
+cStartTime
+  = lens _cStartTime (\ s a -> s{_cStartTime = a})
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"dns#change\".
+cKind :: Lens' Change Text
+cKind = lens _cKind (\ s a -> s{_cKind = a})
+
+-- | Which ResourceRecordSets to remove? Must match existing data exactly.
+cDeletions :: Lens' Change [Maybe ResourceRecordSet]
+cDeletions
+  = lens _cDeletions (\ s a -> s{_cDeletions = a}) .
+      _Default
+      . _Coerce
+
+-- | Unique identifier for the resource; defined by the server (output only).
+cId :: Lens' Change (Maybe Text)
+cId = lens _cId (\ s a -> s{_cId = a})
+
+instance FromJSON Change where
+        parseJSON
+          = withObject "Change"
+              (\ o ->
+                 Change <$>
+                   (o .:? "status") <*> (o .:? "additions" .!= mempty)
+                     <*> (o .:? "startTime")
+                     <*> (o .:? "kind" .!= "dns#change")
+                     <*> (o .:? "deletions" .!= mempty)
+                     <*> (o .:? "id"))
+
+instance ToJSON Change where
+        toJSON Change{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _cStatus,
+                  ("additions" .=) <$> _cAdditions,
+                  ("startTime" .=) <$> _cStartTime,
+                  Just ("kind" .= _cKind),
+                  ("deletions" .=) <$> _cDeletions,
+                  ("id" .=) <$> _cId])
+
 --
 -- /See:/ 'managedZonesListResponse' smart constructor.
 data ManagedZonesListResponse = ManagedZonesListResponse
@@ -378,6 +459,76 @@ instance ToJSON ManagedZonesListResponse where
                  [("nextPageToken" .=) <$> _mzlrNextPageToken,
                   Just ("kind" .= _mzlrKind),
                   ("managedZones" .=) <$> _mzlrManagedZones])
+
+-- | The response to a request to enumerate Changes to a ResourceRecordSets
+-- collection.
+--
+-- /See:/ 'changesListResponse' smart constructor.
+data ChangesListResponse = ChangesListResponse
+    { _clrNextPageToken :: !(Maybe Text)
+    , _clrChanges       :: !(Maybe [Maybe Change])
+    , _clrKind          :: !Text
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ChangesListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'clrNextPageToken'
+--
+-- * 'clrChanges'
+--
+-- * 'clrKind'
+changesListResponse
+    :: ChangesListResponse
+changesListResponse =
+    ChangesListResponse
+    { _clrNextPageToken = Nothing
+    , _clrChanges = Nothing
+    , _clrKind = "dns#changesListResponse"
+    }
+
+-- | The presence of this field indicates that there exist more results
+-- following your last page of results in pagination order. To fetch them,
+-- make another list request using this value as your pagination token. In
+-- this way you can retrieve the complete contents of even very large
+-- collections one page at a time. However, if the contents of the
+-- collection change between the first and last paginated list request, the
+-- set of all elements returned will be an inconsistent view of the
+-- collection. There is no way to retrieve a \"snapshot\" of collections
+-- larger than the maximum page size.
+clrNextPageToken :: Lens' ChangesListResponse (Maybe Text)
+clrNextPageToken
+  = lens _clrNextPageToken
+      (\ s a -> s{_clrNextPageToken = a})
+
+-- | The requested changes.
+clrChanges :: Lens' ChangesListResponse [Maybe Change]
+clrChanges
+  = lens _clrChanges (\ s a -> s{_clrChanges = a}) .
+      _Default
+      . _Coerce
+
+-- | Type of resource.
+clrKind :: Lens' ChangesListResponse Text
+clrKind = lens _clrKind (\ s a -> s{_clrKind = a})
+
+instance FromJSON ChangesListResponse where
+        parseJSON
+          = withObject "ChangesListResponse"
+              (\ o ->
+                 ChangesListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "changes" .!= mempty)
+                     <*> (o .:? "kind" .!= "dns#changesListResponse"))
+
+instance ToJSON ChangesListResponse where
+        toJSON ChangesListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _clrNextPageToken,
+                  ("changes" .=) <$> _clrChanges,
+                  Just ("kind" .= _clrKind)])
 
 -- | A project resource. The project is a top level container for resources
 -- including Cloud DNS ManagedZones. Projects can be created only in the
@@ -563,154 +714,3 @@ instance ToJSON Quota where
                   ("managedZones" .=) <$> _qManagedZones,
                   ("totalRrdataSizePerChange" .=) <$>
                     _qTotalRrdataSizePerChange])
-
--- | A unit of data that will be returned by the DNS servers.
---
--- /See:/ 'resourceRecordSet' smart constructor.
-data ResourceRecordSet = ResourceRecordSet
-    { _rrsTtl     :: !(Maybe Int32)
-    , _rrsKind    :: !Text
-    , _rrsName    :: !(Maybe Text)
-    , _rrsType    :: !(Maybe Text)
-    , _rrsRrdatas :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ResourceRecordSet' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rrsTtl'
---
--- * 'rrsKind'
---
--- * 'rrsName'
---
--- * 'rrsType'
---
--- * 'rrsRrdatas'
-resourceRecordSet
-    :: ResourceRecordSet
-resourceRecordSet =
-    ResourceRecordSet
-    { _rrsTtl = Nothing
-    , _rrsKind = "dns#resourceRecordSet"
-    , _rrsName = Nothing
-    , _rrsType = Nothing
-    , _rrsRrdatas = Nothing
-    }
-
--- | Number of seconds that this ResourceRecordSet can be cached by
--- resolvers.
-rrsTtl :: Lens' ResourceRecordSet (Maybe Int32)
-rrsTtl = lens _rrsTtl (\ s a -> s{_rrsTtl = a})
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"dns#resourceRecordSet\".
-rrsKind :: Lens' ResourceRecordSet Text
-rrsKind = lens _rrsKind (\ s a -> s{_rrsKind = a})
-
--- | For example, www.example.com.
-rrsName :: Lens' ResourceRecordSet (Maybe Text)
-rrsName = lens _rrsName (\ s a -> s{_rrsName = a})
-
--- | The identifier of a supported record type, for example, A, AAAA, MX,
--- TXT, and so on.
-rrsType :: Lens' ResourceRecordSet (Maybe Text)
-rrsType = lens _rrsType (\ s a -> s{_rrsType = a})
-
--- | As defined in RFC 1035 (section 5) and RFC 1034 (section 3.6.1).
-rrsRrdatas :: Lens' ResourceRecordSet [Text]
-rrsRrdatas
-  = lens _rrsRrdatas (\ s a -> s{_rrsRrdatas = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON ResourceRecordSet where
-        parseJSON
-          = withObject "ResourceRecordSet"
-              (\ o ->
-                 ResourceRecordSet <$>
-                   (o .:? "ttl") <*>
-                     (o .:? "kind" .!= "dns#resourceRecordSet")
-                     <*> (o .:? "name")
-                     <*> (o .:? "type")
-                     <*> (o .:? "rrdatas" .!= mempty))
-
-instance ToJSON ResourceRecordSet where
-        toJSON ResourceRecordSet{..}
-          = object
-              (catMaybes
-                 [("ttl" .=) <$> _rrsTtl, Just ("kind" .= _rrsKind),
-                  ("name" .=) <$> _rrsName, ("type" .=) <$> _rrsType,
-                  ("rrdatas" .=) <$> _rrsRrdatas])
-
---
--- /See:/ 'resourceRecordSetsListResponse' smart constructor.
-data ResourceRecordSetsListResponse = ResourceRecordSetsListResponse
-    { _rrslrNextPageToken :: !(Maybe Text)
-    , _rrslrKind          :: !Text
-    , _rrslrRrsets        :: !(Maybe [Maybe ResourceRecordSet])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ResourceRecordSetsListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rrslrNextPageToken'
---
--- * 'rrslrKind'
---
--- * 'rrslrRrsets'
-resourceRecordSetsListResponse
-    :: ResourceRecordSetsListResponse
-resourceRecordSetsListResponse =
-    ResourceRecordSetsListResponse
-    { _rrslrNextPageToken = Nothing
-    , _rrslrKind = "dns#resourceRecordSetsListResponse"
-    , _rrslrRrsets = Nothing
-    }
-
--- | The presence of this field indicates that there exist more results
--- following your last page of results in pagination order. To fetch them,
--- make another list request using this value as your pagination token. In
--- this way you can retrieve the complete contents of even very large
--- collections one page at a time. However, if the contents of the
--- collection change between the first and last paginated list request, the
--- set of all elements returned will be an inconsistent view of the
--- collection. There is no way to retrieve a consistent snapshot of a
--- collection larger than the maximum page size.
-rrslrNextPageToken :: Lens' ResourceRecordSetsListResponse (Maybe Text)
-rrslrNextPageToken
-  = lens _rrslrNextPageToken
-      (\ s a -> s{_rrslrNextPageToken = a})
-
--- | Type of resource.
-rrslrKind :: Lens' ResourceRecordSetsListResponse Text
-rrslrKind
-  = lens _rrslrKind (\ s a -> s{_rrslrKind = a})
-
--- | The resource record set resources.
-rrslrRrsets :: Lens' ResourceRecordSetsListResponse [Maybe ResourceRecordSet]
-rrslrRrsets
-  = lens _rrslrRrsets (\ s a -> s{_rrslrRrsets = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON ResourceRecordSetsListResponse
-         where
-        parseJSON
-          = withObject "ResourceRecordSetsListResponse"
-              (\ o ->
-                 ResourceRecordSetsListResponse <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!=
-                        "dns#resourceRecordSetsListResponse")
-                     <*> (o .:? "rrsets" .!= mempty))
-
-instance ToJSON ResourceRecordSetsListResponse where
-        toJSON ResourceRecordSetsListResponse{..}
-          = object
-              (catMaybes
-                 [("nextPageToken" .=) <$> _rrslrNextPageToken,
-                  Just ("kind" .= _rrslrKind),
-                  ("rrsets" .=) <$> _rrslrRrsets])

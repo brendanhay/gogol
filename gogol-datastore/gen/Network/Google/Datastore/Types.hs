@@ -14,31 +14,89 @@
 --
 module Network.Google.Datastore.Types
     (
+    -- * Service URL
+      datastoreURL
+
+    -- * PropertyReference
+    , PropertyReference
+    , propertyReference
+    , prName
+
+    -- * GqlQueryArg
+    , GqlQueryArg
+    , gqlQueryArg
+    , gqaCursor
+    , gqaValue
+    , gqaName
+
+    -- * ResponseHeader
+    , ResponseHeader
+    , responseHeader
+    , rhKind
+
+    -- * KeyPathElement
+    , KeyPathElement
+    , keyPathElement
+    , kpeKind
+    , kpeName
+    , kpeId
+
+    -- * PropertyFilterOperator
+    , PropertyFilterOperator (..)
+
+    -- * PropertyFilter
+    , PropertyFilter
+    , propertyFilter
+    , pfProperty
+    , pfOperator
+    , pfValue
+
+    -- * Key
+    , Key
+    , key
+    , keyPartitionId
+    , keyPath
 
     -- * AllocateIdsRequest
-      AllocateIdsRequest
+    , AllocateIdsRequest
     , allocateIdsRequest
     , airKeys
 
-    -- * AllocateIdsResponse
-    , AllocateIdsResponse
-    , allocateIdsResponse
-    , aKeys
-    , aHeader
+    -- * RunQueryRequest
+    , RunQueryRequest
+    , runQueryRequest
+    , rqrPartitionId
+    , rqrGqlQuery
+    , rqrQuery
+    , rqrReadOptions
 
     -- * BeginTransactionRequest
     , BeginTransactionRequest
     , beginTransactionRequest
     , btrIsolationLevel
 
-    -- * BeginTransactionRequestIsolationLevel
-    , BeginTransactionRequestIsolationLevel (..)
+    -- * Alt
+    , Alt (..)
 
-    -- * BeginTransactionResponse
-    , BeginTransactionResponse
-    , beginTransactionResponse
-    , btrTransaction
-    , btrHeader
+    -- * RollbackResponse
+    , RollbackResponse
+    , rollbackResponse
+    , rrHeader
+
+    -- * ReadOptionsReadConsistency
+    , ReadOptionsReadConsistency (..)
+
+    -- * PropertyExpression
+    , PropertyExpression
+    , propertyExpression
+    , peProperty
+    , peAggregationFunction
+
+    -- * Filter
+    , Filter
+    , filter'
+    , fCompositeFilter
+    , fPropertyFilter
 
     -- * CommitRequest
     , CommitRequest
@@ -48,23 +106,8 @@ module Network.Google.Datastore.Types
     , crTransaction
     , crIgnoreReadOnly
 
-    -- * CommitRequestMode
-    , CommitRequestMode (..)
-
-    -- * CommitResponse
-    , CommitResponse
-    , commitResponse
-    , crMutationResult
-    , crHeader
-
-    -- * CompositeFilter
-    , CompositeFilter
-    , compositeFilter
-    , cfOperator
-    , cfFilters
-
-    -- * CompositeFilterOperator
-    , CompositeFilterOperator (..)
+    -- * QueryResultBatchMoreResults
+    , QueryResultBatchMoreResults (..)
 
     -- * Entity
     , Entity
@@ -72,59 +115,14 @@ module Network.Google.Datastore.Types
     , eKey
     , eProperties
 
-    -- * EntityProperties
-    , EntityProperties
-    , entityProperties
+    -- * CompositeFilterOperator
+    , CompositeFilterOperator (..)
 
-    -- * EntityResult
-    , EntityResult
-    , entityResult
-    , erEntity
-
-    -- * Filter
-    , Filter
-    , filter'
-    , fCompositeFilter
-    , fPropertyFilter
-
-    -- * GqlQuery
-    , GqlQuery
-    , gqlQuery
-    , gqAllowLiteral
-    , gqNumberArgs
-    , gqQueryString
-    , gqNameArgs
-
-    -- * GqlQueryArg
-    , GqlQueryArg
-    , gqlQueryArg
-    , gqaCursor
-    , gqaValue
-    , gqaName
-
-    -- * Key
-    , Key
-    , key
-    , keyPartitionId
-    , keyPath
-
-    -- * KeyPathElement
-    , KeyPathElement
-    , keyPathElement
-    , kpeKind
-    , kpeName
-    , kpeId
-
-    -- * KindExpression
-    , KindExpression
-    , kindExpression
-    , keName
-
-    -- * LookupRequest
-    , LookupRequest
-    , lookupRequest
-    , lrKeys
-    , lrReadOptions
+    -- * PropertyOrder
+    , PropertyOrder
+    , propertyOrder
+    , poProperty
+    , poDirection
 
     -- * LookupResponse
     , LookupResponse
@@ -134,27 +132,14 @@ module Network.Google.Datastore.Types
     , lrMissing
     , lrHeader
 
-    -- * Mutation
-    , Mutation
-    , mutation
-    , mInsert
-    , mForce
-    , mInsertAutoId
-    , mUpsert
-    , mDelete
-    , mUpdate
-
-    -- * MutationResult
-    , MutationResult
-    , mutationResult
-    , mrInsertAutoIdKeys
-    , mrIndexUpdates
-
     -- * PartitionId
     , PartitionId
     , partitionId
     , piNamespace
     , piDatasetId
+
+    -- * PropertyOrderDirection
+    , PropertyOrderDirection (..)
 
     -- * Property
     , Property
@@ -172,38 +157,24 @@ module Network.Google.Datastore.Types
     , pMeaning
     , pBlobValue
 
-    -- * PropertyExpression
-    , PropertyExpression
-    , propertyExpression
-    , peProperty
-    , peAggregationFunction
+    -- * QueryResultBatch
+    , QueryResultBatch
+    , queryResultBatch
+    , qrbSkippedResults
+    , qrbEntityResultType
+    , qrbEntityResults
+    , qrbMoreResults
+    , qrbEndCursor
 
-    -- * PropertyExpressionAggregationFunction
-    , PropertyExpressionAggregationFunction (..)
+    -- * RollbackRequest
+    , RollbackRequest
+    , rollbackRequest
+    , rrTransaction
 
-    -- * PropertyFilter
-    , PropertyFilter
-    , propertyFilter
-    , pfProperty
-    , pfOperator
-    , pfValue
-
-    -- * PropertyFilterOperator
-    , PropertyFilterOperator (..)
-
-    -- * PropertyOrder
-    , PropertyOrder
-    , propertyOrder
-    , poProperty
-    , poDirection
-
-    -- * PropertyOrderDirection
-    , PropertyOrderDirection (..)
-
-    -- * PropertyReference
-    , PropertyReference
-    , propertyReference
-    , prName
+    -- * KindExpression
+    , KindExpression
+    , kindExpression
+    , keName
 
     -- * Query
     , Query
@@ -218,58 +189,69 @@ module Network.Google.Datastore.Types
     , qKinds
     , qOrder
 
-    -- * QueryResultBatch
-    , QueryResultBatch
-    , queryResultBatch
-    , qrbSkippedResults
-    , qrbEntityResultType
-    , qrbEntityResults
-    , qrbMoreResults
-    , qrbEndCursor
-
-    -- * QueryResultBatchEntityResultType
-    , QueryResultBatchEntityResultType (..)
-
-    -- * QueryResultBatchMoreResults
-    , QueryResultBatchMoreResults (..)
-
     -- * ReadOptions
     , ReadOptions
     , readOptions
     , roReadConsistency
     , roTransaction
 
-    -- * ReadOptionsReadConsistency
-    , ReadOptionsReadConsistency (..)
+    -- * CommitResponse
+    , CommitResponse
+    , commitResponse
+    , crMutationResult
+    , crHeader
 
-    -- * ResponseHeader
-    , ResponseHeader
-    , responseHeader
-    , rhKind
+    -- * EntityResult
+    , EntityResult
+    , entityResult
+    , erEntity
 
-    -- * RollbackRequest
-    , RollbackRequest
-    , rollbackRequest
-    , rrTransaction
-
-    -- * RollbackResponse
-    , RollbackResponse
-    , rollbackResponse
-    , rrHeader
-
-    -- * RunQueryRequest
-    , RunQueryRequest
-    , runQueryRequest
-    , rqrPartitionId
-    , rqrGqlQuery
-    , rqrQuery
-    , rqrReadOptions
+    -- * CompositeFilter
+    , CompositeFilter
+    , compositeFilter
+    , cfOperator
+    , cfFilters
 
     -- * RunQueryResponse
     , RunQueryResponse
     , runQueryResponse
     , rqrBatch
     , rqrHeader
+
+    -- * CommitRequestMode
+    , CommitRequestMode (..)
+
+    -- * MutationResult
+    , MutationResult
+    , mutationResult
+    , mrInsertAutoIdKeys
+    , mrIndexUpdates
+
+    -- * BeginTransactionResponse
+    , BeginTransactionResponse
+    , beginTransactionResponse
+    , btrTransaction
+    , btrHeader
+
+    -- * PropertyExpressionAggregationFunction
+    , PropertyExpressionAggregationFunction (..)
+
+    -- * GqlQuery
+    , GqlQuery
+    , gqlQuery
+    , gqAllowLiteral
+    , gqNumberArgs
+    , gqQueryString
+    , gqNameArgs
+
+    -- * AllocateIdsResponse
+    , AllocateIdsResponse
+    , allocateIdsResponse
+    , aKeys
+    , aHeader
+
+    -- * BeginTransactionRequestIsolationLevel
+    , BeginTransactionRequestIsolationLevel (..)
 
     -- * Value
     , Value
@@ -286,8 +268,38 @@ module Network.Google.Datastore.Types
     , vBooleanValue
     , vMeaning
     , vBlobValue
+
+    -- * LookupRequest
+    , LookupRequest
+    , lookupRequest
+    , lrKeys
+    , lrReadOptions
+
+    -- * QueryResultBatchEntityResultType
+    , QueryResultBatchEntityResultType (..)
+
+    -- * EntityProperties
+    , EntityProperties
+    , entityProperties
+
+    -- * Mutation
+    , Mutation
+    , mutation
+    , mInsert
+    , mForce
+    , mInsertAutoId
+    , mUpsert
+    , mDelete
+    , mUpdate
     ) where
 
 import           Network.Google.Datastore.Types.Product
 import           Network.Google.Datastore.Types.Sum
 import           Network.Google.Prelude
+
+-- | URL referring to version 'v1beta2' of the Google Cloud Datastore API.
+datastoreURL :: BaseUrl
+datastoreURL
+  = BaseUrl Https
+      "https://www.googleapis.com/datastore/v1beta2/datasets/"
+      443

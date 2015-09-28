@@ -17,11 +17,18 @@
 -- /See:/ < Google Cloud Network Performance Monitoring API Reference>
 module Network.Google.LatencyTest
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** Google Cloud Network Performance Monitoring API
       LatencyTest
-    , StatscollectionAPI
-    , StatscollectionUpdatestats
-    , StatscollectionUpdateaggregatedstats
+    , latencyTest
+    , latencyTestURL
+
+    -- ** cloudlatencytest.statscollection.updateaggregatedstats
+    , module Network.Google.API.Cloudlatencytest.Statscollection.Updateaggregatedstats
+
+    -- ** cloudlatencytest.statscollection.updatestats
+    , module Network.Google.API.Cloudlatencytest.Statscollection.Updatestats
 
     -- * Types
 
@@ -30,16 +37,30 @@ module Network.Google.LatencyTest
     , aggregatedStats
     , asStats
 
-    -- ** AggregatedStatsReply
-    , AggregatedStatsReply
-    , aggregatedStatsReply
-    , asrTestValue
+    -- ** Alt
+    , Alt (..)
+
+    -- ** StatsReply
+    , StatsReply
+    , statsReply
+    , srTestValue
 
     -- ** DoubleValue
     , DoubleValue
     , doubleValue
     , dvValue
     , dvLabel
+
+    -- ** StringValue
+    , StringValue
+    , stringValue
+    , svValue
+    , svLabel
+
+    -- ** AggregatedStatsReply
+    , AggregatedStatsReply
+    , aggregatedStatsReply
+    , asrTestValue
 
     -- ** IntValue
     , IntValue
@@ -54,19 +75,10 @@ module Network.Google.LatencyTest
     , sDoubleValues
     , sStringValues
     , sIntValues
-
-    -- ** StatsReply
-    , StatsReply
-    , statsReply
-    , srTestValue
-
-    -- ** StringValue
-    , StringValue
-    , stringValue
-    , svValue
-    , svLabel
     ) where
 
+import           Network.Google.API.Cloudlatencytest.Statscollection.Updateaggregatedstats
+import           Network.Google.API.Cloudlatencytest.Statscollection.Updatestats
 import           Network.Google.LatencyTest.Types
 import           Network.Google.Prelude
 
@@ -74,35 +86,9 @@ import           Network.Google.Prelude
 TODO
 -}
 
-type LatencyTest = StatscollectionAPI
+type LatencyTest =
+     StatscollectionUpdateaggregatedstatsAPI :<|>
+       StatscollectionUpdatestatsAPI
 
-type StatscollectionAPI =
-     StatscollectionUpdatestats :<|>
-       StatscollectionUpdateaggregatedstats
-
--- | RPC to update the new TCP stats.
-type StatscollectionUpdatestats =
-     "v2" :>
-       "statscollection" :>
-         "updatestats" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "alt" Text :> Post '[JSON] StatsReply
-
--- | RPC to update the new TCP stats.
-type StatscollectionUpdateaggregatedstats =
-     "v2" :>
-       "statscollection" :>
-         "updateaggregatedstats" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "alt" Text :>
-                         Post '[JSON] AggregatedStatsReply
+latencyTest :: Proxy LatencyTest
+latencyTest = Proxy

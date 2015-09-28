@@ -18,210 +18,6 @@ module Network.Google.Logging.Types.Product where
 import           Network.Google.Logging.Types.Sum
 import           Network.Google.Prelude
 
--- | A generic empty message that you can re-use to avoid defining duplicated
--- empty messages in your APIs. A typical example is to use it as the
--- request or the response type of an API method. For instance: service Foo
--- { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The
--- JSON representation for \`Empty\` is empty JSON object \`{}\`.
---
--- /See:/ 'empty' smart constructor.
-data Empty =
-    Empty
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Empty' with the minimum fields required to make a request.
---
-empty
-    :: Empty
-empty = Empty
-
-instance FromJSON Empty where
-        parseJSON = withObject "Empty" (\ o -> pure Empty)
-
-instance ToJSON Empty where
-        toJSON = const (Object mempty)
-
--- | A common proto for logging HTTP requests.
---
--- /See:/ 'httpRequest' smart constructor.
-data HttpRequest = HttpRequest
-    { _hrStatus        :: !(Maybe Int32)
-    , _hrRequestUrl    :: !(Maybe Text)
-    , _hrRemoteIp      :: !(Maybe Text)
-    , _hrRequestSize   :: !(Maybe Int64)
-    , _hrUserAgent     :: !(Maybe Text)
-    , _hrResponseSize  :: !(Maybe Int64)
-    , _hrRequestMethod :: !(Maybe Text)
-    , _hrReferer       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'HttpRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'hrStatus'
---
--- * 'hrRequestUrl'
---
--- * 'hrRemoteIp'
---
--- * 'hrRequestSize'
---
--- * 'hrUserAgent'
---
--- * 'hrResponseSize'
---
--- * 'hrRequestMethod'
---
--- * 'hrReferer'
-httpRequest
-    :: HttpRequest
-httpRequest =
-    HttpRequest
-    { _hrStatus = Nothing
-    , _hrRequestUrl = Nothing
-    , _hrRemoteIp = Nothing
-    , _hrRequestSize = Nothing
-    , _hrUserAgent = Nothing
-    , _hrResponseSize = Nothing
-    , _hrRequestMethod = Nothing
-    , _hrReferer = Nothing
-    }
-
--- | A response code indicates the status of response, e.g., 200.
-hrStatus :: Lens' HttpRequest (Maybe Int32)
-hrStatus = lens _hrStatus (\ s a -> s{_hrStatus = a})
-
--- | Contains the scheme (http|https), the host name, the path and the query
--- portion of the URL that was requested.
-hrRequestUrl :: Lens' HttpRequest (Maybe Text)
-hrRequestUrl
-  = lens _hrRequestUrl (\ s a -> s{_hrRequestUrl = a})
-
--- | IP address of the client who issues the HTTP request. Could be either
--- IPv4 or IPv6.
-hrRemoteIp :: Lens' HttpRequest (Maybe Text)
-hrRemoteIp
-  = lens _hrRemoteIp (\ s a -> s{_hrRemoteIp = a})
-
--- | Size of the HTTP request message in bytes, including request headers and
--- the request body.
-hrRequestSize :: Lens' HttpRequest (Maybe Int64)
-hrRequestSize
-  = lens _hrRequestSize
-      (\ s a -> s{_hrRequestSize = a})
-
--- | User agent sent by the client, e.g., \"Mozilla\/4.0 (compatible; MSIE
--- 6.0; Windows 98; Q312461; .NET CLR 1.0.3705)\".
-hrUserAgent :: Lens' HttpRequest (Maybe Text)
-hrUserAgent
-  = lens _hrUserAgent (\ s a -> s{_hrUserAgent = a})
-
--- | Size of the HTTP response message in bytes sent back to the client,
--- including response headers and response body.
-hrResponseSize :: Lens' HttpRequest (Maybe Int64)
-hrResponseSize
-  = lens _hrResponseSize
-      (\ s a -> s{_hrResponseSize = a})
-
--- | Request method, such as \`GET\`, \`HEAD\`, \`PUT\` or \`POST\`.
-hrRequestMethod :: Lens' HttpRequest (Maybe Text)
-hrRequestMethod
-  = lens _hrRequestMethod
-      (\ s a -> s{_hrRequestMethod = a})
-
--- | Referer (a.k.a. referrer) URL of request, as defined in
--- http:\/\/www.w3.org\/Protocols\/rfc2616\/rfc2616-sec14.html.
-hrReferer :: Lens' HttpRequest (Maybe Text)
-hrReferer
-  = lens _hrReferer (\ s a -> s{_hrReferer = a})
-
-instance FromJSON HttpRequest where
-        parseJSON
-          = withObject "HttpRequest"
-              (\ o ->
-                 HttpRequest <$>
-                   (o .:? "status") <*> (o .:? "requestUrl") <*>
-                     (o .:? "remoteIp")
-                     <*> (o .:? "requestSize")
-                     <*> (o .:? "userAgent")
-                     <*> (o .:? "responseSize")
-                     <*> (o .:? "requestMethod")
-                     <*> (o .:? "referer"))
-
-instance ToJSON HttpRequest where
-        toJSON HttpRequest{..}
-          = object
-              (catMaybes
-                 [("status" .=) <$> _hrStatus,
-                  ("requestUrl" .=) <$> _hrRequestUrl,
-                  ("remoteIp" .=) <$> _hrRemoteIp,
-                  ("requestSize" .=) <$> _hrRequestSize,
-                  ("userAgent" .=) <$> _hrUserAgent,
-                  ("responseSize" .=) <$> _hrResponseSize,
-                  ("requestMethod" .=) <$> _hrRequestMethod,
-                  ("referer" .=) <$> _hrReferer])
-
--- | Result returned from ListLogServiceIndexesRequest.
---
--- /See:/ 'listLogServiceIndexesResponse' smart constructor.
-data ListLogServiceIndexesResponse = ListLogServiceIndexesResponse
-    { _llsirNextPageToken        :: !(Maybe Text)
-    , _llsirServiceIndexPrefixes :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ListLogServiceIndexesResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'llsirNextPageToken'
---
--- * 'llsirServiceIndexPrefixes'
-listLogServiceIndexesResponse
-    :: ListLogServiceIndexesResponse
-listLogServiceIndexesResponse =
-    ListLogServiceIndexesResponse
-    { _llsirNextPageToken = Nothing
-    , _llsirServiceIndexPrefixes = Nothing
-    }
-
--- | If there are more results, then \`nextPageToken\` is returned in the
--- response. To get the next batch of indexes, use the value of
--- \`nextPageToken\` as \`pageToken\` in the next call of
--- \`ListLogServiceIndexes\`. If \`nextPageToken\` is empty, then there are
--- no more results.
-llsirNextPageToken :: Lens' ListLogServiceIndexesResponse (Maybe Text)
-llsirNextPageToken
-  = lens _llsirNextPageToken
-      (\ s a -> s{_llsirNextPageToken = a})
-
--- | A list of log service index values. Each index value has the form
--- \`\"\/value1\/value2\/...\"\`, where \`value1\` is a value in the
--- primary index, \`value2\` is a value in the secondary index, and so
--- forth.
-llsirServiceIndexPrefixes :: Lens' ListLogServiceIndexesResponse [Text]
-llsirServiceIndexPrefixes
-  = lens _llsirServiceIndexPrefixes
-      (\ s a -> s{_llsirServiceIndexPrefixes = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON ListLogServiceIndexesResponse where
-        parseJSON
-          = withObject "ListLogServiceIndexesResponse"
-              (\ o ->
-                 ListLogServiceIndexesResponse <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "serviceIndexPrefixes" .!= mempty))
-
-instance ToJSON ListLogServiceIndexesResponse where
-        toJSON ListLogServiceIndexesResponse{..}
-          = object
-              (catMaybes
-                 [("nextPageToken" .=) <$> _llsirNextPageToken,
-                  ("serviceIndexPrefixes" .=) <$>
-                    _llsirServiceIndexPrefixes])
-
 -- | Result returned from \`ListLogServiceSinks\`.
 --
 -- /See:/ 'listLogServiceSinksResponse' smart constructor.
@@ -261,257 +57,144 @@ instance ToJSON ListLogServiceSinksResponse where
         toJSON ListLogServiceSinksResponse{..}
           = object (catMaybes [("sinks" .=) <$> _llssrSinks])
 
--- | Result returned from \`ListLogServicesRequest\`.
+-- | The log entry payload, represented as a structure that is expressed as a
+-- JSON object.
 --
--- /See:/ 'listLogServicesResponse' smart constructor.
-data ListLogServicesResponse = ListLogServicesResponse
-    { _llsrNextPageToken :: !(Maybe Text)
-    , _llsrLogServices   :: !(Maybe [Maybe LogService])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'logEntryStructPayload' smart constructor.
+data LogEntryStructPayload =
+    LogEntryStructPayload
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ListLogServicesResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'LogEntryStructPayload' with the minimum fields required to make a request.
 --
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'llsrNextPageToken'
---
--- * 'llsrLogServices'
-listLogServicesResponse
-    :: ListLogServicesResponse
-listLogServicesResponse =
-    ListLogServicesResponse
-    { _llsrNextPageToken = Nothing
-    , _llsrLogServices = Nothing
-    }
+logEntryStructPayload
+    :: LogEntryStructPayload
+logEntryStructPayload = LogEntryStructPayload
 
--- | If there are more results, then \`nextPageToken\` is returned in the
--- response. To get the next batch of services, use the value of
--- \`nextPageToken\` as \`pageToken\` in the next call of
--- \`ListLogServices\`. If \`nextPageToken\` is empty, then there are no
--- more results.
-llsrNextPageToken :: Lens' ListLogServicesResponse (Maybe Text)
-llsrNextPageToken
-  = lens _llsrNextPageToken
-      (\ s a -> s{_llsrNextPageToken = a})
-
--- | A list of log services.
-llsrLogServices :: Lens' ListLogServicesResponse [Maybe LogService]
-llsrLogServices
-  = lens _llsrLogServices
-      (\ s a -> s{_llsrLogServices = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON ListLogServicesResponse where
+instance FromJSON LogEntryStructPayload where
         parseJSON
-          = withObject "ListLogServicesResponse"
-              (\ o ->
-                 ListLogServicesResponse <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "logServices" .!= mempty))
+          = withObject "LogEntryStructPayload"
+              (\ o -> pure LogEntryStructPayload)
 
-instance ToJSON ListLogServicesResponse where
-        toJSON ListLogServicesResponse{..}
-          = object
-              (catMaybes
-                 [("nextPageToken" .=) <$> _llsrNextPageToken,
-                  ("logServices" .=) <$> _llsrLogServices])
+instance ToJSON LogEntryStructPayload where
+        toJSON = const (Object mempty)
 
--- | Result returned from \`ListLogSinks\`.
+-- | The parameters to WriteLogEntries.
 --
--- /See:/ 'listLogSinksResponse' smart constructor.
-newtype ListLogSinksResponse = ListLogSinksResponse
-    { _llsrSinks :: Maybe [Maybe LogSink]
+-- /See:/ 'writeLogEntriesRequest' smart constructor.
+data WriteLogEntriesRequest = WriteLogEntriesRequest
+    { _wlerEntries      :: !(Maybe [Maybe LogEntry])
+    , _wlerCommonLabels :: !(Maybe WriteLogEntriesRequestCommonLabels)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ListLogSinksResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'WriteLogEntriesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'llsrSinks'
-listLogSinksResponse
-    :: ListLogSinksResponse
-listLogSinksResponse =
-    ListLogSinksResponse
-    { _llsrSinks = Nothing
+-- * 'wlerEntries'
+--
+-- * 'wlerCommonLabels'
+writeLogEntriesRequest
+    :: WriteLogEntriesRequest
+writeLogEntriesRequest =
+    WriteLogEntriesRequest
+    { _wlerEntries = Nothing
+    , _wlerCommonLabels = Nothing
     }
 
--- | The requested log sinks. If a returned \`LogSink\` object has an empty
--- \`destination\` field, the client can retrieve the complete \`LogSink\`
--- object by calling \`log.sinks.get\`.
-llsrSinks :: Lens' ListLogSinksResponse [Maybe LogSink]
-llsrSinks
-  = lens _llsrSinks (\ s a -> s{_llsrSinks = a}) .
+-- | Log entries to insert.
+wlerEntries :: Lens' WriteLogEntriesRequest [Maybe LogEntry]
+wlerEntries
+  = lens _wlerEntries (\ s a -> s{_wlerEntries = a}) .
       _Default
       . _Coerce
 
-instance FromJSON ListLogSinksResponse where
+-- | Metadata labels that apply to all log entries in this request, so that
+-- you don\'t have to repeat them in each log entry\'s \`metadata.labels\`
+-- field. If any of the log entries contains a (key, value) with the same
+-- key that is in \`commonLabels\`, then the entry\'s (key, value)
+-- overrides the one in \`commonLabels\`.
+wlerCommonLabels :: Lens' WriteLogEntriesRequest (Maybe WriteLogEntriesRequestCommonLabels)
+wlerCommonLabels
+  = lens _wlerCommonLabels
+      (\ s a -> s{_wlerCommonLabels = a})
+
+instance FromJSON WriteLogEntriesRequest where
         parseJSON
-          = withObject "ListLogSinksResponse"
+          = withObject "WriteLogEntriesRequest"
               (\ o ->
-                 ListLogSinksResponse <$> (o .:? "sinks" .!= mempty))
+                 WriteLogEntriesRequest <$>
+                   (o .:? "entries" .!= mempty) <*>
+                     (o .:? "commonLabels"))
 
-instance ToJSON ListLogSinksResponse where
-        toJSON ListLogSinksResponse{..}
-          = object (catMaybes [("sinks" .=) <$> _llsrSinks])
-
--- | Result returned from ListLogs.
---
--- /See:/ 'listLogsResponse' smart constructor.
-data ListLogsResponse = ListLogsResponse
-    { _llrNextPageToken :: !(Maybe Text)
-    , _llrLogs          :: !(Maybe [Maybe Log])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ListLogsResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'llrNextPageToken'
---
--- * 'llrLogs'
-listLogsResponse
-    :: ListLogsResponse
-listLogsResponse =
-    ListLogsResponse
-    { _llrNextPageToken = Nothing
-    , _llrLogs = Nothing
-    }
-
--- | If there are more results, then \`nextPageToken\` is returned in the
--- response. To get the next batch of logs, use the value of
--- \`nextPageToken\` as \`pageToken\` in the next call of \`ListLogs\`. If
--- \`nextPageToken\` is empty, then there are no more results.
-llrNextPageToken :: Lens' ListLogsResponse (Maybe Text)
-llrNextPageToken
-  = lens _llrNextPageToken
-      (\ s a -> s{_llrNextPageToken = a})
-
--- | A list of log descriptions matching the criteria.
-llrLogs :: Lens' ListLogsResponse [Maybe Log]
-llrLogs
-  = lens _llrLogs (\ s a -> s{_llrLogs = a}) . _Default
-      . _Coerce
-
-instance FromJSON ListLogsResponse where
-        parseJSON
-          = withObject "ListLogsResponse"
-              (\ o ->
-                 ListLogsResponse <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "logs" .!= mempty))
-
-instance ToJSON ListLogsResponse where
-        toJSON ListLogsResponse{..}
+instance ToJSON WriteLogEntriesRequest where
+        toJSON WriteLogEntriesRequest{..}
           = object
               (catMaybes
-                 [("nextPageToken" .=) <$> _llrNextPageToken,
-                  ("logs" .=) <$> _llrLogs])
+                 [("entries" .=) <$> _wlerEntries,
+                  ("commonLabels" .=) <$> _wlerCommonLabels])
 
--- | Result returned from \`ListSinks\`.
+-- | Specifies a location in a source file.
 --
--- /See:/ 'listSinksResponse' smart constructor.
-newtype ListSinksResponse = ListSinksResponse
-    { _lsrSinks :: Maybe [Maybe LogSink]
+-- /See:/ 'sourceLocation' smart constructor.
+data SourceLocation = SourceLocation
+    { _slLine         :: !(Maybe Int64)
+    , _slFunctionName :: !(Maybe Text)
+    , _slFile         :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ListSinksResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'SourceLocation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lsrSinks'
-listSinksResponse
-    :: ListSinksResponse
-listSinksResponse =
-    ListSinksResponse
-    { _lsrSinks = Nothing
+-- * 'slLine'
+--
+-- * 'slFunctionName'
+--
+-- * 'slFile'
+sourceLocation
+    :: SourceLocation
+sourceLocation =
+    SourceLocation
+    { _slLine = Nothing
+    , _slFunctionName = Nothing
+    , _slFile = Nothing
     }
 
--- | The requested sinks. If a returned \`LogSink\` object has an empty
--- \`destination\` field, the client can retrieve the complete \`LogSink\`
--- object by calling \`projects.sinks.get\`.
-lsrSinks :: Lens' ListSinksResponse [Maybe LogSink]
-lsrSinks
-  = lens _lsrSinks (\ s a -> s{_lsrSinks = a}) .
-      _Default
-      . _Coerce
+-- | Line within the source file.
+slLine :: Lens' SourceLocation (Maybe Int64)
+slLine = lens _slLine (\ s a -> s{_slLine = a})
 
-instance FromJSON ListSinksResponse where
+-- | Human-readable name of the function or method being invoked, with
+-- optional context such as the class or package name, for use in contexts
+-- such as the logs viewer where file:line number is less meaningful. This
+-- may vary by language, for example: in Java: qual.if.ied.Class.method in
+-- Go: dir\/package.func in Python: function ...
+slFunctionName :: Lens' SourceLocation (Maybe Text)
+slFunctionName
+  = lens _slFunctionName
+      (\ s a -> s{_slFunctionName = a})
+
+-- | Source file name. May or may not be a fully qualified name, depending on
+-- the runtime environment.
+slFile :: Lens' SourceLocation (Maybe Text)
+slFile = lens _slFile (\ s a -> s{_slFile = a})
+
+instance FromJSON SourceLocation where
         parseJSON
-          = withObject "ListSinksResponse"
+          = withObject "SourceLocation"
               (\ o ->
-                 ListSinksResponse <$> (o .:? "sinks" .!= mempty))
+                 SourceLocation <$>
+                   (o .:? "line") <*> (o .:? "functionName") <*>
+                     (o .:? "file"))
 
-instance ToJSON ListSinksResponse where
-        toJSON ListSinksResponse{..}
-          = object (catMaybes [("sinks" .=) <$> _lsrSinks])
-
--- | _Output only._ Describes a log, which is a named stream of log entries.
---
--- /See:/ 'log' smart constructor.
-data Log = Log
-    { _logName        :: !(Maybe Text)
-    , _logDisplayName :: !(Maybe Text)
-    , _logPayloadType :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Log' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'logName'
---
--- * 'logDisplayName'
---
--- * 'logPayloadType'
-log
-    :: Log
-log =
-    Log
-    { _logName = Nothing
-    , _logDisplayName = Nothing
-    , _logPayloadType = Nothing
-    }
-
--- | The resource name of the log. Example:
--- \`\"\/projects\/my-gcp-project-id\/logs\/LOG_NAME\"\`, where
--- \`LOG_NAME\` is the URL-encoded given name of the log. The log includes
--- those log entries whose \`LogEntry.log\` field contains this given name.
--- To avoid name collisions, it is a best practice to prefix the given log
--- name with the service name, but this is not required. Examples of log
--- given names: \`\"appengine.googleapis.com\/request_log\"\`,
--- \`\"apache-access\"\`.
-logName :: Lens' Log (Maybe Text)
-logName = lens _logName (\ s a -> s{_logName = a})
-
--- | _Optional._ The common name of the log. Example: \`\"request_log\"\`.
-logDisplayName :: Lens' Log (Maybe Text)
-logDisplayName
-  = lens _logDisplayName
-      (\ s a -> s{_logDisplayName = a})
-
--- | _Optional_. A URI representing the expected payload type for log
--- entries.
-logPayloadType :: Lens' Log (Maybe Text)
-logPayloadType
-  = lens _logPayloadType
-      (\ s a -> s{_logPayloadType = a})
-
-instance FromJSON Log where
-        parseJSON
-          = withObject "Log"
-              (\ o ->
-                 Log <$>
-                   (o .:? "name") <*> (o .:? "displayName") <*>
-                     (o .:? "payloadType"))
-
-instance ToJSON Log where
-        toJSON Log{..}
+instance ToJSON SourceLocation where
+        toJSON SourceLocation{..}
           = object
               (catMaybes
-                 [("name" .=) <$> _logName,
-                  ("displayName" .=) <$> _logDisplayName,
-                  ("payloadType" .=) <$> _logPayloadType])
+                 [("line" .=) <$> _slLine,
+                  ("functionName" .=) <$> _slFunctionName,
+                  ("file" .=) <$> _slFile])
 
 -- | An individual entry in a log.
 --
@@ -624,6 +307,420 @@ instance ToJSON LogEntry where
                   ("insertId" .=) <$> _leInsertId,
                   ("metadata" .=) <$> _leMetadata,
                   ("protoPayload" .=) <$> _leProtoPayload])
+
+-- | A set of (key, value) data that provides additional information about
+-- the log entry. If the log entry is from one of the Google Cloud Platform
+-- sources listed below, the indicated (key, value) information must be
+-- provided: Google App Engine, service_name \`appengine.googleapis.com\`:
+-- \"appengine.googleapis.com\/module_id\",
+-- \"appengine.googleapis.com\/version_id\", and one of:
+-- \"appengine.googleapis.com\/replica_index\",
+-- \"appengine.googleapis.com\/clone_id\", or else provide the following
+-- Compute Engine labels: Google Compute Engine, service_name
+-- \`compute.googleapis.com\`: \"compute.googleapis.com\/resource_type\",
+-- \"instance\" \"compute.googleapis.com\/resource_id\",
+--
+-- /See:/ 'logEntryMetadataLabels' smart constructor.
+data LogEntryMetadataLabels =
+    LogEntryMetadataLabels
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LogEntryMetadataLabels' with the minimum fields required to make a request.
+--
+logEntryMetadataLabels
+    :: LogEntryMetadataLabels
+logEntryMetadataLabels = LogEntryMetadataLabels
+
+instance FromJSON LogEntryMetadataLabels where
+        parseJSON
+          = withObject "LogEntryMetadataLabels"
+              (\ o -> pure LogEntryMetadataLabels)
+
+instance ToJSON LogEntryMetadataLabels where
+        toJSON = const (Object mempty)
+
+-- | Result returned from ListLogs.
+--
+-- /See:/ 'listLogsResponse' smart constructor.
+data ListLogsResponse = ListLogsResponse
+    { _llrNextPageToken :: !(Maybe Text)
+    , _llrLogs          :: !(Maybe [Maybe Log])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListLogsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'llrNextPageToken'
+--
+-- * 'llrLogs'
+listLogsResponse
+    :: ListLogsResponse
+listLogsResponse =
+    ListLogsResponse
+    { _llrNextPageToken = Nothing
+    , _llrLogs = Nothing
+    }
+
+-- | If there are more results, then \`nextPageToken\` is returned in the
+-- response. To get the next batch of logs, use the value of
+-- \`nextPageToken\` as \`pageToken\` in the next call of \`ListLogs\`. If
+-- \`nextPageToken\` is empty, then there are no more results.
+llrNextPageToken :: Lens' ListLogsResponse (Maybe Text)
+llrNextPageToken
+  = lens _llrNextPageToken
+      (\ s a -> s{_llrNextPageToken = a})
+
+-- | A list of log descriptions matching the criteria.
+llrLogs :: Lens' ListLogsResponse [Maybe Log]
+llrLogs
+  = lens _llrLogs (\ s a -> s{_llrLogs = a}) . _Default
+      . _Coerce
+
+instance FromJSON ListLogsResponse where
+        parseJSON
+          = withObject "ListLogsResponse"
+              (\ o ->
+                 ListLogsResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "logs" .!= mempty))
+
+instance ToJSON ListLogsResponse where
+        toJSON ListLogsResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _llrNextPageToken,
+                  ("logs" .=) <$> _llrLogs])
+
+-- | The \`Status\` type defines a logical error model that is suitable for
+-- different programming environments, including REST APIs and RPC APIs. It
+-- is used by [gRPC](https:\/\/github.com\/grpc). The error model is
+-- designed to be: - Simple to use and understand for most users - Flexible
+-- enough to meet unexpected needs # Overview The \`Status\` message
+-- contains three pieces of data: error code, error message, and error
+-- details. The error code should be an enum value of [google.rpc.Code][],
+-- but it may accept additional error codes if needed. The error message
+-- should be a developer-facing English message that helps developers
+-- *understand* and *resolve* the error. If a localized user-facing error
+-- message is needed, put the localized message in the error details or
+-- localize it in the client. The optional error details may contain
+-- arbitrary information about the error. There is a predefined set of
+-- error detail types in the package \`google.rpc\` which can be used for
+-- common error conditions. # Language mapping The \`Status\` message is
+-- the logical representation of the error model, but it is not necessarily
+-- the actual wire format. When the \`Status\` message is exposed in
+-- different client libraries and different wire protocols, it can be
+-- mapped differently. For example, it will likely be mapped to some
+-- exceptions in Java, but more likely mapped to some error codes in C. #
+-- Other uses The error model and the \`Status\` message can be used in a
+-- variety of environments, either with or without APIs, to provide a
+-- consistent developer experience across different environments. Example
+-- uses of this error model include: - Partial errors. If a service needs
+-- to return partial errors to the client, it may embed the \`Status\` in
+-- the normal response to indicate the partial errors. - Workflow errors. A
+-- typical workflow has multiple steps. Each step may have a \`Status\`
+-- message for error reporting purpose. - Batch operations. If a client
+-- uses batch request and batch response, the \`Status\` message should be
+-- used directly inside batch response, one for each error sub-response. -
+-- Asynchronous operations. If an API call embeds asynchronous operation
+-- results in its response, the status of those operations should be
+-- represented directly using the \`Status\` message. - Logging. If some
+-- API errors are stored in logs, the message \`Status\` could be used
+-- directly after any stripping needed for security\/privacy reasons.
+--
+-- /See:/ 'status' smart constructor.
+data Status = Status
+    { _sDetails :: !(Maybe [StatusItemDetails])
+    , _sCode    :: !(Maybe Int32)
+    , _sMessage :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Status' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sDetails'
+--
+-- * 'sCode'
+--
+-- * 'sMessage'
+status
+    :: Status
+status =
+    Status
+    { _sDetails = Nothing
+    , _sCode = Nothing
+    , _sMessage = Nothing
+    }
+
+-- | A list of messages that carry the error details. There will be a common
+-- set of message types for APIs to use.
+sDetails :: Lens' Status [StatusItemDetails]
+sDetails
+  = lens _sDetails (\ s a -> s{_sDetails = a}) .
+      _Default
+      . _Coerce
+
+-- | The status code, which should be an enum value of [google.rpc.Code][].
+sCode :: Lens' Status (Maybe Int32)
+sCode = lens _sCode (\ s a -> s{_sCode = a})
+
+-- | A developer-facing error message, which should be in English. Any
+-- user-facing error message should be localized and sent in the
+-- [google.rpc.Status.details][google.rpc.Status.details] field, or
+-- localized by the client.
+sMessage :: Lens' Status (Maybe Text)
+sMessage = lens _sMessage (\ s a -> s{_sMessage = a})
+
+instance FromJSON Status where
+        parseJSON
+          = withObject "Status"
+              (\ o ->
+                 Status <$>
+                   (o .:? "details" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON Status where
+        toJSON Status{..}
+          = object
+              (catMaybes
+                 [("details" .=) <$> _sDetails,
+                  ("code" .=) <$> _sCode,
+                  ("message" .=) <$> _sMessage])
+
+-- | _Output only._ Describes a log, which is a named stream of log entries.
+--
+-- /See:/ 'log' smart constructor.
+data Log = Log
+    { _logName        :: !(Maybe Text)
+    , _logDisplayName :: !(Maybe Text)
+    , _logPayloadType :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Log' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'logName'
+--
+-- * 'logDisplayName'
+--
+-- * 'logPayloadType'
+log
+    :: Log
+log =
+    Log
+    { _logName = Nothing
+    , _logDisplayName = Nothing
+    , _logPayloadType = Nothing
+    }
+
+-- | The resource name of the log. Example:
+-- \`\"\/projects\/my-gcp-project-id\/logs\/LOG_NAME\"\`, where
+-- \`LOG_NAME\` is the URL-encoded given name of the log. The log includes
+-- those log entries whose \`LogEntry.log\` field contains this given name.
+-- To avoid name collisions, it is a best practice to prefix the given log
+-- name with the service name, but this is not required. Examples of log
+-- given names: \`\"appengine.googleapis.com\/request_log\"\`,
+-- \`\"apache-access\"\`.
+logName :: Lens' Log (Maybe Text)
+logName = lens _logName (\ s a -> s{_logName = a})
+
+-- | _Optional._ The common name of the log. Example: \`\"request_log\"\`.
+logDisplayName :: Lens' Log (Maybe Text)
+logDisplayName
+  = lens _logDisplayName
+      (\ s a -> s{_logDisplayName = a})
+
+-- | _Optional_. A URI representing the expected payload type for log
+-- entries.
+logPayloadType :: Lens' Log (Maybe Text)
+logPayloadType
+  = lens _logPayloadType
+      (\ s a -> s{_logPayloadType = a})
+
+instance FromJSON Log where
+        parseJSON
+          = withObject "Log"
+              (\ o ->
+                 Log <$>
+                   (o .:? "name") <*> (o .:? "displayName") <*>
+                     (o .:? "payloadType"))
+
+instance ToJSON Log where
+        toJSON Log{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _logName,
+                  ("displayName" .=) <$> _logDisplayName,
+                  ("payloadType" .=) <$> _logPayloadType])
+
+-- | Describes a problem with a logging resource or operation.
+--
+-- /See:/ 'logError' smart constructor.
+data LogError = LogError
+    { _leStatus    :: !(Maybe (Maybe Status))
+    , _leResource  :: !(Maybe Text)
+    , _leTimeNanos :: !(Maybe Int64)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LogError' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'leStatus'
+--
+-- * 'leResource'
+--
+-- * 'leTimeNanos'
+logError
+    :: LogError
+logError =
+    LogError
+    { _leStatus = Nothing
+    , _leResource = Nothing
+    , _leTimeNanos = Nothing
+    }
+
+-- | The error description, including a classification code, an error
+-- message, and other details.
+leStatus :: Lens' LogError (Maybe (Maybe Status))
+leStatus = lens _leStatus (\ s a -> s{_leStatus = a})
+
+-- | A resource name associated with this error. For example, the name of a
+-- Cloud Storage bucket that has insufficient permissions to be a
+-- destination for log entries.
+leResource :: Lens' LogError (Maybe Text)
+leResource
+  = lens _leResource (\ s a -> s{_leResource = a})
+
+-- | The time the error was observed, in nanoseconds since the Unix epoch.
+leTimeNanos :: Lens' LogError (Maybe Int64)
+leTimeNanos
+  = lens _leTimeNanos (\ s a -> s{_leTimeNanos = a})
+
+instance FromJSON LogError where
+        parseJSON
+          = withObject "LogError"
+              (\ o ->
+                 LogError <$>
+                   (o .:? "status") <*> (o .:? "resource") <*>
+                     (o .:? "timeNanos"))
+
+instance ToJSON LogError where
+        toJSON LogError{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _leStatus,
+                  ("resource" .=) <$> _leResource,
+                  ("timeNanos" .=) <$> _leTimeNanos])
+
+-- | Application log line emitted while processing a request.
+--
+-- /See:/ 'logLine' smart constructor.
+data LogLine = LogLine
+    { _llTime           :: !(Maybe Text)
+    , _llSeverity       :: !(Maybe Text)
+    , _llLogMessage     :: !(Maybe Text)
+    , _llSourceLocation :: !(Maybe (Maybe SourceLocation))
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LogLine' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'llTime'
+--
+-- * 'llSeverity'
+--
+-- * 'llLogMessage'
+--
+-- * 'llSourceLocation'
+logLine
+    :: LogLine
+logLine =
+    LogLine
+    { _llTime = Nothing
+    , _llSeverity = Nothing
+    , _llLogMessage = Nothing
+    , _llSourceLocation = Nothing
+    }
+
+-- | Time when log entry was made. May be inaccurate.
+llTime :: Lens' LogLine (Maybe Text)
+llTime = lens _llTime (\ s a -> s{_llTime = a})
+
+-- | Severity of log.
+llSeverity :: Lens' LogLine (Maybe Text)
+llSeverity
+  = lens _llSeverity (\ s a -> s{_llSeverity = a})
+
+-- | App provided log message.
+llLogMessage :: Lens' LogLine (Maybe Text)
+llLogMessage
+  = lens _llLogMessage (\ s a -> s{_llLogMessage = a})
+
+-- | Line of code that generated this log message.
+llSourceLocation :: Lens' LogLine (Maybe (Maybe SourceLocation))
+llSourceLocation
+  = lens _llSourceLocation
+      (\ s a -> s{_llSourceLocation = a})
+
+instance FromJSON LogLine where
+        parseJSON
+          = withObject "LogLine"
+              (\ o ->
+                 LogLine <$>
+                   (o .:? "time") <*> (o .:? "severity") <*>
+                     (o .:? "logMessage")
+                     <*> (o .:? "sourceLocation"))
+
+instance ToJSON LogLine where
+        toJSON LogLine{..}
+          = object
+              (catMaybes
+                 [("time" .=) <$> _llTime,
+                  ("severity" .=) <$> _llSeverity,
+                  ("logMessage" .=) <$> _llLogMessage,
+                  ("sourceLocation" .=) <$> _llSourceLocation])
+
+-- | Result returned from \`ListSinks\`.
+--
+-- /See:/ 'listSinksResponse' smart constructor.
+newtype ListSinksResponse = ListSinksResponse
+    { _lsrSinks :: Maybe [Maybe LogSink]
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListSinksResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lsrSinks'
+listSinksResponse
+    :: ListSinksResponse
+listSinksResponse =
+    ListSinksResponse
+    { _lsrSinks = Nothing
+    }
+
+-- | The requested sinks. If a returned \`LogSink\` object has an empty
+-- \`destination\` field, the client can retrieve the complete \`LogSink\`
+-- object by calling \`projects.sinks.get\`.
+lsrSinks :: Lens' ListSinksResponse [Maybe LogSink]
+lsrSinks
+  = lens _lsrSinks (\ s a -> s{_lsrSinks = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ListSinksResponse where
+        parseJSON
+          = withObject "ListSinksResponse"
+              (\ o ->
+                 ListSinksResponse <$> (o .:? "sinks" .!= mempty))
+
+instance ToJSON ListSinksResponse where
+        toJSON ListSinksResponse{..}
+          = object (catMaybes [("sinks" .=) <$> _lsrSinks])
 
 -- | Additional data that is associated with a log entry, set by the service
 -- creating the log entry.
@@ -757,343 +854,28 @@ instance ToJSON LogEntryMetadata where
                   ("projectId" .=) <$> _lemProjectId,
                   ("timestamp" .=) <$> _lemTimestamp])
 
--- | A set of (key, value) data that provides additional information about
--- the log entry. If the log entry is from one of the Google Cloud Platform
--- sources listed below, the indicated (key, value) information must be
--- provided: Google App Engine, service_name \`appengine.googleapis.com\`:
--- \"appengine.googleapis.com\/module_id\",
--- \"appengine.googleapis.com\/version_id\", and one of:
--- \"appengine.googleapis.com\/replica_index\",
--- \"appengine.googleapis.com\/clone_id\", or else provide the following
--- Compute Engine labels: Google Compute Engine, service_name
--- \`compute.googleapis.com\`: \"compute.googleapis.com\/resource_type\",
--- \"instance\" \"compute.googleapis.com\/resource_id\",
+-- | A generic empty message that you can re-use to avoid defining duplicated
+-- empty messages in your APIs. A typical example is to use it as the
+-- request or the response type of an API method. For instance: service Foo
+-- { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The
+-- JSON representation for \`Empty\` is empty JSON object \`{}\`.
 --
--- /See:/ 'logEntryMetadataLabels' smart constructor.
-data LogEntryMetadataLabels =
-    LogEntryMetadataLabels
+-- /See:/ 'empty' smart constructor.
+data Empty =
+    Empty
     deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LogEntryMetadataLabels' with the minimum fields required to make a request.
+-- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
-logEntryMetadataLabels
-    :: LogEntryMetadataLabels
-logEntryMetadataLabels = LogEntryMetadataLabels
+empty
+    :: Empty
+empty = Empty
 
-instance FromJSON LogEntryMetadataLabels where
-        parseJSON
-          = withObject "LogEntryMetadataLabels"
-              (\ o -> pure LogEntryMetadataLabels)
+instance FromJSON Empty where
+        parseJSON = withObject "Empty" (\ o -> pure Empty)
 
-instance ToJSON LogEntryMetadataLabels where
+instance ToJSON Empty where
         toJSON = const (Object mempty)
-
--- | The log entry payload, represented as a protocol buffer that is
--- expressed as a JSON object. You can only pass \`protoPayload\` values
--- that belong to a set of approved types.
---
--- /See:/ 'logEntryProtoPayload' smart constructor.
-data LogEntryProtoPayload =
-    LogEntryProtoPayload
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'LogEntryProtoPayload' with the minimum fields required to make a request.
---
-logEntryProtoPayload
-    :: LogEntryProtoPayload
-logEntryProtoPayload = LogEntryProtoPayload
-
-instance FromJSON LogEntryProtoPayload where
-        parseJSON
-          = withObject "LogEntryProtoPayload"
-              (\ o -> pure LogEntryProtoPayload)
-
-instance ToJSON LogEntryProtoPayload where
-        toJSON = const (Object mempty)
-
--- | The log entry payload, represented as a structure that is expressed as a
--- JSON object.
---
--- /See:/ 'logEntryStructPayload' smart constructor.
-data LogEntryStructPayload =
-    LogEntryStructPayload
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'LogEntryStructPayload' with the minimum fields required to make a request.
---
-logEntryStructPayload
-    :: LogEntryStructPayload
-logEntryStructPayload = LogEntryStructPayload
-
-instance FromJSON LogEntryStructPayload where
-        parseJSON
-          = withObject "LogEntryStructPayload"
-              (\ o -> pure LogEntryStructPayload)
-
-instance ToJSON LogEntryStructPayload where
-        toJSON = const (Object mempty)
-
--- | Describes a problem with a logging resource or operation.
---
--- /See:/ 'logError' smart constructor.
-data LogError = LogError
-    { _leStatus    :: !(Maybe (Maybe Status))
-    , _leResource  :: !(Maybe Text)
-    , _leTimeNanos :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'LogError' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'leStatus'
---
--- * 'leResource'
---
--- * 'leTimeNanos'
-logError
-    :: LogError
-logError =
-    LogError
-    { _leStatus = Nothing
-    , _leResource = Nothing
-    , _leTimeNanos = Nothing
-    }
-
--- | The error description, including a classification code, an error
--- message, and other details.
-leStatus :: Lens' LogError (Maybe (Maybe Status))
-leStatus = lens _leStatus (\ s a -> s{_leStatus = a})
-
--- | A resource name associated with this error. For example, the name of a
--- Cloud Storage bucket that has insufficient permissions to be a
--- destination for log entries.
-leResource :: Lens' LogError (Maybe Text)
-leResource
-  = lens _leResource (\ s a -> s{_leResource = a})
-
--- | The time the error was observed, in nanoseconds since the Unix epoch.
-leTimeNanos :: Lens' LogError (Maybe Int64)
-leTimeNanos
-  = lens _leTimeNanos (\ s a -> s{_leTimeNanos = a})
-
-instance FromJSON LogError where
-        parseJSON
-          = withObject "LogError"
-              (\ o ->
-                 LogError <$>
-                   (o .:? "status") <*> (o .:? "resource") <*>
-                     (o .:? "timeNanos"))
-
-instance ToJSON LogError where
-        toJSON LogError{..}
-          = object
-              (catMaybes
-                 [("status" .=) <$> _leStatus,
-                  ("resource" .=) <$> _leResource,
-                  ("timeNanos" .=) <$> _leTimeNanos])
-
--- | Application log line emitted while processing a request.
---
--- /See:/ 'logLine' smart constructor.
-data LogLine = LogLine
-    { _llTime           :: !(Maybe Text)
-    , _llSeverity       :: !(Maybe Text)
-    , _llLogMessage     :: !(Maybe Text)
-    , _llSourceLocation :: !(Maybe (Maybe SourceLocation))
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'LogLine' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'llTime'
---
--- * 'llSeverity'
---
--- * 'llLogMessage'
---
--- * 'llSourceLocation'
-logLine
-    :: LogLine
-logLine =
-    LogLine
-    { _llTime = Nothing
-    , _llSeverity = Nothing
-    , _llLogMessage = Nothing
-    , _llSourceLocation = Nothing
-    }
-
--- | Time when log entry was made. May be inaccurate.
-llTime :: Lens' LogLine (Maybe Text)
-llTime = lens _llTime (\ s a -> s{_llTime = a})
-
--- | Severity of log.
-llSeverity :: Lens' LogLine (Maybe Text)
-llSeverity
-  = lens _llSeverity (\ s a -> s{_llSeverity = a})
-
--- | App provided log message.
-llLogMessage :: Lens' LogLine (Maybe Text)
-llLogMessage
-  = lens _llLogMessage (\ s a -> s{_llLogMessage = a})
-
--- | Line of code that generated this log message.
-llSourceLocation :: Lens' LogLine (Maybe (Maybe SourceLocation))
-llSourceLocation
-  = lens _llSourceLocation
-      (\ s a -> s{_llSourceLocation = a})
-
-instance FromJSON LogLine where
-        parseJSON
-          = withObject "LogLine"
-              (\ o ->
-                 LogLine <$>
-                   (o .:? "time") <*> (o .:? "severity") <*>
-                     (o .:? "logMessage")
-                     <*> (o .:? "sourceLocation"))
-
-instance ToJSON LogLine where
-        toJSON LogLine{..}
-          = object
-              (catMaybes
-                 [("time" .=) <$> _llTime,
-                  ("severity" .=) <$> _llSeverity,
-                  ("logMessage" .=) <$> _llLogMessage,
-                  ("sourceLocation" .=) <$> _llSourceLocation])
-
--- | _Output only._ Describes a service that writes log entries.
---
--- /See:/ 'logService' smart constructor.
-data LogService = LogService
-    { _lName      :: !(Maybe Text)
-    , _lIndexKeys :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'LogService' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lName'
---
--- * 'lIndexKeys'
-logService
-    :: LogService
-logService =
-    LogService
-    { _lName = Nothing
-    , _lIndexKeys = Nothing
-    }
-
--- | The service\'s name. Example: \`\"appengine.googleapis.com\"\`. Log
--- names beginning with this string are reserved for this service. This
--- value can appear in the \`LogEntry.metadata.serviceName\` field of log
--- entries associated with this log service.
-lName :: Lens' LogService (Maybe Text)
-lName = lens _lName (\ s a -> s{_lName = a})
-
--- | A list of the names of the keys used to index and label individual log
--- entries from this service. The first two keys are used as the primary
--- and secondary index, respectively. Additional keys may be used to label
--- the entries. For example, App Engine indexes its entries by module and
--- by version, so its \`indexKeys\` field is the following: [
--- \"appengine.googleapis.com\/module_id\",
--- \"appengine.googleapis.com\/version_id\" ]
-lIndexKeys :: Lens' LogService [Text]
-lIndexKeys
-  = lens _lIndexKeys (\ s a -> s{_lIndexKeys = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON LogService where
-        parseJSON
-          = withObject "LogService"
-              (\ o ->
-                 LogService <$>
-                   (o .:? "name") <*> (o .:? "indexKeys" .!= mempty))
-
-instance ToJSON LogService where
-        toJSON LogService{..}
-          = object
-              (catMaybes
-                 [("name" .=) <$> _lName,
-                  ("indexKeys" .=) <$> _lIndexKeys])
-
--- | Describes where log entries are written outside of Cloud Logging.
---
--- /See:/ 'logSink' smart constructor.
-data LogSink = LogSink
-    { _lsDestination :: !(Maybe Text)
-    , _lsName        :: !(Maybe Text)
-    , _lsFilter      :: !(Maybe Text)
-    , _lsErrors      :: !(Maybe [Maybe LogError])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'LogSink' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lsDestination'
---
--- * 'lsName'
---
--- * 'lsFilter'
---
--- * 'lsErrors'
-logSink
-    :: LogSink
-logSink =
-    LogSink
-    { _lsDestination = Nothing
-    , _lsName = Nothing
-    , _lsFilter = Nothing
-    , _lsErrors = Nothing
-    }
-
--- | The resource name of the destination. Cloud Logging writes designated
--- log entries to this destination. For example,
--- \`\"storage.googleapis.com\/my-output-bucket\"\`.
-lsDestination :: Lens' LogSink (Maybe Text)
-lsDestination
-  = lens _lsDestination
-      (\ s a -> s{_lsDestination = a})
-
--- | The client-assigned name of this sink. For example,
--- \`\"my-syslog-sink\"\`. The name must be unique among the sinks of a
--- similar kind in the project.
-lsName :: Lens' LogSink (Maybe Text)
-lsName = lens _lsName (\ s a -> s{_lsName = a})
-
--- | An advanced logs filter. If present, only log entries matching the
--- filter are written. Only project sinks use this field; log sinks and log
--- service sinks must not include a filter.
-lsFilter :: Lens' LogSink (Maybe Text)
-lsFilter = lens _lsFilter (\ s a -> s{_lsFilter = a})
-
--- | _Output only._ If any errors occur when invoking a sink method, then
--- this field contains descriptions of the errors.
-lsErrors :: Lens' LogSink [Maybe LogError]
-lsErrors
-  = lens _lsErrors (\ s a -> s{_lsErrors = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON LogSink where
-        parseJSON
-          = withObject "LogSink"
-              (\ o ->
-                 LogSink <$>
-                   (o .:? "destination") <*> (o .:? "name") <*>
-                     (o .:? "filter")
-                     <*> (o .:? "errors" .!= mempty))
-
-instance ToJSON LogSink where
-        toJSON LogSink{..}
-          = object
-              (catMaybes
-                 [("destination" .=) <$> _lsDestination,
-                  ("name" .=) <$> _lsName, ("filter" .=) <$> _lsFilter,
-                  ("errors" .=) <$> _lsErrors])
 
 -- | Complete log information about a single request to an application.
 --
@@ -1486,67 +1268,261 @@ instance ToJSON RequestLog where
                   ("sourceReference" .=) <$> _rlSourceReference,
                   ("appEngineRelease" .=) <$> _rlAppEngineRelease])
 
--- | Specifies a location in a source file.
+-- | Result returned from WriteLogEntries. empty
 --
--- /See:/ 'sourceLocation' smart constructor.
-data SourceLocation = SourceLocation
-    { _slLine         :: !(Maybe Int64)
-    , _slFunctionName :: !(Maybe Text)
-    , _slFile         :: !(Maybe Text)
+-- /See:/ 'writeLogEntriesResponse' smart constructor.
+data WriteLogEntriesResponse =
+    WriteLogEntriesResponse
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'WriteLogEntriesResponse' with the minimum fields required to make a request.
+--
+writeLogEntriesResponse
+    :: WriteLogEntriesResponse
+writeLogEntriesResponse = WriteLogEntriesResponse
+
+instance FromJSON WriteLogEntriesResponse where
+        parseJSON
+          = withObject "WriteLogEntriesResponse"
+              (\ o -> pure WriteLogEntriesResponse)
+
+instance ToJSON WriteLogEntriesResponse where
+        toJSON = const (Object mempty)
+
+-- | Result returned from ListLogServiceIndexesRequest.
+--
+-- /See:/ 'listLogServiceIndexesResponse' smart constructor.
+data ListLogServiceIndexesResponse = ListLogServiceIndexesResponse
+    { _llsirNextPageToken        :: !(Maybe Text)
+    , _llsirServiceIndexPrefixes :: !(Maybe [Text])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SourceLocation' with the minimum fields required to make a request.
+-- | Creates a value of 'ListLogServiceIndexesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'slLine'
+-- * 'llsirNextPageToken'
 --
--- * 'slFunctionName'
---
--- * 'slFile'
-sourceLocation
-    :: SourceLocation
-sourceLocation =
-    SourceLocation
-    { _slLine = Nothing
-    , _slFunctionName = Nothing
-    , _slFile = Nothing
+-- * 'llsirServiceIndexPrefixes'
+listLogServiceIndexesResponse
+    :: ListLogServiceIndexesResponse
+listLogServiceIndexesResponse =
+    ListLogServiceIndexesResponse
+    { _llsirNextPageToken = Nothing
+    , _llsirServiceIndexPrefixes = Nothing
     }
 
--- | Line within the source file.
-slLine :: Lens' SourceLocation (Maybe Int64)
-slLine = lens _slLine (\ s a -> s{_slLine = a})
+-- | If there are more results, then \`nextPageToken\` is returned in the
+-- response. To get the next batch of indexes, use the value of
+-- \`nextPageToken\` as \`pageToken\` in the next call of
+-- \`ListLogServiceIndexes\`. If \`nextPageToken\` is empty, then there are
+-- no more results.
+llsirNextPageToken :: Lens' ListLogServiceIndexesResponse (Maybe Text)
+llsirNextPageToken
+  = lens _llsirNextPageToken
+      (\ s a -> s{_llsirNextPageToken = a})
 
--- | Human-readable name of the function or method being invoked, with
--- optional context such as the class or package name, for use in contexts
--- such as the logs viewer where file:line number is less meaningful. This
--- may vary by language, for example: in Java: qual.if.ied.Class.method in
--- Go: dir\/package.func in Python: function ...
-slFunctionName :: Lens' SourceLocation (Maybe Text)
-slFunctionName
-  = lens _slFunctionName
-      (\ s a -> s{_slFunctionName = a})
+-- | A list of log service index values. Each index value has the form
+-- \`\"\/value1\/value2\/...\"\`, where \`value1\` is a value in the
+-- primary index, \`value2\` is a value in the secondary index, and so
+-- forth.
+llsirServiceIndexPrefixes :: Lens' ListLogServiceIndexesResponse [Text]
+llsirServiceIndexPrefixes
+  = lens _llsirServiceIndexPrefixes
+      (\ s a -> s{_llsirServiceIndexPrefixes = a})
+      . _Default
+      . _Coerce
 
--- | Source file name. May or may not be a fully qualified name, depending on
--- the runtime environment.
-slFile :: Lens' SourceLocation (Maybe Text)
-slFile = lens _slFile (\ s a -> s{_slFile = a})
-
-instance FromJSON SourceLocation where
+instance FromJSON ListLogServiceIndexesResponse where
         parseJSON
-          = withObject "SourceLocation"
+          = withObject "ListLogServiceIndexesResponse"
               (\ o ->
-                 SourceLocation <$>
-                   (o .:? "line") <*> (o .:? "functionName") <*>
-                     (o .:? "file"))
+                 ListLogServiceIndexesResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "serviceIndexPrefixes" .!= mempty))
 
-instance ToJSON SourceLocation where
-        toJSON SourceLocation{..}
+instance ToJSON ListLogServiceIndexesResponse where
+        toJSON ListLogServiceIndexesResponse{..}
           = object
               (catMaybes
-                 [("line" .=) <$> _slLine,
-                  ("functionName" .=) <$> _slFunctionName,
-                  ("file" .=) <$> _slFile])
+                 [("nextPageToken" .=) <$> _llsirNextPageToken,
+                  ("serviceIndexPrefixes" .=) <$>
+                    _llsirServiceIndexPrefixes])
+
+--
+-- /See:/ 'statusItemDetails' smart constructor.
+data StatusItemDetails =
+    StatusItemDetails
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'StatusItemDetails' with the minimum fields required to make a request.
+--
+statusItemDetails
+    :: StatusItemDetails
+statusItemDetails = StatusItemDetails
+
+instance FromJSON StatusItemDetails where
+        parseJSON
+          = withObject "StatusItemDetails"
+              (\ o -> pure StatusItemDetails)
+
+instance ToJSON StatusItemDetails where
+        toJSON = const (Object mempty)
+
+-- | Describes where log entries are written outside of Cloud Logging.
+--
+-- /See:/ 'logSink' smart constructor.
+data LogSink = LogSink
+    { _lsDestination :: !(Maybe Text)
+    , _lsName        :: !(Maybe Text)
+    , _lsFilter      :: !(Maybe Text)
+    , _lsErrors      :: !(Maybe [Maybe LogError])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LogSink' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lsDestination'
+--
+-- * 'lsName'
+--
+-- * 'lsFilter'
+--
+-- * 'lsErrors'
+logSink
+    :: LogSink
+logSink =
+    LogSink
+    { _lsDestination = Nothing
+    , _lsName = Nothing
+    , _lsFilter = Nothing
+    , _lsErrors = Nothing
+    }
+
+-- | The resource name of the destination. Cloud Logging writes designated
+-- log entries to this destination. For example,
+-- \`\"storage.googleapis.com\/my-output-bucket\"\`.
+lsDestination :: Lens' LogSink (Maybe Text)
+lsDestination
+  = lens _lsDestination
+      (\ s a -> s{_lsDestination = a})
+
+-- | The client-assigned name of this sink. For example,
+-- \`\"my-syslog-sink\"\`. The name must be unique among the sinks of a
+-- similar kind in the project.
+lsName :: Lens' LogSink (Maybe Text)
+lsName = lens _lsName (\ s a -> s{_lsName = a})
+
+-- | An advanced logs filter. If present, only log entries matching the
+-- filter are written. Only project sinks use this field; log sinks and log
+-- service sinks must not include a filter.
+lsFilter :: Lens' LogSink (Maybe Text)
+lsFilter = lens _lsFilter (\ s a -> s{_lsFilter = a})
+
+-- | _Output only._ If any errors occur when invoking a sink method, then
+-- this field contains descriptions of the errors.
+lsErrors :: Lens' LogSink [Maybe LogError]
+lsErrors
+  = lens _lsErrors (\ s a -> s{_lsErrors = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON LogSink where
+        parseJSON
+          = withObject "LogSink"
+              (\ o ->
+                 LogSink <$>
+                   (o .:? "destination") <*> (o .:? "name") <*>
+                     (o .:? "filter")
+                     <*> (o .:? "errors" .!= mempty))
+
+instance ToJSON LogSink where
+        toJSON LogSink{..}
+          = object
+              (catMaybes
+                 [("destination" .=) <$> _lsDestination,
+                  ("name" .=) <$> _lsName, ("filter" .=) <$> _lsFilter,
+                  ("errors" .=) <$> _lsErrors])
+
+-- | Result returned from \`ListLogServicesRequest\`.
+--
+-- /See:/ 'listLogServicesResponse' smart constructor.
+data ListLogServicesResponse = ListLogServicesResponse
+    { _llsrNextPageToken :: !(Maybe Text)
+    , _llsrLogServices   :: !(Maybe [Maybe LogService])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListLogServicesResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'llsrNextPageToken'
+--
+-- * 'llsrLogServices'
+listLogServicesResponse
+    :: ListLogServicesResponse
+listLogServicesResponse =
+    ListLogServicesResponse
+    { _llsrNextPageToken = Nothing
+    , _llsrLogServices = Nothing
+    }
+
+-- | If there are more results, then \`nextPageToken\` is returned in the
+-- response. To get the next batch of services, use the value of
+-- \`nextPageToken\` as \`pageToken\` in the next call of
+-- \`ListLogServices\`. If \`nextPageToken\` is empty, then there are no
+-- more results.
+llsrNextPageToken :: Lens' ListLogServicesResponse (Maybe Text)
+llsrNextPageToken
+  = lens _llsrNextPageToken
+      (\ s a -> s{_llsrNextPageToken = a})
+
+-- | A list of log services.
+llsrLogServices :: Lens' ListLogServicesResponse [Maybe LogService]
+llsrLogServices
+  = lens _llsrLogServices
+      (\ s a -> s{_llsrLogServices = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListLogServicesResponse where
+        parseJSON
+          = withObject "ListLogServicesResponse"
+              (\ o ->
+                 ListLogServicesResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "logServices" .!= mempty))
+
+instance ToJSON ListLogServicesResponse where
+        toJSON ListLogServicesResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _llsrNextPageToken,
+                  ("logServices" .=) <$> _llsrLogServices])
+
+-- | The log entry payload, represented as a protocol buffer that is
+-- expressed as a JSON object. You can only pass \`protoPayload\` values
+-- that belong to a set of approved types.
+--
+-- /See:/ 'logEntryProtoPayload' smart constructor.
+data LogEntryProtoPayload =
+    LogEntryProtoPayload
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LogEntryProtoPayload' with the minimum fields required to make a request.
+--
+logEntryProtoPayload
+    :: LogEntryProtoPayload
+logEntryProtoPayload = LogEntryProtoPayload
+
+instance FromJSON LogEntryProtoPayload where
+        parseJSON
+          = withObject "LogEntryProtoPayload"
+              (\ o -> pure LogEntryProtoPayload)
+
+instance ToJSON LogEntryProtoPayload where
+        toJSON = const (Object mempty)
 
 -- | A reference to a particular snapshot of the source tree used to build
 -- and deploy an application.
@@ -1598,176 +1574,126 @@ instance ToJSON SourceReference where
                  [("repository" .=) <$> _srRepository,
                   ("revisionId" .=) <$> _srRevisionId])
 
--- | The \`Status\` type defines a logical error model that is suitable for
--- different programming environments, including REST APIs and RPC APIs. It
--- is used by [gRPC](https:\/\/github.com\/grpc). The error model is
--- designed to be: - Simple to use and understand for most users - Flexible
--- enough to meet unexpected needs # Overview The \`Status\` message
--- contains three pieces of data: error code, error message, and error
--- details. The error code should be an enum value of [google.rpc.Code][],
--- but it may accept additional error codes if needed. The error message
--- should be a developer-facing English message that helps developers
--- *understand* and *resolve* the error. If a localized user-facing error
--- message is needed, put the localized message in the error details or
--- localize it in the client. The optional error details may contain
--- arbitrary information about the error. There is a predefined set of
--- error detail types in the package \`google.rpc\` which can be used for
--- common error conditions. # Language mapping The \`Status\` message is
--- the logical representation of the error model, but it is not necessarily
--- the actual wire format. When the \`Status\` message is exposed in
--- different client libraries and different wire protocols, it can be
--- mapped differently. For example, it will likely be mapped to some
--- exceptions in Java, but more likely mapped to some error codes in C. #
--- Other uses The error model and the \`Status\` message can be used in a
--- variety of environments, either with or without APIs, to provide a
--- consistent developer experience across different environments. Example
--- uses of this error model include: - Partial errors. If a service needs
--- to return partial errors to the client, it may embed the \`Status\` in
--- the normal response to indicate the partial errors. - Workflow errors. A
--- typical workflow has multiple steps. Each step may have a \`Status\`
--- message for error reporting purpose. - Batch operations. If a client
--- uses batch request and batch response, the \`Status\` message should be
--- used directly inside batch response, one for each error sub-response. -
--- Asynchronous operations. If an API call embeds asynchronous operation
--- results in its response, the status of those operations should be
--- represented directly using the \`Status\` message. - Logging. If some
--- API errors are stored in logs, the message \`Status\` could be used
--- directly after any stripping needed for security\/privacy reasons.
+-- | A common proto for logging HTTP requests.
 --
--- /See:/ 'status' smart constructor.
-data Status = Status
-    { _sDetails :: !(Maybe [StatusItemDetails])
-    , _sCode    :: !(Maybe Int32)
-    , _sMessage :: !(Maybe Text)
+-- /See:/ 'httpRequest' smart constructor.
+data HttpRequest = HttpRequest
+    { _hrStatus        :: !(Maybe Int32)
+    , _hrRequestUrl    :: !(Maybe Text)
+    , _hrRemoteIp      :: !(Maybe Text)
+    , _hrRequestSize   :: !(Maybe Int64)
+    , _hrUserAgent     :: !(Maybe Text)
+    , _hrResponseSize  :: !(Maybe Int64)
+    , _hrRequestMethod :: !(Maybe Text)
+    , _hrReferer       :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Status' with the minimum fields required to make a request.
+-- | Creates a value of 'HttpRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sDetails'
+-- * 'hrStatus'
 --
--- * 'sCode'
+-- * 'hrRequestUrl'
 --
--- * 'sMessage'
-status
-    :: Status
-status =
-    Status
-    { _sDetails = Nothing
-    , _sCode = Nothing
-    , _sMessage = Nothing
+-- * 'hrRemoteIp'
+--
+-- * 'hrRequestSize'
+--
+-- * 'hrUserAgent'
+--
+-- * 'hrResponseSize'
+--
+-- * 'hrRequestMethod'
+--
+-- * 'hrReferer'
+httpRequest
+    :: HttpRequest
+httpRequest =
+    HttpRequest
+    { _hrStatus = Nothing
+    , _hrRequestUrl = Nothing
+    , _hrRemoteIp = Nothing
+    , _hrRequestSize = Nothing
+    , _hrUserAgent = Nothing
+    , _hrResponseSize = Nothing
+    , _hrRequestMethod = Nothing
+    , _hrReferer = Nothing
     }
 
--- | A list of messages that carry the error details. There will be a common
--- set of message types for APIs to use.
-sDetails :: Lens' Status [StatusItemDetails]
-sDetails
-  = lens _sDetails (\ s a -> s{_sDetails = a}) .
-      _Default
-      . _Coerce
+-- | A response code indicates the status of response, e.g., 200.
+hrStatus :: Lens' HttpRequest (Maybe Int32)
+hrStatus = lens _hrStatus (\ s a -> s{_hrStatus = a})
 
--- | The status code, which should be an enum value of [google.rpc.Code][].
-sCode :: Lens' Status (Maybe Int32)
-sCode = lens _sCode (\ s a -> s{_sCode = a})
+-- | Contains the scheme (http|https), the host name, the path and the query
+-- portion of the URL that was requested.
+hrRequestUrl :: Lens' HttpRequest (Maybe Text)
+hrRequestUrl
+  = lens _hrRequestUrl (\ s a -> s{_hrRequestUrl = a})
 
--- | A developer-facing error message, which should be in English. Any
--- user-facing error message should be localized and sent in the
--- [google.rpc.Status.details][google.rpc.Status.details] field, or
--- localized by the client.
-sMessage :: Lens' Status (Maybe Text)
-sMessage = lens _sMessage (\ s a -> s{_sMessage = a})
+-- | IP address of the client who issues the HTTP request. Could be either
+-- IPv4 or IPv6.
+hrRemoteIp :: Lens' HttpRequest (Maybe Text)
+hrRemoteIp
+  = lens _hrRemoteIp (\ s a -> s{_hrRemoteIp = a})
 
-instance FromJSON Status where
+-- | Size of the HTTP request message in bytes, including request headers and
+-- the request body.
+hrRequestSize :: Lens' HttpRequest (Maybe Int64)
+hrRequestSize
+  = lens _hrRequestSize
+      (\ s a -> s{_hrRequestSize = a})
+
+-- | User agent sent by the client, e.g., \"Mozilla\/4.0 (compatible; MSIE
+-- 6.0; Windows 98; Q312461; .NET CLR 1.0.3705)\".
+hrUserAgent :: Lens' HttpRequest (Maybe Text)
+hrUserAgent
+  = lens _hrUserAgent (\ s a -> s{_hrUserAgent = a})
+
+-- | Size of the HTTP response message in bytes sent back to the client,
+-- including response headers and response body.
+hrResponseSize :: Lens' HttpRequest (Maybe Int64)
+hrResponseSize
+  = lens _hrResponseSize
+      (\ s a -> s{_hrResponseSize = a})
+
+-- | Request method, such as \`GET\`, \`HEAD\`, \`PUT\` or \`POST\`.
+hrRequestMethod :: Lens' HttpRequest (Maybe Text)
+hrRequestMethod
+  = lens _hrRequestMethod
+      (\ s a -> s{_hrRequestMethod = a})
+
+-- | Referer (a.k.a. referrer) URL of request, as defined in
+-- http:\/\/www.w3.org\/Protocols\/rfc2616\/rfc2616-sec14.html.
+hrReferer :: Lens' HttpRequest (Maybe Text)
+hrReferer
+  = lens _hrReferer (\ s a -> s{_hrReferer = a})
+
+instance FromJSON HttpRequest where
         parseJSON
-          = withObject "Status"
+          = withObject "HttpRequest"
               (\ o ->
-                 Status <$>
-                   (o .:? "details" .!= mempty) <*> (o .:? "code") <*>
-                     (o .:? "message"))
+                 HttpRequest <$>
+                   (o .:? "status") <*> (o .:? "requestUrl") <*>
+                     (o .:? "remoteIp")
+                     <*> (o .:? "requestSize")
+                     <*> (o .:? "userAgent")
+                     <*> (o .:? "responseSize")
+                     <*> (o .:? "requestMethod")
+                     <*> (o .:? "referer"))
 
-instance ToJSON Status where
-        toJSON Status{..}
+instance ToJSON HttpRequest where
+        toJSON HttpRequest{..}
           = object
               (catMaybes
-                 [("details" .=) <$> _sDetails,
-                  ("code" .=) <$> _sCode,
-                  ("message" .=) <$> _sMessage])
-
---
--- /See:/ 'statusItemDetails' smart constructor.
-data StatusItemDetails =
-    StatusItemDetails
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'StatusItemDetails' with the minimum fields required to make a request.
---
-statusItemDetails
-    :: StatusItemDetails
-statusItemDetails = StatusItemDetails
-
-instance FromJSON StatusItemDetails where
-        parseJSON
-          = withObject "StatusItemDetails"
-              (\ o -> pure StatusItemDetails)
-
-instance ToJSON StatusItemDetails where
-        toJSON = const (Object mempty)
-
--- | The parameters to WriteLogEntries.
---
--- /See:/ 'writeLogEntriesRequest' smart constructor.
-data WriteLogEntriesRequest = WriteLogEntriesRequest
-    { _wlerEntries      :: !(Maybe [Maybe LogEntry])
-    , _wlerCommonLabels :: !(Maybe WriteLogEntriesRequestCommonLabels)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'WriteLogEntriesRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'wlerEntries'
---
--- * 'wlerCommonLabels'
-writeLogEntriesRequest
-    :: WriteLogEntriesRequest
-writeLogEntriesRequest =
-    WriteLogEntriesRequest
-    { _wlerEntries = Nothing
-    , _wlerCommonLabels = Nothing
-    }
-
--- | Log entries to insert.
-wlerEntries :: Lens' WriteLogEntriesRequest [Maybe LogEntry]
-wlerEntries
-  = lens _wlerEntries (\ s a -> s{_wlerEntries = a}) .
-      _Default
-      . _Coerce
-
--- | Metadata labels that apply to all log entries in this request, so that
--- you don\'t have to repeat them in each log entry\'s \`metadata.labels\`
--- field. If any of the log entries contains a (key, value) with the same
--- key that is in \`commonLabels\`, then the entry\'s (key, value)
--- overrides the one in \`commonLabels\`.
-wlerCommonLabels :: Lens' WriteLogEntriesRequest (Maybe WriteLogEntriesRequestCommonLabels)
-wlerCommonLabels
-  = lens _wlerCommonLabels
-      (\ s a -> s{_wlerCommonLabels = a})
-
-instance FromJSON WriteLogEntriesRequest where
-        parseJSON
-          = withObject "WriteLogEntriesRequest"
-              (\ o ->
-                 WriteLogEntriesRequest <$>
-                   (o .:? "entries" .!= mempty) <*>
-                     (o .:? "commonLabels"))
-
-instance ToJSON WriteLogEntriesRequest where
-        toJSON WriteLogEntriesRequest{..}
-          = object
-              (catMaybes
-                 [("entries" .=) <$> _wlerEntries,
-                  ("commonLabels" .=) <$> _wlerCommonLabels])
+                 [("status" .=) <$> _hrStatus,
+                  ("requestUrl" .=) <$> _hrRequestUrl,
+                  ("remoteIp" .=) <$> _hrRemoteIp,
+                  ("requestSize" .=) <$> _hrRequestSize,
+                  ("userAgent" .=) <$> _hrUserAgent,
+                  ("responseSize" .=) <$> _hrResponseSize,
+                  ("requestMethod" .=) <$> _hrRequestMethod,
+                  ("referer" .=) <$> _hrReferer])
 
 -- | Metadata labels that apply to all log entries in this request, so that
 -- you don\'t have to repeat them in each log entry\'s \`metadata.labels\`
@@ -1796,23 +1722,97 @@ instance ToJSON WriteLogEntriesRequestCommonLabels
          where
         toJSON = const (Object mempty)
 
--- | Result returned from WriteLogEntries. empty
+-- | Result returned from \`ListLogSinks\`.
 --
--- /See:/ 'writeLogEntriesResponse' smart constructor.
-data WriteLogEntriesResponse =
-    WriteLogEntriesResponse
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'listLogSinksResponse' smart constructor.
+newtype ListLogSinksResponse = ListLogSinksResponse
+    { _llsrSinks :: Maybe [Maybe LogSink]
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'WriteLogEntriesResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'ListLogSinksResponse' with the minimum fields required to make a request.
 --
-writeLogEntriesResponse
-    :: WriteLogEntriesResponse
-writeLogEntriesResponse = WriteLogEntriesResponse
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'llsrSinks'
+listLogSinksResponse
+    :: ListLogSinksResponse
+listLogSinksResponse =
+    ListLogSinksResponse
+    { _llsrSinks = Nothing
+    }
 
-instance FromJSON WriteLogEntriesResponse where
+-- | The requested log sinks. If a returned \`LogSink\` object has an empty
+-- \`destination\` field, the client can retrieve the complete \`LogSink\`
+-- object by calling \`log.sinks.get\`.
+llsrSinks :: Lens' ListLogSinksResponse [Maybe LogSink]
+llsrSinks
+  = lens _llsrSinks (\ s a -> s{_llsrSinks = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ListLogSinksResponse where
         parseJSON
-          = withObject "WriteLogEntriesResponse"
-              (\ o -> pure WriteLogEntriesResponse)
+          = withObject "ListLogSinksResponse"
+              (\ o ->
+                 ListLogSinksResponse <$> (o .:? "sinks" .!= mempty))
 
-instance ToJSON WriteLogEntriesResponse where
-        toJSON = const (Object mempty)
+instance ToJSON ListLogSinksResponse where
+        toJSON ListLogSinksResponse{..}
+          = object (catMaybes [("sinks" .=) <$> _llsrSinks])
+
+-- | _Output only._ Describes a service that writes log entries.
+--
+-- /See:/ 'logService' smart constructor.
+data LogService = LogService
+    { _lName      :: !(Maybe Text)
+    , _lIndexKeys :: !(Maybe [Text])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LogService' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lName'
+--
+-- * 'lIndexKeys'
+logService
+    :: LogService
+logService =
+    LogService
+    { _lName = Nothing
+    , _lIndexKeys = Nothing
+    }
+
+-- | The service\'s name. Example: \`\"appengine.googleapis.com\"\`. Log
+-- names beginning with this string are reserved for this service. This
+-- value can appear in the \`LogEntry.metadata.serviceName\` field of log
+-- entries associated with this log service.
+lName :: Lens' LogService (Maybe Text)
+lName = lens _lName (\ s a -> s{_lName = a})
+
+-- | A list of the names of the keys used to index and label individual log
+-- entries from this service. The first two keys are used as the primary
+-- and secondary index, respectively. Additional keys may be used to label
+-- the entries. For example, App Engine indexes its entries by module and
+-- by version, so its \`indexKeys\` field is the following: [
+-- \"appengine.googleapis.com\/module_id\",
+-- \"appengine.googleapis.com\/version_id\" ]
+lIndexKeys :: Lens' LogService [Text]
+lIndexKeys
+  = lens _lIndexKeys (\ s a -> s{_lIndexKeys = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON LogService where
+        parseJSON
+          = withObject "LogService"
+              (\ o ->
+                 LogService <$>
+                   (o .:? "name") <*> (o .:? "indexKeys" .!= mempty))
+
+instance ToJSON LogService where
+        toJSON LogService{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _lName,
+                  ("indexKeys" .=) <$> _lIndexKeys])

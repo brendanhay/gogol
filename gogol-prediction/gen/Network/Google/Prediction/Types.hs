@@ -14,9 +14,11 @@
 --
 module Network.Google.Prediction.Types
     (
+    -- * Service URL
+      predictionURL
 
     -- * Analyze
-      Analyze
+    , Analyze
     , analyze
     , aKind
     , aModelDescription
@@ -25,29 +27,48 @@ module Network.Google.Prediction.Types
     , aErrors
     , aDataDescription
 
-    -- * AnalyzeCategoricalItemFeaturesDataDescription
-    , AnalyzeCategoricalItemFeaturesDataDescription
-    , analyzeCategoricalItemFeaturesDataDescription
-    , acifddValues
-    , acifddCount
-
-    -- * AnalyzeConfusionMatrixModelDescription
-    , AnalyzeConfusionMatrixModelDescription
-    , analyzeConfusionMatrixModelDescription
-
     -- * AnalyzeConfusionMatrixRowTotalsModelDescription
     , AnalyzeConfusionMatrixRowTotalsModelDescription
     , analyzeConfusionMatrixRowTotalsModelDescription
 
-    -- * AnalyzeDataDescription
-    , AnalyzeDataDescription
-    , analyzeDataDescription
-    , addOutputFeature
-    , addFeatures
+    -- * OutputItemOutputMulti
+    , OutputItemOutputMulti
+    , outputItemOutputMulti
+    , oiomScore
+    , oiomLabel
 
-    -- * AnalyzeItemErrors
-    , AnalyzeItemErrors
-    , analyzeItemErrors
+    -- * Output
+    , Output
+    , output
+    , oOutputValue
+    , oKind
+    , oOutputLabel
+    , oSelfLink
+    , oId
+    , oOutputMulti
+
+    -- * AnalyzeItemTextOutputFeatureDataDescription
+    , AnalyzeItemTextOutputFeatureDataDescription
+    , analyzeItemTextOutputFeatureDataDescription
+    , aitofddValue
+    , aitofddCount
+
+    -- * Alt
+    , Alt (..)
+
+    -- * List
+    , List
+    , list
+    , lNextPageToken
+    , lKind
+    , lItems
+    , lSelfLink
+
+    -- * AnalyzeItemValuesCategoricalItemFeaturesDataDescription
+    , AnalyzeItemValuesCategoricalItemFeaturesDataDescription
+    , analyzeItemValuesCategoricalItemFeaturesDataDescription
+    , aivcifddValue
+    , aivcifddCount
 
     -- * AnalyzeItemFeaturesDataDescription
     , AnalyzeItemFeaturesDataDescription
@@ -57,31 +78,10 @@ module Network.Google.Prediction.Types
     , aifddIndex
     , aifddCategorical
 
-    -- * AnalyzeItemTextOutputFeatureDataDescription
-    , AnalyzeItemTextOutputFeatureDataDescription
-    , analyzeItemTextOutputFeatureDataDescription
-    , aitofddValue
-    , aitofddCount
-
-    -- * AnalyzeItemValuesCategoricalItemFeaturesDataDescription
-    , AnalyzeItemValuesCategoricalItemFeaturesDataDescription
-    , analyzeItemValuesCategoricalItemFeaturesDataDescription
-    , aivcifddValue
-    , aivcifddCount
-
-    -- * AnalyzeModelDescription
-    , AnalyzeModelDescription
-    , analyzeModelDescription
-    , amdConfusionMatrixRowTotals
-    , amdConfusionMatrix
-    , amdModelinfo
-
-    -- * AnalyzeNumericItemFeaturesDataDescription
-    , AnalyzeNumericItemFeaturesDataDescription
-    , analyzeNumericItemFeaturesDataDescription
-    , anifddMean
-    , anifddCount
-    , anifddVariance
+    -- * Input
+    , Input
+    , input
+    , iInput
 
     -- * AnalyzeNumericOutputFeatureDataDescription
     , AnalyzeNumericOutputFeatureDataDescription
@@ -90,26 +90,27 @@ module Network.Google.Prediction.Types
     , anofddCount
     , anofddVariance
 
-    -- * AnalyzeOutputFeatureDataDescription
-    , AnalyzeOutputFeatureDataDescription
-    , analyzeOutputFeatureDataDescription
-    , aofddText
-    , aofddNumeric
+    -- * AnalyzeDataDescription
+    , AnalyzeDataDescription
+    , analyzeDataDescription
+    , addOutputFeature
+    , addFeatures
 
-    -- * AnalyzeTextItemFeaturesDataDescription
-    , AnalyzeTextItemFeaturesDataDescription
-    , analyzeTextItemFeaturesDataDescription
-    , atifddCount
+    -- * Update
+    , Update
+    , update
+    , uCsvInstance
+    , uOutput
 
-    -- * Input
-    , Input
-    , input
-    , iInput
-
-    -- * InputInput
-    , InputInput
-    , inputInput
-    , iiCsvInstance
+    -- * Insert2ModelInfo
+    , Insert2ModelInfo
+    , insert2ModelInfo
+    , imiModelType
+    , imiClassWeightedAccuracy
+    , imiClassificationAccuracy
+    , imiMeanSquaredError
+    , imiNumberLabels
+    , imiNumberInstances
 
     -- * Insert
     , Insert
@@ -122,6 +123,16 @@ module Network.Google.Prediction.Types
     , iSourceModel
     , iId
     , iStoragePMMLLocation
+
+    -- * AnalyzeConfusionMatrixModelDescription
+    , AnalyzeConfusionMatrixModelDescription
+    , analyzeConfusionMatrixModelDescription
+
+    -- * AnalyzeOutputFeatureDataDescription
+    , AnalyzeOutputFeatureDataDescription
+    , analyzeOutputFeatureDataDescription
+    , aofddText
+    , aofddNumeric
 
     -- * Insert2
     , Insert2
@@ -138,15 +149,23 @@ module Network.Google.Prediction.Types
     , insStoragePMMLLocation
     , insModelInfo
 
-    -- * Insert2ModelInfo
-    , Insert2ModelInfo
-    , insert2ModelInfo
-    , imiModelType
-    , imiClassWeightedAccuracy
-    , imiClassificationAccuracy
-    , imiMeanSquaredError
-    , imiNumberLabels
-    , imiNumberInstances
+    -- * AnalyzeCategoricalItemFeaturesDataDescription
+    , AnalyzeCategoricalItemFeaturesDataDescription
+    , analyzeCategoricalItemFeaturesDataDescription
+    , acifddValues
+    , acifddCount
+
+    -- * AnalyzeNumericItemFeaturesDataDescription
+    , AnalyzeNumericItemFeaturesDataDescription
+    , analyzeNumericItemFeaturesDataDescription
+    , anifddMean
+    , anifddCount
+    , anifddVariance
+
+    -- * InputInput
+    , InputInput
+    , inputInput
+    , iiCsvInstance
 
     -- * InsertItemTrainingInstances
     , InsertItemTrainingInstances
@@ -154,41 +173,34 @@ module Network.Google.Prediction.Types
     , iitiCsvInstance
     , iitiOutput
 
+    -- * AnalyzeTextItemFeaturesDataDescription
+    , AnalyzeTextItemFeaturesDataDescription
+    , analyzeTextItemFeaturesDataDescription
+    , atifddCount
+
+    -- * AnalyzeModelDescription
+    , AnalyzeModelDescription
+    , analyzeModelDescription
+    , amdConfusionMatrixRowTotals
+    , amdConfusionMatrix
+    , amdModelinfo
+
+    -- * AnalyzeItemErrors
+    , AnalyzeItemErrors
+    , analyzeItemErrors
+
     -- * InsertItemUtility
     , InsertItemUtility
     , insertItemUtility
-
-    -- * List
-    , List
-    , list
-    , lNextPageToken
-    , lKind
-    , lItems
-    , lSelfLink
-
-    -- * Output
-    , Output
-    , output
-    , oOutputValue
-    , oKind
-    , oOutputLabel
-    , oSelfLink
-    , oId
-    , oOutputMulti
-
-    -- * OutputItemOutputMulti
-    , OutputItemOutputMulti
-    , outputItemOutputMulti
-    , oiomScore
-    , oiomLabel
-
-    -- * Update
-    , Update
-    , update
-    , uCsvInstance
-    , uOutput
     ) where
 
 import           Network.Google.Prediction.Types.Product
 import           Network.Google.Prediction.Types.Sum
 import           Network.Google.Prelude
+
+-- | URL referring to version 'v1.6' of the Prediction API.
+predictionURL :: BaseUrl
+predictionURL
+  = BaseUrl Https
+      "https://www.googleapis.com/prediction/v1.6/projects/"
+      443

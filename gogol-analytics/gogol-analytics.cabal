@@ -1,6 +1,6 @@
 name:                  gogol-analytics
 version:               0.0.1
-synopsis:              Google Analytics API.
+synopsis:              Google Analytics API Client.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -16,8 +16,8 @@ extra-source-files:    README.md
 description:
     View and manage your Google Analytics data
     .
-    /Warning:/ This is an experimental preview release which is still under
-    heavy development and not intended for public consumption, caveat emptor!
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
 
 source-repository head
     type:     git
@@ -30,7 +30,85 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.Analytics
+          Network.Google.API.Analytics.Data.Ga.Get
+        , Network.Google.API.Analytics.Data.Mcf.Get
+        , Network.Google.API.Analytics.Data.Realtime.Get
+        , Network.Google.API.Analytics.Management.AccountSummaries.List
+        , Network.Google.API.Analytics.Management.AccountUserLinks.Delete
+        , Network.Google.API.Analytics.Management.AccountUserLinks.Insert
+        , Network.Google.API.Analytics.Management.AccountUserLinks.List
+        , Network.Google.API.Analytics.Management.AccountUserLinks.Update
+        , Network.Google.API.Analytics.Management.Accounts.List
+        , Network.Google.API.Analytics.Management.CustomDataSources.List
+        , Network.Google.API.Analytics.Management.CustomDimensions.Get
+        , Network.Google.API.Analytics.Management.CustomDimensions.Insert
+        , Network.Google.API.Analytics.Management.CustomDimensions.List
+        , Network.Google.API.Analytics.Management.CustomDimensions.Patch
+        , Network.Google.API.Analytics.Management.CustomDimensions.Update
+        , Network.Google.API.Analytics.Management.CustomMetrics.Get
+        , Network.Google.API.Analytics.Management.CustomMetrics.Insert
+        , Network.Google.API.Analytics.Management.CustomMetrics.List
+        , Network.Google.API.Analytics.Management.CustomMetrics.Patch
+        , Network.Google.API.Analytics.Management.CustomMetrics.Update
+        , Network.Google.API.Analytics.Management.Experiments.Delete
+        , Network.Google.API.Analytics.Management.Experiments.Get
+        , Network.Google.API.Analytics.Management.Experiments.Insert
+        , Network.Google.API.Analytics.Management.Experiments.List
+        , Network.Google.API.Analytics.Management.Experiments.Patch
+        , Network.Google.API.Analytics.Management.Experiments.Update
+        , Network.Google.API.Analytics.Management.Filters.Delete
+        , Network.Google.API.Analytics.Management.Filters.Get
+        , Network.Google.API.Analytics.Management.Filters.Insert
+        , Network.Google.API.Analytics.Management.Filters.List
+        , Network.Google.API.Analytics.Management.Filters.Patch
+        , Network.Google.API.Analytics.Management.Filters.Update
+        , Network.Google.API.Analytics.Management.Goals.Get
+        , Network.Google.API.Analytics.Management.Goals.Insert
+        , Network.Google.API.Analytics.Management.Goals.List
+        , Network.Google.API.Analytics.Management.Goals.Patch
+        , Network.Google.API.Analytics.Management.Goals.Update
+        , Network.Google.API.Analytics.Management.ProfileFilterLinks.Delete
+        , Network.Google.API.Analytics.Management.ProfileFilterLinks.Get
+        , Network.Google.API.Analytics.Management.ProfileFilterLinks.Insert
+        , Network.Google.API.Analytics.Management.ProfileFilterLinks.List
+        , Network.Google.API.Analytics.Management.ProfileFilterLinks.Patch
+        , Network.Google.API.Analytics.Management.ProfileFilterLinks.Update
+        , Network.Google.API.Analytics.Management.ProfileUserLinks.Delete
+        , Network.Google.API.Analytics.Management.ProfileUserLinks.Insert
+        , Network.Google.API.Analytics.Management.ProfileUserLinks.List
+        , Network.Google.API.Analytics.Management.ProfileUserLinks.Update
+        , Network.Google.API.Analytics.Management.Profiles.Delete
+        , Network.Google.API.Analytics.Management.Profiles.Get
+        , Network.Google.API.Analytics.Management.Profiles.Insert
+        , Network.Google.API.Analytics.Management.Profiles.List
+        , Network.Google.API.Analytics.Management.Profiles.Patch
+        , Network.Google.API.Analytics.Management.Profiles.Update
+        , Network.Google.API.Analytics.Management.Segments.List
+        , Network.Google.API.Analytics.Management.UnsampledReports.Get
+        , Network.Google.API.Analytics.Management.UnsampledReports.Insert
+        , Network.Google.API.Analytics.Management.UnsampledReports.List
+        , Network.Google.API.Analytics.Management.Uploads.DeleteUploadData
+        , Network.Google.API.Analytics.Management.Uploads.Get
+        , Network.Google.API.Analytics.Management.Uploads.List
+        , Network.Google.API.Analytics.Management.Uploads.UploadData
+        , Network.Google.API.Analytics.Management.WebPropertyAdWordsLinks.Delete
+        , Network.Google.API.Analytics.Management.WebPropertyAdWordsLinks.Get
+        , Network.Google.API.Analytics.Management.WebPropertyAdWordsLinks.Insert
+        , Network.Google.API.Analytics.Management.WebPropertyAdWordsLinks.List
+        , Network.Google.API.Analytics.Management.WebPropertyAdWordsLinks.Patch
+        , Network.Google.API.Analytics.Management.WebPropertyAdWordsLinks.Update
+        , Network.Google.API.Analytics.Management.Webproperties.Get
+        , Network.Google.API.Analytics.Management.Webproperties.Insert
+        , Network.Google.API.Analytics.Management.Webproperties.List
+        , Network.Google.API.Analytics.Management.Webproperties.Patch
+        , Network.Google.API.Analytics.Management.Webproperties.Update
+        , Network.Google.API.Analytics.Management.WebpropertyUserLinks.Delete
+        , Network.Google.API.Analytics.Management.WebpropertyUserLinks.Insert
+        , Network.Google.API.Analytics.Management.WebpropertyUserLinks.List
+        , Network.Google.API.Analytics.Management.WebpropertyUserLinks.Update
+        , Network.Google.API.Analytics.Metadata.Columns.List
+        , Network.Google.API.Analytics.Provisioning.CreateAccountTicket
+        , Network.Google.Analytics
         , Network.Google.Analytics.Types
 
     other-modules:

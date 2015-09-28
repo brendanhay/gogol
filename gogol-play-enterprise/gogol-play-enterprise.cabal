@@ -1,6 +1,6 @@
 name:                  gogol-play-enterprise
 version:               0.0.1
-synopsis:              Google Play EMM API.
+synopsis:              Google Play EMM API Client.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -17,8 +17,8 @@ description:
     Allows MDMs\/EMMs and enterprises to manage the deployment of apps to
     Android for Work users.
     .
-    /Warning:/ This is an experimental preview release which is still under
-    heavy development and not intended for public consumption, caveat emptor!
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
 
 source-repository head
     type:     git
@@ -31,7 +31,56 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.Play.Enterprise
+          Network.Google.API.Androidenterprise.Collections.Delete
+        , Network.Google.API.Androidenterprise.Collections.Get
+        , Network.Google.API.Androidenterprise.Collections.Insert
+        , Network.Google.API.Androidenterprise.Collections.List
+        , Network.Google.API.Androidenterprise.Collections.Patch
+        , Network.Google.API.Androidenterprise.Collections.Update
+        , Network.Google.API.Androidenterprise.Collectionviewers.Delete
+        , Network.Google.API.Androidenterprise.Collectionviewers.Get
+        , Network.Google.API.Androidenterprise.Collectionviewers.List
+        , Network.Google.API.Androidenterprise.Collectionviewers.Patch
+        , Network.Google.API.Androidenterprise.Collectionviewers.Update
+        , Network.Google.API.Androidenterprise.Devices.Get
+        , Network.Google.API.Androidenterprise.Devices.GetState
+        , Network.Google.API.Androidenterprise.Devices.List
+        , Network.Google.API.Androidenterprise.Devices.SetState
+        , Network.Google.API.Androidenterprise.Enterprises.Delete
+        , Network.Google.API.Androidenterprise.Enterprises.Enroll
+        , Network.Google.API.Androidenterprise.Enterprises.Get
+        , Network.Google.API.Androidenterprise.Enterprises.Insert
+        , Network.Google.API.Androidenterprise.Enterprises.List
+        , Network.Google.API.Androidenterprise.Enterprises.SendTestPushNotification
+        , Network.Google.API.Androidenterprise.Enterprises.SetAccount
+        , Network.Google.API.Androidenterprise.Enterprises.Unenroll
+        , Network.Google.API.Androidenterprise.Entitlements.Delete
+        , Network.Google.API.Androidenterprise.Entitlements.Get
+        , Network.Google.API.Androidenterprise.Entitlements.List
+        , Network.Google.API.Androidenterprise.Entitlements.Patch
+        , Network.Google.API.Androidenterprise.Entitlements.Update
+        , Network.Google.API.Androidenterprise.Grouplicenses.Get
+        , Network.Google.API.Androidenterprise.Grouplicenses.List
+        , Network.Google.API.Androidenterprise.Grouplicenseusers.List
+        , Network.Google.API.Androidenterprise.Installs.Delete
+        , Network.Google.API.Androidenterprise.Installs.Get
+        , Network.Google.API.Androidenterprise.Installs.List
+        , Network.Google.API.Androidenterprise.Installs.Patch
+        , Network.Google.API.Androidenterprise.Installs.Update
+        , Network.Google.API.Androidenterprise.Permissions.Get
+        , Network.Google.API.Androidenterprise.Products.Approve
+        , Network.Google.API.Androidenterprise.Products.GenerateApprovalURL
+        , Network.Google.API.Androidenterprise.Products.Get
+        , Network.Google.API.Androidenterprise.Products.GetAppRestrictionsSchema
+        , Network.Google.API.Androidenterprise.Products.GetPermissions
+        , Network.Google.API.Androidenterprise.Products.UpdatePermissions
+        , Network.Google.API.Androidenterprise.Users.GenerateToken
+        , Network.Google.API.Androidenterprise.Users.Get
+        , Network.Google.API.Androidenterprise.Users.GetAvailableProductSet
+        , Network.Google.API.Androidenterprise.Users.List
+        , Network.Google.API.Androidenterprise.Users.RevokeToken
+        , Network.Google.API.Androidenterprise.Users.SetAvailableProductSet
+        , Network.Google.Play.Enterprise
         , Network.Google.Play.Enterprise.Types
 
     other-modules:

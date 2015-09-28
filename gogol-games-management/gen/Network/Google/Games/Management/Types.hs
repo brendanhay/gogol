@@ -14,46 +14,8 @@
 --
 module Network.Google.Games.Management.Types
     (
-
-    -- * AchievementResetAllResponse
-      AchievementResetAllResponse
-    , achievementResetAllResponse
-    , ararResults
-    , ararKind
-
-    -- * AchievementResetMultipleForAllRequest
-    , AchievementResetMultipleForAllRequest
-    , achievementResetMultipleForAllRequest
-    , armfarKind
-    , armfarAchievementIds
-
-    -- * AchievementResetResponse
-    , AchievementResetResponse
-    , achievementResetResponse
-    , arrUpdateOccurred
-    , arrKind
-    , arrCurrentState
-    , arrDefinitionId
-
-    -- * EventsResetMultipleForAllRequest
-    , EventsResetMultipleForAllRequest
-    , eventsResetMultipleForAllRequest
-    , ermfarKind
-    , ermfarEventIds
-
-    -- * GamesPlayedResource
-    , GamesPlayedResource
-    , gamesPlayedResource
-    , gprAutoMatched
-    , gprTimeMillis
-
-    -- * GamesPlayerExperienceInfoResource
-    , GamesPlayerExperienceInfoResource
-    , gamesPlayerExperienceInfoResource
-    , gpeirCurrentExperiencePoints
-    , gpeirCurrentLevel
-    , gpeirNextLevel
-    , gpeirLastLevelUpTimestampMillis
+    -- * Service URL
+      gamesManagementURL
 
     -- * GamesPlayerLevelResource
     , GamesPlayerLevelResource
@@ -62,19 +24,20 @@ module Network.Google.Games.Management.Types
     , gplrMinExperiencePoints
     , gplrLevel
 
-    -- * HiddenPlayer
-    , HiddenPlayer
-    , hiddenPlayer
-    , hpKind
-    , hpHiddenTimeMillis
-    , hpPlayer
+    -- * Alt
+    , Alt (..)
 
-    -- * HiddenPlayerList
-    , HiddenPlayerList
-    , hiddenPlayerList
-    , hplNextPageToken
-    , hplKind
-    , hplItems
+    -- * GamesPlayedResource
+    , GamesPlayedResource
+    , gamesPlayedResource
+    , gprAutoMatched
+    , gprTimeMillis
+
+    -- * AchievementResetAllResponse
+    , AchievementResetAllResponse
+    , achievementResetAllResponse
+    , ararResults
+    , ararKind
 
     -- * Player
     , Player
@@ -88,17 +51,39 @@ module Network.Google.Games.Management.Types
     , pTitle
     , pPlayerId
 
-    -- * PlayerName
-    , PlayerName
-    , playerName
-    , pnGivenName
-    , pnFamilyName
+    -- * AchievementResetResponse
+    , AchievementResetResponse
+    , achievementResetResponse
+    , arrUpdateOccurred
+    , arrKind
+    , arrCurrentState
+    , arrDefinitionId
+
+    -- * GamesPlayerExperienceInfoResource
+    , GamesPlayerExperienceInfoResource
+    , gamesPlayerExperienceInfoResource
+    , gpeirCurrentExperiencePoints
+    , gpeirCurrentLevel
+    , gpeirNextLevel
+    , gpeirLastLevelUpTimestampMillis
 
     -- * PlayerScoreResetAllResponse
     , PlayerScoreResetAllResponse
     , playerScoreResetAllResponse
     , psrarResults
     , psrarKind
+
+    -- * PlayerName
+    , PlayerName
+    , playerName
+    , pnGivenName
+    , pnFamilyName
+
+    -- * ScoresResetMultipleForAllRequest
+    , ScoresResetMultipleForAllRequest
+    , scoresResetMultipleForAllRequest
+    , srmfarKind
+    , srmfarLeaderboardIds
 
     -- * PlayerScoreResetResponse
     , PlayerScoreResetResponse
@@ -107,19 +92,46 @@ module Network.Google.Games.Management.Types
     , psrrResetScoreTimeSpans
     , psrrDefinitionId
 
+    -- * HiddenPlayerList
+    , HiddenPlayerList
+    , hiddenPlayerList
+    , hplNextPageToken
+    , hplKind
+    , hplItems
+
     -- * QuestsResetMultipleForAllRequest
     , QuestsResetMultipleForAllRequest
     , questsResetMultipleForAllRequest
     , qrmfarKind
     , qrmfarQuestIds
 
-    -- * ScoresResetMultipleForAllRequest
-    , ScoresResetMultipleForAllRequest
-    , scoresResetMultipleForAllRequest
-    , srmfarKind
-    , srmfarLeaderboardIds
+    -- * EventsResetMultipleForAllRequest
+    , EventsResetMultipleForAllRequest
+    , eventsResetMultipleForAllRequest
+    , ermfarKind
+    , ermfarEventIds
+
+    -- * HiddenPlayer
+    , HiddenPlayer
+    , hiddenPlayer
+    , hpKind
+    , hpHiddenTimeMillis
+    , hpPlayer
+
+    -- * AchievementResetMultipleForAllRequest
+    , AchievementResetMultipleForAllRequest
+    , achievementResetMultipleForAllRequest
+    , armfarKind
+    , armfarAchievementIds
     ) where
 
 import           Network.Google.Games.Management.Types.Product
 import           Network.Google.Games.Management.Types.Sum
 import           Network.Google.Prelude
+
+-- | URL referring to version 'v1management' of the Google Play Game Services Management API.
+gamesManagementURL :: BaseUrl
+gamesManagementURL
+  = BaseUrl Https
+      "https://www.googleapis.com/games/v1management/"
+      443

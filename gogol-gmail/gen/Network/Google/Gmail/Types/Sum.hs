@@ -20,11 +20,11 @@ import           Network.Google.Prelude
 -- | The visibility of the label in the label list in the Gmail web
 -- interface.
 data LabelLabelListVisibility
-    = LLLVLabelHide
+    = LabelHide
       -- ^ @labelHide@
-    | LLLVLabelShow
+    | LabelShow
       -- ^ @labelShow@
-    | LLLVLabelShowIfUnread
+    | LabelShowIfUnread
       -- ^ @labelShowIfUnread@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -32,16 +32,16 @@ instance Hashable LabelLabelListVisibility
 
 instance FromText LabelLabelListVisibility where
     fromText = \case
-        "labelHide" -> Just LLLVLabelHide
-        "labelShow" -> Just LLLVLabelShow
-        "labelShowIfUnread" -> Just LLLVLabelShowIfUnread
+        "labelHide" -> Just LabelHide
+        "labelShow" -> Just LabelShow
+        "labelShowIfUnread" -> Just LabelShowIfUnread
         _ -> Nothing
 
 instance ToText LabelLabelListVisibility where
     toText = \case
-        LLLVLabelHide -> "labelHide"
-        LLLVLabelShow -> "labelShow"
-        LLLVLabelShowIfUnread -> "labelShowIfUnread"
+        LabelHide -> "labelHide"
+        LabelShow -> "labelShow"
+        LabelShowIfUnread -> "labelShowIfUnread"
 
 instance FromJSON LabelLabelListVisibility where
     parseJSON = parseJSONText "LabelLabelListVisibility"
@@ -52,9 +52,9 @@ instance ToJSON LabelLabelListVisibility where
 -- | The visibility of the label in the message list in the Gmail web
 -- interface.
 data LabelMessageListVisibility
-    = LMLVHide
+    = Hide
       -- ^ @hide@
-    | LMLVShow
+    | Show
       -- ^ @show@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -62,19 +62,78 @@ instance Hashable LabelMessageListVisibility
 
 instance FromText LabelMessageListVisibility where
     fromText = \case
-        "hide" -> Just LMLVHide
-        "show" -> Just LMLVShow
+        "hide" -> Just Hide
+        "show" -> Just Show
         _ -> Nothing
 
 instance ToText LabelMessageListVisibility where
     toText = \case
-        LMLVHide -> "hide"
-        LMLVShow -> "show"
+        Hide -> "hide"
+        Show -> "show"
 
 instance FromJSON LabelMessageListVisibility where
     parseJSON = parseJSONText "LabelMessageListVisibility"
 
 instance ToJSON LabelMessageListVisibility where
+    toJSON = toJSONText
+
+-- | Data format for the response.
+data Alt
+    = JSON
+      -- ^ @json@
+      -- Responses with Content-Type of application\/json
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable Alt
+
+instance FromText Alt where
+    fromText = \case
+        "json" -> Just JSON
+        _ -> Nothing
+
+instance ToText Alt where
+    toText = \case
+        JSON -> "json"
+
+instance FromJSON Alt where
+    parseJSON = parseJSONText "Alt"
+
+instance ToJSON Alt where
+    toJSON = toJSONText
+
+-- | The format to return the draft in.
+data UsersDraftsGet'Format
+    = Full
+      -- ^ @full@
+    | Metadata
+      -- ^ @metadata@
+    | Minimal
+      -- ^ @minimal@
+    | Raw
+      -- ^ @raw@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable UsersDraftsGet'Format
+
+instance FromText UsersDraftsGet'Format where
+    fromText = \case
+        "full" -> Just Full
+        "metadata" -> Just Metadata
+        "minimal" -> Just Minimal
+        "raw" -> Just Raw
+        _ -> Nothing
+
+instance ToText UsersDraftsGet'Format where
+    toText = \case
+        Full -> "full"
+        Metadata -> "metadata"
+        Minimal -> "minimal"
+        Raw -> "raw"
+
+instance FromJSON UsersDraftsGet'Format where
+    parseJSON = parseJSONText "UsersDraftsGet'Format"
+
+instance ToJSON UsersDraftsGet'Format where
     toJSON = toJSONText
 
 -- | The owner type for the label. User labels are created by the user and
@@ -86,9 +145,9 @@ instance ToJSON LabelMessageListVisibility where
 -- UNREAD labels from messages and threads, but cannot apply or remove the
 -- DRAFTS or SENT labels from messages or threads.
 data LabelType
-    = LTSystem
+    = System
       -- ^ @system@
-    | LTUser
+    | User
       -- ^ @user@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -96,14 +155,14 @@ instance Hashable LabelType
 
 instance FromText LabelType where
     fromText = \case
-        "system" -> Just LTSystem
-        "user" -> Just LTUser
+        "system" -> Just System
+        "user" -> Just User
         _ -> Nothing
 
 instance ToText LabelType where
     toText = \case
-        LTSystem -> "system"
-        LTUser -> "user"
+        System -> "system"
+        User -> "user"
 
 instance FromJSON LabelType where
     parseJSON = parseJSONText "LabelType"
@@ -113,9 +172,9 @@ instance ToJSON LabelType where
 
 -- | Filtering behavior of labelIds list specified.
 data WatchRequestLabelFilterAction
-    = WRLFAExclude
+    = Exclude
       -- ^ @exclude@
-    | WRLFAInclude
+    | Include
       -- ^ @include@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -123,17 +182,48 @@ instance Hashable WatchRequestLabelFilterAction
 
 instance FromText WatchRequestLabelFilterAction where
     fromText = \case
-        "exclude" -> Just WRLFAExclude
-        "include" -> Just WRLFAInclude
+        "exclude" -> Just Exclude
+        "include" -> Just Include
         _ -> Nothing
 
 instance ToText WatchRequestLabelFilterAction where
     toText = \case
-        WRLFAExclude -> "exclude"
-        WRLFAInclude -> "include"
+        Exclude -> "exclude"
+        Include -> "include"
 
 instance FromJSON WatchRequestLabelFilterAction where
     parseJSON = parseJSONText "WatchRequestLabelFilterAction"
 
 instance ToJSON WatchRequestLabelFilterAction where
+    toJSON = toJSONText
+
+-- | The format to return the messages in.
+data UsersThreadsGet'Format
+    = UTGFFull
+      -- ^ @full@
+    | UTGFMetadata
+      -- ^ @metadata@
+    | UTGFMinimal
+      -- ^ @minimal@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable UsersThreadsGet'Format
+
+instance FromText UsersThreadsGet'Format where
+    fromText = \case
+        "full" -> Just UTGFFull
+        "metadata" -> Just UTGFMetadata
+        "minimal" -> Just UTGFMinimal
+        _ -> Nothing
+
+instance ToText UsersThreadsGet'Format where
+    toText = \case
+        UTGFFull -> "full"
+        UTGFMetadata -> "metadata"
+        UTGFMinimal -> "minimal"
+
+instance FromJSON UsersThreadsGet'Format where
+    parseJSON = parseJSONText "UsersThreadsGet'Format"
+
+instance ToJSON UsersThreadsGet'Format where
     toJSON = toJSONText

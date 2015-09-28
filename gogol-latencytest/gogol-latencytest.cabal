@@ -1,6 +1,6 @@
 name:                  gogol-latencytest
 version:               0.0.1
-synopsis:              Google Cloud Network Performance Monitoring API.
+synopsis:              Google Cloud Network Performance Monitoring API Client.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -16,8 +16,8 @@ extra-source-files:    README.md
 description:
     A Test API to report latency data.
     .
-    /Warning:/ This is an experimental preview release which is still under
-    heavy development and not intended for public consumption, caveat emptor!
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
 
 source-repository head
     type:     git
@@ -30,7 +30,9 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.LatencyTest
+          Network.Google.API.Cloudlatencytest.Statscollection.Updateaggregatedstats
+        , Network.Google.API.Cloudlatencytest.Statscollection.Updatestats
+        , Network.Google.LatencyTest
         , Network.Google.LatencyTest.Types
 
     other-modules:

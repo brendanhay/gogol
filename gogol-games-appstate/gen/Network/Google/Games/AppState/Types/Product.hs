@@ -88,66 +88,6 @@ instance ToJSON GetResponse where
                   Just ("kind" .= _grKind), ("data" .=) <$> _grData,
                   ("stateKey" .=) <$> _grStateKey])
 
--- | This is a JSON template to convert a list-response for app state.
---
--- /See:/ 'listResponse' smart constructor.
-data ListResponse = ListResponse
-    { _lrMaximumKeyCount :: !(Maybe Int32)
-    , _lrKind            :: !Text
-    , _lrItems           :: !(Maybe [Maybe GetResponse])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lrMaximumKeyCount'
---
--- * 'lrKind'
---
--- * 'lrItems'
-listResponse
-    :: ListResponse
-listResponse =
-    ListResponse
-    { _lrMaximumKeyCount = Nothing
-    , _lrKind = "appstate#listResponse"
-    , _lrItems = Nothing
-    }
-
--- | The maximum number of keys allowed for this user.
-lrMaximumKeyCount :: Lens' ListResponse (Maybe Int32)
-lrMaximumKeyCount
-  = lens _lrMaximumKeyCount
-      (\ s a -> s{_lrMaximumKeyCount = a})
-
--- | Uniquely identifies the type of this resource. Value is always the fixed
--- string appstate#listResponse.
-lrKind :: Lens' ListResponse Text
-lrKind = lens _lrKind (\ s a -> s{_lrKind = a})
-
--- | The app state data.
-lrItems :: Lens' ListResponse [Maybe GetResponse]
-lrItems
-  = lens _lrItems (\ s a -> s{_lrItems = a}) . _Default
-      . _Coerce
-
-instance FromJSON ListResponse where
-        parseJSON
-          = withObject "ListResponse"
-              (\ o ->
-                 ListResponse <$>
-                   (o .:? "maximumKeyCount") <*>
-                     (o .:? "kind" .!= "appstate#listResponse")
-                     <*> (o .:? "items" .!= mempty))
-
-instance ToJSON ListResponse where
-        toJSON ListResponse{..}
-          = object
-              (catMaybes
-                 [("maximumKeyCount" .=) <$> _lrMaximumKeyCount,
-                  Just ("kind" .= _lrKind), ("items" .=) <$> _lrItems])
-
 -- | This is a JSON template for a requests which update app state
 --
 -- /See:/ 'updateRequest' smart constructor.
@@ -254,3 +194,63 @@ instance ToJSON WriteResult where
                     _wrCurrentStateVersion,
                   Just ("kind" .= _wrKind),
                   ("stateKey" .=) <$> _wrStateKey])
+
+-- | This is a JSON template to convert a list-response for app state.
+--
+-- /See:/ 'listResponse' smart constructor.
+data ListResponse = ListResponse
+    { _lrMaximumKeyCount :: !(Maybe Int32)
+    , _lrKind            :: !Text
+    , _lrItems           :: !(Maybe [Maybe GetResponse])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lrMaximumKeyCount'
+--
+-- * 'lrKind'
+--
+-- * 'lrItems'
+listResponse
+    :: ListResponse
+listResponse =
+    ListResponse
+    { _lrMaximumKeyCount = Nothing
+    , _lrKind = "appstate#listResponse"
+    , _lrItems = Nothing
+    }
+
+-- | The maximum number of keys allowed for this user.
+lrMaximumKeyCount :: Lens' ListResponse (Maybe Int32)
+lrMaximumKeyCount
+  = lens _lrMaximumKeyCount
+      (\ s a -> s{_lrMaximumKeyCount = a})
+
+-- | Uniquely identifies the type of this resource. Value is always the fixed
+-- string appstate#listResponse.
+lrKind :: Lens' ListResponse Text
+lrKind = lens _lrKind (\ s a -> s{_lrKind = a})
+
+-- | The app state data.
+lrItems :: Lens' ListResponse [Maybe GetResponse]
+lrItems
+  = lens _lrItems (\ s a -> s{_lrItems = a}) . _Default
+      . _Coerce
+
+instance FromJSON ListResponse where
+        parseJSON
+          = withObject "ListResponse"
+              (\ o ->
+                 ListResponse <$>
+                   (o .:? "maximumKeyCount") <*>
+                     (o .:? "kind" .!= "appstate#listResponse")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON ListResponse where
+        toJSON ListResponse{..}
+          = object
+              (catMaybes
+                 [("maximumKeyCount" .=) <$> _lrMaximumKeyCount,
+                  Just ("kind" .= _lrKind), ("items" .=) <$> _lrItems])

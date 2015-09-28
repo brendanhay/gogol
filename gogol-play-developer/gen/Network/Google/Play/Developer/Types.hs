@@ -14,39 +14,113 @@
 --
 module Network.Google.Play.Developer.Types
     (
+    -- * Service URL
+      playDeveloperURL
+
+    -- * ExpansionFilesUploadResponse
+    , ExpansionFilesUploadResponse
+    , expansionFilesUploadResponse
+    , efurExpansionFile
+
+    -- * ImagesUploadResponse
+    , ImagesUploadResponse
+    , imagesUploadResponse
+    , iurImage
+
+    -- * InappproductsListResponse
+    , InappproductsListResponse
+    , inappproductsListResponse
+    , ilrTokenPagination
+    , ilrPageInfo
+    , ilrKind
+    , ilrInappproduct
+
+    -- * Listing
+    , Listing
+    , listing
+    , lFullDescription
+    , lVideo
+    , lShortDescription
+    , lLanguage
+    , lTitle
+
+    -- * SubscriptionPurchasesDeferRequest
+    , SubscriptionPurchasesDeferRequest
+    , subscriptionPurchasesDeferRequest
+    , spdrDeferralInfo
+
+    -- * Testers
+    , Testers
+    , testers
+    , tGooglePlusCommunities
+    , tGoogleGroups
+
+    -- * EditsImagesList'ImageType
+    , EditsImagesList'ImageType (..)
+
+    -- * Alt
+    , Alt (..)
 
     -- * Apk
-      Apk
+    , Apk
     , apk
     , apkVersionCode
     , apkBinary
+
+    -- * InappproductsBatchResponseEntry
+    , InappproductsBatchResponseEntry
+    , inappproductsBatchResponseEntry
+    , ibreInappproductsupdateresponse
+    , ibreInappproductsinsertresponse
+    , ibreBatchId
 
     -- * ApkBinary
     , ApkBinary
     , apkBinary
     , abSha1
 
-    -- * ApkListing
-    , ApkListing
-    , apkListing
-    , alLanguage
-    , alRecentChanges
+    -- * InAppProduct
+    , InAppProduct
+    , inAppProduct
+    , iapStatus
+    , iapTrialPeriod
+    , iapPackageName
+    , iapSeason
+    , iapPurchaseType
+    , iapSubscriptionPeriod
+    , iapPrices
+    , iapSku
+    , iapDefaultPrice
+    , iapListings
+    , iapDefaultLanguage
 
-    -- * ApkListingsListResponse
-    , ApkListingsListResponse
-    , apkListingsListResponse
-    , allrKind
-    , allrListings
+    -- * Price
+    , Price
+    , price
+    , pPriceMicros
+    , pCurrency
+
+    -- * InappproductsInsertRequest
+    , InappproductsInsertRequest
+    , inappproductsInsertRequest
+    , iirInappproduct
 
     -- * ApksAddExternallyHostedRequest
     , ApksAddExternallyHostedRequest
     , apksAddExternallyHostedRequest
     , aaehrExternallyHostedApk
 
-    -- * ApksAddExternallyHostedResponse
-    , ApksAddExternallyHostedResponse
-    , apksAddExternallyHostedResponse
-    , aExternallyHostedApk
+    -- * ListingsListResponse
+    , ListingsListResponse
+    , listingsListResponse
+    , llrKind
+    , llrListings
+
+    -- * ExternallyHostedApkUsesPermission
+    , ExternallyHostedApkUsesPermission
+    , externallyHostedApkUsesPermission
+    , ehaupName
+    , ehaupMaxSdkVersion
 
     -- * ApksListResponse
     , ApksListResponse
@@ -54,19 +128,30 @@ module Network.Google.Play.Developer.Types
     , alrKind
     , alrApks
 
-    -- * AppDetails
-    , AppDetails
-    , appDetails
-    , adContactPhone
-    , adContactEmail
-    , adContactWebsite
-    , adDefaultLanguage
+    -- * EntitlementsListResponse
+    , EntitlementsListResponse
+    , entitlementsListResponse
+    , elrTokenPagination
+    , elrPageInfo
+    , elrResources
 
-    -- * AppEdit
-    , AppEdit
-    , appEdit
-    , aeId
-    , aeExpiryTimeSeconds
+    -- * EditsImagesUpload'ImageType
+    , EditsImagesUpload'ImageType (..)
+
+    -- * EditsExpansionfilesUpload'ExpansionFileType
+    , EditsExpansionfilesUpload'ExpansionFileType (..)
+
+    -- * EditsExpansionfilesPatch'ExpansionFileType
+    , EditsExpansionfilesPatch'ExpansionFileType (..)
+
+    -- * EditsExpansionfilesGet'ExpansionFileType
+    , EditsExpansionfilesGet'ExpansionFileType (..)
+
+    -- * InappproductsBatchResponse
+    , InappproductsBatchResponse
+    , inappproductsBatchResponse
+    , ibrEntrys
+    , ibrKind
 
     -- * Entitlement
     , Entitlement
@@ -76,12 +161,43 @@ module Network.Google.Play.Developer.Types
     , eToken
     , eProductId
 
-    -- * EntitlementsListResponse
-    , EntitlementsListResponse
-    , entitlementsListResponse
-    , elrTokenPagination
-    , elrPageInfo
-    , elrResources
+    -- * EditsImagesDelete'ImageType
+    , EditsImagesDelete'ImageType (..)
+
+    -- * EditsExpansionfilesUpdate'ExpansionFileType
+    , EditsExpansionfilesUpdate'ExpansionFileType (..)
+
+    -- * MonthDay
+    , MonthDay
+    , monthDay
+    , mdDay
+    , mdMonth
+
+    -- * InappproductsUpdateResponse
+    , InappproductsUpdateResponse
+    , inappproductsUpdateResponse
+    , iurInappproduct
+
+    -- * TokenPagination
+    , TokenPagination
+    , tokenPagination
+    , tpNextPageToken
+    , tpPreviousPageToken
+
+    -- * InappproductsBatchRequestEntry
+    , InappproductsBatchRequestEntry
+    , inappproductsBatchRequestEntry
+    , iMethodName
+    , iInappproductsinsertrequest
+    , iInappproductsupdaterequest
+    , iBatchId
+
+    -- * Image
+    , Image
+    , image
+    , iUrl
+    , iSha1
+    , iId
 
     -- * ExpansionFile
     , ExpansionFile
@@ -89,10 +205,123 @@ module Network.Google.Play.Developer.Types
     , efFileSize
     , efReferencesVersion
 
-    -- * ExpansionFilesUploadResponse
-    , ExpansionFilesUploadResponse
-    , expansionFilesUploadResponse
-    , efurExpansionFile
+    -- * Track
+    , Track
+    , track
+    , tVersionCodes
+    , tTrack
+    , tUserFraction
+
+    -- * InAppProductListings
+    , InAppProductListings
+    , inAppProductListings
+
+    -- * ImagesDeleteAllResponse
+    , ImagesDeleteAllResponse
+    , imagesDeleteAllResponse
+    , idarDeleted
+
+    -- * InAppProductListing
+    , InAppProductListing
+    , inAppProductListing
+    , iaplTitle
+    , iaplDescription
+
+    -- * EditsTestersUpdate'Track
+    , EditsTestersUpdate'Track (..)
+
+    -- * SubscriptionDeferralInfo
+    , SubscriptionDeferralInfo
+    , subscriptionDeferralInfo
+    , sdiDesiredExpiryTimeMillis
+    , sdiExpectedExpiryTimeMillis
+
+    -- * InappproductsInsertResponse
+    , InappproductsInsertResponse
+    , inappproductsInsertResponse
+    , iInappproduct
+
+    -- * ApkListingsListResponse
+    , ApkListingsListResponse
+    , apkListingsListResponse
+    , allrKind
+    , allrListings
+
+    -- * ApksAddExternallyHostedResponse
+    , ApksAddExternallyHostedResponse
+    , apksAddExternallyHostedResponse
+    , aExternallyHostedApk
+
+    -- * TracksListResponse
+    , TracksListResponse
+    , tracksListResponse
+    , tlrTracks
+    , tlrKind
+
+    -- * AppEdit
+    , AppEdit
+    , appEdit
+    , aeId
+    , aeExpiryTimeSeconds
+
+    -- * PageInfo
+    , PageInfo
+    , pageInfo
+    , piResultPerPage
+    , piTotalResults
+    , piStartIndex
+
+    -- * ImagesListResponse
+    , ImagesListResponse
+    , imagesListResponse
+    , ilrImages
+
+    -- * Season
+    , Season
+    , season
+    , sStart
+    , sEnd
+
+    -- * EditsTestersPatch'Track
+    , EditsTestersPatch'Track (..)
+
+    -- * InAppProductPrices
+    , InAppProductPrices
+    , inAppProductPrices
+
+    -- * SubscriptionPurchasesDeferResponse
+    , SubscriptionPurchasesDeferResponse
+    , subscriptionPurchasesDeferResponse
+    , spdrNewExpiryTimeMillis
+
+    -- * ApkListing
+    , ApkListing
+    , apkListing
+    , alLanguage
+    , alRecentChanges
+
+    -- * SubscriptionPurchase
+    , SubscriptionPurchase
+    , subscriptionPurchase
+    , spKind
+    , spExpiryTimeMillis
+    , spAutoRenewing
+    , spStartTimeMillis
+
+    -- * ProductPurchase
+    , ProductPurchase
+    , productPurchase
+    , ppPurchaseState
+    , ppConsumptionState
+    , ppKind
+    , ppPurchaseTimeMillis
+    , ppDeveloperPayload
+
+    -- * EditsTestersGet'Track
+    , EditsTestersGet'Track (..)
+
+    -- * EditsImagesDeleteall'ImageType
+    , EditsImagesDeleteall'ImageType (..)
 
     -- * ExternallyHostedApk
     , ExternallyHostedApk
@@ -113,216 +342,41 @@ module Network.Google.Play.Developer.Types
     , ehaUsesPermissions
     , ehaCertificateBase64s
 
-    -- * ExternallyHostedApkUsesPermission
-    , ExternallyHostedApkUsesPermission
-    , externallyHostedApkUsesPermission
-    , ehaupName
-    , ehaupMaxSdkVersion
-
-    -- * Image
-    , Image
-    , image
-    , iUrl
-    , iSha1
-    , iId
-
-    -- * ImagesDeleteAllResponse
-    , ImagesDeleteAllResponse
-    , imagesDeleteAllResponse
-    , idarDeleted
-
-    -- * ImagesListResponse
-    , ImagesListResponse
-    , imagesListResponse
-    , ilrImages
-
-    -- * ImagesUploadResponse
-    , ImagesUploadResponse
-    , imagesUploadResponse
-    , iurImage
-
-    -- * InAppProduct
-    , InAppProduct
-    , inAppProduct
-    , iapStatus
-    , iapTrialPeriod
-    , iapPackageName
-    , iapSeason
-    , iapPurchaseType
-    , iapSubscriptionPeriod
-    , iapPrices
-    , iapSku
-    , iapDefaultPrice
-    , iapListings
-    , iapDefaultLanguage
-
-    -- * InAppProductListing
-    , InAppProductListing
-    , inAppProductListing
-    , iaplTitle
-    , iaplDescription
-
-    -- * InAppProductListings
-    , InAppProductListings
-    , inAppProductListings
-
-    -- * InAppProductPrices
-    , InAppProductPrices
-    , inAppProductPrices
+    -- * AppDetails
+    , AppDetails
+    , appDetails
+    , adContactPhone
+    , adContactEmail
+    , adContactWebsite
+    , adDefaultLanguage
 
     -- * InappproductsBatchRequest
     , InappproductsBatchRequest
     , inappproductsBatchRequest
     , iEntrys
 
-    -- * InappproductsBatchRequestEntry
-    , InappproductsBatchRequestEntry
-    , inappproductsBatchRequestEntry
-    , iMethodName
-    , iInappproductsinsertrequest
-    , iInappproductsupdaterequest
-    , iBatchId
-
-    -- * InappproductsBatchResponse
-    , InappproductsBatchResponse
-    , inappproductsBatchResponse
-    , ibrEntrys
-    , ibrKind
-
-    -- * InappproductsBatchResponseEntry
-    , InappproductsBatchResponseEntry
-    , inappproductsBatchResponseEntry
-    , ibreInappproductsupdateresponse
-    , ibreInappproductsinsertresponse
-    , ibreBatchId
-
-    -- * InappproductsInsertRequest
-    , InappproductsInsertRequest
-    , inappproductsInsertRequest
-    , iirInappproduct
-
-    -- * InappproductsInsertResponse
-    , InappproductsInsertResponse
-    , inappproductsInsertResponse
-    , iInappproduct
-
-    -- * InappproductsListResponse
-    , InappproductsListResponse
-    , inappproductsListResponse
-    , ilrTokenPagination
-    , ilrPageInfo
-    , ilrKind
-    , ilrInappproduct
+    -- * EditsTracksPatch'Track
+    , EditsTracksPatch'Track (..)
 
     -- * InappproductsUpdateRequest
     , InappproductsUpdateRequest
     , inappproductsUpdateRequest
     , inaInappproduct
 
-    -- * InappproductsUpdateResponse
-    , InappproductsUpdateResponse
-    , inappproductsUpdateResponse
-    , iurInappproduct
+    -- * EditsTracksGet'Track
+    , EditsTracksGet'Track (..)
 
-    -- * Listing
-    , Listing
-    , listing
-    , lFullDescription
-    , lVideo
-    , lShortDescription
-    , lLanguage
-    , lTitle
-
-    -- * ListingsListResponse
-    , ListingsListResponse
-    , listingsListResponse
-    , llrKind
-    , llrListings
-
-    -- * MonthDay
-    , MonthDay
-    , monthDay
-    , mdDay
-    , mdMonth
-
-    -- * PageInfo
-    , PageInfo
-    , pageInfo
-    , piResultPerPage
-    , piTotalResults
-    , piStartIndex
-
-    -- * Price
-    , Price
-    , price
-    , pPriceMicros
-    , pCurrency
-
-    -- * ProductPurchase
-    , ProductPurchase
-    , productPurchase
-    , ppPurchaseState
-    , ppConsumptionState
-    , ppKind
-    , ppPurchaseTimeMillis
-    , ppDeveloperPayload
-
-    -- * Season
-    , Season
-    , season
-    , sStart
-    , sEnd
-
-    -- * SubscriptionDeferralInfo
-    , SubscriptionDeferralInfo
-    , subscriptionDeferralInfo
-    , sdiDesiredExpiryTimeMillis
-    , sdiExpectedExpiryTimeMillis
-
-    -- * SubscriptionPurchase
-    , SubscriptionPurchase
-    , subscriptionPurchase
-    , spKind
-    , spExpiryTimeMillis
-    , spAutoRenewing
-    , spStartTimeMillis
-
-    -- * SubscriptionPurchasesDeferRequest
-    , SubscriptionPurchasesDeferRequest
-    , subscriptionPurchasesDeferRequest
-    , spdrDeferralInfo
-
-    -- * SubscriptionPurchasesDeferResponse
-    , SubscriptionPurchasesDeferResponse
-    , subscriptionPurchasesDeferResponse
-    , spdrNewExpiryTimeMillis
-
-    -- * Testers
-    , Testers
-    , testers
-    , tGooglePlusCommunities
-    , tGoogleGroups
-
-    -- * TokenPagination
-    , TokenPagination
-    , tokenPagination
-    , tpNextPageToken
-    , tpPreviousPageToken
-
-    -- * Track
-    , Track
-    , track
-    , tVersionCodes
-    , tTrack
-    , tUserFraction
-
-    -- * TracksListResponse
-    , TracksListResponse
-    , tracksListResponse
-    , tlrTracks
-    , tlrKind
+    -- * EditsTracksUpdate'Track
+    , EditsTracksUpdate'Track (..)
     ) where
 
 import           Network.Google.Play.Developer.Types.Product
 import           Network.Google.Play.Developer.Types.Sum
 import           Network.Google.Prelude
+
+-- | URL referring to version 'v2' of the Google Play Developer API.
+playDeveloperURL :: BaseUrl
+playDeveloperURL
+  = BaseUrl Https
+      "https://www.googleapis.com/androidpublisher/v2/applications/"
+      443

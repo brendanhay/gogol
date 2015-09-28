@@ -1,6 +1,6 @@
 name:                  gogol-fonts
 version:               0.0.1
-synopsis:              Google Fonts Developer API.
+synopsis:              Google Fonts Developer API Client.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -16,8 +16,8 @@ extra-source-files:    README.md
 description:
     The Google Fonts Developer API.
     .
-    /Warning:/ This is an experimental preview release which is still under
-    heavy development and not intended for public consumption, caveat emptor!
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
 
 source-repository head
     type:     git
@@ -30,7 +30,8 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.Fonts
+          Network.Google.API.Webfonts.Webfonts.List
+        , Network.Google.Fonts
         , Network.Google.Fonts.Types
 
     other-modules:

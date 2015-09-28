@@ -17,85 +17,95 @@
 -- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference>
 module Network.Google.Games.Management
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** Google Play Game Services Management API
       GamesManagement
-    , RoomsAPI
-    , RoomsResetForAllPlayers
-    , RoomsReset
-    , AchievementsAPI
-    , AchievementsResetAll
-    , AchievementsResetAllForAllPlayers
-    , AchievementsResetMultipleForAllPlayers
-    , AchievementsResetForAllPlayers
-    , AchievementsReset
-    , EventsAPI
-    , EventsResetAll
-    , EventsResetAllForAllPlayers
-    , EventsResetMultipleForAllPlayers
-    , EventsResetForAllPlayers
-    , EventsReset
-    , QuestsAPI
-    , QuestsResetAll
-    , QuestsResetAllForAllPlayers
-    , QuestsResetMultipleForAllPlayers
-    , QuestsResetForAllPlayers
-    , QuestsReset
-    , PlayersAPI
-    , PlayersHide
-    , PlayersUnhide
-    , ScoresAPI
-    , ScoresResetAll
-    , ScoresResetAllForAllPlayers
-    , ScoresResetMultipleForAllPlayers
-    , ScoresResetForAllPlayers
-    , ScoresReset
-    , TurnBasedMatchesAPI
-    , TurnBasedMatchesResetForAllPlayers
-    , TurnBasedMatchesReset
-    , ApplicationsAPI
-    , ApplicationsListHidden
+    , gamesManagement
+    , gamesManagementURL
+
+    -- ** gamesManagement.achievements.reset
+    , module Network.Google.API.GamesManagement.Achievements.Reset
+
+    -- ** gamesManagement.achievements.resetAll
+    , module Network.Google.API.GamesManagement.Achievements.ResetAll
+
+    -- ** gamesManagement.achievements.resetAllForAllPlayers
+    , module Network.Google.API.GamesManagement.Achievements.ResetAllForAllPlayers
+
+    -- ** gamesManagement.achievements.resetForAllPlayers
+    , module Network.Google.API.GamesManagement.Achievements.ResetForAllPlayers
+
+    -- ** gamesManagement.achievements.resetMultipleForAllPlayers
+    , module Network.Google.API.GamesManagement.Achievements.ResetMultipleForAllPlayers
+
+    -- ** gamesManagement.applications.listHidden
+    , module Network.Google.API.GamesManagement.Applications.ListHidden
+
+    -- ** gamesManagement.events.reset
+    , module Network.Google.API.GamesManagement.Events.Reset
+
+    -- ** gamesManagement.events.resetAll
+    , module Network.Google.API.GamesManagement.Events.ResetAll
+
+    -- ** gamesManagement.events.resetAllForAllPlayers
+    , module Network.Google.API.GamesManagement.Events.ResetAllForAllPlayers
+
+    -- ** gamesManagement.events.resetForAllPlayers
+    , module Network.Google.API.GamesManagement.Events.ResetForAllPlayers
+
+    -- ** gamesManagement.events.resetMultipleForAllPlayers
+    , module Network.Google.API.GamesManagement.Events.ResetMultipleForAllPlayers
+
+    -- ** gamesManagement.players.hide
+    , module Network.Google.API.GamesManagement.Players.Hide
+
+    -- ** gamesManagement.players.unhide
+    , module Network.Google.API.GamesManagement.Players.Unhide
+
+    -- ** gamesManagement.quests.reset
+    , module Network.Google.API.GamesManagement.Quests.Reset
+
+    -- ** gamesManagement.quests.resetAll
+    , module Network.Google.API.GamesManagement.Quests.ResetAll
+
+    -- ** gamesManagement.quests.resetAllForAllPlayers
+    , module Network.Google.API.GamesManagement.Quests.ResetAllForAllPlayers
+
+    -- ** gamesManagement.quests.resetForAllPlayers
+    , module Network.Google.API.GamesManagement.Quests.ResetForAllPlayers
+
+    -- ** gamesManagement.quests.resetMultipleForAllPlayers
+    , module Network.Google.API.GamesManagement.Quests.ResetMultipleForAllPlayers
+
+    -- ** gamesManagement.rooms.reset
+    , module Network.Google.API.GamesManagement.Rooms.Reset
+
+    -- ** gamesManagement.rooms.resetForAllPlayers
+    , module Network.Google.API.GamesManagement.Rooms.ResetForAllPlayers
+
+    -- ** gamesManagement.scores.reset
+    , module Network.Google.API.GamesManagement.Scores.Reset
+
+    -- ** gamesManagement.scores.resetAll
+    , module Network.Google.API.GamesManagement.Scores.ResetAll
+
+    -- ** gamesManagement.scores.resetAllForAllPlayers
+    , module Network.Google.API.GamesManagement.Scores.ResetAllForAllPlayers
+
+    -- ** gamesManagement.scores.resetForAllPlayers
+    , module Network.Google.API.GamesManagement.Scores.ResetForAllPlayers
+
+    -- ** gamesManagement.scores.resetMultipleForAllPlayers
+    , module Network.Google.API.GamesManagement.Scores.ResetMultipleForAllPlayers
+
+    -- ** gamesManagement.turnBasedMatches.reset
+    , module Network.Google.API.GamesManagement.TurnBasedMatches.Reset
+
+    -- ** gamesManagement.turnBasedMatches.resetForAllPlayers
+    , module Network.Google.API.GamesManagement.TurnBasedMatches.ResetForAllPlayers
 
     -- * Types
-
-    -- ** AchievementResetAllResponse
-    , AchievementResetAllResponse
-    , achievementResetAllResponse
-    , ararResults
-    , ararKind
-
-    -- ** AchievementResetMultipleForAllRequest
-    , AchievementResetMultipleForAllRequest
-    , achievementResetMultipleForAllRequest
-    , armfarKind
-    , armfarAchievementIds
-
-    -- ** AchievementResetResponse
-    , AchievementResetResponse
-    , achievementResetResponse
-    , arrUpdateOccurred
-    , arrKind
-    , arrCurrentState
-    , arrDefinitionId
-
-    -- ** EventsResetMultipleForAllRequest
-    , EventsResetMultipleForAllRequest
-    , eventsResetMultipleForAllRequest
-    , ermfarKind
-    , ermfarEventIds
-
-    -- ** GamesPlayedResource
-    , GamesPlayedResource
-    , gamesPlayedResource
-    , gprAutoMatched
-    , gprTimeMillis
-
-    -- ** GamesPlayerExperienceInfoResource
-    , GamesPlayerExperienceInfoResource
-    , gamesPlayerExperienceInfoResource
-    , gpeirCurrentExperiencePoints
-    , gpeirCurrentLevel
-    , gpeirNextLevel
-    , gpeirLastLevelUpTimestampMillis
 
     -- ** GamesPlayerLevelResource
     , GamesPlayerLevelResource
@@ -104,19 +114,20 @@ module Network.Google.Games.Management
     , gplrMinExperiencePoints
     , gplrLevel
 
-    -- ** HiddenPlayer
-    , HiddenPlayer
-    , hiddenPlayer
-    , hpKind
-    , hpHiddenTimeMillis
-    , hpPlayer
+    -- ** Alt
+    , Alt (..)
 
-    -- ** HiddenPlayerList
-    , HiddenPlayerList
-    , hiddenPlayerList
-    , hplNextPageToken
-    , hplKind
-    , hplItems
+    -- ** GamesPlayedResource
+    , GamesPlayedResource
+    , gamesPlayedResource
+    , gprAutoMatched
+    , gprTimeMillis
+
+    -- ** AchievementResetAllResponse
+    , AchievementResetAllResponse
+    , achievementResetAllResponse
+    , ararResults
+    , ararKind
 
     -- ** Player
     , Player
@@ -130,17 +141,39 @@ module Network.Google.Games.Management
     , pTitle
     , pPlayerId
 
-    -- ** PlayerName
-    , PlayerName
-    , playerName
-    , pnGivenName
-    , pnFamilyName
+    -- ** AchievementResetResponse
+    , AchievementResetResponse
+    , achievementResetResponse
+    , arrUpdateOccurred
+    , arrKind
+    , arrCurrentState
+    , arrDefinitionId
+
+    -- ** GamesPlayerExperienceInfoResource
+    , GamesPlayerExperienceInfoResource
+    , gamesPlayerExperienceInfoResource
+    , gpeirCurrentExperiencePoints
+    , gpeirCurrentLevel
+    , gpeirNextLevel
+    , gpeirLastLevelUpTimestampMillis
 
     -- ** PlayerScoreResetAllResponse
     , PlayerScoreResetAllResponse
     , playerScoreResetAllResponse
     , psrarResults
     , psrarKind
+
+    -- ** PlayerName
+    , PlayerName
+    , playerName
+    , pnGivenName
+    , pnFamilyName
+
+    -- ** ScoresResetMultipleForAllRequest
+    , ScoresResetMultipleForAllRequest
+    , scoresResetMultipleForAllRequest
+    , srmfarKind
+    , srmfarLeaderboardIds
 
     -- ** PlayerScoreResetResponse
     , PlayerScoreResetResponse
@@ -149,19 +182,66 @@ module Network.Google.Games.Management
     , psrrResetScoreTimeSpans
     , psrrDefinitionId
 
+    -- ** HiddenPlayerList
+    , HiddenPlayerList
+    , hiddenPlayerList
+    , hplNextPageToken
+    , hplKind
+    , hplItems
+
     -- ** QuestsResetMultipleForAllRequest
     , QuestsResetMultipleForAllRequest
     , questsResetMultipleForAllRequest
     , qrmfarKind
     , qrmfarQuestIds
 
-    -- ** ScoresResetMultipleForAllRequest
-    , ScoresResetMultipleForAllRequest
-    , scoresResetMultipleForAllRequest
-    , srmfarKind
-    , srmfarLeaderboardIds
+    -- ** EventsResetMultipleForAllRequest
+    , EventsResetMultipleForAllRequest
+    , eventsResetMultipleForAllRequest
+    , ermfarKind
+    , ermfarEventIds
+
+    -- ** HiddenPlayer
+    , HiddenPlayer
+    , hiddenPlayer
+    , hpKind
+    , hpHiddenTimeMillis
+    , hpPlayer
+
+    -- ** AchievementResetMultipleForAllRequest
+    , AchievementResetMultipleForAllRequest
+    , achievementResetMultipleForAllRequest
+    , armfarKind
+    , armfarAchievementIds
     ) where
 
+import           Network.Google.API.GamesManagement.Achievements.Reset
+import           Network.Google.API.GamesManagement.Achievements.ResetAll
+import           Network.Google.API.GamesManagement.Achievements.ResetAllForAllPlayers
+import           Network.Google.API.GamesManagement.Achievements.ResetForAllPlayers
+import           Network.Google.API.GamesManagement.Achievements.ResetMultipleForAllPlayers
+import           Network.Google.API.GamesManagement.Applications.ListHidden
+import           Network.Google.API.GamesManagement.Events.Reset
+import           Network.Google.API.GamesManagement.Events.ResetAll
+import           Network.Google.API.GamesManagement.Events.ResetAllForAllPlayers
+import           Network.Google.API.GamesManagement.Events.ResetForAllPlayers
+import           Network.Google.API.GamesManagement.Events.ResetMultipleForAllPlayers
+import           Network.Google.API.GamesManagement.Players.Hide
+import           Network.Google.API.GamesManagement.Players.Unhide
+import           Network.Google.API.GamesManagement.Quests.Reset
+import           Network.Google.API.GamesManagement.Quests.ResetAll
+import           Network.Google.API.GamesManagement.Quests.ResetAllForAllPlayers
+import           Network.Google.API.GamesManagement.Quests.ResetForAllPlayers
+import           Network.Google.API.GamesManagement.Quests.ResetMultipleForAllPlayers
+import           Network.Google.API.GamesManagement.Rooms.Reset
+import           Network.Google.API.GamesManagement.Rooms.ResetForAllPlayers
+import           Network.Google.API.GamesManagement.Scores.Reset
+import           Network.Google.API.GamesManagement.Scores.ResetAll
+import           Network.Google.API.GamesManagement.Scores.ResetAllForAllPlayers
+import           Network.Google.API.GamesManagement.Scores.ResetForAllPlayers
+import           Network.Google.API.GamesManagement.Scores.ResetMultipleForAllPlayers
+import           Network.Google.API.GamesManagement.TurnBasedMatches.Reset
+import           Network.Google.API.GamesManagement.TurnBasedMatches.ResetForAllPlayers
 import           Network.Google.Games.Management.Types
 import           Network.Google.Prelude
 
@@ -170,498 +250,32 @@ TODO
 -}
 
 type GamesManagement =
-     RoomsAPI :<|> AchievementsAPI :<|> EventsAPI :<|>
-       QuestsAPI
-       :<|> PlayersAPI
-       :<|> ScoresAPI
-       :<|> TurnBasedMatchesAPI
-       :<|> ApplicationsAPI
+     EventsResetAPI :<|> EventsResetAllForAllPlayersAPI
+       :<|> QuestsResetMultipleForAllPlayersAPI
+       :<|> ScoresResetMultipleForAllPlayersAPI
+       :<|> EventsResetAllAPI
+       :<|> TurnBasedMatchesResetForAllPlayersAPI
+       :<|> QuestsResetForAllPlayersAPI
+       :<|> ScoresResetForAllPlayersAPI
+       :<|> AchievementsResetAPI
+       :<|> EventsResetForAllPlayersAPI
+       :<|> RoomsResetForAllPlayersAPI
+       :<|> AchievementsResetMultipleForAllPlayersAPI
+       :<|> AchievementsResetAllForAllPlayersAPI
+       :<|> AchievementsResetAllAPI
+       :<|> QuestsResetAllForAllPlayersAPI
+       :<|> ScoresResetAllForAllPlayersAPI
+       :<|> RoomsResetAPI
+       :<|> ApplicationsListHiddenAPI
+       :<|> EventsResetMultipleForAllPlayersAPI
+       :<|> ScoresResetAllAPI
+       :<|> PlayersUnhideAPI
+       :<|> QuestsResetAllAPI
+       :<|> AchievementsResetForAllPlayersAPI
+       :<|> TurnBasedMatchesResetAPI
+       :<|> ScoresResetAPI
+       :<|> PlayersHideAPI
+       :<|> QuestsResetAPI
 
-type RoomsAPI =
-     RoomsResetForAllPlayers :<|> RoomsReset
-
--- | Deletes rooms where the only room participants are from whitelisted
--- tester accounts for your application. This method is only available to
--- user accounts for your developer console.
-type RoomsResetForAllPlayers =
-     "games" :>
-       "v1management" :>
-         "rooms" :>
-           "resetForAllPlayers" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Post '[JSON] ()
-
--- | Reset all rooms for the currently authenticated player for your
--- application. This method is only accessible to whitelisted tester
--- accounts for your application.
-type RoomsReset =
-     "games" :>
-       "v1management" :>
-         "rooms" :>
-           "reset" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Post '[JSON] ()
-
-type AchievementsAPI =
-     AchievementsResetAll :<|>
-       AchievementsResetAllForAllPlayers
-       :<|> AchievementsResetMultipleForAllPlayers
-       :<|> AchievementsResetForAllPlayers
-       :<|> AchievementsReset
-
--- | Resets all achievements for the currently authenticated player for your
--- application. This method is only accessible to whitelisted tester
--- accounts for your application.
-type AchievementsResetAll =
-     "games" :>
-       "v1management" :>
-         "achievements" :>
-           "reset" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :>
-                           Post '[JSON] AchievementResetAllResponse
-
--- | Resets all draft achievements for all players. This method is only
--- available to user accounts for your developer console.
-type AchievementsResetAllForAllPlayers =
-     "games" :>
-       "v1management" :>
-         "achievements" :>
-           "resetAllForAllPlayers" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Post '[JSON] ()
-
--- | Resets achievements with the given IDs for all players. This method is
--- only available to user accounts for your developer console. Only draft
--- achievements may be reset.
-type AchievementsResetMultipleForAllPlayers =
-     "games" :>
-       "v1management" :>
-         "achievements" :>
-           "resetMultipleForAllPlayers" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Post '[JSON] ()
-
--- | Resets the achievement with the given ID for all players. This method is
--- only available to user accounts for your developer console. Only draft
--- achievements can be reset.
-type AchievementsResetForAllPlayers =
-     "games" :>
-       "v1management" :>
-         "achievements" :>
-           Capture "achievementId" Text :>
-             "resetForAllPlayers" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] ()
-
--- | Resets the achievement with the given ID for the currently authenticated
--- player. This method is only accessible to whitelisted tester accounts
--- for your application.
-type AchievementsReset =
-     "games" :>
-       "v1management" :>
-         "achievements" :>
-           Capture "achievementId" Text :>
-             "reset" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Post '[JSON] AchievementResetResponse
-
-type EventsAPI =
-     EventsResetAll :<|> EventsResetAllForAllPlayers :<|>
-       EventsResetMultipleForAllPlayers
-       :<|> EventsResetForAllPlayers
-       :<|> EventsReset
-
--- | Resets all player progress on all events for the currently authenticated
--- player. This method is only accessible to whitelisted tester accounts
--- for your application. All quests for this player will also be reset.
-type EventsResetAll =
-     "games" :>
-       "v1management" :>
-         "events" :>
-           "reset" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Post '[JSON] ()
-
--- | Resets all draft events for all players. This method is only available
--- to user accounts for your developer console. All quests that use any of
--- these events will also be reset.
-type EventsResetAllForAllPlayers =
-     "games" :>
-       "v1management" :>
-         "events" :>
-           "resetAllForAllPlayers" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Post '[JSON] ()
-
--- | Resets events with the given IDs for all players. This method is only
--- available to user accounts for your developer console. Only draft events
--- may be reset. All quests that use any of the events will also be reset.
-type EventsResetMultipleForAllPlayers =
-     "games" :>
-       "v1management" :>
-         "events" :>
-           "resetMultipleForAllPlayers" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Post '[JSON] ()
-
--- | Resets the event with the given ID for all players. This method is only
--- available to user accounts for your developer console. Only draft events
--- can be reset. All quests that use the event will also be reset.
-type EventsResetForAllPlayers =
-     "games" :>
-       "v1management" :>
-         "events" :>
-           Capture "eventId" Text :>
-             "resetForAllPlayers" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] ()
-
--- | Resets all player progress on the event with the given ID for the
--- currently authenticated player. This method is only accessible to
--- whitelisted tester accounts for your application. All quests for this
--- player that use the event will also be reset.
-type EventsReset =
-     "games" :>
-       "v1management" :>
-         "events" :>
-           Capture "eventId" Text :>
-             "reset" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] ()
-
-type QuestsAPI =
-     QuestsResetAll :<|> QuestsResetAllForAllPlayers :<|>
-       QuestsResetMultipleForAllPlayers
-       :<|> QuestsResetForAllPlayers
-       :<|> QuestsReset
-
--- | Resets all player progress on all quests for the currently authenticated
--- player. This method is only accessible to whitelisted tester accounts
--- for your application.
-type QuestsResetAll =
-     "games" :>
-       "v1management" :>
-         "quests" :>
-           "reset" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Post '[JSON] ()
-
--- | Resets all draft quests for all players. This method is only available
--- to user accounts for your developer console.
-type QuestsResetAllForAllPlayers =
-     "games" :>
-       "v1management" :>
-         "quests" :>
-           "resetAllForAllPlayers" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Post '[JSON] ()
-
--- | Resets quests with the given IDs for all players. This method is only
--- available to user accounts for your developer console. Only draft quests
--- may be reset.
-type QuestsResetMultipleForAllPlayers =
-     "games" :>
-       "v1management" :>
-         "quests" :>
-           "resetMultipleForAllPlayers" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Post '[JSON] ()
-
--- | Resets all player progress on the quest with the given ID for all
--- players. This method is only available to user accounts for your
--- developer console. Only draft quests can be reset.
-type QuestsResetForAllPlayers =
-     "games" :>
-       "v1management" :>
-         "quests" :>
-           Capture "questId" Text :>
-             "resetForAllPlayers" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] ()
-
--- | Resets all player progress on the quest with the given ID for the
--- currently authenticated player. This method is only accessible to
--- whitelisted tester accounts for your application.
-type QuestsReset =
-     "games" :>
-       "v1management" :>
-         "quests" :>
-           Capture "questId" Text :>
-             "reset" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] ()
-
-type PlayersAPI = PlayersHide :<|> PlayersUnhide
-
--- | Hide the given player\'s leaderboard scores from the given application.
--- This method is only available to user accounts for your developer
--- console.
-type PlayersHide =
-     "games" :>
-       "v1management" :>
-         "applications" :>
-           Capture "applicationId" Text :>
-             "players" :>
-               "hidden" :>
-                 Capture "playerId" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Post '[JSON] ()
-
--- | Unhide the given player\'s leaderboard scores from the given
--- application. This method is only available to user accounts for your
--- developer console.
-type PlayersUnhide =
-     "games" :>
-       "v1management" :>
-         "applications" :>
-           Capture "applicationId" Text :>
-             "players" :>
-               "hidden" :>
-                 Capture "playerId" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Delete '[JSON] ()
-
-type ScoresAPI =
-     ScoresResetAll :<|> ScoresResetAllForAllPlayers :<|>
-       ScoresResetMultipleForAllPlayers
-       :<|> ScoresResetForAllPlayers
-       :<|> ScoresReset
-
--- | Resets all scores for all leaderboards for the currently authenticated
--- players. This method is only accessible to whitelisted tester accounts
--- for your application.
-type ScoresResetAll =
-     "games" :>
-       "v1management" :>
-         "scores" :>
-           "reset" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :>
-                           Post '[JSON] PlayerScoreResetAllResponse
-
--- | Resets scores for all draft leaderboards for all players. This method is
--- only available to user accounts for your developer console.
-type ScoresResetAllForAllPlayers =
-     "games" :>
-       "v1management" :>
-         "scores" :>
-           "resetAllForAllPlayers" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Post '[JSON] ()
-
--- | Resets scores for the leaderboards with the given IDs for all players.
--- This method is only available to user accounts for your developer
--- console. Only draft leaderboards may be reset.
-type ScoresResetMultipleForAllPlayers =
-     "games" :>
-       "v1management" :>
-         "scores" :>
-           "resetMultipleForAllPlayers" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Post '[JSON] ()
-
--- | Resets scores for the leaderboard with the given ID for all players.
--- This method is only available to user accounts for your developer
--- console. Only draft leaderboards can be reset.
-type ScoresResetForAllPlayers =
-     "games" :>
-       "v1management" :>
-         "leaderboards" :>
-           Capture "leaderboardId" Text :>
-             "scores" :>
-               "resetForAllPlayers" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Post '[JSON] ()
-
--- | Resets scores for the leaderboard with the given ID for the currently
--- authenticated player. This method is only accessible to whitelisted
--- tester accounts for your application.
-type ScoresReset =
-     "games" :>
-       "v1management" :>
-         "leaderboards" :>
-           Capture "leaderboardId" Text :>
-             "scores" :>
-               "reset" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Post '[JSON] PlayerScoreResetResponse
-
-type TurnBasedMatchesAPI =
-     TurnBasedMatchesResetForAllPlayers :<|>
-       TurnBasedMatchesReset
-
--- | Deletes turn-based matches where the only match participants are from
--- whitelisted tester accounts for your application. This method is only
--- available to user accounts for your developer console.
-type TurnBasedMatchesResetForAllPlayers =
-     "games" :>
-       "v1management" :>
-         "turnbasedmatches" :>
-           "resetForAllPlayers" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Post '[JSON] ()
-
--- | Reset all turn-based match data for a user. This method is only
--- accessible to whitelisted tester accounts for your application.
-type TurnBasedMatchesReset =
-     "games" :>
-       "v1management" :>
-         "turnbasedmatches" :>
-           "reset" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Post '[JSON] ()
-
-type ApplicationsAPI = ApplicationsListHidden
-
--- | Get the list of players hidden from the given application. This method
--- is only available to user accounts for your developer console.
-type ApplicationsListHidden =
-     "games" :>
-       "v1management" :>
-         "applications" :>
-           Capture "applicationId" Text :>
-             "players" :>
-               "hidden" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "maxResults" Natural :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   Get '[JSON] HiddenPlayerList
+gamesManagement :: Proxy GamesManagement
+gamesManagement = Proxy

@@ -18,32 +18,45 @@
 -- /See:/ <https://developers.google.com/partners/ Google Partners API Reference>
 module Network.Google.Partners
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** Google Partners API
       Partners
-    , UserStatesAPI
-    , UserStatesList
-    , UserEventsAPI
-    , UserEventsLog
-    , ClientMessagesAPI
-    , ClientMessagesLog
-    , CompaniesAPI
-    , LeadsAPI
-    , LeadsCreate
+    , partners
+    , partnersURL
+
+    -- ** partners.clientMessages.log
+    , module Network.Google.API.Partners.ClientMessages.Log
+
+    -- ** partners.companies.leads.create
+    , module Network.Google.API.Partners.Companies.Leads.Create
+
+    -- ** partners.userEvents.log
+    , module Network.Google.API.Partners.UserEvents.Log
+
+    -- ** partners.userStates.list
+    , module Network.Google.API.Partners.UserStates.List
 
     -- * Types
 
-    -- ** CertificationExamStatus
-    , CertificationExamStatus
-    , certificationExamStatus
-    , cesNumberUsersPass
-    , cesType
+    -- ** LogMessageResponse
+    , LogMessageResponse
+    , logMessageResponse
+    , lmrResponseMetadata
 
-    -- ** CertificationStatus
-    , CertificationStatus
-    , certificationStatus
-    , csIsCertified
-    , csType
-    , csExamStatuses
+    -- ** Lead
+    , Lead
+    , lead
+    , lGivenName
+    , lEmail
+    , lFamilyName
+    , lPhoneNumber
+    , lMinMonthlyBudget
+    , lId
+    , lComments
+    , lWebsiteUrl
+    , lType
+    , lGpsMotivations
 
     -- ** Company
     , Company
@@ -61,102 +74,19 @@ module Network.Google.Partners
     , cLocations
     , cServices
 
-    -- ** CreateLeadRequest
-    , CreateLeadRequest
-    , createLeadRequest
-    , clrRequestMetadata
-    , clrRecaptchaChallenge
-    , clrLead
-
-    -- ** CreateLeadResponse
-    , CreateLeadResponse
-    , createLeadResponse
-    , cRecaptchaStatus
-    , cResponseMetadata
-    , cLead
-
-    -- ** DebugInfo
-    , DebugInfo
-    , debugInfo
-    , diServiceUrl
-    , diServerTraceInfo
-    , diServerInfo
-
-    -- ** EventData
-    , EventData
-    , eventData
-    , edValues
-    , edKey
+    -- ** PublicProfile
+    , PublicProfile
+    , publicProfile
+    , ppUrl
+    , ppDisplayImageUrl
+    , ppDisplayName
+    , ppId
 
     -- ** GetCompanyResponse
     , GetCompanyResponse
     , getCompanyResponse
     , gcrResponseMetadata
     , gcrCompany
-
-    -- ** LatLng
-    , LatLng
-    , latLng
-    , llLatitude
-    , llLongitude
-
-    -- ** Lead
-    , Lead
-    , lead
-    , lGivenName
-    , lEmail
-    , lFamilyName
-    , lPhoneNumber
-    , lMinMonthlyBudget
-    , lId
-    , lComments
-    , lWebsiteUrl
-    , lType
-    , lGpsMotivations
-
-    -- ** ListCompaniesResponse
-    , ListCompaniesResponse
-    , listCompaniesResponse
-    , lcrNextPageToken
-    , lcrResponseMetadata
-    , lcrCompanies
-
-    -- ** ListUserStatesResponse
-    , ListUserStatesResponse
-    , listUserStatesResponse
-    , lusrUserStates
-    , lusrResponseMetadata
-
-    -- ** LocalizedCompanyInfo
-    , LocalizedCompanyInfo
-    , localizedCompanyInfo
-    , lciLanguageCode
-    , lciOverview
-    , lciCountryCodes
-    , lciDisplayName
-
-    -- ** Location
-    , Location
-    , location
-    , lLatLng
-    , lAddress
-
-    -- ** LogMessageRequest
-    , LogMessageRequest
-    , logMessageRequest
-    , lmrRequestMetadata
-    , lmrClientInfo
-    , lmrDetails
-    , lmrLevel
-
-    -- ** LogMessageRequestClientInfo
-    , LogMessageRequestClientInfo
-    , logMessageRequestClientInfo
-
-    -- ** LogMessageResponse
-    , LogMessageResponse
-    , logMessageResponse
-    , lmrResponseMetadata
 
     -- ** LogUserEventRequest
     , LogUserEventRequest
@@ -169,37 +99,39 @@ module Network.Google.Partners
     , luerEventDatas
     , luerEventAction
 
-    -- ** LogUserEventResponse
-    , LogUserEventResponse
-    , logUserEventResponse
-    , luerResponseMetadata
+    -- ** UserOverrides
+    , UserOverrides
+    , userOverrides
+    , uoIpAddress
+    , uoUserId
 
-    -- ** Money
-    , Money
-    , money
-    , mCurrencyCode
-    , mNanos
-    , mUnits
+    -- ** ResponseMetadata
+    , ResponseMetadata
+    , responseMetadata
+    , rmDebugInfo
 
-    -- ** PublicProfile
-    , PublicProfile
-    , publicProfile
-    , ppUrl
-    , ppDisplayImageUrl
-    , ppDisplayName
-    , ppId
+    -- ** LogMessageRequest
+    , LogMessageRequest
+    , logMessageRequest
+    , lmrRequestMetadata
+    , lmrClientInfo
+    , lmrDetails
+    , lmrLevel
 
-    -- ** Rank
-    , Rank
-    , rank
-    , rValue
-    , rType
+    -- ** LocalizedCompanyInfo
+    , LocalizedCompanyInfo
+    , localizedCompanyInfo
+    , lciLanguageCode
+    , lciOverview
+    , lciCountryCodes
+    , lciDisplayName
 
-    -- ** RecaptchaChallenge
-    , RecaptchaChallenge
-    , recaptchaChallenge
-    , rcResponse
-    , rcId
+    -- ** CreateLeadRequest
+    , CreateLeadRequest
+    , createLeadRequest
+    , clrRequestMetadata
+    , clrRecaptchaChallenge
+    , clrLead
 
     -- ** RequestMetadata
     , RequestMetadata
@@ -210,10 +142,64 @@ module Network.Google.Partners
     , rmUserOverrides
     , rmPartnersSessionId
 
-    -- ** ResponseMetadata
-    , ResponseMetadata
-    , responseMetadata
-    , rmDebugInfo
+    -- ** CertificationStatus
+    , CertificationStatus
+    , certificationStatus
+    , csIsCertified
+    , csType
+    , csExamStatuses
+
+    -- ** LatLng
+    , LatLng
+    , latLng
+    , llLatitude
+    , llLongitude
+
+    -- ** ListUserStatesResponse
+    , ListUserStatesResponse
+    , listUserStatesResponse
+    , lusrUserStates
+    , lusrResponseMetadata
+
+    -- ** EventData
+    , EventData
+    , eventData
+    , edValues
+    , edKey
+
+    -- ** DebugInfo
+    , DebugInfo
+    , debugInfo
+    , diServiceUrl
+    , diServerTraceInfo
+    , diServerInfo
+
+    -- ** LogMessageRequestClientInfo
+    , LogMessageRequestClientInfo
+    , logMessageRequestClientInfo
+
+    -- ** LogUserEventResponse
+    , LogUserEventResponse
+    , logUserEventResponse
+    , luerResponseMetadata
+
+    -- ** Location
+    , Location
+    , location
+    , lLatLng
+    , lAddress
+
+    -- ** CertificationExamStatus
+    , CertificationExamStatus
+    , certificationExamStatus
+    , cesNumberUsersPass
+    , cesType
+
+    -- ** RecaptchaChallenge
+    , RecaptchaChallenge
+    , recaptchaChallenge
+    , rcResponse
+    , rcId
 
     -- ** TrafficSource
     , TrafficSource
@@ -221,13 +207,38 @@ module Network.Google.Partners
     , tsTrafficSubId
     , tsTrafficSourceId
 
-    -- ** UserOverrides
-    , UserOverrides
-    , userOverrides
-    , uoIpAddress
-    , uoUserId
+    -- ** ListCompaniesResponse
+    , ListCompaniesResponse
+    , listCompaniesResponse
+    , lcrNextPageToken
+    , lcrResponseMetadata
+    , lcrCompanies
+
+    -- ** Money
+    , Money
+    , money
+    , mCurrencyCode
+    , mNanos
+    , mUnits
+
+    -- ** CreateLeadResponse
+    , CreateLeadResponse
+    , createLeadResponse
+    , cRecaptchaStatus
+    , cResponseMetadata
+    , cLead
+
+    -- ** Rank
+    , Rank
+    , rank
+    , rValue
+    , rType
     ) where
 
+import           Network.Google.API.Partners.ClientMessages.Log
+import           Network.Google.API.Partners.Companies.Leads.Create
+import           Network.Google.API.Partners.UserEvents.Log
+import           Network.Google.API.Partners.UserStates.List
 import           Network.Google.Partners.Types
 import           Network.Google.Prelude
 
@@ -236,118 +247,9 @@ TODO
 -}
 
 type Partners =
-     UserStatesAPI :<|> UserEventsAPI :<|>
-       ClientMessagesAPI
-       :<|> CompaniesAPI
+     UserEventsLogAPI :<|> ClientMessagesLogAPI :<|>
+       UserStatesListAPI
+       :<|> CompaniesLeadsCreateAPI
 
-type UserStatesAPI = UserStatesList
-
--- | Lists states for current user.
-type UserStatesList =
-     "v2" :>
-       "userStates" :>
-         QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "requestMetadata.partnersSessionId" Text
-                         :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "requestMetadata.locale" Text :>
-                               QueryParam "requestMetadata.experimentIds" Text
-                                 :>
-                                 QueryParam
-                                   "requestMetadata.userOverrides.ipAddress"
-                                   Text
-                                   :>
-                                   QueryParam
-                                     "requestMetadata.trafficSource.trafficSubId"
-                                     Text
-                                     :>
-                                     QueryParam "oauth_token" Text :>
-                                       QueryParam
-                                         "requestMetadata.userOverrides.userId"
-                                         Text
-                                         :>
-                                         QueryParam
-                                           "requestMetadata.trafficSource.trafficSourceId"
-                                           Text
-                                           :>
-                                           QueryParam "fields" Text :>
-                                             QueryParam "callback" Text :>
-                                               QueryParam "alt" Text :>
-                                                 Get '[JSON]
-                                                   ListUserStatesResponse
-
-type UserEventsAPI = UserEventsLog
-
--- | Logs a user event.
-type UserEventsLog =
-     "v2" :>
-       "userEvents:log" :>
-         QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :>
-                                   Post '[JSON] LogUserEventResponse
-
-type ClientMessagesAPI = ClientMessagesLog
-
--- | Logs a generic message from the client, such as \`Failed to render
--- component\`, \`Profile page is running slow\`, \`More than 500 users
--- have accessed this result.\`, etc.
-type ClientMessagesLog =
-     "v2" :>
-       "clientMessages:log" :>
-         QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :>
-                                   Post '[JSON] LogMessageResponse
-
-type CompaniesAPI = LeadsAPI
-
-type LeadsAPI = LeadsCreate
-
--- | Creates an advertiser lead for the given company ID.
-type LeadsCreate =
-     "v2" :>
-       "companies" :>
-         Capture "companyId" Text :>
-           "leads" :>
-             QueryParam "$.xgafv" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "upload_protocol" Text :>
-                     QueryParam "pp" Bool :>
-                       QueryParam "access_token" Text :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "bearer_token" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "callback" Text :>
-                                     QueryParam "alt" Text :>
-                                       Post '[JSON] CreateLeadResponse
+partners :: Proxy Partners
+partners = Proxy

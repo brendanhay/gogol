@@ -138,64 +138,6 @@ instance ToJSON ListBillingAccountsResponse where
                  [("nextPageToken" .=) <$> _lbarNextPageToken,
                   ("billingAccounts" .=) <$> _lbarBillingAccounts])
 
--- | Request message for \`ListProjectBillingInfoResponse\`.
---
--- /See:/ 'listProjectBillingInfoResponse' smart constructor.
-data ListProjectBillingInfoResponse = ListProjectBillingInfoResponse
-    { _lpbirNextPageToken      :: !(Maybe Text)
-    , _lpbirProjectBillingInfo :: !(Maybe [Maybe ProjectBillingInfo])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ListProjectBillingInfoResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lpbirNextPageToken'
---
--- * 'lpbirProjectBillingInfo'
-listProjectBillingInfoResponse
-    :: ListProjectBillingInfoResponse
-listProjectBillingInfoResponse =
-    ListProjectBillingInfoResponse
-    { _lpbirNextPageToken = Nothing
-    , _lpbirProjectBillingInfo = Nothing
-    }
-
--- | A token to retrieve the next page of results. To retrieve the next page,
--- call \`ListProjectBillingInfo\` again with the \`page_token\` field set
--- to this value. This field is empty if there are no more results to
--- retrieve.
-lpbirNextPageToken :: Lens' ListProjectBillingInfoResponse (Maybe Text)
-lpbirNextPageToken
-  = lens _lpbirNextPageToken
-      (\ s a -> s{_lpbirNextPageToken = a})
-
--- | A list of \`ProjectBillingInfo\` resources representing the projects
--- associated with the billing account.
-lpbirProjectBillingInfo :: Lens' ListProjectBillingInfoResponse [Maybe ProjectBillingInfo]
-lpbirProjectBillingInfo
-  = lens _lpbirProjectBillingInfo
-      (\ s a -> s{_lpbirProjectBillingInfo = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON ListProjectBillingInfoResponse
-         where
-        parseJSON
-          = withObject "ListProjectBillingInfoResponse"
-              (\ o ->
-                 ListProjectBillingInfoResponse <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "projectBillingInfo" .!= mempty))
-
-instance ToJSON ListProjectBillingInfoResponse where
-        toJSON ListProjectBillingInfoResponse{..}
-          = object
-              (catMaybes
-                 [("nextPageToken" .=) <$> _lpbirNextPageToken,
-                  ("projectBillingInfo" .=) <$>
-                    _lpbirProjectBillingInfo])
-
 -- | Encapsulation of billing information for a Developers Console project. A
 -- project has at most one associated billing account at a time (but a
 -- billing account can be assigned to multiple projects).
@@ -277,3 +219,61 @@ instance ToJSON ProjectBillingInfo where
                   ("billingAccountName" .=) <$> _pbiBillingAccountName,
                   ("projectId" .=) <$> _pbiProjectId,
                   ("billingEnabled" .=) <$> _pbiBillingEnabled])
+
+-- | Request message for \`ListProjectBillingInfoResponse\`.
+--
+-- /See:/ 'listProjectBillingInfoResponse' smart constructor.
+data ListProjectBillingInfoResponse = ListProjectBillingInfoResponse
+    { _lpbirNextPageToken      :: !(Maybe Text)
+    , _lpbirProjectBillingInfo :: !(Maybe [Maybe ProjectBillingInfo])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListProjectBillingInfoResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lpbirNextPageToken'
+--
+-- * 'lpbirProjectBillingInfo'
+listProjectBillingInfoResponse
+    :: ListProjectBillingInfoResponse
+listProjectBillingInfoResponse =
+    ListProjectBillingInfoResponse
+    { _lpbirNextPageToken = Nothing
+    , _lpbirProjectBillingInfo = Nothing
+    }
+
+-- | A token to retrieve the next page of results. To retrieve the next page,
+-- call \`ListProjectBillingInfo\` again with the \`page_token\` field set
+-- to this value. This field is empty if there are no more results to
+-- retrieve.
+lpbirNextPageToken :: Lens' ListProjectBillingInfoResponse (Maybe Text)
+lpbirNextPageToken
+  = lens _lpbirNextPageToken
+      (\ s a -> s{_lpbirNextPageToken = a})
+
+-- | A list of \`ProjectBillingInfo\` resources representing the projects
+-- associated with the billing account.
+lpbirProjectBillingInfo :: Lens' ListProjectBillingInfoResponse [Maybe ProjectBillingInfo]
+lpbirProjectBillingInfo
+  = lens _lpbirProjectBillingInfo
+      (\ s a -> s{_lpbirProjectBillingInfo = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListProjectBillingInfoResponse
+         where
+        parseJSON
+          = withObject "ListProjectBillingInfoResponse"
+              (\ o ->
+                 ListProjectBillingInfoResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "projectBillingInfo" .!= mempty))
+
+instance ToJSON ListProjectBillingInfoResponse where
+        toJSON ListProjectBillingInfoResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lpbirNextPageToken,
+                  ("projectBillingInfo" .=) <$>
+                    _lpbirProjectBillingInfo])

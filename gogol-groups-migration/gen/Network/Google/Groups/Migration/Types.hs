@@ -14,9 +14,14 @@
 --
 module Network.Google.Groups.Migration.Types
     (
+    -- * Service URL
+      groupsMigrationURL
+
+    -- * Alt
+    , Alt (..)
 
     -- * Groups
-      Groups
+    , Groups
     , groups
     , gKind
     , gResponseCode
@@ -25,3 +30,10 @@ module Network.Google.Groups.Migration.Types
 import           Network.Google.Groups.Migration.Types.Product
 import           Network.Google.Groups.Migration.Types.Sum
 import           Network.Google.Prelude
+
+-- | URL referring to version 'v1' of the Groups Migration API.
+groupsMigrationURL :: BaseUrl
+groupsMigrationURL
+  = BaseUrl Https
+      "https://www.googleapis.com/groups/v1/groups/"
+      443

@@ -19,6 +19,314 @@ import           Network.Google.Play.Developer.Types.Sum
 import           Network.Google.Prelude
 
 --
+-- /See:/ 'expansionFilesUploadResponse' smart constructor.
+newtype ExpansionFilesUploadResponse = ExpansionFilesUploadResponse
+    { _efurExpansionFile :: Maybe (Maybe ExpansionFile)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ExpansionFilesUploadResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'efurExpansionFile'
+expansionFilesUploadResponse
+    :: ExpansionFilesUploadResponse
+expansionFilesUploadResponse =
+    ExpansionFilesUploadResponse
+    { _efurExpansionFile = Nothing
+    }
+
+efurExpansionFile :: Lens' ExpansionFilesUploadResponse (Maybe (Maybe ExpansionFile))
+efurExpansionFile
+  = lens _efurExpansionFile
+      (\ s a -> s{_efurExpansionFile = a})
+
+instance FromJSON ExpansionFilesUploadResponse where
+        parseJSON
+          = withObject "ExpansionFilesUploadResponse"
+              (\ o ->
+                 ExpansionFilesUploadResponse <$>
+                   (o .:? "expansionFile"))
+
+instance ToJSON ExpansionFilesUploadResponse where
+        toJSON ExpansionFilesUploadResponse{..}
+          = object
+              (catMaybes
+                 [("expansionFile" .=) <$> _efurExpansionFile])
+
+--
+-- /See:/ 'imagesUploadResponse' smart constructor.
+newtype ImagesUploadResponse = ImagesUploadResponse
+    { _iurImage :: Maybe (Maybe Image)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ImagesUploadResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'iurImage'
+imagesUploadResponse
+    :: ImagesUploadResponse
+imagesUploadResponse =
+    ImagesUploadResponse
+    { _iurImage = Nothing
+    }
+
+iurImage :: Lens' ImagesUploadResponse (Maybe (Maybe Image))
+iurImage = lens _iurImage (\ s a -> s{_iurImage = a})
+
+instance FromJSON ImagesUploadResponse where
+        parseJSON
+          = withObject "ImagesUploadResponse"
+              (\ o -> ImagesUploadResponse <$> (o .:? "image"))
+
+instance ToJSON ImagesUploadResponse where
+        toJSON ImagesUploadResponse{..}
+          = object (catMaybes [("image" .=) <$> _iurImage])
+
+--
+-- /See:/ 'inappproductsListResponse' smart constructor.
+data InappproductsListResponse = InappproductsListResponse
+    { _ilrTokenPagination :: !(Maybe (Maybe TokenPagination))
+    , _ilrPageInfo        :: !(Maybe (Maybe PageInfo))
+    , _ilrKind            :: !Text
+    , _ilrInappproduct    :: !(Maybe [Maybe InAppProduct])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InappproductsListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ilrTokenPagination'
+--
+-- * 'ilrPageInfo'
+--
+-- * 'ilrKind'
+--
+-- * 'ilrInappproduct'
+inappproductsListResponse
+    :: InappproductsListResponse
+inappproductsListResponse =
+    InappproductsListResponse
+    { _ilrTokenPagination = Nothing
+    , _ilrPageInfo = Nothing
+    , _ilrKind = "androidpublisher#inappproductsListResponse"
+    , _ilrInappproduct = Nothing
+    }
+
+ilrTokenPagination :: Lens' InappproductsListResponse (Maybe (Maybe TokenPagination))
+ilrTokenPagination
+  = lens _ilrTokenPagination
+      (\ s a -> s{_ilrTokenPagination = a})
+
+ilrPageInfo :: Lens' InappproductsListResponse (Maybe (Maybe PageInfo))
+ilrPageInfo
+  = lens _ilrPageInfo (\ s a -> s{_ilrPageInfo = a})
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"androidpublisher#inappproductsListResponse\".
+ilrKind :: Lens' InappproductsListResponse Text
+ilrKind = lens _ilrKind (\ s a -> s{_ilrKind = a})
+
+ilrInappproduct :: Lens' InappproductsListResponse [Maybe InAppProduct]
+ilrInappproduct
+  = lens _ilrInappproduct
+      (\ s a -> s{_ilrInappproduct = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON InappproductsListResponse where
+        parseJSON
+          = withObject "InappproductsListResponse"
+              (\ o ->
+                 InappproductsListResponse <$>
+                   (o .:? "tokenPagination") <*> (o .:? "pageInfo") <*>
+                     (o .:? "kind" .!=
+                        "androidpublisher#inappproductsListResponse")
+                     <*> (o .:? "inappproduct" .!= mempty))
+
+instance ToJSON InappproductsListResponse where
+        toJSON InappproductsListResponse{..}
+          = object
+              (catMaybes
+                 [("tokenPagination" .=) <$> _ilrTokenPagination,
+                  ("pageInfo" .=) <$> _ilrPageInfo,
+                  Just ("kind" .= _ilrKind),
+                  ("inappproduct" .=) <$> _ilrInappproduct])
+
+--
+-- /See:/ 'listing' smart constructor.
+data Listing = Listing
+    { _lFullDescription  :: !(Maybe Text)
+    , _lVideo            :: !(Maybe Text)
+    , _lShortDescription :: !(Maybe Text)
+    , _lLanguage         :: !(Maybe Text)
+    , _lTitle            :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Listing' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lFullDescription'
+--
+-- * 'lVideo'
+--
+-- * 'lShortDescription'
+--
+-- * 'lLanguage'
+--
+-- * 'lTitle'
+listing
+    :: Listing
+listing =
+    Listing
+    { _lFullDescription = Nothing
+    , _lVideo = Nothing
+    , _lShortDescription = Nothing
+    , _lLanguage = Nothing
+    , _lTitle = Nothing
+    }
+
+-- | Full description of the app; this may be up to 4000 characters in
+-- length.
+lFullDescription :: Lens' Listing (Maybe Text)
+lFullDescription
+  = lens _lFullDescription
+      (\ s a -> s{_lFullDescription = a})
+
+-- | URL of a promotional YouTube video for the app.
+lVideo :: Lens' Listing (Maybe Text)
+lVideo = lens _lVideo (\ s a -> s{_lVideo = a})
+
+-- | Short description of the app (previously known as promo text); this may
+-- be up to 80 characters in length.
+lShortDescription :: Lens' Listing (Maybe Text)
+lShortDescription
+  = lens _lShortDescription
+      (\ s a -> s{_lShortDescription = a})
+
+-- | Language localization code (for example, \"de-AT\" for Austrian German).
+lLanguage :: Lens' Listing (Maybe Text)
+lLanguage
+  = lens _lLanguage (\ s a -> s{_lLanguage = a})
+
+-- | App\'s localized title.
+lTitle :: Lens' Listing (Maybe Text)
+lTitle = lens _lTitle (\ s a -> s{_lTitle = a})
+
+instance FromJSON Listing where
+        parseJSON
+          = withObject "Listing"
+              (\ o ->
+                 Listing <$>
+                   (o .:? "fullDescription") <*> (o .:? "video") <*>
+                     (o .:? "shortDescription")
+                     <*> (o .:? "language")
+                     <*> (o .:? "title"))
+
+instance ToJSON Listing where
+        toJSON Listing{..}
+          = object
+              (catMaybes
+                 [("fullDescription" .=) <$> _lFullDescription,
+                  ("video" .=) <$> _lVideo,
+                  ("shortDescription" .=) <$> _lShortDescription,
+                  ("language" .=) <$> _lLanguage,
+                  ("title" .=) <$> _lTitle])
+
+--
+-- /See:/ 'subscriptionPurchasesDeferRequest' smart constructor.
+newtype SubscriptionPurchasesDeferRequest = SubscriptionPurchasesDeferRequest
+    { _spdrDeferralInfo :: Maybe (Maybe SubscriptionDeferralInfo)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SubscriptionPurchasesDeferRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'spdrDeferralInfo'
+subscriptionPurchasesDeferRequest
+    :: SubscriptionPurchasesDeferRequest
+subscriptionPurchasesDeferRequest =
+    SubscriptionPurchasesDeferRequest
+    { _spdrDeferralInfo = Nothing
+    }
+
+-- | The information about the new desired expiry time for the subscription.
+spdrDeferralInfo :: Lens' SubscriptionPurchasesDeferRequest (Maybe (Maybe SubscriptionDeferralInfo))
+spdrDeferralInfo
+  = lens _spdrDeferralInfo
+      (\ s a -> s{_spdrDeferralInfo = a})
+
+instance FromJSON SubscriptionPurchasesDeferRequest
+         where
+        parseJSON
+          = withObject "SubscriptionPurchasesDeferRequest"
+              (\ o ->
+                 SubscriptionPurchasesDeferRequest <$>
+                   (o .:? "deferralInfo"))
+
+instance ToJSON SubscriptionPurchasesDeferRequest
+         where
+        toJSON SubscriptionPurchasesDeferRequest{..}
+          = object
+              (catMaybes
+                 [("deferralInfo" .=) <$> _spdrDeferralInfo])
+
+--
+-- /See:/ 'testers' smart constructor.
+data Testers = Testers
+    { _tGooglePlusCommunities :: !(Maybe [Text])
+    , _tGoogleGroups          :: !(Maybe [Text])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Testers' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tGooglePlusCommunities'
+--
+-- * 'tGoogleGroups'
+testers
+    :: Testers
+testers =
+    Testers
+    { _tGooglePlusCommunities = Nothing
+    , _tGoogleGroups = Nothing
+    }
+
+tGooglePlusCommunities :: Lens' Testers [Text]
+tGooglePlusCommunities
+  = lens _tGooglePlusCommunities
+      (\ s a -> s{_tGooglePlusCommunities = a})
+      . _Default
+      . _Coerce
+
+tGoogleGroups :: Lens' Testers [Text]
+tGoogleGroups
+  = lens _tGoogleGroups
+      (\ s a -> s{_tGoogleGroups = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON Testers where
+        parseJSON
+          = withObject "Testers"
+              (\ o ->
+                 Testers <$>
+                   (o .:? "googlePlusCommunities" .!= mempty) <*>
+                     (o .:? "googleGroups" .!= mempty))
+
+instance ToJSON Testers where
+        toJSON Testers{..}
+          = object
+              (catMaybes
+                 [("googlePlusCommunities" .=) <$>
+                    _tGooglePlusCommunities,
+                  ("googleGroups" .=) <$> _tGoogleGroups])
+
+--
 -- /See:/ 'apk' smart constructor.
 data Apk = Apk
     { _apkVersionCode :: !(Maybe Int32)
@@ -64,6 +372,66 @@ instance ToJSON Apk where
                  [("versionCode" .=) <$> _apkVersionCode,
                   ("binary" .=) <$> _apkBinary])
 
+--
+-- /See:/ 'inappproductsBatchResponseEntry' smart constructor.
+data InappproductsBatchResponseEntry = InappproductsBatchResponseEntry
+    { _ibreInappproductsupdateresponse :: !(Maybe (Maybe InappproductsUpdateResponse))
+    , _ibreInappproductsinsertresponse :: !(Maybe (Maybe InappproductsInsertResponse))
+    , _ibreBatchId                     :: !(Maybe Word32)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InappproductsBatchResponseEntry' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ibreInappproductsupdateresponse'
+--
+-- * 'ibreInappproductsinsertresponse'
+--
+-- * 'ibreBatchId'
+inappproductsBatchResponseEntry
+    :: InappproductsBatchResponseEntry
+inappproductsBatchResponseEntry =
+    InappproductsBatchResponseEntry
+    { _ibreInappproductsupdateresponse = Nothing
+    , _ibreInappproductsinsertresponse = Nothing
+    , _ibreBatchId = Nothing
+    }
+
+ibreInappproductsupdateresponse :: Lens' InappproductsBatchResponseEntry (Maybe (Maybe InappproductsUpdateResponse))
+ibreInappproductsupdateresponse
+  = lens _ibreInappproductsupdateresponse
+      (\ s a -> s{_ibreInappproductsupdateresponse = a})
+
+ibreInappproductsinsertresponse :: Lens' InappproductsBatchResponseEntry (Maybe (Maybe InappproductsInsertResponse))
+ibreInappproductsinsertresponse
+  = lens _ibreInappproductsinsertresponse
+      (\ s a -> s{_ibreInappproductsinsertresponse = a})
+
+ibreBatchId :: Lens' InappproductsBatchResponseEntry (Maybe Word32)
+ibreBatchId
+  = lens _ibreBatchId (\ s a -> s{_ibreBatchId = a})
+
+instance FromJSON InappproductsBatchResponseEntry
+         where
+        parseJSON
+          = withObject "InappproductsBatchResponseEntry"
+              (\ o ->
+                 InappproductsBatchResponseEntry <$>
+                   (o .:? "inappproductsupdateresponse") <*>
+                     (o .:? "inappproductsinsertresponse")
+                     <*> (o .:? "batchId"))
+
+instance ToJSON InappproductsBatchResponseEntry where
+        toJSON InappproductsBatchResponseEntry{..}
+          = object
+              (catMaybes
+                 [("inappproductsupdateresponse" .=) <$>
+                    _ibreInappproductsupdateresponse,
+                  ("inappproductsinsertresponse" .=) <$>
+                    _ibreInappproductsinsertresponse,
+                  ("batchId" .=) <$> _ibreBatchId])
+
 -- | Represents the binary payload of an APK.
 --
 -- /See:/ 'apkBinary' smart constructor.
@@ -98,100 +466,242 @@ instance ToJSON ApkBinary where
           = object (catMaybes [("sha1" .=) <$> _abSha1])
 
 --
--- /See:/ 'apkListing' smart constructor.
-data ApkListing = ApkListing
-    { _alLanguage      :: !(Maybe Text)
-    , _alRecentChanges :: !(Maybe Text)
+-- /See:/ 'inAppProduct' smart constructor.
+data InAppProduct = InAppProduct
+    { _iapStatus             :: !(Maybe Text)
+    , _iapTrialPeriod        :: !(Maybe Text)
+    , _iapPackageName        :: !(Maybe Text)
+    , _iapSeason             :: !(Maybe (Maybe Season))
+    , _iapPurchaseType       :: !(Maybe Text)
+    , _iapSubscriptionPeriod :: !(Maybe Text)
+    , _iapPrices             :: !(Maybe InAppProductPrices)
+    , _iapSku                :: !(Maybe Text)
+    , _iapDefaultPrice       :: !(Maybe (Maybe Price))
+    , _iapListings           :: !(Maybe InAppProductListings)
+    , _iapDefaultLanguage    :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ApkListing' with the minimum fields required to make a request.
+-- | Creates a value of 'InAppProduct' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'alLanguage'
+-- * 'iapStatus'
 --
--- * 'alRecentChanges'
-apkListing
-    :: ApkListing
-apkListing =
-    ApkListing
-    { _alLanguage = Nothing
-    , _alRecentChanges = Nothing
+-- * 'iapTrialPeriod'
+--
+-- * 'iapPackageName'
+--
+-- * 'iapSeason'
+--
+-- * 'iapPurchaseType'
+--
+-- * 'iapSubscriptionPeriod'
+--
+-- * 'iapPrices'
+--
+-- * 'iapSku'
+--
+-- * 'iapDefaultPrice'
+--
+-- * 'iapListings'
+--
+-- * 'iapDefaultLanguage'
+inAppProduct
+    :: InAppProduct
+inAppProduct =
+    InAppProduct
+    { _iapStatus = Nothing
+    , _iapTrialPeriod = Nothing
+    , _iapPackageName = Nothing
+    , _iapSeason = Nothing
+    , _iapPurchaseType = Nothing
+    , _iapSubscriptionPeriod = Nothing
+    , _iapPrices = Nothing
+    , _iapSku = Nothing
+    , _iapDefaultPrice = Nothing
+    , _iapListings = Nothing
+    , _iapDefaultLanguage = Nothing
     }
 
--- | The language code, in BCP 47 format (eg \"en-US\").
-alLanguage :: Lens' ApkListing (Maybe Text)
-alLanguage
-  = lens _alLanguage (\ s a -> s{_alLanguage = a})
+iapStatus :: Lens' InAppProduct (Maybe Text)
+iapStatus
+  = lens _iapStatus (\ s a -> s{_iapStatus = a})
 
--- | Describe what\'s new in your APK.
-alRecentChanges :: Lens' ApkListing (Maybe Text)
-alRecentChanges
-  = lens _alRecentChanges
-      (\ s a -> s{_alRecentChanges = a})
+-- | Trial period, specified in ISO 8601 format. Acceptable values are
+-- anything between \"P7D\" (seven days) and \"P999D\" (999 days). Seasonal
+-- subscriptions cannot have a trial period.
+iapTrialPeriod :: Lens' InAppProduct (Maybe Text)
+iapTrialPeriod
+  = lens _iapTrialPeriod
+      (\ s a -> s{_iapTrialPeriod = a})
 
-instance FromJSON ApkListing where
+-- | The package name of the parent app.
+iapPackageName :: Lens' InAppProduct (Maybe Text)
+iapPackageName
+  = lens _iapPackageName
+      (\ s a -> s{_iapPackageName = a})
+
+-- | Definition of a season for a seasonal subscription. Can be defined only
+-- for yearly subscriptions.
+iapSeason :: Lens' InAppProduct (Maybe (Maybe Season))
+iapSeason
+  = lens _iapSeason (\ s a -> s{_iapSeason = a})
+
+-- | Purchase type enum value. Unmodifiable after creation.
+iapPurchaseType :: Lens' InAppProduct (Maybe Text)
+iapPurchaseType
+  = lens _iapPurchaseType
+      (\ s a -> s{_iapPurchaseType = a})
+
+-- | Subscription period, specified in ISO 8601 format. Acceptable values are
+-- \"P1W\" (one week), \"P1M\" (one month) and \"P1Y\" (one year).
+iapSubscriptionPeriod :: Lens' InAppProduct (Maybe Text)
+iapSubscriptionPeriod
+  = lens _iapSubscriptionPeriod
+      (\ s a -> s{_iapSubscriptionPeriod = a})
+
+-- | Prices per buyer region. None of these prices should be zero. In-app
+-- products can never be free.
+iapPrices :: Lens' InAppProduct (Maybe InAppProductPrices)
+iapPrices
+  = lens _iapPrices (\ s a -> s{_iapPrices = a})
+
+-- | The stock-keeping-unit (SKU) of the product, unique within an app.
+iapSku :: Lens' InAppProduct (Maybe Text)
+iapSku = lens _iapSku (\ s a -> s{_iapSku = a})
+
+-- | Default price cannot be zero. In-app products can never be free. Default
+-- price is always in the developer\'s Checkout merchant currency.
+iapDefaultPrice :: Lens' InAppProduct (Maybe (Maybe Price))
+iapDefaultPrice
+  = lens _iapDefaultPrice
+      (\ s a -> s{_iapDefaultPrice = a})
+
+-- | List of localized title and description data.
+iapListings :: Lens' InAppProduct (Maybe InAppProductListings)
+iapListings
+  = lens _iapListings (\ s a -> s{_iapListings = a})
+
+-- | The default language of the localized data, as defined by BCP 47. e.g.
+-- \"en-US\", \"en-GB\".
+iapDefaultLanguage :: Lens' InAppProduct (Maybe Text)
+iapDefaultLanguage
+  = lens _iapDefaultLanguage
+      (\ s a -> s{_iapDefaultLanguage = a})
+
+instance FromJSON InAppProduct where
         parseJSON
-          = withObject "ApkListing"
+          = withObject "InAppProduct"
               (\ o ->
-                 ApkListing <$>
-                   (o .:? "language") <*> (o .:? "recentChanges"))
+                 InAppProduct <$>
+                   (o .:? "status") <*> (o .:? "trialPeriod") <*>
+                     (o .:? "packageName")
+                     <*> (o .:? "season")
+                     <*> (o .:? "purchaseType")
+                     <*> (o .:? "subscriptionPeriod")
+                     <*> (o .:? "prices")
+                     <*> (o .:? "sku")
+                     <*> (o .:? "defaultPrice")
+                     <*> (o .:? "listings")
+                     <*> (o .:? "defaultLanguage"))
 
-instance ToJSON ApkListing where
-        toJSON ApkListing{..}
+instance ToJSON InAppProduct where
+        toJSON InAppProduct{..}
           = object
               (catMaybes
-                 [("language" .=) <$> _alLanguage,
-                  ("recentChanges" .=) <$> _alRecentChanges])
+                 [("status" .=) <$> _iapStatus,
+                  ("trialPeriod" .=) <$> _iapTrialPeriod,
+                  ("packageName" .=) <$> _iapPackageName,
+                  ("season" .=) <$> _iapSeason,
+                  ("purchaseType" .=) <$> _iapPurchaseType,
+                  ("subscriptionPeriod" .=) <$> _iapSubscriptionPeriod,
+                  ("prices" .=) <$> _iapPrices, ("sku" .=) <$> _iapSku,
+                  ("defaultPrice" .=) <$> _iapDefaultPrice,
+                  ("listings" .=) <$> _iapListings,
+                  ("defaultLanguage" .=) <$> _iapDefaultLanguage])
 
 --
--- /See:/ 'apkListingsListResponse' smart constructor.
-data ApkListingsListResponse = ApkListingsListResponse
-    { _allrKind     :: !Text
-    , _allrListings :: !(Maybe [Maybe ApkListing])
+-- /See:/ 'price' smart constructor.
+data Price = Price
+    { _pPriceMicros :: !(Maybe Text)
+    , _pCurrency    :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ApkListingsListResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'Price' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'allrKind'
+-- * 'pPriceMicros'
 --
--- * 'allrListings'
-apkListingsListResponse
-    :: ApkListingsListResponse
-apkListingsListResponse =
-    ApkListingsListResponse
-    { _allrKind = "androidpublisher#apkListingsListResponse"
-    , _allrListings = Nothing
+-- * 'pCurrency'
+price
+    :: Price
+price =
+    Price
+    { _pPriceMicros = Nothing
+    , _pCurrency = Nothing
     }
 
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"androidpublisher#apkListingsListResponse\".
-allrKind :: Lens' ApkListingsListResponse Text
-allrKind = lens _allrKind (\ s a -> s{_allrKind = a})
+-- | The price in millionths of the currency base unit represented as a
+-- string.
+pPriceMicros :: Lens' Price (Maybe Text)
+pPriceMicros
+  = lens _pPriceMicros (\ s a -> s{_pPriceMicros = a})
 
-allrListings :: Lens' ApkListingsListResponse [Maybe ApkListing]
-allrListings
-  = lens _allrListings (\ s a -> s{_allrListings = a})
-      . _Default
-      . _Coerce
+-- | 3 letter Currency code, as defined by ISO 4217.
+pCurrency :: Lens' Price (Maybe Text)
+pCurrency
+  = lens _pCurrency (\ s a -> s{_pCurrency = a})
 
-instance FromJSON ApkListingsListResponse where
+instance FromJSON Price where
         parseJSON
-          = withObject "ApkListingsListResponse"
+          = withObject "Price"
               (\ o ->
-                 ApkListingsListResponse <$>
-                   (o .:? "kind" .!=
-                      "androidpublisher#apkListingsListResponse")
-                     <*> (o .:? "listings" .!= mempty))
+                 Price <$>
+                   (o .:? "priceMicros") <*> (o .:? "currency"))
 
-instance ToJSON ApkListingsListResponse where
-        toJSON ApkListingsListResponse{..}
+instance ToJSON Price where
+        toJSON Price{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _allrKind),
-                  ("listings" .=) <$> _allrListings])
+                 [("priceMicros" .=) <$> _pPriceMicros,
+                  ("currency" .=) <$> _pCurrency])
+
+--
+-- /See:/ 'inappproductsInsertRequest' smart constructor.
+newtype InappproductsInsertRequest = InappproductsInsertRequest
+    { _iirInappproduct :: Maybe (Maybe InAppProduct)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InappproductsInsertRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'iirInappproduct'
+inappproductsInsertRequest
+    :: InappproductsInsertRequest
+inappproductsInsertRequest =
+    InappproductsInsertRequest
+    { _iirInappproduct = Nothing
+    }
+
+iirInappproduct :: Lens' InappproductsInsertRequest (Maybe (Maybe InAppProduct))
+iirInappproduct
+  = lens _iirInappproduct
+      (\ s a -> s{_iirInappproduct = a})
+
+instance FromJSON InappproductsInsertRequest where
+        parseJSON
+          = withObject "InappproductsInsertRequest"
+              (\ o ->
+                 InappproductsInsertRequest <$>
+                   (o .:? "inappproduct"))
+
+instance ToJSON InappproductsInsertRequest where
+        toJSON InappproductsInsertRequest{..}
+          = object
+              (catMaybes
+                 [("inappproduct" .=) <$> _iirInappproduct])
 
 --
 -- /See:/ 'apksAddExternallyHostedRequest' smart constructor.
@@ -233,43 +743,104 @@ instance ToJSON ApksAddExternallyHostedRequest where
                     _aaehrExternallyHostedApk])
 
 --
--- /See:/ 'apksAddExternallyHostedResponse' smart constructor.
-newtype ApksAddExternallyHostedResponse = ApksAddExternallyHostedResponse
-    { _aExternallyHostedApk :: Maybe (Maybe ExternallyHostedApk)
+-- /See:/ 'listingsListResponse' smart constructor.
+data ListingsListResponse = ListingsListResponse
+    { _llrKind     :: !Text
+    , _llrListings :: !(Maybe [Maybe Listing])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ApksAddExternallyHostedResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'ListingsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aExternallyHostedApk'
-apksAddExternallyHostedResponse
-    :: ApksAddExternallyHostedResponse
-apksAddExternallyHostedResponse =
-    ApksAddExternallyHostedResponse
-    { _aExternallyHostedApk = Nothing
+-- * 'llrKind'
+--
+-- * 'llrListings'
+listingsListResponse
+    :: ListingsListResponse
+listingsListResponse =
+    ListingsListResponse
+    { _llrKind = "androidpublisher#listingsListResponse"
+    , _llrListings = Nothing
     }
 
--- | The definition of the externally-hosted APK and where it is located.
-aExternallyHostedApk :: Lens' ApksAddExternallyHostedResponse (Maybe (Maybe ExternallyHostedApk))
-aExternallyHostedApk
-  = lens _aExternallyHostedApk
-      (\ s a -> s{_aExternallyHostedApk = a})
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"androidpublisher#listingsListResponse\".
+llrKind :: Lens' ListingsListResponse Text
+llrKind = lens _llrKind (\ s a -> s{_llrKind = a})
 
-instance FromJSON ApksAddExternallyHostedResponse
-         where
+llrListings :: Lens' ListingsListResponse [Maybe Listing]
+llrListings
+  = lens _llrListings (\ s a -> s{_llrListings = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ListingsListResponse where
         parseJSON
-          = withObject "ApksAddExternallyHostedResponse"
+          = withObject "ListingsListResponse"
               (\ o ->
-                 ApksAddExternallyHostedResponse <$>
-                   (o .:? "externallyHostedApk"))
+                 ListingsListResponse <$>
+                   (o .:? "kind" .!=
+                      "androidpublisher#listingsListResponse")
+                     <*> (o .:? "listings" .!= mempty))
 
-instance ToJSON ApksAddExternallyHostedResponse where
-        toJSON ApksAddExternallyHostedResponse{..}
+instance ToJSON ListingsListResponse where
+        toJSON ListingsListResponse{..}
           = object
               (catMaybes
-                 [("externallyHostedApk" .=) <$>
-                    _aExternallyHostedApk])
+                 [Just ("kind" .= _llrKind),
+                  ("listings" .=) <$> _llrListings])
+
+-- | A permission used by this APK.
+--
+-- /See:/ 'externallyHostedApkUsesPermission' smart constructor.
+data ExternallyHostedApkUsesPermission = ExternallyHostedApkUsesPermission
+    { _ehaupName          :: !(Maybe Text)
+    , _ehaupMaxSdkVersion :: !(Maybe Int32)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ExternallyHostedApkUsesPermission' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ehaupName'
+--
+-- * 'ehaupMaxSdkVersion'
+externallyHostedApkUsesPermission
+    :: ExternallyHostedApkUsesPermission
+externallyHostedApkUsesPermission =
+    ExternallyHostedApkUsesPermission
+    { _ehaupName = Nothing
+    , _ehaupMaxSdkVersion = Nothing
+    }
+
+-- | The name of the permission requested.
+ehaupName :: Lens' ExternallyHostedApkUsesPermission (Maybe Text)
+ehaupName
+  = lens _ehaupName (\ s a -> s{_ehaupName = a})
+
+-- | Optionally, the maximum SDK version for which the permission is
+-- required.
+ehaupMaxSdkVersion :: Lens' ExternallyHostedApkUsesPermission (Maybe Int32)
+ehaupMaxSdkVersion
+  = lens _ehaupMaxSdkVersion
+      (\ s a -> s{_ehaupMaxSdkVersion = a})
+
+instance FromJSON ExternallyHostedApkUsesPermission
+         where
+        parseJSON
+          = withObject "ExternallyHostedApkUsesPermission"
+              (\ o ->
+                 ExternallyHostedApkUsesPermission <$>
+                   (o .:? "name") <*> (o .:? "maxSdkVersion"))
+
+instance ToJSON ExternallyHostedApkUsesPermission
+         where
+        toJSON ExternallyHostedApkUsesPermission{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _ehaupName,
+                  ("maxSdkVersion" .=) <$> _ehaupMaxSdkVersion])
 
 --
 -- /See:/ 'apksListResponse' smart constructor.
@@ -320,125 +891,110 @@ instance ToJSON ApksListResponse where
                   ("apks" .=) <$> _alrApks])
 
 --
--- /See:/ 'appDetails' smart constructor.
-data AppDetails = AppDetails
-    { _adContactPhone    :: !(Maybe Text)
-    , _adContactEmail    :: !(Maybe Text)
-    , _adContactWebsite  :: !(Maybe Text)
-    , _adDefaultLanguage :: !(Maybe Text)
+-- /See:/ 'entitlementsListResponse' smart constructor.
+data EntitlementsListResponse = EntitlementsListResponse
+    { _elrTokenPagination :: !(Maybe (Maybe TokenPagination))
+    , _elrPageInfo        :: !(Maybe (Maybe PageInfo))
+    , _elrResources       :: !(Maybe [Maybe Entitlement])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AppDetails' with the minimum fields required to make a request.
+-- | Creates a value of 'EntitlementsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'adContactPhone'
+-- * 'elrTokenPagination'
 --
--- * 'adContactEmail'
+-- * 'elrPageInfo'
 --
--- * 'adContactWebsite'
---
--- * 'adDefaultLanguage'
-appDetails
-    :: AppDetails
-appDetails =
-    AppDetails
-    { _adContactPhone = Nothing
-    , _adContactEmail = Nothing
-    , _adContactWebsite = Nothing
-    , _adDefaultLanguage = Nothing
+-- * 'elrResources'
+entitlementsListResponse
+    :: EntitlementsListResponse
+entitlementsListResponse =
+    EntitlementsListResponse
+    { _elrTokenPagination = Nothing
+    , _elrPageInfo = Nothing
+    , _elrResources = Nothing
     }
 
--- | The user-visible support telephone number for this app.
-adContactPhone :: Lens' AppDetails (Maybe Text)
-adContactPhone
-  = lens _adContactPhone
-      (\ s a -> s{_adContactPhone = a})
+elrTokenPagination :: Lens' EntitlementsListResponse (Maybe (Maybe TokenPagination))
+elrTokenPagination
+  = lens _elrTokenPagination
+      (\ s a -> s{_elrTokenPagination = a})
 
--- | The user-visible support email for this app.
-adContactEmail :: Lens' AppDetails (Maybe Text)
-adContactEmail
-  = lens _adContactEmail
-      (\ s a -> s{_adContactEmail = a})
+elrPageInfo :: Lens' EntitlementsListResponse (Maybe (Maybe PageInfo))
+elrPageInfo
+  = lens _elrPageInfo (\ s a -> s{_elrPageInfo = a})
 
--- | The user-visible website for this app.
-adContactWebsite :: Lens' AppDetails (Maybe Text)
-adContactWebsite
-  = lens _adContactWebsite
-      (\ s a -> s{_adContactWebsite = a})
+elrResources :: Lens' EntitlementsListResponse [Maybe Entitlement]
+elrResources
+  = lens _elrResources (\ s a -> s{_elrResources = a})
+      . _Default
+      . _Coerce
 
--- | Default language code, in BCP 47 format (eg \"en-US\").
-adDefaultLanguage :: Lens' AppDetails (Maybe Text)
-adDefaultLanguage
-  = lens _adDefaultLanguage
-      (\ s a -> s{_adDefaultLanguage = a})
-
-instance FromJSON AppDetails where
+instance FromJSON EntitlementsListResponse where
         parseJSON
-          = withObject "AppDetails"
+          = withObject "EntitlementsListResponse"
               (\ o ->
-                 AppDetails <$>
-                   (o .:? "contactPhone") <*> (o .:? "contactEmail") <*>
-                     (o .:? "contactWebsite")
-                     <*> (o .:? "defaultLanguage"))
+                 EntitlementsListResponse <$>
+                   (o .:? "tokenPagination") <*> (o .:? "pageInfo") <*>
+                     (o .:? "resources" .!= mempty))
 
-instance ToJSON AppDetails where
-        toJSON AppDetails{..}
+instance ToJSON EntitlementsListResponse where
+        toJSON EntitlementsListResponse{..}
           = object
               (catMaybes
-                 [("contactPhone" .=) <$> _adContactPhone,
-                  ("contactEmail" .=) <$> _adContactEmail,
-                  ("contactWebsite" .=) <$> _adContactWebsite,
-                  ("defaultLanguage" .=) <$> _adDefaultLanguage])
+                 [("tokenPagination" .=) <$> _elrTokenPagination,
+                  ("pageInfo" .=) <$> _elrPageInfo,
+                  ("resources" .=) <$> _elrResources])
 
--- | Represents an edit of an app. An edit allows clients to make multiple
--- changes before committing them in one operation.
 --
--- /See:/ 'appEdit' smart constructor.
-data AppEdit = AppEdit
-    { _aeId                :: !(Maybe Text)
-    , _aeExpiryTimeSeconds :: !(Maybe Text)
+-- /See:/ 'inappproductsBatchResponse' smart constructor.
+data InappproductsBatchResponse = InappproductsBatchResponse
+    { _ibrEntrys :: !(Maybe [Maybe InappproductsBatchResponseEntry])
+    , _ibrKind   :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AppEdit' with the minimum fields required to make a request.
+-- | Creates a value of 'InappproductsBatchResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aeId'
+-- * 'ibrEntrys'
 --
--- * 'aeExpiryTimeSeconds'
-appEdit
-    :: AppEdit
-appEdit =
-    AppEdit
-    { _aeId = Nothing
-    , _aeExpiryTimeSeconds = Nothing
+-- * 'ibrKind'
+inappproductsBatchResponse
+    :: InappproductsBatchResponse
+inappproductsBatchResponse =
+    InappproductsBatchResponse
+    { _ibrEntrys = Nothing
+    , _ibrKind = "androidpublisher#inappproductsBatchResponse"
     }
 
--- | The ID of the edit that can be used in subsequent API calls.
-aeId :: Lens' AppEdit (Maybe Text)
-aeId = lens _aeId (\ s a -> s{_aeId = a})
+ibrEntrys :: Lens' InappproductsBatchResponse [Maybe InappproductsBatchResponseEntry]
+ibrEntrys
+  = lens _ibrEntrys (\ s a -> s{_ibrEntrys = a}) .
+      _Default
+      . _Coerce
 
--- | The time at which the edit will expire and will be no longer valid for
--- use in any subsequent API calls (encoded as seconds since the Epoch).
-aeExpiryTimeSeconds :: Lens' AppEdit (Maybe Text)
-aeExpiryTimeSeconds
-  = lens _aeExpiryTimeSeconds
-      (\ s a -> s{_aeExpiryTimeSeconds = a})
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"androidpublisher#inappproductsBatchResponse\".
+ibrKind :: Lens' InappproductsBatchResponse Text
+ibrKind = lens _ibrKind (\ s a -> s{_ibrKind = a})
 
-instance FromJSON AppEdit where
+instance FromJSON InappproductsBatchResponse where
         parseJSON
-          = withObject "AppEdit"
+          = withObject "InappproductsBatchResponse"
               (\ o ->
-                 AppEdit <$>
-                   (o .:? "id") <*> (o .:? "expiryTimeSeconds"))
+                 InappproductsBatchResponse <$>
+                   (o .:? "entrys" .!= mempty) <*>
+                     (o .:? "kind" .!=
+                        "androidpublisher#inappproductsBatchResponse"))
 
-instance ToJSON AppEdit where
-        toJSON AppEdit{..}
+instance ToJSON InappproductsBatchResponse where
+        toJSON InappproductsBatchResponse{..}
           = object
               (catMaybes
-                 [("id" .=) <$> _aeId,
-                  ("expiryTimeSeconds" .=) <$> _aeExpiryTimeSeconds])
+                 [("entrys" .=) <$> _ibrEntrys,
+                  Just ("kind" .= _ibrKind)])
 
 -- | An Entitlement resource indicates a user\'s current entitlement to an
 -- inapp item or subscription.
@@ -512,61 +1068,251 @@ instance ToJSON Entitlement where
                   ("productId" .=) <$> _eProductId])
 
 --
--- /See:/ 'entitlementsListResponse' smart constructor.
-data EntitlementsListResponse = EntitlementsListResponse
-    { _elrTokenPagination :: !(Maybe (Maybe TokenPagination))
-    , _elrPageInfo        :: !(Maybe (Maybe PageInfo))
-    , _elrResources       :: !(Maybe [Maybe Entitlement])
+-- /See:/ 'monthDay' smart constructor.
+data MonthDay = MonthDay
+    { _mdDay   :: !(Maybe Word32)
+    , _mdMonth :: !(Maybe Word32)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EntitlementsListResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'MonthDay' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'elrTokenPagination'
+-- * 'mdDay'
 --
--- * 'elrPageInfo'
---
--- * 'elrResources'
-entitlementsListResponse
-    :: EntitlementsListResponse
-entitlementsListResponse =
-    EntitlementsListResponse
-    { _elrTokenPagination = Nothing
-    , _elrPageInfo = Nothing
-    , _elrResources = Nothing
+-- * 'mdMonth'
+monthDay
+    :: MonthDay
+monthDay =
+    MonthDay
+    { _mdDay = Nothing
+    , _mdMonth = Nothing
     }
 
-elrTokenPagination :: Lens' EntitlementsListResponse (Maybe (Maybe TokenPagination))
-elrTokenPagination
-  = lens _elrTokenPagination
-      (\ s a -> s{_elrTokenPagination = a})
+-- | Day of a month, value in [1, 31] range. Valid range depends on the
+-- specified month.
+mdDay :: Lens' MonthDay (Maybe Word32)
+mdDay = lens _mdDay (\ s a -> s{_mdDay = a})
 
-elrPageInfo :: Lens' EntitlementsListResponse (Maybe (Maybe PageInfo))
-elrPageInfo
-  = lens _elrPageInfo (\ s a -> s{_elrPageInfo = a})
+-- | Month of a year. e.g. 1 = JAN, 2 = FEB etc.
+mdMonth :: Lens' MonthDay (Maybe Word32)
+mdMonth = lens _mdMonth (\ s a -> s{_mdMonth = a})
 
-elrResources :: Lens' EntitlementsListResponse [Maybe Entitlement]
-elrResources
-  = lens _elrResources (\ s a -> s{_elrResources = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON EntitlementsListResponse where
+instance FromJSON MonthDay where
         parseJSON
-          = withObject "EntitlementsListResponse"
+          = withObject "MonthDay"
               (\ o ->
-                 EntitlementsListResponse <$>
-                   (o .:? "tokenPagination") <*> (o .:? "pageInfo") <*>
-                     (o .:? "resources" .!= mempty))
+                 MonthDay <$> (o .:? "day") <*> (o .:? "month"))
 
-instance ToJSON EntitlementsListResponse where
-        toJSON EntitlementsListResponse{..}
+instance ToJSON MonthDay where
+        toJSON MonthDay{..}
           = object
               (catMaybes
-                 [("tokenPagination" .=) <$> _elrTokenPagination,
-                  ("pageInfo" .=) <$> _elrPageInfo,
-                  ("resources" .=) <$> _elrResources])
+                 [("day" .=) <$> _mdDay, ("month" .=) <$> _mdMonth])
+
+--
+-- /See:/ 'inappproductsUpdateResponse' smart constructor.
+newtype InappproductsUpdateResponse = InappproductsUpdateResponse
+    { _iurInappproduct :: Maybe (Maybe InAppProduct)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InappproductsUpdateResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'iurInappproduct'
+inappproductsUpdateResponse
+    :: InappproductsUpdateResponse
+inappproductsUpdateResponse =
+    InappproductsUpdateResponse
+    { _iurInappproduct = Nothing
+    }
+
+iurInappproduct :: Lens' InappproductsUpdateResponse (Maybe (Maybe InAppProduct))
+iurInappproduct
+  = lens _iurInappproduct
+      (\ s a -> s{_iurInappproduct = a})
+
+instance FromJSON InappproductsUpdateResponse where
+        parseJSON
+          = withObject "InappproductsUpdateResponse"
+              (\ o ->
+                 InappproductsUpdateResponse <$>
+                   (o .:? "inappproduct"))
+
+instance ToJSON InappproductsUpdateResponse where
+        toJSON InappproductsUpdateResponse{..}
+          = object
+              (catMaybes
+                 [("inappproduct" .=) <$> _iurInappproduct])
+
+--
+-- /See:/ 'tokenPagination' smart constructor.
+data TokenPagination = TokenPagination
+    { _tpNextPageToken     :: !(Maybe Text)
+    , _tpPreviousPageToken :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TokenPagination' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tpNextPageToken'
+--
+-- * 'tpPreviousPageToken'
+tokenPagination
+    :: TokenPagination
+tokenPagination =
+    TokenPagination
+    { _tpNextPageToken = Nothing
+    , _tpPreviousPageToken = Nothing
+    }
+
+tpNextPageToken :: Lens' TokenPagination (Maybe Text)
+tpNextPageToken
+  = lens _tpNextPageToken
+      (\ s a -> s{_tpNextPageToken = a})
+
+tpPreviousPageToken :: Lens' TokenPagination (Maybe Text)
+tpPreviousPageToken
+  = lens _tpPreviousPageToken
+      (\ s a -> s{_tpPreviousPageToken = a})
+
+instance FromJSON TokenPagination where
+        parseJSON
+          = withObject "TokenPagination"
+              (\ o ->
+                 TokenPagination <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "previousPageToken"))
+
+instance ToJSON TokenPagination where
+        toJSON TokenPagination{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _tpNextPageToken,
+                  ("previousPageToken" .=) <$> _tpPreviousPageToken])
+
+--
+-- /See:/ 'inappproductsBatchRequestEntry' smart constructor.
+data InappproductsBatchRequestEntry = InappproductsBatchRequestEntry
+    { _iMethodName                 :: !(Maybe Text)
+    , _iInappproductsinsertrequest :: !(Maybe (Maybe InappproductsInsertRequest))
+    , _iInappproductsupdaterequest :: !(Maybe (Maybe InappproductsUpdateRequest))
+    , _iBatchId                    :: !(Maybe Word32)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InappproductsBatchRequestEntry' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'iMethodName'
+--
+-- * 'iInappproductsinsertrequest'
+--
+-- * 'iInappproductsupdaterequest'
+--
+-- * 'iBatchId'
+inappproductsBatchRequestEntry
+    :: InappproductsBatchRequestEntry
+inappproductsBatchRequestEntry =
+    InappproductsBatchRequestEntry
+    { _iMethodName = Nothing
+    , _iInappproductsinsertrequest = Nothing
+    , _iInappproductsupdaterequest = Nothing
+    , _iBatchId = Nothing
+    }
+
+iMethodName :: Lens' InappproductsBatchRequestEntry (Maybe Text)
+iMethodName
+  = lens _iMethodName (\ s a -> s{_iMethodName = a})
+
+iInappproductsinsertrequest :: Lens' InappproductsBatchRequestEntry (Maybe (Maybe InappproductsInsertRequest))
+iInappproductsinsertrequest
+  = lens _iInappproductsinsertrequest
+      (\ s a -> s{_iInappproductsinsertrequest = a})
+
+iInappproductsupdaterequest :: Lens' InappproductsBatchRequestEntry (Maybe (Maybe InappproductsUpdateRequest))
+iInappproductsupdaterequest
+  = lens _iInappproductsupdaterequest
+      (\ s a -> s{_iInappproductsupdaterequest = a})
+
+iBatchId :: Lens' InappproductsBatchRequestEntry (Maybe Word32)
+iBatchId = lens _iBatchId (\ s a -> s{_iBatchId = a})
+
+instance FromJSON InappproductsBatchRequestEntry
+         where
+        parseJSON
+          = withObject "InappproductsBatchRequestEntry"
+              (\ o ->
+                 InappproductsBatchRequestEntry <$>
+                   (o .:? "methodName") <*>
+                     (o .:? "inappproductsinsertrequest")
+                     <*> (o .:? "inappproductsupdaterequest")
+                     <*> (o .:? "batchId"))
+
+instance ToJSON InappproductsBatchRequestEntry where
+        toJSON InappproductsBatchRequestEntry{..}
+          = object
+              (catMaybes
+                 [("methodName" .=) <$> _iMethodName,
+                  ("inappproductsinsertrequest" .=) <$>
+                    _iInappproductsinsertrequest,
+                  ("inappproductsupdaterequest" .=) <$>
+                    _iInappproductsupdaterequest,
+                  ("batchId" .=) <$> _iBatchId])
+
+--
+-- /See:/ 'image' smart constructor.
+data Image = Image
+    { _iUrl  :: !(Maybe Text)
+    , _iSha1 :: !(Maybe Text)
+    , _iId   :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Image' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'iUrl'
+--
+-- * 'iSha1'
+--
+-- * 'iId'
+image
+    :: Image
+image =
+    Image
+    { _iUrl = Nothing
+    , _iSha1 = Nothing
+    , _iId = Nothing
+    }
+
+-- | A URL that will serve a preview of the image.
+iUrl :: Lens' Image (Maybe Text)
+iUrl = lens _iUrl (\ s a -> s{_iUrl = a})
+
+-- | A sha1 hash of the image that was uploaded.
+iSha1 :: Lens' Image (Maybe Text)
+iSha1 = lens _iSha1 (\ s a -> s{_iSha1 = a})
+
+-- | A unique id representing this image.
+iId :: Lens' Image (Maybe Text)
+iId = lens _iId (\ s a -> s{_iId = a})
+
+instance FromJSON Image where
+        parseJSON
+          = withObject "Image"
+              (\ o ->
+                 Image <$>
+                   (o .:? "url") <*> (o .:? "sha1") <*> (o .:? "id"))
+
+instance ToJSON Image where
+        toJSON Image{..}
+          = object
+              (catMaybes
+                 [("url" .=) <$> _iUrl, ("sha1" .=) <$> _iSha1,
+                  ("id" .=) <$> _iId])
 
 --
 -- /See:/ 'expansionFile' smart constructor.
@@ -619,40 +1365,849 @@ instance ToJSON ExpansionFile where
                   ("referencesVersion" .=) <$> _efReferencesVersion])
 
 --
--- /See:/ 'expansionFilesUploadResponse' smart constructor.
-newtype ExpansionFilesUploadResponse = ExpansionFilesUploadResponse
-    { _efurExpansionFile :: Maybe (Maybe ExpansionFile)
+-- /See:/ 'track' smart constructor.
+data Track = Track
+    { _tVersionCodes :: !(Maybe [Int32])
+    , _tTrack        :: !(Maybe Text)
+    , _tUserFraction :: !(Maybe Double)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ExpansionFilesUploadResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'Track' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'efurExpansionFile'
-expansionFilesUploadResponse
-    :: ExpansionFilesUploadResponse
-expansionFilesUploadResponse =
-    ExpansionFilesUploadResponse
-    { _efurExpansionFile = Nothing
+-- * 'tVersionCodes'
+--
+-- * 'tTrack'
+--
+-- * 'tUserFraction'
+track
+    :: Track
+track =
+    Track
+    { _tVersionCodes = Nothing
+    , _tTrack = Nothing
+    , _tUserFraction = Nothing
     }
 
-efurExpansionFile :: Lens' ExpansionFilesUploadResponse (Maybe (Maybe ExpansionFile))
-efurExpansionFile
-  = lens _efurExpansionFile
-      (\ s a -> s{_efurExpansionFile = a})
+tVersionCodes :: Lens' Track [Int32]
+tVersionCodes
+  = lens _tVersionCodes
+      (\ s a -> s{_tVersionCodes = a})
+      . _Default
+      . _Coerce
 
-instance FromJSON ExpansionFilesUploadResponse where
+tTrack :: Lens' Track (Maybe Text)
+tTrack = lens _tTrack (\ s a -> s{_tTrack = a})
+
+tUserFraction :: Lens' Track (Maybe Double)
+tUserFraction
+  = lens _tUserFraction
+      (\ s a -> s{_tUserFraction = a})
+
+instance FromJSON Track where
         parseJSON
-          = withObject "ExpansionFilesUploadResponse"
+          = withObject "Track"
               (\ o ->
-                 ExpansionFilesUploadResponse <$>
-                   (o .:? "expansionFile"))
+                 Track <$>
+                   (o .:? "versionCodes" .!= mempty) <*> (o .:? "track")
+                     <*> (o .:? "userFraction"))
 
-instance ToJSON ExpansionFilesUploadResponse where
-        toJSON ExpansionFilesUploadResponse{..}
+instance ToJSON Track where
+        toJSON Track{..}
           = object
               (catMaybes
-                 [("expansionFile" .=) <$> _efurExpansionFile])
+                 [("versionCodes" .=) <$> _tVersionCodes,
+                  ("track" .=) <$> _tTrack,
+                  ("userFraction" .=) <$> _tUserFraction])
+
+-- | List of localized title and description data.
+--
+-- /See:/ 'inAppProductListings' smart constructor.
+data InAppProductListings =
+    InAppProductListings
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InAppProductListings' with the minimum fields required to make a request.
+--
+inAppProductListings
+    :: InAppProductListings
+inAppProductListings = InAppProductListings
+
+instance FromJSON InAppProductListings where
+        parseJSON
+          = withObject "InAppProductListings"
+              (\ o -> pure InAppProductListings)
+
+instance ToJSON InAppProductListings where
+        toJSON = const (Object mempty)
+
+--
+-- /See:/ 'imagesDeleteAllResponse' smart constructor.
+newtype ImagesDeleteAllResponse = ImagesDeleteAllResponse
+    { _idarDeleted :: Maybe [Maybe Image]
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ImagesDeleteAllResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'idarDeleted'
+imagesDeleteAllResponse
+    :: ImagesDeleteAllResponse
+imagesDeleteAllResponse =
+    ImagesDeleteAllResponse
+    { _idarDeleted = Nothing
+    }
+
+idarDeleted :: Lens' ImagesDeleteAllResponse [Maybe Image]
+idarDeleted
+  = lens _idarDeleted (\ s a -> s{_idarDeleted = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ImagesDeleteAllResponse where
+        parseJSON
+          = withObject "ImagesDeleteAllResponse"
+              (\ o ->
+                 ImagesDeleteAllResponse <$>
+                   (o .:? "deleted" .!= mempty))
+
+instance ToJSON ImagesDeleteAllResponse where
+        toJSON ImagesDeleteAllResponse{..}
+          = object
+              (catMaybes [("deleted" .=) <$> _idarDeleted])
+
+--
+-- /See:/ 'inAppProductListing' smart constructor.
+data InAppProductListing = InAppProductListing
+    { _iaplTitle       :: !(Maybe Text)
+    , _iaplDescription :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InAppProductListing' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'iaplTitle'
+--
+-- * 'iaplDescription'
+inAppProductListing
+    :: InAppProductListing
+inAppProductListing =
+    InAppProductListing
+    { _iaplTitle = Nothing
+    , _iaplDescription = Nothing
+    }
+
+iaplTitle :: Lens' InAppProductListing (Maybe Text)
+iaplTitle
+  = lens _iaplTitle (\ s a -> s{_iaplTitle = a})
+
+iaplDescription :: Lens' InAppProductListing (Maybe Text)
+iaplDescription
+  = lens _iaplDescription
+      (\ s a -> s{_iaplDescription = a})
+
+instance FromJSON InAppProductListing where
+        parseJSON
+          = withObject "InAppProductListing"
+              (\ o ->
+                 InAppProductListing <$>
+                   (o .:? "title") <*> (o .:? "description"))
+
+instance ToJSON InAppProductListing where
+        toJSON InAppProductListing{..}
+          = object
+              (catMaybes
+                 [("title" .=) <$> _iaplTitle,
+                  ("description" .=) <$> _iaplDescription])
+
+-- | A SubscriptionDeferralInfo contains the data needed to defer a
+-- subscription purchase to a future expiry time.
+--
+-- /See:/ 'subscriptionDeferralInfo' smart constructor.
+data SubscriptionDeferralInfo = SubscriptionDeferralInfo
+    { _sdiDesiredExpiryTimeMillis  :: !(Maybe Int64)
+    , _sdiExpectedExpiryTimeMillis :: !(Maybe Int64)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SubscriptionDeferralInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sdiDesiredExpiryTimeMillis'
+--
+-- * 'sdiExpectedExpiryTimeMillis'
+subscriptionDeferralInfo
+    :: SubscriptionDeferralInfo
+subscriptionDeferralInfo =
+    SubscriptionDeferralInfo
+    { _sdiDesiredExpiryTimeMillis = Nothing
+    , _sdiExpectedExpiryTimeMillis = Nothing
+    }
+
+-- | The desired next expiry time for the subscription in milliseconds since
+-- Epoch. The given time must be after the current expiry time for the
+-- subscription.
+sdiDesiredExpiryTimeMillis :: Lens' SubscriptionDeferralInfo (Maybe Int64)
+sdiDesiredExpiryTimeMillis
+  = lens _sdiDesiredExpiryTimeMillis
+      (\ s a -> s{_sdiDesiredExpiryTimeMillis = a})
+
+-- | The expected expiry time for the subscription. If the current expiry
+-- time for the subscription is not the value specified here, the deferral
+-- will not occur.
+sdiExpectedExpiryTimeMillis :: Lens' SubscriptionDeferralInfo (Maybe Int64)
+sdiExpectedExpiryTimeMillis
+  = lens _sdiExpectedExpiryTimeMillis
+      (\ s a -> s{_sdiExpectedExpiryTimeMillis = a})
+
+instance FromJSON SubscriptionDeferralInfo where
+        parseJSON
+          = withObject "SubscriptionDeferralInfo"
+              (\ o ->
+                 SubscriptionDeferralInfo <$>
+                   (o .:? "desiredExpiryTimeMillis") <*>
+                     (o .:? "expectedExpiryTimeMillis"))
+
+instance ToJSON SubscriptionDeferralInfo where
+        toJSON SubscriptionDeferralInfo{..}
+          = object
+              (catMaybes
+                 [("desiredExpiryTimeMillis" .=) <$>
+                    _sdiDesiredExpiryTimeMillis,
+                  ("expectedExpiryTimeMillis" .=) <$>
+                    _sdiExpectedExpiryTimeMillis])
+
+--
+-- /See:/ 'inappproductsInsertResponse' smart constructor.
+newtype InappproductsInsertResponse = InappproductsInsertResponse
+    { _iInappproduct :: Maybe (Maybe InAppProduct)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InappproductsInsertResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'iInappproduct'
+inappproductsInsertResponse
+    :: InappproductsInsertResponse
+inappproductsInsertResponse =
+    InappproductsInsertResponse
+    { _iInappproduct = Nothing
+    }
+
+iInappproduct :: Lens' InappproductsInsertResponse (Maybe (Maybe InAppProduct))
+iInappproduct
+  = lens _iInappproduct
+      (\ s a -> s{_iInappproduct = a})
+
+instance FromJSON InappproductsInsertResponse where
+        parseJSON
+          = withObject "InappproductsInsertResponse"
+              (\ o ->
+                 InappproductsInsertResponse <$>
+                   (o .:? "inappproduct"))
+
+instance ToJSON InappproductsInsertResponse where
+        toJSON InappproductsInsertResponse{..}
+          = object
+              (catMaybes [("inappproduct" .=) <$> _iInappproduct])
+
+--
+-- /See:/ 'apkListingsListResponse' smart constructor.
+data ApkListingsListResponse = ApkListingsListResponse
+    { _allrKind     :: !Text
+    , _allrListings :: !(Maybe [Maybe ApkListing])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ApkListingsListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'allrKind'
+--
+-- * 'allrListings'
+apkListingsListResponse
+    :: ApkListingsListResponse
+apkListingsListResponse =
+    ApkListingsListResponse
+    { _allrKind = "androidpublisher#apkListingsListResponse"
+    , _allrListings = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"androidpublisher#apkListingsListResponse\".
+allrKind :: Lens' ApkListingsListResponse Text
+allrKind = lens _allrKind (\ s a -> s{_allrKind = a})
+
+allrListings :: Lens' ApkListingsListResponse [Maybe ApkListing]
+allrListings
+  = lens _allrListings (\ s a -> s{_allrListings = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ApkListingsListResponse where
+        parseJSON
+          = withObject "ApkListingsListResponse"
+              (\ o ->
+                 ApkListingsListResponse <$>
+                   (o .:? "kind" .!=
+                      "androidpublisher#apkListingsListResponse")
+                     <*> (o .:? "listings" .!= mempty))
+
+instance ToJSON ApkListingsListResponse where
+        toJSON ApkListingsListResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _allrKind),
+                  ("listings" .=) <$> _allrListings])
+
+--
+-- /See:/ 'apksAddExternallyHostedResponse' smart constructor.
+newtype ApksAddExternallyHostedResponse = ApksAddExternallyHostedResponse
+    { _aExternallyHostedApk :: Maybe (Maybe ExternallyHostedApk)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ApksAddExternallyHostedResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aExternallyHostedApk'
+apksAddExternallyHostedResponse
+    :: ApksAddExternallyHostedResponse
+apksAddExternallyHostedResponse =
+    ApksAddExternallyHostedResponse
+    { _aExternallyHostedApk = Nothing
+    }
+
+-- | The definition of the externally-hosted APK and where it is located.
+aExternallyHostedApk :: Lens' ApksAddExternallyHostedResponse (Maybe (Maybe ExternallyHostedApk))
+aExternallyHostedApk
+  = lens _aExternallyHostedApk
+      (\ s a -> s{_aExternallyHostedApk = a})
+
+instance FromJSON ApksAddExternallyHostedResponse
+         where
+        parseJSON
+          = withObject "ApksAddExternallyHostedResponse"
+              (\ o ->
+                 ApksAddExternallyHostedResponse <$>
+                   (o .:? "externallyHostedApk"))
+
+instance ToJSON ApksAddExternallyHostedResponse where
+        toJSON ApksAddExternallyHostedResponse{..}
+          = object
+              (catMaybes
+                 [("externallyHostedApk" .=) <$>
+                    _aExternallyHostedApk])
+
+--
+-- /See:/ 'tracksListResponse' smart constructor.
+data TracksListResponse = TracksListResponse
+    { _tlrTracks :: !(Maybe [Maybe Track])
+    , _tlrKind   :: !Text
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TracksListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tlrTracks'
+--
+-- * 'tlrKind'
+tracksListResponse
+    :: TracksListResponse
+tracksListResponse =
+    TracksListResponse
+    { _tlrTracks = Nothing
+    , _tlrKind = "androidpublisher#tracksListResponse"
+    }
+
+tlrTracks :: Lens' TracksListResponse [Maybe Track]
+tlrTracks
+  = lens _tlrTracks (\ s a -> s{_tlrTracks = a}) .
+      _Default
+      . _Coerce
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"androidpublisher#tracksListResponse\".
+tlrKind :: Lens' TracksListResponse Text
+tlrKind = lens _tlrKind (\ s a -> s{_tlrKind = a})
+
+instance FromJSON TracksListResponse where
+        parseJSON
+          = withObject "TracksListResponse"
+              (\ o ->
+                 TracksListResponse <$>
+                   (o .:? "tracks" .!= mempty) <*>
+                     (o .:? "kind" .!=
+                        "androidpublisher#tracksListResponse"))
+
+instance ToJSON TracksListResponse where
+        toJSON TracksListResponse{..}
+          = object
+              (catMaybes
+                 [("tracks" .=) <$> _tlrTracks,
+                  Just ("kind" .= _tlrKind)])
+
+-- | Represents an edit of an app. An edit allows clients to make multiple
+-- changes before committing them in one operation.
+--
+-- /See:/ 'appEdit' smart constructor.
+data AppEdit = AppEdit
+    { _aeId                :: !(Maybe Text)
+    , _aeExpiryTimeSeconds :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AppEdit' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aeId'
+--
+-- * 'aeExpiryTimeSeconds'
+appEdit
+    :: AppEdit
+appEdit =
+    AppEdit
+    { _aeId = Nothing
+    , _aeExpiryTimeSeconds = Nothing
+    }
+
+-- | The ID of the edit that can be used in subsequent API calls.
+aeId :: Lens' AppEdit (Maybe Text)
+aeId = lens _aeId (\ s a -> s{_aeId = a})
+
+-- | The time at which the edit will expire and will be no longer valid for
+-- use in any subsequent API calls (encoded as seconds since the Epoch).
+aeExpiryTimeSeconds :: Lens' AppEdit (Maybe Text)
+aeExpiryTimeSeconds
+  = lens _aeExpiryTimeSeconds
+      (\ s a -> s{_aeExpiryTimeSeconds = a})
+
+instance FromJSON AppEdit where
+        parseJSON
+          = withObject "AppEdit"
+              (\ o ->
+                 AppEdit <$>
+                   (o .:? "id") <*> (o .:? "expiryTimeSeconds"))
+
+instance ToJSON AppEdit where
+        toJSON AppEdit{..}
+          = object
+              (catMaybes
+                 [("id" .=) <$> _aeId,
+                  ("expiryTimeSeconds" .=) <$> _aeExpiryTimeSeconds])
+
+--
+-- /See:/ 'pageInfo' smart constructor.
+data PageInfo = PageInfo
+    { _piResultPerPage :: !(Maybe Int32)
+    , _piTotalResults  :: !(Maybe Int32)
+    , _piStartIndex    :: !(Maybe Int32)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PageInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'piResultPerPage'
+--
+-- * 'piTotalResults'
+--
+-- * 'piStartIndex'
+pageInfo
+    :: PageInfo
+pageInfo =
+    PageInfo
+    { _piResultPerPage = Nothing
+    , _piTotalResults = Nothing
+    , _piStartIndex = Nothing
+    }
+
+piResultPerPage :: Lens' PageInfo (Maybe Int32)
+piResultPerPage
+  = lens _piResultPerPage
+      (\ s a -> s{_piResultPerPage = a})
+
+piTotalResults :: Lens' PageInfo (Maybe Int32)
+piTotalResults
+  = lens _piTotalResults
+      (\ s a -> s{_piTotalResults = a})
+
+piStartIndex :: Lens' PageInfo (Maybe Int32)
+piStartIndex
+  = lens _piStartIndex (\ s a -> s{_piStartIndex = a})
+
+instance FromJSON PageInfo where
+        parseJSON
+          = withObject "PageInfo"
+              (\ o ->
+                 PageInfo <$>
+                   (o .:? "resultPerPage") <*> (o .:? "totalResults")
+                     <*> (o .:? "startIndex"))
+
+instance ToJSON PageInfo where
+        toJSON PageInfo{..}
+          = object
+              (catMaybes
+                 [("resultPerPage" .=) <$> _piResultPerPage,
+                  ("totalResults" .=) <$> _piTotalResults,
+                  ("startIndex" .=) <$> _piStartIndex])
+
+--
+-- /See:/ 'imagesListResponse' smart constructor.
+newtype ImagesListResponse = ImagesListResponse
+    { _ilrImages :: Maybe [Maybe Image]
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ImagesListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ilrImages'
+imagesListResponse
+    :: ImagesListResponse
+imagesListResponse =
+    ImagesListResponse
+    { _ilrImages = Nothing
+    }
+
+ilrImages :: Lens' ImagesListResponse [Maybe Image]
+ilrImages
+  = lens _ilrImages (\ s a -> s{_ilrImages = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ImagesListResponse where
+        parseJSON
+          = withObject "ImagesListResponse"
+              (\ o ->
+                 ImagesListResponse <$> (o .:? "images" .!= mempty))
+
+instance ToJSON ImagesListResponse where
+        toJSON ImagesListResponse{..}
+          = object (catMaybes [("images" .=) <$> _ilrImages])
+
+--
+-- /See:/ 'season' smart constructor.
+data Season = Season
+    { _sStart :: !(Maybe (Maybe MonthDay))
+    , _sEnd   :: !(Maybe (Maybe MonthDay))
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Season' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sStart'
+--
+-- * 'sEnd'
+season
+    :: Season
+season =
+    Season
+    { _sStart = Nothing
+    , _sEnd = Nothing
+    }
+
+-- | Inclusive start date of the recurrence period.
+sStart :: Lens' Season (Maybe (Maybe MonthDay))
+sStart = lens _sStart (\ s a -> s{_sStart = a})
+
+-- | Inclusive end date of the recurrence period.
+sEnd :: Lens' Season (Maybe (Maybe MonthDay))
+sEnd = lens _sEnd (\ s a -> s{_sEnd = a})
+
+instance FromJSON Season where
+        parseJSON
+          = withObject "Season"
+              (\ o -> Season <$> (o .:? "start") <*> (o .:? "end"))
+
+instance ToJSON Season where
+        toJSON Season{..}
+          = object
+              (catMaybes
+                 [("start" .=) <$> _sStart, ("end" .=) <$> _sEnd])
+
+-- | Prices per buyer region. None of these prices should be zero. In-app
+-- products can never be free.
+--
+-- /See:/ 'inAppProductPrices' smart constructor.
+data InAppProductPrices =
+    InAppProductPrices
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InAppProductPrices' with the minimum fields required to make a request.
+--
+inAppProductPrices
+    :: InAppProductPrices
+inAppProductPrices = InAppProductPrices
+
+instance FromJSON InAppProductPrices where
+        parseJSON
+          = withObject "InAppProductPrices"
+              (\ o -> pure InAppProductPrices)
+
+instance ToJSON InAppProductPrices where
+        toJSON = const (Object mempty)
+
+--
+-- /See:/ 'subscriptionPurchasesDeferResponse' smart constructor.
+newtype SubscriptionPurchasesDeferResponse = SubscriptionPurchasesDeferResponse
+    { _spdrNewExpiryTimeMillis :: Maybe Int64
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SubscriptionPurchasesDeferResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'spdrNewExpiryTimeMillis'
+subscriptionPurchasesDeferResponse
+    :: SubscriptionPurchasesDeferResponse
+subscriptionPurchasesDeferResponse =
+    SubscriptionPurchasesDeferResponse
+    { _spdrNewExpiryTimeMillis = Nothing
+    }
+
+-- | The new expiry time for the subscription in milliseconds since the
+-- Epoch.
+spdrNewExpiryTimeMillis :: Lens' SubscriptionPurchasesDeferResponse (Maybe Int64)
+spdrNewExpiryTimeMillis
+  = lens _spdrNewExpiryTimeMillis
+      (\ s a -> s{_spdrNewExpiryTimeMillis = a})
+
+instance FromJSON SubscriptionPurchasesDeferResponse
+         where
+        parseJSON
+          = withObject "SubscriptionPurchasesDeferResponse"
+              (\ o ->
+                 SubscriptionPurchasesDeferResponse <$>
+                   (o .:? "newExpiryTimeMillis"))
+
+instance ToJSON SubscriptionPurchasesDeferResponse
+         where
+        toJSON SubscriptionPurchasesDeferResponse{..}
+          = object
+              (catMaybes
+                 [("newExpiryTimeMillis" .=) <$>
+                    _spdrNewExpiryTimeMillis])
+
+--
+-- /See:/ 'apkListing' smart constructor.
+data ApkListing = ApkListing
+    { _alLanguage      :: !(Maybe Text)
+    , _alRecentChanges :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ApkListing' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'alLanguage'
+--
+-- * 'alRecentChanges'
+apkListing
+    :: ApkListing
+apkListing =
+    ApkListing
+    { _alLanguage = Nothing
+    , _alRecentChanges = Nothing
+    }
+
+-- | The language code, in BCP 47 format (eg \"en-US\").
+alLanguage :: Lens' ApkListing (Maybe Text)
+alLanguage
+  = lens _alLanguage (\ s a -> s{_alLanguage = a})
+
+-- | Describe what\'s new in your APK.
+alRecentChanges :: Lens' ApkListing (Maybe Text)
+alRecentChanges
+  = lens _alRecentChanges
+      (\ s a -> s{_alRecentChanges = a})
+
+instance FromJSON ApkListing where
+        parseJSON
+          = withObject "ApkListing"
+              (\ o ->
+                 ApkListing <$>
+                   (o .:? "language") <*> (o .:? "recentChanges"))
+
+instance ToJSON ApkListing where
+        toJSON ApkListing{..}
+          = object
+              (catMaybes
+                 [("language" .=) <$> _alLanguage,
+                  ("recentChanges" .=) <$> _alRecentChanges])
+
+-- | A SubscriptionPurchase resource indicates the status of a user\'s
+-- subscription purchase.
+--
+-- /See:/ 'subscriptionPurchase' smart constructor.
+data SubscriptionPurchase = SubscriptionPurchase
+    { _spKind             :: !Text
+    , _spExpiryTimeMillis :: !(Maybe Int64)
+    , _spAutoRenewing     :: !(Maybe Bool)
+    , _spStartTimeMillis  :: !(Maybe Int64)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SubscriptionPurchase' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'spKind'
+--
+-- * 'spExpiryTimeMillis'
+--
+-- * 'spAutoRenewing'
+--
+-- * 'spStartTimeMillis'
+subscriptionPurchase
+    :: SubscriptionPurchase
+subscriptionPurchase =
+    SubscriptionPurchase
+    { _spKind = "androidpublisher#subscriptionPurchase"
+    , _spExpiryTimeMillis = Nothing
+    , _spAutoRenewing = Nothing
+    , _spStartTimeMillis = Nothing
+    }
+
+-- | This kind represents a subscriptionPurchase object in the
+-- androidpublisher service.
+spKind :: Lens' SubscriptionPurchase Text
+spKind = lens _spKind (\ s a -> s{_spKind = a})
+
+-- | Time at which the subscription will expire, in milliseconds since Epoch.
+spExpiryTimeMillis :: Lens' SubscriptionPurchase (Maybe Int64)
+spExpiryTimeMillis
+  = lens _spExpiryTimeMillis
+      (\ s a -> s{_spExpiryTimeMillis = a})
+
+-- | Whether the subscription will automatically be renewed when it reaches
+-- its current expiry time.
+spAutoRenewing :: Lens' SubscriptionPurchase (Maybe Bool)
+spAutoRenewing
+  = lens _spAutoRenewing
+      (\ s a -> s{_spAutoRenewing = a})
+
+-- | Time at which the subscription was granted, in milliseconds since Epoch.
+spStartTimeMillis :: Lens' SubscriptionPurchase (Maybe Int64)
+spStartTimeMillis
+  = lens _spStartTimeMillis
+      (\ s a -> s{_spStartTimeMillis = a})
+
+instance FromJSON SubscriptionPurchase where
+        parseJSON
+          = withObject "SubscriptionPurchase"
+              (\ o ->
+                 SubscriptionPurchase <$>
+                   (o .:? "kind" .!=
+                      "androidpublisher#subscriptionPurchase")
+                     <*> (o .:? "expiryTimeMillis")
+                     <*> (o .:? "autoRenewing")
+                     <*> (o .:? "startTimeMillis"))
+
+instance ToJSON SubscriptionPurchase where
+        toJSON SubscriptionPurchase{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _spKind),
+                  ("expiryTimeMillis" .=) <$> _spExpiryTimeMillis,
+                  ("autoRenewing" .=) <$> _spAutoRenewing,
+                  ("startTimeMillis" .=) <$> _spStartTimeMillis])
+
+-- | A ProductPurchase resource indicates the status of a user\'s inapp
+-- product purchase.
+--
+-- /See:/ 'productPurchase' smart constructor.
+data ProductPurchase = ProductPurchase
+    { _ppPurchaseState      :: !(Maybe Int32)
+    , _ppConsumptionState   :: !(Maybe Int32)
+    , _ppKind               :: !Text
+    , _ppPurchaseTimeMillis :: !(Maybe Int64)
+    , _ppDeveloperPayload   :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ProductPurchase' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ppPurchaseState'
+--
+-- * 'ppConsumptionState'
+--
+-- * 'ppKind'
+--
+-- * 'ppPurchaseTimeMillis'
+--
+-- * 'ppDeveloperPayload'
+productPurchase
+    :: ProductPurchase
+productPurchase =
+    ProductPurchase
+    { _ppPurchaseState = Nothing
+    , _ppConsumptionState = Nothing
+    , _ppKind = "androidpublisher#productPurchase"
+    , _ppPurchaseTimeMillis = Nothing
+    , _ppDeveloperPayload = Nothing
+    }
+
+-- | The purchase state of the order. Possible values are: - Purchased -
+-- Cancelled
+ppPurchaseState :: Lens' ProductPurchase (Maybe Int32)
+ppPurchaseState
+  = lens _ppPurchaseState
+      (\ s a -> s{_ppPurchaseState = a})
+
+-- | The consumption state of the inapp product. Possible values are: - Yet
+-- to be consumed - Consumed
+ppConsumptionState :: Lens' ProductPurchase (Maybe Int32)
+ppConsumptionState
+  = lens _ppConsumptionState
+      (\ s a -> s{_ppConsumptionState = a})
+
+-- | This kind represents an inappPurchase object in the androidpublisher
+-- service.
+ppKind :: Lens' ProductPurchase Text
+ppKind = lens _ppKind (\ s a -> s{_ppKind = a})
+
+-- | The time the product was purchased, in milliseconds since the epoch (Jan
+-- 1, 1970).
+ppPurchaseTimeMillis :: Lens' ProductPurchase (Maybe Int64)
+ppPurchaseTimeMillis
+  = lens _ppPurchaseTimeMillis
+      (\ s a -> s{_ppPurchaseTimeMillis = a})
+
+-- | A developer-specified string that contains supplemental information
+-- about an order.
+ppDeveloperPayload :: Lens' ProductPurchase (Maybe Text)
+ppDeveloperPayload
+  = lens _ppDeveloperPayload
+      (\ s a -> s{_ppDeveloperPayload = a})
+
+instance FromJSON ProductPurchase where
+        parseJSON
+          = withObject "ProductPurchase"
+              (\ o ->
+                 ProductPurchase <$>
+                   (o .:? "purchaseState") <*>
+                     (o .:? "consumptionState")
+                     <*>
+                     (o .:? "kind" .!= "androidpublisher#productPurchase")
+                     <*> (o .:? "purchaseTimeMillis")
+                     <*> (o .:? "developerPayload"))
+
+instance ToJSON ProductPurchase where
+        toJSON ProductPurchase{..}
+          = object
+              (catMaybes
+                 [("purchaseState" .=) <$> _ppPurchaseState,
+                  ("consumptionState" .=) <$> _ppConsumptionState,
+                  Just ("kind" .= _ppKind),
+                  ("purchaseTimeMillis" .=) <$> _ppPurchaseTimeMillis,
+                  ("developerPayload" .=) <$> _ppDeveloperPayload])
 
 -- | Defines an APK available for this application that is hosted externally
 -- and not uploaded to Google Play. This function is only available to
@@ -874,451 +2429,77 @@ instance ToJSON ExternallyHostedApk where
                   ("certificateBase64s" .=) <$>
                     _ehaCertificateBase64s])
 
--- | A permission used by this APK.
 --
--- /See:/ 'externallyHostedApkUsesPermission' smart constructor.
-data ExternallyHostedApkUsesPermission = ExternallyHostedApkUsesPermission
-    { _ehaupName          :: !(Maybe Text)
-    , _ehaupMaxSdkVersion :: !(Maybe Int32)
+-- /See:/ 'appDetails' smart constructor.
+data AppDetails = AppDetails
+    { _adContactPhone    :: !(Maybe Text)
+    , _adContactEmail    :: !(Maybe Text)
+    , _adContactWebsite  :: !(Maybe Text)
+    , _adDefaultLanguage :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ExternallyHostedApkUsesPermission' with the minimum fields required to make a request.
+-- | Creates a value of 'AppDetails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ehaupName'
+-- * 'adContactPhone'
 --
--- * 'ehaupMaxSdkVersion'
-externallyHostedApkUsesPermission
-    :: ExternallyHostedApkUsesPermission
-externallyHostedApkUsesPermission =
-    ExternallyHostedApkUsesPermission
-    { _ehaupName = Nothing
-    , _ehaupMaxSdkVersion = Nothing
+-- * 'adContactEmail'
+--
+-- * 'adContactWebsite'
+--
+-- * 'adDefaultLanguage'
+appDetails
+    :: AppDetails
+appDetails =
+    AppDetails
+    { _adContactPhone = Nothing
+    , _adContactEmail = Nothing
+    , _adContactWebsite = Nothing
+    , _adDefaultLanguage = Nothing
     }
 
--- | The name of the permission requested.
-ehaupName :: Lens' ExternallyHostedApkUsesPermission (Maybe Text)
-ehaupName
-  = lens _ehaupName (\ s a -> s{_ehaupName = a})
+-- | The user-visible support telephone number for this app.
+adContactPhone :: Lens' AppDetails (Maybe Text)
+adContactPhone
+  = lens _adContactPhone
+      (\ s a -> s{_adContactPhone = a})
 
--- | Optionally, the maximum SDK version for which the permission is
--- required.
-ehaupMaxSdkVersion :: Lens' ExternallyHostedApkUsesPermission (Maybe Int32)
-ehaupMaxSdkVersion
-  = lens _ehaupMaxSdkVersion
-      (\ s a -> s{_ehaupMaxSdkVersion = a})
+-- | The user-visible support email for this app.
+adContactEmail :: Lens' AppDetails (Maybe Text)
+adContactEmail
+  = lens _adContactEmail
+      (\ s a -> s{_adContactEmail = a})
 
-instance FromJSON ExternallyHostedApkUsesPermission
-         where
+-- | The user-visible website for this app.
+adContactWebsite :: Lens' AppDetails (Maybe Text)
+adContactWebsite
+  = lens _adContactWebsite
+      (\ s a -> s{_adContactWebsite = a})
+
+-- | Default language code, in BCP 47 format (eg \"en-US\").
+adDefaultLanguage :: Lens' AppDetails (Maybe Text)
+adDefaultLanguage
+  = lens _adDefaultLanguage
+      (\ s a -> s{_adDefaultLanguage = a})
+
+instance FromJSON AppDetails where
         parseJSON
-          = withObject "ExternallyHostedApkUsesPermission"
+          = withObject "AppDetails"
               (\ o ->
-                 ExternallyHostedApkUsesPermission <$>
-                   (o .:? "name") <*> (o .:? "maxSdkVersion"))
-
-instance ToJSON ExternallyHostedApkUsesPermission
-         where
-        toJSON ExternallyHostedApkUsesPermission{..}
-          = object
-              (catMaybes
-                 [("name" .=) <$> _ehaupName,
-                  ("maxSdkVersion" .=) <$> _ehaupMaxSdkVersion])
-
---
--- /See:/ 'image' smart constructor.
-data Image = Image
-    { _iUrl  :: !(Maybe Text)
-    , _iSha1 :: !(Maybe Text)
-    , _iId   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Image' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'iUrl'
---
--- * 'iSha1'
---
--- * 'iId'
-image
-    :: Image
-image =
-    Image
-    { _iUrl = Nothing
-    , _iSha1 = Nothing
-    , _iId = Nothing
-    }
-
--- | A URL that will serve a preview of the image.
-iUrl :: Lens' Image (Maybe Text)
-iUrl = lens _iUrl (\ s a -> s{_iUrl = a})
-
--- | A sha1 hash of the image that was uploaded.
-iSha1 :: Lens' Image (Maybe Text)
-iSha1 = lens _iSha1 (\ s a -> s{_iSha1 = a})
-
--- | A unique id representing this image.
-iId :: Lens' Image (Maybe Text)
-iId = lens _iId (\ s a -> s{_iId = a})
-
-instance FromJSON Image where
-        parseJSON
-          = withObject "Image"
-              (\ o ->
-                 Image <$>
-                   (o .:? "url") <*> (o .:? "sha1") <*> (o .:? "id"))
-
-instance ToJSON Image where
-        toJSON Image{..}
-          = object
-              (catMaybes
-                 [("url" .=) <$> _iUrl, ("sha1" .=) <$> _iSha1,
-                  ("id" .=) <$> _iId])
-
---
--- /See:/ 'imagesDeleteAllResponse' smart constructor.
-newtype ImagesDeleteAllResponse = ImagesDeleteAllResponse
-    { _idarDeleted :: Maybe [Maybe Image]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ImagesDeleteAllResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'idarDeleted'
-imagesDeleteAllResponse
-    :: ImagesDeleteAllResponse
-imagesDeleteAllResponse =
-    ImagesDeleteAllResponse
-    { _idarDeleted = Nothing
-    }
-
-idarDeleted :: Lens' ImagesDeleteAllResponse [Maybe Image]
-idarDeleted
-  = lens _idarDeleted (\ s a -> s{_idarDeleted = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON ImagesDeleteAllResponse where
-        parseJSON
-          = withObject "ImagesDeleteAllResponse"
-              (\ o ->
-                 ImagesDeleteAllResponse <$>
-                   (o .:? "deleted" .!= mempty))
-
-instance ToJSON ImagesDeleteAllResponse where
-        toJSON ImagesDeleteAllResponse{..}
-          = object
-              (catMaybes [("deleted" .=) <$> _idarDeleted])
-
---
--- /See:/ 'imagesListResponse' smart constructor.
-newtype ImagesListResponse = ImagesListResponse
-    { _ilrImages :: Maybe [Maybe Image]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ImagesListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ilrImages'
-imagesListResponse
-    :: ImagesListResponse
-imagesListResponse =
-    ImagesListResponse
-    { _ilrImages = Nothing
-    }
-
-ilrImages :: Lens' ImagesListResponse [Maybe Image]
-ilrImages
-  = lens _ilrImages (\ s a -> s{_ilrImages = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON ImagesListResponse where
-        parseJSON
-          = withObject "ImagesListResponse"
-              (\ o ->
-                 ImagesListResponse <$> (o .:? "images" .!= mempty))
-
-instance ToJSON ImagesListResponse where
-        toJSON ImagesListResponse{..}
-          = object (catMaybes [("images" .=) <$> _ilrImages])
-
---
--- /See:/ 'imagesUploadResponse' smart constructor.
-newtype ImagesUploadResponse = ImagesUploadResponse
-    { _iurImage :: Maybe (Maybe Image)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ImagesUploadResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'iurImage'
-imagesUploadResponse
-    :: ImagesUploadResponse
-imagesUploadResponse =
-    ImagesUploadResponse
-    { _iurImage = Nothing
-    }
-
-iurImage :: Lens' ImagesUploadResponse (Maybe (Maybe Image))
-iurImage = lens _iurImage (\ s a -> s{_iurImage = a})
-
-instance FromJSON ImagesUploadResponse where
-        parseJSON
-          = withObject "ImagesUploadResponse"
-              (\ o -> ImagesUploadResponse <$> (o .:? "image"))
-
-instance ToJSON ImagesUploadResponse where
-        toJSON ImagesUploadResponse{..}
-          = object (catMaybes [("image" .=) <$> _iurImage])
-
---
--- /See:/ 'inAppProduct' smart constructor.
-data InAppProduct = InAppProduct
-    { _iapStatus             :: !(Maybe Text)
-    , _iapTrialPeriod        :: !(Maybe Text)
-    , _iapPackageName        :: !(Maybe Text)
-    , _iapSeason             :: !(Maybe (Maybe Season))
-    , _iapPurchaseType       :: !(Maybe Text)
-    , _iapSubscriptionPeriod :: !(Maybe Text)
-    , _iapPrices             :: !(Maybe InAppProductPrices)
-    , _iapSku                :: !(Maybe Text)
-    , _iapDefaultPrice       :: !(Maybe (Maybe Price))
-    , _iapListings           :: !(Maybe InAppProductListings)
-    , _iapDefaultLanguage    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'InAppProduct' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'iapStatus'
---
--- * 'iapTrialPeriod'
---
--- * 'iapPackageName'
---
--- * 'iapSeason'
---
--- * 'iapPurchaseType'
---
--- * 'iapSubscriptionPeriod'
---
--- * 'iapPrices'
---
--- * 'iapSku'
---
--- * 'iapDefaultPrice'
---
--- * 'iapListings'
---
--- * 'iapDefaultLanguage'
-inAppProduct
-    :: InAppProduct
-inAppProduct =
-    InAppProduct
-    { _iapStatus = Nothing
-    , _iapTrialPeriod = Nothing
-    , _iapPackageName = Nothing
-    , _iapSeason = Nothing
-    , _iapPurchaseType = Nothing
-    , _iapSubscriptionPeriod = Nothing
-    , _iapPrices = Nothing
-    , _iapSku = Nothing
-    , _iapDefaultPrice = Nothing
-    , _iapListings = Nothing
-    , _iapDefaultLanguage = Nothing
-    }
-
-iapStatus :: Lens' InAppProduct (Maybe Text)
-iapStatus
-  = lens _iapStatus (\ s a -> s{_iapStatus = a})
-
--- | Trial period, specified in ISO 8601 format. Acceptable values are
--- anything between \"P7D\" (seven days) and \"P999D\" (999 days). Seasonal
--- subscriptions cannot have a trial period.
-iapTrialPeriod :: Lens' InAppProduct (Maybe Text)
-iapTrialPeriod
-  = lens _iapTrialPeriod
-      (\ s a -> s{_iapTrialPeriod = a})
-
--- | The package name of the parent app.
-iapPackageName :: Lens' InAppProduct (Maybe Text)
-iapPackageName
-  = lens _iapPackageName
-      (\ s a -> s{_iapPackageName = a})
-
--- | Definition of a season for a seasonal subscription. Can be defined only
--- for yearly subscriptions.
-iapSeason :: Lens' InAppProduct (Maybe (Maybe Season))
-iapSeason
-  = lens _iapSeason (\ s a -> s{_iapSeason = a})
-
--- | Purchase type enum value. Unmodifiable after creation.
-iapPurchaseType :: Lens' InAppProduct (Maybe Text)
-iapPurchaseType
-  = lens _iapPurchaseType
-      (\ s a -> s{_iapPurchaseType = a})
-
--- | Subscription period, specified in ISO 8601 format. Acceptable values are
--- \"P1W\" (one week), \"P1M\" (one month) and \"P1Y\" (one year).
-iapSubscriptionPeriod :: Lens' InAppProduct (Maybe Text)
-iapSubscriptionPeriod
-  = lens _iapSubscriptionPeriod
-      (\ s a -> s{_iapSubscriptionPeriod = a})
-
--- | Prices per buyer region. None of these prices should be zero. In-app
--- products can never be free.
-iapPrices :: Lens' InAppProduct (Maybe InAppProductPrices)
-iapPrices
-  = lens _iapPrices (\ s a -> s{_iapPrices = a})
-
--- | The stock-keeping-unit (SKU) of the product, unique within an app.
-iapSku :: Lens' InAppProduct (Maybe Text)
-iapSku = lens _iapSku (\ s a -> s{_iapSku = a})
-
--- | Default price cannot be zero. In-app products can never be free. Default
--- price is always in the developer\'s Checkout merchant currency.
-iapDefaultPrice :: Lens' InAppProduct (Maybe (Maybe Price))
-iapDefaultPrice
-  = lens _iapDefaultPrice
-      (\ s a -> s{_iapDefaultPrice = a})
-
--- | List of localized title and description data.
-iapListings :: Lens' InAppProduct (Maybe InAppProductListings)
-iapListings
-  = lens _iapListings (\ s a -> s{_iapListings = a})
-
--- | The default language of the localized data, as defined by BCP 47. e.g.
--- \"en-US\", \"en-GB\".
-iapDefaultLanguage :: Lens' InAppProduct (Maybe Text)
-iapDefaultLanguage
-  = lens _iapDefaultLanguage
-      (\ s a -> s{_iapDefaultLanguage = a})
-
-instance FromJSON InAppProduct where
-        parseJSON
-          = withObject "InAppProduct"
-              (\ o ->
-                 InAppProduct <$>
-                   (o .:? "status") <*> (o .:? "trialPeriod") <*>
-                     (o .:? "packageName")
-                     <*> (o .:? "season")
-                     <*> (o .:? "purchaseType")
-                     <*> (o .:? "subscriptionPeriod")
-                     <*> (o .:? "prices")
-                     <*> (o .:? "sku")
-                     <*> (o .:? "defaultPrice")
-                     <*> (o .:? "listings")
+                 AppDetails <$>
+                   (o .:? "contactPhone") <*> (o .:? "contactEmail") <*>
+                     (o .:? "contactWebsite")
                      <*> (o .:? "defaultLanguage"))
 
-instance ToJSON InAppProduct where
-        toJSON InAppProduct{..}
+instance ToJSON AppDetails where
+        toJSON AppDetails{..}
           = object
               (catMaybes
-                 [("status" .=) <$> _iapStatus,
-                  ("trialPeriod" .=) <$> _iapTrialPeriod,
-                  ("packageName" .=) <$> _iapPackageName,
-                  ("season" .=) <$> _iapSeason,
-                  ("purchaseType" .=) <$> _iapPurchaseType,
-                  ("subscriptionPeriod" .=) <$> _iapSubscriptionPeriod,
-                  ("prices" .=) <$> _iapPrices, ("sku" .=) <$> _iapSku,
-                  ("defaultPrice" .=) <$> _iapDefaultPrice,
-                  ("listings" .=) <$> _iapListings,
-                  ("defaultLanguage" .=) <$> _iapDefaultLanguage])
-
---
--- /See:/ 'inAppProductListing' smart constructor.
-data InAppProductListing = InAppProductListing
-    { _iaplTitle       :: !(Maybe Text)
-    , _iaplDescription :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'InAppProductListing' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'iaplTitle'
---
--- * 'iaplDescription'
-inAppProductListing
-    :: InAppProductListing
-inAppProductListing =
-    InAppProductListing
-    { _iaplTitle = Nothing
-    , _iaplDescription = Nothing
-    }
-
-iaplTitle :: Lens' InAppProductListing (Maybe Text)
-iaplTitle
-  = lens _iaplTitle (\ s a -> s{_iaplTitle = a})
-
-iaplDescription :: Lens' InAppProductListing (Maybe Text)
-iaplDescription
-  = lens _iaplDescription
-      (\ s a -> s{_iaplDescription = a})
-
-instance FromJSON InAppProductListing where
-        parseJSON
-          = withObject "InAppProductListing"
-              (\ o ->
-                 InAppProductListing <$>
-                   (o .:? "title") <*> (o .:? "description"))
-
-instance ToJSON InAppProductListing where
-        toJSON InAppProductListing{..}
-          = object
-              (catMaybes
-                 [("title" .=) <$> _iaplTitle,
-                  ("description" .=) <$> _iaplDescription])
-
--- | List of localized title and description data.
---
--- /See:/ 'inAppProductListings' smart constructor.
-data InAppProductListings =
-    InAppProductListings
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'InAppProductListings' with the minimum fields required to make a request.
---
-inAppProductListings
-    :: InAppProductListings
-inAppProductListings = InAppProductListings
-
-instance FromJSON InAppProductListings where
-        parseJSON
-          = withObject "InAppProductListings"
-              (\ o -> pure InAppProductListings)
-
-instance ToJSON InAppProductListings where
-        toJSON = const (Object mempty)
-
--- | Prices per buyer region. None of these prices should be zero. In-app
--- products can never be free.
---
--- /See:/ 'inAppProductPrices' smart constructor.
-data InAppProductPrices =
-    InAppProductPrices
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'InAppProductPrices' with the minimum fields required to make a request.
---
-inAppProductPrices
-    :: InAppProductPrices
-inAppProductPrices = InAppProductPrices
-
-instance FromJSON InAppProductPrices where
-        parseJSON
-          = withObject "InAppProductPrices"
-              (\ o -> pure InAppProductPrices)
-
-instance ToJSON InAppProductPrices where
-        toJSON = const (Object mempty)
+                 [("contactPhone" .=) <$> _adContactPhone,
+                  ("contactEmail" .=) <$> _adContactEmail,
+                  ("contactWebsite" .=) <$> _adContactWebsite,
+                  ("defaultLanguage" .=) <$> _adDefaultLanguage])
 
 --
 -- /See:/ 'inappproductsBatchRequest' smart constructor.
@@ -1355,325 +2536,6 @@ instance ToJSON InappproductsBatchRequest where
           = object (catMaybes [("entrys" .=) <$> _iEntrys])
 
 --
--- /See:/ 'inappproductsBatchRequestEntry' smart constructor.
-data InappproductsBatchRequestEntry = InappproductsBatchRequestEntry
-    { _iMethodName                 :: !(Maybe Text)
-    , _iInappproductsinsertrequest :: !(Maybe (Maybe InappproductsInsertRequest))
-    , _iInappproductsupdaterequest :: !(Maybe (Maybe InappproductsUpdateRequest))
-    , _iBatchId                    :: !(Maybe Word32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'InappproductsBatchRequestEntry' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'iMethodName'
---
--- * 'iInappproductsinsertrequest'
---
--- * 'iInappproductsupdaterequest'
---
--- * 'iBatchId'
-inappproductsBatchRequestEntry
-    :: InappproductsBatchRequestEntry
-inappproductsBatchRequestEntry =
-    InappproductsBatchRequestEntry
-    { _iMethodName = Nothing
-    , _iInappproductsinsertrequest = Nothing
-    , _iInappproductsupdaterequest = Nothing
-    , _iBatchId = Nothing
-    }
-
-iMethodName :: Lens' InappproductsBatchRequestEntry (Maybe Text)
-iMethodName
-  = lens _iMethodName (\ s a -> s{_iMethodName = a})
-
-iInappproductsinsertrequest :: Lens' InappproductsBatchRequestEntry (Maybe (Maybe InappproductsInsertRequest))
-iInappproductsinsertrequest
-  = lens _iInappproductsinsertrequest
-      (\ s a -> s{_iInappproductsinsertrequest = a})
-
-iInappproductsupdaterequest :: Lens' InappproductsBatchRequestEntry (Maybe (Maybe InappproductsUpdateRequest))
-iInappproductsupdaterequest
-  = lens _iInappproductsupdaterequest
-      (\ s a -> s{_iInappproductsupdaterequest = a})
-
-iBatchId :: Lens' InappproductsBatchRequestEntry (Maybe Word32)
-iBatchId = lens _iBatchId (\ s a -> s{_iBatchId = a})
-
-instance FromJSON InappproductsBatchRequestEntry
-         where
-        parseJSON
-          = withObject "InappproductsBatchRequestEntry"
-              (\ o ->
-                 InappproductsBatchRequestEntry <$>
-                   (o .:? "methodName") <*>
-                     (o .:? "inappproductsinsertrequest")
-                     <*> (o .:? "inappproductsupdaterequest")
-                     <*> (o .:? "batchId"))
-
-instance ToJSON InappproductsBatchRequestEntry where
-        toJSON InappproductsBatchRequestEntry{..}
-          = object
-              (catMaybes
-                 [("methodName" .=) <$> _iMethodName,
-                  ("inappproductsinsertrequest" .=) <$>
-                    _iInappproductsinsertrequest,
-                  ("inappproductsupdaterequest" .=) <$>
-                    _iInappproductsupdaterequest,
-                  ("batchId" .=) <$> _iBatchId])
-
---
--- /See:/ 'inappproductsBatchResponse' smart constructor.
-data InappproductsBatchResponse = InappproductsBatchResponse
-    { _ibrEntrys :: !(Maybe [Maybe InappproductsBatchResponseEntry])
-    , _ibrKind   :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'InappproductsBatchResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ibrEntrys'
---
--- * 'ibrKind'
-inappproductsBatchResponse
-    :: InappproductsBatchResponse
-inappproductsBatchResponse =
-    InappproductsBatchResponse
-    { _ibrEntrys = Nothing
-    , _ibrKind = "androidpublisher#inappproductsBatchResponse"
-    }
-
-ibrEntrys :: Lens' InappproductsBatchResponse [Maybe InappproductsBatchResponseEntry]
-ibrEntrys
-  = lens _ibrEntrys (\ s a -> s{_ibrEntrys = a}) .
-      _Default
-      . _Coerce
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"androidpublisher#inappproductsBatchResponse\".
-ibrKind :: Lens' InappproductsBatchResponse Text
-ibrKind = lens _ibrKind (\ s a -> s{_ibrKind = a})
-
-instance FromJSON InappproductsBatchResponse where
-        parseJSON
-          = withObject "InappproductsBatchResponse"
-              (\ o ->
-                 InappproductsBatchResponse <$>
-                   (o .:? "entrys" .!= mempty) <*>
-                     (o .:? "kind" .!=
-                        "androidpublisher#inappproductsBatchResponse"))
-
-instance ToJSON InappproductsBatchResponse where
-        toJSON InappproductsBatchResponse{..}
-          = object
-              (catMaybes
-                 [("entrys" .=) <$> _ibrEntrys,
-                  Just ("kind" .= _ibrKind)])
-
---
--- /See:/ 'inappproductsBatchResponseEntry' smart constructor.
-data InappproductsBatchResponseEntry = InappproductsBatchResponseEntry
-    { _ibreInappproductsupdateresponse :: !(Maybe (Maybe InappproductsUpdateResponse))
-    , _ibreInappproductsinsertresponse :: !(Maybe (Maybe InappproductsInsertResponse))
-    , _ibreBatchId                     :: !(Maybe Word32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'InappproductsBatchResponseEntry' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ibreInappproductsupdateresponse'
---
--- * 'ibreInappproductsinsertresponse'
---
--- * 'ibreBatchId'
-inappproductsBatchResponseEntry
-    :: InappproductsBatchResponseEntry
-inappproductsBatchResponseEntry =
-    InappproductsBatchResponseEntry
-    { _ibreInappproductsupdateresponse = Nothing
-    , _ibreInappproductsinsertresponse = Nothing
-    , _ibreBatchId = Nothing
-    }
-
-ibreInappproductsupdateresponse :: Lens' InappproductsBatchResponseEntry (Maybe (Maybe InappproductsUpdateResponse))
-ibreInappproductsupdateresponse
-  = lens _ibreInappproductsupdateresponse
-      (\ s a -> s{_ibreInappproductsupdateresponse = a})
-
-ibreInappproductsinsertresponse :: Lens' InappproductsBatchResponseEntry (Maybe (Maybe InappproductsInsertResponse))
-ibreInappproductsinsertresponse
-  = lens _ibreInappproductsinsertresponse
-      (\ s a -> s{_ibreInappproductsinsertresponse = a})
-
-ibreBatchId :: Lens' InappproductsBatchResponseEntry (Maybe Word32)
-ibreBatchId
-  = lens _ibreBatchId (\ s a -> s{_ibreBatchId = a})
-
-instance FromJSON InappproductsBatchResponseEntry
-         where
-        parseJSON
-          = withObject "InappproductsBatchResponseEntry"
-              (\ o ->
-                 InappproductsBatchResponseEntry <$>
-                   (o .:? "inappproductsupdateresponse") <*>
-                     (o .:? "inappproductsinsertresponse")
-                     <*> (o .:? "batchId"))
-
-instance ToJSON InappproductsBatchResponseEntry where
-        toJSON InappproductsBatchResponseEntry{..}
-          = object
-              (catMaybes
-                 [("inappproductsupdateresponse" .=) <$>
-                    _ibreInappproductsupdateresponse,
-                  ("inappproductsinsertresponse" .=) <$>
-                    _ibreInappproductsinsertresponse,
-                  ("batchId" .=) <$> _ibreBatchId])
-
---
--- /See:/ 'inappproductsInsertRequest' smart constructor.
-newtype InappproductsInsertRequest = InappproductsInsertRequest
-    { _iirInappproduct :: Maybe (Maybe InAppProduct)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'InappproductsInsertRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'iirInappproduct'
-inappproductsInsertRequest
-    :: InappproductsInsertRequest
-inappproductsInsertRequest =
-    InappproductsInsertRequest
-    { _iirInappproduct = Nothing
-    }
-
-iirInappproduct :: Lens' InappproductsInsertRequest (Maybe (Maybe InAppProduct))
-iirInappproduct
-  = lens _iirInappproduct
-      (\ s a -> s{_iirInappproduct = a})
-
-instance FromJSON InappproductsInsertRequest where
-        parseJSON
-          = withObject "InappproductsInsertRequest"
-              (\ o ->
-                 InappproductsInsertRequest <$>
-                   (o .:? "inappproduct"))
-
-instance ToJSON InappproductsInsertRequest where
-        toJSON InappproductsInsertRequest{..}
-          = object
-              (catMaybes
-                 [("inappproduct" .=) <$> _iirInappproduct])
-
---
--- /See:/ 'inappproductsInsertResponse' smart constructor.
-newtype InappproductsInsertResponse = InappproductsInsertResponse
-    { _iInappproduct :: Maybe (Maybe InAppProduct)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'InappproductsInsertResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'iInappproduct'
-inappproductsInsertResponse
-    :: InappproductsInsertResponse
-inappproductsInsertResponse =
-    InappproductsInsertResponse
-    { _iInappproduct = Nothing
-    }
-
-iInappproduct :: Lens' InappproductsInsertResponse (Maybe (Maybe InAppProduct))
-iInappproduct
-  = lens _iInappproduct
-      (\ s a -> s{_iInappproduct = a})
-
-instance FromJSON InappproductsInsertResponse where
-        parseJSON
-          = withObject "InappproductsInsertResponse"
-              (\ o ->
-                 InappproductsInsertResponse <$>
-                   (o .:? "inappproduct"))
-
-instance ToJSON InappproductsInsertResponse where
-        toJSON InappproductsInsertResponse{..}
-          = object
-              (catMaybes [("inappproduct" .=) <$> _iInappproduct])
-
---
--- /See:/ 'inappproductsListResponse' smart constructor.
-data InappproductsListResponse = InappproductsListResponse
-    { _ilrTokenPagination :: !(Maybe (Maybe TokenPagination))
-    , _ilrPageInfo        :: !(Maybe (Maybe PageInfo))
-    , _ilrKind            :: !Text
-    , _ilrInappproduct    :: !(Maybe [Maybe InAppProduct])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'InappproductsListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ilrTokenPagination'
---
--- * 'ilrPageInfo'
---
--- * 'ilrKind'
---
--- * 'ilrInappproduct'
-inappproductsListResponse
-    :: InappproductsListResponse
-inappproductsListResponse =
-    InappproductsListResponse
-    { _ilrTokenPagination = Nothing
-    , _ilrPageInfo = Nothing
-    , _ilrKind = "androidpublisher#inappproductsListResponse"
-    , _ilrInappproduct = Nothing
-    }
-
-ilrTokenPagination :: Lens' InappproductsListResponse (Maybe (Maybe TokenPagination))
-ilrTokenPagination
-  = lens _ilrTokenPagination
-      (\ s a -> s{_ilrTokenPagination = a})
-
-ilrPageInfo :: Lens' InappproductsListResponse (Maybe (Maybe PageInfo))
-ilrPageInfo
-  = lens _ilrPageInfo (\ s a -> s{_ilrPageInfo = a})
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"androidpublisher#inappproductsListResponse\".
-ilrKind :: Lens' InappproductsListResponse Text
-ilrKind = lens _ilrKind (\ s a -> s{_ilrKind = a})
-
-ilrInappproduct :: Lens' InappproductsListResponse [Maybe InAppProduct]
-ilrInappproduct
-  = lens _ilrInappproduct
-      (\ s a -> s{_ilrInappproduct = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON InappproductsListResponse where
-        parseJSON
-          = withObject "InappproductsListResponse"
-              (\ o ->
-                 InappproductsListResponse <$>
-                   (o .:? "tokenPagination") <*> (o .:? "pageInfo") <*>
-                     (o .:? "kind" .!=
-                        "androidpublisher#inappproductsListResponse")
-                     <*> (o .:? "inappproduct" .!= mempty))
-
-instance ToJSON InappproductsListResponse where
-        toJSON InappproductsListResponse{..}
-          = object
-              (catMaybes
-                 [("tokenPagination" .=) <$> _ilrTokenPagination,
-                  ("pageInfo" .=) <$> _ilrPageInfo,
-                  Just ("kind" .= _ilrKind),
-                  ("inappproduct" .=) <$> _ilrInappproduct])
-
---
 -- /See:/ 'inappproductsUpdateRequest' smart constructor.
 newtype InappproductsUpdateRequest = InappproductsUpdateRequest
     { _inaInappproduct :: Maybe (Maybe InAppProduct)
@@ -1708,865 +2570,3 @@ instance ToJSON InappproductsUpdateRequest where
           = object
               (catMaybes
                  [("inappproduct" .=) <$> _inaInappproduct])
-
---
--- /See:/ 'inappproductsUpdateResponse' smart constructor.
-newtype InappproductsUpdateResponse = InappproductsUpdateResponse
-    { _iurInappproduct :: Maybe (Maybe InAppProduct)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'InappproductsUpdateResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'iurInappproduct'
-inappproductsUpdateResponse
-    :: InappproductsUpdateResponse
-inappproductsUpdateResponse =
-    InappproductsUpdateResponse
-    { _iurInappproduct = Nothing
-    }
-
-iurInappproduct :: Lens' InappproductsUpdateResponse (Maybe (Maybe InAppProduct))
-iurInappproduct
-  = lens _iurInappproduct
-      (\ s a -> s{_iurInappproduct = a})
-
-instance FromJSON InappproductsUpdateResponse where
-        parseJSON
-          = withObject "InappproductsUpdateResponse"
-              (\ o ->
-                 InappproductsUpdateResponse <$>
-                   (o .:? "inappproduct"))
-
-instance ToJSON InappproductsUpdateResponse where
-        toJSON InappproductsUpdateResponse{..}
-          = object
-              (catMaybes
-                 [("inappproduct" .=) <$> _iurInappproduct])
-
---
--- /See:/ 'listing' smart constructor.
-data Listing = Listing
-    { _lFullDescription  :: !(Maybe Text)
-    , _lVideo            :: !(Maybe Text)
-    , _lShortDescription :: !(Maybe Text)
-    , _lLanguage         :: !(Maybe Text)
-    , _lTitle            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Listing' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lFullDescription'
---
--- * 'lVideo'
---
--- * 'lShortDescription'
---
--- * 'lLanguage'
---
--- * 'lTitle'
-listing
-    :: Listing
-listing =
-    Listing
-    { _lFullDescription = Nothing
-    , _lVideo = Nothing
-    , _lShortDescription = Nothing
-    , _lLanguage = Nothing
-    , _lTitle = Nothing
-    }
-
--- | Full description of the app; this may be up to 4000 characters in
--- length.
-lFullDescription :: Lens' Listing (Maybe Text)
-lFullDescription
-  = lens _lFullDescription
-      (\ s a -> s{_lFullDescription = a})
-
--- | URL of a promotional YouTube video for the app.
-lVideo :: Lens' Listing (Maybe Text)
-lVideo = lens _lVideo (\ s a -> s{_lVideo = a})
-
--- | Short description of the app (previously known as promo text); this may
--- be up to 80 characters in length.
-lShortDescription :: Lens' Listing (Maybe Text)
-lShortDescription
-  = lens _lShortDescription
-      (\ s a -> s{_lShortDescription = a})
-
--- | Language localization code (for example, \"de-AT\" for Austrian German).
-lLanguage :: Lens' Listing (Maybe Text)
-lLanguage
-  = lens _lLanguage (\ s a -> s{_lLanguage = a})
-
--- | App\'s localized title.
-lTitle :: Lens' Listing (Maybe Text)
-lTitle = lens _lTitle (\ s a -> s{_lTitle = a})
-
-instance FromJSON Listing where
-        parseJSON
-          = withObject "Listing"
-              (\ o ->
-                 Listing <$>
-                   (o .:? "fullDescription") <*> (o .:? "video") <*>
-                     (o .:? "shortDescription")
-                     <*> (o .:? "language")
-                     <*> (o .:? "title"))
-
-instance ToJSON Listing where
-        toJSON Listing{..}
-          = object
-              (catMaybes
-                 [("fullDescription" .=) <$> _lFullDescription,
-                  ("video" .=) <$> _lVideo,
-                  ("shortDescription" .=) <$> _lShortDescription,
-                  ("language" .=) <$> _lLanguage,
-                  ("title" .=) <$> _lTitle])
-
---
--- /See:/ 'listingsListResponse' smart constructor.
-data ListingsListResponse = ListingsListResponse
-    { _llrKind     :: !Text
-    , _llrListings :: !(Maybe [Maybe Listing])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ListingsListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'llrKind'
---
--- * 'llrListings'
-listingsListResponse
-    :: ListingsListResponse
-listingsListResponse =
-    ListingsListResponse
-    { _llrKind = "androidpublisher#listingsListResponse"
-    , _llrListings = Nothing
-    }
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"androidpublisher#listingsListResponse\".
-llrKind :: Lens' ListingsListResponse Text
-llrKind = lens _llrKind (\ s a -> s{_llrKind = a})
-
-llrListings :: Lens' ListingsListResponse [Maybe Listing]
-llrListings
-  = lens _llrListings (\ s a -> s{_llrListings = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON ListingsListResponse where
-        parseJSON
-          = withObject "ListingsListResponse"
-              (\ o ->
-                 ListingsListResponse <$>
-                   (o .:? "kind" .!=
-                      "androidpublisher#listingsListResponse")
-                     <*> (o .:? "listings" .!= mempty))
-
-instance ToJSON ListingsListResponse where
-        toJSON ListingsListResponse{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _llrKind),
-                  ("listings" .=) <$> _llrListings])
-
---
--- /See:/ 'monthDay' smart constructor.
-data MonthDay = MonthDay
-    { _mdDay   :: !(Maybe Word32)
-    , _mdMonth :: !(Maybe Word32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'MonthDay' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'mdDay'
---
--- * 'mdMonth'
-monthDay
-    :: MonthDay
-monthDay =
-    MonthDay
-    { _mdDay = Nothing
-    , _mdMonth = Nothing
-    }
-
--- | Day of a month, value in [1, 31] range. Valid range depends on the
--- specified month.
-mdDay :: Lens' MonthDay (Maybe Word32)
-mdDay = lens _mdDay (\ s a -> s{_mdDay = a})
-
--- | Month of a year. e.g. 1 = JAN, 2 = FEB etc.
-mdMonth :: Lens' MonthDay (Maybe Word32)
-mdMonth = lens _mdMonth (\ s a -> s{_mdMonth = a})
-
-instance FromJSON MonthDay where
-        parseJSON
-          = withObject "MonthDay"
-              (\ o ->
-                 MonthDay <$> (o .:? "day") <*> (o .:? "month"))
-
-instance ToJSON MonthDay where
-        toJSON MonthDay{..}
-          = object
-              (catMaybes
-                 [("day" .=) <$> _mdDay, ("month" .=) <$> _mdMonth])
-
---
--- /See:/ 'pageInfo' smart constructor.
-data PageInfo = PageInfo
-    { _piResultPerPage :: !(Maybe Int32)
-    , _piTotalResults  :: !(Maybe Int32)
-    , _piStartIndex    :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PageInfo' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'piResultPerPage'
---
--- * 'piTotalResults'
---
--- * 'piStartIndex'
-pageInfo
-    :: PageInfo
-pageInfo =
-    PageInfo
-    { _piResultPerPage = Nothing
-    , _piTotalResults = Nothing
-    , _piStartIndex = Nothing
-    }
-
-piResultPerPage :: Lens' PageInfo (Maybe Int32)
-piResultPerPage
-  = lens _piResultPerPage
-      (\ s a -> s{_piResultPerPage = a})
-
-piTotalResults :: Lens' PageInfo (Maybe Int32)
-piTotalResults
-  = lens _piTotalResults
-      (\ s a -> s{_piTotalResults = a})
-
-piStartIndex :: Lens' PageInfo (Maybe Int32)
-piStartIndex
-  = lens _piStartIndex (\ s a -> s{_piStartIndex = a})
-
-instance FromJSON PageInfo where
-        parseJSON
-          = withObject "PageInfo"
-              (\ o ->
-                 PageInfo <$>
-                   (o .:? "resultPerPage") <*> (o .:? "totalResults")
-                     <*> (o .:? "startIndex"))
-
-instance ToJSON PageInfo where
-        toJSON PageInfo{..}
-          = object
-              (catMaybes
-                 [("resultPerPage" .=) <$> _piResultPerPage,
-                  ("totalResults" .=) <$> _piTotalResults,
-                  ("startIndex" .=) <$> _piStartIndex])
-
---
--- /See:/ 'price' smart constructor.
-data Price = Price
-    { _pPriceMicros :: !(Maybe Text)
-    , _pCurrency    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Price' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'pPriceMicros'
---
--- * 'pCurrency'
-price
-    :: Price
-price =
-    Price
-    { _pPriceMicros = Nothing
-    , _pCurrency = Nothing
-    }
-
--- | The price in millionths of the currency base unit represented as a
--- string.
-pPriceMicros :: Lens' Price (Maybe Text)
-pPriceMicros
-  = lens _pPriceMicros (\ s a -> s{_pPriceMicros = a})
-
--- | 3 letter Currency code, as defined by ISO 4217.
-pCurrency :: Lens' Price (Maybe Text)
-pCurrency
-  = lens _pCurrency (\ s a -> s{_pCurrency = a})
-
-instance FromJSON Price where
-        parseJSON
-          = withObject "Price"
-              (\ o ->
-                 Price <$>
-                   (o .:? "priceMicros") <*> (o .:? "currency"))
-
-instance ToJSON Price where
-        toJSON Price{..}
-          = object
-              (catMaybes
-                 [("priceMicros" .=) <$> _pPriceMicros,
-                  ("currency" .=) <$> _pCurrency])
-
--- | A ProductPurchase resource indicates the status of a user\'s inapp
--- product purchase.
---
--- /See:/ 'productPurchase' smart constructor.
-data ProductPurchase = ProductPurchase
-    { _ppPurchaseState      :: !(Maybe Int32)
-    , _ppConsumptionState   :: !(Maybe Int32)
-    , _ppKind               :: !Text
-    , _ppPurchaseTimeMillis :: !(Maybe Int64)
-    , _ppDeveloperPayload   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ProductPurchase' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ppPurchaseState'
---
--- * 'ppConsumptionState'
---
--- * 'ppKind'
---
--- * 'ppPurchaseTimeMillis'
---
--- * 'ppDeveloperPayload'
-productPurchase
-    :: ProductPurchase
-productPurchase =
-    ProductPurchase
-    { _ppPurchaseState = Nothing
-    , _ppConsumptionState = Nothing
-    , _ppKind = "androidpublisher#productPurchase"
-    , _ppPurchaseTimeMillis = Nothing
-    , _ppDeveloperPayload = Nothing
-    }
-
--- | The purchase state of the order. Possible values are: - Purchased -
--- Cancelled
-ppPurchaseState :: Lens' ProductPurchase (Maybe Int32)
-ppPurchaseState
-  = lens _ppPurchaseState
-      (\ s a -> s{_ppPurchaseState = a})
-
--- | The consumption state of the inapp product. Possible values are: - Yet
--- to be consumed - Consumed
-ppConsumptionState :: Lens' ProductPurchase (Maybe Int32)
-ppConsumptionState
-  = lens _ppConsumptionState
-      (\ s a -> s{_ppConsumptionState = a})
-
--- | This kind represents an inappPurchase object in the androidpublisher
--- service.
-ppKind :: Lens' ProductPurchase Text
-ppKind = lens _ppKind (\ s a -> s{_ppKind = a})
-
--- | The time the product was purchased, in milliseconds since the epoch (Jan
--- 1, 1970).
-ppPurchaseTimeMillis :: Lens' ProductPurchase (Maybe Int64)
-ppPurchaseTimeMillis
-  = lens _ppPurchaseTimeMillis
-      (\ s a -> s{_ppPurchaseTimeMillis = a})
-
--- | A developer-specified string that contains supplemental information
--- about an order.
-ppDeveloperPayload :: Lens' ProductPurchase (Maybe Text)
-ppDeveloperPayload
-  = lens _ppDeveloperPayload
-      (\ s a -> s{_ppDeveloperPayload = a})
-
-instance FromJSON ProductPurchase where
-        parseJSON
-          = withObject "ProductPurchase"
-              (\ o ->
-                 ProductPurchase <$>
-                   (o .:? "purchaseState") <*>
-                     (o .:? "consumptionState")
-                     <*>
-                     (o .:? "kind" .!= "androidpublisher#productPurchase")
-                     <*> (o .:? "purchaseTimeMillis")
-                     <*> (o .:? "developerPayload"))
-
-instance ToJSON ProductPurchase where
-        toJSON ProductPurchase{..}
-          = object
-              (catMaybes
-                 [("purchaseState" .=) <$> _ppPurchaseState,
-                  ("consumptionState" .=) <$> _ppConsumptionState,
-                  Just ("kind" .= _ppKind),
-                  ("purchaseTimeMillis" .=) <$> _ppPurchaseTimeMillis,
-                  ("developerPayload" .=) <$> _ppDeveloperPayload])
-
---
--- /See:/ 'season' smart constructor.
-data Season = Season
-    { _sStart :: !(Maybe (Maybe MonthDay))
-    , _sEnd   :: !(Maybe (Maybe MonthDay))
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Season' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'sStart'
---
--- * 'sEnd'
-season
-    :: Season
-season =
-    Season
-    { _sStart = Nothing
-    , _sEnd = Nothing
-    }
-
--- | Inclusive start date of the recurrence period.
-sStart :: Lens' Season (Maybe (Maybe MonthDay))
-sStart = lens _sStart (\ s a -> s{_sStart = a})
-
--- | Inclusive end date of the recurrence period.
-sEnd :: Lens' Season (Maybe (Maybe MonthDay))
-sEnd = lens _sEnd (\ s a -> s{_sEnd = a})
-
-instance FromJSON Season where
-        parseJSON
-          = withObject "Season"
-              (\ o -> Season <$> (o .:? "start") <*> (o .:? "end"))
-
-instance ToJSON Season where
-        toJSON Season{..}
-          = object
-              (catMaybes
-                 [("start" .=) <$> _sStart, ("end" .=) <$> _sEnd])
-
--- | A SubscriptionDeferralInfo contains the data needed to defer a
--- subscription purchase to a future expiry time.
---
--- /See:/ 'subscriptionDeferralInfo' smart constructor.
-data SubscriptionDeferralInfo = SubscriptionDeferralInfo
-    { _sdiDesiredExpiryTimeMillis  :: !(Maybe Int64)
-    , _sdiExpectedExpiryTimeMillis :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'SubscriptionDeferralInfo' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'sdiDesiredExpiryTimeMillis'
---
--- * 'sdiExpectedExpiryTimeMillis'
-subscriptionDeferralInfo
-    :: SubscriptionDeferralInfo
-subscriptionDeferralInfo =
-    SubscriptionDeferralInfo
-    { _sdiDesiredExpiryTimeMillis = Nothing
-    , _sdiExpectedExpiryTimeMillis = Nothing
-    }
-
--- | The desired next expiry time for the subscription in milliseconds since
--- Epoch. The given time must be after the current expiry time for the
--- subscription.
-sdiDesiredExpiryTimeMillis :: Lens' SubscriptionDeferralInfo (Maybe Int64)
-sdiDesiredExpiryTimeMillis
-  = lens _sdiDesiredExpiryTimeMillis
-      (\ s a -> s{_sdiDesiredExpiryTimeMillis = a})
-
--- | The expected expiry time for the subscription. If the current expiry
--- time for the subscription is not the value specified here, the deferral
--- will not occur.
-sdiExpectedExpiryTimeMillis :: Lens' SubscriptionDeferralInfo (Maybe Int64)
-sdiExpectedExpiryTimeMillis
-  = lens _sdiExpectedExpiryTimeMillis
-      (\ s a -> s{_sdiExpectedExpiryTimeMillis = a})
-
-instance FromJSON SubscriptionDeferralInfo where
-        parseJSON
-          = withObject "SubscriptionDeferralInfo"
-              (\ o ->
-                 SubscriptionDeferralInfo <$>
-                   (o .:? "desiredExpiryTimeMillis") <*>
-                     (o .:? "expectedExpiryTimeMillis"))
-
-instance ToJSON SubscriptionDeferralInfo where
-        toJSON SubscriptionDeferralInfo{..}
-          = object
-              (catMaybes
-                 [("desiredExpiryTimeMillis" .=) <$>
-                    _sdiDesiredExpiryTimeMillis,
-                  ("expectedExpiryTimeMillis" .=) <$>
-                    _sdiExpectedExpiryTimeMillis])
-
--- | A SubscriptionPurchase resource indicates the status of a user\'s
--- subscription purchase.
---
--- /See:/ 'subscriptionPurchase' smart constructor.
-data SubscriptionPurchase = SubscriptionPurchase
-    { _spKind             :: !Text
-    , _spExpiryTimeMillis :: !(Maybe Int64)
-    , _spAutoRenewing     :: !(Maybe Bool)
-    , _spStartTimeMillis  :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'SubscriptionPurchase' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'spKind'
---
--- * 'spExpiryTimeMillis'
---
--- * 'spAutoRenewing'
---
--- * 'spStartTimeMillis'
-subscriptionPurchase
-    :: SubscriptionPurchase
-subscriptionPurchase =
-    SubscriptionPurchase
-    { _spKind = "androidpublisher#subscriptionPurchase"
-    , _spExpiryTimeMillis = Nothing
-    , _spAutoRenewing = Nothing
-    , _spStartTimeMillis = Nothing
-    }
-
--- | This kind represents a subscriptionPurchase object in the
--- androidpublisher service.
-spKind :: Lens' SubscriptionPurchase Text
-spKind = lens _spKind (\ s a -> s{_spKind = a})
-
--- | Time at which the subscription will expire, in milliseconds since Epoch.
-spExpiryTimeMillis :: Lens' SubscriptionPurchase (Maybe Int64)
-spExpiryTimeMillis
-  = lens _spExpiryTimeMillis
-      (\ s a -> s{_spExpiryTimeMillis = a})
-
--- | Whether the subscription will automatically be renewed when it reaches
--- its current expiry time.
-spAutoRenewing :: Lens' SubscriptionPurchase (Maybe Bool)
-spAutoRenewing
-  = lens _spAutoRenewing
-      (\ s a -> s{_spAutoRenewing = a})
-
--- | Time at which the subscription was granted, in milliseconds since Epoch.
-spStartTimeMillis :: Lens' SubscriptionPurchase (Maybe Int64)
-spStartTimeMillis
-  = lens _spStartTimeMillis
-      (\ s a -> s{_spStartTimeMillis = a})
-
-instance FromJSON SubscriptionPurchase where
-        parseJSON
-          = withObject "SubscriptionPurchase"
-              (\ o ->
-                 SubscriptionPurchase <$>
-                   (o .:? "kind" .!=
-                      "androidpublisher#subscriptionPurchase")
-                     <*> (o .:? "expiryTimeMillis")
-                     <*> (o .:? "autoRenewing")
-                     <*> (o .:? "startTimeMillis"))
-
-instance ToJSON SubscriptionPurchase where
-        toJSON SubscriptionPurchase{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _spKind),
-                  ("expiryTimeMillis" .=) <$> _spExpiryTimeMillis,
-                  ("autoRenewing" .=) <$> _spAutoRenewing,
-                  ("startTimeMillis" .=) <$> _spStartTimeMillis])
-
---
--- /See:/ 'subscriptionPurchasesDeferRequest' smart constructor.
-newtype SubscriptionPurchasesDeferRequest = SubscriptionPurchasesDeferRequest
-    { _spdrDeferralInfo :: Maybe (Maybe SubscriptionDeferralInfo)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'SubscriptionPurchasesDeferRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'spdrDeferralInfo'
-subscriptionPurchasesDeferRequest
-    :: SubscriptionPurchasesDeferRequest
-subscriptionPurchasesDeferRequest =
-    SubscriptionPurchasesDeferRequest
-    { _spdrDeferralInfo = Nothing
-    }
-
--- | The information about the new desired expiry time for the subscription.
-spdrDeferralInfo :: Lens' SubscriptionPurchasesDeferRequest (Maybe (Maybe SubscriptionDeferralInfo))
-spdrDeferralInfo
-  = lens _spdrDeferralInfo
-      (\ s a -> s{_spdrDeferralInfo = a})
-
-instance FromJSON SubscriptionPurchasesDeferRequest
-         where
-        parseJSON
-          = withObject "SubscriptionPurchasesDeferRequest"
-              (\ o ->
-                 SubscriptionPurchasesDeferRequest <$>
-                   (o .:? "deferralInfo"))
-
-instance ToJSON SubscriptionPurchasesDeferRequest
-         where
-        toJSON SubscriptionPurchasesDeferRequest{..}
-          = object
-              (catMaybes
-                 [("deferralInfo" .=) <$> _spdrDeferralInfo])
-
---
--- /See:/ 'subscriptionPurchasesDeferResponse' smart constructor.
-newtype SubscriptionPurchasesDeferResponse = SubscriptionPurchasesDeferResponse
-    { _spdrNewExpiryTimeMillis :: Maybe Int64
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'SubscriptionPurchasesDeferResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'spdrNewExpiryTimeMillis'
-subscriptionPurchasesDeferResponse
-    :: SubscriptionPurchasesDeferResponse
-subscriptionPurchasesDeferResponse =
-    SubscriptionPurchasesDeferResponse
-    { _spdrNewExpiryTimeMillis = Nothing
-    }
-
--- | The new expiry time for the subscription in milliseconds since the
--- Epoch.
-spdrNewExpiryTimeMillis :: Lens' SubscriptionPurchasesDeferResponse (Maybe Int64)
-spdrNewExpiryTimeMillis
-  = lens _spdrNewExpiryTimeMillis
-      (\ s a -> s{_spdrNewExpiryTimeMillis = a})
-
-instance FromJSON SubscriptionPurchasesDeferResponse
-         where
-        parseJSON
-          = withObject "SubscriptionPurchasesDeferResponse"
-              (\ o ->
-                 SubscriptionPurchasesDeferResponse <$>
-                   (o .:? "newExpiryTimeMillis"))
-
-instance ToJSON SubscriptionPurchasesDeferResponse
-         where
-        toJSON SubscriptionPurchasesDeferResponse{..}
-          = object
-              (catMaybes
-                 [("newExpiryTimeMillis" .=) <$>
-                    _spdrNewExpiryTimeMillis])
-
---
--- /See:/ 'testers' smart constructor.
-data Testers = Testers
-    { _tGooglePlusCommunities :: !(Maybe [Text])
-    , _tGoogleGroups          :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Testers' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'tGooglePlusCommunities'
---
--- * 'tGoogleGroups'
-testers
-    :: Testers
-testers =
-    Testers
-    { _tGooglePlusCommunities = Nothing
-    , _tGoogleGroups = Nothing
-    }
-
-tGooglePlusCommunities :: Lens' Testers [Text]
-tGooglePlusCommunities
-  = lens _tGooglePlusCommunities
-      (\ s a -> s{_tGooglePlusCommunities = a})
-      . _Default
-      . _Coerce
-
-tGoogleGroups :: Lens' Testers [Text]
-tGoogleGroups
-  = lens _tGoogleGroups
-      (\ s a -> s{_tGoogleGroups = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON Testers where
-        parseJSON
-          = withObject "Testers"
-              (\ o ->
-                 Testers <$>
-                   (o .:? "googlePlusCommunities" .!= mempty) <*>
-                     (o .:? "googleGroups" .!= mempty))
-
-instance ToJSON Testers where
-        toJSON Testers{..}
-          = object
-              (catMaybes
-                 [("googlePlusCommunities" .=) <$>
-                    _tGooglePlusCommunities,
-                  ("googleGroups" .=) <$> _tGoogleGroups])
-
---
--- /See:/ 'tokenPagination' smart constructor.
-data TokenPagination = TokenPagination
-    { _tpNextPageToken     :: !(Maybe Text)
-    , _tpPreviousPageToken :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'TokenPagination' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'tpNextPageToken'
---
--- * 'tpPreviousPageToken'
-tokenPagination
-    :: TokenPagination
-tokenPagination =
-    TokenPagination
-    { _tpNextPageToken = Nothing
-    , _tpPreviousPageToken = Nothing
-    }
-
-tpNextPageToken :: Lens' TokenPagination (Maybe Text)
-tpNextPageToken
-  = lens _tpNextPageToken
-      (\ s a -> s{_tpNextPageToken = a})
-
-tpPreviousPageToken :: Lens' TokenPagination (Maybe Text)
-tpPreviousPageToken
-  = lens _tpPreviousPageToken
-      (\ s a -> s{_tpPreviousPageToken = a})
-
-instance FromJSON TokenPagination where
-        parseJSON
-          = withObject "TokenPagination"
-              (\ o ->
-                 TokenPagination <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "previousPageToken"))
-
-instance ToJSON TokenPagination where
-        toJSON TokenPagination{..}
-          = object
-              (catMaybes
-                 [("nextPageToken" .=) <$> _tpNextPageToken,
-                  ("previousPageToken" .=) <$> _tpPreviousPageToken])
-
---
--- /See:/ 'track' smart constructor.
-data Track = Track
-    { _tVersionCodes :: !(Maybe [Int32])
-    , _tTrack        :: !(Maybe Text)
-    , _tUserFraction :: !(Maybe Double)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Track' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'tVersionCodes'
---
--- * 'tTrack'
---
--- * 'tUserFraction'
-track
-    :: Track
-track =
-    Track
-    { _tVersionCodes = Nothing
-    , _tTrack = Nothing
-    , _tUserFraction = Nothing
-    }
-
-tVersionCodes :: Lens' Track [Int32]
-tVersionCodes
-  = lens _tVersionCodes
-      (\ s a -> s{_tVersionCodes = a})
-      . _Default
-      . _Coerce
-
-tTrack :: Lens' Track (Maybe Text)
-tTrack = lens _tTrack (\ s a -> s{_tTrack = a})
-
-tUserFraction :: Lens' Track (Maybe Double)
-tUserFraction
-  = lens _tUserFraction
-      (\ s a -> s{_tUserFraction = a})
-
-instance FromJSON Track where
-        parseJSON
-          = withObject "Track"
-              (\ o ->
-                 Track <$>
-                   (o .:? "versionCodes" .!= mempty) <*> (o .:? "track")
-                     <*> (o .:? "userFraction"))
-
-instance ToJSON Track where
-        toJSON Track{..}
-          = object
-              (catMaybes
-                 [("versionCodes" .=) <$> _tVersionCodes,
-                  ("track" .=) <$> _tTrack,
-                  ("userFraction" .=) <$> _tUserFraction])
-
---
--- /See:/ 'tracksListResponse' smart constructor.
-data TracksListResponse = TracksListResponse
-    { _tlrTracks :: !(Maybe [Maybe Track])
-    , _tlrKind   :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'TracksListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'tlrTracks'
---
--- * 'tlrKind'
-tracksListResponse
-    :: TracksListResponse
-tracksListResponse =
-    TracksListResponse
-    { _tlrTracks = Nothing
-    , _tlrKind = "androidpublisher#tracksListResponse"
-    }
-
-tlrTracks :: Lens' TracksListResponse [Maybe Track]
-tlrTracks
-  = lens _tlrTracks (\ s a -> s{_tlrTracks = a}) .
-      _Default
-      . _Coerce
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"androidpublisher#tracksListResponse\".
-tlrKind :: Lens' TracksListResponse Text
-tlrKind = lens _tlrKind (\ s a -> s{_tlrKind = a})
-
-instance FromJSON TracksListResponse where
-        parseJSON
-          = withObject "TracksListResponse"
-              (\ o ->
-                 TracksListResponse <$>
-                   (o .:? "tracks" .!= mempty) <*>
-                     (o .:? "kind" .!=
-                        "androidpublisher#tracksListResponse"))
-
-instance ToJSON TracksListResponse where
-        toJSON TracksListResponse{..}
-          = object
-              (catMaybes
-                 [("tracks" .=) <$> _tlrTracks,
-                  Just ("kind" .= _tlrKind)])

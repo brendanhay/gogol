@@ -17,14 +17,35 @@
 -- /See:/ <https://developers.google.com/accounts/docs/OAuth2 Google OAuth2 API Reference>
 module Network.Google.OAuth2
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** Google OAuth2 API
       OAuth2
-    , UserinfoAPI
-    , V2API
-    , MeAPI
-    , MeGet
+    , oAuth2
+    , oAuth2URL
+
+    -- ** oauth2.userinfo.v2.me.get
+    , module Network.Google.API.OAuth2.Userinfo.V2.Me.Get
 
     -- * Types
+
+    -- ** Alt
+    , Alt (..)
+
+    -- ** Userinfoplus
+    , Userinfoplus
+    , userinfoplus
+    , uHd
+    , uEmail
+    , uLink
+    , uLocale
+    , uGivenName
+    , uFamilyName
+    , uPicture
+    , uGender
+    , uName
+    , uVerifiedEmail
+    , uId
 
     -- ** Jwk
     , Jwk
@@ -53,23 +74,9 @@ module Network.Google.OAuth2
     , tUserId
     , tTokenHandle
     , tIssuedTo
-
-    -- ** Userinfoplus
-    , Userinfoplus
-    , userinfoplus
-    , uHd
-    , uEmail
-    , uLink
-    , uLocale
-    , uGivenName
-    , uFamilyName
-    , uPicture
-    , uGender
-    , uName
-    , uVerifiedEmail
-    , uId
     ) where
 
+import           Network.Google.API.OAuth2.Userinfo.V2.Me.Get
 import           Network.Google.OAuth2.Types
 import           Network.Google.Prelude
 
@@ -77,22 +84,7 @@ import           Network.Google.Prelude
 TODO
 -}
 
-type OAuth2 = UserinfoAPI
+type OAuth2 = UserinfoV2MeGetAPI
 
-type UserinfoAPI = V2API
-
-type V2API = MeAPI
-
-type MeAPI = MeGet
-
-type MeGet =
-     "userinfo" :>
-       "v2" :>
-         "me" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "alt" Text :> Get '[JSON] Userinfoplus
+oAuth2 :: Proxy OAuth2
+oAuth2 = Proxy

@@ -1,6 +1,6 @@
 name:                  gogol-sqladmin
 version:               0.0.1
-synopsis:              Google Cloud SQL Administration API.
+synopsis:              Google Cloud SQL Administration API Client.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -16,8 +16,8 @@ extra-source-files:    README.md
 description:
     API for Cloud SQL database instance management.
     .
-    /Warning:/ This is an experimental preview release which is still under
-    heavy development and not intended for public consumption, caveat emptor!
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
 
 source-repository head
     type:     git
@@ -30,7 +30,44 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.SQLAdmin
+          Network.Google.API.Sql.BackupRuns.Delete
+        , Network.Google.API.Sql.BackupRuns.Get
+        , Network.Google.API.Sql.BackupRuns.List
+        , Network.Google.API.Sql.Databases.Delete
+        , Network.Google.API.Sql.Databases.Get
+        , Network.Google.API.Sql.Databases.Insert
+        , Network.Google.API.Sql.Databases.List
+        , Network.Google.API.Sql.Databases.Patch
+        , Network.Google.API.Sql.Databases.Update
+        , Network.Google.API.Sql.Flags.List
+        , Network.Google.API.Sql.Instances.Clone
+        , Network.Google.API.Sql.Instances.Delete
+        , Network.Google.API.Sql.Instances.Export
+        , Network.Google.API.Sql.Instances.Get
+        , Network.Google.API.Sql.Instances.Import
+        , Network.Google.API.Sql.Instances.Insert
+        , Network.Google.API.Sql.Instances.List
+        , Network.Google.API.Sql.Instances.Patch
+        , Network.Google.API.Sql.Instances.PromoteReplica
+        , Network.Google.API.Sql.Instances.ResetSSLConfig
+        , Network.Google.API.Sql.Instances.Restart
+        , Network.Google.API.Sql.Instances.RestoreBackup
+        , Network.Google.API.Sql.Instances.StartReplica
+        , Network.Google.API.Sql.Instances.StopReplica
+        , Network.Google.API.Sql.Instances.Update
+        , Network.Google.API.Sql.Operations.Get
+        , Network.Google.API.Sql.Operations.List
+        , Network.Google.API.Sql.SSLCerts.CreateEphemeral
+        , Network.Google.API.Sql.SSLCerts.Delete
+        , Network.Google.API.Sql.SSLCerts.Get
+        , Network.Google.API.Sql.SSLCerts.Insert
+        , Network.Google.API.Sql.SSLCerts.List
+        , Network.Google.API.Sql.Tiers.List
+        , Network.Google.API.Sql.Users.Delete
+        , Network.Google.API.Sql.Users.Insert
+        , Network.Google.API.Sql.Users.List
+        , Network.Google.API.Sql.Users.Update
+        , Network.Google.SQLAdmin
         , Network.Google.SQLAdmin.Types
 
     other-modules:

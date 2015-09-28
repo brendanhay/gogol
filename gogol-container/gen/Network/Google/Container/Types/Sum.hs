@@ -17,15 +17,39 @@ module Network.Google.Container.Types.Sum where
 
 import           Network.Google.Prelude
 
+-- | Data format for the response.
+data Alt
+    = JSON
+      -- ^ @json@
+      -- Responses with Content-Type of application\/json
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable Alt
+
+instance FromText Alt where
+    fromText = \case
+        "json" -> Just JSON
+        _ -> Nothing
+
+instance ToText Alt where
+    toText = \case
+        JSON -> "json"
+
+instance FromJSON Alt where
+    parseJSON = parseJSONText "Alt"
+
+instance ToJSON Alt where
+    toJSON = toJSONText
+
 -- | [Output only] The current status of this cluster.
 data ClusterStatus
-    = CSError
+    = Error'
       -- ^ @error@
-    | CSProvisioning
+    | Provisioning
       -- ^ @provisioning@
-    | CSRunning
+    | Running
       -- ^ @running@
-    | CSStopping
+    | Stopping
       -- ^ @stopping@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -33,50 +57,23 @@ instance Hashable ClusterStatus
 
 instance FromText ClusterStatus where
     fromText = \case
-        "error" -> Just CSError
-        "provisioning" -> Just CSProvisioning
-        "running" -> Just CSRunning
-        "stopping" -> Just CSStopping
+        "error" -> Just Error'
+        "provisioning" -> Just Provisioning
+        "running" -> Just Running
+        "stopping" -> Just Stopping
         _ -> Nothing
 
 instance ToText ClusterStatus where
     toText = \case
-        CSError -> "error"
-        CSProvisioning -> "provisioning"
-        CSRunning -> "running"
-        CSStopping -> "stopping"
+        Error' -> "error"
+        Provisioning -> "provisioning"
+        Running -> "running"
+        Stopping -> "stopping"
 
 instance FromJSON ClusterStatus where
     parseJSON = parseJSONText "ClusterStatus"
 
 instance ToJSON ClusterStatus where
-    toJSON = toJSONText
-
--- | The operation type.
-data OperationOperationType
-    = OOTCreateCluster
-      -- ^ @createCluster@
-    | OOTDeleteCluster
-      -- ^ @deleteCluster@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable OperationOperationType
-
-instance FromText OperationOperationType where
-    fromText = \case
-        "createCluster" -> Just OOTCreateCluster
-        "deleteCluster" -> Just OOTDeleteCluster
-        _ -> Nothing
-
-instance ToText OperationOperationType where
-    toText = \case
-        OOTCreateCluster -> "createCluster"
-        OOTDeleteCluster -> "deleteCluster"
-
-instance FromJSON OperationOperationType where
-    parseJSON = parseJSONText "OperationOperationType"
-
-instance ToJSON OperationOperationType where
     toJSON = toJSONText
 
 -- | The current status of the operation.
@@ -108,4 +105,31 @@ instance FromJSON OperationStatus where
     parseJSON = parseJSONText "OperationStatus"
 
 instance ToJSON OperationStatus where
+    toJSON = toJSONText
+
+-- | The operation type.
+data OperationOperationType
+    = CreateCluster
+      -- ^ @createCluster@
+    | DeleteCluster
+      -- ^ @deleteCluster@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable OperationOperationType
+
+instance FromText OperationOperationType where
+    fromText = \case
+        "createCluster" -> Just CreateCluster
+        "deleteCluster" -> Just DeleteCluster
+        _ -> Nothing
+
+instance ToText OperationOperationType where
+    toText = \case
+        CreateCluster -> "createCluster"
+        DeleteCluster -> "deleteCluster"
+
+instance FromJSON OperationOperationType where
+    parseJSON = parseJSONText "OperationOperationType"
+
+instance ToJSON OperationOperationType where
     toJSON = toJSONText

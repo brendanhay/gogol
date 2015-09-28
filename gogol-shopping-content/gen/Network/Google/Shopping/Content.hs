@@ -18,62 +18,195 @@
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference>
 module Network.Google.Shopping.Content
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** Content API for Shopping
       ShoppingContent
-    , OrdersAPI
-    , OrdersGetbymerchantorderid
-    , OrdersCreatetestorder
-    , OrdersList
-    , OrdersCancellineitem
-    , OrdersUpdatemerchantorderid
-    , OrdersAcknowledge
-    , OrdersGet
-    , OrdersRefund
-    , OrdersGettestordertemplate
-    , OrdersReturnlineitem
-    , OrdersUpdateshipment
-    , OrdersCustombatch
-    , OrdersAdvancetestorder
-    , OrdersShiplineitems
-    , OrdersCancel
+    , shoppingContent
+    , shoppingContentURL
+
+    -- ** content.orders.acknowledge
+    , module Network.Google.API.Content.Orders.Acknowledge
+
+    -- ** content.orders.advancetestorder
+    , module Network.Google.API.Content.Orders.Advancetestorder
+
+    -- ** content.orders.cancel
+    , module Network.Google.API.Content.Orders.Cancel
+
+    -- ** content.orders.cancellineitem
+    , module Network.Google.API.Content.Orders.Cancellineitem
+
+    -- ** content.orders.createtestorder
+    , module Network.Google.API.Content.Orders.Createtestorder
+
+    -- ** content.orders.custombatch
+    , module Network.Google.API.Content.Orders.Custombatch
+
+    -- ** content.orders.get
+    , module Network.Google.API.Content.Orders.Get
+
+    -- ** content.orders.getbymerchantorderid
+    , module Network.Google.API.Content.Orders.Getbymerchantorderid
+
+    -- ** content.orders.gettestordertemplate
+    , module Network.Google.API.Content.Orders.Gettestordertemplate
+
+    -- ** content.orders.list
+    , module Network.Google.API.Content.Orders.List
+
+    -- ** content.orders.refund
+    , module Network.Google.API.Content.Orders.Refund
+
+    -- ** content.orders.returnlineitem
+    , module Network.Google.API.Content.Orders.Returnlineitem
+
+    -- ** content.orders.shiplineitems
+    , module Network.Google.API.Content.Orders.Shiplineitems
+
+    -- ** content.orders.updatemerchantorderid
+    , module Network.Google.API.Content.Orders.Updatemerchantorderid
+
+    -- ** content.orders.updateshipment
+    , module Network.Google.API.Content.Orders.Updateshipment
 
     -- * Types
 
-    -- ** Error
-    , Error
-    , error'
-    , errDomain
-    , errReason
-    , errMessage
+    -- ** OrdersListResponse
+    , OrdersListResponse
+    , ordersListResponse
+    , olrNextPageToken
+    , olrKind
+    , olrResources
 
-    -- ** Errors
-    , Errors
-    , errors
-    , eCode
-    , eMessage
-    , eErrors
+    -- ** OrdersShipLineItemsResponse
+    , OrdersShipLineItemsResponse
+    , ordersShipLineItemsResponse
+    , oslirKind
+    , oslirExecutionStatus
 
-    -- ** Order
-    , Order
-    , order
-    , ordStatus
-    , ordMerchantId
-    , ordRefunds
-    , ordKind
-    , ordLineItems
-    , ordShipments
-    , ordNetAmount
-    , ordPlacedDate
-    , ordDeliveryDetails
-    , ordShippingOption
-    , ordMerchantOrderId
-    , ordAcknowledged
-    , ordShippingCostTax
-    , ordCustomer
-    , ordId
-    , ordPaymentMethod
-    , ordPaymentStatus
-    , ordShippingCost
+    -- ** OrdersReturnLineItemResponse
+    , OrdersReturnLineItemResponse
+    , ordersReturnLineItemResponse
+    , orlirKind
+    , orlirExecutionStatus
+
+    -- ** OrdersUpdateShipmentResponse
+    , OrdersUpdateShipmentResponse
+    , ordersUpdateShipmentResponse
+    , ousrKind
+    , ousrExecutionStatus
+
+    -- ** OrderLineItemShippingDetailsMethod
+    , OrderLineItemShippingDetailsMethod
+    , orderLineItemShippingDetailsMethod
+    , olisdmCarrier
+    , olisdmMethodName
+    , olisdmMaxDaysInTransit
+    , olisdmMinDaysInTransit
+
+    -- ** OrdersCreateTestOrderResponse
+    , OrdersCreateTestOrderResponse
+    , ordersCreateTestOrderResponse
+    , octorKind
+    , octorOrderId
+
+    -- ** OrdersRefundRequest
+    , OrdersRefundRequest
+    , ordersRefundRequest
+    , orrAmount
+    , orrReason
+    , orrOperationId
+    , orrReasonText
+
+    -- ** OrdersCustomBatchRequestEntryCancelLineItem
+    , OrdersCustomBatchRequestEntryCancelLineItem
+    , ordersCustomBatchRequestEntryCancelLineItem
+    , ocbrecliQuantity
+    , ocbrecliLineItemId
+    , ocbrecliReason
+    , ocbrecliReasonText
+
+    -- ** Alt
+    , Alt (..)
+
+    -- ** OrderLineItemShippingDetails
+    , OrderLineItemShippingDetails
+    , orderLineItemShippingDetails
+    , olisdShipByDate
+    , olisdMethod
+    , olisdDeliverByDate
+
+    -- ** OrderLineItemProductVariantAttribute
+    , OrderLineItemProductVariantAttribute
+    , orderLineItemProductVariantAttribute
+    , olipvaDimension
+    , olipvaValue
+
+    -- ** Price
+    , Price
+    , price
+    , pValue
+    , pCurrency
+
+    -- ** OrdersCustomBatchResponseEntry
+    , OrdersCustomBatchResponseEntry
+    , ordersCustomBatchResponseEntry
+    , ocbreKind
+    , ocbreExecutionStatus
+    , ocbreErrors
+    , ocbreOrder
+    , ocbreBatchId
+
+    -- ** OrdersCancelResponse
+    , OrdersCancelResponse
+    , ordersCancelResponse
+    , ocrKind
+    , ocrExecutionStatus
+
+    -- ** OrderRefund
+    , OrderRefund
+    , orderRefund
+    , orAmount
+    , orActor
+    , orReason
+    , orCreationDate
+    , orReasonText
+
+    -- ** TestOrderLineItemProduct
+    , TestOrderLineItemProduct
+    , testOrderLineItemProduct
+    , tolipImageLink
+    , tolipChannel
+    , tolipBrand
+    , tolipTargetCountry
+    , tolipGtin
+    , tolipItemGroupId
+    , tolipOfferId
+    , tolipPrice
+    , tolipVariantAttributes
+    , tolipTitle
+    , tolipContentLanguage
+    , tolipMpn
+    , tolipCondition
+
+    -- ** OrderDeliveryDetails
+    , OrderDeliveryDetails
+    , orderDeliveryDetails
+    , oddAddress
+    , oddPhoneNumber
+
+    -- ** TestOrder
+    , TestOrder
+    , testOrder
+    , toKind
+    , toLineItems
+    , toShippingOption
+    , toPredefinedDeliveryAddress
+    , toShippingCostTax
+    , toCustomer
+    , toPaymentMethod
+    , toShippingCost
 
     -- ** OrderAddress
     , OrderAddress
@@ -87,6 +220,65 @@ module Network.Google.Shopping.Content
     , oaFullAddress
     , oaRegion
 
+    -- ** TestOrderLineItem
+    , TestOrderLineItem
+    , testOrderLineItem
+    , toliQuantityOrdered
+    , toliReturnInfo
+    , toliShippingDetails
+    , toliProduct
+    , toliUnitTax
+
+    -- ** Errors
+    , Errors
+    , errors
+    , eCode
+    , eMessage
+    , eErrors
+
+    -- ** OrdersCancelLineItemResponse
+    , OrdersCancelLineItemResponse
+    , ordersCancelLineItemResponse
+    , oclirKind
+    , oclirExecutionStatus
+
+    -- ** OrderPaymentMethod
+    , OrderPaymentMethod
+    , orderPaymentMethod
+    , opmExpirationMonth
+    , opmExpirationYear
+    , opmPhoneNumber
+    , opmBillingAddress
+    , opmLastFourDigits
+    , opmType
+
+    -- ** OrderShipment
+    , OrderShipment
+    , orderShipment
+    , osCarrier
+    , osStatus
+    , osTrackingId
+    , osLineItems
+    , osId
+    , osCreationDate
+    , osDeliveryDate
+
+    -- ** OrdersShipLineItemsRequest
+    , OrdersShipLineItemsRequest
+    , ordersShipLineItemsRequest
+    , oslirCarrier
+    , oslirTrackingId
+    , oslirShipmentId
+    , oslirLineItems
+    , oslirOperationId
+
+    -- ** OrdersCustomBatchRequestEntryRefund
+    , OrdersCustomBatchRequestEntryRefund
+    , ordersCustomBatchRequestEntryRefund
+    , ocbrerAmount
+    , ocbrerReason
+    , ocbrerReasonText
+
     -- ** OrderCancellation
     , OrderCancellation
     , orderCancellation
@@ -96,6 +288,60 @@ module Network.Google.Shopping.Content
     , ocCreationDate
     , ocReasonText
 
+    -- ** OrdersCustomBatchResponse
+    , OrdersCustomBatchResponse
+    , ordersCustomBatchResponse
+    , ocbrEntries
+    , ocbrKind
+
+    -- ** OrderReturn
+    , OrderReturn
+    , orderReturn
+    , oQuantity
+    , oActor
+    , oReason
+    , oCreationDate
+    , oReasonText
+
+    -- ** OrdersAcknowledgeRequest
+    , OrdersAcknowledgeRequest
+    , ordersAcknowledgeRequest
+    , oarOperationId
+
+    -- ** OrdersUpdateMerchantOrderIdRequest
+    , OrdersUpdateMerchantOrderIdRequest
+    , ordersUpdateMerchantOrderIdRequest
+    , oumoirMerchantOrderId
+    , oumoirOperationId
+
+    -- ** TestOrderCustomer
+    , TestOrderCustomer
+    , testOrderCustomer
+    , tocFullName
+    , tocEmail
+    , tocExplicitMarketingPreference
+
+    -- ** OrdersAdvanceTestOrderResponse
+    , OrdersAdvanceTestOrderResponse
+    , ordersAdvanceTestOrderResponse
+    , oatorKind
+
+    -- ** OrdersCustomBatchRequestEntry
+    , OrdersCustomBatchRequestEntry
+    , ordersCustomBatchRequestEntry
+    , oMerchantId
+    , oCancelLineItem
+    , oRefund
+    , oUpdateShipment
+    , oReturnLineItem
+    , oMerchantOrderId
+    , oMethod
+    , oShipLineItems
+    , oOperationId
+    , oOrderId
+    , oCancel
+    , oBatchId
+
     -- ** OrderCustomer
     , OrderCustomer
     , orderCustomer
@@ -103,11 +349,24 @@ module Network.Google.Shopping.Content
     , ocEmail
     , ocExplicitMarketingPreference
 
-    -- ** OrderDeliveryDetails
-    , OrderDeliveryDetails
-    , orderDeliveryDetails
-    , oddAddress
-    , oddPhoneNumber
+    -- ** OrdersCancelRequest
+    , OrdersCancelRequest
+    , ordersCancelRequest
+    , ocrReason
+    , ocrOperationId
+    , ocrReasonText
+
+    -- ** OrdersGetByMerchantOrderIdResponse
+    , OrdersGetByMerchantOrderIdResponse
+    , ordersGetByMerchantOrderIdResponse
+    , ogbmoirKind
+    , ogbmoirOrder
+
+    -- ** OrderShipmentLineItemShipment
+    , OrderShipmentLineItemShipment
+    , orderShipmentLineItemShipment
+    , oslisQuantity
+    , oslisLineItemId
 
     -- ** OrderLineItem
     , OrderLineItem
@@ -126,6 +385,104 @@ module Network.Google.Shopping.Content
     , oliQuantityReturned
     , oliProduct
     , oliReturns
+
+    -- ** OrdersUpdateShipmentRequest
+    , OrdersUpdateShipmentRequest
+    , ordersUpdateShipmentRequest
+    , ousrCarrier
+    , ousrStatus
+    , ousrTrackingId
+    , ousrShipmentId
+    , ousrOperationId
+
+    -- ** OrdersReturnLineItemRequest
+    , OrdersReturnLineItemRequest
+    , ordersReturnLineItemRequest
+    , orlirQuantity
+    , orlirLineItemId
+    , orlirReason
+    , orlirOperationId
+    , orlirReasonText
+
+    -- ** TestOrderPaymentMethod
+    , TestOrderPaymentMethod
+    , testOrderPaymentMethod
+    , topmExpirationMonth
+    , topmExpirationYear
+    , topmLastFourDigits
+    , topmType
+    , topmPredefinedBillingAddress
+
+    -- ** OrdersCustomBatchRequestEntryShipLineItems
+    , OrdersCustomBatchRequestEntryShipLineItems
+    , ordersCustomBatchRequestEntryShipLineItems
+    , ocbresliCarrier
+    , ocbresliTrackingId
+    , ocbresliShipmentId
+    , ocbresliLineItems
+
+    -- ** OrdersCreateTestOrderRequest
+    , OrdersCreateTestOrderRequest
+    , ordersCreateTestOrderRequest
+    , octorTemplateName
+    , octorTestOrder
+
+    -- ** OrdersGetTestOrderTemplateResponse
+    , OrdersGetTestOrderTemplateResponse
+    , ordersGetTestOrderTemplateResponse
+    , ogtotrKind
+    , ogtotrTemplate
+
+    -- ** OrdersRefundResponse
+    , OrdersRefundResponse
+    , ordersRefundResponse
+    , orrKind
+    , orrExecutionStatus
+
+    -- ** Error'
+    , Error'
+    , error'
+    , errDomain
+    , errReason
+    , errMessage
+
+    -- ** OrdersGettestordertemplate'TemplateName
+    , OrdersGettestordertemplate'TemplateName (..)
+
+    -- ** OrdersCustomBatchRequest
+    , OrdersCustomBatchRequest
+    , ordersCustomBatchRequest
+    , oEntries
+
+    -- ** Order
+    , Order
+    , order
+    , ordrStatus
+    , ordrMerchantId
+    , ordrRefunds
+    , ordrKind
+    , ordrLineItems
+    , ordrShipments
+    , ordrNetAmount
+    , ordrPlacedDate
+    , ordrDeliveryDetails
+    , ordrShippingOption
+    , ordrMerchantOrderId
+    , ordrAcknowledged
+    , ordrShippingCostTax
+    , ordrCustomer
+    , ordrId
+    , ordrPaymentMethod
+    , ordrPaymentStatus
+    , ordrShippingCost
+
+    -- ** OrdersCustomBatchRequestEntryUpdateShipment
+    , OrdersCustomBatchRequestEntryUpdateShipment
+    , ordersCustomBatchRequestEntryUpdateShipment
+    , ocbreusCarrier
+    , ocbreusStatus
+    , ocbreusTrackingId
+    , ocbreusShipmentId
 
     -- ** OrderLineItemProduct
     , OrderLineItemProduct
@@ -146,83 +503,16 @@ module Network.Google.Shopping.Content
     , olipMpn
     , olipCondition
 
-    -- ** OrderLineItemProductVariantAttribute
-    , OrderLineItemProductVariantAttribute
-    , orderLineItemProductVariantAttribute
-    , olipvaDimension
-    , olipvaValue
+    -- ** OrdersCustomBatchRequestEntryReturnLineItem
+    , OrdersCustomBatchRequestEntryReturnLineItem
+    , ordersCustomBatchRequestEntryReturnLineItem
+    , ocbrerliQuantity
+    , ocbrerliLineItemId
+    , ocbrerliReason
+    , ocbrerliReasonText
 
-    -- ** OrderLineItemReturnInfo
-    , OrderLineItemReturnInfo
-    , orderLineItemReturnInfo
-    , oliriIsReturnable
-    , oliriPolicyUrl
-    , oliriDaysToReturn
-
-    -- ** OrderLineItemShippingDetails
-    , OrderLineItemShippingDetails
-    , orderLineItemShippingDetails
-    , olisdShipByDate
-    , olisdMethod
-    , olisdDeliverByDate
-
-    -- ** OrderLineItemShippingDetailsMethod
-    , OrderLineItemShippingDetailsMethod
-    , orderLineItemShippingDetailsMethod
-    , olisdmCarrier
-    , olisdmMethodName
-    , olisdmMaxDaysInTransit
-    , olisdmMinDaysInTransit
-
-    -- ** OrderPaymentMethod
-    , OrderPaymentMethod
-    , orderPaymentMethod
-    , opmExpirationMonth
-    , opmExpirationYear
-    , opmPhoneNumber
-    , opmBillingAddress
-    , opmLastFourDigits
-    , opmType
-
-    -- ** OrderRefund
-    , OrderRefund
-    , orderRefund
-    , orAmount
-    , orActor
-    , orReason
-    , orCreationDate
-    , orReasonText
-
-    -- ** OrderReturn
-    , OrderReturn
-    , orderReturn
-    , oQuantity
-    , oActor
-    , oReason
-    , oCreationDate
-    , oReasonText
-
-    -- ** OrderShipment
-    , OrderShipment
-    , orderShipment
-    , osCarrier
-    , osStatus
-    , osTrackingId
-    , osLineItems
-    , osId
-    , osCreationDate
-    , osDeliveryDate
-
-    -- ** OrderShipmentLineItemShipment
-    , OrderShipmentLineItemShipment
-    , orderShipmentLineItemShipment
-    , oslisQuantity
-    , oslisLineItemId
-
-    -- ** OrdersAcknowledgeRequest
-    , OrdersAcknowledgeRequest
-    , ordersAcknowledgeRequest
-    , oarOperationId
+    -- ** OrdersList'OrderBy
+    , OrdersList'OrderBy (..)
 
     -- ** OrdersAcknowledgeResponse
     , OrdersAcknowledgeResponse
@@ -230,10 +520,11 @@ module Network.Google.Shopping.Content
     , oarKind
     , oarExecutionStatus
 
-    -- ** OrdersAdvanceTestOrderResponse
-    , OrdersAdvanceTestOrderResponse
-    , ordersAdvanceTestOrderResponse
-    , oatorKind
+    -- ** OrdersUpdateMerchantOrderIdResponse
+    , OrdersUpdateMerchantOrderIdResponse
+    , ordersUpdateMerchantOrderIdResponse
+    , oumoirKind
+    , oumoirExecutionStatus
 
     -- ** OrdersCancelLineItemRequest
     , OrdersCancelLineItemRequest
@@ -244,57 +535,12 @@ module Network.Google.Shopping.Content
     , oclirOperationId
     , oclirReasonText
 
-    -- ** OrdersCancelLineItemResponse
-    , OrdersCancelLineItemResponse
-    , ordersCancelLineItemResponse
-    , oclirKind
-    , oclirExecutionStatus
-
-    -- ** OrdersCancelRequest
-    , OrdersCancelRequest
-    , ordersCancelRequest
-    , ocrReason
-    , ocrOperationId
-    , ocrReasonText
-
-    -- ** OrdersCancelResponse
-    , OrdersCancelResponse
-    , ordersCancelResponse
-    , ocrKind
-    , ocrExecutionStatus
-
-    -- ** OrdersCreateTestOrderRequest
-    , OrdersCreateTestOrderRequest
-    , ordersCreateTestOrderRequest
-    , octorTemplateName
-    , octorTestOrder
-
-    -- ** OrdersCreateTestOrderResponse
-    , OrdersCreateTestOrderResponse
-    , ordersCreateTestOrderResponse
-    , octorKind
-    , octorOrderId
-
-    -- ** OrdersCustomBatchRequest
-    , OrdersCustomBatchRequest
-    , ordersCustomBatchRequest
-    , oEntries
-
-    -- ** OrdersCustomBatchRequestEntry
-    , OrdersCustomBatchRequestEntry
-    , ordersCustomBatchRequestEntry
-    , oMerchantId
-    , oCancelLineItem
-    , oRefund
-    , oUpdateShipment
-    , oReturnLineItem
-    , oMerchantOrderId
-    , oMethod
-    , oShipLineItems
-    , oOperationId
-    , oOrderId
-    , oCancel
-    , oBatchId
+    -- ** OrderLineItemReturnInfo
+    , OrderLineItemReturnInfo
+    , orderLineItemReturnInfo
+    , oliriIsReturnable
+    , oliriPolicyUrl
+    , oliriDaysToReturn
 
     -- ** OrdersCustomBatchRequestEntryCancel
     , OrdersCustomBatchRequestEntryCancel
@@ -302,211 +548,25 @@ module Network.Google.Shopping.Content
     , ocbrecReason
     , ocbrecReasonText
 
-    -- ** OrdersCustomBatchRequestEntryCancelLineItem
-    , OrdersCustomBatchRequestEntryCancelLineItem
-    , ordersCustomBatchRequestEntryCancelLineItem
-    , ocbrecliQuantity
-    , ocbrecliLineItemId
-    , ocbrecliReason
-    , ocbrecliReasonText
-
-    -- ** OrdersCustomBatchRequestEntryRefund
-    , OrdersCustomBatchRequestEntryRefund
-    , ordersCustomBatchRequestEntryRefund
-    , ocbrerAmount
-    , ocbrerReason
-    , ocbrerReasonText
-
-    -- ** OrdersCustomBatchRequestEntryReturnLineItem
-    , OrdersCustomBatchRequestEntryReturnLineItem
-    , ordersCustomBatchRequestEntryReturnLineItem
-    , ocbrerliQuantity
-    , ocbrerliLineItemId
-    , ocbrerliReason
-    , ocbrerliReasonText
-
-    -- ** OrdersCustomBatchRequestEntryShipLineItems
-    , OrdersCustomBatchRequestEntryShipLineItems
-    , ordersCustomBatchRequestEntryShipLineItems
-    , ocbresliCarrier
-    , ocbresliTrackingId
-    , ocbresliShipmentId
-    , ocbresliLineItems
-
-    -- ** OrdersCustomBatchRequestEntryUpdateShipment
-    , OrdersCustomBatchRequestEntryUpdateShipment
-    , ordersCustomBatchRequestEntryUpdateShipment
-    , ocbreusCarrier
-    , ocbreusStatus
-    , ocbreusTrackingId
-    , ocbreusShipmentId
-
-    -- ** OrdersCustomBatchResponse
-    , OrdersCustomBatchResponse
-    , ordersCustomBatchResponse
-    , ocbrEntries
-    , ocbrKind
-
-    -- ** OrdersCustomBatchResponseEntry
-    , OrdersCustomBatchResponseEntry
-    , ordersCustomBatchResponseEntry
-    , ocbreKind
-    , ocbreExecutionStatus
-    , ocbreErrors
-    , ocbreOrder
-    , ocbreBatchId
-
-    -- ** OrdersGetByMerchantOrderIdResponse
-    , OrdersGetByMerchantOrderIdResponse
-    , ordersGetByMerchantOrderIdResponse
-    , ogbmoirKind
-    , ogbmoirOrder
-
-    -- ** OrdersGetTestOrderTemplateResponse
-    , OrdersGetTestOrderTemplateResponse
-    , ordersGetTestOrderTemplateResponse
-    , ogtotrKind
-    , ogtotrTemplate
-
-    -- ** OrdersListResponse
-    , OrdersListResponse
-    , ordersListResponse
-    , olrNextPageToken
-    , olrKind
-    , olrResources
-
-    -- ** OrdersRefundRequest
-    , OrdersRefundRequest
-    , ordersRefundRequest
-    , orrAmount
-    , orrReason
-    , orrOperationId
-    , orrReasonText
-
-    -- ** OrdersRefundResponse
-    , OrdersRefundResponse
-    , ordersRefundResponse
-    , orrKind
-    , orrExecutionStatus
-
-    -- ** OrdersReturnLineItemRequest
-    , OrdersReturnLineItemRequest
-    , ordersReturnLineItemRequest
-    , orlirQuantity
-    , orlirLineItemId
-    , orlirReason
-    , orlirOperationId
-    , orlirReasonText
-
-    -- ** OrdersReturnLineItemResponse
-    , OrdersReturnLineItemResponse
-    , ordersReturnLineItemResponse
-    , orlirKind
-    , orlirExecutionStatus
-
-    -- ** OrdersShipLineItemsRequest
-    , OrdersShipLineItemsRequest
-    , ordersShipLineItemsRequest
-    , oslirCarrier
-    , oslirTrackingId
-    , oslirShipmentId
-    , oslirLineItems
-    , oslirOperationId
-
-    -- ** OrdersShipLineItemsResponse
-    , OrdersShipLineItemsResponse
-    , ordersShipLineItemsResponse
-    , oslirKind
-    , oslirExecutionStatus
-
-    -- ** OrdersUpdateMerchantOrderIdRequest
-    , OrdersUpdateMerchantOrderIdRequest
-    , ordersUpdateMerchantOrderIdRequest
-    , oumoirMerchantOrderId
-    , oumoirOperationId
-
-    -- ** OrdersUpdateMerchantOrderIdResponse
-    , OrdersUpdateMerchantOrderIdResponse
-    , ordersUpdateMerchantOrderIdResponse
-    , oumoirKind
-    , oumoirExecutionStatus
-
-    -- ** OrdersUpdateShipmentRequest
-    , OrdersUpdateShipmentRequest
-    , ordersUpdateShipmentRequest
-    , ousrCarrier
-    , ousrStatus
-    , ousrTrackingId
-    , ousrShipmentId
-    , ousrOperationId
-
-    -- ** OrdersUpdateShipmentResponse
-    , OrdersUpdateShipmentResponse
-    , ordersUpdateShipmentResponse
-    , ousrKind
-    , ousrExecutionStatus
-
-    -- ** Price
-    , Price
-    , price
-    , pValue
-    , pCurrency
-
-    -- ** TestOrder
-    , TestOrder
-    , testOrder
-    , toKind
-    , toLineItems
-    , toShippingOption
-    , toPredefinedDeliveryAddress
-    , toShippingCostTax
-    , toCustomer
-    , toPaymentMethod
-    , toShippingCost
-
-    -- ** TestOrderCustomer
-    , TestOrderCustomer
-    , testOrderCustomer
-    , tocFullName
-    , tocEmail
-    , tocExplicitMarketingPreference
-
-    -- ** TestOrderLineItem
-    , TestOrderLineItem
-    , testOrderLineItem
-    , toliQuantityOrdered
-    , toliReturnInfo
-    , toliShippingDetails
-    , toliProduct
-    , toliUnitTax
-
-    -- ** TestOrderLineItemProduct
-    , TestOrderLineItemProduct
-    , testOrderLineItemProduct
-    , tolipImageLink
-    , tolipChannel
-    , tolipBrand
-    , tolipTargetCountry
-    , tolipGtin
-    , tolipItemGroupId
-    , tolipOfferId
-    , tolipPrice
-    , tolipVariantAttributes
-    , tolipTitle
-    , tolipContentLanguage
-    , tolipMpn
-    , tolipCondition
-
-    -- ** TestOrderPaymentMethod
-    , TestOrderPaymentMethod
-    , testOrderPaymentMethod
-    , topmExpirationMonth
-    , topmExpirationYear
-    , topmLastFourDigits
-    , topmType
-    , topmPredefinedBillingAddress
+    -- ** OrdersList'Statuses
+    , OrdersList'Statuses (..)
     ) where
 
+import           Network.Google.API.Content.Orders.Acknowledge
+import           Network.Google.API.Content.Orders.Advancetestorder
+import           Network.Google.API.Content.Orders.Cancel
+import           Network.Google.API.Content.Orders.Cancellineitem
+import           Network.Google.API.Content.Orders.Createtestorder
+import           Network.Google.API.Content.Orders.Custombatch
+import           Network.Google.API.Content.Orders.Get
+import           Network.Google.API.Content.Orders.Getbymerchantorderid
+import           Network.Google.API.Content.Orders.Gettestordertemplate
+import           Network.Google.API.Content.Orders.List
+import           Network.Google.API.Content.Orders.Refund
+import           Network.Google.API.Content.Orders.Returnlineitem
+import           Network.Google.API.Content.Orders.Shiplineitems
+import           Network.Google.API.Content.Orders.Updatemerchantorderid
+import           Network.Google.API.Content.Orders.Updateshipment
 import           Network.Google.Prelude
 import           Network.Google.Shopping.Content.Types
 
@@ -514,274 +574,21 @@ import           Network.Google.Shopping.Content.Types
 TODO
 -}
 
-type ShoppingContent = OrdersAPI
+type ShoppingContent =
+     OrdersCancellineitemAPI :<|> OrdersAcknowledgeAPI
+       :<|> OrdersUpdateshipmentAPI
+       :<|> OrdersReturnlineitemAPI
+       :<|> OrdersGetAPI
+       :<|> OrdersRefundAPI
+       :<|> OrdersUpdatemerchantorderidAPI
+       :<|> OrdersListAPI
+       :<|> OrdersCustombatchAPI
+       :<|> OrdersCancelAPI
+       :<|> OrdersGetbymerchantorderidAPI
+       :<|> OrdersGettestordertemplateAPI
+       :<|> OrdersCreatetestorderAPI
+       :<|> OrdersShiplineitemsAPI
+       :<|> OrdersAdvancetestorderAPI
 
-type OrdersAPI =
-     OrdersGetbymerchantorderid :<|> OrdersCreatetestorder
-       :<|> OrdersList
-       :<|> OrdersCancellineitem
-       :<|> OrdersUpdatemerchantorderid
-       :<|> OrdersAcknowledge
-       :<|> OrdersGet
-       :<|> OrdersRefund
-       :<|> OrdersGettestordertemplate
-       :<|> OrdersReturnlineitem
-       :<|> OrdersUpdateshipment
-       :<|> OrdersCustombatch
-       :<|> OrdersAdvancetestorder
-       :<|> OrdersShiplineitems
-       :<|> OrdersCancel
-
--- | Retrieves an order using merchant order id.
-type OrdersGetbymerchantorderid =
-     "content" :>
-       "v2sandbox" :>
-         Capture "merchantId" Word64 :>
-           "ordersbymerchantid" :>
-             Capture "merchantOrderId" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Get '[JSON] OrdersGetByMerchantOrderIdResponse
-
--- | Sandbox only. Creates a test order.
-type OrdersCreatetestorder =
-     "content" :>
-       "v2sandbox" :>
-         Capture "merchantId" Word64 :>
-           "testorders" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :>
-                           Post '[JSON] OrdersCreateTestOrderResponse
-
--- | Lists the orders in your Merchant Center account.
-type OrdersList =
-     "content" :>
-       "v2sandbox" :>
-         Capture "merchantId" Word64 :>
-           "orders" :>
-             QueryParam "placedDateEnd" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "orderBy" Text :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "acknowledged" Bool :>
-                         QueryParam "key" Text :>
-                           QueryParam "statuses" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "placedDateStart" Text :>
-                                   QueryParam "maxResults" Word32 :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "alt" Text :>
-                                         Get '[JSON] OrdersListResponse
-
--- | Cancels a line item.
-type OrdersCancellineitem =
-     "content" :>
-       "v2sandbox" :>
-         Capture "merchantId" Word64 :>
-           "orders" :>
-             Capture "orderId" Text :>
-               "cancelLineItem" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Post '[JSON] OrdersCancelLineItemResponse
-
--- | Updates the merchant order ID for a given order.
-type OrdersUpdatemerchantorderid =
-     "content" :>
-       "v2sandbox" :>
-         Capture "merchantId" Word64 :>
-           "orders" :>
-             Capture "orderId" Text :>
-               "updateMerchantOrderId" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Post '[JSON] OrdersUpdateMerchantOrderIdResponse
-
--- | Marks an order as acknowledged.
-type OrdersAcknowledge =
-     "content" :>
-       "v2sandbox" :>
-         Capture "merchantId" Word64 :>
-           "orders" :>
-             Capture "orderId" Text :>
-               "acknowledge" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Post '[JSON] OrdersAcknowledgeResponse
-
--- | Retrieves an order from your Merchant Center account.
-type OrdersGet =
-     "content" :>
-       "v2sandbox" :>
-         Capture "merchantId" Word64 :>
-           "orders" :>
-             Capture "orderId" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Get '[JSON] Order
-
--- | Refund a portion of the order, up to the full amount paid.
-type OrdersRefund =
-     "content" :>
-       "v2sandbox" :>
-         Capture "merchantId" Word64 :>
-           "orders" :>
-             Capture "orderId" Text :>
-               "refund" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Post '[JSON] OrdersRefundResponse
-
--- | Sandbox only. Retrieves an order template that can be used to quickly
--- create a new order in sandbox.
-type OrdersGettestordertemplate =
-     "content" :>
-       "v2sandbox" :>
-         Capture "merchantId" Word64 :>
-           "testordertemplates" :>
-             Capture "templateName" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Get '[JSON] OrdersGetTestOrderTemplateResponse
-
--- | Returns a line item.
-type OrdersReturnlineitem =
-     "content" :>
-       "v2sandbox" :>
-         Capture "merchantId" Word64 :>
-           "orders" :>
-             Capture "orderId" Text :>
-               "returnLineItem" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Post '[JSON] OrdersReturnLineItemResponse
-
--- | Updates a shipment\'s status, carrier, and\/or tracking ID.
-type OrdersUpdateshipment =
-     "content" :>
-       "v2sandbox" :>
-         Capture "merchantId" Word64 :>
-           "orders" :>
-             Capture "orderId" Text :>
-               "updateShipment" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Post '[JSON] OrdersUpdateShipmentResponse
-
--- | Retrieves or modifies multiple orders in a single request.
-type OrdersCustombatch =
-     "content" :>
-       "v2sandbox" :>
-         "orders" :>
-           "batch" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :>
-                           Post '[JSON] OrdersCustomBatchResponse
-
--- | Sandbox only. Moves a test order from state \"inProgress\" to state
--- \"pendingShipment\".
-type OrdersAdvancetestorder =
-     "content" :>
-       "v2sandbox" :>
-         Capture "merchantId" Word64 :>
-           "testorders" :>
-             Capture "orderId" Text :>
-               "advance" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Post '[JSON] OrdersAdvanceTestOrderResponse
-
--- | Marks line item(s) as shipped.
-type OrdersShiplineitems =
-     "content" :>
-       "v2sandbox" :>
-         Capture "merchantId" Word64 :>
-           "orders" :>
-             Capture "orderId" Text :>
-               "shipLineItems" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Post '[JSON] OrdersShipLineItemsResponse
-
--- | Cancels all line items in an order.
-type OrdersCancel =
-     "content" :>
-       "v2sandbox" :>
-         Capture "merchantId" Word64 :>
-           "orders" :>
-             Capture "orderId" Text :>
-               "cancel" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Post '[JSON] OrdersCancelResponse
+shoppingContent :: Proxy ShoppingContent
+shoppingContent = Proxy

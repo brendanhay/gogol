@@ -18,241 +18,600 @@ module Network.Google.Mirror.Types.Product where
 import           Network.Google.Mirror.Types.Sum
 import           Network.Google.Prelude
 
--- | Represents an account passed into the Account Manager on Glass.
+-- | Represents an action taken by the user that triggered a notification.
 --
--- /See:/ 'account' smart constructor.
-data Account = Account
-    { _aAuthTokens :: !(Maybe [Maybe AuthToken])
-    , _aUserData   :: !(Maybe [Maybe UserData])
-    , _aPassword   :: !(Maybe Text)
-    , _aFeatures   :: !(Maybe [Text])
+-- /See:/ 'userAction' smart constructor.
+data UserAction = UserAction
+    { _uaPayload :: !(Maybe Text)
+    , _uaType    :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Account' with the minimum fields required to make a request.
+-- | Creates a value of 'UserAction' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aAuthTokens'
+-- * 'uaPayload'
 --
--- * 'aUserData'
---
--- * 'aPassword'
---
--- * 'aFeatures'
-account
-    :: Account
-account =
-    Account
-    { _aAuthTokens = Nothing
-    , _aUserData = Nothing
-    , _aPassword = Nothing
-    , _aFeatures = Nothing
+-- * 'uaType'
+userAction
+    :: UserAction
+userAction =
+    UserAction
+    { _uaPayload = Nothing
+    , _uaType = Nothing
     }
 
-aAuthTokens :: Lens' Account [Maybe AuthToken]
-aAuthTokens
-  = lens _aAuthTokens (\ s a -> s{_aAuthTokens = a}) .
-      _Default
-      . _Coerce
+-- | An optional payload for the action. For actions of type CUSTOM, this is
+-- the ID of the custom menu item that was selected.
+uaPayload :: Lens' UserAction (Maybe Text)
+uaPayload
+  = lens _uaPayload (\ s a -> s{_uaPayload = a})
 
-aUserData :: Lens' Account [Maybe UserData]
-aUserData
-  = lens _aUserData (\ s a -> s{_aUserData = a}) .
-      _Default
-      . _Coerce
+-- | The type of action. The value of this can be: - SHARE - the user shared
+-- an item. - REPLY - the user replied to an item. - REPLY_ALL - the user
+-- replied to all recipients of an item. - CUSTOM - the user selected a
+-- custom menu item on the timeline item. - DELETE - the user deleted the
+-- item. - PIN - the user pinned the item. - UNPIN - the user unpinned the
+-- item. - LAUNCH - the user initiated a voice command. In the future,
+-- additional types may be added. UserActions with unrecognized types
+-- should be ignored.
+uaType :: Lens' UserAction (Maybe Text)
+uaType = lens _uaType (\ s a -> s{_uaType = a})
 
-aPassword :: Lens' Account (Maybe Text)
-aPassword
-  = lens _aPassword (\ s a -> s{_aPassword = a})
-
-aFeatures :: Lens' Account [Text]
-aFeatures
-  = lens _aFeatures (\ s a -> s{_aFeatures = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON Account where
+instance FromJSON UserAction where
         parseJSON
-          = withObject "Account"
+          = withObject "UserAction"
               (\ o ->
-                 Account <$>
-                   (o .:? "authTokens" .!= mempty) <*>
-                     (o .:? "userData" .!= mempty)
-                     <*> (o .:? "password")
-                     <*> (o .:? "features" .!= mempty))
+                 UserAction <$> (o .:? "payload") <*> (o .:? "type"))
 
-instance ToJSON Account where
-        toJSON Account{..}
+instance ToJSON UserAction where
+        toJSON UserAction{..}
           = object
               (catMaybes
-                 [("authTokens" .=) <$> _aAuthTokens,
-                  ("userData" .=) <$> _aUserData,
-                  ("password" .=) <$> _aPassword,
-                  ("features" .=) <$> _aFeatures])
+                 [("payload" .=) <$> _uaPayload,
+                  ("type" .=) <$> _uaType])
 
--- | Represents media content, such as a photo, that can be attached to a
--- timeline item.
+-- | A single value that is part of a MenuItem.
 --
--- /See:/ 'attachment' smart constructor.
-data Attachment = Attachment
-    { _aContentUrl          :: !(Maybe Text)
-    , _aId                  :: !(Maybe Text)
-    , _aIsProcessingContent :: !(Maybe Bool)
-    , _aContentType         :: !(Maybe Text)
+-- /See:/ 'menuValue' smart constructor.
+data MenuValue = MenuValue
+    { _mvState       :: !(Maybe Text)
+    , _mvDisplayName :: !(Maybe Text)
+    , _mvIconUrl     :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Attachment' with the minimum fields required to make a request.
+-- | Creates a value of 'MenuValue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aContentUrl'
+-- * 'mvState'
 --
--- * 'aId'
+-- * 'mvDisplayName'
 --
--- * 'aIsProcessingContent'
---
--- * 'aContentType'
-attachment
-    :: Attachment
-attachment =
-    Attachment
-    { _aContentUrl = Nothing
-    , _aId = Nothing
-    , _aIsProcessingContent = Nothing
-    , _aContentType = Nothing
+-- * 'mvIconUrl'
+menuValue
+    :: MenuValue
+menuValue =
+    MenuValue
+    { _mvState = Nothing
+    , _mvDisplayName = Nothing
+    , _mvIconUrl = Nothing
     }
 
--- | The URL for the content.
-aContentUrl :: Lens' Attachment (Maybe Text)
-aContentUrl
-  = lens _aContentUrl (\ s a -> s{_aContentUrl = a})
+-- | The state that this value applies to. Allowed values are: - DEFAULT -
+-- Default value shown when displayed in the menuItems list. - PENDING -
+-- Value shown when the menuItem has been selected by the user but can
+-- still be cancelled. - CONFIRMED - Value shown when the menuItem has been
+-- selected by the user and can no longer be cancelled.
+mvState :: Lens' MenuValue (Maybe Text)
+mvState = lens _mvState (\ s a -> s{_mvState = a})
 
--- | The ID of the attachment.
-aId :: Lens' Attachment (Maybe Text)
-aId = lens _aId (\ s a -> s{_aId = a})
+-- | The name to display for the menu item. If you specify this property for
+-- a built-in menu item, the default contextual voice command for that menu
+-- item is not shown.
+mvDisplayName :: Lens' MenuValue (Maybe Text)
+mvDisplayName
+  = lens _mvDisplayName
+      (\ s a -> s{_mvDisplayName = a})
 
--- | Indicates that the contentUrl is not available because the attachment
--- content is still being processed. If the caller wishes to retrieve the
--- content, it should try again later.
-aIsProcessingContent :: Lens' Attachment (Maybe Bool)
-aIsProcessingContent
-  = lens _aIsProcessingContent
-      (\ s a -> s{_aIsProcessingContent = a})
+-- | URL of an icon to display with the menu item.
+mvIconUrl :: Lens' MenuValue (Maybe Text)
+mvIconUrl
+  = lens _mvIconUrl (\ s a -> s{_mvIconUrl = a})
 
--- | The MIME type of the attachment.
-aContentType :: Lens' Attachment (Maybe Text)
-aContentType
-  = lens _aContentType (\ s a -> s{_aContentType = a})
-
-instance FromJSON Attachment where
+instance FromJSON MenuValue where
         parseJSON
-          = withObject "Attachment"
+          = withObject "MenuValue"
               (\ o ->
-                 Attachment <$>
-                   (o .:? "contentUrl") <*> (o .:? "id") <*>
-                     (o .:? "isProcessingContent")
-                     <*> (o .:? "contentType"))
+                 MenuValue <$>
+                   (o .:? "state") <*> (o .:? "displayName") <*>
+                     (o .:? "iconUrl"))
 
-instance ToJSON Attachment where
-        toJSON Attachment{..}
+instance ToJSON MenuValue where
+        toJSON MenuValue{..}
           = object
               (catMaybes
-                 [("contentUrl" .=) <$> _aContentUrl,
-                  ("id" .=) <$> _aId,
-                  ("isProcessingContent" .=) <$> _aIsProcessingContent,
-                  ("contentType" .=) <$> _aContentType])
+                 [("state" .=) <$> _mvState,
+                  ("displayName" .=) <$> _mvDisplayName,
+                  ("iconUrl" .=) <$> _mvIconUrl])
 
--- | A list of Attachments. This is the response from the server to GET
--- requests on the attachments collection.
+-- | A subscription to events on a collection.
 --
--- /See:/ 'attachmentsListResponse' smart constructor.
-data AttachmentsListResponse = AttachmentsListResponse
-    { _alrKind  :: !Text
-    , _alrItems :: !(Maybe [Maybe Attachment])
+-- /See:/ 'subscription' smart constructor.
+data Subscription = Subscription
+    { _sCallbackUrl  :: !(Maybe Text)
+    , _sOperation    :: !(Maybe [Text])
+    , _sNotification :: !(Maybe (Maybe Notification))
+    , _sKind         :: !Text
+    , _sCollection   :: !(Maybe Text)
+    , _sVerifyToken  :: !(Maybe Text)
+    , _sUserToken    :: !(Maybe Text)
+    , _sId           :: !(Maybe Text)
+    , _sUpdated      :: !(Maybe UTCTime)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AttachmentsListResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'Subscription' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'alrKind'
+-- * 'sCallbackUrl'
 --
--- * 'alrItems'
-attachmentsListResponse
-    :: AttachmentsListResponse
-attachmentsListResponse =
-    AttachmentsListResponse
-    { _alrKind = "mirror#attachmentsList"
-    , _alrItems = Nothing
+-- * 'sOperation'
+--
+-- * 'sNotification'
+--
+-- * 'sKind'
+--
+-- * 'sCollection'
+--
+-- * 'sVerifyToken'
+--
+-- * 'sUserToken'
+--
+-- * 'sId'
+--
+-- * 'sUpdated'
+subscription
+    :: Subscription
+subscription =
+    Subscription
+    { _sCallbackUrl = Nothing
+    , _sOperation = Nothing
+    , _sNotification = Nothing
+    , _sKind = "mirror#subscription"
+    , _sCollection = Nothing
+    , _sVerifyToken = Nothing
+    , _sUserToken = Nothing
+    , _sId = Nothing
+    , _sUpdated = Nothing
     }
 
--- | The type of resource. This is always mirror#attachmentsList.
-alrKind :: Lens' AttachmentsListResponse Text
-alrKind = lens _alrKind (\ s a -> s{_alrKind = a})
+-- | The URL where notifications should be delivered (must start with
+-- https:\/\/).
+sCallbackUrl :: Lens' Subscription (Maybe Text)
+sCallbackUrl
+  = lens _sCallbackUrl (\ s a -> s{_sCallbackUrl = a})
 
--- | The list of attachments.
-alrItems :: Lens' AttachmentsListResponse [Maybe Attachment]
-alrItems
-  = lens _alrItems (\ s a -> s{_alrItems = a}) .
+-- | A list of operations that should be subscribed to. An empty list
+-- indicates that all operations on the collection should be subscribed to.
+-- Allowed values are: - UPDATE - The item has been updated. - INSERT - A
+-- new item has been inserted. - DELETE - The item has been deleted. -
+-- MENU_ACTION - A custom menu item has been triggered by the user.
+sOperation :: Lens' Subscription [Text]
+sOperation
+  = lens _sOperation (\ s a -> s{_sOperation = a}) .
       _Default
       . _Coerce
 
-instance FromJSON AttachmentsListResponse where
+-- | Container object for notifications. This is not populated in the
+-- Subscription resource.
+sNotification :: Lens' Subscription (Maybe (Maybe Notification))
+sNotification
+  = lens _sNotification
+      (\ s a -> s{_sNotification = a})
+
+-- | The type of resource. This is always mirror#subscription.
+sKind :: Lens' Subscription Text
+sKind = lens _sKind (\ s a -> s{_sKind = a})
+
+-- | The collection to subscribe to. Allowed values are: - timeline - Changes
+-- in the timeline including insertion, deletion, and updates. - locations
+-- - Location updates. - settings - Settings updates.
+sCollection :: Lens' Subscription (Maybe Text)
+sCollection
+  = lens _sCollection (\ s a -> s{_sCollection = a})
+
+-- | A secret token sent to the subscriber in notifications so that it can
+-- verify that the notification was generated by Google.
+sVerifyToken :: Lens' Subscription (Maybe Text)
+sVerifyToken
+  = lens _sVerifyToken (\ s a -> s{_sVerifyToken = a})
+
+-- | An opaque token sent to the subscriber in notifications so that it can
+-- determine the ID of the user.
+sUserToken :: Lens' Subscription (Maybe Text)
+sUserToken
+  = lens _sUserToken (\ s a -> s{_sUserToken = a})
+
+-- | The ID of the subscription.
+sId :: Lens' Subscription (Maybe Text)
+sId = lens _sId (\ s a -> s{_sId = a})
+
+-- | The time at which this subscription was last modified, formatted
+-- according to RFC 3339.
+sUpdated :: Lens' Subscription (Maybe UTCTime)
+sUpdated = lens _sUpdated (\ s a -> s{_sUpdated = a})
+
+instance FromJSON Subscription where
         parseJSON
-          = withObject "AttachmentsListResponse"
+          = withObject "Subscription"
               (\ o ->
-                 AttachmentsListResponse <$>
-                   (o .:? "kind" .!= "mirror#attachmentsList") <*>
+                 Subscription <$>
+                   (o .:? "callbackUrl") <*>
+                     (o .:? "operation" .!= mempty)
+                     <*> (o .:? "notification")
+                     <*> (o .:? "kind" .!= "mirror#subscription")
+                     <*> (o .:? "collection")
+                     <*> (o .:? "verifyToken")
+                     <*> (o .:? "userToken")
+                     <*> (o .:? "id")
+                     <*> (o .:? "updated"))
+
+instance ToJSON Subscription where
+        toJSON Subscription{..}
+          = object
+              (catMaybes
+                 [("callbackUrl" .=) <$> _sCallbackUrl,
+                  ("operation" .=) <$> _sOperation,
+                  ("notification" .=) <$> _sNotification,
+                  Just ("kind" .= _sKind),
+                  ("collection" .=) <$> _sCollection,
+                  ("verifyToken" .=) <$> _sVerifyToken,
+                  ("userToken" .=) <$> _sUserToken, ("id" .=) <$> _sId,
+                  ("updated" .=) <$> _sUpdated])
+
+-- | A custom menu item that can be presented to the user by a timeline item.
+--
+-- /See:/ 'menuItem' smart constructor.
+data MenuItem = MenuItem
+    { _miValues             :: !(Maybe [Maybe MenuValue])
+    , _miRemoveWhenSelected :: !(Maybe Bool)
+    , _miAction             :: !(Maybe Text)
+    , _miPayload            :: !(Maybe Text)
+    , _miContextualCommand  :: !(Maybe Text)
+    , _miId                 :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'MenuItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'miValues'
+--
+-- * 'miRemoveWhenSelected'
+--
+-- * 'miAction'
+--
+-- * 'miPayload'
+--
+-- * 'miContextualCommand'
+--
+-- * 'miId'
+menuItem
+    :: MenuItem
+menuItem =
+    MenuItem
+    { _miValues = Nothing
+    , _miRemoveWhenSelected = Nothing
+    , _miAction = Nothing
+    , _miPayload = Nothing
+    , _miContextualCommand = Nothing
+    , _miId = Nothing
+    }
+
+-- | For CUSTOM items, a list of values controlling the appearance of the
+-- menu item in each of its states. A value for the DEFAULT state must be
+-- provided. If the PENDING or CONFIRMED states are missing, they will not
+-- be shown.
+miValues :: Lens' MenuItem [Maybe MenuValue]
+miValues
+  = lens _miValues (\ s a -> s{_miValues = a}) .
+      _Default
+      . _Coerce
+
+-- | If set to true on a CUSTOM menu item, that item will be removed from the
+-- menu after it is selected.
+miRemoveWhenSelected :: Lens' MenuItem (Maybe Bool)
+miRemoveWhenSelected
+  = lens _miRemoveWhenSelected
+      (\ s a -> s{_miRemoveWhenSelected = a})
+
+-- | Controls the behavior when the user picks the menu option. Allowed
+-- values are: - CUSTOM - Custom action set by the service. When the user
+-- selects this menuItem, the API triggers a notification to your
+-- callbackUrl with the userActions.type set to CUSTOM and the
+-- userActions.payload set to the ID of this menu item. This is the default
+-- value. - Built-in actions: - REPLY - Initiate a reply to the timeline
+-- item using the voice recording UI. The creator attribute must be set in
+-- the timeline item for this menu to be available. - REPLY_ALL - Same
+-- behavior as REPLY. The original timeline item\'s recipients will be
+-- added to the reply item. - DELETE - Delete the timeline item. - SHARE -
+-- Share the timeline item with the available contacts. - READ_ALOUD - Read
+-- the timeline item\'s speakableText aloud; if this field is not set, read
+-- the text field; if none of those fields are set, this menu item is
+-- ignored. - GET_MEDIA_INPUT - Allow users to provide media payloads to
+-- Glassware from a menu item (currently, only transcribed text from voice
+-- input is supported). Subscribe to notifications when users invoke this
+-- menu item to receive the timeline item ID. Retrieve the media from the
+-- timeline item in the payload property. - VOICE_CALL - Initiate a phone
+-- call using the timeline item\'s creator.phoneNumber attribute as
+-- recipient. - NAVIGATE - Navigate to the timeline item\'s location. -
+-- TOGGLE_PINNED - Toggle the isPinned state of the timeline item. -
+-- OPEN_URI - Open the payload of the menu item in the browser. -
+-- PLAY_VIDEO - Open the payload of the menu item in the Glass video
+-- player. - SEND_MESSAGE - Initiate sending a message to the timeline
+-- item\'s creator: - If the creator.phoneNumber is set and Glass is
+-- connected to an Android phone, the message is an SMS. - Otherwise, if
+-- the creator.email is set, the message is an email.
+miAction :: Lens' MenuItem (Maybe Text)
+miAction = lens _miAction (\ s a -> s{_miAction = a})
+
+-- | A generic payload whose meaning changes depending on this MenuItem\'s
+-- action. - When the action is OPEN_URI, the payload is the URL of the
+-- website to view. - When the action is PLAY_VIDEO, the payload is the
+-- streaming URL of the video - When the action is GET_MEDIA_INPUT, the
+-- payload is the text transcription of a user\'s speech input
+miPayload :: Lens' MenuItem (Maybe Text)
+miPayload
+  = lens _miPayload (\ s a -> s{_miPayload = a})
+
+-- | The ContextualMenus.Command associated with this MenuItem (e.g.
+-- READ_ALOUD). The voice label for this command will be displayed in the
+-- voice menu and the touch label will be displayed in the touch menu. Note
+-- that the default menu value\'s display name will be overriden if you
+-- specify this property. Values that do not correspond to a
+-- ContextualMenus.Command name will be ignored.
+miContextualCommand :: Lens' MenuItem (Maybe Text)
+miContextualCommand
+  = lens _miContextualCommand
+      (\ s a -> s{_miContextualCommand = a})
+
+-- | The ID for this menu item. This is generated by the application and is
+-- treated as an opaque token.
+miId :: Lens' MenuItem (Maybe Text)
+miId = lens _miId (\ s a -> s{_miId = a})
+
+instance FromJSON MenuItem where
+        parseJSON
+          = withObject "MenuItem"
+              (\ o ->
+                 MenuItem <$>
+                   (o .:? "values" .!= mempty) <*>
+                     (o .:? "removeWhenSelected")
+                     <*> (o .:? "action")
+                     <*> (o .:? "payload")
+                     <*> (o .:? "contextual_command")
+                     <*> (o .:? "id"))
+
+instance ToJSON MenuItem where
+        toJSON MenuItem{..}
+          = object
+              (catMaybes
+                 [("values" .=) <$> _miValues,
+                  ("removeWhenSelected" .=) <$> _miRemoveWhenSelected,
+                  ("action" .=) <$> _miAction,
+                  ("payload" .=) <$> _miPayload,
+                  ("contextual_command" .=) <$> _miContextualCommand,
+                  ("id" .=) <$> _miId])
+
+-- | A setting for Glass.
+--
+-- /See:/ 'setting' smart constructor.
+data Setting = Setting
+    { _setKind  :: !Text
+    , _setValue :: !(Maybe Text)
+    , _setId    :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Setting' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'setKind'
+--
+-- * 'setValue'
+--
+-- * 'setId'
+setting
+    :: Setting
+setting =
+    Setting
+    { _setKind = "mirror#setting"
+    , _setValue = Nothing
+    , _setId = Nothing
+    }
+
+-- | The type of resource. This is always mirror#setting.
+setKind :: Lens' Setting Text
+setKind = lens _setKind (\ s a -> s{_setKind = a})
+
+-- | The setting value, as a string.
+setValue :: Lens' Setting (Maybe Text)
+setValue = lens _setValue (\ s a -> s{_setValue = a})
+
+-- | The setting\'s ID. The following IDs are valid: - locale - The key to
+-- the user’s language\/locale (BCP 47 identifier) that Glassware should
+-- use to render localized content. - timezone - The key to the user’s
+-- current time zone region as defined in the tz database. Example:
+-- America\/Los_Angeles.
+setId :: Lens' Setting (Maybe Text)
+setId = lens _setId (\ s a -> s{_setId = a})
+
+instance FromJSON Setting where
+        parseJSON
+          = withObject "Setting"
+              (\ o ->
+                 Setting <$>
+                   (o .:? "kind" .!= "mirror#setting") <*>
+                     (o .:? "value")
+                     <*> (o .:? "id"))
+
+instance ToJSON Setting where
+        toJSON Setting{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _setKind),
+                  ("value" .=) <$> _setValue, ("id" .=) <$> _setId])
+
+-- | A list of Subscriptions. This is the response from the server to GET
+-- requests on the subscription collection.
+--
+-- /See:/ 'subscriptionsListResponse' smart constructor.
+data SubscriptionsListResponse = SubscriptionsListResponse
+    { _slrKind  :: !Text
+    , _slrItems :: !(Maybe [Maybe Subscription])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SubscriptionsListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'slrKind'
+--
+-- * 'slrItems'
+subscriptionsListResponse
+    :: SubscriptionsListResponse
+subscriptionsListResponse =
+    SubscriptionsListResponse
+    { _slrKind = "mirror#subscriptionsList"
+    , _slrItems = Nothing
+    }
+
+-- | The type of resource. This is always mirror#subscriptionsList.
+slrKind :: Lens' SubscriptionsListResponse Text
+slrKind = lens _slrKind (\ s a -> s{_slrKind = a})
+
+-- | The list of subscriptions.
+slrItems :: Lens' SubscriptionsListResponse [Maybe Subscription]
+slrItems
+  = lens _slrItems (\ s a -> s{_slrItems = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON SubscriptionsListResponse where
+        parseJSON
+          = withObject "SubscriptionsListResponse"
+              (\ o ->
+                 SubscriptionsListResponse <$>
+                   (o .:? "kind" .!= "mirror#subscriptionsList") <*>
                      (o .:? "items" .!= mempty))
 
-instance ToJSON AttachmentsListResponse where
-        toJSON AttachmentsListResponse{..}
+instance ToJSON SubscriptionsListResponse where
+        toJSON SubscriptionsListResponse{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _alrKind),
-                  ("items" .=) <$> _alrItems])
+                 [Just ("kind" .= _slrKind),
+                  ("items" .=) <$> _slrItems])
 
+-- | A list of Locations. This is the response from the server to GET
+-- requests on the locations collection.
 --
--- /See:/ 'authToken' smart constructor.
-data AuthToken = AuthToken
-    { _atAuthToken :: !(Maybe Text)
-    , _atType      :: !(Maybe Text)
+-- /See:/ 'locationsListResponse' smart constructor.
+data LocationsListResponse = LocationsListResponse
+    { _llrKind  :: !Text
+    , _llrItems :: !(Maybe [Maybe Location])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AuthToken' with the minimum fields required to make a request.
+-- | Creates a value of 'LocationsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'atAuthToken'
+-- * 'llrKind'
 --
--- * 'atType'
-authToken
-    :: AuthToken
-authToken =
-    AuthToken
-    { _atAuthToken = Nothing
-    , _atType = Nothing
+-- * 'llrItems'
+locationsListResponse
+    :: LocationsListResponse
+locationsListResponse =
+    LocationsListResponse
+    { _llrKind = "mirror#locationsList"
+    , _llrItems = Nothing
     }
 
-atAuthToken :: Lens' AuthToken (Maybe Text)
-atAuthToken
-  = lens _atAuthToken (\ s a -> s{_atAuthToken = a})
+-- | The type of resource. This is always mirror#locationsList.
+llrKind :: Lens' LocationsListResponse Text
+llrKind = lens _llrKind (\ s a -> s{_llrKind = a})
 
-atType :: Lens' AuthToken (Maybe Text)
-atType = lens _atType (\ s a -> s{_atType = a})
+-- | The list of locations.
+llrItems :: Lens' LocationsListResponse [Maybe Location]
+llrItems
+  = lens _llrItems (\ s a -> s{_llrItems = a}) .
+      _Default
+      . _Coerce
 
-instance FromJSON AuthToken where
+instance FromJSON LocationsListResponse where
         parseJSON
-          = withObject "AuthToken"
+          = withObject "LocationsListResponse"
               (\ o ->
-                 AuthToken <$> (o .:? "authToken") <*> (o .:? "type"))
+                 LocationsListResponse <$>
+                   (o .:? "kind" .!= "mirror#locationsList") <*>
+                     (o .:? "items" .!= mempty))
 
-instance ToJSON AuthToken where
-        toJSON AuthToken{..}
+instance ToJSON LocationsListResponse where
+        toJSON LocationsListResponse{..}
           = object
               (catMaybes
-                 [("authToken" .=) <$> _atAuthToken,
-                  ("type" .=) <$> _atType])
+                 [Just ("kind" .= _llrKind),
+                  ("items" .=) <$> _llrItems])
+
+-- | Controls how notifications for a timeline item are presented to the
+-- user.
+--
+-- /See:/ 'notificationConfig' smart constructor.
+data NotificationConfig = NotificationConfig
+    { _ncDeliveryTime :: !(Maybe UTCTime)
+    , _ncLevel        :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'NotificationConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ncDeliveryTime'
+--
+-- * 'ncLevel'
+notificationConfig
+    :: NotificationConfig
+notificationConfig =
+    NotificationConfig
+    { _ncDeliveryTime = Nothing
+    , _ncLevel = Nothing
+    }
+
+-- | The time at which the notification should be delivered.
+ncDeliveryTime :: Lens' NotificationConfig (Maybe UTCTime)
+ncDeliveryTime
+  = lens _ncDeliveryTime
+      (\ s a -> s{_ncDeliveryTime = a})
+
+-- | Describes how important the notification is. Allowed values are: -
+-- DEFAULT - Notifications of default importance. A chime will be played to
+-- alert users.
+ncLevel :: Lens' NotificationConfig (Maybe Text)
+ncLevel = lens _ncLevel (\ s a -> s{_ncLevel = a})
+
+instance FromJSON NotificationConfig where
+        parseJSON
+          = withObject "NotificationConfig"
+              (\ o ->
+                 NotificationConfig <$>
+                   (o .:? "deliveryTime") <*> (o .:? "level"))
+
+instance ToJSON NotificationConfig where
+        toJSON NotificationConfig{..}
+          = object
+              (catMaybes
+                 [("deliveryTime" .=) <$> _ncDeliveryTime,
+                  ("level" .=) <$> _ncLevel])
 
 -- | A single menu command that is part of a Contact.
 --
@@ -289,6 +648,325 @@ instance FromJSON Command where
 instance ToJSON Command where
         toJSON Command{..}
           = object (catMaybes [("type" .=) <$> _cType])
+
+-- | A list of Contacts representing contacts. This is the response from the
+-- server to GET requests on the contacts collection.
+--
+-- /See:/ 'contactsListResponse' smart constructor.
+data ContactsListResponse = ContactsListResponse
+    { _clrKind  :: !Text
+    , _clrItems :: !(Maybe [Maybe Contact])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ContactsListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'clrKind'
+--
+-- * 'clrItems'
+contactsListResponse
+    :: ContactsListResponse
+contactsListResponse =
+    ContactsListResponse
+    { _clrKind = "mirror#contacts"
+    , _clrItems = Nothing
+    }
+
+-- | The type of resource. This is always mirror#contacts.
+clrKind :: Lens' ContactsListResponse Text
+clrKind = lens _clrKind (\ s a -> s{_clrKind = a})
+
+-- | Contact list.
+clrItems :: Lens' ContactsListResponse [Maybe Contact]
+clrItems
+  = lens _clrItems (\ s a -> s{_clrItems = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ContactsListResponse where
+        parseJSON
+          = withObject "ContactsListResponse"
+              (\ o ->
+                 ContactsListResponse <$>
+                   (o .:? "kind" .!= "mirror#contacts") <*>
+                     (o .:? "items" .!= mempty))
+
+instance ToJSON ContactsListResponse where
+        toJSON ContactsListResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _clrKind),
+                  ("items" .=) <$> _clrItems])
+
+-- | A list of timeline items. This is the response from the server to GET
+-- requests on the timeline collection.
+--
+-- /See:/ 'timelineListResponse' smart constructor.
+data TimelineListResponse = TimelineListResponse
+    { _tlrNextPageToken :: !(Maybe Text)
+    , _tlrKind          :: !Text
+    , _tlrItems         :: !(Maybe [Maybe TimelineItem])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TimelineListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tlrNextPageToken'
+--
+-- * 'tlrKind'
+--
+-- * 'tlrItems'
+timelineListResponse
+    :: TimelineListResponse
+timelineListResponse =
+    TimelineListResponse
+    { _tlrNextPageToken = Nothing
+    , _tlrKind = "mirror#timeline"
+    , _tlrItems = Nothing
+    }
+
+-- | The next page token. Provide this as the pageToken parameter in the
+-- request to retrieve the next page of results.
+tlrNextPageToken :: Lens' TimelineListResponse (Maybe Text)
+tlrNextPageToken
+  = lens _tlrNextPageToken
+      (\ s a -> s{_tlrNextPageToken = a})
+
+-- | The type of resource. This is always mirror#timeline.
+tlrKind :: Lens' TimelineListResponse Text
+tlrKind = lens _tlrKind (\ s a -> s{_tlrKind = a})
+
+-- | Items in the timeline.
+tlrItems :: Lens' TimelineListResponse [Maybe TimelineItem]
+tlrItems
+  = lens _tlrItems (\ s a -> s{_tlrItems = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON TimelineListResponse where
+        parseJSON
+          = withObject "TimelineListResponse"
+              (\ o ->
+                 TimelineListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "mirror#timeline")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON TimelineListResponse where
+        toJSON TimelineListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _tlrNextPageToken,
+                  Just ("kind" .= _tlrKind),
+                  ("items" .=) <$> _tlrItems])
+
+-- | A geographic location that can be associated with a timeline item.
+--
+-- /See:/ 'location' smart constructor.
+data Location = Location
+    { _lKind        :: !Text
+    , _lLatitude    :: !(Maybe Double)
+    , _lAddress     :: !(Maybe Text)
+    , _lDisplayName :: !(Maybe Text)
+    , _lId          :: !(Maybe Text)
+    , _lAccuracy    :: !(Maybe Double)
+    , _lLongitude   :: !(Maybe Double)
+    , _lTimestamp   :: !(Maybe UTCTime)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Location' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lKind'
+--
+-- * 'lLatitude'
+--
+-- * 'lAddress'
+--
+-- * 'lDisplayName'
+--
+-- * 'lId'
+--
+-- * 'lAccuracy'
+--
+-- * 'lLongitude'
+--
+-- * 'lTimestamp'
+location
+    :: Location
+location =
+    Location
+    { _lKind = "mirror#location"
+    , _lLatitude = Nothing
+    , _lAddress = Nothing
+    , _lDisplayName = Nothing
+    , _lId = Nothing
+    , _lAccuracy = Nothing
+    , _lLongitude = Nothing
+    , _lTimestamp = Nothing
+    }
+
+-- | The type of resource. This is always mirror#location.
+lKind :: Lens' Location Text
+lKind = lens _lKind (\ s a -> s{_lKind = a})
+
+-- | The latitude, in degrees.
+lLatitude :: Lens' Location (Maybe Double)
+lLatitude
+  = lens _lLatitude (\ s a -> s{_lLatitude = a})
+
+-- | The full address of the location.
+lAddress :: Lens' Location (Maybe Text)
+lAddress = lens _lAddress (\ s a -> s{_lAddress = a})
+
+-- | The name to be displayed. This may be a business name or a user-defined
+-- place, such as \"Home\".
+lDisplayName :: Lens' Location (Maybe Text)
+lDisplayName
+  = lens _lDisplayName (\ s a -> s{_lDisplayName = a})
+
+-- | The ID of the location.
+lId :: Lens' Location (Maybe Text)
+lId = lens _lId (\ s a -> s{_lId = a})
+
+-- | The accuracy of the location fix in meters.
+lAccuracy :: Lens' Location (Maybe Double)
+lAccuracy
+  = lens _lAccuracy (\ s a -> s{_lAccuracy = a})
+
+-- | The longitude, in degrees.
+lLongitude :: Lens' Location (Maybe Double)
+lLongitude
+  = lens _lLongitude (\ s a -> s{_lLongitude = a})
+
+-- | The time at which this location was captured, formatted according to RFC
+-- 3339.
+lTimestamp :: Lens' Location (Maybe UTCTime)
+lTimestamp
+  = lens _lTimestamp (\ s a -> s{_lTimestamp = a})
+
+instance FromJSON Location where
+        parseJSON
+          = withObject "Location"
+              (\ o ->
+                 Location <$>
+                   (o .:? "kind" .!= "mirror#location") <*>
+                     (o .:? "latitude")
+                     <*> (o .:? "address")
+                     <*> (o .:? "displayName")
+                     <*> (o .:? "id")
+                     <*> (o .:? "accuracy")
+                     <*> (o .:? "longitude")
+                     <*> (o .:? "timestamp"))
+
+instance ToJSON Location where
+        toJSON Location{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _lKind),
+                  ("latitude" .=) <$> _lLatitude,
+                  ("address" .=) <$> _lAddress,
+                  ("displayName" .=) <$> _lDisplayName,
+                  ("id" .=) <$> _lId, ("accuracy" .=) <$> _lAccuracy,
+                  ("longitude" .=) <$> _lLongitude,
+                  ("timestamp" .=) <$> _lTimestamp])
+
+-- | A notification delivered by the API.
+--
+-- /See:/ 'notification' smart constructor.
+data Notification = Notification
+    { _nOperation   :: !(Maybe Text)
+    , _nItemId      :: !(Maybe Text)
+    , _nCollection  :: !(Maybe Text)
+    , _nUserActions :: !(Maybe [Maybe UserAction])
+    , _nVerifyToken :: !(Maybe Text)
+    , _nUserToken   :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Notification' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'nOperation'
+--
+-- * 'nItemId'
+--
+-- * 'nCollection'
+--
+-- * 'nUserActions'
+--
+-- * 'nVerifyToken'
+--
+-- * 'nUserToken'
+notification
+    :: Notification
+notification =
+    Notification
+    { _nOperation = Nothing
+    , _nItemId = Nothing
+    , _nCollection = Nothing
+    , _nUserActions = Nothing
+    , _nVerifyToken = Nothing
+    , _nUserToken = Nothing
+    }
+
+-- | The type of operation that generated the notification.
+nOperation :: Lens' Notification (Maybe Text)
+nOperation
+  = lens _nOperation (\ s a -> s{_nOperation = a})
+
+-- | The ID of the item that generated the notification.
+nItemId :: Lens' Notification (Maybe Text)
+nItemId = lens _nItemId (\ s a -> s{_nItemId = a})
+
+-- | The collection that generated the notification.
+nCollection :: Lens' Notification (Maybe Text)
+nCollection
+  = lens _nCollection (\ s a -> s{_nCollection = a})
+
+-- | A list of actions taken by the user that triggered the notification.
+nUserActions :: Lens' Notification [Maybe UserAction]
+nUserActions
+  = lens _nUserActions (\ s a -> s{_nUserActions = a})
+      . _Default
+      . _Coerce
+
+-- | The secret verify token provided by the service when it subscribed for
+-- notifications.
+nVerifyToken :: Lens' Notification (Maybe Text)
+nVerifyToken
+  = lens _nVerifyToken (\ s a -> s{_nVerifyToken = a})
+
+-- | The user token provided by the service when it subscribed for
+-- notifications.
+nUserToken :: Lens' Notification (Maybe Text)
+nUserToken
+  = lens _nUserToken (\ s a -> s{_nUserToken = a})
+
+instance FromJSON Notification where
+        parseJSON
+          = withObject "Notification"
+              (\ o ->
+                 Notification <$>
+                   (o .:? "operation") <*> (o .:? "itemId") <*>
+                     (o .:? "collection")
+                     <*> (o .:? "userActions" .!= mempty)
+                     <*> (o .:? "verifyToken")
+                     <*> (o .:? "userToken"))
+
+instance ToJSON Notification where
+        toJSON Notification{..}
+          = object
+              (catMaybes
+                 [("operation" .=) <$> _nOperation,
+                  ("itemId" .=) <$> _nItemId,
+                  ("collection" .=) <$> _nCollection,
+                  ("userActions" .=) <$> _nUserActions,
+                  ("verifyToken" .=) <$> _nVerifyToken,
+                  ("userToken" .=) <$> _nUserToken])
 
 -- | A person or group that can be used as a creator or a contact.
 --
@@ -478,803 +1156,97 @@ instance ToJSON Contact where
                   ("type" .=) <$> _conType,
                   ("speakableName" .=) <$> _conSpeakableName])
 
--- | A list of Contacts representing contacts. This is the response from the
--- server to GET requests on the contacts collection.
+-- | A list of Attachments. This is the response from the server to GET
+-- requests on the attachments collection.
 --
--- /See:/ 'contactsListResponse' smart constructor.
-data ContactsListResponse = ContactsListResponse
-    { _clrKind  :: !Text
-    , _clrItems :: !(Maybe [Maybe Contact])
+-- /See:/ 'attachmentsListResponse' smart constructor.
+data AttachmentsListResponse = AttachmentsListResponse
+    { _alrKind  :: !Text
+    , _alrItems :: !(Maybe [Maybe Attachment])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ContactsListResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'AttachmentsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'clrKind'
+-- * 'alrKind'
 --
--- * 'clrItems'
-contactsListResponse
-    :: ContactsListResponse
-contactsListResponse =
-    ContactsListResponse
-    { _clrKind = "mirror#contacts"
-    , _clrItems = Nothing
+-- * 'alrItems'
+attachmentsListResponse
+    :: AttachmentsListResponse
+attachmentsListResponse =
+    AttachmentsListResponse
+    { _alrKind = "mirror#attachmentsList"
+    , _alrItems = Nothing
     }
 
--- | The type of resource. This is always mirror#contacts.
-clrKind :: Lens' ContactsListResponse Text
-clrKind = lens _clrKind (\ s a -> s{_clrKind = a})
+-- | The type of resource. This is always mirror#attachmentsList.
+alrKind :: Lens' AttachmentsListResponse Text
+alrKind = lens _alrKind (\ s a -> s{_alrKind = a})
 
--- | Contact list.
-clrItems :: Lens' ContactsListResponse [Maybe Contact]
-clrItems
-  = lens _clrItems (\ s a -> s{_clrItems = a}) .
+-- | The list of attachments.
+alrItems :: Lens' AttachmentsListResponse [Maybe Attachment]
+alrItems
+  = lens _alrItems (\ s a -> s{_alrItems = a}) .
       _Default
       . _Coerce
 
-instance FromJSON ContactsListResponse where
+instance FromJSON AttachmentsListResponse where
         parseJSON
-          = withObject "ContactsListResponse"
+          = withObject "AttachmentsListResponse"
               (\ o ->
-                 ContactsListResponse <$>
-                   (o .:? "kind" .!= "mirror#contacts") <*>
+                 AttachmentsListResponse <$>
+                   (o .:? "kind" .!= "mirror#attachmentsList") <*>
                      (o .:? "items" .!= mempty))
 
-instance ToJSON ContactsListResponse where
-        toJSON ContactsListResponse{..}
+instance ToJSON AttachmentsListResponse where
+        toJSON AttachmentsListResponse{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _clrKind),
-                  ("items" .=) <$> _clrItems])
+                 [Just ("kind" .= _alrKind),
+                  ("items" .=) <$> _alrItems])
 
--- | A geographic location that can be associated with a timeline item.
 --
--- /See:/ 'location' smart constructor.
-data Location = Location
-    { _lKind        :: !Text
-    , _lLatitude    :: !(Maybe Double)
-    , _lAddress     :: !(Maybe Text)
-    , _lDisplayName :: !(Maybe Text)
-    , _lId          :: !(Maybe Text)
-    , _lAccuracy    :: !(Maybe Double)
-    , _lLongitude   :: !(Maybe Double)
-    , _lTimestamp   :: !(Maybe UTCTime)
+-- /See:/ 'authToken' smart constructor.
+data AuthToken = AuthToken
+    { _atAuthToken :: !(Maybe Text)
+    , _atType      :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Location' with the minimum fields required to make a request.
+-- | Creates a value of 'AuthToken' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lKind'
+-- * 'atAuthToken'
 --
--- * 'lLatitude'
---
--- * 'lAddress'
---
--- * 'lDisplayName'
---
--- * 'lId'
---
--- * 'lAccuracy'
---
--- * 'lLongitude'
---
--- * 'lTimestamp'
-location
-    :: Location
-location =
-    Location
-    { _lKind = "mirror#location"
-    , _lLatitude = Nothing
-    , _lAddress = Nothing
-    , _lDisplayName = Nothing
-    , _lId = Nothing
-    , _lAccuracy = Nothing
-    , _lLongitude = Nothing
-    , _lTimestamp = Nothing
+-- * 'atType'
+authToken
+    :: AuthToken
+authToken =
+    AuthToken
+    { _atAuthToken = Nothing
+    , _atType = Nothing
     }
 
--- | The type of resource. This is always mirror#location.
-lKind :: Lens' Location Text
-lKind = lens _lKind (\ s a -> s{_lKind = a})
+atAuthToken :: Lens' AuthToken (Maybe Text)
+atAuthToken
+  = lens _atAuthToken (\ s a -> s{_atAuthToken = a})
 
--- | The latitude, in degrees.
-lLatitude :: Lens' Location (Maybe Double)
-lLatitude
-  = lens _lLatitude (\ s a -> s{_lLatitude = a})
+atType :: Lens' AuthToken (Maybe Text)
+atType = lens _atType (\ s a -> s{_atType = a})
 
--- | The full address of the location.
-lAddress :: Lens' Location (Maybe Text)
-lAddress = lens _lAddress (\ s a -> s{_lAddress = a})
-
--- | The name to be displayed. This may be a business name or a user-defined
--- place, such as \"Home\".
-lDisplayName :: Lens' Location (Maybe Text)
-lDisplayName
-  = lens _lDisplayName (\ s a -> s{_lDisplayName = a})
-
--- | The ID of the location.
-lId :: Lens' Location (Maybe Text)
-lId = lens _lId (\ s a -> s{_lId = a})
-
--- | The accuracy of the location fix in meters.
-lAccuracy :: Lens' Location (Maybe Double)
-lAccuracy
-  = lens _lAccuracy (\ s a -> s{_lAccuracy = a})
-
--- | The longitude, in degrees.
-lLongitude :: Lens' Location (Maybe Double)
-lLongitude
-  = lens _lLongitude (\ s a -> s{_lLongitude = a})
-
--- | The time at which this location was captured, formatted according to RFC
--- 3339.
-lTimestamp :: Lens' Location (Maybe UTCTime)
-lTimestamp
-  = lens _lTimestamp (\ s a -> s{_lTimestamp = a})
-
-instance FromJSON Location where
+instance FromJSON AuthToken where
         parseJSON
-          = withObject "Location"
+          = withObject "AuthToken"
               (\ o ->
-                 Location <$>
-                   (o .:? "kind" .!= "mirror#location") <*>
-                     (o .:? "latitude")
-                     <*> (o .:? "address")
-                     <*> (o .:? "displayName")
-                     <*> (o .:? "id")
-                     <*> (o .:? "accuracy")
-                     <*> (o .:? "longitude")
-                     <*> (o .:? "timestamp"))
+                 AuthToken <$> (o .:? "authToken") <*> (o .:? "type"))
 
-instance ToJSON Location where
-        toJSON Location{..}
+instance ToJSON AuthToken where
+        toJSON AuthToken{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _lKind),
-                  ("latitude" .=) <$> _lLatitude,
-                  ("address" .=) <$> _lAddress,
-                  ("displayName" .=) <$> _lDisplayName,
-                  ("id" .=) <$> _lId, ("accuracy" .=) <$> _lAccuracy,
-                  ("longitude" .=) <$> _lLongitude,
-                  ("timestamp" .=) <$> _lTimestamp])
-
--- | A list of Locations. This is the response from the server to GET
--- requests on the locations collection.
---
--- /See:/ 'locationsListResponse' smart constructor.
-data LocationsListResponse = LocationsListResponse
-    { _llrKind  :: !Text
-    , _llrItems :: !(Maybe [Maybe Location])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'LocationsListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'llrKind'
---
--- * 'llrItems'
-locationsListResponse
-    :: LocationsListResponse
-locationsListResponse =
-    LocationsListResponse
-    { _llrKind = "mirror#locationsList"
-    , _llrItems = Nothing
-    }
-
--- | The type of resource. This is always mirror#locationsList.
-llrKind :: Lens' LocationsListResponse Text
-llrKind = lens _llrKind (\ s a -> s{_llrKind = a})
-
--- | The list of locations.
-llrItems :: Lens' LocationsListResponse [Maybe Location]
-llrItems
-  = lens _llrItems (\ s a -> s{_llrItems = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON LocationsListResponse where
-        parseJSON
-          = withObject "LocationsListResponse"
-              (\ o ->
-                 LocationsListResponse <$>
-                   (o .:? "kind" .!= "mirror#locationsList") <*>
-                     (o .:? "items" .!= mempty))
-
-instance ToJSON LocationsListResponse where
-        toJSON LocationsListResponse{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _llrKind),
-                  ("items" .=) <$> _llrItems])
-
--- | A custom menu item that can be presented to the user by a timeline item.
---
--- /See:/ 'menuItem' smart constructor.
-data MenuItem = MenuItem
-    { _miValues             :: !(Maybe [Maybe MenuValue])
-    , _miRemoveWhenSelected :: !(Maybe Bool)
-    , _miAction             :: !(Maybe Text)
-    , _miPayload            :: !(Maybe Text)
-    , _miContextualCommand  :: !(Maybe Text)
-    , _miId                 :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'MenuItem' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'miValues'
---
--- * 'miRemoveWhenSelected'
---
--- * 'miAction'
---
--- * 'miPayload'
---
--- * 'miContextualCommand'
---
--- * 'miId'
-menuItem
-    :: MenuItem
-menuItem =
-    MenuItem
-    { _miValues = Nothing
-    , _miRemoveWhenSelected = Nothing
-    , _miAction = Nothing
-    , _miPayload = Nothing
-    , _miContextualCommand = Nothing
-    , _miId = Nothing
-    }
-
--- | For CUSTOM items, a list of values controlling the appearance of the
--- menu item in each of its states. A value for the DEFAULT state must be
--- provided. If the PENDING or CONFIRMED states are missing, they will not
--- be shown.
-miValues :: Lens' MenuItem [Maybe MenuValue]
-miValues
-  = lens _miValues (\ s a -> s{_miValues = a}) .
-      _Default
-      . _Coerce
-
--- | If set to true on a CUSTOM menu item, that item will be removed from the
--- menu after it is selected.
-miRemoveWhenSelected :: Lens' MenuItem (Maybe Bool)
-miRemoveWhenSelected
-  = lens _miRemoveWhenSelected
-      (\ s a -> s{_miRemoveWhenSelected = a})
-
--- | Controls the behavior when the user picks the menu option. Allowed
--- values are: - CUSTOM - Custom action set by the service. When the user
--- selects this menuItem, the API triggers a notification to your
--- callbackUrl with the userActions.type set to CUSTOM and the
--- userActions.payload set to the ID of this menu item. This is the default
--- value. - Built-in actions: - REPLY - Initiate a reply to the timeline
--- item using the voice recording UI. The creator attribute must be set in
--- the timeline item for this menu to be available. - REPLY_ALL - Same
--- behavior as REPLY. The original timeline item\'s recipients will be
--- added to the reply item. - DELETE - Delete the timeline item. - SHARE -
--- Share the timeline item with the available contacts. - READ_ALOUD - Read
--- the timeline item\'s speakableText aloud; if this field is not set, read
--- the text field; if none of those fields are set, this menu item is
--- ignored. - GET_MEDIA_INPUT - Allow users to provide media payloads to
--- Glassware from a menu item (currently, only transcribed text from voice
--- input is supported). Subscribe to notifications when users invoke this
--- menu item to receive the timeline item ID. Retrieve the media from the
--- timeline item in the payload property. - VOICE_CALL - Initiate a phone
--- call using the timeline item\'s creator.phoneNumber attribute as
--- recipient. - NAVIGATE - Navigate to the timeline item\'s location. -
--- TOGGLE_PINNED - Toggle the isPinned state of the timeline item. -
--- OPEN_URI - Open the payload of the menu item in the browser. -
--- PLAY_VIDEO - Open the payload of the menu item in the Glass video
--- player. - SEND_MESSAGE - Initiate sending a message to the timeline
--- item\'s creator: - If the creator.phoneNumber is set and Glass is
--- connected to an Android phone, the message is an SMS. - Otherwise, if
--- the creator.email is set, the message is an email.
-miAction :: Lens' MenuItem (Maybe Text)
-miAction = lens _miAction (\ s a -> s{_miAction = a})
-
--- | A generic payload whose meaning changes depending on this MenuItem\'s
--- action. - When the action is OPEN_URI, the payload is the URL of the
--- website to view. - When the action is PLAY_VIDEO, the payload is the
--- streaming URL of the video - When the action is GET_MEDIA_INPUT, the
--- payload is the text transcription of a user\'s speech input
-miPayload :: Lens' MenuItem (Maybe Text)
-miPayload
-  = lens _miPayload (\ s a -> s{_miPayload = a})
-
--- | The ContextualMenus.Command associated with this MenuItem (e.g.
--- READ_ALOUD). The voice label for this command will be displayed in the
--- voice menu and the touch label will be displayed in the touch menu. Note
--- that the default menu value\'s display name will be overriden if you
--- specify this property. Values that do not correspond to a
--- ContextualMenus.Command name will be ignored.
-miContextualCommand :: Lens' MenuItem (Maybe Text)
-miContextualCommand
-  = lens _miContextualCommand
-      (\ s a -> s{_miContextualCommand = a})
-
--- | The ID for this menu item. This is generated by the application and is
--- treated as an opaque token.
-miId :: Lens' MenuItem (Maybe Text)
-miId = lens _miId (\ s a -> s{_miId = a})
-
-instance FromJSON MenuItem where
-        parseJSON
-          = withObject "MenuItem"
-              (\ o ->
-                 MenuItem <$>
-                   (o .:? "values" .!= mempty) <*>
-                     (o .:? "removeWhenSelected")
-                     <*> (o .:? "action")
-                     <*> (o .:? "payload")
-                     <*> (o .:? "contextual_command")
-                     <*> (o .:? "id"))
-
-instance ToJSON MenuItem where
-        toJSON MenuItem{..}
-          = object
-              (catMaybes
-                 [("values" .=) <$> _miValues,
-                  ("removeWhenSelected" .=) <$> _miRemoveWhenSelected,
-                  ("action" .=) <$> _miAction,
-                  ("payload" .=) <$> _miPayload,
-                  ("contextual_command" .=) <$> _miContextualCommand,
-                  ("id" .=) <$> _miId])
-
--- | A single value that is part of a MenuItem.
---
--- /See:/ 'menuValue' smart constructor.
-data MenuValue = MenuValue
-    { _mvState       :: !(Maybe Text)
-    , _mvDisplayName :: !(Maybe Text)
-    , _mvIconUrl     :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'MenuValue' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'mvState'
---
--- * 'mvDisplayName'
---
--- * 'mvIconUrl'
-menuValue
-    :: MenuValue
-menuValue =
-    MenuValue
-    { _mvState = Nothing
-    , _mvDisplayName = Nothing
-    , _mvIconUrl = Nothing
-    }
-
--- | The state that this value applies to. Allowed values are: - DEFAULT -
--- Default value shown when displayed in the menuItems list. - PENDING -
--- Value shown when the menuItem has been selected by the user but can
--- still be cancelled. - CONFIRMED - Value shown when the menuItem has been
--- selected by the user and can no longer be cancelled.
-mvState :: Lens' MenuValue (Maybe Text)
-mvState = lens _mvState (\ s a -> s{_mvState = a})
-
--- | The name to display for the menu item. If you specify this property for
--- a built-in menu item, the default contextual voice command for that menu
--- item is not shown.
-mvDisplayName :: Lens' MenuValue (Maybe Text)
-mvDisplayName
-  = lens _mvDisplayName
-      (\ s a -> s{_mvDisplayName = a})
-
--- | URL of an icon to display with the menu item.
-mvIconUrl :: Lens' MenuValue (Maybe Text)
-mvIconUrl
-  = lens _mvIconUrl (\ s a -> s{_mvIconUrl = a})
-
-instance FromJSON MenuValue where
-        parseJSON
-          = withObject "MenuValue"
-              (\ o ->
-                 MenuValue <$>
-                   (o .:? "state") <*> (o .:? "displayName") <*>
-                     (o .:? "iconUrl"))
-
-instance ToJSON MenuValue where
-        toJSON MenuValue{..}
-          = object
-              (catMaybes
-                 [("state" .=) <$> _mvState,
-                  ("displayName" .=) <$> _mvDisplayName,
-                  ("iconUrl" .=) <$> _mvIconUrl])
-
--- | A notification delivered by the API.
---
--- /See:/ 'notification' smart constructor.
-data Notification = Notification
-    { _nOperation   :: !(Maybe Text)
-    , _nItemId      :: !(Maybe Text)
-    , _nCollection  :: !(Maybe Text)
-    , _nUserActions :: !(Maybe [Maybe UserAction])
-    , _nVerifyToken :: !(Maybe Text)
-    , _nUserToken   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Notification' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'nOperation'
---
--- * 'nItemId'
---
--- * 'nCollection'
---
--- * 'nUserActions'
---
--- * 'nVerifyToken'
---
--- * 'nUserToken'
-notification
-    :: Notification
-notification =
-    Notification
-    { _nOperation = Nothing
-    , _nItemId = Nothing
-    , _nCollection = Nothing
-    , _nUserActions = Nothing
-    , _nVerifyToken = Nothing
-    , _nUserToken = Nothing
-    }
-
--- | The type of operation that generated the notification.
-nOperation :: Lens' Notification (Maybe Text)
-nOperation
-  = lens _nOperation (\ s a -> s{_nOperation = a})
-
--- | The ID of the item that generated the notification.
-nItemId :: Lens' Notification (Maybe Text)
-nItemId = lens _nItemId (\ s a -> s{_nItemId = a})
-
--- | The collection that generated the notification.
-nCollection :: Lens' Notification (Maybe Text)
-nCollection
-  = lens _nCollection (\ s a -> s{_nCollection = a})
-
--- | A list of actions taken by the user that triggered the notification.
-nUserActions :: Lens' Notification [Maybe UserAction]
-nUserActions
-  = lens _nUserActions (\ s a -> s{_nUserActions = a})
-      . _Default
-      . _Coerce
-
--- | The secret verify token provided by the service when it subscribed for
--- notifications.
-nVerifyToken :: Lens' Notification (Maybe Text)
-nVerifyToken
-  = lens _nVerifyToken (\ s a -> s{_nVerifyToken = a})
-
--- | The user token provided by the service when it subscribed for
--- notifications.
-nUserToken :: Lens' Notification (Maybe Text)
-nUserToken
-  = lens _nUserToken (\ s a -> s{_nUserToken = a})
-
-instance FromJSON Notification where
-        parseJSON
-          = withObject "Notification"
-              (\ o ->
-                 Notification <$>
-                   (o .:? "operation") <*> (o .:? "itemId") <*>
-                     (o .:? "collection")
-                     <*> (o .:? "userActions" .!= mempty)
-                     <*> (o .:? "verifyToken")
-                     <*> (o .:? "userToken"))
-
-instance ToJSON Notification where
-        toJSON Notification{..}
-          = object
-              (catMaybes
-                 [("operation" .=) <$> _nOperation,
-                  ("itemId" .=) <$> _nItemId,
-                  ("collection" .=) <$> _nCollection,
-                  ("userActions" .=) <$> _nUserActions,
-                  ("verifyToken" .=) <$> _nVerifyToken,
-                  ("userToken" .=) <$> _nUserToken])
-
--- | Controls how notifications for a timeline item are presented to the
--- user.
---
--- /See:/ 'notificationConfig' smart constructor.
-data NotificationConfig = NotificationConfig
-    { _ncDeliveryTime :: !(Maybe UTCTime)
-    , _ncLevel        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'NotificationConfig' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ncDeliveryTime'
---
--- * 'ncLevel'
-notificationConfig
-    :: NotificationConfig
-notificationConfig =
-    NotificationConfig
-    { _ncDeliveryTime = Nothing
-    , _ncLevel = Nothing
-    }
-
--- | The time at which the notification should be delivered.
-ncDeliveryTime :: Lens' NotificationConfig (Maybe UTCTime)
-ncDeliveryTime
-  = lens _ncDeliveryTime
-      (\ s a -> s{_ncDeliveryTime = a})
-
--- | Describes how important the notification is. Allowed values are: -
--- DEFAULT - Notifications of default importance. A chime will be played to
--- alert users.
-ncLevel :: Lens' NotificationConfig (Maybe Text)
-ncLevel = lens _ncLevel (\ s a -> s{_ncLevel = a})
-
-instance FromJSON NotificationConfig where
-        parseJSON
-          = withObject "NotificationConfig"
-              (\ o ->
-                 NotificationConfig <$>
-                   (o .:? "deliveryTime") <*> (o .:? "level"))
-
-instance ToJSON NotificationConfig where
-        toJSON NotificationConfig{..}
-          = object
-              (catMaybes
-                 [("deliveryTime" .=) <$> _ncDeliveryTime,
-                  ("level" .=) <$> _ncLevel])
-
--- | A setting for Glass.
---
--- /See:/ 'setting' smart constructor.
-data Setting = Setting
-    { _setKind  :: !Text
-    , _setValue :: !(Maybe Text)
-    , _setId    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Setting' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'setKind'
---
--- * 'setValue'
---
--- * 'setId'
-setting
-    :: Setting
-setting =
-    Setting
-    { _setKind = "mirror#setting"
-    , _setValue = Nothing
-    , _setId = Nothing
-    }
-
--- | The type of resource. This is always mirror#setting.
-setKind :: Lens' Setting Text
-setKind = lens _setKind (\ s a -> s{_setKind = a})
-
--- | The setting value, as a string.
-setValue :: Lens' Setting (Maybe Text)
-setValue = lens _setValue (\ s a -> s{_setValue = a})
-
--- | The setting\'s ID. The following IDs are valid: - locale - The key to
--- the user’s language\/locale (BCP 47 identifier) that Glassware should
--- use to render localized content. - timezone - The key to the user’s
--- current time zone region as defined in the tz database. Example:
--- America\/Los_Angeles.
-setId :: Lens' Setting (Maybe Text)
-setId = lens _setId (\ s a -> s{_setId = a})
-
-instance FromJSON Setting where
-        parseJSON
-          = withObject "Setting"
-              (\ o ->
-                 Setting <$>
-                   (o .:? "kind" .!= "mirror#setting") <*>
-                     (o .:? "value")
-                     <*> (o .:? "id"))
-
-instance ToJSON Setting where
-        toJSON Setting{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _setKind),
-                  ("value" .=) <$> _setValue, ("id" .=) <$> _setId])
-
--- | A subscription to events on a collection.
---
--- /See:/ 'subscription' smart constructor.
-data Subscription = Subscription
-    { _sCallbackUrl  :: !(Maybe Text)
-    , _sOperation    :: !(Maybe [Text])
-    , _sNotification :: !(Maybe (Maybe Notification))
-    , _sKind         :: !Text
-    , _sCollection   :: !(Maybe Text)
-    , _sVerifyToken  :: !(Maybe Text)
-    , _sUserToken    :: !(Maybe Text)
-    , _sId           :: !(Maybe Text)
-    , _sUpdated      :: !(Maybe UTCTime)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Subscription' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'sCallbackUrl'
---
--- * 'sOperation'
---
--- * 'sNotification'
---
--- * 'sKind'
---
--- * 'sCollection'
---
--- * 'sVerifyToken'
---
--- * 'sUserToken'
---
--- * 'sId'
---
--- * 'sUpdated'
-subscription
-    :: Subscription
-subscription =
-    Subscription
-    { _sCallbackUrl = Nothing
-    , _sOperation = Nothing
-    , _sNotification = Nothing
-    , _sKind = "mirror#subscription"
-    , _sCollection = Nothing
-    , _sVerifyToken = Nothing
-    , _sUserToken = Nothing
-    , _sId = Nothing
-    , _sUpdated = Nothing
-    }
-
--- | The URL where notifications should be delivered (must start with
--- https:\/\/).
-sCallbackUrl :: Lens' Subscription (Maybe Text)
-sCallbackUrl
-  = lens _sCallbackUrl (\ s a -> s{_sCallbackUrl = a})
-
--- | A list of operations that should be subscribed to. An empty list
--- indicates that all operations on the collection should be subscribed to.
--- Allowed values are: - UPDATE - The item has been updated. - INSERT - A
--- new item has been inserted. - DELETE - The item has been deleted. -
--- MENU_ACTION - A custom menu item has been triggered by the user.
-sOperation :: Lens' Subscription [Text]
-sOperation
-  = lens _sOperation (\ s a -> s{_sOperation = a}) .
-      _Default
-      . _Coerce
-
--- | Container object for notifications. This is not populated in the
--- Subscription resource.
-sNotification :: Lens' Subscription (Maybe (Maybe Notification))
-sNotification
-  = lens _sNotification
-      (\ s a -> s{_sNotification = a})
-
--- | The type of resource. This is always mirror#subscription.
-sKind :: Lens' Subscription Text
-sKind = lens _sKind (\ s a -> s{_sKind = a})
-
--- | The collection to subscribe to. Allowed values are: - timeline - Changes
--- in the timeline including insertion, deletion, and updates. - locations
--- - Location updates. - settings - Settings updates.
-sCollection :: Lens' Subscription (Maybe Text)
-sCollection
-  = lens _sCollection (\ s a -> s{_sCollection = a})
-
--- | A secret token sent to the subscriber in notifications so that it can
--- verify that the notification was generated by Google.
-sVerifyToken :: Lens' Subscription (Maybe Text)
-sVerifyToken
-  = lens _sVerifyToken (\ s a -> s{_sVerifyToken = a})
-
--- | An opaque token sent to the subscriber in notifications so that it can
--- determine the ID of the user.
-sUserToken :: Lens' Subscription (Maybe Text)
-sUserToken
-  = lens _sUserToken (\ s a -> s{_sUserToken = a})
-
--- | The ID of the subscription.
-sId :: Lens' Subscription (Maybe Text)
-sId = lens _sId (\ s a -> s{_sId = a})
-
--- | The time at which this subscription was last modified, formatted
--- according to RFC 3339.
-sUpdated :: Lens' Subscription (Maybe UTCTime)
-sUpdated = lens _sUpdated (\ s a -> s{_sUpdated = a})
-
-instance FromJSON Subscription where
-        parseJSON
-          = withObject "Subscription"
-              (\ o ->
-                 Subscription <$>
-                   (o .:? "callbackUrl") <*>
-                     (o .:? "operation" .!= mempty)
-                     <*> (o .:? "notification")
-                     <*> (o .:? "kind" .!= "mirror#subscription")
-                     <*> (o .:? "collection")
-                     <*> (o .:? "verifyToken")
-                     <*> (o .:? "userToken")
-                     <*> (o .:? "id")
-                     <*> (o .:? "updated"))
-
-instance ToJSON Subscription where
-        toJSON Subscription{..}
-          = object
-              (catMaybes
-                 [("callbackUrl" .=) <$> _sCallbackUrl,
-                  ("operation" .=) <$> _sOperation,
-                  ("notification" .=) <$> _sNotification,
-                  Just ("kind" .= _sKind),
-                  ("collection" .=) <$> _sCollection,
-                  ("verifyToken" .=) <$> _sVerifyToken,
-                  ("userToken" .=) <$> _sUserToken, ("id" .=) <$> _sId,
-                  ("updated" .=) <$> _sUpdated])
-
--- | A list of Subscriptions. This is the response from the server to GET
--- requests on the subscription collection.
---
--- /See:/ 'subscriptionsListResponse' smart constructor.
-data SubscriptionsListResponse = SubscriptionsListResponse
-    { _slrKind  :: !Text
-    , _slrItems :: !(Maybe [Maybe Subscription])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'SubscriptionsListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'slrKind'
---
--- * 'slrItems'
-subscriptionsListResponse
-    :: SubscriptionsListResponse
-subscriptionsListResponse =
-    SubscriptionsListResponse
-    { _slrKind = "mirror#subscriptionsList"
-    , _slrItems = Nothing
-    }
-
--- | The type of resource. This is always mirror#subscriptionsList.
-slrKind :: Lens' SubscriptionsListResponse Text
-slrKind = lens _slrKind (\ s a -> s{_slrKind = a})
-
--- | The list of subscriptions.
-slrItems :: Lens' SubscriptionsListResponse [Maybe Subscription]
-slrItems
-  = lens _slrItems (\ s a -> s{_slrItems = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON SubscriptionsListResponse where
-        parseJSON
-          = withObject "SubscriptionsListResponse"
-              (\ o ->
-                 SubscriptionsListResponse <$>
-                   (o .:? "kind" .!= "mirror#subscriptionsList") <*>
-                     (o .:? "items" .!= mempty))
-
-instance ToJSON SubscriptionsListResponse where
-        toJSON SubscriptionsListResponse{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _slrKind),
-                  ("items" .=) <$> _slrItems])
+                 [("authToken" .=) <$> _atAuthToken,
+                  ("type" .=) <$> _atType])
 
 -- | Each item in the user\'s timeline is represented as a TimelineItem JSON
 -- structure, described below.
@@ -1652,121 +1624,149 @@ instance ToJSON TimelineItem where
                   ("title" .=) <$> _tiTitle,
                   ("inReplyTo" .=) <$> _tiInReplyTo])
 
--- | A list of timeline items. This is the response from the server to GET
--- requests on the timeline collection.
+-- | Represents media content, such as a photo, that can be attached to a
+-- timeline item.
 --
--- /See:/ 'timelineListResponse' smart constructor.
-data TimelineListResponse = TimelineListResponse
-    { _tlrNextPageToken :: !(Maybe Text)
-    , _tlrKind          :: !Text
-    , _tlrItems         :: !(Maybe [Maybe TimelineItem])
+-- /See:/ 'attachment' smart constructor.
+data Attachment = Attachment
+    { _aContentUrl          :: !(Maybe Text)
+    , _aId                  :: !(Maybe Text)
+    , _aIsProcessingContent :: !(Maybe Bool)
+    , _aContentType         :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TimelineListResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'Attachment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tlrNextPageToken'
+-- * 'aContentUrl'
 --
--- * 'tlrKind'
+-- * 'aId'
 --
--- * 'tlrItems'
-timelineListResponse
-    :: TimelineListResponse
-timelineListResponse =
-    TimelineListResponse
-    { _tlrNextPageToken = Nothing
-    , _tlrKind = "mirror#timeline"
-    , _tlrItems = Nothing
+-- * 'aIsProcessingContent'
+--
+-- * 'aContentType'
+attachment
+    :: Attachment
+attachment =
+    Attachment
+    { _aContentUrl = Nothing
+    , _aId = Nothing
+    , _aIsProcessingContent = Nothing
+    , _aContentType = Nothing
     }
 
--- | The next page token. Provide this as the pageToken parameter in the
--- request to retrieve the next page of results.
-tlrNextPageToken :: Lens' TimelineListResponse (Maybe Text)
-tlrNextPageToken
-  = lens _tlrNextPageToken
-      (\ s a -> s{_tlrNextPageToken = a})
+-- | The URL for the content.
+aContentUrl :: Lens' Attachment (Maybe Text)
+aContentUrl
+  = lens _aContentUrl (\ s a -> s{_aContentUrl = a})
 
--- | The type of resource. This is always mirror#timeline.
-tlrKind :: Lens' TimelineListResponse Text
-tlrKind = lens _tlrKind (\ s a -> s{_tlrKind = a})
+-- | The ID of the attachment.
+aId :: Lens' Attachment (Maybe Text)
+aId = lens _aId (\ s a -> s{_aId = a})
 
--- | Items in the timeline.
-tlrItems :: Lens' TimelineListResponse [Maybe TimelineItem]
-tlrItems
-  = lens _tlrItems (\ s a -> s{_tlrItems = a}) .
+-- | Indicates that the contentUrl is not available because the attachment
+-- content is still being processed. If the caller wishes to retrieve the
+-- content, it should try again later.
+aIsProcessingContent :: Lens' Attachment (Maybe Bool)
+aIsProcessingContent
+  = lens _aIsProcessingContent
+      (\ s a -> s{_aIsProcessingContent = a})
+
+-- | The MIME type of the attachment.
+aContentType :: Lens' Attachment (Maybe Text)
+aContentType
+  = lens _aContentType (\ s a -> s{_aContentType = a})
+
+instance FromJSON Attachment where
+        parseJSON
+          = withObject "Attachment"
+              (\ o ->
+                 Attachment <$>
+                   (o .:? "contentUrl") <*> (o .:? "id") <*>
+                     (o .:? "isProcessingContent")
+                     <*> (o .:? "contentType"))
+
+instance ToJSON Attachment where
+        toJSON Attachment{..}
+          = object
+              (catMaybes
+                 [("contentUrl" .=) <$> _aContentUrl,
+                  ("id" .=) <$> _aId,
+                  ("isProcessingContent" .=) <$> _aIsProcessingContent,
+                  ("contentType" .=) <$> _aContentType])
+
+-- | Represents an account passed into the Account Manager on Glass.
+--
+-- /See:/ 'account' smart constructor.
+data Account = Account
+    { _aAuthTokens :: !(Maybe [Maybe AuthToken])
+    , _aUserData   :: !(Maybe [Maybe UserData])
+    , _aPassword   :: !(Maybe Text)
+    , _aFeatures   :: !(Maybe [Text])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Account' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aAuthTokens'
+--
+-- * 'aUserData'
+--
+-- * 'aPassword'
+--
+-- * 'aFeatures'
+account
+    :: Account
+account =
+    Account
+    { _aAuthTokens = Nothing
+    , _aUserData = Nothing
+    , _aPassword = Nothing
+    , _aFeatures = Nothing
+    }
+
+aAuthTokens :: Lens' Account [Maybe AuthToken]
+aAuthTokens
+  = lens _aAuthTokens (\ s a -> s{_aAuthTokens = a}) .
       _Default
       . _Coerce
 
-instance FromJSON TimelineListResponse where
-        parseJSON
-          = withObject "TimelineListResponse"
-              (\ o ->
-                 TimelineListResponse <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!= "mirror#timeline")
-                     <*> (o .:? "items" .!= mempty))
+aUserData :: Lens' Account [Maybe UserData]
+aUserData
+  = lens _aUserData (\ s a -> s{_aUserData = a}) .
+      _Default
+      . _Coerce
 
-instance ToJSON TimelineListResponse where
-        toJSON TimelineListResponse{..}
+aPassword :: Lens' Account (Maybe Text)
+aPassword
+  = lens _aPassword (\ s a -> s{_aPassword = a})
+
+aFeatures :: Lens' Account [Text]
+aFeatures
+  = lens _aFeatures (\ s a -> s{_aFeatures = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON Account where
+        parseJSON
+          = withObject "Account"
+              (\ o ->
+                 Account <$>
+                   (o .:? "authTokens" .!= mempty) <*>
+                     (o .:? "userData" .!= mempty)
+                     <*> (o .:? "password")
+                     <*> (o .:? "features" .!= mempty))
+
+instance ToJSON Account where
+        toJSON Account{..}
           = object
               (catMaybes
-                 [("nextPageToken" .=) <$> _tlrNextPageToken,
-                  Just ("kind" .= _tlrKind),
-                  ("items" .=) <$> _tlrItems])
-
--- | Represents an action taken by the user that triggered a notification.
---
--- /See:/ 'userAction' smart constructor.
-data UserAction = UserAction
-    { _uaPayload :: !(Maybe Text)
-    , _uaType    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'UserAction' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'uaPayload'
---
--- * 'uaType'
-userAction
-    :: UserAction
-userAction =
-    UserAction
-    { _uaPayload = Nothing
-    , _uaType = Nothing
-    }
-
--- | An optional payload for the action. For actions of type CUSTOM, this is
--- the ID of the custom menu item that was selected.
-uaPayload :: Lens' UserAction (Maybe Text)
-uaPayload
-  = lens _uaPayload (\ s a -> s{_uaPayload = a})
-
--- | The type of action. The value of this can be: - SHARE - the user shared
--- an item. - REPLY - the user replied to an item. - REPLY_ALL - the user
--- replied to all recipients of an item. - CUSTOM - the user selected a
--- custom menu item on the timeline item. - DELETE - the user deleted the
--- item. - PIN - the user pinned the item. - UNPIN - the user unpinned the
--- item. - LAUNCH - the user initiated a voice command. In the future,
--- additional types may be added. UserActions with unrecognized types
--- should be ignored.
-uaType :: Lens' UserAction (Maybe Text)
-uaType = lens _uaType (\ s a -> s{_uaType = a})
-
-instance FromJSON UserAction where
-        parseJSON
-          = withObject "UserAction"
-              (\ o ->
-                 UserAction <$> (o .:? "payload") <*> (o .:? "type"))
-
-instance ToJSON UserAction where
-        toJSON UserAction{..}
-          = object
-              (catMaybes
-                 [("payload" .=) <$> _uaPayload,
-                  ("type" .=) <$> _uaType])
+                 [("authTokens" .=) <$> _aAuthTokens,
+                  ("userData" .=) <$> _aUserData,
+                  ("password" .=) <$> _aPassword,
+                  ("features" .=) <$> _aFeatures])
 
 --
 -- /See:/ 'userData' smart constructor.

@@ -17,42 +17,113 @@
 -- /See:/ <https://developers.google.com/datastore/ Google Cloud Datastore API Reference>
 module Network.Google.Datastore
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** Google Cloud Datastore API
       Datastore
-    , DatasetsAPI
-    , DatasetsBeginTransaction
-    , DatasetsAllocateIds
-    , DatasetsRunQuery
-    , DatasetsRollback
-    , DatasetsLookup
-    , DatasetsCommit
+    , datastore
+    , datastoreURL
+
+    -- ** datastore.datasets.allocateIds
+    , module Network.Google.API.Datastore.Datasets.AllocateIds
+
+    -- ** datastore.datasets.beginTransaction
+    , module Network.Google.API.Datastore.Datasets.BeginTransaction
+
+    -- ** datastore.datasets.commit
+    , module Network.Google.API.Datastore.Datasets.Commit
+
+    -- ** datastore.datasets.lookup
+    , module Network.Google.API.Datastore.Datasets.Lookup
+
+    -- ** datastore.datasets.rollback
+    , module Network.Google.API.Datastore.Datasets.Rollback
+
+    -- ** datastore.datasets.runQuery
+    , module Network.Google.API.Datastore.Datasets.RunQuery
 
     -- * Types
+
+    -- ** PropertyReference
+    , PropertyReference
+    , propertyReference
+    , prName
+
+    -- ** GqlQueryArg
+    , GqlQueryArg
+    , gqlQueryArg
+    , gqaCursor
+    , gqaValue
+    , gqaName
+
+    -- ** ResponseHeader
+    , ResponseHeader
+    , responseHeader
+    , rhKind
+
+    -- ** KeyPathElement
+    , KeyPathElement
+    , keyPathElement
+    , kpeKind
+    , kpeName
+    , kpeId
+
+    -- ** PropertyFilterOperator
+    , PropertyFilterOperator (..)
+
+    -- ** PropertyFilter
+    , PropertyFilter
+    , propertyFilter
+    , pfProperty
+    , pfOperator
+    , pfValue
+
+    -- ** Key
+    , Key
+    , key
+    , keyPartitionId
+    , keyPath
 
     -- ** AllocateIdsRequest
     , AllocateIdsRequest
     , allocateIdsRequest
     , airKeys
 
-    -- ** AllocateIdsResponse
-    , AllocateIdsResponse
-    , allocateIdsResponse
-    , aKeys
-    , aHeader
+    -- ** RunQueryRequest
+    , RunQueryRequest
+    , runQueryRequest
+    , rqrPartitionId
+    , rqrGqlQuery
+    , rqrQuery
+    , rqrReadOptions
 
     -- ** BeginTransactionRequest
     , BeginTransactionRequest
     , beginTransactionRequest
     , btrIsolationLevel
 
-    -- ** BeginTransactionRequestIsolationLevel
-    , BeginTransactionRequestIsolationLevel (..)
+    -- ** Alt
+    , Alt (..)
 
-    -- ** BeginTransactionResponse
-    , BeginTransactionResponse
-    , beginTransactionResponse
-    , btrTransaction
-    , btrHeader
+    -- ** RollbackResponse
+    , RollbackResponse
+    , rollbackResponse
+    , rrHeader
+
+    -- ** ReadOptionsReadConsistency
+    , ReadOptionsReadConsistency (..)
+
+    -- ** PropertyExpression
+    , PropertyExpression
+    , propertyExpression
+    , peProperty
+    , peAggregationFunction
+
+    -- ** Filter
+    , Filter
+    , filter'
+    , fCompositeFilter
+    , fPropertyFilter
 
     -- ** CommitRequest
     , CommitRequest
@@ -62,23 +133,8 @@ module Network.Google.Datastore
     , crTransaction
     , crIgnoreReadOnly
 
-    -- ** CommitRequestMode
-    , CommitRequestMode (..)
-
-    -- ** CommitResponse
-    , CommitResponse
-    , commitResponse
-    , crMutationResult
-    , crHeader
-
-    -- ** CompositeFilter
-    , CompositeFilter
-    , compositeFilter
-    , cfOperator
-    , cfFilters
-
-    -- ** CompositeFilterOperator
-    , CompositeFilterOperator (..)
+    -- ** QueryResultBatchMoreResults
+    , QueryResultBatchMoreResults (..)
 
     -- ** Entity
     , Entity
@@ -86,59 +142,14 @@ module Network.Google.Datastore
     , eKey
     , eProperties
 
-    -- ** EntityProperties
-    , EntityProperties
-    , entityProperties
+    -- ** CompositeFilterOperator
+    , CompositeFilterOperator (..)
 
-    -- ** EntityResult
-    , EntityResult
-    , entityResult
-    , erEntity
-
-    -- ** Filter
-    , Filter
-    , filter'
-    , fCompositeFilter
-    , fPropertyFilter
-
-    -- ** GqlQuery
-    , GqlQuery
-    , gqlQuery
-    , gqAllowLiteral
-    , gqNumberArgs
-    , gqQueryString
-    , gqNameArgs
-
-    -- ** GqlQueryArg
-    , GqlQueryArg
-    , gqlQueryArg
-    , gqaCursor
-    , gqaValue
-    , gqaName
-
-    -- ** Key
-    , Key
-    , key
-    , keyPartitionId
-    , keyPath
-
-    -- ** KeyPathElement
-    , KeyPathElement
-    , keyPathElement
-    , kpeKind
-    , kpeName
-    , kpeId
-
-    -- ** KindExpression
-    , KindExpression
-    , kindExpression
-    , keName
-
-    -- ** LookupRequest
-    , LookupRequest
-    , lookupRequest
-    , lrKeys
-    , lrReadOptions
+    -- ** PropertyOrder
+    , PropertyOrder
+    , propertyOrder
+    , poProperty
+    , poDirection
 
     -- ** LookupResponse
     , LookupResponse
@@ -148,27 +159,14 @@ module Network.Google.Datastore
     , lrMissing
     , lrHeader
 
-    -- ** Mutation
-    , Mutation
-    , mutation
-    , mInsert
-    , mForce
-    , mInsertAutoId
-    , mUpsert
-    , mDelete
-    , mUpdate
-
-    -- ** MutationResult
-    , MutationResult
-    , mutationResult
-    , mrInsertAutoIdKeys
-    , mrIndexUpdates
-
     -- ** PartitionId
     , PartitionId
     , partitionId
     , piNamespace
     , piDatasetId
+
+    -- ** PropertyOrderDirection
+    , PropertyOrderDirection (..)
 
     -- ** Property
     , Property
@@ -186,38 +184,24 @@ module Network.Google.Datastore
     , pMeaning
     , pBlobValue
 
-    -- ** PropertyExpression
-    , PropertyExpression
-    , propertyExpression
-    , peProperty
-    , peAggregationFunction
+    -- ** QueryResultBatch
+    , QueryResultBatch
+    , queryResultBatch
+    , qrbSkippedResults
+    , qrbEntityResultType
+    , qrbEntityResults
+    , qrbMoreResults
+    , qrbEndCursor
 
-    -- ** PropertyExpressionAggregationFunction
-    , PropertyExpressionAggregationFunction (..)
+    -- ** RollbackRequest
+    , RollbackRequest
+    , rollbackRequest
+    , rrTransaction
 
-    -- ** PropertyFilter
-    , PropertyFilter
-    , propertyFilter
-    , pfProperty
-    , pfOperator
-    , pfValue
-
-    -- ** PropertyFilterOperator
-    , PropertyFilterOperator (..)
-
-    -- ** PropertyOrder
-    , PropertyOrder
-    , propertyOrder
-    , poProperty
-    , poDirection
-
-    -- ** PropertyOrderDirection
-    , PropertyOrderDirection (..)
-
-    -- ** PropertyReference
-    , PropertyReference
-    , propertyReference
-    , prName
+    -- ** KindExpression
+    , KindExpression
+    , kindExpression
+    , keName
 
     -- ** Query
     , Query
@@ -232,58 +216,69 @@ module Network.Google.Datastore
     , qKinds
     , qOrder
 
-    -- ** QueryResultBatch
-    , QueryResultBatch
-    , queryResultBatch
-    , qrbSkippedResults
-    , qrbEntityResultType
-    , qrbEntityResults
-    , qrbMoreResults
-    , qrbEndCursor
-
-    -- ** QueryResultBatchEntityResultType
-    , QueryResultBatchEntityResultType (..)
-
-    -- ** QueryResultBatchMoreResults
-    , QueryResultBatchMoreResults (..)
-
     -- ** ReadOptions
     , ReadOptions
     , readOptions
     , roReadConsistency
     , roTransaction
 
-    -- ** ReadOptionsReadConsistency
-    , ReadOptionsReadConsistency (..)
+    -- ** CommitResponse
+    , CommitResponse
+    , commitResponse
+    , crMutationResult
+    , crHeader
 
-    -- ** ResponseHeader
-    , ResponseHeader
-    , responseHeader
-    , rhKind
+    -- ** EntityResult
+    , EntityResult
+    , entityResult
+    , erEntity
 
-    -- ** RollbackRequest
-    , RollbackRequest
-    , rollbackRequest
-    , rrTransaction
-
-    -- ** RollbackResponse
-    , RollbackResponse
-    , rollbackResponse
-    , rrHeader
-
-    -- ** RunQueryRequest
-    , RunQueryRequest
-    , runQueryRequest
-    , rqrPartitionId
-    , rqrGqlQuery
-    , rqrQuery
-    , rqrReadOptions
+    -- ** CompositeFilter
+    , CompositeFilter
+    , compositeFilter
+    , cfOperator
+    , cfFilters
 
     -- ** RunQueryResponse
     , RunQueryResponse
     , runQueryResponse
     , rqrBatch
     , rqrHeader
+
+    -- ** CommitRequestMode
+    , CommitRequestMode (..)
+
+    -- ** MutationResult
+    , MutationResult
+    , mutationResult
+    , mrInsertAutoIdKeys
+    , mrIndexUpdates
+
+    -- ** BeginTransactionResponse
+    , BeginTransactionResponse
+    , beginTransactionResponse
+    , btrTransaction
+    , btrHeader
+
+    -- ** PropertyExpressionAggregationFunction
+    , PropertyExpressionAggregationFunction (..)
+
+    -- ** GqlQuery
+    , GqlQuery
+    , gqlQuery
+    , gqAllowLiteral
+    , gqNumberArgs
+    , gqQueryString
+    , gqNameArgs
+
+    -- ** AllocateIdsResponse
+    , AllocateIdsResponse
+    , allocateIdsResponse
+    , aKeys
+    , aHeader
+
+    -- ** BeginTransactionRequestIsolationLevel
+    , BeginTransactionRequestIsolationLevel (..)
 
     -- ** Value
     , Value
@@ -300,8 +295,37 @@ module Network.Google.Datastore
     , vBooleanValue
     , vMeaning
     , vBlobValue
+
+    -- ** LookupRequest
+    , LookupRequest
+    , lookupRequest
+    , lrKeys
+    , lrReadOptions
+
+    -- ** QueryResultBatchEntityResultType
+    , QueryResultBatchEntityResultType (..)
+
+    -- ** EntityProperties
+    , EntityProperties
+    , entityProperties
+
+    -- ** Mutation
+    , Mutation
+    , mutation
+    , mInsert
+    , mForce
+    , mInsertAutoId
+    , mUpsert
+    , mDelete
+    , mUpdate
     ) where
 
+import           Network.Google.API.Datastore.Datasets.AllocateIds
+import           Network.Google.API.Datastore.Datasets.BeginTransaction
+import           Network.Google.API.Datastore.Datasets.Commit
+import           Network.Google.API.Datastore.Datasets.Lookup
+import           Network.Google.API.Datastore.Datasets.Rollback
+import           Network.Google.API.Datastore.Datasets.RunQuery
 import           Network.Google.Datastore.Types
 import           Network.Google.Prelude
 
@@ -309,107 +333,12 @@ import           Network.Google.Prelude
 TODO
 -}
 
-type Datastore = DatasetsAPI
+type Datastore =
+     DatasetsLookupAPI :<|> DatasetsAllocateIdsAPI :<|>
+       DatasetsCommitAPI
+       :<|> DatasetsRollbackAPI
+       :<|> DatasetsBeginTransactionAPI
+       :<|> DatasetsRunQueryAPI
 
-type DatasetsAPI =
-     DatasetsBeginTransaction :<|> DatasetsAllocateIds
-       :<|> DatasetsRunQuery
-       :<|> DatasetsRollback
-       :<|> DatasetsLookup
-       :<|> DatasetsCommit
-
--- | Begin a new transaction.
-type DatasetsBeginTransaction =
-     "datastore" :>
-       "v1beta2" :>
-         "datasets" :>
-           Capture "datasetId" Text :>
-             "beginTransaction" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Post '[JSON] BeginTransactionResponse
-
--- | Allocate IDs for incomplete keys (useful for referencing an entity
--- before it is inserted).
-type DatasetsAllocateIds =
-     "datastore" :>
-       "v1beta2" :>
-         "datasets" :>
-           Capture "datasetId" Text :>
-             "allocateIds" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Post '[JSON] AllocateIdsResponse
-
--- | Query for entities.
-type DatasetsRunQuery =
-     "datastore" :>
-       "v1beta2" :>
-         "datasets" :>
-           Capture "datasetId" Text :>
-             "runQuery" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Post '[JSON] RunQueryResponse
-
--- | Roll back a transaction.
-type DatasetsRollback =
-     "datastore" :>
-       "v1beta2" :>
-         "datasets" :>
-           Capture "datasetId" Text :>
-             "rollback" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Post '[JSON] RollbackResponse
-
--- | Look up some entities by key.
-type DatasetsLookup =
-     "datastore" :>
-       "v1beta2" :>
-         "datasets" :>
-           Capture "datasetId" Text :>
-             "lookup" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] LookupResponse
-
--- | Commit a transaction, optionally creating, deleting or modifying some
--- entities.
-type DatasetsCommit =
-     "datastore" :>
-       "v1beta2" :>
-         "datasets" :>
-           Capture "datasetId" Text :>
-             "commit" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] CommitResponse
+datastore :: Proxy Datastore
+datastore = Proxy

@@ -18,58 +18,93 @@
 -- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference>
 module Network.Google.AdSense.Host
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** AdSense Host API
       AdSenseHost
-    , AssociationsessionsAPI
-    , AssociationsessionsVerify
-    , AssociationsessionsStart
-    , AdclientsAPI
-    , AdclientsList
-    , AdclientsGet
-    , AccountsAPI
-    , AdclientsAPI
-    , AdclientsList
-    , AdclientsGet
-    , ReportsAPI
-    , ReportsGenerate
-    , AdunitsAPI
-    , AdunitsInsert
-    , AdunitsList
-    , AdunitsPatch
-    , AdunitsGet
-    , AdunitsGetAdCode
-    , AdunitsDelete
-    , AdunitsUpdate
-    , ReportsAPI
-    , ReportsGenerate
-    , UrlchannelsAPI
-    , UrlchannelsInsert
-    , UrlchannelsList
-    , UrlchannelsDelete
-    , CustomchannelsAPI
-    , CustomchannelsInsert
-    , CustomchannelsList
-    , CustomchannelsPatch
-    , CustomchannelsGet
-    , CustomchannelsDelete
-    , CustomchannelsUpdate
+    , adSenseHost
+    , adSenseHostURL
+
+    -- ** adsensehost.accounts.adclients.get
+    , module Network.Google.API.AdSenseHost.Accounts.Adclients.Get
+
+    -- ** adsensehost.accounts.adclients.list
+    , module Network.Google.API.AdSenseHost.Accounts.Adclients.List
+
+    -- ** adsensehost.accounts.adunits.delete
+    , module Network.Google.API.AdSenseHost.Accounts.Adunits.Delete
+
+    -- ** adsensehost.accounts.adunits.get
+    , module Network.Google.API.AdSenseHost.Accounts.Adunits.Get
+
+    -- ** adsensehost.accounts.adunits.getAdCode
+    , module Network.Google.API.AdSenseHost.Accounts.Adunits.GetAdCode
+
+    -- ** adsensehost.accounts.adunits.insert
+    , module Network.Google.API.AdSenseHost.Accounts.Adunits.Insert
+
+    -- ** adsensehost.accounts.adunits.list
+    , module Network.Google.API.AdSenseHost.Accounts.Adunits.List
+
+    -- ** adsensehost.accounts.adunits.patch
+    , module Network.Google.API.AdSenseHost.Accounts.Adunits.Patch
+
+    -- ** adsensehost.accounts.adunits.update
+    , module Network.Google.API.AdSenseHost.Accounts.Adunits.Update
+
+    -- ** adsensehost.accounts.reports.generate
+    , module Network.Google.API.AdSenseHost.Accounts.Reports.Generate
+
+    -- ** adsensehost.adclients.get
+    , module Network.Google.API.AdSenseHost.Adclients.Get
+
+    -- ** adsensehost.adclients.list
+    , module Network.Google.API.AdSenseHost.Adclients.List
+
+    -- ** adsensehost.associationsessions.start
+    , module Network.Google.API.AdSenseHost.Associationsessions.Start
+
+    -- ** adsensehost.associationsessions.verify
+    , module Network.Google.API.AdSenseHost.Associationsessions.Verify
+
+    -- ** adsensehost.customchannels.delete
+    , module Network.Google.API.AdSenseHost.Customchannels.Delete
+
+    -- ** adsensehost.customchannels.get
+    , module Network.Google.API.AdSenseHost.Customchannels.Get
+
+    -- ** adsensehost.customchannels.insert
+    , module Network.Google.API.AdSenseHost.Customchannels.Insert
+
+    -- ** adsensehost.customchannels.list
+    , module Network.Google.API.AdSenseHost.Customchannels.List
+
+    -- ** adsensehost.customchannels.patch
+    , module Network.Google.API.AdSenseHost.Customchannels.Patch
+
+    -- ** adsensehost.customchannels.update
+    , module Network.Google.API.AdSenseHost.Customchannels.Update
+
+    -- ** adsensehost.reports.generate
+    , module Network.Google.API.AdSenseHost.Reports.Generate
+
+    -- ** adsensehost.urlchannels.delete
+    , module Network.Google.API.AdSenseHost.URLchannels.Delete
+
+    -- ** adsensehost.urlchannels.insert
+    , module Network.Google.API.AdSenseHost.URLchannels.Insert
+
+    -- ** adsensehost.urlchannels.list
+    , module Network.Google.API.AdSenseHost.URLchannels.List
 
     -- * Types
 
-    -- ** Account
-    , Account
-    , account
-    , accStatus
-    , accKind
-    , accName
-    , accId
-
-    -- ** Accounts
-    , Accounts
-    , accounts
-    , aEtag
-    , aKind
-    , aItems
+    -- ** ReportItemHeaders
+    , ReportItemHeaders
+    , reportItemHeaders
+    , rihName
+    , rihCurrency
+    , rihType
 
     -- ** AdClient
     , AdClient
@@ -80,55 +115,6 @@ module Network.Google.AdSense.Host
     , acId
     , acProductCode
 
-    -- ** AdClients
-    , AdClients
-    , adClients
-    , acsEtag
-    , acsNextPageToken
-    , acsKind
-    , acsItems
-
-    -- ** AdCode
-    , AdCode
-    , adCode
-    , adKind
-    , adAdCode
-
-    -- ** AdStyle
-    , AdStyle
-    , adStyle
-    , assCorners
-    , assKind
-    , assFont
-    , assColors
-
-    -- ** AdStyleColors
-    , AdStyleColors
-    , adStyleColors
-    , ascText
-    , ascUrl
-    , ascBorder
-    , ascTitle
-    , ascBackground
-
-    -- ** AdStyleFont
-    , AdStyleFont
-    , adStyleFont
-    , asfSize
-    , asfFamily
-
-    -- ** AdUnit
-    , AdUnit
-    , adUnit
-    , auuStatus
-    , auuMobileContentAdsSettings
-    , auuKind
-    , auuCustomStyle
-    , auuName
-    , auuContentAdsSettings
-    , auuCode
-    , auuId
-
     -- ** AdUnitBackupOptionContentAdsSettings
     , AdUnitBackupOptionContentAdsSettings
     , adUnitBackupOptionContentAdsSettings
@@ -136,12 +122,12 @@ module Network.Google.AdSense.Host
     , aubocasUrl
     , aubocasType
 
-    -- ** AdUnitContentAdsSettings
-    , AdUnitContentAdsSettings
-    , adUnitContentAdsSettings
-    , aucasBackupOption
-    , aucasSize
-    , aucasType
+    -- ** Accounts
+    , Accounts
+    , accounts
+    , aEtag
+    , aKind
+    , aItems
 
     -- ** AdUnitMobileContentAdsSettings
     , AdUnitMobileContentAdsSettings
@@ -151,13 +137,43 @@ module Network.Google.AdSense.Host
     , aumcasMarkupLanguage
     , aumcasType
 
-    -- ** AdUnits
-    , AdUnits
-    , adUnits
-    , auEtag
-    , auNextPageToken
-    , auKind
-    , auItems
+    -- ** Alt
+    , Alt (..)
+
+    -- ** CustomChannel
+    , CustomChannel
+    , customChannel
+    , ccKind
+    , ccName
+    , ccCode
+    , ccId
+
+    -- ** AdCode
+    , AdCode
+    , adCode
+    , adKind
+    , adAdCode
+
+    -- ** UrlChannel
+    , UrlChannel
+    , urlChannel
+    , ucKind
+    , ucId
+    , ucUrlPattern
+
+    -- ** Report
+    , Report
+    , report
+    , rKind
+    , rAverages
+    , rWarnings
+    , rRows
+    , rTotals
+    , rHeaders
+    , rTotalMatchedRows
+
+    -- ** AssociationsessionsStart'ProductCode
+    , AssociationsessionsStart'ProductCode (..)
 
     -- ** AssociationSession
     , AssociationSession
@@ -172,13 +188,71 @@ module Network.Google.AdSense.Host
     , asWebsiteUrl
     , asRedirectUrl
 
-    -- ** CustomChannel
-    , CustomChannel
-    , customChannel
-    , ccKind
-    , ccName
-    , ccCode
-    , ccId
+    -- ** AdClients
+    , AdClients
+    , adClients
+    , acsEtag
+    , acsNextPageToken
+    , acsKind
+    , acsItems
+
+    -- ** AdStyleColors
+    , AdStyleColors
+    , adStyleColors
+    , ascText
+    , ascUrl
+    , ascBorder
+    , ascTitle
+    , ascBackground
+
+    -- ** AdUnitContentAdsSettings
+    , AdUnitContentAdsSettings
+    , adUnitContentAdsSettings
+    , aucasBackupOption
+    , aucasSize
+    , aucasType
+
+    -- ** AdStyleFont
+    , AdStyleFont
+    , adStyleFont
+    , asfSize
+    , asfFamily
+
+    -- ** AdStyle
+    , AdStyle
+    , adStyle
+    , assCorners
+    , assKind
+    , assFont
+    , assColors
+
+    -- ** AdUnits
+    , AdUnits
+    , adUnits
+    , auEtag
+    , auNextPageToken
+    , auKind
+    , auItems
+
+    -- ** AdUnit
+    , AdUnit
+    , adUnit
+    , auuStatus
+    , auuMobileContentAdsSettings
+    , auuKind
+    , auuCustomStyle
+    , auuName
+    , auuContentAdsSettings
+    , auuCode
+    , auuId
+
+    -- ** UrlChannels
+    , UrlChannels
+    , urlChannels
+    , urlcEtag
+    , urlcNextPageToken
+    , urlcKind
+    , urlcItems
 
     -- ** CustomChannels
     , CustomChannels
@@ -188,41 +262,40 @@ module Network.Google.AdSense.Host
     , cKind
     , cItems
 
-    -- ** Report
-    , Report
-    , report
-    , rKind
-    , rAverages
-    , rWarnings
-    , rRows
-    , rTotals
-    , rHeaders
-    , rTotalMatchedRows
-
-    -- ** ReportItemHeaders
-    , ReportItemHeaders
-    , reportItemHeaders
-    , rihName
-    , rihCurrency
-    , rihType
-
-    -- ** UrlChannel
-    , UrlChannel
-    , urlChannel
-    , ucKind
-    , ucId
-    , ucUrlPattern
-
-    -- ** UrlChannels
-    , UrlChannels
-    , urlChannels
-    , urlcEtag
-    , urlcNextPageToken
-    , urlcKind
-    , urlcItems
+    -- ** Account
+    , Account
+    , account
+    , accStatus
+    , accKind
+    , accName
+    , accId
     ) where
 
 import           Network.Google.AdSense.Host.Types
+import           Network.Google.API.AdSenseHost.Accounts.Adclients.Get
+import           Network.Google.API.AdSenseHost.Accounts.Adclients.List
+import           Network.Google.API.AdSenseHost.Accounts.Adunits.Delete
+import           Network.Google.API.AdSenseHost.Accounts.Adunits.Get
+import           Network.Google.API.AdSenseHost.Accounts.Adunits.GetAdCode
+import           Network.Google.API.AdSenseHost.Accounts.Adunits.Insert
+import           Network.Google.API.AdSenseHost.Accounts.Adunits.List
+import           Network.Google.API.AdSenseHost.Accounts.Adunits.Patch
+import           Network.Google.API.AdSenseHost.Accounts.Adunits.Update
+import           Network.Google.API.AdSenseHost.Accounts.Reports.Generate
+import           Network.Google.API.AdSenseHost.Adclients.Get
+import           Network.Google.API.AdSenseHost.Adclients.List
+import           Network.Google.API.AdSenseHost.Associationsessions.Start
+import           Network.Google.API.AdSenseHost.Associationsessions.Verify
+import           Network.Google.API.AdSenseHost.Customchannels.Delete
+import           Network.Google.API.AdSenseHost.Customchannels.Get
+import           Network.Google.API.AdSenseHost.Customchannels.Insert
+import           Network.Google.API.AdSenseHost.Customchannels.List
+import           Network.Google.API.AdSenseHost.Customchannels.Patch
+import           Network.Google.API.AdSenseHost.Customchannels.Update
+import           Network.Google.API.AdSenseHost.Reports.Generate
+import           Network.Google.API.AdSenseHost.URLchannels.Delete
+import           Network.Google.API.AdSenseHost.URLchannels.Insert
+import           Network.Google.API.AdSenseHost.URLchannels.List
 import           Network.Google.Prelude
 
 {- $resources
@@ -230,473 +303,29 @@ TODO
 -}
 
 type AdSenseHost =
-     AssociationsessionsAPI :<|> AdclientsAPI :<|>
-       AccountsAPI
-       :<|> ReportsAPI
-       :<|> UrlchannelsAPI
-       :<|> CustomchannelsAPI
+     URLchannelsInsertAPI :<|> AccountsAdclientsGetAPI
+       :<|> AssociationsessionsStartAPI
+       :<|> CustomchannelsPatchAPI
+       :<|> AccountsReportsGenerateAPI
+       :<|> AccountsAdunitsGetAdCodeAPI
+       :<|> AdclientsGetAPI
+       :<|> AccountsAdunitsDeleteAPI
+       :<|> AccountsAdclientsListAPI
+       :<|> ReportsGenerateAPI
+       :<|> AccountsAdunitsGetAPI
+       :<|> CustomchannelsGetAPI
+       :<|> URLchannelsListAPI
+       :<|> AccountsAdunitsInsertAPI
+       :<|> URLchannelsDeleteAPI
+       :<|> AccountsAdunitsPatchAPI
+       :<|> AssociationsessionsVerifyAPI
+       :<|> AdclientsListAPI
+       :<|> CustomchannelsDeleteAPI
+       :<|> AccountsAdunitsListAPI
+       :<|> AccountsAdunitsUpdateAPI
+       :<|> CustomchannelsUpdateAPI
+       :<|> CustomchannelsInsertAPI
+       :<|> CustomchannelsListAPI
 
-type AssociationsessionsAPI =
-     AssociationsessionsVerify :<|>
-       AssociationsessionsStart
-
--- | Verify an association session after the association callback returns
--- from AdSense signup.
-type AssociationsessionsVerify =
-     "adsensehost" :>
-       "v4.1" :>
-         "associationsessions" :>
-           "verify" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "token" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Get '[JSON] AssociationSession
-
--- | Create an association session for initiating an association with an
--- AdSense user.
-type AssociationsessionsStart =
-     "adsensehost" :>
-       "v4.1" :>
-         "associationsessions" :>
-           "start" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "websiteLocale" Text :>
-                     QueryParam "userLocale" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "websiteUrl" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "productCode" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   Get '[JSON] AssociationSession
-
-type AdclientsAPI = AdclientsList :<|> AdclientsGet
-
--- | List all host ad clients in this AdSense account.
-type AdclientsList =
-     "adsensehost" :>
-       "v4.1" :>
-         "adclients" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "maxResults" Word32 :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Get '[JSON] AdClients
-
--- | Get information about one of the ad clients in the Host AdSense account.
-type AdclientsGet =
-     "adsensehost" :>
-       "v4.1" :>
-         "adclients" :>
-           Capture "adClientId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Get '[JSON] AdClient
-
-type AccountsAPI =
-     AdclientsAPI :<|> ReportsAPI :<|> AdunitsAPI
-
-type AdclientsAPI = AdclientsList :<|> AdclientsGet
-
--- | List all hosted ad clients in the specified hosted account.
-type AdclientsList =
-     "adsensehost" :>
-       "v4.1" :>
-         "accounts" :>
-           Capture "accountId" Text :>
-             "adclients" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Get '[JSON] AdClients
-
--- | Get information about one of the ad clients in the specified
--- publisher\'s AdSense account.
-type AdclientsGet =
-     "adsensehost" :>
-       "v4.1" :>
-         "accounts" :>
-           Capture "accountId" Text :>
-             "adclients" :>
-               Capture "adClientId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] AdClient
-
-type ReportsAPI = ReportsGenerate
-
--- | Generate an AdSense report based on the report request sent in the query
--- parameters. Returns the result as JSON; to retrieve output in CSV format
--- specify \"alt=csv\" as a query parameter.
-type ReportsGenerate =
-     "adsensehost" :>
-       "v4.1" :>
-         "accounts" :>
-           Capture "accountId" Text :>
-             "reports" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "dimension" Text :>
-                       QueryParam "locale" Text :>
-                         QueryParam "endDate" Text :>
-                           QueryParam "startDate" Text :>
-                             QueryParam "metric" Text :>
-                               QueryParam "key" Text :>
-                                 QueryParam "sort" Text :>
-                                   QueryParam "filter" Text :>
-                                     QueryParam "oauth_token" Text :>
-                                       QueryParam "startIndex" Word32 :>
-                                         QueryParam "maxResults" Word32 :>
-                                           QueryParam "fields" Text :>
-                                             QueryParam "alt" Text :>
-                                               Get '[JSON] Report
-
-type AdunitsAPI =
-     AdunitsInsert :<|> AdunitsList :<|> AdunitsPatch :<|>
-       AdunitsGet
-       :<|> AdunitsGetAdCode
-       :<|> AdunitsDelete
-       :<|> AdunitsUpdate
-
--- | Insert the supplied ad unit into the specified publisher AdSense
--- account.
-type AdunitsInsert =
-     "adsensehost" :>
-       "v4.1" :>
-         "accounts" :>
-           Capture "accountId" Text :>
-             "adclients" :>
-               Capture "adClientId" Text :>
-                 "adunits" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Post '[JSON] AdUnit
-
--- | List all ad units in the specified publisher\'s AdSense account.
-type AdunitsList =
-     "adsensehost" :>
-       "v4.1" :>
-         "accounts" :>
-           Capture "accountId" Text :>
-             "adclients" :>
-               Capture "adClientId" Text :>
-                 "adunits" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "includeInactive" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "maxResults" Word32 :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "alt" Text :>
-                                       Get '[JSON] AdUnits
-
--- | Update the supplied ad unit in the specified publisher AdSense account.
--- This method supports patch semantics.
-type AdunitsPatch =
-     "adsensehost" :>
-       "v4.1" :>
-         "accounts" :>
-           Capture "accountId" Text :>
-             "adclients" :>
-               Capture "adClientId" Text :>
-                 "adunits" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "adUnitId" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Patch '[JSON] AdUnit
-
--- | Get the specified host ad unit in this AdSense account.
-type AdunitsGet =
-     "adsensehost" :>
-       "v4.1" :>
-         "accounts" :>
-           Capture "accountId" Text :>
-             "adclients" :>
-               Capture "adClientId" Text :>
-                 "adunits" :>
-                   Capture "adUnitId" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Get '[JSON] AdUnit
-
--- | Get ad code for the specified ad unit, attaching the specified host
--- custom channels.
-type AdunitsGetAdCode =
-     "adsensehost" :>
-       "v4.1" :>
-         "accounts" :>
-           Capture "accountId" Text :>
-             "adclients" :>
-               Capture "adClientId" Text :>
-                 "adunits" :>
-                   Capture "adUnitId" Text :>
-                     "adcode" :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "userIp" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "hostCustomChannelId" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "alt" Text :> Get '[JSON] AdCode
-
--- | Delete the specified ad unit from the specified publisher AdSense
--- account.
-type AdunitsDelete =
-     "adsensehost" :>
-       "v4.1" :>
-         "accounts" :>
-           Capture "accountId" Text :>
-             "adclients" :>
-               Capture "adClientId" Text :>
-                 "adunits" :>
-                   Capture "adUnitId" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Delete '[JSON] AdUnit
-
--- | Update the supplied ad unit in the specified publisher AdSense account.
-type AdunitsUpdate =
-     "adsensehost" :>
-       "v4.1" :>
-         "accounts" :>
-           Capture "accountId" Text :>
-             "adclients" :>
-               Capture "adClientId" Text :>
-                 "adunits" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Put '[JSON] AdUnit
-
-type ReportsAPI = ReportsGenerate
-
--- | Generate an AdSense report based on the report request sent in the query
--- parameters. Returns the result as JSON; to retrieve output in CSV format
--- specify \"alt=csv\" as a query parameter.
-type ReportsGenerate =
-     "adsensehost" :>
-       "v4.1" :>
-         "reports" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "dimension" Text :>
-                   QueryParam "locale" Text :>
-                     QueryParam "endDate" Text :>
-                       QueryParam "startDate" Text :>
-                         QueryParam "metric" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "sort" Text :>
-                               QueryParam "filter" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "startIndex" Word32 :>
-                                     QueryParam "maxResults" Word32 :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "alt" Text :>
-                                           Get '[JSON] Report
-
-type UrlchannelsAPI =
-     UrlchannelsInsert :<|> UrlchannelsList :<|>
-       UrlchannelsDelete
-
--- | Add a new URL channel to the host AdSense account.
-type UrlchannelsInsert =
-     "adsensehost" :>
-       "v4.1" :>
-         "adclients" :>
-           Capture "adClientId" Text :>
-             "urlchannels" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] UrlChannel
-
--- | List all host URL channels in the host AdSense account.
-type UrlchannelsList =
-     "adsensehost" :>
-       "v4.1" :>
-         "adclients" :>
-           Capture "adClientId" Text :>
-             "urlchannels" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Get '[JSON] UrlChannels
-
--- | Delete a URL channel from the host AdSense account.
-type UrlchannelsDelete =
-     "adsensehost" :>
-       "v4.1" :>
-         "adclients" :>
-           Capture "adClientId" Text :>
-             "urlchannels" :>
-               Capture "urlChannelId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Delete '[JSON] UrlChannel
-
-type CustomchannelsAPI =
-     CustomchannelsInsert :<|> CustomchannelsList :<|>
-       CustomchannelsPatch
-       :<|> CustomchannelsGet
-       :<|> CustomchannelsDelete
-       :<|> CustomchannelsUpdate
-
--- | Add a new custom channel to the host AdSense account.
-type CustomchannelsInsert =
-     "adsensehost" :>
-       "v4.1" :>
-         "adclients" :>
-           Capture "adClientId" Text :>
-             "customchannels" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] CustomChannel
-
--- | List all host custom channels in this AdSense account.
-type CustomchannelsList =
-     "adsensehost" :>
-       "v4.1" :>
-         "adclients" :>
-           Capture "adClientId" Text :>
-             "customchannels" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Get '[JSON] CustomChannels
-
--- | Update a custom channel in the host AdSense account. This method
--- supports patch semantics.
-type CustomchannelsPatch =
-     "adsensehost" :>
-       "v4.1" :>
-         "adclients" :>
-           Capture "adClientId" Text :>
-             "customchannels" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "customChannelId" Text :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Patch '[JSON] CustomChannel
-
--- | Get a specific custom channel from the host AdSense account.
-type CustomchannelsGet =
-     "adsensehost" :>
-       "v4.1" :>
-         "adclients" :>
-           Capture "adClientId" Text :>
-             "customchannels" :>
-               Capture "customChannelId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] CustomChannel
-
--- | Delete a specific custom channel from the host AdSense account.
-type CustomchannelsDelete =
-     "adsensehost" :>
-       "v4.1" :>
-         "adclients" :>
-           Capture "adClientId" Text :>
-             "customchannels" :>
-               Capture "customChannelId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Delete '[JSON] CustomChannel
-
--- | Update a custom channel in the host AdSense account.
-type CustomchannelsUpdate =
-     "adsensehost" :>
-       "v4.1" :>
-         "adclients" :>
-           Capture "adClientId" Text :>
-             "customchannels" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Put '[JSON] CustomChannel
+adSenseHost :: Proxy AdSenseHost
+adSenseHost = Proxy

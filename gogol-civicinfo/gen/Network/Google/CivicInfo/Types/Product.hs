@@ -18,446 +18,6 @@ module Network.Google.CivicInfo.Types.Product where
 import           Network.Google.CivicInfo.Types.Sum
 import           Network.Google.Prelude
 
--- | Describes information about a regional election administrative area.
---
--- /See:/ 'administrationRegion' smart constructor.
-data AdministrationRegion = AdministrationRegion
-    { _arLocalJurisdiction          :: !(Maybe (Maybe AdministrationRegion))
-    , _arSources                    :: !(Maybe [Maybe Source])
-    , _arName                       :: !(Maybe Text)
-    , _arElectionAdministrationBody :: !(Maybe (Maybe AdministrativeBody))
-    , _arId                         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AdministrationRegion' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'arLocalJurisdiction'
---
--- * 'arSources'
---
--- * 'arName'
---
--- * 'arElectionAdministrationBody'
---
--- * 'arId'
-administrationRegion
-    :: AdministrationRegion
-administrationRegion =
-    AdministrationRegion
-    { _arLocalJurisdiction = Nothing
-    , _arSources = Nothing
-    , _arName = Nothing
-    , _arElectionAdministrationBody = Nothing
-    , _arId = Nothing
-    }
-
--- | The city or county that provides election information for this voter.
--- This object can have the same elements as state.
-arLocalJurisdiction :: Lens' AdministrationRegion (Maybe (Maybe AdministrationRegion))
-arLocalJurisdiction
-  = lens _arLocalJurisdiction
-      (\ s a -> s{_arLocalJurisdiction = a})
-
--- | A list of sources for this area. If multiple sources are listed the data
--- has been aggregated from those sources.
-arSources :: Lens' AdministrationRegion [Maybe Source]
-arSources
-  = lens _arSources (\ s a -> s{_arSources = a}) .
-      _Default
-      . _Coerce
-
--- | The name of the jurisdiction.
-arName :: Lens' AdministrationRegion (Maybe Text)
-arName = lens _arName (\ s a -> s{_arName = a})
-
--- | The election administration body for this area.
-arElectionAdministrationBody :: Lens' AdministrationRegion (Maybe (Maybe AdministrativeBody))
-arElectionAdministrationBody
-  = lens _arElectionAdministrationBody
-      (\ s a -> s{_arElectionAdministrationBody = a})
-
--- | An ID for this object. IDs may change in future requests and should not
--- be cached. Access to this field requires special access that can be
--- requested from the Request more link on the Quotas page.
-arId :: Lens' AdministrationRegion (Maybe Text)
-arId = lens _arId (\ s a -> s{_arId = a})
-
-instance FromJSON AdministrationRegion where
-        parseJSON
-          = withObject "AdministrationRegion"
-              (\ o ->
-                 AdministrationRegion <$>
-                   (o .:? "local_jurisdiction") <*>
-                     (o .:? "sources" .!= mempty)
-                     <*> (o .:? "name")
-                     <*> (o .:? "electionAdministrationBody")
-                     <*> (o .:? "id"))
-
-instance ToJSON AdministrationRegion where
-        toJSON AdministrationRegion{..}
-          = object
-              (catMaybes
-                 [("local_jurisdiction" .=) <$> _arLocalJurisdiction,
-                  ("sources" .=) <$> _arSources,
-                  ("name" .=) <$> _arName,
-                  ("electionAdministrationBody" .=) <$>
-                    _arElectionAdministrationBody,
-                  ("id" .=) <$> _arId])
-
--- | Information about an election administrative body (e.g. County Board of
--- Elections).
---
--- /See:/ 'administrativeBody' smart constructor.
-data AdministrativeBody = AdministrativeBody
-    { _abCorrespondenceAddress               :: !(Maybe (Maybe SimpleAddressType))
-    , _abAbsenteeVotingInfoUrl               :: !(Maybe Text)
-    , _abHoursOfOperation                    :: !(Maybe Text)
-    , _abBallotInfoUrl                       :: !(Maybe Text)
-    , _abPhysicalAddress                     :: !(Maybe (Maybe SimpleAddressType))
-    , _abElectionRegistrationConfirmationUrl :: !(Maybe Text)
-    , _abElectionInfoUrl                     :: !(Maybe Text)
-    , _abVotingLocationFinderUrl             :: !(Maybe Text)
-    , _abElectionOfficials                   :: !(Maybe [Maybe ElectionOfficial])
-    , _abName                                :: !(Maybe Text)
-    , _abElectionRulesUrl                    :: !(Maybe Text)
-    , _abVoterServices                       :: !(Maybe [Text])
-    , _abElectionRegistrationUrl             :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AdministrativeBody' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'abCorrespondenceAddress'
---
--- * 'abAbsenteeVotingInfoUrl'
---
--- * 'abHoursOfOperation'
---
--- * 'abBallotInfoUrl'
---
--- * 'abPhysicalAddress'
---
--- * 'abElectionRegistrationConfirmationUrl'
---
--- * 'abElectionInfoUrl'
---
--- * 'abVotingLocationFinderUrl'
---
--- * 'abElectionOfficials'
---
--- * 'abName'
---
--- * 'abElectionRulesUrl'
---
--- * 'abVoterServices'
---
--- * 'abElectionRegistrationUrl'
-administrativeBody
-    :: AdministrativeBody
-administrativeBody =
-    AdministrativeBody
-    { _abCorrespondenceAddress = Nothing
-    , _abAbsenteeVotingInfoUrl = Nothing
-    , _abHoursOfOperation = Nothing
-    , _abBallotInfoUrl = Nothing
-    , _abPhysicalAddress = Nothing
-    , _abElectionRegistrationConfirmationUrl = Nothing
-    , _abElectionInfoUrl = Nothing
-    , _abVotingLocationFinderUrl = Nothing
-    , _abElectionOfficials = Nothing
-    , _abName = Nothing
-    , _abElectionRulesUrl = Nothing
-    , _abVoterServices = Nothing
-    , _abElectionRegistrationUrl = Nothing
-    }
-
--- | The mailing address of this administrative body.
-abCorrespondenceAddress :: Lens' AdministrativeBody (Maybe (Maybe SimpleAddressType))
-abCorrespondenceAddress
-  = lens _abCorrespondenceAddress
-      (\ s a -> s{_abCorrespondenceAddress = a})
-
--- | A URL provided by this administrative body for information on absentee
--- voting.
-abAbsenteeVotingInfoUrl :: Lens' AdministrativeBody (Maybe Text)
-abAbsenteeVotingInfoUrl
-  = lens _abAbsenteeVotingInfoUrl
-      (\ s a -> s{_abAbsenteeVotingInfoUrl = a})
-
--- | A description of the hours of operation for this administrative body.
-abHoursOfOperation :: Lens' AdministrativeBody (Maybe Text)
-abHoursOfOperation
-  = lens _abHoursOfOperation
-      (\ s a -> s{_abHoursOfOperation = a})
-
--- | A URL provided by this administrative body to give contest information
--- to the voter.
-abBallotInfoUrl :: Lens' AdministrativeBody (Maybe Text)
-abBallotInfoUrl
-  = lens _abBallotInfoUrl
-      (\ s a -> s{_abBallotInfoUrl = a})
-
--- | The physical address of this administrative body.
-abPhysicalAddress :: Lens' AdministrativeBody (Maybe (Maybe SimpleAddressType))
-abPhysicalAddress
-  = lens _abPhysicalAddress
-      (\ s a -> s{_abPhysicalAddress = a})
-
--- | A URL provided by this administrative body for confirming that the voter
--- is registered to vote.
-abElectionRegistrationConfirmationUrl :: Lens' AdministrativeBody (Maybe Text)
-abElectionRegistrationConfirmationUrl
-  = lens _abElectionRegistrationConfirmationUrl
-      (\ s a ->
-         s{_abElectionRegistrationConfirmationUrl = a})
-
--- | A URL provided by this administrative body for looking up general
--- election information.
-abElectionInfoUrl :: Lens' AdministrativeBody (Maybe Text)
-abElectionInfoUrl
-  = lens _abElectionInfoUrl
-      (\ s a -> s{_abElectionInfoUrl = a})
-
--- | A URL provided by this administrative body for looking up where to vote.
-abVotingLocationFinderUrl :: Lens' AdministrativeBody (Maybe Text)
-abVotingLocationFinderUrl
-  = lens _abVotingLocationFinderUrl
-      (\ s a -> s{_abVotingLocationFinderUrl = a})
-
--- | The election officials for this election administrative body.
-abElectionOfficials :: Lens' AdministrativeBody [Maybe ElectionOfficial]
-abElectionOfficials
-  = lens _abElectionOfficials
-      (\ s a -> s{_abElectionOfficials = a})
-      . _Default
-      . _Coerce
-
--- | The name of this election administrative body.
-abName :: Lens' AdministrativeBody (Maybe Text)
-abName = lens _abName (\ s a -> s{_abName = a})
-
--- | A URL provided by this administrative body describing election rules to
--- the voter.
-abElectionRulesUrl :: Lens' AdministrativeBody (Maybe Text)
-abElectionRulesUrl
-  = lens _abElectionRulesUrl
-      (\ s a -> s{_abElectionRulesUrl = a})
-
--- | A description of the services this administrative body may provide.
-abVoterServices :: Lens' AdministrativeBody [Text]
-abVoterServices
-  = lens _abVoterServices
-      (\ s a -> s{_abVoterServices = a})
-      . _Default
-      . _Coerce
-
--- | A URL provided by this administrative body for looking up how to
--- register to vote.
-abElectionRegistrationUrl :: Lens' AdministrativeBody (Maybe Text)
-abElectionRegistrationUrl
-  = lens _abElectionRegistrationUrl
-      (\ s a -> s{_abElectionRegistrationUrl = a})
-
-instance FromJSON AdministrativeBody where
-        parseJSON
-          = withObject "AdministrativeBody"
-              (\ o ->
-                 AdministrativeBody <$>
-                   (o .:? "correspondenceAddress") <*>
-                     (o .:? "absenteeVotingInfoUrl")
-                     <*> (o .:? "hoursOfOperation")
-                     <*> (o .:? "ballotInfoUrl")
-                     <*> (o .:? "physicalAddress")
-                     <*> (o .:? "electionRegistrationConfirmationUrl")
-                     <*> (o .:? "electionInfoUrl")
-                     <*> (o .:? "votingLocationFinderUrl")
-                     <*> (o .:? "electionOfficials" .!= mempty)
-                     <*> (o .:? "name")
-                     <*> (o .:? "electionRulesUrl")
-                     <*> (o .:? "voter_services" .!= mempty)
-                     <*> (o .:? "electionRegistrationUrl"))
-
-instance ToJSON AdministrativeBody where
-        toJSON AdministrativeBody{..}
-          = object
-              (catMaybes
-                 [("correspondenceAddress" .=) <$>
-                    _abCorrespondenceAddress,
-                  ("absenteeVotingInfoUrl" .=) <$>
-                    _abAbsenteeVotingInfoUrl,
-                  ("hoursOfOperation" .=) <$> _abHoursOfOperation,
-                  ("ballotInfoUrl" .=) <$> _abBallotInfoUrl,
-                  ("physicalAddress" .=) <$> _abPhysicalAddress,
-                  ("electionRegistrationConfirmationUrl" .=) <$>
-                    _abElectionRegistrationConfirmationUrl,
-                  ("electionInfoUrl" .=) <$> _abElectionInfoUrl,
-                  ("votingLocationFinderUrl" .=) <$>
-                    _abVotingLocationFinderUrl,
-                  ("electionOfficials" .=) <$> _abElectionOfficials,
-                  ("name" .=) <$> _abName,
-                  ("electionRulesUrl" .=) <$> _abElectionRulesUrl,
-                  ("voter_services" .=) <$> _abVoterServices,
-                  ("electionRegistrationUrl" .=) <$>
-                    _abElectionRegistrationUrl])
-
--- | Information about a candidate running for elected office.
---
--- /See:/ 'candidate' smart constructor.
-data Candidate = Candidate
-    { _cEmail         :: !(Maybe Text)
-    , _cPhone         :: !(Maybe Text)
-    , _cPhotoUrl      :: !(Maybe Text)
-    , _cChannels      :: !(Maybe [Maybe Channel])
-    , _cCandidateUrl  :: !(Maybe Text)
-    , _cOrderOnBallot :: !(Maybe Int64)
-    , _cName          :: !(Maybe Text)
-    , _cParty         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Candidate' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'cEmail'
---
--- * 'cPhone'
---
--- * 'cPhotoUrl'
---
--- * 'cChannels'
---
--- * 'cCandidateUrl'
---
--- * 'cOrderOnBallot'
---
--- * 'cName'
---
--- * 'cParty'
-candidate
-    :: Candidate
-candidate =
-    Candidate
-    { _cEmail = Nothing
-    , _cPhone = Nothing
-    , _cPhotoUrl = Nothing
-    , _cChannels = Nothing
-    , _cCandidateUrl = Nothing
-    , _cOrderOnBallot = Nothing
-    , _cName = Nothing
-    , _cParty = Nothing
-    }
-
--- | The email address for the candidate\'s campaign.
-cEmail :: Lens' Candidate (Maybe Text)
-cEmail = lens _cEmail (\ s a -> s{_cEmail = a})
-
--- | The voice phone number for the candidate\'s campaign office.
-cPhone :: Lens' Candidate (Maybe Text)
-cPhone = lens _cPhone (\ s a -> s{_cPhone = a})
-
--- | A URL for a photo of the candidate.
-cPhotoUrl :: Lens' Candidate (Maybe Text)
-cPhotoUrl
-  = lens _cPhotoUrl (\ s a -> s{_cPhotoUrl = a})
-
--- | A list of known (social) media channels for this candidate.
-cChannels :: Lens' Candidate [Maybe Channel]
-cChannels
-  = lens _cChannels (\ s a -> s{_cChannels = a}) .
-      _Default
-      . _Coerce
-
--- | The URL for the candidate\'s campaign web site.
-cCandidateUrl :: Lens' Candidate (Maybe Text)
-cCandidateUrl
-  = lens _cCandidateUrl
-      (\ s a -> s{_cCandidateUrl = a})
-
--- | The order the candidate appears on the ballot for this contest.
-cOrderOnBallot :: Lens' Candidate (Maybe Int64)
-cOrderOnBallot
-  = lens _cOrderOnBallot
-      (\ s a -> s{_cOrderOnBallot = a})
-
--- | The candidate\'s name.
-cName :: Lens' Candidate (Maybe Text)
-cName = lens _cName (\ s a -> s{_cName = a})
-
--- | The full name of the party the candidate is a member of.
-cParty :: Lens' Candidate (Maybe Text)
-cParty = lens _cParty (\ s a -> s{_cParty = a})
-
-instance FromJSON Candidate where
-        parseJSON
-          = withObject "Candidate"
-              (\ o ->
-                 Candidate <$>
-                   (o .:? "email") <*> (o .:? "phone") <*>
-                     (o .:? "photoUrl")
-                     <*> (o .:? "channels" .!= mempty)
-                     <*> (o .:? "candidateUrl")
-                     <*> (o .:? "orderOnBallot")
-                     <*> (o .:? "name")
-                     <*> (o .:? "party"))
-
-instance ToJSON Candidate where
-        toJSON Candidate{..}
-          = object
-              (catMaybes
-                 [("email" .=) <$> _cEmail, ("phone" .=) <$> _cPhone,
-                  ("photoUrl" .=) <$> _cPhotoUrl,
-                  ("channels" .=) <$> _cChannels,
-                  ("candidateUrl" .=) <$> _cCandidateUrl,
-                  ("orderOnBallot" .=) <$> _cOrderOnBallot,
-                  ("name" .=) <$> _cName, ("party" .=) <$> _cParty])
-
--- | A social media or web channel for a candidate.
---
--- /See:/ 'channel' smart constructor.
-data Channel = Channel
-    { _chaId   :: !(Maybe Text)
-    , _chaType :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Channel' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'chaId'
---
--- * 'chaType'
-channel
-    :: Channel
-channel =
-    Channel
-    { _chaId = Nothing
-    , _chaType = Nothing
-    }
-
--- | The unique public identifier for the candidate\'s channel.
-chaId :: Lens' Channel (Maybe Text)
-chaId = lens _chaId (\ s a -> s{_chaId = a})
-
--- | The type of channel. The following is a list of types of channels, but
--- is not exhaustive. More channel types may be added at a later time. One
--- of: GooglePlus, YouTube, Facebook, Twitter
-chaType :: Lens' Channel (Maybe Text)
-chaType = lens _chaType (\ s a -> s{_chaType = a})
-
-instance FromJSON Channel where
-        parseJSON
-          = withObject "Channel"
-              (\ o -> Channel <$> (o .:? "id") <*> (o .:? "type"))
-
-instance ToJSON Channel where
-        toJSON Channel{..}
-          = object
-              (catMaybes
-                 [("id" .=) <$> _chaId, ("type" .=) <$> _chaType])
-
 -- | Information about a contest that appears on a voter\'s ballot.
 --
 -- /See:/ 'contest' smart constructor.
@@ -850,328 +410,225 @@ instance ToJSON DivisionSearchResponse where
                  [("results" .=) <$> _dsrResults,
                   Just ("kind" .= _dsrKind)])
 
--- | Represents a political geographic division that matches the requested
--- query.
+-- | Information about an election administrative body (e.g. County Board of
+-- Elections).
 --
--- /See:/ 'divisionSearchResult' smart constructor.
-data DivisionSearchResult = DivisionSearchResult
-    { _dsrAliases :: !(Maybe [Text])
-    , _dsrName    :: !(Maybe Text)
-    , _dsrOcdId   :: !(Maybe Text)
+-- /See:/ 'administrativeBody' smart constructor.
+data AdministrativeBody = AdministrativeBody
+    { _abCorrespondenceAddress               :: !(Maybe (Maybe SimpleAddressType))
+    , _abAbsenteeVotingInfoUrl               :: !(Maybe Text)
+    , _abHoursOfOperation                    :: !(Maybe Text)
+    , _abBallotInfoUrl                       :: !(Maybe Text)
+    , _abPhysicalAddress                     :: !(Maybe (Maybe SimpleAddressType))
+    , _abElectionRegistrationConfirmationUrl :: !(Maybe Text)
+    , _abElectionInfoUrl                     :: !(Maybe Text)
+    , _abVotingLocationFinderUrl             :: !(Maybe Text)
+    , _abElectionOfficials                   :: !(Maybe [Maybe ElectionOfficial])
+    , _abName                                :: !(Maybe Text)
+    , _abElectionRulesUrl                    :: !(Maybe Text)
+    , _abVoterServices                       :: !(Maybe [Text])
+    , _abElectionRegistrationUrl             :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DivisionSearchResult' with the minimum fields required to make a request.
+-- | Creates a value of 'AdministrativeBody' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dsrAliases'
+-- * 'abCorrespondenceAddress'
 --
--- * 'dsrName'
+-- * 'abAbsenteeVotingInfoUrl'
 --
--- * 'dsrOcdId'
-divisionSearchResult
-    :: DivisionSearchResult
-divisionSearchResult =
-    DivisionSearchResult
-    { _dsrAliases = Nothing
-    , _dsrName = Nothing
-    , _dsrOcdId = Nothing
+-- * 'abHoursOfOperation'
+--
+-- * 'abBallotInfoUrl'
+--
+-- * 'abPhysicalAddress'
+--
+-- * 'abElectionRegistrationConfirmationUrl'
+--
+-- * 'abElectionInfoUrl'
+--
+-- * 'abVotingLocationFinderUrl'
+--
+-- * 'abElectionOfficials'
+--
+-- * 'abName'
+--
+-- * 'abElectionRulesUrl'
+--
+-- * 'abVoterServices'
+--
+-- * 'abElectionRegistrationUrl'
+administrativeBody
+    :: AdministrativeBody
+administrativeBody =
+    AdministrativeBody
+    { _abCorrespondenceAddress = Nothing
+    , _abAbsenteeVotingInfoUrl = Nothing
+    , _abHoursOfOperation = Nothing
+    , _abBallotInfoUrl = Nothing
+    , _abPhysicalAddress = Nothing
+    , _abElectionRegistrationConfirmationUrl = Nothing
+    , _abElectionInfoUrl = Nothing
+    , _abVotingLocationFinderUrl = Nothing
+    , _abElectionOfficials = Nothing
+    , _abName = Nothing
+    , _abElectionRulesUrl = Nothing
+    , _abVoterServices = Nothing
+    , _abElectionRegistrationUrl = Nothing
     }
 
--- | Other Open Civic Data identifiers that refer to the same division -- for
--- example, those that refer to other political divisions whose boundaries
--- are defined to be coterminous with this one. For example,
--- ocd-division\/country:us\/state:wy will include an alias of
--- ocd-division\/country:us\/state:wy\/cd:1, since Wyoming has only one
--- Congressional district.
-dsrAliases :: Lens' DivisionSearchResult [Text]
-dsrAliases
-  = lens _dsrAliases (\ s a -> s{_dsrAliases = a}) .
-      _Default
-      . _Coerce
+-- | The mailing address of this administrative body.
+abCorrespondenceAddress :: Lens' AdministrativeBody (Maybe (Maybe SimpleAddressType))
+abCorrespondenceAddress
+  = lens _abCorrespondenceAddress
+      (\ s a -> s{_abCorrespondenceAddress = a})
 
--- | The name of the division.
-dsrName :: Lens' DivisionSearchResult (Maybe Text)
-dsrName = lens _dsrName (\ s a -> s{_dsrName = a})
+-- | A URL provided by this administrative body for information on absentee
+-- voting.
+abAbsenteeVotingInfoUrl :: Lens' AdministrativeBody (Maybe Text)
+abAbsenteeVotingInfoUrl
+  = lens _abAbsenteeVotingInfoUrl
+      (\ s a -> s{_abAbsenteeVotingInfoUrl = a})
 
--- | The unique Open Civic Data identifier for this division.
-dsrOcdId :: Lens' DivisionSearchResult (Maybe Text)
-dsrOcdId = lens _dsrOcdId (\ s a -> s{_dsrOcdId = a})
+-- | A description of the hours of operation for this administrative body.
+abHoursOfOperation :: Lens' AdministrativeBody (Maybe Text)
+abHoursOfOperation
+  = lens _abHoursOfOperation
+      (\ s a -> s{_abHoursOfOperation = a})
 
-instance FromJSON DivisionSearchResult where
-        parseJSON
-          = withObject "DivisionSearchResult"
-              (\ o ->
-                 DivisionSearchResult <$>
-                   (o .:? "aliases" .!= mempty) <*> (o .:? "name") <*>
-                     (o .:? "ocdId"))
+-- | A URL provided by this administrative body to give contest information
+-- to the voter.
+abBallotInfoUrl :: Lens' AdministrativeBody (Maybe Text)
+abBallotInfoUrl
+  = lens _abBallotInfoUrl
+      (\ s a -> s{_abBallotInfoUrl = a})
 
-instance ToJSON DivisionSearchResult where
-        toJSON DivisionSearchResult{..}
-          = object
-              (catMaybes
-                 [("aliases" .=) <$> _dsrAliases,
-                  ("name" .=) <$> _dsrName,
-                  ("ocdId" .=) <$> _dsrOcdId])
+-- | The physical address of this administrative body.
+abPhysicalAddress :: Lens' AdministrativeBody (Maybe (Maybe SimpleAddressType))
+abPhysicalAddress
+  = lens _abPhysicalAddress
+      (\ s a -> s{_abPhysicalAddress = a})
 
--- | Information about the election that was queried.
---
--- /See:/ 'election' smart constructor.
-data Election = Election
-    { _eOcdDivisionId :: !(Maybe Text)
-    , _eElectionDay   :: !(Maybe Text)
-    , _eName          :: !(Maybe Text)
-    , _eId            :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- | A URL provided by this administrative body for confirming that the voter
+-- is registered to vote.
+abElectionRegistrationConfirmationUrl :: Lens' AdministrativeBody (Maybe Text)
+abElectionRegistrationConfirmationUrl
+  = lens _abElectionRegistrationConfirmationUrl
+      (\ s a ->
+         s{_abElectionRegistrationConfirmationUrl = a})
 
--- | Creates a value of 'Election' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'eOcdDivisionId'
---
--- * 'eElectionDay'
---
--- * 'eName'
---
--- * 'eId'
-election
-    :: Election
-election =
-    Election
-    { _eOcdDivisionId = Nothing
-    , _eElectionDay = Nothing
-    , _eName = Nothing
-    , _eId = Nothing
-    }
+-- | A URL provided by this administrative body for looking up general
+-- election information.
+abElectionInfoUrl :: Lens' AdministrativeBody (Maybe Text)
+abElectionInfoUrl
+  = lens _abElectionInfoUrl
+      (\ s a -> s{_abElectionInfoUrl = a})
 
--- | The political division of the election. Represented as an OCD Division
--- ID. Voters within these political jurisdictions are covered by this
--- election. This is typically a state such as
--- ocd-division\/country:us\/state:ca or for the midterms or general
--- election the entire US (i.e. ocd-division\/country:us).
-eOcdDivisionId :: Lens' Election (Maybe Text)
-eOcdDivisionId
-  = lens _eOcdDivisionId
-      (\ s a -> s{_eOcdDivisionId = a})
+-- | A URL provided by this administrative body for looking up where to vote.
+abVotingLocationFinderUrl :: Lens' AdministrativeBody (Maybe Text)
+abVotingLocationFinderUrl
+  = lens _abVotingLocationFinderUrl
+      (\ s a -> s{_abVotingLocationFinderUrl = a})
 
--- | Day of the election in YYYY-MM-DD format.
-eElectionDay :: Lens' Election (Maybe Text)
-eElectionDay
-  = lens _eElectionDay (\ s a -> s{_eElectionDay = a})
-
--- | A displayable name for the election.
-eName :: Lens' Election (Maybe Text)
-eName = lens _eName (\ s a -> s{_eName = a})
-
--- | The unique ID of this election.
-eId :: Lens' Election (Maybe Int64)
-eId = lens _eId (\ s a -> s{_eId = a})
-
-instance FromJSON Election where
-        parseJSON
-          = withObject "Election"
-              (\ o ->
-                 Election <$>
-                   (o .:? "ocdDivisionId") <*> (o .:? "electionDay") <*>
-                     (o .:? "name")
-                     <*> (o .:? "id"))
-
-instance ToJSON Election where
-        toJSON Election{..}
-          = object
-              (catMaybes
-                 [("ocdDivisionId" .=) <$> _eOcdDivisionId,
-                  ("electionDay" .=) <$> _eElectionDay,
-                  ("name" .=) <$> _eName, ("id" .=) <$> _eId])
-
--- | Information about individual election officials.
---
--- /See:/ 'electionOfficial' smart constructor.
-data ElectionOfficial = ElectionOfficial
-    { _eoFaxNumber         :: !(Maybe Text)
-    , _eoName              :: !(Maybe Text)
-    , _eoOfficePhoneNumber :: !(Maybe Text)
-    , _eoEmailAddress      :: !(Maybe Text)
-    , _eoTitle             :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ElectionOfficial' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'eoFaxNumber'
---
--- * 'eoName'
---
--- * 'eoOfficePhoneNumber'
---
--- * 'eoEmailAddress'
---
--- * 'eoTitle'
-electionOfficial
-    :: ElectionOfficial
-electionOfficial =
-    ElectionOfficial
-    { _eoFaxNumber = Nothing
-    , _eoName = Nothing
-    , _eoOfficePhoneNumber = Nothing
-    , _eoEmailAddress = Nothing
-    , _eoTitle = Nothing
-    }
-
--- | The fax number of the election official.
-eoFaxNumber :: Lens' ElectionOfficial (Maybe Text)
-eoFaxNumber
-  = lens _eoFaxNumber (\ s a -> s{_eoFaxNumber = a})
-
--- | The full name of the election official.
-eoName :: Lens' ElectionOfficial (Maybe Text)
-eoName = lens _eoName (\ s a -> s{_eoName = a})
-
--- | The office phone number of the election official.
-eoOfficePhoneNumber :: Lens' ElectionOfficial (Maybe Text)
-eoOfficePhoneNumber
-  = lens _eoOfficePhoneNumber
-      (\ s a -> s{_eoOfficePhoneNumber = a})
-
--- | The email address of the election official.
-eoEmailAddress :: Lens' ElectionOfficial (Maybe Text)
-eoEmailAddress
-  = lens _eoEmailAddress
-      (\ s a -> s{_eoEmailAddress = a})
-
--- | The title of the election official.
-eoTitle :: Lens' ElectionOfficial (Maybe Text)
-eoTitle = lens _eoTitle (\ s a -> s{_eoTitle = a})
-
-instance FromJSON ElectionOfficial where
-        parseJSON
-          = withObject "ElectionOfficial"
-              (\ o ->
-                 ElectionOfficial <$>
-                   (o .:? "faxNumber") <*> (o .:? "name") <*>
-                     (o .:? "officePhoneNumber")
-                     <*> (o .:? "emailAddress")
-                     <*> (o .:? "title"))
-
-instance ToJSON ElectionOfficial where
-        toJSON ElectionOfficial{..}
-          = object
-              (catMaybes
-                 [("faxNumber" .=) <$> _eoFaxNumber,
-                  ("name" .=) <$> _eoName,
-                  ("officePhoneNumber" .=) <$> _eoOfficePhoneNumber,
-                  ("emailAddress" .=) <$> _eoEmailAddress,
-                  ("title" .=) <$> _eoTitle])
-
--- | The list of elections available for this version of the API.
---
--- /See:/ 'electionsQueryResponse' smart constructor.
-data ElectionsQueryResponse = ElectionsQueryResponse
-    { _eqrKind      :: !Text
-    , _eqrElections :: !(Maybe [Maybe Election])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ElectionsQueryResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'eqrKind'
---
--- * 'eqrElections'
-electionsQueryResponse
-    :: ElectionsQueryResponse
-electionsQueryResponse =
-    ElectionsQueryResponse
-    { _eqrKind = "civicinfo#electionsQueryResponse"
-    , _eqrElections = Nothing
-    }
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"civicinfo#electionsQueryResponse\".
-eqrKind :: Lens' ElectionsQueryResponse Text
-eqrKind = lens _eqrKind (\ s a -> s{_eqrKind = a})
-
--- | A list of available elections
-eqrElections :: Lens' ElectionsQueryResponse [Maybe Election]
-eqrElections
-  = lens _eqrElections (\ s a -> s{_eqrElections = a})
+-- | The election officials for this election administrative body.
+abElectionOfficials :: Lens' AdministrativeBody [Maybe ElectionOfficial]
+abElectionOfficials
+  = lens _abElectionOfficials
+      (\ s a -> s{_abElectionOfficials = a})
       . _Default
       . _Coerce
 
-instance FromJSON ElectionsQueryResponse where
-        parseJSON
-          = withObject "ElectionsQueryResponse"
-              (\ o ->
-                 ElectionsQueryResponse <$>
-                   (o .:? "kind" .!= "civicinfo#electionsQueryResponse")
-                     <*> (o .:? "elections" .!= mempty))
+-- | The name of this election administrative body.
+abName :: Lens' AdministrativeBody (Maybe Text)
+abName = lens _abName (\ s a -> s{_abName = a})
 
-instance ToJSON ElectionsQueryResponse where
-        toJSON ElectionsQueryResponse{..}
+-- | A URL provided by this administrative body describing election rules to
+-- the voter.
+abElectionRulesUrl :: Lens' AdministrativeBody (Maybe Text)
+abElectionRulesUrl
+  = lens _abElectionRulesUrl
+      (\ s a -> s{_abElectionRulesUrl = a})
+
+-- | A description of the services this administrative body may provide.
+abVoterServices :: Lens' AdministrativeBody [Text]
+abVoterServices
+  = lens _abVoterServices
+      (\ s a -> s{_abVoterServices = a})
+      . _Default
+      . _Coerce
+
+-- | A URL provided by this administrative body for looking up how to
+-- register to vote.
+abElectionRegistrationUrl :: Lens' AdministrativeBody (Maybe Text)
+abElectionRegistrationUrl
+  = lens _abElectionRegistrationUrl
+      (\ s a -> s{_abElectionRegistrationUrl = a})
+
+instance FromJSON AdministrativeBody where
+        parseJSON
+          = withObject "AdministrativeBody"
+              (\ o ->
+                 AdministrativeBody <$>
+                   (o .:? "correspondenceAddress") <*>
+                     (o .:? "absenteeVotingInfoUrl")
+                     <*> (o .:? "hoursOfOperation")
+                     <*> (o .:? "ballotInfoUrl")
+                     <*> (o .:? "physicalAddress")
+                     <*> (o .:? "electionRegistrationConfirmationUrl")
+                     <*> (o .:? "electionInfoUrl")
+                     <*> (o .:? "votingLocationFinderUrl")
+                     <*> (o .:? "electionOfficials" .!= mempty)
+                     <*> (o .:? "name")
+                     <*> (o .:? "electionRulesUrl")
+                     <*> (o .:? "voter_services" .!= mempty)
+                     <*> (o .:? "electionRegistrationUrl"))
+
+instance ToJSON AdministrativeBody where
+        toJSON AdministrativeBody{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _eqrKind),
-                  ("elections" .=) <$> _eqrElections])
+                 [("correspondenceAddress" .=) <$>
+                    _abCorrespondenceAddress,
+                  ("absenteeVotingInfoUrl" .=) <$>
+                    _abAbsenteeVotingInfoUrl,
+                  ("hoursOfOperation" .=) <$> _abHoursOfOperation,
+                  ("ballotInfoUrl" .=) <$> _abBallotInfoUrl,
+                  ("physicalAddress" .=) <$> _abPhysicalAddress,
+                  ("electionRegistrationConfirmationUrl" .=) <$>
+                    _abElectionRegistrationConfirmationUrl,
+                  ("electionInfoUrl" .=) <$> _abElectionInfoUrl,
+                  ("votingLocationFinderUrl" .=) <$>
+                    _abVotingLocationFinderUrl,
+                  ("electionOfficials" .=) <$> _abElectionOfficials,
+                  ("name" .=) <$> _abName,
+                  ("electionRulesUrl" .=) <$> _abElectionRulesUrl,
+                  ("voter_services" .=) <$> _abVoterServices,
+                  ("electionRegistrationUrl" .=) <$>
+                    _abElectionRegistrationUrl])
 
--- | Describes the geographic scope of a contest.
+-- | Political geographic divisions that contain the requested address.
 --
--- /See:/ 'electoralDistrict' smart constructor.
-data ElectoralDistrict = ElectoralDistrict
-    { _edName  :: !(Maybe Text)
-    , _edScope :: !(Maybe Text)
-    , _edId    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'representativeInfoResponseDivisions' smart constructor.
+data RepresentativeInfoResponseDivisions =
+    RepresentativeInfoResponseDivisions
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ElectoralDistrict' with the minimum fields required to make a request.
+-- | Creates a value of 'RepresentativeInfoResponseDivisions' with the minimum fields required to make a request.
 --
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'edName'
---
--- * 'edScope'
---
--- * 'edId'
-electoralDistrict
-    :: ElectoralDistrict
-electoralDistrict =
-    ElectoralDistrict
-    { _edName = Nothing
-    , _edScope = Nothing
-    , _edId = Nothing
-    }
+representativeInfoResponseDivisions
+    :: RepresentativeInfoResponseDivisions
+representativeInfoResponseDivisions = RepresentativeInfoResponseDivisions
 
--- | The name of the district.
-edName :: Lens' ElectoralDistrict (Maybe Text)
-edName = lens _edName (\ s a -> s{_edName = a})
-
--- | The geographic scope of this district. If unspecified the district\'s
--- geography is not known. One of: national, statewide, congressional,
--- stateUpper, stateLower, countywide, judicial, schoolBoard, cityWide,
--- township, countyCouncil, cityCouncil, ward, special
-edScope :: Lens' ElectoralDistrict (Maybe Text)
-edScope = lens _edScope (\ s a -> s{_edScope = a})
-
--- | An identifier for this district, relative to its scope. For example, the
--- 34th State Senate district would have id \"34\" and a scope of
--- stateUpper.
-edId :: Lens' ElectoralDistrict (Maybe Text)
-edId = lens _edId (\ s a -> s{_edId = a})
-
-instance FromJSON ElectoralDistrict where
+instance FromJSON RepresentativeInfoResponseDivisions
+         where
         parseJSON
-          = withObject "ElectoralDistrict"
-              (\ o ->
-                 ElectoralDistrict <$>
-                   (o .:? "name") <*> (o .:? "scope") <*> (o .:? "id"))
+          = withObject "RepresentativeInfoResponseDivisions"
+              (\ o -> pure RepresentativeInfoResponseDivisions)
 
-instance ToJSON ElectoralDistrict where
-        toJSON ElectoralDistrict{..}
-          = object
-              (catMaybes
-                 [("name" .=) <$> _edName, ("scope" .=) <$> _edScope,
-                  ("id" .=) <$> _edId])
+instance ToJSON RepresentativeInfoResponseDivisions
+         where
+        toJSON = const (Object mempty)
 
 -- | Describes a political geography.
 --
@@ -1245,232 +702,6 @@ instance ToJSON GeographicDivision where
                  [("name" .=) <$> _gdName,
                   ("officeIndices" .=) <$> _gdOfficeIndices,
                   ("alsoKnownAs" .=) <$> _gdAlsoKnownAs])
-
--- | Information about an Office held by one or more Officials.
---
--- /See:/ 'office' smart constructor.
-data Office = Office
-    { _offDivisionId      :: !(Maybe Text)
-    , _offRoles           :: !(Maybe [Text])
-    , _offOfficialIndices :: !(Maybe [Word32])
-    , _offSources         :: !(Maybe [Maybe Source])
-    , _offName            :: !(Maybe Text)
-    , _offLevels          :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Office' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'offDivisionId'
---
--- * 'offRoles'
---
--- * 'offOfficialIndices'
---
--- * 'offSources'
---
--- * 'offName'
---
--- * 'offLevels'
-office
-    :: Office
-office =
-    Office
-    { _offDivisionId = Nothing
-    , _offRoles = Nothing
-    , _offOfficialIndices = Nothing
-    , _offSources = Nothing
-    , _offName = Nothing
-    , _offLevels = Nothing
-    }
-
--- | The OCD ID of the division with which this office is associated.
-offDivisionId :: Lens' Office (Maybe Text)
-offDivisionId
-  = lens _offDivisionId
-      (\ s a -> s{_offDivisionId = a})
-
--- | The roles which this office fulfills. Roles are not meant to be
--- exhaustive, or to exactly specify the entire set of responsibilities of
--- a given office, but are meant to be rough categories that are useful for
--- general selection from or sorting of a list of offices.
-offRoles :: Lens' Office [Text]
-offRoles
-  = lens _offRoles (\ s a -> s{_offRoles = a}) .
-      _Default
-      . _Coerce
-
--- | List of indices in the officials array of people who presently hold this
--- office.
-offOfficialIndices :: Lens' Office [Word32]
-offOfficialIndices
-  = lens _offOfficialIndices
-      (\ s a -> s{_offOfficialIndices = a})
-      . _Default
-      . _Coerce
-
--- | A list of sources for this office. If multiple sources are listed, the
--- data has been aggregated from those sources.
-offSources :: Lens' Office [Maybe Source]
-offSources
-  = lens _offSources (\ s a -> s{_offSources = a}) .
-      _Default
-      . _Coerce
-
--- | The human-readable name of the office.
-offName :: Lens' Office (Maybe Text)
-offName = lens _offName (\ s a -> s{_offName = a})
-
--- | The levels of government of which this office is part. There may be more
--- than one in cases where a jurisdiction effectively acts at two different
--- levels of government; for example, the mayor of the District of Columbia
--- acts at \"locality\" level, but also effectively at both
--- \"administrative-area-2\" and \"administrative-area-1\".
-offLevels :: Lens' Office [Text]
-offLevels
-  = lens _offLevels (\ s a -> s{_offLevels = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON Office where
-        parseJSON
-          = withObject "Office"
-              (\ o ->
-                 Office <$>
-                   (o .:? "divisionId") <*> (o .:? "roles" .!= mempty)
-                     <*> (o .:? "officialIndices" .!= mempty)
-                     <*> (o .:? "sources" .!= mempty)
-                     <*> (o .:? "name")
-                     <*> (o .:? "levels" .!= mempty))
-
-instance ToJSON Office where
-        toJSON Office{..}
-          = object
-              (catMaybes
-                 [("divisionId" .=) <$> _offDivisionId,
-                  ("roles" .=) <$> _offRoles,
-                  ("officialIndices" .=) <$> _offOfficialIndices,
-                  ("sources" .=) <$> _offSources,
-                  ("name" .=) <$> _offName,
-                  ("levels" .=) <$> _offLevels])
-
--- | Information about a person holding an elected office.
---
--- /See:/ 'official' smart constructor.
-data Official = Official
-    { _oPhotoUrl :: !(Maybe Text)
-    , _oUrls     :: !(Maybe [Text])
-    , _oChannels :: !(Maybe [Maybe Channel])
-    , _oAddress  :: !(Maybe [Maybe SimpleAddressType])
-    , _oPhones   :: !(Maybe [Text])
-    , _oName     :: !(Maybe Text)
-    , _oEmails   :: !(Maybe [Text])
-    , _oParty    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Official' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'oPhotoUrl'
---
--- * 'oUrls'
---
--- * 'oChannels'
---
--- * 'oAddress'
---
--- * 'oPhones'
---
--- * 'oName'
---
--- * 'oEmails'
---
--- * 'oParty'
-official
-    :: Official
-official =
-    Official
-    { _oPhotoUrl = Nothing
-    , _oUrls = Nothing
-    , _oChannels = Nothing
-    , _oAddress = Nothing
-    , _oPhones = Nothing
-    , _oName = Nothing
-    , _oEmails = Nothing
-    , _oParty = Nothing
-    }
-
--- | A URL for a photo of the official.
-oPhotoUrl :: Lens' Official (Maybe Text)
-oPhotoUrl
-  = lens _oPhotoUrl (\ s a -> s{_oPhotoUrl = a})
-
--- | The official\'s public website URLs.
-oUrls :: Lens' Official [Text]
-oUrls
-  = lens _oUrls (\ s a -> s{_oUrls = a}) . _Default .
-      _Coerce
-
--- | A list of known (social) media channels for this official.
-oChannels :: Lens' Official [Maybe Channel]
-oChannels
-  = lens _oChannels (\ s a -> s{_oChannels = a}) .
-      _Default
-      . _Coerce
-
--- | Addresses at which to contact the official.
-oAddress :: Lens' Official [Maybe SimpleAddressType]
-oAddress
-  = lens _oAddress (\ s a -> s{_oAddress = a}) .
-      _Default
-      . _Coerce
-
--- | The official\'s public contact phone numbers.
-oPhones :: Lens' Official [Text]
-oPhones
-  = lens _oPhones (\ s a -> s{_oPhones = a}) . _Default
-      . _Coerce
-
--- | The official\'s name.
-oName :: Lens' Official (Maybe Text)
-oName = lens _oName (\ s a -> s{_oName = a})
-
--- | The direct email addresses for the official.
-oEmails :: Lens' Official [Text]
-oEmails
-  = lens _oEmails (\ s a -> s{_oEmails = a}) . _Default
-      . _Coerce
-
--- | The full name of the party the official belongs to.
-oParty :: Lens' Official (Maybe Text)
-oParty = lens _oParty (\ s a -> s{_oParty = a})
-
-instance FromJSON Official where
-        parseJSON
-          = withObject "Official"
-              (\ o ->
-                 Official <$>
-                   (o .:? "photoUrl") <*> (o .:? "urls" .!= mempty) <*>
-                     (o .:? "channels" .!= mempty)
-                     <*> (o .:? "address" .!= mempty)
-                     <*> (o .:? "phones" .!= mempty)
-                     <*> (o .:? "name")
-                     <*> (o .:? "emails" .!= mempty)
-                     <*> (o .:? "party"))
-
-instance ToJSON Official where
-        toJSON Official{..}
-          = object
-              (catMaybes
-                 [("photoUrl" .=) <$> _oPhotoUrl,
-                  ("urls" .=) <$> _oUrls,
-                  ("channels" .=) <$> _oChannels,
-                  ("address" .=) <$> _oAddress,
-                  ("phones" .=) <$> _oPhones, ("name" .=) <$> _oName,
-                  ("emails" .=) <$> _oEmails,
-                  ("party" .=) <$> _oParty])
 
 -- | A location where a voter can vote. This may be an early vote site, an
 -- election day voting location, or a drop off location for a completed
@@ -1669,139 +900,109 @@ instance ToJSON RepresentativeInfoData where
                   ("divisions" .=) <$> _ridDivisions,
                   ("offices" .=) <$> _ridOffices])
 
--- | Political geographic divisions that contain the requested address.
+-- | Describes the geographic scope of a contest.
 --
--- /See:/ 'representativeInfoDataDivisions' smart constructor.
-data RepresentativeInfoDataDivisions =
-    RepresentativeInfoDataDivisions
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'RepresentativeInfoDataDivisions' with the minimum fields required to make a request.
---
-representativeInfoDataDivisions
-    :: RepresentativeInfoDataDivisions
-representativeInfoDataDivisions = RepresentativeInfoDataDivisions
-
-instance FromJSON RepresentativeInfoDataDivisions
-         where
-        parseJSON
-          = withObject "RepresentativeInfoDataDivisions"
-              (\ o -> pure RepresentativeInfoDataDivisions)
-
-instance ToJSON RepresentativeInfoDataDivisions where
-        toJSON = const (Object mempty)
-
--- | The result of a representative info lookup query.
---
--- /See:/ 'representativeInfoResponse' smart constructor.
-data RepresentativeInfoResponse = RepresentativeInfoResponse
-    { _rirKind            :: !Text
-    , _rirNormalizedInput :: !(Maybe (Maybe SimpleAddressType))
-    , _rirOfficials       :: !(Maybe [Maybe Official])
-    , _rirDivisions       :: !(Maybe RepresentativeInfoResponseDivisions)
-    , _rirOffices         :: !(Maybe [Maybe Office])
+-- /See:/ 'electoralDistrict' smart constructor.
+data ElectoralDistrict = ElectoralDistrict
+    { _edName  :: !(Maybe Text)
+    , _edScope :: !(Maybe Text)
+    , _edId    :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RepresentativeInfoResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'ElectoralDistrict' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rirKind'
+-- * 'edName'
 --
--- * 'rirNormalizedInput'
+-- * 'edScope'
 --
--- * 'rirOfficials'
---
--- * 'rirDivisions'
---
--- * 'rirOffices'
-representativeInfoResponse
-    :: RepresentativeInfoResponse
-representativeInfoResponse =
-    RepresentativeInfoResponse
-    { _rirKind = "civicinfo#representativeInfoResponse"
-    , _rirNormalizedInput = Nothing
-    , _rirOfficials = Nothing
-    , _rirDivisions = Nothing
-    , _rirOffices = Nothing
+-- * 'edId'
+electoralDistrict
+    :: ElectoralDistrict
+electoralDistrict =
+    ElectoralDistrict
+    { _edName = Nothing
+    , _edScope = Nothing
+    , _edId = Nothing
     }
 
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"civicinfo#representativeInfoResponse\".
-rirKind :: Lens' RepresentativeInfoResponse Text
-rirKind = lens _rirKind (\ s a -> s{_rirKind = a})
+-- | The name of the district.
+edName :: Lens' ElectoralDistrict (Maybe Text)
+edName = lens _edName (\ s a -> s{_edName = a})
 
--- | The normalized version of the requested address
-rirNormalizedInput :: Lens' RepresentativeInfoResponse (Maybe (Maybe SimpleAddressType))
-rirNormalizedInput
-  = lens _rirNormalizedInput
-      (\ s a -> s{_rirNormalizedInput = a})
+-- | The geographic scope of this district. If unspecified the district\'s
+-- geography is not known. One of: national, statewide, congressional,
+-- stateUpper, stateLower, countywide, judicial, schoolBoard, cityWide,
+-- township, countyCouncil, cityCouncil, ward, special
+edScope :: Lens' ElectoralDistrict (Maybe Text)
+edScope = lens _edScope (\ s a -> s{_edScope = a})
 
--- | Officials holding the offices listed above. Will only be present if
--- includeOffices was true in the request.
-rirOfficials :: Lens' RepresentativeInfoResponse [Maybe Official]
-rirOfficials
-  = lens _rirOfficials (\ s a -> s{_rirOfficials = a})
-      . _Default
-      . _Coerce
+-- | An identifier for this district, relative to its scope. For example, the
+-- 34th State Senate district would have id \"34\" and a scope of
+-- stateUpper.
+edId :: Lens' ElectoralDistrict (Maybe Text)
+edId = lens _edId (\ s a -> s{_edId = a})
 
--- | Political geographic divisions that contain the requested address.
-rirDivisions :: Lens' RepresentativeInfoResponse (Maybe RepresentativeInfoResponseDivisions)
-rirDivisions
-  = lens _rirDivisions (\ s a -> s{_rirDivisions = a})
-
--- | Elected offices referenced by the divisions listed above. Will only be
--- present if includeOffices was true in the request.
-rirOffices :: Lens' RepresentativeInfoResponse [Maybe Office]
-rirOffices
-  = lens _rirOffices (\ s a -> s{_rirOffices = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON RepresentativeInfoResponse where
+instance FromJSON ElectoralDistrict where
         parseJSON
-          = withObject "RepresentativeInfoResponse"
+          = withObject "ElectoralDistrict"
               (\ o ->
-                 RepresentativeInfoResponse <$>
-                   (o .:? "kind" .!=
-                      "civicinfo#representativeInfoResponse")
-                     <*> (o .:? "normalizedInput")
-                     <*> (o .:? "officials" .!= mempty)
-                     <*> (o .:? "divisions")
-                     <*> (o .:? "offices" .!= mempty))
+                 ElectoralDistrict <$>
+                   (o .:? "name") <*> (o .:? "scope") <*> (o .:? "id"))
 
-instance ToJSON RepresentativeInfoResponse where
-        toJSON RepresentativeInfoResponse{..}
+instance ToJSON ElectoralDistrict where
+        toJSON ElectoralDistrict{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _rirKind),
-                  ("normalizedInput" .=) <$> _rirNormalizedInput,
-                  ("officials" .=) <$> _rirOfficials,
-                  ("divisions" .=) <$> _rirDivisions,
-                  ("offices" .=) <$> _rirOffices])
+                 [("name" .=) <$> _edName, ("scope" .=) <$> _edScope,
+                  ("id" .=) <$> _edId])
 
--- | Political geographic divisions that contain the requested address.
+-- | Contains information about the data source for the element containing
+-- it.
 --
--- /See:/ 'representativeInfoResponseDivisions' smart constructor.
-data RepresentativeInfoResponseDivisions =
-    RepresentativeInfoResponseDivisions
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- /See:/ 'source' smart constructor.
+data Source = Source
+    { _sName     :: !(Maybe Text)
+    , _sOfficial :: !(Maybe Bool)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RepresentativeInfoResponseDivisions' with the minimum fields required to make a request.
+-- | Creates a value of 'Source' with the minimum fields required to make a request.
 --
-representativeInfoResponseDivisions
-    :: RepresentativeInfoResponseDivisions
-representativeInfoResponseDivisions = RepresentativeInfoResponseDivisions
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sName'
+--
+-- * 'sOfficial'
+source
+    :: Source
+source =
+    Source
+    { _sName = Nothing
+    , _sOfficial = Nothing
+    }
 
-instance FromJSON RepresentativeInfoResponseDivisions
-         where
+-- | The name of the data source.
+sName :: Lens' Source (Maybe Text)
+sName = lens _sName (\ s a -> s{_sName = a})
+
+-- | Whether this data comes from an official government source.
+sOfficial :: Lens' Source (Maybe Bool)
+sOfficial
+  = lens _sOfficial (\ s a -> s{_sOfficial = a})
+
+instance FromJSON Source where
         parseJSON
-          = withObject "RepresentativeInfoResponseDivisions"
-              (\ o -> pure RepresentativeInfoResponseDivisions)
+          = withObject "Source"
+              (\ o ->
+                 Source <$> (o .:? "name") <*> (o .:? "official"))
 
-instance ToJSON RepresentativeInfoResponseDivisions
-         where
-        toJSON = const (Object mempty)
+instance ToJSON Source where
+        toJSON Source{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _sName,
+                  ("official" .=) <$> _sOfficial])
 
 -- | A simple representation of an address.
 --
@@ -1898,51 +1099,347 @@ instance ToJSON SimpleAddressType where
                   ("city" .=) <$> _satCity, ("line1" .=) <$> _satLine1,
                   ("locationName" .=) <$> _satLocationName])
 
--- | Contains information about the data source for the element containing
--- it.
+-- | Represents a political geographic division that matches the requested
+-- query.
 --
--- /See:/ 'source' smart constructor.
-data Source = Source
-    { _sName     :: !(Maybe Text)
-    , _sOfficial :: !(Maybe Bool)
+-- /See:/ 'divisionSearchResult' smart constructor.
+data DivisionSearchResult = DivisionSearchResult
+    { _dsrAliases :: !(Maybe [Text])
+    , _dsrName    :: !(Maybe Text)
+    , _dsrOcdId   :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Source' with the minimum fields required to make a request.
+-- | Creates a value of 'DivisionSearchResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sName'
+-- * 'dsrAliases'
 --
--- * 'sOfficial'
-source
-    :: Source
-source =
-    Source
-    { _sName = Nothing
-    , _sOfficial = Nothing
+-- * 'dsrName'
+--
+-- * 'dsrOcdId'
+divisionSearchResult
+    :: DivisionSearchResult
+divisionSearchResult =
+    DivisionSearchResult
+    { _dsrAliases = Nothing
+    , _dsrName = Nothing
+    , _dsrOcdId = Nothing
     }
 
--- | The name of the data source.
-sName :: Lens' Source (Maybe Text)
-sName = lens _sName (\ s a -> s{_sName = a})
+-- | Other Open Civic Data identifiers that refer to the same division -- for
+-- example, those that refer to other political divisions whose boundaries
+-- are defined to be coterminous with this one. For example,
+-- ocd-division\/country:us\/state:wy will include an alias of
+-- ocd-division\/country:us\/state:wy\/cd:1, since Wyoming has only one
+-- Congressional district.
+dsrAliases :: Lens' DivisionSearchResult [Text]
+dsrAliases
+  = lens _dsrAliases (\ s a -> s{_dsrAliases = a}) .
+      _Default
+      . _Coerce
 
--- | Whether this data comes from an official government source.
-sOfficial :: Lens' Source (Maybe Bool)
-sOfficial
-  = lens _sOfficial (\ s a -> s{_sOfficial = a})
+-- | The name of the division.
+dsrName :: Lens' DivisionSearchResult (Maybe Text)
+dsrName = lens _dsrName (\ s a -> s{_dsrName = a})
 
-instance FromJSON Source where
+-- | The unique Open Civic Data identifier for this division.
+dsrOcdId :: Lens' DivisionSearchResult (Maybe Text)
+dsrOcdId = lens _dsrOcdId (\ s a -> s{_dsrOcdId = a})
+
+instance FromJSON DivisionSearchResult where
         parseJSON
-          = withObject "Source"
+          = withObject "DivisionSearchResult"
               (\ o ->
-                 Source <$> (o .:? "name") <*> (o .:? "official"))
+                 DivisionSearchResult <$>
+                   (o .:? "aliases" .!= mempty) <*> (o .:? "name") <*>
+                     (o .:? "ocdId"))
 
-instance ToJSON Source where
-        toJSON Source{..}
+instance ToJSON DivisionSearchResult where
+        toJSON DivisionSearchResult{..}
           = object
               (catMaybes
-                 [("name" .=) <$> _sName,
-                  ("official" .=) <$> _sOfficial])
+                 [("aliases" .=) <$> _dsrAliases,
+                  ("name" .=) <$> _dsrName,
+                  ("ocdId" .=) <$> _dsrOcdId])
+
+-- | The result of a representative info lookup query.
+--
+-- /See:/ 'representativeInfoResponse' smart constructor.
+data RepresentativeInfoResponse = RepresentativeInfoResponse
+    { _rirKind            :: !Text
+    , _rirNormalizedInput :: !(Maybe (Maybe SimpleAddressType))
+    , _rirOfficials       :: !(Maybe [Maybe Official])
+    , _rirDivisions       :: !(Maybe RepresentativeInfoResponseDivisions)
+    , _rirOffices         :: !(Maybe [Maybe Office])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RepresentativeInfoResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rirKind'
+--
+-- * 'rirNormalizedInput'
+--
+-- * 'rirOfficials'
+--
+-- * 'rirDivisions'
+--
+-- * 'rirOffices'
+representativeInfoResponse
+    :: RepresentativeInfoResponse
+representativeInfoResponse =
+    RepresentativeInfoResponse
+    { _rirKind = "civicinfo#representativeInfoResponse"
+    , _rirNormalizedInput = Nothing
+    , _rirOfficials = Nothing
+    , _rirDivisions = Nothing
+    , _rirOffices = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"civicinfo#representativeInfoResponse\".
+rirKind :: Lens' RepresentativeInfoResponse Text
+rirKind = lens _rirKind (\ s a -> s{_rirKind = a})
+
+-- | The normalized version of the requested address
+rirNormalizedInput :: Lens' RepresentativeInfoResponse (Maybe (Maybe SimpleAddressType))
+rirNormalizedInput
+  = lens _rirNormalizedInput
+      (\ s a -> s{_rirNormalizedInput = a})
+
+-- | Officials holding the offices listed above. Will only be present if
+-- includeOffices was true in the request.
+rirOfficials :: Lens' RepresentativeInfoResponse [Maybe Official]
+rirOfficials
+  = lens _rirOfficials (\ s a -> s{_rirOfficials = a})
+      . _Default
+      . _Coerce
+
+-- | Political geographic divisions that contain the requested address.
+rirDivisions :: Lens' RepresentativeInfoResponse (Maybe RepresentativeInfoResponseDivisions)
+rirDivisions
+  = lens _rirDivisions (\ s a -> s{_rirDivisions = a})
+
+-- | Elected offices referenced by the divisions listed above. Will only be
+-- present if includeOffices was true in the request.
+rirOffices :: Lens' RepresentativeInfoResponse [Maybe Office]
+rirOffices
+  = lens _rirOffices (\ s a -> s{_rirOffices = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON RepresentativeInfoResponse where
+        parseJSON
+          = withObject "RepresentativeInfoResponse"
+              (\ o ->
+                 RepresentativeInfoResponse <$>
+                   (o .:? "kind" .!=
+                      "civicinfo#representativeInfoResponse")
+                     <*> (o .:? "normalizedInput")
+                     <*> (o .:? "officials" .!= mempty)
+                     <*> (o .:? "divisions")
+                     <*> (o .:? "offices" .!= mempty))
+
+instance ToJSON RepresentativeInfoResponse where
+        toJSON RepresentativeInfoResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _rirKind),
+                  ("normalizedInput" .=) <$> _rirNormalizedInput,
+                  ("officials" .=) <$> _rirOfficials,
+                  ("divisions" .=) <$> _rirDivisions,
+                  ("offices" .=) <$> _rirOffices])
+
+-- | Information about a person holding an elected office.
+--
+-- /See:/ 'official' smart constructor.
+data Official = Official
+    { _oPhotoUrl :: !(Maybe Text)
+    , _oUrls     :: !(Maybe [Text])
+    , _oChannels :: !(Maybe [Maybe Channel])
+    , _oAddress  :: !(Maybe [Maybe SimpleAddressType])
+    , _oPhones   :: !(Maybe [Text])
+    , _oName     :: !(Maybe Text)
+    , _oEmails   :: !(Maybe [Text])
+    , _oParty    :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Official' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oPhotoUrl'
+--
+-- * 'oUrls'
+--
+-- * 'oChannels'
+--
+-- * 'oAddress'
+--
+-- * 'oPhones'
+--
+-- * 'oName'
+--
+-- * 'oEmails'
+--
+-- * 'oParty'
+official
+    :: Official
+official =
+    Official
+    { _oPhotoUrl = Nothing
+    , _oUrls = Nothing
+    , _oChannels = Nothing
+    , _oAddress = Nothing
+    , _oPhones = Nothing
+    , _oName = Nothing
+    , _oEmails = Nothing
+    , _oParty = Nothing
+    }
+
+-- | A URL for a photo of the official.
+oPhotoUrl :: Lens' Official (Maybe Text)
+oPhotoUrl
+  = lens _oPhotoUrl (\ s a -> s{_oPhotoUrl = a})
+
+-- | The official\'s public website URLs.
+oUrls :: Lens' Official [Text]
+oUrls
+  = lens _oUrls (\ s a -> s{_oUrls = a}) . _Default .
+      _Coerce
+
+-- | A list of known (social) media channels for this official.
+oChannels :: Lens' Official [Maybe Channel]
+oChannels
+  = lens _oChannels (\ s a -> s{_oChannels = a}) .
+      _Default
+      . _Coerce
+
+-- | Addresses at which to contact the official.
+oAddress :: Lens' Official [Maybe SimpleAddressType]
+oAddress
+  = lens _oAddress (\ s a -> s{_oAddress = a}) .
+      _Default
+      . _Coerce
+
+-- | The official\'s public contact phone numbers.
+oPhones :: Lens' Official [Text]
+oPhones
+  = lens _oPhones (\ s a -> s{_oPhones = a}) . _Default
+      . _Coerce
+
+-- | The official\'s name.
+oName :: Lens' Official (Maybe Text)
+oName = lens _oName (\ s a -> s{_oName = a})
+
+-- | The direct email addresses for the official.
+oEmails :: Lens' Official [Text]
+oEmails
+  = lens _oEmails (\ s a -> s{_oEmails = a}) . _Default
+      . _Coerce
+
+-- | The full name of the party the official belongs to.
+oParty :: Lens' Official (Maybe Text)
+oParty = lens _oParty (\ s a -> s{_oParty = a})
+
+instance FromJSON Official where
+        parseJSON
+          = withObject "Official"
+              (\ o ->
+                 Official <$>
+                   (o .:? "photoUrl") <*> (o .:? "urls" .!= mempty) <*>
+                     (o .:? "channels" .!= mempty)
+                     <*> (o .:? "address" .!= mempty)
+                     <*> (o .:? "phones" .!= mempty)
+                     <*> (o .:? "name")
+                     <*> (o .:? "emails" .!= mempty)
+                     <*> (o .:? "party"))
+
+instance ToJSON Official where
+        toJSON Official{..}
+          = object
+              (catMaybes
+                 [("photoUrl" .=) <$> _oPhotoUrl,
+                  ("urls" .=) <$> _oUrls,
+                  ("channels" .=) <$> _oChannels,
+                  ("address" .=) <$> _oAddress,
+                  ("phones" .=) <$> _oPhones, ("name" .=) <$> _oName,
+                  ("emails" .=) <$> _oEmails,
+                  ("party" .=) <$> _oParty])
+
+-- | The list of elections available for this version of the API.
+--
+-- /See:/ 'electionsQueryResponse' smart constructor.
+data ElectionsQueryResponse = ElectionsQueryResponse
+    { _eqrKind      :: !Text
+    , _eqrElections :: !(Maybe [Maybe Election])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ElectionsQueryResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eqrKind'
+--
+-- * 'eqrElections'
+electionsQueryResponse
+    :: ElectionsQueryResponse
+electionsQueryResponse =
+    ElectionsQueryResponse
+    { _eqrKind = "civicinfo#electionsQueryResponse"
+    , _eqrElections = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"civicinfo#electionsQueryResponse\".
+eqrKind :: Lens' ElectionsQueryResponse Text
+eqrKind = lens _eqrKind (\ s a -> s{_eqrKind = a})
+
+-- | A list of available elections
+eqrElections :: Lens' ElectionsQueryResponse [Maybe Election]
+eqrElections
+  = lens _eqrElections (\ s a -> s{_eqrElections = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ElectionsQueryResponse where
+        parseJSON
+          = withObject "ElectionsQueryResponse"
+              (\ o ->
+                 ElectionsQueryResponse <$>
+                   (o .:? "kind" .!= "civicinfo#electionsQueryResponse")
+                     <*> (o .:? "elections" .!= mempty))
+
+instance ToJSON ElectionsQueryResponse where
+        toJSON ElectionsQueryResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _eqrKind),
+                  ("elections" .=) <$> _eqrElections])
+
+-- | Political geographic divisions that contain the requested address.
+--
+-- /See:/ 'representativeInfoDataDivisions' smart constructor.
+data RepresentativeInfoDataDivisions =
+    RepresentativeInfoDataDivisions
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RepresentativeInfoDataDivisions' with the minimum fields required to make a request.
+--
+representativeInfoDataDivisions
+    :: RepresentativeInfoDataDivisions
+representativeInfoDataDivisions = RepresentativeInfoDataDivisions
+
+instance FromJSON RepresentativeInfoDataDivisions
+         where
+        parseJSON
+          = withObject "RepresentativeInfoDataDivisions"
+              (\ o -> pure RepresentativeInfoDataDivisions)
+
+instance ToJSON RepresentativeInfoDataDivisions where
+        toJSON = const (Object mempty)
 
 -- | The result of a voter info lookup query.
 --
@@ -2117,3 +1614,506 @@ instance ToJSON VoterInfoResponse where
                   ("earlyVoteSites" .=) <$> _virEarlyVoteSites,
                   ("pollingLocations" .=) <$> _virPollingLocations,
                   ("precinctId" .=) <$> _virPrecinctId])
+
+-- | Information about individual election officials.
+--
+-- /See:/ 'electionOfficial' smart constructor.
+data ElectionOfficial = ElectionOfficial
+    { _eoFaxNumber         :: !(Maybe Text)
+    , _eoName              :: !(Maybe Text)
+    , _eoOfficePhoneNumber :: !(Maybe Text)
+    , _eoEmailAddress      :: !(Maybe Text)
+    , _eoTitle             :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ElectionOfficial' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eoFaxNumber'
+--
+-- * 'eoName'
+--
+-- * 'eoOfficePhoneNumber'
+--
+-- * 'eoEmailAddress'
+--
+-- * 'eoTitle'
+electionOfficial
+    :: ElectionOfficial
+electionOfficial =
+    ElectionOfficial
+    { _eoFaxNumber = Nothing
+    , _eoName = Nothing
+    , _eoOfficePhoneNumber = Nothing
+    , _eoEmailAddress = Nothing
+    , _eoTitle = Nothing
+    }
+
+-- | The fax number of the election official.
+eoFaxNumber :: Lens' ElectionOfficial (Maybe Text)
+eoFaxNumber
+  = lens _eoFaxNumber (\ s a -> s{_eoFaxNumber = a})
+
+-- | The full name of the election official.
+eoName :: Lens' ElectionOfficial (Maybe Text)
+eoName = lens _eoName (\ s a -> s{_eoName = a})
+
+-- | The office phone number of the election official.
+eoOfficePhoneNumber :: Lens' ElectionOfficial (Maybe Text)
+eoOfficePhoneNumber
+  = lens _eoOfficePhoneNumber
+      (\ s a -> s{_eoOfficePhoneNumber = a})
+
+-- | The email address of the election official.
+eoEmailAddress :: Lens' ElectionOfficial (Maybe Text)
+eoEmailAddress
+  = lens _eoEmailAddress
+      (\ s a -> s{_eoEmailAddress = a})
+
+-- | The title of the election official.
+eoTitle :: Lens' ElectionOfficial (Maybe Text)
+eoTitle = lens _eoTitle (\ s a -> s{_eoTitle = a})
+
+instance FromJSON ElectionOfficial where
+        parseJSON
+          = withObject "ElectionOfficial"
+              (\ o ->
+                 ElectionOfficial <$>
+                   (o .:? "faxNumber") <*> (o .:? "name") <*>
+                     (o .:? "officePhoneNumber")
+                     <*> (o .:? "emailAddress")
+                     <*> (o .:? "title"))
+
+instance ToJSON ElectionOfficial where
+        toJSON ElectionOfficial{..}
+          = object
+              (catMaybes
+                 [("faxNumber" .=) <$> _eoFaxNumber,
+                  ("name" .=) <$> _eoName,
+                  ("officePhoneNumber" .=) <$> _eoOfficePhoneNumber,
+                  ("emailAddress" .=) <$> _eoEmailAddress,
+                  ("title" .=) <$> _eoTitle])
+
+-- | Information about a candidate running for elected office.
+--
+-- /See:/ 'candidate' smart constructor.
+data Candidate = Candidate
+    { _cEmail         :: !(Maybe Text)
+    , _cPhone         :: !(Maybe Text)
+    , _cPhotoUrl      :: !(Maybe Text)
+    , _cChannels      :: !(Maybe [Maybe Channel])
+    , _cCandidateUrl  :: !(Maybe Text)
+    , _cOrderOnBallot :: !(Maybe Int64)
+    , _cName          :: !(Maybe Text)
+    , _cParty         :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Candidate' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cEmail'
+--
+-- * 'cPhone'
+--
+-- * 'cPhotoUrl'
+--
+-- * 'cChannels'
+--
+-- * 'cCandidateUrl'
+--
+-- * 'cOrderOnBallot'
+--
+-- * 'cName'
+--
+-- * 'cParty'
+candidate
+    :: Candidate
+candidate =
+    Candidate
+    { _cEmail = Nothing
+    , _cPhone = Nothing
+    , _cPhotoUrl = Nothing
+    , _cChannels = Nothing
+    , _cCandidateUrl = Nothing
+    , _cOrderOnBallot = Nothing
+    , _cName = Nothing
+    , _cParty = Nothing
+    }
+
+-- | The email address for the candidate\'s campaign.
+cEmail :: Lens' Candidate (Maybe Text)
+cEmail = lens _cEmail (\ s a -> s{_cEmail = a})
+
+-- | The voice phone number for the candidate\'s campaign office.
+cPhone :: Lens' Candidate (Maybe Text)
+cPhone = lens _cPhone (\ s a -> s{_cPhone = a})
+
+-- | A URL for a photo of the candidate.
+cPhotoUrl :: Lens' Candidate (Maybe Text)
+cPhotoUrl
+  = lens _cPhotoUrl (\ s a -> s{_cPhotoUrl = a})
+
+-- | A list of known (social) media channels for this candidate.
+cChannels :: Lens' Candidate [Maybe Channel]
+cChannels
+  = lens _cChannels (\ s a -> s{_cChannels = a}) .
+      _Default
+      . _Coerce
+
+-- | The URL for the candidate\'s campaign web site.
+cCandidateUrl :: Lens' Candidate (Maybe Text)
+cCandidateUrl
+  = lens _cCandidateUrl
+      (\ s a -> s{_cCandidateUrl = a})
+
+-- | The order the candidate appears on the ballot for this contest.
+cOrderOnBallot :: Lens' Candidate (Maybe Int64)
+cOrderOnBallot
+  = lens _cOrderOnBallot
+      (\ s a -> s{_cOrderOnBallot = a})
+
+-- | The candidate\'s name.
+cName :: Lens' Candidate (Maybe Text)
+cName = lens _cName (\ s a -> s{_cName = a})
+
+-- | The full name of the party the candidate is a member of.
+cParty :: Lens' Candidate (Maybe Text)
+cParty = lens _cParty (\ s a -> s{_cParty = a})
+
+instance FromJSON Candidate where
+        parseJSON
+          = withObject "Candidate"
+              (\ o ->
+                 Candidate <$>
+                   (o .:? "email") <*> (o .:? "phone") <*>
+                     (o .:? "photoUrl")
+                     <*> (o .:? "channels" .!= mempty)
+                     <*> (o .:? "candidateUrl")
+                     <*> (o .:? "orderOnBallot")
+                     <*> (o .:? "name")
+                     <*> (o .:? "party"))
+
+instance ToJSON Candidate where
+        toJSON Candidate{..}
+          = object
+              (catMaybes
+                 [("email" .=) <$> _cEmail, ("phone" .=) <$> _cPhone,
+                  ("photoUrl" .=) <$> _cPhotoUrl,
+                  ("channels" .=) <$> _cChannels,
+                  ("candidateUrl" .=) <$> _cCandidateUrl,
+                  ("orderOnBallot" .=) <$> _cOrderOnBallot,
+                  ("name" .=) <$> _cName, ("party" .=) <$> _cParty])
+
+-- | Information about an Office held by one or more Officials.
+--
+-- /See:/ 'office' smart constructor.
+data Office = Office
+    { _offDivisionId      :: !(Maybe Text)
+    , _offRoles           :: !(Maybe [Text])
+    , _offOfficialIndices :: !(Maybe [Word32])
+    , _offSources         :: !(Maybe [Maybe Source])
+    , _offName            :: !(Maybe Text)
+    , _offLevels          :: !(Maybe [Text])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Office' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'offDivisionId'
+--
+-- * 'offRoles'
+--
+-- * 'offOfficialIndices'
+--
+-- * 'offSources'
+--
+-- * 'offName'
+--
+-- * 'offLevels'
+office
+    :: Office
+office =
+    Office
+    { _offDivisionId = Nothing
+    , _offRoles = Nothing
+    , _offOfficialIndices = Nothing
+    , _offSources = Nothing
+    , _offName = Nothing
+    , _offLevels = Nothing
+    }
+
+-- | The OCD ID of the division with which this office is associated.
+offDivisionId :: Lens' Office (Maybe Text)
+offDivisionId
+  = lens _offDivisionId
+      (\ s a -> s{_offDivisionId = a})
+
+-- | The roles which this office fulfills. Roles are not meant to be
+-- exhaustive, or to exactly specify the entire set of responsibilities of
+-- a given office, but are meant to be rough categories that are useful for
+-- general selection from or sorting of a list of offices.
+offRoles :: Lens' Office [Text]
+offRoles
+  = lens _offRoles (\ s a -> s{_offRoles = a}) .
+      _Default
+      . _Coerce
+
+-- | List of indices in the officials array of people who presently hold this
+-- office.
+offOfficialIndices :: Lens' Office [Word32]
+offOfficialIndices
+  = lens _offOfficialIndices
+      (\ s a -> s{_offOfficialIndices = a})
+      . _Default
+      . _Coerce
+
+-- | A list of sources for this office. If multiple sources are listed, the
+-- data has been aggregated from those sources.
+offSources :: Lens' Office [Maybe Source]
+offSources
+  = lens _offSources (\ s a -> s{_offSources = a}) .
+      _Default
+      . _Coerce
+
+-- | The human-readable name of the office.
+offName :: Lens' Office (Maybe Text)
+offName = lens _offName (\ s a -> s{_offName = a})
+
+-- | The levels of government of which this office is part. There may be more
+-- than one in cases where a jurisdiction effectively acts at two different
+-- levels of government; for example, the mayor of the District of Columbia
+-- acts at \"locality\" level, but also effectively at both
+-- \"administrative-area-2\" and \"administrative-area-1\".
+offLevels :: Lens' Office [Text]
+offLevels
+  = lens _offLevels (\ s a -> s{_offLevels = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON Office where
+        parseJSON
+          = withObject "Office"
+              (\ o ->
+                 Office <$>
+                   (o .:? "divisionId") <*> (o .:? "roles" .!= mempty)
+                     <*> (o .:? "officialIndices" .!= mempty)
+                     <*> (o .:? "sources" .!= mempty)
+                     <*> (o .:? "name")
+                     <*> (o .:? "levels" .!= mempty))
+
+instance ToJSON Office where
+        toJSON Office{..}
+          = object
+              (catMaybes
+                 [("divisionId" .=) <$> _offDivisionId,
+                  ("roles" .=) <$> _offRoles,
+                  ("officialIndices" .=) <$> _offOfficialIndices,
+                  ("sources" .=) <$> _offSources,
+                  ("name" .=) <$> _offName,
+                  ("levels" .=) <$> _offLevels])
+
+-- | A social media or web channel for a candidate.
+--
+-- /See:/ 'channel' smart constructor.
+data Channel = Channel
+    { _chaId   :: !(Maybe Text)
+    , _chaType :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Channel' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'chaId'
+--
+-- * 'chaType'
+channel
+    :: Channel
+channel =
+    Channel
+    { _chaId = Nothing
+    , _chaType = Nothing
+    }
+
+-- | The unique public identifier for the candidate\'s channel.
+chaId :: Lens' Channel (Maybe Text)
+chaId = lens _chaId (\ s a -> s{_chaId = a})
+
+-- | The type of channel. The following is a list of types of channels, but
+-- is not exhaustive. More channel types may be added at a later time. One
+-- of: GooglePlus, YouTube, Facebook, Twitter
+chaType :: Lens' Channel (Maybe Text)
+chaType = lens _chaType (\ s a -> s{_chaType = a})
+
+instance FromJSON Channel where
+        parseJSON
+          = withObject "Channel"
+              (\ o -> Channel <$> (o .:? "id") <*> (o .:? "type"))
+
+instance ToJSON Channel where
+        toJSON Channel{..}
+          = object
+              (catMaybes
+                 [("id" .=) <$> _chaId, ("type" .=) <$> _chaType])
+
+-- | Information about the election that was queried.
+--
+-- /See:/ 'election' smart constructor.
+data Election = Election
+    { _eOcdDivisionId :: !(Maybe Text)
+    , _eElectionDay   :: !(Maybe Text)
+    , _eName          :: !(Maybe Text)
+    , _eId            :: !(Maybe Int64)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Election' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eOcdDivisionId'
+--
+-- * 'eElectionDay'
+--
+-- * 'eName'
+--
+-- * 'eId'
+election
+    :: Election
+election =
+    Election
+    { _eOcdDivisionId = Nothing
+    , _eElectionDay = Nothing
+    , _eName = Nothing
+    , _eId = Nothing
+    }
+
+-- | The political division of the election. Represented as an OCD Division
+-- ID. Voters within these political jurisdictions are covered by this
+-- election. This is typically a state such as
+-- ocd-division\/country:us\/state:ca or for the midterms or general
+-- election the entire US (i.e. ocd-division\/country:us).
+eOcdDivisionId :: Lens' Election (Maybe Text)
+eOcdDivisionId
+  = lens _eOcdDivisionId
+      (\ s a -> s{_eOcdDivisionId = a})
+
+-- | Day of the election in YYYY-MM-DD format.
+eElectionDay :: Lens' Election (Maybe Text)
+eElectionDay
+  = lens _eElectionDay (\ s a -> s{_eElectionDay = a})
+
+-- | A displayable name for the election.
+eName :: Lens' Election (Maybe Text)
+eName = lens _eName (\ s a -> s{_eName = a})
+
+-- | The unique ID of this election.
+eId :: Lens' Election (Maybe Int64)
+eId = lens _eId (\ s a -> s{_eId = a})
+
+instance FromJSON Election where
+        parseJSON
+          = withObject "Election"
+              (\ o ->
+                 Election <$>
+                   (o .:? "ocdDivisionId") <*> (o .:? "electionDay") <*>
+                     (o .:? "name")
+                     <*> (o .:? "id"))
+
+instance ToJSON Election where
+        toJSON Election{..}
+          = object
+              (catMaybes
+                 [("ocdDivisionId" .=) <$> _eOcdDivisionId,
+                  ("electionDay" .=) <$> _eElectionDay,
+                  ("name" .=) <$> _eName, ("id" .=) <$> _eId])
+
+-- | Describes information about a regional election administrative area.
+--
+-- /See:/ 'administrationRegion' smart constructor.
+data AdministrationRegion = AdministrationRegion
+    { _arLocalJurisdiction          :: !(Maybe (Maybe AdministrationRegion))
+    , _arSources                    :: !(Maybe [Maybe Source])
+    , _arName                       :: !(Maybe Text)
+    , _arElectionAdministrationBody :: !(Maybe (Maybe AdministrativeBody))
+    , _arId                         :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AdministrationRegion' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'arLocalJurisdiction'
+--
+-- * 'arSources'
+--
+-- * 'arName'
+--
+-- * 'arElectionAdministrationBody'
+--
+-- * 'arId'
+administrationRegion
+    :: AdministrationRegion
+administrationRegion =
+    AdministrationRegion
+    { _arLocalJurisdiction = Nothing
+    , _arSources = Nothing
+    , _arName = Nothing
+    , _arElectionAdministrationBody = Nothing
+    , _arId = Nothing
+    }
+
+-- | The city or county that provides election information for this voter.
+-- This object can have the same elements as state.
+arLocalJurisdiction :: Lens' AdministrationRegion (Maybe (Maybe AdministrationRegion))
+arLocalJurisdiction
+  = lens _arLocalJurisdiction
+      (\ s a -> s{_arLocalJurisdiction = a})
+
+-- | A list of sources for this area. If multiple sources are listed the data
+-- has been aggregated from those sources.
+arSources :: Lens' AdministrationRegion [Maybe Source]
+arSources
+  = lens _arSources (\ s a -> s{_arSources = a}) .
+      _Default
+      . _Coerce
+
+-- | The name of the jurisdiction.
+arName :: Lens' AdministrationRegion (Maybe Text)
+arName = lens _arName (\ s a -> s{_arName = a})
+
+-- | The election administration body for this area.
+arElectionAdministrationBody :: Lens' AdministrationRegion (Maybe (Maybe AdministrativeBody))
+arElectionAdministrationBody
+  = lens _arElectionAdministrationBody
+      (\ s a -> s{_arElectionAdministrationBody = a})
+
+-- | An ID for this object. IDs may change in future requests and should not
+-- be cached. Access to this field requires special access that can be
+-- requested from the Request more link on the Quotas page.
+arId :: Lens' AdministrationRegion (Maybe Text)
+arId = lens _arId (\ s a -> s{_arId = a})
+
+instance FromJSON AdministrationRegion where
+        parseJSON
+          = withObject "AdministrationRegion"
+              (\ o ->
+                 AdministrationRegion <$>
+                   (o .:? "local_jurisdiction") <*>
+                     (o .:? "sources" .!= mempty)
+                     <*> (o .:? "name")
+                     <*> (o .:? "electionAdministrationBody")
+                     <*> (o .:? "id"))
+
+instance ToJSON AdministrationRegion where
+        toJSON AdministrationRegion{..}
+          = object
+              (catMaybes
+                 [("local_jurisdiction" .=) <$> _arLocalJurisdiction,
+                  ("sources" .=) <$> _arSources,
+                  ("name" .=) <$> _arName,
+                  ("electionAdministrationBody" .=) <$>
+                    _arElectionAdministrationBody,
+                  ("id" .=) <$> _arId])

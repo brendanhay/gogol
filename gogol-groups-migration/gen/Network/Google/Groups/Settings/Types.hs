@@ -14,9 +14,14 @@
 --
 module Network.Google.Groups.Settings.Types
     (
+    -- * Service URL
+      groupsSettingsURL
+
+    -- * Alt
+    , Alt (..)
 
     -- * Groups
-      Groups
+    , Groups
     , groups
     , gEmail
     , gSendMessageDenyNotification
@@ -51,3 +56,10 @@ module Network.Google.Groups.Settings.Types
 import           Network.Google.Groups.Settings.Types.Product
 import           Network.Google.Groups.Settings.Types.Sum
 import           Network.Google.Prelude
+
+-- | URL referring to version 'v1' of the Groups Settings API.
+groupsSettingsURL :: BaseUrl
+groupsSettingsURL
+  = BaseUrl Https
+      "https://www.googleapis.com/groups/v1/groups/"
+      443

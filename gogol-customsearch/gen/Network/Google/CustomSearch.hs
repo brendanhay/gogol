@@ -17,18 +17,20 @@
 -- /See:/ <https://developers.google.com/custom-search/v1/using_rest CustomSearch API Reference>
 module Network.Google.CustomSearch
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** CustomSearch API
       CustomSearch
-    , CseAPI
-    , CseList
+    , customSearch
+    , customSearchURL
+
+    -- ** search.cse.list
+    , module Network.Google.API.Search.Cse.List
 
     -- * Types
 
-    -- ** Context
-    , Context
-    , context
-    , cFacets
-    , cTitle
+    -- ** CseList'ImgDominantColor
+    , CseList'ImgDominantColor (..)
 
     -- ** ContextItemItemFacets
     , ContextItemItemFacets
@@ -36,6 +38,25 @@ module Network.Google.CustomSearch
     , ciifAnchor
     , ciifLabelWithOp
     , ciifLabel
+
+    -- ** ResultItemLabels
+    , ResultItemLabels
+    , resultItemLabels
+    , rilName
+    , rilDisplayName
+    , rilLabelWithOp
+
+    -- ** Alt
+    , Alt (..)
+
+    -- ** CseList'Safe
+    , CseList'Safe (..)
+
+    -- ** CseList'ImgColorType
+    , CseList'ImgColorType (..)
+
+    -- ** CseList'ImgType
+    , CseList'ImgType (..)
 
     -- ** Promotion
     , Promotion
@@ -47,20 +68,39 @@ module Network.Google.CustomSearch
     , pHtmlTitle
     , pTitle
 
+    -- ** CseList'SiteSearchFilter
+    , CseList'SiteSearchFilter (..)
+
+    -- ** SearchUrl
+    , SearchUrl
+    , searchUrl
+    , suType
+    , suTemplate
+
+    -- ** SearchQueries
+    , SearchQueries
+    , searchQueries
+
+    -- ** Context
+    , Context
+    , context
+    , cFacets
+    , cTitle
+
+    -- ** SearchSearchInformation
+    , SearchSearchInformation
+    , searchSearchInformation
+    , ssiSearchTime
+    , ssiFormattedSearchTime
+    , ssiTotalResults
+    , ssiFormattedTotalResults
+
     -- ** PromotionImage
     , PromotionImage
     , promotionImage
     , piHeight
     , piWidth
     , piSource
-
-    -- ** PromotionItemBodyLines
-    , PromotionItemBodyLines
-    , promotionItemBodyLines
-    , piblLink
-    , piblUrl
-    , piblHtmlTitle
-    , piblTitle
 
     -- ** Query
     , Query
@@ -103,6 +143,59 @@ module Network.Google.CustomSearch
     , qHq
     , qHighRange
 
+    -- ** ResultImage
+    , ResultImage
+    , resultImage
+    , riThumbnailLink
+    , riHeight
+    , riByteSize
+    , riContextLink
+    , riThumbnailHeight
+    , riWidth
+    , riThumbnailWidth
+
+    -- ** ResultPagemap
+    , ResultPagemap
+    , resultPagemap
+
+    -- ** CseList'Lr
+    , CseList'Lr (..)
+
+    -- ** CseList'ImgSize
+    , CseList'ImgSize (..)
+
+    -- ** CseList'SearchType
+    , CseList'SearchType (..)
+
+    -- ** PromotionItemBodyLines
+    , PromotionItemBodyLines
+    , promotionItemBodyLines
+    , piblLink
+    , piblUrl
+    , piblHtmlTitle
+    , piblTitle
+
+    -- ** SearchSpelling
+    , SearchSpelling
+    , searchSpelling
+    , ssCorrectedQuery
+    , ssHtmlCorrectedQuery
+
+    -- ** CseList'Filter
+    , CseList'Filter (..)
+
+    -- ** Search
+    , Search
+    , search
+    , sQueries
+    , sContext
+    , sKind
+    , sUrl
+    , sItems
+    , sSearchInformation
+    , sPromotions
+    , sSpelling
+
     -- ** Result
     , Result
     , result
@@ -121,66 +214,9 @@ module Network.Google.CustomSearch
     , rHtmlTitle
     , rLabels
     , rTitle
-
-    -- ** ResultImage
-    , ResultImage
-    , resultImage
-    , riThumbnailLink
-    , riHeight
-    , riByteSize
-    , riContextLink
-    , riThumbnailHeight
-    , riWidth
-    , riThumbnailWidth
-
-    -- ** ResultItemLabels
-    , ResultItemLabels
-    , resultItemLabels
-    , rilName
-    , rilDisplayName
-    , rilLabelWithOp
-
-    -- ** ResultPagemap
-    , ResultPagemap
-    , resultPagemap
-
-    -- ** Search
-    , Search
-    , search
-    , sQueries
-    , sContext
-    , sKind
-    , sUrl
-    , sItems
-    , sSearchInformation
-    , sPromotions
-    , sSpelling
-
-    -- ** SearchQueries
-    , SearchQueries
-    , searchQueries
-
-    -- ** SearchSearchInformation
-    , SearchSearchInformation
-    , searchSearchInformation
-    , ssiSearchTime
-    , ssiFormattedSearchTime
-    , ssiTotalResults
-    , ssiFormattedTotalResults
-
-    -- ** SearchSpelling
-    , SearchSpelling
-    , searchSpelling
-    , ssCorrectedQuery
-    , ssHtmlCorrectedQuery
-
-    -- ** SearchUrl
-    , SearchUrl
-    , searchUrl
-    , suType
-    , suTemplate
     ) where
 
+import           Network.Google.API.Search.Cse.List
 import           Network.Google.CustomSearch.Types
 import           Network.Google.Prelude
 
@@ -188,100 +224,7 @@ import           Network.Google.Prelude
 TODO
 -}
 
-type CustomSearch = CseAPI
+type CustomSearch = CseListAPI
 
-type CseAPI = CseList
-
--- | Returns metadata about the search performed, metadata about the custom
--- search engine used for the search, and the search results.
-type CseList =
-     "customsearch" :>
-       "v1" :>
-         QueryParam "imgDominantColor" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "siteSearchFilter" Text :>
-                 QueryParam "c2coff" Text :>
-                   QueryParam "orTerms" Text :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "start" Word32 :>
-                         QueryParam "rights" Text :>
-                           QueryParam "excludeTerms" Text :>
-                             QueryParam "num" Word32 :>
-                               QueryParam "fileType" Text :>
-                                 QueryParam "searchType" Text :>
-                                   QueryParam "lr" Text :>
-                                     QueryParam "q" Text :>
-                                       QueryParam "googlehost" Text :>
-                                         QueryParam "relatedSite" Text :>
-                                           QueryParam "hl" Text :>
-                                             QueryParam "key" Text :>
-                                               QueryParam "cref" Text :>
-                                                 QueryParam "sort" Text :>
-                                                   QueryParam "siteSearch" Text
-                                                     :>
-                                                     QueryParam "filter" Text :>
-                                                       QueryParam "dateRestrict"
-                                                         Text
-                                                         :>
-                                                         QueryParam "linkSite"
-                                                           Text
-                                                           :>
-                                                           QueryParam
-                                                             "oauth_token"
-                                                             Text
-                                                             :>
-                                                             QueryParam
-                                                               "lowRange"
-                                                               Text
-                                                               :>
-                                                               QueryParam
-                                                                 "imgType"
-                                                                 Text
-                                                                 :>
-                                                                 QueryParam "gl"
-                                                                   Text
-                                                                   :>
-                                                                   QueryParam
-                                                                     "cx"
-                                                                     Text
-                                                                     :>
-                                                                     QueryParam
-                                                                       "imgColorType"
-                                                                       Text
-                                                                       :>
-                                                                       QueryParam
-                                                                         "imgSize"
-                                                                         Text
-                                                                         :>
-                                                                         QueryParam
-                                                                           "exactTerms"
-                                                                           Text
-                                                                           :>
-                                                                           QueryParam
-                                                                             "cr"
-                                                                             Text
-                                                                             :>
-                                                                             QueryParam
-                                                                               "safe"
-                                                                               Text
-                                                                               :>
-                                                                               QueryParam
-                                                                                 "hq"
-                                                                                 Text
-                                                                                 :>
-                                                                                 QueryParam
-                                                                                   "fields"
-                                                                                   Text
-                                                                                   :>
-                                                                                   QueryParam
-                                                                                     "highRange"
-                                                                                     Text
-                                                                                     :>
-                                                                                     QueryParam
-                                                                                       "alt"
-                                                                                       Text
-                                                                                       :>
-                                                                                       Get
-                                                                                         '[JSON]
-                                                                                         Search
+customSearch :: Proxy CustomSearch
+customSearch = Proxy

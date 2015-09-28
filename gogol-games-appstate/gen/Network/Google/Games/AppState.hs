@@ -17,16 +17,32 @@
 -- /See:/ <https://developers.google.com/games/services/web/api/states Google App State API Reference>
 module Network.Google.Games.AppState
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** Google App State API
       GamesAppState
-    , StatesAPI
-    , StatesList
-    , StatesGet
-    , StatesClear
-    , StatesDelete
-    , StatesUpdate
+    , gamesAppState
+    , gamesAppStateURL
+
+    -- ** appstate.states.clear
+    , module Network.Google.API.Appstate.States.Clear
+
+    -- ** appstate.states.delete
+    , module Network.Google.API.Appstate.States.Delete
+
+    -- ** appstate.states.get
+    , module Network.Google.API.Appstate.States.Get
+
+    -- ** appstate.states.list
+    , module Network.Google.API.Appstate.States.List
+
+    -- ** appstate.states.update
+    , module Network.Google.API.Appstate.States.Update
 
     -- * Types
+
+    -- ** Alt
+    , Alt (..)
 
     -- ** GetResponse
     , GetResponse
@@ -35,13 +51,6 @@ module Network.Google.Games.AppState
     , grKind
     , grData
     , grStateKey
-
-    -- ** ListResponse
-    , ListResponse
-    , listResponse
-    , lrMaximumKeyCount
-    , lrKind
-    , lrItems
 
     -- ** UpdateRequest
     , UpdateRequest
@@ -55,8 +64,20 @@ module Network.Google.Games.AppState
     , wrCurrentStateVersion
     , wrKind
     , wrStateKey
+
+    -- ** ListResponse
+    , ListResponse
+    , listResponse
+    , lrMaximumKeyCount
+    , lrKind
+    , lrItems
     ) where
 
+import           Network.Google.API.Appstate.States.Clear
+import           Network.Google.API.Appstate.States.Delete
+import           Network.Google.API.Appstate.States.Get
+import           Network.Google.API.Appstate.States.List
+import           Network.Google.API.Appstate.States.Update
 import           Network.Google.Games.AppState.Types
 import           Network.Google.Prelude
 
@@ -64,91 +85,10 @@ import           Network.Google.Prelude
 TODO
 -}
 
-type GamesAppState = StatesAPI
+type GamesAppState =
+     StatesListAPI :<|> StatesGetAPI :<|> StatesDeleteAPI
+       :<|> StatesUpdateAPI
+       :<|> StatesClearAPI
 
-type StatesAPI =
-     StatesList :<|> StatesGet :<|> StatesClear :<|>
-       StatesDelete
-       :<|> StatesUpdate
-
--- | Lists all the states keys, and optionally the state data.
-type StatesList =
-     "appstate" :>
-       "v1" :>
-         "states" :>
-           QueryParam "includeData" Bool :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Get '[JSON] ListResponse
-
--- | Retrieves the data corresponding to the passed key. If the key does not
--- exist on the server, an HTTP 404 will be returned.
-type StatesGet =
-     "appstate" :>
-       "v1" :>
-         "states" :>
-           Capture "stateKey" Int32 :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Get '[JSON] GetResponse
-
--- | Clears (sets to empty) the data for the passed key if and only if the
--- passed version matches the currently stored version. This method results
--- in a conflict error on version mismatch.
-type StatesClear =
-     "appstate" :>
-       "v1" :>
-         "states" :>
-           Capture "stateKey" Int32 :>
-             "clear" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "currentDataVersion" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Post '[JSON] WriteResult
-
--- | Deletes a key and the data associated with it. The key is removed and no
--- longer counts against the key quota. Note that since this method is not
--- safe in the face of concurrent modifications, it should only be used for
--- development and testing purposes. Invoking this method in shipping code
--- can result in data loss and data corruption.
-type StatesDelete =
-     "appstate" :>
-       "v1" :>
-         "states" :>
-           Capture "stateKey" Int32 :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Update the data associated with the input key if and only if the passed
--- version matches the currently stored version. This method is safe in the
--- face of concurrent writes. Maximum per-key size is 128KB.
-type StatesUpdate =
-     "appstate" :>
-       "v1" :>
-         "states" :>
-           Capture "stateKey" Int32 :>
-             QueryParam "currentStateVersion" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Put '[JSON] WriteResult
+gamesAppState :: Proxy GamesAppState
+gamesAppState = Proxy

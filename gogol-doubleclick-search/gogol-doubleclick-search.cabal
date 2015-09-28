@@ -1,6 +1,6 @@
 name:                  gogol-doubleclick-search
 version:               0.0.1
-synopsis:              Google DoubleClick Search API.
+synopsis:              Google DoubleClick Search API Client.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -17,8 +17,8 @@ description:
     Report and modify your advertising data in DoubleClick Search (for
     example, campaigns, ad groups, keywords, and conversions).
     .
-    /Warning:/ This is an experimental preview release which is still under
-    heavy development and not intended for public consumption, caveat emptor!
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
 
 source-repository head
     type:     git
@@ -31,7 +31,17 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.DoubleClick.Search
+          Network.Google.API.DoubleClickSearch.Conversion.Get
+        , Network.Google.API.DoubleClickSearch.Conversion.Insert
+        , Network.Google.API.DoubleClickSearch.Conversion.Patch
+        , Network.Google.API.DoubleClickSearch.Conversion.Update
+        , Network.Google.API.DoubleClickSearch.Conversion.UpdateAvailability
+        , Network.Google.API.DoubleClickSearch.Reports.Generate
+        , Network.Google.API.DoubleClickSearch.Reports.Get
+        , Network.Google.API.DoubleClickSearch.Reports.GetFile
+        , Network.Google.API.DoubleClickSearch.Reports.Request
+        , Network.Google.API.DoubleClickSearch.SavedColumns.List
+        , Network.Google.DoubleClick.Search
         , Network.Google.DoubleClick.Search.Types
 
     other-modules:

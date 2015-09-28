@@ -1,6 +1,6 @@
 name:                  gogol-mirror
 version:               0.0.1
-synopsis:              Google Mirror API.
+synopsis:              Google Mirror API Client.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -16,8 +16,8 @@ extra-source-files:    README.md
 description:
     API for interacting with Glass users via the timeline.
     .
-    /Warning:/ This is an experimental preview release which is still under
-    heavy development and not intended for public consumption, caveat emptor!
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
 
 source-repository head
     type:     git
@@ -30,7 +30,25 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.Mirror
+          Network.Google.API.Mirror.Accounts.Insert
+        , Network.Google.API.Mirror.Contacts.Delete
+        , Network.Google.API.Mirror.Contacts.Get
+        , Network.Google.API.Mirror.Contacts.Insert
+        , Network.Google.API.Mirror.Contacts.List
+        , Network.Google.API.Mirror.Contacts.Patch
+        , Network.Google.API.Mirror.Contacts.Update
+        , Network.Google.API.Mirror.Locations.Get
+        , Network.Google.API.Mirror.Locations.List
+        , Network.Google.API.Mirror.Settings.Get
+        , Network.Google.API.Mirror.Subscriptions.Delete
+        , Network.Google.API.Mirror.Subscriptions.Insert
+        , Network.Google.API.Mirror.Subscriptions.List
+        , Network.Google.API.Mirror.Subscriptions.Update
+        , Network.Google.API.Mirror.Timeline.Attachments.Delete
+        , Network.Google.API.Mirror.Timeline.Attachments.Get
+        , Network.Google.API.Mirror.Timeline.Attachments.Insert
+        , Network.Google.API.Mirror.Timeline.Attachments.List
+        , Network.Google.Mirror
         , Network.Google.Mirror.Types
 
     other-modules:

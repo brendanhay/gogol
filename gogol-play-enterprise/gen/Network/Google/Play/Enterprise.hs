@@ -18,70 +18,172 @@
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference>
 module Network.Google.Play.Enterprise
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** Google Play EMM API
       PlayEnterprise
-    , CollectionviewersAPI
-    , CollectionviewersList
-    , CollectionviewersPatch
-    , CollectionviewersGet
-    , CollectionviewersDelete
-    , CollectionviewersUpdate
-    , UsersAPI
-    , UsersList
-    , UsersGenerateToken
-    , UsersGet
-    , UsersSetAvailableProductSet
-    , UsersRevokeToken
-    , UsersGetAvailableProductSet
-    , InstallsAPI
-    , InstallsList
-    , InstallsPatch
-    , InstallsGet
-    , InstallsDelete
-    , InstallsUpdate
-    , CollectionsAPI
-    , CollectionsInsert
-    , CollectionsList
-    , CollectionsPatch
-    , CollectionsGet
-    , CollectionsDelete
-    , CollectionsUpdate
-    , EnterprisesAPI
-    , EnterprisesInsert
-    , EnterprisesList
-    , EnterprisesUnenroll
-    , EnterprisesSetAccount
-    , EnterprisesEnroll
-    , EnterprisesGet
-    , EnterprisesSendTestPushNotification
-    , EnterprisesDelete
-    , GrouplicensesAPI
-    , GrouplicensesList
-    , GrouplicensesGet
-    , EntitlementsAPI
-    , EntitlementsList
-    , EntitlementsPatch
-    , EntitlementsGet
-    , EntitlementsDelete
-    , EntitlementsUpdate
-    , PermissionsAPI
-    , PermissionsGet
-    , ProductsAPI
-    , ProductsGenerateApprovalUrl
-    , ProductsGet
-    , ProductsGetAppRestrictionsSchema
-    , ProductsApprove
-    , ProductsGetPermissions
-    , ProductsUpdatePermissions
-    , DevicesAPI
-    , DevicesList
-    , DevicesSetState
-    , DevicesGet
-    , DevicesGetState
-    , GrouplicenseusersAPI
-    , GrouplicenseusersList
+    , playEnterprise
+    , playEnterpriseURL
+
+    -- ** androidenterprise.collections.delete
+    , module Network.Google.API.Androidenterprise.Collections.Delete
+
+    -- ** androidenterprise.collections.get
+    , module Network.Google.API.Androidenterprise.Collections.Get
+
+    -- ** androidenterprise.collections.insert
+    , module Network.Google.API.Androidenterprise.Collections.Insert
+
+    -- ** androidenterprise.collections.list
+    , module Network.Google.API.Androidenterprise.Collections.List
+
+    -- ** androidenterprise.collections.patch
+    , module Network.Google.API.Androidenterprise.Collections.Patch
+
+    -- ** androidenterprise.collections.update
+    , module Network.Google.API.Androidenterprise.Collections.Update
+
+    -- ** androidenterprise.collectionviewers.delete
+    , module Network.Google.API.Androidenterprise.Collectionviewers.Delete
+
+    -- ** androidenterprise.collectionviewers.get
+    , module Network.Google.API.Androidenterprise.Collectionviewers.Get
+
+    -- ** androidenterprise.collectionviewers.list
+    , module Network.Google.API.Androidenterprise.Collectionviewers.List
+
+    -- ** androidenterprise.collectionviewers.patch
+    , module Network.Google.API.Androidenterprise.Collectionviewers.Patch
+
+    -- ** androidenterprise.collectionviewers.update
+    , module Network.Google.API.Androidenterprise.Collectionviewers.Update
+
+    -- ** androidenterprise.devices.get
+    , module Network.Google.API.Androidenterprise.Devices.Get
+
+    -- ** androidenterprise.devices.getState
+    , module Network.Google.API.Androidenterprise.Devices.GetState
+
+    -- ** androidenterprise.devices.list
+    , module Network.Google.API.Androidenterprise.Devices.List
+
+    -- ** androidenterprise.devices.setState
+    , module Network.Google.API.Androidenterprise.Devices.SetState
+
+    -- ** androidenterprise.enterprises.delete
+    , module Network.Google.API.Androidenterprise.Enterprises.Delete
+
+    -- ** androidenterprise.enterprises.enroll
+    , module Network.Google.API.Androidenterprise.Enterprises.Enroll
+
+    -- ** androidenterprise.enterprises.get
+    , module Network.Google.API.Androidenterprise.Enterprises.Get
+
+    -- ** androidenterprise.enterprises.insert
+    , module Network.Google.API.Androidenterprise.Enterprises.Insert
+
+    -- ** androidenterprise.enterprises.list
+    , module Network.Google.API.Androidenterprise.Enterprises.List
+
+    -- ** androidenterprise.enterprises.sendTestPushNotification
+    , module Network.Google.API.Androidenterprise.Enterprises.SendTestPushNotification
+
+    -- ** androidenterprise.enterprises.setAccount
+    , module Network.Google.API.Androidenterprise.Enterprises.SetAccount
+
+    -- ** androidenterprise.enterprises.unenroll
+    , module Network.Google.API.Androidenterprise.Enterprises.Unenroll
+
+    -- ** androidenterprise.entitlements.delete
+    , module Network.Google.API.Androidenterprise.Entitlements.Delete
+
+    -- ** androidenterprise.entitlements.get
+    , module Network.Google.API.Androidenterprise.Entitlements.Get
+
+    -- ** androidenterprise.entitlements.list
+    , module Network.Google.API.Androidenterprise.Entitlements.List
+
+    -- ** androidenterprise.entitlements.patch
+    , module Network.Google.API.Androidenterprise.Entitlements.Patch
+
+    -- ** androidenterprise.entitlements.update
+    , module Network.Google.API.Androidenterprise.Entitlements.Update
+
+    -- ** androidenterprise.grouplicenses.get
+    , module Network.Google.API.Androidenterprise.Grouplicenses.Get
+
+    -- ** androidenterprise.grouplicenses.list
+    , module Network.Google.API.Androidenterprise.Grouplicenses.List
+
+    -- ** androidenterprise.grouplicenseusers.list
+    , module Network.Google.API.Androidenterprise.Grouplicenseusers.List
+
+    -- ** androidenterprise.installs.delete
+    , module Network.Google.API.Androidenterprise.Installs.Delete
+
+    -- ** androidenterprise.installs.get
+    , module Network.Google.API.Androidenterprise.Installs.Get
+
+    -- ** androidenterprise.installs.list
+    , module Network.Google.API.Androidenterprise.Installs.List
+
+    -- ** androidenterprise.installs.patch
+    , module Network.Google.API.Androidenterprise.Installs.Patch
+
+    -- ** androidenterprise.installs.update
+    , module Network.Google.API.Androidenterprise.Installs.Update
+
+    -- ** androidenterprise.permissions.get
+    , module Network.Google.API.Androidenterprise.Permissions.Get
+
+    -- ** androidenterprise.products.approve
+    , module Network.Google.API.Androidenterprise.Products.Approve
+
+    -- ** androidenterprise.products.generateApprovalUrl
+    , module Network.Google.API.Androidenterprise.Products.GenerateApprovalURL
+
+    -- ** androidenterprise.products.get
+    , module Network.Google.API.Androidenterprise.Products.Get
+
+    -- ** androidenterprise.products.getAppRestrictionsSchema
+    , module Network.Google.API.Androidenterprise.Products.GetAppRestrictionsSchema
+
+    -- ** androidenterprise.products.getPermissions
+    , module Network.Google.API.Androidenterprise.Products.GetPermissions
+
+    -- ** androidenterprise.products.updatePermissions
+    , module Network.Google.API.Androidenterprise.Products.UpdatePermissions
+
+    -- ** androidenterprise.users.generateToken
+    , module Network.Google.API.Androidenterprise.Users.GenerateToken
+
+    -- ** androidenterprise.users.get
+    , module Network.Google.API.Androidenterprise.Users.Get
+
+    -- ** androidenterprise.users.getAvailableProductSet
+    , module Network.Google.API.Androidenterprise.Users.GetAvailableProductSet
+
+    -- ** androidenterprise.users.list
+    , module Network.Google.API.Androidenterprise.Users.List
+
+    -- ** androidenterprise.users.revokeToken
+    , module Network.Google.API.Androidenterprise.Users.RevokeToken
+
+    -- ** androidenterprise.users.setAvailableProductSet
+    , module Network.Google.API.Androidenterprise.Users.SetAvailableProductSet
 
     -- * Types
+
+    -- ** ProductsGenerateApprovalUrlResponse
+    , ProductsGenerateApprovalUrlResponse
+    , productsGenerateApprovalUrlResponse
+    , pgaurUrl
+
+    -- ** EnterprisesSendTestPushNotificationResponse
+    , EnterprisesSendTestPushNotificationResponse
+    , enterprisesSendTestPushNotificationResponse
+    , estpnrTopicName
+    , estpnrMessageId
 
     -- ** AppRestrictionsSchema
     , AppRestrictionsSchema
@@ -89,77 +191,20 @@ module Network.Google.Play.Enterprise
     , arsKind
     , arsRestrictions
 
-    -- ** AppRestrictionsSchemaRestriction
-    , AppRestrictionsSchemaRestriction
-    , appRestrictionsSchemaRestriction
-    , arsrRestrictionType
-    , arsrEntry
-    , arsrKey
-    , arsrEntryValue
-    , arsrDefaultValue
-    , arsrTitle
-    , arsrDescription
+    -- ** EnterprisesListResponse
+    , EnterprisesListResponse
+    , enterprisesListResponse
+    , elrKind
+    , elrEnterprise
 
-    -- ** AppRestrictionsSchemaRestrictionRestrictionValue
-    , AppRestrictionsSchemaRestrictionRestrictionValue
-    , appRestrictionsSchemaRestrictionRestrictionValue
-    , arsrrvValueMultiselect
-    , arsrrvValueBool
-    , arsrrvValueInteger
-    , arsrrvType
-    , arsrrvValueString
-
-    -- ** AppVersion
-    , AppVersion
-    , appVersion
-    , avVersionCode
-    , avVersionString
+    -- ** Alt
+    , Alt (..)
 
     -- ** ApprovalUrlInfo
     , ApprovalUrlInfo
     , approvalUrlInfo
     , auiApprovalUrl
     , auiKind
-
-    -- ** Collection
-    , Collection
-    , collection
-    , cKind
-    , cCollectionId
-    , cVisibility
-    , cName
-    , cProductId
-
-    -- ** CollectionViewersListResponse
-    , CollectionViewersListResponse
-    , collectionViewersListResponse
-    , cvlrKind
-    , cvlrUser
-
-    -- ** CollectionsListResponse
-    , CollectionsListResponse
-    , collectionsListResponse
-    , clrKind
-    , clrCollection
-
-    -- ** Device
-    , Device
-    , device
-    , dKind
-    , dManagementType
-    , dAndroidId
-
-    -- ** DeviceState
-    , DeviceState
-    , deviceState
-    , dsKind
-    , dsAccountState
-
-    -- ** DevicesListResponse
-    , DevicesListResponse
-    , devicesListResponse
-    , dlrKind
-    , dlrDevice
 
     -- ** Enterprise
     , Enterprise
@@ -168,81 +213,6 @@ module Network.Google.Play.Enterprise
     , ePrimaryDomain
     , eName
     , eId
-
-    -- ** EnterpriseAccount
-    , EnterpriseAccount
-    , enterpriseAccount
-    , eaKind
-    , eaAccountEmail
-
-    -- ** EnterprisesListResponse
-    , EnterprisesListResponse
-    , enterprisesListResponse
-    , elrKind
-    , elrEnterprise
-
-    -- ** EnterprisesSendTestPushNotificationResponse
-    , EnterprisesSendTestPushNotificationResponse
-    , enterprisesSendTestPushNotificationResponse
-    , estpnrTopicName
-    , estpnrMessageId
-
-    -- ** Entitlement
-    , Entitlement
-    , entitlement
-    , eeKind
-    , eeReason
-    , eeProductId
-
-    -- ** EntitlementsListResponse
-    , EntitlementsListResponse
-    , entitlementsListResponse
-    , entKind
-    , entEntitlement
-
-    -- ** GroupLicense
-    , GroupLicense
-    , groupLicense
-    , glKind
-    , glNumProvisioned
-    , glNumPurchased
-    , glApproval
-    , glProductId
-    , glAcquisitionKind
-
-    -- ** GroupLicenseUsersListResponse
-    , GroupLicenseUsersListResponse
-    , groupLicenseUsersListResponse
-    , glulrKind
-    , glulrUser
-
-    -- ** GroupLicensesListResponse
-    , GroupLicensesListResponse
-    , groupLicensesListResponse
-    , gllrGroupLicense
-    , gllrKind
-
-    -- ** Install
-    , Install
-    , install
-    , iVersionCode
-    , iKind
-    , iInstallState
-    , iProductId
-
-    -- ** InstallsListResponse
-    , InstallsListResponse
-    , installsListResponse
-    , ilrKind
-    , ilrInstall
-
-    -- ** Permission
-    , Permission
-    , permission
-    , perKind
-    , perName
-    , perDescription
-    , perPermissionId
 
     -- ** Product
     , Product
@@ -258,11 +228,11 @@ module Network.Google.Play.Enterprise
     , pProductId
     , pDetailsUrl
 
-    -- ** ProductPermission
-    , ProductPermission
-    , productPermission
-    , ppState
-    , ppPermissionId
+    -- ** EntitlementsListResponse
+    , EntitlementsListResponse
+    , entitlementsListResponse
+    , entKind
+    , entEntitlement
 
     -- ** ProductPermissions
     , ProductPermissions
@@ -271,28 +241,78 @@ module Network.Google.Play.Enterprise
     , ppPermission
     , ppProductId
 
-    -- ** ProductSet
-    , ProductSet
-    , productSet
-    , psKind
-    , psProductId
+    -- ** Permission
+    , Permission
+    , permission
+    , perKind
+    , perName
+    , perDescription
+    , perPermissionId
 
-    -- ** ProductsApproveRequest
-    , ProductsApproveRequest
-    , productsApproveRequest
-    , parApprovalUrlInfo
+    -- ** GroupLicensesListResponse
+    , GroupLicensesListResponse
+    , groupLicensesListResponse
+    , gllrGroupLicense
+    , gllrKind
 
-    -- ** ProductsGenerateApprovalUrlResponse
-    , ProductsGenerateApprovalUrlResponse
-    , productsGenerateApprovalUrlResponse
-    , pgaurUrl
+    -- ** Collection
+    , Collection
+    , collection
+    , ccKind
+    , ccCollectionId
+    , ccVisibility
+    , ccName
+    , ccProductId
 
-    -- ** User
-    , User
-    , user
-    , uKind
-    , uId
-    , uPrimaryEmail
+    -- ** Entitlement
+    , Entitlement
+    , entitlement
+    , eeKind
+    , eeReason
+    , eeProductId
+
+    -- ** AppRestrictionsSchemaRestrictionRestrictionValue
+    , AppRestrictionsSchemaRestrictionRestrictionValue
+    , appRestrictionsSchemaRestrictionRestrictionValue
+    , arsrrvValueMultiselect
+    , arsrrvValueBool
+    , arsrrvValueInteger
+    , arsrrvType
+    , arsrrvValueString
+
+    -- ** GroupLicense
+    , GroupLicense
+    , groupLicense
+    , glKind
+    , glNumProvisioned
+    , glNumPurchased
+    , glApproval
+    , glProductId
+    , glAcquisitionKind
+
+    -- ** EnterpriseAccount
+    , EnterpriseAccount
+    , enterpriseAccount
+    , eaKind
+    , eaAccountEmail
+
+    -- ** CollectionsListResponse
+    , CollectionsListResponse
+    , collectionsListResponse
+    , clrKind
+    , clrCollection
+
+    -- ** GroupLicenseUsersListResponse
+    , GroupLicenseUsersListResponse
+    , groupLicenseUsersListResponse
+    , glulrKind
+    , glulrUser
+
+    -- ** DeviceState
+    , DeviceState
+    , deviceState
+    , dsKind
+    , dsAccountState
 
     -- ** UserToken
     , UserToken
@@ -301,13 +321,136 @@ module Network.Google.Play.Enterprise
     , utToken
     , utUserId
 
+    -- ** DevicesListResponse
+    , DevicesListResponse
+    , devicesListResponse
+    , dlrKind
+    , dlrDevice
+
+    -- ** ProductPermission
+    , ProductPermission
+    , productPermission
+    , ppState
+    , ppPermissionId
+
+    -- ** Device
+    , Device
+    , device
+    , dKind
+    , dManagementType
+    , dAndroidId
+
+    -- ** InstallsListResponse
+    , InstallsListResponse
+    , installsListResponse
+    , ilrKind
+    , ilrInstall
+
+    -- ** AppRestrictionsSchemaRestriction
+    , AppRestrictionsSchemaRestriction
+    , appRestrictionsSchemaRestriction
+    , arsrRestrictionType
+    , arsrEntry
+    , arsrKey
+    , arsrEntryValue
+    , arsrDefaultValue
+    , arsrTitle
+    , arsrDescription
+
     -- ** UsersListResponse
     , UsersListResponse
     , usersListResponse
     , ulrKind
     , ulrUser
+
+    -- ** AppVersion
+    , AppVersion
+    , appVersion
+    , avVersionCode
+    , avVersionString
+
+    -- ** ProductsApproveRequest
+    , ProductsApproveRequest
+    , productsApproveRequest
+    , parApprovalUrlInfo
+
+    -- ** CollectionViewersListResponse
+    , CollectionViewersListResponse
+    , collectionViewersListResponse
+    , cvlrKind
+    , cvlrUser
+
+    -- ** Install
+    , Install
+    , install
+    , iVersionCode
+    , iKind
+    , iInstallState
+    , iProductId
+
+    -- ** User
+    , User
+    , user
+    , uKind
+    , uId
+    , uPrimaryEmail
+
+    -- ** ProductSet
+    , ProductSet
+    , productSet
+    , psKind
+    , psProductId
     ) where
 
+import           Network.Google.API.Androidenterprise.Collections.Delete
+import           Network.Google.API.Androidenterprise.Collections.Get
+import           Network.Google.API.Androidenterprise.Collections.Insert
+import           Network.Google.API.Androidenterprise.Collections.List
+import           Network.Google.API.Androidenterprise.Collections.Patch
+import           Network.Google.API.Androidenterprise.Collections.Update
+import           Network.Google.API.Androidenterprise.Collectionviewers.Delete
+import           Network.Google.API.Androidenterprise.Collectionviewers.Get
+import           Network.Google.API.Androidenterprise.Collectionviewers.List
+import           Network.Google.API.Androidenterprise.Collectionviewers.Patch
+import           Network.Google.API.Androidenterprise.Collectionviewers.Update
+import           Network.Google.API.Androidenterprise.Devices.Get
+import           Network.Google.API.Androidenterprise.Devices.GetState
+import           Network.Google.API.Androidenterprise.Devices.List
+import           Network.Google.API.Androidenterprise.Devices.SetState
+import           Network.Google.API.Androidenterprise.Enterprises.Delete
+import           Network.Google.API.Androidenterprise.Enterprises.Enroll
+import           Network.Google.API.Androidenterprise.Enterprises.Get
+import           Network.Google.API.Androidenterprise.Enterprises.Insert
+import           Network.Google.API.Androidenterprise.Enterprises.List
+import           Network.Google.API.Androidenterprise.Enterprises.SendTestPushNotification
+import           Network.Google.API.Androidenterprise.Enterprises.SetAccount
+import           Network.Google.API.Androidenterprise.Enterprises.Unenroll
+import           Network.Google.API.Androidenterprise.Entitlements.Delete
+import           Network.Google.API.Androidenterprise.Entitlements.Get
+import           Network.Google.API.Androidenterprise.Entitlements.List
+import           Network.Google.API.Androidenterprise.Entitlements.Patch
+import           Network.Google.API.Androidenterprise.Entitlements.Update
+import           Network.Google.API.Androidenterprise.Grouplicenses.Get
+import           Network.Google.API.Androidenterprise.Grouplicenses.List
+import           Network.Google.API.Androidenterprise.Grouplicenseusers.List
+import           Network.Google.API.Androidenterprise.Installs.Delete
+import           Network.Google.API.Androidenterprise.Installs.Get
+import           Network.Google.API.Androidenterprise.Installs.List
+import           Network.Google.API.Androidenterprise.Installs.Patch
+import           Network.Google.API.Androidenterprise.Installs.Update
+import           Network.Google.API.Androidenterprise.Permissions.Get
+import           Network.Google.API.Androidenterprise.Products.Approve
+import           Network.Google.API.Androidenterprise.Products.GenerateApprovalURL
+import           Network.Google.API.Androidenterprise.Products.Get
+import           Network.Google.API.Androidenterprise.Products.GetAppRestrictionsSchema
+import           Network.Google.API.Androidenterprise.Products.GetPermissions
+import           Network.Google.API.Androidenterprise.Products.UpdatePermissions
+import           Network.Google.API.Androidenterprise.Users.GenerateToken
+import           Network.Google.API.Androidenterprise.Users.Get
+import           Network.Google.API.Androidenterprise.Users.GetAvailableProductSet
+import           Network.Google.API.Androidenterprise.Users.List
+import           Network.Google.API.Androidenterprise.Users.RevokeToken
+import           Network.Google.API.Androidenterprise.Users.SetAvailableProductSet
 import           Network.Google.Play.Enterprise.Types
 import           Network.Google.Prelude
 
@@ -316,971 +459,54 @@ TODO
 -}
 
 type PlayEnterprise =
-     CollectionviewersAPI :<|> UsersAPI :<|> InstallsAPI
-       :<|> CollectionsAPI
-       :<|> EnterprisesAPI
-       :<|> GrouplicensesAPI
-       :<|> EntitlementsAPI
-       :<|> PermissionsAPI
-       :<|> ProductsAPI
-       :<|> DevicesAPI
-       :<|> GrouplicenseusersAPI
+     ProductsGetPermissionsAPI :<|> InstallsGetAPI :<|>
+       CollectionsUpdateAPI
+       :<|> UsersGetAPI
+       :<|> CollectionviewersDeleteAPI
+       :<|> ProductsApproveAPI
+       :<|> DevicesGetAPI
+       :<|> CollectionviewersUpdateAPI
+       :<|> GrouplicenseusersListAPI
+       :<|> InstallsPatchAPI
+       :<|> EntitlementsDeleteAPI
+       :<|> EnterprisesDeleteAPI
+       :<|> CollectionviewersListAPI
+       :<|> EntitlementsGetAPI
+       :<|> UsersListAPI
+       :<|> EnterprisesGetAPI
+       :<|> PermissionsGetAPI
+       :<|> InstallsListAPI
+       :<|> CollectionsPatchAPI
+       :<|> InstallsUpdateAPI
+       :<|> EnterprisesSendTestPushNotificationAPI
+       :<|> DevicesSetStateAPI
+       :<|> EntitlementsPatchAPI
+       :<|> CollectionviewersPatchAPI
+       :<|> UsersRevokeTokenAPI
+       :<|> DevicesListAPI
+       :<|> ProductsUpdatePermissionsAPI
+       :<|> UsersGenerateTokenAPI
+       :<|> EnterprisesListAPI
+       :<|> EntitlementsListAPI
+       :<|> GrouplicensesGetAPI
+       :<|> EntitlementsUpdateAPI
+       :<|> DevicesGetStateAPI
+       :<|> UsersGetAvailableProductSetAPI
+       :<|> ProductsGetAppRestrictionsSchemaAPI
+       :<|> CollectionsGetAPI
+       :<|> EnterprisesEnrollAPI
+       :<|> CollectionsInsertAPI
+       :<|> ProductsGetAPI
+       :<|> CollectionviewersGetAPI
+       :<|> EnterprisesInsertAPI
+       :<|> CollectionsListAPI
+       :<|> ProductsGenerateApprovalURLAPI
+       :<|> UsersSetAvailableProductSetAPI
+       :<|> CollectionsDeleteAPI
+       :<|> EnterprisesSetAccountAPI
+       :<|> EnterprisesUnenrollAPI
+       :<|> InstallsDeleteAPI
+       :<|> GrouplicensesListAPI
 
-type CollectionviewersAPI =
-     CollectionviewersList :<|> CollectionviewersPatch
-       :<|> CollectionviewersGet
-       :<|> CollectionviewersDelete
-       :<|> CollectionviewersUpdate
-
--- | Retrieves the IDs of the users who have been specifically allowed to see
--- the collection. If the collection\'s visibility is set to viewersOnly
--- then only these users will see the collection.
-type CollectionviewersList =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           Capture "enterpriseId" Text :>
-             "collections" :>
-               Capture "collectionId" Text :>
-                 "users" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Get '[JSON] CollectionViewersListResponse
-
--- | Adds the user to the list of those specifically allowed to see the
--- collection. If the collection\'s visibility is set to viewersOnly then
--- only such users will see the collection. This method supports patch
--- semantics.
-type CollectionviewersPatch =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           Capture "enterpriseId" Text :>
-             "collections" :>
-               Capture "collectionId" Text :>
-                 "users" :>
-                   Capture "userId" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Patch '[JSON] User
-
--- | Retrieves the ID of the user if they have been specifically allowed to
--- see the collection. If the collection\'s visibility is set to
--- viewersOnly then only these users will see the collection.
-type CollectionviewersGet =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           Capture "enterpriseId" Text :>
-             "collections" :>
-               Capture "collectionId" Text :>
-                 "users" :>
-                   Capture "userId" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Get '[JSON] User
-
--- | Removes the user from the list of those specifically allowed to see the
--- collection. If the collection\'s visibility is set to viewersOnly then
--- only such users will see the collection.
-type CollectionviewersDelete =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           Capture "enterpriseId" Text :>
-             "collections" :>
-               Capture "collectionId" Text :>
-                 "users" :>
-                   Capture "userId" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Adds the user to the list of those specifically allowed to see the
--- collection. If the collection\'s visibility is set to viewersOnly then
--- only such users will see the collection.
-type CollectionviewersUpdate =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           Capture "enterpriseId" Text :>
-             "collections" :>
-               Capture "collectionId" Text :>
-                 "users" :>
-                   Capture "userId" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Put '[JSON] User
-
-type UsersAPI =
-     UsersList :<|> UsersGenerateToken :<|> UsersGet :<|>
-       UsersSetAvailableProductSet
-       :<|> UsersRevokeToken
-       :<|> UsersGetAvailableProductSet
-
--- | Looks up a user by email address.
-type UsersList =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           Capture "enterpriseId" Text :>
-             "users" :>
-               QueryParam "email" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Get '[JSON] UsersListResponse
-
--- | Generates a token (activation code) to allow this user to configure
--- their work account in the Android Setup Wizard. Revokes any previously
--- generated token.
-type UsersGenerateToken =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           Capture "enterpriseId" Text :>
-             "users" :>
-               Capture "userId" Text :>
-                 "token" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Post '[JSON] UserToken
-
--- | Retrieves a user\'s details.
-type UsersGet =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           Capture "enterpriseId" Text :>
-             "users" :>
-               Capture "userId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] User
-
--- | Modifies the set of products a user is entitled to access.
-type UsersSetAvailableProductSet =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           Capture "enterpriseId" Text :>
-             "users" :>
-               Capture "userId" Text :>
-                 "availableProductSet" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Put '[JSON] ProductSet
-
--- | Revokes a previously generated token (activation code) for the user.
-type UsersRevokeToken =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           Capture "enterpriseId" Text :>
-             "users" :>
-               Capture "userId" Text :>
-                 "token" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Retrieves the set of products a user is entitled to access.
-type UsersGetAvailableProductSet =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           Capture "enterpriseId" Text :>
-             "users" :>
-               Capture "userId" Text :>
-                 "availableProductSet" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Get '[JSON] ProductSet
-
-type InstallsAPI =
-     InstallsList :<|> InstallsPatch :<|> InstallsGet :<|>
-       InstallsDelete
-       :<|> InstallsUpdate
-
--- | Retrieves the details of all apps installed on the specified device.
-type InstallsList =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           Capture "enterpriseId" Text :>
-             "users" :>
-               Capture "userId" Text :>
-                 "devices" :>
-                   Capture "deviceId" Text :>
-                     "installs" :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "userIp" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Get '[JSON] InstallsListResponse
-
--- | Requests to install the latest version of an app to a device. If the app
--- is already installed then it is updated to the latest version if
--- necessary. This method supports patch semantics.
-type InstallsPatch =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           Capture "enterpriseId" Text :>
-             "users" :>
-               Capture "userId" Text :>
-                 "devices" :>
-                   Capture "deviceId" Text :>
-                     "installs" :>
-                       Capture "installId" Text :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "userIp" Text :>
-                               QueryParam "key" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "alt" Text :>
-                                       Patch '[JSON] Install
-
--- | Retrieves details of an installation of an app on a device.
-type InstallsGet =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           Capture "enterpriseId" Text :>
-             "users" :>
-               Capture "userId" Text :>
-                 "devices" :>
-                   Capture "deviceId" Text :>
-                     "installs" :>
-                       Capture "installId" Text :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "userIp" Text :>
-                               QueryParam "key" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "alt" Text :>
-                                       Get '[JSON] Install
-
--- | Requests to remove an app from a device. A call to get or list will
--- still show the app as installed on the device until it is actually
--- removed.
-type InstallsDelete =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           Capture "enterpriseId" Text :>
-             "users" :>
-               Capture "userId" Text :>
-                 "devices" :>
-                   Capture "deviceId" Text :>
-                     "installs" :>
-                       Capture "installId" Text :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "userIp" Text :>
-                               QueryParam "key" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Requests to install the latest version of an app to a device. If the app
--- is already installed then it is updated to the latest version if
--- necessary.
-type InstallsUpdate =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           Capture "enterpriseId" Text :>
-             "users" :>
-               Capture "userId" Text :>
-                 "devices" :>
-                   Capture "deviceId" Text :>
-                     "installs" :>
-                       Capture "installId" Text :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "userIp" Text :>
-                               QueryParam "key" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "alt" Text :>
-                                       Put '[JSON] Install
-
-type CollectionsAPI =
-     CollectionsInsert :<|> CollectionsList :<|>
-       CollectionsPatch
-       :<|> CollectionsGet
-       :<|> CollectionsDelete
-       :<|> CollectionsUpdate
-
--- | Creates a new collection.
-type CollectionsInsert =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           Capture "enterpriseId" Text :>
-             "collections" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] Collection
-
--- | Retrieves the IDs of all the collections for an enterprise.
-type CollectionsList =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           Capture "enterpriseId" Text :>
-             "collections" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Get '[JSON] CollectionsListResponse
-
--- | Updates a collection. This method supports patch semantics.
-type CollectionsPatch =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           Capture "enterpriseId" Text :>
-             "collections" :>
-               Capture "collectionId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Patch '[JSON] Collection
-
--- | Retrieves the details of a collection.
-type CollectionsGet =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           Capture "enterpriseId" Text :>
-             "collections" :>
-               Capture "collectionId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] Collection
-
--- | Deletes a collection.
-type CollectionsDelete =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           Capture "enterpriseId" Text :>
-             "collections" :>
-               Capture "collectionId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Updates a collection.
-type CollectionsUpdate =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           Capture "enterpriseId" Text :>
-             "collections" :>
-               Capture "collectionId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Put '[JSON] Collection
-
-type EnterprisesAPI =
-     EnterprisesInsert :<|> EnterprisesList :<|>
-       EnterprisesUnenroll
-       :<|> EnterprisesSetAccount
-       :<|> EnterprisesEnroll
-       :<|> EnterprisesGet
-       :<|> EnterprisesSendTestPushNotification
-       :<|> EnterprisesDelete
-
--- | Establishes the binding between the MDM and an enterprise. This is now
--- deprecated; use enroll instead.
-type EnterprisesInsert =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "token" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Post '[JSON] Enterprise
-
--- | Looks up an enterprise by domain name.
-type EnterprisesList =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "domain" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :>
-                           Get '[JSON] EnterprisesListResponse
-
--- | Unenrolls an enterprise from the calling MDM.
-type EnterprisesUnenroll =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           Capture "enterpriseId" Text :>
-             "unenroll" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] ()
-
--- | Set the account that will be used to authenticate to the API as the
--- enterprise.
-type EnterprisesSetAccount =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           Capture "enterpriseId" Text :>
-             "account" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Put '[JSON] EnterpriseAccount
-
--- | Enrolls an enterprise with the calling MDM.
-type EnterprisesEnroll =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           "enroll" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "token" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] Enterprise
-
--- | Retrieves the name and domain of an enterprise.
-type EnterprisesGet =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           Capture "enterpriseId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Get '[JSON] Enterprise
-
--- | Sends a test push notification to validate the MDM integration with the
--- Google Cloud Pub\/Sub service for this enterprise.
-type EnterprisesSendTestPushNotification =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           Capture "enterpriseId" Text :>
-             "sendTestPushNotification" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Post '[JSON]
-                               EnterprisesSendTestPushNotificationResponse
-
--- | Deletes the binding between the MDM and enterprise. This is now
--- deprecated; use this to unenroll customers that were previously enrolled
--- with the \'insert\' call, then enroll them again with the \'enroll\'
--- call.
-type EnterprisesDelete =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           Capture "enterpriseId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Delete '[JSON] ()
-
-type GrouplicensesAPI =
-     GrouplicensesList :<|> GrouplicensesGet
-
--- | Retrieves IDs of all products for which the enterprise has a group
--- license.
-type GrouplicensesList =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           Capture "enterpriseId" Text :>
-             "groupLicenses" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Get '[JSON] GroupLicensesListResponse
-
--- | Retrieves details of an enterprise\'s group license for a product.
-type GrouplicensesGet =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           Capture "enterpriseId" Text :>
-             "groupLicenses" :>
-               Capture "groupLicenseId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] GroupLicense
-
-type EntitlementsAPI =
-     EntitlementsList :<|> EntitlementsPatch :<|>
-       EntitlementsGet
-       :<|> EntitlementsDelete
-       :<|> EntitlementsUpdate
-
--- | List of all entitlements for the specified user. Only the ID is set.
-type EntitlementsList =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           Capture "enterpriseId" Text :>
-             "users" :>
-               Capture "userId" Text :>
-                 "entitlements" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Get '[JSON] EntitlementsListResponse
-
--- | Adds or updates an entitlement to an app for a user. This method
--- supports patch semantics.
-type EntitlementsPatch =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           Capture "enterpriseId" Text :>
-             "users" :>
-               Capture "userId" Text :>
-                 "entitlements" :>
-                   Capture "entitlementId" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "install" Bool :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Patch '[JSON] Entitlement
-
--- | Retrieves details of an entitlement.
-type EntitlementsGet =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           Capture "enterpriseId" Text :>
-             "users" :>
-               Capture "userId" Text :>
-                 "entitlements" :>
-                   Capture "entitlementId" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   Get '[JSON] Entitlement
-
--- | Removes an entitlement to an app for a user and uninstalls it.
-type EntitlementsDelete =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           Capture "enterpriseId" Text :>
-             "users" :>
-               Capture "userId" Text :>
-                 "entitlements" :>
-                   Capture "entitlementId" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Adds or updates an entitlement to an app for a user.
-type EntitlementsUpdate =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           Capture "enterpriseId" Text :>
-             "users" :>
-               Capture "userId" Text :>
-                 "entitlements" :>
-                   Capture "entitlementId" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "install" Bool :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Put '[JSON] Entitlement
-
-type PermissionsAPI = PermissionsGet
-
--- | Retrieves details of an Android app permission for display to an
--- enterprise admin.
-type PermissionsGet =
-     "androidenterprise" :>
-       "v1" :>
-         "permissions" :>
-           Capture "permissionId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "language" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Get '[JSON] Permission
-
-type ProductsAPI =
-     ProductsGenerateApprovalUrl :<|> ProductsGet :<|>
-       ProductsGetAppRestrictionsSchema
-       :<|> ProductsApprove
-       :<|> ProductsGetPermissions
-       :<|> ProductsUpdatePermissions
-
--- | Generates a URL that can be rendered in an iframe to display the
--- permissions (if any) of a product. An enterprise admin must view these
--- permissions and accept them on behalf of their organization in order to
--- approve that product. Admins should accept the displayed permissions by
--- interacting with a separate UI element in the EMM console, which in turn
--- should trigger the use of this URL as the approvalUrlInfo.approvalUrl
--- property in a Products.approve call to approve the product. This URL can
--- only be used to display permissions for up to 1 day.
-type ProductsGenerateApprovalUrl =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           Capture "enterpriseId" Text :>
-             "products" :>
-               Capture "productId" Text :>
-                 "generateApprovalUrl" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "languageCode" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   Post '[JSON]
-                                     ProductsGenerateApprovalUrlResponse
-
--- | Retrieves details of a product for display to an enterprise admin.
-type ProductsGet =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           Capture "enterpriseId" Text :>
-             "products" :>
-               Capture "productId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "language" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Get '[JSON] Product
-
--- | Retrieves the schema defining app restrictions configurable for this
--- product. All products have a schema, but this may be empty if no app
--- restrictions are defined.
-type ProductsGetAppRestrictionsSchema =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           Capture "enterpriseId" Text :>
-             "products" :>
-               Capture "productId" Text :>
-                 "appRestrictionsSchema" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "language" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   Get '[JSON] AppRestrictionsSchema
-
--- | Approves the specified product (and the relevant app permissions, if
--- any).
-type ProductsApprove =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           Capture "enterpriseId" Text :>
-             "products" :>
-               Capture "productId" Text :>
-                 "approve" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Post '[JSON] ()
-
--- | Retrieves the Android app permissions required by this app.
-type ProductsGetPermissions =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           Capture "enterpriseId" Text :>
-             "products" :>
-               Capture "productId" Text :>
-                 "permissions" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Get '[JSON] ProductPermissions
-
--- | Updates the set of Android app permissions for this app that have been
--- accepted by the enterprise.
-type ProductsUpdatePermissions =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           Capture "enterpriseId" Text :>
-             "products" :>
-               Capture "productId" Text :>
-                 "permissions" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Put '[JSON] ProductPermissions
-
-type DevicesAPI =
-     DevicesList :<|> DevicesSetState :<|> DevicesGet :<|>
-       DevicesGetState
-
--- | Retrieves the IDs of all of a user\'s devices.
-type DevicesList =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           Capture "enterpriseId" Text :>
-             "users" :>
-               Capture "userId" Text :>
-                 "devices" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Get '[JSON] DevicesListResponse
-
--- | Sets whether a device is enabled or disabled for access by the user to
--- Google services. The device state takes effect only if enforcing EMM
--- policies on Android devices is enabled in the Google Admin Console.
--- Otherwise, the device state is ignored and all devices are allowed
--- access to Google services.
-type DevicesSetState =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           Capture "enterpriseId" Text :>
-             "users" :>
-               Capture "userId" Text :>
-                 "devices" :>
-                   Capture "deviceId" Text :>
-                     "state" :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "userIp" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Put '[JSON] DeviceState
-
--- | Retrieves the details of a device.
-type DevicesGet =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           Capture "enterpriseId" Text :>
-             "users" :>
-               Capture "userId" Text :>
-                 "devices" :>
-                   Capture "deviceId" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Get '[JSON] Device
-
--- | Retrieves whether a device is enabled or disabled for access by the user
--- to Google services. The device state takes effect only if enforcing EMM
--- policies on Android devices is enabled in the Google Admin Console.
--- Otherwise, the device state is ignored and all devices are allowed
--- access to Google services.
-type DevicesGetState =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           Capture "enterpriseId" Text :>
-             "users" :>
-               Capture "userId" Text :>
-                 "devices" :>
-                   Capture "deviceId" Text :>
-                     "state" :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "userIp" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Get '[JSON] DeviceState
-
-type GrouplicenseusersAPI = GrouplicenseusersList
-
--- | Retrieves the IDs of the users who have been granted entitlements under
--- the license.
-type GrouplicenseusersList =
-     "androidenterprise" :>
-       "v1" :>
-         "enterprises" :>
-           Capture "enterpriseId" Text :>
-             "groupLicenses" :>
-               Capture "groupLicenseId" Text :>
-                 "users" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Get '[JSON] GroupLicenseUsersListResponse
+playEnterprise :: Proxy PlayEnterprise
+playEnterprise = Proxy

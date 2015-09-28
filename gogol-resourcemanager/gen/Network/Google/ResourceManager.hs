@@ -18,60 +18,63 @@
 -- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference>
 module Network.Google.ResourceManager
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** Google Cloud Resource Manager API
       ResourceManager
-    , OrganizationsAPI
-    , OrganizationsList
-    , OrganizationsGetIamPolicy
-    , OrganizationsGet
-    , OrganizationsSetIamPolicy
-    , OrganizationsTestIamPermissions
-    , OrganizationsUpdate
-    , ProjectsAPI
-    , ProjectsList
-    , ProjectsUndelete
-    , ProjectsGetIamPolicy
-    , ProjectsGet
-    , ProjectsCreate
-    , ProjectsSetIamPolicy
-    , ProjectsTestIamPermissions
-    , ProjectsDelete
-    , ProjectsUpdate
+    , resourceManager
+    , resourceManagerURL
+
+    -- ** cloudresourcemanager.organizations.get
+    , module Network.Google.API.Cloudresourcemanager.Organizations.Get
+
+    -- ** cloudresourcemanager.organizations.getIamPolicy
+    , module Network.Google.API.Cloudresourcemanager.Organizations.GetIAMPolicy
+
+    -- ** cloudresourcemanager.organizations.list
+    , module Network.Google.API.Cloudresourcemanager.Organizations.List
+
+    -- ** cloudresourcemanager.organizations.setIamPolicy
+    , module Network.Google.API.Cloudresourcemanager.Organizations.SetIAMPolicy
+
+    -- ** cloudresourcemanager.organizations.testIamPermissions
+    , module Network.Google.API.Cloudresourcemanager.Organizations.TestIAMPermissions
+
+    -- ** cloudresourcemanager.organizations.update
+    , module Network.Google.API.Cloudresourcemanager.Organizations.Update
+
+    -- ** cloudresourcemanager.projects.create
+    , module Network.Google.API.Cloudresourcemanager.Projects.Create
+
+    -- ** cloudresourcemanager.projects.delete
+    , module Network.Google.API.Cloudresourcemanager.Projects.Delete
+
+    -- ** cloudresourcemanager.projects.get
+    , module Network.Google.API.Cloudresourcemanager.Projects.Get
+
+    -- ** cloudresourcemanager.projects.getIamPolicy
+    , module Network.Google.API.Cloudresourcemanager.Projects.GetIAMPolicy
+
+    -- ** cloudresourcemanager.projects.list
+    , module Network.Google.API.Cloudresourcemanager.Projects.List
+
+    -- ** cloudresourcemanager.projects.setIamPolicy
+    , module Network.Google.API.Cloudresourcemanager.Projects.SetIAMPolicy
+
+    -- ** cloudresourcemanager.projects.testIamPermissions
+    , module Network.Google.API.Cloudresourcemanager.Projects.TestIAMPermissions
+
+    -- ** cloudresourcemanager.projects.undelete
+    , module Network.Google.API.Cloudresourcemanager.Projects.Undelete
+
+    -- ** cloudresourcemanager.projects.update
+    , module Network.Google.API.Cloudresourcemanager.Projects.Update
 
     -- * Types
-
-    -- ** Binding
-    , Binding
-    , binding
-    , bMembers
-    , bRole
-
-    -- ** Empty
-    , Empty
-    , empty
 
     -- ** GetIamPolicyRequest
     , GetIamPolicyRequest
     , getIamPolicyRequest
-
-    -- ** ListOrganizationsResponse
-    , ListOrganizationsResponse
-    , listOrganizationsResponse
-    , lorNextPageToken
-    , lorOrganizations
-
-    -- ** ListProjectsResponse
-    , ListProjectsResponse
-    , listProjectsResponse
-    , lprNextPageToken
-    , lprProjects
-
-    -- ** Organization
-    , Organization
-    , organization
-    , oOwner
-    , oDisplayName
-    , oOrganizationId
 
     -- ** OrganizationOwner
     , OrganizationOwner
@@ -84,6 +87,56 @@ module Network.Google.ResourceManager
     , pEtag
     , pVersion
     , pBindings
+
+    -- ** TestIamPermissionsResponse
+    , TestIamPermissionsResponse
+    , testIamPermissionsResponse
+    , tiprPermissions
+
+    -- ** Organization
+    , Organization
+    , organization
+    , oOwner
+    , oDisplayName
+    , oOrganizationId
+
+    -- ** SetIamPolicyRequest
+    , SetIamPolicyRequest
+    , setIamPolicyRequest
+    , siprPolicy
+
+    -- ** ListOrganizationsResponse
+    , ListOrganizationsResponse
+    , listOrganizationsResponse
+    , lorNextPageToken
+    , lorOrganizations
+
+    -- ** Binding
+    , Binding
+    , binding
+    , bMembers
+    , bRole
+
+    -- ** ListProjectsResponse
+    , ListProjectsResponse
+    , listProjectsResponse
+    , lprNextPageToken
+    , lprProjects
+
+    -- ** ResourceId
+    , ResourceId
+    , resourceId
+    , riId
+    , riType
+
+    -- ** TestIamPermissionsRequest
+    , TestIamPermissionsRequest
+    , testIamPermissionsRequest
+    , tiamprPermissions
+
+    -- ** Empty
+    , Empty
+    , empty
 
     -- ** Project
     , Project
@@ -99,29 +152,23 @@ module Network.Google.ResourceManager
     -- ** ProjectLabels
     , ProjectLabels
     , projectLabels
-
-    -- ** ResourceId
-    , ResourceId
-    , resourceId
-    , riId
-    , riType
-
-    -- ** SetIamPolicyRequest
-    , SetIamPolicyRequest
-    , setIamPolicyRequest
-    , siprPolicy
-
-    -- ** TestIamPermissionsRequest
-    , TestIamPermissionsRequest
-    , testIamPermissionsRequest
-    , tiamprPermissions
-
-    -- ** TestIamPermissionsResponse
-    , TestIamPermissionsResponse
-    , testIamPermissionsResponse
-    , tiprPermissions
     ) where
 
+import           Network.Google.API.Cloudresourcemanager.Organizations.Get
+import           Network.Google.API.Cloudresourcemanager.Organizations.GetIAMPolicy
+import           Network.Google.API.Cloudresourcemanager.Organizations.List
+import           Network.Google.API.Cloudresourcemanager.Organizations.SetIAMPolicy
+import           Network.Google.API.Cloudresourcemanager.Organizations.TestIAMPermissions
+import           Network.Google.API.Cloudresourcemanager.Organizations.Update
+import           Network.Google.API.Cloudresourcemanager.Projects.Create
+import           Network.Google.API.Cloudresourcemanager.Projects.Delete
+import           Network.Google.API.Cloudresourcemanager.Projects.Get
+import           Network.Google.API.Cloudresourcemanager.Projects.GetIAMPolicy
+import           Network.Google.API.Cloudresourcemanager.Projects.List
+import           Network.Google.API.Cloudresourcemanager.Projects.SetIAMPolicy
+import           Network.Google.API.Cloudresourcemanager.Projects.TestIAMPermissions
+import           Network.Google.API.Cloudresourcemanager.Projects.Undelete
+import           Network.Google.API.Cloudresourcemanager.Projects.Update
 import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
@@ -130,360 +177,20 @@ TODO
 -}
 
 type ResourceManager =
-     OrganizationsAPI :<|> ProjectsAPI
+     OrganizationsListAPI :<|> ProjectsGetIAMPolicyAPI
+       :<|> OrganizationsUpdateAPI
+       :<|> ProjectsListAPI
+       :<|> ProjectsGetAPI
+       :<|> ProjectsTestIAMPermissionsAPI
+       :<|> OrganizationsGetIAMPolicyAPI
+       :<|> ProjectsDeleteAPI
+       :<|> ProjectsCreateAPI
+       :<|> ProjectsUndeleteAPI
+       :<|> OrganizationsTestIAMPermissionsAPI
+       :<|> OrganizationsSetIAMPolicyAPI
+       :<|> OrganizationsGetAPI
+       :<|> ProjectsSetIAMPolicyAPI
+       :<|> ProjectsUpdateAPI
 
-type OrganizationsAPI =
-     OrganizationsList :<|> OrganizationsGetIamPolicy :<|>
-       OrganizationsGet
-       :<|> OrganizationsSetIamPolicy
-       :<|> OrganizationsTestIamPermissions
-       :<|> OrganizationsUpdate
-
--- | Query Organization resources.
-type OrganizationsList =
-     "v1beta1" :>
-       "organizations" :>
-         QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "filter" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "pageSize" Int32 :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "callback" Text :>
-                                       QueryParam "alt" Text :>
-                                         Get '[JSON] ListOrganizationsResponse
-
--- | Gets the access control policy for a Organization resource. May be empty
--- if no such policy or resource exists.
-type OrganizationsGetIamPolicy =
-     "v1beta1" :>
-       "organizations" :>
-         "{resource}:getIamPolicy" :>
-           QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "callback" Text :>
-                                   QueryParam "alt" Text :> Post '[JSON] Policy
-
--- | Fetches an Organization resource by id.
-type OrganizationsGet =
-     "v1beta1" :>
-       "organizations" :>
-         Capture "organizationId" Text :>
-           QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "callback" Text :>
-                                   QueryParam "alt" Text :>
-                                     Get '[JSON] Organization
-
--- | Sets the access control policy on a Organization resource. Replaces any
--- existing policy.
-type OrganizationsSetIamPolicy =
-     "v1beta1" :>
-       "organizations" :>
-         "{resource}:setIamPolicy" :>
-           QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "callback" Text :>
-                                   QueryParam "alt" Text :> Post '[JSON] Policy
-
--- | Returns permissions that a caller has on the specified Organization.
-type OrganizationsTestIamPermissions =
-     "v1beta1" :>
-       "organizations" :>
-         "{resource}:testIamPermissions" :>
-           QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "callback" Text :>
-                                   QueryParam "alt" Text :>
-                                     Post '[JSON] TestIamPermissionsResponse
-
--- | Updates an Organization resource.
-type OrganizationsUpdate =
-     "v1beta1" :>
-       "organizations" :>
-         Capture "organizationId" Text :>
-           QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "callback" Text :>
-                                   QueryParam "alt" Text :>
-                                     Put '[JSON] Organization
-
-type ProjectsAPI =
-     ProjectsList :<|> ProjectsUndelete :<|>
-       ProjectsGetIamPolicy
-       :<|> ProjectsGet
-       :<|> ProjectsCreate
-       :<|> ProjectsSetIamPolicy
-       :<|> ProjectsTestIamPermissions
-       :<|> ProjectsDelete
-       :<|> ProjectsUpdate
-
--- | Lists projects that are visible to the user and satisfy the specified
--- filter. This method returns projects in an unspecified order. New
--- projects do not necessarily appear at the end of the list.
-type ProjectsList =
-     "v1beta1" :>
-       "projects" :>
-         QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "filter" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "pageSize" Int32 :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "callback" Text :>
-                                       QueryParam "alt" Text :>
-                                         Get '[JSON] ListProjectsResponse
-
--- | Restores the project identified by the specified \`project_id\` (for
--- example, \`my-project-123\`). You can only use this method for a project
--- that has a lifecycle state of [DELETE_REQUESTED]
--- [google.cloudresourcemanager.projects.v1beta1.LifecycleState.DELETE_REQUESTED].
--- After deletion starts, as indicated by a lifecycle state of
--- [DELETE_IN_PROGRESS]
--- [google.cloudresourcemanager.projects.v1beta1.LifecycleState.DELETE_IN_PROGRESS],
--- the project cannot be restored. The caller must have modify permissions
--- for this project.
-type ProjectsUndelete =
-     "v1beta1" :>
-       "projects" :>
-         "{projectId}:undelete" :>
-           QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "callback" Text :>
-                                   QueryParam "alt" Text :> Post '[JSON] Empty
-
--- | Returns the IAM access control policy for specified project.
-type ProjectsGetIamPolicy =
-     "v1beta1" :>
-       "projects" :>
-         "{resource}:getIamPolicy" :>
-           QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "callback" Text :>
-                                   QueryParam "alt" Text :> Post '[JSON] Policy
-
--- | Retrieves the project identified by the specified \`project_id\` (for
--- example, \`my-project-123\`). The caller must have read permissions for
--- this project.
-type ProjectsGet =
-     "v1beta1" :>
-       "projects" :>
-         Capture "projectId" Text :>
-           QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "callback" Text :>
-                                   QueryParam "alt" Text :> Get '[JSON] Project
-
--- | Creates a project resource. Initially, the project resource is owned by
--- its creator exclusively. The creator can later grant permission to
--- others to read or update the project. Several APIs are activated
--- automatically for the project, including Google Cloud Storage.
-type ProjectsCreate =
-     "v1beta1" :>
-       "projects" :>
-         QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :> Post '[JSON] Project
-
--- | Sets the IAM access control policy for the specified project. We do not
--- currently support \'domain:\' prefixed members in a Binding of a Policy.
--- Calling this method requires enabling the App Engine Admin API.
-type ProjectsSetIamPolicy =
-     "v1beta1" :>
-       "projects" :>
-         "{resource}:setIamPolicy" :>
-           QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "callback" Text :>
-                                   QueryParam "alt" Text :> Post '[JSON] Policy
-
--- | Tests the specified permissions against the IAM access control policy
--- for the specified project.
-type ProjectsTestIamPermissions =
-     "v1beta1" :>
-       "projects" :>
-         "{resource}:testIamPermissions" :>
-           QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "callback" Text :>
-                                   QueryParam "alt" Text :>
-                                     Post '[JSON] TestIamPermissionsResponse
-
--- | Marks the project identified by the specified \`project_id\` (for
--- example, \`my-project-123\`) for deletion. This method will only affect
--- the project if the following criteria are met: + The project does not
--- have a billing account associated with it. + The project has a lifecycle
--- state of
--- [ACTIVE][google.cloudresourcemanager.projects.v1beta1.LifecycleState.ACTIVE].
--- This method changes the project\'s lifecycle state from
--- [ACTIVE][google.cloudresourcemanager.projects.v1beta1.LifecycleState.ACTIVE]
--- to [DELETE_REQUESTED]
--- [google.cloudresourcemanager.projects.v1beta1.LifecycleState.DELETE_REQUESTED].
--- The deletion starts at an unspecified time, at which point the lifecycle
--- state changes to [DELETE_IN_PROGRESS]
--- [google.cloudresourcemanager.projects.v1beta1.LifecycleState.DELETE_IN_PROGRESS].
--- Until the deletion completes, you can check the lifecycle state checked
--- by retrieving the project with [GetProject]
--- [google.cloudresourcemanager.projects.v1beta1.DeveloperProjects.GetProject],
--- and the project remains visible to [ListProjects]
--- [google.cloudresourcemanager.projects.v1beta1.DeveloperProjects.ListProjects].
--- However, you cannot update the project. After the deletion completes,
--- the project is not retrievable by the [GetProject]
--- [google.cloudresourcemanager.projects.v1beta1.DeveloperProjects.GetProject]
--- and [ListProjects]
--- [google.cloudresourcemanager.projects.v1beta1.DeveloperProjects.ListProjects]
--- methods. The caller must have modify permissions for this project.
-type ProjectsDelete =
-     "v1beta1" :>
-       "projects" :>
-         Capture "projectId" Text :>
-           QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "callback" Text :>
-                                   QueryParam "alt" Text :> Delete '[JSON] Empty
-
--- | Updates the attributes of the project identified by the specified
--- \`project_id\` (for example, \`my-project-123\`). The caller must have
--- modify permissions for this project.
-type ProjectsUpdate =
-     "v1beta1" :>
-       "projects" :>
-         Capture "projectId" Text :>
-           QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "callback" Text :>
-                                   QueryParam "alt" Text :> Put '[JSON] Project
+resourceManager :: Proxy ResourceManager
+resourceManager = Proxy

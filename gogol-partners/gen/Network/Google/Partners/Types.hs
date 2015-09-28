@@ -14,19 +14,27 @@
 --
 module Network.Google.Partners.Types
     (
+    -- * Service URL
+      partnersURL
 
-    -- * CertificationExamStatus
-      CertificationExamStatus
-    , certificationExamStatus
-    , cesNumberUsersPass
-    , cesType
+    -- * LogMessageResponse
+    , LogMessageResponse
+    , logMessageResponse
+    , lmrResponseMetadata
 
-    -- * CertificationStatus
-    , CertificationStatus
-    , certificationStatus
-    , csIsCertified
-    , csType
-    , csExamStatuses
+    -- * Lead
+    , Lead
+    , lead
+    , lGivenName
+    , lEmail
+    , lFamilyName
+    , lPhoneNumber
+    , lMinMonthlyBudget
+    , lId
+    , lComments
+    , lWebsiteUrl
+    , lType
+    , lGpsMotivations
 
     -- * Company
     , Company
@@ -44,102 +52,19 @@ module Network.Google.Partners.Types
     , cLocations
     , cServices
 
-    -- * CreateLeadRequest
-    , CreateLeadRequest
-    , createLeadRequest
-    , clrRequestMetadata
-    , clrRecaptchaChallenge
-    , clrLead
-
-    -- * CreateLeadResponse
-    , CreateLeadResponse
-    , createLeadResponse
-    , cRecaptchaStatus
-    , cResponseMetadata
-    , cLead
-
-    -- * DebugInfo
-    , DebugInfo
-    , debugInfo
-    , diServiceUrl
-    , diServerTraceInfo
-    , diServerInfo
-
-    -- * EventData
-    , EventData
-    , eventData
-    , edValues
-    , edKey
+    -- * PublicProfile
+    , PublicProfile
+    , publicProfile
+    , ppUrl
+    , ppDisplayImageUrl
+    , ppDisplayName
+    , ppId
 
     -- * GetCompanyResponse
     , GetCompanyResponse
     , getCompanyResponse
     , gcrResponseMetadata
     , gcrCompany
-
-    -- * LatLng
-    , LatLng
-    , latLng
-    , llLatitude
-    , llLongitude
-
-    -- * Lead
-    , Lead
-    , lead
-    , lGivenName
-    , lEmail
-    , lFamilyName
-    , lPhoneNumber
-    , lMinMonthlyBudget
-    , lId
-    , lComments
-    , lWebsiteUrl
-    , lType
-    , lGpsMotivations
-
-    -- * ListCompaniesResponse
-    , ListCompaniesResponse
-    , listCompaniesResponse
-    , lcrNextPageToken
-    , lcrResponseMetadata
-    , lcrCompanies
-
-    -- * ListUserStatesResponse
-    , ListUserStatesResponse
-    , listUserStatesResponse
-    , lusrUserStates
-    , lusrResponseMetadata
-
-    -- * LocalizedCompanyInfo
-    , LocalizedCompanyInfo
-    , localizedCompanyInfo
-    , lciLanguageCode
-    , lciOverview
-    , lciCountryCodes
-    , lciDisplayName
-
-    -- * Location
-    , Location
-    , location
-    , lLatLng
-    , lAddress
-
-    -- * LogMessageRequest
-    , LogMessageRequest
-    , logMessageRequest
-    , lmrRequestMetadata
-    , lmrClientInfo
-    , lmrDetails
-    , lmrLevel
-
-    -- * LogMessageRequestClientInfo
-    , LogMessageRequestClientInfo
-    , logMessageRequestClientInfo
-
-    -- * LogMessageResponse
-    , LogMessageResponse
-    , logMessageResponse
-    , lmrResponseMetadata
 
     -- * LogUserEventRequest
     , LogUserEventRequest
@@ -152,37 +77,39 @@ module Network.Google.Partners.Types
     , luerEventDatas
     , luerEventAction
 
-    -- * LogUserEventResponse
-    , LogUserEventResponse
-    , logUserEventResponse
-    , luerResponseMetadata
+    -- * UserOverrides
+    , UserOverrides
+    , userOverrides
+    , uoIpAddress
+    , uoUserId
 
-    -- * Money
-    , Money
-    , money
-    , mCurrencyCode
-    , mNanos
-    , mUnits
+    -- * ResponseMetadata
+    , ResponseMetadata
+    , responseMetadata
+    , rmDebugInfo
 
-    -- * PublicProfile
-    , PublicProfile
-    , publicProfile
-    , ppUrl
-    , ppDisplayImageUrl
-    , ppDisplayName
-    , ppId
+    -- * LogMessageRequest
+    , LogMessageRequest
+    , logMessageRequest
+    , lmrRequestMetadata
+    , lmrClientInfo
+    , lmrDetails
+    , lmrLevel
 
-    -- * Rank
-    , Rank
-    , rank
-    , rValue
-    , rType
+    -- * LocalizedCompanyInfo
+    , LocalizedCompanyInfo
+    , localizedCompanyInfo
+    , lciLanguageCode
+    , lciOverview
+    , lciCountryCodes
+    , lciDisplayName
 
-    -- * RecaptchaChallenge
-    , RecaptchaChallenge
-    , recaptchaChallenge
-    , rcResponse
-    , rcId
+    -- * CreateLeadRequest
+    , CreateLeadRequest
+    , createLeadRequest
+    , clrRequestMetadata
+    , clrRecaptchaChallenge
+    , clrLead
 
     -- * RequestMetadata
     , RequestMetadata
@@ -193,10 +120,64 @@ module Network.Google.Partners.Types
     , rmUserOverrides
     , rmPartnersSessionId
 
-    -- * ResponseMetadata
-    , ResponseMetadata
-    , responseMetadata
-    , rmDebugInfo
+    -- * CertificationStatus
+    , CertificationStatus
+    , certificationStatus
+    , csIsCertified
+    , csType
+    , csExamStatuses
+
+    -- * LatLng
+    , LatLng
+    , latLng
+    , llLatitude
+    , llLongitude
+
+    -- * ListUserStatesResponse
+    , ListUserStatesResponse
+    , listUserStatesResponse
+    , lusrUserStates
+    , lusrResponseMetadata
+
+    -- * EventData
+    , EventData
+    , eventData
+    , edValues
+    , edKey
+
+    -- * DebugInfo
+    , DebugInfo
+    , debugInfo
+    , diServiceUrl
+    , diServerTraceInfo
+    , diServerInfo
+
+    -- * LogMessageRequestClientInfo
+    , LogMessageRequestClientInfo
+    , logMessageRequestClientInfo
+
+    -- * LogUserEventResponse
+    , LogUserEventResponse
+    , logUserEventResponse
+    , luerResponseMetadata
+
+    -- * Location
+    , Location
+    , location
+    , lLatLng
+    , lAddress
+
+    -- * CertificationExamStatus
+    , CertificationExamStatus
+    , certificationExamStatus
+    , cesNumberUsersPass
+    , cesType
+
+    -- * RecaptchaChallenge
+    , RecaptchaChallenge
+    , recaptchaChallenge
+    , rcResponse
+    , rcId
 
     -- * TrafficSource
     , TrafficSource
@@ -204,13 +185,40 @@ module Network.Google.Partners.Types
     , tsTrafficSubId
     , tsTrafficSourceId
 
-    -- * UserOverrides
-    , UserOverrides
-    , userOverrides
-    , uoIpAddress
-    , uoUserId
+    -- * ListCompaniesResponse
+    , ListCompaniesResponse
+    , listCompaniesResponse
+    , lcrNextPageToken
+    , lcrResponseMetadata
+    , lcrCompanies
+
+    -- * Money
+    , Money
+    , money
+    , mCurrencyCode
+    , mNanos
+    , mUnits
+
+    -- * CreateLeadResponse
+    , CreateLeadResponse
+    , createLeadResponse
+    , cRecaptchaStatus
+    , cResponseMetadata
+    , cLead
+
+    -- * Rank
+    , Rank
+    , rank
+    , rValue
+    , rType
     ) where
 
 import           Network.Google.Partners.Types.Product
 import           Network.Google.Partners.Types.Sum
 import           Network.Google.Prelude
+
+-- | URL referring to version 'v2' of the Google Partners API.
+partnersURL :: BaseUrl
+partnersURL
+  = BaseUrl Https "https://partners.googleapis.com/"
+      443

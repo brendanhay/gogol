@@ -17,51 +17,254 @@
 -- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference>
 module Network.Google.Blogger
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** Blogger API
       Blogger
-    , PostUserInfosAPI
-    , PostUserInfosList
-    , PostUserInfosGet
-    , UsersAPI
-    , UsersGet
-    , PageViewsAPI
-    , PageViewsGet
-    , BlogsAPI
-    , BlogsListByUser
-    , BlogsGet
-    , BlogsGetByUrl
-    , PagesAPI
-    , PagesInsert
-    , PagesList
-    , PagesPatch
-    , PagesGet
-    , PagesRevert
-    , PagesDelete
-    , PagesUpdate
-    , PagesPublish
-    , BlogUserInfosAPI
-    , BlogUserInfosGet
-    , CommentsAPI
-    , CommentsList
-    , CommentsGet
-    , CommentsListByBlog
-    , CommentsRemoveContent
-    , CommentsApprove
-    , CommentsMarkAsSpam
-    , CommentsDelete
-    , PostsAPI
-    , PostsInsert
-    , PostsList
-    , PostsPatch
-    , PostsGet
-    , PostsRevert
-    , PostsGetByPath
-    , PostsSearch
-    , PostsDelete
-    , PostsUpdate
-    , PostsPublish
+    , blogger
+    , bloggerURL
+
+    -- ** blogger.blogUserInfos.get
+    , module Network.Google.API.Blogger.BlogUserInfos.Get
+
+    -- ** blogger.blogs.get
+    , module Network.Google.API.Blogger.Blogs.Get
+
+    -- ** blogger.blogs.getByUrl
+    , module Network.Google.API.Blogger.Blogs.GetByURL
+
+    -- ** blogger.blogs.listByUser
+    , module Network.Google.API.Blogger.Blogs.ListByUser
+
+    -- ** blogger.comments.approve
+    , module Network.Google.API.Blogger.Comments.Approve
+
+    -- ** blogger.comments.delete
+    , module Network.Google.API.Blogger.Comments.Delete
+
+    -- ** blogger.comments.get
+    , module Network.Google.API.Blogger.Comments.Get
+
+    -- ** blogger.comments.list
+    , module Network.Google.API.Blogger.Comments.List
+
+    -- ** blogger.comments.listByBlog
+    , module Network.Google.API.Blogger.Comments.ListByBlog
+
+    -- ** blogger.comments.markAsSpam
+    , module Network.Google.API.Blogger.Comments.MarkAsSpam
+
+    -- ** blogger.comments.removeContent
+    , module Network.Google.API.Blogger.Comments.RemoveContent
+
+    -- ** blogger.pageViews.get
+    , module Network.Google.API.Blogger.PageViews.Get
+
+    -- ** blogger.pages.delete
+    , module Network.Google.API.Blogger.Pages.Delete
+
+    -- ** blogger.pages.get
+    , module Network.Google.API.Blogger.Pages.Get
+
+    -- ** blogger.pages.insert
+    , module Network.Google.API.Blogger.Pages.Insert
+
+    -- ** blogger.pages.list
+    , module Network.Google.API.Blogger.Pages.List
+
+    -- ** blogger.pages.patch
+    , module Network.Google.API.Blogger.Pages.Patch
+
+    -- ** blogger.pages.publish
+    , module Network.Google.API.Blogger.Pages.Publish
+
+    -- ** blogger.pages.revert
+    , module Network.Google.API.Blogger.Pages.Revert
+
+    -- ** blogger.pages.update
+    , module Network.Google.API.Blogger.Pages.Update
+
+    -- ** blogger.postUserInfos.get
+    , module Network.Google.API.Blogger.PostUserInfos.Get
+
+    -- ** blogger.postUserInfos.list
+    , module Network.Google.API.Blogger.PostUserInfos.List
+
+    -- ** blogger.posts.delete
+    , module Network.Google.API.Blogger.Posts.Delete
+
+    -- ** blogger.posts.get
+    , module Network.Google.API.Blogger.Posts.Get
+
+    -- ** blogger.posts.getByPath
+    , module Network.Google.API.Blogger.Posts.GetByPath
+
+    -- ** blogger.posts.insert
+    , module Network.Google.API.Blogger.Posts.Insert
+
+    -- ** blogger.posts.list
+    , module Network.Google.API.Blogger.Posts.List
+
+    -- ** blogger.posts.patch
+    , module Network.Google.API.Blogger.Posts.Patch
+
+    -- ** blogger.posts.publish
+    , module Network.Google.API.Blogger.Posts.Publish
+
+    -- ** blogger.posts.revert
+    , module Network.Google.API.Blogger.Posts.Revert
+
+    -- ** blogger.posts.search
+    , module Network.Google.API.Blogger.Posts.Search
+
+    -- ** blogger.posts.update
+    , module Network.Google.API.Blogger.Posts.Update
+
+    -- ** blogger.users.get
+    , module Network.Google.API.Blogger.Users.Get
 
     -- * Types
+
+    -- ** BlogList
+    , BlogList
+    , blogList
+    , blKind
+    , blItems
+    , blBlogUserInfos
+
+    -- ** PostsSearch'OrderBy
+    , PostsSearch'OrderBy (..)
+
+    -- ** CommentsGet'View
+    , CommentsGet'View (..)
+
+    -- ** PostUserInfosList'View
+    , PostUserInfosList'View (..)
+
+    -- ** PagesGet'View
+    , PagesGet'View (..)
+
+    -- ** UserLocale
+    , UserLocale
+    , userLocale
+    , ulVariant
+    , ulCountry
+    , ulLanguage
+
+    -- ** PagesList'Status
+    , PagesList'Status (..)
+
+    -- ** PostsGetByPath'View
+    , PostsGetByPath'View (..)
+
+    -- ** PostList
+    , PostList
+    , postList
+    , plEtag
+    , plNextPageToken
+    , plKind
+    , plItems
+
+    -- ** BlogsGetByURL'View
+    , BlogsGetByURL'View (..)
+
+    -- ** CommentsList'Status
+    , CommentsList'Status (..)
+
+    -- ** Alt
+    , Alt (..)
+
+    -- ** CommentAuthor
+    , CommentAuthor
+    , commentAuthor
+    , caImage
+    , caUrl
+    , caDisplayName
+    , caId
+
+    -- ** BlogsListByUser'Status
+    , BlogsListByUser'Status (..)
+
+    -- ** PageAuthor
+    , PageAuthor
+    , pageAuthor
+    , paImage
+    , paUrl
+    , paDisplayName
+    , paId
+
+    -- ** BlogLocale
+    , BlogLocale
+    , blogLocale
+    , blVariant
+    , blCountry
+    , blLanguage
+
+    -- ** PostBlog
+    , PostBlog
+    , postBlog
+    , pbId
+
+    -- ** PostsList'View
+    , PostsList'View (..)
+
+    -- ** PostPerUserInfo
+    , PostPerUserInfo
+    , postPerUserInfo
+    , ppuiKind
+    , ppuiBlogId
+    , ppuiUserId
+    , ppuiHasEditAccess
+    , ppuiPostId
+
+    -- ** PostsList'OrderBy
+    , PostsList'OrderBy (..)
+
+    -- ** PagesList'View
+    , PagesList'View (..)
+
+    -- ** CommentsList'View
+    , CommentsList'View (..)
+
+    -- ** Comment
+    , Comment
+    , comment
+    , cStatus
+    , cPost
+    , cKind
+    , cPublished
+    , cBlog
+    , cContent
+    , cSelfLink
+    , cAuthor
+    , cId
+    , cUpdated
+    , cInReplyTo
+
+    -- ** BlogPosts
+    , BlogPosts
+    , blogPosts
+    , bpTotalItems
+    , bpItems
+    , bpSelfLink
+
+    -- ** PageBlog
+    , PageBlog
+    , pageBlog
+    , pId
+
+    -- ** CommentBlog
+    , CommentBlog
+    , commentBlog
+    , cbId
+
+    -- ** PostAuthor
+    , PostAuthor
+    , postAuthor
+    , posImage
+    , posUrl
+    , posDisplayName
+    , posId
 
     -- ** Blog
     , Blog
@@ -80,87 +283,12 @@ module Network.Google.Blogger
     , bPosts
     , bDescription
 
-    -- ** BlogList
-    , BlogList
-    , blogList
-    , blKind
-    , blItems
-    , blBlogUserInfos
-
-    -- ** BlogLocale
-    , BlogLocale
-    , blogLocale
-    , blVariant
-    , blCountry
-    , blLanguage
-
-    -- ** BlogPages
-    , BlogPages
-    , blogPages
-    , bpsTotalItems
-    , bpsSelfLink
-
-    -- ** BlogPerUserInfo
-    , BlogPerUserInfo
-    , blogPerUserInfo
-    , bpuiPhotosAlbumKey
-    , bpuiKind
-    , bpuiBlogId
-    , bpuiUserId
-    , bpuiRole
-    , bpuiHasAdminAccess
-
-    -- ** BlogPosts
-    , BlogPosts
-    , blogPosts
-    , bpTotalItems
-    , bpItems
-    , bpSelfLink
-
     -- ** BlogUserInfo
     , BlogUserInfo
     , blogUserInfo
     , buiKind
     , buiBlog
     , buiBlogUserInfo
-
-    -- ** Comment
-    , Comment
-    , comment
-    , cStatus
-    , cPost
-    , cKind
-    , cPublished
-    , cBlog
-    , cContent
-    , cSelfLink
-    , cAuthor
-    , cId
-    , cUpdated
-    , cInReplyTo
-
-    -- ** CommentAuthor
-    , CommentAuthor
-    , commentAuthor
-    , caImage
-    , caUrl
-    , caDisplayName
-    , caId
-
-    -- ** CommentBlog
-    , CommentBlog
-    , commentBlog
-    , cbId
-
-    -- ** CommentImageAuthor
-    , CommentImageAuthor
-    , commentImageAuthor
-    , ciaUrl
-
-    -- ** CommentInReplyTo
-    , CommentInReplyTo
-    , commentInReplyTo
-    , cirtId
 
     -- ** CommentList
     , CommentList
@@ -171,65 +299,78 @@ module Network.Google.Blogger
     , clItems
     , clPrevPageToken
 
-    -- ** CommentPost
-    , CommentPost
-    , commentPost
-    , cpId
+    -- ** BlogsListByUser'View
+    , BlogsListByUser'View (..)
 
-    -- ** Page
-    , Page
-    , page
-    , pagStatus
-    , pagEtag
-    , pagKind
-    , pagPublished
-    , pagUrl
-    , pagBlog
-    , pagContent
-    , pagSelfLink
-    , pagAuthor
-    , pagId
-    , pagUpdated
-    , pagTitle
+    -- ** PostsGet'View
+    , PostsGet'View (..)
 
-    -- ** PageAuthor
-    , PageAuthor
-    , pageAuthor
-    , paImage
-    , paUrl
-    , paDisplayName
-    , paId
+    -- ** PostUserInfo
+    , PostUserInfo
+    , postUserInfo
+    , puiPostUserInfo
+    , puiPost
+    , puiKind
 
-    -- ** PageBlog
-    , PageBlog
-    , pageBlog
-    , pId
+    -- ** CommentsListByBlog'Status
+    , CommentsListByBlog'Status (..)
+
+    -- ** PostReplies
+    , PostReplies
+    , postReplies
+    , prTotalItems
+    , prItems
+    , prSelfLink
+
+    -- ** UserBlogs
+    , UserBlogs
+    , userBlogs
+    , ubSelfLink
+
+    -- ** PostUserInfosList'OrderBy
+    , PostUserInfosList'OrderBy (..)
 
     -- ** PageImageAuthor
     , PageImageAuthor
     , pageImageAuthor
     , piaUrl
 
-    -- ** PageList
-    , PageList
-    , pageList
-    , pllEtag
-    , pllNextPageToken
-    , pllKind
-    , pllItems
+    -- ** BlogsGet'View
+    , BlogsGet'View (..)
+
+    -- ** CommentImageAuthor
+    , CommentImageAuthor
+    , commentImageAuthor
+    , ciaUrl
+
+    -- ** PostItemImages
+    , PostItemImages
+    , postItemImages
+    , piiUrl
 
     -- ** Pageviews
     , Pageviews
     , pageviews
-    , pKind
-    , pCounts
-    , pBlogId
+    , pagaKind
+    , pagaCounts
+    , pagaBlogId
 
-    -- ** PageviewsItemCounts
-    , PageviewsItemCounts
-    , pageviewsItemCounts
-    , picTimeRange
-    , picCount
+    -- ** BlogsListByUser'Role
+    , BlogsListByUser'Role (..)
+
+    -- ** BlogPages
+    , BlogPages
+    , blogPages
+    , bpsTotalItems
+    , bpsSelfLink
+
+    -- ** PageViewsGet'Range
+    , PageViewsGet'Range (..)
+
+    -- ** CommentPost
+    , CommentPost
+    , commentPost
+    , cpId
 
     -- ** Post
     , Post
@@ -254,36 +395,30 @@ module Network.Google.Blogger
     , ppTitleLink
     , ppTitle
 
-    -- ** PostAuthor
-    , PostAuthor
-    , postAuthor
-    , posImage
-    , posUrl
-    , posDisplayName
-    , posId
+    -- ** Page
+    , Page
+    , page
+    , pagStatus
+    , pagEtag
+    , pagKind
+    , pagPublished
+    , pagUrl
+    , pagBlog
+    , pagContent
+    , pagSelfLink
+    , pagAuthor
+    , pagId
+    , pagUpdated
+    , pagTitle
 
-    -- ** PostBlog
-    , PostBlog
-    , postBlog
-    , pbId
+    -- ** PageviewsItemCounts
+    , PageviewsItemCounts
+    , pageviewsItemCounts
+    , picTimeRange
+    , picCount
 
-    -- ** PostImageAuthor
-    , PostImageAuthor
-    , postImageAuthor
-    , pUrl
-
-    -- ** PostItemImages
-    , PostItemImages
-    , postItemImages
-    , piiUrl
-
-    -- ** PostList
-    , PostList
-    , postList
-    , plEtag
-    , plNextPageToken
-    , plKind
-    , plItems
+    -- ** PostUserInfosList'Status
+    , PostUserInfosList'Status (..)
 
     -- ** PostLocation
     , PostLocation
@@ -293,28 +428,20 @@ module Network.Google.Blogger
     , plName
     , plLng
 
-    -- ** PostPerUserInfo
-    , PostPerUserInfo
-    , postPerUserInfo
-    , ppuiKind
-    , ppuiBlogId
-    , ppuiUserId
-    , ppuiHasEditAccess
-    , ppuiPostId
+    -- ** CommentInReplyTo
+    , CommentInReplyTo
+    , commentInReplyTo
+    , cirtId
 
-    -- ** PostReplies
-    , PostReplies
-    , postReplies
-    , prTotalItems
-    , prItems
-    , prSelfLink
-
-    -- ** PostUserInfo
-    , PostUserInfo
-    , postUserInfo
-    , puiPostUserInfo
-    , puiPost
-    , puiKind
+    -- ** BlogPerUserInfo
+    , BlogPerUserInfo
+    , blogPerUserInfo
+    , bpuiPhotosAlbumKey
+    , bpuiKind
+    , bpuiBlogId
+    , bpuiUserId
+    , bpuiRole
+    , bpuiHasAdminAccess
 
     -- ** PostUserInfosList
     , PostUserInfosList
@@ -322,6 +449,9 @@ module Network.Google.Blogger
     , puilNextPageToken
     , puilKind
     , puilItems
+
+    -- ** PostsList'Status
+    , PostsList'Status (..)
 
     -- ** User
     , User
@@ -336,19 +466,53 @@ module Network.Google.Blogger
     , uDisplayName
     , uId
 
-    -- ** UserBlogs
-    , UserBlogs
-    , userBlogs
-    , ubSelfLink
+    -- ** PostImageAuthor
+    , PostImageAuthor
+    , postImageAuthor
+    , pUrl
 
-    -- ** UserLocale
-    , UserLocale
-    , userLocale
-    , ulVariant
-    , ulCountry
-    , ulLanguage
+    -- ** PageList
+    , PageList
+    , pageList
+    , pEtag
+    , pNextPageToken
+    , pKind
+    , pItems
     ) where
 
+import           Network.Google.API.Blogger.Blogs.Get
+import           Network.Google.API.Blogger.Blogs.GetByURL
+import           Network.Google.API.Blogger.Blogs.ListByUser
+import           Network.Google.API.Blogger.BlogUserInfos.Get
+import           Network.Google.API.Blogger.Comments.Approve
+import           Network.Google.API.Blogger.Comments.Delete
+import           Network.Google.API.Blogger.Comments.Get
+import           Network.Google.API.Blogger.Comments.List
+import           Network.Google.API.Blogger.Comments.ListByBlog
+import           Network.Google.API.Blogger.Comments.MarkAsSpam
+import           Network.Google.API.Blogger.Comments.RemoveContent
+import           Network.Google.API.Blogger.Pages.Delete
+import           Network.Google.API.Blogger.Pages.Get
+import           Network.Google.API.Blogger.Pages.Insert
+import           Network.Google.API.Blogger.Pages.List
+import           Network.Google.API.Blogger.Pages.Patch
+import           Network.Google.API.Blogger.Pages.Publish
+import           Network.Google.API.Blogger.Pages.Revert
+import           Network.Google.API.Blogger.Pages.Update
+import           Network.Google.API.Blogger.PageViews.Get
+import           Network.Google.API.Blogger.Posts.Delete
+import           Network.Google.API.Blogger.Posts.Get
+import           Network.Google.API.Blogger.Posts.GetByPath
+import           Network.Google.API.Blogger.Posts.Insert
+import           Network.Google.API.Blogger.Posts.List
+import           Network.Google.API.Blogger.Posts.Patch
+import           Network.Google.API.Blogger.Posts.Publish
+import           Network.Google.API.Blogger.Posts.Revert
+import           Network.Google.API.Blogger.Posts.Search
+import           Network.Google.API.Blogger.Posts.Update
+import           Network.Google.API.Blogger.PostUserInfos.Get
+import           Network.Google.API.Blogger.PostUserInfos.List
+import           Network.Google.API.Blogger.Users.Get
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
@@ -357,673 +521,37 @@ TODO
 -}
 
 type Blogger =
-     PostUserInfosAPI :<|> UsersAPI :<|> PageViewsAPI :<|>
-       BlogsAPI
-       :<|> PagesAPI
-       :<|> BlogUserInfosAPI
-       :<|> CommentsAPI
-       :<|> PostsAPI
+     UsersGetAPI :<|> PostsRevertAPI :<|> PostsGetAPI :<|>
+       CommentsGetAPI
+       :<|> CommentsListAPI
+       :<|> CommentsRemoveContentAPI
+       :<|> PostsDeleteAPI
+       :<|> PageViewsGetAPI
+       :<|> PostsUpdateAPI
+       :<|> PostsPublishAPI
+       :<|> PostsInsertAPI
+       :<|> PostsSearchAPI
+       :<|> PagesPublishAPI
+       :<|> PostsGetByPathAPI
+       :<|> PostsListAPI
+       :<|> BlogsGetByURLAPI
+       :<|> PagesDeleteAPI
+       :<|> BlogUserInfosGetAPI
+       :<|> PagesGetAPI
+       :<|> CommentsDeleteAPI
+       :<|> PagesInsertAPI
+       :<|> CommentsMarkAsSpamAPI
+       :<|> PagesRevertAPI
+       :<|> PostUserInfosGetAPI
+       :<|> PagesPatchAPI
+       :<|> PostUserInfosListAPI
+       :<|> PostsPatchAPI
+       :<|> BlogsGetAPI
+       :<|> CommentsListByBlogAPI
+       :<|> PagesListAPI
+       :<|> PagesUpdateAPI
+       :<|> CommentsApproveAPI
+       :<|> BlogsListByUserAPI
 
-type PostUserInfosAPI =
-     PostUserInfosList :<|> PostUserInfosGet
-
--- | Retrieves a list of post and post user info pairs, possibly filtered.
--- The post user info contains per-user information about the post, such as
--- access rights, specific to the user.
-type PostUserInfosList =
-     "blogger" :>
-       "v3" :>
-         "users" :>
-           Capture "userId" Text :>
-             "blogs" :>
-               Capture "blogId" Text :>
-                 "posts" :>
-                   QueryParam "status" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "orderBy" Text :>
-                           QueryParam "userIp" Text :>
-                             QueryParam "endDate" UTCTime :>
-                               QueryParam "startDate" UTCTime :>
-                                 QueryParam "key" Text :>
-                                   QueryParam "fetchBodies" Bool :>
-                                     QueryParam "view" Text :>
-                                       QueryParam "labels" Text :>
-                                         QueryParam "pageToken" Text :>
-                                           QueryParam "oauth_token" Text :>
-                                             QueryParam "maxResults" Word32 :>
-                                               QueryParam "fields" Text :>
-                                                 QueryParam "alt" Text :>
-                                                   Get '[JSON] PostUserInfosList
-
--- | Gets one post and user info pair, by post ID and user ID. The post user
--- info contains per-user information about the post, such as access
--- rights, specific to the user.
-type PostUserInfosGet =
-     "blogger" :>
-       "v3" :>
-         "users" :>
-           Capture "userId" Text :>
-             "blogs" :>
-               Capture "blogId" Text :>
-                 "posts" :>
-                   Capture "postId" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "maxComments" Word32 :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Get '[JSON] PostUserInfo
-
-type UsersAPI = UsersGet
-
--- | Gets one user by ID.
-type UsersGet =
-     "blogger" :>
-       "v3" :>
-         "users" :>
-           Capture "userId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Get '[JSON] User
-
-type PageViewsAPI = PageViewsGet
-
--- | Retrieve pageview stats for a Blog.
-type PageViewsGet =
-     "blogger" :>
-       "v3" :>
-         "blogs" :>
-           Capture "blogId" Text :>
-             "pageviews" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "range" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] Pageviews
-
-type BlogsAPI =
-     BlogsListByUser :<|> BlogsGet :<|> BlogsGetByUrl
-
--- | Retrieves a list of blogs, possibly filtered.
-type BlogsListByUser =
-     "blogger" :>
-       "v3" :>
-         "users" :>
-           Capture "userId" Text :>
-             "blogs" :>
-               QueryParam "status" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "fetchUserInfo" Bool :>
-                         QueryParam "role" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "view" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :> Get '[JSON] BlogList
-
--- | Gets one blog by ID.
-type BlogsGet =
-     "blogger" :>
-       "v3" :>
-         "blogs" :>
-           Capture "blogId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "maxPosts" Word32 :>
-                       QueryParam "view" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] Blog
-
--- | Retrieve a Blog by URL.
-type BlogsGetByUrl =
-     "blogger" :>
-       "v3" :>
-         "blogs" :>
-           "byurl" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "url" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "view" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] Blog
-
-type PagesAPI =
-     PagesInsert :<|> PagesList :<|> PagesPatch :<|>
-       PagesGet
-       :<|> PagesRevert
-       :<|> PagesDelete
-       :<|> PagesUpdate
-       :<|> PagesPublish
-
--- | Add a page.
-type PagesInsert =
-     "blogger" :>
-       "v3" :>
-         "blogs" :>
-           Capture "blogId" Text :>
-             "pages" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "isDraft" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Post '[JSON] Page
-
--- | Retrieves the pages for a blog, optionally including non-LIVE statuses.
-type PagesList =
-     "blogger" :>
-       "v3" :>
-         "blogs" :>
-           Capture "blogId" Text :>
-             "pages" :>
-               QueryParam "status" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "fetchBodies" Bool :>
-                           QueryParam "view" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "maxResults" Word32 :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "alt" Text :>
-                                       Get '[JSON] PageList
-
--- | Update a page. This method supports patch semantics.
-type PagesPatch =
-     "blogger" :>
-       "v3" :>
-         "blogs" :>
-           Capture "blogId" Text :>
-             "pages" :>
-               Capture "pageId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "revert" Bool :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "publish" Bool :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Patch '[JSON] Page
-
--- | Gets one blog page by ID.
-type PagesGet =
-     "blogger" :>
-       "v3" :>
-         "blogs" :>
-           Capture "blogId" Text :>
-             "pages" :>
-               Capture "pageId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "view" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Get '[JSON] Page
-
--- | Revert a published or scheduled page to draft state.
-type PagesRevert =
-     "blogger" :>
-       "v3" :>
-         "blogs" :>
-           Capture "blogId" Text :>
-             "pages" :>
-               Capture "pageId" Text :>
-                 "revert" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Post '[JSON] Page
-
--- | Delete a page by ID.
-type PagesDelete =
-     "blogger" :>
-       "v3" :>
-         "blogs" :>
-           Capture "blogId" Text :>
-             "pages" :>
-               Capture "pageId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Update a page.
-type PagesUpdate =
-     "blogger" :>
-       "v3" :>
-         "blogs" :>
-           Capture "blogId" Text :>
-             "pages" :>
-               Capture "pageId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "revert" Bool :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "publish" Bool :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Put '[JSON] Page
-
--- | Publishes a draft page.
-type PagesPublish =
-     "blogger" :>
-       "v3" :>
-         "blogs" :>
-           Capture "blogId" Text :>
-             "pages" :>
-               Capture "pageId" Text :>
-                 "publish" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Post '[JSON] Page
-
-type BlogUserInfosAPI = BlogUserInfosGet
-
--- | Gets one blog and user info pair by blogId and userId.
-type BlogUserInfosGet =
-     "blogger" :>
-       "v3" :>
-         "users" :>
-           Capture "userId" Text :>
-             "blogs" :>
-               Capture "blogId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "maxPosts" Word32 :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Get '[JSON] BlogUserInfo
-
-type CommentsAPI =
-     CommentsList :<|> CommentsGet :<|> CommentsListByBlog
-       :<|> CommentsRemoveContent
-       :<|> CommentsApprove
-       :<|> CommentsMarkAsSpam
-       :<|> CommentsDelete
-
--- | Retrieves the comments for a post, possibly filtered.
-type CommentsList =
-     "blogger" :>
-       "v3" :>
-         "blogs" :>
-           Capture "blogId" Text :>
-             "posts" :>
-               Capture "postId" Text :>
-                 "comments" :>
-                   QueryParam "status" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "endDate" UTCTime :>
-                             QueryParam "startDate" UTCTime :>
-                               QueryParam "key" Text :>
-                                 QueryParam "fetchBodies" Bool :>
-                                   QueryParam "view" Text :>
-                                     QueryParam "pageToken" Text :>
-                                       QueryParam "oauth_token" Text :>
-                                         QueryParam "maxResults" Word32 :>
-                                           QueryParam "fields" Text :>
-                                             QueryParam "alt" Text :>
-                                               Get '[JSON] CommentList
-
--- | Gets one comment by ID.
-type CommentsGet =
-     "blogger" :>
-       "v3" :>
-         "blogs" :>
-           Capture "blogId" Text :>
-             "posts" :>
-               Capture "postId" Text :>
-                 "comments" :>
-                   Capture "commentId" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "view" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :> Get '[JSON] Comment
-
--- | Retrieves the comments for a blog, across all posts, possibly filtered.
-type CommentsListByBlog =
-     "blogger" :>
-       "v3" :>
-         "blogs" :>
-           Capture "blogId" Text :>
-             "comments" :>
-               QueryParam "status" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "endDate" UTCTime :>
-                         QueryParam "startDate" UTCTime :>
-                           QueryParam "key" Text :>
-                             QueryParam "fetchBodies" Bool :>
-                               QueryParam "pageToken" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "maxResults" Word32 :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "alt" Text :>
-                                         Get '[JSON] CommentList
-
--- | Removes the content of a comment.
-type CommentsRemoveContent =
-     "blogger" :>
-       "v3" :>
-         "blogs" :>
-           Capture "blogId" Text :>
-             "posts" :>
-               Capture "postId" Text :>
-                 "comments" :>
-                   Capture "commentId" Text :>
-                     "removecontent" :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "userIp" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :> Post '[JSON] Comment
-
--- | Marks a comment as not spam.
-type CommentsApprove =
-     "blogger" :>
-       "v3" :>
-         "blogs" :>
-           Capture "blogId" Text :>
-             "posts" :>
-               Capture "postId" Text :>
-                 "comments" :>
-                   Capture "commentId" Text :>
-                     "approve" :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "userIp" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :> Post '[JSON] Comment
-
--- | Marks a comment as spam.
-type CommentsMarkAsSpam =
-     "blogger" :>
-       "v3" :>
-         "blogs" :>
-           Capture "blogId" Text :>
-             "posts" :>
-               Capture "postId" Text :>
-                 "comments" :>
-                   Capture "commentId" Text :>
-                     "spam" :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "userIp" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :> Post '[JSON] Comment
-
--- | Delete a comment by ID.
-type CommentsDelete =
-     "blogger" :>
-       "v3" :>
-         "blogs" :>
-           Capture "blogId" Text :>
-             "posts" :>
-               Capture "postId" Text :>
-                 "comments" :>
-                   Capture "commentId" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Delete '[JSON] ()
-
-type PostsAPI =
-     PostsInsert :<|> PostsList :<|> PostsPatch :<|>
-       PostsGet
-       :<|> PostsRevert
-       :<|> PostsGetByPath
-       :<|> PostsSearch
-       :<|> PostsDelete
-       :<|> PostsUpdate
-       :<|> PostsPublish
-
--- | Add a post.
-type PostsInsert =
-     "blogger" :>
-       "v3" :>
-         "blogs" :>
-           Capture "blogId" Text :>
-             "posts" :>
-               QueryParam "fetchBody" Bool :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "isDraft" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "fetchImages" Bool :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Post '[JSON] Post
-
--- | Retrieves a list of posts, possibly filtered.
-type PostsList =
-     "blogger" :>
-       "v3" :>
-         "blogs" :>
-           Capture "blogId" Text :>
-             "posts" :>
-               QueryParam "status" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "orderBy" Text :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "fetchImages" Bool :>
-                           QueryParam "endDate" UTCTime :>
-                             QueryParam "startDate" UTCTime :>
-                               QueryParam "key" Text :>
-                                 QueryParam "fetchBodies" Bool :>
-                                   QueryParam "view" Text :>
-                                     QueryParam "labels" Text :>
-                                       QueryParam "pageToken" Text :>
-                                         QueryParam "oauth_token" Text :>
-                                           QueryParam "maxResults" Word32 :>
-                                             QueryParam "fields" Text :>
-                                               QueryParam "alt" Text :>
-                                                 Get '[JSON] PostList
-
--- | Update a post. This method supports patch semantics.
-type PostsPatch =
-     "blogger" :>
-       "v3" :>
-         "blogs" :>
-           Capture "blogId" Text :>
-             "posts" :>
-               Capture "postId" Text :>
-                 QueryParam "fetchBody" Bool :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "fetchImages" Bool :>
-                           QueryParam "maxComments" Word32 :>
-                             QueryParam "key" Text :>
-                               QueryParam "revert" Bool :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "publish" Bool :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "alt" Text :>
-                                         Patch '[JSON] Post
-
--- | Get a post by ID.
-type PostsGet =
-     "blogger" :>
-       "v3" :>
-         "blogs" :>
-           Capture "blogId" Text :>
-             "posts" :>
-               Capture "postId" Text :>
-                 QueryParam "fetchBody" Bool :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "fetchImages" Bool :>
-                           QueryParam "maxComments" Word32 :>
-                             QueryParam "key" Text :>
-                               QueryParam "view" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "alt" Text :> Get '[JSON] Post
-
--- | Revert a published or scheduled post to draft state.
-type PostsRevert =
-     "blogger" :>
-       "v3" :>
-         "blogs" :>
-           Capture "blogId" Text :>
-             "posts" :>
-               Capture "postId" Text :>
-                 "revert" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Post '[JSON] Post
-
--- | Retrieve a Post by Path.
-type PostsGetByPath =
-     "blogger" :>
-       "v3" :>
-         "blogs" :>
-           Capture "blogId" Text :>
-             "posts" :>
-               "bypath" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "path" Text :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "maxComments" Word32 :>
-                           QueryParam "key" Text :>
-                             QueryParam "view" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :> Get '[JSON] Post
-
--- | Search for a post.
-type PostsSearch =
-     "blogger" :>
-       "v3" :>
-         "blogs" :>
-           Capture "blogId" Text :>
-             "posts" :>
-               "search" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "orderBy" Text :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "q" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "fetchBodies" Bool :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :> Get '[JSON] PostList
-
--- | Delete a post by ID.
-type PostsDelete =
-     "blogger" :>
-       "v3" :>
-         "blogs" :>
-           Capture "blogId" Text :>
-             "posts" :>
-               Capture "postId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Update a post.
-type PostsUpdate =
-     "blogger" :>
-       "v3" :>
-         "blogs" :>
-           Capture "blogId" Text :>
-             "posts" :>
-               Capture "postId" Text :>
-                 QueryParam "fetchBody" Bool :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "fetchImages" Bool :>
-                           QueryParam "maxComments" Word32 :>
-                             QueryParam "key" Text :>
-                               QueryParam "revert" Bool :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "publish" Bool :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "alt" Text :> Put '[JSON] Post
-
--- | Publishes a draft post, optionally at the specific time of the given
--- publishDate parameter.
-type PostsPublish =
-     "blogger" :>
-       "v3" :>
-         "blogs" :>
-           Capture "blogId" Text :>
-             "posts" :>
-               Capture "postId" Text :>
-                 "publish" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "publishDate" UTCTime :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Post '[JSON] Post
+blogger :: Proxy Blogger
+blogger = Proxy

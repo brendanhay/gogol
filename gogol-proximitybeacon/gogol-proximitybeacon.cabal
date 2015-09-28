@@ -1,6 +1,6 @@
 name:                  gogol-proximitybeacon
 version:               0.0.1
-synopsis:              Google Proximity Beacon API.
+synopsis:              Google Proximity Beacon API Client.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -17,8 +17,8 @@ description:
     This API provides services to register, manage, index, and search
     beacons.
     .
-    /Warning:/ This is an experimental preview release which is still under
-    heavy development and not intended for public consumption, caveat emptor!
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
 
 source-repository head
     type:     git
@@ -31,7 +31,14 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.ProximityBeacon
+          Network.Google.API.ProximityBeacon.Beaconinfo.Getforobserved
+        , Network.Google.API.ProximityBeacon.Beacons.Attachments.BatchDelete
+        , Network.Google.API.ProximityBeacon.Beacons.Attachments.Create
+        , Network.Google.API.ProximityBeacon.Beacons.Attachments.Delete
+        , Network.Google.API.ProximityBeacon.Beacons.Attachments.List
+        , Network.Google.API.ProximityBeacon.Beacons.Diagnostics.List
+        , Network.Google.API.ProximityBeacon.Namespaces.List
+        , Network.Google.ProximityBeacon
         , Network.Google.ProximityBeacon.Types
 
     other-modules:

@@ -17,71 +17,132 @@
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference>
 module Network.Google.Storage
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** Cloud Storage API
       Storage
-    , BucketsAPI
-    , BucketsInsert
-    , BucketsList
-    , BucketsPatch
-    , BucketsGet
-    , BucketsDelete
-    , BucketsUpdate
-    , ChannelsAPI
-    , ChannelsStop
-    , BucketAccessControlsAPI
-    , BucketAccessControlsInsert
-    , BucketAccessControlsList
-    , BucketAccessControlsPatch
-    , BucketAccessControlsGet
-    , BucketAccessControlsDelete
-    , BucketAccessControlsUpdate
-    , ObjectsAPI
-    , ObjectsInsert
-    , ObjectsList
-    , ObjectsCopy
-    , ObjectsWatchAll
-    , ObjectsPatch
-    , ObjectsGet
-    , ObjectsCompose
-    , ObjectsDelete
-    , ObjectsUpdate
-    , DefaultObjectAccessControlsAPI
-    , DefaultObjectAccessControlsInsert
-    , DefaultObjectAccessControlsList
-    , DefaultObjectAccessControlsPatch
-    , DefaultObjectAccessControlsGet
-    , DefaultObjectAccessControlsDelete
-    , DefaultObjectAccessControlsUpdate
-    , ObjectAccessControlsAPI
-    , ObjectAccessControlsInsert
-    , ObjectAccessControlsList
-    , ObjectAccessControlsPatch
-    , ObjectAccessControlsGet
-    , ObjectAccessControlsDelete
-    , ObjectAccessControlsUpdate
+    , storage
+    , storageURL
+
+    -- ** storage.bucketAccessControls.delete
+    , module Network.Google.API.Storage.BucketAccessControls.Delete
+
+    -- ** storage.bucketAccessControls.get
+    , module Network.Google.API.Storage.BucketAccessControls.Get
+
+    -- ** storage.bucketAccessControls.insert
+    , module Network.Google.API.Storage.BucketAccessControls.Insert
+
+    -- ** storage.bucketAccessControls.list
+    , module Network.Google.API.Storage.BucketAccessControls.List
+
+    -- ** storage.bucketAccessControls.patch
+    , module Network.Google.API.Storage.BucketAccessControls.Patch
+
+    -- ** storage.bucketAccessControls.update
+    , module Network.Google.API.Storage.BucketAccessControls.Update
+
+    -- ** storage.buckets.delete
+    , module Network.Google.API.Storage.Buckets.Delete
+
+    -- ** storage.buckets.get
+    , module Network.Google.API.Storage.Buckets.Get
+
+    -- ** storage.buckets.insert
+    , module Network.Google.API.Storage.Buckets.Insert
+
+    -- ** storage.buckets.list
+    , module Network.Google.API.Storage.Buckets.List
+
+    -- ** storage.buckets.patch
+    , module Network.Google.API.Storage.Buckets.Patch
+
+    -- ** storage.buckets.update
+    , module Network.Google.API.Storage.Buckets.Update
+
+    -- ** storage.channels.stop
+    , module Network.Google.API.Storage.Channels.Stop
+
+    -- ** storage.defaultObjectAccessControls.delete
+    , module Network.Google.API.Storage.DefaultObjectAccessControls.Delete
+
+    -- ** storage.defaultObjectAccessControls.get
+    , module Network.Google.API.Storage.DefaultObjectAccessControls.Get
+
+    -- ** storage.defaultObjectAccessControls.insert
+    , module Network.Google.API.Storage.DefaultObjectAccessControls.Insert
+
+    -- ** storage.defaultObjectAccessControls.list
+    , module Network.Google.API.Storage.DefaultObjectAccessControls.List
+
+    -- ** storage.defaultObjectAccessControls.patch
+    , module Network.Google.API.Storage.DefaultObjectAccessControls.Patch
+
+    -- ** storage.defaultObjectAccessControls.update
+    , module Network.Google.API.Storage.DefaultObjectAccessControls.Update
+
+    -- ** storage.objectAccessControls.delete
+    , module Network.Google.API.Storage.ObjectAccessControls.Delete
+
+    -- ** storage.objectAccessControls.get
+    , module Network.Google.API.Storage.ObjectAccessControls.Get
+
+    -- ** storage.objectAccessControls.insert
+    , module Network.Google.API.Storage.ObjectAccessControls.Insert
+
+    -- ** storage.objectAccessControls.list
+    , module Network.Google.API.Storage.ObjectAccessControls.List
+
+    -- ** storage.objectAccessControls.patch
+    , module Network.Google.API.Storage.ObjectAccessControls.Patch
+
+    -- ** storage.objectAccessControls.update
+    , module Network.Google.API.Storage.ObjectAccessControls.Update
+
+    -- ** storage.objects.compose
+    , module Network.Google.API.Storage.Objects.Compose
+
+    -- ** storage.objects.copy
+    , module Network.Google.API.Storage.Objects.Copy
+
+    -- ** storage.objects.delete
+    , module Network.Google.API.Storage.Objects.Delete
+
+    -- ** storage.objects.get
+    , module Network.Google.API.Storage.Objects.Get
+
+    -- ** storage.objects.insert
+    , module Network.Google.API.Storage.Objects.Insert
+
+    -- ** storage.objects.list
+    , module Network.Google.API.Storage.Objects.List
+
+    -- ** storage.objects.patch
+    , module Network.Google.API.Storage.Objects.Patch
+
+    -- ** storage.objects.update
+    , module Network.Google.API.Storage.Objects.Update
+
+    -- ** storage.objects.watchAll
+    , module Network.Google.API.Storage.Objects.WatchAll
 
     -- * Types
 
-    -- ** Bucket
-    , Bucket
-    , bucket
-    , bucEtag
-    , bucLocation
-    , bucKind
-    , bucWebsite
-    , bucLifecycle
-    , bucOwner
-    , bucSelfLink
-    , bucName
-    , bucStorageClass
-    , bucVersioning
-    , bucCors
-    , bucTimeCreated
-    , bucId
-    , bucDefaultObjectAcl
-    , bucMetageneration
-    , bucLogging
-    , bucAcl
+    -- ** ComposeRequestItemSourceObjects
+    , ComposeRequestItemSourceObjects
+    , composeRequestItemSourceObjects
+    , crisoName
+    , crisoObjectPreconditions
+    , crisoGeneration
+
+    -- ** ObjectOwner
+    , ObjectOwner
+    , objectOwner
+    , ooEntity
+    , ooEntityId
+
+    -- ** Alt
+    , Alt (..)
 
     -- ** BucketAccessControl
     , BucketAccessControl
@@ -97,25 +158,6 @@ module Network.Google.Storage
     , bacEntity
     , bacEntityId
 
-    -- ** BucketAccessControls
-    , BucketAccessControls
-    , bucketAccessControls
-    , bKind
-    , bItems
-
-    -- ** BucketActionItemRuleLifecycle
-    , BucketActionItemRuleLifecycle
-    , bucketActionItemRuleLifecycle
-    , bairlType
-
-    -- ** BucketConditionItemRuleLifecycle
-    , BucketConditionItemRuleLifecycle
-    , bucketConditionItemRuleLifecycle
-    , bcirlAge
-    , bcirlIsLive
-    , bcirlNumNewerVersions
-    , bcirlCreatedBefore
-
     -- ** BucketItemCors
     , BucketItemCors
     , bucketItemCors
@@ -123,84 +165,6 @@ module Network.Google.Storage
     , bicOrigin
     , bicResponseHeader
     , bicMethod
-
-    -- ** BucketItemRuleLifecycle
-    , BucketItemRuleLifecycle
-    , bucketItemRuleLifecycle
-    , birlAction
-    , birlCondition
-
-    -- ** BucketLifecycle
-    , BucketLifecycle
-    , bucketLifecycle
-    , blRule
-
-    -- ** BucketLogging
-    , BucketLogging
-    , bucketLogging
-    , blLogBucket
-    , blLogObjectPrefix
-
-    -- ** BucketOwner
-    , BucketOwner
-    , bucketOwner
-    , boEntity
-    , boEntityId
-
-    -- ** BucketVersioning
-    , BucketVersioning
-    , bucketVersioning
-    , bvEnabled
-
-    -- ** BucketWebsite
-    , BucketWebsite
-    , bucketWebsite
-    , bwMainPageSuffix
-    , bwNotFoundPage
-
-    -- ** Buckets
-    , Buckets
-    , buckets
-    , bbNextPageToken
-    , bbKind
-    , bbItems
-
-    -- ** Channel
-    , Channel
-    , channel
-    , cResourceUri
-    , cResourceId
-    , cKind
-    , cExpiration
-    , cToken
-    , cAddress
-    , cPayload
-    , cParams
-    , cId
-    , cType
-
-    -- ** ChannelParams
-    , ChannelParams
-    , channelParams
-
-    -- ** ComposeRequest
-    , ComposeRequest
-    , composeRequest
-    , crDestination
-    , crKind
-    , crSourceObjects
-
-    -- ** ComposeRequestItemSourceObjects
-    , ComposeRequestItemSourceObjects
-    , composeRequestItemSourceObjects
-    , crisoName
-    , crisoObjectPreconditions
-    , crisoGeneration
-
-    -- ** ComposeRequestObjectPreconditionsItemSourceObjects
-    , ComposeRequestObjectPreconditionsItemSourceObjects
-    , composeRequestObjectPreconditionsItemSourceObjects
-    , cropisoIfGenerationMatch
 
     -- ** Object
     , Object
@@ -230,6 +194,147 @@ module Network.Google.Storage
     , oMd5Hash
     , oContentType
 
+    -- ** ObjectAccessControls
+    , ObjectAccessControls
+    , objectAccessControls
+    , oacKind
+    , oacItems
+
+    -- ** ObjectsInsert'Projection
+    , ObjectsInsert'Projection (..)
+
+    -- ** BucketsInsert'Projection
+    , BucketsInsert'Projection (..)
+
+    -- ** BucketConditionItemRuleLifecycle
+    , BucketConditionItemRuleLifecycle
+    , bucketConditionItemRuleLifecycle
+    , bcirlAge
+    , bcirlIsLive
+    , bcirlNumNewerVersions
+    , bcirlCreatedBefore
+
+    -- ** BucketLifecycle
+    , BucketLifecycle
+    , bucketLifecycle
+    , blRule
+
+    -- ** BucketActionItemRuleLifecycle
+    , BucketActionItemRuleLifecycle
+    , bucketActionItemRuleLifecycle
+    , bairlType
+
+    -- ** BucketAccessControls
+    , BucketAccessControls
+    , bucketAccessControls
+    , bKind
+    , bItems
+
+    -- ** Bucket
+    , Bucket
+    , bucket
+    , bucEtag
+    , bucLocation
+    , bucKind
+    , bucWebsite
+    , bucLifecycle
+    , bucOwner
+    , bucSelfLink
+    , bucName
+    , bucStorageClass
+    , bucVersioning
+    , bucCors
+    , bucTimeCreated
+    , bucId
+    , bucDefaultObjectAcl
+    , bucMetageneration
+    , bucLogging
+    , bucAcl
+
+    -- ** Objects
+    , Objects
+    , objects
+    , objNextPageToken
+    , objKind
+    , objItems
+    , objPrefixes
+
+    -- ** BucketLogging
+    , BucketLogging
+    , bucketLogging
+    , blLogBucket
+    , blLogObjectPrefix
+
+    -- ** ChannelParams
+    , ChannelParams
+    , channelParams
+
+    -- ** BucketOwner
+    , BucketOwner
+    , bucketOwner
+    , boEntity
+    , boEntityId
+
+    -- ** ObjectsWatchAll'Projection
+    , ObjectsWatchAll'Projection (..)
+
+    -- ** BucketVersioning
+    , BucketVersioning
+    , bucketVersioning
+    , bvEnabled
+
+    -- ** BucketsGet'Projection
+    , BucketsGet'Projection (..)
+
+    -- ** ObjectsCopy'Projection
+    , ObjectsCopy'Projection (..)
+
+    -- ** BucketsPatch'Projection
+    , BucketsPatch'Projection (..)
+
+    -- ** Buckets
+    , Buckets
+    , buckets
+    , bbNextPageToken
+    , bbKind
+    , bbItems
+
+    -- ** ObjectsList'Projection
+    , ObjectsList'Projection (..)
+
+    -- ** BucketsUpdate'Projection
+    , BucketsUpdate'Projection (..)
+
+    -- ** BucketItemRuleLifecycle
+    , BucketItemRuleLifecycle
+    , bucketItemRuleLifecycle
+    , birlAction
+    , birlCondition
+
+    -- ** Channel
+    , Channel
+    , channel
+    , cResourceUri
+    , cResourceId
+    , cKind
+    , cExpiration
+    , cToken
+    , cAddress
+    , cPayload
+    , cParams
+    , cId
+    , cType
+
+    -- ** ObjectMetadata
+    , ObjectMetadata
+    , objectMetadata
+
+    -- ** ObjectsUpdate'Projection
+    , ObjectsUpdate'Projection (..)
+
+    -- ** BucketsList'Projection
+    , BucketsList'Projection (..)
+
     -- ** ObjectAccessControl
     , ObjectAccessControl
     , objectAccessControl
@@ -246,31 +351,65 @@ module Network.Google.Storage
     , oacaGeneration
     , oacaEntityId
 
-    -- ** ObjectAccessControls
-    , ObjectAccessControls
-    , objectAccessControls
-    , oacKind
-    , oacItems
+    -- ** ComposeRequestObjectPreconditionsItemSourceObjects
+    , ComposeRequestObjectPreconditionsItemSourceObjects
+    , composeRequestObjectPreconditionsItemSourceObjects
+    , cropisoIfGenerationMatch
 
-    -- ** ObjectMetadata
-    , ObjectMetadata
-    , objectMetadata
+    -- ** BucketWebsite
+    , BucketWebsite
+    , bucketWebsite
+    , bwMainPageSuffix
+    , bwNotFoundPage
 
-    -- ** ObjectOwner
-    , ObjectOwner
-    , objectOwner
-    , ooEntity
-    , ooEntityId
+    -- ** ObjectsGet'Projection
+    , ObjectsGet'Projection (..)
 
-    -- ** Objects
-    , Objects
-    , objects
-    , objNextPageToken
-    , objKind
-    , objItems
-    , objPrefixes
+    -- ** ComposeRequest
+    , ComposeRequest
+    , composeRequest
+    , crDestination
+    , crKind
+    , crSourceObjects
+
+    -- ** ObjectsPatch'Projection
+    , ObjectsPatch'Projection (..)
     ) where
 
+import           Network.Google.API.Storage.BucketAccessControls.Delete
+import           Network.Google.API.Storage.BucketAccessControls.Get
+import           Network.Google.API.Storage.BucketAccessControls.Insert
+import           Network.Google.API.Storage.BucketAccessControls.List
+import           Network.Google.API.Storage.BucketAccessControls.Patch
+import           Network.Google.API.Storage.BucketAccessControls.Update
+import           Network.Google.API.Storage.Buckets.Delete
+import           Network.Google.API.Storage.Buckets.Get
+import           Network.Google.API.Storage.Buckets.Insert
+import           Network.Google.API.Storage.Buckets.List
+import           Network.Google.API.Storage.Buckets.Patch
+import           Network.Google.API.Storage.Buckets.Update
+import           Network.Google.API.Storage.Channels.Stop
+import           Network.Google.API.Storage.DefaultObjectAccessControls.Delete
+import           Network.Google.API.Storage.DefaultObjectAccessControls.Get
+import           Network.Google.API.Storage.DefaultObjectAccessControls.Insert
+import           Network.Google.API.Storage.DefaultObjectAccessControls.List
+import           Network.Google.API.Storage.DefaultObjectAccessControls.Patch
+import           Network.Google.API.Storage.DefaultObjectAccessControls.Update
+import           Network.Google.API.Storage.ObjectAccessControls.Delete
+import           Network.Google.API.Storage.ObjectAccessControls.Get
+import           Network.Google.API.Storage.ObjectAccessControls.Insert
+import           Network.Google.API.Storage.ObjectAccessControls.List
+import           Network.Google.API.Storage.ObjectAccessControls.Patch
+import           Network.Google.API.Storage.ObjectAccessControls.Update
+import           Network.Google.API.Storage.Objects.Compose
+import           Network.Google.API.Storage.Objects.Copy
+import           Network.Google.API.Storage.Objects.Delete
+import           Network.Google.API.Storage.Objects.Get
+import           Network.Google.API.Storage.Objects.Insert
+import           Network.Google.API.Storage.Objects.List
+import           Network.Google.API.Storage.Objects.Patch
+import           Network.Google.API.Storage.Objects.Update
+import           Network.Google.API.Storage.Objects.WatchAll
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
@@ -279,720 +418,39 @@ TODO
 -}
 
 type Storage =
-     BucketsAPI :<|> ChannelsAPI :<|>
-       BucketAccessControlsAPI
-       :<|> ObjectsAPI
-       :<|> DefaultObjectAccessControlsAPI
-       :<|> ObjectAccessControlsAPI
+     BucketAccessControlsDeleteAPI :<|> BucketsInsertAPI
+       :<|> ObjectAccessControlsInsertAPI
+       :<|> DefaultObjectAccessControlsUpdateAPI
+       :<|> ObjectsDeleteAPI
+       :<|> ObjectsGetAPI
+       :<|> ObjectsCopyAPI
+       :<|> ObjectAccessControlsGetAPI
+       :<|> BucketsGetAPI
+       :<|> ObjectsWatchAllAPI
+       :<|> DefaultObjectAccessControlsListAPI
+       :<|> ObjectsPatchAPI
+       :<|> DefaultObjectAccessControlsGetAPI
+       :<|> BucketAccessControlsUpdateAPI
+       :<|> BucketAccessControlsInsertAPI
+       :<|> DefaultObjectAccessControlsPatchAPI
+       :<|> BucketsDeleteAPI
+       :<|> ObjectAccessControlsDeleteAPI
+       :<|> ObjectsListAPI
+       :<|> ObjectsUpdateAPI
+       :<|> BucketsUpdateAPI
+       :<|> BucketAccessControlsListAPI
+       :<|> ObjectAccessControlsUpdateAPI
+       :<|> BucketAccessControlsGetAPI
+       :<|> DefaultObjectAccessControlsInsertAPI
+       :<|> BucketsListAPI
+       :<|> ObjectAccessControlsListAPI
+       :<|> ChannelsStopAPI
+       :<|> ObjectsComposeAPI
+       :<|> BucketAccessControlsPatchAPI
+       :<|> ObjectsInsertAPI
+       :<|> DefaultObjectAccessControlsDeleteAPI
+       :<|> BucketsPatchAPI
+       :<|> ObjectAccessControlsPatchAPI
 
-type BucketsAPI =
-     BucketsInsert :<|> BucketsList :<|> BucketsPatch :<|>
-       BucketsGet
-       :<|> BucketsDelete
-       :<|> BucketsUpdate
-
--- | Creates a new bucket.
-type BucketsInsert =
-     "storage" :>
-       "v1beta2" :>
-         "b" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "project" Text :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "projection" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] Bucket
-
--- | Retrieves a list of buckets for a given project.
-type BucketsList =
-     "storage" :>
-       "v1beta2" :>
-         "b" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "project" Text :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "projection" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Get '[JSON] Buckets
-
--- | Updates a bucket. This method supports patch semantics.
-type BucketsPatch =
-     "storage" :>
-       "v1beta2" :>
-         "b" :>
-           Capture "bucket" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "ifMetagenerationMatch" Word64 :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "ifMetagenerationNotMatch" Word64 :>
-                         QueryParam "projection" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Patch '[JSON] Bucket
-
--- | Returns metadata for the specified bucket.
-type BucketsGet =
-     "storage" :>
-       "v1beta2" :>
-         "b" :>
-           Capture "bucket" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "ifMetagenerationMatch" Word64 :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "ifMetagenerationNotMatch" Word64 :>
-                         QueryParam "projection" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Get '[JSON] Bucket
-
--- | Permanently deletes an empty bucket.
-type BucketsDelete =
-     "storage" :>
-       "v1beta2" :>
-         "b" :>
-           Capture "bucket" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "ifMetagenerationMatch" Word64 :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "ifMetagenerationNotMatch" Word64 :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Updates a bucket.
-type BucketsUpdate =
-     "storage" :>
-       "v1beta2" :>
-         "b" :>
-           Capture "bucket" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "ifMetagenerationMatch" Word64 :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "ifMetagenerationNotMatch" Word64 :>
-                         QueryParam "projection" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Put '[JSON] Bucket
-
-type ChannelsAPI = ChannelsStop
-
--- | Stop watching resources through this channel
-type ChannelsStop =
-     "storage" :>
-       "v1beta2" :>
-         "channels" :>
-           "stop" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Post '[JSON] ()
-
-type BucketAccessControlsAPI =
-     BucketAccessControlsInsert :<|>
-       BucketAccessControlsList
-       :<|> BucketAccessControlsPatch
-       :<|> BucketAccessControlsGet
-       :<|> BucketAccessControlsDelete
-       :<|> BucketAccessControlsUpdate
-
--- | Creates a new ACL entry on the specified bucket.
-type BucketAccessControlsInsert =
-     "storage" :>
-       "v1beta2" :>
-         "b" :>
-           Capture "bucket" Text :>
-             "acl" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Post '[JSON] BucketAccessControl
-
--- | Retrieves ACL entries on the specified bucket.
-type BucketAccessControlsList =
-     "storage" :>
-       "v1beta2" :>
-         "b" :>
-           Capture "bucket" Text :>
-             "acl" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Get '[JSON] BucketAccessControls
-
--- | Updates an ACL entry on the specified bucket. This method supports patch
--- semantics.
-type BucketAccessControlsPatch =
-     "storage" :>
-       "v1beta2" :>
-         "b" :>
-           Capture "bucket" Text :>
-             "acl" :>
-               Capture "entity" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Patch '[JSON] BucketAccessControl
-
--- | Returns the ACL entry for the specified entity on the specified bucket.
-type BucketAccessControlsGet =
-     "storage" :>
-       "v1beta2" :>
-         "b" :>
-           Capture "bucket" Text :>
-             "acl" :>
-               Capture "entity" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Get '[JSON] BucketAccessControl
-
--- | Permanently deletes the ACL entry for the specified entity on the
--- specified bucket.
-type BucketAccessControlsDelete =
-     "storage" :>
-       "v1beta2" :>
-         "b" :>
-           Capture "bucket" Text :>
-             "acl" :>
-               Capture "entity" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Updates an ACL entry on the specified bucket.
-type BucketAccessControlsUpdate =
-     "storage" :>
-       "v1beta2" :>
-         "b" :>
-           Capture "bucket" Text :>
-             "acl" :>
-               Capture "entity" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Put '[JSON] BucketAccessControl
-
-type ObjectsAPI =
-     ObjectsInsert :<|> ObjectsList :<|> ObjectsCopy :<|>
-       ObjectsWatchAll
-       :<|> ObjectsPatch
-       :<|> ObjectsGet
-       :<|> ObjectsCompose
-       :<|> ObjectsDelete
-       :<|> ObjectsUpdate
-
--- | Stores new data blobs and associated metadata.
-type ObjectsInsert =
-     "storage" :>
-       "v1beta2" :>
-         "b" :>
-           Capture "bucket" Text :>
-             "o" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "ifMetagenerationMatch" Word64 :>
-                   QueryParam "ifGenerationNotMatch" Word64 :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "ifGenerationMatch" Word64 :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "name" Text :>
-                               QueryParam "ifMetagenerationNotMatch" Word64 :>
-                                 QueryParam "projection" Text :>
-                                   QueryParam "oauth_token" Text :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "alt" Text :>
-                                         Post '[JSON] Object
-
--- | Retrieves a list of objects matching the criteria.
-type ObjectsList =
-     "storage" :>
-       "v1beta2" :>
-         "b" :>
-           Capture "bucket" Text :>
-             "o" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "prefix" Text :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "versions" Bool :>
-                         QueryParam "key" Text :>
-                           QueryParam "projection" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "delimiter" Text :>
-                                   QueryParam "maxResults" Word32 :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "alt" Text :>
-                                         Get '[JSON] Objects
-
--- | Copies an object to a destination in the same location. Optionally
--- overrides metadata.
-type ObjectsCopy =
-     "storage" :>
-       "v1beta2" :>
-         "b" :>
-           Capture "sourceBucket" Text :>
-             "o" :>
-               Capture "sourceObject" Text :>
-                 "copyTo" :>
-                   "b" :>
-                     Capture "destinationBucket" Text :>
-                       "o" :>
-                         Capture "destinationObject" Text :>
-                           QueryParam "quotaUser" Text :>
-                             QueryParam "ifSourceGenerationMatch" Word64 :>
-                               QueryParam "ifMetagenerationMatch" Word64 :>
-                                 QueryParam "ifGenerationNotMatch" Word64 :>
-                                   QueryParam "prettyPrint" Bool :>
-                                     QueryParam "ifSourceMetagenerationNotMatch"
-                                       Word64
-                                       :>
-                                       QueryParam "ifSourceMetagenerationMatch"
-                                         Word64
-                                         :>
-                                         QueryParam "ifGenerationMatch" Word64
-                                           :>
-                                           QueryParam "userIp" Text :>
-                                             QueryParam "key" Text :>
-                                               QueryParam
-                                                 "ifMetagenerationNotMatch"
-                                                 Word64
-                                                 :>
-                                                 QueryParam
-                                                   "ifSourceGenerationNotMatch"
-                                                   Word64
-                                                   :>
-                                                   QueryParam "projection" Text
-                                                     :>
-                                                     QueryParam "oauth_token"
-                                                       Text
-                                                       :>
-                                                       QueryParam
-                                                         "sourceGeneration"
-                                                         Word64
-                                                         :>
-                                                         QueryParam "fields"
-                                                           Text
-                                                           :>
-                                                           QueryParam "alt" Text
-                                                             :>
-                                                             Post '[JSON] Object
-
--- | Watch for changes on all objects in a bucket.
-type ObjectsWatchAll =
-     "storage" :>
-       "v1beta2" :>
-         "b" :>
-           Capture "bucket" Text :>
-             "o" :>
-               "watch" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "prefix" Text :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "versions" Bool :>
-                           QueryParam "key" Text :>
-                             QueryParam "projection" Text :>
-                               QueryParam "pageToken" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "delimiter" Text :>
-                                     QueryParam "maxResults" Word32 :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "alt" Text :>
-                                           Post '[JSON] Channel
-
--- | Updates a data blob\'s associated metadata. This method supports patch
--- semantics.
-type ObjectsPatch =
-     "storage" :>
-       "v1beta2" :>
-         "b" :>
-           Capture "bucket" Text :>
-             "o" :>
-               Capture "object" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "ifMetagenerationMatch" Word64 :>
-                     QueryParam "ifGenerationNotMatch" Word64 :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "ifGenerationMatch" Word64 :>
-                           QueryParam "userIp" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "ifMetagenerationNotMatch" Word64 :>
-                                 QueryParam "projection" Text :>
-                                   QueryParam "oauth_token" Text :>
-                                     QueryParam "generation" Word64 :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "alt" Text :>
-                                           Patch '[JSON] Object
-
--- | Retrieves objects or their associated metadata.
-type ObjectsGet =
-     "storage" :>
-       "v1beta2" :>
-         "b" :>
-           Capture "bucket" Text :>
-             "o" :>
-               Capture "object" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "ifMetagenerationMatch" Word64 :>
-                     QueryParam "ifGenerationNotMatch" Word64 :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "ifGenerationMatch" Word64 :>
-                           QueryParam "userIp" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "ifMetagenerationNotMatch" Word64 :>
-                                 QueryParam "projection" Text :>
-                                   QueryParam "oauth_token" Text :>
-                                     QueryParam "generation" Word64 :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "alt" Text :>
-                                           Get '[JSON] Object
-
--- | Concatenates a list of existing objects into a new object in the same
--- bucket.
-type ObjectsCompose =
-     "storage" :>
-       "v1beta2" :>
-         "b" :>
-           Capture "destinationBucket" Text :>
-             "o" :>
-               Capture "destinationObject" Text :>
-                 "compose" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "ifMetagenerationMatch" Word64 :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "ifGenerationMatch" Word64 :>
-                           QueryParam "userIp" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :> Post '[JSON] Object
-
--- | Deletes data blobs and associated metadata. Deletions are permanent if
--- versioning is not enabled for the bucket, or if the generation parameter
--- is used.
-type ObjectsDelete =
-     "storage" :>
-       "v1beta2" :>
-         "b" :>
-           Capture "bucket" Text :>
-             "o" :>
-               Capture "object" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "ifMetagenerationMatch" Word64 :>
-                     QueryParam "ifGenerationNotMatch" Word64 :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "ifGenerationMatch" Word64 :>
-                           QueryParam "userIp" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "ifMetagenerationNotMatch" Word64 :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "generation" Word64 :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "alt" Text :>
-                                         Delete '[JSON] ()
-
--- | Updates a data blob\'s associated metadata.
-type ObjectsUpdate =
-     "storage" :>
-       "v1beta2" :>
-         "b" :>
-           Capture "bucket" Text :>
-             "o" :>
-               Capture "object" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "ifMetagenerationMatch" Word64 :>
-                     QueryParam "ifGenerationNotMatch" Word64 :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "ifGenerationMatch" Word64 :>
-                           QueryParam "userIp" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "ifMetagenerationNotMatch" Word64 :>
-                                 QueryParam "projection" Text :>
-                                   QueryParam "oauth_token" Text :>
-                                     QueryParam "generation" Word64 :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "alt" Text :>
-                                           Put '[JSON] Object
-
-type DefaultObjectAccessControlsAPI =
-     DefaultObjectAccessControlsInsert :<|>
-       DefaultObjectAccessControlsList
-       :<|> DefaultObjectAccessControlsPatch
-       :<|> DefaultObjectAccessControlsGet
-       :<|> DefaultObjectAccessControlsDelete
-       :<|> DefaultObjectAccessControlsUpdate
-
--- | Creates a new default object ACL entry on the specified bucket.
-type DefaultObjectAccessControlsInsert =
-     "storage" :>
-       "v1beta2" :>
-         "b" :>
-           Capture "bucket" Text :>
-             "defaultObjectAcl" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Post '[JSON] ObjectAccessControl
-
--- | Retrieves default object ACL entries on the specified bucket.
-type DefaultObjectAccessControlsList =
-     "storage" :>
-       "v1beta2" :>
-         "b" :>
-           Capture "bucket" Text :>
-             "defaultObjectAcl" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "ifMetagenerationMatch" Int64 :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "ifMetagenerationNotMatch" Int64 :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Get '[JSON] ObjectAccessControls
-
--- | Updates a default object ACL entry on the specified bucket. This method
--- supports patch semantics.
-type DefaultObjectAccessControlsPatch =
-     "storage" :>
-       "v1beta2" :>
-         "b" :>
-           Capture "bucket" Text :>
-             "defaultObjectAcl" :>
-               Capture "entity" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Patch '[JSON] ObjectAccessControl
-
--- | Returns the default object ACL entry for the specified entity on the
--- specified bucket.
-type DefaultObjectAccessControlsGet =
-     "storage" :>
-       "v1beta2" :>
-         "b" :>
-           Capture "bucket" Text :>
-             "defaultObjectAcl" :>
-               Capture "entity" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Get '[JSON] ObjectAccessControl
-
--- | Permanently deletes the default object ACL entry for the specified
--- entity on the specified bucket.
-type DefaultObjectAccessControlsDelete =
-     "storage" :>
-       "v1beta2" :>
-         "b" :>
-           Capture "bucket" Text :>
-             "defaultObjectAcl" :>
-               Capture "entity" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Updates a default object ACL entry on the specified bucket.
-type DefaultObjectAccessControlsUpdate =
-     "storage" :>
-       "v1beta2" :>
-         "b" :>
-           Capture "bucket" Text :>
-             "defaultObjectAcl" :>
-               Capture "entity" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Put '[JSON] ObjectAccessControl
-
-type ObjectAccessControlsAPI =
-     ObjectAccessControlsInsert :<|>
-       ObjectAccessControlsList
-       :<|> ObjectAccessControlsPatch
-       :<|> ObjectAccessControlsGet
-       :<|> ObjectAccessControlsDelete
-       :<|> ObjectAccessControlsUpdate
-
--- | Creates a new ACL entry on the specified object.
-type ObjectAccessControlsInsert =
-     "storage" :>
-       "v1beta2" :>
-         "b" :>
-           Capture "bucket" Text :>
-             "o" :>
-               Capture "object" Text :>
-                 "acl" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "generation" Word64 :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   Post '[JSON] ObjectAccessControl
-
--- | Retrieves ACL entries on the specified object.
-type ObjectAccessControlsList =
-     "storage" :>
-       "v1beta2" :>
-         "b" :>
-           Capture "bucket" Text :>
-             "o" :>
-               Capture "object" Text :>
-                 "acl" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "generation" Word64 :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   Get '[JSON] ObjectAccessControls
-
--- | Updates an ACL entry on the specified object. This method supports patch
--- semantics.
-type ObjectAccessControlsPatch =
-     "storage" :>
-       "v1beta2" :>
-         "b" :>
-           Capture "bucket" Text :>
-             "o" :>
-               Capture "object" Text :>
-                 "acl" :>
-                   Capture "entity" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "generation" Word64 :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Patch '[JSON] ObjectAccessControl
-
--- | Returns the ACL entry for the specified entity on the specified object.
-type ObjectAccessControlsGet =
-     "storage" :>
-       "v1beta2" :>
-         "b" :>
-           Capture "bucket" Text :>
-             "o" :>
-               Capture "object" Text :>
-                 "acl" :>
-                   Capture "entity" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "generation" Word64 :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Get '[JSON] ObjectAccessControl
-
--- | Permanently deletes the ACL entry for the specified entity on the
--- specified object.
-type ObjectAccessControlsDelete =
-     "storage" :>
-       "v1beta2" :>
-         "b" :>
-           Capture "bucket" Text :>
-             "o" :>
-               Capture "object" Text :>
-                 "acl" :>
-                   Capture "entity" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "generation" Word64 :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Updates an ACL entry on the specified object.
-type ObjectAccessControlsUpdate =
-     "storage" :>
-       "v1beta2" :>
-         "b" :>
-           Capture "bucket" Text :>
-             "o" :>
-               Capture "object" Text :>
-                 "acl" :>
-                   Capture "entity" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "generation" Word64 :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Put '[JSON] ObjectAccessControl
+storage :: Proxy Storage
+storage = Proxy

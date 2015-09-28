@@ -14,18 +14,17 @@
 --
 module Network.Google.SiteVerification.Types
     (
+    -- * Service URL
+      siteVerificationURL
 
     -- * SiteVerificationWebResourceGettokenRequest
-      SiteVerificationWebResourceGettokenRequest
+    , SiteVerificationWebResourceGettokenRequest
     , siteVerificationWebResourceGettokenRequest
     , svwrgrSite
     , svwrgrVerificationMethod
 
-    -- * SiteVerificationWebResourceGettokenRequestSite
-    , SiteVerificationWebResourceGettokenRequestSite
-    , siteVerificationWebResourceGettokenRequestSite
-    , svwrgrsIdentifier
-    , svwrgrsType
+    -- * Alt
+    , Alt (..)
 
     -- * SiteVerificationWebResourceGettokenResponse
     , SiteVerificationWebResourceGettokenResponse
@@ -33,10 +32,11 @@ module Network.Google.SiteVerification.Types
     , svwrgrToken
     , svwrgrMethod
 
-    -- * SiteVerificationWebResourceListResponse
-    , SiteVerificationWebResourceListResponse
-    , siteVerificationWebResourceListResponse
-    , svwrlrItems
+    -- * SiteVerificationWebResourceGettokenRequestSite
+    , SiteVerificationWebResourceGettokenRequestSite
+    , siteVerificationWebResourceGettokenRequestSite
+    , svwrgrsIdentifier
+    , svwrgrsType
 
     -- * SiteVerificationWebResourceResource
     , SiteVerificationWebResourceResource
@@ -50,8 +50,20 @@ module Network.Google.SiteVerification.Types
     , siteVerificationWebResourceResourceSite
     , svwrrsIdentifier
     , svwrrsType
+
+    -- * SiteVerificationWebResourceListResponse
+    , SiteVerificationWebResourceListResponse
+    , siteVerificationWebResourceListResponse
+    , svwrlrItems
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.SiteVerification.Types.Product
 import           Network.Google.SiteVerification.Types.Sum
+
+-- | URL referring to version 'v1' of the Google Site Verification API.
+siteVerificationURL :: BaseUrl
+siteVerificationURL
+  = BaseUrl Https
+      "https://www.googleapis.com/siteVerification/v1/"
+      443

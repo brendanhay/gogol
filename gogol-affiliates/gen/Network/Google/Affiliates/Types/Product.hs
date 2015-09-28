@@ -18,6 +18,221 @@ module Network.Google.Affiliates.Types.Product where
 import           Network.Google.Affiliates.Types.Sum
 import           Network.Google.Prelude
 
+--
+-- /See:/ 'events' smart constructor.
+data Events = Events
+    { _eNextPageToken :: !(Maybe Text)
+    , _eKind          :: !Text
+    , _eItems         :: !(Maybe [Maybe Event])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Events' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eNextPageToken'
+--
+-- * 'eKind'
+--
+-- * 'eItems'
+events
+    :: Events
+events =
+    Events
+    { _eNextPageToken = Nothing
+    , _eKind = "gan#events"
+    , _eItems = Nothing
+    }
+
+-- | The \'pageToken\' to pass to the next request to get the next page, if
+-- there are more to retrieve.
+eNextPageToken :: Lens' Events (Maybe Text)
+eNextPageToken
+  = lens _eNextPageToken
+      (\ s a -> s{_eNextPageToken = a})
+
+-- | The kind for a page of events.
+eKind :: Lens' Events Text
+eKind = lens _eKind (\ s a -> s{_eKind = a})
+
+-- | The event list.
+eItems :: Lens' Events [Maybe Event]
+eItems
+  = lens _eItems (\ s a -> s{_eItems = a}) . _Default .
+      _Coerce
+
+instance FromJSON Events where
+        parseJSON
+          = withObject "Events"
+              (\ o ->
+                 Events <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "gan#events")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON Events where
+        toJSON Events{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _eNextPageToken,
+                  Just ("kind" .= _eKind), ("items" .=) <$> _eItems])
+
+--
+-- /See:/ 'ccOfferItemRewards' smart constructor.
+data CcOfferItemRewards = CcOfferItemRewards
+    { _coirAmount            :: !(Maybe Double)
+    , _coirExpirationMonths  :: !(Maybe Double)
+    , _coirCategory          :: !(Maybe Text)
+    , _coirAdditionalDetails :: !(Maybe Text)
+    , _coirMaxRewardTier     :: !(Maybe Double)
+    , _coirMinRewardTier     :: !(Maybe Double)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CcOfferItemRewards' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'coirAmount'
+--
+-- * 'coirExpirationMonths'
+--
+-- * 'coirCategory'
+--
+-- * 'coirAdditionalDetails'
+--
+-- * 'coirMaxRewardTier'
+--
+-- * 'coirMinRewardTier'
+ccOfferItemRewards
+    :: CcOfferItemRewards
+ccOfferItemRewards =
+    CcOfferItemRewards
+    { _coirAmount = Nothing
+    , _coirExpirationMonths = Nothing
+    , _coirCategory = Nothing
+    , _coirAdditionalDetails = Nothing
+    , _coirMaxRewardTier = Nothing
+    , _coirMinRewardTier = Nothing
+    }
+
+-- | The number of units rewarded per purchase dollar.
+coirAmount :: Lens' CcOfferItemRewards (Maybe Double)
+coirAmount
+  = lens _coirAmount (\ s a -> s{_coirAmount = a})
+
+-- | How long rewards granted by this rule last.
+coirExpirationMonths :: Lens' CcOfferItemRewards (Maybe Double)
+coirExpirationMonths
+  = lens _coirExpirationMonths
+      (\ s a -> s{_coirExpirationMonths = a})
+
+-- | The kind of purchases covered by this rule.
+coirCategory :: Lens' CcOfferItemRewards (Maybe Text)
+coirCategory
+  = lens _coirCategory (\ s a -> s{_coirCategory = a})
+
+-- | Other limits, for example, if this rule only applies during an
+-- introductory period.
+coirAdditionalDetails :: Lens' CcOfferItemRewards (Maybe Text)
+coirAdditionalDetails
+  = lens _coirAdditionalDetails
+      (\ s a -> s{_coirAdditionalDetails = a})
+
+-- | The maximum purchase amount in the given category for this rule to
+-- apply.
+coirMaxRewardTier :: Lens' CcOfferItemRewards (Maybe Double)
+coirMaxRewardTier
+  = lens _coirMaxRewardTier
+      (\ s a -> s{_coirMaxRewardTier = a})
+
+-- | The minimum purchase amount in the given category before this rule
+-- applies.
+coirMinRewardTier :: Lens' CcOfferItemRewards (Maybe Double)
+coirMinRewardTier
+  = lens _coirMinRewardTier
+      (\ s a -> s{_coirMinRewardTier = a})
+
+instance FromJSON CcOfferItemRewards where
+        parseJSON
+          = withObject "CcOfferItemRewards"
+              (\ o ->
+                 CcOfferItemRewards <$>
+                   (o .:? "amount") <*> (o .:? "expirationMonths") <*>
+                     (o .:? "category")
+                     <*> (o .:? "additionalDetails")
+                     <*> (o .:? "maxRewardTier")
+                     <*> (o .:? "minRewardTier"))
+
+instance ToJSON CcOfferItemRewards where
+        toJSON CcOfferItemRewards{..}
+          = object
+              (catMaybes
+                 [("amount" .=) <$> _coirAmount,
+                  ("expirationMonths" .=) <$> _coirExpirationMonths,
+                  ("category" .=) <$> _coirCategory,
+                  ("additionalDetails" .=) <$> _coirAdditionalDetails,
+                  ("maxRewardTier" .=) <$> _coirMaxRewardTier,
+                  ("minRewardTier" .=) <$> _coirMinRewardTier])
+
+--
+-- /See:/ 'publishers' smart constructor.
+data Publishers = Publishers
+    { _pNextPageToken :: !(Maybe Text)
+    , _pKind          :: !Text
+    , _pItems         :: !(Maybe [Maybe Publisher])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Publishers' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pNextPageToken'
+--
+-- * 'pKind'
+--
+-- * 'pItems'
+publishers
+    :: Publishers
+publishers =
+    Publishers
+    { _pNextPageToken = Nothing
+    , _pKind = "gan#publishers"
+    , _pItems = Nothing
+    }
+
+-- | The \'pageToken\' to pass to the next request to get the next page, if
+-- there are more to retrieve.
+pNextPageToken :: Lens' Publishers (Maybe Text)
+pNextPageToken
+  = lens _pNextPageToken
+      (\ s a -> s{_pNextPageToken = a})
+
+-- | The kind for a page of entities.
+pKind :: Lens' Publishers Text
+pKind = lens _pKind (\ s a -> s{_pKind = a})
+
+-- | The entity list.
+pItems :: Lens' Publishers [Maybe Publisher]
+pItems
+  = lens _pItems (\ s a -> s{_pItems = a}) . _Default .
+      _Coerce
+
+instance FromJSON Publishers where
+        parseJSON
+          = withObject "Publishers"
+              (\ o ->
+                 Publishers <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "gan#publishers")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON Publishers where
+        toJSON Publishers{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _pNextPageToken,
+                  Just ("kind" .= _pKind), ("items" .=) <$> _pItems])
+
 -- | An AdvertiserResource.
 --
 -- /See:/ 'advertiser' smart constructor.
@@ -291,67 +506,6 @@ instance ToJSON Advertiser where
                   ("epcNinetyDayAverage" .=) <$> _aEpcNinetyDayAverage,
                   ("commissionDuration" .=) <$> _aCommissionDuration,
                   ("description" .=) <$> _aDescription])
-
---
--- /See:/ 'advertisers' smart constructor.
-data Advertisers = Advertisers
-    { _advNextPageToken :: !(Maybe Text)
-    , _advKind          :: !Text
-    , _advItems         :: !(Maybe [Maybe Advertiser])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Advertisers' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'advNextPageToken'
---
--- * 'advKind'
---
--- * 'advItems'
-advertisers
-    :: Advertisers
-advertisers =
-    Advertisers
-    { _advNextPageToken = Nothing
-    , _advKind = "gan#advertisers"
-    , _advItems = Nothing
-    }
-
--- | The \'pageToken\' to pass to the next request to get the next page, if
--- there are more to retrieve.
-advNextPageToken :: Lens' Advertisers (Maybe Text)
-advNextPageToken
-  = lens _advNextPageToken
-      (\ s a -> s{_advNextPageToken = a})
-
--- | The kind for a page of advertisers.
-advKind :: Lens' Advertisers Text
-advKind = lens _advKind (\ s a -> s{_advKind = a})
-
--- | The advertiser list.
-advItems :: Lens' Advertisers [Maybe Advertiser]
-advItems
-  = lens _advItems (\ s a -> s{_advItems = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON Advertisers where
-        parseJSON
-          = withObject "Advertisers"
-              (\ o ->
-                 Advertisers <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!= "gan#advertisers")
-                     <*> (o .:? "items" .!= mempty))
-
-instance ToJSON Advertisers where
-        toJSON Advertisers{..}
-          = object
-              (catMaybes
-                 [("nextPageToken" .=) <$> _advNextPageToken,
-                  Just ("kind" .= _advKind),
-                  ("items" .=) <$> _advItems])
 
 -- | A credit card offer. There are many possible result fields. We provide
 -- two different views of the data, or \"projections.\" The \"full\"
@@ -1193,53 +1347,6 @@ instance ToJSON CcOffer where
                   ("purchaseRateType" .=) <$> _coPurchaseRateType])
 
 --
--- /See:/ 'ccOfferItemBonusRewards' smart constructor.
-data CcOfferItemBonusRewards = CcOfferItemBonusRewards
-    { _coibrAmount  :: !(Maybe Double)
-    , _coibrDetails :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'CcOfferItemBonusRewards' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'coibrAmount'
---
--- * 'coibrDetails'
-ccOfferItemBonusRewards
-    :: CcOfferItemBonusRewards
-ccOfferItemBonusRewards =
-    CcOfferItemBonusRewards
-    { _coibrAmount = Nothing
-    , _coibrDetails = Nothing
-    }
-
--- | How many units of reward will be granted.
-coibrAmount :: Lens' CcOfferItemBonusRewards (Maybe Double)
-coibrAmount
-  = lens _coibrAmount (\ s a -> s{_coibrAmount = a})
-
--- | The circumstances under which this rule applies, for example, booking a
--- flight via Orbitz.
-coibrDetails :: Lens' CcOfferItemBonusRewards (Maybe Text)
-coibrDetails
-  = lens _coibrDetails (\ s a -> s{_coibrDetails = a})
-
-instance FromJSON CcOfferItemBonusRewards where
-        parseJSON
-          = withObject "CcOfferItemBonusRewards"
-              (\ o ->
-                 CcOfferItemBonusRewards <$>
-                   (o .:? "amount") <*> (o .:? "details"))
-
-instance ToJSON CcOfferItemBonusRewards where
-        toJSON CcOfferItemBonusRewards{..}
-          = object
-              (catMaybes
-                 [("amount" .=) <$> _coibrAmount,
-                  ("details" .=) <$> _coibrDetails])
-
---
 -- /See:/ 'ccOfferItemDefaultFees' smart constructor.
 data CcOfferItemDefaultFees = CcOfferItemDefaultFees
     { _coidfRateType :: !(Maybe Text)
@@ -1312,147 +1419,241 @@ instance ToJSON CcOfferItemDefaultFees where
                   ("maxRate" .=) <$> _coidfMaxRate])
 
 --
--- /See:/ 'ccOfferItemRewards' smart constructor.
-data CcOfferItemRewards = CcOfferItemRewards
-    { _coirAmount            :: !(Maybe Double)
-    , _coirExpirationMonths  :: !(Maybe Double)
-    , _coirCategory          :: !(Maybe Text)
-    , _coirAdditionalDetails :: !(Maybe Text)
-    , _coirMaxRewardTier     :: !(Maybe Double)
-    , _coirMinRewardTier     :: !(Maybe Double)
+-- /See:/ 'links' smart constructor.
+data Links = Links
+    { _lNextPageToken :: !(Maybe Text)
+    , _lKind          :: !Text
+    , _lItems         :: !(Maybe [Maybe Link])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CcOfferItemRewards' with the minimum fields required to make a request.
+-- | Creates a value of 'Links' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'coirAmount'
+-- * 'lNextPageToken'
 --
--- * 'coirExpirationMonths'
+-- * 'lKind'
 --
--- * 'coirCategory'
---
--- * 'coirAdditionalDetails'
---
--- * 'coirMaxRewardTier'
---
--- * 'coirMinRewardTier'
-ccOfferItemRewards
-    :: CcOfferItemRewards
-ccOfferItemRewards =
-    CcOfferItemRewards
-    { _coirAmount = Nothing
-    , _coirExpirationMonths = Nothing
-    , _coirCategory = Nothing
-    , _coirAdditionalDetails = Nothing
-    , _coirMaxRewardTier = Nothing
-    , _coirMinRewardTier = Nothing
+-- * 'lItems'
+links
+    :: Links
+links =
+    Links
+    { _lNextPageToken = Nothing
+    , _lKind = "gan#links"
+    , _lItems = Nothing
     }
 
--- | The number of units rewarded per purchase dollar.
-coirAmount :: Lens' CcOfferItemRewards (Maybe Double)
-coirAmount
-  = lens _coirAmount (\ s a -> s{_coirAmount = a})
+-- | The next page token.
+lNextPageToken :: Lens' Links (Maybe Text)
+lNextPageToken
+  = lens _lNextPageToken
+      (\ s a -> s{_lNextPageToken = a})
 
--- | How long rewards granted by this rule last.
-coirExpirationMonths :: Lens' CcOfferItemRewards (Maybe Double)
-coirExpirationMonths
-  = lens _coirExpirationMonths
-      (\ s a -> s{_coirExpirationMonths = a})
+-- | The kind for a page of links.
+lKind :: Lens' Links Text
+lKind = lens _lKind (\ s a -> s{_lKind = a})
 
--- | The kind of purchases covered by this rule.
-coirCategory :: Lens' CcOfferItemRewards (Maybe Text)
-coirCategory
-  = lens _coirCategory (\ s a -> s{_coirCategory = a})
-
--- | Other limits, for example, if this rule only applies during an
--- introductory period.
-coirAdditionalDetails :: Lens' CcOfferItemRewards (Maybe Text)
-coirAdditionalDetails
-  = lens _coirAdditionalDetails
-      (\ s a -> s{_coirAdditionalDetails = a})
-
--- | The maximum purchase amount in the given category for this rule to
--- apply.
-coirMaxRewardTier :: Lens' CcOfferItemRewards (Maybe Double)
-coirMaxRewardTier
-  = lens _coirMaxRewardTier
-      (\ s a -> s{_coirMaxRewardTier = a})
-
--- | The minimum purchase amount in the given category before this rule
--- applies.
-coirMinRewardTier :: Lens' CcOfferItemRewards (Maybe Double)
-coirMinRewardTier
-  = lens _coirMinRewardTier
-      (\ s a -> s{_coirMinRewardTier = a})
-
-instance FromJSON CcOfferItemRewards where
-        parseJSON
-          = withObject "CcOfferItemRewards"
-              (\ o ->
-                 CcOfferItemRewards <$>
-                   (o .:? "amount") <*> (o .:? "expirationMonths") <*>
-                     (o .:? "category")
-                     <*> (o .:? "additionalDetails")
-                     <*> (o .:? "maxRewardTier")
-                     <*> (o .:? "minRewardTier"))
-
-instance ToJSON CcOfferItemRewards where
-        toJSON CcOfferItemRewards{..}
-          = object
-              (catMaybes
-                 [("amount" .=) <$> _coirAmount,
-                  ("expirationMonths" .=) <$> _coirExpirationMonths,
-                  ("category" .=) <$> _coirCategory,
-                  ("additionalDetails" .=) <$> _coirAdditionalDetails,
-                  ("maxRewardTier" .=) <$> _coirMaxRewardTier,
-                  ("minRewardTier" .=) <$> _coirMinRewardTier])
-
---
--- /See:/ 'ccOffers' smart constructor.
-data CcOffers = CcOffers
-    { _cKind  :: !Text
-    , _cItems :: !(Maybe [Maybe CcOffer])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'CcOffers' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'cKind'
---
--- * 'cItems'
-ccOffers
-    :: CcOffers
-ccOffers =
-    CcOffers
-    { _cKind = "gan#ccOffers"
-    , _cItems = Nothing
-    }
-
--- | The kind for a page of credit card offers.
-cKind :: Lens' CcOffers Text
-cKind = lens _cKind (\ s a -> s{_cKind = a})
-
--- | The credit card offers.
-cItems :: Lens' CcOffers [Maybe CcOffer]
-cItems
-  = lens _cItems (\ s a -> s{_cItems = a}) . _Default .
+-- | The links.
+lItems :: Lens' Links [Maybe Link]
+lItems
+  = lens _lItems (\ s a -> s{_lItems = a}) . _Default .
       _Coerce
 
-instance FromJSON CcOffers where
+instance FromJSON Links where
         parseJSON
-          = withObject "CcOffers"
+          = withObject "Links"
               (\ o ->
-                 CcOffers <$>
-                   (o .:? "kind" .!= "gan#ccOffers") <*>
-                     (o .:? "items" .!= mempty))
+                 Links <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "gan#links")
+                     <*> (o .:? "items" .!= mempty))
 
-instance ToJSON CcOffers where
-        toJSON CcOffers{..}
+instance ToJSON Links where
+        toJSON Links{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _cKind), ("items" .=) <$> _cItems])
+                 [("nextPageToken" .=) <$> _lNextPageToken,
+                  Just ("kind" .= _lKind), ("items" .=) <$> _lItems])
+
+-- | A ReportResource representing a report of a certain type either for an
+-- advertiser or publisher.
+--
+-- /See:/ 'report' smart constructor.
+data Report = Report
+    { _rEndDate          :: !(Maybe Text)
+    , _rTotalsRows       :: !(Maybe [[Either Text Int64]])
+    , _rKind             :: !Text
+    , _rStartDate        :: !(Maybe Text)
+    , _rRows             :: !(Maybe [[Either Text Int64]])
+    , _rMatchingRowCount :: !(Maybe Int64)
+    , _rColumnNames      :: !(Maybe [Text])
+    , _rType             :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Report' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rEndDate'
+--
+-- * 'rTotalsRows'
+--
+-- * 'rKind'
+--
+-- * 'rStartDate'
+--
+-- * 'rRows'
+--
+-- * 'rMatchingRowCount'
+--
+-- * 'rColumnNames'
+--
+-- * 'rType'
+report
+    :: Report
+report =
+    Report
+    { _rEndDate = Nothing
+    , _rTotalsRows = Nothing
+    , _rKind = "gan#report"
+    , _rStartDate = Nothing
+    , _rRows = Nothing
+    , _rMatchingRowCount = Nothing
+    , _rColumnNames = Nothing
+    , _rType = Nothing
+    }
+
+-- | The end of the date range for this report, exclusive.
+rEndDate :: Lens' Report (Maybe Text)
+rEndDate = lens _rEndDate (\ s a -> s{_rEndDate = a})
+
+-- | The totals rows for the report
+rTotalsRows :: Lens' Report [[Either Text Int64]]
+rTotalsRows
+  = lens _rTotalsRows (\ s a -> s{_rTotalsRows = a}) .
+      _Default
+      . _Coerce
+
+-- | The kind for a report.
+rKind :: Lens' Report Text
+rKind = lens _rKind (\ s a -> s{_rKind = a})
+
+-- | The start of the date range for this report, inclusive.
+rStartDate :: Lens' Report (Maybe Text)
+rStartDate
+  = lens _rStartDate (\ s a -> s{_rStartDate = a})
+
+-- | The rows of data for the report
+rRows :: Lens' Report [[Either Text Int64]]
+rRows
+  = lens _rRows (\ s a -> s{_rRows = a}) . _Default .
+      _Coerce
+
+-- | The number of matching rows before paging is applied.
+rMatchingRowCount :: Lens' Report (Maybe Int64)
+rMatchingRowCount
+  = lens _rMatchingRowCount
+      (\ s a -> s{_rMatchingRowCount = a})
+
+-- | The column names for the report
+rColumnNames :: Lens' Report [Text]
+rColumnNames
+  = lens _rColumnNames (\ s a -> s{_rColumnNames = a})
+      . _Default
+      . _Coerce
+
+-- | The report type.
+rType :: Lens' Report (Maybe Text)
+rType = lens _rType (\ s a -> s{_rType = a})
+
+instance FromJSON Report where
+        parseJSON
+          = withObject "Report"
+              (\ o ->
+                 Report <$>
+                   (o .:? "end_date") <*>
+                     (o .:? "totals_rows" .!= mempty)
+                     <*> (o .:? "kind" .!= "gan#report")
+                     <*> (o .:? "start_date")
+                     <*> (o .:? "rows" .!= mempty)
+                     <*> (o .:? "matching_row_count")
+                     <*> (o .:? "column_names" .!= mempty)
+                     <*> (o .:? "type"))
+
+instance ToJSON Report where
+        toJSON Report{..}
+          = object
+              (catMaybes
+                 [("end_date" .=) <$> _rEndDate,
+                  ("totals_rows" .=) <$> _rTotalsRows,
+                  Just ("kind" .= _rKind),
+                  ("start_date" .=) <$> _rStartDate,
+                  ("rows" .=) <$> _rRows,
+                  ("matching_row_count" .=) <$> _rMatchingRowCount,
+                  ("column_names" .=) <$> _rColumnNames,
+                  ("type" .=) <$> _rType])
+
+--
+-- /See:/ 'advertisers' smart constructor.
+data Advertisers = Advertisers
+    { _advNextPageToken :: !(Maybe Text)
+    , _advKind          :: !Text
+    , _advItems         :: !(Maybe [Maybe Advertiser])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Advertisers' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'advNextPageToken'
+--
+-- * 'advKind'
+--
+-- * 'advItems'
+advertisers
+    :: Advertisers
+advertisers =
+    Advertisers
+    { _advNextPageToken = Nothing
+    , _advKind = "gan#advertisers"
+    , _advItems = Nothing
+    }
+
+-- | The \'pageToken\' to pass to the next request to get the next page, if
+-- there are more to retrieve.
+advNextPageToken :: Lens' Advertisers (Maybe Text)
+advNextPageToken
+  = lens _advNextPageToken
+      (\ s a -> s{_advNextPageToken = a})
+
+-- | The kind for a page of advertisers.
+advKind :: Lens' Advertisers Text
+advKind = lens _advKind (\ s a -> s{_advKind = a})
+
+-- | The advertiser list.
+advItems :: Lens' Advertisers [Maybe Advertiser]
+advItems
+  = lens _advItems (\ s a -> s{_advItems = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON Advertisers where
+        parseJSON
+          = withObject "Advertisers"
+              (\ o ->
+                 Advertisers <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "gan#advertisers")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON Advertisers where
+        toJSON Advertisers{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _advNextPageToken,
+                  Just ("kind" .= _advKind),
+                  ("items" .=) <$> _advItems])
 
 -- | An EventResource.
 --
@@ -1694,6 +1895,53 @@ instance ToJSON Event where
                   ("publisherName" .=) <$> _evePublisherName])
 
 --
+-- /See:/ 'ccOfferItemBonusRewards' smart constructor.
+data CcOfferItemBonusRewards = CcOfferItemBonusRewards
+    { _coibrAmount  :: !(Maybe Double)
+    , _coibrDetails :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CcOfferItemBonusRewards' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'coibrAmount'
+--
+-- * 'coibrDetails'
+ccOfferItemBonusRewards
+    :: CcOfferItemBonusRewards
+ccOfferItemBonusRewards =
+    CcOfferItemBonusRewards
+    { _coibrAmount = Nothing
+    , _coibrDetails = Nothing
+    }
+
+-- | How many units of reward will be granted.
+coibrAmount :: Lens' CcOfferItemBonusRewards (Maybe Double)
+coibrAmount
+  = lens _coibrAmount (\ s a -> s{_coibrAmount = a})
+
+-- | The circumstances under which this rule applies, for example, booking a
+-- flight via Orbitz.
+coibrDetails :: Lens' CcOfferItemBonusRewards (Maybe Text)
+coibrDetails
+  = lens _coibrDetails (\ s a -> s{_coibrDetails = a})
+
+instance FromJSON CcOfferItemBonusRewards where
+        parseJSON
+          = withObject "CcOfferItemBonusRewards"
+              (\ o ->
+                 CcOfferItemBonusRewards <$>
+                   (o .:? "amount") <*> (o .:? "details"))
+
+instance ToJSON CcOfferItemBonusRewards where
+        toJSON CcOfferItemBonusRewards{..}
+          = object
+              (catMaybes
+                 [("amount" .=) <$> _coibrAmount,
+                  ("details" .=) <$> _coibrDetails])
+
+--
 -- /See:/ 'eventItemProducts' smart constructor.
 data EventItemProducts = EventItemProducts
     { _eipSkuName      :: !(Maybe Text)
@@ -1819,65 +2067,6 @@ instance ToJSON EventItemProducts where
                   ("publisherFee" .=) <$> _eipPublisherFee,
                   ("unitPrice" .=) <$> _eipUnitPrice,
                   ("earnings" .=) <$> _eipEarnings])
-
---
--- /See:/ 'events' smart constructor.
-data Events = Events
-    { _eNextPageToken :: !(Maybe Text)
-    , _eKind          :: !Text
-    , _eItems         :: !(Maybe [Maybe Event])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Events' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'eNextPageToken'
---
--- * 'eKind'
---
--- * 'eItems'
-events
-    :: Events
-events =
-    Events
-    { _eNextPageToken = Nothing
-    , _eKind = "gan#events"
-    , _eItems = Nothing
-    }
-
--- | The \'pageToken\' to pass to the next request to get the next page, if
--- there are more to retrieve.
-eNextPageToken :: Lens' Events (Maybe Text)
-eNextPageToken
-  = lens _eNextPageToken
-      (\ s a -> s{_eNextPageToken = a})
-
--- | The kind for a page of events.
-eKind :: Lens' Events Text
-eKind = lens _eKind (\ s a -> s{_eKind = a})
-
--- | The event list.
-eItems :: Lens' Events [Maybe Event]
-eItems
-  = lens _eItems (\ s a -> s{_eItems = a}) . _Default .
-      _Coerce
-
-instance FromJSON Events where
-        parseJSON
-          = withObject "Events"
-              (\ o ->
-                 Events <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!= "gan#events")
-                     <*> (o .:? "items" .!= mempty))
-
-instance ToJSON Events where
-        toJSON Events{..}
-          = object
-              (catMaybes
-                 [("nextPageToken" .=) <$> _eNextPageToken,
-                  Just ("kind" .= _eKind), ("items" .=) <$> _eItems])
 
 -- | A LinkResource.
 --
@@ -2151,185 +2340,6 @@ instance ToJSON Link where
                   ("duration" .=) <$> _linDuration,
                   ("description" .=) <$> _linDescription])
 
--- | Special offers on the link.
---
--- /See:/ 'linkSpecialOffers' smart constructor.
-data LinkSpecialOffers = LinkSpecialOffers
-    { _lsoFreeShippingMin :: !(Maybe (Maybe Money))
-    , _lsoPercentOff      :: !(Maybe Double)
-    , _lsoPriceCut        :: !(Maybe (Maybe Money))
-    , _lsoPriceCutMin     :: !(Maybe (Maybe Money))
-    , _lsoPercentOffMin   :: !(Maybe (Maybe Money))
-    , _lsoFreeShipping    :: !(Maybe Bool)
-    , _lsoPromotionCodes  :: !(Maybe [Text])
-    , _lsoFreeGift        :: !(Maybe Bool)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'LinkSpecialOffers' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lsoFreeShippingMin'
---
--- * 'lsoPercentOff'
---
--- * 'lsoPriceCut'
---
--- * 'lsoPriceCutMin'
---
--- * 'lsoPercentOffMin'
---
--- * 'lsoFreeShipping'
---
--- * 'lsoPromotionCodes'
---
--- * 'lsoFreeGift'
-linkSpecialOffers
-    :: LinkSpecialOffers
-linkSpecialOffers =
-    LinkSpecialOffers
-    { _lsoFreeShippingMin = Nothing
-    , _lsoPercentOff = Nothing
-    , _lsoPriceCut = Nothing
-    , _lsoPriceCutMin = Nothing
-    , _lsoPercentOffMin = Nothing
-    , _lsoFreeShipping = Nothing
-    , _lsoPromotionCodes = Nothing
-    , _lsoFreeGift = Nothing
-    }
-
--- | Minimum purchase amount for free shipping promotion
-lsoFreeShippingMin :: Lens' LinkSpecialOffers (Maybe (Maybe Money))
-lsoFreeShippingMin
-  = lens _lsoFreeShippingMin
-      (\ s a -> s{_lsoFreeShippingMin = a})
-
--- | Percent off on the purchase
-lsoPercentOff :: Lens' LinkSpecialOffers (Maybe Double)
-lsoPercentOff
-  = lens _lsoPercentOff
-      (\ s a -> s{_lsoPercentOff = a})
-
--- | Price cut on the purchase
-lsoPriceCut :: Lens' LinkSpecialOffers (Maybe (Maybe Money))
-lsoPriceCut
-  = lens _lsoPriceCut (\ s a -> s{_lsoPriceCut = a})
-
--- | Minimum purchase amount for price cut promotion
-lsoPriceCutMin :: Lens' LinkSpecialOffers (Maybe (Maybe Money))
-lsoPriceCutMin
-  = lens _lsoPriceCutMin
-      (\ s a -> s{_lsoPriceCutMin = a})
-
--- | Minimum purchase amount for percent off promotion
-lsoPercentOffMin :: Lens' LinkSpecialOffers (Maybe (Maybe Money))
-lsoPercentOffMin
-  = lens _lsoPercentOffMin
-      (\ s a -> s{_lsoPercentOffMin = a})
-
--- | Whether there is free shipping
-lsoFreeShipping :: Lens' LinkSpecialOffers (Maybe Bool)
-lsoFreeShipping
-  = lens _lsoFreeShipping
-      (\ s a -> s{_lsoFreeShipping = a})
-
--- | List of promotion code associated with the link
-lsoPromotionCodes :: Lens' LinkSpecialOffers [Text]
-lsoPromotionCodes
-  = lens _lsoPromotionCodes
-      (\ s a -> s{_lsoPromotionCodes = a})
-      . _Default
-      . _Coerce
-
--- | Whether there is a free gift
-lsoFreeGift :: Lens' LinkSpecialOffers (Maybe Bool)
-lsoFreeGift
-  = lens _lsoFreeGift (\ s a -> s{_lsoFreeGift = a})
-
-instance FromJSON LinkSpecialOffers where
-        parseJSON
-          = withObject "LinkSpecialOffers"
-              (\ o ->
-                 LinkSpecialOffers <$>
-                   (o .:? "freeShippingMin") <*> (o .:? "percentOff")
-                     <*> (o .:? "priceCut")
-                     <*> (o .:? "priceCutMin")
-                     <*> (o .:? "percentOffMin")
-                     <*> (o .:? "freeShipping")
-                     <*> (o .:? "promotionCodes" .!= mempty)
-                     <*> (o .:? "freeGift"))
-
-instance ToJSON LinkSpecialOffers where
-        toJSON LinkSpecialOffers{..}
-          = object
-              (catMaybes
-                 [("freeShippingMin" .=) <$> _lsoFreeShippingMin,
-                  ("percentOff" .=) <$> _lsoPercentOff,
-                  ("priceCut" .=) <$> _lsoPriceCut,
-                  ("priceCutMin" .=) <$> _lsoPriceCutMin,
-                  ("percentOffMin" .=) <$> _lsoPercentOffMin,
-                  ("freeShipping" .=) <$> _lsoFreeShipping,
-                  ("promotionCodes" .=) <$> _lsoPromotionCodes,
-                  ("freeGift" .=) <$> _lsoFreeGift])
-
---
--- /See:/ 'links' smart constructor.
-data Links = Links
-    { _lNextPageToken :: !(Maybe Text)
-    , _lKind          :: !Text
-    , _lItems         :: !(Maybe [Maybe Link])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Links' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lNextPageToken'
---
--- * 'lKind'
---
--- * 'lItems'
-links
-    :: Links
-links =
-    Links
-    { _lNextPageToken = Nothing
-    , _lKind = "gan#links"
-    , _lItems = Nothing
-    }
-
--- | The next page token.
-lNextPageToken :: Lens' Links (Maybe Text)
-lNextPageToken
-  = lens _lNextPageToken
-      (\ s a -> s{_lNextPageToken = a})
-
--- | The kind for a page of links.
-lKind :: Lens' Links Text
-lKind = lens _lKind (\ s a -> s{_lKind = a})
-
--- | The links.
-lItems :: Lens' Links [Maybe Link]
-lItems
-  = lens _lItems (\ s a -> s{_lItems = a}) . _Default .
-      _Coerce
-
-instance FromJSON Links where
-        parseJSON
-          = withObject "Links"
-              (\ o ->
-                 Links <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!= "gan#links")
-                     <*> (o .:? "items" .!= mempty))
-
-instance ToJSON Links where
-        toJSON Links{..}
-          = object
-              (catMaybes
-                 [("nextPageToken" .=) <$> _lNextPageToken,
-                  Just ("kind" .= _lKind), ("items" .=) <$> _lItems])
-
 -- | An ApiMoneyProto.
 --
 -- /See:/ 'money' smart constructor.
@@ -2376,6 +2386,52 @@ instance ToJSON Money where
               (catMaybes
                  [("amount" .=) <$> _mAmount,
                   ("currencyCode" .=) <$> _mCurrencyCode])
+
+--
+-- /See:/ 'ccOffers' smart constructor.
+data CcOffers = CcOffers
+    { _cKind  :: !Text
+    , _cItems :: !(Maybe [Maybe CcOffer])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CcOffers' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cKind'
+--
+-- * 'cItems'
+ccOffers
+    :: CcOffers
+ccOffers =
+    CcOffers
+    { _cKind = "gan#ccOffers"
+    , _cItems = Nothing
+    }
+
+-- | The kind for a page of credit card offers.
+cKind :: Lens' CcOffers Text
+cKind = lens _cKind (\ s a -> s{_cKind = a})
+
+-- | The credit card offers.
+cItems :: Lens' CcOffers [Maybe CcOffer]
+cItems
+  = lens _cItems (\ s a -> s{_cItems = a}) . _Default .
+      _Coerce
+
+instance FromJSON CcOffers where
+        parseJSON
+          = withObject "CcOffers"
+              (\ o ->
+                 CcOffers <$>
+                   (o .:? "kind" .!= "gan#ccOffers") <*>
+                     (o .:? "items" .!= mempty))
+
+instance ToJSON CcOffers where
+        toJSON CcOffers{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _cKind), ("items" .=) <$> _cItems])
 
 -- | A PublisherResource.
 --
@@ -2536,179 +2592,123 @@ instance ToJSON Publisher where
                     _pubEpcNinetyDayAverage,
                   ("sites" .=) <$> _pubSites])
 
+-- | Special offers on the link.
 --
--- /See:/ 'publishers' smart constructor.
-data Publishers = Publishers
-    { _pNextPageToken :: !(Maybe Text)
-    , _pKind          :: !Text
-    , _pItems         :: !(Maybe [Maybe Publisher])
+-- /See:/ 'linkSpecialOffers' smart constructor.
+data LinkSpecialOffers = LinkSpecialOffers
+    { _lsoFreeShippingMin :: !(Maybe (Maybe Money))
+    , _lsoPercentOff      :: !(Maybe Double)
+    , _lsoPriceCut        :: !(Maybe (Maybe Money))
+    , _lsoPriceCutMin     :: !(Maybe (Maybe Money))
+    , _lsoPercentOffMin   :: !(Maybe (Maybe Money))
+    , _lsoFreeShipping    :: !(Maybe Bool)
+    , _lsoPromotionCodes  :: !(Maybe [Text])
+    , _lsoFreeGift        :: !(Maybe Bool)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Publishers' with the minimum fields required to make a request.
+-- | Creates a value of 'LinkSpecialOffers' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pNextPageToken'
+-- * 'lsoFreeShippingMin'
 --
--- * 'pKind'
+-- * 'lsoPercentOff'
 --
--- * 'pItems'
-publishers
-    :: Publishers
-publishers =
-    Publishers
-    { _pNextPageToken = Nothing
-    , _pKind = "gan#publishers"
-    , _pItems = Nothing
+-- * 'lsoPriceCut'
+--
+-- * 'lsoPriceCutMin'
+--
+-- * 'lsoPercentOffMin'
+--
+-- * 'lsoFreeShipping'
+--
+-- * 'lsoPromotionCodes'
+--
+-- * 'lsoFreeGift'
+linkSpecialOffers
+    :: LinkSpecialOffers
+linkSpecialOffers =
+    LinkSpecialOffers
+    { _lsoFreeShippingMin = Nothing
+    , _lsoPercentOff = Nothing
+    , _lsoPriceCut = Nothing
+    , _lsoPriceCutMin = Nothing
+    , _lsoPercentOffMin = Nothing
+    , _lsoFreeShipping = Nothing
+    , _lsoPromotionCodes = Nothing
+    , _lsoFreeGift = Nothing
     }
 
--- | The \'pageToken\' to pass to the next request to get the next page, if
--- there are more to retrieve.
-pNextPageToken :: Lens' Publishers (Maybe Text)
-pNextPageToken
-  = lens _pNextPageToken
-      (\ s a -> s{_pNextPageToken = a})
+-- | Minimum purchase amount for free shipping promotion
+lsoFreeShippingMin :: Lens' LinkSpecialOffers (Maybe (Maybe Money))
+lsoFreeShippingMin
+  = lens _lsoFreeShippingMin
+      (\ s a -> s{_lsoFreeShippingMin = a})
 
--- | The kind for a page of entities.
-pKind :: Lens' Publishers Text
-pKind = lens _pKind (\ s a -> s{_pKind = a})
+-- | Percent off on the purchase
+lsoPercentOff :: Lens' LinkSpecialOffers (Maybe Double)
+lsoPercentOff
+  = lens _lsoPercentOff
+      (\ s a -> s{_lsoPercentOff = a})
 
--- | The entity list.
-pItems :: Lens' Publishers [Maybe Publisher]
-pItems
-  = lens _pItems (\ s a -> s{_pItems = a}) . _Default .
-      _Coerce
+-- | Price cut on the purchase
+lsoPriceCut :: Lens' LinkSpecialOffers (Maybe (Maybe Money))
+lsoPriceCut
+  = lens _lsoPriceCut (\ s a -> s{_lsoPriceCut = a})
 
-instance FromJSON Publishers where
-        parseJSON
-          = withObject "Publishers"
-              (\ o ->
-                 Publishers <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!= "gan#publishers")
-                     <*> (o .:? "items" .!= mempty))
+-- | Minimum purchase amount for price cut promotion
+lsoPriceCutMin :: Lens' LinkSpecialOffers (Maybe (Maybe Money))
+lsoPriceCutMin
+  = lens _lsoPriceCutMin
+      (\ s a -> s{_lsoPriceCutMin = a})
 
-instance ToJSON Publishers where
-        toJSON Publishers{..}
-          = object
-              (catMaybes
-                 [("nextPageToken" .=) <$> _pNextPageToken,
-                  Just ("kind" .= _pKind), ("items" .=) <$> _pItems])
+-- | Minimum purchase amount for percent off promotion
+lsoPercentOffMin :: Lens' LinkSpecialOffers (Maybe (Maybe Money))
+lsoPercentOffMin
+  = lens _lsoPercentOffMin
+      (\ s a -> s{_lsoPercentOffMin = a})
 
--- | A ReportResource representing a report of a certain type either for an
--- advertiser or publisher.
---
--- /See:/ 'report' smart constructor.
-data Report = Report
-    { _rEndDate          :: !(Maybe Text)
-    , _rTotalsRows       :: !(Maybe [[Either Text Int64]])
-    , _rKind             :: !Text
-    , _rStartDate        :: !(Maybe Text)
-    , _rRows             :: !(Maybe [[Either Text Int64]])
-    , _rMatchingRowCount :: !(Maybe Int64)
-    , _rColumnNames      :: !(Maybe [Text])
-    , _rType             :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+-- | Whether there is free shipping
+lsoFreeShipping :: Lens' LinkSpecialOffers (Maybe Bool)
+lsoFreeShipping
+  = lens _lsoFreeShipping
+      (\ s a -> s{_lsoFreeShipping = a})
 
--- | Creates a value of 'Report' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rEndDate'
---
--- * 'rTotalsRows'
---
--- * 'rKind'
---
--- * 'rStartDate'
---
--- * 'rRows'
---
--- * 'rMatchingRowCount'
---
--- * 'rColumnNames'
---
--- * 'rType'
-report
-    :: Report
-report =
-    Report
-    { _rEndDate = Nothing
-    , _rTotalsRows = Nothing
-    , _rKind = "gan#report"
-    , _rStartDate = Nothing
-    , _rRows = Nothing
-    , _rMatchingRowCount = Nothing
-    , _rColumnNames = Nothing
-    , _rType = Nothing
-    }
-
--- | The end of the date range for this report, exclusive.
-rEndDate :: Lens' Report (Maybe Text)
-rEndDate = lens _rEndDate (\ s a -> s{_rEndDate = a})
-
--- | The totals rows for the report
-rTotalsRows :: Lens' Report [[Either Text Int64]]
-rTotalsRows
-  = lens _rTotalsRows (\ s a -> s{_rTotalsRows = a}) .
-      _Default
-      . _Coerce
-
--- | The kind for a report.
-rKind :: Lens' Report Text
-rKind = lens _rKind (\ s a -> s{_rKind = a})
-
--- | The start of the date range for this report, inclusive.
-rStartDate :: Lens' Report (Maybe Text)
-rStartDate
-  = lens _rStartDate (\ s a -> s{_rStartDate = a})
-
--- | The rows of data for the report
-rRows :: Lens' Report [[Either Text Int64]]
-rRows
-  = lens _rRows (\ s a -> s{_rRows = a}) . _Default .
-      _Coerce
-
--- | The number of matching rows before paging is applied.
-rMatchingRowCount :: Lens' Report (Maybe Int64)
-rMatchingRowCount
-  = lens _rMatchingRowCount
-      (\ s a -> s{_rMatchingRowCount = a})
-
--- | The column names for the report
-rColumnNames :: Lens' Report [Text]
-rColumnNames
-  = lens _rColumnNames (\ s a -> s{_rColumnNames = a})
+-- | List of promotion code associated with the link
+lsoPromotionCodes :: Lens' LinkSpecialOffers [Text]
+lsoPromotionCodes
+  = lens _lsoPromotionCodes
+      (\ s a -> s{_lsoPromotionCodes = a})
       . _Default
       . _Coerce
 
--- | The report type.
-rType :: Lens' Report (Maybe Text)
-rType = lens _rType (\ s a -> s{_rType = a})
+-- | Whether there is a free gift
+lsoFreeGift :: Lens' LinkSpecialOffers (Maybe Bool)
+lsoFreeGift
+  = lens _lsoFreeGift (\ s a -> s{_lsoFreeGift = a})
 
-instance FromJSON Report where
+instance FromJSON LinkSpecialOffers where
         parseJSON
-          = withObject "Report"
+          = withObject "LinkSpecialOffers"
               (\ o ->
-                 Report <$>
-                   (o .:? "end_date") <*>
-                     (o .:? "totals_rows" .!= mempty)
-                     <*> (o .:? "kind" .!= "gan#report")
-                     <*> (o .:? "start_date")
-                     <*> (o .:? "rows" .!= mempty)
-                     <*> (o .:? "matching_row_count")
-                     <*> (o .:? "column_names" .!= mempty)
-                     <*> (o .:? "type"))
+                 LinkSpecialOffers <$>
+                   (o .:? "freeShippingMin") <*> (o .:? "percentOff")
+                     <*> (o .:? "priceCut")
+                     <*> (o .:? "priceCutMin")
+                     <*> (o .:? "percentOffMin")
+                     <*> (o .:? "freeShipping")
+                     <*> (o .:? "promotionCodes" .!= mempty)
+                     <*> (o .:? "freeGift"))
 
-instance ToJSON Report where
-        toJSON Report{..}
+instance ToJSON LinkSpecialOffers where
+        toJSON LinkSpecialOffers{..}
           = object
               (catMaybes
-                 [("end_date" .=) <$> _rEndDate,
-                  ("totals_rows" .=) <$> _rTotalsRows,
-                  Just ("kind" .= _rKind),
-                  ("start_date" .=) <$> _rStartDate,
-                  ("rows" .=) <$> _rRows,
-                  ("matching_row_count" .=) <$> _rMatchingRowCount,
-                  ("column_names" .=) <$> _rColumnNames,
-                  ("type" .=) <$> _rType])
+                 [("freeShippingMin" .=) <$> _lsoFreeShippingMin,
+                  ("percentOff" .=) <$> _lsoPercentOff,
+                  ("priceCut" .=) <$> _lsoPriceCut,
+                  ("priceCutMin" .=) <$> _lsoPriceCutMin,
+                  ("percentOffMin" .=) <$> _lsoPercentOffMin,
+                  ("freeShipping" .=) <$> _lsoFreeShipping,
+                  ("promotionCodes" .=) <$> _lsoPromotionCodes,
+                  ("freeGift" .=) <$> _lsoFreeGift])

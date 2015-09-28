@@ -1,6 +1,6 @@
 name:                  gogol-discovery
 version:               0.0.1
-synopsis:              Google APIs Discovery Service API.
+synopsis:              Google APIs Discovery Service API Client.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -17,8 +17,8 @@ description:
     Lets you discover information about other Google APIs, such as what APIs
     are available, the resource and method details for each API.
     .
-    /Warning:/ This is an experimental preview release which is still under
-    heavy development and not intended for public consumption, caveat emptor!
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
 
 source-repository head
     type:     git
@@ -31,7 +31,9 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.Discovery
+          Network.Google.API.Discovery.APIs.GetRest
+        , Network.Google.API.Discovery.APIs.List
+        , Network.Google.Discovery
         , Network.Google.Discovery.Types
 
     other-modules:

@@ -17,71 +17,199 @@
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference>
 module Network.Google.Play.Developer
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** Google Play Developer API
       PlayDeveloper
-    , InappproductsAPI
-    , InappproductsBatch
-    , InappproductsInsert
-    , InappproductsList
-    , InappproductsPatch
-    , InappproductsGet
-    , InappproductsDelete
-    , InappproductsUpdate
-    , EditsAPI
-    , ImagesAPI
-    , ImagesList
-    , ImagesDeleteall
-    , ImagesUpload
-    , ImagesDelete
-    , ExpansionfilesAPI
-    , ExpansionfilesPatch
-    , ExpansionfilesGet
-    , ExpansionfilesUpload
-    , ExpansionfilesUpdate
-    , TracksAPI
-    , TracksList
-    , TracksPatch
-    , TracksGet
-    , TracksUpdate
-    , TestersAPI
-    , TestersPatch
-    , TestersGet
-    , TestersUpdate
-    , DetailsAPI
-    , DetailsPatch
-    , DetailsGet
-    , DetailsUpdate
-    , ApklistingsAPI
-    , ApklistingsList
-    , ApklistingsDeleteall
-    , ApklistingsPatch
-    , ApklistingsGet
-    , ApklistingsDelete
-    , ApklistingsUpdate
-    , ApksAPI
-    , ApksList
-    , ApksAddexternallyhosted
-    , ApksUpload
-    , ListingsAPI
-    , ListingsList
-    , ListingsDeleteall
-    , ListingsPatch
-    , ListingsGet
-    , ListingsDelete
-    , ListingsUpdate
-    , EntitlementsAPI
-    , EntitlementsList
-    , PurchasesAPI
-    , ProductsAPI
-    , ProductsGet
-    , SubscriptionsAPI
-    , SubscriptionsDefer
-    , SubscriptionsGet
-    , SubscriptionsRefund
-    , SubscriptionsRevoke
-    , SubscriptionsCancel
+    , playDeveloper
+    , playDeveloperURL
+
+    -- ** androidpublisher.edits.apklistings.delete
+    , module Network.Google.API.Androidpublisher.Edits.Apklistings.Delete
+
+    -- ** androidpublisher.edits.apklistings.deleteall
+    , module Network.Google.API.Androidpublisher.Edits.Apklistings.Deleteall
+
+    -- ** androidpublisher.edits.apklistings.get
+    , module Network.Google.API.Androidpublisher.Edits.Apklistings.Get
+
+    -- ** androidpublisher.edits.apklistings.list
+    , module Network.Google.API.Androidpublisher.Edits.Apklistings.List
+
+    -- ** androidpublisher.edits.apklistings.patch
+    , module Network.Google.API.Androidpublisher.Edits.Apklistings.Patch
+
+    -- ** androidpublisher.edits.apklistings.update
+    , module Network.Google.API.Androidpublisher.Edits.Apklistings.Update
+
+    -- ** androidpublisher.edits.apks.addexternallyhosted
+    , module Network.Google.API.Androidpublisher.Edits.Apks.Addexternallyhosted
+
+    -- ** androidpublisher.edits.apks.list
+    , module Network.Google.API.Androidpublisher.Edits.Apks.List
+
+    -- ** androidpublisher.edits.apks.upload
+    , module Network.Google.API.Androidpublisher.Edits.Apks.Upload
+
+    -- ** androidpublisher.edits.details.get
+    , module Network.Google.API.Androidpublisher.Edits.Details.Get
+
+    -- ** androidpublisher.edits.details.patch
+    , module Network.Google.API.Androidpublisher.Edits.Details.Patch
+
+    -- ** androidpublisher.edits.details.update
+    , module Network.Google.API.Androidpublisher.Edits.Details.Update
+
+    -- ** androidpublisher.edits.expansionfiles.get
+    , module Network.Google.API.Androidpublisher.Edits.Expansionfiles.Get
+
+    -- ** androidpublisher.edits.expansionfiles.patch
+    , module Network.Google.API.Androidpublisher.Edits.Expansionfiles.Patch
+
+    -- ** androidpublisher.edits.expansionfiles.update
+    , module Network.Google.API.Androidpublisher.Edits.Expansionfiles.Update
+
+    -- ** androidpublisher.edits.expansionfiles.upload
+    , module Network.Google.API.Androidpublisher.Edits.Expansionfiles.Upload
+
+    -- ** androidpublisher.edits.images.delete
+    , module Network.Google.API.Androidpublisher.Edits.Images.Delete
+
+    -- ** androidpublisher.edits.images.deleteall
+    , module Network.Google.API.Androidpublisher.Edits.Images.Deleteall
+
+    -- ** androidpublisher.edits.images.list
+    , module Network.Google.API.Androidpublisher.Edits.Images.List
+
+    -- ** androidpublisher.edits.images.upload
+    , module Network.Google.API.Androidpublisher.Edits.Images.Upload
+
+    -- ** androidpublisher.edits.listings.delete
+    , module Network.Google.API.Androidpublisher.Edits.Listings.Delete
+
+    -- ** androidpublisher.edits.listings.deleteall
+    , module Network.Google.API.Androidpublisher.Edits.Listings.Deleteall
+
+    -- ** androidpublisher.edits.listings.get
+    , module Network.Google.API.Androidpublisher.Edits.Listings.Get
+
+    -- ** androidpublisher.edits.listings.list
+    , module Network.Google.API.Androidpublisher.Edits.Listings.List
+
+    -- ** androidpublisher.edits.listings.patch
+    , module Network.Google.API.Androidpublisher.Edits.Listings.Patch
+
+    -- ** androidpublisher.edits.listings.update
+    , module Network.Google.API.Androidpublisher.Edits.Listings.Update
+
+    -- ** androidpublisher.edits.testers.get
+    , module Network.Google.API.Androidpublisher.Edits.Testers.Get
+
+    -- ** androidpublisher.edits.testers.patch
+    , module Network.Google.API.Androidpublisher.Edits.Testers.Patch
+
+    -- ** androidpublisher.edits.testers.update
+    , module Network.Google.API.Androidpublisher.Edits.Testers.Update
+
+    -- ** androidpublisher.edits.tracks.get
+    , module Network.Google.API.Androidpublisher.Edits.Tracks.Get
+
+    -- ** androidpublisher.edits.tracks.list
+    , module Network.Google.API.Androidpublisher.Edits.Tracks.List
+
+    -- ** androidpublisher.edits.tracks.patch
+    , module Network.Google.API.Androidpublisher.Edits.Tracks.Patch
+
+    -- ** androidpublisher.edits.tracks.update
+    , module Network.Google.API.Androidpublisher.Edits.Tracks.Update
+
+    -- ** androidpublisher.entitlements.list
+    , module Network.Google.API.Androidpublisher.Entitlements.List
+
+    -- ** androidpublisher.inappproducts.batch
+    , module Network.Google.API.Androidpublisher.Inappproducts.Batch
+
+    -- ** androidpublisher.inappproducts.delete
+    , module Network.Google.API.Androidpublisher.Inappproducts.Delete
+
+    -- ** androidpublisher.inappproducts.get
+    , module Network.Google.API.Androidpublisher.Inappproducts.Get
+
+    -- ** androidpublisher.inappproducts.insert
+    , module Network.Google.API.Androidpublisher.Inappproducts.Insert
+
+    -- ** androidpublisher.inappproducts.list
+    , module Network.Google.API.Androidpublisher.Inappproducts.List
+
+    -- ** androidpublisher.inappproducts.patch
+    , module Network.Google.API.Androidpublisher.Inappproducts.Patch
+
+    -- ** androidpublisher.inappproducts.update
+    , module Network.Google.API.Androidpublisher.Inappproducts.Update
+
+    -- ** androidpublisher.purchases.products.get
+    , module Network.Google.API.Androidpublisher.Purchases.Products.Get
+
+    -- ** androidpublisher.purchases.subscriptions.cancel
+    , module Network.Google.API.Androidpublisher.Purchases.Subscriptions.Cancel
+
+    -- ** androidpublisher.purchases.subscriptions.defer
+    , module Network.Google.API.Androidpublisher.Purchases.Subscriptions.Defer
+
+    -- ** androidpublisher.purchases.subscriptions.get
+    , module Network.Google.API.Androidpublisher.Purchases.Subscriptions.Get
+
+    -- ** androidpublisher.purchases.subscriptions.refund
+    , module Network.Google.API.Androidpublisher.Purchases.Subscriptions.Refund
+
+    -- ** androidpublisher.purchases.subscriptions.revoke
+    , module Network.Google.API.Androidpublisher.Purchases.Subscriptions.Revoke
 
     -- * Types
+
+    -- ** ExpansionFilesUploadResponse
+    , ExpansionFilesUploadResponse
+    , expansionFilesUploadResponse
+    , efurExpansionFile
+
+    -- ** ImagesUploadResponse
+    , ImagesUploadResponse
+    , imagesUploadResponse
+    , iurImage
+
+    -- ** InappproductsListResponse
+    , InappproductsListResponse
+    , inappproductsListResponse
+    , ilrTokenPagination
+    , ilrPageInfo
+    , ilrKind
+    , ilrInappproduct
+
+    -- ** Listing
+    , Listing
+    , listing
+    , lFullDescription
+    , lVideo
+    , lShortDescription
+    , lLanguage
+    , lTitle
+
+    -- ** SubscriptionPurchasesDeferRequest
+    , SubscriptionPurchasesDeferRequest
+    , subscriptionPurchasesDeferRequest
+    , spdrDeferralInfo
+
+    -- ** Testers
+    , Testers
+    , testers
+    , tGooglePlusCommunities
+    , tGoogleGroups
+
+    -- ** EditsImagesList'ImageType
+    , EditsImagesList'ImageType (..)
+
+    -- ** Alt
+    , Alt (..)
 
     -- ** Apk
     , Apk
@@ -89,32 +217,60 @@ module Network.Google.Play.Developer
     , apkVersionCode
     , apkBinary
 
+    -- ** InappproductsBatchResponseEntry
+    , InappproductsBatchResponseEntry
+    , inappproductsBatchResponseEntry
+    , ibreInappproductsupdateresponse
+    , ibreInappproductsinsertresponse
+    , ibreBatchId
+
     -- ** ApkBinary
     , ApkBinary
     , apkBinary
     , abSha1
 
-    -- ** ApkListing
-    , ApkListing
-    , apkListing
-    , alLanguage
-    , alRecentChanges
+    -- ** InAppProduct
+    , InAppProduct
+    , inAppProduct
+    , iapStatus
+    , iapTrialPeriod
+    , iapPackageName
+    , iapSeason
+    , iapPurchaseType
+    , iapSubscriptionPeriod
+    , iapPrices
+    , iapSku
+    , iapDefaultPrice
+    , iapListings
+    , iapDefaultLanguage
 
-    -- ** ApkListingsListResponse
-    , ApkListingsListResponse
-    , apkListingsListResponse
-    , allrKind
-    , allrListings
+    -- ** Price
+    , Price
+    , price
+    , pPriceMicros
+    , pCurrency
+
+    -- ** InappproductsInsertRequest
+    , InappproductsInsertRequest
+    , inappproductsInsertRequest
+    , iirInappproduct
 
     -- ** ApksAddExternallyHostedRequest
     , ApksAddExternallyHostedRequest
     , apksAddExternallyHostedRequest
     , aaehrExternallyHostedApk
 
-    -- ** ApksAddExternallyHostedResponse
-    , ApksAddExternallyHostedResponse
-    , apksAddExternallyHostedResponse
-    , aExternallyHostedApk
+    -- ** ListingsListResponse
+    , ListingsListResponse
+    , listingsListResponse
+    , llrKind
+    , llrListings
+
+    -- ** ExternallyHostedApkUsesPermission
+    , ExternallyHostedApkUsesPermission
+    , externallyHostedApkUsesPermission
+    , ehaupName
+    , ehaupMaxSdkVersion
 
     -- ** ApksListResponse
     , ApksListResponse
@@ -122,19 +278,30 @@ module Network.Google.Play.Developer
     , alrKind
     , alrApks
 
-    -- ** AppDetails
-    , AppDetails
-    , appDetails
-    , adContactPhone
-    , adContactEmail
-    , adContactWebsite
-    , adDefaultLanguage
+    -- ** EntitlementsListResponse
+    , EntitlementsListResponse
+    , entitlementsListResponse
+    , elrTokenPagination
+    , elrPageInfo
+    , elrResources
 
-    -- ** AppEdit
-    , AppEdit
-    , appEdit
-    , aeId
-    , aeExpiryTimeSeconds
+    -- ** EditsImagesUpload'ImageType
+    , EditsImagesUpload'ImageType (..)
+
+    -- ** EditsExpansionfilesUpload'ExpansionFileType
+    , EditsExpansionfilesUpload'ExpansionFileType (..)
+
+    -- ** EditsExpansionfilesPatch'ExpansionFileType
+    , EditsExpansionfilesPatch'ExpansionFileType (..)
+
+    -- ** EditsExpansionfilesGet'ExpansionFileType
+    , EditsExpansionfilesGet'ExpansionFileType (..)
+
+    -- ** InappproductsBatchResponse
+    , InappproductsBatchResponse
+    , inappproductsBatchResponse
+    , ibrEntrys
+    , ibrKind
 
     -- ** Entitlement
     , Entitlement
@@ -144,12 +311,43 @@ module Network.Google.Play.Developer
     , eToken
     , eProductId
 
-    -- ** EntitlementsListResponse
-    , EntitlementsListResponse
-    , entitlementsListResponse
-    , elrTokenPagination
-    , elrPageInfo
-    , elrResources
+    -- ** EditsImagesDelete'ImageType
+    , EditsImagesDelete'ImageType (..)
+
+    -- ** EditsExpansionfilesUpdate'ExpansionFileType
+    , EditsExpansionfilesUpdate'ExpansionFileType (..)
+
+    -- ** MonthDay
+    , MonthDay
+    , monthDay
+    , mdDay
+    , mdMonth
+
+    -- ** InappproductsUpdateResponse
+    , InappproductsUpdateResponse
+    , inappproductsUpdateResponse
+    , iurInappproduct
+
+    -- ** TokenPagination
+    , TokenPagination
+    , tokenPagination
+    , tpNextPageToken
+    , tpPreviousPageToken
+
+    -- ** InappproductsBatchRequestEntry
+    , InappproductsBatchRequestEntry
+    , inappproductsBatchRequestEntry
+    , iMethodName
+    , iInappproductsinsertrequest
+    , iInappproductsupdaterequest
+    , iBatchId
+
+    -- ** Image
+    , Image
+    , image
+    , iUrl
+    , iSha1
+    , iId
 
     -- ** ExpansionFile
     , ExpansionFile
@@ -157,10 +355,123 @@ module Network.Google.Play.Developer
     , efFileSize
     , efReferencesVersion
 
-    -- ** ExpansionFilesUploadResponse
-    , ExpansionFilesUploadResponse
-    , expansionFilesUploadResponse
-    , efurExpansionFile
+    -- ** Track
+    , Track
+    , track
+    , tVersionCodes
+    , tTrack
+    , tUserFraction
+
+    -- ** InAppProductListings
+    , InAppProductListings
+    , inAppProductListings
+
+    -- ** ImagesDeleteAllResponse
+    , ImagesDeleteAllResponse
+    , imagesDeleteAllResponse
+    , idarDeleted
+
+    -- ** InAppProductListing
+    , InAppProductListing
+    , inAppProductListing
+    , iaplTitle
+    , iaplDescription
+
+    -- ** EditsTestersUpdate'Track
+    , EditsTestersUpdate'Track (..)
+
+    -- ** SubscriptionDeferralInfo
+    , SubscriptionDeferralInfo
+    , subscriptionDeferralInfo
+    , sdiDesiredExpiryTimeMillis
+    , sdiExpectedExpiryTimeMillis
+
+    -- ** InappproductsInsertResponse
+    , InappproductsInsertResponse
+    , inappproductsInsertResponse
+    , iInappproduct
+
+    -- ** ApkListingsListResponse
+    , ApkListingsListResponse
+    , apkListingsListResponse
+    , allrKind
+    , allrListings
+
+    -- ** ApksAddExternallyHostedResponse
+    , ApksAddExternallyHostedResponse
+    , apksAddExternallyHostedResponse
+    , aExternallyHostedApk
+
+    -- ** TracksListResponse
+    , TracksListResponse
+    , tracksListResponse
+    , tlrTracks
+    , tlrKind
+
+    -- ** AppEdit
+    , AppEdit
+    , appEdit
+    , aeId
+    , aeExpiryTimeSeconds
+
+    -- ** PageInfo
+    , PageInfo
+    , pageInfo
+    , piResultPerPage
+    , piTotalResults
+    , piStartIndex
+
+    -- ** ImagesListResponse
+    , ImagesListResponse
+    , imagesListResponse
+    , ilrImages
+
+    -- ** Season
+    , Season
+    , season
+    , sStart
+    , sEnd
+
+    -- ** EditsTestersPatch'Track
+    , EditsTestersPatch'Track (..)
+
+    -- ** InAppProductPrices
+    , InAppProductPrices
+    , inAppProductPrices
+
+    -- ** SubscriptionPurchasesDeferResponse
+    , SubscriptionPurchasesDeferResponse
+    , subscriptionPurchasesDeferResponse
+    , spdrNewExpiryTimeMillis
+
+    -- ** ApkListing
+    , ApkListing
+    , apkListing
+    , alLanguage
+    , alRecentChanges
+
+    -- ** SubscriptionPurchase
+    , SubscriptionPurchase
+    , subscriptionPurchase
+    , spKind
+    , spExpiryTimeMillis
+    , spAutoRenewing
+    , spStartTimeMillis
+
+    -- ** ProductPurchase
+    , ProductPurchase
+    , productPurchase
+    , ppPurchaseState
+    , ppConsumptionState
+    , ppKind
+    , ppPurchaseTimeMillis
+    , ppDeveloperPayload
+
+    -- ** EditsTestersGet'Track
+    , EditsTestersGet'Track (..)
+
+    -- ** EditsImagesDeleteall'ImageType
+    , EditsImagesDeleteall'ImageType (..)
 
     -- ** ExternallyHostedApk
     , ExternallyHostedApk
@@ -181,216 +492,81 @@ module Network.Google.Play.Developer
     , ehaUsesPermissions
     , ehaCertificateBase64s
 
-    -- ** ExternallyHostedApkUsesPermission
-    , ExternallyHostedApkUsesPermission
-    , externallyHostedApkUsesPermission
-    , ehaupName
-    , ehaupMaxSdkVersion
-
-    -- ** Image
-    , Image
-    , image
-    , iUrl
-    , iSha1
-    , iId
-
-    -- ** ImagesDeleteAllResponse
-    , ImagesDeleteAllResponse
-    , imagesDeleteAllResponse
-    , idarDeleted
-
-    -- ** ImagesListResponse
-    , ImagesListResponse
-    , imagesListResponse
-    , ilrImages
-
-    -- ** ImagesUploadResponse
-    , ImagesUploadResponse
-    , imagesUploadResponse
-    , iurImage
-
-    -- ** InAppProduct
-    , InAppProduct
-    , inAppProduct
-    , iapStatus
-    , iapTrialPeriod
-    , iapPackageName
-    , iapSeason
-    , iapPurchaseType
-    , iapSubscriptionPeriod
-    , iapPrices
-    , iapSku
-    , iapDefaultPrice
-    , iapListings
-    , iapDefaultLanguage
-
-    -- ** InAppProductListing
-    , InAppProductListing
-    , inAppProductListing
-    , iaplTitle
-    , iaplDescription
-
-    -- ** InAppProductListings
-    , InAppProductListings
-    , inAppProductListings
-
-    -- ** InAppProductPrices
-    , InAppProductPrices
-    , inAppProductPrices
+    -- ** AppDetails
+    , AppDetails
+    , appDetails
+    , adContactPhone
+    , adContactEmail
+    , adContactWebsite
+    , adDefaultLanguage
 
     -- ** InappproductsBatchRequest
     , InappproductsBatchRequest
     , inappproductsBatchRequest
     , iEntrys
 
-    -- ** InappproductsBatchRequestEntry
-    , InappproductsBatchRequestEntry
-    , inappproductsBatchRequestEntry
-    , iMethodName
-    , iInappproductsinsertrequest
-    , iInappproductsupdaterequest
-    , iBatchId
-
-    -- ** InappproductsBatchResponse
-    , InappproductsBatchResponse
-    , inappproductsBatchResponse
-    , ibrEntrys
-    , ibrKind
-
-    -- ** InappproductsBatchResponseEntry
-    , InappproductsBatchResponseEntry
-    , inappproductsBatchResponseEntry
-    , ibreInappproductsupdateresponse
-    , ibreInappproductsinsertresponse
-    , ibreBatchId
-
-    -- ** InappproductsInsertRequest
-    , InappproductsInsertRequest
-    , inappproductsInsertRequest
-    , iirInappproduct
-
-    -- ** InappproductsInsertResponse
-    , InappproductsInsertResponse
-    , inappproductsInsertResponse
-    , iInappproduct
-
-    -- ** InappproductsListResponse
-    , InappproductsListResponse
-    , inappproductsListResponse
-    , ilrTokenPagination
-    , ilrPageInfo
-    , ilrKind
-    , ilrInappproduct
+    -- ** EditsTracksPatch'Track
+    , EditsTracksPatch'Track (..)
 
     -- ** InappproductsUpdateRequest
     , InappproductsUpdateRequest
     , inappproductsUpdateRequest
     , inaInappproduct
 
-    -- ** InappproductsUpdateResponse
-    , InappproductsUpdateResponse
-    , inappproductsUpdateResponse
-    , iurInappproduct
+    -- ** EditsTracksGet'Track
+    , EditsTracksGet'Track (..)
 
-    -- ** Listing
-    , Listing
-    , listing
-    , lFullDescription
-    , lVideo
-    , lShortDescription
-    , lLanguage
-    , lTitle
-
-    -- ** ListingsListResponse
-    , ListingsListResponse
-    , listingsListResponse
-    , llrKind
-    , llrListings
-
-    -- ** MonthDay
-    , MonthDay
-    , monthDay
-    , mdDay
-    , mdMonth
-
-    -- ** PageInfo
-    , PageInfo
-    , pageInfo
-    , piResultPerPage
-    , piTotalResults
-    , piStartIndex
-
-    -- ** Price
-    , Price
-    , price
-    , pPriceMicros
-    , pCurrency
-
-    -- ** ProductPurchase
-    , ProductPurchase
-    , productPurchase
-    , ppPurchaseState
-    , ppConsumptionState
-    , ppKind
-    , ppPurchaseTimeMillis
-    , ppDeveloperPayload
-
-    -- ** Season
-    , Season
-    , season
-    , sStart
-    , sEnd
-
-    -- ** SubscriptionDeferralInfo
-    , SubscriptionDeferralInfo
-    , subscriptionDeferralInfo
-    , sdiDesiredExpiryTimeMillis
-    , sdiExpectedExpiryTimeMillis
-
-    -- ** SubscriptionPurchase
-    , SubscriptionPurchase
-    , subscriptionPurchase
-    , spKind
-    , spExpiryTimeMillis
-    , spAutoRenewing
-    , spStartTimeMillis
-
-    -- ** SubscriptionPurchasesDeferRequest
-    , SubscriptionPurchasesDeferRequest
-    , subscriptionPurchasesDeferRequest
-    , spdrDeferralInfo
-
-    -- ** SubscriptionPurchasesDeferResponse
-    , SubscriptionPurchasesDeferResponse
-    , subscriptionPurchasesDeferResponse
-    , spdrNewExpiryTimeMillis
-
-    -- ** Testers
-    , Testers
-    , testers
-    , tGooglePlusCommunities
-    , tGoogleGroups
-
-    -- ** TokenPagination
-    , TokenPagination
-    , tokenPagination
-    , tpNextPageToken
-    , tpPreviousPageToken
-
-    -- ** Track
-    , Track
-    , track
-    , tVersionCodes
-    , tTrack
-    , tUserFraction
-
-    -- ** TracksListResponse
-    , TracksListResponse
-    , tracksListResponse
-    , tlrTracks
-    , tlrKind
+    -- ** EditsTracksUpdate'Track
+    , EditsTracksUpdate'Track (..)
     ) where
 
+import           Network.Google.API.Androidpublisher.Edits.Apklistings.Delete
+import           Network.Google.API.Androidpublisher.Edits.Apklistings.Deleteall
+import           Network.Google.API.Androidpublisher.Edits.Apklistings.Get
+import           Network.Google.API.Androidpublisher.Edits.Apklistings.List
+import           Network.Google.API.Androidpublisher.Edits.Apklistings.Patch
+import           Network.Google.API.Androidpublisher.Edits.Apklistings.Update
+import           Network.Google.API.Androidpublisher.Edits.Apks.Addexternallyhosted
+import           Network.Google.API.Androidpublisher.Edits.Apks.List
+import           Network.Google.API.Androidpublisher.Edits.Apks.Upload
+import           Network.Google.API.Androidpublisher.Edits.Details.Get
+import           Network.Google.API.Androidpublisher.Edits.Details.Patch
+import           Network.Google.API.Androidpublisher.Edits.Details.Update
+import           Network.Google.API.Androidpublisher.Edits.Expansionfiles.Get
+import           Network.Google.API.Androidpublisher.Edits.Expansionfiles.Patch
+import           Network.Google.API.Androidpublisher.Edits.Expansionfiles.Update
+import           Network.Google.API.Androidpublisher.Edits.Expansionfiles.Upload
+import           Network.Google.API.Androidpublisher.Edits.Images.Delete
+import           Network.Google.API.Androidpublisher.Edits.Images.Deleteall
+import           Network.Google.API.Androidpublisher.Edits.Images.List
+import           Network.Google.API.Androidpublisher.Edits.Images.Upload
+import           Network.Google.API.Androidpublisher.Edits.Listings.Delete
+import           Network.Google.API.Androidpublisher.Edits.Listings.Deleteall
+import           Network.Google.API.Androidpublisher.Edits.Listings.Get
+import           Network.Google.API.Androidpublisher.Edits.Listings.List
+import           Network.Google.API.Androidpublisher.Edits.Listings.Patch
+import           Network.Google.API.Androidpublisher.Edits.Listings.Update
+import           Network.Google.API.Androidpublisher.Edits.Testers.Get
+import           Network.Google.API.Androidpublisher.Edits.Testers.Patch
+import           Network.Google.API.Androidpublisher.Edits.Testers.Update
+import           Network.Google.API.Androidpublisher.Edits.Tracks.Get
+import           Network.Google.API.Androidpublisher.Edits.Tracks.List
+import           Network.Google.API.Androidpublisher.Edits.Tracks.Patch
+import           Network.Google.API.Androidpublisher.Edits.Tracks.Update
+import           Network.Google.API.Androidpublisher.Entitlements.List
+import           Network.Google.API.Androidpublisher.Inappproducts.Batch
+import           Network.Google.API.Androidpublisher.Inappproducts.Delete
+import           Network.Google.API.Androidpublisher.Inappproducts.Get
+import           Network.Google.API.Androidpublisher.Inappproducts.Insert
+import           Network.Google.API.Androidpublisher.Inappproducts.List
+import           Network.Google.API.Androidpublisher.Inappproducts.Patch
+import           Network.Google.API.Androidpublisher.Inappproducts.Update
+import           Network.Google.API.Androidpublisher.Purchases.Products.Get
+import           Network.Google.API.Androidpublisher.Purchases.Subscriptions.Cancel
+import           Network.Google.API.Androidpublisher.Purchases.Subscriptions.Defer
+import           Network.Google.API.Androidpublisher.Purchases.Subscriptions.Get
+import           Network.Google.API.Androidpublisher.Purchases.Subscriptions.Refund
+import           Network.Google.API.Androidpublisher.Purchases.Subscriptions.Revoke
 import           Network.Google.Play.Developer.Types
 import           Network.Google.Prelude
 
@@ -399,971 +575,53 @@ TODO
 -}
 
 type PlayDeveloper =
-     InappproductsAPI :<|> EditsAPI :<|> EntitlementsAPI
-       :<|> PurchasesAPI
+     EditsExpansionfilesUploadAPI :<|>
+       EditsListingsListAPI
+       :<|> EditsTracksUpdateAPI
+       :<|> PurchasesSubscriptionsCancelAPI
+       :<|> EditsListingsUpdateAPI
+       :<|> EditsTestersUpdateAPI
+       :<|> PurchasesSubscriptionsDeferAPI
+       :<|> EditsImagesUploadAPI
+       :<|> EditsExpansionfilesGetAPI
+       :<|> EditsApklistingsDeleteAPI
+       :<|> EditsDetailsGetAPI
+       :<|> InappproductsUpdateAPI
+       :<|> EditsImagesDeleteAPI
+       :<|> EditsApklistingsGetAPI
+       :<|> PurchasesProductsGetAPI
+       :<|> EditsTracksPatchAPI
+       :<|> EditsApklistingsPatchAPI
+       :<|> InappproductsBatchAPI
+       :<|> InappproductsListAPI
+       :<|> EditsListingsDeleteallAPI
+       :<|> InappproductsGetAPI
+       :<|> EditsTestersPatchAPI
+       :<|> EditsImagesListAPI
+       :<|> PurchasesSubscriptionsRevokeAPI
+       :<|> InappproductsPatchAPI
+       :<|> EditsExpansionfilesUpdateAPI
+       :<|> PurchasesSubscriptionsRefundAPI
+       :<|> EditsApklistingsListAPI
+       :<|> EditsDetailsUpdateAPI
+       :<|> EntitlementsListAPI
+       :<|> EditsApklistingsUpdateAPI
+       :<|> EditsApksAddexternallyhostedAPI
+       :<|> EditsApksListAPI
+       :<|> EditsTracksGetAPI
+       :<|> InappproductsInsertAPI
+       :<|> EditsApksUploadAPI
+       :<|> EditsListingsDeleteAPI
+       :<|> EditsListingsGetAPI
+       :<|> EditsExpansionfilesPatchAPI
+       :<|> InappproductsDeleteAPI
+       :<|> EditsTracksListAPI
+       :<|> EditsTestersGetAPI
+       :<|> EditsDetailsPatchAPI
+       :<|> EditsApklistingsDeleteallAPI
+       :<|> EditsListingsPatchAPI
+       :<|> PurchasesSubscriptionsGetAPI
+       :<|> EditsImagesDeleteallAPI
 
-type InappproductsAPI =
-     InappproductsBatch :<|> InappproductsInsert :<|>
-       InappproductsList
-       :<|> InappproductsPatch
-       :<|> InappproductsGet
-       :<|> InappproductsDelete
-       :<|> InappproductsUpdate
-
-type InappproductsBatch =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           "inappproducts" :>
-             "batch" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Post '[JSON] InappproductsBatchResponse
-
--- | Creates a new in-app product for an app.
-type InappproductsInsert =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           Capture "packageName" Text :>
-             "inappproducts" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "autoConvertMissingPrices" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Post '[JSON] InAppProduct
-
--- | List all the in-app products for an Android app, both subscriptions and
--- managed in-app products..
-type InappproductsList =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           Capture "packageName" Text :>
-             "inappproducts" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "token" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "startIndex" Word32 :>
-                             QueryParam "maxResults" Word32 :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   Get '[JSON] InappproductsListResponse
-
--- | Updates the details of an in-app product. This method supports patch
--- semantics.
-type InappproductsPatch =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           Capture "packageName" Text :>
-             "inappproducts" :>
-               Capture "sku" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "autoConvertMissingPrices" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Patch '[JSON] InAppProduct
-
--- | Returns information about the in-app product specified.
-type InappproductsGet =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           Capture "packageName" Text :>
-             "inappproducts" :>
-               Capture "sku" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] InAppProduct
-
--- | Delete an in-app product for an app.
-type InappproductsDelete =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           Capture "packageName" Text :>
-             "inappproducts" :>
-               Capture "sku" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Updates the details of an in-app product.
-type InappproductsUpdate =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           Capture "packageName" Text :>
-             "inappproducts" :>
-               Capture "sku" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "autoConvertMissingPrices" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Put '[JSON] InAppProduct
-
-type EditsAPI =
-     ImagesAPI :<|> ExpansionfilesAPI :<|> TracksAPI :<|>
-       TestersAPI
-       :<|> DetailsAPI
-       :<|> ApklistingsAPI
-       :<|> ApksAPI
-       :<|> ListingsAPI
-
-type ImagesAPI =
-     ImagesList :<|> ImagesDeleteall :<|> ImagesUpload
-       :<|> ImagesDelete
-
--- | Lists all images for the specified language and image type.
-type ImagesList =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           Capture "packageName" Text :>
-             "edits" :>
-               Capture "editId" Text :>
-                 "listings" :>
-                   Capture "language" Text :>
-                     Capture "imageType" Text :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "userIp" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Get '[JSON] ImagesListResponse
-
--- | Deletes all images for the specified language and image type.
-type ImagesDeleteall =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           Capture "packageName" Text :>
-             "edits" :>
-               Capture "editId" Text :>
-                 "listings" :>
-                   Capture "language" Text :>
-                     Capture "imageType" Text :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "userIp" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Delete '[JSON] ImagesDeleteAllResponse
-
--- | Uploads a new image and adds it to the list of images for the specified
--- language and image type.
-type ImagesUpload =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           Capture "packageName" Text :>
-             "edits" :>
-               Capture "editId" Text :>
-                 "listings" :>
-                   Capture "language" Text :>
-                     Capture "imageType" Text :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "userIp" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Post '[JSON] ImagesUploadResponse
-
--- | Deletes the image (specified by id) from the edit.
-type ImagesDelete =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           Capture "packageName" Text :>
-             "edits" :>
-               Capture "editId" Text :>
-                 "listings" :>
-                   Capture "language" Text :>
-                     Capture "imageType" Text :>
-                       Capture "imageId" Text :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "userIp" Text :>
-                               QueryParam "key" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "alt" Text :> Delete '[JSON] ()
-
-type ExpansionfilesAPI =
-     ExpansionfilesPatch :<|> ExpansionfilesGet :<|>
-       ExpansionfilesUpload
-       :<|> ExpansionfilesUpdate
-
--- | Updates the APK\'s Expansion File configuration to reference another
--- APK\'s Expansion Files. To add a new Expansion File use the Upload
--- method. This method supports patch semantics.
-type ExpansionfilesPatch =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           Capture "packageName" Text :>
-             "edits" :>
-               Capture "editId" Text :>
-                 "apks" :>
-                   Capture "apkVersionCode" Int32 :>
-                     "expansionFiles" :>
-                       Capture "expansionFileType" Text :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "userIp" Text :>
-                               QueryParam "key" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "alt" Text :>
-                                       Patch '[JSON] ExpansionFile
-
--- | Fetches the Expansion File configuration for the APK specified.
-type ExpansionfilesGet =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           Capture "packageName" Text :>
-             "edits" :>
-               Capture "editId" Text :>
-                 "apks" :>
-                   Capture "apkVersionCode" Int32 :>
-                     "expansionFiles" :>
-                       Capture "expansionFileType" Text :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "userIp" Text :>
-                               QueryParam "key" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "alt" Text :>
-                                       Get '[JSON] ExpansionFile
-
--- | Uploads and attaches a new Expansion File to the APK specified.
-type ExpansionfilesUpload =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           Capture "packageName" Text :>
-             "edits" :>
-               Capture "editId" Text :>
-                 "apks" :>
-                   Capture "apkVersionCode" Int32 :>
-                     "expansionFiles" :>
-                       Capture "expansionFileType" Text :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "userIp" Text :>
-                               QueryParam "key" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "alt" Text :>
-                                       Post '[JSON] ExpansionFilesUploadResponse
-
--- | Updates the APK\'s Expansion File configuration to reference another
--- APK\'s Expansion Files. To add a new Expansion File use the Upload
--- method.
-type ExpansionfilesUpdate =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           Capture "packageName" Text :>
-             "edits" :>
-               Capture "editId" Text :>
-                 "apks" :>
-                   Capture "apkVersionCode" Int32 :>
-                     "expansionFiles" :>
-                       Capture "expansionFileType" Text :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "userIp" Text :>
-                               QueryParam "key" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "alt" Text :>
-                                       Put '[JSON] ExpansionFile
-
-type TracksAPI =
-     TracksList :<|> TracksPatch :<|> TracksGet :<|>
-       TracksUpdate
-
--- | Lists all the track configurations for this edit.
-type TracksList =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           Capture "packageName" Text :>
-             "edits" :>
-               Capture "editId" Text :>
-                 "tracks" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Get '[JSON] TracksListResponse
-
--- | Updates the track configuration for the specified track type. When
--- halted, the rollout track cannot be updated without adding new APKs, and
--- adding new APKs will cause it to resume. This method supports patch
--- semantics.
-type TracksPatch =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           Capture "packageName" Text :>
-             "edits" :>
-               Capture "editId" Text :>
-                 "tracks" :>
-                   Capture "track" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Patch '[JSON] Track
-
--- | Fetches the track configuration for the specified track type. Includes
--- the APK version codes that are in this track.
-type TracksGet =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           Capture "packageName" Text :>
-             "edits" :>
-               Capture "editId" Text :>
-                 "tracks" :>
-                   Capture "track" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Get '[JSON] Track
-
--- | Updates the track configuration for the specified track type. When
--- halted, the rollout track cannot be updated without adding new APKs, and
--- adding new APKs will cause it to resume.
-type TracksUpdate =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           Capture "packageName" Text :>
-             "edits" :>
-               Capture "editId" Text :>
-                 "tracks" :>
-                   Capture "track" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Put '[JSON] Track
-
-type TestersAPI =
-     TestersPatch :<|> TestersGet :<|> TestersUpdate
-
-type TestersPatch =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           Capture "packageName" Text :>
-             "edits" :>
-               Capture "editId" Text :>
-                 "testers" :>
-                   Capture "track" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Patch '[JSON] Testers
-
-type TestersGet =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           Capture "packageName" Text :>
-             "edits" :>
-               Capture "editId" Text :>
-                 "testers" :>
-                   Capture "track" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Get '[JSON] Testers
-
-type TestersUpdate =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           Capture "packageName" Text :>
-             "edits" :>
-               Capture "editId" Text :>
-                 "testers" :>
-                   Capture "track" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Put '[JSON] Testers
-
-type DetailsAPI =
-     DetailsPatch :<|> DetailsGet :<|> DetailsUpdate
-
--- | Updates app details for this edit. This method supports patch semantics.
-type DetailsPatch =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           Capture "packageName" Text :>
-             "edits" :>
-               Capture "editId" Text :>
-                 "details" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Patch '[JSON] AppDetails
-
--- | Fetches app details for this edit. This includes the default language
--- and developer support contact information.
-type DetailsGet =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           Capture "packageName" Text :>
-             "edits" :>
-               Capture "editId" Text :>
-                 "details" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Get '[JSON] AppDetails
-
--- | Updates app details for this edit.
-type DetailsUpdate =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           Capture "packageName" Text :>
-             "edits" :>
-               Capture "editId" Text :>
-                 "details" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Put '[JSON] AppDetails
-
-type ApklistingsAPI =
-     ApklistingsList :<|> ApklistingsDeleteall :<|>
-       ApklistingsPatch
-       :<|> ApklistingsGet
-       :<|> ApklistingsDelete
-       :<|> ApklistingsUpdate
-
--- | Lists all the APK-specific localized listings for a specified APK.
-type ApklistingsList =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           Capture "packageName" Text :>
-             "edits" :>
-               Capture "editId" Text :>
-                 "apks" :>
-                   Capture "apkVersionCode" Int32 :>
-                     "listings" :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "userIp" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Get '[JSON] ApkListingsListResponse
-
--- | Deletes all the APK-specific localized listings for a specified APK.
-type ApklistingsDeleteall =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           Capture "packageName" Text :>
-             "edits" :>
-               Capture "editId" Text :>
-                 "apks" :>
-                   Capture "apkVersionCode" Int32 :>
-                     "listings" :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "userIp" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Updates or creates the APK-specific localized listing for a specified
--- APK and language code. This method supports patch semantics.
-type ApklistingsPatch =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           Capture "packageName" Text :>
-             "edits" :>
-               Capture "editId" Text :>
-                 "apks" :>
-                   Capture "apkVersionCode" Int32 :>
-                     "listings" :>
-                       Capture "language" Text :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "userIp" Text :>
-                               QueryParam "key" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "alt" Text :>
-                                       Patch '[JSON] ApkListing
-
--- | Fetches the APK-specific localized listing for a specified APK and
--- language code.
-type ApklistingsGet =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           Capture "packageName" Text :>
-             "edits" :>
-               Capture "editId" Text :>
-                 "apks" :>
-                   Capture "apkVersionCode" Int32 :>
-                     "listings" :>
-                       Capture "language" Text :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "userIp" Text :>
-                               QueryParam "key" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "alt" Text :>
-                                       Get '[JSON] ApkListing
-
--- | Deletes the APK-specific localized listing for a specified APK and
--- language code.
-type ApklistingsDelete =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           Capture "packageName" Text :>
-             "edits" :>
-               Capture "editId" Text :>
-                 "apks" :>
-                   Capture "apkVersionCode" Int32 :>
-                     "listings" :>
-                       Capture "language" Text :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "userIp" Text :>
-                               QueryParam "key" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Updates or creates the APK-specific localized listing for a specified
--- APK and language code.
-type ApklistingsUpdate =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           Capture "packageName" Text :>
-             "edits" :>
-               Capture "editId" Text :>
-                 "apks" :>
-                   Capture "apkVersionCode" Int32 :>
-                     "listings" :>
-                       Capture "language" Text :>
-                         QueryParam "quotaUser" Text :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "userIp" Text :>
-                               QueryParam "key" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "alt" Text :>
-                                       Put '[JSON] ApkListing
-
-type ApksAPI =
-     ApksList :<|> ApksAddexternallyhosted :<|> ApksUpload
-
-type ApksList =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           Capture "packageName" Text :>
-             "edits" :>
-               Capture "editId" Text :>
-                 "apks" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Get '[JSON] ApksListResponse
-
--- | Creates a new APK without uploading the APK itself to Google Play,
--- instead hosting the APK at a specified URL. This function is only
--- available to enterprises using Google Play for Work whose application is
--- configured to restrict distribution to the enterprise domain.
-type ApksAddexternallyhosted =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           Capture "packageName" Text :>
-             "edits" :>
-               Capture "editId" Text :>
-                 "apks" :>
-                   "externallyHosted" :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   Post '[JSON] ApksAddExternallyHostedResponse
-
-type ApksUpload =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           Capture "packageName" Text :>
-             "edits" :>
-               Capture "editId" Text :>
-                 "apks" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Post '[JSON] Apk
-
-type ListingsAPI =
-     ListingsList :<|> ListingsDeleteall :<|>
-       ListingsPatch
-       :<|> ListingsGet
-       :<|> ListingsDelete
-       :<|> ListingsUpdate
-
--- | Returns all of the localized store listings attached to this edit.
-type ListingsList =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           Capture "packageName" Text :>
-             "edits" :>
-               Capture "editId" Text :>
-                 "listings" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Get '[JSON] ListingsListResponse
-
--- | Deletes all localized listings from an edit.
-type ListingsDeleteall =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           Capture "packageName" Text :>
-             "edits" :>
-               Capture "editId" Text :>
-                 "listings" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Creates or updates a localized store listing. This method supports patch
--- semantics.
-type ListingsPatch =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           Capture "packageName" Text :>
-             "edits" :>
-               Capture "editId" Text :>
-                 "listings" :>
-                   Capture "language" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Patch '[JSON] Listing
-
--- | Fetches information about a localized store listing.
-type ListingsGet =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           Capture "packageName" Text :>
-             "edits" :>
-               Capture "editId" Text :>
-                 "listings" :>
-                   Capture "language" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Get '[JSON] Listing
-
--- | Deletes the specified localized store listing from an edit.
-type ListingsDelete =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           Capture "packageName" Text :>
-             "edits" :>
-               Capture "editId" Text :>
-                 "listings" :>
-                   Capture "language" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Creates or updates a localized store listing.
-type ListingsUpdate =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           Capture "packageName" Text :>
-             "edits" :>
-               Capture "editId" Text :>
-                 "listings" :>
-                   Capture "language" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Put '[JSON] Listing
-
-type EntitlementsAPI = EntitlementsList
-
--- | Lists the user\'s current inapp item or subscription entitlements
-type EntitlementsList =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           Capture "packageName" Text :>
-             "entitlements" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "token" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "startIndex" Word32 :>
-                             QueryParam "productId" Text :>
-                               QueryParam "maxResults" Word32 :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Get '[JSON] EntitlementsListResponse
-
-type PurchasesAPI = ProductsAPI :<|> SubscriptionsAPI
-
-type ProductsAPI = ProductsGet
-
--- | Checks the purchase and consumption status of an inapp item.
-type ProductsGet =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           Capture "packageName" Text :>
-             "purchases" :>
-               "products" :>
-                 Capture "productId" Text :>
-                   "tokens" :>
-                     Capture "token" Text :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "userIp" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Get '[JSON] ProductPurchase
-
-type SubscriptionsAPI =
-     SubscriptionsDefer :<|> SubscriptionsGet :<|>
-       SubscriptionsRefund
-       :<|> SubscriptionsRevoke
-       :<|> SubscriptionsCancel
-
--- | Defers a user\'s subscription purchase until a specified future
--- expiration time.
-type SubscriptionsDefer =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           Capture "packageName" Text :>
-             "purchases" :>
-               "subscriptions" :>
-                 Capture "subscriptionId" Text :>
-                   "tokens" :>
-                     "{token}:defer" :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "userIp" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Post '[JSON]
-                                       SubscriptionPurchasesDeferResponse
-
--- | Checks whether a user\'s subscription purchase is valid and returns its
--- expiry time.
-type SubscriptionsGet =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           Capture "packageName" Text :>
-             "purchases" :>
-               "subscriptions" :>
-                 Capture "subscriptionId" Text :>
-                   "tokens" :>
-                     Capture "token" Text :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "userIp" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Get '[JSON] SubscriptionPurchase
-
--- | Refunds a user\'s subscription purchase, but the subscription remains
--- valid until its expiration time and it will continue to recur.
-type SubscriptionsRefund =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           Capture "packageName" Text :>
-             "purchases" :>
-               "subscriptions" :>
-                 Capture "subscriptionId" Text :>
-                   "tokens" :>
-                     "{token}:refund" :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "userIp" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :> Post '[JSON] ()
-
--- | Refunds and immediately revokes a user\'s subscription purchase. Access
--- to the subscription will be terminated immediately and it will stop
--- recurring.
-type SubscriptionsRevoke =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           Capture "packageName" Text :>
-             "purchases" :>
-               "subscriptions" :>
-                 Capture "subscriptionId" Text :>
-                   "tokens" :>
-                     "{token}:revoke" :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "userIp" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :> Post '[JSON] ()
-
--- | Cancels a user\'s subscription purchase. The subscription remains valid
--- until its expiration time.
-type SubscriptionsCancel =
-     "androidpublisher" :>
-       "v2" :>
-         "applications" :>
-           Capture "packageName" Text :>
-             "purchases" :>
-               "subscriptions" :>
-                 Capture "subscriptionId" Text :>
-                   "tokens" :>
-                     "{token}:cancel" :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "userIp" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :> Post '[JSON] ()
+playDeveloper :: Proxy PlayDeveloper
+playDeveloper = Proxy

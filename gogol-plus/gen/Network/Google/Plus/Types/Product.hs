@@ -18,469 +18,77 @@ module Network.Google.Plus.Types.Product where
 import           Network.Google.Plus.Types.Sum
 import           Network.Google.Prelude
 
---
--- /See:/ 'acl' smart constructor.
-data Acl = Acl
-    { _aclKind        :: !Text
-    , _aclItems       :: !(Maybe [Maybe PlusAclentryResource])
-    , _aclDescription :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Acl' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aclKind'
---
--- * 'aclItems'
---
--- * 'aclDescription'
-acl
-    :: Acl
-acl =
-    Acl
-    { _aclKind = "plus#acl"
-    , _aclItems = Nothing
-    , _aclDescription = Nothing
-    }
-
--- | Identifies this resource as a collection of access controls. Value:
--- \"plus#acl\".
-aclKind :: Lens' Acl Text
-aclKind = lens _aclKind (\ s a -> s{_aclKind = a})
-
--- | The list of access entries.
-aclItems :: Lens' Acl [Maybe PlusAclentryResource]
-aclItems
-  = lens _aclItems (\ s a -> s{_aclItems = a}) .
-      _Default
-      . _Coerce
-
--- | Description of the access granted, suitable for display.
-aclDescription :: Lens' Acl (Maybe Text)
-aclDescription
-  = lens _aclDescription
-      (\ s a -> s{_aclDescription = a})
-
-instance FromJSON Acl where
-        parseJSON
-          = withObject "Acl"
-              (\ o ->
-                 Acl <$>
-                   (o .:? "kind" .!= "plus#acl") <*>
-                     (o .:? "items" .!= mempty)
-                     <*> (o .:? "description"))
-
-instance ToJSON Acl where
-        toJSON Acl{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _aclKind),
-                  ("items" .=) <$> _aclItems,
-                  ("description" .=) <$> _aclDescription])
-
---
--- /See:/ 'activity' smart constructor.
-data Activity = Activity
-    { _aAccess          :: !(Maybe (Maybe Acl))
-    , _aPlaceName       :: !(Maybe Text)
-    , _aEtag            :: !(Maybe Text)
-    , _aAnnotation      :: !(Maybe Text)
-    , _aLocation        :: !(Maybe (Maybe Place))
-    , _aGeocode         :: !(Maybe Text)
-    , _aKind            :: !Text
-    , _aRadius          :: !(Maybe Text)
-    , _aPublished       :: !(Maybe UTCTime)
-    , _aUrl             :: !(Maybe Text)
-    , _aActor           :: !(Maybe ActivityActor)
-    , _aAddress         :: !(Maybe Text)
-    , _aObject          :: !(Maybe ActivityObject)
-    , _aId              :: !(Maybe Text)
-    , _aUpdated         :: !(Maybe UTCTime)
-    , _aTitle           :: !(Maybe Text)
-    , _aVerb            :: !(Maybe Text)
-    , _aCrosspostSource :: !(Maybe Text)
-    , _aPlaceId         :: !(Maybe Text)
-    , _aProvider        :: !(Maybe ActivityProvider)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Activity' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aAccess'
---
--- * 'aPlaceName'
---
--- * 'aEtag'
---
--- * 'aAnnotation'
---
--- * 'aLocation'
---
--- * 'aGeocode'
---
--- * 'aKind'
---
--- * 'aRadius'
---
--- * 'aPublished'
---
--- * 'aUrl'
---
--- * 'aActor'
---
--- * 'aAddress'
---
--- * 'aObject'
---
--- * 'aId'
---
--- * 'aUpdated'
---
--- * 'aTitle'
---
--- * 'aVerb'
---
--- * 'aCrosspostSource'
---
--- * 'aPlaceId'
---
--- * 'aProvider'
-activity
-    :: Activity
-activity =
-    Activity
-    { _aAccess = Nothing
-    , _aPlaceName = Nothing
-    , _aEtag = Nothing
-    , _aAnnotation = Nothing
-    , _aLocation = Nothing
-    , _aGeocode = Nothing
-    , _aKind = "plus#activity"
-    , _aRadius = Nothing
-    , _aPublished = Nothing
-    , _aUrl = Nothing
-    , _aActor = Nothing
-    , _aAddress = Nothing
-    , _aObject = Nothing
-    , _aId = Nothing
-    , _aUpdated = Nothing
-    , _aTitle = Nothing
-    , _aVerb = Nothing
-    , _aCrosspostSource = Nothing
-    , _aPlaceId = Nothing
-    , _aProvider = Nothing
-    }
-
--- | Identifies who has access to see this activity.
-aAccess :: Lens' Activity (Maybe (Maybe Acl))
-aAccess = lens _aAccess (\ s a -> s{_aAccess = a})
-
--- | Name of the place where this activity occurred.
-aPlaceName :: Lens' Activity (Maybe Text)
-aPlaceName
-  = lens _aPlaceName (\ s a -> s{_aPlaceName = a})
-
--- | ETag of this response for caching purposes.
-aEtag :: Lens' Activity (Maybe Text)
-aEtag = lens _aEtag (\ s a -> s{_aEtag = a})
-
--- | Additional content added by the person who shared this activity,
--- applicable only when resharing an activity.
-aAnnotation :: Lens' Activity (Maybe Text)
-aAnnotation
-  = lens _aAnnotation (\ s a -> s{_aAnnotation = a})
-
--- | The location where this activity occurred.
-aLocation :: Lens' Activity (Maybe (Maybe Place))
-aLocation
-  = lens _aLocation (\ s a -> s{_aLocation = a})
-
--- | Latitude and longitude where this activity occurred. Format is latitude
--- followed by longitude, space separated.
-aGeocode :: Lens' Activity (Maybe Text)
-aGeocode = lens _aGeocode (\ s a -> s{_aGeocode = a})
-
--- | Identifies this resource as an activity. Value: \"plus#activity\".
-aKind :: Lens' Activity Text
-aKind = lens _aKind (\ s a -> s{_aKind = a})
-
--- | Radius, in meters, of the region where this activity occurred, centered
--- at the latitude and longitude identified in geocode.
-aRadius :: Lens' Activity (Maybe Text)
-aRadius = lens _aRadius (\ s a -> s{_aRadius = a})
-
--- | The time at which this activity was initially published. Formatted as an
--- RFC 3339 timestamp.
-aPublished :: Lens' Activity (Maybe UTCTime)
-aPublished
-  = lens _aPublished (\ s a -> s{_aPublished = a})
-
--- | The link to this activity.
-aUrl :: Lens' Activity (Maybe Text)
-aUrl = lens _aUrl (\ s a -> s{_aUrl = a})
-
--- | The person who performed this activity.
-aActor :: Lens' Activity (Maybe ActivityActor)
-aActor = lens _aActor (\ s a -> s{_aActor = a})
-
--- | Street address where this activity occurred.
-aAddress :: Lens' Activity (Maybe Text)
-aAddress = lens _aAddress (\ s a -> s{_aAddress = a})
-
--- | The object of this activity.
-aObject :: Lens' Activity (Maybe ActivityObject)
-aObject = lens _aObject (\ s a -> s{_aObject = a})
-
--- | The ID of this activity.
-aId :: Lens' Activity (Maybe Text)
-aId = lens _aId (\ s a -> s{_aId = a})
-
--- | The time at which this activity was last updated. Formatted as an RFC
--- 3339 timestamp.
-aUpdated :: Lens' Activity (Maybe UTCTime)
-aUpdated = lens _aUpdated (\ s a -> s{_aUpdated = a})
-
--- | Title of this activity.
-aTitle :: Lens' Activity (Maybe Text)
-aTitle = lens _aTitle (\ s a -> s{_aTitle = a})
-
--- | This activity\'s verb, which indicates the action that was performed.
--- Possible values include, but are not limited to, the following values: -
--- \"post\" - Publish content to the stream. - \"share\" - Reshare an
--- activity.
-aVerb :: Lens' Activity (Maybe Text)
-aVerb = lens _aVerb (\ s a -> s{_aVerb = a})
-
--- | If this activity is a crosspost from another system, this property
--- specifies the ID of the original activity.
-aCrosspostSource :: Lens' Activity (Maybe Text)
-aCrosspostSource
-  = lens _aCrosspostSource
-      (\ s a -> s{_aCrosspostSource = a})
-
--- | ID of the place where this activity occurred.
-aPlaceId :: Lens' Activity (Maybe Text)
-aPlaceId = lens _aPlaceId (\ s a -> s{_aPlaceId = a})
-
--- | The service provider that initially published this activity.
-aProvider :: Lens' Activity (Maybe ActivityProvider)
-aProvider
-  = lens _aProvider (\ s a -> s{_aProvider = a})
-
-instance FromJSON Activity where
-        parseJSON
-          = withObject "Activity"
-              (\ o ->
-                 Activity <$>
-                   (o .:? "access") <*> (o .:? "placeName") <*>
-                     (o .:? "etag")
-                     <*> (o .:? "annotation")
-                     <*> (o .:? "location")
-                     <*> (o .:? "geocode")
-                     <*> (o .:? "kind" .!= "plus#activity")
-                     <*> (o .:? "radius")
-                     <*> (o .:? "published")
-                     <*> (o .:? "url")
-                     <*> (o .:? "actor")
-                     <*> (o .:? "address")
-                     <*> (o .:? "object")
-                     <*> (o .:? "id")
-                     <*> (o .:? "updated")
-                     <*> (o .:? "title")
-                     <*> (o .:? "verb")
-                     <*> (o .:? "crosspostSource")
-                     <*> (o .:? "placeId")
-                     <*> (o .:? "provider"))
-
-instance ToJSON Activity where
-        toJSON Activity{..}
-          = object
-              (catMaybes
-                 [("access" .=) <$> _aAccess,
-                  ("placeName" .=) <$> _aPlaceName,
-                  ("etag" .=) <$> _aEtag,
-                  ("annotation" .=) <$> _aAnnotation,
-                  ("location" .=) <$> _aLocation,
-                  ("geocode" .=) <$> _aGeocode,
-                  Just ("kind" .= _aKind), ("radius" .=) <$> _aRadius,
-                  ("published" .=) <$> _aPublished,
-                  ("url" .=) <$> _aUrl, ("actor" .=) <$> _aActor,
-                  ("address" .=) <$> _aAddress,
-                  ("object" .=) <$> _aObject, ("id" .=) <$> _aId,
-                  ("updated" .=) <$> _aUpdated,
-                  ("title" .=) <$> _aTitle, ("verb" .=) <$> _aVerb,
-                  ("crosspostSource" .=) <$> _aCrosspostSource,
-                  ("placeId" .=) <$> _aPlaceId,
-                  ("provider" .=) <$> _aProvider])
-
--- | The person who performed this activity.
---
--- /See:/ 'activityActor' smart constructor.
-data ActivityActor = ActivityActor
-    { _aaImage        :: !(Maybe ActivityImageActor)
-    , _aaUrl          :: !(Maybe Text)
-    , _aaName         :: !(Maybe ActivityNameActor)
-    , _aaDisplayName  :: !(Maybe Text)
-    , _aaId           :: !(Maybe Text)
-    , _aaVerification :: !(Maybe ActivityVerificationActor)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ActivityActor' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aaImage'
---
--- * 'aaUrl'
---
--- * 'aaName'
---
--- * 'aaDisplayName'
---
--- * 'aaId'
---
--- * 'aaVerification'
-activityActor
-    :: ActivityActor
-activityActor =
-    ActivityActor
-    { _aaImage = Nothing
-    , _aaUrl = Nothing
-    , _aaName = Nothing
-    , _aaDisplayName = Nothing
-    , _aaId = Nothing
-    , _aaVerification = Nothing
-    }
-
--- | The image representation of the actor.
-aaImage :: Lens' ActivityActor (Maybe ActivityImageActor)
-aaImage = lens _aaImage (\ s a -> s{_aaImage = a})
-
--- | The link to the actor\'s Google profile.
-aaUrl :: Lens' ActivityActor (Maybe Text)
-aaUrl = lens _aaUrl (\ s a -> s{_aaUrl = a})
-
--- | An object representation of the individual components of name.
-aaName :: Lens' ActivityActor (Maybe ActivityNameActor)
-aaName = lens _aaName (\ s a -> s{_aaName = a})
-
--- | The name of the actor, suitable for display.
-aaDisplayName :: Lens' ActivityActor (Maybe Text)
-aaDisplayName
-  = lens _aaDisplayName
-      (\ s a -> s{_aaDisplayName = a})
-
--- | The ID of the actor\'s Person resource.
-aaId :: Lens' ActivityActor (Maybe Text)
-aaId = lens _aaId (\ s a -> s{_aaId = a})
-
 -- | Verification status of actor.
-aaVerification :: Lens' ActivityActor (Maybe ActivityVerificationActor)
-aaVerification
-  = lens _aaVerification
-      (\ s a -> s{_aaVerification = a})
-
-instance FromJSON ActivityActor where
-        parseJSON
-          = withObject "ActivityActor"
-              (\ o ->
-                 ActivityActor <$>
-                   (o .:? "image") <*> (o .:? "url") <*> (o .:? "name")
-                     <*> (o .:? "displayName")
-                     <*> (o .:? "id")
-                     <*> (o .:? "verification"))
-
-instance ToJSON ActivityActor where
-        toJSON ActivityActor{..}
-          = object
-              (catMaybes
-                 [("image" .=) <$> _aaImage, ("url" .=) <$> _aaUrl,
-                  ("name" .=) <$> _aaName,
-                  ("displayName" .=) <$> _aaDisplayName,
-                  ("id" .=) <$> _aaId,
-                  ("verification" .=) <$> _aaVerification])
-
--- | If this activity\'s object is itself another activity, such as when a
--- person reshares an activity, this property specifies the original
--- activity\'s actor.
 --
--- /See:/ 'activityActorObject' smart constructor.
-data ActivityActorObject = ActivityActorObject
-    { _aaoImage        :: !(Maybe ActivityImageActorObject)
-    , _aaoUrl          :: !(Maybe Text)
-    , _aaoDisplayName  :: !(Maybe Text)
-    , _aaoId           :: !(Maybe Text)
-    , _aaoVerification :: !(Maybe ActivityVerificationActorObject)
+-- /See:/ 'activityVerificationActor' smart constructor.
+newtype ActivityVerificationActor = ActivityVerificationActor
+    { _avaAdHocVerified :: Maybe Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ActivityActorObject' with the minimum fields required to make a request.
+-- | Creates a value of 'ActivityVerificationActor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aaoImage'
---
--- * 'aaoUrl'
---
--- * 'aaoDisplayName'
---
--- * 'aaoId'
---
--- * 'aaoVerification'
-activityActorObject
-    :: ActivityActorObject
-activityActorObject =
-    ActivityActorObject
-    { _aaoImage = Nothing
-    , _aaoUrl = Nothing
-    , _aaoDisplayName = Nothing
-    , _aaoId = Nothing
-    , _aaoVerification = Nothing
+-- * 'avaAdHocVerified'
+activityVerificationActor
+    :: ActivityVerificationActor
+activityVerificationActor =
+    ActivityVerificationActor
+    { _avaAdHocVerified = Nothing
     }
 
--- | The image representation of the original actor.
-aaoImage :: Lens' ActivityActorObject (Maybe ActivityImageActorObject)
-aaoImage = lens _aaoImage (\ s a -> s{_aaoImage = a})
+-- | Verification for one-time or manual processes.
+avaAdHocVerified :: Lens' ActivityVerificationActor (Maybe Text)
+avaAdHocVerified
+  = lens _avaAdHocVerified
+      (\ s a -> s{_avaAdHocVerified = a})
 
--- | A link to the original actor\'s Google profile.
-aaoUrl :: Lens' ActivityActorObject (Maybe Text)
-aaoUrl = lens _aaoUrl (\ s a -> s{_aaoUrl = a})
-
--- | The original actor\'s name, which is suitable for display.
-aaoDisplayName :: Lens' ActivityActorObject (Maybe Text)
-aaoDisplayName
-  = lens _aaoDisplayName
-      (\ s a -> s{_aaoDisplayName = a})
-
--- | ID of the original actor.
-aaoId :: Lens' ActivityActorObject (Maybe Text)
-aaoId = lens _aaoId (\ s a -> s{_aaoId = a})
-
--- | Verification status of actor.
-aaoVerification :: Lens' ActivityActorObject (Maybe ActivityVerificationActorObject)
-aaoVerification
-  = lens _aaoVerification
-      (\ s a -> s{_aaoVerification = a})
-
-instance FromJSON ActivityActorObject where
+instance FromJSON ActivityVerificationActor where
         parseJSON
-          = withObject "ActivityActorObject"
+          = withObject "ActivityVerificationActor"
               (\ o ->
-                 ActivityActorObject <$>
-                   (o .:? "image") <*> (o .:? "url") <*>
-                     (o .:? "displayName")
-                     <*> (o .:? "id")
-                     <*> (o .:? "verification"))
+                 ActivityVerificationActor <$>
+                   (o .:? "adHocVerified"))
 
-instance ToJSON ActivityActorObject where
-        toJSON ActivityActorObject{..}
+instance ToJSON ActivityVerificationActor where
+        toJSON ActivityVerificationActor{..}
           = object
               (catMaybes
-                 [("image" .=) <$> _aaoImage, ("url" .=) <$> _aaoUrl,
-                  ("displayName" .=) <$> _aaoDisplayName,
-                  ("id" .=) <$> _aaoId,
-                  ("verification" .=) <$> _aaoVerification])
+                 [("adHocVerified" .=) <$> _avaAdHocVerified])
+
+-- | The image representation of this actor.
+--
+-- /See:/ 'commentImageActor' smart constructor.
+newtype CommentImageActor = CommentImageActor
+    { _ciaUrl :: Maybe Text
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CommentImageActor' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ciaUrl'
+commentImageActor
+    :: CommentImageActor
+commentImageActor =
+    CommentImageActor
+    { _ciaUrl = Nothing
+    }
+
+-- | The URL of the actor\'s profile photo. To resize the image and crop it
+-- to a square, append the query string ?sz=x, where x is the dimension in
+-- pixels of each side.
+ciaUrl :: Lens' CommentImageActor (Maybe Text)
+ciaUrl = lens _ciaUrl (\ s a -> s{_ciaUrl = a})
+
+instance FromJSON CommentImageActor where
+        parseJSON
+          = withObject "CommentImageActor"
+              (\ o -> CommentImageActor <$> (o .:? "url"))
+
+instance ToJSON CommentImageActor where
+        toJSON CommentImageActor{..}
+          = object (catMaybes [("url" .=) <$> _ciaUrl])
 
 -- | If the attachment is a video, the embeddable link.
 --
@@ -530,235 +138,6 @@ instance ToJSON ActivityEmbedItemAttachmentsObject
                  [("url" .=) <$> _aeiaoUrl,
                   ("type" .=) <$> _aeiaoType])
 
---
--- /See:/ 'activityFeed' smart constructor.
-data ActivityFeed = ActivityFeed
-    { _afEtag          :: !(Maybe Text)
-    , _afNextPageToken :: !(Maybe Text)
-    , _afNextLink      :: !(Maybe Text)
-    , _afKind          :: !Text
-    , _afItems         :: !(Maybe [Maybe Activity])
-    , _afSelfLink      :: !(Maybe Text)
-    , _afId            :: !(Maybe Text)
-    , _afUpdated       :: !(Maybe UTCTime)
-    , _afTitle         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ActivityFeed' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'afEtag'
---
--- * 'afNextPageToken'
---
--- * 'afNextLink'
---
--- * 'afKind'
---
--- * 'afItems'
---
--- * 'afSelfLink'
---
--- * 'afId'
---
--- * 'afUpdated'
---
--- * 'afTitle'
-activityFeed
-    :: ActivityFeed
-activityFeed =
-    ActivityFeed
-    { _afEtag = Nothing
-    , _afNextPageToken = Nothing
-    , _afNextLink = Nothing
-    , _afKind = "plus#activityFeed"
-    , _afItems = Nothing
-    , _afSelfLink = Nothing
-    , _afId = Nothing
-    , _afUpdated = Nothing
-    , _afTitle = Nothing
-    }
-
--- | ETag of this response for caching purposes.
-afEtag :: Lens' ActivityFeed (Maybe Text)
-afEtag = lens _afEtag (\ s a -> s{_afEtag = a})
-
--- | The continuation token, which is used to page through large result sets.
--- Provide this value in a subsequent request to return the next page of
--- results.
-afNextPageToken :: Lens' ActivityFeed (Maybe Text)
-afNextPageToken
-  = lens _afNextPageToken
-      (\ s a -> s{_afNextPageToken = a})
-
--- | Link to the next page of activities.
-afNextLink :: Lens' ActivityFeed (Maybe Text)
-afNextLink
-  = lens _afNextLink (\ s a -> s{_afNextLink = a})
-
--- | Identifies this resource as a collection of activities. Value:
--- \"plus#activityFeed\".
-afKind :: Lens' ActivityFeed Text
-afKind = lens _afKind (\ s a -> s{_afKind = a})
-
--- | The activities in this page of results.
-afItems :: Lens' ActivityFeed [Maybe Activity]
-afItems
-  = lens _afItems (\ s a -> s{_afItems = a}) . _Default
-      . _Coerce
-
--- | Link to this activity resource.
-afSelfLink :: Lens' ActivityFeed (Maybe Text)
-afSelfLink
-  = lens _afSelfLink (\ s a -> s{_afSelfLink = a})
-
--- | The ID of this collection of activities. Deprecated.
-afId :: Lens' ActivityFeed (Maybe Text)
-afId = lens _afId (\ s a -> s{_afId = a})
-
--- | The time at which this collection of activities was last updated.
--- Formatted as an RFC 3339 timestamp.
-afUpdated :: Lens' ActivityFeed (Maybe UTCTime)
-afUpdated
-  = lens _afUpdated (\ s a -> s{_afUpdated = a})
-
--- | The title of this collection of activities, which is a truncated portion
--- of the content.
-afTitle :: Lens' ActivityFeed (Maybe Text)
-afTitle = lens _afTitle (\ s a -> s{_afTitle = a})
-
-instance FromJSON ActivityFeed where
-        parseJSON
-          = withObject "ActivityFeed"
-              (\ o ->
-                 ActivityFeed <$>
-                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
-                     (o .:? "nextLink")
-                     <*> (o .:? "kind" .!= "plus#activityFeed")
-                     <*> (o .:? "items" .!= mempty)
-                     <*> (o .:? "selfLink")
-                     <*> (o .:? "id")
-                     <*> (o .:? "updated")
-                     <*> (o .:? "title"))
-
-instance ToJSON ActivityFeed where
-        toJSON ActivityFeed{..}
-          = object
-              (catMaybes
-                 [("etag" .=) <$> _afEtag,
-                  ("nextPageToken" .=) <$> _afNextPageToken,
-                  ("nextLink" .=) <$> _afNextLink,
-                  Just ("kind" .= _afKind), ("items" .=) <$> _afItems,
-                  ("selfLink" .=) <$> _afSelfLink, ("id" .=) <$> _afId,
-                  ("updated" .=) <$> _afUpdated,
-                  ("title" .=) <$> _afTitle])
-
--- | The full image URL for photo attachments.
---
--- /See:/ 'activityFullImageItemAttachmentsObject' smart constructor.
-data ActivityFullImageItemAttachmentsObject = ActivityFullImageItemAttachmentsObject
-    { _afiiaoHeight :: !(Maybe Word32)
-    , _afiiaoUrl    :: !(Maybe Text)
-    , _afiiaoWidth  :: !(Maybe Word32)
-    , _afiiaoType   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ActivityFullImageItemAttachmentsObject' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'afiiaoHeight'
---
--- * 'afiiaoUrl'
---
--- * 'afiiaoWidth'
---
--- * 'afiiaoType'
-activityFullImageItemAttachmentsObject
-    :: ActivityFullImageItemAttachmentsObject
-activityFullImageItemAttachmentsObject =
-    ActivityFullImageItemAttachmentsObject
-    { _afiiaoHeight = Nothing
-    , _afiiaoUrl = Nothing
-    , _afiiaoWidth = Nothing
-    , _afiiaoType = Nothing
-    }
-
--- | The height, in pixels, of the linked resource.
-afiiaoHeight :: Lens' ActivityFullImageItemAttachmentsObject (Maybe Word32)
-afiiaoHeight
-  = lens _afiiaoHeight (\ s a -> s{_afiiaoHeight = a})
-
--- | URL of the image.
-afiiaoUrl :: Lens' ActivityFullImageItemAttachmentsObject (Maybe Text)
-afiiaoUrl
-  = lens _afiiaoUrl (\ s a -> s{_afiiaoUrl = a})
-
--- | The width, in pixels, of the linked resource.
-afiiaoWidth :: Lens' ActivityFullImageItemAttachmentsObject (Maybe Word32)
-afiiaoWidth
-  = lens _afiiaoWidth (\ s a -> s{_afiiaoWidth = a})
-
--- | Media type of the link.
-afiiaoType :: Lens' ActivityFullImageItemAttachmentsObject (Maybe Text)
-afiiaoType
-  = lens _afiiaoType (\ s a -> s{_afiiaoType = a})
-
-instance FromJSON
-         ActivityFullImageItemAttachmentsObject where
-        parseJSON
-          = withObject "ActivityFullImageItemAttachmentsObject"
-              (\ o ->
-                 ActivityFullImageItemAttachmentsObject <$>
-                   (o .:? "height") <*> (o .:? "url") <*>
-                     (o .:? "width")
-                     <*> (o .:? "type"))
-
-instance ToJSON
-         ActivityFullImageItemAttachmentsObject where
-        toJSON ActivityFullImageItemAttachmentsObject{..}
-          = object
-              (catMaybes
-                 [("height" .=) <$> _afiiaoHeight,
-                  ("url" .=) <$> _afiiaoUrl,
-                  ("width" .=) <$> _afiiaoWidth,
-                  ("type" .=) <$> _afiiaoType])
-
--- | The image representation of the actor.
---
--- /See:/ 'activityImageActor' smart constructor.
-newtype ActivityImageActor = ActivityImageActor
-    { _aiaUrl :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ActivityImageActor' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aiaUrl'
-activityImageActor
-    :: ActivityImageActor
-activityImageActor =
-    ActivityImageActor
-    { _aiaUrl = Nothing
-    }
-
--- | The URL of the actor\'s profile photo. To resize the image and crop it
--- to a square, append the query string ?sz=x, where x is the dimension in
--- pixels of each side.
-aiaUrl :: Lens' ActivityImageActor (Maybe Text)
-aiaUrl = lens _aiaUrl (\ s a -> s{_aiaUrl = a})
-
-instance FromJSON ActivityImageActor where
-        parseJSON
-          = withObject "ActivityImageActor"
-              (\ o -> ActivityImageActor <$> (o .:? "url"))
-
-instance ToJSON ActivityImageActor where
-        toJSON ActivityImageActor{..}
-          = object (catMaybes [("url" .=) <$> _aiaUrl])
-
 -- | The image representation of the original actor.
 --
 -- /See:/ 'activityImageActorObject' smart constructor.
@@ -790,1328 +169,6 @@ instance FromJSON ActivityImageActorObject where
 instance ToJSON ActivityImageActorObject where
         toJSON ActivityImageActorObject{..}
           = object (catMaybes [("url" .=) <$> _aiaoUrl])
-
--- | The preview image for photos or videos.
---
--- /See:/ 'activityImageItemAttachmentsObject' smart constructor.
-data ActivityImageItemAttachmentsObject = ActivityImageItemAttachmentsObject
-    { _aiiaoHeight :: !(Maybe Word32)
-    , _aiiaoUrl    :: !(Maybe Text)
-    , _aiiaoWidth  :: !(Maybe Word32)
-    , _aiiaoType   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ActivityImageItemAttachmentsObject' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aiiaoHeight'
---
--- * 'aiiaoUrl'
---
--- * 'aiiaoWidth'
---
--- * 'aiiaoType'
-activityImageItemAttachmentsObject
-    :: ActivityImageItemAttachmentsObject
-activityImageItemAttachmentsObject =
-    ActivityImageItemAttachmentsObject
-    { _aiiaoHeight = Nothing
-    , _aiiaoUrl = Nothing
-    , _aiiaoWidth = Nothing
-    , _aiiaoType = Nothing
-    }
-
--- | The height, in pixels, of the linked resource.
-aiiaoHeight :: Lens' ActivityImageItemAttachmentsObject (Maybe Word32)
-aiiaoHeight
-  = lens _aiiaoHeight (\ s a -> s{_aiiaoHeight = a})
-
--- | Image URL.
-aiiaoUrl :: Lens' ActivityImageItemAttachmentsObject (Maybe Text)
-aiiaoUrl = lens _aiiaoUrl (\ s a -> s{_aiiaoUrl = a})
-
--- | The width, in pixels, of the linked resource.
-aiiaoWidth :: Lens' ActivityImageItemAttachmentsObject (Maybe Word32)
-aiiaoWidth
-  = lens _aiiaoWidth (\ s a -> s{_aiiaoWidth = a})
-
--- | Media type of the link.
-aiiaoType :: Lens' ActivityImageItemAttachmentsObject (Maybe Text)
-aiiaoType
-  = lens _aiiaoType (\ s a -> s{_aiiaoType = a})
-
-instance FromJSON ActivityImageItemAttachmentsObject
-         where
-        parseJSON
-          = withObject "ActivityImageItemAttachmentsObject"
-              (\ o ->
-                 ActivityImageItemAttachmentsObject <$>
-                   (o .:? "height") <*> (o .:? "url") <*>
-                     (o .:? "width")
-                     <*> (o .:? "type"))
-
-instance ToJSON ActivityImageItemAttachmentsObject
-         where
-        toJSON ActivityImageItemAttachmentsObject{..}
-          = object
-              (catMaybes
-                 [("height" .=) <$> _aiiaoHeight,
-                  ("url" .=) <$> _aiiaoUrl,
-                  ("width" .=) <$> _aiiaoWidth,
-                  ("type" .=) <$> _aiiaoType])
-
--- | Image resource.
---
--- /See:/ 'activityImageItemThumbnailsItemAttachmentsObject' smart constructor.
-data ActivityImageItemThumbnailsItemAttachmentsObject = ActivityImageItemThumbnailsItemAttachmentsObject
-    { _aiitiaoHeight :: !(Maybe Word32)
-    , _aiitiaoUrl    :: !(Maybe Text)
-    , _aiitiaoWidth  :: !(Maybe Word32)
-    , _aiitiaoType   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ActivityImageItemThumbnailsItemAttachmentsObject' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aiitiaoHeight'
---
--- * 'aiitiaoUrl'
---
--- * 'aiitiaoWidth'
---
--- * 'aiitiaoType'
-activityImageItemThumbnailsItemAttachmentsObject
-    :: ActivityImageItemThumbnailsItemAttachmentsObject
-activityImageItemThumbnailsItemAttachmentsObject =
-    ActivityImageItemThumbnailsItemAttachmentsObject
-    { _aiitiaoHeight = Nothing
-    , _aiitiaoUrl = Nothing
-    , _aiitiaoWidth = Nothing
-    , _aiitiaoType = Nothing
-    }
-
--- | The height, in pixels, of the linked resource.
-aiitiaoHeight :: Lens' ActivityImageItemThumbnailsItemAttachmentsObject (Maybe Word32)
-aiitiaoHeight
-  = lens _aiitiaoHeight
-      (\ s a -> s{_aiitiaoHeight = a})
-
--- | Image url.
-aiitiaoUrl :: Lens' ActivityImageItemThumbnailsItemAttachmentsObject (Maybe Text)
-aiitiaoUrl
-  = lens _aiitiaoUrl (\ s a -> s{_aiitiaoUrl = a})
-
--- | The width, in pixels, of the linked resource.
-aiitiaoWidth :: Lens' ActivityImageItemThumbnailsItemAttachmentsObject (Maybe Word32)
-aiitiaoWidth
-  = lens _aiitiaoWidth (\ s a -> s{_aiitiaoWidth = a})
-
--- | Media type of the link.
-aiitiaoType :: Lens' ActivityImageItemThumbnailsItemAttachmentsObject (Maybe Text)
-aiitiaoType
-  = lens _aiitiaoType (\ s a -> s{_aiitiaoType = a})
-
-instance FromJSON
-         ActivityImageItemThumbnailsItemAttachmentsObject
-         where
-        parseJSON
-          = withObject
-              "ActivityImageItemThumbnailsItemAttachmentsObject"
-              (\ o ->
-                 ActivityImageItemThumbnailsItemAttachmentsObject <$>
-                   (o .:? "height") <*> (o .:? "url") <*>
-                     (o .:? "width")
-                     <*> (o .:? "type"))
-
-instance ToJSON
-         ActivityImageItemThumbnailsItemAttachmentsObject
-         where
-        toJSON
-          ActivityImageItemThumbnailsItemAttachmentsObject{..}
-          = object
-              (catMaybes
-                 [("height" .=) <$> _aiitiaoHeight,
-                  ("url" .=) <$> _aiitiaoUrl,
-                  ("width" .=) <$> _aiitiaoWidth,
-                  ("type" .=) <$> _aiitiaoType])
-
---
--- /See:/ 'activityItemAttachmentsObject' smart constructor.
-data ActivityItemAttachmentsObject = ActivityItemAttachmentsObject
-    { _actFullImage   :: !(Maybe ActivityFullImageItemAttachmentsObject)
-    , _actImage       :: !(Maybe ActivityImageItemAttachmentsObject)
-    , _actObjectType  :: !(Maybe Text)
-    , _actUrl         :: !(Maybe Text)
-    , _actEmbed       :: !(Maybe ActivityEmbedItemAttachmentsObject)
-    , _actContent     :: !(Maybe Text)
-    , _actThumbnails  :: !(Maybe [ActivityItemThumbnailsItemAttachmentsObject])
-    , _actDisplayName :: !(Maybe Text)
-    , _actId          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ActivityItemAttachmentsObject' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'actFullImage'
---
--- * 'actImage'
---
--- * 'actObjectType'
---
--- * 'actUrl'
---
--- * 'actEmbed'
---
--- * 'actContent'
---
--- * 'actThumbnails'
---
--- * 'actDisplayName'
---
--- * 'actId'
-activityItemAttachmentsObject
-    :: ActivityItemAttachmentsObject
-activityItemAttachmentsObject =
-    ActivityItemAttachmentsObject
-    { _actFullImage = Nothing
-    , _actImage = Nothing
-    , _actObjectType = Nothing
-    , _actUrl = Nothing
-    , _actEmbed = Nothing
-    , _actContent = Nothing
-    , _actThumbnails = Nothing
-    , _actDisplayName = Nothing
-    , _actId = Nothing
-    }
-
--- | The full image URL for photo attachments.
-actFullImage :: Lens' ActivityItemAttachmentsObject (Maybe ActivityFullImageItemAttachmentsObject)
-actFullImage
-  = lens _actFullImage (\ s a -> s{_actFullImage = a})
-
--- | The preview image for photos or videos.
-actImage :: Lens' ActivityItemAttachmentsObject (Maybe ActivityImageItemAttachmentsObject)
-actImage = lens _actImage (\ s a -> s{_actImage = a})
-
--- | The type of media object. Possible values include, but are not limited
--- to, the following values: - \"photo\" - A photo. - \"album\" - A photo
--- album. - \"video\" - A video. - \"article\" - An article, specified by a
--- link.
-actObjectType :: Lens' ActivityItemAttachmentsObject (Maybe Text)
-actObjectType
-  = lens _actObjectType
-      (\ s a -> s{_actObjectType = a})
-
--- | The link to the attachment, which should be of type text\/html.
-actUrl :: Lens' ActivityItemAttachmentsObject (Maybe Text)
-actUrl = lens _actUrl (\ s a -> s{_actUrl = a})
-
--- | If the attachment is a video, the embeddable link.
-actEmbed :: Lens' ActivityItemAttachmentsObject (Maybe ActivityEmbedItemAttachmentsObject)
-actEmbed = lens _actEmbed (\ s a -> s{_actEmbed = a})
-
--- | If the attachment is an article, this property contains a snippet of
--- text from the article. It can also include descriptions for other types.
-actContent :: Lens' ActivityItemAttachmentsObject (Maybe Text)
-actContent
-  = lens _actContent (\ s a -> s{_actContent = a})
-
--- | If the attachment is an album, this property is a list of potential
--- additional thumbnails from the album.
-actThumbnails :: Lens' ActivityItemAttachmentsObject [ActivityItemThumbnailsItemAttachmentsObject]
-actThumbnails
-  = lens _actThumbnails
-      (\ s a -> s{_actThumbnails = a})
-      . _Default
-      . _Coerce
-
--- | The title of the attachment, such as a photo caption or an article
--- title.
-actDisplayName :: Lens' ActivityItemAttachmentsObject (Maybe Text)
-actDisplayName
-  = lens _actDisplayName
-      (\ s a -> s{_actDisplayName = a})
-
--- | The ID of the attachment.
-actId :: Lens' ActivityItemAttachmentsObject (Maybe Text)
-actId = lens _actId (\ s a -> s{_actId = a})
-
-instance FromJSON ActivityItemAttachmentsObject where
-        parseJSON
-          = withObject "ActivityItemAttachmentsObject"
-              (\ o ->
-                 ActivityItemAttachmentsObject <$>
-                   (o .:? "fullImage") <*> (o .:? "image") <*>
-                     (o .:? "objectType")
-                     <*> (o .:? "url")
-                     <*> (o .:? "embed")
-                     <*> (o .:? "content")
-                     <*> (o .:? "thumbnails" .!= mempty)
-                     <*> (o .:? "displayName")
-                     <*> (o .:? "id"))
-
-instance ToJSON ActivityItemAttachmentsObject where
-        toJSON ActivityItemAttachmentsObject{..}
-          = object
-              (catMaybes
-                 [("fullImage" .=) <$> _actFullImage,
-                  ("image" .=) <$> _actImage,
-                  ("objectType" .=) <$> _actObjectType,
-                  ("url" .=) <$> _actUrl, ("embed" .=) <$> _actEmbed,
-                  ("content" .=) <$> _actContent,
-                  ("thumbnails" .=) <$> _actThumbnails,
-                  ("displayName" .=) <$> _actDisplayName,
-                  ("id" .=) <$> _actId])
-
---
--- /See:/ 'activityItemThumbnailsItemAttachmentsObject' smart constructor.
-data ActivityItemThumbnailsItemAttachmentsObject = ActivityItemThumbnailsItemAttachmentsObject
-    { _aitiaoImage       :: !(Maybe ActivityImageItemThumbnailsItemAttachmentsObject)
-    , _aitiaoUrl         :: !(Maybe Text)
-    , _aitiaoDescription :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ActivityItemThumbnailsItemAttachmentsObject' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aitiaoImage'
---
--- * 'aitiaoUrl'
---
--- * 'aitiaoDescription'
-activityItemThumbnailsItemAttachmentsObject
-    :: ActivityItemThumbnailsItemAttachmentsObject
-activityItemThumbnailsItemAttachmentsObject =
-    ActivityItemThumbnailsItemAttachmentsObject
-    { _aitiaoImage = Nothing
-    , _aitiaoUrl = Nothing
-    , _aitiaoDescription = Nothing
-    }
-
--- | Image resource.
-aitiaoImage :: Lens' ActivityItemThumbnailsItemAttachmentsObject (Maybe ActivityImageItemThumbnailsItemAttachmentsObject)
-aitiaoImage
-  = lens _aitiaoImage (\ s a -> s{_aitiaoImage = a})
-
--- | URL of the webpage containing the image.
-aitiaoUrl :: Lens' ActivityItemThumbnailsItemAttachmentsObject (Maybe Text)
-aitiaoUrl
-  = lens _aitiaoUrl (\ s a -> s{_aitiaoUrl = a})
-
--- | Potential name of the thumbnail.
-aitiaoDescription :: Lens' ActivityItemThumbnailsItemAttachmentsObject (Maybe Text)
-aitiaoDescription
-  = lens _aitiaoDescription
-      (\ s a -> s{_aitiaoDescription = a})
-
-instance FromJSON
-         ActivityItemThumbnailsItemAttachmentsObject where
-        parseJSON
-          = withObject
-              "ActivityItemThumbnailsItemAttachmentsObject"
-              (\ o ->
-                 ActivityItemThumbnailsItemAttachmentsObject <$>
-                   (o .:? "image") <*> (o .:? "url") <*>
-                     (o .:? "description"))
-
-instance ToJSON
-         ActivityItemThumbnailsItemAttachmentsObject where
-        toJSON
-          ActivityItemThumbnailsItemAttachmentsObject{..}
-          = object
-              (catMaybes
-                 [("image" .=) <$> _aitiaoImage,
-                  ("url" .=) <$> _aitiaoUrl,
-                  ("description" .=) <$> _aitiaoDescription])
-
--- | An object representation of the individual components of name.
---
--- /See:/ 'activityNameActor' smart constructor.
-data ActivityNameActor = ActivityNameActor
-    { _anaGivenName  :: !(Maybe Text)
-    , _anaFamilyName :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ActivityNameActor' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'anaGivenName'
---
--- * 'anaFamilyName'
-activityNameActor
-    :: ActivityNameActor
-activityNameActor =
-    ActivityNameActor
-    { _anaGivenName = Nothing
-    , _anaFamilyName = Nothing
-    }
-
--- | The given name (\"first name\") of the actor.
-anaGivenName :: Lens' ActivityNameActor (Maybe Text)
-anaGivenName
-  = lens _anaGivenName (\ s a -> s{_anaGivenName = a})
-
--- | The family name (\"last name\") of the actor.
-anaFamilyName :: Lens' ActivityNameActor (Maybe Text)
-anaFamilyName
-  = lens _anaFamilyName
-      (\ s a -> s{_anaFamilyName = a})
-
-instance FromJSON ActivityNameActor where
-        parseJSON
-          = withObject "ActivityNameActor"
-              (\ o ->
-                 ActivityNameActor <$>
-                   (o .:? "givenName") <*> (o .:? "familyName"))
-
-instance ToJSON ActivityNameActor where
-        toJSON ActivityNameActor{..}
-          = object
-              (catMaybes
-                 [("givenName" .=) <$> _anaGivenName,
-                  ("familyName" .=) <$> _anaFamilyName])
-
--- | The object of this activity.
---
--- /See:/ 'activityObject' smart constructor.
-data ActivityObject = ActivityObject
-    { _aoPlusoners       :: !(Maybe ActivityPlusonersObject)
-    , _aoAttachments     :: !(Maybe [ActivityItemAttachmentsObject])
-    , _aoObjectType      :: !(Maybe Text)
-    , _aoOriginalContent :: !(Maybe Text)
-    , _aoUrl             :: !(Maybe Text)
-    , _aoActor           :: !(Maybe ActivityActorObject)
-    , _aoContent         :: !(Maybe Text)
-    , _aoReplies         :: !(Maybe ActivityRepliesObject)
-    , _aoId              :: !(Maybe Text)
-    , _aoResharers       :: !(Maybe ActivityResharersObject)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ActivityObject' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aoPlusoners'
---
--- * 'aoAttachments'
---
--- * 'aoObjectType'
---
--- * 'aoOriginalContent'
---
--- * 'aoUrl'
---
--- * 'aoActor'
---
--- * 'aoContent'
---
--- * 'aoReplies'
---
--- * 'aoId'
---
--- * 'aoResharers'
-activityObject
-    :: ActivityObject
-activityObject =
-    ActivityObject
-    { _aoPlusoners = Nothing
-    , _aoAttachments = Nothing
-    , _aoObjectType = Nothing
-    , _aoOriginalContent = Nothing
-    , _aoUrl = Nothing
-    , _aoActor = Nothing
-    , _aoContent = Nothing
-    , _aoReplies = Nothing
-    , _aoId = Nothing
-    , _aoResharers = Nothing
-    }
-
--- | People who +1\'d this activity.
-aoPlusoners :: Lens' ActivityObject (Maybe ActivityPlusonersObject)
-aoPlusoners
-  = lens _aoPlusoners (\ s a -> s{_aoPlusoners = a})
-
--- | The media objects attached to this activity.
-aoAttachments :: Lens' ActivityObject [ActivityItemAttachmentsObject]
-aoAttachments
-  = lens _aoAttachments
-      (\ s a -> s{_aoAttachments = a})
-      . _Default
-      . _Coerce
-
--- | The type of the object. Possible values include, but are not limited to,
--- the following values: - \"note\" - Textual content. - \"activity\" - A
--- Google+ activity.
-aoObjectType :: Lens' ActivityObject (Maybe Text)
-aoObjectType
-  = lens _aoObjectType (\ s a -> s{_aoObjectType = a})
-
--- | The content (text) as provided by the author, which is stored without
--- any HTML formatting. When creating or updating an activity, this value
--- must be supplied as plain text in the request.
-aoOriginalContent :: Lens' ActivityObject (Maybe Text)
-aoOriginalContent
-  = lens _aoOriginalContent
-      (\ s a -> s{_aoOriginalContent = a})
-
--- | The URL that points to the linked resource.
-aoUrl :: Lens' ActivityObject (Maybe Text)
-aoUrl = lens _aoUrl (\ s a -> s{_aoUrl = a})
-
--- | If this activity\'s object is itself another activity, such as when a
--- person reshares an activity, this property specifies the original
--- activity\'s actor.
-aoActor :: Lens' ActivityObject (Maybe ActivityActorObject)
-aoActor = lens _aoActor (\ s a -> s{_aoActor = a})
-
--- | The HTML-formatted content, which is suitable for display.
-aoContent :: Lens' ActivityObject (Maybe Text)
-aoContent
-  = lens _aoContent (\ s a -> s{_aoContent = a})
-
--- | Comments in reply to this activity.
-aoReplies :: Lens' ActivityObject (Maybe ActivityRepliesObject)
-aoReplies
-  = lens _aoReplies (\ s a -> s{_aoReplies = a})
-
--- | The ID of the object. When resharing an activity, this is the ID of the
--- activity that is being reshared.
-aoId :: Lens' ActivityObject (Maybe Text)
-aoId = lens _aoId (\ s a -> s{_aoId = a})
-
--- | People who reshared this activity.
-aoResharers :: Lens' ActivityObject (Maybe ActivityResharersObject)
-aoResharers
-  = lens _aoResharers (\ s a -> s{_aoResharers = a})
-
-instance FromJSON ActivityObject where
-        parseJSON
-          = withObject "ActivityObject"
-              (\ o ->
-                 ActivityObject <$>
-                   (o .:? "plusoners") <*>
-                     (o .:? "attachments" .!= mempty)
-                     <*> (o .:? "objectType")
-                     <*> (o .:? "originalContent")
-                     <*> (o .:? "url")
-                     <*> (o .:? "actor")
-                     <*> (o .:? "content")
-                     <*> (o .:? "replies")
-                     <*> (o .:? "id")
-                     <*> (o .:? "resharers"))
-
-instance ToJSON ActivityObject where
-        toJSON ActivityObject{..}
-          = object
-              (catMaybes
-                 [("plusoners" .=) <$> _aoPlusoners,
-                  ("attachments" .=) <$> _aoAttachments,
-                  ("objectType" .=) <$> _aoObjectType,
-                  ("originalContent" .=) <$> _aoOriginalContent,
-                  ("url" .=) <$> _aoUrl, ("actor" .=) <$> _aoActor,
-                  ("content" .=) <$> _aoContent,
-                  ("replies" .=) <$> _aoReplies, ("id" .=) <$> _aoId,
-                  ("resharers" .=) <$> _aoResharers])
-
--- | People who +1\'d this activity.
---
--- /See:/ 'activityPlusonersObject' smart constructor.
-data ActivityPlusonersObject = ActivityPlusonersObject
-    { _apoTotalItems :: !(Maybe Word32)
-    , _apoSelfLink   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ActivityPlusonersObject' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'apoTotalItems'
---
--- * 'apoSelfLink'
-activityPlusonersObject
-    :: ActivityPlusonersObject
-activityPlusonersObject =
-    ActivityPlusonersObject
-    { _apoTotalItems = Nothing
-    , _apoSelfLink = Nothing
-    }
-
--- | Total number of people who +1\'d this activity.
-apoTotalItems :: Lens' ActivityPlusonersObject (Maybe Word32)
-apoTotalItems
-  = lens _apoTotalItems
-      (\ s a -> s{_apoTotalItems = a})
-
--- | The URL for the collection of people who +1\'d this activity.
-apoSelfLink :: Lens' ActivityPlusonersObject (Maybe Text)
-apoSelfLink
-  = lens _apoSelfLink (\ s a -> s{_apoSelfLink = a})
-
-instance FromJSON ActivityPlusonersObject where
-        parseJSON
-          = withObject "ActivityPlusonersObject"
-              (\ o ->
-                 ActivityPlusonersObject <$>
-                   (o .:? "totalItems") <*> (o .:? "selfLink"))
-
-instance ToJSON ActivityPlusonersObject where
-        toJSON ActivityPlusonersObject{..}
-          = object
-              (catMaybes
-                 [("totalItems" .=) <$> _apoTotalItems,
-                  ("selfLink" .=) <$> _apoSelfLink])
-
--- | The service provider that initially published this activity.
---
--- /See:/ 'activityProvider' smart constructor.
-newtype ActivityProvider = ActivityProvider
-    { _apTitle :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ActivityProvider' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'apTitle'
-activityProvider
-    :: ActivityProvider
-activityProvider =
-    ActivityProvider
-    { _apTitle = Nothing
-    }
-
--- | Name of the service provider.
-apTitle :: Lens' ActivityProvider (Maybe Text)
-apTitle = lens _apTitle (\ s a -> s{_apTitle = a})
-
-instance FromJSON ActivityProvider where
-        parseJSON
-          = withObject "ActivityProvider"
-              (\ o -> ActivityProvider <$> (o .:? "title"))
-
-instance ToJSON ActivityProvider where
-        toJSON ActivityProvider{..}
-          = object (catMaybes [("title" .=) <$> _apTitle])
-
--- | Comments in reply to this activity.
---
--- /See:/ 'activityRepliesObject' smart constructor.
-data ActivityRepliesObject = ActivityRepliesObject
-    { _aroTotalItems :: !(Maybe Word32)
-    , _aroSelfLink   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ActivityRepliesObject' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aroTotalItems'
---
--- * 'aroSelfLink'
-activityRepliesObject
-    :: ActivityRepliesObject
-activityRepliesObject =
-    ActivityRepliesObject
-    { _aroTotalItems = Nothing
-    , _aroSelfLink = Nothing
-    }
-
--- | Total number of comments on this activity.
-aroTotalItems :: Lens' ActivityRepliesObject (Maybe Word32)
-aroTotalItems
-  = lens _aroTotalItems
-      (\ s a -> s{_aroTotalItems = a})
-
--- | The URL for the collection of comments in reply to this activity.
-aroSelfLink :: Lens' ActivityRepliesObject (Maybe Text)
-aroSelfLink
-  = lens _aroSelfLink (\ s a -> s{_aroSelfLink = a})
-
-instance FromJSON ActivityRepliesObject where
-        parseJSON
-          = withObject "ActivityRepliesObject"
-              (\ o ->
-                 ActivityRepliesObject <$>
-                   (o .:? "totalItems") <*> (o .:? "selfLink"))
-
-instance ToJSON ActivityRepliesObject where
-        toJSON ActivityRepliesObject{..}
-          = object
-              (catMaybes
-                 [("totalItems" .=) <$> _aroTotalItems,
-                  ("selfLink" .=) <$> _aroSelfLink])
-
--- | People who reshared this activity.
---
--- /See:/ 'activityResharersObject' smart constructor.
-data ActivityResharersObject = ActivityResharersObject
-    { _aTotalItems :: !(Maybe Word32)
-    , _aSelfLink   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ActivityResharersObject' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aTotalItems'
---
--- * 'aSelfLink'
-activityResharersObject
-    :: ActivityResharersObject
-activityResharersObject =
-    ActivityResharersObject
-    { _aTotalItems = Nothing
-    , _aSelfLink = Nothing
-    }
-
--- | Total number of people who reshared this activity.
-aTotalItems :: Lens' ActivityResharersObject (Maybe Word32)
-aTotalItems
-  = lens _aTotalItems (\ s a -> s{_aTotalItems = a})
-
--- | The URL for the collection of resharers.
-aSelfLink :: Lens' ActivityResharersObject (Maybe Text)
-aSelfLink
-  = lens _aSelfLink (\ s a -> s{_aSelfLink = a})
-
-instance FromJSON ActivityResharersObject where
-        parseJSON
-          = withObject "ActivityResharersObject"
-              (\ o ->
-                 ActivityResharersObject <$>
-                   (o .:? "totalItems") <*> (o .:? "selfLink"))
-
-instance ToJSON ActivityResharersObject where
-        toJSON ActivityResharersObject{..}
-          = object
-              (catMaybes
-                 [("totalItems" .=) <$> _aTotalItems,
-                  ("selfLink" .=) <$> _aSelfLink])
-
--- | Verification status of actor.
---
--- /See:/ 'activityVerificationActor' smart constructor.
-newtype ActivityVerificationActor = ActivityVerificationActor
-    { _avaAdHocVerified :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ActivityVerificationActor' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'avaAdHocVerified'
-activityVerificationActor
-    :: ActivityVerificationActor
-activityVerificationActor =
-    ActivityVerificationActor
-    { _avaAdHocVerified = Nothing
-    }
-
--- | Verification for one-time or manual processes.
-avaAdHocVerified :: Lens' ActivityVerificationActor (Maybe Text)
-avaAdHocVerified
-  = lens _avaAdHocVerified
-      (\ s a -> s{_avaAdHocVerified = a})
-
-instance FromJSON ActivityVerificationActor where
-        parseJSON
-          = withObject "ActivityVerificationActor"
-              (\ o ->
-                 ActivityVerificationActor <$>
-                   (o .:? "adHocVerified"))
-
-instance ToJSON ActivityVerificationActor where
-        toJSON ActivityVerificationActor{..}
-          = object
-              (catMaybes
-                 [("adHocVerified" .=) <$> _avaAdHocVerified])
-
--- | Verification status of actor.
---
--- /See:/ 'activityVerificationActorObject' smart constructor.
-newtype ActivityVerificationActorObject = ActivityVerificationActorObject
-    { _avaoAdHocVerified :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ActivityVerificationActorObject' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'avaoAdHocVerified'
-activityVerificationActorObject
-    :: ActivityVerificationActorObject
-activityVerificationActorObject =
-    ActivityVerificationActorObject
-    { _avaoAdHocVerified = Nothing
-    }
-
--- | Verification for one-time or manual processes.
-avaoAdHocVerified :: Lens' ActivityVerificationActorObject (Maybe Text)
-avaoAdHocVerified
-  = lens _avaoAdHocVerified
-      (\ s a -> s{_avaoAdHocVerified = a})
-
-instance FromJSON ActivityVerificationActorObject
-         where
-        parseJSON
-          = withObject "ActivityVerificationActorObject"
-              (\ o ->
-                 ActivityVerificationActorObject <$>
-                   (o .:? "adHocVerified"))
-
-instance ToJSON ActivityVerificationActorObject where
-        toJSON ActivityVerificationActorObject{..}
-          = object
-              (catMaybes
-                 [("adHocVerified" .=) <$> _avaoAdHocVerified])
-
---
--- /See:/ 'comment' smart constructor.
-data Comment = Comment
-    { _cEtag      :: !(Maybe Text)
-    , _cPlusoners :: !(Maybe CommentPlusoners)
-    , _cKind      :: !Text
-    , _cPublished :: !(Maybe UTCTime)
-    , _cActor     :: !(Maybe CommentActor)
-    , _cSelfLink  :: !(Maybe Text)
-    , _cObject    :: !(Maybe CommentObject)
-    , _cId        :: !(Maybe Text)
-    , _cUpdated   :: !(Maybe UTCTime)
-    , _cVerb      :: !Text
-    , _cInReplyTo :: !(Maybe [CommentItemInReplyTo])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Comment' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'cEtag'
---
--- * 'cPlusoners'
---
--- * 'cKind'
---
--- * 'cPublished'
---
--- * 'cActor'
---
--- * 'cSelfLink'
---
--- * 'cObject'
---
--- * 'cId'
---
--- * 'cUpdated'
---
--- * 'cVerb'
---
--- * 'cInReplyTo'
-comment
-    :: Comment
-comment =
-    Comment
-    { _cEtag = Nothing
-    , _cPlusoners = Nothing
-    , _cKind = "plus#comment"
-    , _cPublished = Nothing
-    , _cActor = Nothing
-    , _cSelfLink = Nothing
-    , _cObject = Nothing
-    , _cId = Nothing
-    , _cUpdated = Nothing
-    , _cVerb = "post"
-    , _cInReplyTo = Nothing
-    }
-
--- | ETag of this response for caching purposes.
-cEtag :: Lens' Comment (Maybe Text)
-cEtag = lens _cEtag (\ s a -> s{_cEtag = a})
-
--- | People who +1\'d this comment.
-cPlusoners :: Lens' Comment (Maybe CommentPlusoners)
-cPlusoners
-  = lens _cPlusoners (\ s a -> s{_cPlusoners = a})
-
--- | Identifies this resource as a comment. Value: \"plus#comment\".
-cKind :: Lens' Comment Text
-cKind = lens _cKind (\ s a -> s{_cKind = a})
-
--- | The time at which this comment was initially published. Formatted as an
--- RFC 3339 timestamp.
-cPublished :: Lens' Comment (Maybe UTCTime)
-cPublished
-  = lens _cPublished (\ s a -> s{_cPublished = a})
-
--- | The person who posted this comment.
-cActor :: Lens' Comment (Maybe CommentActor)
-cActor = lens _cActor (\ s a -> s{_cActor = a})
-
--- | Link to this comment resource.
-cSelfLink :: Lens' Comment (Maybe Text)
-cSelfLink
-  = lens _cSelfLink (\ s a -> s{_cSelfLink = a})
-
--- | The object of this comment.
-cObject :: Lens' Comment (Maybe CommentObject)
-cObject = lens _cObject (\ s a -> s{_cObject = a})
-
--- | The ID of this comment.
-cId :: Lens' Comment (Maybe Text)
-cId = lens _cId (\ s a -> s{_cId = a})
-
--- | The time at which this comment was last updated. Formatted as an RFC
--- 3339 timestamp.
-cUpdated :: Lens' Comment (Maybe UTCTime)
-cUpdated = lens _cUpdated (\ s a -> s{_cUpdated = a})
-
--- | This comment\'s verb, indicating what action was performed. Possible
--- values are: - \"post\" - Publish content to the stream.
-cVerb :: Lens' Comment Text
-cVerb = lens _cVerb (\ s a -> s{_cVerb = a})
-
--- | The activity this comment replied to.
-cInReplyTo :: Lens' Comment [CommentItemInReplyTo]
-cInReplyTo
-  = lens _cInReplyTo (\ s a -> s{_cInReplyTo = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON Comment where
-        parseJSON
-          = withObject "Comment"
-              (\ o ->
-                 Comment <$>
-                   (o .:? "etag") <*> (o .:? "plusoners") <*>
-                     (o .:? "kind" .!= "plus#comment")
-                     <*> (o .:? "published")
-                     <*> (o .:? "actor")
-                     <*> (o .:? "selfLink")
-                     <*> (o .:? "object")
-                     <*> (o .:? "id")
-                     <*> (o .:? "updated")
-                     <*> (o .:? "verb" .!= "post")
-                     <*> (o .:? "inReplyTo" .!= mempty))
-
-instance ToJSON Comment where
-        toJSON Comment{..}
-          = object
-              (catMaybes
-                 [("etag" .=) <$> _cEtag,
-                  ("plusoners" .=) <$> _cPlusoners,
-                  Just ("kind" .= _cKind),
-                  ("published" .=) <$> _cPublished,
-                  ("actor" .=) <$> _cActor,
-                  ("selfLink" .=) <$> _cSelfLink,
-                  ("object" .=) <$> _cObject, ("id" .=) <$> _cId,
-                  ("updated" .=) <$> _cUpdated,
-                  Just ("verb" .= _cVerb),
-                  ("inReplyTo" .=) <$> _cInReplyTo])
-
--- | The person who posted this comment.
---
--- /See:/ 'commentActor' smart constructor.
-data CommentActor = CommentActor
-    { _caImage        :: !(Maybe CommentImageActor)
-    , _caUrl          :: !(Maybe Text)
-    , _caDisplayName  :: !(Maybe Text)
-    , _caId           :: !(Maybe Text)
-    , _caVerification :: !(Maybe CommentVerificationActor)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'CommentActor' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'caImage'
---
--- * 'caUrl'
---
--- * 'caDisplayName'
---
--- * 'caId'
---
--- * 'caVerification'
-commentActor
-    :: CommentActor
-commentActor =
-    CommentActor
-    { _caImage = Nothing
-    , _caUrl = Nothing
-    , _caDisplayName = Nothing
-    , _caId = Nothing
-    , _caVerification = Nothing
-    }
-
--- | The image representation of this actor.
-caImage :: Lens' CommentActor (Maybe CommentImageActor)
-caImage = lens _caImage (\ s a -> s{_caImage = a})
-
--- | A link to the Person resource for this actor.
-caUrl :: Lens' CommentActor (Maybe Text)
-caUrl = lens _caUrl (\ s a -> s{_caUrl = a})
-
--- | The name of this actor, suitable for display.
-caDisplayName :: Lens' CommentActor (Maybe Text)
-caDisplayName
-  = lens _caDisplayName
-      (\ s a -> s{_caDisplayName = a})
-
--- | The ID of the actor.
-caId :: Lens' CommentActor (Maybe Text)
-caId = lens _caId (\ s a -> s{_caId = a})
-
--- | Verification status of actor.
-caVerification :: Lens' CommentActor (Maybe CommentVerificationActor)
-caVerification
-  = lens _caVerification
-      (\ s a -> s{_caVerification = a})
-
-instance FromJSON CommentActor where
-        parseJSON
-          = withObject "CommentActor"
-              (\ o ->
-                 CommentActor <$>
-                   (o .:? "image") <*> (o .:? "url") <*>
-                     (o .:? "displayName")
-                     <*> (o .:? "id")
-                     <*> (o .:? "verification"))
-
-instance ToJSON CommentActor where
-        toJSON CommentActor{..}
-          = object
-              (catMaybes
-                 [("image" .=) <$> _caImage, ("url" .=) <$> _caUrl,
-                  ("displayName" .=) <$> _caDisplayName,
-                  ("id" .=) <$> _caId,
-                  ("verification" .=) <$> _caVerification])
-
---
--- /See:/ 'commentFeed' smart constructor.
-data CommentFeed = CommentFeed
-    { _cfEtag          :: !(Maybe Text)
-    , _cfNextPageToken :: !(Maybe Text)
-    , _cfNextLink      :: !(Maybe Text)
-    , _cfKind          :: !Text
-    , _cfItems         :: !(Maybe [Maybe Comment])
-    , _cfId            :: !(Maybe Text)
-    , _cfUpdated       :: !(Maybe UTCTime)
-    , _cfTitle         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'CommentFeed' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'cfEtag'
---
--- * 'cfNextPageToken'
---
--- * 'cfNextLink'
---
--- * 'cfKind'
---
--- * 'cfItems'
---
--- * 'cfId'
---
--- * 'cfUpdated'
---
--- * 'cfTitle'
-commentFeed
-    :: CommentFeed
-commentFeed =
-    CommentFeed
-    { _cfEtag = Nothing
-    , _cfNextPageToken = Nothing
-    , _cfNextLink = Nothing
-    , _cfKind = "plus#commentFeed"
-    , _cfItems = Nothing
-    , _cfId = Nothing
-    , _cfUpdated = Nothing
-    , _cfTitle = Nothing
-    }
-
--- | ETag of this response for caching purposes.
-cfEtag :: Lens' CommentFeed (Maybe Text)
-cfEtag = lens _cfEtag (\ s a -> s{_cfEtag = a})
-
--- | The continuation token, which is used to page through large result sets.
--- Provide this value in a subsequent request to return the next page of
--- results.
-cfNextPageToken :: Lens' CommentFeed (Maybe Text)
-cfNextPageToken
-  = lens _cfNextPageToken
-      (\ s a -> s{_cfNextPageToken = a})
-
--- | Link to the next page of activities.
-cfNextLink :: Lens' CommentFeed (Maybe Text)
-cfNextLink
-  = lens _cfNextLink (\ s a -> s{_cfNextLink = a})
-
--- | Identifies this resource as a collection of comments. Value:
--- \"plus#commentFeed\".
-cfKind :: Lens' CommentFeed Text
-cfKind = lens _cfKind (\ s a -> s{_cfKind = a})
-
--- | The comments in this page of results.
-cfItems :: Lens' CommentFeed [Maybe Comment]
-cfItems
-  = lens _cfItems (\ s a -> s{_cfItems = a}) . _Default
-      . _Coerce
-
--- | The ID of this collection of comments.
-cfId :: Lens' CommentFeed (Maybe Text)
-cfId = lens _cfId (\ s a -> s{_cfId = a})
-
--- | The time at which this collection of comments was last updated.
--- Formatted as an RFC 3339 timestamp.
-cfUpdated :: Lens' CommentFeed (Maybe UTCTime)
-cfUpdated
-  = lens _cfUpdated (\ s a -> s{_cfUpdated = a})
-
--- | The title of this collection of comments.
-cfTitle :: Lens' CommentFeed (Maybe Text)
-cfTitle = lens _cfTitle (\ s a -> s{_cfTitle = a})
-
-instance FromJSON CommentFeed where
-        parseJSON
-          = withObject "CommentFeed"
-              (\ o ->
-                 CommentFeed <$>
-                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
-                     (o .:? "nextLink")
-                     <*> (o .:? "kind" .!= "plus#commentFeed")
-                     <*> (o .:? "items" .!= mempty)
-                     <*> (o .:? "id")
-                     <*> (o .:? "updated")
-                     <*> (o .:? "title"))
-
-instance ToJSON CommentFeed where
-        toJSON CommentFeed{..}
-          = object
-              (catMaybes
-                 [("etag" .=) <$> _cfEtag,
-                  ("nextPageToken" .=) <$> _cfNextPageToken,
-                  ("nextLink" .=) <$> _cfNextLink,
-                  Just ("kind" .= _cfKind), ("items" .=) <$> _cfItems,
-                  ("id" .=) <$> _cfId, ("updated" .=) <$> _cfUpdated,
-                  ("title" .=) <$> _cfTitle])
-
--- | The image representation of this actor.
---
--- /See:/ 'commentImageActor' smart constructor.
-newtype CommentImageActor = CommentImageActor
-    { _ciaUrl :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'CommentImageActor' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ciaUrl'
-commentImageActor
-    :: CommentImageActor
-commentImageActor =
-    CommentImageActor
-    { _ciaUrl = Nothing
-    }
-
--- | The URL of the actor\'s profile photo. To resize the image and crop it
--- to a square, append the query string ?sz=x, where x is the dimension in
--- pixels of each side.
-ciaUrl :: Lens' CommentImageActor (Maybe Text)
-ciaUrl = lens _ciaUrl (\ s a -> s{_ciaUrl = a})
-
-instance FromJSON CommentImageActor where
-        parseJSON
-          = withObject "CommentImageActor"
-              (\ o -> CommentImageActor <$> (o .:? "url"))
-
-instance ToJSON CommentImageActor where
-        toJSON CommentImageActor{..}
-          = object (catMaybes [("url" .=) <$> _ciaUrl])
-
---
--- /See:/ 'commentItemInReplyTo' smart constructor.
-data CommentItemInReplyTo = CommentItemInReplyTo
-    { _ciirtUrl :: !(Maybe Text)
-    , _ciirtId  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'CommentItemInReplyTo' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ciirtUrl'
---
--- * 'ciirtId'
-commentItemInReplyTo
-    :: CommentItemInReplyTo
-commentItemInReplyTo =
-    CommentItemInReplyTo
-    { _ciirtUrl = Nothing
-    , _ciirtId = Nothing
-    }
-
--- | The URL of the activity.
-ciirtUrl :: Lens' CommentItemInReplyTo (Maybe Text)
-ciirtUrl = lens _ciirtUrl (\ s a -> s{_ciirtUrl = a})
-
--- | The ID of the activity.
-ciirtId :: Lens' CommentItemInReplyTo (Maybe Text)
-ciirtId = lens _ciirtId (\ s a -> s{_ciirtId = a})
-
-instance FromJSON CommentItemInReplyTo where
-        parseJSON
-          = withObject "CommentItemInReplyTo"
-              (\ o ->
-                 CommentItemInReplyTo <$>
-                   (o .:? "url") <*> (o .:? "id"))
-
-instance ToJSON CommentItemInReplyTo where
-        toJSON CommentItemInReplyTo{..}
-          = object
-              (catMaybes
-                 [("url" .=) <$> _ciirtUrl, ("id" .=) <$> _ciirtId])
-
--- | The object of this comment.
---
--- /See:/ 'commentObject' smart constructor.
-data CommentObject = CommentObject
-    { _coObjectType      :: !Text
-    , _coOriginalContent :: !(Maybe Text)
-    , _coContent         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'CommentObject' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'coObjectType'
---
--- * 'coOriginalContent'
---
--- * 'coContent'
-commentObject
-    :: CommentObject
-commentObject =
-    CommentObject
-    { _coObjectType = "comment"
-    , _coOriginalContent = Nothing
-    , _coContent = Nothing
-    }
-
--- | The object type of this comment. Possible values are: - \"comment\" - A
--- comment in reply to an activity.
-coObjectType :: Lens' CommentObject Text
-coObjectType
-  = lens _coObjectType (\ s a -> s{_coObjectType = a})
-
--- | The content (text) as provided by the author, stored without any HTML
--- formatting. When creating or updating a comment, this value must be
--- supplied as plain text in the request.
-coOriginalContent :: Lens' CommentObject (Maybe Text)
-coOriginalContent
-  = lens _coOriginalContent
-      (\ s a -> s{_coOriginalContent = a})
-
--- | The HTML-formatted content, suitable for display.
-coContent :: Lens' CommentObject (Maybe Text)
-coContent
-  = lens _coContent (\ s a -> s{_coContent = a})
-
-instance FromJSON CommentObject where
-        parseJSON
-          = withObject "CommentObject"
-              (\ o ->
-                 CommentObject <$>
-                   (o .:? "objectType" .!= "comment") <*>
-                     (o .:? "originalContent")
-                     <*> (o .:? "content"))
-
-instance ToJSON CommentObject where
-        toJSON CommentObject{..}
-          = object
-              (catMaybes
-                 [Just ("objectType" .= _coObjectType),
-                  ("originalContent" .=) <$> _coOriginalContent,
-                  ("content" .=) <$> _coContent])
-
--- | People who +1\'d this comment.
---
--- /See:/ 'commentPlusoners' smart constructor.
-newtype CommentPlusoners = CommentPlusoners
-    { _cpTotalItems :: Maybe Word32
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'CommentPlusoners' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'cpTotalItems'
-commentPlusoners
-    :: CommentPlusoners
-commentPlusoners =
-    CommentPlusoners
-    { _cpTotalItems = Nothing
-    }
-
--- | Total number of people who +1\'d this comment.
-cpTotalItems :: Lens' CommentPlusoners (Maybe Word32)
-cpTotalItems
-  = lens _cpTotalItems (\ s a -> s{_cpTotalItems = a})
-
-instance FromJSON CommentPlusoners where
-        parseJSON
-          = withObject "CommentPlusoners"
-              (\ o -> CommentPlusoners <$> (o .:? "totalItems"))
-
-instance ToJSON CommentPlusoners where
-        toJSON CommentPlusoners{..}
-          = object
-              (catMaybes [("totalItems" .=) <$> _cpTotalItems])
-
--- | Verification status of actor.
---
--- /See:/ 'commentVerificationActor' smart constructor.
-newtype CommentVerificationActor = CommentVerificationActor
-    { _cvaAdHocVerified :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'CommentVerificationActor' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'cvaAdHocVerified'
-commentVerificationActor
-    :: CommentVerificationActor
-commentVerificationActor =
-    CommentVerificationActor
-    { _cvaAdHocVerified = Nothing
-    }
-
--- | Verification for one-time or manual processes.
-cvaAdHocVerified :: Lens' CommentVerificationActor (Maybe Text)
-cvaAdHocVerified
-  = lens _cvaAdHocVerified
-      (\ s a -> s{_cvaAdHocVerified = a})
-
-instance FromJSON CommentVerificationActor where
-        parseJSON
-          = withObject "CommentVerificationActor"
-              (\ o ->
-                 CommentVerificationActor <$> (o .:? "adHocVerified"))
-
-instance ToJSON CommentVerificationActor where
-        toJSON CommentVerificationActor{..}
-          = object
-              (catMaybes
-                 [("adHocVerified" .=) <$> _cvaAdHocVerified])
 
 --
 -- /See:/ 'itemScope' smart constructor.
@@ -2791,105 +848,1577 @@ instance ToJSON ItemScope where
                   ("description" .=) <$> _isDescription,
                   ("birthDate" .=) <$> _isBirthDate])
 
+-- | Comments in reply to this activity.
 --
--- /See:/ 'moment' smart constructor.
-data Moment = Moment
-    { _mKind      :: !Text
-    , _mResult    :: !(Maybe (Maybe ItemScope))
-    , _mStartDate :: !(Maybe UTCTime)
-    , _mObject    :: !(Maybe (Maybe ItemScope))
-    , _mId        :: !(Maybe Text)
-    , _mType      :: !(Maybe Text)
-    , _mTarget    :: !(Maybe (Maybe ItemScope))
+-- /See:/ 'activityRepliesObject' smart constructor.
+data ActivityRepliesObject = ActivityRepliesObject
+    { _aroTotalItems :: !(Maybe Word32)
+    , _aroSelfLink   :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Moment' with the minimum fields required to make a request.
+-- | Creates a value of 'ActivityRepliesObject' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mKind'
+-- * 'aroTotalItems'
 --
--- * 'mResult'
---
--- * 'mStartDate'
---
--- * 'mObject'
---
--- * 'mId'
---
--- * 'mType'
---
--- * 'mTarget'
-moment
-    :: Moment
-moment =
-    Moment
-    { _mKind = "plus#moment"
-    , _mResult = Nothing
-    , _mStartDate = Nothing
-    , _mObject = Nothing
-    , _mId = Nothing
-    , _mType = Nothing
-    , _mTarget = Nothing
+-- * 'aroSelfLink'
+activityRepliesObject
+    :: ActivityRepliesObject
+activityRepliesObject =
+    ActivityRepliesObject
+    { _aroTotalItems = Nothing
+    , _aroSelfLink = Nothing
     }
 
--- | Identifies this resource as a moment.
-mKind :: Lens' Moment Text
-mKind = lens _mKind (\ s a -> s{_mKind = a})
+-- | Total number of comments on this activity.
+aroTotalItems :: Lens' ActivityRepliesObject (Maybe Word32)
+aroTotalItems
+  = lens _aroTotalItems
+      (\ s a -> s{_aroTotalItems = a})
 
--- | The object generated by performing the action on the object. For
--- example, a user writes a review of a restaurant, the object is the
--- restaurant and the result is the review.
-mResult :: Lens' Moment (Maybe (Maybe ItemScope))
-mResult = lens _mResult (\ s a -> s{_mResult = a})
+-- | The URL for the collection of comments in reply to this activity.
+aroSelfLink :: Lens' ActivityRepliesObject (Maybe Text)
+aroSelfLink
+  = lens _aroSelfLink (\ s a -> s{_aroSelfLink = a})
 
--- | Time stamp of when the action occurred in RFC3339 format.
-mStartDate :: Lens' Moment (Maybe UTCTime)
-mStartDate
-  = lens _mStartDate (\ s a -> s{_mStartDate = a})
-
--- | The object on which the action was performed. Specifying this is
--- equivalent with specifying \"target\". Note that responses from the
--- server will use the \"target\" field instead for backward-compatibility
--- with older clients.
-mObject :: Lens' Moment (Maybe (Maybe ItemScope))
-mObject = lens _mObject (\ s a -> s{_mObject = a})
-
--- | The moment ID.
-mId :: Lens' Moment (Maybe Text)
-mId = lens _mId (\ s a -> s{_mId = a})
-
--- | The schema.org type for the type of moment to write. For example,
--- http:\/\/schema.org\/AddAction. Note that responses from the server will
--- use the Google schema type instead for backward-compatibility with older
--- clients. For example, http:\/\/schemas.google.com\/AddActivity.
-mType :: Lens' Moment (Maybe Text)
-mType = lens _mType (\ s a -> s{_mType = a})
-
--- | The object on which the action was performed.
-mTarget :: Lens' Moment (Maybe (Maybe ItemScope))
-mTarget = lens _mTarget (\ s a -> s{_mTarget = a})
-
-instance FromJSON Moment where
+instance FromJSON ActivityRepliesObject where
         parseJSON
-          = withObject "Moment"
+          = withObject "ActivityRepliesObject"
               (\ o ->
-                 Moment <$>
-                   (o .:? "kind" .!= "plus#moment") <*> (o .:? "result")
-                     <*> (o .:? "startDate")
-                     <*> (o .:? "object")
-                     <*> (o .:? "id")
-                     <*> (o .:? "type")
-                     <*> (o .:? "target"))
+                 ActivityRepliesObject <$>
+                   (o .:? "totalItems") <*> (o .:? "selfLink"))
 
-instance ToJSON Moment where
-        toJSON Moment{..}
+instance ToJSON ActivityRepliesObject where
+        toJSON ActivityRepliesObject{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _mKind), ("result" .=) <$> _mResult,
-                  ("startDate" .=) <$> _mStartDate,
-                  ("object" .=) <$> _mObject, ("id" .=) <$> _mId,
-                  ("type" .=) <$> _mType, ("target" .=) <$> _mTarget])
+                 [("totalItems" .=) <$> _aroTotalItems,
+                  ("selfLink" .=) <$> _aroSelfLink])
+
+--
+-- /See:/ 'activityFeed' smart constructor.
+data ActivityFeed = ActivityFeed
+    { _afEtag          :: !(Maybe Text)
+    , _afNextPageToken :: !(Maybe Text)
+    , _afNextLink      :: !(Maybe Text)
+    , _afKind          :: !Text
+    , _afItems         :: !(Maybe [Maybe Activity])
+    , _afSelfLink      :: !(Maybe Text)
+    , _afId            :: !(Maybe Text)
+    , _afUpdated       :: !(Maybe UTCTime)
+    , _afTitle         :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ActivityFeed' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'afEtag'
+--
+-- * 'afNextPageToken'
+--
+-- * 'afNextLink'
+--
+-- * 'afKind'
+--
+-- * 'afItems'
+--
+-- * 'afSelfLink'
+--
+-- * 'afId'
+--
+-- * 'afUpdated'
+--
+-- * 'afTitle'
+activityFeed
+    :: ActivityFeed
+activityFeed =
+    ActivityFeed
+    { _afEtag = Nothing
+    , _afNextPageToken = Nothing
+    , _afNextLink = Nothing
+    , _afKind = "plus#activityFeed"
+    , _afItems = Nothing
+    , _afSelfLink = Nothing
+    , _afId = Nothing
+    , _afUpdated = Nothing
+    , _afTitle = Nothing
+    }
+
+-- | ETag of this response for caching purposes.
+afEtag :: Lens' ActivityFeed (Maybe Text)
+afEtag = lens _afEtag (\ s a -> s{_afEtag = a})
+
+-- | The continuation token, which is used to page through large result sets.
+-- Provide this value in a subsequent request to return the next page of
+-- results.
+afNextPageToken :: Lens' ActivityFeed (Maybe Text)
+afNextPageToken
+  = lens _afNextPageToken
+      (\ s a -> s{_afNextPageToken = a})
+
+-- | Link to the next page of activities.
+afNextLink :: Lens' ActivityFeed (Maybe Text)
+afNextLink
+  = lens _afNextLink (\ s a -> s{_afNextLink = a})
+
+-- | Identifies this resource as a collection of activities. Value:
+-- \"plus#activityFeed\".
+afKind :: Lens' ActivityFeed Text
+afKind = lens _afKind (\ s a -> s{_afKind = a})
+
+-- | The activities in this page of results.
+afItems :: Lens' ActivityFeed [Maybe Activity]
+afItems
+  = lens _afItems (\ s a -> s{_afItems = a}) . _Default
+      . _Coerce
+
+-- | Link to this activity resource.
+afSelfLink :: Lens' ActivityFeed (Maybe Text)
+afSelfLink
+  = lens _afSelfLink (\ s a -> s{_afSelfLink = a})
+
+-- | The ID of this collection of activities. Deprecated.
+afId :: Lens' ActivityFeed (Maybe Text)
+afId = lens _afId (\ s a -> s{_afId = a})
+
+-- | The time at which this collection of activities was last updated.
+-- Formatted as an RFC 3339 timestamp.
+afUpdated :: Lens' ActivityFeed (Maybe UTCTime)
+afUpdated
+  = lens _afUpdated (\ s a -> s{_afUpdated = a})
+
+-- | The title of this collection of activities, which is a truncated portion
+-- of the content.
+afTitle :: Lens' ActivityFeed (Maybe Text)
+afTitle = lens _afTitle (\ s a -> s{_afTitle = a})
+
+instance FromJSON ActivityFeed where
+        parseJSON
+          = withObject "ActivityFeed"
+              (\ o ->
+                 ActivityFeed <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "nextLink")
+                     <*> (o .:? "kind" .!= "plus#activityFeed")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id")
+                     <*> (o .:? "updated")
+                     <*> (o .:? "title"))
+
+instance ToJSON ActivityFeed where
+        toJSON ActivityFeed{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _afEtag,
+                  ("nextPageToken" .=) <$> _afNextPageToken,
+                  ("nextLink" .=) <$> _afNextLink,
+                  Just ("kind" .= _afKind), ("items" .=) <$> _afItems,
+                  ("selfLink" .=) <$> _afSelfLink, ("id" .=) <$> _afId,
+                  ("updated" .=) <$> _afUpdated,
+                  ("title" .=) <$> _afTitle])
+
+-- | The person\'s primary cover image.
+--
+-- /See:/ 'personCoverPhotoCover' smart constructor.
+data PersonCoverPhotoCover = PersonCoverPhotoCover
+    { _pcpcHeight :: !(Maybe Int32)
+    , _pcpcUrl    :: !(Maybe Text)
+    , _pcpcWidth  :: !(Maybe Int32)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PersonCoverPhotoCover' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pcpcHeight'
+--
+-- * 'pcpcUrl'
+--
+-- * 'pcpcWidth'
+personCoverPhotoCover
+    :: PersonCoverPhotoCover
+personCoverPhotoCover =
+    PersonCoverPhotoCover
+    { _pcpcHeight = Nothing
+    , _pcpcUrl = Nothing
+    , _pcpcWidth = Nothing
+    }
+
+-- | The height of the image.
+pcpcHeight :: Lens' PersonCoverPhotoCover (Maybe Int32)
+pcpcHeight
+  = lens _pcpcHeight (\ s a -> s{_pcpcHeight = a})
+
+-- | The URL of the image.
+pcpcUrl :: Lens' PersonCoverPhotoCover (Maybe Text)
+pcpcUrl = lens _pcpcUrl (\ s a -> s{_pcpcUrl = a})
+
+-- | The width of the image.
+pcpcWidth :: Lens' PersonCoverPhotoCover (Maybe Int32)
+pcpcWidth
+  = lens _pcpcWidth (\ s a -> s{_pcpcWidth = a})
+
+instance FromJSON PersonCoverPhotoCover where
+        parseJSON
+          = withObject "PersonCoverPhotoCover"
+              (\ o ->
+                 PersonCoverPhotoCover <$>
+                   (o .:? "height") <*> (o .:? "url") <*>
+                     (o .:? "width"))
+
+instance ToJSON PersonCoverPhotoCover where
+        toJSON PersonCoverPhotoCover{..}
+          = object
+              (catMaybes
+                 [("height" .=) <$> _pcpcHeight,
+                  ("url" .=) <$> _pcpcUrl,
+                  ("width" .=) <$> _pcpcWidth])
+
+-- | The age range of the person. Valid ranges are 17 or younger, 18 to 20,
+-- and 21 or older. Age is determined from the user\'s birthday using
+-- Western age reckoning.
+--
+-- /See:/ 'personAgeRange' smart constructor.
+data PersonAgeRange = PersonAgeRange
+    { _parMax :: !(Maybe Int32)
+    , _parMin :: !(Maybe Int32)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PersonAgeRange' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'parMax'
+--
+-- * 'parMin'
+personAgeRange
+    :: PersonAgeRange
+personAgeRange =
+    PersonAgeRange
+    { _parMax = Nothing
+    , _parMin = Nothing
+    }
+
+-- | The age range\'s upper bound, if any. Possible values include, but are
+-- not limited to, the following: - \"17\" - for age 17 - \"20\" - for age
+-- 20
+parMax :: Lens' PersonAgeRange (Maybe Int32)
+parMax = lens _parMax (\ s a -> s{_parMax = a})
+
+-- | The age range\'s lower bound, if any. Possible values include, but are
+-- not limited to, the following: - \"21\" - for age 21 - \"18\" - for age
+-- 18
+parMin :: Lens' PersonAgeRange (Maybe Int32)
+parMin = lens _parMin (\ s a -> s{_parMin = a})
+
+instance FromJSON PersonAgeRange where
+        parseJSON
+          = withObject "PersonAgeRange"
+              (\ o ->
+                 PersonAgeRange <$> (o .:? "max") <*> (o .:? "min"))
+
+instance ToJSON PersonAgeRange where
+        toJSON PersonAgeRange{..}
+          = object
+              (catMaybes
+                 [("max" .=) <$> _parMax, ("min" .=) <$> _parMin])
+
+-- | The image representation of the actor.
+--
+-- /See:/ 'activityImageActor' smart constructor.
+newtype ActivityImageActor = ActivityImageActor
+    { _aiaUrl :: Maybe Text
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ActivityImageActor' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aiaUrl'
+activityImageActor
+    :: ActivityImageActor
+activityImageActor =
+    ActivityImageActor
+    { _aiaUrl = Nothing
+    }
+
+-- | The URL of the actor\'s profile photo. To resize the image and crop it
+-- to a square, append the query string ?sz=x, where x is the dimension in
+-- pixels of each side.
+aiaUrl :: Lens' ActivityImageActor (Maybe Text)
+aiaUrl = lens _aiaUrl (\ s a -> s{_aiaUrl = a})
+
+instance FromJSON ActivityImageActor where
+        parseJSON
+          = withObject "ActivityImageActor"
+              (\ o -> ActivityImageActor <$> (o .:? "url"))
+
+instance ToJSON ActivityImageActor where
+        toJSON ActivityImageActor{..}
+          = object (catMaybes [("url" .=) <$> _aiaUrl])
+
+-- | Verification status of actor.
+--
+-- /See:/ 'commentVerificationActor' smart constructor.
+newtype CommentVerificationActor = CommentVerificationActor
+    { _cvaAdHocVerified :: Maybe Text
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CommentVerificationActor' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cvaAdHocVerified'
+commentVerificationActor
+    :: CommentVerificationActor
+commentVerificationActor =
+    CommentVerificationActor
+    { _cvaAdHocVerified = Nothing
+    }
+
+-- | Verification for one-time or manual processes.
+cvaAdHocVerified :: Lens' CommentVerificationActor (Maybe Text)
+cvaAdHocVerified
+  = lens _cvaAdHocVerified
+      (\ s a -> s{_cvaAdHocVerified = a})
+
+instance FromJSON CommentVerificationActor where
+        parseJSON
+          = withObject "CommentVerificationActor"
+              (\ o ->
+                 CommentVerificationActor <$> (o .:? "adHocVerified"))
+
+instance ToJSON CommentVerificationActor where
+        toJSON CommentVerificationActor{..}
+          = object
+              (catMaybes
+                 [("adHocVerified" .=) <$> _cvaAdHocVerified])
+
+--
+-- /See:/ 'activity' smart constructor.
+data Activity = Activity
+    { _aAccess          :: !(Maybe (Maybe Acl))
+    , _aPlaceName       :: !(Maybe Text)
+    , _aEtag            :: !(Maybe Text)
+    , _aAnnotation      :: !(Maybe Text)
+    , _aLocation        :: !(Maybe (Maybe Place))
+    , _aGeocode         :: !(Maybe Text)
+    , _aKind            :: !Text
+    , _aRadius          :: !(Maybe Text)
+    , _aPublished       :: !(Maybe UTCTime)
+    , _aUrl             :: !(Maybe Text)
+    , _aActor           :: !(Maybe ActivityActor)
+    , _aAddress         :: !(Maybe Text)
+    , _aObject          :: !(Maybe ActivityObject)
+    , _aId              :: !(Maybe Text)
+    , _aUpdated         :: !(Maybe UTCTime)
+    , _aTitle           :: !(Maybe Text)
+    , _aVerb            :: !(Maybe Text)
+    , _aCrosspostSource :: !(Maybe Text)
+    , _aPlaceId         :: !(Maybe Text)
+    , _aProvider        :: !(Maybe ActivityProvider)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Activity' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aAccess'
+--
+-- * 'aPlaceName'
+--
+-- * 'aEtag'
+--
+-- * 'aAnnotation'
+--
+-- * 'aLocation'
+--
+-- * 'aGeocode'
+--
+-- * 'aKind'
+--
+-- * 'aRadius'
+--
+-- * 'aPublished'
+--
+-- * 'aUrl'
+--
+-- * 'aActor'
+--
+-- * 'aAddress'
+--
+-- * 'aObject'
+--
+-- * 'aId'
+--
+-- * 'aUpdated'
+--
+-- * 'aTitle'
+--
+-- * 'aVerb'
+--
+-- * 'aCrosspostSource'
+--
+-- * 'aPlaceId'
+--
+-- * 'aProvider'
+activity
+    :: Activity
+activity =
+    Activity
+    { _aAccess = Nothing
+    , _aPlaceName = Nothing
+    , _aEtag = Nothing
+    , _aAnnotation = Nothing
+    , _aLocation = Nothing
+    , _aGeocode = Nothing
+    , _aKind = "plus#activity"
+    , _aRadius = Nothing
+    , _aPublished = Nothing
+    , _aUrl = Nothing
+    , _aActor = Nothing
+    , _aAddress = Nothing
+    , _aObject = Nothing
+    , _aId = Nothing
+    , _aUpdated = Nothing
+    , _aTitle = Nothing
+    , _aVerb = Nothing
+    , _aCrosspostSource = Nothing
+    , _aPlaceId = Nothing
+    , _aProvider = Nothing
+    }
+
+-- | Identifies who has access to see this activity.
+aAccess :: Lens' Activity (Maybe (Maybe Acl))
+aAccess = lens _aAccess (\ s a -> s{_aAccess = a})
+
+-- | Name of the place where this activity occurred.
+aPlaceName :: Lens' Activity (Maybe Text)
+aPlaceName
+  = lens _aPlaceName (\ s a -> s{_aPlaceName = a})
+
+-- | ETag of this response for caching purposes.
+aEtag :: Lens' Activity (Maybe Text)
+aEtag = lens _aEtag (\ s a -> s{_aEtag = a})
+
+-- | Additional content added by the person who shared this activity,
+-- applicable only when resharing an activity.
+aAnnotation :: Lens' Activity (Maybe Text)
+aAnnotation
+  = lens _aAnnotation (\ s a -> s{_aAnnotation = a})
+
+-- | The location where this activity occurred.
+aLocation :: Lens' Activity (Maybe (Maybe Place))
+aLocation
+  = lens _aLocation (\ s a -> s{_aLocation = a})
+
+-- | Latitude and longitude where this activity occurred. Format is latitude
+-- followed by longitude, space separated.
+aGeocode :: Lens' Activity (Maybe Text)
+aGeocode = lens _aGeocode (\ s a -> s{_aGeocode = a})
+
+-- | Identifies this resource as an activity. Value: \"plus#activity\".
+aKind :: Lens' Activity Text
+aKind = lens _aKind (\ s a -> s{_aKind = a})
+
+-- | Radius, in meters, of the region where this activity occurred, centered
+-- at the latitude and longitude identified in geocode.
+aRadius :: Lens' Activity (Maybe Text)
+aRadius = lens _aRadius (\ s a -> s{_aRadius = a})
+
+-- | The time at which this activity was initially published. Formatted as an
+-- RFC 3339 timestamp.
+aPublished :: Lens' Activity (Maybe UTCTime)
+aPublished
+  = lens _aPublished (\ s a -> s{_aPublished = a})
+
+-- | The link to this activity.
+aUrl :: Lens' Activity (Maybe Text)
+aUrl = lens _aUrl (\ s a -> s{_aUrl = a})
+
+-- | The person who performed this activity.
+aActor :: Lens' Activity (Maybe ActivityActor)
+aActor = lens _aActor (\ s a -> s{_aActor = a})
+
+-- | Street address where this activity occurred.
+aAddress :: Lens' Activity (Maybe Text)
+aAddress = lens _aAddress (\ s a -> s{_aAddress = a})
+
+-- | The object of this activity.
+aObject :: Lens' Activity (Maybe ActivityObject)
+aObject = lens _aObject (\ s a -> s{_aObject = a})
+
+-- | The ID of this activity.
+aId :: Lens' Activity (Maybe Text)
+aId = lens _aId (\ s a -> s{_aId = a})
+
+-- | The time at which this activity was last updated. Formatted as an RFC
+-- 3339 timestamp.
+aUpdated :: Lens' Activity (Maybe UTCTime)
+aUpdated = lens _aUpdated (\ s a -> s{_aUpdated = a})
+
+-- | Title of this activity.
+aTitle :: Lens' Activity (Maybe Text)
+aTitle = lens _aTitle (\ s a -> s{_aTitle = a})
+
+-- | This activity\'s verb, which indicates the action that was performed.
+-- Possible values include, but are not limited to, the following values: -
+-- \"post\" - Publish content to the stream. - \"share\" - Reshare an
+-- activity.
+aVerb :: Lens' Activity (Maybe Text)
+aVerb = lens _aVerb (\ s a -> s{_aVerb = a})
+
+-- | If this activity is a crosspost from another system, this property
+-- specifies the ID of the original activity.
+aCrosspostSource :: Lens' Activity (Maybe Text)
+aCrosspostSource
+  = lens _aCrosspostSource
+      (\ s a -> s{_aCrosspostSource = a})
+
+-- | ID of the place where this activity occurred.
+aPlaceId :: Lens' Activity (Maybe Text)
+aPlaceId = lens _aPlaceId (\ s a -> s{_aPlaceId = a})
+
+-- | The service provider that initially published this activity.
+aProvider :: Lens' Activity (Maybe ActivityProvider)
+aProvider
+  = lens _aProvider (\ s a -> s{_aProvider = a})
+
+instance FromJSON Activity where
+        parseJSON
+          = withObject "Activity"
+              (\ o ->
+                 Activity <$>
+                   (o .:? "access") <*> (o .:? "placeName") <*>
+                     (o .:? "etag")
+                     <*> (o .:? "annotation")
+                     <*> (o .:? "location")
+                     <*> (o .:? "geocode")
+                     <*> (o .:? "kind" .!= "plus#activity")
+                     <*> (o .:? "radius")
+                     <*> (o .:? "published")
+                     <*> (o .:? "url")
+                     <*> (o .:? "actor")
+                     <*> (o .:? "address")
+                     <*> (o .:? "object")
+                     <*> (o .:? "id")
+                     <*> (o .:? "updated")
+                     <*> (o .:? "title")
+                     <*> (o .:? "verb")
+                     <*> (o .:? "crosspostSource")
+                     <*> (o .:? "placeId")
+                     <*> (o .:? "provider"))
+
+instance ToJSON Activity where
+        toJSON Activity{..}
+          = object
+              (catMaybes
+                 [("access" .=) <$> _aAccess,
+                  ("placeName" .=) <$> _aPlaceName,
+                  ("etag" .=) <$> _aEtag,
+                  ("annotation" .=) <$> _aAnnotation,
+                  ("location" .=) <$> _aLocation,
+                  ("geocode" .=) <$> _aGeocode,
+                  Just ("kind" .= _aKind), ("radius" .=) <$> _aRadius,
+                  ("published" .=) <$> _aPublished,
+                  ("url" .=) <$> _aUrl, ("actor" .=) <$> _aActor,
+                  ("address" .=) <$> _aAddress,
+                  ("object" .=) <$> _aObject, ("id" .=) <$> _aId,
+                  ("updated" .=) <$> _aUpdated,
+                  ("title" .=) <$> _aTitle, ("verb" .=) <$> _aVerb,
+                  ("crosspostSource" .=) <$> _aCrosspostSource,
+                  ("placeId" .=) <$> _aPlaceId,
+                  ("provider" .=) <$> _aProvider])
+
+-- | The person who performed this activity.
+--
+-- /See:/ 'activityActor' smart constructor.
+data ActivityActor = ActivityActor
+    { _aaImage        :: !(Maybe ActivityImageActor)
+    , _aaUrl          :: !(Maybe Text)
+    , _aaName         :: !(Maybe ActivityNameActor)
+    , _aaDisplayName  :: !(Maybe Text)
+    , _aaId           :: !(Maybe Text)
+    , _aaVerification :: !(Maybe ActivityVerificationActor)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ActivityActor' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aaImage'
+--
+-- * 'aaUrl'
+--
+-- * 'aaName'
+--
+-- * 'aaDisplayName'
+--
+-- * 'aaId'
+--
+-- * 'aaVerification'
+activityActor
+    :: ActivityActor
+activityActor =
+    ActivityActor
+    { _aaImage = Nothing
+    , _aaUrl = Nothing
+    , _aaName = Nothing
+    , _aaDisplayName = Nothing
+    , _aaId = Nothing
+    , _aaVerification = Nothing
+    }
+
+-- | The image representation of the actor.
+aaImage :: Lens' ActivityActor (Maybe ActivityImageActor)
+aaImage = lens _aaImage (\ s a -> s{_aaImage = a})
+
+-- | The link to the actor\'s Google profile.
+aaUrl :: Lens' ActivityActor (Maybe Text)
+aaUrl = lens _aaUrl (\ s a -> s{_aaUrl = a})
+
+-- | An object representation of the individual components of name.
+aaName :: Lens' ActivityActor (Maybe ActivityNameActor)
+aaName = lens _aaName (\ s a -> s{_aaName = a})
+
+-- | The name of the actor, suitable for display.
+aaDisplayName :: Lens' ActivityActor (Maybe Text)
+aaDisplayName
+  = lens _aaDisplayName
+      (\ s a -> s{_aaDisplayName = a})
+
+-- | The ID of the actor\'s Person resource.
+aaId :: Lens' ActivityActor (Maybe Text)
+aaId = lens _aaId (\ s a -> s{_aaId = a})
+
+-- | Verification status of actor.
+aaVerification :: Lens' ActivityActor (Maybe ActivityVerificationActor)
+aaVerification
+  = lens _aaVerification
+      (\ s a -> s{_aaVerification = a})
+
+instance FromJSON ActivityActor where
+        parseJSON
+          = withObject "ActivityActor"
+              (\ o ->
+                 ActivityActor <$>
+                   (o .:? "image") <*> (o .:? "url") <*> (o .:? "name")
+                     <*> (o .:? "displayName")
+                     <*> (o .:? "id")
+                     <*> (o .:? "verification"))
+
+instance ToJSON ActivityActor where
+        toJSON ActivityActor{..}
+          = object
+              (catMaybes
+                 [("image" .=) <$> _aaImage, ("url" .=) <$> _aaUrl,
+                  ("name" .=) <$> _aaName,
+                  ("displayName" .=) <$> _aaDisplayName,
+                  ("id" .=) <$> _aaId,
+                  ("verification" .=) <$> _aaVerification])
+
+-- | The object of this comment.
+--
+-- /See:/ 'commentObject' smart constructor.
+data CommentObject = CommentObject
+    { _coObjectType      :: !Text
+    , _coOriginalContent :: !(Maybe Text)
+    , _coContent         :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CommentObject' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'coObjectType'
+--
+-- * 'coOriginalContent'
+--
+-- * 'coContent'
+commentObject
+    :: CommentObject
+commentObject =
+    CommentObject
+    { _coObjectType = "comment"
+    , _coOriginalContent = Nothing
+    , _coContent = Nothing
+    }
+
+-- | The object type of this comment. Possible values are: - \"comment\" - A
+-- comment in reply to an activity.
+coObjectType :: Lens' CommentObject Text
+coObjectType
+  = lens _coObjectType (\ s a -> s{_coObjectType = a})
+
+-- | The content (text) as provided by the author, stored without any HTML
+-- formatting. When creating or updating a comment, this value must be
+-- supplied as plain text in the request.
+coOriginalContent :: Lens' CommentObject (Maybe Text)
+coOriginalContent
+  = lens _coOriginalContent
+      (\ s a -> s{_coOriginalContent = a})
+
+-- | The HTML-formatted content, suitable for display.
+coContent :: Lens' CommentObject (Maybe Text)
+coContent
+  = lens _coContent (\ s a -> s{_coContent = a})
+
+instance FromJSON CommentObject where
+        parseJSON
+          = withObject "CommentObject"
+              (\ o ->
+                 CommentObject <$>
+                   (o .:? "objectType" .!= "comment") <*>
+                     (o .:? "originalContent")
+                     <*> (o .:? "content"))
+
+instance ToJSON CommentObject where
+        toJSON CommentObject{..}
+          = object
+              (catMaybes
+                 [Just ("objectType" .= _coObjectType),
+                  ("originalContent" .=) <$> _coOriginalContent,
+                  ("content" .=) <$> _coContent])
+
+-- | People who reshared this activity.
+--
+-- /See:/ 'activityResharersObject' smart constructor.
+data ActivityResharersObject = ActivityResharersObject
+    { _aTotalItems :: !(Maybe Word32)
+    , _aSelfLink   :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ActivityResharersObject' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aTotalItems'
+--
+-- * 'aSelfLink'
+activityResharersObject
+    :: ActivityResharersObject
+activityResharersObject =
+    ActivityResharersObject
+    { _aTotalItems = Nothing
+    , _aSelfLink = Nothing
+    }
+
+-- | Total number of people who reshared this activity.
+aTotalItems :: Lens' ActivityResharersObject (Maybe Word32)
+aTotalItems
+  = lens _aTotalItems (\ s a -> s{_aTotalItems = a})
+
+-- | The URL for the collection of resharers.
+aSelfLink :: Lens' ActivityResharersObject (Maybe Text)
+aSelfLink
+  = lens _aSelfLink (\ s a -> s{_aSelfLink = a})
+
+instance FromJSON ActivityResharersObject where
+        parseJSON
+          = withObject "ActivityResharersObject"
+              (\ o ->
+                 ActivityResharersObject <$>
+                   (o .:? "totalItems") <*> (o .:? "selfLink"))
+
+instance ToJSON ActivityResharersObject where
+        toJSON ActivityResharersObject{..}
+          = object
+              (catMaybes
+                 [("totalItems" .=) <$> _aTotalItems,
+                  ("selfLink" .=) <$> _aSelfLink])
+
+-- | Extra information about the cover photo.
+--
+-- /See:/ 'personCoverInfoCover' smart constructor.
+data PersonCoverInfoCover = PersonCoverInfoCover
+    { _pcicTopImageOffset  :: !(Maybe Int32)
+    , _pcicLeftImageOffset :: !(Maybe Int32)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PersonCoverInfoCover' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pcicTopImageOffset'
+--
+-- * 'pcicLeftImageOffset'
+personCoverInfoCover
+    :: PersonCoverInfoCover
+personCoverInfoCover =
+    PersonCoverInfoCover
+    { _pcicTopImageOffset = Nothing
+    , _pcicLeftImageOffset = Nothing
+    }
+
+-- | The difference between the top position of the cover image and the
+-- actual displayed cover image. Only valid for banner layout.
+pcicTopImageOffset :: Lens' PersonCoverInfoCover (Maybe Int32)
+pcicTopImageOffset
+  = lens _pcicTopImageOffset
+      (\ s a -> s{_pcicTopImageOffset = a})
+
+-- | The difference between the left position of the cover image and the
+-- actual displayed cover image. Only valid for banner layout.
+pcicLeftImageOffset :: Lens' PersonCoverInfoCover (Maybe Int32)
+pcicLeftImageOffset
+  = lens _pcicLeftImageOffset
+      (\ s a -> s{_pcicLeftImageOffset = a})
+
+instance FromJSON PersonCoverInfoCover where
+        parseJSON
+          = withObject "PersonCoverInfoCover"
+              (\ o ->
+                 PersonCoverInfoCover <$>
+                   (o .:? "topImageOffset") <*>
+                     (o .:? "leftImageOffset"))
+
+instance ToJSON PersonCoverInfoCover where
+        toJSON PersonCoverInfoCover{..}
+          = object
+              (catMaybes
+                 [("topImageOffset" .=) <$> _pcicTopImageOffset,
+                  ("leftImageOffset" .=) <$> _pcicLeftImageOffset])
+
+--
+-- /See:/ 'personItemUrls' smart constructor.
+data PersonItemUrls = PersonItemUrls
+    { _piuValue :: !(Maybe Text)
+    , _piuType  :: !(Maybe Text)
+    , _piuLabel :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PersonItemUrls' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'piuValue'
+--
+-- * 'piuType'
+--
+-- * 'piuLabel'
+personItemUrls
+    :: PersonItemUrls
+personItemUrls =
+    PersonItemUrls
+    { _piuValue = Nothing
+    , _piuType = Nothing
+    , _piuLabel = Nothing
+    }
+
+-- | The URL value.
+piuValue :: Lens' PersonItemUrls (Maybe Text)
+piuValue = lens _piuValue (\ s a -> s{_piuValue = a})
+
+-- | The type of URL. Possible values include, but are not limited to, the
+-- following values: - \"otherProfile\" - URL for another profile. -
+-- \"contributor\" - URL to a site for which this person is a contributor.
+-- - \"website\" - URL for this Google+ Page\'s primary website. -
+-- \"other\" - Other URL.
+piuType :: Lens' PersonItemUrls (Maybe Text)
+piuType = lens _piuType (\ s a -> s{_piuType = a})
+
+-- | The label of the URL.
+piuLabel :: Lens' PersonItemUrls (Maybe Text)
+piuLabel = lens _piuLabel (\ s a -> s{_piuLabel = a})
+
+instance FromJSON PersonItemUrls where
+        parseJSON
+          = withObject "PersonItemUrls"
+              (\ o ->
+                 PersonItemUrls <$>
+                   (o .:? "value") <*> (o .:? "type") <*>
+                     (o .:? "label"))
+
+instance ToJSON PersonItemUrls where
+        toJSON PersonItemUrls{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _piuValue,
+                  ("type" .=) <$> _piuType,
+                  ("label" .=) <$> _piuLabel])
+
+--
+-- /See:/ 'place' smart constructor.
+data Place = Place
+    { _pKind        :: !Text
+    , _pAddress     :: !(Maybe PlaceAddress)
+    , _pDisplayName :: !(Maybe Text)
+    , _pId          :: !(Maybe Text)
+    , _pPosition    :: !(Maybe PlacePosition)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Place' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pKind'
+--
+-- * 'pAddress'
+--
+-- * 'pDisplayName'
+--
+-- * 'pId'
+--
+-- * 'pPosition'
+place
+    :: Place
+place =
+    Place
+    { _pKind = "plus#place"
+    , _pAddress = Nothing
+    , _pDisplayName = Nothing
+    , _pId = Nothing
+    , _pPosition = Nothing
+    }
+
+-- | Identifies this resource as a place. Value: \"plus#place\".
+pKind :: Lens' Place Text
+pKind = lens _pKind (\ s a -> s{_pKind = a})
+
+-- | The physical address of the place.
+pAddress :: Lens' Place (Maybe PlaceAddress)
+pAddress = lens _pAddress (\ s a -> s{_pAddress = a})
+
+-- | The display name of the place.
+pDisplayName :: Lens' Place (Maybe Text)
+pDisplayName
+  = lens _pDisplayName (\ s a -> s{_pDisplayName = a})
+
+-- | The id of the place.
+pId :: Lens' Place (Maybe Text)
+pId = lens _pId (\ s a -> s{_pId = a})
+
+-- | The position of the place.
+pPosition :: Lens' Place (Maybe PlacePosition)
+pPosition
+  = lens _pPosition (\ s a -> s{_pPosition = a})
+
+instance FromJSON Place where
+        parseJSON
+          = withObject "Place"
+              (\ o ->
+                 Place <$>
+                   (o .:? "kind" .!= "plus#place") <*> (o .:? "address")
+                     <*> (o .:? "displayName")
+                     <*> (o .:? "id")
+                     <*> (o .:? "position"))
+
+instance ToJSON Place where
+        toJSON Place{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _pKind),
+                  ("address" .=) <$> _pAddress,
+                  ("displayName" .=) <$> _pDisplayName,
+                  ("id" .=) <$> _pId, ("position" .=) <$> _pPosition])
+
+--
+-- /See:/ 'comment' smart constructor.
+data Comment = Comment
+    { _cEtag      :: !(Maybe Text)
+    , _cPlusoners :: !(Maybe CommentPlusoners)
+    , _cKind      :: !Text
+    , _cPublished :: !(Maybe UTCTime)
+    , _cActor     :: !(Maybe CommentActor)
+    , _cSelfLink  :: !(Maybe Text)
+    , _cObject    :: !(Maybe CommentObject)
+    , _cId        :: !(Maybe Text)
+    , _cUpdated   :: !(Maybe UTCTime)
+    , _cVerb      :: !Text
+    , _cInReplyTo :: !(Maybe [CommentItemInReplyTo])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Comment' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cEtag'
+--
+-- * 'cPlusoners'
+--
+-- * 'cKind'
+--
+-- * 'cPublished'
+--
+-- * 'cActor'
+--
+-- * 'cSelfLink'
+--
+-- * 'cObject'
+--
+-- * 'cId'
+--
+-- * 'cUpdated'
+--
+-- * 'cVerb'
+--
+-- * 'cInReplyTo'
+comment
+    :: Comment
+comment =
+    Comment
+    { _cEtag = Nothing
+    , _cPlusoners = Nothing
+    , _cKind = "plus#comment"
+    , _cPublished = Nothing
+    , _cActor = Nothing
+    , _cSelfLink = Nothing
+    , _cObject = Nothing
+    , _cId = Nothing
+    , _cUpdated = Nothing
+    , _cVerb = "post"
+    , _cInReplyTo = Nothing
+    }
+
+-- | ETag of this response for caching purposes.
+cEtag :: Lens' Comment (Maybe Text)
+cEtag = lens _cEtag (\ s a -> s{_cEtag = a})
+
+-- | People who +1\'d this comment.
+cPlusoners :: Lens' Comment (Maybe CommentPlusoners)
+cPlusoners
+  = lens _cPlusoners (\ s a -> s{_cPlusoners = a})
+
+-- | Identifies this resource as a comment. Value: \"plus#comment\".
+cKind :: Lens' Comment Text
+cKind = lens _cKind (\ s a -> s{_cKind = a})
+
+-- | The time at which this comment was initially published. Formatted as an
+-- RFC 3339 timestamp.
+cPublished :: Lens' Comment (Maybe UTCTime)
+cPublished
+  = lens _cPublished (\ s a -> s{_cPublished = a})
+
+-- | The person who posted this comment.
+cActor :: Lens' Comment (Maybe CommentActor)
+cActor = lens _cActor (\ s a -> s{_cActor = a})
+
+-- | Link to this comment resource.
+cSelfLink :: Lens' Comment (Maybe Text)
+cSelfLink
+  = lens _cSelfLink (\ s a -> s{_cSelfLink = a})
+
+-- | The object of this comment.
+cObject :: Lens' Comment (Maybe CommentObject)
+cObject = lens _cObject (\ s a -> s{_cObject = a})
+
+-- | The ID of this comment.
+cId :: Lens' Comment (Maybe Text)
+cId = lens _cId (\ s a -> s{_cId = a})
+
+-- | The time at which this comment was last updated. Formatted as an RFC
+-- 3339 timestamp.
+cUpdated :: Lens' Comment (Maybe UTCTime)
+cUpdated = lens _cUpdated (\ s a -> s{_cUpdated = a})
+
+-- | This comment\'s verb, indicating what action was performed. Possible
+-- values are: - \"post\" - Publish content to the stream.
+cVerb :: Lens' Comment Text
+cVerb = lens _cVerb (\ s a -> s{_cVerb = a})
+
+-- | The activity this comment replied to.
+cInReplyTo :: Lens' Comment [CommentItemInReplyTo]
+cInReplyTo
+  = lens _cInReplyTo (\ s a -> s{_cInReplyTo = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON Comment where
+        parseJSON
+          = withObject "Comment"
+              (\ o ->
+                 Comment <$>
+                   (o .:? "etag") <*> (o .:? "plusoners") <*>
+                     (o .:? "kind" .!= "plus#comment")
+                     <*> (o .:? "published")
+                     <*> (o .:? "actor")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "object")
+                     <*> (o .:? "id")
+                     <*> (o .:? "updated")
+                     <*> (o .:? "verb" .!= "post")
+                     <*> (o .:? "inReplyTo" .!= mempty))
+
+instance ToJSON Comment where
+        toJSON Comment{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _cEtag,
+                  ("plusoners" .=) <$> _cPlusoners,
+                  Just ("kind" .= _cKind),
+                  ("published" .=) <$> _cPublished,
+                  ("actor" .=) <$> _cActor,
+                  ("selfLink" .=) <$> _cSelfLink,
+                  ("object" .=) <$> _cObject, ("id" .=) <$> _cId,
+                  ("updated" .=) <$> _cUpdated,
+                  Just ("verb" .= _cVerb),
+                  ("inReplyTo" .=) <$> _cInReplyTo])
+
+-- | The preview image for photos or videos.
+--
+-- /See:/ 'activityImageItemAttachmentsObject' smart constructor.
+data ActivityImageItemAttachmentsObject = ActivityImageItemAttachmentsObject
+    { _aiiaoHeight :: !(Maybe Word32)
+    , _aiiaoUrl    :: !(Maybe Text)
+    , _aiiaoWidth  :: !(Maybe Word32)
+    , _aiiaoType   :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ActivityImageItemAttachmentsObject' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aiiaoHeight'
+--
+-- * 'aiiaoUrl'
+--
+-- * 'aiiaoWidth'
+--
+-- * 'aiiaoType'
+activityImageItemAttachmentsObject
+    :: ActivityImageItemAttachmentsObject
+activityImageItemAttachmentsObject =
+    ActivityImageItemAttachmentsObject
+    { _aiiaoHeight = Nothing
+    , _aiiaoUrl = Nothing
+    , _aiiaoWidth = Nothing
+    , _aiiaoType = Nothing
+    }
+
+-- | The height, in pixels, of the linked resource.
+aiiaoHeight :: Lens' ActivityImageItemAttachmentsObject (Maybe Word32)
+aiiaoHeight
+  = lens _aiiaoHeight (\ s a -> s{_aiiaoHeight = a})
+
+-- | Image URL.
+aiiaoUrl :: Lens' ActivityImageItemAttachmentsObject (Maybe Text)
+aiiaoUrl = lens _aiiaoUrl (\ s a -> s{_aiiaoUrl = a})
+
+-- | The width, in pixels, of the linked resource.
+aiiaoWidth :: Lens' ActivityImageItemAttachmentsObject (Maybe Word32)
+aiiaoWidth
+  = lens _aiiaoWidth (\ s a -> s{_aiiaoWidth = a})
+
+-- | Media type of the link.
+aiiaoType :: Lens' ActivityImageItemAttachmentsObject (Maybe Text)
+aiiaoType
+  = lens _aiiaoType (\ s a -> s{_aiiaoType = a})
+
+instance FromJSON ActivityImageItemAttachmentsObject
+         where
+        parseJSON
+          = withObject "ActivityImageItemAttachmentsObject"
+              (\ o ->
+                 ActivityImageItemAttachmentsObject <$>
+                   (o .:? "height") <*> (o .:? "url") <*>
+                     (o .:? "width")
+                     <*> (o .:? "type"))
+
+instance ToJSON ActivityImageItemAttachmentsObject
+         where
+        toJSON ActivityImageItemAttachmentsObject{..}
+          = object
+              (catMaybes
+                 [("height" .=) <$> _aiiaoHeight,
+                  ("url" .=) <$> _aiiaoUrl,
+                  ("width" .=) <$> _aiiaoWidth,
+                  ("type" .=) <$> _aiiaoType])
+
+--
+-- /See:/ 'personItemOrganizations' smart constructor.
+data PersonItemOrganizations = PersonItemOrganizations
+    { _pioDepartment  :: !(Maybe Text)
+    , _pioLocation    :: !(Maybe Text)
+    , _pioEndDate     :: !(Maybe Text)
+    , _pioPrimary     :: !(Maybe Bool)
+    , _pioStartDate   :: !(Maybe Text)
+    , _pioName        :: !(Maybe Text)
+    , _pioTitle       :: !(Maybe Text)
+    , _pioType        :: !(Maybe Text)
+    , _pioDescription :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PersonItemOrganizations' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pioDepartment'
+--
+-- * 'pioLocation'
+--
+-- * 'pioEndDate'
+--
+-- * 'pioPrimary'
+--
+-- * 'pioStartDate'
+--
+-- * 'pioName'
+--
+-- * 'pioTitle'
+--
+-- * 'pioType'
+--
+-- * 'pioDescription'
+personItemOrganizations
+    :: PersonItemOrganizations
+personItemOrganizations =
+    PersonItemOrganizations
+    { _pioDepartment = Nothing
+    , _pioLocation = Nothing
+    , _pioEndDate = Nothing
+    , _pioPrimary = Nothing
+    , _pioStartDate = Nothing
+    , _pioName = Nothing
+    , _pioTitle = Nothing
+    , _pioType = Nothing
+    , _pioDescription = Nothing
+    }
+
+-- | The department within the organization. Deprecated.
+pioDepartment :: Lens' PersonItemOrganizations (Maybe Text)
+pioDepartment
+  = lens _pioDepartment
+      (\ s a -> s{_pioDepartment = a})
+
+-- | The location of this organization. Deprecated.
+pioLocation :: Lens' PersonItemOrganizations (Maybe Text)
+pioLocation
+  = lens _pioLocation (\ s a -> s{_pioLocation = a})
+
+-- | The date that the person left this organization.
+pioEndDate :: Lens' PersonItemOrganizations (Maybe Text)
+pioEndDate
+  = lens _pioEndDate (\ s a -> s{_pioEndDate = a})
+
+-- | If \"true\", indicates this organization is the person\'s primary one,
+-- which is typically interpreted as the current one.
+pioPrimary :: Lens' PersonItemOrganizations (Maybe Bool)
+pioPrimary
+  = lens _pioPrimary (\ s a -> s{_pioPrimary = a})
+
+-- | The date that the person joined this organization.
+pioStartDate :: Lens' PersonItemOrganizations (Maybe Text)
+pioStartDate
+  = lens _pioStartDate (\ s a -> s{_pioStartDate = a})
+
+-- | The name of the organization.
+pioName :: Lens' PersonItemOrganizations (Maybe Text)
+pioName = lens _pioName (\ s a -> s{_pioName = a})
+
+-- | The person\'s job title or role within the organization.
+pioTitle :: Lens' PersonItemOrganizations (Maybe Text)
+pioTitle = lens _pioTitle (\ s a -> s{_pioTitle = a})
+
+-- | The type of organization. Possible values include, but are not limited
+-- to, the following values: - \"work\" - Work. - \"school\" - School.
+pioType :: Lens' PersonItemOrganizations (Maybe Text)
+pioType = lens _pioType (\ s a -> s{_pioType = a})
+
+-- | A short description of the person\'s role in this organization.
+-- Deprecated.
+pioDescription :: Lens' PersonItemOrganizations (Maybe Text)
+pioDescription
+  = lens _pioDescription
+      (\ s a -> s{_pioDescription = a})
+
+instance FromJSON PersonItemOrganizations where
+        parseJSON
+          = withObject "PersonItemOrganizations"
+              (\ o ->
+                 PersonItemOrganizations <$>
+                   (o .:? "department") <*> (o .:? "location") <*>
+                     (o .:? "endDate")
+                     <*> (o .:? "primary")
+                     <*> (o .:? "startDate")
+                     <*> (o .:? "name")
+                     <*> (o .:? "title")
+                     <*> (o .:? "type")
+                     <*> (o .:? "description"))
+
+instance ToJSON PersonItemOrganizations where
+        toJSON PersonItemOrganizations{..}
+          = object
+              (catMaybes
+                 [("department" .=) <$> _pioDepartment,
+                  ("location" .=) <$> _pioLocation,
+                  ("endDate" .=) <$> _pioEndDate,
+                  ("primary" .=) <$> _pioPrimary,
+                  ("startDate" .=) <$> _pioStartDate,
+                  ("name" .=) <$> _pioName, ("title" .=) <$> _pioTitle,
+                  ("type" .=) <$> _pioType,
+                  ("description" .=) <$> _pioDescription])
+
+-- | The physical address of the place.
+--
+-- /See:/ 'placeAddress' smart constructor.
+newtype PlaceAddress = PlaceAddress
+    { _paFormatted :: Maybe Text
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PlaceAddress' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'paFormatted'
+placeAddress
+    :: PlaceAddress
+placeAddress =
+    PlaceAddress
+    { _paFormatted = Nothing
+    }
+
+-- | The formatted address for display.
+paFormatted :: Lens' PlaceAddress (Maybe Text)
+paFormatted
+  = lens _paFormatted (\ s a -> s{_paFormatted = a})
+
+instance FromJSON PlaceAddress where
+        parseJSON
+          = withObject "PlaceAddress"
+              (\ o -> PlaceAddress <$> (o .:? "formatted"))
+
+instance ToJSON PlaceAddress where
+        toJSON PlaceAddress{..}
+          = object
+              (catMaybes [("formatted" .=) <$> _paFormatted])
+
+--
+-- /See:/ 'commentFeed' smart constructor.
+data CommentFeed = CommentFeed
+    { _cfEtag          :: !(Maybe Text)
+    , _cfNextPageToken :: !(Maybe Text)
+    , _cfNextLink      :: !(Maybe Text)
+    , _cfKind          :: !Text
+    , _cfItems         :: !(Maybe [Maybe Comment])
+    , _cfId            :: !(Maybe Text)
+    , _cfUpdated       :: !(Maybe UTCTime)
+    , _cfTitle         :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CommentFeed' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cfEtag'
+--
+-- * 'cfNextPageToken'
+--
+-- * 'cfNextLink'
+--
+-- * 'cfKind'
+--
+-- * 'cfItems'
+--
+-- * 'cfId'
+--
+-- * 'cfUpdated'
+--
+-- * 'cfTitle'
+commentFeed
+    :: CommentFeed
+commentFeed =
+    CommentFeed
+    { _cfEtag = Nothing
+    , _cfNextPageToken = Nothing
+    , _cfNextLink = Nothing
+    , _cfKind = "plus#commentFeed"
+    , _cfItems = Nothing
+    , _cfId = Nothing
+    , _cfUpdated = Nothing
+    , _cfTitle = Nothing
+    }
+
+-- | ETag of this response for caching purposes.
+cfEtag :: Lens' CommentFeed (Maybe Text)
+cfEtag = lens _cfEtag (\ s a -> s{_cfEtag = a})
+
+-- | The continuation token, which is used to page through large result sets.
+-- Provide this value in a subsequent request to return the next page of
+-- results.
+cfNextPageToken :: Lens' CommentFeed (Maybe Text)
+cfNextPageToken
+  = lens _cfNextPageToken
+      (\ s a -> s{_cfNextPageToken = a})
+
+-- | Link to the next page of activities.
+cfNextLink :: Lens' CommentFeed (Maybe Text)
+cfNextLink
+  = lens _cfNextLink (\ s a -> s{_cfNextLink = a})
+
+-- | Identifies this resource as a collection of comments. Value:
+-- \"plus#commentFeed\".
+cfKind :: Lens' CommentFeed Text
+cfKind = lens _cfKind (\ s a -> s{_cfKind = a})
+
+-- | The comments in this page of results.
+cfItems :: Lens' CommentFeed [Maybe Comment]
+cfItems
+  = lens _cfItems (\ s a -> s{_cfItems = a}) . _Default
+      . _Coerce
+
+-- | The ID of this collection of comments.
+cfId :: Lens' CommentFeed (Maybe Text)
+cfId = lens _cfId (\ s a -> s{_cfId = a})
+
+-- | The time at which this collection of comments was last updated.
+-- Formatted as an RFC 3339 timestamp.
+cfUpdated :: Lens' CommentFeed (Maybe UTCTime)
+cfUpdated
+  = lens _cfUpdated (\ s a -> s{_cfUpdated = a})
+
+-- | The title of this collection of comments.
+cfTitle :: Lens' CommentFeed (Maybe Text)
+cfTitle = lens _cfTitle (\ s a -> s{_cfTitle = a})
+
+instance FromJSON CommentFeed where
+        parseJSON
+          = withObject "CommentFeed"
+              (\ o ->
+                 CommentFeed <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "nextLink")
+                     <*> (o .:? "kind" .!= "plus#commentFeed")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "id")
+                     <*> (o .:? "updated")
+                     <*> (o .:? "title"))
+
+instance ToJSON CommentFeed where
+        toJSON CommentFeed{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _cfEtag,
+                  ("nextPageToken" .=) <$> _cfNextPageToken,
+                  ("nextLink" .=) <$> _cfNextLink,
+                  Just ("kind" .= _cfKind), ("items" .=) <$> _cfItems,
+                  ("id" .=) <$> _cfId, ("updated" .=) <$> _cfUpdated,
+                  ("title" .=) <$> _cfTitle])
+
+-- | Image resource.
+--
+-- /See:/ 'activityImageItemThumbnailsItemAttachmentsObject' smart constructor.
+data ActivityImageItemThumbnailsItemAttachmentsObject = ActivityImageItemThumbnailsItemAttachmentsObject
+    { _aiitiaoHeight :: !(Maybe Word32)
+    , _aiitiaoUrl    :: !(Maybe Text)
+    , _aiitiaoWidth  :: !(Maybe Word32)
+    , _aiitiaoType   :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ActivityImageItemThumbnailsItemAttachmentsObject' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aiitiaoHeight'
+--
+-- * 'aiitiaoUrl'
+--
+-- * 'aiitiaoWidth'
+--
+-- * 'aiitiaoType'
+activityImageItemThumbnailsItemAttachmentsObject
+    :: ActivityImageItemThumbnailsItemAttachmentsObject
+activityImageItemThumbnailsItemAttachmentsObject =
+    ActivityImageItemThumbnailsItemAttachmentsObject
+    { _aiitiaoHeight = Nothing
+    , _aiitiaoUrl = Nothing
+    , _aiitiaoWidth = Nothing
+    , _aiitiaoType = Nothing
+    }
+
+-- | The height, in pixels, of the linked resource.
+aiitiaoHeight :: Lens' ActivityImageItemThumbnailsItemAttachmentsObject (Maybe Word32)
+aiitiaoHeight
+  = lens _aiitiaoHeight
+      (\ s a -> s{_aiitiaoHeight = a})
+
+-- | Image url.
+aiitiaoUrl :: Lens' ActivityImageItemThumbnailsItemAttachmentsObject (Maybe Text)
+aiitiaoUrl
+  = lens _aiitiaoUrl (\ s a -> s{_aiitiaoUrl = a})
+
+-- | The width, in pixels, of the linked resource.
+aiitiaoWidth :: Lens' ActivityImageItemThumbnailsItemAttachmentsObject (Maybe Word32)
+aiitiaoWidth
+  = lens _aiitiaoWidth (\ s a -> s{_aiitiaoWidth = a})
+
+-- | Media type of the link.
+aiitiaoType :: Lens' ActivityImageItemThumbnailsItemAttachmentsObject (Maybe Text)
+aiitiaoType
+  = lens _aiitiaoType (\ s a -> s{_aiitiaoType = a})
+
+instance FromJSON
+         ActivityImageItemThumbnailsItemAttachmentsObject
+         where
+        parseJSON
+          = withObject
+              "ActivityImageItemThumbnailsItemAttachmentsObject"
+              (\ o ->
+                 ActivityImageItemThumbnailsItemAttachmentsObject <$>
+                   (o .:? "height") <*> (o .:? "url") <*>
+                     (o .:? "width")
+                     <*> (o .:? "type"))
+
+instance ToJSON
+         ActivityImageItemThumbnailsItemAttachmentsObject
+         where
+        toJSON
+          ActivityImageItemThumbnailsItemAttachmentsObject{..}
+          = object
+              (catMaybes
+                 [("height" .=) <$> _aiitiaoHeight,
+                  ("url" .=) <$> _aiitiaoUrl,
+                  ("width" .=) <$> _aiitiaoWidth,
+                  ("type" .=) <$> _aiitiaoType])
+
+-- | The position of the place.
+--
+-- /See:/ 'placePosition' smart constructor.
+data PlacePosition = PlacePosition
+    { _ppLatitude  :: !(Maybe Double)
+    , _ppLongitude :: !(Maybe Double)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PlacePosition' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ppLatitude'
+--
+-- * 'ppLongitude'
+placePosition
+    :: PlacePosition
+placePosition =
+    PlacePosition
+    { _ppLatitude = Nothing
+    , _ppLongitude = Nothing
+    }
+
+-- | The latitude of this position.
+ppLatitude :: Lens' PlacePosition (Maybe Double)
+ppLatitude
+  = lens _ppLatitude (\ s a -> s{_ppLatitude = a})
+
+-- | The longitude of this position.
+ppLongitude :: Lens' PlacePosition (Maybe Double)
+ppLongitude
+  = lens _ppLongitude (\ s a -> s{_ppLongitude = a})
+
+instance FromJSON PlacePosition where
+        parseJSON
+          = withObject "PlacePosition"
+              (\ o ->
+                 PlacePosition <$>
+                   (o .:? "latitude") <*> (o .:? "longitude"))
+
+instance ToJSON PlacePosition where
+        toJSON PlacePosition{..}
+          = object
+              (catMaybes
+                 [("latitude" .=) <$> _ppLatitude,
+                  ("longitude" .=) <$> _ppLongitude])
 
 --
 -- /See:/ 'momentsFeed' smart constructor.
@@ -3005,111 +2534,499 @@ instance ToJSON MomentsFeed where
                   ("updated" .=) <$> _mfUpdated,
                   ("title" .=) <$> _mfTitle])
 
+-- | An object representation of the individual components of a person\'s
+-- name.
 --
--- /See:/ 'peopleFeed' smart constructor.
-data PeopleFeed = PeopleFeed
-    { _pfTotalItems    :: !(Maybe Int32)
-    , _pfEtag          :: !(Maybe Text)
-    , _pfNextPageToken :: !(Maybe Text)
-    , _pfKind          :: !Text
-    , _pfItems         :: !(Maybe [Maybe Person])
-    , _pfSelfLink      :: !(Maybe Text)
-    , _pfTitle         :: !(Maybe Text)
+-- /See:/ 'personName' smart constructor.
+data PersonName = PersonName
+    { _pnGivenName       :: !(Maybe Text)
+    , _pnMiddleName      :: !(Maybe Text)
+    , _pnFormatted       :: !(Maybe Text)
+    , _pnHonorificPrefix :: !(Maybe Text)
+    , _pnFamilyName      :: !(Maybe Text)
+    , _pnHonorificSuffix :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PeopleFeed' with the minimum fields required to make a request.
+-- | Creates a value of 'PersonName' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pfTotalItems'
+-- * 'pnGivenName'
 --
--- * 'pfEtag'
+-- * 'pnMiddleName'
 --
--- * 'pfNextPageToken'
+-- * 'pnFormatted'
 --
--- * 'pfKind'
+-- * 'pnHonorificPrefix'
 --
--- * 'pfItems'
+-- * 'pnFamilyName'
 --
--- * 'pfSelfLink'
---
--- * 'pfTitle'
-peopleFeed
-    :: PeopleFeed
-peopleFeed =
-    PeopleFeed
-    { _pfTotalItems = Nothing
-    , _pfEtag = Nothing
-    , _pfNextPageToken = Nothing
-    , _pfKind = "plus#peopleFeed"
-    , _pfItems = Nothing
-    , _pfSelfLink = Nothing
-    , _pfTitle = Nothing
+-- * 'pnHonorificSuffix'
+personName
+    :: PersonName
+personName =
+    PersonName
+    { _pnGivenName = Nothing
+    , _pnMiddleName = Nothing
+    , _pnFormatted = Nothing
+    , _pnHonorificPrefix = Nothing
+    , _pnFamilyName = Nothing
+    , _pnHonorificSuffix = Nothing
     }
 
--- | The total number of people available in this list. The number of people
--- in a response might be smaller due to paging. This might not be set for
--- all collections.
-pfTotalItems :: Lens' PeopleFeed (Maybe Int32)
-pfTotalItems
-  = lens _pfTotalItems (\ s a -> s{_pfTotalItems = a})
+-- | The given name (first name) of this person.
+pnGivenName :: Lens' PersonName (Maybe Text)
+pnGivenName
+  = lens _pnGivenName (\ s a -> s{_pnGivenName = a})
 
--- | ETag of this response for caching purposes.
-pfEtag :: Lens' PeopleFeed (Maybe Text)
-pfEtag = lens _pfEtag (\ s a -> s{_pfEtag = a})
+-- | The middle name of this person.
+pnMiddleName :: Lens' PersonName (Maybe Text)
+pnMiddleName
+  = lens _pnMiddleName (\ s a -> s{_pnMiddleName = a})
 
--- | The continuation token, which is used to page through large result sets.
--- Provide this value in a subsequent request to return the next page of
--- results.
-pfNextPageToken :: Lens' PeopleFeed (Maybe Text)
-pfNextPageToken
-  = lens _pfNextPageToken
-      (\ s a -> s{_pfNextPageToken = a})
+-- | The full name of this person, including middle names, suffixes, etc.
+pnFormatted :: Lens' PersonName (Maybe Text)
+pnFormatted
+  = lens _pnFormatted (\ s a -> s{_pnFormatted = a})
 
--- | Identifies this resource as a collection of people. Value:
--- \"plus#peopleFeed\".
-pfKind :: Lens' PeopleFeed Text
-pfKind = lens _pfKind (\ s a -> s{_pfKind = a})
+-- | The honorific prefixes (such as \"Dr.\" or \"Mrs.\") for this person.
+pnHonorificPrefix :: Lens' PersonName (Maybe Text)
+pnHonorificPrefix
+  = lens _pnHonorificPrefix
+      (\ s a -> s{_pnHonorificPrefix = a})
 
--- | The people in this page of results. Each item includes the id,
--- displayName, image, and url for the person. To retrieve additional
--- profile data, see the people.get method.
-pfItems :: Lens' PeopleFeed [Maybe Person]
-pfItems
-  = lens _pfItems (\ s a -> s{_pfItems = a}) . _Default
-      . _Coerce
+-- | The family name (last name) of this person.
+pnFamilyName :: Lens' PersonName (Maybe Text)
+pnFamilyName
+  = lens _pnFamilyName (\ s a -> s{_pnFamilyName = a})
 
--- | Link to this resource.
-pfSelfLink :: Lens' PeopleFeed (Maybe Text)
-pfSelfLink
-  = lens _pfSelfLink (\ s a -> s{_pfSelfLink = a})
+-- | The honorific suffixes (such as \"Jr.\") for this person.
+pnHonorificSuffix :: Lens' PersonName (Maybe Text)
+pnHonorificSuffix
+  = lens _pnHonorificSuffix
+      (\ s a -> s{_pnHonorificSuffix = a})
 
--- | The title of this collection of people.
-pfTitle :: Lens' PeopleFeed (Maybe Text)
-pfTitle = lens _pfTitle (\ s a -> s{_pfTitle = a})
-
-instance FromJSON PeopleFeed where
+instance FromJSON PersonName where
         parseJSON
-          = withObject "PeopleFeed"
+          = withObject "PersonName"
               (\ o ->
-                 PeopleFeed <$>
-                   (o .:? "totalItems") <*> (o .:? "etag") <*>
-                     (o .:? "nextPageToken")
-                     <*> (o .:? "kind" .!= "plus#peopleFeed")
-                     <*> (o .:? "items" .!= mempty)
-                     <*> (o .:? "selfLink")
-                     <*> (o .:? "title"))
+                 PersonName <$>
+                   (o .:? "givenName") <*> (o .:? "middleName") <*>
+                     (o .:? "formatted")
+                     <*> (o .:? "honorificPrefix")
+                     <*> (o .:? "familyName")
+                     <*> (o .:? "honorificSuffix"))
 
-instance ToJSON PeopleFeed where
-        toJSON PeopleFeed{..}
+instance ToJSON PersonName where
+        toJSON PersonName{..}
           = object
               (catMaybes
-                 [("totalItems" .=) <$> _pfTotalItems,
-                  ("etag" .=) <$> _pfEtag,
-                  ("nextPageToken" .=) <$> _pfNextPageToken,
-                  Just ("kind" .= _pfKind), ("items" .=) <$> _pfItems,
-                  ("selfLink" .=) <$> _pfSelfLink,
-                  ("title" .=) <$> _pfTitle])
+                 [("givenName" .=) <$> _pnGivenName,
+                  ("middleName" .=) <$> _pnMiddleName,
+                  ("formatted" .=) <$> _pnFormatted,
+                  ("honorificPrefix" .=) <$> _pnHonorificPrefix,
+                  ("familyName" .=) <$> _pnFamilyName,
+                  ("honorificSuffix" .=) <$> _pnHonorificSuffix])
+
+--
+-- /See:/ 'personItemEmails' smart constructor.
+data PersonItemEmails = PersonItemEmails
+    { _pieValue :: !(Maybe Text)
+    , _pieType  :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PersonItemEmails' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pieValue'
+--
+-- * 'pieType'
+personItemEmails
+    :: PersonItemEmails
+personItemEmails =
+    PersonItemEmails
+    { _pieValue = Nothing
+    , _pieType = Nothing
+    }
+
+-- | The email address.
+pieValue :: Lens' PersonItemEmails (Maybe Text)
+pieValue = lens _pieValue (\ s a -> s{_pieValue = a})
+
+-- | The type of address. Possible values include, but are not limited to,
+-- the following values: - \"account\" - Google account email address. -
+-- \"home\" - Home email address. - \"work\" - Work email address. -
+-- \"other\" - Other.
+pieType :: Lens' PersonItemEmails (Maybe Text)
+pieType = lens _pieType (\ s a -> s{_pieType = a})
+
+instance FromJSON PersonItemEmails where
+        parseJSON
+          = withObject "PersonItemEmails"
+              (\ o ->
+                 PersonItemEmails <$>
+                   (o .:? "value") <*> (o .:? "type"))
+
+instance ToJSON PersonItemEmails where
+        toJSON PersonItemEmails{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _pieValue,
+                  ("type" .=) <$> _pieType])
+
+--
+-- /See:/ 'activityItemAttachmentsObject' smart constructor.
+data ActivityItemAttachmentsObject = ActivityItemAttachmentsObject
+    { _actFullImage   :: !(Maybe ActivityFullImageItemAttachmentsObject)
+    , _actImage       :: !(Maybe ActivityImageItemAttachmentsObject)
+    , _actObjectType  :: !(Maybe Text)
+    , _actUrl         :: !(Maybe Text)
+    , _actEmbed       :: !(Maybe ActivityEmbedItemAttachmentsObject)
+    , _actContent     :: !(Maybe Text)
+    , _actThumbnails  :: !(Maybe [ActivityItemThumbnailsItemAttachmentsObject])
+    , _actDisplayName :: !(Maybe Text)
+    , _actId          :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ActivityItemAttachmentsObject' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'actFullImage'
+--
+-- * 'actImage'
+--
+-- * 'actObjectType'
+--
+-- * 'actUrl'
+--
+-- * 'actEmbed'
+--
+-- * 'actContent'
+--
+-- * 'actThumbnails'
+--
+-- * 'actDisplayName'
+--
+-- * 'actId'
+activityItemAttachmentsObject
+    :: ActivityItemAttachmentsObject
+activityItemAttachmentsObject =
+    ActivityItemAttachmentsObject
+    { _actFullImage = Nothing
+    , _actImage = Nothing
+    , _actObjectType = Nothing
+    , _actUrl = Nothing
+    , _actEmbed = Nothing
+    , _actContent = Nothing
+    , _actThumbnails = Nothing
+    , _actDisplayName = Nothing
+    , _actId = Nothing
+    }
+
+-- | The full image URL for photo attachments.
+actFullImage :: Lens' ActivityItemAttachmentsObject (Maybe ActivityFullImageItemAttachmentsObject)
+actFullImage
+  = lens _actFullImage (\ s a -> s{_actFullImage = a})
+
+-- | The preview image for photos or videos.
+actImage :: Lens' ActivityItemAttachmentsObject (Maybe ActivityImageItemAttachmentsObject)
+actImage = lens _actImage (\ s a -> s{_actImage = a})
+
+-- | The type of media object. Possible values include, but are not limited
+-- to, the following values: - \"photo\" - A photo. - \"album\" - A photo
+-- album. - \"video\" - A video. - \"article\" - An article, specified by a
+-- link.
+actObjectType :: Lens' ActivityItemAttachmentsObject (Maybe Text)
+actObjectType
+  = lens _actObjectType
+      (\ s a -> s{_actObjectType = a})
+
+-- | The link to the attachment, which should be of type text\/html.
+actUrl :: Lens' ActivityItemAttachmentsObject (Maybe Text)
+actUrl = lens _actUrl (\ s a -> s{_actUrl = a})
+
+-- | If the attachment is a video, the embeddable link.
+actEmbed :: Lens' ActivityItemAttachmentsObject (Maybe ActivityEmbedItemAttachmentsObject)
+actEmbed = lens _actEmbed (\ s a -> s{_actEmbed = a})
+
+-- | If the attachment is an article, this property contains a snippet of
+-- text from the article. It can also include descriptions for other types.
+actContent :: Lens' ActivityItemAttachmentsObject (Maybe Text)
+actContent
+  = lens _actContent (\ s a -> s{_actContent = a})
+
+-- | If the attachment is an album, this property is a list of potential
+-- additional thumbnails from the album.
+actThumbnails :: Lens' ActivityItemAttachmentsObject [ActivityItemThumbnailsItemAttachmentsObject]
+actThumbnails
+  = lens _actThumbnails
+      (\ s a -> s{_actThumbnails = a})
+      . _Default
+      . _Coerce
+
+-- | The title of the attachment, such as a photo caption or an article
+-- title.
+actDisplayName :: Lens' ActivityItemAttachmentsObject (Maybe Text)
+actDisplayName
+  = lens _actDisplayName
+      (\ s a -> s{_actDisplayName = a})
+
+-- | The ID of the attachment.
+actId :: Lens' ActivityItemAttachmentsObject (Maybe Text)
+actId = lens _actId (\ s a -> s{_actId = a})
+
+instance FromJSON ActivityItemAttachmentsObject where
+        parseJSON
+          = withObject "ActivityItemAttachmentsObject"
+              (\ o ->
+                 ActivityItemAttachmentsObject <$>
+                   (o .:? "fullImage") <*> (o .:? "image") <*>
+                     (o .:? "objectType")
+                     <*> (o .:? "url")
+                     <*> (o .:? "embed")
+                     <*> (o .:? "content")
+                     <*> (o .:? "thumbnails" .!= mempty)
+                     <*> (o .:? "displayName")
+                     <*> (o .:? "id"))
+
+instance ToJSON ActivityItemAttachmentsObject where
+        toJSON ActivityItemAttachmentsObject{..}
+          = object
+              (catMaybes
+                 [("fullImage" .=) <$> _actFullImage,
+                  ("image" .=) <$> _actImage,
+                  ("objectType" .=) <$> _actObjectType,
+                  ("url" .=) <$> _actUrl, ("embed" .=) <$> _actEmbed,
+                  ("content" .=) <$> _actContent,
+                  ("thumbnails" .=) <$> _actThumbnails,
+                  ("displayName" .=) <$> _actDisplayName,
+                  ("id" .=) <$> _actId])
+
+-- | People who +1\'d this activity.
+--
+-- /See:/ 'activityPlusonersObject' smart constructor.
+data ActivityPlusonersObject = ActivityPlusonersObject
+    { _apoTotalItems :: !(Maybe Word32)
+    , _apoSelfLink   :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ActivityPlusonersObject' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'apoTotalItems'
+--
+-- * 'apoSelfLink'
+activityPlusonersObject
+    :: ActivityPlusonersObject
+activityPlusonersObject =
+    ActivityPlusonersObject
+    { _apoTotalItems = Nothing
+    , _apoSelfLink = Nothing
+    }
+
+-- | Total number of people who +1\'d this activity.
+apoTotalItems :: Lens' ActivityPlusonersObject (Maybe Word32)
+apoTotalItems
+  = lens _apoTotalItems
+      (\ s a -> s{_apoTotalItems = a})
+
+-- | The URL for the collection of people who +1\'d this activity.
+apoSelfLink :: Lens' ActivityPlusonersObject (Maybe Text)
+apoSelfLink
+  = lens _apoSelfLink (\ s a -> s{_apoSelfLink = a})
+
+instance FromJSON ActivityPlusonersObject where
+        parseJSON
+          = withObject "ActivityPlusonersObject"
+              (\ o ->
+                 ActivityPlusonersObject <$>
+                   (o .:? "totalItems") <*> (o .:? "selfLink"))
+
+instance ToJSON ActivityPlusonersObject where
+        toJSON ActivityPlusonersObject{..}
+          = object
+              (catMaybes
+                 [("totalItems" .=) <$> _apoTotalItems,
+                  ("selfLink" .=) <$> _apoSelfLink])
+
+-- | People who +1\'d this comment.
+--
+-- /See:/ 'commentPlusoners' smart constructor.
+newtype CommentPlusoners = CommentPlusoners
+    { _cpTotalItems :: Maybe Word32
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CommentPlusoners' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cpTotalItems'
+commentPlusoners
+    :: CommentPlusoners
+commentPlusoners =
+    CommentPlusoners
+    { _cpTotalItems = Nothing
+    }
+
+-- | Total number of people who +1\'d this comment.
+cpTotalItems :: Lens' CommentPlusoners (Maybe Word32)
+cpTotalItems
+  = lens _cpTotalItems (\ s a -> s{_cpTotalItems = a})
+
+instance FromJSON CommentPlusoners where
+        parseJSON
+          = withObject "CommentPlusoners"
+              (\ o -> CommentPlusoners <$> (o .:? "totalItems"))
+
+instance ToJSON CommentPlusoners where
+        toJSON CommentPlusoners{..}
+          = object
+              (catMaybes [("totalItems" .=) <$> _cpTotalItems])
+
+-- | The service provider that initially published this activity.
+--
+-- /See:/ 'activityProvider' smart constructor.
+newtype ActivityProvider = ActivityProvider
+    { _apTitle :: Maybe Text
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ActivityProvider' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'apTitle'
+activityProvider
+    :: ActivityProvider
+activityProvider =
+    ActivityProvider
+    { _apTitle = Nothing
+    }
+
+-- | Name of the service provider.
+apTitle :: Lens' ActivityProvider (Maybe Text)
+apTitle = lens _apTitle (\ s a -> s{_apTitle = a})
+
+instance FromJSON ActivityProvider where
+        parseJSON
+          = withObject "ActivityProvider"
+              (\ o -> ActivityProvider <$> (o .:? "title"))
+
+instance ToJSON ActivityProvider where
+        toJSON ActivityProvider{..}
+          = object (catMaybes [("title" .=) <$> _apTitle])
+
+--
+-- /See:/ 'plusAclentryResource' smart constructor.
+data PlusAclentryResource = PlusAclentryResource
+    { _parDisplayName :: !(Maybe Text)
+    , _parId          :: !(Maybe Text)
+    , _parType        :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PlusAclentryResource' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'parDisplayName'
+--
+-- * 'parId'
+--
+-- * 'parType'
+plusAclentryResource
+    :: PlusAclentryResource
+plusAclentryResource =
+    PlusAclentryResource
+    { _parDisplayName = Nothing
+    , _parId = Nothing
+    , _parType = Nothing
+    }
+
+-- | A descriptive name for this entry. Suitable for display.
+parDisplayName :: Lens' PlusAclentryResource (Maybe Text)
+parDisplayName
+  = lens _parDisplayName
+      (\ s a -> s{_parDisplayName = a})
+
+-- | The ID of the entry. For entries of type \"person\" or \"circle\", this
+-- is the ID of the resource. For other types, this property is not set.
+parId :: Lens' PlusAclentryResource (Maybe Text)
+parId = lens _parId (\ s a -> s{_parId = a})
+
+-- | The type of entry describing to whom access is granted. Possible values
+-- are: - \"person\" - Access to an individual. - \"circle\" - Access to
+-- members of a circle. - \"myCircles\" - Access to members of all the
+-- person\'s circles. - \"extendedCircles\" - Access to members of all the
+-- person\'s circles, plus all of the people in their circles. - \"domain\"
+-- - Access to members of the person\'s Google Apps domain. - \"public\" -
+-- Access to anyone on the web.
+parType :: Lens' PlusAclentryResource (Maybe Text)
+parType = lens _parType (\ s a -> s{_parType = a})
+
+instance FromJSON PlusAclentryResource where
+        parseJSON
+          = withObject "PlusAclentryResource"
+              (\ o ->
+                 PlusAclentryResource <$>
+                   (o .:? "displayName") <*> (o .:? "id") <*>
+                     (o .:? "type"))
+
+instance ToJSON PlusAclentryResource where
+        toJSON PlusAclentryResource{..}
+          = object
+              (catMaybes
+                 [("displayName" .=) <$> _parDisplayName,
+                  ("id" .=) <$> _parId, ("type" .=) <$> _parType])
+
+-- | An object representation of the individual components of name.
+--
+-- /See:/ 'activityNameActor' smart constructor.
+data ActivityNameActor = ActivityNameActor
+    { _anaGivenName  :: !(Maybe Text)
+    , _anaFamilyName :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ActivityNameActor' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'anaGivenName'
+--
+-- * 'anaFamilyName'
+activityNameActor
+    :: ActivityNameActor
+activityNameActor =
+    ActivityNameActor
+    { _anaGivenName = Nothing
+    , _anaFamilyName = Nothing
+    }
+
+-- | The given name (\"first name\") of the actor.
+anaGivenName :: Lens' ActivityNameActor (Maybe Text)
+anaGivenName
+  = lens _anaGivenName (\ s a -> s{_anaGivenName = a})
+
+-- | The family name (\"last name\") of the actor.
+anaFamilyName :: Lens' ActivityNameActor (Maybe Text)
+anaFamilyName
+  = lens _anaFamilyName
+      (\ s a -> s{_anaFamilyName = a})
+
+instance FromJSON ActivityNameActor where
+        parseJSON
+          = withObject "ActivityNameActor"
+              (\ o ->
+                 ActivityNameActor <$>
+                   (o .:? "givenName") <*> (o .:? "familyName"))
+
+instance ToJSON ActivityNameActor where
+        toJSON ActivityNameActor{..}
+          = object
+              (catMaybes
+                 [("givenName" .=) <$> _anaGivenName,
+                  ("familyName" .=) <$> _anaFamilyName])
 
 --
 -- /See:/ 'person' smart constructor.
@@ -3496,54 +3413,519 @@ instance ToJSON Person where
                   ("organizations" .=) <$> _perOrganizations,
                   ("circledByCount" .=) <$> _perCircledByCount])
 
--- | The age range of the person. Valid ranges are 17 or younger, 18 to 20,
--- and 21 or older. Age is determined from the user\'s birthday using
--- Western age reckoning.
+-- | The full image URL for photo attachments.
 --
--- /See:/ 'personAgeRange' smart constructor.
-data PersonAgeRange = PersonAgeRange
-    { _parMax :: !(Maybe Int32)
-    , _parMin :: !(Maybe Int32)
+-- /See:/ 'activityFullImageItemAttachmentsObject' smart constructor.
+data ActivityFullImageItemAttachmentsObject = ActivityFullImageItemAttachmentsObject
+    { _afiiaoHeight :: !(Maybe Word32)
+    , _afiiaoUrl    :: !(Maybe Text)
+    , _afiiaoWidth  :: !(Maybe Word32)
+    , _afiiaoType   :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PersonAgeRange' with the minimum fields required to make a request.
+-- | Creates a value of 'ActivityFullImageItemAttachmentsObject' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'parMax'
+-- * 'afiiaoHeight'
 --
--- * 'parMin'
-personAgeRange
-    :: PersonAgeRange
-personAgeRange =
-    PersonAgeRange
-    { _parMax = Nothing
-    , _parMin = Nothing
+-- * 'afiiaoUrl'
+--
+-- * 'afiiaoWidth'
+--
+-- * 'afiiaoType'
+activityFullImageItemAttachmentsObject
+    :: ActivityFullImageItemAttachmentsObject
+activityFullImageItemAttachmentsObject =
+    ActivityFullImageItemAttachmentsObject
+    { _afiiaoHeight = Nothing
+    , _afiiaoUrl = Nothing
+    , _afiiaoWidth = Nothing
+    , _afiiaoType = Nothing
     }
 
--- | The age range\'s upper bound, if any. Possible values include, but are
--- not limited to, the following: - \"17\" - for age 17 - \"20\" - for age
--- 20
-parMax :: Lens' PersonAgeRange (Maybe Int32)
-parMax = lens _parMax (\ s a -> s{_parMax = a})
+-- | The height, in pixels, of the linked resource.
+afiiaoHeight :: Lens' ActivityFullImageItemAttachmentsObject (Maybe Word32)
+afiiaoHeight
+  = lens _afiiaoHeight (\ s a -> s{_afiiaoHeight = a})
 
--- | The age range\'s lower bound, if any. Possible values include, but are
--- not limited to, the following: - \"21\" - for age 21 - \"18\" - for age
--- 18
-parMin :: Lens' PersonAgeRange (Maybe Int32)
-parMin = lens _parMin (\ s a -> s{_parMin = a})
+-- | URL of the image.
+afiiaoUrl :: Lens' ActivityFullImageItemAttachmentsObject (Maybe Text)
+afiiaoUrl
+  = lens _afiiaoUrl (\ s a -> s{_afiiaoUrl = a})
 
-instance FromJSON PersonAgeRange where
+-- | The width, in pixels, of the linked resource.
+afiiaoWidth :: Lens' ActivityFullImageItemAttachmentsObject (Maybe Word32)
+afiiaoWidth
+  = lens _afiiaoWidth (\ s a -> s{_afiiaoWidth = a})
+
+-- | Media type of the link.
+afiiaoType :: Lens' ActivityFullImageItemAttachmentsObject (Maybe Text)
+afiiaoType
+  = lens _afiiaoType (\ s a -> s{_afiiaoType = a})
+
+instance FromJSON
+         ActivityFullImageItemAttachmentsObject where
         parseJSON
-          = withObject "PersonAgeRange"
+          = withObject "ActivityFullImageItemAttachmentsObject"
               (\ o ->
-                 PersonAgeRange <$> (o .:? "max") <*> (o .:? "min"))
+                 ActivityFullImageItemAttachmentsObject <$>
+                   (o .:? "height") <*> (o .:? "url") <*>
+                     (o .:? "width")
+                     <*> (o .:? "type"))
 
-instance ToJSON PersonAgeRange where
-        toJSON PersonAgeRange{..}
+instance ToJSON
+         ActivityFullImageItemAttachmentsObject where
+        toJSON ActivityFullImageItemAttachmentsObject{..}
           = object
               (catMaybes
-                 [("max" .=) <$> _parMax, ("min" .=) <$> _parMin])
+                 [("height" .=) <$> _afiiaoHeight,
+                  ("url" .=) <$> _afiiaoUrl,
+                  ("width" .=) <$> _afiiaoWidth,
+                  ("type" .=) <$> _afiiaoType])
+
+--
+-- /See:/ 'moment' smart constructor.
+data Moment = Moment
+    { _mKind      :: !Text
+    , _mResult    :: !(Maybe (Maybe ItemScope))
+    , _mStartDate :: !(Maybe UTCTime)
+    , _mObject    :: !(Maybe (Maybe ItemScope))
+    , _mId        :: !(Maybe Text)
+    , _mType      :: !(Maybe Text)
+    , _mTarget    :: !(Maybe (Maybe ItemScope))
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Moment' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mKind'
+--
+-- * 'mResult'
+--
+-- * 'mStartDate'
+--
+-- * 'mObject'
+--
+-- * 'mId'
+--
+-- * 'mType'
+--
+-- * 'mTarget'
+moment
+    :: Moment
+moment =
+    Moment
+    { _mKind = "plus#moment"
+    , _mResult = Nothing
+    , _mStartDate = Nothing
+    , _mObject = Nothing
+    , _mId = Nothing
+    , _mType = Nothing
+    , _mTarget = Nothing
+    }
+
+-- | Identifies this resource as a moment.
+mKind :: Lens' Moment Text
+mKind = lens _mKind (\ s a -> s{_mKind = a})
+
+-- | The object generated by performing the action on the object. For
+-- example, a user writes a review of a restaurant, the object is the
+-- restaurant and the result is the review.
+mResult :: Lens' Moment (Maybe (Maybe ItemScope))
+mResult = lens _mResult (\ s a -> s{_mResult = a})
+
+-- | Time stamp of when the action occurred in RFC3339 format.
+mStartDate :: Lens' Moment (Maybe UTCTime)
+mStartDate
+  = lens _mStartDate (\ s a -> s{_mStartDate = a})
+
+-- | The object on which the action was performed. Specifying this is
+-- equivalent with specifying \"target\". Note that responses from the
+-- server will use the \"target\" field instead for backward-compatibility
+-- with older clients.
+mObject :: Lens' Moment (Maybe (Maybe ItemScope))
+mObject = lens _mObject (\ s a -> s{_mObject = a})
+
+-- | The moment ID.
+mId :: Lens' Moment (Maybe Text)
+mId = lens _mId (\ s a -> s{_mId = a})
+
+-- | The schema.org type for the type of moment to write. For example,
+-- http:\/\/schema.org\/AddAction. Note that responses from the server will
+-- use the Google schema type instead for backward-compatibility with older
+-- clients. For example, http:\/\/schemas.google.com\/AddActivity.
+mType :: Lens' Moment (Maybe Text)
+mType = lens _mType (\ s a -> s{_mType = a})
+
+-- | The object on which the action was performed.
+mTarget :: Lens' Moment (Maybe (Maybe ItemScope))
+mTarget = lens _mTarget (\ s a -> s{_mTarget = a})
+
+instance FromJSON Moment where
+        parseJSON
+          = withObject "Moment"
+              (\ o ->
+                 Moment <$>
+                   (o .:? "kind" .!= "plus#moment") <*> (o .:? "result")
+                     <*> (o .:? "startDate")
+                     <*> (o .:? "object")
+                     <*> (o .:? "id")
+                     <*> (o .:? "type")
+                     <*> (o .:? "target"))
+
+instance ToJSON Moment where
+        toJSON Moment{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _mKind), ("result" .=) <$> _mResult,
+                  ("startDate" .=) <$> _mStartDate,
+                  ("object" .=) <$> _mObject, ("id" .=) <$> _mId,
+                  ("type" .=) <$> _mType, ("target" .=) <$> _mTarget])
+
+-- | If this activity\'s object is itself another activity, such as when a
+-- person reshares an activity, this property specifies the original
+-- activity\'s actor.
+--
+-- /See:/ 'activityActorObject' smart constructor.
+data ActivityActorObject = ActivityActorObject
+    { _aaoImage        :: !(Maybe ActivityImageActorObject)
+    , _aaoUrl          :: !(Maybe Text)
+    , _aaoDisplayName  :: !(Maybe Text)
+    , _aaoId           :: !(Maybe Text)
+    , _aaoVerification :: !(Maybe ActivityVerificationActorObject)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ActivityActorObject' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aaoImage'
+--
+-- * 'aaoUrl'
+--
+-- * 'aaoDisplayName'
+--
+-- * 'aaoId'
+--
+-- * 'aaoVerification'
+activityActorObject
+    :: ActivityActorObject
+activityActorObject =
+    ActivityActorObject
+    { _aaoImage = Nothing
+    , _aaoUrl = Nothing
+    , _aaoDisplayName = Nothing
+    , _aaoId = Nothing
+    , _aaoVerification = Nothing
+    }
+
+-- | The image representation of the original actor.
+aaoImage :: Lens' ActivityActorObject (Maybe ActivityImageActorObject)
+aaoImage = lens _aaoImage (\ s a -> s{_aaoImage = a})
+
+-- | A link to the original actor\'s Google profile.
+aaoUrl :: Lens' ActivityActorObject (Maybe Text)
+aaoUrl = lens _aaoUrl (\ s a -> s{_aaoUrl = a})
+
+-- | The original actor\'s name, which is suitable for display.
+aaoDisplayName :: Lens' ActivityActorObject (Maybe Text)
+aaoDisplayName
+  = lens _aaoDisplayName
+      (\ s a -> s{_aaoDisplayName = a})
+
+-- | ID of the original actor.
+aaoId :: Lens' ActivityActorObject (Maybe Text)
+aaoId = lens _aaoId (\ s a -> s{_aaoId = a})
+
+-- | Verification status of actor.
+aaoVerification :: Lens' ActivityActorObject (Maybe ActivityVerificationActorObject)
+aaoVerification
+  = lens _aaoVerification
+      (\ s a -> s{_aaoVerification = a})
+
+instance FromJSON ActivityActorObject where
+        parseJSON
+          = withObject "ActivityActorObject"
+              (\ o ->
+                 ActivityActorObject <$>
+                   (o .:? "image") <*> (o .:? "url") <*>
+                     (o .:? "displayName")
+                     <*> (o .:? "id")
+                     <*> (o .:? "verification"))
+
+instance ToJSON ActivityActorObject where
+        toJSON ActivityActorObject{..}
+          = object
+              (catMaybes
+                 [("image" .=) <$> _aaoImage, ("url" .=) <$> _aaoUrl,
+                  ("displayName" .=) <$> _aaoDisplayName,
+                  ("id" .=) <$> _aaoId,
+                  ("verification" .=) <$> _aaoVerification])
+
+-- | The object of this activity.
+--
+-- /See:/ 'activityObject' smart constructor.
+data ActivityObject = ActivityObject
+    { _aoPlusoners       :: !(Maybe ActivityPlusonersObject)
+    , _aoAttachments     :: !(Maybe [ActivityItemAttachmentsObject])
+    , _aoObjectType      :: !(Maybe Text)
+    , _aoOriginalContent :: !(Maybe Text)
+    , _aoUrl             :: !(Maybe Text)
+    , _aoActor           :: !(Maybe ActivityActorObject)
+    , _aoContent         :: !(Maybe Text)
+    , _aoReplies         :: !(Maybe ActivityRepliesObject)
+    , _aoId              :: !(Maybe Text)
+    , _aoResharers       :: !(Maybe ActivityResharersObject)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ActivityObject' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aoPlusoners'
+--
+-- * 'aoAttachments'
+--
+-- * 'aoObjectType'
+--
+-- * 'aoOriginalContent'
+--
+-- * 'aoUrl'
+--
+-- * 'aoActor'
+--
+-- * 'aoContent'
+--
+-- * 'aoReplies'
+--
+-- * 'aoId'
+--
+-- * 'aoResharers'
+activityObject
+    :: ActivityObject
+activityObject =
+    ActivityObject
+    { _aoPlusoners = Nothing
+    , _aoAttachments = Nothing
+    , _aoObjectType = Nothing
+    , _aoOriginalContent = Nothing
+    , _aoUrl = Nothing
+    , _aoActor = Nothing
+    , _aoContent = Nothing
+    , _aoReplies = Nothing
+    , _aoId = Nothing
+    , _aoResharers = Nothing
+    }
+
+-- | People who +1\'d this activity.
+aoPlusoners :: Lens' ActivityObject (Maybe ActivityPlusonersObject)
+aoPlusoners
+  = lens _aoPlusoners (\ s a -> s{_aoPlusoners = a})
+
+-- | The media objects attached to this activity.
+aoAttachments :: Lens' ActivityObject [ActivityItemAttachmentsObject]
+aoAttachments
+  = lens _aoAttachments
+      (\ s a -> s{_aoAttachments = a})
+      . _Default
+      . _Coerce
+
+-- | The type of the object. Possible values include, but are not limited to,
+-- the following values: - \"note\" - Textual content. - \"activity\" - A
+-- Google+ activity.
+aoObjectType :: Lens' ActivityObject (Maybe Text)
+aoObjectType
+  = lens _aoObjectType (\ s a -> s{_aoObjectType = a})
+
+-- | The content (text) as provided by the author, which is stored without
+-- any HTML formatting. When creating or updating an activity, this value
+-- must be supplied as plain text in the request.
+aoOriginalContent :: Lens' ActivityObject (Maybe Text)
+aoOriginalContent
+  = lens _aoOriginalContent
+      (\ s a -> s{_aoOriginalContent = a})
+
+-- | The URL that points to the linked resource.
+aoUrl :: Lens' ActivityObject (Maybe Text)
+aoUrl = lens _aoUrl (\ s a -> s{_aoUrl = a})
+
+-- | If this activity\'s object is itself another activity, such as when a
+-- person reshares an activity, this property specifies the original
+-- activity\'s actor.
+aoActor :: Lens' ActivityObject (Maybe ActivityActorObject)
+aoActor = lens _aoActor (\ s a -> s{_aoActor = a})
+
+-- | The HTML-formatted content, which is suitable for display.
+aoContent :: Lens' ActivityObject (Maybe Text)
+aoContent
+  = lens _aoContent (\ s a -> s{_aoContent = a})
+
+-- | Comments in reply to this activity.
+aoReplies :: Lens' ActivityObject (Maybe ActivityRepliesObject)
+aoReplies
+  = lens _aoReplies (\ s a -> s{_aoReplies = a})
+
+-- | The ID of the object. When resharing an activity, this is the ID of the
+-- activity that is being reshared.
+aoId :: Lens' ActivityObject (Maybe Text)
+aoId = lens _aoId (\ s a -> s{_aoId = a})
+
+-- | People who reshared this activity.
+aoResharers :: Lens' ActivityObject (Maybe ActivityResharersObject)
+aoResharers
+  = lens _aoResharers (\ s a -> s{_aoResharers = a})
+
+instance FromJSON ActivityObject where
+        parseJSON
+          = withObject "ActivityObject"
+              (\ o ->
+                 ActivityObject <$>
+                   (o .:? "plusoners") <*>
+                     (o .:? "attachments" .!= mempty)
+                     <*> (o .:? "objectType")
+                     <*> (o .:? "originalContent")
+                     <*> (o .:? "url")
+                     <*> (o .:? "actor")
+                     <*> (o .:? "content")
+                     <*> (o .:? "replies")
+                     <*> (o .:? "id")
+                     <*> (o .:? "resharers"))
+
+instance ToJSON ActivityObject where
+        toJSON ActivityObject{..}
+          = object
+              (catMaybes
+                 [("plusoners" .=) <$> _aoPlusoners,
+                  ("attachments" .=) <$> _aoAttachments,
+                  ("objectType" .=) <$> _aoObjectType,
+                  ("originalContent" .=) <$> _aoOriginalContent,
+                  ("url" .=) <$> _aoUrl, ("actor" .=) <$> _aoActor,
+                  ("content" .=) <$> _aoContent,
+                  ("replies" .=) <$> _aoReplies, ("id" .=) <$> _aoId,
+                  ("resharers" .=) <$> _aoResharers])
+
+-- | The person who posted this comment.
+--
+-- /See:/ 'commentActor' smart constructor.
+data CommentActor = CommentActor
+    { _caImage        :: !(Maybe CommentImageActor)
+    , _caUrl          :: !(Maybe Text)
+    , _caDisplayName  :: !(Maybe Text)
+    , _caId           :: !(Maybe Text)
+    , _caVerification :: !(Maybe CommentVerificationActor)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CommentActor' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'caImage'
+--
+-- * 'caUrl'
+--
+-- * 'caDisplayName'
+--
+-- * 'caId'
+--
+-- * 'caVerification'
+commentActor
+    :: CommentActor
+commentActor =
+    CommentActor
+    { _caImage = Nothing
+    , _caUrl = Nothing
+    , _caDisplayName = Nothing
+    , _caId = Nothing
+    , _caVerification = Nothing
+    }
+
+-- | The image representation of this actor.
+caImage :: Lens' CommentActor (Maybe CommentImageActor)
+caImage = lens _caImage (\ s a -> s{_caImage = a})
+
+-- | A link to the Person resource for this actor.
+caUrl :: Lens' CommentActor (Maybe Text)
+caUrl = lens _caUrl (\ s a -> s{_caUrl = a})
+
+-- | The name of this actor, suitable for display.
+caDisplayName :: Lens' CommentActor (Maybe Text)
+caDisplayName
+  = lens _caDisplayName
+      (\ s a -> s{_caDisplayName = a})
+
+-- | The ID of the actor.
+caId :: Lens' CommentActor (Maybe Text)
+caId = lens _caId (\ s a -> s{_caId = a})
+
+-- | Verification status of actor.
+caVerification :: Lens' CommentActor (Maybe CommentVerificationActor)
+caVerification
+  = lens _caVerification
+      (\ s a -> s{_caVerification = a})
+
+instance FromJSON CommentActor where
+        parseJSON
+          = withObject "CommentActor"
+              (\ o ->
+                 CommentActor <$>
+                   (o .:? "image") <*> (o .:? "url") <*>
+                     (o .:? "displayName")
+                     <*> (o .:? "id")
+                     <*> (o .:? "verification"))
+
+instance ToJSON CommentActor where
+        toJSON CommentActor{..}
+          = object
+              (catMaybes
+                 [("image" .=) <$> _caImage, ("url" .=) <$> _caUrl,
+                  ("displayName" .=) <$> _caDisplayName,
+                  ("id" .=) <$> _caId,
+                  ("verification" .=) <$> _caVerification])
+
+--
+-- /See:/ 'commentItemInReplyTo' smart constructor.
+data CommentItemInReplyTo = CommentItemInReplyTo
+    { _ciirtUrl :: !(Maybe Text)
+    , _ciirtId  :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CommentItemInReplyTo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ciirtUrl'
+--
+-- * 'ciirtId'
+commentItemInReplyTo
+    :: CommentItemInReplyTo
+commentItemInReplyTo =
+    CommentItemInReplyTo
+    { _ciirtUrl = Nothing
+    , _ciirtId = Nothing
+    }
+
+-- | The URL of the activity.
+ciirtUrl :: Lens' CommentItemInReplyTo (Maybe Text)
+ciirtUrl = lens _ciirtUrl (\ s a -> s{_ciirtUrl = a})
+
+-- | The ID of the activity.
+ciirtId :: Lens' CommentItemInReplyTo (Maybe Text)
+ciirtId = lens _ciirtId (\ s a -> s{_ciirtId = a})
+
+instance FromJSON CommentItemInReplyTo where
+        parseJSON
+          = withObject "CommentItemInReplyTo"
+              (\ o ->
+                 CommentItemInReplyTo <$>
+                   (o .:? "url") <*> (o .:? "id"))
+
+instance ToJSON CommentItemInReplyTo where
+        toJSON CommentItemInReplyTo{..}
+          = object
+              (catMaybes
+                 [("url" .=) <$> _ciirtUrl, ("id" .=) <$> _ciirtId])
 
 -- | The cover photo content.
 --
@@ -3603,114 +3985,128 @@ instance ToJSON PersonCover where
                   ("coverInfo" .=) <$> _pcCoverInfo,
                   ("coverPhoto" .=) <$> _pcCoverPhoto])
 
--- | Extra information about the cover photo.
 --
--- /See:/ 'personCoverInfoCover' smart constructor.
-data PersonCoverInfoCover = PersonCoverInfoCover
-    { _pcicTopImageOffset  :: !(Maybe Int32)
-    , _pcicLeftImageOffset :: !(Maybe Int32)
+-- /See:/ 'acl' smart constructor.
+data Acl = Acl
+    { _aclKind        :: !Text
+    , _aclItems       :: !(Maybe [Maybe PlusAclentryResource])
+    , _aclDescription :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PersonCoverInfoCover' with the minimum fields required to make a request.
+-- | Creates a value of 'Acl' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pcicTopImageOffset'
+-- * 'aclKind'
 --
--- * 'pcicLeftImageOffset'
-personCoverInfoCover
-    :: PersonCoverInfoCover
-personCoverInfoCover =
-    PersonCoverInfoCover
-    { _pcicTopImageOffset = Nothing
-    , _pcicLeftImageOffset = Nothing
+-- * 'aclItems'
+--
+-- * 'aclDescription'
+acl
+    :: Acl
+acl =
+    Acl
+    { _aclKind = "plus#acl"
+    , _aclItems = Nothing
+    , _aclDescription = Nothing
     }
 
--- | The difference between the top position of the cover image and the
--- actual displayed cover image. Only valid for banner layout.
-pcicTopImageOffset :: Lens' PersonCoverInfoCover (Maybe Int32)
-pcicTopImageOffset
-  = lens _pcicTopImageOffset
-      (\ s a -> s{_pcicTopImageOffset = a})
+-- | Identifies this resource as a collection of access controls. Value:
+-- \"plus#acl\".
+aclKind :: Lens' Acl Text
+aclKind = lens _aclKind (\ s a -> s{_aclKind = a})
 
--- | The difference between the left position of the cover image and the
--- actual displayed cover image. Only valid for banner layout.
-pcicLeftImageOffset :: Lens' PersonCoverInfoCover (Maybe Int32)
-pcicLeftImageOffset
-  = lens _pcicLeftImageOffset
-      (\ s a -> s{_pcicLeftImageOffset = a})
+-- | The list of access entries.
+aclItems :: Lens' Acl [Maybe PlusAclentryResource]
+aclItems
+  = lens _aclItems (\ s a -> s{_aclItems = a}) .
+      _Default
+      . _Coerce
 
-instance FromJSON PersonCoverInfoCover where
+-- | Description of the access granted, suitable for display.
+aclDescription :: Lens' Acl (Maybe Text)
+aclDescription
+  = lens _aclDescription
+      (\ s a -> s{_aclDescription = a})
+
+instance FromJSON Acl where
         parseJSON
-          = withObject "PersonCoverInfoCover"
+          = withObject "Acl"
               (\ o ->
-                 PersonCoverInfoCover <$>
-                   (o .:? "topImageOffset") <*>
-                     (o .:? "leftImageOffset"))
+                 Acl <$>
+                   (o .:? "kind" .!= "plus#acl") <*>
+                     (o .:? "items" .!= mempty)
+                     <*> (o .:? "description"))
 
-instance ToJSON PersonCoverInfoCover where
-        toJSON PersonCoverInfoCover{..}
+instance ToJSON Acl where
+        toJSON Acl{..}
           = object
               (catMaybes
-                 [("topImageOffset" .=) <$> _pcicTopImageOffset,
-                  ("leftImageOffset" .=) <$> _pcicLeftImageOffset])
+                 [Just ("kind" .= _aclKind),
+                  ("items" .=) <$> _aclItems,
+                  ("description" .=) <$> _aclDescription])
 
--- | The person\'s primary cover image.
 --
--- /See:/ 'personCoverPhotoCover' smart constructor.
-data PersonCoverPhotoCover = PersonCoverPhotoCover
-    { _pcpcHeight :: !(Maybe Int32)
-    , _pcpcUrl    :: !(Maybe Text)
-    , _pcpcWidth  :: !(Maybe Int32)
+-- /See:/ 'activityItemThumbnailsItemAttachmentsObject' smart constructor.
+data ActivityItemThumbnailsItemAttachmentsObject = ActivityItemThumbnailsItemAttachmentsObject
+    { _aitiaoImage       :: !(Maybe ActivityImageItemThumbnailsItemAttachmentsObject)
+    , _aitiaoUrl         :: !(Maybe Text)
+    , _aitiaoDescription :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PersonCoverPhotoCover' with the minimum fields required to make a request.
+-- | Creates a value of 'ActivityItemThumbnailsItemAttachmentsObject' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pcpcHeight'
+-- * 'aitiaoImage'
 --
--- * 'pcpcUrl'
+-- * 'aitiaoUrl'
 --
--- * 'pcpcWidth'
-personCoverPhotoCover
-    :: PersonCoverPhotoCover
-personCoverPhotoCover =
-    PersonCoverPhotoCover
-    { _pcpcHeight = Nothing
-    , _pcpcUrl = Nothing
-    , _pcpcWidth = Nothing
+-- * 'aitiaoDescription'
+activityItemThumbnailsItemAttachmentsObject
+    :: ActivityItemThumbnailsItemAttachmentsObject
+activityItemThumbnailsItemAttachmentsObject =
+    ActivityItemThumbnailsItemAttachmentsObject
+    { _aitiaoImage = Nothing
+    , _aitiaoUrl = Nothing
+    , _aitiaoDescription = Nothing
     }
 
--- | The height of the image.
-pcpcHeight :: Lens' PersonCoverPhotoCover (Maybe Int32)
-pcpcHeight
-  = lens _pcpcHeight (\ s a -> s{_pcpcHeight = a})
+-- | Image resource.
+aitiaoImage :: Lens' ActivityItemThumbnailsItemAttachmentsObject (Maybe ActivityImageItemThumbnailsItemAttachmentsObject)
+aitiaoImage
+  = lens _aitiaoImage (\ s a -> s{_aitiaoImage = a})
 
--- | The URL of the image.
-pcpcUrl :: Lens' PersonCoverPhotoCover (Maybe Text)
-pcpcUrl = lens _pcpcUrl (\ s a -> s{_pcpcUrl = a})
+-- | URL of the webpage containing the image.
+aitiaoUrl :: Lens' ActivityItemThumbnailsItemAttachmentsObject (Maybe Text)
+aitiaoUrl
+  = lens _aitiaoUrl (\ s a -> s{_aitiaoUrl = a})
 
--- | The width of the image.
-pcpcWidth :: Lens' PersonCoverPhotoCover (Maybe Int32)
-pcpcWidth
-  = lens _pcpcWidth (\ s a -> s{_pcpcWidth = a})
+-- | Potential name of the thumbnail.
+aitiaoDescription :: Lens' ActivityItemThumbnailsItemAttachmentsObject (Maybe Text)
+aitiaoDescription
+  = lens _aitiaoDescription
+      (\ s a -> s{_aitiaoDescription = a})
 
-instance FromJSON PersonCoverPhotoCover where
+instance FromJSON
+         ActivityItemThumbnailsItemAttachmentsObject where
         parseJSON
-          = withObject "PersonCoverPhotoCover"
+          = withObject
+              "ActivityItemThumbnailsItemAttachmentsObject"
               (\ o ->
-                 PersonCoverPhotoCover <$>
-                   (o .:? "height") <*> (o .:? "url") <*>
-                     (o .:? "width"))
+                 ActivityItemThumbnailsItemAttachmentsObject <$>
+                   (o .:? "image") <*> (o .:? "url") <*>
+                     (o .:? "description"))
 
-instance ToJSON PersonCoverPhotoCover where
-        toJSON PersonCoverPhotoCover{..}
+instance ToJSON
+         ActivityItemThumbnailsItemAttachmentsObject where
+        toJSON
+          ActivityItemThumbnailsItemAttachmentsObject{..}
           = object
               (catMaybes
-                 [("height" .=) <$> _pcpcHeight,
-                  ("url" .=) <$> _pcpcUrl,
-                  ("width" .=) <$> _pcpcWidth])
+                 [("image" .=) <$> _aitiaoImage,
+                  ("url" .=) <$> _aitiaoUrl,
+                  ("description" .=) <$> _aitiaoDescription])
 
 -- | The representation of the person\'s profile photo.
 --
@@ -3760,176 +4156,44 @@ instance ToJSON PersonImage where
                  [("url" .=) <$> _piUrl,
                   ("isDefault" .=) <$> _piIsDefault])
 
+-- | Verification status of actor.
 --
--- /See:/ 'personItemEmails' smart constructor.
-data PersonItemEmails = PersonItemEmails
-    { _pieValue :: !(Maybe Text)
-    , _pieType  :: !(Maybe Text)
+-- /See:/ 'activityVerificationActorObject' smart constructor.
+newtype ActivityVerificationActorObject = ActivityVerificationActorObject
+    { _avaoAdHocVerified :: Maybe Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PersonItemEmails' with the minimum fields required to make a request.
+-- | Creates a value of 'ActivityVerificationActorObject' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pieValue'
---
--- * 'pieType'
-personItemEmails
-    :: PersonItemEmails
-personItemEmails =
-    PersonItemEmails
-    { _pieValue = Nothing
-    , _pieType = Nothing
+-- * 'avaoAdHocVerified'
+activityVerificationActorObject
+    :: ActivityVerificationActorObject
+activityVerificationActorObject =
+    ActivityVerificationActorObject
+    { _avaoAdHocVerified = Nothing
     }
 
--- | The email address.
-pieValue :: Lens' PersonItemEmails (Maybe Text)
-pieValue = lens _pieValue (\ s a -> s{_pieValue = a})
+-- | Verification for one-time or manual processes.
+avaoAdHocVerified :: Lens' ActivityVerificationActorObject (Maybe Text)
+avaoAdHocVerified
+  = lens _avaoAdHocVerified
+      (\ s a -> s{_avaoAdHocVerified = a})
 
--- | The type of address. Possible values include, but are not limited to,
--- the following values: - \"account\" - Google account email address. -
--- \"home\" - Home email address. - \"work\" - Work email address. -
--- \"other\" - Other.
-pieType :: Lens' PersonItemEmails (Maybe Text)
-pieType = lens _pieType (\ s a -> s{_pieType = a})
-
-instance FromJSON PersonItemEmails where
+instance FromJSON ActivityVerificationActorObject
+         where
         parseJSON
-          = withObject "PersonItemEmails"
+          = withObject "ActivityVerificationActorObject"
               (\ o ->
-                 PersonItemEmails <$>
-                   (o .:? "value") <*> (o .:? "type"))
+                 ActivityVerificationActorObject <$>
+                   (o .:? "adHocVerified"))
 
-instance ToJSON PersonItemEmails where
-        toJSON PersonItemEmails{..}
+instance ToJSON ActivityVerificationActorObject where
+        toJSON ActivityVerificationActorObject{..}
           = object
               (catMaybes
-                 [("value" .=) <$> _pieValue,
-                  ("type" .=) <$> _pieType])
-
---
--- /See:/ 'personItemOrganizations' smart constructor.
-data PersonItemOrganizations = PersonItemOrganizations
-    { _pioDepartment  :: !(Maybe Text)
-    , _pioLocation    :: !(Maybe Text)
-    , _pioEndDate     :: !(Maybe Text)
-    , _pioPrimary     :: !(Maybe Bool)
-    , _pioStartDate   :: !(Maybe Text)
-    , _pioName        :: !(Maybe Text)
-    , _pioTitle       :: !(Maybe Text)
-    , _pioType        :: !(Maybe Text)
-    , _pioDescription :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PersonItemOrganizations' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'pioDepartment'
---
--- * 'pioLocation'
---
--- * 'pioEndDate'
---
--- * 'pioPrimary'
---
--- * 'pioStartDate'
---
--- * 'pioName'
---
--- * 'pioTitle'
---
--- * 'pioType'
---
--- * 'pioDescription'
-personItemOrganizations
-    :: PersonItemOrganizations
-personItemOrganizations =
-    PersonItemOrganizations
-    { _pioDepartment = Nothing
-    , _pioLocation = Nothing
-    , _pioEndDate = Nothing
-    , _pioPrimary = Nothing
-    , _pioStartDate = Nothing
-    , _pioName = Nothing
-    , _pioTitle = Nothing
-    , _pioType = Nothing
-    , _pioDescription = Nothing
-    }
-
--- | The department within the organization. Deprecated.
-pioDepartment :: Lens' PersonItemOrganizations (Maybe Text)
-pioDepartment
-  = lens _pioDepartment
-      (\ s a -> s{_pioDepartment = a})
-
--- | The location of this organization. Deprecated.
-pioLocation :: Lens' PersonItemOrganizations (Maybe Text)
-pioLocation
-  = lens _pioLocation (\ s a -> s{_pioLocation = a})
-
--- | The date that the person left this organization.
-pioEndDate :: Lens' PersonItemOrganizations (Maybe Text)
-pioEndDate
-  = lens _pioEndDate (\ s a -> s{_pioEndDate = a})
-
--- | If \"true\", indicates this organization is the person\'s primary one,
--- which is typically interpreted as the current one.
-pioPrimary :: Lens' PersonItemOrganizations (Maybe Bool)
-pioPrimary
-  = lens _pioPrimary (\ s a -> s{_pioPrimary = a})
-
--- | The date that the person joined this organization.
-pioStartDate :: Lens' PersonItemOrganizations (Maybe Text)
-pioStartDate
-  = lens _pioStartDate (\ s a -> s{_pioStartDate = a})
-
--- | The name of the organization.
-pioName :: Lens' PersonItemOrganizations (Maybe Text)
-pioName = lens _pioName (\ s a -> s{_pioName = a})
-
--- | The person\'s job title or role within the organization.
-pioTitle :: Lens' PersonItemOrganizations (Maybe Text)
-pioTitle = lens _pioTitle (\ s a -> s{_pioTitle = a})
-
--- | The type of organization. Possible values include, but are not limited
--- to, the following values: - \"work\" - Work. - \"school\" - School.
-pioType :: Lens' PersonItemOrganizations (Maybe Text)
-pioType = lens _pioType (\ s a -> s{_pioType = a})
-
--- | A short description of the person\'s role in this organization.
--- Deprecated.
-pioDescription :: Lens' PersonItemOrganizations (Maybe Text)
-pioDescription
-  = lens _pioDescription
-      (\ s a -> s{_pioDescription = a})
-
-instance FromJSON PersonItemOrganizations where
-        parseJSON
-          = withObject "PersonItemOrganizations"
-              (\ o ->
-                 PersonItemOrganizations <$>
-                   (o .:? "department") <*> (o .:? "location") <*>
-                     (o .:? "endDate")
-                     <*> (o .:? "primary")
-                     <*> (o .:? "startDate")
-                     <*> (o .:? "name")
-                     <*> (o .:? "title")
-                     <*> (o .:? "type")
-                     <*> (o .:? "description"))
-
-instance ToJSON PersonItemOrganizations where
-        toJSON PersonItemOrganizations{..}
-          = object
-              (catMaybes
-                 [("department" .=) <$> _pioDepartment,
-                  ("location" .=) <$> _pioLocation,
-                  ("endDate" .=) <$> _pioEndDate,
-                  ("primary" .=) <$> _pioPrimary,
-                  ("startDate" .=) <$> _pioStartDate,
-                  ("name" .=) <$> _pioName, ("title" .=) <$> _pioTitle,
-                  ("type" .=) <$> _pioType,
-                  ("description" .=) <$> _pioDescription])
+                 [("adHocVerified" .=) <$> _avaoAdHocVerified])
 
 --
 -- /See:/ 'personItemPlacesLived' smart constructor.
@@ -3980,371 +4244,107 @@ instance ToJSON PersonItemPlacesLived where
                   ("primary" .=) <$> _piplPrimary])
 
 --
--- /See:/ 'personItemUrls' smart constructor.
-data PersonItemUrls = PersonItemUrls
-    { _piuValue :: !(Maybe Text)
-    , _piuType  :: !(Maybe Text)
-    , _piuLabel :: !(Maybe Text)
+-- /See:/ 'peopleFeed' smart constructor.
+data PeopleFeed = PeopleFeed
+    { _pfTotalItems    :: !(Maybe Int32)
+    , _pfEtag          :: !(Maybe Text)
+    , _pfNextPageToken :: !(Maybe Text)
+    , _pfKind          :: !Text
+    , _pfItems         :: !(Maybe [Maybe Person])
+    , _pfSelfLink      :: !(Maybe Text)
+    , _pfTitle         :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PersonItemUrls' with the minimum fields required to make a request.
+-- | Creates a value of 'PeopleFeed' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'piuValue'
+-- * 'pfTotalItems'
 --
--- * 'piuType'
+-- * 'pfEtag'
 --
--- * 'piuLabel'
-personItemUrls
-    :: PersonItemUrls
-personItemUrls =
-    PersonItemUrls
-    { _piuValue = Nothing
-    , _piuType = Nothing
-    , _piuLabel = Nothing
+-- * 'pfNextPageToken'
+--
+-- * 'pfKind'
+--
+-- * 'pfItems'
+--
+-- * 'pfSelfLink'
+--
+-- * 'pfTitle'
+peopleFeed
+    :: PeopleFeed
+peopleFeed =
+    PeopleFeed
+    { _pfTotalItems = Nothing
+    , _pfEtag = Nothing
+    , _pfNextPageToken = Nothing
+    , _pfKind = "plus#peopleFeed"
+    , _pfItems = Nothing
+    , _pfSelfLink = Nothing
+    , _pfTitle = Nothing
     }
 
--- | The URL value.
-piuValue :: Lens' PersonItemUrls (Maybe Text)
-piuValue = lens _piuValue (\ s a -> s{_piuValue = a})
+-- | The total number of people available in this list. The number of people
+-- in a response might be smaller due to paging. This might not be set for
+-- all collections.
+pfTotalItems :: Lens' PeopleFeed (Maybe Int32)
+pfTotalItems
+  = lens _pfTotalItems (\ s a -> s{_pfTotalItems = a})
 
--- | The type of URL. Possible values include, but are not limited to, the
--- following values: - \"otherProfile\" - URL for another profile. -
--- \"contributor\" - URL to a site for which this person is a contributor.
--- - \"website\" - URL for this Google+ Page\'s primary website. -
--- \"other\" - Other URL.
-piuType :: Lens' PersonItemUrls (Maybe Text)
-piuType = lens _piuType (\ s a -> s{_piuType = a})
+-- | ETag of this response for caching purposes.
+pfEtag :: Lens' PeopleFeed (Maybe Text)
+pfEtag = lens _pfEtag (\ s a -> s{_pfEtag = a})
 
--- | The label of the URL.
-piuLabel :: Lens' PersonItemUrls (Maybe Text)
-piuLabel = lens _piuLabel (\ s a -> s{_piuLabel = a})
+-- | The continuation token, which is used to page through large result sets.
+-- Provide this value in a subsequent request to return the next page of
+-- results.
+pfNextPageToken :: Lens' PeopleFeed (Maybe Text)
+pfNextPageToken
+  = lens _pfNextPageToken
+      (\ s a -> s{_pfNextPageToken = a})
 
-instance FromJSON PersonItemUrls where
+-- | Identifies this resource as a collection of people. Value:
+-- \"plus#peopleFeed\".
+pfKind :: Lens' PeopleFeed Text
+pfKind = lens _pfKind (\ s a -> s{_pfKind = a})
+
+-- | The people in this page of results. Each item includes the id,
+-- displayName, image, and url for the person. To retrieve additional
+-- profile data, see the people.get method.
+pfItems :: Lens' PeopleFeed [Maybe Person]
+pfItems
+  = lens _pfItems (\ s a -> s{_pfItems = a}) . _Default
+      . _Coerce
+
+-- | Link to this resource.
+pfSelfLink :: Lens' PeopleFeed (Maybe Text)
+pfSelfLink
+  = lens _pfSelfLink (\ s a -> s{_pfSelfLink = a})
+
+-- | The title of this collection of people.
+pfTitle :: Lens' PeopleFeed (Maybe Text)
+pfTitle = lens _pfTitle (\ s a -> s{_pfTitle = a})
+
+instance FromJSON PeopleFeed where
         parseJSON
-          = withObject "PersonItemUrls"
+          = withObject "PeopleFeed"
               (\ o ->
-                 PersonItemUrls <$>
-                   (o .:? "value") <*> (o .:? "type") <*>
-                     (o .:? "label"))
+                 PeopleFeed <$>
+                   (o .:? "totalItems") <*> (o .:? "etag") <*>
+                     (o .:? "nextPageToken")
+                     <*> (o .:? "kind" .!= "plus#peopleFeed")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "title"))
 
-instance ToJSON PersonItemUrls where
-        toJSON PersonItemUrls{..}
+instance ToJSON PeopleFeed where
+        toJSON PeopleFeed{..}
           = object
               (catMaybes
-                 [("value" .=) <$> _piuValue,
-                  ("type" .=) <$> _piuType,
-                  ("label" .=) <$> _piuLabel])
-
--- | An object representation of the individual components of a person\'s
--- name.
---
--- /See:/ 'personName' smart constructor.
-data PersonName = PersonName
-    { _pnGivenName       :: !(Maybe Text)
-    , _pnMiddleName      :: !(Maybe Text)
-    , _pnFormatted       :: !(Maybe Text)
-    , _pnHonorificPrefix :: !(Maybe Text)
-    , _pnFamilyName      :: !(Maybe Text)
-    , _pnHonorificSuffix :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PersonName' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'pnGivenName'
---
--- * 'pnMiddleName'
---
--- * 'pnFormatted'
---
--- * 'pnHonorificPrefix'
---
--- * 'pnFamilyName'
---
--- * 'pnHonorificSuffix'
-personName
-    :: PersonName
-personName =
-    PersonName
-    { _pnGivenName = Nothing
-    , _pnMiddleName = Nothing
-    , _pnFormatted = Nothing
-    , _pnHonorificPrefix = Nothing
-    , _pnFamilyName = Nothing
-    , _pnHonorificSuffix = Nothing
-    }
-
--- | The given name (first name) of this person.
-pnGivenName :: Lens' PersonName (Maybe Text)
-pnGivenName
-  = lens _pnGivenName (\ s a -> s{_pnGivenName = a})
-
--- | The middle name of this person.
-pnMiddleName :: Lens' PersonName (Maybe Text)
-pnMiddleName
-  = lens _pnMiddleName (\ s a -> s{_pnMiddleName = a})
-
--- | The full name of this person, including middle names, suffixes, etc.
-pnFormatted :: Lens' PersonName (Maybe Text)
-pnFormatted
-  = lens _pnFormatted (\ s a -> s{_pnFormatted = a})
-
--- | The honorific prefixes (such as \"Dr.\" or \"Mrs.\") for this person.
-pnHonorificPrefix :: Lens' PersonName (Maybe Text)
-pnHonorificPrefix
-  = lens _pnHonorificPrefix
-      (\ s a -> s{_pnHonorificPrefix = a})
-
--- | The family name (last name) of this person.
-pnFamilyName :: Lens' PersonName (Maybe Text)
-pnFamilyName
-  = lens _pnFamilyName (\ s a -> s{_pnFamilyName = a})
-
--- | The honorific suffixes (such as \"Jr.\") for this person.
-pnHonorificSuffix :: Lens' PersonName (Maybe Text)
-pnHonorificSuffix
-  = lens _pnHonorificSuffix
-      (\ s a -> s{_pnHonorificSuffix = a})
-
-instance FromJSON PersonName where
-        parseJSON
-          = withObject "PersonName"
-              (\ o ->
-                 PersonName <$>
-                   (o .:? "givenName") <*> (o .:? "middleName") <*>
-                     (o .:? "formatted")
-                     <*> (o .:? "honorificPrefix")
-                     <*> (o .:? "familyName")
-                     <*> (o .:? "honorificSuffix"))
-
-instance ToJSON PersonName where
-        toJSON PersonName{..}
-          = object
-              (catMaybes
-                 [("givenName" .=) <$> _pnGivenName,
-                  ("middleName" .=) <$> _pnMiddleName,
-                  ("formatted" .=) <$> _pnFormatted,
-                  ("honorificPrefix" .=) <$> _pnHonorificPrefix,
-                  ("familyName" .=) <$> _pnFamilyName,
-                  ("honorificSuffix" .=) <$> _pnHonorificSuffix])
-
---
--- /See:/ 'place' smart constructor.
-data Place = Place
-    { _pKind        :: !Text
-    , _pAddress     :: !(Maybe PlaceAddress)
-    , _pDisplayName :: !(Maybe Text)
-    , _pId          :: !(Maybe Text)
-    , _pPosition    :: !(Maybe PlacePosition)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Place' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'pKind'
---
--- * 'pAddress'
---
--- * 'pDisplayName'
---
--- * 'pId'
---
--- * 'pPosition'
-place
-    :: Place
-place =
-    Place
-    { _pKind = "plus#place"
-    , _pAddress = Nothing
-    , _pDisplayName = Nothing
-    , _pId = Nothing
-    , _pPosition = Nothing
-    }
-
--- | Identifies this resource as a place. Value: \"plus#place\".
-pKind :: Lens' Place Text
-pKind = lens _pKind (\ s a -> s{_pKind = a})
-
--- | The physical address of the place.
-pAddress :: Lens' Place (Maybe PlaceAddress)
-pAddress = lens _pAddress (\ s a -> s{_pAddress = a})
-
--- | The display name of the place.
-pDisplayName :: Lens' Place (Maybe Text)
-pDisplayName
-  = lens _pDisplayName (\ s a -> s{_pDisplayName = a})
-
--- | The id of the place.
-pId :: Lens' Place (Maybe Text)
-pId = lens _pId (\ s a -> s{_pId = a})
-
--- | The position of the place.
-pPosition :: Lens' Place (Maybe PlacePosition)
-pPosition
-  = lens _pPosition (\ s a -> s{_pPosition = a})
-
-instance FromJSON Place where
-        parseJSON
-          = withObject "Place"
-              (\ o ->
-                 Place <$>
-                   (o .:? "kind" .!= "plus#place") <*> (o .:? "address")
-                     <*> (o .:? "displayName")
-                     <*> (o .:? "id")
-                     <*> (o .:? "position"))
-
-instance ToJSON Place where
-        toJSON Place{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _pKind),
-                  ("address" .=) <$> _pAddress,
-                  ("displayName" .=) <$> _pDisplayName,
-                  ("id" .=) <$> _pId, ("position" .=) <$> _pPosition])
-
--- | The physical address of the place.
---
--- /See:/ 'placeAddress' smart constructor.
-newtype PlaceAddress = PlaceAddress
-    { _paFormatted :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PlaceAddress' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'paFormatted'
-placeAddress
-    :: PlaceAddress
-placeAddress =
-    PlaceAddress
-    { _paFormatted = Nothing
-    }
-
--- | The formatted address for display.
-paFormatted :: Lens' PlaceAddress (Maybe Text)
-paFormatted
-  = lens _paFormatted (\ s a -> s{_paFormatted = a})
-
-instance FromJSON PlaceAddress where
-        parseJSON
-          = withObject "PlaceAddress"
-              (\ o -> PlaceAddress <$> (o .:? "formatted"))
-
-instance ToJSON PlaceAddress where
-        toJSON PlaceAddress{..}
-          = object
-              (catMaybes [("formatted" .=) <$> _paFormatted])
-
--- | The position of the place.
---
--- /See:/ 'placePosition' smart constructor.
-data PlacePosition = PlacePosition
-    { _ppLatitude  :: !(Maybe Double)
-    , _ppLongitude :: !(Maybe Double)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PlacePosition' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ppLatitude'
---
--- * 'ppLongitude'
-placePosition
-    :: PlacePosition
-placePosition =
-    PlacePosition
-    { _ppLatitude = Nothing
-    , _ppLongitude = Nothing
-    }
-
--- | The latitude of this position.
-ppLatitude :: Lens' PlacePosition (Maybe Double)
-ppLatitude
-  = lens _ppLatitude (\ s a -> s{_ppLatitude = a})
-
--- | The longitude of this position.
-ppLongitude :: Lens' PlacePosition (Maybe Double)
-ppLongitude
-  = lens _ppLongitude (\ s a -> s{_ppLongitude = a})
-
-instance FromJSON PlacePosition where
-        parseJSON
-          = withObject "PlacePosition"
-              (\ o ->
-                 PlacePosition <$>
-                   (o .:? "latitude") <*> (o .:? "longitude"))
-
-instance ToJSON PlacePosition where
-        toJSON PlacePosition{..}
-          = object
-              (catMaybes
-                 [("latitude" .=) <$> _ppLatitude,
-                  ("longitude" .=) <$> _ppLongitude])
-
---
--- /See:/ 'plusAclentryResource' smart constructor.
-data PlusAclentryResource = PlusAclentryResource
-    { _parDisplayName :: !(Maybe Text)
-    , _parId          :: !(Maybe Text)
-    , _parType        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PlusAclentryResource' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'parDisplayName'
---
--- * 'parId'
---
--- * 'parType'
-plusAclentryResource
-    :: PlusAclentryResource
-plusAclentryResource =
-    PlusAclentryResource
-    { _parDisplayName = Nothing
-    , _parId = Nothing
-    , _parType = Nothing
-    }
-
--- | A descriptive name for this entry. Suitable for display.
-parDisplayName :: Lens' PlusAclentryResource (Maybe Text)
-parDisplayName
-  = lens _parDisplayName
-      (\ s a -> s{_parDisplayName = a})
-
--- | The ID of the entry. For entries of type \"person\" or \"circle\", this
--- is the ID of the resource. For other types, this property is not set.
-parId :: Lens' PlusAclentryResource (Maybe Text)
-parId = lens _parId (\ s a -> s{_parId = a})
-
--- | The type of entry describing to whom access is granted. Possible values
--- are: - \"person\" - Access to an individual. - \"circle\" - Access to
--- members of a circle. - \"myCircles\" - Access to members of all the
--- person\'s circles. - \"extendedCircles\" - Access to members of all the
--- person\'s circles, plus all of the people in their circles. - \"domain\"
--- - Access to members of the person\'s Google Apps domain. - \"public\" -
--- Access to anyone on the web.
-parType :: Lens' PlusAclentryResource (Maybe Text)
-parType = lens _parType (\ s a -> s{_parType = a})
-
-instance FromJSON PlusAclentryResource where
-        parseJSON
-          = withObject "PlusAclentryResource"
-              (\ o ->
-                 PlusAclentryResource <$>
-                   (o .:? "displayName") <*> (o .:? "id") <*>
-                     (o .:? "type"))
-
-instance ToJSON PlusAclentryResource where
-        toJSON PlusAclentryResource{..}
-          = object
-              (catMaybes
-                 [("displayName" .=) <$> _parDisplayName,
-                  ("id" .=) <$> _parId, ("type" .=) <$> _parType])
+                 [("totalItems" .=) <$> _pfTotalItems,
+                  ("etag" .=) <$> _pfEtag,
+                  ("nextPageToken" .=) <$> _pfNextPageToken,
+                  Just ("kind" .= _pfKind), ("items" .=) <$> _pfItems,
+                  ("selfLink" .=) <$> _pfSelfLink,
+                  ("title" .=) <$> _pfTitle])

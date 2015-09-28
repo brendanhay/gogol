@@ -1,6 +1,6 @@
 name:                  gogol-identity-toolkit
 version:               0.0.1
-synopsis:              Google Identity Toolkit API.
+synopsis:              Google Identity Toolkit API Client.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -16,8 +16,8 @@ extra-source-files:    README.md
 description:
     Help the third party sites to implement federated login.
     .
-    /Warning:/ This is an experimental preview release which is still under
-    heavy development and not intended for public consumption, caveat emptor!
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
 
 source-repository head
     type:     git
@@ -30,7 +30,19 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.IdentityToolkit
+          Network.Google.API.IdentityToolkit.Relyingparty.CreateAuthURI
+        , Network.Google.API.IdentityToolkit.Relyingparty.DeleteAccount
+        , Network.Google.API.IdentityToolkit.Relyingparty.DownloadAccount
+        , Network.Google.API.IdentityToolkit.Relyingparty.GetAccountInfo
+        , Network.Google.API.IdentityToolkit.Relyingparty.GetOobConfirmationCode
+        , Network.Google.API.IdentityToolkit.Relyingparty.GetPublicKeys
+        , Network.Google.API.IdentityToolkit.Relyingparty.GetRecaptchaParam
+        , Network.Google.API.IdentityToolkit.Relyingparty.ResetPassword
+        , Network.Google.API.IdentityToolkit.Relyingparty.SetAccountInfo
+        , Network.Google.API.IdentityToolkit.Relyingparty.UploadAccount
+        , Network.Google.API.IdentityToolkit.Relyingparty.VerifyAssertion
+        , Network.Google.API.IdentityToolkit.Relyingparty.VerifyPassword
+        , Network.Google.IdentityToolkit
         , Network.Google.IdentityToolkit.Types
 
     other-modules:

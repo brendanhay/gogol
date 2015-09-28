@@ -1,6 +1,6 @@
 name:                  gogol-bigquery
 version:               0.0.1
-synopsis:              Google BigQuery API.
+synopsis:              Google BigQuery API Client.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -16,8 +16,8 @@ extra-source-files:    README.md
 description:
     A data platform for customers to create, manage, share and query data.
     .
-    /Warning:/ This is an experimental preview release which is still under
-    heavy development and not intended for public consumption, caveat emptor!
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
 
 source-repository head
     type:     git
@@ -30,7 +30,28 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.BigQuery
+          Network.Google.API.BigQuery.Datasets.Delete
+        , Network.Google.API.BigQuery.Datasets.Get
+        , Network.Google.API.BigQuery.Datasets.Insert
+        , Network.Google.API.BigQuery.Datasets.List
+        , Network.Google.API.BigQuery.Datasets.Patch
+        , Network.Google.API.BigQuery.Datasets.Update
+        , Network.Google.API.BigQuery.Jobs.Cancel
+        , Network.Google.API.BigQuery.Jobs.Get
+        , Network.Google.API.BigQuery.Jobs.GetQueryResults
+        , Network.Google.API.BigQuery.Jobs.Insert
+        , Network.Google.API.BigQuery.Jobs.List
+        , Network.Google.API.BigQuery.Jobs.Query
+        , Network.Google.API.BigQuery.Projects.List
+        , Network.Google.API.BigQuery.Tabledata.InsertAll
+        , Network.Google.API.BigQuery.Tabledata.List
+        , Network.Google.API.BigQuery.Tables.Delete
+        , Network.Google.API.BigQuery.Tables.Get
+        , Network.Google.API.BigQuery.Tables.Insert
+        , Network.Google.API.BigQuery.Tables.List
+        , Network.Google.API.BigQuery.Tables.Patch
+        , Network.Google.API.BigQuery.Tables.Update
+        , Network.Google.BigQuery
         , Network.Google.BigQuery.Types
 
     other-modules:

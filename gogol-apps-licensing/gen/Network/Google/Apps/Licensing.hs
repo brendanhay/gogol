@@ -17,18 +17,51 @@
 -- /See:/ <https://developers.google.com/google-apps/licensing/ Enterprise License Manager API Reference>
 module Network.Google.Apps.Licensing
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** Enterprise License Manager API
       AppsLicensing
-    , LicenseAssignmentsAPI
-    , LicenseAssignmentsInsert
-    , LicenseAssignmentsPatch
-    , LicenseAssignmentsGet
-    , LicenseAssignmentsListForProductAndSku
-    , LicenseAssignmentsListForProduct
-    , LicenseAssignmentsDelete
-    , LicenseAssignmentsUpdate
+    , appsLicensing
+    , appsLicensingURL
+
+    -- ** licensing.licenseAssignments.delete
+    , module Network.Google.API.Licensing.LicenseAssignments.Delete
+
+    -- ** licensing.licenseAssignments.get
+    , module Network.Google.API.Licensing.LicenseAssignments.Get
+
+    -- ** licensing.licenseAssignments.insert
+    , module Network.Google.API.Licensing.LicenseAssignments.Insert
+
+    -- ** licensing.licenseAssignments.listForProduct
+    , module Network.Google.API.Licensing.LicenseAssignments.ListForProduct
+
+    -- ** licensing.licenseAssignments.listForProductAndSku
+    , module Network.Google.API.Licensing.LicenseAssignments.ListForProductAndSku
+
+    -- ** licensing.licenseAssignments.patch
+    , module Network.Google.API.Licensing.LicenseAssignments.Patch
+
+    -- ** licensing.licenseAssignments.update
+    , module Network.Google.API.Licensing.LicenseAssignments.Update
 
     -- * Types
+
+    -- ** LicenseAssignmentList
+    , LicenseAssignmentList
+    , licenseAssignmentList
+    , lalEtag
+    , lalNextPageToken
+    , lalKind
+    , lalItems
+
+    -- ** Alt
+    , Alt (..)
+
+    -- ** LicenseAssignmentInsert
+    , LicenseAssignmentInsert
+    , licenseAssignmentInsert
+    , laiUserId
 
     -- ** LicenseAssignment
     , LicenseAssignment
@@ -39,21 +72,15 @@ module Network.Google.Apps.Licensing
     , laUserId
     , laSelfLink
     , laProductId
-
-    -- ** LicenseAssignmentInsert
-    , LicenseAssignmentInsert
-    , licenseAssignmentInsert
-    , laiUserId
-
-    -- ** LicenseAssignmentList
-    , LicenseAssignmentList
-    , licenseAssignmentList
-    , lalEtag
-    , lalNextPageToken
-    , lalKind
-    , lalItems
     ) where
 
+import           Network.Google.API.Licensing.LicenseAssignments.Delete
+import           Network.Google.API.Licensing.LicenseAssignments.Get
+import           Network.Google.API.Licensing.LicenseAssignments.Insert
+import           Network.Google.API.Licensing.LicenseAssignments.ListForProduct
+import           Network.Google.API.Licensing.LicenseAssignments.ListForProductAndSku
+import           Network.Google.API.Licensing.LicenseAssignments.Patch
+import           Network.Google.API.Licensing.LicenseAssignments.Update
 import           Network.Google.Apps.Licensing.Types
 import           Network.Google.Prelude
 
@@ -61,152 +88,14 @@ import           Network.Google.Prelude
 TODO
 -}
 
-type AppsLicensing = LicenseAssignmentsAPI
+type AppsLicensing =
+     LicenseAssignmentsGetAPI :<|>
+       LicenseAssignmentsDeleteAPI
+       :<|> LicenseAssignmentsInsertAPI
+       :<|> LicenseAssignmentsUpdateAPI
+       :<|> LicenseAssignmentsListForProductAndSkuAPI
+       :<|> LicenseAssignmentsListForProductAPI
+       :<|> LicenseAssignmentsPatchAPI
 
-type LicenseAssignmentsAPI =
-     LicenseAssignmentsInsert :<|> LicenseAssignmentsPatch
-       :<|> LicenseAssignmentsGet
-       :<|> LicenseAssignmentsListForProductAndSku
-       :<|> LicenseAssignmentsListForProduct
-       :<|> LicenseAssignmentsDelete
-       :<|> LicenseAssignmentsUpdate
-
--- | Assign License.
-type LicenseAssignmentsInsert =
-     "apps" :>
-       "licensing" :>
-         "v1" :>
-           "product" :>
-             Capture "productId" Text :>
-               "sku" :>
-                 Capture "skuId" Text :>
-                   "user" :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   Post '[JSON] LicenseAssignment
-
--- | Assign License. This method supports patch semantics.
-type LicenseAssignmentsPatch =
-     "apps" :>
-       "licensing" :>
-         "v1" :>
-           "product" :>
-             Capture "productId" Text :>
-               "sku" :>
-                 Capture "skuId" Text :>
-                   "user" :>
-                     Capture "userId" Text :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "userIp" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Patch '[JSON] LicenseAssignment
-
--- | Get license assignment of a particular product and sku for a user
-type LicenseAssignmentsGet =
-     "apps" :>
-       "licensing" :>
-         "v1" :>
-           "product" :>
-             Capture "productId" Text :>
-               "sku" :>
-                 Capture "skuId" Text :>
-                   "user" :>
-                     Capture "userId" Text :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "userIp" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Get '[JSON] LicenseAssignment
-
--- | List license assignments for given product and sku of the customer.
-type LicenseAssignmentsListForProductAndSku =
-     "apps" :>
-       "licensing" :>
-         "v1" :>
-           "product" :>
-             Capture "productId" Text :>
-               "sku" :>
-                 Capture "skuId" Text :>
-                   "users" :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "customerId" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "pageToken" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "maxResults" Natural :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "alt" Text :>
-                                         Get '[JSON] LicenseAssignmentList
-
--- | List license assignments for given product of the customer.
-type LicenseAssignmentsListForProduct =
-     "apps" :>
-       "licensing" :>
-         "v1" :>
-           "product" :>
-             Capture "productId" Text :>
-               "users" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "customerId" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "maxResults" Natural :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Get '[JSON] LicenseAssignmentList
-
--- | Revoke License.
-type LicenseAssignmentsDelete =
-     "apps" :>
-       "licensing" :>
-         "v1" :>
-           "product" :>
-             Capture "productId" Text :>
-               "sku" :>
-                 Capture "skuId" Text :>
-                   "user" :>
-                     Capture "userId" Text :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "userIp" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Assign License.
-type LicenseAssignmentsUpdate =
-     "apps" :>
-       "licensing" :>
-         "v1" :>
-           "product" :>
-             Capture "productId" Text :>
-               "sku" :>
-                 Capture "skuId" Text :>
-                   "user" :>
-                     Capture "userId" Text :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "userIp" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Put '[JSON] LicenseAssignment
+appsLicensing :: Proxy AppsLicensing
+appsLicensing = Proxy

@@ -14,12 +14,8 @@
 --
 module Network.Google.PageSpeed.Types
     (
-
-    -- * PagespeedApiFormatStringV2
-      PagespeedApiFormatStringV2
-    , pagespeedApiFormatStringV2
-    , pafsvArgs
-    , pafsvFormat
+    -- * Service URL
+      pageSpeedURL
 
     -- * PagespeedApiFormatStringV2ItemArgs
     , PagespeedApiFormatStringV2ItemArgs
@@ -30,13 +26,45 @@ module Network.Google.PageSpeed.Types
     , pafsviaType
     , pafsviaSecondaryRects
 
-    -- * PagespeedApiFormatStringV2ItemRectsItemArgs
-    , PagespeedApiFormatStringV2ItemRectsItemArgs
-    , pagespeedApiFormatStringV2ItemRectsItemArgs
-    , pafsviriaHeight
-    , pafsviriaLeft
-    , pafsviriaWidth
-    , pafsviriaTop
+    -- * ResultRuleResultsFormattedResults
+    , ResultRuleResultsFormattedResults
+    , resultRuleResultsFormattedResults
+
+    -- * Alt
+    , Alt (..)
+
+    -- * ResultPageStats
+    , ResultPageStats
+    , resultPageStats
+    , rpsHtmlResponseBytes
+    , rpsTotalRequestBytes
+    , rpsNumberResources
+    , rpsNumberStaticResources
+    , rpsNumberHosts
+    , rpsNumberJsResources
+    , rpsNumberCssResources
+    , rpsTextResponseBytes
+    , rpsFlashResponseBytes
+    , rpsImageResponseBytes
+    , rpsOtherResponseBytes
+    , rpsJavascriptResponseBytes
+    , rpsCssResponseBytes
+
+    -- * ResultVersion
+    , ResultVersion
+    , resultVersion
+    , rvMinor
+    , rvMajor
+
+    -- * ResultRuleGroups
+    , ResultRuleGroups
+    , resultRuleGroups
+
+    -- * ResultFormattedResults
+    , ResultFormattedResults
+    , resultFormattedResults
+    , rfrLocale
+    , rfrRuleResults
 
     -- * PagespeedApiFormatStringV2ItemSecondary_rectsItemArgs
     , PagespeedApiFormatStringV2ItemSecondary_rectsItemArgs
@@ -64,6 +92,15 @@ module Network.Google.PageSpeed.Types
     , paivpWidth
     , paivpTop
 
+    -- * PagespeedApiFormatStringV2
+    , PagespeedApiFormatStringV2
+    , pagespeedApiFormatStringV2
+    , pafsvArgs
+    , pafsvFormat
+
+    -- * PagespeedapiRunpagespeed'Strategy
+    , PagespeedapiRunpagespeed'Strategy (..)
+
     -- * Result
     , Result
     , result
@@ -78,44 +115,22 @@ module Network.Google.PageSpeed.Types
     , rId
     , rTitle
 
-    -- * ResultFormattedResults
-    , ResultFormattedResults
-    , resultFormattedResults
-    , rfrLocale
-    , rfrRuleResults
-
-    -- * ResultPageStats
-    , ResultPageStats
-    , resultPageStats
-    , rpsHtmlResponseBytes
-    , rpsTotalRequestBytes
-    , rpsNumberResources
-    , rpsNumberStaticResources
-    , rpsNumberHosts
-    , rpsNumberJsResources
-    , rpsNumberCssResources
-    , rpsTextResponseBytes
-    , rpsFlashResponseBytes
-    , rpsImageResponseBytes
-    , rpsOtherResponseBytes
-    , rpsJavascriptResponseBytes
-    , rpsCssResponseBytes
-
-    -- * ResultRuleGroups
-    , ResultRuleGroups
-    , resultRuleGroups
-
-    -- * ResultRuleResultsFormattedResults
-    , ResultRuleResultsFormattedResults
-    , resultRuleResultsFormattedResults
-
-    -- * ResultVersion
-    , ResultVersion
-    , resultVersion
-    , rvMinor
-    , rvMajor
+    -- * PagespeedApiFormatStringV2ItemRectsItemArgs
+    , PagespeedApiFormatStringV2ItemRectsItemArgs
+    , pagespeedApiFormatStringV2ItemRectsItemArgs
+    , pafsviriaHeight
+    , pafsviriaLeft
+    , pafsviriaWidth
+    , pafsviriaTop
     ) where
 
 import           Network.Google.PageSpeed.Types.Product
 import           Network.Google.PageSpeed.Types.Sum
 import           Network.Google.Prelude
+
+-- | URL referring to version 'v2' of the PageSpeed Insights API.
+pageSpeedURL :: BaseUrl
+pageSpeedURL
+  = BaseUrl Https
+      "https://www.googleapis.com/pagespeedonline/v2/"
+      443

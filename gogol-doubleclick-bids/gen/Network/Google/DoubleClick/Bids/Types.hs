@@ -14,24 +14,45 @@
 --
 module Network.Google.DoubleClick.Bids.Types
     (
+    -- * Service URL
+      doubleClickBidsURL
 
-    -- * DownloadLineItemsRequest
-      DownloadLineItemsRequest
-    , downloadLineItemsRequest
-    , dlirFilterType
-    , dlirFormat
-    , dlirFilterIds
+    -- * QueryMetadataFormat
+    , QueryMetadataFormat (..)
 
-    -- * DownloadLineItemsRequestFilterType
-    , DownloadLineItemsRequestFilterType (..)
-
-    -- * DownloadLineItemsRequestFormat
-    , DownloadLineItemsRequestFormat (..)
+    -- * QuerySchedule
+    , QuerySchedule
+    , querySchedule
+    , qsFrequency
+    , qsEndTimeMs
+    , qsNextRunMinuteOfDay
+    , qsNextRunTimezoneCode
 
     -- * DownloadLineItemsResponse
     , DownloadLineItemsResponse
     , downloadLineItemsResponse
     , dlirLineItems
+
+    -- * UploadStatus
+    , UploadStatus
+    , uploadStatus
+    , usRowStatus
+    , usErrors
+
+    -- * RunQueryRequest
+    , RunQueryRequest
+    , runQueryRequest
+    , rqrReportDataEndTimeMs
+    , rqrDataRange
+    , rqrReportDataStartTimeMs
+    , rqrTimezoneCode
+
+    -- * UploadLineItemsRequest
+    , UploadLineItemsRequest
+    , uploadLineItemsRequest
+    , ulirLineItems
+    , ulirFormat
+    , ulirDryRun
 
     -- * FilterPair
     , FilterPair
@@ -39,50 +60,46 @@ module Network.Google.DoubleClick.Bids.Types
     , fpValue
     , fpType
 
+    -- * UploadLineItemsRequestFormat
+    , UploadLineItemsRequestFormat (..)
+
+    -- * Alt
+    , Alt (..)
+
+    -- * ReportFailureErrorCode
+    , ReportFailureErrorCode (..)
+
+    -- * ParametersItemGroupBys
+    , ParametersItemGroupBys (..)
+
+    -- * Report
+    , Report
+    , report
+    , rParams
+    , rKey
+    , rMetadata
+
+    -- * RowStatus
+    , RowStatus
+    , rowStatus
+    , rsEntityName
+    , rsChanged
+    , rsPersisted
+    , rsRowNumber
+    , rsErrors
+    , rsEntityId
+
+    -- * RunQueryRequestDataRange
+    , RunQueryRequestDataRange (..)
+
     -- * FilterPairType
     , FilterPairType (..)
-
-    -- * ListQueriesResponse
-    , ListQueriesResponse
-    , listQueriesResponse
-    , lqrQueries
-    , lqrKind
 
     -- * ListReportsResponse
     , ListReportsResponse
     , listReportsResponse
     , lrrReports
     , lrrKind
-
-    -- * Parameters
-    , Parameters
-    , parameters
-    , pMetrics
-    , pIncludeInviteData
-    , pFilters
-    , pGroupBys
-    , pType
-
-    -- * ParametersItemGroupBys
-    , ParametersItemGroupBys (..)
-
-    -- * ParametersItemMetrics
-    , ParametersItemMetrics (..)
-
-    -- * ParametersType
-    , ParametersType (..)
-
-    -- * Query
-    , Query
-    , query
-    , qQueryId
-    , qReportDataEndTimeMs
-    , qSchedule
-    , qKind
-    , qParams
-    , qMetadata
-    , qReportDataStartTimeMs
-    , qTimezoneCode
 
     -- * QueryMetadata
     , QueryMetadata
@@ -99,51 +116,17 @@ module Network.Google.DoubleClick.Bids.Types
     , qmTitle
     , qmSendNotification
 
-    -- * QueryMetadataDataRange
-    , QueryMetadataDataRange (..)
+    -- * Parameters
+    , Parameters
+    , parameters
+    , pMetrics
+    , pIncludeInviteData
+    , pFilters
+    , pGroupBys
+    , pType
 
-    -- * QueryMetadataFormat
-    , QueryMetadataFormat (..)
-
-    -- * QuerySchedule
-    , QuerySchedule
-    , querySchedule
-    , qsFrequency
-    , qsEndTimeMs
-    , qsNextRunMinuteOfDay
-    , qsNextRunTimezoneCode
-
-    -- * QueryScheduleFrequency
-    , QueryScheduleFrequency (..)
-
-    -- * Report
-    , Report
-    , report
-    , rParams
-    , rKey
-    , rMetadata
-
-    -- * ReportFailure
-    , ReportFailure
-    , reportFailure
-    , rfErrorCode
-
-    -- * ReportFailureErrorCode
-    , ReportFailureErrorCode (..)
-
-    -- * ReportKey
-    , ReportKey
-    , reportKey
-    , rkQueryId
-    , rkReportId
-
-    -- * ReportMetadata
-    , ReportMetadata
-    , reportMetadata
-    , rmStatus
-    , rmReportDataEndTimeMs
-    , rmGoogleCloudStoragePath
-    , rmReportDataStartTimeMs
+    -- * ReportStatusFormat
+    , ReportStatusFormat (..)
 
     -- * ReportStatus
     , ReportStatus
@@ -153,55 +136,84 @@ module Network.Google.DoubleClick.Bids.Types
     , rsFormat
     , rsFailure
 
-    -- * ReportStatusFormat
-    , ReportStatusFormat (..)
+    -- * Query
+    , Query
+    , query
+    , qQueryId
+    , qReportDataEndTimeMs
+    , qSchedule
+    , qKind
+    , qParams
+    , qMetadata
+    , qReportDataStartTimeMs
+    , qTimezoneCode
 
-    -- * ReportStatusState
-    , ReportStatusState (..)
+    -- * DownloadLineItemsRequest
+    , DownloadLineItemsRequest
+    , downloadLineItemsRequest
+    , dlirFilterType
+    , dlirFormat
+    , dlirFilterIds
 
-    -- * RowStatus
-    , RowStatus
-    , rowStatus
-    , rsEntityName
-    , rsChanged
-    , rsPersisted
-    , rsRowNumber
-    , rsErrors
-    , rsEntityId
+    -- * ListQueriesResponse
+    , ListQueriesResponse
+    , listQueriesResponse
+    , lqrQueries
+    , lqrKind
 
-    -- * RunQueryRequest
-    , RunQueryRequest
-    , runQueryRequest
-    , rqrReportDataEndTimeMs
-    , rqrDataRange
-    , rqrReportDataStartTimeMs
-    , rqrTimezoneCode
+    -- * DownloadLineItemsRequestFormat
+    , DownloadLineItemsRequestFormat (..)
 
-    -- * RunQueryRequestDataRange
-    , RunQueryRequestDataRange (..)
-
-    -- * UploadLineItemsRequest
-    , UploadLineItemsRequest
-    , uploadLineItemsRequest
-    , ulirLineItems
-    , ulirFormat
-    , ulirDryRun
-
-    -- * UploadLineItemsRequestFormat
-    , UploadLineItemsRequestFormat (..)
+    -- * QueryScheduleFrequency
+    , QueryScheduleFrequency (..)
 
     -- * UploadLineItemsResponse
     , UploadLineItemsResponse
     , uploadLineItemsResponse
     , ulirUploadStatus
 
-    -- * UploadStatus
-    , UploadStatus
-    , uploadStatus
-    , usRowStatus
-    , usErrors
+    -- * ReportMetadata
+    , ReportMetadata
+    , reportMetadata
+    , rmStatus
+    , rmReportDataEndTimeMs
+    , rmGoogleCloudStoragePath
+    , rmReportDataStartTimeMs
+
+    -- * ParametersItemMetrics
+    , ParametersItemMetrics (..)
+
+    -- * QueryMetadataDataRange
+    , QueryMetadataDataRange (..)
+
+    -- * ReportStatusState
+    , ReportStatusState (..)
+
+    -- * DownloadLineItemsRequestFilterType
+    , DownloadLineItemsRequestFilterType (..)
+
+    -- * ReportFailure
+    , ReportFailure
+    , reportFailure
+    , rfErrorCode
+
+    -- * ReportKey
+    , ReportKey
+    , reportKey
+    , rkQueryId
+    , rkReportId
+
+    -- * ParametersType
+    , ParametersType (..)
     ) where
 
 import           Network.Google.DoubleClick.Bids.Types.Product
 import           Network.Google.DoubleClick.Bids.Types.Sum
 import           Network.Google.Prelude
+
+-- | URL referring to version 'v1' of the DoubleClick Bid Manager API.
+doubleClickBidsURL :: BaseUrl
+doubleClickBidsURL
+  = BaseUrl Https
+      "https://www.googleapis.com/doubleclickbidmanager/v1/"
+      443

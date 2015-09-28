@@ -18,38 +18,63 @@
 -- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference>
 module Network.Google.Storage.Transfer
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** Google Storage Transfer API
       StorageTransfer
-    , TransferJobsAPI
-    , TransferJobsList
-    , TransferJobsPatch
-    , TransferJobsGet
-    , TransferJobsCreate
-    , V1API
-    , V1GetGoogleServiceAccount
-    , TransferOperationsAPI
-    , TransferOperationsList
-    , TransferOperationsGet
-    , TransferOperationsPause
-    , TransferOperationsCancel
-    , TransferOperationsDelete
-    , TransferOperationsResume
-    , GoogleServiceAccountsAPI
-    , GoogleServiceAccountsGet
+    , storageTransfer
+    , storageTransferURL
+
+    -- ** storagetransfer.getGoogleServiceAccount
+    , module Network.Google.API.StorageTransfer.GetGoogleServiceAccount
+
+    -- ** storagetransfer.googleServiceAccounts.get
+    , module Network.Google.API.StorageTransfer.GoogleServiceAccounts.Get
+
+    -- ** storagetransfer.transferJobs.create
+    , module Network.Google.API.StorageTransfer.TransferJobs.Create
+
+    -- ** storagetransfer.transferJobs.get
+    , module Network.Google.API.StorageTransfer.TransferJobs.Get
+
+    -- ** storagetransfer.transferJobs.list
+    , module Network.Google.API.StorageTransfer.TransferJobs.List
+
+    -- ** storagetransfer.transferJobs.patch
+    , module Network.Google.API.StorageTransfer.TransferJobs.Patch
+
+    -- ** storagetransfer.transferOperations.cancel
+    , module Network.Google.API.StorageTransfer.TransferOperations.Cancel
+
+    -- ** storagetransfer.transferOperations.delete
+    , module Network.Google.API.StorageTransfer.TransferOperations.Delete
+
+    -- ** storagetransfer.transferOperations.get
+    , module Network.Google.API.StorageTransfer.TransferOperations.Get
+
+    -- ** storagetransfer.transferOperations.list
+    , module Network.Google.API.StorageTransfer.TransferOperations.List
+
+    -- ** storagetransfer.transferOperations.pause
+    , module Network.Google.API.StorageTransfer.TransferOperations.Pause
+
+    -- ** storagetransfer.transferOperations.resume
+    , module Network.Google.API.StorageTransfer.TransferOperations.Resume
 
     -- * Types
 
-    -- ** AwsAccessKey
-    , AwsAccessKey
-    , awsAccessKey
-    , aakSecretAccessKey
-    , aakAccessKeyId
-
-    -- ** AwsS3Data
-    , AwsS3Data
-    , awsS3Data
-    , asdBucketName
-    , asdAwsAccessKey
+    -- ** TransferJob
+    , TransferJob
+    , transferJob
+    , tjCreationTime
+    , tjStatus
+    , tjSchedule
+    , tjDeletionTime
+    , tjName
+    , tjProjectId
+    , tjTransferSpec
+    , tjDescription
+    , tjLastModificationTime
 
     -- ** Date
     , Date
@@ -58,108 +83,12 @@ module Network.Google.Storage.Transfer
     , dYear
     , dMonth
 
-    -- ** Empty
-    , Empty
-    , empty
-
-    -- ** ErrorLogEntry
-    , ErrorLogEntry
-    , errorLogEntry
-    , eleUrl
-    , eleErrorDetails
-
-    -- ** ErrorSummary
-    , ErrorSummary
-    , errorSummary
-    , esErrorCount
-    , esErrorCode
-    , esErrorLogEntries
-
-    -- ** GcsData
-    , GcsData
-    , gcsData
-    , gdBucketName
-
-    -- ** GoogleServiceAccount
-    , GoogleServiceAccount
-    , googleServiceAccount
-    , gsaAccountEmail
-
-    -- ** HttpData
-    , HttpData
-    , httpData
-    , hdListUrl
-
-    -- ** ListOperationsResponse
-    , ListOperationsResponse
-    , listOperationsResponse
-    , lorNextPageToken
-    , lorOperations
-
-    -- ** ListTransferJobsResponse
-    , ListTransferJobsResponse
-    , listTransferJobsResponse
-    , ltjrNextPageToken
-    , ltjrTransferJobs
-
-    -- ** ObjectConditions
-    , ObjectConditions
-    , objectConditions
-    , ocMinTimeElapsedSinceLastModification
-    , ocIncludePrefixes
-    , ocMaxTimeElapsedSinceLastModification
-    , ocExcludePrefixes
-
-    -- ** Operation
-    , Operation
-    , operation
-    , oDone
-    , oError
-    , oResponse
-    , oName
-    , oMetadata
-
-    -- ** OperationMetadata
-    , OperationMetadata
-    , operationMetadata
-
-    -- ** OperationResponse
-    , OperationResponse
-    , operationResponse
-
-    -- ** PauseTransferOperationRequest
-    , PauseTransferOperationRequest
-    , pauseTransferOperationRequest
-
-    -- ** ResumeTransferOperationRequest
-    , ResumeTransferOperationRequest
-    , resumeTransferOperationRequest
-
-    -- ** Schedule
-    , Schedule
-    , schedule
-    , sScheduleEndDate
-    , sScheduleStartDate
-    , sStartTimeOfDay
-
-    -- ** Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
-
-    -- ** StatusItemDetails
-    , StatusItemDetails
-    , statusItemDetails
-
-    -- ** TimeOfDay
-    , TimeOfDay
-    , timeOfDay
-    , todNanos
-    , todHours
-    , todMinutes
-    , todSeconds
+    -- ** UpdateTransferJobRequest
+    , UpdateTransferJobRequest
+    , updateTransferJobRequest
+    , utjrTransferJob
+    , utjrProjectId
+    , utjrUpdateTransferJobFieldMask
 
     -- ** TransferCounters
     , TransferCounters
@@ -181,18 +110,137 @@ module Network.Google.Storage.Transfer
     , tcObjectsFailedToDeleteFromSink
     , tcObjectsFromSourceSkippedBySync
 
-    -- ** TransferJob
-    , TransferJob
-    , transferJob
-    , tjCreationTime
-    , tjStatus
-    , tjSchedule
-    , tjDeletionTime
-    , tjName
-    , tjProjectId
-    , tjTransferSpec
-    , tjDescription
-    , tjLastModificationTime
+    -- ** GcsData
+    , GcsData
+    , gcsData
+    , gdBucketName
+
+    -- ** AwsS3Data
+    , AwsS3Data
+    , awsS3Data
+    , asdBucketName
+    , asdAwsAccessKey
+
+    -- ** OperationResponse
+    , OperationResponse
+    , operationResponse
+
+    -- ** ErrorLogEntry
+    , ErrorLogEntry
+    , errorLogEntry
+    , eleUrl
+    , eleErrorDetails
+
+    -- ** TimeOfDay
+    , TimeOfDay
+    , timeOfDay
+    , todNanos
+    , todHours
+    , todMinutes
+    , todSeconds
+
+    -- ** HttpData
+    , HttpData
+    , httpData
+    , hdListUrl
+
+    -- ** TransferOptions
+    , TransferOptions
+    , transferOptions
+    , toDeleteObjectsUniqueInSink
+    , toDeleteObjectsFromSourceAfterTransfer
+    , toOverwriteObjectsAlreadyExistingInSink
+
+    -- ** ErrorSummary
+    , ErrorSummary
+    , errorSummary
+    , esErrorCount
+    , esErrorCode
+    , esErrorLogEntries
+
+    -- ** Status
+    , Status
+    , status
+    , sDetails
+    , sCode
+    , sMessage
+
+    -- ** ListOperationsResponse
+    , ListOperationsResponse
+    , listOperationsResponse
+    , lorNextPageToken
+    , lorOperations
+
+    -- ** Empty
+    , Empty
+    , empty
+
+    -- ** PauseTransferOperationRequest
+    , PauseTransferOperationRequest
+    , pauseTransferOperationRequest
+
+    -- ** Schedule
+    , Schedule
+    , schedule
+    , sScheduleEndDate
+    , sScheduleStartDate
+    , sStartTimeOfDay
+
+    -- ** ObjectConditions
+    , ObjectConditions
+    , objectConditions
+    , ocMinTimeElapsedSinceLastModification
+    , ocIncludePrefixes
+    , ocMaxTimeElapsedSinceLastModification
+    , ocExcludePrefixes
+
+    -- ** Operation
+    , Operation
+    , operation
+    , oDone
+    , oError
+    , oResponse
+    , oName
+    , oMetadata
+
+    -- ** GoogleServiceAccount
+    , GoogleServiceAccount
+    , googleServiceAccount
+    , gsaAccountEmail
+
+    -- ** StatusItemDetails
+    , StatusItemDetails
+    , statusItemDetails
+
+    -- ** OperationMetadata
+    , OperationMetadata
+    , operationMetadata
+
+    -- ** AwsAccessKey
+    , AwsAccessKey
+    , awsAccessKey
+    , aakSecretAccessKey
+    , aakAccessKeyId
+
+    -- ** TransferSpec
+    , TransferSpec
+    , transferSpec
+    , tsGcsDataSource
+    , tsObjectConditions
+    , tsHttpDataSource
+    , tsAwsS3DataSource
+    , tsGcsDataSink
+    , tsTransferOptions
+
+    -- ** ResumeTransferOperationRequest
+    , ResumeTransferOperationRequest
+    , resumeTransferOperationRequest
+
+    -- ** ListTransferJobsResponse
+    , ListTransferJobsResponse
+    , listTransferJobsResponse
+    , ltjrNextPageToken
+    , ltjrTransferJobs
 
     -- ** TransferOperation
     , TransferOperation
@@ -206,32 +254,20 @@ module Network.Google.Storage.Transfer
     , toProjectId
     , toTransferSpec
     , toErrorBreakdowns
-
-    -- ** TransferOptions
-    , TransferOptions
-    , transferOptions
-    , toDeleteObjectsUniqueInSink
-    , toDeleteObjectsFromSourceAfterTransfer
-    , toOverwriteObjectsAlreadyExistingInSink
-
-    -- ** TransferSpec
-    , TransferSpec
-    , transferSpec
-    , tsGcsDataSource
-    , tsObjectConditions
-    , tsHttpDataSource
-    , tsAwsS3DataSource
-    , tsGcsDataSink
-    , tsTransferOptions
-
-    -- ** UpdateTransferJobRequest
-    , UpdateTransferJobRequest
-    , updateTransferJobRequest
-    , utjrTransferJob
-    , utjrProjectId
-    , utjrUpdateTransferJobFieldMask
     ) where
 
+import           Network.Google.API.StorageTransfer.GetGoogleServiceAccount
+import           Network.Google.API.StorageTransfer.GoogleServiceAccounts.Get
+import           Network.Google.API.StorageTransfer.TransferJobs.Create
+import           Network.Google.API.StorageTransfer.TransferJobs.Get
+import           Network.Google.API.StorageTransfer.TransferJobs.List
+import           Network.Google.API.StorageTransfer.TransferJobs.Patch
+import           Network.Google.API.StorageTransfer.TransferOperations.Cancel
+import           Network.Google.API.StorageTransfer.TransferOperations.Delete
+import           Network.Google.API.StorageTransfer.TransferOperations.Get
+import           Network.Google.API.StorageTransfer.TransferOperations.List
+import           Network.Google.API.StorageTransfer.TransferOperations.Pause
+import           Network.Google.API.StorageTransfer.TransferOperations.Resume
 import           Network.Google.Prelude
 import           Network.Google.Storage.Transfer.Types
 
@@ -240,274 +276,17 @@ TODO
 -}
 
 type StorageTransfer =
-     TransferJobsAPI :<|> V1API :<|> TransferOperationsAPI
-       :<|> GoogleServiceAccountsAPI
+     TransferJobsGetAPI :<|> TransferOperationsListAPI
+       :<|> TransferOperationsDeleteAPI
+       :<|> TransferOperationsResumeAPI
+       :<|> TransferOperationsCancelAPI
+       :<|> GetGoogleServiceAccountAPI
+       :<|> TransferJobsListAPI
+       :<|> GoogleServiceAccountsGetAPI
+       :<|> TransferJobsPatchAPI
+       :<|> TransferOperationsPauseAPI
+       :<|> TransferJobsCreateAPI
+       :<|> TransferOperationsGetAPI
 
-type TransferJobsAPI =
-     TransferJobsList :<|> TransferJobsPatch :<|>
-       TransferJobsGet
-       :<|> TransferJobsCreate
-
--- | Lists transfer jobs.
-type TransferJobsList =
-     "v1" :>
-       "transferJobs" :>
-         QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "filter" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "pageSize" Int32 :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "callback" Text :>
-                                       QueryParam "alt" Text :>
-                                         Get '[JSON] ListTransferJobsResponse
-
--- | Updates a transfer job. Updating a job\'s transfer spec does not affect
--- transfer operations that are running already. Updating the scheduling of
--- a job is not allowed.
-type TransferJobsPatch =
-     "v1" :>
-       "{+jobName}" :>
-         QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :>
-                                   Patch '[JSON] TransferJob
-
--- | Gets a transfer job.
-type TransferJobsGet =
-     "v1" :>
-       "{+jobName}" :>
-         QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "projectId" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "callback" Text :>
-                                   QueryParam "alt" Text :>
-                                     Get '[JSON] TransferJob
-
--- | Creates a transfer job that runs periodically.
-type TransferJobsCreate =
-     "v1" :>
-       "transferJobs" :>
-         QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :>
-                                   Post '[JSON] TransferJob
-
-type V1API = V1GetGoogleServiceAccount
-
--- | Returns the Google service account that is used by Storage Transfer
--- Service to access buckets in the project where transfers run or in other
--- projects. Each Google service account is associated with one Google
--- Developers Console project. Users should add this service account to the
--- Google Cloud Storage bucket ACLs to grant access to Storage Transfer
--- Service. This service account is created and owned by Storage Transfer
--- Service and can only be used by Storage Transfer Service.
-type V1GetGoogleServiceAccount =
-     "v1:getGoogleServiceAccount" :>
-       QueryParam "$.xgafv" Text :>
-         QueryParam "quotaUser" Text :>
-           QueryParam "prettyPrint" Bool :>
-             QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "projectId" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :>
-                                   Get '[JSON] GoogleServiceAccount
-
-type TransferOperationsAPI =
-     TransferOperationsList :<|> TransferOperationsGet
-       :<|> TransferOperationsPause
-       :<|> TransferOperationsCancel
-       :<|> TransferOperationsDelete
-       :<|> TransferOperationsResume
-
--- | Lists operations that match the specified filter in the request. If the
--- server doesn\'t support this method, it returns \`UNIMPLEMENTED\`. NOTE:
--- the \`name\` binding below allows API services to override the binding
--- to use different resource name schemes, such as
--- \`users\/*\/operations\`.
-type TransferOperationsList =
-     "v1" :>
-       "{+name}" :>
-         QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "filter" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "pageSize" Int32 :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "callback" Text :>
-                                       QueryParam "alt" Text :>
-                                         Get '[JSON] ListOperationsResponse
-
--- | Gets the latest state of a long-running operation. Clients can use this
--- method to poll the operation result at intervals as recommended by the
--- API service.
-type TransferOperationsGet =
-     "v1" :>
-       "{+name}" :>
-         QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :> Get '[JSON] Operation
-
--- | Pauses a transfer operation.
-type TransferOperationsPause =
-     "v1" :>
-       "{+name}:pause" :>
-         QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :> Post '[JSON] Empty
-
--- | Cancels a transfer. Use the get method to check whether the cancellation
--- succeeded or whether the operation completed despite cancellation.
-type TransferOperationsCancel =
-     "v1" :>
-       "{+name}:cancel" :>
-         QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :> Post '[JSON] Empty
-
--- | This method is not supported and the server returns \`UNIMPLEMENTED\`.
-type TransferOperationsDelete =
-     "v1" :>
-       "{+name}" :>
-         QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :> Delete '[JSON] Empty
-
--- | Resumes a transfer operation that is paused.
-type TransferOperationsResume =
-     "v1" :>
-       "{+name}:resume" :>
-         QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :> Post '[JSON] Empty
-
-type GoogleServiceAccountsAPI =
-     GoogleServiceAccountsGet
-
--- | Returns the Google service account that is used by Storage Transfer
--- Service to access buckets in the project where transfers run or in other
--- projects. Each Google service account is associated with one Google
--- Developers Console project. Users should add this service account to the
--- Google Cloud Storage bucket ACLs to grant access to Storage Transfer
--- Service. This service account is created and owned by Storage Transfer
--- Service and can only be used by Storage Transfer Service.
-type GoogleServiceAccountsGet =
-     "v1" :>
-       "googleServiceAccounts" :>
-         Capture "projectId" Text :>
-           QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "callback" Text :>
-                                   QueryParam "alt" Text :>
-                                     Get '[JSON] GoogleServiceAccount
+storageTransfer :: Proxy StorageTransfer
+storageTransfer = Proxy

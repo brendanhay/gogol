@@ -14,18 +14,15 @@
 --
 module Network.Google.ProximityBeacon.Types
     (
+    -- * Service URL
+      proximityBeaconURL
 
-    -- * AdvertisedId
-      AdvertisedId
-    , advertisedId
-    , aiId
-    , aiType
-
-    -- * AttachmentInfo
-    , AttachmentInfo
-    , attachmentInfo
-    , aiData
-    , aiNamespacedType
+    -- * Date
+    , Date
+    , date
+    , dDay
+    , dYear
+    , dMonth
 
     -- * Beacon
     , Beacon
@@ -40,12 +37,52 @@ module Network.Google.ProximityBeacon.Types
     , bAdvertisedId
     , bProperties
 
+    -- * Diagnostics
+    , Diagnostics
+    , diagnostics
+    , dAlerts
+    , dBeaconName
+    , dEstimatedLowBatteryDate
+
+    -- * IndoorLevel
+    , IndoorLevel
+    , indoorLevel
+    , ilName
+
+    -- * ListBeaconAttachmentsResponse
+    , ListBeaconAttachmentsResponse
+    , listBeaconAttachmentsResponse
+    , lbarAttachments
+
     -- * BeaconAttachment
     , BeaconAttachment
     , beaconAttachment
     , baData
     , baAttachmentName
     , baNamespacedType
+
+    -- * ListDiagnosticsResponse
+    , ListDiagnosticsResponse
+    , listDiagnosticsResponse
+    , ldrNextPageToken
+    , ldrDiagnostics
+
+    -- * GetInfoForObservedBeaconsResponse
+    , GetInfoForObservedBeaconsResponse
+    , getInfoForObservedBeaconsResponse
+    , gifobrBeacons
+
+    -- * LatLng
+    , LatLng
+    , latLng
+    , llLatitude
+    , llLongitude
+
+    -- * AttachmentInfo
+    , AttachmentInfo
+    , attachmentInfo
+    , aiData
+    , aiNamespacedType
 
     -- * BeaconInfo
     , BeaconInfo
@@ -55,59 +92,33 @@ module Network.Google.ProximityBeacon.Types
     , biDescription
     , biAdvertisedId
 
-    -- * BeaconProperties
-    , BeaconProperties
-    , beaconProperties
+    -- * Observation
+    , Observation
+    , observation
+    , oTelemetry
+    , oTimestampMs
+    , oAdvertisedId
 
-    -- * Date
-    , Date
-    , date
-    , dDay
-    , dYear
-    , dMonth
+    -- * Empty
+    , Empty
+    , empty
 
     -- * DeleteAttachmentsResponse
     , DeleteAttachmentsResponse
     , deleteAttachmentsResponse
     , darNumDeleted
 
-    -- * Diagnostics
-    , Diagnostics
-    , diagnostics
-    , dAlerts
-    , dBeaconName
-    , dEstimatedLowBatteryDate
-
-    -- * Empty
-    , Empty
-    , empty
+    -- * Namespace
+    , Namespace
+    , namespace
+    , nServingVisibility
+    , nNamespaceName
 
     -- * GetInfoForObservedBeaconsRequest
     , GetInfoForObservedBeaconsRequest
     , getInfoForObservedBeaconsRequest
     , gifobrObservations
     , gifobrNamespacedTypes
-
-    -- * GetInfoForObservedBeaconsResponse
-    , GetInfoForObservedBeaconsResponse
-    , getInfoForObservedBeaconsResponse
-    , gifobrBeacons
-
-    -- * IndoorLevel
-    , IndoorLevel
-    , indoorLevel
-    , ilName
-
-    -- * LatLng
-    , LatLng
-    , latLng
-    , llLatitude
-    , llLongitude
-
-    -- * ListBeaconAttachmentsResponse
-    , ListBeaconAttachmentsResponse
-    , listBeaconAttachmentsResponse
-    , lbarAttachments
 
     -- * ListBeaconsResponse
     , ListBeaconsResponse
@@ -116,31 +127,29 @@ module Network.Google.ProximityBeacon.Types
     , lbrBeacons
     , lbrTotalCount
 
-    -- * ListDiagnosticsResponse
-    , ListDiagnosticsResponse
-    , listDiagnosticsResponse
-    , ldrNextPageToken
-    , ldrDiagnostics
+    -- * AdvertisedId
+    , AdvertisedId
+    , advertisedId
+    , aiId
+    , aiType
+
+    -- * BeaconProperties
+    , BeaconProperties
+    , beaconProperties
 
     -- * ListNamespacesResponse
     , ListNamespacesResponse
     , listNamespacesResponse
     , lnrNamespaces
-
-    -- * Namespace
-    , Namespace
-    , namespace
-    , nServingVisibility
-    , nNamespaceName
-
-    -- * Observation
-    , Observation
-    , observation
-    , oTelemetry
-    , oTimestampMs
-    , oAdvertisedId
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types.Product
 import           Network.Google.ProximityBeacon.Types.Sum
+
+-- | URL referring to version 'v1beta1' of the Google Proximity Beacon API.
+proximityBeaconURL :: BaseUrl
+proximityBeaconURL
+  = BaseUrl Https
+      "https://proximitybeacon.googleapis.com/"
+      443

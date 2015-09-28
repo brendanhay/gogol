@@ -18,104 +18,163 @@
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference>
 module Network.Google.Map.Engine
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** Google Maps Engine API
       MapEngine
-    , MapsAPI
-    , PermissionsAPI
-    , PermissionsList
-    , PermissionsBatchUpdate
-    , PermissionsBatchDelete
-    , TablesAPI
-    , ParentsAPI
-    , ParentsList
-    , FeaturesAPI
-    , FeaturesList
-    , FeaturesBatchInsert
-    , FeaturesGet
-    , FeaturesBatchPatch
-    , FeaturesBatchDelete
-    , FilesAPI
-    , FilesInsert
-    , PermissionsAPI
-    , PermissionsList
-    , PermissionsBatchUpdate
-    , PermissionsBatchDelete
-    , LayersAPI
-    , ParentsAPI
-    , ParentsList
-    , PermissionsAPI
-    , PermissionsList
-    , PermissionsBatchUpdate
-    , PermissionsBatchDelete
-    , RastersAPI
-    , ParentsAPI
-    , ParentsList
-    , FilesAPI
-    , FilesInsert
-    , PermissionsAPI
-    , PermissionsList
-    , PermissionsBatchUpdate
-    , PermissionsBatchDelete
-    , AssetsAPI
-    , ParentsAPI
-    , ParentsList
-    , PermissionsAPI
-    , PermissionsList
-    , ProjectsAPI
-    , IconsAPI
-    , IconsList
-    , IconsGet
-    , IconsCreate
-    , RasterCollectionsAPI
-    , ParentsAPI
-    , ParentsList
-    , PermissionsAPI
-    , PermissionsList
-    , PermissionsBatchUpdate
-    , PermissionsBatchDelete
-    , RastersAPI
-    , RastersList
-    , RastersBatchInsert
-    , RastersBatchDelete
+    , mapEngine
+    , mapEngineURL
+
+    -- ** mapsengine.assets.parents.list
+    , module Network.Google.API.Mapsengine.Assets.Parents.List
+
+    -- ** mapsengine.assets.permissions.list
+    , module Network.Google.API.Mapsengine.Assets.Permissions.List
+
+    -- ** mapsengine.layers.parents.list
+    , module Network.Google.API.Mapsengine.Layers.Parents.List
+
+    -- ** mapsengine.layers.permissions.batchDelete
+    , module Network.Google.API.Mapsengine.Layers.Permissions.BatchDelete
+
+    -- ** mapsengine.layers.permissions.batchUpdate
+    , module Network.Google.API.Mapsengine.Layers.Permissions.BatchUpdate
+
+    -- ** mapsengine.layers.permissions.list
+    , module Network.Google.API.Mapsengine.Layers.Permissions.List
+
+    -- ** mapsengine.maps.permissions.batchDelete
+    , module Network.Google.API.Mapsengine.Maps.Permissions.BatchDelete
+
+    -- ** mapsengine.maps.permissions.batchUpdate
+    , module Network.Google.API.Mapsengine.Maps.Permissions.BatchUpdate
+
+    -- ** mapsengine.maps.permissions.list
+    , module Network.Google.API.Mapsengine.Maps.Permissions.List
+
+    -- ** mapsengine.projects.icons.create
+    , module Network.Google.API.Mapsengine.Projects.Icons.Create
+
+    -- ** mapsengine.projects.icons.get
+    , module Network.Google.API.Mapsengine.Projects.Icons.Get
+
+    -- ** mapsengine.projects.icons.list
+    , module Network.Google.API.Mapsengine.Projects.Icons.List
+
+    -- ** mapsengine.rasterCollections.parents.list
+    , module Network.Google.API.Mapsengine.RasterCollections.Parents.List
+
+    -- ** mapsengine.rasterCollections.permissions.batchDelete
+    , module Network.Google.API.Mapsengine.RasterCollections.Permissions.BatchDelete
+
+    -- ** mapsengine.rasterCollections.permissions.batchUpdate
+    , module Network.Google.API.Mapsengine.RasterCollections.Permissions.BatchUpdate
+
+    -- ** mapsengine.rasterCollections.permissions.list
+    , module Network.Google.API.Mapsengine.RasterCollections.Permissions.List
+
+    -- ** mapsengine.rasterCollections.rasters.batchDelete
+    , module Network.Google.API.Mapsengine.RasterCollections.Rasters.BatchDelete
+
+    -- ** mapsengine.rasterCollections.rasters.batchInsert
+    , module Network.Google.API.Mapsengine.RasterCollections.Rasters.BatchInsert
+
+    -- ** mapsengine.rasterCollections.rasters.list
+    , module Network.Google.API.Mapsengine.RasterCollections.Rasters.List
+
+    -- ** mapsengine.rasters.files.insert
+    , module Network.Google.API.Mapsengine.Rasters.Files.Insert
+
+    -- ** mapsengine.rasters.parents.list
+    , module Network.Google.API.Mapsengine.Rasters.Parents.List
+
+    -- ** mapsengine.rasters.permissions.batchDelete
+    , module Network.Google.API.Mapsengine.Rasters.Permissions.BatchDelete
+
+    -- ** mapsengine.rasters.permissions.batchUpdate
+    , module Network.Google.API.Mapsengine.Rasters.Permissions.BatchUpdate
+
+    -- ** mapsengine.rasters.permissions.list
+    , module Network.Google.API.Mapsengine.Rasters.Permissions.List
+
+    -- ** mapsengine.tables.features.batchDelete
+    , module Network.Google.API.Mapsengine.Tables.Features.BatchDelete
+
+    -- ** mapsengine.tables.features.batchInsert
+    , module Network.Google.API.Mapsengine.Tables.Features.BatchInsert
+
+    -- ** mapsengine.tables.features.batchPatch
+    , module Network.Google.API.Mapsengine.Tables.Features.BatchPatch
+
+    -- ** mapsengine.tables.features.get
+    , module Network.Google.API.Mapsengine.Tables.Features.Get
+
+    -- ** mapsengine.tables.features.list
+    , module Network.Google.API.Mapsengine.Tables.Features.List
+
+    -- ** mapsengine.tables.files.insert
+    , module Network.Google.API.Mapsengine.Tables.Files.Insert
+
+    -- ** mapsengine.tables.parents.list
+    , module Network.Google.API.Mapsengine.Tables.Parents.List
+
+    -- ** mapsengine.tables.permissions.batchDelete
+    , module Network.Google.API.Mapsengine.Tables.Permissions.BatchDelete
+
+    -- ** mapsengine.tables.permissions.batchUpdate
+    , module Network.Google.API.Mapsengine.Tables.Permissions.BatchUpdate
+
+    -- ** mapsengine.tables.permissions.list
+    , module Network.Google.API.Mapsengine.Tables.Permissions.List
 
     -- * Types
 
-    -- ** AcquisitionTime
-    , AcquisitionTime
-    , acquisitionTime
-    , atStart
-    , atPrecision
-    , atEnd
+    -- ** RasterCollectionsRastersBatchInsertRequest
+    , RasterCollectionsRastersBatchInsertRequest
+    , rasterCollectionsRastersBatchInsertRequest
+    , rcrbirIds
 
-    -- ** AcquisitionTimePrecision
-    , AcquisitionTimePrecision (..)
+    -- ** PublishedMap
+    , PublishedMap
+    , publishedMap
+    , pmDefaultViewport
+    , pmContents
+    , pmName
+    , pmId
+    , pmProjectId
+    , pmDescription
 
-    -- ** Asset
-    , Asset
-    , asset
-    , aCreationTime
-    , aWritersCanEditPermissions
-    , aEtag
-    , aCreatorEmail
-    , aLastModifiedTime
-    , aLastModifierEmail
-    , aName
-    , aBbox
-    , aResource
-    , aId
-    , aProjectId
-    , aType
-    , aDescription
-    , aTags
+    -- ** RasterCollectionsRastersList'Role
+    , RasterCollectionsRastersList'Role (..)
 
-    -- ** AssetType
-    , AssetType (..)
+    -- ** Map
+    , Map
+    , map'
+    , mapCreationTime
+    , mapWritersCanEditPermissions
+    , mapEtag
+    , mapDefaultViewport
+    , mapContents
+    , mapPublishingStatus
+    , mapCreatorEmail
+    , mapLastModifiedTime
+    , mapLastModifierEmail
+    , mapVersions
+    , mapName
+    , mapBbox
+    , mapProcessingStatus
+    , mapId
+    , mapProjectId
+    , mapDraftAccessList
+    , mapPublishedAccessList
+    , mapDescription
+    , mapTags
 
-    -- ** AssetsListResponse
-    , AssetsListResponse
-    , assetsListResponse
-    , alrNextPageToken
-    , alrAssets
+    -- ** TablesListResponse
+    , TablesListResponse
+    , tablesListResponse
+    , tlrNextPageToken
+    , tlrTables
 
     -- ** Border
     , Border
@@ -124,16 +183,23 @@ module Network.Google.Map.Engine
     , bWidth
     , bOpacity
 
-    -- ** Color
-    , Color
-    , color
-    , cColor
-    , cOpacity
+    -- ** AcquisitionTime
+    , AcquisitionTime
+    , acquisitionTime
+    , atStart
+    , atPrecision
+    , atEnd
 
-    -- ** Datasource
-    , Datasource
-    , datasource
-    , dId
+    -- ** IconStyle
+    , IconStyle
+    , iconStyle
+    , isScaledShape
+    , isScalingFunction
+    , isName
+    , isId
+
+    -- ** MapLayerType
+    , MapLayerType (..)
 
     -- ** DisplayRule
     , DisplayRule
@@ -145,23 +211,92 @@ module Network.Google.Map.Engine
     , drName
     , drLineOptions
 
-    -- ** Feature
-    , Feature
-    , feature
-    , fGeometry
-    , fType
-    , fProperties
+    -- ** GeoJsonMultiLineString
+    , GeoJsonMultiLineString
+    , geoJsonMultiLineString
+    , gjmlsCoordinates
+    , gjmlsType
+
+    -- ** LayerProcessingStatus
+    , LayerProcessingStatus (..)
+
+    -- ** ScalingFunction
+    , ScalingFunction
+    , scalingFunction
+    , sfValueRange
+    , sfSizeRange
+    , sfScalingType
+    , sfColumn
+
+    -- ** RasterCollectionsRastersListResponse
+    , RasterCollectionsRastersListResponse
+    , rasterCollectionsRastersListResponse
+    , rcrlrNextPageToken
+    , rcrlrRasters
+
+    -- ** GeoJsonPointType
+    , GeoJsonPointType (..)
 
     -- ** FeatureInfo
     , FeatureInfo
     , featureInfo
     , fiContent
 
-    -- ** FeaturesBatchDeleteRequest
-    , FeaturesBatchDeleteRequest
-    , featuresBatchDeleteRequest
-    , fbdrPrimaryKeys
-    , fbdrGxIds
+    -- ** TableProcessingStatus
+    , TableProcessingStatus (..)
+
+    -- ** MapPublishingStatus
+    , MapPublishingStatus (..)
+
+    -- ** GeoJsonPolygonType
+    , GeoJsonPolygonType (..)
+
+    -- ** SizeRange
+    , SizeRange
+    , sizeRange
+    , srMax
+    , srMin
+
+    -- ** TablesFeaturesGet'Version
+    , TablesFeaturesGet'Version (..)
+
+    -- ** Alt
+    , Alt (..)
+
+    -- ** MapFolder
+    , MapFolder
+    , mapFolder
+    , mfExpandable
+    , mfDefaultViewport
+    , mfContents
+    , mfVisibility
+    , mfKey
+    , mfName
+    , mfType
+
+    -- ** ZoomLevels
+    , ZoomLevels
+    , zoomLevels
+    , zlMax
+    , zlMin
+
+    -- ** RasterCollectionsRaster
+    , RasterCollectionsRaster
+    , rasterCollectionsRaster
+    , rcrCreationTime
+    , rcrRasterType
+    , rcrLastModifiedTime
+    , rcrName
+    , rcrBbox
+    , rcrId
+    , rcrProjectId
+    , rcrDescription
+    , rcrTags
+
+    -- ** Datasource
+    , Datasource
+    , datasource
+    , dId
 
     -- ** FeaturesBatchInsertRequest
     , FeaturesBatchInsertRequest
@@ -169,30 +304,11 @@ module Network.Google.Map.Engine
     , fbirFeatures
     , fbirNormalizeGeometries
 
-    -- ** FeaturesBatchPatchRequest
-    , FeaturesBatchPatchRequest
-    , featuresBatchPatchRequest
-    , fbprFeatures
-    , fbprNormalizeGeometries
+    -- ** MapKmlLinkType
+    , MapKmlLinkType (..)
 
-    -- ** FeaturesListResponse
-    , FeaturesListResponse
-    , featuresListResponse
-    , flrNextPageToken
-    , flrAllowedQueriesPerSecond
-    , flrSchema
-    , flrFeatures
-    , flrType
-
-    -- ** File
-    , File
-    , file
-    , fSize
-    , fUploadStatus
-    , fFilename
-
-    -- ** FileUploadStatus
-    , FileUploadStatus (..)
+    -- ** MapProcessingStatus
+    , MapProcessingStatus (..)
 
     -- ** Filter
     , Filter
@@ -201,39 +317,11 @@ module Network.Google.Map.Engine
     , fValue
     , fColumn
 
-    -- ** FilterOperator
-    , FilterOperator (..)
-
-    -- ** GeoJsonGeometry
-    , GeoJsonGeometry
-    , geoJsonGeometry
-
-    -- ** GeoJsonGeometryCollection
-    , GeoJsonGeometryCollection
-    , geoJsonGeometryCollection
-    , gjgcGeometries
-    , gjgcType
-
-    -- ** GeoJsonGeometryCollectionType
-    , GeoJsonGeometryCollectionType (..)
-
-    -- ** GeoJsonLineString
-    , GeoJsonLineString
-    , geoJsonLineString
-    , gjlsCoordinates
-    , gjlsType
-
-    -- ** GeoJsonLineStringType
-    , GeoJsonLineStringType (..)
-
-    -- ** GeoJsonMultiLineString
-    , GeoJsonMultiLineString
-    , geoJsonMultiLineString
-    , gjmlsCoordinates
-    , gjmlsType
-
-    -- ** GeoJsonMultiLineStringType
-    , GeoJsonMultiLineStringType (..)
+    -- ** GeoJsonMultiPolygon
+    , GeoJsonMultiPolygon
+    , geoJsonMultiPolygon
+    , gjmpCoordinates
+    , gjmpType
 
     -- ** GeoJsonMultiPoint
     , GeoJsonMultiPoint
@@ -241,77 +329,28 @@ module Network.Google.Map.Engine
     , gjsonmpCoordinates
     , gjsonmpType
 
-    -- ** GeoJsonMultiPointType
-    , GeoJsonMultiPointType (..)
-
-    -- ** GeoJsonMultiPolygon
-    , GeoJsonMultiPolygon
-    , geoJsonMultiPolygon
-    , gjmpCoordinates
-    , gjmpType
-
-    -- ** GeoJsonMultiPolygonType
-    , GeoJsonMultiPolygonType (..)
-
-    -- ** GeoJsonPoint
-    , GeoJsonPoint
-    , geoJsonPoint
-    , gjpCoordinates
-    , gjpType
-
-    -- ** GeoJsonPointType
-    , GeoJsonPointType (..)
-
-    -- ** GeoJsonPolygon
-    , GeoJsonPolygon
-    , geoJsonPolygon
-    , gjsonpCoordinates
-    , gjsonpType
-
-    -- ** GeoJsonPolygonType
-    , GeoJsonPolygonType (..)
-
-    -- ** GeoJsonProperties
-    , GeoJsonProperties
-    , geoJsonProperties
-
-    -- ** Icon
-    , Icon
-    , icon
-    , iName
-    , iId
-    , iDescription
-
-    -- ** IconStyle
-    , IconStyle
-    , iconStyle
-    , isScaledShape
-    , isScalingFunction
-    , isName
-    , isId
-
-    -- ** IconsListResponse
-    , IconsListResponse
-    , iconsListResponse
-    , ilrNextPageToken
-    , ilrIcons
-
-    -- ** LabelStyle
-    , LabelStyle
-    , labelStyle
-    , lsFontStyle
-    , lsColor
-    , lsSize
-    , lsOpacity
-    , lsOutline
-    , lsFontWeight
-    , lsColumn
-
-    -- ** LabelStyleFontStyle
-    , LabelStyleFontStyle (..)
-
-    -- ** LabelStyleFontWeight
-    , LabelStyleFontWeight (..)
+    -- ** Raster
+    , Raster
+    , raster
+    , rCreationTime
+    , rWritersCanEditPermissions
+    , rMaskType
+    , rEtag
+    , rCreatorEmail
+    , rRasterType
+    , rLastModifiedTime
+    , rLastModifierEmail
+    , rAcquisitionTime
+    , rName
+    , rBbox
+    , rProcessingStatus
+    , rFiles
+    , rId
+    , rProjectId
+    , rDraftAccessList
+    , rDescription
+    , rAttribution
+    , rTags
 
     -- ** Layer
     , Layer
@@ -337,196 +376,14 @@ module Network.Google.Map.Engine
     , lDescription
     , lTags
 
-    -- ** LayerDatasourceType
-    , LayerDatasourceType (..)
-
-    -- ** LayerLayerType
-    , LayerLayerType (..)
-
-    -- ** LayerProcessingStatus
-    , LayerProcessingStatus (..)
-
-    -- ** LayerPublishingStatus
-    , LayerPublishingStatus (..)
-
-    -- ** LayersListResponse
-    , LayersListResponse
-    , layersListResponse
-    , llrNextPageToken
-    , llrLayers
-
-    -- ** LineStyle
-    , LineStyle
-    , lineStyle
-    , lsStroke
-    , lsBorder
-    , lsDash
-    , lsLabel
-
-    -- ** LineStyleStroke
-    , LineStyleStroke
-    , lineStyleStroke
-    , lssColor
-    , lssWidth
-    , lssOpacity
-
-    -- ** Map
-    , Map
-    , map'
-    , mapCreationTime
-    , mapWritersCanEditPermissions
-    , mapEtag
-    , mapDefaultViewport
-    , mapContents
-    , mapPublishingStatus
-    , mapCreatorEmail
-    , mapLastModifiedTime
-    , mapLastModifierEmail
-    , mapVersions
-    , mapName
-    , mapBbox
-    , mapProcessingStatus
-    , mapId
-    , mapProjectId
-    , mapDraftAccessList
-    , mapPublishedAccessList
-    , mapDescription
-    , mapTags
-
-    -- ** MapFolder
-    , MapFolder
-    , mapFolder
-    , mfExpandable
-    , mfDefaultViewport
-    , mfContents
-    , mfVisibility
-    , mfKey
-    , mfName
-    , mfType
-
-    -- ** MapFolderType
-    , MapFolderType (..)
-
-    -- ** MapItem
-    , MapItem
-    , mapItem
-
-    -- ** MapKmlLink
-    , MapKmlLink
-    , mapKmlLink
-    , mklDefaultViewport
-    , mklVisibility
-    , mklName
-    , mklType
-    , mklKmlUrl
-
-    -- ** MapKmlLinkType
-    , MapKmlLinkType (..)
-
-    -- ** MapLayer
-    , MapLayer
-    , mapLayer
-    , mlDefaultViewport
-    , mlVisibility
-    , mlKey
-    , mlName
-    , mlId
-    , mlType
-
-    -- ** MapLayerType
-    , MapLayerType (..)
-
-    -- ** MapProcessingStatus
-    , MapProcessingStatus (..)
-
-    -- ** MapPublishingStatus
-    , MapPublishingStatus (..)
-
-    -- ** MapsListResponse
-    , MapsListResponse
-    , mapsListResponse
-    , mlrMaps
-    , mlrNextPageToken
-
-    -- ** Parent
-    , Parent
-    , parent
-    , parId
-
-    -- ** ParentsListResponse
-    , ParentsListResponse
-    , parentsListResponse
-    , plrNextPageToken
-    , plrParents
-
-    -- ** Permission
-    , Permission
-    , permission
-    , pRole
-    , pId
-    , pType
-    , pDiscoverable
-
-    -- ** PermissionRole
-    , PermissionRole (..)
-
-    -- ** PermissionType
-    , PermissionType (..)
-
-    -- ** PermissionsBatchDeleteRequest
-    , PermissionsBatchDeleteRequest
-    , permissionsBatchDeleteRequest
-    , pbdrIds
-
-    -- ** PermissionsBatchDeleteResponse
-    , PermissionsBatchDeleteResponse
-    , permissionsBatchDeleteResponse
-
-    -- ** PermissionsBatchUpdateRequest
-    , PermissionsBatchUpdateRequest
-    , permissionsBatchUpdateRequest
-    , pburPermissions
-
-    -- ** PermissionsBatchUpdateResponse
-    , PermissionsBatchUpdateResponse
-    , permissionsBatchUpdateResponse
-
-    -- ** PermissionsListResponse
-    , PermissionsListResponse
-    , permissionsListResponse
-    , plrPermissions
+    -- ** GeoJsonMultiPointType
+    , GeoJsonMultiPointType (..)
 
     -- ** PointStyle
     , PointStyle
     , pointStyle
     , psIcon
     , psLabel
-
-    -- ** PolygonStyle
-    , PolygonStyle
-    , polygonStyle
-    , pStroke
-    , pFill
-    , pLabel
-
-    -- ** ProcessResponse
-    , ProcessResponse
-    , processResponse
-
-    -- ** Project
-    , Project
-    , project
-    , proName
-    , proId
-
-    -- ** ProjectsListResponse
-    , ProjectsListResponse
-    , projectsListResponse
-    , plrProjects
-
-    -- ** PublishResponse
-    , PublishResponse
-    , publishResponse
 
     -- ** PublishedLayer
     , PublishedLayer
@@ -540,50 +397,201 @@ module Network.Google.Map.Engine
     -- ** PublishedLayerLayerType
     , PublishedLayerLayerType (..)
 
+    -- ** FilterOperator
+    , FilterOperator (..)
+
+    -- ** PolygonStyle
+    , PolygonStyle
+    , polygonStyle
+    , pStroke
+    , pFill
+    , pLabel
+
+    -- ** RasterRasterType
+    , RasterRasterType (..)
+
+    -- ** GeoJsonMultiPolygonType
+    , GeoJsonMultiPolygonType (..)
+
+    -- ** Permission
+    , Permission
+    , permission
+    , pRole
+    , pId
+    , pType
+    , pDiscoverable
+
+    -- ** RasterCollectionsRastersBatchInsertResponse
+    , RasterCollectionsRastersBatchInsertResponse
+    , rasterCollectionsRastersBatchInsertResponse
+
+    -- ** FeaturesListResponse
+    , FeaturesListResponse
+    , featuresListResponse
+    , flrNextPageToken
+    , flrAllowedQueriesPerSecond
+    , flrSchema
+    , flrFeatures
+    , flrType
+
+    -- ** LineStyleStroke
+    , LineStyleStroke
+    , lineStyleStroke
+    , lssColor
+    , lssWidth
+    , lssOpacity
+
+    -- ** ParentsListResponse
+    , ParentsListResponse
+    , parentsListResponse
+    , plrNextPageToken
+    , plrParents
+
     -- ** PublishedLayersListResponse
     , PublishedLayersListResponse
     , publishedLayersListResponse
     , pllrNextPageToken
     , pllrLayers
 
-    -- ** PublishedMap
-    , PublishedMap
-    , publishedMap
-    , pmDefaultViewport
-    , pmContents
-    , pmName
-    , pmId
-    , pmProjectId
-    , pmDescription
+    -- ** RastersListResponse
+    , RastersListResponse
+    , rastersListResponse
+    , rlrNextPageToken
+    , rlrRasters
 
-    -- ** PublishedMapsListResponse
-    , PublishedMapsListResponse
-    , publishedMapsListResponse
-    , pmlrMaps
-    , pmlrNextPageToken
+    -- ** GeoJsonPoint
+    , GeoJsonPoint
+    , geoJsonPoint
+    , gjpCoordinates
+    , gjpType
 
-    -- ** Raster
-    , Raster
-    , raster
-    , rCreationTime
-    , rWritersCanEditPermissions
-    , rMaskType
-    , rEtag
-    , rCreatorEmail
-    , rRasterType
-    , rLastModifiedTime
-    , rLastModifierEmail
-    , rAcquisitionTime
-    , rName
-    , rBbox
-    , rProcessingStatus
-    , rFiles
-    , rId
-    , rProjectId
-    , rDraftAccessList
-    , rDescription
-    , rAttribution
-    , rTags
+    -- ** PermissionsListResponse
+    , PermissionsListResponse
+    , permissionsListResponse
+    , plrPermissions
+
+    -- ** RasterCollectionProcessingStatus
+    , RasterCollectionProcessingStatus (..)
+
+    -- ** LineStyle
+    , LineStyle
+    , lineStyle
+    , lsStroke
+    , lsBorder
+    , lsDash
+    , lsLabel
+
+    -- ** GeoJsonPolygon
+    , GeoJsonPolygon
+    , geoJsonPolygon
+    , gjsonpCoordinates
+    , gjsonpType
+
+    -- ** LabelStyleFontWeight
+    , LabelStyleFontWeight (..)
+
+    -- ** GeoJsonGeometryCollection
+    , GeoJsonGeometryCollection
+    , geoJsonGeometryCollection
+    , gjgcGeometries
+    , gjgcType
+
+    -- ** LayersListResponse
+    , LayersListResponse
+    , layersListResponse
+    , llrNextPageToken
+    , llrLayers
+
+    -- ** PermissionsBatchDeleteRequest
+    , PermissionsBatchDeleteRequest
+    , permissionsBatchDeleteRequest
+    , pbdrIds
+
+    -- ** GeoJsonMultiLineStringType
+    , GeoJsonMultiLineStringType (..)
+
+    -- ** PermissionsBatchUpdateRequest
+    , PermissionsBatchUpdateRequest
+    , permissionsBatchUpdateRequest
+    , pburPermissions
+
+    -- ** PermissionRole
+    , PermissionRole (..)
+
+    -- ** FeaturesBatchPatchRequest
+    , FeaturesBatchPatchRequest
+    , featuresBatchPatchRequest
+    , fbprFeatures
+    , fbprNormalizeGeometries
+
+    -- ** ValueRange
+    , ValueRange
+    , valueRange
+    , vrMax
+    , vrMin
+
+    -- ** Feature
+    , Feature
+    , feature
+    , fGeometry
+    , fType
+    , fProperties
+
+    -- ** GeoJsonProperties
+    , GeoJsonProperties
+    , geoJsonProperties
+
+    -- ** Parent
+    , Parent
+    , parent
+    , parId
+
+    -- ** ProjectsListResponse
+    , ProjectsListResponse
+    , projectsListResponse
+    , plrProjects
+
+    -- ** RasterProcessingStatus
+    , RasterProcessingStatus (..)
+
+    -- ** MapLayer
+    , MapLayer
+    , mapLayer
+    , mlDefaultViewport
+    , mlVisibility
+    , mlKey
+    , mlName
+    , mlId
+    , mlType
+
+    -- ** GeoJsonGeometry
+    , GeoJsonGeometry
+    , geoJsonGeometry
+
+    -- ** RasterCollectionsListResponse
+    , RasterCollectionsListResponse
+    , rasterCollectionsListResponse
+    , rclrNextPageToken
+    , rclrRasterCollections
+
+    -- ** ScaledShapeShape
+    , ScaledShapeShape (..)
+
+    -- ** FileUploadStatus
+    , FileUploadStatus (..)
+
+    -- ** AssetsListResponse
+    , AssetsListResponse
+    , assetsListResponse
+    , alrNextPageToken
+    , alrAssets
+
+    -- ** GeoJsonGeometryCollectionType
+    , GeoJsonGeometryCollectionType (..)
+
+    -- ** PublishResponse
+    , PublishResponse
+    , publishResponse
 
     -- ** RasterCollection
     , RasterCollection
@@ -606,66 +614,80 @@ module Network.Google.Map.Engine
     , rcAttribution
     , rcTags
 
-    -- ** RasterCollectionProcessingStatus
-    , RasterCollectionProcessingStatus (..)
+    -- ** GeoJsonLineStringType
+    , GeoJsonLineStringType (..)
+
+    -- ** Project
+    , Project
+    , project
+    , proName
+    , proId
+
+    -- ** LayerPublishingStatus
+    , LayerPublishingStatus (..)
+
+    -- ** LayerDatasourceType
+    , LayerDatasourceType (..)
 
     -- ** RasterCollectionRasterType
     , RasterCollectionRasterType (..)
 
-    -- ** RasterCollectionsListResponse
-    , RasterCollectionsListResponse
-    , rasterCollectionsListResponse
-    , rclrNextPageToken
-    , rclrRasterCollections
+    -- ** Color
+    , Color
+    , color
+    , cColor
+    , cOpacity
 
-    -- ** RasterCollectionsRaster
-    , RasterCollectionsRaster
-    , rasterCollectionsRaster
-    , rcrCreationTime
-    , rcrRasterType
-    , rcrLastModifiedTime
-    , rcrName
-    , rcrBbox
-    , rcrId
-    , rcrProjectId
-    , rcrDescription
-    , rcrTags
+    -- ** VectorStyleType
+    , VectorStyleType (..)
 
-    -- ** RasterCollectionsRasterBatchDeleteRequest
-    , RasterCollectionsRasterBatchDeleteRequest
-    , rasterCollectionsRasterBatchDeleteRequest
-    , rcrbdrIds
+    -- ** Asset
+    , Asset
+    , asset
+    , aCreationTime
+    , aWritersCanEditPermissions
+    , aEtag
+    , aCreatorEmail
+    , aLastModifiedTime
+    , aLastModifierEmail
+    , aName
+    , aBbox
+    , aResource
+    , aId
+    , aProjectId
+    , aType
+    , aDescription
+    , aTags
 
     -- ** RasterCollectionsRastersBatchDeleteResponse
     , RasterCollectionsRastersBatchDeleteResponse
     , rasterCollectionsRastersBatchDeleteResponse
 
-    -- ** RasterCollectionsRastersBatchInsertRequest
-    , RasterCollectionsRastersBatchInsertRequest
-    , rasterCollectionsRastersBatchInsertRequest
-    , rcrbirIds
+    -- ** PermissionType
+    , PermissionType (..)
 
-    -- ** RasterCollectionsRastersBatchInsertResponse
-    , RasterCollectionsRastersBatchInsertResponse
-    , rasterCollectionsRastersBatchInsertResponse
+    -- ** TableColumn
+    , TableColumn
+    , tableColumn
+    , tcName
+    , tcType
 
-    -- ** RasterCollectionsRastersListResponse
-    , RasterCollectionsRastersListResponse
-    , rasterCollectionsRastersListResponse
-    , rcrlrNextPageToken
-    , rcrlrRasters
+    -- ** ProcessResponse
+    , ProcessResponse
+    , processResponse
 
-    -- ** RasterProcessingStatus
-    , RasterProcessingStatus (..)
+    -- ** LayerLayerType
+    , LayerLayerType (..)
 
-    -- ** RasterRasterType
-    , RasterRasterType (..)
+    -- ** AssetType
+    , AssetType (..)
 
-    -- ** RastersListResponse
-    , RastersListResponse
-    , rastersListResponse
-    , rlrNextPageToken
-    , rlrRasters
+    -- ** Icon
+    , Icon
+    , icon
+    , iName
+    , iId
+    , iDescription
 
     -- ** ScaledShape
     , ScaledShape
@@ -674,16 +696,102 @@ module Network.Google.Map.Engine
     , ssFill
     , ssShape
 
-    -- ** ScaledShapeShape
-    , ScaledShapeShape (..)
+    -- ** TableColumnType
+    , TableColumnType (..)
 
-    -- ** ScalingFunction
-    , ScalingFunction
-    , scalingFunction
-    , sfValueRange
-    , sfSizeRange
-    , sfScalingType
-    , sfColumn
+    -- ** FeaturesBatchDeleteRequest
+    , FeaturesBatchDeleteRequest
+    , featuresBatchDeleteRequest
+    , fbdrPrimaryKeys
+    , fbdrGxIds
+
+    -- ** GeoJsonLineString
+    , GeoJsonLineString
+    , geoJsonLineString
+    , gjlsCoordinates
+    , gjlsType
+
+    -- ** Table
+    , Table
+    , table
+    , tabCreationTime
+    , tabWritersCanEditPermissions
+    , tabEtag
+    , tabCreatorEmail
+    , tabLastModifiedTime
+    , tabSchema
+    , tabLastModifierEmail
+    , tabName
+    , tabBbox
+    , tabProcessingStatus
+    , tabFiles
+    , tabId
+    , tabProjectId
+    , tabDraftAccessList
+    , tabPublishedAccessList
+    , tabSourceEncoding
+    , tabDescription
+    , tabTags
+
+    -- ** PermissionsBatchUpdateResponse
+    , PermissionsBatchUpdateResponse
+    , permissionsBatchUpdateResponse
+
+    -- ** MapKmlLink
+    , MapKmlLink
+    , mapKmlLink
+    , mklDefaultViewport
+    , mklVisibility
+    , mklName
+    , mklType
+    , mklKmlUrl
+
+    -- ** PermissionsBatchDeleteResponse
+    , PermissionsBatchDeleteResponse
+    , permissionsBatchDeleteResponse
+
+    -- ** VectorStyle
+    , VectorStyle
+    , vectorStyle
+    , vsDisplayRules
+    , vsFeatureInfo
+    , vsType
+
+    -- ** PublishedMapsListResponse
+    , PublishedMapsListResponse
+    , publishedMapsListResponse
+    , pmlrMaps
+    , pmlrNextPageToken
+
+    -- ** LabelStyleFontStyle
+    , LabelStyleFontStyle (..)
+
+    -- ** TablesFeaturesList'Version
+    , TablesFeaturesList'Version (..)
+
+    -- ** File
+    , File
+    , file
+    , fSize
+    , fUploadStatus
+    , fFilename
+
+    -- ** MapsListResponse
+    , MapsListResponse
+    , mapsListResponse
+    , mlrMaps
+    , mlrNextPageToken
+
+    -- ** LabelStyle
+    , LabelStyle
+    , labelStyle
+    , lsFontStyle
+    , lsColor
+    , lsSize
+    , lsOpacity
+    , lsOutline
+    , lsFontWeight
+    , lsColumn
 
     -- ** ScalingFunctionScalingType
     , ScalingFunctionScalingType (..)
@@ -695,75 +803,62 @@ module Network.Google.Map.Engine
     , sColumns
     , sPrimaryGeometry
 
-    -- ** SizeRange
-    , SizeRange
-    , sizeRange
-    , srMax
-    , srMin
+    -- ** MapFolderType
+    , MapFolderType (..)
 
-    -- ** Table
-    , Table
-    , table
-    , tCreationTime
-    , tWritersCanEditPermissions
-    , tEtag
-    , tCreatorEmail
-    , tLastModifiedTime
-    , tSchema
-    , tLastModifierEmail
-    , tName
-    , tBbox
-    , tProcessingStatus
-    , tFiles
-    , tId
-    , tProjectId
-    , tDraftAccessList
-    , tPublishedAccessList
-    , tSourceEncoding
-    , tDescription
-    , tTags
+    -- ** MapItem
+    , MapItem
+    , mapItem
 
-    -- ** TableColumn
-    , TableColumn
-    , tableColumn
-    , tcName
-    , tcType
+    -- ** RasterCollectionsRasterBatchDeleteRequest
+    , RasterCollectionsRasterBatchDeleteRequest
+    , rasterCollectionsRasterBatchDeleteRequest
+    , rcrbdrIds
 
-    -- ** TableColumnType
-    , TableColumnType (..)
+    -- ** AcquisitionTimePrecision
+    , AcquisitionTimePrecision (..)
 
-    -- ** TableProcessingStatus
-    , TableProcessingStatus (..)
-
-    -- ** TablesListResponse
-    , TablesListResponse
-    , tablesListResponse
-    , tlrNextPageToken
-    , tlrTables
-
-    -- ** ValueRange
-    , ValueRange
-    , valueRange
-    , vrMax
-    , vrMin
-
-    -- ** VectorStyle
-    , VectorStyle
-    , vectorStyle
-    , vsDisplayRules
-    , vsFeatureInfo
-    , vsType
-
-    -- ** VectorStyleType
-    , VectorStyleType (..)
-
-    -- ** ZoomLevels
-    , ZoomLevels
-    , zoomLevels
-    , zlMax
-    , zlMin
+    -- ** IconsListResponse
+    , IconsListResponse
+    , iconsListResponse
+    , ilrNextPageToken
+    , ilrIcons
     ) where
 
+import           Network.Google.API.Mapsengine.Assets.Parents.List
+import           Network.Google.API.Mapsengine.Assets.Permissions.List
+import           Network.Google.API.Mapsengine.Layers.Parents.List
+import           Network.Google.API.Mapsengine.Layers.Permissions.BatchDelete
+import           Network.Google.API.Mapsengine.Layers.Permissions.BatchUpdate
+import           Network.Google.API.Mapsengine.Layers.Permissions.List
+import           Network.Google.API.Mapsengine.Maps.Permissions.BatchDelete
+import           Network.Google.API.Mapsengine.Maps.Permissions.BatchUpdate
+import           Network.Google.API.Mapsengine.Maps.Permissions.List
+import           Network.Google.API.Mapsengine.Projects.Icons.Create
+import           Network.Google.API.Mapsengine.Projects.Icons.Get
+import           Network.Google.API.Mapsengine.Projects.Icons.List
+import           Network.Google.API.Mapsengine.RasterCollections.Parents.List
+import           Network.Google.API.Mapsengine.RasterCollections.Permissions.BatchDelete
+import           Network.Google.API.Mapsengine.RasterCollections.Permissions.BatchUpdate
+import           Network.Google.API.Mapsengine.RasterCollections.Permissions.List
+import           Network.Google.API.Mapsengine.RasterCollections.Rasters.BatchDelete
+import           Network.Google.API.Mapsengine.RasterCollections.Rasters.BatchInsert
+import           Network.Google.API.Mapsengine.RasterCollections.Rasters.List
+import           Network.Google.API.Mapsengine.Rasters.Files.Insert
+import           Network.Google.API.Mapsengine.Rasters.Parents.List
+import           Network.Google.API.Mapsengine.Rasters.Permissions.BatchDelete
+import           Network.Google.API.Mapsengine.Rasters.Permissions.BatchUpdate
+import           Network.Google.API.Mapsengine.Rasters.Permissions.List
+import           Network.Google.API.Mapsengine.Tables.Features.BatchDelete
+import           Network.Google.API.Mapsengine.Tables.Features.BatchInsert
+import           Network.Google.API.Mapsengine.Tables.Features.BatchPatch
+import           Network.Google.API.Mapsengine.Tables.Features.Get
+import           Network.Google.API.Mapsengine.Tables.Features.List
+import           Network.Google.API.Mapsengine.Tables.Files.Insert
+import           Network.Google.API.Mapsengine.Tables.Parents.List
+import           Network.Google.API.Mapsengine.Tables.Permissions.BatchDelete
+import           Network.Google.API.Mapsengine.Tables.Permissions.BatchUpdate
+import           Network.Google.API.Mapsengine.Tables.Permissions.List
 import           Network.Google.Map.Engine.Types
 import           Network.Google.Prelude
 
@@ -772,703 +867,40 @@ TODO
 -}
 
 type MapEngine =
-     MapsAPI :<|> TablesAPI :<|> LayersAPI :<|> RastersAPI
-       :<|> AssetsAPI
-       :<|> ProjectsAPI
-       :<|> RasterCollectionsAPI
+     RasterCollectionsRastersListAPI :<|>
+       MapsPermissionsBatchDeleteAPI
+       :<|> ProjectsIconsListAPI
+       :<|> TablesFeaturesBatchPatchAPI
+       :<|> RasterCollectionsPermissionsBatchDeleteAPI
+       :<|> MapsPermissionsListAPI
+       :<|> TablesFilesInsertAPI
+       :<|> LayersPermissionsListAPI
+       :<|> RastersPermissionsListAPI
+       :<|> MapsPermissionsBatchUpdateAPI
+       :<|> RasterCollectionsParentsListAPI
+       :<|> LayersPermissionsBatchUpdateAPI
+       :<|> AssetsPermissionsListAPI
+       :<|> RastersPermissionsBatchUpdateAPI
+       :<|> RasterCollectionsRastersBatchDeleteAPI
+       :<|> TablesFeaturesBatchInsertAPI
+       :<|> RastersFilesInsertAPI
+       :<|> TablesFeaturesBatchDeleteAPI
+       :<|> TablesPermissionsBatchDeleteAPI
+       :<|> RasterCollectionsPermissionsListAPI
+       :<|> AssetsParentsListAPI
+       :<|> LayersParentsListAPI
+       :<|> RastersParentsListAPI
+       :<|> RasterCollectionsPermissionsBatchUpdateAPI
+       :<|> TablesPermissionsBatchUpdateAPI
+       :<|> TablesFeaturesListAPI
+       :<|> TablesParentsListAPI
+       :<|> TablesFeaturesGetAPI
+       :<|> ProjectsIconsCreateAPI
+       :<|> ProjectsIconsGetAPI
+       :<|> RastersPermissionsBatchDeleteAPI
+       :<|> RasterCollectionsRastersBatchInsertAPI
+       :<|> LayersPermissionsBatchDeleteAPI
+       :<|> TablesPermissionsListAPI
 
-type MapsAPI = PermissionsAPI
-
-type PermissionsAPI =
-     PermissionsList :<|> PermissionsBatchUpdate :<|>
-       PermissionsBatchDelete
-
--- | Return all of the permissions for the specified asset.
-type PermissionsList =
-     "mapsengine" :>
-       "v1" :>
-         "maps" :>
-           Capture "id" Text :>
-             "permissions" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Get '[JSON] PermissionsListResponse
-
--- | Add or update permission entries to an already existing asset. An asset
--- can hold up to 20 different permission entries. Each batchInsert request
--- is atomic.
-type PermissionsBatchUpdate =
-     "mapsengine" :>
-       "v1" :>
-         "maps" :>
-           Capture "id" Text :>
-             "permissions" :>
-               "batchUpdate" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Post '[JSON] PermissionsBatchUpdateResponse
-
--- | Remove permission entries from an already existing asset.
-type PermissionsBatchDelete =
-     "mapsengine" :>
-       "v1" :>
-         "maps" :>
-           Capture "id" Text :>
-             "permissions" :>
-               "batchDelete" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Post '[JSON] PermissionsBatchDeleteResponse
-
-type TablesAPI =
-     ParentsAPI :<|> FeaturesAPI :<|> FilesAPI :<|>
-       PermissionsAPI
-
-type ParentsAPI = ParentsList
-
--- | Return all parent ids of the specified table.
-type ParentsList =
-     "mapsengine" :>
-       "v1" :>
-         "tables" :>
-           Capture "id" Text :>
-             "parents" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Get '[JSON] ParentsListResponse
-
-type FeaturesAPI =
-     FeaturesList :<|> FeaturesBatchInsert :<|>
-       FeaturesGet
-       :<|> FeaturesBatchPatch
-       :<|> FeaturesBatchDelete
-
--- | Return all features readable by the current user.
-type FeaturesList =
-     "mapsengine" :>
-       "v1" :>
-         "tables" :>
-           Capture "id" Text :>
-             "features" :>
-               QueryParam "include" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "where" Text :>
-                       QueryParam "orderBy" Text :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "version" Text :>
-                               QueryParam "limit" Word32 :>
-                                 QueryParam "pageToken" Text :>
-                                   QueryParam "select" Text :>
-                                     QueryParam "oauth_token" Text :>
-                                       QueryParam "intersects" Text :>
-                                         QueryParam "maxResults" Word32 :>
-                                           QueryParam "fields" Text :>
-                                             QueryParam "alt" Text :>
-                                               Get '[JSON] FeaturesListResponse
-
--- | Append features to an existing table. A single batchInsert request can
--- create: - Up to 50 features. - A combined total of 10 000 vertices.
--- Feature limits are documented in the Supported data formats and limits
--- article of the Google Maps Engine help center. Note that free and paid
--- accounts have different limits. For more information about inserting
--- features, read Creating features in the Google Maps Engine developer\'s
--- guide.
-type FeaturesBatchInsert =
-     "mapsengine" :>
-       "v1" :>
-         "tables" :>
-           Capture "id" Text :>
-             "features" :>
-               "batchInsert" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Post '[JSON] ()
-
--- | Return a single feature, given its ID.
-type FeaturesGet =
-     "mapsengine" :>
-       "v1" :>
-         "tables" :>
-           Capture "tableId" Text :>
-             "features" :>
-               Capture "id" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "version" Text :>
-                           QueryParam "select" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Get '[JSON] Feature
-
--- | Update the supplied features. A single batchPatch request can update: -
--- Up to 50 features. - A combined total of 10 000 vertices. Feature limits
--- are documented in the Supported data formats and limits article of the
--- Google Maps Engine help center. Note that free and paid accounts have
--- different limits. Feature updates use HTTP PATCH semantics: - A supplied
--- value replaces an existing value (if any) in that field. - Omitted
--- fields remain unchanged. - Complex values in geometries and properties
--- must be replaced as atomic units. For example, providing just the
--- coordinates of a geometry is not allowed; the complete geometry,
--- including type, must be supplied. - Setting a property\'s value to null
--- deletes that property. For more information about updating features,
--- read Updating features in the Google Maps Engine developer\'s guide.
-type FeaturesBatchPatch =
-     "mapsengine" :>
-       "v1" :>
-         "tables" :>
-           Capture "id" Text :>
-             "features" :>
-               "batchPatch" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Post '[JSON] ()
-
--- | Delete all features matching the given IDs.
-type FeaturesBatchDelete =
-     "mapsengine" :>
-       "v1" :>
-         "tables" :>
-           Capture "id" Text :>
-             "features" :>
-               "batchDelete" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Post '[JSON] ()
-
-type FilesAPI = FilesInsert
-
--- | Upload a file to a placeholder table asset. See Table Upload in the
--- Developer\'s Guide for more information. Supported file types are listed
--- in the Supported data formats and limits article of the Google Maps
--- Engine help center.
-type FilesInsert =
-     "mapsengine" :>
-       "v1" :>
-         "tables" :>
-           Capture "id" Text :>
-             "files" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "filename" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Post '[JSON] ()
-
-type PermissionsAPI =
-     PermissionsList :<|> PermissionsBatchUpdate :<|>
-       PermissionsBatchDelete
-
--- | Return all of the permissions for the specified asset.
-type PermissionsList =
-     "mapsengine" :>
-       "v1" :>
-         "tables" :>
-           Capture "id" Text :>
-             "permissions" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Get '[JSON] PermissionsListResponse
-
--- | Add or update permission entries to an already existing asset. An asset
--- can hold up to 20 different permission entries. Each batchInsert request
--- is atomic.
-type PermissionsBatchUpdate =
-     "mapsengine" :>
-       "v1" :>
-         "tables" :>
-           Capture "id" Text :>
-             "permissions" :>
-               "batchUpdate" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Post '[JSON] PermissionsBatchUpdateResponse
-
--- | Remove permission entries from an already existing asset.
-type PermissionsBatchDelete =
-     "mapsengine" :>
-       "v1" :>
-         "tables" :>
-           Capture "id" Text :>
-             "permissions" :>
-               "batchDelete" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Post '[JSON] PermissionsBatchDeleteResponse
-
-type LayersAPI = ParentsAPI :<|> PermissionsAPI
-
-type ParentsAPI = ParentsList
-
--- | Return all parent ids of the specified layer.
-type ParentsList =
-     "mapsengine" :>
-       "v1" :>
-         "layers" :>
-           Capture "id" Text :>
-             "parents" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Get '[JSON] ParentsListResponse
-
-type PermissionsAPI =
-     PermissionsList :<|> PermissionsBatchUpdate :<|>
-       PermissionsBatchDelete
-
--- | Return all of the permissions for the specified asset.
-type PermissionsList =
-     "mapsengine" :>
-       "v1" :>
-         "layers" :>
-           Capture "id" Text :>
-             "permissions" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Get '[JSON] PermissionsListResponse
-
--- | Add or update permission entries to an already existing asset. An asset
--- can hold up to 20 different permission entries. Each batchInsert request
--- is atomic.
-type PermissionsBatchUpdate =
-     "mapsengine" :>
-       "v1" :>
-         "layers" :>
-           Capture "id" Text :>
-             "permissions" :>
-               "batchUpdate" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Post '[JSON] PermissionsBatchUpdateResponse
-
--- | Remove permission entries from an already existing asset.
-type PermissionsBatchDelete =
-     "mapsengine" :>
-       "v1" :>
-         "layers" :>
-           Capture "id" Text :>
-             "permissions" :>
-               "batchDelete" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Post '[JSON] PermissionsBatchDeleteResponse
-
-type RastersAPI =
-     ParentsAPI :<|> FilesAPI :<|> PermissionsAPI
-
-type ParentsAPI = ParentsList
-
--- | Return all parent ids of the specified rasters.
-type ParentsList =
-     "mapsengine" :>
-       "v1" :>
-         "rasters" :>
-           Capture "id" Text :>
-             "parents" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Get '[JSON] ParentsListResponse
-
-type FilesAPI = FilesInsert
-
--- | Upload a file to a raster asset.
-type FilesInsert =
-     "mapsengine" :>
-       "v1" :>
-         "rasters" :>
-           Capture "id" Text :>
-             "files" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "filename" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Post '[JSON] ()
-
-type PermissionsAPI =
-     PermissionsList :<|> PermissionsBatchUpdate :<|>
-       PermissionsBatchDelete
-
--- | Return all of the permissions for the specified asset.
-type PermissionsList =
-     "mapsengine" :>
-       "v1" :>
-         "rasters" :>
-           Capture "id" Text :>
-             "permissions" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Get '[JSON] PermissionsListResponse
-
--- | Add or update permission entries to an already existing asset. An asset
--- can hold up to 20 different permission entries. Each batchInsert request
--- is atomic.
-type PermissionsBatchUpdate =
-     "mapsengine" :>
-       "v1" :>
-         "rasters" :>
-           Capture "id" Text :>
-             "permissions" :>
-               "batchUpdate" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Post '[JSON] PermissionsBatchUpdateResponse
-
--- | Remove permission entries from an already existing asset.
-type PermissionsBatchDelete =
-     "mapsengine" :>
-       "v1" :>
-         "rasters" :>
-           Capture "id" Text :>
-             "permissions" :>
-               "batchDelete" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Post '[JSON] PermissionsBatchDeleteResponse
-
-type AssetsAPI = ParentsAPI :<|> PermissionsAPI
-
-type ParentsAPI = ParentsList
-
--- | Return all parent ids of the specified asset.
-type ParentsList =
-     "mapsengine" :>
-       "v1" :>
-         "assets" :>
-           Capture "id" Text :>
-             "parents" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Get '[JSON] ParentsListResponse
-
-type PermissionsAPI = PermissionsList
-
--- | Return all of the permissions for the specified asset.
-type PermissionsList =
-     "mapsengine" :>
-       "v1" :>
-         "assets" :>
-           Capture "id" Text :>
-             "permissions" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Get '[JSON] PermissionsListResponse
-
-type ProjectsAPI = IconsAPI
-
-type IconsAPI =
-     IconsList :<|> IconsGet :<|> IconsCreate
-
--- | Return all icons in the current project
-type IconsList =
-     "mapsengine" :>
-       "v1" :>
-         "projects" :>
-           Capture "projectId" Text :>
-             "icons" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Get '[JSON] IconsListResponse
-
--- | Return an icon or its associated metadata
-type IconsGet =
-     "mapsengine" :>
-       "v1" :>
-         "projects" :>
-           Capture "projectId" Text :>
-             "icons" :>
-               Capture "id" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] Icon
-
--- | Create an icon.
-type IconsCreate =
-     "mapsengine" :>
-       "v1" :>
-         "projects" :>
-           Capture "projectId" Text :>
-             "icons" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] Icon
-
-type RasterCollectionsAPI =
-     ParentsAPI :<|> PermissionsAPI :<|> RastersAPI
-
-type ParentsAPI = ParentsList
-
--- | Return all parent ids of the specified raster collection.
-type ParentsList =
-     "mapsengine" :>
-       "v1" :>
-         "rasterCollections" :>
-           Capture "id" Text :>
-             "parents" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Get '[JSON] ParentsListResponse
-
-type PermissionsAPI =
-     PermissionsList :<|> PermissionsBatchUpdate :<|>
-       PermissionsBatchDelete
-
--- | Return all of the permissions for the specified asset.
-type PermissionsList =
-     "mapsengine" :>
-       "v1" :>
-         "rasterCollections" :>
-           Capture "id" Text :>
-             "permissions" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Get '[JSON] PermissionsListResponse
-
--- | Add or update permission entries to an already existing asset. An asset
--- can hold up to 20 different permission entries. Each batchInsert request
--- is atomic.
-type PermissionsBatchUpdate =
-     "mapsengine" :>
-       "v1" :>
-         "rasterCollections" :>
-           Capture "id" Text :>
-             "permissions" :>
-               "batchUpdate" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Post '[JSON] PermissionsBatchUpdateResponse
-
--- | Remove permission entries from an already existing asset.
-type PermissionsBatchDelete =
-     "mapsengine" :>
-       "v1" :>
-         "rasterCollections" :>
-           Capture "id" Text :>
-             "permissions" :>
-               "batchDelete" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Post '[JSON] PermissionsBatchDeleteResponse
-
-type RastersAPI =
-     RastersList :<|> RastersBatchInsert :<|>
-       RastersBatchDelete
-
--- | Return all rasters within a raster collection.
-type RastersList =
-     "mapsengine" :>
-       "v1" :>
-         "rasterCollections" :>
-           Capture "id" Text :>
-             "rasters" :>
-               QueryParam "createdAfter" UTCTime :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "creatorEmail" Text :>
-                         QueryParam "role" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "bbox" Text :>
-                               QueryParam "modifiedAfter" UTCTime :>
-                                 QueryParam "modifiedBefore" UTCTime :>
-                                   QueryParam "pageToken" Text :>
-                                     QueryParam "oauth_token" Text :>
-                                       QueryParam "search" Text :>
-                                         QueryParam "maxResults" Word32 :>
-                                           QueryParam "tags" Text :>
-                                             QueryParam "fields" Text :>
-                                               QueryParam "createdBefore"
-                                                 UTCTime
-                                                 :>
-                                                 QueryParam "alt" Text :>
-                                                   Get '[JSON]
-                                                     RasterCollectionsRastersListResponse
-
--- | Add rasters to an existing raster collection. Rasters must be
--- successfully processed in order to be added to a raster collection. Up
--- to 50 rasters can be included in a single batchInsert request. Each
--- batchInsert request is atomic.
-type RastersBatchInsert =
-     "mapsengine" :>
-       "v1" :>
-         "rasterCollections" :>
-           Capture "id" Text :>
-             "rasters" :>
-               "batchInsert" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Post '[JSON]
-                                 RasterCollectionsRastersBatchInsertResponse
-
--- | Remove rasters from an existing raster collection. Up to 50 rasters can
--- be included in a single batchDelete request. Each batchDelete request is
--- atomic.
-type RastersBatchDelete =
-     "mapsengine" :>
-       "v1" :>
-         "rasterCollections" :>
-           Capture "id" Text :>
-             "rasters" :>
-               "batchDelete" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Post '[JSON]
-                                 RasterCollectionsRastersBatchDeleteResponse
+mapEngine :: Proxy MapEngine
+mapEngine = Proxy

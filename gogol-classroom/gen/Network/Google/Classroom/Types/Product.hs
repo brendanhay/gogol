@@ -18,6 +18,176 @@ module Network.Google.Classroom.Types.Product where
 import           Network.Google.Classroom.Types.Sum
 import           Network.Google.Prelude
 
+-- | Teacher of a course.
+--
+-- /See:/ 'teacher' smart constructor.
+data Teacher = Teacher
+    { _tCourseId :: !(Maybe Text)
+    , _tProfile  :: !(Maybe (Maybe UserProfile))
+    , _tUserId   :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Teacher' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tCourseId'
+--
+-- * 'tProfile'
+--
+-- * 'tUserId'
+teacher
+    :: Teacher
+teacher =
+    Teacher
+    { _tCourseId = Nothing
+    , _tProfile = Nothing
+    , _tUserId = Nothing
+    }
+
+-- | Identifier of the course. Read-only.
+tCourseId :: Lens' Teacher (Maybe Text)
+tCourseId
+  = lens _tCourseId (\ s a -> s{_tCourseId = a})
+
+-- | Global user information for the teacher. Read-only.
+tProfile :: Lens' Teacher (Maybe (Maybe UserProfile))
+tProfile = lens _tProfile (\ s a -> s{_tProfile = a})
+
+-- | Identifier of the user. When specified as a parameter of a request, this
+-- identifier can be one of the following: * the numeric identifier for the
+-- user * the email address of the user * the string literal \`\"me\"\`,
+-- indicating the requesting user
+tUserId :: Lens' Teacher (Maybe Text)
+tUserId = lens _tUserId (\ s a -> s{_tUserId = a})
+
+instance FromJSON Teacher where
+        parseJSON
+          = withObject "Teacher"
+              (\ o ->
+                 Teacher <$>
+                   (o .:? "courseId") <*> (o .:? "profile") <*>
+                     (o .:? "userId"))
+
+instance ToJSON Teacher where
+        toJSON Teacher{..}
+          = object
+              (catMaybes
+                 [("courseId" .=) <$> _tCourseId,
+                  ("profile" .=) <$> _tProfile,
+                  ("userId" .=) <$> _tUserId])
+
+-- | Details of the user\'s name.
+--
+-- /See:/ 'name' smart constructor.
+data Name = Name
+    { _nGivenName  :: !(Maybe Text)
+    , _nFullName   :: !(Maybe Text)
+    , _nFamilyName :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Name' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'nGivenName'
+--
+-- * 'nFullName'
+--
+-- * 'nFamilyName'
+name
+    :: Name
+name =
+    Name
+    { _nGivenName = Nothing
+    , _nFullName = Nothing
+    , _nFamilyName = Nothing
+    }
+
+-- | The user\'s first name. Read-only.
+nGivenName :: Lens' Name (Maybe Text)
+nGivenName
+  = lens _nGivenName (\ s a -> s{_nGivenName = a})
+
+-- | The user\'s full name formed by concatenating the first and last name
+-- values. Read-only.
+nFullName :: Lens' Name (Maybe Text)
+nFullName
+  = lens _nFullName (\ s a -> s{_nFullName = a})
+
+-- | The user\'s last name. Read-only.
+nFamilyName :: Lens' Name (Maybe Text)
+nFamilyName
+  = lens _nFamilyName (\ s a -> s{_nFamilyName = a})
+
+instance FromJSON Name where
+        parseJSON
+          = withObject "Name"
+              (\ o ->
+                 Name <$>
+                   (o .:? "givenName") <*> (o .:? "fullName") <*>
+                     (o .:? "familyName"))
+
+instance ToJSON Name where
+        toJSON Name{..}
+          = object
+              (catMaybes
+                 [("givenName" .=) <$> _nGivenName,
+                  ("fullName" .=) <$> _nFullName,
+                  ("familyName" .=) <$> _nFamilyName])
+
+-- | Response when listing courses.
+--
+-- /See:/ 'listCoursesResponse' smart constructor.
+data ListCoursesResponse = ListCoursesResponse
+    { _lcrNextPageToken :: !(Maybe Text)
+    , _lcrCourses       :: !(Maybe [Maybe Course])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListCoursesResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lcrNextPageToken'
+--
+-- * 'lcrCourses'
+listCoursesResponse
+    :: ListCoursesResponse
+listCoursesResponse =
+    ListCoursesResponse
+    { _lcrNextPageToken = Nothing
+    , _lcrCourses = Nothing
+    }
+
+-- | Token identifying the next page of results to return. If empty, no
+-- further results are available.
+lcrNextPageToken :: Lens' ListCoursesResponse (Maybe Text)
+lcrNextPageToken
+  = lens _lcrNextPageToken
+      (\ s a -> s{_lcrNextPageToken = a})
+
+-- | Courses that match the list request.
+lcrCourses :: Lens' ListCoursesResponse [Maybe Course]
+lcrCourses
+  = lens _lcrCourses (\ s a -> s{_lcrCourses = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ListCoursesResponse where
+        parseJSON
+          = withObject "ListCoursesResponse"
+              (\ o ->
+                 ListCoursesResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "courses" .!= mempty))
+
+instance ToJSON ListCoursesResponse where
+        toJSON ListCoursesResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lcrNextPageToken,
+                  ("courses" .=) <$> _lcrCourses])
+
 -- | A Course in Classroom.
 --
 -- /See:/ 'course' smart constructor.
@@ -244,289 +414,6 @@ instance ToJSON CourseAlias where
         toJSON CourseAlias{..}
           = object (catMaybes [("alias" .=) <$> _caAlias])
 
--- | A generic empty message that you can re-use to avoid defining duplicated
--- empty messages in your APIs. A typical example is to use it as the
--- request or the response type of an API method. For instance: service Foo
--- { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The
--- JSON representation for \`Empty\` is empty JSON object \`{}\`.
---
--- /See:/ 'empty' smart constructor.
-data Empty =
-    Empty
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Empty' with the minimum fields required to make a request.
---
-empty
-    :: Empty
-empty = Empty
-
-instance FromJSON Empty where
-        parseJSON = withObject "Empty" (\ o -> pure Empty)
-
-instance ToJSON Empty where
-        toJSON = const (Object mempty)
-
--- | Global user permission description.
---
--- /See:/ 'globalPermission' smart constructor.
-newtype GlobalPermission = GlobalPermission
-    { _gpPermission :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'GlobalPermission' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'gpPermission'
-globalPermission
-    :: GlobalPermission
-globalPermission =
-    GlobalPermission
-    { _gpPermission = Nothing
-    }
-
--- | Permission value.
-gpPermission :: Lens' GlobalPermission (Maybe Text)
-gpPermission
-  = lens _gpPermission (\ s a -> s{_gpPermission = a})
-
-instance FromJSON GlobalPermission where
-        parseJSON
-          = withObject "GlobalPermission"
-              (\ o -> GlobalPermission <$> (o .:? "permission"))
-
-instance ToJSON GlobalPermission where
-        toJSON GlobalPermission{..}
-          = object
-              (catMaybes [("permission" .=) <$> _gpPermission])
-
--- | An invitation to join a course.
---
--- /See:/ 'invitation' smart constructor.
-data Invitation = Invitation
-    { _iCourseId :: !(Maybe Text)
-    , _iUserId   :: !(Maybe Text)
-    , _iRole     :: !(Maybe Text)
-    , _iId       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Invitation' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'iCourseId'
---
--- * 'iUserId'
---
--- * 'iRole'
---
--- * 'iId'
-invitation
-    :: Invitation
-invitation =
-    Invitation
-    { _iCourseId = Nothing
-    , _iUserId = Nothing
-    , _iRole = Nothing
-    , _iId = Nothing
-    }
-
--- | Identifier of the course to invite the user to.
-iCourseId :: Lens' Invitation (Maybe Text)
-iCourseId
-  = lens _iCourseId (\ s a -> s{_iCourseId = a})
-
--- | Identifier of the invited user. When specified as a parameter of a
--- request, this identifier can be set to one of the following: * the
--- numeric identifier for the user * the email address of the user * the
--- string literal \`\"me\"\`, indicating the requesting user
-iUserId :: Lens' Invitation (Maybe Text)
-iUserId = lens _iUserId (\ s a -> s{_iUserId = a})
-
--- | Role to invite the user to have. Must not be
--- \`COURSE_ROLE_UNSPECIFIED\`.
-iRole :: Lens' Invitation (Maybe Text)
-iRole = lens _iRole (\ s a -> s{_iRole = a})
-
--- | Identifier assigned by Classroom. Read-only.
-iId :: Lens' Invitation (Maybe Text)
-iId = lens _iId (\ s a -> s{_iId = a})
-
-instance FromJSON Invitation where
-        parseJSON
-          = withObject "Invitation"
-              (\ o ->
-                 Invitation <$>
-                   (o .:? "courseId") <*> (o .:? "userId") <*>
-                     (o .:? "role")
-                     <*> (o .:? "id"))
-
-instance ToJSON Invitation where
-        toJSON Invitation{..}
-          = object
-              (catMaybes
-                 [("courseId" .=) <$> _iCourseId,
-                  ("userId" .=) <$> _iUserId, ("role" .=) <$> _iRole,
-                  ("id" .=) <$> _iId])
-
--- | Response when listing course aliases.
---
--- /See:/ 'listCourseAliasesResponse' smart constructor.
-data ListCourseAliasesResponse = ListCourseAliasesResponse
-    { _lcarNextPageToken :: !(Maybe Text)
-    , _lcarAliases       :: !(Maybe [Maybe CourseAlias])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ListCourseAliasesResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lcarNextPageToken'
---
--- * 'lcarAliases'
-listCourseAliasesResponse
-    :: ListCourseAliasesResponse
-listCourseAliasesResponse =
-    ListCourseAliasesResponse
-    { _lcarNextPageToken = Nothing
-    , _lcarAliases = Nothing
-    }
-
--- | Token identifying the next page of results to return. If empty, no
--- further results are available.
-lcarNextPageToken :: Lens' ListCourseAliasesResponse (Maybe Text)
-lcarNextPageToken
-  = lens _lcarNextPageToken
-      (\ s a -> s{_lcarNextPageToken = a})
-
--- | The course aliases.
-lcarAliases :: Lens' ListCourseAliasesResponse [Maybe CourseAlias]
-lcarAliases
-  = lens _lcarAliases (\ s a -> s{_lcarAliases = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON ListCourseAliasesResponse where
-        parseJSON
-          = withObject "ListCourseAliasesResponse"
-              (\ o ->
-                 ListCourseAliasesResponse <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "aliases" .!= mempty))
-
-instance ToJSON ListCourseAliasesResponse where
-        toJSON ListCourseAliasesResponse{..}
-          = object
-              (catMaybes
-                 [("nextPageToken" .=) <$> _lcarNextPageToken,
-                  ("aliases" .=) <$> _lcarAliases])
-
--- | Response when listing courses.
---
--- /See:/ 'listCoursesResponse' smart constructor.
-data ListCoursesResponse = ListCoursesResponse
-    { _lcrNextPageToken :: !(Maybe Text)
-    , _lcrCourses       :: !(Maybe [Maybe Course])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ListCoursesResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lcrNextPageToken'
---
--- * 'lcrCourses'
-listCoursesResponse
-    :: ListCoursesResponse
-listCoursesResponse =
-    ListCoursesResponse
-    { _lcrNextPageToken = Nothing
-    , _lcrCourses = Nothing
-    }
-
--- | Token identifying the next page of results to return. If empty, no
--- further results are available.
-lcrNextPageToken :: Lens' ListCoursesResponse (Maybe Text)
-lcrNextPageToken
-  = lens _lcrNextPageToken
-      (\ s a -> s{_lcrNextPageToken = a})
-
--- | Courses that match the list request.
-lcrCourses :: Lens' ListCoursesResponse [Maybe Course]
-lcrCourses
-  = lens _lcrCourses (\ s a -> s{_lcrCourses = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON ListCoursesResponse where
-        parseJSON
-          = withObject "ListCoursesResponse"
-              (\ o ->
-                 ListCoursesResponse <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "courses" .!= mempty))
-
-instance ToJSON ListCoursesResponse where
-        toJSON ListCoursesResponse{..}
-          = object
-              (catMaybes
-                 [("nextPageToken" .=) <$> _lcrNextPageToken,
-                  ("courses" .=) <$> _lcrCourses])
-
--- | Response when listing invitations.
---
--- /See:/ 'listInvitationsResponse' smart constructor.
-data ListInvitationsResponse = ListInvitationsResponse
-    { _lirNextPageToken :: !(Maybe Text)
-    , _lirInvitations   :: !(Maybe [Maybe Invitation])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ListInvitationsResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lirNextPageToken'
---
--- * 'lirInvitations'
-listInvitationsResponse
-    :: ListInvitationsResponse
-listInvitationsResponse =
-    ListInvitationsResponse
-    { _lirNextPageToken = Nothing
-    , _lirInvitations = Nothing
-    }
-
--- | Token identifying the next page of results to return. If empty, no
--- further results are available.
-lirNextPageToken :: Lens' ListInvitationsResponse (Maybe Text)
-lirNextPageToken
-  = lens _lirNextPageToken
-      (\ s a -> s{_lirNextPageToken = a})
-
--- | Invitations that match the list request.
-lirInvitations :: Lens' ListInvitationsResponse [Maybe Invitation]
-lirInvitations
-  = lens _lirInvitations
-      (\ s a -> s{_lirInvitations = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON ListInvitationsResponse where
-        parseJSON
-          = withObject "ListInvitationsResponse"
-              (\ o ->
-                 ListInvitationsResponse <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "invitations" .!= mempty))
-
-instance ToJSON ListInvitationsResponse where
-        toJSON ListInvitationsResponse{..}
-          = object
-              (catMaybes
-                 [("nextPageToken" .=) <$> _lirNextPageToken,
-                  ("invitations" .=) <$> _lirInvitations])
-
 -- | Response when listing students.
 --
 -- /See:/ 'listStudentsResponse' smart constructor.
@@ -578,117 +465,6 @@ instance ToJSON ListStudentsResponse where
               (catMaybes
                  [("nextPageToken" .=) <$> _lsrNextPageToken,
                   ("students" .=) <$> _lsrStudents])
-
--- | Response when listing teachers.
---
--- /See:/ 'listTeachersResponse' smart constructor.
-data ListTeachersResponse = ListTeachersResponse
-    { _ltrNextPageToken :: !(Maybe Text)
-    , _ltrTeachers      :: !(Maybe [Maybe Teacher])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ListTeachersResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ltrNextPageToken'
---
--- * 'ltrTeachers'
-listTeachersResponse
-    :: ListTeachersResponse
-listTeachersResponse =
-    ListTeachersResponse
-    { _ltrNextPageToken = Nothing
-    , _ltrTeachers = Nothing
-    }
-
--- | Token identifying the next page of results to return. If empty, no
--- further results are available.
-ltrNextPageToken :: Lens' ListTeachersResponse (Maybe Text)
-ltrNextPageToken
-  = lens _ltrNextPageToken
-      (\ s a -> s{_ltrNextPageToken = a})
-
--- | Teachers who match the list request.
-ltrTeachers :: Lens' ListTeachersResponse [Maybe Teacher]
-ltrTeachers
-  = lens _ltrTeachers (\ s a -> s{_ltrTeachers = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON ListTeachersResponse where
-        parseJSON
-          = withObject "ListTeachersResponse"
-              (\ o ->
-                 ListTeachersResponse <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "teachers" .!= mempty))
-
-instance ToJSON ListTeachersResponse where
-        toJSON ListTeachersResponse{..}
-          = object
-              (catMaybes
-                 [("nextPageToken" .=) <$> _ltrNextPageToken,
-                  ("teachers" .=) <$> _ltrTeachers])
-
--- | Details of the user\'s name.
---
--- /See:/ 'name' smart constructor.
-data Name = Name
-    { _nGivenName  :: !(Maybe Text)
-    , _nFullName   :: !(Maybe Text)
-    , _nFamilyName :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Name' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'nGivenName'
---
--- * 'nFullName'
---
--- * 'nFamilyName'
-name
-    :: Name
-name =
-    Name
-    { _nGivenName = Nothing
-    , _nFullName = Nothing
-    , _nFamilyName = Nothing
-    }
-
--- | The user\'s first name. Read-only.
-nGivenName :: Lens' Name (Maybe Text)
-nGivenName
-  = lens _nGivenName (\ s a -> s{_nGivenName = a})
-
--- | The user\'s full name formed by concatenating the first and last name
--- values. Read-only.
-nFullName :: Lens' Name (Maybe Text)
-nFullName
-  = lens _nFullName (\ s a -> s{_nFullName = a})
-
--- | The user\'s last name. Read-only.
-nFamilyName :: Lens' Name (Maybe Text)
-nFamilyName
-  = lens _nFamilyName (\ s a -> s{_nFamilyName = a})
-
-instance FromJSON Name where
-        parseJSON
-          = withObject "Name"
-              (\ o ->
-                 Name <$>
-                   (o .:? "givenName") <*> (o .:? "fullName") <*>
-                     (o .:? "familyName"))
-
-instance ToJSON Name where
-        toJSON Name{..}
-          = object
-              (catMaybes
-                 [("givenName" .=) <$> _nGivenName,
-                  ("fullName" .=) <$> _nFullName,
-                  ("familyName" .=) <$> _nFamilyName])
 
 -- | Student in a course.
 --
@@ -749,64 +525,57 @@ instance ToJSON Student where
                   ("profile" .=) <$> _sProfile,
                   ("userId" .=) <$> _sUserId])
 
--- | Teacher of a course.
+-- | Response when listing course aliases.
 --
--- /See:/ 'teacher' smart constructor.
-data Teacher = Teacher
-    { _tCourseId :: !(Maybe Text)
-    , _tProfile  :: !(Maybe (Maybe UserProfile))
-    , _tUserId   :: !(Maybe Text)
+-- /See:/ 'listCourseAliasesResponse' smart constructor.
+data ListCourseAliasesResponse = ListCourseAliasesResponse
+    { _lcarNextPageToken :: !(Maybe Text)
+    , _lcarAliases       :: !(Maybe [Maybe CourseAlias])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Teacher' with the minimum fields required to make a request.
+-- | Creates a value of 'ListCourseAliasesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tCourseId'
+-- * 'lcarNextPageToken'
 --
--- * 'tProfile'
---
--- * 'tUserId'
-teacher
-    :: Teacher
-teacher =
-    Teacher
-    { _tCourseId = Nothing
-    , _tProfile = Nothing
-    , _tUserId = Nothing
+-- * 'lcarAliases'
+listCourseAliasesResponse
+    :: ListCourseAliasesResponse
+listCourseAliasesResponse =
+    ListCourseAliasesResponse
+    { _lcarNextPageToken = Nothing
+    , _lcarAliases = Nothing
     }
 
--- | Identifier of the course. Read-only.
-tCourseId :: Lens' Teacher (Maybe Text)
-tCourseId
-  = lens _tCourseId (\ s a -> s{_tCourseId = a})
+-- | Token identifying the next page of results to return. If empty, no
+-- further results are available.
+lcarNextPageToken :: Lens' ListCourseAliasesResponse (Maybe Text)
+lcarNextPageToken
+  = lens _lcarNextPageToken
+      (\ s a -> s{_lcarNextPageToken = a})
 
--- | Global user information for the teacher. Read-only.
-tProfile :: Lens' Teacher (Maybe (Maybe UserProfile))
-tProfile = lens _tProfile (\ s a -> s{_tProfile = a})
+-- | The course aliases.
+lcarAliases :: Lens' ListCourseAliasesResponse [Maybe CourseAlias]
+lcarAliases
+  = lens _lcarAliases (\ s a -> s{_lcarAliases = a}) .
+      _Default
+      . _Coerce
 
--- | Identifier of the user. When specified as a parameter of a request, this
--- identifier can be one of the following: * the numeric identifier for the
--- user * the email address of the user * the string literal \`\"me\"\`,
--- indicating the requesting user
-tUserId :: Lens' Teacher (Maybe Text)
-tUserId = lens _tUserId (\ s a -> s{_tUserId = a})
-
-instance FromJSON Teacher where
+instance FromJSON ListCourseAliasesResponse where
         parseJSON
-          = withObject "Teacher"
+          = withObject "ListCourseAliasesResponse"
               (\ o ->
-                 Teacher <$>
-                   (o .:? "courseId") <*> (o .:? "profile") <*>
-                     (o .:? "userId"))
+                 ListCourseAliasesResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "aliases" .!= mempty))
 
-instance ToJSON Teacher where
-        toJSON Teacher{..}
+instance ToJSON ListCourseAliasesResponse where
+        toJSON ListCourseAliasesResponse{..}
           = object
               (catMaybes
-                 [("courseId" .=) <$> _tCourseId,
-                  ("profile" .=) <$> _tProfile,
-                  ("userId" .=) <$> _tUserId])
+                 [("nextPageToken" .=) <$> _lcarNextPageToken,
+                  ("aliases" .=) <$> _lcarAliases])
 
 -- | Global information for a user.
 --
@@ -889,3 +658,234 @@ instance ToJSON UserProfile where
                   ("emailAddress" .=) <$> _upEmailAddress,
                   ("id" .=) <$> _upId,
                   ("permissions" .=) <$> _upPermissions])
+
+-- | A generic empty message that you can re-use to avoid defining duplicated
+-- empty messages in your APIs. A typical example is to use it as the
+-- request or the response type of an API method. For instance: service Foo
+-- { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The
+-- JSON representation for \`Empty\` is empty JSON object \`{}\`.
+--
+-- /See:/ 'empty' smart constructor.
+data Empty =
+    Empty
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Empty' with the minimum fields required to make a request.
+--
+empty
+    :: Empty
+empty = Empty
+
+instance FromJSON Empty where
+        parseJSON = withObject "Empty" (\ o -> pure Empty)
+
+instance ToJSON Empty where
+        toJSON = const (Object mempty)
+
+-- | Global user permission description.
+--
+-- /See:/ 'globalPermission' smart constructor.
+newtype GlobalPermission = GlobalPermission
+    { _gpPermission :: Maybe Text
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GlobalPermission' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gpPermission'
+globalPermission
+    :: GlobalPermission
+globalPermission =
+    GlobalPermission
+    { _gpPermission = Nothing
+    }
+
+-- | Permission value.
+gpPermission :: Lens' GlobalPermission (Maybe Text)
+gpPermission
+  = lens _gpPermission (\ s a -> s{_gpPermission = a})
+
+instance FromJSON GlobalPermission where
+        parseJSON
+          = withObject "GlobalPermission"
+              (\ o -> GlobalPermission <$> (o .:? "permission"))
+
+instance ToJSON GlobalPermission where
+        toJSON GlobalPermission{..}
+          = object
+              (catMaybes [("permission" .=) <$> _gpPermission])
+
+-- | Response when listing invitations.
+--
+-- /See:/ 'listInvitationsResponse' smart constructor.
+data ListInvitationsResponse = ListInvitationsResponse
+    { _lirNextPageToken :: !(Maybe Text)
+    , _lirInvitations   :: !(Maybe [Maybe Invitation])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListInvitationsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lirNextPageToken'
+--
+-- * 'lirInvitations'
+listInvitationsResponse
+    :: ListInvitationsResponse
+listInvitationsResponse =
+    ListInvitationsResponse
+    { _lirNextPageToken = Nothing
+    , _lirInvitations = Nothing
+    }
+
+-- | Token identifying the next page of results to return. If empty, no
+-- further results are available.
+lirNextPageToken :: Lens' ListInvitationsResponse (Maybe Text)
+lirNextPageToken
+  = lens _lirNextPageToken
+      (\ s a -> s{_lirNextPageToken = a})
+
+-- | Invitations that match the list request.
+lirInvitations :: Lens' ListInvitationsResponse [Maybe Invitation]
+lirInvitations
+  = lens _lirInvitations
+      (\ s a -> s{_lirInvitations = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListInvitationsResponse where
+        parseJSON
+          = withObject "ListInvitationsResponse"
+              (\ o ->
+                 ListInvitationsResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "invitations" .!= mempty))
+
+instance ToJSON ListInvitationsResponse where
+        toJSON ListInvitationsResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lirNextPageToken,
+                  ("invitations" .=) <$> _lirInvitations])
+
+-- | Response when listing teachers.
+--
+-- /See:/ 'listTeachersResponse' smart constructor.
+data ListTeachersResponse = ListTeachersResponse
+    { _ltrNextPageToken :: !(Maybe Text)
+    , _ltrTeachers      :: !(Maybe [Maybe Teacher])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListTeachersResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ltrNextPageToken'
+--
+-- * 'ltrTeachers'
+listTeachersResponse
+    :: ListTeachersResponse
+listTeachersResponse =
+    ListTeachersResponse
+    { _ltrNextPageToken = Nothing
+    , _ltrTeachers = Nothing
+    }
+
+-- | Token identifying the next page of results to return. If empty, no
+-- further results are available.
+ltrNextPageToken :: Lens' ListTeachersResponse (Maybe Text)
+ltrNextPageToken
+  = lens _ltrNextPageToken
+      (\ s a -> s{_ltrNextPageToken = a})
+
+-- | Teachers who match the list request.
+ltrTeachers :: Lens' ListTeachersResponse [Maybe Teacher]
+ltrTeachers
+  = lens _ltrTeachers (\ s a -> s{_ltrTeachers = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ListTeachersResponse where
+        parseJSON
+          = withObject "ListTeachersResponse"
+              (\ o ->
+                 ListTeachersResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "teachers" .!= mempty))
+
+instance ToJSON ListTeachersResponse where
+        toJSON ListTeachersResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _ltrNextPageToken,
+                  ("teachers" .=) <$> _ltrTeachers])
+
+-- | An invitation to join a course.
+--
+-- /See:/ 'invitation' smart constructor.
+data Invitation = Invitation
+    { _iCourseId :: !(Maybe Text)
+    , _iUserId   :: !(Maybe Text)
+    , _iRole     :: !(Maybe Text)
+    , _iId       :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Invitation' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'iCourseId'
+--
+-- * 'iUserId'
+--
+-- * 'iRole'
+--
+-- * 'iId'
+invitation
+    :: Invitation
+invitation =
+    Invitation
+    { _iCourseId = Nothing
+    , _iUserId = Nothing
+    , _iRole = Nothing
+    , _iId = Nothing
+    }
+
+-- | Identifier of the course to invite the user to.
+iCourseId :: Lens' Invitation (Maybe Text)
+iCourseId
+  = lens _iCourseId (\ s a -> s{_iCourseId = a})
+
+-- | Identifier of the invited user. When specified as a parameter of a
+-- request, this identifier can be set to one of the following: * the
+-- numeric identifier for the user * the email address of the user * the
+-- string literal \`\"me\"\`, indicating the requesting user
+iUserId :: Lens' Invitation (Maybe Text)
+iUserId = lens _iUserId (\ s a -> s{_iUserId = a})
+
+-- | Role to invite the user to have. Must not be
+-- \`COURSE_ROLE_UNSPECIFIED\`.
+iRole :: Lens' Invitation (Maybe Text)
+iRole = lens _iRole (\ s a -> s{_iRole = a})
+
+-- | Identifier assigned by Classroom. Read-only.
+iId :: Lens' Invitation (Maybe Text)
+iId = lens _iId (\ s a -> s{_iId = a})
+
+instance FromJSON Invitation where
+        parseJSON
+          = withObject "Invitation"
+              (\ o ->
+                 Invitation <$>
+                   (o .:? "courseId") <*> (o .:? "userId") <*>
+                     (o .:? "role")
+                     <*> (o .:? "id"))
+
+instance ToJSON Invitation where
+        toJSON Invitation{..}
+          = object
+              (catMaybes
+                 [("courseId" .=) <$> _iCourseId,
+                  ("userId" .=) <$> _iUserId, ("role" .=) <$> _iRole,
+                  ("id" .=) <$> _iId])

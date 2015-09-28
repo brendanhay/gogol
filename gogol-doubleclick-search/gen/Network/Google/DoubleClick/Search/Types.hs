@@ -14,16 +14,42 @@
 --
 module Network.Google.DoubleClick.Search.Types
     (
+    -- * Service URL
+      doubleClickSearchURL
 
-    -- * Availability
-      Availability
-    , availability
-    , aAgencyId
-    , aAdvertiserId
-    , aSegmentationId
-    , aSegmentationName
-    , aAvailabilityTimestamp
-    , aSegmentationType
+    -- * ReportRequestItemOrderBy
+    , ReportRequestItemOrderBy
+    , reportRequestItemOrderBy
+    , rriobSortOrder
+    , rriobColumn
+
+    -- * CustomMetric
+    , CustomMetric
+    , customMetric
+    , cmValue
+    , cmName
+
+    -- * Alt
+    , Alt (..)
+
+    -- * ReportApiColumnSpec
+    , ReportApiColumnSpec
+    , reportApiColumnSpec
+    , racsCustomDimensionName
+    , racsSavedColumnName
+    , racsGroupByColumn
+    , racsCustomMetricName
+    , racsEndDate
+    , racsStartDate
+    , racsHeaderText
+    , racsPlatformSource
+    , racsColumnName
+
+    -- * ReportItemFiles
+    , ReportItemFiles
+    , reportItemFiles
+    , rifUrl
+    , rifByteCount
 
     -- * Conversion
     , Conversion
@@ -62,11 +88,28 @@ module Network.Google.DoubleClick.Search.Types
     , cProductId
     , cProductGroupId
 
-    -- * ConversionList
-    , ConversionList
-    , conversionList
-    , clKind
-    , clConversion
+    -- * ReportRequestReportScope
+    , ReportRequestReportScope
+    , reportRequestReportScope
+    , rrrsKeywordId
+    , rrrsAdGroupId
+    , rrrsEngineAccountId
+    , rrrsAgencyId
+    , rrrsAdvertiserId
+    , rrrsCampaignId
+    , rrrsAdId
+
+    -- * UpdateAvailabilityResponse
+    , UpdateAvailabilityResponse
+    , updateAvailabilityResponse
+    , uarAvailabilities
+
+    -- * SavedColumn
+    , SavedColumn
+    , savedColumn
+    , scSavedColumnName
+    , scKind
+    , scType
 
     -- * CustomDimension
     , CustomDimension
@@ -74,11 +117,13 @@ module Network.Google.DoubleClick.Search.Types
     , cdValue
     , cdName
 
-    -- * CustomMetric
-    , CustomMetric
-    , customMetric
-    , cmValue
-    , cmName
+    -- * ReportRequestTimeRange
+    , ReportRequestTimeRange
+    , reportRequestTimeRange
+    , rrtrEndDate
+    , rrtrChangedAttributesSinceTimestamp
+    , rrtrStartDate
+    , rrtrChangedMetricsSinceTimestamp
 
     -- * Report
     , Report
@@ -93,24 +138,15 @@ module Network.Google.DoubleClick.Search.Types
     , rRowCount
     , rRequest
 
-    -- * ReportApiColumnSpec
-    , ReportApiColumnSpec
-    , reportApiColumnSpec
-    , racsCustomDimensionName
-    , racsSavedColumnName
-    , racsGroupByColumn
-    , racsCustomMetricName
-    , racsEndDate
-    , racsStartDate
-    , racsHeaderText
-    , racsPlatformSource
-    , racsColumnName
+    -- * SavedColumnList
+    , SavedColumnList
+    , savedColumnList
+    , sclKind
+    , sclItems
 
-    -- * ReportItemFiles
-    , ReportItemFiles
-    , reportItemFiles
-    , rifUrl
-    , rifByteCount
+    -- * ReportRow
+    , ReportRow
+    , reportRow
 
     -- * ReportRequest
     , ReportRequest
@@ -137,59 +173,35 @@ module Network.Google.DoubleClick.Search.Types
     , rrifValues
     , rrifColumn
 
-    -- * ReportRequestItemOrderBy
-    , ReportRequestItemOrderBy
-    , reportRequestItemOrderBy
-    , rriobSortOrder
-    , rriobColumn
-
-    -- * ReportRequestReportScope
-    , ReportRequestReportScope
-    , reportRequestReportScope
-    , rrrsKeywordId
-    , rrrsAdGroupId
-    , rrrsEngineAccountId
-    , rrrsAgencyId
-    , rrrsAdvertiserId
-    , rrrsCampaignId
-    , rrrsAdId
-
-    -- * ReportRequestTimeRange
-    , ReportRequestTimeRange
-    , reportRequestTimeRange
-    , rrtrEndDate
-    , rrtrChangedAttributesSinceTimestamp
-    , rrtrStartDate
-    , rrtrChangedMetricsSinceTimestamp
-
-    -- * ReportRow
-    , ReportRow
-    , reportRow
-
-    -- * SavedColumn
-    , SavedColumn
-    , savedColumn
-    , scSavedColumnName
-    , scKind
-    , scType
-
-    -- * SavedColumnList
-    , SavedColumnList
-    , savedColumnList
-    , sclKind
-    , sclItems
+    -- * ConversionList
+    , ConversionList
+    , conversionList
+    , clKind
+    , clConversion
 
     -- * UpdateAvailabilityRequest
     , UpdateAvailabilityRequest
     , updateAvailabilityRequest
     , uAvailabilities
 
-    -- * UpdateAvailabilityResponse
-    , UpdateAvailabilityResponse
-    , updateAvailabilityResponse
-    , uarAvailabilities
+    -- * Availability
+    , Availability
+    , availability
+    , aAgencyId
+    , aAdvertiserId
+    , aSegmentationId
+    , aSegmentationName
+    , aAvailabilityTimestamp
+    , aSegmentationType
     ) where
 
 import           Network.Google.DoubleClick.Search.Types.Product
 import           Network.Google.DoubleClick.Search.Types.Sum
 import           Network.Google.Prelude
+
+-- | URL referring to version 'v2' of the DoubleClick Search API.
+doubleClickSearchURL :: BaseUrl
+doubleClickSearchURL
+  = BaseUrl Https
+      "https://www.googleapis.com/doubleclicksearch/v2/"
+      443

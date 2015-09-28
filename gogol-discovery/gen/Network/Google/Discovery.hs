@@ -18,26 +18,66 @@
 -- /See:/ <https://developers.google.com/discovery/ APIs Discovery Service Reference>
 module Network.Google.Discovery
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** APIs Discovery Service
       Discovery
-    , ApisAPI
-    , ApisList
-    , ApisGetRest
+    , discovery
+    , discoveryURL
+
+    -- ** discovery.apis.getRest
+    , module Network.Google.API.Discovery.APIs.GetRest
+
+    -- ** discovery.apis.list
+    , module Network.Google.API.Discovery.APIs.List
 
     -- * Types
 
-    -- ** DirectoryList
-    , DirectoryList
-    , directoryList
-    , dlKind
-    , dlItems
-    , dlDiscoveryVersion
+    -- ** RestDescriptionResources
+    , RestDescriptionResources
+    , restDescriptionResources
 
-    -- ** DirectoryListIconsItemItems
-    , DirectoryListIconsItemItems
-    , directoryListIconsItemItems
-    , dliiiX16
-    , dliiiX32
+    -- ** RestDescriptionSchemas
+    , RestDescriptionSchemas
+    , restDescriptionSchemas
+
+    -- ** RestDescriptionParameters
+    , RestDescriptionParameters
+    , restDescriptionParameters
+
+    -- ** RestResource
+    , RestResource
+    , restResource
+    , rrResources
+    , rrMethods
+
+    -- ** Alt
+    , Alt (..)
+
+    -- ** RestMethodRequest
+    , RestMethodRequest
+    , restMethodRequest
+    , rmrRef
+    , rmrParameterName
+
+    -- ** RestDescriptionIcons
+    , RestDescriptionIcons
+    , restDescriptionIcons
+    , rdiX16
+    , rdiX32
+
+    -- ** RestDescriptionOauth2Auth
+    , RestDescriptionOauth2Auth
+    , restDescriptionOauth2Auth
+    , rdoaScopes
+
+    -- ** RestResourceResources
+    , RestResourceResources
+    , restResourceResources
+
+    -- ** JsonSchemaProperties
+    , JsonSchemaProperties
+    , jsonSchemaProperties
 
     -- ** DirectoryListItemItems
     , DirectoryListItemItems
@@ -55,50 +95,22 @@ module Network.Google.Discovery
     , dliiDescription
     , dliiDiscoveryRestUrl
 
-    -- ** JsonSchema
-    , JsonSchema
-    , jsonSchema
-    , jsAnnotations
-    , jsVariant
-    , jsLocation
-    , jsRef
-    , jsPattern
-    , jsMaximum
-    , jsDefault
-    , jsFormat
-    , jsItems
-    , jsMinimum
-    , jsRequired
-    , jsId
-    , jsAdditionalProperties
-    , jsType
-    , jsEnum
-    , jsRepeated
-    , jsReadOnly
-    , jsEnumDescriptions
-    , jsDescription
-    , jsProperties
+    -- ** DirectoryListIconsItemItems
+    , DirectoryListIconsItemItems
+    , directoryListIconsItemItems
+    , dliiiX16
+    , dliiiX32
 
-    -- ** JsonSchemaAnnotations
-    , JsonSchemaAnnotations
-    , jsonSchemaAnnotations
-    , jsaRequired
+    -- ** DirectoryList
+    , DirectoryList
+    , directoryList
+    , dlKind
+    , dlItems
+    , dlDiscoveryVersion
 
-    -- ** JsonSchemaItemMapVariant
-    , JsonSchemaItemMapVariant
-    , jsonSchemaItemMapVariant
-    , jsimvRef
-    , jsimvTypeValue
-
-    -- ** JsonSchemaProperties
-    , JsonSchemaProperties
-    , jsonSchemaProperties
-
-    -- ** JsonSchemaVariant
-    , JsonSchemaVariant
-    , jsonSchemaVariant
-    , jsvDiscriminant
-    , jsvMap
+    -- ** RestMethodParameters
+    , RestMethodParameters
+    , restMethodParameters
 
     -- ** RestDescription
     , RestDescription
@@ -133,41 +145,26 @@ module Network.Google.Discovery
     , rdRevision
     , rdDescription
 
-    -- ** RestDescriptionAuth
-    , RestDescriptionAuth
-    , restDescriptionAuth
-    , rdaOauth2
-
-    -- ** RestDescriptionIcons
-    , RestDescriptionIcons
-    , restDescriptionIcons
-    , rdiX16
-    , rdiX32
-
-    -- ** RestDescriptionMethods
-    , RestDescriptionMethods
-    , restDescriptionMethods
-
-    -- ** RestDescriptionOauth2Auth
-    , RestDescriptionOauth2Auth
-    , restDescriptionOauth2Auth
-    , rdoaScopes
-
-    -- ** RestDescriptionParameters
-    , RestDescriptionParameters
-    , restDescriptionParameters
-
-    -- ** RestDescriptionResources
-    , RestDescriptionResources
-    , restDescriptionResources
-
-    -- ** RestDescriptionSchemas
-    , RestDescriptionSchemas
-    , restDescriptionSchemas
+    -- ** RestMethodProtocolsMediaUpload
+    , RestMethodProtocolsMediaUpload
+    , restMethodProtocolsMediaUpload
+    , rmpmuSimple
+    , rmpmuResumable
 
     -- ** RestDescriptionScopesOauth2Auth
     , RestDescriptionScopesOauth2Auth
     , restDescriptionScopesOauth2Auth
+
+    -- ** JsonSchemaItemMapVariant
+    , JsonSchemaItemMapVariant
+    , jsonSchemaItemMapVariant
+    , jsimvRef
+    , jsimvTypeValue
+
+    -- ** RestMethodResponse
+    , RestMethodResponse
+    , restMethodResponse
+    , rRef
 
     -- ** RestMethod
     , RestMethod
@@ -188,39 +185,20 @@ module Network.Google.Discovery
     , rmDescription
     , rmRequest
 
-    -- ** RestMethodMediaUpload
-    , RestMethodMediaUpload
-    , restMethodMediaUpload
-    , rmmuProtocols
-    , rmmuAccept
-    , rmmuMaxSize
+    -- ** RestDescriptionAuth
+    , RestDescriptionAuth
+    , restDescriptionAuth
+    , rdaOauth2
 
-    -- ** RestMethodParameters
-    , RestMethodParameters
-    , restMethodParameters
+    -- ** JsonSchemaVariant
+    , JsonSchemaVariant
+    , jsonSchemaVariant
+    , jsvDiscriminant
+    , jsvMap
 
-    -- ** RestMethodProtocolsMediaUpload
-    , RestMethodProtocolsMediaUpload
-    , restMethodProtocolsMediaUpload
-    , rmpmuSimple
-    , rmpmuResumable
-
-    -- ** RestMethodRequest
-    , RestMethodRequest
-    , restMethodRequest
-    , rmrRef
-    , rmrParameterName
-
-    -- ** RestMethodResponse
-    , RestMethodResponse
-    , restMethodResponse
-    , rRef
-
-    -- ** RestMethodResumableProtocolsMediaUpload
-    , RestMethodResumableProtocolsMediaUpload
-    , restMethodResumableProtocolsMediaUpload
-    , rmrpmuPath
-    , rmrpmuMultipart
+    -- ** RestResourceMethods
+    , RestResourceMethods
+    , restResourceMethods
 
     -- ** RestMethodSimpleProtocolsMediaUpload
     , RestMethodSimpleProtocolsMediaUpload
@@ -228,21 +206,55 @@ module Network.Google.Discovery
     , rmspmuPath
     , rmspmuMultipart
 
-    -- ** RestResource
-    , RestResource
-    , restResource
-    , rrResources
-    , rrMethods
+    -- ** RestMethodResumableProtocolsMediaUpload
+    , RestMethodResumableProtocolsMediaUpload
+    , restMethodResumableProtocolsMediaUpload
+    , rmrpmuPath
+    , rmrpmuMultipart
 
-    -- ** RestResourceMethods
-    , RestResourceMethods
-    , restResourceMethods
+    -- ** RestMethodMediaUpload
+    , RestMethodMediaUpload
+    , restMethodMediaUpload
+    , rmmuProtocols
+    , rmmuAccept
+    , rmmuMaxSize
 
-    -- ** RestResourceResources
-    , RestResourceResources
-    , restResourceResources
+    -- ** JsonSchemaAnnotations
+    , JsonSchemaAnnotations
+    , jsonSchemaAnnotations
+    , jsaRequired
+
+    -- ** RestDescriptionMethods
+    , RestDescriptionMethods
+    , restDescriptionMethods
+
+    -- ** JsonSchema
+    , JsonSchema
+    , jsonSchema
+    , jsAnnotations
+    , jsVariant
+    , jsLocation
+    , jsRef
+    , jsPattern
+    , jsMaximum
+    , jsDefault
+    , jsFormat
+    , jsItems
+    , jsMinimum
+    , jsRequired
+    , jsId
+    , jsAdditionalProperties
+    , jsType
+    , jsEnum
+    , jsRepeated
+    , jsReadOnly
+    , jsEnumDescriptions
+    , jsDescription
+    , jsProperties
     ) where
 
+import           Network.Google.API.Discovery.APIs.GetRest
+import           Network.Google.API.Discovery.APIs.List
 import           Network.Google.Discovery.Types
 import           Network.Google.Prelude
 
@@ -250,38 +262,7 @@ import           Network.Google.Prelude
 TODO
 -}
 
-type Discovery = ApisAPI
+type Discovery = APIsListAPI :<|> APIsGetRestAPI
 
-type ApisAPI = ApisList :<|> ApisGetRest
-
--- | Retrieve the list of APIs supported at this endpoint.
-type ApisList =
-     "discovery" :>
-       "v1" :>
-         "apis" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "preferred" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "name" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Get '[JSON] DirectoryList
-
--- | Retrieve the description of a particular version of an api.
-type ApisGetRest =
-     "discovery" :>
-       "v1" :>
-         "apis" :>
-           Capture "api" Text :>
-             Capture "version" Text :>
-               "rest" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Get '[JSON] RestDescription
+discovery :: Proxy Discovery
+discovery = Proxy

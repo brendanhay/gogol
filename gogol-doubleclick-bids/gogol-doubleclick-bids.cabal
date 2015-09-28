@@ -1,6 +1,6 @@
 name:                  gogol-doubleclick-bids
 version:               0.0.1
-synopsis:              Google DoubleClick Bid Manager API.
+synopsis:              Google DoubleClick Bid Manager API Client.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -16,8 +16,8 @@ extra-source-files:    README.md
 description:
     API for viewing and managing your reports in DoubleClick Bid Manager.
     .
-    /Warning:/ This is an experimental preview release which is still under
-    heavy development and not intended for public consumption, caveat emptor!
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
 
 source-repository head
     type:     git
@@ -30,7 +30,15 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.DoubleClick.Bids
+          Network.Google.API.Doubleclickbidmanager.Lineitems.Downloadlineitems
+        , Network.Google.API.Doubleclickbidmanager.Lineitems.Uploadlineitems
+        , Network.Google.API.Doubleclickbidmanager.Queries.Createquery
+        , Network.Google.API.Doubleclickbidmanager.Queries.Deletequery
+        , Network.Google.API.Doubleclickbidmanager.Queries.Getquery
+        , Network.Google.API.Doubleclickbidmanager.Queries.Listqueries
+        , Network.Google.API.Doubleclickbidmanager.Queries.Runquery
+        , Network.Google.API.Doubleclickbidmanager.Reports.Listreports
+        , Network.Google.DoubleClick.Bids
         , Network.Google.DoubleClick.Bids.Types
 
     other-modules:

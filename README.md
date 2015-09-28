@@ -1,7 +1,7 @@
 # Gogol
 
-**Warning:** This is an experimental preview release which is still under
-heavy development and not intended for public consumption, caveat emptor!
+**Warning:** This is an experimental prototype/preview release which is still
+under heavy development and not intended for public consumption, caveat emptor!
 
 
 * [Description](#description)

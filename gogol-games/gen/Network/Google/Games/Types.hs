@@ -14,50 +14,15 @@
 --
 module Network.Google.Games.Types
     (
+    -- * Service URL
+      gamesURL
 
-    -- * AchievementDefinition
-      AchievementDefinition
-    , achievementDefinition
-    , adAchievementType
-    , adFormattedTotalSteps
-    , adRevealedIconUrl
-    , adKind
-    , adExperiencePoints
-    , adInitialState
-    , adName
-    , adId
-    , adIsUnlockedIconUrlDefault
-    , adTotalSteps
-    , adDescription
-    , adIsRevealedIconUrlDefault
-    , adUnlockedIconUrl
-
-    -- * AchievementDefinitionsListResponse
-    , AchievementDefinitionsListResponse
-    , achievementDefinitionsListResponse
-    , adlrNextPageToken
-    , adlrKind
-    , adlrItems
-
-    -- * AchievementIncrementResponse
-    , AchievementIncrementResponse
-    , achievementIncrementResponse
-    , airKind
-    , airNewlyUnlocked
-    , airCurrentSteps
-
-    -- * AchievementRevealResponse
-    , AchievementRevealResponse
-    , achievementRevealResponse
-    , arrKind
-    , arrCurrentState
-
-    -- * AchievementSetStepsAtLeastResponse
-    , AchievementSetStepsAtLeastResponse
-    , achievementSetStepsAtLeastResponse
-    , assalrKind
-    , assalrNewlyUnlocked
-    , assalrCurrentSteps
+    -- * EventUpdateRequest
+    , EventUpdateRequest
+    , eventUpdateRequest
+    , eurUpdateCount
+    , eurKind
+    , eurDefinitionId
 
     -- * AchievementUnlockResponse
     , AchievementUnlockResponse
@@ -65,17 +30,52 @@ module Network.Google.Games.Types
     , aurKind
     , aurNewlyUnlocked
 
+    -- * PlayerAchievement
+    , PlayerAchievement
+    , playerAchievement
+    , paKind
+    , paAchievementState
+    , paFormattedCurrentStepsString
+    , paExperiencePoints
+    , paId
+    , paCurrentSteps
+    , paLastUpdatedTimestamp
+
+    -- * ScoresList'TimeSpan
+    , ScoresList'TimeSpan (..)
+
+    -- * ApplicationsGet'PlatformType
+    , ApplicationsGet'PlatformType (..)
+
+    -- * LeaderboardScoreRank
+    , LeaderboardScoreRank
+    , leaderboardScoreRank
+    , lsrNumScores
+    , lsrKind
+    , lsrFormattedRank
+    , lsrFormattedNumScores
+    , lsrRank
+
     -- * AchievementUpdateMultipleRequest
     , AchievementUpdateMultipleRequest
     , achievementUpdateMultipleRequest
     , aumrKind
     , aumrUpdates
 
-    -- * AchievementUpdateMultipleResponse
-    , AchievementUpdateMultipleResponse
-    , achievementUpdateMultipleResponse
-    , aumruKind
-    , aumruUpdatedAchievements
+    -- * RoomP2PStatuses
+    , RoomP2PStatuses
+    , roomP2PStatuses
+    , rppsKind
+    , rppsUpdates
+
+    -- * ImageAsset
+    , ImageAsset
+    , imageAsset
+    , iaHeight
+    , iaKind
+    , iaUrl
+    , iaWidth
+    , iaName
 
     -- * AchievementUpdateRequest
     , AchievementUpdateRequest
@@ -86,31 +86,30 @@ module Network.Google.Games.Types
     , aSetStepsAtLeastPayload
     , aIncrementPayload
 
-    -- * AchievementUpdateResponse
-    , AchievementUpdateResponse
-    , achievementUpdateResponse
-    , achUpdateOccurred
-    , achAchievementId
-    , achKind
-    , achCurrentState
-    , achNewlyUnlocked
-    , achCurrentSteps
+    -- * RoomAutoMatchStatus
+    , RoomAutoMatchStatus
+    , roomAutoMatchStatus
+    , ramsKind
+    , ramsWaitEstimateSeconds
 
-    -- * AggregateStats
-    , AggregateStats
-    , aggregateStats
-    , asMax
-    , asKind
-    , asCount
-    , asMin
-    , asSum
+    -- * PlayerScoreListResponse
+    , PlayerScoreListResponse
+    , playerScoreListResponse
+    , pslrSubmittedScores
+    , pslrKind
 
-    -- * AnonymousPlayer
-    , AnonymousPlayer
-    , anonymousPlayer
-    , apAvatarImageUrl
-    , apKind
-    , apDisplayName
+    -- * PlayerLeaderboardScore
+    , PlayerLeaderboardScore
+    , playerLeaderboardScore
+    , plsScoreTag
+    , plsScoreString
+    , plsKind
+    , plsScoreValue
+    , plsTimeSpan
+    , plsPublicRank
+    , plsSocialRank
+    , plsLeaderboardId
+    , plsWriteTimestamp
 
     -- * Application
     , Application
@@ -129,6 +128,15 @@ module Network.Google.Games.Types
     , appDescription
     , appLastUpdatedTimestamp
 
+    -- * TurnBasedMatchTurn
+    , TurnBasedMatchTurn
+    , turnBasedMatchTurn
+    , tbmtResults
+    , tbmtKind
+    , tbmtData
+    , tbmtPendingParticipantId
+    , tbmtMatchVersion
+
     -- * ApplicationCategory
     , ApplicationCategory
     , applicationCategory
@@ -136,19 +144,71 @@ module Network.Google.Games.Types
     , acKind
     , acPrimary
 
-    -- * Category
-    , Category
-    , category
-    , cKind
-    , cCategory
-    , cExperiencePoints
+    -- * NetworkDiagnostics
+    , NetworkDiagnostics
+    , networkDiagnostics
+    , ndAndroidNetworkType
+    , ndKind
+    , ndNetworkOperatorCode
+    , ndNetworkOperatorName
+    , ndRegistrationLatencyMillis
+    , ndIosNetworkType
+    , ndAndroidNetworkSubtype
 
-    -- * CategoryListResponse
-    , CategoryListResponse
-    , categoryListResponse
-    , clrNextPageToken
-    , clrKind
-    , clrItems
+    -- * Alt
+    , Alt (..)
+
+    -- * AchievementRevealResponse
+    , AchievementRevealResponse
+    , achievementRevealResponse
+    , arrKind
+    , arrCurrentState
+
+    -- * AchievementSetStepsAtLeastResponse
+    , AchievementSetStepsAtLeastResponse
+    , achievementSetStepsAtLeastResponse
+    , assalrKind
+    , assalrNewlyUnlocked
+    , assalrCurrentSteps
+
+    -- * AchievementIncrementResponse
+    , AchievementIncrementResponse
+    , achievementIncrementResponse
+    , airKind
+    , airNewlyUnlocked
+    , airCurrentSteps
+
+    -- * TurnBasedMatchResults
+    , TurnBasedMatchResults
+    , turnBasedMatchResults
+    , tbmrResults
+    , tbmrKind
+    , tbmrData
+    , tbmrMatchVersion
+
+    -- * Played
+    , Played
+    , played
+    , pKind
+    , pAutoMatched
+    , pTimeMillis
+
+    -- * MetagameListCategoriesByPlayer'Collection
+    , MetagameListCategoriesByPlayer'Collection (..)
+
+    -- * RoomLeaveRequest
+    , RoomLeaveRequest
+    , roomLeaveRequest
+    , rlrKind
+    , rlrReason
+    , rlrLeaveDiagnostics
+
+    -- * PlayerAchievementListResponse
+    , PlayerAchievementListResponse
+    , playerAchievementListResponse
+    , palrNextPageToken
+    , palrKind
+    , palrItems
 
     -- * EventBatchRecordFailure
     , EventBatchRecordFailure
@@ -156,52 +216,6 @@ module Network.Google.Games.Types
     , ebrfKind
     , ebrfRange
     , ebrfFailureCause
-
-    -- * EventChild
-    , EventChild
-    , eventChild
-    , ecKind
-    , ecChildId
-
-    -- * EventDefinition
-    , EventDefinition
-    , eventDefinition
-    , edIsDefaultImageUrl
-    , edKind
-    , edVisibility
-    , edImageUrl
-    , edDisplayName
-    , edId
-    , edChildEvents
-    , edDescription
-
-    -- * EventDefinitionListResponse
-    , EventDefinitionListResponse
-    , eventDefinitionListResponse
-    , edlrNextPageToken
-    , edlrKind
-    , edlrItems
-
-    -- * EventPeriodRange
-    , EventPeriodRange
-    , eventPeriodRange
-    , eprKind
-    , eprPeriodStartMillis
-    , eprPeriodEndMillis
-
-    -- * EventPeriodUpdate
-    , EventPeriodUpdate
-    , eventPeriodUpdate
-    , epuKind
-    , epuTimePeriod
-    , epuUpdates
-
-    -- * EventRecordFailure
-    , EventRecordFailure
-    , eventRecordFailure
-    , erfKind
-    , erfFailureCause
-    , erfEventId
 
     -- * EventRecordRequest
     , EventRecordRequest
@@ -211,20 +225,99 @@ module Network.Google.Games.Types
     , errCurrentTimeMillis
     , errTimePeriods
 
-    -- * EventUpdateRequest
-    , EventUpdateRequest
-    , eventUpdateRequest
-    , eurUpdateCount
-    , eurKind
-    , eurDefinitionId
+    -- * PushTokenId
+    , PushTokenId
+    , pushTokenId
+    , ptiIos
+    , ptiKind
 
-    -- * EventUpdateResponse
-    , EventUpdateResponse
-    , eventUpdateResponse
-    , ePlayerEvents
-    , eBatchFailures
-    , eEventFailures
-    , eKind
+    -- * ScoresListWindow'TimeSpan
+    , ScoresListWindow'TimeSpan (..)
+
+    -- * ScoreSubmission
+    , ScoreSubmission
+    , scoreSubmission
+    , ssSignature
+    , ssScoreTag
+    , ssScore
+    , ssKind
+    , ssLeaderboardId
+
+    -- * EventPeriodUpdate
+    , EventPeriodUpdate
+    , eventPeriodUpdate
+    , epuKind
+    , epuTimePeriod
+    , epuUpdates
+
+    -- * QuestMilestone
+    , QuestMilestone
+    , questMilestone
+    , qmState
+    , qmKind
+    , qmId
+    , qmCompletionRewardData
+    , qmCriteria
+
+    -- * TurnBasedMatchSync
+    , TurnBasedMatchSync
+    , turnBasedMatchSync
+    , tbmsMoreAvailable
+    , tbmsNextPageToken
+    , tbmsKind
+    , tbmsItems
+
+    -- * RoomLeaveDiagnostics
+    , RoomLeaveDiagnostics
+    , roomLeaveDiagnostics
+    , rldPeerSession
+    , rldAndroidNetworkType
+    , rldKind
+    , rldNetworkOperatorCode
+    , rldNetworkOperatorName
+    , rldSocketsUsed
+    , rldIosNetworkType
+    , rldAndroidNetworkSubtype
+
+    -- * PeerSessionDiagnostics
+    , PeerSessionDiagnostics
+    , peerSessionDiagnostics
+    , psdConnectedTimestampMillis
+    , psdParticipantId
+    , psdKind
+    , psdUnreliableChannel
+    , psdReliableChannel
+
+    -- * AggregateStats
+    , AggregateStats
+    , aggregateStats
+    , asMax
+    , asKind
+    , asCount
+    , asMin
+    , asSum
+
+    -- * RoomAutoMatchingCriteria
+    , RoomAutoMatchingCriteria
+    , roomAutoMatchingCriteria
+    , ramcKind
+    , ramcExclusiveBitmask
+    , ramcMaxAutoMatchingPlayers
+    , ramcMinAutoMatchingPlayers
+
+    -- * TurnBasedMatchRematch
+    , TurnBasedMatchRematch
+    , turnBasedMatchRematch
+    , tRematch
+    , tKind
+    , tPreviousMatch
+
+    -- * InstanceWebDetails
+    , InstanceWebDetails
+    , instanceWebDetails
+    , iwdPreferred
+    , iwdKind
+    , iwdLaunchUrl
 
     -- * GamesAchievementIncrement
     , GamesAchievementIncrement
@@ -233,20 +326,72 @@ module Network.Google.Games.Types
     , gaiKind
     , gaiSteps
 
+    -- * Player
+    , Player
+    , player
+    , plaLastPlayedWith
+    , plaAvatarImageUrl
+    , plaKind
+    , plaExperienceInfo
+    , plaName
+    , plaDisplayName
+    , plaTitle
+    , plaPlayerId
+
+    -- * PlayerExperienceInfo
+    , PlayerExperienceInfo
+    , playerExperienceInfo
+    , peiKind
+    , peiCurrentExperiencePoints
+    , peiCurrentLevel
+    , peiNextLevel
+    , peiLastLevelUpTimestampMillis
+
     -- * GamesAchievementSetStepsAtLeast
     , GamesAchievementSetStepsAtLeast
     , gamesAchievementSetStepsAtLeast
     , gassalKind
     , gassalSteps
 
-    -- * ImageAsset
-    , ImageAsset
-    , imageAsset
-    , iaHeight
-    , iaKind
-    , iaUrl
-    , iaWidth
-    , iaName
+    -- * ParticipantResult
+    , ParticipantResult
+    , participantResult
+    , prParticipantId
+    , prKind
+    , prResult
+    , prPlacing
+
+    -- * RevisionCheckResponse
+    , RevisionCheckResponse
+    , revisionCheckResponse
+    , rcrApiVersion
+    , rcrKind
+    , rcrRevisionStatus
+
+    -- * InstanceIosDetails
+    , InstanceIosDetails
+    , instanceIosDetails
+    , iidItunesAppId
+    , iidPreferredForIpad
+    , iidSupportIphone
+    , iidKind
+    , iidSupportIpad
+    , iidPreferredForIphone
+    , iidBundleIdentifier
+
+    -- * PushTokenIdIos
+    , PushTokenIdIos
+    , pushTokenIdIos
+    , ptiiApnsDeviceToken
+    , ptiiApnsEnvironment
+
+    -- * EventUpdateResponse
+    , EventUpdateResponse
+    , eventUpdateResponse
+    , ePlayerEvents
+    , eBatchFailures
+    , eEventFailures
+    , eKind
 
     -- * Instance
     , Instance
@@ -261,481 +406,18 @@ module Network.Google.Games.Types
     , iTurnBasedPlay
     , iRealtimePlay
 
-    -- * InstanceAndroidDetails
-    , InstanceAndroidDetails
-    , instanceAndroidDetails
-    , iadPackageName
-    , iadPreferred
-    , iadKind
-    , iadEnablePiracyCheck
-
-    -- * InstanceIosDetails
-    , InstanceIosDetails
-    , instanceIosDetails
-    , iidItunesAppId
-    , iidPreferredForIpad
-    , iidSupportIphone
-    , iidKind
-    , iidSupportIpad
-    , iidPreferredForIphone
-    , iidBundleIdentifier
-
-    -- * InstanceWebDetails
-    , InstanceWebDetails
-    , instanceWebDetails
-    , iwdPreferred
-    , iwdKind
-    , iwdLaunchUrl
-
-    -- * Leaderboard
-    , Leaderboard
-    , leaderboard
-    , lKind
-    , lIsIconUrlDefault
-    , lName
-    , lId
-    , lIconUrl
-    , lOrder
-
-    -- * LeaderboardEntry
-    , LeaderboardEntry
-    , leaderboardEntry
-    , leScoreTag
-    , leWriteTimestampMillis
-    , leKind
-    , leScoreValue
-    , leFormattedScore
-    , leTimeSpan
-    , leFormattedScoreRank
-    , lePlayer
-    , leScoreRank
-
-    -- * LeaderboardListResponse
-    , LeaderboardListResponse
-    , leaderboardListResponse
-    , llrNextPageToken
-    , llrKind
-    , llrItems
-
-    -- * LeaderboardScoreRank
-    , LeaderboardScoreRank
-    , leaderboardScoreRank
-    , lsrNumScores
-    , lsrKind
-    , lsrFormattedRank
-    , lsrFormattedNumScores
-    , lsrRank
-
-    -- * LeaderboardScores
-    , LeaderboardScores
-    , leaderboardScores
-    , lsNextPageToken
-    , lsNumScores
-    , lsKind
-    , lsPlayerScore
-    , lsItems
-    , lsPrevPageToken
-
-    -- * MetagameConfig
-    , MetagameConfig
-    , metagameConfig
-    , mcKind
-    , mcCurrentVersion
-    , mcPlayerLevels
-
-    -- * NetworkDiagnostics
-    , NetworkDiagnostics
-    , networkDiagnostics
-    , ndAndroidNetworkType
-    , ndKind
-    , ndNetworkOperatorCode
-    , ndNetworkOperatorName
-    , ndRegistrationLatencyMillis
-    , ndIosNetworkType
-    , ndAndroidNetworkSubtype
-
-    -- * ParticipantResult
-    , ParticipantResult
-    , participantResult
-    , prParticipantId
-    , prKind
-    , prResult
-    , prPlacing
-
-    -- * PeerChannelDiagnostics
-    , PeerChannelDiagnostics
-    , peerChannelDiagnostics
-    , pcdNumMessagesLost
-    , pcdBytesSent
-    , pcdKind
-    , pcdRoundtripLatencyMillis
-    , pcdBytesReceived
-    , pcdNumMessagesReceived
-    , pcdNumSendFailures
-    , pcdNumMessagesSent
-
-    -- * PeerSessionDiagnostics
-    , PeerSessionDiagnostics
-    , peerSessionDiagnostics
-    , psdConnectedTimestampMillis
-    , psdParticipantId
-    , psdKind
-    , psdUnreliableChannel
-    , psdReliableChannel
-
-    -- * Played
-    , Played
-    , played
-    , pKind
-    , pAutoMatched
-    , pTimeMillis
-
-    -- * Player
-    , Player
-    , player
-    , plaLastPlayedWith
-    , plaAvatarImageUrl
-    , plaKind
-    , plaExperienceInfo
-    , plaName
-    , plaDisplayName
-    , plaTitle
-    , plaPlayerId
-
-    -- * PlayerAchievement
-    , PlayerAchievement
-    , playerAchievement
-    , paKind
-    , paAchievementState
-    , paFormattedCurrentStepsString
-    , paExperiencePoints
-    , paId
-    , paCurrentSteps
-    , paLastUpdatedTimestamp
-
-    -- * PlayerAchievementListResponse
-    , PlayerAchievementListResponse
-    , playerAchievementListResponse
-    , palrNextPageToken
-    , palrKind
-    , palrItems
-
-    -- * PlayerEvent
-    , PlayerEvent
-    , playerEvent
-    , peKind
-    , peNumEvents
-    , peFormattedNumEvents
-    , peDefinitionId
-    , pePlayerId
-
-    -- * PlayerEventListResponse
-    , PlayerEventListResponse
-    , playerEventListResponse
-    , pelrNextPageToken
-    , pelrKind
-    , pelrItems
-
-    -- * PlayerExperienceInfo
-    , PlayerExperienceInfo
-    , playerExperienceInfo
-    , peiKind
-    , peiCurrentExperiencePoints
-    , peiCurrentLevel
-    , peiNextLevel
-    , peiLastLevelUpTimestampMillis
-
-    -- * PlayerLeaderboardScore
-    , PlayerLeaderboardScore
-    , playerLeaderboardScore
-    , plsScoreTag
-    , plsScoreString
-    , plsKind
-    , plsScoreValue
-    , plsTimeSpan
-    , plsPublicRank
-    , plsSocialRank
-    , plsLeaderboardId
-    , plsWriteTimestamp
-
-    -- * PlayerLeaderboardScoreListResponse
-    , PlayerLeaderboardScoreListResponse
-    , playerLeaderboardScoreListResponse
-    , plslrNextPageToken
-    , plslrKind
-    , plslrItems
-    , plslrPlayer
-
-    -- * PlayerLevel
-    , PlayerLevel
-    , playerLevel
-    , plMaxExperiencePoints
-    , plKind
-    , plMinExperiencePoints
-    , plLevel
-
-    -- * PlayerListResponse
-    , PlayerListResponse
-    , playerListResponse
-    , plrNextPageToken
-    , plrKind
-    , plrItems
-
-    -- * PlayerName
-    , PlayerName
-    , playerName
-    , pnGivenName
-    , pnFamilyName
-
-    -- * PlayerScore
-    , PlayerScore
-    , playerScore
-    , psScoreTag
-    , psScore
-    , psKind
-    , psFormattedScore
-    , psTimeSpan
-
-    -- * PlayerScoreListResponse
-    , PlayerScoreListResponse
-    , playerScoreListResponse
-    , pslrSubmittedScores
-    , pslrKind
-
-    -- * PlayerScoreResponse
-    , PlayerScoreResponse
-    , playerScoreResponse
-    , psrScoreTag
-    , psrKind
-    , psrFormattedScore
-    , psrLeaderboardId
-    , psrBeatenScoreTimeSpans
-    , psrUnbeatenScores
-
     -- * PlayerScoreSubmissionList
     , PlayerScoreSubmissionList
     , playerScoreSubmissionList
     , psslKind
     , psslScores
 
-    -- * PushToken
-    , PushToken
-    , pushToken
-    , ptClientRevision
-    , ptKind
-    , ptLanguage
-    , ptId
-
-    -- * PushTokenId
-    , PushTokenId
-    , pushTokenId
-    , ptiIos
-    , ptiKind
-
-    -- * PushTokenIdIos
-    , PushTokenIdIos
-    , pushTokenIdIos
-    , ptiiApnsDeviceToken
-    , ptiiApnsEnvironment
-
-    -- * Quest
-    , Quest
-    , quest
-    , queLastUpdatedTimestampMillis
-    , queBannerUrl
-    , queState
-    , queMilestones
-    , queKind
-    , queApplicationId
-    , queEndTimestampMillis
-    , queName
-    , queId
-    , queIconUrl
-    , queStartTimestampMillis
-    , queNotifyTimestampMillis
-    , queDescription
-    , queIsDefaultBannerUrl
-    , queIsDefaultIconUrl
-    , queAcceptedTimestampMillis
-
-    -- * QuestContribution
-    , QuestContribution
-    , questContribution
-    , qKind
-    , qValue
-    , qFormattedValue
-
-    -- * QuestCriterion
-    , QuestCriterion
-    , questCriterion
-    , qcCurrentContribution
-    , qcCompletionContribution
-    , qcKind
-    , qcInitialPlayerProgress
-    , qcEventId
-
-    -- * QuestListResponse
-    , QuestListResponse
-    , questListResponse
-    , qlrNextPageToken
-    , qlrKind
-    , qlrItems
-
-    -- * QuestMilestone
-    , QuestMilestone
-    , questMilestone
-    , qmState
-    , qmKind
-    , qmId
-    , qmCompletionRewardData
-    , qmCriteria
-
-    -- * RevisionCheckResponse
-    , RevisionCheckResponse
-    , revisionCheckResponse
-    , rcrApiVersion
-    , rcrKind
-    , rcrRevisionStatus
-
-    -- * Room
-    , Room
-    , room
-    , rStatus
-    , rVariant
-    , rKind
-    , rAutoMatchingStatus
-    , rCreationDetails
-    , rInviterId
-    , rLastUpdateDetails
-    , rRoomStatusVersion
-    , rParticipants
-    , rApplicationId
-    , rAutoMatchingCriteria
-    , rRoomId
-    , rDescription
-
-    -- * RoomAutoMatchStatus
-    , RoomAutoMatchStatus
-    , roomAutoMatchStatus
-    , ramsKind
-    , ramsWaitEstimateSeconds
-
-    -- * RoomAutoMatchingCriteria
-    , RoomAutoMatchingCriteria
-    , roomAutoMatchingCriteria
-    , ramcKind
-    , ramcExclusiveBitmask
-    , ramcMaxAutoMatchingPlayers
-    , ramcMinAutoMatchingPlayers
-
-    -- * RoomClientAddress
-    , RoomClientAddress
-    , roomClientAddress
-    , rcaKind
-    , rcaXmppAddress
-
-    -- * RoomCreateRequest
-    , RoomCreateRequest
-    , roomCreateRequest
-    , rooRequestId
-    , rooVariant
-    , rooNetworkDiagnostics
-    , rooKind
-    , rooInvitedPlayerIds
-    , rooClientAddress
-    , rooAutoMatchingCriteria
-    , rooCapabilities
-
-    -- * RoomJoinRequest
-    , RoomJoinRequest
-    , roomJoinRequest
-    , rjrNetworkDiagnostics
-    , rjrKind
-    , rjrClientAddress
-    , rjrCapabilities
-
-    -- * RoomLeaveDiagnostics
-    , RoomLeaveDiagnostics
-    , roomLeaveDiagnostics
-    , rldPeerSession
-    , rldAndroidNetworkType
-    , rldKind
-    , rldNetworkOperatorCode
-    , rldNetworkOperatorName
-    , rldSocketsUsed
-    , rldIosNetworkType
-    , rldAndroidNetworkSubtype
-
-    -- * RoomLeaveRequest
-    , RoomLeaveRequest
-    , roomLeaveRequest
-    , rlrKind
-    , rlrReason
-    , rlrLeaveDiagnostics
-
-    -- * RoomList
-    , RoomList
-    , roomList
-    , rlNextPageToken
-    , rlKind
-    , rlItems
-
-    -- * RoomModification
-    , RoomModification
-    , roomModification
-    , rmParticipantId
-    , rmKind
-    , rmModifiedTimestampMillis
-
-    -- * RoomP2PStatus
-    , RoomP2PStatus
-    , roomP2PStatus
-    , rppssStatus
-    , rppssParticipantId
-    , rppssKind
-    , rppssError
-    , rppssErrorReason
-    , rppssConnectionSetupLatencyMillis
-    , rppssUnreliableRoundtripLatencyMillis
-
-    -- * RoomP2PStatuses
-    , RoomP2PStatuses
-    , roomP2PStatuses
-    , rppsKind
-    , rppsUpdates
-
-    -- * RoomParticipant
-    , RoomParticipant
-    , roomParticipant
-    , rpStatus
-    , rpConnected
-    , rpLeaveReason
-    , rpKind
-    , rpClientAddress
-    , rpId
-    , rpAutoMatched
-    , rpPlayer
-    , rpCapabilities
-    , rpAutoMatchedPlayer
-
-    -- * RoomStatus
-    , RoomStatus
-    , roomStatus
-    , rsStatus
-    , rsKind
-    , rsAutoMatchingStatus
-    , rsStatusVersion
-    , rsParticipants
-    , rsRoomId
-
-    -- * ScoreSubmission
-    , ScoreSubmission
-    , scoreSubmission
-    , ssSignature
-    , ssScoreTag
-    , ssScore
-    , ssKind
-    , ssLeaderboardId
+    -- * EventRecordFailure
+    , EventRecordFailure
+    , eventRecordFailure
+    , erfKind
+    , erfFailureCause
+    , erfEventId
 
     -- * Snapshot
     , Snapshot
@@ -752,29 +434,62 @@ module Network.Google.Games.Types
     , sDescription
     , sDriveId
 
-    -- * SnapshotImage
-    , SnapshotImage
-    , snapshotImage
-    , siHeight
-    , siKind
-    , siUrl
-    , siMimeType
-    , siWidth
+    -- * RoomJoinRequest
+    , RoomJoinRequest
+    , roomJoinRequest
+    , rjrNetworkDiagnostics
+    , rjrKind
+    , rjrClientAddress
+    , rjrCapabilities
 
-    -- * SnapshotListResponse
-    , SnapshotListResponse
-    , snapshotListResponse
-    , slrNextPageToken
-    , slrKind
-    , slrItems
+    -- * Room
+    , Room
+    , room
+    , rooStatus
+    , rooVariant
+    , rooKind
+    , rooAutoMatchingStatus
+    , rooCreationDetails
+    , rooInviterId
+    , rooLastUpdateDetails
+    , rooRoomStatusVersion
+    , rooParticipants
+    , rooApplicationId
+    , rooAutoMatchingCriteria
+    , rooRoomId
+    , rooDescription
 
-    -- * TurnBasedAutoMatchingCriteria
-    , TurnBasedAutoMatchingCriteria
-    , turnBasedAutoMatchingCriteria
-    , tbamcKind
-    , tbamcExclusiveBitmask
-    , tbamcMaxAutoMatchingPlayers
-    , tbamcMinAutoMatchingPlayers
+    -- * TurnBasedMatchData
+    , TurnBasedMatchData
+    , turnBasedMatchData
+    , tbmdKind
+    , tbmdData
+    , tbmdDataAvailable
+
+    -- * PlayerEvent
+    , PlayerEvent
+    , playerEvent
+    , peKind
+    , peNumEvents
+    , peFormattedNumEvents
+    , peDefinitionId
+    , pePlayerId
+
+    -- * QuestListResponse
+    , QuestListResponse
+    , questListResponse
+    , qlrNextPageToken
+    , qlrKind
+    , qlrItems
+
+    -- * PlayerName
+    , PlayerName
+    , playerName
+    , pnGivenName
+    , pnFamilyName
+
+    -- * ScoresListWindow'Collection
+    , ScoresListWindow'Collection (..)
 
     -- * TurnBasedMatch
     , TurnBasedMatch
@@ -800,6 +515,13 @@ module Network.Google.Games.Types
     , tbmRematchId
     , tbmMatchVersion
 
+    -- * PlayerListResponse
+    , PlayerListResponse
+    , playerListResponse
+    , plrNextPageToken
+    , plrKind
+    , plrItems
+
     -- * TurnBasedMatchCreateRequest
     , TurnBasedMatchCreateRequest
     , turnBasedMatchCreateRequest
@@ -809,18 +531,54 @@ module Network.Google.Games.Types
     , tbmcrInvitedPlayerIds
     , tbmcrAutoMatchingCriteria
 
-    -- * TurnBasedMatchData
-    , TurnBasedMatchData
-    , turnBasedMatchData
-    , tbmdKind
-    , tbmdData
-    , tbmdDataAvailable
+    -- * AchievementDefinition
+    , AchievementDefinition
+    , achievementDefinition
+    , adAchievementType
+    , adFormattedTotalSteps
+    , adRevealedIconUrl
+    , adKind
+    , adExperiencePoints
+    , adInitialState
+    , adName
+    , adId
+    , adIsUnlockedIconUrlDefault
+    , adTotalSteps
+    , adDescription
+    , adIsRevealedIconUrlDefault
+    , adUnlockedIconUrl
 
-    -- * TurnBasedMatchDataRequest
-    , TurnBasedMatchDataRequest
-    , turnBasedMatchDataRequest
-    , tbmdrKind
-    , tbmdrData
+    -- * RoomCreateRequest
+    , RoomCreateRequest
+    , roomCreateRequest
+    , rRequestId
+    , rVariant
+    , rNetworkDiagnostics
+    , rKind
+    , rInvitedPlayerIds
+    , rClientAddress
+    , rAutoMatchingCriteria
+    , rCapabilities
+
+    -- * LeaderboardScores
+    , LeaderboardScores
+    , leaderboardScores
+    , lsNextPageToken
+    , lsNumScores
+    , lsKind
+    , lsPlayerScore
+    , lsItems
+    , lsPrevPageToken
+
+    -- * AchievementUpdateResponse
+    , AchievementUpdateResponse
+    , achievementUpdateResponse
+    , achUpdateOccurred
+    , achAchievementId
+    , achKind
+    , achCurrentState
+    , achNewlyUnlocked
+    , achCurrentSteps
 
     -- * TurnBasedMatchList
     , TurnBasedMatchList
@@ -829,12 +587,131 @@ module Network.Google.Games.Types
     , tbmlKind
     , tbmlItems
 
-    -- * TurnBasedMatchModification
-    , TurnBasedMatchModification
-    , turnBasedMatchModification
-    , tbmmParticipantId
-    , tbmmKind
-    , tbmmModifiedTimestampMillis
+    -- * LeaderboardEntry
+    , LeaderboardEntry
+    , leaderboardEntry
+    , leScoreTag
+    , leWriteTimestampMillis
+    , leKind
+    , leScoreValue
+    , leFormattedScore
+    , leTimeSpan
+    , leFormattedScoreRank
+    , lePlayer
+    , leScoreRank
+
+    -- * PeerChannelDiagnostics
+    , PeerChannelDiagnostics
+    , peerChannelDiagnostics
+    , pcdNumMessagesLost
+    , pcdBytesSent
+    , pcdKind
+    , pcdRoundtripLatencyMillis
+    , pcdBytesReceived
+    , pcdNumMessagesReceived
+    , pcdNumSendFailures
+    , pcdNumMessagesSent
+
+    -- * SnapshotListResponse
+    , SnapshotListResponse
+    , snapshotListResponse
+    , slrNextPageToken
+    , slrKind
+    , slrItems
+
+    -- * PushToken
+    , PushToken
+    , pushToken
+    , ptClientRevision
+    , ptKind
+    , ptLanguage
+    , ptId
+
+    -- * AchievementUpdateMultipleResponse
+    , AchievementUpdateMultipleResponse
+    , achievementUpdateMultipleResponse
+    , aumruKind
+    , aumruUpdatedAchievements
+
+    -- * RoomList
+    , RoomList
+    , roomList
+    , rlNextPageToken
+    , rlKind
+    , rlItems
+
+    -- * PlayerLevel
+    , PlayerLevel
+    , playerLevel
+    , plMaxExperiencePoints
+    , plKind
+    , plMinExperiencePoints
+    , plLevel
+
+    -- * QuestCriterion
+    , QuestCriterion
+    , questCriterion
+    , qcCurrentContribution
+    , qcCompletionContribution
+    , qcKind
+    , qcInitialPlayerProgress
+    , qcEventId
+
+    -- * AchievementsList'State
+    , AchievementsList'State (..)
+
+    -- * PlayerScoreResponse
+    , PlayerScoreResponse
+    , playerScoreResponse
+    , psrScoreTag
+    , psrKind
+    , psrFormattedScore
+    , psrLeaderboardId
+    , psrBeatenScoreTimeSpans
+    , psrUnbeatenScores
+
+    -- * InstanceAndroidDetails
+    , InstanceAndroidDetails
+    , instanceAndroidDetails
+    , iadPackageName
+    , iadPreferred
+    , iadKind
+    , iadEnablePiracyCheck
+
+    -- * AnonymousPlayer
+    , AnonymousPlayer
+    , anonymousPlayer
+    , apAvatarImageUrl
+    , apKind
+    , apDisplayName
+
+    -- * RoomParticipant
+    , RoomParticipant
+    , roomParticipant
+    , rpStatus
+    , rpConnected
+    , rpLeaveReason
+    , rpKind
+    , rpClientAddress
+    , rpId
+    , rpAutoMatched
+    , rpPlayer
+    , rpCapabilities
+    , rpAutoMatchedPlayer
+
+    -- * Category
+    , Category
+    , category
+    , cKind
+    , cCategory
+    , cExperiencePoints
+
+    -- * LeaderboardListResponse
+    , LeaderboardListResponse
+    , leaderboardListResponse
+    , llrNextPageToken
+    , llrKind
+    , llrItems
 
     -- * TurnBasedMatchParticipant
     , TurnBasedMatchParticipant
@@ -846,39 +723,204 @@ module Network.Google.Games.Types
     , tbmpPlayer
     , tbmpAutoMatchedPlayer
 
-    -- * TurnBasedMatchRematch
-    , TurnBasedMatchRematch
-    , turnBasedMatchRematch
-    , tRematch
-    , tKind
-    , tPreviousMatch
+    -- * ScoresGet'TimeSpan
+    , ScoresGet'TimeSpan (..)
 
-    -- * TurnBasedMatchResults
-    , TurnBasedMatchResults
-    , turnBasedMatchResults
-    , tbmrResults
-    , tbmrKind
-    , tbmrData
-    , tbmrMatchVersion
+    -- * RoomClientAddress
+    , RoomClientAddress
+    , roomClientAddress
+    , rcaKind
+    , rcaXmppAddress
 
-    -- * TurnBasedMatchSync
-    , TurnBasedMatchSync
-    , turnBasedMatchSync
-    , tbmsMoreAvailable
-    , tbmsNextPageToken
-    , tbmsKind
-    , tbmsItems
+    -- * EventDefinitionListResponse
+    , EventDefinitionListResponse
+    , eventDefinitionListResponse
+    , edlrNextPageToken
+    , edlrKind
+    , edlrItems
 
-    -- * TurnBasedMatchTurn
-    , TurnBasedMatchTurn
-    , turnBasedMatchTurn
-    , tbmtResults
-    , tbmtKind
-    , tbmtData
-    , tbmtPendingParticipantId
-    , tbmtMatchVersion
+    -- * QuestContribution
+    , QuestContribution
+    , questContribution
+    , qKind
+    , qValue
+    , qFormattedValue
+
+    -- * PlayersList'Collection
+    , PlayersList'Collection (..)
+
+    -- * AchievementDefinitionsListResponse
+    , AchievementDefinitionsListResponse
+    , achievementDefinitionsListResponse
+    , adlrNextPageToken
+    , adlrKind
+    , adlrItems
+
+    -- * RoomStatus
+    , RoomStatus
+    , roomStatus
+    , rsStatus
+    , rsKind
+    , rsAutoMatchingStatus
+    , rsStatusVersion
+    , rsParticipants
+    , rsRoomId
+
+    -- * ScoresList'Collection
+    , ScoresList'Collection (..)
+
+    -- * TurnBasedAutoMatchingCriteria
+    , TurnBasedAutoMatchingCriteria
+    , turnBasedAutoMatchingCriteria
+    , tbamcKind
+    , tbamcExclusiveBitmask
+    , tbamcMaxAutoMatchingPlayers
+    , tbamcMinAutoMatchingPlayers
+
+    -- * ScoresGet'IncludeRankType
+    , ScoresGet'IncludeRankType (..)
+
+    -- * PlayerLeaderboardScoreListResponse
+    , PlayerLeaderboardScoreListResponse
+    , playerLeaderboardScoreListResponse
+    , plslrNextPageToken
+    , plslrKind
+    , plslrItems
+    , plslrPlayer
+
+    -- * SnapshotImage
+    , SnapshotImage
+    , snapshotImage
+    , siHeight
+    , siKind
+    , siUrl
+    , siMimeType
+    , siWidth
+
+    -- * PlayerScore
+    , PlayerScore
+    , playerScore
+    , psScoreTag
+    , psScore
+    , psKind
+    , psFormattedScore
+    , psTimeSpan
+
+    -- * TurnBasedMatchDataRequest
+    , TurnBasedMatchDataRequest
+    , turnBasedMatchDataRequest
+    , tbmdrKind
+    , tbmdrData
+
+    -- * EventChild
+    , EventChild
+    , eventChild
+    , ecKind
+    , ecChildId
+
+    -- * PlayerEventListResponse
+    , PlayerEventListResponse
+    , playerEventListResponse
+    , pelrNextPageToken
+    , pelrKind
+    , pelrItems
+
+    -- * EventPeriodRange
+    , EventPeriodRange
+    , eventPeriodRange
+    , eprKind
+    , eprPeriodStartMillis
+    , eprPeriodEndMillis
+
+    -- * Quest
+    , Quest
+    , quest
+    , queLastUpdatedTimestampMillis
+    , queBannerUrl
+    , queState
+    , queMilestones
+    , queKind
+    , queApplicationId
+    , queEndTimestampMillis
+    , queName
+    , queId
+    , queIconUrl
+    , queStartTimestampMillis
+    , queNotifyTimestampMillis
+    , queDescription
+    , queIsDefaultBannerUrl
+    , queIsDefaultIconUrl
+    , queAcceptedTimestampMillis
+
+    -- * CategoryListResponse
+    , CategoryListResponse
+    , categoryListResponse
+    , clrNextPageToken
+    , clrKind
+    , clrItems
+
+    -- * TurnBasedMatchModification
+    , TurnBasedMatchModification
+    , turnBasedMatchModification
+    , tbmmParticipantId
+    , tbmmKind
+    , tbmmModifiedTimestampMillis
+
+    -- * MetagameConfig
+    , MetagameConfig
+    , metagameConfig
+    , mcKind
+    , mcCurrentVersion
+    , mcPlayerLevels
+
+    -- * RoomModification
+    , RoomModification
+    , roomModification
+    , rmParticipantId
+    , rmKind
+    , rmModifiedTimestampMillis
+
+    -- * RoomP2PStatus
+    , RoomP2PStatus
+    , roomP2PStatus
+    , rppssStatus
+    , rppssParticipantId
+    , rppssKind
+    , rppssError
+    , rppssErrorReason
+    , rppssConnectionSetupLatencyMillis
+    , rppssUnreliableRoundtripLatencyMillis
+
+    -- * EventDefinition
+    , EventDefinition
+    , eventDefinition
+    , edIsDefaultImageUrl
+    , edKind
+    , edVisibility
+    , edImageUrl
+    , edDisplayName
+    , edId
+    , edChildEvents
+    , edDescription
+
+    -- * Leaderboard
+    , Leaderboard
+    , leaderboard
+    , lKind
+    , lIsIconUrlDefault
+    , lName
+    , lId
+    , lIconUrl
+    , lOrder
     ) where
 
 import           Network.Google.Games.Types.Product
 import           Network.Google.Games.Types.Sum
 import           Network.Google.Prelude
+
+-- | URL referring to version 'v1' of the Google Play Game Services API.
+gamesURL :: BaseUrl
+gamesURL
+  = BaseUrl Https
+      "https://www.googleapis.com/games/v1/"
+      443

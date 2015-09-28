@@ -48,6 +48,8 @@ library
         , servant
         , servant-client
         , text
+        , either
+        , scientific
 
     if !impl(ghc>=7.9)
         build-depends:

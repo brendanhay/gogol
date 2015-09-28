@@ -17,26 +17,74 @@
 -- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference>
 module Network.Google.Affiliates
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** Google Affiliate Network API
       Affiliates
-    , ReportsAPI
-    , ReportsGet
-    , CcOffersAPI
-    , CcOffersList
-    , AdvertisersAPI
-    , AdvertisersList
-    , AdvertisersGet
-    , EventsAPI
-    , EventsList
-    , PublishersAPI
-    , PublishersList
-    , PublishersGet
-    , LinksAPI
-    , LinksInsert
-    , LinksList
-    , LinksGet
+    , affiliates
+    , affiliatesURL
+
+    -- ** gan.advertisers.get
+    , module Network.Google.API.Gan.Advertisers.Get
+
+    -- ** gan.advertisers.list
+    , module Network.Google.API.Gan.Advertisers.List
+
+    -- ** gan.ccOffers.list
+    , module Network.Google.API.Gan.CcOffers.List
+
+    -- ** gan.events.list
+    , module Network.Google.API.Gan.Events.List
+
+    -- ** gan.links.get
+    , module Network.Google.API.Gan.Links.Get
+
+    -- ** gan.links.insert
+    , module Network.Google.API.Gan.Links.Insert
+
+    -- ** gan.links.list
+    , module Network.Google.API.Gan.Links.List
+
+    -- ** gan.publishers.get
+    , module Network.Google.API.Gan.Publishers.Get
+
+    -- ** gan.publishers.list
+    , module Network.Google.API.Gan.Publishers.List
+
+    -- ** gan.reports.get
+    , module Network.Google.API.Gan.Reports.Get
 
     -- * Types
+
+    -- ** Events
+    , Events
+    , events
+    , eNextPageToken
+    , eKind
+    , eItems
+
+    -- ** CcOfferItemRewards
+    , CcOfferItemRewards
+    , ccOfferItemRewards
+    , coirAmount
+    , coirExpirationMonths
+    , coirCategory
+    , coirAdditionalDetails
+    , coirMaxRewardTier
+    , coirMinRewardTier
+
+    -- ** Alt
+    , Alt (..)
+
+    -- ** LinksList'Authorship
+    , LinksList'Authorship (..)
+
+    -- ** Publishers
+    , Publishers
+    , publishers
+    , pNextPageToken
+    , pKind
+    , pItems
 
     -- ** Advertiser
     , Advertiser
@@ -63,12 +111,11 @@ module Network.Google.Affiliates
     , aCommissionDuration
     , aDescription
 
-    -- ** Advertisers
-    , Advertisers
-    , advertisers
-    , advNextPageToken
-    , advKind
-    , advItems
+    -- ** LinksList'LinkType
+    , LinksList'LinkType (..)
+
+    -- ** EventsList'Status
+    , EventsList'Status (..)
 
     -- ** CcOffer
     , CcOffer
@@ -137,12 +184,6 @@ module Network.Google.Affiliates
     , coRewardPartner
     , coPurchaseRateType
 
-    -- ** CcOfferItemBonusRewards
-    , CcOfferItemBonusRewards
-    , ccOfferItemBonusRewards
-    , coibrAmount
-    , coibrDetails
-
     -- ** CcOfferItemDefaultFees
     , CcOfferItemDefaultFees
     , ccOfferItemDefaultFees
@@ -151,21 +192,55 @@ module Network.Google.Affiliates
     , coidfCategory
     , coidfMaxRate
 
-    -- ** CcOfferItemRewards
-    , CcOfferItemRewards
-    , ccOfferItemRewards
-    , coirAmount
-    , coirExpirationMonths
-    , coirCategory
-    , coirAdditionalDetails
-    , coirMaxRewardTier
-    , coirMinRewardTier
+    -- ** AdvertisersList'RelationshipStatus
+    , AdvertisersList'RelationshipStatus (..)
 
-    -- ** CcOffers
-    , CcOffers
-    , ccOffers
-    , cKind
-    , cItems
+    -- ** CcOffersList'Projection
+    , CcOffersList'Projection (..)
+
+    -- ** ReportsGet'Role
+    , ReportsGet'Role (..)
+
+    -- ** PublishersGet'Role
+    , PublishersGet'Role (..)
+
+    -- ** EventsList'ChargeType
+    , EventsList'ChargeType (..)
+
+    -- ** PublishersList'RelationshipStatus
+    , PublishersList'RelationshipStatus (..)
+
+    -- ** Links
+    , Links
+    , links
+    , lNextPageToken
+    , lKind
+    , lItems
+
+    -- ** Report
+    , Report
+    , report
+    , rEndDate
+    , rTotalsRows
+    , rKind
+    , rStartDate
+    , rRows
+    , rMatchingRowCount
+    , rColumnNames
+    , rType
+
+    -- ** Advertisers
+    , Advertisers
+    , advertisers
+    , advNextPageToken
+    , advKind
+    , advItems
+
+    -- ** LinksList'PromotionType
+    , LinksList'PromotionType (..)
+
+    -- ** LinksList'Role
+    , LinksList'Role (..)
 
     -- ** Event
     , Event
@@ -189,6 +264,21 @@ module Network.Google.Affiliates
     , eveEarnings
     , evePublisherName
 
+    -- ** AdvertisersList'Role
+    , AdvertisersList'Role (..)
+
+    -- ** LinksInsert'Role
+    , LinksInsert'Role (..)
+
+    -- ** CcOfferItemBonusRewards
+    , CcOfferItemBonusRewards
+    , ccOfferItemBonusRewards
+    , coibrAmount
+    , coibrDetails
+
+    -- ** PublishersList'Role
+    , PublishersList'Role (..)
+
     -- ** EventItemProducts
     , EventItemProducts
     , eventItemProducts
@@ -202,12 +292,17 @@ module Network.Google.Affiliates
     , eipUnitPrice
     , eipEarnings
 
-    -- ** Events
-    , Events
-    , events
-    , eNextPageToken
-    , eKind
-    , eItems
+    -- ** LinksList'RelationshipStatus
+    , LinksList'RelationshipStatus (..)
+
+    -- ** EventsList'Role
+    , EventsList'Role (..)
+
+    -- ** LinksGet'Role
+    , LinksGet'Role (..)
+
+    -- ** AdvertisersGet'Role
+    , AdvertisersGet'Role (..)
 
     -- ** Link
     , Link
@@ -234,30 +329,23 @@ module Network.Google.Affiliates
     , linDuration
     , linDescription
 
-    -- ** LinkSpecialOffers
-    , LinkSpecialOffers
-    , linkSpecialOffers
-    , lsoFreeShippingMin
-    , lsoPercentOff
-    , lsoPriceCut
-    , lsoPriceCutMin
-    , lsoPercentOffMin
-    , lsoFreeShipping
-    , lsoPromotionCodes
-    , lsoFreeGift
-
-    -- ** Links
-    , Links
-    , links
-    , lNextPageToken
-    , lKind
-    , lItems
-
     -- ** Money
     , Money
     , money
     , mAmount
     , mCurrencyCode
+
+    -- ** CcOffers
+    , CcOffers
+    , ccOffers
+    , cKind
+    , cItems
+
+    -- ** ReportsGet'EventType
+    , ReportsGet'EventType (..)
+
+    -- ** ReportsGet'Status
+    , ReportsGet'Status (..)
 
     -- ** Publisher
     , Publisher
@@ -274,27 +362,36 @@ module Network.Google.Affiliates
     , pubEpcNinetyDayAverage
     , pubSites
 
-    -- ** Publishers
-    , Publishers
-    , publishers
-    , pNextPageToken
-    , pKind
-    , pItems
+    -- ** ReportsGet'ReportType
+    , ReportsGet'ReportType (..)
 
-    -- ** Report
-    , Report
-    , report
-    , rEndDate
-    , rTotalsRows
-    , rKind
-    , rStartDate
-    , rRows
-    , rMatchingRowCount
-    , rColumnNames
-    , rType
+    -- ** LinkSpecialOffers
+    , LinkSpecialOffers
+    , linkSpecialOffers
+    , lsoFreeShippingMin
+    , lsoPercentOff
+    , lsoPriceCut
+    , lsoPriceCutMin
+    , lsoPercentOffMin
+    , lsoFreeShipping
+    , lsoPromotionCodes
+    , lsoFreeGift
+
+    -- ** EventsList'Type
+    , EventsList'Type (..)
     ) where
 
 import           Network.Google.Affiliates.Types
+import           Network.Google.API.Gan.Advertisers.Get
+import           Network.Google.API.Gan.Advertisers.List
+import           Network.Google.API.Gan.CcOffers.List
+import           Network.Google.API.Gan.Events.List
+import           Network.Google.API.Gan.Links.Get
+import           Network.Google.API.Gan.Links.Insert
+import           Network.Google.API.Gan.Links.List
+import           Network.Google.API.Gan.Publishers.Get
+import           Network.Google.API.Gan.Publishers.List
+import           Network.Google.API.Gan.Reports.Get
 import           Network.Google.Prelude
 
 {- $resources
@@ -302,258 +399,14 @@ TODO
 -}
 
 type Affiliates =
-     ReportsAPI :<|> CcOffersAPI :<|> AdvertisersAPI :<|>
-       EventsAPI
-       :<|> PublishersAPI
-       :<|> LinksAPI
+     LinksListAPI :<|> ReportsGetAPI :<|> PublishersGetAPI
+       :<|> LinksInsertAPI
+       :<|> CcOffersListAPI
+       :<|> EventsListAPI
+       :<|> PublishersListAPI
+       :<|> AdvertisersListAPI
+       :<|> AdvertisersGetAPI
+       :<|> LinksGetAPI
 
-type ReportsAPI = ReportsGet
-
--- | Retrieves a report of the specified type.
-type ReportsGet =
-     "gan" :>
-       "v1beta1" :>
-         Capture "role" Text :>
-           Capture "roleId" Text :>
-             "report" :>
-               Capture "reportType" Text :>
-                 QueryParam "status" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "advertiserId" Text :>
-                           QueryParam "endDate" Text :>
-                             QueryParam "eventType" Text :>
-                               QueryParam "startDate" Text :>
-                                 QueryParam "key" Text :>
-                                   QueryParam "calculateTotals" Bool :>
-                                     QueryParam "linkId" Text :>
-                                       QueryParam "oauth_token" Text :>
-                                         QueryParam "orderId" Text :>
-                                           QueryParam "publisherId" Text :>
-                                             QueryParam "startIndex" Word32 :>
-                                               QueryParam "maxResults" Word32 :>
-                                                 QueryParam "fields" Text :>
-                                                   QueryParam "alt" Text :>
-                                                     Get '[JSON] Report
-
-type CcOffersAPI = CcOffersList
-
--- | Retrieves credit card offers for the given publisher.
-type CcOffersList =
-     "gan" :>
-       "v1beta1" :>
-         "publishers" :>
-           Capture "publisher" Text :>
-             "ccOffers" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "advertiser" Text :>
-                         QueryParam "projection" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Get '[JSON] CcOffers
-
-type AdvertisersAPI =
-     AdvertisersList :<|> AdvertisersGet
-
--- | Retrieves data about all advertisers that the requesting
--- advertiser\/publisher has access to.
-type AdvertisersList =
-     "gan" :>
-       "v1beta1" :>
-         Capture "role" Text :>
-           Capture "roleId" Text :>
-             "advertisers" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "relationshipStatus" Text :>
-                       QueryParam "minSevenDayEpc" Double :>
-                         QueryParam "minNinetyDayEpc" Double :>
-                           QueryParam "key" Text :>
-                             QueryParam "minPayoutRank" Natural :>
-                               QueryParam "advertiserCategory" Text :>
-                                 QueryParam "pageToken" Text :>
-                                   QueryParam "oauth_token" Text :>
-                                     QueryParam "maxResults" Word32 :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "alt" Text :>
-                                           Get '[JSON] Advertisers
-
--- | Retrieves data about a single advertiser if that the requesting
--- advertiser\/publisher has access to it. Only publishers can lookup
--- advertisers. Advertisers can request information about themselves by
--- omitting the advertiserId query parameter.
-type AdvertisersGet =
-     "gan" :>
-       "v1beta1" :>
-         Capture "role" Text :>
-           Capture "roleId" Text :>
-             "advertiser" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "advertiserId" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] Advertiser
-
-type EventsAPI = EventsList
-
--- | Retrieves event data for a given advertiser\/publisher.
-type EventsList =
-     "gan" :>
-       "v1beta1" :>
-         Capture "role" Text :>
-           Capture "roleId" Text :>
-             "events" :>
-               QueryParam "status" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "eventDateMin" Text :>
-                       QueryParam "chargeType" Text :>
-                         QueryParam "memberId" Text :>
-                           QueryParam "userIp" Text :>
-                             QueryParam "modifyDateMax" Text :>
-                               QueryParam "advertiserId" Text :>
-                                 QueryParam "modifyDateMin" Text :>
-                                   QueryParam "eventDateMax" Text :>
-                                     QueryParam "key" Text :>
-                                       QueryParam "sku" Text :>
-                                         QueryParam "linkId" Text :>
-                                           QueryParam "pageToken" Text :>
-                                             QueryParam "type" Text :>
-                                               QueryParam "oauth_token" Text :>
-                                                 QueryParam "orderId" Text :>
-                                                   QueryParam "publisherId" Text
-                                                     :>
-                                                     QueryParam
-                                                       "productCategory"
-                                                       Text
-                                                       :>
-                                                       QueryParam "maxResults"
-                                                         Word32
-                                                         :>
-                                                         QueryParam "fields"
-                                                           Text
-                                                           :>
-                                                           QueryParam "alt" Text
-                                                             :>
-                                                             Get '[JSON] Events
-
-type PublishersAPI =
-     PublishersList :<|> PublishersGet
-
--- | Retrieves data about all publishers that the requesting
--- advertiser\/publisher has access to.
-type PublishersList =
-     "gan" :>
-       "v1beta1" :>
-         Capture "role" Text :>
-           Capture "roleId" Text :>
-             "publishers" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "relationshipStatus" Text :>
-                       QueryParam "minSevenDayEpc" Double :>
-                         QueryParam "minNinetyDayEpc" Double :>
-                           QueryParam "key" Text :>
-                             QueryParam "minPayoutRank" Natural :>
-                               QueryParam "pageToken" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "publisherCategory" Text :>
-                                     QueryParam "maxResults" Word32 :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "alt" Text :>
-                                           Get '[JSON] Publishers
-
--- | Retrieves data about a single advertiser if that the requesting
--- advertiser\/publisher has access to it. Only advertisers can look up
--- publishers. Publishers can request information about themselves by
--- omitting the publisherId query parameter.
-type PublishersGet =
-     "gan" :>
-       "v1beta1" :>
-         Capture "role" Text :>
-           Capture "roleId" Text :>
-             "publisher" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "publisherId" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] Publisher
-
-type LinksAPI =
-     LinksInsert :<|> LinksList :<|> LinksGet
-
--- | Inserts a new link.
-type LinksInsert =
-     "gan" :>
-       "v1beta1" :>
-         Capture "role" Text :>
-           Capture "roleId" Text :>
-             "link" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] Link
-
--- | Retrieves all links that match the query parameters.
-type LinksList =
-     "gan" :>
-       "v1beta1" :>
-         Capture "role" Text :>
-           Capture "roleId" Text :>
-             "links" :>
-               QueryParam "createDateMax" Text :>
-                 QueryParam "authorship" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "assetSize" Text :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "relationshipStatus" Text :>
-                             QueryParam "advertiserId" Int64 :>
-                               QueryParam "searchText" Text :>
-                                 QueryParam "promotionType" Text :>
-                                   QueryParam "key" Text :>
-                                     QueryParam "createDateMin" Text :>
-                                       QueryParam "linkType" Text :>
-                                         QueryParam "pageToken" Text :>
-                                           QueryParam "startDateMax" Text :>
-                                             QueryParam "oauth_token" Text :>
-                                               QueryParam "startDateMin" Text :>
-                                                 QueryParam "maxResults" Word32
-                                                   :>
-                                                   QueryParam "fields" Text :>
-                                                     QueryParam "alt" Text :>
-                                                       Get '[JSON] Links
-
--- | Retrieves data about a single link if the requesting
--- advertiser\/publisher has access to it. Advertisers can look up their
--- own links. Publishers can look up visible links or links belonging to
--- advertisers they are in a relationship with.
-type LinksGet =
-     "gan" :>
-       "v1beta1" :>
-         Capture "role" Text :>
-           Capture "roleId" Text :>
-             "link" :>
-               Capture "linkId" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] Link
+affiliates :: Proxy Affiliates
+affiliates = Proxy

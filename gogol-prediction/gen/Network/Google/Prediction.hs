@@ -18,18 +18,36 @@
 -- /See:/ <https://developers.google.com/prediction/docs/developer-guide Prediction API Reference>
 module Network.Google.Prediction
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** Prediction API
       Prediction
-    , TrainedmodelsAPI
-    , TrainedmodelsInsert
-    , TrainedmodelsList
-    , TrainedmodelsGet
-    , TrainedmodelsAnalyze
-    , TrainedmodelsPredict
-    , TrainedmodelsDelete
-    , TrainedmodelsUpdate
-    , HostedmodelsAPI
-    , HostedmodelsPredict
+    , prediction
+    , predictionURL
+
+    -- ** prediction.hostedmodels.predict
+    , module Network.Google.API.Prediction.Hostedmodels.Predict
+
+    -- ** prediction.trainedmodels.analyze
+    , module Network.Google.API.Prediction.Trainedmodels.Analyze
+
+    -- ** prediction.trainedmodels.delete
+    , module Network.Google.API.Prediction.Trainedmodels.Delete
+
+    -- ** prediction.trainedmodels.get
+    , module Network.Google.API.Prediction.Trainedmodels.Get
+
+    -- ** prediction.trainedmodels.insert
+    , module Network.Google.API.Prediction.Trainedmodels.Insert
+
+    -- ** prediction.trainedmodels.list
+    , module Network.Google.API.Prediction.Trainedmodels.List
+
+    -- ** prediction.trainedmodels.predict
+    , module Network.Google.API.Prediction.Trainedmodels.Predict
+
+    -- ** prediction.trainedmodels.update
+    , module Network.Google.API.Prediction.Trainedmodels.Update
 
     -- * Types
 
@@ -43,29 +61,48 @@ module Network.Google.Prediction
     , aErrors
     , aDataDescription
 
-    -- ** AnalyzeCategoricalItemFeaturesDataDescription
-    , AnalyzeCategoricalItemFeaturesDataDescription
-    , analyzeCategoricalItemFeaturesDataDescription
-    , acifddValues
-    , acifddCount
-
-    -- ** AnalyzeConfusionMatrixModelDescription
-    , AnalyzeConfusionMatrixModelDescription
-    , analyzeConfusionMatrixModelDescription
-
     -- ** AnalyzeConfusionMatrixRowTotalsModelDescription
     , AnalyzeConfusionMatrixRowTotalsModelDescription
     , analyzeConfusionMatrixRowTotalsModelDescription
 
-    -- ** AnalyzeDataDescription
-    , AnalyzeDataDescription
-    , analyzeDataDescription
-    , addOutputFeature
-    , addFeatures
+    -- ** OutputItemOutputMulti
+    , OutputItemOutputMulti
+    , outputItemOutputMulti
+    , oiomScore
+    , oiomLabel
 
-    -- ** AnalyzeItemErrors
-    , AnalyzeItemErrors
-    , analyzeItemErrors
+    -- ** Output
+    , Output
+    , output
+    , oOutputValue
+    , oKind
+    , oOutputLabel
+    , oSelfLink
+    , oId
+    , oOutputMulti
+
+    -- ** AnalyzeItemTextOutputFeatureDataDescription
+    , AnalyzeItemTextOutputFeatureDataDescription
+    , analyzeItemTextOutputFeatureDataDescription
+    , aitofddValue
+    , aitofddCount
+
+    -- ** Alt
+    , Alt (..)
+
+    -- ** List
+    , List
+    , list
+    , lNextPageToken
+    , lKind
+    , lItems
+    , lSelfLink
+
+    -- ** AnalyzeItemValuesCategoricalItemFeaturesDataDescription
+    , AnalyzeItemValuesCategoricalItemFeaturesDataDescription
+    , analyzeItemValuesCategoricalItemFeaturesDataDescription
+    , aivcifddValue
+    , aivcifddCount
 
     -- ** AnalyzeItemFeaturesDataDescription
     , AnalyzeItemFeaturesDataDescription
@@ -75,31 +112,10 @@ module Network.Google.Prediction
     , aifddIndex
     , aifddCategorical
 
-    -- ** AnalyzeItemTextOutputFeatureDataDescription
-    , AnalyzeItemTextOutputFeatureDataDescription
-    , analyzeItemTextOutputFeatureDataDescription
-    , aitofddValue
-    , aitofddCount
-
-    -- ** AnalyzeItemValuesCategoricalItemFeaturesDataDescription
-    , AnalyzeItemValuesCategoricalItemFeaturesDataDescription
-    , analyzeItemValuesCategoricalItemFeaturesDataDescription
-    , aivcifddValue
-    , aivcifddCount
-
-    -- ** AnalyzeModelDescription
-    , AnalyzeModelDescription
-    , analyzeModelDescription
-    , amdConfusionMatrixRowTotals
-    , amdConfusionMatrix
-    , amdModelinfo
-
-    -- ** AnalyzeNumericItemFeaturesDataDescription
-    , AnalyzeNumericItemFeaturesDataDescription
-    , analyzeNumericItemFeaturesDataDescription
-    , anifddMean
-    , anifddCount
-    , anifddVariance
+    -- ** Input
+    , Input
+    , input
+    , iInput
 
     -- ** AnalyzeNumericOutputFeatureDataDescription
     , AnalyzeNumericOutputFeatureDataDescription
@@ -108,26 +124,27 @@ module Network.Google.Prediction
     , anofddCount
     , anofddVariance
 
-    -- ** AnalyzeOutputFeatureDataDescription
-    , AnalyzeOutputFeatureDataDescription
-    , analyzeOutputFeatureDataDescription
-    , aofddText
-    , aofddNumeric
+    -- ** AnalyzeDataDescription
+    , AnalyzeDataDescription
+    , analyzeDataDescription
+    , addOutputFeature
+    , addFeatures
 
-    -- ** AnalyzeTextItemFeaturesDataDescription
-    , AnalyzeTextItemFeaturesDataDescription
-    , analyzeTextItemFeaturesDataDescription
-    , atifddCount
+    -- ** Update
+    , Update
+    , update
+    , uCsvInstance
+    , uOutput
 
-    -- ** Input
-    , Input
-    , input
-    , iInput
-
-    -- ** InputInput
-    , InputInput
-    , inputInput
-    , iiCsvInstance
+    -- ** Insert2ModelInfo
+    , Insert2ModelInfo
+    , insert2ModelInfo
+    , imiModelType
+    , imiClassWeightedAccuracy
+    , imiClassificationAccuracy
+    , imiMeanSquaredError
+    , imiNumberLabels
+    , imiNumberInstances
 
     -- ** Insert
     , Insert
@@ -140,6 +157,16 @@ module Network.Google.Prediction
     , iSourceModel
     , iId
     , iStoragePMMLLocation
+
+    -- ** AnalyzeConfusionMatrixModelDescription
+    , AnalyzeConfusionMatrixModelDescription
+    , analyzeConfusionMatrixModelDescription
+
+    -- ** AnalyzeOutputFeatureDataDescription
+    , AnalyzeOutputFeatureDataDescription
+    , analyzeOutputFeatureDataDescription
+    , aofddText
+    , aofddNumeric
 
     -- ** Insert2
     , Insert2
@@ -156,15 +183,23 @@ module Network.Google.Prediction
     , insStoragePMMLLocation
     , insModelInfo
 
-    -- ** Insert2ModelInfo
-    , Insert2ModelInfo
-    , insert2ModelInfo
-    , imiModelType
-    , imiClassWeightedAccuracy
-    , imiClassificationAccuracy
-    , imiMeanSquaredError
-    , imiNumberLabels
-    , imiNumberInstances
+    -- ** AnalyzeCategoricalItemFeaturesDataDescription
+    , AnalyzeCategoricalItemFeaturesDataDescription
+    , analyzeCategoricalItemFeaturesDataDescription
+    , acifddValues
+    , acifddCount
+
+    -- ** AnalyzeNumericItemFeaturesDataDescription
+    , AnalyzeNumericItemFeaturesDataDescription
+    , analyzeNumericItemFeaturesDataDescription
+    , anifddMean
+    , anifddCount
+    , anifddVariance
+
+    -- ** InputInput
+    , InputInput
+    , inputInput
+    , iiCsvInstance
 
     -- ** InsertItemTrainingInstances
     , InsertItemTrainingInstances
@@ -172,41 +207,35 @@ module Network.Google.Prediction
     , iitiCsvInstance
     , iitiOutput
 
+    -- ** AnalyzeTextItemFeaturesDataDescription
+    , AnalyzeTextItemFeaturesDataDescription
+    , analyzeTextItemFeaturesDataDescription
+    , atifddCount
+
+    -- ** AnalyzeModelDescription
+    , AnalyzeModelDescription
+    , analyzeModelDescription
+    , amdConfusionMatrixRowTotals
+    , amdConfusionMatrix
+    , amdModelinfo
+
+    -- ** AnalyzeItemErrors
+    , AnalyzeItemErrors
+    , analyzeItemErrors
+
     -- ** InsertItemUtility
     , InsertItemUtility
     , insertItemUtility
-
-    -- ** List
-    , List
-    , list
-    , lNextPageToken
-    , lKind
-    , lItems
-    , lSelfLink
-
-    -- ** Output
-    , Output
-    , output
-    , oOutputValue
-    , oKind
-    , oOutputLabel
-    , oSelfLink
-    , oId
-    , oOutputMulti
-
-    -- ** OutputItemOutputMulti
-    , OutputItemOutputMulti
-    , outputItemOutputMulti
-    , oiomScore
-    , oiomLabel
-
-    -- ** Update
-    , Update
-    , update
-    , uCsvInstance
-    , uOutput
     ) where
 
+import           Network.Google.API.Prediction.Hostedmodels.Predict
+import           Network.Google.API.Prediction.Trainedmodels.Analyze
+import           Network.Google.API.Prediction.Trainedmodels.Delete
+import           Network.Google.API.Prediction.Trainedmodels.Get
+import           Network.Google.API.Prediction.Trainedmodels.Insert
+import           Network.Google.API.Prediction.Trainedmodels.List
+import           Network.Google.API.Prediction.Trainedmodels.Predict
+import           Network.Google.API.Prediction.Trainedmodels.Update
 import           Network.Google.Prediction.Types
 import           Network.Google.Prelude
 
@@ -215,146 +244,13 @@ TODO
 -}
 
 type Prediction =
-     TrainedmodelsAPI :<|> HostedmodelsAPI
+     TrainedmodelsListAPI :<|> HostedmodelsPredictAPI :<|>
+       TrainedmodelsDeleteAPI
+       :<|> TrainedmodelsPredictAPI
+       :<|> TrainedmodelsAnalyzeAPI
+       :<|> TrainedmodelsUpdateAPI
+       :<|> TrainedmodelsInsertAPI
+       :<|> TrainedmodelsGetAPI
 
-type TrainedmodelsAPI =
-     TrainedmodelsInsert :<|> TrainedmodelsList :<|>
-       TrainedmodelsGet
-       :<|> TrainedmodelsAnalyze
-       :<|> TrainedmodelsPredict
-       :<|> TrainedmodelsDelete
-       :<|> TrainedmodelsUpdate
-
--- | Train a Prediction API model.
-type TrainedmodelsInsert =
-     "prediction" :>
-       "v1.6" :>
-         "projects" :>
-           Capture "project" Text :>
-             "trainedmodels" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] Insert2
-
--- | List available models.
-type TrainedmodelsList =
-     "prediction" :>
-       "v1.6" :>
-         "projects" :>
-           Capture "project" Text :>
-             "trainedmodels" :>
-               "list" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "maxResults" Word32 :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Get '[JSON] List
-
--- | Check training status of your model.
-type TrainedmodelsGet =
-     "prediction" :>
-       "v1.6" :>
-         "projects" :>
-           Capture "project" Text :>
-             "trainedmodels" :>
-               Capture "id" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] Insert2
-
--- | Get analysis of the model and the data the model was trained on.
-type TrainedmodelsAnalyze =
-     "prediction" :>
-       "v1.6" :>
-         "projects" :>
-           Capture "project" Text :>
-             "trainedmodels" :>
-               Capture "id" Text :>
-                 "analyze" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Get '[JSON] Analyze
-
--- | Submit model id and request a prediction.
-type TrainedmodelsPredict =
-     "prediction" :>
-       "v1.6" :>
-         "projects" :>
-           Capture "project" Text :>
-             "trainedmodels" :>
-               Capture "id" Text :>
-                 "predict" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Post '[JSON] Output
-
--- | Delete a trained model.
-type TrainedmodelsDelete =
-     "prediction" :>
-       "v1.6" :>
-         "projects" :>
-           Capture "project" Text :>
-             "trainedmodels" :>
-               Capture "id" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Add new data to a trained model.
-type TrainedmodelsUpdate =
-     "prediction" :>
-       "v1.6" :>
-         "projects" :>
-           Capture "project" Text :>
-             "trainedmodels" :>
-               Capture "id" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Put '[JSON] Insert2
-
-type HostedmodelsAPI = HostedmodelsPredict
-
--- | Submit input and request an output against a hosted model.
-type HostedmodelsPredict =
-     "prediction" :>
-       "v1.6" :>
-         "projects" :>
-           Capture "project" Text :>
-             "hostedmodels" :>
-               Capture "hostedModelName" Text :>
-                 "predict" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Post '[JSON] Output
+prediction :: Proxy Prediction
+prediction = Proxy

@@ -14,9 +14,32 @@
 --
 module Network.Google.URLShortener.Types
     (
+    -- * Service URL
+      uRLShortenerURL
+
+    -- * URLGet'Projection
+    , URLGet'Projection (..)
+
+    -- * Alt
+    , Alt (..)
+
+    -- * StringCount
+    , StringCount
+    , stringCount
+    , scCount
+    , scId
+
+    -- * UrlHistory
+    , UrlHistory
+    , urlHistory
+    , uhTotalItems
+    , uhNextPageToken
+    , uhItemsPerPage
+    , uhKind
+    , uhItems
 
     -- * AnalyticsSnapshot
-      AnalyticsSnapshot
+    , AnalyticsSnapshot
     , analyticsSnapshot
     , asPlatforms
     , asShortUrlClicks
@@ -34,11 +57,8 @@ module Network.Google.URLShortener.Types
     , asTwoHours
     , asMonth
 
-    -- * StringCount
-    , StringCount
-    , stringCount
-    , scCount
-    , scId
+    -- * URLList'Projection
+    , URLList'Projection (..)
 
     -- * Url
     , Url
@@ -49,17 +69,15 @@ module Network.Google.URLShortener.Types
     , urlAnalytics
     , urlLongUrl
     , urlId
-
-    -- * UrlHistory
-    , UrlHistory
-    , urlHistory
-    , uhTotalItems
-    , uhNextPageToken
-    , uhItemsPerPage
-    , uhKind
-    , uhItems
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.URLShortener.Types.Product
 import           Network.Google.URLShortener.Types.Sum
+
+-- | URL referring to version 'v1' of the URL Shortener API.
+uRLShortenerURL :: BaseUrl
+uRLShortenerURL
+  = BaseUrl Https
+      "https://www.googleapis.com/urlshortener/v1/"
+      443

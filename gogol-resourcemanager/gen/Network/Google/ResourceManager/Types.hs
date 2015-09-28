@@ -14,39 +14,12 @@
 --
 module Network.Google.ResourceManager.Types
     (
-
-    -- * Binding
-      Binding
-    , binding
-    , bMembers
-    , bRole
-
-    -- * Empty
-    , Empty
-    , empty
+    -- * Service URL
+      resourceManagerURL
 
     -- * GetIamPolicyRequest
     , GetIamPolicyRequest
     , getIamPolicyRequest
-
-    -- * ListOrganizationsResponse
-    , ListOrganizationsResponse
-    , listOrganizationsResponse
-    , lorNextPageToken
-    , lorOrganizations
-
-    -- * ListProjectsResponse
-    , ListProjectsResponse
-    , listProjectsResponse
-    , lprNextPageToken
-    , lprProjects
-
-    -- * Organization
-    , Organization
-    , organization
-    , oOwner
-    , oDisplayName
-    , oOrganizationId
 
     -- * OrganizationOwner
     , OrganizationOwner
@@ -59,6 +32,56 @@ module Network.Google.ResourceManager.Types
     , pEtag
     , pVersion
     , pBindings
+
+    -- * TestIamPermissionsResponse
+    , TestIamPermissionsResponse
+    , testIamPermissionsResponse
+    , tiprPermissions
+
+    -- * Organization
+    , Organization
+    , organization
+    , oOwner
+    , oDisplayName
+    , oOrganizationId
+
+    -- * SetIamPolicyRequest
+    , SetIamPolicyRequest
+    , setIamPolicyRequest
+    , siprPolicy
+
+    -- * ListOrganizationsResponse
+    , ListOrganizationsResponse
+    , listOrganizationsResponse
+    , lorNextPageToken
+    , lorOrganizations
+
+    -- * Binding
+    , Binding
+    , binding
+    , bMembers
+    , bRole
+
+    -- * ListProjectsResponse
+    , ListProjectsResponse
+    , listProjectsResponse
+    , lprNextPageToken
+    , lprProjects
+
+    -- * ResourceId
+    , ResourceId
+    , resourceId
+    , riId
+    , riType
+
+    -- * TestIamPermissionsRequest
+    , TestIamPermissionsRequest
+    , testIamPermissionsRequest
+    , tiamprPermissions
+
+    -- * Empty
+    , Empty
+    , empty
 
     -- * Project
     , Project
@@ -74,29 +97,15 @@ module Network.Google.ResourceManager.Types
     -- * ProjectLabels
     , ProjectLabels
     , projectLabels
-
-    -- * ResourceId
-    , ResourceId
-    , resourceId
-    , riId
-    , riType
-
-    -- * SetIamPolicyRequest
-    , SetIamPolicyRequest
-    , setIamPolicyRequest
-    , siprPolicy
-
-    -- * TestIamPermissionsRequest
-    , TestIamPermissionsRequest
-    , testIamPermissionsRequest
-    , tiamprPermissions
-
-    -- * TestIamPermissionsResponse
-    , TestIamPermissionsResponse
-    , testIamPermissionsResponse
-    , tiprPermissions
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types.Product
 import           Network.Google.ResourceManager.Types.Sum
+
+-- | URL referring to version 'v1beta1' of the Google Cloud Resource Manager API.
+resourceManagerURL :: BaseUrl
+resourceManagerURL
+  = BaseUrl Https
+      "https://cloudresourcemanager.googleapis.com/"
+      443

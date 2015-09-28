@@ -18,6 +18,584 @@ module Network.Google.DeploymentManager.Types.Product where
 import           Network.Google.DeploymentManager.Types.Sum
 import           Network.Google.Prelude
 
+--
+-- /See:/ 'operationItemDataItemWarnings' smart constructor.
+data OperationItemDataItemWarnings = OperationItemDataItemWarnings
+    { _oidiwValue :: !(Maybe Text)
+    , _oidiwKey   :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OperationItemDataItemWarnings' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oidiwValue'
+--
+-- * 'oidiwKey'
+operationItemDataItemWarnings
+    :: OperationItemDataItemWarnings
+operationItemDataItemWarnings =
+    OperationItemDataItemWarnings
+    { _oidiwValue = Nothing
+    , _oidiwKey = Nothing
+    }
+
+-- | [Output Only] A warning data value corresponding to the key.
+oidiwValue :: Lens' OperationItemDataItemWarnings (Maybe Text)
+oidiwValue
+  = lens _oidiwValue (\ s a -> s{_oidiwValue = a})
+
+-- | [Output Only] A key for the warning data.
+oidiwKey :: Lens' OperationItemDataItemWarnings (Maybe Text)
+oidiwKey = lens _oidiwKey (\ s a -> s{_oidiwKey = a})
+
+instance FromJSON OperationItemDataItemWarnings where
+        parseJSON
+          = withObject "OperationItemDataItemWarnings"
+              (\ o ->
+                 OperationItemDataItemWarnings <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON OperationItemDataItemWarnings where
+        toJSON OperationItemDataItemWarnings{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _oidiwValue,
+                  ("key" .=) <$> _oidiwKey])
+
+-- |
+--
+-- /See:/ 'manifest' smart constructor.
+data Manifest = Manifest
+    { _mInsertTime      :: !(Maybe Text)
+    , _mLayout          :: !(Maybe Text)
+    , _mConfig          :: !(Maybe Text)
+    , _mImports         :: !(Maybe [Maybe ImportFile])
+    , _mSelfLink        :: !(Maybe Text)
+    , _mName            :: !(Maybe Text)
+    , _mEvaluatedConfig :: !(Maybe Text)
+    , _mId              :: !(Maybe Word64)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Manifest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mInsertTime'
+--
+-- * 'mLayout'
+--
+-- * 'mConfig'
+--
+-- * 'mImports'
+--
+-- * 'mSelfLink'
+--
+-- * 'mName'
+--
+-- * 'mEvaluatedConfig'
+--
+-- * 'mId'
+manifest
+    :: Manifest
+manifest =
+    Manifest
+    { _mInsertTime = Nothing
+    , _mLayout = Nothing
+    , _mConfig = Nothing
+    , _mImports = Nothing
+    , _mSelfLink = Nothing
+    , _mName = Nothing
+    , _mEvaluatedConfig = Nothing
+    , _mId = Nothing
+    }
+
+-- | [Output Only] Timestamp when the manifest was created, in RFC3339 text
+-- format.
+mInsertTime :: Lens' Manifest (Maybe Text)
+mInsertTime
+  = lens _mInsertTime (\ s a -> s{_mInsertTime = a})
+
+-- | [Output Only] The YAML layout for this manifest.
+mLayout :: Lens' Manifest (Maybe Text)
+mLayout = lens _mLayout (\ s a -> s{_mLayout = a})
+
+-- | [Output Only] The YAML configuration for this manifest.
+mConfig :: Lens' Manifest (Maybe Text)
+mConfig = lens _mConfig (\ s a -> s{_mConfig = a})
+
+-- | [Output Only] The imported files for this manifest.
+mImports :: Lens' Manifest [Maybe ImportFile]
+mImports
+  = lens _mImports (\ s a -> s{_mImports = a}) .
+      _Default
+      . _Coerce
+
+-- | [Output Only] Self link for the manifest.
+mSelfLink :: Lens' Manifest (Maybe Text)
+mSelfLink
+  = lens _mSelfLink (\ s a -> s{_mSelfLink = a})
+
+-- | [Output Only] The name of the manifest.
+mName :: Lens' Manifest (Maybe Text)
+mName = lens _mName (\ s a -> s{_mName = a})
+
+-- | [Output Only] The fully-expanded configuration file, including any
+-- templates and references.
+mEvaluatedConfig :: Lens' Manifest (Maybe Text)
+mEvaluatedConfig
+  = lens _mEvaluatedConfig
+      (\ s a -> s{_mEvaluatedConfig = a})
+
+-- | [Output Only] Unique identifier for the resource; defined by the server.
+mId :: Lens' Manifest (Maybe Word64)
+mId = lens _mId (\ s a -> s{_mId = a})
+
+instance FromJSON Manifest where
+        parseJSON
+          = withObject "Manifest"
+              (\ o ->
+                 Manifest <$>
+                   (o .:? "insertTime") <*> (o .:? "layout") <*>
+                     (o .:? "config")
+                     <*> (o .:? "imports" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "evaluatedConfig")
+                     <*> (o .:? "id"))
+
+instance ToJSON Manifest where
+        toJSON Manifest{..}
+          = object
+              (catMaybes
+                 [("insertTime" .=) <$> _mInsertTime,
+                  ("layout" .=) <$> _mLayout,
+                  ("config" .=) <$> _mConfig,
+                  ("imports" .=) <$> _mImports,
+                  ("selfLink" .=) <$> _mSelfLink,
+                  ("name" .=) <$> _mName,
+                  ("evaluatedConfig" .=) <$> _mEvaluatedConfig,
+                  ("id" .=) <$> _mId])
+
+-- | A response that returns all Types supported by Deployment Manager
+--
+-- /See:/ 'typesListResponse' smart constructor.
+data TypesListResponse = TypesListResponse
+    { _tlrNextPageToken :: !(Maybe Text)
+    , _tlrTypes         :: !(Maybe [Maybe Type])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TypesListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tlrNextPageToken'
+--
+-- * 'tlrTypes'
+typesListResponse
+    :: TypesListResponse
+typesListResponse =
+    TypesListResponse
+    { _tlrNextPageToken = Nothing
+    , _tlrTypes = Nothing
+    }
+
+-- | A token used to continue a truncated list request.
+tlrNextPageToken :: Lens' TypesListResponse (Maybe Text)
+tlrNextPageToken
+  = lens _tlrNextPageToken
+      (\ s a -> s{_tlrNextPageToken = a})
+
+-- | [Output Only] A list of resource types supported by Deployment Manager.
+tlrTypes :: Lens' TypesListResponse [Maybe Type]
+tlrTypes
+  = lens _tlrTypes (\ s a -> s{_tlrTypes = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON TypesListResponse where
+        parseJSON
+          = withObject "TypesListResponse"
+              (\ o ->
+                 TypesListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "types" .!= mempty))
+
+instance ToJSON TypesListResponse where
+        toJSON TypesListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _tlrNextPageToken,
+                  ("types" .=) <$> _tlrTypes])
+
+--
+-- /See:/ 'operationItemWarnings' smart constructor.
+data OperationItemWarnings = OperationItemWarnings
+    { _oiwData    :: !(Maybe [OperationItemDataItemWarnings])
+    , _oiwCode    :: !(Maybe Text)
+    , _oiwMessage :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OperationItemWarnings' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oiwData'
+--
+-- * 'oiwCode'
+--
+-- * 'oiwMessage'
+operationItemWarnings
+    :: OperationItemWarnings
+operationItemWarnings =
+    OperationItemWarnings
+    { _oiwData = Nothing
+    , _oiwCode = Nothing
+    , _oiwMessage = Nothing
+    }
+
+-- | [Output Only] Metadata for this warning in key: value format.
+oiwData :: Lens' OperationItemWarnings [OperationItemDataItemWarnings]
+oiwData
+  = lens _oiwData (\ s a -> s{_oiwData = a}) . _Default
+      . _Coerce
+
+-- | [Output Only] The warning type identifier for this warning.
+oiwCode :: Lens' OperationItemWarnings (Maybe Text)
+oiwCode = lens _oiwCode (\ s a -> s{_oiwCode = a})
+
+-- | [Output Only] Optional human-readable details for this warning.
+oiwMessage :: Lens' OperationItemWarnings (Maybe Text)
+oiwMessage
+  = lens _oiwMessage (\ s a -> s{_oiwMessage = a})
+
+instance FromJSON OperationItemWarnings where
+        parseJSON
+          = withObject "OperationItemWarnings"
+              (\ o ->
+                 OperationItemWarnings <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON OperationItemWarnings where
+        toJSON OperationItemWarnings{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _oiwData, ("code" .=) <$> _oiwCode,
+                  ("message" .=) <$> _oiwMessage])
+
+-- | A response containing a partial list of manifests and a page token used
+-- to build the next request if the request has been truncated.
+--
+-- /See:/ 'manifestsListResponse' smart constructor.
+data ManifestsListResponse = ManifestsListResponse
+    { _mlrNextPageToken :: !(Maybe Text)
+    , _mlrManifests     :: !(Maybe [Maybe Manifest])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ManifestsListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mlrNextPageToken'
+--
+-- * 'mlrManifests'
+manifestsListResponse
+    :: ManifestsListResponse
+manifestsListResponse =
+    ManifestsListResponse
+    { _mlrNextPageToken = Nothing
+    , _mlrManifests = Nothing
+    }
+
+-- | [Output Only] A token used to continue a truncated list request.
+mlrNextPageToken :: Lens' ManifestsListResponse (Maybe Text)
+mlrNextPageToken
+  = lens _mlrNextPageToken
+      (\ s a -> s{_mlrNextPageToken = a})
+
+-- | [Output Only] Manifests contained in this list response.
+mlrManifests :: Lens' ManifestsListResponse [Maybe Manifest]
+mlrManifests
+  = lens _mlrManifests (\ s a -> s{_mlrManifests = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ManifestsListResponse where
+        parseJSON
+          = withObject "ManifestsListResponse"
+              (\ o ->
+                 ManifestsListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "manifests" .!= mempty))
+
+instance ToJSON ManifestsListResponse where
+        toJSON ManifestsListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _mlrNextPageToken,
+                  ("manifests" .=) <$> _mlrManifests])
+
+-- | A resource type supported by Deployment Manager.
+--
+-- /See:/ 'type'' smart constructor.
+data Type = Type
+    { _tInsertTime :: !(Maybe Text)
+    , _tSelfLink   :: !(Maybe Text)
+    , _tName       :: !(Maybe Text)
+    , _tId         :: !(Maybe Word64)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Type' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tInsertTime'
+--
+-- * 'tSelfLink'
+--
+-- * 'tName'
+--
+-- * 'tId'
+type'
+    :: Type
+type' =
+    Type
+    { _tInsertTime = Nothing
+    , _tSelfLink = Nothing
+    , _tName = Nothing
+    , _tId = Nothing
+    }
+
+-- | [Output Only] Timestamp when the type was created, in RFC3339 text
+-- format.
+tInsertTime :: Lens' Type (Maybe Text)
+tInsertTime
+  = lens _tInsertTime (\ s a -> s{_tInsertTime = a})
+
+-- | [Output Only] Self link for the type.
+tSelfLink :: Lens' Type (Maybe Text)
+tSelfLink
+  = lens _tSelfLink (\ s a -> s{_tSelfLink = a})
+
+-- | Name of the type.
+tName :: Lens' Type (Maybe Text)
+tName = lens _tName (\ s a -> s{_tName = a})
+
+-- | [Output Only] Unique identifier for the resource; defined by the server.
+tId :: Lens' Type (Maybe Word64)
+tId = lens _tId (\ s a -> s{_tId = a})
+
+instance FromJSON Type where
+        parseJSON
+          = withObject "Type"
+              (\ o ->
+                 Type <$>
+                   (o .:? "insertTime") <*> (o .:? "selfLink") <*>
+                     (o .:? "name")
+                     <*> (o .:? "id"))
+
+instance ToJSON Type where
+        toJSON Type{..}
+          = object
+              (catMaybes
+                 [("insertTime" .=) <$> _tInsertTime,
+                  ("selfLink" .=) <$> _tSelfLink,
+                  ("name" .=) <$> _tName, ("id" .=) <$> _tId])
+
+--
+-- /See:/ 'operationItemErrorsError' smart constructor.
+data OperationItemErrorsError = OperationItemErrorsError
+    { _oieeLocation :: !(Maybe Text)
+    , _oieeCode     :: !(Maybe Text)
+    , _oieeMessage  :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OperationItemErrorsError' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oieeLocation'
+--
+-- * 'oieeCode'
+--
+-- * 'oieeMessage'
+operationItemErrorsError
+    :: OperationItemErrorsError
+operationItemErrorsError =
+    OperationItemErrorsError
+    { _oieeLocation = Nothing
+    , _oieeCode = Nothing
+    , _oieeMessage = Nothing
+    }
+
+-- | [Output Only] Indicates the field in the request which caused the error.
+-- This property is optional.
+oieeLocation :: Lens' OperationItemErrorsError (Maybe Text)
+oieeLocation
+  = lens _oieeLocation (\ s a -> s{_oieeLocation = a})
+
+-- | [Output Only] The error type identifier for this error.
+oieeCode :: Lens' OperationItemErrorsError (Maybe Text)
+oieeCode = lens _oieeCode (\ s a -> s{_oieeCode = a})
+
+-- | [Output Only] An optional, human-readable error message.
+oieeMessage :: Lens' OperationItemErrorsError (Maybe Text)
+oieeMessage
+  = lens _oieeMessage (\ s a -> s{_oieeMessage = a})
+
+instance FromJSON OperationItemErrorsError where
+        parseJSON
+          = withObject "OperationItemErrorsError"
+              (\ o ->
+                 OperationItemErrorsError <$>
+                   (o .:? "location") <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON OperationItemErrorsError where
+        toJSON OperationItemErrorsError{..}
+          = object
+              (catMaybes
+                 [("location" .=) <$> _oieeLocation,
+                  ("code" .=) <$> _oieeCode,
+                  ("message" .=) <$> _oieeMessage])
+
+-- |
+--
+-- /See:/ 'importFile' smart constructor.
+data ImportFile = ImportFile
+    { _ifContent :: !(Maybe Text)
+    , _ifName    :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ImportFile' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ifContent'
+--
+-- * 'ifName'
+importFile
+    :: ImportFile
+importFile =
+    ImportFile
+    { _ifContent = Nothing
+    , _ifName = Nothing
+    }
+
+-- | The contents of the file.
+ifContent :: Lens' ImportFile (Maybe Text)
+ifContent
+  = lens _ifContent (\ s a -> s{_ifContent = a})
+
+-- | The name of the file.
+ifName :: Lens' ImportFile (Maybe Text)
+ifName = lens _ifName (\ s a -> s{_ifName = a})
+
+instance FromJSON ImportFile where
+        parseJSON
+          = withObject "ImportFile"
+              (\ o ->
+                 ImportFile <$> (o .:? "content") <*> (o .:? "name"))
+
+instance ToJSON ImportFile where
+        toJSON ImportFile{..}
+          = object
+              (catMaybes
+                 [("content" .=) <$> _ifContent,
+                  ("name" .=) <$> _ifName])
+
+-- | A response containing a partial list of deployments and a page token
+-- used to build the next request if the request has been truncated.
+--
+-- /See:/ 'deploymentsListResponse' smart constructor.
+data DeploymentsListResponse = DeploymentsListResponse
+    { _dlrNextPageToken :: !(Maybe Text)
+    , _dlrDeployments   :: !(Maybe [Maybe Deployment])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DeploymentsListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dlrNextPageToken'
+--
+-- * 'dlrDeployments'
+deploymentsListResponse
+    :: DeploymentsListResponse
+deploymentsListResponse =
+    DeploymentsListResponse
+    { _dlrNextPageToken = Nothing
+    , _dlrDeployments = Nothing
+    }
+
+-- | [Output Only] A token used to continue a truncated list request.
+dlrNextPageToken :: Lens' DeploymentsListResponse (Maybe Text)
+dlrNextPageToken
+  = lens _dlrNextPageToken
+      (\ s a -> s{_dlrNextPageToken = a})
+
+-- | [Output Only] The deployments contained in this response.
+dlrDeployments :: Lens' DeploymentsListResponse [Maybe Deployment]
+dlrDeployments
+  = lens _dlrDeployments
+      (\ s a -> s{_dlrDeployments = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON DeploymentsListResponse where
+        parseJSON
+          = withObject "DeploymentsListResponse"
+              (\ o ->
+                 DeploymentsListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "deployments" .!= mempty))
+
+instance ToJSON DeploymentsListResponse where
+        toJSON DeploymentsListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _dlrNextPageToken,
+                  ("deployments" .=) <$> _dlrDeployments])
+
+-- | [Output Only] If errors are generated during processing of the
+-- operation, this field will be populated.
+--
+-- /See:/ 'operationError' smart constructor.
+newtype OperationError = OperationError
+    { _oeErrors :: Maybe [OperationItemErrorsError]
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OperationError' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oeErrors'
+operationError
+    :: OperationError
+operationError =
+    OperationError
+    { _oeErrors = Nothing
+    }
+
+-- | [Output Only] The array of errors encountered while processing this
+-- operation.
+oeErrors :: Lens' OperationError [OperationItemErrorsError]
+oeErrors
+  = lens _oeErrors (\ s a -> s{_oeErrors = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON OperationError where
+        parseJSON
+          = withObject "OperationError"
+              (\ o ->
+                 OperationError <$> (o .:? "errors" .!= mempty))
+
+instance ToJSON OperationError where
+        toJSON OperationError{..}
+          = object (catMaybes [("errors" .=) <$> _oeErrors])
+
 -- |
 --
 -- /See:/ 'deployment' smart constructor.
@@ -194,318 +772,243 @@ instance ToJSON Deployment where
 
 -- |
 --
--- /See:/ 'deploymentUpdate' smart constructor.
-data DeploymentUpdate = DeploymentUpdate
-    { _duManifest :: !(Maybe Text)
-    , _duErrors   :: !(Maybe [Text])
+-- /See:/ 'targetConfiguration' smart constructor.
+data TargetConfiguration = TargetConfiguration
+    { _tcConfig  :: !(Maybe Text)
+    , _tcImports :: !(Maybe [Maybe ImportFile])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DeploymentUpdate' with the minimum fields required to make a request.
+-- | Creates a value of 'TargetConfiguration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'duManifest'
+-- * 'tcConfig'
 --
--- * 'duErrors'
-deploymentUpdate
-    :: DeploymentUpdate
-deploymentUpdate =
-    DeploymentUpdate
-    { _duManifest = Nothing
-    , _duErrors = Nothing
+-- * 'tcImports'
+targetConfiguration
+    :: TargetConfiguration
+targetConfiguration =
+    TargetConfiguration
+    { _tcConfig = Nothing
+    , _tcImports = Nothing
     }
 
--- | [Output Only] URL of the manifest representing the update configuration
--- of this deployment.
-duManifest :: Lens' DeploymentUpdate (Maybe Text)
-duManifest
-  = lens _duManifest (\ s a -> s{_duManifest = a})
+-- | The configuration to use for this deployment.
+tcConfig :: Lens' TargetConfiguration (Maybe Text)
+tcConfig = lens _tcConfig (\ s a -> s{_tcConfig = a})
 
--- | [Output Only] List of all errors encountered while trying to enact the
--- update.
-duErrors :: Lens' DeploymentUpdate [Text]
-duErrors
-  = lens _duErrors (\ s a -> s{_duErrors = a}) .
+-- | Specifies any files to import for this configuration. This can be used
+-- to import templates or other files. For example, you might import a text
+-- file in order to use the file in a template.
+tcImports :: Lens' TargetConfiguration [Maybe ImportFile]
+tcImports
+  = lens _tcImports (\ s a -> s{_tcImports = a}) .
       _Default
       . _Coerce
 
-instance FromJSON DeploymentUpdate where
+instance FromJSON TargetConfiguration where
         parseJSON
-          = withObject "DeploymentUpdate"
+          = withObject "TargetConfiguration"
               (\ o ->
-                 DeploymentUpdate <$>
-                   (o .:? "manifest") <*> (o .:? "errors" .!= mempty))
+                 TargetConfiguration <$>
+                   (o .:? "config") <*> (o .:? "imports" .!= mempty))
 
-instance ToJSON DeploymentUpdate where
-        toJSON DeploymentUpdate{..}
+instance ToJSON TargetConfiguration where
+        toJSON TargetConfiguration{..}
           = object
               (catMaybes
-                 [("manifest" .=) <$> _duManifest,
-                  ("errors" .=) <$> _duErrors])
+                 [("config" .=) <$> _tcConfig,
+                  ("imports" .=) <$> _tcImports])
 
--- | A response containing a partial list of deployments and a page token
--- used to build the next request if the request has been truncated.
---
--- /See:/ 'deploymentsListResponse' smart constructor.
-data DeploymentsListResponse = DeploymentsListResponse
-    { _dlrNextPageToken :: !(Maybe Text)
-    , _dlrDeployments   :: !(Maybe [Maybe Deployment])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'DeploymentsListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'dlrNextPageToken'
---
--- * 'dlrDeployments'
-deploymentsListResponse
-    :: DeploymentsListResponse
-deploymentsListResponse =
-    DeploymentsListResponse
-    { _dlrNextPageToken = Nothing
-    , _dlrDeployments = Nothing
-    }
-
--- | [Output Only] A token used to continue a truncated list request.
-dlrNextPageToken :: Lens' DeploymentsListResponse (Maybe Text)
-dlrNextPageToken
-  = lens _dlrNextPageToken
-      (\ s a -> s{_dlrNextPageToken = a})
-
--- | [Output Only] The deployments contained in this response.
-dlrDeployments :: Lens' DeploymentsListResponse [Maybe Deployment]
-dlrDeployments
-  = lens _dlrDeployments
-      (\ s a -> s{_dlrDeployments = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON DeploymentsListResponse where
-        parseJSON
-          = withObject "DeploymentsListResponse"
-              (\ o ->
-                 DeploymentsListResponse <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "deployments" .!= mempty))
-
-instance ToJSON DeploymentsListResponse where
-        toJSON DeploymentsListResponse{..}
-          = object
-              (catMaybes
-                 [("nextPageToken" .=) <$> _dlrNextPageToken,
-                  ("deployments" .=) <$> _dlrDeployments])
-
--- |
---
--- /See:/ 'importFile' smart constructor.
-data ImportFile = ImportFile
-    { _ifContent :: !(Maybe Text)
-    , _ifName    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ImportFile' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ifContent'
---
--- * 'ifName'
-importFile
-    :: ImportFile
-importFile =
-    ImportFile
-    { _ifContent = Nothing
-    , _ifName = Nothing
-    }
-
--- | The contents of the file.
-ifContent :: Lens' ImportFile (Maybe Text)
-ifContent
-  = lens _ifContent (\ s a -> s{_ifContent = a})
-
--- | The name of the file.
-ifName :: Lens' ImportFile (Maybe Text)
-ifName = lens _ifName (\ s a -> s{_ifName = a})
-
-instance FromJSON ImportFile where
-        parseJSON
-          = withObject "ImportFile"
-              (\ o ->
-                 ImportFile <$> (o .:? "content") <*> (o .:? "name"))
-
-instance ToJSON ImportFile where
-        toJSON ImportFile{..}
-          = object
-              (catMaybes
-                 [("content" .=) <$> _ifContent,
-                  ("name" .=) <$> _ifName])
-
--- |
---
--- /See:/ 'manifest' smart constructor.
-data Manifest = Manifest
-    { _mInsertTime      :: !(Maybe Text)
-    , _mLayout          :: !(Maybe Text)
-    , _mConfig          :: !(Maybe Text)
-    , _mImports         :: !(Maybe [Maybe ImportFile])
-    , _mSelfLink        :: !(Maybe Text)
-    , _mName            :: !(Maybe Text)
-    , _mEvaluatedConfig :: !(Maybe Text)
-    , _mId              :: !(Maybe Word64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Manifest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'mInsertTime'
---
--- * 'mLayout'
---
--- * 'mConfig'
---
--- * 'mImports'
---
--- * 'mSelfLink'
---
--- * 'mName'
---
--- * 'mEvaluatedConfig'
---
--- * 'mId'
-manifest
-    :: Manifest
-manifest =
-    Manifest
-    { _mInsertTime = Nothing
-    , _mLayout = Nothing
-    , _mConfig = Nothing
-    , _mImports = Nothing
-    , _mSelfLink = Nothing
-    , _mName = Nothing
-    , _mEvaluatedConfig = Nothing
-    , _mId = Nothing
-    }
-
--- | [Output Only] Timestamp when the manifest was created, in RFC3339 text
--- format.
-mInsertTime :: Lens' Manifest (Maybe Text)
-mInsertTime
-  = lens _mInsertTime (\ s a -> s{_mInsertTime = a})
-
--- | [Output Only] The YAML layout for this manifest.
-mLayout :: Lens' Manifest (Maybe Text)
-mLayout = lens _mLayout (\ s a -> s{_mLayout = a})
-
--- | [Output Only] The YAML configuration for this manifest.
-mConfig :: Lens' Manifest (Maybe Text)
-mConfig = lens _mConfig (\ s a -> s{_mConfig = a})
-
--- | [Output Only] The imported files for this manifest.
-mImports :: Lens' Manifest [Maybe ImportFile]
-mImports
-  = lens _mImports (\ s a -> s{_mImports = a}) .
-      _Default
-      . _Coerce
-
--- | [Output Only] Self link for the manifest.
-mSelfLink :: Lens' Manifest (Maybe Text)
-mSelfLink
-  = lens _mSelfLink (\ s a -> s{_mSelfLink = a})
-
--- | [Output Only] The name of the manifest.
-mName :: Lens' Manifest (Maybe Text)
-mName = lens _mName (\ s a -> s{_mName = a})
-
--- | [Output Only] The fully-expanded configuration file, including any
--- templates and references.
-mEvaluatedConfig :: Lens' Manifest (Maybe Text)
-mEvaluatedConfig
-  = lens _mEvaluatedConfig
-      (\ s a -> s{_mEvaluatedConfig = a})
-
--- | [Output Only] Unique identifier for the resource; defined by the server.
-mId :: Lens' Manifest (Maybe Word64)
-mId = lens _mId (\ s a -> s{_mId = a})
-
-instance FromJSON Manifest where
-        parseJSON
-          = withObject "Manifest"
-              (\ o ->
-                 Manifest <$>
-                   (o .:? "insertTime") <*> (o .:? "layout") <*>
-                     (o .:? "config")
-                     <*> (o .:? "imports" .!= mempty)
-                     <*> (o .:? "selfLink")
-                     <*> (o .:? "name")
-                     <*> (o .:? "evaluatedConfig")
-                     <*> (o .:? "id"))
-
-instance ToJSON Manifest where
-        toJSON Manifest{..}
-          = object
-              (catMaybes
-                 [("insertTime" .=) <$> _mInsertTime,
-                  ("layout" .=) <$> _mLayout,
-                  ("config" .=) <$> _mConfig,
-                  ("imports" .=) <$> _mImports,
-                  ("selfLink" .=) <$> _mSelfLink,
-                  ("name" .=) <$> _mName,
-                  ("evaluatedConfig" .=) <$> _mEvaluatedConfig,
-                  ("id" .=) <$> _mId])
-
--- | A response containing a partial list of manifests and a page token used
+-- | A response containing a partial list of operations and a page token used
 -- to build the next request if the request has been truncated.
 --
--- /See:/ 'manifestsListResponse' smart constructor.
-data ManifestsListResponse = ManifestsListResponse
-    { _mlrNextPageToken :: !(Maybe Text)
-    , _mlrManifests     :: !(Maybe [Maybe Manifest])
+-- /See:/ 'operationsListResponse' smart constructor.
+data OperationsListResponse = OperationsListResponse
+    { _olrNextPageToken :: !(Maybe Text)
+    , _olrOperations    :: !(Maybe [Maybe Operation])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManifestsListResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'OperationsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mlrNextPageToken'
+-- * 'olrNextPageToken'
 --
--- * 'mlrManifests'
-manifestsListResponse
-    :: ManifestsListResponse
-manifestsListResponse =
-    ManifestsListResponse
-    { _mlrNextPageToken = Nothing
-    , _mlrManifests = Nothing
+-- * 'olrOperations'
+operationsListResponse
+    :: OperationsListResponse
+operationsListResponse =
+    OperationsListResponse
+    { _olrNextPageToken = Nothing
+    , _olrOperations = Nothing
     }
 
 -- | [Output Only] A token used to continue a truncated list request.
-mlrNextPageToken :: Lens' ManifestsListResponse (Maybe Text)
-mlrNextPageToken
-  = lens _mlrNextPageToken
-      (\ s a -> s{_mlrNextPageToken = a})
+olrNextPageToken :: Lens' OperationsListResponse (Maybe Text)
+olrNextPageToken
+  = lens _olrNextPageToken
+      (\ s a -> s{_olrNextPageToken = a})
 
--- | [Output Only] Manifests contained in this list response.
-mlrManifests :: Lens' ManifestsListResponse [Maybe Manifest]
-mlrManifests
-  = lens _mlrManifests (\ s a -> s{_mlrManifests = a})
+-- | [Output Only] Operations contained in this list response.
+olrOperations :: Lens' OperationsListResponse [Maybe Operation]
+olrOperations
+  = lens _olrOperations
+      (\ s a -> s{_olrOperations = a})
       . _Default
       . _Coerce
 
-instance FromJSON ManifestsListResponse where
+instance FromJSON OperationsListResponse where
         parseJSON
-          = withObject "ManifestsListResponse"
+          = withObject "OperationsListResponse"
               (\ o ->
-                 ManifestsListResponse <$>
+                 OperationsListResponse <$>
                    (o .:? "nextPageToken") <*>
-                     (o .:? "manifests" .!= mempty))
+                     (o .:? "operations" .!= mempty))
 
-instance ToJSON ManifestsListResponse where
-        toJSON ManifestsListResponse{..}
+instance ToJSON OperationsListResponse where
+        toJSON OperationsListResponse{..}
           = object
               (catMaybes
-                 [("nextPageToken" .=) <$> _mlrNextPageToken,
-                  ("manifests" .=) <$> _mlrManifests])
+                 [("nextPageToken" .=) <$> _olrNextPageToken,
+                  ("operations" .=) <$> _olrOperations])
+
+-- |
+--
+-- /See:/ 'resource' smart constructor.
+data Resource = Resource
+    { _rInsertTime      :: !(Maybe Text)
+    , _rUrl             :: !(Maybe Text)
+    , _rUpdateTime      :: !(Maybe Text)
+    , _rName            :: !(Maybe Text)
+    , _rManifest        :: !(Maybe Text)
+    , _rFinalProperties :: !(Maybe Text)
+    , _rId              :: !(Maybe Word64)
+    , _rType            :: !(Maybe Text)
+    , _rUpdate          :: !(Maybe (Maybe ResourceUpdate))
+    , _rProperties      :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Resource' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rInsertTime'
+--
+-- * 'rUrl'
+--
+-- * 'rUpdateTime'
+--
+-- * 'rName'
+--
+-- * 'rManifest'
+--
+-- * 'rFinalProperties'
+--
+-- * 'rId'
+--
+-- * 'rType'
+--
+-- * 'rUpdate'
+--
+-- * 'rProperties'
+resource
+    :: Resource
+resource =
+    Resource
+    { _rInsertTime = Nothing
+    , _rUrl = Nothing
+    , _rUpdateTime = Nothing
+    , _rName = Nothing
+    , _rManifest = Nothing
+    , _rFinalProperties = Nothing
+    , _rId = Nothing
+    , _rType = Nothing
+    , _rUpdate = Nothing
+    , _rProperties = Nothing
+    }
+
+-- | [Output Only] Timestamp when the resource was created or acquired, in
+-- RFC3339 text format .
+rInsertTime :: Lens' Resource (Maybe Text)
+rInsertTime
+  = lens _rInsertTime (\ s a -> s{_rInsertTime = a})
+
+-- | [Output Only] The URL of the actual resource.
+rUrl :: Lens' Resource (Maybe Text)
+rUrl = lens _rUrl (\ s a -> s{_rUrl = a})
+
+-- | [Output Only] Timestamp when the resource was updated, in RFC3339 text
+-- format .
+rUpdateTime :: Lens' Resource (Maybe Text)
+rUpdateTime
+  = lens _rUpdateTime (\ s a -> s{_rUpdateTime = a})
+
+-- | [Output Only] The name of the resource as it appears in the YAML config.
+rName :: Lens' Resource (Maybe Text)
+rName = lens _rName (\ s a -> s{_rName = a})
+
+-- | [Output Only] URL of the manifest representing the current configuration
+-- of this resource.
+rManifest :: Lens' Resource (Maybe Text)
+rManifest
+  = lens _rManifest (\ s a -> s{_rManifest = a})
+
+-- | [Output Only] The evaluated properties of the resource with references
+-- expanded. Returned as serialized YAML.
+rFinalProperties :: Lens' Resource (Maybe Text)
+rFinalProperties
+  = lens _rFinalProperties
+      (\ s a -> s{_rFinalProperties = a})
+
+-- | [Output Only] Unique identifier for the resource; defined by the server.
+rId :: Lens' Resource (Maybe Word64)
+rId = lens _rId (\ s a -> s{_rId = a})
+
+-- | [Output Only] The type of the resource, for example compute.v1.instance,
+-- or replicaPools.v1beta2.instanceGroupManager.
+rType :: Lens' Resource (Maybe Text)
+rType = lens _rType (\ s a -> s{_rType = a})
+
+-- | [Output Only] If Deployment Manager is currently updating or previewing
+-- an update to this resource, the updated configuration appears here.
+rUpdate :: Lens' Resource (Maybe (Maybe ResourceUpdate))
+rUpdate = lens _rUpdate (\ s a -> s{_rUpdate = a})
+
+-- | [Output Only] The current properties of the resource before any
+-- references have been filled in. Returned as serialized YAML.
+rProperties :: Lens' Resource (Maybe Text)
+rProperties
+  = lens _rProperties (\ s a -> s{_rProperties = a})
+
+instance FromJSON Resource where
+        parseJSON
+          = withObject "Resource"
+              (\ o ->
+                 Resource <$>
+                   (o .:? "insertTime") <*> (o .:? "url") <*>
+                     (o .:? "updateTime")
+                     <*> (o .:? "name")
+                     <*> (o .:? "manifest")
+                     <*> (o .:? "finalProperties")
+                     <*> (o .:? "id")
+                     <*> (o .:? "type")
+                     <*> (o .:? "update")
+                     <*> (o .:? "properties"))
+
+instance ToJSON Resource where
+        toJSON Resource{..}
+          = object
+              (catMaybes
+                 [("insertTime" .=) <$> _rInsertTime,
+                  ("url" .=) <$> _rUrl,
+                  ("updateTime" .=) <$> _rUpdateTime,
+                  ("name" .=) <$> _rName,
+                  ("manifest" .=) <$> _rManifest,
+                  ("finalProperties" .=) <$> _rFinalProperties,
+                  ("id" .=) <$> _rId, ("type" .=) <$> _rType,
+                  ("update" .=) <$> _rUpdate,
+                  ("properties" .=) <$> _rProperties])
 
 -- | An Operation resource, used to manage asynchronous API requests.
 --
@@ -790,391 +1293,108 @@ instance ToJSON Operation where
                   ("targetLink" .=) <$> _oTargetLink,
                   ("clientOperationId" .=) <$> _oClientOperationId])
 
--- | [Output Only] If errors are generated during processing of the
--- operation, this field will be populated.
---
--- /See:/ 'operationError' smart constructor.
-newtype OperationError = OperationError
-    { _oeErrors :: Maybe [OperationItemErrorsError]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'OperationError' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'oeErrors'
-operationError
-    :: OperationError
-operationError =
-    OperationError
-    { _oeErrors = Nothing
-    }
-
--- | [Output Only] The array of errors encountered while processing this
--- operation.
-oeErrors :: Lens' OperationError [OperationItemErrorsError]
-oeErrors
-  = lens _oeErrors (\ s a -> s{_oeErrors = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON OperationError where
-        parseJSON
-          = withObject "OperationError"
-              (\ o ->
-                 OperationError <$> (o .:? "errors" .!= mempty))
-
-instance ToJSON OperationError where
-        toJSON OperationError{..}
-          = object (catMaybes [("errors" .=) <$> _oeErrors])
-
---
--- /See:/ 'operationItemDataItemWarnings' smart constructor.
-data OperationItemDataItemWarnings = OperationItemDataItemWarnings
-    { _oidiwValue :: !(Maybe Text)
-    , _oidiwKey   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'OperationItemDataItemWarnings' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'oidiwValue'
---
--- * 'oidiwKey'
-operationItemDataItemWarnings
-    :: OperationItemDataItemWarnings
-operationItemDataItemWarnings =
-    OperationItemDataItemWarnings
-    { _oidiwValue = Nothing
-    , _oidiwKey = Nothing
-    }
-
--- | [Output Only] A warning data value corresponding to the key.
-oidiwValue :: Lens' OperationItemDataItemWarnings (Maybe Text)
-oidiwValue
-  = lens _oidiwValue (\ s a -> s{_oidiwValue = a})
-
--- | [Output Only] A key for the warning data.
-oidiwKey :: Lens' OperationItemDataItemWarnings (Maybe Text)
-oidiwKey = lens _oidiwKey (\ s a -> s{_oidiwKey = a})
-
-instance FromJSON OperationItemDataItemWarnings where
-        parseJSON
-          = withObject "OperationItemDataItemWarnings"
-              (\ o ->
-                 OperationItemDataItemWarnings <$>
-                   (o .:? "value") <*> (o .:? "key"))
-
-instance ToJSON OperationItemDataItemWarnings where
-        toJSON OperationItemDataItemWarnings{..}
-          = object
-              (catMaybes
-                 [("value" .=) <$> _oidiwValue,
-                  ("key" .=) <$> _oidiwKey])
-
---
--- /See:/ 'operationItemErrorsError' smart constructor.
-data OperationItemErrorsError = OperationItemErrorsError
-    { _oieeLocation :: !(Maybe Text)
-    , _oieeCode     :: !(Maybe Text)
-    , _oieeMessage  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'OperationItemErrorsError' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'oieeLocation'
---
--- * 'oieeCode'
---
--- * 'oieeMessage'
-operationItemErrorsError
-    :: OperationItemErrorsError
-operationItemErrorsError =
-    OperationItemErrorsError
-    { _oieeLocation = Nothing
-    , _oieeCode = Nothing
-    , _oieeMessage = Nothing
-    }
-
--- | [Output Only] Indicates the field in the request which caused the error.
--- This property is optional.
-oieeLocation :: Lens' OperationItemErrorsError (Maybe Text)
-oieeLocation
-  = lens _oieeLocation (\ s a -> s{_oieeLocation = a})
-
--- | [Output Only] The error type identifier for this error.
-oieeCode :: Lens' OperationItemErrorsError (Maybe Text)
-oieeCode = lens _oieeCode (\ s a -> s{_oieeCode = a})
-
--- | [Output Only] An optional, human-readable error message.
-oieeMessage :: Lens' OperationItemErrorsError (Maybe Text)
-oieeMessage
-  = lens _oieeMessage (\ s a -> s{_oieeMessage = a})
-
-instance FromJSON OperationItemErrorsError where
-        parseJSON
-          = withObject "OperationItemErrorsError"
-              (\ o ->
-                 OperationItemErrorsError <$>
-                   (o .:? "location") <*> (o .:? "code") <*>
-                     (o .:? "message"))
-
-instance ToJSON OperationItemErrorsError where
-        toJSON OperationItemErrorsError{..}
-          = object
-              (catMaybes
-                 [("location" .=) <$> _oieeLocation,
-                  ("code" .=) <$> _oieeCode,
-                  ("message" .=) <$> _oieeMessage])
-
---
--- /See:/ 'operationItemWarnings' smart constructor.
-data OperationItemWarnings = OperationItemWarnings
-    { _oiwData    :: !(Maybe [OperationItemDataItemWarnings])
-    , _oiwCode    :: !(Maybe Text)
-    , _oiwMessage :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'OperationItemWarnings' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'oiwData'
---
--- * 'oiwCode'
---
--- * 'oiwMessage'
-operationItemWarnings
-    :: OperationItemWarnings
-operationItemWarnings =
-    OperationItemWarnings
-    { _oiwData = Nothing
-    , _oiwCode = Nothing
-    , _oiwMessage = Nothing
-    }
-
--- | [Output Only] Metadata for this warning in key: value format.
-oiwData :: Lens' OperationItemWarnings [OperationItemDataItemWarnings]
-oiwData
-  = lens _oiwData (\ s a -> s{_oiwData = a}) . _Default
-      . _Coerce
-
--- | [Output Only] The warning type identifier for this warning.
-oiwCode :: Lens' OperationItemWarnings (Maybe Text)
-oiwCode = lens _oiwCode (\ s a -> s{_oiwCode = a})
-
--- | [Output Only] Optional human-readable details for this warning.
-oiwMessage :: Lens' OperationItemWarnings (Maybe Text)
-oiwMessage
-  = lens _oiwMessage (\ s a -> s{_oiwMessage = a})
-
-instance FromJSON OperationItemWarnings where
-        parseJSON
-          = withObject "OperationItemWarnings"
-              (\ o ->
-                 OperationItemWarnings <$>
-                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
-                     (o .:? "message"))
-
-instance ToJSON OperationItemWarnings where
-        toJSON OperationItemWarnings{..}
-          = object
-              (catMaybes
-                 [("data" .=) <$> _oiwData, ("code" .=) <$> _oiwCode,
-                  ("message" .=) <$> _oiwMessage])
-
--- | A response containing a partial list of operations and a page token used
+-- | A response containing a partial list of resources and a page token used
 -- to build the next request if the request has been truncated.
 --
--- /See:/ 'operationsListResponse' smart constructor.
-data OperationsListResponse = OperationsListResponse
-    { _olrNextPageToken :: !(Maybe Text)
-    , _olrOperations    :: !(Maybe [Maybe Operation])
+-- /See:/ 'resourcesListResponse' smart constructor.
+data ResourcesListResponse = ResourcesListResponse
+    { _rlrNextPageToken :: !(Maybe Text)
+    , _rlrResources     :: !(Maybe [Maybe Resource])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OperationsListResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'ResourcesListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'olrNextPageToken'
+-- * 'rlrNextPageToken'
 --
--- * 'olrOperations'
-operationsListResponse
-    :: OperationsListResponse
-operationsListResponse =
-    OperationsListResponse
-    { _olrNextPageToken = Nothing
-    , _olrOperations = Nothing
+-- * 'rlrResources'
+resourcesListResponse
+    :: ResourcesListResponse
+resourcesListResponse =
+    ResourcesListResponse
+    { _rlrNextPageToken = Nothing
+    , _rlrResources = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
-olrNextPageToken :: Lens' OperationsListResponse (Maybe Text)
-olrNextPageToken
-  = lens _olrNextPageToken
-      (\ s a -> s{_olrNextPageToken = a})
+-- | A token used to continue a truncated list request.
+rlrNextPageToken :: Lens' ResourcesListResponse (Maybe Text)
+rlrNextPageToken
+  = lens _rlrNextPageToken
+      (\ s a -> s{_rlrNextPageToken = a})
 
--- | [Output Only] Operations contained in this list response.
-olrOperations :: Lens' OperationsListResponse [Maybe Operation]
-olrOperations
-  = lens _olrOperations
-      (\ s a -> s{_olrOperations = a})
+-- | Resources contained in this list response.
+rlrResources :: Lens' ResourcesListResponse [Maybe Resource]
+rlrResources
+  = lens _rlrResources (\ s a -> s{_rlrResources = a})
       . _Default
       . _Coerce
 
-instance FromJSON OperationsListResponse where
+instance FromJSON ResourcesListResponse where
         parseJSON
-          = withObject "OperationsListResponse"
+          = withObject "ResourcesListResponse"
               (\ o ->
-                 OperationsListResponse <$>
+                 ResourcesListResponse <$>
                    (o .:? "nextPageToken") <*>
-                     (o .:? "operations" .!= mempty))
+                     (o .:? "resources" .!= mempty))
 
-instance ToJSON OperationsListResponse where
-        toJSON OperationsListResponse{..}
+instance ToJSON ResourcesListResponse where
+        toJSON ResourcesListResponse{..}
           = object
               (catMaybes
-                 [("nextPageToken" .=) <$> _olrNextPageToken,
-                  ("operations" .=) <$> _olrOperations])
+                 [("nextPageToken" .=) <$> _rlrNextPageToken,
+                  ("resources" .=) <$> _rlrResources])
 
 -- |
 --
--- /See:/ 'resource' smart constructor.
-data Resource = Resource
-    { _rInsertTime      :: !(Maybe Text)
-    , _rUrl             :: !(Maybe Text)
-    , _rUpdateTime      :: !(Maybe Text)
-    , _rName            :: !(Maybe Text)
-    , _rManifest        :: !(Maybe Text)
-    , _rFinalProperties :: !(Maybe Text)
-    , _rId              :: !(Maybe Word64)
-    , _rType            :: !(Maybe Text)
-    , _rUpdate          :: !(Maybe (Maybe ResourceUpdate))
-    , _rProperties      :: !(Maybe Text)
+-- /See:/ 'deploymentUpdate' smart constructor.
+data DeploymentUpdate = DeploymentUpdate
+    { _duManifest :: !(Maybe Text)
+    , _duErrors   :: !(Maybe [Text])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Resource' with the minimum fields required to make a request.
+-- | Creates a value of 'DeploymentUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rInsertTime'
+-- * 'duManifest'
 --
--- * 'rUrl'
---
--- * 'rUpdateTime'
---
--- * 'rName'
---
--- * 'rManifest'
---
--- * 'rFinalProperties'
---
--- * 'rId'
---
--- * 'rType'
---
--- * 'rUpdate'
---
--- * 'rProperties'
-resource
-    :: Resource
-resource =
-    Resource
-    { _rInsertTime = Nothing
-    , _rUrl = Nothing
-    , _rUpdateTime = Nothing
-    , _rName = Nothing
-    , _rManifest = Nothing
-    , _rFinalProperties = Nothing
-    , _rId = Nothing
-    , _rType = Nothing
-    , _rUpdate = Nothing
-    , _rProperties = Nothing
+-- * 'duErrors'
+deploymentUpdate
+    :: DeploymentUpdate
+deploymentUpdate =
+    DeploymentUpdate
+    { _duManifest = Nothing
+    , _duErrors = Nothing
     }
 
--- | [Output Only] Timestamp when the resource was created or acquired, in
--- RFC3339 text format .
-rInsertTime :: Lens' Resource (Maybe Text)
-rInsertTime
-  = lens _rInsertTime (\ s a -> s{_rInsertTime = a})
+-- | [Output Only] URL of the manifest representing the update configuration
+-- of this deployment.
+duManifest :: Lens' DeploymentUpdate (Maybe Text)
+duManifest
+  = lens _duManifest (\ s a -> s{_duManifest = a})
 
--- | [Output Only] The URL of the actual resource.
-rUrl :: Lens' Resource (Maybe Text)
-rUrl = lens _rUrl (\ s a -> s{_rUrl = a})
+-- | [Output Only] List of all errors encountered while trying to enact the
+-- update.
+duErrors :: Lens' DeploymentUpdate [Text]
+duErrors
+  = lens _duErrors (\ s a -> s{_duErrors = a}) .
+      _Default
+      . _Coerce
 
--- | [Output Only] Timestamp when the resource was updated, in RFC3339 text
--- format .
-rUpdateTime :: Lens' Resource (Maybe Text)
-rUpdateTime
-  = lens _rUpdateTime (\ s a -> s{_rUpdateTime = a})
-
--- | [Output Only] The name of the resource as it appears in the YAML config.
-rName :: Lens' Resource (Maybe Text)
-rName = lens _rName (\ s a -> s{_rName = a})
-
--- | [Output Only] URL of the manifest representing the current configuration
--- of this resource.
-rManifest :: Lens' Resource (Maybe Text)
-rManifest
-  = lens _rManifest (\ s a -> s{_rManifest = a})
-
--- | [Output Only] The evaluated properties of the resource with references
--- expanded. Returned as serialized YAML.
-rFinalProperties :: Lens' Resource (Maybe Text)
-rFinalProperties
-  = lens _rFinalProperties
-      (\ s a -> s{_rFinalProperties = a})
-
--- | [Output Only] Unique identifier for the resource; defined by the server.
-rId :: Lens' Resource (Maybe Word64)
-rId = lens _rId (\ s a -> s{_rId = a})
-
--- | [Output Only] The type of the resource, for example compute.v1.instance,
--- or replicaPools.v1beta2.instanceGroupManager.
-rType :: Lens' Resource (Maybe Text)
-rType = lens _rType (\ s a -> s{_rType = a})
-
--- | [Output Only] If Deployment Manager is currently updating or previewing
--- an update to this resource, the updated configuration appears here.
-rUpdate :: Lens' Resource (Maybe (Maybe ResourceUpdate))
-rUpdate = lens _rUpdate (\ s a -> s{_rUpdate = a})
-
--- | [Output Only] The current properties of the resource before any
--- references have been filled in. Returned as serialized YAML.
-rProperties :: Lens' Resource (Maybe Text)
-rProperties
-  = lens _rProperties (\ s a -> s{_rProperties = a})
-
-instance FromJSON Resource where
+instance FromJSON DeploymentUpdate where
         parseJSON
-          = withObject "Resource"
+          = withObject "DeploymentUpdate"
               (\ o ->
-                 Resource <$>
-                   (o .:? "insertTime") <*> (o .:? "url") <*>
-                     (o .:? "updateTime")
-                     <*> (o .:? "name")
-                     <*> (o .:? "manifest")
-                     <*> (o .:? "finalProperties")
-                     <*> (o .:? "id")
-                     <*> (o .:? "type")
-                     <*> (o .:? "update")
-                     <*> (o .:? "properties"))
+                 DeploymentUpdate <$>
+                   (o .:? "manifest") <*> (o .:? "errors" .!= mempty))
 
-instance ToJSON Resource where
-        toJSON Resource{..}
+instance ToJSON DeploymentUpdate where
+        toJSON DeploymentUpdate{..}
           = object
               (catMaybes
-                 [("insertTime" .=) <$> _rInsertTime,
-                  ("url" .=) <$> _rUrl,
-                  ("updateTime" .=) <$> _rUpdateTime,
-                  ("name" .=) <$> _rName,
-                  ("manifest" .=) <$> _rManifest,
-                  ("finalProperties" .=) <$> _rFinalProperties,
-                  ("id" .=) <$> _rId, ("type" .=) <$> _rType,
-                  ("update" .=) <$> _rUpdate,
-                  ("properties" .=) <$> _rProperties])
+                 [("manifest" .=) <$> _duManifest,
+                  ("errors" .=) <$> _duErrors])
 
 -- |
 --
@@ -1271,223 +1491,3 @@ instance ToJSON ResourceUpdate where
                   ("finalProperties" .=) <$> _ruFinalProperties,
                   ("errors" .=) <$> _ruErrors,
                   ("properties" .=) <$> _ruProperties])
-
--- | A response containing a partial list of resources and a page token used
--- to build the next request if the request has been truncated.
---
--- /See:/ 'resourcesListResponse' smart constructor.
-data ResourcesListResponse = ResourcesListResponse
-    { _rlrNextPageToken :: !(Maybe Text)
-    , _rlrResources     :: !(Maybe [Maybe Resource])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ResourcesListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rlrNextPageToken'
---
--- * 'rlrResources'
-resourcesListResponse
-    :: ResourcesListResponse
-resourcesListResponse =
-    ResourcesListResponse
-    { _rlrNextPageToken = Nothing
-    , _rlrResources = Nothing
-    }
-
--- | A token used to continue a truncated list request.
-rlrNextPageToken :: Lens' ResourcesListResponse (Maybe Text)
-rlrNextPageToken
-  = lens _rlrNextPageToken
-      (\ s a -> s{_rlrNextPageToken = a})
-
--- | Resources contained in this list response.
-rlrResources :: Lens' ResourcesListResponse [Maybe Resource]
-rlrResources
-  = lens _rlrResources (\ s a -> s{_rlrResources = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON ResourcesListResponse where
-        parseJSON
-          = withObject "ResourcesListResponse"
-              (\ o ->
-                 ResourcesListResponse <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "resources" .!= mempty))
-
-instance ToJSON ResourcesListResponse where
-        toJSON ResourcesListResponse{..}
-          = object
-              (catMaybes
-                 [("nextPageToken" .=) <$> _rlrNextPageToken,
-                  ("resources" .=) <$> _rlrResources])
-
--- |
---
--- /See:/ 'targetConfiguration' smart constructor.
-data TargetConfiguration = TargetConfiguration
-    { _tcConfig  :: !(Maybe Text)
-    , _tcImports :: !(Maybe [Maybe ImportFile])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'TargetConfiguration' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'tcConfig'
---
--- * 'tcImports'
-targetConfiguration
-    :: TargetConfiguration
-targetConfiguration =
-    TargetConfiguration
-    { _tcConfig = Nothing
-    , _tcImports = Nothing
-    }
-
--- | The configuration to use for this deployment.
-tcConfig :: Lens' TargetConfiguration (Maybe Text)
-tcConfig = lens _tcConfig (\ s a -> s{_tcConfig = a})
-
--- | Specifies any files to import for this configuration. This can be used
--- to import templates or other files. For example, you might import a text
--- file in order to use the file in a template.
-tcImports :: Lens' TargetConfiguration [Maybe ImportFile]
-tcImports
-  = lens _tcImports (\ s a -> s{_tcImports = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON TargetConfiguration where
-        parseJSON
-          = withObject "TargetConfiguration"
-              (\ o ->
-                 TargetConfiguration <$>
-                   (o .:? "config") <*> (o .:? "imports" .!= mempty))
-
-instance ToJSON TargetConfiguration where
-        toJSON TargetConfiguration{..}
-          = object
-              (catMaybes
-                 [("config" .=) <$> _tcConfig,
-                  ("imports" .=) <$> _tcImports])
-
--- | A resource type supported by Deployment Manager.
---
--- /See:/ 'type'' smart constructor.
-data Type = Type
-    { _tInsertTime :: !(Maybe Text)
-    , _tSelfLink   :: !(Maybe Text)
-    , _tName       :: !(Maybe Text)
-    , _tId         :: !(Maybe Word64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Type' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'tInsertTime'
---
--- * 'tSelfLink'
---
--- * 'tName'
---
--- * 'tId'
-type'
-    :: Type
-type' =
-    Type
-    { _tInsertTime = Nothing
-    , _tSelfLink = Nothing
-    , _tName = Nothing
-    , _tId = Nothing
-    }
-
--- | [Output Only] Timestamp when the type was created, in RFC3339 text
--- format.
-tInsertTime :: Lens' Type (Maybe Text)
-tInsertTime
-  = lens _tInsertTime (\ s a -> s{_tInsertTime = a})
-
--- | [Output Only] Self link for the type.
-tSelfLink :: Lens' Type (Maybe Text)
-tSelfLink
-  = lens _tSelfLink (\ s a -> s{_tSelfLink = a})
-
--- | Name of the type.
-tName :: Lens' Type (Maybe Text)
-tName = lens _tName (\ s a -> s{_tName = a})
-
--- | [Output Only] Unique identifier for the resource; defined by the server.
-tId :: Lens' Type (Maybe Word64)
-tId = lens _tId (\ s a -> s{_tId = a})
-
-instance FromJSON Type where
-        parseJSON
-          = withObject "Type"
-              (\ o ->
-                 Type <$>
-                   (o .:? "insertTime") <*> (o .:? "selfLink") <*>
-                     (o .:? "name")
-                     <*> (o .:? "id"))
-
-instance ToJSON Type where
-        toJSON Type{..}
-          = object
-              (catMaybes
-                 [("insertTime" .=) <$> _tInsertTime,
-                  ("selfLink" .=) <$> _tSelfLink,
-                  ("name" .=) <$> _tName, ("id" .=) <$> _tId])
-
--- | A response that returns all Types supported by Deployment Manager
---
--- /See:/ 'typesListResponse' smart constructor.
-data TypesListResponse = TypesListResponse
-    { _tlrNextPageToken :: !(Maybe Text)
-    , _tlrTypes         :: !(Maybe [Maybe Type])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'TypesListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'tlrNextPageToken'
---
--- * 'tlrTypes'
-typesListResponse
-    :: TypesListResponse
-typesListResponse =
-    TypesListResponse
-    { _tlrNextPageToken = Nothing
-    , _tlrTypes = Nothing
-    }
-
--- | A token used to continue a truncated list request.
-tlrNextPageToken :: Lens' TypesListResponse (Maybe Text)
-tlrNextPageToken
-  = lens _tlrNextPageToken
-      (\ s a -> s{_tlrNextPageToken = a})
-
--- | [Output Only] A list of resource types supported by Deployment Manager.
-tlrTypes :: Lens' TypesListResponse [Maybe Type]
-tlrTypes
-  = lens _tlrTypes (\ s a -> s{_tlrTypes = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON TypesListResponse where
-        parseJSON
-          = withObject "TypesListResponse"
-              (\ o ->
-                 TypesListResponse <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "types" .!= mempty))
-
-instance ToJSON TypesListResponse where
-        toJSON TypesListResponse{..}
-          = object
-              (catMaybes
-                 [("nextPageToken" .=) <$> _tlrNextPageToken,
-                  ("types" .=) <$> _tlrTypes])

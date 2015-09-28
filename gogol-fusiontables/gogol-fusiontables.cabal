@@ -1,6 +1,6 @@
 name:                  gogol-fusiontables
 version:               0.0.1
-synopsis:              Google Fusion Tables API.
+synopsis:              Google Fusion Tables API Client.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -16,8 +16,8 @@ extra-source-files:    README.md
 description:
     API for working with Fusion Tables data.
     .
-    /Warning:/ This is an experimental preview release which is still under
-    heavy development and not intended for public consumption, caveat emptor!
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
 
 source-repository head
     type:     git
@@ -30,7 +30,40 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.FusionTables
+          Network.Google.API.FusionTables.Column.Delete
+        , Network.Google.API.FusionTables.Column.Get
+        , Network.Google.API.FusionTables.Column.Insert
+        , Network.Google.API.FusionTables.Column.List
+        , Network.Google.API.FusionTables.Column.Patch
+        , Network.Google.API.FusionTables.Column.Update
+        , Network.Google.API.FusionTables.Query.Sql
+        , Network.Google.API.FusionTables.Query.SqlGet
+        , Network.Google.API.FusionTables.Style.Delete
+        , Network.Google.API.FusionTables.Style.Get
+        , Network.Google.API.FusionTables.Style.Insert
+        , Network.Google.API.FusionTables.Style.List
+        , Network.Google.API.FusionTables.Style.Patch
+        , Network.Google.API.FusionTables.Style.Update
+        , Network.Google.API.FusionTables.Table.Copy
+        , Network.Google.API.FusionTables.Table.Delete
+        , Network.Google.API.FusionTables.Table.Get
+        , Network.Google.API.FusionTables.Table.ImportRows
+        , Network.Google.API.FusionTables.Table.ImportTable
+        , Network.Google.API.FusionTables.Table.Insert
+        , Network.Google.API.FusionTables.Table.List
+        , Network.Google.API.FusionTables.Table.Patch
+        , Network.Google.API.FusionTables.Table.ReplaceRows
+        , Network.Google.API.FusionTables.Table.Update
+        , Network.Google.API.FusionTables.Task.Delete
+        , Network.Google.API.FusionTables.Task.Get
+        , Network.Google.API.FusionTables.Task.List
+        , Network.Google.API.FusionTables.Template.Delete
+        , Network.Google.API.FusionTables.Template.Get
+        , Network.Google.API.FusionTables.Template.Insert
+        , Network.Google.API.FusionTables.Template.List
+        , Network.Google.API.FusionTables.Template.Patch
+        , Network.Google.API.FusionTables.Template.Update
+        , Network.Google.FusionTables
         , Network.Google.FusionTables.Types
 
     other-modules:

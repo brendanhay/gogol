@@ -14,9 +14,11 @@
 --
 module Network.Google.Games.Configuration.Types
     (
+    -- * Service URL
+      gamesConfigurationURL
 
     -- * AchievementConfiguration
-      AchievementConfiguration
+    , AchievementConfiguration
     , achievementConfiguration
     , acAchievementType
     , acStepsToUnlock
@@ -27,15 +29,25 @@ module Network.Google.Games.Configuration.Types
     , acDraft
     , acId
 
-    -- * AchievementConfigurationDetail
-    , AchievementConfigurationDetail
-    , achievementConfigurationDetail
-    , acdKind
-    , acdSortRank
-    , acdName
-    , acdPointValue
-    , acdIconUrl
-    , acdDescription
+    -- * Alt
+    , Alt (..)
+
+    -- * GamesNumberFormatConfiguration
+    , GamesNumberFormatConfiguration
+    , gamesNumberFormatConfiguration
+    , gnfcSuffix
+    , gnfcCurrencyCode
+    , gnfcNumberFormatType
+    , gnfcNumDecimalPlaces
+
+    -- * LeaderboardConfigurationDetail
+    , LeaderboardConfigurationDetail
+    , leaderboardConfigurationDetail
+    , lcdKind
+    , lcdScoreFormat
+    , lcdSortRank
+    , lcdName
+    , lcdIconUrl
 
     -- * AchievementConfigurationListResponse
     , AchievementConfigurationListResponse
@@ -54,13 +66,8 @@ module Network.Google.Games.Configuration.Types
     , gnacZero
     , gnacMany
 
-    -- * GamesNumberFormatConfiguration
-    , GamesNumberFormatConfiguration
-    , gamesNumberFormatConfiguration
-    , gnfcSuffix
-    , gnfcCurrencyCode
-    , gnfcNumberFormatType
-    , gnfcNumDecimalPlaces
+    -- * ImageConfigurationsUpload'ImageType
+    , ImageConfigurationsUpload'ImageType (..)
 
     -- * ImageConfiguration
     , ImageConfiguration
@@ -69,6 +76,36 @@ module Network.Google.Games.Configuration.Types
     , icKind
     , icUrl
     , icImageType
+
+    -- * LocalizedString
+    , LocalizedString
+    , localizedString
+    , lsKind
+    , lsLocale
+    , lsValue
+
+    -- * LeaderboardConfigurationListResponse
+    , LeaderboardConfigurationListResponse
+    , leaderboardConfigurationListResponse
+    , lclrNextPageToken
+    , lclrKind
+    , lclrItems
+
+    -- * AchievementConfigurationDetail
+    , AchievementConfigurationDetail
+    , achievementConfigurationDetail
+    , acdKind
+    , acdSortRank
+    , acdName
+    , acdPointValue
+    , acdIconUrl
+    , acdDescription
+
+    -- * LocalizedStringBundle
+    , LocalizedStringBundle
+    , localizedStringBundle
+    , lsbKind
+    , lsbTranslations
 
     -- * LeaderboardConfiguration
     , LeaderboardConfiguration
@@ -81,37 +118,15 @@ module Network.Google.Games.Configuration.Types
     , lcDraft
     , lcId
     , lcScoreOrder
-
-    -- * LeaderboardConfigurationDetail
-    , LeaderboardConfigurationDetail
-    , leaderboardConfigurationDetail
-    , lcdKind
-    , lcdScoreFormat
-    , lcdSortRank
-    , lcdName
-    , lcdIconUrl
-
-    -- * LeaderboardConfigurationListResponse
-    , LeaderboardConfigurationListResponse
-    , leaderboardConfigurationListResponse
-    , lclrNextPageToken
-    , lclrKind
-    , lclrItems
-
-    -- * LocalizedString
-    , LocalizedString
-    , localizedString
-    , lsKind
-    , lsLocale
-    , lsValue
-
-    -- * LocalizedStringBundle
-    , LocalizedStringBundle
-    , localizedStringBundle
-    , lsbKind
-    , lsbTranslations
     ) where
 
 import           Network.Google.Games.Configuration.Types.Product
 import           Network.Google.Games.Configuration.Types.Sum
 import           Network.Google.Prelude
+
+-- | URL referring to version 'v1configuration' of the Google Play Game Services Publishing API.
+gamesConfigurationURL :: BaseUrl
+gamesConfigurationURL
+  = BaseUrl Https
+      "https://www.googleapis.com/games/v1configuration/"
+      443

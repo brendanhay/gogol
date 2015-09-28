@@ -1,6 +1,6 @@
 name:                  gogol-storage
 version:               0.0.1
-synopsis:              Google Cloud Storage API.
+synopsis:              Google Cloud Storage API Client.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -16,8 +16,8 @@ extra-source-files:    README.md
 description:
     Lets you store and retrieve potentially-large, immutable data objects.
     .
-    /Warning:/ This is an experimental preview release which is still under
-    heavy development and not intended for public consumption, caveat emptor!
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
 
 source-repository head
     type:     git
@@ -30,7 +30,41 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.Storage
+          Network.Google.API.Storage.BucketAccessControls.Delete
+        , Network.Google.API.Storage.BucketAccessControls.Get
+        , Network.Google.API.Storage.BucketAccessControls.Insert
+        , Network.Google.API.Storage.BucketAccessControls.List
+        , Network.Google.API.Storage.BucketAccessControls.Patch
+        , Network.Google.API.Storage.BucketAccessControls.Update
+        , Network.Google.API.Storage.Buckets.Delete
+        , Network.Google.API.Storage.Buckets.Get
+        , Network.Google.API.Storage.Buckets.Insert
+        , Network.Google.API.Storage.Buckets.List
+        , Network.Google.API.Storage.Buckets.Patch
+        , Network.Google.API.Storage.Buckets.Update
+        , Network.Google.API.Storage.Channels.Stop
+        , Network.Google.API.Storage.DefaultObjectAccessControls.Delete
+        , Network.Google.API.Storage.DefaultObjectAccessControls.Get
+        , Network.Google.API.Storage.DefaultObjectAccessControls.Insert
+        , Network.Google.API.Storage.DefaultObjectAccessControls.List
+        , Network.Google.API.Storage.DefaultObjectAccessControls.Patch
+        , Network.Google.API.Storage.DefaultObjectAccessControls.Update
+        , Network.Google.API.Storage.ObjectAccessControls.Delete
+        , Network.Google.API.Storage.ObjectAccessControls.Get
+        , Network.Google.API.Storage.ObjectAccessControls.Insert
+        , Network.Google.API.Storage.ObjectAccessControls.List
+        , Network.Google.API.Storage.ObjectAccessControls.Patch
+        , Network.Google.API.Storage.ObjectAccessControls.Update
+        , Network.Google.API.Storage.Objects.Compose
+        , Network.Google.API.Storage.Objects.Copy
+        , Network.Google.API.Storage.Objects.Delete
+        , Network.Google.API.Storage.Objects.Get
+        , Network.Google.API.Storage.Objects.Insert
+        , Network.Google.API.Storage.Objects.List
+        , Network.Google.API.Storage.Objects.Patch
+        , Network.Google.API.Storage.Objects.Update
+        , Network.Google.API.Storage.Objects.WatchAll
+        , Network.Google.Storage
         , Network.Google.Storage.Types
 
     other-modules:

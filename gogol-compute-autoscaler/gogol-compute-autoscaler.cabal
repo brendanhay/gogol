@@ -1,6 +1,6 @@
 name:                  gogol-compute-autoscaler
 version:               0.0.1
-synopsis:              Google Compute Engine Autoscaler API.
+synopsis:              Google Compute Engine Autoscaler API Client.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -17,8 +17,8 @@ description:
     The Google Compute Engine Autoscaler API provides autoscaling for groups
     of Cloud VMs.
     .
-    /Warning:/ This is an experimental preview release which is still under
-    heavy development and not intended for public consumption, caveat emptor!
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
 
 source-repository head
     type:     git
@@ -31,7 +31,17 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.Compute.Autoscaler
+          Network.Google.API.Autoscaler.Autoscalers.Delete
+        , Network.Google.API.Autoscaler.Autoscalers.Get
+        , Network.Google.API.Autoscaler.Autoscalers.Insert
+        , Network.Google.API.Autoscaler.Autoscalers.List
+        , Network.Google.API.Autoscaler.Autoscalers.Patch
+        , Network.Google.API.Autoscaler.Autoscalers.Update
+        , Network.Google.API.Autoscaler.ZoneOperations.Delete
+        , Network.Google.API.Autoscaler.ZoneOperations.Get
+        , Network.Google.API.Autoscaler.ZoneOperations.List
+        , Network.Google.API.Autoscaler.Zones.List
+        , Network.Google.Compute.Autoscaler
         , Network.Google.Compute.Autoscaler.Types
 
     other-modules:

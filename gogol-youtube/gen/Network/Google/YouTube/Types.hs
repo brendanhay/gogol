@@ -14,117 +14,30 @@
 --
 module Network.Google.YouTube.Types
     (
+    -- * Service URL
+      youTubeURL
 
-    -- * AccessPolicy
-      AccessPolicy
-    , accessPolicy
-    , apException
-    , apAllowed
+    -- * ContentRatingCncRating
+    , ContentRatingCncRating (..)
 
-    -- * Activity
-    , Activity
-    , activity
-    , aEtag
-    , aSnippet
-    , aKind
-    , aContentDetails
-    , aId
+    -- * VideoProcessingDetailsProcessingFailureReason
+    , VideoProcessingDetailsProcessingFailureReason (..)
 
-    -- * ActivityContentDetails
-    , ActivityContentDetails
-    , activityContentDetails
-    , acdPromotedItem
-    , acdChannelItem
-    , acdBulletin
-    , acdFavorite
-    , acdUpload
-    , acdComment
-    , acdSocial
-    , acdSubscription
-    , acdPlaylistItem
-    , acdLike
-    , acdRecommendation
-
-    -- * ActivityContentDetailsBulletin
-    , ActivityContentDetailsBulletin
-    , activityContentDetailsBulletin
-    , acdbResourceId
-
-    -- * ActivityContentDetailsChannelItem
-    , ActivityContentDetailsChannelItem
-    , activityContentDetailsChannelItem
-    , acdciResourceId
-
-    -- * ActivityContentDetailsComment
-    , ActivityContentDetailsComment
-    , activityContentDetailsComment
-    , acdcResourceId
-
-    -- * ActivityContentDetailsFavorite
-    , ActivityContentDetailsFavorite
-    , activityContentDetailsFavorite
-    , acdfResourceId
-
-    -- * ActivityContentDetailsLike
-    , ActivityContentDetailsLike
-    , activityContentDetailsLike
-    , acdlResourceId
-
-    -- * ActivityContentDetailsPlaylistItem
-    , ActivityContentDetailsPlaylistItem
-    , activityContentDetailsPlaylistItem
-    , acdpiResourceId
-    , acdpiPlaylistId
-    , acdpiPlaylistItemId
-
-    -- * ActivityContentDetailsPromotedItem
-    , ActivityContentDetailsPromotedItem
-    , activityContentDetailsPromotedItem
-    , acdpiDestinationUrl
-    , acdpiClickTrackingUrl
-    , acdpiForecastingUrl
-    , acdpiDescriptionText
-    , acdpiCtaType
-    , acdpiVideoId
-    , acdpiAdTag
-    , acdpiCreativeViewUrl
-    , acdpiImpressionUrl
-    , acdpiCustomCtaButtonText
-
-    -- * ActivityContentDetailsPromotedItemCtaType
-    , ActivityContentDetailsPromotedItemCtaType (..)
-
-    -- * ActivityContentDetailsRecommendation
-    , ActivityContentDetailsRecommendation
-    , activityContentDetailsRecommendation
-    , acdrResourceId
-    , acdrSeedResourceId
-    , acdrReason
-
-    -- * ActivityContentDetailsRecommendationReason
-    , ActivityContentDetailsRecommendationReason (..)
-
-    -- * ActivityContentDetailsSocial
-    , ActivityContentDetailsSocial
-    , activityContentDetailsSocial
-    , acdsResourceId
-    , acdsImageUrl
-    , acdsAuthor
-    , acdsReferenceUrl
-    , acdsType
-
-    -- * ActivityContentDetailsSocialType
-    , ActivityContentDetailsSocialType (..)
-
-    -- * ActivityContentDetailsSubscription
-    , ActivityContentDetailsSubscription
-    , activityContentDetailsSubscription
-    , aResourceId
-
-    -- * ActivityContentDetailsUpload
-    , ActivityContentDetailsUpload
-    , activityContentDetailsUpload
-    , acduVideoId
+    -- * VideoSnippet
+    , VideoSnippet
+    , videoSnippet
+    , vsDefaultAudioLanguage
+    , vsPublishedAt
+    , vsChannelTitle
+    , vsChannelId
+    , vsThumbnails
+    , vsLocalized
+    , vsCategoryId
+    , vsTitle
+    , vsLiveBroadcastContent
+    , vsDescription
+    , vsTags
+    , vsDefaultLanguage
 
     -- * ActivityListResponse
     , ActivityListResponse
@@ -139,28 +52,127 @@ module Network.Google.YouTube.Types
     , alrEventId
     , alrPrevPageToken
 
-    -- * ActivitySnippet
-    , ActivitySnippet
-    , activitySnippet
-    , asPublishedAt
-    , asChannelTitle
-    , asChannelId
-    , asThumbnails
-    , asGroupId
-    , asTitle
-    , asType
-    , asDescription
+    -- * VideoProcessingDetailsProcessingStatus
+    , VideoProcessingDetailsProcessingStatus (..)
 
-    -- * ActivitySnippetType
-    , ActivitySnippetType (..)
+    -- * InvideoPositionType
+    , InvideoPositionType (..)
 
-    -- * Caption
-    , Caption
-    , caption
-    , capEtag
-    , capSnippet
-    , capKind
-    , capId
+    -- * VideoStatistics
+    , VideoStatistics
+    , videoStatistics
+    , vsLikeCount
+    , vsCommentCount
+    , vsFavoriteCount
+    , vsDislikeCount
+    , vsViewCount
+
+    -- * ContentRatingEefilmRating
+    , ContentRatingEefilmRating (..)
+
+    -- * PropertyValue
+    , PropertyValue
+    , propertyValue
+    , pvProperty
+    , pvValue
+
+    -- * CommentThreadListResponse
+    , CommentThreadListResponse
+    , commentThreadListResponse
+    , ctlrEtag
+    , ctlrTokenPagination
+    , ctlrNextPageToken
+    , ctlrPageInfo
+    , ctlrKind
+    , ctlrItems
+    , ctlrVisitorId
+    , ctlrEventId
+
+    -- * I18nLanguage
+    , I18nLanguage
+    , i18nLanguage
+    , ilEtag
+    , ilSnippet
+    , ilKind
+    , ilId
+
+    -- * CdnSettings
+    , CdnSettings
+    , cdnSettings
+    , csIngestionInfo
+    , csFormat
+    , csIngestionType
+
+    -- * VideoContentDetailsDefinition
+    , VideoContentDetailsDefinition (..)
+
+    -- * WatchSettings
+    , WatchSettings
+    , watchSettings
+    , wsFeaturedPlaylistId
+    , wsBackgroundColor
+    , wsTextColor
+
+    -- * AccessPolicy
+    , AccessPolicy
+    , accessPolicy
+    , apException
+    , apAllowed
+
+    -- * CaptionSnippetStatus
+    , CaptionSnippetStatus (..)
+
+    -- * SearchList'VideoDefinition
+    , SearchList'VideoDefinition (..)
+
+    -- * VideoCategorySnippet
+    , VideoCategorySnippet
+    , videoCategorySnippet
+    , vcsAssignable
+    , vcsChannelId
+    , vcsTitle
+
+    -- * CaptionSnippetFailureReason
+    , CaptionSnippetFailureReason (..)
+
+    -- * LiveBroadcastSnippet
+    , LiveBroadcastSnippet
+    , liveBroadcastSnippet
+    , lbsActualEndTime
+    , lbsLiveChatId
+    , lbsPublishedAt
+    , lbsScheduledEndTime
+    , lbsChannelId
+    , lbsScheduledStartTime
+    , lbsThumbnails
+    , lbsTitle
+    , lbsActualStartTime
+    , lbsIsDefaultBroadcast
+    , lbsDescription
+
+    -- * ContentRatingMekuRating
+    , ContentRatingMekuRating (..)
+
+    -- * LiveBroadcastStatistics
+    , LiveBroadcastStatistics
+    , liveBroadcastStatistics
+    , lbsTotalChatCount
+    , lbsConcurrentViewers
+
+    -- * ContentRatingChfilmRating
+    , ContentRatingChfilmRating (..)
+
+    -- * SearchList'VideoDuration
+    , SearchList'VideoDuration (..)
+
+    -- * VideosList'MyRating
+    , VideosList'MyRating (..)
+
+    -- * GuideCategorySnippet
+    , GuideCategorySnippet
+    , guideCategorySnippet
+    , gcsChannelId
+    , gcsTitle
 
     -- * CaptionListResponse
     , CaptionListResponse
@@ -170,6 +182,446 @@ module Network.Google.YouTube.Types
     , clrItems
     , clrVisitorId
     , clrEventId
+
+    -- * LiveBroadcastsList'BroadcastStatus
+    , LiveBroadcastsList'BroadcastStatus (..)
+
+    -- * ContentRatingSmaisRating
+    , ContentRatingSmaisRating (..)
+
+    -- * PlaylistItemStatus
+    , PlaylistItemStatus
+    , playlistItemStatus
+    , pisPrivacyStatus
+
+    -- * VideoContentDetailsCaption
+    , VideoContentDetailsCaption (..)
+
+    -- * SearchList'VideoCaption
+    , SearchList'VideoCaption (..)
+
+    -- * CaptionSnippetTrackKind
+    , CaptionSnippetTrackKind (..)
+
+    -- * ContentRatingMpaaRating
+    , ContentRatingMpaaRating (..)
+
+    -- * LiveBroadcastStatusRecordingStatus
+    , LiveBroadcastStatusRecordingStatus (..)
+
+    -- * VideoAbuseReport
+    , VideoAbuseReport
+    , videoAbuseReport
+    , varSecondaryReasonId
+    , varReasonId
+    , varVideoId
+    , varLanguage
+    , varComments
+
+    -- * InvideoPosition
+    , InvideoPosition
+    , invideoPosition
+    , ipCornerPosition
+    , ipType
+
+    -- * I18nRegionListResponse
+    , I18nRegionListResponse
+    , i18nRegionListResponse
+    , irlrEtag
+    , irlrKind
+    , irlrItems
+    , irlrVisitorId
+    , irlrEventId
+
+    -- * VideoFileDetailsAudioStream
+    , VideoFileDetailsAudioStream
+    , videoFileDetailsAudioStream
+    , vfdasBitrateBps
+    , vfdasVendor
+    , vfdasCodec
+    , vfdasChannelCount
+
+    -- * ActivityContentDetailsBulletin
+    , ActivityContentDetailsBulletin
+    , activityContentDetailsBulletin
+    , acdbResourceId
+
+    -- * ContentRatingRtcRating
+    , ContentRatingRtcRating (..)
+
+    -- * VideoTopicDetails
+    , VideoTopicDetails
+    , videoTopicDetails
+    , vtdTopicIds
+    , vtdRelevantTopicIds
+
+    -- * LiveStream
+    , LiveStream
+    , liveStream
+    , lsStatus
+    , lsEtag
+    , lsSnippet
+    , lsKind
+    , lsContentDetails
+    , lsId
+    , lsCdn
+
+    -- * LiveBroadcastContentDetails
+    , LiveBroadcastContentDetails
+    , liveBroadcastContentDetails
+    , lbcdEnableContentEncryption
+    , lbcdEnableLowLatency
+    , lbcdEnableEmbed
+    , lbcdStartWithSlate
+    , lbcdMonitorStream
+    , lbcdBoundStreamId
+    , lbcdRecordFromStart
+    , lbcdEnableClosedCaptions
+    , lbcdEnableDvr
+
+    -- * ChannelSection
+    , ChannelSection
+    , channelSection
+    , csEtag
+    , csSnippet
+    , csKind
+    , csContentDetails
+    , csTargeting
+    , csId
+    , csLocalizations
+
+    -- * PlaylistStatus
+    , PlaylistStatus
+    , playlistStatus
+    , psPrivacyStatus
+
+    -- * VideoContentDetails
+    , VideoContentDetails
+    , videoContentDetails
+    , vcdCountryRestriction
+    , vcdDefinition
+    , vcdDimension
+    , vcdCaption
+    , vcdRegionRestriction
+    , vcdDuration
+    , vcdContentRating
+    , vcdLicensedContent
+
+    -- * LiveBroadcastTopicDetails
+    , LiveBroadcastTopicDetails
+    , liveBroadcastTopicDetails
+    , lbtdTopics
+
+    -- * VideoAbuseReportReasonListResponse
+    , VideoAbuseReportReasonListResponse
+    , videoAbuseReportReasonListResponse
+    , varrlrEtag
+    , varrlrKind
+    , varrlrItems
+    , varrlrVisitorId
+    , varrlrEventId
+
+    -- * ChannelStatusLongUploadsStatus
+    , ChannelStatusLongUploadsStatus (..)
+
+    -- * ContentRatingCatvRating
+    , ContentRatingCatvRating (..)
+
+    -- * VideoLocalizations
+    , VideoLocalizations
+    , videoLocalizations
+
+    -- * VideoSuggestionsItemProcessingWarnings
+    , VideoSuggestionsItemProcessingWarnings (..)
+
+    -- * ActivityContentDetailsFavorite
+    , ActivityContentDetailsFavorite
+    , activityContentDetailsFavorite
+    , acdfResourceId
+
+    -- * Alt
+    , Alt (..)
+
+    -- * ImageSettings
+    , ImageSettings
+    , imageSettings
+    , isBannerMobileLowImageUrl
+    , isBannerTabletExtraHdImageUrl
+    , isSmallBrandedBannerImageImapScript
+    , isBannerTvHighImageUrl
+    , isBannerMobileHdImageUrl
+    , isBannerTvMediumImageUrl
+    , isBannerTvImageUrl
+    , isBannerTabletImageUrl
+    , isBannerMobileImageUrl
+    , isTrackingImageUrl
+    , isBannerMobileMediumHdImageUrl
+    , isLargeBrandedBannerImageUrl
+    , isBannerExternalUrl
+    , isBackgroundImageUrl
+    , isSmallBrandedBannerImageUrl
+    , isBannerImageUrl
+    , isWatchIconImageUrl
+    , isBannerTvLowImageUrl
+    , isBannerMobileExtraHdImageUrl
+    , isLargeBrandedBannerImageImapScript
+    , isBannerTabletLowImageUrl
+    , isBannerTabletHdImageUrl
+
+    -- * ChannelListResponse
+    , ChannelListResponse
+    , channelListResponse
+    , cEtag
+    , cTokenPagination
+    , cNextPageToken
+    , cPageInfo
+    , cKind
+    , cItems
+    , cVisitorId
+    , cEventId
+    , cPrevPageToken
+
+    -- * I18nLanguageListResponse
+    , I18nLanguageListResponse
+    , i18nLanguageListResponse
+    , illrEtag
+    , illrKind
+    , illrItems
+    , illrVisitorId
+    , illrEventId
+
+    -- * Activity
+    , Activity
+    , activity
+    , aEtag
+    , aSnippet
+    , aKind
+    , aContentDetails
+    , aId
+
+    -- * PlaylistPlayer
+    , PlaylistPlayer
+    , playlistPlayer
+    , ppEmbedHtml
+
+    -- * InvideoTimingType
+    , InvideoTimingType (..)
+
+    -- * ContentRatingNbcRating
+    , ContentRatingNbcRating (..)
+
+    -- * InvideoPromotion
+    , InvideoPromotion
+    , invideoPromotion
+    , ipUseSmartTiming
+    , ipItems
+    , ipDefaultTiming
+    , ipPosition
+
+    -- * ChannelBannerResource
+    , ChannelBannerResource
+    , channelBannerResource
+    , cbrEtag
+    , cbrKind
+    , cbrUrl
+
+    -- * CommentThread
+    , CommentThread
+    , commentThread
+    , ctEtag
+    , ctSnippet
+    , ctKind
+    , ctReplies
+    , ctId
+
+    -- * VideoStatusRejectionReason
+    , VideoStatusRejectionReason (..)
+
+    -- * ChannelBrandingSettings
+    , ChannelBrandingSettings
+    , channelBrandingSettings
+    , cbsImage
+    , cbsHints
+    , cbsChannel
+    , cbsWatch
+
+    -- * PlaylistLocalization
+    , PlaylistLocalization
+    , playlistLocalization
+    , plTitle
+    , plDescription
+
+    -- * LiveStreamHealthStatusStatus
+    , LiveStreamHealthStatusStatus (..)
+
+    -- * InvideoBranding
+    , InvideoBranding
+    , invideoBranding
+    , ibImageUrl
+    , ibTargetChannelId
+    , ibTiming
+    , ibImageBytes
+    , ibPosition
+
+    -- * LiveBroadcastStatusLiveBroadcastPriority
+    , LiveBroadcastStatusLiveBroadcastPriority (..)
+
+    -- * LiveBroadcastTopicSnippet
+    , LiveBroadcastTopicSnippet
+    , liveBroadcastTopicSnippet
+    , lbtsName
+    , lbtsReleaseDate
+
+    -- * ContentRatingIcaaRating
+    , ContentRatingIcaaRating (..)
+
+    -- * ChannelLocalization
+    , ChannelLocalization
+    , channelLocalization
+    , clTitle
+    , clDescription
+
+    -- * ContentRatingFcbmRating
+    , ContentRatingFcbmRating (..)
+
+    -- * SubscriptionsList'Order
+    , SubscriptionsList'Order (..)
+
+    -- * VideosList'Chart
+    , VideosList'Chart (..)
+
+    -- * VideoFileDetailsFileType
+    , VideoFileDetailsFileType (..)
+
+    -- * ContentRatingFcoRating
+    , ContentRatingFcoRating (..)
+
+    -- * PlaylistItemContentDetails
+    , PlaylistItemContentDetails
+    , playlistItemContentDetails
+    , picdStartAt
+    , picdNote
+    , picdVideoId
+    , picdEndAt
+
+    -- * LocalizedProperty
+    , LocalizedProperty
+    , localizedProperty
+    , lpDefault
+    , lpLocalized
+    , lpDefaultLanguage
+
+    -- * VideoSuggestionsItemProcessingErrors
+    , VideoSuggestionsItemProcessingErrors (..)
+
+    -- * VideoFileDetailsVideoStream
+    , VideoFileDetailsVideoStream
+    , videoFileDetailsVideoStream
+    , vfdvsHeightPixels
+    , vfdvsBitrateBps
+    , vfdvsVendor
+    , vfdvsRotation
+    , vfdvsFrameRateFps
+    , vfdvsCodec
+    , vfdvsAspectRatio
+    , vfdvsWidthPixels
+
+    -- * SubscriptionContentDetails
+    , SubscriptionContentDetails
+    , subscriptionContentDetails
+    , scdActivityType
+    , scdTotalItemCount
+    , scdNewItemCount
+
+    -- * ChannelConversionPings
+    , ChannelConversionPings
+    , channelConversionPings
+    , ccpPings
+
+    -- * LanguageTag
+    , LanguageTag
+    , languageTag
+    , ltValue
+
+    -- * LiveStreamConfigurationIssueType
+    , LiveStreamConfigurationIssueType (..)
+
+    -- * VideoAgeGating
+    , VideoAgeGating
+    , videoAgeGating
+    , vagAlcoholContent
+    , vagRestricted
+    , vagVideoGameRating
+
+    -- * LiveBroadcastTopic
+    , LiveBroadcastTopic
+    , liveBroadcastTopic
+    , lbtSnippet
+    , lbtUnmatched
+    , lbtType
+
+    -- * ActivityContentDetailsRecommendationReason
+    , ActivityContentDetailsRecommendationReason (..)
+
+    -- * ContentRatingMtrcbRating
+    , ContentRatingMtrcbRating (..)
+
+    -- * PlaylistItem
+    , PlaylistItem
+    , playlistItem
+    , piStatus
+    , piEtag
+    , piSnippet
+    , piKind
+    , piContentDetails
+    , piId
+
+    -- * ContentRatingEirinRating
+    , ContentRatingEirinRating (..)
+
+    -- * Subscription
+    , Subscription
+    , subscription
+    , sEtag
+    , sSubscriberSnippet
+    , sSnippet
+    , sKind
+    , sContentDetails
+    , sId
+
+    -- * VideoSuggestionsItemProcessingHints
+    , VideoSuggestionsItemProcessingHints (..)
+
+    -- * ChannelSectionSnippetStyle
+    , ChannelSectionSnippetStyle (..)
+
+    -- * VideoAgeGatingVideoGameRating
+    , VideoAgeGatingVideoGameRating (..)
+
+    -- * GuideCategoryListResponse
+    , GuideCategoryListResponse
+    , guideCategoryListResponse
+    , gclrEtag
+    , gclrTokenPagination
+    , gclrNextPageToken
+    , gclrPageInfo
+    , gclrKind
+    , gclrItems
+    , gclrVisitorId
+    , gclrEventId
+    , gclrPrevPageToken
+
+    -- * ContentRatingMocRating
+    , ContentRatingMocRating (..)
+
+    -- * ChannelConversionPing
+    , ChannelConversionPing
+    , channelConversionPing
+    , ccpContext
+    , ccpConversionUrl
+
+    -- * ContentRatingCsaRating
+    , ContentRatingCsaRating (..)
 
     -- * CaptionSnippet
     , CaptionSnippet
@@ -188,74 +640,165 @@ module Network.Google.YouTube.Types
     , csIsEasyReader
     , csAudioTrackType
 
-    -- * CaptionSnippetAudioTrackType
-    , CaptionSnippetAudioTrackType (..)
+    -- * ContentRatingBfvcRating
+    , ContentRatingBfvcRating (..)
 
-    -- * CaptionSnippetFailureReason
-    , CaptionSnippetFailureReason (..)
+    -- * Comment
+    , Comment
+    , comment
+    , comEtag
+    , comSnippet
+    , comKind
+    , comId
 
-    -- * CaptionSnippetStatus
-    , CaptionSnippetStatus (..)
+    -- * I18nRegionSnippet
+    , I18nRegionSnippet
+    , i18nRegionSnippet
+    , irsName
+    , irsGl
 
-    -- * CaptionSnippetTrackKind
-    , CaptionSnippetTrackKind (..)
+    -- * ThumbnailDetails
+    , ThumbnailDetails
+    , thumbnailDetails
+    , tdMedium
+    , tdMaxres
+    , tdDefault
+    , tdStandard
+    , tdHigh
 
-    -- * CdnSettings
-    , CdnSettings
-    , cdnSettings
-    , csIngestionInfo
-    , csFormat
-    , csIngestionType
+    -- * ContentRatingKfcbRating
+    , ContentRatingKfcbRating (..)
 
-    -- * CdnSettingsIngestionType
-    , CdnSettingsIngestionType (..)
+    -- * ChannelStatistics
+    , ChannelStatistics
+    , channelStatistics
+    , csCommentCount
+    , csSubscriberCount
+    , csVideoCount
+    , csHiddenSubscriberCount
+    , csViewCount
 
-    -- * Channel
-    , Channel
-    , channel
-    , chaStatus
-    , chaEtag
-    , chaAuditDetails
-    , chaContentOwnerDetails
-    , chaSnippet
-    , chaKind
-    , chaTopicDetails
-    , chaContentDetails
-    , chaConversionPings
-    , chaBrandingSettings
-    , chaId
-    , chaInvideoPromotion
-    , chaStatistics
-    , chaLocalizations
+    -- * ChannelSnippet
+    , ChannelSnippet
+    , channelSnippet
+    , csPublishedAt
+    , csCountry
+    , csThumbnails
+    , csLocalized
+    , csTitle
+    , csDescription
+    , csDefaultLanguage
 
-    -- * ChannelAuditDetails
-    , ChannelAuditDetails
-    , channelAuditDetails
-    , cadContentIdClaimsGoodStanding
-    , cadOverallGoodStanding
-    , cadCopyrightStrikesGoodStanding
-    , cadCommunityGuidelinesGoodStanding
+    -- * SubscriptionContentDetailsActivityType
+    , SubscriptionContentDetailsActivityType (..)
 
-    -- * ChannelBannerResource
-    , ChannelBannerResource
-    , channelBannerResource
-    , cbrEtag
-    , cbrKind
-    , cbrUrl
+    -- * I18nRegion
+    , I18nRegion
+    , i18nRegion
+    , irEtag
+    , irSnippet
+    , irKind
+    , irId
 
-    -- * ChannelBrandingSettings
-    , ChannelBrandingSettings
-    , channelBrandingSettings
-    , cbsImage
-    , cbsHints
-    , cbsChannel
-    , cbsWatch
+    -- * ChannelId
+    , ChannelId
+    , channelId
+    , ciValue
 
-    -- * ChannelContentDetails
-    , ChannelContentDetails
-    , channelContentDetails
-    , ccdRelatedPlaylists
-    , ccdGooglePlusUserId
+    -- * ContentRatingCbfcRating
+    , ContentRatingCbfcRating (..)
+
+    -- * ContentRatingMibacRating
+    , ContentRatingMibacRating (..)
+
+    -- * Caption
+    , Caption
+    , caption
+    , capEtag
+    , capSnippet
+    , capKind
+    , capId
+
+    -- * VideoContentDetailsRegionRestriction
+    , VideoContentDetailsRegionRestriction
+    , videoContentDetailsRegionRestriction
+    , vcdrrAllowed
+    , vcdrrBlocked
+
+    -- * ContentRatingCatvfrRating
+    , ContentRatingCatvfrRating (..)
+
+    -- * ContentRatingMedietilsynetRating
+    , ContentRatingMedietilsynetRating (..)
+
+    -- * SearchList'Order
+    , SearchList'Order (..)
+
+    -- * MonitorStreamInfo
+    , MonitorStreamInfo
+    , monitorStreamInfo
+    , msiBroadcastStreamDelayMs
+    , msiEmbedHtml
+    , msiEnableMonitorStream
+
+    -- * VideoAbuseReportReasonSnippet
+    , VideoAbuseReportReasonSnippet
+    , videoAbuseReportReasonSnippet
+    , varrsSecondaryReasons
+    , varrsLabel
+
+    -- * ContentRatingMccypRating
+    , ContentRatingMccypRating (..)
+
+    -- * ContentRatingFpbRating
+    , ContentRatingFpbRating (..)
+
+    -- * ContentRatingSmsaRating
+    , ContentRatingSmsaRating (..)
+
+    -- * InvideoTiming
+    , InvideoTiming
+    , invideoTiming
+    , itDurationMs
+    , itOffsetMs
+    , itType
+
+    -- * ActivityContentDetailsSocialType
+    , ActivityContentDetailsSocialType (..)
+
+    -- * ActivityContentDetails
+    , ActivityContentDetails
+    , activityContentDetails
+    , acdPromotedItem
+    , acdChannelItem
+    , acdBulletin
+    , acdFavorite
+    , acdUpload
+    , acdComment
+    , acdSocial
+    , acdSubscription
+    , acdPlaylistItem
+    , acdLike
+    , acdRecommendation
+
+    -- * CommentsSetModerationStatus'ModerationStatus
+    , CommentsSetModerationStatus'ModerationStatus (..)
+
+    -- * VideoProcessingDetailsProcessingProgress
+    , VideoProcessingDetailsProcessingProgress
+    , videoProcessingDetailsProcessingProgress
+    , vpdppTimeLeftMs
+    , vpdppPartsTotal
+    , vpdppPartsProcessed
+
+    -- * ContentRatingNkclvRating
+    , ContentRatingNkclvRating (..)
+
+    -- * VideoConversionPing
+    , VideoConversionPing
+    , videoConversionPing
+    , vcpContext
+    , vcpConversionUrl
 
     -- * ChannelContentDetailsRelatedPlaylists
     , ChannelContentDetailsRelatedPlaylists
@@ -266,88 +809,170 @@ module Network.Google.YouTube.Types
     , ccdrpUploads
     , ccdrpLikes
 
-    -- * ChannelContentOwnerDetails
-    , ChannelContentOwnerDetails
-    , channelContentOwnerDetails
-    , ccodTimeLinked
-    , ccodContentOwner
+    -- * CommentThreadReplies
+    , CommentThreadReplies
+    , commentThreadReplies
+    , ctrComments
 
-    -- * ChannelConversionPing
-    , ChannelConversionPing
-    , channelConversionPing
-    , ccpContext
-    , ccpConversionUrl
+    -- * ContentRatingAnatelRating
+    , ContentRatingAnatelRating (..)
 
-    -- * ChannelConversionPingContext
-    , ChannelConversionPingContext (..)
+    -- * ContentRatingNbcplRating
+    , ContentRatingNbcplRating (..)
 
-    -- * ChannelConversionPings
-    , ChannelConversionPings
-    , channelConversionPings
-    , ccpPings
+    -- * ActivityContentDetailsPromotedItem
+    , ActivityContentDetailsPromotedItem
+    , activityContentDetailsPromotedItem
+    , acdpiDestinationUrl
+    , acdpiClickTrackingUrl
+    , acdpiForecastingUrl
+    , acdpiDescriptionText
+    , acdpiCtaType
+    , acdpiVideoId
+    , acdpiAdTag
+    , acdpiCreativeViewUrl
+    , acdpiImpressionUrl
+    , acdpiCustomCtaButtonText
 
-    -- * ChannelId
-    , ChannelId
-    , channelId
-    , ciValue
+    -- * VideoLiveStreamingDetails
+    , VideoLiveStreamingDetails
+    , videoLiveStreamingDetails
+    , vlsdActualEndTime
+    , vlsdConcurrentViewers
+    , vlsdScheduledEndTime
+    , vlsdScheduledStartTime
+    , vlsdActualStartTime
 
-    -- * ChannelListResponse
-    , ChannelListResponse
-    , channelListResponse
-    , cEtag
-    , cTokenPagination
-    , cNextPageToken
-    , cPageInfo
-    , cKind
-    , cItems
-    , cVisitorId
-    , cEventId
-    , cPrevPageToken
+    -- * SearchResultSnippetLiveBroadcastContent
+    , SearchResultSnippetLiveBroadcastContent (..)
 
-    -- * ChannelLocalization
-    , ChannelLocalization
-    , channelLocalization
-    , clTitle
-    , clDescription
+    -- * ContentRatingPefilmRating
+    , ContentRatingPefilmRating (..)
 
-    -- * ChannelLocalizations
-    , ChannelLocalizations
-    , channelLocalizations
-
-    -- * ChannelSection
-    , ChannelSection
-    , channelSection
-    , csEtag
-    , csSnippet
-    , csKind
-    , csContentDetails
-    , csTargeting
-    , csId
-    , csLocalizations
-
-    -- * ChannelSectionContentDetails
-    , ChannelSectionContentDetails
-    , channelSectionContentDetails
-    , cscdChannels
-    , cscdPlaylists
-
-    -- * ChannelSectionListResponse
-    , ChannelSectionListResponse
-    , channelSectionListResponse
-    , cslrEtag
-    , cslrKind
-    , cslrItems
-    , cslrVisitorId
-    , cslrEventId
+    -- * ContentRatingRteRating
+    , ContentRatingRteRating (..)
 
     -- * ChannelSectionLocalization
     , ChannelSectionLocalization
     , channelSectionLocalization
     , cslTitle
 
-    -- * ChannelSectionLocalizations
-    , ChannelSectionLocalizations
-    , channelSectionLocalizations
+    -- * GeoPoint
+    , GeoPoint
+    , geoPoint
+    , gpLatitude
+    , gpAltitude
+    , gpLongitude
+
+    -- * ChannelContentOwnerDetails
+    , ChannelContentOwnerDetails
+    , channelContentOwnerDetails
+    , ccodTimeLinked
+    , ccodContentOwner
+
+    -- * I18nLanguageSnippet
+    , I18nLanguageSnippet
+    , i18nLanguageSnippet
+    , ilsHl
+    , ilsName
+
+    -- * VideoAbuseReportSecondaryReason
+    , VideoAbuseReportSecondaryReason
+    , videoAbuseReportSecondaryReason
+    , varsrId
+    , varsrLabel
+
+    -- * ContentRatingFskRating
+    , ContentRatingFskRating (..)
+
+    -- * LiveBroadcastStatusPrivacyStatus
+    , LiveBroadcastStatusPrivacyStatus (..)
+
+    -- * ActivityContentDetailsPromotedItemCtaType
+    , ActivityContentDetailsPromotedItemCtaType (..)
+
+    -- * SearchList'VideoEmbeddable
+    , SearchList'VideoEmbeddable (..)
+
+    -- * ContentRatingOflcRating
+    , ContentRatingOflcRating (..)
+
+    -- * VideoStatusPrivacyStatus
+    , VideoStatusPrivacyStatus (..)
+
+    -- * ChannelSectionSnippetType
+    , ChannelSectionSnippetType (..)
+
+    -- * ChannelAuditDetails
+    , ChannelAuditDetails
+    , channelAuditDetails
+    , cadContentIdClaimsGoodStanding
+    , cadOverallGoodStanding
+    , cadCopyrightStrikesGoodStanding
+    , cadCommunityGuidelinesGoodStanding
+
+    -- * SubscriptionSubscriberSnippet
+    , SubscriptionSubscriberSnippet
+    , subscriptionSubscriberSnippet
+    , sssChannelId
+    , sssThumbnails
+    , sssTitle
+    , sssDescription
+
+    -- * IngestionInfo
+    , IngestionInfo
+    , ingestionInfo
+    , iiBackupIngestionAddress
+    , iiIngestionAddress
+    , iiStreamName
+
+    -- * Thumbnail
+    , Thumbnail
+    , thumbnail
+    , tHeight
+    , tUrl
+    , tWidth
+
+    -- * SearchList'EventType
+    , SearchList'EventType (..)
+
+    -- * ContentRatingSkfilmRating
+    , ContentRatingSkfilmRating (..)
+
+    -- * ContentRatingKmrbRating
+    , ContentRatingKmrbRating (..)
+
+    -- * LiveBroadcastStatusLifeCycleStatus
+    , LiveBroadcastStatusLifeCycleStatus (..)
+
+    -- * ContentRatingRcnofRating
+    , ContentRatingRcnofRating (..)
+
+    -- * TokenPagination
+    , TokenPagination
+    , tokenPagination
+
+    -- * VideoFileDetailsVideoStreamRotation
+    , VideoFileDetailsVideoStreamRotation (..)
+
+    -- * ContentRatingCceRating
+    , ContentRatingCceRating (..)
+
+    -- * PlaylistListResponse
+    , PlaylistListResponse
+    , playlistListResponse
+    , plrEtag
+    , plrTokenPagination
+    , plrNextPageToken
+    , plrPageInfo
+    , plrKind
+    , plrItems
+    , plrVisitorId
+    , plrEventId
+    , plrPrevPageToken
+
+    -- * ContentRatingCscfRating
+    , ContentRatingCscfRating (..)
 
     -- * ChannelSectionSnippet
     , ChannelSectionSnippet
@@ -360,11 +985,528 @@ module Network.Google.YouTube.Types
     , cssPosition
     , cssDefaultLanguage
 
-    -- * ChannelSectionSnippetStyle
-    , ChannelSectionSnippetStyle (..)
+    -- * ContentRatingBbfcRating
+    , ContentRatingBbfcRating (..)
 
-    -- * ChannelSectionSnippetType
-    , ChannelSectionSnippetType (..)
+    -- * SearchList'VideoSyndicated
+    , SearchList'VideoSyndicated (..)
+
+    -- * SearchListResponse
+    , SearchListResponse
+    , searchListResponse
+    , slrEtag
+    , slrTokenPagination
+    , slrNextPageToken
+    , slrPageInfo
+    , slrKind
+    , slrItems
+    , slrVisitorId
+    , slrEventId
+    , slrPrevPageToken
+
+    -- * ChannelStatus
+    , ChannelStatus
+    , channelStatus
+    , csIsLinked
+    , csLongUploadsStatus
+    , csPrivacyStatus
+
+    -- * LiveStreamSnippet
+    , LiveStreamSnippet
+    , liveStreamSnippet
+    , lssPublishedAt
+    , lssChannelId
+    , lssIsDefaultStream
+    , lssTitle
+    , lssDescription
+
+    -- * PromotedItem
+    , PromotedItem
+    , promotedItem
+    , pCustomMessage
+    , pPromotedByContentOwner
+    , pId
+    , pTiming
+
+    -- * ResourceId
+    , ResourceId
+    , resourceId
+    , riKind
+    , riChannelId
+    , riVideoId
+    , riPlaylistId
+
+    -- * ContentRatingTvpgRating
+    , ContentRatingTvpgRating (..)
+
+    -- * SearchList'SafeSearch
+    , SearchList'SafeSearch (..)
+
+    -- * ActivityContentDetailsRecommendation
+    , ActivityContentDetailsRecommendation
+    , activityContentDetailsRecommendation
+    , acdrResourceId
+    , acdrSeedResourceId
+    , acdrReason
+
+    -- * SearchResult
+    , SearchResult
+    , searchResult
+    , srEtag
+    , srSnippet
+    , srKind
+    , srId
+
+    -- * ContentRatingYtRating
+    , ContentRatingYtRating (..)
+
+    -- * ContentRatingMccaaRating
+    , ContentRatingMccaaRating (..)
+
+    -- * ChannelConversionPingContext
+    , ChannelConversionPingContext (..)
+
+    -- * VideoSnippetLiveBroadcastContent
+    , VideoSnippetLiveBroadcastContent (..)
+
+    -- * LiveBroadcastsTransition'BroadcastStatus
+    , LiveBroadcastsTransition'BroadcastStatus (..)
+
+    -- * InvideoPositionCornerPosition
+    , InvideoPositionCornerPosition (..)
+
+    -- * SearchResultSnippet
+    , SearchResultSnippet
+    , searchResultSnippet
+    , srsPublishedAt
+    , srsChannelTitle
+    , srsChannelId
+    , srsThumbnails
+    , srsTitle
+    , srsLiveBroadcastContent
+    , srsDescription
+
+    -- * VideoConversionPings
+    , VideoConversionPings
+    , videoConversionPings
+    , vcpPings
+
+    -- * ContentRatingMdaRating
+    , ContentRatingMdaRating (..)
+
+    -- * PromotedItemId
+    , PromotedItemId
+    , promotedItemId
+    , piiRecentlyUploadedBy
+    , piiVideoId
+    , piiWebsiteUrl
+    , piiType
+
+    -- * GuideCategory
+    , GuideCategory
+    , guideCategory
+    , gcEtag
+    , gcSnippet
+    , gcKind
+    , gcId
+
+    -- * VideoRatingRating
+    , VideoRatingRating (..)
+
+    -- * SearchList'VideoLicense
+    , SearchList'VideoLicense (..)
+
+    -- * LiveStreamHealthStatus
+    , LiveStreamHealthStatus
+    , liveStreamHealthStatus
+    , lshsStatus
+    , lshsConfigurationIssues
+    , lshsLastUpdateTimeSeconds
+
+    -- * CommentListResponse
+    , CommentListResponse
+    , commentListResponse
+    , clrlEtag
+    , clrlTokenPagination
+    , clrlNextPageToken
+    , clrlPageInfo
+    , clrlKind
+    , clrlItems
+    , clrlVisitorId
+    , clrlEventId
+
+    -- * VideoStatusFailureReason
+    , VideoStatusFailureReason (..)
+
+    -- * ContentRatingDjctqRating
+    , ContentRatingDjctqRating (..)
+
+    -- * PlaylistItemListResponse
+    , PlaylistItemListResponse
+    , playlistItemListResponse
+    , pilrEtag
+    , pilrTokenPagination
+    , pilrNextPageToken
+    , pilrPageInfo
+    , pilrKind
+    , pilrItems
+    , pilrVisitorId
+    , pilrEventId
+    , pilrPrevPageToken
+
+    -- * SubscriptionListResponse
+    , SubscriptionListResponse
+    , subscriptionListResponse
+    , subEtag
+    , subTokenPagination
+    , subNextPageToken
+    , subPageInfo
+    , subKind
+    , subItems
+    , subVisitorId
+    , subEventId
+    , subPrevPageToken
+
+    -- * LocalizedString
+    , LocalizedString
+    , localizedString
+    , lsValue
+    , lsLanguage
+
+    -- * VideoLocalization
+    , VideoLocalization
+    , videoLocalization
+    , vlTitle
+    , vlDescription
+
+    -- * VideoPlayer
+    , VideoPlayer
+    , videoPlayer
+    , vpEmbedHtml
+
+    -- * ContentRatingAcbRating
+    , ContentRatingAcbRating (..)
+
+    -- * LiveStreamStatusStreamStatus
+    , LiveStreamStatusStreamStatus (..)
+
+    -- * ActivityContentDetailsPlaylistItem
+    , ActivityContentDetailsPlaylistItem
+    , activityContentDetailsPlaylistItem
+    , acdpiResourceId
+    , acdpiPlaylistId
+    , acdpiPlaylistItemId
+
+    -- * PlaylistLocalizations
+    , PlaylistLocalizations
+    , playlistLocalizations
+
+    -- * ContentRatingCicfRating
+    , ContentRatingCicfRating (..)
+
+    -- * CdnSettingsIngestionType
+    , CdnSettingsIngestionType (..)
+
+    -- * PlaylistContentDetails
+    , PlaylistContentDetails
+    , playlistContentDetails
+    , pcdItemCount
+
+    -- * CommentSnippetModerationStatus
+    , CommentSnippetModerationStatus (..)
+
+    -- * ThumbnailSetResponse
+    , ThumbnailSetResponse
+    , thumbnailSetResponse
+    , tsrEtag
+    , tsrKind
+    , tsrItems
+    , tsrVisitorId
+    , tsrEventId
+
+    -- * ActivityContentDetailsComment
+    , ActivityContentDetailsComment
+    , activityContentDetailsComment
+    , acdcResourceId
+
+    -- * ContentRatingNfvcbRating
+    , ContentRatingNfvcbRating (..)
+
+    -- * VideoStatus
+    , VideoStatus
+    , videoStatus
+    , vsFailureReason
+    , vsPublicStatsViewable
+    , vsRejectionReason
+    , vsPublishAt
+    , vsUploadStatus
+    , vsPrivacyStatus
+    , vsEmbeddable
+    , vsLicense
+
+    -- * ContentRatingFmocRating
+    , ContentRatingFmocRating (..)
+
+    -- * ActivityContentDetailsSocial
+    , ActivityContentDetailsSocial
+    , activityContentDetailsSocial
+    , acdsResourceId
+    , acdsImageUrl
+    , acdsAuthor
+    , acdsReferenceUrl
+    , acdsType
+
+    -- * ContentRatingRussiaRating
+    , ContentRatingRussiaRating (..)
+
+    -- * ActivityContentDetailsSubscription
+    , ActivityContentDetailsSubscription
+    , activityContentDetailsSubscription
+    , aResourceId
+
+    -- * ActivityContentDetailsUpload
+    , ActivityContentDetailsUpload
+    , activityContentDetailsUpload
+    , acduVideoId
+
+    -- * ActivityContentDetailsLike
+    , ActivityContentDetailsLike
+    , activityContentDetailsLike
+    , acdlResourceId
+
+    -- * PageInfo
+    , PageInfo
+    , pageInfo
+    , piResultsPerPage
+    , piTotalResults
+
+    -- * ContentRatingCzfilmRating
+    , ContentRatingCzfilmRating (..)
+
+    -- * VideoConversionPingContext
+    , VideoConversionPingContext (..)
+
+    -- * VideoFileDetails
+    , VideoFileDetails
+    , videoFileDetails
+    , vfdBitrateBps
+    , vfdCreationTime
+    , vfdRecordingLocation
+    , vfdDurationMs
+    , vfdFileSize
+    , vfdFileType
+    , vfdContainer
+    , vfdVideoStreams
+    , vfdAudioStreams
+    , vfdFileName
+
+    -- * ContentRatingAgcomRating
+    , ContentRatingAgcomRating (..)
+
+    -- * VideoStatusLicense
+    , VideoStatusLicense (..)
+
+    -- * LiveBroadcastStatus
+    , LiveBroadcastStatus
+    , liveBroadcastStatus
+    , lbsLiveBroadcastPriority
+    , lbsRecordingStatus
+    , lbsLifeCycleStatus
+    , lbsPrivacyStatus
+
+    -- * LiveBroadcastListResponse
+    , LiveBroadcastListResponse
+    , liveBroadcastListResponse
+    , lblrEtag
+    , lblrTokenPagination
+    , lblrNextPageToken
+    , lblrPageInfo
+    , lblrKind
+    , lblrItems
+    , lblrVisitorId
+    , lblrEventId
+    , lblrPrevPageToken
+
+    -- * VideoMonetizationDetails
+    , VideoMonetizationDetails
+    , videoMonetizationDetails
+    , vmdAccess
+
+    -- * CommentThreadsList'ModerationStatus
+    , CommentThreadsList'ModerationStatus (..)
+
+    -- * VideoListResponse
+    , VideoListResponse
+    , videoListResponse
+    , vlrEtag
+    , vlrTokenPagination
+    , vlrNextPageToken
+    , vlrPageInfo
+    , vlrKind
+    , vlrItems
+    , vlrVisitorId
+    , vlrEventId
+    , vlrPrevPageToken
+
+    -- * ContentRatingBmukkRating
+    , ContentRatingBmukkRating (..)
+
+    -- * CommentThreadSnippet
+    , CommentThreadSnippet
+    , commentThreadSnippet
+    , ctsIsPublic
+    , ctsChannelId
+    , ctsCanReply
+    , ctsVideoId
+    , ctsTotalReplyCount
+    , ctsTopLevelComment
+
+    -- * VideoProcessingDetails
+    , VideoProcessingDetails
+    , videoProcessingDetails
+    , vpdProcessingFailureReason
+    , vpdProcessingIssuesAvailability
+    , vpdProcessingProgress
+    , vpdThumbnailsAvailability
+    , vpdTagSuggestionsAvailability
+    , vpdProcessingStatus
+    , vpdEditorSuggestionsAvailability
+    , vpdFileDetailsAvailability
+
+    -- * VideoCategoryListResponse
+    , VideoCategoryListResponse
+    , videoCategoryListResponse
+    , vclrEtag
+    , vclrTokenPagination
+    , vclrNextPageToken
+    , vclrPageInfo
+    , vclrKind
+    , vclrItems
+    , vclrVisitorId
+    , vclrEventId
+    , vclrPrevPageToken
+
+    -- * ChannelContentDetails
+    , ChannelContentDetails
+    , channelContentDetails
+    , ccdRelatedPlaylists
+    , ccdGooglePlusUserId
+
+    -- * ActivitySnippet
+    , ActivitySnippet
+    , activitySnippet
+    , asPublishedAt
+    , asChannelTitle
+    , asChannelId
+    , asThumbnails
+    , asGroupId
+    , asTitle
+    , asType
+    , asDescription
+
+    -- * ActivityContentDetailsChannelItem
+    , ActivityContentDetailsChannelItem
+    , activityContentDetailsChannelItem
+    , acdciResourceId
+
+    -- * VideoSuggestionsTagSuggestion
+    , VideoSuggestionsTagSuggestion
+    , videoSuggestionsTagSuggestion
+    , vstsTag
+    , vstsCategoryRestricts
+
+    -- * ContentRatingMoctwRating
+    , ContentRatingMoctwRating (..)
+
+    -- * ContentRatingItemDjctqRatingReasons
+    , ContentRatingItemDjctqRatingReasons (..)
+
+    -- * ChannelTopicDetails
+    , ChannelTopicDetails
+    , channelTopicDetails
+    , ctdTopicIds
+
+    -- * ChannelLocalizations
+    , ChannelLocalizations
+    , channelLocalizations
+
+    -- * ContentRatingKijkwijzerRating
+    , ContentRatingKijkwijzerRating (..)
+
+    -- * CommentsList'TextFormat
+    , CommentsList'TextFormat (..)
+
+    -- * CommentSnippetViewerRating
+    , CommentSnippetViewerRating (..)
+
+    -- * ContentRatingLsfRating
+    , ContentRatingLsfRating (..)
+
+    -- * VideoAbuseReportReason
+    , VideoAbuseReportReason
+    , videoAbuseReportReason
+    , varrEtag
+    , varrSnippet
+    , varrKind
+    , varrId
+
+    -- * ContentRatingNfrcRating
+    , ContentRatingNfrcRating (..)
+
+    -- * LiveStreamListResponse
+    , LiveStreamListResponse
+    , liveStreamListResponse
+    , lslrEtag
+    , lslrTokenPagination
+    , lslrNextPageToken
+    , lslrPageInfo
+    , lslrKind
+    , lslrItems
+    , lslrVisitorId
+    , lslrEventId
+    , lslrPrevPageToken
+
+    -- * ChannelSectionListResponse
+    , ChannelSectionListResponse
+    , channelSectionListResponse
+    , cslrEtag
+    , cslrKind
+    , cslrItems
+    , cslrVisitorId
+    , cslrEventId
+
+    -- * Channel
+    , Channel
+    , channel
+    , ccStatus
+    , ccEtag
+    , ccAuditDetails
+    , ccContentOwnerDetails
+    , ccSnippet
+    , ccKind
+    , ccTopicDetails
+    , ccContentDetails
+    , ccConversionPings
+    , ccBrandingSettings
+    , ccId
+    , ccInvideoPromotion
+    , ccStatistics
+    , ccLocalizations
+
+    -- * LiveStreamConfigurationIssueSeverity
+    , LiveStreamConfigurationIssueSeverity (..)
+
+    -- * VideosRate'Rating
+    , VideosRate'Rating (..)
+
+    -- * VideoGetRatingResponse
+    , VideoGetRatingResponse
+    , videoGetRatingResponse
+    , vgrrEtag
+    , vgrrKind
+    , vgrrItems
+    , vgrrVisitorId
+    , vgrrEventId
 
     -- * ChannelSectionTargeting
     , ChannelSectionTargeting
@@ -372,6 +1514,68 @@ module Network.Google.YouTube.Types
     , cstRegions
     , cstCountries
     , cstLanguages
+
+    -- * ActivitySnippetType
+    , ActivitySnippetType (..)
+
+    -- * PlaylistStatusPrivacyStatus
+    , PlaylistStatusPrivacyStatus (..)
+
+    -- * LiveBroadcastTopicType
+    , LiveBroadcastTopicType (..)
+
+    -- * SearchList'ChannelType
+    , SearchList'ChannelType (..)
+
+    -- * LiveStreamConfigurationIssue
+    , LiveStreamConfigurationIssue
+    , liveStreamConfigurationIssue
+    , lsciSeverity
+    , lsciReason
+    , lsciType
+    , lsciDescription
+
+    -- * PlaylistSnippet
+    , PlaylistSnippet
+    , playlistSnippet
+    , psPublishedAt
+    , psChannelTitle
+    , psChannelId
+    , psThumbnails
+    , psLocalized
+    , psTitle
+    , psDescription
+    , psTags
+    , psDefaultLanguage
+
+    -- * PlaylistItemSnippet
+    , PlaylistItemSnippet
+    , playlistItemSnippet
+    , pisResourceId
+    , pisPublishedAt
+    , pisChannelTitle
+    , pisChannelId
+    , pisThumbnails
+    , pisTitle
+    , pisPlaylistId
+    , pisDescription
+    , pisPosition
+
+    -- * VideoProjectDetails
+    , VideoProjectDetails
+    , videoProjectDetails
+    , vpdTags
+
+    -- * SubscriptionSnippet
+    , SubscriptionSnippet
+    , subscriptionSnippet
+    , ssResourceId
+    , ssPublishedAt
+    , ssChannelTitle
+    , ssChannelId
+    , ssThumbnails
+    , ssTitle
+    , ssDescription
 
     -- * ChannelSettings
     , ChannelSettings
@@ -391,125 +1595,26 @@ module Network.Google.YouTube.Types
     , cDescription
     , cDefaultLanguage
 
-    -- * ChannelSnippet
-    , ChannelSnippet
-    , channelSnippet
-    , csPublishedAt
-    , csCountry
-    , csThumbnails
-    , csLocalized
-    , csTitle
-    , csDescription
-    , csDefaultLanguage
+    -- * VideoSuggestions
+    , VideoSuggestions
+    , videoSuggestions
+    , vsProcessingErrors
+    , vsProcessingHints
+    , vsEditorSuggestions
+    , vsProcessingWarnings
+    , vsTagSuggestions
 
-    -- * ChannelStatistics
-    , ChannelStatistics
-    , channelStatistics
-    , csCommentCount
-    , csSubscriberCount
-    , csVideoCount
-    , csHiddenSubscriberCount
-    , csViewCount
+    -- * VideoRating
+    , VideoRating
+    , videoRating
+    , vRating
+    , vVideoId
 
-    -- * ChannelStatus
-    , ChannelStatus
-    , channelStatus
-    , csIsLinked
-    , csLongUploadsStatus
-    , csPrivacyStatus
+    -- * ContentRatingChvrsRating
+    , ContentRatingChvrsRating (..)
 
-    -- * ChannelStatusLongUploadsStatus
-    , ChannelStatusLongUploadsStatus (..)
-
-    -- * ChannelStatusPrivacyStatus
-    , ChannelStatusPrivacyStatus (..)
-
-    -- * ChannelTopicDetails
-    , ChannelTopicDetails
-    , channelTopicDetails
-    , ctdTopicIds
-
-    -- * Comment
-    , Comment
-    , comment
-    , comEtag
-    , comSnippet
-    , comKind
-    , comId
-
-    -- * CommentListResponse
-    , CommentListResponse
-    , commentListResponse
-    , clrlEtag
-    , clrlTokenPagination
-    , clrlNextPageToken
-    , clrlPageInfo
-    , clrlKind
-    , clrlItems
-    , clrlVisitorId
-    , clrlEventId
-
-    -- * CommentSnippet
-    , CommentSnippet
-    , commentSnippet
-    , csniViewerRating
-    , csniPublishedAt
-    , csniAuthorChannelUrl
-    , csniModerationStatus
-    , csniLikeCount
-    , csniChannelId
-    , csniTextOriginal
-    , csniVideoId
-    , csniTextDisplay
-    , csniAuthorProfileImageUrl
-    , csniAuthorDisplayName
-    , csniUpdatedAt
-    , csniAuthorChannelId
-    , csniCanRate
-    , csniAuthorGoogleplusProfileUrl
-    , csniParentId
-
-    -- * CommentSnippetModerationStatus
-    , CommentSnippetModerationStatus (..)
-
-    -- * CommentSnippetViewerRating
-    , CommentSnippetViewerRating (..)
-
-    -- * CommentThread
-    , CommentThread
-    , commentThread
-    , ctEtag
-    , ctSnippet
-    , ctKind
-    , ctReplies
-    , ctId
-
-    -- * CommentThreadListResponse
-    , CommentThreadListResponse
-    , commentThreadListResponse
-    , ctlrEtag
-    , ctlrTokenPagination
-    , ctlrNextPageToken
-    , ctlrPageInfo
-    , ctlrKind
-    , ctlrItems
-    , ctlrVisitorId
-    , ctlrEventId
-
-    -- * CommentThreadReplies
-    , CommentThreadReplies
-    , commentThreadReplies
-    , ctrComments
-
-    -- * CommentThreadSnippet
-    , CommentThreadSnippet
-    , commentThreadSnippet
-    , ctsIsPublic
-    , ctsChannelId
-    , ctsCanReply
-    , ctsVideoId
-    , ctsTotalReplyCount
-    , ctsTopLevelComment
+    -- * CommentThreadsList'TextFormat
+    , CommentThreadsList'TextFormat (..)
 
     -- * ContentRating
     , ContentRating
@@ -580,555 +1685,14 @@ module Network.Google.YouTube.Types
     , crOflcRating
     , crKmrbRating
 
-    -- * ContentRatingAcbRating
-    , ContentRatingAcbRating (..)
+    -- * VideoSuggestionsItemEditorSuggestions
+    , VideoSuggestionsItemEditorSuggestions (..)
 
-    -- * ContentRatingAgcomRating
-    , ContentRatingAgcomRating (..)
-
-    -- * ContentRatingAnatelRating
-    , ContentRatingAnatelRating (..)
-
-    -- * ContentRatingBbfcRating
-    , ContentRatingBbfcRating (..)
-
-    -- * ContentRatingBfvcRating
-    , ContentRatingBfvcRating (..)
-
-    -- * ContentRatingBmukkRating
-    , ContentRatingBmukkRating (..)
-
-    -- * ContentRatingCatvRating
-    , ContentRatingCatvRating (..)
-
-    -- * ContentRatingCatvfrRating
-    , ContentRatingCatvfrRating (..)
-
-    -- * ContentRatingCbfcRating
-    , ContentRatingCbfcRating (..)
-
-    -- * ContentRatingCccRating
-    , ContentRatingCccRating (..)
-
-    -- * ContentRatingCceRating
-    , ContentRatingCceRating (..)
-
-    -- * ContentRatingChfilmRating
-    , ContentRatingChfilmRating (..)
-
-    -- * ContentRatingChvrsRating
-    , ContentRatingChvrsRating (..)
-
-    -- * ContentRatingCicfRating
-    , ContentRatingCicfRating (..)
-
-    -- * ContentRatingCnaRating
-    , ContentRatingCnaRating (..)
-
-    -- * ContentRatingCncRating
-    , ContentRatingCncRating (..)
-
-    -- * ContentRatingCsaRating
-    , ContentRatingCsaRating (..)
-
-    -- * ContentRatingCscfRating
-    , ContentRatingCscfRating (..)
-
-    -- * ContentRatingCzfilmRating
-    , ContentRatingCzfilmRating (..)
-
-    -- * ContentRatingDjctqRating
-    , ContentRatingDjctqRating (..)
-
-    -- * ContentRatingEefilmRating
-    , ContentRatingEefilmRating (..)
-
-    -- * ContentRatingEgfilmRating
-    , ContentRatingEgfilmRating (..)
-
-    -- * ContentRatingEirinRating
-    , ContentRatingEirinRating (..)
-
-    -- * ContentRatingFcbmRating
-    , ContentRatingFcbmRating (..)
-
-    -- * ContentRatingFcoRating
-    , ContentRatingFcoRating (..)
-
-    -- * ContentRatingFmocRating
-    , ContentRatingFmocRating (..)
-
-    -- * ContentRatingFpbRating
-    , ContentRatingFpbRating (..)
-
-    -- * ContentRatingFskRating
-    , ContentRatingFskRating (..)
-
-    -- * ContentRatingGrfilmRating
-    , ContentRatingGrfilmRating (..)
-
-    -- * ContentRatingIcaaRating
-    , ContentRatingIcaaRating (..)
-
-    -- * ContentRatingIfcoRating
-    , ContentRatingIfcoRating (..)
-
-    -- * ContentRatingIlfilmRating
-    , ContentRatingIlfilmRating (..)
-
-    -- * ContentRatingIncaaRating
-    , ContentRatingIncaaRating (..)
-
-    -- * ContentRatingItemDjctqRatingReasons
-    , ContentRatingItemDjctqRatingReasons (..)
-
-    -- * ContentRatingKfcbRating
-    , ContentRatingKfcbRating (..)
-
-    -- * ContentRatingKijkwijzerRating
-    , ContentRatingKijkwijzerRating (..)
-
-    -- * ContentRatingKmrbRating
-    , ContentRatingKmrbRating (..)
-
-    -- * ContentRatingLsfRating
-    , ContentRatingLsfRating (..)
-
-    -- * ContentRatingMccaaRating
-    , ContentRatingMccaaRating (..)
-
-    -- * ContentRatingMccypRating
-    , ContentRatingMccypRating (..)
-
-    -- * ContentRatingMdaRating
-    , ContentRatingMdaRating (..)
-
-    -- * ContentRatingMedietilsynetRating
-    , ContentRatingMedietilsynetRating (..)
-
-    -- * ContentRatingMekuRating
-    , ContentRatingMekuRating (..)
-
-    -- * ContentRatingMibacRating
-    , ContentRatingMibacRating (..)
-
-    -- * ContentRatingMocRating
-    , ContentRatingMocRating (..)
-
-    -- * ContentRatingMoctwRating
-    , ContentRatingMoctwRating (..)
-
-    -- * ContentRatingMpaaRating
-    , ContentRatingMpaaRating (..)
-
-    -- * ContentRatingMtrcbRating
-    , ContentRatingMtrcbRating (..)
-
-    -- * ContentRatingNbcRating
-    , ContentRatingNbcRating (..)
-
-    -- * ContentRatingNbcplRating
-    , ContentRatingNbcplRating (..)
-
-    -- * ContentRatingNfrcRating
-    , ContentRatingNfrcRating (..)
-
-    -- * ContentRatingNfvcbRating
-    , ContentRatingNfvcbRating (..)
-
-    -- * ContentRatingNkclvRating
-    , ContentRatingNkclvRating (..)
-
-    -- * ContentRatingOflcRating
-    , ContentRatingOflcRating (..)
-
-    -- * ContentRatingPefilmRating
-    , ContentRatingPefilmRating (..)
-
-    -- * ContentRatingRcnofRating
-    , ContentRatingRcnofRating (..)
+    -- * CaptionsDownload'Tfmt
+    , CaptionsDownload'Tfmt (..)
 
     -- * ContentRatingResorteviolenciaRating
     , ContentRatingResorteviolenciaRating (..)
-
-    -- * ContentRatingRtcRating
-    , ContentRatingRtcRating (..)
-
-    -- * ContentRatingRteRating
-    , ContentRatingRteRating (..)
-
-    -- * ContentRatingRussiaRating
-    , ContentRatingRussiaRating (..)
-
-    -- * ContentRatingSkfilmRating
-    , ContentRatingSkfilmRating (..)
-
-    -- * ContentRatingSmaisRating
-    , ContentRatingSmaisRating (..)
-
-    -- * ContentRatingSmsaRating
-    , ContentRatingSmsaRating (..)
-
-    -- * ContentRatingTvpgRating
-    , ContentRatingTvpgRating (..)
-
-    -- * ContentRatingYtRating
-    , ContentRatingYtRating (..)
-
-    -- * GeoPoint
-    , GeoPoint
-    , geoPoint
-    , gpLatitude
-    , gpAltitude
-    , gpLongitude
-
-    -- * GuideCategory
-    , GuideCategory
-    , guideCategory
-    , gcEtag
-    , gcSnippet
-    , gcKind
-    , gcId
-
-    -- * GuideCategoryListResponse
-    , GuideCategoryListResponse
-    , guideCategoryListResponse
-    , gclrEtag
-    , gclrTokenPagination
-    , gclrNextPageToken
-    , gclrPageInfo
-    , gclrKind
-    , gclrItems
-    , gclrVisitorId
-    , gclrEventId
-    , gclrPrevPageToken
-
-    -- * GuideCategorySnippet
-    , GuideCategorySnippet
-    , guideCategorySnippet
-    , gcsChannelId
-    , gcsTitle
-
-    -- * I18nLanguage
-    , I18nLanguage
-    , i18nLanguage
-    , ilEtag
-    , ilSnippet
-    , ilKind
-    , ilId
-
-    -- * I18nLanguageListResponse
-    , I18nLanguageListResponse
-    , i18nLanguageListResponse
-    , illrEtag
-    , illrKind
-    , illrItems
-    , illrVisitorId
-    , illrEventId
-
-    -- * I18nLanguageSnippet
-    , I18nLanguageSnippet
-    , i18nLanguageSnippet
-    , ilsHl
-    , ilsName
-
-    -- * I18nRegion
-    , I18nRegion
-    , i18nRegion
-    , irEtag
-    , irSnippet
-    , irKind
-    , irId
-
-    -- * I18nRegionListResponse
-    , I18nRegionListResponse
-    , i18nRegionListResponse
-    , irlrEtag
-    , irlrKind
-    , irlrItems
-    , irlrVisitorId
-    , irlrEventId
-
-    -- * I18nRegionSnippet
-    , I18nRegionSnippet
-    , i18nRegionSnippet
-    , irsName
-    , irsGl
-
-    -- * ImageSettings
-    , ImageSettings
-    , imageSettings
-    , isBannerMobileLowImageUrl
-    , isBannerTabletExtraHdImageUrl
-    , isSmallBrandedBannerImageImapScript
-    , isBannerTvHighImageUrl
-    , isBannerMobileHdImageUrl
-    , isBannerTvMediumImageUrl
-    , isBannerTvImageUrl
-    , isBannerTabletImageUrl
-    , isBannerMobileImageUrl
-    , isTrackingImageUrl
-    , isBannerMobileMediumHdImageUrl
-    , isLargeBrandedBannerImageUrl
-    , isBannerExternalUrl
-    , isBackgroundImageUrl
-    , isSmallBrandedBannerImageUrl
-    , isBannerImageUrl
-    , isWatchIconImageUrl
-    , isBannerTvLowImageUrl
-    , isBannerMobileExtraHdImageUrl
-    , isLargeBrandedBannerImageImapScript
-    , isBannerTabletLowImageUrl
-    , isBannerTabletHdImageUrl
-
-    -- * IngestionInfo
-    , IngestionInfo
-    , ingestionInfo
-    , iiBackupIngestionAddress
-    , iiIngestionAddress
-    , iiStreamName
-
-    -- * InvideoBranding
-    , InvideoBranding
-    , invideoBranding
-    , ibImageUrl
-    , ibTargetChannelId
-    , ibTiming
-    , ibImageBytes
-    , ibPosition
-
-    -- * InvideoPosition
-    , InvideoPosition
-    , invideoPosition
-    , ipCornerPosition
-    , ipType
-
-    -- * InvideoPositionCornerPosition
-    , InvideoPositionCornerPosition (..)
-
-    -- * InvideoPositionType
-    , InvideoPositionType (..)
-
-    -- * InvideoPromotion
-    , InvideoPromotion
-    , invideoPromotion
-    , ipUseSmartTiming
-    , ipItems
-    , ipDefaultTiming
-    , ipPosition
-
-    -- * InvideoTiming
-    , InvideoTiming
-    , invideoTiming
-    , itDurationMs
-    , itOffsetMs
-    , itType
-
-    -- * InvideoTimingType
-    , InvideoTimingType (..)
-
-    -- * LanguageTag
-    , LanguageTag
-    , languageTag
-    , ltValue
-
-    -- * LiveBroadcast
-    , LiveBroadcast
-    , liveBroadcast
-    , lbStatus
-    , lbEtag
-    , lbSnippet
-    , lbKind
-    , lbTopicDetails
-    , lbContentDetails
-    , lbId
-    , lbStatistics
-
-    -- * LiveBroadcastContentDetails
-    , LiveBroadcastContentDetails
-    , liveBroadcastContentDetails
-    , lbcdEnableContentEncryption
-    , lbcdEnableLowLatency
-    , lbcdEnableEmbed
-    , lbcdStartWithSlate
-    , lbcdMonitorStream
-    , lbcdBoundStreamId
-    , lbcdRecordFromStart
-    , lbcdEnableClosedCaptions
-    , lbcdEnableDvr
-
-    -- * LiveBroadcastListResponse
-    , LiveBroadcastListResponse
-    , liveBroadcastListResponse
-    , lblrEtag
-    , lblrTokenPagination
-    , lblrNextPageToken
-    , lblrPageInfo
-    , lblrKind
-    , lblrItems
-    , lblrVisitorId
-    , lblrEventId
-    , lblrPrevPageToken
-
-    -- * LiveBroadcastSnippet
-    , LiveBroadcastSnippet
-    , liveBroadcastSnippet
-    , lbsActualEndTime
-    , lbsLiveChatId
-    , lbsPublishedAt
-    , lbsScheduledEndTime
-    , lbsChannelId
-    , lbsScheduledStartTime
-    , lbsThumbnails
-    , lbsTitle
-    , lbsActualStartTime
-    , lbsIsDefaultBroadcast
-    , lbsDescription
-
-    -- * LiveBroadcastStatistics
-    , LiveBroadcastStatistics
-    , liveBroadcastStatistics
-    , lbsTotalChatCount
-    , lbsConcurrentViewers
-
-    -- * LiveBroadcastStatus
-    , LiveBroadcastStatus
-    , liveBroadcastStatus
-    , lbsLiveBroadcastPriority
-    , lbsRecordingStatus
-    , lbsLifeCycleStatus
-    , lbsPrivacyStatus
-
-    -- * LiveBroadcastStatusLifeCycleStatus
-    , LiveBroadcastStatusLifeCycleStatus (..)
-
-    -- * LiveBroadcastStatusLiveBroadcastPriority
-    , LiveBroadcastStatusLiveBroadcastPriority (..)
-
-    -- * LiveBroadcastStatusPrivacyStatus
-    , LiveBroadcastStatusPrivacyStatus (..)
-
-    -- * LiveBroadcastStatusRecordingStatus
-    , LiveBroadcastStatusRecordingStatus (..)
-
-    -- * LiveBroadcastTopic
-    , LiveBroadcastTopic
-    , liveBroadcastTopic
-    , lbtSnippet
-    , lbtUnmatched
-    , lbtType
-
-    -- * LiveBroadcastTopicDetails
-    , LiveBroadcastTopicDetails
-    , liveBroadcastTopicDetails
-    , lbtdTopics
-
-    -- * LiveBroadcastTopicSnippet
-    , LiveBroadcastTopicSnippet
-    , liveBroadcastTopicSnippet
-    , lbtsName
-    , lbtsReleaseDate
-
-    -- * LiveBroadcastTopicType
-    , LiveBroadcastTopicType (..)
-
-    -- * LiveStream
-    , LiveStream
-    , liveStream
-    , lsStatus
-    , lsEtag
-    , lsSnippet
-    , lsKind
-    , lsContentDetails
-    , lsId
-    , lsCdn
-
-    -- * LiveStreamConfigurationIssue
-    , LiveStreamConfigurationIssue
-    , liveStreamConfigurationIssue
-    , lsciSeverity
-    , lsciReason
-    , lsciType
-    , lsciDescription
-
-    -- * LiveStreamConfigurationIssueSeverity
-    , LiveStreamConfigurationIssueSeverity (..)
-
-    -- * LiveStreamConfigurationIssueType
-    , LiveStreamConfigurationIssueType (..)
-
-    -- * LiveStreamContentDetails
-    , LiveStreamContentDetails
-    , liveStreamContentDetails
-    , lscdClosedCaptionsIngestionUrl
-    , lscdIsReusable
-
-    -- * LiveStreamHealthStatus
-    , LiveStreamHealthStatus
-    , liveStreamHealthStatus
-    , lshsStatus
-    , lshsConfigurationIssues
-    , lshsLastUpdateTimeSeconds
-
-    -- * LiveStreamHealthStatusStatus
-    , LiveStreamHealthStatusStatus (..)
-
-    -- * LiveStreamListResponse
-    , LiveStreamListResponse
-    , liveStreamListResponse
-    , lslrEtag
-    , lslrTokenPagination
-    , lslrNextPageToken
-    , lslrPageInfo
-    , lslrKind
-    , lslrItems
-    , lslrVisitorId
-    , lslrEventId
-    , lslrPrevPageToken
-
-    -- * LiveStreamSnippet
-    , LiveStreamSnippet
-    , liveStreamSnippet
-    , lssPublishedAt
-    , lssChannelId
-    , lssIsDefaultStream
-    , lssTitle
-    , lssDescription
-
-    -- * LiveStreamStatus
-    , LiveStreamStatus
-    , liveStreamStatus
-    , lssStreamStatus
-    , lssHealthStatus
-
-    -- * LiveStreamStatusStreamStatus
-    , LiveStreamStatusStreamStatus (..)
-
-    -- * LocalizedProperty
-    , LocalizedProperty
-    , localizedProperty
-    , lpDefault
-    , lpLocalized
-    , lpDefaultLanguage
-
-    -- * LocalizedString
-    , LocalizedString
-    , localizedString
-    , lsValue
-    , lsLanguage
-
-    -- * MonitorStreamInfo
-    , MonitorStreamInfo
-    , monitorStreamInfo
-    , msiBroadcastStreamDelayMs
-    , msiEmbedHtml
-    , msiEnableMonitorStream
-
-    -- * PageInfo
-    , PageInfo
-    , pageInfo
-    , piResultsPerPage
-    , piTotalResults
 
     -- * Playlist
     , Playlist
@@ -1142,260 +1706,99 @@ module Network.Google.YouTube.Types
     , plaLocalizations
     , plaPlayer
 
-    -- * PlaylistContentDetails
-    , PlaylistContentDetails
-    , playlistContentDetails
-    , pcdItemCount
+    -- * LiveStreamStatus
+    , LiveStreamStatus
+    , liveStreamStatus
+    , lssStreamStatus
+    , lssHealthStatus
 
-    -- * PlaylistItem
-    , PlaylistItem
-    , playlistItem
-    , piStatus
-    , piEtag
-    , piSnippet
-    , piKind
-    , piContentDetails
-    , piId
-
-    -- * PlaylistItemContentDetails
-    , PlaylistItemContentDetails
-    , playlistItemContentDetails
-    , picdStartAt
-    , picdNote
-    , picdVideoId
-    , picdEndAt
-
-    -- * PlaylistItemListResponse
-    , PlaylistItemListResponse
-    , playlistItemListResponse
-    , pilrEtag
-    , pilrTokenPagination
-    , pilrNextPageToken
-    , pilrPageInfo
-    , pilrKind
-    , pilrItems
-    , pilrVisitorId
-    , pilrEventId
-    , pilrPrevPageToken
-
-    -- * PlaylistItemSnippet
-    , PlaylistItemSnippet
-    , playlistItemSnippet
-    , pisResourceId
-    , pisPublishedAt
-    , pisChannelTitle
-    , pisChannelId
-    , pisThumbnails
-    , pisTitle
-    , pisPlaylistId
-    , pisDescription
-    , pisPosition
-
-    -- * PlaylistItemStatus
-    , PlaylistItemStatus
-    , playlistItemStatus
-    , pisPrivacyStatus
+    -- * CommentSnippet
+    , CommentSnippet
+    , commentSnippet
+    , csniViewerRating
+    , csniPublishedAt
+    , csniAuthorChannelUrl
+    , csniModerationStatus
+    , csniLikeCount
+    , csniChannelId
+    , csniTextOriginal
+    , csniVideoId
+    , csniTextDisplay
+    , csniAuthorProfileImageUrl
+    , csniAuthorDisplayName
+    , csniUpdatedAt
+    , csniAuthorChannelId
+    , csniCanRate
+    , csniAuthorGoogleplusProfileUrl
+    , csniParentId
 
     -- * PlaylistItemStatusPrivacyStatus
     , PlaylistItemStatusPrivacyStatus (..)
 
-    -- * PlaylistListResponse
-    , PlaylistListResponse
-    , playlistListResponse
-    , plrEtag
-    , plrTokenPagination
-    , plrNextPageToken
-    , plrPageInfo
-    , plrKind
-    , plrItems
-    , plrVisitorId
-    , plrEventId
-    , plrPrevPageToken
+    -- * ContentRatingCnaRating
+    , ContentRatingCnaRating (..)
 
-    -- * PlaylistLocalization
-    , PlaylistLocalization
-    , playlistLocalization
-    , plTitle
-    , plDescription
+    -- * ContentRatingIncaaRating
+    , ContentRatingIncaaRating (..)
 
-    -- * PlaylistLocalizations
-    , PlaylistLocalizations
-    , playlistLocalizations
+    -- * CommentThreadsList'Order
+    , CommentThreadsList'Order (..)
 
-    -- * PlaylistPlayer
-    , PlaylistPlayer
-    , playlistPlayer
-    , ppEmbedHtml
+    -- * ContentRatingEgfilmRating
+    , ContentRatingEgfilmRating (..)
 
-    -- * PlaylistSnippet
-    , PlaylistSnippet
-    , playlistSnippet
-    , psPublishedAt
-    , psChannelTitle
-    , psChannelId
-    , psThumbnails
-    , psLocalized
-    , psTitle
-    , psDescription
-    , psTags
-    , psDefaultLanguage
+    -- * VideoRecordingDetails
+    , VideoRecordingDetails
+    , videoRecordingDetails
+    , vrdLocation
+    , vrdLocationDescription
+    , vrdRecordingDate
 
-    -- * PlaylistStatus
-    , PlaylistStatus
-    , playlistStatus
-    , psPrivacyStatus
+    -- * ChannelStatusPrivacyStatus
+    , ChannelStatusPrivacyStatus (..)
 
-    -- * PlaylistStatusPrivacyStatus
-    , PlaylistStatusPrivacyStatus (..)
+    -- * LiveBroadcast
+    , LiveBroadcast
+    , liveBroadcast
+    , lbStatus
+    , lbEtag
+    , lbSnippet
+    , lbKind
+    , lbTopicDetails
+    , lbContentDetails
+    , lbId
+    , lbStatistics
 
-    -- * PromotedItem
-    , PromotedItem
-    , promotedItem
-    , pCustomMessage
-    , pPromotedByContentOwner
-    , pId
-    , pTiming
+    -- * ContentRatingCccRating
+    , ContentRatingCccRating (..)
 
-    -- * PromotedItemId
-    , PromotedItemId
-    , promotedItemId
-    , piiRecentlyUploadedBy
-    , piiVideoId
-    , piiWebsiteUrl
-    , piiType
+    -- * SearchList'VideoDimension
+    , SearchList'VideoDimension (..)
 
-    -- * PromotedItemIdType
-    , PromotedItemIdType (..)
+    -- * CaptionSnippetAudioTrackType
+    , CaptionSnippetAudioTrackType (..)
 
-    -- * PropertyValue
-    , PropertyValue
-    , propertyValue
-    , pvProperty
-    , pvValue
+    -- * ContentRatingIfcoRating
+    , ContentRatingIfcoRating (..)
 
-    -- * ResourceId
-    , ResourceId
-    , resourceId
-    , riKind
-    , riChannelId
-    , riVideoId
-    , riPlaylistId
+    -- * VideoStatusUploadStatus
+    , VideoStatusUploadStatus (..)
 
-    -- * SearchListResponse
-    , SearchListResponse
-    , searchListResponse
-    , slrEtag
-    , slrTokenPagination
-    , slrNextPageToken
-    , slrPageInfo
-    , slrKind
-    , slrItems
-    , slrVisitorId
-    , slrEventId
-    , slrPrevPageToken
+    -- * ContentRatingIlfilmRating
+    , ContentRatingIlfilmRating (..)
 
-    -- * SearchResult
-    , SearchResult
-    , searchResult
-    , srEtag
-    , srSnippet
-    , srKind
-    , srId
+    -- * ChannelSectionLocalizations
+    , ChannelSectionLocalizations
+    , channelSectionLocalizations
 
-    -- * SearchResultSnippet
-    , SearchResultSnippet
-    , searchResultSnippet
-    , srsPublishedAt
-    , srsChannelTitle
-    , srsChannelId
-    , srsThumbnails
-    , srsTitle
-    , srsLiveBroadcastContent
-    , srsDescription
+    -- * LiveStreamContentDetails
+    , LiveStreamContentDetails
+    , liveStreamContentDetails
+    , lscdClosedCaptionsIngestionUrl
+    , lscdIsReusable
 
-    -- * SearchResultSnippetLiveBroadcastContent
-    , SearchResultSnippetLiveBroadcastContent (..)
-
-    -- * Subscription
-    , Subscription
-    , subscription
-    , sEtag
-    , sSubscriberSnippet
-    , sSnippet
-    , sKind
-    , sContentDetails
-    , sId
-
-    -- * SubscriptionContentDetails
-    , SubscriptionContentDetails
-    , subscriptionContentDetails
-    , scdActivityType
-    , scdTotalItemCount
-    , scdNewItemCount
-
-    -- * SubscriptionContentDetailsActivityType
-    , SubscriptionContentDetailsActivityType (..)
-
-    -- * SubscriptionListResponse
-    , SubscriptionListResponse
-    , subscriptionListResponse
-    , subEtag
-    , subTokenPagination
-    , subNextPageToken
-    , subPageInfo
-    , subKind
-    , subItems
-    , subVisitorId
-    , subEventId
-    , subPrevPageToken
-
-    -- * SubscriptionSnippet
-    , SubscriptionSnippet
-    , subscriptionSnippet
-    , ssResourceId
-    , ssPublishedAt
-    , ssChannelTitle
-    , ssChannelId
-    , ssThumbnails
-    , ssTitle
-    , ssDescription
-
-    -- * SubscriptionSubscriberSnippet
-    , SubscriptionSubscriberSnippet
-    , subscriptionSubscriberSnippet
-    , sssChannelId
-    , sssThumbnails
-    , sssTitle
-    , sssDescription
-
-    -- * Thumbnail
-    , Thumbnail
-    , thumbnail
-    , tHeight
-    , tUrl
-    , tWidth
-
-    -- * ThumbnailDetails
-    , ThumbnailDetails
-    , thumbnailDetails
-    , tdMedium
-    , tdMaxres
-    , tdDefault
-    , tdStandard
-    , tdHigh
-
-    -- * ThumbnailSetResponse
-    , ThumbnailSetResponse
-    , thumbnailSetResponse
-    , tsrEtag
-    , tsrKind
-    , tsrItems
-    , tsrVisitorId
-    , tsrEventId
-
-    -- * TokenPagination
-    , TokenPagination
-    , tokenPagination
+    -- * SearchList'VideoType
+    , SearchList'VideoType (..)
 
     -- * Video
     , Video
@@ -1420,53 +1823,17 @@ module Network.Google.YouTube.Types
     , vProcessingDetails
     , vMonetizationDetails
 
-    -- * VideoAbuseReport
-    , VideoAbuseReport
-    , videoAbuseReport
-    , varSecondaryReasonId
-    , varReasonId
-    , varVideoId
-    , varLanguage
-    , varComments
+    -- * ContentRatingGrfilmRating
+    , ContentRatingGrfilmRating (..)
 
-    -- * VideoAbuseReportReason
-    , VideoAbuseReportReason
-    , videoAbuseReportReason
-    , varrEtag
-    , varrSnippet
-    , varrKind
-    , varrId
+    -- * PromotedItemIdType
+    , PromotedItemIdType (..)
 
-    -- * VideoAbuseReportReasonListResponse
-    , VideoAbuseReportReasonListResponse
-    , videoAbuseReportReasonListResponse
-    , varrlrEtag
-    , varrlrKind
-    , varrlrItems
-    , varrlrVisitorId
-    , varrlrEventId
-
-    -- * VideoAbuseReportReasonSnippet
-    , VideoAbuseReportReasonSnippet
-    , videoAbuseReportReasonSnippet
-    , varrsSecondaryReasons
-    , varrsLabel
-
-    -- * VideoAbuseReportSecondaryReason
-    , VideoAbuseReportSecondaryReason
-    , videoAbuseReportSecondaryReason
-    , varsrId
-    , varsrLabel
-
-    -- * VideoAgeGating
-    , VideoAgeGating
-    , videoAgeGating
-    , vagAlcoholContent
-    , vagRestricted
-    , vagVideoGameRating
-
-    -- * VideoAgeGatingVideoGameRating
-    , VideoAgeGatingVideoGameRating (..)
+    -- * ChannelSectionContentDetails
+    , ChannelSectionContentDetails
+    , channelSectionContentDetails
+    , cscdChannels
+    , cscdPlaylists
 
     -- * VideoCategory
     , VideoCategory
@@ -1475,298 +1842,15 @@ module Network.Google.YouTube.Types
     , vcSnippet
     , vcKind
     , vcId
-
-    -- * VideoCategoryListResponse
-    , VideoCategoryListResponse
-    , videoCategoryListResponse
-    , vclrEtag
-    , vclrTokenPagination
-    , vclrNextPageToken
-    , vclrPageInfo
-    , vclrKind
-    , vclrItems
-    , vclrVisitorId
-    , vclrEventId
-    , vclrPrevPageToken
-
-    -- * VideoCategorySnippet
-    , VideoCategorySnippet
-    , videoCategorySnippet
-    , vcsAssignable
-    , vcsChannelId
-    , vcsTitle
-
-    -- * VideoContentDetails
-    , VideoContentDetails
-    , videoContentDetails
-    , vcdCountryRestriction
-    , vcdDefinition
-    , vcdDimension
-    , vcdCaption
-    , vcdRegionRestriction
-    , vcdDuration
-    , vcdContentRating
-    , vcdLicensedContent
-
-    -- * VideoContentDetailsCaption
-    , VideoContentDetailsCaption (..)
-
-    -- * VideoContentDetailsDefinition
-    , VideoContentDetailsDefinition (..)
-
-    -- * VideoContentDetailsRegionRestriction
-    , VideoContentDetailsRegionRestriction
-    , videoContentDetailsRegionRestriction
-    , vcdrrAllowed
-    , vcdrrBlocked
-
-    -- * VideoConversionPing
-    , VideoConversionPing
-    , videoConversionPing
-    , vcpContext
-    , vcpConversionUrl
-
-    -- * VideoConversionPingContext
-    , VideoConversionPingContext (..)
-
-    -- * VideoConversionPings
-    , VideoConversionPings
-    , videoConversionPings
-    , vcpPings
-
-    -- * VideoFileDetails
-    , VideoFileDetails
-    , videoFileDetails
-    , vfdBitrateBps
-    , vfdCreationTime
-    , vfdRecordingLocation
-    , vfdDurationMs
-    , vfdFileSize
-    , vfdFileType
-    , vfdContainer
-    , vfdVideoStreams
-    , vfdAudioStreams
-    , vfdFileName
-
-    -- * VideoFileDetailsAudioStream
-    , VideoFileDetailsAudioStream
-    , videoFileDetailsAudioStream
-    , vfdasBitrateBps
-    , vfdasVendor
-    , vfdasCodec
-    , vfdasChannelCount
-
-    -- * VideoFileDetailsFileType
-    , VideoFileDetailsFileType (..)
-
-    -- * VideoFileDetailsVideoStream
-    , VideoFileDetailsVideoStream
-    , videoFileDetailsVideoStream
-    , vfdvsHeightPixels
-    , vfdvsBitrateBps
-    , vfdvsVendor
-    , vfdvsRotation
-    , vfdvsFrameRateFps
-    , vfdvsCodec
-    , vfdvsAspectRatio
-    , vfdvsWidthPixels
-
-    -- * VideoFileDetailsVideoStreamRotation
-    , VideoFileDetailsVideoStreamRotation (..)
-
-    -- * VideoGetRatingResponse
-    , VideoGetRatingResponse
-    , videoGetRatingResponse
-    , vgrrEtag
-    , vgrrKind
-    , vgrrItems
-    , vgrrVisitorId
-    , vgrrEventId
-
-    -- * VideoListResponse
-    , VideoListResponse
-    , videoListResponse
-    , vlrEtag
-    , vlrTokenPagination
-    , vlrNextPageToken
-    , vlrPageInfo
-    , vlrKind
-    , vlrItems
-    , vlrVisitorId
-    , vlrEventId
-    , vlrPrevPageToken
-
-    -- * VideoLiveStreamingDetails
-    , VideoLiveStreamingDetails
-    , videoLiveStreamingDetails
-    , vlsdActualEndTime
-    , vlsdConcurrentViewers
-    , vlsdScheduledEndTime
-    , vlsdScheduledStartTime
-    , vlsdActualStartTime
-
-    -- * VideoLocalization
-    , VideoLocalization
-    , videoLocalization
-    , vlTitle
-    , vlDescription
-
-    -- * VideoLocalizations
-    , VideoLocalizations
-    , videoLocalizations
-
-    -- * VideoMonetizationDetails
-    , VideoMonetizationDetails
-    , videoMonetizationDetails
-    , vmdAccess
-
-    -- * VideoPlayer
-    , VideoPlayer
-    , videoPlayer
-    , vpEmbedHtml
-
-    -- * VideoProcessingDetails
-    , VideoProcessingDetails
-    , videoProcessingDetails
-    , vpdProcessingFailureReason
-    , vpdProcessingIssuesAvailability
-    , vpdProcessingProgress
-    , vpdThumbnailsAvailability
-    , vpdTagSuggestionsAvailability
-    , vpdProcessingStatus
-    , vpdEditorSuggestionsAvailability
-    , vpdFileDetailsAvailability
-
-    -- * VideoProcessingDetailsProcessingFailureReason
-    , VideoProcessingDetailsProcessingFailureReason (..)
-
-    -- * VideoProcessingDetailsProcessingProgress
-    , VideoProcessingDetailsProcessingProgress
-    , videoProcessingDetailsProcessingProgress
-    , vpdppTimeLeftMs
-    , vpdppPartsTotal
-    , vpdppPartsProcessed
-
-    -- * VideoProcessingDetailsProcessingStatus
-    , VideoProcessingDetailsProcessingStatus (..)
-
-    -- * VideoProjectDetails
-    , VideoProjectDetails
-    , videoProjectDetails
-    , vpdTags
-
-    -- * VideoRating
-    , VideoRating
-    , videoRating
-    , vrRating
-    , vrVideoId
-
-    -- * VideoRatingRating
-    , VideoRatingRating (..)
-
-    -- * VideoRecordingDetails
-    , VideoRecordingDetails
-    , videoRecordingDetails
-    , vrdLocation
-    , vrdLocationDescription
-    , vrdRecordingDate
-
-    -- * VideoSnippet
-    , VideoSnippet
-    , videoSnippet
-    , vsDefaultAudioLanguage
-    , vsPublishedAt
-    , vsChannelTitle
-    , vsChannelId
-    , vsThumbnails
-    , vsLocalized
-    , vsCategoryId
-    , vsTitle
-    , vsLiveBroadcastContent
-    , vsDescription
-    , vsTags
-    , vsDefaultLanguage
-
-    -- * VideoSnippetLiveBroadcastContent
-    , VideoSnippetLiveBroadcastContent (..)
-
-    -- * VideoStatistics
-    , VideoStatistics
-    , videoStatistics
-    , vsLikeCount
-    , vsCommentCount
-    , vsFavoriteCount
-    , vsDislikeCount
-    , vsViewCount
-
-    -- * VideoStatus
-    , VideoStatus
-    , videoStatus
-    , vsFailureReason
-    , vsPublicStatsViewable
-    , vsRejectionReason
-    , vsPublishAt
-    , vsUploadStatus
-    , vsPrivacyStatus
-    , vsEmbeddable
-    , vsLicense
-
-    -- * VideoStatusFailureReason
-    , VideoStatusFailureReason (..)
-
-    -- * VideoStatusLicense
-    , VideoStatusLicense (..)
-
-    -- * VideoStatusPrivacyStatus
-    , VideoStatusPrivacyStatus (..)
-
-    -- * VideoStatusRejectionReason
-    , VideoStatusRejectionReason (..)
-
-    -- * VideoStatusUploadStatus
-    , VideoStatusUploadStatus (..)
-
-    -- * VideoSuggestions
-    , VideoSuggestions
-    , videoSuggestions
-    , vsProcessingErrors
-    , vsProcessingHints
-    , vsEditorSuggestions
-    , vsProcessingWarnings
-    , vsTagSuggestions
-
-    -- * VideoSuggestionsItemEditorSuggestions
-    , VideoSuggestionsItemEditorSuggestions (..)
-
-    -- * VideoSuggestionsItemProcessingErrors
-    , VideoSuggestionsItemProcessingErrors (..)
-
-    -- * VideoSuggestionsItemProcessingHints
-    , VideoSuggestionsItemProcessingHints (..)
-
-    -- * VideoSuggestionsItemProcessingWarnings
-    , VideoSuggestionsItemProcessingWarnings (..)
-
-    -- * VideoSuggestionsTagSuggestion
-    , VideoSuggestionsTagSuggestion
-    , videoSuggestionsTagSuggestion
-    , vstsTag
-    , vstsCategoryRestricts
-
-    -- * VideoTopicDetails
-    , VideoTopicDetails
-    , videoTopicDetails
-    , vtdTopicIds
-    , vtdRelevantTopicIds
-
-    -- * WatchSettings
-    , WatchSettings
-    , watchSettings
-    , wsFeaturedPlaylistId
-    , wsBackgroundColor
-    , wsTextColor
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types.Product
 import           Network.Google.YouTube.Types.Sum
+
+-- | URL referring to version 'v3' of the YouTube Data API.
+youTubeURL :: BaseUrl
+youTubeURL
+  = BaseUrl Https
+      "https://www.googleapis.com/youtube/v3/"
+      443

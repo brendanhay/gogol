@@ -14,9 +14,27 @@
 --
 module Network.Google.Container.Types
     (
+    -- * Service URL
+      containerURL
+
+    -- * MasterAuth
+    , MasterAuth
+    , masterAuth
+    , maBearerToken
+    , maClientKey
+    , maUser
+    , maClientCertificate
+    , maPassword
+    , maClusterCaCertificate
+
+    -- * ServiceAccount
+    , ServiceAccount
+    , serviceAccount
+    , saEmail
+    , saScopes
 
     -- * Cluster
-      Cluster
+    , Cluster
     , cluster
     , cStatus
     , cNodeConfig
@@ -38,23 +56,28 @@ module Network.Google.Container.Types
     , cInstanceGroupUrls
     , cNodeRoutingPrefixSize
 
+    -- * ListAggregatedOperationsResponse
+    , ListAggregatedOperationsResponse
+    , listAggregatedOperationsResponse
+    , laorOperations
+
+    -- * NodeConfig
+    , NodeConfig
+    , nodeConfig
+    , ncServiceAccounts
+    , ncSourceImage
+    , ncMachineType
+
+    -- * Alt
+    , Alt (..)
+
     -- * ClusterStatus
     , ClusterStatus (..)
-
-    -- * CreateClusterRequest
-    , CreateClusterRequest
-    , createClusterRequest
-    , ccrCluster
 
     -- * ListAggregatedClustersResponse
     , ListAggregatedClustersResponse
     , listAggregatedClustersResponse
     , lacrClusters
-
-    -- * ListAggregatedOperationsResponse
-    , ListAggregatedOperationsResponse
-    , listAggregatedOperationsResponse
-    , laorOperations
 
     -- * ListClustersResponse
     , ListClustersResponse
@@ -66,22 +89,13 @@ module Network.Google.Container.Types
     , listOperationsResponse
     , lorOperations
 
-    -- * MasterAuth
-    , MasterAuth
-    , masterAuth
-    , maBearerToken
-    , maClientKey
-    , maUser
-    , maClientCertificate
-    , maPassword
-    , maClusterCaCertificate
+    -- * CreateClusterRequest
+    , CreateClusterRequest
+    , createClusterRequest
+    , ccrCluster
 
-    -- * NodeConfig
-    , NodeConfig
-    , nodeConfig
-    , ncServiceAccounts
-    , ncSourceImage
-    , ncMachineType
+    -- * OperationStatus
+    , OperationStatus (..)
 
     -- * Operation
     , Operation
@@ -97,17 +111,15 @@ module Network.Google.Container.Types
 
     -- * OperationOperationType
     , OperationOperationType (..)
-
-    -- * OperationStatus
-    , OperationStatus (..)
-
-    -- * ServiceAccount
-    , ServiceAccount
-    , serviceAccount
-    , saEmail
-    , saScopes
     ) where
 
 import           Network.Google.Container.Types.Product
 import           Network.Google.Container.Types.Sum
 import           Network.Google.Prelude
+
+-- | URL referring to version 'v1beta1' of the Google Container Engine API.
+containerURL :: BaseUrl
+containerURL
+  = BaseUrl Https
+      "https://www.googleapis.com/container/v1beta1/projects/"
+      443

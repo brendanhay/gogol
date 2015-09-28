@@ -19,6 +19,816 @@ import           Network.Google.Blogger.Types.Sum
 import           Network.Google.Prelude
 
 --
+-- /See:/ 'blogList' smart constructor.
+data BlogList = BlogList
+    { _blKind          :: !Text
+    , _blItems         :: !(Maybe [Maybe Blog])
+    , _blBlogUserInfos :: !(Maybe [Maybe BlogUserInfo])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BlogList' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'blKind'
+--
+-- * 'blItems'
+--
+-- * 'blBlogUserInfos'
+blogList
+    :: BlogList
+blogList =
+    BlogList
+    { _blKind = "blogger#blogList"
+    , _blItems = Nothing
+    , _blBlogUserInfos = Nothing
+    }
+
+-- | The kind of this entity. Always blogger#blogList
+blKind :: Lens' BlogList Text
+blKind = lens _blKind (\ s a -> s{_blKind = a})
+
+-- | The list of Blogs this user has Authorship or Admin rights over.
+blItems :: Lens' BlogList [Maybe Blog]
+blItems
+  = lens _blItems (\ s a -> s{_blItems = a}) . _Default
+      . _Coerce
+
+-- | Admin level list of blog per-user information
+blBlogUserInfos :: Lens' BlogList [Maybe BlogUserInfo]
+blBlogUserInfos
+  = lens _blBlogUserInfos
+      (\ s a -> s{_blBlogUserInfos = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON BlogList where
+        parseJSON
+          = withObject "BlogList"
+              (\ o ->
+                 BlogList <$>
+                   (o .:? "kind" .!= "blogger#blogList") <*>
+                     (o .:? "items" .!= mempty)
+                     <*> (o .:? "blogUserInfos" .!= mempty))
+
+instance ToJSON BlogList where
+        toJSON BlogList{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _blKind), ("items" .=) <$> _blItems,
+                  ("blogUserInfos" .=) <$> _blBlogUserInfos])
+
+-- | This user\'s locale
+--
+-- /See:/ 'userLocale' smart constructor.
+data UserLocale = UserLocale
+    { _ulVariant  :: !(Maybe Text)
+    , _ulCountry  :: !(Maybe Text)
+    , _ulLanguage :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UserLocale' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ulVariant'
+--
+-- * 'ulCountry'
+--
+-- * 'ulLanguage'
+userLocale
+    :: UserLocale
+userLocale =
+    UserLocale
+    { _ulVariant = Nothing
+    , _ulCountry = Nothing
+    , _ulLanguage = Nothing
+    }
+
+-- | The user\'s language variant setting.
+ulVariant :: Lens' UserLocale (Maybe Text)
+ulVariant
+  = lens _ulVariant (\ s a -> s{_ulVariant = a})
+
+-- | The user\'s country setting.
+ulCountry :: Lens' UserLocale (Maybe Text)
+ulCountry
+  = lens _ulCountry (\ s a -> s{_ulCountry = a})
+
+-- | The user\'s language setting.
+ulLanguage :: Lens' UserLocale (Maybe Text)
+ulLanguage
+  = lens _ulLanguage (\ s a -> s{_ulLanguage = a})
+
+instance FromJSON UserLocale where
+        parseJSON
+          = withObject "UserLocale"
+              (\ o ->
+                 UserLocale <$>
+                   (o .:? "variant") <*> (o .:? "country") <*>
+                     (o .:? "language"))
+
+instance ToJSON UserLocale where
+        toJSON UserLocale{..}
+          = object
+              (catMaybes
+                 [("variant" .=) <$> _ulVariant,
+                  ("country" .=) <$> _ulCountry,
+                  ("language" .=) <$> _ulLanguage])
+
+--
+-- /See:/ 'postList' smart constructor.
+data PostList = PostList
+    { _plEtag          :: !(Maybe Text)
+    , _plNextPageToken :: !(Maybe Text)
+    , _plKind          :: !Text
+    , _plItems         :: !(Maybe [Maybe Post])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PostList' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'plEtag'
+--
+-- * 'plNextPageToken'
+--
+-- * 'plKind'
+--
+-- * 'plItems'
+postList
+    :: PostList
+postList =
+    PostList
+    { _plEtag = Nothing
+    , _plNextPageToken = Nothing
+    , _plKind = "blogger#postList"
+    , _plItems = Nothing
+    }
+
+-- | Etag of the response.
+plEtag :: Lens' PostList (Maybe Text)
+plEtag = lens _plEtag (\ s a -> s{_plEtag = a})
+
+-- | Pagination token to fetch the next page, if one exists.
+plNextPageToken :: Lens' PostList (Maybe Text)
+plNextPageToken
+  = lens _plNextPageToken
+      (\ s a -> s{_plNextPageToken = a})
+
+-- | The kind of this entity. Always blogger#postList
+plKind :: Lens' PostList Text
+plKind = lens _plKind (\ s a -> s{_plKind = a})
+
+-- | The list of Posts for this Blog.
+plItems :: Lens' PostList [Maybe Post]
+plItems
+  = lens _plItems (\ s a -> s{_plItems = a}) . _Default
+      . _Coerce
+
+instance FromJSON PostList where
+        parseJSON
+          = withObject "PostList"
+              (\ o ->
+                 PostList <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "blogger#postList")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON PostList where
+        toJSON PostList{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _plEtag,
+                  ("nextPageToken" .=) <$> _plNextPageToken,
+                  Just ("kind" .= _plKind), ("items" .=) <$> _plItems])
+
+-- | The author of this Comment.
+--
+-- /See:/ 'commentAuthor' smart constructor.
+data CommentAuthor = CommentAuthor
+    { _caImage       :: !(Maybe CommentImageAuthor)
+    , _caUrl         :: !(Maybe Text)
+    , _caDisplayName :: !(Maybe Text)
+    , _caId          :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CommentAuthor' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'caImage'
+--
+-- * 'caUrl'
+--
+-- * 'caDisplayName'
+--
+-- * 'caId'
+commentAuthor
+    :: CommentAuthor
+commentAuthor =
+    CommentAuthor
+    { _caImage = Nothing
+    , _caUrl = Nothing
+    , _caDisplayName = Nothing
+    , _caId = Nothing
+    }
+
+-- | The comment creator\'s avatar.
+caImage :: Lens' CommentAuthor (Maybe CommentImageAuthor)
+caImage = lens _caImage (\ s a -> s{_caImage = a})
+
+-- | The URL of the Comment creator\'s Profile page.
+caUrl :: Lens' CommentAuthor (Maybe Text)
+caUrl = lens _caUrl (\ s a -> s{_caUrl = a})
+
+-- | The display name.
+caDisplayName :: Lens' CommentAuthor (Maybe Text)
+caDisplayName
+  = lens _caDisplayName
+      (\ s a -> s{_caDisplayName = a})
+
+-- | The identifier of the Comment creator.
+caId :: Lens' CommentAuthor (Maybe Text)
+caId = lens _caId (\ s a -> s{_caId = a})
+
+instance FromJSON CommentAuthor where
+        parseJSON
+          = withObject "CommentAuthor"
+              (\ o ->
+                 CommentAuthor <$>
+                   (o .:? "image") <*> (o .:? "url") <*>
+                     (o .:? "displayName")
+                     <*> (o .:? "id"))
+
+instance ToJSON CommentAuthor where
+        toJSON CommentAuthor{..}
+          = object
+              (catMaybes
+                 [("image" .=) <$> _caImage, ("url" .=) <$> _caUrl,
+                  ("displayName" .=) <$> _caDisplayName,
+                  ("id" .=) <$> _caId])
+
+-- | The author of this Page.
+--
+-- /See:/ 'pageAuthor' smart constructor.
+data PageAuthor = PageAuthor
+    { _paImage       :: !(Maybe PageImageAuthor)
+    , _paUrl         :: !(Maybe Text)
+    , _paDisplayName :: !(Maybe Text)
+    , _paId          :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PageAuthor' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'paImage'
+--
+-- * 'paUrl'
+--
+-- * 'paDisplayName'
+--
+-- * 'paId'
+pageAuthor
+    :: PageAuthor
+pageAuthor =
+    PageAuthor
+    { _paImage = Nothing
+    , _paUrl = Nothing
+    , _paDisplayName = Nothing
+    , _paId = Nothing
+    }
+
+-- | The page author\'s avatar.
+paImage :: Lens' PageAuthor (Maybe PageImageAuthor)
+paImage = lens _paImage (\ s a -> s{_paImage = a})
+
+-- | The URL of the Page creator\'s Profile page.
+paUrl :: Lens' PageAuthor (Maybe Text)
+paUrl = lens _paUrl (\ s a -> s{_paUrl = a})
+
+-- | The display name.
+paDisplayName :: Lens' PageAuthor (Maybe Text)
+paDisplayName
+  = lens _paDisplayName
+      (\ s a -> s{_paDisplayName = a})
+
+-- | The identifier of the Page creator.
+paId :: Lens' PageAuthor (Maybe Text)
+paId = lens _paId (\ s a -> s{_paId = a})
+
+instance FromJSON PageAuthor where
+        parseJSON
+          = withObject "PageAuthor"
+              (\ o ->
+                 PageAuthor <$>
+                   (o .:? "image") <*> (o .:? "url") <*>
+                     (o .:? "displayName")
+                     <*> (o .:? "id"))
+
+instance ToJSON PageAuthor where
+        toJSON PageAuthor{..}
+          = object
+              (catMaybes
+                 [("image" .=) <$> _paImage, ("url" .=) <$> _paUrl,
+                  ("displayName" .=) <$> _paDisplayName,
+                  ("id" .=) <$> _paId])
+
+-- | The locale this Blog is set to.
+--
+-- /See:/ 'blogLocale' smart constructor.
+data BlogLocale = BlogLocale
+    { _blVariant  :: !(Maybe Text)
+    , _blCountry  :: !(Maybe Text)
+    , _blLanguage :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BlogLocale' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'blVariant'
+--
+-- * 'blCountry'
+--
+-- * 'blLanguage'
+blogLocale
+    :: BlogLocale
+blogLocale =
+    BlogLocale
+    { _blVariant = Nothing
+    , _blCountry = Nothing
+    , _blLanguage = Nothing
+    }
+
+-- | The language variant this blog is authored in.
+blVariant :: Lens' BlogLocale (Maybe Text)
+blVariant
+  = lens _blVariant (\ s a -> s{_blVariant = a})
+
+-- | The country this blog\'s locale is set to.
+blCountry :: Lens' BlogLocale (Maybe Text)
+blCountry
+  = lens _blCountry (\ s a -> s{_blCountry = a})
+
+-- | The language this blog is authored in.
+blLanguage :: Lens' BlogLocale (Maybe Text)
+blLanguage
+  = lens _blLanguage (\ s a -> s{_blLanguage = a})
+
+instance FromJSON BlogLocale where
+        parseJSON
+          = withObject "BlogLocale"
+              (\ o ->
+                 BlogLocale <$>
+                   (o .:? "variant") <*> (o .:? "country") <*>
+                     (o .:? "language"))
+
+instance ToJSON BlogLocale where
+        toJSON BlogLocale{..}
+          = object
+              (catMaybes
+                 [("variant" .=) <$> _blVariant,
+                  ("country" .=) <$> _blCountry,
+                  ("language" .=) <$> _blLanguage])
+
+-- | Data about the blog containing this Post.
+--
+-- /See:/ 'postBlog' smart constructor.
+newtype PostBlog = PostBlog
+    { _pbId :: Maybe Text
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PostBlog' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pbId'
+postBlog
+    :: PostBlog
+postBlog =
+    PostBlog
+    { _pbId = Nothing
+    }
+
+-- | The identifier of the Blog that contains this Post.
+pbId :: Lens' PostBlog (Maybe Text)
+pbId = lens _pbId (\ s a -> s{_pbId = a})
+
+instance FromJSON PostBlog where
+        parseJSON
+          = withObject "PostBlog"
+              (\ o -> PostBlog <$> (o .:? "id"))
+
+instance ToJSON PostBlog where
+        toJSON PostBlog{..}
+          = object (catMaybes [("id" .=) <$> _pbId])
+
+--
+-- /See:/ 'postPerUserInfo' smart constructor.
+data PostPerUserInfo = PostPerUserInfo
+    { _ppuiKind          :: !Text
+    , _ppuiBlogId        :: !(Maybe Text)
+    , _ppuiUserId        :: !(Maybe Text)
+    , _ppuiHasEditAccess :: !(Maybe Bool)
+    , _ppuiPostId        :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PostPerUserInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ppuiKind'
+--
+-- * 'ppuiBlogId'
+--
+-- * 'ppuiUserId'
+--
+-- * 'ppuiHasEditAccess'
+--
+-- * 'ppuiPostId'
+postPerUserInfo
+    :: PostPerUserInfo
+postPerUserInfo =
+    PostPerUserInfo
+    { _ppuiKind = "blogger#postPerUserInfo"
+    , _ppuiBlogId = Nothing
+    , _ppuiUserId = Nothing
+    , _ppuiHasEditAccess = Nothing
+    , _ppuiPostId = Nothing
+    }
+
+-- | The kind of this entity. Always blogger#postPerUserInfo
+ppuiKind :: Lens' PostPerUserInfo Text
+ppuiKind = lens _ppuiKind (\ s a -> s{_ppuiKind = a})
+
+-- | ID of the Blog that the post resource belongs to.
+ppuiBlogId :: Lens' PostPerUserInfo (Maybe Text)
+ppuiBlogId
+  = lens _ppuiBlogId (\ s a -> s{_ppuiBlogId = a})
+
+-- | ID of the User.
+ppuiUserId :: Lens' PostPerUserInfo (Maybe Text)
+ppuiUserId
+  = lens _ppuiUserId (\ s a -> s{_ppuiUserId = a})
+
+-- | True if the user has Author level access to the post.
+ppuiHasEditAccess :: Lens' PostPerUserInfo (Maybe Bool)
+ppuiHasEditAccess
+  = lens _ppuiHasEditAccess
+      (\ s a -> s{_ppuiHasEditAccess = a})
+
+-- | ID of the Post resource.
+ppuiPostId :: Lens' PostPerUserInfo (Maybe Text)
+ppuiPostId
+  = lens _ppuiPostId (\ s a -> s{_ppuiPostId = a})
+
+instance FromJSON PostPerUserInfo where
+        parseJSON
+          = withObject "PostPerUserInfo"
+              (\ o ->
+                 PostPerUserInfo <$>
+                   (o .:? "kind" .!= "blogger#postPerUserInfo") <*>
+                     (o .:? "blogId")
+                     <*> (o .:? "userId")
+                     <*> (o .:? "hasEditAccess")
+                     <*> (o .:? "postId"))
+
+instance ToJSON PostPerUserInfo where
+        toJSON PostPerUserInfo{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _ppuiKind),
+                  ("blogId" .=) <$> _ppuiBlogId,
+                  ("userId" .=) <$> _ppuiUserId,
+                  ("hasEditAccess" .=) <$> _ppuiHasEditAccess,
+                  ("postId" .=) <$> _ppuiPostId])
+
+--
+-- /See:/ 'comment' smart constructor.
+data Comment = Comment
+    { _cStatus    :: !(Maybe Text)
+    , _cPost      :: !(Maybe CommentPost)
+    , _cKind      :: !Text
+    , _cPublished :: !(Maybe UTCTime)
+    , _cBlog      :: !(Maybe CommentBlog)
+    , _cContent   :: !(Maybe Text)
+    , _cSelfLink  :: !(Maybe Text)
+    , _cAuthor    :: !(Maybe CommentAuthor)
+    , _cId        :: !(Maybe Text)
+    , _cUpdated   :: !(Maybe UTCTime)
+    , _cInReplyTo :: !(Maybe CommentInReplyTo)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Comment' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cStatus'
+--
+-- * 'cPost'
+--
+-- * 'cKind'
+--
+-- * 'cPublished'
+--
+-- * 'cBlog'
+--
+-- * 'cContent'
+--
+-- * 'cSelfLink'
+--
+-- * 'cAuthor'
+--
+-- * 'cId'
+--
+-- * 'cUpdated'
+--
+-- * 'cInReplyTo'
+comment
+    :: Comment
+comment =
+    Comment
+    { _cStatus = Nothing
+    , _cPost = Nothing
+    , _cKind = "blogger#comment"
+    , _cPublished = Nothing
+    , _cBlog = Nothing
+    , _cContent = Nothing
+    , _cSelfLink = Nothing
+    , _cAuthor = Nothing
+    , _cId = Nothing
+    , _cUpdated = Nothing
+    , _cInReplyTo = Nothing
+    }
+
+-- | The status of the comment (only populated for admin users)
+cStatus :: Lens' Comment (Maybe Text)
+cStatus = lens _cStatus (\ s a -> s{_cStatus = a})
+
+-- | Data about the post containing this comment.
+cPost :: Lens' Comment (Maybe CommentPost)
+cPost = lens _cPost (\ s a -> s{_cPost = a})
+
+-- | The kind of this entry. Always blogger#comment
+cKind :: Lens' Comment Text
+cKind = lens _cKind (\ s a -> s{_cKind = a})
+
+-- | RFC 3339 date-time when this comment was published.
+cPublished :: Lens' Comment (Maybe UTCTime)
+cPublished
+  = lens _cPublished (\ s a -> s{_cPublished = a})
+
+-- | Data about the blog containing this comment.
+cBlog :: Lens' Comment (Maybe CommentBlog)
+cBlog = lens _cBlog (\ s a -> s{_cBlog = a})
+
+-- | The actual content of the comment. May include HTML markup.
+cContent :: Lens' Comment (Maybe Text)
+cContent = lens _cContent (\ s a -> s{_cContent = a})
+
+-- | The API REST URL to fetch this resource from.
+cSelfLink :: Lens' Comment (Maybe Text)
+cSelfLink
+  = lens _cSelfLink (\ s a -> s{_cSelfLink = a})
+
+-- | The author of this Comment.
+cAuthor :: Lens' Comment (Maybe CommentAuthor)
+cAuthor = lens _cAuthor (\ s a -> s{_cAuthor = a})
+
+-- | The identifier for this resource.
+cId :: Lens' Comment (Maybe Text)
+cId = lens _cId (\ s a -> s{_cId = a})
+
+-- | RFC 3339 date-time when this comment was last updated.
+cUpdated :: Lens' Comment (Maybe UTCTime)
+cUpdated = lens _cUpdated (\ s a -> s{_cUpdated = a})
+
+-- | Data about the comment this is in reply to.
+cInReplyTo :: Lens' Comment (Maybe CommentInReplyTo)
+cInReplyTo
+  = lens _cInReplyTo (\ s a -> s{_cInReplyTo = a})
+
+instance FromJSON Comment where
+        parseJSON
+          = withObject "Comment"
+              (\ o ->
+                 Comment <$>
+                   (o .:? "status") <*> (o .:? "post") <*>
+                     (o .:? "kind" .!= "blogger#comment")
+                     <*> (o .:? "published")
+                     <*> (o .:? "blog")
+                     <*> (o .:? "content")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "author")
+                     <*> (o .:? "id")
+                     <*> (o .:? "updated")
+                     <*> (o .:? "inReplyTo"))
+
+instance ToJSON Comment where
+        toJSON Comment{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _cStatus, ("post" .=) <$> _cPost,
+                  Just ("kind" .= _cKind),
+                  ("published" .=) <$> _cPublished,
+                  ("blog" .=) <$> _cBlog, ("content" .=) <$> _cContent,
+                  ("selfLink" .=) <$> _cSelfLink,
+                  ("author" .=) <$> _cAuthor, ("id" .=) <$> _cId,
+                  ("updated" .=) <$> _cUpdated,
+                  ("inReplyTo" .=) <$> _cInReplyTo])
+
+-- | The container of posts in this blog.
+--
+-- /See:/ 'blogPosts' smart constructor.
+data BlogPosts = BlogPosts
+    { _bpTotalItems :: !(Maybe Int32)
+    , _bpItems      :: !(Maybe [Maybe Post])
+    , _bpSelfLink   :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BlogPosts' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bpTotalItems'
+--
+-- * 'bpItems'
+--
+-- * 'bpSelfLink'
+blogPosts
+    :: BlogPosts
+blogPosts =
+    BlogPosts
+    { _bpTotalItems = Nothing
+    , _bpItems = Nothing
+    , _bpSelfLink = Nothing
+    }
+
+-- | The count of posts in this blog.
+bpTotalItems :: Lens' BlogPosts (Maybe Int32)
+bpTotalItems
+  = lens _bpTotalItems (\ s a -> s{_bpTotalItems = a})
+
+-- | The List of Posts for this Blog.
+bpItems :: Lens' BlogPosts [Maybe Post]
+bpItems
+  = lens _bpItems (\ s a -> s{_bpItems = a}) . _Default
+      . _Coerce
+
+-- | The URL of the container for posts in this blog.
+bpSelfLink :: Lens' BlogPosts (Maybe Text)
+bpSelfLink
+  = lens _bpSelfLink (\ s a -> s{_bpSelfLink = a})
+
+instance FromJSON BlogPosts where
+        parseJSON
+          = withObject "BlogPosts"
+              (\ o ->
+                 BlogPosts <$>
+                   (o .:? "totalItems") <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink"))
+
+instance ToJSON BlogPosts where
+        toJSON BlogPosts{..}
+          = object
+              (catMaybes
+                 [("totalItems" .=) <$> _bpTotalItems,
+                  ("items" .=) <$> _bpItems,
+                  ("selfLink" .=) <$> _bpSelfLink])
+
+-- | Data about the blog containing this Page.
+--
+-- /See:/ 'pageBlog' smart constructor.
+newtype PageBlog = PageBlog
+    { _pId :: Maybe Text
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PageBlog' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pId'
+pageBlog
+    :: PageBlog
+pageBlog =
+    PageBlog
+    { _pId = Nothing
+    }
+
+-- | The identifier of the blog containing this page.
+pId :: Lens' PageBlog (Maybe Text)
+pId = lens _pId (\ s a -> s{_pId = a})
+
+instance FromJSON PageBlog where
+        parseJSON
+          = withObject "PageBlog"
+              (\ o -> PageBlog <$> (o .:? "id"))
+
+instance ToJSON PageBlog where
+        toJSON PageBlog{..}
+          = object (catMaybes [("id" .=) <$> _pId])
+
+-- | Data about the blog containing this comment.
+--
+-- /See:/ 'commentBlog' smart constructor.
+newtype CommentBlog = CommentBlog
+    { _cbId :: Maybe Text
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CommentBlog' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cbId'
+commentBlog
+    :: CommentBlog
+commentBlog =
+    CommentBlog
+    { _cbId = Nothing
+    }
+
+-- | The identifier of the blog containing this comment.
+cbId :: Lens' CommentBlog (Maybe Text)
+cbId = lens _cbId (\ s a -> s{_cbId = a})
+
+instance FromJSON CommentBlog where
+        parseJSON
+          = withObject "CommentBlog"
+              (\ o -> CommentBlog <$> (o .:? "id"))
+
+instance ToJSON CommentBlog where
+        toJSON CommentBlog{..}
+          = object (catMaybes [("id" .=) <$> _cbId])
+
+-- | The author of this Post.
+--
+-- /See:/ 'postAuthor' smart constructor.
+data PostAuthor = PostAuthor
+    { _posImage       :: !(Maybe PostImageAuthor)
+    , _posUrl         :: !(Maybe Text)
+    , _posDisplayName :: !(Maybe Text)
+    , _posId          :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PostAuthor' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'posImage'
+--
+-- * 'posUrl'
+--
+-- * 'posDisplayName'
+--
+-- * 'posId'
+postAuthor
+    :: PostAuthor
+postAuthor =
+    PostAuthor
+    { _posImage = Nothing
+    , _posUrl = Nothing
+    , _posDisplayName = Nothing
+    , _posId = Nothing
+    }
+
+-- | The Post author\'s avatar.
+posImage :: Lens' PostAuthor (Maybe PostImageAuthor)
+posImage = lens _posImage (\ s a -> s{_posImage = a})
+
+-- | The URL of the Post creator\'s Profile page.
+posUrl :: Lens' PostAuthor (Maybe Text)
+posUrl = lens _posUrl (\ s a -> s{_posUrl = a})
+
+-- | The display name.
+posDisplayName :: Lens' PostAuthor (Maybe Text)
+posDisplayName
+  = lens _posDisplayName
+      (\ s a -> s{_posDisplayName = a})
+
+-- | The identifier of the Post creator.
+posId :: Lens' PostAuthor (Maybe Text)
+posId = lens _posId (\ s a -> s{_posId = a})
+
+instance FromJSON PostAuthor where
+        parseJSON
+          = withObject "PostAuthor"
+              (\ o ->
+                 PostAuthor <$>
+                   (o .:? "image") <*> (o .:? "url") <*>
+                     (o .:? "displayName")
+                     <*> (o .:? "id"))
+
+instance ToJSON PostAuthor where
+        toJSON PostAuthor{..}
+          = object
+              (catMaybes
+                 [("image" .=) <$> _posImage, ("url" .=) <$> _posUrl,
+                  ("displayName" .=) <$> _posDisplayName,
+                  ("id" .=) <$> _posId])
+
+--
 -- /See:/ 'blog' smart constructor.
 data Blog = Blog
     { _bStatus         :: !(Maybe Text)
@@ -176,323 +986,6 @@ instance ToJSON Blog where
                   ("description" .=) <$> _bDescription])
 
 --
--- /See:/ 'blogList' smart constructor.
-data BlogList = BlogList
-    { _blKind          :: !Text
-    , _blItems         :: !(Maybe [Maybe Blog])
-    , _blBlogUserInfos :: !(Maybe [Maybe BlogUserInfo])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'BlogList' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'blKind'
---
--- * 'blItems'
---
--- * 'blBlogUserInfos'
-blogList
-    :: BlogList
-blogList =
-    BlogList
-    { _blKind = "blogger#blogList"
-    , _blItems = Nothing
-    , _blBlogUserInfos = Nothing
-    }
-
--- | The kind of this entity. Always blogger#blogList
-blKind :: Lens' BlogList Text
-blKind = lens _blKind (\ s a -> s{_blKind = a})
-
--- | The list of Blogs this user has Authorship or Admin rights over.
-blItems :: Lens' BlogList [Maybe Blog]
-blItems
-  = lens _blItems (\ s a -> s{_blItems = a}) . _Default
-      . _Coerce
-
--- | Admin level list of blog per-user information
-blBlogUserInfos :: Lens' BlogList [Maybe BlogUserInfo]
-blBlogUserInfos
-  = lens _blBlogUserInfos
-      (\ s a -> s{_blBlogUserInfos = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON BlogList where
-        parseJSON
-          = withObject "BlogList"
-              (\ o ->
-                 BlogList <$>
-                   (o .:? "kind" .!= "blogger#blogList") <*>
-                     (o .:? "items" .!= mempty)
-                     <*> (o .:? "blogUserInfos" .!= mempty))
-
-instance ToJSON BlogList where
-        toJSON BlogList{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _blKind), ("items" .=) <$> _blItems,
-                  ("blogUserInfos" .=) <$> _blBlogUserInfos])
-
--- | The locale this Blog is set to.
---
--- /See:/ 'blogLocale' smart constructor.
-data BlogLocale = BlogLocale
-    { _blVariant  :: !(Maybe Text)
-    , _blCountry  :: !(Maybe Text)
-    , _blLanguage :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'BlogLocale' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'blVariant'
---
--- * 'blCountry'
---
--- * 'blLanguage'
-blogLocale
-    :: BlogLocale
-blogLocale =
-    BlogLocale
-    { _blVariant = Nothing
-    , _blCountry = Nothing
-    , _blLanguage = Nothing
-    }
-
--- | The language variant this blog is authored in.
-blVariant :: Lens' BlogLocale (Maybe Text)
-blVariant
-  = lens _blVariant (\ s a -> s{_blVariant = a})
-
--- | The country this blog\'s locale is set to.
-blCountry :: Lens' BlogLocale (Maybe Text)
-blCountry
-  = lens _blCountry (\ s a -> s{_blCountry = a})
-
--- | The language this blog is authored in.
-blLanguage :: Lens' BlogLocale (Maybe Text)
-blLanguage
-  = lens _blLanguage (\ s a -> s{_blLanguage = a})
-
-instance FromJSON BlogLocale where
-        parseJSON
-          = withObject "BlogLocale"
-              (\ o ->
-                 BlogLocale <$>
-                   (o .:? "variant") <*> (o .:? "country") <*>
-                     (o .:? "language"))
-
-instance ToJSON BlogLocale where
-        toJSON BlogLocale{..}
-          = object
-              (catMaybes
-                 [("variant" .=) <$> _blVariant,
-                  ("country" .=) <$> _blCountry,
-                  ("language" .=) <$> _blLanguage])
-
--- | The container of pages in this blog.
---
--- /See:/ 'blogPages' smart constructor.
-data BlogPages = BlogPages
-    { _bpsTotalItems :: !(Maybe Int32)
-    , _bpsSelfLink   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'BlogPages' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'bpsTotalItems'
---
--- * 'bpsSelfLink'
-blogPages
-    :: BlogPages
-blogPages =
-    BlogPages
-    { _bpsTotalItems = Nothing
-    , _bpsSelfLink = Nothing
-    }
-
--- | The count of pages in this blog.
-bpsTotalItems :: Lens' BlogPages (Maybe Int32)
-bpsTotalItems
-  = lens _bpsTotalItems
-      (\ s a -> s{_bpsTotalItems = a})
-
--- | The URL of the container for pages in this blog.
-bpsSelfLink :: Lens' BlogPages (Maybe Text)
-bpsSelfLink
-  = lens _bpsSelfLink (\ s a -> s{_bpsSelfLink = a})
-
-instance FromJSON BlogPages where
-        parseJSON
-          = withObject "BlogPages"
-              (\ o ->
-                 BlogPages <$>
-                   (o .:? "totalItems") <*> (o .:? "selfLink"))
-
-instance ToJSON BlogPages where
-        toJSON BlogPages{..}
-          = object
-              (catMaybes
-                 [("totalItems" .=) <$> _bpsTotalItems,
-                  ("selfLink" .=) <$> _bpsSelfLink])
-
---
--- /See:/ 'blogPerUserInfo' smart constructor.
-data BlogPerUserInfo = BlogPerUserInfo
-    { _bpuiPhotosAlbumKey :: !(Maybe Text)
-    , _bpuiKind           :: !Text
-    , _bpuiBlogId         :: !(Maybe Text)
-    , _bpuiUserId         :: !(Maybe Text)
-    , _bpuiRole           :: !(Maybe Text)
-    , _bpuiHasAdminAccess :: !(Maybe Bool)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'BlogPerUserInfo' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'bpuiPhotosAlbumKey'
---
--- * 'bpuiKind'
---
--- * 'bpuiBlogId'
---
--- * 'bpuiUserId'
---
--- * 'bpuiRole'
---
--- * 'bpuiHasAdminAccess'
-blogPerUserInfo
-    :: BlogPerUserInfo
-blogPerUserInfo =
-    BlogPerUserInfo
-    { _bpuiPhotosAlbumKey = Nothing
-    , _bpuiKind = "blogger#blogPerUserInfo"
-    , _bpuiBlogId = Nothing
-    , _bpuiUserId = Nothing
-    , _bpuiRole = Nothing
-    , _bpuiHasAdminAccess = Nothing
-    }
-
--- | The Photo Album Key for the user when adding photos to the blog
-bpuiPhotosAlbumKey :: Lens' BlogPerUserInfo (Maybe Text)
-bpuiPhotosAlbumKey
-  = lens _bpuiPhotosAlbumKey
-      (\ s a -> s{_bpuiPhotosAlbumKey = a})
-
--- | The kind of this entity. Always blogger#blogPerUserInfo
-bpuiKind :: Lens' BlogPerUserInfo Text
-bpuiKind = lens _bpuiKind (\ s a -> s{_bpuiKind = a})
-
--- | ID of the Blog resource
-bpuiBlogId :: Lens' BlogPerUserInfo (Maybe Text)
-bpuiBlogId
-  = lens _bpuiBlogId (\ s a -> s{_bpuiBlogId = a})
-
--- | ID of the User
-bpuiUserId :: Lens' BlogPerUserInfo (Maybe Text)
-bpuiUserId
-  = lens _bpuiUserId (\ s a -> s{_bpuiUserId = a})
-
--- | Access permissions that the user has for the blog (ADMIN, AUTHOR, or
--- READER).
-bpuiRole :: Lens' BlogPerUserInfo (Maybe Text)
-bpuiRole = lens _bpuiRole (\ s a -> s{_bpuiRole = a})
-
--- | True if the user has Admin level access to the blog.
-bpuiHasAdminAccess :: Lens' BlogPerUserInfo (Maybe Bool)
-bpuiHasAdminAccess
-  = lens _bpuiHasAdminAccess
-      (\ s a -> s{_bpuiHasAdminAccess = a})
-
-instance FromJSON BlogPerUserInfo where
-        parseJSON
-          = withObject "BlogPerUserInfo"
-              (\ o ->
-                 BlogPerUserInfo <$>
-                   (o .:? "photosAlbumKey") <*>
-                     (o .:? "kind" .!= "blogger#blogPerUserInfo")
-                     <*> (o .:? "blogId")
-                     <*> (o .:? "userId")
-                     <*> (o .:? "role")
-                     <*> (o .:? "hasAdminAccess"))
-
-instance ToJSON BlogPerUserInfo where
-        toJSON BlogPerUserInfo{..}
-          = object
-              (catMaybes
-                 [("photosAlbumKey" .=) <$> _bpuiPhotosAlbumKey,
-                  Just ("kind" .= _bpuiKind),
-                  ("blogId" .=) <$> _bpuiBlogId,
-                  ("userId" .=) <$> _bpuiUserId,
-                  ("role" .=) <$> _bpuiRole,
-                  ("hasAdminAccess" .=) <$> _bpuiHasAdminAccess])
-
--- | The container of posts in this blog.
---
--- /See:/ 'blogPosts' smart constructor.
-data BlogPosts = BlogPosts
-    { _bpTotalItems :: !(Maybe Int32)
-    , _bpItems      :: !(Maybe [Maybe Post])
-    , _bpSelfLink   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'BlogPosts' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'bpTotalItems'
---
--- * 'bpItems'
---
--- * 'bpSelfLink'
-blogPosts
-    :: BlogPosts
-blogPosts =
-    BlogPosts
-    { _bpTotalItems = Nothing
-    , _bpItems = Nothing
-    , _bpSelfLink = Nothing
-    }
-
--- | The count of posts in this blog.
-bpTotalItems :: Lens' BlogPosts (Maybe Int32)
-bpTotalItems
-  = lens _bpTotalItems (\ s a -> s{_bpTotalItems = a})
-
--- | The List of Posts for this Blog.
-bpItems :: Lens' BlogPosts [Maybe Post]
-bpItems
-  = lens _bpItems (\ s a -> s{_bpItems = a}) . _Default
-      . _Coerce
-
--- | The URL of the container for posts in this blog.
-bpSelfLink :: Lens' BlogPosts (Maybe Text)
-bpSelfLink
-  = lens _bpSelfLink (\ s a -> s{_bpSelfLink = a})
-
-instance FromJSON BlogPosts where
-        parseJSON
-          = withObject "BlogPosts"
-              (\ o ->
-                 BlogPosts <$>
-                   (o .:? "totalItems") <*> (o .:? "items" .!= mempty)
-                     <*> (o .:? "selfLink"))
-
-instance ToJSON BlogPosts where
-        toJSON BlogPosts{..}
-          = object
-              (catMaybes
-                 [("totalItems" .=) <$> _bpTotalItems,
-                  ("items" .=) <$> _bpItems,
-                  ("selfLink" .=) <$> _bpSelfLink])
-
---
 -- /See:/ 'blogUserInfo' smart constructor.
 data BlogUserInfo = BlogUserInfo
     { _buiKind         :: !Text
@@ -547,302 +1040,6 @@ instance ToJSON BlogUserInfo where
               (catMaybes
                  [Just ("kind" .= _buiKind), ("blog" .=) <$> _buiBlog,
                   ("blog_user_info" .=) <$> _buiBlogUserInfo])
-
---
--- /See:/ 'comment' smart constructor.
-data Comment = Comment
-    { _cStatus    :: !(Maybe Text)
-    , _cPost      :: !(Maybe CommentPost)
-    , _cKind      :: !Text
-    , _cPublished :: !(Maybe UTCTime)
-    , _cBlog      :: !(Maybe CommentBlog)
-    , _cContent   :: !(Maybe Text)
-    , _cSelfLink  :: !(Maybe Text)
-    , _cAuthor    :: !(Maybe CommentAuthor)
-    , _cId        :: !(Maybe Text)
-    , _cUpdated   :: !(Maybe UTCTime)
-    , _cInReplyTo :: !(Maybe CommentInReplyTo)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Comment' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'cStatus'
---
--- * 'cPost'
---
--- * 'cKind'
---
--- * 'cPublished'
---
--- * 'cBlog'
---
--- * 'cContent'
---
--- * 'cSelfLink'
---
--- * 'cAuthor'
---
--- * 'cId'
---
--- * 'cUpdated'
---
--- * 'cInReplyTo'
-comment
-    :: Comment
-comment =
-    Comment
-    { _cStatus = Nothing
-    , _cPost = Nothing
-    , _cKind = "blogger#comment"
-    , _cPublished = Nothing
-    , _cBlog = Nothing
-    , _cContent = Nothing
-    , _cSelfLink = Nothing
-    , _cAuthor = Nothing
-    , _cId = Nothing
-    , _cUpdated = Nothing
-    , _cInReplyTo = Nothing
-    }
-
--- | The status of the comment (only populated for admin users)
-cStatus :: Lens' Comment (Maybe Text)
-cStatus = lens _cStatus (\ s a -> s{_cStatus = a})
-
--- | Data about the post containing this comment.
-cPost :: Lens' Comment (Maybe CommentPost)
-cPost = lens _cPost (\ s a -> s{_cPost = a})
-
--- | The kind of this entry. Always blogger#comment
-cKind :: Lens' Comment Text
-cKind = lens _cKind (\ s a -> s{_cKind = a})
-
--- | RFC 3339 date-time when this comment was published.
-cPublished :: Lens' Comment (Maybe UTCTime)
-cPublished
-  = lens _cPublished (\ s a -> s{_cPublished = a})
-
--- | Data about the blog containing this comment.
-cBlog :: Lens' Comment (Maybe CommentBlog)
-cBlog = lens _cBlog (\ s a -> s{_cBlog = a})
-
--- | The actual content of the comment. May include HTML markup.
-cContent :: Lens' Comment (Maybe Text)
-cContent = lens _cContent (\ s a -> s{_cContent = a})
-
--- | The API REST URL to fetch this resource from.
-cSelfLink :: Lens' Comment (Maybe Text)
-cSelfLink
-  = lens _cSelfLink (\ s a -> s{_cSelfLink = a})
-
--- | The author of this Comment.
-cAuthor :: Lens' Comment (Maybe CommentAuthor)
-cAuthor = lens _cAuthor (\ s a -> s{_cAuthor = a})
-
--- | The identifier for this resource.
-cId :: Lens' Comment (Maybe Text)
-cId = lens _cId (\ s a -> s{_cId = a})
-
--- | RFC 3339 date-time when this comment was last updated.
-cUpdated :: Lens' Comment (Maybe UTCTime)
-cUpdated = lens _cUpdated (\ s a -> s{_cUpdated = a})
-
--- | Data about the comment this is in reply to.
-cInReplyTo :: Lens' Comment (Maybe CommentInReplyTo)
-cInReplyTo
-  = lens _cInReplyTo (\ s a -> s{_cInReplyTo = a})
-
-instance FromJSON Comment where
-        parseJSON
-          = withObject "Comment"
-              (\ o ->
-                 Comment <$>
-                   (o .:? "status") <*> (o .:? "post") <*>
-                     (o .:? "kind" .!= "blogger#comment")
-                     <*> (o .:? "published")
-                     <*> (o .:? "blog")
-                     <*> (o .:? "content")
-                     <*> (o .:? "selfLink")
-                     <*> (o .:? "author")
-                     <*> (o .:? "id")
-                     <*> (o .:? "updated")
-                     <*> (o .:? "inReplyTo"))
-
-instance ToJSON Comment where
-        toJSON Comment{..}
-          = object
-              (catMaybes
-                 [("status" .=) <$> _cStatus, ("post" .=) <$> _cPost,
-                  Just ("kind" .= _cKind),
-                  ("published" .=) <$> _cPublished,
-                  ("blog" .=) <$> _cBlog, ("content" .=) <$> _cContent,
-                  ("selfLink" .=) <$> _cSelfLink,
-                  ("author" .=) <$> _cAuthor, ("id" .=) <$> _cId,
-                  ("updated" .=) <$> _cUpdated,
-                  ("inReplyTo" .=) <$> _cInReplyTo])
-
--- | The author of this Comment.
---
--- /See:/ 'commentAuthor' smart constructor.
-data CommentAuthor = CommentAuthor
-    { _caImage       :: !(Maybe CommentImageAuthor)
-    , _caUrl         :: !(Maybe Text)
-    , _caDisplayName :: !(Maybe Text)
-    , _caId          :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'CommentAuthor' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'caImage'
---
--- * 'caUrl'
---
--- * 'caDisplayName'
---
--- * 'caId'
-commentAuthor
-    :: CommentAuthor
-commentAuthor =
-    CommentAuthor
-    { _caImage = Nothing
-    , _caUrl = Nothing
-    , _caDisplayName = Nothing
-    , _caId = Nothing
-    }
-
--- | The comment creator\'s avatar.
-caImage :: Lens' CommentAuthor (Maybe CommentImageAuthor)
-caImage = lens _caImage (\ s a -> s{_caImage = a})
-
--- | The URL of the Comment creator\'s Profile page.
-caUrl :: Lens' CommentAuthor (Maybe Text)
-caUrl = lens _caUrl (\ s a -> s{_caUrl = a})
-
--- | The display name.
-caDisplayName :: Lens' CommentAuthor (Maybe Text)
-caDisplayName
-  = lens _caDisplayName
-      (\ s a -> s{_caDisplayName = a})
-
--- | The identifier of the Comment creator.
-caId :: Lens' CommentAuthor (Maybe Text)
-caId = lens _caId (\ s a -> s{_caId = a})
-
-instance FromJSON CommentAuthor where
-        parseJSON
-          = withObject "CommentAuthor"
-              (\ o ->
-                 CommentAuthor <$>
-                   (o .:? "image") <*> (o .:? "url") <*>
-                     (o .:? "displayName")
-                     <*> (o .:? "id"))
-
-instance ToJSON CommentAuthor where
-        toJSON CommentAuthor{..}
-          = object
-              (catMaybes
-                 [("image" .=) <$> _caImage, ("url" .=) <$> _caUrl,
-                  ("displayName" .=) <$> _caDisplayName,
-                  ("id" .=) <$> _caId])
-
--- | Data about the blog containing this comment.
---
--- /See:/ 'commentBlog' smart constructor.
-newtype CommentBlog = CommentBlog
-    { _cbId :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'CommentBlog' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'cbId'
-commentBlog
-    :: CommentBlog
-commentBlog =
-    CommentBlog
-    { _cbId = Nothing
-    }
-
--- | The identifier of the blog containing this comment.
-cbId :: Lens' CommentBlog (Maybe Text)
-cbId = lens _cbId (\ s a -> s{_cbId = a})
-
-instance FromJSON CommentBlog where
-        parseJSON
-          = withObject "CommentBlog"
-              (\ o -> CommentBlog <$> (o .:? "id"))
-
-instance ToJSON CommentBlog where
-        toJSON CommentBlog{..}
-          = object (catMaybes [("id" .=) <$> _cbId])
-
--- | The comment creator\'s avatar.
---
--- /See:/ 'commentImageAuthor' smart constructor.
-newtype CommentImageAuthor = CommentImageAuthor
-    { _ciaUrl :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'CommentImageAuthor' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ciaUrl'
-commentImageAuthor
-    :: CommentImageAuthor
-commentImageAuthor =
-    CommentImageAuthor
-    { _ciaUrl = Nothing
-    }
-
--- | The comment creator\'s avatar URL.
-ciaUrl :: Lens' CommentImageAuthor (Maybe Text)
-ciaUrl = lens _ciaUrl (\ s a -> s{_ciaUrl = a})
-
-instance FromJSON CommentImageAuthor where
-        parseJSON
-          = withObject "CommentImageAuthor"
-              (\ o -> CommentImageAuthor <$> (o .:? "url"))
-
-instance ToJSON CommentImageAuthor where
-        toJSON CommentImageAuthor{..}
-          = object (catMaybes [("url" .=) <$> _ciaUrl])
-
--- | Data about the comment this is in reply to.
---
--- /See:/ 'commentInReplyTo' smart constructor.
-newtype CommentInReplyTo = CommentInReplyTo
-    { _cirtId :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'CommentInReplyTo' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'cirtId'
-commentInReplyTo
-    :: CommentInReplyTo
-commentInReplyTo =
-    CommentInReplyTo
-    { _cirtId = Nothing
-    }
-
--- | The identified of the parent of this comment.
-cirtId :: Lens' CommentInReplyTo (Maybe Text)
-cirtId = lens _cirtId (\ s a -> s{_cirtId = a})
-
-instance FromJSON CommentInReplyTo where
-        parseJSON
-          = withObject "CommentInReplyTo"
-              (\ o -> CommentInReplyTo <$> (o .:? "id"))
-
-instance ToJSON CommentInReplyTo where
-        toJSON CommentInReplyTo{..}
-          = object (catMaybes [("id" .=) <$> _cirtId])
 
 --
 -- /See:/ 'commentList' smart constructor.
@@ -923,283 +1120,153 @@ instance ToJSON CommentList where
                   Just ("kind" .= _clKind), ("items" .=) <$> _clItems,
                   ("prevPageToken" .=) <$> _clPrevPageToken])
 
--- | Data about the post containing this comment.
 --
--- /See:/ 'commentPost' smart constructor.
-newtype CommentPost = CommentPost
-    { _cpId :: Maybe Text
+-- /See:/ 'postUserInfo' smart constructor.
+data PostUserInfo = PostUserInfo
+    { _puiPostUserInfo :: !(Maybe (Maybe PostPerUserInfo))
+    , _puiPost         :: !(Maybe (Maybe Post))
+    , _puiKind         :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CommentPost' with the minimum fields required to make a request.
+-- | Creates a value of 'PostUserInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cpId'
-commentPost
-    :: CommentPost
-commentPost =
-    CommentPost
-    { _cpId = Nothing
+-- * 'puiPostUserInfo'
+--
+-- * 'puiPost'
+--
+-- * 'puiKind'
+postUserInfo
+    :: PostUserInfo
+postUserInfo =
+    PostUserInfo
+    { _puiPostUserInfo = Nothing
+    , _puiPost = Nothing
+    , _puiKind = "blogger#postUserInfo"
     }
 
--- | The identifier of the post containing this comment.
-cpId :: Lens' CommentPost (Maybe Text)
-cpId = lens _cpId (\ s a -> s{_cpId = a})
+-- | Information about a User for the Post.
+puiPostUserInfo :: Lens' PostUserInfo (Maybe (Maybe PostPerUserInfo))
+puiPostUserInfo
+  = lens _puiPostUserInfo
+      (\ s a -> s{_puiPostUserInfo = a})
 
-instance FromJSON CommentPost where
+-- | The Post resource.
+puiPost :: Lens' PostUserInfo (Maybe (Maybe Post))
+puiPost = lens _puiPost (\ s a -> s{_puiPost = a})
+
+-- | The kind of this entity. Always blogger#postUserInfo
+puiKind :: Lens' PostUserInfo Text
+puiKind = lens _puiKind (\ s a -> s{_puiKind = a})
+
+instance FromJSON PostUserInfo where
         parseJSON
-          = withObject "CommentPost"
-              (\ o -> CommentPost <$> (o .:? "id"))
-
-instance ToJSON CommentPost where
-        toJSON CommentPost{..}
-          = object (catMaybes [("id" .=) <$> _cpId])
-
---
--- /See:/ 'page' smart constructor.
-data Page = Page
-    { _pagStatus    :: !(Maybe Text)
-    , _pagEtag      :: !(Maybe Text)
-    , _pagKind      :: !Text
-    , _pagPublished :: !(Maybe UTCTime)
-    , _pagUrl       :: !(Maybe Text)
-    , _pagBlog      :: !(Maybe PageBlog)
-    , _pagContent   :: !(Maybe Text)
-    , _pagSelfLink  :: !(Maybe Text)
-    , _pagAuthor    :: !(Maybe PageAuthor)
-    , _pagId        :: !(Maybe Text)
-    , _pagUpdated   :: !(Maybe UTCTime)
-    , _pagTitle     :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Page' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'pagStatus'
---
--- * 'pagEtag'
---
--- * 'pagKind'
---
--- * 'pagPublished'
---
--- * 'pagUrl'
---
--- * 'pagBlog'
---
--- * 'pagContent'
---
--- * 'pagSelfLink'
---
--- * 'pagAuthor'
---
--- * 'pagId'
---
--- * 'pagUpdated'
---
--- * 'pagTitle'
-page
-    :: Page
-page =
-    Page
-    { _pagStatus = Nothing
-    , _pagEtag = Nothing
-    , _pagKind = "blogger#page"
-    , _pagPublished = Nothing
-    , _pagUrl = Nothing
-    , _pagBlog = Nothing
-    , _pagContent = Nothing
-    , _pagSelfLink = Nothing
-    , _pagAuthor = Nothing
-    , _pagId = Nothing
-    , _pagUpdated = Nothing
-    , _pagTitle = Nothing
-    }
-
--- | The status of the page for admin resources (either LIVE or DRAFT).
-pagStatus :: Lens' Page (Maybe Text)
-pagStatus
-  = lens _pagStatus (\ s a -> s{_pagStatus = a})
-
--- | Etag of the resource.
-pagEtag :: Lens' Page (Maybe Text)
-pagEtag = lens _pagEtag (\ s a -> s{_pagEtag = a})
-
--- | The kind of this entity. Always blogger#page
-pagKind :: Lens' Page Text
-pagKind = lens _pagKind (\ s a -> s{_pagKind = a})
-
--- | RFC 3339 date-time when this Page was published.
-pagPublished :: Lens' Page (Maybe UTCTime)
-pagPublished
-  = lens _pagPublished (\ s a -> s{_pagPublished = a})
-
--- | The URL that this Page is displayed at.
-pagUrl :: Lens' Page (Maybe Text)
-pagUrl = lens _pagUrl (\ s a -> s{_pagUrl = a})
-
--- | Data about the blog containing this Page.
-pagBlog :: Lens' Page (Maybe PageBlog)
-pagBlog = lens _pagBlog (\ s a -> s{_pagBlog = a})
-
--- | The body content of this Page, in HTML.
-pagContent :: Lens' Page (Maybe Text)
-pagContent
-  = lens _pagContent (\ s a -> s{_pagContent = a})
-
--- | The API REST URL to fetch this resource from.
-pagSelfLink :: Lens' Page (Maybe Text)
-pagSelfLink
-  = lens _pagSelfLink (\ s a -> s{_pagSelfLink = a})
-
--- | The author of this Page.
-pagAuthor :: Lens' Page (Maybe PageAuthor)
-pagAuthor
-  = lens _pagAuthor (\ s a -> s{_pagAuthor = a})
-
--- | The identifier for this resource.
-pagId :: Lens' Page (Maybe Text)
-pagId = lens _pagId (\ s a -> s{_pagId = a})
-
--- | RFC 3339 date-time when this Page was last updated.
-pagUpdated :: Lens' Page (Maybe UTCTime)
-pagUpdated
-  = lens _pagUpdated (\ s a -> s{_pagUpdated = a})
-
--- | The title of this entity. This is the name displayed in the Admin user
--- interface.
-pagTitle :: Lens' Page (Maybe Text)
-pagTitle = lens _pagTitle (\ s a -> s{_pagTitle = a})
-
-instance FromJSON Page where
-        parseJSON
-          = withObject "Page"
+          = withObject "PostUserInfo"
               (\ o ->
-                 Page <$>
-                   (o .:? "status") <*> (o .:? "etag") <*>
-                     (o .:? "kind" .!= "blogger#page")
-                     <*> (o .:? "published")
-                     <*> (o .:? "url")
-                     <*> (o .:? "blog")
-                     <*> (o .:? "content")
-                     <*> (o .:? "selfLink")
-                     <*> (o .:? "author")
-                     <*> (o .:? "id")
-                     <*> (o .:? "updated")
-                     <*> (o .:? "title"))
+                 PostUserInfo <$>
+                   (o .:? "post_user_info") <*> (o .:? "post") <*>
+                     (o .:? "kind" .!= "blogger#postUserInfo"))
 
-instance ToJSON Page where
-        toJSON Page{..}
+instance ToJSON PostUserInfo where
+        toJSON PostUserInfo{..}
           = object
               (catMaybes
-                 [("status" .=) <$> _pagStatus,
-                  ("etag" .=) <$> _pagEtag, Just ("kind" .= _pagKind),
-                  ("published" .=) <$> _pagPublished,
-                  ("url" .=) <$> _pagUrl, ("blog" .=) <$> _pagBlog,
-                  ("content" .=) <$> _pagContent,
-                  ("selfLink" .=) <$> _pagSelfLink,
-                  ("author" .=) <$> _pagAuthor, ("id" .=) <$> _pagId,
-                  ("updated" .=) <$> _pagUpdated,
-                  ("title" .=) <$> _pagTitle])
+                 [("post_user_info" .=) <$> _puiPostUserInfo,
+                  ("post" .=) <$> _puiPost, Just ("kind" .= _puiKind)])
 
--- | The author of this Page.
+-- | The container of comments on this Post.
 --
--- /See:/ 'pageAuthor' smart constructor.
-data PageAuthor = PageAuthor
-    { _paImage       :: !(Maybe PageImageAuthor)
-    , _paUrl         :: !(Maybe Text)
-    , _paDisplayName :: !(Maybe Text)
-    , _paId          :: !(Maybe Text)
+-- /See:/ 'postReplies' smart constructor.
+data PostReplies = PostReplies
+    { _prTotalItems :: !(Maybe Int64)
+    , _prItems      :: !(Maybe [Maybe Comment])
+    , _prSelfLink   :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PageAuthor' with the minimum fields required to make a request.
+-- | Creates a value of 'PostReplies' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'paImage'
+-- * 'prTotalItems'
 --
--- * 'paUrl'
+-- * 'prItems'
 --
--- * 'paDisplayName'
---
--- * 'paId'
-pageAuthor
-    :: PageAuthor
-pageAuthor =
-    PageAuthor
-    { _paImage = Nothing
-    , _paUrl = Nothing
-    , _paDisplayName = Nothing
-    , _paId = Nothing
+-- * 'prSelfLink'
+postReplies
+    :: PostReplies
+postReplies =
+    PostReplies
+    { _prTotalItems = Nothing
+    , _prItems = Nothing
+    , _prSelfLink = Nothing
     }
 
--- | The page author\'s avatar.
-paImage :: Lens' PageAuthor (Maybe PageImageAuthor)
-paImage = lens _paImage (\ s a -> s{_paImage = a})
+-- | The count of comments on this post.
+prTotalItems :: Lens' PostReplies (Maybe Int64)
+prTotalItems
+  = lens _prTotalItems (\ s a -> s{_prTotalItems = a})
 
--- | The URL of the Page creator\'s Profile page.
-paUrl :: Lens' PageAuthor (Maybe Text)
-paUrl = lens _paUrl (\ s a -> s{_paUrl = a})
+-- | The List of Comments for this Post.
+prItems :: Lens' PostReplies [Maybe Comment]
+prItems
+  = lens _prItems (\ s a -> s{_prItems = a}) . _Default
+      . _Coerce
 
--- | The display name.
-paDisplayName :: Lens' PageAuthor (Maybe Text)
-paDisplayName
-  = lens _paDisplayName
-      (\ s a -> s{_paDisplayName = a})
+-- | The URL of the comments on this post.
+prSelfLink :: Lens' PostReplies (Maybe Text)
+prSelfLink
+  = lens _prSelfLink (\ s a -> s{_prSelfLink = a})
 
--- | The identifier of the Page creator.
-paId :: Lens' PageAuthor (Maybe Text)
-paId = lens _paId (\ s a -> s{_paId = a})
-
-instance FromJSON PageAuthor where
+instance FromJSON PostReplies where
         parseJSON
-          = withObject "PageAuthor"
+          = withObject "PostReplies"
               (\ o ->
-                 PageAuthor <$>
-                   (o .:? "image") <*> (o .:? "url") <*>
-                     (o .:? "displayName")
-                     <*> (o .:? "id"))
+                 PostReplies <$>
+                   (o .:? "totalItems") <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink"))
 
-instance ToJSON PageAuthor where
-        toJSON PageAuthor{..}
+instance ToJSON PostReplies where
+        toJSON PostReplies{..}
           = object
               (catMaybes
-                 [("image" .=) <$> _paImage, ("url" .=) <$> _paUrl,
-                  ("displayName" .=) <$> _paDisplayName,
-                  ("id" .=) <$> _paId])
+                 [("totalItems" .=) <$> _prTotalItems,
+                  ("items" .=) <$> _prItems,
+                  ("selfLink" .=) <$> _prSelfLink])
 
--- | Data about the blog containing this Page.
+-- | The container of blogs for this user.
 --
--- /See:/ 'pageBlog' smart constructor.
-newtype PageBlog = PageBlog
-    { _pId :: Maybe Text
+-- /See:/ 'userBlogs' smart constructor.
+newtype UserBlogs = UserBlogs
+    { _ubSelfLink :: Maybe Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PageBlog' with the minimum fields required to make a request.
+-- | Creates a value of 'UserBlogs' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pId'
-pageBlog
-    :: PageBlog
-pageBlog =
-    PageBlog
-    { _pId = Nothing
+-- * 'ubSelfLink'
+userBlogs
+    :: UserBlogs
+userBlogs =
+    UserBlogs
+    { _ubSelfLink = Nothing
     }
 
--- | The identifier of the blog containing this page.
-pId :: Lens' PageBlog (Maybe Text)
-pId = lens _pId (\ s a -> s{_pId = a})
+-- | The URL of the Blogs for this user.
+ubSelfLink :: Lens' UserBlogs (Maybe Text)
+ubSelfLink
+  = lens _ubSelfLink (\ s a -> s{_ubSelfLink = a})
 
-instance FromJSON PageBlog where
+instance FromJSON UserBlogs where
         parseJSON
-          = withObject "PageBlog"
-              (\ o -> PageBlog <$> (o .:? "id"))
+          = withObject "UserBlogs"
+              (\ o -> UserBlogs <$> (o .:? "selfLink"))
 
-instance ToJSON PageBlog where
-        toJSON PageBlog{..}
-          = object (catMaybes [("id" .=) <$> _pId])
+instance ToJSON UserBlogs where
+        toJSON UserBlogs{..}
+          = object
+              (catMaybes [("selfLink" .=) <$> _ubSelfLink])
 
 -- | The page author\'s avatar.
 --
@@ -1233,114 +1300,109 @@ instance ToJSON PageImageAuthor where
         toJSON PageImageAuthor{..}
           = object (catMaybes [("url" .=) <$> _piaUrl])
 
+-- | The comment creator\'s avatar.
 --
--- /See:/ 'pageList' smart constructor.
-data PageList = PageList
-    { _pllEtag          :: !(Maybe Text)
-    , _pllNextPageToken :: !(Maybe Text)
-    , _pllKind          :: !Text
-    , _pllItems         :: !(Maybe [Maybe Page])
+-- /See:/ 'commentImageAuthor' smart constructor.
+newtype CommentImageAuthor = CommentImageAuthor
+    { _ciaUrl :: Maybe Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PageList' with the minimum fields required to make a request.
+-- | Creates a value of 'CommentImageAuthor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pllEtag'
---
--- * 'pllNextPageToken'
---
--- * 'pllKind'
---
--- * 'pllItems'
-pageList
-    :: PageList
-pageList =
-    PageList
-    { _pllEtag = Nothing
-    , _pllNextPageToken = Nothing
-    , _pllKind = "blogger#pageList"
-    , _pllItems = Nothing
+-- * 'ciaUrl'
+commentImageAuthor
+    :: CommentImageAuthor
+commentImageAuthor =
+    CommentImageAuthor
+    { _ciaUrl = Nothing
     }
 
--- | Etag of the response.
-pllEtag :: Lens' PageList (Maybe Text)
-pllEtag = lens _pllEtag (\ s a -> s{_pllEtag = a})
+-- | The comment creator\'s avatar URL.
+ciaUrl :: Lens' CommentImageAuthor (Maybe Text)
+ciaUrl = lens _ciaUrl (\ s a -> s{_ciaUrl = a})
 
--- | Pagination token to fetch the next page, if one exists.
-pllNextPageToken :: Lens' PageList (Maybe Text)
-pllNextPageToken
-  = lens _pllNextPageToken
-      (\ s a -> s{_pllNextPageToken = a})
-
--- | The kind of this entity. Always blogger#pageList
-pllKind :: Lens' PageList Text
-pllKind = lens _pllKind (\ s a -> s{_pllKind = a})
-
--- | The list of Pages for a Blog.
-pllItems :: Lens' PageList [Maybe Page]
-pllItems
-  = lens _pllItems (\ s a -> s{_pllItems = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON PageList where
+instance FromJSON CommentImageAuthor where
         parseJSON
-          = withObject "PageList"
-              (\ o ->
-                 PageList <$>
-                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!= "blogger#pageList")
-                     <*> (o .:? "items" .!= mempty))
+          = withObject "CommentImageAuthor"
+              (\ o -> CommentImageAuthor <$> (o .:? "url"))
 
-instance ToJSON PageList where
-        toJSON PageList{..}
-          = object
-              (catMaybes
-                 [("etag" .=) <$> _pllEtag,
-                  ("nextPageToken" .=) <$> _pllNextPageToken,
-                  Just ("kind" .= _pllKind),
-                  ("items" .=) <$> _pllItems])
+instance ToJSON CommentImageAuthor where
+        toJSON CommentImageAuthor{..}
+          = object (catMaybes [("url" .=) <$> _ciaUrl])
+
+--
+-- /See:/ 'postItemImages' smart constructor.
+newtype PostItemImages = PostItemImages
+    { _piiUrl :: Maybe Text
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PostItemImages' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'piiUrl'
+postItemImages
+    :: PostItemImages
+postItemImages =
+    PostItemImages
+    { _piiUrl = Nothing
+    }
+
+piiUrl :: Lens' PostItemImages (Maybe Text)
+piiUrl = lens _piiUrl (\ s a -> s{_piiUrl = a})
+
+instance FromJSON PostItemImages where
+        parseJSON
+          = withObject "PostItemImages"
+              (\ o -> PostItemImages <$> (o .:? "url"))
+
+instance ToJSON PostItemImages where
+        toJSON PostItemImages{..}
+          = object (catMaybes [("url" .=) <$> _piiUrl])
 
 --
 -- /See:/ 'pageviews' smart constructor.
 data Pageviews = Pageviews
-    { _pKind   :: !Text
-    , _pCounts :: !(Maybe [PageviewsItemCounts])
-    , _pBlogId :: !(Maybe Text)
+    { _pagaKind   :: !Text
+    , _pagaCounts :: !(Maybe [PageviewsItemCounts])
+    , _pagaBlogId :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Pageviews' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pKind'
+-- * 'pagaKind'
 --
--- * 'pCounts'
+-- * 'pagaCounts'
 --
--- * 'pBlogId'
+-- * 'pagaBlogId'
 pageviews
     :: Pageviews
 pageviews =
     Pageviews
-    { _pKind = "blogger#page_views"
-    , _pCounts = Nothing
-    , _pBlogId = Nothing
+    { _pagaKind = "blogger#page_views"
+    , _pagaCounts = Nothing
+    , _pagaBlogId = Nothing
     }
 
 -- | The kind of this entry. Always blogger#page_views
-pKind :: Lens' Pageviews Text
-pKind = lens _pKind (\ s a -> s{_pKind = a})
+pagaKind :: Lens' Pageviews Text
+pagaKind = lens _pagaKind (\ s a -> s{_pagaKind = a})
 
 -- | The container of posts in this blog.
-pCounts :: Lens' Pageviews [PageviewsItemCounts]
-pCounts
-  = lens _pCounts (\ s a -> s{_pCounts = a}) . _Default
+pagaCounts :: Lens' Pageviews [PageviewsItemCounts]
+pagaCounts
+  = lens _pagaCounts (\ s a -> s{_pagaCounts = a}) .
+      _Default
       . _Coerce
 
 -- | Blog Id
-pBlogId :: Lens' Pageviews (Maybe Text)
-pBlogId = lens _pBlogId (\ s a -> s{_pBlogId = a})
+pagaBlogId :: Lens' Pageviews (Maybe Text)
+pagaBlogId
+  = lens _pagaBlogId (\ s a -> s{_pagaBlogId = a})
 
 instance FromJSON Pageviews where
         parseJSON
@@ -1355,53 +1417,89 @@ instance ToJSON Pageviews where
         toJSON Pageviews{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _pKind), ("counts" .=) <$> _pCounts,
-                  ("blogId" .=) <$> _pBlogId])
+                 [Just ("kind" .= _pagaKind),
+                  ("counts" .=) <$> _pagaCounts,
+                  ("blogId" .=) <$> _pagaBlogId])
 
+-- | The container of pages in this blog.
 --
--- /See:/ 'pageviewsItemCounts' smart constructor.
-data PageviewsItemCounts = PageviewsItemCounts
-    { _picTimeRange :: !(Maybe Text)
-    , _picCount     :: !(Maybe Int64)
+-- /See:/ 'blogPages' smart constructor.
+data BlogPages = BlogPages
+    { _bpsTotalItems :: !(Maybe Int32)
+    , _bpsSelfLink   :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PageviewsItemCounts' with the minimum fields required to make a request.
+-- | Creates a value of 'BlogPages' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'picTimeRange'
+-- * 'bpsTotalItems'
 --
--- * 'picCount'
-pageviewsItemCounts
-    :: PageviewsItemCounts
-pageviewsItemCounts =
-    PageviewsItemCounts
-    { _picTimeRange = Nothing
-    , _picCount = Nothing
+-- * 'bpsSelfLink'
+blogPages
+    :: BlogPages
+blogPages =
+    BlogPages
+    { _bpsTotalItems = Nothing
+    , _bpsSelfLink = Nothing
     }
 
--- | Time range the given count applies to
-picTimeRange :: Lens' PageviewsItemCounts (Maybe Text)
-picTimeRange
-  = lens _picTimeRange (\ s a -> s{_picTimeRange = a})
+-- | The count of pages in this blog.
+bpsTotalItems :: Lens' BlogPages (Maybe Int32)
+bpsTotalItems
+  = lens _bpsTotalItems
+      (\ s a -> s{_bpsTotalItems = a})
 
--- | Count of page views for the given time range
-picCount :: Lens' PageviewsItemCounts (Maybe Int64)
-picCount = lens _picCount (\ s a -> s{_picCount = a})
+-- | The URL of the container for pages in this blog.
+bpsSelfLink :: Lens' BlogPages (Maybe Text)
+bpsSelfLink
+  = lens _bpsSelfLink (\ s a -> s{_bpsSelfLink = a})
 
-instance FromJSON PageviewsItemCounts where
+instance FromJSON BlogPages where
         parseJSON
-          = withObject "PageviewsItemCounts"
+          = withObject "BlogPages"
               (\ o ->
-                 PageviewsItemCounts <$>
-                   (o .:? "timeRange") <*> (o .:? "count"))
+                 BlogPages <$>
+                   (o .:? "totalItems") <*> (o .:? "selfLink"))
 
-instance ToJSON PageviewsItemCounts where
-        toJSON PageviewsItemCounts{..}
+instance ToJSON BlogPages where
+        toJSON BlogPages{..}
           = object
               (catMaybes
-                 [("timeRange" .=) <$> _picTimeRange,
-                  ("count" .=) <$> _picCount])
+                 [("totalItems" .=) <$> _bpsTotalItems,
+                  ("selfLink" .=) <$> _bpsSelfLink])
+
+-- | Data about the post containing this comment.
+--
+-- /See:/ 'commentPost' smart constructor.
+newtype CommentPost = CommentPost
+    { _cpId :: Maybe Text
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CommentPost' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cpId'
+commentPost
+    :: CommentPost
+commentPost =
+    CommentPost
+    { _cpId = Nothing
+    }
+
+-- | The identifier of the post containing this comment.
+cpId :: Lens' CommentPost (Maybe Text)
+cpId = lens _cpId (\ s a -> s{_cpId = a})
+
+instance FromJSON CommentPost where
+        parseJSON
+          = withObject "CommentPost"
+              (\ o -> CommentPost <$> (o .:? "id"))
+
+instance ToJSON CommentPost where
+        toJSON CommentPost{..}
+          = object (catMaybes [("id" .=) <$> _cpId])
 
 --
 -- /See:/ 'post' smart constructor.
@@ -1631,232 +1729,198 @@ instance ToJSON Post where
                   ("titleLink" .=) <$> _ppTitleLink,
                   ("title" .=) <$> _ppTitle])
 
--- | The author of this Post.
 --
--- /See:/ 'postAuthor' smart constructor.
-data PostAuthor = PostAuthor
-    { _posImage       :: !(Maybe PostImageAuthor)
-    , _posUrl         :: !(Maybe Text)
-    , _posDisplayName :: !(Maybe Text)
-    , _posId          :: !(Maybe Text)
+-- /See:/ 'page' smart constructor.
+data Page = Page
+    { _pagStatus    :: !(Maybe Text)
+    , _pagEtag      :: !(Maybe Text)
+    , _pagKind      :: !Text
+    , _pagPublished :: !(Maybe UTCTime)
+    , _pagUrl       :: !(Maybe Text)
+    , _pagBlog      :: !(Maybe PageBlog)
+    , _pagContent   :: !(Maybe Text)
+    , _pagSelfLink  :: !(Maybe Text)
+    , _pagAuthor    :: !(Maybe PageAuthor)
+    , _pagId        :: !(Maybe Text)
+    , _pagUpdated   :: !(Maybe UTCTime)
+    , _pagTitle     :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PostAuthor' with the minimum fields required to make a request.
+-- | Creates a value of 'Page' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'posImage'
+-- * 'pagStatus'
 --
--- * 'posUrl'
+-- * 'pagEtag'
 --
--- * 'posDisplayName'
+-- * 'pagKind'
 --
--- * 'posId'
-postAuthor
-    :: PostAuthor
-postAuthor =
-    PostAuthor
-    { _posImage = Nothing
-    , _posUrl = Nothing
-    , _posDisplayName = Nothing
-    , _posId = Nothing
+-- * 'pagPublished'
+--
+-- * 'pagUrl'
+--
+-- * 'pagBlog'
+--
+-- * 'pagContent'
+--
+-- * 'pagSelfLink'
+--
+-- * 'pagAuthor'
+--
+-- * 'pagId'
+--
+-- * 'pagUpdated'
+--
+-- * 'pagTitle'
+page
+    :: Page
+page =
+    Page
+    { _pagStatus = Nothing
+    , _pagEtag = Nothing
+    , _pagKind = "blogger#page"
+    , _pagPublished = Nothing
+    , _pagUrl = Nothing
+    , _pagBlog = Nothing
+    , _pagContent = Nothing
+    , _pagSelfLink = Nothing
+    , _pagAuthor = Nothing
+    , _pagId = Nothing
+    , _pagUpdated = Nothing
+    , _pagTitle = Nothing
     }
 
--- | The Post author\'s avatar.
-posImage :: Lens' PostAuthor (Maybe PostImageAuthor)
-posImage = lens _posImage (\ s a -> s{_posImage = a})
+-- | The status of the page for admin resources (either LIVE or DRAFT).
+pagStatus :: Lens' Page (Maybe Text)
+pagStatus
+  = lens _pagStatus (\ s a -> s{_pagStatus = a})
 
--- | The URL of the Post creator\'s Profile page.
-posUrl :: Lens' PostAuthor (Maybe Text)
-posUrl = lens _posUrl (\ s a -> s{_posUrl = a})
+-- | Etag of the resource.
+pagEtag :: Lens' Page (Maybe Text)
+pagEtag = lens _pagEtag (\ s a -> s{_pagEtag = a})
 
--- | The display name.
-posDisplayName :: Lens' PostAuthor (Maybe Text)
-posDisplayName
-  = lens _posDisplayName
-      (\ s a -> s{_posDisplayName = a})
+-- | The kind of this entity. Always blogger#page
+pagKind :: Lens' Page Text
+pagKind = lens _pagKind (\ s a -> s{_pagKind = a})
 
--- | The identifier of the Post creator.
-posId :: Lens' PostAuthor (Maybe Text)
-posId = lens _posId (\ s a -> s{_posId = a})
+-- | RFC 3339 date-time when this Page was published.
+pagPublished :: Lens' Page (Maybe UTCTime)
+pagPublished
+  = lens _pagPublished (\ s a -> s{_pagPublished = a})
 
-instance FromJSON PostAuthor where
+-- | The URL that this Page is displayed at.
+pagUrl :: Lens' Page (Maybe Text)
+pagUrl = lens _pagUrl (\ s a -> s{_pagUrl = a})
+
+-- | Data about the blog containing this Page.
+pagBlog :: Lens' Page (Maybe PageBlog)
+pagBlog = lens _pagBlog (\ s a -> s{_pagBlog = a})
+
+-- | The body content of this Page, in HTML.
+pagContent :: Lens' Page (Maybe Text)
+pagContent
+  = lens _pagContent (\ s a -> s{_pagContent = a})
+
+-- | The API REST URL to fetch this resource from.
+pagSelfLink :: Lens' Page (Maybe Text)
+pagSelfLink
+  = lens _pagSelfLink (\ s a -> s{_pagSelfLink = a})
+
+-- | The author of this Page.
+pagAuthor :: Lens' Page (Maybe PageAuthor)
+pagAuthor
+  = lens _pagAuthor (\ s a -> s{_pagAuthor = a})
+
+-- | The identifier for this resource.
+pagId :: Lens' Page (Maybe Text)
+pagId = lens _pagId (\ s a -> s{_pagId = a})
+
+-- | RFC 3339 date-time when this Page was last updated.
+pagUpdated :: Lens' Page (Maybe UTCTime)
+pagUpdated
+  = lens _pagUpdated (\ s a -> s{_pagUpdated = a})
+
+-- | The title of this entity. This is the name displayed in the Admin user
+-- interface.
+pagTitle :: Lens' Page (Maybe Text)
+pagTitle = lens _pagTitle (\ s a -> s{_pagTitle = a})
+
+instance FromJSON Page where
         parseJSON
-          = withObject "PostAuthor"
+          = withObject "Page"
               (\ o ->
-                 PostAuthor <$>
-                   (o .:? "image") <*> (o .:? "url") <*>
-                     (o .:? "displayName")
-                     <*> (o .:? "id"))
+                 Page <$>
+                   (o .:? "status") <*> (o .:? "etag") <*>
+                     (o .:? "kind" .!= "blogger#page")
+                     <*> (o .:? "published")
+                     <*> (o .:? "url")
+                     <*> (o .:? "blog")
+                     <*> (o .:? "content")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "author")
+                     <*> (o .:? "id")
+                     <*> (o .:? "updated")
+                     <*> (o .:? "title"))
 
-instance ToJSON PostAuthor where
-        toJSON PostAuthor{..}
+instance ToJSON Page where
+        toJSON Page{..}
           = object
               (catMaybes
-                 [("image" .=) <$> _posImage, ("url" .=) <$> _posUrl,
-                  ("displayName" .=) <$> _posDisplayName,
-                  ("id" .=) <$> _posId])
+                 [("status" .=) <$> _pagStatus,
+                  ("etag" .=) <$> _pagEtag, Just ("kind" .= _pagKind),
+                  ("published" .=) <$> _pagPublished,
+                  ("url" .=) <$> _pagUrl, ("blog" .=) <$> _pagBlog,
+                  ("content" .=) <$> _pagContent,
+                  ("selfLink" .=) <$> _pagSelfLink,
+                  ("author" .=) <$> _pagAuthor, ("id" .=) <$> _pagId,
+                  ("updated" .=) <$> _pagUpdated,
+                  ("title" .=) <$> _pagTitle])
 
--- | Data about the blog containing this Post.
 --
--- /See:/ 'postBlog' smart constructor.
-newtype PostBlog = PostBlog
-    { _pbId :: Maybe Text
+-- /See:/ 'pageviewsItemCounts' smart constructor.
+data PageviewsItemCounts = PageviewsItemCounts
+    { _picTimeRange :: !(Maybe Text)
+    , _picCount     :: !(Maybe Int64)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PostBlog' with the minimum fields required to make a request.
+-- | Creates a value of 'PageviewsItemCounts' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pbId'
-postBlog
-    :: PostBlog
-postBlog =
-    PostBlog
-    { _pbId = Nothing
+-- * 'picTimeRange'
+--
+-- * 'picCount'
+pageviewsItemCounts
+    :: PageviewsItemCounts
+pageviewsItemCounts =
+    PageviewsItemCounts
+    { _picTimeRange = Nothing
+    , _picCount = Nothing
     }
 
--- | The identifier of the Blog that contains this Post.
-pbId :: Lens' PostBlog (Maybe Text)
-pbId = lens _pbId (\ s a -> s{_pbId = a})
+-- | Time range the given count applies to
+picTimeRange :: Lens' PageviewsItemCounts (Maybe Text)
+picTimeRange
+  = lens _picTimeRange (\ s a -> s{_picTimeRange = a})
 
-instance FromJSON PostBlog where
+-- | Count of page views for the given time range
+picCount :: Lens' PageviewsItemCounts (Maybe Int64)
+picCount = lens _picCount (\ s a -> s{_picCount = a})
+
+instance FromJSON PageviewsItemCounts where
         parseJSON
-          = withObject "PostBlog"
-              (\ o -> PostBlog <$> (o .:? "id"))
-
-instance ToJSON PostBlog where
-        toJSON PostBlog{..}
-          = object (catMaybes [("id" .=) <$> _pbId])
-
--- | The Post author\'s avatar.
---
--- /See:/ 'postImageAuthor' smart constructor.
-newtype PostImageAuthor = PostImageAuthor
-    { _pUrl :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PostImageAuthor' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'pUrl'
-postImageAuthor
-    :: PostImageAuthor
-postImageAuthor =
-    PostImageAuthor
-    { _pUrl = Nothing
-    }
-
--- | The Post author\'s avatar URL.
-pUrl :: Lens' PostImageAuthor (Maybe Text)
-pUrl = lens _pUrl (\ s a -> s{_pUrl = a})
-
-instance FromJSON PostImageAuthor where
-        parseJSON
-          = withObject "PostImageAuthor"
-              (\ o -> PostImageAuthor <$> (o .:? "url"))
-
-instance ToJSON PostImageAuthor where
-        toJSON PostImageAuthor{..}
-          = object (catMaybes [("url" .=) <$> _pUrl])
-
---
--- /See:/ 'postItemImages' smart constructor.
-newtype PostItemImages = PostItemImages
-    { _piiUrl :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PostItemImages' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'piiUrl'
-postItemImages
-    :: PostItemImages
-postItemImages =
-    PostItemImages
-    { _piiUrl = Nothing
-    }
-
-piiUrl :: Lens' PostItemImages (Maybe Text)
-piiUrl = lens _piiUrl (\ s a -> s{_piiUrl = a})
-
-instance FromJSON PostItemImages where
-        parseJSON
-          = withObject "PostItemImages"
-              (\ o -> PostItemImages <$> (o .:? "url"))
-
-instance ToJSON PostItemImages where
-        toJSON PostItemImages{..}
-          = object (catMaybes [("url" .=) <$> _piiUrl])
-
---
--- /See:/ 'postList' smart constructor.
-data PostList = PostList
-    { _plEtag          :: !(Maybe Text)
-    , _plNextPageToken :: !(Maybe Text)
-    , _plKind          :: !Text
-    , _plItems         :: !(Maybe [Maybe Post])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PostList' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'plEtag'
---
--- * 'plNextPageToken'
---
--- * 'plKind'
---
--- * 'plItems'
-postList
-    :: PostList
-postList =
-    PostList
-    { _plEtag = Nothing
-    , _plNextPageToken = Nothing
-    , _plKind = "blogger#postList"
-    , _plItems = Nothing
-    }
-
--- | Etag of the response.
-plEtag :: Lens' PostList (Maybe Text)
-plEtag = lens _plEtag (\ s a -> s{_plEtag = a})
-
--- | Pagination token to fetch the next page, if one exists.
-plNextPageToken :: Lens' PostList (Maybe Text)
-plNextPageToken
-  = lens _plNextPageToken
-      (\ s a -> s{_plNextPageToken = a})
-
--- | The kind of this entity. Always blogger#postList
-plKind :: Lens' PostList Text
-plKind = lens _plKind (\ s a -> s{_plKind = a})
-
--- | The list of Posts for this Blog.
-plItems :: Lens' PostList [Maybe Post]
-plItems
-  = lens _plItems (\ s a -> s{_plItems = a}) . _Default
-      . _Coerce
-
-instance FromJSON PostList where
-        parseJSON
-          = withObject "PostList"
+          = withObject "PageviewsItemCounts"
               (\ o ->
-                 PostList <$>
-                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!= "blogger#postList")
-                     <*> (o .:? "items" .!= mempty))
+                 PageviewsItemCounts <$>
+                   (o .:? "timeRange") <*> (o .:? "count"))
 
-instance ToJSON PostList where
-        toJSON PostList{..}
+instance ToJSON PageviewsItemCounts where
+        toJSON PageviewsItemCounts{..}
           = object
               (catMaybes
-                 [("etag" .=) <$> _plEtag,
-                  ("nextPageToken" .=) <$> _plNextPageToken,
-                  Just ("kind" .= _plKind), ("items" .=) <$> _plItems])
+                 [("timeRange" .=) <$> _picTimeRange,
+                  ("count" .=) <$> _picCount])
 
 -- | The location for geotagged posts.
 --
@@ -1920,199 +1984,129 @@ instance ToJSON PostLocation where
                  [("span" .=) <$> _plSpan, ("lat" .=) <$> _plLat,
                   ("name" .=) <$> _plName, ("lng" .=) <$> _plLng])
 
+-- | Data about the comment this is in reply to.
 --
--- /See:/ 'postPerUserInfo' smart constructor.
-data PostPerUserInfo = PostPerUserInfo
-    { _ppuiKind          :: !Text
-    , _ppuiBlogId        :: !(Maybe Text)
-    , _ppuiUserId        :: !(Maybe Text)
-    , _ppuiHasEditAccess :: !(Maybe Bool)
-    , _ppuiPostId        :: !(Maybe Text)
+-- /See:/ 'commentInReplyTo' smart constructor.
+newtype CommentInReplyTo = CommentInReplyTo
+    { _cirtId :: Maybe Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PostPerUserInfo' with the minimum fields required to make a request.
+-- | Creates a value of 'CommentInReplyTo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ppuiKind'
---
--- * 'ppuiBlogId'
---
--- * 'ppuiUserId'
---
--- * 'ppuiHasEditAccess'
---
--- * 'ppuiPostId'
-postPerUserInfo
-    :: PostPerUserInfo
-postPerUserInfo =
-    PostPerUserInfo
-    { _ppuiKind = "blogger#postPerUserInfo"
-    , _ppuiBlogId = Nothing
-    , _ppuiUserId = Nothing
-    , _ppuiHasEditAccess = Nothing
-    , _ppuiPostId = Nothing
+-- * 'cirtId'
+commentInReplyTo
+    :: CommentInReplyTo
+commentInReplyTo =
+    CommentInReplyTo
+    { _cirtId = Nothing
     }
 
--- | The kind of this entity. Always blogger#postPerUserInfo
-ppuiKind :: Lens' PostPerUserInfo Text
-ppuiKind = lens _ppuiKind (\ s a -> s{_ppuiKind = a})
+-- | The identified of the parent of this comment.
+cirtId :: Lens' CommentInReplyTo (Maybe Text)
+cirtId = lens _cirtId (\ s a -> s{_cirtId = a})
 
--- | ID of the Blog that the post resource belongs to.
-ppuiBlogId :: Lens' PostPerUserInfo (Maybe Text)
-ppuiBlogId
-  = lens _ppuiBlogId (\ s a -> s{_ppuiBlogId = a})
-
--- | ID of the User.
-ppuiUserId :: Lens' PostPerUserInfo (Maybe Text)
-ppuiUserId
-  = lens _ppuiUserId (\ s a -> s{_ppuiUserId = a})
-
--- | True if the user has Author level access to the post.
-ppuiHasEditAccess :: Lens' PostPerUserInfo (Maybe Bool)
-ppuiHasEditAccess
-  = lens _ppuiHasEditAccess
-      (\ s a -> s{_ppuiHasEditAccess = a})
-
--- | ID of the Post resource.
-ppuiPostId :: Lens' PostPerUserInfo (Maybe Text)
-ppuiPostId
-  = lens _ppuiPostId (\ s a -> s{_ppuiPostId = a})
-
-instance FromJSON PostPerUserInfo where
+instance FromJSON CommentInReplyTo where
         parseJSON
-          = withObject "PostPerUserInfo"
+          = withObject "CommentInReplyTo"
+              (\ o -> CommentInReplyTo <$> (o .:? "id"))
+
+instance ToJSON CommentInReplyTo where
+        toJSON CommentInReplyTo{..}
+          = object (catMaybes [("id" .=) <$> _cirtId])
+
+--
+-- /See:/ 'blogPerUserInfo' smart constructor.
+data BlogPerUserInfo = BlogPerUserInfo
+    { _bpuiPhotosAlbumKey :: !(Maybe Text)
+    , _bpuiKind           :: !Text
+    , _bpuiBlogId         :: !(Maybe Text)
+    , _bpuiUserId         :: !(Maybe Text)
+    , _bpuiRole           :: !(Maybe Text)
+    , _bpuiHasAdminAccess :: !(Maybe Bool)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BlogPerUserInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bpuiPhotosAlbumKey'
+--
+-- * 'bpuiKind'
+--
+-- * 'bpuiBlogId'
+--
+-- * 'bpuiUserId'
+--
+-- * 'bpuiRole'
+--
+-- * 'bpuiHasAdminAccess'
+blogPerUserInfo
+    :: BlogPerUserInfo
+blogPerUserInfo =
+    BlogPerUserInfo
+    { _bpuiPhotosAlbumKey = Nothing
+    , _bpuiKind = "blogger#blogPerUserInfo"
+    , _bpuiBlogId = Nothing
+    , _bpuiUserId = Nothing
+    , _bpuiRole = Nothing
+    , _bpuiHasAdminAccess = Nothing
+    }
+
+-- | The Photo Album Key for the user when adding photos to the blog
+bpuiPhotosAlbumKey :: Lens' BlogPerUserInfo (Maybe Text)
+bpuiPhotosAlbumKey
+  = lens _bpuiPhotosAlbumKey
+      (\ s a -> s{_bpuiPhotosAlbumKey = a})
+
+-- | The kind of this entity. Always blogger#blogPerUserInfo
+bpuiKind :: Lens' BlogPerUserInfo Text
+bpuiKind = lens _bpuiKind (\ s a -> s{_bpuiKind = a})
+
+-- | ID of the Blog resource
+bpuiBlogId :: Lens' BlogPerUserInfo (Maybe Text)
+bpuiBlogId
+  = lens _bpuiBlogId (\ s a -> s{_bpuiBlogId = a})
+
+-- | ID of the User
+bpuiUserId :: Lens' BlogPerUserInfo (Maybe Text)
+bpuiUserId
+  = lens _bpuiUserId (\ s a -> s{_bpuiUserId = a})
+
+-- | Access permissions that the user has for the blog (ADMIN, AUTHOR, or
+-- READER).
+bpuiRole :: Lens' BlogPerUserInfo (Maybe Text)
+bpuiRole = lens _bpuiRole (\ s a -> s{_bpuiRole = a})
+
+-- | True if the user has Admin level access to the blog.
+bpuiHasAdminAccess :: Lens' BlogPerUserInfo (Maybe Bool)
+bpuiHasAdminAccess
+  = lens _bpuiHasAdminAccess
+      (\ s a -> s{_bpuiHasAdminAccess = a})
+
+instance FromJSON BlogPerUserInfo where
+        parseJSON
+          = withObject "BlogPerUserInfo"
               (\ o ->
-                 PostPerUserInfo <$>
-                   (o .:? "kind" .!= "blogger#postPerUserInfo") <*>
-                     (o .:? "blogId")
+                 BlogPerUserInfo <$>
+                   (o .:? "photosAlbumKey") <*>
+                     (o .:? "kind" .!= "blogger#blogPerUserInfo")
+                     <*> (o .:? "blogId")
                      <*> (o .:? "userId")
-                     <*> (o .:? "hasEditAccess")
-                     <*> (o .:? "postId"))
+                     <*> (o .:? "role")
+                     <*> (o .:? "hasAdminAccess"))
 
-instance ToJSON PostPerUserInfo where
-        toJSON PostPerUserInfo{..}
+instance ToJSON BlogPerUserInfo where
+        toJSON BlogPerUserInfo{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _ppuiKind),
-                  ("blogId" .=) <$> _ppuiBlogId,
-                  ("userId" .=) <$> _ppuiUserId,
-                  ("hasEditAccess" .=) <$> _ppuiHasEditAccess,
-                  ("postId" .=) <$> _ppuiPostId])
-
--- | The container of comments on this Post.
---
--- /See:/ 'postReplies' smart constructor.
-data PostReplies = PostReplies
-    { _prTotalItems :: !(Maybe Int64)
-    , _prItems      :: !(Maybe [Maybe Comment])
-    , _prSelfLink   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PostReplies' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'prTotalItems'
---
--- * 'prItems'
---
--- * 'prSelfLink'
-postReplies
-    :: PostReplies
-postReplies =
-    PostReplies
-    { _prTotalItems = Nothing
-    , _prItems = Nothing
-    , _prSelfLink = Nothing
-    }
-
--- | The count of comments on this post.
-prTotalItems :: Lens' PostReplies (Maybe Int64)
-prTotalItems
-  = lens _prTotalItems (\ s a -> s{_prTotalItems = a})
-
--- | The List of Comments for this Post.
-prItems :: Lens' PostReplies [Maybe Comment]
-prItems
-  = lens _prItems (\ s a -> s{_prItems = a}) . _Default
-      . _Coerce
-
--- | The URL of the comments on this post.
-prSelfLink :: Lens' PostReplies (Maybe Text)
-prSelfLink
-  = lens _prSelfLink (\ s a -> s{_prSelfLink = a})
-
-instance FromJSON PostReplies where
-        parseJSON
-          = withObject "PostReplies"
-              (\ o ->
-                 PostReplies <$>
-                   (o .:? "totalItems") <*> (o .:? "items" .!= mempty)
-                     <*> (o .:? "selfLink"))
-
-instance ToJSON PostReplies where
-        toJSON PostReplies{..}
-          = object
-              (catMaybes
-                 [("totalItems" .=) <$> _prTotalItems,
-                  ("items" .=) <$> _prItems,
-                  ("selfLink" .=) <$> _prSelfLink])
-
---
--- /See:/ 'postUserInfo' smart constructor.
-data PostUserInfo = PostUserInfo
-    { _puiPostUserInfo :: !(Maybe (Maybe PostPerUserInfo))
-    , _puiPost         :: !(Maybe (Maybe Post))
-    , _puiKind         :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PostUserInfo' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'puiPostUserInfo'
---
--- * 'puiPost'
---
--- * 'puiKind'
-postUserInfo
-    :: PostUserInfo
-postUserInfo =
-    PostUserInfo
-    { _puiPostUserInfo = Nothing
-    , _puiPost = Nothing
-    , _puiKind = "blogger#postUserInfo"
-    }
-
--- | Information about a User for the Post.
-puiPostUserInfo :: Lens' PostUserInfo (Maybe (Maybe PostPerUserInfo))
-puiPostUserInfo
-  = lens _puiPostUserInfo
-      (\ s a -> s{_puiPostUserInfo = a})
-
--- | The Post resource.
-puiPost :: Lens' PostUserInfo (Maybe (Maybe Post))
-puiPost = lens _puiPost (\ s a -> s{_puiPost = a})
-
--- | The kind of this entity. Always blogger#postUserInfo
-puiKind :: Lens' PostUserInfo Text
-puiKind = lens _puiKind (\ s a -> s{_puiKind = a})
-
-instance FromJSON PostUserInfo where
-        parseJSON
-          = withObject "PostUserInfo"
-              (\ o ->
-                 PostUserInfo <$>
-                   (o .:? "post_user_info") <*> (o .:? "post") <*>
-                     (o .:? "kind" .!= "blogger#postUserInfo"))
-
-instance ToJSON PostUserInfo where
-        toJSON PostUserInfo{..}
-          = object
-              (catMaybes
-                 [("post_user_info" .=) <$> _puiPostUserInfo,
-                  ("post" .=) <$> _puiPost, Just ("kind" .= _puiKind)])
+                 [("photosAlbumKey" .=) <$> _bpuiPhotosAlbumKey,
+                  Just ("kind" .= _bpuiKind),
+                  ("blogId" .=) <$> _bpuiBlogId,
+                  ("userId" .=) <$> _bpuiUserId,
+                  ("role" .=) <$> _bpuiRole,
+                  ("hasAdminAccess" .=) <$> _bpuiHasAdminAccess])
 
 --
 -- /See:/ 'postUserInfosList' smart constructor.
@@ -2288,94 +2282,101 @@ instance ToJSON User where
                   ("displayName" .=) <$> _uDisplayName,
                   ("id" .=) <$> _uId])
 
--- | The container of blogs for this user.
+-- | The Post author\'s avatar.
 --
--- /See:/ 'userBlogs' smart constructor.
-newtype UserBlogs = UserBlogs
-    { _ubSelfLink :: Maybe Text
+-- /See:/ 'postImageAuthor' smart constructor.
+newtype PostImageAuthor = PostImageAuthor
+    { _pUrl :: Maybe Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UserBlogs' with the minimum fields required to make a request.
+-- | Creates a value of 'PostImageAuthor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ubSelfLink'
-userBlogs
-    :: UserBlogs
-userBlogs =
-    UserBlogs
-    { _ubSelfLink = Nothing
+-- * 'pUrl'
+postImageAuthor
+    :: PostImageAuthor
+postImageAuthor =
+    PostImageAuthor
+    { _pUrl = Nothing
     }
 
--- | The URL of the Blogs for this user.
-ubSelfLink :: Lens' UserBlogs (Maybe Text)
-ubSelfLink
-  = lens _ubSelfLink (\ s a -> s{_ubSelfLink = a})
+-- | The Post author\'s avatar URL.
+pUrl :: Lens' PostImageAuthor (Maybe Text)
+pUrl = lens _pUrl (\ s a -> s{_pUrl = a})
 
-instance FromJSON UserBlogs where
+instance FromJSON PostImageAuthor where
         parseJSON
-          = withObject "UserBlogs"
-              (\ o -> UserBlogs <$> (o .:? "selfLink"))
+          = withObject "PostImageAuthor"
+              (\ o -> PostImageAuthor <$> (o .:? "url"))
 
-instance ToJSON UserBlogs where
-        toJSON UserBlogs{..}
-          = object
-              (catMaybes [("selfLink" .=) <$> _ubSelfLink])
+instance ToJSON PostImageAuthor where
+        toJSON PostImageAuthor{..}
+          = object (catMaybes [("url" .=) <$> _pUrl])
 
--- | This user\'s locale
 --
--- /See:/ 'userLocale' smart constructor.
-data UserLocale = UserLocale
-    { _ulVariant  :: !(Maybe Text)
-    , _ulCountry  :: !(Maybe Text)
-    , _ulLanguage :: !(Maybe Text)
+-- /See:/ 'pageList' smart constructor.
+data PageList = PageList
+    { _pEtag          :: !(Maybe Text)
+    , _pNextPageToken :: !(Maybe Text)
+    , _pKind          :: !Text
+    , _pItems         :: !(Maybe [Maybe Page])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UserLocale' with the minimum fields required to make a request.
+-- | Creates a value of 'PageList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ulVariant'
+-- * 'pEtag'
 --
--- * 'ulCountry'
+-- * 'pNextPageToken'
 --
--- * 'ulLanguage'
-userLocale
-    :: UserLocale
-userLocale =
-    UserLocale
-    { _ulVariant = Nothing
-    , _ulCountry = Nothing
-    , _ulLanguage = Nothing
+-- * 'pKind'
+--
+-- * 'pItems'
+pageList
+    :: PageList
+pageList =
+    PageList
+    { _pEtag = Nothing
+    , _pNextPageToken = Nothing
+    , _pKind = "blogger#pageList"
+    , _pItems = Nothing
     }
 
--- | The user\'s language variant setting.
-ulVariant :: Lens' UserLocale (Maybe Text)
-ulVariant
-  = lens _ulVariant (\ s a -> s{_ulVariant = a})
+-- | Etag of the response.
+pEtag :: Lens' PageList (Maybe Text)
+pEtag = lens _pEtag (\ s a -> s{_pEtag = a})
 
--- | The user\'s country setting.
-ulCountry :: Lens' UserLocale (Maybe Text)
-ulCountry
-  = lens _ulCountry (\ s a -> s{_ulCountry = a})
+-- | Pagination token to fetch the next page, if one exists.
+pNextPageToken :: Lens' PageList (Maybe Text)
+pNextPageToken
+  = lens _pNextPageToken
+      (\ s a -> s{_pNextPageToken = a})
 
--- | The user\'s language setting.
-ulLanguage :: Lens' UserLocale (Maybe Text)
-ulLanguage
-  = lens _ulLanguage (\ s a -> s{_ulLanguage = a})
+-- | The kind of this entity. Always blogger#pageList
+pKind :: Lens' PageList Text
+pKind = lens _pKind (\ s a -> s{_pKind = a})
 
-instance FromJSON UserLocale where
+-- | The list of Pages for a Blog.
+pItems :: Lens' PageList [Maybe Page]
+pItems
+  = lens _pItems (\ s a -> s{_pItems = a}) . _Default .
+      _Coerce
+
+instance FromJSON PageList where
         parseJSON
-          = withObject "UserLocale"
+          = withObject "PageList"
               (\ o ->
-                 UserLocale <$>
-                   (o .:? "variant") <*> (o .:? "country") <*>
-                     (o .:? "language"))
+                 PageList <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "blogger#pageList")
+                     <*> (o .:? "items" .!= mempty))
 
-instance ToJSON UserLocale where
-        toJSON UserLocale{..}
+instance ToJSON PageList where
+        toJSON PageList{..}
           = object
               (catMaybes
-                 [("variant" .=) <$> _ulVariant,
-                  ("country" .=) <$> _ulCountry,
-                  ("language" .=) <$> _ulLanguage])
+                 [("etag" .=) <$> _pEtag,
+                  ("nextPageToken" .=) <$> _pNextPageToken,
+                  Just ("kind" .= _pKind), ("items" .=) <$> _pItems])

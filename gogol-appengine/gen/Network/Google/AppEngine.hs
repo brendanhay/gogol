@@ -18,34 +18,49 @@
 -- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference>
 module Network.Google.AppEngine
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** Google App Engine Admin API
       AppEngine
-    , AppsAPI
-    , ModulesAPI
-    , VersionsAPI
-    , VersionsList
-    , VersionsGet
-    , VersionsCreate
-    , VersionsDelete
-    , OperationsAPI
-    , OperationsList
-    , OperationsGet
+    , appEngine
+    , appEngineURL
+
+    -- ** appengine.apps.modules.versions.create
+    , module Network.Google.API.AppEngine.Apps.Modules.Versions.Create
+
+    -- ** appengine.apps.modules.versions.delete
+    , module Network.Google.API.AppEngine.Apps.Modules.Versions.Delete
+
+    -- ** appengine.apps.modules.versions.get
+    , module Network.Google.API.AppEngine.Apps.Modules.Versions.Get
+
+    -- ** appengine.apps.modules.versions.list
+    , module Network.Google.API.AppEngine.Apps.Modules.Versions.List
+
+    -- ** appengine.apps.operations.get
+    , module Network.Google.API.AppEngine.Apps.Operations.Get
+
+    -- ** appengine.apps.operations.list
+    , module Network.Google.API.AppEngine.Apps.Operations.List
 
     -- * Types
 
-    -- ** ApiConfigHandler
-    , ApiConfigHandler
-    , apiConfigHandler
-    , achScript
-    , achSecurityLevel
-    , achUrl
-    , achAuthFailAction
-    , achLogin
+    -- ** CpuUtilization
+    , CpuUtilization
+    , cpuUtilization
+    , cuAggregationWindowLength
+    , cuTargetUtilization
 
-    -- ** ApiEndpointHandler
-    , ApiEndpointHandler
-    , apiEndpointHandler
-    , aehScriptPath
+    -- ** ManualScaling
+    , ManualScaling
+    , manualScaling
+    , msInstances
+
+    -- ** BasicScaling
+    , BasicScaling
+    , basicScaling
+    , bsMaxInstances
+    , bsIdleTimeout
 
     -- ** Application
     , Application
@@ -55,61 +70,6 @@ module Network.Google.AppEngine
     , aName
     , aDispatchRules
     , aId
-
-    -- ** AutomaticScaling
-    , AutomaticScaling
-    , automaticScaling
-    , asMaxTotalInstances
-    , asMinIdleInstances
-    , asMinPendingLatency
-    , asCpuUtilization
-    , asMaxIdleInstances
-    , asMinTotalInstances
-    , asMaxConcurrentRequests
-    , asCoolDownPeriod
-    , asMaxPendingLatency
-
-    -- ** BasicScaling
-    , BasicScaling
-    , basicScaling
-    , bsMaxInstances
-    , bsIdleTimeout
-
-    -- ** ContainerInfo
-    , ContainerInfo
-    , containerInfo
-    , ciImage
-
-    -- ** CpuUtilization
-    , CpuUtilization
-    , cpuUtilization
-    , cuAggregationWindowLength
-    , cuTargetUtilization
-
-    -- ** Deployment
-    , Deployment
-    , deployment
-    , dContainer
-    , dFiles
-    , dSourceReferences
-
-    -- ** DeploymentFiles
-    , DeploymentFiles
-    , deploymentFiles
-
-    -- ** ErrorHandler
-    , ErrorHandler
-    , errorHandler
-    , ehMimeType
-    , ehErrorCode
-    , ehStaticFile
-
-    -- ** FileInfo
-    , FileInfo
-    , fileInfo
-    , fiSha1Sum
-    , fiMimeType
-    , fiSourceUrl
 
     -- ** HealthCheck
     , HealthCheck
@@ -122,97 +82,18 @@ module Network.Google.AppEngine
     , hcTimeout
     , hcUnhealthyThreshold
 
-    -- ** Library
-    , Library
-    , library
-    , lName
-    , lVersion
-
-    -- ** ListModulesResponse
-    , ListModulesResponse
-    , listModulesResponse
-    , lmrNextPageToken
-    , lmrModules
-
-    -- ** ListOperationsResponse
-    , ListOperationsResponse
-    , listOperationsResponse
-    , lorNextPageToken
-    , lorOperations
-
-    -- ** ListVersionsResponse
-    , ListVersionsResponse
-    , listVersionsResponse
-    , lvrNextPageToken
-    , lvrVersions
-
-    -- ** ManualScaling
-    , ManualScaling
-    , manualScaling
-    , msInstances
-
-    -- ** Module
-    , Module
-    , module'
-    , mSplit
-    , mName
-    , mId
-
-    -- ** Network
-    , Network
-    , network
-    , nForwardedPorts
-    , nInstanceTag
-    , nName
-
-    -- ** Operation
-    , Operation
-    , operation
-    , oDone
-    , oError
-    , oResponse
-    , oName
-    , oMetadata
-
-    -- ** OperationMetadata
-    , OperationMetadata
-    , operationMetadata
+    -- ** ApiConfigHandler
+    , ApiConfigHandler
+    , apiConfigHandler
+    , achScript
+    , achSecurityLevel
+    , achUrl
+    , achAuthFailAction
+    , achLogin
 
     -- ** OperationResponse
     , OperationResponse
     , operationResponse
-
-    -- ** Resources
-    , Resources
-    , resources
-    , rMemoryGb
-    , rDiskGb
-    , rCpu
-
-    -- ** ScriptHandler
-    , ScriptHandler
-    , scriptHandler
-    , shScriptPath
-
-    -- ** SourceReference
-    , SourceReference
-    , sourceReference
-    , srRepository
-    , srRevisionId
-
-    -- ** StaticDirectoryHandler
-    , StaticDirectoryHandler
-    , staticDirectoryHandler
-    , sdhHttpHeaders
-    , sdhRequireMatchingFile
-    , sdhExpiration
-    , sdhMimeType
-    , sdhApplicationReadable
-    , sdhDirectory
-
-    -- ** StaticDirectoryHandlerHttpHeaders
-    , StaticDirectoryHandlerHttpHeaders
-    , staticDirectoryHandlerHttpHeaders
 
     -- ** StaticFilesHandler
     , StaticFilesHandler
@@ -225,9 +106,63 @@ module Network.Google.AppEngine
     , sfhApplicationReadable
     , sfhUploadPathRegex
 
-    -- ** StaticFilesHandlerHttpHeaders
-    , StaticFilesHandlerHttpHeaders
-    , staticFilesHandlerHttpHeaders
+    -- ** OperationMetadata
+    , OperationMetadata
+    , operationMetadata
+    , omInsertTime
+    , omUser
+    , omMethod
+    , omEndTime
+    , omOperationType
+    , omTarget
+
+    -- ** ErrorHandler
+    , ErrorHandler
+    , errorHandler
+    , ehMimeType
+    , ehErrorCode
+    , ehStaticFile
+
+    -- ** VersionBetaSettings
+    , VersionBetaSettings
+    , versionBetaSettings
+
+    -- ** StaticDirectoryHandlerHttpHeaders
+    , StaticDirectoryHandlerHttpHeaders
+    , staticDirectoryHandlerHttpHeaders
+
+    -- ** Network
+    , Network
+    , network
+    , nForwardedPorts
+    , nInstanceTag
+    , nName
+
+    -- ** StaticDirectoryHandler
+    , StaticDirectoryHandler
+    , staticDirectoryHandler
+    , sdhHttpHeaders
+    , sdhRequireMatchingFile
+    , sdhExpiration
+    , sdhMimeType
+    , sdhApplicationReadable
+    , sdhDirectory
+
+    -- ** Deployment
+    , Deployment
+    , deployment
+    , dContainer
+    , dFiles
+    , dSourceReferences
+
+    -- ** VersionEnvVariables
+    , VersionEnvVariables
+    , versionEnvVariables
+
+    -- ** ContainerInfo
+    , ContainerInfo
+    , containerInfo
+    , ciImage
 
     -- ** Status
     , Status
@@ -235,27 +170,6 @@ module Network.Google.AppEngine
     , sDetails
     , sCode
     , sMessage
-
-    -- ** StatusItemDetails
-    , StatusItemDetails
-    , statusItemDetails
-
-    -- ** TrafficSplit
-    , TrafficSplit
-    , trafficSplit
-    , tsShardBy
-    , tsAllocations
-
-    -- ** TrafficSplitAllocations
-    , TrafficSplitAllocations
-    , trafficSplitAllocations
-
-    -- ** UrlDispatchRule
-    , UrlDispatchRule
-    , urlDispatchRule
-    , udrPath
-    , udrDomain
-    , udrModule
 
     -- ** UrlMap
     , UrlMap
@@ -269,6 +183,41 @@ module Network.Google.AppEngine
     , umStaticFiles
     , umLogin
     , umStaticDirectory
+
+    -- ** TrafficSplitAllocations
+    , TrafficSplitAllocations
+    , trafficSplitAllocations
+
+    -- ** ScriptHandler
+    , ScriptHandler
+    , scriptHandler
+    , shScriptPath
+
+    -- ** Library
+    , Library
+    , library
+    , lName
+    , lVersion
+
+    -- ** DeploymentFiles
+    , DeploymentFiles
+    , deploymentFiles
+
+    -- ** ListOperationsResponse
+    , ListOperationsResponse
+    , listOperationsResponse
+    , lorNextPageToken
+    , lorOperations
+
+    -- ** TrafficSplit
+    , TrafficSplit
+    , trafficSplit
+    , tsShardBy
+    , tsAllocations
+
+    -- ** StaticFilesHandlerHttpHeaders
+    , StaticFilesHandlerHttpHeaders
+    , staticFilesHandlerHttpHeaders
 
     -- ** Version
     , Version
@@ -300,15 +249,94 @@ module Network.Google.AppEngine
     , vLibraries
     , vDeployment
 
-    -- ** VersionBetaSettings
-    , VersionBetaSettings
-    , versionBetaSettings
+    -- ** Module
+    , Module
+    , module'
+    , mSplit
+    , mName
+    , mId
 
-    -- ** VersionEnvVariables
-    , VersionEnvVariables
-    , versionEnvVariables
+    -- ** UrlDispatchRule
+    , UrlDispatchRule
+    , urlDispatchRule
+    , udrPath
+    , udrDomain
+    , udrModule
+
+    -- ** Operation
+    , Operation
+    , operation
+    , oDone
+    , oError
+    , oResponse
+    , oName
+    , oMetadata
+
+    -- ** FileInfo
+    , FileInfo
+    , fileInfo
+    , fiSha1Sum
+    , fiMimeType
+    , fiSourceUrl
+
+    -- ** AutomaticScaling
+    , AutomaticScaling
+    , automaticScaling
+    , asMaxTotalInstances
+    , asMinIdleInstances
+    , asMinPendingLatency
+    , asCpuUtilization
+    , asMaxIdleInstances
+    , asMinTotalInstances
+    , asMaxConcurrentRequests
+    , asCoolDownPeriod
+    , asMaxPendingLatency
+
+    -- ** ListModulesResponse
+    , ListModulesResponse
+    , listModulesResponse
+    , lmrNextPageToken
+    , lmrModules
+
+    -- ** ListVersionsResponse
+    , ListVersionsResponse
+    , listVersionsResponse
+    , lvrNextPageToken
+    , lvrVersions
+
+    -- ** StatusItemDetails
+    , StatusItemDetails
+    , statusItemDetails
+
+    -- ** ApiEndpointHandler
+    , ApiEndpointHandler
+    , apiEndpointHandler
+    , aehScriptPath
+
+    -- ** OperationMetadata
+    , OperationMetadata
+    , operationMetadata
+
+    -- ** SourceReference
+    , SourceReference
+    , sourceReference
+    , srRepository
+    , srRevisionId
+
+    -- ** Resources
+    , Resources
+    , resources
+    , rMemoryGb
+    , rDiskGb
+    , rCpu
     ) where
 
+import           Network.Google.API.AppEngine.Apps.Modules.Versions.Create
+import           Network.Google.API.AppEngine.Apps.Modules.Versions.Delete
+import           Network.Google.API.AppEngine.Apps.Modules.Versions.Get
+import           Network.Google.API.AppEngine.Apps.Modules.Versions.List
+import           Network.Google.API.AppEngine.Apps.Operations.Get
+import           Network.Google.API.AppEngine.Apps.Operations.List
 import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 
@@ -316,166 +344,13 @@ import           Network.Google.Prelude
 TODO
 -}
 
-type AppEngine = AppsAPI
+type AppEngine =
+     AppsModulesVersionsGetAPI :<|>
+       AppsModulesVersionsListAPI
+       :<|> AppsModulesVersionsCreateAPI
+       :<|> AppsOperationsGetAPI
+       :<|> AppsOperationsListAPI
+       :<|> AppsModulesVersionsDeleteAPI
 
-type AppsAPI = ModulesAPI :<|> OperationsAPI
-
-type ModulesAPI = VersionsAPI
-
-type VersionsAPI =
-     VersionsList :<|> VersionsGet :<|> VersionsCreate
-       :<|> VersionsDelete
-
--- | Lists the versions of a module.
-type VersionsList =
-     "v1beta4" :>
-       "apps" :>
-         Capture "appsId" Text :>
-           "modules" :>
-             Capture "modulesId" Text :>
-               "versions" :>
-                 QueryParam "$.xgafv" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "upload_protocol" Text :>
-                         QueryParam "pp" Bool :>
-                           QueryParam "access_token" Text :>
-                             QueryParam "uploadType" Text :>
-                               QueryParam "bearer_token" Text :>
-                                 QueryParam "key" Text :>
-                                   QueryParam "view" Text :>
-                                     QueryParam "pageToken" Text :>
-                                       QueryParam "oauth_token" Text :>
-                                         QueryParam "pageSize" Int32 :>
-                                           QueryParam "fields" Text :>
-                                             QueryParam "callback" Text :>
-                                               QueryParam "alt" Text :>
-                                                 Get '[JSON]
-                                                   ListVersionsResponse
-
--- | Gets application deployment information.
-type VersionsGet =
-     "v1beta4" :>
-       "apps" :>
-         Capture "appsId" Text :>
-           "modules" :>
-             Capture "modulesId" Text :>
-               "versions" :>
-                 Capture "versionsId" Text :>
-                   QueryParam "$.xgafv" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "upload_protocol" Text :>
-                           QueryParam "pp" Bool :>
-                             QueryParam "access_token" Text :>
-                               QueryParam "uploadType" Text :>
-                                 QueryParam "bearer_token" Text :>
-                                   QueryParam "key" Text :>
-                                     QueryParam "view" Text :>
-                                       QueryParam "oauth_token" Text :>
-                                         QueryParam "fields" Text :>
-                                           QueryParam "callback" Text :>
-                                             QueryParam "alt" Text :>
-                                               Get '[JSON] Version
-
--- | Deploys new code and resource files to a version.
-type VersionsCreate =
-     "v1beta4" :>
-       "apps" :>
-         Capture "appsId" Text :>
-           "modules" :>
-             Capture "modulesId" Text :>
-               "versions" :>
-                 QueryParam "$.xgafv" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "upload_protocol" Text :>
-                         QueryParam "pp" Bool :>
-                           QueryParam "access_token" Text :>
-                             QueryParam "uploadType" Text :>
-                               QueryParam "bearer_token" Text :>
-                                 QueryParam "key" Text :>
-                                   QueryParam "oauth_token" Text :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "callback" Text :>
-                                         QueryParam "alt" Text :>
-                                           Post '[JSON] Operation
-
--- | Deletes an existing version.
-type VersionsDelete =
-     "v1beta4" :>
-       "apps" :>
-         Capture "appsId" Text :>
-           "modules" :>
-             Capture "modulesId" Text :>
-               "versions" :>
-                 Capture "versionsId" Text :>
-                   QueryParam "$.xgafv" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "upload_protocol" Text :>
-                           QueryParam "pp" Bool :>
-                             QueryParam "access_token" Text :>
-                               QueryParam "uploadType" Text :>
-                                 QueryParam "bearer_token" Text :>
-                                   QueryParam "key" Text :>
-                                     QueryParam "oauth_token" Text :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "callback" Text :>
-                                           QueryParam "alt" Text :>
-                                             Delete '[JSON] Operation
-
-type OperationsAPI =
-     OperationsList :<|> OperationsGet
-
--- | Lists operations that match the specified filter in the request. If the
--- server doesn\'t support this method, it returns \`UNIMPLEMENTED\`. NOTE:
--- the \`name\` binding below allows API services to override the binding
--- to use different resource name schemes, such as
--- \`users\/*\/operations\`.
-type OperationsList =
-     "v1beta4" :>
-       "apps" :>
-         Capture "appsId" Text :>
-           "operations" :>
-             QueryParam "$.xgafv" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "upload_protocol" Text :>
-                     QueryParam "pp" Bool :>
-                       QueryParam "access_token" Text :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "bearer_token" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "filter" Text :>
-                                 QueryParam "pageToken" Text :>
-                                   QueryParam "oauth_token" Text :>
-                                     QueryParam "pageSize" Int32 :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "callback" Text :>
-                                           QueryParam "alt" Text :>
-                                             Get '[JSON] ListOperationsResponse
-
--- | Gets the latest state of a long-running operation. Clients can use this
--- method to poll the operation result at intervals as recommended by the
--- API service.
-type OperationsGet =
-     "v1beta4" :>
-       "apps" :>
-         Capture "appsId" Text :>
-           "operations" :>
-             Capture "operationsId" Text :>
-               QueryParam "$.xgafv" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "upload_protocol" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "access_token" Text :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "bearer_token" Text :>
-                               QueryParam "key" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "callback" Text :>
-                                       QueryParam "alt" Text :>
-                                         Get '[JSON] Operation
+appEngine :: Proxy AppEngine
+appEngine = Proxy

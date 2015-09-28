@@ -17,14 +17,26 @@
 -- /See:/ <https://developers.google.com/google-apps/groups-settings/get_started Groups Settings API Reference>
 module Network.Google.Groups.Settings
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** Groups Settings API
       GroupsSettings
-    , GroupsAPI
-    , GroupsPatch
-    , GroupsGet
-    , GroupsUpdate
+    , groupsSettings
+    , groupsSettingsURL
+
+    -- ** groupsSettings.groups.get
+    , module Network.Google.API.GroupsSettings.Groups.Get
+
+    -- ** groupsSettings.groups.patch
+    , module Network.Google.API.GroupsSettings.Groups.Patch
+
+    -- ** groupsSettings.groups.update
+    , module Network.Google.API.GroupsSettings.Groups.Update
 
     -- * Types
+
+    -- ** Alt
+    , Alt (..)
 
     -- ** Groups
     , Groups
@@ -59,6 +71,9 @@ module Network.Google.Groups.Settings
     , gAllowWebPosting
     ) where
 
+import           Network.Google.API.GroupsSettings.Groups.Get
+import           Network.Google.API.GroupsSettings.Groups.Patch
+import           Network.Google.API.GroupsSettings.Groups.Update
 import           Network.Google.Groups.Settings.Types
 import           Network.Google.Prelude
 
@@ -66,49 +81,8 @@ import           Network.Google.Prelude
 TODO
 -}
 
-type GroupsSettings = GroupsAPI
+type GroupsSettings =
+     GroupsGetAPI :<|> GroupsPatchAPI :<|> GroupsUpdateAPI
 
-type GroupsAPI =
-     GroupsPatch :<|> GroupsGet :<|> GroupsUpdate
-
--- | Updates an existing resource. This method supports patch semantics.
-type GroupsPatch =
-     "groups" :>
-       "v1" :>
-         "groups" :>
-           Capture "groupUniqueId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Patch '[JSON] Groups
-
--- | Gets one resource by id.
-type GroupsGet =
-     "groups" :>
-       "v1" :>
-         "groups" :>
-           Capture "groupUniqueId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Get '[JSON] Groups
-
--- | Updates an existing resource.
-type GroupsUpdate =
-     "groups" :>
-       "v1" :>
-         "groups" :>
-           Capture "groupUniqueId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Put '[JSON] Groups
+groupsSettings :: Proxy GroupsSettings
+groupsSettings = Proxy

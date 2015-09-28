@@ -1,6 +1,6 @@
 name:                  gogol-blogger
 version:               0.0.1
-synopsis:              Google Blogger API.
+synopsis:              Google Blogger API Client.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -16,8 +16,8 @@ extra-source-files:    README.md
 description:
     API for access to the data within Blogger.
     .
-    /Warning:/ This is an experimental preview release which is still under
-    heavy development and not intended for public consumption, caveat emptor!
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
 
 source-repository head
     type:     git
@@ -30,7 +30,40 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.Blogger
+          Network.Google.API.Blogger.BlogUserInfos.Get
+        , Network.Google.API.Blogger.Blogs.Get
+        , Network.Google.API.Blogger.Blogs.GetByURL
+        , Network.Google.API.Blogger.Blogs.ListByUser
+        , Network.Google.API.Blogger.Comments.Approve
+        , Network.Google.API.Blogger.Comments.Delete
+        , Network.Google.API.Blogger.Comments.Get
+        , Network.Google.API.Blogger.Comments.List
+        , Network.Google.API.Blogger.Comments.ListByBlog
+        , Network.Google.API.Blogger.Comments.MarkAsSpam
+        , Network.Google.API.Blogger.Comments.RemoveContent
+        , Network.Google.API.Blogger.PageViews.Get
+        , Network.Google.API.Blogger.Pages.Delete
+        , Network.Google.API.Blogger.Pages.Get
+        , Network.Google.API.Blogger.Pages.Insert
+        , Network.Google.API.Blogger.Pages.List
+        , Network.Google.API.Blogger.Pages.Patch
+        , Network.Google.API.Blogger.Pages.Publish
+        , Network.Google.API.Blogger.Pages.Revert
+        , Network.Google.API.Blogger.Pages.Update
+        , Network.Google.API.Blogger.PostUserInfos.Get
+        , Network.Google.API.Blogger.PostUserInfos.List
+        , Network.Google.API.Blogger.Posts.Delete
+        , Network.Google.API.Blogger.Posts.Get
+        , Network.Google.API.Blogger.Posts.GetByPath
+        , Network.Google.API.Blogger.Posts.Insert
+        , Network.Google.API.Blogger.Posts.List
+        , Network.Google.API.Blogger.Posts.Patch
+        , Network.Google.API.Blogger.Posts.Publish
+        , Network.Google.API.Blogger.Posts.Revert
+        , Network.Google.API.Blogger.Posts.Search
+        , Network.Google.API.Blogger.Posts.Update
+        , Network.Google.API.Blogger.Users.Get
+        , Network.Google.Blogger
         , Network.Google.Blogger.Types
 
     other-modules:

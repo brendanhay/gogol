@@ -1,6 +1,6 @@
 name:                  gogol-maps-coordinate
 version:               0.0.1
-synopsis:              Google Maps Coordinate API.
+synopsis:              Google Maps Coordinate API Client.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -16,8 +16,8 @@ extra-source-files:    README.md
 description:
     Lets you view and manage jobs in a Coordinate team.
     .
-    /Warning:/ This is an experimental preview release which is still under
-    heavy development and not intended for public consumption, caveat emptor!
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
 
 source-repository head
     type:     git
@@ -30,7 +30,19 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.Maps.Coordinate
+          Network.Google.API.Coordinate.CustomFieldDef.List
+        , Network.Google.API.Coordinate.Jobs.Get
+        , Network.Google.API.Coordinate.Jobs.Insert
+        , Network.Google.API.Coordinate.Jobs.List
+        , Network.Google.API.Coordinate.Jobs.Patch
+        , Network.Google.API.Coordinate.Jobs.Update
+        , Network.Google.API.Coordinate.Location.List
+        , Network.Google.API.Coordinate.Schedule.Get
+        , Network.Google.API.Coordinate.Schedule.Patch
+        , Network.Google.API.Coordinate.Schedule.Update
+        , Network.Google.API.Coordinate.Team.List
+        , Network.Google.API.Coordinate.Worker.List
+        , Network.Google.Maps.Coordinate
         , Network.Google.Maps.Coordinate.Types
 
     other-modules:

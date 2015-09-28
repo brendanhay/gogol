@@ -1,6 +1,6 @@
 name:                  gogol-container
 version:               0.0.1
-synopsis:              Google Container Engine API.
+synopsis:              Google Container Engine API Client.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -18,8 +18,8 @@ description:
     container based applications, powered by the open source Kubernetes
     technology.
     .
-    /Warning:/ This is an experimental preview release which is still under
-    heavy development and not intended for public consumption, caveat emptor!
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
 
 source-repository head
     type:     git
@@ -32,7 +32,15 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.Container
+          Network.Google.API.Container.Projects.Clusters.List
+        , Network.Google.API.Container.Projects.Operations.List
+        , Network.Google.API.Container.Projects.Zones.Clusters.Create
+        , Network.Google.API.Container.Projects.Zones.Clusters.Delete
+        , Network.Google.API.Container.Projects.Zones.Clusters.Get
+        , Network.Google.API.Container.Projects.Zones.Clusters.List
+        , Network.Google.API.Container.Projects.Zones.Operations.Get
+        , Network.Google.API.Container.Projects.Zones.Operations.List
+        , Network.Google.Container
         , Network.Google.Container.Types
 
     other-modules:

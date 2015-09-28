@@ -19,24 +19,54 @@
 -- /See:/ <https://cloud.google.com/container-engine/docs/v1beta1/ Google Container Engine API Reference>
 module Network.Google.Container
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** Google Container Engine API
       Container
-    , ProjectsAPI
-    , ZonesAPI
-    , OperationsAPI
-    , OperationsList
-    , OperationsGet
-    , ClustersAPI
-    , ClustersList
-    , ClustersGet
-    , ClustersCreate
-    , ClustersDelete
-    , OperationsAPI
-    , OperationsList
-    , ClustersAPI
-    , ClustersList
+    , container
+    , containerURL
+
+    -- ** container.projects.clusters.list
+    , module Network.Google.API.Container.Projects.Clusters.List
+
+    -- ** container.projects.operations.list
+    , module Network.Google.API.Container.Projects.Operations.List
+
+    -- ** container.projects.zones.clusters.create
+    , module Network.Google.API.Container.Projects.Zones.Clusters.Create
+
+    -- ** container.projects.zones.clusters.delete
+    , module Network.Google.API.Container.Projects.Zones.Clusters.Delete
+
+    -- ** container.projects.zones.clusters.get
+    , module Network.Google.API.Container.Projects.Zones.Clusters.Get
+
+    -- ** container.projects.zones.clusters.list
+    , module Network.Google.API.Container.Projects.Zones.Clusters.List
+
+    -- ** container.projects.zones.operations.get
+    , module Network.Google.API.Container.Projects.Zones.Operations.Get
+
+    -- ** container.projects.zones.operations.list
+    , module Network.Google.API.Container.Projects.Zones.Operations.List
 
     -- * Types
+
+    -- ** MasterAuth
+    , MasterAuth
+    , masterAuth
+    , maBearerToken
+    , maClientKey
+    , maUser
+    , maClientCertificate
+    , maPassword
+    , maClusterCaCertificate
+
+    -- ** ServiceAccount
+    , ServiceAccount
+    , serviceAccount
+    , saEmail
+    , saScopes
 
     -- ** Cluster
     , Cluster
@@ -61,23 +91,28 @@ module Network.Google.Container
     , cInstanceGroupUrls
     , cNodeRoutingPrefixSize
 
+    -- ** ListAggregatedOperationsResponse
+    , ListAggregatedOperationsResponse
+    , listAggregatedOperationsResponse
+    , laorOperations
+
+    -- ** NodeConfig
+    , NodeConfig
+    , nodeConfig
+    , ncServiceAccounts
+    , ncSourceImage
+    , ncMachineType
+
+    -- ** Alt
+    , Alt (..)
+
     -- ** ClusterStatus
     , ClusterStatus (..)
-
-    -- ** CreateClusterRequest
-    , CreateClusterRequest
-    , createClusterRequest
-    , ccrCluster
 
     -- ** ListAggregatedClustersResponse
     , ListAggregatedClustersResponse
     , listAggregatedClustersResponse
     , lacrClusters
-
-    -- ** ListAggregatedOperationsResponse
-    , ListAggregatedOperationsResponse
-    , listAggregatedOperationsResponse
-    , laorOperations
 
     -- ** ListClustersResponse
     , ListClustersResponse
@@ -89,22 +124,13 @@ module Network.Google.Container
     , listOperationsResponse
     , lorOperations
 
-    -- ** MasterAuth
-    , MasterAuth
-    , masterAuth
-    , maBearerToken
-    , maClientKey
-    , maUser
-    , maClientCertificate
-    , maPassword
-    , maClusterCaCertificate
+    -- ** CreateClusterRequest
+    , CreateClusterRequest
+    , createClusterRequest
+    , ccrCluster
 
-    -- ** NodeConfig
-    , NodeConfig
-    , nodeConfig
-    , ncServiceAccounts
-    , ncSourceImage
-    , ncMachineType
+    -- ** OperationStatus
+    , OperationStatus (..)
 
     -- ** Operation
     , Operation
@@ -120,17 +146,16 @@ module Network.Google.Container
 
     -- ** OperationOperationType
     , OperationOperationType (..)
-
-    -- ** OperationStatus
-    , OperationStatus (..)
-
-    -- ** ServiceAccount
-    , ServiceAccount
-    , serviceAccount
-    , saEmail
-    , saScopes
     ) where
 
+import           Network.Google.API.Container.Projects.Clusters.List
+import           Network.Google.API.Container.Projects.Operations.List
+import           Network.Google.API.Container.Projects.Zones.Clusters.Create
+import           Network.Google.API.Container.Projects.Zones.Clusters.Delete
+import           Network.Google.API.Container.Projects.Zones.Clusters.Get
+import           Network.Google.API.Container.Projects.Zones.Clusters.List
+import           Network.Google.API.Container.Projects.Zones.Operations.Get
+import           Network.Google.API.Container.Projects.Zones.Operations.List
 import           Network.Google.Container.Types
 import           Network.Google.Prelude
 
@@ -138,169 +163,15 @@ import           Network.Google.Prelude
 TODO
 -}
 
-type Container = ProjectsAPI
+type Container =
+     ProjectsZonesClustersGetAPI :<|>
+       ProjectsZonesClustersListAPI
+       :<|> ProjectsClustersListAPI
+       :<|> ProjectsZonesOperationsGetAPI
+       :<|> ProjectsOperationsListAPI
+       :<|> ProjectsZonesClustersDeleteAPI
+       :<|> ProjectsZonesClustersCreateAPI
+       :<|> ProjectsZonesOperationsListAPI
 
-type ProjectsAPI =
-     ZonesAPI :<|> OperationsAPI :<|> ClustersAPI
-
-type ZonesAPI = OperationsAPI :<|> ClustersAPI
-
-type OperationsAPI =
-     OperationsList :<|> OperationsGet
-
--- | Lists all operations in a project in a specific zone.
-type OperationsList =
-     "container" :>
-       "v1beta1" :>
-         "projects" :>
-           Capture "projectId" Text :>
-             "zones" :>
-               Capture "zoneId" Text :>
-                 "operations" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Get '[JSON] ListOperationsResponse
-
--- | Gets the specified operation.
-type OperationsGet =
-     "container" :>
-       "v1beta1" :>
-         "projects" :>
-           Capture "projectId" Text :>
-             "zones" :>
-               Capture "zoneId" Text :>
-                 "operations" :>
-                   Capture "operationId" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Get '[JSON] Operation
-
-type ClustersAPI =
-     ClustersList :<|> ClustersGet :<|> ClustersCreate
-       :<|> ClustersDelete
-
--- | Lists all clusters owned by a project in the specified zone.
-type ClustersList =
-     "container" :>
-       "v1beta1" :>
-         "projects" :>
-           Capture "projectId" Text :>
-             "zones" :>
-               Capture "zoneId" Text :>
-                 "clusters" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Get '[JSON] ListClustersResponse
-
--- | Gets a specific cluster.
-type ClustersGet =
-     "container" :>
-       "v1beta1" :>
-         "projects" :>
-           Capture "projectId" Text :>
-             "zones" :>
-               Capture "zoneId" Text :>
-                 "clusters" :>
-                   Capture "clusterId" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Get '[JSON] Cluster
-
--- | Creates a cluster, consisting of the specified number and type of Google
--- Compute Engine instances, plus a Kubernetes master instance. The cluster
--- is created in the project\'s default network. A firewall is added that
--- allows traffic into port 443 on the master, which enables HTTPS. A
--- firewall and a route is added for each node to allow the containers on
--- that node to communicate with all other instances in the cluster.
--- Finally, an entry is added to the project\'s global metadata indicating
--- which CIDR range is being used by the cluster.
-type ClustersCreate =
-     "container" :>
-       "v1beta1" :>
-         "projects" :>
-           Capture "projectId" Text :>
-             "zones" :>
-               Capture "zoneId" Text :>
-                 "clusters" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Post '[JSON] Operation
-
--- | Deletes the cluster, including the Kubernetes master and all worker
--- nodes. Firewalls and routes that were configured at cluster creation are
--- also deleted.
-type ClustersDelete =
-     "container" :>
-       "v1beta1" :>
-         "projects" :>
-           Capture "projectId" Text :>
-             "zones" :>
-               Capture "zoneId" Text :>
-                 "clusters" :>
-                   Capture "clusterId" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   Delete '[JSON] Operation
-
-type OperationsAPI = OperationsList
-
--- | Lists all operations in a project, across all zones.
-type OperationsList =
-     "container" :>
-       "v1beta1" :>
-         "projects" :>
-           Capture "projectId" Text :>
-             "operations" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Get '[JSON] ListAggregatedOperationsResponse
-
-type ClustersAPI = ClustersList
-
--- | Lists all clusters owned by a project across all zones.
-type ClustersList =
-     "container" :>
-       "v1beta1" :>
-         "projects" :>
-           Capture "projectId" Text :>
-             "clusters" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Get '[JSON] ListAggregatedClustersResponse
+container :: Proxy Container
+container = Proxy

@@ -14,21 +14,19 @@
 --
 module Network.Google.Games.AppState.Types
     (
+    -- * Service URL
+      gamesAppStateURL
+
+    -- * Alt
+    , Alt (..)
 
     -- * GetResponse
-      GetResponse
+    , GetResponse
     , getResponse
     , grCurrentStateVersion
     , grKind
     , grData
     , grStateKey
-
-    -- * ListResponse
-    , ListResponse
-    , listResponse
-    , lrMaximumKeyCount
-    , lrKind
-    , lrItems
 
     -- * UpdateRequest
     , UpdateRequest
@@ -42,8 +40,22 @@ module Network.Google.Games.AppState.Types
     , wrCurrentStateVersion
     , wrKind
     , wrStateKey
+
+    -- * ListResponse
+    , ListResponse
+    , listResponse
+    , lrMaximumKeyCount
+    , lrKind
+    , lrItems
     ) where
 
 import           Network.Google.Games.AppState.Types.Product
 import           Network.Google.Games.AppState.Types.Sum
 import           Network.Google.Prelude
+
+-- | URL referring to version 'v1' of the Google App State API.
+gamesAppStateURL :: BaseUrl
+gamesAppStateURL
+  = BaseUrl Https
+      "https://www.googleapis.com/appstate/v1/"
+      443

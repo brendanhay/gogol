@@ -17,12 +17,20 @@
 -- /See:/ <https://developers.google.com/google-apps/groups-migration/ Groups Migration API Reference>
 module Network.Google.Groups.Migration
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** Groups Migration API
       GroupsMigration
-    , ArchiveAPI
-    , ArchiveInsert
+    , groupsMigration
+    , groupsMigrationURL
+
+    -- ** groupsmigration.archive.insert
+    , module Network.Google.API.GroupsMigration.Archive.Insert
 
     -- * Types
+
+    -- ** Alt
+    , Alt (..)
 
     -- ** Groups
     , Groups
@@ -31,6 +39,7 @@ module Network.Google.Groups.Migration
     , gResponseCode
     ) where
 
+import           Network.Google.API.GroupsMigration.Archive.Insert
 import           Network.Google.Groups.Migration.Types
 import           Network.Google.Prelude
 
@@ -38,21 +47,7 @@ import           Network.Google.Prelude
 TODO
 -}
 
-type GroupsMigration = ArchiveAPI
+type GroupsMigration = ArchiveInsertAPI
 
-type ArchiveAPI = ArchiveInsert
-
--- | Inserts a new mail into the archive of the Google group.
-type ArchiveInsert =
-     "groups" :>
-       "v1" :>
-         "groups" :>
-           Capture "groupId" Text :>
-             "archive" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] Groups
+groupsMigration :: Proxy GroupsMigration
+groupsMigration = Proxy

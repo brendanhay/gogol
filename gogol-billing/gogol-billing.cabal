@@ -1,6 +1,6 @@
 name:                  gogol-billing
 version:               0.0.1
-synopsis:              Google Cloud Billing API.
+synopsis:              Google Cloud Billing API Client.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -17,8 +17,8 @@ description:
     Retrieves Google Developers Console billing accounts and associates them
     with projects.
     .
-    /Warning:/ This is an experimental preview release which is still under
-    heavy development and not intended for public consumption, caveat emptor!
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
 
 source-repository head
     type:     git
@@ -31,7 +31,10 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.Billing
+          Network.Google.API.Cloudbilling.BillingAccounts.Projects.List
+        , Network.Google.API.Cloudbilling.Projects.GetBillingInfo
+        , Network.Google.API.Cloudbilling.Projects.UpdateBillingInfo
+        , Network.Google.Billing
         , Network.Google.Billing.Types
 
     other-modules:

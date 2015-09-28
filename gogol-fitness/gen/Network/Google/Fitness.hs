@@ -17,81 +17,45 @@
 -- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference>
 module Network.Google.Fitness
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** Fitness
       Fitness
-    , UsersAPI
-    , DatasetAPI
-    , DatasetAggregate
-    , DataSourcesAPI
-    , DatasetsAPI
-    , DatasetsPatch
-    , DatasetsGet
-    , DatasetsDelete
-    , SessionsAPI
-    , SessionsList
-    , SessionsDelete
-    , SessionsUpdate
+    , fitness
+    , fitnessURL
+
+    -- ** fitness.users.dataSources.datasets.delete
+    , module Network.Google.API.Fitness.Users.DataSources.Datasets.Delete
+
+    -- ** fitness.users.dataSources.datasets.get
+    , module Network.Google.API.Fitness.Users.DataSources.Datasets.Get
+
+    -- ** fitness.users.dataSources.datasets.patch
+    , module Network.Google.API.Fitness.Users.DataSources.Datasets.Patch
+
+    -- ** fitness.users.dataset.aggregate
+    , module Network.Google.API.Fitness.Users.Dataset.Aggregate
+
+    -- ** fitness.users.sessions.delete
+    , module Network.Google.API.Fitness.Users.Sessions.Delete
+
+    -- ** fitness.users.sessions.list
+    , module Network.Google.API.Fitness.Users.Sessions.List
+
+    -- ** fitness.users.sessions.update
+    , module Network.Google.API.Fitness.Users.Sessions.Update
 
     -- * Types
 
-    -- ** AggregateBucket
-    , AggregateBucket
-    , aggregateBucket
-    , abEndTimeMillis
-    , abDataset
-    , abActivity
-    , abType
-    , abStartTimeMillis
-    , abSession
+    -- ** ListSessionsResponse
+    , ListSessionsResponse
+    , listSessionsResponse
+    , lsrNextPageToken
+    , lsrDeletedSession
+    , lsrSession
 
     -- ** AggregateBucketType
     , AggregateBucketType (..)
-
-    -- ** AggregateBy
-    , AggregateBy
-    , aggregateBy
-    , abDataTypeName
-    , abDataSourceId
-
-    -- ** AggregateRequest
-    , AggregateRequest
-    , aggregateRequest
-    , arEndTimeMillis
-    , arAggregateBy
-    , arBucketBySession
-    , arBucketByActivityType
-    , arBucketByTime
-    , arStartTimeMillis
-    , arBucketByActivitySegment
-
-    -- ** AggregateResponse
-    , AggregateResponse
-    , aggregateResponse
-    , arBucket
-
-    -- ** Application
-    , Application
-    , application
-    , aPackageName
-    , aName
-    , aVersion
-    , aDetailsUrl
-
-    -- ** BucketByActivity
-    , BucketByActivity
-    , bucketByActivity
-    , bbaMinDurationMillis
-    , bbaActivityDataSourceId
-
-    -- ** BucketBySession
-    , BucketBySession
-    , bucketBySession
-    , bbsMinDurationMillis
-
-    -- ** BucketByTime
-    , BucketByTime
-    , bucketByTime
-    , bbtDurationMillis
 
     -- ** DataPoint
     , DataPoint
@@ -105,32 +69,31 @@ module Network.Google.Fitness
     , dpModifiedTimeMillis
     , dpStartTimeNanos
 
-    -- ** DataSource
-    , DataSource
-    , dataSource
-    , dsApplication
-    , dsDevice
-    , dsName
-    , dsDataType
-    , dsType
-    , dsDataStreamName
-    , dsDataStreamId
+    -- ** AggregateBucket
+    , AggregateBucket
+    , aggregateBucket
+    , abEndTimeMillis
+    , abDataset
+    , abActivity
+    , abType
+    , abStartTimeMillis
+    , abSession
 
-    -- ** DataSourceType
-    , DataSourceType (..)
+    -- ** MapValue
+    , MapValue
+    , mapValue
+    , mvFpVal
 
-    -- ** DataType
-    , DataType
-    , dataType
-    , dtField
-    , dtName
+    -- ** ListDataSourcesResponse
+    , ListDataSourcesResponse
+    , listDataSourcesResponse
+    , ldsrDataSource
 
-    -- ** DataTypeField
-    , DataTypeField
-    , dataTypeField
-    , dtfFormat
-    , dtfName
-    , dtfOptional
+    -- ** AggregateBy
+    , AggregateBy
+    , aggregateBy
+    , abDataTypeName
+    , abDataSourceId
 
     -- ** DataTypeFieldFormat
     , DataTypeFieldFormat (..)
@@ -144,6 +107,77 @@ module Network.Google.Fitness
     , dMinStartTimeNs
     , dMaxEndTimeNs
 
+    -- ** Application
+    , Application
+    , application
+    , aPackageName
+    , aName
+    , aVersion
+    , aDetailsUrl
+
+    -- ** Alt
+    , Alt (..)
+
+    -- ** AggregateResponse
+    , AggregateResponse
+    , aggregateResponse
+    , arBucket
+
+    -- ** DataSource
+    , DataSource
+    , dataSource
+    , dsApplication
+    , dsDevice
+    , dsName
+    , dsDataType
+    , dsType
+    , dsDataStreamName
+    , dsDataStreamId
+
+    -- ** DataType
+    , DataType
+    , dataType
+    , dtField
+    , dtName
+
+    -- ** BucketByTime
+    , BucketByTime
+    , bucketByTime
+    , bbtDurationMillis
+
+    -- ** ValueMapValEntry
+    , ValueMapValEntry
+    , valueMapValEntry
+    , vmveValue
+    , vmveKey
+
+    -- ** DeviceType
+    , DeviceType (..)
+
+    -- ** DataTypeField
+    , DataTypeField
+    , dataTypeField
+    , dtfFormat
+    , dtfName
+    , dtfOptional
+
+    -- ** AggregateRequest
+    , AggregateRequest
+    , aggregateRequest
+    , arEndTimeMillis
+    , arAggregateBy
+    , arBucketBySession
+    , arBucketByActivityType
+    , arBucketByTime
+    , arStartTimeMillis
+    , arBucketByActivitySegment
+
+    -- ** BucketByActivity
+    , BucketByActivity
+    , bucketByActivity
+    , bbaMinDurationMillis
+    , bbaActivityDataSourceId
+
     -- ** Device
     , Device
     , device
@@ -153,25 +187,18 @@ module Network.Google.Fitness
     , dVersion
     , dType
 
-    -- ** DeviceType
-    , DeviceType (..)
+    -- ** Value
+    , Value
+    , value
+    , vMapVal
+    , vFpVal
+    , vIntVal
+    , vStringVal
 
-    -- ** ListDataSourcesResponse
-    , ListDataSourcesResponse
-    , listDataSourcesResponse
-    , ldsrDataSource
-
-    -- ** ListSessionsResponse
-    , ListSessionsResponse
-    , listSessionsResponse
-    , lsrNextPageToken
-    , lsrDeletedSession
-    , lsrSession
-
-    -- ** MapValue
-    , MapValue
-    , mapValue
-    , mvFpVal
+    -- ** BucketBySession
+    , BucketBySession
+    , bucketBySession
+    , bbsMinDurationMillis
 
     -- ** Session
     , Session
@@ -186,21 +213,17 @@ module Network.Google.Fitness
     , sStartTimeMillis
     , sDescription
 
-    -- ** Value
-    , Value
-    , value
-    , vMapVal
-    , vFpVal
-    , vIntVal
-    , vStringVal
-
-    -- ** ValueMapValEntry
-    , ValueMapValEntry
-    , valueMapValEntry
-    , vmveValue
-    , vmveKey
+    -- ** DataSourceType
+    , DataSourceType (..)
     ) where
 
+import           Network.Google.API.Fitness.Users.Dataset.Aggregate
+import           Network.Google.API.Fitness.Users.DataSources.Datasets.Delete
+import           Network.Google.API.Fitness.Users.DataSources.Datasets.Get
+import           Network.Google.API.Fitness.Users.DataSources.Datasets.Patch
+import           Network.Google.API.Fitness.Users.Sessions.Delete
+import           Network.Google.API.Fitness.Users.Sessions.List
+import           Network.Google.API.Fitness.Users.Sessions.Update
 import           Network.Google.Fitness.Types
 import           Network.Google.Prelude
 
@@ -208,164 +231,14 @@ import           Network.Google.Prelude
 TODO
 -}
 
-type Fitness = UsersAPI
+type Fitness =
+     UsersSessionsUpdateAPI :<|>
+       UsersDataSourcesDatasetsGetAPI
+       :<|> UsersDataSourcesDatasetsDeleteAPI
+       :<|> UsersDataSourcesDatasetsPatchAPI
+       :<|> UsersSessionsListAPI
+       :<|> UsersSessionsDeleteAPI
+       :<|> UsersDatasetAggregateAPI
 
-type UsersAPI =
-     DatasetAPI :<|> DataSourcesAPI :<|> SessionsAPI
-
-type DatasetAPI = DatasetAggregate
-
--- | Aggregates data of a certain type or stream into buckets divided by a
--- given type of boundary. Multiple data sets of multiple types and from
--- multiple sources can be aggreated into exactly one bucket type per
--- request.
-type DatasetAggregate =
-     "fitness" :>
-       "v1" :>
-         "users" :>
-           Capture "userId" Text :>
-             "dataset:aggregate" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Post '[JSON] AggregateResponse
-
-type DataSourcesAPI = DatasetsAPI
-
-type DatasetsAPI =
-     DatasetsPatch :<|> DatasetsGet :<|> DatasetsDelete
-
--- | Adds data points to a dataset. The dataset need not be previously
--- created. All points within the given dataset will be returned with
--- subsquent calls to retrieve this dataset. Data points can belong to more
--- than one dataset. This method does not use patch semantics.
-type DatasetsPatch =
-     "fitness" :>
-       "v1" :>
-         "users" :>
-           Capture "userId" Text :>
-             "dataSources" :>
-               Capture "dataSourceId" Text :>
-                 "datasets" :>
-                   Capture "datasetId" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "currentTimeMillis" Int64 :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Patch '[JSON] Dataset
-
--- | Returns a dataset containing all data points whose start and end times
--- overlap with the specified range of the dataset minimum start time and
--- maximum end time. Specifically, any data point whose start time is less
--- than or equal to the dataset end time and whose end time is greater than
--- or equal to the dataset start time.
-type DatasetsGet =
-     "fitness" :>
-       "v1" :>
-         "users" :>
-           Capture "userId" Text :>
-             "dataSources" :>
-               Capture "dataSourceId" Text :>
-                 "datasets" :>
-                   Capture "datasetId" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "limit" Int32 :>
-                               QueryParam "pageToken" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "alt" Text :>
-                                       Get '[JSON] Dataset
-
--- | Performs an inclusive delete of all data points whose start and end
--- times have any overlap with the time range specified by the dataset ID.
--- For most data types, the entire data point will be deleted. For data
--- types where the time span represents a consistent value (such as
--- com.google.activity.segment), and a data point straddles either end
--- point of the dataset, only the overlapping portion of the data point
--- will be deleted.
-type DatasetsDelete =
-     "fitness" :>
-       "v1" :>
-         "users" :>
-           Capture "userId" Text :>
-             "dataSources" :>
-               Capture "dataSourceId" Text :>
-                 "datasets" :>
-                   Capture "datasetId" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "modifiedTimeMillis" Int64 :>
-                               QueryParam "currentTimeMillis" Int64 :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "alt" Text :> Delete '[JSON] ()
-
-type SessionsAPI =
-     SessionsList :<|> SessionsDelete :<|> SessionsUpdate
-
--- | Lists sessions previously created.
-type SessionsList =
-     "fitness" :>
-       "v1" :>
-         "users" :>
-           Capture "userId" Text :>
-             "sessions" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "startTime" Text :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "endTime" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "includeDeleted" Bool :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Get '[JSON] ListSessionsResponse
-
--- | Deletes a session specified by the given session ID.
-type SessionsDelete =
-     "fitness" :>
-       "v1" :>
-         "users" :>
-           Capture "userId" Text :>
-             "sessions" :>
-               Capture "sessionId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "currentTimeMillis" Int64 :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Updates or insert a given session.
-type SessionsUpdate =
-     "fitness" :>
-       "v1" :>
-         "users" :>
-           Capture "userId" Text :>
-             "sessions" :>
-               Capture "sessionId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "currentTimeMillis" Int64 :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Put '[JSON] Session
+fitness :: Proxy Fitness
+fitness = Proxy

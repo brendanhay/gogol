@@ -14,39 +14,17 @@
 --
 module Network.Google.DeploymentManager.Types
     (
+    -- * Service URL
+      deploymentManagerURL
 
-    -- * Deployment
-      Deployment
-    , deployment
-    , dState
-    , dInsertTime
-    , dFingerprint
-    , dIntent
-    , dUpdateTime
-    , dName
-    , dManifest
-    , dId
-    , dDescription
-    , dUpdate
-    , dTarget
+    -- * DeploymentsPatch'CreatePolicy
+    , DeploymentsPatch'CreatePolicy (..)
 
-    -- * DeploymentUpdate
-    , DeploymentUpdate
-    , deploymentUpdate
-    , duManifest
-    , duErrors
-
-    -- * DeploymentsListResponse
-    , DeploymentsListResponse
-    , deploymentsListResponse
-    , dlrNextPageToken
-    , dlrDeployments
-
-    -- * ImportFile
-    , ImportFile
-    , importFile
-    , ifContent
-    , ifName
+    -- * OperationItemDataItemWarnings
+    , OperationItemDataItemWarnings
+    , operationItemDataItemWarnings
+    , oidiwValue
+    , oidiwKey
 
     -- * Manifest
     , Manifest
@@ -60,11 +38,115 @@ module Network.Google.DeploymentManager.Types
     , mEvaluatedConfig
     , mId
 
+    -- * TypesListResponse
+    , TypesListResponse
+    , typesListResponse
+    , tlrNextPageToken
+    , tlrTypes
+
+    -- * OperationItemWarnings
+    , OperationItemWarnings
+    , operationItemWarnings
+    , oiwData
+    , oiwCode
+    , oiwMessage
+
+    -- * Alt
+    , Alt (..)
+
     -- * ManifestsListResponse
     , ManifestsListResponse
     , manifestsListResponse
     , mlrNextPageToken
     , mlrManifests
+
+    -- * Type
+    , Type
+    , type'
+    , tInsertTime
+    , tSelfLink
+    , tName
+    , tId
+
+    -- * OperationItemErrorsError
+    , OperationItemErrorsError
+    , operationItemErrorsError
+    , oieeLocation
+    , oieeCode
+    , oieeMessage
+
+    -- * ImportFile
+    , ImportFile
+    , importFile
+    , ifContent
+    , ifName
+
+    -- * DeploymentsListResponse
+    , DeploymentsListResponse
+    , deploymentsListResponse
+    , dlrNextPageToken
+    , dlrDeployments
+
+    -- * DeploymentsUpdate'CreatePolicy
+    , DeploymentsUpdate'CreatePolicy (..)
+
+    -- * OperationError
+    , OperationError
+    , operationError
+    , oeErrors
+
+    -- * DeploymentsUpdate'UpdatePolicy
+    , DeploymentsUpdate'UpdatePolicy (..)
+
+    -- * DeploymentsUpdate'DeletePolicy
+    , DeploymentsUpdate'DeletePolicy (..)
+
+    -- * DeploymentsPatch'UpdatePolicy
+    , DeploymentsPatch'UpdatePolicy (..)
+
+    -- * Deployment
+    , Deployment
+    , deployment
+    , dState
+    , dInsertTime
+    , dFingerprint
+    , dIntent
+    , dUpdateTime
+    , dName
+    , dManifest
+    , dId
+    , dDescription
+    , dUpdate
+    , dTarget
+
+    -- * DeploymentsPatch'DeletePolicy
+    , DeploymentsPatch'DeletePolicy (..)
+
+    -- * TargetConfiguration
+    , TargetConfiguration
+    , targetConfiguration
+    , tcConfig
+    , tcImports
+
+    -- * OperationsListResponse
+    , OperationsListResponse
+    , operationsListResponse
+    , olrNextPageToken
+    , olrOperations
+
+    -- * Resource
+    , Resource
+    , resource
+    , rInsertTime
+    , rUrl
+    , rUpdateTime
+    , rName
+    , rManifest
+    , rFinalProperties
+    , rId
+    , rType
+    , rUpdate
+    , rProperties
 
     -- * Operation
     , Operation
@@ -92,50 +174,17 @@ module Network.Google.DeploymentManager.Types
     , oTargetLink
     , oClientOperationId
 
-    -- * OperationError
-    , OperationError
-    , operationError
-    , oeErrors
+    -- * ResourcesListResponse
+    , ResourcesListResponse
+    , resourcesListResponse
+    , rlrNextPageToken
+    , rlrResources
 
-    -- * OperationItemDataItemWarnings
-    , OperationItemDataItemWarnings
-    , operationItemDataItemWarnings
-    , oidiwValue
-    , oidiwKey
-
-    -- * OperationItemErrorsError
-    , OperationItemErrorsError
-    , operationItemErrorsError
-    , oieeLocation
-    , oieeCode
-    , oieeMessage
-
-    -- * OperationItemWarnings
-    , OperationItemWarnings
-    , operationItemWarnings
-    , oiwData
-    , oiwCode
-    , oiwMessage
-
-    -- * OperationsListResponse
-    , OperationsListResponse
-    , operationsListResponse
-    , olrNextPageToken
-    , olrOperations
-
-    -- * Resource
-    , Resource
-    , resource
-    , rInsertTime
-    , rUrl
-    , rUpdateTime
-    , rName
-    , rManifest
-    , rFinalProperties
-    , rId
-    , rType
-    , rUpdate
-    , rProperties
+    -- * DeploymentUpdate
+    , DeploymentUpdate
+    , deploymentUpdate
+    , duManifest
+    , duErrors
 
     -- * ResourceUpdate
     , ResourceUpdate
@@ -146,34 +195,15 @@ module Network.Google.DeploymentManager.Types
     , ruFinalProperties
     , ruErrors
     , ruProperties
-
-    -- * ResourcesListResponse
-    , ResourcesListResponse
-    , resourcesListResponse
-    , rlrNextPageToken
-    , rlrResources
-
-    -- * TargetConfiguration
-    , TargetConfiguration
-    , targetConfiguration
-    , tcConfig
-    , tcImports
-
-    -- * Type
-    , Type
-    , type'
-    , tInsertTime
-    , tSelfLink
-    , tName
-    , tId
-
-    -- * TypesListResponse
-    , TypesListResponse
-    , typesListResponse
-    , tlrNextPageToken
-    , tlrTypes
     ) where
 
 import           Network.Google.DeploymentManager.Types.Product
 import           Network.Google.DeploymentManager.Types.Sum
 import           Network.Google.Prelude
+
+-- | URL referring to version 'v2beta2' of the Google Cloud Deployment Manager API.
+deploymentManagerURL :: BaseUrl
+deploymentManagerURL
+  = BaseUrl Https
+      "https://www.googleapis.com/deploymentmanager/v2beta2/projects/"
+      443

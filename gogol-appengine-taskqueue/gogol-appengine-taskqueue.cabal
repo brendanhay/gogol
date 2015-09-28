@@ -1,6 +1,6 @@
 name:                  gogol-appengine-taskqueue
 version:               0.0.1
-synopsis:              Google TaskQueue API.
+synopsis:              Google TaskQueue API Client.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -16,8 +16,8 @@ extra-source-files:    README.md
 description:
     Lets you access a Google App Engine Pull Task Queue over REST.
     .
-    /Warning:/ This is an experimental preview release which is still under
-    heavy development and not intended for public consumption, caveat emptor!
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
 
 source-repository head
     type:     git
@@ -30,7 +30,15 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.AppEngine.TaskQueue
+          Network.Google.API.Taskqueue.Taskqueues.Get
+        , Network.Google.API.Taskqueue.Tasks.Delete
+        , Network.Google.API.Taskqueue.Tasks.Get
+        , Network.Google.API.Taskqueue.Tasks.Insert
+        , Network.Google.API.Taskqueue.Tasks.Lease
+        , Network.Google.API.Taskqueue.Tasks.List
+        , Network.Google.API.Taskqueue.Tasks.Patch
+        , Network.Google.API.Taskqueue.Tasks.Update
+        , Network.Google.AppEngine.TaskQueue
         , Network.Google.AppEngine.TaskQueue.Types
 
     other-modules:

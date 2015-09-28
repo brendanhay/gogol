@@ -14,9 +14,11 @@
 --
 module Network.Google.Billing.Types
     (
+    -- * Service URL
+      billingURL
 
     -- * BillingAccount
-      BillingAccount
+    , BillingAccount
     , billingAccount
     , baOpen
     , baName
@@ -28,12 +30,6 @@ module Network.Google.Billing.Types
     , lbarNextPageToken
     , lbarBillingAccounts
 
-    -- * ListProjectBillingInfoResponse
-    , ListProjectBillingInfoResponse
-    , listProjectBillingInfoResponse
-    , lpbirNextPageToken
-    , lpbirProjectBillingInfo
-
     -- * ProjectBillingInfo
     , ProjectBillingInfo
     , projectBillingInfo
@@ -41,8 +37,21 @@ module Network.Google.Billing.Types
     , pbiBillingAccountName
     , pbiProjectId
     , pbiBillingEnabled
+
+    -- * ListProjectBillingInfoResponse
+    , ListProjectBillingInfoResponse
+    , listProjectBillingInfoResponse
+    , lpbirNextPageToken
+    , lpbirProjectBillingInfo
     ) where
 
 import           Network.Google.Billing.Types.Product
 import           Network.Google.Billing.Types.Sum
 import           Network.Google.Prelude
+
+-- | URL referring to version 'v1' of the Google Cloud Billing API.
+billingURL :: BaseUrl
+billingURL
+  = BaseUrl Https
+      "https://cloudbilling.googleapis.com/"
+      443

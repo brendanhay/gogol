@@ -17,14 +17,44 @@
 -- /See:/ <https://developers.google.com/url-shortener/v1/getting_started URL Shortener API Reference>
 module Network.Google.URLShortener
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** URL Shortener API
       URLShortener
-    , UrlAPI
-    , UrlInsert
-    , UrlList
-    , UrlGet
+    , uRLShortener
+    , uRLShortenerURL
+
+    -- ** urlshortener.url.get
+    , module Network.Google.API.URLShortener.URL.Get
+
+    -- ** urlshortener.url.insert
+    , module Network.Google.API.URLShortener.URL.Insert
+
+    -- ** urlshortener.url.list
+    , module Network.Google.API.URLShortener.URL.List
 
     -- * Types
+
+    -- ** URLGet'Projection
+    , URLGet'Projection (..)
+
+    -- ** Alt
+    , Alt (..)
+
+    -- ** StringCount
+    , StringCount
+    , stringCount
+    , scCount
+    , scId
+
+    -- ** UrlHistory
+    , UrlHistory
+    , urlHistory
+    , uhTotalItems
+    , uhNextPageToken
+    , uhItemsPerPage
+    , uhKind
+    , uhItems
 
     -- ** AnalyticsSnapshot
     , AnalyticsSnapshot
@@ -45,11 +75,8 @@ module Network.Google.URLShortener
     , asTwoHours
     , asMonth
 
-    -- ** StringCount
-    , StringCount
-    , stringCount
-    , scCount
-    , scId
+    -- ** URLList'Projection
+    , URLList'Projection (..)
 
     -- ** Url
     , Url
@@ -60,17 +87,11 @@ module Network.Google.URLShortener
     , urlAnalytics
     , urlLongUrl
     , urlId
-
-    -- ** UrlHistory
-    , UrlHistory
-    , urlHistory
-    , uhTotalItems
-    , uhNextPageToken
-    , uhItemsPerPage
-    , uhKind
-    , uhItems
     ) where
 
+import           Network.Google.API.URLShortener.URL.Get
+import           Network.Google.API.URLShortener.URL.Insert
+import           Network.Google.API.URLShortener.URL.List
 import           Network.Google.Prelude
 import           Network.Google.URLShortener.Types
 
@@ -78,50 +99,8 @@ import           Network.Google.URLShortener.Types
 TODO
 -}
 
-type URLShortener = UrlAPI
+type URLShortener =
+     URLInsertAPI :<|> URLGetAPI :<|> URLListAPI
 
-type UrlAPI = UrlInsert :<|> UrlList :<|> UrlGet
-
--- | Creates a new short URL.
-type UrlInsert =
-     "urlshortener" :>
-       "v1" :>
-         "url" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "alt" Text :> Post '[JSON] Url
-
--- | Retrieves a list of URLs shortened by a user.
-type UrlList =
-     "urlshortener" :>
-       "v1" :>
-         "url" :>
-           "history" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "start-token" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "projection" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] UrlHistory
-
--- | Expands a short URL or gets creation time and analytics.
-type UrlGet =
-     "urlshortener" :>
-       "v1" :>
-         "url" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "projection" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "shortUrl" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Get '[JSON] Url
+uRLShortener :: Proxy URLShortener
+uRLShortener = Proxy

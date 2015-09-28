@@ -1,6 +1,6 @@
 name:                  gogol-adexchange-seller
 version:               0.0.1
-synopsis:              Google Ad Exchange Seller API.
+synopsis:              Google Ad Exchange Seller API Client.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -17,8 +17,8 @@ description:
     Gives Ad Exchange seller users access to their inventory and the ability
     to generate reports
     .
-    /Warning:/ This is an experimental preview release which is still under
-    heavy development and not intended for public consumption, caveat emptor!
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
 
 source-repository head
     type:     git
@@ -31,12 +31,23 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.AdExchange.Seller
-        , Network.Google.AdExchange.Seller.Types
+          Network.Google.API.AdExchangeSeller.Accounts.Adclients.List
+        , Network.Google.API.AdExchangeSeller.Accounts.Alerts.List
+        , Network.Google.API.AdExchangeSeller.Accounts.Customchannels.Get
+        , Network.Google.API.AdExchangeSeller.Accounts.Customchannels.List
+        , Network.Google.API.AdExchangeSeller.Accounts.Metadata.Dimensions.List
+        , Network.Google.API.AdExchangeSeller.Accounts.Metadata.Metrics.List
+        , Network.Google.API.AdExchangeSeller.Accounts.Preferreddeals.Get
+        , Network.Google.API.AdExchangeSeller.Accounts.Preferreddeals.List
+        , Network.Google.API.AdExchangeSeller.Accounts.Reports.Saved.Generate
+        , Network.Google.API.AdExchangeSeller.Accounts.Reports.Saved.List
+        , Network.Google.API.AdExchangeSeller.Accounts.URLchannels.List
+        , Network.Google.AdExchangeSeller
+        , Network.Google.AdExchangeSeller.Types
 
     other-modules:
-          Network.Google.AdExchange.Seller.Types.Product
-        , Network.Google.AdExchange.Seller.Types.Sum
+          Network.Google.AdExchangeSeller.Types.Product
+        , Network.Google.AdExchangeSeller.Types.Sum
 
     build-depends:
           gogol-core == 0.0.1.*

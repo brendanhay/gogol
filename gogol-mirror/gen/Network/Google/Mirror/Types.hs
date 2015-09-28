@@ -14,39 +14,112 @@
 --
 module Network.Google.Mirror.Types
     (
+    -- * Service URL
+      mirrorURL
 
-    -- * Account
-      Account
-    , account
-    , aAuthTokens
-    , aUserData
-    , aPassword
-    , aFeatures
+    -- * UserAction
+    , UserAction
+    , userAction
+    , uaPayload
+    , uaType
 
-    -- * Attachment
-    , Attachment
-    , attachment
-    , aContentUrl
-    , aId
-    , aIsProcessingContent
-    , aContentType
+    -- * Alt
+    , Alt (..)
 
-    -- * AttachmentsListResponse
-    , AttachmentsListResponse
-    , attachmentsListResponse
-    , alrKind
-    , alrItems
+    -- * MenuValue
+    , MenuValue
+    , menuValue
+    , mvState
+    , mvDisplayName
+    , mvIconUrl
 
-    -- * AuthToken
-    , AuthToken
-    , authToken
-    , atAuthToken
-    , atType
+    -- * Subscription
+    , Subscription
+    , subscription
+    , sCallbackUrl
+    , sOperation
+    , sNotification
+    , sKind
+    , sCollection
+    , sVerifyToken
+    , sUserToken
+    , sId
+    , sUpdated
+
+    -- * MenuItem
+    , MenuItem
+    , menuItem
+    , miValues
+    , miRemoveWhenSelected
+    , miAction
+    , miPayload
+    , miContextualCommand
+    , miId
+
+    -- * Setting
+    , Setting
+    , setting
+    , setKind
+    , setValue
+    , setId
+
+    -- * SubscriptionsListResponse
+    , SubscriptionsListResponse
+    , subscriptionsListResponse
+    , slrKind
+    , slrItems
+
+    -- * LocationsListResponse
+    , LocationsListResponse
+    , locationsListResponse
+    , llrKind
+    , llrItems
+
+    -- * NotificationConfig
+    , NotificationConfig
+    , notificationConfig
+    , ncDeliveryTime
+    , ncLevel
 
     -- * Command
     , Command
     , command
     , cType
+
+    -- * ContactsListResponse
+    , ContactsListResponse
+    , contactsListResponse
+    , clrKind
+    , clrItems
+
+    -- * TimelineListResponse
+    , TimelineListResponse
+    , timelineListResponse
+    , tlrNextPageToken
+    , tlrKind
+    , tlrItems
+
+    -- * Location
+    , Location
+    , location
+    , lKind
+    , lLatitude
+    , lAddress
+    , lDisplayName
+    , lId
+    , lAccuracy
+    , lLongitude
+    , lTimestamp
+
+    -- * Notification
+    , Notification
+    , notification
+    , nOperation
+    , nItemId
+    , nCollection
+    , nUserActions
+    , nVerifyToken
+    , nUserToken
 
     -- * Contact
     , Contact
@@ -64,88 +137,17 @@ module Network.Google.Mirror.Types
     , conType
     , conSpeakableName
 
-    -- * ContactsListResponse
-    , ContactsListResponse
-    , contactsListResponse
-    , clrKind
-    , clrItems
+    -- * AttachmentsListResponse
+    , AttachmentsListResponse
+    , attachmentsListResponse
+    , alrKind
+    , alrItems
 
-    -- * Location
-    , Location
-    , location
-    , lKind
-    , lLatitude
-    , lAddress
-    , lDisplayName
-    , lId
-    , lAccuracy
-    , lLongitude
-    , lTimestamp
-
-    -- * LocationsListResponse
-    , LocationsListResponse
-    , locationsListResponse
-    , llrKind
-    , llrItems
-
-    -- * MenuItem
-    , MenuItem
-    , menuItem
-    , miValues
-    , miRemoveWhenSelected
-    , miAction
-    , miPayload
-    , miContextualCommand
-    , miId
-
-    -- * MenuValue
-    , MenuValue
-    , menuValue
-    , mvState
-    , mvDisplayName
-    , mvIconUrl
-
-    -- * Notification
-    , Notification
-    , notification
-    , nOperation
-    , nItemId
-    , nCollection
-    , nUserActions
-    , nVerifyToken
-    , nUserToken
-
-    -- * NotificationConfig
-    , NotificationConfig
-    , notificationConfig
-    , ncDeliveryTime
-    , ncLevel
-
-    -- * Setting
-    , Setting
-    , setting
-    , setKind
-    , setValue
-    , setId
-
-    -- * Subscription
-    , Subscription
-    , subscription
-    , sCallbackUrl
-    , sOperation
-    , sNotification
-    , sKind
-    , sCollection
-    , sVerifyToken
-    , sUserToken
-    , sId
-    , sUpdated
-
-    -- * SubscriptionsListResponse
-    , SubscriptionsListResponse
-    , subscriptionsListResponse
-    , slrKind
-    , slrItems
+    -- * AuthToken
+    , AuthToken
+    , authToken
+    , atAuthToken
+    , atType
 
     -- * TimelineItem
     , TimelineItem
@@ -177,18 +179,21 @@ module Network.Google.Mirror.Types
     , tiTitle
     , tiInReplyTo
 
-    -- * TimelineListResponse
-    , TimelineListResponse
-    , timelineListResponse
-    , tlrNextPageToken
-    , tlrKind
-    , tlrItems
+    -- * Attachment
+    , Attachment
+    , attachment
+    , aContentUrl
+    , aId
+    , aIsProcessingContent
+    , aContentType
 
-    -- * UserAction
-    , UserAction
-    , userAction
-    , uaPayload
-    , uaType
+    -- * Account
+    , Account
+    , account
+    , aAuthTokens
+    , aUserData
+    , aPassword
+    , aFeatures
 
     -- * UserData
     , UserData
@@ -200,3 +205,10 @@ module Network.Google.Mirror.Types
 import           Network.Google.Mirror.Types.Product
 import           Network.Google.Mirror.Types.Sum
 import           Network.Google.Prelude
+
+-- | URL referring to version 'v1' of the Google Mirror API.
+mirrorURL :: BaseUrl
+mirrorURL
+  = BaseUrl Https
+      "https://www.googleapis.com/mirror/v1/"
+      443

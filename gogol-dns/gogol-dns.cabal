@@ -1,6 +1,6 @@
 name:                  gogol-dns
 version:               0.0.1
-synopsis:              Google Cloud DNS API.
+synopsis:              Google Cloud DNS API Client.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -17,8 +17,8 @@ description:
     The Google Cloud DNS API provides services for configuring and serving
     authoritative DNS records.
     .
-    /Warning:/ This is an experimental preview release which is still under
-    heavy development and not intended for public consumption, caveat emptor!
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
 
 source-repository head
     type:     git
@@ -31,7 +31,16 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.DNS
+          Network.Google.API.DNS.Changes.Create
+        , Network.Google.API.DNS.Changes.Get
+        , Network.Google.API.DNS.Changes.List
+        , Network.Google.API.DNS.ManagedZones.Create
+        , Network.Google.API.DNS.ManagedZones.Delete
+        , Network.Google.API.DNS.ManagedZones.Get
+        , Network.Google.API.DNS.ManagedZones.List
+        , Network.Google.API.DNS.Projects.Get
+        , Network.Google.API.DNS.ResourceRecordSets.List
+        , Network.Google.DNS
         , Network.Google.DNS.Types
 
     other-modules:

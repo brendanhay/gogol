@@ -1,6 +1,6 @@
 name:                  gogol-books
 version:               0.0.1
-synopsis:              Google Books API.
+synopsis:              Google Books API Client.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -16,8 +16,8 @@ extra-source-files:    README.md
 description:
     Lets you search for books and manage your Google Books library.
     .
-    /Warning:/ This is an experimental preview release which is still under
-    heavy development and not intended for public consumption, caveat emptor!
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
 
 source-repository head
     type:     git
@@ -30,7 +30,39 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.Books
+          Network.Google.API.Books.Bookshelves.Volumes.List
+        , Network.Google.API.Books.Cloudloading.AddBook
+        , Network.Google.API.Books.Cloudloading.DeleteBook
+        , Network.Google.API.Books.Cloudloading.UpdateBook
+        , Network.Google.API.Books.Dictionary.ListOfflineMetadata
+        , Network.Google.API.Books.Layers.AnnotationData.Get
+        , Network.Google.API.Books.Layers.AnnotationData.List
+        , Network.Google.API.Books.Layers.VolumeAnnotations.Get
+        , Network.Google.API.Books.Layers.VolumeAnnotations.List
+        , Network.Google.API.Books.Myconfig.GetUserSettings
+        , Network.Google.API.Books.Myconfig.ReleaseDownloadAccess
+        , Network.Google.API.Books.Myconfig.RequestAccess
+        , Network.Google.API.Books.Myconfig.SyncVolumeLicenses
+        , Network.Google.API.Books.Myconfig.UpdateUserSettings
+        , Network.Google.API.Books.Mylibrary.Annotations.Delete
+        , Network.Google.API.Books.Mylibrary.Annotations.Insert
+        , Network.Google.API.Books.Mylibrary.Annotations.List
+        , Network.Google.API.Books.Mylibrary.Annotations.Summary
+        , Network.Google.API.Books.Mylibrary.Annotations.Update
+        , Network.Google.API.Books.Mylibrary.Bookshelves.Volumes.List
+        , Network.Google.API.Books.Mylibrary.Readingpositions.Get
+        , Network.Google.API.Books.Mylibrary.Readingpositions.SetPosition
+        , Network.Google.API.Books.Onboarding.ListCategories
+        , Network.Google.API.Books.Onboarding.ListCategoryVolumes
+        , Network.Google.API.Books.Promooffer.Accept
+        , Network.Google.API.Books.Promooffer.Dismiss
+        , Network.Google.API.Books.Promooffer.Get
+        , Network.Google.API.Books.Volumes.Associated.List
+        , Network.Google.API.Books.Volumes.Mybooks.List
+        , Network.Google.API.Books.Volumes.Recommended.List
+        , Network.Google.API.Books.Volumes.Recommended.Rate
+        , Network.Google.API.Books.Volumes.Useruploaded.List
+        , Network.Google.Books
         , Network.Google.Books.Types
 
     other-modules:

@@ -1,6 +1,6 @@
 name:                  gogol-adsense
 version:               0.0.1
-synopsis:              Google AdSense Management API.
+synopsis:              Google AdSense Management API Client.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -17,8 +17,8 @@ description:
     Gives AdSense publishers access to their inventory and the ability to
     generate reports
     .
-    /Warning:/ This is an experimental preview release which is still under
-    heavy development and not intended for public consumption, caveat emptor!
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
 
 source-repository head
     type:     git
@@ -31,7 +31,31 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.AdSense
+          Network.Google.API.AdSense.Accounts.Adclients.List
+        , Network.Google.API.AdSense.Accounts.Adunits.Customchannels.List
+        , Network.Google.API.AdSense.Accounts.Alerts.Delete
+        , Network.Google.API.AdSense.Accounts.Alerts.List
+        , Network.Google.API.AdSense.Accounts.Customchannels.Adunits.List
+        , Network.Google.API.AdSense.Accounts.Payments.List
+        , Network.Google.API.AdSense.Accounts.Reports.Saved.Generate
+        , Network.Google.API.AdSense.Accounts.Reports.Saved.List
+        , Network.Google.API.AdSense.Accounts.Savedadstyles.Get
+        , Network.Google.API.AdSense.Accounts.Savedadstyles.List
+        , Network.Google.API.AdSense.Accounts.URLchannels.List
+        , Network.Google.API.AdSense.Adclients.List
+        , Network.Google.API.AdSense.Adunits.Customchannels.List
+        , Network.Google.API.AdSense.Alerts.Delete
+        , Network.Google.API.AdSense.Alerts.List
+        , Network.Google.API.AdSense.Customchannels.Adunits.List
+        , Network.Google.API.AdSense.Metadata.Dimensions.List
+        , Network.Google.API.AdSense.Metadata.Metrics.List
+        , Network.Google.API.AdSense.Payments.List
+        , Network.Google.API.AdSense.Reports.Saved.Generate
+        , Network.Google.API.AdSense.Reports.Saved.List
+        , Network.Google.API.AdSense.Savedadstyles.Get
+        , Network.Google.API.AdSense.Savedadstyles.List
+        , Network.Google.API.AdSense.URLchannels.List
+        , Network.Google.AdSense
         , Network.Google.AdSense.Types
 
     other-modules:

@@ -17,124 +17,125 @@
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference>
 module Network.Google.SQLAdmin
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** Cloud SQL Administration API
       SQLAdmin
-    , FlagsAPI
-    , FlagsList
-    , UsersAPI
-    , UsersInsert
-    , UsersList
-    , UsersDelete
-    , UsersUpdate
-    , TiersAPI
-    , TiersList
-    , BackupRunsAPI
-    , BackupRunsList
-    , BackupRunsGet
-    , BackupRunsDelete
-    , SslCertsAPI
-    , SslCertsInsert
-    , SslCertsList
-    , SslCertsGet
-    , SslCertsCreateEphemeral
-    , SslCertsDelete
-    , InstancesAPI
-    , InstancesExport
-    , InstancesInsert
-    , InstancesList
-    , InstancesStartReplica
-    , InstancesClone
-    , InstancesPatch
-    , InstancesGet
-    , InstancesRestoreBackup
-    , InstancesRestart
-    , InstancesImport
-    , InstancesStopReplica
-    , InstancesResetSslConfig
-    , InstancesPromoteReplica
-    , InstancesDelete
-    , InstancesUpdate
-    , OperationsAPI
-    , OperationsList
-    , OperationsGet
-    , DatabasesAPI
-    , DatabasesInsert
-    , DatabasesList
-    , DatabasesPatch
-    , DatabasesGet
-    , DatabasesDelete
-    , DatabasesUpdate
+    , sQLAdmin
+    , sQLAdminURL
+
+    -- ** sql.backupRuns.delete
+    , module Network.Google.API.Sql.BackupRuns.Delete
+
+    -- ** sql.backupRuns.get
+    , module Network.Google.API.Sql.BackupRuns.Get
+
+    -- ** sql.backupRuns.list
+    , module Network.Google.API.Sql.BackupRuns.List
+
+    -- ** sql.databases.delete
+    , module Network.Google.API.Sql.Databases.Delete
+
+    -- ** sql.databases.get
+    , module Network.Google.API.Sql.Databases.Get
+
+    -- ** sql.databases.insert
+    , module Network.Google.API.Sql.Databases.Insert
+
+    -- ** sql.databases.list
+    , module Network.Google.API.Sql.Databases.List
+
+    -- ** sql.databases.patch
+    , module Network.Google.API.Sql.Databases.Patch
+
+    -- ** sql.databases.update
+    , module Network.Google.API.Sql.Databases.Update
+
+    -- ** sql.flags.list
+    , module Network.Google.API.Sql.Flags.List
+
+    -- ** sql.instances.clone
+    , module Network.Google.API.Sql.Instances.Clone
+
+    -- ** sql.instances.delete
+    , module Network.Google.API.Sql.Instances.Delete
+
+    -- ** sql.instances.export
+    , module Network.Google.API.Sql.Instances.Export
+
+    -- ** sql.instances.get
+    , module Network.Google.API.Sql.Instances.Get
+
+    -- ** sql.instances.import
+    , module Network.Google.API.Sql.Instances.Import
+
+    -- ** sql.instances.insert
+    , module Network.Google.API.Sql.Instances.Insert
+
+    -- ** sql.instances.list
+    , module Network.Google.API.Sql.Instances.List
+
+    -- ** sql.instances.patch
+    , module Network.Google.API.Sql.Instances.Patch
+
+    -- ** sql.instances.promoteReplica
+    , module Network.Google.API.Sql.Instances.PromoteReplica
+
+    -- ** sql.instances.resetSslConfig
+    , module Network.Google.API.Sql.Instances.ResetSSLConfig
+
+    -- ** sql.instances.restart
+    , module Network.Google.API.Sql.Instances.Restart
+
+    -- ** sql.instances.restoreBackup
+    , module Network.Google.API.Sql.Instances.RestoreBackup
+
+    -- ** sql.instances.startReplica
+    , module Network.Google.API.Sql.Instances.StartReplica
+
+    -- ** sql.instances.stopReplica
+    , module Network.Google.API.Sql.Instances.StopReplica
+
+    -- ** sql.instances.update
+    , module Network.Google.API.Sql.Instances.Update
+
+    -- ** sql.operations.get
+    , module Network.Google.API.Sql.Operations.Get
+
+    -- ** sql.operations.list
+    , module Network.Google.API.Sql.Operations.List
+
+    -- ** sql.sslCerts.createEphemeral
+    , module Network.Google.API.Sql.SSLCerts.CreateEphemeral
+
+    -- ** sql.sslCerts.delete
+    , module Network.Google.API.Sql.SSLCerts.Delete
+
+    -- ** sql.sslCerts.get
+    , module Network.Google.API.Sql.SSLCerts.Get
+
+    -- ** sql.sslCerts.insert
+    , module Network.Google.API.Sql.SSLCerts.Insert
+
+    -- ** sql.sslCerts.list
+    , module Network.Google.API.Sql.SSLCerts.List
+
+    -- ** sql.tiers.list
+    , module Network.Google.API.Sql.Tiers.List
+
+    -- ** sql.users.delete
+    , module Network.Google.API.Sql.Users.Delete
+
+    -- ** sql.users.insert
+    , module Network.Google.API.Sql.Users.Insert
+
+    -- ** sql.users.list
+    , module Network.Google.API.Sql.Users.List
+
+    -- ** sql.users.update
+    , module Network.Google.API.Sql.Users.Update
 
     -- * Types
-
-    -- ** AclEntry
-    , AclEntry
-    , aclEntry
-    , aeKind
-    , aeValue
-    , aeName
-    , aeExpirationTime
-
-    -- ** BackupConfiguration
-    , BackupConfiguration
-    , backupConfiguration
-    , bcEnabled
-    , bcStartTime
-    , bcKind
-    , bcBinaryLogEnabled
-
-    -- ** BackupRun
-    , BackupRun
-    , backupRun
-    , brStatus
-    , brStartTime
-    , brKind
-    , brError
-    , brWindowStartTime
-    , brSelfLink
-    , brEndTime
-    , brId
-    , brEnqueuedTime
-    , brInstance
-
-    -- ** BackupRunsListResponse
-    , BackupRunsListResponse
-    , backupRunsListResponse
-    , brlrNextPageToken
-    , brlrKind
-    , brlrItems
-
-    -- ** BinLogCoordinates
-    , BinLogCoordinates
-    , binLogCoordinates
-    , blcBinLogPosition
-    , blcKind
-    , blcBinLogFileName
-
-    -- ** CloneContext
-    , CloneContext
-    , cloneContext
-    , ccDestinationInstanceName
-    , ccBinLogCoordinates
-    , ccKind
-
-    -- ** Database
-    , Database
-    , database
-    , dEtag
-    , dProject
-    , dKind
-    , dCollation
-    , dSelfLink
-    , dName
-    , dCharset
-    , dInstance
-
-    -- ** DatabaseFlags
-    , DatabaseFlags
-    , databaseFlags
-    , dfValue
-    , dfName
 
     -- ** DatabaseInstance
     , DatabaseInstance
@@ -160,33 +161,6 @@ module Network.Google.SQLAdmin
     , diServiceAccountEmailAddress
     , diIpAddresses
 
-    -- ** DatabasesListResponse
-    , DatabasesListResponse
-    , databasesListResponse
-    , dlrKind
-    , dlrItems
-
-    -- ** ExportContext
-    , ExportContext
-    , exportContext
-    , ecCsvExportOptions
-    , ecKind
-    , ecUri
-    , ecFileType
-    , ecSqlExportOptions
-    , ecDatabases
-
-    -- ** ExportContextCsvExportOptions
-    , ExportContextCsvExportOptions
-    , exportContextCsvExportOptions
-    , ecceoSelectQuery
-
-    -- ** ExportContextSqlExportOptions
-    , ExportContextSqlExportOptions
-    , exportContextSqlExportOptions
-    , ecseoSchemaOnly
-    , ecseoTables
-
     -- ** Flag
     , Flag
     , flag
@@ -198,11 +172,35 @@ module Network.Google.SQLAdmin
     , fType
     , fMinValue
 
-    -- ** FlagsListResponse
-    , FlagsListResponse
-    , flagsListResponse
-    , flrKind
-    , flrItems
+    -- ** CloneContext
+    , CloneContext
+    , cloneContext
+    , ccDestinationInstanceName
+    , ccBinLogCoordinates
+    , ccKind
+
+    -- ** BackupRun
+    , BackupRun
+    , backupRun
+    , brStatus
+    , brStartTime
+    , brKind
+    , brError
+    , brWindowStartTime
+    , brSelfLink
+    , brEndTime
+    , brId
+    , brEnqueuedTime
+    , brInstance
+
+    -- ** Alt
+    , Alt (..)
+
+    -- ** ExportContextSqlExportOptions
+    , ExportContextSqlExportOptions
+    , exportContextSqlExportOptions
+    , ecseoSchemaOnly
+    , ecseoTables
 
     -- ** ImportContext
     , ImportContext
@@ -213,26 +211,41 @@ module Network.Google.SQLAdmin
     , icUri
     , icFileType
 
-    -- ** ImportContextCsvImportOptions
-    , ImportContextCsvImportOptions
-    , importContextCsvImportOptions
-    , iccioColumns
-    , iccioTable
+    -- ** BackupRunsListResponse
+    , BackupRunsListResponse
+    , backupRunsListResponse
+    , brlrNextPageToken
+    , brlrKind
+    , brlrItems
+
+    -- ** OperationError
+    , OperationError
+    , operationError
+    , oeKind
+    , oeCode
+    , oeMessage
+
+    -- ** InstancesRestoreBackupRequest
+    , InstancesRestoreBackupRequest
+    , instancesRestoreBackupRequest
+    , irbrRestoreBackupContext
+
+    -- ** SslCertDetail
+    , SslCertDetail
+    , sslCertDetail
+    , scdCertInfo
+    , scdCertPrivateKey
+
+    -- ** ReplicaConfiguration
+    , ReplicaConfiguration
+    , replicaConfiguration
+    , rcKind
+    , rcMysqlReplicaConfiguration
 
     -- ** InstancesCloneRequest
     , InstancesCloneRequest
     , instancesCloneRequest
     , icrCloneContext
-
-    -- ** InstancesExportRequest
-    , InstancesExportRequest
-    , instancesExportRequest
-    , ierExportContext
-
-    -- ** InstancesImportRequest
-    , InstancesImportRequest
-    , instancesImportRequest
-    , iirImportContext
 
     -- ** InstancesListResponse
     , InstancesListResponse
@@ -241,30 +254,87 @@ module Network.Google.SQLAdmin
     , ilrKind
     , ilrItems
 
-    -- ** InstancesRestoreBackupRequest
-    , InstancesRestoreBackupRequest
-    , instancesRestoreBackupRequest
-    , irbrRestoreBackupContext
+    -- ** SslCertsInsertResponse
+    , SslCertsInsertResponse
+    , sslCertsInsertResponse
+    , scirServerCaCert
+    , scirKind
+    , scirClientCert
 
-    -- ** IpConfiguration
-    , IpConfiguration
-    , ipConfiguration
-    , icAuthorizedNetworks
-    , icRequireSsl
-    , icIpv4Enabled
+    -- ** SslCertsListResponse
+    , SslCertsListResponse
+    , sslCertsListResponse
+    , sclrKind
+    , sclrItems
 
-    -- ** IpMapping
-    , IpMapping
-    , ipMapping
-    , imIpAddress
-    , imTimeToRetire
+    -- ** OperationErrors
+    , OperationErrors
+    , operationErrors
+    , oKind
+    , oErrors
 
-    -- ** LocationPreference
-    , LocationPreference
-    , locationPreference
-    , lpKind
-    , lpFollowGaeApplication
-    , lpZone
+    -- ** RestoreBackupContext
+    , RestoreBackupContext
+    , restoreBackupContext
+    , rbcInstanceId
+    , rbcBackupRunId
+    , rbcKind
+
+    -- ** SslCert
+    , SslCert
+    , sslCert
+    , scCommonName
+    , scKind
+    , scCertSerialNumber
+    , scSelfLink
+    , scCert
+    , scSha1Fingerprint
+    , scExpirationTime
+    , scCreateTime
+    , scInstance
+
+    -- ** OperationsListResponse
+    , OperationsListResponse
+    , operationsListResponse
+    , olrNextPageToken
+    , olrKind
+    , olrItems
+
+    -- ** DatabasesListResponse
+    , DatabasesListResponse
+    , databasesListResponse
+    , dlrKind
+    , dlrItems
+
+    -- ** InstancesExportRequest
+    , InstancesExportRequest
+    , instancesExportRequest
+    , ierExportContext
+
+    -- ** OnPremisesConfiguration
+    , OnPremisesConfiguration
+    , onPremisesConfiguration
+    , opcKind
+    , opcHostPort
+
+    -- ** AclEntry
+    , AclEntry
+    , aclEntry
+    , aeKind
+    , aeValue
+    , aeName
+    , aeExpirationTime
+
+    -- ** DatabaseFlags
+    , DatabaseFlags
+    , databaseFlags
+    , dfValue
+    , dfName
+
+    -- ** ExportContextCsvExportOptions
+    , ExportContextCsvExportOptions
+    , exportContextCsvExportOptions
+    , ecceoSelectQuery
 
     -- ** MySqlReplicaConfiguration
     , MySqlReplicaConfiguration
@@ -281,11 +351,54 @@ module Network.Google.SQLAdmin
     , msrcDumpFilePath
     , msrcPassword
 
-    -- ** OnPremisesConfiguration
-    , OnPremisesConfiguration
-    , onPremisesConfiguration
-    , opcKind
-    , opcHostPort
+    -- ** ImportContextCsvImportOptions
+    , ImportContextCsvImportOptions
+    , importContextCsvImportOptions
+    , iccioColumns
+    , iccioTable
+
+    -- ** Tier
+    , Tier
+    , tier
+    , tKind
+    , tTier
+    , tRegion
+    , tDiskQuota
+    , tRAM
+
+    -- ** Database
+    , Database
+    , database
+    , datEtag
+    , datProject
+    , datKind
+    , datCollation
+    , datSelfLink
+    , datName
+    , datCharset
+    , datInstance
+
+    -- ** Settings
+    , Settings
+    , settings
+    , sReplicationType
+    , sActivationPolicy
+    , sSettingsVersion
+    , sAuthorizedGaeApplications
+    , sKind
+    , sPricingPlan
+    , sIpConfiguration
+    , sDatabaseReplicationEnabled
+    , sTier
+    , sDatabaseFlags
+    , sCrashSafeReplicationEnabled
+    , sLocationPreference
+    , sBackupConfiguration
+
+    -- ** SslCertsCreateEphemeralRequest
+    , SslCertsCreateEphemeralRequest
+    , sslCertsCreateEphemeralRequest
+    , sccerPublicKey
 
     -- ** Operation
     , Operation
@@ -306,112 +419,72 @@ module Network.Google.SQLAdmin
     , opeOperationType
     , opeTargetLink
 
-    -- ** OperationError
-    , OperationError
-    , operationError
-    , oeKind
-    , oeCode
-    , oeMessage
+    -- ** IpMapping
+    , IpMapping
+    , ipMapping
+    , imIpAddress
+    , imTimeToRetire
 
-    -- ** OperationErrors
-    , OperationErrors
-    , operationErrors
-    , oKind
-    , oErrors
-
-    -- ** OperationsListResponse
-    , OperationsListResponse
-    , operationsListResponse
-    , olrNextPageToken
-    , olrKind
-    , olrItems
-
-    -- ** ReplicaConfiguration
-    , ReplicaConfiguration
-    , replicaConfiguration
-    , rcKind
-    , rcMysqlReplicaConfiguration
-
-    -- ** RestoreBackupContext
-    , RestoreBackupContext
-    , restoreBackupContext
-    , rbcInstanceId
-    , rbcBackupRunId
-    , rbcKind
-
-    -- ** Settings
-    , Settings
-    , settings
-    , sReplicationType
-    , sActivationPolicy
-    , sSettingsVersion
-    , sAuthorizedGaeApplications
-    , sKind
-    , sPricingPlan
-    , sIpConfiguration
-    , sDatabaseReplicationEnabled
-    , sTier
-    , sDatabaseFlags
-    , sCrashSafeReplicationEnabled
-    , sLocationPreference
-    , sBackupConfiguration
-
-    -- ** SslCert
-    , SslCert
-    , sslCert
-    , scCommonName
-    , scKind
-    , scCertSerialNumber
-    , scSelfLink
-    , scCert
-    , scSha1Fingerprint
-    , scExpirationTime
-    , scCreateTime
-    , scInstance
-
-    -- ** SslCertDetail
-    , SslCertDetail
-    , sslCertDetail
-    , scdCertInfo
-    , scdCertPrivateKey
-
-    -- ** SslCertsCreateEphemeralRequest
-    , SslCertsCreateEphemeralRequest
-    , sslCertsCreateEphemeralRequest
-    , sccerPublicKey
-
-    -- ** SslCertsInsertRequest
-    , SslCertsInsertRequest
-    , sslCertsInsertRequest
-    , scirCommonName
-
-    -- ** SslCertsInsertResponse
-    , SslCertsInsertResponse
-    , sslCertsInsertResponse
-    , scirServerCaCert
-    , scirKind
-    , scirClientCert
-
-    -- ** SslCertsListResponse
-    , SslCertsListResponse
-    , sslCertsListResponse
-    , sclrKind
-    , sclrItems
-
-    -- ** Tier
-    , Tier
-    , tier
-    , tKind
-    , tTier
-    , tRegion
-    , tDiskQuota
-    , tRAM
+    -- ** BinLogCoordinates
+    , BinLogCoordinates
+    , binLogCoordinates
+    , blcBinLogPosition
+    , blcKind
+    , blcBinLogFileName
 
     -- ** TiersListResponse
     , TiersListResponse
     , tiersListResponse
     , tlrKind
     , tlrItems
+
+    -- ** ExportContext
+    , ExportContext
+    , exportContext
+    , ecCsvExportOptions
+    , ecKind
+    , ecUri
+    , ecFileType
+    , ecSqlExportOptions
+    , ecDatabases
+
+    -- ** UsersListResponse
+    , UsersListResponse
+    , usersListResponse
+    , ulrNextPageToken
+    , ulrKind
+    , ulrItems
+
+    -- ** InstancesImportRequest
+    , InstancesImportRequest
+    , instancesImportRequest
+    , iirImportContext
+
+    -- ** LocationPreference
+    , LocationPreference
+    , locationPreference
+    , lpKind
+    , lpFollowGaeApplication
+    , lpZone
+
+    -- ** FlagsListResponse
+    , FlagsListResponse
+    , flagsListResponse
+    , flrKind
+    , flrItems
+
+    -- ** BackupConfiguration
+    , BackupConfiguration
+    , backupConfiguration
+    , bcEnabled
+    , bcStartTime
+    , bcKind
+    , bcBinaryLogEnabled
+
+    -- ** SslCertsInsertRequest
+    , SslCertsInsertRequest
+    , sslCertsInsertRequest
+    , scirCommonName
 
     -- ** User
     , User
@@ -424,14 +497,51 @@ module Network.Google.SQLAdmin
     , uHost
     , uInstance
 
-    -- ** UsersListResponse
-    , UsersListResponse
-    , usersListResponse
-    , ulrNextPageToken
-    , ulrKind
-    , ulrItems
+    -- ** IpConfiguration
+    , IpConfiguration
+    , ipConfiguration
+    , icAuthorizedNetworks
+    , icRequireSsl
+    , icIpv4Enabled
     ) where
 
+import           Network.Google.API.Sql.BackupRuns.Delete
+import           Network.Google.API.Sql.BackupRuns.Get
+import           Network.Google.API.Sql.BackupRuns.List
+import           Network.Google.API.Sql.Databases.Delete
+import           Network.Google.API.Sql.Databases.Get
+import           Network.Google.API.Sql.Databases.Insert
+import           Network.Google.API.Sql.Databases.List
+import           Network.Google.API.Sql.Databases.Patch
+import           Network.Google.API.Sql.Databases.Update
+import           Network.Google.API.Sql.Flags.List
+import           Network.Google.API.Sql.Instances.Clone
+import           Network.Google.API.Sql.Instances.Delete
+import           Network.Google.API.Sql.Instances.Export
+import           Network.Google.API.Sql.Instances.Get
+import           Network.Google.API.Sql.Instances.Import
+import           Network.Google.API.Sql.Instances.Insert
+import           Network.Google.API.Sql.Instances.List
+import           Network.Google.API.Sql.Instances.Patch
+import           Network.Google.API.Sql.Instances.PromoteReplica
+import           Network.Google.API.Sql.Instances.ResetSSLConfig
+import           Network.Google.API.Sql.Instances.Restart
+import           Network.Google.API.Sql.Instances.RestoreBackup
+import           Network.Google.API.Sql.Instances.StartReplica
+import           Network.Google.API.Sql.Instances.StopReplica
+import           Network.Google.API.Sql.Instances.Update
+import           Network.Google.API.Sql.Operations.Get
+import           Network.Google.API.Sql.Operations.List
+import           Network.Google.API.Sql.SSLCerts.CreateEphemeral
+import           Network.Google.API.Sql.SSLCerts.Delete
+import           Network.Google.API.Sql.SSLCerts.Get
+import           Network.Google.API.Sql.SSLCerts.Insert
+import           Network.Google.API.Sql.SSLCerts.List
+import           Network.Google.API.Sql.Tiers.List
+import           Network.Google.API.Sql.Users.Delete
+import           Network.Google.API.Sql.Users.Insert
+import           Network.Google.API.Sql.Users.List
+import           Network.Google.API.Sql.Users.Update
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
@@ -440,727 +550,43 @@ TODO
 -}
 
 type SQLAdmin =
-     FlagsAPI :<|> UsersAPI :<|> TiersAPI :<|>
-       BackupRunsAPI
-       :<|> SslCertsAPI
-       :<|> InstancesAPI
-       :<|> OperationsAPI
-       :<|> DatabasesAPI
+     InstancesRestoreBackupAPI :<|>
+       InstancesStopReplicaAPI
+       :<|> InstancesImportAPI
+       :<|> UsersInsertAPI
+       :<|> DatabasesDeleteAPI
+       :<|> InstancesCloneAPI
+       :<|> SSLCertsListAPI
+       :<|> SSLCertsDeleteAPI
+       :<|> InstancesExportAPI
+       :<|> BackupRunsDeleteAPI
+       :<|> InstancesStartReplicaAPI
+       :<|> BackupRunsGetAPI
+       :<|> UsersListAPI
+       :<|> UsersUpdateAPI
+       :<|> TiersListAPI
+       :<|> InstancesResetSSLConfigAPI
+       :<|> OperationsGetAPI
+       :<|> OperationsListAPI
+       :<|> InstancesRestartAPI
+       :<|> InstancesDeleteAPI
+       :<|> DatabasesInsertAPI
+       :<|> DatabasesUpdateAPI
+       :<|> BackupRunsListAPI
+       :<|> SSLCertsInsertAPI
+       :<|> InstancesGetAPI
+       :<|> InstancesInsertAPI
+       :<|> InstancesPatchAPI
+       :<|> DatabasesListAPI
+       :<|> DatabasesGetAPI
+       :<|> InstancesListAPI
+       :<|> SSLCertsCreateEphemeralAPI
+       :<|> DatabasesPatchAPI
+       :<|> InstancesPromoteReplicaAPI
+       :<|> InstancesUpdateAPI
+       :<|> FlagsListAPI
+       :<|> SSLCertsGetAPI
+       :<|> UsersDeleteAPI
 
-type FlagsAPI = FlagsList
-
--- | List all available database flags for Google Cloud SQL instances.
-type FlagsList =
-     "sql" :>
-       "v1beta4" :>
-         "flags" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "alt" Text :>
-                         Get '[JSON] FlagsListResponse
-
-type UsersAPI =
-     UsersInsert :<|> UsersList :<|> UsersDelete :<|>
-       UsersUpdate
-
--- | Creates a new user in a Cloud SQL instance.
-type UsersInsert =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "instances" :>
-               Capture "instance" Text :>
-                 "users" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Post '[JSON] Operation
-
--- | Lists users in the specified Cloud SQL instance.
-type UsersList =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "instances" :>
-               Capture "instance" Text :>
-                 "users" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Get '[JSON] UsersListResponse
-
--- | Deletes a user from a Cloud SQL instance.
-type UsersDelete =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "instances" :>
-               Capture "instance" Text :>
-                 "users" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "name" Text :>
-                             QueryParam "host" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Delete '[JSON] Operation
-
--- | Updates an existing user in a Cloud SQL instance.
-type UsersUpdate =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "instances" :>
-               Capture "instance" Text :>
-                 "users" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "name" Text :>
-                             QueryParam "host" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Put '[JSON] Operation
-
-type TiersAPI = TiersList
-
--- | Lists all available service tiers for Google Cloud SQL, for example D1,
--- D2. For related information, see Pricing.
-type TiersList =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "tiers" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Get '[JSON] TiersListResponse
-
-type BackupRunsAPI =
-     BackupRunsList :<|> BackupRunsGet :<|>
-       BackupRunsDelete
-
--- | Lists all backup runs associated with a given instance and configuration
--- in the reverse chronological order of the enqueued time.
-type BackupRunsList =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "instances" :>
-               Capture "instance" Text :>
-                 "backupRuns" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "maxResults" Int32 :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Get '[JSON] BackupRunsListResponse
-
--- | Retrieves a resource containing information about a backup run.
-type BackupRunsGet =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "instances" :>
-               Capture "instance" Text :>
-                 "backupRuns" :>
-                   Capture "id" Int64 :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Get '[JSON] BackupRun
-
--- | Deletes the backup taken by a backup run.
-type BackupRunsDelete =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "instances" :>
-               Capture "instance" Text :>
-                 "backupRuns" :>
-                   Capture "id" Int64 :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   Delete '[JSON] Operation
-
-type SslCertsAPI =
-     SslCertsInsert :<|> SslCertsList :<|> SslCertsGet
-       :<|> SslCertsCreateEphemeral
-       :<|> SslCertsDelete
-
--- | Creates an SSL certificate and returns it along with the private key and
--- server certificate authority. The new certificate will not be usable
--- until the instance is restarted.
-type SslCertsInsert =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "instances" :>
-               Capture "instance" Text :>
-                 "sslCerts" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Post '[JSON] SslCertsInsertResponse
-
--- | Lists all of the current SSL certificates for the instance.
-type SslCertsList =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "instances" :>
-               Capture "instance" Text :>
-                 "sslCerts" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Get '[JSON] SslCertsListResponse
-
--- | Retrieves a particular SSL certificate. Does not include the private key
--- (required for usage). The private key must be saved from the response to
--- initial creation.
-type SslCertsGet =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "instances" :>
-               Capture "instance" Text :>
-                 "sslCerts" :>
-                   Capture "sha1Fingerprint" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Get '[JSON] SslCert
-
--- | Generates a short-lived X509 certificate containing the provided public
--- key and signed by a private key specific to the target instance. Users
--- may use the certificate to authenticate as themselves when connecting to
--- the database.
-type SslCertsCreateEphemeral =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "instances" :>
-               Capture "instance" Text :>
-                 "createEphemeral" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Post '[JSON] SslCert
-
--- | Deletes the SSL certificate. The change will not take effect until the
--- instance is restarted.
-type SslCertsDelete =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "instances" :>
-               Capture "instance" Text :>
-                 "sslCerts" :>
-                   Capture "sha1Fingerprint" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   Delete '[JSON] Operation
-
-type InstancesAPI =
-     InstancesExport :<|> InstancesInsert :<|>
-       InstancesList
-       :<|> InstancesStartReplica
-       :<|> InstancesClone
-       :<|> InstancesPatch
-       :<|> InstancesGet
-       :<|> InstancesRestoreBackup
-       :<|> InstancesRestart
-       :<|> InstancesImport
-       :<|> InstancesStopReplica
-       :<|> InstancesResetSslConfig
-       :<|> InstancesPromoteReplica
-       :<|> InstancesDelete
-       :<|> InstancesUpdate
-
--- | Exports data from a Cloud SQL instance to a Google Cloud Storage bucket
--- as a MySQL dump file.
-type InstancesExport =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "instances" :>
-               Capture "instance" Text :>
-                 "export" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Post '[JSON] Operation
-
--- | Creates a new Cloud SQL instance.
-type InstancesInsert =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "instances" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] Operation
-
--- | Lists instances under a given project in the alphabetical order of the
--- instance name.
-type InstancesList =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "instances" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Get '[JSON] InstancesListResponse
-
--- | Starts the replication in the read replica instance.
-type InstancesStartReplica =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "instances" :>
-               Capture "instance" Text :>
-                 "startReplica" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Post '[JSON] Operation
-
--- | Creates a Cloud SQL instance as a clone of the source instance.
-type InstancesClone =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "instances" :>
-               Capture "instance" Text :>
-                 "clone" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Post '[JSON] Operation
-
--- | Updates settings of a Cloud SQL instance. Caution: This is not a partial
--- update, so you must include values for all the settings that you want to
--- retain. For partial updates, use patch.. This method supports patch
--- semantics.
-type InstancesPatch =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "instances" :>
-               Capture "instance" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Patch '[JSON] Operation
-
--- | Retrieves a resource containing information about a Cloud SQL instance.
-type InstancesGet =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "instances" :>
-               Capture "instance" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Get '[JSON] DatabaseInstance
-
--- | Restores a backup of a Cloud SQL instance.
-type InstancesRestoreBackup =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "instances" :>
-               Capture "instance" Text :>
-                 "restoreBackup" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Post '[JSON] Operation
-
--- | Restarts a Cloud SQL instance.
-type InstancesRestart =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "instances" :>
-               Capture "instance" Text :>
-                 "restart" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Post '[JSON] Operation
-
--- | Imports data into a Cloud SQL instance from a MySQL dump file in Google
--- Cloud Storage.
-type InstancesImport =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "instances" :>
-               Capture "instance" Text :>
-                 "import" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Post '[JSON] Operation
-
--- | Stops the replication in the read replica instance.
-type InstancesStopReplica =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "instances" :>
-               Capture "instance" Text :>
-                 "stopReplica" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Post '[JSON] Operation
-
--- | Deletes all client certificates and generates a new server SSL
--- certificate for the instance. The changes will not take effect until the
--- instance is restarted. Existing instances without a server certificate
--- will need to call this once to set a server certificate.
-type InstancesResetSslConfig =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "instances" :>
-               Capture "instance" Text :>
-                 "resetSslConfig" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Post '[JSON] Operation
-
--- | Promotes the read replica instance to be a stand-alone Cloud SQL
--- instance.
-type InstancesPromoteReplica =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "instances" :>
-               Capture "instance" Text :>
-                 "promoteReplica" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Post '[JSON] Operation
-
--- | Deletes a Cloud SQL instance.
-type InstancesDelete =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "instances" :>
-               Capture "instance" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Delete '[JSON] Operation
-
--- | Updates settings of a Cloud SQL instance. Caution: This is not a partial
--- update, so you must include values for all the settings that you want to
--- retain. For partial updates, use patch.
-type InstancesUpdate =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "instances" :>
-               Capture "instance" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Put '[JSON] Operation
-
-type OperationsAPI =
-     OperationsList :<|> OperationsGet
-
--- | Lists all instance operations that have been performed on the given
--- Cloud SQL instance in the reverse chronological order of the start time.
-type OperationsList =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "operations" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 QueryParam "instance" Text :>
-                                   Get '[JSON] OperationsListResponse
-
--- | Retrieves an instance operation that has been performed on an instance.
-type OperationsGet =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "operations" :>
-               Capture "operation" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] Operation
-
-type DatabasesAPI =
-     DatabasesInsert :<|> DatabasesList :<|>
-       DatabasesPatch
-       :<|> DatabasesGet
-       :<|> DatabasesDelete
-       :<|> DatabasesUpdate
-
--- | Inserts a resource containing information about a database inside a
--- Cloud SQL instance.
-type DatabasesInsert =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "instances" :>
-               Capture "instance" Text :>
-                 "databases" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Post '[JSON] Operation
-
--- | Lists databases in the specified Cloud SQL instance.
-type DatabasesList =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "instances" :>
-               Capture "instance" Text :>
-                 "databases" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Get '[JSON] DatabasesListResponse
-
--- | Updates a resource containing information about a database inside a
--- Cloud SQL instance. This method supports patch semantics.
-type DatabasesPatch =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "instances" :>
-               Capture "instance" Text :>
-                 "databases" :>
-                   Capture "database" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   Patch '[JSON] Operation
-
--- | Retrieves a resource containing information about a database inside a
--- Cloud SQL instance.
-type DatabasesGet =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "instances" :>
-               Capture "instance" Text :>
-                 "databases" :>
-                   Capture "database" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Get '[JSON] Database
-
--- | Deletes a resource containing information about a database inside a
--- Cloud SQL instance.
-type DatabasesDelete =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "instances" :>
-               Capture "instance" Text :>
-                 "databases" :>
-                   Capture "database" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   Delete '[JSON] Operation
-
--- | Updates a resource containing information about a database inside a
--- Cloud SQL instance.
-type DatabasesUpdate =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "instances" :>
-               Capture "instance" Text :>
-                 "databases" :>
-                   Capture "database" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Put '[JSON] Operation
+sQLAdmin :: Proxy SQLAdmin
+sQLAdmin = Proxy

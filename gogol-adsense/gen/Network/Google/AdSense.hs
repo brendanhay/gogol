@@ -18,78 +18,102 @@
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference>
 module Network.Google.AdSense
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** AdSense Management API
       AdSense
-    , AdclientsAPI
-    , AdclientsList
-    , AccountsAPI
-    , AdclientsAPI
-    , AdclientsList
-    , ReportsAPI
-    , SavedAPI
-    , SavedList
-    , SavedGenerate
-    , AlertsAPI
-    , AlertsList
-    , AlertsDelete
-    , AdunitsAPI
-    , CustomchannelsAPI
-    , CustomchannelsList
-    , UrlchannelsAPI
-    , UrlchannelsList
-    , CustomchannelsAPI
-    , AdunitsAPI
-    , AdunitsList
-    , SavedadstylesAPI
-    , SavedadstylesList
-    , SavedadstylesGet
-    , PaymentsAPI
-    , PaymentsList
-    , ReportsAPI
-    , SavedAPI
-    , SavedList
-    , SavedGenerate
-    , AlertsAPI
-    , AlertsList
-    , AlertsDelete
-    , AdunitsAPI
-    , CustomchannelsAPI
-    , CustomchannelsList
-    , UrlchannelsAPI
-    , UrlchannelsList
-    , CustomchannelsAPI
-    , AdunitsAPI
-    , AdunitsList
-    , SavedadstylesAPI
-    , SavedadstylesList
-    , SavedadstylesGet
-    , MetadataAPI
-    , MetricsAPI
-    , MetricsList
-    , DimensionsAPI
-    , DimensionsList
-    , PaymentsAPI
-    , PaymentsList
+    , adSense
+    , adSenseURL
+
+    -- ** adsense.accounts.adclients.list
+    , module Network.Google.API.AdSense.Accounts.Adclients.List
+
+    -- ** adsense.accounts.adunits.customchannels.list
+    , module Network.Google.API.AdSense.Accounts.Adunits.Customchannels.List
+
+    -- ** adsense.accounts.alerts.delete
+    , module Network.Google.API.AdSense.Accounts.Alerts.Delete
+
+    -- ** adsense.accounts.alerts.list
+    , module Network.Google.API.AdSense.Accounts.Alerts.List
+
+    -- ** adsense.accounts.customchannels.adunits.list
+    , module Network.Google.API.AdSense.Accounts.Customchannels.Adunits.List
+
+    -- ** adsense.accounts.payments.list
+    , module Network.Google.API.AdSense.Accounts.Payments.List
+
+    -- ** adsense.accounts.reports.saved.generate
+    , module Network.Google.API.AdSense.Accounts.Reports.Saved.Generate
+
+    -- ** adsense.accounts.reports.saved.list
+    , module Network.Google.API.AdSense.Accounts.Reports.Saved.List
+
+    -- ** adsense.accounts.savedadstyles.get
+    , module Network.Google.API.AdSense.Accounts.Savedadstyles.Get
+
+    -- ** adsense.accounts.savedadstyles.list
+    , module Network.Google.API.AdSense.Accounts.Savedadstyles.List
+
+    -- ** adsense.accounts.urlchannels.list
+    , module Network.Google.API.AdSense.Accounts.URLchannels.List
+
+    -- ** adsense.adclients.list
+    , module Network.Google.API.AdSense.Adclients.List
+
+    -- ** adsense.adunits.customchannels.list
+    , module Network.Google.API.AdSense.Adunits.Customchannels.List
+
+    -- ** adsense.alerts.delete
+    , module Network.Google.API.AdSense.Alerts.Delete
+
+    -- ** adsense.alerts.list
+    , module Network.Google.API.AdSense.Alerts.List
+
+    -- ** adsense.customchannels.adunits.list
+    , module Network.Google.API.AdSense.Customchannels.Adunits.List
+
+    -- ** adsense.metadata.dimensions.list
+    , module Network.Google.API.AdSense.Metadata.Dimensions.List
+
+    -- ** adsense.metadata.metrics.list
+    , module Network.Google.API.AdSense.Metadata.Metrics.List
+
+    -- ** adsense.payments.list
+    , module Network.Google.API.AdSense.Payments.List
+
+    -- ** adsense.reports.saved.generate
+    , module Network.Google.API.AdSense.Reports.Saved.Generate
+
+    -- ** adsense.reports.saved.list
+    , module Network.Google.API.AdSense.Reports.Saved.List
+
+    -- ** adsense.savedadstyles.get
+    , module Network.Google.API.AdSense.Savedadstyles.Get
+
+    -- ** adsense.savedadstyles.list
+    , module Network.Google.API.AdSense.Savedadstyles.List
+
+    -- ** adsense.urlchannels.list
+    , module Network.Google.API.AdSense.URLchannels.List
 
     -- * Types
 
-    -- ** Account
-    , Account
-    , account
-    , accKind
-    , accPremium
-    , accName
-    , accId
-    , accTimezone
-    , accSubAccounts
+    -- ** SavedAdStyles
+    , SavedAdStyles
+    , savedAdStyles
+    , sasEtag
+    , sasNextPageToken
+    , sasKind
+    , sasItems
 
-    -- ** Accounts
-    , Accounts
-    , accounts
-    , aEtag
-    , aNextPageToken
-    , aKind
-    , aItems
+    -- ** CustomChannelTargetingInfo
+    , CustomChannelTargetingInfo
+    , customChannelTargetingInfo
+    , cctiLocation
+    , cctiSiteLanguage
+    , cctiAdsAppearOn
+    , cctiDescription
 
     -- ** AdClient
     , AdClient
@@ -101,13 +125,63 @@ module Network.Google.AdSense
     , acProductCode
     , acArcReviewMode
 
-    -- ** AdClients
-    , AdClients
-    , adClients
-    , acsEtag
-    , acsNextPageToken
-    , acsKind
-    , acsItems
+    -- ** SavedAdStyle
+    , SavedAdStyle
+    , savedAdStyle
+    , sKind
+    , sName
+    , sAdStyle
+    , sId
+
+    -- ** AdUnitBackupOptionContentAdsSettings
+    , AdUnitBackupOptionContentAdsSettings
+    , adUnitBackupOptionContentAdsSettings
+    , aubocasColor
+    , aubocasUrl
+    , aubocasType
+
+    -- ** Accounts
+    , Accounts
+    , accounts
+    , aEtag
+    , aNextPageToken
+    , aKind
+    , aItems
+
+    -- ** AdUnitMobileContentAdsSettings
+    , AdUnitMobileContentAdsSettings
+    , adUnitMobileContentAdsSettings
+    , aumcasSize
+    , aumcasScriptingLanguage
+    , aumcasMarkupLanguage
+    , aumcasType
+
+    -- ** Payment
+    , Payment
+    , payment
+    , pPaymentAmountCurrencyCode
+    , pKind
+    , pPaymentDate
+    , pId
+    , pPaymentAmount
+
+    -- ** Alt
+    , Alt (..)
+
+    -- ** Metadata
+    , Metadata
+    , metadata
+    , mKind
+    , mItems
+
+    -- ** CustomChannel
+    , CustomChannel
+    , customChannel
+    , ccTargetingInfo
+    , ccKind
+    , ccName
+    , ccCode
+    , ccId
 
     -- ** AdCode
     , AdCode
@@ -115,13 +189,54 @@ module Network.Google.AdSense
     , adKind
     , adAdCode
 
-    -- ** AdStyle
-    , AdStyle
-    , adStyle
-    , asCorners
-    , asKind
-    , asFont
-    , asColors
+    -- ** UrlChannel
+    , UrlChannel
+    , urlChannel
+    , ucKind
+    , ucId
+    , ucUrlPattern
+
+    -- ** Alert
+    , Alert
+    , alert
+    , aleIsDismissible
+    , aleKind
+    , aleSeverity
+    , aleId
+    , aleType
+    , aleMessage
+
+    -- ** Payments
+    , Payments
+    , payments
+    , payKind
+    , payItems
+
+    -- ** AdsenseReportsGenerateResponseItemHeaders
+    , AdsenseReportsGenerateResponseItemHeaders
+    , adsenseReportsGenerateResponseItemHeaders
+    , argrihName
+    , argrihCurrency
+    , argrihType
+
+    -- ** ReportingMetadataEntry
+    , ReportingMetadataEntry
+    , reportingMetadataEntry
+    , rmeKind
+    , rmeRequiredMetrics
+    , rmeCompatibleMetrics
+    , rmeRequiredDimensions
+    , rmeId
+    , rmeCompatibleDimensions
+    , rmeSupportedProducts
+
+    -- ** AdClients
+    , AdClients
+    , adClients
+    , acsEtag
+    , acsNextPageToken
+    , acsKind
+    , acsItems
 
     -- ** AdStyleColors
     , AdStyleColors
@@ -132,11 +247,55 @@ module Network.Google.AdSense
     , ascTitle
     , ascBackground
 
+    -- ** AdUnitContentAdsSettings
+    , AdUnitContentAdsSettings
+    , adUnitContentAdsSettings
+    , aucasBackupOption
+    , aucasSize
+    , aucasType
+
     -- ** AdStyleFont
     , AdStyleFont
     , adStyleFont
     , asfSize
     , asfFamily
+
+    -- ** AdStyle
+    , AdStyle
+    , adStyle
+    , asCorners
+    , asKind
+    , asFont
+    , asColors
+
+    -- ** Alerts
+    , Alerts
+    , alerts
+    , aaKind
+    , aaItems
+
+    -- ** AdUnits
+    , AdUnits
+    , adUnits
+    , auEtag
+    , auNextPageToken
+    , auKind
+    , auItems
+
+    -- ** SavedReports
+    , SavedReports
+    , savedReports
+    , srEtag
+    , srNextPageToken
+    , srKind
+    , srItems
+
+    -- ** SavedReport
+    , SavedReport
+    , savedReport
+    , savKind
+    , savName
+    , savId
 
     -- ** AdUnit
     , AdUnit
@@ -152,43 +311,21 @@ module Network.Google.AdSense
     , auuCode
     , auuId
 
-    -- ** AdUnitBackupOptionContentAdsSettings
-    , AdUnitBackupOptionContentAdsSettings
-    , adUnitBackupOptionContentAdsSettings
-    , aubocasColor
-    , aubocasUrl
-    , aubocasType
+    -- ** UrlChannels
+    , UrlChannels
+    , urlChannels
+    , urlcEtag
+    , urlcNextPageToken
+    , urlcKind
+    , urlcItems
 
-    -- ** AdUnitContentAdsSettings
-    , AdUnitContentAdsSettings
-    , adUnitContentAdsSettings
-    , aucasBackupOption
-    , aucasSize
-    , aucasType
-
-    -- ** AdUnitFeedAdsSettings
-    , AdUnitFeedAdsSettings
-    , adUnitFeedAdsSettings
-    , aufasFrequency
-    , aufasAdPosition
-    , aufasType
-    , aufasMinimumWordCount
-
-    -- ** AdUnitMobileContentAdsSettings
-    , AdUnitMobileContentAdsSettings
-    , adUnitMobileContentAdsSettings
-    , aumcasSize
-    , aumcasScriptingLanguage
-    , aumcasMarkupLanguage
-    , aumcasType
-
-    -- ** AdUnits
-    , AdUnits
-    , adUnits
-    , auEtag
-    , auNextPageToken
-    , auKind
-    , auItems
+    -- ** CustomChannels
+    , CustomChannels
+    , customChannels
+    , cEtag
+    , cNextPageToken
+    , cKind
+    , cItems
 
     -- ** AdsenseReportsGenerateResponse
     , AdsenseReportsGenerateResponse
@@ -203,134 +340,50 @@ module Network.Google.AdSense
     , argrHeaders
     , argrTotalMatchedRows
 
-    -- ** AdsenseReportsGenerateResponseItemHeaders
-    , AdsenseReportsGenerateResponseItemHeaders
-    , adsenseReportsGenerateResponseItemHeaders
-    , argrihName
-    , argrihCurrency
-    , argrihType
+    -- ** Account
+    , Account
+    , account
+    , accKind
+    , accPremium
+    , accName
+    , accId
+    , accTimezone
+    , accSubAccounts
 
-    -- ** Alert
-    , Alert
-    , alert
-    , aleIsDismissible
-    , aleKind
-    , aleSeverity
-    , aleId
-    , aleType
-    , aleMessage
-
-    -- ** Alerts
-    , Alerts
-    , alerts
-    , aaKind
-    , aaItems
-
-    -- ** CustomChannel
-    , CustomChannel
-    , customChannel
-    , ccTargetingInfo
-    , ccKind
-    , ccName
-    , ccCode
-    , ccId
-
-    -- ** CustomChannelTargetingInfo
-    , CustomChannelTargetingInfo
-    , customChannelTargetingInfo
-    , cctiLocation
-    , cctiSiteLanguage
-    , cctiAdsAppearOn
-    , cctiDescription
-
-    -- ** CustomChannels
-    , CustomChannels
-    , customChannels
-    , cEtag
-    , cNextPageToken
-    , cKind
-    , cItems
-
-    -- ** Metadata
-    , Metadata
-    , metadata
-    , mKind
-    , mItems
-
-    -- ** Payment
-    , Payment
-    , payment
-    , pPaymentAmountCurrencyCode
-    , pKind
-    , pPaymentDate
-    , pId
-    , pPaymentAmount
-
-    -- ** Payments
-    , Payments
-    , payments
-    , payKind
-    , payItems
-
-    -- ** ReportingMetadataEntry
-    , ReportingMetadataEntry
-    , reportingMetadataEntry
-    , rmeKind
-    , rmeRequiredMetrics
-    , rmeCompatibleMetrics
-    , rmeRequiredDimensions
-    , rmeId
-    , rmeCompatibleDimensions
-    , rmeSupportedProducts
-
-    -- ** SavedAdStyle
-    , SavedAdStyle
-    , savedAdStyle
-    , sKind
-    , sName
-    , sAdStyle
-    , sId
-
-    -- ** SavedAdStyles
-    , SavedAdStyles
-    , savedAdStyles
-    , sasEtag
-    , sasNextPageToken
-    , sasKind
-    , sasItems
-
-    -- ** SavedReport
-    , SavedReport
-    , savedReport
-    , savKind
-    , savName
-    , savId
-
-    -- ** SavedReports
-    , SavedReports
-    , savedReports
-    , srEtag
-    , srNextPageToken
-    , srKind
-    , srItems
-
-    -- ** UrlChannel
-    , UrlChannel
-    , urlChannel
-    , ucKind
-    , ucId
-    , ucUrlPattern
-
-    -- ** UrlChannels
-    , UrlChannels
-    , urlChannels
-    , urlcEtag
-    , urlcNextPageToken
-    , urlcKind
-    , urlcItems
+    -- ** AdUnitFeedAdsSettings
+    , AdUnitFeedAdsSettings
+    , adUnitFeedAdsSettings
+    , aufasFrequency
+    , aufasAdPosition
+    , aufasType
+    , aufasMinimumWordCount
     ) where
 
 import           Network.Google.AdSense.Types
+import           Network.Google.API.AdSense.Accounts.Adclients.List
+import           Network.Google.API.AdSense.Accounts.Adunits.Customchannels.List
+import           Network.Google.API.AdSense.Accounts.Alerts.Delete
+import           Network.Google.API.AdSense.Accounts.Alerts.List
+import           Network.Google.API.AdSense.Accounts.Customchannels.Adunits.List
+import           Network.Google.API.AdSense.Accounts.Payments.List
+import           Network.Google.API.AdSense.Accounts.Reports.Saved.Generate
+import           Network.Google.API.AdSense.Accounts.Reports.Saved.List
+import           Network.Google.API.AdSense.Accounts.Savedadstyles.Get
+import           Network.Google.API.AdSense.Accounts.Savedadstyles.List
+import           Network.Google.API.AdSense.Accounts.URLchannels.List
+import           Network.Google.API.AdSense.Adclients.List
+import           Network.Google.API.AdSense.Adunits.Customchannels.List
+import           Network.Google.API.AdSense.Alerts.Delete
+import           Network.Google.API.AdSense.Alerts.List
+import           Network.Google.API.AdSense.Customchannels.Adunits.List
+import           Network.Google.API.AdSense.Metadata.Dimensions.List
+import           Network.Google.API.AdSense.Metadata.Metrics.List
+import           Network.Google.API.AdSense.Payments.List
+import           Network.Google.API.AdSense.Reports.Saved.Generate
+import           Network.Google.API.AdSense.Reports.Saved.List
+import           Network.Google.API.AdSense.Savedadstyles.Get
+import           Network.Google.API.AdSense.Savedadstyles.List
+import           Network.Google.API.AdSense.URLchannels.List
 import           Network.Google.Prelude
 
 {- $resources
@@ -338,484 +391,29 @@ TODO
 -}
 
 type AdSense =
-     AdclientsAPI :<|> AccountsAPI :<|> ReportsAPI :<|>
-       AlertsAPI
-       :<|> AdunitsAPI
-       :<|> UrlchannelsAPI
-       :<|> CustomchannelsAPI
-       :<|> SavedadstylesAPI
-       :<|> MetadataAPI
-       :<|> PaymentsAPI
+     AccountsSavedadstylesListAPI :<|> SavedadstylesGetAPI
+       :<|> CustomchannelsAdunitsListAPI
+       :<|> AdunitsCustomchannelsListAPI
+       :<|> MetadataDimensionsListAPI
+       :<|> SavedadstylesListAPI
+       :<|> AccountsCustomchannelsAdunitsListAPI
+       :<|> AccountsPaymentsListAPI
+       :<|> AccountsAdclientsListAPI
+       :<|> AccountsAdunitsCustomchannelsListAPI
+       :<|> AlertsDeleteAPI
+       :<|> AccountsReportsSavedGenerateAPI
+       :<|> URLchannelsListAPI
+       :<|> AccountsReportsSavedListAPI
+       :<|> AlertsListAPI
+       :<|> AdclientsListAPI
+       :<|> PaymentsListAPI
+       :<|> AccountsSavedadstylesGetAPI
+       :<|> AccountsAlertsDeleteAPI
+       :<|> AccountsURLchannelsListAPI
+       :<|> ReportsSavedGenerateAPI
+       :<|> MetadataMetricsListAPI
+       :<|> ReportsSavedListAPI
+       :<|> AccountsAlertsListAPI
 
-type AdclientsAPI = AdclientsList
-
--- | List all ad clients in this AdSense account.
-type AdclientsList =
-     "adsense" :>
-       "v1.4" :>
-         "adclients" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "maxResults" Int32 :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Get '[JSON] AdClients
-
-type AccountsAPI =
-     AdclientsAPI :<|> ReportsAPI :<|> AlertsAPI :<|>
-       AdunitsAPI
-       :<|> UrlchannelsAPI
-       :<|> CustomchannelsAPI
-       :<|> SavedadstylesAPI
-       :<|> PaymentsAPI
-
-type AdclientsAPI = AdclientsList
-
--- | List all ad clients in the specified account.
-type AdclientsList =
-     "adsense" :>
-       "v1.4" :>
-         "accounts" :>
-           Capture "accountId" Text :>
-             "adclients" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "maxResults" Int32 :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Get '[JSON] AdClients
-
-type ReportsAPI = SavedAPI
-
-type SavedAPI = SavedList :<|> SavedGenerate
-
--- | List all saved reports in the specified AdSense account.
-type SavedList =
-     "adsense" :>
-       "v1.4" :>
-         "accounts" :>
-           Capture "accountId" Text :>
-             "reports" :>
-               "saved" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "maxResults" Int32 :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   Get '[JSON] SavedReports
-
--- | Generate an AdSense report based on the saved report ID sent in the
--- query parameters.
-type SavedGenerate =
-     "adsense" :>
-       "v1.4" :>
-         "accounts" :>
-           Capture "accountId" Text :>
-             "reports" :>
-               Capture "savedReportId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "locale" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "startIndex" Int32 :>
-                               QueryParam "maxResults" Int32 :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Get '[JSON] AdsenseReportsGenerateResponse
-
-type AlertsAPI = AlertsList :<|> AlertsDelete
-
--- | List the alerts for the specified AdSense account.
-type AlertsList =
-     "adsense" :>
-       "v1.4" :>
-         "accounts" :>
-           Capture "accountId" Text :>
-             "alerts" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "locale" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] Alerts
-
--- | Dismiss (delete) the specified alert from the specified publisher
--- AdSense account.
-type AlertsDelete =
-     "adsense" :>
-       "v1.4" :>
-         "accounts" :>
-           Capture "accountId" Text :>
-             "alerts" :>
-               Capture "alertId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Delete '[JSON] ()
-
-type AdunitsAPI = CustomchannelsAPI
-
-type CustomchannelsAPI = CustomchannelsList
-
--- | List all custom channels which the specified ad unit belongs to.
-type CustomchannelsList =
-     "adsense" :>
-       "v1.4" :>
-         "accounts" :>
-           Capture "accountId" Text :>
-             "adclients" :>
-               Capture "adClientId" Text :>
-                 "adunits" :>
-                   Capture "adUnitId" Text :>
-                     "customchannels" :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "userIp" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "pageToken" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "maxResults" Int32 :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "alt" Text :>
-                                         Get '[JSON] CustomChannels
-
-type UrlchannelsAPI = UrlchannelsList
-
--- | List all URL channels in the specified ad client for the specified
--- account.
-type UrlchannelsList =
-     "adsense" :>
-       "v1.4" :>
-         "accounts" :>
-           Capture "accountId" Text :>
-             "adclients" :>
-               Capture "adClientId" Text :>
-                 "urlchannels" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "maxResults" Int32 :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Get '[JSON] UrlChannels
-
-type CustomchannelsAPI = AdunitsAPI
-
-type AdunitsAPI = AdunitsList
-
--- | List all ad units in the specified custom channel.
-type AdunitsList =
-     "adsense" :>
-       "v1.4" :>
-         "accounts" :>
-           Capture "accountId" Text :>
-             "adclients" :>
-               Capture "adClientId" Text :>
-                 "customchannels" :>
-                   Capture "customChannelId" Text :>
-                     "adunits" :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "includeInactive" Bool :>
-                             QueryParam "userIp" Text :>
-                               QueryParam "key" Text :>
-                                 QueryParam "pageToken" Text :>
-                                   QueryParam "oauth_token" Text :>
-                                     QueryParam "maxResults" Int32 :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "alt" Text :>
-                                           Get '[JSON] AdUnits
-
-type SavedadstylesAPI =
-     SavedadstylesList :<|> SavedadstylesGet
-
--- | List all saved ad styles in the specified account.
-type SavedadstylesList =
-     "adsense" :>
-       "v1.4" :>
-         "accounts" :>
-           Capture "accountId" Text :>
-             "savedadstyles" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "maxResults" Int32 :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Get '[JSON] SavedAdStyles
-
--- | List a specific saved ad style for the specified account.
-type SavedadstylesGet =
-     "adsense" :>
-       "v1.4" :>
-         "accounts" :>
-           Capture "accountId" Text :>
-             "savedadstyles" :>
-               Capture "savedAdStyleId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] SavedAdStyle
-
-type PaymentsAPI = PaymentsList
-
--- | List the payments for the specified AdSense account.
-type PaymentsList =
-     "adsense" :>
-       "v1.4" :>
-         "accounts" :>
-           Capture "accountId" Text :>
-             "payments" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Get '[JSON] Payments
-
-type ReportsAPI = SavedAPI
-
-type SavedAPI = SavedList :<|> SavedGenerate
-
--- | List all saved reports in this AdSense account.
-type SavedList =
-     "adsense" :>
-       "v1.4" :>
-         "reports" :>
-           "saved" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "maxResults" Int32 :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] SavedReports
-
--- | Generate an AdSense report based on the saved report ID sent in the
--- query parameters.
-type SavedGenerate =
-     "adsense" :>
-       "v1.4" :>
-         "reports" :>
-           Capture "savedReportId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "locale" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "startIndex" Int32 :>
-                           QueryParam "maxResults" Int32 :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Get '[JSON] AdsenseReportsGenerateResponse
-
-type AlertsAPI = AlertsList :<|> AlertsDelete
-
--- | List the alerts for this AdSense account.
-type AlertsList =
-     "adsense" :>
-       "v1.4" :>
-         "alerts" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "locale" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Get '[JSON] Alerts
-
--- | Dismiss (delete) the specified alert from the publisher\'s AdSense
--- account.
-type AlertsDelete =
-     "adsense" :>
-       "v1.4" :>
-         "alerts" :>
-           Capture "alertId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Delete '[JSON] ()
-
-type AdunitsAPI = CustomchannelsAPI
-
-type CustomchannelsAPI = CustomchannelsList
-
--- | List all custom channels which the specified ad unit belongs to.
-type CustomchannelsList =
-     "adsense" :>
-       "v1.4" :>
-         "adclients" :>
-           Capture "adClientId" Text :>
-             "adunits" :>
-               Capture "adUnitId" Text :>
-                 "customchannels" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "maxResults" Int32 :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Get '[JSON] CustomChannels
-
-type UrlchannelsAPI = UrlchannelsList
-
--- | List all URL channels in the specified ad client for this AdSense
--- account.
-type UrlchannelsList =
-     "adsense" :>
-       "v1.4" :>
-         "adclients" :>
-           Capture "adClientId" Text :>
-             "urlchannels" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "maxResults" Int32 :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Get '[JSON] UrlChannels
-
-type CustomchannelsAPI = AdunitsAPI
-
-type AdunitsAPI = AdunitsList
-
--- | List all ad units in the specified custom channel.
-type AdunitsList =
-     "adsense" :>
-       "v1.4" :>
-         "adclients" :>
-           Capture "adClientId" Text :>
-             "customchannels" :>
-               Capture "customChannelId" Text :>
-                 "adunits" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "includeInactive" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "maxResults" Int32 :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "alt" Text :>
-                                       Get '[JSON] AdUnits
-
-type SavedadstylesAPI =
-     SavedadstylesList :<|> SavedadstylesGet
-
--- | List all saved ad styles in the user\'s account.
-type SavedadstylesList =
-     "adsense" :>
-       "v1.4" :>
-         "savedadstyles" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "maxResults" Int32 :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Get '[JSON] SavedAdStyles
-
--- | Get a specific saved ad style from the user\'s account.
-type SavedadstylesGet =
-     "adsense" :>
-       "v1.4" :>
-         "savedadstyles" :>
-           Capture "savedAdStyleId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Get '[JSON] SavedAdStyle
-
-type MetadataAPI = MetricsAPI :<|> DimensionsAPI
-
-type MetricsAPI = MetricsList
-
--- | List the metadata for the metrics available to this AdSense account.
-type MetricsList =
-     "adsense" :>
-       "v1.4" :>
-         "metadata" :>
-           "metrics" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Get '[JSON] Metadata
-
-type DimensionsAPI = DimensionsList
-
--- | List the metadata for the dimensions available to this AdSense account.
-type DimensionsList =
-     "adsense" :>
-       "v1.4" :>
-         "metadata" :>
-           "dimensions" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Get '[JSON] Metadata
-
-type PaymentsAPI = PaymentsList
-
--- | List the payments for this AdSense account.
-type PaymentsList =
-     "adsense" :>
-       "v1.4" :>
-         "payments" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "alt" Text :> Get '[JSON] Payments
+adSense :: Proxy AdSense
+adSense = Proxy

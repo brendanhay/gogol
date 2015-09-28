@@ -14,28 +14,8 @@
 --
 module Network.Google.Apps.Reseller.Types
     (
-
-    -- * Address
-      Address
-    , address
-    , aOrganizationName
-    , aKind
-    , aPostalCode
-    , aAddressLine1
-    , aLocality
-    , aContactName
-    , aAddressLine2
-    , aCountryCode
-    , aRegion
-    , aAddressLine3
-
-    -- * ChangePlanRequest
-    , ChangePlanRequest
-    , changePlanRequest
-    , cprKind
-    , cprPlanName
-    , cprPurchaseOrderId
-    , cprSeats
+    -- * Service URL
+      appsResellerURL
 
     -- * Customer
     , Customer
@@ -48,11 +28,28 @@ module Network.Google.Apps.Reseller.Types
     , cPhoneNumber
     , cPostalAddress
 
-    -- * RenewalSettings
-    , RenewalSettings
-    , renewalSettings
-    , rsKind
-    , rsRenewalType
+    -- * ChangePlanRequest
+    , ChangePlanRequest
+    , changePlanRequest
+    , cprKind
+    , cprPlanName
+    , cprPurchaseOrderId
+    , cprSeats
+
+    -- * SubscriptionCommitmentIntervalPlan
+    , SubscriptionCommitmentIntervalPlan
+    , subscriptionCommitmentIntervalPlan
+    , scipStartTime
+    , scipEndTime
+
+    -- * SubscriptionTrialSettings
+    , SubscriptionTrialSettings
+    , subscriptionTrialSettings
+    , stsIsInTrial
+    , stsTrialEndTime
+
+    -- * Alt
+    , Alt (..)
 
     -- * Seats
     , Seats
@@ -61,6 +58,13 @@ module Network.Google.Apps.Reseller.Types
     , sMaximumNumberOfSeats
     , sLicensedNumberOfSeats
     , sKind
+
+    -- * Subscriptions
+    , Subscriptions
+    , subscriptions
+    , subNextPageToken
+    , subKind
+    , subSubscriptions
 
     -- * Subscription
     , Subscription
@@ -81,12 +85,6 @@ module Network.Google.Apps.Reseller.Types
     , ssRenewalSettings
     , ssSubscriptionId
 
-    -- * SubscriptionCommitmentIntervalPlan
-    , SubscriptionCommitmentIntervalPlan
-    , subscriptionCommitmentIntervalPlan
-    , scipStartTime
-    , scipEndTime
-
     -- * SubscriptionPlan
     , SubscriptionPlan
     , subscriptionPlan
@@ -94,26 +92,43 @@ module Network.Google.Apps.Reseller.Types
     , spIsCommitmentPlan
     , spPlanName
 
+    -- * RenewalSettings
+    , RenewalSettings
+    , renewalSettings
+    , rsKind
+    , rsRenewalType
+
+    -- * Address
+    , Address
+    , address
+    , aOrganizationName
+    , aKind
+    , aPostalCode
+    , aAddressLine1
+    , aLocality
+    , aContactName
+    , aAddressLine2
+    , aCountryCode
+    , aRegion
+    , aAddressLine3
+
     -- * SubscriptionTransferInfo
     , SubscriptionTransferInfo
     , subscriptionTransferInfo
     , stiTransferabilityExpirationTime
     , stiMinimumTransferableSeats
 
-    -- * SubscriptionTrialSettings
-    , SubscriptionTrialSettings
-    , subscriptionTrialSettings
-    , stsIsInTrial
-    , stsTrialEndTime
-
-    -- * Subscriptions
-    , Subscriptions
-    , subscriptions
-    , subNextPageToken
-    , subKind
-    , subSubscriptions
+    -- * SubscriptionsDelete'DeletionType
+    , SubscriptionsDelete'DeletionType (..)
     ) where
 
 import           Network.Google.Apps.Reseller.Types.Product
 import           Network.Google.Apps.Reseller.Types.Sum
 import           Network.Google.Prelude
+
+-- | URL referring to version 'v1sandbox' of the Enterprise Apps Reseller API.
+appsResellerURL :: BaseUrl
+appsResellerURL
+  = BaseUrl Https
+      "https://www.googleapis.com/apps/reseller/v1sandbox/"
+      443

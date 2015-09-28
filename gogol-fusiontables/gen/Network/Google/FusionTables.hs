@@ -17,49 +17,185 @@
 -- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference>
 module Network.Google.FusionTables
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** Fusion Tables API
       FusionTables
-    , StyleAPI
-    , StyleInsert
-    , StyleList
-    , StylePatch
-    , StyleGet
-    , StyleDelete
-    , StyleUpdate
-    , QueryAPI
-    , QuerySqlGet
-    , QuerySql
-    , TaskAPI
-    , TaskList
-    , TaskGet
-    , TaskDelete
-    , TemplateAPI
-    , TemplateInsert
-    , TemplateList
-    , TemplatePatch
-    , TemplateGet
-    , TemplateDelete
-    , TemplateUpdate
-    , ColumnAPI
-    , ColumnInsert
-    , ColumnList
-    , ColumnPatch
-    , ColumnGet
-    , ColumnDelete
-    , ColumnUpdate
-    , TableAPI
-    , TableInsert
-    , TableList
-    , TableCopy
-    , TableReplaceRows
-    , TableImportTable
-    , TablePatch
-    , TableGet
-    , TableImportRows
-    , TableDelete
-    , TableUpdate
+    , fusionTables
+    , fusionTablesURL
+
+    -- ** fusiontables.column.delete
+    , module Network.Google.API.FusionTables.Column.Delete
+
+    -- ** fusiontables.column.get
+    , module Network.Google.API.FusionTables.Column.Get
+
+    -- ** fusiontables.column.insert
+    , module Network.Google.API.FusionTables.Column.Insert
+
+    -- ** fusiontables.column.list
+    , module Network.Google.API.FusionTables.Column.List
+
+    -- ** fusiontables.column.patch
+    , module Network.Google.API.FusionTables.Column.Patch
+
+    -- ** fusiontables.column.update
+    , module Network.Google.API.FusionTables.Column.Update
+
+    -- ** fusiontables.query.sql
+    , module Network.Google.API.FusionTables.Query.Sql
+
+    -- ** fusiontables.query.sqlGet
+    , module Network.Google.API.FusionTables.Query.SqlGet
+
+    -- ** fusiontables.style.delete
+    , module Network.Google.API.FusionTables.Style.Delete
+
+    -- ** fusiontables.style.get
+    , module Network.Google.API.FusionTables.Style.Get
+
+    -- ** fusiontables.style.insert
+    , module Network.Google.API.FusionTables.Style.Insert
+
+    -- ** fusiontables.style.list
+    , module Network.Google.API.FusionTables.Style.List
+
+    -- ** fusiontables.style.patch
+    , module Network.Google.API.FusionTables.Style.Patch
+
+    -- ** fusiontables.style.update
+    , module Network.Google.API.FusionTables.Style.Update
+
+    -- ** fusiontables.table.copy
+    , module Network.Google.API.FusionTables.Table.Copy
+
+    -- ** fusiontables.table.delete
+    , module Network.Google.API.FusionTables.Table.Delete
+
+    -- ** fusiontables.table.get
+    , module Network.Google.API.FusionTables.Table.Get
+
+    -- ** fusiontables.table.importRows
+    , module Network.Google.API.FusionTables.Table.ImportRows
+
+    -- ** fusiontables.table.importTable
+    , module Network.Google.API.FusionTables.Table.ImportTable
+
+    -- ** fusiontables.table.insert
+    , module Network.Google.API.FusionTables.Table.Insert
+
+    -- ** fusiontables.table.list
+    , module Network.Google.API.FusionTables.Table.List
+
+    -- ** fusiontables.table.patch
+    , module Network.Google.API.FusionTables.Table.Patch
+
+    -- ** fusiontables.table.replaceRows
+    , module Network.Google.API.FusionTables.Table.ReplaceRows
+
+    -- ** fusiontables.table.update
+    , module Network.Google.API.FusionTables.Table.Update
+
+    -- ** fusiontables.task.delete
+    , module Network.Google.API.FusionTables.Task.Delete
+
+    -- ** fusiontables.task.get
+    , module Network.Google.API.FusionTables.Task.Get
+
+    -- ** fusiontables.task.list
+    , module Network.Google.API.FusionTables.Task.List
+
+    -- ** fusiontables.template.delete
+    , module Network.Google.API.FusionTables.Template.Delete
+
+    -- ** fusiontables.template.get
+    , module Network.Google.API.FusionTables.Template.Get
+
+    -- ** fusiontables.template.insert
+    , module Network.Google.API.FusionTables.Template.Insert
+
+    -- ** fusiontables.template.list
+    , module Network.Google.API.FusionTables.Template.List
+
+    -- ** fusiontables.template.patch
+    , module Network.Google.API.FusionTables.Template.Patch
+
+    -- ** fusiontables.template.update
+    , module Network.Google.API.FusionTables.Template.Update
 
     -- * Types
+
+    -- ** Polygon
+    , Polygon
+    , polygon
+    , pCoordinates
+    , pType
+
+    -- ** Point
+    , Point
+    , point
+    , poiCoordinates
+    , poiType
+
+    -- ** TaskList
+    , TaskList
+    , taskList
+    , tlTotalItems
+    , tlNextPageToken
+    , tlKind
+    , tlItems
+
+    -- ** Alt
+    , Alt (..)
+
+    -- ** Import
+    , Import
+    , import'
+    , iKind
+    , iNumRowsReceived
+
+    -- ** Task
+    , Task
+    , task
+    , tProgress
+    , tTaskId
+    , tKind
+    , tType
+    , tStarted
+
+    -- ** Template
+    , Template
+    , template
+    , temAutomaticColumnNames
+    , temTemplateId
+    , temKind
+    , temBody
+    , temName
+    , temTableId
+
+    -- ** StyleFunctionItemColorsGradient
+    , StyleFunctionItemColorsGradient
+    , styleFunctionItemColorsGradient
+    , sficgColor
+    , sficgOpacity
+
+    -- ** PointStyle
+    , PointStyle
+    , pointStyle
+    , psIconName
+    , psIconStyler
+
+    -- ** PolygonStyle
+    , PolygonStyle
+    , polygonStyle
+    , psFillColorStyler
+    , psFillColor
+    , psStrokeColorStyler
+    , psStrokeWeight
+    , psStrokeOpacity
+    , psFillOpacity
+    , psStrokeWeightStyler
+    , psStrokeColor
 
     -- ** Bucket
     , Bucket
@@ -70,49 +206,6 @@ module Network.Google.FusionTables
     , bIcon
     , bOpacity
     , bMin
-
-    -- ** Column
-    , Column
-    , column
-    , cColumnJsonSchema
-    , cGraphPredicate
-    , cKind
-    , cBaseColumn
-    , cColumnPropertiesJson
-    , cName
-    , cType
-    , cFormatPattern
-    , cColumnId
-    , cValidValues
-    , cValidateData
-    , cDescription
-
-    -- ** ColumnBaseColumn
-    , ColumnBaseColumn
-    , columnBaseColumn
-    , cbcTableIndex
-    , cbcColumnId
-
-    -- ** ColumnList
-    , ColumnList
-    , columnList
-    , clTotalItems
-    , clNextPageToken
-    , clKind
-    , clItems
-
-    -- ** Geometry
-    , Geometry
-    , geometry
-    , gGeometries
-    , gGeometry
-    , gType
-
-    -- ** Import
-    , Import
-    , import'
-    , iKind
-    , iNumRowsReceived
 
     -- ** Line
     , Line
@@ -129,42 +222,35 @@ module Network.Google.FusionTables
     , lsStrokeWeightStyler
     , lsStrokeColor
 
-    -- ** Point
-    , Point
-    , point
-    , poiCoordinates
-    , poiType
+    -- ** ColumnList
+    , ColumnList
+    , columnList
+    , clTotalItems
+    , clNextPageToken
+    , clKind
+    , clItems
 
-    -- ** PointStyle
-    , PointStyle
-    , pointStyle
-    , psIconName
-    , psIconStyler
+    -- ** TableList
+    , TableList
+    , tableList
+    , tabNextPageToken
+    , tabKind
+    , tabItems
 
-    -- ** Polygon
-    , Polygon
-    , polygon
-    , pCoordinates
-    , pType
+    -- ** TemplateList
+    , TemplateList
+    , templateList
+    , tllTotalItems
+    , tllNextPageToken
+    , tllKind
+    , tllItems
 
-    -- ** PolygonStyle
-    , PolygonStyle
-    , polygonStyle
-    , psFillColorStyler
-    , psFillColor
-    , psStrokeColorStyler
-    , psStrokeWeight
-    , psStrokeOpacity
-    , psFillOpacity
-    , psStrokeWeightStyler
-    , psStrokeColor
-
-    -- ** Sqlresponse
-    , Sqlresponse
-    , sqlresponse
-    , sKind
-    , sRows
-    , sColumns
+    -- ** Geometry
+    , Geometry
+    , geometry
+    , gGeometries
+    , gGeometry
+    , gType
 
     -- ** StyleFunction
     , StyleFunction
@@ -174,29 +260,19 @@ module Network.Google.FusionTables
     , sfGradient
     , sfColumnName
 
+    -- ** Sqlresponse
+    , Sqlresponse
+    , sqlresponse
+    , sKind
+    , sRows
+    , sColumns
+
     -- ** StyleFunctionGradient
     , StyleFunctionGradient
     , styleFunctionGradient
     , sfgMax
     , sfgMin
     , sfgColors
-
-    -- ** StyleFunctionItemColorsGradient
-    , StyleFunctionItemColorsGradient
-    , styleFunctionItemColorsGradient
-    , sficgColor
-    , sficgOpacity
-
-    -- ** StyleSetting
-    , StyleSetting
-    , styleSetting
-    , ssPolylineOptions
-    , ssPolygonOptions
-    , ssMarkerOptions
-    , ssKind
-    , ssName
-    , ssStyleId
-    , ssTableId
 
     -- ** StyleSettingList
     , StyleSettingList
@@ -223,49 +299,73 @@ module Network.Google.FusionTables
     , ttAttribution
     , ttAttributionLink
 
-    -- ** TableList
-    , TableList
-    , tableList
-    , tabNextPageToken
-    , tabKind
-    , tabItems
+    -- ** ColumnBaseColumn
+    , ColumnBaseColumn
+    , columnBaseColumn
+    , cbcTableIndex
+    , cbcColumnId
 
-    -- ** Task
-    , Task
-    , task
-    , tProgress
-    , tTaskId
-    , tKind
-    , tType
-    , tStarted
+    -- ** Column
+    , Column
+    , column
+    , cColumnJsonSchema
+    , cGraphPredicate
+    , cKind
+    , cBaseColumn
+    , cColumnPropertiesJson
+    , cName
+    , cType
+    , cFormatPattern
+    , cColumnId
+    , cValidValues
+    , cValidateData
+    , cDescription
 
-    -- ** TaskList
-    , TaskList
-    , taskList
-    , tlTotalItems
-    , tlNextPageToken
-    , tlKind
-    , tlItems
-
-    -- ** Template
-    , Template
-    , template
-    , temAutomaticColumnNames
-    , temTemplateId
-    , temKind
-    , temBody
-    , temName
-    , temTableId
-
-    -- ** TemplateList
-    , TemplateList
-    , templateList
-    , tllTotalItems
-    , tllNextPageToken
-    , tllKind
-    , tllItems
+    -- ** StyleSetting
+    , StyleSetting
+    , styleSetting
+    , ssPolylineOptions
+    , ssPolygonOptions
+    , ssMarkerOptions
+    , ssKind
+    , ssName
+    , ssStyleId
+    , ssTableId
     ) where
 
+import           Network.Google.API.FusionTables.Column.Delete
+import           Network.Google.API.FusionTables.Column.Get
+import           Network.Google.API.FusionTables.Column.Insert
+import           Network.Google.API.FusionTables.Column.List
+import           Network.Google.API.FusionTables.Column.Patch
+import           Network.Google.API.FusionTables.Column.Update
+import           Network.Google.API.FusionTables.Query.Sql
+import           Network.Google.API.FusionTables.Query.SqlGet
+import           Network.Google.API.FusionTables.Style.Delete
+import           Network.Google.API.FusionTables.Style.Get
+import           Network.Google.API.FusionTables.Style.Insert
+import           Network.Google.API.FusionTables.Style.List
+import           Network.Google.API.FusionTables.Style.Patch
+import           Network.Google.API.FusionTables.Style.Update
+import           Network.Google.API.FusionTables.Table.Copy
+import           Network.Google.API.FusionTables.Table.Delete
+import           Network.Google.API.FusionTables.Table.Get
+import           Network.Google.API.FusionTables.Table.ImportRows
+import           Network.Google.API.FusionTables.Table.ImportTable
+import           Network.Google.API.FusionTables.Table.Insert
+import           Network.Google.API.FusionTables.Table.List
+import           Network.Google.API.FusionTables.Table.Patch
+import           Network.Google.API.FusionTables.Table.ReplaceRows
+import           Network.Google.API.FusionTables.Table.Update
+import           Network.Google.API.FusionTables.Task.Delete
+import           Network.Google.API.FusionTables.Task.Get
+import           Network.Google.API.FusionTables.Task.List
+import           Network.Google.API.FusionTables.Template.Delete
+import           Network.Google.API.FusionTables.Template.Get
+import           Network.Google.API.FusionTables.Template.Insert
+import           Network.Google.API.FusionTables.Template.List
+import           Network.Google.API.FusionTables.Template.Patch
+import           Network.Google.API.FusionTables.Template.Update
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
@@ -274,576 +374,38 @@ TODO
 -}
 
 type FusionTables =
-     StyleAPI :<|> QueryAPI :<|> TaskAPI :<|> TemplateAPI
-       :<|> ColumnAPI
-       :<|> TableAPI
+     QuerySqlGetAPI :<|> TableListAPI :<|>
+       TableImportRowsAPI
+       :<|> TemplateDeleteAPI
+       :<|> ColumnDeleteAPI
+       :<|> TableUpdateAPI
+       :<|> TaskGetAPI
+       :<|> StyleGetAPI
+       :<|> StyleInsertAPI
+       :<|> TableInsertAPI
+       :<|> TaskListAPI
+       :<|> TableReplaceRowsAPI
+       :<|> StyleListAPI
+       :<|> TaskDeleteAPI
+       :<|> StyleDeleteAPI
+       :<|> TemplateUpdateAPI
+       :<|> TemplateInsertAPI
+       :<|> TableImportTableAPI
+       :<|> ColumnInsertAPI
+       :<|> ColumnUpdateAPI
+       :<|> StyleUpdateAPI
+       :<|> ColumnGetAPI
+       :<|> TemplateListAPI
+       :<|> TemplateGetAPI
+       :<|> ColumnListAPI
+       :<|> TableDeleteAPI
+       :<|> QuerySqlAPI
+       :<|> TableGetAPI
+       :<|> TemplatePatchAPI
+       :<|> ColumnPatchAPI
+       :<|> TableCopyAPI
+       :<|> StylePatchAPI
+       :<|> TablePatchAPI
 
-type StyleAPI =
-     StyleInsert :<|> StyleList :<|> StylePatch :<|>
-       StyleGet
-       :<|> StyleDelete
-       :<|> StyleUpdate
-
--- | Adds a new style for the table.
-type StyleInsert =
-     "fusiontables" :>
-       "v2" :>
-         "tables" :>
-           Capture "tableId" Text :>
-             "styles" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] StyleSetting
-
--- | Retrieves a list of styles.
-type StyleList =
-     "fusiontables" :>
-       "v2" :>
-         "tables" :>
-           Capture "tableId" Text :>
-             "styles" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Get '[JSON] StyleSettingList
-
--- | Updates an existing style. This method supports patch semantics.
-type StylePatch =
-     "fusiontables" :>
-       "v2" :>
-         "tables" :>
-           Capture "tableId" Text :>
-             "styles" :>
-               Capture "styleId" Int32 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Patch '[JSON] StyleSetting
-
--- | Gets a specific style.
-type StyleGet =
-     "fusiontables" :>
-       "v2" :>
-         "tables" :>
-           Capture "tableId" Text :>
-             "styles" :>
-               Capture "styleId" Int32 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] StyleSetting
-
--- | Deletes a style.
-type StyleDelete =
-     "fusiontables" :>
-       "v2" :>
-         "tables" :>
-           Capture "tableId" Text :>
-             "styles" :>
-               Capture "styleId" Int32 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Updates an existing style.
-type StyleUpdate =
-     "fusiontables" :>
-       "v2" :>
-         "tables" :>
-           Capture "tableId" Text :>
-             "styles" :>
-               Capture "styleId" Int32 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Put '[JSON] StyleSetting
-
-type QueryAPI = QuerySqlGet :<|> QuerySql
-
--- | Executes a SQL statement which can be any of - SELECT - SHOW - DESCRIBE
-type QuerySqlGet =
-     "fusiontables" :>
-       "v2" :>
-         "query" :>
-           QueryParam "typed" Bool :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "hdrs" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "sql" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] Sqlresponse
-
--- | Executes a Fusion Tables SQL statement, which can be any of - SELECT -
--- INSERT - UPDATE - DELETE - SHOW - DESCRIBE - CREATE statement.
-type QuerySql =
-     "fusiontables" :>
-       "v2" :>
-         "query" :>
-           QueryParam "typed" Bool :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "hdrs" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "sql" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Post '[JSON] Sqlresponse
-
-type TaskAPI = TaskList :<|> TaskGet :<|> TaskDelete
-
--- | Retrieves a list of tasks.
-type TaskList =
-     "fusiontables" :>
-       "v2" :>
-         "tables" :>
-           Capture "tableId" Text :>
-             "tasks" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "startIndex" Word32 :>
-                             QueryParam "maxResults" Word32 :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Get '[JSON] TaskList
-
--- | Retrieves a specific task by its ID.
-type TaskGet =
-     "fusiontables" :>
-       "v2" :>
-         "tables" :>
-           Capture "tableId" Text :>
-             "tasks" :>
-               Capture "taskId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] Task
-
--- | Deletes a specific task by its ID, unless that task has already started
--- running.
-type TaskDelete =
-     "fusiontables" :>
-       "v2" :>
-         "tables" :>
-           Capture "tableId" Text :>
-             "tasks" :>
-               Capture "taskId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Delete '[JSON] ()
-
-type TemplateAPI =
-     TemplateInsert :<|> TemplateList :<|> TemplatePatch
-       :<|> TemplateGet
-       :<|> TemplateDelete
-       :<|> TemplateUpdate
-
--- | Creates a new template for the table.
-type TemplateInsert =
-     "fusiontables" :>
-       "v2" :>
-         "tables" :>
-           Capture "tableId" Text :>
-             "templates" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] Template
-
--- | Retrieves a list of templates.
-type TemplateList =
-     "fusiontables" :>
-       "v2" :>
-         "tables" :>
-           Capture "tableId" Text :>
-             "templates" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Get '[JSON] TemplateList
-
--- | Updates an existing template. This method supports patch semantics.
-type TemplatePatch =
-     "fusiontables" :>
-       "v2" :>
-         "tables" :>
-           Capture "tableId" Text :>
-             "templates" :>
-               Capture "templateId" Int32 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Patch '[JSON] Template
-
--- | Retrieves a specific template by its id
-type TemplateGet =
-     "fusiontables" :>
-       "v2" :>
-         "tables" :>
-           Capture "tableId" Text :>
-             "templates" :>
-               Capture "templateId" Int32 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] Template
-
--- | Deletes a template
-type TemplateDelete =
-     "fusiontables" :>
-       "v2" :>
-         "tables" :>
-           Capture "tableId" Text :>
-             "templates" :>
-               Capture "templateId" Int32 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Updates an existing template
-type TemplateUpdate =
-     "fusiontables" :>
-       "v2" :>
-         "tables" :>
-           Capture "tableId" Text :>
-             "templates" :>
-               Capture "templateId" Int32 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Put '[JSON] Template
-
-type ColumnAPI =
-     ColumnInsert :<|> ColumnList :<|> ColumnPatch :<|>
-       ColumnGet
-       :<|> ColumnDelete
-       :<|> ColumnUpdate
-
--- | Adds a new column to the table.
-type ColumnInsert =
-     "fusiontables" :>
-       "v2" :>
-         "tables" :>
-           Capture "tableId" Text :>
-             "columns" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] Column
-
--- | Retrieves a list of columns.
-type ColumnList =
-     "fusiontables" :>
-       "v2" :>
-         "tables" :>
-           Capture "tableId" Text :>
-             "columns" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Get '[JSON] ColumnList
-
--- | Updates the name or type of an existing column. This method supports
--- patch semantics.
-type ColumnPatch =
-     "fusiontables" :>
-       "v2" :>
-         "tables" :>
-           Capture "tableId" Text :>
-             "columns" :>
-               Capture "columnId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Patch '[JSON] Column
-
--- | Retrieves a specific column by its ID.
-type ColumnGet =
-     "fusiontables" :>
-       "v2" :>
-         "tables" :>
-           Capture "tableId" Text :>
-             "columns" :>
-               Capture "columnId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] Column
-
--- | Deletes the specified column.
-type ColumnDelete =
-     "fusiontables" :>
-       "v2" :>
-         "tables" :>
-           Capture "tableId" Text :>
-             "columns" :>
-               Capture "columnId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Updates the name or type of an existing column.
-type ColumnUpdate =
-     "fusiontables" :>
-       "v2" :>
-         "tables" :>
-           Capture "tableId" Text :>
-             "columns" :>
-               Capture "columnId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Put '[JSON] Column
-
-type TableAPI =
-     TableInsert :<|> TableList :<|> TableCopy :<|>
-       TableReplaceRows
-       :<|> TableImportTable
-       :<|> TablePatch
-       :<|> TableGet
-       :<|> TableImportRows
-       :<|> TableDelete
-       :<|> TableUpdate
-
--- | Creates a new table.
-type TableInsert =
-     "fusiontables" :>
-       "v2" :>
-         "tables" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "alt" Text :> Post '[JSON] Table
-
--- | Retrieves a list of tables a user owns.
-type TableList =
-     "fusiontables" :>
-       "v2" :>
-         "tables" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "maxResults" Word32 :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Get '[JSON] TableList
-
--- | Copies a table.
-type TableCopy =
-     "fusiontables" :>
-       "v2" :>
-         "tables" :>
-           Capture "tableId" Text :>
-             "copy" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "copyPresentation" Bool :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Post '[JSON] Table
-
--- | Replaces rows of an existing table. Current rows remain visible until
--- all replacement rows are ready.
-type TableReplaceRows =
-     "fusiontables" :>
-       "v2" :>
-         "tables" :>
-           Capture "tableId" Text :>
-             "replace" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "startLine" Int32 :>
-                       QueryParam "endLine" Int32 :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "delimiter" Text :>
-                               QueryParam "encoding" Text :>
-                                 QueryParam "isStrict" Bool :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "alt" Text :> Post '[JSON] Task
-
--- | Imports a new table.
-type TableImportTable =
-     "fusiontables" :>
-       "v2" :>
-         "tables" :>
-           "import" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "name" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "delimiter" Text :>
-                           QueryParam "encoding" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Post '[JSON] Table
-
--- | Updates an existing table. Unless explicitly requested, only the name,
--- description, and attribution will be updated. This method supports patch
--- semantics.
-type TablePatch =
-     "fusiontables" :>
-       "v2" :>
-         "tables" :>
-           Capture "tableId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "replaceViewDefinition" Bool :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Patch '[JSON] Table
-
--- | Retrieves a specific table by its ID.
-type TableGet =
-     "fusiontables" :>
-       "v2" :>
-         "tables" :>
-           Capture "tableId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Get '[JSON] Table
-
--- | Imports more rows into a table.
-type TableImportRows =
-     "fusiontables" :>
-       "v2" :>
-         "tables" :>
-           Capture "tableId" Text :>
-             "import" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "startLine" Int32 :>
-                       QueryParam "endLine" Int32 :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "delimiter" Text :>
-                               QueryParam "encoding" Text :>
-                                 QueryParam "isStrict" Bool :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "alt" Text :>
-                                       Post '[JSON] Import
-
--- | Deletes a table.
-type TableDelete =
-     "fusiontables" :>
-       "v2" :>
-         "tables" :>
-           Capture "tableId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Updates an existing table. Unless explicitly requested, only the name,
--- description, and attribution will be updated.
-type TableUpdate =
-     "fusiontables" :>
-       "v2" :>
-         "tables" :>
-           Capture "tableId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "replaceViewDefinition" Bool :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Put '[JSON] Table
+fusionTables :: Proxy FusionTables
+fusionTables = Proxy

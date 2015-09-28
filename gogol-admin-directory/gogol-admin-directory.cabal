@@ -1,0 +1,96 @@
+name:                  gogol-admin-directory
+version:               0.0.1
+synopsis:              Google Admin Directory API Client.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               OtherLicense
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
+copyright:             Copyright (c) 2015 Brendan Hay
+category:              Network, Google, Cloud
+build-type:            Simple
+cabal-version:         >= 1.10
+extra-source-files:    README.md
+
+description:
+    The Admin SDK Directory API lets you view and manage enterprise
+    resources such as users and groups, administrative notifications,
+    security features, and more.
+    .
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
+
+source-repository head
+    type:     git
+    location: git://github.com/brendanhay/gogol.git
+
+library
+    default-language:  Haskell2010
+    hs-source-dirs:    src gen
+
+    ghc-options:       -Wall
+
+    exposed-modules:
+          Network.Google.API.Admin.Channels.Stop
+        , Network.Google.API.Directory.Asps.Delete
+        , Network.Google.API.Directory.Asps.Get
+        , Network.Google.API.Directory.Asps.List
+        , Network.Google.API.Directory.Chromeosdevices.Get
+        , Network.Google.API.Directory.Chromeosdevices.List
+        , Network.Google.API.Directory.Chromeosdevices.Patch
+        , Network.Google.API.Directory.Chromeosdevices.Update
+        , Network.Google.API.Directory.Groups.Aliases.Delete
+        , Network.Google.API.Directory.Groups.Aliases.Insert
+        , Network.Google.API.Directory.Groups.Aliases.List
+        , Network.Google.API.Directory.Members.Delete
+        , Network.Google.API.Directory.Members.Get
+        , Network.Google.API.Directory.Members.Insert
+        , Network.Google.API.Directory.Members.List
+        , Network.Google.API.Directory.Members.Patch
+        , Network.Google.API.Directory.Members.Update
+        , Network.Google.API.Directory.Mobiledevices.Action
+        , Network.Google.API.Directory.Mobiledevices.Delete
+        , Network.Google.API.Directory.Mobiledevices.Get
+        , Network.Google.API.Directory.Mobiledevices.List
+        , Network.Google.API.Directory.Notifications.Delete
+        , Network.Google.API.Directory.Notifications.Get
+        , Network.Google.API.Directory.Notifications.List
+        , Network.Google.API.Directory.Notifications.Patch
+        , Network.Google.API.Directory.Notifications.Update
+        , Network.Google.API.Directory.Orgunits.Delete
+        , Network.Google.API.Directory.Orgunits.Get
+        , Network.Google.API.Directory.Orgunits.Insert
+        , Network.Google.API.Directory.Orgunits.List
+        , Network.Google.API.Directory.Orgunits.Patch
+        , Network.Google.API.Directory.Orgunits.Update
+        , Network.Google.API.Directory.Schemas.Delete
+        , Network.Google.API.Directory.Schemas.Get
+        , Network.Google.API.Directory.Schemas.Insert
+        , Network.Google.API.Directory.Schemas.List
+        , Network.Google.API.Directory.Schemas.Patch
+        , Network.Google.API.Directory.Schemas.Update
+        , Network.Google.API.Directory.Tokens.Delete
+        , Network.Google.API.Directory.Tokens.Get
+        , Network.Google.API.Directory.Tokens.List
+        , Network.Google.API.Directory.Users.Aliases.Delete
+        , Network.Google.API.Directory.Users.Aliases.Insert
+        , Network.Google.API.Directory.Users.Aliases.List
+        , Network.Google.API.Directory.Users.Aliases.Watch
+        , Network.Google.API.Directory.Users.Photos.Delete
+        , Network.Google.API.Directory.Users.Photos.Get
+        , Network.Google.API.Directory.Users.Photos.Patch
+        , Network.Google.API.Directory.Users.Photos.Update
+        , Network.Google.API.Directory.VerificationCodes.Generate
+        , Network.Google.API.Directory.VerificationCodes.Invalidate
+        , Network.Google.API.Directory.VerificationCodes.List
+        , Network.Google.Admin.Directory
+        , Network.Google.Admin.Directory.Types
+
+    other-modules:
+          Network.Google.Admin.Directory.Types.Product
+        , Network.Google.Admin.Directory.Types.Sum
+
+    build-depends:
+          gogol-core == 0.0.1.*
+        , base       >= 4.7 && < 5

@@ -57,47 +57,19 @@ instance FromJSON AggregateBucketType where
 instance ToJSON AggregateBucketType where
     toJSON = toJSONText
 
--- | A constant describing the type of this data source. Indicates whether
--- this data source produces raw or derived data.
-data DataSourceType
-    = DSTDerived
-      -- ^ @derived@
-    | DSTRaw
-      -- ^ @raw@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable DataSourceType
-
-instance FromText DataSourceType where
-    fromText = \case
-        "derived" -> Just DSTDerived
-        "raw" -> Just DSTRaw
-        _ -> Nothing
-
-instance ToText DataSourceType where
-    toText = \case
-        DSTDerived -> "derived"
-        DSTRaw -> "raw"
-
-instance FromJSON DataSourceType where
-    parseJSON = parseJSONText "DataSourceType"
-
-instance ToJSON DataSourceType where
-    toJSON = toJSONText
-
 -- | The different supported formats for each field in a data type.
 data DataTypeFieldFormat
-    = DTFFFloatList
+    = FloatList
       -- ^ @floatList@
-    | DTFFFloatPoint
+    | FloatPoint
       -- ^ @floatPoint@
-    | DTFFInteger
+    | Integer
       -- ^ @integer@
-    | DTFFIntegerList
+    | IntegerList
       -- ^ @integerList@
-    | DTFFMap
+    | Map
       -- ^ @map@
-    | DTFFString
+    | String
       -- ^ @string@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -105,22 +77,22 @@ instance Hashable DataTypeFieldFormat
 
 instance FromText DataTypeFieldFormat where
     fromText = \case
-        "floatList" -> Just DTFFFloatList
-        "floatPoint" -> Just DTFFFloatPoint
-        "integer" -> Just DTFFInteger
-        "integerList" -> Just DTFFIntegerList
-        "map" -> Just DTFFMap
-        "string" -> Just DTFFString
+        "floatList" -> Just FloatList
+        "floatPoint" -> Just FloatPoint
+        "integer" -> Just Integer
+        "integerList" -> Just IntegerList
+        "map" -> Just Map
+        "string" -> Just String
         _ -> Nothing
 
 instance ToText DataTypeFieldFormat where
     toText = \case
-        DTFFFloatList -> "floatList"
-        DTFFFloatPoint -> "floatPoint"
-        DTFFInteger -> "integer"
-        DTFFIntegerList -> "integerList"
-        DTFFMap -> "map"
-        DTFFString -> "string"
+        FloatList -> "floatList"
+        FloatPoint -> "floatPoint"
+        Integer -> "integer"
+        IntegerList -> "integerList"
+        Map -> "map"
+        String -> "string"
 
 instance FromJSON DataTypeFieldFormat where
     parseJSON = parseJSONText "DataTypeFieldFormat"
@@ -128,19 +100,43 @@ instance FromJSON DataTypeFieldFormat where
 instance ToJSON DataTypeFieldFormat where
     toJSON = toJSONText
 
+-- | Data format for the response.
+data Alt
+    = JSON
+      -- ^ @json@
+      -- Responses with Content-Type of application\/json
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable Alt
+
+instance FromText Alt where
+    fromText = \case
+        "json" -> Just JSON
+        _ -> Nothing
+
+instance ToText Alt where
+    toText = \case
+        JSON -> "json"
+
+instance FromJSON Alt where
+    parseJSON = parseJSONText "Alt"
+
+instance ToJSON Alt where
+    toJSON = toJSONText
+
 -- | A constant representing the type of the device.
 data DeviceType
-    = DTChestStrap
+    = ChestStrap
       -- ^ @chestStrap@
-    | DTPhone
+    | Phone
       -- ^ @phone@
-    | DTScale
+    | Scale
       -- ^ @scale@
-    | DTTablet
+    | Tablet
       -- ^ @tablet@
-    | DTUnknown
+    | Unknown
       -- ^ @unknown@
-    | DTWatch
+    | Watch
       -- ^ @watch@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -148,25 +144,53 @@ instance Hashable DeviceType
 
 instance FromText DeviceType where
     fromText = \case
-        "chestStrap" -> Just DTChestStrap
-        "phone" -> Just DTPhone
-        "scale" -> Just DTScale
-        "tablet" -> Just DTTablet
-        "unknown" -> Just DTUnknown
-        "watch" -> Just DTWatch
+        "chestStrap" -> Just ChestStrap
+        "phone" -> Just Phone
+        "scale" -> Just Scale
+        "tablet" -> Just Tablet
+        "unknown" -> Just Unknown
+        "watch" -> Just Watch
         _ -> Nothing
 
 instance ToText DeviceType where
     toText = \case
-        DTChestStrap -> "chestStrap"
-        DTPhone -> "phone"
-        DTScale -> "scale"
-        DTTablet -> "tablet"
-        DTUnknown -> "unknown"
-        DTWatch -> "watch"
+        ChestStrap -> "chestStrap"
+        Phone -> "phone"
+        Scale -> "scale"
+        Tablet -> "tablet"
+        Unknown -> "unknown"
+        Watch -> "watch"
 
 instance FromJSON DeviceType where
     parseJSON = parseJSONText "DeviceType"
 
 instance ToJSON DeviceType where
+    toJSON = toJSONText
+
+-- | A constant describing the type of this data source. Indicates whether
+-- this data source produces raw or derived data.
+data DataSourceType
+    = Derived
+      -- ^ @derived@
+    | Raw
+      -- ^ @raw@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable DataSourceType
+
+instance FromText DataSourceType where
+    fromText = \case
+        "derived" -> Just Derived
+        "raw" -> Just Raw
+        _ -> Nothing
+
+instance ToText DataSourceType where
+    toText = \case
+        Derived -> "derived"
+        Raw -> "raw"
+
+instance FromJSON DataSourceType where
+    parseJSON = parseJSONText "DataSourceType"
+
+instance ToJSON DataSourceType where
     toJSON = toJSONText

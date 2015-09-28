@@ -1,6 +1,6 @@
 name:                  gogol-games-management
 version:               0.0.1
-synopsis:              Google Play Game Services Management API.
+synopsis:              Google Play Game Services Management API Client.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -16,8 +16,8 @@ extra-source-files:    README.md
 description:
     The Management API for Google Play Game Services.
     .
-    /Warning:/ This is an experimental preview release which is still under
-    heavy development and not intended for public consumption, caveat emptor!
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
 
 source-repository head
     type:     git
@@ -30,7 +30,34 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.Games.Management
+          Network.Google.API.GamesManagement.Achievements.Reset
+        , Network.Google.API.GamesManagement.Achievements.ResetAll
+        , Network.Google.API.GamesManagement.Achievements.ResetAllForAllPlayers
+        , Network.Google.API.GamesManagement.Achievements.ResetForAllPlayers
+        , Network.Google.API.GamesManagement.Achievements.ResetMultipleForAllPlayers
+        , Network.Google.API.GamesManagement.Applications.ListHidden
+        , Network.Google.API.GamesManagement.Events.Reset
+        , Network.Google.API.GamesManagement.Events.ResetAll
+        , Network.Google.API.GamesManagement.Events.ResetAllForAllPlayers
+        , Network.Google.API.GamesManagement.Events.ResetForAllPlayers
+        , Network.Google.API.GamesManagement.Events.ResetMultipleForAllPlayers
+        , Network.Google.API.GamesManagement.Players.Hide
+        , Network.Google.API.GamesManagement.Players.Unhide
+        , Network.Google.API.GamesManagement.Quests.Reset
+        , Network.Google.API.GamesManagement.Quests.ResetAll
+        , Network.Google.API.GamesManagement.Quests.ResetAllForAllPlayers
+        , Network.Google.API.GamesManagement.Quests.ResetForAllPlayers
+        , Network.Google.API.GamesManagement.Quests.ResetMultipleForAllPlayers
+        , Network.Google.API.GamesManagement.Rooms.Reset
+        , Network.Google.API.GamesManagement.Rooms.ResetForAllPlayers
+        , Network.Google.API.GamesManagement.Scores.Reset
+        , Network.Google.API.GamesManagement.Scores.ResetAll
+        , Network.Google.API.GamesManagement.Scores.ResetAllForAllPlayers
+        , Network.Google.API.GamesManagement.Scores.ResetForAllPlayers
+        , Network.Google.API.GamesManagement.Scores.ResetMultipleForAllPlayers
+        , Network.Google.API.GamesManagement.TurnBasedMatches.Reset
+        , Network.Google.API.GamesManagement.TurnBasedMatches.ResetForAllPlayers
+        , Network.Google.Games.Management
         , Network.Google.Games.Management.Types
 
     other-modules:

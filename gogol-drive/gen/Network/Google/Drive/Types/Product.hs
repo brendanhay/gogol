@@ -18,6 +18,246 @@ module Network.Google.Drive.Types.Product where
 import           Network.Google.Drive.Types.Sum
 import           Network.Google.Prelude
 
+-- | A list of changes for a user.
+--
+-- /See:/ 'changeList' smart constructor.
+data ChangeList = ChangeList
+    { _clEtag            :: !(Maybe Text)
+    , _clNextPageToken   :: !(Maybe Text)
+    , _clNextLink        :: !(Maybe Text)
+    , _clKind            :: !Text
+    , _clItems           :: !(Maybe [Maybe Change])
+    , _clSelfLink        :: !(Maybe Text)
+    , _clLargestChangeId :: !(Maybe Int64)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ChangeList' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'clEtag'
+--
+-- * 'clNextPageToken'
+--
+-- * 'clNextLink'
+--
+-- * 'clKind'
+--
+-- * 'clItems'
+--
+-- * 'clSelfLink'
+--
+-- * 'clLargestChangeId'
+changeList
+    :: ChangeList
+changeList =
+    ChangeList
+    { _clEtag = Nothing
+    , _clNextPageToken = Nothing
+    , _clNextLink = Nothing
+    , _clKind = "drive#changeList"
+    , _clItems = Nothing
+    , _clSelfLink = Nothing
+    , _clLargestChangeId = Nothing
+    }
+
+-- | The ETag of the list.
+clEtag :: Lens' ChangeList (Maybe Text)
+clEtag = lens _clEtag (\ s a -> s{_clEtag = a})
+
+-- | The page token for the next page of changes.
+clNextPageToken :: Lens' ChangeList (Maybe Text)
+clNextPageToken
+  = lens _clNextPageToken
+      (\ s a -> s{_clNextPageToken = a})
+
+-- | A link to the next page of changes.
+clNextLink :: Lens' ChangeList (Maybe Text)
+clNextLink
+  = lens _clNextLink (\ s a -> s{_clNextLink = a})
+
+-- | This is always drive#changeList.
+clKind :: Lens' ChangeList Text
+clKind = lens _clKind (\ s a -> s{_clKind = a})
+
+-- | The actual list of changes.
+clItems :: Lens' ChangeList [Maybe Change]
+clItems
+  = lens _clItems (\ s a -> s{_clItems = a}) . _Default
+      . _Coerce
+
+-- | A link back to this list.
+clSelfLink :: Lens' ChangeList (Maybe Text)
+clSelfLink
+  = lens _clSelfLink (\ s a -> s{_clSelfLink = a})
+
+-- | The current largest change ID.
+clLargestChangeId :: Lens' ChangeList (Maybe Int64)
+clLargestChangeId
+  = lens _clLargestChangeId
+      (\ s a -> s{_clLargestChangeId = a})
+
+instance FromJSON ChangeList where
+        parseJSON
+          = withObject "ChangeList"
+              (\ o ->
+                 ChangeList <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "nextLink")
+                     <*> (o .:? "kind" .!= "drive#changeList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "largestChangeId"))
+
+instance ToJSON ChangeList where
+        toJSON ChangeList{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _clEtag,
+                  ("nextPageToken" .=) <$> _clNextPageToken,
+                  ("nextLink" .=) <$> _clNextLink,
+                  Just ("kind" .= _clKind), ("items" .=) <$> _clItems,
+                  ("selfLink" .=) <$> _clSelfLink,
+                  ("largestChangeId" .=) <$> _clLargestChangeId])
+
+--
+-- /See:/ 'appItemIcons' smart constructor.
+data AppItemIcons = AppItemIcons
+    { _aiiSize     :: !(Maybe Int32)
+    , _aiiCategory :: !(Maybe Text)
+    , _aiiIconUrl  :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AppItemIcons' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aiiSize'
+--
+-- * 'aiiCategory'
+--
+-- * 'aiiIconUrl'
+appItemIcons
+    :: AppItemIcons
+appItemIcons =
+    AppItemIcons
+    { _aiiSize = Nothing
+    , _aiiCategory = Nothing
+    , _aiiIconUrl = Nothing
+    }
+
+-- | Size of the icon. Represented as the maximum of the width and height.
+aiiSize :: Lens' AppItemIcons (Maybe Int32)
+aiiSize = lens _aiiSize (\ s a -> s{_aiiSize = a})
+
+-- | Category of the icon. Allowed values are: - application - icon for the
+-- application - document - icon for a file associated with the app -
+-- documentShared - icon for a shared file associated with the app
+aiiCategory :: Lens' AppItemIcons (Maybe Text)
+aiiCategory
+  = lens _aiiCategory (\ s a -> s{_aiiCategory = a})
+
+-- | URL for the icon.
+aiiIconUrl :: Lens' AppItemIcons (Maybe Text)
+aiiIconUrl
+  = lens _aiiIconUrl (\ s a -> s{_aiiIconUrl = a})
+
+instance FromJSON AppItemIcons where
+        parseJSON
+          = withObject "AppItemIcons"
+              (\ o ->
+                 AppItemIcons <$>
+                   (o .:? "size") <*> (o .:? "category") <*>
+                     (o .:? "iconUrl"))
+
+instance ToJSON AppItemIcons where
+        toJSON AppItemIcons{..}
+          = object
+              (catMaybes
+                 [("size" .=) <$> _aiiSize,
+                  ("category" .=) <$> _aiiCategory,
+                  ("iconUrl" .=) <$> _aiiIconUrl])
+
+-- | Links for exporting Google Docs to specific formats.
+--
+-- /See:/ 'fileExportLinks' smart constructor.
+data FileExportLinks =
+    FileExportLinks
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'FileExportLinks' with the minimum fields required to make a request.
+--
+fileExportLinks
+    :: FileExportLinks
+fileExportLinks = FileExportLinks
+
+instance FromJSON FileExportLinks where
+        parseJSON
+          = withObject "FileExportLinks"
+              (\ o -> pure FileExportLinks)
+
+instance ToJSON FileExportLinks where
+        toJSON = const (Object mempty)
+
+-- | Metadata about video media. This will only be present for video types.
+--
+-- /See:/ 'fileVideoMediaMetadata' smart constructor.
+data FileVideoMediaMetadata = FileVideoMediaMetadata
+    { _fvmmHeight         :: !(Maybe Int32)
+    , _fvmmWidth          :: !(Maybe Int32)
+    , _fvmmDurationMillis :: !(Maybe Int64)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'FileVideoMediaMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'fvmmHeight'
+--
+-- * 'fvmmWidth'
+--
+-- * 'fvmmDurationMillis'
+fileVideoMediaMetadata
+    :: FileVideoMediaMetadata
+fileVideoMediaMetadata =
+    FileVideoMediaMetadata
+    { _fvmmHeight = Nothing
+    , _fvmmWidth = Nothing
+    , _fvmmDurationMillis = Nothing
+    }
+
+-- | The height of the video in pixels.
+fvmmHeight :: Lens' FileVideoMediaMetadata (Maybe Int32)
+fvmmHeight
+  = lens _fvmmHeight (\ s a -> s{_fvmmHeight = a})
+
+-- | The width of the video in pixels.
+fvmmWidth :: Lens' FileVideoMediaMetadata (Maybe Int32)
+fvmmWidth
+  = lens _fvmmWidth (\ s a -> s{_fvmmWidth = a})
+
+-- | The duration of the video in milliseconds.
+fvmmDurationMillis :: Lens' FileVideoMediaMetadata (Maybe Int64)
+fvmmDurationMillis
+  = lens _fvmmDurationMillis
+      (\ s a -> s{_fvmmDurationMillis = a})
+
+instance FromJSON FileVideoMediaMetadata where
+        parseJSON
+          = withObject "FileVideoMediaMetadata"
+              (\ o ->
+                 FileVideoMediaMetadata <$>
+                   (o .:? "height") <*> (o .:? "width") <*>
+                     (o .:? "durationMillis"))
+
+instance ToJSON FileVideoMediaMetadata where
+        toJSON FileVideoMediaMetadata{..}
+          = object
+              (catMaybes
+                 [("height" .=) <$> _fvmmHeight,
+                  ("width" .=) <$> _fvmmWidth,
+                  ("durationMillis" .=) <$> _fvmmDurationMillis])
+
 -- | An item with user information and settings.
 --
 -- /See:/ 'about' smart constructor.
@@ -346,293 +586,6 @@ instance ToJSON About where
                   ("largestChangeId" .=) <$> _aLargestChangeId])
 
 --
--- /See:/ 'aboutItemAdditionalRoleInfo' smart constructor.
-data AboutItemAdditionalRoleInfo = AboutItemAdditionalRoleInfo
-    { _aiariRoleSets :: !(Maybe [AboutItemRoleSetsItemAdditionalRoleInfo])
-    , _aiariType     :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AboutItemAdditionalRoleInfo' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aiariRoleSets'
---
--- * 'aiariType'
-aboutItemAdditionalRoleInfo
-    :: AboutItemAdditionalRoleInfo
-aboutItemAdditionalRoleInfo =
-    AboutItemAdditionalRoleInfo
-    { _aiariRoleSets = Nothing
-    , _aiariType = Nothing
-    }
-
--- | The supported additional roles per primary role.
-aiariRoleSets :: Lens' AboutItemAdditionalRoleInfo [AboutItemRoleSetsItemAdditionalRoleInfo]
-aiariRoleSets
-  = lens _aiariRoleSets
-      (\ s a -> s{_aiariRoleSets = a})
-      . _Default
-      . _Coerce
-
--- | The content type that this additional role info applies to.
-aiariType :: Lens' AboutItemAdditionalRoleInfo (Maybe Text)
-aiariType
-  = lens _aiariType (\ s a -> s{_aiariType = a})
-
-instance FromJSON AboutItemAdditionalRoleInfo where
-        parseJSON
-          = withObject "AboutItemAdditionalRoleInfo"
-              (\ o ->
-                 AboutItemAdditionalRoleInfo <$>
-                   (o .:? "roleSets" .!= mempty) <*> (o .:? "type"))
-
-instance ToJSON AboutItemAdditionalRoleInfo where
-        toJSON AboutItemAdditionalRoleInfo{..}
-          = object
-              (catMaybes
-                 [("roleSets" .=) <$> _aiariRoleSets,
-                  ("type" .=) <$> _aiariType])
-
---
--- /See:/ 'aboutItemExportFormats' smart constructor.
-data AboutItemExportFormats = AboutItemExportFormats
-    { _aiefTargets :: !(Maybe [Text])
-    , _aiefSource  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AboutItemExportFormats' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aiefTargets'
---
--- * 'aiefSource'
-aboutItemExportFormats
-    :: AboutItemExportFormats
-aboutItemExportFormats =
-    AboutItemExportFormats
-    { _aiefTargets = Nothing
-    , _aiefSource = Nothing
-    }
-
--- | The possible content types to convert to.
-aiefTargets :: Lens' AboutItemExportFormats [Text]
-aiefTargets
-  = lens _aiefTargets (\ s a -> s{_aiefTargets = a}) .
-      _Default
-      . _Coerce
-
--- | The content type to convert from.
-aiefSource :: Lens' AboutItemExportFormats (Maybe Text)
-aiefSource
-  = lens _aiefSource (\ s a -> s{_aiefSource = a})
-
-instance FromJSON AboutItemExportFormats where
-        parseJSON
-          = withObject "AboutItemExportFormats"
-              (\ o ->
-                 AboutItemExportFormats <$>
-                   (o .:? "targets" .!= mempty) <*> (o .:? "source"))
-
-instance ToJSON AboutItemExportFormats where
-        toJSON AboutItemExportFormats{..}
-          = object
-              (catMaybes
-                 [("targets" .=) <$> _aiefTargets,
-                  ("source" .=) <$> _aiefSource])
-
---
--- /See:/ 'aboutItemFeatures' smart constructor.
-data AboutItemFeatures = AboutItemFeatures
-    { _aifFeatureRate :: !(Maybe Double)
-    , _aifFeatureName :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AboutItemFeatures' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aifFeatureRate'
---
--- * 'aifFeatureName'
-aboutItemFeatures
-    :: AboutItemFeatures
-aboutItemFeatures =
-    AboutItemFeatures
-    { _aifFeatureRate = Nothing
-    , _aifFeatureName = Nothing
-    }
-
--- | The request limit rate for this feature, in queries per second.
-aifFeatureRate :: Lens' AboutItemFeatures (Maybe Double)
-aifFeatureRate
-  = lens _aifFeatureRate
-      (\ s a -> s{_aifFeatureRate = a})
-
--- | The name of the feature.
-aifFeatureName :: Lens' AboutItemFeatures (Maybe Text)
-aifFeatureName
-  = lens _aifFeatureName
-      (\ s a -> s{_aifFeatureName = a})
-
-instance FromJSON AboutItemFeatures where
-        parseJSON
-          = withObject "AboutItemFeatures"
-              (\ o ->
-                 AboutItemFeatures <$>
-                   (o .:? "featureRate") <*> (o .:? "featureName"))
-
-instance ToJSON AboutItemFeatures where
-        toJSON AboutItemFeatures{..}
-          = object
-              (catMaybes
-                 [("featureRate" .=) <$> _aifFeatureRate,
-                  ("featureName" .=) <$> _aifFeatureName])
-
---
--- /See:/ 'aboutItemImportFormats' smart constructor.
-data AboutItemImportFormats = AboutItemImportFormats
-    { _aiifTargets :: !(Maybe [Text])
-    , _aiifSource  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AboutItemImportFormats' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aiifTargets'
---
--- * 'aiifSource'
-aboutItemImportFormats
-    :: AboutItemImportFormats
-aboutItemImportFormats =
-    AboutItemImportFormats
-    { _aiifTargets = Nothing
-    , _aiifSource = Nothing
-    }
-
--- | The possible content types to convert to.
-aiifTargets :: Lens' AboutItemImportFormats [Text]
-aiifTargets
-  = lens _aiifTargets (\ s a -> s{_aiifTargets = a}) .
-      _Default
-      . _Coerce
-
--- | The imported file\'s content type to convert from.
-aiifSource :: Lens' AboutItemImportFormats (Maybe Text)
-aiifSource
-  = lens _aiifSource (\ s a -> s{_aiifSource = a})
-
-instance FromJSON AboutItemImportFormats where
-        parseJSON
-          = withObject "AboutItemImportFormats"
-              (\ o ->
-                 AboutItemImportFormats <$>
-                   (o .:? "targets" .!= mempty) <*> (o .:? "source"))
-
-instance ToJSON AboutItemImportFormats where
-        toJSON AboutItemImportFormats{..}
-          = object
-              (catMaybes
-                 [("targets" .=) <$> _aiifTargets,
-                  ("source" .=) <$> _aiifSource])
-
---
--- /See:/ 'aboutItemMaxUploadSizes' smart constructor.
-data AboutItemMaxUploadSizes = AboutItemMaxUploadSizes
-    { _aimusSize :: !(Maybe Int64)
-    , _aimusType :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AboutItemMaxUploadSizes' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aimusSize'
---
--- * 'aimusType'
-aboutItemMaxUploadSizes
-    :: AboutItemMaxUploadSizes
-aboutItemMaxUploadSizes =
-    AboutItemMaxUploadSizes
-    { _aimusSize = Nothing
-    , _aimusType = Nothing
-    }
-
--- | The max upload size for this type.
-aimusSize :: Lens' AboutItemMaxUploadSizes (Maybe Int64)
-aimusSize
-  = lens _aimusSize (\ s a -> s{_aimusSize = a})
-
--- | The file type.
-aimusType :: Lens' AboutItemMaxUploadSizes (Maybe Text)
-aimusType
-  = lens _aimusType (\ s a -> s{_aimusType = a})
-
-instance FromJSON AboutItemMaxUploadSizes where
-        parseJSON
-          = withObject "AboutItemMaxUploadSizes"
-              (\ o ->
-                 AboutItemMaxUploadSizes <$>
-                   (o .:? "size") <*> (o .:? "type"))
-
-instance ToJSON AboutItemMaxUploadSizes where
-        toJSON AboutItemMaxUploadSizes{..}
-          = object
-              (catMaybes
-                 [("size" .=) <$> _aimusSize,
-                  ("type" .=) <$> _aimusType])
-
---
--- /See:/ 'aboutItemQuotaBytesByService' smart constructor.
-data AboutItemQuotaBytesByService = AboutItemQuotaBytesByService
-    { _aiqbbsBytesUsed   :: !(Maybe Int64)
-    , _aiqbbsServiceName :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AboutItemQuotaBytesByService' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aiqbbsBytesUsed'
---
--- * 'aiqbbsServiceName'
-aboutItemQuotaBytesByService
-    :: AboutItemQuotaBytesByService
-aboutItemQuotaBytesByService =
-    AboutItemQuotaBytesByService
-    { _aiqbbsBytesUsed = Nothing
-    , _aiqbbsServiceName = Nothing
-    }
-
--- | The storage quota bytes used by the service.
-aiqbbsBytesUsed :: Lens' AboutItemQuotaBytesByService (Maybe Int64)
-aiqbbsBytesUsed
-  = lens _aiqbbsBytesUsed
-      (\ s a -> s{_aiqbbsBytesUsed = a})
-
--- | The service\'s name, e.g. DRIVE, GMAIL, or PHOTOS.
-aiqbbsServiceName :: Lens' AboutItemQuotaBytesByService (Maybe Text)
-aiqbbsServiceName
-  = lens _aiqbbsServiceName
-      (\ s a -> s{_aiqbbsServiceName = a})
-
-instance FromJSON AboutItemQuotaBytesByService where
-        parseJSON
-          = withObject "AboutItemQuotaBytesByService"
-              (\ o ->
-                 AboutItemQuotaBytesByService <$>
-                   (o .:? "bytesUsed") <*> (o .:? "serviceName"))
-
-instance ToJSON AboutItemQuotaBytesByService where
-        toJSON AboutItemQuotaBytesByService{..}
-          = object
-              (catMaybes
-                 [("bytesUsed" .=) <$> _aiqbbsBytesUsed,
-                  ("serviceName" .=) <$> _aiqbbsServiceName])
-
---
 -- /See:/ 'aboutItemRoleSetsItemAdditionalRoleInfo' smart constructor.
 data AboutItemRoleSetsItemAdditionalRoleInfo = AboutItemRoleSetsItemAdditionalRoleInfo
     { _airsiariPrimaryRole     :: !(Maybe Text)
@@ -686,994 +639,378 @@ instance ToJSON
                  [("primaryRole" .=) <$> _airsiariPrimaryRole,
                   ("additionalRoles" .=) <$> _airsiariAdditionalRoles])
 
--- | The apps resource provides a list of the apps that a user has installed,
--- with information about each app\'s supported MIME types, file
--- extensions, and other details.
+-- | A group of labels for the file.
 --
--- /See:/ 'app' smart constructor.
-data App = App
-    { _appLongDescription         :: !(Maybe Text)
-    , _appOpenUrlTemplate         :: !(Maybe Text)
-    , _appAuthorized              :: !(Maybe Bool)
-    , _appObjectType              :: !(Maybe Text)
-    , _appSecondaryMimeTypes      :: !(Maybe [Text])
-    , _appCreateInFolderTemplate  :: !(Maybe Text)
-    , _appKind                    :: !Text
-    , _appIcons                   :: !(Maybe [AppItemIcons])
-    , _appProductUrl              :: !(Maybe Text)
-    , _appUseByDefault            :: !(Maybe Bool)
-    , _appShortDescription        :: !(Maybe Text)
-    , _appName                    :: !(Maybe Text)
-    , _appCreateUrl               :: !(Maybe Text)
-    , _appId                      :: !(Maybe Text)
-    , _appPrimaryFileExtensions   :: !(Maybe [Text])
-    , _appInstalled               :: !(Maybe Bool)
-    , _appSupportsCreate          :: !(Maybe Bool)
-    , _appPrimaryMimeTypes        :: !(Maybe [Text])
-    , _appHasDriveWideScope       :: !(Maybe Bool)
-    , _appProductId               :: !(Maybe Text)
-    , _appSecondaryFileExtensions :: !(Maybe [Text])
-    , _appSupportsMultiOpen       :: !(Maybe Bool)
-    , _appSupportsImport          :: !(Maybe Bool)
-    , _appSupportsOfflineCreate   :: !(Maybe Bool)
+-- /See:/ 'fileLabels' smart constructor.
+data FileLabels = FileLabels
+    { _flViewed     :: !(Maybe Bool)
+    , _flTrashed    :: !(Maybe Bool)
+    , _flStarred    :: !(Maybe Bool)
+    , _flHidden     :: !(Maybe Bool)
+    , _flRestricted :: !(Maybe Bool)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'App' with the minimum fields required to make a request.
+-- | Creates a value of 'FileLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'appLongDescription'
+-- * 'flViewed'
 --
--- * 'appOpenUrlTemplate'
+-- * 'flTrashed'
 --
--- * 'appAuthorized'
+-- * 'flStarred'
 --
--- * 'appObjectType'
+-- * 'flHidden'
 --
--- * 'appSecondaryMimeTypes'
---
--- * 'appCreateInFolderTemplate'
---
--- * 'appKind'
---
--- * 'appIcons'
---
--- * 'appProductUrl'
---
--- * 'appUseByDefault'
---
--- * 'appShortDescription'
---
--- * 'appName'
---
--- * 'appCreateUrl'
---
--- * 'appId'
---
--- * 'appPrimaryFileExtensions'
---
--- * 'appInstalled'
---
--- * 'appSupportsCreate'
---
--- * 'appPrimaryMimeTypes'
---
--- * 'appHasDriveWideScope'
---
--- * 'appProductId'
---
--- * 'appSecondaryFileExtensions'
---
--- * 'appSupportsMultiOpen'
---
--- * 'appSupportsImport'
---
--- * 'appSupportsOfflineCreate'
-app
-    :: App
-app =
-    App
-    { _appLongDescription = Nothing
-    , _appOpenUrlTemplate = Nothing
-    , _appAuthorized = Nothing
-    , _appObjectType = Nothing
-    , _appSecondaryMimeTypes = Nothing
-    , _appCreateInFolderTemplate = Nothing
-    , _appKind = "drive#app"
-    , _appIcons = Nothing
-    , _appProductUrl = Nothing
-    , _appUseByDefault = Nothing
-    , _appShortDescription = Nothing
-    , _appName = Nothing
-    , _appCreateUrl = Nothing
-    , _appId = Nothing
-    , _appPrimaryFileExtensions = Nothing
-    , _appInstalled = Nothing
-    , _appSupportsCreate = Nothing
-    , _appPrimaryMimeTypes = Nothing
-    , _appHasDriveWideScope = Nothing
-    , _appProductId = Nothing
-    , _appSecondaryFileExtensions = Nothing
-    , _appSupportsMultiOpen = Nothing
-    , _appSupportsImport = Nothing
-    , _appSupportsOfflineCreate = Nothing
+-- * 'flRestricted'
+fileLabels
+    :: FileLabels
+fileLabels =
+    FileLabels
+    { _flViewed = Nothing
+    , _flTrashed = Nothing
+    , _flStarred = Nothing
+    , _flHidden = Nothing
+    , _flRestricted = Nothing
     }
 
--- | A long description of the app.
-appLongDescription :: Lens' App (Maybe Text)
-appLongDescription
-  = lens _appLongDescription
-      (\ s a -> s{_appLongDescription = a})
+-- | Whether this file has been viewed by this user.
+flViewed :: Lens' FileLabels (Maybe Bool)
+flViewed = lens _flViewed (\ s a -> s{_flViewed = a})
 
--- | The template url for opening files with this app. The template will
--- contain {ids} and\/or {exportIds} to be replaced by the actual file ids.
--- See Open Files for the full documentation.
-appOpenUrlTemplate :: Lens' App (Maybe Text)
-appOpenUrlTemplate
-  = lens _appOpenUrlTemplate
-      (\ s a -> s{_appOpenUrlTemplate = a})
+-- | Whether this file has been trashed. This label applies to all users
+-- accessing the file; however, only owners are allowed to see and untrash
+-- files.
+flTrashed :: Lens' FileLabels (Maybe Bool)
+flTrashed
+  = lens _flTrashed (\ s a -> s{_flTrashed = a})
 
--- | Whether the app is authorized to access data on the user\'s Drive.
-appAuthorized :: Lens' App (Maybe Bool)
-appAuthorized
-  = lens _appAuthorized
-      (\ s a -> s{_appAuthorized = a})
+-- | Whether this file is starred by the user.
+flStarred :: Lens' FileLabels (Maybe Bool)
+flStarred
+  = lens _flStarred (\ s a -> s{_flStarred = a})
 
--- | The type of object this app creates (e.g. Chart). If empty, the app name
--- should be used instead.
-appObjectType :: Lens' App (Maybe Text)
-appObjectType
-  = lens _appObjectType
-      (\ s a -> s{_appObjectType = a})
+-- | Deprecated.
+flHidden :: Lens' FileLabels (Maybe Bool)
+flHidden = lens _flHidden (\ s a -> s{_flHidden = a})
 
--- | The list of secondary mime types.
-appSecondaryMimeTypes :: Lens' App [Text]
-appSecondaryMimeTypes
-  = lens _appSecondaryMimeTypes
-      (\ s a -> s{_appSecondaryMimeTypes = a})
-      . _Default
-      . _Coerce
+-- | Whether viewers and commenters are prevented from downloading, printing,
+-- and copying this file.
+flRestricted :: Lens' FileLabels (Maybe Bool)
+flRestricted
+  = lens _flRestricted (\ s a -> s{_flRestricted = a})
 
--- | The template url to create a new file with this app in a given folder.
--- The template will contain {folderId} to be replaced by the folder to
--- create the new file in.
-appCreateInFolderTemplate :: Lens' App (Maybe Text)
-appCreateInFolderTemplate
-  = lens _appCreateInFolderTemplate
-      (\ s a -> s{_appCreateInFolderTemplate = a})
-
--- | This is always drive#app.
-appKind :: Lens' App Text
-appKind = lens _appKind (\ s a -> s{_appKind = a})
-
--- | The various icons for the app.
-appIcons :: Lens' App [AppItemIcons]
-appIcons
-  = lens _appIcons (\ s a -> s{_appIcons = a}) .
-      _Default
-      . _Coerce
-
--- | A link to the product listing for this app.
-appProductUrl :: Lens' App (Maybe Text)
-appProductUrl
-  = lens _appProductUrl
-      (\ s a -> s{_appProductUrl = a})
-
--- | Whether the app is selected as the default handler for the types it
--- supports.
-appUseByDefault :: Lens' App (Maybe Bool)
-appUseByDefault
-  = lens _appUseByDefault
-      (\ s a -> s{_appUseByDefault = a})
-
--- | A short description of the app.
-appShortDescription :: Lens' App (Maybe Text)
-appShortDescription
-  = lens _appShortDescription
-      (\ s a -> s{_appShortDescription = a})
-
--- | The name of the app.
-appName :: Lens' App (Maybe Text)
-appName = lens _appName (\ s a -> s{_appName = a})
-
--- | The url to create a new file with this app.
-appCreateUrl :: Lens' App (Maybe Text)
-appCreateUrl
-  = lens _appCreateUrl (\ s a -> s{_appCreateUrl = a})
-
--- | The ID of the app.
-appId :: Lens' App (Maybe Text)
-appId = lens _appId (\ s a -> s{_appId = a})
-
--- | The list of primary file extensions.
-appPrimaryFileExtensions :: Lens' App [Text]
-appPrimaryFileExtensions
-  = lens _appPrimaryFileExtensions
-      (\ s a -> s{_appPrimaryFileExtensions = a})
-      . _Default
-      . _Coerce
-
--- | Whether the app is installed.
-appInstalled :: Lens' App (Maybe Bool)
-appInstalled
-  = lens _appInstalled (\ s a -> s{_appInstalled = a})
-
--- | Whether this app supports creating new objects.
-appSupportsCreate :: Lens' App (Maybe Bool)
-appSupportsCreate
-  = lens _appSupportsCreate
-      (\ s a -> s{_appSupportsCreate = a})
-
--- | The list of primary mime types.
-appPrimaryMimeTypes :: Lens' App [Text]
-appPrimaryMimeTypes
-  = lens _appPrimaryMimeTypes
-      (\ s a -> s{_appPrimaryMimeTypes = a})
-      . _Default
-      . _Coerce
-
--- | Whether the app has drive-wide scope. An app with drive-wide scope can
--- access all files in the user\'s drive.
-appHasDriveWideScope :: Lens' App (Maybe Bool)
-appHasDriveWideScope
-  = lens _appHasDriveWideScope
-      (\ s a -> s{_appHasDriveWideScope = a})
-
--- | The ID of the product listing for this app.
-appProductId :: Lens' App (Maybe Text)
-appProductId
-  = lens _appProductId (\ s a -> s{_appProductId = a})
-
--- | The list of secondary file extensions.
-appSecondaryFileExtensions :: Lens' App [Text]
-appSecondaryFileExtensions
-  = lens _appSecondaryFileExtensions
-      (\ s a -> s{_appSecondaryFileExtensions = a})
-      . _Default
-      . _Coerce
-
--- | Whether this app supports opening more than one file.
-appSupportsMultiOpen :: Lens' App (Maybe Bool)
-appSupportsMultiOpen
-  = lens _appSupportsMultiOpen
-      (\ s a -> s{_appSupportsMultiOpen = a})
-
--- | Whether this app supports importing Google Docs.
-appSupportsImport :: Lens' App (Maybe Bool)
-appSupportsImport
-  = lens _appSupportsImport
-      (\ s a -> s{_appSupportsImport = a})
-
--- | Whether this app supports creating new files when offline.
-appSupportsOfflineCreate :: Lens' App (Maybe Bool)
-appSupportsOfflineCreate
-  = lens _appSupportsOfflineCreate
-      (\ s a -> s{_appSupportsOfflineCreate = a})
-
-instance FromJSON App where
+instance FromJSON FileLabels where
         parseJSON
-          = withObject "App"
+          = withObject "FileLabels"
               (\ o ->
-                 App <$>
-                   (o .:? "longDescription") <*>
-                     (o .:? "openUrlTemplate")
-                     <*> (o .:? "authorized")
-                     <*> (o .:? "objectType")
-                     <*> (o .:? "secondaryMimeTypes" .!= mempty)
-                     <*> (o .:? "createInFolderTemplate")
-                     <*> (o .:? "kind" .!= "drive#app")
-                     <*> (o .:? "icons" .!= mempty)
-                     <*> (o .:? "productUrl")
-                     <*> (o .:? "useByDefault")
-                     <*> (o .:? "shortDescription")
-                     <*> (o .:? "name")
-                     <*> (o .:? "createUrl")
-                     <*> (o .:? "id")
-                     <*> (o .:? "primaryFileExtensions" .!= mempty)
-                     <*> (o .:? "installed")
-                     <*> (o .:? "supportsCreate")
-                     <*> (o .:? "primaryMimeTypes" .!= mempty)
-                     <*> (o .:? "hasDriveWideScope")
-                     <*> (o .:? "productId")
-                     <*> (o .:? "secondaryFileExtensions" .!= mempty)
-                     <*> (o .:? "supportsMultiOpen")
-                     <*> (o .:? "supportsImport")
-                     <*> (o .:? "supportsOfflineCreate"))
+                 FileLabels <$>
+                   (o .:? "viewed") <*> (o .:? "trashed") <*>
+                     (o .:? "starred")
+                     <*> (o .:? "hidden")
+                     <*> (o .:? "restricted"))
 
-instance ToJSON App where
-        toJSON App{..}
+instance ToJSON FileLabels where
+        toJSON FileLabels{..}
           = object
               (catMaybes
-                 [("longDescription" .=) <$> _appLongDescription,
-                  ("openUrlTemplate" .=) <$> _appOpenUrlTemplate,
-                  ("authorized" .=) <$> _appAuthorized,
-                  ("objectType" .=) <$> _appObjectType,
-                  ("secondaryMimeTypes" .=) <$> _appSecondaryMimeTypes,
-                  ("createInFolderTemplate" .=) <$>
-                    _appCreateInFolderTemplate,
-                  Just ("kind" .= _appKind),
-                  ("icons" .=) <$> _appIcons,
-                  ("productUrl" .=) <$> _appProductUrl,
-                  ("useByDefault" .=) <$> _appUseByDefault,
-                  ("shortDescription" .=) <$> _appShortDescription,
-                  ("name" .=) <$> _appName,
-                  ("createUrl" .=) <$> _appCreateUrl,
-                  ("id" .=) <$> _appId,
-                  ("primaryFileExtensions" .=) <$>
-                    _appPrimaryFileExtensions,
-                  ("installed" .=) <$> _appInstalled,
-                  ("supportsCreate" .=) <$> _appSupportsCreate,
-                  ("primaryMimeTypes" .=) <$> _appPrimaryMimeTypes,
-                  ("hasDriveWideScope" .=) <$> _appHasDriveWideScope,
-                  ("productId" .=) <$> _appProductId,
-                  ("secondaryFileExtensions" .=) <$>
-                    _appSecondaryFileExtensions,
-                  ("supportsMultiOpen" .=) <$> _appSupportsMultiOpen,
-                  ("supportsImport" .=) <$> _appSupportsImport,
-                  ("supportsOfflineCreate" .=) <$>
-                    _appSupportsOfflineCreate])
+                 [("viewed" .=) <$> _flViewed,
+                  ("trashed" .=) <$> _flTrashed,
+                  ("starred" .=) <$> _flStarred,
+                  ("hidden" .=) <$> _flHidden,
+                  ("restricted" .=) <$> _flRestricted])
 
+-- | A map of the id of each of the user\'s apps to a link to open this file
+-- with that app. Only populated when the drive.apps.readonly scope is
+-- used.
 --
--- /See:/ 'appItemIcons' smart constructor.
-data AppItemIcons = AppItemIcons
-    { _aiiSize     :: !(Maybe Int32)
-    , _aiiCategory :: !(Maybe Text)
-    , _aiiIconUrl  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AppItemIcons' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aiiSize'
---
--- * 'aiiCategory'
---
--- * 'aiiIconUrl'
-appItemIcons
-    :: AppItemIcons
-appItemIcons =
-    AppItemIcons
-    { _aiiSize = Nothing
-    , _aiiCategory = Nothing
-    , _aiiIconUrl = Nothing
-    }
-
--- | Size of the icon. Represented as the maximum of the width and height.
-aiiSize :: Lens' AppItemIcons (Maybe Int32)
-aiiSize = lens _aiiSize (\ s a -> s{_aiiSize = a})
-
--- | Category of the icon. Allowed values are: - application - icon for the
--- application - document - icon for a file associated with the app -
--- documentShared - icon for a shared file associated with the app
-aiiCategory :: Lens' AppItemIcons (Maybe Text)
-aiiCategory
-  = lens _aiiCategory (\ s a -> s{_aiiCategory = a})
-
--- | URL for the icon.
-aiiIconUrl :: Lens' AppItemIcons (Maybe Text)
-aiiIconUrl
-  = lens _aiiIconUrl (\ s a -> s{_aiiIconUrl = a})
-
-instance FromJSON AppItemIcons where
-        parseJSON
-          = withObject "AppItemIcons"
-              (\ o ->
-                 AppItemIcons <$>
-                   (o .:? "size") <*> (o .:? "category") <*>
-                     (o .:? "iconUrl"))
-
-instance ToJSON AppItemIcons where
-        toJSON AppItemIcons{..}
-          = object
-              (catMaybes
-                 [("size" .=) <$> _aiiSize,
-                  ("category" .=) <$> _aiiCategory,
-                  ("iconUrl" .=) <$> _aiiIconUrl])
-
--- | A list of third-party applications which the user has installed or given
--- access to Google Drive.
---
--- /See:/ 'appList' smart constructor.
-data AppList = AppList
-    { _alDefaultAppIds :: !(Maybe [Text])
-    , _alEtag          :: !(Maybe Text)
-    , _alKind          :: !Text
-    , _alItems         :: !(Maybe [Maybe App])
-    , _alSelfLink      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AppList' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'alDefaultAppIds'
---
--- * 'alEtag'
---
--- * 'alKind'
---
--- * 'alItems'
---
--- * 'alSelfLink'
-appList
-    :: AppList
-appList =
-    AppList
-    { _alDefaultAppIds = Nothing
-    , _alEtag = Nothing
-    , _alKind = "drive#appList"
-    , _alItems = Nothing
-    , _alSelfLink = Nothing
-    }
-
--- | List of app IDs that the user has specified to use by default. The list
--- is in reverse-priority order (lowest to highest).
-alDefaultAppIds :: Lens' AppList [Text]
-alDefaultAppIds
-  = lens _alDefaultAppIds
-      (\ s a -> s{_alDefaultAppIds = a})
-      . _Default
-      . _Coerce
-
--- | The ETag of the list.
-alEtag :: Lens' AppList (Maybe Text)
-alEtag = lens _alEtag (\ s a -> s{_alEtag = a})
-
--- | This is always drive#appList.
-alKind :: Lens' AppList Text
-alKind = lens _alKind (\ s a -> s{_alKind = a})
-
--- | The actual list of apps.
-alItems :: Lens' AppList [Maybe App]
-alItems
-  = lens _alItems (\ s a -> s{_alItems = a}) . _Default
-      . _Coerce
-
--- | A link back to this list.
-alSelfLink :: Lens' AppList (Maybe Text)
-alSelfLink
-  = lens _alSelfLink (\ s a -> s{_alSelfLink = a})
-
-instance FromJSON AppList where
-        parseJSON
-          = withObject "AppList"
-              (\ o ->
-                 AppList <$>
-                   (o .:? "defaultAppIds" .!= mempty) <*> (o .:? "etag")
-                     <*> (o .:? "kind" .!= "drive#appList")
-                     <*> (o .:? "items" .!= mempty)
-                     <*> (o .:? "selfLink"))
-
-instance ToJSON AppList where
-        toJSON AppList{..}
-          = object
-              (catMaybes
-                 [("defaultAppIds" .=) <$> _alDefaultAppIds,
-                  ("etag" .=) <$> _alEtag, Just ("kind" .= _alKind),
-                  ("items" .=) <$> _alItems,
-                  ("selfLink" .=) <$> _alSelfLink])
-
--- | Representation of a change to a file.
---
--- /See:/ 'change' smart constructor.
-data Change = Change
-    { _chaKind             :: !Text
-    , _chaSelfLink         :: !(Maybe Text)
-    , _chaModificationDate :: !(Maybe UTCTime)
-    , _chaId               :: !(Maybe Int64)
-    , _chaDeleted          :: !(Maybe Bool)
-    , _chaFileId           :: !(Maybe Text)
-    , _chaFile             :: !(Maybe (Maybe File))
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Change' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'chaKind'
---
--- * 'chaSelfLink'
---
--- * 'chaModificationDate'
---
--- * 'chaId'
---
--- * 'chaDeleted'
---
--- * 'chaFileId'
---
--- * 'chaFile'
-change
-    :: Change
-change =
-    Change
-    { _chaKind = "drive#change"
-    , _chaSelfLink = Nothing
-    , _chaModificationDate = Nothing
-    , _chaId = Nothing
-    , _chaDeleted = Nothing
-    , _chaFileId = Nothing
-    , _chaFile = Nothing
-    }
-
--- | This is always drive#change.
-chaKind :: Lens' Change Text
-chaKind = lens _chaKind (\ s a -> s{_chaKind = a})
-
--- | A link back to this change.
-chaSelfLink :: Lens' Change (Maybe Text)
-chaSelfLink
-  = lens _chaSelfLink (\ s a -> s{_chaSelfLink = a})
-
--- | The time of this modification.
-chaModificationDate :: Lens' Change (Maybe UTCTime)
-chaModificationDate
-  = lens _chaModificationDate
-      (\ s a -> s{_chaModificationDate = a})
-
--- | The ID of the change.
-chaId :: Lens' Change (Maybe Int64)
-chaId = lens _chaId (\ s a -> s{_chaId = a})
-
--- | Whether the file has been deleted.
-chaDeleted :: Lens' Change (Maybe Bool)
-chaDeleted
-  = lens _chaDeleted (\ s a -> s{_chaDeleted = a})
-
--- | The ID of the file associated with this change.
-chaFileId :: Lens' Change (Maybe Text)
-chaFileId
-  = lens _chaFileId (\ s a -> s{_chaFileId = a})
-
--- | The updated state of the file. Present if the file has not been deleted.
-chaFile :: Lens' Change (Maybe (Maybe File))
-chaFile = lens _chaFile (\ s a -> s{_chaFile = a})
-
-instance FromJSON Change where
-        parseJSON
-          = withObject "Change"
-              (\ o ->
-                 Change <$>
-                   (o .:? "kind" .!= "drive#change") <*>
-                     (o .:? "selfLink")
-                     <*> (o .:? "modificationDate")
-                     <*> (o .:? "id")
-                     <*> (o .:? "deleted")
-                     <*> (o .:? "fileId")
-                     <*> (o .:? "file"))
-
-instance ToJSON Change where
-        toJSON Change{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _chaKind),
-                  ("selfLink" .=) <$> _chaSelfLink,
-                  ("modificationDate" .=) <$> _chaModificationDate,
-                  ("id" .=) <$> _chaId, ("deleted" .=) <$> _chaDeleted,
-                  ("fileId" .=) <$> _chaFileId,
-                  ("file" .=) <$> _chaFile])
-
--- | A list of changes for a user.
---
--- /See:/ 'changeList' smart constructor.
-data ChangeList = ChangeList
-    { _clEtag            :: !(Maybe Text)
-    , _clNextPageToken   :: !(Maybe Text)
-    , _clNextLink        :: !(Maybe Text)
-    , _clKind            :: !Text
-    , _clItems           :: !(Maybe [Maybe Change])
-    , _clSelfLink        :: !(Maybe Text)
-    , _clLargestChangeId :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ChangeList' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'clEtag'
---
--- * 'clNextPageToken'
---
--- * 'clNextLink'
---
--- * 'clKind'
---
--- * 'clItems'
---
--- * 'clSelfLink'
---
--- * 'clLargestChangeId'
-changeList
-    :: ChangeList
-changeList =
-    ChangeList
-    { _clEtag = Nothing
-    , _clNextPageToken = Nothing
-    , _clNextLink = Nothing
-    , _clKind = "drive#changeList"
-    , _clItems = Nothing
-    , _clSelfLink = Nothing
-    , _clLargestChangeId = Nothing
-    }
-
--- | The ETag of the list.
-clEtag :: Lens' ChangeList (Maybe Text)
-clEtag = lens _clEtag (\ s a -> s{_clEtag = a})
-
--- | The page token for the next page of changes.
-clNextPageToken :: Lens' ChangeList (Maybe Text)
-clNextPageToken
-  = lens _clNextPageToken
-      (\ s a -> s{_clNextPageToken = a})
-
--- | A link to the next page of changes.
-clNextLink :: Lens' ChangeList (Maybe Text)
-clNextLink
-  = lens _clNextLink (\ s a -> s{_clNextLink = a})
-
--- | This is always drive#changeList.
-clKind :: Lens' ChangeList Text
-clKind = lens _clKind (\ s a -> s{_clKind = a})
-
--- | The actual list of changes.
-clItems :: Lens' ChangeList [Maybe Change]
-clItems
-  = lens _clItems (\ s a -> s{_clItems = a}) . _Default
-      . _Coerce
-
--- | A link back to this list.
-clSelfLink :: Lens' ChangeList (Maybe Text)
-clSelfLink
-  = lens _clSelfLink (\ s a -> s{_clSelfLink = a})
-
--- | The current largest change ID.
-clLargestChangeId :: Lens' ChangeList (Maybe Int64)
-clLargestChangeId
-  = lens _clLargestChangeId
-      (\ s a -> s{_clLargestChangeId = a})
-
-instance FromJSON ChangeList where
-        parseJSON
-          = withObject "ChangeList"
-              (\ o ->
-                 ChangeList <$>
-                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
-                     (o .:? "nextLink")
-                     <*> (o .:? "kind" .!= "drive#changeList")
-                     <*> (o .:? "items" .!= mempty)
-                     <*> (o .:? "selfLink")
-                     <*> (o .:? "largestChangeId"))
-
-instance ToJSON ChangeList where
-        toJSON ChangeList{..}
-          = object
-              (catMaybes
-                 [("etag" .=) <$> _clEtag,
-                  ("nextPageToken" .=) <$> _clNextPageToken,
-                  ("nextLink" .=) <$> _clNextLink,
-                  Just ("kind" .= _clKind), ("items" .=) <$> _clItems,
-                  ("selfLink" .=) <$> _clSelfLink,
-                  ("largestChangeId" .=) <$> _clLargestChangeId])
-
--- | An notification channel used to watch for resource changes.
---
--- /See:/ 'channel' smart constructor.
-data Channel = Channel
-    { _chahResourceUri :: !(Maybe Text)
-    , _chahResourceId  :: !(Maybe Text)
-    , _chahKind        :: !Text
-    , _chahExpiration  :: !(Maybe Int64)
-    , _chahToken       :: !(Maybe Text)
-    , _chahAddress     :: !(Maybe Text)
-    , _chahPayload     :: !(Maybe Bool)
-    , _chahParams      :: !(Maybe ChannelParams)
-    , _chahId          :: !(Maybe Text)
-    , _chahType        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Channel' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'chahResourceUri'
---
--- * 'chahResourceId'
---
--- * 'chahKind'
---
--- * 'chahExpiration'
---
--- * 'chahToken'
---
--- * 'chahAddress'
---
--- * 'chahPayload'
---
--- * 'chahParams'
---
--- * 'chahId'
---
--- * 'chahType'
-channel
-    :: Channel
-channel =
-    Channel
-    { _chahResourceUri = Nothing
-    , _chahResourceId = Nothing
-    , _chahKind = "api#channel"
-    , _chahExpiration = Nothing
-    , _chahToken = Nothing
-    , _chahAddress = Nothing
-    , _chahPayload = Nothing
-    , _chahParams = Nothing
-    , _chahId = Nothing
-    , _chahType = Nothing
-    }
-
--- | A version-specific identifier for the watched resource.
-chahResourceUri :: Lens' Channel (Maybe Text)
-chahResourceUri
-  = lens _chahResourceUri
-      (\ s a -> s{_chahResourceUri = a})
-
--- | An opaque ID that identifies the resource being watched on this channel.
--- Stable across different API versions.
-chahResourceId :: Lens' Channel (Maybe Text)
-chahResourceId
-  = lens _chahResourceId
-      (\ s a -> s{_chahResourceId = a})
-
--- | Identifies this as a notification channel used to watch for changes to a
--- resource. Value: the fixed string \"api#channel\".
-chahKind :: Lens' Channel Text
-chahKind = lens _chahKind (\ s a -> s{_chahKind = a})
-
--- | Date and time of notification channel expiration, expressed as a Unix
--- timestamp, in milliseconds. Optional.
-chahExpiration :: Lens' Channel (Maybe Int64)
-chahExpiration
-  = lens _chahExpiration
-      (\ s a -> s{_chahExpiration = a})
-
--- | An arbitrary string delivered to the target address with each
--- notification delivered over this channel. Optional.
-chahToken :: Lens' Channel (Maybe Text)
-chahToken
-  = lens _chahToken (\ s a -> s{_chahToken = a})
-
--- | The address where notifications are delivered for this channel.
-chahAddress :: Lens' Channel (Maybe Text)
-chahAddress
-  = lens _chahAddress (\ s a -> s{_chahAddress = a})
-
--- | A Boolean value to indicate whether payload is wanted. Optional.
-chahPayload :: Lens' Channel (Maybe Bool)
-chahPayload
-  = lens _chahPayload (\ s a -> s{_chahPayload = a})
-
--- | Additional parameters controlling delivery channel behavior. Optional.
-chahParams :: Lens' Channel (Maybe ChannelParams)
-chahParams
-  = lens _chahParams (\ s a -> s{_chahParams = a})
-
--- | A UUID or similar unique string that identifies this channel.
-chahId :: Lens' Channel (Maybe Text)
-chahId = lens _chahId (\ s a -> s{_chahId = a})
-
--- | The type of delivery mechanism used for this channel.
-chahType :: Lens' Channel (Maybe Text)
-chahType = lens _chahType (\ s a -> s{_chahType = a})
-
-instance FromJSON Channel where
-        parseJSON
-          = withObject "Channel"
-              (\ o ->
-                 Channel <$>
-                   (o .:? "resourceUri") <*> (o .:? "resourceId") <*>
-                     (o .:? "kind" .!= "api#channel")
-                     <*> (o .:? "expiration")
-                     <*> (o .:? "token")
-                     <*> (o .:? "address")
-                     <*> (o .:? "payload")
-                     <*> (o .:? "params")
-                     <*> (o .:? "id")
-                     <*> (o .:? "type"))
-
-instance ToJSON Channel where
-        toJSON Channel{..}
-          = object
-              (catMaybes
-                 [("resourceUri" .=) <$> _chahResourceUri,
-                  ("resourceId" .=) <$> _chahResourceId,
-                  Just ("kind" .= _chahKind),
-                  ("expiration" .=) <$> _chahExpiration,
-                  ("token" .=) <$> _chahToken,
-                  ("address" .=) <$> _chahAddress,
-                  ("payload" .=) <$> _chahPayload,
-                  ("params" .=) <$> _chahParams, ("id" .=) <$> _chahId,
-                  ("type" .=) <$> _chahType])
-
--- | Additional parameters controlling delivery channel behavior. Optional.
---
--- /See:/ 'channelParams' smart constructor.
-data ChannelParams =
-    ChannelParams
+-- /See:/ 'fileOpenWithLinks' smart constructor.
+data FileOpenWithLinks =
+    FileOpenWithLinks
     deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ChannelParams' with the minimum fields required to make a request.
+-- | Creates a value of 'FileOpenWithLinks' with the minimum fields required to make a request.
 --
-channelParams
-    :: ChannelParams
-channelParams = ChannelParams
+fileOpenWithLinks
+    :: FileOpenWithLinks
+fileOpenWithLinks = FileOpenWithLinks
 
-instance FromJSON ChannelParams where
+instance FromJSON FileOpenWithLinks where
         parseJSON
-          = withObject "ChannelParams"
-              (\ o -> pure ChannelParams)
+          = withObject "FileOpenWithLinks"
+              (\ o -> pure FileOpenWithLinks)
 
-instance ToJSON ChannelParams where
+instance ToJSON FileOpenWithLinks where
         toJSON = const (Object mempty)
 
--- | A list of children of a file.
+-- | Metadata about image media. This will only be present for image types,
+-- and its contents will depend on what can be parsed from the image
+-- content.
 --
--- /See:/ 'childList' smart constructor.
-data ChildList = ChildList
-    { _chiEtag          :: !(Maybe Text)
-    , _chiNextPageToken :: !(Maybe Text)
-    , _chiNextLink      :: !(Maybe Text)
-    , _chiKind          :: !Text
-    , _chiItems         :: !(Maybe [Maybe ChildReference])
-    , _chiSelfLink      :: !(Maybe Text)
+-- /See:/ 'fileImageMediaMetadata' smart constructor.
+data FileImageMediaMetadata = FileImageMediaMetadata
+    { _fimmRotation         :: !(Maybe Int32)
+    , _fimmHeight           :: !(Maybe Int32)
+    , _fimmSubjectDistance  :: !(Maybe Int32)
+    , _fimmMaxApertureValue :: !(Maybe Float)
+    , _fimmIsoSpeed         :: !(Maybe Int32)
+    , _fimmLocation         :: !(Maybe FileLocationImageMediaMetadata)
+    , _fimmAperture         :: !(Maybe Float)
+    , _fimmFocalLength      :: !(Maybe Float)
+    , _fimmCameraMake       :: !(Maybe Text)
+    , _fimmWidth            :: !(Maybe Int32)
+    , _fimmExposureTime     :: !(Maybe Float)
+    , _fimmCameraModel      :: !(Maybe Text)
+    , _fimmWhiteBalance     :: !(Maybe Text)
+    , _fimmDate             :: !(Maybe Text)
+    , _fimmLens             :: !(Maybe Text)
+    , _fimmFlashUsed        :: !(Maybe Bool)
+    , _fimmExposureBias     :: !(Maybe Float)
+    , _fimmMeteringMode     :: !(Maybe Text)
+    , _fimmExposureMode     :: !(Maybe Text)
+    , _fimmSensor           :: !(Maybe Text)
+    , _fimmColorSpace       :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ChildList' with the minimum fields required to make a request.
+-- | Creates a value of 'FileImageMediaMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'chiEtag'
+-- * 'fimmRotation'
 --
--- * 'chiNextPageToken'
+-- * 'fimmHeight'
 --
--- * 'chiNextLink'
+-- * 'fimmSubjectDistance'
 --
--- * 'chiKind'
+-- * 'fimmMaxApertureValue'
 --
--- * 'chiItems'
+-- * 'fimmIsoSpeed'
 --
--- * 'chiSelfLink'
-childList
-    :: ChildList
-childList =
-    ChildList
-    { _chiEtag = Nothing
-    , _chiNextPageToken = Nothing
-    , _chiNextLink = Nothing
-    , _chiKind = "drive#childList"
-    , _chiItems = Nothing
-    , _chiSelfLink = Nothing
+-- * 'fimmLocation'
+--
+-- * 'fimmAperture'
+--
+-- * 'fimmFocalLength'
+--
+-- * 'fimmCameraMake'
+--
+-- * 'fimmWidth'
+--
+-- * 'fimmExposureTime'
+--
+-- * 'fimmCameraModel'
+--
+-- * 'fimmWhiteBalance'
+--
+-- * 'fimmDate'
+--
+-- * 'fimmLens'
+--
+-- * 'fimmFlashUsed'
+--
+-- * 'fimmExposureBias'
+--
+-- * 'fimmMeteringMode'
+--
+-- * 'fimmExposureMode'
+--
+-- * 'fimmSensor'
+--
+-- * 'fimmColorSpace'
+fileImageMediaMetadata
+    :: FileImageMediaMetadata
+fileImageMediaMetadata =
+    FileImageMediaMetadata
+    { _fimmRotation = Nothing
+    , _fimmHeight = Nothing
+    , _fimmSubjectDistance = Nothing
+    , _fimmMaxApertureValue = Nothing
+    , _fimmIsoSpeed = Nothing
+    , _fimmLocation = Nothing
+    , _fimmAperture = Nothing
+    , _fimmFocalLength = Nothing
+    , _fimmCameraMake = Nothing
+    , _fimmWidth = Nothing
+    , _fimmExposureTime = Nothing
+    , _fimmCameraModel = Nothing
+    , _fimmWhiteBalance = Nothing
+    , _fimmDate = Nothing
+    , _fimmLens = Nothing
+    , _fimmFlashUsed = Nothing
+    , _fimmExposureBias = Nothing
+    , _fimmMeteringMode = Nothing
+    , _fimmExposureMode = Nothing
+    , _fimmSensor = Nothing
+    , _fimmColorSpace = Nothing
     }
 
--- | The ETag of the list.
-chiEtag :: Lens' ChildList (Maybe Text)
-chiEtag = lens _chiEtag (\ s a -> s{_chiEtag = a})
+-- | The rotation in clockwise degrees from the image\'s original
+-- orientation.
+fimmRotation :: Lens' FileImageMediaMetadata (Maybe Int32)
+fimmRotation
+  = lens _fimmRotation (\ s a -> s{_fimmRotation = a})
 
--- | The page token for the next page of children.
-chiNextPageToken :: Lens' ChildList (Maybe Text)
-chiNextPageToken
-  = lens _chiNextPageToken
-      (\ s a -> s{_chiNextPageToken = a})
+-- | The height of the image in pixels.
+fimmHeight :: Lens' FileImageMediaMetadata (Maybe Int32)
+fimmHeight
+  = lens _fimmHeight (\ s a -> s{_fimmHeight = a})
 
--- | A link to the next page of children.
-chiNextLink :: Lens' ChildList (Maybe Text)
-chiNextLink
-  = lens _chiNextLink (\ s a -> s{_chiNextLink = a})
+-- | The distance to the subject of the photo, in meters.
+fimmSubjectDistance :: Lens' FileImageMediaMetadata (Maybe Int32)
+fimmSubjectDistance
+  = lens _fimmSubjectDistance
+      (\ s a -> s{_fimmSubjectDistance = a})
 
--- | This is always drive#childList.
-chiKind :: Lens' ChildList Text
-chiKind = lens _chiKind (\ s a -> s{_chiKind = a})
+-- | The smallest f-number of the lens at the focal length used to create the
+-- photo (APEX value).
+fimmMaxApertureValue :: Lens' FileImageMediaMetadata (Maybe Float)
+fimmMaxApertureValue
+  = lens _fimmMaxApertureValue
+      (\ s a -> s{_fimmMaxApertureValue = a})
 
--- | The actual list of children.
-chiItems :: Lens' ChildList [Maybe ChildReference]
-chiItems
-  = lens _chiItems (\ s a -> s{_chiItems = a}) .
-      _Default
-      . _Coerce
+-- | The ISO speed used to create the photo.
+fimmIsoSpeed :: Lens' FileImageMediaMetadata (Maybe Int32)
+fimmIsoSpeed
+  = lens _fimmIsoSpeed (\ s a -> s{_fimmIsoSpeed = a})
 
--- | A link back to this list.
-chiSelfLink :: Lens' ChildList (Maybe Text)
-chiSelfLink
-  = lens _chiSelfLink (\ s a -> s{_chiSelfLink = a})
+-- | Geographic location information stored in the image.
+fimmLocation :: Lens' FileImageMediaMetadata (Maybe FileLocationImageMediaMetadata)
+fimmLocation
+  = lens _fimmLocation (\ s a -> s{_fimmLocation = a})
 
-instance FromJSON ChildList where
+-- | The aperture used to create the photo (f-number).
+fimmAperture :: Lens' FileImageMediaMetadata (Maybe Float)
+fimmAperture
+  = lens _fimmAperture (\ s a -> s{_fimmAperture = a})
+
+-- | The focal length used to create the photo, in millimeters.
+fimmFocalLength :: Lens' FileImageMediaMetadata (Maybe Float)
+fimmFocalLength
+  = lens _fimmFocalLength
+      (\ s a -> s{_fimmFocalLength = a})
+
+-- | The make of the camera used to create the photo.
+fimmCameraMake :: Lens' FileImageMediaMetadata (Maybe Text)
+fimmCameraMake
+  = lens _fimmCameraMake
+      (\ s a -> s{_fimmCameraMake = a})
+
+-- | The width of the image in pixels.
+fimmWidth :: Lens' FileImageMediaMetadata (Maybe Int32)
+fimmWidth
+  = lens _fimmWidth (\ s a -> s{_fimmWidth = a})
+
+-- | The length of the exposure, in seconds.
+fimmExposureTime :: Lens' FileImageMediaMetadata (Maybe Float)
+fimmExposureTime
+  = lens _fimmExposureTime
+      (\ s a -> s{_fimmExposureTime = a})
+
+-- | The model of the camera used to create the photo.
+fimmCameraModel :: Lens' FileImageMediaMetadata (Maybe Text)
+fimmCameraModel
+  = lens _fimmCameraModel
+      (\ s a -> s{_fimmCameraModel = a})
+
+-- | The white balance mode used to create the photo.
+fimmWhiteBalance :: Lens' FileImageMediaMetadata (Maybe Text)
+fimmWhiteBalance
+  = lens _fimmWhiteBalance
+      (\ s a -> s{_fimmWhiteBalance = a})
+
+-- | The date and time the photo was taken (EXIF format timestamp).
+fimmDate :: Lens' FileImageMediaMetadata (Maybe Text)
+fimmDate = lens _fimmDate (\ s a -> s{_fimmDate = a})
+
+-- | The lens used to create the photo.
+fimmLens :: Lens' FileImageMediaMetadata (Maybe Text)
+fimmLens = lens _fimmLens (\ s a -> s{_fimmLens = a})
+
+-- | Whether a flash was used to create the photo.
+fimmFlashUsed :: Lens' FileImageMediaMetadata (Maybe Bool)
+fimmFlashUsed
+  = lens _fimmFlashUsed
+      (\ s a -> s{_fimmFlashUsed = a})
+
+-- | The exposure bias of the photo (APEX value).
+fimmExposureBias :: Lens' FileImageMediaMetadata (Maybe Float)
+fimmExposureBias
+  = lens _fimmExposureBias
+      (\ s a -> s{_fimmExposureBias = a})
+
+-- | The metering mode used to create the photo.
+fimmMeteringMode :: Lens' FileImageMediaMetadata (Maybe Text)
+fimmMeteringMode
+  = lens _fimmMeteringMode
+      (\ s a -> s{_fimmMeteringMode = a})
+
+-- | The exposure mode used to create the photo.
+fimmExposureMode :: Lens' FileImageMediaMetadata (Maybe Text)
+fimmExposureMode
+  = lens _fimmExposureMode
+      (\ s a -> s{_fimmExposureMode = a})
+
+-- | The type of sensor used to create the photo.
+fimmSensor :: Lens' FileImageMediaMetadata (Maybe Text)
+fimmSensor
+  = lens _fimmSensor (\ s a -> s{_fimmSensor = a})
+
+-- | The color space of the photo.
+fimmColorSpace :: Lens' FileImageMediaMetadata (Maybe Text)
+fimmColorSpace
+  = lens _fimmColorSpace
+      (\ s a -> s{_fimmColorSpace = a})
+
+instance FromJSON FileImageMediaMetadata where
         parseJSON
-          = withObject "ChildList"
+          = withObject "FileImageMediaMetadata"
               (\ o ->
-                 ChildList <$>
-                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
-                     (o .:? "nextLink")
-                     <*> (o .:? "kind" .!= "drive#childList")
-                     <*> (o .:? "items" .!= mempty)
-                     <*> (o .:? "selfLink"))
+                 FileImageMediaMetadata <$>
+                   (o .:? "rotation") <*> (o .:? "height") <*>
+                     (o .:? "subjectDistance")
+                     <*> (o .:? "maxApertureValue")
+                     <*> (o .:? "isoSpeed")
+                     <*> (o .:? "location")
+                     <*> (o .:? "aperture")
+                     <*> (o .:? "focalLength")
+                     <*> (o .:? "cameraMake")
+                     <*> (o .:? "width")
+                     <*> (o .:? "exposureTime")
+                     <*> (o .:? "cameraModel")
+                     <*> (o .:? "whiteBalance")
+                     <*> (o .:? "date")
+                     <*> (o .:? "lens")
+                     <*> (o .:? "flashUsed")
+                     <*> (o .:? "exposureBias")
+                     <*> (o .:? "meteringMode")
+                     <*> (o .:? "exposureMode")
+                     <*> (o .:? "sensor")
+                     <*> (o .:? "colorSpace"))
 
-instance ToJSON ChildList where
-        toJSON ChildList{..}
+instance ToJSON FileImageMediaMetadata where
+        toJSON FileImageMediaMetadata{..}
           = object
               (catMaybes
-                 [("etag" .=) <$> _chiEtag,
-                  ("nextPageToken" .=) <$> _chiNextPageToken,
-                  ("nextLink" .=) <$> _chiNextLink,
-                  Just ("kind" .= _chiKind),
-                  ("items" .=) <$> _chiItems,
-                  ("selfLink" .=) <$> _chiSelfLink])
-
--- | A reference to a folder\'s child.
---
--- /See:/ 'childReference' smart constructor.
-data ChildReference = ChildReference
-    { _crChildLink :: !(Maybe Text)
-    , _crKind      :: !Text
-    , _crSelfLink  :: !(Maybe Text)
-    , _crId        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ChildReference' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'crChildLink'
---
--- * 'crKind'
---
--- * 'crSelfLink'
---
--- * 'crId'
-childReference
-    :: ChildReference
-childReference =
-    ChildReference
-    { _crChildLink = Nothing
-    , _crKind = "drive#childReference"
-    , _crSelfLink = Nothing
-    , _crId = Nothing
-    }
-
--- | A link to the child.
-crChildLink :: Lens' ChildReference (Maybe Text)
-crChildLink
-  = lens _crChildLink (\ s a -> s{_crChildLink = a})
-
--- | This is always drive#childReference.
-crKind :: Lens' ChildReference Text
-crKind = lens _crKind (\ s a -> s{_crKind = a})
-
--- | A link back to this reference.
-crSelfLink :: Lens' ChildReference (Maybe Text)
-crSelfLink
-  = lens _crSelfLink (\ s a -> s{_crSelfLink = a})
-
--- | The ID of the child.
-crId :: Lens' ChildReference (Maybe Text)
-crId = lens _crId (\ s a -> s{_crId = a})
-
-instance FromJSON ChildReference where
-        parseJSON
-          = withObject "ChildReference"
-              (\ o ->
-                 ChildReference <$>
-                   (o .:? "childLink") <*>
-                     (o .:? "kind" .!= "drive#childReference")
-                     <*> (o .:? "selfLink")
-                     <*> (o .:? "id"))
-
-instance ToJSON ChildReference where
-        toJSON ChildReference{..}
-          = object
-              (catMaybes
-                 [("childLink" .=) <$> _crChildLink,
-                  Just ("kind" .= _crKind),
-                  ("selfLink" .=) <$> _crSelfLink,
-                  ("id" .=) <$> _crId])
+                 [("rotation" .=) <$> _fimmRotation,
+                  ("height" .=) <$> _fimmHeight,
+                  ("subjectDistance" .=) <$> _fimmSubjectDistance,
+                  ("maxApertureValue" .=) <$> _fimmMaxApertureValue,
+                  ("isoSpeed" .=) <$> _fimmIsoSpeed,
+                  ("location" .=) <$> _fimmLocation,
+                  ("aperture" .=) <$> _fimmAperture,
+                  ("focalLength" .=) <$> _fimmFocalLength,
+                  ("cameraMake" .=) <$> _fimmCameraMake,
+                  ("width" .=) <$> _fimmWidth,
+                  ("exposureTime" .=) <$> _fimmExposureTime,
+                  ("cameraModel" .=) <$> _fimmCameraModel,
+                  ("whiteBalance" .=) <$> _fimmWhiteBalance,
+                  ("date" .=) <$> _fimmDate, ("lens" .=) <$> _fimmLens,
+                  ("flashUsed" .=) <$> _fimmFlashUsed,
+                  ("exposureBias" .=) <$> _fimmExposureBias,
+                  ("meteringMode" .=) <$> _fimmMeteringMode,
+                  ("exposureMode" .=) <$> _fimmExposureMode,
+                  ("sensor" .=) <$> _fimmSensor,
+                  ("colorSpace" .=) <$> _fimmColorSpace])
 
 -- | A JSON representation of a comment on a file in Google Drive.
 --
@@ -1869,51 +1206,860 @@ instance ToJSON Comment where
                   ("fileId" .=) <$> _cFileId,
                   ("commentId" .=) <$> _cCommentId])
 
--- | The context of the file which is being commented on.
+-- | A permission for a file.
 --
--- /See:/ 'commentContext' smart constructor.
-data CommentContext = CommentContext
-    { _ccValue :: !(Maybe Text)
-    , _ccType  :: !(Maybe Text)
+-- /See:/ 'permission' smart constructor.
+data Permission = Permission
+    { _pPhotoLink       :: !(Maybe Text)
+    , _pEtag            :: !(Maybe Text)
+    , _pWithLink        :: !(Maybe Bool)
+    , _pKind            :: !Text
+    , _pDomain          :: !(Maybe Text)
+    , _pValue           :: !(Maybe Text)
+    , _pAdditionalRoles :: !(Maybe [Text])
+    , _pRole            :: !(Maybe Text)
+    , _pSelfLink        :: !(Maybe Text)
+    , _pName            :: !(Maybe Text)
+    , _pAuthKey         :: !(Maybe Text)
+    , _pEmailAddress    :: !(Maybe Text)
+    , _pId              :: !(Maybe Text)
+    , _pType            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CommentContext' with the minimum fields required to make a request.
+-- | Creates a value of 'Permission' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ccValue'
+-- * 'pPhotoLink'
 --
--- * 'ccType'
-commentContext
-    :: CommentContext
-commentContext =
-    CommentContext
-    { _ccValue = Nothing
-    , _ccType = Nothing
+-- * 'pEtag'
+--
+-- * 'pWithLink'
+--
+-- * 'pKind'
+--
+-- * 'pDomain'
+--
+-- * 'pValue'
+--
+-- * 'pAdditionalRoles'
+--
+-- * 'pRole'
+--
+-- * 'pSelfLink'
+--
+-- * 'pName'
+--
+-- * 'pAuthKey'
+--
+-- * 'pEmailAddress'
+--
+-- * 'pId'
+--
+-- * 'pType'
+permission
+    :: Permission
+permission =
+    Permission
+    { _pPhotoLink = Nothing
+    , _pEtag = Nothing
+    , _pWithLink = Nothing
+    , _pKind = "drive#permission"
+    , _pDomain = Nothing
+    , _pValue = Nothing
+    , _pAdditionalRoles = Nothing
+    , _pRole = Nothing
+    , _pSelfLink = Nothing
+    , _pName = Nothing
+    , _pAuthKey = Nothing
+    , _pEmailAddress = Nothing
+    , _pId = Nothing
+    , _pType = Nothing
     }
 
--- | Data representation of the segment of the file being commented on. In
--- the case of a text file for example, this would be the actual text that
--- the comment is about.
-ccValue :: Lens' CommentContext (Maybe Text)
-ccValue = lens _ccValue (\ s a -> s{_ccValue = a})
+-- | A link to the profile photo, if available.
+pPhotoLink :: Lens' Permission (Maybe Text)
+pPhotoLink
+  = lens _pPhotoLink (\ s a -> s{_pPhotoLink = a})
 
--- | The MIME type of the context snippet.
-ccType :: Lens' CommentContext (Maybe Text)
-ccType = lens _ccType (\ s a -> s{_ccType = a})
+-- | The ETag of the permission.
+pEtag :: Lens' Permission (Maybe Text)
+pEtag = lens _pEtag (\ s a -> s{_pEtag = a})
 
-instance FromJSON CommentContext where
+-- | Whether the link is required for this permission.
+pWithLink :: Lens' Permission (Maybe Bool)
+pWithLink
+  = lens _pWithLink (\ s a -> s{_pWithLink = a})
+
+-- | This is always drive#permission.
+pKind :: Lens' Permission Text
+pKind = lens _pKind (\ s a -> s{_pKind = a})
+
+-- | The domain name of the entity this permission refers to. This is an
+-- output-only field which is present when the permission type is user,
+-- group or domain.
+pDomain :: Lens' Permission (Maybe Text)
+pDomain = lens _pDomain (\ s a -> s{_pDomain = a})
+
+-- | The email address or domain name for the entity. This is used during
+-- inserts and is not populated in responses. When making a
+-- drive.permissions.insert request, exactly one of the id or value fields
+-- must be specified.
+pValue :: Lens' Permission (Maybe Text)
+pValue = lens _pValue (\ s a -> s{_pValue = a})
+
+-- | Additional roles for this user. Only commenter is currently allowed.
+pAdditionalRoles :: Lens' Permission [Text]
+pAdditionalRoles
+  = lens _pAdditionalRoles
+      (\ s a -> s{_pAdditionalRoles = a})
+      . _Default
+      . _Coerce
+
+-- | The primary role for this user. Allowed values are: - owner - reader -
+-- writer
+pRole :: Lens' Permission (Maybe Text)
+pRole = lens _pRole (\ s a -> s{_pRole = a})
+
+-- | A link back to this permission.
+pSelfLink :: Lens' Permission (Maybe Text)
+pSelfLink
+  = lens _pSelfLink (\ s a -> s{_pSelfLink = a})
+
+-- | The name for this permission.
+pName :: Lens' Permission (Maybe Text)
+pName = lens _pName (\ s a -> s{_pName = a})
+
+-- | The authkey parameter required for this permission.
+pAuthKey :: Lens' Permission (Maybe Text)
+pAuthKey = lens _pAuthKey (\ s a -> s{_pAuthKey = a})
+
+-- | The email address of the user or group this permission refers to. This
+-- is an output-only field which is present when the permission type is
+-- user or group.
+pEmailAddress :: Lens' Permission (Maybe Text)
+pEmailAddress
+  = lens _pEmailAddress
+      (\ s a -> s{_pEmailAddress = a})
+
+-- | The ID of the user this permission refers to, and identical to the
+-- permissionId in the About and Files resources. When making a
+-- drive.permissions.insert request, exactly one of the id or value fields
+-- must be specified.
+pId :: Lens' Permission (Maybe Text)
+pId = lens _pId (\ s a -> s{_pId = a})
+
+-- | The account type. Allowed values are: - user - group - domain - anyone
+pType :: Lens' Permission (Maybe Text)
+pType = lens _pType (\ s a -> s{_pType = a})
+
+instance FromJSON Permission where
         parseJSON
-          = withObject "CommentContext"
+          = withObject "Permission"
               (\ o ->
-                 CommentContext <$>
-                   (o .:? "value") <*> (o .:? "type"))
+                 Permission <$>
+                   (o .:? "photoLink") <*> (o .:? "etag") <*>
+                     (o .:? "withLink")
+                     <*> (o .:? "kind" .!= "drive#permission")
+                     <*> (o .:? "domain")
+                     <*> (o .:? "value")
+                     <*> (o .:? "additionalRoles" .!= mempty)
+                     <*> (o .:? "role")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "authKey")
+                     <*> (o .:? "emailAddress")
+                     <*> (o .:? "id")
+                     <*> (o .:? "type"))
 
-instance ToJSON CommentContext where
-        toJSON CommentContext{..}
+instance ToJSON Permission where
+        toJSON Permission{..}
           = object
               (catMaybes
-                 [("value" .=) <$> _ccValue, ("type" .=) <$> _ccType])
+                 [("photoLink" .=) <$> _pPhotoLink,
+                  ("etag" .=) <$> _pEtag,
+                  ("withLink" .=) <$> _pWithLink,
+                  Just ("kind" .= _pKind), ("domain" .=) <$> _pDomain,
+                  ("value" .=) <$> _pValue,
+                  ("additionalRoles" .=) <$> _pAdditionalRoles,
+                  ("role" .=) <$> _pRole,
+                  ("selfLink" .=) <$> _pSelfLink,
+                  ("name" .=) <$> _pName, ("authKey" .=) <$> _pAuthKey,
+                  ("emailAddress" .=) <$> _pEmailAddress,
+                  ("id" .=) <$> _pId, ("type" .=) <$> _pType])
+
+-- | A revision of a file.
+--
+-- /See:/ 'revision' smart constructor.
+data Revision = Revision
+    { _rEtag                   :: !(Maybe Text)
+    , _rOriginalFilename       :: !(Maybe Text)
+    , _rKind                   :: !Text
+    , _rPublishedLink          :: !(Maybe Text)
+    , _rPinned                 :: !(Maybe Bool)
+    , _rPublished              :: !(Maybe Bool)
+    , _rLastModifyingUser      :: !(Maybe (Maybe User))
+    , _rFileSize               :: !(Maybe Int64)
+    , _rPublishAuto            :: !(Maybe Bool)
+    , _rMd5Checksum            :: !(Maybe Text)
+    , _rMimeType               :: !(Maybe Text)
+    , _rSelfLink               :: !(Maybe Text)
+    , _rLastModifyingUserName  :: !(Maybe Text)
+    , _rDownloadUrl            :: !(Maybe Text)
+    , _rExportLinks            :: !(Maybe RevisionExportLinks)
+    , _rPublishedOutsideDomain :: !(Maybe Bool)
+    , _rId                     :: !(Maybe Text)
+    , _rModifiedDate           :: !(Maybe UTCTime)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Revision' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rEtag'
+--
+-- * 'rOriginalFilename'
+--
+-- * 'rKind'
+--
+-- * 'rPublishedLink'
+--
+-- * 'rPinned'
+--
+-- * 'rPublished'
+--
+-- * 'rLastModifyingUser'
+--
+-- * 'rFileSize'
+--
+-- * 'rPublishAuto'
+--
+-- * 'rMd5Checksum'
+--
+-- * 'rMimeType'
+--
+-- * 'rSelfLink'
+--
+-- * 'rLastModifyingUserName'
+--
+-- * 'rDownloadUrl'
+--
+-- * 'rExportLinks'
+--
+-- * 'rPublishedOutsideDomain'
+--
+-- * 'rId'
+--
+-- * 'rModifiedDate'
+revision
+    :: Revision
+revision =
+    Revision
+    { _rEtag = Nothing
+    , _rOriginalFilename = Nothing
+    , _rKind = "drive#revision"
+    , _rPublishedLink = Nothing
+    , _rPinned = Nothing
+    , _rPublished = Nothing
+    , _rLastModifyingUser = Nothing
+    , _rFileSize = Nothing
+    , _rPublishAuto = Nothing
+    , _rMd5Checksum = Nothing
+    , _rMimeType = Nothing
+    , _rSelfLink = Nothing
+    , _rLastModifyingUserName = Nothing
+    , _rDownloadUrl = Nothing
+    , _rExportLinks = Nothing
+    , _rPublishedOutsideDomain = Nothing
+    , _rId = Nothing
+    , _rModifiedDate = Nothing
+    }
+
+-- | The ETag of the revision.
+rEtag :: Lens' Revision (Maybe Text)
+rEtag = lens _rEtag (\ s a -> s{_rEtag = a})
+
+-- | The original filename when this revision was created. This will only be
+-- populated on files with content stored in Drive.
+rOriginalFilename :: Lens' Revision (Maybe Text)
+rOriginalFilename
+  = lens _rOriginalFilename
+      (\ s a -> s{_rOriginalFilename = a})
+
+-- | This is always drive#revision.
+rKind :: Lens' Revision Text
+rKind = lens _rKind (\ s a -> s{_rKind = a})
+
+-- | A link to the published revision.
+rPublishedLink :: Lens' Revision (Maybe Text)
+rPublishedLink
+  = lens _rPublishedLink
+      (\ s a -> s{_rPublishedLink = a})
+
+-- | Whether this revision is pinned to prevent automatic purging. This will
+-- only be populated and can only be modified on files with content stored
+-- in Drive which are not Google Docs. Revisions can also be pinned when
+-- they are created through the drive.files.insert\/update\/copy by using
+-- the pinned query parameter.
+rPinned :: Lens' Revision (Maybe Bool)
+rPinned = lens _rPinned (\ s a -> s{_rPinned = a})
+
+-- | Whether this revision is published. This is only populated and can only
+-- be modified for Google Docs.
+rPublished :: Lens' Revision (Maybe Bool)
+rPublished
+  = lens _rPublished (\ s a -> s{_rPublished = a})
+
+-- | The last user to modify this revision.
+rLastModifyingUser :: Lens' Revision (Maybe (Maybe User))
+rLastModifyingUser
+  = lens _rLastModifyingUser
+      (\ s a -> s{_rLastModifyingUser = a})
+
+-- | The size of the revision in bytes. This will only be populated on files
+-- with content stored in Drive.
+rFileSize :: Lens' Revision (Maybe Int64)
+rFileSize
+  = lens _rFileSize (\ s a -> s{_rFileSize = a})
+
+-- | Whether subsequent revisions will be automatically republished. This is
+-- only populated and can only be modified for Google Docs.
+rPublishAuto :: Lens' Revision (Maybe Bool)
+rPublishAuto
+  = lens _rPublishAuto (\ s a -> s{_rPublishAuto = a})
+
+-- | An MD5 checksum for the content of this revision. This will only be
+-- populated on files with content stored in Drive.
+rMd5Checksum :: Lens' Revision (Maybe Text)
+rMd5Checksum
+  = lens _rMd5Checksum (\ s a -> s{_rMd5Checksum = a})
+
+-- | The MIME type of the revision.
+rMimeType :: Lens' Revision (Maybe Text)
+rMimeType
+  = lens _rMimeType (\ s a -> s{_rMimeType = a})
+
+-- | A link back to this revision.
+rSelfLink :: Lens' Revision (Maybe Text)
+rSelfLink
+  = lens _rSelfLink (\ s a -> s{_rSelfLink = a})
+
+-- | Name of the last user to modify this revision.
+rLastModifyingUserName :: Lens' Revision (Maybe Text)
+rLastModifyingUserName
+  = lens _rLastModifyingUserName
+      (\ s a -> s{_rLastModifyingUserName = a})
+
+-- | Short term download URL for the file. This will only be populated on
+-- files with content stored in Drive.
+rDownloadUrl :: Lens' Revision (Maybe Text)
+rDownloadUrl
+  = lens _rDownloadUrl (\ s a -> s{_rDownloadUrl = a})
+
+-- | Links for exporting Google Docs to specific formats.
+rExportLinks :: Lens' Revision (Maybe RevisionExportLinks)
+rExportLinks
+  = lens _rExportLinks (\ s a -> s{_rExportLinks = a})
+
+-- | Whether this revision is published outside the domain. This is only
+-- populated and can only be modified for Google Docs.
+rPublishedOutsideDomain :: Lens' Revision (Maybe Bool)
+rPublishedOutsideDomain
+  = lens _rPublishedOutsideDomain
+      (\ s a -> s{_rPublishedOutsideDomain = a})
+
+-- | The ID of the revision.
+rId :: Lens' Revision (Maybe Text)
+rId = lens _rId (\ s a -> s{_rId = a})
+
+-- | Last time this revision was modified (formatted RFC 3339 timestamp).
+rModifiedDate :: Lens' Revision (Maybe UTCTime)
+rModifiedDate
+  = lens _rModifiedDate
+      (\ s a -> s{_rModifiedDate = a})
+
+instance FromJSON Revision where
+        parseJSON
+          = withObject "Revision"
+              (\ o ->
+                 Revision <$>
+                   (o .:? "etag") <*> (o .:? "originalFilename") <*>
+                     (o .:? "kind" .!= "drive#revision")
+                     <*> (o .:? "publishedLink")
+                     <*> (o .:? "pinned")
+                     <*> (o .:? "published")
+                     <*> (o .:? "lastModifyingUser")
+                     <*> (o .:? "fileSize")
+                     <*> (o .:? "publishAuto")
+                     <*> (o .:? "md5Checksum")
+                     <*> (o .:? "mimeType")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "lastModifyingUserName")
+                     <*> (o .:? "downloadUrl")
+                     <*> (o .:? "exportLinks")
+                     <*> (o .:? "publishedOutsideDomain")
+                     <*> (o .:? "id")
+                     <*> (o .:? "modifiedDate"))
+
+instance ToJSON Revision where
+        toJSON Revision{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _rEtag,
+                  ("originalFilename" .=) <$> _rOriginalFilename,
+                  Just ("kind" .= _rKind),
+                  ("publishedLink" .=) <$> _rPublishedLink,
+                  ("pinned" .=) <$> _rPinned,
+                  ("published" .=) <$> _rPublished,
+                  ("lastModifyingUser" .=) <$> _rLastModifyingUser,
+                  ("fileSize" .=) <$> _rFileSize,
+                  ("publishAuto" .=) <$> _rPublishAuto,
+                  ("md5Checksum" .=) <$> _rMd5Checksum,
+                  ("mimeType" .=) <$> _rMimeType,
+                  ("selfLink" .=) <$> _rSelfLink,
+                  ("lastModifyingUserName" .=) <$>
+                    _rLastModifyingUserName,
+                  ("downloadUrl" .=) <$> _rDownloadUrl,
+                  ("exportLinks" .=) <$> _rExportLinks,
+                  ("publishedOutsideDomain" .=) <$>
+                    _rPublishedOutsideDomain,
+                  ("id" .=) <$> _rId,
+                  ("modifiedDate" .=) <$> _rModifiedDate])
+
+-- | Representation of a change to a file.
+--
+-- /See:/ 'change' smart constructor.
+data Change = Change
+    { _chaKind             :: !Text
+    , _chaSelfLink         :: !(Maybe Text)
+    , _chaModificationDate :: !(Maybe UTCTime)
+    , _chaId               :: !(Maybe Int64)
+    , _chaDeleted          :: !(Maybe Bool)
+    , _chaFileId           :: !(Maybe Text)
+    , _chaFile             :: !(Maybe (Maybe File))
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Change' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'chaKind'
+--
+-- * 'chaSelfLink'
+--
+-- * 'chaModificationDate'
+--
+-- * 'chaId'
+--
+-- * 'chaDeleted'
+--
+-- * 'chaFileId'
+--
+-- * 'chaFile'
+change
+    :: Change
+change =
+    Change
+    { _chaKind = "drive#change"
+    , _chaSelfLink = Nothing
+    , _chaModificationDate = Nothing
+    , _chaId = Nothing
+    , _chaDeleted = Nothing
+    , _chaFileId = Nothing
+    , _chaFile = Nothing
+    }
+
+-- | This is always drive#change.
+chaKind :: Lens' Change Text
+chaKind = lens _chaKind (\ s a -> s{_chaKind = a})
+
+-- | A link back to this change.
+chaSelfLink :: Lens' Change (Maybe Text)
+chaSelfLink
+  = lens _chaSelfLink (\ s a -> s{_chaSelfLink = a})
+
+-- | The time of this modification.
+chaModificationDate :: Lens' Change (Maybe UTCTime)
+chaModificationDate
+  = lens _chaModificationDate
+      (\ s a -> s{_chaModificationDate = a})
+
+-- | The ID of the change.
+chaId :: Lens' Change (Maybe Int64)
+chaId = lens _chaId (\ s a -> s{_chaId = a})
+
+-- | Whether the file has been deleted.
+chaDeleted :: Lens' Change (Maybe Bool)
+chaDeleted
+  = lens _chaDeleted (\ s a -> s{_chaDeleted = a})
+
+-- | The ID of the file associated with this change.
+chaFileId :: Lens' Change (Maybe Text)
+chaFileId
+  = lens _chaFileId (\ s a -> s{_chaFileId = a})
+
+-- | The updated state of the file. Present if the file has not been deleted.
+chaFile :: Lens' Change (Maybe (Maybe File))
+chaFile = lens _chaFile (\ s a -> s{_chaFile = a})
+
+instance FromJSON Change where
+        parseJSON
+          = withObject "Change"
+              (\ o ->
+                 Change <$>
+                   (o .:? "kind" .!= "drive#change") <*>
+                     (o .:? "selfLink")
+                     <*> (o .:? "modificationDate")
+                     <*> (o .:? "id")
+                     <*> (o .:? "deleted")
+                     <*> (o .:? "fileId")
+                     <*> (o .:? "file"))
+
+instance ToJSON Change where
+        toJSON Change{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _chaKind),
+                  ("selfLink" .=) <$> _chaSelfLink,
+                  ("modificationDate" .=) <$> _chaModificationDate,
+                  ("id" .=) <$> _chaId, ("deleted" .=) <$> _chaDeleted,
+                  ("fileId" .=) <$> _chaFileId,
+                  ("file" .=) <$> _chaFile])
+
+-- | The user\'s profile picture.
+--
+-- /See:/ 'userPicture' smart constructor.
+newtype UserPicture = UserPicture
+    { _upUrl :: Maybe Text
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UserPicture' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'upUrl'
+userPicture
+    :: UserPicture
+userPicture =
+    UserPicture
+    { _upUrl = Nothing
+    }
+
+-- | A URL that points to a profile picture of this user.
+upUrl :: Lens' UserPicture (Maybe Text)
+upUrl = lens _upUrl (\ s a -> s{_upUrl = a})
+
+instance FromJSON UserPicture where
+        parseJSON
+          = withObject "UserPicture"
+              (\ o -> UserPicture <$> (o .:? "url"))
+
+instance ToJSON UserPicture where
+        toJSON UserPicture{..}
+          = object (catMaybes [("url" .=) <$> _upUrl])
+
+-- | Geographic location information stored in the image.
+--
+-- /See:/ 'fileLocationImageMediaMetadata' smart constructor.
+data FileLocationImageMediaMetadata = FileLocationImageMediaMetadata
+    { _flimmLatitude  :: !(Maybe Double)
+    , _flimmAltitude  :: !(Maybe Double)
+    , _flimmLongitude :: !(Maybe Double)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'FileLocationImageMediaMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'flimmLatitude'
+--
+-- * 'flimmAltitude'
+--
+-- * 'flimmLongitude'
+fileLocationImageMediaMetadata
+    :: FileLocationImageMediaMetadata
+fileLocationImageMediaMetadata =
+    FileLocationImageMediaMetadata
+    { _flimmLatitude = Nothing
+    , _flimmAltitude = Nothing
+    , _flimmLongitude = Nothing
+    }
+
+-- | The latitude stored in the image.
+flimmLatitude :: Lens' FileLocationImageMediaMetadata (Maybe Double)
+flimmLatitude
+  = lens _flimmLatitude
+      (\ s a -> s{_flimmLatitude = a})
+
+-- | The altitude stored in the image.
+flimmAltitude :: Lens' FileLocationImageMediaMetadata (Maybe Double)
+flimmAltitude
+  = lens _flimmAltitude
+      (\ s a -> s{_flimmAltitude = a})
+
+-- | The longitude stored in the image.
+flimmLongitude :: Lens' FileLocationImageMediaMetadata (Maybe Double)
+flimmLongitude
+  = lens _flimmLongitude
+      (\ s a -> s{_flimmLongitude = a})
+
+instance FromJSON FileLocationImageMediaMetadata
+         where
+        parseJSON
+          = withObject "FileLocationImageMediaMetadata"
+              (\ o ->
+                 FileLocationImageMediaMetadata <$>
+                   (o .:? "latitude") <*> (o .:? "altitude") <*>
+                     (o .:? "longitude"))
+
+instance ToJSON FileLocationImageMediaMetadata where
+        toJSON FileLocationImageMediaMetadata{..}
+          = object
+              (catMaybes
+                 [("latitude" .=) <$> _flimmLatitude,
+                  ("altitude" .=) <$> _flimmAltitude,
+                  ("longitude" .=) <$> _flimmLongitude])
+
+-- | A list of revisions of a file.
+--
+-- /See:/ 'revisionList' smart constructor.
+data RevisionList = RevisionList
+    { _rlEtag     :: !(Maybe Text)
+    , _rlKind     :: !Text
+    , _rlItems    :: !(Maybe [Maybe Revision])
+    , _rlSelfLink :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RevisionList' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rlEtag'
+--
+-- * 'rlKind'
+--
+-- * 'rlItems'
+--
+-- * 'rlSelfLink'
+revisionList
+    :: RevisionList
+revisionList =
+    RevisionList
+    { _rlEtag = Nothing
+    , _rlKind = "drive#revisionList"
+    , _rlItems = Nothing
+    , _rlSelfLink = Nothing
+    }
+
+-- | The ETag of the list.
+rlEtag :: Lens' RevisionList (Maybe Text)
+rlEtag = lens _rlEtag (\ s a -> s{_rlEtag = a})
+
+-- | This is always drive#revisionList.
+rlKind :: Lens' RevisionList Text
+rlKind = lens _rlKind (\ s a -> s{_rlKind = a})
+
+-- | The actual list of revisions.
+rlItems :: Lens' RevisionList [Maybe Revision]
+rlItems
+  = lens _rlItems (\ s a -> s{_rlItems = a}) . _Default
+      . _Coerce
+
+-- | A link back to this list.
+rlSelfLink :: Lens' RevisionList (Maybe Text)
+rlSelfLink
+  = lens _rlSelfLink (\ s a -> s{_rlSelfLink = a})
+
+instance FromJSON RevisionList where
+        parseJSON
+          = withObject "RevisionList"
+              (\ o ->
+                 RevisionList <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!= "drive#revisionList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink"))
+
+instance ToJSON RevisionList where
+        toJSON RevisionList{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _rlEtag, Just ("kind" .= _rlKind),
+                  ("items" .=) <$> _rlItems,
+                  ("selfLink" .=) <$> _rlSelfLink])
+
+-- | Thumbnail for the file. Only accepted on upload and for files that are
+-- not already thumbnailed by Google.
+--
+-- /See:/ 'fileThumbnail' smart constructor.
+data FileThumbnail = FileThumbnail
+    { _ftImage    :: !(Maybe Word8)
+    , _ftMimeType :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'FileThumbnail' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ftImage'
+--
+-- * 'ftMimeType'
+fileThumbnail
+    :: FileThumbnail
+fileThumbnail =
+    FileThumbnail
+    { _ftImage = Nothing
+    , _ftMimeType = Nothing
+    }
+
+-- | The URL-safe Base64 encoded bytes of the thumbnail image. It should
+-- conform to RFC 4648 section 5.
+ftImage :: Lens' FileThumbnail (Maybe Word8)
+ftImage = lens _ftImage (\ s a -> s{_ftImage = a})
+
+-- | The MIME type of the thumbnail.
+ftMimeType :: Lens' FileThumbnail (Maybe Text)
+ftMimeType
+  = lens _ftMimeType (\ s a -> s{_ftMimeType = a})
+
+instance FromJSON FileThumbnail where
+        parseJSON
+          = withObject "FileThumbnail"
+              (\ o ->
+                 FileThumbnail <$>
+                   (o .:? "image") <*> (o .:? "mimeType"))
+
+instance ToJSON FileThumbnail where
+        toJSON FileThumbnail{..}
+          = object
+              (catMaybes
+                 [("image" .=) <$> _ftImage,
+                  ("mimeType" .=) <$> _ftMimeType])
+
+-- | A list of permissions associated with a file.
+--
+-- /See:/ 'permissionList' smart constructor.
+data PermissionList = PermissionList
+    { _plEtag     :: !(Maybe Text)
+    , _plKind     :: !Text
+    , _plItems    :: !(Maybe [Maybe Permission])
+    , _plSelfLink :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PermissionList' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'plEtag'
+--
+-- * 'plKind'
+--
+-- * 'plItems'
+--
+-- * 'plSelfLink'
+permissionList
+    :: PermissionList
+permissionList =
+    PermissionList
+    { _plEtag = Nothing
+    , _plKind = "drive#permissionList"
+    , _plItems = Nothing
+    , _plSelfLink = Nothing
+    }
+
+-- | The ETag of the list.
+plEtag :: Lens' PermissionList (Maybe Text)
+plEtag = lens _plEtag (\ s a -> s{_plEtag = a})
+
+-- | This is always drive#permissionList.
+plKind :: Lens' PermissionList Text
+plKind = lens _plKind (\ s a -> s{_plKind = a})
+
+-- | The actual list of permissions.
+plItems :: Lens' PermissionList [Maybe Permission]
+plItems
+  = lens _plItems (\ s a -> s{_plItems = a}) . _Default
+      . _Coerce
+
+-- | A link back to this list.
+plSelfLink :: Lens' PermissionList (Maybe Text)
+plSelfLink
+  = lens _plSelfLink (\ s a -> s{_plSelfLink = a})
+
+instance FromJSON PermissionList where
+        parseJSON
+          = withObject "PermissionList"
+              (\ o ->
+                 PermissionList <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!= "drive#permissionList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink"))
+
+instance ToJSON PermissionList where
+        toJSON PermissionList{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _plEtag, Just ("kind" .= _plKind),
+                  ("items" .=) <$> _plItems,
+                  ("selfLink" .=) <$> _plSelfLink])
+
+-- | A list of generated IDs which can be provided in insert requests
+--
+-- /See:/ 'generatedIds' smart constructor.
+data GeneratedIds = GeneratedIds
+    { _giSpace :: !(Maybe Text)
+    , _giKind  :: !Text
+    , _giIds   :: !(Maybe [Text])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GeneratedIds' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'giSpace'
+--
+-- * 'giKind'
+--
+-- * 'giIds'
+generatedIds
+    :: GeneratedIds
+generatedIds =
+    GeneratedIds
+    { _giSpace = Nothing
+    , _giKind = "drive#generatedIds"
+    , _giIds = Nothing
+    }
+
+-- | The type of file that can be created with these IDs.
+giSpace :: Lens' GeneratedIds (Maybe Text)
+giSpace = lens _giSpace (\ s a -> s{_giSpace = a})
+
+-- | This is always drive#generatedIds
+giKind :: Lens' GeneratedIds Text
+giKind = lens _giKind (\ s a -> s{_giKind = a})
+
+-- | The IDs generated for the requesting user in the specified space.
+giIds :: Lens' GeneratedIds [Text]
+giIds
+  = lens _giIds (\ s a -> s{_giIds = a}) . _Default .
+      _Coerce
+
+instance FromJSON GeneratedIds where
+        parseJSON
+          = withObject "GeneratedIds"
+              (\ o ->
+                 GeneratedIds <$>
+                   (o .:? "space") <*>
+                     (o .:? "kind" .!= "drive#generatedIds")
+                     <*> (o .:? "ids" .!= mempty))
+
+instance ToJSON GeneratedIds where
+        toJSON GeneratedIds{..}
+          = object
+              (catMaybes
+                 [("space" .=) <$> _giSpace, Just ("kind" .= _giKind),
+                  ("ids" .=) <$> _giIds])
 
 -- | A JSON representation of a list of comments on a file in Google Drive.
 --
@@ -1997,139 +2143,867 @@ instance ToJSON CommentList where
                   ("items" .=) <$> _comItems,
                   ("selfLink" .=) <$> _comSelfLink])
 
--- | A JSON representation of a reply to a comment on a file in Google Drive.
+-- | A list of files.
 --
--- /See:/ 'commentReply' smart constructor.
-data CommentReply = CommentReply
-    { _crrHtmlContent  :: !(Maybe Text)
-    , _crrKind         :: !Text
-    , _crrContent      :: !(Maybe Text)
-    , _crrCreatedDate  :: !(Maybe UTCTime)
-    , _crrReplyId      :: !(Maybe Text)
-    , _crrAuthor       :: !(Maybe (Maybe User))
-    , _crrModifiedDate :: !(Maybe UTCTime)
-    , _crrDeleted      :: !(Maybe Bool)
-    , _crrVerb         :: !(Maybe Text)
+-- /See:/ 'fileList' smart constructor.
+data FileList = FileList
+    { _flEtag          :: !(Maybe Text)
+    , _flNextPageToken :: !(Maybe Text)
+    , _flNextLink      :: !(Maybe Text)
+    , _flKind          :: !Text
+    , _flItems         :: !(Maybe [Maybe File])
+    , _flSelfLink      :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CommentReply' with the minimum fields required to make a request.
+-- | Creates a value of 'FileList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'crrHtmlContent'
+-- * 'flEtag'
 --
--- * 'crrKind'
+-- * 'flNextPageToken'
 --
--- * 'crrContent'
+-- * 'flNextLink'
 --
--- * 'crrCreatedDate'
+-- * 'flKind'
 --
--- * 'crrReplyId'
+-- * 'flItems'
 --
--- * 'crrAuthor'
---
--- * 'crrModifiedDate'
---
--- * 'crrDeleted'
---
--- * 'crrVerb'
-commentReply
-    :: CommentReply
-commentReply =
-    CommentReply
-    { _crrHtmlContent = Nothing
-    , _crrKind = "drive#commentReply"
-    , _crrContent = Nothing
-    , _crrCreatedDate = Nothing
-    , _crrReplyId = Nothing
-    , _crrAuthor = Nothing
-    , _crrModifiedDate = Nothing
-    , _crrDeleted = Nothing
-    , _crrVerb = Nothing
+-- * 'flSelfLink'
+fileList
+    :: FileList
+fileList =
+    FileList
+    { _flEtag = Nothing
+    , _flNextPageToken = Nothing
+    , _flNextLink = Nothing
+    , _flKind = "drive#fileList"
+    , _flItems = Nothing
+    , _flSelfLink = Nothing
     }
 
--- | HTML formatted content for this reply.
-crrHtmlContent :: Lens' CommentReply (Maybe Text)
-crrHtmlContent
-  = lens _crrHtmlContent
-      (\ s a -> s{_crrHtmlContent = a})
+-- | The ETag of the list.
+flEtag :: Lens' FileList (Maybe Text)
+flEtag = lens _flEtag (\ s a -> s{_flEtag = a})
 
--- | This is always drive#commentReply.
-crrKind :: Lens' CommentReply Text
-crrKind = lens _crrKind (\ s a -> s{_crrKind = a})
+-- | The page token for the next page of files.
+flNextPageToken :: Lens' FileList (Maybe Text)
+flNextPageToken
+  = lens _flNextPageToken
+      (\ s a -> s{_flNextPageToken = a})
 
--- | The plain text content used to create this reply. This is not HTML safe
--- and should only be used as a starting point to make edits to a reply\'s
--- content. This field is required on inserts if no verb is specified
--- (resolve\/reopen).
-crrContent :: Lens' CommentReply (Maybe Text)
-crrContent
-  = lens _crrContent (\ s a -> s{_crrContent = a})
+-- | A link to the next page of files.
+flNextLink :: Lens' FileList (Maybe Text)
+flNextLink
+  = lens _flNextLink (\ s a -> s{_flNextLink = a})
 
--- | The date when this reply was first created.
-crrCreatedDate :: Lens' CommentReply (Maybe UTCTime)
-crrCreatedDate
-  = lens _crrCreatedDate
-      (\ s a -> s{_crrCreatedDate = a})
+-- | This is always drive#fileList.
+flKind :: Lens' FileList Text
+flKind = lens _flKind (\ s a -> s{_flKind = a})
 
--- | The ID of the reply.
-crrReplyId :: Lens' CommentReply (Maybe Text)
-crrReplyId
-  = lens _crrReplyId (\ s a -> s{_crrReplyId = a})
+-- | The actual list of files.
+flItems :: Lens' FileList [Maybe File]
+flItems
+  = lens _flItems (\ s a -> s{_flItems = a}) . _Default
+      . _Coerce
 
--- | The user who wrote this reply.
-crrAuthor :: Lens' CommentReply (Maybe (Maybe User))
-crrAuthor
-  = lens _crrAuthor (\ s a -> s{_crrAuthor = a})
+-- | A link back to this list.
+flSelfLink :: Lens' FileList (Maybe Text)
+flSelfLink
+  = lens _flSelfLink (\ s a -> s{_flSelfLink = a})
 
--- | The date when this reply was last modified.
-crrModifiedDate :: Lens' CommentReply (Maybe UTCTime)
-crrModifiedDate
-  = lens _crrModifiedDate
-      (\ s a -> s{_crrModifiedDate = a})
-
--- | Whether this reply has been deleted. If a reply has been deleted the
--- content will be cleared and this will only represent a reply that once
--- existed.
-crrDeleted :: Lens' CommentReply (Maybe Bool)
-crrDeleted
-  = lens _crrDeleted (\ s a -> s{_crrDeleted = a})
-
--- | The action this reply performed to the parent comment. When creating a
--- new reply this is the action to be perform to the parent comment.
--- Possible values are: - \"resolve\" - To resolve a comment. - \"reopen\"
--- - To reopen (un-resolve) a comment.
-crrVerb :: Lens' CommentReply (Maybe Text)
-crrVerb = lens _crrVerb (\ s a -> s{_crrVerb = a})
-
-instance FromJSON CommentReply where
+instance FromJSON FileList where
         parseJSON
-          = withObject "CommentReply"
+          = withObject "FileList"
               (\ o ->
-                 CommentReply <$>
-                   (o .:? "htmlContent") <*>
-                     (o .:? "kind" .!= "drive#commentReply")
-                     <*> (o .:? "content")
-                     <*> (o .:? "createdDate")
-                     <*> (o .:? "replyId")
-                     <*> (o .:? "author")
-                     <*> (o .:? "modifiedDate")
-                     <*> (o .:? "deleted")
-                     <*> (o .:? "verb"))
+                 FileList <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "nextLink")
+                     <*> (o .:? "kind" .!= "drive#fileList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink"))
 
-instance ToJSON CommentReply where
-        toJSON CommentReply{..}
+instance ToJSON FileList where
+        toJSON FileList{..}
           = object
               (catMaybes
-                 [("htmlContent" .=) <$> _crrHtmlContent,
-                  Just ("kind" .= _crrKind),
-                  ("content" .=) <$> _crrContent,
-                  ("createdDate" .=) <$> _crrCreatedDate,
-                  ("replyId" .=) <$> _crrReplyId,
-                  ("author" .=) <$> _crrAuthor,
-                  ("modifiedDate" .=) <$> _crrModifiedDate,
-                  ("deleted" .=) <$> _crrDeleted,
-                  ("verb" .=) <$> _crrVerb])
+                 [("etag" .=) <$> _flEtag,
+                  ("nextPageToken" .=) <$> _flNextPageToken,
+                  ("nextLink" .=) <$> _flNextLink,
+                  Just ("kind" .= _flKind), ("items" .=) <$> _flItems,
+                  ("selfLink" .=) <$> _flSelfLink])
+
+--
+-- /See:/ 'aboutItemFeatures' smart constructor.
+data AboutItemFeatures = AboutItemFeatures
+    { _aifFeatureRate :: !(Maybe Double)
+    , _aifFeatureName :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AboutItemFeatures' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aifFeatureRate'
+--
+-- * 'aifFeatureName'
+aboutItemFeatures
+    :: AboutItemFeatures
+aboutItemFeatures =
+    AboutItemFeatures
+    { _aifFeatureRate = Nothing
+    , _aifFeatureName = Nothing
+    }
+
+-- | The request limit rate for this feature, in queries per second.
+aifFeatureRate :: Lens' AboutItemFeatures (Maybe Double)
+aifFeatureRate
+  = lens _aifFeatureRate
+      (\ s a -> s{_aifFeatureRate = a})
+
+-- | The name of the feature.
+aifFeatureName :: Lens' AboutItemFeatures (Maybe Text)
+aifFeatureName
+  = lens _aifFeatureName
+      (\ s a -> s{_aifFeatureName = a})
+
+instance FromJSON AboutItemFeatures where
+        parseJSON
+          = withObject "AboutItemFeatures"
+              (\ o ->
+                 AboutItemFeatures <$>
+                   (o .:? "featureRate") <*> (o .:? "featureName"))
+
+instance ToJSON AboutItemFeatures where
+        toJSON AboutItemFeatures{..}
+          = object
+              (catMaybes
+                 [("featureRate" .=) <$> _aifFeatureRate,
+                  ("featureName" .=) <$> _aifFeatureName])
+
+-- | Additional parameters controlling delivery channel behavior. Optional.
+--
+-- /See:/ 'channelParams' smart constructor.
+data ChannelParams =
+    ChannelParams
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ChannelParams' with the minimum fields required to make a request.
+--
+channelParams
+    :: ChannelParams
+channelParams = ChannelParams
+
+instance FromJSON ChannelParams where
+        parseJSON
+          = withObject "ChannelParams"
+              (\ o -> pure ChannelParams)
+
+instance ToJSON ChannelParams where
+        toJSON = const (Object mempty)
+
+-- | Indexable text attributes for the file (can only be written)
+--
+-- /See:/ 'fileIndexableText' smart constructor.
+newtype FileIndexableText = FileIndexableText
+    { _fitText :: Maybe Text
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'FileIndexableText' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'fitText'
+fileIndexableText
+    :: FileIndexableText
+fileIndexableText =
+    FileIndexableText
+    { _fitText = Nothing
+    }
+
+-- | The text to be indexed for this file.
+fitText :: Lens' FileIndexableText (Maybe Text)
+fitText = lens _fitText (\ s a -> s{_fitText = a})
+
+instance FromJSON FileIndexableText where
+        parseJSON
+          = withObject "FileIndexableText"
+              (\ o -> FileIndexableText <$> (o .:? "text"))
+
+instance ToJSON FileIndexableText where
+        toJSON FileIndexableText{..}
+          = object (catMaybes [("text" .=) <$> _fitText])
+
+--
+-- /See:/ 'aboutItemExportFormats' smart constructor.
+data AboutItemExportFormats = AboutItemExportFormats
+    { _aiefTargets :: !(Maybe [Text])
+    , _aiefSource  :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AboutItemExportFormats' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aiefTargets'
+--
+-- * 'aiefSource'
+aboutItemExportFormats
+    :: AboutItemExportFormats
+aboutItemExportFormats =
+    AboutItemExportFormats
+    { _aiefTargets = Nothing
+    , _aiefSource = Nothing
+    }
+
+-- | The possible content types to convert to.
+aiefTargets :: Lens' AboutItemExportFormats [Text]
+aiefTargets
+  = lens _aiefTargets (\ s a -> s{_aiefTargets = a}) .
+      _Default
+      . _Coerce
+
+-- | The content type to convert from.
+aiefSource :: Lens' AboutItemExportFormats (Maybe Text)
+aiefSource
+  = lens _aiefSource (\ s a -> s{_aiefSource = a})
+
+instance FromJSON AboutItemExportFormats where
+        parseJSON
+          = withObject "AboutItemExportFormats"
+              (\ o ->
+                 AboutItemExportFormats <$>
+                   (o .:? "targets" .!= mempty) <*> (o .:? "source"))
+
+instance ToJSON AboutItemExportFormats where
+        toJSON AboutItemExportFormats{..}
+          = object
+              (catMaybes
+                 [("targets" .=) <$> _aiefTargets,
+                  ("source" .=) <$> _aiefSource])
+
+-- | A reference to a file\'s parent.
+--
+-- /See:/ 'parentReference' smart constructor.
+data ParentReference = ParentReference
+    { _prParentLink :: !(Maybe Text)
+    , _prIsRoot     :: !(Maybe Bool)
+    , _prKind       :: !Text
+    , _prSelfLink   :: !(Maybe Text)
+    , _prId         :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ParentReference' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'prParentLink'
+--
+-- * 'prIsRoot'
+--
+-- * 'prKind'
+--
+-- * 'prSelfLink'
+--
+-- * 'prId'
+parentReference
+    :: ParentReference
+parentReference =
+    ParentReference
+    { _prParentLink = Nothing
+    , _prIsRoot = Nothing
+    , _prKind = "drive#parentReference"
+    , _prSelfLink = Nothing
+    , _prId = Nothing
+    }
+
+-- | A link to the parent.
+prParentLink :: Lens' ParentReference (Maybe Text)
+prParentLink
+  = lens _prParentLink (\ s a -> s{_prParentLink = a})
+
+-- | Whether or not the parent is the root folder.
+prIsRoot :: Lens' ParentReference (Maybe Bool)
+prIsRoot = lens _prIsRoot (\ s a -> s{_prIsRoot = a})
+
+-- | This is always drive#parentReference.
+prKind :: Lens' ParentReference Text
+prKind = lens _prKind (\ s a -> s{_prKind = a})
+
+-- | A link back to this reference.
+prSelfLink :: Lens' ParentReference (Maybe Text)
+prSelfLink
+  = lens _prSelfLink (\ s a -> s{_prSelfLink = a})
+
+-- | The ID of the parent.
+prId :: Lens' ParentReference (Maybe Text)
+prId = lens _prId (\ s a -> s{_prId = a})
+
+instance FromJSON ParentReference where
+        parseJSON
+          = withObject "ParentReference"
+              (\ o ->
+                 ParentReference <$>
+                   (o .:? "parentLink") <*> (o .:? "isRoot") <*>
+                     (o .:? "kind" .!= "drive#parentReference")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON ParentReference where
+        toJSON ParentReference{..}
+          = object
+              (catMaybes
+                 [("parentLink" .=) <$> _prParentLink,
+                  ("isRoot" .=) <$> _prIsRoot,
+                  Just ("kind" .= _prKind),
+                  ("selfLink" .=) <$> _prSelfLink,
+                  ("id" .=) <$> _prId])
+
+-- | The context of the file which is being commented on.
+--
+-- /See:/ 'commentContext' smart constructor.
+data CommentContext = CommentContext
+    { _ccValue :: !(Maybe Text)
+    , _ccType  :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CommentContext' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ccValue'
+--
+-- * 'ccType'
+commentContext
+    :: CommentContext
+commentContext =
+    CommentContext
+    { _ccValue = Nothing
+    , _ccType = Nothing
+    }
+
+-- | Data representation of the segment of the file being commented on. In
+-- the case of a text file for example, this would be the actual text that
+-- the comment is about.
+ccValue :: Lens' CommentContext (Maybe Text)
+ccValue = lens _ccValue (\ s a -> s{_ccValue = a})
+
+-- | The MIME type of the context snippet.
+ccType :: Lens' CommentContext (Maybe Text)
+ccType = lens _ccType (\ s a -> s{_ccType = a})
+
+instance FromJSON CommentContext where
+        parseJSON
+          = withObject "CommentContext"
+              (\ o ->
+                 CommentContext <$>
+                   (o .:? "value") <*> (o .:? "type"))
+
+instance ToJSON CommentContext where
+        toJSON CommentContext{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _ccValue, ("type" .=) <$> _ccType])
+
+-- | Links for exporting Google Docs to specific formats.
+--
+-- /See:/ 'revisionExportLinks' smart constructor.
+data RevisionExportLinks =
+    RevisionExportLinks
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RevisionExportLinks' with the minimum fields required to make a request.
+--
+revisionExportLinks
+    :: RevisionExportLinks
+revisionExportLinks = RevisionExportLinks
+
+instance FromJSON RevisionExportLinks where
+        parseJSON
+          = withObject "RevisionExportLinks"
+              (\ o -> pure RevisionExportLinks)
+
+instance ToJSON RevisionExportLinks where
+        toJSON = const (Object mempty)
+
+-- | A key-value pair attached to a file that is either public or private to
+-- an application. The following limits apply to file properties: - Maximum
+-- of 100 properties total per file - Maximum of 30 private properties per
+-- app - Maximum of 30 public properties - Maximum of 124 bytes size limit
+-- on (key + value) string in UTF-8 encoding for a single property.
+--
+-- /See:/ 'property' smart constructor.
+data Property = Property
+    { _ppEtag       :: !(Maybe Text)
+    , _ppKind       :: !Text
+    , _ppValue      :: !(Maybe Text)
+    , _ppVisibility :: !(Maybe Text)
+    , _ppSelfLink   :: !(Maybe Text)
+    , _ppKey        :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Property' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ppEtag'
+--
+-- * 'ppKind'
+--
+-- * 'ppValue'
+--
+-- * 'ppVisibility'
+--
+-- * 'ppSelfLink'
+--
+-- * 'ppKey'
+property
+    :: Property
+property =
+    Property
+    { _ppEtag = Nothing
+    , _ppKind = "drive#property"
+    , _ppValue = Nothing
+    , _ppVisibility = Nothing
+    , _ppSelfLink = Nothing
+    , _ppKey = Nothing
+    }
+
+-- | ETag of the property.
+ppEtag :: Lens' Property (Maybe Text)
+ppEtag = lens _ppEtag (\ s a -> s{_ppEtag = a})
+
+-- | This is always drive#property.
+ppKind :: Lens' Property Text
+ppKind = lens _ppKind (\ s a -> s{_ppKind = a})
+
+-- | The value of this property.
+ppValue :: Lens' Property (Maybe Text)
+ppValue = lens _ppValue (\ s a -> s{_ppValue = a})
+
+-- | The visibility of this property.
+ppVisibility :: Lens' Property (Maybe Text)
+ppVisibility
+  = lens _ppVisibility (\ s a -> s{_ppVisibility = a})
+
+-- | The link back to this property.
+ppSelfLink :: Lens' Property (Maybe Text)
+ppSelfLink
+  = lens _ppSelfLink (\ s a -> s{_ppSelfLink = a})
+
+-- | The key of this property.
+ppKey :: Lens' Property (Maybe Text)
+ppKey = lens _ppKey (\ s a -> s{_ppKey = a})
+
+instance FromJSON Property where
+        parseJSON
+          = withObject "Property"
+              (\ o ->
+                 Property <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!= "drive#property")
+                     <*> (o .:? "value")
+                     <*> (o .:? "visibility")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "key"))
+
+instance ToJSON Property where
+        toJSON Property{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _ppEtag, Just ("kind" .= _ppKind),
+                  ("value" .=) <$> _ppValue,
+                  ("visibility" .=) <$> _ppVisibility,
+                  ("selfLink" .=) <$> _ppSelfLink,
+                  ("key" .=) <$> _ppKey])
+
+--
+-- /See:/ 'aboutItemMaxUploadSizes' smart constructor.
+data AboutItemMaxUploadSizes = AboutItemMaxUploadSizes
+    { _aimusSize :: !(Maybe Int64)
+    , _aimusType :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AboutItemMaxUploadSizes' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aimusSize'
+--
+-- * 'aimusType'
+aboutItemMaxUploadSizes
+    :: AboutItemMaxUploadSizes
+aboutItemMaxUploadSizes =
+    AboutItemMaxUploadSizes
+    { _aimusSize = Nothing
+    , _aimusType = Nothing
+    }
+
+-- | The max upload size for this type.
+aimusSize :: Lens' AboutItemMaxUploadSizes (Maybe Int64)
+aimusSize
+  = lens _aimusSize (\ s a -> s{_aimusSize = a})
+
+-- | The file type.
+aimusType :: Lens' AboutItemMaxUploadSizes (Maybe Text)
+aimusType
+  = lens _aimusType (\ s a -> s{_aimusType = a})
+
+instance FromJSON AboutItemMaxUploadSizes where
+        parseJSON
+          = withObject "AboutItemMaxUploadSizes"
+              (\ o ->
+                 AboutItemMaxUploadSizes <$>
+                   (o .:? "size") <*> (o .:? "type"))
+
+instance ToJSON AboutItemMaxUploadSizes where
+        toJSON AboutItemMaxUploadSizes{..}
+          = object
+              (catMaybes
+                 [("size" .=) <$> _aimusSize,
+                  ("type" .=) <$> _aimusType])
+
+--
+-- /See:/ 'aboutItemQuotaBytesByService' smart constructor.
+data AboutItemQuotaBytesByService = AboutItemQuotaBytesByService
+    { _aiqbbsBytesUsed   :: !(Maybe Int64)
+    , _aiqbbsServiceName :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AboutItemQuotaBytesByService' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aiqbbsBytesUsed'
+--
+-- * 'aiqbbsServiceName'
+aboutItemQuotaBytesByService
+    :: AboutItemQuotaBytesByService
+aboutItemQuotaBytesByService =
+    AboutItemQuotaBytesByService
+    { _aiqbbsBytesUsed = Nothing
+    , _aiqbbsServiceName = Nothing
+    }
+
+-- | The storage quota bytes used by the service.
+aiqbbsBytesUsed :: Lens' AboutItemQuotaBytesByService (Maybe Int64)
+aiqbbsBytesUsed
+  = lens _aiqbbsBytesUsed
+      (\ s a -> s{_aiqbbsBytesUsed = a})
+
+-- | The service\'s name, e.g. DRIVE, GMAIL, or PHOTOS.
+aiqbbsServiceName :: Lens' AboutItemQuotaBytesByService (Maybe Text)
+aiqbbsServiceName
+  = lens _aiqbbsServiceName
+      (\ s a -> s{_aiqbbsServiceName = a})
+
+instance FromJSON AboutItemQuotaBytesByService where
+        parseJSON
+          = withObject "AboutItemQuotaBytesByService"
+              (\ o ->
+                 AboutItemQuotaBytesByService <$>
+                   (o .:? "bytesUsed") <*> (o .:? "serviceName"))
+
+instance ToJSON AboutItemQuotaBytesByService where
+        toJSON AboutItemQuotaBytesByService{..}
+          = object
+              (catMaybes
+                 [("bytesUsed" .=) <$> _aiqbbsBytesUsed,
+                  ("serviceName" .=) <$> _aiqbbsServiceName])
+
+-- | A collection of properties, key-value pairs that are either public or
+-- private to an application.
+--
+-- /See:/ 'propertyList' smart constructor.
+data PropertyList = PropertyList
+    { _proEtag     :: !(Maybe Text)
+    , _proKind     :: !Text
+    , _proItems    :: !(Maybe [Maybe Property])
+    , _proSelfLink :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PropertyList' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'proEtag'
+--
+-- * 'proKind'
+--
+-- * 'proItems'
+--
+-- * 'proSelfLink'
+propertyList
+    :: PropertyList
+propertyList =
+    PropertyList
+    { _proEtag = Nothing
+    , _proKind = "drive#propertyList"
+    , _proItems = Nothing
+    , _proSelfLink = Nothing
+    }
+
+-- | The ETag of the list.
+proEtag :: Lens' PropertyList (Maybe Text)
+proEtag = lens _proEtag (\ s a -> s{_proEtag = a})
+
+-- | This is always drive#propertyList.
+proKind :: Lens' PropertyList Text
+proKind = lens _proKind (\ s a -> s{_proKind = a})
+
+-- | The list of properties.
+proItems :: Lens' PropertyList [Maybe Property]
+proItems
+  = lens _proItems (\ s a -> s{_proItems = a}) .
+      _Default
+      . _Coerce
+
+-- | The link back to this list.
+proSelfLink :: Lens' PropertyList (Maybe Text)
+proSelfLink
+  = lens _proSelfLink (\ s a -> s{_proSelfLink = a})
+
+instance FromJSON PropertyList where
+        parseJSON
+          = withObject "PropertyList"
+              (\ o ->
+                 PropertyList <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!= "drive#propertyList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink"))
+
+instance ToJSON PropertyList where
+        toJSON PropertyList{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _proEtag, Just ("kind" .= _proKind),
+                  ("items" .=) <$> _proItems,
+                  ("selfLink" .=) <$> _proSelfLink])
+
+--
+-- /See:/ 'aboutItemAdditionalRoleInfo' smart constructor.
+data AboutItemAdditionalRoleInfo = AboutItemAdditionalRoleInfo
+    { _aiariRoleSets :: !(Maybe [AboutItemRoleSetsItemAdditionalRoleInfo])
+    , _aiariType     :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AboutItemAdditionalRoleInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aiariRoleSets'
+--
+-- * 'aiariType'
+aboutItemAdditionalRoleInfo
+    :: AboutItemAdditionalRoleInfo
+aboutItemAdditionalRoleInfo =
+    AboutItemAdditionalRoleInfo
+    { _aiariRoleSets = Nothing
+    , _aiariType = Nothing
+    }
+
+-- | The supported additional roles per primary role.
+aiariRoleSets :: Lens' AboutItemAdditionalRoleInfo [AboutItemRoleSetsItemAdditionalRoleInfo]
+aiariRoleSets
+  = lens _aiariRoleSets
+      (\ s a -> s{_aiariRoleSets = a})
+      . _Default
+      . _Coerce
+
+-- | The content type that this additional role info applies to.
+aiariType :: Lens' AboutItemAdditionalRoleInfo (Maybe Text)
+aiariType
+  = lens _aiariType (\ s a -> s{_aiariType = a})
+
+instance FromJSON AboutItemAdditionalRoleInfo where
+        parseJSON
+          = withObject "AboutItemAdditionalRoleInfo"
+              (\ o ->
+                 AboutItemAdditionalRoleInfo <$>
+                   (o .:? "roleSets" .!= mempty) <*> (o .:? "type"))
+
+instance ToJSON AboutItemAdditionalRoleInfo where
+        toJSON AboutItemAdditionalRoleInfo{..}
+          = object
+              (catMaybes
+                 [("roleSets" .=) <$> _aiariRoleSets,
+                  ("type" .=) <$> _aiariType])
+
+-- | A list of children of a file.
+--
+-- /See:/ 'childList' smart constructor.
+data ChildList = ChildList
+    { _chiEtag          :: !(Maybe Text)
+    , _chiNextPageToken :: !(Maybe Text)
+    , _chiNextLink      :: !(Maybe Text)
+    , _chiKind          :: !Text
+    , _chiItems         :: !(Maybe [Maybe ChildReference])
+    , _chiSelfLink      :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ChildList' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'chiEtag'
+--
+-- * 'chiNextPageToken'
+--
+-- * 'chiNextLink'
+--
+-- * 'chiKind'
+--
+-- * 'chiItems'
+--
+-- * 'chiSelfLink'
+childList
+    :: ChildList
+childList =
+    ChildList
+    { _chiEtag = Nothing
+    , _chiNextPageToken = Nothing
+    , _chiNextLink = Nothing
+    , _chiKind = "drive#childList"
+    , _chiItems = Nothing
+    , _chiSelfLink = Nothing
+    }
+
+-- | The ETag of the list.
+chiEtag :: Lens' ChildList (Maybe Text)
+chiEtag = lens _chiEtag (\ s a -> s{_chiEtag = a})
+
+-- | The page token for the next page of children.
+chiNextPageToken :: Lens' ChildList (Maybe Text)
+chiNextPageToken
+  = lens _chiNextPageToken
+      (\ s a -> s{_chiNextPageToken = a})
+
+-- | A link to the next page of children.
+chiNextLink :: Lens' ChildList (Maybe Text)
+chiNextLink
+  = lens _chiNextLink (\ s a -> s{_chiNextLink = a})
+
+-- | This is always drive#childList.
+chiKind :: Lens' ChildList Text
+chiKind = lens _chiKind (\ s a -> s{_chiKind = a})
+
+-- | The actual list of children.
+chiItems :: Lens' ChildList [Maybe ChildReference]
+chiItems
+  = lens _chiItems (\ s a -> s{_chiItems = a}) .
+      _Default
+      . _Coerce
+
+-- | A link back to this list.
+chiSelfLink :: Lens' ChildList (Maybe Text)
+chiSelfLink
+  = lens _chiSelfLink (\ s a -> s{_chiSelfLink = a})
+
+instance FromJSON ChildList where
+        parseJSON
+          = withObject "ChildList"
+              (\ o ->
+                 ChildList <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "nextLink")
+                     <*> (o .:? "kind" .!= "drive#childList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink"))
+
+instance ToJSON ChildList where
+        toJSON ChildList{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _chiEtag,
+                  ("nextPageToken" .=) <$> _chiNextPageToken,
+                  ("nextLink" .=) <$> _chiNextLink,
+                  Just ("kind" .= _chiKind),
+                  ("items" .=) <$> _chiItems,
+                  ("selfLink" .=) <$> _chiSelfLink])
+
+-- | A list of third-party applications which the user has installed or given
+-- access to Google Drive.
+--
+-- /See:/ 'appList' smart constructor.
+data AppList = AppList
+    { _alDefaultAppIds :: !(Maybe [Text])
+    , _alEtag          :: !(Maybe Text)
+    , _alKind          :: !Text
+    , _alItems         :: !(Maybe [Maybe App])
+    , _alSelfLink      :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AppList' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'alDefaultAppIds'
+--
+-- * 'alEtag'
+--
+-- * 'alKind'
+--
+-- * 'alItems'
+--
+-- * 'alSelfLink'
+appList
+    :: AppList
+appList =
+    AppList
+    { _alDefaultAppIds = Nothing
+    , _alEtag = Nothing
+    , _alKind = "drive#appList"
+    , _alItems = Nothing
+    , _alSelfLink = Nothing
+    }
+
+-- | List of app IDs that the user has specified to use by default. The list
+-- is in reverse-priority order (lowest to highest).
+alDefaultAppIds :: Lens' AppList [Text]
+alDefaultAppIds
+  = lens _alDefaultAppIds
+      (\ s a -> s{_alDefaultAppIds = a})
+      . _Default
+      . _Coerce
+
+-- | The ETag of the list.
+alEtag :: Lens' AppList (Maybe Text)
+alEtag = lens _alEtag (\ s a -> s{_alEtag = a})
+
+-- | This is always drive#appList.
+alKind :: Lens' AppList Text
+alKind = lens _alKind (\ s a -> s{_alKind = a})
+
+-- | The actual list of apps.
+alItems :: Lens' AppList [Maybe App]
+alItems
+  = lens _alItems (\ s a -> s{_alItems = a}) . _Default
+      . _Coerce
+
+-- | A link back to this list.
+alSelfLink :: Lens' AppList (Maybe Text)
+alSelfLink
+  = lens _alSelfLink (\ s a -> s{_alSelfLink = a})
+
+instance FromJSON AppList where
+        parseJSON
+          = withObject "AppList"
+              (\ o ->
+                 AppList <$>
+                   (o .:? "defaultAppIds" .!= mempty) <*> (o .:? "etag")
+                     <*> (o .:? "kind" .!= "drive#appList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink"))
+
+instance ToJSON AppList where
+        toJSON AppList{..}
+          = object
+              (catMaybes
+                 [("defaultAppIds" .=) <$> _alDefaultAppIds,
+                  ("etag" .=) <$> _alEtag, Just ("kind" .= _alKind),
+                  ("items" .=) <$> _alItems,
+                  ("selfLink" .=) <$> _alSelfLink])
 
 -- | A JSON representation of a list of replies to a comment on a file in
 -- Google Drive.
@@ -2213,6 +3087,306 @@ instance ToJSON CommentReplyList where
                   Just ("kind" .= _crlKind),
                   ("items" .=) <$> _crlItems,
                   ("selfLink" .=) <$> _crlSelfLink])
+
+-- | An notification channel used to watch for resource changes.
+--
+-- /See:/ 'channel' smart constructor.
+data Channel = Channel
+    { _chahResourceUri :: !(Maybe Text)
+    , _chahResourceId  :: !(Maybe Text)
+    , _chahKind        :: !Text
+    , _chahExpiration  :: !(Maybe Int64)
+    , _chahToken       :: !(Maybe Text)
+    , _chahAddress     :: !(Maybe Text)
+    , _chahPayload     :: !(Maybe Bool)
+    , _chahParams      :: !(Maybe ChannelParams)
+    , _chahId          :: !(Maybe Text)
+    , _chahType        :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Channel' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'chahResourceUri'
+--
+-- * 'chahResourceId'
+--
+-- * 'chahKind'
+--
+-- * 'chahExpiration'
+--
+-- * 'chahToken'
+--
+-- * 'chahAddress'
+--
+-- * 'chahPayload'
+--
+-- * 'chahParams'
+--
+-- * 'chahId'
+--
+-- * 'chahType'
+channel
+    :: Channel
+channel =
+    Channel
+    { _chahResourceUri = Nothing
+    , _chahResourceId = Nothing
+    , _chahKind = "api#channel"
+    , _chahExpiration = Nothing
+    , _chahToken = Nothing
+    , _chahAddress = Nothing
+    , _chahPayload = Nothing
+    , _chahParams = Nothing
+    , _chahId = Nothing
+    , _chahType = Nothing
+    }
+
+-- | A version-specific identifier for the watched resource.
+chahResourceUri :: Lens' Channel (Maybe Text)
+chahResourceUri
+  = lens _chahResourceUri
+      (\ s a -> s{_chahResourceUri = a})
+
+-- | An opaque ID that identifies the resource being watched on this channel.
+-- Stable across different API versions.
+chahResourceId :: Lens' Channel (Maybe Text)
+chahResourceId
+  = lens _chahResourceId
+      (\ s a -> s{_chahResourceId = a})
+
+-- | Identifies this as a notification channel used to watch for changes to a
+-- resource. Value: the fixed string \"api#channel\".
+chahKind :: Lens' Channel Text
+chahKind = lens _chahKind (\ s a -> s{_chahKind = a})
+
+-- | Date and time of notification channel expiration, expressed as a Unix
+-- timestamp, in milliseconds. Optional.
+chahExpiration :: Lens' Channel (Maybe Int64)
+chahExpiration
+  = lens _chahExpiration
+      (\ s a -> s{_chahExpiration = a})
+
+-- | An arbitrary string delivered to the target address with each
+-- notification delivered over this channel. Optional.
+chahToken :: Lens' Channel (Maybe Text)
+chahToken
+  = lens _chahToken (\ s a -> s{_chahToken = a})
+
+-- | The address where notifications are delivered for this channel.
+chahAddress :: Lens' Channel (Maybe Text)
+chahAddress
+  = lens _chahAddress (\ s a -> s{_chahAddress = a})
+
+-- | A Boolean value to indicate whether payload is wanted. Optional.
+chahPayload :: Lens' Channel (Maybe Bool)
+chahPayload
+  = lens _chahPayload (\ s a -> s{_chahPayload = a})
+
+-- | Additional parameters controlling delivery channel behavior. Optional.
+chahParams :: Lens' Channel (Maybe ChannelParams)
+chahParams
+  = lens _chahParams (\ s a -> s{_chahParams = a})
+
+-- | A UUID or similar unique string that identifies this channel.
+chahId :: Lens' Channel (Maybe Text)
+chahId = lens _chahId (\ s a -> s{_chahId = a})
+
+-- | The type of delivery mechanism used for this channel.
+chahType :: Lens' Channel (Maybe Text)
+chahType = lens _chahType (\ s a -> s{_chahType = a})
+
+instance FromJSON Channel where
+        parseJSON
+          = withObject "Channel"
+              (\ o ->
+                 Channel <$>
+                   (o .:? "resourceUri") <*> (o .:? "resourceId") <*>
+                     (o .:? "kind" .!= "api#channel")
+                     <*> (o .:? "expiration")
+                     <*> (o .:? "token")
+                     <*> (o .:? "address")
+                     <*> (o .:? "payload")
+                     <*> (o .:? "params")
+                     <*> (o .:? "id")
+                     <*> (o .:? "type"))
+
+instance ToJSON Channel where
+        toJSON Channel{..}
+          = object
+              (catMaybes
+                 [("resourceUri" .=) <$> _chahResourceUri,
+                  ("resourceId" .=) <$> _chahResourceId,
+                  Just ("kind" .= _chahKind),
+                  ("expiration" .=) <$> _chahExpiration,
+                  ("token" .=) <$> _chahToken,
+                  ("address" .=) <$> _chahAddress,
+                  ("payload" .=) <$> _chahPayload,
+                  ("params" .=) <$> _chahParams, ("id" .=) <$> _chahId,
+                  ("type" .=) <$> _chahType])
+
+-- | An ID for a user or group as seen in Permission items.
+--
+-- /See:/ 'permissionId' smart constructor.
+data PermissionId = PermissionId
+    { _piKind :: !Text
+    , _piId   :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PermissionId' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'piKind'
+--
+-- * 'piId'
+permissionId
+    :: PermissionId
+permissionId =
+    PermissionId
+    { _piKind = "drive#permissionId"
+    , _piId = Nothing
+    }
+
+-- | This is always drive#permissionId.
+piKind :: Lens' PermissionId Text
+piKind = lens _piKind (\ s a -> s{_piKind = a})
+
+-- | The permission ID.
+piId :: Lens' PermissionId (Maybe Text)
+piId = lens _piId (\ s a -> s{_piId = a})
+
+instance FromJSON PermissionId where
+        parseJSON
+          = withObject "PermissionId"
+              (\ o ->
+                 PermissionId <$>
+                   (o .:? "kind" .!= "drive#permissionId") <*>
+                     (o .:? "id"))
+
+instance ToJSON PermissionId where
+        toJSON PermissionId{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _piKind), ("id" .=) <$> _piId])
+
+--
+-- /See:/ 'aboutItemImportFormats' smart constructor.
+data AboutItemImportFormats = AboutItemImportFormats
+    { _aiifTargets :: !(Maybe [Text])
+    , _aiifSource  :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AboutItemImportFormats' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aiifTargets'
+--
+-- * 'aiifSource'
+aboutItemImportFormats
+    :: AboutItemImportFormats
+aboutItemImportFormats =
+    AboutItemImportFormats
+    { _aiifTargets = Nothing
+    , _aiifSource = Nothing
+    }
+
+-- | The possible content types to convert to.
+aiifTargets :: Lens' AboutItemImportFormats [Text]
+aiifTargets
+  = lens _aiifTargets (\ s a -> s{_aiifTargets = a}) .
+      _Default
+      . _Coerce
+
+-- | The imported file\'s content type to convert from.
+aiifSource :: Lens' AboutItemImportFormats (Maybe Text)
+aiifSource
+  = lens _aiifSource (\ s a -> s{_aiifSource = a})
+
+instance FromJSON AboutItemImportFormats where
+        parseJSON
+          = withObject "AboutItemImportFormats"
+              (\ o ->
+                 AboutItemImportFormats <$>
+                   (o .:? "targets" .!= mempty) <*> (o .:? "source"))
+
+instance ToJSON AboutItemImportFormats where
+        toJSON AboutItemImportFormats{..}
+          = object
+              (catMaybes
+                 [("targets" .=) <$> _aiifTargets,
+                  ("source" .=) <$> _aiifSource])
+
+-- | A list of a file\'s parents.
+--
+-- /See:/ 'parentList' smart constructor.
+data ParentList = ParentList
+    { _parEtag     :: !(Maybe Text)
+    , _parKind     :: !Text
+    , _parItems    :: !(Maybe [Maybe ParentReference])
+    , _parSelfLink :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ParentList' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'parEtag'
+--
+-- * 'parKind'
+--
+-- * 'parItems'
+--
+-- * 'parSelfLink'
+parentList
+    :: ParentList
+parentList =
+    ParentList
+    { _parEtag = Nothing
+    , _parKind = "drive#parentList"
+    , _parItems = Nothing
+    , _parSelfLink = Nothing
+    }
+
+-- | The ETag of the list.
+parEtag :: Lens' ParentList (Maybe Text)
+parEtag = lens _parEtag (\ s a -> s{_parEtag = a})
+
+-- | This is always drive#parentList.
+parKind :: Lens' ParentList Text
+parKind = lens _parKind (\ s a -> s{_parKind = a})
+
+-- | The actual list of parents.
+parItems :: Lens' ParentList [Maybe ParentReference]
+parItems
+  = lens _parItems (\ s a -> s{_parItems = a}) .
+      _Default
+      . _Coerce
+
+-- | A link back to this list.
+parSelfLink :: Lens' ParentList (Maybe Text)
+parSelfLink
+  = lens _parSelfLink (\ s a -> s{_parSelfLink = a})
+
+instance FromJSON ParentList where
+        parseJSON
+          = withObject "ParentList"
+              (\ o ->
+                 ParentList <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!= "drive#parentList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink"))
+
+instance ToJSON ParentList where
+        toJSON ParentList{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _parEtag, Just ("kind" .= _parKind),
+                  ("items" .=) <$> _parItems,
+                  ("selfLink" .=) <$> _parSelfLink])
 
 -- | The metadata for a file.
 --
@@ -2931,1678 +4105,6 @@ instance ToJSON File where
                   ("properties" .=) <$> _fProperties,
                   ("indexableText" .=) <$> _fIndexableText])
 
--- | Links for exporting Google Docs to specific formats.
---
--- /See:/ 'fileExportLinks' smart constructor.
-data FileExportLinks =
-    FileExportLinks
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'FileExportLinks' with the minimum fields required to make a request.
---
-fileExportLinks
-    :: FileExportLinks
-fileExportLinks = FileExportLinks
-
-instance FromJSON FileExportLinks where
-        parseJSON
-          = withObject "FileExportLinks"
-              (\ o -> pure FileExportLinks)
-
-instance ToJSON FileExportLinks where
-        toJSON = const (Object mempty)
-
--- | Metadata about image media. This will only be present for image types,
--- and its contents will depend on what can be parsed from the image
--- content.
---
--- /See:/ 'fileImageMediaMetadata' smart constructor.
-data FileImageMediaMetadata = FileImageMediaMetadata
-    { _fimmRotation         :: !(Maybe Int32)
-    , _fimmHeight           :: !(Maybe Int32)
-    , _fimmSubjectDistance  :: !(Maybe Int32)
-    , _fimmMaxApertureValue :: !(Maybe Float)
-    , _fimmIsoSpeed         :: !(Maybe Int32)
-    , _fimmLocation         :: !(Maybe FileLocationImageMediaMetadata)
-    , _fimmAperture         :: !(Maybe Float)
-    , _fimmFocalLength      :: !(Maybe Float)
-    , _fimmCameraMake       :: !(Maybe Text)
-    , _fimmWidth            :: !(Maybe Int32)
-    , _fimmExposureTime     :: !(Maybe Float)
-    , _fimmCameraModel      :: !(Maybe Text)
-    , _fimmWhiteBalance     :: !(Maybe Text)
-    , _fimmDate             :: !(Maybe Text)
-    , _fimmLens             :: !(Maybe Text)
-    , _fimmFlashUsed        :: !(Maybe Bool)
-    , _fimmExposureBias     :: !(Maybe Float)
-    , _fimmMeteringMode     :: !(Maybe Text)
-    , _fimmExposureMode     :: !(Maybe Text)
-    , _fimmSensor           :: !(Maybe Text)
-    , _fimmColorSpace       :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'FileImageMediaMetadata' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'fimmRotation'
---
--- * 'fimmHeight'
---
--- * 'fimmSubjectDistance'
---
--- * 'fimmMaxApertureValue'
---
--- * 'fimmIsoSpeed'
---
--- * 'fimmLocation'
---
--- * 'fimmAperture'
---
--- * 'fimmFocalLength'
---
--- * 'fimmCameraMake'
---
--- * 'fimmWidth'
---
--- * 'fimmExposureTime'
---
--- * 'fimmCameraModel'
---
--- * 'fimmWhiteBalance'
---
--- * 'fimmDate'
---
--- * 'fimmLens'
---
--- * 'fimmFlashUsed'
---
--- * 'fimmExposureBias'
---
--- * 'fimmMeteringMode'
---
--- * 'fimmExposureMode'
---
--- * 'fimmSensor'
---
--- * 'fimmColorSpace'
-fileImageMediaMetadata
-    :: FileImageMediaMetadata
-fileImageMediaMetadata =
-    FileImageMediaMetadata
-    { _fimmRotation = Nothing
-    , _fimmHeight = Nothing
-    , _fimmSubjectDistance = Nothing
-    , _fimmMaxApertureValue = Nothing
-    , _fimmIsoSpeed = Nothing
-    , _fimmLocation = Nothing
-    , _fimmAperture = Nothing
-    , _fimmFocalLength = Nothing
-    , _fimmCameraMake = Nothing
-    , _fimmWidth = Nothing
-    , _fimmExposureTime = Nothing
-    , _fimmCameraModel = Nothing
-    , _fimmWhiteBalance = Nothing
-    , _fimmDate = Nothing
-    , _fimmLens = Nothing
-    , _fimmFlashUsed = Nothing
-    , _fimmExposureBias = Nothing
-    , _fimmMeteringMode = Nothing
-    , _fimmExposureMode = Nothing
-    , _fimmSensor = Nothing
-    , _fimmColorSpace = Nothing
-    }
-
--- | The rotation in clockwise degrees from the image\'s original
--- orientation.
-fimmRotation :: Lens' FileImageMediaMetadata (Maybe Int32)
-fimmRotation
-  = lens _fimmRotation (\ s a -> s{_fimmRotation = a})
-
--- | The height of the image in pixels.
-fimmHeight :: Lens' FileImageMediaMetadata (Maybe Int32)
-fimmHeight
-  = lens _fimmHeight (\ s a -> s{_fimmHeight = a})
-
--- | The distance to the subject of the photo, in meters.
-fimmSubjectDistance :: Lens' FileImageMediaMetadata (Maybe Int32)
-fimmSubjectDistance
-  = lens _fimmSubjectDistance
-      (\ s a -> s{_fimmSubjectDistance = a})
-
--- | The smallest f-number of the lens at the focal length used to create the
--- photo (APEX value).
-fimmMaxApertureValue :: Lens' FileImageMediaMetadata (Maybe Float)
-fimmMaxApertureValue
-  = lens _fimmMaxApertureValue
-      (\ s a -> s{_fimmMaxApertureValue = a})
-
--- | The ISO speed used to create the photo.
-fimmIsoSpeed :: Lens' FileImageMediaMetadata (Maybe Int32)
-fimmIsoSpeed
-  = lens _fimmIsoSpeed (\ s a -> s{_fimmIsoSpeed = a})
-
--- | Geographic location information stored in the image.
-fimmLocation :: Lens' FileImageMediaMetadata (Maybe FileLocationImageMediaMetadata)
-fimmLocation
-  = lens _fimmLocation (\ s a -> s{_fimmLocation = a})
-
--- | The aperture used to create the photo (f-number).
-fimmAperture :: Lens' FileImageMediaMetadata (Maybe Float)
-fimmAperture
-  = lens _fimmAperture (\ s a -> s{_fimmAperture = a})
-
--- | The focal length used to create the photo, in millimeters.
-fimmFocalLength :: Lens' FileImageMediaMetadata (Maybe Float)
-fimmFocalLength
-  = lens _fimmFocalLength
-      (\ s a -> s{_fimmFocalLength = a})
-
--- | The make of the camera used to create the photo.
-fimmCameraMake :: Lens' FileImageMediaMetadata (Maybe Text)
-fimmCameraMake
-  = lens _fimmCameraMake
-      (\ s a -> s{_fimmCameraMake = a})
-
--- | The width of the image in pixels.
-fimmWidth :: Lens' FileImageMediaMetadata (Maybe Int32)
-fimmWidth
-  = lens _fimmWidth (\ s a -> s{_fimmWidth = a})
-
--- | The length of the exposure, in seconds.
-fimmExposureTime :: Lens' FileImageMediaMetadata (Maybe Float)
-fimmExposureTime
-  = lens _fimmExposureTime
-      (\ s a -> s{_fimmExposureTime = a})
-
--- | The model of the camera used to create the photo.
-fimmCameraModel :: Lens' FileImageMediaMetadata (Maybe Text)
-fimmCameraModel
-  = lens _fimmCameraModel
-      (\ s a -> s{_fimmCameraModel = a})
-
--- | The white balance mode used to create the photo.
-fimmWhiteBalance :: Lens' FileImageMediaMetadata (Maybe Text)
-fimmWhiteBalance
-  = lens _fimmWhiteBalance
-      (\ s a -> s{_fimmWhiteBalance = a})
-
--- | The date and time the photo was taken (EXIF format timestamp).
-fimmDate :: Lens' FileImageMediaMetadata (Maybe Text)
-fimmDate = lens _fimmDate (\ s a -> s{_fimmDate = a})
-
--- | The lens used to create the photo.
-fimmLens :: Lens' FileImageMediaMetadata (Maybe Text)
-fimmLens = lens _fimmLens (\ s a -> s{_fimmLens = a})
-
--- | Whether a flash was used to create the photo.
-fimmFlashUsed :: Lens' FileImageMediaMetadata (Maybe Bool)
-fimmFlashUsed
-  = lens _fimmFlashUsed
-      (\ s a -> s{_fimmFlashUsed = a})
-
--- | The exposure bias of the photo (APEX value).
-fimmExposureBias :: Lens' FileImageMediaMetadata (Maybe Float)
-fimmExposureBias
-  = lens _fimmExposureBias
-      (\ s a -> s{_fimmExposureBias = a})
-
--- | The metering mode used to create the photo.
-fimmMeteringMode :: Lens' FileImageMediaMetadata (Maybe Text)
-fimmMeteringMode
-  = lens _fimmMeteringMode
-      (\ s a -> s{_fimmMeteringMode = a})
-
--- | The exposure mode used to create the photo.
-fimmExposureMode :: Lens' FileImageMediaMetadata (Maybe Text)
-fimmExposureMode
-  = lens _fimmExposureMode
-      (\ s a -> s{_fimmExposureMode = a})
-
--- | The type of sensor used to create the photo.
-fimmSensor :: Lens' FileImageMediaMetadata (Maybe Text)
-fimmSensor
-  = lens _fimmSensor (\ s a -> s{_fimmSensor = a})
-
--- | The color space of the photo.
-fimmColorSpace :: Lens' FileImageMediaMetadata (Maybe Text)
-fimmColorSpace
-  = lens _fimmColorSpace
-      (\ s a -> s{_fimmColorSpace = a})
-
-instance FromJSON FileImageMediaMetadata where
-        parseJSON
-          = withObject "FileImageMediaMetadata"
-              (\ o ->
-                 FileImageMediaMetadata <$>
-                   (o .:? "rotation") <*> (o .:? "height") <*>
-                     (o .:? "subjectDistance")
-                     <*> (o .:? "maxApertureValue")
-                     <*> (o .:? "isoSpeed")
-                     <*> (o .:? "location")
-                     <*> (o .:? "aperture")
-                     <*> (o .:? "focalLength")
-                     <*> (o .:? "cameraMake")
-                     <*> (o .:? "width")
-                     <*> (o .:? "exposureTime")
-                     <*> (o .:? "cameraModel")
-                     <*> (o .:? "whiteBalance")
-                     <*> (o .:? "date")
-                     <*> (o .:? "lens")
-                     <*> (o .:? "flashUsed")
-                     <*> (o .:? "exposureBias")
-                     <*> (o .:? "meteringMode")
-                     <*> (o .:? "exposureMode")
-                     <*> (o .:? "sensor")
-                     <*> (o .:? "colorSpace"))
-
-instance ToJSON FileImageMediaMetadata where
-        toJSON FileImageMediaMetadata{..}
-          = object
-              (catMaybes
-                 [("rotation" .=) <$> _fimmRotation,
-                  ("height" .=) <$> _fimmHeight,
-                  ("subjectDistance" .=) <$> _fimmSubjectDistance,
-                  ("maxApertureValue" .=) <$> _fimmMaxApertureValue,
-                  ("isoSpeed" .=) <$> _fimmIsoSpeed,
-                  ("location" .=) <$> _fimmLocation,
-                  ("aperture" .=) <$> _fimmAperture,
-                  ("focalLength" .=) <$> _fimmFocalLength,
-                  ("cameraMake" .=) <$> _fimmCameraMake,
-                  ("width" .=) <$> _fimmWidth,
-                  ("exposureTime" .=) <$> _fimmExposureTime,
-                  ("cameraModel" .=) <$> _fimmCameraModel,
-                  ("whiteBalance" .=) <$> _fimmWhiteBalance,
-                  ("date" .=) <$> _fimmDate, ("lens" .=) <$> _fimmLens,
-                  ("flashUsed" .=) <$> _fimmFlashUsed,
-                  ("exposureBias" .=) <$> _fimmExposureBias,
-                  ("meteringMode" .=) <$> _fimmMeteringMode,
-                  ("exposureMode" .=) <$> _fimmExposureMode,
-                  ("sensor" .=) <$> _fimmSensor,
-                  ("colorSpace" .=) <$> _fimmColorSpace])
-
--- | Indexable text attributes for the file (can only be written)
---
--- /See:/ 'fileIndexableText' smart constructor.
-newtype FileIndexableText = FileIndexableText
-    { _fitText :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'FileIndexableText' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'fitText'
-fileIndexableText
-    :: FileIndexableText
-fileIndexableText =
-    FileIndexableText
-    { _fitText = Nothing
-    }
-
--- | The text to be indexed for this file.
-fitText :: Lens' FileIndexableText (Maybe Text)
-fitText = lens _fitText (\ s a -> s{_fitText = a})
-
-instance FromJSON FileIndexableText where
-        parseJSON
-          = withObject "FileIndexableText"
-              (\ o -> FileIndexableText <$> (o .:? "text"))
-
-instance ToJSON FileIndexableText where
-        toJSON FileIndexableText{..}
-          = object (catMaybes [("text" .=) <$> _fitText])
-
--- | A group of labels for the file.
---
--- /See:/ 'fileLabels' smart constructor.
-data FileLabels = FileLabels
-    { _flViewed     :: !(Maybe Bool)
-    , _flTrashed    :: !(Maybe Bool)
-    , _flStarred    :: !(Maybe Bool)
-    , _flHidden     :: !(Maybe Bool)
-    , _flRestricted :: !(Maybe Bool)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'FileLabels' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'flViewed'
---
--- * 'flTrashed'
---
--- * 'flStarred'
---
--- * 'flHidden'
---
--- * 'flRestricted'
-fileLabels
-    :: FileLabels
-fileLabels =
-    FileLabels
-    { _flViewed = Nothing
-    , _flTrashed = Nothing
-    , _flStarred = Nothing
-    , _flHidden = Nothing
-    , _flRestricted = Nothing
-    }
-
--- | Whether this file has been viewed by this user.
-flViewed :: Lens' FileLabels (Maybe Bool)
-flViewed = lens _flViewed (\ s a -> s{_flViewed = a})
-
--- | Whether this file has been trashed. This label applies to all users
--- accessing the file; however, only owners are allowed to see and untrash
--- files.
-flTrashed :: Lens' FileLabels (Maybe Bool)
-flTrashed
-  = lens _flTrashed (\ s a -> s{_flTrashed = a})
-
--- | Whether this file is starred by the user.
-flStarred :: Lens' FileLabels (Maybe Bool)
-flStarred
-  = lens _flStarred (\ s a -> s{_flStarred = a})
-
--- | Deprecated.
-flHidden :: Lens' FileLabels (Maybe Bool)
-flHidden = lens _flHidden (\ s a -> s{_flHidden = a})
-
--- | Whether viewers and commenters are prevented from downloading, printing,
--- and copying this file.
-flRestricted :: Lens' FileLabels (Maybe Bool)
-flRestricted
-  = lens _flRestricted (\ s a -> s{_flRestricted = a})
-
-instance FromJSON FileLabels where
-        parseJSON
-          = withObject "FileLabels"
-              (\ o ->
-                 FileLabels <$>
-                   (o .:? "viewed") <*> (o .:? "trashed") <*>
-                     (o .:? "starred")
-                     <*> (o .:? "hidden")
-                     <*> (o .:? "restricted"))
-
-instance ToJSON FileLabels where
-        toJSON FileLabels{..}
-          = object
-              (catMaybes
-                 [("viewed" .=) <$> _flViewed,
-                  ("trashed" .=) <$> _flTrashed,
-                  ("starred" .=) <$> _flStarred,
-                  ("hidden" .=) <$> _flHidden,
-                  ("restricted" .=) <$> _flRestricted])
-
--- | A list of files.
---
--- /See:/ 'fileList' smart constructor.
-data FileList = FileList
-    { _flEtag          :: !(Maybe Text)
-    , _flNextPageToken :: !(Maybe Text)
-    , _flNextLink      :: !(Maybe Text)
-    , _flKind          :: !Text
-    , _flItems         :: !(Maybe [Maybe File])
-    , _flSelfLink      :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'FileList' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'flEtag'
---
--- * 'flNextPageToken'
---
--- * 'flNextLink'
---
--- * 'flKind'
---
--- * 'flItems'
---
--- * 'flSelfLink'
-fileList
-    :: FileList
-fileList =
-    FileList
-    { _flEtag = Nothing
-    , _flNextPageToken = Nothing
-    , _flNextLink = Nothing
-    , _flKind = "drive#fileList"
-    , _flItems = Nothing
-    , _flSelfLink = Nothing
-    }
-
--- | The ETag of the list.
-flEtag :: Lens' FileList (Maybe Text)
-flEtag = lens _flEtag (\ s a -> s{_flEtag = a})
-
--- | The page token for the next page of files.
-flNextPageToken :: Lens' FileList (Maybe Text)
-flNextPageToken
-  = lens _flNextPageToken
-      (\ s a -> s{_flNextPageToken = a})
-
--- | A link to the next page of files.
-flNextLink :: Lens' FileList (Maybe Text)
-flNextLink
-  = lens _flNextLink (\ s a -> s{_flNextLink = a})
-
--- | This is always drive#fileList.
-flKind :: Lens' FileList Text
-flKind = lens _flKind (\ s a -> s{_flKind = a})
-
--- | The actual list of files.
-flItems :: Lens' FileList [Maybe File]
-flItems
-  = lens _flItems (\ s a -> s{_flItems = a}) . _Default
-      . _Coerce
-
--- | A link back to this list.
-flSelfLink :: Lens' FileList (Maybe Text)
-flSelfLink
-  = lens _flSelfLink (\ s a -> s{_flSelfLink = a})
-
-instance FromJSON FileList where
-        parseJSON
-          = withObject "FileList"
-              (\ o ->
-                 FileList <$>
-                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
-                     (o .:? "nextLink")
-                     <*> (o .:? "kind" .!= "drive#fileList")
-                     <*> (o .:? "items" .!= mempty)
-                     <*> (o .:? "selfLink"))
-
-instance ToJSON FileList where
-        toJSON FileList{..}
-          = object
-              (catMaybes
-                 [("etag" .=) <$> _flEtag,
-                  ("nextPageToken" .=) <$> _flNextPageToken,
-                  ("nextLink" .=) <$> _flNextLink,
-                  Just ("kind" .= _flKind), ("items" .=) <$> _flItems,
-                  ("selfLink" .=) <$> _flSelfLink])
-
--- | Geographic location information stored in the image.
---
--- /See:/ 'fileLocationImageMediaMetadata' smart constructor.
-data FileLocationImageMediaMetadata = FileLocationImageMediaMetadata
-    { _flimmLatitude  :: !(Maybe Double)
-    , _flimmAltitude  :: !(Maybe Double)
-    , _flimmLongitude :: !(Maybe Double)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'FileLocationImageMediaMetadata' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'flimmLatitude'
---
--- * 'flimmAltitude'
---
--- * 'flimmLongitude'
-fileLocationImageMediaMetadata
-    :: FileLocationImageMediaMetadata
-fileLocationImageMediaMetadata =
-    FileLocationImageMediaMetadata
-    { _flimmLatitude = Nothing
-    , _flimmAltitude = Nothing
-    , _flimmLongitude = Nothing
-    }
-
--- | The latitude stored in the image.
-flimmLatitude :: Lens' FileLocationImageMediaMetadata (Maybe Double)
-flimmLatitude
-  = lens _flimmLatitude
-      (\ s a -> s{_flimmLatitude = a})
-
--- | The altitude stored in the image.
-flimmAltitude :: Lens' FileLocationImageMediaMetadata (Maybe Double)
-flimmAltitude
-  = lens _flimmAltitude
-      (\ s a -> s{_flimmAltitude = a})
-
--- | The longitude stored in the image.
-flimmLongitude :: Lens' FileLocationImageMediaMetadata (Maybe Double)
-flimmLongitude
-  = lens _flimmLongitude
-      (\ s a -> s{_flimmLongitude = a})
-
-instance FromJSON FileLocationImageMediaMetadata
-         where
-        parseJSON
-          = withObject "FileLocationImageMediaMetadata"
-              (\ o ->
-                 FileLocationImageMediaMetadata <$>
-                   (o .:? "latitude") <*> (o .:? "altitude") <*>
-                     (o .:? "longitude"))
-
-instance ToJSON FileLocationImageMediaMetadata where
-        toJSON FileLocationImageMediaMetadata{..}
-          = object
-              (catMaybes
-                 [("latitude" .=) <$> _flimmLatitude,
-                  ("altitude" .=) <$> _flimmAltitude,
-                  ("longitude" .=) <$> _flimmLongitude])
-
--- | A map of the id of each of the user\'s apps to a link to open this file
--- with that app. Only populated when the drive.apps.readonly scope is
--- used.
---
--- /See:/ 'fileOpenWithLinks' smart constructor.
-data FileOpenWithLinks =
-    FileOpenWithLinks
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'FileOpenWithLinks' with the minimum fields required to make a request.
---
-fileOpenWithLinks
-    :: FileOpenWithLinks
-fileOpenWithLinks = FileOpenWithLinks
-
-instance FromJSON FileOpenWithLinks where
-        parseJSON
-          = withObject "FileOpenWithLinks"
-              (\ o -> pure FileOpenWithLinks)
-
-instance ToJSON FileOpenWithLinks where
-        toJSON = const (Object mempty)
-
--- | Thumbnail for the file. Only accepted on upload and for files that are
--- not already thumbnailed by Google.
---
--- /See:/ 'fileThumbnail' smart constructor.
-data FileThumbnail = FileThumbnail
-    { _ftImage    :: !(Maybe Word8)
-    , _ftMimeType :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'FileThumbnail' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ftImage'
---
--- * 'ftMimeType'
-fileThumbnail
-    :: FileThumbnail
-fileThumbnail =
-    FileThumbnail
-    { _ftImage = Nothing
-    , _ftMimeType = Nothing
-    }
-
--- | The URL-safe Base64 encoded bytes of the thumbnail image. It should
--- conform to RFC 4648 section 5.
-ftImage :: Lens' FileThumbnail (Maybe Word8)
-ftImage = lens _ftImage (\ s a -> s{_ftImage = a})
-
--- | The MIME type of the thumbnail.
-ftMimeType :: Lens' FileThumbnail (Maybe Text)
-ftMimeType
-  = lens _ftMimeType (\ s a -> s{_ftMimeType = a})
-
-instance FromJSON FileThumbnail where
-        parseJSON
-          = withObject "FileThumbnail"
-              (\ o ->
-                 FileThumbnail <$>
-                   (o .:? "image") <*> (o .:? "mimeType"))
-
-instance ToJSON FileThumbnail where
-        toJSON FileThumbnail{..}
-          = object
-              (catMaybes
-                 [("image" .=) <$> _ftImage,
-                  ("mimeType" .=) <$> _ftMimeType])
-
--- | Metadata about video media. This will only be present for video types.
---
--- /See:/ 'fileVideoMediaMetadata' smart constructor.
-data FileVideoMediaMetadata = FileVideoMediaMetadata
-    { _fvmmHeight         :: !(Maybe Int32)
-    , _fvmmWidth          :: !(Maybe Int32)
-    , _fvmmDurationMillis :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'FileVideoMediaMetadata' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'fvmmHeight'
---
--- * 'fvmmWidth'
---
--- * 'fvmmDurationMillis'
-fileVideoMediaMetadata
-    :: FileVideoMediaMetadata
-fileVideoMediaMetadata =
-    FileVideoMediaMetadata
-    { _fvmmHeight = Nothing
-    , _fvmmWidth = Nothing
-    , _fvmmDurationMillis = Nothing
-    }
-
--- | The height of the video in pixels.
-fvmmHeight :: Lens' FileVideoMediaMetadata (Maybe Int32)
-fvmmHeight
-  = lens _fvmmHeight (\ s a -> s{_fvmmHeight = a})
-
--- | The width of the video in pixels.
-fvmmWidth :: Lens' FileVideoMediaMetadata (Maybe Int32)
-fvmmWidth
-  = lens _fvmmWidth (\ s a -> s{_fvmmWidth = a})
-
--- | The duration of the video in milliseconds.
-fvmmDurationMillis :: Lens' FileVideoMediaMetadata (Maybe Int64)
-fvmmDurationMillis
-  = lens _fvmmDurationMillis
-      (\ s a -> s{_fvmmDurationMillis = a})
-
-instance FromJSON FileVideoMediaMetadata where
-        parseJSON
-          = withObject "FileVideoMediaMetadata"
-              (\ o ->
-                 FileVideoMediaMetadata <$>
-                   (o .:? "height") <*> (o .:? "width") <*>
-                     (o .:? "durationMillis"))
-
-instance ToJSON FileVideoMediaMetadata where
-        toJSON FileVideoMediaMetadata{..}
-          = object
-              (catMaybes
-                 [("height" .=) <$> _fvmmHeight,
-                  ("width" .=) <$> _fvmmWidth,
-                  ("durationMillis" .=) <$> _fvmmDurationMillis])
-
--- | A list of generated IDs which can be provided in insert requests
---
--- /See:/ 'generatedIds' smart constructor.
-data GeneratedIds = GeneratedIds
-    { _giSpace :: !(Maybe Text)
-    , _giKind  :: !Text
-    , _giIds   :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'GeneratedIds' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'giSpace'
---
--- * 'giKind'
---
--- * 'giIds'
-generatedIds
-    :: GeneratedIds
-generatedIds =
-    GeneratedIds
-    { _giSpace = Nothing
-    , _giKind = "drive#generatedIds"
-    , _giIds = Nothing
-    }
-
--- | The type of file that can be created with these IDs.
-giSpace :: Lens' GeneratedIds (Maybe Text)
-giSpace = lens _giSpace (\ s a -> s{_giSpace = a})
-
--- | This is always drive#generatedIds
-giKind :: Lens' GeneratedIds Text
-giKind = lens _giKind (\ s a -> s{_giKind = a})
-
--- | The IDs generated for the requesting user in the specified space.
-giIds :: Lens' GeneratedIds [Text]
-giIds
-  = lens _giIds (\ s a -> s{_giIds = a}) . _Default .
-      _Coerce
-
-instance FromJSON GeneratedIds where
-        parseJSON
-          = withObject "GeneratedIds"
-              (\ o ->
-                 GeneratedIds <$>
-                   (o .:? "space") <*>
-                     (o .:? "kind" .!= "drive#generatedIds")
-                     <*> (o .:? "ids" .!= mempty))
-
-instance ToJSON GeneratedIds where
-        toJSON GeneratedIds{..}
-          = object
-              (catMaybes
-                 [("space" .=) <$> _giSpace, Just ("kind" .= _giKind),
-                  ("ids" .=) <$> _giIds])
-
--- | A list of a file\'s parents.
---
--- /See:/ 'parentList' smart constructor.
-data ParentList = ParentList
-    { _parEtag     :: !(Maybe Text)
-    , _parKind     :: !Text
-    , _parItems    :: !(Maybe [Maybe ParentReference])
-    , _parSelfLink :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ParentList' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'parEtag'
---
--- * 'parKind'
---
--- * 'parItems'
---
--- * 'parSelfLink'
-parentList
-    :: ParentList
-parentList =
-    ParentList
-    { _parEtag = Nothing
-    , _parKind = "drive#parentList"
-    , _parItems = Nothing
-    , _parSelfLink = Nothing
-    }
-
--- | The ETag of the list.
-parEtag :: Lens' ParentList (Maybe Text)
-parEtag = lens _parEtag (\ s a -> s{_parEtag = a})
-
--- | This is always drive#parentList.
-parKind :: Lens' ParentList Text
-parKind = lens _parKind (\ s a -> s{_parKind = a})
-
--- | The actual list of parents.
-parItems :: Lens' ParentList [Maybe ParentReference]
-parItems
-  = lens _parItems (\ s a -> s{_parItems = a}) .
-      _Default
-      . _Coerce
-
--- | A link back to this list.
-parSelfLink :: Lens' ParentList (Maybe Text)
-parSelfLink
-  = lens _parSelfLink (\ s a -> s{_parSelfLink = a})
-
-instance FromJSON ParentList where
-        parseJSON
-          = withObject "ParentList"
-              (\ o ->
-                 ParentList <$>
-                   (o .:? "etag") <*>
-                     (o .:? "kind" .!= "drive#parentList")
-                     <*> (o .:? "items" .!= mempty)
-                     <*> (o .:? "selfLink"))
-
-instance ToJSON ParentList where
-        toJSON ParentList{..}
-          = object
-              (catMaybes
-                 [("etag" .=) <$> _parEtag, Just ("kind" .= _parKind),
-                  ("items" .=) <$> _parItems,
-                  ("selfLink" .=) <$> _parSelfLink])
-
--- | A reference to a file\'s parent.
---
--- /See:/ 'parentReference' smart constructor.
-data ParentReference = ParentReference
-    { _prParentLink :: !(Maybe Text)
-    , _prIsRoot     :: !(Maybe Bool)
-    , _prKind       :: !Text
-    , _prSelfLink   :: !(Maybe Text)
-    , _prId         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ParentReference' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'prParentLink'
---
--- * 'prIsRoot'
---
--- * 'prKind'
---
--- * 'prSelfLink'
---
--- * 'prId'
-parentReference
-    :: ParentReference
-parentReference =
-    ParentReference
-    { _prParentLink = Nothing
-    , _prIsRoot = Nothing
-    , _prKind = "drive#parentReference"
-    , _prSelfLink = Nothing
-    , _prId = Nothing
-    }
-
--- | A link to the parent.
-prParentLink :: Lens' ParentReference (Maybe Text)
-prParentLink
-  = lens _prParentLink (\ s a -> s{_prParentLink = a})
-
--- | Whether or not the parent is the root folder.
-prIsRoot :: Lens' ParentReference (Maybe Bool)
-prIsRoot = lens _prIsRoot (\ s a -> s{_prIsRoot = a})
-
--- | This is always drive#parentReference.
-prKind :: Lens' ParentReference Text
-prKind = lens _prKind (\ s a -> s{_prKind = a})
-
--- | A link back to this reference.
-prSelfLink :: Lens' ParentReference (Maybe Text)
-prSelfLink
-  = lens _prSelfLink (\ s a -> s{_prSelfLink = a})
-
--- | The ID of the parent.
-prId :: Lens' ParentReference (Maybe Text)
-prId = lens _prId (\ s a -> s{_prId = a})
-
-instance FromJSON ParentReference where
-        parseJSON
-          = withObject "ParentReference"
-              (\ o ->
-                 ParentReference <$>
-                   (o .:? "parentLink") <*> (o .:? "isRoot") <*>
-                     (o .:? "kind" .!= "drive#parentReference")
-                     <*> (o .:? "selfLink")
-                     <*> (o .:? "id"))
-
-instance ToJSON ParentReference where
-        toJSON ParentReference{..}
-          = object
-              (catMaybes
-                 [("parentLink" .=) <$> _prParentLink,
-                  ("isRoot" .=) <$> _prIsRoot,
-                  Just ("kind" .= _prKind),
-                  ("selfLink" .=) <$> _prSelfLink,
-                  ("id" .=) <$> _prId])
-
--- | A permission for a file.
---
--- /See:/ 'permission' smart constructor.
-data Permission = Permission
-    { _pPhotoLink       :: !(Maybe Text)
-    , _pEtag            :: !(Maybe Text)
-    , _pWithLink        :: !(Maybe Bool)
-    , _pKind            :: !Text
-    , _pDomain          :: !(Maybe Text)
-    , _pValue           :: !(Maybe Text)
-    , _pAdditionalRoles :: !(Maybe [Text])
-    , _pRole            :: !(Maybe Text)
-    , _pSelfLink        :: !(Maybe Text)
-    , _pName            :: !(Maybe Text)
-    , _pAuthKey         :: !(Maybe Text)
-    , _pEmailAddress    :: !(Maybe Text)
-    , _pId              :: !(Maybe Text)
-    , _pType            :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Permission' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'pPhotoLink'
---
--- * 'pEtag'
---
--- * 'pWithLink'
---
--- * 'pKind'
---
--- * 'pDomain'
---
--- * 'pValue'
---
--- * 'pAdditionalRoles'
---
--- * 'pRole'
---
--- * 'pSelfLink'
---
--- * 'pName'
---
--- * 'pAuthKey'
---
--- * 'pEmailAddress'
---
--- * 'pId'
---
--- * 'pType'
-permission
-    :: Permission
-permission =
-    Permission
-    { _pPhotoLink = Nothing
-    , _pEtag = Nothing
-    , _pWithLink = Nothing
-    , _pKind = "drive#permission"
-    , _pDomain = Nothing
-    , _pValue = Nothing
-    , _pAdditionalRoles = Nothing
-    , _pRole = Nothing
-    , _pSelfLink = Nothing
-    , _pName = Nothing
-    , _pAuthKey = Nothing
-    , _pEmailAddress = Nothing
-    , _pId = Nothing
-    , _pType = Nothing
-    }
-
--- | A link to the profile photo, if available.
-pPhotoLink :: Lens' Permission (Maybe Text)
-pPhotoLink
-  = lens _pPhotoLink (\ s a -> s{_pPhotoLink = a})
-
--- | The ETag of the permission.
-pEtag :: Lens' Permission (Maybe Text)
-pEtag = lens _pEtag (\ s a -> s{_pEtag = a})
-
--- | Whether the link is required for this permission.
-pWithLink :: Lens' Permission (Maybe Bool)
-pWithLink
-  = lens _pWithLink (\ s a -> s{_pWithLink = a})
-
--- | This is always drive#permission.
-pKind :: Lens' Permission Text
-pKind = lens _pKind (\ s a -> s{_pKind = a})
-
--- | The domain name of the entity this permission refers to. This is an
--- output-only field which is present when the permission type is user,
--- group or domain.
-pDomain :: Lens' Permission (Maybe Text)
-pDomain = lens _pDomain (\ s a -> s{_pDomain = a})
-
--- | The email address or domain name for the entity. This is used during
--- inserts and is not populated in responses. When making a
--- drive.permissions.insert request, exactly one of the id or value fields
--- must be specified.
-pValue :: Lens' Permission (Maybe Text)
-pValue = lens _pValue (\ s a -> s{_pValue = a})
-
--- | Additional roles for this user. Only commenter is currently allowed.
-pAdditionalRoles :: Lens' Permission [Text]
-pAdditionalRoles
-  = lens _pAdditionalRoles
-      (\ s a -> s{_pAdditionalRoles = a})
-      . _Default
-      . _Coerce
-
--- | The primary role for this user. Allowed values are: - owner - reader -
--- writer
-pRole :: Lens' Permission (Maybe Text)
-pRole = lens _pRole (\ s a -> s{_pRole = a})
-
--- | A link back to this permission.
-pSelfLink :: Lens' Permission (Maybe Text)
-pSelfLink
-  = lens _pSelfLink (\ s a -> s{_pSelfLink = a})
-
--- | The name for this permission.
-pName :: Lens' Permission (Maybe Text)
-pName = lens _pName (\ s a -> s{_pName = a})
-
--- | The authkey parameter required for this permission.
-pAuthKey :: Lens' Permission (Maybe Text)
-pAuthKey = lens _pAuthKey (\ s a -> s{_pAuthKey = a})
-
--- | The email address of the user or group this permission refers to. This
--- is an output-only field which is present when the permission type is
--- user or group.
-pEmailAddress :: Lens' Permission (Maybe Text)
-pEmailAddress
-  = lens _pEmailAddress
-      (\ s a -> s{_pEmailAddress = a})
-
--- | The ID of the user this permission refers to, and identical to the
--- permissionId in the About and Files resources. When making a
--- drive.permissions.insert request, exactly one of the id or value fields
--- must be specified.
-pId :: Lens' Permission (Maybe Text)
-pId = lens _pId (\ s a -> s{_pId = a})
-
--- | The account type. Allowed values are: - user - group - domain - anyone
-pType :: Lens' Permission (Maybe Text)
-pType = lens _pType (\ s a -> s{_pType = a})
-
-instance FromJSON Permission where
-        parseJSON
-          = withObject "Permission"
-              (\ o ->
-                 Permission <$>
-                   (o .:? "photoLink") <*> (o .:? "etag") <*>
-                     (o .:? "withLink")
-                     <*> (o .:? "kind" .!= "drive#permission")
-                     <*> (o .:? "domain")
-                     <*> (o .:? "value")
-                     <*> (o .:? "additionalRoles" .!= mempty)
-                     <*> (o .:? "role")
-                     <*> (o .:? "selfLink")
-                     <*> (o .:? "name")
-                     <*> (o .:? "authKey")
-                     <*> (o .:? "emailAddress")
-                     <*> (o .:? "id")
-                     <*> (o .:? "type"))
-
-instance ToJSON Permission where
-        toJSON Permission{..}
-          = object
-              (catMaybes
-                 [("photoLink" .=) <$> _pPhotoLink,
-                  ("etag" .=) <$> _pEtag,
-                  ("withLink" .=) <$> _pWithLink,
-                  Just ("kind" .= _pKind), ("domain" .=) <$> _pDomain,
-                  ("value" .=) <$> _pValue,
-                  ("additionalRoles" .=) <$> _pAdditionalRoles,
-                  ("role" .=) <$> _pRole,
-                  ("selfLink" .=) <$> _pSelfLink,
-                  ("name" .=) <$> _pName, ("authKey" .=) <$> _pAuthKey,
-                  ("emailAddress" .=) <$> _pEmailAddress,
-                  ("id" .=) <$> _pId, ("type" .=) <$> _pType])
-
--- | An ID for a user or group as seen in Permission items.
---
--- /See:/ 'permissionId' smart constructor.
-data PermissionId = PermissionId
-    { _piKind :: !Text
-    , _piId   :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PermissionId' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'piKind'
---
--- * 'piId'
-permissionId
-    :: PermissionId
-permissionId =
-    PermissionId
-    { _piKind = "drive#permissionId"
-    , _piId = Nothing
-    }
-
--- | This is always drive#permissionId.
-piKind :: Lens' PermissionId Text
-piKind = lens _piKind (\ s a -> s{_piKind = a})
-
--- | The permission ID.
-piId :: Lens' PermissionId (Maybe Text)
-piId = lens _piId (\ s a -> s{_piId = a})
-
-instance FromJSON PermissionId where
-        parseJSON
-          = withObject "PermissionId"
-              (\ o ->
-                 PermissionId <$>
-                   (o .:? "kind" .!= "drive#permissionId") <*>
-                     (o .:? "id"))
-
-instance ToJSON PermissionId where
-        toJSON PermissionId{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _piKind), ("id" .=) <$> _piId])
-
--- | A list of permissions associated with a file.
---
--- /See:/ 'permissionList' smart constructor.
-data PermissionList = PermissionList
-    { _plEtag     :: !(Maybe Text)
-    , _plKind     :: !Text
-    , _plItems    :: !(Maybe [Maybe Permission])
-    , _plSelfLink :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PermissionList' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'plEtag'
---
--- * 'plKind'
---
--- * 'plItems'
---
--- * 'plSelfLink'
-permissionList
-    :: PermissionList
-permissionList =
-    PermissionList
-    { _plEtag = Nothing
-    , _plKind = "drive#permissionList"
-    , _plItems = Nothing
-    , _plSelfLink = Nothing
-    }
-
--- | The ETag of the list.
-plEtag :: Lens' PermissionList (Maybe Text)
-plEtag = lens _plEtag (\ s a -> s{_plEtag = a})
-
--- | This is always drive#permissionList.
-plKind :: Lens' PermissionList Text
-plKind = lens _plKind (\ s a -> s{_plKind = a})
-
--- | The actual list of permissions.
-plItems :: Lens' PermissionList [Maybe Permission]
-plItems
-  = lens _plItems (\ s a -> s{_plItems = a}) . _Default
-      . _Coerce
-
--- | A link back to this list.
-plSelfLink :: Lens' PermissionList (Maybe Text)
-plSelfLink
-  = lens _plSelfLink (\ s a -> s{_plSelfLink = a})
-
-instance FromJSON PermissionList where
-        parseJSON
-          = withObject "PermissionList"
-              (\ o ->
-                 PermissionList <$>
-                   (o .:? "etag") <*>
-                     (o .:? "kind" .!= "drive#permissionList")
-                     <*> (o .:? "items" .!= mempty)
-                     <*> (o .:? "selfLink"))
-
-instance ToJSON PermissionList where
-        toJSON PermissionList{..}
-          = object
-              (catMaybes
-                 [("etag" .=) <$> _plEtag, Just ("kind" .= _plKind),
-                  ("items" .=) <$> _plItems,
-                  ("selfLink" .=) <$> _plSelfLink])
-
--- | A key-value pair attached to a file that is either public or private to
--- an application. The following limits apply to file properties: - Maximum
--- of 100 properties total per file - Maximum of 30 private properties per
--- app - Maximum of 30 public properties - Maximum of 124 bytes size limit
--- on (key + value) string in UTF-8 encoding for a single property.
---
--- /See:/ 'property' smart constructor.
-data Property = Property
-    { _proEtag       :: !(Maybe Text)
-    , _proKind       :: !Text
-    , _proValue      :: !(Maybe Text)
-    , _proVisibility :: !(Maybe Text)
-    , _proSelfLink   :: !(Maybe Text)
-    , _proKey        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Property' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'proEtag'
---
--- * 'proKind'
---
--- * 'proValue'
---
--- * 'proVisibility'
---
--- * 'proSelfLink'
---
--- * 'proKey'
-property
-    :: Property
-property =
-    Property
-    { _proEtag = Nothing
-    , _proKind = "drive#property"
-    , _proValue = Nothing
-    , _proVisibility = Nothing
-    , _proSelfLink = Nothing
-    , _proKey = Nothing
-    }
-
--- | ETag of the property.
-proEtag :: Lens' Property (Maybe Text)
-proEtag = lens _proEtag (\ s a -> s{_proEtag = a})
-
--- | This is always drive#property.
-proKind :: Lens' Property Text
-proKind = lens _proKind (\ s a -> s{_proKind = a})
-
--- | The value of this property.
-proValue :: Lens' Property (Maybe Text)
-proValue = lens _proValue (\ s a -> s{_proValue = a})
-
--- | The visibility of this property.
-proVisibility :: Lens' Property (Maybe Text)
-proVisibility
-  = lens _proVisibility
-      (\ s a -> s{_proVisibility = a})
-
--- | The link back to this property.
-proSelfLink :: Lens' Property (Maybe Text)
-proSelfLink
-  = lens _proSelfLink (\ s a -> s{_proSelfLink = a})
-
--- | The key of this property.
-proKey :: Lens' Property (Maybe Text)
-proKey = lens _proKey (\ s a -> s{_proKey = a})
-
-instance FromJSON Property where
-        parseJSON
-          = withObject "Property"
-              (\ o ->
-                 Property <$>
-                   (o .:? "etag") <*>
-                     (o .:? "kind" .!= "drive#property")
-                     <*> (o .:? "value")
-                     <*> (o .:? "visibility")
-                     <*> (o .:? "selfLink")
-                     <*> (o .:? "key"))
-
-instance ToJSON Property where
-        toJSON Property{..}
-          = object
-              (catMaybes
-                 [("etag" .=) <$> _proEtag, Just ("kind" .= _proKind),
-                  ("value" .=) <$> _proValue,
-                  ("visibility" .=) <$> _proVisibility,
-                  ("selfLink" .=) <$> _proSelfLink,
-                  ("key" .=) <$> _proKey])
-
--- | A collection of properties, key-value pairs that are either public or
--- private to an application.
---
--- /See:/ 'propertyList' smart constructor.
-data PropertyList = PropertyList
-    { _pllEtag     :: !(Maybe Text)
-    , _pllKind     :: !Text
-    , _pllItems    :: !(Maybe [Maybe Property])
-    , _pllSelfLink :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PropertyList' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'pllEtag'
---
--- * 'pllKind'
---
--- * 'pllItems'
---
--- * 'pllSelfLink'
-propertyList
-    :: PropertyList
-propertyList =
-    PropertyList
-    { _pllEtag = Nothing
-    , _pllKind = "drive#propertyList"
-    , _pllItems = Nothing
-    , _pllSelfLink = Nothing
-    }
-
--- | The ETag of the list.
-pllEtag :: Lens' PropertyList (Maybe Text)
-pllEtag = lens _pllEtag (\ s a -> s{_pllEtag = a})
-
--- | This is always drive#propertyList.
-pllKind :: Lens' PropertyList Text
-pllKind = lens _pllKind (\ s a -> s{_pllKind = a})
-
--- | The list of properties.
-pllItems :: Lens' PropertyList [Maybe Property]
-pllItems
-  = lens _pllItems (\ s a -> s{_pllItems = a}) .
-      _Default
-      . _Coerce
-
--- | The link back to this list.
-pllSelfLink :: Lens' PropertyList (Maybe Text)
-pllSelfLink
-  = lens _pllSelfLink (\ s a -> s{_pllSelfLink = a})
-
-instance FromJSON PropertyList where
-        parseJSON
-          = withObject "PropertyList"
-              (\ o ->
-                 PropertyList <$>
-                   (o .:? "etag") <*>
-                     (o .:? "kind" .!= "drive#propertyList")
-                     <*> (o .:? "items" .!= mempty)
-                     <*> (o .:? "selfLink"))
-
-instance ToJSON PropertyList where
-        toJSON PropertyList{..}
-          = object
-              (catMaybes
-                 [("etag" .=) <$> _pllEtag, Just ("kind" .= _pllKind),
-                  ("items" .=) <$> _pllItems,
-                  ("selfLink" .=) <$> _pllSelfLink])
-
--- | A revision of a file.
---
--- /See:/ 'revision' smart constructor.
-data Revision = Revision
-    { _rEtag                   :: !(Maybe Text)
-    , _rOriginalFilename       :: !(Maybe Text)
-    , _rKind                   :: !Text
-    , _rPublishedLink          :: !(Maybe Text)
-    , _rPinned                 :: !(Maybe Bool)
-    , _rPublished              :: !(Maybe Bool)
-    , _rLastModifyingUser      :: !(Maybe (Maybe User))
-    , _rFileSize               :: !(Maybe Int64)
-    , _rPublishAuto            :: !(Maybe Bool)
-    , _rMd5Checksum            :: !(Maybe Text)
-    , _rMimeType               :: !(Maybe Text)
-    , _rSelfLink               :: !(Maybe Text)
-    , _rLastModifyingUserName  :: !(Maybe Text)
-    , _rDownloadUrl            :: !(Maybe Text)
-    , _rExportLinks            :: !(Maybe RevisionExportLinks)
-    , _rPublishedOutsideDomain :: !(Maybe Bool)
-    , _rId                     :: !(Maybe Text)
-    , _rModifiedDate           :: !(Maybe UTCTime)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Revision' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rEtag'
---
--- * 'rOriginalFilename'
---
--- * 'rKind'
---
--- * 'rPublishedLink'
---
--- * 'rPinned'
---
--- * 'rPublished'
---
--- * 'rLastModifyingUser'
---
--- * 'rFileSize'
---
--- * 'rPublishAuto'
---
--- * 'rMd5Checksum'
---
--- * 'rMimeType'
---
--- * 'rSelfLink'
---
--- * 'rLastModifyingUserName'
---
--- * 'rDownloadUrl'
---
--- * 'rExportLinks'
---
--- * 'rPublishedOutsideDomain'
---
--- * 'rId'
---
--- * 'rModifiedDate'
-revision
-    :: Revision
-revision =
-    Revision
-    { _rEtag = Nothing
-    , _rOriginalFilename = Nothing
-    , _rKind = "drive#revision"
-    , _rPublishedLink = Nothing
-    , _rPinned = Nothing
-    , _rPublished = Nothing
-    , _rLastModifyingUser = Nothing
-    , _rFileSize = Nothing
-    , _rPublishAuto = Nothing
-    , _rMd5Checksum = Nothing
-    , _rMimeType = Nothing
-    , _rSelfLink = Nothing
-    , _rLastModifyingUserName = Nothing
-    , _rDownloadUrl = Nothing
-    , _rExportLinks = Nothing
-    , _rPublishedOutsideDomain = Nothing
-    , _rId = Nothing
-    , _rModifiedDate = Nothing
-    }
-
--- | The ETag of the revision.
-rEtag :: Lens' Revision (Maybe Text)
-rEtag = lens _rEtag (\ s a -> s{_rEtag = a})
-
--- | The original filename when this revision was created. This will only be
--- populated on files with content stored in Drive.
-rOriginalFilename :: Lens' Revision (Maybe Text)
-rOriginalFilename
-  = lens _rOriginalFilename
-      (\ s a -> s{_rOriginalFilename = a})
-
--- | This is always drive#revision.
-rKind :: Lens' Revision Text
-rKind = lens _rKind (\ s a -> s{_rKind = a})
-
--- | A link to the published revision.
-rPublishedLink :: Lens' Revision (Maybe Text)
-rPublishedLink
-  = lens _rPublishedLink
-      (\ s a -> s{_rPublishedLink = a})
-
--- | Whether this revision is pinned to prevent automatic purging. This will
--- only be populated and can only be modified on files with content stored
--- in Drive which are not Google Docs. Revisions can also be pinned when
--- they are created through the drive.files.insert\/update\/copy by using
--- the pinned query parameter.
-rPinned :: Lens' Revision (Maybe Bool)
-rPinned = lens _rPinned (\ s a -> s{_rPinned = a})
-
--- | Whether this revision is published. This is only populated and can only
--- be modified for Google Docs.
-rPublished :: Lens' Revision (Maybe Bool)
-rPublished
-  = lens _rPublished (\ s a -> s{_rPublished = a})
-
--- | The last user to modify this revision.
-rLastModifyingUser :: Lens' Revision (Maybe (Maybe User))
-rLastModifyingUser
-  = lens _rLastModifyingUser
-      (\ s a -> s{_rLastModifyingUser = a})
-
--- | The size of the revision in bytes. This will only be populated on files
--- with content stored in Drive.
-rFileSize :: Lens' Revision (Maybe Int64)
-rFileSize
-  = lens _rFileSize (\ s a -> s{_rFileSize = a})
-
--- | Whether subsequent revisions will be automatically republished. This is
--- only populated and can only be modified for Google Docs.
-rPublishAuto :: Lens' Revision (Maybe Bool)
-rPublishAuto
-  = lens _rPublishAuto (\ s a -> s{_rPublishAuto = a})
-
--- | An MD5 checksum for the content of this revision. This will only be
--- populated on files with content stored in Drive.
-rMd5Checksum :: Lens' Revision (Maybe Text)
-rMd5Checksum
-  = lens _rMd5Checksum (\ s a -> s{_rMd5Checksum = a})
-
--- | The MIME type of the revision.
-rMimeType :: Lens' Revision (Maybe Text)
-rMimeType
-  = lens _rMimeType (\ s a -> s{_rMimeType = a})
-
--- | A link back to this revision.
-rSelfLink :: Lens' Revision (Maybe Text)
-rSelfLink
-  = lens _rSelfLink (\ s a -> s{_rSelfLink = a})
-
--- | Name of the last user to modify this revision.
-rLastModifyingUserName :: Lens' Revision (Maybe Text)
-rLastModifyingUserName
-  = lens _rLastModifyingUserName
-      (\ s a -> s{_rLastModifyingUserName = a})
-
--- | Short term download URL for the file. This will only be populated on
--- files with content stored in Drive.
-rDownloadUrl :: Lens' Revision (Maybe Text)
-rDownloadUrl
-  = lens _rDownloadUrl (\ s a -> s{_rDownloadUrl = a})
-
--- | Links for exporting Google Docs to specific formats.
-rExportLinks :: Lens' Revision (Maybe RevisionExportLinks)
-rExportLinks
-  = lens _rExportLinks (\ s a -> s{_rExportLinks = a})
-
--- | Whether this revision is published outside the domain. This is only
--- populated and can only be modified for Google Docs.
-rPublishedOutsideDomain :: Lens' Revision (Maybe Bool)
-rPublishedOutsideDomain
-  = lens _rPublishedOutsideDomain
-      (\ s a -> s{_rPublishedOutsideDomain = a})
-
--- | The ID of the revision.
-rId :: Lens' Revision (Maybe Text)
-rId = lens _rId (\ s a -> s{_rId = a})
-
--- | Last time this revision was modified (formatted RFC 3339 timestamp).
-rModifiedDate :: Lens' Revision (Maybe UTCTime)
-rModifiedDate
-  = lens _rModifiedDate
-      (\ s a -> s{_rModifiedDate = a})
-
-instance FromJSON Revision where
-        parseJSON
-          = withObject "Revision"
-              (\ o ->
-                 Revision <$>
-                   (o .:? "etag") <*> (o .:? "originalFilename") <*>
-                     (o .:? "kind" .!= "drive#revision")
-                     <*> (o .:? "publishedLink")
-                     <*> (o .:? "pinned")
-                     <*> (o .:? "published")
-                     <*> (o .:? "lastModifyingUser")
-                     <*> (o .:? "fileSize")
-                     <*> (o .:? "publishAuto")
-                     <*> (o .:? "md5Checksum")
-                     <*> (o .:? "mimeType")
-                     <*> (o .:? "selfLink")
-                     <*> (o .:? "lastModifyingUserName")
-                     <*> (o .:? "downloadUrl")
-                     <*> (o .:? "exportLinks")
-                     <*> (o .:? "publishedOutsideDomain")
-                     <*> (o .:? "id")
-                     <*> (o .:? "modifiedDate"))
-
-instance ToJSON Revision where
-        toJSON Revision{..}
-          = object
-              (catMaybes
-                 [("etag" .=) <$> _rEtag,
-                  ("originalFilename" .=) <$> _rOriginalFilename,
-                  Just ("kind" .= _rKind),
-                  ("publishedLink" .=) <$> _rPublishedLink,
-                  ("pinned" .=) <$> _rPinned,
-                  ("published" .=) <$> _rPublished,
-                  ("lastModifyingUser" .=) <$> _rLastModifyingUser,
-                  ("fileSize" .=) <$> _rFileSize,
-                  ("publishAuto" .=) <$> _rPublishAuto,
-                  ("md5Checksum" .=) <$> _rMd5Checksum,
-                  ("mimeType" .=) <$> _rMimeType,
-                  ("selfLink" .=) <$> _rSelfLink,
-                  ("lastModifyingUserName" .=) <$>
-                    _rLastModifyingUserName,
-                  ("downloadUrl" .=) <$> _rDownloadUrl,
-                  ("exportLinks" .=) <$> _rExportLinks,
-                  ("publishedOutsideDomain" .=) <$>
-                    _rPublishedOutsideDomain,
-                  ("id" .=) <$> _rId,
-                  ("modifiedDate" .=) <$> _rModifiedDate])
-
--- | Links for exporting Google Docs to specific formats.
---
--- /See:/ 'revisionExportLinks' smart constructor.
-data RevisionExportLinks =
-    RevisionExportLinks
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'RevisionExportLinks' with the minimum fields required to make a request.
---
-revisionExportLinks
-    :: RevisionExportLinks
-revisionExportLinks = RevisionExportLinks
-
-instance FromJSON RevisionExportLinks where
-        parseJSON
-          = withObject "RevisionExportLinks"
-              (\ o -> pure RevisionExportLinks)
-
-instance ToJSON RevisionExportLinks where
-        toJSON = const (Object mempty)
-
--- | A list of revisions of a file.
---
--- /See:/ 'revisionList' smart constructor.
-data RevisionList = RevisionList
-    { _rlEtag     :: !(Maybe Text)
-    , _rlKind     :: !Text
-    , _rlItems    :: !(Maybe [Maybe Revision])
-    , _rlSelfLink :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'RevisionList' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rlEtag'
---
--- * 'rlKind'
---
--- * 'rlItems'
---
--- * 'rlSelfLink'
-revisionList
-    :: RevisionList
-revisionList =
-    RevisionList
-    { _rlEtag = Nothing
-    , _rlKind = "drive#revisionList"
-    , _rlItems = Nothing
-    , _rlSelfLink = Nothing
-    }
-
--- | The ETag of the list.
-rlEtag :: Lens' RevisionList (Maybe Text)
-rlEtag = lens _rlEtag (\ s a -> s{_rlEtag = a})
-
--- | This is always drive#revisionList.
-rlKind :: Lens' RevisionList Text
-rlKind = lens _rlKind (\ s a -> s{_rlKind = a})
-
--- | The actual list of revisions.
-rlItems :: Lens' RevisionList [Maybe Revision]
-rlItems
-  = lens _rlItems (\ s a -> s{_rlItems = a}) . _Default
-      . _Coerce
-
--- | A link back to this list.
-rlSelfLink :: Lens' RevisionList (Maybe Text)
-rlSelfLink
-  = lens _rlSelfLink (\ s a -> s{_rlSelfLink = a})
-
-instance FromJSON RevisionList where
-        parseJSON
-          = withObject "RevisionList"
-              (\ o ->
-                 RevisionList <$>
-                   (o .:? "etag") <*>
-                     (o .:? "kind" .!= "drive#revisionList")
-                     <*> (o .:? "items" .!= mempty)
-                     <*> (o .:? "selfLink"))
-
-instance ToJSON RevisionList where
-        toJSON RevisionList{..}
-          = object
-              (catMaybes
-                 [("etag" .=) <$> _rlEtag, Just ("kind" .= _rlKind),
-                  ("items" .=) <$> _rlItems,
-                  ("selfLink" .=) <$> _rlSelfLink])
-
 -- | The JSON template for a user.
 --
 -- /See:/ 'user' smart constructor.
@@ -4698,34 +4200,531 @@ instance ToJSON User where
                   ("displayName" .=) <$> _uDisplayName,
                   ("permissionId" .=) <$> _uPermissionId])
 
--- | The user\'s profile picture.
+-- | A reference to a folder\'s child.
 --
--- /See:/ 'userPicture' smart constructor.
-newtype UserPicture = UserPicture
-    { _upUrl :: Maybe Text
+-- /See:/ 'childReference' smart constructor.
+data ChildReference = ChildReference
+    { _crChildLink :: !(Maybe Text)
+    , _crKind      :: !Text
+    , _crSelfLink  :: !(Maybe Text)
+    , _crId        :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UserPicture' with the minimum fields required to make a request.
+-- | Creates a value of 'ChildReference' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'upUrl'
-userPicture
-    :: UserPicture
-userPicture =
-    UserPicture
-    { _upUrl = Nothing
+-- * 'crChildLink'
+--
+-- * 'crKind'
+--
+-- * 'crSelfLink'
+--
+-- * 'crId'
+childReference
+    :: ChildReference
+childReference =
+    ChildReference
+    { _crChildLink = Nothing
+    , _crKind = "drive#childReference"
+    , _crSelfLink = Nothing
+    , _crId = Nothing
     }
 
--- | A URL that points to a profile picture of this user.
-upUrl :: Lens' UserPicture (Maybe Text)
-upUrl = lens _upUrl (\ s a -> s{_upUrl = a})
+-- | A link to the child.
+crChildLink :: Lens' ChildReference (Maybe Text)
+crChildLink
+  = lens _crChildLink (\ s a -> s{_crChildLink = a})
 
-instance FromJSON UserPicture where
+-- | This is always drive#childReference.
+crKind :: Lens' ChildReference Text
+crKind = lens _crKind (\ s a -> s{_crKind = a})
+
+-- | A link back to this reference.
+crSelfLink :: Lens' ChildReference (Maybe Text)
+crSelfLink
+  = lens _crSelfLink (\ s a -> s{_crSelfLink = a})
+
+-- | The ID of the child.
+crId :: Lens' ChildReference (Maybe Text)
+crId = lens _crId (\ s a -> s{_crId = a})
+
+instance FromJSON ChildReference where
         parseJSON
-          = withObject "UserPicture"
-              (\ o -> UserPicture <$> (o .:? "url"))
+          = withObject "ChildReference"
+              (\ o ->
+                 ChildReference <$>
+                   (o .:? "childLink") <*>
+                     (o .:? "kind" .!= "drive#childReference")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
 
-instance ToJSON UserPicture where
-        toJSON UserPicture{..}
-          = object (catMaybes [("url" .=) <$> _upUrl])
+instance ToJSON ChildReference where
+        toJSON ChildReference{..}
+          = object
+              (catMaybes
+                 [("childLink" .=) <$> _crChildLink,
+                  Just ("kind" .= _crKind),
+                  ("selfLink" .=) <$> _crSelfLink,
+                  ("id" .=) <$> _crId])
+
+-- | The apps resource provides a list of the apps that a user has installed,
+-- with information about each app\'s supported MIME types, file
+-- extensions, and other details.
+--
+-- /See:/ 'app' smart constructor.
+data App = App
+    { _appLongDescription         :: !(Maybe Text)
+    , _appOpenUrlTemplate         :: !(Maybe Text)
+    , _appAuthorized              :: !(Maybe Bool)
+    , _appObjectType              :: !(Maybe Text)
+    , _appSecondaryMimeTypes      :: !(Maybe [Text])
+    , _appCreateInFolderTemplate  :: !(Maybe Text)
+    , _appKind                    :: !Text
+    , _appIcons                   :: !(Maybe [AppItemIcons])
+    , _appProductUrl              :: !(Maybe Text)
+    , _appUseByDefault            :: !(Maybe Bool)
+    , _appShortDescription        :: !(Maybe Text)
+    , _appName                    :: !(Maybe Text)
+    , _appCreateUrl               :: !(Maybe Text)
+    , _appId                      :: !(Maybe Text)
+    , _appPrimaryFileExtensions   :: !(Maybe [Text])
+    , _appInstalled               :: !(Maybe Bool)
+    , _appSupportsCreate          :: !(Maybe Bool)
+    , _appPrimaryMimeTypes        :: !(Maybe [Text])
+    , _appHasDriveWideScope       :: !(Maybe Bool)
+    , _appProductId               :: !(Maybe Text)
+    , _appSecondaryFileExtensions :: !(Maybe [Text])
+    , _appSupportsMultiOpen       :: !(Maybe Bool)
+    , _appSupportsImport          :: !(Maybe Bool)
+    , _appSupportsOfflineCreate   :: !(Maybe Bool)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'App' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'appLongDescription'
+--
+-- * 'appOpenUrlTemplate'
+--
+-- * 'appAuthorized'
+--
+-- * 'appObjectType'
+--
+-- * 'appSecondaryMimeTypes'
+--
+-- * 'appCreateInFolderTemplate'
+--
+-- * 'appKind'
+--
+-- * 'appIcons'
+--
+-- * 'appProductUrl'
+--
+-- * 'appUseByDefault'
+--
+-- * 'appShortDescription'
+--
+-- * 'appName'
+--
+-- * 'appCreateUrl'
+--
+-- * 'appId'
+--
+-- * 'appPrimaryFileExtensions'
+--
+-- * 'appInstalled'
+--
+-- * 'appSupportsCreate'
+--
+-- * 'appPrimaryMimeTypes'
+--
+-- * 'appHasDriveWideScope'
+--
+-- * 'appProductId'
+--
+-- * 'appSecondaryFileExtensions'
+--
+-- * 'appSupportsMultiOpen'
+--
+-- * 'appSupportsImport'
+--
+-- * 'appSupportsOfflineCreate'
+app
+    :: App
+app =
+    App
+    { _appLongDescription = Nothing
+    , _appOpenUrlTemplate = Nothing
+    , _appAuthorized = Nothing
+    , _appObjectType = Nothing
+    , _appSecondaryMimeTypes = Nothing
+    , _appCreateInFolderTemplate = Nothing
+    , _appKind = "drive#app"
+    , _appIcons = Nothing
+    , _appProductUrl = Nothing
+    , _appUseByDefault = Nothing
+    , _appShortDescription = Nothing
+    , _appName = Nothing
+    , _appCreateUrl = Nothing
+    , _appId = Nothing
+    , _appPrimaryFileExtensions = Nothing
+    , _appInstalled = Nothing
+    , _appSupportsCreate = Nothing
+    , _appPrimaryMimeTypes = Nothing
+    , _appHasDriveWideScope = Nothing
+    , _appProductId = Nothing
+    , _appSecondaryFileExtensions = Nothing
+    , _appSupportsMultiOpen = Nothing
+    , _appSupportsImport = Nothing
+    , _appSupportsOfflineCreate = Nothing
+    }
+
+-- | A long description of the app.
+appLongDescription :: Lens' App (Maybe Text)
+appLongDescription
+  = lens _appLongDescription
+      (\ s a -> s{_appLongDescription = a})
+
+-- | The template url for opening files with this app. The template will
+-- contain {ids} and\/or {exportIds} to be replaced by the actual file ids.
+-- See Open Files for the full documentation.
+appOpenUrlTemplate :: Lens' App (Maybe Text)
+appOpenUrlTemplate
+  = lens _appOpenUrlTemplate
+      (\ s a -> s{_appOpenUrlTemplate = a})
+
+-- | Whether the app is authorized to access data on the user\'s Drive.
+appAuthorized :: Lens' App (Maybe Bool)
+appAuthorized
+  = lens _appAuthorized
+      (\ s a -> s{_appAuthorized = a})
+
+-- | The type of object this app creates (e.g. Chart). If empty, the app name
+-- should be used instead.
+appObjectType :: Lens' App (Maybe Text)
+appObjectType
+  = lens _appObjectType
+      (\ s a -> s{_appObjectType = a})
+
+-- | The list of secondary mime types.
+appSecondaryMimeTypes :: Lens' App [Text]
+appSecondaryMimeTypes
+  = lens _appSecondaryMimeTypes
+      (\ s a -> s{_appSecondaryMimeTypes = a})
+      . _Default
+      . _Coerce
+
+-- | The template url to create a new file with this app in a given folder.
+-- The template will contain {folderId} to be replaced by the folder to
+-- create the new file in.
+appCreateInFolderTemplate :: Lens' App (Maybe Text)
+appCreateInFolderTemplate
+  = lens _appCreateInFolderTemplate
+      (\ s a -> s{_appCreateInFolderTemplate = a})
+
+-- | This is always drive#app.
+appKind :: Lens' App Text
+appKind = lens _appKind (\ s a -> s{_appKind = a})
+
+-- | The various icons for the app.
+appIcons :: Lens' App [AppItemIcons]
+appIcons
+  = lens _appIcons (\ s a -> s{_appIcons = a}) .
+      _Default
+      . _Coerce
+
+-- | A link to the product listing for this app.
+appProductUrl :: Lens' App (Maybe Text)
+appProductUrl
+  = lens _appProductUrl
+      (\ s a -> s{_appProductUrl = a})
+
+-- | Whether the app is selected as the default handler for the types it
+-- supports.
+appUseByDefault :: Lens' App (Maybe Bool)
+appUseByDefault
+  = lens _appUseByDefault
+      (\ s a -> s{_appUseByDefault = a})
+
+-- | A short description of the app.
+appShortDescription :: Lens' App (Maybe Text)
+appShortDescription
+  = lens _appShortDescription
+      (\ s a -> s{_appShortDescription = a})
+
+-- | The name of the app.
+appName :: Lens' App (Maybe Text)
+appName = lens _appName (\ s a -> s{_appName = a})
+
+-- | The url to create a new file with this app.
+appCreateUrl :: Lens' App (Maybe Text)
+appCreateUrl
+  = lens _appCreateUrl (\ s a -> s{_appCreateUrl = a})
+
+-- | The ID of the app.
+appId :: Lens' App (Maybe Text)
+appId = lens _appId (\ s a -> s{_appId = a})
+
+-- | The list of primary file extensions.
+appPrimaryFileExtensions :: Lens' App [Text]
+appPrimaryFileExtensions
+  = lens _appPrimaryFileExtensions
+      (\ s a -> s{_appPrimaryFileExtensions = a})
+      . _Default
+      . _Coerce
+
+-- | Whether the app is installed.
+appInstalled :: Lens' App (Maybe Bool)
+appInstalled
+  = lens _appInstalled (\ s a -> s{_appInstalled = a})
+
+-- | Whether this app supports creating new objects.
+appSupportsCreate :: Lens' App (Maybe Bool)
+appSupportsCreate
+  = lens _appSupportsCreate
+      (\ s a -> s{_appSupportsCreate = a})
+
+-- | The list of primary mime types.
+appPrimaryMimeTypes :: Lens' App [Text]
+appPrimaryMimeTypes
+  = lens _appPrimaryMimeTypes
+      (\ s a -> s{_appPrimaryMimeTypes = a})
+      . _Default
+      . _Coerce
+
+-- | Whether the app has drive-wide scope. An app with drive-wide scope can
+-- access all files in the user\'s drive.
+appHasDriveWideScope :: Lens' App (Maybe Bool)
+appHasDriveWideScope
+  = lens _appHasDriveWideScope
+      (\ s a -> s{_appHasDriveWideScope = a})
+
+-- | The ID of the product listing for this app.
+appProductId :: Lens' App (Maybe Text)
+appProductId
+  = lens _appProductId (\ s a -> s{_appProductId = a})
+
+-- | The list of secondary file extensions.
+appSecondaryFileExtensions :: Lens' App [Text]
+appSecondaryFileExtensions
+  = lens _appSecondaryFileExtensions
+      (\ s a -> s{_appSecondaryFileExtensions = a})
+      . _Default
+      . _Coerce
+
+-- | Whether this app supports opening more than one file.
+appSupportsMultiOpen :: Lens' App (Maybe Bool)
+appSupportsMultiOpen
+  = lens _appSupportsMultiOpen
+      (\ s a -> s{_appSupportsMultiOpen = a})
+
+-- | Whether this app supports importing Google Docs.
+appSupportsImport :: Lens' App (Maybe Bool)
+appSupportsImport
+  = lens _appSupportsImport
+      (\ s a -> s{_appSupportsImport = a})
+
+-- | Whether this app supports creating new files when offline.
+appSupportsOfflineCreate :: Lens' App (Maybe Bool)
+appSupportsOfflineCreate
+  = lens _appSupportsOfflineCreate
+      (\ s a -> s{_appSupportsOfflineCreate = a})
+
+instance FromJSON App where
+        parseJSON
+          = withObject "App"
+              (\ o ->
+                 App <$>
+                   (o .:? "longDescription") <*>
+                     (o .:? "openUrlTemplate")
+                     <*> (o .:? "authorized")
+                     <*> (o .:? "objectType")
+                     <*> (o .:? "secondaryMimeTypes" .!= mempty)
+                     <*> (o .:? "createInFolderTemplate")
+                     <*> (o .:? "kind" .!= "drive#app")
+                     <*> (o .:? "icons" .!= mempty)
+                     <*> (o .:? "productUrl")
+                     <*> (o .:? "useByDefault")
+                     <*> (o .:? "shortDescription")
+                     <*> (o .:? "name")
+                     <*> (o .:? "createUrl")
+                     <*> (o .:? "id")
+                     <*> (o .:? "primaryFileExtensions" .!= mempty)
+                     <*> (o .:? "installed")
+                     <*> (o .:? "supportsCreate")
+                     <*> (o .:? "primaryMimeTypes" .!= mempty)
+                     <*> (o .:? "hasDriveWideScope")
+                     <*> (o .:? "productId")
+                     <*> (o .:? "secondaryFileExtensions" .!= mempty)
+                     <*> (o .:? "supportsMultiOpen")
+                     <*> (o .:? "supportsImport")
+                     <*> (o .:? "supportsOfflineCreate"))
+
+instance ToJSON App where
+        toJSON App{..}
+          = object
+              (catMaybes
+                 [("longDescription" .=) <$> _appLongDescription,
+                  ("openUrlTemplate" .=) <$> _appOpenUrlTemplate,
+                  ("authorized" .=) <$> _appAuthorized,
+                  ("objectType" .=) <$> _appObjectType,
+                  ("secondaryMimeTypes" .=) <$> _appSecondaryMimeTypes,
+                  ("createInFolderTemplate" .=) <$>
+                    _appCreateInFolderTemplate,
+                  Just ("kind" .= _appKind),
+                  ("icons" .=) <$> _appIcons,
+                  ("productUrl" .=) <$> _appProductUrl,
+                  ("useByDefault" .=) <$> _appUseByDefault,
+                  ("shortDescription" .=) <$> _appShortDescription,
+                  ("name" .=) <$> _appName,
+                  ("createUrl" .=) <$> _appCreateUrl,
+                  ("id" .=) <$> _appId,
+                  ("primaryFileExtensions" .=) <$>
+                    _appPrimaryFileExtensions,
+                  ("installed" .=) <$> _appInstalled,
+                  ("supportsCreate" .=) <$> _appSupportsCreate,
+                  ("primaryMimeTypes" .=) <$> _appPrimaryMimeTypes,
+                  ("hasDriveWideScope" .=) <$> _appHasDriveWideScope,
+                  ("productId" .=) <$> _appProductId,
+                  ("secondaryFileExtensions" .=) <$>
+                    _appSecondaryFileExtensions,
+                  ("supportsMultiOpen" .=) <$> _appSupportsMultiOpen,
+                  ("supportsImport" .=) <$> _appSupportsImport,
+                  ("supportsOfflineCreate" .=) <$>
+                    _appSupportsOfflineCreate])
+
+-- | A JSON representation of a reply to a comment on a file in Google Drive.
+--
+-- /See:/ 'commentReply' smart constructor.
+data CommentReply = CommentReply
+    { _crrHtmlContent  :: !(Maybe Text)
+    , _crrKind         :: !Text
+    , _crrContent      :: !(Maybe Text)
+    , _crrCreatedDate  :: !(Maybe UTCTime)
+    , _crrReplyId      :: !(Maybe Text)
+    , _crrAuthor       :: !(Maybe (Maybe User))
+    , _crrModifiedDate :: !(Maybe UTCTime)
+    , _crrDeleted      :: !(Maybe Bool)
+    , _crrVerb         :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CommentReply' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'crrHtmlContent'
+--
+-- * 'crrKind'
+--
+-- * 'crrContent'
+--
+-- * 'crrCreatedDate'
+--
+-- * 'crrReplyId'
+--
+-- * 'crrAuthor'
+--
+-- * 'crrModifiedDate'
+--
+-- * 'crrDeleted'
+--
+-- * 'crrVerb'
+commentReply
+    :: CommentReply
+commentReply =
+    CommentReply
+    { _crrHtmlContent = Nothing
+    , _crrKind = "drive#commentReply"
+    , _crrContent = Nothing
+    , _crrCreatedDate = Nothing
+    , _crrReplyId = Nothing
+    , _crrAuthor = Nothing
+    , _crrModifiedDate = Nothing
+    , _crrDeleted = Nothing
+    , _crrVerb = Nothing
+    }
+
+-- | HTML formatted content for this reply.
+crrHtmlContent :: Lens' CommentReply (Maybe Text)
+crrHtmlContent
+  = lens _crrHtmlContent
+      (\ s a -> s{_crrHtmlContent = a})
+
+-- | This is always drive#commentReply.
+crrKind :: Lens' CommentReply Text
+crrKind = lens _crrKind (\ s a -> s{_crrKind = a})
+
+-- | The plain text content used to create this reply. This is not HTML safe
+-- and should only be used as a starting point to make edits to a reply\'s
+-- content. This field is required on inserts if no verb is specified
+-- (resolve\/reopen).
+crrContent :: Lens' CommentReply (Maybe Text)
+crrContent
+  = lens _crrContent (\ s a -> s{_crrContent = a})
+
+-- | The date when this reply was first created.
+crrCreatedDate :: Lens' CommentReply (Maybe UTCTime)
+crrCreatedDate
+  = lens _crrCreatedDate
+      (\ s a -> s{_crrCreatedDate = a})
+
+-- | The ID of the reply.
+crrReplyId :: Lens' CommentReply (Maybe Text)
+crrReplyId
+  = lens _crrReplyId (\ s a -> s{_crrReplyId = a})
+
+-- | The user who wrote this reply.
+crrAuthor :: Lens' CommentReply (Maybe (Maybe User))
+crrAuthor
+  = lens _crrAuthor (\ s a -> s{_crrAuthor = a})
+
+-- | The date when this reply was last modified.
+crrModifiedDate :: Lens' CommentReply (Maybe UTCTime)
+crrModifiedDate
+  = lens _crrModifiedDate
+      (\ s a -> s{_crrModifiedDate = a})
+
+-- | Whether this reply has been deleted. If a reply has been deleted the
+-- content will be cleared and this will only represent a reply that once
+-- existed.
+crrDeleted :: Lens' CommentReply (Maybe Bool)
+crrDeleted
+  = lens _crrDeleted (\ s a -> s{_crrDeleted = a})
+
+-- | The action this reply performed to the parent comment. When creating a
+-- new reply this is the action to be perform to the parent comment.
+-- Possible values are: - \"resolve\" - To resolve a comment. - \"reopen\"
+-- - To reopen (un-resolve) a comment.
+crrVerb :: Lens' CommentReply (Maybe Text)
+crrVerb = lens _crrVerb (\ s a -> s{_crrVerb = a})
+
+instance FromJSON CommentReply where
+        parseJSON
+          = withObject "CommentReply"
+              (\ o ->
+                 CommentReply <$>
+                   (o .:? "htmlContent") <*>
+                     (o .:? "kind" .!= "drive#commentReply")
+                     <*> (o .:? "content")
+                     <*> (o .:? "createdDate")
+                     <*> (o .:? "replyId")
+                     <*> (o .:? "author")
+                     <*> (o .:? "modifiedDate")
+                     <*> (o .:? "deleted")
+                     <*> (o .:? "verb"))
+
+instance ToJSON CommentReply where
+        toJSON CommentReply{..}
+          = object
+              (catMaybes
+                 [("htmlContent" .=) <$> _crrHtmlContent,
+                  Just ("kind" .= _crrKind),
+                  ("content" .=) <$> _crrContent,
+                  ("createdDate" .=) <$> _crrCreatedDate,
+                  ("replyId" .=) <$> _crrReplyId,
+                  ("author" .=) <$> _crrAuthor,
+                  ("modifiedDate" .=) <$> _crrModifiedDate,
+                  ("deleted" .=) <$> _crrDeleted,
+                  ("verb" .=) <$> _crrVerb])

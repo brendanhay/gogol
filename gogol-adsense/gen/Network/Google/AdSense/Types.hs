@@ -14,24 +14,24 @@
 --
 module Network.Google.AdSense.Types
     (
+    -- * Service URL
+      adSenseURL
 
-    -- * Account
-      Account
-    , account
-    , accKind
-    , accPremium
-    , accName
-    , accId
-    , accTimezone
-    , accSubAccounts
+    -- * SavedAdStyles
+    , SavedAdStyles
+    , savedAdStyles
+    , sasEtag
+    , sasNextPageToken
+    , sasKind
+    , sasItems
 
-    -- * Accounts
-    , Accounts
-    , accounts
-    , aEtag
-    , aNextPageToken
-    , aKind
-    , aItems
+    -- * CustomChannelTargetingInfo
+    , CustomChannelTargetingInfo
+    , customChannelTargetingInfo
+    , cctiLocation
+    , cctiSiteLanguage
+    , cctiAdsAppearOn
+    , cctiDescription
 
     -- * AdClient
     , AdClient
@@ -43,13 +43,63 @@ module Network.Google.AdSense.Types
     , acProductCode
     , acArcReviewMode
 
-    -- * AdClients
-    , AdClients
-    , adClients
-    , acsEtag
-    , acsNextPageToken
-    , acsKind
-    , acsItems
+    -- * SavedAdStyle
+    , SavedAdStyle
+    , savedAdStyle
+    , sKind
+    , sName
+    , sAdStyle
+    , sId
+
+    -- * AdUnitBackupOptionContentAdsSettings
+    , AdUnitBackupOptionContentAdsSettings
+    , adUnitBackupOptionContentAdsSettings
+    , aubocasColor
+    , aubocasUrl
+    , aubocasType
+
+    -- * Accounts
+    , Accounts
+    , accounts
+    , aEtag
+    , aNextPageToken
+    , aKind
+    , aItems
+
+    -- * AdUnitMobileContentAdsSettings
+    , AdUnitMobileContentAdsSettings
+    , adUnitMobileContentAdsSettings
+    , aumcasSize
+    , aumcasScriptingLanguage
+    , aumcasMarkupLanguage
+    , aumcasType
+
+    -- * Payment
+    , Payment
+    , payment
+    , pPaymentAmountCurrencyCode
+    , pKind
+    , pPaymentDate
+    , pId
+    , pPaymentAmount
+
+    -- * Alt
+    , Alt (..)
+
+    -- * Metadata
+    , Metadata
+    , metadata
+    , mKind
+    , mItems
+
+    -- * CustomChannel
+    , CustomChannel
+    , customChannel
+    , ccTargetingInfo
+    , ccKind
+    , ccName
+    , ccCode
+    , ccId
 
     -- * AdCode
     , AdCode
@@ -57,13 +107,54 @@ module Network.Google.AdSense.Types
     , adKind
     , adAdCode
 
-    -- * AdStyle
-    , AdStyle
-    , adStyle
-    , asCorners
-    , asKind
-    , asFont
-    , asColors
+    -- * UrlChannel
+    , UrlChannel
+    , urlChannel
+    , ucKind
+    , ucId
+    , ucUrlPattern
+
+    -- * Alert
+    , Alert
+    , alert
+    , aleIsDismissible
+    , aleKind
+    , aleSeverity
+    , aleId
+    , aleType
+    , aleMessage
+
+    -- * Payments
+    , Payments
+    , payments
+    , payKind
+    , payItems
+
+    -- * AdsenseReportsGenerateResponseItemHeaders
+    , AdsenseReportsGenerateResponseItemHeaders
+    , adsenseReportsGenerateResponseItemHeaders
+    , argrihName
+    , argrihCurrency
+    , argrihType
+
+    -- * ReportingMetadataEntry
+    , ReportingMetadataEntry
+    , reportingMetadataEntry
+    , rmeKind
+    , rmeRequiredMetrics
+    , rmeCompatibleMetrics
+    , rmeRequiredDimensions
+    , rmeId
+    , rmeCompatibleDimensions
+    , rmeSupportedProducts
+
+    -- * AdClients
+    , AdClients
+    , adClients
+    , acsEtag
+    , acsNextPageToken
+    , acsKind
+    , acsItems
 
     -- * AdStyleColors
     , AdStyleColors
@@ -74,11 +165,55 @@ module Network.Google.AdSense.Types
     , ascTitle
     , ascBackground
 
+    -- * AdUnitContentAdsSettings
+    , AdUnitContentAdsSettings
+    , adUnitContentAdsSettings
+    , aucasBackupOption
+    , aucasSize
+    , aucasType
+
     -- * AdStyleFont
     , AdStyleFont
     , adStyleFont
     , asfSize
     , asfFamily
+
+    -- * AdStyle
+    , AdStyle
+    , adStyle
+    , asCorners
+    , asKind
+    , asFont
+    , asColors
+
+    -- * Alerts
+    , Alerts
+    , alerts
+    , aaKind
+    , aaItems
+
+    -- * AdUnits
+    , AdUnits
+    , adUnits
+    , auEtag
+    , auNextPageToken
+    , auKind
+    , auItems
+
+    -- * SavedReports
+    , SavedReports
+    , savedReports
+    , srEtag
+    , srNextPageToken
+    , srKind
+    , srItems
+
+    -- * SavedReport
+    , SavedReport
+    , savedReport
+    , savKind
+    , savName
+    , savId
 
     -- * AdUnit
     , AdUnit
@@ -94,43 +229,21 @@ module Network.Google.AdSense.Types
     , auuCode
     , auuId
 
-    -- * AdUnitBackupOptionContentAdsSettings
-    , AdUnitBackupOptionContentAdsSettings
-    , adUnitBackupOptionContentAdsSettings
-    , aubocasColor
-    , aubocasUrl
-    , aubocasType
+    -- * UrlChannels
+    , UrlChannels
+    , urlChannels
+    , urlcEtag
+    , urlcNextPageToken
+    , urlcKind
+    , urlcItems
 
-    -- * AdUnitContentAdsSettings
-    , AdUnitContentAdsSettings
-    , adUnitContentAdsSettings
-    , aucasBackupOption
-    , aucasSize
-    , aucasType
-
-    -- * AdUnitFeedAdsSettings
-    , AdUnitFeedAdsSettings
-    , adUnitFeedAdsSettings
-    , aufasFrequency
-    , aufasAdPosition
-    , aufasType
-    , aufasMinimumWordCount
-
-    -- * AdUnitMobileContentAdsSettings
-    , AdUnitMobileContentAdsSettings
-    , adUnitMobileContentAdsSettings
-    , aumcasSize
-    , aumcasScriptingLanguage
-    , aumcasMarkupLanguage
-    , aumcasType
-
-    -- * AdUnits
-    , AdUnits
-    , adUnits
-    , auEtag
-    , auNextPageToken
-    , auKind
-    , auItems
+    -- * CustomChannels
+    , CustomChannels
+    , customChannels
+    , cEtag
+    , cNextPageToken
+    , cKind
+    , cItems
 
     -- * AdsenseReportsGenerateResponse
     , AdsenseReportsGenerateResponse
@@ -145,133 +258,32 @@ module Network.Google.AdSense.Types
     , argrHeaders
     , argrTotalMatchedRows
 
-    -- * AdsenseReportsGenerateResponseItemHeaders
-    , AdsenseReportsGenerateResponseItemHeaders
-    , adsenseReportsGenerateResponseItemHeaders
-    , argrihName
-    , argrihCurrency
-    , argrihType
+    -- * Account
+    , Account
+    , account
+    , accKind
+    , accPremium
+    , accName
+    , accId
+    , accTimezone
+    , accSubAccounts
 
-    -- * Alert
-    , Alert
-    , alert
-    , aleIsDismissible
-    , aleKind
-    , aleSeverity
-    , aleId
-    , aleType
-    , aleMessage
-
-    -- * Alerts
-    , Alerts
-    , alerts
-    , aaKind
-    , aaItems
-
-    -- * CustomChannel
-    , CustomChannel
-    , customChannel
-    , ccTargetingInfo
-    , ccKind
-    , ccName
-    , ccCode
-    , ccId
-
-    -- * CustomChannelTargetingInfo
-    , CustomChannelTargetingInfo
-    , customChannelTargetingInfo
-    , cctiLocation
-    , cctiSiteLanguage
-    , cctiAdsAppearOn
-    , cctiDescription
-
-    -- * CustomChannels
-    , CustomChannels
-    , customChannels
-    , cEtag
-    , cNextPageToken
-    , cKind
-    , cItems
-
-    -- * Metadata
-    , Metadata
-    , metadata
-    , mKind
-    , mItems
-
-    -- * Payment
-    , Payment
-    , payment
-    , pPaymentAmountCurrencyCode
-    , pKind
-    , pPaymentDate
-    , pId
-    , pPaymentAmount
-
-    -- * Payments
-    , Payments
-    , payments
-    , payKind
-    , payItems
-
-    -- * ReportingMetadataEntry
-    , ReportingMetadataEntry
-    , reportingMetadataEntry
-    , rmeKind
-    , rmeRequiredMetrics
-    , rmeCompatibleMetrics
-    , rmeRequiredDimensions
-    , rmeId
-    , rmeCompatibleDimensions
-    , rmeSupportedProducts
-
-    -- * SavedAdStyle
-    , SavedAdStyle
-    , savedAdStyle
-    , sKind
-    , sName
-    , sAdStyle
-    , sId
-
-    -- * SavedAdStyles
-    , SavedAdStyles
-    , savedAdStyles
-    , sasEtag
-    , sasNextPageToken
-    , sasKind
-    , sasItems
-
-    -- * SavedReport
-    , SavedReport
-    , savedReport
-    , savKind
-    , savName
-    , savId
-
-    -- * SavedReports
-    , SavedReports
-    , savedReports
-    , srEtag
-    , srNextPageToken
-    , srKind
-    , srItems
-
-    -- * UrlChannel
-    , UrlChannel
-    , urlChannel
-    , ucKind
-    , ucId
-    , ucUrlPattern
-
-    -- * UrlChannels
-    , UrlChannels
-    , urlChannels
-    , urlcEtag
-    , urlcNextPageToken
-    , urlcKind
-    , urlcItems
+    -- * AdUnitFeedAdsSettings
+    , AdUnitFeedAdsSettings
+    , adUnitFeedAdsSettings
+    , aufasFrequency
+    , aufasAdPosition
+    , aufasType
+    , aufasMinimumWordCount
     ) where
 
 import           Network.Google.AdSense.Types.Product
 import           Network.Google.AdSense.Types.Sum
 import           Network.Google.Prelude
+
+-- | URL referring to version 'v1.4' of the AdSense Management API.
+adSenseURL :: BaseUrl
+adSenseURL
+  = BaseUrl Https
+      "https://www.googleapis.com/adsense/v1.4/"
+      443

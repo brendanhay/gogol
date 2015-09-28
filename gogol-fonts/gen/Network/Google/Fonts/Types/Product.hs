@@ -18,6 +18,28 @@ module Network.Google.Fonts.Types.Product where
 import           Network.Google.Fonts.Types.Sum
 import           Network.Google.Prelude
 
+-- | The font files (with all supported scripts) for each one of the
+-- available variants, as a key : value map.
+--
+-- /See:/ 'webfontFiles' smart constructor.
+data WebfontFiles =
+    WebfontFiles
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'WebfontFiles' with the minimum fields required to make a request.
+--
+webfontFiles
+    :: WebfontFiles
+webfontFiles = WebfontFiles
+
+instance FromJSON WebfontFiles where
+        parseJSON
+          = withObject "WebfontFiles"
+              (\ o -> pure WebfontFiles)
+
+instance ToJSON WebfontFiles where
+        toJSON = const (Object mempty)
+
 --
 -- /See:/ 'webfont' smart constructor.
 data Webfont = Webfont
@@ -133,28 +155,6 @@ instance ToJSON Webfont where
                   ("files" .=) <$> _wFiles,
                   ("subsets" .=) <$> _wSubsets,
                   ("lastModified" .=) <$> _wLastModified])
-
--- | The font files (with all supported scripts) for each one of the
--- available variants, as a key : value map.
---
--- /See:/ 'webfontFiles' smart constructor.
-data WebfontFiles =
-    WebfontFiles
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'WebfontFiles' with the minimum fields required to make a request.
---
-webfontFiles
-    :: WebfontFiles
-webfontFiles = WebfontFiles
-
-instance FromJSON WebfontFiles where
-        parseJSON
-          = withObject "WebfontFiles"
-              (\ o -> pure WebfontFiles)
-
-instance ToJSON WebfontFiles where
-        toJSON = const (Object mempty)
 
 --
 -- /See:/ 'webfontList' smart constructor.

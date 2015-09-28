@@ -18,91 +18,6 @@ module Network.Google.ResourceManager.Types.Product where
 import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types.Sum
 
--- | Associates \`members\` with a \`role\`.
---
--- /See:/ 'binding' smart constructor.
-data Binding = Binding
-    { _bMembers :: !(Maybe [Text])
-    , _bRole    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Binding' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'bMembers'
---
--- * 'bRole'
-binding
-    :: Binding
-binding =
-    Binding
-    { _bMembers = Nothing
-    , _bRole = Nothing
-    }
-
--- | Specifies the identities requesting access for a Cloud Platform
--- resource. \`members\` can have the following formats: * \`allUsers\`: A
--- special identifier that represents anyone who is on the internet; with
--- or without a Google account. * \`allAuthenticatedUsers\`: A special
--- identifier that represents anyone who is authenticated with a Google
--- account or a service account. * \`user:{emailid}\`: An email address
--- that represents a specific Google account. For example,
--- \`alice\'gmail.com\` or \`joe\'example.com\`. *
--- \`serviceAccount:{emailid}\`: An email address that represents a service
--- account. For example, \`my-other-app\'appspot.gserviceaccount.com\`. *
--- \`group:{emailid}\`: An email address that represents a Google group.
--- For example, \`admins\'example.com\`. * \`domain:{domain}\`: A Google
--- Apps domain name that represents all the users of that domain. For
--- example, \`google.com\` or \`example.com\`.
-bMembers :: Lens' Binding [Text]
-bMembers
-  = lens _bMembers (\ s a -> s{_bMembers = a}) .
-      _Default
-      . _Coerce
-
--- | Role that is assigned to \`members\`. For example, \`roles\/viewer\`,
--- \`roles\/editor\`, or \`roles\/owner\`. Required
-bRole :: Lens' Binding (Maybe Text)
-bRole = lens _bRole (\ s a -> s{_bRole = a})
-
-instance FromJSON Binding where
-        parseJSON
-          = withObject "Binding"
-              (\ o ->
-                 Binding <$>
-                   (o .:? "members" .!= mempty) <*> (o .:? "role"))
-
-instance ToJSON Binding where
-        toJSON Binding{..}
-          = object
-              (catMaybes
-                 [("members" .=) <$> _bMembers,
-                  ("role" .=) <$> _bRole])
-
--- | A generic empty message that you can re-use to avoid defining duplicated
--- empty messages in your APIs. A typical example is to use it as the
--- request or the response type of an API method. For instance: service Foo
--- { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The
--- JSON representation for \`Empty\` is empty JSON object \`{}\`.
---
--- /See:/ 'empty' smart constructor.
-data Empty =
-    Empty
-    deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Empty' with the minimum fields required to make a request.
---
-empty
-    :: Empty
-empty = Empty
-
-instance FromJSON Empty where
-        parseJSON = withObject "Empty" (\ o -> pure Empty)
-
-instance ToJSON Empty where
-        toJSON = const (Object mempty)
-
 -- | Request message for \`GetIamPolicy\` method.
 --
 -- /See:/ 'getIamPolicyRequest' smart constructor.
@@ -123,189 +38,6 @@ instance FromJSON GetIamPolicyRequest where
 
 instance ToJSON GetIamPolicyRequest where
         toJSON = const (Object mempty)
-
--- | The response returned from the ListOrganizations method.
---
--- /See:/ 'listOrganizationsResponse' smart constructor.
-data ListOrganizationsResponse = ListOrganizationsResponse
-    { _lorNextPageToken :: !(Maybe Text)
-    , _lorOrganizations :: !(Maybe [Maybe Organization])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ListOrganizationsResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lorNextPageToken'
---
--- * 'lorOrganizations'
-listOrganizationsResponse
-    :: ListOrganizationsResponse
-listOrganizationsResponse =
-    ListOrganizationsResponse
-    { _lorNextPageToken = Nothing
-    , _lorOrganizations = Nothing
-    }
-
--- | A pagination token to be used to retrieve the next page of results. If
--- the result is too large to fit within the page size specified in the
--- request, this field will be set with a token that can be used to fetch
--- the next page of results. If this field is empty, it indicates that this
--- response contains the last page of results.
-lorNextPageToken :: Lens' ListOrganizationsResponse (Maybe Text)
-lorNextPageToken
-  = lens _lorNextPageToken
-      (\ s a -> s{_lorNextPageToken = a})
-
--- | The list of Organizations that matched the list query, possibly
--- paginated.
-lorOrganizations :: Lens' ListOrganizationsResponse [Maybe Organization]
-lorOrganizations
-  = lens _lorOrganizations
-      (\ s a -> s{_lorOrganizations = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON ListOrganizationsResponse where
-        parseJSON
-          = withObject "ListOrganizationsResponse"
-              (\ o ->
-                 ListOrganizationsResponse <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "organizations" .!= mempty))
-
-instance ToJSON ListOrganizationsResponse where
-        toJSON ListOrganizationsResponse{..}
-          = object
-              (catMaybes
-                 [("nextPageToken" .=) <$> _lorNextPageToken,
-                  ("organizations" .=) <$> _lorOrganizations])
-
--- | A page of the response received from the
--- [ListProjects][google.cloudresourcemanager.projects.v1beta1.DeveloperProjects.ListProjects]
--- method. A paginated response where more pages are available has
--- \`next_page_token\` set. This token can be used in a subsequent request
--- to retrieve the next request page.
---
--- /See:/ 'listProjectsResponse' smart constructor.
-data ListProjectsResponse = ListProjectsResponse
-    { _lprNextPageToken :: !(Maybe Text)
-    , _lprProjects      :: !(Maybe [Maybe Project])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ListProjectsResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lprNextPageToken'
---
--- * 'lprProjects'
-listProjectsResponse
-    :: ListProjectsResponse
-listProjectsResponse =
-    ListProjectsResponse
-    { _lprNextPageToken = Nothing
-    , _lprProjects = Nothing
-    }
-
--- | Pagination token. If the result set is too large to fit in a single
--- response, this token is returned. It encodes the position of the current
--- result cursor. Feeding this value into a new list request with the
--- \`page_token\` parameter gives the next page of the results. When
--- \`next_page_token\` is not filled in, there is no next page and the list
--- returned is the last page in the result set. Pagination tokens have a
--- limited lifetime. Note: pagination is not yet supported; the server will
--- not set this field.
-lprNextPageToken :: Lens' ListProjectsResponse (Maybe Text)
-lprNextPageToken
-  = lens _lprNextPageToken
-      (\ s a -> s{_lprNextPageToken = a})
-
--- | The list of projects that matched the list filter. This list can be
--- paginated.
-lprProjects :: Lens' ListProjectsResponse [Maybe Project]
-lprProjects
-  = lens _lprProjects (\ s a -> s{_lprProjects = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON ListProjectsResponse where
-        parseJSON
-          = withObject "ListProjectsResponse"
-              (\ o ->
-                 ListProjectsResponse <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "projects" .!= mempty))
-
-instance ToJSON ListProjectsResponse where
-        toJSON ListProjectsResponse{..}
-          = object
-              (catMaybes
-                 [("nextPageToken" .=) <$> _lprNextPageToken,
-                  ("projects" .=) <$> _lprProjects])
-
--- | The root node in the resource hierarchy to which a particular entity\'s
--- (e.g., company) resources belong.
---
--- /See:/ 'organization' smart constructor.
-data Organization = Organization
-    { _oOwner          :: !(Maybe (Maybe OrganizationOwner))
-    , _oDisplayName    :: !(Maybe Text)
-    , _oOrganizationId :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Organization' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'oOwner'
---
--- * 'oDisplayName'
---
--- * 'oOrganizationId'
-organization
-    :: Organization
-organization =
-    Organization
-    { _oOwner = Nothing
-    , _oDisplayName = Nothing
-    , _oOrganizationId = Nothing
-    }
-
--- | The owner of this Organization. The owner should be specified upon
--- creation. Once set, it cannot be changed. This field is required.
-oOwner :: Lens' Organization (Maybe (Maybe OrganizationOwner))
-oOwner = lens _oOwner (\ s a -> s{_oOwner = a})
-
--- | A friendly string to be used to refer to the Organization in the UI.
--- This field is required.
-oDisplayName :: Lens' Organization (Maybe Text)
-oDisplayName
-  = lens _oDisplayName (\ s a -> s{_oDisplayName = a})
-
--- | An immutable id for the Organization that is assigned on creation. This
--- should be omitted when creating a new Organization. This field is
--- read-only.
-oOrganizationId :: Lens' Organization (Maybe Text)
-oOrganizationId
-  = lens _oOrganizationId
-      (\ s a -> s{_oOrganizationId = a})
-
-instance FromJSON Organization where
-        parseJSON
-          = withObject "Organization"
-              (\ o ->
-                 Organization <$>
-                   (o .:? "owner") <*> (o .:? "displayName") <*>
-                     (o .:? "organizationId"))
-
-instance ToJSON Organization where
-        toJSON Organization{..}
-          = object
-              (catMaybes
-                 [("owner" .=) <$> _oOwner,
-                  ("displayName" .=) <$> _oDisplayName,
-                  ("organizationId" .=) <$> _oOrganizationId])
 
 -- | The entity that owns an Organization. The lifetime of the Organization
 -- and all of its descendants are bound to the OrganizationOwner. If the
@@ -419,6 +151,439 @@ instance ToJSON Policy where
                  [("etag" .=) <$> _pEtag,
                   ("version" .=) <$> _pVersion,
                   ("bindings" .=) <$> _pBindings])
+
+-- | Response message for \`TestIamPermissions\` method.
+--
+-- /See:/ 'testIamPermissionsResponse' smart constructor.
+newtype TestIamPermissionsResponse = TestIamPermissionsResponse
+    { _tiprPermissions :: Maybe [Text]
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TestIamPermissionsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tiprPermissions'
+testIamPermissionsResponse
+    :: TestIamPermissionsResponse
+testIamPermissionsResponse =
+    TestIamPermissionsResponse
+    { _tiprPermissions = Nothing
+    }
+
+-- | A subset of \`TestPermissionsRequest.permissions\` that the caller is
+-- allowed.
+tiprPermissions :: Lens' TestIamPermissionsResponse [Text]
+tiprPermissions
+  = lens _tiprPermissions
+      (\ s a -> s{_tiprPermissions = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON TestIamPermissionsResponse where
+        parseJSON
+          = withObject "TestIamPermissionsResponse"
+              (\ o ->
+                 TestIamPermissionsResponse <$>
+                   (o .:? "permissions" .!= mempty))
+
+instance ToJSON TestIamPermissionsResponse where
+        toJSON TestIamPermissionsResponse{..}
+          = object
+              (catMaybes [("permissions" .=) <$> _tiprPermissions])
+
+-- | The root node in the resource hierarchy to which a particular entity\'s
+-- (e.g., company) resources belong.
+--
+-- /See:/ 'organization' smart constructor.
+data Organization = Organization
+    { _oOwner          :: !(Maybe (Maybe OrganizationOwner))
+    , _oDisplayName    :: !(Maybe Text)
+    , _oOrganizationId :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Organization' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oOwner'
+--
+-- * 'oDisplayName'
+--
+-- * 'oOrganizationId'
+organization
+    :: Organization
+organization =
+    Organization
+    { _oOwner = Nothing
+    , _oDisplayName = Nothing
+    , _oOrganizationId = Nothing
+    }
+
+-- | The owner of this Organization. The owner should be specified upon
+-- creation. Once set, it cannot be changed. This field is required.
+oOwner :: Lens' Organization (Maybe (Maybe OrganizationOwner))
+oOwner = lens _oOwner (\ s a -> s{_oOwner = a})
+
+-- | A friendly string to be used to refer to the Organization in the UI.
+-- This field is required.
+oDisplayName :: Lens' Organization (Maybe Text)
+oDisplayName
+  = lens _oDisplayName (\ s a -> s{_oDisplayName = a})
+
+-- | An immutable id for the Organization that is assigned on creation. This
+-- should be omitted when creating a new Organization. This field is
+-- read-only.
+oOrganizationId :: Lens' Organization (Maybe Text)
+oOrganizationId
+  = lens _oOrganizationId
+      (\ s a -> s{_oOrganizationId = a})
+
+instance FromJSON Organization where
+        parseJSON
+          = withObject "Organization"
+              (\ o ->
+                 Organization <$>
+                   (o .:? "owner") <*> (o .:? "displayName") <*>
+                     (o .:? "organizationId"))
+
+instance ToJSON Organization where
+        toJSON Organization{..}
+          = object
+              (catMaybes
+                 [("owner" .=) <$> _oOwner,
+                  ("displayName" .=) <$> _oDisplayName,
+                  ("organizationId" .=) <$> _oOrganizationId])
+
+-- | Request message for \`SetIamPolicy\` method.
+--
+-- /See:/ 'setIamPolicyRequest' smart constructor.
+newtype SetIamPolicyRequest = SetIamPolicyRequest
+    { _siprPolicy :: Maybe (Maybe Policy)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SetIamPolicyRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'siprPolicy'
+setIamPolicyRequest
+    :: SetIamPolicyRequest
+setIamPolicyRequest =
+    SetIamPolicyRequest
+    { _siprPolicy = Nothing
+    }
+
+-- | REQUIRED: The complete policy to be applied to the \`resource\`. The
+-- size of the policy is limited to a few 10s of KB. An empty policy is a
+-- valid policy but certain Cloud Platform services (such as Projects)
+-- might reject them.
+siprPolicy :: Lens' SetIamPolicyRequest (Maybe (Maybe Policy))
+siprPolicy
+  = lens _siprPolicy (\ s a -> s{_siprPolicy = a})
+
+instance FromJSON SetIamPolicyRequest where
+        parseJSON
+          = withObject "SetIamPolicyRequest"
+              (\ o -> SetIamPolicyRequest <$> (o .:? "policy"))
+
+instance ToJSON SetIamPolicyRequest where
+        toJSON SetIamPolicyRequest{..}
+          = object (catMaybes [("policy" .=) <$> _siprPolicy])
+
+-- | The response returned from the ListOrganizations method.
+--
+-- /See:/ 'listOrganizationsResponse' smart constructor.
+data ListOrganizationsResponse = ListOrganizationsResponse
+    { _lorNextPageToken :: !(Maybe Text)
+    , _lorOrganizations :: !(Maybe [Maybe Organization])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListOrganizationsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lorNextPageToken'
+--
+-- * 'lorOrganizations'
+listOrganizationsResponse
+    :: ListOrganizationsResponse
+listOrganizationsResponse =
+    ListOrganizationsResponse
+    { _lorNextPageToken = Nothing
+    , _lorOrganizations = Nothing
+    }
+
+-- | A pagination token to be used to retrieve the next page of results. If
+-- the result is too large to fit within the page size specified in the
+-- request, this field will be set with a token that can be used to fetch
+-- the next page of results. If this field is empty, it indicates that this
+-- response contains the last page of results.
+lorNextPageToken :: Lens' ListOrganizationsResponse (Maybe Text)
+lorNextPageToken
+  = lens _lorNextPageToken
+      (\ s a -> s{_lorNextPageToken = a})
+
+-- | The list of Organizations that matched the list query, possibly
+-- paginated.
+lorOrganizations :: Lens' ListOrganizationsResponse [Maybe Organization]
+lorOrganizations
+  = lens _lorOrganizations
+      (\ s a -> s{_lorOrganizations = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListOrganizationsResponse where
+        parseJSON
+          = withObject "ListOrganizationsResponse"
+              (\ o ->
+                 ListOrganizationsResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "organizations" .!= mempty))
+
+instance ToJSON ListOrganizationsResponse where
+        toJSON ListOrganizationsResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lorNextPageToken,
+                  ("organizations" .=) <$> _lorOrganizations])
+
+-- | Associates \`members\` with a \`role\`.
+--
+-- /See:/ 'binding' smart constructor.
+data Binding = Binding
+    { _bMembers :: !(Maybe [Text])
+    , _bRole    :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Binding' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bMembers'
+--
+-- * 'bRole'
+binding
+    :: Binding
+binding =
+    Binding
+    { _bMembers = Nothing
+    , _bRole = Nothing
+    }
+
+-- | Specifies the identities requesting access for a Cloud Platform
+-- resource. \`members\` can have the following formats: * \`allUsers\`: A
+-- special identifier that represents anyone who is on the internet; with
+-- or without a Google account. * \`allAuthenticatedUsers\`: A special
+-- identifier that represents anyone who is authenticated with a Google
+-- account or a service account. * \`user:{emailid}\`: An email address
+-- that represents a specific Google account. For example,
+-- \`alice\'gmail.com\` or \`joe\'example.com\`. *
+-- \`serviceAccount:{emailid}\`: An email address that represents a service
+-- account. For example, \`my-other-app\'appspot.gserviceaccount.com\`. *
+-- \`group:{emailid}\`: An email address that represents a Google group.
+-- For example, \`admins\'example.com\`. * \`domain:{domain}\`: A Google
+-- Apps domain name that represents all the users of that domain. For
+-- example, \`google.com\` or \`example.com\`.
+bMembers :: Lens' Binding [Text]
+bMembers
+  = lens _bMembers (\ s a -> s{_bMembers = a}) .
+      _Default
+      . _Coerce
+
+-- | Role that is assigned to \`members\`. For example, \`roles\/viewer\`,
+-- \`roles\/editor\`, or \`roles\/owner\`. Required
+bRole :: Lens' Binding (Maybe Text)
+bRole = lens _bRole (\ s a -> s{_bRole = a})
+
+instance FromJSON Binding where
+        parseJSON
+          = withObject "Binding"
+              (\ o ->
+                 Binding <$>
+                   (o .:? "members" .!= mempty) <*> (o .:? "role"))
+
+instance ToJSON Binding where
+        toJSON Binding{..}
+          = object
+              (catMaybes
+                 [("members" .=) <$> _bMembers,
+                  ("role" .=) <$> _bRole])
+
+-- | A page of the response received from the
+-- [ListProjects][google.cloudresourcemanager.projects.v1beta1.DeveloperProjects.ListProjects]
+-- method. A paginated response where more pages are available has
+-- \`next_page_token\` set. This token can be used in a subsequent request
+-- to retrieve the next request page.
+--
+-- /See:/ 'listProjectsResponse' smart constructor.
+data ListProjectsResponse = ListProjectsResponse
+    { _lprNextPageToken :: !(Maybe Text)
+    , _lprProjects      :: !(Maybe [Maybe Project])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListProjectsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lprNextPageToken'
+--
+-- * 'lprProjects'
+listProjectsResponse
+    :: ListProjectsResponse
+listProjectsResponse =
+    ListProjectsResponse
+    { _lprNextPageToken = Nothing
+    , _lprProjects = Nothing
+    }
+
+-- | Pagination token. If the result set is too large to fit in a single
+-- response, this token is returned. It encodes the position of the current
+-- result cursor. Feeding this value into a new list request with the
+-- \`page_token\` parameter gives the next page of the results. When
+-- \`next_page_token\` is not filled in, there is no next page and the list
+-- returned is the last page in the result set. Pagination tokens have a
+-- limited lifetime. Note: pagination is not yet supported; the server will
+-- not set this field.
+lprNextPageToken :: Lens' ListProjectsResponse (Maybe Text)
+lprNextPageToken
+  = lens _lprNextPageToken
+      (\ s a -> s{_lprNextPageToken = a})
+
+-- | The list of projects that matched the list filter. This list can be
+-- paginated.
+lprProjects :: Lens' ListProjectsResponse [Maybe Project]
+lprProjects
+  = lens _lprProjects (\ s a -> s{_lprProjects = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ListProjectsResponse where
+        parseJSON
+          = withObject "ListProjectsResponse"
+              (\ o ->
+                 ListProjectsResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "projects" .!= mempty))
+
+instance ToJSON ListProjectsResponse where
+        toJSON ListProjectsResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lprNextPageToken,
+                  ("projects" .=) <$> _lprProjects])
+
+-- | A container to reference an id for any resource type. A \'resource\' in
+-- Google Cloud Platform is a generic term for something you (a developer)
+-- may want to interact with through one of our API\'s. Some examples are
+-- an AppEngine app, a Compute Engine instance, Cloud SQL database, ...
+--
+-- /See:/ 'resourceId' smart constructor.
+data ResourceId = ResourceId
+    { _riId   :: !(Maybe Text)
+    , _riType :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ResourceId' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'riId'
+--
+-- * 'riType'
+resourceId
+    :: ResourceId
+resourceId =
+    ResourceId
+    { _riId = Nothing
+    , _riType = Nothing
+    }
+
+-- | Required field for the type-specific id. This should correspond to the
+-- id used in the type-specific API\'s.
+riId :: Lens' ResourceId (Maybe Text)
+riId = lens _riId (\ s a -> s{_riId = a})
+
+-- | Required field representing the resource type this id is for. At
+-- present, the only valid type is \"organization\".
+riType :: Lens' ResourceId (Maybe Text)
+riType = lens _riType (\ s a -> s{_riType = a})
+
+instance FromJSON ResourceId where
+        parseJSON
+          = withObject "ResourceId"
+              (\ o ->
+                 ResourceId <$> (o .:? "id") <*> (o .:? "type"))
+
+instance ToJSON ResourceId where
+        toJSON ResourceId{..}
+          = object
+              (catMaybes
+                 [("id" .=) <$> _riId, ("type" .=) <$> _riType])
+
+-- | Request message for \`TestIamPermissions\` method.
+--
+-- /See:/ 'testIamPermissionsRequest' smart constructor.
+newtype TestIamPermissionsRequest = TestIamPermissionsRequest
+    { _tiamprPermissions :: Maybe [Text]
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TestIamPermissionsRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tiamprPermissions'
+testIamPermissionsRequest
+    :: TestIamPermissionsRequest
+testIamPermissionsRequest =
+    TestIamPermissionsRequest
+    { _tiamprPermissions = Nothing
+    }
+
+-- | The set of permissions to check for the \`resource\`. Permissions with
+-- wildcards (such as \'*\' or \'storage.*\') are not allowed.
+tiamprPermissions :: Lens' TestIamPermissionsRequest [Text]
+tiamprPermissions
+  = lens _tiamprPermissions
+      (\ s a -> s{_tiamprPermissions = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON TestIamPermissionsRequest where
+        parseJSON
+          = withObject "TestIamPermissionsRequest"
+              (\ o ->
+                 TestIamPermissionsRequest <$>
+                   (o .:? "permissions" .!= mempty))
+
+instance ToJSON TestIamPermissionsRequest where
+        toJSON TestIamPermissionsRequest{..}
+          = object
+              (catMaybes
+                 [("permissions" .=) <$> _tiamprPermissions])
+
+-- | A generic empty message that you can re-use to avoid defining duplicated
+-- empty messages in your APIs. A typical example is to use it as the
+-- request or the response type of an API method. For instance: service Foo
+-- { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The
+-- JSON representation for \`Empty\` is empty JSON object \`{}\`.
+--
+-- /See:/ 'empty' smart constructor.
+data Empty =
+    Empty
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Empty' with the minimum fields required to make a request.
+--
+empty
+    :: Empty
+empty = Empty
+
+instance FromJSON Empty where
+        parseJSON = withObject "Empty" (\ o -> pure Empty)
+
+instance ToJSON Empty where
+        toJSON = const (Object mempty)
 
 -- | A Project is a high-level Google Cloud Platform entity. It is a
 -- container for ACLs, APIs, AppEngine Apps, VMs, and other Google Cloud
@@ -567,168 +732,3 @@ instance FromJSON ProjectLabels where
 
 instance ToJSON ProjectLabels where
         toJSON = const (Object mempty)
-
--- | A container to reference an id for any resource type. A \'resource\' in
--- Google Cloud Platform is a generic term for something you (a developer)
--- may want to interact with through one of our API\'s. Some examples are
--- an AppEngine app, a Compute Engine instance, Cloud SQL database, ...
---
--- /See:/ 'resourceId' smart constructor.
-data ResourceId = ResourceId
-    { _riId   :: !(Maybe Text)
-    , _riType :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ResourceId' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'riId'
---
--- * 'riType'
-resourceId
-    :: ResourceId
-resourceId =
-    ResourceId
-    { _riId = Nothing
-    , _riType = Nothing
-    }
-
--- | Required field for the type-specific id. This should correspond to the
--- id used in the type-specific API\'s.
-riId :: Lens' ResourceId (Maybe Text)
-riId = lens _riId (\ s a -> s{_riId = a})
-
--- | Required field representing the resource type this id is for. At
--- present, the only valid type is \"organization\".
-riType :: Lens' ResourceId (Maybe Text)
-riType = lens _riType (\ s a -> s{_riType = a})
-
-instance FromJSON ResourceId where
-        parseJSON
-          = withObject "ResourceId"
-              (\ o ->
-                 ResourceId <$> (o .:? "id") <*> (o .:? "type"))
-
-instance ToJSON ResourceId where
-        toJSON ResourceId{..}
-          = object
-              (catMaybes
-                 [("id" .=) <$> _riId, ("type" .=) <$> _riType])
-
--- | Request message for \`SetIamPolicy\` method.
---
--- /See:/ 'setIamPolicyRequest' smart constructor.
-newtype SetIamPolicyRequest = SetIamPolicyRequest
-    { _siprPolicy :: Maybe (Maybe Policy)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'SetIamPolicyRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'siprPolicy'
-setIamPolicyRequest
-    :: SetIamPolicyRequest
-setIamPolicyRequest =
-    SetIamPolicyRequest
-    { _siprPolicy = Nothing
-    }
-
--- | REQUIRED: The complete policy to be applied to the \`resource\`. The
--- size of the policy is limited to a few 10s of KB. An empty policy is a
--- valid policy but certain Cloud Platform services (such as Projects)
--- might reject them.
-siprPolicy :: Lens' SetIamPolicyRequest (Maybe (Maybe Policy))
-siprPolicy
-  = lens _siprPolicy (\ s a -> s{_siprPolicy = a})
-
-instance FromJSON SetIamPolicyRequest where
-        parseJSON
-          = withObject "SetIamPolicyRequest"
-              (\ o -> SetIamPolicyRequest <$> (o .:? "policy"))
-
-instance ToJSON SetIamPolicyRequest where
-        toJSON SetIamPolicyRequest{..}
-          = object (catMaybes [("policy" .=) <$> _siprPolicy])
-
--- | Request message for \`TestIamPermissions\` method.
---
--- /See:/ 'testIamPermissionsRequest' smart constructor.
-newtype TestIamPermissionsRequest = TestIamPermissionsRequest
-    { _tiamprPermissions :: Maybe [Text]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'TestIamPermissionsRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'tiamprPermissions'
-testIamPermissionsRequest
-    :: TestIamPermissionsRequest
-testIamPermissionsRequest =
-    TestIamPermissionsRequest
-    { _tiamprPermissions = Nothing
-    }
-
--- | The set of permissions to check for the \`resource\`. Permissions with
--- wildcards (such as \'*\' or \'storage.*\') are not allowed.
-tiamprPermissions :: Lens' TestIamPermissionsRequest [Text]
-tiamprPermissions
-  = lens _tiamprPermissions
-      (\ s a -> s{_tiamprPermissions = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON TestIamPermissionsRequest where
-        parseJSON
-          = withObject "TestIamPermissionsRequest"
-              (\ o ->
-                 TestIamPermissionsRequest <$>
-                   (o .:? "permissions" .!= mempty))
-
-instance ToJSON TestIamPermissionsRequest where
-        toJSON TestIamPermissionsRequest{..}
-          = object
-              (catMaybes
-                 [("permissions" .=) <$> _tiamprPermissions])
-
--- | Response message for \`TestIamPermissions\` method.
---
--- /See:/ 'testIamPermissionsResponse' smart constructor.
-newtype TestIamPermissionsResponse = TestIamPermissionsResponse
-    { _tiprPermissions :: Maybe [Text]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'TestIamPermissionsResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'tiprPermissions'
-testIamPermissionsResponse
-    :: TestIamPermissionsResponse
-testIamPermissionsResponse =
-    TestIamPermissionsResponse
-    { _tiprPermissions = Nothing
-    }
-
--- | A subset of \`TestPermissionsRequest.permissions\` that the caller is
--- allowed.
-tiprPermissions :: Lens' TestIamPermissionsResponse [Text]
-tiprPermissions
-  = lens _tiprPermissions
-      (\ s a -> s{_tiprPermissions = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON TestIamPermissionsResponse where
-        parseJSON
-          = withObject "TestIamPermissionsResponse"
-              (\ o ->
-                 TestIamPermissionsResponse <$>
-                   (o .:? "permissions" .!= mempty))
-
-instance ToJSON TestIamPermissionsResponse where
-        toJSON TestIamPermissionsResponse{..}
-          = object
-              (catMaybes [("permissions" .=) <$> _tiprPermissions])

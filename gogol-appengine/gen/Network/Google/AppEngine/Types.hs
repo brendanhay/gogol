@@ -14,20 +14,25 @@
 --
 module Network.Google.AppEngine.Types
     (
+    -- * Service URL
+      appEngineURL
 
-    -- * ApiConfigHandler
-      ApiConfigHandler
-    , apiConfigHandler
-    , achScript
-    , achSecurityLevel
-    , achUrl
-    , achAuthFailAction
-    , achLogin
+    -- * CpuUtilization
+    , CpuUtilization
+    , cpuUtilization
+    , cuAggregationWindowLength
+    , cuTargetUtilization
 
-    -- * ApiEndpointHandler
-    , ApiEndpointHandler
-    , apiEndpointHandler
-    , aehScriptPath
+    -- * ManualScaling
+    , ManualScaling
+    , manualScaling
+    , msInstances
+
+    -- * BasicScaling
+    , BasicScaling
+    , basicScaling
+    , bsMaxInstances
+    , bsIdleTimeout
 
     -- * Application
     , Application
@@ -37,61 +42,6 @@ module Network.Google.AppEngine.Types
     , aName
     , aDispatchRules
     , aId
-
-    -- * AutomaticScaling
-    , AutomaticScaling
-    , automaticScaling
-    , asMaxTotalInstances
-    , asMinIdleInstances
-    , asMinPendingLatency
-    , asCpuUtilization
-    , asMaxIdleInstances
-    , asMinTotalInstances
-    , asMaxConcurrentRequests
-    , asCoolDownPeriod
-    , asMaxPendingLatency
-
-    -- * BasicScaling
-    , BasicScaling
-    , basicScaling
-    , bsMaxInstances
-    , bsIdleTimeout
-
-    -- * ContainerInfo
-    , ContainerInfo
-    , containerInfo
-    , ciImage
-
-    -- * CpuUtilization
-    , CpuUtilization
-    , cpuUtilization
-    , cuAggregationWindowLength
-    , cuTargetUtilization
-
-    -- * Deployment
-    , Deployment
-    , deployment
-    , dContainer
-    , dFiles
-    , dSourceReferences
-
-    -- * DeploymentFiles
-    , DeploymentFiles
-    , deploymentFiles
-
-    -- * ErrorHandler
-    , ErrorHandler
-    , errorHandler
-    , ehMimeType
-    , ehErrorCode
-    , ehStaticFile
-
-    -- * FileInfo
-    , FileInfo
-    , fileInfo
-    , fiSha1Sum
-    , fiMimeType
-    , fiSourceUrl
 
     -- * HealthCheck
     , HealthCheck
@@ -104,97 +54,18 @@ module Network.Google.AppEngine.Types
     , hcTimeout
     , hcUnhealthyThreshold
 
-    -- * Library
-    , Library
-    , library
-    , lName
-    , lVersion
-
-    -- * ListModulesResponse
-    , ListModulesResponse
-    , listModulesResponse
-    , lmrNextPageToken
-    , lmrModules
-
-    -- * ListOperationsResponse
-    , ListOperationsResponse
-    , listOperationsResponse
-    , lorNextPageToken
-    , lorOperations
-
-    -- * ListVersionsResponse
-    , ListVersionsResponse
-    , listVersionsResponse
-    , lvrNextPageToken
-    , lvrVersions
-
-    -- * ManualScaling
-    , ManualScaling
-    , manualScaling
-    , msInstances
-
-    -- * Module
-    , Module
-    , module'
-    , mSplit
-    , mName
-    , mId
-
-    -- * Network
-    , Network
-    , network
-    , nForwardedPorts
-    , nInstanceTag
-    , nName
-
-    -- * Operation
-    , Operation
-    , operation
-    , oDone
-    , oError
-    , oResponse
-    , oName
-    , oMetadata
-
-    -- * OperationMetadata
-    , OperationMetadata
-    , operationMetadata
+    -- * ApiConfigHandler
+    , ApiConfigHandler
+    , apiConfigHandler
+    , achScript
+    , achSecurityLevel
+    , achUrl
+    , achAuthFailAction
+    , achLogin
 
     -- * OperationResponse
     , OperationResponse
     , operationResponse
-
-    -- * Resources
-    , Resources
-    , resources
-    , rMemoryGb
-    , rDiskGb
-    , rCpu
-
-    -- * ScriptHandler
-    , ScriptHandler
-    , scriptHandler
-    , shScriptPath
-
-    -- * SourceReference
-    , SourceReference
-    , sourceReference
-    , srRepository
-    , srRevisionId
-
-    -- * StaticDirectoryHandler
-    , StaticDirectoryHandler
-    , staticDirectoryHandler
-    , sdhHttpHeaders
-    , sdhRequireMatchingFile
-    , sdhExpiration
-    , sdhMimeType
-    , sdhApplicationReadable
-    , sdhDirectory
-
-    -- * StaticDirectoryHandlerHttpHeaders
-    , StaticDirectoryHandlerHttpHeaders
-    , staticDirectoryHandlerHttpHeaders
 
     -- * StaticFilesHandler
     , StaticFilesHandler
@@ -207,9 +78,63 @@ module Network.Google.AppEngine.Types
     , sfhApplicationReadable
     , sfhUploadPathRegex
 
-    -- * StaticFilesHandlerHttpHeaders
-    , StaticFilesHandlerHttpHeaders
-    , staticFilesHandlerHttpHeaders
+    -- * OperationMetadata
+    , OperationMetadata
+    , operationMetadata
+    , omInsertTime
+    , omUser
+    , omMethod
+    , omEndTime
+    , omOperationType
+    , omTarget
+
+    -- * ErrorHandler
+    , ErrorHandler
+    , errorHandler
+    , ehMimeType
+    , ehErrorCode
+    , ehStaticFile
+
+    -- * VersionBetaSettings
+    , VersionBetaSettings
+    , versionBetaSettings
+
+    -- * StaticDirectoryHandlerHttpHeaders
+    , StaticDirectoryHandlerHttpHeaders
+    , staticDirectoryHandlerHttpHeaders
+
+    -- * Network
+    , Network
+    , network
+    , nForwardedPorts
+    , nInstanceTag
+    , nName
+
+    -- * StaticDirectoryHandler
+    , StaticDirectoryHandler
+    , staticDirectoryHandler
+    , sdhHttpHeaders
+    , sdhRequireMatchingFile
+    , sdhExpiration
+    , sdhMimeType
+    , sdhApplicationReadable
+    , sdhDirectory
+
+    -- * Deployment
+    , Deployment
+    , deployment
+    , dContainer
+    , dFiles
+    , dSourceReferences
+
+    -- * VersionEnvVariables
+    , VersionEnvVariables
+    , versionEnvVariables
+
+    -- * ContainerInfo
+    , ContainerInfo
+    , containerInfo
+    , ciImage
 
     -- * Status
     , Status
@@ -217,27 +142,6 @@ module Network.Google.AppEngine.Types
     , sDetails
     , sCode
     , sMessage
-
-    -- * StatusItemDetails
-    , StatusItemDetails
-    , statusItemDetails
-
-    -- * TrafficSplit
-    , TrafficSplit
-    , trafficSplit
-    , tsShardBy
-    , tsAllocations
-
-    -- * TrafficSplitAllocations
-    , TrafficSplitAllocations
-    , trafficSplitAllocations
-
-    -- * UrlDispatchRule
-    , UrlDispatchRule
-    , urlDispatchRule
-    , udrPath
-    , udrDomain
-    , udrModule
 
     -- * UrlMap
     , UrlMap
@@ -251,6 +155,41 @@ module Network.Google.AppEngine.Types
     , umStaticFiles
     , umLogin
     , umStaticDirectory
+
+    -- * TrafficSplitAllocations
+    , TrafficSplitAllocations
+    , trafficSplitAllocations
+
+    -- * ScriptHandler
+    , ScriptHandler
+    , scriptHandler
+    , shScriptPath
+
+    -- * Library
+    , Library
+    , library
+    , lName
+    , lVersion
+
+    -- * DeploymentFiles
+    , DeploymentFiles
+    , deploymentFiles
+
+    -- * ListOperationsResponse
+    , ListOperationsResponse
+    , listOperationsResponse
+    , lorNextPageToken
+    , lorOperations
+
+    -- * TrafficSplit
+    , TrafficSplit
+    , trafficSplit
+    , tsShardBy
+    , tsAllocations
+
+    -- * StaticFilesHandlerHttpHeaders
+    , StaticFilesHandlerHttpHeaders
+    , staticFilesHandlerHttpHeaders
 
     -- * Version
     , Version
@@ -282,15 +221,94 @@ module Network.Google.AppEngine.Types
     , vLibraries
     , vDeployment
 
-    -- * VersionBetaSettings
-    , VersionBetaSettings
-    , versionBetaSettings
+    -- * Module
+    , Module
+    , module'
+    , mSplit
+    , mName
+    , mId
 
-    -- * VersionEnvVariables
-    , VersionEnvVariables
-    , versionEnvVariables
+    -- * UrlDispatchRule
+    , UrlDispatchRule
+    , urlDispatchRule
+    , udrPath
+    , udrDomain
+    , udrModule
+
+    -- * Operation
+    , Operation
+    , operation
+    , oDone
+    , oError
+    , oResponse
+    , oName
+    , oMetadata
+
+    -- * FileInfo
+    , FileInfo
+    , fileInfo
+    , fiSha1Sum
+    , fiMimeType
+    , fiSourceUrl
+
+    -- * AutomaticScaling
+    , AutomaticScaling
+    , automaticScaling
+    , asMaxTotalInstances
+    , asMinIdleInstances
+    , asMinPendingLatency
+    , asCpuUtilization
+    , asMaxIdleInstances
+    , asMinTotalInstances
+    , asMaxConcurrentRequests
+    , asCoolDownPeriod
+    , asMaxPendingLatency
+
+    -- * ListModulesResponse
+    , ListModulesResponse
+    , listModulesResponse
+    , lmrNextPageToken
+    , lmrModules
+
+    -- * ListVersionsResponse
+    , ListVersionsResponse
+    , listVersionsResponse
+    , lvrNextPageToken
+    , lvrVersions
+
+    -- * StatusItemDetails
+    , StatusItemDetails
+    , statusItemDetails
+
+    -- * ApiEndpointHandler
+    , ApiEndpointHandler
+    , apiEndpointHandler
+    , aehScriptPath
+
+    -- * OperationMetadata
+    , OperationMetadata
+    , operationMetadata
+
+    -- * SourceReference
+    , SourceReference
+    , sourceReference
+    , srRepository
+    , srRevisionId
+
+    -- * Resources
+    , Resources
+    , resources
+    , rMemoryGb
+    , rDiskGb
+    , rCpu
     ) where
 
 import           Network.Google.AppEngine.Types.Product
 import           Network.Google.AppEngine.Types.Sum
 import           Network.Google.Prelude
+
+-- | URL referring to version 'v1beta4' of the Google App Engine Admin API.
+appEngineURL :: BaseUrl
+appEngineURL
+  = BaseUrl Https "https://appengine.googleapis.com/"
+      443

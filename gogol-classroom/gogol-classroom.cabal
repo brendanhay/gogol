@@ -1,6 +1,6 @@
 name:                  gogol-classroom
 version:               0.0.1
-synopsis:              Google Classroom API.
+synopsis:              Google Classroom API Client.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -16,8 +16,8 @@ extra-source-files:    README.md
 description:
     Google Classroom API
     .
-    /Warning:/ This is an experimental preview release which is still under
-    heavy development and not intended for public consumption, caveat emptor!
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
 
 source-repository head
     type:     git
@@ -30,7 +30,24 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.Classroom
+          Network.Google.API.Classroom.Courses.Aliases.Create
+        , Network.Google.API.Classroom.Courses.Aliases.Delete
+        , Network.Google.API.Classroom.Courses.Aliases.List
+        , Network.Google.API.Classroom.Courses.Students.Create
+        , Network.Google.API.Classroom.Courses.Students.Delete
+        , Network.Google.API.Classroom.Courses.Students.Get
+        , Network.Google.API.Classroom.Courses.Students.List
+        , Network.Google.API.Classroom.Courses.Teachers.Create
+        , Network.Google.API.Classroom.Courses.Teachers.Delete
+        , Network.Google.API.Classroom.Courses.Teachers.Get
+        , Network.Google.API.Classroom.Courses.Teachers.List
+        , Network.Google.API.Classroom.Invitations.Accept
+        , Network.Google.API.Classroom.Invitations.Create
+        , Network.Google.API.Classroom.Invitations.Delete
+        , Network.Google.API.Classroom.Invitations.Get
+        , Network.Google.API.Classroom.Invitations.List
+        , Network.Google.API.Classroom.UserProfiles.Get
+        , Network.Google.Classroom
         , Network.Google.Classroom.Types
 
     other-modules:

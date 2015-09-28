@@ -1,6 +1,6 @@
 name:                  gogol-play-moviespartner
 version:               0.0.1
-synopsis:              Google Play Movies Partner API.
+synopsis:              Google Play Movies Partner API Client.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -17,8 +17,8 @@ description:
     Lets Google Play Movies Partners get the delivery status of their
     titles.
     .
-    /Warning:/ This is an experimental preview release which is still under
-    heavy development and not intended for public consumption, caveat emptor!
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
 
 source-repository head
     type:     git
@@ -31,7 +31,13 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.Play.Movies.Partner
+          Network.Google.API.PlayMoviesPartner.Accounts.Avails.List
+        , Network.Google.API.PlayMoviesPartner.Accounts.ExperienceLocales.Get
+        , Network.Google.API.PlayMoviesPartner.Accounts.ExperienceLocales.List
+        , Network.Google.API.PlayMoviesPartner.Accounts.Orders.Get
+        , Network.Google.API.PlayMoviesPartner.Accounts.Orders.List
+        , Network.Google.API.PlayMoviesPartner.Accounts.StoreInfos.Country.Get
+        , Network.Google.Play.Movies.Partner
         , Network.Google.Play.Movies.Partner.Types
 
     other-modules:

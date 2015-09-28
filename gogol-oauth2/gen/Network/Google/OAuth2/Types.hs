@@ -14,9 +14,29 @@
 --
 module Network.Google.OAuth2.Types
     (
+    -- * Service URL
+      oAuth2URL
+
+    -- * Alt
+    , Alt (..)
+
+    -- * Userinfoplus
+    , Userinfoplus
+    , userinfoplus
+    , uHd
+    , uEmail
+    , uLink
+    , uLocale
+    , uGivenName
+    , uFamilyName
+    , uPicture
+    , uGender
+    , uName
+    , uVerifiedEmail
+    , uId
 
     -- * Jwk
-      Jwk
+    , Jwk
     , jwk
     , jwkKeys
 
@@ -42,23 +62,13 @@ module Network.Google.OAuth2.Types
     , tUserId
     , tTokenHandle
     , tIssuedTo
-
-    -- * Userinfoplus
-    , Userinfoplus
-    , userinfoplus
-    , uHd
-    , uEmail
-    , uLink
-    , uLocale
-    , uGivenName
-    , uFamilyName
-    , uPicture
-    , uGender
-    , uName
-    , uVerifiedEmail
-    , uId
     ) where
 
 import           Network.Google.OAuth2.Types.Product
 import           Network.Google.OAuth2.Types.Sum
 import           Network.Google.Prelude
+
+-- | URL referring to version 'v2' of the Google OAuth2 API.
+oAuth2URL :: BaseUrl
+oAuth2URL
+  = BaseUrl Https "https://www.googleapis.com/" 443

@@ -17,12 +17,29 @@
 -- /See:/ <https://developers.google.com/freebase/ Freebase Search Reference>
 module Network.Google.Freebase.Search
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** Freebase Search
       FreebaseSearch
-    , Reconcile
-    , Search
+    , freebaseSearch
+    , freebaseSearchURL
+
+    -- ** freebase.reconcile
+    , module Network.Google.API.Freebase.Reconcile
+
+    -- ** freebase.search
+    , module Network.Google.API.Freebase.Search
 
     -- * Types
+
+    -- ** Search'Spell
+    , Search'Spell (..)
+
+    -- ** Search'Encode
+    , Search'Encode (..)
+
+    -- ** Alt
+    , Alt (..)
 
     -- ** ReconcileCandidate
     , ReconcileCandidate
@@ -32,6 +49,28 @@ module Network.Google.Freebase.Search
     , rcName
     , rcNotable
     , rcMid
+
+    -- ** Search'Help
+    , Search'Help (..)
+
+    -- ** ReconcileGetCosts
+    , ReconcileGetCosts
+    , reconcileGetCosts
+    , rgcHits
+    , rgcMs
+
+    -- ** Search'Format
+    , Search'Format (..)
+
+    -- ** ReconcileGetItemWarning
+    , ReconcileGetItemWarning
+    , reconcileGetItemWarning
+    , rgiwLocation
+    , rgiwReason
+    , rgiwMessage
+
+    -- ** Search'Scoring
+    , Search'Scoring (..)
 
     -- ** ReconcileCandidateNotable
     , ReconcileCandidateNotable
@@ -46,21 +85,10 @@ module Network.Google.Freebase.Search
     , rgCosts
     , rgWarning
     , rgMatch
-
-    -- ** ReconcileGetCosts
-    , ReconcileGetCosts
-    , reconcileGetCosts
-    , rgcHits
-    , rgcMs
-
-    -- ** ReconcileGetItemWarning
-    , ReconcileGetItemWarning
-    , reconcileGetItemWarning
-    , rgiwLocation
-    , rgiwReason
-    , rgiwMessage
     ) where
 
+import           Network.Google.API.Freebase.Reconcile
+import           Network.Google.API.Freebase.Search
 import           Network.Google.Freebase.Search.Types
 import           Network.Google.Prelude
 
@@ -68,84 +96,7 @@ import           Network.Google.Prelude
 TODO
 -}
 
-type FreebaseSearch = ReconcileAPI :<|> SearchAPI
+type FreebaseSearch = SearchAPI :<|> ReconcileAPI
 
--- | Reconcile entities to Freebase open data.
-type Reconcile =
-     "freebase" :>
-       "v1" :>
-         "reconcile" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "kind" Text :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "lang" Text :>
-                     QueryParam "confidence" Float :>
-                       QueryParam "key" Text :>
-                         QueryParam "name" Text :>
-                           QueryParam "limit" Int32 :>
-                             QueryParam "prop" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Get '[JSON] ReconcileGet
-
--- | Search Freebase open data.
-type Search =
-     "freebase" :>
-       "v1" :>
-         "search" :>
-           QueryParam "without" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "cursor" Int32 :>
-                   QueryParam "with" Text :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "domain" Text :>
-                         QueryParam "format" Text :>
-                           QueryParam "help" Text :>
-                             QueryParam "lang" Text :>
-                               QueryParam "indent" Bool :>
-                                 QueryParam "key" Text :>
-                                   QueryParam "output" Text :>
-                                     QueryParam "query" Text :>
-                                       QueryParam "scoring" Text :>
-                                         QueryParam "limit" Int32 :>
-                                           QueryParam "filter" Text :>
-                                             QueryParam "mql_output" Text :>
-                                               QueryParam "mid" Text :>
-                                                 QueryParam "type" Text :>
-                                                   QueryParam "stemmed" Bool :>
-                                                     QueryParam "oauth_token"
-                                                       Text
-                                                       :>
-                                                       QueryParam "exact" Bool
-                                                         :>
-                                                         QueryParam "spell" Text
-                                                           :>
-                                                           QueryParam
-                                                             "as_of_time"
-                                                             Text
-                                                             :>
-                                                             QueryParam "encode"
-                                                               Text
-                                                               :>
-                                                               QueryParam
-                                                                 "prefixed"
-                                                                 Bool
-                                                                 :>
-                                                                 QueryParam
-                                                                   "fields"
-                                                                   Text
-                                                                   :>
-                                                                   QueryParam
-                                                                     "callback"
-                                                                     Text
-                                                                     :>
-                                                                     QueryParam
-                                                                       "alt"
-                                                                       Text
-                                                                       :>
-                                                                       Get
-                                                                         '[JSON]
-                                                                         ()
+freebaseSearch :: Proxy FreebaseSearch
+freebaseSearch = Proxy

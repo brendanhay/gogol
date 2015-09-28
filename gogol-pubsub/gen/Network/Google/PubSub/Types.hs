@@ -14,39 +14,14 @@
 --
 module Network.Google.PubSub.Types
     (
+    -- * Service URL
+      pubSubURL
 
-    -- * AcknowledgeRequest
-      AcknowledgeRequest
-    , acknowledgeRequest
-    , arAckIds
-
-    -- * Binding
-    , Binding
-    , binding
-    , bMembers
-    , bRole
-
-    -- * Empty
-    , Empty
-    , empty
-
-    -- * ListSubscriptionsResponse
-    , ListSubscriptionsResponse
-    , listSubscriptionsResponse
-    , lsrNextPageToken
-    , lsrSubscriptions
-
-    -- * ListTopicSubscriptionsResponse
-    , ListTopicSubscriptionsResponse
-    , listTopicSubscriptionsResponse
-    , ltsrNextPageToken
-    , ltsrSubscriptions
-
-    -- * ListTopicsResponse
-    , ListTopicsResponse
-    , listTopicsResponse
-    , ltrNextPageToken
-    , ltrTopics
+    -- * PullRequest
+    , PullRequest
+    , pullRequest
+    , prMaxMessages
+    , prReturnImmediately
 
     -- * ModifyAckDeadlineRequest
     , ModifyAckDeadlineRequest
@@ -55,11 +30,6 @@ module Network.Google.PubSub.Types
     , madrAckId
     , madrAckDeadlineSeconds
 
-    -- * ModifyPushConfigRequest
-    , ModifyPushConfigRequest
-    , modifyPushConfigRequest
-    , mpcrPushConfig
-
     -- * Policy
     , Policy
     , policy
@@ -67,58 +37,19 @@ module Network.Google.PubSub.Types
     , pVersion
     , pBindings
 
-    -- * PublishRequest
-    , PublishRequest
-    , publishRequest
-    , prMessages
-
-    -- * PublishResponse
-    , PublishResponse
-    , publishResponse
-    , prMessageIds
-
-    -- * PubsubMessage
-    , PubsubMessage
-    , pubsubMessage
-    , pmData
-    , pmAttributes
-    , pmMessageId
-
-    -- * PubsubMessageAttributes
-    , PubsubMessageAttributes
-    , pubsubMessageAttributes
-
-    -- * PullRequest
-    , PullRequest
-    , pullRequest
-    , prMaxMessages
-    , prReturnImmediately
-
-    -- * PullResponse
-    , PullResponse
-    , pullResponse
-    , prReceivedMessages
-
-    -- * PushConfig
-    , PushConfig
-    , pushConfig
-    , pcAttributes
-    , pcPushEndpoint
-
     -- * PushConfigAttributes
     , PushConfigAttributes
     , pushConfigAttributes
 
-    -- * ReceivedMessage
-    , ReceivedMessage
-    , receivedMessage
-    , rmAckId
-    , rmMessage
+    -- * TestIamPermissionsResponse
+    , TestIamPermissionsResponse
+    , testIamPermissionsResponse
+    , tiprPermissions
 
-    -- * SetIamPolicyRequest
-    , SetIamPolicyRequest
-    , setIamPolicyRequest
-    , siprPolicy
+    -- * PublishRequest
+    , PublishRequest
+    , publishRequest
+    , prMessages
 
     -- * Subscription
     , Subscription
@@ -128,15 +59,86 @@ module Network.Google.PubSub.Types
     , sName
     , sAckDeadlineSeconds
 
+    -- * SetIamPolicyRequest
+    , SetIamPolicyRequest
+    , setIamPolicyRequest
+    , siprPolicy
+
+    -- * PullResponse
+    , PullResponse
+    , pullResponse
+    , prReceivedMessages
+
+    -- * AcknowledgeRequest
+    , AcknowledgeRequest
+    , acknowledgeRequest
+    , arAckIds
+
+    -- * Binding
+    , Binding
+    , binding
+    , bMembers
+    , bRole
+
+    -- * ListSubscriptionsResponse
+    , ListSubscriptionsResponse
+    , listSubscriptionsResponse
+    , lsrNextPageToken
+    , lsrSubscriptions
+
+    -- * ReceivedMessage
+    , ReceivedMessage
+    , receivedMessage
+    , rmAckId
+    , rmMessage
+
+    -- * PubsubMessageAttributes
+    , PubsubMessageAttributes
+    , pubsubMessageAttributes
+
+    -- * PushConfig
+    , PushConfig
+    , pushConfig
+    , pcAttributes
+    , pcPushEndpoint
+
     -- * TestIamPermissionsRequest
     , TestIamPermissionsRequest
     , testIamPermissionsRequest
     , tiamprPermissions
 
-    -- * TestIamPermissionsResponse
-    , TestIamPermissionsResponse
-    , testIamPermissionsResponse
-    , tiprPermissions
+    -- * PublishResponse
+    , PublishResponse
+    , publishResponse
+    , prMessageIds
+
+    -- * Empty
+    , Empty
+    , empty
+
+    -- * ModifyPushConfigRequest
+    , ModifyPushConfigRequest
+    , modifyPushConfigRequest
+    , mpcrPushConfig
+
+    -- * ListTopicSubscriptionsResponse
+    , ListTopicSubscriptionsResponse
+    , listTopicSubscriptionsResponse
+    , ltsrNextPageToken
+    , ltsrSubscriptions
+
+    -- * PubsubMessage
+    , PubsubMessage
+    , pubsubMessage
+    , pmData
+    , pmAttributes
+    , pmMessageId
+
+    -- * ListTopicsResponse
+    , ListTopicsResponse
+    , listTopicsResponse
+    , ltrNextPageToken
+    , ltrTopics
 
     -- * Topic
     , Topic
@@ -147,3 +149,8 @@ module Network.Google.PubSub.Types
 import           Network.Google.Prelude
 import           Network.Google.PubSub.Types.Product
 import           Network.Google.PubSub.Types.Sum
+
+-- | URL referring to version 'v1beta2' of the Google Cloud Pub/Sub API.
+pubSubURL :: BaseUrl
+pubSubURL
+  = BaseUrl Https "https://pubsub.googleapis.com/" 443

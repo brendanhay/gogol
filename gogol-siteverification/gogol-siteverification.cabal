@@ -1,6 +1,6 @@
 name:                  gogol-siteverification
 version:               0.0.1
-synopsis:              Google Site Verification API.
+synopsis:              Google Site Verification API Client.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -17,8 +17,8 @@ description:
     Lets you programatically verify ownership of websites or domains with
     Google.
     .
-    /Warning:/ This is an experimental preview release which is still under
-    heavy development and not intended for public consumption, caveat emptor!
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
 
 source-repository head
     type:     git
@@ -31,7 +31,14 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.SiteVerification
+          Network.Google.API.SiteVerification.WebResource.Delete
+        , Network.Google.API.SiteVerification.WebResource.Get
+        , Network.Google.API.SiteVerification.WebResource.GetToken
+        , Network.Google.API.SiteVerification.WebResource.Insert
+        , Network.Google.API.SiteVerification.WebResource.List
+        , Network.Google.API.SiteVerification.WebResource.Patch
+        , Network.Google.API.SiteVerification.WebResource.Update
+        , Network.Google.SiteVerification
         , Network.Google.SiteVerification.Types
 
     other-modules:

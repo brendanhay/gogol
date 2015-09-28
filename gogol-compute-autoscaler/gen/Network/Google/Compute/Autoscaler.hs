@@ -18,23 +18,84 @@
 -- /See:/ <http://developers.google.com/compute/docs/autoscaler Google Compute Engine Autoscaler API Reference>
 module Network.Google.Compute.Autoscaler
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** Google Compute Engine Autoscaler API
       ComputeAutoscaler
-    , ZonesAPI
-    , ZonesList
-    , AutoscalersAPI
-    , AutoscalersInsert
-    , AutoscalersList
-    , AutoscalersPatch
-    , AutoscalersGet
-    , AutoscalersDelete
-    , AutoscalersUpdate
-    , ZoneOperationsAPI
-    , ZoneOperationsList
-    , ZoneOperationsGet
-    , ZoneOperationsDelete
+    , computeAutoscaler
+    , computeAutoscalerURL
+
+    -- ** autoscaler.autoscalers.delete
+    , module Network.Google.API.Autoscaler.Autoscalers.Delete
+
+    -- ** autoscaler.autoscalers.get
+    , module Network.Google.API.Autoscaler.Autoscalers.Get
+
+    -- ** autoscaler.autoscalers.insert
+    , module Network.Google.API.Autoscaler.Autoscalers.Insert
+
+    -- ** autoscaler.autoscalers.list
+    , module Network.Google.API.Autoscaler.Autoscalers.List
+
+    -- ** autoscaler.autoscalers.patch
+    , module Network.Google.API.Autoscaler.Autoscalers.Patch
+
+    -- ** autoscaler.autoscalers.update
+    , module Network.Google.API.Autoscaler.Autoscalers.Update
+
+    -- ** autoscaler.zoneOperations.delete
+    , module Network.Google.API.Autoscaler.ZoneOperations.Delete
+
+    -- ** autoscaler.zoneOperations.get
+    , module Network.Google.API.Autoscaler.ZoneOperations.Get
+
+    -- ** autoscaler.zoneOperations.list
+    , module Network.Google.API.Autoscaler.ZoneOperations.List
+
+    -- ** autoscaler.zones.list
+    , module Network.Google.API.Autoscaler.Zones.List
 
     -- * Types
+
+    -- ** AutoscalerListResponse
+    , AutoscalerListResponse
+    , autoscalerListResponse
+    , alrNextPageToken
+    , alrKind
+    , alrItems
+
+    -- ** ZoneList
+    , ZoneList
+    , zoneList
+    , zlNextPageToken
+    , zlKind
+    , zlItems
+    , zlSelfLink
+    , zlId
+
+    -- ** OperationItemDataItemWarnings
+    , OperationItemDataItemWarnings
+    , operationItemDataItemWarnings
+    , oidiwValue
+    , oidiwKey
+
+    -- ** OperationItemWarnings
+    , OperationItemWarnings
+    , operationItemWarnings
+    , oiwData
+    , oiwCode
+    , oiwMessage
+
+    -- ** ZoneItemMaintenanceWindows
+    , ZoneItemMaintenanceWindows
+    , zoneItemMaintenanceWindows
+    , zimwBeginTime
+    , zimwName
+    , zimwEndTime
+    , zimwDescription
+
+    -- ** Alt
+    , Alt (..)
 
     -- ** Autoscaler
     , Autoscaler
@@ -48,12 +109,56 @@ module Network.Google.Compute.Autoscaler
     , aDescription
     , aTarget
 
-    -- ** AutoscalerListResponse
-    , AutoscalerListResponse
-    , autoscalerListResponse
-    , alrNextPageToken
-    , alrKind
-    , alrItems
+    -- ** OperationItemErrorsError
+    , OperationItemErrorsError
+    , operationItemErrorsError
+    , oieeLocation
+    , oieeCode
+    , oieeMessage
+
+    -- ** OperationError
+    , OperationError
+    , operationError
+    , oeErrors
+
+    -- ** Zone
+    , Zone
+    , zone
+    , zStatus
+    , zMaintenanceWindows
+    , zKind
+    , zSelfLink
+    , zName
+    , zCreationTimestamp
+    , zId
+    , zRegion
+    , zDescription
+    , zDeprecated
+
+    -- ** DeprecationStatus
+    , DeprecationStatus
+    , deprecationStatus
+    , dsState
+    , dsDeleted
+    , dsReplacement
+    , dsObsolete
+    , dsDeprecated
+
+    -- ** AutoscalingPolicyCustomMetricUtilization
+    , AutoscalingPolicyCustomMetricUtilization
+    , autoscalingPolicyCustomMetricUtilization
+    , apcmuUtilizationTarget
+    , apcmuMetric
+    , apcmuUtilizationTargetType
+
+    -- ** OperationList
+    , OperationList
+    , operationList
+    , olNextPageToken
+    , olKind
+    , olItems
+    , olSelfLink
+    , olId
 
     -- ** AutoscalingPolicy
     , AutoscalingPolicy
@@ -65,31 +170,10 @@ module Network.Google.Compute.Autoscaler
     , apMinNumReplicas
     , apCoolDownPeriodSec
 
-    -- ** AutoscalingPolicyCpuUtilization
-    , AutoscalingPolicyCpuUtilization
-    , autoscalingPolicyCpuUtilization
-    , apcuUtilizationTarget
-
-    -- ** AutoscalingPolicyCustomMetricUtilization
-    , AutoscalingPolicyCustomMetricUtilization
-    , autoscalingPolicyCustomMetricUtilization
-    , apcmuUtilizationTarget
-    , apcmuMetric
-    , apcmuUtilizationTargetType
-
     -- ** AutoscalingPolicyLoadBalancingUtilization
     , AutoscalingPolicyLoadBalancingUtilization
     , autoscalingPolicyLoadBalancingUtilization
     , aplbuUtilizationTarget
-
-    -- ** DeprecationStatus
-    , DeprecationStatus
-    , deprecationStatus
-    , dsState
-    , dsDeleted
-    , dsReplacement
-    , dsObsolete
-    , dsDeprecated
 
     -- ** Operation
     , Operation
@@ -117,72 +201,22 @@ module Network.Google.Compute.Autoscaler
     , oTargetLink
     , oClientOperationId
 
-    -- ** OperationError
-    , OperationError
-    , operationError
-    , oeErrors
-
-    -- ** OperationItemDataItemWarnings
-    , OperationItemDataItemWarnings
-    , operationItemDataItemWarnings
-    , oidiwValue
-    , oidiwKey
-
-    -- ** OperationItemErrorsError
-    , OperationItemErrorsError
-    , operationItemErrorsError
-    , oieeLocation
-    , oieeCode
-    , oieeMessage
-
-    -- ** OperationItemWarnings
-    , OperationItemWarnings
-    , operationItemWarnings
-    , oiwData
-    , oiwCode
-    , oiwMessage
-
-    -- ** OperationList
-    , OperationList
-    , operationList
-    , olNextPageToken
-    , olKind
-    , olItems
-    , olSelfLink
-    , olId
-
-    -- ** Zone
-    , Zone
-    , zone
-    , zStatus
-    , zMaintenanceWindows
-    , zKind
-    , zSelfLink
-    , zName
-    , zCreationTimestamp
-    , zId
-    , zRegion
-    , zDescription
-    , zDeprecated
-
-    -- ** ZoneItemMaintenanceWindows
-    , ZoneItemMaintenanceWindows
-    , zoneItemMaintenanceWindows
-    , zimwBeginTime
-    , zimwName
-    , zimwEndTime
-    , zimwDescription
-
-    -- ** ZoneList
-    , ZoneList
-    , zoneList
-    , zlNextPageToken
-    , zlKind
-    , zlItems
-    , zlSelfLink
-    , zlId
+    -- ** AutoscalingPolicyCpuUtilization
+    , AutoscalingPolicyCpuUtilization
+    , autoscalingPolicyCpuUtilization
+    , apcuUtilizationTarget
     ) where
 
+import           Network.Google.API.Autoscaler.Autoscalers.Delete
+import           Network.Google.API.Autoscaler.Autoscalers.Get
+import           Network.Google.API.Autoscaler.Autoscalers.Insert
+import           Network.Google.API.Autoscaler.Autoscalers.List
+import           Network.Google.API.Autoscaler.Autoscalers.Patch
+import           Network.Google.API.Autoscaler.Autoscalers.Update
+import           Network.Google.API.Autoscaler.ZoneOperations.Delete
+import           Network.Google.API.Autoscaler.ZoneOperations.Get
+import           Network.Google.API.Autoscaler.ZoneOperations.List
+import           Network.Google.API.Autoscaler.Zones.List
 import           Network.Google.Compute.Autoscaler.Types
 import           Network.Google.Prelude
 
@@ -191,202 +225,15 @@ TODO
 -}
 
 type ComputeAutoscaler =
-     ZonesAPI :<|> AutoscalersAPI :<|> ZoneOperationsAPI
+     AutoscalersListAPI :<|> AutoscalersUpdateAPI :<|>
+       ZonesListAPI
+       :<|> AutoscalersInsertAPI
+       :<|> ZoneOperationsDeleteAPI
+       :<|> ZoneOperationsGetAPI
+       :<|> AutoscalersDeleteAPI
+       :<|> ZoneOperationsListAPI
+       :<|> AutoscalersGetAPI
+       :<|> AutoscalersPatchAPI
 
-type ZonesAPI = ZonesList
-
--- |
-type ZonesList =
-     "autoscaler" :>
-       "v1beta2" :>
-         Capture "project" Text :>
-           "zones" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "filter" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Get '[JSON] ZoneList
-
-type AutoscalersAPI =
-     AutoscalersInsert :<|> AutoscalersList :<|>
-       AutoscalersPatch
-       :<|> AutoscalersGet
-       :<|> AutoscalersDelete
-       :<|> AutoscalersUpdate
-
--- | Adds new Autoscaler resource.
-type AutoscalersInsert =
-     "autoscaler" :>
-       "v1beta2" :>
-         "projects" :>
-           Capture "project" Text :>
-             "zones" :>
-               Capture "zone" Text :>
-                 "autoscalers" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Post '[JSON] Operation
-
--- | Lists all Autoscaler resources in this zone.
-type AutoscalersList =
-     "autoscaler" :>
-       "v1beta2" :>
-         "projects" :>
-           Capture "project" Text :>
-             "zones" :>
-               Capture "zone" Text :>
-                 "autoscalers" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "filter" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "maxResults" Word32 :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "alt" Text :>
-                                       Get '[JSON] AutoscalerListResponse
-
--- | Update the entire content of the Autoscaler resource. This method
--- supports patch semantics.
-type AutoscalersPatch =
-     "autoscaler" :>
-       "v1beta2" :>
-         "projects" :>
-           Capture "project" Text :>
-             "zones" :>
-               Capture "zone" Text :>
-                 "autoscalers" :>
-                   Capture "autoscaler" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   Patch '[JSON] Operation
-
--- | Gets the specified Autoscaler resource.
-type AutoscalersGet =
-     "autoscaler" :>
-       "v1beta2" :>
-         "projects" :>
-           Capture "project" Text :>
-             "zones" :>
-               Capture "zone" Text :>
-                 "autoscalers" :>
-                   Capture "autoscaler" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Get '[JSON] Autoscaler
-
--- | Deletes the specified Autoscaler resource.
-type AutoscalersDelete =
-     "autoscaler" :>
-       "v1beta2" :>
-         "projects" :>
-           Capture "project" Text :>
-             "zones" :>
-               Capture "zone" Text :>
-                 "autoscalers" :>
-                   Capture "autoscaler" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   Delete '[JSON] Operation
-
--- | Update the entire content of the Autoscaler resource.
-type AutoscalersUpdate =
-     "autoscaler" :>
-       "v1beta2" :>
-         "projects" :>
-           Capture "project" Text :>
-             "zones" :>
-               Capture "zone" Text :>
-                 "autoscalers" :>
-                   Capture "autoscaler" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Put '[JSON] Operation
-
-type ZoneOperationsAPI =
-     ZoneOperationsList :<|> ZoneOperationsGet :<|>
-       ZoneOperationsDelete
-
--- | Retrieves the list of operation resources contained within the specified
--- zone.
-type ZoneOperationsList =
-     "autoscaler" :>
-       "v1beta2" :>
-         Capture "project" Text :>
-           "zones" :>
-             Capture "zone" Text :>
-               "operations" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "filter" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "maxResults" Word32 :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Get '[JSON] OperationList
-
--- | Retrieves the specified zone-specific operation resource.
-type ZoneOperationsGet =
-     "autoscaler" :>
-       "v1beta2" :>
-         Capture "project" Text :>
-           "zones" :>
-             Capture "zone" Text :>
-               "operations" :>
-                 Capture "operation" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Get '[JSON] Operation
-
--- | Deletes the specified zone-specific operation resource.
-type ZoneOperationsDelete =
-     "autoscaler" :>
-       "v1beta2" :>
-         Capture "project" Text :>
-           "zones" :>
-             Capture "zone" Text :>
-               "operations" :>
-                 Capture "operation" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Delete '[JSON] ()
+computeAutoscaler :: Proxy ComputeAutoscaler
+computeAutoscaler = Proxy

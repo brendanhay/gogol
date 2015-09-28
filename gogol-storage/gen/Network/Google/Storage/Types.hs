@@ -14,27 +14,24 @@
 --
 module Network.Google.Storage.Types
     (
+    -- * Service URL
+      storageURL
 
-    -- * Bucket
-      Bucket
-    , bucket
-    , bucEtag
-    , bucLocation
-    , bucKind
-    , bucWebsite
-    , bucLifecycle
-    , bucOwner
-    , bucSelfLink
-    , bucName
-    , bucStorageClass
-    , bucVersioning
-    , bucCors
-    , bucTimeCreated
-    , bucId
-    , bucDefaultObjectAcl
-    , bucMetageneration
-    , bucLogging
-    , bucAcl
+    -- * ComposeRequestItemSourceObjects
+    , ComposeRequestItemSourceObjects
+    , composeRequestItemSourceObjects
+    , crisoName
+    , crisoObjectPreconditions
+    , crisoGeneration
+
+    -- * ObjectOwner
+    , ObjectOwner
+    , objectOwner
+    , ooEntity
+    , ooEntityId
+
+    -- * Alt
+    , Alt (..)
 
     -- * BucketAccessControl
     , BucketAccessControl
@@ -50,25 +47,6 @@ module Network.Google.Storage.Types
     , bacEntity
     , bacEntityId
 
-    -- * BucketAccessControls
-    , BucketAccessControls
-    , bucketAccessControls
-    , bKind
-    , bItems
-
-    -- * BucketActionItemRuleLifecycle
-    , BucketActionItemRuleLifecycle
-    , bucketActionItemRuleLifecycle
-    , bairlType
-
-    -- * BucketConditionItemRuleLifecycle
-    , BucketConditionItemRuleLifecycle
-    , bucketConditionItemRuleLifecycle
-    , bcirlAge
-    , bcirlIsLive
-    , bcirlNumNewerVersions
-    , bcirlCreatedBefore
-
     -- * BucketItemCors
     , BucketItemCors
     , bucketItemCors
@@ -76,84 +54,6 @@ module Network.Google.Storage.Types
     , bicOrigin
     , bicResponseHeader
     , bicMethod
-
-    -- * BucketItemRuleLifecycle
-    , BucketItemRuleLifecycle
-    , bucketItemRuleLifecycle
-    , birlAction
-    , birlCondition
-
-    -- * BucketLifecycle
-    , BucketLifecycle
-    , bucketLifecycle
-    , blRule
-
-    -- * BucketLogging
-    , BucketLogging
-    , bucketLogging
-    , blLogBucket
-    , blLogObjectPrefix
-
-    -- * BucketOwner
-    , BucketOwner
-    , bucketOwner
-    , boEntity
-    , boEntityId
-
-    -- * BucketVersioning
-    , BucketVersioning
-    , bucketVersioning
-    , bvEnabled
-
-    -- * BucketWebsite
-    , BucketWebsite
-    , bucketWebsite
-    , bwMainPageSuffix
-    , bwNotFoundPage
-
-    -- * Buckets
-    , Buckets
-    , buckets
-    , bbNextPageToken
-    , bbKind
-    , bbItems
-
-    -- * Channel
-    , Channel
-    , channel
-    , cResourceUri
-    , cResourceId
-    , cKind
-    , cExpiration
-    , cToken
-    , cAddress
-    , cPayload
-    , cParams
-    , cId
-    , cType
-
-    -- * ChannelParams
-    , ChannelParams
-    , channelParams
-
-    -- * ComposeRequest
-    , ComposeRequest
-    , composeRequest
-    , crDestination
-    , crKind
-    , crSourceObjects
-
-    -- * ComposeRequestItemSourceObjects
-    , ComposeRequestItemSourceObjects
-    , composeRequestItemSourceObjects
-    , crisoName
-    , crisoObjectPreconditions
-    , crisoGeneration
-
-    -- * ComposeRequestObjectPreconditionsItemSourceObjects
-    , ComposeRequestObjectPreconditionsItemSourceObjects
-    , composeRequestObjectPreconditionsItemSourceObjects
-    , cropisoIfGenerationMatch
 
     -- * Object
     , Object
@@ -183,6 +83,147 @@ module Network.Google.Storage.Types
     , oMd5Hash
     , oContentType
 
+    -- * ObjectAccessControls
+    , ObjectAccessControls
+    , objectAccessControls
+    , oacKind
+    , oacItems
+
+    -- * ObjectsInsert'Projection
+    , ObjectsInsert'Projection (..)
+
+    -- * BucketsInsert'Projection
+    , BucketsInsert'Projection (..)
+
+    -- * BucketConditionItemRuleLifecycle
+    , BucketConditionItemRuleLifecycle
+    , bucketConditionItemRuleLifecycle
+    , bcirlAge
+    , bcirlIsLive
+    , bcirlNumNewerVersions
+    , bcirlCreatedBefore
+
+    -- * BucketLifecycle
+    , BucketLifecycle
+    , bucketLifecycle
+    , blRule
+
+    -- * BucketActionItemRuleLifecycle
+    , BucketActionItemRuleLifecycle
+    , bucketActionItemRuleLifecycle
+    , bairlType
+
+    -- * BucketAccessControls
+    , BucketAccessControls
+    , bucketAccessControls
+    , bKind
+    , bItems
+
+    -- * Bucket
+    , Bucket
+    , bucket
+    , bucEtag
+    , bucLocation
+    , bucKind
+    , bucWebsite
+    , bucLifecycle
+    , bucOwner
+    , bucSelfLink
+    , bucName
+    , bucStorageClass
+    , bucVersioning
+    , bucCors
+    , bucTimeCreated
+    , bucId
+    , bucDefaultObjectAcl
+    , bucMetageneration
+    , bucLogging
+    , bucAcl
+
+    -- * Objects
+    , Objects
+    , objects
+    , objNextPageToken
+    , objKind
+    , objItems
+    , objPrefixes
+
+    -- * BucketLogging
+    , BucketLogging
+    , bucketLogging
+    , blLogBucket
+    , blLogObjectPrefix
+
+    -- * ChannelParams
+    , ChannelParams
+    , channelParams
+
+    -- * BucketOwner
+    , BucketOwner
+    , bucketOwner
+    , boEntity
+    , boEntityId
+
+    -- * ObjectsWatchAll'Projection
+    , ObjectsWatchAll'Projection (..)
+
+    -- * BucketVersioning
+    , BucketVersioning
+    , bucketVersioning
+    , bvEnabled
+
+    -- * BucketsGet'Projection
+    , BucketsGet'Projection (..)
+
+    -- * ObjectsCopy'Projection
+    , ObjectsCopy'Projection (..)
+
+    -- * BucketsPatch'Projection
+    , BucketsPatch'Projection (..)
+
+    -- * Buckets
+    , Buckets
+    , buckets
+    , bbNextPageToken
+    , bbKind
+    , bbItems
+
+    -- * ObjectsList'Projection
+    , ObjectsList'Projection (..)
+
+    -- * BucketsUpdate'Projection
+    , BucketsUpdate'Projection (..)
+
+    -- * BucketItemRuleLifecycle
+    , BucketItemRuleLifecycle
+    , bucketItemRuleLifecycle
+    , birlAction
+    , birlCondition
+
+    -- * Channel
+    , Channel
+    , channel
+    , cResourceUri
+    , cResourceId
+    , cKind
+    , cExpiration
+    , cToken
+    , cAddress
+    , cPayload
+    , cParams
+    , cId
+    , cType
+
+    -- * ObjectMetadata
+    , ObjectMetadata
+    , objectMetadata
+
+    -- * ObjectsUpdate'Projection
+    , ObjectsUpdate'Projection (..)
+
+    -- * BucketsList'Projection
+    , BucketsList'Projection (..)
+
     -- * ObjectAccessControl
     , ObjectAccessControl
     , objectAccessControl
@@ -199,31 +240,38 @@ module Network.Google.Storage.Types
     , oacaGeneration
     , oacaEntityId
 
-    -- * ObjectAccessControls
-    , ObjectAccessControls
-    , objectAccessControls
-    , oacKind
-    , oacItems
+    -- * ComposeRequestObjectPreconditionsItemSourceObjects
+    , ComposeRequestObjectPreconditionsItemSourceObjects
+    , composeRequestObjectPreconditionsItemSourceObjects
+    , cropisoIfGenerationMatch
 
-    -- * ObjectMetadata
-    , ObjectMetadata
-    , objectMetadata
+    -- * BucketWebsite
+    , BucketWebsite
+    , bucketWebsite
+    , bwMainPageSuffix
+    , bwNotFoundPage
 
-    -- * ObjectOwner
-    , ObjectOwner
-    , objectOwner
-    , ooEntity
-    , ooEntityId
+    -- * ObjectsGet'Projection
+    , ObjectsGet'Projection (..)
 
-    -- * Objects
-    , Objects
-    , objects
-    , objNextPageToken
-    , objKind
-    , objItems
-    , objPrefixes
+    -- * ComposeRequest
+    , ComposeRequest
+    , composeRequest
+    , crDestination
+    , crKind
+    , crSourceObjects
+
+    -- * ObjectsPatch'Projection
+    , ObjectsPatch'Projection (..)
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types.Product
 import           Network.Google.Storage.Types.Sum
+
+-- | URL referring to version 'v1beta2' of the Cloud Storage API.
+storageURL :: BaseUrl
+storageURL
+  = BaseUrl Https
+      "https://www.googleapis.com/storage/v1beta2/"
+      443

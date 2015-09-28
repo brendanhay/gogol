@@ -1,6 +1,6 @@
 name:                  gogol-plus-domains
 version:               0.0.1
-synopsis:              Google Google+ Domains API.
+synopsis:              Google Google+ Domains API Client.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -17,8 +17,8 @@ description:
     The Google+ API enables developers to build on top of the Google+
     platform.
     .
-    /Warning:/ This is an experimental preview release which is still under
-    heavy development and not intended for public consumption, caveat emptor!
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
 
 source-repository head
     type:     git
@@ -31,7 +31,27 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.PlusDomains
+          Network.Google.API.PlusDomains.Activities.Get
+        , Network.Google.API.PlusDomains.Activities.Insert
+        , Network.Google.API.PlusDomains.Activities.List
+        , Network.Google.API.PlusDomains.Audiences.List
+        , Network.Google.API.PlusDomains.Circles.AddPeople
+        , Network.Google.API.PlusDomains.Circles.Get
+        , Network.Google.API.PlusDomains.Circles.Insert
+        , Network.Google.API.PlusDomains.Circles.List
+        , Network.Google.API.PlusDomains.Circles.Patch
+        , Network.Google.API.PlusDomains.Circles.Remove
+        , Network.Google.API.PlusDomains.Circles.RemovePeople
+        , Network.Google.API.PlusDomains.Circles.Update
+        , Network.Google.API.PlusDomains.Comments.Get
+        , Network.Google.API.PlusDomains.Comments.Insert
+        , Network.Google.API.PlusDomains.Comments.List
+        , Network.Google.API.PlusDomains.Media.Insert
+        , Network.Google.API.PlusDomains.People.Get
+        , Network.Google.API.PlusDomains.People.List
+        , Network.Google.API.PlusDomains.People.ListByActivity
+        , Network.Google.API.PlusDomains.People.ListByCircle
+        , Network.Google.PlusDomains
         , Network.Google.PlusDomains.Types
 
     other-modules:

@@ -17,128 +17,52 @@
 -- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference>
 module Network.Google.Dataflow
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** Google Dataflow API
       Dataflow
-    , ProjectsAPI
-    , JobsAPI
-    , WorkItemsAPI
-    , WorkItemsLease
-    , WorkItemsReportStatus
-    , MessagesAPI
-    , MessagesList
+    , dataflow
+    , dataflowURL
+
+    -- ** dataflow.projects.jobs.messages.list
+    , module Network.Google.API.Dataflow.Projects.Jobs.Messages.List
+
+    -- ** dataflow.projects.jobs.workItems.lease
+    , module Network.Google.API.Dataflow.Projects.Jobs.WorkItems.Lease
+
+    -- ** dataflow.projects.jobs.workItems.reportStatus
+    , module Network.Google.API.Dataflow.Projects.Jobs.WorkItems.ReportStatus
 
     -- * Types
 
-    -- ** ApproximateProgress
-    , ApproximateProgress
-    , approximateProgress
-    , apRemainingTime
-    , apPercentComplete
-    , apPosition
+    -- ** StreamingSideInputLocation
+    , StreamingSideInputLocation
+    , streamingSideInputLocation
+    , ssilTag
+    , ssilStateFamily
 
-    -- ** AutoscalingSettings
-    , AutoscalingSettings
-    , autoscalingSettings
-    , asMaxNumWorkers
-    , asAlgorithm
+    -- ** JobMessage
+    , JobMessage
+    , jobMessage
+    , jmTime
+    , jmMessageText
+    , jmMessageImportance
+    , jmId
 
-    -- ** ComputationTopology
-    , ComputationTopology
-    , computationTopology
-    , ctStateFamilies
-    , ctUserStageName
-    , ctInputs
-    , ctKeyRanges
-    , ctOutputs
-    , ctComputationId
-    , ctSystemStageName
+    -- ** PartialGroupByKeyInstructionValueCombiningFn
+    , PartialGroupByKeyInstructionValueCombiningFn
+    , partialGroupByKeyInstructionValueCombiningFn
 
-    -- ** ConcatPosition
-    , ConcatPosition
-    , concatPosition
-    , cpIndex
-    , cpPosition
+    -- ** SeqMapTaskUserFn
+    , SeqMapTaskUserFn
+    , seqMapTaskUserFn
 
-    -- ** CustomSourceLocation
-    , CustomSourceLocation
-    , customSourceLocation
-    , cslStateful
-
-    -- ** DataDiskAssignment
-    , DataDiskAssignment
-    , dataDiskAssignment
-    , ddaVmInstance
-    , ddaDataDisks
-
-    -- ** DerivedSource
-    , DerivedSource
-    , derivedSource
-    , dsDerivationMode
-    , dsSource
-
-    -- ** Disk
-    , Disk
-    , disk
-    , dSizeGb
-    , dDiskType
-    , dMountPoint
-
-    -- ** DynamicSourceSplit
-    , DynamicSourceSplit
-    , dynamicSourceSplit
-    , dssResidual
-    , dssPrimary
-
-    -- ** Environment
-    , Environment
-    , environment
-    , eDataset
-    , eExperiments
-    , eWorkerPools
-    , eClusterManagerApiService
-    , eVersion
-    , eInternalExperiments
-    , eTempStoragePrefix
-    , eUserAgent
-    , eSdkPipelineOptions
-
-    -- ** EnvironmentInternalExperiments
-    , EnvironmentInternalExperiments
-    , environmentInternalExperiments
-
-    -- ** EnvironmentSdkPipelineOptions
-    , EnvironmentSdkPipelineOptions
-    , environmentSdkPipelineOptions
-
-    -- ** EnvironmentUserAgent
-    , EnvironmentUserAgent
-    , environmentUserAgent
-
-    -- ** EnvironmentVersion
-    , EnvironmentVersion
-    , environmentVersion
-
-    -- ** FlattenInstruction
-    , FlattenInstruction
-    , flattenInstruction
-    , fiInputs
-
-    -- ** InstructionInput
-    , InstructionInput
-    , instructionInput
-    , iiProducerInstructionIndex
-    , iiOutputNum
-
-    -- ** InstructionOutput
-    , InstructionOutput
-    , instructionOutput
-    , ioCodec
-    , ioName
-    , ioSystemName
-
-    -- ** InstructionOutputCodec
-    , InstructionOutputCodec
-    , instructionOutputCodec
+    -- ** StreamingComputationTask
+    , StreamingComputationTask
+    , streamingComputationTask
+    , sctTaskType
+    , sctDataDisks
+    , sctComputationRanges
 
     -- ** Job
     , Job
@@ -159,44 +83,40 @@ module Network.Google.Dataflow
     , jobReplaceJobId
     , jobCreateTime
 
-    -- ** JobExecutionInfo
-    , JobExecutionInfo
-    , jobExecutionInfo
-    , jeiStages
+    -- ** SourceGetMetadataRequest
+    , SourceGetMetadataRequest
+    , sourceGetMetadataRequest
+    , sgmrSource
 
-    -- ** JobExecutionInfoStages
-    , JobExecutionInfoStages
-    , jobExecutionInfoStages
+    -- ** SeqMapTaskOutputInfo
+    , SeqMapTaskOutputInfo
+    , seqMapTaskOutputInfo
+    , smtoiSink
+    , smtoiTag
 
-    -- ** JobExecutionStageInfo
-    , JobExecutionStageInfo
-    , jobExecutionStageInfo
-    , jesiStepName
+    -- ** InstructionOutputCodec
+    , InstructionOutputCodec
+    , instructionOutputCodec
 
-    -- ** JobMessage
-    , JobMessage
-    , jobMessage
-    , jmTime
-    , jmMessageText
-    , jmMessageImportance
-    , jmId
+    -- ** ParDoInstructionUserFn
+    , ParDoInstructionUserFn
+    , parDoInstructionUserFn
 
-    -- ** JobMetrics
-    , JobMetrics
-    , jobMetrics
-    , jmMetrics
-    , jmMetricTime
+    -- ** MetricStructuredName
+    , MetricStructuredName
+    , metricStructuredName
+    , msnOrigin
+    , msnContext
+    , msnName
 
-    -- ** JobTransformNameMapping
-    , JobTransformNameMapping
-    , jobTransformNameMapping
+    -- ** WorkerPoolPoolArgs
+    , WorkerPoolPoolArgs
+    , workerPoolPoolArgs
 
-    -- ** KeyRangeDataDiskAssignment
-    , KeyRangeDataDiskAssignment
-    , keyRangeDataDiskAssignment
-    , krddaDataDisk
-    , krddaStart
-    , krddaEnd
+    -- ** ReportWorkItemStatusResponse
+    , ReportWorkItemStatusResponse
+    , reportWorkItemStatusResponse
+    , rwisrWorkItemServiceStates
 
     -- ** KeyRangeLocation
     , KeyRangeLocation
@@ -207,25 +127,29 @@ module Network.Google.Dataflow
     , krlDeliveryEndpoint
     , krlEnd
 
-    -- ** LeaseWorkItemRequest
-    , LeaseWorkItemRequest
-    , leaseWorkItemRequest
-    , lwirWorkItemTypes
-    , lwirCurrentWorkerTime
-    , lwirWorkerCapabilities
-    , lwirRequestedLeaseDuration
-    , lwirWorkerId
+    -- ** Source
+    , Source
+    , source
+    , sDoesNotNeedSplitting
+    , sBaseSpecs
+    , sCodec
+    , sSpec
+    , sMetadata
 
-    -- ** LeaseWorkItemResponse
-    , LeaseWorkItemResponse
-    , leaseWorkItemResponse
-    , lwirWorkItems
+    -- ** SourceFork
+    , SourceFork
+    , sourceFork
+    , sfResidual
+    , sfPrimarySource
+    , sfPrimary
+    , sfResidualSource
 
-    -- ** ListJobMessagesResponse
-    , ListJobMessagesResponse
-    , listJobMessagesResponse
-    , ljmrJobMessages
-    , ljmrNextPageToken
+    -- ** ApproximateProgress
+    , ApproximateProgress
+    , approximateProgress
+    , apRemainingTime
+    , apPercentComplete
+    , apPosition
 
     -- ** ListJobsResponse
     , ListJobsResponse
@@ -233,23 +157,298 @@ module Network.Google.Dataflow
     , ljrNextPageToken
     , ljrJobs
 
-    -- ** MapTask
-    , MapTask
-    , mapTask
-    , mtInstructions
-    , mtSystemName
-    , mtStageName
+    -- ** StreamingComputationRanges
+    , StreamingComputationRanges
+    , streamingComputationRanges
+    , scrRangeAssignments
+    , scrComputationId
 
-    -- ** MetricStructuredName
-    , MetricStructuredName
-    , metricStructuredName
-    , msnOrigin
-    , msnContext
-    , msnName
+    -- ** MultiOutputInfo
+    , MultiOutputInfo
+    , multiOutputInfo
+    , moiTag
+
+    -- ** ParDoInstruction
+    , ParDoInstruction
+    , parDoInstruction
+    , pdiNumOutputs
+    , pdiMultiOutputInfos
+    , pdiSideInputs
+    , pdiInput
+    , pdiUserFn
+
+    -- ** SourceItemBaseSpecs
+    , SourceItemBaseSpecs
+    , sourceItemBaseSpecs
+
+    -- ** PartialGroupByKeyInstruction
+    , PartialGroupByKeyInstruction
+    , partialGroupByKeyInstruction
+    , pgbkiValueCombiningFn
+    , pgbkiInput
+    , pgbkiInputElementCodec
+
+    -- ** TopologyConfigUserStageToComputationNameMap
+    , TopologyConfigUserStageToComputationNameMap
+    , topologyConfigUserStageToComputationNameMap
+
+    -- ** EnvironmentSdkPipelineOptions
+    , EnvironmentSdkPipelineOptions
+    , environmentSdkPipelineOptions
+
+    -- ** SourceSplitShard
+    , SourceSplitShard
+    , sourceSplitShard
+    , sssDerivationMode
+    , sssSource
+
+    -- ** JobTransformNameMapping
+    , JobTransformNameMapping
+    , jobTransformNameMapping
+
+    -- ** SideInputInfo
+    , SideInputInfo
+    , sideInputInfo
+    , siiTag
+    , siiKind
+    , siiSources
+
+    -- ** JobExecutionInfo
+    , JobExecutionInfo
+    , jobExecutionInfo
+    , jeiStages
+
+    -- ** CustomSourceLocation
+    , CustomSourceLocation
+    , customSourceLocation
+    , cslStateful
+
+    -- ** ParallelInstruction
+    , ParallelInstruction
+    , parallelInstruction
+    , piRead
+    , piWrite
+    , piParDo
+    , piPartialGroupByKey
+    , piOutputs
+    , piName
+    , piSystemName
+    , piFlatten
+
+    -- ** StateFamilyConfig
+    , StateFamilyConfig
+    , stateFamilyConfig
+    , sfcIsRead
+    , sfcStateFamily
 
     -- ** MetricStructuredNameContext
     , MetricStructuredNameContext
     , metricStructuredNameContext
+
+    -- ** DataDiskAssignment
+    , DataDiskAssignment
+    , dataDiskAssignment
+    , ddaVmInstance
+    , ddaDataDisks
+
+    -- ** WorkItemServiceState
+    , WorkItemServiceState
+    , workItemServiceState
+    , wissNextReportIndex
+    , wissReportStatusInterval
+    , wissHarnessData
+    , wissSuggestedStopPoint
+    , wissSuggestedStopPosition
+    , wissLeaseExpireTime
+
+    -- ** StreamingSetupTask
+    , StreamingSetupTask
+    , streamingSetupTask
+    , sstStreamingComputationTopology
+    , sstReceiveWorkPort
+    , sstWorkerHarnessPort
+
+    -- ** SourceOperationRequest
+    , SourceOperationRequest
+    , sourceOperationRequest
+    , sorSplit
+    , sorGetMetadata
+
+    -- ** SinkSpec
+    , SinkSpec
+    , sinkSpec
+
+    -- ** LeaseWorkItemResponse
+    , LeaseWorkItemResponse
+    , leaseWorkItemResponse
+    , lwirWorkItems
+
+    -- ** Position
+    , Position
+    , position
+    , pByteOffset
+    , pConcatPosition
+    , pRecordIndex
+    , pShufflePosition
+    , pKey
+    , pEnd
+
+    -- ** SourceSplitResponse
+    , SourceSplitResponse
+    , sourceSplitResponse
+    , ssrBundles
+    , ssrShards
+    , ssrOutcome
+
+    -- ** Status
+    , Status
+    , status
+    , sDetails
+    , sCode
+    , sMessage
+
+    -- ** WorkerPoolMetadata
+    , WorkerPoolMetadata
+    , workerPoolMetadata
+
+    -- ** EnvironmentVersion
+    , EnvironmentVersion
+    , environmentVersion
+
+    -- ** WorkItem
+    , WorkItem
+    , workItem
+    , wiJobId
+    , wiReportStatusInterval
+    , wiShellTask
+    , wiStreamingSetupTask
+    , wiInitialReportIndex
+    , wiMapTask
+    , wiPackages
+    , wiStreamingComputationTask
+    , wiSourceOperationTask
+    , wiId
+    , wiProjectId
+    , wiLeaseExpireTime
+    , wiConfiguration
+    , wiSeqMapTask
+
+    -- ** ComputationTopology
+    , ComputationTopology
+    , computationTopology
+    , ctStateFamilies
+    , ctUserStageName
+    , ctInputs
+    , ctKeyRanges
+    , ctOutputs
+    , ctComputationId
+    , ctSystemStageName
+
+    -- ** JobExecutionInfoStages
+    , JobExecutionInfoStages
+    , jobExecutionInfoStages
+
+    -- ** Sink
+    , Sink
+    , sink
+    , sinCodec
+    , sinSpec
+
+    -- ** JobExecutionStageInfo
+    , JobExecutionStageInfo
+    , jobExecutionStageInfo
+    , jesiStepName
+
+    -- ** AutoscalingSettings
+    , AutoscalingSettings
+    , autoscalingSettings
+    , asMaxNumWorkers
+    , asAlgorithm
+
+    -- ** SourceSplitOptions
+    , SourceSplitOptions
+    , sourceSplitOptions
+    , ssoDesiredShardSizeBytes
+    , ssoDesiredBundleSizeBytes
+
+    -- ** InstructionOutput
+    , InstructionOutput
+    , instructionOutput
+    , ioCodec
+    , ioName
+    , ioSystemName
+
+    -- ** ReportWorkItemStatusRequest
+    , ReportWorkItemStatusRequest
+    , reportWorkItemStatusRequest
+    , rwisrCurrentWorkerTime
+    , rwisrWorkItemStatuses
+    , rwisrWorkerId
+
+    -- ** WorkerPool
+    , WorkerPool
+    , workerPool
+    , wpAutoscalingSettings
+    , wpDiskSizeGb
+    , wpKind
+    , wpTaskrunnerSettings
+    , wpNumWorkers
+    , wpNetwork
+    , wpZone
+    , wpPackages
+    , wpOnHostMaintenance
+    , wpDiskSourceImage
+    , wpMachineType
+    , wpMetadata
+    , wpDiskType
+    , wpTeardownPolicy
+    , wpDefaultPackageSet
+    , wpPoolArgs
+    , wpDataDisks
+
+    -- ** Step
+    , Step
+    , step
+    , sKind
+    , sName
+    , sProperties
+
+    -- ** DynamicSourceSplit
+    , DynamicSourceSplit
+    , dynamicSourceSplit
+    , dssResidual
+    , dssPrimary
+
+    -- ** SinkCodec
+    , SinkCodec
+    , sinkCodec
+
+    -- ** ReadInstruction
+    , ReadInstruction
+    , readInstruction
+    , riSource
+
+    -- ** Package
+    , Package
+    , package
+    , pLocation
+    , pName
+
+    -- ** WorkItemServiceStateHarnessData
+    , WorkItemServiceStateHarnessData
+    , workItemServiceStateHarnessData
+
+    -- ** ConcatPosition
+    , ConcatPosition
+    , concatPosition
+    , cpIndex
+    , cpPosition
+
+    -- ** WriteInstruction
+    , WriteInstruction
+    , writeInstruction
+    , wiSink
+    , wiInput
 
     -- ** MetricUpdate
     , MetricUpdate
@@ -264,184 +463,39 @@ module Network.Google.Dataflow
     , muName
     , muScalar
 
-    -- ** MountedDataDisk
-    , MountedDataDisk
-    , mountedDataDisk
-    , mddDataDisk
+    -- ** StreamingStageLocation
+    , StreamingStageLocation
+    , streamingStageLocation
+    , sslStreamId
 
-    -- ** MultiOutputInfo
-    , MultiOutputInfo
-    , multiOutputInfo
-    , moiTag
-
-    -- ** Package
-    , Package
-    , package
-    , pLocation
-    , pName
-
-    -- ** ParDoInstruction
-    , ParDoInstruction
-    , parDoInstruction
-    , pdiNumOutputs
-    , pdiMultiOutputInfos
-    , pdiSideInputs
-    , pdiInput
-    , pdiUserFn
-
-    -- ** ParDoInstructionUserFn
-    , ParDoInstructionUserFn
-    , parDoInstructionUserFn
-
-    -- ** ParallelInstruction
-    , ParallelInstruction
-    , parallelInstruction
-    , piRead
-    , piWrite
-    , piParDo
-    , piPartialGroupByKey
-    , piOutputs
-    , piName
-    , piSystemName
-    , piFlatten
-
-    -- ** PartialGroupByKeyInstruction
-    , PartialGroupByKeyInstruction
-    , partialGroupByKeyInstruction
-    , pgbkiValueCombiningFn
-    , pgbkiInput
-    , pgbkiInputElementCodec
+    -- ** Disk
+    , Disk
+    , disk
+    , dSizeGb
+    , dDiskType
+    , dMountPoint
 
     -- ** PartialGroupByKeyInstructionInputElementCodec
     , PartialGroupByKeyInstructionInputElementCodec
     , partialGroupByKeyInstructionInputElementCodec
 
-    -- ** PartialGroupByKeyInstructionValueCombiningFn
-    , PartialGroupByKeyInstructionValueCombiningFn
-    , partialGroupByKeyInstructionValueCombiningFn
-
-    -- ** Position
-    , Position
-    , position
-    , pByteOffset
-    , pConcatPosition
-    , pRecordIndex
-    , pShufflePosition
-    , pKey
-    , pEnd
-
-    -- ** PubsubLocation
-    , PubsubLocation
-    , pubsubLocation
-    , plTrackingSubscription
-    , plDropLateData
-    , plTimestampLabel
-    , plIdLabel
-    , plTopic
-    , plSubscription
-
-    -- ** ReadInstruction
-    , ReadInstruction
-    , readInstruction
-    , riSource
-
-    -- ** ReportWorkItemStatusRequest
-    , ReportWorkItemStatusRequest
-    , reportWorkItemStatusRequest
-    , rwisrCurrentWorkerTime
-    , rwisrWorkItemStatuses
-    , rwisrWorkerId
-
-    -- ** ReportWorkItemStatusResponse
-    , ReportWorkItemStatusResponse
-    , reportWorkItemStatusResponse
-    , rwisrWorkItemServiceStates
-
-    -- ** SeqMapTask
-    , SeqMapTask
-    , seqMapTask
-    , smtInputs
-    , smtName
-    , smtOutputInfos
-    , smtSystemName
-    , smtStageName
-    , smtUserFn
-
-    -- ** SeqMapTaskOutputInfo
-    , SeqMapTaskOutputInfo
-    , seqMapTaskOutputInfo
-    , smtoiSink
-    , smtoiTag
-
-    -- ** SeqMapTaskUserFn
-    , SeqMapTaskUserFn
-    , seqMapTaskUserFn
-
-    -- ** ShellTask
-    , ShellTask
-    , shellTask
-    , stCommand
-    , stExitCode
-
-    -- ** SideInputInfo
-    , SideInputInfo
-    , sideInputInfo
-    , siiTag
-    , siiKind
-    , siiSources
-
-    -- ** SideInputInfoKind
-    , SideInputInfoKind
-    , sideInputInfoKind
-
-    -- ** Sink
-    , Sink
-    , sink
-    , sinCodec
-    , sinSpec
-
-    -- ** SinkCodec
-    , SinkCodec
-    , sinkCodec
-
-    -- ** SinkSpec
-    , SinkSpec
-    , sinkSpec
-
-    -- ** Source
-    , Source
-    , source
-    , sDoesNotNeedSplitting
-    , sBaseSpecs
-    , sCodec
-    , sSpec
-    , sMetadata
-
-    -- ** SourceCodec
-    , SourceCodec
-    , sourceCodec
-
-    -- ** SourceFork
-    , SourceFork
-    , sourceFork
-    , sfResidual
-    , sfPrimarySource
-    , sfPrimary
-    , sfResidualSource
-
-    -- ** SourceGetMetadataRequest
-    , SourceGetMetadataRequest
-    , sourceGetMetadataRequest
-    , sgmrSource
+    -- ** Environment
+    , Environment
+    , environment
+    , eDataset
+    , eExperiments
+    , eWorkerPools
+    , eClusterManagerApiService
+    , eVersion
+    , eInternalExperiments
+    , eTempStoragePrefix
+    , eUserAgent
+    , eSdkPipelineOptions
 
     -- ** SourceGetMetadataResponse
     , SourceGetMetadataResponse
     , sourceGetMetadataResponse
     , sgmrMetadata
-
-    -- ** SourceItemBaseSpecs
-    , SourceItemBaseSpecs
-    , sourceItemBaseSpecs
 
     -- ** SourceMetadata
     , SourceMetadata
@@ -450,113 +504,9 @@ module Network.Google.Dataflow
     , smProducesSortedKeys
     , smInfinite
 
-    -- ** SourceOperationRequest
-    , SourceOperationRequest
-    , sourceOperationRequest
-    , sorSplit
-    , sorGetMetadata
-
-    -- ** SourceOperationResponse
-    , SourceOperationResponse
-    , sourceOperationResponse
-    , sSplit
-    , sGetMetadata
-
-    -- ** SourceSpec
-    , SourceSpec
-    , sourceSpec
-
-    -- ** SourceSplitOptions
-    , SourceSplitOptions
-    , sourceSplitOptions
-    , ssoDesiredShardSizeBytes
-    , ssoDesiredBundleSizeBytes
-
-    -- ** SourceSplitRequest
-    , SourceSplitRequest
-    , sourceSplitRequest
-    , ssrSource
-    , ssrOptions
-
-    -- ** SourceSplitResponse
-    , SourceSplitResponse
-    , sourceSplitResponse
-    , ssrBundles
-    , ssrShards
-    , ssrOutcome
-
-    -- ** SourceSplitShard
-    , SourceSplitShard
-    , sourceSplitShard
-    , sssDerivationMode
-    , sssSource
-
-    -- ** StateFamilyConfig
-    , StateFamilyConfig
-    , stateFamilyConfig
-    , sfcIsRead
-    , sfcStateFamily
-
-    -- ** Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
-
-    -- ** StatusItemDetails
-    , StatusItemDetails
-    , statusItemDetails
-
-    -- ** Step
-    , Step
-    , step
-    , sKind
-    , sName
-    , sProperties
-
-    -- ** StepProperties
-    , StepProperties
-    , stepProperties
-
-    -- ** StreamLocation
-    , StreamLocation
-    , streamLocation
-    , slStreamingStageLocation
-    , slSideInputLocation
-    , slCustomSourceLocation
-    , slPubsubLocation
-
-    -- ** StreamingComputationRanges
-    , StreamingComputationRanges
-    , streamingComputationRanges
-    , scrRangeAssignments
-    , scrComputationId
-
-    -- ** StreamingComputationTask
-    , StreamingComputationTask
-    , streamingComputationTask
-    , sctTaskType
-    , sctDataDisks
-    , sctComputationRanges
-
-    -- ** StreamingSetupTask
-    , StreamingSetupTask
-    , streamingSetupTask
-    , sstStreamingComputationTopology
-    , sstReceiveWorkPort
-    , sstWorkerHarnessPort
-
-    -- ** StreamingSideInputLocation
-    , StreamingSideInputLocation
-    , streamingSideInputLocation
-    , ssilTag
-    , ssilStateFamily
-
-    -- ** StreamingStageLocation
-    , StreamingStageLocation
-    , streamingStageLocation
-    , sslStreamId
+    -- ** SideInputInfoKind
+    , SideInputInfoKind
+    , sideInputInfoKind
 
     -- ** TaskRunnerSettings
     , TaskRunnerSettings
@@ -581,48 +531,28 @@ module Network.Google.Dataflow
     , trsParallelWorkerSettings
     , trsLanguageHint
 
-    -- ** TopologyConfig
-    , TopologyConfig
-    , topologyConfig
-    , tcDataDiskAssignments
-    , tcUserStageToComputationNameMap
-    , tcComputations
+    -- ** FlattenInstruction
+    , FlattenInstruction
+    , flattenInstruction
+    , fiInputs
 
-    -- ** TopologyConfigUserStageToComputationNameMap
-    , TopologyConfigUserStageToComputationNameMap
-    , topologyConfigUserStageToComputationNameMap
+    -- ** StepProperties
+    , StepProperties
+    , stepProperties
 
-    -- ** WorkItem
-    , WorkItem
-    , workItem
-    , wiJobId
-    , wiReportStatusInterval
-    , wiShellTask
-    , wiStreamingSetupTask
-    , wiInitialReportIndex
-    , wiMapTask
-    , wiPackages
-    , wiStreamingComputationTask
-    , wiSourceOperationTask
-    , wiId
-    , wiProjectId
-    , wiLeaseExpireTime
-    , wiConfiguration
-    , wiSeqMapTask
+    -- ** DerivedSource
+    , DerivedSource
+    , derivedSource
+    , dsDerivationMode
+    , dsSource
 
-    -- ** WorkItemServiceState
-    , WorkItemServiceState
-    , workItemServiceState
-    , wissNextReportIndex
-    , wissReportStatusInterval
-    , wissHarnessData
-    , wissSuggestedStopPoint
-    , wissSuggestedStopPosition
-    , wissLeaseExpireTime
+    -- ** StatusItemDetails
+    , StatusItemDetails
+    , statusItemDetails
 
-    -- ** WorkItemServiceStateHarnessData
-    , WorkItemServiceStateHarnessData
-    , workItemServiceStateHarnessData
+    -- ** SourceCodec
+    , SourceCodec
+    , sourceCodec
 
     -- ** WorkItemStatus
     , WorkItemStatus
@@ -639,34 +569,38 @@ module Network.Google.Dataflow
     , wisMetricUpdates
     , wisWorkItemId
 
-    -- ** WorkerPool
-    , WorkerPool
-    , workerPool
-    , wpAutoscalingSettings
-    , wpDiskSizeGb
-    , wpKind
-    , wpTaskrunnerSettings
-    , wpNumWorkers
-    , wpNetwork
-    , wpZone
-    , wpPackages
-    , wpOnHostMaintenance
-    , wpDiskSourceImage
-    , wpMachineType
-    , wpMetadata
-    , wpDiskType
-    , wpTeardownPolicy
-    , wpDefaultPackageSet
-    , wpPoolArgs
-    , wpDataDisks
+    -- ** JobMetrics
+    , JobMetrics
+    , jobMetrics
+    , jmMetrics
+    , jmMetricTime
 
-    -- ** WorkerPoolMetadata
-    , WorkerPoolMetadata
-    , workerPoolMetadata
+    -- ** ShellTask
+    , ShellTask
+    , shellTask
+    , stCommand
+    , stExitCode
 
-    -- ** WorkerPoolPoolArgs
-    , WorkerPoolPoolArgs
-    , workerPoolPoolArgs
+    -- ** TopologyConfig
+    , TopologyConfig
+    , topologyConfig
+    , tcDataDiskAssignments
+    , tcUserStageToComputationNameMap
+    , tcComputations
+
+    -- ** SourceSpec
+    , SourceSpec
+    , sourceSpec
+
+    -- ** SourceOperationResponse
+    , SourceOperationResponse
+    , sourceOperationResponse
+    , sSplit
+    , sGetMetadata
+
+    -- ** EnvironmentInternalExperiments
+    , EnvironmentInternalExperiments
+    , environmentInternalExperiments
 
     -- ** WorkerSettings
     , WorkerSettings
@@ -678,13 +612,88 @@ module Network.Google.Dataflow
     , wsReportingEnabled
     , wsWorkerId
 
-    -- ** WriteInstruction
-    , WriteInstruction
-    , writeInstruction
-    , wiSink
-    , wiInput
+    -- ** LeaseWorkItemRequest
+    , LeaseWorkItemRequest
+    , leaseWorkItemRequest
+    , lwirWorkItemTypes
+    , lwirCurrentWorkerTime
+    , lwirWorkerCapabilities
+    , lwirRequestedLeaseDuration
+    , lwirWorkerId
+
+    -- ** EnvironmentUserAgent
+    , EnvironmentUserAgent
+    , environmentUserAgent
+
+    -- ** SeqMapTask
+    , SeqMapTask
+    , seqMapTask
+    , smtInputs
+    , smtName
+    , smtOutputInfos
+    , smtSystemName
+    , smtStageName
+    , smtUserFn
+
+    -- ** ListJobMessagesResponse
+    , ListJobMessagesResponse
+    , listJobMessagesResponse
+    , ljmrJobMessages
+    , ljmrNextPageToken
+
+    -- ** InstructionInput
+    , InstructionInput
+    , instructionInput
+    , iiProducerInstructionIndex
+    , iiOutputNum
+
+    -- ** SourceSplitRequest
+    , SourceSplitRequest
+    , sourceSplitRequest
+    , ssrSource
+    , ssrOptions
+
+    -- ** PubsubLocation
+    , PubsubLocation
+    , pubsubLocation
+    , plTrackingSubscription
+    , plDropLateData
+    , plTimestampLabel
+    , plIdLabel
+    , plTopic
+    , plSubscription
+
+    -- ** KeyRangeDataDiskAssignment
+    , KeyRangeDataDiskAssignment
+    , keyRangeDataDiskAssignment
+    , krddaDataDisk
+    , krddaStart
+    , krddaEnd
+
+    -- ** MapTask
+    , MapTask
+    , mapTask
+    , mtInstructions
+    , mtSystemName
+    , mtStageName
+
+    -- ** MountedDataDisk
+    , MountedDataDisk
+    , mountedDataDisk
+    , mddDataDisk
+
+    -- ** StreamLocation
+    , StreamLocation
+    , streamLocation
+    , slStreamingStageLocation
+    , slSideInputLocation
+    , slCustomSourceLocation
+    , slPubsubLocation
     ) where
 
+import           Network.Google.API.Dataflow.Projects.Jobs.Messages.List
+import           Network.Google.API.Dataflow.Projects.Jobs.WorkItems.Lease
+import           Network.Google.API.Dataflow.Projects.Jobs.WorkItems.ReportStatus
 import           Network.Google.Dataflow.Types
 import           Network.Google.Prelude
 
@@ -692,89 +701,10 @@ import           Network.Google.Prelude
 TODO
 -}
 
-type Dataflow = ProjectsAPI
+type Dataflow =
+     ProjectsJobsWorkItemsReportStatusAPI :<|>
+       ProjectsJobsMessagesListAPI
+       :<|> ProjectsJobsWorkItemsLeaseAPI
 
-type ProjectsAPI = JobsAPI
-
-type JobsAPI = WorkItemsAPI :<|> MessagesAPI
-
-type WorkItemsAPI =
-     WorkItemsLease :<|> WorkItemsReportStatus
-
--- | Leases a dataflow WorkItem to run.
-type WorkItemsLease =
-     "v1b3" :>
-       "projects" :>
-         Capture "projectId" Text :>
-           "jobs" :>
-             Capture "jobId" Text :>
-               "workItems:lease" :>
-                 QueryParam "$.xgafv" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "upload_protocol" Text :>
-                         QueryParam "pp" Bool :>
-                           QueryParam "access_token" Text :>
-                             QueryParam "uploadType" Text :>
-                               QueryParam "bearer_token" Text :>
-                                 QueryParam "key" Text :>
-                                   QueryParam "oauth_token" Text :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "callback" Text :>
-                                         QueryParam "alt" Text :>
-                                           Post '[JSON] LeaseWorkItemResponse
-
--- | Reports the status of dataflow WorkItems leased by a worker.
-type WorkItemsReportStatus =
-     "v1b3" :>
-       "projects" :>
-         Capture "projectId" Text :>
-           "jobs" :>
-             Capture "jobId" Text :>
-               "workItems:reportStatus" :>
-                 QueryParam "$.xgafv" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "upload_protocol" Text :>
-                         QueryParam "pp" Bool :>
-                           QueryParam "access_token" Text :>
-                             QueryParam "uploadType" Text :>
-                               QueryParam "bearer_token" Text :>
-                                 QueryParam "key" Text :>
-                                   QueryParam "oauth_token" Text :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "callback" Text :>
-                                         QueryParam "alt" Text :>
-                                           Post '[JSON]
-                                             ReportWorkItemStatusResponse
-
-type MessagesAPI = MessagesList
-
--- | Request the job status.
-type MessagesList =
-     "v1b3" :>
-       "projects" :>
-         Capture "projectId" Text :>
-           "jobs" :>
-             Capture "jobId" Text :>
-               "messages" :>
-                 QueryParam "$.xgafv" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "upload_protocol" Text :>
-                         QueryParam "startTime" Text :>
-                           QueryParam "pp" Bool :>
-                             QueryParam "access_token" Text :>
-                               QueryParam "uploadType" Text :>
-                                 QueryParam "bearer_token" Text :>
-                                   QueryParam "key" Text :>
-                                     QueryParam "endTime" Text :>
-                                       QueryParam "minimumImportance" Text :>
-                                         QueryParam "pageToken" Text :>
-                                           QueryParam "oauth_token" Text :>
-                                             QueryParam "pageSize" Int32 :>
-                                               QueryParam "fields" Text :>
-                                                 QueryParam "callback" Text :>
-                                                   QueryParam "alt" Text :>
-                                                     Get '[JSON]
-                                                       ListJobMessagesResponse
+dataflow :: Proxy Dataflow
+dataflow = Proxy

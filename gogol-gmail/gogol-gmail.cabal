@@ -1,6 +1,6 @@
 name:                  gogol-gmail
 version:               0.0.1
-synopsis:              Google Gmail API.
+synopsis:              Google Gmail API Client.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -16,8 +16,8 @@ extra-source-files:    README.md
 description:
     The Gmail REST API.
     .
-    /Warning:/ This is an experimental preview release which is still under
-    heavy development and not intended for public consumption, caveat emptor!
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
 
 source-repository head
     type:     git
@@ -30,7 +30,27 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.Gmail
+          Network.Google.API.Gmail.Users.Drafts.Create
+        , Network.Google.API.Gmail.Users.Drafts.Delete
+        , Network.Google.API.Gmail.Users.Drafts.Get
+        , Network.Google.API.Gmail.Users.Drafts.List
+        , Network.Google.API.Gmail.Users.Drafts.Send
+        , Network.Google.API.Gmail.Users.Drafts.Update
+        , Network.Google.API.Gmail.Users.History.List
+        , Network.Google.API.Gmail.Users.Labels.Create
+        , Network.Google.API.Gmail.Users.Labels.Delete
+        , Network.Google.API.Gmail.Users.Labels.Get
+        , Network.Google.API.Gmail.Users.Labels.List
+        , Network.Google.API.Gmail.Users.Labels.Patch
+        , Network.Google.API.Gmail.Users.Labels.Update
+        , Network.Google.API.Gmail.Users.Messages.Attachments.Get
+        , Network.Google.API.Gmail.Users.Threads.Delete
+        , Network.Google.API.Gmail.Users.Threads.Get
+        , Network.Google.API.Gmail.Users.Threads.List
+        , Network.Google.API.Gmail.Users.Threads.Modify
+        , Network.Google.API.Gmail.Users.Threads.Trash
+        , Network.Google.API.Gmail.Users.Threads.Untrash
+        , Network.Google.Gmail
         , Network.Google.Gmail.Types
 
     other-modules:

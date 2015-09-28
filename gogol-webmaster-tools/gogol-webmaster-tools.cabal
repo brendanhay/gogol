@@ -1,6 +1,6 @@
 name:                  gogol-webmaster-tools
 version:               0.0.1
-synopsis:              Google Webmaster Tools API.
+synopsis:              Google Webmaster Tools API Client.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -16,8 +16,8 @@ extra-source-files:    README.md
 description:
     Lets you view Google Webmaster Tools data for your verified sites.
     .
-    /Warning:/ This is an experimental preview release which is still under
-    heavy development and not intended for public consumption, caveat emptor!
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
 
 source-repository head
     type:     git
@@ -30,7 +30,20 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.Webmaster.Tools
+          Network.Google.API.Webmasters.Searchanalytics.Query
+        , Network.Google.API.Webmasters.Sitemaps.Delete
+        , Network.Google.API.Webmasters.Sitemaps.Get
+        , Network.Google.API.Webmasters.Sitemaps.List
+        , Network.Google.API.Webmasters.Sitemaps.Submit
+        , Network.Google.API.Webmasters.Sites.Add
+        , Network.Google.API.Webmasters.Sites.Delete
+        , Network.Google.API.Webmasters.Sites.Get
+        , Network.Google.API.Webmasters.Sites.List
+        , Network.Google.API.Webmasters.URLcrawlerrorscounts.Query
+        , Network.Google.API.Webmasters.URLcrawlerrorssamples.Get
+        , Network.Google.API.Webmasters.URLcrawlerrorssamples.List
+        , Network.Google.API.Webmasters.URLcrawlerrorssamples.MarkAsFixed
+        , Network.Google.Webmaster.Tools
         , Network.Google.Webmaster.Tools.Types
 
     other-modules:

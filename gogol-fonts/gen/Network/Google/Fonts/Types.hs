@@ -14,9 +14,21 @@
 --
 module Network.Google.Fonts.Types
     (
+    -- * Service URL
+      fontsURL
+
+    -- * Alt
+    , Alt (..)
+
+    -- * WebfontsList'Sort
+    , WebfontsList'Sort (..)
+
+    -- * WebfontFiles
+    , WebfontFiles
+    , webfontFiles
 
     -- * Webfont
-      Webfont
+    , Webfont
     , webfont
     , wVariants
     , wKind
@@ -26,10 +38,6 @@ module Network.Google.Fonts.Types
     , wFiles
     , wSubsets
     , wLastModified
-
-    -- * WebfontFiles
-    , WebfontFiles
-    , webfontFiles
 
     -- * WebfontList
     , WebfontList
@@ -41,3 +49,10 @@ module Network.Google.Fonts.Types
 import           Network.Google.Fonts.Types.Product
 import           Network.Google.Fonts.Types.Sum
 import           Network.Google.Prelude
+
+-- | URL referring to version 'v1' of the Google Fonts Developer API.
+fontsURL :: BaseUrl
+fontsURL
+  = BaseUrl Https
+      "https://www.googleapis.com/webfonts/v1/"
+      443

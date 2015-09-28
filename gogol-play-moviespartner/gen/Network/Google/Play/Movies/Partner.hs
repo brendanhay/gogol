@@ -18,22 +18,79 @@
 -- /See:/ <https://developers.google.com/playmoviespartner/ Google Play Movies Partner API Reference>
 module Network.Google.Play.Movies.Partner
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** Google Play Movies Partner API
       PlayMoviesPartner
-    , AccountsAPI
-    , AvailsAPI
-    , AvailsList
-    , StoreInfosAPI
-    , CountryAPI
-    , CountryGet
-    , OrdersAPI
-    , OrdersList
-    , OrdersGet
-    , ExperienceLocalesAPI
-    , ExperienceLocalesList
-    , ExperienceLocalesGet
+    , playMoviesPartner
+    , playMoviesPartnerURL
+
+    -- ** playmoviespartner.accounts.avails.list
+    , module Network.Google.API.PlayMoviesPartner.Accounts.Avails.List
+
+    -- ** playmoviespartner.accounts.experienceLocales.get
+    , module Network.Google.API.PlayMoviesPartner.Accounts.ExperienceLocales.Get
+
+    -- ** playmoviespartner.accounts.experienceLocales.list
+    , module Network.Google.API.PlayMoviesPartner.Accounts.ExperienceLocales.List
+
+    -- ** playmoviespartner.accounts.orders.get
+    , module Network.Google.API.PlayMoviesPartner.Accounts.Orders.Get
+
+    -- ** playmoviespartner.accounts.orders.list
+    , module Network.Google.API.PlayMoviesPartner.Accounts.Orders.List
+
+    -- ** playmoviespartner.accounts.storeInfos.country.get
+    , module Network.Google.API.PlayMoviesPartner.Accounts.StoreInfos.Country.Get
 
     -- * Types
+
+    -- ** ListExperienceLocalesResponse
+    , ListExperienceLocalesResponse
+    , listExperienceLocalesResponse
+    , lelrNextPageToken
+    , lelrExperienceLocales
+
+    -- ** ListOrdersResponse
+    , ListOrdersResponse
+    , listOrdersResponse
+    , lorNextPageToken
+    , lorOrders
+
+    -- ** ListStoreInfosResponse
+    , ListStoreInfosResponse
+    , listStoreInfosResponse
+    , lsirNextPageToken
+    , lsirStoreInfos
+
+    -- ** StoreInfo
+    , StoreInfo
+    , storeInfo
+    , siTitleLevelEidr
+    , siPphNames
+    , siShowName
+    , siSubtitles
+    , siStudioName
+    , siAudioTracks
+    , siEpisodeNumber
+    , siCountry
+    , siTrailerId
+    , siHasInfoCards
+    , siLiveTime
+    , siSeasonNumber
+    , siHasHdOffer
+    , siVideoId
+    , siName
+    , siHasVodOffer
+    , siSeasonName
+    , siHasSdOffer
+    , siMid
+    , siEditLevelEidr
+    , siType
+    , siHasEstOffer
+    , siHasAudio51
+    , siSeasonId
+    , siShowId
 
     -- ** Avail
     , Avail
@@ -71,6 +128,33 @@ module Network.Google.Play.Movies.Partner
     , aSeasonAltId
     , aTitleInternalAlias
 
+    -- ** Order
+    , Order
+    , order
+    , oStatus
+    , oShowName
+    , oPphName
+    , oEarliestAvailStartTime
+    , oStudioName
+    , oReceivedTime
+    , oPriority
+    , oChannelId
+    , oCustomId
+    , oApprovedTime
+    , oCountries
+    , oChannelName
+    , oVideoId
+    , oLegacyPriority
+    , oName
+    , oRejectionNote
+    , oOrderedTime
+    , oSeasonName
+    , oStatusDetail
+    , oType
+    , oNormalizedPriority
+    , oOrderId
+    , oEpisodeName
+
     -- ** ExperienceLocale
     , ExperienceLocale
     , experienceLocale
@@ -103,82 +187,14 @@ module Network.Google.Play.Movies.Partner
     , listAvailsResponse
     , larNextPageToken
     , larAvails
-
-    -- ** ListExperienceLocalesResponse
-    , ListExperienceLocalesResponse
-    , listExperienceLocalesResponse
-    , lelrNextPageToken
-    , lelrExperienceLocales
-
-    -- ** ListOrdersResponse
-    , ListOrdersResponse
-    , listOrdersResponse
-    , lorNextPageToken
-    , lorOrders
-
-    -- ** ListStoreInfosResponse
-    , ListStoreInfosResponse
-    , listStoreInfosResponse
-    , lsirNextPageToken
-    , lsirStoreInfos
-
-    -- ** Order
-    , Order
-    , order
-    , oStatus
-    , oShowName
-    , oPphName
-    , oEarliestAvailStartTime
-    , oStudioName
-    , oReceivedTime
-    , oPriority
-    , oChannelId
-    , oCustomId
-    , oApprovedTime
-    , oCountries
-    , oChannelName
-    , oVideoId
-    , oLegacyPriority
-    , oName
-    , oRejectionNote
-    , oOrderedTime
-    , oSeasonName
-    , oStatusDetail
-    , oType
-    , oNormalizedPriority
-    , oOrderId
-    , oEpisodeName
-
-    -- ** StoreInfo
-    , StoreInfo
-    , storeInfo
-    , siTitleLevelEidr
-    , siPphNames
-    , siShowName
-    , siSubtitles
-    , siStudioName
-    , siAudioTracks
-    , siEpisodeNumber
-    , siCountry
-    , siTrailerId
-    , siHasInfoCards
-    , siLiveTime
-    , siSeasonNumber
-    , siHasHdOffer
-    , siVideoId
-    , siName
-    , siHasVodOffer
-    , siSeasonName
-    , siHasSdOffer
-    , siMid
-    , siEditLevelEidr
-    , siType
-    , siHasEstOffer
-    , siHasAudio51
-    , siSeasonId
-    , siShowId
     ) where
 
+import           Network.Google.API.PlayMoviesPartner.Accounts.Avails.List
+import           Network.Google.API.PlayMoviesPartner.Accounts.ExperienceLocales.Get
+import           Network.Google.API.PlayMoviesPartner.Accounts.ExperienceLocales.List
+import           Network.Google.API.PlayMoviesPartner.Accounts.Orders.Get
+import           Network.Google.API.PlayMoviesPartner.Accounts.Orders.List
+import           Network.Google.API.PlayMoviesPartner.Accounts.StoreInfos.Country.Get
 import           Network.Google.Play.Movies.Partner.Types
 import           Network.Google.Prelude
 
@@ -186,189 +202,13 @@ import           Network.Google.Prelude
 TODO
 -}
 
-type PlayMoviesPartner = AccountsAPI
+type PlayMoviesPartner =
+     AccountsStoreInfosCountryGetAPI :<|>
+       AccountsExperienceLocalesGetAPI
+       :<|> AccountsOrdersGetAPI
+       :<|> AccountsAvailsListAPI
+       :<|> AccountsOrdersListAPI
+       :<|> AccountsExperienceLocalesListAPI
 
-type AccountsAPI =
-     AvailsAPI :<|> StoreInfosAPI :<|> OrdersAPI :<|>
-       ExperienceLocalesAPI
-
-type AvailsAPI = AvailsList
-
--- | List Avails owned or managed by the partner. See _Authentication and
--- Authorization rules_ and _List methods rules_ for more information about
--- this method.
-type AvailsList =
-     "v1" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "avails" :>
-             QueryParam "altId" Text :>
-               QueryParam "pphNames" Text :>
-                 QueryParam "$.xgafv" Text :>
-                   QueryParam "studioNames" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "videoIds" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "upload_protocol" Text :>
-                             QueryParam "pp" Bool :>
-                               QueryParam "access_token" Text :>
-                                 QueryParam "uploadType" Text :>
-                                   QueryParam "territories" Text :>
-                                     QueryParam "bearer_token" Text :>
-                                       QueryParam "key" Text :>
-                                         QueryParam "pageToken" Text :>
-                                           QueryParam "title" Text :>
-                                             QueryParam "oauth_token" Text :>
-                                               QueryParam "pageSize" Int32 :>
-                                                 QueryParam "fields" Text :>
-                                                   QueryParam "callback" Text :>
-                                                     QueryParam "alt" Text :>
-                                                       Get '[JSON]
-                                                         ListAvailsResponse
-
-type StoreInfosAPI = CountryAPI
-
-type CountryAPI = CountryGet
-
--- | Get a StoreInfo given its video id and country. See _Authentication and
--- Authorization rules_ and _Get methods rules_ for more information about
--- this method.
-type CountryGet =
-     "v1" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "storeInfos" :>
-             Capture "videoId" Text :>
-               "country" :>
-                 Capture "country" Text :>
-                   QueryParam "$.xgafv" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "upload_protocol" Text :>
-                           QueryParam "pp" Bool :>
-                             QueryParam "access_token" Text :>
-                               QueryParam "uploadType" Text :>
-                                 QueryParam "bearer_token" Text :>
-                                   QueryParam "key" Text :>
-                                     QueryParam "oauth_token" Text :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "callback" Text :>
-                                           QueryParam "alt" Text :>
-                                             Get '[JSON] StoreInfo
-
-type OrdersAPI = OrdersList :<|> OrdersGet
-
--- | List Orders owned or managed by the partner. See _Authentication and
--- Authorization rules_ and _List methods rules_ for more information about
--- this method.
-type OrdersList =
-     "v1" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "orders" :>
-             QueryParam "status" Text :>
-               QueryParam "pphNames" Text :>
-                 QueryParam "$.xgafv" Text :>
-                   QueryParam "studioNames" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "upload_protocol" Text :>
-                           QueryParam "pp" Bool :>
-                             QueryParam "access_token" Text :>
-                               QueryParam "uploadType" Text :>
-                                 QueryParam "customId" Text :>
-                                   QueryParam "bearer_token" Text :>
-                                     QueryParam "key" Text :>
-                                       QueryParam "name" Text :>
-                                         QueryParam "pageToken" Text :>
-                                           QueryParam "oauth_token" Text :>
-                                             QueryParam "pageSize" Int32 :>
-                                               QueryParam "fields" Text :>
-                                                 QueryParam "callback" Text :>
-                                                   QueryParam "alt" Text :>
-                                                     Get '[JSON]
-                                                       ListOrdersResponse
-
--- | Get an Order given its id. See _Authentication and Authorization rules_
--- and _Get methods rules_ for more information about this method.
-type OrdersGet =
-     "v1" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "orders" :>
-             Capture "orderId" Text :>
-               QueryParam "$.xgafv" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "upload_protocol" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "access_token" Text :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "bearer_token" Text :>
-                               QueryParam "key" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "callback" Text :>
-                                       QueryParam "alt" Text :>
-                                         Get '[JSON] Order
-
-type ExperienceLocalesAPI =
-     ExperienceLocalesList :<|> ExperienceLocalesGet
-
--- | List ExperienceLocales owned or managed by the partner. See
--- _Authentication and Authorization rules_ and _List methods rules_ for
--- more information about this method.
-type ExperienceLocalesList =
-     "v1" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "experienceLocales" :>
-             QueryParam "titleLevelEidr" Text :>
-               QueryParam "status" Text :>
-                 QueryParam "pphNames" Text :>
-                   QueryParam "$.xgafv" Text :>
-                     QueryParam "studioNames" Text :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "prettyPrint" Bool :>
-                           QueryParam "upload_protocol" Text :>
-                             QueryParam "pp" Bool :>
-                               QueryParam "access_token" Text :>
-                                 QueryParam "uploadType" Text :>
-                                   QueryParam "altCutId" Text :>
-                                     QueryParam "customId" Text :>
-                                       QueryParam "bearer_token" Text :>
-                                         QueryParam "key" Text :>
-                                           QueryParam "editLevelEidr" Text :>
-                                             QueryParam "pageToken" Text :>
-                                               QueryParam "oauth_token" Text :>
-                                                 QueryParam "pageSize" Int32 :>
-                                                   QueryParam "fields" Text :>
-                                                     QueryParam "callback" Text
-                                                       :>
-                                                       QueryParam "alt" Text :>
-                                                         Get '[JSON]
-                                                           ListExperienceLocalesResponse
-
--- | Get an ExperienceLocale given its id. See _Authentication and
--- Authorization rules_ and _Get methods rules_ for more information about
--- this method.
-type ExperienceLocalesGet =
-     "v1" :>
-       "accounts" :>
-         Capture "accountId" Text :>
-           "experienceLocales" :>
-             Capture "elId" Text :>
-               QueryParam "$.xgafv" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "upload_protocol" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "access_token" Text :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "bearer_token" Text :>
-                               QueryParam "key" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "callback" Text :>
-                                       QueryParam "alt" Text :>
-                                         Get '[JSON] ExperienceLocale
+playMoviesPartner :: Proxy PlayMoviesPartner
+playMoviesPartner = Proxy

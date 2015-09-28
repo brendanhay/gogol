@@ -14,12 +14,66 @@
 --
 module Network.Google.Apps.Activity.Types
     (
+    -- * Service URL
+      appsActivityURL
+
+    -- * EventPrimaryEventType
+    , EventPrimaryEventType (..)
+
+    -- * ListActivitiesResponse
+    , ListActivitiesResponse
+    , listActivitiesResponse
+    , larNextPageToken
+    , larActivities
+
+    -- * Alt
+    , Alt (..)
 
     -- * Activity
-      Activity
+    , Activity
     , activity
     , aSingleEvents
     , aCombinedEvent
+
+    -- * Rename
+    , Rename
+    , rename
+    , rNewTitle
+    , rOldTitle
+
+    -- * Permission
+    , Permission
+    , permission
+    , pWithLink
+    , pUser
+    , pRole
+    , pName
+    , pType
+    , pPermissionId
+
+    -- * ActivitiesList'GroupingStrategy
+    , ActivitiesList'GroupingStrategy (..)
+
+    -- * Target
+    , Target
+    , target
+    , tMimeType
+    , tName
+    , tId
+
+    -- * Move
+    , Move
+    , move
+    , mAddedParents
+    , mRemovedParents
+
+    -- * Photo
+    , Photo
+    , photo
+    , pUrl
+
+    -- * PermissionRole
+    , PermissionRole (..)
 
     -- * Event
     , Event
@@ -37,21 +91,6 @@ module Network.Google.Apps.Activity.Types
     -- * EventItemAdditionalEventTypes
     , EventItemAdditionalEventTypes (..)
 
-    -- * EventPrimaryEventType
-    , EventPrimaryEventType (..)
-
-    -- * ListActivitiesResponse
-    , ListActivitiesResponse
-    , listActivitiesResponse
-    , larNextPageToken
-    , larActivities
-
-    -- * Move
-    , Move
-    , move
-    , mAddedParents
-    , mRemovedParents
-
     -- * Parent
     , Parent
     , parent
@@ -59,45 +98,14 @@ module Network.Google.Apps.Activity.Types
     , pId
     , pTitle
 
-    -- * Permission
-    , Permission
-    , permission
-    , pWithLink
-    , pUser
-    , pRole
-    , pName
-    , pType
-    , pPermissionId
-
     -- * PermissionChange
     , PermissionChange
     , permissionChange
     , pcAddedPermissions
     , pcRemovedPermissions
 
-    -- * PermissionRole
-    , PermissionRole (..)
-
     -- * PermissionType
     , PermissionType (..)
-
-    -- * Photo
-    , Photo
-    , photo
-    , pUrl
-
-    -- * Rename
-    , Rename
-    , rename
-    , rNewTitle
-    , rOldTitle
-
-    -- * Target
-    , Target
-    , target
-    , tMimeType
-    , tName
-    , tId
 
     -- * User
     , User
@@ -109,3 +117,10 @@ module Network.Google.Apps.Activity.Types
 import           Network.Google.Apps.Activity.Types.Product
 import           Network.Google.Apps.Activity.Types.Sum
 import           Network.Google.Prelude
+
+-- | URL referring to version 'v1' of the Google Apps Activity API.
+appsActivityURL :: BaseUrl
+appsActivityURL
+  = BaseUrl Https
+      "https://www.googleapis.com/appsactivity/v1/"
+      443

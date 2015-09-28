@@ -1,6 +1,6 @@
 name:                  gogol-drive
 version:               0.0.1
-synopsis:              Google Drive API.
+synopsis:              Google Drive API Client.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -16,8 +16,8 @@ extra-source-files:    README.md
 description:
     The API to interact with Drive.
     .
-    /Warning:/ This is an experimental preview release which is still under
-    heavy development and not intended for public consumption, caveat emptor!
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
 
 source-repository head
     type:     git
@@ -30,7 +30,67 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.Drive
+          Network.Google.API.Drive.About.Get
+        , Network.Google.API.Drive.Apps.Get
+        , Network.Google.API.Drive.Apps.List
+        , Network.Google.API.Drive.Changes.Get
+        , Network.Google.API.Drive.Changes.List
+        , Network.Google.API.Drive.Changes.Watch
+        , Network.Google.API.Drive.Channels.Stop
+        , Network.Google.API.Drive.Children.Delete
+        , Network.Google.API.Drive.Children.Get
+        , Network.Google.API.Drive.Children.Insert
+        , Network.Google.API.Drive.Children.List
+        , Network.Google.API.Drive.Comments.Delete
+        , Network.Google.API.Drive.Comments.Get
+        , Network.Google.API.Drive.Comments.Insert
+        , Network.Google.API.Drive.Comments.List
+        , Network.Google.API.Drive.Comments.Patch
+        , Network.Google.API.Drive.Comments.Update
+        , Network.Google.API.Drive.Files.Copy
+        , Network.Google.API.Drive.Files.Delete
+        , Network.Google.API.Drive.Files.EmptyTrash
+        , Network.Google.API.Drive.Files.GenerateIds
+        , Network.Google.API.Drive.Files.Get
+        , Network.Google.API.Drive.Files.Insert
+        , Network.Google.API.Drive.Files.List
+        , Network.Google.API.Drive.Files.Patch
+        , Network.Google.API.Drive.Files.Touch
+        , Network.Google.API.Drive.Files.Trash
+        , Network.Google.API.Drive.Files.Untrash
+        , Network.Google.API.Drive.Files.Update
+        , Network.Google.API.Drive.Files.Watch
+        , Network.Google.API.Drive.Parents.Delete
+        , Network.Google.API.Drive.Parents.Get
+        , Network.Google.API.Drive.Parents.Insert
+        , Network.Google.API.Drive.Parents.List
+        , Network.Google.API.Drive.Permissions.Delete
+        , Network.Google.API.Drive.Permissions.Get
+        , Network.Google.API.Drive.Permissions.GetIdForEmail
+        , Network.Google.API.Drive.Permissions.Insert
+        , Network.Google.API.Drive.Permissions.List
+        , Network.Google.API.Drive.Permissions.Patch
+        , Network.Google.API.Drive.Permissions.Update
+        , Network.Google.API.Drive.Properties.Delete
+        , Network.Google.API.Drive.Properties.Get
+        , Network.Google.API.Drive.Properties.Insert
+        , Network.Google.API.Drive.Properties.List
+        , Network.Google.API.Drive.Properties.Patch
+        , Network.Google.API.Drive.Properties.Update
+        , Network.Google.API.Drive.Realtime.Get
+        , Network.Google.API.Drive.Realtime.Update
+        , Network.Google.API.Drive.Replies.Delete
+        , Network.Google.API.Drive.Replies.Get
+        , Network.Google.API.Drive.Replies.Insert
+        , Network.Google.API.Drive.Replies.List
+        , Network.Google.API.Drive.Replies.Patch
+        , Network.Google.API.Drive.Replies.Update
+        , Network.Google.API.Drive.Revisions.Delete
+        , Network.Google.API.Drive.Revisions.Get
+        , Network.Google.API.Drive.Revisions.List
+        , Network.Google.API.Drive.Revisions.Patch
+        , Network.Google.API.Drive.Revisions.Update
+        , Network.Google.Drive
         , Network.Google.Drive.Types
 
     other-modules:

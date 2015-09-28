@@ -18,33 +18,78 @@
 -- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference>
 module Network.Google.DoubleClick.Search
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** DoubleClick Search API
       DoubleClickSearch
-    , ReportsAPI
-    , ReportsGet
-    , ReportsGetFile
-    , ReportsGenerate
-    , ReportsRequest
-    , SavedColumnsAPI
-    , SavedColumnsList
-    , ConversionAPI
-    , ConversionInsert
-    , ConversionPatch
-    , ConversionGet
-    , ConversionUpdateAvailability
-    , ConversionUpdate
+    , doubleClickSearch
+    , doubleClickSearchURL
+
+    -- ** doubleclicksearch.conversion.get
+    , module Network.Google.API.DoubleClickSearch.Conversion.Get
+
+    -- ** doubleclicksearch.conversion.insert
+    , module Network.Google.API.DoubleClickSearch.Conversion.Insert
+
+    -- ** doubleclicksearch.conversion.patch
+    , module Network.Google.API.DoubleClickSearch.Conversion.Patch
+
+    -- ** doubleclicksearch.conversion.update
+    , module Network.Google.API.DoubleClickSearch.Conversion.Update
+
+    -- ** doubleclicksearch.conversion.updateAvailability
+    , module Network.Google.API.DoubleClickSearch.Conversion.UpdateAvailability
+
+    -- ** doubleclicksearch.reports.generate
+    , module Network.Google.API.DoubleClickSearch.Reports.Generate
+
+    -- ** doubleclicksearch.reports.get
+    , module Network.Google.API.DoubleClickSearch.Reports.Get
+
+    -- ** doubleclicksearch.reports.getFile
+    , module Network.Google.API.DoubleClickSearch.Reports.GetFile
+
+    -- ** doubleclicksearch.reports.request
+    , module Network.Google.API.DoubleClickSearch.Reports.Request
+
+    -- ** doubleclicksearch.savedColumns.list
+    , module Network.Google.API.DoubleClickSearch.SavedColumns.List
 
     -- * Types
 
-    -- ** Availability
-    , Availability
-    , availability
-    , aAgencyId
-    , aAdvertiserId
-    , aSegmentationId
-    , aSegmentationName
-    , aAvailabilityTimestamp
-    , aSegmentationType
+    -- ** ReportRequestItemOrderBy
+    , ReportRequestItemOrderBy
+    , reportRequestItemOrderBy
+    , rriobSortOrder
+    , rriobColumn
+
+    -- ** CustomMetric
+    , CustomMetric
+    , customMetric
+    , cmValue
+    , cmName
+
+    -- ** Alt
+    , Alt (..)
+
+    -- ** ReportApiColumnSpec
+    , ReportApiColumnSpec
+    , reportApiColumnSpec
+    , racsCustomDimensionName
+    , racsSavedColumnName
+    , racsGroupByColumn
+    , racsCustomMetricName
+    , racsEndDate
+    , racsStartDate
+    , racsHeaderText
+    , racsPlatformSource
+    , racsColumnName
+
+    -- ** ReportItemFiles
+    , ReportItemFiles
+    , reportItemFiles
+    , rifUrl
+    , rifByteCount
 
     -- ** Conversion
     , Conversion
@@ -83,11 +128,28 @@ module Network.Google.DoubleClick.Search
     , cProductId
     , cProductGroupId
 
-    -- ** ConversionList
-    , ConversionList
-    , conversionList
-    , clKind
-    , clConversion
+    -- ** ReportRequestReportScope
+    , ReportRequestReportScope
+    , reportRequestReportScope
+    , rrrsKeywordId
+    , rrrsAdGroupId
+    , rrrsEngineAccountId
+    , rrrsAgencyId
+    , rrrsAdvertiserId
+    , rrrsCampaignId
+    , rrrsAdId
+
+    -- ** UpdateAvailabilityResponse
+    , UpdateAvailabilityResponse
+    , updateAvailabilityResponse
+    , uarAvailabilities
+
+    -- ** SavedColumn
+    , SavedColumn
+    , savedColumn
+    , scSavedColumnName
+    , scKind
+    , scType
 
     -- ** CustomDimension
     , CustomDimension
@@ -95,11 +157,13 @@ module Network.Google.DoubleClick.Search
     , cdValue
     , cdName
 
-    -- ** CustomMetric
-    , CustomMetric
-    , customMetric
-    , cmValue
-    , cmName
+    -- ** ReportRequestTimeRange
+    , ReportRequestTimeRange
+    , reportRequestTimeRange
+    , rrtrEndDate
+    , rrtrChangedAttributesSinceTimestamp
+    , rrtrStartDate
+    , rrtrChangedMetricsSinceTimestamp
 
     -- ** Report
     , Report
@@ -114,24 +178,15 @@ module Network.Google.DoubleClick.Search
     , rRowCount
     , rRequest
 
-    -- ** ReportApiColumnSpec
-    , ReportApiColumnSpec
-    , reportApiColumnSpec
-    , racsCustomDimensionName
-    , racsSavedColumnName
-    , racsGroupByColumn
-    , racsCustomMetricName
-    , racsEndDate
-    , racsStartDate
-    , racsHeaderText
-    , racsPlatformSource
-    , racsColumnName
+    -- ** SavedColumnList
+    , SavedColumnList
+    , savedColumnList
+    , sclKind
+    , sclItems
 
-    -- ** ReportItemFiles
-    , ReportItemFiles
-    , reportItemFiles
-    , rifUrl
-    , rifByteCount
+    -- ** ReportRow
+    , ReportRow
+    , reportRow
 
     -- ** ReportRequest
     , ReportRequest
@@ -158,59 +213,38 @@ module Network.Google.DoubleClick.Search
     , rrifValues
     , rrifColumn
 
-    -- ** ReportRequestItemOrderBy
-    , ReportRequestItemOrderBy
-    , reportRequestItemOrderBy
-    , rriobSortOrder
-    , rriobColumn
-
-    -- ** ReportRequestReportScope
-    , ReportRequestReportScope
-    , reportRequestReportScope
-    , rrrsKeywordId
-    , rrrsAdGroupId
-    , rrrsEngineAccountId
-    , rrrsAgencyId
-    , rrrsAdvertiserId
-    , rrrsCampaignId
-    , rrrsAdId
-
-    -- ** ReportRequestTimeRange
-    , ReportRequestTimeRange
-    , reportRequestTimeRange
-    , rrtrEndDate
-    , rrtrChangedAttributesSinceTimestamp
-    , rrtrStartDate
-    , rrtrChangedMetricsSinceTimestamp
-
-    -- ** ReportRow
-    , ReportRow
-    , reportRow
-
-    -- ** SavedColumn
-    , SavedColumn
-    , savedColumn
-    , scSavedColumnName
-    , scKind
-    , scType
-
-    -- ** SavedColumnList
-    , SavedColumnList
-    , savedColumnList
-    , sclKind
-    , sclItems
+    -- ** ConversionList
+    , ConversionList
+    , conversionList
+    , clKind
+    , clConversion
 
     -- ** UpdateAvailabilityRequest
     , UpdateAvailabilityRequest
     , updateAvailabilityRequest
     , uAvailabilities
 
-    -- ** UpdateAvailabilityResponse
-    , UpdateAvailabilityResponse
-    , updateAvailabilityResponse
-    , uarAvailabilities
+    -- ** Availability
+    , Availability
+    , availability
+    , aAgencyId
+    , aAdvertiserId
+    , aSegmentationId
+    , aSegmentationName
+    , aAvailabilityTimestamp
+    , aSegmentationType
     ) where
 
+import           Network.Google.API.DoubleClickSearch.Conversion.Get
+import           Network.Google.API.DoubleClickSearch.Conversion.Insert
+import           Network.Google.API.DoubleClickSearch.Conversion.Patch
+import           Network.Google.API.DoubleClickSearch.Conversion.Update
+import           Network.Google.API.DoubleClickSearch.Conversion.UpdateAvailability
+import           Network.Google.API.DoubleClickSearch.Reports.Generate
+import           Network.Google.API.DoubleClickSearch.Reports.Get
+import           Network.Google.API.DoubleClickSearch.Reports.GetFile
+import           Network.Google.API.DoubleClickSearch.Reports.Request
+import           Network.Google.API.DoubleClickSearch.SavedColumns.List
 import           Network.Google.DoubleClick.Search.Types
 import           Network.Google.Prelude
 
@@ -219,184 +253,15 @@ TODO
 -}
 
 type DoubleClickSearch =
-     ReportsAPI :<|> SavedColumnsAPI :<|> ConversionAPI
+     ReportsGetAPI :<|> ConversionUpdateAvailabilityAPI
+       :<|> ReportsGetFileAPI
+       :<|> ReportsGenerateAPI
+       :<|> ConversionGetAPI
+       :<|> ReportsRequestAPI
+       :<|> ConversionInsertAPI
+       :<|> ConversionPatchAPI
+       :<|> ConversionUpdateAPI
+       :<|> SavedColumnsListAPI
 
-type ReportsAPI =
-     ReportsGet :<|> ReportsGetFile :<|> ReportsGenerate
-       :<|> ReportsRequest
-
--- | Polls for the status of a report request.
-type ReportsGet =
-     "doubleclicksearch" :>
-       "v2" :>
-         "reports" :>
-           Capture "reportId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Get '[JSON] Report
-
--- | Downloads a report file encoded in UTF-8.
-type ReportsGetFile =
-     "doubleclicksearch" :>
-       "v2" :>
-         "reports" :>
-           Capture "reportId" Text :>
-             "files" :>
-               Capture "reportFragment" Int32 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] ()
-
--- | Generates and returns a report immediately.
-type ReportsGenerate =
-     "doubleclicksearch" :>
-       "v2" :>
-         "reports" :>
-           "generate" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Post '[JSON] Report
-
--- | Inserts a report request into the reporting system.
-type ReportsRequest =
-     "doubleclicksearch" :>
-       "v2" :>
-         "reports" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "alt" Text :> Post '[JSON] Report
-
-type SavedColumnsAPI = SavedColumnsList
-
--- | Retrieve the list of saved columns for a specified advertiser.
-type SavedColumnsList =
-     "doubleclicksearch" :>
-       "v2" :>
-         "agency" :>
-           Capture "agencyId" Int64 :>
-             "advertiser" :>
-               Capture "advertiserId" Int64 :>
-                 "savedcolumns" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Get '[JSON] SavedColumnList
-
-type ConversionAPI =
-     ConversionInsert :<|> ConversionPatch :<|>
-       ConversionGet
-       :<|> ConversionUpdateAvailability
-       :<|> ConversionUpdate
-
--- | Inserts a batch of new conversions into DoubleClick Search.
-type ConversionInsert =
-     "doubleclicksearch" :>
-       "v2" :>
-         "conversion" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "alt" Text :> Post '[JSON] ConversionList
-
--- | Updates a batch of conversions in DoubleClick Search. This method
--- supports patch semantics.
-type ConversionPatch =
-     "doubleclicksearch" :>
-       "v2" :>
-         "conversion" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "engineAccountId" Int64 :>
-                 QueryParam "agencyId" Int64 :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "advertiserId" Int64 :>
-                       QueryParam "endDate" Natural :>
-                         QueryParam "startDate" Natural :>
-                           QueryParam "key" Text :>
-                             QueryParam "startRow" Word32 :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "rowCount" Natural :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "alt" Text :>
-                                       Patch '[JSON] ConversionList
-
--- | Retrieves a list of conversions from a DoubleClick Search engine
--- account.
-type ConversionGet =
-     "doubleclicksearch" :>
-       "v2" :>
-         "agency" :>
-           Capture "agencyId" Int64 :>
-             "advertiser" :>
-               Capture "advertiserId" Int64 :>
-                 "engine" :>
-                   Capture "engineAccountId" Int64 :>
-                     "conversion" :>
-                       QueryParam "quotaUser" Text :>
-                         QueryParam "adGroupId" Int64 :>
-                           QueryParam "prettyPrint" Bool :>
-                             QueryParam "userIp" Text :>
-                               QueryParam "endDate" Natural :>
-                                 QueryParam "campaignId" Int64 :>
-                                   QueryParam "criterionId" Int64 :>
-                                     QueryParam "startDate" Natural :>
-                                       QueryParam "key" Text :>
-                                         QueryParam "startRow" Word32 :>
-                                           QueryParam "adId" Int64 :>
-                                             QueryParam "oauth_token" Text :>
-                                               QueryParam "rowCount" Natural :>
-                                                 QueryParam "fields" Text :>
-                                                   QueryParam "alt" Text :>
-                                                     Get '[JSON] ConversionList
-
--- | Updates the availabilities of a batch of floodlight activities in
--- DoubleClick Search.
-type ConversionUpdateAvailability =
-     "doubleclicksearch" :>
-       "v2" :>
-         "conversion" :>
-           "updateAvailability" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :>
-                           Post '[JSON] UpdateAvailabilityResponse
-
--- | Updates a batch of conversions in DoubleClick Search.
-type ConversionUpdate =
-     "doubleclicksearch" :>
-       "v2" :>
-         "conversion" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "alt" Text :> Put '[JSON] ConversionList
+doubleClickSearch :: Proxy DoubleClickSearch
+doubleClickSearch = Proxy

@@ -19,6 +19,158 @@ import           Network.Google.Apps.Tasks.Types.Sum
 import           Network.Google.Prelude
 
 --
+-- /See:/ 'taskLists' smart constructor.
+data TaskLists = TaskLists
+    { _tlEtag          :: !(Maybe Text)
+    , _tlNextPageToken :: !(Maybe Text)
+    , _tlKind          :: !Text
+    , _tlItems         :: !(Maybe [Maybe TaskList])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TaskLists' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tlEtag'
+--
+-- * 'tlNextPageToken'
+--
+-- * 'tlKind'
+--
+-- * 'tlItems'
+taskLists
+    :: TaskLists
+taskLists =
+    TaskLists
+    { _tlEtag = Nothing
+    , _tlNextPageToken = Nothing
+    , _tlKind = "tasks#taskLists"
+    , _tlItems = Nothing
+    }
+
+-- | ETag of the resource.
+tlEtag :: Lens' TaskLists (Maybe Text)
+tlEtag = lens _tlEtag (\ s a -> s{_tlEtag = a})
+
+-- | Token that can be used to request the next page of this result.
+tlNextPageToken :: Lens' TaskLists (Maybe Text)
+tlNextPageToken
+  = lens _tlNextPageToken
+      (\ s a -> s{_tlNextPageToken = a})
+
+-- | Type of the resource. This is always \"tasks#taskLists\".
+tlKind :: Lens' TaskLists Text
+tlKind = lens _tlKind (\ s a -> s{_tlKind = a})
+
+-- | Collection of task lists.
+tlItems :: Lens' TaskLists [Maybe TaskList]
+tlItems
+  = lens _tlItems (\ s a -> s{_tlItems = a}) . _Default
+      . _Coerce
+
+instance FromJSON TaskLists where
+        parseJSON
+          = withObject "TaskLists"
+              (\ o ->
+                 TaskLists <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "tasks#taskLists")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON TaskLists where
+        toJSON TaskLists{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _tlEtag,
+                  ("nextPageToken" .=) <$> _tlNextPageToken,
+                  Just ("kind" .= _tlKind), ("items" .=) <$> _tlItems])
+
+--
+-- /See:/ 'taskList' smart constructor.
+data TaskList = TaskList
+    { _tEtag     :: !(Maybe Text)
+    , _tKind     :: !Text
+    , _tSelfLink :: !(Maybe Text)
+    , _tId       :: !(Maybe Text)
+    , _tUpdated  :: !(Maybe UTCTime)
+    , _tTitle    :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TaskList' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tEtag'
+--
+-- * 'tKind'
+--
+-- * 'tSelfLink'
+--
+-- * 'tId'
+--
+-- * 'tUpdated'
+--
+-- * 'tTitle'
+taskList
+    :: TaskList
+taskList =
+    TaskList
+    { _tEtag = Nothing
+    , _tKind = "tasks#taskList"
+    , _tSelfLink = Nothing
+    , _tId = Nothing
+    , _tUpdated = Nothing
+    , _tTitle = Nothing
+    }
+
+-- | ETag of the resource.
+tEtag :: Lens' TaskList (Maybe Text)
+tEtag = lens _tEtag (\ s a -> s{_tEtag = a})
+
+-- | Type of the resource. This is always \"tasks#taskList\".
+tKind :: Lens' TaskList Text
+tKind = lens _tKind (\ s a -> s{_tKind = a})
+
+-- | URL pointing to this task list. Used to retrieve, update, or delete this
+-- task list.
+tSelfLink :: Lens' TaskList (Maybe Text)
+tSelfLink
+  = lens _tSelfLink (\ s a -> s{_tSelfLink = a})
+
+-- | Task list identifier.
+tId :: Lens' TaskList (Maybe Text)
+tId = lens _tId (\ s a -> s{_tId = a})
+
+-- | Last modification time of the task list (as a RFC 3339 timestamp).
+tUpdated :: Lens' TaskList (Maybe UTCTime)
+tUpdated = lens _tUpdated (\ s a -> s{_tUpdated = a})
+
+-- | Title of the task list.
+tTitle :: Lens' TaskList (Maybe Text)
+tTitle = lens _tTitle (\ s a -> s{_tTitle = a})
+
+instance FromJSON TaskList where
+        parseJSON
+          = withObject "TaskList"
+              (\ o ->
+                 TaskList <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!= "tasks#taskList")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id")
+                     <*> (o .:? "updated")
+                     <*> (o .:? "title"))
+
+instance ToJSON TaskList where
+        toJSON TaskList{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _tEtag, Just ("kind" .= _tKind),
+                  ("selfLink" .=) <$> _tSelfLink, ("id" .=) <$> _tId,
+                  ("updated" .=) <$> _tUpdated,
+                  ("title" .=) <$> _tTitle])
+
+--
 -- /See:/ 'task' smart constructor.
 data Task = Task
     { _tasParent    :: !(Maybe Text)
@@ -212,213 +364,6 @@ instance ToJSON Task where
                   ("position" .=) <$> _tasPosition])
 
 --
--- /See:/ 'taskItemLinks' smart constructor.
-data TaskItemLinks = TaskItemLinks
-    { _tilLink        :: !(Maybe Text)
-    , _tilType        :: !(Maybe Text)
-    , _tilDescription :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'TaskItemLinks' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'tilLink'
---
--- * 'tilType'
---
--- * 'tilDescription'
-taskItemLinks
-    :: TaskItemLinks
-taskItemLinks =
-    TaskItemLinks
-    { _tilLink = Nothing
-    , _tilType = Nothing
-    , _tilDescription = Nothing
-    }
-
--- | The URL.
-tilLink :: Lens' TaskItemLinks (Maybe Text)
-tilLink = lens _tilLink (\ s a -> s{_tilLink = a})
-
--- | Type of the link, e.g. \"email\".
-tilType :: Lens' TaskItemLinks (Maybe Text)
-tilType = lens _tilType (\ s a -> s{_tilType = a})
-
--- | The description. In HTML speak: Everything between and .
-tilDescription :: Lens' TaskItemLinks (Maybe Text)
-tilDescription
-  = lens _tilDescription
-      (\ s a -> s{_tilDescription = a})
-
-instance FromJSON TaskItemLinks where
-        parseJSON
-          = withObject "TaskItemLinks"
-              (\ o ->
-                 TaskItemLinks <$>
-                   (o .:? "link") <*> (o .:? "type") <*>
-                     (o .:? "description"))
-
-instance ToJSON TaskItemLinks where
-        toJSON TaskItemLinks{..}
-          = object
-              (catMaybes
-                 [("link" .=) <$> _tilLink, ("type" .=) <$> _tilType,
-                  ("description" .=) <$> _tilDescription])
-
---
--- /See:/ 'taskList' smart constructor.
-data TaskList = TaskList
-    { _tEtag     :: !(Maybe Text)
-    , _tKind     :: !Text
-    , _tSelfLink :: !(Maybe Text)
-    , _tId       :: !(Maybe Text)
-    , _tUpdated  :: !(Maybe UTCTime)
-    , _tTitle    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'TaskList' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'tEtag'
---
--- * 'tKind'
---
--- * 'tSelfLink'
---
--- * 'tId'
---
--- * 'tUpdated'
---
--- * 'tTitle'
-taskList
-    :: TaskList
-taskList =
-    TaskList
-    { _tEtag = Nothing
-    , _tKind = "tasks#taskList"
-    , _tSelfLink = Nothing
-    , _tId = Nothing
-    , _tUpdated = Nothing
-    , _tTitle = Nothing
-    }
-
--- | ETag of the resource.
-tEtag :: Lens' TaskList (Maybe Text)
-tEtag = lens _tEtag (\ s a -> s{_tEtag = a})
-
--- | Type of the resource. This is always \"tasks#taskList\".
-tKind :: Lens' TaskList Text
-tKind = lens _tKind (\ s a -> s{_tKind = a})
-
--- | URL pointing to this task list. Used to retrieve, update, or delete this
--- task list.
-tSelfLink :: Lens' TaskList (Maybe Text)
-tSelfLink
-  = lens _tSelfLink (\ s a -> s{_tSelfLink = a})
-
--- | Task list identifier.
-tId :: Lens' TaskList (Maybe Text)
-tId = lens _tId (\ s a -> s{_tId = a})
-
--- | Last modification time of the task list (as a RFC 3339 timestamp).
-tUpdated :: Lens' TaskList (Maybe UTCTime)
-tUpdated = lens _tUpdated (\ s a -> s{_tUpdated = a})
-
--- | Title of the task list.
-tTitle :: Lens' TaskList (Maybe Text)
-tTitle = lens _tTitle (\ s a -> s{_tTitle = a})
-
-instance FromJSON TaskList where
-        parseJSON
-          = withObject "TaskList"
-              (\ o ->
-                 TaskList <$>
-                   (o .:? "etag") <*>
-                     (o .:? "kind" .!= "tasks#taskList")
-                     <*> (o .:? "selfLink")
-                     <*> (o .:? "id")
-                     <*> (o .:? "updated")
-                     <*> (o .:? "title"))
-
-instance ToJSON TaskList where
-        toJSON TaskList{..}
-          = object
-              (catMaybes
-                 [("etag" .=) <$> _tEtag, Just ("kind" .= _tKind),
-                  ("selfLink" .=) <$> _tSelfLink, ("id" .=) <$> _tId,
-                  ("updated" .=) <$> _tUpdated,
-                  ("title" .=) <$> _tTitle])
-
---
--- /See:/ 'taskLists' smart constructor.
-data TaskLists = TaskLists
-    { _tlEtag          :: !(Maybe Text)
-    , _tlNextPageToken :: !(Maybe Text)
-    , _tlKind          :: !Text
-    , _tlItems         :: !(Maybe [Maybe TaskList])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'TaskLists' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'tlEtag'
---
--- * 'tlNextPageToken'
---
--- * 'tlKind'
---
--- * 'tlItems'
-taskLists
-    :: TaskLists
-taskLists =
-    TaskLists
-    { _tlEtag = Nothing
-    , _tlNextPageToken = Nothing
-    , _tlKind = "tasks#taskLists"
-    , _tlItems = Nothing
-    }
-
--- | ETag of the resource.
-tlEtag :: Lens' TaskLists (Maybe Text)
-tlEtag = lens _tlEtag (\ s a -> s{_tlEtag = a})
-
--- | Token that can be used to request the next page of this result.
-tlNextPageToken :: Lens' TaskLists (Maybe Text)
-tlNextPageToken
-  = lens _tlNextPageToken
-      (\ s a -> s{_tlNextPageToken = a})
-
--- | Type of the resource. This is always \"tasks#taskLists\".
-tlKind :: Lens' TaskLists Text
-tlKind = lens _tlKind (\ s a -> s{_tlKind = a})
-
--- | Collection of task lists.
-tlItems :: Lens' TaskLists [Maybe TaskList]
-tlItems
-  = lens _tlItems (\ s a -> s{_tlItems = a}) . _Default
-      . _Coerce
-
-instance FromJSON TaskLists where
-        parseJSON
-          = withObject "TaskLists"
-              (\ o ->
-                 TaskLists <$>
-                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!= "tasks#taskLists")
-                     <*> (o .:? "items" .!= mempty))
-
-instance ToJSON TaskLists where
-        toJSON TaskLists{..}
-          = object
-              (catMaybes
-                 [("etag" .=) <$> _tlEtag,
-                  ("nextPageToken" .=) <$> _tlNextPageToken,
-                  Just ("kind" .= _tlKind), ("items" .=) <$> _tlItems])
-
---
 -- /See:/ 'tasks' smart constructor.
 data Tasks = Tasks
     { _ttEtag          :: !(Maybe Text)
@@ -484,3 +429,58 @@ instance ToJSON Tasks where
                  [("etag" .=) <$> _ttEtag,
                   ("nextPageToken" .=) <$> _ttNextPageToken,
                   Just ("kind" .= _ttKind), ("items" .=) <$> _ttItems])
+
+--
+-- /See:/ 'taskItemLinks' smart constructor.
+data TaskItemLinks = TaskItemLinks
+    { _tilLink        :: !(Maybe Text)
+    , _tilType        :: !(Maybe Text)
+    , _tilDescription :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TaskItemLinks' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tilLink'
+--
+-- * 'tilType'
+--
+-- * 'tilDescription'
+taskItemLinks
+    :: TaskItemLinks
+taskItemLinks =
+    TaskItemLinks
+    { _tilLink = Nothing
+    , _tilType = Nothing
+    , _tilDescription = Nothing
+    }
+
+-- | The URL.
+tilLink :: Lens' TaskItemLinks (Maybe Text)
+tilLink = lens _tilLink (\ s a -> s{_tilLink = a})
+
+-- | Type of the link, e.g. \"email\".
+tilType :: Lens' TaskItemLinks (Maybe Text)
+tilType = lens _tilType (\ s a -> s{_tilType = a})
+
+-- | The description. In HTML speak: Everything between and .
+tilDescription :: Lens' TaskItemLinks (Maybe Text)
+tilDescription
+  = lens _tilDescription
+      (\ s a -> s{_tilDescription = a})
+
+instance FromJSON TaskItemLinks where
+        parseJSON
+          = withObject "TaskItemLinks"
+              (\ o ->
+                 TaskItemLinks <$>
+                   (o .:? "link") <*> (o .:? "type") <*>
+                     (o .:? "description"))
+
+instance ToJSON TaskItemLinks where
+        toJSON TaskItemLinks{..}
+          = object
+              (catMaybes
+                 [("link" .=) <$> _tilLink, ("type" .=) <$> _tilType,
+                  ("description" .=) <$> _tilDescription])

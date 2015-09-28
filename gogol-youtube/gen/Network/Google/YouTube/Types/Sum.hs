@@ -17,43 +17,1623 @@ module Network.Google.YouTube.Types.Sum where
 
 import           Network.Google.Prelude
 
--- | The type of call-to-action, a message to the user indicating action that
--- can be taken.
-data ActivityContentDetailsPromotedItemCtaType
-    = ACDPICTUnspecified
-      -- ^ @unspecified@
-    | ACDPICTVisitAdvertiserSite
-      -- ^ @visitAdvertiserSite@
+-- | Rating system in France - Commission de classification cinematographique
+data ContentRatingCncRating
+    = CNC10
+      -- ^ @cnc10@
+    | CNC12
+      -- ^ @cnc12@
+    | CNC16
+      -- ^ @cnc16@
+    | CNC18
+      -- ^ @cnc18@
+    | CNCE
+      -- ^ @cncE@
+    | CNCT
+      -- ^ @cncT@
+    | CNCUnrated
+      -- ^ @cncUnrated@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable ActivityContentDetailsPromotedItemCtaType
+instance Hashable ContentRatingCncRating
 
-instance FromText ActivityContentDetailsPromotedItemCtaType where
+instance FromText ContentRatingCncRating where
     fromText = \case
-        "unspecified" -> Just ACDPICTUnspecified
-        "visitAdvertiserSite" -> Just ACDPICTVisitAdvertiserSite
+        "cnc10" -> Just CNC10
+        "cnc12" -> Just CNC12
+        "cnc16" -> Just CNC16
+        "cnc18" -> Just CNC18
+        "cncE" -> Just CNCE
+        "cncT" -> Just CNCT
+        "cncUnrated" -> Just CNCUnrated
         _ -> Nothing
 
-instance ToText ActivityContentDetailsPromotedItemCtaType where
+instance ToText ContentRatingCncRating where
     toText = \case
-        ACDPICTUnspecified -> "unspecified"
-        ACDPICTVisitAdvertiserSite -> "visitAdvertiserSite"
+        CNC10 -> "cnc10"
+        CNC12 -> "cnc12"
+        CNC16 -> "cnc16"
+        CNC18 -> "cnc18"
+        CNCE -> "cncE"
+        CNCT -> "cncT"
+        CNCUnrated -> "cncUnrated"
 
-instance FromJSON ActivityContentDetailsPromotedItemCtaType where
-    parseJSON = parseJSONText "ActivityContentDetailsPromotedItemCtaType"
+instance FromJSON ContentRatingCncRating where
+    parseJSON = parseJSONText "ContentRatingCncRating"
 
-instance ToJSON ActivityContentDetailsPromotedItemCtaType where
+instance ToJSON ContentRatingCncRating where
+    toJSON = toJSONText
+
+-- | The reason that YouTube failed to process the video. This property will
+-- only have a value if the processingStatus property\'s value is failed.
+data VideoProcessingDetailsProcessingFailureReason
+    = Other
+      -- ^ @other@
+    | StreamingFailed
+      -- ^ @streamingFailed@
+    | TranscodeFailed
+      -- ^ @transcodeFailed@
+    | UploadFailed
+      -- ^ @uploadFailed@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable VideoProcessingDetailsProcessingFailureReason
+
+instance FromText VideoProcessingDetailsProcessingFailureReason where
+    fromText = \case
+        "other" -> Just Other
+        "streamingFailed" -> Just StreamingFailed
+        "transcodeFailed" -> Just TranscodeFailed
+        "uploadFailed" -> Just UploadFailed
+        _ -> Nothing
+
+instance ToText VideoProcessingDetailsProcessingFailureReason where
+    toText = \case
+        Other -> "other"
+        StreamingFailed -> "streamingFailed"
+        TranscodeFailed -> "transcodeFailed"
+        UploadFailed -> "uploadFailed"
+
+instance FromJSON VideoProcessingDetailsProcessingFailureReason where
+    parseJSON = parseJSONText "VideoProcessingDetailsProcessingFailureReason"
+
+instance ToJSON VideoProcessingDetailsProcessingFailureReason where
+    toJSON = toJSONText
+
+-- | The video\'s processing status. This value indicates whether YouTube was
+-- able to process the video or if the video is still being processed.
+data VideoProcessingDetailsProcessingStatus
+    = Failed
+      -- ^ @failed@
+    | Processing
+      -- ^ @processing@
+    | Succeeded
+      -- ^ @succeeded@
+    | Terminated
+      -- ^ @terminated@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable VideoProcessingDetailsProcessingStatus
+
+instance FromText VideoProcessingDetailsProcessingStatus where
+    fromText = \case
+        "failed" -> Just Failed
+        "processing" -> Just Processing
+        "succeeded" -> Just Succeeded
+        "terminated" -> Just Terminated
+        _ -> Nothing
+
+instance ToText VideoProcessingDetailsProcessingStatus where
+    toText = \case
+        Failed -> "failed"
+        Processing -> "processing"
+        Succeeded -> "succeeded"
+        Terminated -> "terminated"
+
+instance FromJSON VideoProcessingDetailsProcessingStatus where
+    parseJSON = parseJSONText "VideoProcessingDetailsProcessingStatus"
+
+instance ToJSON VideoProcessingDetailsProcessingStatus where
+    toJSON = toJSONText
+
+-- | Defines the position type.
+data InvideoPositionType
+    = Corner
+      -- ^ @corner@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable InvideoPositionType
+
+instance FromText InvideoPositionType where
+    fromText = \case
+        "corner" -> Just Corner
+        _ -> Nothing
+
+instance ToText InvideoPositionType where
+    toText = \case
+        Corner -> "corner"
+
+instance FromJSON InvideoPositionType where
+    parseJSON = parseJSONText "InvideoPositionType"
+
+instance ToJSON InvideoPositionType where
+    toJSON = toJSONText
+
+-- | The video\'s rating in Estonia.
+data ContentRatingEefilmRating
+    = EEFILMK12
+      -- ^ @eefilmK12@
+    | EEFILMK14
+      -- ^ @eefilmK14@
+    | EEFILMK16
+      -- ^ @eefilmK16@
+    | EEFILMK6
+      -- ^ @eefilmK6@
+    | EefilmL
+      -- ^ @eefilmL@
+    | EEFILMMS12
+      -- ^ @eefilmMs12@
+    | EEFILMMS6
+      -- ^ @eefilmMs6@
+    | EefilmPere
+      -- ^ @eefilmPere@
+    | EefilmUnrated
+      -- ^ @eefilmUnrated@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingEefilmRating
+
+instance FromText ContentRatingEefilmRating where
+    fromText = \case
+        "eefilmK12" -> Just EEFILMK12
+        "eefilmK14" -> Just EEFILMK14
+        "eefilmK16" -> Just EEFILMK16
+        "eefilmK6" -> Just EEFILMK6
+        "eefilmL" -> Just EefilmL
+        "eefilmMs12" -> Just EEFILMMS12
+        "eefilmMs6" -> Just EEFILMMS6
+        "eefilmPere" -> Just EefilmPere
+        "eefilmUnrated" -> Just EefilmUnrated
+        _ -> Nothing
+
+instance ToText ContentRatingEefilmRating where
+    toText = \case
+        EEFILMK12 -> "eefilmK12"
+        EEFILMK14 -> "eefilmK14"
+        EEFILMK16 -> "eefilmK16"
+        EEFILMK6 -> "eefilmK6"
+        EefilmL -> "eefilmL"
+        EEFILMMS12 -> "eefilmMs12"
+        EEFILMMS6 -> "eefilmMs6"
+        EefilmPere -> "eefilmPere"
+        EefilmUnrated -> "eefilmUnrated"
+
+instance FromJSON ContentRatingEefilmRating where
+    parseJSON = parseJSONText "ContentRatingEefilmRating"
+
+instance ToJSON ContentRatingEefilmRating where
+    toJSON = toJSONText
+
+-- | The value of definition indicates whether the video is available in high
+-- definition or only in standard definition.
+data VideoContentDetailsDefinition
+    = HD
+      -- ^ @hd@
+    | SD
+      -- ^ @sd@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable VideoContentDetailsDefinition
+
+instance FromText VideoContentDetailsDefinition where
+    fromText = \case
+        "hd" -> Just HD
+        "sd" -> Just SD
+        _ -> Nothing
+
+instance ToText VideoContentDetailsDefinition where
+    toText = \case
+        HD -> "hd"
+        SD -> "sd"
+
+instance FromJSON VideoContentDetailsDefinition where
+    parseJSON = parseJSONText "VideoContentDetailsDefinition"
+
+instance ToJSON VideoContentDetailsDefinition where
+    toJSON = toJSONText
+
+-- | The caption track\'s status.
+data CaptionSnippetStatus
+    = CSSFailed
+      -- ^ @failed@
+    | CSSServing
+      -- ^ @serving@
+    | CSSSyncing
+      -- ^ @syncing@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable CaptionSnippetStatus
+
+instance FromText CaptionSnippetStatus where
+    fromText = \case
+        "failed" -> Just CSSFailed
+        "serving" -> Just CSSServing
+        "syncing" -> Just CSSSyncing
+        _ -> Nothing
+
+instance ToText CaptionSnippetStatus where
+    toText = \case
+        CSSFailed -> "failed"
+        CSSServing -> "serving"
+        CSSSyncing -> "syncing"
+
+instance FromJSON CaptionSnippetStatus where
+    parseJSON = parseJSONText "CaptionSnippetStatus"
+
+instance ToJSON CaptionSnippetStatus where
+    toJSON = toJSONText
+
+-- | The videoDefinition parameter lets you restrict a search to only include
+-- either high definition (HD) or standard definition (SD) videos. HD
+-- videos are available for playback in at least 720p, though higher
+-- resolutions, like 1080p, might also be available. If you specify a value
+-- for this parameter, you must also set the type parameter\'s value to
+-- video.
+data SearchList'VideoDefinition
+    = Any
+      -- ^ @any@
+      -- Return all videos, regardless of their resolution.
+    | High
+      -- ^ @high@
+      -- Only retrieve HD videos.
+    | Standard
+      -- ^ @standard@
+      -- Only retrieve videos in standard definition.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable SearchList'VideoDefinition
+
+instance FromText SearchList'VideoDefinition where
+    fromText = \case
+        "any" -> Just Any
+        "high" -> Just High
+        "standard" -> Just Standard
+        _ -> Nothing
+
+instance ToText SearchList'VideoDefinition where
+    toText = \case
+        Any -> "any"
+        High -> "high"
+        Standard -> "standard"
+
+instance FromJSON SearchList'VideoDefinition where
+    parseJSON = parseJSONText "SearchList'VideoDefinition"
+
+instance ToJSON SearchList'VideoDefinition where
+    toJSON = toJSONText
+
+-- | The reason that YouTube failed to process the caption track. This
+-- property is only present if the state property\'s value is failed.
+data CaptionSnippetFailureReason
+    = ProcessingFailed
+      -- ^ @processingFailed@
+    | UnknownFormat
+      -- ^ @unknownFormat@
+    | UnsupportedFormat
+      -- ^ @unsupportedFormat@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable CaptionSnippetFailureReason
+
+instance FromText CaptionSnippetFailureReason where
+    fromText = \case
+        "processingFailed" -> Just ProcessingFailed
+        "unknownFormat" -> Just UnknownFormat
+        "unsupportedFormat" -> Just UnsupportedFormat
+        _ -> Nothing
+
+instance ToText CaptionSnippetFailureReason where
+    toText = \case
+        ProcessingFailed -> "processingFailed"
+        UnknownFormat -> "unknownFormat"
+        UnsupportedFormat -> "unsupportedFormat"
+
+instance FromJSON CaptionSnippetFailureReason where
+    parseJSON = parseJSONText "CaptionSnippetFailureReason"
+
+instance ToJSON CaptionSnippetFailureReason where
+    toJSON = toJSONText
+
+-- | The video\'s rating from Finland\'s Kansallinen Audiovisuaalinen
+-- Instituutti (National Audiovisual Institute).
+data ContentRatingMekuRating
+    = MEKU12
+      -- ^ @meku12@
+    | MEKU16
+      -- ^ @meku16@
+    | MEKU18
+      -- ^ @meku18@
+    | MEKU7
+      -- ^ @meku7@
+    | MekuS
+      -- ^ @mekuS@
+    | MekuUnrated
+      -- ^ @mekuUnrated@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingMekuRating
+
+instance FromText ContentRatingMekuRating where
+    fromText = \case
+        "meku12" -> Just MEKU12
+        "meku16" -> Just MEKU16
+        "meku18" -> Just MEKU18
+        "meku7" -> Just MEKU7
+        "mekuS" -> Just MekuS
+        "mekuUnrated" -> Just MekuUnrated
+        _ -> Nothing
+
+instance ToText ContentRatingMekuRating where
+    toText = \case
+        MEKU12 -> "meku12"
+        MEKU16 -> "meku16"
+        MEKU18 -> "meku18"
+        MEKU7 -> "meku7"
+        MekuS -> "mekuS"
+        MekuUnrated -> "mekuUnrated"
+
+instance FromJSON ContentRatingMekuRating where
+    parseJSON = parseJSONText "ContentRatingMekuRating"
+
+instance ToJSON ContentRatingMekuRating where
+    toJSON = toJSONText
+
+-- | The video\'s rating in Switzerland.
+data ContentRatingChfilmRating
+    = CHFILM0
+      -- ^ @chfilm0@
+    | CHFILM12
+      -- ^ @chfilm12@
+    | CHFILM16
+      -- ^ @chfilm16@
+    | CHFILM18
+      -- ^ @chfilm18@
+    | CHFILM6
+      -- ^ @chfilm6@
+    | ChfilmUnrated
+      -- ^ @chfilmUnrated@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingChfilmRating
+
+instance FromText ContentRatingChfilmRating where
+    fromText = \case
+        "chfilm0" -> Just CHFILM0
+        "chfilm12" -> Just CHFILM12
+        "chfilm16" -> Just CHFILM16
+        "chfilm18" -> Just CHFILM18
+        "chfilm6" -> Just CHFILM6
+        "chfilmUnrated" -> Just ChfilmUnrated
+        _ -> Nothing
+
+instance ToText ContentRatingChfilmRating where
+    toText = \case
+        CHFILM0 -> "chfilm0"
+        CHFILM12 -> "chfilm12"
+        CHFILM16 -> "chfilm16"
+        CHFILM18 -> "chfilm18"
+        CHFILM6 -> "chfilm6"
+        ChfilmUnrated -> "chfilmUnrated"
+
+instance FromJSON ContentRatingChfilmRating where
+    parseJSON = parseJSONText "ContentRatingChfilmRating"
+
+instance ToJSON ContentRatingChfilmRating where
+    toJSON = toJSONText
+
+-- | The videoDuration parameter filters video search results based on their
+-- duration. If you specify a value for this parameter, you must also set
+-- the type parameter\'s value to video.
+data SearchList'VideoDuration
+    = SLVDAny
+      -- ^ @any@
+      -- Do not filter video search results based on their duration. This is the
+      -- default value.
+    | SLVDLong
+      -- ^ @long@
+      -- Only include videos longer than 20 minutes.
+    | SLVDMedium
+      -- ^ @medium@
+      -- Only include videos that are between four and 20 minutes long
+      -- (inclusive).
+    | SLVDShort
+      -- ^ @short@
+      -- Only include videos that are less than four minutes long.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable SearchList'VideoDuration
+
+instance FromText SearchList'VideoDuration where
+    fromText = \case
+        "any" -> Just SLVDAny
+        "long" -> Just SLVDLong
+        "medium" -> Just SLVDMedium
+        "short" -> Just SLVDShort
+        _ -> Nothing
+
+instance ToText SearchList'VideoDuration where
+    toText = \case
+        SLVDAny -> "any"
+        SLVDLong -> "long"
+        SLVDMedium -> "medium"
+        SLVDShort -> "short"
+
+instance FromJSON SearchList'VideoDuration where
+    parseJSON = parseJSONText "SearchList'VideoDuration"
+
+instance ToJSON SearchList'VideoDuration where
+    toJSON = toJSONText
+
+-- | Set this parameter\'s value to like or dislike to instruct the API to
+-- only return videos liked or disliked by the authenticated user.
+data VideosList'MyRating
+    = Dislike
+      -- ^ @dislike@
+      -- Returns only videos disliked by the authenticated user.
+    | Like
+      -- ^ @like@
+      -- Returns only video liked by the authenticated user.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable VideosList'MyRating
+
+instance FromText VideosList'MyRating where
+    fromText = \case
+        "dislike" -> Just Dislike
+        "like" -> Just Like
+        _ -> Nothing
+
+instance ToText VideosList'MyRating where
+    toText = \case
+        Dislike -> "dislike"
+        Like -> "like"
+
+instance FromJSON VideosList'MyRating where
+    parseJSON = parseJSONText "VideosList'MyRating"
+
+instance ToJSON VideosList'MyRating where
+    toJSON = toJSONText
+
+-- | The broadcastStatus parameter filters the API response to only include
+-- broadcasts with the specified status.
+data LiveBroadcastsList'BroadcastStatus
+    = Active
+      -- ^ @active@
+      -- Return current live broadcasts.
+    | All
+      -- ^ @all@
+      -- Return all broadcasts.
+    | Completed
+      -- ^ @completed@
+      -- Return broadcasts that have already ended.
+    | Upcoming
+      -- ^ @upcoming@
+      -- Return broadcasts that have not yet started.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable LiveBroadcastsList'BroadcastStatus
+
+instance FromText LiveBroadcastsList'BroadcastStatus where
+    fromText = \case
+        "active" -> Just Active
+        "all" -> Just All
+        "completed" -> Just Completed
+        "upcoming" -> Just Upcoming
+        _ -> Nothing
+
+instance ToText LiveBroadcastsList'BroadcastStatus where
+    toText = \case
+        Active -> "active"
+        All -> "all"
+        Completed -> "completed"
+        Upcoming -> "upcoming"
+
+instance FromJSON LiveBroadcastsList'BroadcastStatus where
+    parseJSON = parseJSONText "LiveBroadcastsList'BroadcastStatus"
+
+instance ToJSON LiveBroadcastsList'BroadcastStatus where
+    toJSON = toJSONText
+
+-- | The video\'s rating in Iceland.
+data ContentRatingSmaisRating
+    = SMAIS12
+      -- ^ @smais12@
+    | SMAIS14
+      -- ^ @smais14@
+    | SMAIS16
+      -- ^ @smais16@
+    | SMAIS18
+      -- ^ @smais18@
+    | SMAIS7
+      -- ^ @smais7@
+    | SmaisL
+      -- ^ @smaisL@
+    | SmaisUnrated
+      -- ^ @smaisUnrated@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingSmaisRating
+
+instance FromText ContentRatingSmaisRating where
+    fromText = \case
+        "smais12" -> Just SMAIS12
+        "smais14" -> Just SMAIS14
+        "smais16" -> Just SMAIS16
+        "smais18" -> Just SMAIS18
+        "smais7" -> Just SMAIS7
+        "smaisL" -> Just SmaisL
+        "smaisUnrated" -> Just SmaisUnrated
+        _ -> Nothing
+
+instance ToText ContentRatingSmaisRating where
+    toText = \case
+        SMAIS12 -> "smais12"
+        SMAIS14 -> "smais14"
+        SMAIS16 -> "smais16"
+        SMAIS18 -> "smais18"
+        SMAIS7 -> "smais7"
+        SmaisL -> "smaisL"
+        SmaisUnrated -> "smaisUnrated"
+
+instance FromJSON ContentRatingSmaisRating where
+    parseJSON = parseJSONText "ContentRatingSmaisRating"
+
+instance ToJSON ContentRatingSmaisRating where
+    toJSON = toJSONText
+
+-- | The value of captions indicates whether the video has captions or not.
+data VideoContentDetailsCaption
+    = False'
+      -- ^ @false@
+    | True'
+      -- ^ @true@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable VideoContentDetailsCaption
+
+instance FromText VideoContentDetailsCaption where
+    fromText = \case
+        "false" -> Just False'
+        "true" -> Just True'
+        _ -> Nothing
+
+instance ToText VideoContentDetailsCaption where
+    toText = \case
+        False' -> "false"
+        True' -> "true"
+
+instance FromJSON VideoContentDetailsCaption where
+    parseJSON = parseJSONText "VideoContentDetailsCaption"
+
+instance ToJSON VideoContentDetailsCaption where
+    toJSON = toJSONText
+
+-- | The videoCaption parameter indicates whether the API should filter video
+-- search results based on whether they have captions. If you specify a
+-- value for this parameter, you must also set the type parameter\'s value
+-- to video.
+data SearchList'VideoCaption
+    = SLVCAny
+      -- ^ @any@
+      -- Do not filter results based on caption availability.
+    | SLVCClosedCaption
+      -- ^ @closedCaption@
+      -- Only include videos that have captions.
+    | SLVCNone
+      -- ^ @none@
+      -- Only include videos that do not have captions.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable SearchList'VideoCaption
+
+instance FromText SearchList'VideoCaption where
+    fromText = \case
+        "any" -> Just SLVCAny
+        "closedCaption" -> Just SLVCClosedCaption
+        "none" -> Just SLVCNone
+        _ -> Nothing
+
+instance ToText SearchList'VideoCaption where
+    toText = \case
+        SLVCAny -> "any"
+        SLVCClosedCaption -> "closedCaption"
+        SLVCNone -> "none"
+
+instance FromJSON SearchList'VideoCaption where
+    parseJSON = parseJSONText "SearchList'VideoCaption"
+
+instance ToJSON SearchList'VideoCaption where
+    toJSON = toJSONText
+
+-- | The caption track\'s type.
+data CaptionSnippetTrackKind
+    = CSTKAsr
+      -- ^ @ASR@
+    | CSTKForced
+      -- ^ @forced@
+    | CSTKStandard
+      -- ^ @standard@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable CaptionSnippetTrackKind
+
+instance FromText CaptionSnippetTrackKind where
+    fromText = \case
+        "ASR" -> Just CSTKAsr
+        "forced" -> Just CSTKForced
+        "standard" -> Just CSTKStandard
+        _ -> Nothing
+
+instance ToText CaptionSnippetTrackKind where
+    toText = \case
+        CSTKAsr -> "ASR"
+        CSTKForced -> "forced"
+        CSTKStandard -> "standard"
+
+instance FromJSON CaptionSnippetTrackKind where
+    parseJSON = parseJSONText "CaptionSnippetTrackKind"
+
+instance ToJSON CaptionSnippetTrackKind where
+    toJSON = toJSONText
+
+-- | The video\'s Motion Picture Association of America (MPAA) rating.
+data ContentRatingMpaaRating
+    = MpaaG
+      -- ^ @mpaaG@
+    | MPAANC17
+      -- ^ @mpaaNc17@
+    | MpaaPg
+      -- ^ @mpaaPg@
+    | MPAAPG13
+      -- ^ @mpaaPg13@
+    | MpaaR
+      -- ^ @mpaaR@
+    | MpaaUnrated
+      -- ^ @mpaaUnrated@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingMpaaRating
+
+instance FromText ContentRatingMpaaRating where
+    fromText = \case
+        "mpaaG" -> Just MpaaG
+        "mpaaNc17" -> Just MPAANC17
+        "mpaaPg" -> Just MpaaPg
+        "mpaaPg13" -> Just MPAAPG13
+        "mpaaR" -> Just MpaaR
+        "mpaaUnrated" -> Just MpaaUnrated
+        _ -> Nothing
+
+instance ToText ContentRatingMpaaRating where
+    toText = \case
+        MpaaG -> "mpaaG"
+        MPAANC17 -> "mpaaNc17"
+        MpaaPg -> "mpaaPg"
+        MPAAPG13 -> "mpaaPg13"
+        MpaaR -> "mpaaR"
+        MpaaUnrated -> "mpaaUnrated"
+
+instance FromJSON ContentRatingMpaaRating where
+    parseJSON = parseJSONText "ContentRatingMpaaRating"
+
+instance ToJSON ContentRatingMpaaRating where
+    toJSON = toJSONText
+
+-- | The broadcast\'s recording status.
+data LiveBroadcastStatusRecordingStatus
+    = NotRecording
+      -- ^ @notRecording@
+    | Recorded
+      -- ^ @recorded@
+    | Recording
+      -- ^ @recording@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable LiveBroadcastStatusRecordingStatus
+
+instance FromText LiveBroadcastStatusRecordingStatus where
+    fromText = \case
+        "notRecording" -> Just NotRecording
+        "recorded" -> Just Recorded
+        "recording" -> Just Recording
+        _ -> Nothing
+
+instance ToText LiveBroadcastStatusRecordingStatus where
+    toText = \case
+        NotRecording -> "notRecording"
+        Recorded -> "recorded"
+        Recording -> "recording"
+
+instance FromJSON LiveBroadcastStatusRecordingStatus where
+    parseJSON = parseJSONText "LiveBroadcastStatusRecordingStatus"
+
+instance ToJSON LiveBroadcastStatusRecordingStatus where
+    toJSON = toJSONText
+
+-- | The video\'s General Directorate of Radio, Television and Cinematography
+-- (Mexico) rating.
+data ContentRatingRtcRating
+    = RtcA
+      -- ^ @rtcA@
+    | RtcAa
+      -- ^ @rtcAa@
+    | RtcB
+      -- ^ @rtcB@
+    | RTCB15
+      -- ^ @rtcB15@
+    | RtcC
+      -- ^ @rtcC@
+    | RtcD
+      -- ^ @rtcD@
+    | RtcUnrated
+      -- ^ @rtcUnrated@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingRtcRating
+
+instance FromText ContentRatingRtcRating where
+    fromText = \case
+        "rtcA" -> Just RtcA
+        "rtcAa" -> Just RtcAa
+        "rtcB" -> Just RtcB
+        "rtcB15" -> Just RTCB15
+        "rtcC" -> Just RtcC
+        "rtcD" -> Just RtcD
+        "rtcUnrated" -> Just RtcUnrated
+        _ -> Nothing
+
+instance ToText ContentRatingRtcRating where
+    toText = \case
+        RtcA -> "rtcA"
+        RtcAa -> "rtcAa"
+        RtcB -> "rtcB"
+        RTCB15 -> "rtcB15"
+        RtcC -> "rtcC"
+        RtcD -> "rtcD"
+        RtcUnrated -> "rtcUnrated"
+
+instance FromJSON ContentRatingRtcRating where
+    parseJSON = parseJSONText "ContentRatingRtcRating"
+
+instance ToJSON ContentRatingRtcRating where
+    toJSON = toJSONText
+
+-- | The long uploads status of this channel. See
+data ChannelStatusLongUploadsStatus
+    = Allowed
+      -- ^ @allowed@
+    | Disallowed
+      -- ^ @disallowed@
+    | Eligible
+      -- ^ @eligible@
+    | LongUploadsUnspecified
+      -- ^ @longUploadsUnspecified@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ChannelStatusLongUploadsStatus
+
+instance FromText ChannelStatusLongUploadsStatus where
+    fromText = \case
+        "allowed" -> Just Allowed
+        "disallowed" -> Just Disallowed
+        "eligible" -> Just Eligible
+        "longUploadsUnspecified" -> Just LongUploadsUnspecified
+        _ -> Nothing
+
+instance ToText ChannelStatusLongUploadsStatus where
+    toText = \case
+        Allowed -> "allowed"
+        Disallowed -> "disallowed"
+        Eligible -> "eligible"
+        LongUploadsUnspecified -> "longUploadsUnspecified"
+
+instance FromJSON ChannelStatusLongUploadsStatus where
+    parseJSON = parseJSONText "ChannelStatusLongUploadsStatus"
+
+instance ToJSON ChannelStatusLongUploadsStatus where
+    toJSON = toJSONText
+
+-- | Rating system for Canadian TV - Canadian TV Classification System The
+-- video\'s rating from the Canadian Radio-Television and
+-- Telecommunications Commission (CRTC) for Canadian English-language
+-- broadcasts. For more information, see the Canadian Broadcast Standards
+-- Council website.
+data ContentRatingCatvRating
+    = Catv14plus
+      -- ^ @catv14plus@
+    | Catv18plus
+      -- ^ @catv18plus@
+    | CatvC
+      -- ^ @catvC@
+    | CATVC8
+      -- ^ @catvC8@
+    | CatvG
+      -- ^ @catvG@
+    | CatvPg
+      -- ^ @catvPg@
+    | CatvUnrated
+      -- ^ @catvUnrated@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingCatvRating
+
+instance FromText ContentRatingCatvRating where
+    fromText = \case
+        "catv14plus" -> Just Catv14plus
+        "catv18plus" -> Just Catv18plus
+        "catvC" -> Just CatvC
+        "catvC8" -> Just CATVC8
+        "catvG" -> Just CatvG
+        "catvPg" -> Just CatvPg
+        "catvUnrated" -> Just CatvUnrated
+        _ -> Nothing
+
+instance ToText ContentRatingCatvRating where
+    toText = \case
+        Catv14plus -> "catv14plus"
+        Catv18plus -> "catv18plus"
+        CatvC -> "catvC"
+        CATVC8 -> "catvC8"
+        CatvG -> "catvG"
+        CatvPg -> "catvPg"
+        CatvUnrated -> "catvUnrated"
+
+instance FromJSON ContentRatingCatvRating where
+    parseJSON = parseJSONText "ContentRatingCatvRating"
+
+instance ToJSON ContentRatingCatvRating where
+    toJSON = toJSONText
+
+data VideoSuggestionsItemProcessingWarnings
+    = HasEditlist
+      -- ^ @hasEditlist@
+    | InconsistentResolution
+      -- ^ @inconsistentResolution@
+    | ProblematicAudioCodec
+      -- ^ @problematicAudioCodec@
+    | ProblematicVideoCodec
+      -- ^ @problematicVideoCodec@
+    | UnknownAudioCodec
+      -- ^ @unknownAudioCodec@
+    | UnknownContainer
+      -- ^ @unknownContainer@
+    | UnknownVideoCodec
+      -- ^ @unknownVideoCodec@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable VideoSuggestionsItemProcessingWarnings
+
+instance FromText VideoSuggestionsItemProcessingWarnings where
+    fromText = \case
+        "hasEditlist" -> Just HasEditlist
+        "inconsistentResolution" -> Just InconsistentResolution
+        "problematicAudioCodec" -> Just ProblematicAudioCodec
+        "problematicVideoCodec" -> Just ProblematicVideoCodec
+        "unknownAudioCodec" -> Just UnknownAudioCodec
+        "unknownContainer" -> Just UnknownContainer
+        "unknownVideoCodec" -> Just UnknownVideoCodec
+        _ -> Nothing
+
+instance ToText VideoSuggestionsItemProcessingWarnings where
+    toText = \case
+        HasEditlist -> "hasEditlist"
+        InconsistentResolution -> "inconsistentResolution"
+        ProblematicAudioCodec -> "problematicAudioCodec"
+        ProblematicVideoCodec -> "problematicVideoCodec"
+        UnknownAudioCodec -> "unknownAudioCodec"
+        UnknownContainer -> "unknownContainer"
+        UnknownVideoCodec -> "unknownVideoCodec"
+
+instance FromJSON VideoSuggestionsItemProcessingWarnings where
+    parseJSON = parseJSONText "VideoSuggestionsItemProcessingWarnings"
+
+instance ToJSON VideoSuggestionsItemProcessingWarnings where
+    toJSON = toJSONText
+
+-- | Data format for the response.
+data Alt
+    = JSON
+      -- ^ @json@
+      -- Responses with Content-Type of application\/json
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable Alt
+
+instance FromText Alt where
+    fromText = \case
+        "json" -> Just JSON
+        _ -> Nothing
+
+instance ToText Alt where
+    toText = \case
+        JSON -> "json"
+
+instance FromJSON Alt where
+    parseJSON = parseJSONText "Alt"
+
+instance ToJSON Alt where
+    toJSON = toJSONText
+
+-- | Describes a timing type. If the value is offsetFromStart, then the
+-- offsetMs field represents an offset from the start of the video. If the
+-- value is offsetFromEnd, then the offsetMs field represents an offset
+-- from the end of the video.
+data InvideoTimingType
+    = OffsetFromEnd
+      -- ^ @offsetFromEnd@
+    | OffsetFromStart
+      -- ^ @offsetFromStart@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable InvideoTimingType
+
+instance FromText InvideoTimingType where
+    fromText = \case
+        "offsetFromEnd" -> Just OffsetFromEnd
+        "offsetFromStart" -> Just OffsetFromStart
+        _ -> Nothing
+
+instance ToText InvideoTimingType where
+    toText = \case
+        OffsetFromEnd -> "offsetFromEnd"
+        OffsetFromStart -> "offsetFromStart"
+
+instance FromJSON InvideoTimingType where
+    parseJSON = parseJSONText "InvideoTimingType"
+
+instance ToJSON InvideoTimingType where
+    toJSON = toJSONText
+
+-- | The video\'s rating from the Maldives National Bureau of Classification.
+data ContentRatingNbcRating
+    = Nbc12plus
+      -- ^ @nbc12plus@
+    | Nbc15plus
+      -- ^ @nbc15plus@
+    | Nbc18plus
+      -- ^ @nbc18plus@
+    | Nbc18plusr
+      -- ^ @nbc18plusr@
+    | NbcG
+      -- ^ @nbcG@
+    | NbcPg
+      -- ^ @nbcPg@
+    | NbcPu
+      -- ^ @nbcPu@
+    | NbcUnrated
+      -- ^ @nbcUnrated@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingNbcRating
+
+instance FromText ContentRatingNbcRating where
+    fromText = \case
+        "nbc12plus" -> Just Nbc12plus
+        "nbc15plus" -> Just Nbc15plus
+        "nbc18plus" -> Just Nbc18plus
+        "nbc18plusr" -> Just Nbc18plusr
+        "nbcG" -> Just NbcG
+        "nbcPg" -> Just NbcPg
+        "nbcPu" -> Just NbcPu
+        "nbcUnrated" -> Just NbcUnrated
+        _ -> Nothing
+
+instance ToText ContentRatingNbcRating where
+    toText = \case
+        Nbc12plus -> "nbc12plus"
+        Nbc15plus -> "nbc15plus"
+        Nbc18plus -> "nbc18plus"
+        Nbc18plusr -> "nbc18plusr"
+        NbcG -> "nbcG"
+        NbcPg -> "nbcPg"
+        NbcPu -> "nbcPu"
+        NbcUnrated -> "nbcUnrated"
+
+instance FromJSON ContentRatingNbcRating where
+    parseJSON = parseJSONText "ContentRatingNbcRating"
+
+instance ToJSON ContentRatingNbcRating where
+    toJSON = toJSONText
+
+-- | This value explains why YouTube rejected an uploaded video. This
+-- property is only present if the uploadStatus property indicates that the
+-- upload was rejected.
+data VideoStatusRejectionReason
+    = Claim
+      -- ^ @claim@
+    | Copyright
+      -- ^ @copyright@
+    | Duplicate
+      -- ^ @duplicate@
+    | Inappropriate
+      -- ^ @inappropriate@
+    | Length
+      -- ^ @length@
+    | TermsOfUse
+      -- ^ @termsOfUse@
+    | Trademark
+      -- ^ @trademark@
+    | UploaderAccountClosed
+      -- ^ @uploaderAccountClosed@
+    | UploaderAccountSuspended
+      -- ^ @uploaderAccountSuspended@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable VideoStatusRejectionReason
+
+instance FromText VideoStatusRejectionReason where
+    fromText = \case
+        "claim" -> Just Claim
+        "copyright" -> Just Copyright
+        "duplicate" -> Just Duplicate
+        "inappropriate" -> Just Inappropriate
+        "length" -> Just Length
+        "termsOfUse" -> Just TermsOfUse
+        "trademark" -> Just Trademark
+        "uploaderAccountClosed" -> Just UploaderAccountClosed
+        "uploaderAccountSuspended" -> Just UploaderAccountSuspended
+        _ -> Nothing
+
+instance ToText VideoStatusRejectionReason where
+    toText = \case
+        Claim -> "claim"
+        Copyright -> "copyright"
+        Duplicate -> "duplicate"
+        Inappropriate -> "inappropriate"
+        Length -> "length"
+        TermsOfUse -> "termsOfUse"
+        Trademark -> "trademark"
+        UploaderAccountClosed -> "uploaderAccountClosed"
+        UploaderAccountSuspended -> "uploaderAccountSuspended"
+
+instance FromJSON VideoStatusRejectionReason where
+    parseJSON = parseJSONText "VideoStatusRejectionReason"
+
+instance ToJSON VideoStatusRejectionReason where
+    toJSON = toJSONText
+
+-- | The status code of this stream
+data LiveStreamHealthStatusStatus
+    = Bad
+      -- ^ @bad@
+    | Good
+      -- ^ @good@
+    | NoData
+      -- ^ @noData@
+    | OK
+      -- ^ @ok@
+    | Revoked
+      -- ^ @revoked@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable LiveStreamHealthStatusStatus
+
+instance FromText LiveStreamHealthStatusStatus where
+    fromText = \case
+        "bad" -> Just Bad
+        "good" -> Just Good
+        "noData" -> Just NoData
+        "ok" -> Just OK
+        "revoked" -> Just Revoked
+        _ -> Nothing
+
+instance ToText LiveStreamHealthStatusStatus where
+    toText = \case
+        Bad -> "bad"
+        Good -> "good"
+        NoData -> "noData"
+        OK -> "ok"
+        Revoked -> "revoked"
+
+instance FromJSON LiveStreamHealthStatusStatus where
+    parseJSON = parseJSONText "LiveStreamHealthStatusStatus"
+
+instance ToJSON LiveStreamHealthStatusStatus where
+    toJSON = toJSONText
+
+-- | Priority of the live broadcast event (internal state).
+data LiveBroadcastStatusLiveBroadcastPriority
+    = LBSLBPHigh
+      -- ^ @high@
+    | LBSLBPLow
+      -- ^ @low@
+    | LBSLBPNormal
+      -- ^ @normal@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable LiveBroadcastStatusLiveBroadcastPriority
+
+instance FromText LiveBroadcastStatusLiveBroadcastPriority where
+    fromText = \case
+        "high" -> Just LBSLBPHigh
+        "low" -> Just LBSLBPLow
+        "normal" -> Just LBSLBPNormal
+        _ -> Nothing
+
+instance ToText LiveBroadcastStatusLiveBroadcastPriority where
+    toText = \case
+        LBSLBPHigh -> "high"
+        LBSLBPLow -> "low"
+        LBSLBPNormal -> "normal"
+
+instance FromJSON LiveBroadcastStatusLiveBroadcastPriority where
+    parseJSON = parseJSONText "LiveBroadcastStatusLiveBroadcastPriority"
+
+instance ToJSON LiveBroadcastStatusLiveBroadcastPriority where
+    toJSON = toJSONText
+
+-- | The video\'s Instituto de la Cinematografía y de las Artes Audiovisuales
+-- (ICAA - Spain) rating.
+data ContentRatingIcaaRating
+    = ICAA12
+      -- ^ @icaa12@
+    | ICAA13
+      -- ^ @icaa13@
+    | ICAA16
+      -- ^ @icaa16@
+    | ICAA18
+      -- ^ @icaa18@
+    | ICAA7
+      -- ^ @icaa7@
+    | IcaaApta
+      -- ^ @icaaApta@
+    | IcaaUnrated
+      -- ^ @icaaUnrated@
+    | IcaaX
+      -- ^ @icaaX@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingIcaaRating
+
+instance FromText ContentRatingIcaaRating where
+    fromText = \case
+        "icaa12" -> Just ICAA12
+        "icaa13" -> Just ICAA13
+        "icaa16" -> Just ICAA16
+        "icaa18" -> Just ICAA18
+        "icaa7" -> Just ICAA7
+        "icaaApta" -> Just IcaaApta
+        "icaaUnrated" -> Just IcaaUnrated
+        "icaaX" -> Just IcaaX
+        _ -> Nothing
+
+instance ToText ContentRatingIcaaRating where
+    toText = \case
+        ICAA12 -> "icaa12"
+        ICAA13 -> "icaa13"
+        ICAA16 -> "icaa16"
+        ICAA18 -> "icaa18"
+        ICAA7 -> "icaa7"
+        IcaaApta -> "icaaApta"
+        IcaaUnrated -> "icaaUnrated"
+        IcaaX -> "icaaX"
+
+instance FromJSON ContentRatingIcaaRating where
+    parseJSON = parseJSONText "ContentRatingIcaaRating"
+
+instance ToJSON ContentRatingIcaaRating where
+    toJSON = toJSONText
+
+-- | The video\'s rating from Malaysia\'s Film Censorship Board.
+data ContentRatingFcbmRating
+    = FCBM18
+      -- ^ @fcbm18@
+    | Fcbm18pa
+      -- ^ @fcbm18pa@
+    | Fcbm18pl
+      -- ^ @fcbm18pl@
+    | Fcbm18sg
+      -- ^ @fcbm18sg@
+    | Fcbm18sx
+      -- ^ @fcbm18sx@
+    | FCBMP13
+      -- ^ @fcbmP13@
+    | FCBMPG13
+      -- ^ @fcbmPg13@
+    | FcbmU
+      -- ^ @fcbmU@
+    | FcbmUnrated
+      -- ^ @fcbmUnrated@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingFcbmRating
+
+instance FromText ContentRatingFcbmRating where
+    fromText = \case
+        "fcbm18" -> Just FCBM18
+        "fcbm18pa" -> Just Fcbm18pa
+        "fcbm18pl" -> Just Fcbm18pl
+        "fcbm18sg" -> Just Fcbm18sg
+        "fcbm18sx" -> Just Fcbm18sx
+        "fcbmP13" -> Just FCBMP13
+        "fcbmPg13" -> Just FCBMPG13
+        "fcbmU" -> Just FcbmU
+        "fcbmUnrated" -> Just FcbmUnrated
+        _ -> Nothing
+
+instance ToText ContentRatingFcbmRating where
+    toText = \case
+        FCBM18 -> "fcbm18"
+        Fcbm18pa -> "fcbm18pa"
+        Fcbm18pl -> "fcbm18pl"
+        Fcbm18sg -> "fcbm18sg"
+        Fcbm18sx -> "fcbm18sx"
+        FCBMP13 -> "fcbmP13"
+        FCBMPG13 -> "fcbmPg13"
+        FcbmU -> "fcbmU"
+        FcbmUnrated -> "fcbmUnrated"
+
+instance FromJSON ContentRatingFcbmRating where
+    parseJSON = parseJSONText "ContentRatingFcbmRating"
+
+instance ToJSON ContentRatingFcbmRating where
+    toJSON = toJSONText
+
+-- | The order parameter specifies the method that will be used to sort
+-- resources in the API response.
+data SubscriptionsList'Order
+    = Alphabetical
+      -- ^ @alphabetical@
+      -- Sort alphabetically.
+    | Relevance
+      -- ^ @relevance@
+      -- Sort by relevance.
+    | Unread
+      -- ^ @unread@
+      -- Sort by order of activity.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable SubscriptionsList'Order
+
+instance FromText SubscriptionsList'Order where
+    fromText = \case
+        "alphabetical" -> Just Alphabetical
+        "relevance" -> Just Relevance
+        "unread" -> Just Unread
+        _ -> Nothing
+
+instance ToText SubscriptionsList'Order where
+    toText = \case
+        Alphabetical -> "alphabetical"
+        Relevance -> "relevance"
+        Unread -> "unread"
+
+instance FromJSON SubscriptionsList'Order where
+    parseJSON = parseJSONText "SubscriptionsList'Order"
+
+instance ToJSON SubscriptionsList'Order where
+    toJSON = toJSONText
+
+-- | The chart parameter identifies the chart that you want to retrieve.
+data VideosList'Chart
+    = MostPopular
+      -- ^ @mostPopular@
+      -- Return the most popular videos for the specified content region and
+      -- video category.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable VideosList'Chart
+
+instance FromText VideosList'Chart where
+    fromText = \case
+        "mostPopular" -> Just MostPopular
+        _ -> Nothing
+
+instance ToText VideosList'Chart where
+    toText = \case
+        MostPopular -> "mostPopular"
+
+instance FromJSON VideosList'Chart where
+    parseJSON = parseJSONText "VideosList'Chart"
+
+instance ToJSON VideosList'Chart where
+    toJSON = toJSONText
+
+-- | The uploaded file\'s type as detected by YouTube\'s video processing
+-- engine. Currently, YouTube only processes video files, but this field is
+-- present whether a video file or another type of file was uploaded.
+data VideoFileDetailsFileType
+    = VFDFTArchive
+      -- ^ @archive@
+    | VFDFTAudio
+      -- ^ @audio@
+    | VFDFTDocument
+      -- ^ @document@
+    | VFDFTImage
+      -- ^ @image@
+    | VFDFTOther
+      -- ^ @other@
+    | VFDFTProject
+      -- ^ @project@
+    | VFDFTVideo
+      -- ^ @video@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable VideoFileDetailsFileType
+
+instance FromText VideoFileDetailsFileType where
+    fromText = \case
+        "archive" -> Just VFDFTArchive
+        "audio" -> Just VFDFTAudio
+        "document" -> Just VFDFTDocument
+        "image" -> Just VFDFTImage
+        "other" -> Just VFDFTOther
+        "project" -> Just VFDFTProject
+        "video" -> Just VFDFTVideo
+        _ -> Nothing
+
+instance ToText VideoFileDetailsFileType where
+    toText = \case
+        VFDFTArchive -> "archive"
+        VFDFTAudio -> "audio"
+        VFDFTDocument -> "document"
+        VFDFTImage -> "image"
+        VFDFTOther -> "other"
+        VFDFTProject -> "project"
+        VFDFTVideo -> "video"
+
+instance FromJSON VideoFileDetailsFileType where
+    parseJSON = parseJSONText "VideoFileDetailsFileType"
+
+instance ToJSON VideoFileDetailsFileType where
+    toJSON = toJSONText
+
+-- | The video\'s rating from Hong Kong\'s Office for Film, Newspaper and
+-- Article Administration.
+data ContentRatingFcoRating
+    = FcoI
+      -- ^ @fcoI@
+    | FcoIi
+      -- ^ @fcoIi@
+    | FcoIia
+      -- ^ @fcoIia@
+    | FcoIib
+      -- ^ @fcoIib@
+    | FcoIii
+      -- ^ @fcoIii@
+    | FcoUnrated
+      -- ^ @fcoUnrated@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingFcoRating
+
+instance FromText ContentRatingFcoRating where
+    fromText = \case
+        "fcoI" -> Just FcoI
+        "fcoIi" -> Just FcoIi
+        "fcoIia" -> Just FcoIia
+        "fcoIib" -> Just FcoIib
+        "fcoIii" -> Just FcoIii
+        "fcoUnrated" -> Just FcoUnrated
+        _ -> Nothing
+
+instance ToText ContentRatingFcoRating where
+    toText = \case
+        FcoI -> "fcoI"
+        FcoIi -> "fcoIi"
+        FcoIia -> "fcoIia"
+        FcoIib -> "fcoIib"
+        FcoIii -> "fcoIii"
+        FcoUnrated -> "fcoUnrated"
+
+instance FromJSON ContentRatingFcoRating where
+    parseJSON = parseJSONText "ContentRatingFcoRating"
+
+instance ToJSON ContentRatingFcoRating where
+    toJSON = toJSONText
+
+data VideoSuggestionsItemProcessingErrors
+    = ArchiveFile
+      -- ^ @archiveFile@
+    | AudioFile
+      -- ^ @audioFile@
+    | DocFile
+      -- ^ @docFile@
+    | ImageFile
+      -- ^ @imageFile@
+    | NotAVideoFile
+      -- ^ @notAVideoFile@
+    | ProjectFile
+      -- ^ @projectFile@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable VideoSuggestionsItemProcessingErrors
+
+instance FromText VideoSuggestionsItemProcessingErrors where
+    fromText = \case
+        "archiveFile" -> Just ArchiveFile
+        "audioFile" -> Just AudioFile
+        "docFile" -> Just DocFile
+        "imageFile" -> Just ImageFile
+        "notAVideoFile" -> Just NotAVideoFile
+        "projectFile" -> Just ProjectFile
+        _ -> Nothing
+
+instance ToText VideoSuggestionsItemProcessingErrors where
+    toText = \case
+        ArchiveFile -> "archiveFile"
+        AudioFile -> "audioFile"
+        DocFile -> "docFile"
+        ImageFile -> "imageFile"
+        NotAVideoFile -> "notAVideoFile"
+        ProjectFile -> "projectFile"
+
+instance FromJSON VideoSuggestionsItemProcessingErrors where
+    parseJSON = parseJSONText "VideoSuggestionsItemProcessingErrors"
+
+instance ToJSON VideoSuggestionsItemProcessingErrors where
+    toJSON = toJSONText
+
+-- | The kind of error happening.
+data LiveStreamConfigurationIssueType
+    = AudioBitrateHigh
+      -- ^ @audioBitrateHigh@
+    | AudioBitrateLow
+      -- ^ @audioBitrateLow@
+    | AudioBitrateMismatch
+      -- ^ @audioBitrateMismatch@
+    | AudioCodec
+      -- ^ @audioCodec@
+    | AudioCodecMismatch
+      -- ^ @audioCodecMismatch@
+    | AudioSampleRate
+      -- ^ @audioSampleRate@
+    | AudioSampleRateMismatch
+      -- ^ @audioSampleRateMismatch@
+    | AudioStereoMismatch
+      -- ^ @audioStereoMismatch@
+    | AudioTooManyChannels
+      -- ^ @audioTooManyChannels@
+    | BadContainer
+      -- ^ @badContainer@
+    | BitrateHigh
+      -- ^ @bitrateHigh@
+    | BitrateLow
+      -- ^ @bitrateLow@
+    | FrameRateHigh
+      -- ^ @frameRateHigh@
+    | FramerateMismatch
+      -- ^ @framerateMismatch@
+    | GopMismatch
+      -- ^ @gopMismatch@
+    | GopSizeLong
+      -- ^ @gopSizeLong@
+    | GopSizeOver
+      -- ^ @gopSizeOver@
+    | GopSizeShort
+      -- ^ @gopSizeShort@
+    | InterlacedVideo
+      -- ^ @interlacedVideo@
+    | MultipleAudioStreams
+      -- ^ @multipleAudioStreams@
+    | MultipleVideoStreams
+      -- ^ @multipleVideoStreams@
+    | NoAudioStream
+      -- ^ @noAudioStream@
+    | NoVideoStream
+      -- ^ @noVideoStream@
+    | OpenGop
+      -- ^ @openGop@
+    | ResolutionMismatch
+      -- ^ @resolutionMismatch@
+    | VideoBitrateMismatch
+      -- ^ @videoBitrateMismatch@
+    | VideoCodec
+      -- ^ @videoCodec@
+    | VideoCodecMismatch
+      -- ^ @videoCodecMismatch@
+    | VideoIngestionStarved
+      -- ^ @videoIngestionStarved@
+    | VideoInterlaceMismatch
+      -- ^ @videoInterlaceMismatch@
+    | VideoProfileMismatch
+      -- ^ @videoProfileMismatch@
+    | VideoResolutionSuboptimal
+      -- ^ @videoResolutionSuboptimal@
+    | VideoResolutionUnsupported
+      -- ^ @videoResolutionUnsupported@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable LiveStreamConfigurationIssueType
+
+instance FromText LiveStreamConfigurationIssueType where
+    fromText = \case
+        "audioBitrateHigh" -> Just AudioBitrateHigh
+        "audioBitrateLow" -> Just AudioBitrateLow
+        "audioBitrateMismatch" -> Just AudioBitrateMismatch
+        "audioCodec" -> Just AudioCodec
+        "audioCodecMismatch" -> Just AudioCodecMismatch
+        "audioSampleRate" -> Just AudioSampleRate
+        "audioSampleRateMismatch" -> Just AudioSampleRateMismatch
+        "audioStereoMismatch" -> Just AudioStereoMismatch
+        "audioTooManyChannels" -> Just AudioTooManyChannels
+        "badContainer" -> Just BadContainer
+        "bitrateHigh" -> Just BitrateHigh
+        "bitrateLow" -> Just BitrateLow
+        "frameRateHigh" -> Just FrameRateHigh
+        "framerateMismatch" -> Just FramerateMismatch
+        "gopMismatch" -> Just GopMismatch
+        "gopSizeLong" -> Just GopSizeLong
+        "gopSizeOver" -> Just GopSizeOver
+        "gopSizeShort" -> Just GopSizeShort
+        "interlacedVideo" -> Just InterlacedVideo
+        "multipleAudioStreams" -> Just MultipleAudioStreams
+        "multipleVideoStreams" -> Just MultipleVideoStreams
+        "noAudioStream" -> Just NoAudioStream
+        "noVideoStream" -> Just NoVideoStream
+        "openGop" -> Just OpenGop
+        "resolutionMismatch" -> Just ResolutionMismatch
+        "videoBitrateMismatch" -> Just VideoBitrateMismatch
+        "videoCodec" -> Just VideoCodec
+        "videoCodecMismatch" -> Just VideoCodecMismatch
+        "videoIngestionStarved" -> Just VideoIngestionStarved
+        "videoInterlaceMismatch" -> Just VideoInterlaceMismatch
+        "videoProfileMismatch" -> Just VideoProfileMismatch
+        "videoResolutionSuboptimal" -> Just VideoResolutionSuboptimal
+        "videoResolutionUnsupported" -> Just VideoResolutionUnsupported
+        _ -> Nothing
+
+instance ToText LiveStreamConfigurationIssueType where
+    toText = \case
+        AudioBitrateHigh -> "audioBitrateHigh"
+        AudioBitrateLow -> "audioBitrateLow"
+        AudioBitrateMismatch -> "audioBitrateMismatch"
+        AudioCodec -> "audioCodec"
+        AudioCodecMismatch -> "audioCodecMismatch"
+        AudioSampleRate -> "audioSampleRate"
+        AudioSampleRateMismatch -> "audioSampleRateMismatch"
+        AudioStereoMismatch -> "audioStereoMismatch"
+        AudioTooManyChannels -> "audioTooManyChannels"
+        BadContainer -> "badContainer"
+        BitrateHigh -> "bitrateHigh"
+        BitrateLow -> "bitrateLow"
+        FrameRateHigh -> "frameRateHigh"
+        FramerateMismatch -> "framerateMismatch"
+        GopMismatch -> "gopMismatch"
+        GopSizeLong -> "gopSizeLong"
+        GopSizeOver -> "gopSizeOver"
+        GopSizeShort -> "gopSizeShort"
+        InterlacedVideo -> "interlacedVideo"
+        MultipleAudioStreams -> "multipleAudioStreams"
+        MultipleVideoStreams -> "multipleVideoStreams"
+        NoAudioStream -> "noAudioStream"
+        NoVideoStream -> "noVideoStream"
+        OpenGop -> "openGop"
+        ResolutionMismatch -> "resolutionMismatch"
+        VideoBitrateMismatch -> "videoBitrateMismatch"
+        VideoCodec -> "videoCodec"
+        VideoCodecMismatch -> "videoCodecMismatch"
+        VideoIngestionStarved -> "videoIngestionStarved"
+        VideoInterlaceMismatch -> "videoInterlaceMismatch"
+        VideoProfileMismatch -> "videoProfileMismatch"
+        VideoResolutionSuboptimal -> "videoResolutionSuboptimal"
+        VideoResolutionUnsupported -> "videoResolutionUnsupported"
+
+instance FromJSON LiveStreamConfigurationIssueType where
+    parseJSON = parseJSONText "LiveStreamConfigurationIssueType"
+
+instance ToJSON LiveStreamConfigurationIssueType where
     toJSON = toJSONText
 
 -- | The reason that the resource is recommended to the user.
 data ActivityContentDetailsRecommendationReason
-    = ACDRRUnspecified
+    = Unspecified
       -- ^ @unspecified@
-    | ACDRRVideoFavorited
+    | VideoFavorited
       -- ^ @videoFavorited@
-    | ACDRRVideoLiked
+    | VideoLiked
       -- ^ @videoLiked@
-    | ACDRRVideoWatched
+    | VideoWatched
       -- ^ @videoWatched@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -61,23 +1641,799 @@ instance Hashable ActivityContentDetailsRecommendationReason
 
 instance FromText ActivityContentDetailsRecommendationReason where
     fromText = \case
-        "unspecified" -> Just ACDRRUnspecified
-        "videoFavorited" -> Just ACDRRVideoFavorited
-        "videoLiked" -> Just ACDRRVideoLiked
-        "videoWatched" -> Just ACDRRVideoWatched
+        "unspecified" -> Just Unspecified
+        "videoFavorited" -> Just VideoFavorited
+        "videoLiked" -> Just VideoLiked
+        "videoWatched" -> Just VideoWatched
         _ -> Nothing
 
 instance ToText ActivityContentDetailsRecommendationReason where
     toText = \case
-        ACDRRUnspecified -> "unspecified"
-        ACDRRVideoFavorited -> "videoFavorited"
-        ACDRRVideoLiked -> "videoLiked"
-        ACDRRVideoWatched -> "videoWatched"
+        Unspecified -> "unspecified"
+        VideoFavorited -> "videoFavorited"
+        VideoLiked -> "videoLiked"
+        VideoWatched -> "videoWatched"
 
 instance FromJSON ActivityContentDetailsRecommendationReason where
     parseJSON = parseJSONText "ActivityContentDetailsRecommendationReason"
 
 instance ToJSON ActivityContentDetailsRecommendationReason where
+    toJSON = toJSONText
+
+-- | The video\'s rating from the Movie and Television Review and
+-- Classification Board (Philippines).
+data ContentRatingMtrcbRating
+    = MtrcbG
+      -- ^ @mtrcbG@
+    | MtrcbPg
+      -- ^ @mtrcbPg@
+    | MTRCBR13
+      -- ^ @mtrcbR13@
+    | MTRCBR16
+      -- ^ @mtrcbR16@
+    | MTRCBR18
+      -- ^ @mtrcbR18@
+    | MtrcbUnrated
+      -- ^ @mtrcbUnrated@
+    | MtrcbX
+      -- ^ @mtrcbX@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingMtrcbRating
+
+instance FromText ContentRatingMtrcbRating where
+    fromText = \case
+        "mtrcbG" -> Just MtrcbG
+        "mtrcbPg" -> Just MtrcbPg
+        "mtrcbR13" -> Just MTRCBR13
+        "mtrcbR16" -> Just MTRCBR16
+        "mtrcbR18" -> Just MTRCBR18
+        "mtrcbUnrated" -> Just MtrcbUnrated
+        "mtrcbX" -> Just MtrcbX
+        _ -> Nothing
+
+instance ToText ContentRatingMtrcbRating where
+    toText = \case
+        MtrcbG -> "mtrcbG"
+        MtrcbPg -> "mtrcbPg"
+        MTRCBR13 -> "mtrcbR13"
+        MTRCBR16 -> "mtrcbR16"
+        MTRCBR18 -> "mtrcbR18"
+        MtrcbUnrated -> "mtrcbUnrated"
+        MtrcbX -> "mtrcbX"
+
+instance FromJSON ContentRatingMtrcbRating where
+    parseJSON = parseJSONText "ContentRatingMtrcbRating"
+
+instance ToJSON ContentRatingMtrcbRating where
+    toJSON = toJSONText
+
+-- | The video\'s Eirin (映倫) rating. Eirin is the Japanese rating system.
+data ContentRatingEirinRating
+    = EirinG
+      -- ^ @eirinG@
+    | EIRINPG12
+      -- ^ @eirinPg12@
+    | EirinR15plus
+      -- ^ @eirinR15plus@
+    | EirinR18plus
+      -- ^ @eirinR18plus@
+    | EirinUnrated
+      -- ^ @eirinUnrated@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingEirinRating
+
+instance FromText ContentRatingEirinRating where
+    fromText = \case
+        "eirinG" -> Just EirinG
+        "eirinPg12" -> Just EIRINPG12
+        "eirinR15plus" -> Just EirinR15plus
+        "eirinR18plus" -> Just EirinR18plus
+        "eirinUnrated" -> Just EirinUnrated
+        _ -> Nothing
+
+instance ToText ContentRatingEirinRating where
+    toText = \case
+        EirinG -> "eirinG"
+        EIRINPG12 -> "eirinPg12"
+        EirinR15plus -> "eirinR15plus"
+        EirinR18plus -> "eirinR18plus"
+        EirinUnrated -> "eirinUnrated"
+
+instance FromJSON ContentRatingEirinRating where
+    parseJSON = parseJSONText "ContentRatingEirinRating"
+
+instance ToJSON ContentRatingEirinRating where
+    toJSON = toJSONText
+
+data VideoSuggestionsItemProcessingHints
+    = NonStreamableMov
+      -- ^ @nonStreamableMov@
+    | SendBestQualityVideo
+      -- ^ @sendBestQualityVideo@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable VideoSuggestionsItemProcessingHints
+
+instance FromText VideoSuggestionsItemProcessingHints where
+    fromText = \case
+        "nonStreamableMov" -> Just NonStreamableMov
+        "sendBestQualityVideo" -> Just SendBestQualityVideo
+        _ -> Nothing
+
+instance ToText VideoSuggestionsItemProcessingHints where
+    toText = \case
+        NonStreamableMov -> "nonStreamableMov"
+        SendBestQualityVideo -> "sendBestQualityVideo"
+
+instance FromJSON VideoSuggestionsItemProcessingHints where
+    parseJSON = parseJSONText "VideoSuggestionsItemProcessingHints"
+
+instance ToJSON VideoSuggestionsItemProcessingHints where
+    toJSON = toJSONText
+
+-- | The style of the channel section.
+data ChannelSectionSnippetStyle
+    = ChannelsectionStyleUndefined
+      -- ^ @channelsectionStyleUndefined@
+    | HorizontalRow
+      -- ^ @horizontalRow@
+    | VerticalList
+      -- ^ @verticalList@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ChannelSectionSnippetStyle
+
+instance FromText ChannelSectionSnippetStyle where
+    fromText = \case
+        "channelsectionStyleUndefined" -> Just ChannelsectionStyleUndefined
+        "horizontalRow" -> Just HorizontalRow
+        "verticalList" -> Just VerticalList
+        _ -> Nothing
+
+instance ToText ChannelSectionSnippetStyle where
+    toText = \case
+        ChannelsectionStyleUndefined -> "channelsectionStyleUndefined"
+        HorizontalRow -> "horizontalRow"
+        VerticalList -> "verticalList"
+
+instance FromJSON ChannelSectionSnippetStyle where
+    parseJSON = parseJSONText "ChannelSectionSnippetStyle"
+
+instance ToJSON ChannelSectionSnippetStyle where
+    toJSON = toJSONText
+
+-- | Video game rating, if any.
+data VideoAgeGatingVideoGameRating
+    = Anyone
+      -- ^ @anyone@
+    | M15Plus
+      -- ^ @m15Plus@
+    | M16Plus
+      -- ^ @m16Plus@
+    | M17Plus
+      -- ^ @m17Plus@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable VideoAgeGatingVideoGameRating
+
+instance FromText VideoAgeGatingVideoGameRating where
+    fromText = \case
+        "anyone" -> Just Anyone
+        "m15Plus" -> Just M15Plus
+        "m16Plus" -> Just M16Plus
+        "m17Plus" -> Just M17Plus
+        _ -> Nothing
+
+instance ToText VideoAgeGatingVideoGameRating where
+    toText = \case
+        Anyone -> "anyone"
+        M15Plus -> "m15Plus"
+        M16Plus -> "m16Plus"
+        M17Plus -> "m17Plus"
+
+instance FromJSON VideoAgeGatingVideoGameRating where
+    parseJSON = parseJSONText "VideoAgeGatingVideoGameRating"
+
+instance ToJSON VideoAgeGatingVideoGameRating where
+    toJSON = toJSONText
+
+-- | The video\'s Ministerio de Cultura (Colombia) rating.
+data ContentRatingMocRating
+    = MOC12
+      -- ^ @moc12@
+    | MOC15
+      -- ^ @moc15@
+    | MOC18
+      -- ^ @moc18@
+    | MOC7
+      -- ^ @moc7@
+    | MocBanned
+      -- ^ @mocBanned@
+    | MocE
+      -- ^ @mocE@
+    | MocT
+      -- ^ @mocT@
+    | MocUnrated
+      -- ^ @mocUnrated@
+    | MocX
+      -- ^ @mocX@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingMocRating
+
+instance FromText ContentRatingMocRating where
+    fromText = \case
+        "moc12" -> Just MOC12
+        "moc15" -> Just MOC15
+        "moc18" -> Just MOC18
+        "moc7" -> Just MOC7
+        "mocBanned" -> Just MocBanned
+        "mocE" -> Just MocE
+        "mocT" -> Just MocT
+        "mocUnrated" -> Just MocUnrated
+        "mocX" -> Just MocX
+        _ -> Nothing
+
+instance ToText ContentRatingMocRating where
+    toText = \case
+        MOC12 -> "moc12"
+        MOC15 -> "moc15"
+        MOC18 -> "moc18"
+        MOC7 -> "moc7"
+        MocBanned -> "mocBanned"
+        MocE -> "mocE"
+        MocT -> "mocT"
+        MocUnrated -> "mocUnrated"
+        MocX -> "mocX"
+
+instance FromJSON ContentRatingMocRating where
+    parseJSON = parseJSONText "ContentRatingMocRating"
+
+instance ToJSON ContentRatingMocRating where
+    toJSON = toJSONText
+
+-- | The video\'s rating from France\'s Conseil supérieur de l?audiovisuel,
+-- which rates broadcast content.
+data ContentRatingCsaRating
+    = CSA10
+      -- ^ @csa10@
+    | CSA12
+      -- ^ @csa12@
+    | CSA16
+      -- ^ @csa16@
+    | CSA18
+      -- ^ @csa18@
+    | CsaInterdiction
+      -- ^ @csaInterdiction@
+    | CsaT
+      -- ^ @csaT@
+    | CsaUnrated
+      -- ^ @csaUnrated@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingCsaRating
+
+instance FromText ContentRatingCsaRating where
+    fromText = \case
+        "csa10" -> Just CSA10
+        "csa12" -> Just CSA12
+        "csa16" -> Just CSA16
+        "csa18" -> Just CSA18
+        "csaInterdiction" -> Just CsaInterdiction
+        "csaT" -> Just CsaT
+        "csaUnrated" -> Just CsaUnrated
+        _ -> Nothing
+
+instance ToText ContentRatingCsaRating where
+    toText = \case
+        CSA10 -> "csa10"
+        CSA12 -> "csa12"
+        CSA16 -> "csa16"
+        CSA18 -> "csa18"
+        CsaInterdiction -> "csaInterdiction"
+        CsaT -> "csaT"
+        CsaUnrated -> "csaUnrated"
+
+instance FromJSON ContentRatingCsaRating where
+    parseJSON = parseJSONText "ContentRatingCsaRating"
+
+instance ToJSON ContentRatingCsaRating where
+    toJSON = toJSONText
+
+-- | The video\'s rating from Thailand\'s Board of Film and Video Censors.
+data ContentRatingBfvcRating
+    = BFVC13
+      -- ^ @bfvc13@
+    | BFVC15
+      -- ^ @bfvc15@
+    | BFVC18
+      -- ^ @bfvc18@
+    | BFVC20
+      -- ^ @bfvc20@
+    | BfvcB
+      -- ^ @bfvcB@
+    | BfvcE
+      -- ^ @bfvcE@
+    | BfvcG
+      -- ^ @bfvcG@
+    | BfvcUnrated
+      -- ^ @bfvcUnrated@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingBfvcRating
+
+instance FromText ContentRatingBfvcRating where
+    fromText = \case
+        "bfvc13" -> Just BFVC13
+        "bfvc15" -> Just BFVC15
+        "bfvc18" -> Just BFVC18
+        "bfvc20" -> Just BFVC20
+        "bfvcB" -> Just BfvcB
+        "bfvcE" -> Just BfvcE
+        "bfvcG" -> Just BfvcG
+        "bfvcUnrated" -> Just BfvcUnrated
+        _ -> Nothing
+
+instance ToText ContentRatingBfvcRating where
+    toText = \case
+        BFVC13 -> "bfvc13"
+        BFVC15 -> "bfvc15"
+        BFVC18 -> "bfvc18"
+        BFVC20 -> "bfvc20"
+        BfvcB -> "bfvcB"
+        BfvcE -> "bfvcE"
+        BfvcG -> "bfvcG"
+        BfvcUnrated -> "bfvcUnrated"
+
+instance FromJSON ContentRatingBfvcRating where
+    parseJSON = parseJSONText "ContentRatingBfvcRating"
+
+instance ToJSON ContentRatingBfvcRating where
+    toJSON = toJSONText
+
+-- | The video\'s rating from the Kenya Film Classification Board.
+data ContentRatingKfcbRating
+    = Kfcb16plus
+      -- ^ @kfcb16plus@
+    | KfcbG
+      -- ^ @kfcbG@
+    | KfcbPg
+      -- ^ @kfcbPg@
+    | KfcbR
+      -- ^ @kfcbR@
+    | KfcbUnrated
+      -- ^ @kfcbUnrated@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingKfcbRating
+
+instance FromText ContentRatingKfcbRating where
+    fromText = \case
+        "kfcb16plus" -> Just Kfcb16plus
+        "kfcbG" -> Just KfcbG
+        "kfcbPg" -> Just KfcbPg
+        "kfcbR" -> Just KfcbR
+        "kfcbUnrated" -> Just KfcbUnrated
+        _ -> Nothing
+
+instance ToText ContentRatingKfcbRating where
+    toText = \case
+        Kfcb16plus -> "kfcb16plus"
+        KfcbG -> "kfcbG"
+        KfcbPg -> "kfcbPg"
+        KfcbR -> "kfcbR"
+        KfcbUnrated -> "kfcbUnrated"
+
+instance FromJSON ContentRatingKfcbRating where
+    parseJSON = parseJSONText "ContentRatingKfcbRating"
+
+instance ToJSON ContentRatingKfcbRating where
+    toJSON = toJSONText
+
+-- | The type of activity this subscription is for (only uploads,
+-- everything).
+data SubscriptionContentDetailsActivityType
+    = SCDATAll
+      -- ^ @all@
+    | SCDATUploads
+      -- ^ @uploads@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable SubscriptionContentDetailsActivityType
+
+instance FromText SubscriptionContentDetailsActivityType where
+    fromText = \case
+        "all" -> Just SCDATAll
+        "uploads" -> Just SCDATUploads
+        _ -> Nothing
+
+instance ToText SubscriptionContentDetailsActivityType where
+    toText = \case
+        SCDATAll -> "all"
+        SCDATUploads -> "uploads"
+
+instance FromJSON SubscriptionContentDetailsActivityType where
+    parseJSON = parseJSONText "SubscriptionContentDetailsActivityType"
+
+instance ToJSON SubscriptionContentDetailsActivityType where
+    toJSON = toJSONText
+
+-- | The video\'s Central Board of Film Certification (CBFC - India) rating.
+data ContentRatingCbfcRating
+    = CbfcA
+      -- ^ @cbfcA@
+    | CbfcS
+      -- ^ @cbfcS@
+    | CbfcU
+      -- ^ @cbfcU@
+    | CbfcUA
+      -- ^ @cbfcUA@
+    | CbfcUnrated
+      -- ^ @cbfcUnrated@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingCbfcRating
+
+instance FromText ContentRatingCbfcRating where
+    fromText = \case
+        "cbfcA" -> Just CbfcA
+        "cbfcS" -> Just CbfcS
+        "cbfcU" -> Just CbfcU
+        "cbfcUA" -> Just CbfcUA
+        "cbfcUnrated" -> Just CbfcUnrated
+        _ -> Nothing
+
+instance ToText ContentRatingCbfcRating where
+    toText = \case
+        CbfcA -> "cbfcA"
+        CbfcS -> "cbfcS"
+        CbfcU -> "cbfcU"
+        CbfcUA -> "cbfcUA"
+        CbfcUnrated -> "cbfcUnrated"
+
+instance FromJSON ContentRatingCbfcRating where
+    parseJSON = parseJSONText "ContentRatingCbfcRating"
+
+instance ToJSON ContentRatingCbfcRating where
+    toJSON = toJSONText
+
+-- | The video\'s rating from the Ministero dei Beni e delle Attività
+-- Culturali e del Turismo (Italy).
+data ContentRatingMibacRating
+    = MibacT
+      -- ^ @mibacT@
+    | MibacUnrated
+      -- ^ @mibacUnrated@
+    | MibacVap
+      -- ^ @mibacVap@
+    | MIBACVM12
+      -- ^ @mibacVm12@
+    | MIBACVM14
+      -- ^ @mibacVm14@
+    | MIBACVM18
+      -- ^ @mibacVm18@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingMibacRating
+
+instance FromText ContentRatingMibacRating where
+    fromText = \case
+        "mibacT" -> Just MibacT
+        "mibacUnrated" -> Just MibacUnrated
+        "mibacVap" -> Just MibacVap
+        "mibacVm12" -> Just MIBACVM12
+        "mibacVm14" -> Just MIBACVM14
+        "mibacVm18" -> Just MIBACVM18
+        _ -> Nothing
+
+instance ToText ContentRatingMibacRating where
+    toText = \case
+        MibacT -> "mibacT"
+        MibacUnrated -> "mibacUnrated"
+        MibacVap -> "mibacVap"
+        MIBACVM12 -> "mibacVm12"
+        MIBACVM14 -> "mibacVm14"
+        MIBACVM18 -> "mibacVm18"
+
+instance FromJSON ContentRatingMibacRating where
+    parseJSON = parseJSONText "ContentRatingMibacRating"
+
+instance ToJSON ContentRatingMibacRating where
+    toJSON = toJSONText
+
+-- | The video\'s rating from the Canadian Radio-Television and
+-- Telecommunications Commission (CRTC) for Canadian French-language
+-- broadcasts. For more information, see the Canadian Broadcast Standards
+-- Council website.
+data ContentRatingCatvfrRating
+    = Catvfr13plus
+      -- ^ @catvfr13plus@
+    | Catvfr16plus
+      -- ^ @catvfr16plus@
+    | Catvfr18plus
+      -- ^ @catvfr18plus@
+    | Catvfr8plus
+      -- ^ @catvfr8plus@
+    | CatvfrG
+      -- ^ @catvfrG@
+    | CatvfrUnrated
+      -- ^ @catvfrUnrated@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingCatvfrRating
+
+instance FromText ContentRatingCatvfrRating where
+    fromText = \case
+        "catvfr13plus" -> Just Catvfr13plus
+        "catvfr16plus" -> Just Catvfr16plus
+        "catvfr18plus" -> Just Catvfr18plus
+        "catvfr8plus" -> Just Catvfr8plus
+        "catvfrG" -> Just CatvfrG
+        "catvfrUnrated" -> Just CatvfrUnrated
+        _ -> Nothing
+
+instance ToText ContentRatingCatvfrRating where
+    toText = \case
+        Catvfr13plus -> "catvfr13plus"
+        Catvfr16plus -> "catvfr16plus"
+        Catvfr18plus -> "catvfr18plus"
+        Catvfr8plus -> "catvfr8plus"
+        CatvfrG -> "catvfrG"
+        CatvfrUnrated -> "catvfrUnrated"
+
+instance FromJSON ContentRatingCatvfrRating where
+    parseJSON = parseJSONText "ContentRatingCatvfrRating"
+
+instance ToJSON ContentRatingCatvfrRating where
+    toJSON = toJSONText
+
+-- | The video\'s rating from Medietilsynet, the Norwegian Media Authority.
+data ContentRatingMedietilsynetRating
+    = MEDIETILSYNET11
+      -- ^ @medietilsynet11@
+    | MEDIETILSYNET12
+      -- ^ @medietilsynet12@
+    | MEDIETILSYNET15
+      -- ^ @medietilsynet15@
+    | MEDIETILSYNET18
+      -- ^ @medietilsynet18@
+    | MEDIETILSYNET6
+      -- ^ @medietilsynet6@
+    | MEDIETILSYNET7
+      -- ^ @medietilsynet7@
+    | MEDIETILSYNET9
+      -- ^ @medietilsynet9@
+    | MedietilsynetA
+      -- ^ @medietilsynetA@
+    | MedietilsynetUnrated
+      -- ^ @medietilsynetUnrated@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingMedietilsynetRating
+
+instance FromText ContentRatingMedietilsynetRating where
+    fromText = \case
+        "medietilsynet11" -> Just MEDIETILSYNET11
+        "medietilsynet12" -> Just MEDIETILSYNET12
+        "medietilsynet15" -> Just MEDIETILSYNET15
+        "medietilsynet18" -> Just MEDIETILSYNET18
+        "medietilsynet6" -> Just MEDIETILSYNET6
+        "medietilsynet7" -> Just MEDIETILSYNET7
+        "medietilsynet9" -> Just MEDIETILSYNET9
+        "medietilsynetA" -> Just MedietilsynetA
+        "medietilsynetUnrated" -> Just MedietilsynetUnrated
+        _ -> Nothing
+
+instance ToText ContentRatingMedietilsynetRating where
+    toText = \case
+        MEDIETILSYNET11 -> "medietilsynet11"
+        MEDIETILSYNET12 -> "medietilsynet12"
+        MEDIETILSYNET15 -> "medietilsynet15"
+        MEDIETILSYNET18 -> "medietilsynet18"
+        MEDIETILSYNET6 -> "medietilsynet6"
+        MEDIETILSYNET7 -> "medietilsynet7"
+        MEDIETILSYNET9 -> "medietilsynet9"
+        MedietilsynetA -> "medietilsynetA"
+        MedietilsynetUnrated -> "medietilsynetUnrated"
+
+instance FromJSON ContentRatingMedietilsynetRating where
+    parseJSON = parseJSONText "ContentRatingMedietilsynetRating"
+
+instance ToJSON ContentRatingMedietilsynetRating where
+    toJSON = toJSONText
+
+-- | The order parameter specifies the method that will be used to order
+-- resources in the API response.
+data SearchList'Order
+    = SLODate
+      -- ^ @date@
+      -- Resources are sorted in reverse chronological order based on the date
+      -- they were created.
+    | SLORating
+      -- ^ @rating@
+      -- Resources are sorted from highest to lowest rating.
+    | SLORelevance
+      -- ^ @relevance@
+      -- Resources are sorted based on their relevance to the search query. This
+      -- is the default value for this parameter.
+    | SLOTitle
+      -- ^ @title@
+      -- Resources are sorted alphabetically by title.
+    | SLOVideoCount
+      -- ^ @videoCount@
+      -- Channels are sorted in descending order of their number of uploaded
+      -- videos.
+    | SLOViewCount
+      -- ^ @viewCount@
+      -- Resources are sorted from highest to lowest number of views.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable SearchList'Order
+
+instance FromText SearchList'Order where
+    fromText = \case
+        "date" -> Just SLODate
+        "rating" -> Just SLORating
+        "relevance" -> Just SLORelevance
+        "title" -> Just SLOTitle
+        "videoCount" -> Just SLOVideoCount
+        "viewCount" -> Just SLOViewCount
+        _ -> Nothing
+
+instance ToText SearchList'Order where
+    toText = \case
+        SLODate -> "date"
+        SLORating -> "rating"
+        SLORelevance -> "relevance"
+        SLOTitle -> "title"
+        SLOVideoCount -> "videoCount"
+        SLOViewCount -> "viewCount"
+
+instance FromJSON SearchList'Order where
+    parseJSON = parseJSONText "SearchList'Order"
+
+instance ToJSON SearchList'Order where
+    toJSON = toJSONText
+
+-- | The video\'s rating from the Danish Film Institute\'s (Det Danske
+-- Filminstitut) Media Council for Children and Young People.
+data ContentRatingMccypRating
+    = MCCYP11
+      -- ^ @mccyp11@
+    | MCCYP15
+      -- ^ @mccyp15@
+    | MCCYP7
+      -- ^ @mccyp7@
+    | MccypA
+      -- ^ @mccypA@
+    | MccypUnrated
+      -- ^ @mccypUnrated@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingMccypRating
+
+instance FromText ContentRatingMccypRating where
+    fromText = \case
+        "mccyp11" -> Just MCCYP11
+        "mccyp15" -> Just MCCYP15
+        "mccyp7" -> Just MCCYP7
+        "mccypA" -> Just MccypA
+        "mccypUnrated" -> Just MccypUnrated
+        _ -> Nothing
+
+instance ToText ContentRatingMccypRating where
+    toText = \case
+        MCCYP11 -> "mccyp11"
+        MCCYP15 -> "mccyp15"
+        MCCYP7 -> "mccyp7"
+        MccypA -> "mccypA"
+        MccypUnrated -> "mccypUnrated"
+
+instance FromJSON ContentRatingMccypRating where
+    parseJSON = parseJSONText "ContentRatingMccypRating"
+
+instance ToJSON ContentRatingMccypRating where
+    toJSON = toJSONText
+
+-- | The video\'s rating from South Africa\'s Film and Publication Board.
+data ContentRatingFpbRating
+    = Fpb1012Pg
+      -- ^ @fpb1012Pg@
+    | FPB13
+      -- ^ @fpb13@
+    | FPB16
+      -- ^ @fpb16@
+    | FPB18
+      -- ^ @fpb18@
+    | Fpb79Pg
+      -- ^ @fpb79Pg@
+    | FpbA
+      -- ^ @fpbA@
+    | FpbPg
+      -- ^ @fpbPg@
+    | FpbUnrated
+      -- ^ @fpbUnrated@
+    | FPBX18
+      -- ^ @fpbX18@
+    | FpbXx
+      -- ^ @fpbXx@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingFpbRating
+
+instance FromText ContentRatingFpbRating where
+    fromText = \case
+        "fpb1012Pg" -> Just Fpb1012Pg
+        "fpb13" -> Just FPB13
+        "fpb16" -> Just FPB16
+        "fpb18" -> Just FPB18
+        "fpb79Pg" -> Just Fpb79Pg
+        "fpbA" -> Just FpbA
+        "fpbPg" -> Just FpbPg
+        "fpbUnrated" -> Just FpbUnrated
+        "fpbX18" -> Just FPBX18
+        "fpbXx" -> Just FpbXx
+        _ -> Nothing
+
+instance ToText ContentRatingFpbRating where
+    toText = \case
+        Fpb1012Pg -> "fpb1012Pg"
+        FPB13 -> "fpb13"
+        FPB16 -> "fpb16"
+        FPB18 -> "fpb18"
+        Fpb79Pg -> "fpb79Pg"
+        FpbA -> "fpbA"
+        FpbPg -> "fpbPg"
+        FpbUnrated -> "fpbUnrated"
+        FPBX18 -> "fpbX18"
+        FpbXx -> "fpbXx"
+
+instance FromJSON ContentRatingFpbRating where
+    parseJSON = parseJSONText "ContentRatingFpbRating"
+
+instance ToJSON ContentRatingFpbRating where
+    toJSON = toJSONText
+
+-- | The video\'s rating from Statens medieråd (Sweden\'s National Media
+-- Council).
+data ContentRatingSmsaRating
+    = SMSA11
+      -- ^ @smsa11@
+    | SMSA15
+      -- ^ @smsa15@
+    | SMSA7
+      -- ^ @smsa7@
+    | SmsaA
+      -- ^ @smsaA@
+    | SmsaUnrated
+      -- ^ @smsaUnrated@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingSmsaRating
+
+instance FromText ContentRatingSmsaRating where
+    fromText = \case
+        "smsa11" -> Just SMSA11
+        "smsa15" -> Just SMSA15
+        "smsa7" -> Just SMSA7
+        "smsaA" -> Just SmsaA
+        "smsaUnrated" -> Just SmsaUnrated
+        _ -> Nothing
+
+instance ToText ContentRatingSmsaRating where
+    toText = \case
+        SMSA11 -> "smsa11"
+        SMSA15 -> "smsa15"
+        SMSA7 -> "smsa7"
+        SmsaA -> "smsaA"
+        SmsaUnrated -> "smsaUnrated"
+
+instance FromJSON ContentRatingSmsaRating where
+    parseJSON = parseJSONText "ContentRatingSmsaRating"
+
+instance ToJSON ContentRatingSmsaRating where
     toJSON = toJSONText
 
 -- | The name of the social network.
@@ -115,2974 +2471,58 @@ instance FromJSON ActivityContentDetailsSocialType where
 instance ToJSON ActivityContentDetailsSocialType where
     toJSON = toJSONText
 
--- | The type of activity that the resource describes.
-data ActivitySnippetType
-    = ASTBulletin
-      -- ^ @bulletin@
-    | ASTChannelItem
-      -- ^ @channelItem@
-    | ASTComment
-      -- ^ @comment@
-    | ASTFavorite
-      -- ^ @favorite@
-    | ASTLike
-      -- ^ @like@
-    | ASTPlaylistItem
-      -- ^ @playlistItem@
-    | ASTPromotedItem
-      -- ^ @promotedItem@
-    | ASTRecommendation
-      -- ^ @recommendation@
-    | ASTSocial
-      -- ^ @social@
-    | ASTSubscription
-      -- ^ @subscription@
-    | ASTUpload
-      -- ^ @upload@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ActivitySnippetType
-
-instance FromText ActivitySnippetType where
-    fromText = \case
-        "bulletin" -> Just ASTBulletin
-        "channelItem" -> Just ASTChannelItem
-        "comment" -> Just ASTComment
-        "favorite" -> Just ASTFavorite
-        "like" -> Just ASTLike
-        "playlistItem" -> Just ASTPlaylistItem
-        "promotedItem" -> Just ASTPromotedItem
-        "recommendation" -> Just ASTRecommendation
-        "social" -> Just ASTSocial
-        "subscription" -> Just ASTSubscription
-        "upload" -> Just ASTUpload
-        _ -> Nothing
-
-instance ToText ActivitySnippetType where
-    toText = \case
-        ASTBulletin -> "bulletin"
-        ASTChannelItem -> "channelItem"
-        ASTComment -> "comment"
-        ASTFavorite -> "favorite"
-        ASTLike -> "like"
-        ASTPlaylistItem -> "playlistItem"
-        ASTPromotedItem -> "promotedItem"
-        ASTRecommendation -> "recommendation"
-        ASTSocial -> "social"
-        ASTSubscription -> "subscription"
-        ASTUpload -> "upload"
-
-instance FromJSON ActivitySnippetType where
-    parseJSON = parseJSONText "ActivitySnippetType"
-
-instance ToJSON ActivitySnippetType where
-    toJSON = toJSONText
-
--- | The type of audio track associated with the caption track.
-data CaptionSnippetAudioTrackType
-    = CSATTCommentary
-      -- ^ @commentary@
-    | CSATTDescriptive
-      -- ^ @descriptive@
-    | CSATTPrimary
-      -- ^ @primary@
-    | CSATTUnknown
-      -- ^ @unknown@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable CaptionSnippetAudioTrackType
-
-instance FromText CaptionSnippetAudioTrackType where
-    fromText = \case
-        "commentary" -> Just CSATTCommentary
-        "descriptive" -> Just CSATTDescriptive
-        "primary" -> Just CSATTPrimary
-        "unknown" -> Just CSATTUnknown
-        _ -> Nothing
-
-instance ToText CaptionSnippetAudioTrackType where
-    toText = \case
-        CSATTCommentary -> "commentary"
-        CSATTDescriptive -> "descriptive"
-        CSATTPrimary -> "primary"
-        CSATTUnknown -> "unknown"
-
-instance FromJSON CaptionSnippetAudioTrackType where
-    parseJSON = parseJSONText "CaptionSnippetAudioTrackType"
-
-instance ToJSON CaptionSnippetAudioTrackType where
-    toJSON = toJSONText
-
--- | The reason that YouTube failed to process the caption track. This
--- property is only present if the state property\'s value is failed.
-data CaptionSnippetFailureReason
-    = CSFRProcessingFailed
-      -- ^ @processingFailed@
-    | CSFRUnknownFormat
-      -- ^ @unknownFormat@
-    | CSFRUnsupportedFormat
-      -- ^ @unsupportedFormat@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable CaptionSnippetFailureReason
-
-instance FromText CaptionSnippetFailureReason where
-    fromText = \case
-        "processingFailed" -> Just CSFRProcessingFailed
-        "unknownFormat" -> Just CSFRUnknownFormat
-        "unsupportedFormat" -> Just CSFRUnsupportedFormat
-        _ -> Nothing
-
-instance ToText CaptionSnippetFailureReason where
-    toText = \case
-        CSFRProcessingFailed -> "processingFailed"
-        CSFRUnknownFormat -> "unknownFormat"
-        CSFRUnsupportedFormat -> "unsupportedFormat"
-
-instance FromJSON CaptionSnippetFailureReason where
-    parseJSON = parseJSONText "CaptionSnippetFailureReason"
-
-instance ToJSON CaptionSnippetFailureReason where
-    toJSON = toJSONText
-
--- | The caption track\'s status.
-data CaptionSnippetStatus
-    = CSSFailed
-      -- ^ @failed@
-    | CSSServing
-      -- ^ @serving@
-    | CSSSyncing
-      -- ^ @syncing@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable CaptionSnippetStatus
-
-instance FromText CaptionSnippetStatus where
-    fromText = \case
-        "failed" -> Just CSSFailed
-        "serving" -> Just CSSServing
-        "syncing" -> Just CSSSyncing
-        _ -> Nothing
-
-instance ToText CaptionSnippetStatus where
-    toText = \case
-        CSSFailed -> "failed"
-        CSSServing -> "serving"
-        CSSSyncing -> "syncing"
-
-instance FromJSON CaptionSnippetStatus where
-    parseJSON = parseJSONText "CaptionSnippetStatus"
-
-instance ToJSON CaptionSnippetStatus where
-    toJSON = toJSONText
-
--- | The caption track\'s type.
-data CaptionSnippetTrackKind
-    = CSTKAsr
-      -- ^ @ASR@
-    | CSTKForced
-      -- ^ @forced@
-    | CSTKStandard
-      -- ^ @standard@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable CaptionSnippetTrackKind
-
-instance FromText CaptionSnippetTrackKind where
-    fromText = \case
-        "ASR" -> Just CSTKAsr
-        "forced" -> Just CSTKForced
-        "standard" -> Just CSTKStandard
-        _ -> Nothing
-
-instance ToText CaptionSnippetTrackKind where
-    toText = \case
-        CSTKAsr -> "ASR"
-        CSTKForced -> "forced"
-        CSTKStandard -> "standard"
-
-instance FromJSON CaptionSnippetTrackKind where
-    parseJSON = parseJSONText "CaptionSnippetTrackKind"
-
-instance ToJSON CaptionSnippetTrackKind where
-    toJSON = toJSONText
-
--- | The method or protocol used to transmit the video stream.
-data CdnSettingsIngestionType
-    = CSITDash
-      -- ^ @dash@
-    | CSITRtmp
-      -- ^ @rtmp@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable CdnSettingsIngestionType
-
-instance FromText CdnSettingsIngestionType where
-    fromText = \case
-        "dash" -> Just CSITDash
-        "rtmp" -> Just CSITRtmp
-        _ -> Nothing
-
-instance ToText CdnSettingsIngestionType where
-    toText = \case
-        CSITDash -> "dash"
-        CSITRtmp -> "rtmp"
-
-instance FromJSON CdnSettingsIngestionType where
-    parseJSON = parseJSONText "CdnSettingsIngestionType"
-
-instance ToJSON CdnSettingsIngestionType where
-    toJSON = toJSONText
-
--- | Defines the context of the ping.
-data ChannelConversionPingContext
-    = CCPCCview
-      -- ^ @cview@
-    | CCPCSubscribe
-      -- ^ @subscribe@
-    | CCPCUnsubscribe
-      -- ^ @unsubscribe@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ChannelConversionPingContext
-
-instance FromText ChannelConversionPingContext where
-    fromText = \case
-        "cview" -> Just CCPCCview
-        "subscribe" -> Just CCPCSubscribe
-        "unsubscribe" -> Just CCPCUnsubscribe
-        _ -> Nothing
-
-instance ToText ChannelConversionPingContext where
-    toText = \case
-        CCPCCview -> "cview"
-        CCPCSubscribe -> "subscribe"
-        CCPCUnsubscribe -> "unsubscribe"
-
-instance FromJSON ChannelConversionPingContext where
-    parseJSON = parseJSONText "ChannelConversionPingContext"
-
-instance ToJSON ChannelConversionPingContext where
-    toJSON = toJSONText
-
--- | The style of the channel section.
-data ChannelSectionSnippetStyle
-    = CSSSChannelsectionStyleUndefined
-      -- ^ @channelsectionStyleUndefined@
-    | CSSSHorizontalRow
-      -- ^ @horizontalRow@
-    | CSSSVerticalList
-      -- ^ @verticalList@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ChannelSectionSnippetStyle
-
-instance FromText ChannelSectionSnippetStyle where
-    fromText = \case
-        "channelsectionStyleUndefined" -> Just CSSSChannelsectionStyleUndefined
-        "horizontalRow" -> Just CSSSHorizontalRow
-        "verticalList" -> Just CSSSVerticalList
-        _ -> Nothing
-
-instance ToText ChannelSectionSnippetStyle where
-    toText = \case
-        CSSSChannelsectionStyleUndefined -> "channelsectionStyleUndefined"
-        CSSSHorizontalRow -> "horizontalRow"
-        CSSSVerticalList -> "verticalList"
-
-instance FromJSON ChannelSectionSnippetStyle where
-    parseJSON = parseJSONText "ChannelSectionSnippetStyle"
-
-instance ToJSON ChannelSectionSnippetStyle where
-    toJSON = toJSONText
-
--- | The type of the channel section.
-data ChannelSectionSnippetType
-    = CSSTAllPlaylists
-      -- ^ @allPlaylists@
-    | CSSTChannelsectionTypeUndefined
-      -- ^ @channelsectionTypeUndefined@
-    | CSSTCompletedEvents
-      -- ^ @completedEvents@
-    | CSSTLikedPlaylists
-      -- ^ @likedPlaylists@
-    | CSSTLikes
-      -- ^ @likes@
-    | CSSTLiveEvents
-      -- ^ @liveEvents@
-    | CSSTMultipleChannels
-      -- ^ @multipleChannels@
-    | CSSTMultiplePlaylists
-      -- ^ @multiplePlaylists@
-    | CSSTPopularUploads
-      -- ^ @popularUploads@
-    | CSSTPostedPlaylists
-      -- ^ @postedPlaylists@
-    | CSSTPostedVideos
-      -- ^ @postedVideos@
-    | CSSTRecentActivity
-      -- ^ @recentActivity@
-    | CSSTRecentPosts
-      -- ^ @recentPosts@
-    | CSSTRecentUploads
-      -- ^ @recentUploads@
-    | CSSTSinglePlaylist
-      -- ^ @singlePlaylist@
-    | CSSTSubscriptions
-      -- ^ @subscriptions@
-    | CSSTUpcomingEvents
-      -- ^ @upcomingEvents@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ChannelSectionSnippetType
-
-instance FromText ChannelSectionSnippetType where
-    fromText = \case
-        "allPlaylists" -> Just CSSTAllPlaylists
-        "channelsectionTypeUndefined" -> Just CSSTChannelsectionTypeUndefined
-        "completedEvents" -> Just CSSTCompletedEvents
-        "likedPlaylists" -> Just CSSTLikedPlaylists
-        "likes" -> Just CSSTLikes
-        "liveEvents" -> Just CSSTLiveEvents
-        "multipleChannels" -> Just CSSTMultipleChannels
-        "multiplePlaylists" -> Just CSSTMultiplePlaylists
-        "popularUploads" -> Just CSSTPopularUploads
-        "postedPlaylists" -> Just CSSTPostedPlaylists
-        "postedVideos" -> Just CSSTPostedVideos
-        "recentActivity" -> Just CSSTRecentActivity
-        "recentPosts" -> Just CSSTRecentPosts
-        "recentUploads" -> Just CSSTRecentUploads
-        "singlePlaylist" -> Just CSSTSinglePlaylist
-        "subscriptions" -> Just CSSTSubscriptions
-        "upcomingEvents" -> Just CSSTUpcomingEvents
-        _ -> Nothing
-
-instance ToText ChannelSectionSnippetType where
-    toText = \case
-        CSSTAllPlaylists -> "allPlaylists"
-        CSSTChannelsectionTypeUndefined -> "channelsectionTypeUndefined"
-        CSSTCompletedEvents -> "completedEvents"
-        CSSTLikedPlaylists -> "likedPlaylists"
-        CSSTLikes -> "likes"
-        CSSTLiveEvents -> "liveEvents"
-        CSSTMultipleChannels -> "multipleChannels"
-        CSSTMultiplePlaylists -> "multiplePlaylists"
-        CSSTPopularUploads -> "popularUploads"
-        CSSTPostedPlaylists -> "postedPlaylists"
-        CSSTPostedVideos -> "postedVideos"
-        CSSTRecentActivity -> "recentActivity"
-        CSSTRecentPosts -> "recentPosts"
-        CSSTRecentUploads -> "recentUploads"
-        CSSTSinglePlaylist -> "singlePlaylist"
-        CSSTSubscriptions -> "subscriptions"
-        CSSTUpcomingEvents -> "upcomingEvents"
-
-instance FromJSON ChannelSectionSnippetType where
-    parseJSON = parseJSONText "ChannelSectionSnippetType"
-
-instance ToJSON ChannelSectionSnippetType where
-    toJSON = toJSONText
-
--- | The long uploads status of this channel. See
-data ChannelStatusLongUploadsStatus
-    = CSLUSAllowed
-      -- ^ @allowed@
-    | CSLUSDisallowed
-      -- ^ @disallowed@
-    | CSLUSEligible
-      -- ^ @eligible@
-    | CSLUSLongUploadsUnspecified
-      -- ^ @longUploadsUnspecified@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ChannelStatusLongUploadsStatus
-
-instance FromText ChannelStatusLongUploadsStatus where
-    fromText = \case
-        "allowed" -> Just CSLUSAllowed
-        "disallowed" -> Just CSLUSDisallowed
-        "eligible" -> Just CSLUSEligible
-        "longUploadsUnspecified" -> Just CSLUSLongUploadsUnspecified
-        _ -> Nothing
-
-instance ToText ChannelStatusLongUploadsStatus where
-    toText = \case
-        CSLUSAllowed -> "allowed"
-        CSLUSDisallowed -> "disallowed"
-        CSLUSEligible -> "eligible"
-        CSLUSLongUploadsUnspecified -> "longUploadsUnspecified"
-
-instance FromJSON ChannelStatusLongUploadsStatus where
-    parseJSON = parseJSONText "ChannelStatusLongUploadsStatus"
-
-instance ToJSON ChannelStatusLongUploadsStatus where
-    toJSON = toJSONText
-
--- | Privacy status of the channel.
-data ChannelStatusPrivacyStatus
-    = CSPSPrivate
-      -- ^ @private@
-    | CSPSPublic
-      -- ^ @public@
-    | CSPSUnlisted
-      -- ^ @unlisted@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ChannelStatusPrivacyStatus
-
-instance FromText ChannelStatusPrivacyStatus where
-    fromText = \case
-        "private" -> Just CSPSPrivate
-        "public" -> Just CSPSPublic
-        "unlisted" -> Just CSPSUnlisted
-        _ -> Nothing
-
-instance ToText ChannelStatusPrivacyStatus where
-    toText = \case
-        CSPSPrivate -> "private"
-        CSPSPublic -> "public"
-        CSPSUnlisted -> "unlisted"
-
-instance FromJSON ChannelStatusPrivacyStatus where
-    parseJSON = parseJSONText "ChannelStatusPrivacyStatus"
-
-instance ToJSON ChannelStatusPrivacyStatus where
-    toJSON = toJSONText
-
--- | The comment\'s moderation status. Will not be set if the comments were
--- requested through the id filter.
-data CommentSnippetModerationStatus
-    = CSMSHeldForReview
+-- | Identifies the new moderation status of the specified comments.
+data CommentsSetModerationStatus'ModerationStatus
+    = HeldForReview
       -- ^ @heldForReview@
-    | CSMSLikelySpam
-      -- ^ @likelySpam@
-    | CSMSPublished
+      -- Marks a comment as awaiting review by a moderator.
+    | Published
       -- ^ @published@
-    | CSMSRejected
+      -- Clears a comment for public display.
+    | Rejected
       -- ^ @rejected@
+      -- Rejects a comment as being unfit for display. This action also
+      -- effectively hides all replies to the rejected comment. Note: The API
+      -- does not currently provide a way to list or otherwise discover rejected
+      -- comments. However, you can change the moderation status of a rejected
+      -- comment if you still know its ID. If you were to change the moderation
+      -- status of a rejected comment, the comment replies would subsequently be
+      -- discoverable again as well.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable CommentSnippetModerationStatus
+instance Hashable CommentsSetModerationStatus'ModerationStatus
 
-instance FromText CommentSnippetModerationStatus where
+instance FromText CommentsSetModerationStatus'ModerationStatus where
     fromText = \case
-        "heldForReview" -> Just CSMSHeldForReview
-        "likelySpam" -> Just CSMSLikelySpam
-        "published" -> Just CSMSPublished
-        "rejected" -> Just CSMSRejected
+        "heldForReview" -> Just HeldForReview
+        "published" -> Just Published
+        "rejected" -> Just Rejected
         _ -> Nothing
 
-instance ToText CommentSnippetModerationStatus where
+instance ToText CommentsSetModerationStatus'ModerationStatus where
     toText = \case
-        CSMSHeldForReview -> "heldForReview"
-        CSMSLikelySpam -> "likelySpam"
-        CSMSPublished -> "published"
-        CSMSRejected -> "rejected"
+        HeldForReview -> "heldForReview"
+        Published -> "published"
+        Rejected -> "rejected"
 
-instance FromJSON CommentSnippetModerationStatus where
-    parseJSON = parseJSONText "CommentSnippetModerationStatus"
+instance FromJSON CommentsSetModerationStatus'ModerationStatus where
+    parseJSON = parseJSONText "CommentsSetModerationStatus'ModerationStatus"
 
-instance ToJSON CommentSnippetModerationStatus where
-    toJSON = toJSONText
-
--- | The rating the viewer has given to this comment. For the time being this
--- will never return RATE_TYPE_DISLIKE and instead return RATE_TYPE_NONE.
--- This may change in the future.
-data CommentSnippetViewerRating
-    = CSVRDislike
-      -- ^ @dislike@
-    | CSVRLike
-      -- ^ @like@
-    | CSVRNone
-      -- ^ @none@
-    | CSVRUnspecified
-      -- ^ @unspecified@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable CommentSnippetViewerRating
-
-instance FromText CommentSnippetViewerRating where
-    fromText = \case
-        "dislike" -> Just CSVRDislike
-        "like" -> Just CSVRLike
-        "none" -> Just CSVRNone
-        "unspecified" -> Just CSVRUnspecified
-        _ -> Nothing
-
-instance ToText CommentSnippetViewerRating where
-    toText = \case
-        CSVRDislike -> "dislike"
-        CSVRLike -> "like"
-        CSVRNone -> "none"
-        CSVRUnspecified -> "unspecified"
-
-instance FromJSON CommentSnippetViewerRating where
-    parseJSON = parseJSONText "CommentSnippetViewerRating"
-
-instance ToJSON CommentSnippetViewerRating where
-    toJSON = toJSONText
-
--- | The video\'s Australian Classification Board (ACB) or Australian
--- Communications and Media Authority (ACMA) rating. ACMA ratings are used
--- to classify children\'s television programming.
-data ContentRatingAcbRating
-    = CRARAcbC
-      -- ^ @acbC@
-    | CRARAcbE
-      -- ^ @acbE@
-    | CRARAcbG
-      -- ^ @acbG@
-    | CRARAcbM
-      -- ^ @acbM@
-    | CRARAcbMa15plus
-      -- ^ @acbMa15plus@
-    | CRARAcbP
-      -- ^ @acbP@
-    | CRARAcbPg
-      -- ^ @acbPg@
-    | CRARAcbR18plus
-      -- ^ @acbR18plus@
-    | CRARAcbUnrated
-      -- ^ @acbUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingAcbRating
-
-instance FromText ContentRatingAcbRating where
-    fromText = \case
-        "acbC" -> Just CRARAcbC
-        "acbE" -> Just CRARAcbE
-        "acbG" -> Just CRARAcbG
-        "acbM" -> Just CRARAcbM
-        "acbMa15plus" -> Just CRARAcbMa15plus
-        "acbP" -> Just CRARAcbP
-        "acbPg" -> Just CRARAcbPg
-        "acbR18plus" -> Just CRARAcbR18plus
-        "acbUnrated" -> Just CRARAcbUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingAcbRating where
-    toText = \case
-        CRARAcbC -> "acbC"
-        CRARAcbE -> "acbE"
-        CRARAcbG -> "acbG"
-        CRARAcbM -> "acbM"
-        CRARAcbMa15plus -> "acbMa15plus"
-        CRARAcbP -> "acbP"
-        CRARAcbPg -> "acbPg"
-        CRARAcbR18plus -> "acbR18plus"
-        CRARAcbUnrated -> "acbUnrated"
-
-instance FromJSON ContentRatingAcbRating where
-    parseJSON = parseJSONText "ContentRatingAcbRating"
-
-instance ToJSON ContentRatingAcbRating where
-    toJSON = toJSONText
-
--- | The video\'s rating from Italy\'s Autorità per le Garanzie nelle
--- Comunicazioni (AGCOM).
-data ContentRatingAgcomRating
-    = CRARAgcomT
-      -- ^ @agcomT@
-    | CRARAgcomUnrated
-      -- ^ @agcomUnrated@
-    | CRARAGCOMVM14
-      -- ^ @agcomVm14@
-    | CRARAGCOMVM18
-      -- ^ @agcomVm18@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingAgcomRating
-
-instance FromText ContentRatingAgcomRating where
-    fromText = \case
-        "agcomT" -> Just CRARAgcomT
-        "agcomUnrated" -> Just CRARAgcomUnrated
-        "agcomVm14" -> Just CRARAGCOMVM14
-        "agcomVm18" -> Just CRARAGCOMVM18
-        _ -> Nothing
-
-instance ToText ContentRatingAgcomRating where
-    toText = \case
-        CRARAgcomT -> "agcomT"
-        CRARAgcomUnrated -> "agcomUnrated"
-        CRARAGCOMVM14 -> "agcomVm14"
-        CRARAGCOMVM18 -> "agcomVm18"
-
-instance FromJSON ContentRatingAgcomRating where
-    parseJSON = parseJSONText "ContentRatingAgcomRating"
-
-instance ToJSON ContentRatingAgcomRating where
-    toJSON = toJSONText
-
--- | The video\'s Anatel (Asociación Nacional de Televisión) rating for
--- Chilean television.
-data ContentRatingAnatelRating
-    = CRARAnatelA
-      -- ^ @anatelA@
-    | CRARAnatelF
-      -- ^ @anatelF@
-    | CRARAnatelI
-      -- ^ @anatelI@
-    | CRARANATELI10
-      -- ^ @anatelI10@
-    | CRARANATELI12
-      -- ^ @anatelI12@
-    | CRARANATELI7
-      -- ^ @anatelI7@
-    | CRARAnatelR
-      -- ^ @anatelR@
-    | CRARAnatelUnrated
-      -- ^ @anatelUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingAnatelRating
-
-instance FromText ContentRatingAnatelRating where
-    fromText = \case
-        "anatelA" -> Just CRARAnatelA
-        "anatelF" -> Just CRARAnatelF
-        "anatelI" -> Just CRARAnatelI
-        "anatelI10" -> Just CRARANATELI10
-        "anatelI12" -> Just CRARANATELI12
-        "anatelI7" -> Just CRARANATELI7
-        "anatelR" -> Just CRARAnatelR
-        "anatelUnrated" -> Just CRARAnatelUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingAnatelRating where
-    toText = \case
-        CRARAnatelA -> "anatelA"
-        CRARAnatelF -> "anatelF"
-        CRARAnatelI -> "anatelI"
-        CRARANATELI10 -> "anatelI10"
-        CRARANATELI12 -> "anatelI12"
-        CRARANATELI7 -> "anatelI7"
-        CRARAnatelR -> "anatelR"
-        CRARAnatelUnrated -> "anatelUnrated"
-
-instance FromJSON ContentRatingAnatelRating where
-    parseJSON = parseJSONText "ContentRatingAnatelRating"
-
-instance ToJSON ContentRatingAnatelRating where
-    toJSON = toJSONText
-
--- | The video\'s British Board of Film Classification (BBFC) rating.
-data ContentRatingBbfcRating
-    = CRBRBBFC12
-      -- ^ @bbfc12@
-    | CRBRBbfc12a
-      -- ^ @bbfc12a@
-    | CRBRBBFC15
-      -- ^ @bbfc15@
-    | CRBRBBFC18
-      -- ^ @bbfc18@
-    | CRBRBbfcPg
-      -- ^ @bbfcPg@
-    | CRBRBBFCR18
-      -- ^ @bbfcR18@
-    | CRBRBbfcU
-      -- ^ @bbfcU@
-    | CRBRBbfcUnrated
-      -- ^ @bbfcUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingBbfcRating
-
-instance FromText ContentRatingBbfcRating where
-    fromText = \case
-        "bbfc12" -> Just CRBRBBFC12
-        "bbfc12a" -> Just CRBRBbfc12a
-        "bbfc15" -> Just CRBRBBFC15
-        "bbfc18" -> Just CRBRBBFC18
-        "bbfcPg" -> Just CRBRBbfcPg
-        "bbfcR18" -> Just CRBRBBFCR18
-        "bbfcU" -> Just CRBRBbfcU
-        "bbfcUnrated" -> Just CRBRBbfcUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingBbfcRating where
-    toText = \case
-        CRBRBBFC12 -> "bbfc12"
-        CRBRBbfc12a -> "bbfc12a"
-        CRBRBBFC15 -> "bbfc15"
-        CRBRBBFC18 -> "bbfc18"
-        CRBRBbfcPg -> "bbfcPg"
-        CRBRBBFCR18 -> "bbfcR18"
-        CRBRBbfcU -> "bbfcU"
-        CRBRBbfcUnrated -> "bbfcUnrated"
-
-instance FromJSON ContentRatingBbfcRating where
-    parseJSON = parseJSONText "ContentRatingBbfcRating"
-
-instance ToJSON ContentRatingBbfcRating where
-    toJSON = toJSONText
-
--- | The video\'s rating from Thailand\'s Board of Film and Video Censors.
-data ContentRatingBfvcRating
-    = CRBRBFVC13
-      -- ^ @bfvc13@
-    | CRBRBFVC15
-      -- ^ @bfvc15@
-    | CRBRBFVC18
-      -- ^ @bfvc18@
-    | CRBRBFVC20
-      -- ^ @bfvc20@
-    | CRBRBfvcB
-      -- ^ @bfvcB@
-    | CRBRBfvcE
-      -- ^ @bfvcE@
-    | CRBRBfvcG
-      -- ^ @bfvcG@
-    | CRBRBfvcUnrated
-      -- ^ @bfvcUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingBfvcRating
-
-instance FromText ContentRatingBfvcRating where
-    fromText = \case
-        "bfvc13" -> Just CRBRBFVC13
-        "bfvc15" -> Just CRBRBFVC15
-        "bfvc18" -> Just CRBRBFVC18
-        "bfvc20" -> Just CRBRBFVC20
-        "bfvcB" -> Just CRBRBfvcB
-        "bfvcE" -> Just CRBRBfvcE
-        "bfvcG" -> Just CRBRBfvcG
-        "bfvcUnrated" -> Just CRBRBfvcUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingBfvcRating where
-    toText = \case
-        CRBRBFVC13 -> "bfvc13"
-        CRBRBFVC15 -> "bfvc15"
-        CRBRBFVC18 -> "bfvc18"
-        CRBRBFVC20 -> "bfvc20"
-        CRBRBfvcB -> "bfvcB"
-        CRBRBfvcE -> "bfvcE"
-        CRBRBfvcG -> "bfvcG"
-        CRBRBfvcUnrated -> "bfvcUnrated"
-
-instance FromJSON ContentRatingBfvcRating where
-    parseJSON = parseJSONText "ContentRatingBfvcRating"
-
-instance ToJSON ContentRatingBfvcRating where
-    toJSON = toJSONText
-
--- | The video\'s rating from the Austrian Board of Media Classification
--- (Bundesministerium für Unterricht, Kunst und Kultur).
-data ContentRatingBmukkRating
-    = CRBRBMUKK10
-      -- ^ @bmukk10@
-    | CRBRBMUKK12
-      -- ^ @bmukk12@
-    | CRBRBMUKK14
-      -- ^ @bmukk14@
-    | CRBRBMUKK16
-      -- ^ @bmukk16@
-    | CRBRBMUKK6
-      -- ^ @bmukk6@
-    | CRBRBMUKK8
-      -- ^ @bmukk8@
-    | CRBRBmukkAa
-      -- ^ @bmukkAa@
-    | CRBRBmukkUnrated
-      -- ^ @bmukkUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingBmukkRating
-
-instance FromText ContentRatingBmukkRating where
-    fromText = \case
-        "bmukk10" -> Just CRBRBMUKK10
-        "bmukk12" -> Just CRBRBMUKK12
-        "bmukk14" -> Just CRBRBMUKK14
-        "bmukk16" -> Just CRBRBMUKK16
-        "bmukk6" -> Just CRBRBMUKK6
-        "bmukk8" -> Just CRBRBMUKK8
-        "bmukkAa" -> Just CRBRBmukkAa
-        "bmukkUnrated" -> Just CRBRBmukkUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingBmukkRating where
-    toText = \case
-        CRBRBMUKK10 -> "bmukk10"
-        CRBRBMUKK12 -> "bmukk12"
-        CRBRBMUKK14 -> "bmukk14"
-        CRBRBMUKK16 -> "bmukk16"
-        CRBRBMUKK6 -> "bmukk6"
-        CRBRBMUKK8 -> "bmukk8"
-        CRBRBmukkAa -> "bmukkAa"
-        CRBRBmukkUnrated -> "bmukkUnrated"
-
-instance FromJSON ContentRatingBmukkRating where
-    parseJSON = parseJSONText "ContentRatingBmukkRating"
-
-instance ToJSON ContentRatingBmukkRating where
-    toJSON = toJSONText
-
--- | Rating system for Canadian TV - Canadian TV Classification System The
--- video\'s rating from the Canadian Radio-Television and
--- Telecommunications Commission (CRTC) for Canadian English-language
--- broadcasts. For more information, see the Canadian Broadcast Standards
--- Council website.
-data ContentRatingCatvRating
-    = CRCRCatv14plus
-      -- ^ @catv14plus@
-    | CRCRCatv18plus
-      -- ^ @catv18plus@
-    | CRCRCatvC
-      -- ^ @catvC@
-    | CRCRCATVC8
-      -- ^ @catvC8@
-    | CRCRCatvG
-      -- ^ @catvG@
-    | CRCRCatvPg
-      -- ^ @catvPg@
-    | CRCRCatvUnrated
-      -- ^ @catvUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingCatvRating
-
-instance FromText ContentRatingCatvRating where
-    fromText = \case
-        "catv14plus" -> Just CRCRCatv14plus
-        "catv18plus" -> Just CRCRCatv18plus
-        "catvC" -> Just CRCRCatvC
-        "catvC8" -> Just CRCRCATVC8
-        "catvG" -> Just CRCRCatvG
-        "catvPg" -> Just CRCRCatvPg
-        "catvUnrated" -> Just CRCRCatvUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingCatvRating where
-    toText = \case
-        CRCRCatv14plus -> "catv14plus"
-        CRCRCatv18plus -> "catv18plus"
-        CRCRCatvC -> "catvC"
-        CRCRCATVC8 -> "catvC8"
-        CRCRCatvG -> "catvG"
-        CRCRCatvPg -> "catvPg"
-        CRCRCatvUnrated -> "catvUnrated"
-
-instance FromJSON ContentRatingCatvRating where
-    parseJSON = parseJSONText "ContentRatingCatvRating"
-
-instance ToJSON ContentRatingCatvRating where
-    toJSON = toJSONText
-
--- | The video\'s rating from the Canadian Radio-Television and
--- Telecommunications Commission (CRTC) for Canadian French-language
--- broadcasts. For more information, see the Canadian Broadcast Standards
--- Council website.
-data ContentRatingCatvfrRating
-    = CRCRCatvfr13plus
-      -- ^ @catvfr13plus@
-    | CRCRCatvfr16plus
-      -- ^ @catvfr16plus@
-    | CRCRCatvfr18plus
-      -- ^ @catvfr18plus@
-    | CRCRCatvfr8plus
-      -- ^ @catvfr8plus@
-    | CRCRCatvfrG
-      -- ^ @catvfrG@
-    | CRCRCatvfrUnrated
-      -- ^ @catvfrUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingCatvfrRating
-
-instance FromText ContentRatingCatvfrRating where
-    fromText = \case
-        "catvfr13plus" -> Just CRCRCatvfr13plus
-        "catvfr16plus" -> Just CRCRCatvfr16plus
-        "catvfr18plus" -> Just CRCRCatvfr18plus
-        "catvfr8plus" -> Just CRCRCatvfr8plus
-        "catvfrG" -> Just CRCRCatvfrG
-        "catvfrUnrated" -> Just CRCRCatvfrUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingCatvfrRating where
-    toText = \case
-        CRCRCatvfr13plus -> "catvfr13plus"
-        CRCRCatvfr16plus -> "catvfr16plus"
-        CRCRCatvfr18plus -> "catvfr18plus"
-        CRCRCatvfr8plus -> "catvfr8plus"
-        CRCRCatvfrG -> "catvfrG"
-        CRCRCatvfrUnrated -> "catvfrUnrated"
-
-instance FromJSON ContentRatingCatvfrRating where
-    parseJSON = parseJSONText "ContentRatingCatvfrRating"
-
-instance ToJSON ContentRatingCatvfrRating where
-    toJSON = toJSONText
-
--- | The video\'s Central Board of Film Certification (CBFC - India) rating.
-data ContentRatingCbfcRating
-    = CRCRCbfcA
-      -- ^ @cbfcA@
-    | CRCRCbfcS
-      -- ^ @cbfcS@
-    | CRCRCbfcU
-      -- ^ @cbfcU@
-    | CRCRCbfcUA
-      -- ^ @cbfcUA@
-    | CRCRCbfcUnrated
-      -- ^ @cbfcUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingCbfcRating
-
-instance FromText ContentRatingCbfcRating where
-    fromText = \case
-        "cbfcA" -> Just CRCRCbfcA
-        "cbfcS" -> Just CRCRCbfcS
-        "cbfcU" -> Just CRCRCbfcU
-        "cbfcUA" -> Just CRCRCbfcUA
-        "cbfcUnrated" -> Just CRCRCbfcUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingCbfcRating where
-    toText = \case
-        CRCRCbfcA -> "cbfcA"
-        CRCRCbfcS -> "cbfcS"
-        CRCRCbfcU -> "cbfcU"
-        CRCRCbfcUA -> "cbfcUA"
-        CRCRCbfcUnrated -> "cbfcUnrated"
-
-instance FromJSON ContentRatingCbfcRating where
-    parseJSON = parseJSONText "ContentRatingCbfcRating"
-
-instance ToJSON ContentRatingCbfcRating where
-    toJSON = toJSONText
-
--- | The video\'s Consejo de Calificación Cinematográfica (Chile) rating.
-data ContentRatingCccRating
-    = CRCRCCC14
-      -- ^ @ccc14@
-    | CRCRCCC18
-      -- ^ @ccc18@
-    | CRCRCcc18s
-      -- ^ @ccc18s@
-    | CRCRCcc18v
-      -- ^ @ccc18v@
-    | CRCRCCC6
-      -- ^ @ccc6@
-    | CRCRCccTe
-      -- ^ @cccTe@
-    | CRCRCccUnrated
-      -- ^ @cccUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingCccRating
-
-instance FromText ContentRatingCccRating where
-    fromText = \case
-        "ccc14" -> Just CRCRCCC14
-        "ccc18" -> Just CRCRCCC18
-        "ccc18s" -> Just CRCRCcc18s
-        "ccc18v" -> Just CRCRCcc18v
-        "ccc6" -> Just CRCRCCC6
-        "cccTe" -> Just CRCRCccTe
-        "cccUnrated" -> Just CRCRCccUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingCccRating where
-    toText = \case
-        CRCRCCC14 -> "ccc14"
-        CRCRCCC18 -> "ccc18"
-        CRCRCcc18s -> "ccc18s"
-        CRCRCcc18v -> "ccc18v"
-        CRCRCCC6 -> "ccc6"
-        CRCRCccTe -> "cccTe"
-        CRCRCccUnrated -> "cccUnrated"
-
-instance FromJSON ContentRatingCccRating where
-    parseJSON = parseJSONText "ContentRatingCccRating"
-
-instance ToJSON ContentRatingCccRating where
-    toJSON = toJSONText
-
--- | The video\'s rating from Portugal\'s Comissão de Classificação de
--- Espect´culos.
-data ContentRatingCceRating
-    = CRCRCCEM12
-      -- ^ @cceM12@
-    | CRCRCCEM16
-      -- ^ @cceM16@
-    | CRCRCCEM18
-      -- ^ @cceM18@
-    | CRCRCCEM4
-      -- ^ @cceM4@
-    | CRCRCCEM6
-      -- ^ @cceM6@
-    | CRCRCceUnrated
-      -- ^ @cceUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingCceRating
-
-instance FromText ContentRatingCceRating where
-    fromText = \case
-        "cceM12" -> Just CRCRCCEM12
-        "cceM16" -> Just CRCRCCEM16
-        "cceM18" -> Just CRCRCCEM18
-        "cceM4" -> Just CRCRCCEM4
-        "cceM6" -> Just CRCRCCEM6
-        "cceUnrated" -> Just CRCRCceUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingCceRating where
-    toText = \case
-        CRCRCCEM12 -> "cceM12"
-        CRCRCCEM16 -> "cceM16"
-        CRCRCCEM18 -> "cceM18"
-        CRCRCCEM4 -> "cceM4"
-        CRCRCCEM6 -> "cceM6"
-        CRCRCceUnrated -> "cceUnrated"
-
-instance FromJSON ContentRatingCceRating where
-    parseJSON = parseJSONText "ContentRatingCceRating"
-
-instance ToJSON ContentRatingCceRating where
-    toJSON = toJSONText
-
--- | The video\'s rating in Switzerland.
-data ContentRatingChfilmRating
-    = CRCRCHFILM0
-      -- ^ @chfilm0@
-    | CRCRCHFILM12
-      -- ^ @chfilm12@
-    | CRCRCHFILM16
-      -- ^ @chfilm16@
-    | CRCRCHFILM18
-      -- ^ @chfilm18@
-    | CRCRCHFILM6
-      -- ^ @chfilm6@
-    | CRCRChfilmUnrated
-      -- ^ @chfilmUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingChfilmRating
-
-instance FromText ContentRatingChfilmRating where
-    fromText = \case
-        "chfilm0" -> Just CRCRCHFILM0
-        "chfilm12" -> Just CRCRCHFILM12
-        "chfilm16" -> Just CRCRCHFILM16
-        "chfilm18" -> Just CRCRCHFILM18
-        "chfilm6" -> Just CRCRCHFILM6
-        "chfilmUnrated" -> Just CRCRChfilmUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingChfilmRating where
-    toText = \case
-        CRCRCHFILM0 -> "chfilm0"
-        CRCRCHFILM12 -> "chfilm12"
-        CRCRCHFILM16 -> "chfilm16"
-        CRCRCHFILM18 -> "chfilm18"
-        CRCRCHFILM6 -> "chfilm6"
-        CRCRChfilmUnrated -> "chfilmUnrated"
-
-instance FromJSON ContentRatingChfilmRating where
-    parseJSON = parseJSONText "ContentRatingChfilmRating"
-
-instance ToJSON ContentRatingChfilmRating where
-    toJSON = toJSONText
-
--- | The video\'s Canadian Home Video Rating System (CHVRS) rating.
-data ContentRatingChvrsRating
-    = CRCRChvrs14a
-      -- ^ @chvrs14a@
-    | CRCRChvrs18a
-      -- ^ @chvrs18a@
-    | CRCRChvrsE
-      -- ^ @chvrsE@
-    | CRCRChvrsG
-      -- ^ @chvrsG@
-    | CRCRChvrsPg
-      -- ^ @chvrsPg@
-    | CRCRChvrsR
-      -- ^ @chvrsR@
-    | CRCRChvrsUnrated
-      -- ^ @chvrsUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingChvrsRating
-
-instance FromText ContentRatingChvrsRating where
-    fromText = \case
-        "chvrs14a" -> Just CRCRChvrs14a
-        "chvrs18a" -> Just CRCRChvrs18a
-        "chvrsE" -> Just CRCRChvrsE
-        "chvrsG" -> Just CRCRChvrsG
-        "chvrsPg" -> Just CRCRChvrsPg
-        "chvrsR" -> Just CRCRChvrsR
-        "chvrsUnrated" -> Just CRCRChvrsUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingChvrsRating where
-    toText = \case
-        CRCRChvrs14a -> "chvrs14a"
-        CRCRChvrs18a -> "chvrs18a"
-        CRCRChvrsE -> "chvrsE"
-        CRCRChvrsG -> "chvrsG"
-        CRCRChvrsPg -> "chvrsPg"
-        CRCRChvrsR -> "chvrsR"
-        CRCRChvrsUnrated -> "chvrsUnrated"
-
-instance FromJSON ContentRatingChvrsRating where
-    parseJSON = parseJSONText "ContentRatingChvrsRating"
-
-instance ToJSON ContentRatingChvrsRating where
-    toJSON = toJSONText
-
--- | The video\'s rating from the Commission de Contrôle des Films (Belgium).
-data ContentRatingCicfRating
-    = CRCRCicfE
-      -- ^ @cicfE@
-    | CRCRCicfKntEna
-      -- ^ @cicfKntEna@
-    | CRCRCicfKtEa
-      -- ^ @cicfKtEa@
-    | CRCRCicfUnrated
-      -- ^ @cicfUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingCicfRating
-
-instance FromText ContentRatingCicfRating where
-    fromText = \case
-        "cicfE" -> Just CRCRCicfE
-        "cicfKntEna" -> Just CRCRCicfKntEna
-        "cicfKtEa" -> Just CRCRCicfKtEa
-        "cicfUnrated" -> Just CRCRCicfUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingCicfRating where
-    toText = \case
-        CRCRCicfE -> "cicfE"
-        CRCRCicfKntEna -> "cicfKntEna"
-        CRCRCicfKtEa -> "cicfKtEa"
-        CRCRCicfUnrated -> "cicfUnrated"
-
-instance FromJSON ContentRatingCicfRating where
-    parseJSON = parseJSONText "ContentRatingCicfRating"
-
-instance ToJSON ContentRatingCicfRating where
-    toJSON = toJSONText
-
--- | The video\'s rating from Romania\'s CONSILIUL NATIONAL AL
--- AUDIOVIZUALULUI (CNA).
-data ContentRatingCnaRating
-    = CRCRCNA12
-      -- ^ @cna12@
-    | CRCRCNA15
-      -- ^ @cna15@
-    | CRCRCNA18
-      -- ^ @cna18@
-    | CRCRCna18plus
-      -- ^ @cna18plus@
-    | CRCRCnaAp
-      -- ^ @cnaAp@
-    | CRCRCnaUnrated
-      -- ^ @cnaUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingCnaRating
-
-instance FromText ContentRatingCnaRating where
-    fromText = \case
-        "cna12" -> Just CRCRCNA12
-        "cna15" -> Just CRCRCNA15
-        "cna18" -> Just CRCRCNA18
-        "cna18plus" -> Just CRCRCna18plus
-        "cnaAp" -> Just CRCRCnaAp
-        "cnaUnrated" -> Just CRCRCnaUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingCnaRating where
-    toText = \case
-        CRCRCNA12 -> "cna12"
-        CRCRCNA15 -> "cna15"
-        CRCRCNA18 -> "cna18"
-        CRCRCna18plus -> "cna18plus"
-        CRCRCnaAp -> "cnaAp"
-        CRCRCnaUnrated -> "cnaUnrated"
-
-instance FromJSON ContentRatingCnaRating where
-    parseJSON = parseJSONText "ContentRatingCnaRating"
-
-instance ToJSON ContentRatingCnaRating where
-    toJSON = toJSONText
-
--- | Rating system in France - Commission de classification cinematographique
-data ContentRatingCncRating
-    = CRCRCNC10
-      -- ^ @cnc10@
-    | CRCRCNC12
-      -- ^ @cnc12@
-    | CRCRCNC16
-      -- ^ @cnc16@
-    | CRCRCNC18
-      -- ^ @cnc18@
-    | CRCRCncE
-      -- ^ @cncE@
-    | CRCRCncT
-      -- ^ @cncT@
-    | CRCRCncUnrated
-      -- ^ @cncUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingCncRating
-
-instance FromText ContentRatingCncRating where
-    fromText = \case
-        "cnc10" -> Just CRCRCNC10
-        "cnc12" -> Just CRCRCNC12
-        "cnc16" -> Just CRCRCNC16
-        "cnc18" -> Just CRCRCNC18
-        "cncE" -> Just CRCRCncE
-        "cncT" -> Just CRCRCncT
-        "cncUnrated" -> Just CRCRCncUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingCncRating where
-    toText = \case
-        CRCRCNC10 -> "cnc10"
-        CRCRCNC12 -> "cnc12"
-        CRCRCNC16 -> "cnc16"
-        CRCRCNC18 -> "cnc18"
-        CRCRCncE -> "cncE"
-        CRCRCncT -> "cncT"
-        CRCRCncUnrated -> "cncUnrated"
-
-instance FromJSON ContentRatingCncRating where
-    parseJSON = parseJSONText "ContentRatingCncRating"
-
-instance ToJSON ContentRatingCncRating where
-    toJSON = toJSONText
-
--- | The video\'s rating from France\'s Conseil supérieur de l?audiovisuel,
--- which rates broadcast content.
-data ContentRatingCsaRating
-    = CRCRCSA10
-      -- ^ @csa10@
-    | CRCRCSA12
-      -- ^ @csa12@
-    | CRCRCSA16
-      -- ^ @csa16@
-    | CRCRCSA18
-      -- ^ @csa18@
-    | CRCRCsaInterdiction
-      -- ^ @csaInterdiction@
-    | CRCRCsaT
-      -- ^ @csaT@
-    | CRCRCsaUnrated
-      -- ^ @csaUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingCsaRating
-
-instance FromText ContentRatingCsaRating where
-    fromText = \case
-        "csa10" -> Just CRCRCSA10
-        "csa12" -> Just CRCRCSA12
-        "csa16" -> Just CRCRCSA16
-        "csa18" -> Just CRCRCSA18
-        "csaInterdiction" -> Just CRCRCsaInterdiction
-        "csaT" -> Just CRCRCsaT
-        "csaUnrated" -> Just CRCRCsaUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingCsaRating where
-    toText = \case
-        CRCRCSA10 -> "csa10"
-        CRCRCSA12 -> "csa12"
-        CRCRCSA16 -> "csa16"
-        CRCRCSA18 -> "csa18"
-        CRCRCsaInterdiction -> "csaInterdiction"
-        CRCRCsaT -> "csaT"
-        CRCRCsaUnrated -> "csaUnrated"
-
-instance FromJSON ContentRatingCsaRating where
-    parseJSON = parseJSONText "ContentRatingCsaRating"
-
-instance ToJSON ContentRatingCsaRating where
-    toJSON = toJSONText
-
--- | The video\'s rating from Luxembourg\'s Commission de surveillance de la
--- classification des films (CSCF).
-data ContentRatingCscfRating
-    = CRCRCSCF12
-      -- ^ @cscf12@
-    | CRCRCSCF16
-      -- ^ @cscf16@
-    | CRCRCSCF18
-      -- ^ @cscf18@
-    | CRCRCSCF6
-      -- ^ @cscf6@
-    | CRCRCSCF9
-      -- ^ @cscf9@
-    | CRCRCscfA
-      -- ^ @cscfA@
-    | CRCRCscfAl
-      -- ^ @cscfAl@
-    | CRCRCscfUnrated
-      -- ^ @cscfUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingCscfRating
-
-instance FromText ContentRatingCscfRating where
-    fromText = \case
-        "cscf12" -> Just CRCRCSCF12
-        "cscf16" -> Just CRCRCSCF16
-        "cscf18" -> Just CRCRCSCF18
-        "cscf6" -> Just CRCRCSCF6
-        "cscf9" -> Just CRCRCSCF9
-        "cscfA" -> Just CRCRCscfA
-        "cscfAl" -> Just CRCRCscfAl
-        "cscfUnrated" -> Just CRCRCscfUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingCscfRating where
-    toText = \case
-        CRCRCSCF12 -> "cscf12"
-        CRCRCSCF16 -> "cscf16"
-        CRCRCSCF18 -> "cscf18"
-        CRCRCSCF6 -> "cscf6"
-        CRCRCSCF9 -> "cscf9"
-        CRCRCscfA -> "cscfA"
-        CRCRCscfAl -> "cscfAl"
-        CRCRCscfUnrated -> "cscfUnrated"
-
-instance FromJSON ContentRatingCscfRating where
-    parseJSON = parseJSONText "ContentRatingCscfRating"
-
-instance ToJSON ContentRatingCscfRating where
-    toJSON = toJSONText
-
--- | The video\'s rating in the Czech Republic.
-data ContentRatingCzfilmRating
-    = CRCRCZFILM12
-      -- ^ @czfilm12@
-    | CRCRCZFILM14
-      -- ^ @czfilm14@
-    | CRCRCZFILM18
-      -- ^ @czfilm18@
-    | CRCRCzfilmU
-      -- ^ @czfilmU@
-    | CRCRCzfilmUnrated
-      -- ^ @czfilmUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingCzfilmRating
-
-instance FromText ContentRatingCzfilmRating where
-    fromText = \case
-        "czfilm12" -> Just CRCRCZFILM12
-        "czfilm14" -> Just CRCRCZFILM14
-        "czfilm18" -> Just CRCRCZFILM18
-        "czfilmU" -> Just CRCRCzfilmU
-        "czfilmUnrated" -> Just CRCRCzfilmUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingCzfilmRating where
-    toText = \case
-        CRCRCZFILM12 -> "czfilm12"
-        CRCRCZFILM14 -> "czfilm14"
-        CRCRCZFILM18 -> "czfilm18"
-        CRCRCzfilmU -> "czfilmU"
-        CRCRCzfilmUnrated -> "czfilmUnrated"
-
-instance FromJSON ContentRatingCzfilmRating where
-    parseJSON = parseJSONText "ContentRatingCzfilmRating"
-
-instance ToJSON ContentRatingCzfilmRating where
-    toJSON = toJSONText
-
--- | The video\'s Departamento de Justiça, Classificação, Qualificação e
--- Títulos (DJCQT - Brazil) rating.
-data ContentRatingDjctqRating
-    = CRDRDJCTQ10
-      -- ^ @djctq10@
-    | CRDRDJCTQ12
-      -- ^ @djctq12@
-    | CRDRDJCTQ14
-      -- ^ @djctq14@
-    | CRDRDJCTQ16
-      -- ^ @djctq16@
-    | CRDRDJCTQ18
-      -- ^ @djctq18@
-    | CRDRDjctqL
-      -- ^ @djctqL@
-    | CRDRDjctqUnrated
-      -- ^ @djctqUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingDjctqRating
-
-instance FromText ContentRatingDjctqRating where
-    fromText = \case
-        "djctq10" -> Just CRDRDJCTQ10
-        "djctq12" -> Just CRDRDJCTQ12
-        "djctq14" -> Just CRDRDJCTQ14
-        "djctq16" -> Just CRDRDJCTQ16
-        "djctq18" -> Just CRDRDJCTQ18
-        "djctqL" -> Just CRDRDjctqL
-        "djctqUnrated" -> Just CRDRDjctqUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingDjctqRating where
-    toText = \case
-        CRDRDJCTQ10 -> "djctq10"
-        CRDRDJCTQ12 -> "djctq12"
-        CRDRDJCTQ14 -> "djctq14"
-        CRDRDJCTQ16 -> "djctq16"
-        CRDRDJCTQ18 -> "djctq18"
-        CRDRDjctqL -> "djctqL"
-        CRDRDjctqUnrated -> "djctqUnrated"
-
-instance FromJSON ContentRatingDjctqRating where
-    parseJSON = parseJSONText "ContentRatingDjctqRating"
-
-instance ToJSON ContentRatingDjctqRating where
-    toJSON = toJSONText
-
--- | The video\'s rating in Estonia.
-data ContentRatingEefilmRating
-    = CREREEFILMK12
-      -- ^ @eefilmK12@
-    | CREREEFILMK14
-      -- ^ @eefilmK14@
-    | CREREEFILMK16
-      -- ^ @eefilmK16@
-    | CREREEFILMK6
-      -- ^ @eefilmK6@
-    | CREREefilmL
-      -- ^ @eefilmL@
-    | CREREEFILMMS12
-      -- ^ @eefilmMs12@
-    | CREREEFILMMS6
-      -- ^ @eefilmMs6@
-    | CREREefilmPere
-      -- ^ @eefilmPere@
-    | CREREefilmUnrated
-      -- ^ @eefilmUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingEefilmRating
-
-instance FromText ContentRatingEefilmRating where
-    fromText = \case
-        "eefilmK12" -> Just CREREEFILMK12
-        "eefilmK14" -> Just CREREEFILMK14
-        "eefilmK16" -> Just CREREEFILMK16
-        "eefilmK6" -> Just CREREEFILMK6
-        "eefilmL" -> Just CREREefilmL
-        "eefilmMs12" -> Just CREREEFILMMS12
-        "eefilmMs6" -> Just CREREEFILMMS6
-        "eefilmPere" -> Just CREREefilmPere
-        "eefilmUnrated" -> Just CREREefilmUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingEefilmRating where
-    toText = \case
-        CREREEFILMK12 -> "eefilmK12"
-        CREREEFILMK14 -> "eefilmK14"
-        CREREEFILMK16 -> "eefilmK16"
-        CREREEFILMK6 -> "eefilmK6"
-        CREREefilmL -> "eefilmL"
-        CREREEFILMMS12 -> "eefilmMs12"
-        CREREEFILMMS6 -> "eefilmMs6"
-        CREREefilmPere -> "eefilmPere"
-        CREREefilmUnrated -> "eefilmUnrated"
-
-instance FromJSON ContentRatingEefilmRating where
-    parseJSON = parseJSONText "ContentRatingEefilmRating"
-
-instance ToJSON ContentRatingEefilmRating where
-    toJSON = toJSONText
-
--- | The video\'s rating in Egypt.
-data ContentRatingEgfilmRating
-    = CREREGFILM18
-      -- ^ @egfilm18@
-    | CREREgfilmBn
-      -- ^ @egfilmBn@
-    | CREREgfilmGn
-      -- ^ @egfilmGn@
-    | CREREgfilmUnrated
-      -- ^ @egfilmUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingEgfilmRating
-
-instance FromText ContentRatingEgfilmRating where
-    fromText = \case
-        "egfilm18" -> Just CREREGFILM18
-        "egfilmBn" -> Just CREREgfilmBn
-        "egfilmGn" -> Just CREREgfilmGn
-        "egfilmUnrated" -> Just CREREgfilmUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingEgfilmRating where
-    toText = \case
-        CREREGFILM18 -> "egfilm18"
-        CREREgfilmBn -> "egfilmBn"
-        CREREgfilmGn -> "egfilmGn"
-        CREREgfilmUnrated -> "egfilmUnrated"
-
-instance FromJSON ContentRatingEgfilmRating where
-    parseJSON = parseJSONText "ContentRatingEgfilmRating"
-
-instance ToJSON ContentRatingEgfilmRating where
-    toJSON = toJSONText
-
--- | The video\'s Eirin (映倫) rating. Eirin is the Japanese rating system.
-data ContentRatingEirinRating
-    = CREREirinG
-      -- ^ @eirinG@
-    | CREREIRINPG12
-      -- ^ @eirinPg12@
-    | CREREirinR15plus
-      -- ^ @eirinR15plus@
-    | CREREirinR18plus
-      -- ^ @eirinR18plus@
-    | CREREirinUnrated
-      -- ^ @eirinUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingEirinRating
-
-instance FromText ContentRatingEirinRating where
-    fromText = \case
-        "eirinG" -> Just CREREirinG
-        "eirinPg12" -> Just CREREIRINPG12
-        "eirinR15plus" -> Just CREREirinR15plus
-        "eirinR18plus" -> Just CREREirinR18plus
-        "eirinUnrated" -> Just CREREirinUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingEirinRating where
-    toText = \case
-        CREREirinG -> "eirinG"
-        CREREIRINPG12 -> "eirinPg12"
-        CREREirinR15plus -> "eirinR15plus"
-        CREREirinR18plus -> "eirinR18plus"
-        CREREirinUnrated -> "eirinUnrated"
-
-instance FromJSON ContentRatingEirinRating where
-    parseJSON = parseJSONText "ContentRatingEirinRating"
-
-instance ToJSON ContentRatingEirinRating where
-    toJSON = toJSONText
-
--- | The video\'s rating from Malaysia\'s Film Censorship Board.
-data ContentRatingFcbmRating
-    = CRFRFCBM18
-      -- ^ @fcbm18@
-    | CRFRFcbm18pa
-      -- ^ @fcbm18pa@
-    | CRFRFcbm18pl
-      -- ^ @fcbm18pl@
-    | CRFRFcbm18sg
-      -- ^ @fcbm18sg@
-    | CRFRFcbm18sx
-      -- ^ @fcbm18sx@
-    | CRFRFCBMP13
-      -- ^ @fcbmP13@
-    | CRFRFCBMPG13
-      -- ^ @fcbmPg13@
-    | CRFRFcbmU
-      -- ^ @fcbmU@
-    | CRFRFcbmUnrated
-      -- ^ @fcbmUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingFcbmRating
-
-instance FromText ContentRatingFcbmRating where
-    fromText = \case
-        "fcbm18" -> Just CRFRFCBM18
-        "fcbm18pa" -> Just CRFRFcbm18pa
-        "fcbm18pl" -> Just CRFRFcbm18pl
-        "fcbm18sg" -> Just CRFRFcbm18sg
-        "fcbm18sx" -> Just CRFRFcbm18sx
-        "fcbmP13" -> Just CRFRFCBMP13
-        "fcbmPg13" -> Just CRFRFCBMPG13
-        "fcbmU" -> Just CRFRFcbmU
-        "fcbmUnrated" -> Just CRFRFcbmUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingFcbmRating where
-    toText = \case
-        CRFRFCBM18 -> "fcbm18"
-        CRFRFcbm18pa -> "fcbm18pa"
-        CRFRFcbm18pl -> "fcbm18pl"
-        CRFRFcbm18sg -> "fcbm18sg"
-        CRFRFcbm18sx -> "fcbm18sx"
-        CRFRFCBMP13 -> "fcbmP13"
-        CRFRFCBMPG13 -> "fcbmPg13"
-        CRFRFcbmU -> "fcbmU"
-        CRFRFcbmUnrated -> "fcbmUnrated"
-
-instance FromJSON ContentRatingFcbmRating where
-    parseJSON = parseJSONText "ContentRatingFcbmRating"
-
-instance ToJSON ContentRatingFcbmRating where
-    toJSON = toJSONText
-
--- | The video\'s rating from Hong Kong\'s Office for Film, Newspaper and
--- Article Administration.
-data ContentRatingFcoRating
-    = CRFRFcoI
-      -- ^ @fcoI@
-    | CRFRFcoIi
-      -- ^ @fcoIi@
-    | CRFRFcoIia
-      -- ^ @fcoIia@
-    | CRFRFcoIib
-      -- ^ @fcoIib@
-    | CRFRFcoIii
-      -- ^ @fcoIii@
-    | CRFRFcoUnrated
-      -- ^ @fcoUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingFcoRating
-
-instance FromText ContentRatingFcoRating where
-    fromText = \case
-        "fcoI" -> Just CRFRFcoI
-        "fcoIi" -> Just CRFRFcoIi
-        "fcoIia" -> Just CRFRFcoIia
-        "fcoIib" -> Just CRFRFcoIib
-        "fcoIii" -> Just CRFRFcoIii
-        "fcoUnrated" -> Just CRFRFcoUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingFcoRating where
-    toText = \case
-        CRFRFcoI -> "fcoI"
-        CRFRFcoIi -> "fcoIi"
-        CRFRFcoIia -> "fcoIia"
-        CRFRFcoIib -> "fcoIib"
-        CRFRFcoIii -> "fcoIii"
-        CRFRFcoUnrated -> "fcoUnrated"
-
-instance FromJSON ContentRatingFcoRating where
-    parseJSON = parseJSONText "ContentRatingFcoRating"
-
-instance ToJSON ContentRatingFcoRating where
-    toJSON = toJSONText
-
--- | This property has been deprecated. Use the
--- contentDetails.contentRating.cncRating instead.
-data ContentRatingFmocRating
-    = CRFRFMOC10
-      -- ^ @fmoc10@
-    | CRFRFMOC12
-      -- ^ @fmoc12@
-    | CRFRFMOC16
-      -- ^ @fmoc16@
-    | CRFRFMOC18
-      -- ^ @fmoc18@
-    | CRFRFmocE
-      -- ^ @fmocE@
-    | CRFRFmocU
-      -- ^ @fmocU@
-    | CRFRFmocUnrated
-      -- ^ @fmocUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingFmocRating
-
-instance FromText ContentRatingFmocRating where
-    fromText = \case
-        "fmoc10" -> Just CRFRFMOC10
-        "fmoc12" -> Just CRFRFMOC12
-        "fmoc16" -> Just CRFRFMOC16
-        "fmoc18" -> Just CRFRFMOC18
-        "fmocE" -> Just CRFRFmocE
-        "fmocU" -> Just CRFRFmocU
-        "fmocUnrated" -> Just CRFRFmocUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingFmocRating where
-    toText = \case
-        CRFRFMOC10 -> "fmoc10"
-        CRFRFMOC12 -> "fmoc12"
-        CRFRFMOC16 -> "fmoc16"
-        CRFRFMOC18 -> "fmoc18"
-        CRFRFmocE -> "fmocE"
-        CRFRFmocU -> "fmocU"
-        CRFRFmocUnrated -> "fmocUnrated"
-
-instance FromJSON ContentRatingFmocRating where
-    parseJSON = parseJSONText "ContentRatingFmocRating"
-
-instance ToJSON ContentRatingFmocRating where
-    toJSON = toJSONText
-
--- | The video\'s rating from South Africa\'s Film and Publication Board.
-data ContentRatingFpbRating
-    = CRFRFpb1012Pg
-      -- ^ @fpb1012Pg@
-    | CRFRFPB13
-      -- ^ @fpb13@
-    | CRFRFPB16
-      -- ^ @fpb16@
-    | CRFRFPB18
-      -- ^ @fpb18@
-    | CRFRFpb79Pg
-      -- ^ @fpb79Pg@
-    | CRFRFpbA
-      -- ^ @fpbA@
-    | CRFRFpbPg
-      -- ^ @fpbPg@
-    | CRFRFpbUnrated
-      -- ^ @fpbUnrated@
-    | CRFRFPBX18
-      -- ^ @fpbX18@
-    | CRFRFpbXx
-      -- ^ @fpbXx@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingFpbRating
-
-instance FromText ContentRatingFpbRating where
-    fromText = \case
-        "fpb1012Pg" -> Just CRFRFpb1012Pg
-        "fpb13" -> Just CRFRFPB13
-        "fpb16" -> Just CRFRFPB16
-        "fpb18" -> Just CRFRFPB18
-        "fpb79Pg" -> Just CRFRFpb79Pg
-        "fpbA" -> Just CRFRFpbA
-        "fpbPg" -> Just CRFRFpbPg
-        "fpbUnrated" -> Just CRFRFpbUnrated
-        "fpbX18" -> Just CRFRFPBX18
-        "fpbXx" -> Just CRFRFpbXx
-        _ -> Nothing
-
-instance ToText ContentRatingFpbRating where
-    toText = \case
-        CRFRFpb1012Pg -> "fpb1012Pg"
-        CRFRFPB13 -> "fpb13"
-        CRFRFPB16 -> "fpb16"
-        CRFRFPB18 -> "fpb18"
-        CRFRFpb79Pg -> "fpb79Pg"
-        CRFRFpbA -> "fpbA"
-        CRFRFpbPg -> "fpbPg"
-        CRFRFpbUnrated -> "fpbUnrated"
-        CRFRFPBX18 -> "fpbX18"
-        CRFRFpbXx -> "fpbXx"
-
-instance FromJSON ContentRatingFpbRating where
-    parseJSON = parseJSONText "ContentRatingFpbRating"
-
-instance ToJSON ContentRatingFpbRating where
-    toJSON = toJSONText
-
--- | The video\'s Freiwillige Selbstkontrolle der Filmwirtschaft (FSK -
--- Germany) rating.
-data ContentRatingFskRating
-    = CRFRFSK0
-      -- ^ @fsk0@
-    | CRFRFSK12
-      -- ^ @fsk12@
-    | CRFRFSK16
-      -- ^ @fsk16@
-    | CRFRFSK18
-      -- ^ @fsk18@
-    | CRFRFSK6
-      -- ^ @fsk6@
-    | CRFRFskUnrated
-      -- ^ @fskUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingFskRating
-
-instance FromText ContentRatingFskRating where
-    fromText = \case
-        "fsk0" -> Just CRFRFSK0
-        "fsk12" -> Just CRFRFSK12
-        "fsk16" -> Just CRFRFSK16
-        "fsk18" -> Just CRFRFSK18
-        "fsk6" -> Just CRFRFSK6
-        "fskUnrated" -> Just CRFRFskUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingFskRating where
-    toText = \case
-        CRFRFSK0 -> "fsk0"
-        CRFRFSK12 -> "fsk12"
-        CRFRFSK16 -> "fsk16"
-        CRFRFSK18 -> "fsk18"
-        CRFRFSK6 -> "fsk6"
-        CRFRFskUnrated -> "fskUnrated"
-
-instance FromJSON ContentRatingFskRating where
-    parseJSON = parseJSONText "ContentRatingFskRating"
-
-instance ToJSON ContentRatingFskRating where
-    toJSON = toJSONText
-
--- | The video\'s rating in Greece.
-data ContentRatingGrfilmRating
-    = CRGRGrfilmE
-      -- ^ @grfilmE@
-    | CRGRGrfilmK
-      -- ^ @grfilmK@
-    | CRGRGRFILMK13
-      -- ^ @grfilmK13@
-    | CRGRGRFILMK17
-      -- ^ @grfilmK17@
-    | CRGRGrfilmUnrated
-      -- ^ @grfilmUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingGrfilmRating
-
-instance FromText ContentRatingGrfilmRating where
-    fromText = \case
-        "grfilmE" -> Just CRGRGrfilmE
-        "grfilmK" -> Just CRGRGrfilmK
-        "grfilmK13" -> Just CRGRGRFILMK13
-        "grfilmK17" -> Just CRGRGRFILMK17
-        "grfilmUnrated" -> Just CRGRGrfilmUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingGrfilmRating where
-    toText = \case
-        CRGRGrfilmE -> "grfilmE"
-        CRGRGrfilmK -> "grfilmK"
-        CRGRGRFILMK13 -> "grfilmK13"
-        CRGRGRFILMK17 -> "grfilmK17"
-        CRGRGrfilmUnrated -> "grfilmUnrated"
-
-instance FromJSON ContentRatingGrfilmRating where
-    parseJSON = parseJSONText "ContentRatingGrfilmRating"
-
-instance ToJSON ContentRatingGrfilmRating where
-    toJSON = toJSONText
-
--- | The video\'s Instituto de la Cinematografía y de las Artes Audiovisuales
--- (ICAA - Spain) rating.
-data ContentRatingIcaaRating
-    = CRIRICAA12
-      -- ^ @icaa12@
-    | CRIRICAA13
-      -- ^ @icaa13@
-    | CRIRICAA16
-      -- ^ @icaa16@
-    | CRIRICAA18
-      -- ^ @icaa18@
-    | CRIRICAA7
-      -- ^ @icaa7@
-    | CRIRIcaaApta
-      -- ^ @icaaApta@
-    | CRIRIcaaUnrated
-      -- ^ @icaaUnrated@
-    | CRIRIcaaX
-      -- ^ @icaaX@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingIcaaRating
-
-instance FromText ContentRatingIcaaRating where
-    fromText = \case
-        "icaa12" -> Just CRIRICAA12
-        "icaa13" -> Just CRIRICAA13
-        "icaa16" -> Just CRIRICAA16
-        "icaa18" -> Just CRIRICAA18
-        "icaa7" -> Just CRIRICAA7
-        "icaaApta" -> Just CRIRIcaaApta
-        "icaaUnrated" -> Just CRIRIcaaUnrated
-        "icaaX" -> Just CRIRIcaaX
-        _ -> Nothing
-
-instance ToText ContentRatingIcaaRating where
-    toText = \case
-        CRIRICAA12 -> "icaa12"
-        CRIRICAA13 -> "icaa13"
-        CRIRICAA16 -> "icaa16"
-        CRIRICAA18 -> "icaa18"
-        CRIRICAA7 -> "icaa7"
-        CRIRIcaaApta -> "icaaApta"
-        CRIRIcaaUnrated -> "icaaUnrated"
-        CRIRIcaaX -> "icaaX"
-
-instance FromJSON ContentRatingIcaaRating where
-    parseJSON = parseJSONText "ContentRatingIcaaRating"
-
-instance ToJSON ContentRatingIcaaRating where
-    toJSON = toJSONText
-
--- | The video\'s Irish Film Classification Office (IFCO - Ireland) rating.
--- See the IFCO website for more information.
-data ContentRatingIfcoRating
-    = CRIRIFCO12
-      -- ^ @ifco12@
-    | CRIRIfco12a
-      -- ^ @ifco12a@
-    | CRIRIFCO15
-      -- ^ @ifco15@
-    | CRIRIfco15a
-      -- ^ @ifco15a@
-    | CRIRIFCO16
-      -- ^ @ifco16@
-    | CRIRIFCO18
-      -- ^ @ifco18@
-    | CRIRIfcoG
-      -- ^ @ifcoG@
-    | CRIRIfcoPg
-      -- ^ @ifcoPg@
-    | CRIRIfcoUnrated
-      -- ^ @ifcoUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingIfcoRating
-
-instance FromText ContentRatingIfcoRating where
-    fromText = \case
-        "ifco12" -> Just CRIRIFCO12
-        "ifco12a" -> Just CRIRIfco12a
-        "ifco15" -> Just CRIRIFCO15
-        "ifco15a" -> Just CRIRIfco15a
-        "ifco16" -> Just CRIRIFCO16
-        "ifco18" -> Just CRIRIFCO18
-        "ifcoG" -> Just CRIRIfcoG
-        "ifcoPg" -> Just CRIRIfcoPg
-        "ifcoUnrated" -> Just CRIRIfcoUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingIfcoRating where
-    toText = \case
-        CRIRIFCO12 -> "ifco12"
-        CRIRIfco12a -> "ifco12a"
-        CRIRIFCO15 -> "ifco15"
-        CRIRIfco15a -> "ifco15a"
-        CRIRIFCO16 -> "ifco16"
-        CRIRIFCO18 -> "ifco18"
-        CRIRIfcoG -> "ifcoG"
-        CRIRIfcoPg -> "ifcoPg"
-        CRIRIfcoUnrated -> "ifcoUnrated"
-
-instance FromJSON ContentRatingIfcoRating where
-    parseJSON = parseJSONText "ContentRatingIfcoRating"
-
-instance ToJSON ContentRatingIfcoRating where
-    toJSON = toJSONText
-
--- | The video\'s rating in Israel.
-data ContentRatingIlfilmRating
-    = CRIRILFILM12
-      -- ^ @ilfilm12@
-    | CRIRILFILM16
-      -- ^ @ilfilm16@
-    | CRIRILFILM18
-      -- ^ @ilfilm18@
-    | CRIRIlfilmAa
-      -- ^ @ilfilmAa@
-    | CRIRIlfilmUnrated
-      -- ^ @ilfilmUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingIlfilmRating
-
-instance FromText ContentRatingIlfilmRating where
-    fromText = \case
-        "ilfilm12" -> Just CRIRILFILM12
-        "ilfilm16" -> Just CRIRILFILM16
-        "ilfilm18" -> Just CRIRILFILM18
-        "ilfilmAa" -> Just CRIRIlfilmAa
-        "ilfilmUnrated" -> Just CRIRIlfilmUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingIlfilmRating where
-    toText = \case
-        CRIRILFILM12 -> "ilfilm12"
-        CRIRILFILM16 -> "ilfilm16"
-        CRIRILFILM18 -> "ilfilm18"
-        CRIRIlfilmAa -> "ilfilmAa"
-        CRIRIlfilmUnrated -> "ilfilmUnrated"
-
-instance FromJSON ContentRatingIlfilmRating where
-    parseJSON = parseJSONText "ContentRatingIlfilmRating"
-
-instance ToJSON ContentRatingIlfilmRating where
-    toJSON = toJSONText
-
--- | The video\'s INCAA (Instituto Nacional de Cine y Artes Audiovisuales -
--- Argentina) rating.
-data ContentRatingIncaaRating
-    = CRIRIncaaAtp
-      -- ^ @incaaAtp@
-    | CRIRIncaaC
-      -- ^ @incaaC@
-    | CRIRINCAASAM13
-      -- ^ @incaaSam13@
-    | CRIRINCAASAM16
-      -- ^ @incaaSam16@
-    | CRIRINCAASAM18
-      -- ^ @incaaSam18@
-    | CRIRIncaaUnrated
-      -- ^ @incaaUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingIncaaRating
-
-instance FromText ContentRatingIncaaRating where
-    fromText = \case
-        "incaaAtp" -> Just CRIRIncaaAtp
-        "incaaC" -> Just CRIRIncaaC
-        "incaaSam13" -> Just CRIRINCAASAM13
-        "incaaSam16" -> Just CRIRINCAASAM16
-        "incaaSam18" -> Just CRIRINCAASAM18
-        "incaaUnrated" -> Just CRIRIncaaUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingIncaaRating where
-    toText = \case
-        CRIRIncaaAtp -> "incaaAtp"
-        CRIRIncaaC -> "incaaC"
-        CRIRINCAASAM13 -> "incaaSam13"
-        CRIRINCAASAM16 -> "incaaSam16"
-        CRIRINCAASAM18 -> "incaaSam18"
-        CRIRIncaaUnrated -> "incaaUnrated"
-
-instance FromJSON ContentRatingIncaaRating where
-    parseJSON = parseJSONText "ContentRatingIncaaRating"
-
-instance ToJSON ContentRatingIncaaRating where
-    toJSON = toJSONText
-
-data ContentRatingItemDjctqRatingReasons
-    = CRIDRRDjctqCriminalActs
-      -- ^ @djctqCriminalActs@
-    | CRIDRRDjctqDrugs
-      -- ^ @djctqDrugs@
-    | CRIDRRDjctqExplicitSex
-      -- ^ @djctqExplicitSex@
-    | CRIDRRDjctqExtremeViolence
-      -- ^ @djctqExtremeViolence@
-    | CRIDRRDjctqIllegalDrugs
-      -- ^ @djctqIllegalDrugs@
-    | CRIDRRDjctqImpactingContent
-      -- ^ @djctqImpactingContent@
-    | CRIDRRDjctqInappropriateLanguage
-      -- ^ @djctqInappropriateLanguage@
-    | CRIDRRDjctqLegalDrugs
-      -- ^ @djctqLegalDrugs@
-    | CRIDRRDjctqNudity
-      -- ^ @djctqNudity@
-    | CRIDRRDjctqSex
-      -- ^ @djctqSex@
-    | CRIDRRDjctqSexualContent
-      -- ^ @djctqSexualContent@
-    | CRIDRRDjctqViolence
-      -- ^ @djctqViolence@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingItemDjctqRatingReasons
-
-instance FromText ContentRatingItemDjctqRatingReasons where
-    fromText = \case
-        "djctqCriminalActs" -> Just CRIDRRDjctqCriminalActs
-        "djctqDrugs" -> Just CRIDRRDjctqDrugs
-        "djctqExplicitSex" -> Just CRIDRRDjctqExplicitSex
-        "djctqExtremeViolence" -> Just CRIDRRDjctqExtremeViolence
-        "djctqIllegalDrugs" -> Just CRIDRRDjctqIllegalDrugs
-        "djctqImpactingContent" -> Just CRIDRRDjctqImpactingContent
-        "djctqInappropriateLanguage" -> Just CRIDRRDjctqInappropriateLanguage
-        "djctqLegalDrugs" -> Just CRIDRRDjctqLegalDrugs
-        "djctqNudity" -> Just CRIDRRDjctqNudity
-        "djctqSex" -> Just CRIDRRDjctqSex
-        "djctqSexualContent" -> Just CRIDRRDjctqSexualContent
-        "djctqViolence" -> Just CRIDRRDjctqViolence
-        _ -> Nothing
-
-instance ToText ContentRatingItemDjctqRatingReasons where
-    toText = \case
-        CRIDRRDjctqCriminalActs -> "djctqCriminalActs"
-        CRIDRRDjctqDrugs -> "djctqDrugs"
-        CRIDRRDjctqExplicitSex -> "djctqExplicitSex"
-        CRIDRRDjctqExtremeViolence -> "djctqExtremeViolence"
-        CRIDRRDjctqIllegalDrugs -> "djctqIllegalDrugs"
-        CRIDRRDjctqImpactingContent -> "djctqImpactingContent"
-        CRIDRRDjctqInappropriateLanguage -> "djctqInappropriateLanguage"
-        CRIDRRDjctqLegalDrugs -> "djctqLegalDrugs"
-        CRIDRRDjctqNudity -> "djctqNudity"
-        CRIDRRDjctqSex -> "djctqSex"
-        CRIDRRDjctqSexualContent -> "djctqSexualContent"
-        CRIDRRDjctqViolence -> "djctqViolence"
-
-instance FromJSON ContentRatingItemDjctqRatingReasons where
-    parseJSON = parseJSONText "ContentRatingItemDjctqRatingReasons"
-
-instance ToJSON ContentRatingItemDjctqRatingReasons where
-    toJSON = toJSONText
-
--- | The video\'s rating from the Kenya Film Classification Board.
-data ContentRatingKfcbRating
-    = CRKRKfcb16plus
-      -- ^ @kfcb16plus@
-    | CRKRKfcbG
-      -- ^ @kfcbG@
-    | CRKRKfcbPg
-      -- ^ @kfcbPg@
-    | CRKRKfcbR
-      -- ^ @kfcbR@
-    | CRKRKfcbUnrated
-      -- ^ @kfcbUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingKfcbRating
-
-instance FromText ContentRatingKfcbRating where
-    fromText = \case
-        "kfcb16plus" -> Just CRKRKfcb16plus
-        "kfcbG" -> Just CRKRKfcbG
-        "kfcbPg" -> Just CRKRKfcbPg
-        "kfcbR" -> Just CRKRKfcbR
-        "kfcbUnrated" -> Just CRKRKfcbUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingKfcbRating where
-    toText = \case
-        CRKRKfcb16plus -> "kfcb16plus"
-        CRKRKfcbG -> "kfcbG"
-        CRKRKfcbPg -> "kfcbPg"
-        CRKRKfcbR -> "kfcbR"
-        CRKRKfcbUnrated -> "kfcbUnrated"
-
-instance FromJSON ContentRatingKfcbRating where
-    parseJSON = parseJSONText "ContentRatingKfcbRating"
-
-instance ToJSON ContentRatingKfcbRating where
-    toJSON = toJSONText
-
--- | voor de Classificatie van Audiovisuele Media (Netherlands).
-data ContentRatingKijkwijzerRating
-    = CRKRKIJKWIJZER12
-      -- ^ @kijkwijzer12@
-    | CRKRKIJKWIJZER16
-      -- ^ @kijkwijzer16@
-    | CRKRKIJKWIJZER18
-      -- ^ @kijkwijzer18@
-    | CRKRKIJKWIJZER6
-      -- ^ @kijkwijzer6@
-    | CRKRKIJKWIJZER9
-      -- ^ @kijkwijzer9@
-    | CRKRKijkwijzerAl
-      -- ^ @kijkwijzerAl@
-    | CRKRKijkwijzerUnrated
-      -- ^ @kijkwijzerUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingKijkwijzerRating
-
-instance FromText ContentRatingKijkwijzerRating where
-    fromText = \case
-        "kijkwijzer12" -> Just CRKRKIJKWIJZER12
-        "kijkwijzer16" -> Just CRKRKIJKWIJZER16
-        "kijkwijzer18" -> Just CRKRKIJKWIJZER18
-        "kijkwijzer6" -> Just CRKRKIJKWIJZER6
-        "kijkwijzer9" -> Just CRKRKIJKWIJZER9
-        "kijkwijzerAl" -> Just CRKRKijkwijzerAl
-        "kijkwijzerUnrated" -> Just CRKRKijkwijzerUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingKijkwijzerRating where
-    toText = \case
-        CRKRKIJKWIJZER12 -> "kijkwijzer12"
-        CRKRKIJKWIJZER16 -> "kijkwijzer16"
-        CRKRKIJKWIJZER18 -> "kijkwijzer18"
-        CRKRKIJKWIJZER6 -> "kijkwijzer6"
-        CRKRKIJKWIJZER9 -> "kijkwijzer9"
-        CRKRKijkwijzerAl -> "kijkwijzerAl"
-        CRKRKijkwijzerUnrated -> "kijkwijzerUnrated"
-
-instance FromJSON ContentRatingKijkwijzerRating where
-    parseJSON = parseJSONText "ContentRatingKijkwijzerRating"
-
-instance ToJSON ContentRatingKijkwijzerRating where
-    toJSON = toJSONText
-
--- | The video\'s Korea Media Rating Board (영상물등급위원회) rating. The
--- KMRB rates videos in South Korea.
-data ContentRatingKmrbRating
-    = CRKRKmrb12plus
-      -- ^ @kmrb12plus@
-    | CRKRKmrb15plus
-      -- ^ @kmrb15plus@
-    | CRKRKmrbAll
-      -- ^ @kmrbAll@
-    | CRKRKmrbR
-      -- ^ @kmrbR@
-    | CRKRKmrbTeenr
-      -- ^ @kmrbTeenr@
-    | CRKRKmrbUnrated
-      -- ^ @kmrbUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingKmrbRating
-
-instance FromText ContentRatingKmrbRating where
-    fromText = \case
-        "kmrb12plus" -> Just CRKRKmrb12plus
-        "kmrb15plus" -> Just CRKRKmrb15plus
-        "kmrbAll" -> Just CRKRKmrbAll
-        "kmrbR" -> Just CRKRKmrbR
-        "kmrbTeenr" -> Just CRKRKmrbTeenr
-        "kmrbUnrated" -> Just CRKRKmrbUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingKmrbRating where
-    toText = \case
-        CRKRKmrb12plus -> "kmrb12plus"
-        CRKRKmrb15plus -> "kmrb15plus"
-        CRKRKmrbAll -> "kmrbAll"
-        CRKRKmrbR -> "kmrbR"
-        CRKRKmrbTeenr -> "kmrbTeenr"
-        CRKRKmrbUnrated -> "kmrbUnrated"
-
-instance FromJSON ContentRatingKmrbRating where
-    parseJSON = parseJSONText "ContentRatingKmrbRating"
-
-instance ToJSON ContentRatingKmrbRating where
-    toJSON = toJSONText
-
--- | The video\'s rating from Indonesia\'s Lembaga Sensor Film.
-data ContentRatingLsfRating
-    = CRLRLSF13
-      -- ^ @lsf13@
-    | CRLRLSF17
-      -- ^ @lsf17@
-    | CRLRLSF21
-      -- ^ @lsf21@
-    | CRLRLsfA
-      -- ^ @lsfA@
-    | CRLRLsfBo
-      -- ^ @lsfBo@
-    | CRLRLsfD
-      -- ^ @lsfD@
-    | CRLRLsfR
-      -- ^ @lsfR@
-    | CRLRLsfSu
-      -- ^ @lsfSu@
-    | CRLRLsfUnrated
-      -- ^ @lsfUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingLsfRating
-
-instance FromText ContentRatingLsfRating where
-    fromText = \case
-        "lsf13" -> Just CRLRLSF13
-        "lsf17" -> Just CRLRLSF17
-        "lsf21" -> Just CRLRLSF21
-        "lsfA" -> Just CRLRLsfA
-        "lsfBo" -> Just CRLRLsfBo
-        "lsfD" -> Just CRLRLsfD
-        "lsfR" -> Just CRLRLsfR
-        "lsfSu" -> Just CRLRLsfSu
-        "lsfUnrated" -> Just CRLRLsfUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingLsfRating where
-    toText = \case
-        CRLRLSF13 -> "lsf13"
-        CRLRLSF17 -> "lsf17"
-        CRLRLSF21 -> "lsf21"
-        CRLRLsfA -> "lsfA"
-        CRLRLsfBo -> "lsfBo"
-        CRLRLsfD -> "lsfD"
-        CRLRLsfR -> "lsfR"
-        CRLRLsfSu -> "lsfSu"
-        CRLRLsfUnrated -> "lsfUnrated"
-
-instance FromJSON ContentRatingLsfRating where
-    parseJSON = parseJSONText "ContentRatingLsfRating"
-
-instance ToJSON ContentRatingLsfRating where
-    toJSON = toJSONText
-
--- | The video\'s rating from Malta\'s Film Age-Classification Board.
-data ContentRatingMccaaRating
-    = CRMRMCCAA12
-      -- ^ @mccaa12@
-    | CRMRMccaa12a
-      -- ^ @mccaa12a@
-    | CRMRMCCAA14
-      -- ^ @mccaa14@
-    | CRMRMCCAA15
-      -- ^ @mccaa15@
-    | CRMRMCCAA16
-      -- ^ @mccaa16@
-    | CRMRMCCAA18
-      -- ^ @mccaa18@
-    | CRMRMccaaPg
-      -- ^ @mccaaPg@
-    | CRMRMccaaU
-      -- ^ @mccaaU@
-    | CRMRMccaaUnrated
-      -- ^ @mccaaUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingMccaaRating
-
-instance FromText ContentRatingMccaaRating where
-    fromText = \case
-        "mccaa12" -> Just CRMRMCCAA12
-        "mccaa12a" -> Just CRMRMccaa12a
-        "mccaa14" -> Just CRMRMCCAA14
-        "mccaa15" -> Just CRMRMCCAA15
-        "mccaa16" -> Just CRMRMCCAA16
-        "mccaa18" -> Just CRMRMCCAA18
-        "mccaaPg" -> Just CRMRMccaaPg
-        "mccaaU" -> Just CRMRMccaaU
-        "mccaaUnrated" -> Just CRMRMccaaUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingMccaaRating where
-    toText = \case
-        CRMRMCCAA12 -> "mccaa12"
-        CRMRMccaa12a -> "mccaa12a"
-        CRMRMCCAA14 -> "mccaa14"
-        CRMRMCCAA15 -> "mccaa15"
-        CRMRMCCAA16 -> "mccaa16"
-        CRMRMCCAA18 -> "mccaa18"
-        CRMRMccaaPg -> "mccaaPg"
-        CRMRMccaaU -> "mccaaU"
-        CRMRMccaaUnrated -> "mccaaUnrated"
-
-instance FromJSON ContentRatingMccaaRating where
-    parseJSON = parseJSONText "ContentRatingMccaaRating"
-
-instance ToJSON ContentRatingMccaaRating where
-    toJSON = toJSONText
-
--- | The video\'s rating from the Danish Film Institute\'s (Det Danske
--- Filminstitut) Media Council for Children and Young People.
-data ContentRatingMccypRating
-    = CRMRMCCYP11
-      -- ^ @mccyp11@
-    | CRMRMCCYP15
-      -- ^ @mccyp15@
-    | CRMRMCCYP7
-      -- ^ @mccyp7@
-    | CRMRMccypA
-      -- ^ @mccypA@
-    | CRMRMccypUnrated
-      -- ^ @mccypUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingMccypRating
-
-instance FromText ContentRatingMccypRating where
-    fromText = \case
-        "mccyp11" -> Just CRMRMCCYP11
-        "mccyp15" -> Just CRMRMCCYP15
-        "mccyp7" -> Just CRMRMCCYP7
-        "mccypA" -> Just CRMRMccypA
-        "mccypUnrated" -> Just CRMRMccypUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingMccypRating where
-    toText = \case
-        CRMRMCCYP11 -> "mccyp11"
-        CRMRMCCYP15 -> "mccyp15"
-        CRMRMCCYP7 -> "mccyp7"
-        CRMRMccypA -> "mccypA"
-        CRMRMccypUnrated -> "mccypUnrated"
-
-instance FromJSON ContentRatingMccypRating where
-    parseJSON = parseJSONText "ContentRatingMccypRating"
-
-instance ToJSON ContentRatingMccypRating where
-    toJSON = toJSONText
-
--- | The video\'s rating from Singapore\'s Media Development Authority (MDA)
--- and, specifically, it\'s Board of Film Censors (BFC).
-data ContentRatingMdaRating
-    = CRMRMdaG
-      -- ^ @mdaG@
-    | CRMRMDAM18
-      -- ^ @mdaM18@
-    | CRMRMDANC16
-      -- ^ @mdaNc16@
-    | CRMRMdaPg
-      -- ^ @mdaPg@
-    | CRMRMDAPG13
-      -- ^ @mdaPg13@
-    | CRMRMDAR21
-      -- ^ @mdaR21@
-    | CRMRMdaUnrated
-      -- ^ @mdaUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingMdaRating
-
-instance FromText ContentRatingMdaRating where
-    fromText = \case
-        "mdaG" -> Just CRMRMdaG
-        "mdaM18" -> Just CRMRMDAM18
-        "mdaNc16" -> Just CRMRMDANC16
-        "mdaPg" -> Just CRMRMdaPg
-        "mdaPg13" -> Just CRMRMDAPG13
-        "mdaR21" -> Just CRMRMDAR21
-        "mdaUnrated" -> Just CRMRMdaUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingMdaRating where
-    toText = \case
-        CRMRMdaG -> "mdaG"
-        CRMRMDAM18 -> "mdaM18"
-        CRMRMDANC16 -> "mdaNc16"
-        CRMRMdaPg -> "mdaPg"
-        CRMRMDAPG13 -> "mdaPg13"
-        CRMRMDAR21 -> "mdaR21"
-        CRMRMdaUnrated -> "mdaUnrated"
-
-instance FromJSON ContentRatingMdaRating where
-    parseJSON = parseJSONText "ContentRatingMdaRating"
-
-instance ToJSON ContentRatingMdaRating where
-    toJSON = toJSONText
-
--- | The video\'s rating from Medietilsynet, the Norwegian Media Authority.
-data ContentRatingMedietilsynetRating
-    = CRMRMEDIETILSYNET11
-      -- ^ @medietilsynet11@
-    | CRMRMEDIETILSYNET12
-      -- ^ @medietilsynet12@
-    | CRMRMEDIETILSYNET15
-      -- ^ @medietilsynet15@
-    | CRMRMEDIETILSYNET18
-      -- ^ @medietilsynet18@
-    | CRMRMEDIETILSYNET6
-      -- ^ @medietilsynet6@
-    | CRMRMEDIETILSYNET7
-      -- ^ @medietilsynet7@
-    | CRMRMEDIETILSYNET9
-      -- ^ @medietilsynet9@
-    | CRMRMedietilsynetA
-      -- ^ @medietilsynetA@
-    | CRMRMedietilsynetUnrated
-      -- ^ @medietilsynetUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingMedietilsynetRating
-
-instance FromText ContentRatingMedietilsynetRating where
-    fromText = \case
-        "medietilsynet11" -> Just CRMRMEDIETILSYNET11
-        "medietilsynet12" -> Just CRMRMEDIETILSYNET12
-        "medietilsynet15" -> Just CRMRMEDIETILSYNET15
-        "medietilsynet18" -> Just CRMRMEDIETILSYNET18
-        "medietilsynet6" -> Just CRMRMEDIETILSYNET6
-        "medietilsynet7" -> Just CRMRMEDIETILSYNET7
-        "medietilsynet9" -> Just CRMRMEDIETILSYNET9
-        "medietilsynetA" -> Just CRMRMedietilsynetA
-        "medietilsynetUnrated" -> Just CRMRMedietilsynetUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingMedietilsynetRating where
-    toText = \case
-        CRMRMEDIETILSYNET11 -> "medietilsynet11"
-        CRMRMEDIETILSYNET12 -> "medietilsynet12"
-        CRMRMEDIETILSYNET15 -> "medietilsynet15"
-        CRMRMEDIETILSYNET18 -> "medietilsynet18"
-        CRMRMEDIETILSYNET6 -> "medietilsynet6"
-        CRMRMEDIETILSYNET7 -> "medietilsynet7"
-        CRMRMEDIETILSYNET9 -> "medietilsynet9"
-        CRMRMedietilsynetA -> "medietilsynetA"
-        CRMRMedietilsynetUnrated -> "medietilsynetUnrated"
-
-instance FromJSON ContentRatingMedietilsynetRating where
-    parseJSON = parseJSONText "ContentRatingMedietilsynetRating"
-
-instance ToJSON ContentRatingMedietilsynetRating where
-    toJSON = toJSONText
-
--- | The video\'s rating from Finland\'s Kansallinen Audiovisuaalinen
--- Instituutti (National Audiovisual Institute).
-data ContentRatingMekuRating
-    = CRMRMEKU12
-      -- ^ @meku12@
-    | CRMRMEKU16
-      -- ^ @meku16@
-    | CRMRMEKU18
-      -- ^ @meku18@
-    | CRMRMEKU7
-      -- ^ @meku7@
-    | CRMRMekuS
-      -- ^ @mekuS@
-    | CRMRMekuUnrated
-      -- ^ @mekuUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingMekuRating
-
-instance FromText ContentRatingMekuRating where
-    fromText = \case
-        "meku12" -> Just CRMRMEKU12
-        "meku16" -> Just CRMRMEKU16
-        "meku18" -> Just CRMRMEKU18
-        "meku7" -> Just CRMRMEKU7
-        "mekuS" -> Just CRMRMekuS
-        "mekuUnrated" -> Just CRMRMekuUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingMekuRating where
-    toText = \case
-        CRMRMEKU12 -> "meku12"
-        CRMRMEKU16 -> "meku16"
-        CRMRMEKU18 -> "meku18"
-        CRMRMEKU7 -> "meku7"
-        CRMRMekuS -> "mekuS"
-        CRMRMekuUnrated -> "mekuUnrated"
-
-instance FromJSON ContentRatingMekuRating where
-    parseJSON = parseJSONText "ContentRatingMekuRating"
-
-instance ToJSON ContentRatingMekuRating where
-    toJSON = toJSONText
-
--- | The video\'s rating from the Ministero dei Beni e delle Attività
--- Culturali e del Turismo (Italy).
-data ContentRatingMibacRating
-    = CRMRMibacT
-      -- ^ @mibacT@
-    | CRMRMibacUnrated
-      -- ^ @mibacUnrated@
-    | CRMRMibacVap
-      -- ^ @mibacVap@
-    | CRMRMIBACVM12
-      -- ^ @mibacVm12@
-    | CRMRMIBACVM14
-      -- ^ @mibacVm14@
-    | CRMRMIBACVM18
-      -- ^ @mibacVm18@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingMibacRating
-
-instance FromText ContentRatingMibacRating where
-    fromText = \case
-        "mibacT" -> Just CRMRMibacT
-        "mibacUnrated" -> Just CRMRMibacUnrated
-        "mibacVap" -> Just CRMRMibacVap
-        "mibacVm12" -> Just CRMRMIBACVM12
-        "mibacVm14" -> Just CRMRMIBACVM14
-        "mibacVm18" -> Just CRMRMIBACVM18
-        _ -> Nothing
-
-instance ToText ContentRatingMibacRating where
-    toText = \case
-        CRMRMibacT -> "mibacT"
-        CRMRMibacUnrated -> "mibacUnrated"
-        CRMRMibacVap -> "mibacVap"
-        CRMRMIBACVM12 -> "mibacVm12"
-        CRMRMIBACVM14 -> "mibacVm14"
-        CRMRMIBACVM18 -> "mibacVm18"
-
-instance FromJSON ContentRatingMibacRating where
-    parseJSON = parseJSONText "ContentRatingMibacRating"
-
-instance ToJSON ContentRatingMibacRating where
-    toJSON = toJSONText
-
--- | The video\'s Ministerio de Cultura (Colombia) rating.
-data ContentRatingMocRating
-    = CRMRMOC12
-      -- ^ @moc12@
-    | CRMRMOC15
-      -- ^ @moc15@
-    | CRMRMOC18
-      -- ^ @moc18@
-    | CRMRMOC7
-      -- ^ @moc7@
-    | CRMRMocBanned
-      -- ^ @mocBanned@
-    | CRMRMocE
-      -- ^ @mocE@
-    | CRMRMocT
-      -- ^ @mocT@
-    | CRMRMocUnrated
-      -- ^ @mocUnrated@
-    | CRMRMocX
-      -- ^ @mocX@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingMocRating
-
-instance FromText ContentRatingMocRating where
-    fromText = \case
-        "moc12" -> Just CRMRMOC12
-        "moc15" -> Just CRMRMOC15
-        "moc18" -> Just CRMRMOC18
-        "moc7" -> Just CRMRMOC7
-        "mocBanned" -> Just CRMRMocBanned
-        "mocE" -> Just CRMRMocE
-        "mocT" -> Just CRMRMocT
-        "mocUnrated" -> Just CRMRMocUnrated
-        "mocX" -> Just CRMRMocX
-        _ -> Nothing
-
-instance ToText ContentRatingMocRating where
-    toText = \case
-        CRMRMOC12 -> "moc12"
-        CRMRMOC15 -> "moc15"
-        CRMRMOC18 -> "moc18"
-        CRMRMOC7 -> "moc7"
-        CRMRMocBanned -> "mocBanned"
-        CRMRMocE -> "mocE"
-        CRMRMocT -> "mocT"
-        CRMRMocUnrated -> "mocUnrated"
-        CRMRMocX -> "mocX"
-
-instance FromJSON ContentRatingMocRating where
-    parseJSON = parseJSONText "ContentRatingMocRating"
-
-instance ToJSON ContentRatingMocRating where
-    toJSON = toJSONText
-
--- | The video\'s rating from Taiwan\'s Ministry of Culture (文化部).
-data ContentRatingMoctwRating
-    = CRMRMoctwG
-      -- ^ @moctwG@
-    | CRMRMoctwP
-      -- ^ @moctwP@
-    | CRMRMoctwPg
-      -- ^ @moctwPg@
-    | CRMRMoctwR
-      -- ^ @moctwR@
-    | CRMRMoctwUnrated
-      -- ^ @moctwUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingMoctwRating
-
-instance FromText ContentRatingMoctwRating where
-    fromText = \case
-        "moctwG" -> Just CRMRMoctwG
-        "moctwP" -> Just CRMRMoctwP
-        "moctwPg" -> Just CRMRMoctwPg
-        "moctwR" -> Just CRMRMoctwR
-        "moctwUnrated" -> Just CRMRMoctwUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingMoctwRating where
-    toText = \case
-        CRMRMoctwG -> "moctwG"
-        CRMRMoctwP -> "moctwP"
-        CRMRMoctwPg -> "moctwPg"
-        CRMRMoctwR -> "moctwR"
-        CRMRMoctwUnrated -> "moctwUnrated"
-
-instance FromJSON ContentRatingMoctwRating where
-    parseJSON = parseJSONText "ContentRatingMoctwRating"
-
-instance ToJSON ContentRatingMoctwRating where
-    toJSON = toJSONText
-
--- | The video\'s Motion Picture Association of America (MPAA) rating.
-data ContentRatingMpaaRating
-    = CRMRMpaaG
-      -- ^ @mpaaG@
-    | CRMRMPAANC17
-      -- ^ @mpaaNc17@
-    | CRMRMpaaPg
-      -- ^ @mpaaPg@
-    | CRMRMPAAPG13
-      -- ^ @mpaaPg13@
-    | CRMRMpaaR
-      -- ^ @mpaaR@
-    | CRMRMpaaUnrated
-      -- ^ @mpaaUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingMpaaRating
-
-instance FromText ContentRatingMpaaRating where
-    fromText = \case
-        "mpaaG" -> Just CRMRMpaaG
-        "mpaaNc17" -> Just CRMRMPAANC17
-        "mpaaPg" -> Just CRMRMpaaPg
-        "mpaaPg13" -> Just CRMRMPAAPG13
-        "mpaaR" -> Just CRMRMpaaR
-        "mpaaUnrated" -> Just CRMRMpaaUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingMpaaRating where
-    toText = \case
-        CRMRMpaaG -> "mpaaG"
-        CRMRMPAANC17 -> "mpaaNc17"
-        CRMRMpaaPg -> "mpaaPg"
-        CRMRMPAAPG13 -> "mpaaPg13"
-        CRMRMpaaR -> "mpaaR"
-        CRMRMpaaUnrated -> "mpaaUnrated"
-
-instance FromJSON ContentRatingMpaaRating where
-    parseJSON = parseJSONText "ContentRatingMpaaRating"
-
-instance ToJSON ContentRatingMpaaRating where
-    toJSON = toJSONText
-
--- | The video\'s rating from the Movie and Television Review and
--- Classification Board (Philippines).
-data ContentRatingMtrcbRating
-    = CRMRMtrcbG
-      -- ^ @mtrcbG@
-    | CRMRMtrcbPg
-      -- ^ @mtrcbPg@
-    | CRMRMTRCBR13
-      -- ^ @mtrcbR13@
-    | CRMRMTRCBR16
-      -- ^ @mtrcbR16@
-    | CRMRMTRCBR18
-      -- ^ @mtrcbR18@
-    | CRMRMtrcbUnrated
-      -- ^ @mtrcbUnrated@
-    | CRMRMtrcbX
-      -- ^ @mtrcbX@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingMtrcbRating
-
-instance FromText ContentRatingMtrcbRating where
-    fromText = \case
-        "mtrcbG" -> Just CRMRMtrcbG
-        "mtrcbPg" -> Just CRMRMtrcbPg
-        "mtrcbR13" -> Just CRMRMTRCBR13
-        "mtrcbR16" -> Just CRMRMTRCBR16
-        "mtrcbR18" -> Just CRMRMTRCBR18
-        "mtrcbUnrated" -> Just CRMRMtrcbUnrated
-        "mtrcbX" -> Just CRMRMtrcbX
-        _ -> Nothing
-
-instance ToText ContentRatingMtrcbRating where
-    toText = \case
-        CRMRMtrcbG -> "mtrcbG"
-        CRMRMtrcbPg -> "mtrcbPg"
-        CRMRMTRCBR13 -> "mtrcbR13"
-        CRMRMTRCBR16 -> "mtrcbR16"
-        CRMRMTRCBR18 -> "mtrcbR18"
-        CRMRMtrcbUnrated -> "mtrcbUnrated"
-        CRMRMtrcbX -> "mtrcbX"
-
-instance FromJSON ContentRatingMtrcbRating where
-    parseJSON = parseJSONText "ContentRatingMtrcbRating"
-
-instance ToJSON ContentRatingMtrcbRating where
-    toJSON = toJSONText
-
--- | The video\'s rating from the Maldives National Bureau of Classification.
-data ContentRatingNbcRating
-    = CRNRNbc12plus
-      -- ^ @nbc12plus@
-    | CRNRNbc15plus
-      -- ^ @nbc15plus@
-    | CRNRNbc18plus
-      -- ^ @nbc18plus@
-    | CRNRNbc18plusr
-      -- ^ @nbc18plusr@
-    | CRNRNbcG
-      -- ^ @nbcG@
-    | CRNRNbcPg
-      -- ^ @nbcPg@
-    | CRNRNbcPu
-      -- ^ @nbcPu@
-    | CRNRNbcUnrated
-      -- ^ @nbcUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingNbcRating
-
-instance FromText ContentRatingNbcRating where
-    fromText = \case
-        "nbc12plus" -> Just CRNRNbc12plus
-        "nbc15plus" -> Just CRNRNbc15plus
-        "nbc18plus" -> Just CRNRNbc18plus
-        "nbc18plusr" -> Just CRNRNbc18plusr
-        "nbcG" -> Just CRNRNbcG
-        "nbcPg" -> Just CRNRNbcPg
-        "nbcPu" -> Just CRNRNbcPu
-        "nbcUnrated" -> Just CRNRNbcUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingNbcRating where
-    toText = \case
-        CRNRNbc12plus -> "nbc12plus"
-        CRNRNbc15plus -> "nbc15plus"
-        CRNRNbc18plus -> "nbc18plus"
-        CRNRNbc18plusr -> "nbc18plusr"
-        CRNRNbcG -> "nbcG"
-        CRNRNbcPg -> "nbcPg"
-        CRNRNbcPu -> "nbcPu"
-        CRNRNbcUnrated -> "nbcUnrated"
-
-instance FromJSON ContentRatingNbcRating where
-    parseJSON = parseJSONText "ContentRatingNbcRating"
-
-instance ToJSON ContentRatingNbcRating where
-    toJSON = toJSONText
-
--- | The video\'s rating in Poland.
-data ContentRatingNbcplRating
-    = CRNRNbcpl18plus
-      -- ^ @nbcpl18plus@
-    | CRNRNbcplI
-      -- ^ @nbcplI@
-    | CRNRNbcplIi
-      -- ^ @nbcplIi@
-    | CRNRNbcplIii
-      -- ^ @nbcplIii@
-    | CRNRNbcplIv
-      -- ^ @nbcplIv@
-    | CRNRNbcplUnrated
-      -- ^ @nbcplUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingNbcplRating
-
-instance FromText ContentRatingNbcplRating where
-    fromText = \case
-        "nbcpl18plus" -> Just CRNRNbcpl18plus
-        "nbcplI" -> Just CRNRNbcplI
-        "nbcplIi" -> Just CRNRNbcplIi
-        "nbcplIii" -> Just CRNRNbcplIii
-        "nbcplIv" -> Just CRNRNbcplIv
-        "nbcplUnrated" -> Just CRNRNbcplUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingNbcplRating where
-    toText = \case
-        CRNRNbcpl18plus -> "nbcpl18plus"
-        CRNRNbcplI -> "nbcplI"
-        CRNRNbcplIi -> "nbcplIi"
-        CRNRNbcplIii -> "nbcplIii"
-        CRNRNbcplIv -> "nbcplIv"
-        CRNRNbcplUnrated -> "nbcplUnrated"
-
-instance FromJSON ContentRatingNbcplRating where
-    parseJSON = parseJSONText "ContentRatingNbcplRating"
-
-instance ToJSON ContentRatingNbcplRating where
-    toJSON = toJSONText
-
--- | The video\'s rating from the Bulgarian National Film Center.
-data ContentRatingNfrcRating
-    = CRNRNfrcA
-      -- ^ @nfrcA@
-    | CRNRNfrcB
-      -- ^ @nfrcB@
-    | CRNRNfrcC
-      -- ^ @nfrcC@
-    | CRNRNfrcD
-      -- ^ @nfrcD@
-    | CRNRNfrcUnrated
-      -- ^ @nfrcUnrated@
-    | CRNRNfrcX
-      -- ^ @nfrcX@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingNfrcRating
-
-instance FromText ContentRatingNfrcRating where
-    fromText = \case
-        "nfrcA" -> Just CRNRNfrcA
-        "nfrcB" -> Just CRNRNfrcB
-        "nfrcC" -> Just CRNRNfrcC
-        "nfrcD" -> Just CRNRNfrcD
-        "nfrcUnrated" -> Just CRNRNfrcUnrated
-        "nfrcX" -> Just CRNRNfrcX
-        _ -> Nothing
-
-instance ToText ContentRatingNfrcRating where
-    toText = \case
-        CRNRNfrcA -> "nfrcA"
-        CRNRNfrcB -> "nfrcB"
-        CRNRNfrcC -> "nfrcC"
-        CRNRNfrcD -> "nfrcD"
-        CRNRNfrcUnrated -> "nfrcUnrated"
-        CRNRNfrcX -> "nfrcX"
-
-instance FromJSON ContentRatingNfrcRating where
-    parseJSON = parseJSONText "ContentRatingNfrcRating"
-
-instance ToJSON ContentRatingNfrcRating where
-    toJSON = toJSONText
-
--- | The video\'s rating from Nigeria\'s National Film and Video Censors
--- Board.
-data ContentRatingNfvcbRating
-    = CRNRNFVCB12
-      -- ^ @nfvcb12@
-    | CRNRNfvcb12a
-      -- ^ @nfvcb12a@
-    | CRNRNFVCB15
-      -- ^ @nfvcb15@
-    | CRNRNFVCB18
-      -- ^ @nfvcb18@
-    | CRNRNfvcbG
-      -- ^ @nfvcbG@
-    | CRNRNfvcbPg
-      -- ^ @nfvcbPg@
-    | CRNRNfvcbRe
-      -- ^ @nfvcbRe@
-    | CRNRNfvcbUnrated
-      -- ^ @nfvcbUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingNfvcbRating
-
-instance FromText ContentRatingNfvcbRating where
-    fromText = \case
-        "nfvcb12" -> Just CRNRNFVCB12
-        "nfvcb12a" -> Just CRNRNfvcb12a
-        "nfvcb15" -> Just CRNRNFVCB15
-        "nfvcb18" -> Just CRNRNFVCB18
-        "nfvcbG" -> Just CRNRNfvcbG
-        "nfvcbPg" -> Just CRNRNfvcbPg
-        "nfvcbRe" -> Just CRNRNfvcbRe
-        "nfvcbUnrated" -> Just CRNRNfvcbUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingNfvcbRating where
-    toText = \case
-        CRNRNFVCB12 -> "nfvcb12"
-        CRNRNfvcb12a -> "nfvcb12a"
-        CRNRNFVCB15 -> "nfvcb15"
-        CRNRNFVCB18 -> "nfvcb18"
-        CRNRNfvcbG -> "nfvcbG"
-        CRNRNfvcbPg -> "nfvcbPg"
-        CRNRNfvcbRe -> "nfvcbRe"
-        CRNRNfvcbUnrated -> "nfvcbUnrated"
-
-instance FromJSON ContentRatingNfvcbRating where
-    parseJSON = parseJSONText "ContentRatingNfvcbRating"
-
-instance ToJSON ContentRatingNfvcbRating where
+instance ToJSON CommentsSetModerationStatus'ModerationStatus where
     toJSON = toJSONText
 
 -- | The video\'s rating from the Nacionãlais Kino centrs (National Film
 -- Centre of Latvia).
 data ContentRatingNkclvRating
-    = CRNRNkclv12plus
+    = Nkclv12plus
       -- ^ @nkclv12plus@
-    | CRNRNkclv18plus
+    | Nkclv18plus
       -- ^ @nkclv18plus@
-    | CRNRNkclv7plus
+    | Nkclv7plus
       -- ^ @nkclv7plus@
-    | CRNRNkclvU
+    | NkclvU
       -- ^ @nkclvU@
-    | CRNRNkclvUnrated
+    | NkclvUnrated
       -- ^ @nkclvUnrated@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -3090,20 +2530,20 @@ instance Hashable ContentRatingNkclvRating
 
 instance FromText ContentRatingNkclvRating where
     fromText = \case
-        "nkclv12plus" -> Just CRNRNkclv12plus
-        "nkclv18plus" -> Just CRNRNkclv18plus
-        "nkclv7plus" -> Just CRNRNkclv7plus
-        "nkclvU" -> Just CRNRNkclvU
-        "nkclvUnrated" -> Just CRNRNkclvUnrated
+        "nkclv12plus" -> Just Nkclv12plus
+        "nkclv18plus" -> Just Nkclv18plus
+        "nkclv7plus" -> Just Nkclv7plus
+        "nkclvU" -> Just NkclvU
+        "nkclvUnrated" -> Just NkclvUnrated
         _ -> Nothing
 
 instance ToText ContentRatingNkclvRating where
     toText = \case
-        CRNRNkclv12plus -> "nkclv12plus"
-        CRNRNkclv18plus -> "nkclv18plus"
-        CRNRNkclv7plus -> "nkclv7plus"
-        CRNRNkclvU -> "nkclvU"
-        CRNRNkclvUnrated -> "nkclvUnrated"
+        Nkclv12plus -> "nkclv12plus"
+        Nkclv18plus -> "nkclv18plus"
+        Nkclv7plus -> "nkclv7plus"
+        NkclvU -> "nkclvU"
+        NkclvUnrated -> "nkclvUnrated"
 
 instance FromJSON ContentRatingNkclvRating where
     parseJSON = parseJSONText "ContentRatingNkclvRating"
@@ -3111,77 +2551,145 @@ instance FromJSON ContentRatingNkclvRating where
 instance ToJSON ContentRatingNkclvRating where
     toJSON = toJSONText
 
--- | The video\'s Office of Film and Literature Classification (OFLC - New
--- Zealand) rating.
-data ContentRatingOflcRating
-    = CROROflcG
-      -- ^ @oflcG@
-    | CROROflcM
-      -- ^ @oflcM@
-    | CROROflcPg
-      -- ^ @oflcPg@
-    | CROROFLCR13
-      -- ^ @oflcR13@
-    | CROROFLCR15
-      -- ^ @oflcR15@
-    | CROROFLCR16
-      -- ^ @oflcR16@
-    | CROROFLCR18
-      -- ^ @oflcR18@
-    | CROROFLCRP13
-      -- ^ @oflcRp13@
-    | CROROFLCRP16
-      -- ^ @oflcRp16@
-    | CROROflcUnrated
-      -- ^ @oflcUnrated@
+-- | The video\'s Anatel (Asociación Nacional de Televisión) rating for
+-- Chilean television.
+data ContentRatingAnatelRating
+    = AnatelA
+      -- ^ @anatelA@
+    | AnatelF
+      -- ^ @anatelF@
+    | AnatelI
+      -- ^ @anatelI@
+    | ANATELI10
+      -- ^ @anatelI10@
+    | ANATELI12
+      -- ^ @anatelI12@
+    | ANATELI7
+      -- ^ @anatelI7@
+    | AnatelR
+      -- ^ @anatelR@
+    | AnatelUnrated
+      -- ^ @anatelUnrated@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable ContentRatingOflcRating
+instance Hashable ContentRatingAnatelRating
 
-instance FromText ContentRatingOflcRating where
+instance FromText ContentRatingAnatelRating where
     fromText = \case
-        "oflcG" -> Just CROROflcG
-        "oflcM" -> Just CROROflcM
-        "oflcPg" -> Just CROROflcPg
-        "oflcR13" -> Just CROROFLCR13
-        "oflcR15" -> Just CROROFLCR15
-        "oflcR16" -> Just CROROFLCR16
-        "oflcR18" -> Just CROROFLCR18
-        "oflcRp13" -> Just CROROFLCRP13
-        "oflcRp16" -> Just CROROFLCRP16
-        "oflcUnrated" -> Just CROROflcUnrated
+        "anatelA" -> Just AnatelA
+        "anatelF" -> Just AnatelF
+        "anatelI" -> Just AnatelI
+        "anatelI10" -> Just ANATELI10
+        "anatelI12" -> Just ANATELI12
+        "anatelI7" -> Just ANATELI7
+        "anatelR" -> Just AnatelR
+        "anatelUnrated" -> Just AnatelUnrated
         _ -> Nothing
 
-instance ToText ContentRatingOflcRating where
+instance ToText ContentRatingAnatelRating where
     toText = \case
-        CROROflcG -> "oflcG"
-        CROROflcM -> "oflcM"
-        CROROflcPg -> "oflcPg"
-        CROROFLCR13 -> "oflcR13"
-        CROROFLCR15 -> "oflcR15"
-        CROROFLCR16 -> "oflcR16"
-        CROROFLCR18 -> "oflcR18"
-        CROROFLCRP13 -> "oflcRp13"
-        CROROFLCRP16 -> "oflcRp16"
-        CROROflcUnrated -> "oflcUnrated"
+        AnatelA -> "anatelA"
+        AnatelF -> "anatelF"
+        AnatelI -> "anatelI"
+        ANATELI10 -> "anatelI10"
+        ANATELI12 -> "anatelI12"
+        ANATELI7 -> "anatelI7"
+        AnatelR -> "anatelR"
+        AnatelUnrated -> "anatelUnrated"
 
-instance FromJSON ContentRatingOflcRating where
-    parseJSON = parseJSONText "ContentRatingOflcRating"
+instance FromJSON ContentRatingAnatelRating where
+    parseJSON = parseJSONText "ContentRatingAnatelRating"
 
-instance ToJSON ContentRatingOflcRating where
+instance ToJSON ContentRatingAnatelRating where
+    toJSON = toJSONText
+
+-- | The video\'s rating in Poland.
+data ContentRatingNbcplRating
+    = Nbcpl18plus
+      -- ^ @nbcpl18plus@
+    | NbcplI
+      -- ^ @nbcplI@
+    | NbcplIi
+      -- ^ @nbcplIi@
+    | NbcplIii
+      -- ^ @nbcplIii@
+    | NbcplIv
+      -- ^ @nbcplIv@
+    | NbcplUnrated
+      -- ^ @nbcplUnrated@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingNbcplRating
+
+instance FromText ContentRatingNbcplRating where
+    fromText = \case
+        "nbcpl18plus" -> Just Nbcpl18plus
+        "nbcplI" -> Just NbcplI
+        "nbcplIi" -> Just NbcplIi
+        "nbcplIii" -> Just NbcplIii
+        "nbcplIv" -> Just NbcplIv
+        "nbcplUnrated" -> Just NbcplUnrated
+        _ -> Nothing
+
+instance ToText ContentRatingNbcplRating where
+    toText = \case
+        Nbcpl18plus -> "nbcpl18plus"
+        NbcplI -> "nbcplI"
+        NbcplIi -> "nbcplIi"
+        NbcplIii -> "nbcplIii"
+        NbcplIv -> "nbcplIv"
+        NbcplUnrated -> "nbcplUnrated"
+
+instance FromJSON ContentRatingNbcplRating where
+    parseJSON = parseJSONText "ContentRatingNbcplRating"
+
+instance ToJSON ContentRatingNbcplRating where
+    toJSON = toJSONText
+
+-- | It indicates if the resource (video or channel) has upcoming\/active
+-- live broadcast content. Or it\'s \"none\" if there is not any
+-- upcoming\/active live broadcasts.
+data SearchResultSnippetLiveBroadcastContent
+    = SRSLBCLive
+      -- ^ @live@
+    | SRSLBCNone
+      -- ^ @none@
+    | SRSLBCUpcoming
+      -- ^ @upcoming@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable SearchResultSnippetLiveBroadcastContent
+
+instance FromText SearchResultSnippetLiveBroadcastContent where
+    fromText = \case
+        "live" -> Just SRSLBCLive
+        "none" -> Just SRSLBCNone
+        "upcoming" -> Just SRSLBCUpcoming
+        _ -> Nothing
+
+instance ToText SearchResultSnippetLiveBroadcastContent where
+    toText = \case
+        SRSLBCLive -> "live"
+        SRSLBCNone -> "none"
+        SRSLBCUpcoming -> "upcoming"
+
+instance FromJSON SearchResultSnippetLiveBroadcastContent where
+    parseJSON = parseJSONText "SearchResultSnippetLiveBroadcastContent"
+
+instance ToJSON SearchResultSnippetLiveBroadcastContent where
     toJSON = toJSONText
 
 -- | The video\'s rating in Peru.
 data ContentRatingPefilmRating
-    = CRPRPEFILM14
+    = PEFILM14
       -- ^ @pefilm14@
-    | CRPRPEFILM18
+    | PEFILM18
       -- ^ @pefilm18@
-    | CRPRPefilmPg
+    | PefilmPg
       -- ^ @pefilmPg@
-    | CRPRPefilmPt
+    | PefilmPt
       -- ^ @pefilmPt@
-    | CRPRPefilmUnrated
+    | PefilmUnrated
       -- ^ @pefilmUnrated@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -3189,20 +2697,20 @@ instance Hashable ContentRatingPefilmRating
 
 instance FromText ContentRatingPefilmRating where
     fromText = \case
-        "pefilm14" -> Just CRPRPEFILM14
-        "pefilm18" -> Just CRPRPEFILM18
-        "pefilmPg" -> Just CRPRPefilmPg
-        "pefilmPt" -> Just CRPRPefilmPt
-        "pefilmUnrated" -> Just CRPRPefilmUnrated
+        "pefilm14" -> Just PEFILM14
+        "pefilm18" -> Just PEFILM18
+        "pefilmPg" -> Just PefilmPg
+        "pefilmPt" -> Just PefilmPt
+        "pefilmUnrated" -> Just PefilmUnrated
         _ -> Nothing
 
 instance ToText ContentRatingPefilmRating where
     toText = \case
-        CRPRPEFILM14 -> "pefilm14"
-        CRPRPEFILM18 -> "pefilm18"
-        CRPRPefilmPg -> "pefilmPg"
-        CRPRPefilmPt -> "pefilmPt"
-        CRPRPefilmUnrated -> "pefilmUnrated"
+        PEFILM14 -> "pefilm14"
+        PEFILM18 -> "pefilm18"
+        PefilmPg -> "pefilmPg"
+        PefilmPt -> "pefilmPt"
+        PefilmUnrated -> "pefilmUnrated"
 
 instance FromJSON ContentRatingPefilmRating where
     parseJSON = parseJSONText "ContentRatingPefilmRating"
@@ -3210,156 +2718,17 @@ instance FromJSON ContentRatingPefilmRating where
 instance ToJSON ContentRatingPefilmRating where
     toJSON = toJSONText
 
--- | The video\'s rating from the Hungarian Nemzeti Filmiroda, the Rating
--- Committee of the National Office of Film.
-data ContentRatingRcnofRating
-    = CRRRRcnofI
-      -- ^ @rcnofI@
-    | CRRRRcnofIi
-      -- ^ @rcnofIi@
-    | CRRRRcnofIii
-      -- ^ @rcnofIii@
-    | CRRRRcnofIv
-      -- ^ @rcnofIv@
-    | CRRRRcnofUnrated
-      -- ^ @rcnofUnrated@
-    | CRRRRcnofV
-      -- ^ @rcnofV@
-    | CRRRRcnofVi
-      -- ^ @rcnofVi@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingRcnofRating
-
-instance FromText ContentRatingRcnofRating where
-    fromText = \case
-        "rcnofI" -> Just CRRRRcnofI
-        "rcnofIi" -> Just CRRRRcnofIi
-        "rcnofIii" -> Just CRRRRcnofIii
-        "rcnofIv" -> Just CRRRRcnofIv
-        "rcnofUnrated" -> Just CRRRRcnofUnrated
-        "rcnofV" -> Just CRRRRcnofV
-        "rcnofVi" -> Just CRRRRcnofVi
-        _ -> Nothing
-
-instance ToText ContentRatingRcnofRating where
-    toText = \case
-        CRRRRcnofI -> "rcnofI"
-        CRRRRcnofIi -> "rcnofIi"
-        CRRRRcnofIii -> "rcnofIii"
-        CRRRRcnofIv -> "rcnofIv"
-        CRRRRcnofUnrated -> "rcnofUnrated"
-        CRRRRcnofV -> "rcnofV"
-        CRRRRcnofVi -> "rcnofVi"
-
-instance FromJSON ContentRatingRcnofRating where
-    parseJSON = parseJSONText "ContentRatingRcnofRating"
-
-instance ToJSON ContentRatingRcnofRating where
-    toJSON = toJSONText
-
--- | The video\'s rating in Venezuela.
-data ContentRatingResorteviolenciaRating
-    = CRRRResorteviolenciaA
-      -- ^ @resorteviolenciaA@
-    | CRRRResorteviolenciaB
-      -- ^ @resorteviolenciaB@
-    | CRRRResorteviolenciaC
-      -- ^ @resorteviolenciaC@
-    | CRRRResorteviolenciaD
-      -- ^ @resorteviolenciaD@
-    | CRRRResorteviolenciaE
-      -- ^ @resorteviolenciaE@
-    | CRRRResorteviolenciaUnrated
-      -- ^ @resorteviolenciaUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingResorteviolenciaRating
-
-instance FromText ContentRatingResorteviolenciaRating where
-    fromText = \case
-        "resorteviolenciaA" -> Just CRRRResorteviolenciaA
-        "resorteviolenciaB" -> Just CRRRResorteviolenciaB
-        "resorteviolenciaC" -> Just CRRRResorteviolenciaC
-        "resorteviolenciaD" -> Just CRRRResorteviolenciaD
-        "resorteviolenciaE" -> Just CRRRResorteviolenciaE
-        "resorteviolenciaUnrated" -> Just CRRRResorteviolenciaUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingResorteviolenciaRating where
-    toText = \case
-        CRRRResorteviolenciaA -> "resorteviolenciaA"
-        CRRRResorteviolenciaB -> "resorteviolenciaB"
-        CRRRResorteviolenciaC -> "resorteviolenciaC"
-        CRRRResorteviolenciaD -> "resorteviolenciaD"
-        CRRRResorteviolenciaE -> "resorteviolenciaE"
-        CRRRResorteviolenciaUnrated -> "resorteviolenciaUnrated"
-
-instance FromJSON ContentRatingResorteviolenciaRating where
-    parseJSON = parseJSONText "ContentRatingResorteviolenciaRating"
-
-instance ToJSON ContentRatingResorteviolenciaRating where
-    toJSON = toJSONText
-
--- | The video\'s General Directorate of Radio, Television and Cinematography
--- (Mexico) rating.
-data ContentRatingRtcRating
-    = CRRRRtcA
-      -- ^ @rtcA@
-    | CRRRRtcAa
-      -- ^ @rtcAa@
-    | CRRRRtcB
-      -- ^ @rtcB@
-    | CRRRRTCB15
-      -- ^ @rtcB15@
-    | CRRRRtcC
-      -- ^ @rtcC@
-    | CRRRRtcD
-      -- ^ @rtcD@
-    | CRRRRtcUnrated
-      -- ^ @rtcUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingRtcRating
-
-instance FromText ContentRatingRtcRating where
-    fromText = \case
-        "rtcA" -> Just CRRRRtcA
-        "rtcAa" -> Just CRRRRtcAa
-        "rtcB" -> Just CRRRRtcB
-        "rtcB15" -> Just CRRRRTCB15
-        "rtcC" -> Just CRRRRtcC
-        "rtcD" -> Just CRRRRtcD
-        "rtcUnrated" -> Just CRRRRtcUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingRtcRating where
-    toText = \case
-        CRRRRtcA -> "rtcA"
-        CRRRRtcAa -> "rtcAa"
-        CRRRRtcB -> "rtcB"
-        CRRRRTCB15 -> "rtcB15"
-        CRRRRtcC -> "rtcC"
-        CRRRRtcD -> "rtcD"
-        CRRRRtcUnrated -> "rtcUnrated"
-
-instance FromJSON ContentRatingRtcRating where
-    parseJSON = parseJSONText "ContentRatingRtcRating"
-
-instance ToJSON ContentRatingRtcRating where
-    toJSON = toJSONText
-
 -- | The video\'s rating from Ireland\'s Raidió Teilifís Éireann.
 data ContentRatingRteRating
-    = CRRRRteCh
+    = RteCh
       -- ^ @rteCh@
-    | CRRRRteGa
+    | RteGa
       -- ^ @rteGa@
-    | CRRRRteMa
+    | RteMa
       -- ^ @rteMa@
-    | CRRRRtePs
+    | RtePs
       -- ^ @rtePs@
-    | CRRRRteUnrated
+    | RteUnrated
       -- ^ @rteUnrated@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -3367,20 +2736,20 @@ instance Hashable ContentRatingRteRating
 
 instance FromText ContentRatingRteRating where
     fromText = \case
-        "rteCh" -> Just CRRRRteCh
-        "rteGa" -> Just CRRRRteGa
-        "rteMa" -> Just CRRRRteMa
-        "rtePs" -> Just CRRRRtePs
-        "rteUnrated" -> Just CRRRRteUnrated
+        "rteCh" -> Just RteCh
+        "rteGa" -> Just RteGa
+        "rteMa" -> Just RteMa
+        "rtePs" -> Just RtePs
+        "rteUnrated" -> Just RteUnrated
         _ -> Nothing
 
 instance ToText ContentRatingRteRating where
     toText = \case
-        CRRRRteCh -> "rteCh"
-        CRRRRteGa -> "rteGa"
-        CRRRRteMa -> "rteMa"
-        CRRRRtePs -> "rtePs"
-        CRRRRteUnrated -> "rteUnrated"
+        RteCh -> "rteCh"
+        RteGa -> "rteGa"
+        RteMa -> "rteMa"
+        RtePs -> "rtePs"
+        RteUnrated -> "rteUnrated"
 
 instance FromJSON ContentRatingRteRating where
     parseJSON = parseJSONText "ContentRatingRteRating"
@@ -3388,61 +2757,369 @@ instance FromJSON ContentRatingRteRating where
 instance ToJSON ContentRatingRteRating where
     toJSON = toJSONText
 
--- | The video\'s National Film Registry of the Russian Federation (MKRF -
--- Russia) rating.
-data ContentRatingRussiaRating
-    = CRRRRUSSIA0
-      -- ^ @russia0@
-    | CRRRRUSSIA12
-      -- ^ @russia12@
-    | CRRRRUSSIA16
-      -- ^ @russia16@
-    | CRRRRUSSIA18
-      -- ^ @russia18@
-    | CRRRRUSSIA6
-      -- ^ @russia6@
-    | CRRRRussiaUnrated
-      -- ^ @russiaUnrated@
+-- | The video\'s Freiwillige Selbstkontrolle der Filmwirtschaft (FSK -
+-- Germany) rating.
+data ContentRatingFskRating
+    = FSK0
+      -- ^ @fsk0@
+    | FSK12
+      -- ^ @fsk12@
+    | FSK16
+      -- ^ @fsk16@
+    | FSK18
+      -- ^ @fsk18@
+    | FSK6
+      -- ^ @fsk6@
+    | FskUnrated
+      -- ^ @fskUnrated@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable ContentRatingRussiaRating
+instance Hashable ContentRatingFskRating
 
-instance FromText ContentRatingRussiaRating where
+instance FromText ContentRatingFskRating where
     fromText = \case
-        "russia0" -> Just CRRRRUSSIA0
-        "russia12" -> Just CRRRRUSSIA12
-        "russia16" -> Just CRRRRUSSIA16
-        "russia18" -> Just CRRRRUSSIA18
-        "russia6" -> Just CRRRRUSSIA6
-        "russiaUnrated" -> Just CRRRRussiaUnrated
+        "fsk0" -> Just FSK0
+        "fsk12" -> Just FSK12
+        "fsk16" -> Just FSK16
+        "fsk18" -> Just FSK18
+        "fsk6" -> Just FSK6
+        "fskUnrated" -> Just FskUnrated
         _ -> Nothing
 
-instance ToText ContentRatingRussiaRating where
+instance ToText ContentRatingFskRating where
     toText = \case
-        CRRRRUSSIA0 -> "russia0"
-        CRRRRUSSIA12 -> "russia12"
-        CRRRRUSSIA16 -> "russia16"
-        CRRRRUSSIA18 -> "russia18"
-        CRRRRUSSIA6 -> "russia6"
-        CRRRRussiaUnrated -> "russiaUnrated"
+        FSK0 -> "fsk0"
+        FSK12 -> "fsk12"
+        FSK16 -> "fsk16"
+        FSK18 -> "fsk18"
+        FSK6 -> "fsk6"
+        FskUnrated -> "fskUnrated"
 
-instance FromJSON ContentRatingRussiaRating where
-    parseJSON = parseJSONText "ContentRatingRussiaRating"
+instance FromJSON ContentRatingFskRating where
+    parseJSON = parseJSONText "ContentRatingFskRating"
 
-instance ToJSON ContentRatingRussiaRating where
+instance ToJSON ContentRatingFskRating where
+    toJSON = toJSONText
+
+-- | The broadcast\'s privacy status. Note that the broadcast represents
+-- exactly one YouTube video, so the privacy settings are identical to
+-- those supported for videos. In addition, you can set this field by
+-- modifying the broadcast resource or by setting the privacyStatus field
+-- of the corresponding video resource.
+data LiveBroadcastStatusPrivacyStatus
+    = Private
+      -- ^ @private@
+    | Public
+      -- ^ @public@
+    | Unlisted
+      -- ^ @unlisted@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable LiveBroadcastStatusPrivacyStatus
+
+instance FromText LiveBroadcastStatusPrivacyStatus where
+    fromText = \case
+        "private" -> Just Private
+        "public" -> Just Public
+        "unlisted" -> Just Unlisted
+        _ -> Nothing
+
+instance ToText LiveBroadcastStatusPrivacyStatus where
+    toText = \case
+        Private -> "private"
+        Public -> "public"
+        Unlisted -> "unlisted"
+
+instance FromJSON LiveBroadcastStatusPrivacyStatus where
+    parseJSON = parseJSONText "LiveBroadcastStatusPrivacyStatus"
+
+instance ToJSON LiveBroadcastStatusPrivacyStatus where
+    toJSON = toJSONText
+
+-- | The type of call-to-action, a message to the user indicating action that
+-- can be taken.
+data ActivityContentDetailsPromotedItemCtaType
+    = ACDPICTUnspecified
+      -- ^ @unspecified@
+    | ACDPICTVisitAdvertiserSite
+      -- ^ @visitAdvertiserSite@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ActivityContentDetailsPromotedItemCtaType
+
+instance FromText ActivityContentDetailsPromotedItemCtaType where
+    fromText = \case
+        "unspecified" -> Just ACDPICTUnspecified
+        "visitAdvertiserSite" -> Just ACDPICTVisitAdvertiserSite
+        _ -> Nothing
+
+instance ToText ActivityContentDetailsPromotedItemCtaType where
+    toText = \case
+        ACDPICTUnspecified -> "unspecified"
+        ACDPICTVisitAdvertiserSite -> "visitAdvertiserSite"
+
+instance FromJSON ActivityContentDetailsPromotedItemCtaType where
+    parseJSON = parseJSONText "ActivityContentDetailsPromotedItemCtaType"
+
+instance ToJSON ActivityContentDetailsPromotedItemCtaType where
+    toJSON = toJSONText
+
+-- | The videoEmbeddable parameter lets you to restrict a search to only
+-- videos that can be embedded into a webpage. If you specify a value for
+-- this parameter, you must also set the type parameter\'s value to video.
+data SearchList'VideoEmbeddable
+    = SLVEAny
+      -- ^ @any@
+      -- Return all videos, embeddable or not.
+    | SLVETrue'
+      -- ^ @true@
+      -- Only retrieve embeddable videos.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable SearchList'VideoEmbeddable
+
+instance FromText SearchList'VideoEmbeddable where
+    fromText = \case
+        "any" -> Just SLVEAny
+        "true" -> Just SLVETrue'
+        _ -> Nothing
+
+instance ToText SearchList'VideoEmbeddable where
+    toText = \case
+        SLVEAny -> "any"
+        SLVETrue' -> "true"
+
+instance FromJSON SearchList'VideoEmbeddable where
+    parseJSON = parseJSONText "SearchList'VideoEmbeddable"
+
+instance ToJSON SearchList'VideoEmbeddable where
+    toJSON = toJSONText
+
+-- | The video\'s Office of Film and Literature Classification (OFLC - New
+-- Zealand) rating.
+data ContentRatingOflcRating
+    = OflcG
+      -- ^ @oflcG@
+    | OflcM
+      -- ^ @oflcM@
+    | OflcPg
+      -- ^ @oflcPg@
+    | OFLCR13
+      -- ^ @oflcR13@
+    | OFLCR15
+      -- ^ @oflcR15@
+    | OFLCR16
+      -- ^ @oflcR16@
+    | OFLCR18
+      -- ^ @oflcR18@
+    | OFLCRP13
+      -- ^ @oflcRp13@
+    | OFLCRP16
+      -- ^ @oflcRp16@
+    | OflcUnrated
+      -- ^ @oflcUnrated@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingOflcRating
+
+instance FromText ContentRatingOflcRating where
+    fromText = \case
+        "oflcG" -> Just OflcG
+        "oflcM" -> Just OflcM
+        "oflcPg" -> Just OflcPg
+        "oflcR13" -> Just OFLCR13
+        "oflcR15" -> Just OFLCR15
+        "oflcR16" -> Just OFLCR16
+        "oflcR18" -> Just OFLCR18
+        "oflcRp13" -> Just OFLCRP13
+        "oflcRp16" -> Just OFLCRP16
+        "oflcUnrated" -> Just OflcUnrated
+        _ -> Nothing
+
+instance ToText ContentRatingOflcRating where
+    toText = \case
+        OflcG -> "oflcG"
+        OflcM -> "oflcM"
+        OflcPg -> "oflcPg"
+        OFLCR13 -> "oflcR13"
+        OFLCR15 -> "oflcR15"
+        OFLCR16 -> "oflcR16"
+        OFLCR18 -> "oflcR18"
+        OFLCRP13 -> "oflcRp13"
+        OFLCRP16 -> "oflcRp16"
+        OflcUnrated -> "oflcUnrated"
+
+instance FromJSON ContentRatingOflcRating where
+    parseJSON = parseJSONText "ContentRatingOflcRating"
+
+instance ToJSON ContentRatingOflcRating where
+    toJSON = toJSONText
+
+-- | The video\'s privacy status.
+data VideoStatusPrivacyStatus
+    = VSPSPrivate
+      -- ^ @private@
+    | VSPSPublic
+      -- ^ @public@
+    | VSPSUnlisted
+      -- ^ @unlisted@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable VideoStatusPrivacyStatus
+
+instance FromText VideoStatusPrivacyStatus where
+    fromText = \case
+        "private" -> Just VSPSPrivate
+        "public" -> Just VSPSPublic
+        "unlisted" -> Just VSPSUnlisted
+        _ -> Nothing
+
+instance ToText VideoStatusPrivacyStatus where
+    toText = \case
+        VSPSPrivate -> "private"
+        VSPSPublic -> "public"
+        VSPSUnlisted -> "unlisted"
+
+instance FromJSON VideoStatusPrivacyStatus where
+    parseJSON = parseJSONText "VideoStatusPrivacyStatus"
+
+instance ToJSON VideoStatusPrivacyStatus where
+    toJSON = toJSONText
+
+-- | The type of the channel section.
+data ChannelSectionSnippetType
+    = AllPlaylists
+      -- ^ @allPlaylists@
+    | ChannelsectionTypeUndefined
+      -- ^ @channelsectionTypeUndefined@
+    | CompletedEvents
+      -- ^ @completedEvents@
+    | LikedPlaylists
+      -- ^ @likedPlaylists@
+    | Likes
+      -- ^ @likes@
+    | LiveEvents
+      -- ^ @liveEvents@
+    | MultipleChannels
+      -- ^ @multipleChannels@
+    | MultiplePlaylists
+      -- ^ @multiplePlaylists@
+    | PopularUploads
+      -- ^ @popularUploads@
+    | PostedPlaylists
+      -- ^ @postedPlaylists@
+    | PostedVideos
+      -- ^ @postedVideos@
+    | RecentActivity
+      -- ^ @recentActivity@
+    | RecentPosts
+      -- ^ @recentPosts@
+    | RecentUploads
+      -- ^ @recentUploads@
+    | SinglePlaylist
+      -- ^ @singlePlaylist@
+    | Subscriptions
+      -- ^ @subscriptions@
+    | UpcomingEvents
+      -- ^ @upcomingEvents@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ChannelSectionSnippetType
+
+instance FromText ChannelSectionSnippetType where
+    fromText = \case
+        "allPlaylists" -> Just AllPlaylists
+        "channelsectionTypeUndefined" -> Just ChannelsectionTypeUndefined
+        "completedEvents" -> Just CompletedEvents
+        "likedPlaylists" -> Just LikedPlaylists
+        "likes" -> Just Likes
+        "liveEvents" -> Just LiveEvents
+        "multipleChannels" -> Just MultipleChannels
+        "multiplePlaylists" -> Just MultiplePlaylists
+        "popularUploads" -> Just PopularUploads
+        "postedPlaylists" -> Just PostedPlaylists
+        "postedVideos" -> Just PostedVideos
+        "recentActivity" -> Just RecentActivity
+        "recentPosts" -> Just RecentPosts
+        "recentUploads" -> Just RecentUploads
+        "singlePlaylist" -> Just SinglePlaylist
+        "subscriptions" -> Just Subscriptions
+        "upcomingEvents" -> Just UpcomingEvents
+        _ -> Nothing
+
+instance ToText ChannelSectionSnippetType where
+    toText = \case
+        AllPlaylists -> "allPlaylists"
+        ChannelsectionTypeUndefined -> "channelsectionTypeUndefined"
+        CompletedEvents -> "completedEvents"
+        LikedPlaylists -> "likedPlaylists"
+        Likes -> "likes"
+        LiveEvents -> "liveEvents"
+        MultipleChannels -> "multipleChannels"
+        MultiplePlaylists -> "multiplePlaylists"
+        PopularUploads -> "popularUploads"
+        PostedPlaylists -> "postedPlaylists"
+        PostedVideos -> "postedVideos"
+        RecentActivity -> "recentActivity"
+        RecentPosts -> "recentPosts"
+        RecentUploads -> "recentUploads"
+        SinglePlaylist -> "singlePlaylist"
+        Subscriptions -> "subscriptions"
+        UpcomingEvents -> "upcomingEvents"
+
+instance FromJSON ChannelSectionSnippetType where
+    parseJSON = parseJSONText "ChannelSectionSnippetType"
+
+instance ToJSON ChannelSectionSnippetType where
+    toJSON = toJSONText
+
+-- | The eventType parameter restricts a search to broadcast events. If you
+-- specify a value for this parameter, you must also set the type
+-- parameter\'s value to video.
+data SearchList'EventType
+    = SLETCompleted
+      -- ^ @completed@
+      -- Only include completed broadcasts.
+    | SLETLive
+      -- ^ @live@
+      -- Only include active broadcasts.
+    | SLETUpcoming
+      -- ^ @upcoming@
+      -- Only include upcoming broadcasts.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable SearchList'EventType
+
+instance FromText SearchList'EventType where
+    fromText = \case
+        "completed" -> Just SLETCompleted
+        "live" -> Just SLETLive
+        "upcoming" -> Just SLETUpcoming
+        _ -> Nothing
+
+instance ToText SearchList'EventType where
+    toText = \case
+        SLETCompleted -> "completed"
+        SLETLive -> "live"
+        SLETUpcoming -> "upcoming"
+
+instance FromJSON SearchList'EventType where
+    parseJSON = parseJSONText "SearchList'EventType"
+
+instance ToJSON SearchList'EventType where
     toJSON = toJSONText
 
 -- | The video\'s rating in Slovakia.
 data ContentRatingSkfilmRating
-    = CRSRSkfilmG
+    = SkfilmG
       -- ^ @skfilmG@
-    | CRSRSKFILMP2
+    | SKFILMP2
       -- ^ @skfilmP2@
-    | CRSRSKFILMP5
+    | SKFILMP5
       -- ^ @skfilmP5@
-    | CRSRSKFILMP8
+    | SKFILMP8
       -- ^ @skfilmP8@
-    | CRSRSkfilmUnrated
+    | SkfilmUnrated
       -- ^ @skfilmUnrated@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -3450,20 +3127,20 @@ instance Hashable ContentRatingSkfilmRating
 
 instance FromText ContentRatingSkfilmRating where
     fromText = \case
-        "skfilmG" -> Just CRSRSkfilmG
-        "skfilmP2" -> Just CRSRSKFILMP2
-        "skfilmP5" -> Just CRSRSKFILMP5
-        "skfilmP8" -> Just CRSRSKFILMP8
-        "skfilmUnrated" -> Just CRSRSkfilmUnrated
+        "skfilmG" -> Just SkfilmG
+        "skfilmP2" -> Just SKFILMP2
+        "skfilmP5" -> Just SKFILMP5
+        "skfilmP8" -> Just SKFILMP8
+        "skfilmUnrated" -> Just SkfilmUnrated
         _ -> Nothing
 
 instance ToText ContentRatingSkfilmRating where
     toText = \case
-        CRSRSkfilmG -> "skfilmG"
-        CRSRSKFILMP2 -> "skfilmP2"
-        CRSRSKFILMP5 -> "skfilmP5"
-        CRSRSKFILMP8 -> "skfilmP8"
-        CRSRSkfilmUnrated -> "skfilmUnrated"
+        SkfilmG -> "skfilmG"
+        SKFILMP2 -> "skfilmP2"
+        SKFILMP5 -> "skfilmP5"
+        SKFILMP8 -> "skfilmP8"
+        SkfilmUnrated -> "skfilmUnrated"
 
 instance FromJSON ContentRatingSkfilmRating where
     parseJSON = parseJSONText "ContentRatingSkfilmRating"
@@ -3471,253 +3148,48 @@ instance FromJSON ContentRatingSkfilmRating where
 instance ToJSON ContentRatingSkfilmRating where
     toJSON = toJSONText
 
--- | The video\'s rating in Iceland.
-data ContentRatingSmaisRating
-    = CRSRSMAIS12
-      -- ^ @smais12@
-    | CRSRSMAIS14
-      -- ^ @smais14@
-    | CRSRSMAIS16
-      -- ^ @smais16@
-    | CRSRSMAIS18
-      -- ^ @smais18@
-    | CRSRSMAIS7
-      -- ^ @smais7@
-    | CRSRSmaisL
-      -- ^ @smaisL@
-    | CRSRSmaisUnrated
-      -- ^ @smaisUnrated@
+-- | The video\'s Korea Media Rating Board (영상물등급위원회) rating. The
+-- KMRB rates videos in South Korea.
+data ContentRatingKmrbRating
+    = Kmrb12plus
+      -- ^ @kmrb12plus@
+    | Kmrb15plus
+      -- ^ @kmrb15plus@
+    | KmrbAll
+      -- ^ @kmrbAll@
+    | KmrbR
+      -- ^ @kmrbR@
+    | KmrbTeenr
+      -- ^ @kmrbTeenr@
+    | KmrbUnrated
+      -- ^ @kmrbUnrated@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable ContentRatingSmaisRating
+instance Hashable ContentRatingKmrbRating
 
-instance FromText ContentRatingSmaisRating where
+instance FromText ContentRatingKmrbRating where
     fromText = \case
-        "smais12" -> Just CRSRSMAIS12
-        "smais14" -> Just CRSRSMAIS14
-        "smais16" -> Just CRSRSMAIS16
-        "smais18" -> Just CRSRSMAIS18
-        "smais7" -> Just CRSRSMAIS7
-        "smaisL" -> Just CRSRSmaisL
-        "smaisUnrated" -> Just CRSRSmaisUnrated
+        "kmrb12plus" -> Just Kmrb12plus
+        "kmrb15plus" -> Just Kmrb15plus
+        "kmrbAll" -> Just KmrbAll
+        "kmrbR" -> Just KmrbR
+        "kmrbTeenr" -> Just KmrbTeenr
+        "kmrbUnrated" -> Just KmrbUnrated
         _ -> Nothing
 
-instance ToText ContentRatingSmaisRating where
+instance ToText ContentRatingKmrbRating where
     toText = \case
-        CRSRSMAIS12 -> "smais12"
-        CRSRSMAIS14 -> "smais14"
-        CRSRSMAIS16 -> "smais16"
-        CRSRSMAIS18 -> "smais18"
-        CRSRSMAIS7 -> "smais7"
-        CRSRSmaisL -> "smaisL"
-        CRSRSmaisUnrated -> "smaisUnrated"
+        Kmrb12plus -> "kmrb12plus"
+        Kmrb15plus -> "kmrb15plus"
+        KmrbAll -> "kmrbAll"
+        KmrbR -> "kmrbR"
+        KmrbTeenr -> "kmrbTeenr"
+        KmrbUnrated -> "kmrbUnrated"
 
-instance FromJSON ContentRatingSmaisRating where
-    parseJSON = parseJSONText "ContentRatingSmaisRating"
+instance FromJSON ContentRatingKmrbRating where
+    parseJSON = parseJSONText "ContentRatingKmrbRating"
 
-instance ToJSON ContentRatingSmaisRating where
-    toJSON = toJSONText
-
--- | The video\'s rating from Statens medieråd (Sweden\'s National Media
--- Council).
-data ContentRatingSmsaRating
-    = CRSRSMSA11
-      -- ^ @smsa11@
-    | CRSRSMSA15
-      -- ^ @smsa15@
-    | CRSRSMSA7
-      -- ^ @smsa7@
-    | CRSRSmsaA
-      -- ^ @smsaA@
-    | CRSRSmsaUnrated
-      -- ^ @smsaUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingSmsaRating
-
-instance FromText ContentRatingSmsaRating where
-    fromText = \case
-        "smsa11" -> Just CRSRSMSA11
-        "smsa15" -> Just CRSRSMSA15
-        "smsa7" -> Just CRSRSMSA7
-        "smsaA" -> Just CRSRSmsaA
-        "smsaUnrated" -> Just CRSRSmsaUnrated
-        _ -> Nothing
-
-instance ToText ContentRatingSmsaRating where
-    toText = \case
-        CRSRSMSA11 -> "smsa11"
-        CRSRSMSA15 -> "smsa15"
-        CRSRSMSA7 -> "smsa7"
-        CRSRSmsaA -> "smsaA"
-        CRSRSmsaUnrated -> "smsaUnrated"
-
-instance FromJSON ContentRatingSmsaRating where
-    parseJSON = parseJSONText "ContentRatingSmsaRating"
-
-instance ToJSON ContentRatingSmsaRating where
-    toJSON = toJSONText
-
--- | The video\'s TV Parental Guidelines (TVPG) rating.
-data ContentRatingTvpgRating
-    = CRTRPG14
-      -- ^ @pg14@
-    | CRTRTvpgG
-      -- ^ @tvpgG@
-    | CRTRTvpgMa
-      -- ^ @tvpgMa@
-    | CRTRTvpgPg
-      -- ^ @tvpgPg@
-    | CRTRTvpgUnrated
-      -- ^ @tvpgUnrated@
-    | CRTRTvpgY
-      -- ^ @tvpgY@
-    | CRTRTVPGY7
-      -- ^ @tvpgY7@
-    | CRTRTvpgY7Fv
-      -- ^ @tvpgY7Fv@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingTvpgRating
-
-instance FromText ContentRatingTvpgRating where
-    fromText = \case
-        "pg14" -> Just CRTRPG14
-        "tvpgG" -> Just CRTRTvpgG
-        "tvpgMa" -> Just CRTRTvpgMa
-        "tvpgPg" -> Just CRTRTvpgPg
-        "tvpgUnrated" -> Just CRTRTvpgUnrated
-        "tvpgY" -> Just CRTRTvpgY
-        "tvpgY7" -> Just CRTRTVPGY7
-        "tvpgY7Fv" -> Just CRTRTvpgY7Fv
-        _ -> Nothing
-
-instance ToText ContentRatingTvpgRating where
-    toText = \case
-        CRTRPG14 -> "pg14"
-        CRTRTvpgG -> "tvpgG"
-        CRTRTvpgMa -> "tvpgMa"
-        CRTRTvpgPg -> "tvpgPg"
-        CRTRTvpgUnrated -> "tvpgUnrated"
-        CRTRTvpgY -> "tvpgY"
-        CRTRTVPGY7 -> "tvpgY7"
-        CRTRTvpgY7Fv -> "tvpgY7Fv"
-
-instance FromJSON ContentRatingTvpgRating where
-    parseJSON = parseJSONText "ContentRatingTvpgRating"
-
-instance ToJSON ContentRatingTvpgRating where
-    toJSON = toJSONText
-
--- | A rating that YouTube uses to identify age-restricted content.
-data ContentRatingYtRating
-    = CRYRYtAgeRestricted
-      -- ^ @ytAgeRestricted@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ContentRatingYtRating
-
-instance FromText ContentRatingYtRating where
-    fromText = \case
-        "ytAgeRestricted" -> Just CRYRYtAgeRestricted
-        _ -> Nothing
-
-instance ToText ContentRatingYtRating where
-    toText = \case
-        CRYRYtAgeRestricted -> "ytAgeRestricted"
-
-instance FromJSON ContentRatingYtRating where
-    parseJSON = parseJSONText "ContentRatingYtRating"
-
-instance ToJSON ContentRatingYtRating where
-    toJSON = toJSONText
-
--- | Describes in which corner of the video the visual widget will appear.
-data InvideoPositionCornerPosition
-    = IPCPBottomLeft
-      -- ^ @bottomLeft@
-    | IPCPBottomRight
-      -- ^ @bottomRight@
-    | IPCPTopLeft
-      -- ^ @topLeft@
-    | IPCPTopRight
-      -- ^ @topRight@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable InvideoPositionCornerPosition
-
-instance FromText InvideoPositionCornerPosition where
-    fromText = \case
-        "bottomLeft" -> Just IPCPBottomLeft
-        "bottomRight" -> Just IPCPBottomRight
-        "topLeft" -> Just IPCPTopLeft
-        "topRight" -> Just IPCPTopRight
-        _ -> Nothing
-
-instance ToText InvideoPositionCornerPosition where
-    toText = \case
-        IPCPBottomLeft -> "bottomLeft"
-        IPCPBottomRight -> "bottomRight"
-        IPCPTopLeft -> "topLeft"
-        IPCPTopRight -> "topRight"
-
-instance FromJSON InvideoPositionCornerPosition where
-    parseJSON = parseJSONText "InvideoPositionCornerPosition"
-
-instance ToJSON InvideoPositionCornerPosition where
-    toJSON = toJSONText
-
--- | Defines the position type.
-data InvideoPositionType
-    = IPTCorner
-      -- ^ @corner@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable InvideoPositionType
-
-instance FromText InvideoPositionType where
-    fromText = \case
-        "corner" -> Just IPTCorner
-        _ -> Nothing
-
-instance ToText InvideoPositionType where
-    toText = \case
-        IPTCorner -> "corner"
-
-instance FromJSON InvideoPositionType where
-    parseJSON = parseJSONText "InvideoPositionType"
-
-instance ToJSON InvideoPositionType where
-    toJSON = toJSONText
-
--- | Describes a timing type. If the value is offsetFromStart, then the
--- offsetMs field represents an offset from the start of the video. If the
--- value is offsetFromEnd, then the offsetMs field represents an offset
--- from the end of the video.
-data InvideoTimingType
-    = ITTOffsetFromEnd
-      -- ^ @offsetFromEnd@
-    | ITTOffsetFromStart
-      -- ^ @offsetFromStart@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable InvideoTimingType
-
-instance FromText InvideoTimingType where
-    fromText = \case
-        "offsetFromEnd" -> Just ITTOffsetFromEnd
-        "offsetFromStart" -> Just ITTOffsetFromStart
-        _ -> Nothing
-
-instance ToText InvideoTimingType where
-    toText = \case
-        ITTOffsetFromEnd -> "offsetFromEnd"
-        ITTOffsetFromStart -> "offsetFromStart"
-
-instance FromJSON InvideoTimingType where
-    parseJSON = parseJSONText "InvideoTimingType"
-
-instance ToJSON InvideoTimingType where
+instance ToJSON ContentRatingKmrbRating where
     toJSON = toJSONText
 
 -- | The broadcast\'s status. The status can be updated using the API\'s
@@ -3784,711 +3256,52 @@ instance FromJSON LiveBroadcastStatusLifeCycleStatus where
 instance ToJSON LiveBroadcastStatusLifeCycleStatus where
     toJSON = toJSONText
 
--- | Priority of the live broadcast event (internal state).
-data LiveBroadcastStatusLiveBroadcastPriority
-    = LBSLBPHigh
-      -- ^ @high@
-    | LBSLBPLow
-      -- ^ @low@
-    | LBSLBPNormal
-      -- ^ @normal@
+-- | The video\'s rating from the Hungarian Nemzeti Filmiroda, the Rating
+-- Committee of the National Office of Film.
+data ContentRatingRcnofRating
+    = RcnofI
+      -- ^ @rcnofI@
+    | RcnofIi
+      -- ^ @rcnofIi@
+    | RcnofIii
+      -- ^ @rcnofIii@
+    | RcnofIv
+      -- ^ @rcnofIv@
+    | RcnofUnrated
+      -- ^ @rcnofUnrated@
+    | RcnofV
+      -- ^ @rcnofV@
+    | RcnofVi
+      -- ^ @rcnofVi@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable LiveBroadcastStatusLiveBroadcastPriority
+instance Hashable ContentRatingRcnofRating
 
-instance FromText LiveBroadcastStatusLiveBroadcastPriority where
+instance FromText ContentRatingRcnofRating where
     fromText = \case
-        "high" -> Just LBSLBPHigh
-        "low" -> Just LBSLBPLow
-        "normal" -> Just LBSLBPNormal
+        "rcnofI" -> Just RcnofI
+        "rcnofIi" -> Just RcnofIi
+        "rcnofIii" -> Just RcnofIii
+        "rcnofIv" -> Just RcnofIv
+        "rcnofUnrated" -> Just RcnofUnrated
+        "rcnofV" -> Just RcnofV
+        "rcnofVi" -> Just RcnofVi
         _ -> Nothing
 
-instance ToText LiveBroadcastStatusLiveBroadcastPriority where
+instance ToText ContentRatingRcnofRating where
     toText = \case
-        LBSLBPHigh -> "high"
-        LBSLBPLow -> "low"
-        LBSLBPNormal -> "normal"
-
-instance FromJSON LiveBroadcastStatusLiveBroadcastPriority where
-    parseJSON = parseJSONText "LiveBroadcastStatusLiveBroadcastPriority"
-
-instance ToJSON LiveBroadcastStatusLiveBroadcastPriority where
-    toJSON = toJSONText
-
--- | The broadcast\'s privacy status. Note that the broadcast represents
--- exactly one YouTube video, so the privacy settings are identical to
--- those supported for videos. In addition, you can set this field by
--- modifying the broadcast resource or by setting the privacyStatus field
--- of the corresponding video resource.
-data LiveBroadcastStatusPrivacyStatus
-    = LBSPSPrivate
-      -- ^ @private@
-    | LBSPSPublic
-      -- ^ @public@
-    | LBSPSUnlisted
-      -- ^ @unlisted@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable LiveBroadcastStatusPrivacyStatus
-
-instance FromText LiveBroadcastStatusPrivacyStatus where
-    fromText = \case
-        "private" -> Just LBSPSPrivate
-        "public" -> Just LBSPSPublic
-        "unlisted" -> Just LBSPSUnlisted
-        _ -> Nothing
-
-instance ToText LiveBroadcastStatusPrivacyStatus where
-    toText = \case
-        LBSPSPrivate -> "private"
-        LBSPSPublic -> "public"
-        LBSPSUnlisted -> "unlisted"
-
-instance FromJSON LiveBroadcastStatusPrivacyStatus where
-    parseJSON = parseJSONText "LiveBroadcastStatusPrivacyStatus"
-
-instance ToJSON LiveBroadcastStatusPrivacyStatus where
-    toJSON = toJSONText
-
--- | The broadcast\'s recording status.
-data LiveBroadcastStatusRecordingStatus
-    = LBSRSNotRecording
-      -- ^ @notRecording@
-    | LBSRSRecorded
-      -- ^ @recorded@
-    | LBSRSRecording
-      -- ^ @recording@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable LiveBroadcastStatusRecordingStatus
-
-instance FromText LiveBroadcastStatusRecordingStatus where
-    fromText = \case
-        "notRecording" -> Just LBSRSNotRecording
-        "recorded" -> Just LBSRSRecorded
-        "recording" -> Just LBSRSRecording
-        _ -> Nothing
-
-instance ToText LiveBroadcastStatusRecordingStatus where
-    toText = \case
-        LBSRSNotRecording -> "notRecording"
-        LBSRSRecorded -> "recorded"
-        LBSRSRecording -> "recording"
-
-instance FromJSON LiveBroadcastStatusRecordingStatus where
-    parseJSON = parseJSONText "LiveBroadcastStatusRecordingStatus"
-
-instance ToJSON LiveBroadcastStatusRecordingStatus where
-    toJSON = toJSONText
-
--- | The type of the topic.
-data LiveBroadcastTopicType
-    = LBTTVideoGame
-      -- ^ @videoGame@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable LiveBroadcastTopicType
-
-instance FromText LiveBroadcastTopicType where
-    fromText = \case
-        "videoGame" -> Just LBTTVideoGame
-        _ -> Nothing
-
-instance ToText LiveBroadcastTopicType where
-    toText = \case
-        LBTTVideoGame -> "videoGame"
-
-instance FromJSON LiveBroadcastTopicType where
-    parseJSON = parseJSONText "LiveBroadcastTopicType"
-
-instance ToJSON LiveBroadcastTopicType where
-    toJSON = toJSONText
-
--- | How severe this issue is to the stream.
-data LiveStreamConfigurationIssueSeverity
-    = LSCISError
-      -- ^ @error@
-    | LSCISInfo
-      -- ^ @info@
-    | LSCISWarning
-      -- ^ @warning@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable LiveStreamConfigurationIssueSeverity
-
-instance FromText LiveStreamConfigurationIssueSeverity where
-    fromText = \case
-        "error" -> Just LSCISError
-        "info" -> Just LSCISInfo
-        "warning" -> Just LSCISWarning
-        _ -> Nothing
-
-instance ToText LiveStreamConfigurationIssueSeverity where
-    toText = \case
-        LSCISError -> "error"
-        LSCISInfo -> "info"
-        LSCISWarning -> "warning"
-
-instance FromJSON LiveStreamConfigurationIssueSeverity where
-    parseJSON = parseJSONText "LiveStreamConfigurationIssueSeverity"
-
-instance ToJSON LiveStreamConfigurationIssueSeverity where
-    toJSON = toJSONText
-
--- | The kind of error happening.
-data LiveStreamConfigurationIssueType
-    = LSCITAudioBitrateHigh
-      -- ^ @audioBitrateHigh@
-    | LSCITAudioBitrateLow
-      -- ^ @audioBitrateLow@
-    | LSCITAudioBitrateMismatch
-      -- ^ @audioBitrateMismatch@
-    | LSCITAudioCodec
-      -- ^ @audioCodec@
-    | LSCITAudioCodecMismatch
-      -- ^ @audioCodecMismatch@
-    | LSCITAudioSampleRate
-      -- ^ @audioSampleRate@
-    | LSCITAudioSampleRateMismatch
-      -- ^ @audioSampleRateMismatch@
-    | LSCITAudioStereoMismatch
-      -- ^ @audioStereoMismatch@
-    | LSCITAudioTooManyChannels
-      -- ^ @audioTooManyChannels@
-    | LSCITBadContainer
-      -- ^ @badContainer@
-    | LSCITBitrateHigh
-      -- ^ @bitrateHigh@
-    | LSCITBitrateLow
-      -- ^ @bitrateLow@
-    | LSCITFrameRateHigh
-      -- ^ @frameRateHigh@
-    | LSCITFramerateMismatch
-      -- ^ @framerateMismatch@
-    | LSCITGopMismatch
-      -- ^ @gopMismatch@
-    | LSCITGopSizeLong
-      -- ^ @gopSizeLong@
-    | LSCITGopSizeOver
-      -- ^ @gopSizeOver@
-    | LSCITGopSizeShort
-      -- ^ @gopSizeShort@
-    | LSCITInterlacedVideo
-      -- ^ @interlacedVideo@
-    | LSCITMultipleAudioStreams
-      -- ^ @multipleAudioStreams@
-    | LSCITMultipleVideoStreams
-      -- ^ @multipleVideoStreams@
-    | LSCITNoAudioStream
-      -- ^ @noAudioStream@
-    | LSCITNoVideoStream
-      -- ^ @noVideoStream@
-    | LSCITOpenGop
-      -- ^ @openGop@
-    | LSCITResolutionMismatch
-      -- ^ @resolutionMismatch@
-    | LSCITVideoBitrateMismatch
-      -- ^ @videoBitrateMismatch@
-    | LSCITVideoCodec
-      -- ^ @videoCodec@
-    | LSCITVideoCodecMismatch
-      -- ^ @videoCodecMismatch@
-    | LSCITVideoIngestionStarved
-      -- ^ @videoIngestionStarved@
-    | LSCITVideoInterlaceMismatch
-      -- ^ @videoInterlaceMismatch@
-    | LSCITVideoProfileMismatch
-      -- ^ @videoProfileMismatch@
-    | LSCITVideoResolutionSuboptimal
-      -- ^ @videoResolutionSuboptimal@
-    | LSCITVideoResolutionUnsupported
-      -- ^ @videoResolutionUnsupported@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable LiveStreamConfigurationIssueType
-
-instance FromText LiveStreamConfigurationIssueType where
-    fromText = \case
-        "audioBitrateHigh" -> Just LSCITAudioBitrateHigh
-        "audioBitrateLow" -> Just LSCITAudioBitrateLow
-        "audioBitrateMismatch" -> Just LSCITAudioBitrateMismatch
-        "audioCodec" -> Just LSCITAudioCodec
-        "audioCodecMismatch" -> Just LSCITAudioCodecMismatch
-        "audioSampleRate" -> Just LSCITAudioSampleRate
-        "audioSampleRateMismatch" -> Just LSCITAudioSampleRateMismatch
-        "audioStereoMismatch" -> Just LSCITAudioStereoMismatch
-        "audioTooManyChannels" -> Just LSCITAudioTooManyChannels
-        "badContainer" -> Just LSCITBadContainer
-        "bitrateHigh" -> Just LSCITBitrateHigh
-        "bitrateLow" -> Just LSCITBitrateLow
-        "frameRateHigh" -> Just LSCITFrameRateHigh
-        "framerateMismatch" -> Just LSCITFramerateMismatch
-        "gopMismatch" -> Just LSCITGopMismatch
-        "gopSizeLong" -> Just LSCITGopSizeLong
-        "gopSizeOver" -> Just LSCITGopSizeOver
-        "gopSizeShort" -> Just LSCITGopSizeShort
-        "interlacedVideo" -> Just LSCITInterlacedVideo
-        "multipleAudioStreams" -> Just LSCITMultipleAudioStreams
-        "multipleVideoStreams" -> Just LSCITMultipleVideoStreams
-        "noAudioStream" -> Just LSCITNoAudioStream
-        "noVideoStream" -> Just LSCITNoVideoStream
-        "openGop" -> Just LSCITOpenGop
-        "resolutionMismatch" -> Just LSCITResolutionMismatch
-        "videoBitrateMismatch" -> Just LSCITVideoBitrateMismatch
-        "videoCodec" -> Just LSCITVideoCodec
-        "videoCodecMismatch" -> Just LSCITVideoCodecMismatch
-        "videoIngestionStarved" -> Just LSCITVideoIngestionStarved
-        "videoInterlaceMismatch" -> Just LSCITVideoInterlaceMismatch
-        "videoProfileMismatch" -> Just LSCITVideoProfileMismatch
-        "videoResolutionSuboptimal" -> Just LSCITVideoResolutionSuboptimal
-        "videoResolutionUnsupported" -> Just LSCITVideoResolutionUnsupported
-        _ -> Nothing
-
-instance ToText LiveStreamConfigurationIssueType where
-    toText = \case
-        LSCITAudioBitrateHigh -> "audioBitrateHigh"
-        LSCITAudioBitrateLow -> "audioBitrateLow"
-        LSCITAudioBitrateMismatch -> "audioBitrateMismatch"
-        LSCITAudioCodec -> "audioCodec"
-        LSCITAudioCodecMismatch -> "audioCodecMismatch"
-        LSCITAudioSampleRate -> "audioSampleRate"
-        LSCITAudioSampleRateMismatch -> "audioSampleRateMismatch"
-        LSCITAudioStereoMismatch -> "audioStereoMismatch"
-        LSCITAudioTooManyChannels -> "audioTooManyChannels"
-        LSCITBadContainer -> "badContainer"
-        LSCITBitrateHigh -> "bitrateHigh"
-        LSCITBitrateLow -> "bitrateLow"
-        LSCITFrameRateHigh -> "frameRateHigh"
-        LSCITFramerateMismatch -> "framerateMismatch"
-        LSCITGopMismatch -> "gopMismatch"
-        LSCITGopSizeLong -> "gopSizeLong"
-        LSCITGopSizeOver -> "gopSizeOver"
-        LSCITGopSizeShort -> "gopSizeShort"
-        LSCITInterlacedVideo -> "interlacedVideo"
-        LSCITMultipleAudioStreams -> "multipleAudioStreams"
-        LSCITMultipleVideoStreams -> "multipleVideoStreams"
-        LSCITNoAudioStream -> "noAudioStream"
-        LSCITNoVideoStream -> "noVideoStream"
-        LSCITOpenGop -> "openGop"
-        LSCITResolutionMismatch -> "resolutionMismatch"
-        LSCITVideoBitrateMismatch -> "videoBitrateMismatch"
-        LSCITVideoCodec -> "videoCodec"
-        LSCITVideoCodecMismatch -> "videoCodecMismatch"
-        LSCITVideoIngestionStarved -> "videoIngestionStarved"
-        LSCITVideoInterlaceMismatch -> "videoInterlaceMismatch"
-        LSCITVideoProfileMismatch -> "videoProfileMismatch"
-        LSCITVideoResolutionSuboptimal -> "videoResolutionSuboptimal"
-        LSCITVideoResolutionUnsupported -> "videoResolutionUnsupported"
-
-instance FromJSON LiveStreamConfigurationIssueType where
-    parseJSON = parseJSONText "LiveStreamConfigurationIssueType"
-
-instance ToJSON LiveStreamConfigurationIssueType where
-    toJSON = toJSONText
-
--- | The status code of this stream
-data LiveStreamHealthStatusStatus
-    = LSHSSBad
-      -- ^ @bad@
-    | LSHSSGood
-      -- ^ @good@
-    | LSHSSNoData
-      -- ^ @noData@
-    | LSHSSOK
-      -- ^ @ok@
-    | LSHSSRevoked
-      -- ^ @revoked@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable LiveStreamHealthStatusStatus
-
-instance FromText LiveStreamHealthStatusStatus where
-    fromText = \case
-        "bad" -> Just LSHSSBad
-        "good" -> Just LSHSSGood
-        "noData" -> Just LSHSSNoData
-        "ok" -> Just LSHSSOK
-        "revoked" -> Just LSHSSRevoked
-        _ -> Nothing
-
-instance ToText LiveStreamHealthStatusStatus where
-    toText = \case
-        LSHSSBad -> "bad"
-        LSHSSGood -> "good"
-        LSHSSNoData -> "noData"
-        LSHSSOK -> "ok"
-        LSHSSRevoked -> "revoked"
-
-instance FromJSON LiveStreamHealthStatusStatus where
-    parseJSON = parseJSONText "LiveStreamHealthStatusStatus"
-
-instance ToJSON LiveStreamHealthStatusStatus where
-    toJSON = toJSONText
-
-data LiveStreamStatusStreamStatus
-    = LSSSSActive
-      -- ^ @active@
-    | LSSSSCreated
-      -- ^ @created@
-    | LSSSSError
-      -- ^ @error@
-    | LSSSSInactive
-      -- ^ @inactive@
-    | LSSSSReady
-      -- ^ @ready@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable LiveStreamStatusStreamStatus
-
-instance FromText LiveStreamStatusStreamStatus where
-    fromText = \case
-        "active" -> Just LSSSSActive
-        "created" -> Just LSSSSCreated
-        "error" -> Just LSSSSError
-        "inactive" -> Just LSSSSInactive
-        "ready" -> Just LSSSSReady
-        _ -> Nothing
-
-instance ToText LiveStreamStatusStreamStatus where
-    toText = \case
-        LSSSSActive -> "active"
-        LSSSSCreated -> "created"
-        LSSSSError -> "error"
-        LSSSSInactive -> "inactive"
-        LSSSSReady -> "ready"
-
-instance FromJSON LiveStreamStatusStreamStatus where
-    parseJSON = parseJSONText "LiveStreamStatusStreamStatus"
-
-instance ToJSON LiveStreamStatusStreamStatus where
-    toJSON = toJSONText
-
--- | This resource\'s privacy status.
-data PlaylistItemStatusPrivacyStatus
-    = PISPSPrivate
-      -- ^ @private@
-    | PISPSPublic
-      -- ^ @public@
-    | PISPSUnlisted
-      -- ^ @unlisted@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable PlaylistItemStatusPrivacyStatus
-
-instance FromText PlaylistItemStatusPrivacyStatus where
-    fromText = \case
-        "private" -> Just PISPSPrivate
-        "public" -> Just PISPSPublic
-        "unlisted" -> Just PISPSUnlisted
-        _ -> Nothing
-
-instance ToText PlaylistItemStatusPrivacyStatus where
-    toText = \case
-        PISPSPrivate -> "private"
-        PISPSPublic -> "public"
-        PISPSUnlisted -> "unlisted"
-
-instance FromJSON PlaylistItemStatusPrivacyStatus where
-    parseJSON = parseJSONText "PlaylistItemStatusPrivacyStatus"
-
-instance ToJSON PlaylistItemStatusPrivacyStatus where
-    toJSON = toJSONText
-
--- | The playlist\'s privacy status.
-data PlaylistStatusPrivacyStatus
-    = PSPSPrivate
-      -- ^ @private@
-    | PSPSPublic
-      -- ^ @public@
-    | PSPSUnlisted
-      -- ^ @unlisted@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable PlaylistStatusPrivacyStatus
-
-instance FromText PlaylistStatusPrivacyStatus where
-    fromText = \case
-        "private" -> Just PSPSPrivate
-        "public" -> Just PSPSPublic
-        "unlisted" -> Just PSPSUnlisted
-        _ -> Nothing
-
-instance ToText PlaylistStatusPrivacyStatus where
-    toText = \case
-        PSPSPrivate -> "private"
-        PSPSPublic -> "public"
-        PSPSUnlisted -> "unlisted"
-
-instance FromJSON PlaylistStatusPrivacyStatus where
-    parseJSON = parseJSONText "PlaylistStatusPrivacyStatus"
-
-instance ToJSON PlaylistStatusPrivacyStatus where
-    toJSON = toJSONText
-
--- | Describes the type of the promoted item.
-data PromotedItemIdType
-    = PIITRecentUpload
-      -- ^ @recentUpload@
-    | PIITVideo
-      -- ^ @video@
-    | PIITWebsite
-      -- ^ @website@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable PromotedItemIdType
-
-instance FromText PromotedItemIdType where
-    fromText = \case
-        "recentUpload" -> Just PIITRecentUpload
-        "video" -> Just PIITVideo
-        "website" -> Just PIITWebsite
-        _ -> Nothing
-
-instance ToText PromotedItemIdType where
-    toText = \case
-        PIITRecentUpload -> "recentUpload"
-        PIITVideo -> "video"
-        PIITWebsite -> "website"
-
-instance FromJSON PromotedItemIdType where
-    parseJSON = parseJSONText "PromotedItemIdType"
-
-instance ToJSON PromotedItemIdType where
-    toJSON = toJSONText
-
--- | It indicates if the resource (video or channel) has upcoming\/active
--- live broadcast content. Or it\'s \"none\" if there is not any
--- upcoming\/active live broadcasts.
-data SearchResultSnippetLiveBroadcastContent
-    = SRSLBCLive
-      -- ^ @live@
-    | SRSLBCNone
-      -- ^ @none@
-    | SRSLBCUpcoming
-      -- ^ @upcoming@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable SearchResultSnippetLiveBroadcastContent
-
-instance FromText SearchResultSnippetLiveBroadcastContent where
-    fromText = \case
-        "live" -> Just SRSLBCLive
-        "none" -> Just SRSLBCNone
-        "upcoming" -> Just SRSLBCUpcoming
-        _ -> Nothing
-
-instance ToText SearchResultSnippetLiveBroadcastContent where
-    toText = \case
-        SRSLBCLive -> "live"
-        SRSLBCNone -> "none"
-        SRSLBCUpcoming -> "upcoming"
-
-instance FromJSON SearchResultSnippetLiveBroadcastContent where
-    parseJSON = parseJSONText "SearchResultSnippetLiveBroadcastContent"
-
-instance ToJSON SearchResultSnippetLiveBroadcastContent where
-    toJSON = toJSONText
-
--- | The type of activity this subscription is for (only uploads,
--- everything).
-data SubscriptionContentDetailsActivityType
-    = SCDATAll
-      -- ^ @all@
-    | SCDATUploads
-      -- ^ @uploads@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable SubscriptionContentDetailsActivityType
-
-instance FromText SubscriptionContentDetailsActivityType where
-    fromText = \case
-        "all" -> Just SCDATAll
-        "uploads" -> Just SCDATUploads
-        _ -> Nothing
-
-instance ToText SubscriptionContentDetailsActivityType where
-    toText = \case
-        SCDATAll -> "all"
-        SCDATUploads -> "uploads"
-
-instance FromJSON SubscriptionContentDetailsActivityType where
-    parseJSON = parseJSONText "SubscriptionContentDetailsActivityType"
-
-instance ToJSON SubscriptionContentDetailsActivityType where
-    toJSON = toJSONText
-
--- | Video game rating, if any.
-data VideoAgeGatingVideoGameRating
-    = VAGVGRAnyone
-      -- ^ @anyone@
-    | VAGVGRM15Plus
-      -- ^ @m15Plus@
-    | VAGVGRM16Plus
-      -- ^ @m16Plus@
-    | VAGVGRM17Plus
-      -- ^ @m17Plus@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable VideoAgeGatingVideoGameRating
-
-instance FromText VideoAgeGatingVideoGameRating where
-    fromText = \case
-        "anyone" -> Just VAGVGRAnyone
-        "m15Plus" -> Just VAGVGRM15Plus
-        "m16Plus" -> Just VAGVGRM16Plus
-        "m17Plus" -> Just VAGVGRM17Plus
-        _ -> Nothing
-
-instance ToText VideoAgeGatingVideoGameRating where
-    toText = \case
-        VAGVGRAnyone -> "anyone"
-        VAGVGRM15Plus -> "m15Plus"
-        VAGVGRM16Plus -> "m16Plus"
-        VAGVGRM17Plus -> "m17Plus"
-
-instance FromJSON VideoAgeGatingVideoGameRating where
-    parseJSON = parseJSONText "VideoAgeGatingVideoGameRating"
-
-instance ToJSON VideoAgeGatingVideoGameRating where
-    toJSON = toJSONText
-
--- | The value of captions indicates whether the video has captions or not.
-data VideoContentDetailsCaption
-    = VCDCFalse
-      -- ^ @false@
-    | VCDCTrue
-      -- ^ @true@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable VideoContentDetailsCaption
-
-instance FromText VideoContentDetailsCaption where
-    fromText = \case
-        "false" -> Just VCDCFalse
-        "true" -> Just VCDCTrue
-        _ -> Nothing
-
-instance ToText VideoContentDetailsCaption where
-    toText = \case
-        VCDCFalse -> "false"
-        VCDCTrue -> "true"
-
-instance FromJSON VideoContentDetailsCaption where
-    parseJSON = parseJSONText "VideoContentDetailsCaption"
-
-instance ToJSON VideoContentDetailsCaption where
-    toJSON = toJSONText
-
--- | The value of definition indicates whether the video is available in high
--- definition or only in standard definition.
-data VideoContentDetailsDefinition
-    = VCDDHD
-      -- ^ @hd@
-    | VCDDSD
-      -- ^ @sd@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable VideoContentDetailsDefinition
-
-instance FromText VideoContentDetailsDefinition where
-    fromText = \case
-        "hd" -> Just VCDDHD
-        "sd" -> Just VCDDSD
-        _ -> Nothing
-
-instance ToText VideoContentDetailsDefinition where
-    toText = \case
-        VCDDHD -> "hd"
-        VCDDSD -> "sd"
-
-instance FromJSON VideoContentDetailsDefinition where
-    parseJSON = parseJSONText "VideoContentDetailsDefinition"
-
-instance ToJSON VideoContentDetailsDefinition where
-    toJSON = toJSONText
-
--- | Defines the context of the ping.
-data VideoConversionPingContext
-    = VCPCComment
-      -- ^ @comment@
-    | VCPCDislike
-      -- ^ @dislike@
-    | VCPCLike
-      -- ^ @like@
-    | VCPCShare
-      -- ^ @share@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable VideoConversionPingContext
-
-instance FromText VideoConversionPingContext where
-    fromText = \case
-        "comment" -> Just VCPCComment
-        "dislike" -> Just VCPCDislike
-        "like" -> Just VCPCLike
-        "share" -> Just VCPCShare
-        _ -> Nothing
-
-instance ToText VideoConversionPingContext where
-    toText = \case
-        VCPCComment -> "comment"
-        VCPCDislike -> "dislike"
-        VCPCLike -> "like"
-        VCPCShare -> "share"
-
-instance FromJSON VideoConversionPingContext where
-    parseJSON = parseJSONText "VideoConversionPingContext"
-
-instance ToJSON VideoConversionPingContext where
-    toJSON = toJSONText
-
--- | The uploaded file\'s type as detected by YouTube\'s video processing
--- engine. Currently, YouTube only processes video files, but this field is
--- present whether a video file or another type of file was uploaded.
-data VideoFileDetailsFileType
-    = VFDFTArchive
-      -- ^ @archive@
-    | VFDFTAudio
-      -- ^ @audio@
-    | VFDFTDocument
-      -- ^ @document@
-    | VFDFTImage
-      -- ^ @image@
-    | VFDFTOther
-      -- ^ @other@
-    | VFDFTProject
-      -- ^ @project@
-    | VFDFTVideo
-      -- ^ @video@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable VideoFileDetailsFileType
-
-instance FromText VideoFileDetailsFileType where
-    fromText = \case
-        "archive" -> Just VFDFTArchive
-        "audio" -> Just VFDFTAudio
-        "document" -> Just VFDFTDocument
-        "image" -> Just VFDFTImage
-        "other" -> Just VFDFTOther
-        "project" -> Just VFDFTProject
-        "video" -> Just VFDFTVideo
-        _ -> Nothing
-
-instance ToText VideoFileDetailsFileType where
-    toText = \case
-        VFDFTArchive -> "archive"
-        VFDFTAudio -> "audio"
-        VFDFTDocument -> "document"
-        VFDFTImage -> "image"
-        VFDFTOther -> "other"
-        VFDFTProject -> "project"
-        VFDFTVideo -> "video"
-
-instance FromJSON VideoFileDetailsFileType where
-    parseJSON = parseJSONText "VideoFileDetailsFileType"
-
-instance ToJSON VideoFileDetailsFileType where
+        RcnofI -> "rcnofI"
+        RcnofIi -> "rcnofIi"
+        RcnofIii -> "rcnofIii"
+        RcnofIv -> "rcnofIv"
+        RcnofUnrated -> "rcnofUnrated"
+        RcnofV -> "rcnofV"
+        RcnofVi -> "rcnofVi"
+
+instance FromJSON ContentRatingRcnofRating where
+    parseJSON = parseJSONText "ContentRatingRcnofRating"
+
+instance ToJSON ContentRatingRcnofRating where
     toJSON = toJSONText
 
 -- | The amount that YouTube needs to rotate the original source content to
@@ -4531,76 +3344,539 @@ instance FromJSON VideoFileDetailsVideoStreamRotation where
 instance ToJSON VideoFileDetailsVideoStreamRotation where
     toJSON = toJSONText
 
--- | The reason that YouTube failed to process the video. This property will
--- only have a value if the processingStatus property\'s value is failed.
-data VideoProcessingDetailsProcessingFailureReason
-    = VPDPFROther
-      -- ^ @other@
-    | VPDPFRStreamingFailed
-      -- ^ @streamingFailed@
-    | VPDPFRTranscodeFailed
-      -- ^ @transcodeFailed@
-    | VPDPFRUploadFailed
-      -- ^ @uploadFailed@
+-- | The video\'s rating from Portugal\'s Comissão de Classificação de
+-- Espect´culos.
+data ContentRatingCceRating
+    = CCEM12
+      -- ^ @cceM12@
+    | CCEM16
+      -- ^ @cceM16@
+    | CCEM18
+      -- ^ @cceM18@
+    | CCEM4
+      -- ^ @cceM4@
+    | CCEM6
+      -- ^ @cceM6@
+    | CceUnrated
+      -- ^ @cceUnrated@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable VideoProcessingDetailsProcessingFailureReason
+instance Hashable ContentRatingCceRating
 
-instance FromText VideoProcessingDetailsProcessingFailureReason where
+instance FromText ContentRatingCceRating where
     fromText = \case
-        "other" -> Just VPDPFROther
-        "streamingFailed" -> Just VPDPFRStreamingFailed
-        "transcodeFailed" -> Just VPDPFRTranscodeFailed
-        "uploadFailed" -> Just VPDPFRUploadFailed
+        "cceM12" -> Just CCEM12
+        "cceM16" -> Just CCEM16
+        "cceM18" -> Just CCEM18
+        "cceM4" -> Just CCEM4
+        "cceM6" -> Just CCEM6
+        "cceUnrated" -> Just CceUnrated
         _ -> Nothing
 
-instance ToText VideoProcessingDetailsProcessingFailureReason where
+instance ToText ContentRatingCceRating where
     toText = \case
-        VPDPFROther -> "other"
-        VPDPFRStreamingFailed -> "streamingFailed"
-        VPDPFRTranscodeFailed -> "transcodeFailed"
-        VPDPFRUploadFailed -> "uploadFailed"
+        CCEM12 -> "cceM12"
+        CCEM16 -> "cceM16"
+        CCEM18 -> "cceM18"
+        CCEM4 -> "cceM4"
+        CCEM6 -> "cceM6"
+        CceUnrated -> "cceUnrated"
 
-instance FromJSON VideoProcessingDetailsProcessingFailureReason where
-    parseJSON = parseJSONText "VideoProcessingDetailsProcessingFailureReason"
+instance FromJSON ContentRatingCceRating where
+    parseJSON = parseJSONText "ContentRatingCceRating"
 
-instance ToJSON VideoProcessingDetailsProcessingFailureReason where
+instance ToJSON ContentRatingCceRating where
     toJSON = toJSONText
 
--- | The video\'s processing status. This value indicates whether YouTube was
--- able to process the video or if the video is still being processed.
-data VideoProcessingDetailsProcessingStatus
-    = VPDPSFailed
-      -- ^ @failed@
-    | VPDPSProcessing
-      -- ^ @processing@
-    | VPDPSSucceeded
-      -- ^ @succeeded@
-    | VPDPSTerminated
-      -- ^ @terminated@
+-- | The video\'s rating from Luxembourg\'s Commission de surveillance de la
+-- classification des films (CSCF).
+data ContentRatingCscfRating
+    = CSCF12
+      -- ^ @cscf12@
+    | CSCF16
+      -- ^ @cscf16@
+    | CSCF18
+      -- ^ @cscf18@
+    | CSCF6
+      -- ^ @cscf6@
+    | CSCF9
+      -- ^ @cscf9@
+    | CscfA
+      -- ^ @cscfA@
+    | CscfAl
+      -- ^ @cscfAl@
+    | CscfUnrated
+      -- ^ @cscfUnrated@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable VideoProcessingDetailsProcessingStatus
+instance Hashable ContentRatingCscfRating
 
-instance FromText VideoProcessingDetailsProcessingStatus where
+instance FromText ContentRatingCscfRating where
     fromText = \case
-        "failed" -> Just VPDPSFailed
-        "processing" -> Just VPDPSProcessing
-        "succeeded" -> Just VPDPSSucceeded
-        "terminated" -> Just VPDPSTerminated
+        "cscf12" -> Just CSCF12
+        "cscf16" -> Just CSCF16
+        "cscf18" -> Just CSCF18
+        "cscf6" -> Just CSCF6
+        "cscf9" -> Just CSCF9
+        "cscfA" -> Just CscfA
+        "cscfAl" -> Just CscfAl
+        "cscfUnrated" -> Just CscfUnrated
         _ -> Nothing
 
-instance ToText VideoProcessingDetailsProcessingStatus where
+instance ToText ContentRatingCscfRating where
     toText = \case
-        VPDPSFailed -> "failed"
-        VPDPSProcessing -> "processing"
-        VPDPSSucceeded -> "succeeded"
-        VPDPSTerminated -> "terminated"
+        CSCF12 -> "cscf12"
+        CSCF16 -> "cscf16"
+        CSCF18 -> "cscf18"
+        CSCF6 -> "cscf6"
+        CSCF9 -> "cscf9"
+        CscfA -> "cscfA"
+        CscfAl -> "cscfAl"
+        CscfUnrated -> "cscfUnrated"
 
-instance FromJSON VideoProcessingDetailsProcessingStatus where
-    parseJSON = parseJSONText "VideoProcessingDetailsProcessingStatus"
+instance FromJSON ContentRatingCscfRating where
+    parseJSON = parseJSONText "ContentRatingCscfRating"
 
-instance ToJSON VideoProcessingDetailsProcessingStatus where
+instance ToJSON ContentRatingCscfRating where
+    toJSON = toJSONText
+
+-- | The video\'s British Board of Film Classification (BBFC) rating.
+data ContentRatingBbfcRating
+    = BBFC12
+      -- ^ @bbfc12@
+    | Bbfc12a
+      -- ^ @bbfc12a@
+    | BBFC15
+      -- ^ @bbfc15@
+    | BBFC18
+      -- ^ @bbfc18@
+    | BbfcPg
+      -- ^ @bbfcPg@
+    | BBFCR18
+      -- ^ @bbfcR18@
+    | BbfcU
+      -- ^ @bbfcU@
+    | BbfcUnrated
+      -- ^ @bbfcUnrated@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingBbfcRating
+
+instance FromText ContentRatingBbfcRating where
+    fromText = \case
+        "bbfc12" -> Just BBFC12
+        "bbfc12a" -> Just Bbfc12a
+        "bbfc15" -> Just BBFC15
+        "bbfc18" -> Just BBFC18
+        "bbfcPg" -> Just BbfcPg
+        "bbfcR18" -> Just BBFCR18
+        "bbfcU" -> Just BbfcU
+        "bbfcUnrated" -> Just BbfcUnrated
+        _ -> Nothing
+
+instance ToText ContentRatingBbfcRating where
+    toText = \case
+        BBFC12 -> "bbfc12"
+        Bbfc12a -> "bbfc12a"
+        BBFC15 -> "bbfc15"
+        BBFC18 -> "bbfc18"
+        BbfcPg -> "bbfcPg"
+        BBFCR18 -> "bbfcR18"
+        BbfcU -> "bbfcU"
+        BbfcUnrated -> "bbfcUnrated"
+
+instance FromJSON ContentRatingBbfcRating where
+    parseJSON = parseJSONText "ContentRatingBbfcRating"
+
+instance ToJSON ContentRatingBbfcRating where
+    toJSON = toJSONText
+
+-- | The videoSyndicated parameter lets you to restrict a search to only
+-- videos that can be played outside youtube.com. If you specify a value
+-- for this parameter, you must also set the type parameter\'s value to
+-- video.
+data SearchList'VideoSyndicated
+    = SLVSAny
+      -- ^ @any@
+      -- Return all videos, syndicated or not.
+    | SLVSTrue'
+      -- ^ @true@
+      -- Only retrieve syndicated videos.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable SearchList'VideoSyndicated
+
+instance FromText SearchList'VideoSyndicated where
+    fromText = \case
+        "any" -> Just SLVSAny
+        "true" -> Just SLVSTrue'
+        _ -> Nothing
+
+instance ToText SearchList'VideoSyndicated where
+    toText = \case
+        SLVSAny -> "any"
+        SLVSTrue' -> "true"
+
+instance FromJSON SearchList'VideoSyndicated where
+    parseJSON = parseJSONText "SearchList'VideoSyndicated"
+
+instance ToJSON SearchList'VideoSyndicated where
+    toJSON = toJSONText
+
+-- | The video\'s TV Parental Guidelines (TVPG) rating.
+data ContentRatingTvpgRating
+    = PG14
+      -- ^ @pg14@
+    | TvpgG
+      -- ^ @tvpgG@
+    | TvpgMa
+      -- ^ @tvpgMa@
+    | TvpgPg
+      -- ^ @tvpgPg@
+    | TvpgUnrated
+      -- ^ @tvpgUnrated@
+    | TvpgY
+      -- ^ @tvpgY@
+    | TVPGY7
+      -- ^ @tvpgY7@
+    | TvpgY7Fv
+      -- ^ @tvpgY7Fv@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingTvpgRating
+
+instance FromText ContentRatingTvpgRating where
+    fromText = \case
+        "pg14" -> Just PG14
+        "tvpgG" -> Just TvpgG
+        "tvpgMa" -> Just TvpgMa
+        "tvpgPg" -> Just TvpgPg
+        "tvpgUnrated" -> Just TvpgUnrated
+        "tvpgY" -> Just TvpgY
+        "tvpgY7" -> Just TVPGY7
+        "tvpgY7Fv" -> Just TvpgY7Fv
+        _ -> Nothing
+
+instance ToText ContentRatingTvpgRating where
+    toText = \case
+        PG14 -> "pg14"
+        TvpgG -> "tvpgG"
+        TvpgMa -> "tvpgMa"
+        TvpgPg -> "tvpgPg"
+        TvpgUnrated -> "tvpgUnrated"
+        TvpgY -> "tvpgY"
+        TVPGY7 -> "tvpgY7"
+        TvpgY7Fv -> "tvpgY7Fv"
+
+instance FromJSON ContentRatingTvpgRating where
+    parseJSON = parseJSONText "ContentRatingTvpgRating"
+
+instance ToJSON ContentRatingTvpgRating where
+    toJSON = toJSONText
+
+-- | The safeSearch parameter indicates whether the search results should
+-- include restricted content as well as standard content.
+data SearchList'SafeSearch
+    = Moderate
+      -- ^ @moderate@
+      -- YouTube will filter some content from search results and, at the least,
+      -- will filter content that is restricted in your locale. Based on their
+      -- content, search results could be removed from search results or demoted
+      -- in search results. This is the default parameter value.
+    | None
+      -- ^ @none@
+      -- YouTube will not filter the search result set.
+    | Strict
+      -- ^ @strict@
+      -- YouTube will try to exclude all restricted content from the search
+      -- result set. Based on their content, search results could be removed from
+      -- search results or demoted in search results.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable SearchList'SafeSearch
+
+instance FromText SearchList'SafeSearch where
+    fromText = \case
+        "moderate" -> Just Moderate
+        "none" -> Just None
+        "strict" -> Just Strict
+        _ -> Nothing
+
+instance ToText SearchList'SafeSearch where
+    toText = \case
+        Moderate -> "moderate"
+        None -> "none"
+        Strict -> "strict"
+
+instance FromJSON SearchList'SafeSearch where
+    parseJSON = parseJSONText "SearchList'SafeSearch"
+
+instance ToJSON SearchList'SafeSearch where
+    toJSON = toJSONText
+
+-- | A rating that YouTube uses to identify age-restricted content.
+data ContentRatingYtRating
+    = YtAgeRestricted
+      -- ^ @ytAgeRestricted@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingYtRating
+
+instance FromText ContentRatingYtRating where
+    fromText = \case
+        "ytAgeRestricted" -> Just YtAgeRestricted
+        _ -> Nothing
+
+instance ToText ContentRatingYtRating where
+    toText = \case
+        YtAgeRestricted -> "ytAgeRestricted"
+
+instance FromJSON ContentRatingYtRating where
+    parseJSON = parseJSONText "ContentRatingYtRating"
+
+instance ToJSON ContentRatingYtRating where
+    toJSON = toJSONText
+
+-- | The video\'s rating from Malta\'s Film Age-Classification Board.
+data ContentRatingMccaaRating
+    = MCCAA12
+      -- ^ @mccaa12@
+    | Mccaa12a
+      -- ^ @mccaa12a@
+    | MCCAA14
+      -- ^ @mccaa14@
+    | MCCAA15
+      -- ^ @mccaa15@
+    | MCCAA16
+      -- ^ @mccaa16@
+    | MCCAA18
+      -- ^ @mccaa18@
+    | MccaaPg
+      -- ^ @mccaaPg@
+    | MccaaU
+      -- ^ @mccaaU@
+    | MccaaUnrated
+      -- ^ @mccaaUnrated@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingMccaaRating
+
+instance FromText ContentRatingMccaaRating where
+    fromText = \case
+        "mccaa12" -> Just MCCAA12
+        "mccaa12a" -> Just Mccaa12a
+        "mccaa14" -> Just MCCAA14
+        "mccaa15" -> Just MCCAA15
+        "mccaa16" -> Just MCCAA16
+        "mccaa18" -> Just MCCAA18
+        "mccaaPg" -> Just MccaaPg
+        "mccaaU" -> Just MccaaU
+        "mccaaUnrated" -> Just MccaaUnrated
+        _ -> Nothing
+
+instance ToText ContentRatingMccaaRating where
+    toText = \case
+        MCCAA12 -> "mccaa12"
+        Mccaa12a -> "mccaa12a"
+        MCCAA14 -> "mccaa14"
+        MCCAA15 -> "mccaa15"
+        MCCAA16 -> "mccaa16"
+        MCCAA18 -> "mccaa18"
+        MccaaPg -> "mccaaPg"
+        MccaaU -> "mccaaU"
+        MccaaUnrated -> "mccaaUnrated"
+
+instance FromJSON ContentRatingMccaaRating where
+    parseJSON = parseJSONText "ContentRatingMccaaRating"
+
+instance ToJSON ContentRatingMccaaRating where
+    toJSON = toJSONText
+
+-- | Defines the context of the ping.
+data ChannelConversionPingContext
+    = Cview
+      -- ^ @cview@
+    | Subscribe
+      -- ^ @subscribe@
+    | Unsubscribe
+      -- ^ @unsubscribe@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ChannelConversionPingContext
+
+instance FromText ChannelConversionPingContext where
+    fromText = \case
+        "cview" -> Just Cview
+        "subscribe" -> Just Subscribe
+        "unsubscribe" -> Just Unsubscribe
+        _ -> Nothing
+
+instance ToText ChannelConversionPingContext where
+    toText = \case
+        Cview -> "cview"
+        Subscribe -> "subscribe"
+        Unsubscribe -> "unsubscribe"
+
+instance FromJSON ChannelConversionPingContext where
+    parseJSON = parseJSONText "ChannelConversionPingContext"
+
+instance ToJSON ChannelConversionPingContext where
+    toJSON = toJSONText
+
+-- | Indicates if the video is an upcoming\/active live broadcast. Or it\'s
+-- \"none\" if the video is not an upcoming\/active live broadcast.
+data VideoSnippetLiveBroadcastContent
+    = VSLBCLive
+      -- ^ @live@
+    | VSLBCNone
+      -- ^ @none@
+    | VSLBCUpcoming
+      -- ^ @upcoming@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable VideoSnippetLiveBroadcastContent
+
+instance FromText VideoSnippetLiveBroadcastContent where
+    fromText = \case
+        "live" -> Just VSLBCLive
+        "none" -> Just VSLBCNone
+        "upcoming" -> Just VSLBCUpcoming
+        _ -> Nothing
+
+instance ToText VideoSnippetLiveBroadcastContent where
+    toText = \case
+        VSLBCLive -> "live"
+        VSLBCNone -> "none"
+        VSLBCUpcoming -> "upcoming"
+
+instance FromJSON VideoSnippetLiveBroadcastContent where
+    parseJSON = parseJSONText "VideoSnippetLiveBroadcastContent"
+
+instance ToJSON VideoSnippetLiveBroadcastContent where
+    toJSON = toJSONText
+
+-- | The broadcastStatus parameter identifies the state to which the
+-- broadcast is changing. Note that to transition a broadcast to either the
+-- testing or live state, the status.streamStatus must be active for the
+-- stream that the broadcast is bound to.
+data LiveBroadcastsTransition'BroadcastStatus
+    = Complete
+      -- ^ @complete@
+      -- The broadcast is over. YouTube stops transmitting video.
+    | Live
+      -- ^ @live@
+      -- The broadcast is visible to its audience. YouTube transmits video to the
+      -- broadcast\'s monitor stream and its broadcast stream.
+    | Testing
+      -- ^ @testing@
+      -- Start testing the broadcast. YouTube transmits video to the broadcast\'s
+      -- monitor stream. Note that you can only transition a broadcast to the
+      -- testing state if its contentDetails.monitorStream.enableMonitorStream
+      -- property is set to true.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable LiveBroadcastsTransition'BroadcastStatus
+
+instance FromText LiveBroadcastsTransition'BroadcastStatus where
+    fromText = \case
+        "complete" -> Just Complete
+        "live" -> Just Live
+        "testing" -> Just Testing
+        _ -> Nothing
+
+instance ToText LiveBroadcastsTransition'BroadcastStatus where
+    toText = \case
+        Complete -> "complete"
+        Live -> "live"
+        Testing -> "testing"
+
+instance FromJSON LiveBroadcastsTransition'BroadcastStatus where
+    parseJSON = parseJSONText "LiveBroadcastsTransition'BroadcastStatus"
+
+instance ToJSON LiveBroadcastsTransition'BroadcastStatus where
+    toJSON = toJSONText
+
+-- | Describes in which corner of the video the visual widget will appear.
+data InvideoPositionCornerPosition
+    = BottomLeft
+      -- ^ @bottomLeft@
+    | BottomRight
+      -- ^ @bottomRight@
+    | TopLeft
+      -- ^ @topLeft@
+    | TopRight
+      -- ^ @topRight@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable InvideoPositionCornerPosition
+
+instance FromText InvideoPositionCornerPosition where
+    fromText = \case
+        "bottomLeft" -> Just BottomLeft
+        "bottomRight" -> Just BottomRight
+        "topLeft" -> Just TopLeft
+        "topRight" -> Just TopRight
+        _ -> Nothing
+
+instance ToText InvideoPositionCornerPosition where
+    toText = \case
+        BottomLeft -> "bottomLeft"
+        BottomRight -> "bottomRight"
+        TopLeft -> "topLeft"
+        TopRight -> "topRight"
+
+instance FromJSON InvideoPositionCornerPosition where
+    parseJSON = parseJSONText "InvideoPositionCornerPosition"
+
+instance ToJSON InvideoPositionCornerPosition where
+    toJSON = toJSONText
+
+-- | The video\'s rating from Singapore\'s Media Development Authority (MDA)
+-- and, specifically, it\'s Board of Film Censors (BFC).
+data ContentRatingMdaRating
+    = MdaG
+      -- ^ @mdaG@
+    | MDAM18
+      -- ^ @mdaM18@
+    | MDANC16
+      -- ^ @mdaNc16@
+    | MdaPg
+      -- ^ @mdaPg@
+    | MDAPG13
+      -- ^ @mdaPg13@
+    | MDAR21
+      -- ^ @mdaR21@
+    | MdaUnrated
+      -- ^ @mdaUnrated@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingMdaRating
+
+instance FromText ContentRatingMdaRating where
+    fromText = \case
+        "mdaG" -> Just MdaG
+        "mdaM18" -> Just MDAM18
+        "mdaNc16" -> Just MDANC16
+        "mdaPg" -> Just MdaPg
+        "mdaPg13" -> Just MDAPG13
+        "mdaR21" -> Just MDAR21
+        "mdaUnrated" -> Just MdaUnrated
+        _ -> Nothing
+
+instance ToText ContentRatingMdaRating where
+    toText = \case
+        MdaG -> "mdaG"
+        MDAM18 -> "mdaM18"
+        MDANC16 -> "mdaNc16"
+        MdaPg -> "mdaPg"
+        MDAPG13 -> "mdaPg13"
+        MDAR21 -> "mdaR21"
+        MdaUnrated -> "mdaUnrated"
+
+instance FromJSON ContentRatingMdaRating where
+    parseJSON = parseJSONText "ContentRatingMdaRating"
+
+instance ToJSON ContentRatingMdaRating where
     toJSON = toJSONText
 
 data VideoRatingRating
@@ -4637,52 +3913,60 @@ instance FromJSON VideoRatingRating where
 instance ToJSON VideoRatingRating where
     toJSON = toJSONText
 
--- | Indicates if the video is an upcoming\/active live broadcast. Or it\'s
--- \"none\" if the video is not an upcoming\/active live broadcast.
-data VideoSnippetLiveBroadcastContent
-    = VSLBCLive
-      -- ^ @live@
-    | VSLBCNone
-      -- ^ @none@
-    | VSLBCUpcoming
-      -- ^ @upcoming@
+-- | The videoLicense parameter filters search results to only include videos
+-- with a particular license. YouTube lets video uploaders choose to attach
+-- either the Creative Commons license or the standard YouTube license to
+-- each of their videos. If you specify a value for this parameter, you
+-- must also set the type parameter\'s value to video.
+data SearchList'VideoLicense
+    = SLVLAny
+      -- ^ @any@
+      -- Return all videos, regardless of which license they have, that match the
+      -- query parameters.
+    | SLVLCreativeCommon
+      -- ^ @creativeCommon@
+      -- Only return videos that have a Creative Commons license. Users can reuse
+      -- videos with this license in other videos that they create. Learn more.
+    | SLVLYouTube
+      -- ^ @youtube@
+      -- Only return videos that have the standard YouTube license.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable VideoSnippetLiveBroadcastContent
+instance Hashable SearchList'VideoLicense
 
-instance FromText VideoSnippetLiveBroadcastContent where
+instance FromText SearchList'VideoLicense where
     fromText = \case
-        "live" -> Just VSLBCLive
-        "none" -> Just VSLBCNone
-        "upcoming" -> Just VSLBCUpcoming
+        "any" -> Just SLVLAny
+        "creativeCommon" -> Just SLVLCreativeCommon
+        "youtube" -> Just SLVLYouTube
         _ -> Nothing
 
-instance ToText VideoSnippetLiveBroadcastContent where
+instance ToText SearchList'VideoLicense where
     toText = \case
-        VSLBCLive -> "live"
-        VSLBCNone -> "none"
-        VSLBCUpcoming -> "upcoming"
+        SLVLAny -> "any"
+        SLVLCreativeCommon -> "creativeCommon"
+        SLVLYouTube -> "youtube"
 
-instance FromJSON VideoSnippetLiveBroadcastContent where
-    parseJSON = parseJSONText "VideoSnippetLiveBroadcastContent"
+instance FromJSON SearchList'VideoLicense where
+    parseJSON = parseJSONText "SearchList'VideoLicense"
 
-instance ToJSON VideoSnippetLiveBroadcastContent where
+instance ToJSON SearchList'VideoLicense where
     toJSON = toJSONText
 
 -- | This value explains why a video failed to upload. This property is only
 -- present if the uploadStatus property indicates that the upload failed.
 data VideoStatusFailureReason
-    = VSFRCodec
+    = Codec
       -- ^ @codec@
-    | VSFRConversion
+    | Conversion
       -- ^ @conversion@
-    | VSFREmptyFile
+    | EmptyFile
       -- ^ @emptyFile@
-    | VSFRInvalidFile
+    | InvalidFile
       -- ^ @invalidFile@
-    | VSFRTooSmall
+    | TooSmall
       -- ^ @tooSmall@
-    | VSFRUploadAborted
+    | UploadAborted
       -- ^ @uploadAborted@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -4690,22 +3974,22 @@ instance Hashable VideoStatusFailureReason
 
 instance FromText VideoStatusFailureReason where
     fromText = \case
-        "codec" -> Just VSFRCodec
-        "conversion" -> Just VSFRConversion
-        "emptyFile" -> Just VSFREmptyFile
-        "invalidFile" -> Just VSFRInvalidFile
-        "tooSmall" -> Just VSFRTooSmall
-        "uploadAborted" -> Just VSFRUploadAborted
+        "codec" -> Just Codec
+        "conversion" -> Just Conversion
+        "emptyFile" -> Just EmptyFile
+        "invalidFile" -> Just InvalidFile
+        "tooSmall" -> Just TooSmall
+        "uploadAborted" -> Just UploadAborted
         _ -> Nothing
 
 instance ToText VideoStatusFailureReason where
     toText = \case
-        VSFRCodec -> "codec"
-        VSFRConversion -> "conversion"
-        VSFREmptyFile -> "emptyFile"
-        VSFRInvalidFile -> "invalidFile"
-        VSFRTooSmall -> "tooSmall"
-        VSFRUploadAborted -> "uploadAborted"
+        Codec -> "codec"
+        Conversion -> "conversion"
+        EmptyFile -> "emptyFile"
+        InvalidFile -> "invalidFile"
+        TooSmall -> "tooSmall"
+        UploadAborted -> "uploadAborted"
 
 instance FromJSON VideoStatusFailureReason where
     parseJSON = parseJSONText "VideoStatusFailureReason"
@@ -4713,11 +3997,506 @@ instance FromJSON VideoStatusFailureReason where
 instance ToJSON VideoStatusFailureReason where
     toJSON = toJSONText
 
+-- | The video\'s Departamento de Justiça, Classificação, Qualificação e
+-- Títulos (DJCQT - Brazil) rating.
+data ContentRatingDjctqRating
+    = DJCTQ10
+      -- ^ @djctq10@
+    | DJCTQ12
+      -- ^ @djctq12@
+    | DJCTQ14
+      -- ^ @djctq14@
+    | DJCTQ16
+      -- ^ @djctq16@
+    | DJCTQ18
+      -- ^ @djctq18@
+    | DjctqL
+      -- ^ @djctqL@
+    | DjctqUnrated
+      -- ^ @djctqUnrated@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingDjctqRating
+
+instance FromText ContentRatingDjctqRating where
+    fromText = \case
+        "djctq10" -> Just DJCTQ10
+        "djctq12" -> Just DJCTQ12
+        "djctq14" -> Just DJCTQ14
+        "djctq16" -> Just DJCTQ16
+        "djctq18" -> Just DJCTQ18
+        "djctqL" -> Just DjctqL
+        "djctqUnrated" -> Just DjctqUnrated
+        _ -> Nothing
+
+instance ToText ContentRatingDjctqRating where
+    toText = \case
+        DJCTQ10 -> "djctq10"
+        DJCTQ12 -> "djctq12"
+        DJCTQ14 -> "djctq14"
+        DJCTQ16 -> "djctq16"
+        DJCTQ18 -> "djctq18"
+        DjctqL -> "djctqL"
+        DjctqUnrated -> "djctqUnrated"
+
+instance FromJSON ContentRatingDjctqRating where
+    parseJSON = parseJSONText "ContentRatingDjctqRating"
+
+instance ToJSON ContentRatingDjctqRating where
+    toJSON = toJSONText
+
+-- | The video\'s Australian Classification Board (ACB) or Australian
+-- Communications and Media Authority (ACMA) rating. ACMA ratings are used
+-- to classify children\'s television programming.
+data ContentRatingAcbRating
+    = AcbC
+      -- ^ @acbC@
+    | AcbE
+      -- ^ @acbE@
+    | AcbG
+      -- ^ @acbG@
+    | AcbM
+      -- ^ @acbM@
+    | AcbMa15plus
+      -- ^ @acbMa15plus@
+    | AcbP
+      -- ^ @acbP@
+    | AcbPg
+      -- ^ @acbPg@
+    | AcbR18plus
+      -- ^ @acbR18plus@
+    | AcbUnrated
+      -- ^ @acbUnrated@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingAcbRating
+
+instance FromText ContentRatingAcbRating where
+    fromText = \case
+        "acbC" -> Just AcbC
+        "acbE" -> Just AcbE
+        "acbG" -> Just AcbG
+        "acbM" -> Just AcbM
+        "acbMa15plus" -> Just AcbMa15plus
+        "acbP" -> Just AcbP
+        "acbPg" -> Just AcbPg
+        "acbR18plus" -> Just AcbR18plus
+        "acbUnrated" -> Just AcbUnrated
+        _ -> Nothing
+
+instance ToText ContentRatingAcbRating where
+    toText = \case
+        AcbC -> "acbC"
+        AcbE -> "acbE"
+        AcbG -> "acbG"
+        AcbM -> "acbM"
+        AcbMa15plus -> "acbMa15plus"
+        AcbP -> "acbP"
+        AcbPg -> "acbPg"
+        AcbR18plus -> "acbR18plus"
+        AcbUnrated -> "acbUnrated"
+
+instance FromJSON ContentRatingAcbRating where
+    parseJSON = parseJSONText "ContentRatingAcbRating"
+
+instance ToJSON ContentRatingAcbRating where
+    toJSON = toJSONText
+
+data LiveStreamStatusStreamStatus
+    = LSSSSActive
+      -- ^ @active@
+    | LSSSSCreated
+      -- ^ @created@
+    | LSSSSError'
+      -- ^ @error@
+    | LSSSSInactive
+      -- ^ @inactive@
+    | LSSSSReady
+      -- ^ @ready@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable LiveStreamStatusStreamStatus
+
+instance FromText LiveStreamStatusStreamStatus where
+    fromText = \case
+        "active" -> Just LSSSSActive
+        "created" -> Just LSSSSCreated
+        "error" -> Just LSSSSError'
+        "inactive" -> Just LSSSSInactive
+        "ready" -> Just LSSSSReady
+        _ -> Nothing
+
+instance ToText LiveStreamStatusStreamStatus where
+    toText = \case
+        LSSSSActive -> "active"
+        LSSSSCreated -> "created"
+        LSSSSError' -> "error"
+        LSSSSInactive -> "inactive"
+        LSSSSReady -> "ready"
+
+instance FromJSON LiveStreamStatusStreamStatus where
+    parseJSON = parseJSONText "LiveStreamStatusStreamStatus"
+
+instance ToJSON LiveStreamStatusStreamStatus where
+    toJSON = toJSONText
+
+-- | The video\'s rating from the Commission de Contrôle des Films (Belgium).
+data ContentRatingCicfRating
+    = CicfE
+      -- ^ @cicfE@
+    | CicfKntEna
+      -- ^ @cicfKntEna@
+    | CicfKtEa
+      -- ^ @cicfKtEa@
+    | CicfUnrated
+      -- ^ @cicfUnrated@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingCicfRating
+
+instance FromText ContentRatingCicfRating where
+    fromText = \case
+        "cicfE" -> Just CicfE
+        "cicfKntEna" -> Just CicfKntEna
+        "cicfKtEa" -> Just CicfKtEa
+        "cicfUnrated" -> Just CicfUnrated
+        _ -> Nothing
+
+instance ToText ContentRatingCicfRating where
+    toText = \case
+        CicfE -> "cicfE"
+        CicfKntEna -> "cicfKntEna"
+        CicfKtEa -> "cicfKtEa"
+        CicfUnrated -> "cicfUnrated"
+
+instance FromJSON ContentRatingCicfRating where
+    parseJSON = parseJSONText "ContentRatingCicfRating"
+
+instance ToJSON ContentRatingCicfRating where
+    toJSON = toJSONText
+
+-- | The method or protocol used to transmit the video stream.
+data CdnSettingsIngestionType
+    = Dash
+      -- ^ @dash@
+    | Rtmp
+      -- ^ @rtmp@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable CdnSettingsIngestionType
+
+instance FromText CdnSettingsIngestionType where
+    fromText = \case
+        "dash" -> Just Dash
+        "rtmp" -> Just Rtmp
+        _ -> Nothing
+
+instance ToText CdnSettingsIngestionType where
+    toText = \case
+        Dash -> "dash"
+        Rtmp -> "rtmp"
+
+instance FromJSON CdnSettingsIngestionType where
+    parseJSON = parseJSONText "CdnSettingsIngestionType"
+
+instance ToJSON CdnSettingsIngestionType where
+    toJSON = toJSONText
+
+-- | The comment\'s moderation status. Will not be set if the comments were
+-- requested through the id filter.
+data CommentSnippetModerationStatus
+    = CSMSHeldForReview
+      -- ^ @heldForReview@
+    | CSMSLikelySpam
+      -- ^ @likelySpam@
+    | CSMSPublished
+      -- ^ @published@
+    | CSMSRejected
+      -- ^ @rejected@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable CommentSnippetModerationStatus
+
+instance FromText CommentSnippetModerationStatus where
+    fromText = \case
+        "heldForReview" -> Just CSMSHeldForReview
+        "likelySpam" -> Just CSMSLikelySpam
+        "published" -> Just CSMSPublished
+        "rejected" -> Just CSMSRejected
+        _ -> Nothing
+
+instance ToText CommentSnippetModerationStatus where
+    toText = \case
+        CSMSHeldForReview -> "heldForReview"
+        CSMSLikelySpam -> "likelySpam"
+        CSMSPublished -> "published"
+        CSMSRejected -> "rejected"
+
+instance FromJSON CommentSnippetModerationStatus where
+    parseJSON = parseJSONText "CommentSnippetModerationStatus"
+
+instance ToJSON CommentSnippetModerationStatus where
+    toJSON = toJSONText
+
+-- | The video\'s rating from Nigeria\'s National Film and Video Censors
+-- Board.
+data ContentRatingNfvcbRating
+    = NFVCB12
+      -- ^ @nfvcb12@
+    | Nfvcb12a
+      -- ^ @nfvcb12a@
+    | NFVCB15
+      -- ^ @nfvcb15@
+    | NFVCB18
+      -- ^ @nfvcb18@
+    | NfvcbG
+      -- ^ @nfvcbG@
+    | NfvcbPg
+      -- ^ @nfvcbPg@
+    | NfvcbRe
+      -- ^ @nfvcbRe@
+    | NfvcbUnrated
+      -- ^ @nfvcbUnrated@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingNfvcbRating
+
+instance FromText ContentRatingNfvcbRating where
+    fromText = \case
+        "nfvcb12" -> Just NFVCB12
+        "nfvcb12a" -> Just Nfvcb12a
+        "nfvcb15" -> Just NFVCB15
+        "nfvcb18" -> Just NFVCB18
+        "nfvcbG" -> Just NfvcbG
+        "nfvcbPg" -> Just NfvcbPg
+        "nfvcbRe" -> Just NfvcbRe
+        "nfvcbUnrated" -> Just NfvcbUnrated
+        _ -> Nothing
+
+instance ToText ContentRatingNfvcbRating where
+    toText = \case
+        NFVCB12 -> "nfvcb12"
+        Nfvcb12a -> "nfvcb12a"
+        NFVCB15 -> "nfvcb15"
+        NFVCB18 -> "nfvcb18"
+        NfvcbG -> "nfvcbG"
+        NfvcbPg -> "nfvcbPg"
+        NfvcbRe -> "nfvcbRe"
+        NfvcbUnrated -> "nfvcbUnrated"
+
+instance FromJSON ContentRatingNfvcbRating where
+    parseJSON = parseJSONText "ContentRatingNfvcbRating"
+
+instance ToJSON ContentRatingNfvcbRating where
+    toJSON = toJSONText
+
+-- | This property has been deprecated. Use the
+-- contentDetails.contentRating.cncRating instead.
+data ContentRatingFmocRating
+    = FMOC10
+      -- ^ @fmoc10@
+    | FMOC12
+      -- ^ @fmoc12@
+    | FMOC16
+      -- ^ @fmoc16@
+    | FMOC18
+      -- ^ @fmoc18@
+    | FmocE
+      -- ^ @fmocE@
+    | FmocU
+      -- ^ @fmocU@
+    | FmocUnrated
+      -- ^ @fmocUnrated@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingFmocRating
+
+instance FromText ContentRatingFmocRating where
+    fromText = \case
+        "fmoc10" -> Just FMOC10
+        "fmoc12" -> Just FMOC12
+        "fmoc16" -> Just FMOC16
+        "fmoc18" -> Just FMOC18
+        "fmocE" -> Just FmocE
+        "fmocU" -> Just FmocU
+        "fmocUnrated" -> Just FmocUnrated
+        _ -> Nothing
+
+instance ToText ContentRatingFmocRating where
+    toText = \case
+        FMOC10 -> "fmoc10"
+        FMOC12 -> "fmoc12"
+        FMOC16 -> "fmoc16"
+        FMOC18 -> "fmoc18"
+        FmocE -> "fmocE"
+        FmocU -> "fmocU"
+        FmocUnrated -> "fmocUnrated"
+
+instance FromJSON ContentRatingFmocRating where
+    parseJSON = parseJSONText "ContentRatingFmocRating"
+
+instance ToJSON ContentRatingFmocRating where
+    toJSON = toJSONText
+
+-- | The video\'s National Film Registry of the Russian Federation (MKRF -
+-- Russia) rating.
+data ContentRatingRussiaRating
+    = RUSSIA0
+      -- ^ @russia0@
+    | RUSSIA12
+      -- ^ @russia12@
+    | RUSSIA16
+      -- ^ @russia16@
+    | RUSSIA18
+      -- ^ @russia18@
+    | RUSSIA6
+      -- ^ @russia6@
+    | RussiaUnrated
+      -- ^ @russiaUnrated@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingRussiaRating
+
+instance FromText ContentRatingRussiaRating where
+    fromText = \case
+        "russia0" -> Just RUSSIA0
+        "russia12" -> Just RUSSIA12
+        "russia16" -> Just RUSSIA16
+        "russia18" -> Just RUSSIA18
+        "russia6" -> Just RUSSIA6
+        "russiaUnrated" -> Just RussiaUnrated
+        _ -> Nothing
+
+instance ToText ContentRatingRussiaRating where
+    toText = \case
+        RUSSIA0 -> "russia0"
+        RUSSIA12 -> "russia12"
+        RUSSIA16 -> "russia16"
+        RUSSIA18 -> "russia18"
+        RUSSIA6 -> "russia6"
+        RussiaUnrated -> "russiaUnrated"
+
+instance FromJSON ContentRatingRussiaRating where
+    parseJSON = parseJSONText "ContentRatingRussiaRating"
+
+instance ToJSON ContentRatingRussiaRating where
+    toJSON = toJSONText
+
+-- | The video\'s rating in the Czech Republic.
+data ContentRatingCzfilmRating
+    = CZFILM12
+      -- ^ @czfilm12@
+    | CZFILM14
+      -- ^ @czfilm14@
+    | CZFILM18
+      -- ^ @czfilm18@
+    | CzfilmU
+      -- ^ @czfilmU@
+    | CzfilmUnrated
+      -- ^ @czfilmUnrated@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingCzfilmRating
+
+instance FromText ContentRatingCzfilmRating where
+    fromText = \case
+        "czfilm12" -> Just CZFILM12
+        "czfilm14" -> Just CZFILM14
+        "czfilm18" -> Just CZFILM18
+        "czfilmU" -> Just CzfilmU
+        "czfilmUnrated" -> Just CzfilmUnrated
+        _ -> Nothing
+
+instance ToText ContentRatingCzfilmRating where
+    toText = \case
+        CZFILM12 -> "czfilm12"
+        CZFILM14 -> "czfilm14"
+        CZFILM18 -> "czfilm18"
+        CzfilmU -> "czfilmU"
+        CzfilmUnrated -> "czfilmUnrated"
+
+instance FromJSON ContentRatingCzfilmRating where
+    parseJSON = parseJSONText "ContentRatingCzfilmRating"
+
+instance ToJSON ContentRatingCzfilmRating where
+    toJSON = toJSONText
+
+-- | Defines the context of the ping.
+data VideoConversionPingContext
+    = VCPCComment
+      -- ^ @comment@
+    | VCPCDislike
+      -- ^ @dislike@
+    | VCPCLike
+      -- ^ @like@
+    | VCPCShare
+      -- ^ @share@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable VideoConversionPingContext
+
+instance FromText VideoConversionPingContext where
+    fromText = \case
+        "comment" -> Just VCPCComment
+        "dislike" -> Just VCPCDislike
+        "like" -> Just VCPCLike
+        "share" -> Just VCPCShare
+        _ -> Nothing
+
+instance ToText VideoConversionPingContext where
+    toText = \case
+        VCPCComment -> "comment"
+        VCPCDislike -> "dislike"
+        VCPCLike -> "like"
+        VCPCShare -> "share"
+
+instance FromJSON VideoConversionPingContext where
+    parseJSON = parseJSONText "VideoConversionPingContext"
+
+instance ToJSON VideoConversionPingContext where
+    toJSON = toJSONText
+
+-- | The video\'s rating from Italy\'s Autorità per le Garanzie nelle
+-- Comunicazioni (AGCOM).
+data ContentRatingAgcomRating
+    = AgcomT
+      -- ^ @agcomT@
+    | AgcomUnrated
+      -- ^ @agcomUnrated@
+    | AGCOMVM14
+      -- ^ @agcomVm14@
+    | AGCOMVM18
+      -- ^ @agcomVm18@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingAgcomRating
+
+instance FromText ContentRatingAgcomRating where
+    fromText = \case
+        "agcomT" -> Just AgcomT
+        "agcomUnrated" -> Just AgcomUnrated
+        "agcomVm14" -> Just AGCOMVM14
+        "agcomVm18" -> Just AGCOMVM18
+        _ -> Nothing
+
+instance ToText ContentRatingAgcomRating where
+    toText = \case
+        AgcomT -> "agcomT"
+        AgcomUnrated -> "agcomUnrated"
+        AGCOMVM14 -> "agcomVm14"
+        AGCOMVM18 -> "agcomVm18"
+
+instance FromJSON ContentRatingAgcomRating where
+    parseJSON = parseJSONText "ContentRatingAgcomRating"
+
+instance ToJSON ContentRatingAgcomRating where
+    toJSON = toJSONText
+
 -- | The video\'s license.
 data VideoStatusLicense
-    = VSLCreativeCommon
+    = CreativeCommon
       -- ^ @creativeCommon@
-    | VSLYoutube
+    | YouTube
       -- ^ @youtube@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -4725,14 +4504,14 @@ instance Hashable VideoStatusLicense
 
 instance FromText VideoStatusLicense where
     fromText = \case
-        "creativeCommon" -> Just VSLCreativeCommon
-        "youtube" -> Just VSLYoutube
+        "creativeCommon" -> Just CreativeCommon
+        "youtube" -> Just YouTube
         _ -> Nothing
 
 instance ToText VideoStatusLicense where
     toText = \case
-        VSLCreativeCommon -> "creativeCommon"
-        VSLYoutube -> "youtube"
+        CreativeCommon -> "creativeCommon"
+        YouTube -> "youtube"
 
 instance FromJSON VideoStatusLicense where
     parseJSON = parseJSONText "VideoStatusLicense"
@@ -4740,92 +4519,1222 @@ instance FromJSON VideoStatusLicense where
 instance ToJSON VideoStatusLicense where
     toJSON = toJSONText
 
--- | The video\'s privacy status.
-data VideoStatusPrivacyStatus
-    = VSPSPrivate
+-- | Set this parameter to limit the returned comment threads to a particular
+-- moderation state. Note: This parameter is not supported for use in
+-- conjunction with the id parameter.
+data CommentThreadsList'ModerationStatus
+    = CTLMSHeldForReview
+      -- ^ @heldForReview@
+      -- Retrieve comment threads that are awaiting review by a moderator. A
+      -- comment thread can be included in the response if the top-level comment
+      -- or at least one of the replies to that comment are awaiting review.
+    | CTLMSLikelySpam
+      -- ^ @likelySpam@
+      -- Retrieve comment threads classified as likely to be spam. A comment
+      -- thread can be included in the response if the top-level comment or at
+      -- least one of the replies to that comment is considered likely to be
+      -- spam.
+    | CTLMSPublished
+      -- ^ @published@
+      -- Retrieve threads of published comments. This is the default value. A
+      -- comment thread can be included in the response if its top-level comment
+      -- has been published.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable CommentThreadsList'ModerationStatus
+
+instance FromText CommentThreadsList'ModerationStatus where
+    fromText = \case
+        "heldForReview" -> Just CTLMSHeldForReview
+        "likelySpam" -> Just CTLMSLikelySpam
+        "published" -> Just CTLMSPublished
+        _ -> Nothing
+
+instance ToText CommentThreadsList'ModerationStatus where
+    toText = \case
+        CTLMSHeldForReview -> "heldForReview"
+        CTLMSLikelySpam -> "likelySpam"
+        CTLMSPublished -> "published"
+
+instance FromJSON CommentThreadsList'ModerationStatus where
+    parseJSON = parseJSONText "CommentThreadsList'ModerationStatus"
+
+instance ToJSON CommentThreadsList'ModerationStatus where
+    toJSON = toJSONText
+
+-- | The video\'s rating from the Austrian Board of Media Classification
+-- (Bundesministerium für Unterricht, Kunst und Kultur).
+data ContentRatingBmukkRating
+    = BMUKK10
+      -- ^ @bmukk10@
+    | BMUKK12
+      -- ^ @bmukk12@
+    | BMUKK14
+      -- ^ @bmukk14@
+    | BMUKK16
+      -- ^ @bmukk16@
+    | BMUKK6
+      -- ^ @bmukk6@
+    | BMUKK8
+      -- ^ @bmukk8@
+    | BmukkAa
+      -- ^ @bmukkAa@
+    | BmukkUnrated
+      -- ^ @bmukkUnrated@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingBmukkRating
+
+instance FromText ContentRatingBmukkRating where
+    fromText = \case
+        "bmukk10" -> Just BMUKK10
+        "bmukk12" -> Just BMUKK12
+        "bmukk14" -> Just BMUKK14
+        "bmukk16" -> Just BMUKK16
+        "bmukk6" -> Just BMUKK6
+        "bmukk8" -> Just BMUKK8
+        "bmukkAa" -> Just BmukkAa
+        "bmukkUnrated" -> Just BmukkUnrated
+        _ -> Nothing
+
+instance ToText ContentRatingBmukkRating where
+    toText = \case
+        BMUKK10 -> "bmukk10"
+        BMUKK12 -> "bmukk12"
+        BMUKK14 -> "bmukk14"
+        BMUKK16 -> "bmukk16"
+        BMUKK6 -> "bmukk6"
+        BMUKK8 -> "bmukk8"
+        BmukkAa -> "bmukkAa"
+        BmukkUnrated -> "bmukkUnrated"
+
+instance FromJSON ContentRatingBmukkRating where
+    parseJSON = parseJSONText "ContentRatingBmukkRating"
+
+instance ToJSON ContentRatingBmukkRating where
+    toJSON = toJSONText
+
+-- | The video\'s rating from Taiwan\'s Ministry of Culture (文化部).
+data ContentRatingMoctwRating
+    = MoctwG
+      -- ^ @moctwG@
+    | MoctwP
+      -- ^ @moctwP@
+    | MoctwPg
+      -- ^ @moctwPg@
+    | MoctwR
+      -- ^ @moctwR@
+    | MoctwUnrated
+      -- ^ @moctwUnrated@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingMoctwRating
+
+instance FromText ContentRatingMoctwRating where
+    fromText = \case
+        "moctwG" -> Just MoctwG
+        "moctwP" -> Just MoctwP
+        "moctwPg" -> Just MoctwPg
+        "moctwR" -> Just MoctwR
+        "moctwUnrated" -> Just MoctwUnrated
+        _ -> Nothing
+
+instance ToText ContentRatingMoctwRating where
+    toText = \case
+        MoctwG -> "moctwG"
+        MoctwP -> "moctwP"
+        MoctwPg -> "moctwPg"
+        MoctwR -> "moctwR"
+        MoctwUnrated -> "moctwUnrated"
+
+instance FromJSON ContentRatingMoctwRating where
+    parseJSON = parseJSONText "ContentRatingMoctwRating"
+
+instance ToJSON ContentRatingMoctwRating where
+    toJSON = toJSONText
+
+data ContentRatingItemDjctqRatingReasons
+    = DjctqCriminalActs
+      -- ^ @djctqCriminalActs@
+    | DjctqDrugs
+      -- ^ @djctqDrugs@
+    | DjctqExplicitSex
+      -- ^ @djctqExplicitSex@
+    | DjctqExtremeViolence
+      -- ^ @djctqExtremeViolence@
+    | DjctqIllegalDrugs
+      -- ^ @djctqIllegalDrugs@
+    | DjctqImpactingContent
+      -- ^ @djctqImpactingContent@
+    | DjctqInappropriateLanguage
+      -- ^ @djctqInappropriateLanguage@
+    | DjctqLegalDrugs
+      -- ^ @djctqLegalDrugs@
+    | DjctqNudity
+      -- ^ @djctqNudity@
+    | DjctqSex
+      -- ^ @djctqSex@
+    | DjctqSexualContent
+      -- ^ @djctqSexualContent@
+    | DjctqViolence
+      -- ^ @djctqViolence@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingItemDjctqRatingReasons
+
+instance FromText ContentRatingItemDjctqRatingReasons where
+    fromText = \case
+        "djctqCriminalActs" -> Just DjctqCriminalActs
+        "djctqDrugs" -> Just DjctqDrugs
+        "djctqExplicitSex" -> Just DjctqExplicitSex
+        "djctqExtremeViolence" -> Just DjctqExtremeViolence
+        "djctqIllegalDrugs" -> Just DjctqIllegalDrugs
+        "djctqImpactingContent" -> Just DjctqImpactingContent
+        "djctqInappropriateLanguage" -> Just DjctqInappropriateLanguage
+        "djctqLegalDrugs" -> Just DjctqLegalDrugs
+        "djctqNudity" -> Just DjctqNudity
+        "djctqSex" -> Just DjctqSex
+        "djctqSexualContent" -> Just DjctqSexualContent
+        "djctqViolence" -> Just DjctqViolence
+        _ -> Nothing
+
+instance ToText ContentRatingItemDjctqRatingReasons where
+    toText = \case
+        DjctqCriminalActs -> "djctqCriminalActs"
+        DjctqDrugs -> "djctqDrugs"
+        DjctqExplicitSex -> "djctqExplicitSex"
+        DjctqExtremeViolence -> "djctqExtremeViolence"
+        DjctqIllegalDrugs -> "djctqIllegalDrugs"
+        DjctqImpactingContent -> "djctqImpactingContent"
+        DjctqInappropriateLanguage -> "djctqInappropriateLanguage"
+        DjctqLegalDrugs -> "djctqLegalDrugs"
+        DjctqNudity -> "djctqNudity"
+        DjctqSex -> "djctqSex"
+        DjctqSexualContent -> "djctqSexualContent"
+        DjctqViolence -> "djctqViolence"
+
+instance FromJSON ContentRatingItemDjctqRatingReasons where
+    parseJSON = parseJSONText "ContentRatingItemDjctqRatingReasons"
+
+instance ToJSON ContentRatingItemDjctqRatingReasons where
+    toJSON = toJSONText
+
+-- | voor de Classificatie van Audiovisuele Media (Netherlands).
+data ContentRatingKijkwijzerRating
+    = KIJKWIJZER12
+      -- ^ @kijkwijzer12@
+    | KIJKWIJZER16
+      -- ^ @kijkwijzer16@
+    | KIJKWIJZER18
+      -- ^ @kijkwijzer18@
+    | KIJKWIJZER6
+      -- ^ @kijkwijzer6@
+    | KIJKWIJZER9
+      -- ^ @kijkwijzer9@
+    | KijkwijzerAl
+      -- ^ @kijkwijzerAl@
+    | KijkwijzerUnrated
+      -- ^ @kijkwijzerUnrated@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingKijkwijzerRating
+
+instance FromText ContentRatingKijkwijzerRating where
+    fromText = \case
+        "kijkwijzer12" -> Just KIJKWIJZER12
+        "kijkwijzer16" -> Just KIJKWIJZER16
+        "kijkwijzer18" -> Just KIJKWIJZER18
+        "kijkwijzer6" -> Just KIJKWIJZER6
+        "kijkwijzer9" -> Just KIJKWIJZER9
+        "kijkwijzerAl" -> Just KijkwijzerAl
+        "kijkwijzerUnrated" -> Just KijkwijzerUnrated
+        _ -> Nothing
+
+instance ToText ContentRatingKijkwijzerRating where
+    toText = \case
+        KIJKWIJZER12 -> "kijkwijzer12"
+        KIJKWIJZER16 -> "kijkwijzer16"
+        KIJKWIJZER18 -> "kijkwijzer18"
+        KIJKWIJZER6 -> "kijkwijzer6"
+        KIJKWIJZER9 -> "kijkwijzer9"
+        KijkwijzerAl -> "kijkwijzerAl"
+        KijkwijzerUnrated -> "kijkwijzerUnrated"
+
+instance FromJSON ContentRatingKijkwijzerRating where
+    parseJSON = parseJSONText "ContentRatingKijkwijzerRating"
+
+instance ToJSON ContentRatingKijkwijzerRating where
+    toJSON = toJSONText
+
+-- | This parameter indicates whether the API should return comments
+-- formatted as HTML or as plain text.
+data CommentsList'TextFormat
+    = HTML
+      -- ^ @html@
+      -- Returns the comments in HTML format. This is the default value.
+    | PlainText
+      -- ^ @plainText@
+      -- Returns the comments in plain text format.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable CommentsList'TextFormat
+
+instance FromText CommentsList'TextFormat where
+    fromText = \case
+        "html" -> Just HTML
+        "plainText" -> Just PlainText
+        _ -> Nothing
+
+instance ToText CommentsList'TextFormat where
+    toText = \case
+        HTML -> "html"
+        PlainText -> "plainText"
+
+instance FromJSON CommentsList'TextFormat where
+    parseJSON = parseJSONText "CommentsList'TextFormat"
+
+instance ToJSON CommentsList'TextFormat where
+    toJSON = toJSONText
+
+-- | The rating the viewer has given to this comment. For the time being this
+-- will never return RATE_TYPE_DISLIKE and instead return RATE_TYPE_NONE.
+-- This may change in the future.
+data CommentSnippetViewerRating
+    = CSVRDislike
+      -- ^ @dislike@
+    | CSVRLike
+      -- ^ @like@
+    | CSVRNone
+      -- ^ @none@
+    | CSVRUnspecified
+      -- ^ @unspecified@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable CommentSnippetViewerRating
+
+instance FromText CommentSnippetViewerRating where
+    fromText = \case
+        "dislike" -> Just CSVRDislike
+        "like" -> Just CSVRLike
+        "none" -> Just CSVRNone
+        "unspecified" -> Just CSVRUnspecified
+        _ -> Nothing
+
+instance ToText CommentSnippetViewerRating where
+    toText = \case
+        CSVRDislike -> "dislike"
+        CSVRLike -> "like"
+        CSVRNone -> "none"
+        CSVRUnspecified -> "unspecified"
+
+instance FromJSON CommentSnippetViewerRating where
+    parseJSON = parseJSONText "CommentSnippetViewerRating"
+
+instance ToJSON CommentSnippetViewerRating where
+    toJSON = toJSONText
+
+-- | The video\'s rating from Indonesia\'s Lembaga Sensor Film.
+data ContentRatingLsfRating
+    = LSF13
+      -- ^ @lsf13@
+    | LSF17
+      -- ^ @lsf17@
+    | LSF21
+      -- ^ @lsf21@
+    | LsfA
+      -- ^ @lsfA@
+    | LsfBo
+      -- ^ @lsfBo@
+    | LsfD
+      -- ^ @lsfD@
+    | LsfR
+      -- ^ @lsfR@
+    | LsfSu
+      -- ^ @lsfSu@
+    | LsfUnrated
+      -- ^ @lsfUnrated@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingLsfRating
+
+instance FromText ContentRatingLsfRating where
+    fromText = \case
+        "lsf13" -> Just LSF13
+        "lsf17" -> Just LSF17
+        "lsf21" -> Just LSF21
+        "lsfA" -> Just LsfA
+        "lsfBo" -> Just LsfBo
+        "lsfD" -> Just LsfD
+        "lsfR" -> Just LsfR
+        "lsfSu" -> Just LsfSu
+        "lsfUnrated" -> Just LsfUnrated
+        _ -> Nothing
+
+instance ToText ContentRatingLsfRating where
+    toText = \case
+        LSF13 -> "lsf13"
+        LSF17 -> "lsf17"
+        LSF21 -> "lsf21"
+        LsfA -> "lsfA"
+        LsfBo -> "lsfBo"
+        LsfD -> "lsfD"
+        LsfR -> "lsfR"
+        LsfSu -> "lsfSu"
+        LsfUnrated -> "lsfUnrated"
+
+instance FromJSON ContentRatingLsfRating where
+    parseJSON = parseJSONText "ContentRatingLsfRating"
+
+instance ToJSON ContentRatingLsfRating where
+    toJSON = toJSONText
+
+-- | The video\'s rating from the Bulgarian National Film Center.
+data ContentRatingNfrcRating
+    = NfrcA
+      -- ^ @nfrcA@
+    | NfrcB
+      -- ^ @nfrcB@
+    | NfrcC
+      -- ^ @nfrcC@
+    | NfrcD
+      -- ^ @nfrcD@
+    | NfrcUnrated
+      -- ^ @nfrcUnrated@
+    | NfrcX
+      -- ^ @nfrcX@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingNfrcRating
+
+instance FromText ContentRatingNfrcRating where
+    fromText = \case
+        "nfrcA" -> Just NfrcA
+        "nfrcB" -> Just NfrcB
+        "nfrcC" -> Just NfrcC
+        "nfrcD" -> Just NfrcD
+        "nfrcUnrated" -> Just NfrcUnrated
+        "nfrcX" -> Just NfrcX
+        _ -> Nothing
+
+instance ToText ContentRatingNfrcRating where
+    toText = \case
+        NfrcA -> "nfrcA"
+        NfrcB -> "nfrcB"
+        NfrcC -> "nfrcC"
+        NfrcD -> "nfrcD"
+        NfrcUnrated -> "nfrcUnrated"
+        NfrcX -> "nfrcX"
+
+instance FromJSON ContentRatingNfrcRating where
+    parseJSON = parseJSONText "ContentRatingNfrcRating"
+
+instance ToJSON ContentRatingNfrcRating where
+    toJSON = toJSONText
+
+-- | How severe this issue is to the stream.
+data LiveStreamConfigurationIssueSeverity
+    = Error'
+      -- ^ @error@
+    | Info
+      -- ^ @info@
+    | Warning
+      -- ^ @warning@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable LiveStreamConfigurationIssueSeverity
+
+instance FromText LiveStreamConfigurationIssueSeverity where
+    fromText = \case
+        "error" -> Just Error'
+        "info" -> Just Info
+        "warning" -> Just Warning
+        _ -> Nothing
+
+instance ToText LiveStreamConfigurationIssueSeverity where
+    toText = \case
+        Error' -> "error"
+        Info -> "info"
+        Warning -> "warning"
+
+instance FromJSON LiveStreamConfigurationIssueSeverity where
+    parseJSON = parseJSONText "LiveStreamConfigurationIssueSeverity"
+
+instance ToJSON LiveStreamConfigurationIssueSeverity where
+    toJSON = toJSONText
+
+-- | Specifies the rating to record.
+data VideosRate'Rating
+    = VDislike
+      -- ^ @dislike@
+      -- Records that the authenticated user disliked the video.
+    | VLike
+      -- ^ @like@
+      -- Records that the authenticated user liked the video.
+    | VNone
+      -- ^ @none@
+      -- Removes any rating that the authenticated user had previously set for
+      -- the video.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable VideosRate'Rating
+
+instance FromText VideosRate'Rating where
+    fromText = \case
+        "dislike" -> Just VDislike
+        "like" -> Just VLike
+        "none" -> Just VNone
+        _ -> Nothing
+
+instance ToText VideosRate'Rating where
+    toText = \case
+        VDislike -> "dislike"
+        VLike -> "like"
+        VNone -> "none"
+
+instance FromJSON VideosRate'Rating where
+    parseJSON = parseJSONText "VideosRate'Rating"
+
+instance ToJSON VideosRate'Rating where
+    toJSON = toJSONText
+
+-- | The type of activity that the resource describes.
+data ActivitySnippetType
+    = ASTBulletin
+      -- ^ @bulletin@
+    | ASTChannelItem
+      -- ^ @channelItem@
+    | ASTComment
+      -- ^ @comment@
+    | ASTFavorite
+      -- ^ @favorite@
+    | ASTLike
+      -- ^ @like@
+    | ASTPlaylistItem
+      -- ^ @playlistItem@
+    | ASTPromotedItem
+      -- ^ @promotedItem@
+    | ASTRecommendation
+      -- ^ @recommendation@
+    | ASTSocial
+      -- ^ @social@
+    | ASTSubscription
+      -- ^ @subscription@
+    | ASTUpload
+      -- ^ @upload@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ActivitySnippetType
+
+instance FromText ActivitySnippetType where
+    fromText = \case
+        "bulletin" -> Just ASTBulletin
+        "channelItem" -> Just ASTChannelItem
+        "comment" -> Just ASTComment
+        "favorite" -> Just ASTFavorite
+        "like" -> Just ASTLike
+        "playlistItem" -> Just ASTPlaylistItem
+        "promotedItem" -> Just ASTPromotedItem
+        "recommendation" -> Just ASTRecommendation
+        "social" -> Just ASTSocial
+        "subscription" -> Just ASTSubscription
+        "upload" -> Just ASTUpload
+        _ -> Nothing
+
+instance ToText ActivitySnippetType where
+    toText = \case
+        ASTBulletin -> "bulletin"
+        ASTChannelItem -> "channelItem"
+        ASTComment -> "comment"
+        ASTFavorite -> "favorite"
+        ASTLike -> "like"
+        ASTPlaylistItem -> "playlistItem"
+        ASTPromotedItem -> "promotedItem"
+        ASTRecommendation -> "recommendation"
+        ASTSocial -> "social"
+        ASTSubscription -> "subscription"
+        ASTUpload -> "upload"
+
+instance FromJSON ActivitySnippetType where
+    parseJSON = parseJSONText "ActivitySnippetType"
+
+instance ToJSON ActivitySnippetType where
+    toJSON = toJSONText
+
+-- | The playlist\'s privacy status.
+data PlaylistStatusPrivacyStatus
+    = PSPSPrivate
       -- ^ @private@
-    | VSPSPublic
+    | PSPSPublic
       -- ^ @public@
-    | VSPSUnlisted
+    | PSPSUnlisted
       -- ^ @unlisted@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable VideoStatusPrivacyStatus
+instance Hashable PlaylistStatusPrivacyStatus
 
-instance FromText VideoStatusPrivacyStatus where
+instance FromText PlaylistStatusPrivacyStatus where
     fromText = \case
-        "private" -> Just VSPSPrivate
-        "public" -> Just VSPSPublic
-        "unlisted" -> Just VSPSUnlisted
+        "private" -> Just PSPSPrivate
+        "public" -> Just PSPSPublic
+        "unlisted" -> Just PSPSUnlisted
         _ -> Nothing
 
-instance ToText VideoStatusPrivacyStatus where
+instance ToText PlaylistStatusPrivacyStatus where
     toText = \case
-        VSPSPrivate -> "private"
-        VSPSPublic -> "public"
-        VSPSUnlisted -> "unlisted"
+        PSPSPrivate -> "private"
+        PSPSPublic -> "public"
+        PSPSUnlisted -> "unlisted"
 
-instance FromJSON VideoStatusPrivacyStatus where
-    parseJSON = parseJSONText "VideoStatusPrivacyStatus"
+instance FromJSON PlaylistStatusPrivacyStatus where
+    parseJSON = parseJSONText "PlaylistStatusPrivacyStatus"
 
-instance ToJSON VideoStatusPrivacyStatus where
+instance ToJSON PlaylistStatusPrivacyStatus where
     toJSON = toJSONText
 
--- | This value explains why YouTube rejected an uploaded video. This
--- property is only present if the uploadStatus property indicates that the
--- upload was rejected.
-data VideoStatusRejectionReason
-    = VSRRClaim
-      -- ^ @claim@
-    | VSRRCopyright
-      -- ^ @copyright@
-    | VSRRDuplicate
-      -- ^ @duplicate@
-    | VSRRInappropriate
-      -- ^ @inappropriate@
-    | VSRRLength
-      -- ^ @length@
-    | VSRRTermsOfUse
-      -- ^ @termsOfUse@
-    | VSRRTrademark
-      -- ^ @trademark@
-    | VSRRUploaderAccountClosed
-      -- ^ @uploaderAccountClosed@
-    | VSRRUploaderAccountSuspended
-      -- ^ @uploaderAccountSuspended@
+-- | The type of the topic.
+data LiveBroadcastTopicType
+    = VideoGame
+      -- ^ @videoGame@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable VideoStatusRejectionReason
+instance Hashable LiveBroadcastTopicType
 
-instance FromText VideoStatusRejectionReason where
+instance FromText LiveBroadcastTopicType where
     fromText = \case
-        "claim" -> Just VSRRClaim
-        "copyright" -> Just VSRRCopyright
-        "duplicate" -> Just VSRRDuplicate
-        "inappropriate" -> Just VSRRInappropriate
-        "length" -> Just VSRRLength
-        "termsOfUse" -> Just VSRRTermsOfUse
-        "trademark" -> Just VSRRTrademark
-        "uploaderAccountClosed" -> Just VSRRUploaderAccountClosed
-        "uploaderAccountSuspended" -> Just VSRRUploaderAccountSuspended
+        "videoGame" -> Just VideoGame
         _ -> Nothing
 
-instance ToText VideoStatusRejectionReason where
+instance ToText LiveBroadcastTopicType where
     toText = \case
-        VSRRClaim -> "claim"
-        VSRRCopyright -> "copyright"
-        VSRRDuplicate -> "duplicate"
-        VSRRInappropriate -> "inappropriate"
-        VSRRLength -> "length"
-        VSRRTermsOfUse -> "termsOfUse"
-        VSRRTrademark -> "trademark"
-        VSRRUploaderAccountClosed -> "uploaderAccountClosed"
-        VSRRUploaderAccountSuspended -> "uploaderAccountSuspended"
+        VideoGame -> "videoGame"
 
-instance FromJSON VideoStatusRejectionReason where
-    parseJSON = parseJSONText "VideoStatusRejectionReason"
+instance FromJSON LiveBroadcastTopicType where
+    parseJSON = parseJSONText "LiveBroadcastTopicType"
 
-instance ToJSON VideoStatusRejectionReason where
+instance ToJSON LiveBroadcastTopicType where
+    toJSON = toJSONText
+
+-- | The channelType parameter lets you restrict a search to a particular
+-- type of channel.
+data SearchList'ChannelType
+    = SLCTAny
+      -- ^ @any@
+      -- Return all channels.
+    | SLCTShow
+      -- ^ @show@
+      -- Only retrieve shows.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable SearchList'ChannelType
+
+instance FromText SearchList'ChannelType where
+    fromText = \case
+        "any" -> Just SLCTAny
+        "show" -> Just SLCTShow
+        _ -> Nothing
+
+instance ToText SearchList'ChannelType where
+    toText = \case
+        SLCTAny -> "any"
+        SLCTShow -> "show"
+
+instance FromJSON SearchList'ChannelType where
+    parseJSON = parseJSONText "SearchList'ChannelType"
+
+instance ToJSON SearchList'ChannelType where
+    toJSON = toJSONText
+
+-- | The video\'s Canadian Home Video Rating System (CHVRS) rating.
+data ContentRatingChvrsRating
+    = Chvrs14a
+      -- ^ @chvrs14a@
+    | Chvrs18a
+      -- ^ @chvrs18a@
+    | ChvrsE
+      -- ^ @chvrsE@
+    | ChvrsG
+      -- ^ @chvrsG@
+    | ChvrsPg
+      -- ^ @chvrsPg@
+    | ChvrsR
+      -- ^ @chvrsR@
+    | ChvrsUnrated
+      -- ^ @chvrsUnrated@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingChvrsRating
+
+instance FromText ContentRatingChvrsRating where
+    fromText = \case
+        "chvrs14a" -> Just Chvrs14a
+        "chvrs18a" -> Just Chvrs18a
+        "chvrsE" -> Just ChvrsE
+        "chvrsG" -> Just ChvrsG
+        "chvrsPg" -> Just ChvrsPg
+        "chvrsR" -> Just ChvrsR
+        "chvrsUnrated" -> Just ChvrsUnrated
+        _ -> Nothing
+
+instance ToText ContentRatingChvrsRating where
+    toText = \case
+        Chvrs14a -> "chvrs14a"
+        Chvrs18a -> "chvrs18a"
+        ChvrsE -> "chvrsE"
+        ChvrsG -> "chvrsG"
+        ChvrsPg -> "chvrsPg"
+        ChvrsR -> "chvrsR"
+        ChvrsUnrated -> "chvrsUnrated"
+
+instance FromJSON ContentRatingChvrsRating where
+    parseJSON = parseJSONText "ContentRatingChvrsRating"
+
+instance ToJSON ContentRatingChvrsRating where
+    toJSON = toJSONText
+
+-- | Set this parameter\'s value to html or plainText to instruct the API to
+-- return the comments left by users in html formatted or in plain text.
+data CommentThreadsList'TextFormat
+    = CTLTFHTML
+      -- ^ @html@
+      -- Returns the comments in HTML format. This is the default value.
+    | CTLTFPlainText
+      -- ^ @plainText@
+      -- Returns the comments in plain text format.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable CommentThreadsList'TextFormat
+
+instance FromText CommentThreadsList'TextFormat where
+    fromText = \case
+        "html" -> Just CTLTFHTML
+        "plainText" -> Just CTLTFPlainText
+        _ -> Nothing
+
+instance ToText CommentThreadsList'TextFormat where
+    toText = \case
+        CTLTFHTML -> "html"
+        CTLTFPlainText -> "plainText"
+
+instance FromJSON CommentThreadsList'TextFormat where
+    parseJSON = parseJSONText "CommentThreadsList'TextFormat"
+
+instance ToJSON CommentThreadsList'TextFormat where
+    toJSON = toJSONText
+
+data VideoSuggestionsItemEditorSuggestions
+    = AudioQuietAudioSwap
+      -- ^ @audioQuietAudioSwap@
+    | VideoAutoLevels
+      -- ^ @videoAutoLevels@
+    | VideoCrop
+      -- ^ @videoCrop@
+    | VideoStabilize
+      -- ^ @videoStabilize@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable VideoSuggestionsItemEditorSuggestions
+
+instance FromText VideoSuggestionsItemEditorSuggestions where
+    fromText = \case
+        "audioQuietAudioSwap" -> Just AudioQuietAudioSwap
+        "videoAutoLevels" -> Just VideoAutoLevels
+        "videoCrop" -> Just VideoCrop
+        "videoStabilize" -> Just VideoStabilize
+        _ -> Nothing
+
+instance ToText VideoSuggestionsItemEditorSuggestions where
+    toText = \case
+        AudioQuietAudioSwap -> "audioQuietAudioSwap"
+        VideoAutoLevels -> "videoAutoLevels"
+        VideoCrop -> "videoCrop"
+        VideoStabilize -> "videoStabilize"
+
+instance FromJSON VideoSuggestionsItemEditorSuggestions where
+    parseJSON = parseJSONText "VideoSuggestionsItemEditorSuggestions"
+
+instance ToJSON VideoSuggestionsItemEditorSuggestions where
+    toJSON = toJSONText
+
+-- | The tfmt parameter specifies that the caption track should be returned
+-- in a specific format. If the parameter is not included in the request,
+-- the track is returned in its original format.
+data CaptionsDownload'Tfmt
+    = Sbv
+      -- ^ @sbv@
+      -- SubViewer subtitle.
+    | Scc
+      -- ^ @scc@
+      -- Scenarist Closed Caption format.
+    | Srt
+      -- ^ @srt@
+      -- SubRip subtitle.
+    | Ttml
+      -- ^ @ttml@
+      -- Timed Text Markup Language caption.
+    | Vtt
+      -- ^ @vtt@
+      -- Web Video Text Tracks caption.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable CaptionsDownload'Tfmt
+
+instance FromText CaptionsDownload'Tfmt where
+    fromText = \case
+        "sbv" -> Just Sbv
+        "scc" -> Just Scc
+        "srt" -> Just Srt
+        "ttml" -> Just Ttml
+        "vtt" -> Just Vtt
+        _ -> Nothing
+
+instance ToText CaptionsDownload'Tfmt where
+    toText = \case
+        Sbv -> "sbv"
+        Scc -> "scc"
+        Srt -> "srt"
+        Ttml -> "ttml"
+        Vtt -> "vtt"
+
+instance FromJSON CaptionsDownload'Tfmt where
+    parseJSON = parseJSONText "CaptionsDownload'Tfmt"
+
+instance ToJSON CaptionsDownload'Tfmt where
+    toJSON = toJSONText
+
+-- | The video\'s rating in Venezuela.
+data ContentRatingResorteviolenciaRating
+    = ResorteviolenciaA
+      -- ^ @resorteviolenciaA@
+    | ResorteviolenciaB
+      -- ^ @resorteviolenciaB@
+    | ResorteviolenciaC
+      -- ^ @resorteviolenciaC@
+    | ResorteviolenciaD
+      -- ^ @resorteviolenciaD@
+    | ResorteviolenciaE
+      -- ^ @resorteviolenciaE@
+    | ResorteviolenciaUnrated
+      -- ^ @resorteviolenciaUnrated@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingResorteviolenciaRating
+
+instance FromText ContentRatingResorteviolenciaRating where
+    fromText = \case
+        "resorteviolenciaA" -> Just ResorteviolenciaA
+        "resorteviolenciaB" -> Just ResorteviolenciaB
+        "resorteviolenciaC" -> Just ResorteviolenciaC
+        "resorteviolenciaD" -> Just ResorteviolenciaD
+        "resorteviolenciaE" -> Just ResorteviolenciaE
+        "resorteviolenciaUnrated" -> Just ResorteviolenciaUnrated
+        _ -> Nothing
+
+instance ToText ContentRatingResorteviolenciaRating where
+    toText = \case
+        ResorteviolenciaA -> "resorteviolenciaA"
+        ResorteviolenciaB -> "resorteviolenciaB"
+        ResorteviolenciaC -> "resorteviolenciaC"
+        ResorteviolenciaD -> "resorteviolenciaD"
+        ResorteviolenciaE -> "resorteviolenciaE"
+        ResorteviolenciaUnrated -> "resorteviolenciaUnrated"
+
+instance FromJSON ContentRatingResorteviolenciaRating where
+    parseJSON = parseJSONText "ContentRatingResorteviolenciaRating"
+
+instance ToJSON ContentRatingResorteviolenciaRating where
+    toJSON = toJSONText
+
+-- | This resource\'s privacy status.
+data PlaylistItemStatusPrivacyStatus
+    = PISPSPrivate
+      -- ^ @private@
+    | PISPSPublic
+      -- ^ @public@
+    | PISPSUnlisted
+      -- ^ @unlisted@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable PlaylistItemStatusPrivacyStatus
+
+instance FromText PlaylistItemStatusPrivacyStatus where
+    fromText = \case
+        "private" -> Just PISPSPrivate
+        "public" -> Just PISPSPublic
+        "unlisted" -> Just PISPSUnlisted
+        _ -> Nothing
+
+instance ToText PlaylistItemStatusPrivacyStatus where
+    toText = \case
+        PISPSPrivate -> "private"
+        PISPSPublic -> "public"
+        PISPSUnlisted -> "unlisted"
+
+instance FromJSON PlaylistItemStatusPrivacyStatus where
+    parseJSON = parseJSONText "PlaylistItemStatusPrivacyStatus"
+
+instance ToJSON PlaylistItemStatusPrivacyStatus where
+    toJSON = toJSONText
+
+-- | The video\'s rating from Romania\'s CONSILIUL NATIONAL AL
+-- AUDIOVIZUALULUI (CNA).
+data ContentRatingCnaRating
+    = CNA12
+      -- ^ @cna12@
+    | CNA15
+      -- ^ @cna15@
+    | CNA18
+      -- ^ @cna18@
+    | Cna18plus
+      -- ^ @cna18plus@
+    | CnaAp
+      -- ^ @cnaAp@
+    | CnaUnrated
+      -- ^ @cnaUnrated@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingCnaRating
+
+instance FromText ContentRatingCnaRating where
+    fromText = \case
+        "cna12" -> Just CNA12
+        "cna15" -> Just CNA15
+        "cna18" -> Just CNA18
+        "cna18plus" -> Just Cna18plus
+        "cnaAp" -> Just CnaAp
+        "cnaUnrated" -> Just CnaUnrated
+        _ -> Nothing
+
+instance ToText ContentRatingCnaRating where
+    toText = \case
+        CNA12 -> "cna12"
+        CNA15 -> "cna15"
+        CNA18 -> "cna18"
+        Cna18plus -> "cna18plus"
+        CnaAp -> "cnaAp"
+        CnaUnrated -> "cnaUnrated"
+
+instance FromJSON ContentRatingCnaRating where
+    parseJSON = parseJSONText "ContentRatingCnaRating"
+
+instance ToJSON ContentRatingCnaRating where
+    toJSON = toJSONText
+
+-- | The video\'s INCAA (Instituto Nacional de Cine y Artes Audiovisuales -
+-- Argentina) rating.
+data ContentRatingIncaaRating
+    = IncaaAtp
+      -- ^ @incaaAtp@
+    | IncaaC
+      -- ^ @incaaC@
+    | INCAASAM13
+      -- ^ @incaaSam13@
+    | INCAASAM16
+      -- ^ @incaaSam16@
+    | INCAASAM18
+      -- ^ @incaaSam18@
+    | IncaaUnrated
+      -- ^ @incaaUnrated@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingIncaaRating
+
+instance FromText ContentRatingIncaaRating where
+    fromText = \case
+        "incaaAtp" -> Just IncaaAtp
+        "incaaC" -> Just IncaaC
+        "incaaSam13" -> Just INCAASAM13
+        "incaaSam16" -> Just INCAASAM16
+        "incaaSam18" -> Just INCAASAM18
+        "incaaUnrated" -> Just IncaaUnrated
+        _ -> Nothing
+
+instance ToText ContentRatingIncaaRating where
+    toText = \case
+        IncaaAtp -> "incaaAtp"
+        IncaaC -> "incaaC"
+        INCAASAM13 -> "incaaSam13"
+        INCAASAM16 -> "incaaSam16"
+        INCAASAM18 -> "incaaSam18"
+        IncaaUnrated -> "incaaUnrated"
+
+instance FromJSON ContentRatingIncaaRating where
+    parseJSON = parseJSONText "ContentRatingIncaaRating"
+
+instance ToJSON ContentRatingIncaaRating where
+    toJSON = toJSONText
+
+-- | The order parameter specifies the order in which the API response should
+-- list comment threads. Valid values are: - time - Comment threads are
+-- ordered by time. This is the default behavior. - relevance - Comment
+-- threads are ordered by relevance.Note: This parameter is not supported
+-- for use in conjunction with the id parameter.
+data CommentThreadsList'Order
+    = CTLORelevance
+      -- ^ @relevance@
+      -- Order by relevance.
+    | CTLOTime
+      -- ^ @time@
+      -- Order by time.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable CommentThreadsList'Order
+
+instance FromText CommentThreadsList'Order where
+    fromText = \case
+        "relevance" -> Just CTLORelevance
+        "time" -> Just CTLOTime
+        _ -> Nothing
+
+instance ToText CommentThreadsList'Order where
+    toText = \case
+        CTLORelevance -> "relevance"
+        CTLOTime -> "time"
+
+instance FromJSON CommentThreadsList'Order where
+    parseJSON = parseJSONText "CommentThreadsList'Order"
+
+instance ToJSON CommentThreadsList'Order where
+    toJSON = toJSONText
+
+-- | The video\'s rating in Egypt.
+data ContentRatingEgfilmRating
+    = EGFILM18
+      -- ^ @egfilm18@
+    | EgfilmBn
+      -- ^ @egfilmBn@
+    | EgfilmGn
+      -- ^ @egfilmGn@
+    | EgfilmUnrated
+      -- ^ @egfilmUnrated@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingEgfilmRating
+
+instance FromText ContentRatingEgfilmRating where
+    fromText = \case
+        "egfilm18" -> Just EGFILM18
+        "egfilmBn" -> Just EgfilmBn
+        "egfilmGn" -> Just EgfilmGn
+        "egfilmUnrated" -> Just EgfilmUnrated
+        _ -> Nothing
+
+instance ToText ContentRatingEgfilmRating where
+    toText = \case
+        EGFILM18 -> "egfilm18"
+        EgfilmBn -> "egfilmBn"
+        EgfilmGn -> "egfilmGn"
+        EgfilmUnrated -> "egfilmUnrated"
+
+instance FromJSON ContentRatingEgfilmRating where
+    parseJSON = parseJSONText "ContentRatingEgfilmRating"
+
+instance ToJSON ContentRatingEgfilmRating where
+    toJSON = toJSONText
+
+-- | Privacy status of the channel.
+data ChannelStatusPrivacyStatus
+    = CSPSPrivate
+      -- ^ @private@
+    | CSPSPublic
+      -- ^ @public@
+    | CSPSUnlisted
+      -- ^ @unlisted@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ChannelStatusPrivacyStatus
+
+instance FromText ChannelStatusPrivacyStatus where
+    fromText = \case
+        "private" -> Just CSPSPrivate
+        "public" -> Just CSPSPublic
+        "unlisted" -> Just CSPSUnlisted
+        _ -> Nothing
+
+instance ToText ChannelStatusPrivacyStatus where
+    toText = \case
+        CSPSPrivate -> "private"
+        CSPSPublic -> "public"
+        CSPSUnlisted -> "unlisted"
+
+instance FromJSON ChannelStatusPrivacyStatus where
+    parseJSON = parseJSONText "ChannelStatusPrivacyStatus"
+
+instance ToJSON ChannelStatusPrivacyStatus where
+    toJSON = toJSONText
+
+-- | The video\'s Consejo de Calificación Cinematográfica (Chile) rating.
+data ContentRatingCccRating
+    = CCC14
+      -- ^ @ccc14@
+    | CCC18
+      -- ^ @ccc18@
+    | Ccc18s
+      -- ^ @ccc18s@
+    | Ccc18v
+      -- ^ @ccc18v@
+    | CCC6
+      -- ^ @ccc6@
+    | CccTe
+      -- ^ @cccTe@
+    | CccUnrated
+      -- ^ @cccUnrated@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingCccRating
+
+instance FromText ContentRatingCccRating where
+    fromText = \case
+        "ccc14" -> Just CCC14
+        "ccc18" -> Just CCC18
+        "ccc18s" -> Just Ccc18s
+        "ccc18v" -> Just Ccc18v
+        "ccc6" -> Just CCC6
+        "cccTe" -> Just CccTe
+        "cccUnrated" -> Just CccUnrated
+        _ -> Nothing
+
+instance ToText ContentRatingCccRating where
+    toText = \case
+        CCC14 -> "ccc14"
+        CCC18 -> "ccc18"
+        Ccc18s -> "ccc18s"
+        Ccc18v -> "ccc18v"
+        CCC6 -> "ccc6"
+        CccTe -> "cccTe"
+        CccUnrated -> "cccUnrated"
+
+instance FromJSON ContentRatingCccRating where
+    parseJSON = parseJSONText "ContentRatingCccRating"
+
+instance ToJSON ContentRatingCccRating where
+    toJSON = toJSONText
+
+-- | The videoDimension parameter lets you restrict a search to only retrieve
+-- 2D or 3D videos. If you specify a value for this parameter, you must
+-- also set the type parameter\'s value to video.
+data SearchList'VideoDimension
+    = S2D
+      -- ^ @2d@
+      -- Restrict search results to exclude 3D videos.
+    | S3D
+      -- ^ @3d@
+      -- Restrict search results to only include 3D videos.
+    | SAny
+      -- ^ @any@
+      -- Include both 3D and non-3D videos in returned results. This is the
+      -- default value.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable SearchList'VideoDimension
+
+instance FromText SearchList'VideoDimension where
+    fromText = \case
+        "2d" -> Just S2D
+        "3d" -> Just S3D
+        "any" -> Just SAny
+        _ -> Nothing
+
+instance ToText SearchList'VideoDimension where
+    toText = \case
+        S2D -> "2d"
+        S3D -> "3d"
+        SAny -> "any"
+
+instance FromJSON SearchList'VideoDimension where
+    parseJSON = parseJSONText "SearchList'VideoDimension"
+
+instance ToJSON SearchList'VideoDimension where
+    toJSON = toJSONText
+
+-- | The type of audio track associated with the caption track.
+data CaptionSnippetAudioTrackType
+    = Commentary
+      -- ^ @commentary@
+    | Descriptive
+      -- ^ @descriptive@
+    | Primary
+      -- ^ @primary@
+    | Unknown
+      -- ^ @unknown@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable CaptionSnippetAudioTrackType
+
+instance FromText CaptionSnippetAudioTrackType where
+    fromText = \case
+        "commentary" -> Just Commentary
+        "descriptive" -> Just Descriptive
+        "primary" -> Just Primary
+        "unknown" -> Just Unknown
+        _ -> Nothing
+
+instance ToText CaptionSnippetAudioTrackType where
+    toText = \case
+        Commentary -> "commentary"
+        Descriptive -> "descriptive"
+        Primary -> "primary"
+        Unknown -> "unknown"
+
+instance FromJSON CaptionSnippetAudioTrackType where
+    parseJSON = parseJSONText "CaptionSnippetAudioTrackType"
+
+instance ToJSON CaptionSnippetAudioTrackType where
+    toJSON = toJSONText
+
+-- | The video\'s Irish Film Classification Office (IFCO - Ireland) rating.
+-- See the IFCO website for more information.
+data ContentRatingIfcoRating
+    = IFCO12
+      -- ^ @ifco12@
+    | Ifco12a
+      -- ^ @ifco12a@
+    | IFCO15
+      -- ^ @ifco15@
+    | Ifco15a
+      -- ^ @ifco15a@
+    | IFCO16
+      -- ^ @ifco16@
+    | IFCO18
+      -- ^ @ifco18@
+    | IfcoG
+      -- ^ @ifcoG@
+    | IfcoPg
+      -- ^ @ifcoPg@
+    | IfcoUnrated
+      -- ^ @ifcoUnrated@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ContentRatingIfcoRating
+
+instance FromText ContentRatingIfcoRating where
+    fromText = \case
+        "ifco12" -> Just IFCO12
+        "ifco12a" -> Just Ifco12a
+        "ifco15" -> Just IFCO15
+        "ifco15a" -> Just Ifco15a
+        "ifco16" -> Just IFCO16
+        "ifco18" -> Just IFCO18
+        "ifcoG" -> Just IfcoG
+        "ifcoPg" -> Just IfcoPg
+        "ifcoUnrated" -> Just IfcoUnrated
+        _ -> Nothing
+
+instance ToText ContentRatingIfcoRating where
+    toText = \case
+        IFCO12 -> "ifco12"
+        Ifco12a -> "ifco12a"
+        IFCO15 -> "ifco15"
+        Ifco15a -> "ifco15a"
+        IFCO16 -> "ifco16"
+        IFCO18 -> "ifco18"
+        IfcoG -> "ifcoG"
+        IfcoPg -> "ifcoPg"
+        IfcoUnrated -> "ifcoUnrated"
+
+instance FromJSON ContentRatingIfcoRating where
+    parseJSON = parseJSONText "ContentRatingIfcoRating"
+
+instance ToJSON ContentRatingIfcoRating where
     toJSON = toJSONText
 
 -- | The status of the uploaded video.
@@ -4867,150 +5776,147 @@ instance FromJSON VideoStatusUploadStatus where
 instance ToJSON VideoStatusUploadStatus where
     toJSON = toJSONText
 
-data VideoSuggestionsItemEditorSuggestions
-    = VSIESAudioQuietAudioSwap
-      -- ^ @audioQuietAudioSwap@
-    | VSIESVideoAutoLevels
-      -- ^ @videoAutoLevels@
-    | VSIESVideoCrop
-      -- ^ @videoCrop@
-    | VSIESVideoStabilize
-      -- ^ @videoStabilize@
+-- | The video\'s rating in Israel.
+data ContentRatingIlfilmRating
+    = ILFILM12
+      -- ^ @ilfilm12@
+    | ILFILM16
+      -- ^ @ilfilm16@
+    | ILFILM18
+      -- ^ @ilfilm18@
+    | IlfilmAa
+      -- ^ @ilfilmAa@
+    | IlfilmUnrated
+      -- ^ @ilfilmUnrated@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable VideoSuggestionsItemEditorSuggestions
+instance Hashable ContentRatingIlfilmRating
 
-instance FromText VideoSuggestionsItemEditorSuggestions where
+instance FromText ContentRatingIlfilmRating where
     fromText = \case
-        "audioQuietAudioSwap" -> Just VSIESAudioQuietAudioSwap
-        "videoAutoLevels" -> Just VSIESVideoAutoLevels
-        "videoCrop" -> Just VSIESVideoCrop
-        "videoStabilize" -> Just VSIESVideoStabilize
+        "ilfilm12" -> Just ILFILM12
+        "ilfilm16" -> Just ILFILM16
+        "ilfilm18" -> Just ILFILM18
+        "ilfilmAa" -> Just IlfilmAa
+        "ilfilmUnrated" -> Just IlfilmUnrated
         _ -> Nothing
 
-instance ToText VideoSuggestionsItemEditorSuggestions where
+instance ToText ContentRatingIlfilmRating where
     toText = \case
-        VSIESAudioQuietAudioSwap -> "audioQuietAudioSwap"
-        VSIESVideoAutoLevels -> "videoAutoLevels"
-        VSIESVideoCrop -> "videoCrop"
-        VSIESVideoStabilize -> "videoStabilize"
+        ILFILM12 -> "ilfilm12"
+        ILFILM16 -> "ilfilm16"
+        ILFILM18 -> "ilfilm18"
+        IlfilmAa -> "ilfilmAa"
+        IlfilmUnrated -> "ilfilmUnrated"
 
-instance FromJSON VideoSuggestionsItemEditorSuggestions where
-    parseJSON = parseJSONText "VideoSuggestionsItemEditorSuggestions"
+instance FromJSON ContentRatingIlfilmRating where
+    parseJSON = parseJSONText "ContentRatingIlfilmRating"
 
-instance ToJSON VideoSuggestionsItemEditorSuggestions where
+instance ToJSON ContentRatingIlfilmRating where
     toJSON = toJSONText
 
-data VideoSuggestionsItemProcessingErrors
-    = VSIPEArchiveFile
-      -- ^ @archiveFile@
-    | VSIPEAudioFile
-      -- ^ @audioFile@
-    | VSIPEDocFile
-      -- ^ @docFile@
-    | VSIPEImageFile
-      -- ^ @imageFile@
-    | VSIPENotAVideoFile
-      -- ^ @notAVideoFile@
-    | VSIPEProjectFile
-      -- ^ @projectFile@
+-- | The videoType parameter lets you restrict a search to a particular type
+-- of videos. If you specify a value for this parameter, you must also set
+-- the type parameter\'s value to video.
+data SearchList'VideoType
+    = SLVTAny
+      -- ^ @any@
+      -- Return all videos.
+    | SLVTEpisode
+      -- ^ @episode@
+      -- Only retrieve episodes of shows.
+    | SLVTMovie
+      -- ^ @movie@
+      -- Only retrieve movies.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable VideoSuggestionsItemProcessingErrors
+instance Hashable SearchList'VideoType
 
-instance FromText VideoSuggestionsItemProcessingErrors where
+instance FromText SearchList'VideoType where
     fromText = \case
-        "archiveFile" -> Just VSIPEArchiveFile
-        "audioFile" -> Just VSIPEAudioFile
-        "docFile" -> Just VSIPEDocFile
-        "imageFile" -> Just VSIPEImageFile
-        "notAVideoFile" -> Just VSIPENotAVideoFile
-        "projectFile" -> Just VSIPEProjectFile
+        "any" -> Just SLVTAny
+        "episode" -> Just SLVTEpisode
+        "movie" -> Just SLVTMovie
         _ -> Nothing
 
-instance ToText VideoSuggestionsItemProcessingErrors where
+instance ToText SearchList'VideoType where
     toText = \case
-        VSIPEArchiveFile -> "archiveFile"
-        VSIPEAudioFile -> "audioFile"
-        VSIPEDocFile -> "docFile"
-        VSIPEImageFile -> "imageFile"
-        VSIPENotAVideoFile -> "notAVideoFile"
-        VSIPEProjectFile -> "projectFile"
+        SLVTAny -> "any"
+        SLVTEpisode -> "episode"
+        SLVTMovie -> "movie"
 
-instance FromJSON VideoSuggestionsItemProcessingErrors where
-    parseJSON = parseJSONText "VideoSuggestionsItemProcessingErrors"
+instance FromJSON SearchList'VideoType where
+    parseJSON = parseJSONText "SearchList'VideoType"
 
-instance ToJSON VideoSuggestionsItemProcessingErrors where
+instance ToJSON SearchList'VideoType where
     toJSON = toJSONText
 
-data VideoSuggestionsItemProcessingHints
-    = VSIPHNonStreamableMov
-      -- ^ @nonStreamableMov@
-    | VSIPHSendBestQualityVideo
-      -- ^ @sendBestQualityVideo@
+-- | The video\'s rating in Greece.
+data ContentRatingGrfilmRating
+    = GrfilmE
+      -- ^ @grfilmE@
+    | GrfilmK
+      -- ^ @grfilmK@
+    | GRFILMK13
+      -- ^ @grfilmK13@
+    | GRFILMK17
+      -- ^ @grfilmK17@
+    | GrfilmUnrated
+      -- ^ @grfilmUnrated@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable VideoSuggestionsItemProcessingHints
+instance Hashable ContentRatingGrfilmRating
 
-instance FromText VideoSuggestionsItemProcessingHints where
+instance FromText ContentRatingGrfilmRating where
     fromText = \case
-        "nonStreamableMov" -> Just VSIPHNonStreamableMov
-        "sendBestQualityVideo" -> Just VSIPHSendBestQualityVideo
+        "grfilmE" -> Just GrfilmE
+        "grfilmK" -> Just GrfilmK
+        "grfilmK13" -> Just GRFILMK13
+        "grfilmK17" -> Just GRFILMK17
+        "grfilmUnrated" -> Just GrfilmUnrated
         _ -> Nothing
 
-instance ToText VideoSuggestionsItemProcessingHints where
+instance ToText ContentRatingGrfilmRating where
     toText = \case
-        VSIPHNonStreamableMov -> "nonStreamableMov"
-        VSIPHSendBestQualityVideo -> "sendBestQualityVideo"
+        GrfilmE -> "grfilmE"
+        GrfilmK -> "grfilmK"
+        GRFILMK13 -> "grfilmK13"
+        GRFILMK17 -> "grfilmK17"
+        GrfilmUnrated -> "grfilmUnrated"
 
-instance FromJSON VideoSuggestionsItemProcessingHints where
-    parseJSON = parseJSONText "VideoSuggestionsItemProcessingHints"
+instance FromJSON ContentRatingGrfilmRating where
+    parseJSON = parseJSONText "ContentRatingGrfilmRating"
 
-instance ToJSON VideoSuggestionsItemProcessingHints where
+instance ToJSON ContentRatingGrfilmRating where
     toJSON = toJSONText
 
-data VideoSuggestionsItemProcessingWarnings
-    = VSIPWHasEditlist
-      -- ^ @hasEditlist@
-    | VSIPWInconsistentResolution
-      -- ^ @inconsistentResolution@
-    | VSIPWProblematicAudioCodec
-      -- ^ @problematicAudioCodec@
-    | VSIPWProblematicVideoCodec
-      -- ^ @problematicVideoCodec@
-    | VSIPWUnknownAudioCodec
-      -- ^ @unknownAudioCodec@
-    | VSIPWUnknownContainer
-      -- ^ @unknownContainer@
-    | VSIPWUnknownVideoCodec
-      -- ^ @unknownVideoCodec@
+-- | Describes the type of the promoted item.
+data PromotedItemIdType
+    = PIITRecentUpload
+      -- ^ @recentUpload@
+    | PIITVideo
+      -- ^ @video@
+    | PIITWebsite
+      -- ^ @website@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable VideoSuggestionsItemProcessingWarnings
+instance Hashable PromotedItemIdType
 
-instance FromText VideoSuggestionsItemProcessingWarnings where
+instance FromText PromotedItemIdType where
     fromText = \case
-        "hasEditlist" -> Just VSIPWHasEditlist
-        "inconsistentResolution" -> Just VSIPWInconsistentResolution
-        "problematicAudioCodec" -> Just VSIPWProblematicAudioCodec
-        "problematicVideoCodec" -> Just VSIPWProblematicVideoCodec
-        "unknownAudioCodec" -> Just VSIPWUnknownAudioCodec
-        "unknownContainer" -> Just VSIPWUnknownContainer
-        "unknownVideoCodec" -> Just VSIPWUnknownVideoCodec
+        "recentUpload" -> Just PIITRecentUpload
+        "video" -> Just PIITVideo
+        "website" -> Just PIITWebsite
         _ -> Nothing
 
-instance ToText VideoSuggestionsItemProcessingWarnings where
+instance ToText PromotedItemIdType where
     toText = \case
-        VSIPWHasEditlist -> "hasEditlist"
-        VSIPWInconsistentResolution -> "inconsistentResolution"
-        VSIPWProblematicAudioCodec -> "problematicAudioCodec"
-        VSIPWProblematicVideoCodec -> "problematicVideoCodec"
-        VSIPWUnknownAudioCodec -> "unknownAudioCodec"
-        VSIPWUnknownContainer -> "unknownContainer"
-        VSIPWUnknownVideoCodec -> "unknownVideoCodec"
+        PIITRecentUpload -> "recentUpload"
+        PIITVideo -> "video"
+        PIITWebsite -> "website"
 
-instance FromJSON VideoSuggestionsItemProcessingWarnings where
-    parseJSON = parseJSONText "VideoSuggestionsItemProcessingWarnings"
+instance FromJSON PromotedItemIdType where
+    parseJSON = parseJSONText "PromotedItemIdType"
 
-instance ToJSON VideoSuggestionsItemProcessingWarnings where
+instance ToJSON PromotedItemIdType where
     toJSON = toJSONText

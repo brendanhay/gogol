@@ -17,48 +17,56 @@
 -- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference>
 module Network.Google.Apps.Reseller
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** Enterprise Apps Reseller API
       AppsReseller
-    , CustomersAPI
-    , CustomersInsert
-    , CustomersPatch
-    , CustomersGet
-    , CustomersUpdate
-    , SubscriptionsAPI
-    , SubscriptionsInsert
-    , SubscriptionsList
-    , SubscriptionsChangeRenewalSettings
-    , SubscriptionsGet
-    , SubscriptionsActivate
-    , SubscriptionsSuspend
-    , SubscriptionsChangePlan
-    , SubscriptionsChangeSeats
-    , SubscriptionsDelete
-    , SubscriptionsStartPaidService
+    , appsReseller
+    , appsResellerURL
+
+    -- ** reseller.customers.get
+    , module Network.Google.API.Reseller.Customers.Get
+
+    -- ** reseller.customers.insert
+    , module Network.Google.API.Reseller.Customers.Insert
+
+    -- ** reseller.customers.patch
+    , module Network.Google.API.Reseller.Customers.Patch
+
+    -- ** reseller.customers.update
+    , module Network.Google.API.Reseller.Customers.Update
+
+    -- ** reseller.subscriptions.activate
+    , module Network.Google.API.Reseller.Subscriptions.Activate
+
+    -- ** reseller.subscriptions.changePlan
+    , module Network.Google.API.Reseller.Subscriptions.ChangePlan
+
+    -- ** reseller.subscriptions.changeRenewalSettings
+    , module Network.Google.API.Reseller.Subscriptions.ChangeRenewalSettings
+
+    -- ** reseller.subscriptions.changeSeats
+    , module Network.Google.API.Reseller.Subscriptions.ChangeSeats
+
+    -- ** reseller.subscriptions.delete
+    , module Network.Google.API.Reseller.Subscriptions.Delete
+
+    -- ** reseller.subscriptions.get
+    , module Network.Google.API.Reseller.Subscriptions.Get
+
+    -- ** reseller.subscriptions.insert
+    , module Network.Google.API.Reseller.Subscriptions.Insert
+
+    -- ** reseller.subscriptions.list
+    , module Network.Google.API.Reseller.Subscriptions.List
+
+    -- ** reseller.subscriptions.startPaidService
+    , module Network.Google.API.Reseller.Subscriptions.StartPaidService
+
+    -- ** reseller.subscriptions.suspend
+    , module Network.Google.API.Reseller.Subscriptions.Suspend
 
     -- * Types
-
-    -- ** Address
-    , Address
-    , address
-    , aOrganizationName
-    , aKind
-    , aPostalCode
-    , aAddressLine1
-    , aLocality
-    , aContactName
-    , aAddressLine2
-    , aCountryCode
-    , aRegion
-    , aAddressLine3
-
-    -- ** ChangePlanRequest
-    , ChangePlanRequest
-    , changePlanRequest
-    , cprKind
-    , cprPlanName
-    , cprPurchaseOrderId
-    , cprSeats
 
     -- ** Customer
     , Customer
@@ -71,11 +79,28 @@ module Network.Google.Apps.Reseller
     , cPhoneNumber
     , cPostalAddress
 
-    -- ** RenewalSettings
-    , RenewalSettings
-    , renewalSettings
-    , rsKind
-    , rsRenewalType
+    -- ** ChangePlanRequest
+    , ChangePlanRequest
+    , changePlanRequest
+    , cprKind
+    , cprPlanName
+    , cprPurchaseOrderId
+    , cprSeats
+
+    -- ** SubscriptionCommitmentIntervalPlan
+    , SubscriptionCommitmentIntervalPlan
+    , subscriptionCommitmentIntervalPlan
+    , scipStartTime
+    , scipEndTime
+
+    -- ** SubscriptionTrialSettings
+    , SubscriptionTrialSettings
+    , subscriptionTrialSettings
+    , stsIsInTrial
+    , stsTrialEndTime
+
+    -- ** Alt
+    , Alt (..)
 
     -- ** Seats
     , Seats
@@ -84,6 +109,13 @@ module Network.Google.Apps.Reseller
     , sMaximumNumberOfSeats
     , sLicensedNumberOfSeats
     , sKind
+
+    -- ** Subscriptions
+    , Subscriptions
+    , subscriptions
+    , subNextPageToken
+    , subKind
+    , subSubscriptions
 
     -- ** Subscription
     , Subscription
@@ -104,12 +136,6 @@ module Network.Google.Apps.Reseller
     , ssRenewalSettings
     , ssSubscriptionId
 
-    -- ** SubscriptionCommitmentIntervalPlan
-    , SubscriptionCommitmentIntervalPlan
-    , subscriptionCommitmentIntervalPlan
-    , scipStartTime
-    , scipEndTime
-
     -- ** SubscriptionPlan
     , SubscriptionPlan
     , subscriptionPlan
@@ -117,26 +143,50 @@ module Network.Google.Apps.Reseller
     , spIsCommitmentPlan
     , spPlanName
 
+    -- ** RenewalSettings
+    , RenewalSettings
+    , renewalSettings
+    , rsKind
+    , rsRenewalType
+
+    -- ** Address
+    , Address
+    , address
+    , aOrganizationName
+    , aKind
+    , aPostalCode
+    , aAddressLine1
+    , aLocality
+    , aContactName
+    , aAddressLine2
+    , aCountryCode
+    , aRegion
+    , aAddressLine3
+
     -- ** SubscriptionTransferInfo
     , SubscriptionTransferInfo
     , subscriptionTransferInfo
     , stiTransferabilityExpirationTime
     , stiMinimumTransferableSeats
 
-    -- ** SubscriptionTrialSettings
-    , SubscriptionTrialSettings
-    , subscriptionTrialSettings
-    , stsIsInTrial
-    , stsTrialEndTime
-
-    -- ** Subscriptions
-    , Subscriptions
-    , subscriptions
-    , subNextPageToken
-    , subKind
-    , subSubscriptions
+    -- ** SubscriptionsDelete'DeletionType
+    , SubscriptionsDelete'DeletionType (..)
     ) where
 
+import           Network.Google.API.Reseller.Customers.Get
+import           Network.Google.API.Reseller.Customers.Insert
+import           Network.Google.API.Reseller.Customers.Patch
+import           Network.Google.API.Reseller.Customers.Update
+import           Network.Google.API.Reseller.Subscriptions.Activate
+import           Network.Google.API.Reseller.Subscriptions.ChangePlan
+import           Network.Google.API.Reseller.Subscriptions.ChangeRenewalSettings
+import           Network.Google.API.Reseller.Subscriptions.ChangeSeats
+import           Network.Google.API.Reseller.Subscriptions.Delete
+import           Network.Google.API.Reseller.Subscriptions.Get
+import           Network.Google.API.Reseller.Subscriptions.Insert
+import           Network.Google.API.Reseller.Subscriptions.List
+import           Network.Google.API.Reseller.Subscriptions.StartPaidService
+import           Network.Google.API.Reseller.Subscriptions.Suspend
 import           Network.Google.Apps.Reseller.Types
 import           Network.Google.Prelude
 
@@ -145,269 +195,19 @@ TODO
 -}
 
 type AppsReseller =
-     CustomersAPI :<|> SubscriptionsAPI
+     CustomersInsertAPI :<|> CustomersPatchAPI :<|>
+       SubscriptionsStartPaidServiceAPI
+       :<|> SubscriptionsChangePlanAPI
+       :<|> SubscriptionsListAPI
+       :<|> SubscriptionsGetAPI
+       :<|> CustomersGetAPI
+       :<|> SubscriptionsChangeSeatsAPI
+       :<|> SubscriptionsActivateAPI
+       :<|> SubscriptionsChangeRenewalSettingsAPI
+       :<|> SubscriptionsInsertAPI
+       :<|> CustomersUpdateAPI
+       :<|> SubscriptionsDeleteAPI
+       :<|> SubscriptionsSuspendAPI
 
-type CustomersAPI =
-     CustomersInsert :<|> CustomersPatch :<|> CustomersGet
-       :<|> CustomersUpdate
-
--- | Creates a customer resource if one does not already exist.
-type CustomersInsert =
-     "apps" :>
-       "reseller" :>
-         "v1sandbox" :>
-           "customers" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "customerAuthToken" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] Customer
-
--- | Update a customer resource if one it exists and is owned by the
--- reseller. This method supports patch semantics.
-type CustomersPatch =
-     "apps" :>
-       "reseller" :>
-         "v1sandbox" :>
-           "customers" :>
-             Capture "customerId" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Patch '[JSON] Customer
-
--- | Gets a customer resource if one exists and is owned by the reseller.
-type CustomersGet =
-     "apps" :>
-       "reseller" :>
-         "v1sandbox" :>
-           "customers" :>
-             Capture "customerId" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Get '[JSON] Customer
-
--- | Update a customer resource if one it exists and is owned by the
--- reseller.
-type CustomersUpdate =
-     "apps" :>
-       "reseller" :>
-         "v1sandbox" :>
-           "customers" :>
-             Capture "customerId" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Put '[JSON] Customer
-
-type SubscriptionsAPI =
-     SubscriptionsInsert :<|> SubscriptionsList :<|>
-       SubscriptionsChangeRenewalSettings
-       :<|> SubscriptionsGet
-       :<|> SubscriptionsActivate
-       :<|> SubscriptionsSuspend
-       :<|> SubscriptionsChangePlan
-       :<|> SubscriptionsChangeSeats
-       :<|> SubscriptionsDelete
-       :<|> SubscriptionsStartPaidService
-
--- | Creates\/Transfers a subscription for the customer.
-type SubscriptionsInsert =
-     "apps" :>
-       "reseller" :>
-         "v1sandbox" :>
-           "customers" :>
-             Capture "customerId" Text :>
-               "subscriptions" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "customerAuthToken" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Post '[JSON] Subscription
-
--- | Lists subscriptions of a reseller, optionally filtered by a customer
--- name prefix.
-type SubscriptionsList =
-     "apps" :>
-       "reseller" :>
-         "v1sandbox" :>
-           "subscriptions" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "customerNamePrefix" Text :>
-                     QueryParam "customerId" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "customerAuthToken" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "maxResults" Natural :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Get '[JSON] Subscriptions
-
--- | Changes the renewal settings of a subscription
-type SubscriptionsChangeRenewalSettings =
-     "apps" :>
-       "reseller" :>
-         "v1sandbox" :>
-           "customers" :>
-             Capture "customerId" Text :>
-               "subscriptions" :>
-                 Capture "subscriptionId" Text :>
-                   "changeRenewalSettings" :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   Post '[JSON] Subscription
-
--- | Gets a subscription of the customer.
-type SubscriptionsGet =
-     "apps" :>
-       "reseller" :>
-         "v1sandbox" :>
-           "customers" :>
-             Capture "customerId" Text :>
-               "subscriptions" :>
-                 Capture "subscriptionId" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Get '[JSON] Subscription
-
--- | Activates a subscription previously suspended by the reseller
-type SubscriptionsActivate =
-     "apps" :>
-       "reseller" :>
-         "v1sandbox" :>
-           "customers" :>
-             Capture "customerId" Text :>
-               "subscriptions" :>
-                 Capture "subscriptionId" Text :>
-                   "activate" :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   Post '[JSON] Subscription
-
--- | Suspends an active subscription
-type SubscriptionsSuspend =
-     "apps" :>
-       "reseller" :>
-         "v1sandbox" :>
-           "customers" :>
-             Capture "customerId" Text :>
-               "subscriptions" :>
-                 Capture "subscriptionId" Text :>
-                   "suspend" :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   Post '[JSON] Subscription
-
--- | Changes the plan of a subscription
-type SubscriptionsChangePlan =
-     "apps" :>
-       "reseller" :>
-         "v1sandbox" :>
-           "customers" :>
-             Capture "customerId" Text :>
-               "subscriptions" :>
-                 Capture "subscriptionId" Text :>
-                   "changePlan" :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   Post '[JSON] Subscription
-
--- | Changes the seats configuration of a subscription
-type SubscriptionsChangeSeats =
-     "apps" :>
-       "reseller" :>
-         "v1sandbox" :>
-           "customers" :>
-             Capture "customerId" Text :>
-               "subscriptions" :>
-                 Capture "subscriptionId" Text :>
-                   "changeSeats" :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   Post '[JSON] Subscription
-
--- | Cancels\/Downgrades a subscription.
-type SubscriptionsDelete =
-     "apps" :>
-       "reseller" :>
-         "v1sandbox" :>
-           "customers" :>
-             Capture "customerId" Text :>
-               "subscriptions" :>
-                 Capture "subscriptionId" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "deletionType" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Starts paid service of a trial subscription
-type SubscriptionsStartPaidService =
-     "apps" :>
-       "reseller" :>
-         "v1sandbox" :>
-           "customers" :>
-             Capture "customerId" Text :>
-               "subscriptions" :>
-                 Capture "subscriptionId" Text :>
-                   "startPaidService" :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   Post '[JSON] Subscription
+appsReseller :: Proxy AppsReseller
+appsReseller = Proxy

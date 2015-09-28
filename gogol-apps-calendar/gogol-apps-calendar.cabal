@@ -1,6 +1,6 @@
 name:                  gogol-apps-calendar
 version:               0.0.1
-synopsis:              Google Calendar API.
+synopsis:              Google Calendar API Client.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -16,8 +16,8 @@ extra-source-files:    README.md
 description:
     Lets you manipulate events and other calendar data.
     .
-    /Warning:/ This is an experimental preview release which is still under
-    heavy development and not intended for public consumption, caveat emptor!
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
 
 source-repository head
     type:     git
@@ -30,7 +30,44 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.Apps.Calendar
+          Network.Google.API.Calendar.ACL.Delete
+        , Network.Google.API.Calendar.ACL.Get
+        , Network.Google.API.Calendar.ACL.Insert
+        , Network.Google.API.Calendar.ACL.List
+        , Network.Google.API.Calendar.ACL.Patch
+        , Network.Google.API.Calendar.ACL.Update
+        , Network.Google.API.Calendar.ACL.Watch
+        , Network.Google.API.Calendar.CalendarList.Delete
+        , Network.Google.API.Calendar.CalendarList.Get
+        , Network.Google.API.Calendar.CalendarList.Insert
+        , Network.Google.API.Calendar.CalendarList.List
+        , Network.Google.API.Calendar.CalendarList.Patch
+        , Network.Google.API.Calendar.CalendarList.Update
+        , Network.Google.API.Calendar.CalendarList.Watch
+        , Network.Google.API.Calendar.Calendars.Clear
+        , Network.Google.API.Calendar.Calendars.Delete
+        , Network.Google.API.Calendar.Calendars.Get
+        , Network.Google.API.Calendar.Calendars.Insert
+        , Network.Google.API.Calendar.Calendars.Patch
+        , Network.Google.API.Calendar.Calendars.Update
+        , Network.Google.API.Calendar.Channels.Stop
+        , Network.Google.API.Calendar.Colors.Get
+        , Network.Google.API.Calendar.Events.Delete
+        , Network.Google.API.Calendar.Events.Get
+        , Network.Google.API.Calendar.Events.Import
+        , Network.Google.API.Calendar.Events.Insert
+        , Network.Google.API.Calendar.Events.Instances
+        , Network.Google.API.Calendar.Events.List
+        , Network.Google.API.Calendar.Events.Move
+        , Network.Google.API.Calendar.Events.Patch
+        , Network.Google.API.Calendar.Events.QuickAdd
+        , Network.Google.API.Calendar.Events.Update
+        , Network.Google.API.Calendar.Events.Watch
+        , Network.Google.API.Calendar.Freebusy.Query
+        , Network.Google.API.Calendar.Settings.Get
+        , Network.Google.API.Calendar.Settings.List
+        , Network.Google.API.Calendar.Settings.Watch
+        , Network.Google.Apps.Calendar
         , Network.Google.Apps.Calendar.Types
 
     other-modules:

@@ -17,20 +17,41 @@
 -- /See:/ <https://developers.google.com/appengine/docs/python/taskqueue/rest TaskQueue API Reference>
 module Network.Google.AppEngine.TaskQueue
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** TaskQueue API
       AppEngineTaskQueue
-    , TasksAPI
-    , TasksInsert
-    , TasksList
-    , TasksPatch
-    , TasksGet
-    , TasksLease
-    , TasksDelete
-    , TasksUpdate
-    , TaskqueuesAPI
-    , TaskqueuesGet
+    , appEngineTaskQueue
+    , appEngineTaskQueueURL
+
+    -- ** taskqueue.taskqueues.get
+    , module Network.Google.API.Taskqueue.Taskqueues.Get
+
+    -- ** taskqueue.tasks.delete
+    , module Network.Google.API.Taskqueue.Tasks.Delete
+
+    -- ** taskqueue.tasks.get
+    , module Network.Google.API.Taskqueue.Tasks.Get
+
+    -- ** taskqueue.tasks.insert
+    , module Network.Google.API.Taskqueue.Tasks.Insert
+
+    -- ** taskqueue.tasks.lease
+    , module Network.Google.API.Taskqueue.Tasks.Lease
+
+    -- ** taskqueue.tasks.list
+    , module Network.Google.API.Taskqueue.Tasks.List
+
+    -- ** taskqueue.tasks.patch
+    , module Network.Google.API.Taskqueue.Tasks.Patch
+
+    -- ** taskqueue.tasks.update
+    , module Network.Google.API.Taskqueue.Tasks.Update
 
     -- * Types
+
+    -- ** Alt
+    , Alt (..)
 
     -- ** Task
     , Task
@@ -44,30 +65,6 @@ module Network.Google.AppEngine.TaskQueue
     , tId
     , tLeaseTimestamp
 
-    -- ** TaskQueue
-    , TaskQueue
-    , taskQueue
-    , tqKind
-    , tqStats
-    , tqMaxLeases
-    , tqId
-    , tqAcl
-
-    -- ** TaskQueueAcl
-    , TaskQueueAcl
-    , taskQueueAcl
-    , tqaProducerEmails
-    , tqaAdminEmails
-    , tqaConsumerEmails
-
-    -- ** TaskQueueStats
-    , TaskQueueStats
-    , taskQueueStats
-    , tqsTotalTasks
-    , tqsOldestTask
-    , tqsLeasedLastHour
-    , tqsLeasedLastMinute
-
     -- ** Tasks
     , Tasks
     , tasks
@@ -79,8 +76,40 @@ module Network.Google.AppEngine.TaskQueue
     , tasks2
     , ttKind
     , ttItems
+
+    -- ** TaskQueue
+    , TaskQueue
+    , taskQueue
+    , tqKind
+    , tqStats
+    , tqMaxLeases
+    , tqId
+    , tqAcl
+
+    -- ** TaskQueueStats
+    , TaskQueueStats
+    , taskQueueStats
+    , tqsTotalTasks
+    , tqsOldestTask
+    , tqsLeasedLastHour
+    , tqsLeasedLastMinute
+
+    -- ** TaskQueueAcl
+    , TaskQueueAcl
+    , taskQueueAcl
+    , tqaProducerEmails
+    , tqaAdminEmails
+    , tqaConsumerEmails
     ) where
 
+import           Network.Google.API.Taskqueue.Taskqueues.Get
+import           Network.Google.API.Taskqueue.Tasks.Delete
+import           Network.Google.API.Taskqueue.Tasks.Get
+import           Network.Google.API.Taskqueue.Tasks.Insert
+import           Network.Google.API.Taskqueue.Tasks.Lease
+import           Network.Google.API.Taskqueue.Tasks.List
+import           Network.Google.API.Taskqueue.Tasks.Patch
+import           Network.Google.API.Taskqueue.Tasks.Update
 import           Network.Google.AppEngine.TaskQueue.Types
 import           Network.Google.Prelude
 
@@ -88,162 +117,13 @@ import           Network.Google.Prelude
 TODO
 -}
 
-type AppEngineTaskQueue = TasksAPI :<|> TaskqueuesAPI
+type AppEngineTaskQueue =
+     TasksGetAPI :<|> TasksListAPI :<|> TasksPatchAPI :<|>
+       TaskqueuesGetAPI
+       :<|> TasksDeleteAPI
+       :<|> TasksLeaseAPI
+       :<|> TasksUpdateAPI
+       :<|> TasksInsertAPI
 
-type TasksAPI =
-     TasksInsert :<|> TasksList :<|> TasksPatch :<|>
-       TasksGet
-       :<|> TasksLease
-       :<|> TasksDelete
-       :<|> TasksUpdate
-
--- | Insert a new task in a TaskQueue
-type TasksInsert =
-     "taskqueue" :>
-       "v1beta2" :>
-         "projects" :>
-           Capture "project" Text :>
-             "taskqueues" :>
-               Capture "taskqueue" Text :>
-                 "tasks" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Post '[JSON] Task
-
--- | List Tasks in a TaskQueue
-type TasksList =
-     "taskqueue" :>
-       "v1beta2" :>
-         "projects" :>
-           Capture "project" Text :>
-             "taskqueues" :>
-               Capture "taskqueue" Text :>
-                 "tasks" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Get '[JSON] Tasks2
-
--- | Update tasks that are leased out of a TaskQueue. This method supports
--- patch semantics.
-type TasksPatch =
-     "taskqueue" :>
-       "v1beta2" :>
-         "projects" :>
-           Capture "project" Text :>
-             "taskqueues" :>
-               Capture "taskqueue" Text :>
-                 "tasks" :>
-                   Capture "task" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "newLeaseSeconds" Int32 :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :> Patch '[JSON] Task
-
--- | Get a particular task from a TaskQueue.
-type TasksGet =
-     "taskqueue" :>
-       "v1beta2" :>
-         "projects" :>
-           Capture "project" Text :>
-             "taskqueues" :>
-               Capture "taskqueue" Text :>
-                 "tasks" :>
-                   Capture "task" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Get '[JSON] Task
-
--- | Lease 1 or more tasks from a TaskQueue.
-type TasksLease =
-     "taskqueue" :>
-       "v1beta2" :>
-         "projects" :>
-           Capture "project" Text :>
-             "taskqueues" :>
-               Capture "taskqueue" Text :>
-                 "tasks" :>
-                   "lease" :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "tag" Text :>
-                           QueryParam "userIp" Text :>
-                             QueryParam "numTasks" Int32 :>
-                               QueryParam "key" Text :>
-                                 QueryParam "leaseSecs" Int32 :>
-                                   QueryParam "oauth_token" Text :>
-                                     QueryParam "groupByTag" Bool :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "alt" Text :>
-                                           Post '[JSON] Tasks
-
--- | Delete a task from a TaskQueue.
-type TasksDelete =
-     "taskqueue" :>
-       "v1beta2" :>
-         "projects" :>
-           Capture "project" Text :>
-             "taskqueues" :>
-               Capture "taskqueue" Text :>
-                 "tasks" :>
-                   Capture "task" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Update tasks that are leased out of a TaskQueue.
-type TasksUpdate =
-     "taskqueue" :>
-       "v1beta2" :>
-         "projects" :>
-           Capture "project" Text :>
-             "taskqueues" :>
-               Capture "taskqueue" Text :>
-                 "tasks" :>
-                   Capture "task" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "newLeaseSeconds" Int32 :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :> Post '[JSON] Task
-
-type TaskqueuesAPI = TaskqueuesGet
-
--- | Get detailed information about a TaskQueue.
-type TaskqueuesGet =
-     "taskqueue" :>
-       "v1beta2" :>
-         "projects" :>
-           Capture "project" Text :>
-             "taskqueues" :>
-               Capture "taskqueue" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "getStats" Bool :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Get '[JSON] TaskQueue
+appEngineTaskQueue :: Proxy AppEngineTaskQueue
+appEngineTaskQueue = Proxy

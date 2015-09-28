@@ -18,626 +18,6 @@ module Network.Google.SQLAdmin.Types.Product where
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types.Sum
 
--- | An entry for an Access Control list.
---
--- /See:/ 'aclEntry' smart constructor.
-data AclEntry = AclEntry
-    { _aeKind           :: !Text
-    , _aeValue          :: !(Maybe Text)
-    , _aeName           :: !(Maybe Text)
-    , _aeExpirationTime :: !(Maybe UTCTime)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AclEntry' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aeKind'
---
--- * 'aeValue'
---
--- * 'aeName'
---
--- * 'aeExpirationTime'
-aclEntry
-    :: AclEntry
-aclEntry =
-    AclEntry
-    { _aeKind = "sql#aclEntry"
-    , _aeValue = Nothing
-    , _aeName = Nothing
-    , _aeExpirationTime = Nothing
-    }
-
--- | This is always sql#aclEntry.
-aeKind :: Lens' AclEntry Text
-aeKind = lens _aeKind (\ s a -> s{_aeKind = a})
-
--- | The whitelisted value for the access control list.
-aeValue :: Lens' AclEntry (Maybe Text)
-aeValue = lens _aeValue (\ s a -> s{_aeValue = a})
-
--- | An optional label to identify this entry.
-aeName :: Lens' AclEntry (Maybe Text)
-aeName = lens _aeName (\ s a -> s{_aeName = a})
-
--- | The time when this access control entry expires in RFC 3339 format, for
--- example 2012-11-15T16:19:00.094Z.
-aeExpirationTime :: Lens' AclEntry (Maybe UTCTime)
-aeExpirationTime
-  = lens _aeExpirationTime
-      (\ s a -> s{_aeExpirationTime = a})
-
-instance FromJSON AclEntry where
-        parseJSON
-          = withObject "AclEntry"
-              (\ o ->
-                 AclEntry <$>
-                   (o .:? "kind" .!= "sql#aclEntry") <*> (o .:? "value")
-                     <*> (o .:? "name")
-                     <*> (o .:? "expirationTime"))
-
-instance ToJSON AclEntry where
-        toJSON AclEntry{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _aeKind), ("value" .=) <$> _aeValue,
-                  ("name" .=) <$> _aeName,
-                  ("expirationTime" .=) <$> _aeExpirationTime])
-
--- | Database instance backup configuration.
---
--- /See:/ 'backupConfiguration' smart constructor.
-data BackupConfiguration = BackupConfiguration
-    { _bcEnabled          :: !(Maybe Bool)
-    , _bcStartTime        :: !(Maybe Text)
-    , _bcKind             :: !Text
-    , _bcBinaryLogEnabled :: !(Maybe Bool)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'BackupConfiguration' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'bcEnabled'
---
--- * 'bcStartTime'
---
--- * 'bcKind'
---
--- * 'bcBinaryLogEnabled'
-backupConfiguration
-    :: BackupConfiguration
-backupConfiguration =
-    BackupConfiguration
-    { _bcEnabled = Nothing
-    , _bcStartTime = Nothing
-    , _bcKind = "sql#backupConfiguration"
-    , _bcBinaryLogEnabled = Nothing
-    }
-
--- | Whether this configuration is enabled.
-bcEnabled :: Lens' BackupConfiguration (Maybe Bool)
-bcEnabled
-  = lens _bcEnabled (\ s a -> s{_bcEnabled = a})
-
--- | Start time for the daily backup configuration in UTC timezone in the 24
--- hour format - HH:MM.
-bcStartTime :: Lens' BackupConfiguration (Maybe Text)
-bcStartTime
-  = lens _bcStartTime (\ s a -> s{_bcStartTime = a})
-
--- | This is always sql#backupConfiguration.
-bcKind :: Lens' BackupConfiguration Text
-bcKind = lens _bcKind (\ s a -> s{_bcKind = a})
-
--- | Whether binary log is enabled. If backup configuration is disabled,
--- binary log must be disabled as well.
-bcBinaryLogEnabled :: Lens' BackupConfiguration (Maybe Bool)
-bcBinaryLogEnabled
-  = lens _bcBinaryLogEnabled
-      (\ s a -> s{_bcBinaryLogEnabled = a})
-
-instance FromJSON BackupConfiguration where
-        parseJSON
-          = withObject "BackupConfiguration"
-              (\ o ->
-                 BackupConfiguration <$>
-                   (o .:? "enabled") <*> (o .:? "startTime") <*>
-                     (o .:? "kind" .!= "sql#backupConfiguration")
-                     <*> (o .:? "binaryLogEnabled"))
-
-instance ToJSON BackupConfiguration where
-        toJSON BackupConfiguration{..}
-          = object
-              (catMaybes
-                 [("enabled" .=) <$> _bcEnabled,
-                  ("startTime" .=) <$> _bcStartTime,
-                  Just ("kind" .= _bcKind),
-                  ("binaryLogEnabled" .=) <$> _bcBinaryLogEnabled])
-
--- | A database instance backup run resource.
---
--- /See:/ 'backupRun' smart constructor.
-data BackupRun = BackupRun
-    { _brStatus          :: !(Maybe Text)
-    , _brStartTime       :: !(Maybe UTCTime)
-    , _brKind            :: !Text
-    , _brError           :: !(Maybe (Maybe OperationError))
-    , _brWindowStartTime :: !(Maybe UTCTime)
-    , _brSelfLink        :: !(Maybe Text)
-    , _brEndTime         :: !(Maybe UTCTime)
-    , _brId              :: !(Maybe Int64)
-    , _brEnqueuedTime    :: !(Maybe UTCTime)
-    , _brInstance        :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'BackupRun' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'brStatus'
---
--- * 'brStartTime'
---
--- * 'brKind'
---
--- * 'brError'
---
--- * 'brWindowStartTime'
---
--- * 'brSelfLink'
---
--- * 'brEndTime'
---
--- * 'brId'
---
--- * 'brEnqueuedTime'
---
--- * 'brInstance'
-backupRun
-    :: BackupRun
-backupRun =
-    BackupRun
-    { _brStatus = Nothing
-    , _brStartTime = Nothing
-    , _brKind = "sql#backupRun"
-    , _brError = Nothing
-    , _brWindowStartTime = Nothing
-    , _brSelfLink = Nothing
-    , _brEndTime = Nothing
-    , _brId = Nothing
-    , _brEnqueuedTime = Nothing
-    , _brInstance = Nothing
-    }
-
--- | The status of this run.
-brStatus :: Lens' BackupRun (Maybe Text)
-brStatus = lens _brStatus (\ s a -> s{_brStatus = a})
-
--- | The time the backup operation actually started in UTC timezone in RFC
--- 3339 format, for example 2012-11-15T16:19:00.094Z.
-brStartTime :: Lens' BackupRun (Maybe UTCTime)
-brStartTime
-  = lens _brStartTime (\ s a -> s{_brStartTime = a})
-
--- | This is always sql#backupRun.
-brKind :: Lens' BackupRun Text
-brKind = lens _brKind (\ s a -> s{_brKind = a})
-
--- | Information about why the backup operation failed. This is only present
--- if the run has the FAILED status.
-brError :: Lens' BackupRun (Maybe (Maybe OperationError))
-brError = lens _brError (\ s a -> s{_brError = a})
-
--- | The start time of the backup window during which this the backup was
--- attempted in RFC 3339 format, for example 2012-11-15T16:19:00.094Z.
-brWindowStartTime :: Lens' BackupRun (Maybe UTCTime)
-brWindowStartTime
-  = lens _brWindowStartTime
-      (\ s a -> s{_brWindowStartTime = a})
-
--- | The URI of this resource.
-brSelfLink :: Lens' BackupRun (Maybe Text)
-brSelfLink
-  = lens _brSelfLink (\ s a -> s{_brSelfLink = a})
-
--- | The time the backup operation completed in UTC timezone in RFC 3339
--- format, for example 2012-11-15T16:19:00.094Z.
-brEndTime :: Lens' BackupRun (Maybe UTCTime)
-brEndTime
-  = lens _brEndTime (\ s a -> s{_brEndTime = a})
-
--- | A unique identifier for this backup run. Note that this is unique only
--- within the scope of a particular Cloud SQL instance.
-brId :: Lens' BackupRun (Maybe Int64)
-brId = lens _brId (\ s a -> s{_brId = a})
-
--- | The time the run was enqueued in UTC timezone in RFC 3339 format, for
--- example 2012-11-15T16:19:00.094Z.
-brEnqueuedTime :: Lens' BackupRun (Maybe UTCTime)
-brEnqueuedTime
-  = lens _brEnqueuedTime
-      (\ s a -> s{_brEnqueuedTime = a})
-
--- | Name of the database instance.
-brInstance :: Lens' BackupRun (Maybe Text)
-brInstance
-  = lens _brInstance (\ s a -> s{_brInstance = a})
-
-instance FromJSON BackupRun where
-        parseJSON
-          = withObject "BackupRun"
-              (\ o ->
-                 BackupRun <$>
-                   (o .:? "status") <*> (o .:? "startTime") <*>
-                     (o .:? "kind" .!= "sql#backupRun")
-                     <*> (o .:? "error")
-                     <*> (o .:? "windowStartTime")
-                     <*> (o .:? "selfLink")
-                     <*> (o .:? "endTime")
-                     <*> (o .:? "id")
-                     <*> (o .:? "enqueuedTime")
-                     <*> (o .:? "instance"))
-
-instance ToJSON BackupRun where
-        toJSON BackupRun{..}
-          = object
-              (catMaybes
-                 [("status" .=) <$> _brStatus,
-                  ("startTime" .=) <$> _brStartTime,
-                  Just ("kind" .= _brKind), ("error" .=) <$> _brError,
-                  ("windowStartTime" .=) <$> _brWindowStartTime,
-                  ("selfLink" .=) <$> _brSelfLink,
-                  ("endTime" .=) <$> _brEndTime, ("id" .=) <$> _brId,
-                  ("enqueuedTime" .=) <$> _brEnqueuedTime,
-                  ("instance" .=) <$> _brInstance])
-
--- | Backup run list results.
---
--- /See:/ 'backupRunsListResponse' smart constructor.
-data BackupRunsListResponse = BackupRunsListResponse
-    { _brlrNextPageToken :: !(Maybe Text)
-    , _brlrKind          :: !Text
-    , _brlrItems         :: !(Maybe [Maybe BackupRun])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'BackupRunsListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'brlrNextPageToken'
---
--- * 'brlrKind'
---
--- * 'brlrItems'
-backupRunsListResponse
-    :: BackupRunsListResponse
-backupRunsListResponse =
-    BackupRunsListResponse
-    { _brlrNextPageToken = Nothing
-    , _brlrKind = "sql#backupRunsList"
-    , _brlrItems = Nothing
-    }
-
--- | The continuation token, used to page through large result sets. Provide
--- this value in a subsequent request to return the next page of results.
-brlrNextPageToken :: Lens' BackupRunsListResponse (Maybe Text)
-brlrNextPageToken
-  = lens _brlrNextPageToken
-      (\ s a -> s{_brlrNextPageToken = a})
-
--- | This is always sql#backupRunsList.
-brlrKind :: Lens' BackupRunsListResponse Text
-brlrKind = lens _brlrKind (\ s a -> s{_brlrKind = a})
-
--- | A list of backup runs in reverse chronological order of the enqueued
--- time.
-brlrItems :: Lens' BackupRunsListResponse [Maybe BackupRun]
-brlrItems
-  = lens _brlrItems (\ s a -> s{_brlrItems = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON BackupRunsListResponse where
-        parseJSON
-          = withObject "BackupRunsListResponse"
-              (\ o ->
-                 BackupRunsListResponse <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!= "sql#backupRunsList")
-                     <*> (o .:? "items" .!= mempty))
-
-instance ToJSON BackupRunsListResponse where
-        toJSON BackupRunsListResponse{..}
-          = object
-              (catMaybes
-                 [("nextPageToken" .=) <$> _brlrNextPageToken,
-                  Just ("kind" .= _brlrKind),
-                  ("items" .=) <$> _brlrItems])
-
--- | Binary log coordinates.
---
--- /See:/ 'binLogCoordinates' smart constructor.
-data BinLogCoordinates = BinLogCoordinates
-    { _blcBinLogPosition :: !(Maybe Int64)
-    , _blcKind           :: !Text
-    , _blcBinLogFileName :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'BinLogCoordinates' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'blcBinLogPosition'
---
--- * 'blcKind'
---
--- * 'blcBinLogFileName'
-binLogCoordinates
-    :: BinLogCoordinates
-binLogCoordinates =
-    BinLogCoordinates
-    { _blcBinLogPosition = Nothing
-    , _blcKind = "sql#binLogCoordinates"
-    , _blcBinLogFileName = Nothing
-    }
-
--- | Position (offset) within the binary log file.
-blcBinLogPosition :: Lens' BinLogCoordinates (Maybe Int64)
-blcBinLogPosition
-  = lens _blcBinLogPosition
-      (\ s a -> s{_blcBinLogPosition = a})
-
--- | This is always sql#binLogCoordinates.
-blcKind :: Lens' BinLogCoordinates Text
-blcKind = lens _blcKind (\ s a -> s{_blcKind = a})
-
--- | Name of the binary log file for a Cloud SQL instance.
-blcBinLogFileName :: Lens' BinLogCoordinates (Maybe Text)
-blcBinLogFileName
-  = lens _blcBinLogFileName
-      (\ s a -> s{_blcBinLogFileName = a})
-
-instance FromJSON BinLogCoordinates where
-        parseJSON
-          = withObject "BinLogCoordinates"
-              (\ o ->
-                 BinLogCoordinates <$>
-                   (o .:? "binLogPosition") <*>
-                     (o .:? "kind" .!= "sql#binLogCoordinates")
-                     <*> (o .:? "binLogFileName"))
-
-instance ToJSON BinLogCoordinates where
-        toJSON BinLogCoordinates{..}
-          = object
-              (catMaybes
-                 [("binLogPosition" .=) <$> _blcBinLogPosition,
-                  Just ("kind" .= _blcKind),
-                  ("binLogFileName" .=) <$> _blcBinLogFileName])
-
--- | Database instance clone context.
---
--- /See:/ 'cloneContext' smart constructor.
-data CloneContext = CloneContext
-    { _ccDestinationInstanceName :: !(Maybe Text)
-    , _ccBinLogCoordinates       :: !(Maybe (Maybe BinLogCoordinates))
-    , _ccKind                    :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'CloneContext' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ccDestinationInstanceName'
---
--- * 'ccBinLogCoordinates'
---
--- * 'ccKind'
-cloneContext
-    :: CloneContext
-cloneContext =
-    CloneContext
-    { _ccDestinationInstanceName = Nothing
-    , _ccBinLogCoordinates = Nothing
-    , _ccKind = "sql#cloneContext"
-    }
-
--- | Name of the Cloud SQL instance to be created as a clone.
-ccDestinationInstanceName :: Lens' CloneContext (Maybe Text)
-ccDestinationInstanceName
-  = lens _ccDestinationInstanceName
-      (\ s a -> s{_ccDestinationInstanceName = a})
-
--- | Binary log coordinates, if specified, indentify the the position up to
--- which the source instance should be cloned. If not specified, the source
--- instance is cloned up to the most recent binary log coordintes.
-ccBinLogCoordinates :: Lens' CloneContext (Maybe (Maybe BinLogCoordinates))
-ccBinLogCoordinates
-  = lens _ccBinLogCoordinates
-      (\ s a -> s{_ccBinLogCoordinates = a})
-
--- | This is always sql#cloneContext.
-ccKind :: Lens' CloneContext Text
-ccKind = lens _ccKind (\ s a -> s{_ccKind = a})
-
-instance FromJSON CloneContext where
-        parseJSON
-          = withObject "CloneContext"
-              (\ o ->
-                 CloneContext <$>
-                   (o .:? "destinationInstanceName") <*>
-                     (o .:? "binLogCoordinates")
-                     <*> (o .:? "kind" .!= "sql#cloneContext"))
-
-instance ToJSON CloneContext where
-        toJSON CloneContext{..}
-          = object
-              (catMaybes
-                 [("destinationInstanceName" .=) <$>
-                    _ccDestinationInstanceName,
-                  ("binLogCoordinates" .=) <$> _ccBinLogCoordinates,
-                  Just ("kind" .= _ccKind)])
-
--- | A database resource inside a Cloud SQL instance.
---
--- /See:/ 'database' smart constructor.
-data Database = Database
-    { _dEtag      :: !(Maybe Text)
-    , _dProject   :: !(Maybe Text)
-    , _dKind      :: !Text
-    , _dCollation :: !(Maybe Text)
-    , _dSelfLink  :: !(Maybe Text)
-    , _dName      :: !(Maybe Text)
-    , _dCharset   :: !(Maybe Text)
-    , _dInstance  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Database' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'dEtag'
---
--- * 'dProject'
---
--- * 'dKind'
---
--- * 'dCollation'
---
--- * 'dSelfLink'
---
--- * 'dName'
---
--- * 'dCharset'
---
--- * 'dInstance'
-database
-    :: Database
-database =
-    Database
-    { _dEtag = Nothing
-    , _dProject = Nothing
-    , _dKind = "sql#database"
-    , _dCollation = Nothing
-    , _dSelfLink = Nothing
-    , _dName = Nothing
-    , _dCharset = Nothing
-    , _dInstance = Nothing
-    }
-
--- | HTTP 1.1 Entity tag for the resource.
-dEtag :: Lens' Database (Maybe Text)
-dEtag = lens _dEtag (\ s a -> s{_dEtag = a})
-
--- | The project ID of the project containing the Cloud SQL database. The
--- Google apps domain is prefixed if applicable.
-dProject :: Lens' Database (Maybe Text)
-dProject = lens _dProject (\ s a -> s{_dProject = a})
-
--- | This is always sql#database.
-dKind :: Lens' Database Text
-dKind = lens _dKind (\ s a -> s{_dKind = a})
-
--- | The MySQL collation value.
-dCollation :: Lens' Database (Maybe Text)
-dCollation
-  = lens _dCollation (\ s a -> s{_dCollation = a})
-
--- | The URI of this resource.
-dSelfLink :: Lens' Database (Maybe Text)
-dSelfLink
-  = lens _dSelfLink (\ s a -> s{_dSelfLink = a})
-
--- | The name of the database in the Cloud SQL instance. This does not
--- include the project ID or instance name.
-dName :: Lens' Database (Maybe Text)
-dName = lens _dName (\ s a -> s{_dName = a})
-
--- | The MySQL charset value.
-dCharset :: Lens' Database (Maybe Text)
-dCharset = lens _dCharset (\ s a -> s{_dCharset = a})
-
--- | The name of the Cloud SQL instance. This does not include the project
--- ID.
-dInstance :: Lens' Database (Maybe Text)
-dInstance
-  = lens _dInstance (\ s a -> s{_dInstance = a})
-
-instance FromJSON Database where
-        parseJSON
-          = withObject "Database"
-              (\ o ->
-                 Database <$>
-                   (o .:? "etag") <*> (o .:? "project") <*>
-                     (o .:? "kind" .!= "sql#database")
-                     <*> (o .:? "collation")
-                     <*> (o .:? "selfLink")
-                     <*> (o .:? "name")
-                     <*> (o .:? "charset")
-                     <*> (o .:? "instance"))
-
-instance ToJSON Database where
-        toJSON Database{..}
-          = object
-              (catMaybes
-                 [("etag" .=) <$> _dEtag,
-                  ("project" .=) <$> _dProject,
-                  Just ("kind" .= _dKind),
-                  ("collation" .=) <$> _dCollation,
-                  ("selfLink" .=) <$> _dSelfLink,
-                  ("name" .=) <$> _dName, ("charset" .=) <$> _dCharset,
-                  ("instance" .=) <$> _dInstance])
-
--- | MySQL flags for Cloud SQL instances.
---
--- /See:/ 'databaseFlags' smart constructor.
-data DatabaseFlags = DatabaseFlags
-    { _dfValue :: !(Maybe Text)
-    , _dfName  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'DatabaseFlags' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'dfValue'
---
--- * 'dfName'
-databaseFlags
-    :: DatabaseFlags
-databaseFlags =
-    DatabaseFlags
-    { _dfValue = Nothing
-    , _dfName = Nothing
-    }
-
--- | The value of the flag. Booleans should be set to on for true and off for
--- false. This field must be omitted if the flag doesn\'t take a value.
-dfValue :: Lens' DatabaseFlags (Maybe Text)
-dfValue = lens _dfValue (\ s a -> s{_dfValue = a})
-
--- | The name of the flag. These flags are passed at instance startup, so
--- include both MySQL server options and MySQL system variables. Flags
--- should be specified with underscores, not hyphens. For more information,
--- see Configuring MySQL Flags in the Google Cloud SQL documentation, as
--- well as the official MySQL documentation for server options and system
--- variables.
-dfName :: Lens' DatabaseFlags (Maybe Text)
-dfName = lens _dfName (\ s a -> s{_dfName = a})
-
-instance FromJSON DatabaseFlags where
-        parseJSON
-          = withObject "DatabaseFlags"
-              (\ o ->
-                 DatabaseFlags <$> (o .:? "value") <*> (o .:? "name"))
-
-instance ToJSON DatabaseFlags where
-        toJSON DatabaseFlags{..}
-          = object
-              (catMaybes
-                 [("value" .=) <$> _dfValue, ("name" .=) <$> _dfName])
-
 -- | A Cloud SQL instance resource.
 --
 -- /See:/ 'databaseInstance' smart constructor.
@@ -913,245 +293,6 @@ instance ToJSON DatabaseInstance where
                     _diServiceAccountEmailAddress,
                   ("ipAddresses" .=) <$> _diIpAddresses])
 
--- | Database list response.
---
--- /See:/ 'databasesListResponse' smart constructor.
-data DatabasesListResponse = DatabasesListResponse
-    { _dlrKind  :: !Text
-    , _dlrItems :: !(Maybe [Maybe Database])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'DatabasesListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'dlrKind'
---
--- * 'dlrItems'
-databasesListResponse
-    :: DatabasesListResponse
-databasesListResponse =
-    DatabasesListResponse
-    { _dlrKind = "sql#databasesList"
-    , _dlrItems = Nothing
-    }
-
--- | This is always sql#databasesList.
-dlrKind :: Lens' DatabasesListResponse Text
-dlrKind = lens _dlrKind (\ s a -> s{_dlrKind = a})
-
--- | List of database resources in the instance.
-dlrItems :: Lens' DatabasesListResponse [Maybe Database]
-dlrItems
-  = lens _dlrItems (\ s a -> s{_dlrItems = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON DatabasesListResponse where
-        parseJSON
-          = withObject "DatabasesListResponse"
-              (\ o ->
-                 DatabasesListResponse <$>
-                   (o .:? "kind" .!= "sql#databasesList") <*>
-                     (o .:? "items" .!= mempty))
-
-instance ToJSON DatabasesListResponse where
-        toJSON DatabasesListResponse{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _dlrKind),
-                  ("items" .=) <$> _dlrItems])
-
--- | Database instance export context.
---
--- /See:/ 'exportContext' smart constructor.
-data ExportContext = ExportContext
-    { _ecCsvExportOptions :: !(Maybe ExportContextCsvExportOptions)
-    , _ecKind             :: !Text
-    , _ecUri              :: !(Maybe Text)
-    , _ecFileType         :: !(Maybe Text)
-    , _ecSqlExportOptions :: !(Maybe ExportContextSqlExportOptions)
-    , _ecDatabases        :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ExportContext' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ecCsvExportOptions'
---
--- * 'ecKind'
---
--- * 'ecUri'
---
--- * 'ecFileType'
---
--- * 'ecSqlExportOptions'
---
--- * 'ecDatabases'
-exportContext
-    :: ExportContext
-exportContext =
-    ExportContext
-    { _ecCsvExportOptions = Nothing
-    , _ecKind = "sql#exportContext"
-    , _ecUri = Nothing
-    , _ecFileType = Nothing
-    , _ecSqlExportOptions = Nothing
-    , _ecDatabases = Nothing
-    }
-
--- | Options for exporting data as CSV.
-ecCsvExportOptions :: Lens' ExportContext (Maybe ExportContextCsvExportOptions)
-ecCsvExportOptions
-  = lens _ecCsvExportOptions
-      (\ s a -> s{_ecCsvExportOptions = a})
-
--- | This is always sql#exportContext.
-ecKind :: Lens' ExportContext Text
-ecKind = lens _ecKind (\ s a -> s{_ecKind = a})
-
--- | The path to the file in Google Cloud Storage where the export will be
--- stored. The URI is in the form gs:\/\/bucketName\/fileName. If the file
--- already exists, the operation fails. If fileType is SQL and the filename
--- ends with .gz, the contents are compressed.
-ecUri :: Lens' ExportContext (Maybe Text)
-ecUri = lens _ecUri (\ s a -> s{_ecUri = a})
-
--- | The file type for the specified uri. SQL: The file contains SQL
--- statements. CSV: The file contains CSV data.
-ecFileType :: Lens' ExportContext (Maybe Text)
-ecFileType
-  = lens _ecFileType (\ s a -> s{_ecFileType = a})
-
--- | Options for exporting data as SQL statements.
-ecSqlExportOptions :: Lens' ExportContext (Maybe ExportContextSqlExportOptions)
-ecSqlExportOptions
-  = lens _ecSqlExportOptions
-      (\ s a -> s{_ecSqlExportOptions = a})
-
--- | Databases (for example, guestbook) from which the export is made. If
--- fileType is SQL and no database is specified, all databases are
--- exported. If fileType is CSV, you can optionally specify at most one
--- database to export. If csvExportOptions.selectQuery also specifies the
--- database, this field will be ignored.
-ecDatabases :: Lens' ExportContext [Text]
-ecDatabases
-  = lens _ecDatabases (\ s a -> s{_ecDatabases = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON ExportContext where
-        parseJSON
-          = withObject "ExportContext"
-              (\ o ->
-                 ExportContext <$>
-                   (o .:? "csvExportOptions") <*>
-                     (o .:? "kind" .!= "sql#exportContext")
-                     <*> (o .:? "uri")
-                     <*> (o .:? "fileType")
-                     <*> (o .:? "sqlExportOptions")
-                     <*> (o .:? "databases" .!= mempty))
-
-instance ToJSON ExportContext where
-        toJSON ExportContext{..}
-          = object
-              (catMaybes
-                 [("csvExportOptions" .=) <$> _ecCsvExportOptions,
-                  Just ("kind" .= _ecKind), ("uri" .=) <$> _ecUri,
-                  ("fileType" .=) <$> _ecFileType,
-                  ("sqlExportOptions" .=) <$> _ecSqlExportOptions,
-                  ("databases" .=) <$> _ecDatabases])
-
--- | Options for exporting data as CSV.
---
--- /See:/ 'exportContextCsvExportOptions' smart constructor.
-newtype ExportContextCsvExportOptions = ExportContextCsvExportOptions
-    { _ecceoSelectQuery :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ExportContextCsvExportOptions' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ecceoSelectQuery'
-exportContextCsvExportOptions
-    :: ExportContextCsvExportOptions
-exportContextCsvExportOptions =
-    ExportContextCsvExportOptions
-    { _ecceoSelectQuery = Nothing
-    }
-
--- | The select query used to extract the data.
-ecceoSelectQuery :: Lens' ExportContextCsvExportOptions (Maybe Text)
-ecceoSelectQuery
-  = lens _ecceoSelectQuery
-      (\ s a -> s{_ecceoSelectQuery = a})
-
-instance FromJSON ExportContextCsvExportOptions where
-        parseJSON
-          = withObject "ExportContextCsvExportOptions"
-              (\ o ->
-                 ExportContextCsvExportOptions <$>
-                   (o .:? "selectQuery"))
-
-instance ToJSON ExportContextCsvExportOptions where
-        toJSON ExportContextCsvExportOptions{..}
-          = object
-              (catMaybes
-                 [("selectQuery" .=) <$> _ecceoSelectQuery])
-
--- | Options for exporting data as SQL statements.
---
--- /See:/ 'exportContextSqlExportOptions' smart constructor.
-data ExportContextSqlExportOptions = ExportContextSqlExportOptions
-    { _ecseoSchemaOnly :: !(Maybe Bool)
-    , _ecseoTables     :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ExportContextSqlExportOptions' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ecseoSchemaOnly'
---
--- * 'ecseoTables'
-exportContextSqlExportOptions
-    :: ExportContextSqlExportOptions
-exportContextSqlExportOptions =
-    ExportContextSqlExportOptions
-    { _ecseoSchemaOnly = Nothing
-    , _ecseoTables = Nothing
-    }
-
--- | Export only schema.
-ecseoSchemaOnly :: Lens' ExportContextSqlExportOptions (Maybe Bool)
-ecseoSchemaOnly
-  = lens _ecseoSchemaOnly
-      (\ s a -> s{_ecseoSchemaOnly = a})
-
--- | Tables to export, or that were exported, from the specified database. If
--- you specify tables, specify one and only one database.
-ecseoTables :: Lens' ExportContextSqlExportOptions [Text]
-ecseoTables
-  = lens _ecseoTables (\ s a -> s{_ecseoTables = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON ExportContextSqlExportOptions where
-        parseJSON
-          = withObject "ExportContextSqlExportOptions"
-              (\ o ->
-                 ExportContextSqlExportOptions <$>
-                   (o .:? "schemaOnly") <*> (o .:? "tables" .!= mempty))
-
-instance ToJSON ExportContextSqlExportOptions where
-        toJSON ExportContextSqlExportOptions{..}
-          = object
-              (catMaybes
-                 [("schemaOnly" .=) <$> _ecseoSchemaOnly,
-                  ("tables" .=) <$> _ecseoTables])
-
 -- | A Google Cloud SQL service flag resource.
 --
 -- /See:/ 'flag' smart constructor.
@@ -1260,54 +401,256 @@ instance ToJSON Flag where
                   ("type" .=) <$> _fType,
                   ("minValue" .=) <$> _fMinValue])
 
--- | Flags list response.
+-- | Database instance clone context.
 --
--- /See:/ 'flagsListResponse' smart constructor.
-data FlagsListResponse = FlagsListResponse
-    { _flrKind  :: !Text
-    , _flrItems :: !(Maybe [Maybe Flag])
+-- /See:/ 'cloneContext' smart constructor.
+data CloneContext = CloneContext
+    { _ccDestinationInstanceName :: !(Maybe Text)
+    , _ccBinLogCoordinates       :: !(Maybe (Maybe BinLogCoordinates))
+    , _ccKind                    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'FlagsListResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'CloneContext' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'flrKind'
+-- * 'ccDestinationInstanceName'
 --
--- * 'flrItems'
-flagsListResponse
-    :: FlagsListResponse
-flagsListResponse =
-    FlagsListResponse
-    { _flrKind = "sql#flagsList"
-    , _flrItems = Nothing
+-- * 'ccBinLogCoordinates'
+--
+-- * 'ccKind'
+cloneContext
+    :: CloneContext
+cloneContext =
+    CloneContext
+    { _ccDestinationInstanceName = Nothing
+    , _ccBinLogCoordinates = Nothing
+    , _ccKind = "sql#cloneContext"
     }
 
--- | This is always sql#flagsList.
-flrKind :: Lens' FlagsListResponse Text
-flrKind = lens _flrKind (\ s a -> s{_flrKind = a})
+-- | Name of the Cloud SQL instance to be created as a clone.
+ccDestinationInstanceName :: Lens' CloneContext (Maybe Text)
+ccDestinationInstanceName
+  = lens _ccDestinationInstanceName
+      (\ s a -> s{_ccDestinationInstanceName = a})
 
--- | List of flags.
-flrItems :: Lens' FlagsListResponse [Maybe Flag]
-flrItems
-  = lens _flrItems (\ s a -> s{_flrItems = a}) .
+-- | Binary log coordinates, if specified, indentify the the position up to
+-- which the source instance should be cloned. If not specified, the source
+-- instance is cloned up to the most recent binary log coordintes.
+ccBinLogCoordinates :: Lens' CloneContext (Maybe (Maybe BinLogCoordinates))
+ccBinLogCoordinates
+  = lens _ccBinLogCoordinates
+      (\ s a -> s{_ccBinLogCoordinates = a})
+
+-- | This is always sql#cloneContext.
+ccKind :: Lens' CloneContext Text
+ccKind = lens _ccKind (\ s a -> s{_ccKind = a})
+
+instance FromJSON CloneContext where
+        parseJSON
+          = withObject "CloneContext"
+              (\ o ->
+                 CloneContext <$>
+                   (o .:? "destinationInstanceName") <*>
+                     (o .:? "binLogCoordinates")
+                     <*> (o .:? "kind" .!= "sql#cloneContext"))
+
+instance ToJSON CloneContext where
+        toJSON CloneContext{..}
+          = object
+              (catMaybes
+                 [("destinationInstanceName" .=) <$>
+                    _ccDestinationInstanceName,
+                  ("binLogCoordinates" .=) <$> _ccBinLogCoordinates,
+                  Just ("kind" .= _ccKind)])
+
+-- | A database instance backup run resource.
+--
+-- /See:/ 'backupRun' smart constructor.
+data BackupRun = BackupRun
+    { _brStatus          :: !(Maybe Text)
+    , _brStartTime       :: !(Maybe UTCTime)
+    , _brKind            :: !Text
+    , _brError           :: !(Maybe (Maybe OperationError))
+    , _brWindowStartTime :: !(Maybe UTCTime)
+    , _brSelfLink        :: !(Maybe Text)
+    , _brEndTime         :: !(Maybe UTCTime)
+    , _brId              :: !(Maybe Int64)
+    , _brEnqueuedTime    :: !(Maybe UTCTime)
+    , _brInstance        :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BackupRun' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'brStatus'
+--
+-- * 'brStartTime'
+--
+-- * 'brKind'
+--
+-- * 'brError'
+--
+-- * 'brWindowStartTime'
+--
+-- * 'brSelfLink'
+--
+-- * 'brEndTime'
+--
+-- * 'brId'
+--
+-- * 'brEnqueuedTime'
+--
+-- * 'brInstance'
+backupRun
+    :: BackupRun
+backupRun =
+    BackupRun
+    { _brStatus = Nothing
+    , _brStartTime = Nothing
+    , _brKind = "sql#backupRun"
+    , _brError = Nothing
+    , _brWindowStartTime = Nothing
+    , _brSelfLink = Nothing
+    , _brEndTime = Nothing
+    , _brId = Nothing
+    , _brEnqueuedTime = Nothing
+    , _brInstance = Nothing
+    }
+
+-- | The status of this run.
+brStatus :: Lens' BackupRun (Maybe Text)
+brStatus = lens _brStatus (\ s a -> s{_brStatus = a})
+
+-- | The time the backup operation actually started in UTC timezone in RFC
+-- 3339 format, for example 2012-11-15T16:19:00.094Z.
+brStartTime :: Lens' BackupRun (Maybe UTCTime)
+brStartTime
+  = lens _brStartTime (\ s a -> s{_brStartTime = a})
+
+-- | This is always sql#backupRun.
+brKind :: Lens' BackupRun Text
+brKind = lens _brKind (\ s a -> s{_brKind = a})
+
+-- | Information about why the backup operation failed. This is only present
+-- if the run has the FAILED status.
+brError :: Lens' BackupRun (Maybe (Maybe OperationError))
+brError = lens _brError (\ s a -> s{_brError = a})
+
+-- | The start time of the backup window during which this the backup was
+-- attempted in RFC 3339 format, for example 2012-11-15T16:19:00.094Z.
+brWindowStartTime :: Lens' BackupRun (Maybe UTCTime)
+brWindowStartTime
+  = lens _brWindowStartTime
+      (\ s a -> s{_brWindowStartTime = a})
+
+-- | The URI of this resource.
+brSelfLink :: Lens' BackupRun (Maybe Text)
+brSelfLink
+  = lens _brSelfLink (\ s a -> s{_brSelfLink = a})
+
+-- | The time the backup operation completed in UTC timezone in RFC 3339
+-- format, for example 2012-11-15T16:19:00.094Z.
+brEndTime :: Lens' BackupRun (Maybe UTCTime)
+brEndTime
+  = lens _brEndTime (\ s a -> s{_brEndTime = a})
+
+-- | A unique identifier for this backup run. Note that this is unique only
+-- within the scope of a particular Cloud SQL instance.
+brId :: Lens' BackupRun (Maybe Int64)
+brId = lens _brId (\ s a -> s{_brId = a})
+
+-- | The time the run was enqueued in UTC timezone in RFC 3339 format, for
+-- example 2012-11-15T16:19:00.094Z.
+brEnqueuedTime :: Lens' BackupRun (Maybe UTCTime)
+brEnqueuedTime
+  = lens _brEnqueuedTime
+      (\ s a -> s{_brEnqueuedTime = a})
+
+-- | Name of the database instance.
+brInstance :: Lens' BackupRun (Maybe Text)
+brInstance
+  = lens _brInstance (\ s a -> s{_brInstance = a})
+
+instance FromJSON BackupRun where
+        parseJSON
+          = withObject "BackupRun"
+              (\ o ->
+                 BackupRun <$>
+                   (o .:? "status") <*> (o .:? "startTime") <*>
+                     (o .:? "kind" .!= "sql#backupRun")
+                     <*> (o .:? "error")
+                     <*> (o .:? "windowStartTime")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "endTime")
+                     <*> (o .:? "id")
+                     <*> (o .:? "enqueuedTime")
+                     <*> (o .:? "instance"))
+
+instance ToJSON BackupRun where
+        toJSON BackupRun{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _brStatus,
+                  ("startTime" .=) <$> _brStartTime,
+                  Just ("kind" .= _brKind), ("error" .=) <$> _brError,
+                  ("windowStartTime" .=) <$> _brWindowStartTime,
+                  ("selfLink" .=) <$> _brSelfLink,
+                  ("endTime" .=) <$> _brEndTime, ("id" .=) <$> _brId,
+                  ("enqueuedTime" .=) <$> _brEnqueuedTime,
+                  ("instance" .=) <$> _brInstance])
+
+-- | Options for exporting data as SQL statements.
+--
+-- /See:/ 'exportContextSqlExportOptions' smart constructor.
+data ExportContextSqlExportOptions = ExportContextSqlExportOptions
+    { _ecseoSchemaOnly :: !(Maybe Bool)
+    , _ecseoTables     :: !(Maybe [Text])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ExportContextSqlExportOptions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ecseoSchemaOnly'
+--
+-- * 'ecseoTables'
+exportContextSqlExportOptions
+    :: ExportContextSqlExportOptions
+exportContextSqlExportOptions =
+    ExportContextSqlExportOptions
+    { _ecseoSchemaOnly = Nothing
+    , _ecseoTables = Nothing
+    }
+
+-- | Export only schema.
+ecseoSchemaOnly :: Lens' ExportContextSqlExportOptions (Maybe Bool)
+ecseoSchemaOnly
+  = lens _ecseoSchemaOnly
+      (\ s a -> s{_ecseoSchemaOnly = a})
+
+-- | Tables to export, or that were exported, from the specified database. If
+-- you specify tables, specify one and only one database.
+ecseoTables :: Lens' ExportContextSqlExportOptions [Text]
+ecseoTables
+  = lens _ecseoTables (\ s a -> s{_ecseoTables = a}) .
       _Default
       . _Coerce
 
-instance FromJSON FlagsListResponse where
+instance FromJSON ExportContextSqlExportOptions where
         parseJSON
-          = withObject "FlagsListResponse"
+          = withObject "ExportContextSqlExportOptions"
               (\ o ->
-                 FlagsListResponse <$>
-                   (o .:? "kind" .!= "sql#flagsList") <*>
-                     (o .:? "items" .!= mempty))
+                 ExportContextSqlExportOptions <$>
+                   (o .:? "schemaOnly") <*> (o .:? "tables" .!= mempty))
 
-instance ToJSON FlagsListResponse where
-        toJSON FlagsListResponse{..}
+instance ToJSON ExportContextSqlExportOptions where
+        toJSON ExportContextSqlExportOptions{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _flrKind),
-                  ("items" .=) <$> _flrItems])
+                 [("schemaOnly" .=) <$> _ecseoSchemaOnly,
+                  ("tables" .=) <$> _ecseoTables])
 
 -- | Database instance import context.
 --
@@ -1395,55 +738,266 @@ instance ToJSON ImportContext where
                   ("uri" .=) <$> _icUri,
                   ("fileType" .=) <$> _icFileType])
 
--- | Options for importing data as CSV.
+-- | Backup run list results.
 --
--- /See:/ 'importContextCsvImportOptions' smart constructor.
-data ImportContextCsvImportOptions = ImportContextCsvImportOptions
-    { _iccioColumns :: !(Maybe [Text])
-    , _iccioTable   :: !(Maybe Text)
+-- /See:/ 'backupRunsListResponse' smart constructor.
+data BackupRunsListResponse = BackupRunsListResponse
+    { _brlrNextPageToken :: !(Maybe Text)
+    , _brlrKind          :: !Text
+    , _brlrItems         :: !(Maybe [Maybe BackupRun])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ImportContextCsvImportOptions' with the minimum fields required to make a request.
+-- | Creates a value of 'BackupRunsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'iccioColumns'
+-- * 'brlrNextPageToken'
 --
--- * 'iccioTable'
-importContextCsvImportOptions
-    :: ImportContextCsvImportOptions
-importContextCsvImportOptions =
-    ImportContextCsvImportOptions
-    { _iccioColumns = Nothing
-    , _iccioTable = Nothing
+-- * 'brlrKind'
+--
+-- * 'brlrItems'
+backupRunsListResponse
+    :: BackupRunsListResponse
+backupRunsListResponse =
+    BackupRunsListResponse
+    { _brlrNextPageToken = Nothing
+    , _brlrKind = "sql#backupRunsList"
+    , _brlrItems = Nothing
     }
 
--- | The columns to which CSV data is imported. If not specified, all columns
--- of the database table are loaded with CSV data.
-iccioColumns :: Lens' ImportContextCsvImportOptions [Text]
-iccioColumns
-  = lens _iccioColumns (\ s a -> s{_iccioColumns = a})
-      . _Default
+-- | The continuation token, used to page through large result sets. Provide
+-- this value in a subsequent request to return the next page of results.
+brlrNextPageToken :: Lens' BackupRunsListResponse (Maybe Text)
+brlrNextPageToken
+  = lens _brlrNextPageToken
+      (\ s a -> s{_brlrNextPageToken = a})
+
+-- | This is always sql#backupRunsList.
+brlrKind :: Lens' BackupRunsListResponse Text
+brlrKind = lens _brlrKind (\ s a -> s{_brlrKind = a})
+
+-- | A list of backup runs in reverse chronological order of the enqueued
+-- time.
+brlrItems :: Lens' BackupRunsListResponse [Maybe BackupRun]
+brlrItems
+  = lens _brlrItems (\ s a -> s{_brlrItems = a}) .
+      _Default
       . _Coerce
 
--- | The table to which CSV data is imported.
-iccioTable :: Lens' ImportContextCsvImportOptions (Maybe Text)
-iccioTable
-  = lens _iccioTable (\ s a -> s{_iccioTable = a})
-
-instance FromJSON ImportContextCsvImportOptions where
+instance FromJSON BackupRunsListResponse where
         parseJSON
-          = withObject "ImportContextCsvImportOptions"
+          = withObject "BackupRunsListResponse"
               (\ o ->
-                 ImportContextCsvImportOptions <$>
-                   (o .:? "columns" .!= mempty) <*> (o .:? "table"))
+                 BackupRunsListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "sql#backupRunsList")
+                     <*> (o .:? "items" .!= mempty))
 
-instance ToJSON ImportContextCsvImportOptions where
-        toJSON ImportContextCsvImportOptions{..}
+instance ToJSON BackupRunsListResponse where
+        toJSON BackupRunsListResponse{..}
           = object
               (catMaybes
-                 [("columns" .=) <$> _iccioColumns,
-                  ("table" .=) <$> _iccioTable])
+                 [("nextPageToken" .=) <$> _brlrNextPageToken,
+                  Just ("kind" .= _brlrKind),
+                  ("items" .=) <$> _brlrItems])
+
+-- | Database instance operation error.
+--
+-- /See:/ 'operationError' smart constructor.
+data OperationError = OperationError
+    { _oeKind    :: !Text
+    , _oeCode    :: !(Maybe Text)
+    , _oeMessage :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OperationError' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oeKind'
+--
+-- * 'oeCode'
+--
+-- * 'oeMessage'
+operationError
+    :: OperationError
+operationError =
+    OperationError
+    { _oeKind = "sql#operationError"
+    , _oeCode = Nothing
+    , _oeMessage = Nothing
+    }
+
+-- | This is always sql#operationError.
+oeKind :: Lens' OperationError Text
+oeKind = lens _oeKind (\ s a -> s{_oeKind = a})
+
+-- | Identifies the specific error that occurred.
+oeCode :: Lens' OperationError (Maybe Text)
+oeCode = lens _oeCode (\ s a -> s{_oeCode = a})
+
+-- | Additional information about the error encountered.
+oeMessage :: Lens' OperationError (Maybe Text)
+oeMessage
+  = lens _oeMessage (\ s a -> s{_oeMessage = a})
+
+instance FromJSON OperationError where
+        parseJSON
+          = withObject "OperationError"
+              (\ o ->
+                 OperationError <$>
+                   (o .:? "kind" .!= "sql#operationError") <*>
+                     (o .:? "code")
+                     <*> (o .:? "message"))
+
+instance ToJSON OperationError where
+        toJSON OperationError{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _oeKind), ("code" .=) <$> _oeCode,
+                  ("message" .=) <$> _oeMessage])
+
+-- | Database instance restore backup request.
+--
+-- /See:/ 'instancesRestoreBackupRequest' smart constructor.
+newtype InstancesRestoreBackupRequest = InstancesRestoreBackupRequest
+    { _irbrRestoreBackupContext :: Maybe (Maybe RestoreBackupContext)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InstancesRestoreBackupRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'irbrRestoreBackupContext'
+instancesRestoreBackupRequest
+    :: InstancesRestoreBackupRequest
+instancesRestoreBackupRequest =
+    InstancesRestoreBackupRequest
+    { _irbrRestoreBackupContext = Nothing
+    }
+
+-- | Parameters required to perform the restore backup operation.
+irbrRestoreBackupContext :: Lens' InstancesRestoreBackupRequest (Maybe (Maybe RestoreBackupContext))
+irbrRestoreBackupContext
+  = lens _irbrRestoreBackupContext
+      (\ s a -> s{_irbrRestoreBackupContext = a})
+
+instance FromJSON InstancesRestoreBackupRequest where
+        parseJSON
+          = withObject "InstancesRestoreBackupRequest"
+              (\ o ->
+                 InstancesRestoreBackupRequest <$>
+                   (o .:? "restoreBackupContext"))
+
+instance ToJSON InstancesRestoreBackupRequest where
+        toJSON InstancesRestoreBackupRequest{..}
+          = object
+              (catMaybes
+                 [("restoreBackupContext" .=) <$>
+                    _irbrRestoreBackupContext])
+
+-- | SslCertDetail.
+--
+-- /See:/ 'sslCertDetail' smart constructor.
+data SslCertDetail = SslCertDetail
+    { _scdCertInfo       :: !(Maybe (Maybe SslCert))
+    , _scdCertPrivateKey :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SslCertDetail' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'scdCertInfo'
+--
+-- * 'scdCertPrivateKey'
+sslCertDetail
+    :: SslCertDetail
+sslCertDetail =
+    SslCertDetail
+    { _scdCertInfo = Nothing
+    , _scdCertPrivateKey = Nothing
+    }
+
+-- | The public information about the cert.
+scdCertInfo :: Lens' SslCertDetail (Maybe (Maybe SslCert))
+scdCertInfo
+  = lens _scdCertInfo (\ s a -> s{_scdCertInfo = a})
+
+-- | The private key for the client cert, in pem format. Keep private in
+-- order to protect your security.
+scdCertPrivateKey :: Lens' SslCertDetail (Maybe Text)
+scdCertPrivateKey
+  = lens _scdCertPrivateKey
+      (\ s a -> s{_scdCertPrivateKey = a})
+
+instance FromJSON SslCertDetail where
+        parseJSON
+          = withObject "SslCertDetail"
+              (\ o ->
+                 SslCertDetail <$>
+                   (o .:? "certInfo") <*> (o .:? "certPrivateKey"))
+
+instance ToJSON SslCertDetail where
+        toJSON SslCertDetail{..}
+          = object
+              (catMaybes
+                 [("certInfo" .=) <$> _scdCertInfo,
+                  ("certPrivateKey" .=) <$> _scdCertPrivateKey])
+
+-- | Read-replica configuration for connecting to the master.
+--
+-- /See:/ 'replicaConfiguration' smart constructor.
+data ReplicaConfiguration = ReplicaConfiguration
+    { _rcKind                      :: !Text
+    , _rcMysqlReplicaConfiguration :: !(Maybe (Maybe MySqlReplicaConfiguration))
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ReplicaConfiguration' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rcKind'
+--
+-- * 'rcMysqlReplicaConfiguration'
+replicaConfiguration
+    :: ReplicaConfiguration
+replicaConfiguration =
+    ReplicaConfiguration
+    { _rcKind = "sql#replicaConfiguration"
+    , _rcMysqlReplicaConfiguration = Nothing
+    }
+
+-- | This is always sql#replicaConfiguration.
+rcKind :: Lens' ReplicaConfiguration Text
+rcKind = lens _rcKind (\ s a -> s{_rcKind = a})
+
+-- | MySQL specific configuration when replicating from a MySQL on-premises
+-- master. Replication configuration information such as the username,
+-- password, certificates, and keys are not stored in the instance
+-- metadata. The configuration information is used only to set up the
+-- replication connection and is stored by MySQL in a file named
+-- master.info in the data directory.
+rcMysqlReplicaConfiguration :: Lens' ReplicaConfiguration (Maybe (Maybe MySqlReplicaConfiguration))
+rcMysqlReplicaConfiguration
+  = lens _rcMysqlReplicaConfiguration
+      (\ s a -> s{_rcMysqlReplicaConfiguration = a})
+
+instance FromJSON ReplicaConfiguration where
+        parseJSON
+          = withObject "ReplicaConfiguration"
+              (\ o ->
+                 ReplicaConfiguration <$>
+                   (o .:? "kind" .!= "sql#replicaConfiguration") <*>
+                     (o .:? "mysqlReplicaConfiguration"))
+
+instance ToJSON ReplicaConfiguration where
+        toJSON ReplicaConfiguration{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _rcKind),
+                  ("mysqlReplicaConfiguration" .=) <$>
+                    _rcMysqlReplicaConfiguration])
 
 -- | Database instance clone request.
 --
@@ -1481,80 +1035,6 @@ instance ToJSON InstancesCloneRequest where
           = object
               (catMaybes
                  [("cloneContext" .=) <$> _icrCloneContext])
-
--- | Database instance export request.
---
--- /See:/ 'instancesExportRequest' smart constructor.
-newtype InstancesExportRequest = InstancesExportRequest
-    { _ierExportContext :: Maybe (Maybe ExportContext)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'InstancesExportRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ierExportContext'
-instancesExportRequest
-    :: InstancesExportRequest
-instancesExportRequest =
-    InstancesExportRequest
-    { _ierExportContext = Nothing
-    }
-
--- | Contains details about the export operation.
-ierExportContext :: Lens' InstancesExportRequest (Maybe (Maybe ExportContext))
-ierExportContext
-  = lens _ierExportContext
-      (\ s a -> s{_ierExportContext = a})
-
-instance FromJSON InstancesExportRequest where
-        parseJSON
-          = withObject "InstancesExportRequest"
-              (\ o ->
-                 InstancesExportRequest <$> (o .:? "exportContext"))
-
-instance ToJSON InstancesExportRequest where
-        toJSON InstancesExportRequest{..}
-          = object
-              (catMaybes
-                 [("exportContext" .=) <$> _ierExportContext])
-
--- | Database instance import request.
---
--- /See:/ 'instancesImportRequest' smart constructor.
-newtype InstancesImportRequest = InstancesImportRequest
-    { _iirImportContext :: Maybe (Maybe ImportContext)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'InstancesImportRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'iirImportContext'
-instancesImportRequest
-    :: InstancesImportRequest
-instancesImportRequest =
-    InstancesImportRequest
-    { _iirImportContext = Nothing
-    }
-
--- | Contains details about the import operation.
-iirImportContext :: Lens' InstancesImportRequest (Maybe (Maybe ImportContext))
-iirImportContext
-  = lens _iirImportContext
-      (\ s a -> s{_iirImportContext = a})
-
-instance FromJSON InstancesImportRequest where
-        parseJSON
-          = withObject "InstancesImportRequest"
-              (\ o ->
-                 InstancesImportRequest <$> (o .:? "importContext"))
-
-instance ToJSON InstancesImportRequest where
-        toJSON InstancesImportRequest{..}
-          = object
-              (catMaybes
-                 [("importContext" .=) <$> _iirImportContext])
 
 -- | Database instances list response.
 --
@@ -1618,225 +1098,701 @@ instance ToJSON InstancesListResponse where
                   Just ("kind" .= _ilrKind),
                   ("items" .=) <$> _ilrItems])
 
--- | Database instance restore backup request.
+-- | SslCert insert response.
 --
--- /See:/ 'instancesRestoreBackupRequest' smart constructor.
-newtype InstancesRestoreBackupRequest = InstancesRestoreBackupRequest
-    { _irbrRestoreBackupContext :: Maybe (Maybe RestoreBackupContext)
+-- /See:/ 'sslCertsInsertResponse' smart constructor.
+data SslCertsInsertResponse = SslCertsInsertResponse
+    { _scirServerCaCert :: !(Maybe (Maybe SslCert))
+    , _scirKind         :: !Text
+    , _scirClientCert   :: !(Maybe (Maybe SslCertDetail))
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstancesRestoreBackupRequest' with the minimum fields required to make a request.
+-- | Creates a value of 'SslCertsInsertResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'irbrRestoreBackupContext'
-instancesRestoreBackupRequest
-    :: InstancesRestoreBackupRequest
-instancesRestoreBackupRequest =
-    InstancesRestoreBackupRequest
-    { _irbrRestoreBackupContext = Nothing
+-- * 'scirServerCaCert'
+--
+-- * 'scirKind'
+--
+-- * 'scirClientCert'
+sslCertsInsertResponse
+    :: SslCertsInsertResponse
+sslCertsInsertResponse =
+    SslCertsInsertResponse
+    { _scirServerCaCert = Nothing
+    , _scirKind = "sql#sslCertsInsert"
+    , _scirClientCert = Nothing
     }
 
--- | Parameters required to perform the restore backup operation.
-irbrRestoreBackupContext :: Lens' InstancesRestoreBackupRequest (Maybe (Maybe RestoreBackupContext))
-irbrRestoreBackupContext
-  = lens _irbrRestoreBackupContext
-      (\ s a -> s{_irbrRestoreBackupContext = a})
+-- | The server Certificate Authority\'s certificate. If this is missing you
+-- can force a new one to be generated by calling resetSslConfig method on
+-- instances resource.
+scirServerCaCert :: Lens' SslCertsInsertResponse (Maybe (Maybe SslCert))
+scirServerCaCert
+  = lens _scirServerCaCert
+      (\ s a -> s{_scirServerCaCert = a})
 
-instance FromJSON InstancesRestoreBackupRequest where
+-- | This is always sql#sslCertsInsert.
+scirKind :: Lens' SslCertsInsertResponse Text
+scirKind = lens _scirKind (\ s a -> s{_scirKind = a})
+
+-- | The new client certificate and private key. The new certificate will not
+-- work until the instance is restarted.
+scirClientCert :: Lens' SslCertsInsertResponse (Maybe (Maybe SslCertDetail))
+scirClientCert
+  = lens _scirClientCert
+      (\ s a -> s{_scirClientCert = a})
+
+instance FromJSON SslCertsInsertResponse where
         parseJSON
-          = withObject "InstancesRestoreBackupRequest"
+          = withObject "SslCertsInsertResponse"
               (\ o ->
-                 InstancesRestoreBackupRequest <$>
-                   (o .:? "restoreBackupContext"))
+                 SslCertsInsertResponse <$>
+                   (o .:? "serverCaCert") <*>
+                     (o .:? "kind" .!= "sql#sslCertsInsert")
+                     <*> (o .:? "clientCert"))
 
-instance ToJSON InstancesRestoreBackupRequest where
-        toJSON InstancesRestoreBackupRequest{..}
+instance ToJSON SslCertsInsertResponse where
+        toJSON SslCertsInsertResponse{..}
           = object
               (catMaybes
-                 [("restoreBackupContext" .=) <$>
-                    _irbrRestoreBackupContext])
+                 [("serverCaCert" .=) <$> _scirServerCaCert,
+                  Just ("kind" .= _scirKind),
+                  ("clientCert" .=) <$> _scirClientCert])
 
--- | IP Management configuration.
+-- | SslCerts list response.
 --
--- /See:/ 'ipConfiguration' smart constructor.
-data IpConfiguration = IpConfiguration
-    { _icAuthorizedNetworks :: !(Maybe [Maybe AclEntry])
-    , _icRequireSsl         :: !(Maybe Bool)
-    , _icIpv4Enabled        :: !(Maybe Bool)
+-- /See:/ 'sslCertsListResponse' smart constructor.
+data SslCertsListResponse = SslCertsListResponse
+    { _sclrKind  :: !Text
+    , _sclrItems :: !(Maybe [Maybe SslCert])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'IpConfiguration' with the minimum fields required to make a request.
+-- | Creates a value of 'SslCertsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'icAuthorizedNetworks'
+-- * 'sclrKind'
 --
--- * 'icRequireSsl'
---
--- * 'icIpv4Enabled'
-ipConfiguration
-    :: IpConfiguration
-ipConfiguration =
-    IpConfiguration
-    { _icAuthorizedNetworks = Nothing
-    , _icRequireSsl = Nothing
-    , _icIpv4Enabled = Nothing
+-- * 'sclrItems'
+sslCertsListResponse
+    :: SslCertsListResponse
+sslCertsListResponse =
+    SslCertsListResponse
+    { _sclrKind = "sql#sslCertsList"
+    , _sclrItems = Nothing
     }
 
--- | The list of external networks that are allowed to connect to the
--- instance using the IP. In CIDR notation, also known as \'slash\'
--- notation (e.g. 192.168.100.0\/24).
-icAuthorizedNetworks :: Lens' IpConfiguration [Maybe AclEntry]
-icAuthorizedNetworks
-  = lens _icAuthorizedNetworks
-      (\ s a -> s{_icAuthorizedNetworks = a})
-      . _Default
+-- | This is always sql#sslCertsList.
+sclrKind :: Lens' SslCertsListResponse Text
+sclrKind = lens _sclrKind (\ s a -> s{_sclrKind = a})
+
+-- | List of client certificates for the instance.
+sclrItems :: Lens' SslCertsListResponse [Maybe SslCert]
+sclrItems
+  = lens _sclrItems (\ s a -> s{_sclrItems = a}) .
+      _Default
       . _Coerce
 
--- | Whether the mysqld should default to \'REQUIRE X509\' for users
--- connecting over IP.
-icRequireSsl :: Lens' IpConfiguration (Maybe Bool)
-icRequireSsl
-  = lens _icRequireSsl (\ s a -> s{_icRequireSsl = a})
-
--- | Whether the instance should be assigned an IP address or not.
-icIpv4Enabled :: Lens' IpConfiguration (Maybe Bool)
-icIpv4Enabled
-  = lens _icIpv4Enabled
-      (\ s a -> s{_icIpv4Enabled = a})
-
-instance FromJSON IpConfiguration where
+instance FromJSON SslCertsListResponse where
         parseJSON
-          = withObject "IpConfiguration"
+          = withObject "SslCertsListResponse"
               (\ o ->
-                 IpConfiguration <$>
-                   (o .:? "authorizedNetworks" .!= mempty) <*>
-                     (o .:? "requireSsl")
-                     <*> (o .:? "ipv4Enabled"))
+                 SslCertsListResponse <$>
+                   (o .:? "kind" .!= "sql#sslCertsList") <*>
+                     (o .:? "items" .!= mempty))
 
-instance ToJSON IpConfiguration where
-        toJSON IpConfiguration{..}
+instance ToJSON SslCertsListResponse where
+        toJSON SslCertsListResponse{..}
           = object
               (catMaybes
-                 [("authorizedNetworks" .=) <$> _icAuthorizedNetworks,
-                  ("requireSsl" .=) <$> _icRequireSsl,
-                  ("ipv4Enabled" .=) <$> _icIpv4Enabled])
+                 [Just ("kind" .= _sclrKind),
+                  ("items" .=) <$> _sclrItems])
 
--- | Database instance IP Mapping.
+-- | Database instance operation errors list wrapper.
 --
--- /See:/ 'ipMapping' smart constructor.
-data IpMapping = IpMapping
-    { _imIpAddress    :: !(Maybe Text)
-    , _imTimeToRetire :: !(Maybe UTCTime)
+-- /See:/ 'operationErrors' smart constructor.
+data OperationErrors = OperationErrors
+    { _oKind   :: !Text
+    , _oErrors :: !(Maybe [Maybe OperationError])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'IpMapping' with the minimum fields required to make a request.
+-- | Creates a value of 'OperationErrors' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'imIpAddress'
+-- * 'oKind'
 --
--- * 'imTimeToRetire'
-ipMapping
-    :: IpMapping
-ipMapping =
-    IpMapping
-    { _imIpAddress = Nothing
-    , _imTimeToRetire = Nothing
+-- * 'oErrors'
+operationErrors
+    :: OperationErrors
+operationErrors =
+    OperationErrors
+    { _oKind = "sql#operationErrors"
+    , _oErrors = Nothing
     }
 
--- | The IP address assigned.
-imIpAddress :: Lens' IpMapping (Maybe Text)
-imIpAddress
-  = lens _imIpAddress (\ s a -> s{_imIpAddress = a})
+-- | This is always sql#operationErrors.
+oKind :: Lens' OperationErrors Text
+oKind = lens _oKind (\ s a -> s{_oKind = a})
 
--- | The due time for this IP to be retired in RFC 3339 format, for example
--- 2012-11-15T16:19:00.094Z. This field is only available when the IP is
--- scheduled to be retired.
-imTimeToRetire :: Lens' IpMapping (Maybe UTCTime)
-imTimeToRetire
-  = lens _imTimeToRetire
-      (\ s a -> s{_imTimeToRetire = a})
+-- | The list of errors encountered while processing this operation.
+oErrors :: Lens' OperationErrors [Maybe OperationError]
+oErrors
+  = lens _oErrors (\ s a -> s{_oErrors = a}) . _Default
+      . _Coerce
 
-instance FromJSON IpMapping where
+instance FromJSON OperationErrors where
         parseJSON
-          = withObject "IpMapping"
+          = withObject "OperationErrors"
               (\ o ->
-                 IpMapping <$>
-                   (o .:? "ipAddress") <*> (o .:? "timeToRetire"))
+                 OperationErrors <$>
+                   (o .:? "kind" .!= "sql#operationErrors") <*>
+                     (o .:? "errors" .!= mempty))
 
-instance ToJSON IpMapping where
-        toJSON IpMapping{..}
+instance ToJSON OperationErrors where
+        toJSON OperationErrors{..}
           = object
               (catMaybes
-                 [("ipAddress" .=) <$> _imIpAddress,
-                  ("timeToRetire" .=) <$> _imTimeToRetire])
+                 [Just ("kind" .= _oKind),
+                  ("errors" .=) <$> _oErrors])
 
--- | Preferred location. This specifies where a Cloud SQL instance should
--- preferably be located, either in a specific Compute Engine zone, or
--- co-located with an App Engine application. Note that if the preferred
--- location is not available, the instance will be located as close as
--- possible within the region. Only one location may be specified.
+-- | Database instance restore from backup context.
 --
--- /See:/ 'locationPreference' smart constructor.
-data LocationPreference = LocationPreference
-    { _lpKind                 :: !Text
-    , _lpFollowGaeApplication :: !(Maybe Text)
-    , _lpZone                 :: !(Maybe Text)
+-- /See:/ 'restoreBackupContext' smart constructor.
+data RestoreBackupContext = RestoreBackupContext
+    { _rbcInstanceId  :: !(Maybe Text)
+    , _rbcBackupRunId :: !(Maybe Int64)
+    , _rbcKind        :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LocationPreference' with the minimum fields required to make a request.
+-- | Creates a value of 'RestoreBackupContext' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lpKind'
+-- * 'rbcInstanceId'
 --
--- * 'lpFollowGaeApplication'
+-- * 'rbcBackupRunId'
 --
--- * 'lpZone'
-locationPreference
-    :: LocationPreference
-locationPreference =
-    LocationPreference
-    { _lpKind = "sql#locationPreference"
-    , _lpFollowGaeApplication = Nothing
-    , _lpZone = Nothing
+-- * 'rbcKind'
+restoreBackupContext
+    :: RestoreBackupContext
+restoreBackupContext =
+    RestoreBackupContext
+    { _rbcInstanceId = Nothing
+    , _rbcBackupRunId = Nothing
+    , _rbcKind = "sql#restoreBackupContext"
     }
 
--- | This is always sql#locationPreference.
-lpKind :: Lens' LocationPreference Text
-lpKind = lens _lpKind (\ s a -> s{_lpKind = a})
+-- | The ID of the instance that the backup was taken from.
+rbcInstanceId :: Lens' RestoreBackupContext (Maybe Text)
+rbcInstanceId
+  = lens _rbcInstanceId
+      (\ s a -> s{_rbcInstanceId = a})
 
--- | The AppEngine application to follow, it must be in the same region as
--- the Cloud SQL instance.
-lpFollowGaeApplication :: Lens' LocationPreference (Maybe Text)
-lpFollowGaeApplication
-  = lens _lpFollowGaeApplication
-      (\ s a -> s{_lpFollowGaeApplication = a})
+-- | The ID of the backup run to restore from.
+rbcBackupRunId :: Lens' RestoreBackupContext (Maybe Int64)
+rbcBackupRunId
+  = lens _rbcBackupRunId
+      (\ s a -> s{_rbcBackupRunId = a})
 
--- | The preferred Compute Engine zone (e.g. us-centra1-a, us-central1-b,
--- etc.).
-lpZone :: Lens' LocationPreference (Maybe Text)
-lpZone = lens _lpZone (\ s a -> s{_lpZone = a})
+-- | This is always sql#restoreBackupContext.
+rbcKind :: Lens' RestoreBackupContext Text
+rbcKind = lens _rbcKind (\ s a -> s{_rbcKind = a})
 
-instance FromJSON LocationPreference where
+instance FromJSON RestoreBackupContext where
         parseJSON
-          = withObject "LocationPreference"
+          = withObject "RestoreBackupContext"
               (\ o ->
-                 LocationPreference <$>
-                   (o .:? "kind" .!= "sql#locationPreference") <*>
-                     (o .:? "followGaeApplication")
-                     <*> (o .:? "zone"))
+                 RestoreBackupContext <$>
+                   (o .:? "instanceId") <*> (o .:? "backupRunId") <*>
+                     (o .:? "kind" .!= "sql#restoreBackupContext"))
 
-instance ToJSON LocationPreference where
-        toJSON LocationPreference{..}
+instance ToJSON RestoreBackupContext where
+        toJSON RestoreBackupContext{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _lpKind),
-                  ("followGaeApplication" .=) <$>
-                    _lpFollowGaeApplication,
-                  ("zone" .=) <$> _lpZone])
+                 [("instanceId" .=) <$> _rbcInstanceId,
+                  ("backupRunId" .=) <$> _rbcBackupRunId,
+                  Just ("kind" .= _rbcKind)])
+
+-- | SslCerts Resource
+--
+-- /See:/ 'sslCert' smart constructor.
+data SslCert = SslCert
+    { _scCommonName       :: !(Maybe Text)
+    , _scKind             :: !Text
+    , _scCertSerialNumber :: !(Maybe Text)
+    , _scSelfLink         :: !(Maybe Text)
+    , _scCert             :: !(Maybe Text)
+    , _scSha1Fingerprint  :: !(Maybe Text)
+    , _scExpirationTime   :: !(Maybe UTCTime)
+    , _scCreateTime       :: !(Maybe UTCTime)
+    , _scInstance         :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SslCert' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'scCommonName'
+--
+-- * 'scKind'
+--
+-- * 'scCertSerialNumber'
+--
+-- * 'scSelfLink'
+--
+-- * 'scCert'
+--
+-- * 'scSha1Fingerprint'
+--
+-- * 'scExpirationTime'
+--
+-- * 'scCreateTime'
+--
+-- * 'scInstance'
+sslCert
+    :: SslCert
+sslCert =
+    SslCert
+    { _scCommonName = Nothing
+    , _scKind = "sql#sslCert"
+    , _scCertSerialNumber = Nothing
+    , _scSelfLink = Nothing
+    , _scCert = Nothing
+    , _scSha1Fingerprint = Nothing
+    , _scExpirationTime = Nothing
+    , _scCreateTime = Nothing
+    , _scInstance = Nothing
+    }
+
+-- | User supplied name. Constrained to [a-zA-Z.-_ ]+.
+scCommonName :: Lens' SslCert (Maybe Text)
+scCommonName
+  = lens _scCommonName (\ s a -> s{_scCommonName = a})
+
+-- | This is always sql#sslCert.
+scKind :: Lens' SslCert Text
+scKind = lens _scKind (\ s a -> s{_scKind = a})
+
+-- | Serial number, as extracted from the certificate.
+scCertSerialNumber :: Lens' SslCert (Maybe Text)
+scCertSerialNumber
+  = lens _scCertSerialNumber
+      (\ s a -> s{_scCertSerialNumber = a})
+
+-- | The URI of this resource.
+scSelfLink :: Lens' SslCert (Maybe Text)
+scSelfLink
+  = lens _scSelfLink (\ s a -> s{_scSelfLink = a})
+
+-- | PEM representation.
+scCert :: Lens' SslCert (Maybe Text)
+scCert = lens _scCert (\ s a -> s{_scCert = a})
+
+-- | Sha1 Fingerprint.
+scSha1Fingerprint :: Lens' SslCert (Maybe Text)
+scSha1Fingerprint
+  = lens _scSha1Fingerprint
+      (\ s a -> s{_scSha1Fingerprint = a})
+
+-- | The time when the certificate expires in RFC 3339 format, for example
+-- 2012-11-15T16:19:00.094Z.
+scExpirationTime :: Lens' SslCert (Maybe UTCTime)
+scExpirationTime
+  = lens _scExpirationTime
+      (\ s a -> s{_scExpirationTime = a})
+
+-- | The time when the certificate was created in RFC 3339 format, for
+-- example 2012-11-15T16:19:00.094Z
+scCreateTime :: Lens' SslCert (Maybe UTCTime)
+scCreateTime
+  = lens _scCreateTime (\ s a -> s{_scCreateTime = a})
+
+-- | Name of the database instance.
+scInstance :: Lens' SslCert (Maybe Text)
+scInstance
+  = lens _scInstance (\ s a -> s{_scInstance = a})
+
+instance FromJSON SslCert where
+        parseJSON
+          = withObject "SslCert"
+              (\ o ->
+                 SslCert <$>
+                   (o .:? "commonName") <*>
+                     (o .:? "kind" .!= "sql#sslCert")
+                     <*> (o .:? "certSerialNumber")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "cert")
+                     <*> (o .:? "sha1Fingerprint")
+                     <*> (o .:? "expirationTime")
+                     <*> (o .:? "createTime")
+                     <*> (o .:? "instance"))
+
+instance ToJSON SslCert where
+        toJSON SslCert{..}
+          = object
+              (catMaybes
+                 [("commonName" .=) <$> _scCommonName,
+                  Just ("kind" .= _scKind),
+                  ("certSerialNumber" .=) <$> _scCertSerialNumber,
+                  ("selfLink" .=) <$> _scSelfLink,
+                  ("cert" .=) <$> _scCert,
+                  ("sha1Fingerprint" .=) <$> _scSha1Fingerprint,
+                  ("expirationTime" .=) <$> _scExpirationTime,
+                  ("createTime" .=) <$> _scCreateTime,
+                  ("instance" .=) <$> _scInstance])
+
+-- | Database instance list operations response.
+--
+-- /See:/ 'operationsListResponse' smart constructor.
+data OperationsListResponse = OperationsListResponse
+    { _olrNextPageToken :: !(Maybe Text)
+    , _olrKind          :: !Text
+    , _olrItems         :: !(Maybe [Maybe Operation])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OperationsListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'olrNextPageToken'
+--
+-- * 'olrKind'
+--
+-- * 'olrItems'
+operationsListResponse
+    :: OperationsListResponse
+operationsListResponse =
+    OperationsListResponse
+    { _olrNextPageToken = Nothing
+    , _olrKind = "sql#operationsList"
+    , _olrItems = Nothing
+    }
+
+-- | The continuation token, used to page through large result sets. Provide
+-- this value in a subsequent request to return the next page of results.
+olrNextPageToken :: Lens' OperationsListResponse (Maybe Text)
+olrNextPageToken
+  = lens _olrNextPageToken
+      (\ s a -> s{_olrNextPageToken = a})
+
+-- | This is always sql#operationsList.
+olrKind :: Lens' OperationsListResponse Text
+olrKind = lens _olrKind (\ s a -> s{_olrKind = a})
+
+-- | List of operation resources.
+olrItems :: Lens' OperationsListResponse [Maybe Operation]
+olrItems
+  = lens _olrItems (\ s a -> s{_olrItems = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON OperationsListResponse where
+        parseJSON
+          = withObject "OperationsListResponse"
+              (\ o ->
+                 OperationsListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "sql#operationsList")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON OperationsListResponse where
+        toJSON OperationsListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _olrNextPageToken,
+                  Just ("kind" .= _olrKind),
+                  ("items" .=) <$> _olrItems])
+
+-- | Database list response.
+--
+-- /See:/ 'databasesListResponse' smart constructor.
+data DatabasesListResponse = DatabasesListResponse
+    { _dlrKind  :: !Text
+    , _dlrItems :: !(Maybe [Maybe Database])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DatabasesListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dlrKind'
+--
+-- * 'dlrItems'
+databasesListResponse
+    :: DatabasesListResponse
+databasesListResponse =
+    DatabasesListResponse
+    { _dlrKind = "sql#databasesList"
+    , _dlrItems = Nothing
+    }
+
+-- | This is always sql#databasesList.
+dlrKind :: Lens' DatabasesListResponse Text
+dlrKind = lens _dlrKind (\ s a -> s{_dlrKind = a})
+
+-- | List of database resources in the instance.
+dlrItems :: Lens' DatabasesListResponse [Maybe Database]
+dlrItems
+  = lens _dlrItems (\ s a -> s{_dlrItems = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON DatabasesListResponse where
+        parseJSON
+          = withObject "DatabasesListResponse"
+              (\ o ->
+                 DatabasesListResponse <$>
+                   (o .:? "kind" .!= "sql#databasesList") <*>
+                     (o .:? "items" .!= mempty))
+
+instance ToJSON DatabasesListResponse where
+        toJSON DatabasesListResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _dlrKind),
+                  ("items" .=) <$> _dlrItems])
+
+-- | Database instance export request.
+--
+-- /See:/ 'instancesExportRequest' smart constructor.
+newtype InstancesExportRequest = InstancesExportRequest
+    { _ierExportContext :: Maybe (Maybe ExportContext)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InstancesExportRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ierExportContext'
+instancesExportRequest
+    :: InstancesExportRequest
+instancesExportRequest =
+    InstancesExportRequest
+    { _ierExportContext = Nothing
+    }
+
+-- | Contains details about the export operation.
+ierExportContext :: Lens' InstancesExportRequest (Maybe (Maybe ExportContext))
+ierExportContext
+  = lens _ierExportContext
+      (\ s a -> s{_ierExportContext = a})
+
+instance FromJSON InstancesExportRequest where
+        parseJSON
+          = withObject "InstancesExportRequest"
+              (\ o ->
+                 InstancesExportRequest <$> (o .:? "exportContext"))
+
+instance ToJSON InstancesExportRequest where
+        toJSON InstancesExportRequest{..}
+          = object
+              (catMaybes
+                 [("exportContext" .=) <$> _ierExportContext])
+
+-- | On-premises instance configuration.
+--
+-- /See:/ 'onPremisesConfiguration' smart constructor.
+data OnPremisesConfiguration = OnPremisesConfiguration
+    { _opcKind     :: !Text
+    , _opcHostPort :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OnPremisesConfiguration' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'opcKind'
+--
+-- * 'opcHostPort'
+onPremisesConfiguration
+    :: OnPremisesConfiguration
+onPremisesConfiguration =
+    OnPremisesConfiguration
+    { _opcKind = "sql#onPremisesConfiguration"
+    , _opcHostPort = Nothing
+    }
+
+-- | This is always sql#onPremisesConfiguration.
+opcKind :: Lens' OnPremisesConfiguration Text
+opcKind = lens _opcKind (\ s a -> s{_opcKind = a})
+
+-- | The host and port of the on-premises instance in host:port format
+opcHostPort :: Lens' OnPremisesConfiguration (Maybe Text)
+opcHostPort
+  = lens _opcHostPort (\ s a -> s{_opcHostPort = a})
+
+instance FromJSON OnPremisesConfiguration where
+        parseJSON
+          = withObject "OnPremisesConfiguration"
+              (\ o ->
+                 OnPremisesConfiguration <$>
+                   (o .:? "kind" .!= "sql#onPremisesConfiguration") <*>
+                     (o .:? "hostPort"))
+
+instance ToJSON OnPremisesConfiguration where
+        toJSON OnPremisesConfiguration{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _opcKind),
+                  ("hostPort" .=) <$> _opcHostPort])
+
+-- | An entry for an Access Control list.
+--
+-- /See:/ 'aclEntry' smart constructor.
+data AclEntry = AclEntry
+    { _aeKind           :: !Text
+    , _aeValue          :: !(Maybe Text)
+    , _aeName           :: !(Maybe Text)
+    , _aeExpirationTime :: !(Maybe UTCTime)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AclEntry' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aeKind'
+--
+-- * 'aeValue'
+--
+-- * 'aeName'
+--
+-- * 'aeExpirationTime'
+aclEntry
+    :: AclEntry
+aclEntry =
+    AclEntry
+    { _aeKind = "sql#aclEntry"
+    , _aeValue = Nothing
+    , _aeName = Nothing
+    , _aeExpirationTime = Nothing
+    }
+
+-- | This is always sql#aclEntry.
+aeKind :: Lens' AclEntry Text
+aeKind = lens _aeKind (\ s a -> s{_aeKind = a})
+
+-- | The whitelisted value for the access control list.
+aeValue :: Lens' AclEntry (Maybe Text)
+aeValue = lens _aeValue (\ s a -> s{_aeValue = a})
+
+-- | An optional label to identify this entry.
+aeName :: Lens' AclEntry (Maybe Text)
+aeName = lens _aeName (\ s a -> s{_aeName = a})
+
+-- | The time when this access control entry expires in RFC 3339 format, for
+-- example 2012-11-15T16:19:00.094Z.
+aeExpirationTime :: Lens' AclEntry (Maybe UTCTime)
+aeExpirationTime
+  = lens _aeExpirationTime
+      (\ s a -> s{_aeExpirationTime = a})
+
+instance FromJSON AclEntry where
+        parseJSON
+          = withObject "AclEntry"
+              (\ o ->
+                 AclEntry <$>
+                   (o .:? "kind" .!= "sql#aclEntry") <*> (o .:? "value")
+                     <*> (o .:? "name")
+                     <*> (o .:? "expirationTime"))
+
+instance ToJSON AclEntry where
+        toJSON AclEntry{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _aeKind), ("value" .=) <$> _aeValue,
+                  ("name" .=) <$> _aeName,
+                  ("expirationTime" .=) <$> _aeExpirationTime])
+
+-- | MySQL flags for Cloud SQL instances.
+--
+-- /See:/ 'databaseFlags' smart constructor.
+data DatabaseFlags = DatabaseFlags
+    { _dfValue :: !(Maybe Text)
+    , _dfName  :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DatabaseFlags' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dfValue'
+--
+-- * 'dfName'
+databaseFlags
+    :: DatabaseFlags
+databaseFlags =
+    DatabaseFlags
+    { _dfValue = Nothing
+    , _dfName = Nothing
+    }
+
+-- | The value of the flag. Booleans should be set to on for true and off for
+-- false. This field must be omitted if the flag doesn\'t take a value.
+dfValue :: Lens' DatabaseFlags (Maybe Text)
+dfValue = lens _dfValue (\ s a -> s{_dfValue = a})
+
+-- | The name of the flag. These flags are passed at instance startup, so
+-- include both MySQL server options and MySQL system variables. Flags
+-- should be specified with underscores, not hyphens. For more information,
+-- see Configuring MySQL Flags in the Google Cloud SQL documentation, as
+-- well as the official MySQL documentation for server options and system
+-- variables.
+dfName :: Lens' DatabaseFlags (Maybe Text)
+dfName = lens _dfName (\ s a -> s{_dfName = a})
+
+instance FromJSON DatabaseFlags where
+        parseJSON
+          = withObject "DatabaseFlags"
+              (\ o ->
+                 DatabaseFlags <$> (o .:? "value") <*> (o .:? "name"))
+
+instance ToJSON DatabaseFlags where
+        toJSON DatabaseFlags{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _dfValue, ("name" .=) <$> _dfName])
+
+-- | Options for exporting data as CSV.
+--
+-- /See:/ 'exportContextCsvExportOptions' smart constructor.
+newtype ExportContextCsvExportOptions = ExportContextCsvExportOptions
+    { _ecceoSelectQuery :: Maybe Text
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ExportContextCsvExportOptions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ecceoSelectQuery'
+exportContextCsvExportOptions
+    :: ExportContextCsvExportOptions
+exportContextCsvExportOptions =
+    ExportContextCsvExportOptions
+    { _ecceoSelectQuery = Nothing
+    }
+
+-- | The select query used to extract the data.
+ecceoSelectQuery :: Lens' ExportContextCsvExportOptions (Maybe Text)
+ecceoSelectQuery
+  = lens _ecceoSelectQuery
+      (\ s a -> s{_ecceoSelectQuery = a})
+
+instance FromJSON ExportContextCsvExportOptions where
+        parseJSON
+          = withObject "ExportContextCsvExportOptions"
+              (\ o ->
+                 ExportContextCsvExportOptions <$>
+                   (o .:? "selectQuery"))
+
+instance ToJSON ExportContextCsvExportOptions where
+        toJSON ExportContextCsvExportOptions{..}
+          = object
+              (catMaybes
+                 [("selectQuery" .=) <$> _ecceoSelectQuery])
 
 -- | Read-replica configuration specific to MySQL databases.
 --
@@ -2002,52 +1958,486 @@ instance ToJSON MySqlReplicaConfiguration where
                   ("dumpFilePath" .=) <$> _msrcDumpFilePath,
                   ("password" .=) <$> _msrcPassword])
 
--- | On-premises instance configuration.
+-- | Options for importing data as CSV.
 --
--- /See:/ 'onPremisesConfiguration' smart constructor.
-data OnPremisesConfiguration = OnPremisesConfiguration
-    { _opcKind     :: !Text
-    , _opcHostPort :: !(Maybe Text)
+-- /See:/ 'importContextCsvImportOptions' smart constructor.
+data ImportContextCsvImportOptions = ImportContextCsvImportOptions
+    { _iccioColumns :: !(Maybe [Text])
+    , _iccioTable   :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OnPremisesConfiguration' with the minimum fields required to make a request.
+-- | Creates a value of 'ImportContextCsvImportOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'opcKind'
+-- * 'iccioColumns'
 --
--- * 'opcHostPort'
-onPremisesConfiguration
-    :: OnPremisesConfiguration
-onPremisesConfiguration =
-    OnPremisesConfiguration
-    { _opcKind = "sql#onPremisesConfiguration"
-    , _opcHostPort = Nothing
+-- * 'iccioTable'
+importContextCsvImportOptions
+    :: ImportContextCsvImportOptions
+importContextCsvImportOptions =
+    ImportContextCsvImportOptions
+    { _iccioColumns = Nothing
+    , _iccioTable = Nothing
     }
 
--- | This is always sql#onPremisesConfiguration.
-opcKind :: Lens' OnPremisesConfiguration Text
-opcKind = lens _opcKind (\ s a -> s{_opcKind = a})
+-- | The columns to which CSV data is imported. If not specified, all columns
+-- of the database table are loaded with CSV data.
+iccioColumns :: Lens' ImportContextCsvImportOptions [Text]
+iccioColumns
+  = lens _iccioColumns (\ s a -> s{_iccioColumns = a})
+      . _Default
+      . _Coerce
 
--- | The host and port of the on-premises instance in host:port format
-opcHostPort :: Lens' OnPremisesConfiguration (Maybe Text)
-opcHostPort
-  = lens _opcHostPort (\ s a -> s{_opcHostPort = a})
+-- | The table to which CSV data is imported.
+iccioTable :: Lens' ImportContextCsvImportOptions (Maybe Text)
+iccioTable
+  = lens _iccioTable (\ s a -> s{_iccioTable = a})
 
-instance FromJSON OnPremisesConfiguration where
+instance FromJSON ImportContextCsvImportOptions where
         parseJSON
-          = withObject "OnPremisesConfiguration"
+          = withObject "ImportContextCsvImportOptions"
               (\ o ->
-                 OnPremisesConfiguration <$>
-                   (o .:? "kind" .!= "sql#onPremisesConfiguration") <*>
-                     (o .:? "hostPort"))
+                 ImportContextCsvImportOptions <$>
+                   (o .:? "columns" .!= mempty) <*> (o .:? "table"))
 
-instance ToJSON OnPremisesConfiguration where
-        toJSON OnPremisesConfiguration{..}
+instance ToJSON ImportContextCsvImportOptions where
+        toJSON ImportContextCsvImportOptions{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _opcKind),
-                  ("hostPort" .=) <$> _opcHostPort])
+                 [("columns" .=) <$> _iccioColumns,
+                  ("table" .=) <$> _iccioTable])
+
+-- | A Google Cloud SQL service tier resource.
+--
+-- /See:/ 'tier' smart constructor.
+data Tier = Tier
+    { _tKind      :: !Text
+    , _tTier      :: !(Maybe Text)
+    , _tRegion    :: !(Maybe [Text])
+    , _tDiskQuota :: !(Maybe Int64)
+    , _tRAM       :: !(Maybe Int64)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Tier' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tKind'
+--
+-- * 'tTier'
+--
+-- * 'tRegion'
+--
+-- * 'tDiskQuota'
+--
+-- * 'tRAM'
+tier
+    :: Tier
+tier =
+    Tier
+    { _tKind = "sql#tier"
+    , _tTier = Nothing
+    , _tRegion = Nothing
+    , _tDiskQuota = Nothing
+    , _tRAM = Nothing
+    }
+
+-- | This is always sql#tier.
+tKind :: Lens' Tier Text
+tKind = lens _tKind (\ s a -> s{_tKind = a})
+
+-- | An identifier for the service tier, for example D1, D2 etc. For related
+-- information, see Pricing.
+tTier :: Lens' Tier (Maybe Text)
+tTier = lens _tTier (\ s a -> s{_tTier = a})
+
+-- | The applicable regions for this tier. Can be us-east1, europe-west1 or
+-- asia-east1.
+tRegion :: Lens' Tier [Text]
+tRegion
+  = lens _tRegion (\ s a -> s{_tRegion = a}) . _Default
+      . _Coerce
+
+-- | The maximum disk size of this tier in bytes.
+tDiskQuota :: Lens' Tier (Maybe Int64)
+tDiskQuota
+  = lens _tDiskQuota (\ s a -> s{_tDiskQuota = a})
+
+-- | The maximum RAM usage of this tier in bytes.
+tRAM :: Lens' Tier (Maybe Int64)
+tRAM = lens _tRAM (\ s a -> s{_tRAM = a})
+
+instance FromJSON Tier where
+        parseJSON
+          = withObject "Tier"
+              (\ o ->
+                 Tier <$>
+                   (o .:? "kind" .!= "sql#tier") <*> (o .:? "tier") <*>
+                     (o .:? "region" .!= mempty)
+                     <*> (o .:? "DiskQuota")
+                     <*> (o .:? "RAM"))
+
+instance ToJSON Tier where
+        toJSON Tier{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _tKind), ("tier" .=) <$> _tTier,
+                  ("region" .=) <$> _tRegion,
+                  ("DiskQuota" .=) <$> _tDiskQuota,
+                  ("RAM" .=) <$> _tRAM])
+
+-- | A database resource inside a Cloud SQL instance.
+--
+-- /See:/ 'database' smart constructor.
+data Database = Database
+    { _datEtag      :: !(Maybe Text)
+    , _datProject   :: !(Maybe Text)
+    , _datKind      :: !Text
+    , _datCollation :: !(Maybe Text)
+    , _datSelfLink  :: !(Maybe Text)
+    , _datName      :: !(Maybe Text)
+    , _datCharset   :: !(Maybe Text)
+    , _datInstance  :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Database' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'datEtag'
+--
+-- * 'datProject'
+--
+-- * 'datKind'
+--
+-- * 'datCollation'
+--
+-- * 'datSelfLink'
+--
+-- * 'datName'
+--
+-- * 'datCharset'
+--
+-- * 'datInstance'
+database
+    :: Database
+database =
+    Database
+    { _datEtag = Nothing
+    , _datProject = Nothing
+    , _datKind = "sql#database"
+    , _datCollation = Nothing
+    , _datSelfLink = Nothing
+    , _datName = Nothing
+    , _datCharset = Nothing
+    , _datInstance = Nothing
+    }
+
+-- | HTTP 1.1 Entity tag for the resource.
+datEtag :: Lens' Database (Maybe Text)
+datEtag = lens _datEtag (\ s a -> s{_datEtag = a})
+
+-- | The project ID of the project containing the Cloud SQL database. The
+-- Google apps domain is prefixed if applicable.
+datProject :: Lens' Database (Maybe Text)
+datProject
+  = lens _datProject (\ s a -> s{_datProject = a})
+
+-- | This is always sql#database.
+datKind :: Lens' Database Text
+datKind = lens _datKind (\ s a -> s{_datKind = a})
+
+-- | The MySQL collation value.
+datCollation :: Lens' Database (Maybe Text)
+datCollation
+  = lens _datCollation (\ s a -> s{_datCollation = a})
+
+-- | The URI of this resource.
+datSelfLink :: Lens' Database (Maybe Text)
+datSelfLink
+  = lens _datSelfLink (\ s a -> s{_datSelfLink = a})
+
+-- | The name of the database in the Cloud SQL instance. This does not
+-- include the project ID or instance name.
+datName :: Lens' Database (Maybe Text)
+datName = lens _datName (\ s a -> s{_datName = a})
+
+-- | The MySQL charset value.
+datCharset :: Lens' Database (Maybe Text)
+datCharset
+  = lens _datCharset (\ s a -> s{_datCharset = a})
+
+-- | The name of the Cloud SQL instance. This does not include the project
+-- ID.
+datInstance :: Lens' Database (Maybe Text)
+datInstance
+  = lens _datInstance (\ s a -> s{_datInstance = a})
+
+instance FromJSON Database where
+        parseJSON
+          = withObject "Database"
+              (\ o ->
+                 Database <$>
+                   (o .:? "etag") <*> (o .:? "project") <*>
+                     (o .:? "kind" .!= "sql#database")
+                     <*> (o .:? "collation")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "charset")
+                     <*> (o .:? "instance"))
+
+instance ToJSON Database where
+        toJSON Database{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _datEtag,
+                  ("project" .=) <$> _datProject,
+                  Just ("kind" .= _datKind),
+                  ("collation" .=) <$> _datCollation,
+                  ("selfLink" .=) <$> _datSelfLink,
+                  ("name" .=) <$> _datName,
+                  ("charset" .=) <$> _datCharset,
+                  ("instance" .=) <$> _datInstance])
+
+-- | Database instance settings.
+--
+-- /See:/ 'settings' smart constructor.
+data Settings = Settings
+    { _sReplicationType             :: !(Maybe Text)
+    , _sActivationPolicy            :: !(Maybe Text)
+    , _sSettingsVersion             :: !(Maybe Int64)
+    , _sAuthorizedGaeApplications   :: !(Maybe [Text])
+    , _sKind                        :: !Text
+    , _sPricingPlan                 :: !(Maybe Text)
+    , _sIpConfiguration             :: !(Maybe (Maybe IpConfiguration))
+    , _sDatabaseReplicationEnabled  :: !(Maybe Bool)
+    , _sTier                        :: !(Maybe Text)
+    , _sDatabaseFlags               :: !(Maybe [Maybe DatabaseFlags])
+    , _sCrashSafeReplicationEnabled :: !(Maybe Bool)
+    , _sLocationPreference          :: !(Maybe (Maybe LocationPreference))
+    , _sBackupConfiguration         :: !(Maybe (Maybe BackupConfiguration))
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Settings' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sReplicationType'
+--
+-- * 'sActivationPolicy'
+--
+-- * 'sSettingsVersion'
+--
+-- * 'sAuthorizedGaeApplications'
+--
+-- * 'sKind'
+--
+-- * 'sPricingPlan'
+--
+-- * 'sIpConfiguration'
+--
+-- * 'sDatabaseReplicationEnabled'
+--
+-- * 'sTier'
+--
+-- * 'sDatabaseFlags'
+--
+-- * 'sCrashSafeReplicationEnabled'
+--
+-- * 'sLocationPreference'
+--
+-- * 'sBackupConfiguration'
+settings
+    :: Settings
+settings =
+    Settings
+    { _sReplicationType = Nothing
+    , _sActivationPolicy = Nothing
+    , _sSettingsVersion = Nothing
+    , _sAuthorizedGaeApplications = Nothing
+    , _sKind = "sql#settings"
+    , _sPricingPlan = Nothing
+    , _sIpConfiguration = Nothing
+    , _sDatabaseReplicationEnabled = Nothing
+    , _sTier = Nothing
+    , _sDatabaseFlags = Nothing
+    , _sCrashSafeReplicationEnabled = Nothing
+    , _sLocationPreference = Nothing
+    , _sBackupConfiguration = Nothing
+    }
+
+-- | The type of replication this instance uses. This can be either
+-- ASYNCHRONOUS or SYNCHRONOUS.
+sReplicationType :: Lens' Settings (Maybe Text)
+sReplicationType
+  = lens _sReplicationType
+      (\ s a -> s{_sReplicationType = a})
+
+-- | The activation policy for this instance. This specifies when the
+-- instance should be activated and is applicable only when the instance
+-- state is RUNNABLE. This can be one of the following. ALWAYS: The
+-- instance should always be active. NEVER: The instance should never be
+-- activated. ON_DEMAND: The instance is activated upon receiving requests.
+sActivationPolicy :: Lens' Settings (Maybe Text)
+sActivationPolicy
+  = lens _sActivationPolicy
+      (\ s a -> s{_sActivationPolicy = a})
+
+-- | The version of instance settings. This is a required field for update
+-- method to make sure concurrent updates are handled properly. During
+-- update, use the most recent settingsVersion value for this instance and
+-- do not try to update this value.
+sSettingsVersion :: Lens' Settings (Maybe Int64)
+sSettingsVersion
+  = lens _sSettingsVersion
+      (\ s a -> s{_sSettingsVersion = a})
+
+-- | The App Engine app IDs that can access this instance.
+sAuthorizedGaeApplications :: Lens' Settings [Text]
+sAuthorizedGaeApplications
+  = lens _sAuthorizedGaeApplications
+      (\ s a -> s{_sAuthorizedGaeApplications = a})
+      . _Default
+      . _Coerce
+
+-- | This is always sql#settings.
+sKind :: Lens' Settings Text
+sKind = lens _sKind (\ s a -> s{_sKind = a})
+
+-- | The pricing plan for this instance. This can be either PER_USE or
+-- PACKAGE.
+sPricingPlan :: Lens' Settings (Maybe Text)
+sPricingPlan
+  = lens _sPricingPlan (\ s a -> s{_sPricingPlan = a})
+
+-- | The settings for IP Management. This allows to enable or disable the
+-- instance IP and manage which external networks can connect to the
+-- instance.
+sIpConfiguration :: Lens' Settings (Maybe (Maybe IpConfiguration))
+sIpConfiguration
+  = lens _sIpConfiguration
+      (\ s a -> s{_sIpConfiguration = a})
+
+-- | Configuration specific to read replica instances. Indicates whether
+-- replication is enabled or not.
+sDatabaseReplicationEnabled :: Lens' Settings (Maybe Bool)
+sDatabaseReplicationEnabled
+  = lens _sDatabaseReplicationEnabled
+      (\ s a -> s{_sDatabaseReplicationEnabled = a})
+
+-- | The tier of service for this instance, for example D1, D2. For more
+-- information, see pricing.
+sTier :: Lens' Settings (Maybe Text)
+sTier = lens _sTier (\ s a -> s{_sTier = a})
+
+-- | The database flags passed to the instance at startup.
+sDatabaseFlags :: Lens' Settings [Maybe DatabaseFlags]
+sDatabaseFlags
+  = lens _sDatabaseFlags
+      (\ s a -> s{_sDatabaseFlags = a})
+      . _Default
+      . _Coerce
+
+-- | Configuration specific to read replica instances. Indicates whether
+-- database flags for crash-safe replication are enabled.
+sCrashSafeReplicationEnabled :: Lens' Settings (Maybe Bool)
+sCrashSafeReplicationEnabled
+  = lens _sCrashSafeReplicationEnabled
+      (\ s a -> s{_sCrashSafeReplicationEnabled = a})
+
+-- | The location preference settings. This allows the instance to be located
+-- as near as possible to either an App Engine app or GCE zone for better
+-- performance.
+sLocationPreference :: Lens' Settings (Maybe (Maybe LocationPreference))
+sLocationPreference
+  = lens _sLocationPreference
+      (\ s a -> s{_sLocationPreference = a})
+
+-- | The daily backup configuration for the instance.
+sBackupConfiguration :: Lens' Settings (Maybe (Maybe BackupConfiguration))
+sBackupConfiguration
+  = lens _sBackupConfiguration
+      (\ s a -> s{_sBackupConfiguration = a})
+
+instance FromJSON Settings where
+        parseJSON
+          = withObject "Settings"
+              (\ o ->
+                 Settings <$>
+                   (o .:? "replicationType") <*>
+                     (o .:? "activationPolicy")
+                     <*> (o .:? "settingsVersion")
+                     <*> (o .:? "authorizedGaeApplications" .!= mempty)
+                     <*> (o .:? "kind" .!= "sql#settings")
+                     <*> (o .:? "pricingPlan")
+                     <*> (o .:? "ipConfiguration")
+                     <*> (o .:? "databaseReplicationEnabled")
+                     <*> (o .:? "tier")
+                     <*> (o .:? "databaseFlags" .!= mempty)
+                     <*> (o .:? "crashSafeReplicationEnabled")
+                     <*> (o .:? "locationPreference")
+                     <*> (o .:? "backupConfiguration"))
+
+instance ToJSON Settings where
+        toJSON Settings{..}
+          = object
+              (catMaybes
+                 [("replicationType" .=) <$> _sReplicationType,
+                  ("activationPolicy" .=) <$> _sActivationPolicy,
+                  ("settingsVersion" .=) <$> _sSettingsVersion,
+                  ("authorizedGaeApplications" .=) <$>
+                    _sAuthorizedGaeApplications,
+                  Just ("kind" .= _sKind),
+                  ("pricingPlan" .=) <$> _sPricingPlan,
+                  ("ipConfiguration" .=) <$> _sIpConfiguration,
+                  ("databaseReplicationEnabled" .=) <$>
+                    _sDatabaseReplicationEnabled,
+                  ("tier" .=) <$> _sTier,
+                  ("databaseFlags" .=) <$> _sDatabaseFlags,
+                  ("crashSafeReplicationEnabled" .=) <$>
+                    _sCrashSafeReplicationEnabled,
+                  ("locationPreference" .=) <$> _sLocationPreference,
+                  ("backupConfiguration" .=) <$>
+                    _sBackupConfiguration])
+
+-- | SslCerts create ephemeral certificate request.
+--
+-- /See:/ 'sslCertsCreateEphemeralRequest' smart constructor.
+newtype SslCertsCreateEphemeralRequest = SslCertsCreateEphemeralRequest
+    { _sccerPublicKey :: Maybe Text
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SslCertsCreateEphemeralRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sccerPublicKey'
+sslCertsCreateEphemeralRequest
+    :: SslCertsCreateEphemeralRequest
+sslCertsCreateEphemeralRequest =
+    SslCertsCreateEphemeralRequest
+    { _sccerPublicKey = Nothing
+    }
+
+-- | PEM encoded public key to include in the signed certificate.
+sccerPublicKey :: Lens' SslCertsCreateEphemeralRequest (Maybe Text)
+sccerPublicKey
+  = lens _sccerPublicKey
+      (\ s a -> s{_sccerPublicKey = a})
+
+instance FromJSON SslCertsCreateEphemeralRequest
+         where
+        parseJSON
+          = withObject "SslCertsCreateEphemeralRequest"
+              (\ o ->
+                 SslCertsCreateEphemeralRequest <$>
+                   (o .:? "public_key"))
+
+instance ToJSON SslCertsCreateEphemeralRequest where
+        toJSON SslCertsCreateEphemeralRequest{..}
+          = object
+              (catMaybes [("public_key" .=) <$> _sccerPublicKey])
 
 -- | An Operations resource contains information about database instance
 -- operations such as create, delete, and restart. Operations resources are
@@ -2253,929 +2643,115 @@ instance ToJSON Operation where
                   ("operationType" .=) <$> _opeOperationType,
                   ("targetLink" .=) <$> _opeTargetLink])
 
--- | Database instance operation error.
+-- | Database instance IP Mapping.
 --
--- /See:/ 'operationError' smart constructor.
-data OperationError = OperationError
-    { _oeKind    :: !Text
-    , _oeCode    :: !(Maybe Text)
-    , _oeMessage :: !(Maybe Text)
+-- /See:/ 'ipMapping' smart constructor.
+data IpMapping = IpMapping
+    { _imIpAddress    :: !(Maybe Text)
+    , _imTimeToRetire :: !(Maybe UTCTime)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OperationError' with the minimum fields required to make a request.
+-- | Creates a value of 'IpMapping' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'oeKind'
+-- * 'imIpAddress'
 --
--- * 'oeCode'
---
--- * 'oeMessage'
-operationError
-    :: OperationError
-operationError =
-    OperationError
-    { _oeKind = "sql#operationError"
-    , _oeCode = Nothing
-    , _oeMessage = Nothing
+-- * 'imTimeToRetire'
+ipMapping
+    :: IpMapping
+ipMapping =
+    IpMapping
+    { _imIpAddress = Nothing
+    , _imTimeToRetire = Nothing
     }
 
--- | This is always sql#operationError.
-oeKind :: Lens' OperationError Text
-oeKind = lens _oeKind (\ s a -> s{_oeKind = a})
+-- | The IP address assigned.
+imIpAddress :: Lens' IpMapping (Maybe Text)
+imIpAddress
+  = lens _imIpAddress (\ s a -> s{_imIpAddress = a})
 
--- | Identifies the specific error that occurred.
-oeCode :: Lens' OperationError (Maybe Text)
-oeCode = lens _oeCode (\ s a -> s{_oeCode = a})
+-- | The due time for this IP to be retired in RFC 3339 format, for example
+-- 2012-11-15T16:19:00.094Z. This field is only available when the IP is
+-- scheduled to be retired.
+imTimeToRetire :: Lens' IpMapping (Maybe UTCTime)
+imTimeToRetire
+  = lens _imTimeToRetire
+      (\ s a -> s{_imTimeToRetire = a})
 
--- | Additional information about the error encountered.
-oeMessage :: Lens' OperationError (Maybe Text)
-oeMessage
-  = lens _oeMessage (\ s a -> s{_oeMessage = a})
-
-instance FromJSON OperationError where
+instance FromJSON IpMapping where
         parseJSON
-          = withObject "OperationError"
+          = withObject "IpMapping"
               (\ o ->
-                 OperationError <$>
-                   (o .:? "kind" .!= "sql#operationError") <*>
-                     (o .:? "code")
-                     <*> (o .:? "message"))
+                 IpMapping <$>
+                   (o .:? "ipAddress") <*> (o .:? "timeToRetire"))
 
-instance ToJSON OperationError where
-        toJSON OperationError{..}
+instance ToJSON IpMapping where
+        toJSON IpMapping{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _oeKind), ("code" .=) <$> _oeCode,
-                  ("message" .=) <$> _oeMessage])
+                 [("ipAddress" .=) <$> _imIpAddress,
+                  ("timeToRetire" .=) <$> _imTimeToRetire])
 
--- | Database instance operation errors list wrapper.
+-- | Binary log coordinates.
 --
--- /See:/ 'operationErrors' smart constructor.
-data OperationErrors = OperationErrors
-    { _oKind   :: !Text
-    , _oErrors :: !(Maybe [Maybe OperationError])
+-- /See:/ 'binLogCoordinates' smart constructor.
+data BinLogCoordinates = BinLogCoordinates
+    { _blcBinLogPosition :: !(Maybe Int64)
+    , _blcKind           :: !Text
+    , _blcBinLogFileName :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OperationErrors' with the minimum fields required to make a request.
+-- | Creates a value of 'BinLogCoordinates' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'oKind'
+-- * 'blcBinLogPosition'
 --
--- * 'oErrors'
-operationErrors
-    :: OperationErrors
-operationErrors =
-    OperationErrors
-    { _oKind = "sql#operationErrors"
-    , _oErrors = Nothing
+-- * 'blcKind'
+--
+-- * 'blcBinLogFileName'
+binLogCoordinates
+    :: BinLogCoordinates
+binLogCoordinates =
+    BinLogCoordinates
+    { _blcBinLogPosition = Nothing
+    , _blcKind = "sql#binLogCoordinates"
+    , _blcBinLogFileName = Nothing
     }
 
--- | This is always sql#operationErrors.
-oKind :: Lens' OperationErrors Text
-oKind = lens _oKind (\ s a -> s{_oKind = a})
+-- | Position (offset) within the binary log file.
+blcBinLogPosition :: Lens' BinLogCoordinates (Maybe Int64)
+blcBinLogPosition
+  = lens _blcBinLogPosition
+      (\ s a -> s{_blcBinLogPosition = a})
 
--- | The list of errors encountered while processing this operation.
-oErrors :: Lens' OperationErrors [Maybe OperationError]
-oErrors
-  = lens _oErrors (\ s a -> s{_oErrors = a}) . _Default
-      . _Coerce
+-- | This is always sql#binLogCoordinates.
+blcKind :: Lens' BinLogCoordinates Text
+blcKind = lens _blcKind (\ s a -> s{_blcKind = a})
 
-instance FromJSON OperationErrors where
+-- | Name of the binary log file for a Cloud SQL instance.
+blcBinLogFileName :: Lens' BinLogCoordinates (Maybe Text)
+blcBinLogFileName
+  = lens _blcBinLogFileName
+      (\ s a -> s{_blcBinLogFileName = a})
+
+instance FromJSON BinLogCoordinates where
         parseJSON
-          = withObject "OperationErrors"
+          = withObject "BinLogCoordinates"
               (\ o ->
-                 OperationErrors <$>
-                   (o .:? "kind" .!= "sql#operationErrors") <*>
-                     (o .:? "errors" .!= mempty))
+                 BinLogCoordinates <$>
+                   (o .:? "binLogPosition") <*>
+                     (o .:? "kind" .!= "sql#binLogCoordinates")
+                     <*> (o .:? "binLogFileName"))
 
-instance ToJSON OperationErrors where
-        toJSON OperationErrors{..}
+instance ToJSON BinLogCoordinates where
+        toJSON BinLogCoordinates{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _oKind),
-                  ("errors" .=) <$> _oErrors])
-
--- | Database instance list operations response.
---
--- /See:/ 'operationsListResponse' smart constructor.
-data OperationsListResponse = OperationsListResponse
-    { _olrNextPageToken :: !(Maybe Text)
-    , _olrKind          :: !Text
-    , _olrItems         :: !(Maybe [Maybe Operation])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'OperationsListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'olrNextPageToken'
---
--- * 'olrKind'
---
--- * 'olrItems'
-operationsListResponse
-    :: OperationsListResponse
-operationsListResponse =
-    OperationsListResponse
-    { _olrNextPageToken = Nothing
-    , _olrKind = "sql#operationsList"
-    , _olrItems = Nothing
-    }
-
--- | The continuation token, used to page through large result sets. Provide
--- this value in a subsequent request to return the next page of results.
-olrNextPageToken :: Lens' OperationsListResponse (Maybe Text)
-olrNextPageToken
-  = lens _olrNextPageToken
-      (\ s a -> s{_olrNextPageToken = a})
-
--- | This is always sql#operationsList.
-olrKind :: Lens' OperationsListResponse Text
-olrKind = lens _olrKind (\ s a -> s{_olrKind = a})
-
--- | List of operation resources.
-olrItems :: Lens' OperationsListResponse [Maybe Operation]
-olrItems
-  = lens _olrItems (\ s a -> s{_olrItems = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON OperationsListResponse where
-        parseJSON
-          = withObject "OperationsListResponse"
-              (\ o ->
-                 OperationsListResponse <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!= "sql#operationsList")
-                     <*> (o .:? "items" .!= mempty))
-
-instance ToJSON OperationsListResponse where
-        toJSON OperationsListResponse{..}
-          = object
-              (catMaybes
-                 [("nextPageToken" .=) <$> _olrNextPageToken,
-                  Just ("kind" .= _olrKind),
-                  ("items" .=) <$> _olrItems])
-
--- | Read-replica configuration for connecting to the master.
---
--- /See:/ 'replicaConfiguration' smart constructor.
-data ReplicaConfiguration = ReplicaConfiguration
-    { _rcKind                      :: !Text
-    , _rcMysqlReplicaConfiguration :: !(Maybe (Maybe MySqlReplicaConfiguration))
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ReplicaConfiguration' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rcKind'
---
--- * 'rcMysqlReplicaConfiguration'
-replicaConfiguration
-    :: ReplicaConfiguration
-replicaConfiguration =
-    ReplicaConfiguration
-    { _rcKind = "sql#replicaConfiguration"
-    , _rcMysqlReplicaConfiguration = Nothing
-    }
-
--- | This is always sql#replicaConfiguration.
-rcKind :: Lens' ReplicaConfiguration Text
-rcKind = lens _rcKind (\ s a -> s{_rcKind = a})
-
--- | MySQL specific configuration when replicating from a MySQL on-premises
--- master. Replication configuration information such as the username,
--- password, certificates, and keys are not stored in the instance
--- metadata. The configuration information is used only to set up the
--- replication connection and is stored by MySQL in a file named
--- master.info in the data directory.
-rcMysqlReplicaConfiguration :: Lens' ReplicaConfiguration (Maybe (Maybe MySqlReplicaConfiguration))
-rcMysqlReplicaConfiguration
-  = lens _rcMysqlReplicaConfiguration
-      (\ s a -> s{_rcMysqlReplicaConfiguration = a})
-
-instance FromJSON ReplicaConfiguration where
-        parseJSON
-          = withObject "ReplicaConfiguration"
-              (\ o ->
-                 ReplicaConfiguration <$>
-                   (o .:? "kind" .!= "sql#replicaConfiguration") <*>
-                     (o .:? "mysqlReplicaConfiguration"))
-
-instance ToJSON ReplicaConfiguration where
-        toJSON ReplicaConfiguration{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _rcKind),
-                  ("mysqlReplicaConfiguration" .=) <$>
-                    _rcMysqlReplicaConfiguration])
-
--- | Database instance restore from backup context.
---
--- /See:/ 'restoreBackupContext' smart constructor.
-data RestoreBackupContext = RestoreBackupContext
-    { _rbcInstanceId  :: !(Maybe Text)
-    , _rbcBackupRunId :: !(Maybe Int64)
-    , _rbcKind        :: !Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'RestoreBackupContext' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rbcInstanceId'
---
--- * 'rbcBackupRunId'
---
--- * 'rbcKind'
-restoreBackupContext
-    :: RestoreBackupContext
-restoreBackupContext =
-    RestoreBackupContext
-    { _rbcInstanceId = Nothing
-    , _rbcBackupRunId = Nothing
-    , _rbcKind = "sql#restoreBackupContext"
-    }
-
--- | The ID of the instance that the backup was taken from.
-rbcInstanceId :: Lens' RestoreBackupContext (Maybe Text)
-rbcInstanceId
-  = lens _rbcInstanceId
-      (\ s a -> s{_rbcInstanceId = a})
-
--- | The ID of the backup run to restore from.
-rbcBackupRunId :: Lens' RestoreBackupContext (Maybe Int64)
-rbcBackupRunId
-  = lens _rbcBackupRunId
-      (\ s a -> s{_rbcBackupRunId = a})
-
--- | This is always sql#restoreBackupContext.
-rbcKind :: Lens' RestoreBackupContext Text
-rbcKind = lens _rbcKind (\ s a -> s{_rbcKind = a})
-
-instance FromJSON RestoreBackupContext where
-        parseJSON
-          = withObject "RestoreBackupContext"
-              (\ o ->
-                 RestoreBackupContext <$>
-                   (o .:? "instanceId") <*> (o .:? "backupRunId") <*>
-                     (o .:? "kind" .!= "sql#restoreBackupContext"))
-
-instance ToJSON RestoreBackupContext where
-        toJSON RestoreBackupContext{..}
-          = object
-              (catMaybes
-                 [("instanceId" .=) <$> _rbcInstanceId,
-                  ("backupRunId" .=) <$> _rbcBackupRunId,
-                  Just ("kind" .= _rbcKind)])
-
--- | Database instance settings.
---
--- /See:/ 'settings' smart constructor.
-data Settings = Settings
-    { _sReplicationType             :: !(Maybe Text)
-    , _sActivationPolicy            :: !(Maybe Text)
-    , _sSettingsVersion             :: !(Maybe Int64)
-    , _sAuthorizedGaeApplications   :: !(Maybe [Text])
-    , _sKind                        :: !Text
-    , _sPricingPlan                 :: !(Maybe Text)
-    , _sIpConfiguration             :: !(Maybe (Maybe IpConfiguration))
-    , _sDatabaseReplicationEnabled  :: !(Maybe Bool)
-    , _sTier                        :: !(Maybe Text)
-    , _sDatabaseFlags               :: !(Maybe [Maybe DatabaseFlags])
-    , _sCrashSafeReplicationEnabled :: !(Maybe Bool)
-    , _sLocationPreference          :: !(Maybe (Maybe LocationPreference))
-    , _sBackupConfiguration         :: !(Maybe (Maybe BackupConfiguration))
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Settings' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'sReplicationType'
---
--- * 'sActivationPolicy'
---
--- * 'sSettingsVersion'
---
--- * 'sAuthorizedGaeApplications'
---
--- * 'sKind'
---
--- * 'sPricingPlan'
---
--- * 'sIpConfiguration'
---
--- * 'sDatabaseReplicationEnabled'
---
--- * 'sTier'
---
--- * 'sDatabaseFlags'
---
--- * 'sCrashSafeReplicationEnabled'
---
--- * 'sLocationPreference'
---
--- * 'sBackupConfiguration'
-settings
-    :: Settings
-settings =
-    Settings
-    { _sReplicationType = Nothing
-    , _sActivationPolicy = Nothing
-    , _sSettingsVersion = Nothing
-    , _sAuthorizedGaeApplications = Nothing
-    , _sKind = "sql#settings"
-    , _sPricingPlan = Nothing
-    , _sIpConfiguration = Nothing
-    , _sDatabaseReplicationEnabled = Nothing
-    , _sTier = Nothing
-    , _sDatabaseFlags = Nothing
-    , _sCrashSafeReplicationEnabled = Nothing
-    , _sLocationPreference = Nothing
-    , _sBackupConfiguration = Nothing
-    }
-
--- | The type of replication this instance uses. This can be either
--- ASYNCHRONOUS or SYNCHRONOUS.
-sReplicationType :: Lens' Settings (Maybe Text)
-sReplicationType
-  = lens _sReplicationType
-      (\ s a -> s{_sReplicationType = a})
-
--- | The activation policy for this instance. This specifies when the
--- instance should be activated and is applicable only when the instance
--- state is RUNNABLE. This can be one of the following. ALWAYS: The
--- instance should always be active. NEVER: The instance should never be
--- activated. ON_DEMAND: The instance is activated upon receiving requests.
-sActivationPolicy :: Lens' Settings (Maybe Text)
-sActivationPolicy
-  = lens _sActivationPolicy
-      (\ s a -> s{_sActivationPolicy = a})
-
--- | The version of instance settings. This is a required field for update
--- method to make sure concurrent updates are handled properly. During
--- update, use the most recent settingsVersion value for this instance and
--- do not try to update this value.
-sSettingsVersion :: Lens' Settings (Maybe Int64)
-sSettingsVersion
-  = lens _sSettingsVersion
-      (\ s a -> s{_sSettingsVersion = a})
-
--- | The App Engine app IDs that can access this instance.
-sAuthorizedGaeApplications :: Lens' Settings [Text]
-sAuthorizedGaeApplications
-  = lens _sAuthorizedGaeApplications
-      (\ s a -> s{_sAuthorizedGaeApplications = a})
-      . _Default
-      . _Coerce
-
--- | This is always sql#settings.
-sKind :: Lens' Settings Text
-sKind = lens _sKind (\ s a -> s{_sKind = a})
-
--- | The pricing plan for this instance. This can be either PER_USE or
--- PACKAGE.
-sPricingPlan :: Lens' Settings (Maybe Text)
-sPricingPlan
-  = lens _sPricingPlan (\ s a -> s{_sPricingPlan = a})
-
--- | The settings for IP Management. This allows to enable or disable the
--- instance IP and manage which external networks can connect to the
--- instance.
-sIpConfiguration :: Lens' Settings (Maybe (Maybe IpConfiguration))
-sIpConfiguration
-  = lens _sIpConfiguration
-      (\ s a -> s{_sIpConfiguration = a})
-
--- | Configuration specific to read replica instances. Indicates whether
--- replication is enabled or not.
-sDatabaseReplicationEnabled :: Lens' Settings (Maybe Bool)
-sDatabaseReplicationEnabled
-  = lens _sDatabaseReplicationEnabled
-      (\ s a -> s{_sDatabaseReplicationEnabled = a})
-
--- | The tier of service for this instance, for example D1, D2. For more
--- information, see pricing.
-sTier :: Lens' Settings (Maybe Text)
-sTier = lens _sTier (\ s a -> s{_sTier = a})
-
--- | The database flags passed to the instance at startup.
-sDatabaseFlags :: Lens' Settings [Maybe DatabaseFlags]
-sDatabaseFlags
-  = lens _sDatabaseFlags
-      (\ s a -> s{_sDatabaseFlags = a})
-      . _Default
-      . _Coerce
-
--- | Configuration specific to read replica instances. Indicates whether
--- database flags for crash-safe replication are enabled.
-sCrashSafeReplicationEnabled :: Lens' Settings (Maybe Bool)
-sCrashSafeReplicationEnabled
-  = lens _sCrashSafeReplicationEnabled
-      (\ s a -> s{_sCrashSafeReplicationEnabled = a})
-
--- | The location preference settings. This allows the instance to be located
--- as near as possible to either an App Engine app or GCE zone for better
--- performance.
-sLocationPreference :: Lens' Settings (Maybe (Maybe LocationPreference))
-sLocationPreference
-  = lens _sLocationPreference
-      (\ s a -> s{_sLocationPreference = a})
-
--- | The daily backup configuration for the instance.
-sBackupConfiguration :: Lens' Settings (Maybe (Maybe BackupConfiguration))
-sBackupConfiguration
-  = lens _sBackupConfiguration
-      (\ s a -> s{_sBackupConfiguration = a})
-
-instance FromJSON Settings where
-        parseJSON
-          = withObject "Settings"
-              (\ o ->
-                 Settings <$>
-                   (o .:? "replicationType") <*>
-                     (o .:? "activationPolicy")
-                     <*> (o .:? "settingsVersion")
-                     <*> (o .:? "authorizedGaeApplications" .!= mempty)
-                     <*> (o .:? "kind" .!= "sql#settings")
-                     <*> (o .:? "pricingPlan")
-                     <*> (o .:? "ipConfiguration")
-                     <*> (o .:? "databaseReplicationEnabled")
-                     <*> (o .:? "tier")
-                     <*> (o .:? "databaseFlags" .!= mempty)
-                     <*> (o .:? "crashSafeReplicationEnabled")
-                     <*> (o .:? "locationPreference")
-                     <*> (o .:? "backupConfiguration"))
-
-instance ToJSON Settings where
-        toJSON Settings{..}
-          = object
-              (catMaybes
-                 [("replicationType" .=) <$> _sReplicationType,
-                  ("activationPolicy" .=) <$> _sActivationPolicy,
-                  ("settingsVersion" .=) <$> _sSettingsVersion,
-                  ("authorizedGaeApplications" .=) <$>
-                    _sAuthorizedGaeApplications,
-                  Just ("kind" .= _sKind),
-                  ("pricingPlan" .=) <$> _sPricingPlan,
-                  ("ipConfiguration" .=) <$> _sIpConfiguration,
-                  ("databaseReplicationEnabled" .=) <$>
-                    _sDatabaseReplicationEnabled,
-                  ("tier" .=) <$> _sTier,
-                  ("databaseFlags" .=) <$> _sDatabaseFlags,
-                  ("crashSafeReplicationEnabled" .=) <$>
-                    _sCrashSafeReplicationEnabled,
-                  ("locationPreference" .=) <$> _sLocationPreference,
-                  ("backupConfiguration" .=) <$>
-                    _sBackupConfiguration])
-
--- | SslCerts Resource
---
--- /See:/ 'sslCert' smart constructor.
-data SslCert = SslCert
-    { _scCommonName       :: !(Maybe Text)
-    , _scKind             :: !Text
-    , _scCertSerialNumber :: !(Maybe Text)
-    , _scSelfLink         :: !(Maybe Text)
-    , _scCert             :: !(Maybe Text)
-    , _scSha1Fingerprint  :: !(Maybe Text)
-    , _scExpirationTime   :: !(Maybe UTCTime)
-    , _scCreateTime       :: !(Maybe UTCTime)
-    , _scInstance         :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'SslCert' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'scCommonName'
---
--- * 'scKind'
---
--- * 'scCertSerialNumber'
---
--- * 'scSelfLink'
---
--- * 'scCert'
---
--- * 'scSha1Fingerprint'
---
--- * 'scExpirationTime'
---
--- * 'scCreateTime'
---
--- * 'scInstance'
-sslCert
-    :: SslCert
-sslCert =
-    SslCert
-    { _scCommonName = Nothing
-    , _scKind = "sql#sslCert"
-    , _scCertSerialNumber = Nothing
-    , _scSelfLink = Nothing
-    , _scCert = Nothing
-    , _scSha1Fingerprint = Nothing
-    , _scExpirationTime = Nothing
-    , _scCreateTime = Nothing
-    , _scInstance = Nothing
-    }
-
--- | User supplied name. Constrained to [a-zA-Z.-_ ]+.
-scCommonName :: Lens' SslCert (Maybe Text)
-scCommonName
-  = lens _scCommonName (\ s a -> s{_scCommonName = a})
-
--- | This is always sql#sslCert.
-scKind :: Lens' SslCert Text
-scKind = lens _scKind (\ s a -> s{_scKind = a})
-
--- | Serial number, as extracted from the certificate.
-scCertSerialNumber :: Lens' SslCert (Maybe Text)
-scCertSerialNumber
-  = lens _scCertSerialNumber
-      (\ s a -> s{_scCertSerialNumber = a})
-
--- | The URI of this resource.
-scSelfLink :: Lens' SslCert (Maybe Text)
-scSelfLink
-  = lens _scSelfLink (\ s a -> s{_scSelfLink = a})
-
--- | PEM representation.
-scCert :: Lens' SslCert (Maybe Text)
-scCert = lens _scCert (\ s a -> s{_scCert = a})
-
--- | Sha1 Fingerprint.
-scSha1Fingerprint :: Lens' SslCert (Maybe Text)
-scSha1Fingerprint
-  = lens _scSha1Fingerprint
-      (\ s a -> s{_scSha1Fingerprint = a})
-
--- | The time when the certificate expires in RFC 3339 format, for example
--- 2012-11-15T16:19:00.094Z.
-scExpirationTime :: Lens' SslCert (Maybe UTCTime)
-scExpirationTime
-  = lens _scExpirationTime
-      (\ s a -> s{_scExpirationTime = a})
-
--- | The time when the certificate was created in RFC 3339 format, for
--- example 2012-11-15T16:19:00.094Z
-scCreateTime :: Lens' SslCert (Maybe UTCTime)
-scCreateTime
-  = lens _scCreateTime (\ s a -> s{_scCreateTime = a})
-
--- | Name of the database instance.
-scInstance :: Lens' SslCert (Maybe Text)
-scInstance
-  = lens _scInstance (\ s a -> s{_scInstance = a})
-
-instance FromJSON SslCert where
-        parseJSON
-          = withObject "SslCert"
-              (\ o ->
-                 SslCert <$>
-                   (o .:? "commonName") <*>
-                     (o .:? "kind" .!= "sql#sslCert")
-                     <*> (o .:? "certSerialNumber")
-                     <*> (o .:? "selfLink")
-                     <*> (o .:? "cert")
-                     <*> (o .:? "sha1Fingerprint")
-                     <*> (o .:? "expirationTime")
-                     <*> (o .:? "createTime")
-                     <*> (o .:? "instance"))
-
-instance ToJSON SslCert where
-        toJSON SslCert{..}
-          = object
-              (catMaybes
-                 [("commonName" .=) <$> _scCommonName,
-                  Just ("kind" .= _scKind),
-                  ("certSerialNumber" .=) <$> _scCertSerialNumber,
-                  ("selfLink" .=) <$> _scSelfLink,
-                  ("cert" .=) <$> _scCert,
-                  ("sha1Fingerprint" .=) <$> _scSha1Fingerprint,
-                  ("expirationTime" .=) <$> _scExpirationTime,
-                  ("createTime" .=) <$> _scCreateTime,
-                  ("instance" .=) <$> _scInstance])
-
--- | SslCertDetail.
---
--- /See:/ 'sslCertDetail' smart constructor.
-data SslCertDetail = SslCertDetail
-    { _scdCertInfo       :: !(Maybe (Maybe SslCert))
-    , _scdCertPrivateKey :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'SslCertDetail' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'scdCertInfo'
---
--- * 'scdCertPrivateKey'
-sslCertDetail
-    :: SslCertDetail
-sslCertDetail =
-    SslCertDetail
-    { _scdCertInfo = Nothing
-    , _scdCertPrivateKey = Nothing
-    }
-
--- | The public information about the cert.
-scdCertInfo :: Lens' SslCertDetail (Maybe (Maybe SslCert))
-scdCertInfo
-  = lens _scdCertInfo (\ s a -> s{_scdCertInfo = a})
-
--- | The private key for the client cert, in pem format. Keep private in
--- order to protect your security.
-scdCertPrivateKey :: Lens' SslCertDetail (Maybe Text)
-scdCertPrivateKey
-  = lens _scdCertPrivateKey
-      (\ s a -> s{_scdCertPrivateKey = a})
-
-instance FromJSON SslCertDetail where
-        parseJSON
-          = withObject "SslCertDetail"
-              (\ o ->
-                 SslCertDetail <$>
-                   (o .:? "certInfo") <*> (o .:? "certPrivateKey"))
-
-instance ToJSON SslCertDetail where
-        toJSON SslCertDetail{..}
-          = object
-              (catMaybes
-                 [("certInfo" .=) <$> _scdCertInfo,
-                  ("certPrivateKey" .=) <$> _scdCertPrivateKey])
-
--- | SslCerts create ephemeral certificate request.
---
--- /See:/ 'sslCertsCreateEphemeralRequest' smart constructor.
-newtype SslCertsCreateEphemeralRequest = SslCertsCreateEphemeralRequest
-    { _sccerPublicKey :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'SslCertsCreateEphemeralRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'sccerPublicKey'
-sslCertsCreateEphemeralRequest
-    :: SslCertsCreateEphemeralRequest
-sslCertsCreateEphemeralRequest =
-    SslCertsCreateEphemeralRequest
-    { _sccerPublicKey = Nothing
-    }
-
--- | PEM encoded public key to include in the signed certificate.
-sccerPublicKey :: Lens' SslCertsCreateEphemeralRequest (Maybe Text)
-sccerPublicKey
-  = lens _sccerPublicKey
-      (\ s a -> s{_sccerPublicKey = a})
-
-instance FromJSON SslCertsCreateEphemeralRequest
-         where
-        parseJSON
-          = withObject "SslCertsCreateEphemeralRequest"
-              (\ o ->
-                 SslCertsCreateEphemeralRequest <$>
-                   (o .:? "public_key"))
-
-instance ToJSON SslCertsCreateEphemeralRequest where
-        toJSON SslCertsCreateEphemeralRequest{..}
-          = object
-              (catMaybes [("public_key" .=) <$> _sccerPublicKey])
-
--- | SslCerts insert request.
---
--- /See:/ 'sslCertsInsertRequest' smart constructor.
-newtype SslCertsInsertRequest = SslCertsInsertRequest
-    { _scirCommonName :: Maybe Text
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'SslCertsInsertRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'scirCommonName'
-sslCertsInsertRequest
-    :: SslCertsInsertRequest
-sslCertsInsertRequest =
-    SslCertsInsertRequest
-    { _scirCommonName = Nothing
-    }
-
--- | User supplied name. Must be a distinct name from the other certificates
--- for this instance. New certificates will not be usable until the
--- instance is restarted.
-scirCommonName :: Lens' SslCertsInsertRequest (Maybe Text)
-scirCommonName
-  = lens _scirCommonName
-      (\ s a -> s{_scirCommonName = a})
-
-instance FromJSON SslCertsInsertRequest where
-        parseJSON
-          = withObject "SslCertsInsertRequest"
-              (\ o ->
-                 SslCertsInsertRequest <$> (o .:? "commonName"))
-
-instance ToJSON SslCertsInsertRequest where
-        toJSON SslCertsInsertRequest{..}
-          = object
-              (catMaybes [("commonName" .=) <$> _scirCommonName])
-
--- | SslCert insert response.
---
--- /See:/ 'sslCertsInsertResponse' smart constructor.
-data SslCertsInsertResponse = SslCertsInsertResponse
-    { _scirServerCaCert :: !(Maybe (Maybe SslCert))
-    , _scirKind         :: !Text
-    , _scirClientCert   :: !(Maybe (Maybe SslCertDetail))
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'SslCertsInsertResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'scirServerCaCert'
---
--- * 'scirKind'
---
--- * 'scirClientCert'
-sslCertsInsertResponse
-    :: SslCertsInsertResponse
-sslCertsInsertResponse =
-    SslCertsInsertResponse
-    { _scirServerCaCert = Nothing
-    , _scirKind = "sql#sslCertsInsert"
-    , _scirClientCert = Nothing
-    }
-
--- | The server Certificate Authority\'s certificate. If this is missing you
--- can force a new one to be generated by calling resetSslConfig method on
--- instances resource.
-scirServerCaCert :: Lens' SslCertsInsertResponse (Maybe (Maybe SslCert))
-scirServerCaCert
-  = lens _scirServerCaCert
-      (\ s a -> s{_scirServerCaCert = a})
-
--- | This is always sql#sslCertsInsert.
-scirKind :: Lens' SslCertsInsertResponse Text
-scirKind = lens _scirKind (\ s a -> s{_scirKind = a})
-
--- | The new client certificate and private key. The new certificate will not
--- work until the instance is restarted.
-scirClientCert :: Lens' SslCertsInsertResponse (Maybe (Maybe SslCertDetail))
-scirClientCert
-  = lens _scirClientCert
-      (\ s a -> s{_scirClientCert = a})
-
-instance FromJSON SslCertsInsertResponse where
-        parseJSON
-          = withObject "SslCertsInsertResponse"
-              (\ o ->
-                 SslCertsInsertResponse <$>
-                   (o .:? "serverCaCert") <*>
-                     (o .:? "kind" .!= "sql#sslCertsInsert")
-                     <*> (o .:? "clientCert"))
-
-instance ToJSON SslCertsInsertResponse where
-        toJSON SslCertsInsertResponse{..}
-          = object
-              (catMaybes
-                 [("serverCaCert" .=) <$> _scirServerCaCert,
-                  Just ("kind" .= _scirKind),
-                  ("clientCert" .=) <$> _scirClientCert])
-
--- | SslCerts list response.
---
--- /See:/ 'sslCertsListResponse' smart constructor.
-data SslCertsListResponse = SslCertsListResponse
-    { _sclrKind  :: !Text
-    , _sclrItems :: !(Maybe [Maybe SslCert])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'SslCertsListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'sclrKind'
---
--- * 'sclrItems'
-sslCertsListResponse
-    :: SslCertsListResponse
-sslCertsListResponse =
-    SslCertsListResponse
-    { _sclrKind = "sql#sslCertsList"
-    , _sclrItems = Nothing
-    }
-
--- | This is always sql#sslCertsList.
-sclrKind :: Lens' SslCertsListResponse Text
-sclrKind = lens _sclrKind (\ s a -> s{_sclrKind = a})
-
--- | List of client certificates for the instance.
-sclrItems :: Lens' SslCertsListResponse [Maybe SslCert]
-sclrItems
-  = lens _sclrItems (\ s a -> s{_sclrItems = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON SslCertsListResponse where
-        parseJSON
-          = withObject "SslCertsListResponse"
-              (\ o ->
-                 SslCertsListResponse <$>
-                   (o .:? "kind" .!= "sql#sslCertsList") <*>
-                     (o .:? "items" .!= mempty))
-
-instance ToJSON SslCertsListResponse where
-        toJSON SslCertsListResponse{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _sclrKind),
-                  ("items" .=) <$> _sclrItems])
-
--- | A Google Cloud SQL service tier resource.
---
--- /See:/ 'tier' smart constructor.
-data Tier = Tier
-    { _tKind      :: !Text
-    , _tTier      :: !(Maybe Text)
-    , _tRegion    :: !(Maybe [Text])
-    , _tDiskQuota :: !(Maybe Int64)
-    , _tRAM       :: !(Maybe Int64)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Tier' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'tKind'
---
--- * 'tTier'
---
--- * 'tRegion'
---
--- * 'tDiskQuota'
---
--- * 'tRAM'
-tier
-    :: Tier
-tier =
-    Tier
-    { _tKind = "sql#tier"
-    , _tTier = Nothing
-    , _tRegion = Nothing
-    , _tDiskQuota = Nothing
-    , _tRAM = Nothing
-    }
-
--- | This is always sql#tier.
-tKind :: Lens' Tier Text
-tKind = lens _tKind (\ s a -> s{_tKind = a})
-
--- | An identifier for the service tier, for example D1, D2 etc. For related
--- information, see Pricing.
-tTier :: Lens' Tier (Maybe Text)
-tTier = lens _tTier (\ s a -> s{_tTier = a})
-
--- | The applicable regions for this tier. Can be us-east1, europe-west1 or
--- asia-east1.
-tRegion :: Lens' Tier [Text]
-tRegion
-  = lens _tRegion (\ s a -> s{_tRegion = a}) . _Default
-      . _Coerce
-
--- | The maximum disk size of this tier in bytes.
-tDiskQuota :: Lens' Tier (Maybe Int64)
-tDiskQuota
-  = lens _tDiskQuota (\ s a -> s{_tDiskQuota = a})
-
--- | The maximum RAM usage of this tier in bytes.
-tRAM :: Lens' Tier (Maybe Int64)
-tRAM = lens _tRAM (\ s a -> s{_tRAM = a})
-
-instance FromJSON Tier where
-        parseJSON
-          = withObject "Tier"
-              (\ o ->
-                 Tier <$>
-                   (o .:? "kind" .!= "sql#tier") <*> (o .:? "tier") <*>
-                     (o .:? "region" .!= mempty)
-                     <*> (o .:? "DiskQuota")
-                     <*> (o .:? "RAM"))
-
-instance ToJSON Tier where
-        toJSON Tier{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _tKind), ("tier" .=) <$> _tTier,
-                  ("region" .=) <$> _tRegion,
-                  ("DiskQuota" .=) <$> _tDiskQuota,
-                  ("RAM" .=) <$> _tRAM])
+                 [("binLogPosition" .=) <$> _blcBinLogPosition,
+                  Just ("kind" .= _blcKind),
+                  ("binLogFileName" .=) <$> _blcBinLogFileName])
 
 -- | Tiers list response.
 --
@@ -3225,6 +2801,430 @@ instance ToJSON TiersListResponse where
               (catMaybes
                  [Just ("kind" .= _tlrKind),
                   ("items" .=) <$> _tlrItems])
+
+-- | Database instance export context.
+--
+-- /See:/ 'exportContext' smart constructor.
+data ExportContext = ExportContext
+    { _ecCsvExportOptions :: !(Maybe ExportContextCsvExportOptions)
+    , _ecKind             :: !Text
+    , _ecUri              :: !(Maybe Text)
+    , _ecFileType         :: !(Maybe Text)
+    , _ecSqlExportOptions :: !(Maybe ExportContextSqlExportOptions)
+    , _ecDatabases        :: !(Maybe [Text])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ExportContext' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ecCsvExportOptions'
+--
+-- * 'ecKind'
+--
+-- * 'ecUri'
+--
+-- * 'ecFileType'
+--
+-- * 'ecSqlExportOptions'
+--
+-- * 'ecDatabases'
+exportContext
+    :: ExportContext
+exportContext =
+    ExportContext
+    { _ecCsvExportOptions = Nothing
+    , _ecKind = "sql#exportContext"
+    , _ecUri = Nothing
+    , _ecFileType = Nothing
+    , _ecSqlExportOptions = Nothing
+    , _ecDatabases = Nothing
+    }
+
+-- | Options for exporting data as CSV.
+ecCsvExportOptions :: Lens' ExportContext (Maybe ExportContextCsvExportOptions)
+ecCsvExportOptions
+  = lens _ecCsvExportOptions
+      (\ s a -> s{_ecCsvExportOptions = a})
+
+-- | This is always sql#exportContext.
+ecKind :: Lens' ExportContext Text
+ecKind = lens _ecKind (\ s a -> s{_ecKind = a})
+
+-- | The path to the file in Google Cloud Storage where the export will be
+-- stored. The URI is in the form gs:\/\/bucketName\/fileName. If the file
+-- already exists, the operation fails. If fileType is SQL and the filename
+-- ends with .gz, the contents are compressed.
+ecUri :: Lens' ExportContext (Maybe Text)
+ecUri = lens _ecUri (\ s a -> s{_ecUri = a})
+
+-- | The file type for the specified uri. SQL: The file contains SQL
+-- statements. CSV: The file contains CSV data.
+ecFileType :: Lens' ExportContext (Maybe Text)
+ecFileType
+  = lens _ecFileType (\ s a -> s{_ecFileType = a})
+
+-- | Options for exporting data as SQL statements.
+ecSqlExportOptions :: Lens' ExportContext (Maybe ExportContextSqlExportOptions)
+ecSqlExportOptions
+  = lens _ecSqlExportOptions
+      (\ s a -> s{_ecSqlExportOptions = a})
+
+-- | Databases (for example, guestbook) from which the export is made. If
+-- fileType is SQL and no database is specified, all databases are
+-- exported. If fileType is CSV, you can optionally specify at most one
+-- database to export. If csvExportOptions.selectQuery also specifies the
+-- database, this field will be ignored.
+ecDatabases :: Lens' ExportContext [Text]
+ecDatabases
+  = lens _ecDatabases (\ s a -> s{_ecDatabases = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ExportContext where
+        parseJSON
+          = withObject "ExportContext"
+              (\ o ->
+                 ExportContext <$>
+                   (o .:? "csvExportOptions") <*>
+                     (o .:? "kind" .!= "sql#exportContext")
+                     <*> (o .:? "uri")
+                     <*> (o .:? "fileType")
+                     <*> (o .:? "sqlExportOptions")
+                     <*> (o .:? "databases" .!= mempty))
+
+instance ToJSON ExportContext where
+        toJSON ExportContext{..}
+          = object
+              (catMaybes
+                 [("csvExportOptions" .=) <$> _ecCsvExportOptions,
+                  Just ("kind" .= _ecKind), ("uri" .=) <$> _ecUri,
+                  ("fileType" .=) <$> _ecFileType,
+                  ("sqlExportOptions" .=) <$> _ecSqlExportOptions,
+                  ("databases" .=) <$> _ecDatabases])
+
+-- | User list response.
+--
+-- /See:/ 'usersListResponse' smart constructor.
+data UsersListResponse = UsersListResponse
+    { _ulrNextPageToken :: !(Maybe Text)
+    , _ulrKind          :: !Text
+    , _ulrItems         :: !(Maybe [Maybe User])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UsersListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ulrNextPageToken'
+--
+-- * 'ulrKind'
+--
+-- * 'ulrItems'
+usersListResponse
+    :: UsersListResponse
+usersListResponse =
+    UsersListResponse
+    { _ulrNextPageToken = Nothing
+    , _ulrKind = "sql#usersList"
+    , _ulrItems = Nothing
+    }
+
+-- | An identifier that uniquely identifies the operation. You can use this
+-- identifier to retrieve the Operations resource that has information
+-- about the operation.
+ulrNextPageToken :: Lens' UsersListResponse (Maybe Text)
+ulrNextPageToken
+  = lens _ulrNextPageToken
+      (\ s a -> s{_ulrNextPageToken = a})
+
+-- | This is always sql#usersList.
+ulrKind :: Lens' UsersListResponse Text
+ulrKind = lens _ulrKind (\ s a -> s{_ulrKind = a})
+
+-- | List of user resources in the instance.
+ulrItems :: Lens' UsersListResponse [Maybe User]
+ulrItems
+  = lens _ulrItems (\ s a -> s{_ulrItems = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON UsersListResponse where
+        parseJSON
+          = withObject "UsersListResponse"
+              (\ o ->
+                 UsersListResponse <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "sql#usersList")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON UsersListResponse where
+        toJSON UsersListResponse{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _ulrNextPageToken,
+                  Just ("kind" .= _ulrKind),
+                  ("items" .=) <$> _ulrItems])
+
+-- | Database instance import request.
+--
+-- /See:/ 'instancesImportRequest' smart constructor.
+newtype InstancesImportRequest = InstancesImportRequest
+    { _iirImportContext :: Maybe (Maybe ImportContext)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InstancesImportRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'iirImportContext'
+instancesImportRequest
+    :: InstancesImportRequest
+instancesImportRequest =
+    InstancesImportRequest
+    { _iirImportContext = Nothing
+    }
+
+-- | Contains details about the import operation.
+iirImportContext :: Lens' InstancesImportRequest (Maybe (Maybe ImportContext))
+iirImportContext
+  = lens _iirImportContext
+      (\ s a -> s{_iirImportContext = a})
+
+instance FromJSON InstancesImportRequest where
+        parseJSON
+          = withObject "InstancesImportRequest"
+              (\ o ->
+                 InstancesImportRequest <$> (o .:? "importContext"))
+
+instance ToJSON InstancesImportRequest where
+        toJSON InstancesImportRequest{..}
+          = object
+              (catMaybes
+                 [("importContext" .=) <$> _iirImportContext])
+
+-- | Preferred location. This specifies where a Cloud SQL instance should
+-- preferably be located, either in a specific Compute Engine zone, or
+-- co-located with an App Engine application. Note that if the preferred
+-- location is not available, the instance will be located as close as
+-- possible within the region. Only one location may be specified.
+--
+-- /See:/ 'locationPreference' smart constructor.
+data LocationPreference = LocationPreference
+    { _lpKind                 :: !Text
+    , _lpFollowGaeApplication :: !(Maybe Text)
+    , _lpZone                 :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LocationPreference' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lpKind'
+--
+-- * 'lpFollowGaeApplication'
+--
+-- * 'lpZone'
+locationPreference
+    :: LocationPreference
+locationPreference =
+    LocationPreference
+    { _lpKind = "sql#locationPreference"
+    , _lpFollowGaeApplication = Nothing
+    , _lpZone = Nothing
+    }
+
+-- | This is always sql#locationPreference.
+lpKind :: Lens' LocationPreference Text
+lpKind = lens _lpKind (\ s a -> s{_lpKind = a})
+
+-- | The AppEngine application to follow, it must be in the same region as
+-- the Cloud SQL instance.
+lpFollowGaeApplication :: Lens' LocationPreference (Maybe Text)
+lpFollowGaeApplication
+  = lens _lpFollowGaeApplication
+      (\ s a -> s{_lpFollowGaeApplication = a})
+
+-- | The preferred Compute Engine zone (e.g. us-centra1-a, us-central1-b,
+-- etc.).
+lpZone :: Lens' LocationPreference (Maybe Text)
+lpZone = lens _lpZone (\ s a -> s{_lpZone = a})
+
+instance FromJSON LocationPreference where
+        parseJSON
+          = withObject "LocationPreference"
+              (\ o ->
+                 LocationPreference <$>
+                   (o .:? "kind" .!= "sql#locationPreference") <*>
+                     (o .:? "followGaeApplication")
+                     <*> (o .:? "zone"))
+
+instance ToJSON LocationPreference where
+        toJSON LocationPreference{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _lpKind),
+                  ("followGaeApplication" .=) <$>
+                    _lpFollowGaeApplication,
+                  ("zone" .=) <$> _lpZone])
+
+-- | Flags list response.
+--
+-- /See:/ 'flagsListResponse' smart constructor.
+data FlagsListResponse = FlagsListResponse
+    { _flrKind  :: !Text
+    , _flrItems :: !(Maybe [Maybe Flag])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'FlagsListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'flrKind'
+--
+-- * 'flrItems'
+flagsListResponse
+    :: FlagsListResponse
+flagsListResponse =
+    FlagsListResponse
+    { _flrKind = "sql#flagsList"
+    , _flrItems = Nothing
+    }
+
+-- | This is always sql#flagsList.
+flrKind :: Lens' FlagsListResponse Text
+flrKind = lens _flrKind (\ s a -> s{_flrKind = a})
+
+-- | List of flags.
+flrItems :: Lens' FlagsListResponse [Maybe Flag]
+flrItems
+  = lens _flrItems (\ s a -> s{_flrItems = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON FlagsListResponse where
+        parseJSON
+          = withObject "FlagsListResponse"
+              (\ o ->
+                 FlagsListResponse <$>
+                   (o .:? "kind" .!= "sql#flagsList") <*>
+                     (o .:? "items" .!= mempty))
+
+instance ToJSON FlagsListResponse where
+        toJSON FlagsListResponse{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _flrKind),
+                  ("items" .=) <$> _flrItems])
+
+-- | Database instance backup configuration.
+--
+-- /See:/ 'backupConfiguration' smart constructor.
+data BackupConfiguration = BackupConfiguration
+    { _bcEnabled          :: !(Maybe Bool)
+    , _bcStartTime        :: !(Maybe Text)
+    , _bcKind             :: !Text
+    , _bcBinaryLogEnabled :: !(Maybe Bool)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BackupConfiguration' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bcEnabled'
+--
+-- * 'bcStartTime'
+--
+-- * 'bcKind'
+--
+-- * 'bcBinaryLogEnabled'
+backupConfiguration
+    :: BackupConfiguration
+backupConfiguration =
+    BackupConfiguration
+    { _bcEnabled = Nothing
+    , _bcStartTime = Nothing
+    , _bcKind = "sql#backupConfiguration"
+    , _bcBinaryLogEnabled = Nothing
+    }
+
+-- | Whether this configuration is enabled.
+bcEnabled :: Lens' BackupConfiguration (Maybe Bool)
+bcEnabled
+  = lens _bcEnabled (\ s a -> s{_bcEnabled = a})
+
+-- | Start time for the daily backup configuration in UTC timezone in the 24
+-- hour format - HH:MM.
+bcStartTime :: Lens' BackupConfiguration (Maybe Text)
+bcStartTime
+  = lens _bcStartTime (\ s a -> s{_bcStartTime = a})
+
+-- | This is always sql#backupConfiguration.
+bcKind :: Lens' BackupConfiguration Text
+bcKind = lens _bcKind (\ s a -> s{_bcKind = a})
+
+-- | Whether binary log is enabled. If backup configuration is disabled,
+-- binary log must be disabled as well.
+bcBinaryLogEnabled :: Lens' BackupConfiguration (Maybe Bool)
+bcBinaryLogEnabled
+  = lens _bcBinaryLogEnabled
+      (\ s a -> s{_bcBinaryLogEnabled = a})
+
+instance FromJSON BackupConfiguration where
+        parseJSON
+          = withObject "BackupConfiguration"
+              (\ o ->
+                 BackupConfiguration <$>
+                   (o .:? "enabled") <*> (o .:? "startTime") <*>
+                     (o .:? "kind" .!= "sql#backupConfiguration")
+                     <*> (o .:? "binaryLogEnabled"))
+
+instance ToJSON BackupConfiguration where
+        toJSON BackupConfiguration{..}
+          = object
+              (catMaybes
+                 [("enabled" .=) <$> _bcEnabled,
+                  ("startTime" .=) <$> _bcStartTime,
+                  Just ("kind" .= _bcKind),
+                  ("binaryLogEnabled" .=) <$> _bcBinaryLogEnabled])
+
+-- | SslCerts insert request.
+--
+-- /See:/ 'sslCertsInsertRequest' smart constructor.
+newtype SslCertsInsertRequest = SslCertsInsertRequest
+    { _scirCommonName :: Maybe Text
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SslCertsInsertRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'scirCommonName'
+sslCertsInsertRequest
+    :: SslCertsInsertRequest
+sslCertsInsertRequest =
+    SslCertsInsertRequest
+    { _scirCommonName = Nothing
+    }
+
+-- | User supplied name. Must be a distinct name from the other certificates
+-- for this instance. New certificates will not be usable until the
+-- instance is restarted.
+scirCommonName :: Lens' SslCertsInsertRequest (Maybe Text)
+scirCommonName
+  = lens _scirCommonName
+      (\ s a -> s{_scirCommonName = a})
+
+instance FromJSON SslCertsInsertRequest where
+        parseJSON
+          = withObject "SslCertsInsertRequest"
+              (\ o ->
+                 SslCertsInsertRequest <$> (o .:? "commonName"))
+
+instance ToJSON SslCertsInsertRequest where
+        toJSON SslCertsInsertRequest{..}
+          = object
+              (catMaybes [("commonName" .=) <$> _scirCommonName])
 
 -- | A Cloud SQL user resource.
 --
@@ -3329,65 +3329,68 @@ instance ToJSON User where
                   ("host" .=) <$> _uHost,
                   ("instance" .=) <$> _uInstance])
 
--- | User list response.
+-- | IP Management configuration.
 --
--- /See:/ 'usersListResponse' smart constructor.
-data UsersListResponse = UsersListResponse
-    { _ulrNextPageToken :: !(Maybe Text)
-    , _ulrKind          :: !Text
-    , _ulrItems         :: !(Maybe [Maybe User])
+-- /See:/ 'ipConfiguration' smart constructor.
+data IpConfiguration = IpConfiguration
+    { _icAuthorizedNetworks :: !(Maybe [Maybe AclEntry])
+    , _icRequireSsl         :: !(Maybe Bool)
+    , _icIpv4Enabled        :: !(Maybe Bool)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersListResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'IpConfiguration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ulrNextPageToken'
+-- * 'icAuthorizedNetworks'
 --
--- * 'ulrKind'
+-- * 'icRequireSsl'
 --
--- * 'ulrItems'
-usersListResponse
-    :: UsersListResponse
-usersListResponse =
-    UsersListResponse
-    { _ulrNextPageToken = Nothing
-    , _ulrKind = "sql#usersList"
-    , _ulrItems = Nothing
+-- * 'icIpv4Enabled'
+ipConfiguration
+    :: IpConfiguration
+ipConfiguration =
+    IpConfiguration
+    { _icAuthorizedNetworks = Nothing
+    , _icRequireSsl = Nothing
+    , _icIpv4Enabled = Nothing
     }
 
--- | An identifier that uniquely identifies the operation. You can use this
--- identifier to retrieve the Operations resource that has information
--- about the operation.
-ulrNextPageToken :: Lens' UsersListResponse (Maybe Text)
-ulrNextPageToken
-  = lens _ulrNextPageToken
-      (\ s a -> s{_ulrNextPageToken = a})
-
--- | This is always sql#usersList.
-ulrKind :: Lens' UsersListResponse Text
-ulrKind = lens _ulrKind (\ s a -> s{_ulrKind = a})
-
--- | List of user resources in the instance.
-ulrItems :: Lens' UsersListResponse [Maybe User]
-ulrItems
-  = lens _ulrItems (\ s a -> s{_ulrItems = a}) .
-      _Default
+-- | The list of external networks that are allowed to connect to the
+-- instance using the IP. In CIDR notation, also known as \'slash\'
+-- notation (e.g. 192.168.100.0\/24).
+icAuthorizedNetworks :: Lens' IpConfiguration [Maybe AclEntry]
+icAuthorizedNetworks
+  = lens _icAuthorizedNetworks
+      (\ s a -> s{_icAuthorizedNetworks = a})
+      . _Default
       . _Coerce
 
-instance FromJSON UsersListResponse where
-        parseJSON
-          = withObject "UsersListResponse"
-              (\ o ->
-                 UsersListResponse <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!= "sql#usersList")
-                     <*> (o .:? "items" .!= mempty))
+-- | Whether the mysqld should default to \'REQUIRE X509\' for users
+-- connecting over IP.
+icRequireSsl :: Lens' IpConfiguration (Maybe Bool)
+icRequireSsl
+  = lens _icRequireSsl (\ s a -> s{_icRequireSsl = a})
 
-instance ToJSON UsersListResponse where
-        toJSON UsersListResponse{..}
+-- | Whether the instance should be assigned an IP address or not.
+icIpv4Enabled :: Lens' IpConfiguration (Maybe Bool)
+icIpv4Enabled
+  = lens _icIpv4Enabled
+      (\ s a -> s{_icIpv4Enabled = a})
+
+instance FromJSON IpConfiguration where
+        parseJSON
+          = withObject "IpConfiguration"
+              (\ o ->
+                 IpConfiguration <$>
+                   (o .:? "authorizedNetworks" .!= mempty) <*>
+                     (o .:? "requireSsl")
+                     <*> (o .:? "ipv4Enabled"))
+
+instance ToJSON IpConfiguration where
+        toJSON IpConfiguration{..}
           = object
               (catMaybes
-                 [("nextPageToken" .=) <$> _ulrNextPageToken,
-                  Just ("kind" .= _ulrKind),
-                  ("items" .=) <$> _ulrItems])
+                 [("authorizedNetworks" .=) <$> _icAuthorizedNetworks,
+                  ("requireSsl" .=) <$> _icRequireSsl,
+                  ("ipv4Enabled" .=) <$> _icIpv4Enabled])

@@ -17,83 +17,232 @@
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference>
 module Network.Google.Drive
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** Drive API
       Drive
-    , AppsAPI
-    , AppsList
-    , AppsGet
-    , ChangesAPI
-    , ChangesList
-    , ChangesGet
-    , ChangesWatch
-    , ChannelsAPI
-    , ChannelsStop
-    , ChildrenAPI
-    , ChildrenInsert
-    , ChildrenList
-    , ChildrenGet
-    , ChildrenDelete
-    , RepliesAPI
-    , RepliesInsert
-    , RepliesList
-    , RepliesPatch
-    , RepliesGet
-    , RepliesDelete
-    , RepliesUpdate
-    , ParentsAPI
-    , ParentsInsert
-    , ParentsList
-    , ParentsGet
-    , ParentsDelete
-    , RealtimeAPI
-    , RealtimeGet
-    , RealtimeUpdate
-    , AboutAPI
-    , AboutGet
-    , FilesAPI
-    , FilesInsert
-    , FilesList
-    , FilesCopy
-    , FilesPatch
-    , FilesGet
-    , FilesEmptyTrash
-    , FilesTrash
-    , FilesUntrash
-    , FilesTouch
-    , FilesGenerateIds
-    , FilesDelete
-    , FilesUpdate
-    , FilesWatch
-    , PermissionsAPI
-    , PermissionsGetIdForEmail
-    , PermissionsInsert
-    , PermissionsList
-    , PermissionsPatch
-    , PermissionsGet
-    , PermissionsDelete
-    , PermissionsUpdate
-    , CommentsAPI
-    , CommentsInsert
-    , CommentsList
-    , CommentsPatch
-    , CommentsGet
-    , CommentsDelete
-    , CommentsUpdate
-    , RevisionsAPI
-    , RevisionsList
-    , RevisionsPatch
-    , RevisionsGet
-    , RevisionsDelete
-    , RevisionsUpdate
-    , PropertiesAPI
-    , PropertiesInsert
-    , PropertiesList
-    , PropertiesPatch
-    , PropertiesGet
-    , PropertiesDelete
-    , PropertiesUpdate
+    , drive
+    , driveURL
+
+    -- ** drive.about.get
+    , module Network.Google.API.Drive.About.Get
+
+    -- ** drive.apps.get
+    , module Network.Google.API.Drive.Apps.Get
+
+    -- ** drive.apps.list
+    , module Network.Google.API.Drive.Apps.List
+
+    -- ** drive.changes.get
+    , module Network.Google.API.Drive.Changes.Get
+
+    -- ** drive.changes.list
+    , module Network.Google.API.Drive.Changes.List
+
+    -- ** drive.changes.watch
+    , module Network.Google.API.Drive.Changes.Watch
+
+    -- ** drive.channels.stop
+    , module Network.Google.API.Drive.Channels.Stop
+
+    -- ** drive.children.delete
+    , module Network.Google.API.Drive.Children.Delete
+
+    -- ** drive.children.get
+    , module Network.Google.API.Drive.Children.Get
+
+    -- ** drive.children.insert
+    , module Network.Google.API.Drive.Children.Insert
+
+    -- ** drive.children.list
+    , module Network.Google.API.Drive.Children.List
+
+    -- ** drive.comments.delete
+    , module Network.Google.API.Drive.Comments.Delete
+
+    -- ** drive.comments.get
+    , module Network.Google.API.Drive.Comments.Get
+
+    -- ** drive.comments.insert
+    , module Network.Google.API.Drive.Comments.Insert
+
+    -- ** drive.comments.list
+    , module Network.Google.API.Drive.Comments.List
+
+    -- ** drive.comments.patch
+    , module Network.Google.API.Drive.Comments.Patch
+
+    -- ** drive.comments.update
+    , module Network.Google.API.Drive.Comments.Update
+
+    -- ** drive.files.copy
+    , module Network.Google.API.Drive.Files.Copy
+
+    -- ** drive.files.delete
+    , module Network.Google.API.Drive.Files.Delete
+
+    -- ** drive.files.emptyTrash
+    , module Network.Google.API.Drive.Files.EmptyTrash
+
+    -- ** drive.files.generateIds
+    , module Network.Google.API.Drive.Files.GenerateIds
+
+    -- ** drive.files.get
+    , module Network.Google.API.Drive.Files.Get
+
+    -- ** drive.files.insert
+    , module Network.Google.API.Drive.Files.Insert
+
+    -- ** drive.files.list
+    , module Network.Google.API.Drive.Files.List
+
+    -- ** drive.files.patch
+    , module Network.Google.API.Drive.Files.Patch
+
+    -- ** drive.files.touch
+    , module Network.Google.API.Drive.Files.Touch
+
+    -- ** drive.files.trash
+    , module Network.Google.API.Drive.Files.Trash
+
+    -- ** drive.files.untrash
+    , module Network.Google.API.Drive.Files.Untrash
+
+    -- ** drive.files.update
+    , module Network.Google.API.Drive.Files.Update
+
+    -- ** drive.files.watch
+    , module Network.Google.API.Drive.Files.Watch
+
+    -- ** drive.parents.delete
+    , module Network.Google.API.Drive.Parents.Delete
+
+    -- ** drive.parents.get
+    , module Network.Google.API.Drive.Parents.Get
+
+    -- ** drive.parents.insert
+    , module Network.Google.API.Drive.Parents.Insert
+
+    -- ** drive.parents.list
+    , module Network.Google.API.Drive.Parents.List
+
+    -- ** drive.permissions.delete
+    , module Network.Google.API.Drive.Permissions.Delete
+
+    -- ** drive.permissions.get
+    , module Network.Google.API.Drive.Permissions.Get
+
+    -- ** drive.permissions.getIdForEmail
+    , module Network.Google.API.Drive.Permissions.GetIdForEmail
+
+    -- ** drive.permissions.insert
+    , module Network.Google.API.Drive.Permissions.Insert
+
+    -- ** drive.permissions.list
+    , module Network.Google.API.Drive.Permissions.List
+
+    -- ** drive.permissions.patch
+    , module Network.Google.API.Drive.Permissions.Patch
+
+    -- ** drive.permissions.update
+    , module Network.Google.API.Drive.Permissions.Update
+
+    -- ** drive.properties.delete
+    , module Network.Google.API.Drive.Properties.Delete
+
+    -- ** drive.properties.get
+    , module Network.Google.API.Drive.Properties.Get
+
+    -- ** drive.properties.insert
+    , module Network.Google.API.Drive.Properties.Insert
+
+    -- ** drive.properties.list
+    , module Network.Google.API.Drive.Properties.List
+
+    -- ** drive.properties.patch
+    , module Network.Google.API.Drive.Properties.Patch
+
+    -- ** drive.properties.update
+    , module Network.Google.API.Drive.Properties.Update
+
+    -- ** drive.realtime.get
+    , module Network.Google.API.Drive.Realtime.Get
+
+    -- ** drive.realtime.update
+    , module Network.Google.API.Drive.Realtime.Update
+
+    -- ** drive.replies.delete
+    , module Network.Google.API.Drive.Replies.Delete
+
+    -- ** drive.replies.get
+    , module Network.Google.API.Drive.Replies.Get
+
+    -- ** drive.replies.insert
+    , module Network.Google.API.Drive.Replies.Insert
+
+    -- ** drive.replies.list
+    , module Network.Google.API.Drive.Replies.List
+
+    -- ** drive.replies.patch
+    , module Network.Google.API.Drive.Replies.Patch
+
+    -- ** drive.replies.update
+    , module Network.Google.API.Drive.Replies.Update
+
+    -- ** drive.revisions.delete
+    , module Network.Google.API.Drive.Revisions.Delete
+
+    -- ** drive.revisions.get
+    , module Network.Google.API.Drive.Revisions.Get
+
+    -- ** drive.revisions.list
+    , module Network.Google.API.Drive.Revisions.List
+
+    -- ** drive.revisions.patch
+    , module Network.Google.API.Drive.Revisions.Patch
+
+    -- ** drive.revisions.update
+    , module Network.Google.API.Drive.Revisions.Update
 
     -- * Types
+
+    -- ** ChangeList
+    , ChangeList
+    , changeList
+    , clEtag
+    , clNextPageToken
+    , clNextLink
+    , clKind
+    , clItems
+    , clSelfLink
+    , clLargestChangeId
+
+    -- ** AppItemIcons
+    , AppItemIcons
+    , appItemIcons
+    , aiiSize
+    , aiiCategory
+    , aiiIconUrl
+
+    -- ** FilesGet'Projection
+    , FilesGet'Projection (..)
+
+    -- ** FilesCopy'Visibility
+    , FilesCopy'Visibility (..)
+
+    -- ** FileExportLinks
+    , FileExportLinks
+    , fileExportLinks
+
+    -- ** Alt
+    , Alt (..)
+
+    -- ** FileVideoMediaMetadata
+    , FileVideoMediaMetadata
+    , fileVideoMediaMetadata
+    , fvmmHeight
+    , fvmmWidth
+    , fvmmDurationMillis
 
     -- ** About
     , About
@@ -123,41 +272,8 @@ module Network.Google.Drive
     , aQuotaBytesByService
     , aLargestChangeId
 
-    -- ** AboutItemAdditionalRoleInfo
-    , AboutItemAdditionalRoleInfo
-    , aboutItemAdditionalRoleInfo
-    , aiariRoleSets
-    , aiariType
-
-    -- ** AboutItemExportFormats
-    , AboutItemExportFormats
-    , aboutItemExportFormats
-    , aiefTargets
-    , aiefSource
-
-    -- ** AboutItemFeatures
-    , AboutItemFeatures
-    , aboutItemFeatures
-    , aifFeatureRate
-    , aifFeatureName
-
-    -- ** AboutItemImportFormats
-    , AboutItemImportFormats
-    , aboutItemImportFormats
-    , aiifTargets
-    , aiifSource
-
-    -- ** AboutItemMaxUploadSizes
-    , AboutItemMaxUploadSizes
-    , aboutItemMaxUploadSizes
-    , aimusSize
-    , aimusType
-
-    -- ** AboutItemQuotaBytesByService
-    , AboutItemQuotaBytesByService
-    , aboutItemQuotaBytesByService
-    , aiqbbsBytesUsed
-    , aiqbbsServiceName
+    -- ** FilesWatch'Projection
+    , FilesWatch'Projection (..)
 
     -- ** AboutItemRoleSetsItemAdditionalRoleInfo
     , AboutItemRoleSetsItemAdditionalRoleInfo
@@ -165,107 +281,46 @@ module Network.Google.Drive
     , airsiariPrimaryRole
     , airsiariAdditionalRoles
 
-    -- ** App
-    , App
-    , app
-    , appLongDescription
-    , appOpenUrlTemplate
-    , appAuthorized
-    , appObjectType
-    , appSecondaryMimeTypes
-    , appCreateInFolderTemplate
-    , appKind
-    , appIcons
-    , appProductUrl
-    , appUseByDefault
-    , appShortDescription
-    , appName
-    , appCreateUrl
-    , appId
-    , appPrimaryFileExtensions
-    , appInstalled
-    , appSupportsCreate
-    , appPrimaryMimeTypes
-    , appHasDriveWideScope
-    , appProductId
-    , appSecondaryFileExtensions
-    , appSupportsMultiOpen
-    , appSupportsImport
-    , appSupportsOfflineCreate
+    -- ** FileLabels
+    , FileLabels
+    , fileLabels
+    , flViewed
+    , flTrashed
+    , flStarred
+    , flHidden
+    , flRestricted
 
-    -- ** AppItemIcons
-    , AppItemIcons
-    , appItemIcons
-    , aiiSize
-    , aiiCategory
-    , aiiIconUrl
+    -- ** FileOpenWithLinks
+    , FileOpenWithLinks
+    , fileOpenWithLinks
 
-    -- ** AppList
-    , AppList
-    , appList
-    , alDefaultAppIds
-    , alEtag
-    , alKind
-    , alItems
-    , alSelfLink
+    -- ** FileImageMediaMetadata
+    , FileImageMediaMetadata
+    , fileImageMediaMetadata
+    , fimmRotation
+    , fimmHeight
+    , fimmSubjectDistance
+    , fimmMaxApertureValue
+    , fimmIsoSpeed
+    , fimmLocation
+    , fimmAperture
+    , fimmFocalLength
+    , fimmCameraMake
+    , fimmWidth
+    , fimmExposureTime
+    , fimmCameraModel
+    , fimmWhiteBalance
+    , fimmDate
+    , fimmLens
+    , fimmFlashUsed
+    , fimmExposureBias
+    , fimmMeteringMode
+    , fimmExposureMode
+    , fimmSensor
+    , fimmColorSpace
 
-    -- ** Change
-    , Change
-    , change
-    , chaKind
-    , chaSelfLink
-    , chaModificationDate
-    , chaId
-    , chaDeleted
-    , chaFileId
-    , chaFile
-
-    -- ** ChangeList
-    , ChangeList
-    , changeList
-    , clEtag
-    , clNextPageToken
-    , clNextLink
-    , clKind
-    , clItems
-    , clSelfLink
-    , clLargestChangeId
-
-    -- ** Channel
-    , Channel
-    , channel
-    , chahResourceUri
-    , chahResourceId
-    , chahKind
-    , chahExpiration
-    , chahToken
-    , chahAddress
-    , chahPayload
-    , chahParams
-    , chahId
-    , chahType
-
-    -- ** ChannelParams
-    , ChannelParams
-    , channelParams
-
-    -- ** ChildList
-    , ChildList
-    , childList
-    , chiEtag
-    , chiNextPageToken
-    , chiNextLink
-    , chiKind
-    , chiItems
-    , chiSelfLink
-
-    -- ** ChildReference
-    , ChildReference
-    , childReference
-    , crChildLink
-    , crKind
-    , crSelfLink
-    , crId
+    -- ** FilesList'Corpus
+    , FilesList'Corpus (..)
 
     -- ** Comment
     , Comment
@@ -286,11 +341,103 @@ module Network.Google.Drive
     , cFileId
     , cCommentId
 
-    -- ** CommentContext
-    , CommentContext
-    , commentContext
-    , ccValue
-    , ccType
+    -- ** Permission
+    , Permission
+    , permission
+    , pPhotoLink
+    , pEtag
+    , pWithLink
+    , pKind
+    , pDomain
+    , pValue
+    , pAdditionalRoles
+    , pRole
+    , pSelfLink
+    , pName
+    , pAuthKey
+    , pEmailAddress
+    , pId
+    , pType
+
+    -- ** Revision
+    , Revision
+    , revision
+    , rEtag
+    , rOriginalFilename
+    , rKind
+    , rPublishedLink
+    , rPinned
+    , rPublished
+    , rLastModifyingUser
+    , rFileSize
+    , rPublishAuto
+    , rMd5Checksum
+    , rMimeType
+    , rSelfLink
+    , rLastModifyingUserName
+    , rDownloadUrl
+    , rExportLinks
+    , rPublishedOutsideDomain
+    , rId
+    , rModifiedDate
+
+    -- ** Change
+    , Change
+    , change
+    , chaKind
+    , chaSelfLink
+    , chaModificationDate
+    , chaId
+    , chaDeleted
+    , chaFileId
+    , chaFile
+
+    -- ** FilesList'Projection
+    , FilesList'Projection (..)
+
+    -- ** FilesPatch'ModifiedDateBehavior
+    , FilesPatch'ModifiedDateBehavior (..)
+
+    -- ** UserPicture
+    , UserPicture
+    , userPicture
+    , upUrl
+
+    -- ** FileLocationImageMediaMetadata
+    , FileLocationImageMediaMetadata
+    , fileLocationImageMediaMetadata
+    , flimmLatitude
+    , flimmAltitude
+    , flimmLongitude
+
+    -- ** RevisionList
+    , RevisionList
+    , revisionList
+    , rlEtag
+    , rlKind
+    , rlItems
+    , rlSelfLink
+
+    -- ** FileThumbnail
+    , FileThumbnail
+    , fileThumbnail
+    , ftImage
+    , ftMimeType
+
+    -- ** PermissionList
+    , PermissionList
+    , permissionList
+    , plEtag
+    , plKind
+    , plItems
+    , plSelfLink
+
+    -- ** GeneratedIds
+    , GeneratedIds
+    , generatedIds
+    , giSpace
+    , giKind
+    , giIds
 
     -- ** CommentList
     , CommentList
@@ -301,18 +448,113 @@ module Network.Google.Drive
     , comItems
     , comSelfLink
 
-    -- ** CommentReply
-    , CommentReply
-    , commentReply
-    , crrHtmlContent
-    , crrKind
-    , crrContent
-    , crrCreatedDate
-    , crrReplyId
-    , crrAuthor
-    , crrModifiedDate
-    , crrDeleted
-    , crrVerb
+    -- ** FileList
+    , FileList
+    , fileList
+    , flEtag
+    , flNextPageToken
+    , flNextLink
+    , flKind
+    , flItems
+    , flSelfLink
+
+    -- ** AboutItemFeatures
+    , AboutItemFeatures
+    , aboutItemFeatures
+    , aifFeatureRate
+    , aifFeatureName
+
+    -- ** ChannelParams
+    , ChannelParams
+    , channelParams
+
+    -- ** FileIndexableText
+    , FileIndexableText
+    , fileIndexableText
+    , fitText
+
+    -- ** AboutItemExportFormats
+    , AboutItemExportFormats
+    , aboutItemExportFormats
+    , aiefTargets
+    , aiefSource
+
+    -- ** ParentReference
+    , ParentReference
+    , parentReference
+    , prParentLink
+    , prIsRoot
+    , prKind
+    , prSelfLink
+    , prId
+
+    -- ** CommentContext
+    , CommentContext
+    , commentContext
+    , ccValue
+    , ccType
+
+    -- ** RevisionExportLinks
+    , RevisionExportLinks
+    , revisionExportLinks
+
+    -- ** Property
+    , Property
+    , property
+    , ppEtag
+    , ppKind
+    , ppValue
+    , ppVisibility
+    , ppSelfLink
+    , ppKey
+
+    -- ** AboutItemMaxUploadSizes
+    , AboutItemMaxUploadSizes
+    , aboutItemMaxUploadSizes
+    , aimusSize
+    , aimusType
+
+    -- ** AboutItemQuotaBytesByService
+    , AboutItemQuotaBytesByService
+    , aboutItemQuotaBytesByService
+    , aiqbbsBytesUsed
+    , aiqbbsServiceName
+
+    -- ** PropertyList
+    , PropertyList
+    , propertyList
+    , proEtag
+    , proKind
+    , proItems
+    , proSelfLink
+
+    -- ** AboutItemAdditionalRoleInfo
+    , AboutItemAdditionalRoleInfo
+    , aboutItemAdditionalRoleInfo
+    , aiariRoleSets
+    , aiariType
+
+    -- ** ChildList
+    , ChildList
+    , childList
+    , chiEtag
+    , chiNextPageToken
+    , chiNextLink
+    , chiKind
+    , chiItems
+    , chiSelfLink
+
+    -- ** FilesInsert'Visibility
+    , FilesInsert'Visibility (..)
+
+    -- ** AppList
+    , AppList
+    , appList
+    , alDefaultAppIds
+    , alEtag
+    , alKind
+    , alItems
+    , alSelfLink
 
     -- ** CommentReplyList
     , CommentReplyList
@@ -322,6 +564,40 @@ module Network.Google.Drive
     , crlKind
     , crlItems
     , crlSelfLink
+
+    -- ** Channel
+    , Channel
+    , channel
+    , chahResourceUri
+    , chahResourceId
+    , chahKind
+    , chahExpiration
+    , chahToken
+    , chahAddress
+    , chahPayload
+    , chahParams
+    , chahId
+    , chahType
+
+    -- ** PermissionId
+    , PermissionId
+    , permissionId
+    , piKind
+    , piId
+
+    -- ** AboutItemImportFormats
+    , AboutItemImportFormats
+    , aboutItemImportFormats
+    , aiifTargets
+    , aiifSource
+
+    -- ** ParentList
+    , ParentList
+    , parentList
+    , parEtag
+    , parKind
+    , parItems
+    , parSelfLink
 
     -- ** File
     , File
@@ -383,190 +659,8 @@ module Network.Google.Drive
     , fProperties
     , fIndexableText
 
-    -- ** FileExportLinks
-    , FileExportLinks
-    , fileExportLinks
-
-    -- ** FileImageMediaMetadata
-    , FileImageMediaMetadata
-    , fileImageMediaMetadata
-    , fimmRotation
-    , fimmHeight
-    , fimmSubjectDistance
-    , fimmMaxApertureValue
-    , fimmIsoSpeed
-    , fimmLocation
-    , fimmAperture
-    , fimmFocalLength
-    , fimmCameraMake
-    , fimmWidth
-    , fimmExposureTime
-    , fimmCameraModel
-    , fimmWhiteBalance
-    , fimmDate
-    , fimmLens
-    , fimmFlashUsed
-    , fimmExposureBias
-    , fimmMeteringMode
-    , fimmExposureMode
-    , fimmSensor
-    , fimmColorSpace
-
-    -- ** FileIndexableText
-    , FileIndexableText
-    , fileIndexableText
-    , fitText
-
-    -- ** FileLabels
-    , FileLabels
-    , fileLabels
-    , flViewed
-    , flTrashed
-    , flStarred
-    , flHidden
-    , flRestricted
-
-    -- ** FileList
-    , FileList
-    , fileList
-    , flEtag
-    , flNextPageToken
-    , flNextLink
-    , flKind
-    , flItems
-    , flSelfLink
-
-    -- ** FileLocationImageMediaMetadata
-    , FileLocationImageMediaMetadata
-    , fileLocationImageMediaMetadata
-    , flimmLatitude
-    , flimmAltitude
-    , flimmLongitude
-
-    -- ** FileOpenWithLinks
-    , FileOpenWithLinks
-    , fileOpenWithLinks
-
-    -- ** FileThumbnail
-    , FileThumbnail
-    , fileThumbnail
-    , ftImage
-    , ftMimeType
-
-    -- ** FileVideoMediaMetadata
-    , FileVideoMediaMetadata
-    , fileVideoMediaMetadata
-    , fvmmHeight
-    , fvmmWidth
-    , fvmmDurationMillis
-
-    -- ** GeneratedIds
-    , GeneratedIds
-    , generatedIds
-    , giSpace
-    , giKind
-    , giIds
-
-    -- ** ParentList
-    , ParentList
-    , parentList
-    , parEtag
-    , parKind
-    , parItems
-    , parSelfLink
-
-    -- ** ParentReference
-    , ParentReference
-    , parentReference
-    , prParentLink
-    , prIsRoot
-    , prKind
-    , prSelfLink
-    , prId
-
-    -- ** Permission
-    , Permission
-    , permission
-    , pPhotoLink
-    , pEtag
-    , pWithLink
-    , pKind
-    , pDomain
-    , pValue
-    , pAdditionalRoles
-    , pRole
-    , pSelfLink
-    , pName
-    , pAuthKey
-    , pEmailAddress
-    , pId
-    , pType
-
-    -- ** PermissionId
-    , PermissionId
-    , permissionId
-    , piKind
-    , piId
-
-    -- ** PermissionList
-    , PermissionList
-    , permissionList
-    , plEtag
-    , plKind
-    , plItems
-    , plSelfLink
-
-    -- ** Property
-    , Property
-    , property
-    , proEtag
-    , proKind
-    , proValue
-    , proVisibility
-    , proSelfLink
-    , proKey
-
-    -- ** PropertyList
-    , PropertyList
-    , propertyList
-    , pllEtag
-    , pllKind
-    , pllItems
-    , pllSelfLink
-
-    -- ** Revision
-    , Revision
-    , revision
-    , rEtag
-    , rOriginalFilename
-    , rKind
-    , rPublishedLink
-    , rPinned
-    , rPublished
-    , rLastModifyingUser
-    , rFileSize
-    , rPublishAuto
-    , rMd5Checksum
-    , rMimeType
-    , rSelfLink
-    , rLastModifyingUserName
-    , rDownloadUrl
-    , rExportLinks
-    , rPublishedOutsideDomain
-    , rId
-    , rModifiedDate
-
-    -- ** RevisionExportLinks
-    , RevisionExportLinks
-    , revisionExportLinks
-
-    -- ** RevisionList
-    , RevisionList
-    , revisionList
-    , rlEtag
-    , rlKind
-    , rlItems
-    , rlSelfLink
+    -- ** FilesUpdate'ModifiedDateBehavior
+    , FilesUpdate'ModifiedDateBehavior (..)
 
     -- ** User
     , User
@@ -578,12 +672,116 @@ module Network.Google.Drive
     , uDisplayName
     , uPermissionId
 
-    -- ** UserPicture
-    , UserPicture
-    , userPicture
-    , upUrl
+    -- ** ChildReference
+    , ChildReference
+    , childReference
+    , crChildLink
+    , crKind
+    , crSelfLink
+    , crId
+
+    -- ** App
+    , App
+    , app
+    , appLongDescription
+    , appOpenUrlTemplate
+    , appAuthorized
+    , appObjectType
+    , appSecondaryMimeTypes
+    , appCreateInFolderTemplate
+    , appKind
+    , appIcons
+    , appProductUrl
+    , appUseByDefault
+    , appShortDescription
+    , appName
+    , appCreateUrl
+    , appId
+    , appPrimaryFileExtensions
+    , appInstalled
+    , appSupportsCreate
+    , appPrimaryMimeTypes
+    , appHasDriveWideScope
+    , appProductId
+    , appSecondaryFileExtensions
+    , appSupportsMultiOpen
+    , appSupportsImport
+    , appSupportsOfflineCreate
+
+    -- ** CommentReply
+    , CommentReply
+    , commentReply
+    , crrHtmlContent
+    , crrKind
+    , crrContent
+    , crrCreatedDate
+    , crrReplyId
+    , crrAuthor
+    , crrModifiedDate
+    , crrDeleted
+    , crrVerb
     ) where
 
+import           Network.Google.API.Drive.About.Get
+import           Network.Google.API.Drive.Apps.Get
+import           Network.Google.API.Drive.Apps.List
+import           Network.Google.API.Drive.Changes.Get
+import           Network.Google.API.Drive.Changes.List
+import           Network.Google.API.Drive.Changes.Watch
+import           Network.Google.API.Drive.Channels.Stop
+import           Network.Google.API.Drive.Children.Delete
+import           Network.Google.API.Drive.Children.Get
+import           Network.Google.API.Drive.Children.Insert
+import           Network.Google.API.Drive.Children.List
+import           Network.Google.API.Drive.Comments.Delete
+import           Network.Google.API.Drive.Comments.Get
+import           Network.Google.API.Drive.Comments.Insert
+import           Network.Google.API.Drive.Comments.List
+import           Network.Google.API.Drive.Comments.Patch
+import           Network.Google.API.Drive.Comments.Update
+import           Network.Google.API.Drive.Files.Copy
+import           Network.Google.API.Drive.Files.Delete
+import           Network.Google.API.Drive.Files.EmptyTrash
+import           Network.Google.API.Drive.Files.GenerateIds
+import           Network.Google.API.Drive.Files.Get
+import           Network.Google.API.Drive.Files.Insert
+import           Network.Google.API.Drive.Files.List
+import           Network.Google.API.Drive.Files.Patch
+import           Network.Google.API.Drive.Files.Touch
+import           Network.Google.API.Drive.Files.Trash
+import           Network.Google.API.Drive.Files.Untrash
+import           Network.Google.API.Drive.Files.Update
+import           Network.Google.API.Drive.Files.Watch
+import           Network.Google.API.Drive.Parents.Delete
+import           Network.Google.API.Drive.Parents.Get
+import           Network.Google.API.Drive.Parents.Insert
+import           Network.Google.API.Drive.Parents.List
+import           Network.Google.API.Drive.Permissions.Delete
+import           Network.Google.API.Drive.Permissions.Get
+import           Network.Google.API.Drive.Permissions.GetIdForEmail
+import           Network.Google.API.Drive.Permissions.Insert
+import           Network.Google.API.Drive.Permissions.List
+import           Network.Google.API.Drive.Permissions.Patch
+import           Network.Google.API.Drive.Permissions.Update
+import           Network.Google.API.Drive.Properties.Delete
+import           Network.Google.API.Drive.Properties.Get
+import           Network.Google.API.Drive.Properties.Insert
+import           Network.Google.API.Drive.Properties.List
+import           Network.Google.API.Drive.Properties.Patch
+import           Network.Google.API.Drive.Properties.Update
+import           Network.Google.API.Drive.Realtime.Get
+import           Network.Google.API.Drive.Realtime.Update
+import           Network.Google.API.Drive.Replies.Delete
+import           Network.Google.API.Drive.Replies.Get
+import           Network.Google.API.Drive.Replies.Insert
+import           Network.Google.API.Drive.Replies.List
+import           Network.Google.API.Drive.Replies.Patch
+import           Network.Google.API.Drive.Replies.Update
+import           Network.Google.API.Drive.Revisions.Delete
+import           Network.Google.API.Drive.Revisions.Get
+import           Network.Google.API.Drive.Revisions.List
+import           Network.Google.API.Drive.Revisions.Patch
+import           Network.Google.API.Drive.Revisions.Update
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
@@ -592,1113 +790,65 @@ TODO
 -}
 
 type Drive =
-     AppsAPI :<|> ChangesAPI :<|> ChannelsAPI :<|>
-       ChildrenAPI
-       :<|> RepliesAPI
-       :<|> ParentsAPI
-       :<|> RealtimeAPI
-       :<|> AboutAPI
-       :<|> FilesAPI
-       :<|> PermissionsAPI
-       :<|> CommentsAPI
-       :<|> RevisionsAPI
-       :<|> PropertiesAPI
-
-type AppsAPI = AppsList :<|> AppsGet
-
--- | Lists a user\'s installed apps.
-type AppsList =
-     "drive" :>
-       "v2" :>
-         "apps" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "languageCode" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "appFilterExtensions" Text :>
-                         QueryParam "appFilterMimeTypes" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] AppList
-
--- | Gets a specific app.
-type AppsGet =
-     "drive" :>
-       "v2" :>
-         "apps" :>
-           Capture "appId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Get '[JSON] App
-
-type ChangesAPI =
-     ChangesList :<|> ChangesGet :<|> ChangesWatch
-
--- | Lists the changes for a user.
-type ChangesList =
-     "drive" :>
-       "v2" :>
-         "changes" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "includeSubscribed" Bool :>
-                   QueryParam "startChangeId" Int64 :>
-                     QueryParam "key" Text :>
-                       QueryParam "spaces" Text :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "maxResults" Natural :>
-                               QueryParam "includeDeleted" Bool :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Get '[JSON] ChangeList
-
--- | Gets a specific change.
-type ChangesGet =
-     "drive" :>
-       "v2" :>
-         "changes" :>
-           Capture "changeId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Get '[JSON] Change
-
--- | Subscribe to changes for a user.
-type ChangesWatch =
-     "drive" :>
-       "v2" :>
-         "changes" :>
-           "watch" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "includeSubscribed" Bool :>
-                     QueryParam "startChangeId" Int64 :>
-                       QueryParam "key" Text :>
-                         QueryParam "spaces" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "maxResults" Natural :>
-                                 QueryParam "includeDeleted" Bool :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "alt" Text :>
-                                       Post '[JSON] Channel
-
-type ChannelsAPI = ChannelsStop
-
--- | Stop watching resources through this channel
-type ChannelsStop =
-     "drive" :>
-       "v2" :>
-         "channels" :>
-           "stop" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Post '[JSON] ()
-
-type ChildrenAPI =
-     ChildrenInsert :<|> ChildrenList :<|> ChildrenGet
-       :<|> ChildrenDelete
-
--- | Inserts a file into a folder.
-type ChildrenInsert =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "folderId" Text :>
-             "children" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] ChildReference
-
--- | Lists a folder\'s children.
-type ChildrenList =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "folderId" Text :>
-             "children" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "orderBy" Text :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "q" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "maxResults" Int32 :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Get '[JSON] ChildList
-
--- | Gets a specific child reference.
-type ChildrenGet =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "folderId" Text :>
-             "children" :>
-               Capture "childId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] ChildReference
-
--- | Removes a child from a folder.
-type ChildrenDelete =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "folderId" Text :>
-             "children" :>
-               Capture "childId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Delete '[JSON] ()
-
-type RepliesAPI =
-     RepliesInsert :<|> RepliesList :<|> RepliesPatch :<|>
-       RepliesGet
-       :<|> RepliesDelete
-       :<|> RepliesUpdate
-
--- | Creates a new reply to the given comment.
-type RepliesInsert =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "fileId" Text :>
-             "comments" :>
-               Capture "commentId" Text :>
-                 "replies" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Post '[JSON] CommentReply
-
--- | Lists all of the replies to a comment.
-type RepliesList =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "fileId" Text :>
-             "comments" :>
-               Capture "commentId" Text :>
-                 "replies" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "maxResults" Int32 :>
-                                 QueryParam "includeDeleted" Bool :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "alt" Text :>
-                                       Get '[JSON] CommentReplyList
-
--- | Updates an existing reply. This method supports patch semantics.
-type RepliesPatch =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "fileId" Text :>
-             "comments" :>
-               Capture "commentId" Text :>
-                 "replies" :>
-                   Capture "replyId" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   Patch '[JSON] CommentReply
-
--- | Gets a reply.
-type RepliesGet =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "fileId" Text :>
-             "comments" :>
-               Capture "commentId" Text :>
-                 "replies" :>
-                   Capture "replyId" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "includeDeleted" Bool :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Get '[JSON] CommentReply
-
--- | Deletes a reply.
-type RepliesDelete =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "fileId" Text :>
-             "comments" :>
-               Capture "commentId" Text :>
-                 "replies" :>
-                   Capture "replyId" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Updates an existing reply.
-type RepliesUpdate =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "fileId" Text :>
-             "comments" :>
-               Capture "commentId" Text :>
-                 "replies" :>
-                   Capture "replyId" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   Put '[JSON] CommentReply
-
-type ParentsAPI =
-     ParentsInsert :<|> ParentsList :<|> ParentsGet :<|>
-       ParentsDelete
-
--- | Adds a parent folder for a file.
-type ParentsInsert =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "fileId" Text :>
-             "parents" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] ParentReference
-
--- | Lists a file\'s parents.
-type ParentsList =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "fileId" Text :>
-             "parents" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Get '[JSON] ParentList
-
--- | Gets a specific parent reference.
-type ParentsGet =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "fileId" Text :>
-             "parents" :>
-               Capture "parentId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Get '[JSON] ParentReference
-
--- | Removes a parent from a file.
-type ParentsDelete =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "fileId" Text :>
-             "parents" :>
-               Capture "parentId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Delete '[JSON] ()
-
-type RealtimeAPI = RealtimeGet :<|> RealtimeUpdate
-
--- | Exports the contents of the Realtime API data model associated with this
--- file as JSON.
-type RealtimeGet =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "fileId" Text :>
-             "realtime" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "revision" Natural :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] ()
-
--- | Overwrites the Realtime API data model associated with this file with
--- the provided JSON data model.
-type RealtimeUpdate =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "fileId" Text :>
-             "realtime" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "baseRevision" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Put '[JSON] ()
-
-type AboutAPI = AboutGet
-
--- | Gets the information about the current user along with Drive API
--- settings
-type AboutGet =
-     "drive" :>
-       "v2" :>
-         "about" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "includeSubscribed" Bool :>
-                   QueryParam "startChangeId" Int64 :>
-                     QueryParam "maxChangeIdCount" Int64 :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] About
-
-type FilesAPI =
-     FilesInsert :<|> FilesList :<|> FilesCopy :<|>
-       FilesPatch
-       :<|> FilesGet
-       :<|> FilesEmptyTrash
-       :<|> FilesTrash
-       :<|> FilesUntrash
-       :<|> FilesTouch
-       :<|> FilesGenerateIds
-       :<|> FilesDelete
-       :<|> FilesUpdate
-       :<|> FilesWatch
-
--- | Insert a new file.
-type FilesInsert =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "pinned" Bool :>
-                   QueryParam "visibility" Text :>
-                     QueryParam "timedTextLanguage" Text :>
-                       QueryParam "useContentAsIndexableText" Bool :>
-                         QueryParam "timedTextTrackName" Text :>
-                           QueryParam "ocrLanguage" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "convert" Bool :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "ocr" Bool :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "alt" Text :>
-                                         Post '[JSON] File
-
--- | Lists the user\'s files.
-type FilesList =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "orderBy" Text :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "q" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "spaces" Text :>
-                         QueryParam "projection" Text :>
-                           QueryParam "corpus" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "maxResults" Int32 :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "alt" Text :>
-                                       Get '[JSON] FileList
-
--- | Creates a copy of the specified file.
-type FilesCopy =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "fileId" Text :>
-             "copy" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "pinned" Bool :>
-                       QueryParam "visibility" Text :>
-                         QueryParam "timedTextLanguage" Text :>
-                           QueryParam "timedTextTrackName" Text :>
-                             QueryParam "ocrLanguage" Text :>
-                               QueryParam "key" Text :>
-                                 QueryParam "convert" Bool :>
-                                   QueryParam "oauth_token" Text :>
-                                     QueryParam "ocr" Bool :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "alt" Text :>
-                                           Post '[JSON] File
-
--- | Updates file metadata and\/or content. This method supports patch
--- semantics.
-type FilesPatch =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "fileId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "newRevision" Bool :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "pinned" Bool :>
-                       QueryParam "timedTextLanguage" Text :>
-                         QueryParam "updateViewedDate" Bool :>
-                           QueryParam "removeParents" Text :>
-                             QueryParam "modifiedDateBehavior" Text :>
-                               QueryParam "useContentAsIndexableText" Bool :>
-                                 QueryParam "timedTextTrackName" Text :>
-                                   QueryParam "ocrLanguage" Text :>
-                                     QueryParam "key" Text :>
-                                       QueryParam "convert" Bool :>
-                                         QueryParam "setModifiedDate" Bool :>
-                                           QueryParam "oauth_token" Text :>
-                                             QueryParam "addParents" Text :>
-                                               QueryParam "ocr" Bool :>
-                                                 QueryParam "fields" Text :>
-                                                   QueryParam "alt" Text :>
-                                                     Patch '[JSON] File
-
--- | Gets a file\'s metadata by ID.
-type FilesGet =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "fileId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "updateViewedDate" Bool :>
-                     QueryParam "key" Text :>
-                       QueryParam "projection" Text :>
-                         QueryParam "acknowledgeAbuse" Bool :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "revisionId" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Get '[JSON] File
-
--- | Permanently deletes all of the user\'s trashed files.
-type FilesEmptyTrash =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           "trash" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Moves a file to the trash. The currently authenticated user must own the
--- file.
-type FilesTrash =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "fileId" Text :>
-             "trash" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] File
-
--- | Restores a file from the trash.
-type FilesUntrash =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "fileId" Text :>
-             "untrash" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] File
-
--- | Set the file\'s updated time to the current server time.
-type FilesTouch =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "fileId" Text :>
-             "touch" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] File
-
--- | Generates a set of file IDs which can be provided in insert requests.
-type FilesGenerateIds =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           "generateIds" :>
-             QueryParam "space" Text :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "maxResults" Natural :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] GeneratedIds
-
--- | Permanently deletes a file by ID. Skips the trash. The currently
--- authenticated user must own the file.
-type FilesDelete =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "fileId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Updates file metadata and\/or content.
-type FilesUpdate =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "fileId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "newRevision" Bool :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "pinned" Bool :>
-                       QueryParam "timedTextLanguage" Text :>
-                         QueryParam "updateViewedDate" Bool :>
-                           QueryParam "removeParents" Text :>
-                             QueryParam "modifiedDateBehavior" Text :>
-                               QueryParam "useContentAsIndexableText" Bool :>
-                                 QueryParam "timedTextTrackName" Text :>
-                                   QueryParam "ocrLanguage" Text :>
-                                     QueryParam "key" Text :>
-                                       QueryParam "convert" Bool :>
-                                         QueryParam "setModifiedDate" Bool :>
-                                           QueryParam "oauth_token" Text :>
-                                             QueryParam "addParents" Text :>
-                                               QueryParam "ocr" Bool :>
-                                                 QueryParam "fields" Text :>
-                                                   QueryParam "alt" Text :>
-                                                     Put '[JSON] File
-
--- | Subscribe to changes on a file
-type FilesWatch =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "fileId" Text :>
-             "watch" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "updateViewedDate" Bool :>
-                       QueryParam "key" Text :>
-                         QueryParam "projection" Text :>
-                           QueryParam "acknowledgeAbuse" Bool :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "revisionId" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :> Post '[JSON] Channel
-
-type PermissionsAPI =
-     PermissionsGetIdForEmail :<|> PermissionsInsert :<|>
-       PermissionsList
-       :<|> PermissionsPatch
-       :<|> PermissionsGet
-       :<|> PermissionsDelete
-       :<|> PermissionsUpdate
-
--- | Returns the permission ID for an email address.
-type PermissionsGetIdForEmail =
-     "drive" :>
-       "v2" :>
-         "permissionIds" :>
-           Capture "email" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Get '[JSON] PermissionId
-
--- | Inserts a permission for a file.
-type PermissionsInsert =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "fileId" Text :>
-             "permissions" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "emailMessage" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "sendNotificationEmails" Bool :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Post '[JSON] Permission
-
--- | Lists a file\'s permissions.
-type PermissionsList =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "fileId" Text :>
-             "permissions" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Get '[JSON] PermissionList
-
--- | Updates a permission using patch semantics.
-type PermissionsPatch =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "fileId" Text :>
-             "permissions" :>
-               Capture "permissionId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "transferOwnership" Bool :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Patch '[JSON] Permission
-
--- | Gets a permission by ID.
-type PermissionsGet =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "fileId" Text :>
-             "permissions" :>
-               Capture "permissionId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] Permission
-
--- | Deletes a permission from a file.
-type PermissionsDelete =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "fileId" Text :>
-             "permissions" :>
-               Capture "permissionId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Updates a permission.
-type PermissionsUpdate =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "fileId" Text :>
-             "permissions" :>
-               Capture "permissionId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "transferOwnership" Bool :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Put '[JSON] Permission
-
-type CommentsAPI =
-     CommentsInsert :<|> CommentsList :<|> CommentsPatch
-       :<|> CommentsGet
-       :<|> CommentsDelete
-       :<|> CommentsUpdate
-
--- | Creates a new comment on the given file.
-type CommentsInsert =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "fileId" Text :>
-             "comments" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] Comment
-
--- | Lists a file\'s comments.
-type CommentsList =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "fileId" Text :>
-             "comments" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "updatedMin" Text :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "maxResults" Int32 :>
-                               QueryParam "includeDeleted" Bool :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Get '[JSON] CommentList
-
--- | Updates an existing comment. This method supports patch semantics.
-type CommentsPatch =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "fileId" Text :>
-             "comments" :>
-               Capture "commentId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Patch '[JSON] Comment
-
--- | Gets a comment by ID.
-type CommentsGet =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "fileId" Text :>
-             "comments" :>
-               Capture "commentId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "includeDeleted" Bool :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Get '[JSON] Comment
-
--- | Deletes a comment.
-type CommentsDelete =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "fileId" Text :>
-             "comments" :>
-               Capture "commentId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Updates an existing comment.
-type CommentsUpdate =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "fileId" Text :>
-             "comments" :>
-               Capture "commentId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Put '[JSON] Comment
-
-type RevisionsAPI =
-     RevisionsList :<|> RevisionsPatch :<|> RevisionsGet
-       :<|> RevisionsDelete
-       :<|> RevisionsUpdate
-
--- | Lists a file\'s revisions.
-type RevisionsList =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "fileId" Text :>
-             "revisions" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Get '[JSON] RevisionList
-
--- | Updates a revision. This method supports patch semantics.
-type RevisionsPatch =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "fileId" Text :>
-             "revisions" :>
-               Capture "revisionId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Patch '[JSON] Revision
-
--- | Gets a specific revision.
-type RevisionsGet =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "fileId" Text :>
-             "revisions" :>
-               Capture "revisionId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] Revision
-
--- | Removes a revision.
-type RevisionsDelete =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "fileId" Text :>
-             "revisions" :>
-               Capture "revisionId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Updates a revision.
-type RevisionsUpdate =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "fileId" Text :>
-             "revisions" :>
-               Capture "revisionId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Put '[JSON] Revision
-
-type PropertiesAPI =
-     PropertiesInsert :<|> PropertiesList :<|>
-       PropertiesPatch
-       :<|> PropertiesGet
-       :<|> PropertiesDelete
-       :<|> PropertiesUpdate
-
--- | Adds a property to a file.
-type PropertiesInsert =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "fileId" Text :>
-             "properties" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] Property
-
--- | Lists a file\'s properties.
-type PropertiesList =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "fileId" Text :>
-             "properties" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Get '[JSON] PropertyList
-
--- | Updates a property. This method supports patch semantics.
-type PropertiesPatch =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "fileId" Text :>
-             "properties" :>
-               Capture "propertyKey" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "visibility" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Patch '[JSON] Property
-
--- | Gets a property by its key.
-type PropertiesGet =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "fileId" Text :>
-             "properties" :>
-               Capture "propertyKey" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "visibility" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Get '[JSON] Property
-
--- | Deletes a property.
-type PropertiesDelete =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "fileId" Text :>
-             "properties" :>
-               Capture "propertyKey" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "visibility" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Updates a property.
-type PropertiesUpdate =
-     "drive" :>
-       "v2" :>
-         "files" :>
-           Capture "fileId" Text :>
-             "properties" :>
-               Capture "propertyKey" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "visibility" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Put '[JSON] Property
+     RepliesGetAPI :<|> ChildrenDeleteAPI :<|>
+       RealtimeUpdateAPI
+       :<|> ChangesWatchAPI
+       :<|> FilesDeleteAPI
+       :<|> RepliesInsertAPI
+       :<|> ParentsListAPI
+       :<|> RevisionsListAPI
+       :<|> CommentsGetAPI
+       :<|> RevisionsGetAPI
+       :<|> RepliesPatchAPI
+       :<|> CommentsListAPI
+       :<|> FilesUpdateAPI
+       :<|> ParentsDeleteAPI
+       :<|> FilesCopyAPI
+       :<|> AboutGetAPI
+       :<|> PermissionsDeleteAPI
+       :<|> FilesListAPI
+       :<|> ChildrenListAPI
+       :<|> PropertiesGetAPI
+       :<|> CommentsPatchAPI
+       :<|> RevisionsPatchAPI
+       :<|> RepliesListAPI
+       :<|> PermissionsGetAPI
+       :<|> PropertiesInsertAPI
+       :<|> PermissionsGetIdForEmailAPI
+       :<|> RepliesUpdateAPI
+       :<|> PropertiesListAPI
+       :<|> FilesUntrashAPI
+       :<|> PropertiesDeleteAPI
+       :<|> PermissionsPatchAPI
+       :<|> ChangesGetAPI
+       :<|> FilesPatchAPI
+       :<|> PermissionsListAPI
+       :<|> ParentsInsertAPI
+       :<|> AppsGetAPI
+       :<|> PropertiesUpdateAPI
+       :<|> PermissionsUpdateAPI
+       :<|> CommentsDeleteAPI
+       :<|> ChangesListAPI
+       :<|> RevisionsDeleteAPI
+       :<|> FilesEmptyTrashAPI
+       :<|> FilesInsertAPI
+       :<|> ChildrenInsertAPI
+       :<|> FilesTouchAPI
+       :<|> FilesWatchAPI
+       :<|> RealtimeGetAPI
+       :<|> ChannelsStopAPI
+       :<|> AppsListAPI
+       :<|> FilesGetAPI
+       :<|> ChildrenGetAPI
+       :<|> PermissionsInsertAPI
+       :<|> PropertiesPatchAPI
+       :<|> FilesGenerateIdsAPI
+       :<|> ParentsGetAPI
+       :<|> RepliesDeleteAPI
+       :<|> FilesTrashAPI
+       :<|> CommentsInsertAPI
+       :<|> RevisionsUpdateAPI
+       :<|> CommentsUpdateAPI
+
+drive :: Proxy Drive
+drive = Proxy

@@ -14,22 +14,38 @@
 --
 module Network.Google.LatencyTest.Types
     (
+    -- * Service URL
+      latencyTestURL
 
     -- * AggregatedStats
-      AggregatedStats
+    , AggregatedStats
     , aggregatedStats
     , asStats
 
-    -- * AggregatedStatsReply
-    , AggregatedStatsReply
-    , aggregatedStatsReply
-    , asrTestValue
+    -- * Alt
+    , Alt (..)
+
+    -- * StatsReply
+    , StatsReply
+    , statsReply
+    , srTestValue
 
     -- * DoubleValue
     , DoubleValue
     , doubleValue
     , dvValue
     , dvLabel
+
+    -- * StringValue
+    , StringValue
+    , stringValue
+    , svValue
+    , svLabel
+
+    -- * AggregatedStatsReply
+    , AggregatedStatsReply
+    , aggregatedStatsReply
+    , asrTestValue
 
     -- * IntValue
     , IntValue
@@ -44,19 +60,15 @@ module Network.Google.LatencyTest.Types
     , sDoubleValues
     , sStringValues
     , sIntValues
-
-    -- * StatsReply
-    , StatsReply
-    , statsReply
-    , srTestValue
-
-    -- * StringValue
-    , StringValue
-    , stringValue
-    , svValue
-    , svLabel
     ) where
 
 import           Network.Google.LatencyTest.Types.Product
 import           Network.Google.LatencyTest.Types.Sum
 import           Network.Google.Prelude
+
+-- | URL referring to version 'v2' of the Google Cloud Network Performance Monitoring API.
+latencyTestURL :: BaseUrl
+latencyTestURL
+  = BaseUrl Https
+      "https://cloudlatencytest-pa.googleapis.com/v2/statscollection/"
+      443

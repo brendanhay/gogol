@@ -1,6 +1,6 @@
 name:                  gogol-adsense-host
 version:               0.0.1
-synopsis:              Google AdSense Host API.
+synopsis:              Google AdSense Host API Client.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -17,8 +17,8 @@ description:
     Gives AdSense Hosts access to report generation, ad code generation, and
     publisher management capabilities.
     .
-    /Warning:/ This is an experimental preview release which is still under
-    heavy development and not intended for public consumption, caveat emptor!
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
 
 source-repository head
     type:     git
@@ -31,7 +31,31 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.AdSense.Host
+          Network.Google.API.AdSenseHost.Accounts.Adclients.Get
+        , Network.Google.API.AdSenseHost.Accounts.Adclients.List
+        , Network.Google.API.AdSenseHost.Accounts.Adunits.Delete
+        , Network.Google.API.AdSenseHost.Accounts.Adunits.Get
+        , Network.Google.API.AdSenseHost.Accounts.Adunits.GetAdCode
+        , Network.Google.API.AdSenseHost.Accounts.Adunits.Insert
+        , Network.Google.API.AdSenseHost.Accounts.Adunits.List
+        , Network.Google.API.AdSenseHost.Accounts.Adunits.Patch
+        , Network.Google.API.AdSenseHost.Accounts.Adunits.Update
+        , Network.Google.API.AdSenseHost.Accounts.Reports.Generate
+        , Network.Google.API.AdSenseHost.Adclients.Get
+        , Network.Google.API.AdSenseHost.Adclients.List
+        , Network.Google.API.AdSenseHost.Associationsessions.Start
+        , Network.Google.API.AdSenseHost.Associationsessions.Verify
+        , Network.Google.API.AdSenseHost.Customchannels.Delete
+        , Network.Google.API.AdSenseHost.Customchannels.Get
+        , Network.Google.API.AdSenseHost.Customchannels.Insert
+        , Network.Google.API.AdSenseHost.Customchannels.List
+        , Network.Google.API.AdSenseHost.Customchannels.Patch
+        , Network.Google.API.AdSenseHost.Customchannels.Update
+        , Network.Google.API.AdSenseHost.Reports.Generate
+        , Network.Google.API.AdSenseHost.URLchannels.Delete
+        , Network.Google.API.AdSenseHost.URLchannels.Insert
+        , Network.Google.API.AdSenseHost.URLchannels.List
+        , Network.Google.AdSense.Host
         , Network.Google.AdSense.Host.Types
 
     other-modules:

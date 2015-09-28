@@ -14,21 +14,15 @@
 --
 module Network.Google.AdSense.Host.Types
     (
+    -- * Service URL
+      adSenseHostURL
 
-    -- * Account
-      Account
-    , account
-    , accStatus
-    , accKind
-    , accName
-    , accId
-
-    -- * Accounts
-    , Accounts
-    , accounts
-    , aEtag
-    , aKind
-    , aItems
+    -- * ReportItemHeaders
+    , ReportItemHeaders
+    , reportItemHeaders
+    , rihName
+    , rihCurrency
+    , rihType
 
     -- * AdClient
     , AdClient
@@ -39,55 +33,6 @@ module Network.Google.AdSense.Host.Types
     , acId
     , acProductCode
 
-    -- * AdClients
-    , AdClients
-    , adClients
-    , acsEtag
-    , acsNextPageToken
-    , acsKind
-    , acsItems
-
-    -- * AdCode
-    , AdCode
-    , adCode
-    , adKind
-    , adAdCode
-
-    -- * AdStyle
-    , AdStyle
-    , adStyle
-    , assCorners
-    , assKind
-    , assFont
-    , assColors
-
-    -- * AdStyleColors
-    , AdStyleColors
-    , adStyleColors
-    , ascText
-    , ascUrl
-    , ascBorder
-    , ascTitle
-    , ascBackground
-
-    -- * AdStyleFont
-    , AdStyleFont
-    , adStyleFont
-    , asfSize
-    , asfFamily
-
-    -- * AdUnit
-    , AdUnit
-    , adUnit
-    , auuStatus
-    , auuMobileContentAdsSettings
-    , auuKind
-    , auuCustomStyle
-    , auuName
-    , auuContentAdsSettings
-    , auuCode
-    , auuId
-
     -- * AdUnitBackupOptionContentAdsSettings
     , AdUnitBackupOptionContentAdsSettings
     , adUnitBackupOptionContentAdsSettings
@@ -95,12 +40,12 @@ module Network.Google.AdSense.Host.Types
     , aubocasUrl
     , aubocasType
 
-    -- * AdUnitContentAdsSettings
-    , AdUnitContentAdsSettings
-    , adUnitContentAdsSettings
-    , aucasBackupOption
-    , aucasSize
-    , aucasType
+    -- * Accounts
+    , Accounts
+    , accounts
+    , aEtag
+    , aKind
+    , aItems
 
     -- * AdUnitMobileContentAdsSettings
     , AdUnitMobileContentAdsSettings
@@ -110,13 +55,43 @@ module Network.Google.AdSense.Host.Types
     , aumcasMarkupLanguage
     , aumcasType
 
-    -- * AdUnits
-    , AdUnits
-    , adUnits
-    , auEtag
-    , auNextPageToken
-    , auKind
-    , auItems
+    -- * Alt
+    , Alt (..)
+
+    -- * CustomChannel
+    , CustomChannel
+    , customChannel
+    , ccKind
+    , ccName
+    , ccCode
+    , ccId
+
+    -- * AdCode
+    , AdCode
+    , adCode
+    , adKind
+    , adAdCode
+
+    -- * UrlChannel
+    , UrlChannel
+    , urlChannel
+    , ucKind
+    , ucId
+    , ucUrlPattern
+
+    -- * Report
+    , Report
+    , report
+    , rKind
+    , rAverages
+    , rWarnings
+    , rRows
+    , rTotals
+    , rHeaders
+    , rTotalMatchedRows
+
+    -- * AssociationsessionsStart'ProductCode
+    , AssociationsessionsStart'ProductCode (..)
 
     -- * AssociationSession
     , AssociationSession
@@ -131,13 +106,71 @@ module Network.Google.AdSense.Host.Types
     , asWebsiteUrl
     , asRedirectUrl
 
-    -- * CustomChannel
-    , CustomChannel
-    , customChannel
-    , ccKind
-    , ccName
-    , ccCode
-    , ccId
+    -- * AdClients
+    , AdClients
+    , adClients
+    , acsEtag
+    , acsNextPageToken
+    , acsKind
+    , acsItems
+
+    -- * AdStyleColors
+    , AdStyleColors
+    , adStyleColors
+    , ascText
+    , ascUrl
+    , ascBorder
+    , ascTitle
+    , ascBackground
+
+    -- * AdUnitContentAdsSettings
+    , AdUnitContentAdsSettings
+    , adUnitContentAdsSettings
+    , aucasBackupOption
+    , aucasSize
+    , aucasType
+
+    -- * AdStyleFont
+    , AdStyleFont
+    , adStyleFont
+    , asfSize
+    , asfFamily
+
+    -- * AdStyle
+    , AdStyle
+    , adStyle
+    , assCorners
+    , assKind
+    , assFont
+    , assColors
+
+    -- * AdUnits
+    , AdUnits
+    , adUnits
+    , auEtag
+    , auNextPageToken
+    , auKind
+    , auItems
+
+    -- * AdUnit
+    , AdUnit
+    , adUnit
+    , auuStatus
+    , auuMobileContentAdsSettings
+    , auuKind
+    , auuCustomStyle
+    , auuName
+    , auuContentAdsSettings
+    , auuCode
+    , auuId
+
+    -- * UrlChannels
+    , UrlChannels
+    , urlChannels
+    , urlcEtag
+    , urlcNextPageToken
+    , urlcKind
+    , urlcItems
 
     -- * CustomChannels
     , CustomChannels
@@ -147,40 +180,22 @@ module Network.Google.AdSense.Host.Types
     , cKind
     , cItems
 
-    -- * Report
-    , Report
-    , report
-    , rKind
-    , rAverages
-    , rWarnings
-    , rRows
-    , rTotals
-    , rHeaders
-    , rTotalMatchedRows
-
-    -- * ReportItemHeaders
-    , ReportItemHeaders
-    , reportItemHeaders
-    , rihName
-    , rihCurrency
-    , rihType
-
-    -- * UrlChannel
-    , UrlChannel
-    , urlChannel
-    , ucKind
-    , ucId
-    , ucUrlPattern
-
-    -- * UrlChannels
-    , UrlChannels
-    , urlChannels
-    , urlcEtag
-    , urlcNextPageToken
-    , urlcKind
-    , urlcItems
+    -- * Account
+    , Account
+    , account
+    , accStatus
+    , accKind
+    , accName
+    , accId
     ) where
 
 import           Network.Google.AdSense.Host.Types.Product
 import           Network.Google.AdSense.Host.Types.Sum
 import           Network.Google.Prelude
+
+-- | URL referring to version 'v4.1' of the AdSense Host API.
+adSenseHostURL :: BaseUrl
+adSenseHostURL
+  = BaseUrl Https
+      "https://www.googleapis.com/adsensehost/v4.1/"
+      443

@@ -18,26 +18,102 @@
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference>
 module Network.Google.PubSub
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** Google Cloud Pub/Sub API
       PubSub
-    , ProjectsAPI
-    , TopicsAPI
-    , SubscriptionsAPI
-    , SubscriptionsList
-    , SubscriptionsAPI
-    , SubscriptionsList
-    , SubscriptionsAcknowledge
-    , SubscriptionsGetIamPolicy
-    , SubscriptionsModifyAckDeadline
-    , SubscriptionsGet
-    , SubscriptionsModifyPushConfig
-    , SubscriptionsCreate
-    , SubscriptionsSetIamPolicy
-    , SubscriptionsPull
-    , SubscriptionsTestIamPermissions
-    , SubscriptionsDelete
+    , pubSub
+    , pubSubURL
+
+    -- ** pubsub.projects.subscriptions.acknowledge
+    , module Network.Google.API.PubSub.Projects.Subscriptions.Acknowledge
+
+    -- ** pubsub.projects.subscriptions.create
+    , module Network.Google.API.PubSub.Projects.Subscriptions.Create
+
+    -- ** pubsub.projects.subscriptions.delete
+    , module Network.Google.API.PubSub.Projects.Subscriptions.Delete
+
+    -- ** pubsub.projects.subscriptions.get
+    , module Network.Google.API.PubSub.Projects.Subscriptions.Get
+
+    -- ** pubsub.projects.subscriptions.getIamPolicy
+    , module Network.Google.API.PubSub.Projects.Subscriptions.GetIAMPolicy
+
+    -- ** pubsub.projects.subscriptions.list
+    , module Network.Google.API.PubSub.Projects.Subscriptions.List
+
+    -- ** pubsub.projects.subscriptions.modifyAckDeadline
+    , module Network.Google.API.PubSub.Projects.Subscriptions.ModifyAckDeadline
+
+    -- ** pubsub.projects.subscriptions.modifyPushConfig
+    , module Network.Google.API.PubSub.Projects.Subscriptions.ModifyPushConfig
+
+    -- ** pubsub.projects.subscriptions.pull
+    , module Network.Google.API.PubSub.Projects.Subscriptions.Pull
+
+    -- ** pubsub.projects.subscriptions.setIamPolicy
+    , module Network.Google.API.PubSub.Projects.Subscriptions.SetIAMPolicy
+
+    -- ** pubsub.projects.subscriptions.testIamPermissions
+    , module Network.Google.API.PubSub.Projects.Subscriptions.TestIAMPermissions
+
+    -- ** pubsub.projects.topics.subscriptions.list
+    , module Network.Google.API.PubSub.Projects.Topics.Subscriptions.List
 
     -- * Types
+
+    -- ** PullRequest
+    , PullRequest
+    , pullRequest
+    , prMaxMessages
+    , prReturnImmediately
+
+    -- ** ModifyAckDeadlineRequest
+    , ModifyAckDeadlineRequest
+    , modifyAckDeadlineRequest
+    , madrAckIds
+    , madrAckId
+    , madrAckDeadlineSeconds
+
+    -- ** Policy
+    , Policy
+    , policy
+    , pEtag
+    , pVersion
+    , pBindings
+
+    -- ** PushConfigAttributes
+    , PushConfigAttributes
+    , pushConfigAttributes
+
+    -- ** TestIamPermissionsResponse
+    , TestIamPermissionsResponse
+    , testIamPermissionsResponse
+    , tiprPermissions
+
+    -- ** PublishRequest
+    , PublishRequest
+    , publishRequest
+    , prMessages
+
+    -- ** Subscription
+    , Subscription
+    , subscription
+    , sPushConfig
+    , sTopic
+    , sName
+    , sAckDeadlineSeconds
+
+    -- ** SetIamPolicyRequest
+    , SetIamPolicyRequest
+    , setIamPolicyRequest
+    , siprPolicy
+
+    -- ** PullResponse
+    , PullResponse
+    , pullResponse
+    , prReceivedMessages
 
     -- ** AcknowledgeRequest
     , AcknowledgeRequest
@@ -50,56 +126,52 @@ module Network.Google.PubSub
     , bMembers
     , bRole
 
-    -- ** Empty
-    , Empty
-    , empty
-
     -- ** ListSubscriptionsResponse
     , ListSubscriptionsResponse
     , listSubscriptionsResponse
     , lsrNextPageToken
     , lsrSubscriptions
 
-    -- ** ListTopicSubscriptionsResponse
-    , ListTopicSubscriptionsResponse
-    , listTopicSubscriptionsResponse
-    , ltsrNextPageToken
-    , ltsrSubscriptions
+    -- ** ReceivedMessage
+    , ReceivedMessage
+    , receivedMessage
+    , rmAckId
+    , rmMessage
 
-    -- ** ListTopicsResponse
-    , ListTopicsResponse
-    , listTopicsResponse
-    , ltrNextPageToken
-    , ltrTopics
+    -- ** PubsubMessageAttributes
+    , PubsubMessageAttributes
+    , pubsubMessageAttributes
 
-    -- ** ModifyAckDeadlineRequest
-    , ModifyAckDeadlineRequest
-    , modifyAckDeadlineRequest
-    , madrAckIds
-    , madrAckId
-    , madrAckDeadlineSeconds
+    -- ** PushConfig
+    , PushConfig
+    , pushConfig
+    , pcAttributes
+    , pcPushEndpoint
+
+    -- ** TestIamPermissionsRequest
+    , TestIamPermissionsRequest
+    , testIamPermissionsRequest
+    , tiamprPermissions
+
+    -- ** PublishResponse
+    , PublishResponse
+    , publishResponse
+    , prMessageIds
+
+    -- ** Empty
+    , Empty
+    , empty
 
     -- ** ModifyPushConfigRequest
     , ModifyPushConfigRequest
     , modifyPushConfigRequest
     , mpcrPushConfig
 
-    -- ** Policy
-    , Policy
-    , policy
-    , pEtag
-    , pVersion
-    , pBindings
-
-    -- ** PublishRequest
-    , PublishRequest
-    , publishRequest
-    , prMessages
-
-    -- ** PublishResponse
-    , PublishResponse
-    , publishResponse
-    , prMessageIds
+    -- ** ListTopicSubscriptionsResponse
+    , ListTopicSubscriptionsResponse
+    , listTopicSubscriptionsResponse
+    , ltsrNextPageToken
+    , ltsrSubscriptions
 
     -- ** PubsubMessage
     , PubsubMessage
@@ -108,59 +180,11 @@ module Network.Google.PubSub
     , pmAttributes
     , pmMessageId
 
-    -- ** PubsubMessageAttributes
-    , PubsubMessageAttributes
-    , pubsubMessageAttributes
-
-    -- ** PullRequest
-    , PullRequest
-    , pullRequest
-    , prMaxMessages
-    , prReturnImmediately
-
-    -- ** PullResponse
-    , PullResponse
-    , pullResponse
-    , prReceivedMessages
-
-    -- ** PushConfig
-    , PushConfig
-    , pushConfig
-    , pcAttributes
-    , pcPushEndpoint
-
-    -- ** PushConfigAttributes
-    , PushConfigAttributes
-    , pushConfigAttributes
-
-    -- ** ReceivedMessage
-    , ReceivedMessage
-    , receivedMessage
-    , rmAckId
-    , rmMessage
-
-    -- ** SetIamPolicyRequest
-    , SetIamPolicyRequest
-    , setIamPolicyRequest
-    , siprPolicy
-
-    -- ** Subscription
-    , Subscription
-    , subscription
-    , sPushConfig
-    , sTopic
-    , sName
-    , sAckDeadlineSeconds
-
-    -- ** TestIamPermissionsRequest
-    , TestIamPermissionsRequest
-    , testIamPermissionsRequest
-    , tiamprPermissions
-
-    -- ** TestIamPermissionsResponse
-    , TestIamPermissionsResponse
-    , testIamPermissionsResponse
-    , tiprPermissions
+    -- ** ListTopicsResponse
+    , ListTopicsResponse
+    , listTopicsResponse
+    , ltrNextPageToken
+    , ltrTopics
 
     -- ** Topic
     , Topic
@@ -168,6 +192,18 @@ module Network.Google.PubSub
     , tName
     ) where
 
+import           Network.Google.API.PubSub.Projects.Subscriptions.Acknowledge
+import           Network.Google.API.PubSub.Projects.Subscriptions.Create
+import           Network.Google.API.PubSub.Projects.Subscriptions.Delete
+import           Network.Google.API.PubSub.Projects.Subscriptions.Get
+import           Network.Google.API.PubSub.Projects.Subscriptions.GetIAMPolicy
+import           Network.Google.API.PubSub.Projects.Subscriptions.List
+import           Network.Google.API.PubSub.Projects.Subscriptions.ModifyAckDeadline
+import           Network.Google.API.PubSub.Projects.Subscriptions.ModifyPushConfig
+import           Network.Google.API.PubSub.Projects.Subscriptions.Pull
+import           Network.Google.API.PubSub.Projects.Subscriptions.SetIAMPolicy
+import           Network.Google.API.PubSub.Projects.Subscriptions.TestIAMPermissions
+import           Network.Google.API.PubSub.Projects.Topics.Subscriptions.List
 import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
@@ -175,275 +211,19 @@ import           Network.Google.PubSub.Types
 TODO
 -}
 
-type PubSub = ProjectsAPI
+type PubSub =
+     ProjectsSubscriptionsTestIAMPermissionsAPI :<|>
+       ProjectsSubscriptionsDeleteAPI
+       :<|> ProjectsSubscriptionsSetIAMPolicyAPI
+       :<|> ProjectsSubscriptionsGetAPI
+       :<|> ProjectsSubscriptionsAcknowledgeAPI
+       :<|> ProjectsSubscriptionsCreateAPI
+       :<|> ProjectsSubscriptionsPullAPI
+       :<|> ProjectsTopicsSubscriptionsListAPI
+       :<|> ProjectsSubscriptionsListAPI
+       :<|> ProjectsSubscriptionsModifyPushConfigAPI
+       :<|> ProjectsSubscriptionsModifyAckDeadlineAPI
+       :<|> ProjectsSubscriptionsGetIAMPolicyAPI
 
-type ProjectsAPI = TopicsAPI :<|> SubscriptionsAPI
-
-type TopicsAPI = SubscriptionsAPI
-
-type SubscriptionsAPI = SubscriptionsList
-
--- | Lists the name of the subscriptions for this topic.
-type SubscriptionsList =
-     "v1beta2" :>
-       "{+topic}" :>
-         "subscriptions" :>
-           QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "pageSize" Int32 :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "callback" Text :>
-                                       QueryParam "alt" Text :>
-                                         Get '[JSON]
-                                           ListTopicSubscriptionsResponse
-
-type SubscriptionsAPI =
-     SubscriptionsList :<|> SubscriptionsAcknowledge :<|>
-       SubscriptionsGetIamPolicy
-       :<|> SubscriptionsModifyAckDeadline
-       :<|> SubscriptionsGet
-       :<|> SubscriptionsModifyPushConfig
-       :<|> SubscriptionsCreate
-       :<|> SubscriptionsSetIamPolicy
-       :<|> SubscriptionsPull
-       :<|> SubscriptionsTestIamPermissions
-       :<|> SubscriptionsDelete
-
--- | Lists matching subscriptions.
-type SubscriptionsList =
-     "v1beta2" :>
-       "{+project}" :>
-         "subscriptions" :>
-           QueryParam "$.xgafv" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "pageSize" Int32 :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "callback" Text :>
-                                       QueryParam "alt" Text :>
-                                         Get '[JSON] ListSubscriptionsResponse
-
--- | Acknowledges the messages associated with the ack tokens in the
--- AcknowledgeRequest. The Pub\/Sub system can remove the relevant messages
--- from the subscription. Acknowledging a message whose ack deadline has
--- expired may succeed, but such a message may be redelivered later.
--- Acknowledging a message more than once will not result in an error.
-type SubscriptionsAcknowledge =
-     "v1beta2" :>
-       "{+subscription}:acknowledge" :>
-         QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :> Post '[JSON] Empty
-
--- | Gets the access control policy for a resource. Is empty if the policy or
--- the resource does not exist.
-type SubscriptionsGetIamPolicy =
-     "v1beta2" :>
-       "{+resource}:getIamPolicy" :>
-         QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :> Get '[JSON] Policy
-
--- | Modifies the ack deadline for a specific message. This method is useful
--- to indicate that more time is needed to process a message by the
--- subscriber, or to make the message available for redelivery if the
--- processing was interrupted.
-type SubscriptionsModifyAckDeadline =
-     "v1beta2" :>
-       "{+subscription}:modifyAckDeadline" :>
-         QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :> Post '[JSON] Empty
-
--- | Gets the configuration details of a subscription.
-type SubscriptionsGet =
-     "v1beta2" :>
-       "{+subscription}" :>
-         QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :>
-                                   Get '[JSON] Subscription
-
--- | Modifies the PushConfig for a specified subscription. This may be used
--- to change a push subscription to a pull one (signified by an empty
--- PushConfig) or vice versa, or change the endpoint URL and other
--- attributes of a push subscription. Messages will accumulate for delivery
--- continuously through the call regardless of changes to the PushConfig.
-type SubscriptionsModifyPushConfig =
-     "v1beta2" :>
-       "{+subscription}:modifyPushConfig" :>
-         QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :> Post '[JSON] Empty
-
--- | Creates a subscription to a given topic for a given subscriber. If the
--- subscription already exists, returns ALREADY_EXISTS. If the
--- corresponding topic doesn\'t exist, returns NOT_FOUND. If the name is
--- not provided in the request, the server will assign a random name for
--- this subscription on the same project as the topic.
-type SubscriptionsCreate =
-     "v1beta2" :>
-       "{+name}" :>
-         QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :>
-                                   Put '[JSON] Subscription
-
--- | Sets the access control policy on the specified resource. Replaces any
--- existing policy.
-type SubscriptionsSetIamPolicy =
-     "v1beta2" :>
-       "{+resource}:setIamPolicy" :>
-         QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :> Post '[JSON] Policy
-
--- | Pulls messages from the server. Returns an empty list if there are no
--- messages available in the backlog. The server may return UNAVAILABLE if
--- there are too many concurrent pull requests pending for the given
--- subscription.
-type SubscriptionsPull =
-     "v1beta2" :>
-       "{+subscription}:pull" :>
-         QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :>
-                                   Post '[JSON] PullResponse
-
--- | Returns permissions that a caller has on the specified resource.
-type SubscriptionsTestIamPermissions =
-     "v1beta2" :>
-       "{+resource}:testIamPermissions" :>
-         QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :>
-                                   Post '[JSON] TestIamPermissionsResponse
-
--- | Deletes an existing subscription. All pending messages in the
--- subscription are immediately dropped. Calls to Pull after deletion will
--- return NOT_FOUND. After a subscription is deleted, a new one may be
--- created with the same name, but the new one has no association with the
--- old subscription, or its topic unless the same topic is specified.
-type SubscriptionsDelete =
-     "v1beta2" :>
-       "{+subscription}" :>
-         QueryParam "$.xgafv" Text :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :> Delete '[JSON] Empty
+pubSub :: Proxy PubSub
+pubSub = Proxy

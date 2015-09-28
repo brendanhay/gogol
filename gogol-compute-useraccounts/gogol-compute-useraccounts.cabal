@@ -1,6 +1,6 @@
 name:                  gogol-compute-useraccounts
 version:               0.0.1
-synopsis:              Google Cloud User Accounts API.
+synopsis:              Google Cloud User Accounts API Client.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -16,8 +16,8 @@ extra-source-files:    README.md
 description:
     API for the Google Cloud User Accounts service.
     .
-    /Warning:/ This is an experimental preview release which is still under
-    heavy development and not intended for public consumption, caveat emptor!
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
 
 source-repository head
     type:     git
@@ -30,7 +30,24 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.Compute.UserAccounts
+          Network.Google.API.Clouduseraccounts.GlobalAccountsOperations.Delete
+        , Network.Google.API.Clouduseraccounts.GlobalAccountsOperations.Get
+        , Network.Google.API.Clouduseraccounts.GlobalAccountsOperations.List
+        , Network.Google.API.Clouduseraccounts.Groups.AddMember
+        , Network.Google.API.Clouduseraccounts.Groups.Delete
+        , Network.Google.API.Clouduseraccounts.Groups.Get
+        , Network.Google.API.Clouduseraccounts.Groups.Insert
+        , Network.Google.API.Clouduseraccounts.Groups.List
+        , Network.Google.API.Clouduseraccounts.Groups.RemoveMember
+        , Network.Google.API.Clouduseraccounts.Linux.GetAuthorizedKeysView
+        , Network.Google.API.Clouduseraccounts.Linux.GetLinuxAccountViews
+        , Network.Google.API.Clouduseraccounts.Users.AddPublicKey
+        , Network.Google.API.Clouduseraccounts.Users.Delete
+        , Network.Google.API.Clouduseraccounts.Users.Get
+        , Network.Google.API.Clouduseraccounts.Users.Insert
+        , Network.Google.API.Clouduseraccounts.Users.List
+        , Network.Google.API.Clouduseraccounts.Users.RemovePublicKey
+        , Network.Google.Compute.UserAccounts
         , Network.Google.Compute.UserAccounts.Types
 
     other-modules:

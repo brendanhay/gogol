@@ -19,6 +19,131 @@ import           Network.Google.Prelude
 import           Network.Google.URLShortener.Types.Sum
 
 --
+-- /See:/ 'stringCount' smart constructor.
+data StringCount = StringCount
+    { _scCount :: !(Maybe Int64)
+    , _scId    :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'StringCount' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'scCount'
+--
+-- * 'scId'
+stringCount
+    :: StringCount
+stringCount =
+    StringCount
+    { _scCount = Nothing
+    , _scId = Nothing
+    }
+
+-- | Number of clicks for this top entry, e.g. for this particular country or
+-- browser.
+scCount :: Lens' StringCount (Maybe Int64)
+scCount = lens _scCount (\ s a -> s{_scCount = a})
+
+-- | Label assigned to this top entry, e.g. \"US\" or \"Chrome\".
+scId :: Lens' StringCount (Maybe Text)
+scId = lens _scId (\ s a -> s{_scId = a})
+
+instance FromJSON StringCount where
+        parseJSON
+          = withObject "StringCount"
+              (\ o ->
+                 StringCount <$> (o .:? "count") <*> (o .:? "id"))
+
+instance ToJSON StringCount where
+        toJSON StringCount{..}
+          = object
+              (catMaybes
+                 [("count" .=) <$> _scCount, ("id" .=) <$> _scId])
+
+--
+-- /See:/ 'urlHistory' smart constructor.
+data UrlHistory = UrlHistory
+    { _uhTotalItems    :: !(Maybe Int32)
+    , _uhNextPageToken :: !(Maybe Text)
+    , _uhItemsPerPage  :: !(Maybe Int32)
+    , _uhKind          :: !Text
+    , _uhItems         :: !(Maybe [Maybe Url])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UrlHistory' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'uhTotalItems'
+--
+-- * 'uhNextPageToken'
+--
+-- * 'uhItemsPerPage'
+--
+-- * 'uhKind'
+--
+-- * 'uhItems'
+urlHistory
+    :: UrlHistory
+urlHistory =
+    UrlHistory
+    { _uhTotalItems = Nothing
+    , _uhNextPageToken = Nothing
+    , _uhItemsPerPage = Nothing
+    , _uhKind = "urlshortener#urlHistory"
+    , _uhItems = Nothing
+    }
+
+-- | Total number of short URLs associated with this user (may be
+-- approximate).
+uhTotalItems :: Lens' UrlHistory (Maybe Int32)
+uhTotalItems
+  = lens _uhTotalItems (\ s a -> s{_uhTotalItems = a})
+
+-- | A token to provide to get the next page of results.
+uhNextPageToken :: Lens' UrlHistory (Maybe Text)
+uhNextPageToken
+  = lens _uhNextPageToken
+      (\ s a -> s{_uhNextPageToken = a})
+
+-- | Number of items returned with each full \"page\" of results. Note that
+-- the last page could have fewer items than the \"itemsPerPage\" value.
+uhItemsPerPage :: Lens' UrlHistory (Maybe Int32)
+uhItemsPerPage
+  = lens _uhItemsPerPage
+      (\ s a -> s{_uhItemsPerPage = a})
+
+-- | The fixed string \"urlshortener#urlHistory\".
+uhKind :: Lens' UrlHistory Text
+uhKind = lens _uhKind (\ s a -> s{_uhKind = a})
+
+-- | A list of URL resources.
+uhItems :: Lens' UrlHistory [Maybe Url]
+uhItems
+  = lens _uhItems (\ s a -> s{_uhItems = a}) . _Default
+      . _Coerce
+
+instance FromJSON UrlHistory where
+        parseJSON
+          = withObject "UrlHistory"
+              (\ o ->
+                 UrlHistory <$>
+                   (o .:? "totalItems") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "itemsPerPage")
+                     <*> (o .:? "kind" .!= "urlshortener#urlHistory")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON UrlHistory where
+        toJSON UrlHistory{..}
+          = object
+              (catMaybes
+                 [("totalItems" .=) <$> _uhTotalItems,
+                  ("nextPageToken" .=) <$> _uhNextPageToken,
+                  ("itemsPerPage" .=) <$> _uhItemsPerPage,
+                  Just ("kind" .= _uhKind), ("items" .=) <$> _uhItems])
+
+--
 -- /See:/ 'analyticsSnapshot' smart constructor.
 data AnalyticsSnapshot = AnalyticsSnapshot
     { _asPlatforms      :: !(Maybe [Maybe StringCount])
@@ -200,49 +325,6 @@ instance ToJSON AnalyticsSummary where
                   ("month" .=) <$> _asMonth])
 
 --
--- /See:/ 'stringCount' smart constructor.
-data StringCount = StringCount
-    { _scCount :: !(Maybe Int64)
-    , _scId    :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'StringCount' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'scCount'
---
--- * 'scId'
-stringCount
-    :: StringCount
-stringCount =
-    StringCount
-    { _scCount = Nothing
-    , _scId = Nothing
-    }
-
--- | Number of clicks for this top entry, e.g. for this particular country or
--- browser.
-scCount :: Lens' StringCount (Maybe Int64)
-scCount = lens _scCount (\ s a -> s{_scCount = a})
-
--- | Label assigned to this top entry, e.g. \"US\" or \"Chrome\".
-scId :: Lens' StringCount (Maybe Text)
-scId = lens _scId (\ s a -> s{_scId = a})
-
-instance FromJSON StringCount where
-        parseJSON
-          = withObject "StringCount"
-              (\ o ->
-                 StringCount <$> (o .:? "count") <*> (o .:? "id"))
-
-instance ToJSON StringCount where
-        toJSON StringCount{..}
-          = object
-              (catMaybes
-                 [("count" .=) <$> _scCount, ("id" .=) <$> _scId])
-
---
 -- /See:/ 'url' smart constructor.
 data Url = Url
     { _urlStatus    :: !(Maybe Text)
@@ -336,85 +418,3 @@ instance ToJSON Url where
                   ("analytics" .=) <$> _urlAnalytics,
                   ("longUrl" .=) <$> _urlLongUrl,
                   ("id" .=) <$> _urlId])
-
---
--- /See:/ 'urlHistory' smart constructor.
-data UrlHistory = UrlHistory
-    { _uhTotalItems    :: !(Maybe Int32)
-    , _uhNextPageToken :: !(Maybe Text)
-    , _uhItemsPerPage  :: !(Maybe Int32)
-    , _uhKind          :: !Text
-    , _uhItems         :: !(Maybe [Maybe Url])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'UrlHistory' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'uhTotalItems'
---
--- * 'uhNextPageToken'
---
--- * 'uhItemsPerPage'
---
--- * 'uhKind'
---
--- * 'uhItems'
-urlHistory
-    :: UrlHistory
-urlHistory =
-    UrlHistory
-    { _uhTotalItems = Nothing
-    , _uhNextPageToken = Nothing
-    , _uhItemsPerPage = Nothing
-    , _uhKind = "urlshortener#urlHistory"
-    , _uhItems = Nothing
-    }
-
--- | Total number of short URLs associated with this user (may be
--- approximate).
-uhTotalItems :: Lens' UrlHistory (Maybe Int32)
-uhTotalItems
-  = lens _uhTotalItems (\ s a -> s{_uhTotalItems = a})
-
--- | A token to provide to get the next page of results.
-uhNextPageToken :: Lens' UrlHistory (Maybe Text)
-uhNextPageToken
-  = lens _uhNextPageToken
-      (\ s a -> s{_uhNextPageToken = a})
-
--- | Number of items returned with each full \"page\" of results. Note that
--- the last page could have fewer items than the \"itemsPerPage\" value.
-uhItemsPerPage :: Lens' UrlHistory (Maybe Int32)
-uhItemsPerPage
-  = lens _uhItemsPerPage
-      (\ s a -> s{_uhItemsPerPage = a})
-
--- | The fixed string \"urlshortener#urlHistory\".
-uhKind :: Lens' UrlHistory Text
-uhKind = lens _uhKind (\ s a -> s{_uhKind = a})
-
--- | A list of URL resources.
-uhItems :: Lens' UrlHistory [Maybe Url]
-uhItems
-  = lens _uhItems (\ s a -> s{_uhItems = a}) . _Default
-      . _Coerce
-
-instance FromJSON UrlHistory where
-        parseJSON
-          = withObject "UrlHistory"
-              (\ o ->
-                 UrlHistory <$>
-                   (o .:? "totalItems") <*> (o .:? "nextPageToken") <*>
-                     (o .:? "itemsPerPage")
-                     <*> (o .:? "kind" .!= "urlshortener#urlHistory")
-                     <*> (o .:? "items" .!= mempty))
-
-instance ToJSON UrlHistory where
-        toJSON UrlHistory{..}
-          = object
-              (catMaybes
-                 [("totalItems" .=) <$> _uhTotalItems,
-                  ("nextPageToken" .=) <$> _uhNextPageToken,
-                  ("itemsPerPage" .=) <$> _uhItemsPerPage,
-                  Just ("kind" .= _uhKind), ("items" .=) <$> _uhItems])

@@ -1,6 +1,6 @@
 name:                  gogol-games-configuration
 version:               0.0.1
-synopsis:              Google Play Game Services Publishing API.
+synopsis:              Google Play Game Services Publishing API Client.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -16,8 +16,8 @@ extra-source-files:    README.md
 description:
     The Publishing API for Google Play Game Services.
     .
-    /Warning:/ This is an experimental preview release which is still under
-    heavy development and not intended for public consumption, caveat emptor!
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
 
 source-repository head
     type:     git
@@ -30,7 +30,20 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.Games.Configuration
+          Network.Google.API.GamesConfiguration.AchievementConfigurations.Delete
+        , Network.Google.API.GamesConfiguration.AchievementConfigurations.Get
+        , Network.Google.API.GamesConfiguration.AchievementConfigurations.Insert
+        , Network.Google.API.GamesConfiguration.AchievementConfigurations.List
+        , Network.Google.API.GamesConfiguration.AchievementConfigurations.Patch
+        , Network.Google.API.GamesConfiguration.AchievementConfigurations.Update
+        , Network.Google.API.GamesConfiguration.ImageConfigurations.Upload
+        , Network.Google.API.GamesConfiguration.LeaderboardConfigurations.Delete
+        , Network.Google.API.GamesConfiguration.LeaderboardConfigurations.Get
+        , Network.Google.API.GamesConfiguration.LeaderboardConfigurations.Insert
+        , Network.Google.API.GamesConfiguration.LeaderboardConfigurations.List
+        , Network.Google.API.GamesConfiguration.LeaderboardConfigurations.Patch
+        , Network.Google.API.GamesConfiguration.LeaderboardConfigurations.Update
+        , Network.Google.Games.Configuration
         , Network.Google.Games.Configuration.Types
 
     other-modules:

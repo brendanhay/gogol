@@ -17,43 +17,130 @@
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference>
 module Network.Google.Gmail
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** Gmail API
       Gmail
-    , UsersAPI
-    , HistoryAPI
-    , HistoryList
-    , DraftsAPI
-    , DraftsList
-    , DraftsGet
-    , DraftsCreate
-    , DraftsSend
-    , DraftsDelete
-    , DraftsUpdate
-    , LabelsAPI
-    , LabelsList
-    , LabelsPatch
-    , LabelsGet
-    , LabelsCreate
-    , LabelsDelete
-    , LabelsUpdate
-    , ThreadsAPI
-    , ThreadsList
-    , ThreadsGet
-    , ThreadsTrash
-    , ThreadsUntrash
-    , ThreadsModify
-    , ThreadsDelete
-    , MessagesAPI
-    , AttachmentsAPI
-    , AttachmentsGet
+    , gmail
+    , gmailURL
+
+    -- ** gmail.users.drafts.create
+    , module Network.Google.API.Gmail.Users.Drafts.Create
+
+    -- ** gmail.users.drafts.delete
+    , module Network.Google.API.Gmail.Users.Drafts.Delete
+
+    -- ** gmail.users.drafts.get
+    , module Network.Google.API.Gmail.Users.Drafts.Get
+
+    -- ** gmail.users.drafts.list
+    , module Network.Google.API.Gmail.Users.Drafts.List
+
+    -- ** gmail.users.drafts.send
+    , module Network.Google.API.Gmail.Users.Drafts.Send
+
+    -- ** gmail.users.drafts.update
+    , module Network.Google.API.Gmail.Users.Drafts.Update
+
+    -- ** gmail.users.history.list
+    , module Network.Google.API.Gmail.Users.History.List
+
+    -- ** gmail.users.labels.create
+    , module Network.Google.API.Gmail.Users.Labels.Create
+
+    -- ** gmail.users.labels.delete
+    , module Network.Google.API.Gmail.Users.Labels.Delete
+
+    -- ** gmail.users.labels.get
+    , module Network.Google.API.Gmail.Users.Labels.Get
+
+    -- ** gmail.users.labels.list
+    , module Network.Google.API.Gmail.Users.Labels.List
+
+    -- ** gmail.users.labels.patch
+    , module Network.Google.API.Gmail.Users.Labels.Patch
+
+    -- ** gmail.users.labels.update
+    , module Network.Google.API.Gmail.Users.Labels.Update
+
+    -- ** gmail.users.messages.attachments.get
+    , module Network.Google.API.Gmail.Users.Messages.Attachments.Get
+
+    -- ** gmail.users.threads.delete
+    , module Network.Google.API.Gmail.Users.Threads.Delete
+
+    -- ** gmail.users.threads.get
+    , module Network.Google.API.Gmail.Users.Threads.Get
+
+    -- ** gmail.users.threads.list
+    , module Network.Google.API.Gmail.Users.Threads.List
+
+    -- ** gmail.users.threads.modify
+    , module Network.Google.API.Gmail.Users.Threads.Modify
+
+    -- ** gmail.users.threads.trash
+    , module Network.Google.API.Gmail.Users.Threads.Trash
+
+    -- ** gmail.users.threads.untrash
+    , module Network.Google.API.Gmail.Users.Threads.Untrash
 
     -- * Types
 
-    -- ** Draft
-    , Draft
-    , draft
-    , dId
-    , dMessage
+    -- ** HistoryMessageDeleted
+    , HistoryMessageDeleted
+    , historyMessageDeleted
+    , hmdMessage
+
+    -- ** ListLabelsResponse
+    , ListLabelsResponse
+    , listLabelsResponse
+    , llrLabels
+
+    -- ** HistoryLabelAdded
+    , HistoryLabelAdded
+    , historyLabelAdded
+    , hlaLabelIds
+    , hlaMessage
+
+    -- ** MessagePart
+    , MessagePart
+    , messagePart
+    , mpParts
+    , mpBody
+    , mpMimeType
+    , mpHeaders
+    , mpPartId
+    , mpFilename
+
+    -- ** ListThreadsResponse
+    , ListThreadsResponse
+    , listThreadsResponse
+    , ltrNextPageToken
+    , ltrResultSizeEstimate
+    , ltrThreads
+
+    -- ** MessagePartBody
+    , MessagePartBody
+    , messagePartBody
+    , mpbSize
+    , mpbData
+    , mpbAttachmentId
+
+    -- ** LabelLabelListVisibility
+    , LabelLabelListVisibility (..)
+
+    -- ** ListDraftsResponse
+    , ListDraftsResponse
+    , listDraftsResponse
+    , ldrNextPageToken
+    , ldrResultSizeEstimate
+    , ldrDrafts
+
+    -- ** ModifyMessageRequest
+    , ModifyMessageRequest
+    , modifyMessageRequest
+    , mmrRemoveLabelIds
+    , mmrAddLabelIds
 
     -- ** History
     , History
@@ -65,82 +152,27 @@ module Network.Google.Gmail
     , hId
     , hMessages
 
-    -- ** HistoryLabelAdded
-    , HistoryLabelAdded
-    , historyLabelAdded
-    , hlaLabelIds
-    , hlaMessage
-
-    -- ** HistoryLabelRemoved
-    , HistoryLabelRemoved
-    , historyLabelRemoved
-    , hlrLabelIds
-    , hlrMessage
-
-    -- ** HistoryMessageAdded
-    , HistoryMessageAdded
-    , historyMessageAdded
-    , hmaMessage
-
-    -- ** HistoryMessageDeleted
-    , HistoryMessageDeleted
-    , historyMessageDeleted
-    , hmdMessage
-
-    -- ** Label
-    , Label
-    , label
-    , lThreadsUnread
-    , lMessageListVisibility
-    , lMessagesTotal
-    , lMessagesUnread
-    , lName
-    , lThreadsTotal
-    , lLabelListVisibility
-    , lId
-    , lType
-
-    -- ** LabelLabelListVisibility
-    , LabelLabelListVisibility (..)
-
     -- ** LabelMessageListVisibility
     , LabelMessageListVisibility (..)
 
-    -- ** LabelType
-    , LabelType (..)
+    -- ** Alt
+    , Alt (..)
 
-    -- ** ListDraftsResponse
-    , ListDraftsResponse
-    , listDraftsResponse
-    , ldrNextPageToken
-    , ldrResultSizeEstimate
-    , ldrDrafts
+    -- ** Draft
+    , Draft
+    , draft
+    , dId
+    , dMessage
 
-    -- ** ListHistoryResponse
-    , ListHistoryResponse
-    , listHistoryResponse
-    , lhrNextPageToken
-    , lhrHistory
-    , lhrHistoryId
+    -- ** UsersDraftsGet'Format
+    , UsersDraftsGet'Format (..)
 
-    -- ** ListLabelsResponse
-    , ListLabelsResponse
-    , listLabelsResponse
-    , llrLabels
-
-    -- ** ListMessagesResponse
-    , ListMessagesResponse
-    , listMessagesResponse
-    , lmrNextPageToken
-    , lmrResultSizeEstimate
-    , lmrMessages
-
-    -- ** ListThreadsResponse
-    , ListThreadsResponse
-    , listThreadsResponse
-    , ltrNextPageToken
-    , ltrResultSizeEstimate
-    , ltrThreads
+    -- ** WatchRequest
+    , WatchRequest
+    , watchRequest
+    , wrLabelFilterAction
+    , wrTopicName
+    , wrLabelIds
 
     -- ** Message
     , Message
@@ -155,40 +187,38 @@ module Network.Google.Gmail
     , mThreadId
     , mInternalDate
 
-    -- ** MessagePart
-    , MessagePart
-    , messagePart
-    , mpParts
-    , mpBody
-    , mpMimeType
-    , mpHeaders
-    , mpPartId
-    , mpFilename
+    -- ** ListMessagesResponse
+    , ListMessagesResponse
+    , listMessagesResponse
+    , lmrNextPageToken
+    , lmrResultSizeEstimate
+    , lmrMessages
 
-    -- ** MessagePartBody
-    , MessagePartBody
-    , messagePartBody
-    , mpbSize
-    , mpbData
-    , mpbAttachmentId
-
-    -- ** MessagePartHeader
-    , MessagePartHeader
-    , messagePartHeader
-    , mphValue
-    , mphName
-
-    -- ** ModifyMessageRequest
-    , ModifyMessageRequest
-    , modifyMessageRequest
-    , mmrRemoveLabelIds
-    , mmrAddLabelIds
+    -- ** HistoryMessageAdded
+    , HistoryMessageAdded
+    , historyMessageAdded
+    , hmaMessage
 
     -- ** ModifyThreadRequest
     , ModifyThreadRequest
     , modifyThreadRequest
     , mtrRemoveLabelIds
     , mtrAddLabelIds
+
+    -- ** WatchResponse
+    , WatchResponse
+    , watchResponse
+    , wrExpiration
+    , wrHistoryId
+
+    -- ** LabelType
+    , LabelType (..)
+
+    -- ** MessagePartHeader
+    , MessagePartHeader
+    , messagePartHeader
+    , mphValue
+    , mphName
 
     -- ** Profile
     , Profile
@@ -198,6 +228,32 @@ module Network.Google.Gmail
     , pHistoryId
     , pEmailAddress
 
+    -- ** ListHistoryResponse
+    , ListHistoryResponse
+    , listHistoryResponse
+    , lhrNextPageToken
+    , lhrHistory
+    , lhrHistoryId
+
+    -- ** WatchRequestLabelFilterAction
+    , WatchRequestLabelFilterAction (..)
+
+    -- ** UsersThreadsGet'Format
+    , UsersThreadsGet'Format (..)
+
+    -- ** Label
+    , Label
+    , label
+    , lThreadsUnread
+    , lMessageListVisibility
+    , lMessagesTotal
+    , lMessagesUnread
+    , lName
+    , lThreadsTotal
+    , lLabelListVisibility
+    , lId
+    , lType
+
     -- ** Thread
     , Thread
     , thread
@@ -206,23 +262,33 @@ module Network.Google.Gmail
     , tId
     , tMessages
 
-    -- ** WatchRequest
-    , WatchRequest
-    , watchRequest
-    , wrLabelFilterAction
-    , wrTopicName
-    , wrLabelIds
-
-    -- ** WatchRequestLabelFilterAction
-    , WatchRequestLabelFilterAction (..)
-
-    -- ** WatchResponse
-    , WatchResponse
-    , watchResponse
-    , wrExpiration
-    , wrHistoryId
+    -- ** HistoryLabelRemoved
+    , HistoryLabelRemoved
+    , historyLabelRemoved
+    , hlrLabelIds
+    , hlrMessage
     ) where
 
+import           Network.Google.API.Gmail.Users.Drafts.Create
+import           Network.Google.API.Gmail.Users.Drafts.Delete
+import           Network.Google.API.Gmail.Users.Drafts.Get
+import           Network.Google.API.Gmail.Users.Drafts.List
+import           Network.Google.API.Gmail.Users.Drafts.Send
+import           Network.Google.API.Gmail.Users.Drafts.Update
+import           Network.Google.API.Gmail.Users.History.List
+import           Network.Google.API.Gmail.Users.Labels.Create
+import           Network.Google.API.Gmail.Users.Labels.Delete
+import           Network.Google.API.Gmail.Users.Labels.Get
+import           Network.Google.API.Gmail.Users.Labels.List
+import           Network.Google.API.Gmail.Users.Labels.Patch
+import           Network.Google.API.Gmail.Users.Labels.Update
+import           Network.Google.API.Gmail.Users.Messages.Attachments.Get
+import           Network.Google.API.Gmail.Users.Threads.Delete
+import           Network.Google.API.Gmail.Users.Threads.Get
+import           Network.Google.API.Gmail.Users.Threads.List
+import           Network.Google.API.Gmail.Users.Threads.Modify
+import           Network.Google.API.Gmail.Users.Threads.Trash
+import           Network.Google.API.Gmail.Users.Threads.Untrash
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
@@ -230,377 +296,26 @@ import           Network.Google.Prelude
 TODO
 -}
 
-type Gmail = UsersAPI
+type Gmail =
+     UsersDraftsGetAPI :<|> UsersThreadsListAPI :<|>
+       UsersThreadsDeleteAPI
+       :<|> UsersDraftsSendAPI
+       :<|> UsersThreadsModifyAPI
+       :<|> UsersDraftsListAPI
+       :<|> UsersDraftsUpdateAPI
+       :<|> UsersLabelsGetAPI
+       :<|> UsersMessagesAttachmentsGetAPI
+       :<|> UsersLabelsDeleteAPI
+       :<|> UsersDraftsCreateAPI
+       :<|> UsersThreadsUntrashAPI
+       :<|> UsersLabelsUpdateAPI
+       :<|> UsersLabelsListAPI
+       :<|> UsersLabelsCreateAPI
+       :<|> UsersHistoryListAPI
+       :<|> UsersThreadsTrashAPI
+       :<|> UsersDraftsDeleteAPI
+       :<|> UsersLabelsPatchAPI
+       :<|> UsersThreadsGetAPI
 
-type UsersAPI =
-     HistoryAPI :<|> DraftsAPI :<|> LabelsAPI :<|>
-       ThreadsAPI
-       :<|> MessagesAPI
-
-type HistoryAPI = HistoryList
-
--- | Lists the history of all changes to the given mailbox. History results
--- are returned in chronological order (increasing historyId).
-type HistoryList =
-     "gmail" :>
-       "v1" :>
-         "users" :>
-           Capture "userId" Text :>
-             "history" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "startHistoryId" Word64 :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "labelId" Text :>
-                               QueryParam "maxResults" Word32 :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Get '[JSON] ListHistoryResponse
-
-type DraftsAPI =
-     DraftsList :<|> DraftsGet :<|> DraftsCreate :<|>
-       DraftsSend
-       :<|> DraftsDelete
-       :<|> DraftsUpdate
-
--- | Lists the drafts in the user\'s mailbox.
-type DraftsList =
-     "gmail" :>
-       "v1" :>
-         "users" :>
-           Capture "userId" Text :>
-             "drafts" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Get '[JSON] ListDraftsResponse
-
--- | Gets the specified draft.
-type DraftsGet =
-     "gmail" :>
-       "v1" :>
-         "users" :>
-           Capture "userId" Text :>
-             "drafts" :>
-               Capture "id" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "format" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Get '[JSON] Draft
-
--- | Creates a new draft with the DRAFT label.
-type DraftsCreate =
-     "gmail" :>
-       "v1" :>
-         "users" :>
-           Capture "userId" Text :>
-             "drafts" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] Draft
-
--- | Sends the specified, existing draft to the recipients in the To, Cc, and
--- Bcc headers.
-type DraftsSend =
-     "gmail" :>
-       "v1" :>
-         "users" :>
-           Capture "userId" Text :>
-             "drafts" :>
-               "send" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Post '[JSON] Message
-
--- | Immediately and permanently deletes the specified draft. Does not simply
--- trash it.
-type DraftsDelete =
-     "gmail" :>
-       "v1" :>
-         "users" :>
-           Capture "userId" Text :>
-             "drafts" :>
-               Capture "id" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Replaces a draft\'s content.
-type DraftsUpdate =
-     "gmail" :>
-       "v1" :>
-         "users" :>
-           Capture "userId" Text :>
-             "drafts" :>
-               Capture "id" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Put '[JSON] Draft
-
-type LabelsAPI =
-     LabelsList :<|> LabelsPatch :<|> LabelsGet :<|>
-       LabelsCreate
-       :<|> LabelsDelete
-       :<|> LabelsUpdate
-
--- | Lists all labels in the user\'s mailbox.
-type LabelsList =
-     "gmail" :>
-       "v1" :>
-         "users" :>
-           Capture "userId" Text :>
-             "labels" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Get '[JSON] ListLabelsResponse
-
--- | Updates the specified label. This method supports patch semantics.
-type LabelsPatch =
-     "gmail" :>
-       "v1" :>
-         "users" :>
-           Capture "userId" Text :>
-             "labels" :>
-               Capture "id" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Patch '[JSON] Label
-
--- | Gets the specified label.
-type LabelsGet =
-     "gmail" :>
-       "v1" :>
-         "users" :>
-           Capture "userId" Text :>
-             "labels" :>
-               Capture "id" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] Label
-
--- | Creates a new label.
-type LabelsCreate =
-     "gmail" :>
-       "v1" :>
-         "users" :>
-           Capture "userId" Text :>
-             "labels" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] Label
-
--- | Immediately and permanently deletes the specified label and removes it
--- from any messages and threads that it is applied to.
-type LabelsDelete =
-     "gmail" :>
-       "v1" :>
-         "users" :>
-           Capture "userId" Text :>
-             "labels" :>
-               Capture "id" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Updates the specified label.
-type LabelsUpdate =
-     "gmail" :>
-       "v1" :>
-         "users" :>
-           Capture "userId" Text :>
-             "labels" :>
-               Capture "id" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Put '[JSON] Label
-
-type ThreadsAPI =
-     ThreadsList :<|> ThreadsGet :<|> ThreadsTrash :<|>
-       ThreadsUntrash
-       :<|> ThreadsModify
-       :<|> ThreadsDelete
-
--- | Lists the threads in the user\'s mailbox.
-type ThreadsList =
-     "gmail" :>
-       "v1" :>
-         "users" :>
-           Capture "userId" Text :>
-             "threads" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "q" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "includeSpamTrash" Bool :>
-                           QueryParam "labelIds" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "maxResults" Word32 :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "alt" Text :>
-                                       Get '[JSON] ListThreadsResponse
-
--- | Gets the specified thread.
-type ThreadsGet =
-     "gmail" :>
-       "v1" :>
-         "users" :>
-           Capture "userId" Text :>
-             "threads" :>
-               Capture "id" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "format" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "metadataHeaders" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Get '[JSON] Thread
-
--- | Moves the specified thread to the trash.
-type ThreadsTrash =
-     "gmail" :>
-       "v1" :>
-         "users" :>
-           Capture "userId" Text :>
-             "threads" :>
-               Capture "id" Text :>
-                 "trash" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Post '[JSON] Thread
-
--- | Removes the specified thread from the trash.
-type ThreadsUntrash =
-     "gmail" :>
-       "v1" :>
-         "users" :>
-           Capture "userId" Text :>
-             "threads" :>
-               Capture "id" Text :>
-                 "untrash" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Post '[JSON] Thread
-
--- | Modifies the labels applied to the thread. This applies to all messages
--- in the thread.
-type ThreadsModify =
-     "gmail" :>
-       "v1" :>
-         "users" :>
-           Capture "userId" Text :>
-             "threads" :>
-               Capture "id" Text :>
-                 "modify" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Post '[JSON] Thread
-
--- | Immediately and permanently deletes the specified thread. This operation
--- cannot be undone. Prefer threads.trash instead.
-type ThreadsDelete =
-     "gmail" :>
-       "v1" :>
-         "users" :>
-           Capture "userId" Text :>
-             "threads" :>
-               Capture "id" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Delete '[JSON] ()
-
-type MessagesAPI = AttachmentsAPI
-
-type AttachmentsAPI = AttachmentsGet
-
--- | Gets the specified message attachment.
-type AttachmentsGet =
-     "gmail" :>
-       "v1" :>
-         "users" :>
-           Capture "userId" Text :>
-             "messages" :>
-               Capture "messageId" Text :>
-                 "attachments" :>
-                   Capture "id" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   Get '[JSON] MessagePartBody
+gmail :: Proxy Gmail
+gmail = Proxy

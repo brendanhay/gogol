@@ -17,58 +17,598 @@ module Network.Google.DoubleClick.Bids.Types.Sum where
 
 import           Network.Google.Prelude
 
--- | Filter type used to filter line items to fetch.
-data DownloadLineItemsRequestFilterType
-    = DLIRFTAdvertiserId
-      -- ^ @ADVERTISER_ID@
-    | DLIRFTInsertionOrderId
-      -- ^ @INSERTION_ORDER_ID@
-    | DLIRFTLineItemId
-      -- ^ @LINE_ITEM_ID@
+-- | Format of the generated report.
+data QueryMetadataFormat
+    = CSV
+      -- ^ @CSV@
+    | ExcelCSV
+      -- ^ @EXCEL_CSV@
+    | Xlsx
+      -- ^ @XLSX@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable DownloadLineItemsRequestFilterType
+instance Hashable QueryMetadataFormat
 
-instance FromText DownloadLineItemsRequestFilterType where
+instance FromText QueryMetadataFormat where
     fromText = \case
-        "ADVERTISER_ID" -> Just DLIRFTAdvertiserId
-        "INSERTION_ORDER_ID" -> Just DLIRFTInsertionOrderId
-        "LINE_ITEM_ID" -> Just DLIRFTLineItemId
+        "CSV" -> Just CSV
+        "EXCEL_CSV" -> Just ExcelCSV
+        "XLSX" -> Just Xlsx
         _ -> Nothing
 
-instance ToText DownloadLineItemsRequestFilterType where
+instance ToText QueryMetadataFormat where
     toText = \case
-        DLIRFTAdvertiserId -> "ADVERTISER_ID"
-        DLIRFTInsertionOrderId -> "INSERTION_ORDER_ID"
-        DLIRFTLineItemId -> "LINE_ITEM_ID"
+        CSV -> "CSV"
+        ExcelCSV -> "EXCEL_CSV"
+        Xlsx -> "XLSX"
 
-instance FromJSON DownloadLineItemsRequestFilterType where
-    parseJSON = parseJSONText "DownloadLineItemsRequestFilterType"
+instance FromJSON QueryMetadataFormat where
+    parseJSON = parseJSONText "QueryMetadataFormat"
 
-instance ToJSON DownloadLineItemsRequestFilterType where
+instance ToJSON QueryMetadataFormat where
     toJSON = toJSONText
 
--- | Format in which the line items will be returned. Default to CSV.
-data DownloadLineItemsRequestFormat
-    = DLIRFCSV
+-- | Format the line items are in. Default to CSV.
+data UploadLineItemsRequestFormat
+    = ULIRFCSV
       -- ^ @CSV@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable DownloadLineItemsRequestFormat
+instance Hashable UploadLineItemsRequestFormat
 
-instance FromText DownloadLineItemsRequestFormat where
+instance FromText UploadLineItemsRequestFormat where
     fromText = \case
-        "CSV" -> Just DLIRFCSV
+        "CSV" -> Just ULIRFCSV
         _ -> Nothing
 
-instance ToText DownloadLineItemsRequestFormat where
+instance ToText UploadLineItemsRequestFormat where
     toText = \case
-        DLIRFCSV -> "CSV"
+        ULIRFCSV -> "CSV"
 
-instance FromJSON DownloadLineItemsRequestFormat where
-    parseJSON = parseJSONText "DownloadLineItemsRequestFormat"
+instance FromJSON UploadLineItemsRequestFormat where
+    parseJSON = parseJSONText "UploadLineItemsRequestFormat"
 
-instance ToJSON DownloadLineItemsRequestFormat where
+instance ToJSON UploadLineItemsRequestFormat where
+    toJSON = toJSONText
+
+-- | Data format for the response.
+data Alt
+    = JSON
+      -- ^ @json@
+      -- Responses with Content-Type of application\/json
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable Alt
+
+instance FromText Alt where
+    fromText = \case
+        "json" -> Just JSON
+        _ -> Nothing
+
+instance ToText Alt where
+    toText = \case
+        JSON -> "json"
+
+instance FromJSON Alt where
+    parseJSON = parseJSONText "Alt"
+
+instance ToJSON Alt where
+    toJSON = toJSONText
+
+-- | Error code that shows why the report was not created.
+data ReportFailureErrorCode
+    = AuthenticationError
+      -- ^ @AUTHENTICATION_ERROR@
+    | DeprecatedReportingInvalidQuery
+      -- ^ @DEPRECATED_REPORTING_INVALID_QUERY@
+    | ReportingBucketNotFound
+      -- ^ @REPORTING_BUCKET_NOT_FOUND@
+    | ReportingCreateBucketFailed
+      -- ^ @REPORTING_CREATE_BUCKET_FAILED@
+    | ReportingDeleteBucketFailed
+      -- ^ @REPORTING_DELETE_BUCKET_FAILED@
+    | ReportingFatalError
+      -- ^ @REPORTING_FATAL_ERROR@
+    | ReportingIllegalFilename
+      -- ^ @REPORTING_ILLEGAL_FILENAME@
+    | ReportingImcompatibleMetrics
+      -- ^ @REPORTING_IMCOMPATIBLE_METRICS@
+    | ReportingInvalidQueryMissingPartnerAndAdvertiserFilters
+      -- ^ @REPORTING_INVALID_QUERY_MISSING_PARTNER_AND_ADVERTISER_FILTERS@
+    | ReportingInvalidQueryTitleMissing
+      -- ^ @REPORTING_INVALID_QUERY_TITLE_MISSING@
+    | ReportingInvalidQueryTooManyUnfilteredLargeGroupBys
+      -- ^ @REPORTING_INVALID_QUERY_TOO_MANY_UNFILTERED_LARGE_GROUP_BYS@
+    | ReportingQueryNotFound
+      -- ^ @REPORTING_QUERY_NOT_FOUND@
+    | ReportingTransientError
+      -- ^ @REPORTING_TRANSIENT_ERROR@
+    | ReportingUpdateBucketPermissionFailed
+      -- ^ @REPORTING_UPDATE_BUCKET_PERMISSION_FAILED@
+    | ReportingWriteBucketObjectFailed
+      -- ^ @REPORTING_WRITE_BUCKET_OBJECT_FAILED@
+    | ServerError
+      -- ^ @SERVER_ERROR@
+    | UnauthorizedAPIAccess
+      -- ^ @UNAUTHORIZED_API_ACCESS@
+    | ValidationError
+      -- ^ @VALIDATION_ERROR@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ReportFailureErrorCode
+
+instance FromText ReportFailureErrorCode where
+    fromText = \case
+        "AUTHENTICATION_ERROR" -> Just AuthenticationError
+        "DEPRECATED_REPORTING_INVALID_QUERY" -> Just DeprecatedReportingInvalidQuery
+        "REPORTING_BUCKET_NOT_FOUND" -> Just ReportingBucketNotFound
+        "REPORTING_CREATE_BUCKET_FAILED" -> Just ReportingCreateBucketFailed
+        "REPORTING_DELETE_BUCKET_FAILED" -> Just ReportingDeleteBucketFailed
+        "REPORTING_FATAL_ERROR" -> Just ReportingFatalError
+        "REPORTING_ILLEGAL_FILENAME" -> Just ReportingIllegalFilename
+        "REPORTING_IMCOMPATIBLE_METRICS" -> Just ReportingImcompatibleMetrics
+        "REPORTING_INVALID_QUERY_MISSING_PARTNER_AND_ADVERTISER_FILTERS" -> Just ReportingInvalidQueryMissingPartnerAndAdvertiserFilters
+        "REPORTING_INVALID_QUERY_TITLE_MISSING" -> Just ReportingInvalidQueryTitleMissing
+        "REPORTING_INVALID_QUERY_TOO_MANY_UNFILTERED_LARGE_GROUP_BYS" -> Just ReportingInvalidQueryTooManyUnfilteredLargeGroupBys
+        "REPORTING_QUERY_NOT_FOUND" -> Just ReportingQueryNotFound
+        "REPORTING_TRANSIENT_ERROR" -> Just ReportingTransientError
+        "REPORTING_UPDATE_BUCKET_PERMISSION_FAILED" -> Just ReportingUpdateBucketPermissionFailed
+        "REPORTING_WRITE_BUCKET_OBJECT_FAILED" -> Just ReportingWriteBucketObjectFailed
+        "SERVER_ERROR" -> Just ServerError
+        "UNAUTHORIZED_API_ACCESS" -> Just UnauthorizedAPIAccess
+        "VALIDATION_ERROR" -> Just ValidationError
+        _ -> Nothing
+
+instance ToText ReportFailureErrorCode where
+    toText = \case
+        AuthenticationError -> "AUTHENTICATION_ERROR"
+        DeprecatedReportingInvalidQuery -> "DEPRECATED_REPORTING_INVALID_QUERY"
+        ReportingBucketNotFound -> "REPORTING_BUCKET_NOT_FOUND"
+        ReportingCreateBucketFailed -> "REPORTING_CREATE_BUCKET_FAILED"
+        ReportingDeleteBucketFailed -> "REPORTING_DELETE_BUCKET_FAILED"
+        ReportingFatalError -> "REPORTING_FATAL_ERROR"
+        ReportingIllegalFilename -> "REPORTING_ILLEGAL_FILENAME"
+        ReportingImcompatibleMetrics -> "REPORTING_IMCOMPATIBLE_METRICS"
+        ReportingInvalidQueryMissingPartnerAndAdvertiserFilters -> "REPORTING_INVALID_QUERY_MISSING_PARTNER_AND_ADVERTISER_FILTERS"
+        ReportingInvalidQueryTitleMissing -> "REPORTING_INVALID_QUERY_TITLE_MISSING"
+        ReportingInvalidQueryTooManyUnfilteredLargeGroupBys -> "REPORTING_INVALID_QUERY_TOO_MANY_UNFILTERED_LARGE_GROUP_BYS"
+        ReportingQueryNotFound -> "REPORTING_QUERY_NOT_FOUND"
+        ReportingTransientError -> "REPORTING_TRANSIENT_ERROR"
+        ReportingUpdateBucketPermissionFailed -> "REPORTING_UPDATE_BUCKET_PERMISSION_FAILED"
+        ReportingWriteBucketObjectFailed -> "REPORTING_WRITE_BUCKET_OBJECT_FAILED"
+        ServerError -> "SERVER_ERROR"
+        UnauthorizedAPIAccess -> "UNAUTHORIZED_API_ACCESS"
+        ValidationError -> "VALIDATION_ERROR"
+
+instance FromJSON ReportFailureErrorCode where
+    parseJSON = parseJSONText "ReportFailureErrorCode"
+
+instance ToJSON ReportFailureErrorCode where
+    toJSON = toJSONText
+
+data ParametersItemGroupBys
+    = FilterActiveViewExpectedViewability
+      -- ^ @FILTER_ACTIVE_VIEW_EXPECTED_VIEWABILITY@
+    | FilterActivityId
+      -- ^ @FILTER_ACTIVITY_ID@
+    | FilterAdvertiser
+      -- ^ @FILTER_ADVERTISER@
+    | FilterAdvertiserCurrency
+      -- ^ @FILTER_ADVERTISER_CURRENCY@
+    | FilterAdvertiserTimezone
+      -- ^ @FILTER_ADVERTISER_TIMEZONE@
+    | FilterAdPosition
+      -- ^ @FILTER_AD_POSITION@
+    | FilterAge
+      -- ^ @FILTER_AGE@
+    | FilterBrandsafeChannelId
+      -- ^ @FILTER_BRANDSAFE_CHANNEL_ID@
+    | FilterBrowser
+      -- ^ @FILTER_BROWSER@
+    | FilterCampaignDailyFrequency
+      -- ^ @FILTER_CAMPAIGN_DAILY_FREQUENCY@
+    | FilterCarrier
+      -- ^ @FILTER_CARRIER@
+    | FilterChannelId
+      -- ^ @FILTER_CHANNEL_ID@
+    | FilterCity
+      -- ^ @FILTER_CITY@
+    | FilterConversionDelay
+      -- ^ @FILTER_CONVERSION_DELAY@
+    | FilterCountry
+      -- ^ @FILTER_COUNTRY@
+    | FilterCreativeId
+      -- ^ @FILTER_CREATIVE_ID@
+    | FilterCreativeSize
+      -- ^ @FILTER_CREATIVE_SIZE@
+    | FilterCreativeType
+      -- ^ @FILTER_CREATIVE_TYPE@
+    | FilterDataProvider
+      -- ^ @FILTER_DATA_PROVIDER@
+    | FilterDate
+      -- ^ @FILTER_DATE@
+    | FilterDayOfWeek
+      -- ^ @FILTER_DAY_OF_WEEK@
+    | FilterDma
+      -- ^ @FILTER_DMA@
+    | FilterExchangeId
+      -- ^ @FILTER_EXCHANGE_ID@
+    | FilterFloodlightPixelId
+      -- ^ @FILTER_FLOODLIGHT_PIXEL_ID@
+    | FilterGender
+      -- ^ @FILTER_GENDER@
+    | FilterInsertionOrder
+      -- ^ @FILTER_INSERTION_ORDER@
+    | FilterInventoryFormat
+      -- ^ @FILTER_INVENTORY_FORMAT@
+    | FilterInventorySource
+      -- ^ @FILTER_INVENTORY_SOURCE@
+    | FilterInventorySourceType
+      -- ^ @FILTER_INVENTORY_SOURCE_TYPE@
+    | FilterKeyword
+      -- ^ @FILTER_KEYWORD@
+    | FilterLineItem
+      -- ^ @FILTER_LINE_ITEM@
+    | FilterLineItemDailyFrequency
+      -- ^ @FILTER_LINE_ITEM_DAILY_FREQUENCY@
+    | FilterLineItemLifetimeFrequency
+      -- ^ @FILTER_LINE_ITEM_LIFETIME_FREQUENCY@
+    | FilterLineItemType
+      -- ^ @FILTER_LINE_ITEM_TYPE@
+    | FilterMobileDeviceMake
+      -- ^ @FILTER_MOBILE_DEVICE_MAKE@
+    | FilterMobileDeviceMakeModel
+      -- ^ @FILTER_MOBILE_DEVICE_MAKE_MODEL@
+    | FilterMobileDeviceType
+      -- ^ @FILTER_MOBILE_DEVICE_TYPE@
+    | FilterMobileGeo
+      -- ^ @FILTER_MOBILE_GEO@
+    | FilterMonth
+      -- ^ @FILTER_MONTH@
+    | FilterMraidSupport
+      -- ^ @FILTER_MRAID_SUPPORT@
+    | FilterNielsenAge
+      -- ^ @FILTER_NIELSEN_AGE@
+    | FilterNielsenCountryCode
+      -- ^ @FILTER_NIELSEN_COUNTRY_CODE@
+    | FilterNielsenDeviceId
+      -- ^ @FILTER_NIELSEN_DEVICE_ID@
+    | FilterNielsenGender
+      -- ^ @FILTER_NIELSEN_GENDER@
+    | FilterOrderId
+      -- ^ @FILTER_ORDER_ID@
+    | FilterOs
+      -- ^ @FILTER_OS@
+    | FilterPageCategory
+      -- ^ @FILTER_PAGE_CATEGORY@
+    | FilterPageLayout
+      -- ^ @FILTER_PAGE_LAYOUT@
+    | FilterPartner
+      -- ^ @FILTER_PARTNER@
+    | FilterPartnerCurrency
+      -- ^ @FILTER_PARTNER_CURRENCY@
+    | FilterPublicInventory
+      -- ^ @FILTER_PUBLIC_INVENTORY@
+    | FilterQuarter
+      -- ^ @FILTER_QUARTER@
+    | FilterRegion
+      -- ^ @FILTER_REGION@
+    | FilterRegularChannelId
+      -- ^ @FILTER_REGULAR_CHANNEL_ID@
+    | FilterSiteId
+      -- ^ @FILTER_SITE_ID@
+    | FilterSiteLanguage
+      -- ^ @FILTER_SITE_LANGUAGE@
+    | FilterTargetedUserList
+      -- ^ @FILTER_TARGETED_USER_LIST@
+    | FilterTimeOfDay
+      -- ^ @FILTER_TIME_OF_DAY@
+    | FilterTrueviewConversionType
+      -- ^ @FILTER_TRUEVIEW_CONVERSION_TYPE@
+    | FilterUnknown
+      -- ^ @FILTER_UNKNOWN@
+    | FilterUserList
+      -- ^ @FILTER_USER_LIST@
+    | FilterUserListFirstParty
+      -- ^ @FILTER_USER_LIST_FIRST_PARTY@
+    | FilterUserListThirdParty
+      -- ^ @FILTER_USER_LIST_THIRD_PARTY@
+    | FilterVideoAdPositionInStream
+      -- ^ @FILTER_VIDEO_AD_POSITION_IN_STREAM@
+    | FilterVideoCompanionSize
+      -- ^ @FILTER_VIDEO_COMPANION_SIZE@
+    | FilterVideoCompanionType
+      -- ^ @FILTER_VIDEO_COMPANION_TYPE@
+    | FilterVideoCreativeDuration
+      -- ^ @FILTER_VIDEO_CREATIVE_DURATION@
+    | FilterVideoCreativeDurationSkippable
+      -- ^ @FILTER_VIDEO_CREATIVE_DURATION_SKIPPABLE@
+    | FilterVideoDurationSeconds
+      -- ^ @FILTER_VIDEO_DURATION_SECONDS@
+    | FilterVideoFormatSupport
+      -- ^ @FILTER_VIDEO_FORMAT_SUPPORT@
+    | FilterVideoInventoryType
+      -- ^ @FILTER_VIDEO_INVENTORY_TYPE@
+    | FilterVideoPlayerSize
+      -- ^ @FILTER_VIDEO_PLAYER_SIZE@
+    | FilterVideoRatingTier
+      -- ^ @FILTER_VIDEO_RATING_TIER@
+    | FilterVideoSkippableSupport
+      -- ^ @FILTER_VIDEO_SKIPPABLE_SUPPORT@
+    | FilterVideoVpaidSupport
+      -- ^ @FILTER_VIDEO_VPAID_SUPPORT@
+    | FilterWeek
+      -- ^ @FILTER_WEEK@
+    | FilterYear
+      -- ^ @FILTER_YEAR@
+    | FilterYouTubeVertical
+      -- ^ @FILTER_YOUTUBE_VERTICAL@
+    | FilterZipCode
+      -- ^ @FILTER_ZIP_CODE@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable ParametersItemGroupBys
+
+instance FromText ParametersItemGroupBys where
+    fromText = \case
+        "FILTER_ACTIVE_VIEW_EXPECTED_VIEWABILITY" -> Just FilterActiveViewExpectedViewability
+        "FILTER_ACTIVITY_ID" -> Just FilterActivityId
+        "FILTER_ADVERTISER" -> Just FilterAdvertiser
+        "FILTER_ADVERTISER_CURRENCY" -> Just FilterAdvertiserCurrency
+        "FILTER_ADVERTISER_TIMEZONE" -> Just FilterAdvertiserTimezone
+        "FILTER_AD_POSITION" -> Just FilterAdPosition
+        "FILTER_AGE" -> Just FilterAge
+        "FILTER_BRANDSAFE_CHANNEL_ID" -> Just FilterBrandsafeChannelId
+        "FILTER_BROWSER" -> Just FilterBrowser
+        "FILTER_CAMPAIGN_DAILY_FREQUENCY" -> Just FilterCampaignDailyFrequency
+        "FILTER_CARRIER" -> Just FilterCarrier
+        "FILTER_CHANNEL_ID" -> Just FilterChannelId
+        "FILTER_CITY" -> Just FilterCity
+        "FILTER_CONVERSION_DELAY" -> Just FilterConversionDelay
+        "FILTER_COUNTRY" -> Just FilterCountry
+        "FILTER_CREATIVE_ID" -> Just FilterCreativeId
+        "FILTER_CREATIVE_SIZE" -> Just FilterCreativeSize
+        "FILTER_CREATIVE_TYPE" -> Just FilterCreativeType
+        "FILTER_DATA_PROVIDER" -> Just FilterDataProvider
+        "FILTER_DATE" -> Just FilterDate
+        "FILTER_DAY_OF_WEEK" -> Just FilterDayOfWeek
+        "FILTER_DMA" -> Just FilterDma
+        "FILTER_EXCHANGE_ID" -> Just FilterExchangeId
+        "FILTER_FLOODLIGHT_PIXEL_ID" -> Just FilterFloodlightPixelId
+        "FILTER_GENDER" -> Just FilterGender
+        "FILTER_INSERTION_ORDER" -> Just FilterInsertionOrder
+        "FILTER_INVENTORY_FORMAT" -> Just FilterInventoryFormat
+        "FILTER_INVENTORY_SOURCE" -> Just FilterInventorySource
+        "FILTER_INVENTORY_SOURCE_TYPE" -> Just FilterInventorySourceType
+        "FILTER_KEYWORD" -> Just FilterKeyword
+        "FILTER_LINE_ITEM" -> Just FilterLineItem
+        "FILTER_LINE_ITEM_DAILY_FREQUENCY" -> Just FilterLineItemDailyFrequency
+        "FILTER_LINE_ITEM_LIFETIME_FREQUENCY" -> Just FilterLineItemLifetimeFrequency
+        "FILTER_LINE_ITEM_TYPE" -> Just FilterLineItemType
+        "FILTER_MOBILE_DEVICE_MAKE" -> Just FilterMobileDeviceMake
+        "FILTER_MOBILE_DEVICE_MAKE_MODEL" -> Just FilterMobileDeviceMakeModel
+        "FILTER_MOBILE_DEVICE_TYPE" -> Just FilterMobileDeviceType
+        "FILTER_MOBILE_GEO" -> Just FilterMobileGeo
+        "FILTER_MONTH" -> Just FilterMonth
+        "FILTER_MRAID_SUPPORT" -> Just FilterMraidSupport
+        "FILTER_NIELSEN_AGE" -> Just FilterNielsenAge
+        "FILTER_NIELSEN_COUNTRY_CODE" -> Just FilterNielsenCountryCode
+        "FILTER_NIELSEN_DEVICE_ID" -> Just FilterNielsenDeviceId
+        "FILTER_NIELSEN_GENDER" -> Just FilterNielsenGender
+        "FILTER_ORDER_ID" -> Just FilterOrderId
+        "FILTER_OS" -> Just FilterOs
+        "FILTER_PAGE_CATEGORY" -> Just FilterPageCategory
+        "FILTER_PAGE_LAYOUT" -> Just FilterPageLayout
+        "FILTER_PARTNER" -> Just FilterPartner
+        "FILTER_PARTNER_CURRENCY" -> Just FilterPartnerCurrency
+        "FILTER_PUBLIC_INVENTORY" -> Just FilterPublicInventory
+        "FILTER_QUARTER" -> Just FilterQuarter
+        "FILTER_REGION" -> Just FilterRegion
+        "FILTER_REGULAR_CHANNEL_ID" -> Just FilterRegularChannelId
+        "FILTER_SITE_ID" -> Just FilterSiteId
+        "FILTER_SITE_LANGUAGE" -> Just FilterSiteLanguage
+        "FILTER_TARGETED_USER_LIST" -> Just FilterTargetedUserList
+        "FILTER_TIME_OF_DAY" -> Just FilterTimeOfDay
+        "FILTER_TRUEVIEW_CONVERSION_TYPE" -> Just FilterTrueviewConversionType
+        "FILTER_UNKNOWN" -> Just FilterUnknown
+        "FILTER_USER_LIST" -> Just FilterUserList
+        "FILTER_USER_LIST_FIRST_PARTY" -> Just FilterUserListFirstParty
+        "FILTER_USER_LIST_THIRD_PARTY" -> Just FilterUserListThirdParty
+        "FILTER_VIDEO_AD_POSITION_IN_STREAM" -> Just FilterVideoAdPositionInStream
+        "FILTER_VIDEO_COMPANION_SIZE" -> Just FilterVideoCompanionSize
+        "FILTER_VIDEO_COMPANION_TYPE" -> Just FilterVideoCompanionType
+        "FILTER_VIDEO_CREATIVE_DURATION" -> Just FilterVideoCreativeDuration
+        "FILTER_VIDEO_CREATIVE_DURATION_SKIPPABLE" -> Just FilterVideoCreativeDurationSkippable
+        "FILTER_VIDEO_DURATION_SECONDS" -> Just FilterVideoDurationSeconds
+        "FILTER_VIDEO_FORMAT_SUPPORT" -> Just FilterVideoFormatSupport
+        "FILTER_VIDEO_INVENTORY_TYPE" -> Just FilterVideoInventoryType
+        "FILTER_VIDEO_PLAYER_SIZE" -> Just FilterVideoPlayerSize
+        "FILTER_VIDEO_RATING_TIER" -> Just FilterVideoRatingTier
+        "FILTER_VIDEO_SKIPPABLE_SUPPORT" -> Just FilterVideoSkippableSupport
+        "FILTER_VIDEO_VPAID_SUPPORT" -> Just FilterVideoVpaidSupport
+        "FILTER_WEEK" -> Just FilterWeek
+        "FILTER_YEAR" -> Just FilterYear
+        "FILTER_YOUTUBE_VERTICAL" -> Just FilterYouTubeVertical
+        "FILTER_ZIP_CODE" -> Just FilterZipCode
+        _ -> Nothing
+
+instance ToText ParametersItemGroupBys where
+    toText = \case
+        FilterActiveViewExpectedViewability -> "FILTER_ACTIVE_VIEW_EXPECTED_VIEWABILITY"
+        FilterActivityId -> "FILTER_ACTIVITY_ID"
+        FilterAdvertiser -> "FILTER_ADVERTISER"
+        FilterAdvertiserCurrency -> "FILTER_ADVERTISER_CURRENCY"
+        FilterAdvertiserTimezone -> "FILTER_ADVERTISER_TIMEZONE"
+        FilterAdPosition -> "FILTER_AD_POSITION"
+        FilterAge -> "FILTER_AGE"
+        FilterBrandsafeChannelId -> "FILTER_BRANDSAFE_CHANNEL_ID"
+        FilterBrowser -> "FILTER_BROWSER"
+        FilterCampaignDailyFrequency -> "FILTER_CAMPAIGN_DAILY_FREQUENCY"
+        FilterCarrier -> "FILTER_CARRIER"
+        FilterChannelId -> "FILTER_CHANNEL_ID"
+        FilterCity -> "FILTER_CITY"
+        FilterConversionDelay -> "FILTER_CONVERSION_DELAY"
+        FilterCountry -> "FILTER_COUNTRY"
+        FilterCreativeId -> "FILTER_CREATIVE_ID"
+        FilterCreativeSize -> "FILTER_CREATIVE_SIZE"
+        FilterCreativeType -> "FILTER_CREATIVE_TYPE"
+        FilterDataProvider -> "FILTER_DATA_PROVIDER"
+        FilterDate -> "FILTER_DATE"
+        FilterDayOfWeek -> "FILTER_DAY_OF_WEEK"
+        FilterDma -> "FILTER_DMA"
+        FilterExchangeId -> "FILTER_EXCHANGE_ID"
+        FilterFloodlightPixelId -> "FILTER_FLOODLIGHT_PIXEL_ID"
+        FilterGender -> "FILTER_GENDER"
+        FilterInsertionOrder -> "FILTER_INSERTION_ORDER"
+        FilterInventoryFormat -> "FILTER_INVENTORY_FORMAT"
+        FilterInventorySource -> "FILTER_INVENTORY_SOURCE"
+        FilterInventorySourceType -> "FILTER_INVENTORY_SOURCE_TYPE"
+        FilterKeyword -> "FILTER_KEYWORD"
+        FilterLineItem -> "FILTER_LINE_ITEM"
+        FilterLineItemDailyFrequency -> "FILTER_LINE_ITEM_DAILY_FREQUENCY"
+        FilterLineItemLifetimeFrequency -> "FILTER_LINE_ITEM_LIFETIME_FREQUENCY"
+        FilterLineItemType -> "FILTER_LINE_ITEM_TYPE"
+        FilterMobileDeviceMake -> "FILTER_MOBILE_DEVICE_MAKE"
+        FilterMobileDeviceMakeModel -> "FILTER_MOBILE_DEVICE_MAKE_MODEL"
+        FilterMobileDeviceType -> "FILTER_MOBILE_DEVICE_TYPE"
+        FilterMobileGeo -> "FILTER_MOBILE_GEO"
+        FilterMonth -> "FILTER_MONTH"
+        FilterMraidSupport -> "FILTER_MRAID_SUPPORT"
+        FilterNielsenAge -> "FILTER_NIELSEN_AGE"
+        FilterNielsenCountryCode -> "FILTER_NIELSEN_COUNTRY_CODE"
+        FilterNielsenDeviceId -> "FILTER_NIELSEN_DEVICE_ID"
+        FilterNielsenGender -> "FILTER_NIELSEN_GENDER"
+        FilterOrderId -> "FILTER_ORDER_ID"
+        FilterOs -> "FILTER_OS"
+        FilterPageCategory -> "FILTER_PAGE_CATEGORY"
+        FilterPageLayout -> "FILTER_PAGE_LAYOUT"
+        FilterPartner -> "FILTER_PARTNER"
+        FilterPartnerCurrency -> "FILTER_PARTNER_CURRENCY"
+        FilterPublicInventory -> "FILTER_PUBLIC_INVENTORY"
+        FilterQuarter -> "FILTER_QUARTER"
+        FilterRegion -> "FILTER_REGION"
+        FilterRegularChannelId -> "FILTER_REGULAR_CHANNEL_ID"
+        FilterSiteId -> "FILTER_SITE_ID"
+        FilterSiteLanguage -> "FILTER_SITE_LANGUAGE"
+        FilterTargetedUserList -> "FILTER_TARGETED_USER_LIST"
+        FilterTimeOfDay -> "FILTER_TIME_OF_DAY"
+        FilterTrueviewConversionType -> "FILTER_TRUEVIEW_CONVERSION_TYPE"
+        FilterUnknown -> "FILTER_UNKNOWN"
+        FilterUserList -> "FILTER_USER_LIST"
+        FilterUserListFirstParty -> "FILTER_USER_LIST_FIRST_PARTY"
+        FilterUserListThirdParty -> "FILTER_USER_LIST_THIRD_PARTY"
+        FilterVideoAdPositionInStream -> "FILTER_VIDEO_AD_POSITION_IN_STREAM"
+        FilterVideoCompanionSize -> "FILTER_VIDEO_COMPANION_SIZE"
+        FilterVideoCompanionType -> "FILTER_VIDEO_COMPANION_TYPE"
+        FilterVideoCreativeDuration -> "FILTER_VIDEO_CREATIVE_DURATION"
+        FilterVideoCreativeDurationSkippable -> "FILTER_VIDEO_CREATIVE_DURATION_SKIPPABLE"
+        FilterVideoDurationSeconds -> "FILTER_VIDEO_DURATION_SECONDS"
+        FilterVideoFormatSupport -> "FILTER_VIDEO_FORMAT_SUPPORT"
+        FilterVideoInventoryType -> "FILTER_VIDEO_INVENTORY_TYPE"
+        FilterVideoPlayerSize -> "FILTER_VIDEO_PLAYER_SIZE"
+        FilterVideoRatingTier -> "FILTER_VIDEO_RATING_TIER"
+        FilterVideoSkippableSupport -> "FILTER_VIDEO_SKIPPABLE_SUPPORT"
+        FilterVideoVpaidSupport -> "FILTER_VIDEO_VPAID_SUPPORT"
+        FilterWeek -> "FILTER_WEEK"
+        FilterYear -> "FILTER_YEAR"
+        FilterYouTubeVertical -> "FILTER_YOUTUBE_VERTICAL"
+        FilterZipCode -> "FILTER_ZIP_CODE"
+
+instance FromJSON ParametersItemGroupBys where
+    parseJSON = parseJSONText "ParametersItemGroupBys"
+
+instance ToJSON ParametersItemGroupBys where
+    toJSON = toJSONText
+
+-- | Report data range used to generate the report.
+data RunQueryRequestDataRange
+    = AllTime
+      -- ^ @ALL_TIME@
+    | CurrentDay
+      -- ^ @CURRENT_DAY@
+    | CustomDates
+      -- ^ @CUSTOM_DATES@
+    | Last14Days
+      -- ^ @LAST_14_DAYS@
+    | Last30Days
+      -- ^ @LAST_30_DAYS@
+    | Last365Days
+      -- ^ @LAST_365_DAYS@
+    | Last7Days
+      -- ^ @LAST_7_DAYS@
+    | Last90Days
+      -- ^ @LAST_90_DAYS@
+    | MonthToDate
+      -- ^ @MONTH_TO_DATE@
+    | PreviousDay
+      -- ^ @PREVIOUS_DAY@
+    | PreviousHalfMonth
+      -- ^ @PREVIOUS_HALF_MONTH@
+    | PreviousMonth
+      -- ^ @PREVIOUS_MONTH@
+    | PreviousQuarter
+      -- ^ @PREVIOUS_QUARTER@
+    | PreviousWeek
+      -- ^ @PREVIOUS_WEEK@
+    | PreviousYear
+      -- ^ @PREVIOUS_YEAR@
+    | QuarterToDate
+      -- ^ @QUARTER_TO_DATE@
+    | WeekToDate
+      -- ^ @WEEK_TO_DATE@
+    | YearToDate
+      -- ^ @YEAR_TO_DATE@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable RunQueryRequestDataRange
+
+instance FromText RunQueryRequestDataRange where
+    fromText = \case
+        "ALL_TIME" -> Just AllTime
+        "CURRENT_DAY" -> Just CurrentDay
+        "CUSTOM_DATES" -> Just CustomDates
+        "LAST_14_DAYS" -> Just Last14Days
+        "LAST_30_DAYS" -> Just Last30Days
+        "LAST_365_DAYS" -> Just Last365Days
+        "LAST_7_DAYS" -> Just Last7Days
+        "LAST_90_DAYS" -> Just Last90Days
+        "MONTH_TO_DATE" -> Just MonthToDate
+        "PREVIOUS_DAY" -> Just PreviousDay
+        "PREVIOUS_HALF_MONTH" -> Just PreviousHalfMonth
+        "PREVIOUS_MONTH" -> Just PreviousMonth
+        "PREVIOUS_QUARTER" -> Just PreviousQuarter
+        "PREVIOUS_WEEK" -> Just PreviousWeek
+        "PREVIOUS_YEAR" -> Just PreviousYear
+        "QUARTER_TO_DATE" -> Just QuarterToDate
+        "WEEK_TO_DATE" -> Just WeekToDate
+        "YEAR_TO_DATE" -> Just YearToDate
+        _ -> Nothing
+
+instance ToText RunQueryRequestDataRange where
+    toText = \case
+        AllTime -> "ALL_TIME"
+        CurrentDay -> "CURRENT_DAY"
+        CustomDates -> "CUSTOM_DATES"
+        Last14Days -> "LAST_14_DAYS"
+        Last30Days -> "LAST_30_DAYS"
+        Last365Days -> "LAST_365_DAYS"
+        Last7Days -> "LAST_7_DAYS"
+        Last90Days -> "LAST_90_DAYS"
+        MonthToDate -> "MONTH_TO_DATE"
+        PreviousDay -> "PREVIOUS_DAY"
+        PreviousHalfMonth -> "PREVIOUS_HALF_MONTH"
+        PreviousMonth -> "PREVIOUS_MONTH"
+        PreviousQuarter -> "PREVIOUS_QUARTER"
+        PreviousWeek -> "PREVIOUS_WEEK"
+        PreviousYear -> "PREVIOUS_YEAR"
+        QuarterToDate -> "QUARTER_TO_DATE"
+        WeekToDate -> "WEEK_TO_DATE"
+        YearToDate -> "YEAR_TO_DATE"
+
+instance FromJSON RunQueryRequestDataRange where
+    parseJSON = parseJSONText "RunQueryRequestDataRange"
+
+instance ToJSON RunQueryRequestDataRange where
     toJSON = toJSONText
 
 -- | Filter type.
@@ -227,7 +767,7 @@ data FilterPairType
       -- ^ @FILTER_WEEK@
     | FPTFilterYear
       -- ^ @FILTER_YEAR@
-    | FPTFilterYoutubeVertical
+    | FPTFilterYouTubeVertical
       -- ^ @FILTER_YOUTUBE_VERTICAL@
     | FPTFilterZipCode
       -- ^ @FILTER_ZIP_CODE@
@@ -314,7 +854,7 @@ instance FromText FilterPairType where
         "FILTER_VIDEO_VPAID_SUPPORT" -> Just FPTFilterVideoVpaidSupport
         "FILTER_WEEK" -> Just FPTFilterWeek
         "FILTER_YEAR" -> Just FPTFilterYear
-        "FILTER_YOUTUBE_VERTICAL" -> Just FPTFilterYoutubeVertical
+        "FILTER_YOUTUBE_VERTICAL" -> Just FPTFilterYouTubeVertical
         "FILTER_ZIP_CODE" -> Just FPTFilterZipCode
         _ -> Nothing
 
@@ -397,7 +937,7 @@ instance ToText FilterPairType where
         FPTFilterVideoVpaidSupport -> "FILTER_VIDEO_VPAID_SUPPORT"
         FPTFilterWeek -> "FILTER_WEEK"
         FPTFilterYear -> "FILTER_YEAR"
-        FPTFilterYoutubeVertical -> "FILTER_YOUTUBE_VERTICAL"
+        FPTFilterYouTubeVertical -> "FILTER_YOUTUBE_VERTICAL"
         FPTFilterZipCode -> "FILTER_ZIP_CODE"
 
 instance FromJSON FilterPairType where
@@ -406,818 +946,581 @@ instance FromJSON FilterPairType where
 instance ToJSON FilterPairType where
     toJSON = toJSONText
 
-data ParametersItemGroupBys
-    = PIGBFilterActiveViewExpectedViewability
-      -- ^ @FILTER_ACTIVE_VIEW_EXPECTED_VIEWABILITY@
-    | PIGBFilterActivityId
-      -- ^ @FILTER_ACTIVITY_ID@
-    | PIGBFilterAdvertiser
-      -- ^ @FILTER_ADVERTISER@
-    | PIGBFilterAdvertiserCurrency
-      -- ^ @FILTER_ADVERTISER_CURRENCY@
-    | PIGBFilterAdvertiserTimezone
-      -- ^ @FILTER_ADVERTISER_TIMEZONE@
-    | PIGBFilterAdPosition
-      -- ^ @FILTER_AD_POSITION@
-    | PIGBFilterAge
-      -- ^ @FILTER_AGE@
-    | PIGBFilterBrandsafeChannelId
-      -- ^ @FILTER_BRANDSAFE_CHANNEL_ID@
-    | PIGBFilterBrowser
-      -- ^ @FILTER_BROWSER@
-    | PIGBFilterCampaignDailyFrequency
-      -- ^ @FILTER_CAMPAIGN_DAILY_FREQUENCY@
-    | PIGBFilterCarrier
-      -- ^ @FILTER_CARRIER@
-    | PIGBFilterChannelId
-      -- ^ @FILTER_CHANNEL_ID@
-    | PIGBFilterCity
-      -- ^ @FILTER_CITY@
-    | PIGBFilterConversionDelay
-      -- ^ @FILTER_CONVERSION_DELAY@
-    | PIGBFilterCountry
-      -- ^ @FILTER_COUNTRY@
-    | PIGBFilterCreativeId
-      -- ^ @FILTER_CREATIVE_ID@
-    | PIGBFilterCreativeSize
-      -- ^ @FILTER_CREATIVE_SIZE@
-    | PIGBFilterCreativeType
-      -- ^ @FILTER_CREATIVE_TYPE@
-    | PIGBFilterDataProvider
-      -- ^ @FILTER_DATA_PROVIDER@
-    | PIGBFilterDate
-      -- ^ @FILTER_DATE@
-    | PIGBFilterDayOfWeek
-      -- ^ @FILTER_DAY_OF_WEEK@
-    | PIGBFilterDma
-      -- ^ @FILTER_DMA@
-    | PIGBFilterExchangeId
-      -- ^ @FILTER_EXCHANGE_ID@
-    | PIGBFilterFloodlightPixelId
-      -- ^ @FILTER_FLOODLIGHT_PIXEL_ID@
-    | PIGBFilterGender
-      -- ^ @FILTER_GENDER@
-    | PIGBFilterInsertionOrder
-      -- ^ @FILTER_INSERTION_ORDER@
-    | PIGBFilterInventoryFormat
-      -- ^ @FILTER_INVENTORY_FORMAT@
-    | PIGBFilterInventorySource
-      -- ^ @FILTER_INVENTORY_SOURCE@
-    | PIGBFilterInventorySourceType
-      -- ^ @FILTER_INVENTORY_SOURCE_TYPE@
-    | PIGBFilterKeyword
-      -- ^ @FILTER_KEYWORD@
-    | PIGBFilterLineItem
-      -- ^ @FILTER_LINE_ITEM@
-    | PIGBFilterLineItemDailyFrequency
-      -- ^ @FILTER_LINE_ITEM_DAILY_FREQUENCY@
-    | PIGBFilterLineItemLifetimeFrequency
-      -- ^ @FILTER_LINE_ITEM_LIFETIME_FREQUENCY@
-    | PIGBFilterLineItemType
-      -- ^ @FILTER_LINE_ITEM_TYPE@
-    | PIGBFilterMobileDeviceMake
-      -- ^ @FILTER_MOBILE_DEVICE_MAKE@
-    | PIGBFilterMobileDeviceMakeModel
-      -- ^ @FILTER_MOBILE_DEVICE_MAKE_MODEL@
-    | PIGBFilterMobileDeviceType
-      -- ^ @FILTER_MOBILE_DEVICE_TYPE@
-    | PIGBFilterMobileGeo
-      -- ^ @FILTER_MOBILE_GEO@
-    | PIGBFilterMonth
-      -- ^ @FILTER_MONTH@
-    | PIGBFilterMraidSupport
-      -- ^ @FILTER_MRAID_SUPPORT@
-    | PIGBFilterNielsenAge
-      -- ^ @FILTER_NIELSEN_AGE@
-    | PIGBFilterNielsenCountryCode
-      -- ^ @FILTER_NIELSEN_COUNTRY_CODE@
-    | PIGBFilterNielsenDeviceId
-      -- ^ @FILTER_NIELSEN_DEVICE_ID@
-    | PIGBFilterNielsenGender
-      -- ^ @FILTER_NIELSEN_GENDER@
-    | PIGBFilterOrderId
-      -- ^ @FILTER_ORDER_ID@
-    | PIGBFilterOs
-      -- ^ @FILTER_OS@
-    | PIGBFilterPageCategory
-      -- ^ @FILTER_PAGE_CATEGORY@
-    | PIGBFilterPageLayout
-      -- ^ @FILTER_PAGE_LAYOUT@
-    | PIGBFilterPartner
-      -- ^ @FILTER_PARTNER@
-    | PIGBFilterPartnerCurrency
-      -- ^ @FILTER_PARTNER_CURRENCY@
-    | PIGBFilterPublicInventory
-      -- ^ @FILTER_PUBLIC_INVENTORY@
-    | PIGBFilterQuarter
-      -- ^ @FILTER_QUARTER@
-    | PIGBFilterRegion
-      -- ^ @FILTER_REGION@
-    | PIGBFilterRegularChannelId
-      -- ^ @FILTER_REGULAR_CHANNEL_ID@
-    | PIGBFilterSiteId
-      -- ^ @FILTER_SITE_ID@
-    | PIGBFilterSiteLanguage
-      -- ^ @FILTER_SITE_LANGUAGE@
-    | PIGBFilterTargetedUserList
-      -- ^ @FILTER_TARGETED_USER_LIST@
-    | PIGBFilterTimeOfDay
-      -- ^ @FILTER_TIME_OF_DAY@
-    | PIGBFilterTrueviewConversionType
-      -- ^ @FILTER_TRUEVIEW_CONVERSION_TYPE@
-    | PIGBFilterUnknown
-      -- ^ @FILTER_UNKNOWN@
-    | PIGBFilterUserList
-      -- ^ @FILTER_USER_LIST@
-    | PIGBFilterUserListFirstParty
-      -- ^ @FILTER_USER_LIST_FIRST_PARTY@
-    | PIGBFilterUserListThirdParty
-      -- ^ @FILTER_USER_LIST_THIRD_PARTY@
-    | PIGBFilterVideoAdPositionInStream
-      -- ^ @FILTER_VIDEO_AD_POSITION_IN_STREAM@
-    | PIGBFilterVideoCompanionSize
-      -- ^ @FILTER_VIDEO_COMPANION_SIZE@
-    | PIGBFilterVideoCompanionType
-      -- ^ @FILTER_VIDEO_COMPANION_TYPE@
-    | PIGBFilterVideoCreativeDuration
-      -- ^ @FILTER_VIDEO_CREATIVE_DURATION@
-    | PIGBFilterVideoCreativeDurationSkippable
-      -- ^ @FILTER_VIDEO_CREATIVE_DURATION_SKIPPABLE@
-    | PIGBFilterVideoDurationSeconds
-      -- ^ @FILTER_VIDEO_DURATION_SECONDS@
-    | PIGBFilterVideoFormatSupport
-      -- ^ @FILTER_VIDEO_FORMAT_SUPPORT@
-    | PIGBFilterVideoInventoryType
-      -- ^ @FILTER_VIDEO_INVENTORY_TYPE@
-    | PIGBFilterVideoPlayerSize
-      -- ^ @FILTER_VIDEO_PLAYER_SIZE@
-    | PIGBFilterVideoRatingTier
-      -- ^ @FILTER_VIDEO_RATING_TIER@
-    | PIGBFilterVideoSkippableSupport
-      -- ^ @FILTER_VIDEO_SKIPPABLE_SUPPORT@
-    | PIGBFilterVideoVpaidSupport
-      -- ^ @FILTER_VIDEO_VPAID_SUPPORT@
-    | PIGBFilterWeek
-      -- ^ @FILTER_WEEK@
-    | PIGBFilterYear
-      -- ^ @FILTER_YEAR@
-    | PIGBFilterYoutubeVertical
-      -- ^ @FILTER_YOUTUBE_VERTICAL@
-    | PIGBFilterZipCode
-      -- ^ @FILTER_ZIP_CODE@
+-- | The file type of the report.
+data ReportStatusFormat
+    = RSFCSV
+      -- ^ @CSV@
+    | RSFExcelCSV
+      -- ^ @EXCEL_CSV@
+    | RSFXlsx
+      -- ^ @XLSX@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable ParametersItemGroupBys
+instance Hashable ReportStatusFormat
 
-instance FromText ParametersItemGroupBys where
+instance FromText ReportStatusFormat where
     fromText = \case
-        "FILTER_ACTIVE_VIEW_EXPECTED_VIEWABILITY" -> Just PIGBFilterActiveViewExpectedViewability
-        "FILTER_ACTIVITY_ID" -> Just PIGBFilterActivityId
-        "FILTER_ADVERTISER" -> Just PIGBFilterAdvertiser
-        "FILTER_ADVERTISER_CURRENCY" -> Just PIGBFilterAdvertiserCurrency
-        "FILTER_ADVERTISER_TIMEZONE" -> Just PIGBFilterAdvertiserTimezone
-        "FILTER_AD_POSITION" -> Just PIGBFilterAdPosition
-        "FILTER_AGE" -> Just PIGBFilterAge
-        "FILTER_BRANDSAFE_CHANNEL_ID" -> Just PIGBFilterBrandsafeChannelId
-        "FILTER_BROWSER" -> Just PIGBFilterBrowser
-        "FILTER_CAMPAIGN_DAILY_FREQUENCY" -> Just PIGBFilterCampaignDailyFrequency
-        "FILTER_CARRIER" -> Just PIGBFilterCarrier
-        "FILTER_CHANNEL_ID" -> Just PIGBFilterChannelId
-        "FILTER_CITY" -> Just PIGBFilterCity
-        "FILTER_CONVERSION_DELAY" -> Just PIGBFilterConversionDelay
-        "FILTER_COUNTRY" -> Just PIGBFilterCountry
-        "FILTER_CREATIVE_ID" -> Just PIGBFilterCreativeId
-        "FILTER_CREATIVE_SIZE" -> Just PIGBFilterCreativeSize
-        "FILTER_CREATIVE_TYPE" -> Just PIGBFilterCreativeType
-        "FILTER_DATA_PROVIDER" -> Just PIGBFilterDataProvider
-        "FILTER_DATE" -> Just PIGBFilterDate
-        "FILTER_DAY_OF_WEEK" -> Just PIGBFilterDayOfWeek
-        "FILTER_DMA" -> Just PIGBFilterDma
-        "FILTER_EXCHANGE_ID" -> Just PIGBFilterExchangeId
-        "FILTER_FLOODLIGHT_PIXEL_ID" -> Just PIGBFilterFloodlightPixelId
-        "FILTER_GENDER" -> Just PIGBFilterGender
-        "FILTER_INSERTION_ORDER" -> Just PIGBFilterInsertionOrder
-        "FILTER_INVENTORY_FORMAT" -> Just PIGBFilterInventoryFormat
-        "FILTER_INVENTORY_SOURCE" -> Just PIGBFilterInventorySource
-        "FILTER_INVENTORY_SOURCE_TYPE" -> Just PIGBFilterInventorySourceType
-        "FILTER_KEYWORD" -> Just PIGBFilterKeyword
-        "FILTER_LINE_ITEM" -> Just PIGBFilterLineItem
-        "FILTER_LINE_ITEM_DAILY_FREQUENCY" -> Just PIGBFilterLineItemDailyFrequency
-        "FILTER_LINE_ITEM_LIFETIME_FREQUENCY" -> Just PIGBFilterLineItemLifetimeFrequency
-        "FILTER_LINE_ITEM_TYPE" -> Just PIGBFilterLineItemType
-        "FILTER_MOBILE_DEVICE_MAKE" -> Just PIGBFilterMobileDeviceMake
-        "FILTER_MOBILE_DEVICE_MAKE_MODEL" -> Just PIGBFilterMobileDeviceMakeModel
-        "FILTER_MOBILE_DEVICE_TYPE" -> Just PIGBFilterMobileDeviceType
-        "FILTER_MOBILE_GEO" -> Just PIGBFilterMobileGeo
-        "FILTER_MONTH" -> Just PIGBFilterMonth
-        "FILTER_MRAID_SUPPORT" -> Just PIGBFilterMraidSupport
-        "FILTER_NIELSEN_AGE" -> Just PIGBFilterNielsenAge
-        "FILTER_NIELSEN_COUNTRY_CODE" -> Just PIGBFilterNielsenCountryCode
-        "FILTER_NIELSEN_DEVICE_ID" -> Just PIGBFilterNielsenDeviceId
-        "FILTER_NIELSEN_GENDER" -> Just PIGBFilterNielsenGender
-        "FILTER_ORDER_ID" -> Just PIGBFilterOrderId
-        "FILTER_OS" -> Just PIGBFilterOs
-        "FILTER_PAGE_CATEGORY" -> Just PIGBFilterPageCategory
-        "FILTER_PAGE_LAYOUT" -> Just PIGBFilterPageLayout
-        "FILTER_PARTNER" -> Just PIGBFilterPartner
-        "FILTER_PARTNER_CURRENCY" -> Just PIGBFilterPartnerCurrency
-        "FILTER_PUBLIC_INVENTORY" -> Just PIGBFilterPublicInventory
-        "FILTER_QUARTER" -> Just PIGBFilterQuarter
-        "FILTER_REGION" -> Just PIGBFilterRegion
-        "FILTER_REGULAR_CHANNEL_ID" -> Just PIGBFilterRegularChannelId
-        "FILTER_SITE_ID" -> Just PIGBFilterSiteId
-        "FILTER_SITE_LANGUAGE" -> Just PIGBFilterSiteLanguage
-        "FILTER_TARGETED_USER_LIST" -> Just PIGBFilterTargetedUserList
-        "FILTER_TIME_OF_DAY" -> Just PIGBFilterTimeOfDay
-        "FILTER_TRUEVIEW_CONVERSION_TYPE" -> Just PIGBFilterTrueviewConversionType
-        "FILTER_UNKNOWN" -> Just PIGBFilterUnknown
-        "FILTER_USER_LIST" -> Just PIGBFilterUserList
-        "FILTER_USER_LIST_FIRST_PARTY" -> Just PIGBFilterUserListFirstParty
-        "FILTER_USER_LIST_THIRD_PARTY" -> Just PIGBFilterUserListThirdParty
-        "FILTER_VIDEO_AD_POSITION_IN_STREAM" -> Just PIGBFilterVideoAdPositionInStream
-        "FILTER_VIDEO_COMPANION_SIZE" -> Just PIGBFilterVideoCompanionSize
-        "FILTER_VIDEO_COMPANION_TYPE" -> Just PIGBFilterVideoCompanionType
-        "FILTER_VIDEO_CREATIVE_DURATION" -> Just PIGBFilterVideoCreativeDuration
-        "FILTER_VIDEO_CREATIVE_DURATION_SKIPPABLE" -> Just PIGBFilterVideoCreativeDurationSkippable
-        "FILTER_VIDEO_DURATION_SECONDS" -> Just PIGBFilterVideoDurationSeconds
-        "FILTER_VIDEO_FORMAT_SUPPORT" -> Just PIGBFilterVideoFormatSupport
-        "FILTER_VIDEO_INVENTORY_TYPE" -> Just PIGBFilterVideoInventoryType
-        "FILTER_VIDEO_PLAYER_SIZE" -> Just PIGBFilterVideoPlayerSize
-        "FILTER_VIDEO_RATING_TIER" -> Just PIGBFilterVideoRatingTier
-        "FILTER_VIDEO_SKIPPABLE_SUPPORT" -> Just PIGBFilterVideoSkippableSupport
-        "FILTER_VIDEO_VPAID_SUPPORT" -> Just PIGBFilterVideoVpaidSupport
-        "FILTER_WEEK" -> Just PIGBFilterWeek
-        "FILTER_YEAR" -> Just PIGBFilterYear
-        "FILTER_YOUTUBE_VERTICAL" -> Just PIGBFilterYoutubeVertical
-        "FILTER_ZIP_CODE" -> Just PIGBFilterZipCode
+        "CSV" -> Just RSFCSV
+        "EXCEL_CSV" -> Just RSFExcelCSV
+        "XLSX" -> Just RSFXlsx
         _ -> Nothing
 
-instance ToText ParametersItemGroupBys where
+instance ToText ReportStatusFormat where
     toText = \case
-        PIGBFilterActiveViewExpectedViewability -> "FILTER_ACTIVE_VIEW_EXPECTED_VIEWABILITY"
-        PIGBFilterActivityId -> "FILTER_ACTIVITY_ID"
-        PIGBFilterAdvertiser -> "FILTER_ADVERTISER"
-        PIGBFilterAdvertiserCurrency -> "FILTER_ADVERTISER_CURRENCY"
-        PIGBFilterAdvertiserTimezone -> "FILTER_ADVERTISER_TIMEZONE"
-        PIGBFilterAdPosition -> "FILTER_AD_POSITION"
-        PIGBFilterAge -> "FILTER_AGE"
-        PIGBFilterBrandsafeChannelId -> "FILTER_BRANDSAFE_CHANNEL_ID"
-        PIGBFilterBrowser -> "FILTER_BROWSER"
-        PIGBFilterCampaignDailyFrequency -> "FILTER_CAMPAIGN_DAILY_FREQUENCY"
-        PIGBFilterCarrier -> "FILTER_CARRIER"
-        PIGBFilterChannelId -> "FILTER_CHANNEL_ID"
-        PIGBFilterCity -> "FILTER_CITY"
-        PIGBFilterConversionDelay -> "FILTER_CONVERSION_DELAY"
-        PIGBFilterCountry -> "FILTER_COUNTRY"
-        PIGBFilterCreativeId -> "FILTER_CREATIVE_ID"
-        PIGBFilterCreativeSize -> "FILTER_CREATIVE_SIZE"
-        PIGBFilterCreativeType -> "FILTER_CREATIVE_TYPE"
-        PIGBFilterDataProvider -> "FILTER_DATA_PROVIDER"
-        PIGBFilterDate -> "FILTER_DATE"
-        PIGBFilterDayOfWeek -> "FILTER_DAY_OF_WEEK"
-        PIGBFilterDma -> "FILTER_DMA"
-        PIGBFilterExchangeId -> "FILTER_EXCHANGE_ID"
-        PIGBFilterFloodlightPixelId -> "FILTER_FLOODLIGHT_PIXEL_ID"
-        PIGBFilterGender -> "FILTER_GENDER"
-        PIGBFilterInsertionOrder -> "FILTER_INSERTION_ORDER"
-        PIGBFilterInventoryFormat -> "FILTER_INVENTORY_FORMAT"
-        PIGBFilterInventorySource -> "FILTER_INVENTORY_SOURCE"
-        PIGBFilterInventorySourceType -> "FILTER_INVENTORY_SOURCE_TYPE"
-        PIGBFilterKeyword -> "FILTER_KEYWORD"
-        PIGBFilterLineItem -> "FILTER_LINE_ITEM"
-        PIGBFilterLineItemDailyFrequency -> "FILTER_LINE_ITEM_DAILY_FREQUENCY"
-        PIGBFilterLineItemLifetimeFrequency -> "FILTER_LINE_ITEM_LIFETIME_FREQUENCY"
-        PIGBFilterLineItemType -> "FILTER_LINE_ITEM_TYPE"
-        PIGBFilterMobileDeviceMake -> "FILTER_MOBILE_DEVICE_MAKE"
-        PIGBFilterMobileDeviceMakeModel -> "FILTER_MOBILE_DEVICE_MAKE_MODEL"
-        PIGBFilterMobileDeviceType -> "FILTER_MOBILE_DEVICE_TYPE"
-        PIGBFilterMobileGeo -> "FILTER_MOBILE_GEO"
-        PIGBFilterMonth -> "FILTER_MONTH"
-        PIGBFilterMraidSupport -> "FILTER_MRAID_SUPPORT"
-        PIGBFilterNielsenAge -> "FILTER_NIELSEN_AGE"
-        PIGBFilterNielsenCountryCode -> "FILTER_NIELSEN_COUNTRY_CODE"
-        PIGBFilterNielsenDeviceId -> "FILTER_NIELSEN_DEVICE_ID"
-        PIGBFilterNielsenGender -> "FILTER_NIELSEN_GENDER"
-        PIGBFilterOrderId -> "FILTER_ORDER_ID"
-        PIGBFilterOs -> "FILTER_OS"
-        PIGBFilterPageCategory -> "FILTER_PAGE_CATEGORY"
-        PIGBFilterPageLayout -> "FILTER_PAGE_LAYOUT"
-        PIGBFilterPartner -> "FILTER_PARTNER"
-        PIGBFilterPartnerCurrency -> "FILTER_PARTNER_CURRENCY"
-        PIGBFilterPublicInventory -> "FILTER_PUBLIC_INVENTORY"
-        PIGBFilterQuarter -> "FILTER_QUARTER"
-        PIGBFilterRegion -> "FILTER_REGION"
-        PIGBFilterRegularChannelId -> "FILTER_REGULAR_CHANNEL_ID"
-        PIGBFilterSiteId -> "FILTER_SITE_ID"
-        PIGBFilterSiteLanguage -> "FILTER_SITE_LANGUAGE"
-        PIGBFilterTargetedUserList -> "FILTER_TARGETED_USER_LIST"
-        PIGBFilterTimeOfDay -> "FILTER_TIME_OF_DAY"
-        PIGBFilterTrueviewConversionType -> "FILTER_TRUEVIEW_CONVERSION_TYPE"
-        PIGBFilterUnknown -> "FILTER_UNKNOWN"
-        PIGBFilterUserList -> "FILTER_USER_LIST"
-        PIGBFilterUserListFirstParty -> "FILTER_USER_LIST_FIRST_PARTY"
-        PIGBFilterUserListThirdParty -> "FILTER_USER_LIST_THIRD_PARTY"
-        PIGBFilterVideoAdPositionInStream -> "FILTER_VIDEO_AD_POSITION_IN_STREAM"
-        PIGBFilterVideoCompanionSize -> "FILTER_VIDEO_COMPANION_SIZE"
-        PIGBFilterVideoCompanionType -> "FILTER_VIDEO_COMPANION_TYPE"
-        PIGBFilterVideoCreativeDuration -> "FILTER_VIDEO_CREATIVE_DURATION"
-        PIGBFilterVideoCreativeDurationSkippable -> "FILTER_VIDEO_CREATIVE_DURATION_SKIPPABLE"
-        PIGBFilterVideoDurationSeconds -> "FILTER_VIDEO_DURATION_SECONDS"
-        PIGBFilterVideoFormatSupport -> "FILTER_VIDEO_FORMAT_SUPPORT"
-        PIGBFilterVideoInventoryType -> "FILTER_VIDEO_INVENTORY_TYPE"
-        PIGBFilterVideoPlayerSize -> "FILTER_VIDEO_PLAYER_SIZE"
-        PIGBFilterVideoRatingTier -> "FILTER_VIDEO_RATING_TIER"
-        PIGBFilterVideoSkippableSupport -> "FILTER_VIDEO_SKIPPABLE_SUPPORT"
-        PIGBFilterVideoVpaidSupport -> "FILTER_VIDEO_VPAID_SUPPORT"
-        PIGBFilterWeek -> "FILTER_WEEK"
-        PIGBFilterYear -> "FILTER_YEAR"
-        PIGBFilterYoutubeVertical -> "FILTER_YOUTUBE_VERTICAL"
-        PIGBFilterZipCode -> "FILTER_ZIP_CODE"
+        RSFCSV -> "CSV"
+        RSFExcelCSV -> "EXCEL_CSV"
+        RSFXlsx -> "XLSX"
 
-instance FromJSON ParametersItemGroupBys where
-    parseJSON = parseJSONText "ParametersItemGroupBys"
+instance FromJSON ReportStatusFormat where
+    parseJSON = parseJSONText "ReportStatusFormat"
 
-instance ToJSON ParametersItemGroupBys where
+instance ToJSON ReportStatusFormat where
+    toJSON = toJSONText
+
+-- | Format in which the line items will be returned. Default to CSV.
+data DownloadLineItemsRequestFormat
+    = DLIRFCSV
+      -- ^ @CSV@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable DownloadLineItemsRequestFormat
+
+instance FromText DownloadLineItemsRequestFormat where
+    fromText = \case
+        "CSV" -> Just DLIRFCSV
+        _ -> Nothing
+
+instance ToText DownloadLineItemsRequestFormat where
+    toText = \case
+        DLIRFCSV -> "CSV"
+
+instance FromJSON DownloadLineItemsRequestFormat where
+    parseJSON = parseJSONText "DownloadLineItemsRequestFormat"
+
+instance ToJSON DownloadLineItemsRequestFormat where
+    toJSON = toJSONText
+
+-- | How often the query is run.
+data QueryScheduleFrequency
+    = Daily
+      -- ^ @DAILY@
+    | Monthly
+      -- ^ @MONTHLY@
+    | OneTime
+      -- ^ @ONE_TIME@
+    | Quarterly
+      -- ^ @QUARTERLY@
+    | SemiMonthly
+      -- ^ @SEMI_MONTHLY@
+    | Weekly
+      -- ^ @WEEKLY@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable QueryScheduleFrequency
+
+instance FromText QueryScheduleFrequency where
+    fromText = \case
+        "DAILY" -> Just Daily
+        "MONTHLY" -> Just Monthly
+        "ONE_TIME" -> Just OneTime
+        "QUARTERLY" -> Just Quarterly
+        "SEMI_MONTHLY" -> Just SemiMonthly
+        "WEEKLY" -> Just Weekly
+        _ -> Nothing
+
+instance ToText QueryScheduleFrequency where
+    toText = \case
+        Daily -> "DAILY"
+        Monthly -> "MONTHLY"
+        OneTime -> "ONE_TIME"
+        Quarterly -> "QUARTERLY"
+        SemiMonthly -> "SEMI_MONTHLY"
+        Weekly -> "WEEKLY"
+
+instance FromJSON QueryScheduleFrequency where
+    parseJSON = parseJSONText "QueryScheduleFrequency"
+
+instance ToJSON QueryScheduleFrequency where
     toJSON = toJSONText
 
 data ParametersItemMetrics
-    = PIMMetricBidRequests
+    = MetricBidRequests
       -- ^ @METRIC_BID_REQUESTS@
-    | PIMMetricBillableCostAdvertiser
+    | MetricBillableCostAdvertiser
       -- ^ @METRIC_BILLABLE_COST_ADVERTISER@
-    | PIMMetricBillableCostPartner
+    | MetricBillableCostPartner
       -- ^ @METRIC_BILLABLE_COST_PARTNER@
-    | PIMMetricBillableCostUsd
+    | MetricBillableCostUsd
       -- ^ @METRIC_BILLABLE_COST_USD@
-    | PIMMetricClicks
+    | MetricClicks
       -- ^ @METRIC_CLICKS@
-    | PIMMetricClickToPostClickConversionRate
+    | MetricClickToPostClickConversionRate
       -- ^ @METRIC_CLICK_TO_POST_CLICK_CONVERSION_RATE@
-    | PIMMetricComscoreVceAudienceAvgFrequency
+    | MetricComscoreVceAudienceAvgFrequency
       -- ^ @METRIC_COMSCORE_VCE_AUDIENCE_AVG_FREQUENCY@
-    | PIMMetricComscoreVceAudienceImpressions
+    | MetricComscoreVceAudienceImpressions
       -- ^ @METRIC_COMSCORE_VCE_AUDIENCE_IMPRESSIONS@
-    | PIMMetricComscoreVceAudienceImpressionsShare
+    | MetricComscoreVceAudienceImpressionsShare
       -- ^ @METRIC_COMSCORE_VCE_AUDIENCE_IMPRESSIONS_SHARE@
-    | PIMMetricComscoreVceAudienceReachPct
+    | MetricComscoreVceAudienceReachPct
       -- ^ @METRIC_COMSCORE_VCE_AUDIENCE_REACH_PCT@
-    | PIMMetricComscoreVceAudienceSharePct
+    | MetricComscoreVceAudienceSharePct
       -- ^ @METRIC_COMSCORE_VCE_AUDIENCE_SHARE_PCT@
-    | PIMMetricComscoreVceGrossRatingPoints
+    | MetricComscoreVceGrossRatingPoints
       -- ^ @METRIC_COMSCORE_VCE_GROSS_RATING_POINTS@
-    | PIMMetricComscoreVcePopulation
+    | MetricComscoreVcePopulation
       -- ^ @METRIC_COMSCORE_VCE_POPULATION@
-    | PIMMetricComscoreVceUniqueAudience
+    | MetricComscoreVceUniqueAudience
       -- ^ @METRIC_COMSCORE_VCE_UNIQUE_AUDIENCE@
-    | PIMMetricConversionsPerMille
+    | MetricConversionsPerMille
       -- ^ @METRIC_CONVERSIONS_PER_MILLE@
-    | PIMMetricCpmFEE1Advertiser
+    | MetricCpmFEE1Advertiser
       -- ^ @METRIC_CPM_FEE1_ADVERTISER@
-    | PIMMetricCpmFEE1Partner
+    | MetricCpmFEE1Partner
       -- ^ @METRIC_CPM_FEE1_PARTNER@
-    | PIMMetricCpmFEE1Usd
+    | MetricCpmFEE1Usd
       -- ^ @METRIC_CPM_FEE1_USD@
-    | PIMMetricCpmFEE2Advertiser
+    | MetricCpmFEE2Advertiser
       -- ^ @METRIC_CPM_FEE2_ADVERTISER@
-    | PIMMetricCpmFEE2Partner
+    | MetricCpmFEE2Partner
       -- ^ @METRIC_CPM_FEE2_PARTNER@
-    | PIMMetricCpmFEE2Usd
+    | MetricCpmFEE2Usd
       -- ^ @METRIC_CPM_FEE2_USD@
-    | PIMMetricCpmFEE3Advertiser
+    | MetricCpmFEE3Advertiser
       -- ^ @METRIC_CPM_FEE3_ADVERTISER@
-    | PIMMetricCpmFEE3Partner
+    | MetricCpmFEE3Partner
       -- ^ @METRIC_CPM_FEE3_PARTNER@
-    | PIMMetricCpmFEE3Usd
+    | MetricCpmFEE3Usd
       -- ^ @METRIC_CPM_FEE3_USD@
-    | PIMMetricCpmFEE4Advertiser
+    | MetricCpmFEE4Advertiser
       -- ^ @METRIC_CPM_FEE4_ADVERTISER@
-    | PIMMetricCpmFEE4Partner
+    | MetricCpmFEE4Partner
       -- ^ @METRIC_CPM_FEE4_PARTNER@
-    | PIMMetricCpmFEE4Usd
+    | MetricCpmFEE4Usd
       -- ^ @METRIC_CPM_FEE4_USD@
-    | PIMMetricCpmFEE5Advertiser
+    | MetricCpmFEE5Advertiser
       -- ^ @METRIC_CPM_FEE5_ADVERTISER@
-    | PIMMetricCpmFEE5Partner
+    | MetricCpmFEE5Partner
       -- ^ @METRIC_CPM_FEE5_PARTNER@
-    | PIMMetricCpmFEE5Usd
+    | MetricCpmFEE5Usd
       -- ^ @METRIC_CPM_FEE5_USD@
-    | PIMMetricCtr
+    | MetricCtr
       -- ^ @METRIC_CTR@
-    | PIMMetricDataCostAdvertiser
+    | MetricDataCostAdvertiser
       -- ^ @METRIC_DATA_COST_ADVERTISER@
-    | PIMMetricDataCostPartner
+    | MetricDataCostPartner
       -- ^ @METRIC_DATA_COST_PARTNER@
-    | PIMMetricDataCostUsd
+    | MetricDataCostUsd
       -- ^ @METRIC_DATA_COST_USD@
-    | PIMMetricFEE10Advertiser
+    | MetricFEE10Advertiser
       -- ^ @METRIC_FEE10_ADVERTISER@
-    | PIMMetricFEE10Partner
+    | MetricFEE10Partner
       -- ^ @METRIC_FEE10_PARTNER@
-    | PIMMetricFEE10Usd
+    | MetricFEE10Usd
       -- ^ @METRIC_FEE10_USD@
-    | PIMMetricFEE11Advertiser
+    | MetricFEE11Advertiser
       -- ^ @METRIC_FEE11_ADVERTISER@
-    | PIMMetricFEE11Partner
+    | MetricFEE11Partner
       -- ^ @METRIC_FEE11_PARTNER@
-    | PIMMetricFEE11Usd
+    | MetricFEE11Usd
       -- ^ @METRIC_FEE11_USD@
-    | PIMMetricFEE12Advertiser
+    | MetricFEE12Advertiser
       -- ^ @METRIC_FEE12_ADVERTISER@
-    | PIMMetricFEE12Partner
+    | MetricFEE12Partner
       -- ^ @METRIC_FEE12_PARTNER@
-    | PIMMetricFEE12Usd
+    | MetricFEE12Usd
       -- ^ @METRIC_FEE12_USD@
-    | PIMMetricFEE13Advertiser
+    | MetricFEE13Advertiser
       -- ^ @METRIC_FEE13_ADVERTISER@
-    | PIMMetricFEE13Partner
+    | MetricFEE13Partner
       -- ^ @METRIC_FEE13_PARTNER@
-    | PIMMetricFEE13Usd
+    | MetricFEE13Usd
       -- ^ @METRIC_FEE13_USD@
-    | PIMMetricFEE14Advertiser
+    | MetricFEE14Advertiser
       -- ^ @METRIC_FEE14_ADVERTISER@
-    | PIMMetricFEE14Partner
+    | MetricFEE14Partner
       -- ^ @METRIC_FEE14_PARTNER@
-    | PIMMetricFEE14Usd
+    | MetricFEE14Usd
       -- ^ @METRIC_FEE14_USD@
-    | PIMMetricFEE15Advertiser
+    | MetricFEE15Advertiser
       -- ^ @METRIC_FEE15_ADVERTISER@
-    | PIMMetricFEE15Partner
+    | MetricFEE15Partner
       -- ^ @METRIC_FEE15_PARTNER@
-    | PIMMetricFEE15Usd
+    | MetricFEE15Usd
       -- ^ @METRIC_FEE15_USD@
-    | PIMMetricFEE16Advertiser
+    | MetricFEE16Advertiser
       -- ^ @METRIC_FEE16_ADVERTISER@
-    | PIMMetricFEE16Partner
+    | MetricFEE16Partner
       -- ^ @METRIC_FEE16_PARTNER@
-    | PIMMetricFEE16Usd
+    | MetricFEE16Usd
       -- ^ @METRIC_FEE16_USD@
-    | PIMMetricFEE17Advertiser
+    | MetricFEE17Advertiser
       -- ^ @METRIC_FEE17_ADVERTISER@
-    | PIMMetricFEE17Partner
+    | MetricFEE17Partner
       -- ^ @METRIC_FEE17_PARTNER@
-    | PIMMetricFEE17Usd
+    | MetricFEE17Usd
       -- ^ @METRIC_FEE17_USD@
-    | PIMMetricFEE18Advertiser
+    | MetricFEE18Advertiser
       -- ^ @METRIC_FEE18_ADVERTISER@
-    | PIMMetricFEE18Partner
+    | MetricFEE18Partner
       -- ^ @METRIC_FEE18_PARTNER@
-    | PIMMetricFEE18Usd
+    | MetricFEE18Usd
       -- ^ @METRIC_FEE18_USD@
-    | PIMMetricFEE19Advertiser
+    | MetricFEE19Advertiser
       -- ^ @METRIC_FEE19_ADVERTISER@
-    | PIMMetricFEE19Partner
+    | MetricFEE19Partner
       -- ^ @METRIC_FEE19_PARTNER@
-    | PIMMetricFEE19Usd
+    | MetricFEE19Usd
       -- ^ @METRIC_FEE19_USD@
-    | PIMMetricFEE20Advertiser
+    | MetricFEE20Advertiser
       -- ^ @METRIC_FEE20_ADVERTISER@
-    | PIMMetricFEE20Partner
+    | MetricFEE20Partner
       -- ^ @METRIC_FEE20_PARTNER@
-    | PIMMetricFEE20Usd
+    | MetricFEE20Usd
       -- ^ @METRIC_FEE20_USD@
-    | PIMMetricFEE2Advertiser
+    | MetricFEE2Advertiser
       -- ^ @METRIC_FEE2_ADVERTISER@
-    | PIMMetricFEE2Partner
+    | MetricFEE2Partner
       -- ^ @METRIC_FEE2_PARTNER@
-    | PIMMetricFEE2Usd
+    | MetricFEE2Usd
       -- ^ @METRIC_FEE2_USD@
-    | PIMMetricFEE3Advertiser
+    | MetricFEE3Advertiser
       -- ^ @METRIC_FEE3_ADVERTISER@
-    | PIMMetricFEE3Partner
+    | MetricFEE3Partner
       -- ^ @METRIC_FEE3_PARTNER@
-    | PIMMetricFEE3Usd
+    | MetricFEE3Usd
       -- ^ @METRIC_FEE3_USD@
-    | PIMMetricFEE4Advertiser
+    | MetricFEE4Advertiser
       -- ^ @METRIC_FEE4_ADVERTISER@
-    | PIMMetricFEE4Partner
+    | MetricFEE4Partner
       -- ^ @METRIC_FEE4_PARTNER@
-    | PIMMetricFEE4Usd
+    | MetricFEE4Usd
       -- ^ @METRIC_FEE4_USD@
-    | PIMMetricFEE5Advertiser
+    | MetricFEE5Advertiser
       -- ^ @METRIC_FEE5_ADVERTISER@
-    | PIMMetricFEE5Partner
+    | MetricFEE5Partner
       -- ^ @METRIC_FEE5_PARTNER@
-    | PIMMetricFEE5Usd
+    | MetricFEE5Usd
       -- ^ @METRIC_FEE5_USD@
-    | PIMMetricFEE6Advertiser
+    | MetricFEE6Advertiser
       -- ^ @METRIC_FEE6_ADVERTISER@
-    | PIMMetricFEE6Partner
+    | MetricFEE6Partner
       -- ^ @METRIC_FEE6_PARTNER@
-    | PIMMetricFEE6Usd
+    | MetricFEE6Usd
       -- ^ @METRIC_FEE6_USD@
-    | PIMMetricFEE7Advertiser
+    | MetricFEE7Advertiser
       -- ^ @METRIC_FEE7_ADVERTISER@
-    | PIMMetricFEE7Partner
+    | MetricFEE7Partner
       -- ^ @METRIC_FEE7_PARTNER@
-    | PIMMetricFEE7Usd
+    | MetricFEE7Usd
       -- ^ @METRIC_FEE7_USD@
-    | PIMMetricFEE8Advertiser
+    | MetricFEE8Advertiser
       -- ^ @METRIC_FEE8_ADVERTISER@
-    | PIMMetricFEE8Partner
+    | MetricFEE8Partner
       -- ^ @METRIC_FEE8_PARTNER@
-    | PIMMetricFEE8Usd
+    | MetricFEE8Usd
       -- ^ @METRIC_FEE8_USD@
-    | PIMMetricFEE9Advertiser
+    | MetricFEE9Advertiser
       -- ^ @METRIC_FEE9_ADVERTISER@
-    | PIMMetricFEE9Partner
+    | MetricFEE9Partner
       -- ^ @METRIC_FEE9_PARTNER@
-    | PIMMetricFEE9Usd
+    | MetricFEE9Usd
       -- ^ @METRIC_FEE9_USD@
-    | PIMMetricImpressions
+    | MetricImpressions
       -- ^ @METRIC_IMPRESSIONS@
-    | PIMMetricImpressionsToConversionRate
+    | MetricImpressionsToConversionRate
       -- ^ @METRIC_IMPRESSIONS_TO_CONVERSION_RATE@
-    | PIMMetricLastClicks
+    | MetricLastClicks
       -- ^ @METRIC_LAST_CLICKS@
-    | PIMMetricLastImpressions
+    | MetricLastImpressions
       -- ^ @METRIC_LAST_IMPRESSIONS@
-    | PIMMetricMediaCostAdvertiser
+    | MetricMediaCostAdvertiser
       -- ^ @METRIC_MEDIA_COST_ADVERTISER@
-    | PIMMetricMediaCostEcpapcAdvertiser
+    | MetricMediaCostEcpapcAdvertiser
       -- ^ @METRIC_MEDIA_COST_ECPAPC_ADVERTISER@
-    | PIMMetricMediaCostEcpapcPartner
+    | MetricMediaCostEcpapcPartner
       -- ^ @METRIC_MEDIA_COST_ECPAPC_PARTNER@
-    | PIMMetricMediaCostEcpapcUsd
+    | MetricMediaCostEcpapcUsd
       -- ^ @METRIC_MEDIA_COST_ECPAPC_USD@
-    | PIMMetricMediaCostEcpapvAdvertiser
+    | MetricMediaCostEcpapvAdvertiser
       -- ^ @METRIC_MEDIA_COST_ECPAPV_ADVERTISER@
-    | PIMMetricMediaCostEcpapvPartner
+    | MetricMediaCostEcpapvPartner
       -- ^ @METRIC_MEDIA_COST_ECPAPV_PARTNER@
-    | PIMMetricMediaCostEcpapvUsd
+    | MetricMediaCostEcpapvUsd
       -- ^ @METRIC_MEDIA_COST_ECPAPV_USD@
-    | PIMMetricMediaCostEcpaAdvertiser
+    | MetricMediaCostEcpaAdvertiser
       -- ^ @METRIC_MEDIA_COST_ECPA_ADVERTISER@
-    | PIMMetricMediaCostEcpaPartner
+    | MetricMediaCostEcpaPartner
       -- ^ @METRIC_MEDIA_COST_ECPA_PARTNER@
-    | PIMMetricMediaCostEcpaUsd
+    | MetricMediaCostEcpaUsd
       -- ^ @METRIC_MEDIA_COST_ECPA_USD@
-    | PIMMetricMediaCostEcpcvAdvertiser
+    | MetricMediaCostEcpcvAdvertiser
       -- ^ @METRIC_MEDIA_COST_ECPCV_ADVERTISER@
-    | PIMMetricMediaCostEcpcvPartner
+    | MetricMediaCostEcpcvPartner
       -- ^ @METRIC_MEDIA_COST_ECPCV_PARTNER@
-    | PIMMetricMediaCostEcpcvUsd
+    | MetricMediaCostEcpcvUsd
       -- ^ @METRIC_MEDIA_COST_ECPCV_USD@
-    | PIMMetricMediaCostEcpcAdvertiser
+    | MetricMediaCostEcpcAdvertiser
       -- ^ @METRIC_MEDIA_COST_ECPC_ADVERTISER@
-    | PIMMetricMediaCostEcpcPartner
+    | MetricMediaCostEcpcPartner
       -- ^ @METRIC_MEDIA_COST_ECPC_PARTNER@
-    | PIMMetricMediaCostEcpcUsd
+    | MetricMediaCostEcpcUsd
       -- ^ @METRIC_MEDIA_COST_ECPC_USD@
-    | PIMMetricMediaCostEcpmAdvertiser
+    | MetricMediaCostEcpmAdvertiser
       -- ^ @METRIC_MEDIA_COST_ECPM_ADVERTISER@
-    | PIMMetricMediaCostEcpmPartner
+    | MetricMediaCostEcpmPartner
       -- ^ @METRIC_MEDIA_COST_ECPM_PARTNER@
-    | PIMMetricMediaCostEcpmUsd
+    | MetricMediaCostEcpmUsd
       -- ^ @METRIC_MEDIA_COST_ECPM_USD@
-    | PIMMetricMediaCostPartner
+    | MetricMediaCostPartner
       -- ^ @METRIC_MEDIA_COST_PARTNER@
-    | PIMMetricMediaCostUsd
+    | MetricMediaCostUsd
       -- ^ @METRIC_MEDIA_COST_USD@
-    | PIMMetricMediaFEE1Advertiser
+    | MetricMediaFEE1Advertiser
       -- ^ @METRIC_MEDIA_FEE1_ADVERTISER@
-    | PIMMetricMediaFEE1Partner
+    | MetricMediaFEE1Partner
       -- ^ @METRIC_MEDIA_FEE1_PARTNER@
-    | PIMMetricMediaFEE1Usd
+    | MetricMediaFEE1Usd
       -- ^ @METRIC_MEDIA_FEE1_USD@
-    | PIMMetricMediaFEE2Advertiser
+    | MetricMediaFEE2Advertiser
       -- ^ @METRIC_MEDIA_FEE2_ADVERTISER@
-    | PIMMetricMediaFEE2Partner
+    | MetricMediaFEE2Partner
       -- ^ @METRIC_MEDIA_FEE2_PARTNER@
-    | PIMMetricMediaFEE2Usd
+    | MetricMediaFEE2Usd
       -- ^ @METRIC_MEDIA_FEE2_USD@
-    | PIMMetricMediaFEE3Advertiser
+    | MetricMediaFEE3Advertiser
       -- ^ @METRIC_MEDIA_FEE3_ADVERTISER@
-    | PIMMetricMediaFEE3Partner
+    | MetricMediaFEE3Partner
       -- ^ @METRIC_MEDIA_FEE3_PARTNER@
-    | PIMMetricMediaFEE3Usd
+    | MetricMediaFEE3Usd
       -- ^ @METRIC_MEDIA_FEE3_USD@
-    | PIMMetricMediaFEE4Advertiser
+    | MetricMediaFEE4Advertiser
       -- ^ @METRIC_MEDIA_FEE4_ADVERTISER@
-    | PIMMetricMediaFEE4Partner
+    | MetricMediaFEE4Partner
       -- ^ @METRIC_MEDIA_FEE4_PARTNER@
-    | PIMMetricMediaFEE4Usd
+    | MetricMediaFEE4Usd
       -- ^ @METRIC_MEDIA_FEE4_USD@
-    | PIMMetricMediaFEE5Advertiser
+    | MetricMediaFEE5Advertiser
       -- ^ @METRIC_MEDIA_FEE5_ADVERTISER@
-    | PIMMetricMediaFEE5Partner
+    | MetricMediaFEE5Partner
       -- ^ @METRIC_MEDIA_FEE5_PARTNER@
-    | PIMMetricMediaFEE5Usd
+    | MetricMediaFEE5Usd
       -- ^ @METRIC_MEDIA_FEE5_USD@
-    | PIMMetricPixelLoads
+    | MetricPixelLoads
       -- ^ @METRIC_PIXEL_LOADS@
-    | PIMMetricPlatformFeeAdvertiser
+    | MetricPlatformFeeAdvertiser
       -- ^ @METRIC_PLATFORM_FEE_ADVERTISER@
-    | PIMMetricPlatformFeePartner
+    | MetricPlatformFeePartner
       -- ^ @METRIC_PLATFORM_FEE_PARTNER@
-    | PIMMetricPlatformFeeUsd
+    | MetricPlatformFeeUsd
       -- ^ @METRIC_PLATFORM_FEE_USD@
-    | PIMMetricPostClickDfaRevenue
+    | MetricPostClickDfaRevenue
       -- ^ @METRIC_POST_CLICK_DFA_REVENUE@
-    | PIMMetricPostViewDfaRevenue
+    | MetricPostViewDfaRevenue
       -- ^ @METRIC_POST_VIEW_DFA_REVENUE@
-    | PIMMetricProfitAdvertiser
+    | MetricProfitAdvertiser
       -- ^ @METRIC_PROFIT_ADVERTISER@
-    | PIMMetricProfitEcpapcAdvertiser
+    | MetricProfitEcpapcAdvertiser
       -- ^ @METRIC_PROFIT_ECPAPC_ADVERTISER@
-    | PIMMetricProfitEcpapcPartner
+    | MetricProfitEcpapcPartner
       -- ^ @METRIC_PROFIT_ECPAPC_PARTNER@
-    | PIMMetricProfitEcpapcUsd
+    | MetricProfitEcpapcUsd
       -- ^ @METRIC_PROFIT_ECPAPC_USD@
-    | PIMMetricProfitEcpapvAdvertiser
+    | MetricProfitEcpapvAdvertiser
       -- ^ @METRIC_PROFIT_ECPAPV_ADVERTISER@
-    | PIMMetricProfitEcpapvPartner
+    | MetricProfitEcpapvPartner
       -- ^ @METRIC_PROFIT_ECPAPV_PARTNER@
-    | PIMMetricProfitEcpapvUsd
+    | MetricProfitEcpapvUsd
       -- ^ @METRIC_PROFIT_ECPAPV_USD@
-    | PIMMetricProfitEcpaAdvertiser
+    | MetricProfitEcpaAdvertiser
       -- ^ @METRIC_PROFIT_ECPA_ADVERTISER@
-    | PIMMetricProfitEcpaPartner
+    | MetricProfitEcpaPartner
       -- ^ @METRIC_PROFIT_ECPA_PARTNER@
-    | PIMMetricProfitEcpaUsd
+    | MetricProfitEcpaUsd
       -- ^ @METRIC_PROFIT_ECPA_USD@
-    | PIMMetricProfitEcpcAdvertiser
+    | MetricProfitEcpcAdvertiser
       -- ^ @METRIC_PROFIT_ECPC_ADVERTISER@
-    | PIMMetricProfitEcpcPartner
+    | MetricProfitEcpcPartner
       -- ^ @METRIC_PROFIT_ECPC_PARTNER@
-    | PIMMetricProfitEcpcUsd
+    | MetricProfitEcpcUsd
       -- ^ @METRIC_PROFIT_ECPC_USD@
-    | PIMMetricProfitEcpmAdvertiser
+    | MetricProfitEcpmAdvertiser
       -- ^ @METRIC_PROFIT_ECPM_ADVERTISER@
-    | PIMMetricProfitEcpmPartner
+    | MetricProfitEcpmPartner
       -- ^ @METRIC_PROFIT_ECPM_PARTNER@
-    | PIMMetricProfitEcpmUsd
+    | MetricProfitEcpmUsd
       -- ^ @METRIC_PROFIT_ECPM_USD@
-    | PIMMetricProfitMargin
+    | MetricProfitMargin
       -- ^ @METRIC_PROFIT_MARGIN@
-    | PIMMetricProfitPartner
+    | MetricProfitPartner
       -- ^ @METRIC_PROFIT_PARTNER@
-    | PIMMetricProfitUsd
+    | MetricProfitUsd
       -- ^ @METRIC_PROFIT_USD@
-    | PIMMetricRevenueAdvertiser
+    | MetricRevenueAdvertiser
       -- ^ @METRIC_REVENUE_ADVERTISER@
-    | PIMMetricRevenueEcpapcAdvertiser
+    | MetricRevenueEcpapcAdvertiser
       -- ^ @METRIC_REVENUE_ECPAPC_ADVERTISER@
-    | PIMMetricRevenueEcpapcPartner
+    | MetricRevenueEcpapcPartner
       -- ^ @METRIC_REVENUE_ECPAPC_PARTNER@
-    | PIMMetricRevenueEcpapcUsd
+    | MetricRevenueEcpapcUsd
       -- ^ @METRIC_REVENUE_ECPAPC_USD@
-    | PIMMetricRevenueEcpapvAdvertiser
+    | MetricRevenueEcpapvAdvertiser
       -- ^ @METRIC_REVENUE_ECPAPV_ADVERTISER@
-    | PIMMetricRevenueEcpapvPartner
+    | MetricRevenueEcpapvPartner
       -- ^ @METRIC_REVENUE_ECPAPV_PARTNER@
-    | PIMMetricRevenueEcpapvUsd
+    | MetricRevenueEcpapvUsd
       -- ^ @METRIC_REVENUE_ECPAPV_USD@
-    | PIMMetricRevenueEcpaAdvertiser
+    | MetricRevenueEcpaAdvertiser
       -- ^ @METRIC_REVENUE_ECPA_ADVERTISER@
-    | PIMMetricRevenueEcpaPartner
+    | MetricRevenueEcpaPartner
       -- ^ @METRIC_REVENUE_ECPA_PARTNER@
-    | PIMMetricRevenueEcpaUsd
+    | MetricRevenueEcpaUsd
       -- ^ @METRIC_REVENUE_ECPA_USD@
-    | PIMMetricRevenueEcpcvAdvertiser
+    | MetricRevenueEcpcvAdvertiser
       -- ^ @METRIC_REVENUE_ECPCV_ADVERTISER@
-    | PIMMetricRevenueEcpcvPartner
+    | MetricRevenueEcpcvPartner
       -- ^ @METRIC_REVENUE_ECPCV_PARTNER@
-    | PIMMetricRevenueEcpcvUsd
+    | MetricRevenueEcpcvUsd
       -- ^ @METRIC_REVENUE_ECPCV_USD@
-    | PIMMetricRevenueEcpcAdvertiser
+    | MetricRevenueEcpcAdvertiser
       -- ^ @METRIC_REVENUE_ECPC_ADVERTISER@
-    | PIMMetricRevenueEcpcPartner
+    | MetricRevenueEcpcPartner
       -- ^ @METRIC_REVENUE_ECPC_PARTNER@
-    | PIMMetricRevenueEcpcUsd
+    | MetricRevenueEcpcUsd
       -- ^ @METRIC_REVENUE_ECPC_USD@
-    | PIMMetricRevenueEcpmAdvertiser
+    | MetricRevenueEcpmAdvertiser
       -- ^ @METRIC_REVENUE_ECPM_ADVERTISER@
-    | PIMMetricRevenueEcpmPartner
+    | MetricRevenueEcpmPartner
       -- ^ @METRIC_REVENUE_ECPM_PARTNER@
-    | PIMMetricRevenueEcpmUsd
+    | MetricRevenueEcpmUsd
       -- ^ @METRIC_REVENUE_ECPM_USD@
-    | PIMMetricRevenuePartner
+    | MetricRevenuePartner
       -- ^ @METRIC_REVENUE_PARTNER@
-    | PIMMetricRevenueUsd
+    | MetricRevenueUsd
       -- ^ @METRIC_REVENUE_USD@
-    | PIMMetricRichMediaVideoCompletions
+    | MetricRichMediaVideoCompletions
       -- ^ @METRIC_RICH_MEDIA_VIDEO_COMPLETIONS@
-    | PIMMetricRichMediaVideoFirstQuartileCompletes
+    | MetricRichMediaVideoFirstQuartileCompletes
       -- ^ @METRIC_RICH_MEDIA_VIDEO_FIRST_QUARTILE_COMPLETES@
-    | PIMMetricRichMediaVideoFullScreens
+    | MetricRichMediaVideoFullScreens
       -- ^ @METRIC_RICH_MEDIA_VIDEO_FULL_SCREENS@
-    | PIMMetricRichMediaVideoMidpoints
+    | MetricRichMediaVideoMidpoints
       -- ^ @METRIC_RICH_MEDIA_VIDEO_MIDPOINTS@
-    | PIMMetricRichMediaVideoMutes
+    | MetricRichMediaVideoMutes
       -- ^ @METRIC_RICH_MEDIA_VIDEO_MUTES@
-    | PIMMetricRichMediaVideoPauses
+    | MetricRichMediaVideoPauses
       -- ^ @METRIC_RICH_MEDIA_VIDEO_PAUSES@
-    | PIMMetricRichMediaVideoPlays
+    | MetricRichMediaVideoPlays
       -- ^ @METRIC_RICH_MEDIA_VIDEO_PLAYS@
-    | PIMMetricRichMediaVideoSkips
+    | MetricRichMediaVideoSkips
       -- ^ @METRIC_RICH_MEDIA_VIDEO_SKIPS@
-    | PIMMetricRichMediaVideoThirdQuartileCompletes
+    | MetricRichMediaVideoThirdQuartileCompletes
       -- ^ @METRIC_RICH_MEDIA_VIDEO_THIRD_QUARTILE_COMPLETES@
-    | PIMMetricTeaTrueviewImpressions
+    | MetricTeaTrueviewImpressions
       -- ^ @METRIC_TEA_TRUEVIEW_IMPRESSIONS@
-    | PIMMetricTeaTrueviewUniqueCookies
+    | MetricTeaTrueviewUniqueCookies
       -- ^ @METRIC_TEA_TRUEVIEW_UNIQUE_COOKIES@
-    | PIMMetricTeaTrueviewUniquePeople
+    | MetricTeaTrueviewUniquePeople
       -- ^ @METRIC_TEA_TRUEVIEW_UNIQUE_PEOPLE@
-    | PIMMetricTotalConversions
+    | MetricTotalConversions
       -- ^ @METRIC_TOTAL_CONVERSIONS@
-    | PIMMetricTotalMediaCostAdvertiser
+    | MetricTotalMediaCostAdvertiser
       -- ^ @METRIC_TOTAL_MEDIA_COST_ADVERTISER@
-    | PIMMetricTotalMediaCostEcpapcAdvertiser
+    | MetricTotalMediaCostEcpapcAdvertiser
       -- ^ @METRIC_TOTAL_MEDIA_COST_ECPAPC_ADVERTISER@
-    | PIMMetricTotalMediaCostEcpapcPartner
+    | MetricTotalMediaCostEcpapcPartner
       -- ^ @METRIC_TOTAL_MEDIA_COST_ECPAPC_PARTNER@
-    | PIMMetricTotalMediaCostEcpapcUsd
+    | MetricTotalMediaCostEcpapcUsd
       -- ^ @METRIC_TOTAL_MEDIA_COST_ECPAPC_USD@
-    | PIMMetricTotalMediaCostEcpapvAdvertiser
+    | MetricTotalMediaCostEcpapvAdvertiser
       -- ^ @METRIC_TOTAL_MEDIA_COST_ECPAPV_ADVERTISER@
-    | PIMMetricTotalMediaCostEcpapvPartner
+    | MetricTotalMediaCostEcpapvPartner
       -- ^ @METRIC_TOTAL_MEDIA_COST_ECPAPV_PARTNER@
-    | PIMMetricTotalMediaCostEcpapvUsd
+    | MetricTotalMediaCostEcpapvUsd
       -- ^ @METRIC_TOTAL_MEDIA_COST_ECPAPV_USD@
-    | PIMMetricTotalMediaCostEcpaAdvertiser
+    | MetricTotalMediaCostEcpaAdvertiser
       -- ^ @METRIC_TOTAL_MEDIA_COST_ECPA_ADVERTISER@
-    | PIMMetricTotalMediaCostEcpaPartner
+    | MetricTotalMediaCostEcpaPartner
       -- ^ @METRIC_TOTAL_MEDIA_COST_ECPA_PARTNER@
-    | PIMMetricTotalMediaCostEcpaUsd
+    | MetricTotalMediaCostEcpaUsd
       -- ^ @METRIC_TOTAL_MEDIA_COST_ECPA_USD@
-    | PIMMetricTotalMediaCostEcpcvAdvertiser
+    | MetricTotalMediaCostEcpcvAdvertiser
       -- ^ @METRIC_TOTAL_MEDIA_COST_ECPCV_ADVERTISER@
-    | PIMMetricTotalMediaCostEcpcvPartner
+    | MetricTotalMediaCostEcpcvPartner
       -- ^ @METRIC_TOTAL_MEDIA_COST_ECPCV_PARTNER@
-    | PIMMetricTotalMediaCostEcpcvUsd
+    | MetricTotalMediaCostEcpcvUsd
       -- ^ @METRIC_TOTAL_MEDIA_COST_ECPCV_USD@
-    | PIMMetricTotalMediaCostEcpcAdvertiser
+    | MetricTotalMediaCostEcpcAdvertiser
       -- ^ @METRIC_TOTAL_MEDIA_COST_ECPC_ADVERTISER@
-    | PIMMetricTotalMediaCostEcpcPartner
+    | MetricTotalMediaCostEcpcPartner
       -- ^ @METRIC_TOTAL_MEDIA_COST_ECPC_PARTNER@
-    | PIMMetricTotalMediaCostEcpcUsd
+    | MetricTotalMediaCostEcpcUsd
       -- ^ @METRIC_TOTAL_MEDIA_COST_ECPC_USD@
-    | PIMMetricTotalMediaCostEcpmAdvertiser
+    | MetricTotalMediaCostEcpmAdvertiser
       -- ^ @METRIC_TOTAL_MEDIA_COST_ECPM_ADVERTISER@
-    | PIMMetricTotalMediaCostEcpmPartner
+    | MetricTotalMediaCostEcpmPartner
       -- ^ @METRIC_TOTAL_MEDIA_COST_ECPM_PARTNER@
-    | PIMMetricTotalMediaCostEcpmUsd
+    | MetricTotalMediaCostEcpmUsd
       -- ^ @METRIC_TOTAL_MEDIA_COST_ECPM_USD@
-    | PIMMetricTotalMediaCostPartner
+    | MetricTotalMediaCostPartner
       -- ^ @METRIC_TOTAL_MEDIA_COST_PARTNER@
-    | PIMMetricTotalMediaCostUsd
+    | MetricTotalMediaCostUsd
       -- ^ @METRIC_TOTAL_MEDIA_COST_USD@
-    | PIMMetricTrueviewConversionManyPerView
+    | MetricTrueviewConversionManyPerView
       -- ^ @METRIC_TRUEVIEW_CONVERSION_MANY_PER_VIEW@
-    | PIMMetricTrueviewConversionOnePerView
+    | MetricTrueviewConversionOnePerView
       -- ^ @METRIC_TRUEVIEW_CONVERSION_ONE_PER_VIEW@
-    | PIMMetricTrueviewConversionRateOnePerView
+    | MetricTrueviewConversionRateOnePerView
       -- ^ @METRIC_TRUEVIEW_CONVERSION_RATE_ONE_PER_VIEW@
-    | PIMMetricTrueviewCostConversionManyPerViewRatio
+    | MetricTrueviewCostConversionManyPerViewRatio
       -- ^ @METRIC_TRUEVIEW_COST_CONVERSION_MANY_PER_VIEW_RATIO@
-    | PIMMetricTrueviewCostConversionOnePerViewRatio
+    | MetricTrueviewCostConversionOnePerViewRatio
       -- ^ @METRIC_TRUEVIEW_COST_CONVERSION_ONE_PER_VIEW_RATIO@
-    | PIMMetricTrueviewCpvAdvertiser
+    | MetricTrueviewCpvAdvertiser
       -- ^ @METRIC_TRUEVIEW_CPV_ADVERTISER@
-    | PIMMetricTrueviewCpvPartner
+    | MetricTrueviewCpvPartner
       -- ^ @METRIC_TRUEVIEW_CPV_PARTNER@
-    | PIMMetricTrueviewCpvUsd
+    | MetricTrueviewCpvUsd
       -- ^ @METRIC_TRUEVIEW_CPV_USD@
-    | PIMMetricTrueviewEarnedLikes
+    | MetricTrueviewEarnedLikes
       -- ^ @METRIC_TRUEVIEW_EARNED_LIKES@
-    | PIMMetricTrueviewEarnedPlaylistAdditions
+    | MetricTrueviewEarnedPlaylistAdditions
       -- ^ @METRIC_TRUEVIEW_EARNED_PLAYLIST_ADDITIONS@
-    | PIMMetricTrueviewEarnedShares
+    | MetricTrueviewEarnedShares
       -- ^ @METRIC_TRUEVIEW_EARNED_SHARES@
-    | PIMMetricTrueviewEarnedSubscribers
+    | MetricTrueviewEarnedSubscribers
       -- ^ @METRIC_TRUEVIEW_EARNED_SUBSCRIBERS@
-    | PIMMetricTrueviewEarnedViews
+    | MetricTrueviewEarnedViews
       -- ^ @METRIC_TRUEVIEW_EARNED_VIEWS@
-    | PIMMetricTrueviewImpressionShare
+    | MetricTrueviewImpressionShare
       -- ^ @METRIC_TRUEVIEW_IMPRESSION_SHARE@
-    | PIMMetricTrueviewLostIsBudget
+    | MetricTrueviewLostIsBudget
       -- ^ @METRIC_TRUEVIEW_LOST_IS_BUDGET@
-    | PIMMetricTrueviewLostIsRank
+    | MetricTrueviewLostIsRank
       -- ^ @METRIC_TRUEVIEW_LOST_IS_RANK@
-    | PIMMetricTrueviewTotalConversionValue
+    | MetricTrueviewTotalConversionValue
       -- ^ @METRIC_TRUEVIEW_TOTAL_CONVERSION_VALUE@
-    | PIMMetricTrueviewUniqueViewers
+    | MetricTrueviewUniqueViewers
       -- ^ @METRIC_TRUEVIEW_UNIQUE_VIEWERS@
-    | PIMMetricTrueviewValueConversionManyPerViewRatio
+    | MetricTrueviewValueConversionManyPerViewRatio
       -- ^ @METRIC_TRUEVIEW_VALUE_CONVERSION_MANY_PER_VIEW_RATIO@
-    | PIMMetricTrueviewValueConversionOnePerViewRatio
+    | MetricTrueviewValueConversionOnePerViewRatio
       -- ^ @METRIC_TRUEVIEW_VALUE_CONVERSION_ONE_PER_VIEW_RATIO@
-    | PIMMetricTrueviewViews
+    | MetricTrueviewViews
       -- ^ @METRIC_TRUEVIEW_VIEWS@
-    | PIMMetricTrueviewViewRate
+    | MetricTrueviewViewRate
       -- ^ @METRIC_TRUEVIEW_VIEW_RATE@
-    | PIMMetricTrueviewViewThroughConversion
+    | MetricTrueviewViewThroughConversion
       -- ^ @METRIC_TRUEVIEW_VIEW_THROUGH_CONVERSION@
-    | PIMMetricUniqueVisitorsCookies
+    | MetricUniqueVisitorsCookies
       -- ^ @METRIC_UNIQUE_VISITORS_COOKIES@
-    | PIMMetricUnknown
+    | MetricUnknown
       -- ^ @METRIC_UNKNOWN@
-    | PIMMetricVideoCompanionClicks
+    | MetricVideoCompanionClicks
       -- ^ @METRIC_VIDEO_COMPANION_CLICKS@
-    | PIMMetricVideoCompanionImpressions
+    | MetricVideoCompanionImpressions
       -- ^ @METRIC_VIDEO_COMPANION_IMPRESSIONS@
-    | PIMMetricVideoCompletionRate
+    | MetricVideoCompletionRate
       -- ^ @METRIC_VIDEO_COMPLETION_RATE@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -1225,612 +1528,493 @@ instance Hashable ParametersItemMetrics
 
 instance FromText ParametersItemMetrics where
     fromText = \case
-        "METRIC_BID_REQUESTS" -> Just PIMMetricBidRequests
-        "METRIC_BILLABLE_COST_ADVERTISER" -> Just PIMMetricBillableCostAdvertiser
-        "METRIC_BILLABLE_COST_PARTNER" -> Just PIMMetricBillableCostPartner
-        "METRIC_BILLABLE_COST_USD" -> Just PIMMetricBillableCostUsd
-        "METRIC_CLICKS" -> Just PIMMetricClicks
-        "METRIC_CLICK_TO_POST_CLICK_CONVERSION_RATE" -> Just PIMMetricClickToPostClickConversionRate
-        "METRIC_COMSCORE_VCE_AUDIENCE_AVG_FREQUENCY" -> Just PIMMetricComscoreVceAudienceAvgFrequency
-        "METRIC_COMSCORE_VCE_AUDIENCE_IMPRESSIONS" -> Just PIMMetricComscoreVceAudienceImpressions
-        "METRIC_COMSCORE_VCE_AUDIENCE_IMPRESSIONS_SHARE" -> Just PIMMetricComscoreVceAudienceImpressionsShare
-        "METRIC_COMSCORE_VCE_AUDIENCE_REACH_PCT" -> Just PIMMetricComscoreVceAudienceReachPct
-        "METRIC_COMSCORE_VCE_AUDIENCE_SHARE_PCT" -> Just PIMMetricComscoreVceAudienceSharePct
-        "METRIC_COMSCORE_VCE_GROSS_RATING_POINTS" -> Just PIMMetricComscoreVceGrossRatingPoints
-        "METRIC_COMSCORE_VCE_POPULATION" -> Just PIMMetricComscoreVcePopulation
-        "METRIC_COMSCORE_VCE_UNIQUE_AUDIENCE" -> Just PIMMetricComscoreVceUniqueAudience
-        "METRIC_CONVERSIONS_PER_MILLE" -> Just PIMMetricConversionsPerMille
-        "METRIC_CPM_FEE1_ADVERTISER" -> Just PIMMetricCpmFEE1Advertiser
-        "METRIC_CPM_FEE1_PARTNER" -> Just PIMMetricCpmFEE1Partner
-        "METRIC_CPM_FEE1_USD" -> Just PIMMetricCpmFEE1Usd
-        "METRIC_CPM_FEE2_ADVERTISER" -> Just PIMMetricCpmFEE2Advertiser
-        "METRIC_CPM_FEE2_PARTNER" -> Just PIMMetricCpmFEE2Partner
-        "METRIC_CPM_FEE2_USD" -> Just PIMMetricCpmFEE2Usd
-        "METRIC_CPM_FEE3_ADVERTISER" -> Just PIMMetricCpmFEE3Advertiser
-        "METRIC_CPM_FEE3_PARTNER" -> Just PIMMetricCpmFEE3Partner
-        "METRIC_CPM_FEE3_USD" -> Just PIMMetricCpmFEE3Usd
-        "METRIC_CPM_FEE4_ADVERTISER" -> Just PIMMetricCpmFEE4Advertiser
-        "METRIC_CPM_FEE4_PARTNER" -> Just PIMMetricCpmFEE4Partner
-        "METRIC_CPM_FEE4_USD" -> Just PIMMetricCpmFEE4Usd
-        "METRIC_CPM_FEE5_ADVERTISER" -> Just PIMMetricCpmFEE5Advertiser
-        "METRIC_CPM_FEE5_PARTNER" -> Just PIMMetricCpmFEE5Partner
-        "METRIC_CPM_FEE5_USD" -> Just PIMMetricCpmFEE5Usd
-        "METRIC_CTR" -> Just PIMMetricCtr
-        "METRIC_DATA_COST_ADVERTISER" -> Just PIMMetricDataCostAdvertiser
-        "METRIC_DATA_COST_PARTNER" -> Just PIMMetricDataCostPartner
-        "METRIC_DATA_COST_USD" -> Just PIMMetricDataCostUsd
-        "METRIC_FEE10_ADVERTISER" -> Just PIMMetricFEE10Advertiser
-        "METRIC_FEE10_PARTNER" -> Just PIMMetricFEE10Partner
-        "METRIC_FEE10_USD" -> Just PIMMetricFEE10Usd
-        "METRIC_FEE11_ADVERTISER" -> Just PIMMetricFEE11Advertiser
-        "METRIC_FEE11_PARTNER" -> Just PIMMetricFEE11Partner
-        "METRIC_FEE11_USD" -> Just PIMMetricFEE11Usd
-        "METRIC_FEE12_ADVERTISER" -> Just PIMMetricFEE12Advertiser
-        "METRIC_FEE12_PARTNER" -> Just PIMMetricFEE12Partner
-        "METRIC_FEE12_USD" -> Just PIMMetricFEE12Usd
-        "METRIC_FEE13_ADVERTISER" -> Just PIMMetricFEE13Advertiser
-        "METRIC_FEE13_PARTNER" -> Just PIMMetricFEE13Partner
-        "METRIC_FEE13_USD" -> Just PIMMetricFEE13Usd
-        "METRIC_FEE14_ADVERTISER" -> Just PIMMetricFEE14Advertiser
-        "METRIC_FEE14_PARTNER" -> Just PIMMetricFEE14Partner
-        "METRIC_FEE14_USD" -> Just PIMMetricFEE14Usd
-        "METRIC_FEE15_ADVERTISER" -> Just PIMMetricFEE15Advertiser
-        "METRIC_FEE15_PARTNER" -> Just PIMMetricFEE15Partner
-        "METRIC_FEE15_USD" -> Just PIMMetricFEE15Usd
-        "METRIC_FEE16_ADVERTISER" -> Just PIMMetricFEE16Advertiser
-        "METRIC_FEE16_PARTNER" -> Just PIMMetricFEE16Partner
-        "METRIC_FEE16_USD" -> Just PIMMetricFEE16Usd
-        "METRIC_FEE17_ADVERTISER" -> Just PIMMetricFEE17Advertiser
-        "METRIC_FEE17_PARTNER" -> Just PIMMetricFEE17Partner
-        "METRIC_FEE17_USD" -> Just PIMMetricFEE17Usd
-        "METRIC_FEE18_ADVERTISER" -> Just PIMMetricFEE18Advertiser
-        "METRIC_FEE18_PARTNER" -> Just PIMMetricFEE18Partner
-        "METRIC_FEE18_USD" -> Just PIMMetricFEE18Usd
-        "METRIC_FEE19_ADVERTISER" -> Just PIMMetricFEE19Advertiser
-        "METRIC_FEE19_PARTNER" -> Just PIMMetricFEE19Partner
-        "METRIC_FEE19_USD" -> Just PIMMetricFEE19Usd
-        "METRIC_FEE20_ADVERTISER" -> Just PIMMetricFEE20Advertiser
-        "METRIC_FEE20_PARTNER" -> Just PIMMetricFEE20Partner
-        "METRIC_FEE20_USD" -> Just PIMMetricFEE20Usd
-        "METRIC_FEE2_ADVERTISER" -> Just PIMMetricFEE2Advertiser
-        "METRIC_FEE2_PARTNER" -> Just PIMMetricFEE2Partner
-        "METRIC_FEE2_USD" -> Just PIMMetricFEE2Usd
-        "METRIC_FEE3_ADVERTISER" -> Just PIMMetricFEE3Advertiser
-        "METRIC_FEE3_PARTNER" -> Just PIMMetricFEE3Partner
-        "METRIC_FEE3_USD" -> Just PIMMetricFEE3Usd
-        "METRIC_FEE4_ADVERTISER" -> Just PIMMetricFEE4Advertiser
-        "METRIC_FEE4_PARTNER" -> Just PIMMetricFEE4Partner
-        "METRIC_FEE4_USD" -> Just PIMMetricFEE4Usd
-        "METRIC_FEE5_ADVERTISER" -> Just PIMMetricFEE5Advertiser
-        "METRIC_FEE5_PARTNER" -> Just PIMMetricFEE5Partner
-        "METRIC_FEE5_USD" -> Just PIMMetricFEE5Usd
-        "METRIC_FEE6_ADVERTISER" -> Just PIMMetricFEE6Advertiser
-        "METRIC_FEE6_PARTNER" -> Just PIMMetricFEE6Partner
-        "METRIC_FEE6_USD" -> Just PIMMetricFEE6Usd
-        "METRIC_FEE7_ADVERTISER" -> Just PIMMetricFEE7Advertiser
-        "METRIC_FEE7_PARTNER" -> Just PIMMetricFEE7Partner
-        "METRIC_FEE7_USD" -> Just PIMMetricFEE7Usd
-        "METRIC_FEE8_ADVERTISER" -> Just PIMMetricFEE8Advertiser
-        "METRIC_FEE8_PARTNER" -> Just PIMMetricFEE8Partner
-        "METRIC_FEE8_USD" -> Just PIMMetricFEE8Usd
-        "METRIC_FEE9_ADVERTISER" -> Just PIMMetricFEE9Advertiser
-        "METRIC_FEE9_PARTNER" -> Just PIMMetricFEE9Partner
-        "METRIC_FEE9_USD" -> Just PIMMetricFEE9Usd
-        "METRIC_IMPRESSIONS" -> Just PIMMetricImpressions
-        "METRIC_IMPRESSIONS_TO_CONVERSION_RATE" -> Just PIMMetricImpressionsToConversionRate
-        "METRIC_LAST_CLICKS" -> Just PIMMetricLastClicks
-        "METRIC_LAST_IMPRESSIONS" -> Just PIMMetricLastImpressions
-        "METRIC_MEDIA_COST_ADVERTISER" -> Just PIMMetricMediaCostAdvertiser
-        "METRIC_MEDIA_COST_ECPAPC_ADVERTISER" -> Just PIMMetricMediaCostEcpapcAdvertiser
-        "METRIC_MEDIA_COST_ECPAPC_PARTNER" -> Just PIMMetricMediaCostEcpapcPartner
-        "METRIC_MEDIA_COST_ECPAPC_USD" -> Just PIMMetricMediaCostEcpapcUsd
-        "METRIC_MEDIA_COST_ECPAPV_ADVERTISER" -> Just PIMMetricMediaCostEcpapvAdvertiser
-        "METRIC_MEDIA_COST_ECPAPV_PARTNER" -> Just PIMMetricMediaCostEcpapvPartner
-        "METRIC_MEDIA_COST_ECPAPV_USD" -> Just PIMMetricMediaCostEcpapvUsd
-        "METRIC_MEDIA_COST_ECPA_ADVERTISER" -> Just PIMMetricMediaCostEcpaAdvertiser
-        "METRIC_MEDIA_COST_ECPA_PARTNER" -> Just PIMMetricMediaCostEcpaPartner
-        "METRIC_MEDIA_COST_ECPA_USD" -> Just PIMMetricMediaCostEcpaUsd
-        "METRIC_MEDIA_COST_ECPCV_ADVERTISER" -> Just PIMMetricMediaCostEcpcvAdvertiser
-        "METRIC_MEDIA_COST_ECPCV_PARTNER" -> Just PIMMetricMediaCostEcpcvPartner
-        "METRIC_MEDIA_COST_ECPCV_USD" -> Just PIMMetricMediaCostEcpcvUsd
-        "METRIC_MEDIA_COST_ECPC_ADVERTISER" -> Just PIMMetricMediaCostEcpcAdvertiser
-        "METRIC_MEDIA_COST_ECPC_PARTNER" -> Just PIMMetricMediaCostEcpcPartner
-        "METRIC_MEDIA_COST_ECPC_USD" -> Just PIMMetricMediaCostEcpcUsd
-        "METRIC_MEDIA_COST_ECPM_ADVERTISER" -> Just PIMMetricMediaCostEcpmAdvertiser
-        "METRIC_MEDIA_COST_ECPM_PARTNER" -> Just PIMMetricMediaCostEcpmPartner
-        "METRIC_MEDIA_COST_ECPM_USD" -> Just PIMMetricMediaCostEcpmUsd
-        "METRIC_MEDIA_COST_PARTNER" -> Just PIMMetricMediaCostPartner
-        "METRIC_MEDIA_COST_USD" -> Just PIMMetricMediaCostUsd
-        "METRIC_MEDIA_FEE1_ADVERTISER" -> Just PIMMetricMediaFEE1Advertiser
-        "METRIC_MEDIA_FEE1_PARTNER" -> Just PIMMetricMediaFEE1Partner
-        "METRIC_MEDIA_FEE1_USD" -> Just PIMMetricMediaFEE1Usd
-        "METRIC_MEDIA_FEE2_ADVERTISER" -> Just PIMMetricMediaFEE2Advertiser
-        "METRIC_MEDIA_FEE2_PARTNER" -> Just PIMMetricMediaFEE2Partner
-        "METRIC_MEDIA_FEE2_USD" -> Just PIMMetricMediaFEE2Usd
-        "METRIC_MEDIA_FEE3_ADVERTISER" -> Just PIMMetricMediaFEE3Advertiser
-        "METRIC_MEDIA_FEE3_PARTNER" -> Just PIMMetricMediaFEE3Partner
-        "METRIC_MEDIA_FEE3_USD" -> Just PIMMetricMediaFEE3Usd
-        "METRIC_MEDIA_FEE4_ADVERTISER" -> Just PIMMetricMediaFEE4Advertiser
-        "METRIC_MEDIA_FEE4_PARTNER" -> Just PIMMetricMediaFEE4Partner
-        "METRIC_MEDIA_FEE4_USD" -> Just PIMMetricMediaFEE4Usd
-        "METRIC_MEDIA_FEE5_ADVERTISER" -> Just PIMMetricMediaFEE5Advertiser
-        "METRIC_MEDIA_FEE5_PARTNER" -> Just PIMMetricMediaFEE5Partner
-        "METRIC_MEDIA_FEE5_USD" -> Just PIMMetricMediaFEE5Usd
-        "METRIC_PIXEL_LOADS" -> Just PIMMetricPixelLoads
-        "METRIC_PLATFORM_FEE_ADVERTISER" -> Just PIMMetricPlatformFeeAdvertiser
-        "METRIC_PLATFORM_FEE_PARTNER" -> Just PIMMetricPlatformFeePartner
-        "METRIC_PLATFORM_FEE_USD" -> Just PIMMetricPlatformFeeUsd
-        "METRIC_POST_CLICK_DFA_REVENUE" -> Just PIMMetricPostClickDfaRevenue
-        "METRIC_POST_VIEW_DFA_REVENUE" -> Just PIMMetricPostViewDfaRevenue
-        "METRIC_PROFIT_ADVERTISER" -> Just PIMMetricProfitAdvertiser
-        "METRIC_PROFIT_ECPAPC_ADVERTISER" -> Just PIMMetricProfitEcpapcAdvertiser
-        "METRIC_PROFIT_ECPAPC_PARTNER" -> Just PIMMetricProfitEcpapcPartner
-        "METRIC_PROFIT_ECPAPC_USD" -> Just PIMMetricProfitEcpapcUsd
-        "METRIC_PROFIT_ECPAPV_ADVERTISER" -> Just PIMMetricProfitEcpapvAdvertiser
-        "METRIC_PROFIT_ECPAPV_PARTNER" -> Just PIMMetricProfitEcpapvPartner
-        "METRIC_PROFIT_ECPAPV_USD" -> Just PIMMetricProfitEcpapvUsd
-        "METRIC_PROFIT_ECPA_ADVERTISER" -> Just PIMMetricProfitEcpaAdvertiser
-        "METRIC_PROFIT_ECPA_PARTNER" -> Just PIMMetricProfitEcpaPartner
-        "METRIC_PROFIT_ECPA_USD" -> Just PIMMetricProfitEcpaUsd
-        "METRIC_PROFIT_ECPC_ADVERTISER" -> Just PIMMetricProfitEcpcAdvertiser
-        "METRIC_PROFIT_ECPC_PARTNER" -> Just PIMMetricProfitEcpcPartner
-        "METRIC_PROFIT_ECPC_USD" -> Just PIMMetricProfitEcpcUsd
-        "METRIC_PROFIT_ECPM_ADVERTISER" -> Just PIMMetricProfitEcpmAdvertiser
-        "METRIC_PROFIT_ECPM_PARTNER" -> Just PIMMetricProfitEcpmPartner
-        "METRIC_PROFIT_ECPM_USD" -> Just PIMMetricProfitEcpmUsd
-        "METRIC_PROFIT_MARGIN" -> Just PIMMetricProfitMargin
-        "METRIC_PROFIT_PARTNER" -> Just PIMMetricProfitPartner
-        "METRIC_PROFIT_USD" -> Just PIMMetricProfitUsd
-        "METRIC_REVENUE_ADVERTISER" -> Just PIMMetricRevenueAdvertiser
-        "METRIC_REVENUE_ECPAPC_ADVERTISER" -> Just PIMMetricRevenueEcpapcAdvertiser
-        "METRIC_REVENUE_ECPAPC_PARTNER" -> Just PIMMetricRevenueEcpapcPartner
-        "METRIC_REVENUE_ECPAPC_USD" -> Just PIMMetricRevenueEcpapcUsd
-        "METRIC_REVENUE_ECPAPV_ADVERTISER" -> Just PIMMetricRevenueEcpapvAdvertiser
-        "METRIC_REVENUE_ECPAPV_PARTNER" -> Just PIMMetricRevenueEcpapvPartner
-        "METRIC_REVENUE_ECPAPV_USD" -> Just PIMMetricRevenueEcpapvUsd
-        "METRIC_REVENUE_ECPA_ADVERTISER" -> Just PIMMetricRevenueEcpaAdvertiser
-        "METRIC_REVENUE_ECPA_PARTNER" -> Just PIMMetricRevenueEcpaPartner
-        "METRIC_REVENUE_ECPA_USD" -> Just PIMMetricRevenueEcpaUsd
-        "METRIC_REVENUE_ECPCV_ADVERTISER" -> Just PIMMetricRevenueEcpcvAdvertiser
-        "METRIC_REVENUE_ECPCV_PARTNER" -> Just PIMMetricRevenueEcpcvPartner
-        "METRIC_REVENUE_ECPCV_USD" -> Just PIMMetricRevenueEcpcvUsd
-        "METRIC_REVENUE_ECPC_ADVERTISER" -> Just PIMMetricRevenueEcpcAdvertiser
-        "METRIC_REVENUE_ECPC_PARTNER" -> Just PIMMetricRevenueEcpcPartner
-        "METRIC_REVENUE_ECPC_USD" -> Just PIMMetricRevenueEcpcUsd
-        "METRIC_REVENUE_ECPM_ADVERTISER" -> Just PIMMetricRevenueEcpmAdvertiser
-        "METRIC_REVENUE_ECPM_PARTNER" -> Just PIMMetricRevenueEcpmPartner
-        "METRIC_REVENUE_ECPM_USD" -> Just PIMMetricRevenueEcpmUsd
-        "METRIC_REVENUE_PARTNER" -> Just PIMMetricRevenuePartner
-        "METRIC_REVENUE_USD" -> Just PIMMetricRevenueUsd
-        "METRIC_RICH_MEDIA_VIDEO_COMPLETIONS" -> Just PIMMetricRichMediaVideoCompletions
-        "METRIC_RICH_MEDIA_VIDEO_FIRST_QUARTILE_COMPLETES" -> Just PIMMetricRichMediaVideoFirstQuartileCompletes
-        "METRIC_RICH_MEDIA_VIDEO_FULL_SCREENS" -> Just PIMMetricRichMediaVideoFullScreens
-        "METRIC_RICH_MEDIA_VIDEO_MIDPOINTS" -> Just PIMMetricRichMediaVideoMidpoints
-        "METRIC_RICH_MEDIA_VIDEO_MUTES" -> Just PIMMetricRichMediaVideoMutes
-        "METRIC_RICH_MEDIA_VIDEO_PAUSES" -> Just PIMMetricRichMediaVideoPauses
-        "METRIC_RICH_MEDIA_VIDEO_PLAYS" -> Just PIMMetricRichMediaVideoPlays
-        "METRIC_RICH_MEDIA_VIDEO_SKIPS" -> Just PIMMetricRichMediaVideoSkips
-        "METRIC_RICH_MEDIA_VIDEO_THIRD_QUARTILE_COMPLETES" -> Just PIMMetricRichMediaVideoThirdQuartileCompletes
-        "METRIC_TEA_TRUEVIEW_IMPRESSIONS" -> Just PIMMetricTeaTrueviewImpressions
-        "METRIC_TEA_TRUEVIEW_UNIQUE_COOKIES" -> Just PIMMetricTeaTrueviewUniqueCookies
-        "METRIC_TEA_TRUEVIEW_UNIQUE_PEOPLE" -> Just PIMMetricTeaTrueviewUniquePeople
-        "METRIC_TOTAL_CONVERSIONS" -> Just PIMMetricTotalConversions
-        "METRIC_TOTAL_MEDIA_COST_ADVERTISER" -> Just PIMMetricTotalMediaCostAdvertiser
-        "METRIC_TOTAL_MEDIA_COST_ECPAPC_ADVERTISER" -> Just PIMMetricTotalMediaCostEcpapcAdvertiser
-        "METRIC_TOTAL_MEDIA_COST_ECPAPC_PARTNER" -> Just PIMMetricTotalMediaCostEcpapcPartner
-        "METRIC_TOTAL_MEDIA_COST_ECPAPC_USD" -> Just PIMMetricTotalMediaCostEcpapcUsd
-        "METRIC_TOTAL_MEDIA_COST_ECPAPV_ADVERTISER" -> Just PIMMetricTotalMediaCostEcpapvAdvertiser
-        "METRIC_TOTAL_MEDIA_COST_ECPAPV_PARTNER" -> Just PIMMetricTotalMediaCostEcpapvPartner
-        "METRIC_TOTAL_MEDIA_COST_ECPAPV_USD" -> Just PIMMetricTotalMediaCostEcpapvUsd
-        "METRIC_TOTAL_MEDIA_COST_ECPA_ADVERTISER" -> Just PIMMetricTotalMediaCostEcpaAdvertiser
-        "METRIC_TOTAL_MEDIA_COST_ECPA_PARTNER" -> Just PIMMetricTotalMediaCostEcpaPartner
-        "METRIC_TOTAL_MEDIA_COST_ECPA_USD" -> Just PIMMetricTotalMediaCostEcpaUsd
-        "METRIC_TOTAL_MEDIA_COST_ECPCV_ADVERTISER" -> Just PIMMetricTotalMediaCostEcpcvAdvertiser
-        "METRIC_TOTAL_MEDIA_COST_ECPCV_PARTNER" -> Just PIMMetricTotalMediaCostEcpcvPartner
-        "METRIC_TOTAL_MEDIA_COST_ECPCV_USD" -> Just PIMMetricTotalMediaCostEcpcvUsd
-        "METRIC_TOTAL_MEDIA_COST_ECPC_ADVERTISER" -> Just PIMMetricTotalMediaCostEcpcAdvertiser
-        "METRIC_TOTAL_MEDIA_COST_ECPC_PARTNER" -> Just PIMMetricTotalMediaCostEcpcPartner
-        "METRIC_TOTAL_MEDIA_COST_ECPC_USD" -> Just PIMMetricTotalMediaCostEcpcUsd
-        "METRIC_TOTAL_MEDIA_COST_ECPM_ADVERTISER" -> Just PIMMetricTotalMediaCostEcpmAdvertiser
-        "METRIC_TOTAL_MEDIA_COST_ECPM_PARTNER" -> Just PIMMetricTotalMediaCostEcpmPartner
-        "METRIC_TOTAL_MEDIA_COST_ECPM_USD" -> Just PIMMetricTotalMediaCostEcpmUsd
-        "METRIC_TOTAL_MEDIA_COST_PARTNER" -> Just PIMMetricTotalMediaCostPartner
-        "METRIC_TOTAL_MEDIA_COST_USD" -> Just PIMMetricTotalMediaCostUsd
-        "METRIC_TRUEVIEW_CONVERSION_MANY_PER_VIEW" -> Just PIMMetricTrueviewConversionManyPerView
-        "METRIC_TRUEVIEW_CONVERSION_ONE_PER_VIEW" -> Just PIMMetricTrueviewConversionOnePerView
-        "METRIC_TRUEVIEW_CONVERSION_RATE_ONE_PER_VIEW" -> Just PIMMetricTrueviewConversionRateOnePerView
-        "METRIC_TRUEVIEW_COST_CONVERSION_MANY_PER_VIEW_RATIO" -> Just PIMMetricTrueviewCostConversionManyPerViewRatio
-        "METRIC_TRUEVIEW_COST_CONVERSION_ONE_PER_VIEW_RATIO" -> Just PIMMetricTrueviewCostConversionOnePerViewRatio
-        "METRIC_TRUEVIEW_CPV_ADVERTISER" -> Just PIMMetricTrueviewCpvAdvertiser
-        "METRIC_TRUEVIEW_CPV_PARTNER" -> Just PIMMetricTrueviewCpvPartner
-        "METRIC_TRUEVIEW_CPV_USD" -> Just PIMMetricTrueviewCpvUsd
-        "METRIC_TRUEVIEW_EARNED_LIKES" -> Just PIMMetricTrueviewEarnedLikes
-        "METRIC_TRUEVIEW_EARNED_PLAYLIST_ADDITIONS" -> Just PIMMetricTrueviewEarnedPlaylistAdditions
-        "METRIC_TRUEVIEW_EARNED_SHARES" -> Just PIMMetricTrueviewEarnedShares
-        "METRIC_TRUEVIEW_EARNED_SUBSCRIBERS" -> Just PIMMetricTrueviewEarnedSubscribers
-        "METRIC_TRUEVIEW_EARNED_VIEWS" -> Just PIMMetricTrueviewEarnedViews
-        "METRIC_TRUEVIEW_IMPRESSION_SHARE" -> Just PIMMetricTrueviewImpressionShare
-        "METRIC_TRUEVIEW_LOST_IS_BUDGET" -> Just PIMMetricTrueviewLostIsBudget
-        "METRIC_TRUEVIEW_LOST_IS_RANK" -> Just PIMMetricTrueviewLostIsRank
-        "METRIC_TRUEVIEW_TOTAL_CONVERSION_VALUE" -> Just PIMMetricTrueviewTotalConversionValue
-        "METRIC_TRUEVIEW_UNIQUE_VIEWERS" -> Just PIMMetricTrueviewUniqueViewers
-        "METRIC_TRUEVIEW_VALUE_CONVERSION_MANY_PER_VIEW_RATIO" -> Just PIMMetricTrueviewValueConversionManyPerViewRatio
-        "METRIC_TRUEVIEW_VALUE_CONVERSION_ONE_PER_VIEW_RATIO" -> Just PIMMetricTrueviewValueConversionOnePerViewRatio
-        "METRIC_TRUEVIEW_VIEWS" -> Just PIMMetricTrueviewViews
-        "METRIC_TRUEVIEW_VIEW_RATE" -> Just PIMMetricTrueviewViewRate
-        "METRIC_TRUEVIEW_VIEW_THROUGH_CONVERSION" -> Just PIMMetricTrueviewViewThroughConversion
-        "METRIC_UNIQUE_VISITORS_COOKIES" -> Just PIMMetricUniqueVisitorsCookies
-        "METRIC_UNKNOWN" -> Just PIMMetricUnknown
-        "METRIC_VIDEO_COMPANION_CLICKS" -> Just PIMMetricVideoCompanionClicks
-        "METRIC_VIDEO_COMPANION_IMPRESSIONS" -> Just PIMMetricVideoCompanionImpressions
-        "METRIC_VIDEO_COMPLETION_RATE" -> Just PIMMetricVideoCompletionRate
+        "METRIC_BID_REQUESTS" -> Just MetricBidRequests
+        "METRIC_BILLABLE_COST_ADVERTISER" -> Just MetricBillableCostAdvertiser
+        "METRIC_BILLABLE_COST_PARTNER" -> Just MetricBillableCostPartner
+        "METRIC_BILLABLE_COST_USD" -> Just MetricBillableCostUsd
+        "METRIC_CLICKS" -> Just MetricClicks
+        "METRIC_CLICK_TO_POST_CLICK_CONVERSION_RATE" -> Just MetricClickToPostClickConversionRate
+        "METRIC_COMSCORE_VCE_AUDIENCE_AVG_FREQUENCY" -> Just MetricComscoreVceAudienceAvgFrequency
+        "METRIC_COMSCORE_VCE_AUDIENCE_IMPRESSIONS" -> Just MetricComscoreVceAudienceImpressions
+        "METRIC_COMSCORE_VCE_AUDIENCE_IMPRESSIONS_SHARE" -> Just MetricComscoreVceAudienceImpressionsShare
+        "METRIC_COMSCORE_VCE_AUDIENCE_REACH_PCT" -> Just MetricComscoreVceAudienceReachPct
+        "METRIC_COMSCORE_VCE_AUDIENCE_SHARE_PCT" -> Just MetricComscoreVceAudienceSharePct
+        "METRIC_COMSCORE_VCE_GROSS_RATING_POINTS" -> Just MetricComscoreVceGrossRatingPoints
+        "METRIC_COMSCORE_VCE_POPULATION" -> Just MetricComscoreVcePopulation
+        "METRIC_COMSCORE_VCE_UNIQUE_AUDIENCE" -> Just MetricComscoreVceUniqueAudience
+        "METRIC_CONVERSIONS_PER_MILLE" -> Just MetricConversionsPerMille
+        "METRIC_CPM_FEE1_ADVERTISER" -> Just MetricCpmFEE1Advertiser
+        "METRIC_CPM_FEE1_PARTNER" -> Just MetricCpmFEE1Partner
+        "METRIC_CPM_FEE1_USD" -> Just MetricCpmFEE1Usd
+        "METRIC_CPM_FEE2_ADVERTISER" -> Just MetricCpmFEE2Advertiser
+        "METRIC_CPM_FEE2_PARTNER" -> Just MetricCpmFEE2Partner
+        "METRIC_CPM_FEE2_USD" -> Just MetricCpmFEE2Usd
+        "METRIC_CPM_FEE3_ADVERTISER" -> Just MetricCpmFEE3Advertiser
+        "METRIC_CPM_FEE3_PARTNER" -> Just MetricCpmFEE3Partner
+        "METRIC_CPM_FEE3_USD" -> Just MetricCpmFEE3Usd
+        "METRIC_CPM_FEE4_ADVERTISER" -> Just MetricCpmFEE4Advertiser
+        "METRIC_CPM_FEE4_PARTNER" -> Just MetricCpmFEE4Partner
+        "METRIC_CPM_FEE4_USD" -> Just MetricCpmFEE4Usd
+        "METRIC_CPM_FEE5_ADVERTISER" -> Just MetricCpmFEE5Advertiser
+        "METRIC_CPM_FEE5_PARTNER" -> Just MetricCpmFEE5Partner
+        "METRIC_CPM_FEE5_USD" -> Just MetricCpmFEE5Usd
+        "METRIC_CTR" -> Just MetricCtr
+        "METRIC_DATA_COST_ADVERTISER" -> Just MetricDataCostAdvertiser
+        "METRIC_DATA_COST_PARTNER" -> Just MetricDataCostPartner
+        "METRIC_DATA_COST_USD" -> Just MetricDataCostUsd
+        "METRIC_FEE10_ADVERTISER" -> Just MetricFEE10Advertiser
+        "METRIC_FEE10_PARTNER" -> Just MetricFEE10Partner
+        "METRIC_FEE10_USD" -> Just MetricFEE10Usd
+        "METRIC_FEE11_ADVERTISER" -> Just MetricFEE11Advertiser
+        "METRIC_FEE11_PARTNER" -> Just MetricFEE11Partner
+        "METRIC_FEE11_USD" -> Just MetricFEE11Usd
+        "METRIC_FEE12_ADVERTISER" -> Just MetricFEE12Advertiser
+        "METRIC_FEE12_PARTNER" -> Just MetricFEE12Partner
+        "METRIC_FEE12_USD" -> Just MetricFEE12Usd
+        "METRIC_FEE13_ADVERTISER" -> Just MetricFEE13Advertiser
+        "METRIC_FEE13_PARTNER" -> Just MetricFEE13Partner
+        "METRIC_FEE13_USD" -> Just MetricFEE13Usd
+        "METRIC_FEE14_ADVERTISER" -> Just MetricFEE14Advertiser
+        "METRIC_FEE14_PARTNER" -> Just MetricFEE14Partner
+        "METRIC_FEE14_USD" -> Just MetricFEE14Usd
+        "METRIC_FEE15_ADVERTISER" -> Just MetricFEE15Advertiser
+        "METRIC_FEE15_PARTNER" -> Just MetricFEE15Partner
+        "METRIC_FEE15_USD" -> Just MetricFEE15Usd
+        "METRIC_FEE16_ADVERTISER" -> Just MetricFEE16Advertiser
+        "METRIC_FEE16_PARTNER" -> Just MetricFEE16Partner
+        "METRIC_FEE16_USD" -> Just MetricFEE16Usd
+        "METRIC_FEE17_ADVERTISER" -> Just MetricFEE17Advertiser
+        "METRIC_FEE17_PARTNER" -> Just MetricFEE17Partner
+        "METRIC_FEE17_USD" -> Just MetricFEE17Usd
+        "METRIC_FEE18_ADVERTISER" -> Just MetricFEE18Advertiser
+        "METRIC_FEE18_PARTNER" -> Just MetricFEE18Partner
+        "METRIC_FEE18_USD" -> Just MetricFEE18Usd
+        "METRIC_FEE19_ADVERTISER" -> Just MetricFEE19Advertiser
+        "METRIC_FEE19_PARTNER" -> Just MetricFEE19Partner
+        "METRIC_FEE19_USD" -> Just MetricFEE19Usd
+        "METRIC_FEE20_ADVERTISER" -> Just MetricFEE20Advertiser
+        "METRIC_FEE20_PARTNER" -> Just MetricFEE20Partner
+        "METRIC_FEE20_USD" -> Just MetricFEE20Usd
+        "METRIC_FEE2_ADVERTISER" -> Just MetricFEE2Advertiser
+        "METRIC_FEE2_PARTNER" -> Just MetricFEE2Partner
+        "METRIC_FEE2_USD" -> Just MetricFEE2Usd
+        "METRIC_FEE3_ADVERTISER" -> Just MetricFEE3Advertiser
+        "METRIC_FEE3_PARTNER" -> Just MetricFEE3Partner
+        "METRIC_FEE3_USD" -> Just MetricFEE3Usd
+        "METRIC_FEE4_ADVERTISER" -> Just MetricFEE4Advertiser
+        "METRIC_FEE4_PARTNER" -> Just MetricFEE4Partner
+        "METRIC_FEE4_USD" -> Just MetricFEE4Usd
+        "METRIC_FEE5_ADVERTISER" -> Just MetricFEE5Advertiser
+        "METRIC_FEE5_PARTNER" -> Just MetricFEE5Partner
+        "METRIC_FEE5_USD" -> Just MetricFEE5Usd
+        "METRIC_FEE6_ADVERTISER" -> Just MetricFEE6Advertiser
+        "METRIC_FEE6_PARTNER" -> Just MetricFEE6Partner
+        "METRIC_FEE6_USD" -> Just MetricFEE6Usd
+        "METRIC_FEE7_ADVERTISER" -> Just MetricFEE7Advertiser
+        "METRIC_FEE7_PARTNER" -> Just MetricFEE7Partner
+        "METRIC_FEE7_USD" -> Just MetricFEE7Usd
+        "METRIC_FEE8_ADVERTISER" -> Just MetricFEE8Advertiser
+        "METRIC_FEE8_PARTNER" -> Just MetricFEE8Partner
+        "METRIC_FEE8_USD" -> Just MetricFEE8Usd
+        "METRIC_FEE9_ADVERTISER" -> Just MetricFEE9Advertiser
+        "METRIC_FEE9_PARTNER" -> Just MetricFEE9Partner
+        "METRIC_FEE9_USD" -> Just MetricFEE9Usd
+        "METRIC_IMPRESSIONS" -> Just MetricImpressions
+        "METRIC_IMPRESSIONS_TO_CONVERSION_RATE" -> Just MetricImpressionsToConversionRate
+        "METRIC_LAST_CLICKS" -> Just MetricLastClicks
+        "METRIC_LAST_IMPRESSIONS" -> Just MetricLastImpressions
+        "METRIC_MEDIA_COST_ADVERTISER" -> Just MetricMediaCostAdvertiser
+        "METRIC_MEDIA_COST_ECPAPC_ADVERTISER" -> Just MetricMediaCostEcpapcAdvertiser
+        "METRIC_MEDIA_COST_ECPAPC_PARTNER" -> Just MetricMediaCostEcpapcPartner
+        "METRIC_MEDIA_COST_ECPAPC_USD" -> Just MetricMediaCostEcpapcUsd
+        "METRIC_MEDIA_COST_ECPAPV_ADVERTISER" -> Just MetricMediaCostEcpapvAdvertiser
+        "METRIC_MEDIA_COST_ECPAPV_PARTNER" -> Just MetricMediaCostEcpapvPartner
+        "METRIC_MEDIA_COST_ECPAPV_USD" -> Just MetricMediaCostEcpapvUsd
+        "METRIC_MEDIA_COST_ECPA_ADVERTISER" -> Just MetricMediaCostEcpaAdvertiser
+        "METRIC_MEDIA_COST_ECPA_PARTNER" -> Just MetricMediaCostEcpaPartner
+        "METRIC_MEDIA_COST_ECPA_USD" -> Just MetricMediaCostEcpaUsd
+        "METRIC_MEDIA_COST_ECPCV_ADVERTISER" -> Just MetricMediaCostEcpcvAdvertiser
+        "METRIC_MEDIA_COST_ECPCV_PARTNER" -> Just MetricMediaCostEcpcvPartner
+        "METRIC_MEDIA_COST_ECPCV_USD" -> Just MetricMediaCostEcpcvUsd
+        "METRIC_MEDIA_COST_ECPC_ADVERTISER" -> Just MetricMediaCostEcpcAdvertiser
+        "METRIC_MEDIA_COST_ECPC_PARTNER" -> Just MetricMediaCostEcpcPartner
+        "METRIC_MEDIA_COST_ECPC_USD" -> Just MetricMediaCostEcpcUsd
+        "METRIC_MEDIA_COST_ECPM_ADVERTISER" -> Just MetricMediaCostEcpmAdvertiser
+        "METRIC_MEDIA_COST_ECPM_PARTNER" -> Just MetricMediaCostEcpmPartner
+        "METRIC_MEDIA_COST_ECPM_USD" -> Just MetricMediaCostEcpmUsd
+        "METRIC_MEDIA_COST_PARTNER" -> Just MetricMediaCostPartner
+        "METRIC_MEDIA_COST_USD" -> Just MetricMediaCostUsd
+        "METRIC_MEDIA_FEE1_ADVERTISER" -> Just MetricMediaFEE1Advertiser
+        "METRIC_MEDIA_FEE1_PARTNER" -> Just MetricMediaFEE1Partner
+        "METRIC_MEDIA_FEE1_USD" -> Just MetricMediaFEE1Usd
+        "METRIC_MEDIA_FEE2_ADVERTISER" -> Just MetricMediaFEE2Advertiser
+        "METRIC_MEDIA_FEE2_PARTNER" -> Just MetricMediaFEE2Partner
+        "METRIC_MEDIA_FEE2_USD" -> Just MetricMediaFEE2Usd
+        "METRIC_MEDIA_FEE3_ADVERTISER" -> Just MetricMediaFEE3Advertiser
+        "METRIC_MEDIA_FEE3_PARTNER" -> Just MetricMediaFEE3Partner
+        "METRIC_MEDIA_FEE3_USD" -> Just MetricMediaFEE3Usd
+        "METRIC_MEDIA_FEE4_ADVERTISER" -> Just MetricMediaFEE4Advertiser
+        "METRIC_MEDIA_FEE4_PARTNER" -> Just MetricMediaFEE4Partner
+        "METRIC_MEDIA_FEE4_USD" -> Just MetricMediaFEE4Usd
+        "METRIC_MEDIA_FEE5_ADVERTISER" -> Just MetricMediaFEE5Advertiser
+        "METRIC_MEDIA_FEE5_PARTNER" -> Just MetricMediaFEE5Partner
+        "METRIC_MEDIA_FEE5_USD" -> Just MetricMediaFEE5Usd
+        "METRIC_PIXEL_LOADS" -> Just MetricPixelLoads
+        "METRIC_PLATFORM_FEE_ADVERTISER" -> Just MetricPlatformFeeAdvertiser
+        "METRIC_PLATFORM_FEE_PARTNER" -> Just MetricPlatformFeePartner
+        "METRIC_PLATFORM_FEE_USD" -> Just MetricPlatformFeeUsd
+        "METRIC_POST_CLICK_DFA_REVENUE" -> Just MetricPostClickDfaRevenue
+        "METRIC_POST_VIEW_DFA_REVENUE" -> Just MetricPostViewDfaRevenue
+        "METRIC_PROFIT_ADVERTISER" -> Just MetricProfitAdvertiser
+        "METRIC_PROFIT_ECPAPC_ADVERTISER" -> Just MetricProfitEcpapcAdvertiser
+        "METRIC_PROFIT_ECPAPC_PARTNER" -> Just MetricProfitEcpapcPartner
+        "METRIC_PROFIT_ECPAPC_USD" -> Just MetricProfitEcpapcUsd
+        "METRIC_PROFIT_ECPAPV_ADVERTISER" -> Just MetricProfitEcpapvAdvertiser
+        "METRIC_PROFIT_ECPAPV_PARTNER" -> Just MetricProfitEcpapvPartner
+        "METRIC_PROFIT_ECPAPV_USD" -> Just MetricProfitEcpapvUsd
+        "METRIC_PROFIT_ECPA_ADVERTISER" -> Just MetricProfitEcpaAdvertiser
+        "METRIC_PROFIT_ECPA_PARTNER" -> Just MetricProfitEcpaPartner
+        "METRIC_PROFIT_ECPA_USD" -> Just MetricProfitEcpaUsd
+        "METRIC_PROFIT_ECPC_ADVERTISER" -> Just MetricProfitEcpcAdvertiser
+        "METRIC_PROFIT_ECPC_PARTNER" -> Just MetricProfitEcpcPartner
+        "METRIC_PROFIT_ECPC_USD" -> Just MetricProfitEcpcUsd
+        "METRIC_PROFIT_ECPM_ADVERTISER" -> Just MetricProfitEcpmAdvertiser
+        "METRIC_PROFIT_ECPM_PARTNER" -> Just MetricProfitEcpmPartner
+        "METRIC_PROFIT_ECPM_USD" -> Just MetricProfitEcpmUsd
+        "METRIC_PROFIT_MARGIN" -> Just MetricProfitMargin
+        "METRIC_PROFIT_PARTNER" -> Just MetricProfitPartner
+        "METRIC_PROFIT_USD" -> Just MetricProfitUsd
+        "METRIC_REVENUE_ADVERTISER" -> Just MetricRevenueAdvertiser
+        "METRIC_REVENUE_ECPAPC_ADVERTISER" -> Just MetricRevenueEcpapcAdvertiser
+        "METRIC_REVENUE_ECPAPC_PARTNER" -> Just MetricRevenueEcpapcPartner
+        "METRIC_REVENUE_ECPAPC_USD" -> Just MetricRevenueEcpapcUsd
+        "METRIC_REVENUE_ECPAPV_ADVERTISER" -> Just MetricRevenueEcpapvAdvertiser
+        "METRIC_REVENUE_ECPAPV_PARTNER" -> Just MetricRevenueEcpapvPartner
+        "METRIC_REVENUE_ECPAPV_USD" -> Just MetricRevenueEcpapvUsd
+        "METRIC_REVENUE_ECPA_ADVERTISER" -> Just MetricRevenueEcpaAdvertiser
+        "METRIC_REVENUE_ECPA_PARTNER" -> Just MetricRevenueEcpaPartner
+        "METRIC_REVENUE_ECPA_USD" -> Just MetricRevenueEcpaUsd
+        "METRIC_REVENUE_ECPCV_ADVERTISER" -> Just MetricRevenueEcpcvAdvertiser
+        "METRIC_REVENUE_ECPCV_PARTNER" -> Just MetricRevenueEcpcvPartner
+        "METRIC_REVENUE_ECPCV_USD" -> Just MetricRevenueEcpcvUsd
+        "METRIC_REVENUE_ECPC_ADVERTISER" -> Just MetricRevenueEcpcAdvertiser
+        "METRIC_REVENUE_ECPC_PARTNER" -> Just MetricRevenueEcpcPartner
+        "METRIC_REVENUE_ECPC_USD" -> Just MetricRevenueEcpcUsd
+        "METRIC_REVENUE_ECPM_ADVERTISER" -> Just MetricRevenueEcpmAdvertiser
+        "METRIC_REVENUE_ECPM_PARTNER" -> Just MetricRevenueEcpmPartner
+        "METRIC_REVENUE_ECPM_USD" -> Just MetricRevenueEcpmUsd
+        "METRIC_REVENUE_PARTNER" -> Just MetricRevenuePartner
+        "METRIC_REVENUE_USD" -> Just MetricRevenueUsd
+        "METRIC_RICH_MEDIA_VIDEO_COMPLETIONS" -> Just MetricRichMediaVideoCompletions
+        "METRIC_RICH_MEDIA_VIDEO_FIRST_QUARTILE_COMPLETES" -> Just MetricRichMediaVideoFirstQuartileCompletes
+        "METRIC_RICH_MEDIA_VIDEO_FULL_SCREENS" -> Just MetricRichMediaVideoFullScreens
+        "METRIC_RICH_MEDIA_VIDEO_MIDPOINTS" -> Just MetricRichMediaVideoMidpoints
+        "METRIC_RICH_MEDIA_VIDEO_MUTES" -> Just MetricRichMediaVideoMutes
+        "METRIC_RICH_MEDIA_VIDEO_PAUSES" -> Just MetricRichMediaVideoPauses
+        "METRIC_RICH_MEDIA_VIDEO_PLAYS" -> Just MetricRichMediaVideoPlays
+        "METRIC_RICH_MEDIA_VIDEO_SKIPS" -> Just MetricRichMediaVideoSkips
+        "METRIC_RICH_MEDIA_VIDEO_THIRD_QUARTILE_COMPLETES" -> Just MetricRichMediaVideoThirdQuartileCompletes
+        "METRIC_TEA_TRUEVIEW_IMPRESSIONS" -> Just MetricTeaTrueviewImpressions
+        "METRIC_TEA_TRUEVIEW_UNIQUE_COOKIES" -> Just MetricTeaTrueviewUniqueCookies
+        "METRIC_TEA_TRUEVIEW_UNIQUE_PEOPLE" -> Just MetricTeaTrueviewUniquePeople
+        "METRIC_TOTAL_CONVERSIONS" -> Just MetricTotalConversions
+        "METRIC_TOTAL_MEDIA_COST_ADVERTISER" -> Just MetricTotalMediaCostAdvertiser
+        "METRIC_TOTAL_MEDIA_COST_ECPAPC_ADVERTISER" -> Just MetricTotalMediaCostEcpapcAdvertiser
+        "METRIC_TOTAL_MEDIA_COST_ECPAPC_PARTNER" -> Just MetricTotalMediaCostEcpapcPartner
+        "METRIC_TOTAL_MEDIA_COST_ECPAPC_USD" -> Just MetricTotalMediaCostEcpapcUsd
+        "METRIC_TOTAL_MEDIA_COST_ECPAPV_ADVERTISER" -> Just MetricTotalMediaCostEcpapvAdvertiser
+        "METRIC_TOTAL_MEDIA_COST_ECPAPV_PARTNER" -> Just MetricTotalMediaCostEcpapvPartner
+        "METRIC_TOTAL_MEDIA_COST_ECPAPV_USD" -> Just MetricTotalMediaCostEcpapvUsd
+        "METRIC_TOTAL_MEDIA_COST_ECPA_ADVERTISER" -> Just MetricTotalMediaCostEcpaAdvertiser
+        "METRIC_TOTAL_MEDIA_COST_ECPA_PARTNER" -> Just MetricTotalMediaCostEcpaPartner
+        "METRIC_TOTAL_MEDIA_COST_ECPA_USD" -> Just MetricTotalMediaCostEcpaUsd
+        "METRIC_TOTAL_MEDIA_COST_ECPCV_ADVERTISER" -> Just MetricTotalMediaCostEcpcvAdvertiser
+        "METRIC_TOTAL_MEDIA_COST_ECPCV_PARTNER" -> Just MetricTotalMediaCostEcpcvPartner
+        "METRIC_TOTAL_MEDIA_COST_ECPCV_USD" -> Just MetricTotalMediaCostEcpcvUsd
+        "METRIC_TOTAL_MEDIA_COST_ECPC_ADVERTISER" -> Just MetricTotalMediaCostEcpcAdvertiser
+        "METRIC_TOTAL_MEDIA_COST_ECPC_PARTNER" -> Just MetricTotalMediaCostEcpcPartner
+        "METRIC_TOTAL_MEDIA_COST_ECPC_USD" -> Just MetricTotalMediaCostEcpcUsd
+        "METRIC_TOTAL_MEDIA_COST_ECPM_ADVERTISER" -> Just MetricTotalMediaCostEcpmAdvertiser
+        "METRIC_TOTAL_MEDIA_COST_ECPM_PARTNER" -> Just MetricTotalMediaCostEcpmPartner
+        "METRIC_TOTAL_MEDIA_COST_ECPM_USD" -> Just MetricTotalMediaCostEcpmUsd
+        "METRIC_TOTAL_MEDIA_COST_PARTNER" -> Just MetricTotalMediaCostPartner
+        "METRIC_TOTAL_MEDIA_COST_USD" -> Just MetricTotalMediaCostUsd
+        "METRIC_TRUEVIEW_CONVERSION_MANY_PER_VIEW" -> Just MetricTrueviewConversionManyPerView
+        "METRIC_TRUEVIEW_CONVERSION_ONE_PER_VIEW" -> Just MetricTrueviewConversionOnePerView
+        "METRIC_TRUEVIEW_CONVERSION_RATE_ONE_PER_VIEW" -> Just MetricTrueviewConversionRateOnePerView
+        "METRIC_TRUEVIEW_COST_CONVERSION_MANY_PER_VIEW_RATIO" -> Just MetricTrueviewCostConversionManyPerViewRatio
+        "METRIC_TRUEVIEW_COST_CONVERSION_ONE_PER_VIEW_RATIO" -> Just MetricTrueviewCostConversionOnePerViewRatio
+        "METRIC_TRUEVIEW_CPV_ADVERTISER" -> Just MetricTrueviewCpvAdvertiser
+        "METRIC_TRUEVIEW_CPV_PARTNER" -> Just MetricTrueviewCpvPartner
+        "METRIC_TRUEVIEW_CPV_USD" -> Just MetricTrueviewCpvUsd
+        "METRIC_TRUEVIEW_EARNED_LIKES" -> Just MetricTrueviewEarnedLikes
+        "METRIC_TRUEVIEW_EARNED_PLAYLIST_ADDITIONS" -> Just MetricTrueviewEarnedPlaylistAdditions
+        "METRIC_TRUEVIEW_EARNED_SHARES" -> Just MetricTrueviewEarnedShares
+        "METRIC_TRUEVIEW_EARNED_SUBSCRIBERS" -> Just MetricTrueviewEarnedSubscribers
+        "METRIC_TRUEVIEW_EARNED_VIEWS" -> Just MetricTrueviewEarnedViews
+        "METRIC_TRUEVIEW_IMPRESSION_SHARE" -> Just MetricTrueviewImpressionShare
+        "METRIC_TRUEVIEW_LOST_IS_BUDGET" -> Just MetricTrueviewLostIsBudget
+        "METRIC_TRUEVIEW_LOST_IS_RANK" -> Just MetricTrueviewLostIsRank
+        "METRIC_TRUEVIEW_TOTAL_CONVERSION_VALUE" -> Just MetricTrueviewTotalConversionValue
+        "METRIC_TRUEVIEW_UNIQUE_VIEWERS" -> Just MetricTrueviewUniqueViewers
+        "METRIC_TRUEVIEW_VALUE_CONVERSION_MANY_PER_VIEW_RATIO" -> Just MetricTrueviewValueConversionManyPerViewRatio
+        "METRIC_TRUEVIEW_VALUE_CONVERSION_ONE_PER_VIEW_RATIO" -> Just MetricTrueviewValueConversionOnePerViewRatio
+        "METRIC_TRUEVIEW_VIEWS" -> Just MetricTrueviewViews
+        "METRIC_TRUEVIEW_VIEW_RATE" -> Just MetricTrueviewViewRate
+        "METRIC_TRUEVIEW_VIEW_THROUGH_CONVERSION" -> Just MetricTrueviewViewThroughConversion
+        "METRIC_UNIQUE_VISITORS_COOKIES" -> Just MetricUniqueVisitorsCookies
+        "METRIC_UNKNOWN" -> Just MetricUnknown
+        "METRIC_VIDEO_COMPANION_CLICKS" -> Just MetricVideoCompanionClicks
+        "METRIC_VIDEO_COMPANION_IMPRESSIONS" -> Just MetricVideoCompanionImpressions
+        "METRIC_VIDEO_COMPLETION_RATE" -> Just MetricVideoCompletionRate
         _ -> Nothing
 
 instance ToText ParametersItemMetrics where
     toText = \case
-        PIMMetricBidRequests -> "METRIC_BID_REQUESTS"
-        PIMMetricBillableCostAdvertiser -> "METRIC_BILLABLE_COST_ADVERTISER"
-        PIMMetricBillableCostPartner -> "METRIC_BILLABLE_COST_PARTNER"
-        PIMMetricBillableCostUsd -> "METRIC_BILLABLE_COST_USD"
-        PIMMetricClicks -> "METRIC_CLICKS"
-        PIMMetricClickToPostClickConversionRate -> "METRIC_CLICK_TO_POST_CLICK_CONVERSION_RATE"
-        PIMMetricComscoreVceAudienceAvgFrequency -> "METRIC_COMSCORE_VCE_AUDIENCE_AVG_FREQUENCY"
-        PIMMetricComscoreVceAudienceImpressions -> "METRIC_COMSCORE_VCE_AUDIENCE_IMPRESSIONS"
-        PIMMetricComscoreVceAudienceImpressionsShare -> "METRIC_COMSCORE_VCE_AUDIENCE_IMPRESSIONS_SHARE"
-        PIMMetricComscoreVceAudienceReachPct -> "METRIC_COMSCORE_VCE_AUDIENCE_REACH_PCT"
-        PIMMetricComscoreVceAudienceSharePct -> "METRIC_COMSCORE_VCE_AUDIENCE_SHARE_PCT"
-        PIMMetricComscoreVceGrossRatingPoints -> "METRIC_COMSCORE_VCE_GROSS_RATING_POINTS"
-        PIMMetricComscoreVcePopulation -> "METRIC_COMSCORE_VCE_POPULATION"
-        PIMMetricComscoreVceUniqueAudience -> "METRIC_COMSCORE_VCE_UNIQUE_AUDIENCE"
-        PIMMetricConversionsPerMille -> "METRIC_CONVERSIONS_PER_MILLE"
-        PIMMetricCpmFEE1Advertiser -> "METRIC_CPM_FEE1_ADVERTISER"
-        PIMMetricCpmFEE1Partner -> "METRIC_CPM_FEE1_PARTNER"
-        PIMMetricCpmFEE1Usd -> "METRIC_CPM_FEE1_USD"
-        PIMMetricCpmFEE2Advertiser -> "METRIC_CPM_FEE2_ADVERTISER"
-        PIMMetricCpmFEE2Partner -> "METRIC_CPM_FEE2_PARTNER"
-        PIMMetricCpmFEE2Usd -> "METRIC_CPM_FEE2_USD"
-        PIMMetricCpmFEE3Advertiser -> "METRIC_CPM_FEE3_ADVERTISER"
-        PIMMetricCpmFEE3Partner -> "METRIC_CPM_FEE3_PARTNER"
-        PIMMetricCpmFEE3Usd -> "METRIC_CPM_FEE3_USD"
-        PIMMetricCpmFEE4Advertiser -> "METRIC_CPM_FEE4_ADVERTISER"
-        PIMMetricCpmFEE4Partner -> "METRIC_CPM_FEE4_PARTNER"
-        PIMMetricCpmFEE4Usd -> "METRIC_CPM_FEE4_USD"
-        PIMMetricCpmFEE5Advertiser -> "METRIC_CPM_FEE5_ADVERTISER"
-        PIMMetricCpmFEE5Partner -> "METRIC_CPM_FEE5_PARTNER"
-        PIMMetricCpmFEE5Usd -> "METRIC_CPM_FEE5_USD"
-        PIMMetricCtr -> "METRIC_CTR"
-        PIMMetricDataCostAdvertiser -> "METRIC_DATA_COST_ADVERTISER"
-        PIMMetricDataCostPartner -> "METRIC_DATA_COST_PARTNER"
-        PIMMetricDataCostUsd -> "METRIC_DATA_COST_USD"
-        PIMMetricFEE10Advertiser -> "METRIC_FEE10_ADVERTISER"
-        PIMMetricFEE10Partner -> "METRIC_FEE10_PARTNER"
-        PIMMetricFEE10Usd -> "METRIC_FEE10_USD"
-        PIMMetricFEE11Advertiser -> "METRIC_FEE11_ADVERTISER"
-        PIMMetricFEE11Partner -> "METRIC_FEE11_PARTNER"
-        PIMMetricFEE11Usd -> "METRIC_FEE11_USD"
-        PIMMetricFEE12Advertiser -> "METRIC_FEE12_ADVERTISER"
-        PIMMetricFEE12Partner -> "METRIC_FEE12_PARTNER"
-        PIMMetricFEE12Usd -> "METRIC_FEE12_USD"
-        PIMMetricFEE13Advertiser -> "METRIC_FEE13_ADVERTISER"
-        PIMMetricFEE13Partner -> "METRIC_FEE13_PARTNER"
-        PIMMetricFEE13Usd -> "METRIC_FEE13_USD"
-        PIMMetricFEE14Advertiser -> "METRIC_FEE14_ADVERTISER"
-        PIMMetricFEE14Partner -> "METRIC_FEE14_PARTNER"
-        PIMMetricFEE14Usd -> "METRIC_FEE14_USD"
-        PIMMetricFEE15Advertiser -> "METRIC_FEE15_ADVERTISER"
-        PIMMetricFEE15Partner -> "METRIC_FEE15_PARTNER"
-        PIMMetricFEE15Usd -> "METRIC_FEE15_USD"
-        PIMMetricFEE16Advertiser -> "METRIC_FEE16_ADVERTISER"
-        PIMMetricFEE16Partner -> "METRIC_FEE16_PARTNER"
-        PIMMetricFEE16Usd -> "METRIC_FEE16_USD"
-        PIMMetricFEE17Advertiser -> "METRIC_FEE17_ADVERTISER"
-        PIMMetricFEE17Partner -> "METRIC_FEE17_PARTNER"
-        PIMMetricFEE17Usd -> "METRIC_FEE17_USD"
-        PIMMetricFEE18Advertiser -> "METRIC_FEE18_ADVERTISER"
-        PIMMetricFEE18Partner -> "METRIC_FEE18_PARTNER"
-        PIMMetricFEE18Usd -> "METRIC_FEE18_USD"
-        PIMMetricFEE19Advertiser -> "METRIC_FEE19_ADVERTISER"
-        PIMMetricFEE19Partner -> "METRIC_FEE19_PARTNER"
-        PIMMetricFEE19Usd -> "METRIC_FEE19_USD"
-        PIMMetricFEE20Advertiser -> "METRIC_FEE20_ADVERTISER"
-        PIMMetricFEE20Partner -> "METRIC_FEE20_PARTNER"
-        PIMMetricFEE20Usd -> "METRIC_FEE20_USD"
-        PIMMetricFEE2Advertiser -> "METRIC_FEE2_ADVERTISER"
-        PIMMetricFEE2Partner -> "METRIC_FEE2_PARTNER"
-        PIMMetricFEE2Usd -> "METRIC_FEE2_USD"
-        PIMMetricFEE3Advertiser -> "METRIC_FEE3_ADVERTISER"
-        PIMMetricFEE3Partner -> "METRIC_FEE3_PARTNER"
-        PIMMetricFEE3Usd -> "METRIC_FEE3_USD"
-        PIMMetricFEE4Advertiser -> "METRIC_FEE4_ADVERTISER"
-        PIMMetricFEE4Partner -> "METRIC_FEE4_PARTNER"
-        PIMMetricFEE4Usd -> "METRIC_FEE4_USD"
-        PIMMetricFEE5Advertiser -> "METRIC_FEE5_ADVERTISER"
-        PIMMetricFEE5Partner -> "METRIC_FEE5_PARTNER"
-        PIMMetricFEE5Usd -> "METRIC_FEE5_USD"
-        PIMMetricFEE6Advertiser -> "METRIC_FEE6_ADVERTISER"
-        PIMMetricFEE6Partner -> "METRIC_FEE6_PARTNER"
-        PIMMetricFEE6Usd -> "METRIC_FEE6_USD"
-        PIMMetricFEE7Advertiser -> "METRIC_FEE7_ADVERTISER"
-        PIMMetricFEE7Partner -> "METRIC_FEE7_PARTNER"
-        PIMMetricFEE7Usd -> "METRIC_FEE7_USD"
-        PIMMetricFEE8Advertiser -> "METRIC_FEE8_ADVERTISER"
-        PIMMetricFEE8Partner -> "METRIC_FEE8_PARTNER"
-        PIMMetricFEE8Usd -> "METRIC_FEE8_USD"
-        PIMMetricFEE9Advertiser -> "METRIC_FEE9_ADVERTISER"
-        PIMMetricFEE9Partner -> "METRIC_FEE9_PARTNER"
-        PIMMetricFEE9Usd -> "METRIC_FEE9_USD"
-        PIMMetricImpressions -> "METRIC_IMPRESSIONS"
-        PIMMetricImpressionsToConversionRate -> "METRIC_IMPRESSIONS_TO_CONVERSION_RATE"
-        PIMMetricLastClicks -> "METRIC_LAST_CLICKS"
-        PIMMetricLastImpressions -> "METRIC_LAST_IMPRESSIONS"
-        PIMMetricMediaCostAdvertiser -> "METRIC_MEDIA_COST_ADVERTISER"
-        PIMMetricMediaCostEcpapcAdvertiser -> "METRIC_MEDIA_COST_ECPAPC_ADVERTISER"
-        PIMMetricMediaCostEcpapcPartner -> "METRIC_MEDIA_COST_ECPAPC_PARTNER"
-        PIMMetricMediaCostEcpapcUsd -> "METRIC_MEDIA_COST_ECPAPC_USD"
-        PIMMetricMediaCostEcpapvAdvertiser -> "METRIC_MEDIA_COST_ECPAPV_ADVERTISER"
-        PIMMetricMediaCostEcpapvPartner -> "METRIC_MEDIA_COST_ECPAPV_PARTNER"
-        PIMMetricMediaCostEcpapvUsd -> "METRIC_MEDIA_COST_ECPAPV_USD"
-        PIMMetricMediaCostEcpaAdvertiser -> "METRIC_MEDIA_COST_ECPA_ADVERTISER"
-        PIMMetricMediaCostEcpaPartner -> "METRIC_MEDIA_COST_ECPA_PARTNER"
-        PIMMetricMediaCostEcpaUsd -> "METRIC_MEDIA_COST_ECPA_USD"
-        PIMMetricMediaCostEcpcvAdvertiser -> "METRIC_MEDIA_COST_ECPCV_ADVERTISER"
-        PIMMetricMediaCostEcpcvPartner -> "METRIC_MEDIA_COST_ECPCV_PARTNER"
-        PIMMetricMediaCostEcpcvUsd -> "METRIC_MEDIA_COST_ECPCV_USD"
-        PIMMetricMediaCostEcpcAdvertiser -> "METRIC_MEDIA_COST_ECPC_ADVERTISER"
-        PIMMetricMediaCostEcpcPartner -> "METRIC_MEDIA_COST_ECPC_PARTNER"
-        PIMMetricMediaCostEcpcUsd -> "METRIC_MEDIA_COST_ECPC_USD"
-        PIMMetricMediaCostEcpmAdvertiser -> "METRIC_MEDIA_COST_ECPM_ADVERTISER"
-        PIMMetricMediaCostEcpmPartner -> "METRIC_MEDIA_COST_ECPM_PARTNER"
-        PIMMetricMediaCostEcpmUsd -> "METRIC_MEDIA_COST_ECPM_USD"
-        PIMMetricMediaCostPartner -> "METRIC_MEDIA_COST_PARTNER"
-        PIMMetricMediaCostUsd -> "METRIC_MEDIA_COST_USD"
-        PIMMetricMediaFEE1Advertiser -> "METRIC_MEDIA_FEE1_ADVERTISER"
-        PIMMetricMediaFEE1Partner -> "METRIC_MEDIA_FEE1_PARTNER"
-        PIMMetricMediaFEE1Usd -> "METRIC_MEDIA_FEE1_USD"
-        PIMMetricMediaFEE2Advertiser -> "METRIC_MEDIA_FEE2_ADVERTISER"
-        PIMMetricMediaFEE2Partner -> "METRIC_MEDIA_FEE2_PARTNER"
-        PIMMetricMediaFEE2Usd -> "METRIC_MEDIA_FEE2_USD"
-        PIMMetricMediaFEE3Advertiser -> "METRIC_MEDIA_FEE3_ADVERTISER"
-        PIMMetricMediaFEE3Partner -> "METRIC_MEDIA_FEE3_PARTNER"
-        PIMMetricMediaFEE3Usd -> "METRIC_MEDIA_FEE3_USD"
-        PIMMetricMediaFEE4Advertiser -> "METRIC_MEDIA_FEE4_ADVERTISER"
-        PIMMetricMediaFEE4Partner -> "METRIC_MEDIA_FEE4_PARTNER"
-        PIMMetricMediaFEE4Usd -> "METRIC_MEDIA_FEE4_USD"
-        PIMMetricMediaFEE5Advertiser -> "METRIC_MEDIA_FEE5_ADVERTISER"
-        PIMMetricMediaFEE5Partner -> "METRIC_MEDIA_FEE5_PARTNER"
-        PIMMetricMediaFEE5Usd -> "METRIC_MEDIA_FEE5_USD"
-        PIMMetricPixelLoads -> "METRIC_PIXEL_LOADS"
-        PIMMetricPlatformFeeAdvertiser -> "METRIC_PLATFORM_FEE_ADVERTISER"
-        PIMMetricPlatformFeePartner -> "METRIC_PLATFORM_FEE_PARTNER"
-        PIMMetricPlatformFeeUsd -> "METRIC_PLATFORM_FEE_USD"
-        PIMMetricPostClickDfaRevenue -> "METRIC_POST_CLICK_DFA_REVENUE"
-        PIMMetricPostViewDfaRevenue -> "METRIC_POST_VIEW_DFA_REVENUE"
-        PIMMetricProfitAdvertiser -> "METRIC_PROFIT_ADVERTISER"
-        PIMMetricProfitEcpapcAdvertiser -> "METRIC_PROFIT_ECPAPC_ADVERTISER"
-        PIMMetricProfitEcpapcPartner -> "METRIC_PROFIT_ECPAPC_PARTNER"
-        PIMMetricProfitEcpapcUsd -> "METRIC_PROFIT_ECPAPC_USD"
-        PIMMetricProfitEcpapvAdvertiser -> "METRIC_PROFIT_ECPAPV_ADVERTISER"
-        PIMMetricProfitEcpapvPartner -> "METRIC_PROFIT_ECPAPV_PARTNER"
-        PIMMetricProfitEcpapvUsd -> "METRIC_PROFIT_ECPAPV_USD"
-        PIMMetricProfitEcpaAdvertiser -> "METRIC_PROFIT_ECPA_ADVERTISER"
-        PIMMetricProfitEcpaPartner -> "METRIC_PROFIT_ECPA_PARTNER"
-        PIMMetricProfitEcpaUsd -> "METRIC_PROFIT_ECPA_USD"
-        PIMMetricProfitEcpcAdvertiser -> "METRIC_PROFIT_ECPC_ADVERTISER"
-        PIMMetricProfitEcpcPartner -> "METRIC_PROFIT_ECPC_PARTNER"
-        PIMMetricProfitEcpcUsd -> "METRIC_PROFIT_ECPC_USD"
-        PIMMetricProfitEcpmAdvertiser -> "METRIC_PROFIT_ECPM_ADVERTISER"
-        PIMMetricProfitEcpmPartner -> "METRIC_PROFIT_ECPM_PARTNER"
-        PIMMetricProfitEcpmUsd -> "METRIC_PROFIT_ECPM_USD"
-        PIMMetricProfitMargin -> "METRIC_PROFIT_MARGIN"
-        PIMMetricProfitPartner -> "METRIC_PROFIT_PARTNER"
-        PIMMetricProfitUsd -> "METRIC_PROFIT_USD"
-        PIMMetricRevenueAdvertiser -> "METRIC_REVENUE_ADVERTISER"
-        PIMMetricRevenueEcpapcAdvertiser -> "METRIC_REVENUE_ECPAPC_ADVERTISER"
-        PIMMetricRevenueEcpapcPartner -> "METRIC_REVENUE_ECPAPC_PARTNER"
-        PIMMetricRevenueEcpapcUsd -> "METRIC_REVENUE_ECPAPC_USD"
-        PIMMetricRevenueEcpapvAdvertiser -> "METRIC_REVENUE_ECPAPV_ADVERTISER"
-        PIMMetricRevenueEcpapvPartner -> "METRIC_REVENUE_ECPAPV_PARTNER"
-        PIMMetricRevenueEcpapvUsd -> "METRIC_REVENUE_ECPAPV_USD"
-        PIMMetricRevenueEcpaAdvertiser -> "METRIC_REVENUE_ECPA_ADVERTISER"
-        PIMMetricRevenueEcpaPartner -> "METRIC_REVENUE_ECPA_PARTNER"
-        PIMMetricRevenueEcpaUsd -> "METRIC_REVENUE_ECPA_USD"
-        PIMMetricRevenueEcpcvAdvertiser -> "METRIC_REVENUE_ECPCV_ADVERTISER"
-        PIMMetricRevenueEcpcvPartner -> "METRIC_REVENUE_ECPCV_PARTNER"
-        PIMMetricRevenueEcpcvUsd -> "METRIC_REVENUE_ECPCV_USD"
-        PIMMetricRevenueEcpcAdvertiser -> "METRIC_REVENUE_ECPC_ADVERTISER"
-        PIMMetricRevenueEcpcPartner -> "METRIC_REVENUE_ECPC_PARTNER"
-        PIMMetricRevenueEcpcUsd -> "METRIC_REVENUE_ECPC_USD"
-        PIMMetricRevenueEcpmAdvertiser -> "METRIC_REVENUE_ECPM_ADVERTISER"
-        PIMMetricRevenueEcpmPartner -> "METRIC_REVENUE_ECPM_PARTNER"
-        PIMMetricRevenueEcpmUsd -> "METRIC_REVENUE_ECPM_USD"
-        PIMMetricRevenuePartner -> "METRIC_REVENUE_PARTNER"
-        PIMMetricRevenueUsd -> "METRIC_REVENUE_USD"
-        PIMMetricRichMediaVideoCompletions -> "METRIC_RICH_MEDIA_VIDEO_COMPLETIONS"
-        PIMMetricRichMediaVideoFirstQuartileCompletes -> "METRIC_RICH_MEDIA_VIDEO_FIRST_QUARTILE_COMPLETES"
-        PIMMetricRichMediaVideoFullScreens -> "METRIC_RICH_MEDIA_VIDEO_FULL_SCREENS"
-        PIMMetricRichMediaVideoMidpoints -> "METRIC_RICH_MEDIA_VIDEO_MIDPOINTS"
-        PIMMetricRichMediaVideoMutes -> "METRIC_RICH_MEDIA_VIDEO_MUTES"
-        PIMMetricRichMediaVideoPauses -> "METRIC_RICH_MEDIA_VIDEO_PAUSES"
-        PIMMetricRichMediaVideoPlays -> "METRIC_RICH_MEDIA_VIDEO_PLAYS"
-        PIMMetricRichMediaVideoSkips -> "METRIC_RICH_MEDIA_VIDEO_SKIPS"
-        PIMMetricRichMediaVideoThirdQuartileCompletes -> "METRIC_RICH_MEDIA_VIDEO_THIRD_QUARTILE_COMPLETES"
-        PIMMetricTeaTrueviewImpressions -> "METRIC_TEA_TRUEVIEW_IMPRESSIONS"
-        PIMMetricTeaTrueviewUniqueCookies -> "METRIC_TEA_TRUEVIEW_UNIQUE_COOKIES"
-        PIMMetricTeaTrueviewUniquePeople -> "METRIC_TEA_TRUEVIEW_UNIQUE_PEOPLE"
-        PIMMetricTotalConversions -> "METRIC_TOTAL_CONVERSIONS"
-        PIMMetricTotalMediaCostAdvertiser -> "METRIC_TOTAL_MEDIA_COST_ADVERTISER"
-        PIMMetricTotalMediaCostEcpapcAdvertiser -> "METRIC_TOTAL_MEDIA_COST_ECPAPC_ADVERTISER"
-        PIMMetricTotalMediaCostEcpapcPartner -> "METRIC_TOTAL_MEDIA_COST_ECPAPC_PARTNER"
-        PIMMetricTotalMediaCostEcpapcUsd -> "METRIC_TOTAL_MEDIA_COST_ECPAPC_USD"
-        PIMMetricTotalMediaCostEcpapvAdvertiser -> "METRIC_TOTAL_MEDIA_COST_ECPAPV_ADVERTISER"
-        PIMMetricTotalMediaCostEcpapvPartner -> "METRIC_TOTAL_MEDIA_COST_ECPAPV_PARTNER"
-        PIMMetricTotalMediaCostEcpapvUsd -> "METRIC_TOTAL_MEDIA_COST_ECPAPV_USD"
-        PIMMetricTotalMediaCostEcpaAdvertiser -> "METRIC_TOTAL_MEDIA_COST_ECPA_ADVERTISER"
-        PIMMetricTotalMediaCostEcpaPartner -> "METRIC_TOTAL_MEDIA_COST_ECPA_PARTNER"
-        PIMMetricTotalMediaCostEcpaUsd -> "METRIC_TOTAL_MEDIA_COST_ECPA_USD"
-        PIMMetricTotalMediaCostEcpcvAdvertiser -> "METRIC_TOTAL_MEDIA_COST_ECPCV_ADVERTISER"
-        PIMMetricTotalMediaCostEcpcvPartner -> "METRIC_TOTAL_MEDIA_COST_ECPCV_PARTNER"
-        PIMMetricTotalMediaCostEcpcvUsd -> "METRIC_TOTAL_MEDIA_COST_ECPCV_USD"
-        PIMMetricTotalMediaCostEcpcAdvertiser -> "METRIC_TOTAL_MEDIA_COST_ECPC_ADVERTISER"
-        PIMMetricTotalMediaCostEcpcPartner -> "METRIC_TOTAL_MEDIA_COST_ECPC_PARTNER"
-        PIMMetricTotalMediaCostEcpcUsd -> "METRIC_TOTAL_MEDIA_COST_ECPC_USD"
-        PIMMetricTotalMediaCostEcpmAdvertiser -> "METRIC_TOTAL_MEDIA_COST_ECPM_ADVERTISER"
-        PIMMetricTotalMediaCostEcpmPartner -> "METRIC_TOTAL_MEDIA_COST_ECPM_PARTNER"
-        PIMMetricTotalMediaCostEcpmUsd -> "METRIC_TOTAL_MEDIA_COST_ECPM_USD"
-        PIMMetricTotalMediaCostPartner -> "METRIC_TOTAL_MEDIA_COST_PARTNER"
-        PIMMetricTotalMediaCostUsd -> "METRIC_TOTAL_MEDIA_COST_USD"
-        PIMMetricTrueviewConversionManyPerView -> "METRIC_TRUEVIEW_CONVERSION_MANY_PER_VIEW"
-        PIMMetricTrueviewConversionOnePerView -> "METRIC_TRUEVIEW_CONVERSION_ONE_PER_VIEW"
-        PIMMetricTrueviewConversionRateOnePerView -> "METRIC_TRUEVIEW_CONVERSION_RATE_ONE_PER_VIEW"
-        PIMMetricTrueviewCostConversionManyPerViewRatio -> "METRIC_TRUEVIEW_COST_CONVERSION_MANY_PER_VIEW_RATIO"
-        PIMMetricTrueviewCostConversionOnePerViewRatio -> "METRIC_TRUEVIEW_COST_CONVERSION_ONE_PER_VIEW_RATIO"
-        PIMMetricTrueviewCpvAdvertiser -> "METRIC_TRUEVIEW_CPV_ADVERTISER"
-        PIMMetricTrueviewCpvPartner -> "METRIC_TRUEVIEW_CPV_PARTNER"
-        PIMMetricTrueviewCpvUsd -> "METRIC_TRUEVIEW_CPV_USD"
-        PIMMetricTrueviewEarnedLikes -> "METRIC_TRUEVIEW_EARNED_LIKES"
-        PIMMetricTrueviewEarnedPlaylistAdditions -> "METRIC_TRUEVIEW_EARNED_PLAYLIST_ADDITIONS"
-        PIMMetricTrueviewEarnedShares -> "METRIC_TRUEVIEW_EARNED_SHARES"
-        PIMMetricTrueviewEarnedSubscribers -> "METRIC_TRUEVIEW_EARNED_SUBSCRIBERS"
-        PIMMetricTrueviewEarnedViews -> "METRIC_TRUEVIEW_EARNED_VIEWS"
-        PIMMetricTrueviewImpressionShare -> "METRIC_TRUEVIEW_IMPRESSION_SHARE"
-        PIMMetricTrueviewLostIsBudget -> "METRIC_TRUEVIEW_LOST_IS_BUDGET"
-        PIMMetricTrueviewLostIsRank -> "METRIC_TRUEVIEW_LOST_IS_RANK"
-        PIMMetricTrueviewTotalConversionValue -> "METRIC_TRUEVIEW_TOTAL_CONVERSION_VALUE"
-        PIMMetricTrueviewUniqueViewers -> "METRIC_TRUEVIEW_UNIQUE_VIEWERS"
-        PIMMetricTrueviewValueConversionManyPerViewRatio -> "METRIC_TRUEVIEW_VALUE_CONVERSION_MANY_PER_VIEW_RATIO"
-        PIMMetricTrueviewValueConversionOnePerViewRatio -> "METRIC_TRUEVIEW_VALUE_CONVERSION_ONE_PER_VIEW_RATIO"
-        PIMMetricTrueviewViews -> "METRIC_TRUEVIEW_VIEWS"
-        PIMMetricTrueviewViewRate -> "METRIC_TRUEVIEW_VIEW_RATE"
-        PIMMetricTrueviewViewThroughConversion -> "METRIC_TRUEVIEW_VIEW_THROUGH_CONVERSION"
-        PIMMetricUniqueVisitorsCookies -> "METRIC_UNIQUE_VISITORS_COOKIES"
-        PIMMetricUnknown -> "METRIC_UNKNOWN"
-        PIMMetricVideoCompanionClicks -> "METRIC_VIDEO_COMPANION_CLICKS"
-        PIMMetricVideoCompanionImpressions -> "METRIC_VIDEO_COMPANION_IMPRESSIONS"
-        PIMMetricVideoCompletionRate -> "METRIC_VIDEO_COMPLETION_RATE"
+        MetricBidRequests -> "METRIC_BID_REQUESTS"
+        MetricBillableCostAdvertiser -> "METRIC_BILLABLE_COST_ADVERTISER"
+        MetricBillableCostPartner -> "METRIC_BILLABLE_COST_PARTNER"
+        MetricBillableCostUsd -> "METRIC_BILLABLE_COST_USD"
+        MetricClicks -> "METRIC_CLICKS"
+        MetricClickToPostClickConversionRate -> "METRIC_CLICK_TO_POST_CLICK_CONVERSION_RATE"
+        MetricComscoreVceAudienceAvgFrequency -> "METRIC_COMSCORE_VCE_AUDIENCE_AVG_FREQUENCY"
+        MetricComscoreVceAudienceImpressions -> "METRIC_COMSCORE_VCE_AUDIENCE_IMPRESSIONS"
+        MetricComscoreVceAudienceImpressionsShare -> "METRIC_COMSCORE_VCE_AUDIENCE_IMPRESSIONS_SHARE"
+        MetricComscoreVceAudienceReachPct -> "METRIC_COMSCORE_VCE_AUDIENCE_REACH_PCT"
+        MetricComscoreVceAudienceSharePct -> "METRIC_COMSCORE_VCE_AUDIENCE_SHARE_PCT"
+        MetricComscoreVceGrossRatingPoints -> "METRIC_COMSCORE_VCE_GROSS_RATING_POINTS"
+        MetricComscoreVcePopulation -> "METRIC_COMSCORE_VCE_POPULATION"
+        MetricComscoreVceUniqueAudience -> "METRIC_COMSCORE_VCE_UNIQUE_AUDIENCE"
+        MetricConversionsPerMille -> "METRIC_CONVERSIONS_PER_MILLE"
+        MetricCpmFEE1Advertiser -> "METRIC_CPM_FEE1_ADVERTISER"
+        MetricCpmFEE1Partner -> "METRIC_CPM_FEE1_PARTNER"
+        MetricCpmFEE1Usd -> "METRIC_CPM_FEE1_USD"
+        MetricCpmFEE2Advertiser -> "METRIC_CPM_FEE2_ADVERTISER"
+        MetricCpmFEE2Partner -> "METRIC_CPM_FEE2_PARTNER"
+        MetricCpmFEE2Usd -> "METRIC_CPM_FEE2_USD"
+        MetricCpmFEE3Advertiser -> "METRIC_CPM_FEE3_ADVERTISER"
+        MetricCpmFEE3Partner -> "METRIC_CPM_FEE3_PARTNER"
+        MetricCpmFEE3Usd -> "METRIC_CPM_FEE3_USD"
+        MetricCpmFEE4Advertiser -> "METRIC_CPM_FEE4_ADVERTISER"
+        MetricCpmFEE4Partner -> "METRIC_CPM_FEE4_PARTNER"
+        MetricCpmFEE4Usd -> "METRIC_CPM_FEE4_USD"
+        MetricCpmFEE5Advertiser -> "METRIC_CPM_FEE5_ADVERTISER"
+        MetricCpmFEE5Partner -> "METRIC_CPM_FEE5_PARTNER"
+        MetricCpmFEE5Usd -> "METRIC_CPM_FEE5_USD"
+        MetricCtr -> "METRIC_CTR"
+        MetricDataCostAdvertiser -> "METRIC_DATA_COST_ADVERTISER"
+        MetricDataCostPartner -> "METRIC_DATA_COST_PARTNER"
+        MetricDataCostUsd -> "METRIC_DATA_COST_USD"
+        MetricFEE10Advertiser -> "METRIC_FEE10_ADVERTISER"
+        MetricFEE10Partner -> "METRIC_FEE10_PARTNER"
+        MetricFEE10Usd -> "METRIC_FEE10_USD"
+        MetricFEE11Advertiser -> "METRIC_FEE11_ADVERTISER"
+        MetricFEE11Partner -> "METRIC_FEE11_PARTNER"
+        MetricFEE11Usd -> "METRIC_FEE11_USD"
+        MetricFEE12Advertiser -> "METRIC_FEE12_ADVERTISER"
+        MetricFEE12Partner -> "METRIC_FEE12_PARTNER"
+        MetricFEE12Usd -> "METRIC_FEE12_USD"
+        MetricFEE13Advertiser -> "METRIC_FEE13_ADVERTISER"
+        MetricFEE13Partner -> "METRIC_FEE13_PARTNER"
+        MetricFEE13Usd -> "METRIC_FEE13_USD"
+        MetricFEE14Advertiser -> "METRIC_FEE14_ADVERTISER"
+        MetricFEE14Partner -> "METRIC_FEE14_PARTNER"
+        MetricFEE14Usd -> "METRIC_FEE14_USD"
+        MetricFEE15Advertiser -> "METRIC_FEE15_ADVERTISER"
+        MetricFEE15Partner -> "METRIC_FEE15_PARTNER"
+        MetricFEE15Usd -> "METRIC_FEE15_USD"
+        MetricFEE16Advertiser -> "METRIC_FEE16_ADVERTISER"
+        MetricFEE16Partner -> "METRIC_FEE16_PARTNER"
+        MetricFEE16Usd -> "METRIC_FEE16_USD"
+        MetricFEE17Advertiser -> "METRIC_FEE17_ADVERTISER"
+        MetricFEE17Partner -> "METRIC_FEE17_PARTNER"
+        MetricFEE17Usd -> "METRIC_FEE17_USD"
+        MetricFEE18Advertiser -> "METRIC_FEE18_ADVERTISER"
+        MetricFEE18Partner -> "METRIC_FEE18_PARTNER"
+        MetricFEE18Usd -> "METRIC_FEE18_USD"
+        MetricFEE19Advertiser -> "METRIC_FEE19_ADVERTISER"
+        MetricFEE19Partner -> "METRIC_FEE19_PARTNER"
+        MetricFEE19Usd -> "METRIC_FEE19_USD"
+        MetricFEE20Advertiser -> "METRIC_FEE20_ADVERTISER"
+        MetricFEE20Partner -> "METRIC_FEE20_PARTNER"
+        MetricFEE20Usd -> "METRIC_FEE20_USD"
+        MetricFEE2Advertiser -> "METRIC_FEE2_ADVERTISER"
+        MetricFEE2Partner -> "METRIC_FEE2_PARTNER"
+        MetricFEE2Usd -> "METRIC_FEE2_USD"
+        MetricFEE3Advertiser -> "METRIC_FEE3_ADVERTISER"
+        MetricFEE3Partner -> "METRIC_FEE3_PARTNER"
+        MetricFEE3Usd -> "METRIC_FEE3_USD"
+        MetricFEE4Advertiser -> "METRIC_FEE4_ADVERTISER"
+        MetricFEE4Partner -> "METRIC_FEE4_PARTNER"
+        MetricFEE4Usd -> "METRIC_FEE4_USD"
+        MetricFEE5Advertiser -> "METRIC_FEE5_ADVERTISER"
+        MetricFEE5Partner -> "METRIC_FEE5_PARTNER"
+        MetricFEE5Usd -> "METRIC_FEE5_USD"
+        MetricFEE6Advertiser -> "METRIC_FEE6_ADVERTISER"
+        MetricFEE6Partner -> "METRIC_FEE6_PARTNER"
+        MetricFEE6Usd -> "METRIC_FEE6_USD"
+        MetricFEE7Advertiser -> "METRIC_FEE7_ADVERTISER"
+        MetricFEE7Partner -> "METRIC_FEE7_PARTNER"
+        MetricFEE7Usd -> "METRIC_FEE7_USD"
+        MetricFEE8Advertiser -> "METRIC_FEE8_ADVERTISER"
+        MetricFEE8Partner -> "METRIC_FEE8_PARTNER"
+        MetricFEE8Usd -> "METRIC_FEE8_USD"
+        MetricFEE9Advertiser -> "METRIC_FEE9_ADVERTISER"
+        MetricFEE9Partner -> "METRIC_FEE9_PARTNER"
+        MetricFEE9Usd -> "METRIC_FEE9_USD"
+        MetricImpressions -> "METRIC_IMPRESSIONS"
+        MetricImpressionsToConversionRate -> "METRIC_IMPRESSIONS_TO_CONVERSION_RATE"
+        MetricLastClicks -> "METRIC_LAST_CLICKS"
+        MetricLastImpressions -> "METRIC_LAST_IMPRESSIONS"
+        MetricMediaCostAdvertiser -> "METRIC_MEDIA_COST_ADVERTISER"
+        MetricMediaCostEcpapcAdvertiser -> "METRIC_MEDIA_COST_ECPAPC_ADVERTISER"
+        MetricMediaCostEcpapcPartner -> "METRIC_MEDIA_COST_ECPAPC_PARTNER"
+        MetricMediaCostEcpapcUsd -> "METRIC_MEDIA_COST_ECPAPC_USD"
+        MetricMediaCostEcpapvAdvertiser -> "METRIC_MEDIA_COST_ECPAPV_ADVERTISER"
+        MetricMediaCostEcpapvPartner -> "METRIC_MEDIA_COST_ECPAPV_PARTNER"
+        MetricMediaCostEcpapvUsd -> "METRIC_MEDIA_COST_ECPAPV_USD"
+        MetricMediaCostEcpaAdvertiser -> "METRIC_MEDIA_COST_ECPA_ADVERTISER"
+        MetricMediaCostEcpaPartner -> "METRIC_MEDIA_COST_ECPA_PARTNER"
+        MetricMediaCostEcpaUsd -> "METRIC_MEDIA_COST_ECPA_USD"
+        MetricMediaCostEcpcvAdvertiser -> "METRIC_MEDIA_COST_ECPCV_ADVERTISER"
+        MetricMediaCostEcpcvPartner -> "METRIC_MEDIA_COST_ECPCV_PARTNER"
+        MetricMediaCostEcpcvUsd -> "METRIC_MEDIA_COST_ECPCV_USD"
+        MetricMediaCostEcpcAdvertiser -> "METRIC_MEDIA_COST_ECPC_ADVERTISER"
+        MetricMediaCostEcpcPartner -> "METRIC_MEDIA_COST_ECPC_PARTNER"
+        MetricMediaCostEcpcUsd -> "METRIC_MEDIA_COST_ECPC_USD"
+        MetricMediaCostEcpmAdvertiser -> "METRIC_MEDIA_COST_ECPM_ADVERTISER"
+        MetricMediaCostEcpmPartner -> "METRIC_MEDIA_COST_ECPM_PARTNER"
+        MetricMediaCostEcpmUsd -> "METRIC_MEDIA_COST_ECPM_USD"
+        MetricMediaCostPartner -> "METRIC_MEDIA_COST_PARTNER"
+        MetricMediaCostUsd -> "METRIC_MEDIA_COST_USD"
+        MetricMediaFEE1Advertiser -> "METRIC_MEDIA_FEE1_ADVERTISER"
+        MetricMediaFEE1Partner -> "METRIC_MEDIA_FEE1_PARTNER"
+        MetricMediaFEE1Usd -> "METRIC_MEDIA_FEE1_USD"
+        MetricMediaFEE2Advertiser -> "METRIC_MEDIA_FEE2_ADVERTISER"
+        MetricMediaFEE2Partner -> "METRIC_MEDIA_FEE2_PARTNER"
+        MetricMediaFEE2Usd -> "METRIC_MEDIA_FEE2_USD"
+        MetricMediaFEE3Advertiser -> "METRIC_MEDIA_FEE3_ADVERTISER"
+        MetricMediaFEE3Partner -> "METRIC_MEDIA_FEE3_PARTNER"
+        MetricMediaFEE3Usd -> "METRIC_MEDIA_FEE3_USD"
+        MetricMediaFEE4Advertiser -> "METRIC_MEDIA_FEE4_ADVERTISER"
+        MetricMediaFEE4Partner -> "METRIC_MEDIA_FEE4_PARTNER"
+        MetricMediaFEE4Usd -> "METRIC_MEDIA_FEE4_USD"
+        MetricMediaFEE5Advertiser -> "METRIC_MEDIA_FEE5_ADVERTISER"
+        MetricMediaFEE5Partner -> "METRIC_MEDIA_FEE5_PARTNER"
+        MetricMediaFEE5Usd -> "METRIC_MEDIA_FEE5_USD"
+        MetricPixelLoads -> "METRIC_PIXEL_LOADS"
+        MetricPlatformFeeAdvertiser -> "METRIC_PLATFORM_FEE_ADVERTISER"
+        MetricPlatformFeePartner -> "METRIC_PLATFORM_FEE_PARTNER"
+        MetricPlatformFeeUsd -> "METRIC_PLATFORM_FEE_USD"
+        MetricPostClickDfaRevenue -> "METRIC_POST_CLICK_DFA_REVENUE"
+        MetricPostViewDfaRevenue -> "METRIC_POST_VIEW_DFA_REVENUE"
+        MetricProfitAdvertiser -> "METRIC_PROFIT_ADVERTISER"
+        MetricProfitEcpapcAdvertiser -> "METRIC_PROFIT_ECPAPC_ADVERTISER"
+        MetricProfitEcpapcPartner -> "METRIC_PROFIT_ECPAPC_PARTNER"
+        MetricProfitEcpapcUsd -> "METRIC_PROFIT_ECPAPC_USD"
+        MetricProfitEcpapvAdvertiser -> "METRIC_PROFIT_ECPAPV_ADVERTISER"
+        MetricProfitEcpapvPartner -> "METRIC_PROFIT_ECPAPV_PARTNER"
+        MetricProfitEcpapvUsd -> "METRIC_PROFIT_ECPAPV_USD"
+        MetricProfitEcpaAdvertiser -> "METRIC_PROFIT_ECPA_ADVERTISER"
+        MetricProfitEcpaPartner -> "METRIC_PROFIT_ECPA_PARTNER"
+        MetricProfitEcpaUsd -> "METRIC_PROFIT_ECPA_USD"
+        MetricProfitEcpcAdvertiser -> "METRIC_PROFIT_ECPC_ADVERTISER"
+        MetricProfitEcpcPartner -> "METRIC_PROFIT_ECPC_PARTNER"
+        MetricProfitEcpcUsd -> "METRIC_PROFIT_ECPC_USD"
+        MetricProfitEcpmAdvertiser -> "METRIC_PROFIT_ECPM_ADVERTISER"
+        MetricProfitEcpmPartner -> "METRIC_PROFIT_ECPM_PARTNER"
+        MetricProfitEcpmUsd -> "METRIC_PROFIT_ECPM_USD"
+        MetricProfitMargin -> "METRIC_PROFIT_MARGIN"
+        MetricProfitPartner -> "METRIC_PROFIT_PARTNER"
+        MetricProfitUsd -> "METRIC_PROFIT_USD"
+        MetricRevenueAdvertiser -> "METRIC_REVENUE_ADVERTISER"
+        MetricRevenueEcpapcAdvertiser -> "METRIC_REVENUE_ECPAPC_ADVERTISER"
+        MetricRevenueEcpapcPartner -> "METRIC_REVENUE_ECPAPC_PARTNER"
+        MetricRevenueEcpapcUsd -> "METRIC_REVENUE_ECPAPC_USD"
+        MetricRevenueEcpapvAdvertiser -> "METRIC_REVENUE_ECPAPV_ADVERTISER"
+        MetricRevenueEcpapvPartner -> "METRIC_REVENUE_ECPAPV_PARTNER"
+        MetricRevenueEcpapvUsd -> "METRIC_REVENUE_ECPAPV_USD"
+        MetricRevenueEcpaAdvertiser -> "METRIC_REVENUE_ECPA_ADVERTISER"
+        MetricRevenueEcpaPartner -> "METRIC_REVENUE_ECPA_PARTNER"
+        MetricRevenueEcpaUsd -> "METRIC_REVENUE_ECPA_USD"
+        MetricRevenueEcpcvAdvertiser -> "METRIC_REVENUE_ECPCV_ADVERTISER"
+        MetricRevenueEcpcvPartner -> "METRIC_REVENUE_ECPCV_PARTNER"
+        MetricRevenueEcpcvUsd -> "METRIC_REVENUE_ECPCV_USD"
+        MetricRevenueEcpcAdvertiser -> "METRIC_REVENUE_ECPC_ADVERTISER"
+        MetricRevenueEcpcPartner -> "METRIC_REVENUE_ECPC_PARTNER"
+        MetricRevenueEcpcUsd -> "METRIC_REVENUE_ECPC_USD"
+        MetricRevenueEcpmAdvertiser -> "METRIC_REVENUE_ECPM_ADVERTISER"
+        MetricRevenueEcpmPartner -> "METRIC_REVENUE_ECPM_PARTNER"
+        MetricRevenueEcpmUsd -> "METRIC_REVENUE_ECPM_USD"
+        MetricRevenuePartner -> "METRIC_REVENUE_PARTNER"
+        MetricRevenueUsd -> "METRIC_REVENUE_USD"
+        MetricRichMediaVideoCompletions -> "METRIC_RICH_MEDIA_VIDEO_COMPLETIONS"
+        MetricRichMediaVideoFirstQuartileCompletes -> "METRIC_RICH_MEDIA_VIDEO_FIRST_QUARTILE_COMPLETES"
+        MetricRichMediaVideoFullScreens -> "METRIC_RICH_MEDIA_VIDEO_FULL_SCREENS"
+        MetricRichMediaVideoMidpoints -> "METRIC_RICH_MEDIA_VIDEO_MIDPOINTS"
+        MetricRichMediaVideoMutes -> "METRIC_RICH_MEDIA_VIDEO_MUTES"
+        MetricRichMediaVideoPauses -> "METRIC_RICH_MEDIA_VIDEO_PAUSES"
+        MetricRichMediaVideoPlays -> "METRIC_RICH_MEDIA_VIDEO_PLAYS"
+        MetricRichMediaVideoSkips -> "METRIC_RICH_MEDIA_VIDEO_SKIPS"
+        MetricRichMediaVideoThirdQuartileCompletes -> "METRIC_RICH_MEDIA_VIDEO_THIRD_QUARTILE_COMPLETES"
+        MetricTeaTrueviewImpressions -> "METRIC_TEA_TRUEVIEW_IMPRESSIONS"
+        MetricTeaTrueviewUniqueCookies -> "METRIC_TEA_TRUEVIEW_UNIQUE_COOKIES"
+        MetricTeaTrueviewUniquePeople -> "METRIC_TEA_TRUEVIEW_UNIQUE_PEOPLE"
+        MetricTotalConversions -> "METRIC_TOTAL_CONVERSIONS"
+        MetricTotalMediaCostAdvertiser -> "METRIC_TOTAL_MEDIA_COST_ADVERTISER"
+        MetricTotalMediaCostEcpapcAdvertiser -> "METRIC_TOTAL_MEDIA_COST_ECPAPC_ADVERTISER"
+        MetricTotalMediaCostEcpapcPartner -> "METRIC_TOTAL_MEDIA_COST_ECPAPC_PARTNER"
+        MetricTotalMediaCostEcpapcUsd -> "METRIC_TOTAL_MEDIA_COST_ECPAPC_USD"
+        MetricTotalMediaCostEcpapvAdvertiser -> "METRIC_TOTAL_MEDIA_COST_ECPAPV_ADVERTISER"
+        MetricTotalMediaCostEcpapvPartner -> "METRIC_TOTAL_MEDIA_COST_ECPAPV_PARTNER"
+        MetricTotalMediaCostEcpapvUsd -> "METRIC_TOTAL_MEDIA_COST_ECPAPV_USD"
+        MetricTotalMediaCostEcpaAdvertiser -> "METRIC_TOTAL_MEDIA_COST_ECPA_ADVERTISER"
+        MetricTotalMediaCostEcpaPartner -> "METRIC_TOTAL_MEDIA_COST_ECPA_PARTNER"
+        MetricTotalMediaCostEcpaUsd -> "METRIC_TOTAL_MEDIA_COST_ECPA_USD"
+        MetricTotalMediaCostEcpcvAdvertiser -> "METRIC_TOTAL_MEDIA_COST_ECPCV_ADVERTISER"
+        MetricTotalMediaCostEcpcvPartner -> "METRIC_TOTAL_MEDIA_COST_ECPCV_PARTNER"
+        MetricTotalMediaCostEcpcvUsd -> "METRIC_TOTAL_MEDIA_COST_ECPCV_USD"
+        MetricTotalMediaCostEcpcAdvertiser -> "METRIC_TOTAL_MEDIA_COST_ECPC_ADVERTISER"
+        MetricTotalMediaCostEcpcPartner -> "METRIC_TOTAL_MEDIA_COST_ECPC_PARTNER"
+        MetricTotalMediaCostEcpcUsd -> "METRIC_TOTAL_MEDIA_COST_ECPC_USD"
+        MetricTotalMediaCostEcpmAdvertiser -> "METRIC_TOTAL_MEDIA_COST_ECPM_ADVERTISER"
+        MetricTotalMediaCostEcpmPartner -> "METRIC_TOTAL_MEDIA_COST_ECPM_PARTNER"
+        MetricTotalMediaCostEcpmUsd -> "METRIC_TOTAL_MEDIA_COST_ECPM_USD"
+        MetricTotalMediaCostPartner -> "METRIC_TOTAL_MEDIA_COST_PARTNER"
+        MetricTotalMediaCostUsd -> "METRIC_TOTAL_MEDIA_COST_USD"
+        MetricTrueviewConversionManyPerView -> "METRIC_TRUEVIEW_CONVERSION_MANY_PER_VIEW"
+        MetricTrueviewConversionOnePerView -> "METRIC_TRUEVIEW_CONVERSION_ONE_PER_VIEW"
+        MetricTrueviewConversionRateOnePerView -> "METRIC_TRUEVIEW_CONVERSION_RATE_ONE_PER_VIEW"
+        MetricTrueviewCostConversionManyPerViewRatio -> "METRIC_TRUEVIEW_COST_CONVERSION_MANY_PER_VIEW_RATIO"
+        MetricTrueviewCostConversionOnePerViewRatio -> "METRIC_TRUEVIEW_COST_CONVERSION_ONE_PER_VIEW_RATIO"
+        MetricTrueviewCpvAdvertiser -> "METRIC_TRUEVIEW_CPV_ADVERTISER"
+        MetricTrueviewCpvPartner -> "METRIC_TRUEVIEW_CPV_PARTNER"
+        MetricTrueviewCpvUsd -> "METRIC_TRUEVIEW_CPV_USD"
+        MetricTrueviewEarnedLikes -> "METRIC_TRUEVIEW_EARNED_LIKES"
+        MetricTrueviewEarnedPlaylistAdditions -> "METRIC_TRUEVIEW_EARNED_PLAYLIST_ADDITIONS"
+        MetricTrueviewEarnedShares -> "METRIC_TRUEVIEW_EARNED_SHARES"
+        MetricTrueviewEarnedSubscribers -> "METRIC_TRUEVIEW_EARNED_SUBSCRIBERS"
+        MetricTrueviewEarnedViews -> "METRIC_TRUEVIEW_EARNED_VIEWS"
+        MetricTrueviewImpressionShare -> "METRIC_TRUEVIEW_IMPRESSION_SHARE"
+        MetricTrueviewLostIsBudget -> "METRIC_TRUEVIEW_LOST_IS_BUDGET"
+        MetricTrueviewLostIsRank -> "METRIC_TRUEVIEW_LOST_IS_RANK"
+        MetricTrueviewTotalConversionValue -> "METRIC_TRUEVIEW_TOTAL_CONVERSION_VALUE"
+        MetricTrueviewUniqueViewers -> "METRIC_TRUEVIEW_UNIQUE_VIEWERS"
+        MetricTrueviewValueConversionManyPerViewRatio -> "METRIC_TRUEVIEW_VALUE_CONVERSION_MANY_PER_VIEW_RATIO"
+        MetricTrueviewValueConversionOnePerViewRatio -> "METRIC_TRUEVIEW_VALUE_CONVERSION_ONE_PER_VIEW_RATIO"
+        MetricTrueviewViews -> "METRIC_TRUEVIEW_VIEWS"
+        MetricTrueviewViewRate -> "METRIC_TRUEVIEW_VIEW_RATE"
+        MetricTrueviewViewThroughConversion -> "METRIC_TRUEVIEW_VIEW_THROUGH_CONVERSION"
+        MetricUniqueVisitorsCookies -> "METRIC_UNIQUE_VISITORS_COOKIES"
+        MetricUnknown -> "METRIC_UNKNOWN"
+        MetricVideoCompanionClicks -> "METRIC_VIDEO_COMPANION_CLICKS"
+        MetricVideoCompanionImpressions -> "METRIC_VIDEO_COMPANION_IMPRESSIONS"
+        MetricVideoCompletionRate -> "METRIC_VIDEO_COMPLETION_RATE"
 
 instance FromJSON ParametersItemMetrics where
     parseJSON = parseJSONText "ParametersItemMetrics"
 
 instance ToJSON ParametersItemMetrics where
-    toJSON = toJSONText
-
--- | Report type.
-data ParametersType
-    = PTTypeActiveGrp
-      -- ^ @TYPE_ACTIVE_GRP@
-    | PTTypeAudienceComposition
-      -- ^ @TYPE_AUDIENCE_COMPOSITION@
-    | PTTypeAudiencePerformance
-      -- ^ @TYPE_AUDIENCE_PERFORMANCE@
-    | PTTypeClientSafe
-      -- ^ @TYPE_CLIENT_SAFE@
-    | PTTypeComscoreVce
-      -- ^ @TYPE_COMSCORE_VCE@
-    | PTTypeCrossFee
-      -- ^ @TYPE_CROSS_FEE@
-    | PTTypeCrossPartner
-      -- ^ @TYPE_CROSS_PARTNER@
-    | PTTypeCrossPartnerThirdPartyDataProvider
-      -- ^ @TYPE_CROSS_PARTNER_THIRD_PARTY_DATA_PROVIDER@
-    | PTTypeEstimatedConversion
-      -- ^ @TYPE_ESTIMATED_CONVERSION@
-    | PTTypeFee
-      -- ^ @TYPE_FEE@
-    | PTTypeGeneral
-      -- ^ @TYPE_GENERAL@
-    | PTTypeInventoryAvailability
-      -- ^ @TYPE_INVENTORY_AVAILABILITY@
-    | PTTypeKeyword
-      -- ^ @TYPE_KEYWORD@
-    | PTTypeNielsenAudienceProfile
-      -- ^ @TYPE_NIELSEN_AUDIENCE_PROFILE@
-    | PTTypeNielsenDailyReachBuild
-      -- ^ @TYPE_NIELSEN_DAILY_REACH_BUILD@
-    | PTTypeNielsenSite
-      -- ^ @TYPE_NIELSEN_SITE@
-    | PTTypeOrderId
-      -- ^ @TYPE_ORDER_ID@
-    | PTTypePageCategory
-      -- ^ @TYPE_PAGE_CATEGORY@
-    | PTTypePixelLoad
-      -- ^ @TYPE_PIXEL_LOAD@
-    | PTTypeReachAndFrequency
-      -- ^ @TYPE_REACH_AND_FREQUENCY@
-    | PTTypeThirdPartyDataProvider
-      -- ^ @TYPE_THIRD_PARTY_DATA_PROVIDER@
-    | PTTypeTrueview
-      -- ^ @TYPE_TRUEVIEW@
-    | PTTypeTrueviewIar
-      -- ^ @TYPE_TRUEVIEW_IAR@
-    | PTTypeVerification
-      -- ^ @TYPE_VERIFICATION@
-    | PTTypeYoutubeVertical
-      -- ^ @TYPE_YOUTUBE_VERTICAL@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ParametersType
-
-instance FromText ParametersType where
-    fromText = \case
-        "TYPE_ACTIVE_GRP" -> Just PTTypeActiveGrp
-        "TYPE_AUDIENCE_COMPOSITION" -> Just PTTypeAudienceComposition
-        "TYPE_AUDIENCE_PERFORMANCE" -> Just PTTypeAudiencePerformance
-        "TYPE_CLIENT_SAFE" -> Just PTTypeClientSafe
-        "TYPE_COMSCORE_VCE" -> Just PTTypeComscoreVce
-        "TYPE_CROSS_FEE" -> Just PTTypeCrossFee
-        "TYPE_CROSS_PARTNER" -> Just PTTypeCrossPartner
-        "TYPE_CROSS_PARTNER_THIRD_PARTY_DATA_PROVIDER" -> Just PTTypeCrossPartnerThirdPartyDataProvider
-        "TYPE_ESTIMATED_CONVERSION" -> Just PTTypeEstimatedConversion
-        "TYPE_FEE" -> Just PTTypeFee
-        "TYPE_GENERAL" -> Just PTTypeGeneral
-        "TYPE_INVENTORY_AVAILABILITY" -> Just PTTypeInventoryAvailability
-        "TYPE_KEYWORD" -> Just PTTypeKeyword
-        "TYPE_NIELSEN_AUDIENCE_PROFILE" -> Just PTTypeNielsenAudienceProfile
-        "TYPE_NIELSEN_DAILY_REACH_BUILD" -> Just PTTypeNielsenDailyReachBuild
-        "TYPE_NIELSEN_SITE" -> Just PTTypeNielsenSite
-        "TYPE_ORDER_ID" -> Just PTTypeOrderId
-        "TYPE_PAGE_CATEGORY" -> Just PTTypePageCategory
-        "TYPE_PIXEL_LOAD" -> Just PTTypePixelLoad
-        "TYPE_REACH_AND_FREQUENCY" -> Just PTTypeReachAndFrequency
-        "TYPE_THIRD_PARTY_DATA_PROVIDER" -> Just PTTypeThirdPartyDataProvider
-        "TYPE_TRUEVIEW" -> Just PTTypeTrueview
-        "TYPE_TRUEVIEW_IAR" -> Just PTTypeTrueviewIar
-        "TYPE_VERIFICATION" -> Just PTTypeVerification
-        "TYPE_YOUTUBE_VERTICAL" -> Just PTTypeYoutubeVertical
-        _ -> Nothing
-
-instance ToText ParametersType where
-    toText = \case
-        PTTypeActiveGrp -> "TYPE_ACTIVE_GRP"
-        PTTypeAudienceComposition -> "TYPE_AUDIENCE_COMPOSITION"
-        PTTypeAudiencePerformance -> "TYPE_AUDIENCE_PERFORMANCE"
-        PTTypeClientSafe -> "TYPE_CLIENT_SAFE"
-        PTTypeComscoreVce -> "TYPE_COMSCORE_VCE"
-        PTTypeCrossFee -> "TYPE_CROSS_FEE"
-        PTTypeCrossPartner -> "TYPE_CROSS_PARTNER"
-        PTTypeCrossPartnerThirdPartyDataProvider -> "TYPE_CROSS_PARTNER_THIRD_PARTY_DATA_PROVIDER"
-        PTTypeEstimatedConversion -> "TYPE_ESTIMATED_CONVERSION"
-        PTTypeFee -> "TYPE_FEE"
-        PTTypeGeneral -> "TYPE_GENERAL"
-        PTTypeInventoryAvailability -> "TYPE_INVENTORY_AVAILABILITY"
-        PTTypeKeyword -> "TYPE_KEYWORD"
-        PTTypeNielsenAudienceProfile -> "TYPE_NIELSEN_AUDIENCE_PROFILE"
-        PTTypeNielsenDailyReachBuild -> "TYPE_NIELSEN_DAILY_REACH_BUILD"
-        PTTypeNielsenSite -> "TYPE_NIELSEN_SITE"
-        PTTypeOrderId -> "TYPE_ORDER_ID"
-        PTTypePageCategory -> "TYPE_PAGE_CATEGORY"
-        PTTypePixelLoad -> "TYPE_PIXEL_LOAD"
-        PTTypeReachAndFrequency -> "TYPE_REACH_AND_FREQUENCY"
-        PTTypeThirdPartyDataProvider -> "TYPE_THIRD_PARTY_DATA_PROVIDER"
-        PTTypeTrueview -> "TYPE_TRUEVIEW"
-        PTTypeTrueviewIar -> "TYPE_TRUEVIEW_IAR"
-        PTTypeVerification -> "TYPE_VERIFICATION"
-        PTTypeYoutubeVertical -> "TYPE_YOUTUBE_VERTICAL"
-
-instance FromJSON ParametersType where
-    parseJSON = parseJSONText "ParametersType"
-
-instance ToJSON ParametersType where
     toJSON = toJSONText
 
 -- | Range of report data.
@@ -1924,209 +2108,13 @@ instance FromJSON QueryMetadataDataRange where
 instance ToJSON QueryMetadataDataRange where
     toJSON = toJSONText
 
--- | Format of the generated report.
-data QueryMetadataFormat
-    = QMFCSV
-      -- ^ @CSV@
-    | QMFExcelCSV
-      -- ^ @EXCEL_CSV@
-    | QMFXlsx
-      -- ^ @XLSX@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable QueryMetadataFormat
-
-instance FromText QueryMetadataFormat where
-    fromText = \case
-        "CSV" -> Just QMFCSV
-        "EXCEL_CSV" -> Just QMFExcelCSV
-        "XLSX" -> Just QMFXlsx
-        _ -> Nothing
-
-instance ToText QueryMetadataFormat where
-    toText = \case
-        QMFCSV -> "CSV"
-        QMFExcelCSV -> "EXCEL_CSV"
-        QMFXlsx -> "XLSX"
-
-instance FromJSON QueryMetadataFormat where
-    parseJSON = parseJSONText "QueryMetadataFormat"
-
-instance ToJSON QueryMetadataFormat where
-    toJSON = toJSONText
-
--- | How often the query is run.
-data QueryScheduleFrequency
-    = QSFDaily
-      -- ^ @DAILY@
-    | QSFMonthly
-      -- ^ @MONTHLY@
-    | QSFOneTime
-      -- ^ @ONE_TIME@
-    | QSFQuarterly
-      -- ^ @QUARTERLY@
-    | QSFSemiMonthly
-      -- ^ @SEMI_MONTHLY@
-    | QSFWeekly
-      -- ^ @WEEKLY@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable QueryScheduleFrequency
-
-instance FromText QueryScheduleFrequency where
-    fromText = \case
-        "DAILY" -> Just QSFDaily
-        "MONTHLY" -> Just QSFMonthly
-        "ONE_TIME" -> Just QSFOneTime
-        "QUARTERLY" -> Just QSFQuarterly
-        "SEMI_MONTHLY" -> Just QSFSemiMonthly
-        "WEEKLY" -> Just QSFWeekly
-        _ -> Nothing
-
-instance ToText QueryScheduleFrequency where
-    toText = \case
-        QSFDaily -> "DAILY"
-        QSFMonthly -> "MONTHLY"
-        QSFOneTime -> "ONE_TIME"
-        QSFQuarterly -> "QUARTERLY"
-        QSFSemiMonthly -> "SEMI_MONTHLY"
-        QSFWeekly -> "WEEKLY"
-
-instance FromJSON QueryScheduleFrequency where
-    parseJSON = parseJSONText "QueryScheduleFrequency"
-
-instance ToJSON QueryScheduleFrequency where
-    toJSON = toJSONText
-
--- | Error code that shows why the report was not created.
-data ReportFailureErrorCode
-    = RFECAuthenticationError
-      -- ^ @AUTHENTICATION_ERROR@
-    | RFECDeprecatedReportingInvalidQuery
-      -- ^ @DEPRECATED_REPORTING_INVALID_QUERY@
-    | RFECReportingBucketNotFound
-      -- ^ @REPORTING_BUCKET_NOT_FOUND@
-    | RFECReportingCreateBucketFailed
-      -- ^ @REPORTING_CREATE_BUCKET_FAILED@
-    | RFECReportingDeleteBucketFailed
-      -- ^ @REPORTING_DELETE_BUCKET_FAILED@
-    | RFECReportingFatalError
-      -- ^ @REPORTING_FATAL_ERROR@
-    | RFECReportingIllegalFilename
-      -- ^ @REPORTING_ILLEGAL_FILENAME@
-    | RFECReportingImcompatibleMetrics
-      -- ^ @REPORTING_IMCOMPATIBLE_METRICS@
-    | RFECReportingInvalidQueryMissingPartnerAndAdvertiserFilters
-      -- ^ @REPORTING_INVALID_QUERY_MISSING_PARTNER_AND_ADVERTISER_FILTERS@
-    | RFECReportingInvalidQueryTitleMissing
-      -- ^ @REPORTING_INVALID_QUERY_TITLE_MISSING@
-    | RFECReportingInvalidQueryTooManyUnfilteredLargeGroupBys
-      -- ^ @REPORTING_INVALID_QUERY_TOO_MANY_UNFILTERED_LARGE_GROUP_BYS@
-    | RFECReportingQueryNotFound
-      -- ^ @REPORTING_QUERY_NOT_FOUND@
-    | RFECReportingTransientError
-      -- ^ @REPORTING_TRANSIENT_ERROR@
-    | RFECReportingUpdateBucketPermissionFailed
-      -- ^ @REPORTING_UPDATE_BUCKET_PERMISSION_FAILED@
-    | RFECReportingWriteBucketObjectFailed
-      -- ^ @REPORTING_WRITE_BUCKET_OBJECT_FAILED@
-    | RFECServerError
-      -- ^ @SERVER_ERROR@
-    | RFECUnauthorizedAPIAccess
-      -- ^ @UNAUTHORIZED_API_ACCESS@
-    | RFECValidationError
-      -- ^ @VALIDATION_ERROR@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ReportFailureErrorCode
-
-instance FromText ReportFailureErrorCode where
-    fromText = \case
-        "AUTHENTICATION_ERROR" -> Just RFECAuthenticationError
-        "DEPRECATED_REPORTING_INVALID_QUERY" -> Just RFECDeprecatedReportingInvalidQuery
-        "REPORTING_BUCKET_NOT_FOUND" -> Just RFECReportingBucketNotFound
-        "REPORTING_CREATE_BUCKET_FAILED" -> Just RFECReportingCreateBucketFailed
-        "REPORTING_DELETE_BUCKET_FAILED" -> Just RFECReportingDeleteBucketFailed
-        "REPORTING_FATAL_ERROR" -> Just RFECReportingFatalError
-        "REPORTING_ILLEGAL_FILENAME" -> Just RFECReportingIllegalFilename
-        "REPORTING_IMCOMPATIBLE_METRICS" -> Just RFECReportingImcompatibleMetrics
-        "REPORTING_INVALID_QUERY_MISSING_PARTNER_AND_ADVERTISER_FILTERS" -> Just RFECReportingInvalidQueryMissingPartnerAndAdvertiserFilters
-        "REPORTING_INVALID_QUERY_TITLE_MISSING" -> Just RFECReportingInvalidQueryTitleMissing
-        "REPORTING_INVALID_QUERY_TOO_MANY_UNFILTERED_LARGE_GROUP_BYS" -> Just RFECReportingInvalidQueryTooManyUnfilteredLargeGroupBys
-        "REPORTING_QUERY_NOT_FOUND" -> Just RFECReportingQueryNotFound
-        "REPORTING_TRANSIENT_ERROR" -> Just RFECReportingTransientError
-        "REPORTING_UPDATE_BUCKET_PERMISSION_FAILED" -> Just RFECReportingUpdateBucketPermissionFailed
-        "REPORTING_WRITE_BUCKET_OBJECT_FAILED" -> Just RFECReportingWriteBucketObjectFailed
-        "SERVER_ERROR" -> Just RFECServerError
-        "UNAUTHORIZED_API_ACCESS" -> Just RFECUnauthorizedAPIAccess
-        "VALIDATION_ERROR" -> Just RFECValidationError
-        _ -> Nothing
-
-instance ToText ReportFailureErrorCode where
-    toText = \case
-        RFECAuthenticationError -> "AUTHENTICATION_ERROR"
-        RFECDeprecatedReportingInvalidQuery -> "DEPRECATED_REPORTING_INVALID_QUERY"
-        RFECReportingBucketNotFound -> "REPORTING_BUCKET_NOT_FOUND"
-        RFECReportingCreateBucketFailed -> "REPORTING_CREATE_BUCKET_FAILED"
-        RFECReportingDeleteBucketFailed -> "REPORTING_DELETE_BUCKET_FAILED"
-        RFECReportingFatalError -> "REPORTING_FATAL_ERROR"
-        RFECReportingIllegalFilename -> "REPORTING_ILLEGAL_FILENAME"
-        RFECReportingImcompatibleMetrics -> "REPORTING_IMCOMPATIBLE_METRICS"
-        RFECReportingInvalidQueryMissingPartnerAndAdvertiserFilters -> "REPORTING_INVALID_QUERY_MISSING_PARTNER_AND_ADVERTISER_FILTERS"
-        RFECReportingInvalidQueryTitleMissing -> "REPORTING_INVALID_QUERY_TITLE_MISSING"
-        RFECReportingInvalidQueryTooManyUnfilteredLargeGroupBys -> "REPORTING_INVALID_QUERY_TOO_MANY_UNFILTERED_LARGE_GROUP_BYS"
-        RFECReportingQueryNotFound -> "REPORTING_QUERY_NOT_FOUND"
-        RFECReportingTransientError -> "REPORTING_TRANSIENT_ERROR"
-        RFECReportingUpdateBucketPermissionFailed -> "REPORTING_UPDATE_BUCKET_PERMISSION_FAILED"
-        RFECReportingWriteBucketObjectFailed -> "REPORTING_WRITE_BUCKET_OBJECT_FAILED"
-        RFECServerError -> "SERVER_ERROR"
-        RFECUnauthorizedAPIAccess -> "UNAUTHORIZED_API_ACCESS"
-        RFECValidationError -> "VALIDATION_ERROR"
-
-instance FromJSON ReportFailureErrorCode where
-    parseJSON = parseJSONText "ReportFailureErrorCode"
-
-instance ToJSON ReportFailureErrorCode where
-    toJSON = toJSONText
-
--- | The file type of the report.
-data ReportStatusFormat
-    = RSFCSV
-      -- ^ @CSV@
-    | RSFExcelCSV
-      -- ^ @EXCEL_CSV@
-    | RSFXlsx
-      -- ^ @XLSX@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable ReportStatusFormat
-
-instance FromText ReportStatusFormat where
-    fromText = \case
-        "CSV" -> Just RSFCSV
-        "EXCEL_CSV" -> Just RSFExcelCSV
-        "XLSX" -> Just RSFXlsx
-        _ -> Nothing
-
-instance ToText ReportStatusFormat where
-    toText = \case
-        RSFCSV -> "CSV"
-        RSFExcelCSV -> "EXCEL_CSV"
-        RSFXlsx -> "XLSX"
-
-instance FromJSON ReportStatusFormat where
-    parseJSON = parseJSONText "ReportStatusFormat"
-
-instance ToJSON ReportStatusFormat where
-    toJSON = toJSONText
-
 -- | The state of the report.
 data ReportStatusState
-    = RSSDone
+    = Done
       -- ^ @DONE@
-    | RSSFailed
+    | Failed
       -- ^ @FAILED@
-    | RSSRunning
+    | Running
       -- ^ @RUNNING@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -2134,16 +2122,16 @@ instance Hashable ReportStatusState
 
 instance FromText ReportStatusState where
     fromText = \case
-        "DONE" -> Just RSSDone
-        "FAILED" -> Just RSSFailed
-        "RUNNING" -> Just RSSRunning
+        "DONE" -> Just Done
+        "FAILED" -> Just Failed
+        "RUNNING" -> Just Running
         _ -> Nothing
 
 instance ToText ReportStatusState where
     toText = \case
-        RSSDone -> "DONE"
-        RSSFailed -> "FAILED"
-        RSSRunning -> "RUNNING"
+        Done -> "DONE"
+        Failed -> "FAILED"
+        Running -> "RUNNING"
 
 instance FromJSON ReportStatusState where
     parseJSON = parseJSONText "ReportStatusState"
@@ -2151,116 +2139,152 @@ instance FromJSON ReportStatusState where
 instance ToJSON ReportStatusState where
     toJSON = toJSONText
 
--- | Report data range used to generate the report.
-data RunQueryRequestDataRange
-    = RQRDRAllTime
-      -- ^ @ALL_TIME@
-    | RQRDRCurrentDay
-      -- ^ @CURRENT_DAY@
-    | RQRDRCustomDates
-      -- ^ @CUSTOM_DATES@
-    | RQRDRLast14Days
-      -- ^ @LAST_14_DAYS@
-    | RQRDRLast30Days
-      -- ^ @LAST_30_DAYS@
-    | RQRDRLast365Days
-      -- ^ @LAST_365_DAYS@
-    | RQRDRLast7Days
-      -- ^ @LAST_7_DAYS@
-    | RQRDRLast90Days
-      -- ^ @LAST_90_DAYS@
-    | RQRDRMonthToDate
-      -- ^ @MONTH_TO_DATE@
-    | RQRDRPreviousDay
-      -- ^ @PREVIOUS_DAY@
-    | RQRDRPreviousHalfMonth
-      -- ^ @PREVIOUS_HALF_MONTH@
-    | RQRDRPreviousMonth
-      -- ^ @PREVIOUS_MONTH@
-    | RQRDRPreviousQuarter
-      -- ^ @PREVIOUS_QUARTER@
-    | RQRDRPreviousWeek
-      -- ^ @PREVIOUS_WEEK@
-    | RQRDRPreviousYear
-      -- ^ @PREVIOUS_YEAR@
-    | RQRDRQuarterToDate
-      -- ^ @QUARTER_TO_DATE@
-    | RQRDRWeekToDate
-      -- ^ @WEEK_TO_DATE@
-    | RQRDRYearToDate
-      -- ^ @YEAR_TO_DATE@
+-- | Filter type used to filter line items to fetch.
+data DownloadLineItemsRequestFilterType
+    = AdvertiserId
+      -- ^ @ADVERTISER_ID@
+    | InsertionOrderId
+      -- ^ @INSERTION_ORDER_ID@
+    | LineItemId
+      -- ^ @LINE_ITEM_ID@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable RunQueryRequestDataRange
+instance Hashable DownloadLineItemsRequestFilterType
 
-instance FromText RunQueryRequestDataRange where
+instance FromText DownloadLineItemsRequestFilterType where
     fromText = \case
-        "ALL_TIME" -> Just RQRDRAllTime
-        "CURRENT_DAY" -> Just RQRDRCurrentDay
-        "CUSTOM_DATES" -> Just RQRDRCustomDates
-        "LAST_14_DAYS" -> Just RQRDRLast14Days
-        "LAST_30_DAYS" -> Just RQRDRLast30Days
-        "LAST_365_DAYS" -> Just RQRDRLast365Days
-        "LAST_7_DAYS" -> Just RQRDRLast7Days
-        "LAST_90_DAYS" -> Just RQRDRLast90Days
-        "MONTH_TO_DATE" -> Just RQRDRMonthToDate
-        "PREVIOUS_DAY" -> Just RQRDRPreviousDay
-        "PREVIOUS_HALF_MONTH" -> Just RQRDRPreviousHalfMonth
-        "PREVIOUS_MONTH" -> Just RQRDRPreviousMonth
-        "PREVIOUS_QUARTER" -> Just RQRDRPreviousQuarter
-        "PREVIOUS_WEEK" -> Just RQRDRPreviousWeek
-        "PREVIOUS_YEAR" -> Just RQRDRPreviousYear
-        "QUARTER_TO_DATE" -> Just RQRDRQuarterToDate
-        "WEEK_TO_DATE" -> Just RQRDRWeekToDate
-        "YEAR_TO_DATE" -> Just RQRDRYearToDate
+        "ADVERTISER_ID" -> Just AdvertiserId
+        "INSERTION_ORDER_ID" -> Just InsertionOrderId
+        "LINE_ITEM_ID" -> Just LineItemId
         _ -> Nothing
 
-instance ToText RunQueryRequestDataRange where
+instance ToText DownloadLineItemsRequestFilterType where
     toText = \case
-        RQRDRAllTime -> "ALL_TIME"
-        RQRDRCurrentDay -> "CURRENT_DAY"
-        RQRDRCustomDates -> "CUSTOM_DATES"
-        RQRDRLast14Days -> "LAST_14_DAYS"
-        RQRDRLast30Days -> "LAST_30_DAYS"
-        RQRDRLast365Days -> "LAST_365_DAYS"
-        RQRDRLast7Days -> "LAST_7_DAYS"
-        RQRDRLast90Days -> "LAST_90_DAYS"
-        RQRDRMonthToDate -> "MONTH_TO_DATE"
-        RQRDRPreviousDay -> "PREVIOUS_DAY"
-        RQRDRPreviousHalfMonth -> "PREVIOUS_HALF_MONTH"
-        RQRDRPreviousMonth -> "PREVIOUS_MONTH"
-        RQRDRPreviousQuarter -> "PREVIOUS_QUARTER"
-        RQRDRPreviousWeek -> "PREVIOUS_WEEK"
-        RQRDRPreviousYear -> "PREVIOUS_YEAR"
-        RQRDRQuarterToDate -> "QUARTER_TO_DATE"
-        RQRDRWeekToDate -> "WEEK_TO_DATE"
-        RQRDRYearToDate -> "YEAR_TO_DATE"
+        AdvertiserId -> "ADVERTISER_ID"
+        InsertionOrderId -> "INSERTION_ORDER_ID"
+        LineItemId -> "LINE_ITEM_ID"
 
-instance FromJSON RunQueryRequestDataRange where
-    parseJSON = parseJSONText "RunQueryRequestDataRange"
+instance FromJSON DownloadLineItemsRequestFilterType where
+    parseJSON = parseJSONText "DownloadLineItemsRequestFilterType"
 
-instance ToJSON RunQueryRequestDataRange where
+instance ToJSON DownloadLineItemsRequestFilterType where
     toJSON = toJSONText
 
--- | Format the line items are in. Default to CSV.
-data UploadLineItemsRequestFormat
-    = ULIRFCSV
-      -- ^ @CSV@
+-- | Report type.
+data ParametersType
+    = TypeActiveGrp
+      -- ^ @TYPE_ACTIVE_GRP@
+    | TypeAudienceComposition
+      -- ^ @TYPE_AUDIENCE_COMPOSITION@
+    | TypeAudiencePerformance
+      -- ^ @TYPE_AUDIENCE_PERFORMANCE@
+    | TypeClientSafe
+      -- ^ @TYPE_CLIENT_SAFE@
+    | TypeComscoreVce
+      -- ^ @TYPE_COMSCORE_VCE@
+    | TypeCrossFee
+      -- ^ @TYPE_CROSS_FEE@
+    | TypeCrossPartner
+      -- ^ @TYPE_CROSS_PARTNER@
+    | TypeCrossPartnerThirdPartyDataProvider
+      -- ^ @TYPE_CROSS_PARTNER_THIRD_PARTY_DATA_PROVIDER@
+    | TypeEstimatedConversion
+      -- ^ @TYPE_ESTIMATED_CONVERSION@
+    | TypeFee
+      -- ^ @TYPE_FEE@
+    | TypeGeneral
+      -- ^ @TYPE_GENERAL@
+    | TypeInventoryAvailability
+      -- ^ @TYPE_INVENTORY_AVAILABILITY@
+    | TypeKeyword
+      -- ^ @TYPE_KEYWORD@
+    | TypeNielsenAudienceProfile
+      -- ^ @TYPE_NIELSEN_AUDIENCE_PROFILE@
+    | TypeNielsenDailyReachBuild
+      -- ^ @TYPE_NIELSEN_DAILY_REACH_BUILD@
+    | TypeNielsenSite
+      -- ^ @TYPE_NIELSEN_SITE@
+    | TypeOrderId
+      -- ^ @TYPE_ORDER_ID@
+    | TypePageCategory
+      -- ^ @TYPE_PAGE_CATEGORY@
+    | TypePixelLoad
+      -- ^ @TYPE_PIXEL_LOAD@
+    | TypeReachAndFrequency
+      -- ^ @TYPE_REACH_AND_FREQUENCY@
+    | TypeThirdPartyDataProvider
+      -- ^ @TYPE_THIRD_PARTY_DATA_PROVIDER@
+    | TypeTrueview
+      -- ^ @TYPE_TRUEVIEW@
+    | TypeTrueviewIar
+      -- ^ @TYPE_TRUEVIEW_IAR@
+    | TypeVerification
+      -- ^ @TYPE_VERIFICATION@
+    | TypeYouTubeVertical
+      -- ^ @TYPE_YOUTUBE_VERTICAL@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable UploadLineItemsRequestFormat
+instance Hashable ParametersType
 
-instance FromText UploadLineItemsRequestFormat where
+instance FromText ParametersType where
     fromText = \case
-        "CSV" -> Just ULIRFCSV
+        "TYPE_ACTIVE_GRP" -> Just TypeActiveGrp
+        "TYPE_AUDIENCE_COMPOSITION" -> Just TypeAudienceComposition
+        "TYPE_AUDIENCE_PERFORMANCE" -> Just TypeAudiencePerformance
+        "TYPE_CLIENT_SAFE" -> Just TypeClientSafe
+        "TYPE_COMSCORE_VCE" -> Just TypeComscoreVce
+        "TYPE_CROSS_FEE" -> Just TypeCrossFee
+        "TYPE_CROSS_PARTNER" -> Just TypeCrossPartner
+        "TYPE_CROSS_PARTNER_THIRD_PARTY_DATA_PROVIDER" -> Just TypeCrossPartnerThirdPartyDataProvider
+        "TYPE_ESTIMATED_CONVERSION" -> Just TypeEstimatedConversion
+        "TYPE_FEE" -> Just TypeFee
+        "TYPE_GENERAL" -> Just TypeGeneral
+        "TYPE_INVENTORY_AVAILABILITY" -> Just TypeInventoryAvailability
+        "TYPE_KEYWORD" -> Just TypeKeyword
+        "TYPE_NIELSEN_AUDIENCE_PROFILE" -> Just TypeNielsenAudienceProfile
+        "TYPE_NIELSEN_DAILY_REACH_BUILD" -> Just TypeNielsenDailyReachBuild
+        "TYPE_NIELSEN_SITE" -> Just TypeNielsenSite
+        "TYPE_ORDER_ID" -> Just TypeOrderId
+        "TYPE_PAGE_CATEGORY" -> Just TypePageCategory
+        "TYPE_PIXEL_LOAD" -> Just TypePixelLoad
+        "TYPE_REACH_AND_FREQUENCY" -> Just TypeReachAndFrequency
+        "TYPE_THIRD_PARTY_DATA_PROVIDER" -> Just TypeThirdPartyDataProvider
+        "TYPE_TRUEVIEW" -> Just TypeTrueview
+        "TYPE_TRUEVIEW_IAR" -> Just TypeTrueviewIar
+        "TYPE_VERIFICATION" -> Just TypeVerification
+        "TYPE_YOUTUBE_VERTICAL" -> Just TypeYouTubeVertical
         _ -> Nothing
 
-instance ToText UploadLineItemsRequestFormat where
+instance ToText ParametersType where
     toText = \case
-        ULIRFCSV -> "CSV"
+        TypeActiveGrp -> "TYPE_ACTIVE_GRP"
+        TypeAudienceComposition -> "TYPE_AUDIENCE_COMPOSITION"
+        TypeAudiencePerformance -> "TYPE_AUDIENCE_PERFORMANCE"
+        TypeClientSafe -> "TYPE_CLIENT_SAFE"
+        TypeComscoreVce -> "TYPE_COMSCORE_VCE"
+        TypeCrossFee -> "TYPE_CROSS_FEE"
+        TypeCrossPartner -> "TYPE_CROSS_PARTNER"
+        TypeCrossPartnerThirdPartyDataProvider -> "TYPE_CROSS_PARTNER_THIRD_PARTY_DATA_PROVIDER"
+        TypeEstimatedConversion -> "TYPE_ESTIMATED_CONVERSION"
+        TypeFee -> "TYPE_FEE"
+        TypeGeneral -> "TYPE_GENERAL"
+        TypeInventoryAvailability -> "TYPE_INVENTORY_AVAILABILITY"
+        TypeKeyword -> "TYPE_KEYWORD"
+        TypeNielsenAudienceProfile -> "TYPE_NIELSEN_AUDIENCE_PROFILE"
+        TypeNielsenDailyReachBuild -> "TYPE_NIELSEN_DAILY_REACH_BUILD"
+        TypeNielsenSite -> "TYPE_NIELSEN_SITE"
+        TypeOrderId -> "TYPE_ORDER_ID"
+        TypePageCategory -> "TYPE_PAGE_CATEGORY"
+        TypePixelLoad -> "TYPE_PIXEL_LOAD"
+        TypeReachAndFrequency -> "TYPE_REACH_AND_FREQUENCY"
+        TypeThirdPartyDataProvider -> "TYPE_THIRD_PARTY_DATA_PROVIDER"
+        TypeTrueview -> "TYPE_TRUEVIEW"
+        TypeTrueviewIar -> "TYPE_TRUEVIEW_IAR"
+        TypeVerification -> "TYPE_VERIFICATION"
+        TypeYouTubeVertical -> "TYPE_YOUTUBE_VERTICAL"
 
-instance FromJSON UploadLineItemsRequestFormat where
-    parseJSON = parseJSONText "UploadLineItemsRequestFormat"
+instance FromJSON ParametersType where
+    parseJSON = parseJSONText "ParametersType"
 
-instance ToJSON UploadLineItemsRequestFormat where
+instance ToJSON ParametersType where
     toJSON = toJSONText

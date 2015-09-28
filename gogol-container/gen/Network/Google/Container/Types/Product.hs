@@ -18,6 +18,158 @@ module Network.Google.Container.Types.Product where
 import           Network.Google.Container.Types.Sum
 import           Network.Google.Prelude
 
+-- | The authentication information for accessing the master. Authentication
+-- is either done using HTTP basic authentication or using a bearer token.
+--
+-- /See:/ 'masterAuth' smart constructor.
+data MasterAuth = MasterAuth
+    { _maBearerToken          :: !(Maybe Text)
+    , _maClientKey            :: !(Maybe Text)
+    , _maUser                 :: !(Maybe Text)
+    , _maClientCertificate    :: !(Maybe Text)
+    , _maPassword             :: !(Maybe Text)
+    , _maClusterCaCertificate :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'MasterAuth' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'maBearerToken'
+--
+-- * 'maClientKey'
+--
+-- * 'maUser'
+--
+-- * 'maClientCertificate'
+--
+-- * 'maPassword'
+--
+-- * 'maClusterCaCertificate'
+masterAuth
+    :: MasterAuth
+masterAuth =
+    MasterAuth
+    { _maBearerToken = Nothing
+    , _maClientKey = Nothing
+    , _maUser = Nothing
+    , _maClientCertificate = Nothing
+    , _maPassword = Nothing
+    , _maClusterCaCertificate = Nothing
+    }
+
+-- | The token used to authenticate API requests to the master. The token is
+-- to be included in an HTTP Authorization Header in all requests to the
+-- master endpoint. The format of the header is: \"Authorization: Bearer
+-- \".
+maBearerToken :: Lens' MasterAuth (Maybe Text)
+maBearerToken
+  = lens _maBearerToken
+      (\ s a -> s{_maBearerToken = a})
+
+-- | [Output only] Base64 encoded private key used by clients to authenticate
+-- to the cluster endpoint.
+maClientKey :: Lens' MasterAuth (Maybe Text)
+maClientKey
+  = lens _maClientKey (\ s a -> s{_maClientKey = a})
+
+-- | The username to use for HTTP basic authentication when accessing the
+-- Kubernetes master endpoint.
+maUser :: Lens' MasterAuth (Maybe Text)
+maUser = lens _maUser (\ s a -> s{_maUser = a})
+
+-- | [Output only] Base64 encoded public certificate used by clients to
+-- authenticate to the cluster endpoint.
+maClientCertificate :: Lens' MasterAuth (Maybe Text)
+maClientCertificate
+  = lens _maClientCertificate
+      (\ s a -> s{_maClientCertificate = a})
+
+-- | The password to use for HTTP basic authentication when accessing the
+-- Kubernetes master endpoint. Because the master endpoint is open to the
+-- internet, you should create a strong password.
+maPassword :: Lens' MasterAuth (Maybe Text)
+maPassword
+  = lens _maPassword (\ s a -> s{_maPassword = a})
+
+-- | [Output only] Base64 encoded public certificate that is the root of
+-- trust for the cluster.
+maClusterCaCertificate :: Lens' MasterAuth (Maybe Text)
+maClusterCaCertificate
+  = lens _maClusterCaCertificate
+      (\ s a -> s{_maClusterCaCertificate = a})
+
+instance FromJSON MasterAuth where
+        parseJSON
+          = withObject "MasterAuth"
+              (\ o ->
+                 MasterAuth <$>
+                   (o .:? "bearerToken") <*> (o .:? "clientKey") <*>
+                     (o .:? "user")
+                     <*> (o .:? "clientCertificate")
+                     <*> (o .:? "password")
+                     <*> (o .:? "clusterCaCertificate"))
+
+instance ToJSON MasterAuth where
+        toJSON MasterAuth{..}
+          = object
+              (catMaybes
+                 [("bearerToken" .=) <$> _maBearerToken,
+                  ("clientKey" .=) <$> _maClientKey,
+                  ("user" .=) <$> _maUser,
+                  ("clientCertificate" .=) <$> _maClientCertificate,
+                  ("password" .=) <$> _maPassword,
+                  ("clusterCaCertificate" .=) <$>
+                    _maClusterCaCertificate])
+
+-- | A Compute Engine service account.
+--
+-- /See:/ 'serviceAccount' smart constructor.
+data ServiceAccount = ServiceAccount
+    { _saEmail  :: !(Maybe Text)
+    , _saScopes :: !(Maybe [Text])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ServiceAccount' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'saEmail'
+--
+-- * 'saScopes'
+serviceAccount
+    :: ServiceAccount
+serviceAccount =
+    ServiceAccount
+    { _saEmail = Nothing
+    , _saScopes = Nothing
+    }
+
+-- | Email address of the service account.
+saEmail :: Lens' ServiceAccount (Maybe Text)
+saEmail = lens _saEmail (\ s a -> s{_saEmail = a})
+
+-- | The list of scopes to be made available for this service account.
+saScopes :: Lens' ServiceAccount [Text]
+saScopes
+  = lens _saScopes (\ s a -> s{_saScopes = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ServiceAccount where
+        parseJSON
+          = withObject "ServiceAccount"
+              (\ o ->
+                 ServiceAccount <$>
+                   (o .:? "email") <*> (o .:? "scopes" .!= mempty))
+
+instance ToJSON ServiceAccount where
+        toJSON ServiceAccount{..}
+          = object
+              (catMaybes
+                 [("email" .=) <$> _saEmail,
+                  ("scopes" .=) <$> _saScopes])
+
 --
 -- /See:/ 'cluster' smart constructor.
 data Cluster = Cluster
@@ -289,76 +441,6 @@ instance ToJSON Cluster where
                     _cNodeRoutingPrefixSize])
 
 --
--- /See:/ 'createClusterRequest' smart constructor.
-newtype CreateClusterRequest = CreateClusterRequest
-    { _ccrCluster :: Maybe (Maybe Cluster)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'CreateClusterRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ccrCluster'
-createClusterRequest
-    :: CreateClusterRequest
-createClusterRequest =
-    CreateClusterRequest
-    { _ccrCluster = Nothing
-    }
-
--- | A cluster resource.
-ccrCluster :: Lens' CreateClusterRequest (Maybe (Maybe Cluster))
-ccrCluster
-  = lens _ccrCluster (\ s a -> s{_ccrCluster = a})
-
-instance FromJSON CreateClusterRequest where
-        parseJSON
-          = withObject "CreateClusterRequest"
-              (\ o -> CreateClusterRequest <$> (o .:? "cluster"))
-
-instance ToJSON CreateClusterRequest where
-        toJSON CreateClusterRequest{..}
-          = object (catMaybes [("cluster" .=) <$> _ccrCluster])
-
---
--- /See:/ 'listAggregatedClustersResponse' smart constructor.
-newtype ListAggregatedClustersResponse = ListAggregatedClustersResponse
-    { _lacrClusters :: Maybe [Maybe Cluster]
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ListAggregatedClustersResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lacrClusters'
-listAggregatedClustersResponse
-    :: ListAggregatedClustersResponse
-listAggregatedClustersResponse =
-    ListAggregatedClustersResponse
-    { _lacrClusters = Nothing
-    }
-
--- | A list of clusters in the project, across all zones.
-lacrClusters :: Lens' ListAggregatedClustersResponse [Maybe Cluster]
-lacrClusters
-  = lens _lacrClusters (\ s a -> s{_lacrClusters = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON ListAggregatedClustersResponse
-         where
-        parseJSON
-          = withObject "ListAggregatedClustersResponse"
-              (\ o ->
-                 ListAggregatedClustersResponse <$>
-                   (o .:? "clusters" .!= mempty))
-
-instance ToJSON ListAggregatedClustersResponse where
-        toJSON ListAggregatedClustersResponse{..}
-          = object
-              (catMaybes [("clusters" .=) <$> _lacrClusters])
-
---
 -- /See:/ 'listAggregatedOperationsResponse' smart constructor.
 newtype ListAggregatedOperationsResponse = ListAggregatedOperationsResponse
     { _laorOperations :: Maybe [Maybe Operation]
@@ -397,6 +479,118 @@ instance ToJSON ListAggregatedOperationsResponse
         toJSON ListAggregatedOperationsResponse{..}
           = object
               (catMaybes [("operations" .=) <$> _laorOperations])
+
+--
+-- /See:/ 'nodeConfig' smart constructor.
+data NodeConfig = NodeConfig
+    { _ncServiceAccounts :: !(Maybe [Maybe ServiceAccount])
+    , _ncSourceImage     :: !(Maybe Text)
+    , _ncMachineType     :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'NodeConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ncServiceAccounts'
+--
+-- * 'ncSourceImage'
+--
+-- * 'ncMachineType'
+nodeConfig
+    :: NodeConfig
+nodeConfig =
+    NodeConfig
+    { _ncServiceAccounts = Nothing
+    , _ncSourceImage = Nothing
+    , _ncMachineType = Nothing
+    }
+
+-- | The optional list of ServiceAccounts, each with their specified scopes,
+-- to be made available on all of the node VMs. In addition to the service
+-- accounts and scopes specified, the \"default\" account will always be
+-- created with the following scopes to ensure the correct functioning of
+-- the cluster: - https:\/\/www.googleapis.com\/auth\/compute, -
+-- https:\/\/www.googleapis.com\/auth\/devstorage.read_only
+ncServiceAccounts :: Lens' NodeConfig [Maybe ServiceAccount]
+ncServiceAccounts
+  = lens _ncServiceAccounts
+      (\ s a -> s{_ncServiceAccounts = a})
+      . _Default
+      . _Coerce
+
+-- | The fully-specified name of a Google Compute Engine image. For example:
+-- https:\/\/www.googleapis.com\/compute\/v1\/projects\/debian-cloud\/global\/images\/backports-debian-7-wheezy-vYYYYMMDD
+-- (where YYYMMDD is the version date). If specifying an image, you are
+-- responsible for ensuring its compatibility with the Debian 7 backports
+-- image. We recommend leaving this field blank to accept the default
+-- backports-debian-7-wheezy value.
+ncSourceImage :: Lens' NodeConfig (Maybe Text)
+ncSourceImage
+  = lens _ncSourceImage
+      (\ s a -> s{_ncSourceImage = a})
+
+-- | The name of a Google Compute Engine machine type (e.g. n1-standard-1).
+-- If unspecified, the default machine type is n1-standard-1.
+ncMachineType :: Lens' NodeConfig (Maybe Text)
+ncMachineType
+  = lens _ncMachineType
+      (\ s a -> s{_ncMachineType = a})
+
+instance FromJSON NodeConfig where
+        parseJSON
+          = withObject "NodeConfig"
+              (\ o ->
+                 NodeConfig <$>
+                   (o .:? "serviceAccounts" .!= mempty) <*>
+                     (o .:? "sourceImage")
+                     <*> (o .:? "machineType"))
+
+instance ToJSON NodeConfig where
+        toJSON NodeConfig{..}
+          = object
+              (catMaybes
+                 [("serviceAccounts" .=) <$> _ncServiceAccounts,
+                  ("sourceImage" .=) <$> _ncSourceImage,
+                  ("machineType" .=) <$> _ncMachineType])
+
+--
+-- /See:/ 'listAggregatedClustersResponse' smart constructor.
+newtype ListAggregatedClustersResponse = ListAggregatedClustersResponse
+    { _lacrClusters :: Maybe [Maybe Cluster]
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListAggregatedClustersResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lacrClusters'
+listAggregatedClustersResponse
+    :: ListAggregatedClustersResponse
+listAggregatedClustersResponse =
+    ListAggregatedClustersResponse
+    { _lacrClusters = Nothing
+    }
+
+-- | A list of clusters in the project, across all zones.
+lacrClusters :: Lens' ListAggregatedClustersResponse [Maybe Cluster]
+lacrClusters
+  = lens _lacrClusters (\ s a -> s{_lacrClusters = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListAggregatedClustersResponse
+         where
+        parseJSON
+          = withObject "ListAggregatedClustersResponse"
+              (\ o ->
+                 ListAggregatedClustersResponse <$>
+                   (o .:? "clusters" .!= mempty))
+
+instance ToJSON ListAggregatedClustersResponse where
+        toJSON ListAggregatedClustersResponse{..}
+          = object
+              (catMaybes [("clusters" .=) <$> _lacrClusters])
 
 --
 -- /See:/ 'listClustersResponse' smart constructor.
@@ -473,183 +667,37 @@ instance ToJSON ListOperationsResponse where
           = object
               (catMaybes [("operations" .=) <$> _lorOperations])
 
--- | The authentication information for accessing the master. Authentication
--- is either done using HTTP basic authentication or using a bearer token.
 --
--- /See:/ 'masterAuth' smart constructor.
-data MasterAuth = MasterAuth
-    { _maBearerToken          :: !(Maybe Text)
-    , _maClientKey            :: !(Maybe Text)
-    , _maUser                 :: !(Maybe Text)
-    , _maClientCertificate    :: !(Maybe Text)
-    , _maPassword             :: !(Maybe Text)
-    , _maClusterCaCertificate :: !(Maybe Text)
+-- /See:/ 'createClusterRequest' smart constructor.
+newtype CreateClusterRequest = CreateClusterRequest
+    { _ccrCluster :: Maybe (Maybe Cluster)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MasterAuth' with the minimum fields required to make a request.
+-- | Creates a value of 'CreateClusterRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'maBearerToken'
---
--- * 'maClientKey'
---
--- * 'maUser'
---
--- * 'maClientCertificate'
---
--- * 'maPassword'
---
--- * 'maClusterCaCertificate'
-masterAuth
-    :: MasterAuth
-masterAuth =
-    MasterAuth
-    { _maBearerToken = Nothing
-    , _maClientKey = Nothing
-    , _maUser = Nothing
-    , _maClientCertificate = Nothing
-    , _maPassword = Nothing
-    , _maClusterCaCertificate = Nothing
+-- * 'ccrCluster'
+createClusterRequest
+    :: CreateClusterRequest
+createClusterRequest =
+    CreateClusterRequest
+    { _ccrCluster = Nothing
     }
 
--- | The token used to authenticate API requests to the master. The token is
--- to be included in an HTTP Authorization Header in all requests to the
--- master endpoint. The format of the header is: \"Authorization: Bearer
--- \".
-maBearerToken :: Lens' MasterAuth (Maybe Text)
-maBearerToken
-  = lens _maBearerToken
-      (\ s a -> s{_maBearerToken = a})
+-- | A cluster resource.
+ccrCluster :: Lens' CreateClusterRequest (Maybe (Maybe Cluster))
+ccrCluster
+  = lens _ccrCluster (\ s a -> s{_ccrCluster = a})
 
--- | [Output only] Base64 encoded private key used by clients to authenticate
--- to the cluster endpoint.
-maClientKey :: Lens' MasterAuth (Maybe Text)
-maClientKey
-  = lens _maClientKey (\ s a -> s{_maClientKey = a})
-
--- | The username to use for HTTP basic authentication when accessing the
--- Kubernetes master endpoint.
-maUser :: Lens' MasterAuth (Maybe Text)
-maUser = lens _maUser (\ s a -> s{_maUser = a})
-
--- | [Output only] Base64 encoded public certificate used by clients to
--- authenticate to the cluster endpoint.
-maClientCertificate :: Lens' MasterAuth (Maybe Text)
-maClientCertificate
-  = lens _maClientCertificate
-      (\ s a -> s{_maClientCertificate = a})
-
--- | The password to use for HTTP basic authentication when accessing the
--- Kubernetes master endpoint. Because the master endpoint is open to the
--- internet, you should create a strong password.
-maPassword :: Lens' MasterAuth (Maybe Text)
-maPassword
-  = lens _maPassword (\ s a -> s{_maPassword = a})
-
--- | [Output only] Base64 encoded public certificate that is the root of
--- trust for the cluster.
-maClusterCaCertificate :: Lens' MasterAuth (Maybe Text)
-maClusterCaCertificate
-  = lens _maClusterCaCertificate
-      (\ s a -> s{_maClusterCaCertificate = a})
-
-instance FromJSON MasterAuth where
+instance FromJSON CreateClusterRequest where
         parseJSON
-          = withObject "MasterAuth"
-              (\ o ->
-                 MasterAuth <$>
-                   (o .:? "bearerToken") <*> (o .:? "clientKey") <*>
-                     (o .:? "user")
-                     <*> (o .:? "clientCertificate")
-                     <*> (o .:? "password")
-                     <*> (o .:? "clusterCaCertificate"))
+          = withObject "CreateClusterRequest"
+              (\ o -> CreateClusterRequest <$> (o .:? "cluster"))
 
-instance ToJSON MasterAuth where
-        toJSON MasterAuth{..}
-          = object
-              (catMaybes
-                 [("bearerToken" .=) <$> _maBearerToken,
-                  ("clientKey" .=) <$> _maClientKey,
-                  ("user" .=) <$> _maUser,
-                  ("clientCertificate" .=) <$> _maClientCertificate,
-                  ("password" .=) <$> _maPassword,
-                  ("clusterCaCertificate" .=) <$>
-                    _maClusterCaCertificate])
-
---
--- /See:/ 'nodeConfig' smart constructor.
-data NodeConfig = NodeConfig
-    { _ncServiceAccounts :: !(Maybe [Maybe ServiceAccount])
-    , _ncSourceImage     :: !(Maybe Text)
-    , _ncMachineType     :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'NodeConfig' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ncServiceAccounts'
---
--- * 'ncSourceImage'
---
--- * 'ncMachineType'
-nodeConfig
-    :: NodeConfig
-nodeConfig =
-    NodeConfig
-    { _ncServiceAccounts = Nothing
-    , _ncSourceImage = Nothing
-    , _ncMachineType = Nothing
-    }
-
--- | The optional list of ServiceAccounts, each with their specified scopes,
--- to be made available on all of the node VMs. In addition to the service
--- accounts and scopes specified, the \"default\" account will always be
--- created with the following scopes to ensure the correct functioning of
--- the cluster: - https:\/\/www.googleapis.com\/auth\/compute, -
--- https:\/\/www.googleapis.com\/auth\/devstorage.read_only
-ncServiceAccounts :: Lens' NodeConfig [Maybe ServiceAccount]
-ncServiceAccounts
-  = lens _ncServiceAccounts
-      (\ s a -> s{_ncServiceAccounts = a})
-      . _Default
-      . _Coerce
-
--- | The fully-specified name of a Google Compute Engine image. For example:
--- https:\/\/www.googleapis.com\/compute\/v1\/projects\/debian-cloud\/global\/images\/backports-debian-7-wheezy-vYYYYMMDD
--- (where YYYMMDD is the version date). If specifying an image, you are
--- responsible for ensuring its compatibility with the Debian 7 backports
--- image. We recommend leaving this field blank to accept the default
--- backports-debian-7-wheezy value.
-ncSourceImage :: Lens' NodeConfig (Maybe Text)
-ncSourceImage
-  = lens _ncSourceImage
-      (\ s a -> s{_ncSourceImage = a})
-
--- | The name of a Google Compute Engine machine type (e.g. n1-standard-1).
--- If unspecified, the default machine type is n1-standard-1.
-ncMachineType :: Lens' NodeConfig (Maybe Text)
-ncMachineType
-  = lens _ncMachineType
-      (\ s a -> s{_ncMachineType = a})
-
-instance FromJSON NodeConfig where
-        parseJSON
-          = withObject "NodeConfig"
-              (\ o ->
-                 NodeConfig <$>
-                   (o .:? "serviceAccounts" .!= mempty) <*>
-                     (o .:? "sourceImage")
-                     <*> (o .:? "machineType"))
-
-instance ToJSON NodeConfig where
-        toJSON NodeConfig{..}
-          = object
-              (catMaybes
-                 [("serviceAccounts" .=) <$> _ncServiceAccounts,
-                  ("sourceImage" .=) <$> _ncSourceImage,
-                  ("machineType" .=) <$> _ncMachineType])
+instance ToJSON CreateClusterRequest where
+        toJSON CreateClusterRequest{..}
+          = object (catMaybes [("cluster" .=) <$> _ccrCluster])
 
 -- | Defines the operation resource. All fields are output only.
 --
@@ -762,51 +810,3 @@ instance ToJSON Operation where
                   ("errorMessage" .=) <$> _oErrorMessage,
                   ("targetLink" .=) <$> _oTargetLink,
                   ("target" .=) <$> _oTarget])
-
--- | A Compute Engine service account.
---
--- /See:/ 'serviceAccount' smart constructor.
-data ServiceAccount = ServiceAccount
-    { _saEmail  :: !(Maybe Text)
-    , _saScopes :: !(Maybe [Text])
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ServiceAccount' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'saEmail'
---
--- * 'saScopes'
-serviceAccount
-    :: ServiceAccount
-serviceAccount =
-    ServiceAccount
-    { _saEmail = Nothing
-    , _saScopes = Nothing
-    }
-
--- | Email address of the service account.
-saEmail :: Lens' ServiceAccount (Maybe Text)
-saEmail = lens _saEmail (\ s a -> s{_saEmail = a})
-
--- | The list of scopes to be made available for this service account.
-saScopes :: Lens' ServiceAccount [Text]
-saScopes
-  = lens _saScopes (\ s a -> s{_saScopes = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON ServiceAccount where
-        parseJSON
-          = withObject "ServiceAccount"
-              (\ o ->
-                 ServiceAccount <$>
-                   (o .:? "email") <*> (o .:? "scopes" .!= mempty))
-
-instance ToJSON ServiceAccount where
-        toJSON ServiceAccount{..}
-          = object
-              (catMaybes
-                 [("email" .=) <$> _saEmail,
-                  ("scopes" .=) <$> _saScopes])

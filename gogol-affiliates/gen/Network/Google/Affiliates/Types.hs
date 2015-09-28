@@ -14,9 +14,41 @@
 --
 module Network.Google.Affiliates.Types
     (
+    -- * Service URL
+      affiliatesURL
+
+    -- * Events
+    , Events
+    , events
+    , eNextPageToken
+    , eKind
+    , eItems
+
+    -- * CcOfferItemRewards
+    , CcOfferItemRewards
+    , ccOfferItemRewards
+    , coirAmount
+    , coirExpirationMonths
+    , coirCategory
+    , coirAdditionalDetails
+    , coirMaxRewardTier
+    , coirMinRewardTier
+
+    -- * Alt
+    , Alt (..)
+
+    -- * LinksList'Authorship
+    , LinksList'Authorship (..)
+
+    -- * Publishers
+    , Publishers
+    , publishers
+    , pNextPageToken
+    , pKind
+    , pItems
 
     -- * Advertiser
-      Advertiser
+    , Advertiser
     , advertiser
     , aAllowPublisherCreatedLinks
     , aContactPhone
@@ -40,12 +72,11 @@ module Network.Google.Affiliates.Types
     , aCommissionDuration
     , aDescription
 
-    -- * Advertisers
-    , Advertisers
-    , advertisers
-    , advNextPageToken
-    , advKind
-    , advItems
+    -- * LinksList'LinkType
+    , LinksList'LinkType (..)
+
+    -- * EventsList'Status
+    , EventsList'Status (..)
 
     -- * CcOffer
     , CcOffer
@@ -114,12 +145,6 @@ module Network.Google.Affiliates.Types
     , coRewardPartner
     , coPurchaseRateType
 
-    -- * CcOfferItemBonusRewards
-    , CcOfferItemBonusRewards
-    , ccOfferItemBonusRewards
-    , coibrAmount
-    , coibrDetails
-
     -- * CcOfferItemDefaultFees
     , CcOfferItemDefaultFees
     , ccOfferItemDefaultFees
@@ -128,21 +153,55 @@ module Network.Google.Affiliates.Types
     , coidfCategory
     , coidfMaxRate
 
-    -- * CcOfferItemRewards
-    , CcOfferItemRewards
-    , ccOfferItemRewards
-    , coirAmount
-    , coirExpirationMonths
-    , coirCategory
-    , coirAdditionalDetails
-    , coirMaxRewardTier
-    , coirMinRewardTier
+    -- * AdvertisersList'RelationshipStatus
+    , AdvertisersList'RelationshipStatus (..)
 
-    -- * CcOffers
-    , CcOffers
-    , ccOffers
-    , cKind
-    , cItems
+    -- * CcOffersList'Projection
+    , CcOffersList'Projection (..)
+
+    -- * ReportsGet'Role
+    , ReportsGet'Role (..)
+
+    -- * PublishersGet'Role
+    , PublishersGet'Role (..)
+
+    -- * EventsList'ChargeType
+    , EventsList'ChargeType (..)
+
+    -- * PublishersList'RelationshipStatus
+    , PublishersList'RelationshipStatus (..)
+
+    -- * Links
+    , Links
+    , links
+    , lNextPageToken
+    , lKind
+    , lItems
+
+    -- * Report
+    , Report
+    , report
+    , rEndDate
+    , rTotalsRows
+    , rKind
+    , rStartDate
+    , rRows
+    , rMatchingRowCount
+    , rColumnNames
+    , rType
+
+    -- * Advertisers
+    , Advertisers
+    , advertisers
+    , advNextPageToken
+    , advKind
+    , advItems
+
+    -- * LinksList'PromotionType
+    , LinksList'PromotionType (..)
+
+    -- * LinksList'Role
+    , LinksList'Role (..)
 
     -- * Event
     , Event
@@ -166,6 +225,21 @@ module Network.Google.Affiliates.Types
     , eveEarnings
     , evePublisherName
 
+    -- * AdvertisersList'Role
+    , AdvertisersList'Role (..)
+
+    -- * LinksInsert'Role
+    , LinksInsert'Role (..)
+
+    -- * CcOfferItemBonusRewards
+    , CcOfferItemBonusRewards
+    , ccOfferItemBonusRewards
+    , coibrAmount
+    , coibrDetails
+
+    -- * PublishersList'Role
+    , PublishersList'Role (..)
+
     -- * EventItemProducts
     , EventItemProducts
     , eventItemProducts
@@ -179,12 +253,17 @@ module Network.Google.Affiliates.Types
     , eipUnitPrice
     , eipEarnings
 
-    -- * Events
-    , Events
-    , events
-    , eNextPageToken
-    , eKind
-    , eItems
+    -- * LinksList'RelationshipStatus
+    , LinksList'RelationshipStatus (..)
+
+    -- * EventsList'Role
+    , EventsList'Role (..)
+
+    -- * LinksGet'Role
+    , LinksGet'Role (..)
+
+    -- * AdvertisersGet'Role
+    , AdvertisersGet'Role (..)
 
     -- * Link
     , Link
@@ -211,30 +290,23 @@ module Network.Google.Affiliates.Types
     , linDuration
     , linDescription
 
-    -- * LinkSpecialOffers
-    , LinkSpecialOffers
-    , linkSpecialOffers
-    , lsoFreeShippingMin
-    , lsoPercentOff
-    , lsoPriceCut
-    , lsoPriceCutMin
-    , lsoPercentOffMin
-    , lsoFreeShipping
-    , lsoPromotionCodes
-    , lsoFreeGift
-
-    -- * Links
-    , Links
-    , links
-    , lNextPageToken
-    , lKind
-    , lItems
-
     -- * Money
     , Money
     , money
     , mAmount
     , mCurrencyCode
+
+    -- * CcOffers
+    , CcOffers
+    , ccOffers
+    , cKind
+    , cItems
+
+    -- * ReportsGet'EventType
+    , ReportsGet'EventType (..)
+
+    -- * ReportsGet'Status
+    , ReportsGet'Status (..)
 
     -- * Publisher
     , Publisher
@@ -251,26 +323,32 @@ module Network.Google.Affiliates.Types
     , pubEpcNinetyDayAverage
     , pubSites
 
-    -- * Publishers
-    , Publishers
-    , publishers
-    , pNextPageToken
-    , pKind
-    , pItems
+    -- * ReportsGet'ReportType
+    , ReportsGet'ReportType (..)
 
-    -- * Report
-    , Report
-    , report
-    , rEndDate
-    , rTotalsRows
-    , rKind
-    , rStartDate
-    , rRows
-    , rMatchingRowCount
-    , rColumnNames
-    , rType
+    -- * LinkSpecialOffers
+    , LinkSpecialOffers
+    , linkSpecialOffers
+    , lsoFreeShippingMin
+    , lsoPercentOff
+    , lsoPriceCut
+    , lsoPriceCutMin
+    , lsoPercentOffMin
+    , lsoFreeShipping
+    , lsoPromotionCodes
+    , lsoFreeGift
+
+    -- * EventsList'Type
+    , EventsList'Type (..)
     ) where
 
 import           Network.Google.Affiliates.Types.Product
 import           Network.Google.Affiliates.Types.Sum
 import           Network.Google.Prelude
+
+-- | URL referring to version 'v1beta1' of the Google Affiliate Network API.
+affiliatesURL :: BaseUrl
+affiliatesURL
+  = BaseUrl Https
+      "https://www.googleapis.com/gan/v1beta1/"
+      443

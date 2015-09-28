@@ -14,84 +14,40 @@
 --
 module Network.Google.Play.Enterprise.Types
     (
+    -- * Service URL
+      playEnterpriseURL
+
+    -- * ProductsGenerateApprovalUrlResponse
+    , ProductsGenerateApprovalUrlResponse
+    , productsGenerateApprovalUrlResponse
+    , pgaurUrl
+
+    -- * EnterprisesSendTestPushNotificationResponse
+    , EnterprisesSendTestPushNotificationResponse
+    , enterprisesSendTestPushNotificationResponse
+    , estpnrTopicName
+    , estpnrMessageId
 
     -- * AppRestrictionsSchema
-      AppRestrictionsSchema
+    , AppRestrictionsSchema
     , appRestrictionsSchema
     , arsKind
     , arsRestrictions
 
-    -- * AppRestrictionsSchemaRestriction
-    , AppRestrictionsSchemaRestriction
-    , appRestrictionsSchemaRestriction
-    , arsrRestrictionType
-    , arsrEntry
-    , arsrKey
-    , arsrEntryValue
-    , arsrDefaultValue
-    , arsrTitle
-    , arsrDescription
+    -- * EnterprisesListResponse
+    , EnterprisesListResponse
+    , enterprisesListResponse
+    , elrKind
+    , elrEnterprise
 
-    -- * AppRestrictionsSchemaRestrictionRestrictionValue
-    , AppRestrictionsSchemaRestrictionRestrictionValue
-    , appRestrictionsSchemaRestrictionRestrictionValue
-    , arsrrvValueMultiselect
-    , arsrrvValueBool
-    , arsrrvValueInteger
-    , arsrrvType
-    , arsrrvValueString
-
-    -- * AppVersion
-    , AppVersion
-    , appVersion
-    , avVersionCode
-    , avVersionString
+    -- * Alt
+    , Alt (..)
 
     -- * ApprovalUrlInfo
     , ApprovalUrlInfo
     , approvalUrlInfo
     , auiApprovalUrl
     , auiKind
-
-    -- * Collection
-    , Collection
-    , collection
-    , cKind
-    , cCollectionId
-    , cVisibility
-    , cName
-    , cProductId
-
-    -- * CollectionViewersListResponse
-    , CollectionViewersListResponse
-    , collectionViewersListResponse
-    , cvlrKind
-    , cvlrUser
-
-    -- * CollectionsListResponse
-    , CollectionsListResponse
-    , collectionsListResponse
-    , clrKind
-    , clrCollection
-
-    -- * Device
-    , Device
-    , device
-    , dKind
-    , dManagementType
-    , dAndroidId
-
-    -- * DeviceState
-    , DeviceState
-    , deviceState
-    , dsKind
-    , dsAccountState
-
-    -- * DevicesListResponse
-    , DevicesListResponse
-    , devicesListResponse
-    , dlrKind
-    , dlrDevice
 
     -- * Enterprise
     , Enterprise
@@ -100,81 +56,6 @@ module Network.Google.Play.Enterprise.Types
     , ePrimaryDomain
     , eName
     , eId
-
-    -- * EnterpriseAccount
-    , EnterpriseAccount
-    , enterpriseAccount
-    , eaKind
-    , eaAccountEmail
-
-    -- * EnterprisesListResponse
-    , EnterprisesListResponse
-    , enterprisesListResponse
-    , elrKind
-    , elrEnterprise
-
-    -- * EnterprisesSendTestPushNotificationResponse
-    , EnterprisesSendTestPushNotificationResponse
-    , enterprisesSendTestPushNotificationResponse
-    , estpnrTopicName
-    , estpnrMessageId
-
-    -- * Entitlement
-    , Entitlement
-    , entitlement
-    , eeKind
-    , eeReason
-    , eeProductId
-
-    -- * EntitlementsListResponse
-    , EntitlementsListResponse
-    , entitlementsListResponse
-    , entKind
-    , entEntitlement
-
-    -- * GroupLicense
-    , GroupLicense
-    , groupLicense
-    , glKind
-    , glNumProvisioned
-    , glNumPurchased
-    , glApproval
-    , glProductId
-    , glAcquisitionKind
-
-    -- * GroupLicenseUsersListResponse
-    , GroupLicenseUsersListResponse
-    , groupLicenseUsersListResponse
-    , glulrKind
-    , glulrUser
-
-    -- * GroupLicensesListResponse
-    , GroupLicensesListResponse
-    , groupLicensesListResponse
-    , gllrGroupLicense
-    , gllrKind
-
-    -- * Install
-    , Install
-    , install
-    , iVersionCode
-    , iKind
-    , iInstallState
-    , iProductId
-
-    -- * InstallsListResponse
-    , InstallsListResponse
-    , installsListResponse
-    , ilrKind
-    , ilrInstall
-
-    -- * Permission
-    , Permission
-    , permission
-    , perKind
-    , perName
-    , perDescription
-    , perPermissionId
 
     -- * Product
     , Product
@@ -190,11 +71,11 @@ module Network.Google.Play.Enterprise.Types
     , pProductId
     , pDetailsUrl
 
-    -- * ProductPermission
-    , ProductPermission
-    , productPermission
-    , ppState
-    , ppPermissionId
+    -- * EntitlementsListResponse
+    , EntitlementsListResponse
+    , entitlementsListResponse
+    , entKind
+    , entEntitlement
 
     -- * ProductPermissions
     , ProductPermissions
@@ -203,28 +84,78 @@ module Network.Google.Play.Enterprise.Types
     , ppPermission
     , ppProductId
 
-    -- * ProductSet
-    , ProductSet
-    , productSet
-    , psKind
-    , psProductId
+    -- * Permission
+    , Permission
+    , permission
+    , perKind
+    , perName
+    , perDescription
+    , perPermissionId
 
-    -- * ProductsApproveRequest
-    , ProductsApproveRequest
-    , productsApproveRequest
-    , parApprovalUrlInfo
+    -- * GroupLicensesListResponse
+    , GroupLicensesListResponse
+    , groupLicensesListResponse
+    , gllrGroupLicense
+    , gllrKind
 
-    -- * ProductsGenerateApprovalUrlResponse
-    , ProductsGenerateApprovalUrlResponse
-    , productsGenerateApprovalUrlResponse
-    , pgaurUrl
+    -- * Collection
+    , Collection
+    , collection
+    , ccKind
+    , ccCollectionId
+    , ccVisibility
+    , ccName
+    , ccProductId
 
-    -- * User
-    , User
-    , user
-    , uKind
-    , uId
-    , uPrimaryEmail
+    -- * Entitlement
+    , Entitlement
+    , entitlement
+    , eeKind
+    , eeReason
+    , eeProductId
+
+    -- * AppRestrictionsSchemaRestrictionRestrictionValue
+    , AppRestrictionsSchemaRestrictionRestrictionValue
+    , appRestrictionsSchemaRestrictionRestrictionValue
+    , arsrrvValueMultiselect
+    , arsrrvValueBool
+    , arsrrvValueInteger
+    , arsrrvType
+    , arsrrvValueString
+
+    -- * GroupLicense
+    , GroupLicense
+    , groupLicense
+    , glKind
+    , glNumProvisioned
+    , glNumPurchased
+    , glApproval
+    , glProductId
+    , glAcquisitionKind
+
+    -- * EnterpriseAccount
+    , EnterpriseAccount
+    , enterpriseAccount
+    , eaKind
+    , eaAccountEmail
+
+    -- * CollectionsListResponse
+    , CollectionsListResponse
+    , collectionsListResponse
+    , clrKind
+    , clrCollection
+
+    -- * GroupLicenseUsersListResponse
+    , GroupLicenseUsersListResponse
+    , groupLicenseUsersListResponse
+    , glulrKind
+    , glulrUser
+
+    -- * DeviceState
+    , DeviceState
+    , deviceState
+    , dsKind
+    , dsAccountState
 
     -- * UserToken
     , UserToken
@@ -233,13 +164,94 @@ module Network.Google.Play.Enterprise.Types
     , utToken
     , utUserId
 
+    -- * DevicesListResponse
+    , DevicesListResponse
+    , devicesListResponse
+    , dlrKind
+    , dlrDevice
+
+    -- * ProductPermission
+    , ProductPermission
+    , productPermission
+    , ppState
+    , ppPermissionId
+
+    -- * Device
+    , Device
+    , device
+    , dKind
+    , dManagementType
+    , dAndroidId
+
+    -- * InstallsListResponse
+    , InstallsListResponse
+    , installsListResponse
+    , ilrKind
+    , ilrInstall
+
+    -- * AppRestrictionsSchemaRestriction
+    , AppRestrictionsSchemaRestriction
+    , appRestrictionsSchemaRestriction
+    , arsrRestrictionType
+    , arsrEntry
+    , arsrKey
+    , arsrEntryValue
+    , arsrDefaultValue
+    , arsrTitle
+    , arsrDescription
+
     -- * UsersListResponse
     , UsersListResponse
     , usersListResponse
     , ulrKind
     , ulrUser
+
+    -- * AppVersion
+    , AppVersion
+    , appVersion
+    , avVersionCode
+    , avVersionString
+
+    -- * ProductsApproveRequest
+    , ProductsApproveRequest
+    , productsApproveRequest
+    , parApprovalUrlInfo
+
+    -- * CollectionViewersListResponse
+    , CollectionViewersListResponse
+    , collectionViewersListResponse
+    , cvlrKind
+    , cvlrUser
+
+    -- * Install
+    , Install
+    , install
+    , iVersionCode
+    , iKind
+    , iInstallState
+    , iProductId
+
+    -- * User
+    , User
+    , user
+    , uKind
+    , uId
+    , uPrimaryEmail
+
+    -- * ProductSet
+    , ProductSet
+    , productSet
+    , psKind
+    , psProductId
     ) where
 
 import           Network.Google.Play.Enterprise.Types.Product
 import           Network.Google.Play.Enterprise.Types.Sum
 import           Network.Google.Prelude
+
+-- | URL referring to version 'v1' of the Google Play EMM API.
+playEnterpriseURL :: BaseUrl
+playEnterpriseURL
+  = BaseUrl Https
+      "https://www.googleapis.com/androidenterprise/v1/"
+      443

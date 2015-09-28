@@ -17,39 +17,75 @@
 -- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference>
 module Network.Google.DoubleClick.Bids
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** DoubleClick Bid Manager API
       DoubleClickBids
-    , QueriesAPI
-    , QueriesGetquery
-    , QueriesRunquery
-    , QueriesDeletequery
-    , QueriesCreatequery
-    , QueriesListqueries
-    , ReportsAPI
-    , ReportsListreports
-    , LineitemsAPI
-    , LineitemsUploadlineitems
-    , LineitemsDownloadlineitems
+    , doubleClickBids
+    , doubleClickBidsURL
+
+    -- ** doubleclickbidmanager.lineitems.downloadlineitems
+    , module Network.Google.API.Doubleclickbidmanager.Lineitems.Downloadlineitems
+
+    -- ** doubleclickbidmanager.lineitems.uploadlineitems
+    , module Network.Google.API.Doubleclickbidmanager.Lineitems.Uploadlineitems
+
+    -- ** doubleclickbidmanager.queries.createquery
+    , module Network.Google.API.Doubleclickbidmanager.Queries.Createquery
+
+    -- ** doubleclickbidmanager.queries.deletequery
+    , module Network.Google.API.Doubleclickbidmanager.Queries.Deletequery
+
+    -- ** doubleclickbidmanager.queries.getquery
+    , module Network.Google.API.Doubleclickbidmanager.Queries.Getquery
+
+    -- ** doubleclickbidmanager.queries.listqueries
+    , module Network.Google.API.Doubleclickbidmanager.Queries.Listqueries
+
+    -- ** doubleclickbidmanager.queries.runquery
+    , module Network.Google.API.Doubleclickbidmanager.Queries.Runquery
+
+    -- ** doubleclickbidmanager.reports.listreports
+    , module Network.Google.API.Doubleclickbidmanager.Reports.Listreports
 
     -- * Types
 
-    -- ** DownloadLineItemsRequest
-    , DownloadLineItemsRequest
-    , downloadLineItemsRequest
-    , dlirFilterType
-    , dlirFormat
-    , dlirFilterIds
+    -- ** QueryMetadataFormat
+    , QueryMetadataFormat (..)
 
-    -- ** DownloadLineItemsRequestFilterType
-    , DownloadLineItemsRequestFilterType (..)
-
-    -- ** DownloadLineItemsRequestFormat
-    , DownloadLineItemsRequestFormat (..)
+    -- ** QuerySchedule
+    , QuerySchedule
+    , querySchedule
+    , qsFrequency
+    , qsEndTimeMs
+    , qsNextRunMinuteOfDay
+    , qsNextRunTimezoneCode
 
     -- ** DownloadLineItemsResponse
     , DownloadLineItemsResponse
     , downloadLineItemsResponse
     , dlirLineItems
+
+    -- ** UploadStatus
+    , UploadStatus
+    , uploadStatus
+    , usRowStatus
+    , usErrors
+
+    -- ** RunQueryRequest
+    , RunQueryRequest
+    , runQueryRequest
+    , rqrReportDataEndTimeMs
+    , rqrDataRange
+    , rqrReportDataStartTimeMs
+    , rqrTimezoneCode
+
+    -- ** UploadLineItemsRequest
+    , UploadLineItemsRequest
+    , uploadLineItemsRequest
+    , ulirLineItems
+    , ulirFormat
+    , ulirDryRun
 
     -- ** FilterPair
     , FilterPair
@@ -57,50 +93,46 @@ module Network.Google.DoubleClick.Bids
     , fpValue
     , fpType
 
+    -- ** UploadLineItemsRequestFormat
+    , UploadLineItemsRequestFormat (..)
+
+    -- ** Alt
+    , Alt (..)
+
+    -- ** ReportFailureErrorCode
+    , ReportFailureErrorCode (..)
+
+    -- ** ParametersItemGroupBys
+    , ParametersItemGroupBys (..)
+
+    -- ** Report
+    , Report
+    , report
+    , rParams
+    , rKey
+    , rMetadata
+
+    -- ** RowStatus
+    , RowStatus
+    , rowStatus
+    , rsEntityName
+    , rsChanged
+    , rsPersisted
+    , rsRowNumber
+    , rsErrors
+    , rsEntityId
+
+    -- ** RunQueryRequestDataRange
+    , RunQueryRequestDataRange (..)
+
     -- ** FilterPairType
     , FilterPairType (..)
-
-    -- ** ListQueriesResponse
-    , ListQueriesResponse
-    , listQueriesResponse
-    , lqrQueries
-    , lqrKind
 
     -- ** ListReportsResponse
     , ListReportsResponse
     , listReportsResponse
     , lrrReports
     , lrrKind
-
-    -- ** Parameters
-    , Parameters
-    , parameters
-    , pMetrics
-    , pIncludeInviteData
-    , pFilters
-    , pGroupBys
-    , pType
-
-    -- ** ParametersItemGroupBys
-    , ParametersItemGroupBys (..)
-
-    -- ** ParametersItemMetrics
-    , ParametersItemMetrics (..)
-
-    -- ** ParametersType
-    , ParametersType (..)
-
-    -- ** Query
-    , Query
-    , query
-    , qQueryId
-    , qReportDataEndTimeMs
-    , qSchedule
-    , qKind
-    , qParams
-    , qMetadata
-    , qReportDataStartTimeMs
-    , qTimezoneCode
 
     -- ** QueryMetadata
     , QueryMetadata
@@ -117,51 +149,17 @@ module Network.Google.DoubleClick.Bids
     , qmTitle
     , qmSendNotification
 
-    -- ** QueryMetadataDataRange
-    , QueryMetadataDataRange (..)
+    -- ** Parameters
+    , Parameters
+    , parameters
+    , pMetrics
+    , pIncludeInviteData
+    , pFilters
+    , pGroupBys
+    , pType
 
-    -- ** QueryMetadataFormat
-    , QueryMetadataFormat (..)
-
-    -- ** QuerySchedule
-    , QuerySchedule
-    , querySchedule
-    , qsFrequency
-    , qsEndTimeMs
-    , qsNextRunMinuteOfDay
-    , qsNextRunTimezoneCode
-
-    -- ** QueryScheduleFrequency
-    , QueryScheduleFrequency (..)
-
-    -- ** Report
-    , Report
-    , report
-    , rParams
-    , rKey
-    , rMetadata
-
-    -- ** ReportFailure
-    , ReportFailure
-    , reportFailure
-    , rfErrorCode
-
-    -- ** ReportFailureErrorCode
-    , ReportFailureErrorCode (..)
-
-    -- ** ReportKey
-    , ReportKey
-    , reportKey
-    , rkQueryId
-    , rkReportId
-
-    -- ** ReportMetadata
-    , ReportMetadata
-    , reportMetadata
-    , rmStatus
-    , rmReportDataEndTimeMs
-    , rmGoogleCloudStoragePath
-    , rmReportDataStartTimeMs
+    -- ** ReportStatusFormat
+    , ReportStatusFormat (..)
 
     -- ** ReportStatus
     , ReportStatus
@@ -171,55 +169,85 @@ module Network.Google.DoubleClick.Bids
     , rsFormat
     , rsFailure
 
-    -- ** ReportStatusFormat
-    , ReportStatusFormat (..)
+    -- ** Query
+    , Query
+    , query
+    , qQueryId
+    , qReportDataEndTimeMs
+    , qSchedule
+    , qKind
+    , qParams
+    , qMetadata
+    , qReportDataStartTimeMs
+    , qTimezoneCode
 
-    -- ** ReportStatusState
-    , ReportStatusState (..)
+    -- ** DownloadLineItemsRequest
+    , DownloadLineItemsRequest
+    , downloadLineItemsRequest
+    , dlirFilterType
+    , dlirFormat
+    , dlirFilterIds
 
-    -- ** RowStatus
-    , RowStatus
-    , rowStatus
-    , rsEntityName
-    , rsChanged
-    , rsPersisted
-    , rsRowNumber
-    , rsErrors
-    , rsEntityId
+    -- ** ListQueriesResponse
+    , ListQueriesResponse
+    , listQueriesResponse
+    , lqrQueries
+    , lqrKind
 
-    -- ** RunQueryRequest
-    , RunQueryRequest
-    , runQueryRequest
-    , rqrReportDataEndTimeMs
-    , rqrDataRange
-    , rqrReportDataStartTimeMs
-    , rqrTimezoneCode
+    -- ** DownloadLineItemsRequestFormat
+    , DownloadLineItemsRequestFormat (..)
 
-    -- ** RunQueryRequestDataRange
-    , RunQueryRequestDataRange (..)
-
-    -- ** UploadLineItemsRequest
-    , UploadLineItemsRequest
-    , uploadLineItemsRequest
-    , ulirLineItems
-    , ulirFormat
-    , ulirDryRun
-
-    -- ** UploadLineItemsRequestFormat
-    , UploadLineItemsRequestFormat (..)
+    -- ** QueryScheduleFrequency
+    , QueryScheduleFrequency (..)
 
     -- ** UploadLineItemsResponse
     , UploadLineItemsResponse
     , uploadLineItemsResponse
     , ulirUploadStatus
 
-    -- ** UploadStatus
-    , UploadStatus
-    , uploadStatus
-    , usRowStatus
-    , usErrors
+    -- ** ReportMetadata
+    , ReportMetadata
+    , reportMetadata
+    , rmStatus
+    , rmReportDataEndTimeMs
+    , rmGoogleCloudStoragePath
+    , rmReportDataStartTimeMs
+
+    -- ** ParametersItemMetrics
+    , ParametersItemMetrics (..)
+
+    -- ** QueryMetadataDataRange
+    , QueryMetadataDataRange (..)
+
+    -- ** ReportStatusState
+    , ReportStatusState (..)
+
+    -- ** DownloadLineItemsRequestFilterType
+    , DownloadLineItemsRequestFilterType (..)
+
+    -- ** ReportFailure
+    , ReportFailure
+    , reportFailure
+    , rfErrorCode
+
+    -- ** ReportKey
+    , ReportKey
+    , reportKey
+    , rkQueryId
+    , rkReportId
+
+    -- ** ParametersType
+    , ParametersType (..)
     ) where
 
+import           Network.Google.API.Doubleclickbidmanager.Lineitems.Downloadlineitems
+import           Network.Google.API.Doubleclickbidmanager.Lineitems.Uploadlineitems
+import           Network.Google.API.Doubleclickbidmanager.Queries.Createquery
+import           Network.Google.API.Doubleclickbidmanager.Queries.Deletequery
+import           Network.Google.API.Doubleclickbidmanager.Queries.Getquery
+import           Network.Google.API.Doubleclickbidmanager.Queries.Listqueries
+import           Network.Google.API.Doubleclickbidmanager.Queries.Runquery
+import           Network.Google.API.Doubleclickbidmanager.Reports.Listreports
 import           Network.Google.DoubleClick.Bids.Types
 import           Network.Google.Prelude
 
@@ -228,131 +256,14 @@ TODO
 -}
 
 type DoubleClickBids =
-     QueriesAPI :<|> ReportsAPI :<|> LineitemsAPI
+     QueriesListqueriesAPI :<|>
+       LineitemsDownloadlineitemsAPI
+       :<|> QueriesGetqueryAPI
+       :<|> ReportsListreportsAPI
+       :<|> QueriesRunqueryAPI
+       :<|> QueriesCreatequeryAPI
+       :<|> QueriesDeletequeryAPI
+       :<|> LineitemsUploadlineitemsAPI
 
-type QueriesAPI =
-     QueriesGetquery :<|> QueriesRunquery :<|>
-       QueriesDeletequery
-       :<|> QueriesCreatequery
-       :<|> QueriesListqueries
-
--- | Retrieves a stored query.
-type QueriesGetquery =
-     "doubleclickbidmanager" :>
-       "v1" :>
-         "query" :>
-           Capture "queryId" Int64 :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Get '[JSON] Query
-
--- | Runs a stored query to generate a report.
-type QueriesRunquery =
-     "doubleclickbidmanager" :>
-       "v1" :>
-         "query" :>
-           Capture "queryId" Int64 :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Post '[JSON] ()
-
--- | Deletes a stored query as well as the associated stored reports.
-type QueriesDeletequery =
-     "doubleclickbidmanager" :>
-       "v1" :>
-         "query" :>
-           Capture "queryId" Int64 :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Creates a query.
-type QueriesCreatequery =
-     "doubleclickbidmanager" :>
-       "v1" :>
-         "query" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "alt" Text :> Post '[JSON] Query
-
--- | Retrieves stored queries.
-type QueriesListqueries =
-     "doubleclickbidmanager" :>
-       "v1" :>
-         "queries" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "alt" Text :>
-                         Get '[JSON] ListQueriesResponse
-
-type ReportsAPI = ReportsListreports
-
--- | Retrieves stored reports.
-type ReportsListreports =
-     "doubleclickbidmanager" :>
-       "v1" :>
-         "queries" :>
-           Capture "queryId" Int64 :>
-             "reports" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Get '[JSON] ListReportsResponse
-
-type LineitemsAPI =
-     LineitemsUploadlineitems :<|>
-       LineitemsDownloadlineitems
-
--- | Uploads line items in CSV format.
-type LineitemsUploadlineitems =
-     "doubleclickbidmanager" :>
-       "v1" :>
-         "lineitems" :>
-           "uploadlineitems" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :>
-                           Post '[JSON] UploadLineItemsResponse
-
--- | Retrieves line items in CSV format.
-type LineitemsDownloadlineitems =
-     "doubleclickbidmanager" :>
-       "v1" :>
-         "lineitems" :>
-           "downloadlineitems" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :>
-                           Post '[JSON] DownloadLineItemsResponse
+doubleClickBids :: Proxy DoubleClickBids
+doubleClickBids = Proxy

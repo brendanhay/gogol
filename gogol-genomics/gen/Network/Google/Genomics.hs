@@ -17,314 +17,189 @@
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference>
 module Network.Google.Genomics
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** Genomics API
       Genomics
-    , AnnotationsAPI
-    , AnnotationsPatch
-    , AnnotationsGet
-    , AnnotationsCreate
-    , AnnotationsBatchCreate
-    , AnnotationsSearch
-    , AnnotationsDelete
-    , AnnotationsUpdate
-    , VariantsAPI
-    , VariantsGet
-    , VariantsCreate
-    , VariantsSearch
-    , VariantsDelete
-    , VariantsUpdate
-    , ReferencesAPI
-    , BasesAPI
-    , BasesList
-    , VariantsetsAPI
-    , VariantsetsExport
-    , VariantsetsPatch
-    , VariantsetsGet
-    , VariantsetsMergeVariants
-    , VariantsetsCreate
-    , VariantsetsSearch
-    , VariantsetsDelete
-    , VariantsetsUpdate
-    , VariantsetsImportVariants
-    , AnnotationSetsAPI
-    , AnnotationSetsPatch
-    , AnnotationSetsGet
-    , AnnotationSetsCreate
-    , AnnotationSetsSearch
-    , AnnotationSetsDelete
-    , AnnotationSetsUpdate
-    , ExperimentalAPI
-    , JobsAPI
-    , JobsCreate
-    , JobsAPI
-    , JobsGet
-    , JobsCancel
-    , JobsSearch
-    , ReadgroupsetsAPI
-    , CoveragebucketsAPI
-    , CoveragebucketsList
-    , ReferencesetsAPI
-    , ReferencesetsGet
-    , ReferencesetsSearch
-    , CallsetsAPI
-    , CallsetsPatch
-    , CallsetsGet
-    , CallsetsCreate
-    , CallsetsSearch
-    , CallsetsDelete
-    , CallsetsUpdate
-    , ReadsAPI
-    , ReadsSearch
-    , DatasetsAPI
-    , DatasetsList
-    , DatasetsUndelete
-    , DatasetsPatch
-    , DatasetsGet
-    , DatasetsCreate
-    , DatasetsDelete
-    , DatasetsUpdate
+    , genomics
+    , genomicsURL
+
+    -- ** genomics.annotationSets.create
+    , module Network.Google.API.Genomics.AnnotationSets.Create
+
+    -- ** genomics.annotationSets.delete
+    , module Network.Google.API.Genomics.AnnotationSets.Delete
+
+    -- ** genomics.annotationSets.get
+    , module Network.Google.API.Genomics.AnnotationSets.Get
+
+    -- ** genomics.annotationSets.patch
+    , module Network.Google.API.Genomics.AnnotationSets.Patch
+
+    -- ** genomics.annotationSets.search
+    , module Network.Google.API.Genomics.AnnotationSets.Search
+
+    -- ** genomics.annotationSets.update
+    , module Network.Google.API.Genomics.AnnotationSets.Update
+
+    -- ** genomics.annotations.batchCreate
+    , module Network.Google.API.Genomics.Annotations.BatchCreate
+
+    -- ** genomics.annotations.create
+    , module Network.Google.API.Genomics.Annotations.Create
+
+    -- ** genomics.annotations.delete
+    , module Network.Google.API.Genomics.Annotations.Delete
+
+    -- ** genomics.annotations.get
+    , module Network.Google.API.Genomics.Annotations.Get
+
+    -- ** genomics.annotations.patch
+    , module Network.Google.API.Genomics.Annotations.Patch
+
+    -- ** genomics.annotations.search
+    , module Network.Google.API.Genomics.Annotations.Search
+
+    -- ** genomics.annotations.update
+    , module Network.Google.API.Genomics.Annotations.Update
+
+    -- ** genomics.callsets.create
+    , module Network.Google.API.Genomics.Callsets.Create
+
+    -- ** genomics.callsets.delete
+    , module Network.Google.API.Genomics.Callsets.Delete
+
+    -- ** genomics.callsets.get
+    , module Network.Google.API.Genomics.Callsets.Get
+
+    -- ** genomics.callsets.patch
+    , module Network.Google.API.Genomics.Callsets.Patch
+
+    -- ** genomics.callsets.search
+    , module Network.Google.API.Genomics.Callsets.Search
+
+    -- ** genomics.callsets.update
+    , module Network.Google.API.Genomics.Callsets.Update
+
+    -- ** genomics.datasets.create
+    , module Network.Google.API.Genomics.Datasets.Create
+
+    -- ** genomics.datasets.delete
+    , module Network.Google.API.Genomics.Datasets.Delete
+
+    -- ** genomics.datasets.get
+    , module Network.Google.API.Genomics.Datasets.Get
+
+    -- ** genomics.datasets.list
+    , module Network.Google.API.Genomics.Datasets.List
+
+    -- ** genomics.datasets.patch
+    , module Network.Google.API.Genomics.Datasets.Patch
+
+    -- ** genomics.datasets.undelete
+    , module Network.Google.API.Genomics.Datasets.Undelete
+
+    -- ** genomics.datasets.update
+    , module Network.Google.API.Genomics.Datasets.Update
+
+    -- ** genomics.experimental.jobs.create
+    , module Network.Google.API.Genomics.Experimental.Jobs.Create
+
+    -- ** genomics.jobs.cancel
+    , module Network.Google.API.Genomics.Jobs.Cancel
+
+    -- ** genomics.jobs.get
+    , module Network.Google.API.Genomics.Jobs.Get
+
+    -- ** genomics.jobs.search
+    , module Network.Google.API.Genomics.Jobs.Search
+
+    -- ** genomics.readgroupsets.coveragebuckets.list
+    , module Network.Google.API.Genomics.Readgroupsets.Coveragebuckets.List
+
+    -- ** genomics.reads.search
+    , module Network.Google.API.Genomics.Reads.Search
+
+    -- ** genomics.references.bases.list
+    , module Network.Google.API.Genomics.References.Bases.List
+
+    -- ** genomics.referencesets.get
+    , module Network.Google.API.Genomics.Referencesets.Get
+
+    -- ** genomics.referencesets.search
+    , module Network.Google.API.Genomics.Referencesets.Search
+
+    -- ** genomics.variants.create
+    , module Network.Google.API.Genomics.Variants.Create
+
+    -- ** genomics.variants.delete
+    , module Network.Google.API.Genomics.Variants.Delete
+
+    -- ** genomics.variants.get
+    , module Network.Google.API.Genomics.Variants.Get
+
+    -- ** genomics.variants.search
+    , module Network.Google.API.Genomics.Variants.Search
+
+    -- ** genomics.variants.update
+    , module Network.Google.API.Genomics.Variants.Update
+
+    -- ** genomics.variantsets.create
+    , module Network.Google.API.Genomics.Variantsets.Create
+
+    -- ** genomics.variantsets.delete
+    , module Network.Google.API.Genomics.Variantsets.Delete
+
+    -- ** genomics.variantsets.export
+    , module Network.Google.API.Genomics.Variantsets.Export
+
+    -- ** genomics.variantsets.get
+    , module Network.Google.API.Genomics.Variantsets.Get
+
+    -- ** genomics.variantsets.importVariants
+    , module Network.Google.API.Genomics.Variantsets.ImportVariants
+
+    -- ** genomics.variantsets.mergeVariants
+    , module Network.Google.API.Genomics.Variantsets.MergeVariants
+
+    -- ** genomics.variantsets.patch
+    , module Network.Google.API.Genomics.Variantsets.Patch
+
+    -- ** genomics.variantsets.search
+    , module Network.Google.API.Genomics.Variantsets.Search
+
+    -- ** genomics.variantsets.update
+    , module Network.Google.API.Genomics.Variantsets.Update
 
     -- * Types
-
-    -- ** AlignReadGroupSetsRequest
-    , AlignReadGroupSetsRequest
-    , alignReadGroupSetsRequest
-    , argsrInterleavedFastqSource
-    , argsrReadGroupSetId
-    , argsrBamSourceUris
-    , argsrPairedFastqSource
-    , argsrDatasetId
-
-    -- ** AlignReadGroupSetsResponse
-    , AlignReadGroupSetsResponse
-    , alignReadGroupSetsResponse
-    , argsrJobId
-
-    -- ** Annotation
-    , Annotation
-    , annotation
-    , aVariant
-    , aAnnotationSetId
-    , aName
-    , aId
-    , aType
-    , aTranscript
-    , aInfo
-    , aPosition
-
-    -- ** AnnotationInfo
-    , AnnotationInfo
-    , annotationInfo
-
-    -- ** AnnotationSet
-    , AnnotationSet
-    , annotationSet
-    , asReferenceSetId
-    , asName
-    , asDatasetId
-    , asId
-    , asType
-    , asSourceUri
-    , asInfo
-
-    -- ** AnnotationSetInfo
-    , AnnotationSetInfo
-    , annotationSetInfo
-
-    -- ** AnnotationSetType
-    , AnnotationSetType (..)
 
     -- ** AnnotationType
     , AnnotationType (..)
 
-    -- ** BatchAnnotationsResponse
-    , BatchAnnotationsResponse
-    , batchAnnotationsResponse
-    , barEntries
+    -- ** SearchAnnotationSetsRequestItemTypes
+    , SearchAnnotationSetsRequestItemTypes (..)
 
-    -- ** BatchAnnotationsResponseEntry
-    , BatchAnnotationsResponseEntry
-    , batchAnnotationsResponseEntry
-    , bareStatus
-    , bareAnnotation
+    -- ** SearchReadsResponse
+    , SearchReadsResponse
+    , searchReadsResponse
+    , srrNextPageToken
+    , srrAlignments
 
-    -- ** BatchAnnotationsResponseEntryStatus
-    , BatchAnnotationsResponseEntryStatus
-    , batchAnnotationsResponseEntryStatus
-    , baresCode
-    , baresMessage
-
-    -- ** BatchCreateAnnotationsRequest
-    , BatchCreateAnnotationsRequest
-    , batchCreateAnnotationsRequest
-    , bcarAnnotations
-
-    -- ** Call
-    , Call
-    , call
-    , cGenotypeLikelihood
-    , cCallSetName
-    , cPhaseset
-    , cCallSetId
-    , cGenotype
-    , cInfo
-
-    -- ** CallInfo
-    , CallInfo
-    , callInfo
-
-    -- ** CallReadGroupSetsRequest
-    , CallReadGroupSetsRequest
-    , callReadGroupSetsRequest
-    , crgsrReadGroupSetId
-    , crgsrDatasetId
-    , crgsrSourceUris
-
-    -- ** CallReadGroupSetsResponse
-    , CallReadGroupSetsResponse
-    , callReadGroupSetsResponse
-    , crgsrJobId
-
-    -- ** CallSet
-    , CallSet
-    , callSet
-    , csCreated
-    , csName
-    , csId
-    , csSampleId
-    , csVariantSetIds
-    , csInfo
-
-    -- ** CallSetInfo
-    , CallSetInfo
-    , callSetInfo
-
-    -- ** CigarUnit
-    , CigarUnit
-    , cigarUnit
-    , cuOperation
-    , cuOperationLength
-    , cuReferenceSequence
-
-    -- ** CigarUnitOperation
-    , CigarUnitOperation (..)
-
-    -- ** CoverageBucket
-    , CoverageBucket
-    , coverageBucket
-    , cbRange
-    , cbMeanCoverage
-
-    -- ** Dataset
-    , Dataset
-    , dataset
-    , dIsPublic
-    , dProjectNumber
-    , dName
-    , dId
-    , dCreateTime
-
-    -- ** ExperimentalCreateJobRequest
-    , ExperimentalCreateJobRequest
-    , experimentalCreateJobRequest
-    , ecjrGcsOutputPath
-    , ecjrProjectNumber
-    , ecjrAlign
-    , ecjrSourceUris
-    , ecjrPairedSourceUris
-    , ecjrCallVariants
+    -- ** SearchCallSetsRequest
+    , SearchCallSetsRequest
+    , searchCallSetsRequest
+    , scsrName
+    , scsrPageToken
+    , scsrVariantSetIds
+    , scsrPageSize
 
     -- ** ExperimentalCreateJobResponse
     , ExperimentalCreateJobResponse
     , experimentalCreateJobResponse
     , ecjrJobId
 
-    -- ** ExportReadGroupSetsRequest
-    , ExportReadGroupSetsRequest
-    , exportReadGroupSetsRequest
-    , ergsrReferenceNames
-    , ergsrProjectNumber
-    , ergsrExportUri
-    , ergsrReadGroupSetIds
-
-    -- ** ExportReadGroupSetsResponse
-    , ExportReadGroupSetsResponse
-    , exportReadGroupSetsResponse
-    , ergsrJobId
-
-    -- ** ExportVariantSetRequest
-    , ExportVariantSetRequest
-    , exportVariantSetRequest
-    , evsrBigqueryDataset
-    , evsrBigqueryTable
-    , evsrFormat
-    , evsrProjectNumber
-    , evsrCallSetIds
-
-    -- ** ExportVariantSetRequestFormat
-    , ExportVariantSetRequestFormat (..)
-
-    -- ** ExportVariantSetResponse
-    , ExportVariantSetResponse
-    , exportVariantSetResponse
-    , evsrJobId
-
-    -- ** ExternalId
-    , ExternalId
-    , externalId
-    , eiSourceName
-    , eiId
-
-    -- ** FastqMetadata
-    , FastqMetadata
-    , fastqMetadata
-    , fmPlatformUnit
-    , fmReadGroupName
-    , fmLibraryName
-    , fmPlatformName
-    , fmSampleName
-
-    -- ** ImportReadGroupSetsRequest
-    , ImportReadGroupSetsRequest
-    , importReadGroupSetsRequest
-    , irgsrReferenceSetId
-    , irgsrDatasetId
-    , irgsrSourceUris
-    , irgsrPartitionStrategy
-
-    -- ** ImportReadGroupSetsRequestPartitionStrategy
-    , ImportReadGroupSetsRequestPartitionStrategy (..)
-
-    -- ** ImportReadGroupSetsResponse
-    , ImportReadGroupSetsResponse
-    , importReadGroupSetsResponse
-    , irgsrJobId
-
-    -- ** ImportVariantsRequest
-    , ImportVariantsRequest
-    , importVariantsRequest
-    , ivrFormat
-    , ivrNormalizeReferenceNames
-    , ivrSourceUris
-
-    -- ** ImportVariantsRequestFormat
-    , ImportVariantsRequestFormat (..)
-
-    -- ** ImportVariantsResponse
-    , ImportVariantsResponse
-    , importVariantsResponse
-    , ivrJobId
-
-    -- ** Int32Value
-    , Int32Value
-    , int32Value
-    , ivValue
-
-    -- ** InterleavedFastqSource
-    , InterleavedFastqSource
-    , interleavedFastqSource
-    , ifsMetadata
-    , ifsSourceUris
+    -- ** VariantAnnotationEffect
+    , VariantAnnotationEffect (..)
 
     -- ** Job
     , Job
@@ -339,96 +214,16 @@ module Network.Google.Genomics
     , jobErrors
     , jobRequest
 
-    -- ** JobRequest
-    , JobRequest
-    , jobRequest
-    , jrDestination
-    , jrSource
-    , jrType
-
-    -- ** JobRequestType
-    , JobRequestType (..)
-
-    -- ** JobStatus
-    , JobStatus (..)
-
-    -- ** KeyValue
-    , KeyValue
-    , keyValue
-    , kvValue
-    , kvKey
-
-    -- ** LinearAlignment
-    , LinearAlignment
-    , linearAlignment
-    , laCigar
-    , laMappingQuality
-    , laPosition
-
-    -- ** ListBasesResponse
-    , ListBasesResponse
-    , listBasesResponse
-    , lbrNextPageToken
-    , lbrOffset
-    , lbrSequence
-
-    -- ** ListCoverageBucketsResponse
-    , ListCoverageBucketsResponse
-    , listCoverageBucketsResponse
-    , lcbrNextPageToken
-    , lcbrBucketWidth
-    , lcbrCoverageBuckets
-
-    -- ** ListDatasetsResponse
-    , ListDatasetsResponse
-    , listDatasetsResponse
-    , ldrNextPageToken
-    , ldrDatasets
-
-    -- ** MergeVariantsRequest
-    , MergeVariantsRequest
-    , mergeVariantsRequest
-    , mvrVariants
-
-    -- ** Metadata
-    , Metadata
-    , metadata
-    , mValue
-    , mKey
-    , mId
-    , mType
-    , mNumber
-    , mDescription
-    , mInfo
-
-    -- ** MetadataInfo
-    , MetadataInfo
-    , metadataInfo
-
-    -- ** MetadataType
-    , MetadataType (..)
-
-    -- ** PairedFastqSource
-    , PairedFastqSource
-    , pairedFastqSource
-    , pfsFirstSourceUris
-    , pfsMetadata
-    , pfsSecondSourceUris
-
-    -- ** Position
-    , Position
-    , position
-    , pReverseStrand
-    , pReferenceName
-    , pPosition
-
-    -- ** QueryRange
-    , QueryRange
-    , queryRange
-    , qrStart
-    , qrReferenceId
-    , qrReferenceName
-    , qrEnd
+    -- ** ReadGroupSet
+    , ReadGroupSet
+    , readGroupSet
+    , rgsReferenceSetId
+    , rgsName
+    , rgsDatasetId
+    , rgsId
+    , rgsInfo
+    , rgsReadGroups
+    , rgsFilename
 
     -- ** Range
     , Range
@@ -437,14 +232,36 @@ module Network.Google.Genomics
     , rReferenceName
     , rEnd
 
-    -- ** RangePosition
-    , RangePosition
-    , rangePosition
-    , rpStart
-    , rpReverseStrand
-    , rpReferenceId
-    , rpReferenceName
-    , rpEnd
+    -- ** SearchReferencesRequest
+    , SearchReferencesRequest
+    , searchReferencesRequest
+    , srrReferenceSetId
+    , srrMd5checksums
+    , srrAccessions
+    , srrPageToken
+    , srrPageSize
+
+    -- ** SearchReferenceSetsResponse
+    , SearchReferenceSetsResponse
+    , searchReferenceSetsResponse
+    , srsrNextPageToken
+    , srsrReferenceSets
+
+    -- ** PairedFastqSource
+    , PairedFastqSource
+    , pairedFastqSource
+    , pfsFirstSourceUris
+    , pfsMetadata
+    , pfsSecondSourceUris
+
+    -- ** Dataset
+    , Dataset
+    , dataset
+    , dIsPublic
+    , dProjectNumber
+    , dName
+    , dId
+    , dCreateTime
 
     -- ** Read
     , Read
@@ -467,107 +284,142 @@ module Network.Google.Genomics
     , rReadNumber
     , rAlignedQuality
 
-    -- ** ReadGroup
-    , ReadGroup
-    , readGroup
-    , rgReferenceSetId
-    , rgPrograms
-    , rgExperiment
-    , rgName
-    , rgDatasetId
-    , rgId
-    , rgSampleId
-    , rgPredictedInsertSize
-    , rgDescription
-    , rgInfo
+    -- ** TranscriptExon
+    , TranscriptExon
+    , transcriptExon
+    , teStart
+    , teEnd
+    , teFrame
 
-    -- ** ReadGroupExperiment
-    , ReadGroupExperiment
-    , readGroupExperiment
-    , rgeInstrumentModel
-    , rgePlatformUnit
-    , rgeSequencingCenter
-    , rgeLibraryId
+    -- ** Call
+    , Call
+    , call
+    , cGenotypeLikelihood
+    , cCallSetName
+    , cPhaseset
+    , cCallSetId
+    , cGenotype
+    , cInfo
+
+    -- ** AnnotationInfo
+    , AnnotationInfo
+    , annotationInfo
+
+    -- ** Alt
+    , Alt (..)
+
+    -- ** CallSetInfo
+    , CallSetInfo
+    , callSetInfo
+
+    -- ** CallReadGroupSetsResponse
+    , CallReadGroupSetsResponse
+    , callReadGroupSetsResponse
+    , crgsrJobId
+
+    -- ** VariantSet
+    , VariantSet
+    , variantSet
+    , vsDatasetId
+    , vsReferenceBounds
+    , vsMetadata
+    , vsId
+
+    -- ** AnnotationSet
+    , AnnotationSet
+    , annotationSet
+    , asReferenceSetId
+    , asName
+    , asDatasetId
+    , asId
+    , asType
+    , asSourceUri
+    , asInfo
+
+    -- ** Metadata
+    , Metadata
+    , metadata
+    , mValue
+    , mKey
+    , mId
+    , mType
+    , mNumber
+    , mDescription
+    , mInfo
+
+    -- ** ImportReadGroupSetsRequest
+    , ImportReadGroupSetsRequest
+    , importReadGroupSetsRequest
+    , irgsrReferenceSetId
+    , irgsrDatasetId
+    , irgsrSourceUris
+    , irgsrPartitionStrategy
+
+    -- ** ExportVariantSetRequest
+    , ExportVariantSetRequest
+    , exportVariantSetRequest
+    , evsrBigqueryDataset
+    , evsrBigqueryTable
+    , evsrFormat
+    , evsrProjectNumber
+    , evsrCallSetIds
 
     -- ** ReadGroupInfo
     , ReadGroupInfo
     , readGroupInfo
 
-    -- ** ReadGroupProgram
-    , ReadGroupProgram
-    , readGroupProgram
-    , rgpPrevProgramId
-    , rgpName
-    , rgpVersion
-    , rgpId
-    , rgpCommandLine
+    -- ** ExternalId
+    , ExternalId
+    , externalId
+    , eiSourceName
+    , eiId
 
-    -- ** ReadGroupSet
-    , ReadGroupSet
-    , readGroupSet
-    , rgsReferenceSetId
-    , rgsName
-    , rgsDatasetId
-    , rgsId
-    , rgsInfo
-    , rgsReadGroups
-    , rgsFilename
+    -- ** AlignReadGroupSetsRequest
+    , AlignReadGroupSetsRequest
+    , alignReadGroupSetsRequest
+    , argsrInterleavedFastqSource
+    , argsrReadGroupSetId
+    , argsrBamSourceUris
+    , argsrPairedFastqSource
+    , argsrDatasetId
 
-    -- ** ReadGroupSetInfo
-    , ReadGroupSetInfo
-    , readGroupSetInfo
+    -- ** CigarUnit
+    , CigarUnit
+    , cigarUnit
+    , cuOperation
+    , cuOperationLength
+    , cuReferenceSequence
 
-    -- ** ReadInfo
-    , ReadInfo
-    , readInfo
+    -- ** ImportVariantsRequest
+    , ImportVariantsRequest
+    , importVariantsRequest
+    , ivrFormat
+    , ivrNormalizeReferenceNames
+    , ivrSourceUris
 
-    -- ** Reference
-    , Reference
-    , reference
-    , refLength
-    , refSourceAccessions
-    , refMd5checksum
-    , refName
-    , refNcbiTaxonId
-    , refId
-    , refSourceURI
+    -- ** ListDatasetsResponse
+    , ListDatasetsResponse
+    , listDatasetsResponse
+    , ldrNextPageToken
+    , ldrDatasets
 
-    -- ** ReferenceBound
-    , ReferenceBound
-    , referenceBound
-    , rbUpperBound
-    , rbReferenceName
+    -- ** MetadataInfo
+    , MetadataInfo
+    , metadataInfo
 
-    -- ** ReferenceSet
-    , ReferenceSet
-    , referenceSet
-    , rsSourceAccessions
-    , rsReferenceIds
-    , rsMd5checksum
-    , rsNcbiTaxonId
-    , rsId
-    , rsAssemblyId
-    , rsSourceURI
-    , rsDescription
+    -- ** SearchVariantSetsResponse
+    , SearchVariantSetsResponse
+    , searchVariantSetsResponse
+    , svsrNextPageToken
+    , svsrVariantSets
 
-    -- ** SearchAnnotationSetsRequest
-    , SearchAnnotationSetsRequest
-    , searchAnnotationSetsRequest
-    , sasrReferenceSetId
-    , sasrTypes
-    , sasrDatasetIds
-    , sasrName
-    , sasrPageToken
-    , sasrPageSize
-
-    -- ** SearchAnnotationSetsRequestItemTypes
-    , SearchAnnotationSetsRequestItemTypes (..)
-
-    -- ** SearchAnnotationSetsResponse
-    , SearchAnnotationSetsResponse
-    , searchAnnotationSetsResponse
-    , sasrNextPageToken
-    , sasrAnnotationSets
+    -- ** VariantAnnotationCondition
+    , VariantAnnotationCondition
+    , variantAnnotationCondition
+    , vacExternalIds
+    , vacNames
+    , vacConceptId
+    , vacOmimId
 
     -- ** SearchAnnotationsRequest
     , SearchAnnotationsRequest
@@ -576,119 +428,6 @@ module Network.Google.Genomics
     , sarPageToken
     , sarAnnotationSetIds
     , sarPageSize
-
-    -- ** SearchAnnotationsResponse
-    , SearchAnnotationsResponse
-    , searchAnnotationsResponse
-    , sarAnnotations
-    , sarNextPageToken
-
-    -- ** SearchCallSetsRequest
-    , SearchCallSetsRequest
-    , searchCallSetsRequest
-    , scsrName
-    , scsrPageToken
-    , scsrVariantSetIds
-    , scsrPageSize
-
-    -- ** SearchCallSetsResponse
-    , SearchCallSetsResponse
-    , searchCallSetsResponse
-    , scsrNextPageToken
-    , scsrCallSets
-
-    -- ** SearchJobsRequest
-    , SearchJobsRequest
-    , searchJobsRequest
-    , sjrCreatedAfter
-    , sjrStatus
-    , sjrProjectNumber
-    , sjrPageToken
-    , sjrPageSize
-    , sjrCreatedBefore
-
-    -- ** SearchJobsRequestItemStatus
-    , SearchJobsRequestItemStatus (..)
-
-    -- ** SearchJobsResponse
-    , SearchJobsResponse
-    , searchJobsResponse
-    , sjrNextPageToken
-    , sjrJobs
-
-    -- ** SearchReadGroupSetsRequest
-    , SearchReadGroupSetsRequest
-    , searchReadGroupSetsRequest
-    , srgsrDatasetIds
-    , srgsrName
-    , srgsrPageToken
-    , srgsrPageSize
-
-    -- ** SearchReadGroupSetsResponse
-    , SearchReadGroupSetsResponse
-    , searchReadGroupSetsResponse
-    , srgsrNextPageToken
-    , srgsrReadGroupSets
-
-    -- ** SearchReadsRequest
-    , SearchReadsRequest
-    , searchReadsRequest
-    , sStart
-    , sReadGroupIds
-    , sReferenceName
-    , sEnd
-    , sPageToken
-    , sPageSize
-    , sReadGroupSetIds
-
-    -- ** SearchReadsResponse
-    , SearchReadsResponse
-    , searchReadsResponse
-    , srrNextPageToken
-    , srrAlignments
-
-    -- ** SearchReferenceSetsRequest
-    , SearchReferenceSetsRequest
-    , searchReferenceSetsRequest
-    , srsrMd5checksums
-    , srsrAccessions
-    , srsrPageToken
-    , srsrAssemblyId
-    , srsrPageSize
-
-    -- ** SearchReferenceSetsResponse
-    , SearchReferenceSetsResponse
-    , searchReferenceSetsResponse
-    , srsrNextPageToken
-    , srsrReferenceSets
-
-    -- ** SearchReferencesRequest
-    , SearchReferencesRequest
-    , searchReferencesRequest
-    , srrReferenceSetId
-    , srrMd5checksums
-    , srrAccessions
-    , srrPageToken
-    , srrPageSize
-
-    -- ** SearchReferencesResponse
-    , SearchReferencesResponse
-    , searchReferencesResponse
-    , sNextPageToken
-    , sReferences
-
-    -- ** SearchVariantSetsRequest
-    , SearchVariantSetsRequest
-    , searchVariantSetsRequest
-    , svsrDatasetIds
-    , svsrPageToken
-    , svsrPageSize
-
-    -- ** SearchVariantSetsResponse
-    , SearchVariantSetsResponse
-    , searchVariantSetsResponse
-    , svsrNextPageToken
-    , svsrVariantSets
 
     -- ** SearchVariantsRequest
     , SearchVariantsRequest
@@ -703,18 +442,90 @@ module Network.Google.Genomics
     , svrVariantSetIds
     , svrPageSize
 
-    -- ** SearchVariantsResponse
-    , SearchVariantsResponse
-    , searchVariantsResponse
-    , svrVariants
-    , svrNextPageToken
+    -- ** SearchAnnotationSetsResponse
+    , SearchAnnotationSetsResponse
+    , searchAnnotationSetsResponse
+    , sasrNextPageToken
+    , sasrAnnotationSets
 
-    -- ** Transcript
-    , Transcript
-    , transcript
-    , tGeneId
-    , tCodingSequence
-    , tExons
+    -- ** ExportReadGroupSetsResponse
+    , ExportReadGroupSetsResponse
+    , exportReadGroupSetsResponse
+    , ergsrJobId
+
+    -- ** VariantAnnotationClinicalSignificance
+    , VariantAnnotationClinicalSignificance (..)
+
+    -- ** AnnotationSetType
+    , AnnotationSetType (..)
+
+    -- ** ExperimentalCreateJobRequest
+    , ExperimentalCreateJobRequest
+    , experimentalCreateJobRequest
+    , ecjrGcsOutputPath
+    , ecjrProjectNumber
+    , ecjrAlign
+    , ecjrSourceUris
+    , ecjrPairedSourceUris
+    , ecjrCallVariants
+
+    -- ** JobRequest
+    , JobRequest
+    , jobRequest
+    , jrDestination
+    , jrSource
+    , jrType
+
+    -- ** CigarUnitOperation
+    , CigarUnitOperation (..)
+
+    -- ** SearchReadsRequest
+    , SearchReadsRequest
+    , searchReadsRequest
+    , sStart
+    , sReadGroupIds
+    , sReferenceName
+    , sEnd
+    , sPageToken
+    , sPageSize
+    , sReadGroupSetIds
+
+    -- ** SearchCallSetsResponse
+    , SearchCallSetsResponse
+    , searchCallSetsResponse
+    , scsrNextPageToken
+    , scsrCallSets
+
+    -- ** SearchReadGroupSetsResponse
+    , SearchReadGroupSetsResponse
+    , searchReadGroupSetsResponse
+    , srgsrNextPageToken
+    , srgsrReadGroupSets
+
+    -- ** ReferenceSet
+    , ReferenceSet
+    , referenceSet
+    , rsSourceAccessions
+    , rsReferenceIds
+    , rsMd5checksum
+    , rsNcbiTaxonId
+    , rsId
+    , rsAssemblyId
+    , rsSourceURI
+    , rsDescription
+
+    -- ** Position
+    , Position
+    , position
+    , pReverseStrand
+    , pReferenceName
+    , pPosition
+
+    -- ** ReferenceBound
+    , ReferenceBound
+    , referenceBound
+    , rbUpperBound
+    , rbReferenceName
 
     -- ** TranscriptCodingSequence
     , TranscriptCodingSequence
@@ -722,29 +533,221 @@ module Network.Google.Genomics
     , tcsStart
     , tcsEnd
 
-    -- ** TranscriptExon
-    , TranscriptExon
-    , transcriptExon
-    , teStart
-    , teEnd
-    , teFrame
+    -- ** SearchJobsResponse
+    , SearchJobsResponse
+    , searchJobsResponse
+    , sjrNextPageToken
+    , sjrJobs
+
+    -- ** ReadGroupExperiment
+    , ReadGroupExperiment
+    , readGroupExperiment
+    , rgeInstrumentModel
+    , rgePlatformUnit
+    , rgeSequencingCenter
+    , rgeLibraryId
+
+    -- ** FastqMetadata
+    , FastqMetadata
+    , fastqMetadata
+    , fmPlatformUnit
+    , fmReadGroupName
+    , fmLibraryName
+    , fmPlatformName
+    , fmSampleName
+
+    -- ** KeyValue
+    , KeyValue
+    , keyValue
+    , kvValue
+    , kvKey
+
+    -- ** Annotation
+    , Annotation
+    , annotation
+    , aVariant
+    , aAnnotationSetId
+    , aName
+    , aId
+    , aType
+    , aTranscript
+    , aInfo
+    , aPosition
+
+    -- ** CallReadGroupSetsRequest
+    , CallReadGroupSetsRequest
+    , callReadGroupSetsRequest
+    , crgsrReadGroupSetId
+    , crgsrDatasetId
+    , crgsrSourceUris
 
     -- ** Variant
     , Variant
     , variant
-    , vVariantSetId
-    , vCreated
-    , vStart
-    , vAlternateBases
-    , vReferenceName
-    , vNames
-    , vEnd
-    , vReferenceBases
-    , vId
-    , vQuality
-    , vFilter
-    , vInfo
-    , vCalls
+    , vvVariantSetId
+    , vvCreated
+    , vvStart
+    , vvAlternateBases
+    , vvReferenceName
+    , vvNames
+    , vvEnd
+    , vvReferenceBases
+    , vvId
+    , vvQuality
+    , vvFilter
+    , vvInfo
+    , vvCalls
+
+    -- ** InterleavedFastqSource
+    , InterleavedFastqSource
+    , interleavedFastqSource
+    , ifsMetadata
+    , ifsSourceUris
+
+    -- ** BatchAnnotationsResponseEntry
+    , BatchAnnotationsResponseEntry
+    , batchAnnotationsResponseEntry
+    , bareStatus
+    , bareAnnotation
+
+    -- ** CallInfo
+    , CallInfo
+    , callInfo
+
+    -- ** ListBasesResponse
+    , ListBasesResponse
+    , listBasesResponse
+    , lbrNextPageToken
+    , lbrOffset
+    , lbrSequence
+
+    -- ** ReadInfo
+    , ReadInfo
+    , readInfo
+
+    -- ** ReadGroupSetInfo
+    , ReadGroupSetInfo
+    , readGroupSetInfo
+
+    -- ** AlignReadGroupSetsResponse
+    , AlignReadGroupSetsResponse
+    , alignReadGroupSetsResponse
+    , argsrJobId
+
+    -- ** ListCoverageBucketsResponse
+    , ListCoverageBucketsResponse
+    , listCoverageBucketsResponse
+    , lcbrNextPageToken
+    , lcbrBucketWidth
+    , lcbrCoverageBuckets
+
+    -- ** LinearAlignment
+    , LinearAlignment
+    , linearAlignment
+    , laCigar
+    , laMappingQuality
+    , laPosition
+
+    -- ** ExportVariantSetResponse
+    , ExportVariantSetResponse
+    , exportVariantSetResponse
+    , evsrJobId
+
+    -- ** VariantInfo
+    , VariantInfo
+    , variantInfo
+
+    -- ** ImportReadGroupSetsRequestPartitionStrategy
+    , ImportReadGroupSetsRequestPartitionStrategy (..)
+
+    -- ** ImportVariantsResponse
+    , ImportVariantsResponse
+    , importVariantsResponse
+    , ivrJobId
+
+    -- ** ImportReadGroupSetsResponse
+    , ImportReadGroupSetsResponse
+    , importReadGroupSetsResponse
+    , irgsrJobId
+
+    -- ** SearchReferenceSetsRequest
+    , SearchReferenceSetsRequest
+    , searchReferenceSetsRequest
+    , srsrMd5checksums
+    , srsrAccessions
+    , srsrPageToken
+    , srsrAssemblyId
+    , srsrPageSize
+
+    -- ** BatchCreateAnnotationsRequest
+    , BatchCreateAnnotationsRequest
+    , batchCreateAnnotationsRequest
+    , bcarAnnotations
+
+    -- ** ReadGroup
+    , ReadGroup
+    , readGroup
+    , rgReferenceSetId
+    , rgPrograms
+    , rgExperiment
+    , rgName
+    , rgDatasetId
+    , rgId
+    , rgSampleId
+    , rgPredictedInsertSize
+    , rgDescription
+    , rgInfo
+
+    -- ** JobRequestType
+    , JobRequestType (..)
+
+    -- ** SearchReferencesResponse
+    , SearchReferencesResponse
+    , searchReferencesResponse
+    , sNextPageToken
+    , sReferences
+
+    -- ** MergeVariantsRequest
+    , MergeVariantsRequest
+    , mergeVariantsRequest
+    , mvrVariants
+
+    -- ** QueryRange
+    , QueryRange
+    , queryRange
+    , qrStart
+    , qrReferenceId
+    , qrReferenceName
+    , qrEnd
+
+    -- ** ExportVariantSetRequestFormat
+    , ExportVariantSetRequestFormat (..)
+
+    -- ** CoverageBucket
+    , CoverageBucket
+    , coverageBucket
+    , cbRange
+    , cbMeanCoverage
+
+    -- ** JobStatus
+    , JobStatus (..)
+
+    -- ** CallSet
+    , CallSet
+    , callSet
+    , csCreated
+    , csName
+    , csId
+    , csSampleId
+    , csVariantSetIds
+    , csInfo
+
+    -- ** ImportVariantsRequestFormat
+    , ImportVariantsRequestFormat (..)
+
+    -- ** AnnotationSetInfo
+    , AnnotationSetInfo
+    , annotationSetInfo
 
     -- ** VariantAnnotation
     , VariantAnnotation
@@ -757,36 +760,172 @@ module Network.Google.Genomics
     , vaType
     , vaTranscriptIds
 
-    -- ** VariantAnnotationClinicalSignificance
-    , VariantAnnotationClinicalSignificance (..)
+    -- ** SearchJobsRequest
+    , SearchJobsRequest
+    , searchJobsRequest
+    , sjrCreatedAfter
+    , sjrStatus
+    , sjrProjectNumber
+    , sjrPageToken
+    , sjrPageSize
+    , sjrCreatedBefore
 
-    -- ** VariantAnnotationCondition
-    , VariantAnnotationCondition
-    , variantAnnotationCondition
-    , vacExternalIds
-    , vacNames
-    , vacConceptId
-    , vacOmimId
+    -- ** Reference
+    , Reference
+    , reference
+    , refLength
+    , refSourceAccessions
+    , refMd5checksum
+    , refName
+    , refNcbiTaxonId
+    , refId
+    , refSourceURI
 
-    -- ** VariantAnnotationEffect
-    , VariantAnnotationEffect (..)
+    -- ** SearchReadGroupSetsRequest
+    , SearchReadGroupSetsRequest
+    , searchReadGroupSetsRequest
+    , srgsrDatasetIds
+    , srgsrName
+    , srgsrPageToken
+    , srgsrPageSize
+
+    -- ** BatchAnnotationsResponseEntryStatus
+    , BatchAnnotationsResponseEntryStatus
+    , batchAnnotationsResponseEntryStatus
+    , baresCode
+    , baresMessage
+
+    -- ** BatchAnnotationsResponse
+    , BatchAnnotationsResponse
+    , batchAnnotationsResponse
+    , barEntries
 
     -- ** VariantAnnotationType
     , VariantAnnotationType (..)
 
-    -- ** VariantInfo
-    , VariantInfo
-    , variantInfo
+    -- ** MetadataType
+    , MetadataType (..)
 
-    -- ** VariantSet
-    , VariantSet
-    , variantSet
-    , vsDatasetId
-    , vsReferenceBounds
-    , vsMetadata
-    , vsId
+    -- ** Transcript
+    , Transcript
+    , transcript
+    , tGeneId
+    , tCodingSequence
+    , tExons
+
+    -- ** RangePosition
+    , RangePosition
+    , rangePosition
+    , rpStart
+    , rpReverseStrand
+    , rpReferenceId
+    , rpReferenceName
+    , rpEnd
+
+    -- ** SearchAnnotationSetsRequest
+    , SearchAnnotationSetsRequest
+    , searchAnnotationSetsRequest
+    , sasrReferenceSetId
+    , sasrTypes
+    , sasrDatasetIds
+    , sasrName
+    , sasrPageToken
+    , sasrPageSize
+
+    -- ** Int32Value
+    , Int32Value
+    , int32Value
+    , ivValue
+
+    -- ** ReadGroupProgram
+    , ReadGroupProgram
+    , readGroupProgram
+    , rgpPrevProgramId
+    , rgpName
+    , rgpVersion
+    , rgpId
+    , rgpCommandLine
+
+    -- ** SearchJobsRequestItemStatus
+    , SearchJobsRequestItemStatus (..)
+
+    -- ** SearchAnnotationsResponse
+    , SearchAnnotationsResponse
+    , searchAnnotationsResponse
+    , sarAnnotations
+    , sarNextPageToken
+
+    -- ** SearchVariantsResponse
+    , SearchVariantsResponse
+    , searchVariantsResponse
+    , svrVariants
+    , svrNextPageToken
+
+    -- ** ExportReadGroupSetsRequest
+    , ExportReadGroupSetsRequest
+    , exportReadGroupSetsRequest
+    , ergsrReferenceNames
+    , ergsrProjectNumber
+    , ergsrExportUri
+    , ergsrReadGroupSetIds
+
+    -- ** SearchVariantSetsRequest
+    , SearchVariantSetsRequest
+    , searchVariantSetsRequest
+    , svsrDatasetIds
+    , svsrPageToken
+    , svsrPageSize
     ) where
 
+import           Network.Google.API.Genomics.Annotations.BatchCreate
+import           Network.Google.API.Genomics.Annotations.Create
+import           Network.Google.API.Genomics.Annotations.Delete
+import           Network.Google.API.Genomics.Annotations.Get
+import           Network.Google.API.Genomics.Annotations.Patch
+import           Network.Google.API.Genomics.Annotations.Search
+import           Network.Google.API.Genomics.Annotations.Update
+import           Network.Google.API.Genomics.AnnotationSets.Create
+import           Network.Google.API.Genomics.AnnotationSets.Delete
+import           Network.Google.API.Genomics.AnnotationSets.Get
+import           Network.Google.API.Genomics.AnnotationSets.Patch
+import           Network.Google.API.Genomics.AnnotationSets.Search
+import           Network.Google.API.Genomics.AnnotationSets.Update
+import           Network.Google.API.Genomics.Callsets.Create
+import           Network.Google.API.Genomics.Callsets.Delete
+import           Network.Google.API.Genomics.Callsets.Get
+import           Network.Google.API.Genomics.Callsets.Patch
+import           Network.Google.API.Genomics.Callsets.Search
+import           Network.Google.API.Genomics.Callsets.Update
+import           Network.Google.API.Genomics.Datasets.Create
+import           Network.Google.API.Genomics.Datasets.Delete
+import           Network.Google.API.Genomics.Datasets.Get
+import           Network.Google.API.Genomics.Datasets.List
+import           Network.Google.API.Genomics.Datasets.Patch
+import           Network.Google.API.Genomics.Datasets.Undelete
+import           Network.Google.API.Genomics.Datasets.Update
+import           Network.Google.API.Genomics.Experimental.Jobs.Create
+import           Network.Google.API.Genomics.Jobs.Cancel
+import           Network.Google.API.Genomics.Jobs.Get
+import           Network.Google.API.Genomics.Jobs.Search
+import           Network.Google.API.Genomics.Readgroupsets.Coveragebuckets.List
+import           Network.Google.API.Genomics.Reads.Search
+import           Network.Google.API.Genomics.References.Bases.List
+import           Network.Google.API.Genomics.Referencesets.Get
+import           Network.Google.API.Genomics.Referencesets.Search
+import           Network.Google.API.Genomics.Variants.Create
+import           Network.Google.API.Genomics.Variants.Delete
+import           Network.Google.API.Genomics.Variants.Get
+import           Network.Google.API.Genomics.Variants.Search
+import           Network.Google.API.Genomics.Variants.Update
+import           Network.Google.API.Genomics.Variantsets.Create
+import           Network.Google.API.Genomics.Variantsets.Delete
+import           Network.Google.API.Genomics.Variantsets.Export
+import           Network.Google.API.Genomics.Variantsets.Get
+import           Network.Google.API.Genomics.Variantsets.ImportVariants
+import           Network.Google.API.Genomics.Variantsets.MergeVariants
+import           Network.Google.API.Genomics.Variantsets.Patch
+import           Network.Google.API.Genomics.Variantsets.Search
+import           Network.Google.API.Genomics.Variantsets.Update
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
@@ -795,864 +934,54 @@ TODO
 -}
 
 type Genomics =
-     AnnotationsAPI :<|> VariantsAPI :<|> ReferencesAPI
-       :<|> VariantsetsAPI
-       :<|> AnnotationSetsAPI
-       :<|> ExperimentalAPI
-       :<|> JobsAPI
-       :<|> ReadgroupsetsAPI
-       :<|> ReferencesetsAPI
-       :<|> CallsetsAPI
-       :<|> ReadsAPI
-       :<|> DatasetsAPI
-
-type AnnotationsAPI =
-     AnnotationsPatch :<|> AnnotationsGet :<|>
-       AnnotationsCreate
-       :<|> AnnotationsBatchCreate
-       :<|> AnnotationsSearch
-       :<|> AnnotationsDelete
-       :<|> AnnotationsUpdate
-
--- | Updates an annotation. The update must respect all mutability
--- restrictions and other invariants described on the annotation resource.
--- Caller must have WRITE permission for the associated dataset. This
--- method supports patch semantics.
-type AnnotationsPatch =
-     "genomics" :>
-       "v1beta2" :>
-         "annotations" :>
-           Capture "annotationId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Patch '[JSON] Annotation
-
--- | Gets an annotation. Caller must have READ permission for the associated
--- annotation set.
-type AnnotationsGet =
-     "genomics" :>
-       "v1beta2" :>
-         "annotations" :>
-           Capture "annotationId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Get '[JSON] Annotation
-
--- | Creates a new annotation. Caller must have WRITE permission for the
--- associated annotation set.
-type AnnotationsCreate =
-     "genomics" :>
-       "v1beta2" :>
-         "annotations" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "alt" Text :> Post '[JSON] Annotation
-
--- | Creates one or more new annotations atomically. All annotations must
--- belong to the same annotation set. Caller must have WRITE permission for
--- this annotation set. For optimal performance, batch positionally
--- adjacent annotations together. If the request has a systemic issue, such
--- as an attempt to write to an inaccessible annotation set, the entire RPC
--- will fail accordingly. For lesser data issues, when possible an error
--- will be isolated to the corresponding batch entry in the response; the
--- remaining well formed annotations will be created normally.
-type AnnotationsBatchCreate =
-     "genomics" :>
-       "v1beta2" :>
-         "annotations:batchCreate" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "alt" Text :>
-                         Post '[JSON] BatchAnnotationsResponse
-
--- | Searches for annotations that match the given criteria. Results are
--- returned ordered by start position. Annotations that have matching start
--- positions are ordered deterministically. Caller must have READ
--- permission for the queried annotation sets.
-type AnnotationsSearch =
-     "genomics" :>
-       "v1beta2" :>
-         "annotations" :>
-           "search" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :>
-                           Post '[JSON] SearchAnnotationsResponse
-
--- | Deletes an annotation. Caller must have WRITE permission for the
--- associated annotation set.
-type AnnotationsDelete =
-     "genomics" :>
-       "v1beta2" :>
-         "annotations" :>
-           Capture "annotationId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Updates an annotation. The update must respect all mutability
--- restrictions and other invariants described on the annotation resource.
--- Caller must have WRITE permission for the associated dataset.
-type AnnotationsUpdate =
-     "genomics" :>
-       "v1beta2" :>
-         "annotations" :>
-           Capture "annotationId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Put '[JSON] Annotation
-
-type VariantsAPI =
-     VariantsGet :<|> VariantsCreate :<|> VariantsSearch
-       :<|> VariantsDelete
-       :<|> VariantsUpdate
-
--- | Gets a variant by ID.
-type VariantsGet =
-     "genomics" :>
-       "v1beta2" :>
-         "variants" :>
-           Capture "variantId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Get '[JSON] Variant
-
--- | Creates a new variant.
-type VariantsCreate =
-     "genomics" :>
-       "v1beta2" :>
-         "variants" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "alt" Text :> Post '[JSON] Variant
-
--- | Gets a list of variants matching the criteria. Implements
--- GlobalAllianceApi.searchVariants.
-type VariantsSearch =
-     "genomics" :>
-       "v1beta2" :>
-         "variants" :>
-           "search" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :>
-                           Post '[JSON] SearchVariantsResponse
-
--- | Deletes a variant.
-type VariantsDelete =
-     "genomics" :>
-       "v1beta2" :>
-         "variants" :>
-           Capture "variantId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Updates a variant\'s names and info fields. All other modifications are
--- silently ignored. Returns the modified variant without its calls.
-type VariantsUpdate =
-     "genomics" :>
-       "v1beta2" :>
-         "variants" :>
-           Capture "variantId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Put '[JSON] Variant
-
-type ReferencesAPI = BasesAPI
-
-type BasesAPI = BasesList
-
--- | Lists the bases in a reference, optionally restricted to a range.
--- Implements GlobalAllianceApi.getReferenceBases.
-type BasesList =
-     "genomics" :>
-       "v1beta2" :>
-         "references" :>
-           Capture "referenceId" Text :>
-             "bases" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "start" Int64 :>
-                       QueryParam "key" Text :>
-                         QueryParam "end" Int64 :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "pageSize" Int32 :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Get '[JSON] ListBasesResponse
-
-type VariantsetsAPI =
-     VariantsetsExport :<|> VariantsetsPatch :<|>
-       VariantsetsGet
-       :<|> VariantsetsMergeVariants
-       :<|> VariantsetsCreate
-       :<|> VariantsetsSearch
-       :<|> VariantsetsDelete
-       :<|> VariantsetsUpdate
-       :<|> VariantsetsImportVariants
-
--- | Exports variant set data to an external destination.
-type VariantsetsExport =
-     "genomics" :>
-       "v1beta2" :>
-         "variantsets" :>
-           Capture "variantSetId" Text :>
-             "export" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Post '[JSON] ExportVariantSetResponse
-
--- | Updates a variant set\'s metadata. All other modifications are silently
--- ignored. This method supports patch semantics.
-type VariantsetsPatch =
-     "genomics" :>
-       "v1beta2" :>
-         "variantsets" :>
-           Capture "variantSetId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Patch '[JSON] VariantSet
-
--- | Gets a variant set by ID.
-type VariantsetsGet =
-     "genomics" :>
-       "v1beta2" :>
-         "variantsets" :>
-           Capture "variantSetId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Get '[JSON] VariantSet
-
--- | Merges the given variants with existing variants. Each variant will be
--- merged with an existing variant that matches its reference sequence,
--- start, end, reference bases, and alternative bases. If no such variant
--- exists, a new one will be created. When variants are merged, the call
--- information from the new variant is added to the existing variant, and
--- other fields (such as key\/value pairs) are discarded.
-type VariantsetsMergeVariants =
-     "genomics" :>
-       "v1beta2" :>
-         "variantsets" :>
-           Capture "variantSetId" Text :>
-             "mergeVariants" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] ()
-
--- | Creates a new variant set (only necessary in v1). The provided variant
--- set must have a valid datasetId set - all other fields are optional.
--- Note that the id field will be ignored, as this is assigned by the
--- server.
-type VariantsetsCreate =
-     "genomics" :>
-       "v1beta2" :>
-         "variantsets" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "alt" Text :> Post '[JSON] VariantSet
-
--- | Returns a list of all variant sets matching search criteria. Implements
--- GlobalAllianceApi.searchVariantSets.
-type VariantsetsSearch =
-     "genomics" :>
-       "v1beta2" :>
-         "variantsets" :>
-           "search" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :>
-                           Post '[JSON] SearchVariantSetsResponse
-
--- | Deletes the contents of a variant set. The variant set object is not
--- deleted.
-type VariantsetsDelete =
-     "genomics" :>
-       "v1beta2" :>
-         "variantsets" :>
-           Capture "variantSetId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Updates a variant set\'s metadata. All other modifications are silently
--- ignored.
-type VariantsetsUpdate =
-     "genomics" :>
-       "v1beta2" :>
-         "variantsets" :>
-           Capture "variantSetId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Put '[JSON] VariantSet
-
--- | Creates variant data by asynchronously importing the provided
--- information. The variants for import will be merged with any existing
--- data and each other according to the behavior of mergeVariants. In
--- particular, this means for merged VCF variants that have conflicting
--- INFO fields, some data will be arbitrarily discarded. As a special case,
--- for single-sample VCF files, QUAL and FILTER fields will be moved to the
--- call level; these are sometimes interpreted in a call-specific context.
--- Imported VCF headers are appended to the metadata already in a variant
--- set.
-type VariantsetsImportVariants =
-     "genomics" :>
-       "v1beta2" :>
-         "variantsets" :>
-           Capture "variantSetId" Text :>
-             "importVariants" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Post '[JSON] ImportVariantsResponse
-
-type AnnotationSetsAPI =
-     AnnotationSetsPatch :<|> AnnotationSetsGet :<|>
-       AnnotationSetsCreate
-       :<|> AnnotationSetsSearch
-       :<|> AnnotationSetsDelete
-       :<|> AnnotationSetsUpdate
-
--- | Updates an annotation set. The update must respect all mutability
--- restrictions and other invariants described on the annotation set
--- resource. Caller must have WRITE permission for the associated dataset.
--- This method supports patch semantics.
-type AnnotationSetsPatch =
-     "genomics" :>
-       "v1beta2" :>
-         "annotationSets" :>
-           Capture "annotationSetId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Patch '[JSON] AnnotationSet
-
--- | Gets an annotation set. Caller must have READ permission for the
--- associated dataset.
-type AnnotationSetsGet =
-     "genomics" :>
-       "v1beta2" :>
-         "annotationSets" :>
-           Capture "annotationSetId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Get '[JSON] AnnotationSet
-
--- | Creates a new annotation set. Caller must have WRITE permission for the
--- associated dataset.
-type AnnotationSetsCreate =
-     "genomics" :>
-       "v1beta2" :>
-         "annotationSets" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "alt" Text :> Post '[JSON] AnnotationSet
-
--- | Searches for annotation sets that match the given criteria. Results are
--- returned in a deterministic order. Caller must have READ permission for
--- the queried datasets.
-type AnnotationSetsSearch =
-     "genomics" :>
-       "v1beta2" :>
-         "annotationSets" :>
-           "search" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :>
-                           Post '[JSON] SearchAnnotationSetsResponse
-
--- | Deletes an annotation set. Caller must have WRITE permission for the
--- associated annotation set.
-type AnnotationSetsDelete =
-     "genomics" :>
-       "v1beta2" :>
-         "annotationSets" :>
-           Capture "annotationSetId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Updates an annotation set. The update must respect all mutability
--- restrictions and other invariants described on the annotation set
--- resource. Caller must have WRITE permission for the associated dataset.
-type AnnotationSetsUpdate =
-     "genomics" :>
-       "v1beta2" :>
-         "annotationSets" :>
-           Capture "annotationSetId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Put '[JSON] AnnotationSet
-
-type ExperimentalAPI = JobsAPI
-
-type JobsAPI = JobsCreate
-
--- | Creates and asynchronously runs an ad-hoc job. This is an experimental
--- call and may be removed or changed at any time.
-type JobsCreate =
-     "genomics" :>
-       "v1beta2" :>
-         "experimental" :>
-           "jobs" :>
-             "create" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Post '[JSON] ExperimentalCreateJobResponse
-
-type JobsAPI =
-     JobsGet :<|> JobsCancel :<|> JobsSearch
-
--- | Gets a job by ID.
-type JobsGet =
-     "genomics" :>
-       "v1beta2" :>
-         "jobs" :>
-           Capture "jobId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Get '[JSON] Job
-
--- | Cancels a job by ID. Note that it is possible for partial results to be
--- generated and stored for cancelled jobs.
-type JobsCancel =
-     "genomics" :>
-       "v1beta2" :>
-         "jobs" :>
-           Capture "jobId" Text :>
-             "cancel" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] ()
-
--- | Gets a list of jobs matching the criteria.
-type JobsSearch =
-     "genomics" :>
-       "v1beta2" :>
-         "jobs" :>
-           "search" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :>
-                           Post '[JSON] SearchJobsResponse
-
-type ReadgroupsetsAPI = CoveragebucketsAPI
-
-type CoveragebucketsAPI = CoveragebucketsList
-
--- | Lists fixed width coverage buckets for a read group set, each of which
--- correspond to a range of a reference sequence. Each bucket summarizes
--- coverage information across its corresponding genomic range. Coverage is
--- defined as the number of reads which are aligned to a given base in the
--- reference sequence. Coverage buckets are available at several
--- precomputed bucket widths, enabling retrieval of various coverage \'zoom
--- levels\'. The caller must have READ permissions for the target read
--- group set.
-type CoveragebucketsList =
-     "genomics" :>
-       "v1beta2" :>
-         "readgroupsets" :>
-           Capture "readGroupSetId" Text :>
-             "coveragebuckets" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "range.end" Int64 :>
-                       QueryParam "range.start" Int64 :>
-                         QueryParam "targetBucketWidth" Int64 :>
-                           QueryParam "key" Text :>
-                             QueryParam "range.referenceName" Text :>
-                               QueryParam "pageToken" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "pageSize" Int32 :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "alt" Text :>
-                                         Get '[JSON] ListCoverageBucketsResponse
-
-type ReferencesetsAPI =
-     ReferencesetsGet :<|> ReferencesetsSearch
-
--- | Gets a reference set. Implements GlobalAllianceApi.getReferenceSet.
-type ReferencesetsGet =
-     "genomics" :>
-       "v1beta2" :>
-         "referencesets" :>
-           Capture "referenceSetId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Get '[JSON] ReferenceSet
-
--- | Searches for reference sets which match the given criteria. Implements
--- GlobalAllianceApi.searchReferenceSets.
-type ReferencesetsSearch =
-     "genomics" :>
-       "v1beta2" :>
-         "referencesets" :>
-           "search" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :>
-                           Post '[JSON] SearchReferenceSetsResponse
-
-type CallsetsAPI =
-     CallsetsPatch :<|> CallsetsGet :<|> CallsetsCreate
-       :<|> CallsetsSearch
-       :<|> CallsetsDelete
-       :<|> CallsetsUpdate
-
--- | Updates a call set. This method supports patch semantics.
-type CallsetsPatch =
-     "genomics" :>
-       "v1beta2" :>
-         "callsets" :>
-           Capture "callSetId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Patch '[JSON] CallSet
-
--- | Gets a call set by ID.
-type CallsetsGet =
-     "genomics" :>
-       "v1beta2" :>
-         "callsets" :>
-           Capture "callSetId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Get '[JSON] CallSet
-
--- | Creates a new call set.
-type CallsetsCreate =
-     "genomics" :>
-       "v1beta2" :>
-         "callsets" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "alt" Text :> Post '[JSON] CallSet
-
--- | Gets a list of call sets matching the criteria. Implements
--- GlobalAllianceApi.searchCallSets.
-type CallsetsSearch =
-     "genomics" :>
-       "v1beta2" :>
-         "callsets" :>
-           "search" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :>
-                           Post '[JSON] SearchCallSetsResponse
-
--- | Deletes a call set.
-type CallsetsDelete =
-     "genomics" :>
-       "v1beta2" :>
-         "callsets" :>
-           Capture "callSetId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Updates a call set.
-type CallsetsUpdate =
-     "genomics" :>
-       "v1beta2" :>
-         "callsets" :>
-           Capture "callSetId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Put '[JSON] CallSet
-
-type ReadsAPI = ReadsSearch
-
--- | Gets a list of reads for one or more read group sets. Reads search
--- operates over a genomic coordinate space of reference sequence &
--- position defined over the reference sequences to which the requested
--- read group sets are aligned. If a target positional range is specified,
--- search returns all reads whose alignment to the reference genome overlap
--- the range. A query which specifies only read group set IDs yields all
--- reads in those read group sets, including unmapped reads. All reads
--- returned (including reads on subsequent pages) are ordered by genomic
--- coordinate (reference sequence & position). Reads with equivalent
--- genomic coordinates are returned in a deterministic order. Implements
--- GlobalAllianceApi.searchReads.
-type ReadsSearch =
-     "genomics" :>
-       "v1beta2" :>
-         "reads" :>
-           "search" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :>
-                           Post '[JSON] SearchReadsResponse
-
-type DatasetsAPI =
-     DatasetsList :<|> DatasetsUndelete :<|> DatasetsPatch
-       :<|> DatasetsGet
-       :<|> DatasetsCreate
-       :<|> DatasetsDelete
-       :<|> DatasetsUpdate
-
--- | Lists datasets within a project.
-type DatasetsList =
-     "genomics" :>
-       "v1beta2" :>
-         "datasets" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "projectNumber" Int64 :>
-                   QueryParam "key" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "pageSize" Int32 :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Get '[JSON] ListDatasetsResponse
-
--- | Undeletes a dataset by restoring a dataset which was deleted via this
--- API. This operation is only possible for a week after the deletion
--- occurred.
-type DatasetsUndelete =
-     "genomics" :>
-       "v1beta2" :>
-         "datasets" :>
-           Capture "datasetId" Text :>
-             "undelete" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] Dataset
-
--- | Updates a dataset. This method supports patch semantics.
-type DatasetsPatch =
-     "genomics" :>
-       "v1beta2" :>
-         "datasets" :>
-           Capture "datasetId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Patch '[JSON] Dataset
-
--- | Gets a dataset by ID.
-type DatasetsGet =
-     "genomics" :>
-       "v1beta2" :>
-         "datasets" :>
-           Capture "datasetId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Get '[JSON] Dataset
-
--- | Creates a new dataset.
-type DatasetsCreate =
-     "genomics" :>
-       "v1beta2" :>
-         "datasets" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "alt" Text :> Post '[JSON] Dataset
-
--- | Deletes a dataset.
-type DatasetsDelete =
-     "genomics" :>
-       "v1beta2" :>
-         "datasets" :>
-           Capture "datasetId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Updates a dataset.
-type DatasetsUpdate =
-     "genomics" :>
-       "v1beta2" :>
-         "datasets" :>
-           Capture "datasetId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Put '[JSON] Dataset
+     AnnotationSetsSearchAPI :<|> JobsGetAPI :<|>
+       AnnotationSetsGetAPI
+       :<|> JobsSearchAPI
+       :<|> CallsetsSearchAPI
+       :<|> DatasetsPatchAPI
+       :<|> CallsetsDeleteAPI
+       :<|> AnnotationSetsPatchAPI
+       :<|> AnnotationsGetAPI
+       :<|> VariantsetsDeleteAPI
+       :<|> ReadgroupsetsCoveragebucketsListAPI
+       :<|> VariantsetsGetAPI
+       :<|> VariantsetsCreateAPI
+       :<|> CallsetsUpdateAPI
+       :<|> AnnotationsPatchAPI
+       :<|> DatasetsCreateAPI
+       :<|> AnnotationSetsUpdateAPI
+       :<|> DatasetsUndeleteAPI
+       :<|> VariantsDeleteAPI
+       :<|> JobsCancelAPI
+       :<|> ExperimentalJobsCreateAPI
+       :<|> AnnotationsBatchCreateAPI
+       :<|> VariantsetsPatchAPI
+       :<|> VariantsetsExportAPI
+       :<|> AnnotationsSearchAPI
+       :<|> VariantsetsImportVariantsAPI
+       :<|> DatasetsGetAPI
+       :<|> ReferencesetsGetAPI
+       :<|> ReferencesBasesListAPI
+       :<|> ReferencesetsSearchAPI
+       :<|> AnnotationSetsCreateAPI
+       :<|> DatasetsListAPI
+       :<|> CallsetsPatchAPI
+       :<|> VariantsetsUpdateAPI
+       :<|> AnnotationsDeleteAPI
+       :<|> AnnotationsCreateAPI
+       :<|> DatasetsDeleteAPI
+       :<|> VariantsetsMergeVariantsAPI
+       :<|> VariantsSearchAPI
+       :<|> VariantsUpdateAPI
+       :<|> VariantsetsSearchAPI
+       :<|> DatasetsUpdateAPI
+       :<|> ReadsSearchAPI
+       :<|> CallsetsCreateAPI
+       :<|> VariantsGetAPI
+       :<|> VariantsCreateAPI
+       :<|> CallsetsGetAPI
+       :<|> AnnotationsUpdateAPI
+       :<|> AnnotationSetsDeleteAPI
+
+genomics :: Proxy Genomics
+genomics = Proxy

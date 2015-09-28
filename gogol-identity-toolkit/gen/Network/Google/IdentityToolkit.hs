@@ -17,64 +17,97 @@
 -- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference>
 module Network.Google.IdentityToolkit
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** Google Identity Toolkit API
       IdentityToolkit
-    , RelyingpartyAPI
-    , RelyingpartyCreateAuthUri
-    , RelyingpartyUploadAccount
-    , RelyingpartyResetPassword
-    , RelyingpartySetAccountInfo
-    , RelyingpartyVerifyAssertion
-    , RelyingpartyDeleteAccount
-    , RelyingpartyGetOobConfirmationCode
-    , RelyingpartyGetRecaptchaParam
-    , RelyingpartyDownloadAccount
-    , RelyingpartyVerifyPassword
-    , RelyingpartyGetPublicKeys
-    , RelyingpartyGetAccountInfo
+    , identityToolkit
+    , identityToolkitURL
+
+    -- ** identitytoolkit.relyingparty.createAuthUri
+    , module Network.Google.API.IdentityToolkit.Relyingparty.CreateAuthURI
+
+    -- ** identitytoolkit.relyingparty.deleteAccount
+    , module Network.Google.API.IdentityToolkit.Relyingparty.DeleteAccount
+
+    -- ** identitytoolkit.relyingparty.downloadAccount
+    , module Network.Google.API.IdentityToolkit.Relyingparty.DownloadAccount
+
+    -- ** identitytoolkit.relyingparty.getAccountInfo
+    , module Network.Google.API.IdentityToolkit.Relyingparty.GetAccountInfo
+
+    -- ** identitytoolkit.relyingparty.getOobConfirmationCode
+    , module Network.Google.API.IdentityToolkit.Relyingparty.GetOobConfirmationCode
+
+    -- ** identitytoolkit.relyingparty.getPublicKeys
+    , module Network.Google.API.IdentityToolkit.Relyingparty.GetPublicKeys
+
+    -- ** identitytoolkit.relyingparty.getRecaptchaParam
+    , module Network.Google.API.IdentityToolkit.Relyingparty.GetRecaptchaParam
+
+    -- ** identitytoolkit.relyingparty.resetPassword
+    , module Network.Google.API.IdentityToolkit.Relyingparty.ResetPassword
+
+    -- ** identitytoolkit.relyingparty.setAccountInfo
+    , module Network.Google.API.IdentityToolkit.Relyingparty.SetAccountInfo
+
+    -- ** identitytoolkit.relyingparty.uploadAccount
+    , module Network.Google.API.IdentityToolkit.Relyingparty.UploadAccount
+
+    -- ** identitytoolkit.relyingparty.verifyAssertion
+    , module Network.Google.API.IdentityToolkit.Relyingparty.VerifyAssertion
+
+    -- ** identitytoolkit.relyingparty.verifyPassword
+    , module Network.Google.API.IdentityToolkit.Relyingparty.VerifyPassword
 
     -- * Types
 
-    -- ** CreateAuthUriResponse
-    , CreateAuthUriResponse
-    , createAuthUriResponse
-    , caurProviderId
-    , caurKind
-    , caurAuthUri
-    , caurCaptchaRequired
-    , caurRegistered
-    , caurForExistingProvider
+    -- ** IdentitytoolkitRelyingpartyGetPublicKeysResponse
+    , IdentitytoolkitRelyingpartyGetPublicKeysResponse
+    , identitytoolkitRelyingpartyGetPublicKeysResponse
 
-    -- ** DeleteAccountResponse
-    , DeleteAccountResponse
-    , deleteAccountResponse
-    , dKind
+    -- ** IdentitytoolkitRelyingpartyGetAccountInfoRequest
+    , IdentitytoolkitRelyingpartyGetAccountInfoRequest
+    , identitytoolkitRelyingpartyGetAccountInfoRequest
+    , irgairEmail
+    , irgairLocalId
+    , irgairIdToken
 
-    -- ** DownloadAccountResponse
-    , DownloadAccountResponse
-    , downloadAccountResponse
-    , darNextPageToken
-    , darUsers
-    , darKind
+    -- ** Relyingparty
+    , Relyingparty
+    , relyingparty
+    , rEmail
+    , rKind
+    , rUserIp
+    , rRequestType
+    , rCaptchaResp
+    , rNewEmail
+    , rChallenge
+    , rIdToken
 
-    -- ** GetAccountInfoResponse
-    , GetAccountInfoResponse
-    , getAccountInfoResponse
-    , gairUsers
-    , gairKind
+    -- ** IdentitytoolkitRelyingpartyResetPasswordRequest
+    , IdentitytoolkitRelyingpartyResetPasswordRequest
+    , identitytoolkitRelyingpartyResetPasswordRequest
+    , irrprEmail
+    , irrprNewPassword
+    , irrprOobCode
+    , irrprOldPassword
 
-    -- ** GetOobConfirmationCodeResponse
-    , GetOobConfirmationCodeResponse
-    , getOobConfirmationCodeResponse
-    , goccrKind
-    , goccrOobCode
+    -- ** IdentitytoolkitRelyingpartyUploadAccountRequest
+    , IdentitytoolkitRelyingpartyUploadAccountRequest
+    , identitytoolkitRelyingpartyUploadAccountRequest
+    , iruarUsers
+    , iruarMemoryCost
+    , iruarSaltSeparator
+    , iruarHashAlgorithm
+    , iruarSignerKey
+    , iruarRounds
 
-    -- ** GetRecaptchaParamResponse
-    , GetRecaptchaParamResponse
-    , getRecaptchaParamResponse
-    , grprRecaptchaSiteKey
-    , grprKind
-    , grprRecaptchaStoken
+    -- ** UploadAccountResponseItemError
+    , UploadAccountResponseItemError
+    , uploadAccountResponseItemError
+    , uarieMessage
+    , uarieIndex
 
     -- ** IdentitytoolkitRelyingpartyCreateAuthUriRequest
     , IdentitytoolkitRelyingpartyCreateAuthUriRequest
@@ -90,6 +123,15 @@ module Network.Google.IdentityToolkit
     , ircaurOauthScope
     , ircaurOpenidRealm
 
+    -- ** Alt
+    , Alt (..)
+
+    -- ** GetOobConfirmationCodeResponse
+    , GetOobConfirmationCodeResponse
+    , getOobConfirmationCodeResponse
+    , goccrKind
+    , goccrOobCode
+
     -- ** IdentitytoolkitRelyingpartyDeleteAccountRequest
     , IdentitytoolkitRelyingpartyDeleteAccountRequest
     , identitytoolkitRelyingpartyDeleteAccountRequest
@@ -101,115 +143,33 @@ module Network.Google.IdentityToolkit
     , irdarNextPageToken
     , irdarMaxResults
 
-    -- ** IdentitytoolkitRelyingpartyGetAccountInfoRequest
-    , IdentitytoolkitRelyingpartyGetAccountInfoRequest
-    , identitytoolkitRelyingpartyGetAccountInfoRequest
-    , irgairEmail
-    , irgairLocalId
-    , irgairIdToken
+    -- ** VerifyPasswordResponse
+    , VerifyPasswordResponse
+    , verifyPasswordResponse
+    , vprEmail
+    , vprPhotoUrl
+    , vprOauthAccessToken
+    , vprKind
+    , vprOauthExpireIn
+    , vprDisplayName
+    , vprLocalId
+    , vprRegistered
+    , vprIdToken
+    , vprOauthAuthorizationCode
 
-    -- ** IdentitytoolkitRelyingpartyGetPublicKeysResponse
-    , IdentitytoolkitRelyingpartyGetPublicKeysResponse
-    , identitytoolkitRelyingpartyGetPublicKeysResponse
+    -- ** DownloadAccountResponse
+    , DownloadAccountResponse
+    , downloadAccountResponse
+    , darNextPageToken
+    , darUsers
+    , darKind
 
-    -- ** IdentitytoolkitRelyingpartyResetPasswordRequest
-    , IdentitytoolkitRelyingpartyResetPasswordRequest
-    , identitytoolkitRelyingpartyResetPasswordRequest
-    , irrprEmail
-    , irrprNewPassword
-    , irrprOobCode
-    , irrprOldPassword
-
-    -- ** IdentitytoolkitRelyingpartySetAccountInfoRequest
-    , IdentitytoolkitRelyingpartySetAccountInfoRequest
-    , identitytoolkitRelyingpartySetAccountInfoRequest
-    , irsairUpgradeToFederatedLogin
-    , irsairEmail
-    , irsairCaptchaChallenge
-    , irsairValidSince
-    , irsairOobCode
-    , irsairPassword
-    , irsairCaptchaResponse
-    , irsairEmailVerified
-    , irsairDisplayName
-    , irsairDisableUser
-    , irsairLocalId
-    , irsairIdToken
-    , irsairProvider
-
-    -- ** IdentitytoolkitRelyingpartyUploadAccountRequest
-    , IdentitytoolkitRelyingpartyUploadAccountRequest
-    , identitytoolkitRelyingpartyUploadAccountRequest
-    , iruarUsers
-    , iruarMemoryCost
-    , iruarSaltSeparator
-    , iruarHashAlgorithm
-    , iruarSignerKey
-    , iruarRounds
-
-    -- ** IdentitytoolkitRelyingpartyVerifyAssertionRequest
-    , IdentitytoolkitRelyingpartyVerifyAssertionRequest
-    , identitytoolkitRelyingpartyVerifyAssertionRequest
-    , irvarPostBody
-    , irvarReturnRefreshToken
-    , irvarRequestUri
-    , irvarPendingIdToken
-
-    -- ** IdentitytoolkitRelyingpartyVerifyPasswordRequest
-    , IdentitytoolkitRelyingpartyVerifyPasswordRequest
-    , identitytoolkitRelyingpartyVerifyPasswordRequest
-    , irvprEmail
-    , irvprCaptchaChallenge
-    , irvprPassword
-    , irvprCaptchaResponse
-    , irvprPendingIdToken
-
-    -- ** Relyingparty
-    , Relyingparty
-    , relyingparty
-    , rEmail
-    , rKind
-    , rUserIp
-    , rRequestType
-    , rCaptchaResp
-    , rNewEmail
-    , rChallenge
-    , rIdToken
-
-    -- ** ResetPasswordResponse
-    , ResetPasswordResponse
-    , resetPasswordResponse
-    , rprEmail
-    , rprKind
-
-    -- ** SetAccountInfoResponse
-    , SetAccountInfoResponse
-    , setAccountInfoResponse
-    , sairEmail
-    , sairKind
-    , sairProviderUserInfo
-    , sairDisplayName
-    , sairNewEmail
-    , sairIdToken
-
-    -- ** SetAccountInfoResponseItemProviderUserInfo
-    , SetAccountInfoResponseItemProviderUserInfo
-    , setAccountInfoResponseItemProviderUserInfo
-    , sairipuiProviderId
-    , sairipuiPhotoUrl
-    , sairipuiDisplayName
-
-    -- ** UploadAccountResponse
-    , UploadAccountResponse
-    , uploadAccountResponse
-    , uarKind
-    , uarError
-
-    -- ** UploadAccountResponseItemError
-    , UploadAccountResponseItemError
-    , uploadAccountResponseItemError
-    , uarieMessage
-    , uarieIndex
+    -- ** GetRecaptchaParamResponse
+    , GetRecaptchaParamResponse
+    , getRecaptchaParamResponse
+    , grprRecaptchaSiteKey
+    , grprKind
+    , grprRecaptchaStoken
 
     -- ** UserInfo
     , UserInfo
@@ -234,6 +194,61 @@ module Network.Google.IdentityToolkit
     , uiipuiPhotoUrl
     , uiipuiFederatedId
     , uiipuiDisplayName
+
+    -- ** GetAccountInfoResponse
+    , GetAccountInfoResponse
+    , getAccountInfoResponse
+    , gairUsers
+    , gairKind
+
+    -- ** IdentitytoolkitRelyingpartyVerifyPasswordRequest
+    , IdentitytoolkitRelyingpartyVerifyPasswordRequest
+    , identitytoolkitRelyingpartyVerifyPasswordRequest
+    , irvprEmail
+    , irvprCaptchaChallenge
+    , irvprPassword
+    , irvprCaptchaResponse
+    , irvprPendingIdToken
+
+    -- ** IdentitytoolkitRelyingpartySetAccountInfoRequest
+    , IdentitytoolkitRelyingpartySetAccountInfoRequest
+    , identitytoolkitRelyingpartySetAccountInfoRequest
+    , irsairUpgradeToFederatedLogin
+    , irsairEmail
+    , irsairCaptchaChallenge
+    , irsairValidSince
+    , irsairOobCode
+    , irsairPassword
+    , irsairCaptchaResponse
+    , irsairEmailVerified
+    , irsairDisplayName
+    , irsairDisableUser
+    , irsairLocalId
+    , irsairIdToken
+    , irsairProvider
+
+    -- ** IdentitytoolkitRelyingpartyVerifyAssertionRequest
+    , IdentitytoolkitRelyingpartyVerifyAssertionRequest
+    , identitytoolkitRelyingpartyVerifyAssertionRequest
+    , irvarPostBody
+    , irvarReturnRefreshToken
+    , irvarRequestUri
+    , irvarPendingIdToken
+
+    -- ** DeleteAccountResponse
+    , DeleteAccountResponse
+    , deleteAccountResponse
+    , dKind
+
+    -- ** SetAccountInfoResponse
+    , SetAccountInfoResponse
+    , setAccountInfoResponse
+    , sairEmail
+    , sairKind
+    , sairProviderUserInfo
+    , sairDisplayName
+    , sairNewEmail
+    , sairIdToken
 
     -- ** VerifyAssertionResponse
     , VerifyAssertionResponse
@@ -269,21 +284,48 @@ module Network.Google.IdentityToolkit
     , varIdToken
     , varOauthAuthorizationCode
 
-    -- ** VerifyPasswordResponse
-    , VerifyPasswordResponse
-    , verifyPasswordResponse
-    , vprEmail
-    , vprPhotoUrl
-    , vprOauthAccessToken
-    , vprKind
-    , vprOauthExpireIn
-    , vprDisplayName
-    , vprLocalId
-    , vprRegistered
-    , vprIdToken
-    , vprOauthAuthorizationCode
+    -- ** SetAccountInfoResponseItemProviderUserInfo
+    , SetAccountInfoResponseItemProviderUserInfo
+    , setAccountInfoResponseItemProviderUserInfo
+    , sairipuiProviderId
+    , sairipuiPhotoUrl
+    , sairipuiDisplayName
+
+    -- ** ResetPasswordResponse
+    , ResetPasswordResponse
+    , resetPasswordResponse
+    , rprEmail
+    , rprKind
+
+    -- ** UploadAccountResponse
+    , UploadAccountResponse
+    , uploadAccountResponse
+    , uarKind
+    , uarError
+
+    -- ** CreateAuthUriResponse
+    , CreateAuthUriResponse
+    , createAuthUriResponse
+    , caurProviderId
+    , caurKind
+    , caurAuthUri
+    , caurCaptchaRequired
+    , caurRegistered
+    , caurForExistingProvider
     ) where
 
+import           Network.Google.API.IdentityToolkit.Relyingparty.CreateAuthURI
+import           Network.Google.API.IdentityToolkit.Relyingparty.DeleteAccount
+import           Network.Google.API.IdentityToolkit.Relyingparty.DownloadAccount
+import           Network.Google.API.IdentityToolkit.Relyingparty.GetAccountInfo
+import           Network.Google.API.IdentityToolkit.Relyingparty.GetOobConfirmationCode
+import           Network.Google.API.IdentityToolkit.Relyingparty.GetPublicKeys
+import           Network.Google.API.IdentityToolkit.Relyingparty.GetRecaptchaParam
+import           Network.Google.API.IdentityToolkit.Relyingparty.ResetPassword
+import           Network.Google.API.IdentityToolkit.Relyingparty.SetAccountInfo
+import           Network.Google.API.IdentityToolkit.Relyingparty.UploadAccount
+import           Network.Google.API.IdentityToolkit.Relyingparty.VerifyAssertion
+import           Network.Google.API.IdentityToolkit.Relyingparty.VerifyPassword
 import           Network.Google.IdentityToolkit.Types
 import           Network.Google.Prelude
 
@@ -291,199 +333,19 @@ import           Network.Google.Prelude
 TODO
 -}
 
-type IdentityToolkit = RelyingpartyAPI
+type IdentityToolkit =
+     RelyingpartyDeleteAccountAPI :<|>
+       RelyingpartyGetRecaptchaParamAPI
+       :<|> RelyingpartyDownloadAccountAPI
+       :<|> RelyingpartySetAccountInfoAPI
+       :<|> RelyingpartyCreateAuthURIAPI
+       :<|> RelyingpartyGetAccountInfoAPI
+       :<|> RelyingpartyUploadAccountAPI
+       :<|> RelyingpartyGetOobConfirmationCodeAPI
+       :<|> RelyingpartyVerifyAssertionAPI
+       :<|> RelyingpartyGetPublicKeysAPI
+       :<|> RelyingpartyResetPasswordAPI
+       :<|> RelyingpartyVerifyPasswordAPI
 
-type RelyingpartyAPI =
-     RelyingpartyCreateAuthUri :<|>
-       RelyingpartyUploadAccount
-       :<|> RelyingpartyResetPassword
-       :<|> RelyingpartySetAccountInfo
-       :<|> RelyingpartyVerifyAssertion
-       :<|> RelyingpartyDeleteAccount
-       :<|> RelyingpartyGetOobConfirmationCode
-       :<|> RelyingpartyGetRecaptchaParam
-       :<|> RelyingpartyDownloadAccount
-       :<|> RelyingpartyVerifyPassword
-       :<|> RelyingpartyGetPublicKeys
-       :<|> RelyingpartyGetAccountInfo
-
--- | Creates the URI used by the IdP to authenticate the user.
-type RelyingpartyCreateAuthUri =
-     "identitytoolkit" :>
-       "v3" :>
-         "relyingparty" :>
-           "createAuthUri" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :>
-                           Post '[JSON] CreateAuthUriResponse
-
--- | Batch upload existing user accounts.
-type RelyingpartyUploadAccount =
-     "identitytoolkit" :>
-       "v3" :>
-         "relyingparty" :>
-           "uploadAccount" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :>
-                           Post '[JSON] UploadAccountResponse
-
--- | Reset password for a user.
-type RelyingpartyResetPassword =
-     "identitytoolkit" :>
-       "v3" :>
-         "relyingparty" :>
-           "resetPassword" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :>
-                           Post '[JSON] ResetPasswordResponse
-
--- | Set account info for a user.
-type RelyingpartySetAccountInfo =
-     "identitytoolkit" :>
-       "v3" :>
-         "relyingparty" :>
-           "setAccountInfo" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :>
-                           Post '[JSON] SetAccountInfoResponse
-
--- | Verifies the assertion returned by the IdP.
-type RelyingpartyVerifyAssertion =
-     "identitytoolkit" :>
-       "v3" :>
-         "relyingparty" :>
-           "verifyAssertion" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :>
-                           Post '[JSON] VerifyAssertionResponse
-
--- | Delete user account.
-type RelyingpartyDeleteAccount =
-     "identitytoolkit" :>
-       "v3" :>
-         "relyingparty" :>
-           "deleteAccount" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :>
-                           Post '[JSON] DeleteAccountResponse
-
--- | Get a code for user action confirmation.
-type RelyingpartyGetOobConfirmationCode =
-     "identitytoolkit" :>
-       "v3" :>
-         "relyingparty" :>
-           "getOobConfirmationCode" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :>
-                           Post '[JSON] GetOobConfirmationCodeResponse
-
--- | Get recaptcha secure param.
-type RelyingpartyGetRecaptchaParam =
-     "identitytoolkit" :>
-       "v3" :>
-         "relyingparty" :>
-           "getRecaptchaParam" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :>
-                           Get '[JSON] GetRecaptchaParamResponse
-
--- | Batch download user accounts.
-type RelyingpartyDownloadAccount =
-     "identitytoolkit" :>
-       "v3" :>
-         "relyingparty" :>
-           "downloadAccount" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :>
-                           Post '[JSON] DownloadAccountResponse
-
--- | Verifies the user entered password.
-type RelyingpartyVerifyPassword =
-     "identitytoolkit" :>
-       "v3" :>
-         "relyingparty" :>
-           "verifyPassword" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :>
-                           Post '[JSON] VerifyPasswordResponse
-
--- | Get token signing public key.
-type RelyingpartyGetPublicKeys =
-     "identitytoolkit" :>
-       "v3" :>
-         "relyingparty" :>
-           "publicKeys" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :>
-                           Get '[JSON]
-                             IdentitytoolkitRelyingpartyGetPublicKeysResponse
-
--- | Returns the account info.
-type RelyingpartyGetAccountInfo =
-     "identitytoolkit" :>
-       "v3" :>
-         "relyingparty" :>
-           "getAccountInfo" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :>
-                           Post '[JSON] GetAccountInfoResponse
+identityToolkit :: Proxy IdentityToolkit
+identityToolkit = Proxy

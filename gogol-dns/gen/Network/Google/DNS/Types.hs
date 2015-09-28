@@ -14,23 +14,30 @@
 --
 module Network.Google.DNS.Types
     (
+    -- * Service URL
+      dNSURL
 
-    -- * Change
-      Change
-    , change
-    , cStatus
-    , cAdditions
-    , cStartTime
-    , cKind
-    , cDeletions
-    , cId
+    -- * ResourceRecordSetsListResponse
+    , ResourceRecordSetsListResponse
+    , resourceRecordSetsListResponse
+    , rrslrNextPageToken
+    , rrslrKind
+    , rrslrRrsets
 
-    -- * ChangesListResponse
-    , ChangesListResponse
-    , changesListResponse
-    , clrNextPageToken
-    , clrChanges
-    , clrKind
+    -- * ChangesList'SortBy
+    , ChangesList'SortBy (..)
+
+    -- * Alt
+    , Alt (..)
+
+    -- * ResourceRecordSet
+    , ResourceRecordSet
+    , resourceRecordSet
+    , rrsTtl
+    , rrsKind
+    , rrsName
+    , rrsType
+    , rrsRrdatas
 
     -- * ManagedZone
     , ManagedZone
@@ -44,12 +51,29 @@ module Network.Google.DNS.Types
     , mzDescription
     , mzNameServers
 
+    -- * Change
+    , Change
+    , change
+    , cStatus
+    , cAdditions
+    , cStartTime
+    , cKind
+    , cDeletions
+    , cId
+
     -- * ManagedZonesListResponse
     , ManagedZonesListResponse
     , managedZonesListResponse
     , mzlrNextPageToken
     , mzlrKind
     , mzlrManagedZones
+
+    -- * ChangesListResponse
+    , ChangesListResponse
+    , changesListResponse
+    , clrNextPageToken
+    , clrChanges
+    , clrKind
 
     -- * Project
     , Project
@@ -69,24 +93,15 @@ module Network.Google.DNS.Types
     , qRrsetAdditionsPerChange
     , qManagedZones
     , qTotalRrdataSizePerChange
-
-    -- * ResourceRecordSet
-    , ResourceRecordSet
-    , resourceRecordSet
-    , rrsTtl
-    , rrsKind
-    , rrsName
-    , rrsType
-    , rrsRrdatas
-
-    -- * ResourceRecordSetsListResponse
-    , ResourceRecordSetsListResponse
-    , resourceRecordSetsListResponse
-    , rrslrNextPageToken
-    , rrslrKind
-    , rrslrRrsets
     ) where
 
 import           Network.Google.DNS.Types.Product
 import           Network.Google.DNS.Types.Sum
 import           Network.Google.Prelude
+
+-- | URL referring to version 'v1beta1' of the Google Cloud DNS API.
+dNSURL :: BaseUrl
+dNSURL
+  = BaseUrl Https
+      "https://www.googleapis.com/dns/v1beta1/projects/"
+      443

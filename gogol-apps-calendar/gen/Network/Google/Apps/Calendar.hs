@@ -17,90 +17,198 @@
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference>
 module Network.Google.Apps.Calendar
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** Calendar API
       AppsCalendar
-    , SettingsAPI
-    , SettingsList
-    , SettingsGet
-    , SettingsWatch
-    , ChannelsAPI
-    , ChannelsStop
-    , CalendarsAPI
-    , CalendarsInsert
-    , CalendarsPatch
-    , CalendarsGet
-    , CalendarsClear
-    , CalendarsDelete
-    , CalendarsUpdate
-    , EventsAPI
-    , EventsQuickAdd
-    , EventsInsert
-    , EventsList
-    , EventsPatch
-    , EventsGet
-    , EventsInstances
-    , EventsImport
-    , EventsDelete
-    , EventsUpdate
-    , EventsMove
-    , EventsWatch
-    , CalendarListAPI
-    , CalendarListInsert
-    , CalendarListList
-    , CalendarListPatch
-    , CalendarListGet
-    , CalendarListDelete
-    , CalendarListUpdate
-    , CalendarListWatch
-    , AclAPI
-    , AclInsert
-    , AclList
-    , AclPatch
-    , AclGet
-    , AclDelete
-    , AclUpdate
-    , AclWatch
-    , ColorsAPI
-    , ColorsGet
-    , FreebusyAPI
-    , FreebusyQuery
+    , appsCalendar
+    , appsCalendarURL
+
+    -- ** calendar.acl.delete
+    , module Network.Google.API.Calendar.ACL.Delete
+
+    -- ** calendar.acl.get
+    , module Network.Google.API.Calendar.ACL.Get
+
+    -- ** calendar.acl.insert
+    , module Network.Google.API.Calendar.ACL.Insert
+
+    -- ** calendar.acl.list
+    , module Network.Google.API.Calendar.ACL.List
+
+    -- ** calendar.acl.patch
+    , module Network.Google.API.Calendar.ACL.Patch
+
+    -- ** calendar.acl.update
+    , module Network.Google.API.Calendar.ACL.Update
+
+    -- ** calendar.acl.watch
+    , module Network.Google.API.Calendar.ACL.Watch
+
+    -- ** calendar.calendarList.delete
+    , module Network.Google.API.Calendar.CalendarList.Delete
+
+    -- ** calendar.calendarList.get
+    , module Network.Google.API.Calendar.CalendarList.Get
+
+    -- ** calendar.calendarList.insert
+    , module Network.Google.API.Calendar.CalendarList.Insert
+
+    -- ** calendar.calendarList.list
+    , module Network.Google.API.Calendar.CalendarList.List
+
+    -- ** calendar.calendarList.patch
+    , module Network.Google.API.Calendar.CalendarList.Patch
+
+    -- ** calendar.calendarList.update
+    , module Network.Google.API.Calendar.CalendarList.Update
+
+    -- ** calendar.calendarList.watch
+    , module Network.Google.API.Calendar.CalendarList.Watch
+
+    -- ** calendar.calendars.clear
+    , module Network.Google.API.Calendar.Calendars.Clear
+
+    -- ** calendar.calendars.delete
+    , module Network.Google.API.Calendar.Calendars.Delete
+
+    -- ** calendar.calendars.get
+    , module Network.Google.API.Calendar.Calendars.Get
+
+    -- ** calendar.calendars.insert
+    , module Network.Google.API.Calendar.Calendars.Insert
+
+    -- ** calendar.calendars.patch
+    , module Network.Google.API.Calendar.Calendars.Patch
+
+    -- ** calendar.calendars.update
+    , module Network.Google.API.Calendar.Calendars.Update
+
+    -- ** calendar.channels.stop
+    , module Network.Google.API.Calendar.Channels.Stop
+
+    -- ** calendar.colors.get
+    , module Network.Google.API.Calendar.Colors.Get
+
+    -- ** calendar.events.delete
+    , module Network.Google.API.Calendar.Events.Delete
+
+    -- ** calendar.events.get
+    , module Network.Google.API.Calendar.Events.Get
+
+    -- ** calendar.events.import
+    , module Network.Google.API.Calendar.Events.Import
+
+    -- ** calendar.events.insert
+    , module Network.Google.API.Calendar.Events.Insert
+
+    -- ** calendar.events.instances
+    , module Network.Google.API.Calendar.Events.Instances
+
+    -- ** calendar.events.list
+    , module Network.Google.API.Calendar.Events.List
+
+    -- ** calendar.events.move
+    , module Network.Google.API.Calendar.Events.Move
+
+    -- ** calendar.events.patch
+    , module Network.Google.API.Calendar.Events.Patch
+
+    -- ** calendar.events.quickAdd
+    , module Network.Google.API.Calendar.Events.QuickAdd
+
+    -- ** calendar.events.update
+    , module Network.Google.API.Calendar.Events.Update
+
+    -- ** calendar.events.watch
+    , module Network.Google.API.Calendar.Events.Watch
+
+    -- ** calendar.freebusy.query
+    , module Network.Google.API.Calendar.Freebusy.Query
+
+    -- ** calendar.settings.get
+    , module Network.Google.API.Calendar.Settings.Get
+
+    -- ** calendar.settings.list
+    , module Network.Google.API.Calendar.Settings.List
+
+    -- ** calendar.settings.watch
+    , module Network.Google.API.Calendar.Settings.Watch
 
     -- * Types
 
-    -- ** Acl
-    , Acl
-    , acl
-    , aclEtag
-    , aclNextPageToken
-    , aclKind
-    , aclItems
-    , aclNextSyncToken
+    -- ** EventPrivateExtendedProperties
+    , EventPrivateExtendedProperties
+    , eventPrivateExtendedProperties
 
-    -- ** AclRule
-    , AclRule
-    , aclRule
-    , arEtag
-    , arKind
-    , arRole
-    , arScope
-    , arId
+    -- ** EventsWatch'OrderBy
+    , EventsWatch'OrderBy (..)
 
-    -- ** AclRuleScope
-    , AclRuleScope
-    , aclRuleScope
-    , arsValue
-    , arsType
+    -- ** ColorsCalendar
+    , ColorsCalendar
+    , colorsCalendar
 
-    -- ** Calendar
-    , Calendar
-    , calendar
-    , cSummary
-    , cEtag
-    , cLocation
-    , cKind
-    , cId
-    , cTimeZone
-    , cDescription
+    -- ** CalendarNotification
+    , CalendarNotification
+    , calendarNotification
+    , cnMethod
+    , cnType
+
+    -- ** CalendarListEntryNotificationSettings
+    , CalendarListEntryNotificationSettings
+    , calendarListEntryNotificationSettings
+    , clensNotifications
+
+    -- ** Events
+    , Events
+    , events
+    , eSummary
+    , eEtag
+    , eNextPageToken
+    , eKind
+    , eItems
+    , eDefaultReminders
+    , eUpdated
+    , eAccessRole
+    , eTimeZone
+    , eNextSyncToken
+    , eDescription
+
+    -- ** EventReminders
+    , EventReminders
+    , eventReminders
+    , erOverrides
+    , erUseDefault
+
+    -- ** EventSource
+    , EventSource
+    , eventSource
+    , esUrl
+    , esTitle
+
+    -- ** Alt
+    , Alt (..)
+
+    -- ** FreeBusyResponseGroups
+    , FreeBusyResponseGroups
+    , freeBusyResponseGroups
+
+    -- ** EventDateTime
+    , EventDateTime
+    , eventDateTime
+    , edtDate
+    , edtTimeZone
+    , edtDateTime
+
+    -- ** FreeBusyRequest
+    , FreeBusyRequest
+    , freeBusyRequest
+    , fbrCalendarExpansionMax
+    , fbrTimeMin
+    , fbrItems
+    , fbrGroupExpansionMax
+    , fbrTimeZone
+    , fbrTimeMax
 
     -- ** CalendarList
     , CalendarList
@@ -111,84 +219,38 @@ module Network.Google.Apps.Calendar
     , clItems
     , clNextSyncToken
 
-    -- ** CalendarListEntry
-    , CalendarListEntry
-    , calendarListEntry
-    , cleSummary
-    , cleEtag
-    , cleLocation
-    , cleKind
-    , cleNotificationSettings
-    , cleBackgroundColor
-    , cleForegroundColor
-    , cleDefaultReminders
-    , cleSelected
-    , clePrimary
-    , cleHidden
-    , cleId
-    , cleDeleted
-    , cleAccessRole
-    , cleSummaryOverride
-    , cleColorId
-    , cleTimeZone
-    , cleDescription
+    -- ** AclRule
+    , AclRule
+    , aclRule
+    , arEtag
+    , arKind
+    , arRole
+    , arScope
+    , arId
 
-    -- ** CalendarListEntryNotificationSettings
-    , CalendarListEntryNotificationSettings
-    , calendarListEntryNotificationSettings
-    , clensNotifications
+    -- ** EventPreferencesGadget
+    , EventPreferencesGadget
+    , eventPreferencesGadget
 
-    -- ** CalendarNotification
-    , CalendarNotification
-    , calendarNotification
-    , cnMethod
-    , cnType
+    -- ** Setting
+    , Setting
+    , setting
+    , sEtag
+    , sKind
+    , sValue
+    , sId
 
-    -- ** Channel
-    , Channel
-    , channel
-    , chaResourceUri
-    , chaResourceId
-    , chaKind
-    , chaExpiration
-    , chaToken
-    , chaAddress
-    , chaPayload
-    , chaParams
-    , chaId
-    , chaType
-
-    -- ** ChannelParams
-    , ChannelParams
-    , channelParams
-
-    -- ** ColorDefinition
-    , ColorDefinition
-    , colorDefinition
-    , cdForeground
-    , cdBackground
-
-    -- ** Colors
-    , Colors
-    , colors
-    , colEvent
-    , colKind
-    , colCalendar
-    , colUpdated
-
-    -- ** ColorsCalendar
-    , ColorsCalendar
-    , colorsCalendar
+    -- ** EventOrganizer
+    , EventOrganizer
+    , eventOrganizer
+    , eoEmail
+    , eoSelf
+    , eoDisplayName
+    , eoId
 
     -- ** ColorsEvent
     , ColorsEvent
     , colorsEvent
-
-    -- ** Error
-    , Error
-    , error'
-    , eDomain
-    , eReason
 
     -- ** Event
     , Event
@@ -231,14 +293,40 @@ module Network.Google.Apps.Calendar
     , eveDescription
     , eveOrganizer
 
-    -- ** EventAttachment
-    , EventAttachment
-    , eventAttachment
-    , eaFileUrl
-    , eaIconLink
-    , eaMimeType
-    , eaTitle
-    , eaFileId
+    -- ** CalendarListList'MinAccessRole
+    , CalendarListList'MinAccessRole (..)
+
+    -- ** ChannelParams
+    , ChannelParams
+    , channelParams
+
+    -- ** EventsList'OrderBy
+    , EventsList'OrderBy (..)
+
+    -- ** CalendarListEntry
+    , CalendarListEntry
+    , calendarListEntry
+    , cleSummary
+    , cleEtag
+    , cleLocation
+    , cleKind
+    , cleNotificationSettings
+    , cleBackgroundColor
+    , cleForegroundColor
+    , cleDefaultReminders
+    , cleSelected
+    , clePrimary
+    , cleHidden
+    , cleId
+    , cleDeleted
+    , cleAccessRole
+    , cleSummaryOverride
+    , cleColorId
+    , cleTimeZone
+    , cleDescription
+
+    -- ** CalendarListWatch'MinAccessRole
+    , CalendarListWatch'MinAccessRole (..)
 
     -- ** EventAttendee
     , EventAttendee
@@ -254,26 +342,80 @@ module Network.Google.Apps.Calendar
     , eaOptional
     , eaOrganizer
 
-    -- ** EventCreator
-    , EventCreator
-    , eventCreator
-    , ecEmail
-    , ecSelf
-    , ecDisplayName
-    , ecId
+    -- ** EventReminder
+    , EventReminder
+    , eventReminder
+    , erMethod
+    , erMinutes
 
-    -- ** EventDateTime
-    , EventDateTime
-    , eventDateTime
-    , edtDate
-    , edtTimeZone
-    , edtDateTime
+    -- ** Calendar
+    , Calendar
+    , calendar
+    , cSummary
+    , cEtag
+    , cLocation
+    , cKind
+    , cId
+    , cTimeZone
+    , cDescription
 
-    -- ** EventExtendedProperties
-    , EventExtendedProperties
-    , eventExtendedProperties
-    , eepPrivate
-    , eepShared
+    -- ** FreeBusyResponse
+    , FreeBusyResponse
+    , freeBusyResponse
+    , fGroups
+    , fTimeMin
+    , fKind
+    , fCalendars
+    , fTimeMax
+
+    -- ** Settings
+    , Settings
+    , settings
+    , setEtag
+    , setNextPageToken
+    , setKind
+    , setItems
+    , setNextSyncToken
+
+    -- ** EventAttachment
+    , EventAttachment
+    , eventAttachment
+    , eaFileUrl
+    , eaIconLink
+    , eaMimeType
+    , eaTitle
+    , eaFileId
+
+    -- ** FreeBusyRequestItem
+    , FreeBusyRequestItem
+    , freeBusyRequestItem
+    , fbriId
+
+    -- ** ColorDefinition
+    , ColorDefinition
+    , colorDefinition
+    , cdForeground
+    , cdBackground
+
+    -- ** FreeBusyResponseCalendars
+    , FreeBusyResponseCalendars
+    , freeBusyResponseCalendars
+
+    -- ** TimePeriod
+    , TimePeriod
+    , timePeriod
+    , tpStart
+    , tpEnd
+
+    -- ** Error'
+    , Error'
+    , error'
+    , eDomain
+    , eReason
+
+    -- ** EventSharedExtendedProperties
+    , EventSharedExtendedProperties
+    , eventSharedExtendedProperties
 
     -- ** EventGadget
     , EventGadget
@@ -287,58 +429,27 @@ module Network.Google.Apps.Calendar
     , egTitle
     , egType
 
-    -- ** EventOrganizer
-    , EventOrganizer
-    , eventOrganizer
-    , eoEmail
-    , eoSelf
-    , eoDisplayName
-    , eoId
+    -- ** Channel
+    , Channel
+    , channel
+    , chaResourceUri
+    , chaResourceId
+    , chaKind
+    , chaExpiration
+    , chaToken
+    , chaAddress
+    , chaPayload
+    , chaParams
+    , chaId
+    , chaType
 
-    -- ** EventPreferencesGadget
-    , EventPreferencesGadget
-    , eventPreferencesGadget
-
-    -- ** EventPrivateExtendedProperties
-    , EventPrivateExtendedProperties
-    , eventPrivateExtendedProperties
-
-    -- ** EventReminder
-    , EventReminder
-    , eventReminder
-    , erMethod
-    , erMinutes
-
-    -- ** EventReminders
-    , EventReminders
-    , eventReminders
-    , erOverrides
-    , erUseDefault
-
-    -- ** EventSharedExtendedProperties
-    , EventSharedExtendedProperties
-    , eventSharedExtendedProperties
-
-    -- ** EventSource
-    , EventSource
-    , eventSource
-    , esUrl
-    , esTitle
-
-    -- ** Events
-    , Events
-    , events
-    , eSummary
-    , eEtag
-    , eNextPageToken
-    , eKind
-    , eItems
-    , eDefaultReminders
-    , eUpdated
-    , eAccessRole
-    , eTimeZone
-    , eNextSyncToken
-    , eDescription
+    -- ** EventCreator
+    , EventCreator
+    , eventCreator
+    , ecEmail
+    , ecSelf
+    , ecDisplayName
+    , ecId
 
     -- ** FreeBusyCalendar
     , FreeBusyCalendar
@@ -352,62 +463,73 @@ module Network.Google.Apps.Calendar
     , fbgCalendars
     , fbgErrors
 
-    -- ** FreeBusyRequest
-    , FreeBusyRequest
-    , freeBusyRequest
-    , fbrCalendarExpansionMax
-    , fbrTimeMin
-    , fbrItems
-    , fbrGroupExpansionMax
-    , fbrTimeZone
-    , fbrTimeMax
+    -- ** Colors
+    , Colors
+    , colors
+    , colEvent
+    , colKind
+    , colCalendar
+    , colUpdated
 
-    -- ** FreeBusyRequestItem
-    , FreeBusyRequestItem
-    , freeBusyRequestItem
-    , fbriId
+    -- ** Acl
+    , Acl
+    , acl
+    , aclEtag
+    , aclNextPageToken
+    , aclKind
+    , aclItems
+    , aclNextSyncToken
 
-    -- ** FreeBusyResponse
-    , FreeBusyResponse
-    , freeBusyResponse
-    , fGroups
-    , fTimeMin
-    , fKind
-    , fCalendars
-    , fTimeMax
+    -- ** EventExtendedProperties
+    , EventExtendedProperties
+    , eventExtendedProperties
+    , eepPrivate
+    , eepShared
 
-    -- ** FreeBusyResponseCalendars
-    , FreeBusyResponseCalendars
-    , freeBusyResponseCalendars
-
-    -- ** FreeBusyResponseGroups
-    , FreeBusyResponseGroups
-    , freeBusyResponseGroups
-
-    -- ** Setting
-    , Setting
-    , setting
-    , sEtag
-    , sKind
-    , sValue
-    , sId
-
-    -- ** Settings
-    , Settings
-    , settings
-    , setEtag
-    , setNextPageToken
-    , setKind
-    , setItems
-    , setNextSyncToken
-
-    -- ** TimePeriod
-    , TimePeriod
-    , timePeriod
-    , tpStart
-    , tpEnd
+    -- ** AclRuleScope
+    , AclRuleScope
+    , aclRuleScope
+    , arsValue
+    , arsType
     ) where
 
+import           Network.Google.API.Calendar.ACL.Delete
+import           Network.Google.API.Calendar.ACL.Get
+import           Network.Google.API.Calendar.ACL.Insert
+import           Network.Google.API.Calendar.ACL.List
+import           Network.Google.API.Calendar.ACL.Patch
+import           Network.Google.API.Calendar.ACL.Update
+import           Network.Google.API.Calendar.ACL.Watch
+import           Network.Google.API.Calendar.CalendarList.Delete
+import           Network.Google.API.Calendar.CalendarList.Get
+import           Network.Google.API.Calendar.CalendarList.Insert
+import           Network.Google.API.Calendar.CalendarList.List
+import           Network.Google.API.Calendar.CalendarList.Patch
+import           Network.Google.API.Calendar.CalendarList.Update
+import           Network.Google.API.Calendar.CalendarList.Watch
+import           Network.Google.API.Calendar.Calendars.Clear
+import           Network.Google.API.Calendar.Calendars.Delete
+import           Network.Google.API.Calendar.Calendars.Get
+import           Network.Google.API.Calendar.Calendars.Insert
+import           Network.Google.API.Calendar.Calendars.Patch
+import           Network.Google.API.Calendar.Calendars.Update
+import           Network.Google.API.Calendar.Channels.Stop
+import           Network.Google.API.Calendar.Colors.Get
+import           Network.Google.API.Calendar.Events.Delete
+import           Network.Google.API.Calendar.Events.Get
+import           Network.Google.API.Calendar.Events.Import
+import           Network.Google.API.Calendar.Events.Insert
+import           Network.Google.API.Calendar.Events.Instances
+import           Network.Google.API.Calendar.Events.List
+import           Network.Google.API.Calendar.Events.Move
+import           Network.Google.API.Calendar.Events.Patch
+import           Network.Google.API.Calendar.Events.QuickAdd
+import           Network.Google.API.Calendar.Events.Update
+import           Network.Google.API.Calendar.Events.Watch
+import           Network.Google.API.Calendar.Freebusy.Query
+import           Network.Google.API.Calendar.Settings.Get
+import           Network.Google.API.Calendar.Settings.List
+import           Network.Google.API.Calendar.Settings.Watch
 import           Network.Google.Apps.Calendar.Types
 import           Network.Google.Prelude
 
@@ -416,757 +538,42 @@ TODO
 -}
 
 type AppsCalendar =
-     SettingsAPI :<|> ChannelsAPI :<|> CalendarsAPI :<|>
-       EventsAPI
-       :<|> CalendarListAPI
-       :<|> AclAPI
-       :<|> ColorsAPI
-       :<|> FreebusyAPI
+     EventsInsertAPI :<|> CalendarsDeleteAPI :<|>
+       EventsWatchAPI
+       :<|> ACLListAPI
+       :<|> ACLUpdateAPI
+       :<|> EventsPatchAPI
+       :<|> CalendarListGetAPI
+       :<|> CalendarListListAPI
+       :<|> CalendarsUpdateAPI
+       :<|> EventsInstancesAPI
+       :<|> ACLWatchAPI
+       :<|> EventsImportAPI
+       :<|> CalendarListPatchAPI
+       :<|> ColorsGetAPI
+       :<|> ACLInsertAPI
+       :<|> CalendarsPatchAPI
+       :<|> EventsGetAPI
+       :<|> EventsListAPI
+       :<|> CalendarListDeleteAPI
+       :<|> CalendarsInsertAPI
+       :<|> EventsDeleteAPI
+       :<|> SettingsGetAPI
+       :<|> ACLDeleteAPI
+       :<|> ACLGetAPI
+       :<|> ChannelsStopAPI
+       :<|> SettingsWatchAPI
+       :<|> EventsMoveAPI
+       :<|> CalendarsClearAPI
+       :<|> EventsUpdateAPI
+       :<|> SettingsListAPI
+       :<|> FreebusyQueryAPI
+       :<|> CalendarListWatchAPI
+       :<|> CalendarsGetAPI
+       :<|> ACLPatchAPI
+       :<|> CalendarListUpdateAPI
+       :<|> EventsQuickAddAPI
+       :<|> CalendarListInsertAPI
 
-type SettingsAPI =
-     SettingsList :<|> SettingsGet :<|> SettingsWatch
-
--- | Returns all user settings for the authenticated user.
-type SettingsList =
-     "calendar" :>
-       "v3" :>
-         "users" :>
-           "me" :>
-             "settings" :>
-               QueryParam "syncToken" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "maxResults" Natural :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Get '[JSON] Settings
-
--- | Returns a single user setting.
-type SettingsGet =
-     "calendar" :>
-       "v3" :>
-         "users" :>
-           "me" :>
-             "settings" :>
-               Capture "setting" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] Setting
-
--- | Watch for changes to Settings resources.
-type SettingsWatch =
-     "calendar" :>
-       "v3" :>
-         "users" :>
-           "me" :>
-             "settings" :>
-               "watch" :>
-                 QueryParam "syncToken" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "maxResults" Natural :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :> Post '[JSON] Channel
-
-type ChannelsAPI = ChannelsStop
-
--- | Stop watching resources through this channel
-type ChannelsStop =
-     "calendar" :>
-       "v3" :>
-         "channels" :>
-           "stop" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Post '[JSON] ()
-
-type CalendarsAPI =
-     CalendarsInsert :<|> CalendarsPatch :<|> CalendarsGet
-       :<|> CalendarsClear
-       :<|> CalendarsDelete
-       :<|> CalendarsUpdate
-
--- | Creates a secondary calendar.
-type CalendarsInsert =
-     "calendar" :>
-       "v3" :>
-         "calendars" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "alt" Text :> Post '[JSON] Calendar
-
--- | Updates metadata for a calendar. This method supports patch semantics.
-type CalendarsPatch =
-     "calendar" :>
-       "v3" :>
-         "calendars" :>
-           Capture "calendarId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Patch '[JSON] Calendar
-
--- | Returns metadata for a calendar.
-type CalendarsGet =
-     "calendar" :>
-       "v3" :>
-         "calendars" :>
-           Capture "calendarId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Get '[JSON] Calendar
-
--- | Clears a primary calendar. This operation deletes all events associated
--- with the primary calendar of an account.
-type CalendarsClear =
-     "calendar" :>
-       "v3" :>
-         "calendars" :>
-           Capture "calendarId" Text :>
-             "clear" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] ()
-
--- | Deletes a secondary calendar. Use calendars.clear for clearing all
--- events on primary calendars.
-type CalendarsDelete =
-     "calendar" :>
-       "v3" :>
-         "calendars" :>
-           Capture "calendarId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Updates metadata for a calendar.
-type CalendarsUpdate =
-     "calendar" :>
-       "v3" :>
-         "calendars" :>
-           Capture "calendarId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Put '[JSON] Calendar
-
-type EventsAPI =
-     EventsQuickAdd :<|> EventsInsert :<|> EventsList :<|>
-       EventsPatch
-       :<|> EventsGet
-       :<|> EventsInstances
-       :<|> EventsImport
-       :<|> EventsDelete
-       :<|> EventsUpdate
-       :<|> EventsMove
-       :<|> EventsWatch
-
--- | Creates an event based on a simple text string.
-type EventsQuickAdd =
-     "calendar" :>
-       "v3" :>
-         "calendars" :>
-           Capture "calendarId" Text :>
-             "events" :>
-               "quickAdd" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "text" Text :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "sendNotifications" Bool :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Post '[JSON] Event
-
--- | Creates an event.
-type EventsInsert =
-     "calendar" :>
-       "v3" :>
-         "calendars" :>
-           Capture "calendarId" Text :>
-             "events" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "maxAttendees" Natural :>
-                       QueryParam "key" Text :>
-                         QueryParam "sendNotifications" Bool :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "supportsAttachments" Bool :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Post '[JSON] Event
-
--- | Returns events on the specified calendar.
-type EventsList =
-     "calendar" :>
-       "v3" :>
-         "calendars" :>
-           Capture "calendarId" Text :>
-             "events" :>
-               QueryParam "syncToken" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "timeMin" UTCTime :>
-                       QueryParam "orderBy" Text :>
-                         QueryParam "singleEvents" Bool :>
-                           QueryParam "privateExtendedProperty" Text :>
-                             QueryParam "userIp" Text :>
-                               QueryParam "showDeleted" Bool :>
-                                 QueryParam "q" Text :>
-                                   QueryParam "sharedExtendedProperty" Text :>
-                                     QueryParam "maxAttendees" Natural :>
-                                       QueryParam "key" Text :>
-                                         QueryParam "iCalUID" Text :>
-                                           QueryParam "updatedMin" UTCTime :>
-                                             QueryParam "pageToken" Text :>
-                                               QueryParam "timeZone" Text :>
-                                                 QueryParam "oauth_token" Text
-                                                   :>
-                                                   QueryParam
-                                                     "showHiddenInvitations"
-                                                     Bool
-                                                     :>
-                                                     QueryParam "maxResults"
-                                                       Natural
-                                                       :>
-                                                       QueryParam
-                                                         "alwaysIncludeEmail"
-                                                         Bool
-                                                         :>
-                                                         QueryParam "timeMax"
-                                                           UTCTime
-                                                           :>
-                                                           QueryParam "fields"
-                                                             Text
-                                                             :>
-                                                             QueryParam "alt"
-                                                               Text
-                                                               :>
-                                                               Get '[JSON]
-                                                                 Events
-
--- | Updates an event. This method supports patch semantics.
-type EventsPatch =
-     "calendar" :>
-       "v3" :>
-         "calendars" :>
-           Capture "calendarId" Text :>
-             "events" :>
-               Capture "eventId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "maxAttendees" Natural :>
-                         QueryParam "key" Text :>
-                           QueryParam "sendNotifications" Bool :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "supportsAttachments" Bool :>
-                                 QueryParam "alwaysIncludeEmail" Bool :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "alt" Text :>
-                                       Patch '[JSON] Event
-
--- | Returns an event.
-type EventsGet =
-     "calendar" :>
-       "v3" :>
-         "calendars" :>
-           Capture "calendarId" Text :>
-             "events" :>
-               Capture "eventId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "maxAttendees" Natural :>
-                         QueryParam "key" Text :>
-                           QueryParam "timeZone" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "alwaysIncludeEmail" Bool :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :> Get '[JSON] Event
-
--- | Returns instances of the specified recurring event.
-type EventsInstances =
-     "calendar" :>
-       "v3" :>
-         "calendars" :>
-           Capture "calendarId" Text :>
-             "events" :>
-               Capture "eventId" Text :>
-                 "instances" :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "timeMin" UTCTime :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "showDeleted" Bool :>
-                             QueryParam "originalStart" Text :>
-                               QueryParam "maxAttendees" Natural :>
-                                 QueryParam "key" Text :>
-                                   QueryParam "pageToken" Text :>
-                                     QueryParam "timeZone" Text :>
-                                       QueryParam "oauth_token" Text :>
-                                         QueryParam "maxResults" Natural :>
-                                           QueryParam "alwaysIncludeEmail" Bool
-                                             :>
-                                             QueryParam "timeMax" UTCTime :>
-                                               QueryParam "fields" Text :>
-                                                 QueryParam "alt" Text :>
-                                                   Get '[JSON] Events
-
--- | Imports an event. This operation is used to add a private copy of an
--- existing event to a calendar.
-type EventsImport =
-     "calendar" :>
-       "v3" :>
-         "calendars" :>
-           Capture "calendarId" Text :>
-             "events" :>
-               "import" :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "supportsAttachments" Bool :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Post '[JSON] Event
-
--- | Deletes an event.
-type EventsDelete =
-     "calendar" :>
-       "v3" :>
-         "calendars" :>
-           Capture "calendarId" Text :>
-             "events" :>
-               Capture "eventId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "sendNotifications" Bool :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Updates an event.
-type EventsUpdate =
-     "calendar" :>
-       "v3" :>
-         "calendars" :>
-           Capture "calendarId" Text :>
-             "events" :>
-               Capture "eventId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "maxAttendees" Natural :>
-                         QueryParam "key" Text :>
-                           QueryParam "sendNotifications" Bool :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "supportsAttachments" Bool :>
-                                 QueryParam "alwaysIncludeEmail" Bool :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "alt" Text :> Put '[JSON] Event
-
--- | Moves an event to another calendar, i.e. changes an event\'s organizer.
-type EventsMove =
-     "calendar" :>
-       "v3" :>
-         "calendars" :>
-           Capture "calendarId" Text :>
-             "events" :>
-               Capture "eventId" Text :>
-                 "move" :>
-                   QueryParam "destination" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "sendNotifications" Bool :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :> Post '[JSON] Event
-
--- | Watch for changes to Events resources.
-type EventsWatch =
-     "calendar" :>
-       "v3" :>
-         "calendars" :>
-           Capture "calendarId" Text :>
-             "events" :>
-               "watch" :>
-                 QueryParam "syncToken" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "timeMin" UTCTime :>
-                         QueryParam "orderBy" Text :>
-                           QueryParam "singleEvents" Bool :>
-                             QueryParam "privateExtendedProperty" Text :>
-                               QueryParam "userIp" Text :>
-                                 QueryParam "showDeleted" Bool :>
-                                   QueryParam "q" Text :>
-                                     QueryParam "sharedExtendedProperty" Text :>
-                                       QueryParam "maxAttendees" Natural :>
-                                         QueryParam "key" Text :>
-                                           QueryParam "iCalUID" Text :>
-                                             QueryParam "updatedMin" UTCTime :>
-                                               QueryParam "pageToken" Text :>
-                                                 QueryParam "timeZone" Text :>
-                                                   QueryParam "oauth_token" Text
-                                                     :>
-                                                     QueryParam
-                                                       "showHiddenInvitations"
-                                                       Bool
-                                                       :>
-                                                       QueryParam "maxResults"
-                                                         Natural
-                                                         :>
-                                                         QueryParam
-                                                           "alwaysIncludeEmail"
-                                                           Bool
-                                                           :>
-                                                           QueryParam "timeMax"
-                                                             UTCTime
-                                                             :>
-                                                             QueryParam "fields"
-                                                               Text
-                                                               :>
-                                                               QueryParam "alt"
-                                                                 Text
-                                                                 :>
-                                                                 Post '[JSON]
-                                                                   Channel
-
-type CalendarListAPI =
-     CalendarListInsert :<|> CalendarListList :<|>
-       CalendarListPatch
-       :<|> CalendarListGet
-       :<|> CalendarListDelete
-       :<|> CalendarListUpdate
-       :<|> CalendarListWatch
-
--- | Adds an entry to the user\'s calendar list.
-type CalendarListInsert =
-     "calendar" :>
-       "v3" :>
-         "users" :>
-           "me" :>
-             "calendarList" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "colorRgbFormat" Bool :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Post '[JSON] CalendarListEntry
-
--- | Returns entries on the user\'s calendar list.
-type CalendarListList =
-     "calendar" :>
-       "v3" :>
-         "users" :>
-           "me" :>
-             "calendarList" :>
-               QueryParam "syncToken" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "minAccessRole" Text :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "showDeleted" Bool :>
-                           QueryParam "showHidden" Bool :>
-                             QueryParam "key" Text :>
-                               QueryParam "pageToken" Text :>
-                                 QueryParam "oauth_token" Text :>
-                                   QueryParam "maxResults" Natural :>
-                                     QueryParam "fields" Text :>
-                                       QueryParam "alt" Text :>
-                                         Get '[JSON] CalendarList
-
--- | Updates an entry on the user\'s calendar list. This method supports
--- patch semantics.
-type CalendarListPatch =
-     "calendar" :>
-       "v3" :>
-         "users" :>
-           "me" :>
-             "calendarList" :>
-               Capture "calendarId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "colorRgbFormat" Bool :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Patch '[JSON] CalendarListEntry
-
--- | Returns an entry on the user\'s calendar list.
-type CalendarListGet =
-     "calendar" :>
-       "v3" :>
-         "users" :>
-           "me" :>
-             "calendarList" :>
-               Capture "calendarId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Get '[JSON] CalendarListEntry
-
--- | Deletes an entry on the user\'s calendar list.
-type CalendarListDelete =
-     "calendar" :>
-       "v3" :>
-         "users" :>
-           "me" :>
-             "calendarList" :>
-               Capture "calendarId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Updates an entry on the user\'s calendar list.
-type CalendarListUpdate =
-     "calendar" :>
-       "v3" :>
-         "users" :>
-           "me" :>
-             "calendarList" :>
-               Capture "calendarId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "colorRgbFormat" Bool :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Put '[JSON] CalendarListEntry
-
--- | Watch for changes to CalendarList resources.
-type CalendarListWatch =
-     "calendar" :>
-       "v3" :>
-         "users" :>
-           "me" :>
-             "calendarList" :>
-               "watch" :>
-                 QueryParam "syncToken" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "minAccessRole" Text :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "showDeleted" Bool :>
-                             QueryParam "showHidden" Bool :>
-                               QueryParam "key" Text :>
-                                 QueryParam "pageToken" Text :>
-                                   QueryParam "oauth_token" Text :>
-                                     QueryParam "maxResults" Natural :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "alt" Text :>
-                                           Post '[JSON] Channel
-
-type AclAPI =
-     AclInsert :<|> AclList :<|> AclPatch :<|> AclGet :<|>
-       AclDelete
-       :<|> AclUpdate
-       :<|> AclWatch
-
--- | Creates an access control rule.
-type AclInsert =
-     "calendar" :>
-       "v3" :>
-         "calendars" :>
-           Capture "calendarId" Text :>
-             "acl" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] AclRule
-
--- | Returns the rules in the access control list for the calendar.
-type AclList =
-     "calendar" :>
-       "v3" :>
-         "calendars" :>
-           Capture "calendarId" Text :>
-             "acl" :>
-               QueryParam "syncToken" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "showDeleted" Bool :>
-                         QueryParam "key" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "maxResults" Natural :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :> Get '[JSON] Acl
-
--- | Updates an access control rule. This method supports patch semantics.
-type AclPatch =
-     "calendar" :>
-       "v3" :>
-         "calendars" :>
-           Capture "calendarId" Text :>
-             "acl" :>
-               Capture "ruleId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Patch '[JSON] AclRule
-
--- | Returns an access control rule.
-type AclGet =
-     "calendar" :>
-       "v3" :>
-         "calendars" :>
-           Capture "calendarId" Text :>
-             "acl" :>
-               Capture "ruleId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] AclRule
-
--- | Deletes an access control rule.
-type AclDelete =
-     "calendar" :>
-       "v3" :>
-         "calendars" :>
-           Capture "calendarId" Text :>
-             "acl" :>
-               Capture "ruleId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Updates an access control rule.
-type AclUpdate =
-     "calendar" :>
-       "v3" :>
-         "calendars" :>
-           Capture "calendarId" Text :>
-             "acl" :>
-               Capture "ruleId" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Put '[JSON] AclRule
-
--- | Watch for changes to ACL resources.
-type AclWatch =
-     "calendar" :>
-       "v3" :>
-         "calendars" :>
-           Capture "calendarId" Text :>
-             "acl" :>
-               "watch" :>
-                 QueryParam "syncToken" Text :>
-                   QueryParam "quotaUser" Text :>
-                     QueryParam "prettyPrint" Bool :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "showDeleted" Bool :>
-                           QueryParam "key" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "maxResults" Natural :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "alt" Text :>
-                                       Post '[JSON] Channel
-
-type ColorsAPI = ColorsGet
-
--- | Returns the color definitions for calendars and events.
-type ColorsGet =
-     "calendar" :>
-       "v3" :>
-         "colors" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "alt" Text :> Get '[JSON] Colors
-
-type FreebusyAPI = FreebusyQuery
-
--- | Returns free\/busy information for a set of calendars.
-type FreebusyQuery =
-     "calendar" :>
-       "v3" :>
-         "freeBusy" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "alt" Text :>
-                         Post '[JSON] FreeBusyResponse
+appsCalendar :: Proxy AppsCalendar
+appsCalendar = Proxy

@@ -17,24 +17,51 @@
 -- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference>
 module Network.Google.Games.Configuration
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** Google Play Game Services Publishing API
       GamesConfiguration
-    , ImageConfigurationsAPI
-    , ImageConfigurationsUpload
-    , LeaderboardConfigurationsAPI
-    , LeaderboardConfigurationsInsert
-    , LeaderboardConfigurationsList
-    , LeaderboardConfigurationsPatch
-    , LeaderboardConfigurationsGet
-    , LeaderboardConfigurationsDelete
-    , LeaderboardConfigurationsUpdate
-    , AchievementConfigurationsAPI
-    , AchievementConfigurationsInsert
-    , AchievementConfigurationsList
-    , AchievementConfigurationsPatch
-    , AchievementConfigurationsGet
-    , AchievementConfigurationsDelete
-    , AchievementConfigurationsUpdate
+    , gamesConfiguration
+    , gamesConfigurationURL
+
+    -- ** gamesConfiguration.achievementConfigurations.delete
+    , module Network.Google.API.GamesConfiguration.AchievementConfigurations.Delete
+
+    -- ** gamesConfiguration.achievementConfigurations.get
+    , module Network.Google.API.GamesConfiguration.AchievementConfigurations.Get
+
+    -- ** gamesConfiguration.achievementConfigurations.insert
+    , module Network.Google.API.GamesConfiguration.AchievementConfigurations.Insert
+
+    -- ** gamesConfiguration.achievementConfigurations.list
+    , module Network.Google.API.GamesConfiguration.AchievementConfigurations.List
+
+    -- ** gamesConfiguration.achievementConfigurations.patch
+    , module Network.Google.API.GamesConfiguration.AchievementConfigurations.Patch
+
+    -- ** gamesConfiguration.achievementConfigurations.update
+    , module Network.Google.API.GamesConfiguration.AchievementConfigurations.Update
+
+    -- ** gamesConfiguration.imageConfigurations.upload
+    , module Network.Google.API.GamesConfiguration.ImageConfigurations.Upload
+
+    -- ** gamesConfiguration.leaderboardConfigurations.delete
+    , module Network.Google.API.GamesConfiguration.LeaderboardConfigurations.Delete
+
+    -- ** gamesConfiguration.leaderboardConfigurations.get
+    , module Network.Google.API.GamesConfiguration.LeaderboardConfigurations.Get
+
+    -- ** gamesConfiguration.leaderboardConfigurations.insert
+    , module Network.Google.API.GamesConfiguration.LeaderboardConfigurations.Insert
+
+    -- ** gamesConfiguration.leaderboardConfigurations.list
+    , module Network.Google.API.GamesConfiguration.LeaderboardConfigurations.List
+
+    -- ** gamesConfiguration.leaderboardConfigurations.patch
+    , module Network.Google.API.GamesConfiguration.LeaderboardConfigurations.Patch
+
+    -- ** gamesConfiguration.leaderboardConfigurations.update
+    , module Network.Google.API.GamesConfiguration.LeaderboardConfigurations.Update
 
     -- * Types
 
@@ -50,15 +77,25 @@ module Network.Google.Games.Configuration
     , acDraft
     , acId
 
-    -- ** AchievementConfigurationDetail
-    , AchievementConfigurationDetail
-    , achievementConfigurationDetail
-    , acdKind
-    , acdSortRank
-    , acdName
-    , acdPointValue
-    , acdIconUrl
-    , acdDescription
+    -- ** Alt
+    , Alt (..)
+
+    -- ** GamesNumberFormatConfiguration
+    , GamesNumberFormatConfiguration
+    , gamesNumberFormatConfiguration
+    , gnfcSuffix
+    , gnfcCurrencyCode
+    , gnfcNumberFormatType
+    , gnfcNumDecimalPlaces
+
+    -- ** LeaderboardConfigurationDetail
+    , LeaderboardConfigurationDetail
+    , leaderboardConfigurationDetail
+    , lcdKind
+    , lcdScoreFormat
+    , lcdSortRank
+    , lcdName
+    , lcdIconUrl
 
     -- ** AchievementConfigurationListResponse
     , AchievementConfigurationListResponse
@@ -77,13 +114,8 @@ module Network.Google.Games.Configuration
     , gnacZero
     , gnacMany
 
-    -- ** GamesNumberFormatConfiguration
-    , GamesNumberFormatConfiguration
-    , gamesNumberFormatConfiguration
-    , gnfcSuffix
-    , gnfcCurrencyCode
-    , gnfcNumberFormatType
-    , gnfcNumDecimalPlaces
+    -- ** ImageConfigurationsUpload'ImageType
+    , ImageConfigurationsUpload'ImageType (..)
 
     -- ** ImageConfiguration
     , ImageConfiguration
@@ -92,6 +124,36 @@ module Network.Google.Games.Configuration
     , icKind
     , icUrl
     , icImageType
+
+    -- ** LocalizedString
+    , LocalizedString
+    , localizedString
+    , lsKind
+    , lsLocale
+    , lsValue
+
+    -- ** LeaderboardConfigurationListResponse
+    , LeaderboardConfigurationListResponse
+    , leaderboardConfigurationListResponse
+    , lclrNextPageToken
+    , lclrKind
+    , lclrItems
+
+    -- ** AchievementConfigurationDetail
+    , AchievementConfigurationDetail
+    , achievementConfigurationDetail
+    , acdKind
+    , acdSortRank
+    , acdName
+    , acdPointValue
+    , acdIconUrl
+    , acdDescription
+
+    -- ** LocalizedStringBundle
+    , LocalizedStringBundle
+    , localizedStringBundle
+    , lsbKind
+    , lsbTranslations
 
     -- ** LeaderboardConfiguration
     , LeaderboardConfiguration
@@ -104,37 +166,21 @@ module Network.Google.Games.Configuration
     , lcDraft
     , lcId
     , lcScoreOrder
-
-    -- ** LeaderboardConfigurationDetail
-    , LeaderboardConfigurationDetail
-    , leaderboardConfigurationDetail
-    , lcdKind
-    , lcdScoreFormat
-    , lcdSortRank
-    , lcdName
-    , lcdIconUrl
-
-    -- ** LeaderboardConfigurationListResponse
-    , LeaderboardConfigurationListResponse
-    , leaderboardConfigurationListResponse
-    , lclrNextPageToken
-    , lclrKind
-    , lclrItems
-
-    -- ** LocalizedString
-    , LocalizedString
-    , localizedString
-    , lsKind
-    , lsLocale
-    , lsValue
-
-    -- ** LocalizedStringBundle
-    , LocalizedStringBundle
-    , localizedStringBundle
-    , lsbKind
-    , lsbTranslations
     ) where
 
+import           Network.Google.API.GamesConfiguration.AchievementConfigurations.Delete
+import           Network.Google.API.GamesConfiguration.AchievementConfigurations.Get
+import           Network.Google.API.GamesConfiguration.AchievementConfigurations.Insert
+import           Network.Google.API.GamesConfiguration.AchievementConfigurations.List
+import           Network.Google.API.GamesConfiguration.AchievementConfigurations.Patch
+import           Network.Google.API.GamesConfiguration.AchievementConfigurations.Update
+import           Network.Google.API.GamesConfiguration.ImageConfigurations.Upload
+import           Network.Google.API.GamesConfiguration.LeaderboardConfigurations.Delete
+import           Network.Google.API.GamesConfiguration.LeaderboardConfigurations.Get
+import           Network.Google.API.GamesConfiguration.LeaderboardConfigurations.Insert
+import           Network.Google.API.GamesConfiguration.LeaderboardConfigurations.List
+import           Network.Google.API.GamesConfiguration.LeaderboardConfigurations.Patch
+import           Network.Google.API.GamesConfiguration.LeaderboardConfigurations.Update
 import           Network.Google.Games.Configuration.Types
 import           Network.Google.Prelude
 
@@ -143,234 +189,19 @@ TODO
 -}
 
 type GamesConfiguration =
-     ImageConfigurationsAPI :<|>
-       LeaderboardConfigurationsAPI
-       :<|> AchievementConfigurationsAPI
+     AchievementConfigurationsListAPI :<|>
+       LeaderboardConfigurationsListAPI
+       :<|> AchievementConfigurationsUpdateAPI
+       :<|> LeaderboardConfigurationsUpdateAPI
+       :<|> AchievementConfigurationsInsertAPI
+       :<|> LeaderboardConfigurationsInsertAPI
+       :<|> LeaderboardConfigurationsDeleteAPI
+       :<|> AchievementConfigurationsDeleteAPI
+       :<|> AchievementConfigurationsGetAPI
+       :<|> LeaderboardConfigurationsGetAPI
+       :<|> AchievementConfigurationsPatchAPI
+       :<|> LeaderboardConfigurationsPatchAPI
+       :<|> ImageConfigurationsUploadAPI
 
-type ImageConfigurationsAPI =
-     ImageConfigurationsUpload
-
--- | Uploads an image for a resource with the given ID and image type.
-type ImageConfigurationsUpload =
-     "games" :>
-       "v1configuration" :>
-         "images" :>
-           Capture "resourceId" Text :>
-             "imageType" :>
-               Capture "imageType" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Post '[JSON] ImageConfiguration
-
-type LeaderboardConfigurationsAPI =
-     LeaderboardConfigurationsInsert :<|>
-       LeaderboardConfigurationsList
-       :<|> LeaderboardConfigurationsPatch
-       :<|> LeaderboardConfigurationsGet
-       :<|> LeaderboardConfigurationsDelete
-       :<|> LeaderboardConfigurationsUpdate
-
--- | Insert a new leaderboard configuration in this application.
-type LeaderboardConfigurationsInsert =
-     "games" :>
-       "v1configuration" :>
-         "applications" :>
-           Capture "applicationId" Text :>
-             "leaderboards" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Post '[JSON] LeaderboardConfiguration
-
--- | Returns a list of the leaderboard configurations in this application.
-type LeaderboardConfigurationsList =
-     "games" :>
-       "v1configuration" :>
-         "applications" :>
-           Capture "applicationId" Text :>
-             "leaderboards" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "maxResults" Natural :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Get '[JSON]
-                                   LeaderboardConfigurationListResponse
-
--- | Update the metadata of the leaderboard configuration with the given ID.
--- This method supports patch semantics.
-type LeaderboardConfigurationsPatch =
-     "games" :>
-       "v1configuration" :>
-         "leaderboards" :>
-           Capture "leaderboardId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :>
-                           Patch '[JSON] LeaderboardConfiguration
-
--- | Retrieves the metadata of the leaderboard configuration with the given
--- ID.
-type LeaderboardConfigurationsGet =
-     "games" :>
-       "v1configuration" :>
-         "leaderboards" :>
-           Capture "leaderboardId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :>
-                           Get '[JSON] LeaderboardConfiguration
-
--- | Delete the leaderboard configuration with the given ID.
-type LeaderboardConfigurationsDelete =
-     "games" :>
-       "v1configuration" :>
-         "leaderboards" :>
-           Capture "leaderboardId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Update the metadata of the leaderboard configuration with the given ID.
-type LeaderboardConfigurationsUpdate =
-     "games" :>
-       "v1configuration" :>
-         "leaderboards" :>
-           Capture "leaderboardId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :>
-                           Put '[JSON] LeaderboardConfiguration
-
-type AchievementConfigurationsAPI =
-     AchievementConfigurationsInsert :<|>
-       AchievementConfigurationsList
-       :<|> AchievementConfigurationsPatch
-       :<|> AchievementConfigurationsGet
-       :<|> AchievementConfigurationsDelete
-       :<|> AchievementConfigurationsUpdate
-
--- | Insert a new achievement configuration in this application.
-type AchievementConfigurationsInsert =
-     "games" :>
-       "v1configuration" :>
-         "applications" :>
-           Capture "applicationId" Text :>
-             "achievements" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Post '[JSON] AchievementConfiguration
-
--- | Returns a list of the achievement configurations in this application.
-type AchievementConfigurationsList =
-     "games" :>
-       "v1configuration" :>
-         "applications" :>
-           Capture "applicationId" Text :>
-             "achievements" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "maxResults" Natural :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Get '[JSON]
-                                   AchievementConfigurationListResponse
-
--- | Update the metadata of the achievement configuration with the given ID.
--- This method supports patch semantics.
-type AchievementConfigurationsPatch =
-     "games" :>
-       "v1configuration" :>
-         "achievements" :>
-           Capture "achievementId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :>
-                           Patch '[JSON] AchievementConfiguration
-
--- | Retrieves the metadata of the achievement configuration with the given
--- ID.
-type AchievementConfigurationsGet =
-     "games" :>
-       "v1configuration" :>
-         "achievements" :>
-           Capture "achievementId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :>
-                           Get '[JSON] AchievementConfiguration
-
--- | Delete the achievement configuration with the given ID.
-type AchievementConfigurationsDelete =
-     "games" :>
-       "v1configuration" :>
-         "achievements" :>
-           Capture "achievementId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Delete '[JSON] ()
-
--- | Update the metadata of the achievement configuration with the given ID.
-type AchievementConfigurationsUpdate =
-     "games" :>
-       "v1configuration" :>
-         "achievements" :>
-           Capture "achievementId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :>
-                           Put '[JSON] AchievementConfiguration
+gamesConfiguration :: Proxy GamesConfiguration
+gamesConfiguration = Proxy

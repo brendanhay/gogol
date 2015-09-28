@@ -17,121 +17,177 @@
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference>
 module Network.Google.Games
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** Google Play Game Services API
       Games
-    , RoomsAPI
-    , RoomsList
-    , RoomsJoin
-    , RoomsGet
-    , RoomsCreate
-    , RoomsDecline
-    , RoomsDismiss
-    , RoomsReportStatus
-    , RoomsLeave
-    , LeaderboardsAPI
-    , LeaderboardsList
-    , LeaderboardsGet
-    , QuestMilestonesAPI
-    , QuestMilestonesClaim
-    , MetagameAPI
-    , MetagameListCategoriesByPlayer
-    , MetagameGetMetagameConfig
-    , AchievementDefinitionsAPI
-    , AchievementDefinitionsList
-    , AchievementsAPI
-    , AchievementsList
-    , AchievementsUnlock
-    , AchievementsReveal
-    , AchievementsSetStepsAtLeast
-    , AchievementsUpdateMultiple
-    , AchievementsIncrement
-    , SnapshotsAPI
-    , SnapshotsList
-    , SnapshotsGet
-    , EventsAPI
-    , EventsListDefinitions
-    , EventsListByPlayer
-    , EventsRecord
-    , QuestsAPI
-    , QuestsList
-    , QuestsAccept
-    , PlayersAPI
-    , PlayersList
-    , PlayersGet
-    , RevisionsAPI
-    , RevisionsCheck
-    , ScoresAPI
-    , ScoresList
-    , ScoresGet
-    , ScoresSubmit
-    , ScoresSubmitMultiple
-    , ScoresListWindow
-    , PushtokensAPI
-    , PushtokensRemove
-    , PushtokensUpdate
-    , TurnBasedMatchesAPI
-    , TurnBasedMatchesRematch
-    , TurnBasedMatchesList
-    , TurnBasedMatchesJoin
-    , TurnBasedMatchesFinish
-    , TurnBasedMatchesTakeTurn
-    , TurnBasedMatchesLeaveTurn
-    , TurnBasedMatchesGet
-    , TurnBasedMatchesCreate
-    , TurnBasedMatchesDecline
-    , TurnBasedMatchesSync
-    , TurnBasedMatchesDismiss
-    , TurnBasedMatchesLeave
-    , TurnBasedMatchesCancel
-    , ApplicationsAPI
-    , ApplicationsGet
-    , ApplicationsPlayed
+    , games
+    , gamesURL
+
+    -- ** games.achievementDefinitions.list
+    , module Network.Google.API.Games.AchievementDefinitions.List
+
+    -- ** games.achievements.increment
+    , module Network.Google.API.Games.Achievements.Increment
+
+    -- ** games.achievements.list
+    , module Network.Google.API.Games.Achievements.List
+
+    -- ** games.achievements.reveal
+    , module Network.Google.API.Games.Achievements.Reveal
+
+    -- ** games.achievements.setStepsAtLeast
+    , module Network.Google.API.Games.Achievements.SetStepsAtLeast
+
+    -- ** games.achievements.unlock
+    , module Network.Google.API.Games.Achievements.Unlock
+
+    -- ** games.achievements.updateMultiple
+    , module Network.Google.API.Games.Achievements.UpdateMultiple
+
+    -- ** games.applications.get
+    , module Network.Google.API.Games.Applications.Get
+
+    -- ** games.applications.played
+    , module Network.Google.API.Games.Applications.Played
+
+    -- ** games.events.listByPlayer
+    , module Network.Google.API.Games.Events.ListByPlayer
+
+    -- ** games.events.listDefinitions
+    , module Network.Google.API.Games.Events.ListDefinitions
+
+    -- ** games.events.record
+    , module Network.Google.API.Games.Events.Record
+
+    -- ** games.leaderboards.get
+    , module Network.Google.API.Games.Leaderboards.Get
+
+    -- ** games.leaderboards.list
+    , module Network.Google.API.Games.Leaderboards.List
+
+    -- ** games.metagame.getMetagameConfig
+    , module Network.Google.API.Games.Metagame.GetMetagameConfig
+
+    -- ** games.metagame.listCategoriesByPlayer
+    , module Network.Google.API.Games.Metagame.ListCategoriesByPlayer
+
+    -- ** games.players.get
+    , module Network.Google.API.Games.Players.Get
+
+    -- ** games.players.list
+    , module Network.Google.API.Games.Players.List
+
+    -- ** games.pushtokens.remove
+    , module Network.Google.API.Games.Pushtokens.Remove
+
+    -- ** games.pushtokens.update
+    , module Network.Google.API.Games.Pushtokens.Update
+
+    -- ** games.questMilestones.claim
+    , module Network.Google.API.Games.QuestMilestones.Claim
+
+    -- ** games.quests.accept
+    , module Network.Google.API.Games.Quests.Accept
+
+    -- ** games.quests.list
+    , module Network.Google.API.Games.Quests.List
+
+    -- ** games.revisions.check
+    , module Network.Google.API.Games.Revisions.Check
+
+    -- ** games.rooms.create
+    , module Network.Google.API.Games.Rooms.Create
+
+    -- ** games.rooms.decline
+    , module Network.Google.API.Games.Rooms.Decline
+
+    -- ** games.rooms.dismiss
+    , module Network.Google.API.Games.Rooms.Dismiss
+
+    -- ** games.rooms.get
+    , module Network.Google.API.Games.Rooms.Get
+
+    -- ** games.rooms.join
+    , module Network.Google.API.Games.Rooms.Join
+
+    -- ** games.rooms.leave
+    , module Network.Google.API.Games.Rooms.Leave
+
+    -- ** games.rooms.list
+    , module Network.Google.API.Games.Rooms.List
+
+    -- ** games.rooms.reportStatus
+    , module Network.Google.API.Games.Rooms.ReportStatus
+
+    -- ** games.scores.get
+    , module Network.Google.API.Games.Scores.Get
+
+    -- ** games.scores.list
+    , module Network.Google.API.Games.Scores.List
+
+    -- ** games.scores.listWindow
+    , module Network.Google.API.Games.Scores.ListWindow
+
+    -- ** games.scores.submit
+    , module Network.Google.API.Games.Scores.Submit
+
+    -- ** games.scores.submitMultiple
+    , module Network.Google.API.Games.Scores.SubmitMultiple
+
+    -- ** games.snapshots.get
+    , module Network.Google.API.Games.Snapshots.Get
+
+    -- ** games.snapshots.list
+    , module Network.Google.API.Games.Snapshots.List
+
+    -- ** games.turnBasedMatches.cancel
+    , module Network.Google.API.Games.TurnBasedMatches.Cancel
+
+    -- ** games.turnBasedMatches.create
+    , module Network.Google.API.Games.TurnBasedMatches.Create
+
+    -- ** games.turnBasedMatches.decline
+    , module Network.Google.API.Games.TurnBasedMatches.Decline
+
+    -- ** games.turnBasedMatches.dismiss
+    , module Network.Google.API.Games.TurnBasedMatches.Dismiss
+
+    -- ** games.turnBasedMatches.finish
+    , module Network.Google.API.Games.TurnBasedMatches.Finish
+
+    -- ** games.turnBasedMatches.get
+    , module Network.Google.API.Games.TurnBasedMatches.Get
+
+    -- ** games.turnBasedMatches.join
+    , module Network.Google.API.Games.TurnBasedMatches.Join
+
+    -- ** games.turnBasedMatches.leave
+    , module Network.Google.API.Games.TurnBasedMatches.Leave
+
+    -- ** games.turnBasedMatches.leaveTurn
+    , module Network.Google.API.Games.TurnBasedMatches.LeaveTurn
+
+    -- ** games.turnBasedMatches.list
+    , module Network.Google.API.Games.TurnBasedMatches.List
+
+    -- ** games.turnBasedMatches.rematch
+    , module Network.Google.API.Games.TurnBasedMatches.Rematch
+
+    -- ** games.turnBasedMatches.sync
+    , module Network.Google.API.Games.TurnBasedMatches.Sync
+
+    -- ** games.turnBasedMatches.takeTurn
+    , module Network.Google.API.Games.TurnBasedMatches.TakeTurn
 
     -- * Types
 
-    -- ** AchievementDefinition
-    , AchievementDefinition
-    , achievementDefinition
-    , adAchievementType
-    , adFormattedTotalSteps
-    , adRevealedIconUrl
-    , adKind
-    , adExperiencePoints
-    , adInitialState
-    , adName
-    , adId
-    , adIsUnlockedIconUrlDefault
-    , adTotalSteps
-    , adDescription
-    , adIsRevealedIconUrlDefault
-    , adUnlockedIconUrl
-
-    -- ** AchievementDefinitionsListResponse
-    , AchievementDefinitionsListResponse
-    , achievementDefinitionsListResponse
-    , adlrNextPageToken
-    , adlrKind
-    , adlrItems
-
-    -- ** AchievementIncrementResponse
-    , AchievementIncrementResponse
-    , achievementIncrementResponse
-    , airKind
-    , airNewlyUnlocked
-    , airCurrentSteps
-
-    -- ** AchievementRevealResponse
-    , AchievementRevealResponse
-    , achievementRevealResponse
-    , arrKind
-    , arrCurrentState
-
-    -- ** AchievementSetStepsAtLeastResponse
-    , AchievementSetStepsAtLeastResponse
-    , achievementSetStepsAtLeastResponse
-    , assalrKind
-    , assalrNewlyUnlocked
-    , assalrCurrentSteps
+    -- ** EventUpdateRequest
+    , EventUpdateRequest
+    , eventUpdateRequest
+    , eurUpdateCount
+    , eurKind
+    , eurDefinitionId
 
     -- ** AchievementUnlockResponse
     , AchievementUnlockResponse
@@ -139,17 +195,52 @@ module Network.Google.Games
     , aurKind
     , aurNewlyUnlocked
 
+    -- ** PlayerAchievement
+    , PlayerAchievement
+    , playerAchievement
+    , paKind
+    , paAchievementState
+    , paFormattedCurrentStepsString
+    , paExperiencePoints
+    , paId
+    , paCurrentSteps
+    , paLastUpdatedTimestamp
+
+    -- ** ScoresList'TimeSpan
+    , ScoresList'TimeSpan (..)
+
+    -- ** ApplicationsGet'PlatformType
+    , ApplicationsGet'PlatformType (..)
+
+    -- ** LeaderboardScoreRank
+    , LeaderboardScoreRank
+    , leaderboardScoreRank
+    , lsrNumScores
+    , lsrKind
+    , lsrFormattedRank
+    , lsrFormattedNumScores
+    , lsrRank
+
     -- ** AchievementUpdateMultipleRequest
     , AchievementUpdateMultipleRequest
     , achievementUpdateMultipleRequest
     , aumrKind
     , aumrUpdates
 
-    -- ** AchievementUpdateMultipleResponse
-    , AchievementUpdateMultipleResponse
-    , achievementUpdateMultipleResponse
-    , aumruKind
-    , aumruUpdatedAchievements
+    -- ** RoomP2PStatuses
+    , RoomP2PStatuses
+    , roomP2PStatuses
+    , rppsKind
+    , rppsUpdates
+
+    -- ** ImageAsset
+    , ImageAsset
+    , imageAsset
+    , iaHeight
+    , iaKind
+    , iaUrl
+    , iaWidth
+    , iaName
 
     -- ** AchievementUpdateRequest
     , AchievementUpdateRequest
@@ -160,31 +251,30 @@ module Network.Google.Games
     , aSetStepsAtLeastPayload
     , aIncrementPayload
 
-    -- ** AchievementUpdateResponse
-    , AchievementUpdateResponse
-    , achievementUpdateResponse
-    , achUpdateOccurred
-    , achAchievementId
-    , achKind
-    , achCurrentState
-    , achNewlyUnlocked
-    , achCurrentSteps
+    -- ** RoomAutoMatchStatus
+    , RoomAutoMatchStatus
+    , roomAutoMatchStatus
+    , ramsKind
+    , ramsWaitEstimateSeconds
 
-    -- ** AggregateStats
-    , AggregateStats
-    , aggregateStats
-    , asMax
-    , asKind
-    , asCount
-    , asMin
-    , asSum
+    -- ** PlayerScoreListResponse
+    , PlayerScoreListResponse
+    , playerScoreListResponse
+    , pslrSubmittedScores
+    , pslrKind
 
-    -- ** AnonymousPlayer
-    , AnonymousPlayer
-    , anonymousPlayer
-    , apAvatarImageUrl
-    , apKind
-    , apDisplayName
+    -- ** PlayerLeaderboardScore
+    , PlayerLeaderboardScore
+    , playerLeaderboardScore
+    , plsScoreTag
+    , plsScoreString
+    , plsKind
+    , plsScoreValue
+    , plsTimeSpan
+    , plsPublicRank
+    , plsSocialRank
+    , plsLeaderboardId
+    , plsWriteTimestamp
 
     -- ** Application
     , Application
@@ -203,6 +293,15 @@ module Network.Google.Games
     , appDescription
     , appLastUpdatedTimestamp
 
+    -- ** TurnBasedMatchTurn
+    , TurnBasedMatchTurn
+    , turnBasedMatchTurn
+    , tbmtResults
+    , tbmtKind
+    , tbmtData
+    , tbmtPendingParticipantId
+    , tbmtMatchVersion
+
     -- ** ApplicationCategory
     , ApplicationCategory
     , applicationCategory
@@ -210,19 +309,71 @@ module Network.Google.Games
     , acKind
     , acPrimary
 
-    -- ** Category
-    , Category
-    , category
-    , cKind
-    , cCategory
-    , cExperiencePoints
+    -- ** NetworkDiagnostics
+    , NetworkDiagnostics
+    , networkDiagnostics
+    , ndAndroidNetworkType
+    , ndKind
+    , ndNetworkOperatorCode
+    , ndNetworkOperatorName
+    , ndRegistrationLatencyMillis
+    , ndIosNetworkType
+    , ndAndroidNetworkSubtype
 
-    -- ** CategoryListResponse
-    , CategoryListResponse
-    , categoryListResponse
-    , clrNextPageToken
-    , clrKind
-    , clrItems
+    -- ** Alt
+    , Alt (..)
+
+    -- ** AchievementRevealResponse
+    , AchievementRevealResponse
+    , achievementRevealResponse
+    , arrKind
+    , arrCurrentState
+
+    -- ** AchievementSetStepsAtLeastResponse
+    , AchievementSetStepsAtLeastResponse
+    , achievementSetStepsAtLeastResponse
+    , assalrKind
+    , assalrNewlyUnlocked
+    , assalrCurrentSteps
+
+    -- ** AchievementIncrementResponse
+    , AchievementIncrementResponse
+    , achievementIncrementResponse
+    , airKind
+    , airNewlyUnlocked
+    , airCurrentSteps
+
+    -- ** TurnBasedMatchResults
+    , TurnBasedMatchResults
+    , turnBasedMatchResults
+    , tbmrResults
+    , tbmrKind
+    , tbmrData
+    , tbmrMatchVersion
+
+    -- ** Played
+    , Played
+    , played
+    , pKind
+    , pAutoMatched
+    , pTimeMillis
+
+    -- ** MetagameListCategoriesByPlayer'Collection
+    , MetagameListCategoriesByPlayer'Collection (..)
+
+    -- ** RoomLeaveRequest
+    , RoomLeaveRequest
+    , roomLeaveRequest
+    , rlrKind
+    , rlrReason
+    , rlrLeaveDiagnostics
+
+    -- ** PlayerAchievementListResponse
+    , PlayerAchievementListResponse
+    , playerAchievementListResponse
+    , palrNextPageToken
+    , palrKind
+    , palrItems
 
     -- ** EventBatchRecordFailure
     , EventBatchRecordFailure
@@ -230,52 +381,6 @@ module Network.Google.Games
     , ebrfKind
     , ebrfRange
     , ebrfFailureCause
-
-    -- ** EventChild
-    , EventChild
-    , eventChild
-    , ecKind
-    , ecChildId
-
-    -- ** EventDefinition
-    , EventDefinition
-    , eventDefinition
-    , edIsDefaultImageUrl
-    , edKind
-    , edVisibility
-    , edImageUrl
-    , edDisplayName
-    , edId
-    , edChildEvents
-    , edDescription
-
-    -- ** EventDefinitionListResponse
-    , EventDefinitionListResponse
-    , eventDefinitionListResponse
-    , edlrNextPageToken
-    , edlrKind
-    , edlrItems
-
-    -- ** EventPeriodRange
-    , EventPeriodRange
-    , eventPeriodRange
-    , eprKind
-    , eprPeriodStartMillis
-    , eprPeriodEndMillis
-
-    -- ** EventPeriodUpdate
-    , EventPeriodUpdate
-    , eventPeriodUpdate
-    , epuKind
-    , epuTimePeriod
-    , epuUpdates
-
-    -- ** EventRecordFailure
-    , EventRecordFailure
-    , eventRecordFailure
-    , erfKind
-    , erfFailureCause
-    , erfEventId
 
     -- ** EventRecordRequest
     , EventRecordRequest
@@ -285,20 +390,99 @@ module Network.Google.Games
     , errCurrentTimeMillis
     , errTimePeriods
 
-    -- ** EventUpdateRequest
-    , EventUpdateRequest
-    , eventUpdateRequest
-    , eurUpdateCount
-    , eurKind
-    , eurDefinitionId
+    -- ** PushTokenId
+    , PushTokenId
+    , pushTokenId
+    , ptiIos
+    , ptiKind
 
-    -- ** EventUpdateResponse
-    , EventUpdateResponse
-    , eventUpdateResponse
-    , ePlayerEvents
-    , eBatchFailures
-    , eEventFailures
-    , eKind
+    -- ** ScoresListWindow'TimeSpan
+    , ScoresListWindow'TimeSpan (..)
+
+    -- ** ScoreSubmission
+    , ScoreSubmission
+    , scoreSubmission
+    , ssSignature
+    , ssScoreTag
+    , ssScore
+    , ssKind
+    , ssLeaderboardId
+
+    -- ** EventPeriodUpdate
+    , EventPeriodUpdate
+    , eventPeriodUpdate
+    , epuKind
+    , epuTimePeriod
+    , epuUpdates
+
+    -- ** QuestMilestone
+    , QuestMilestone
+    , questMilestone
+    , qmState
+    , qmKind
+    , qmId
+    , qmCompletionRewardData
+    , qmCriteria
+
+    -- ** TurnBasedMatchSync
+    , TurnBasedMatchSync
+    , turnBasedMatchSync
+    , tbmsMoreAvailable
+    , tbmsNextPageToken
+    , tbmsKind
+    , tbmsItems
+
+    -- ** RoomLeaveDiagnostics
+    , RoomLeaveDiagnostics
+    , roomLeaveDiagnostics
+    , rldPeerSession
+    , rldAndroidNetworkType
+    , rldKind
+    , rldNetworkOperatorCode
+    , rldNetworkOperatorName
+    , rldSocketsUsed
+    , rldIosNetworkType
+    , rldAndroidNetworkSubtype
+
+    -- ** PeerSessionDiagnostics
+    , PeerSessionDiagnostics
+    , peerSessionDiagnostics
+    , psdConnectedTimestampMillis
+    , psdParticipantId
+    , psdKind
+    , psdUnreliableChannel
+    , psdReliableChannel
+
+    -- ** AggregateStats
+    , AggregateStats
+    , aggregateStats
+    , asMax
+    , asKind
+    , asCount
+    , asMin
+    , asSum
+
+    -- ** RoomAutoMatchingCriteria
+    , RoomAutoMatchingCriteria
+    , roomAutoMatchingCriteria
+    , ramcKind
+    , ramcExclusiveBitmask
+    , ramcMaxAutoMatchingPlayers
+    , ramcMinAutoMatchingPlayers
+
+    -- ** TurnBasedMatchRematch
+    , TurnBasedMatchRematch
+    , turnBasedMatchRematch
+    , tRematch
+    , tKind
+    , tPreviousMatch
+
+    -- ** InstanceWebDetails
+    , InstanceWebDetails
+    , instanceWebDetails
+    , iwdPreferred
+    , iwdKind
+    , iwdLaunchUrl
 
     -- ** GamesAchievementIncrement
     , GamesAchievementIncrement
@@ -307,20 +491,72 @@ module Network.Google.Games
     , gaiKind
     , gaiSteps
 
+    -- ** Player
+    , Player
+    , player
+    , plaLastPlayedWith
+    , plaAvatarImageUrl
+    , plaKind
+    , plaExperienceInfo
+    , plaName
+    , plaDisplayName
+    , plaTitle
+    , plaPlayerId
+
+    -- ** PlayerExperienceInfo
+    , PlayerExperienceInfo
+    , playerExperienceInfo
+    , peiKind
+    , peiCurrentExperiencePoints
+    , peiCurrentLevel
+    , peiNextLevel
+    , peiLastLevelUpTimestampMillis
+
     -- ** GamesAchievementSetStepsAtLeast
     , GamesAchievementSetStepsAtLeast
     , gamesAchievementSetStepsAtLeast
     , gassalKind
     , gassalSteps
 
-    -- ** ImageAsset
-    , ImageAsset
-    , imageAsset
-    , iaHeight
-    , iaKind
-    , iaUrl
-    , iaWidth
-    , iaName
+    -- ** ParticipantResult
+    , ParticipantResult
+    , participantResult
+    , prParticipantId
+    , prKind
+    , prResult
+    , prPlacing
+
+    -- ** RevisionCheckResponse
+    , RevisionCheckResponse
+    , revisionCheckResponse
+    , rcrApiVersion
+    , rcrKind
+    , rcrRevisionStatus
+
+    -- ** InstanceIosDetails
+    , InstanceIosDetails
+    , instanceIosDetails
+    , iidItunesAppId
+    , iidPreferredForIpad
+    , iidSupportIphone
+    , iidKind
+    , iidSupportIpad
+    , iidPreferredForIphone
+    , iidBundleIdentifier
+
+    -- ** PushTokenIdIos
+    , PushTokenIdIos
+    , pushTokenIdIos
+    , ptiiApnsDeviceToken
+    , ptiiApnsEnvironment
+
+    -- ** EventUpdateResponse
+    , EventUpdateResponse
+    , eventUpdateResponse
+    , ePlayerEvents
+    , eBatchFailures
+    , eEventFailures
+    , eKind
 
     -- ** Instance
     , Instance
@@ -335,481 +571,18 @@ module Network.Google.Games
     , iTurnBasedPlay
     , iRealtimePlay
 
-    -- ** InstanceAndroidDetails
-    , InstanceAndroidDetails
-    , instanceAndroidDetails
-    , iadPackageName
-    , iadPreferred
-    , iadKind
-    , iadEnablePiracyCheck
-
-    -- ** InstanceIosDetails
-    , InstanceIosDetails
-    , instanceIosDetails
-    , iidItunesAppId
-    , iidPreferredForIpad
-    , iidSupportIphone
-    , iidKind
-    , iidSupportIpad
-    , iidPreferredForIphone
-    , iidBundleIdentifier
-
-    -- ** InstanceWebDetails
-    , InstanceWebDetails
-    , instanceWebDetails
-    , iwdPreferred
-    , iwdKind
-    , iwdLaunchUrl
-
-    -- ** Leaderboard
-    , Leaderboard
-    , leaderboard
-    , lKind
-    , lIsIconUrlDefault
-    , lName
-    , lId
-    , lIconUrl
-    , lOrder
-
-    -- ** LeaderboardEntry
-    , LeaderboardEntry
-    , leaderboardEntry
-    , leScoreTag
-    , leWriteTimestampMillis
-    , leKind
-    , leScoreValue
-    , leFormattedScore
-    , leTimeSpan
-    , leFormattedScoreRank
-    , lePlayer
-    , leScoreRank
-
-    -- ** LeaderboardListResponse
-    , LeaderboardListResponse
-    , leaderboardListResponse
-    , llrNextPageToken
-    , llrKind
-    , llrItems
-
-    -- ** LeaderboardScoreRank
-    , LeaderboardScoreRank
-    , leaderboardScoreRank
-    , lsrNumScores
-    , lsrKind
-    , lsrFormattedRank
-    , lsrFormattedNumScores
-    , lsrRank
-
-    -- ** LeaderboardScores
-    , LeaderboardScores
-    , leaderboardScores
-    , lsNextPageToken
-    , lsNumScores
-    , lsKind
-    , lsPlayerScore
-    , lsItems
-    , lsPrevPageToken
-
-    -- ** MetagameConfig
-    , MetagameConfig
-    , metagameConfig
-    , mcKind
-    , mcCurrentVersion
-    , mcPlayerLevels
-
-    -- ** NetworkDiagnostics
-    , NetworkDiagnostics
-    , networkDiagnostics
-    , ndAndroidNetworkType
-    , ndKind
-    , ndNetworkOperatorCode
-    , ndNetworkOperatorName
-    , ndRegistrationLatencyMillis
-    , ndIosNetworkType
-    , ndAndroidNetworkSubtype
-
-    -- ** ParticipantResult
-    , ParticipantResult
-    , participantResult
-    , prParticipantId
-    , prKind
-    , prResult
-    , prPlacing
-
-    -- ** PeerChannelDiagnostics
-    , PeerChannelDiagnostics
-    , peerChannelDiagnostics
-    , pcdNumMessagesLost
-    , pcdBytesSent
-    , pcdKind
-    , pcdRoundtripLatencyMillis
-    , pcdBytesReceived
-    , pcdNumMessagesReceived
-    , pcdNumSendFailures
-    , pcdNumMessagesSent
-
-    -- ** PeerSessionDiagnostics
-    , PeerSessionDiagnostics
-    , peerSessionDiagnostics
-    , psdConnectedTimestampMillis
-    , psdParticipantId
-    , psdKind
-    , psdUnreliableChannel
-    , psdReliableChannel
-
-    -- ** Played
-    , Played
-    , played
-    , pKind
-    , pAutoMatched
-    , pTimeMillis
-
-    -- ** Player
-    , Player
-    , player
-    , plaLastPlayedWith
-    , plaAvatarImageUrl
-    , plaKind
-    , plaExperienceInfo
-    , plaName
-    , plaDisplayName
-    , plaTitle
-    , plaPlayerId
-
-    -- ** PlayerAchievement
-    , PlayerAchievement
-    , playerAchievement
-    , paKind
-    , paAchievementState
-    , paFormattedCurrentStepsString
-    , paExperiencePoints
-    , paId
-    , paCurrentSteps
-    , paLastUpdatedTimestamp
-
-    -- ** PlayerAchievementListResponse
-    , PlayerAchievementListResponse
-    , playerAchievementListResponse
-    , palrNextPageToken
-    , palrKind
-    , palrItems
-
-    -- ** PlayerEvent
-    , PlayerEvent
-    , playerEvent
-    , peKind
-    , peNumEvents
-    , peFormattedNumEvents
-    , peDefinitionId
-    , pePlayerId
-
-    -- ** PlayerEventListResponse
-    , PlayerEventListResponse
-    , playerEventListResponse
-    , pelrNextPageToken
-    , pelrKind
-    , pelrItems
-
-    -- ** PlayerExperienceInfo
-    , PlayerExperienceInfo
-    , playerExperienceInfo
-    , peiKind
-    , peiCurrentExperiencePoints
-    , peiCurrentLevel
-    , peiNextLevel
-    , peiLastLevelUpTimestampMillis
-
-    -- ** PlayerLeaderboardScore
-    , PlayerLeaderboardScore
-    , playerLeaderboardScore
-    , plsScoreTag
-    , plsScoreString
-    , plsKind
-    , plsScoreValue
-    , plsTimeSpan
-    , plsPublicRank
-    , plsSocialRank
-    , plsLeaderboardId
-    , plsWriteTimestamp
-
-    -- ** PlayerLeaderboardScoreListResponse
-    , PlayerLeaderboardScoreListResponse
-    , playerLeaderboardScoreListResponse
-    , plslrNextPageToken
-    , plslrKind
-    , plslrItems
-    , plslrPlayer
-
-    -- ** PlayerLevel
-    , PlayerLevel
-    , playerLevel
-    , plMaxExperiencePoints
-    , plKind
-    , plMinExperiencePoints
-    , plLevel
-
-    -- ** PlayerListResponse
-    , PlayerListResponse
-    , playerListResponse
-    , plrNextPageToken
-    , plrKind
-    , plrItems
-
-    -- ** PlayerName
-    , PlayerName
-    , playerName
-    , pnGivenName
-    , pnFamilyName
-
-    -- ** PlayerScore
-    , PlayerScore
-    , playerScore
-    , psScoreTag
-    , psScore
-    , psKind
-    , psFormattedScore
-    , psTimeSpan
-
-    -- ** PlayerScoreListResponse
-    , PlayerScoreListResponse
-    , playerScoreListResponse
-    , pslrSubmittedScores
-    , pslrKind
-
-    -- ** PlayerScoreResponse
-    , PlayerScoreResponse
-    , playerScoreResponse
-    , psrScoreTag
-    , psrKind
-    , psrFormattedScore
-    , psrLeaderboardId
-    , psrBeatenScoreTimeSpans
-    , psrUnbeatenScores
-
     -- ** PlayerScoreSubmissionList
     , PlayerScoreSubmissionList
     , playerScoreSubmissionList
     , psslKind
     , psslScores
 
-    -- ** PushToken
-    , PushToken
-    , pushToken
-    , ptClientRevision
-    , ptKind
-    , ptLanguage
-    , ptId
-
-    -- ** PushTokenId
-    , PushTokenId
-    , pushTokenId
-    , ptiIos
-    , ptiKind
-
-    -- ** PushTokenIdIos
-    , PushTokenIdIos
-    , pushTokenIdIos
-    , ptiiApnsDeviceToken
-    , ptiiApnsEnvironment
-
-    -- ** Quest
-    , Quest
-    , quest
-    , queLastUpdatedTimestampMillis
-    , queBannerUrl
-    , queState
-    , queMilestones
-    , queKind
-    , queApplicationId
-    , queEndTimestampMillis
-    , queName
-    , queId
-    , queIconUrl
-    , queStartTimestampMillis
-    , queNotifyTimestampMillis
-    , queDescription
-    , queIsDefaultBannerUrl
-    , queIsDefaultIconUrl
-    , queAcceptedTimestampMillis
-
-    -- ** QuestContribution
-    , QuestContribution
-    , questContribution
-    , qKind
-    , qValue
-    , qFormattedValue
-
-    -- ** QuestCriterion
-    , QuestCriterion
-    , questCriterion
-    , qcCurrentContribution
-    , qcCompletionContribution
-    , qcKind
-    , qcInitialPlayerProgress
-    , qcEventId
-
-    -- ** QuestListResponse
-    , QuestListResponse
-    , questListResponse
-    , qlrNextPageToken
-    , qlrKind
-    , qlrItems
-
-    -- ** QuestMilestone
-    , QuestMilestone
-    , questMilestone
-    , qmState
-    , qmKind
-    , qmId
-    , qmCompletionRewardData
-    , qmCriteria
-
-    -- ** RevisionCheckResponse
-    , RevisionCheckResponse
-    , revisionCheckResponse
-    , rcrApiVersion
-    , rcrKind
-    , rcrRevisionStatus
-
-    -- ** Room
-    , Room
-    , room
-    , rStatus
-    , rVariant
-    , rKind
-    , rAutoMatchingStatus
-    , rCreationDetails
-    , rInviterId
-    , rLastUpdateDetails
-    , rRoomStatusVersion
-    , rParticipants
-    , rApplicationId
-    , rAutoMatchingCriteria
-    , rRoomId
-    , rDescription
-
-    -- ** RoomAutoMatchStatus
-    , RoomAutoMatchStatus
-    , roomAutoMatchStatus
-    , ramsKind
-    , ramsWaitEstimateSeconds
-
-    -- ** RoomAutoMatchingCriteria
-    , RoomAutoMatchingCriteria
-    , roomAutoMatchingCriteria
-    , ramcKind
-    , ramcExclusiveBitmask
-    , ramcMaxAutoMatchingPlayers
-    , ramcMinAutoMatchingPlayers
-
-    -- ** RoomClientAddress
-    , RoomClientAddress
-    , roomClientAddress
-    , rcaKind
-    , rcaXmppAddress
-
-    -- ** RoomCreateRequest
-    , RoomCreateRequest
-    , roomCreateRequest
-    , rooRequestId
-    , rooVariant
-    , rooNetworkDiagnostics
-    , rooKind
-    , rooInvitedPlayerIds
-    , rooClientAddress
-    , rooAutoMatchingCriteria
-    , rooCapabilities
-
-    -- ** RoomJoinRequest
-    , RoomJoinRequest
-    , roomJoinRequest
-    , rjrNetworkDiagnostics
-    , rjrKind
-    , rjrClientAddress
-    , rjrCapabilities
-
-    -- ** RoomLeaveDiagnostics
-    , RoomLeaveDiagnostics
-    , roomLeaveDiagnostics
-    , rldPeerSession
-    , rldAndroidNetworkType
-    , rldKind
-    , rldNetworkOperatorCode
-    , rldNetworkOperatorName
-    , rldSocketsUsed
-    , rldIosNetworkType
-    , rldAndroidNetworkSubtype
-
-    -- ** RoomLeaveRequest
-    , RoomLeaveRequest
-    , roomLeaveRequest
-    , rlrKind
-    , rlrReason
-    , rlrLeaveDiagnostics
-
-    -- ** RoomList
-    , RoomList
-    , roomList
-    , rlNextPageToken
-    , rlKind
-    , rlItems
-
-    -- ** RoomModification
-    , RoomModification
-    , roomModification
-    , rmParticipantId
-    , rmKind
-    , rmModifiedTimestampMillis
-
-    -- ** RoomP2PStatus
-    , RoomP2PStatus
-    , roomP2PStatus
-    , rppssStatus
-    , rppssParticipantId
-    , rppssKind
-    , rppssError
-    , rppssErrorReason
-    , rppssConnectionSetupLatencyMillis
-    , rppssUnreliableRoundtripLatencyMillis
-
-    -- ** RoomP2PStatuses
-    , RoomP2PStatuses
-    , roomP2PStatuses
-    , rppsKind
-    , rppsUpdates
-
-    -- ** RoomParticipant
-    , RoomParticipant
-    , roomParticipant
-    , rpStatus
-    , rpConnected
-    , rpLeaveReason
-    , rpKind
-    , rpClientAddress
-    , rpId
-    , rpAutoMatched
-    , rpPlayer
-    , rpCapabilities
-    , rpAutoMatchedPlayer
-
-    -- ** RoomStatus
-    , RoomStatus
-    , roomStatus
-    , rsStatus
-    , rsKind
-    , rsAutoMatchingStatus
-    , rsStatusVersion
-    , rsParticipants
-    , rsRoomId
-
-    -- ** ScoreSubmission
-    , ScoreSubmission
-    , scoreSubmission
-    , ssSignature
-    , ssScoreTag
-    , ssScore
-    , ssKind
-    , ssLeaderboardId
+    -- ** EventRecordFailure
+    , EventRecordFailure
+    , eventRecordFailure
+    , erfKind
+    , erfFailureCause
+    , erfEventId
 
     -- ** Snapshot
     , Snapshot
@@ -826,29 +599,62 @@ module Network.Google.Games
     , sDescription
     , sDriveId
 
-    -- ** SnapshotImage
-    , SnapshotImage
-    , snapshotImage
-    , siHeight
-    , siKind
-    , siUrl
-    , siMimeType
-    , siWidth
+    -- ** RoomJoinRequest
+    , RoomJoinRequest
+    , roomJoinRequest
+    , rjrNetworkDiagnostics
+    , rjrKind
+    , rjrClientAddress
+    , rjrCapabilities
 
-    -- ** SnapshotListResponse
-    , SnapshotListResponse
-    , snapshotListResponse
-    , slrNextPageToken
-    , slrKind
-    , slrItems
+    -- ** Room
+    , Room
+    , room
+    , rooStatus
+    , rooVariant
+    , rooKind
+    , rooAutoMatchingStatus
+    , rooCreationDetails
+    , rooInviterId
+    , rooLastUpdateDetails
+    , rooRoomStatusVersion
+    , rooParticipants
+    , rooApplicationId
+    , rooAutoMatchingCriteria
+    , rooRoomId
+    , rooDescription
 
-    -- ** TurnBasedAutoMatchingCriteria
-    , TurnBasedAutoMatchingCriteria
-    , turnBasedAutoMatchingCriteria
-    , tbamcKind
-    , tbamcExclusiveBitmask
-    , tbamcMaxAutoMatchingPlayers
-    , tbamcMinAutoMatchingPlayers
+    -- ** TurnBasedMatchData
+    , TurnBasedMatchData
+    , turnBasedMatchData
+    , tbmdKind
+    , tbmdData
+    , tbmdDataAvailable
+
+    -- ** PlayerEvent
+    , PlayerEvent
+    , playerEvent
+    , peKind
+    , peNumEvents
+    , peFormattedNumEvents
+    , peDefinitionId
+    , pePlayerId
+
+    -- ** QuestListResponse
+    , QuestListResponse
+    , questListResponse
+    , qlrNextPageToken
+    , qlrKind
+    , qlrItems
+
+    -- ** PlayerName
+    , PlayerName
+    , playerName
+    , pnGivenName
+    , pnFamilyName
+
+    -- ** ScoresListWindow'Collection
+    , ScoresListWindow'Collection (..)
 
     -- ** TurnBasedMatch
     , TurnBasedMatch
@@ -874,6 +680,13 @@ module Network.Google.Games
     , tbmRematchId
     , tbmMatchVersion
 
+    -- ** PlayerListResponse
+    , PlayerListResponse
+    , playerListResponse
+    , plrNextPageToken
+    , plrKind
+    , plrItems
+
     -- ** TurnBasedMatchCreateRequest
     , TurnBasedMatchCreateRequest
     , turnBasedMatchCreateRequest
@@ -883,18 +696,54 @@ module Network.Google.Games
     , tbmcrInvitedPlayerIds
     , tbmcrAutoMatchingCriteria
 
-    -- ** TurnBasedMatchData
-    , TurnBasedMatchData
-    , turnBasedMatchData
-    , tbmdKind
-    , tbmdData
-    , tbmdDataAvailable
+    -- ** AchievementDefinition
+    , AchievementDefinition
+    , achievementDefinition
+    , adAchievementType
+    , adFormattedTotalSteps
+    , adRevealedIconUrl
+    , adKind
+    , adExperiencePoints
+    , adInitialState
+    , adName
+    , adId
+    , adIsUnlockedIconUrlDefault
+    , adTotalSteps
+    , adDescription
+    , adIsRevealedIconUrlDefault
+    , adUnlockedIconUrl
 
-    -- ** TurnBasedMatchDataRequest
-    , TurnBasedMatchDataRequest
-    , turnBasedMatchDataRequest
-    , tbmdrKind
-    , tbmdrData
+    -- ** RoomCreateRequest
+    , RoomCreateRequest
+    , roomCreateRequest
+    , rRequestId
+    , rVariant
+    , rNetworkDiagnostics
+    , rKind
+    , rInvitedPlayerIds
+    , rClientAddress
+    , rAutoMatchingCriteria
+    , rCapabilities
+
+    -- ** LeaderboardScores
+    , LeaderboardScores
+    , leaderboardScores
+    , lsNextPageToken
+    , lsNumScores
+    , lsKind
+    , lsPlayerScore
+    , lsItems
+    , lsPrevPageToken
+
+    -- ** AchievementUpdateResponse
+    , AchievementUpdateResponse
+    , achievementUpdateResponse
+    , achUpdateOccurred
+    , achAchievementId
+    , achKind
+    , achCurrentState
+    , achNewlyUnlocked
+    , achCurrentSteps
 
     -- ** TurnBasedMatchList
     , TurnBasedMatchList
@@ -903,12 +752,131 @@ module Network.Google.Games
     , tbmlKind
     , tbmlItems
 
-    -- ** TurnBasedMatchModification
-    , TurnBasedMatchModification
-    , turnBasedMatchModification
-    , tbmmParticipantId
-    , tbmmKind
-    , tbmmModifiedTimestampMillis
+    -- ** LeaderboardEntry
+    , LeaderboardEntry
+    , leaderboardEntry
+    , leScoreTag
+    , leWriteTimestampMillis
+    , leKind
+    , leScoreValue
+    , leFormattedScore
+    , leTimeSpan
+    , leFormattedScoreRank
+    , lePlayer
+    , leScoreRank
+
+    -- ** PeerChannelDiagnostics
+    , PeerChannelDiagnostics
+    , peerChannelDiagnostics
+    , pcdNumMessagesLost
+    , pcdBytesSent
+    , pcdKind
+    , pcdRoundtripLatencyMillis
+    , pcdBytesReceived
+    , pcdNumMessagesReceived
+    , pcdNumSendFailures
+    , pcdNumMessagesSent
+
+    -- ** SnapshotListResponse
+    , SnapshotListResponse
+    , snapshotListResponse
+    , slrNextPageToken
+    , slrKind
+    , slrItems
+
+    -- ** PushToken
+    , PushToken
+    , pushToken
+    , ptClientRevision
+    , ptKind
+    , ptLanguage
+    , ptId
+
+    -- ** AchievementUpdateMultipleResponse
+    , AchievementUpdateMultipleResponse
+    , achievementUpdateMultipleResponse
+    , aumruKind
+    , aumruUpdatedAchievements
+
+    -- ** RoomList
+    , RoomList
+    , roomList
+    , rlNextPageToken
+    , rlKind
+    , rlItems
+
+    -- ** PlayerLevel
+    , PlayerLevel
+    , playerLevel
+    , plMaxExperiencePoints
+    , plKind
+    , plMinExperiencePoints
+    , plLevel
+
+    -- ** QuestCriterion
+    , QuestCriterion
+    , questCriterion
+    , qcCurrentContribution
+    , qcCompletionContribution
+    , qcKind
+    , qcInitialPlayerProgress
+    , qcEventId
+
+    -- ** AchievementsList'State
+    , AchievementsList'State (..)
+
+    -- ** PlayerScoreResponse
+    , PlayerScoreResponse
+    , playerScoreResponse
+    , psrScoreTag
+    , psrKind
+    , psrFormattedScore
+    , psrLeaderboardId
+    , psrBeatenScoreTimeSpans
+    , psrUnbeatenScores
+
+    -- ** InstanceAndroidDetails
+    , InstanceAndroidDetails
+    , instanceAndroidDetails
+    , iadPackageName
+    , iadPreferred
+    , iadKind
+    , iadEnablePiracyCheck
+
+    -- ** AnonymousPlayer
+    , AnonymousPlayer
+    , anonymousPlayer
+    , apAvatarImageUrl
+    , apKind
+    , apDisplayName
+
+    -- ** RoomParticipant
+    , RoomParticipant
+    , roomParticipant
+    , rpStatus
+    , rpConnected
+    , rpLeaveReason
+    , rpKind
+    , rpClientAddress
+    , rpId
+    , rpAutoMatched
+    , rpPlayer
+    , rpCapabilities
+    , rpAutoMatchedPlayer
+
+    -- ** Category
+    , Category
+    , category
+    , cKind
+    , cCategory
+    , cExperiencePoints
+
+    -- ** LeaderboardListResponse
+    , LeaderboardListResponse
+    , leaderboardListResponse
+    , llrNextPageToken
+    , llrKind
+    , llrItems
 
     -- ** TurnBasedMatchParticipant
     , TurnBasedMatchParticipant
@@ -920,39 +888,249 @@ module Network.Google.Games
     , tbmpPlayer
     , tbmpAutoMatchedPlayer
 
-    -- ** TurnBasedMatchRematch
-    , TurnBasedMatchRematch
-    , turnBasedMatchRematch
-    , tRematch
-    , tKind
-    , tPreviousMatch
+    -- ** ScoresGet'TimeSpan
+    , ScoresGet'TimeSpan (..)
 
-    -- ** TurnBasedMatchResults
-    , TurnBasedMatchResults
-    , turnBasedMatchResults
-    , tbmrResults
-    , tbmrKind
-    , tbmrData
-    , tbmrMatchVersion
+    -- ** RoomClientAddress
+    , RoomClientAddress
+    , roomClientAddress
+    , rcaKind
+    , rcaXmppAddress
 
-    -- ** TurnBasedMatchSync
-    , TurnBasedMatchSync
-    , turnBasedMatchSync
-    , tbmsMoreAvailable
-    , tbmsNextPageToken
-    , tbmsKind
-    , tbmsItems
+    -- ** EventDefinitionListResponse
+    , EventDefinitionListResponse
+    , eventDefinitionListResponse
+    , edlrNextPageToken
+    , edlrKind
+    , edlrItems
 
-    -- ** TurnBasedMatchTurn
-    , TurnBasedMatchTurn
-    , turnBasedMatchTurn
-    , tbmtResults
-    , tbmtKind
-    , tbmtData
-    , tbmtPendingParticipantId
-    , tbmtMatchVersion
+    -- ** QuestContribution
+    , QuestContribution
+    , questContribution
+    , qKind
+    , qValue
+    , qFormattedValue
+
+    -- ** PlayersList'Collection
+    , PlayersList'Collection (..)
+
+    -- ** AchievementDefinitionsListResponse
+    , AchievementDefinitionsListResponse
+    , achievementDefinitionsListResponse
+    , adlrNextPageToken
+    , adlrKind
+    , adlrItems
+
+    -- ** RoomStatus
+    , RoomStatus
+    , roomStatus
+    , rsStatus
+    , rsKind
+    , rsAutoMatchingStatus
+    , rsStatusVersion
+    , rsParticipants
+    , rsRoomId
+
+    -- ** ScoresList'Collection
+    , ScoresList'Collection (..)
+
+    -- ** TurnBasedAutoMatchingCriteria
+    , TurnBasedAutoMatchingCriteria
+    , turnBasedAutoMatchingCriteria
+    , tbamcKind
+    , tbamcExclusiveBitmask
+    , tbamcMaxAutoMatchingPlayers
+    , tbamcMinAutoMatchingPlayers
+
+    -- ** ScoresGet'IncludeRankType
+    , ScoresGet'IncludeRankType (..)
+
+    -- ** PlayerLeaderboardScoreListResponse
+    , PlayerLeaderboardScoreListResponse
+    , playerLeaderboardScoreListResponse
+    , plslrNextPageToken
+    , plslrKind
+    , plslrItems
+    , plslrPlayer
+
+    -- ** SnapshotImage
+    , SnapshotImage
+    , snapshotImage
+    , siHeight
+    , siKind
+    , siUrl
+    , siMimeType
+    , siWidth
+
+    -- ** PlayerScore
+    , PlayerScore
+    , playerScore
+    , psScoreTag
+    , psScore
+    , psKind
+    , psFormattedScore
+    , psTimeSpan
+
+    -- ** TurnBasedMatchDataRequest
+    , TurnBasedMatchDataRequest
+    , turnBasedMatchDataRequest
+    , tbmdrKind
+    , tbmdrData
+
+    -- ** EventChild
+    , EventChild
+    , eventChild
+    , ecKind
+    , ecChildId
+
+    -- ** PlayerEventListResponse
+    , PlayerEventListResponse
+    , playerEventListResponse
+    , pelrNextPageToken
+    , pelrKind
+    , pelrItems
+
+    -- ** EventPeriodRange
+    , EventPeriodRange
+    , eventPeriodRange
+    , eprKind
+    , eprPeriodStartMillis
+    , eprPeriodEndMillis
+
+    -- ** Quest
+    , Quest
+    , quest
+    , queLastUpdatedTimestampMillis
+    , queBannerUrl
+    , queState
+    , queMilestones
+    , queKind
+    , queApplicationId
+    , queEndTimestampMillis
+    , queName
+    , queId
+    , queIconUrl
+    , queStartTimestampMillis
+    , queNotifyTimestampMillis
+    , queDescription
+    , queIsDefaultBannerUrl
+    , queIsDefaultIconUrl
+    , queAcceptedTimestampMillis
+
+    -- ** CategoryListResponse
+    , CategoryListResponse
+    , categoryListResponse
+    , clrNextPageToken
+    , clrKind
+    , clrItems
+
+    -- ** TurnBasedMatchModification
+    , TurnBasedMatchModification
+    , turnBasedMatchModification
+    , tbmmParticipantId
+    , tbmmKind
+    , tbmmModifiedTimestampMillis
+
+    -- ** MetagameConfig
+    , MetagameConfig
+    , metagameConfig
+    , mcKind
+    , mcCurrentVersion
+    , mcPlayerLevels
+
+    -- ** RoomModification
+    , RoomModification
+    , roomModification
+    , rmParticipantId
+    , rmKind
+    , rmModifiedTimestampMillis
+
+    -- ** RoomP2PStatus
+    , RoomP2PStatus
+    , roomP2PStatus
+    , rppssStatus
+    , rppssParticipantId
+    , rppssKind
+    , rppssError
+    , rppssErrorReason
+    , rppssConnectionSetupLatencyMillis
+    , rppssUnreliableRoundtripLatencyMillis
+
+    -- ** EventDefinition
+    , EventDefinition
+    , eventDefinition
+    , edIsDefaultImageUrl
+    , edKind
+    , edVisibility
+    , edImageUrl
+    , edDisplayName
+    , edId
+    , edChildEvents
+    , edDescription
+
+    -- ** Leaderboard
+    , Leaderboard
+    , leaderboard
+    , lKind
+    , lIsIconUrlDefault
+    , lName
+    , lId
+    , lIconUrl
+    , lOrder
     ) where
 
+import           Network.Google.API.Games.AchievementDefinitions.List
+import           Network.Google.API.Games.Achievements.Increment
+import           Network.Google.API.Games.Achievements.List
+import           Network.Google.API.Games.Achievements.Reveal
+import           Network.Google.API.Games.Achievements.SetStepsAtLeast
+import           Network.Google.API.Games.Achievements.Unlock
+import           Network.Google.API.Games.Achievements.UpdateMultiple
+import           Network.Google.API.Games.Applications.Get
+import           Network.Google.API.Games.Applications.Played
+import           Network.Google.API.Games.Events.ListByPlayer
+import           Network.Google.API.Games.Events.ListDefinitions
+import           Network.Google.API.Games.Events.Record
+import           Network.Google.API.Games.Leaderboards.Get
+import           Network.Google.API.Games.Leaderboards.List
+import           Network.Google.API.Games.Metagame.GetMetagameConfig
+import           Network.Google.API.Games.Metagame.ListCategoriesByPlayer
+import           Network.Google.API.Games.Players.Get
+import           Network.Google.API.Games.Players.List
+import           Network.Google.API.Games.Pushtokens.Remove
+import           Network.Google.API.Games.Pushtokens.Update
+import           Network.Google.API.Games.QuestMilestones.Claim
+import           Network.Google.API.Games.Quests.Accept
+import           Network.Google.API.Games.Quests.List
+import           Network.Google.API.Games.Revisions.Check
+import           Network.Google.API.Games.Rooms.Create
+import           Network.Google.API.Games.Rooms.Decline
+import           Network.Google.API.Games.Rooms.Dismiss
+import           Network.Google.API.Games.Rooms.Get
+import           Network.Google.API.Games.Rooms.Join
+import           Network.Google.API.Games.Rooms.Leave
+import           Network.Google.API.Games.Rooms.List
+import           Network.Google.API.Games.Rooms.ReportStatus
+import           Network.Google.API.Games.Scores.Get
+import           Network.Google.API.Games.Scores.List
+import           Network.Google.API.Games.Scores.ListWindow
+import           Network.Google.API.Games.Scores.Submit
+import           Network.Google.API.Games.Scores.SubmitMultiple
+import           Network.Google.API.Games.Snapshots.Get
+import           Network.Google.API.Games.Snapshots.List
+import           Network.Google.API.Games.TurnBasedMatches.Cancel
+import           Network.Google.API.Games.TurnBasedMatches.Create
+import           Network.Google.API.Games.TurnBasedMatches.Decline
+import           Network.Google.API.Games.TurnBasedMatches.Dismiss
+import           Network.Google.API.Games.TurnBasedMatches.Finish
+import           Network.Google.API.Games.TurnBasedMatches.Get
+import           Network.Google.API.Games.TurnBasedMatches.Join
+import           Network.Google.API.Games.TurnBasedMatches.Leave
+import           Network.Google.API.Games.TurnBasedMatches.LeaveTurn
+import           Network.Google.API.Games.TurnBasedMatches.List
+import           Network.Google.API.Games.TurnBasedMatches.Rematch
+import           Network.Google.API.Games.TurnBasedMatches.Sync
+import           Network.Google.API.Games.TurnBasedMatches.TakeTurn
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
@@ -961,995 +1139,57 @@ TODO
 -}
 
 type Games =
-     RoomsAPI :<|> LeaderboardsAPI :<|> QuestMilestonesAPI
-       :<|> MetagameAPI
-       :<|> AchievementDefinitionsAPI
-       :<|> AchievementsAPI
-       :<|> SnapshotsAPI
-       :<|> EventsAPI
-       :<|> QuestsAPI
-       :<|> PlayersAPI
-       :<|> RevisionsAPI
-       :<|> ScoresAPI
-       :<|> PushtokensAPI
-       :<|> TurnBasedMatchesAPI
-       :<|> ApplicationsAPI
-
-type RoomsAPI =
-     RoomsList :<|> RoomsJoin :<|> RoomsGet :<|>
-       RoomsCreate
-       :<|> RoomsDecline
-       :<|> RoomsDismiss
-       :<|> RoomsReportStatus
-       :<|> RoomsLeave
-
--- | Returns invitations to join rooms.
-type RoomsList =
-     "games" :>
-       "v1" :>
-         "rooms" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "language" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "maxResults" Natural :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] RoomList
-
--- | Join a room. For internal use by the Games SDK only. Calling this method
--- directly is unsupported.
-type RoomsJoin =
-     "games" :>
-       "v1" :>
-         "rooms" :>
-           Capture "roomId" Text :>
-             "join" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "language" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Post '[JSON] Room
-
--- | Get the data for a room.
-type RoomsGet =
-     "games" :>
-       "v1" :>
-         "rooms" :>
-           Capture "roomId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "language" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Get '[JSON] Room
-
--- | Create a room. For internal use by the Games SDK only. Calling this
--- method directly is unsupported.
-type RoomsCreate =
-     "games" :>
-       "v1" :>
-         "rooms" :>
-           "create" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "language" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] Room
-
--- | Decline an invitation to join a room. For internal use by the Games SDK
--- only. Calling this method directly is unsupported.
-type RoomsDecline =
-     "games" :>
-       "v1" :>
-         "rooms" :>
-           Capture "roomId" Text :>
-             "decline" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "language" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Post '[JSON] Room
-
--- | Dismiss an invitation to join a room. For internal use by the Games SDK
--- only. Calling this method directly is unsupported.
-type RoomsDismiss =
-     "games" :>
-       "v1" :>
-         "rooms" :>
-           Capture "roomId" Text :>
-             "dismiss" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] ()
-
--- | Updates sent by a client reporting the status of peers in a room. For
--- internal use by the Games SDK only. Calling this method directly is
--- unsupported.
-type RoomsReportStatus =
-     "games" :>
-       "v1" :>
-         "rooms" :>
-           Capture "roomId" Text :>
-             "reportstatus" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "language" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Post '[JSON] RoomStatus
-
--- | Leave a room. For internal use by the Games SDK only. Calling this
--- method directly is unsupported.
-type RoomsLeave =
-     "games" :>
-       "v1" :>
-         "rooms" :>
-           Capture "roomId" Text :>
-             "leave" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "language" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Post '[JSON] Room
-
-type LeaderboardsAPI =
-     LeaderboardsList :<|> LeaderboardsGet
-
--- | Lists all the leaderboard metadata for your application.
-type LeaderboardsList =
-     "games" :>
-       "v1" :>
-         "leaderboards" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "language" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "maxResults" Natural :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Get '[JSON] LeaderboardListResponse
-
--- | Retrieves the metadata of the leaderboard with the given ID.
-type LeaderboardsGet =
-     "games" :>
-       "v1" :>
-         "leaderboards" :>
-           Capture "leaderboardId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "language" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Get '[JSON] Leaderboard
-
-type QuestMilestonesAPI = QuestMilestonesClaim
-
--- | Report that a reward for the milestone corresponding to milestoneId for
--- the quest corresponding to questId has been claimed by the currently
--- authorized user.
-type QuestMilestonesClaim =
-     "games" :>
-       "v1" :>
-         "quests" :>
-           Capture "questId" Text :>
-             "milestones" :>
-               Capture "milestoneId" Text :>
-                 "claim" :>
-                   QueryParam "requestId" Int64 :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :> Put '[JSON] ()
-
-type MetagameAPI =
-     MetagameListCategoriesByPlayer :<|>
-       MetagameGetMetagameConfig
-
--- | List play data aggregated per category for the player corresponding to
--- playerId.
-type MetagameListCategoriesByPlayer =
-     "games" :>
-       "v1" :>
-         "players" :>
-           Capture "playerId" Text :>
-             "categories" :>
-               Capture "collection" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "language" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "maxResults" Natural :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Get '[JSON] CategoryListResponse
-
--- | Return the metagame configuration data for the calling application.
-type MetagameGetMetagameConfig =
-     "games" :>
-       "v1" :>
-         "metagameConfig" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "alt" Text :> Get '[JSON] MetagameConfig
-
-type AchievementDefinitionsAPI =
-     AchievementDefinitionsList
-
--- | Lists all the achievement definitions for your application.
-type AchievementDefinitionsList =
-     "games" :>
-       "v1" :>
-         "achievements" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "language" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "maxResults" Natural :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Get '[JSON] AchievementDefinitionsListResponse
-
-type AchievementsAPI =
-     AchievementsList :<|> AchievementsUnlock :<|>
-       AchievementsReveal
-       :<|> AchievementsSetStepsAtLeast
-       :<|> AchievementsUpdateMultiple
-       :<|> AchievementsIncrement
-
--- | Lists the progress for all your application\'s achievements for the
--- currently authenticated player.
-type AchievementsList =
-     "games" :>
-       "v1" :>
-         "players" :>
-           Capture "playerId" Text :>
-             "achievements" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "state" Text :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "language" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "maxResults" Natural :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Get '[JSON] PlayerAchievementListResponse
-
--- | Unlocks this achievement for the currently authenticated player.
-type AchievementsUnlock =
-     "games" :>
-       "v1" :>
-         "achievements" :>
-           Capture "achievementId" Text :>
-             "unlock" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Post '[JSON] AchievementUnlockResponse
-
--- | Sets the state of the achievement with the given ID to REVEALED for the
--- currently authenticated player.
-type AchievementsReveal =
-     "games" :>
-       "v1" :>
-         "achievements" :>
-           Capture "achievementId" Text :>
-             "reveal" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Post '[JSON] AchievementRevealResponse
-
--- | Sets the steps for the currently authenticated player towards unlocking
--- an achievement. If the steps parameter is less than the current number
--- of steps that the player already gained for the achievement, the
--- achievement is not modified.
-type AchievementsSetStepsAtLeast =
-     "games" :>
-       "v1" :>
-         "achievements" :>
-           Capture "achievementId" Text :>
-             "setStepsAtLeast" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "steps" Natural :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Post '[JSON] AchievementSetStepsAtLeastResponse
-
--- | Updates multiple achievements for the currently authenticated player.
-type AchievementsUpdateMultiple =
-     "games" :>
-       "v1" :>
-         "achievements" :>
-           "updateMultiple" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :>
-                           Post '[JSON] AchievementUpdateMultipleResponse
-
--- | Increments the steps of the achievement with the given ID for the
--- currently authenticated player.
-type AchievementsIncrement =
-     "games" :>
-       "v1" :>
-         "achievements" :>
-           Capture "achievementId" Text :>
-             "increment" :>
-               QueryParam "requestId" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "stepsToIncrement" Natural :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Post '[JSON] AchievementIncrementResponse
-
-type SnapshotsAPI = SnapshotsList :<|> SnapshotsGet
-
--- | Retrieves a list of snapshots created by your application for the player
--- corresponding to the player ID.
-type SnapshotsList =
-     "games" :>
-       "v1" :>
-         "players" :>
-           Capture "playerId" Text :>
-             "snapshots" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "language" Text :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "maxResults" Natural :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   Get '[JSON] SnapshotListResponse
-
--- | Retrieves the metadata for a given snapshot ID.
-type SnapshotsGet =
-     "games" :>
-       "v1" :>
-         "snapshots" :>
-           Capture "snapshotId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "language" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Get '[JSON] Snapshot
-
-type EventsAPI =
-     EventsListDefinitions :<|> EventsListByPlayer :<|>
-       EventsRecord
-
--- | Returns a list of the event definitions in this application.
-type EventsListDefinitions =
-     "games" :>
-       "v1" :>
-         "eventDefinitions" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "language" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "maxResults" Natural :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Get '[JSON] EventDefinitionListResponse
-
--- | Returns a list showing the current progress on events in this
--- application for the currently authenticated user.
-type EventsListByPlayer =
-     "games" :>
-       "v1" :>
-         "events" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "language" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "maxResults" Natural :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :>
-                               Get '[JSON] PlayerEventListResponse
-
--- | Records a batch of changes to the number of times events have occurred
--- for the currently authenticated user of this application.
-type EventsRecord =
-     "games" :>
-       "v1" :>
-         "events" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "language" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :>
-                           Post '[JSON] EventUpdateResponse
-
-type QuestsAPI = QuestsList :<|> QuestsAccept
-
--- | Get a list of quests for your application and the currently
--- authenticated player.
-type QuestsList =
-     "games" :>
-       "v1" :>
-         "players" :>
-           Capture "playerId" Text :>
-             "quests" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "language" Text :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "maxResults" Natural :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   Get '[JSON] QuestListResponse
-
--- | Indicates that the currently authorized user will participate in the
--- quest.
-type QuestsAccept =
-     "games" :>
-       "v1" :>
-         "quests" :>
-           Capture "questId" Text :>
-             "accept" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "language" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Post '[JSON] Quest
-
-type PlayersAPI = PlayersList :<|> PlayersGet
-
--- | Get the collection of players for the currently authenticated user.
-type PlayersList =
-     "games" :>
-       "v1" :>
-         "players" :>
-           "me" :>
-             "players" :>
-               Capture "collection" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "language" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "maxResults" Natural :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Get '[JSON] PlayerListResponse
-
--- | Retrieves the Player resource with the given ID. To retrieve the player
--- for the currently authenticated user, set playerId to me.
-type PlayersGet =
-     "games" :>
-       "v1" :>
-         "players" :>
-           Capture "playerId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "language" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Get '[JSON] Player
-
-type RevisionsAPI = RevisionsCheck
-
--- | Checks whether the games client is out of date.
-type RevisionsCheck =
-     "games" :>
-       "v1" :>
-         "revisions" :>
-           "check" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "clientRevision" Text :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Get '[JSON] RevisionCheckResponse
-
-type ScoresAPI =
-     ScoresList :<|> ScoresGet :<|> ScoresSubmit :<|>
-       ScoresSubmitMultiple
-       :<|> ScoresListWindow
-
--- | Lists the scores in a leaderboard, starting from the top.
-type ScoresList =
-     "games" :>
-       "v1" :>
-         "leaderboards" :>
-           Capture "leaderboardId" Text :>
-             "scores" :>
-               Capture "collection" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "timeSpan" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "language" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" Text :>
-                                 QueryParam "maxResults" Natural :>
-                                   QueryParam "fields" Text :>
-                                     QueryParam "alt" Text :>
-                                       Get '[JSON] LeaderboardScores
-
--- | Get high scores, and optionally ranks, in leaderboards for the currently
--- authenticated player. For a specific time span, leaderboardId can be set
--- to ALL to retrieve data for all leaderboards in a given time span. NOTE:
--- You cannot ask for \'ALL\' leaderboards and \'ALL\' timeSpans in the
--- same request; only one parameter may be set to \'ALL\'.
-type ScoresGet =
-     "games" :>
-       "v1" :>
-         "players" :>
-           Capture "playerId" Text :>
-             "leaderboards" :>
-               Capture "leaderboardId" Text :>
-                 "scores" :>
-                   Capture "timeSpan" Text :>
-                     QueryParam "quotaUser" Text :>
-                       QueryParam "prettyPrint" Bool :>
-                         QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "includeRankType" Text :>
-                               QueryParam "language" Text :>
-                                 QueryParam "pageToken" Text :>
-                                   QueryParam "oauth_token" Text :>
-                                     QueryParam "maxResults" Natural :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "alt" Text :>
-                                           Get '[JSON]
-                                             PlayerLeaderboardScoreListResponse
-
--- | Submits a score to the specified leaderboard.
-type ScoresSubmit =
-     "games" :>
-       "v1" :>
-         "leaderboards" :>
-           Capture "leaderboardId" Text :>
-             "scores" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "scoreTag" Text :>
-                     QueryParam "score" Int64 :>
-                       QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "language" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   Post '[JSON] PlayerScoreResponse
-
--- | Submits multiple scores to leaderboards.
-type ScoresSubmitMultiple =
-     "games" :>
-       "v1" :>
-         "leaderboards" :>
-           "scores" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "language" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :>
-                             Post '[JSON] PlayerScoreListResponse
-
--- | Lists the scores in a leaderboard around (and including) a player\'s
--- score.
-type ScoresListWindow =
-     "games" :>
-       "v1" :>
-         "leaderboards" :>
-           Capture "leaderboardId" Text :>
-             "window" :>
-               Capture "collection" Text :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "timeSpan" Text :>
-                         QueryParam "returnTopIfAbsent" Bool :>
-                           QueryParam "key" Text :>
-                             QueryParam "language" Text :>
-                               QueryParam "resultsAbove" Int32 :>
-                                 QueryParam "pageToken" Text :>
-                                   QueryParam "oauth_token" Text :>
-                                     QueryParam "maxResults" Natural :>
-                                       QueryParam "fields" Text :>
-                                         QueryParam "alt" Text :>
-                                           Get '[JSON] LeaderboardScores
-
-type PushtokensAPI =
-     PushtokensRemove :<|> PushtokensUpdate
-
--- | Removes a push token for the current user and application. Removing a
--- non-existent push token will report success.
-type PushtokensRemove =
-     "games" :>
-       "v1" :>
-         "pushtokens" :>
-           "remove" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Post '[JSON] ()
-
--- | Registers a push token for the current user and application.
-type PushtokensUpdate =
-     "games" :>
-       "v1" :>
-         "pushtokens" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
-                     QueryParam "fields" Text :>
-                       QueryParam "alt" Text :> Put '[JSON] ()
-
-type TurnBasedMatchesAPI =
-     TurnBasedMatchesRematch :<|> TurnBasedMatchesList
-       :<|> TurnBasedMatchesJoin
-       :<|> TurnBasedMatchesFinish
-       :<|> TurnBasedMatchesTakeTurn
-       :<|> TurnBasedMatchesLeaveTurn
-       :<|> TurnBasedMatchesGet
-       :<|> TurnBasedMatchesCreate
-       :<|> TurnBasedMatchesDecline
-       :<|> TurnBasedMatchesSync
-       :<|> TurnBasedMatchesDismiss
-       :<|> TurnBasedMatchesLeave
-       :<|> TurnBasedMatchesCancel
-
--- | Create a rematch of a match that was previously completed, with the same
--- participants. This can be called by only one player on a match still in
--- their list; the player must have called Finish first. Returns the newly
--- created match; it will be the caller\'s turn.
-type TurnBasedMatchesRematch =
-     "games" :>
-       "v1" :>
-         "turnbasedmatches" :>
-           Capture "matchId" Text :>
-             "rematch" :>
-               QueryParam "requestId" Int64 :>
-                 QueryParam "quotaUser" Text :>
-                   QueryParam "prettyPrint" Bool :>
-                     QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "language" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "fields" Text :>
-                               QueryParam "alt" Text :>
-                                 Post '[JSON] TurnBasedMatchRematch
-
--- | Returns turn-based matches the player is or was involved in.
-type TurnBasedMatchesList =
-     "games" :>
-       "v1" :>
-         "turnbasedmatches" :>
-           QueryParam "maxCompletedMatches" Int32 :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "includeMatchData" Bool :>
-                       QueryParam "language" Text :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "maxResults" Natural :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   Get '[JSON] TurnBasedMatchList
-
--- | Join a turn-based match.
-type TurnBasedMatchesJoin =
-     "games" :>
-       "v1" :>
-         "turnbasedmatches" :>
-           Capture "matchId" Text :>
-             "join" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "language" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Put '[JSON] TurnBasedMatch
-
--- | Finish a turn-based match. Each player should make this call once, after
--- all results are in. Only the player whose turn it is may make the first
--- call to Finish, and can pass in the final match state.
-type TurnBasedMatchesFinish =
-     "games" :>
-       "v1" :>
-         "turnbasedmatches" :>
-           Capture "matchId" Text :>
-             "finish" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "language" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Put '[JSON] TurnBasedMatch
-
--- | Commit the results of a player turn.
-type TurnBasedMatchesTakeTurn =
-     "games" :>
-       "v1" :>
-         "turnbasedmatches" :>
-           Capture "matchId" Text :>
-             "turn" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "language" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Put '[JSON] TurnBasedMatch
-
--- | Leave a turn-based match during the current player\'s turn, without
--- canceling the match.
-type TurnBasedMatchesLeaveTurn =
-     "games" :>
-       "v1" :>
-         "turnbasedmatches" :>
-           Capture "matchId" Text :>
-             "leaveTurn" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "language" Text :>
-                         QueryParam "pendingParticipantId" Text :>
-                           QueryParam "oauth_token" Text :>
-                             QueryParam "matchVersion" Int32 :>
-                               QueryParam "fields" Text :>
-                                 QueryParam "alt" Text :>
-                                   Put '[JSON] TurnBasedMatch
-
--- | Get the data for a turn-based match.
-type TurnBasedMatchesGet =
-     "games" :>
-       "v1" :>
-         "turnbasedmatches" :>
-           Capture "matchId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "includeMatchData" Bool :>
-                       QueryParam "language" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] TurnBasedMatch
-
--- | Create a turn-based match.
-type TurnBasedMatchesCreate =
-     "games" :>
-       "v1" :>
-         "turnbasedmatches" :>
-           "create" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "language" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Post '[JSON] TurnBasedMatch
-
--- | Decline an invitation to play a turn-based match.
-type TurnBasedMatchesDecline =
-     "games" :>
-       "v1" :>
-         "turnbasedmatches" :>
-           Capture "matchId" Text :>
-             "decline" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "language" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Put '[JSON] TurnBasedMatch
-
--- | Returns turn-based matches the player is or was involved in that changed
--- since the last sync call, with the least recent changes coming first.
--- Matches that should be removed from the local cache will have a status
--- of MATCH_DELETED.
-type TurnBasedMatchesSync =
-     "games" :>
-       "v1" :>
-         "turnbasedmatches" :>
-           "sync" :>
-             QueryParam "maxCompletedMatches" Int32 :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "includeMatchData" Bool :>
-                         QueryParam "language" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "oauth_token" Text :>
-                               QueryParam "maxResults" Natural :>
-                                 QueryParam "fields" Text :>
-                                   QueryParam "alt" Text :>
-                                     Get '[JSON] TurnBasedMatchSync
-
--- | Dismiss a turn-based match from the match list. The match will no longer
--- show up in the list and will not generate notifications.
-type TurnBasedMatchesDismiss =
-     "games" :>
-       "v1" :>
-         "turnbasedmatches" :>
-           Capture "matchId" Text :>
-             "dismiss" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Put '[JSON] ()
-
--- | Leave a turn-based match when it is not the current player\'s turn,
--- without canceling the match.
-type TurnBasedMatchesLeave =
-     "games" :>
-       "v1" :>
-         "turnbasedmatches" :>
-           Capture "matchId" Text :>
-             "leave" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "language" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Put '[JSON] TurnBasedMatch
-
--- | Cancel a turn-based match.
-type TurnBasedMatchesCancel =
-     "games" :>
-       "v1" :>
-         "turnbasedmatches" :>
-           Capture "matchId" Text :>
-             "cancel" :>
-               QueryParam "quotaUser" Text :>
-                 QueryParam "prettyPrint" Bool :>
-                   QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
-                         QueryParam "fields" Text :>
-                           QueryParam "alt" Text :> Put '[JSON] ()
-
-type ApplicationsAPI =
-     ApplicationsGet :<|> ApplicationsPlayed
-
--- | Retrieves the metadata of the application with the given ID. If the
--- requested application is not available for the specified platformType,
--- the returned response will not include any instance data.
-type ApplicationsGet =
-     "games" :>
-       "v1" :>
-         "applications" :>
-           Capture "applicationId" Text :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "platformType" Text :>
-                       QueryParam "language" Text :>
-                         QueryParam "oauth_token" Text :>
-                           QueryParam "fields" Text :>
-                             QueryParam "alt" Text :> Get '[JSON] Application
-
--- | Indicate that the the currently authenticated user is playing your
--- application.
-type ApplicationsPlayed =
-     "games" :>
-       "v1" :>
-         "applications" :>
-           "played" :>
-             QueryParam "quotaUser" Text :>
-               QueryParam "prettyPrint" Bool :>
-                 QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Post '[JSON] ()
+     TurnBasedMatchesFinishAPI :<|> LeaderboardsListAPI
+       :<|> RoomsGetAPI
+       :<|> AchievementsListAPI
+       :<|> ApplicationsPlayedAPI
+       :<|> TurnBasedMatchesCancelAPI
+       :<|> PlayersGetAPI
+       :<|> PlayersListAPI
+       :<|> SnapshotsGetAPI
+       :<|> QuestsAcceptAPI
+       :<|> MetagameListCategoriesByPlayerAPI
+       :<|> RoomsListAPI
+       :<|> EventsListDefinitionsAPI
+       :<|> AchievementsUpdateMultipleAPI
+       :<|> ApplicationsGetAPI
+       :<|> EventsListByPlayerAPI
+       :<|> SnapshotsListAPI
+       :<|> TurnBasedMatchesDeclineAPI
+       :<|> TurnBasedMatchesJoinAPI
+       :<|> TurnBasedMatchesCreateAPI
+       :<|> TurnBasedMatchesRematchAPI
+       :<|> ScoresListWindowAPI
+       :<|> ScoresSubmitAPI
+       :<|> AchievementsSetStepsAtLeastAPI
+       :<|> RoomsCreateAPI
+       :<|> RoomsReportStatusAPI
+       :<|> RoomsDismissAPI
+       :<|> TurnBasedMatchesSyncAPI
+       :<|> ScoresGetAPI
+       :<|> TurnBasedMatchesGetAPI
+       :<|> TurnBasedMatchesLeaveTurnAPI
+       :<|> TurnBasedMatchesLeaveAPI
+       :<|> QuestMilestonesClaimAPI
+       :<|> RoomsLeaveAPI
+       :<|> PushtokensUpdateAPI
+       :<|> ScoresSubmitMultipleAPI
+       :<|> TurnBasedMatchesTakeTurnAPI
+       :<|> MetagameGetMetagameConfigAPI
+       :<|> RoomsJoinAPI
+       :<|> LeaderboardsGetAPI
+       :<|> AchievementsUnlockAPI
+       :<|> EventsRecordAPI
+       :<|> AchievementsRevealAPI
+       :<|> TurnBasedMatchesDismissAPI
+       :<|> AchievementsIncrementAPI
+       :<|> RoomsDeclineAPI
+       :<|> RevisionsCheckAPI
+       :<|> PushtokensRemoveAPI
+       :<|> TurnBasedMatchesListAPI
+       :<|> AchievementDefinitionsListAPI
+       :<|> QuestsListAPI
+       :<|> ScoresListAPI
+
+games :: Proxy Games
+games = Proxy

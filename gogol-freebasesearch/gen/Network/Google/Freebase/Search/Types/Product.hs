@@ -95,6 +95,107 @@ instance ToJSON ReconcileCandidate where
                   ("notable" .=) <$> _rcNotable,
                   ("mid" .=) <$> _rcMid])
 
+-- | Server costs for reconciling.
+--
+-- /See:/ 'reconcileGetCosts' smart constructor.
+data ReconcileGetCosts = ReconcileGetCosts
+    { _rgcHits :: !(Maybe Int32)
+    , _rgcMs   :: !(Maybe Int32)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ReconcileGetCosts' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rgcHits'
+--
+-- * 'rgcMs'
+reconcileGetCosts
+    :: ReconcileGetCosts
+reconcileGetCosts =
+    ReconcileGetCosts
+    { _rgcHits = Nothing
+    , _rgcMs = Nothing
+    }
+
+-- | Total number of hits found.
+rgcHits :: Lens' ReconcileGetCosts (Maybe Int32)
+rgcHits = lens _rgcHits (\ s a -> s{_rgcHits = a})
+
+-- | Total milliseconds spent.
+rgcMs :: Lens' ReconcileGetCosts (Maybe Int32)
+rgcMs = lens _rgcMs (\ s a -> s{_rgcMs = a})
+
+instance FromJSON ReconcileGetCosts where
+        parseJSON
+          = withObject "ReconcileGetCosts"
+              (\ o ->
+                 ReconcileGetCosts <$>
+                   (o .:? "hits") <*> (o .:? "ms"))
+
+instance ToJSON ReconcileGetCosts where
+        toJSON ReconcileGetCosts{..}
+          = object
+              (catMaybes
+                 [("hits" .=) <$> _rgcHits, ("ms" .=) <$> _rgcMs])
+
+--
+-- /See:/ 'reconcileGetItemWarning' smart constructor.
+data ReconcileGetItemWarning = ReconcileGetItemWarning
+    { _rgiwLocation :: !(Maybe Text)
+    , _rgiwReason   :: !(Maybe Text)
+    , _rgiwMessage  :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ReconcileGetItemWarning' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rgiwLocation'
+--
+-- * 'rgiwReason'
+--
+-- * 'rgiwMessage'
+reconcileGetItemWarning
+    :: ReconcileGetItemWarning
+reconcileGetItemWarning =
+    ReconcileGetItemWarning
+    { _rgiwLocation = Nothing
+    , _rgiwReason = Nothing
+    , _rgiwMessage = Nothing
+    }
+
+-- | Location of warning in the request e.g. invalid predicate.
+rgiwLocation :: Lens' ReconcileGetItemWarning (Maybe Text)
+rgiwLocation
+  = lens _rgiwLocation (\ s a -> s{_rgiwLocation = a})
+
+-- | Code for identifying classes of warnings.
+rgiwReason :: Lens' ReconcileGetItemWarning (Maybe Text)
+rgiwReason
+  = lens _rgiwReason (\ s a -> s{_rgiwReason = a})
+
+-- | Warning message to display to the user.
+rgiwMessage :: Lens' ReconcileGetItemWarning (Maybe Text)
+rgiwMessage
+  = lens _rgiwMessage (\ s a -> s{_rgiwMessage = a})
+
+instance FromJSON ReconcileGetItemWarning where
+        parseJSON
+          = withObject "ReconcileGetItemWarning"
+              (\ o ->
+                 ReconcileGetItemWarning <$>
+                   (o .:? "location") <*> (o .:? "reason") <*>
+                     (o .:? "message"))
+
+instance ToJSON ReconcileGetItemWarning where
+        toJSON ReconcileGetItemWarning{..}
+          = object
+              (catMaybes
+                 [("location" .=) <$> _rgiwLocation,
+                  ("reason" .=) <$> _rgiwReason,
+                  ("message" .=) <$> _rgiwMessage])
+
 -- | Type or profession the candidate is notable for.
 --
 -- /See:/ 'reconcileCandidateNotable' smart constructor.
@@ -216,104 +317,3 @@ instance ToJSON ReconcileGet where
                   ("costs" .=) <$> _rgCosts,
                   ("warning" .=) <$> _rgWarning,
                   ("match" .=) <$> _rgMatch])
-
--- | Server costs for reconciling.
---
--- /See:/ 'reconcileGetCosts' smart constructor.
-data ReconcileGetCosts = ReconcileGetCosts
-    { _rgcHits :: !(Maybe Int32)
-    , _rgcMs   :: !(Maybe Int32)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ReconcileGetCosts' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rgcHits'
---
--- * 'rgcMs'
-reconcileGetCosts
-    :: ReconcileGetCosts
-reconcileGetCosts =
-    ReconcileGetCosts
-    { _rgcHits = Nothing
-    , _rgcMs = Nothing
-    }
-
--- | Total number of hits found.
-rgcHits :: Lens' ReconcileGetCosts (Maybe Int32)
-rgcHits = lens _rgcHits (\ s a -> s{_rgcHits = a})
-
--- | Total milliseconds spent.
-rgcMs :: Lens' ReconcileGetCosts (Maybe Int32)
-rgcMs = lens _rgcMs (\ s a -> s{_rgcMs = a})
-
-instance FromJSON ReconcileGetCosts where
-        parseJSON
-          = withObject "ReconcileGetCosts"
-              (\ o ->
-                 ReconcileGetCosts <$>
-                   (o .:? "hits") <*> (o .:? "ms"))
-
-instance ToJSON ReconcileGetCosts where
-        toJSON ReconcileGetCosts{..}
-          = object
-              (catMaybes
-                 [("hits" .=) <$> _rgcHits, ("ms" .=) <$> _rgcMs])
-
---
--- /See:/ 'reconcileGetItemWarning' smart constructor.
-data ReconcileGetItemWarning = ReconcileGetItemWarning
-    { _rgiwLocation :: !(Maybe Text)
-    , _rgiwReason   :: !(Maybe Text)
-    , _rgiwMessage  :: !(Maybe Text)
-    } deriving (Eq,Read,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ReconcileGetItemWarning' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rgiwLocation'
---
--- * 'rgiwReason'
---
--- * 'rgiwMessage'
-reconcileGetItemWarning
-    :: ReconcileGetItemWarning
-reconcileGetItemWarning =
-    ReconcileGetItemWarning
-    { _rgiwLocation = Nothing
-    , _rgiwReason = Nothing
-    , _rgiwMessage = Nothing
-    }
-
--- | Location of warning in the request e.g. invalid predicate.
-rgiwLocation :: Lens' ReconcileGetItemWarning (Maybe Text)
-rgiwLocation
-  = lens _rgiwLocation (\ s a -> s{_rgiwLocation = a})
-
--- | Code for identifying classes of warnings.
-rgiwReason :: Lens' ReconcileGetItemWarning (Maybe Text)
-rgiwReason
-  = lens _rgiwReason (\ s a -> s{_rgiwReason = a})
-
--- | Warning message to display to the user.
-rgiwMessage :: Lens' ReconcileGetItemWarning (Maybe Text)
-rgiwMessage
-  = lens _rgiwMessage (\ s a -> s{_rgiwMessage = a})
-
-instance FromJSON ReconcileGetItemWarning where
-        parseJSON
-          = withObject "ReconcileGetItemWarning"
-              (\ o ->
-                 ReconcileGetItemWarning <$>
-                   (o .:? "location") <*> (o .:? "reason") <*>
-                     (o .:? "message"))
-
-instance ToJSON ReconcileGetItemWarning where
-        toJSON ReconcileGetItemWarning{..}
-          = object
-              (catMaybes
-                 [("location" .=) <$> _rgiwLocation,
-                  ("reason" .=) <$> _rgiwReason,
-                  ("message" .=) <$> _rgiwMessage])

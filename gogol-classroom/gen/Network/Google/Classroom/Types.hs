@@ -14,9 +14,31 @@
 --
 module Network.Google.Classroom.Types
     (
+    -- * Service URL
+      classroomURL
+
+    -- * Teacher
+    , Teacher
+    , teacher
+    , tCourseId
+    , tProfile
+    , tUserId
+
+    -- * Name
+    , Name
+    , name
+    , nGivenName
+    , nFullName
+    , nFamilyName
+
+    -- * ListCoursesResponse
+    , ListCoursesResponse
+    , listCoursesResponse
+    , lcrNextPageToken
+    , lcrCourses
 
     -- * Course
-      Course
+    , Course
     , course
     , cCreationTime
     , cRoom
@@ -36,59 +58,11 @@ module Network.Google.Classroom.Types
     , courseAlias
     , caAlias
 
-    -- * Empty
-    , Empty
-    , empty
-
-    -- * GlobalPermission
-    , GlobalPermission
-    , globalPermission
-    , gpPermission
-
-    -- * Invitation
-    , Invitation
-    , invitation
-    , iCourseId
-    , iUserId
-    , iRole
-    , iId
-
-    -- * ListCourseAliasesResponse
-    , ListCourseAliasesResponse
-    , listCourseAliasesResponse
-    , lcarNextPageToken
-    , lcarAliases
-
-    -- * ListCoursesResponse
-    , ListCoursesResponse
-    , listCoursesResponse
-    , lcrNextPageToken
-    , lcrCourses
-
-    -- * ListInvitationsResponse
-    , ListInvitationsResponse
-    , listInvitationsResponse
-    , lirNextPageToken
-    , lirInvitations
-
     -- * ListStudentsResponse
     , ListStudentsResponse
     , listStudentsResponse
     , lsrNextPageToken
     , lsrStudents
-
-    -- * ListTeachersResponse
-    , ListTeachersResponse
-    , listTeachersResponse
-    , ltrNextPageToken
-    , ltrTeachers
-
-    -- * Name
-    , Name
-    , name
-    , nGivenName
-    , nFullName
-    , nFamilyName
 
     -- * Student
     , Student
@@ -97,12 +71,11 @@ module Network.Google.Classroom.Types
     , sProfile
     , sUserId
 
-    -- * Teacher
-    , Teacher
-    , teacher
-    , tCourseId
-    , tProfile
-    , tUserId
+    -- * ListCourseAliasesResponse
+    , ListCourseAliasesResponse
+    , listCourseAliasesResponse
+    , lcarNextPageToken
+    , lcarAliases
 
     -- * UserProfile
     , UserProfile
@@ -112,8 +85,43 @@ module Network.Google.Classroom.Types
     , upEmailAddress
     , upId
     , upPermissions
+
+    -- * Empty
+    , Empty
+    , empty
+
+    -- * GlobalPermission
+    , GlobalPermission
+    , globalPermission
+    , gpPermission
+
+    -- * ListInvitationsResponse
+    , ListInvitationsResponse
+    , listInvitationsResponse
+    , lirNextPageToken
+    , lirInvitations
+
+    -- * ListTeachersResponse
+    , ListTeachersResponse
+    , listTeachersResponse
+    , ltrNextPageToken
+    , ltrTeachers
+
+    -- * Invitation
+    , Invitation
+    , invitation
+    , iCourseId
+    , iUserId
+    , iRole
+    , iId
     ) where
 
 import           Network.Google.Classroom.Types.Product
 import           Network.Google.Classroom.Types.Sum
 import           Network.Google.Prelude
+
+-- | URL referring to version 'v1' of the Google Classroom API.
+classroomURL :: BaseUrl
+classroomURL
+  = BaseUrl Https "https://classroom.googleapis.com/"
+      443

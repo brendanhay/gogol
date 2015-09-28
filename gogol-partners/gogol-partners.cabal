@@ -1,6 +1,6 @@
 name:                  gogol-partners
 version:               0.0.1
-synopsis:              Google Partners API.
+synopsis:              Google Partners API Client.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -17,8 +17,8 @@ description:
     Lets advertisers search certified companies and create contact leads
     with them, and also audits the usage of clients.
     .
-    /Warning:/ This is an experimental preview release which is still under
-    heavy development and not intended for public consumption, caveat emptor!
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
 
 source-repository head
     type:     git
@@ -31,7 +31,11 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.Partners
+          Network.Google.API.Partners.ClientMessages.Log
+        , Network.Google.API.Partners.Companies.Leads.Create
+        , Network.Google.API.Partners.UserEvents.Log
+        , Network.Google.API.Partners.UserStates.List
+        , Network.Google.Partners
         , Network.Google.Partners.Types
 
     other-modules:

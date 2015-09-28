@@ -1,6 +1,6 @@
 name:                  gogol-compute
 version:               0.0.1
-synopsis:              Google Compute Engine API.
+synopsis:              Google Compute Engine API Client.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -16,8 +16,8 @@ extra-source-files:    README.md
 description:
     API for the Google Compute Engine service.
     .
-    /Warning:/ This is an experimental preview release which is still under
-    heavy development and not intended for public consumption, caveat emptor!
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
 
 source-repository head
     type:     git
@@ -30,7 +30,181 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.Compute
+          Network.Google.API.Compute.Addresses.AggregatedList
+        , Network.Google.API.Compute.Addresses.Delete
+        , Network.Google.API.Compute.Addresses.Get
+        , Network.Google.API.Compute.Addresses.Insert
+        , Network.Google.API.Compute.Addresses.List
+        , Network.Google.API.Compute.Autoscalers.AggregatedList
+        , Network.Google.API.Compute.Autoscalers.Delete
+        , Network.Google.API.Compute.Autoscalers.Get
+        , Network.Google.API.Compute.Autoscalers.Insert
+        , Network.Google.API.Compute.Autoscalers.List
+        , Network.Google.API.Compute.Autoscalers.Patch
+        , Network.Google.API.Compute.Autoscalers.Update
+        , Network.Google.API.Compute.BackendServices.Delete
+        , Network.Google.API.Compute.BackendServices.Get
+        , Network.Google.API.Compute.BackendServices.GetHealth
+        , Network.Google.API.Compute.BackendServices.Insert
+        , Network.Google.API.Compute.BackendServices.List
+        , Network.Google.API.Compute.BackendServices.Patch
+        , Network.Google.API.Compute.BackendServices.Update
+        , Network.Google.API.Compute.DiskTypes.AggregatedList
+        , Network.Google.API.Compute.DiskTypes.Get
+        , Network.Google.API.Compute.DiskTypes.List
+        , Network.Google.API.Compute.Disks.AggregatedList
+        , Network.Google.API.Compute.Disks.CreateSnapshot
+        , Network.Google.API.Compute.Disks.Delete
+        , Network.Google.API.Compute.Disks.Get
+        , Network.Google.API.Compute.Disks.Insert
+        , Network.Google.API.Compute.Disks.List
+        , Network.Google.API.Compute.Firewalls.Delete
+        , Network.Google.API.Compute.Firewalls.Get
+        , Network.Google.API.Compute.Firewalls.Insert
+        , Network.Google.API.Compute.Firewalls.List
+        , Network.Google.API.Compute.Firewalls.Patch
+        , Network.Google.API.Compute.Firewalls.Update
+        , Network.Google.API.Compute.ForwardingRules.AggregatedList
+        , Network.Google.API.Compute.ForwardingRules.Delete
+        , Network.Google.API.Compute.ForwardingRules.Get
+        , Network.Google.API.Compute.ForwardingRules.Insert
+        , Network.Google.API.Compute.ForwardingRules.List
+        , Network.Google.API.Compute.ForwardingRules.SetTarget
+        , Network.Google.API.Compute.GlobalAddresses.Delete
+        , Network.Google.API.Compute.GlobalAddresses.Get
+        , Network.Google.API.Compute.GlobalAddresses.Insert
+        , Network.Google.API.Compute.GlobalAddresses.List
+        , Network.Google.API.Compute.GlobalForwardingRules.Delete
+        , Network.Google.API.Compute.GlobalForwardingRules.Get
+        , Network.Google.API.Compute.GlobalForwardingRules.Insert
+        , Network.Google.API.Compute.GlobalForwardingRules.List
+        , Network.Google.API.Compute.GlobalForwardingRules.SetTarget
+        , Network.Google.API.Compute.GlobalOperations.AggregatedList
+        , Network.Google.API.Compute.GlobalOperations.Delete
+        , Network.Google.API.Compute.GlobalOperations.Get
+        , Network.Google.API.Compute.GlobalOperations.List
+        , Network.Google.API.Compute.HTTPHealthChecks.Delete
+        , Network.Google.API.Compute.HTTPHealthChecks.Get
+        , Network.Google.API.Compute.HTTPHealthChecks.Insert
+        , Network.Google.API.Compute.HTTPHealthChecks.List
+        , Network.Google.API.Compute.HTTPHealthChecks.Patch
+        , Network.Google.API.Compute.HTTPHealthChecks.Update
+        , Network.Google.API.Compute.Images.Delete
+        , Network.Google.API.Compute.Images.Deprecate
+        , Network.Google.API.Compute.Images.Get
+        , Network.Google.API.Compute.Images.Insert
+        , Network.Google.API.Compute.Images.List
+        , Network.Google.API.Compute.InstanceGroupManagers.AbandonInstances
+        , Network.Google.API.Compute.InstanceGroupManagers.AggregatedList
+        , Network.Google.API.Compute.InstanceGroupManagers.Delete
+        , Network.Google.API.Compute.InstanceGroupManagers.DeleteInstances
+        , Network.Google.API.Compute.InstanceGroupManagers.Get
+        , Network.Google.API.Compute.InstanceGroupManagers.Insert
+        , Network.Google.API.Compute.InstanceGroupManagers.List
+        , Network.Google.API.Compute.InstanceGroupManagers.ListManagedInstances
+        , Network.Google.API.Compute.InstanceGroupManagers.RecreateInstances
+        , Network.Google.API.Compute.InstanceGroupManagers.Resize
+        , Network.Google.API.Compute.InstanceGroupManagers.SetInstanceTemplate
+        , Network.Google.API.Compute.InstanceGroupManagers.SetTargetPools
+        , Network.Google.API.Compute.InstanceGroups.AddInstances
+        , Network.Google.API.Compute.InstanceGroups.AggregatedList
+        , Network.Google.API.Compute.InstanceGroups.Delete
+        , Network.Google.API.Compute.InstanceGroups.Get
+        , Network.Google.API.Compute.InstanceGroups.Insert
+        , Network.Google.API.Compute.InstanceGroups.List
+        , Network.Google.API.Compute.InstanceGroups.ListInstances
+        , Network.Google.API.Compute.InstanceGroups.RemoveInstances
+        , Network.Google.API.Compute.InstanceGroups.SetNamedPorts
+        , Network.Google.API.Compute.InstanceTemplates.Delete
+        , Network.Google.API.Compute.InstanceTemplates.Get
+        , Network.Google.API.Compute.InstanceTemplates.Insert
+        , Network.Google.API.Compute.InstanceTemplates.List
+        , Network.Google.API.Compute.Instances.AddAccessConfig
+        , Network.Google.API.Compute.Instances.AggregatedList
+        , Network.Google.API.Compute.Instances.AttachDisk
+        , Network.Google.API.Compute.Instances.Delete
+        , Network.Google.API.Compute.Instances.DeleteAccessConfig
+        , Network.Google.API.Compute.Instances.DetachDisk
+        , Network.Google.API.Compute.Instances.Get
+        , Network.Google.API.Compute.Instances.GetSerialPortOutput
+        , Network.Google.API.Compute.Instances.Insert
+        , Network.Google.API.Compute.Instances.List
+        , Network.Google.API.Compute.Instances.Reset
+        , Network.Google.API.Compute.Instances.SetDiskAutoDelete
+        , Network.Google.API.Compute.Instances.SetMetadata
+        , Network.Google.API.Compute.Instances.SetScheduling
+        , Network.Google.API.Compute.Instances.SetTags
+        , Network.Google.API.Compute.Instances.Start
+        , Network.Google.API.Compute.Instances.Stop
+        , Network.Google.API.Compute.Licenses.Get
+        , Network.Google.API.Compute.MachineTypes.AggregatedList
+        , Network.Google.API.Compute.MachineTypes.Get
+        , Network.Google.API.Compute.MachineTypes.List
+        , Network.Google.API.Compute.Networks.Delete
+        , Network.Google.API.Compute.Networks.Get
+        , Network.Google.API.Compute.Networks.Insert
+        , Network.Google.API.Compute.Networks.List
+        , Network.Google.API.Compute.Projects.Get
+        , Network.Google.API.Compute.Projects.MoveDisk
+        , Network.Google.API.Compute.Projects.MoveInstance
+        , Network.Google.API.Compute.Projects.SetCommonInstanceMetadata
+        , Network.Google.API.Compute.Projects.SetUsageExportBucket
+        , Network.Google.API.Compute.RegionOperations.Delete
+        , Network.Google.API.Compute.RegionOperations.Get
+        , Network.Google.API.Compute.RegionOperations.List
+        , Network.Google.API.Compute.Regions.Get
+        , Network.Google.API.Compute.Regions.List
+        , Network.Google.API.Compute.Routes.Delete
+        , Network.Google.API.Compute.Routes.Get
+        , Network.Google.API.Compute.Routes.Insert
+        , Network.Google.API.Compute.Routes.List
+        , Network.Google.API.Compute.Snapshots.Delete
+        , Network.Google.API.Compute.Snapshots.Get
+        , Network.Google.API.Compute.Snapshots.List
+        , Network.Google.API.Compute.TargetHTTPProxies.Delete
+        , Network.Google.API.Compute.TargetHTTPProxies.Get
+        , Network.Google.API.Compute.TargetHTTPProxies.Insert
+        , Network.Google.API.Compute.TargetHTTPProxies.List
+        , Network.Google.API.Compute.TargetHTTPProxies.SetURLMap
+        , Network.Google.API.Compute.TargetInstances.AggregatedList
+        , Network.Google.API.Compute.TargetInstances.Delete
+        , Network.Google.API.Compute.TargetInstances.Get
+        , Network.Google.API.Compute.TargetInstances.Insert
+        , Network.Google.API.Compute.TargetInstances.List
+        , Network.Google.API.Compute.TargetPools.AddHealthCheck
+        , Network.Google.API.Compute.TargetPools.AddInstance
+        , Network.Google.API.Compute.TargetPools.AggregatedList
+        , Network.Google.API.Compute.TargetPools.Delete
+        , Network.Google.API.Compute.TargetPools.Get
+        , Network.Google.API.Compute.TargetPools.GetHealth
+        , Network.Google.API.Compute.TargetPools.Insert
+        , Network.Google.API.Compute.TargetPools.List
+        , Network.Google.API.Compute.TargetPools.RemoveHealthCheck
+        , Network.Google.API.Compute.TargetPools.RemoveInstance
+        , Network.Google.API.Compute.TargetPools.SetBackup
+        , Network.Google.API.Compute.TargetVPNGateways.AggregatedList
+        , Network.Google.API.Compute.TargetVPNGateways.Delete
+        , Network.Google.API.Compute.TargetVPNGateways.Get
+        , Network.Google.API.Compute.TargetVPNGateways.Insert
+        , Network.Google.API.Compute.TargetVPNGateways.List
+        , Network.Google.API.Compute.URLMaps.Delete
+        , Network.Google.API.Compute.URLMaps.Get
+        , Network.Google.API.Compute.URLMaps.Insert
+        , Network.Google.API.Compute.URLMaps.List
+        , Network.Google.API.Compute.URLMaps.Patch
+        , Network.Google.API.Compute.URLMaps.Update
+        , Network.Google.API.Compute.URLMaps.Validate
+        , Network.Google.API.Compute.VPNTunnels.AggregatedList
+        , Network.Google.API.Compute.VPNTunnels.Delete
+        , Network.Google.API.Compute.VPNTunnels.Get
+        , Network.Google.API.Compute.VPNTunnels.Insert
+        , Network.Google.API.Compute.VPNTunnels.List
+        , Network.Google.API.Compute.ZoneOperations.Delete
+        , Network.Google.API.Compute.ZoneOperations.Get
+        , Network.Google.API.Compute.ZoneOperations.List
+        , Network.Google.API.Compute.Zones.Get
+        , Network.Google.API.Compute.Zones.List
+        , Network.Google.Compute
         , Network.Google.Compute.Types
 
     other-modules:

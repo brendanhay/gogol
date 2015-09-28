@@ -17,12 +17,27 @@
 -- /See:/ <https://developers.google.com/fonts/docs/developer_api Google Fonts Developer API Reference>
 module Network.Google.Fonts
     (
-    -- * Resources
+    -- * REST Resources
+
+    -- ** Google Fonts Developer API
       Fonts
-    , WebfontsAPI
-    , WebfontsList
+    , fonts
+    , fontsURL
+
+    -- ** webfonts.webfonts.list
+    , module Network.Google.API.Webfonts.Webfonts.List
 
     -- * Types
+
+    -- ** Alt
+    , Alt (..)
+
+    -- ** WebfontsList'Sort
+    , WebfontsList'Sort (..)
+
+    -- ** WebfontFiles
+    , WebfontFiles
+    , webfontFiles
 
     -- ** Webfont
     , Webfont
@@ -36,10 +51,6 @@ module Network.Google.Fonts
     , wSubsets
     , wLastModified
 
-    -- ** WebfontFiles
-    , WebfontFiles
-    , webfontFiles
-
     -- ** WebfontList
     , WebfontList
     , webfontList
@@ -47,6 +58,7 @@ module Network.Google.Fonts
     , wlItems
     ) where
 
+import           Network.Google.API.Webfonts.Webfonts.List
 import           Network.Google.Fonts.Types
 import           Network.Google.Prelude
 
@@ -54,21 +66,7 @@ import           Network.Google.Prelude
 TODO
 -}
 
-type Fonts = WebfontsAPI
+type Fonts = WebfontsListAPI
 
-type WebfontsAPI = WebfontsList
-
--- | Retrieves the list of fonts currently served by the Google Fonts
--- Developer API
-type WebfontsList =
-     "webfonts" :>
-       "v1" :>
-         "webfonts" :>
-           QueryParam "quotaUser" Text :>
-             QueryParam "prettyPrint" Bool :>
-               QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "sort" Text :>
-                     QueryParam "oauth_token" Text :>
-                       QueryParam "fields" Text :>
-                         QueryParam "alt" Text :> Get '[JSON] WebfontList
+fonts :: Proxy Fonts
+fonts = Proxy

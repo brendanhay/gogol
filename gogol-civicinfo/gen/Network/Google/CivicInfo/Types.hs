@@ -14,50 +14,11 @@
 --
 module Network.Google.CivicInfo.Types
     (
+    -- * Service URL
+      civicInfoURL
 
-    -- * AdministrationRegion
-      AdministrationRegion
-    , administrationRegion
-    , arLocalJurisdiction
-    , arSources
-    , arName
-    , arElectionAdministrationBody
-    , arId
-
-    -- * AdministrativeBody
-    , AdministrativeBody
-    , administrativeBody
-    , abCorrespondenceAddress
-    , abAbsenteeVotingInfoUrl
-    , abHoursOfOperation
-    , abBallotInfoUrl
-    , abPhysicalAddress
-    , abElectionRegistrationConfirmationUrl
-    , abElectionInfoUrl
-    , abVotingLocationFinderUrl
-    , abElectionOfficials
-    , abName
-    , abElectionRulesUrl
-    , abVoterServices
-    , abElectionRegistrationUrl
-
-    -- * Candidate
-    , Candidate
-    , candidate
-    , cEmail
-    , cPhone
-    , cPhotoUrl
-    , cChannels
-    , cCandidateUrl
-    , cOrderOnBallot
-    , cName
-    , cParty
-
-    -- * Channel
-    , Channel
-    , channel
-    , chaId
-    , chaType
+    -- * RepresentativesRepresentativeInfoByDivision'Roles
+    , RepresentativesRepresentativeInfoByDivision'Roles (..)
 
     -- * Contest
     , Contest
@@ -93,42 +54,26 @@ module Network.Google.CivicInfo.Types
     , dsrResults
     , dsrKind
 
-    -- * DivisionSearchResult
-    , DivisionSearchResult
-    , divisionSearchResult
-    , dsrAliases
-    , dsrName
-    , dsrOcdId
+    -- * AdministrativeBody
+    , AdministrativeBody
+    , administrativeBody
+    , abCorrespondenceAddress
+    , abAbsenteeVotingInfoUrl
+    , abHoursOfOperation
+    , abBallotInfoUrl
+    , abPhysicalAddress
+    , abElectionRegistrationConfirmationUrl
+    , abElectionInfoUrl
+    , abVotingLocationFinderUrl
+    , abElectionOfficials
+    , abName
+    , abElectionRulesUrl
+    , abVoterServices
+    , abElectionRegistrationUrl
 
-    -- * Election
-    , Election
-    , election
-    , eOcdDivisionId
-    , eElectionDay
-    , eName
-    , eId
-
-    -- * ElectionOfficial
-    , ElectionOfficial
-    , electionOfficial
-    , eoFaxNumber
-    , eoName
-    , eoOfficePhoneNumber
-    , eoEmailAddress
-    , eoTitle
-
-    -- * ElectionsQueryResponse
-    , ElectionsQueryResponse
-    , electionsQueryResponse
-    , eqrKind
-    , eqrElections
-
-    -- * ElectoralDistrict
-    , ElectoralDistrict
-    , electoralDistrict
-    , edName
-    , edScope
-    , edId
+    -- * RepresentativeInfoResponseDivisions
+    , RepresentativeInfoResponseDivisions
+    , representativeInfoResponseDivisions
 
     -- * GeographicDivision
     , GeographicDivision
@@ -136,28 +81,6 @@ module Network.Google.CivicInfo.Types
     , gdName
     , gdOfficeIndices
     , gdAlsoKnownAs
-
-    -- * Office
-    , Office
-    , office
-    , offDivisionId
-    , offRoles
-    , offOfficialIndices
-    , offSources
-    , offName
-    , offLevels
-
-    -- * Official
-    , Official
-    , official
-    , oPhotoUrl
-    , oUrls
-    , oChannels
-    , oAddress
-    , oPhones
-    , oName
-    , oEmails
-    , oParty
 
     -- * PollingLocation
     , PollingLocation
@@ -172,6 +95,9 @@ module Network.Google.CivicInfo.Types
     , plId
     , plNotes
 
+    -- * Alt
+    , Alt (..)
+
     -- * RepresentativeInfoData
     , RepresentativeInfoData
     , representativeInfoData
@@ -179,22 +105,18 @@ module Network.Google.CivicInfo.Types
     , ridDivisions
     , ridOffices
 
-    -- * RepresentativeInfoDataDivisions
-    , RepresentativeInfoDataDivisions
-    , representativeInfoDataDivisions
+    -- * ElectoralDistrict
+    , ElectoralDistrict
+    , electoralDistrict
+    , edName
+    , edScope
+    , edId
 
-    -- * RepresentativeInfoResponse
-    , RepresentativeInfoResponse
-    , representativeInfoResponse
-    , rirKind
-    , rirNormalizedInput
-    , rirOfficials
-    , rirDivisions
-    , rirOffices
-
-    -- * RepresentativeInfoResponseDivisions
-    , RepresentativeInfoResponseDivisions
-    , representativeInfoResponseDivisions
+    -- * Source
+    , Source
+    , source
+    , sName
+    , sOfficial
 
     -- * SimpleAddressType
     , SimpleAddressType
@@ -207,11 +129,49 @@ module Network.Google.CivicInfo.Types
     , satLine1
     , satLocationName
 
-    -- * Source
-    , Source
-    , source
-    , sName
-    , sOfficial
+    -- * DivisionSearchResult
+    , DivisionSearchResult
+    , divisionSearchResult
+    , dsrAliases
+    , dsrName
+    , dsrOcdId
+
+    -- * RepresentativeInfoResponse
+    , RepresentativeInfoResponse
+    , representativeInfoResponse
+    , rirKind
+    , rirNormalizedInput
+    , rirOfficials
+    , rirDivisions
+    , rirOffices
+
+    -- * RepresentativesRepresentativeInfoByDivision'Levels
+    , RepresentativesRepresentativeInfoByDivision'Levels (..)
+
+    -- * Official
+    , Official
+    , official
+    , oPhotoUrl
+    , oUrls
+    , oChannels
+    , oAddress
+    , oPhones
+    , oName
+    , oEmails
+    , oParty
+
+    -- * ElectionsQueryResponse
+    , ElectionsQueryResponse
+    , electionsQueryResponse
+    , eqrKind
+    , eqrElections
+
+    -- * RepresentativesRepresentativeInfoByAddress'Levels
+    , RepresentativesRepresentativeInfoByAddress'Levels (..)
+
+    -- * RepresentativeInfoDataDivisions
+    , RepresentativeInfoDataDivisions
+    , representativeInfoDataDivisions
 
     -- * VoterInfoResponse
     , VoterInfoResponse
@@ -227,8 +187,72 @@ module Network.Google.CivicInfo.Types
     , virEarlyVoteSites
     , virPollingLocations
     , virPrecinctId
+
+    -- * ElectionOfficial
+    , ElectionOfficial
+    , electionOfficial
+    , eoFaxNumber
+    , eoName
+    , eoOfficePhoneNumber
+    , eoEmailAddress
+    , eoTitle
+
+    -- * Candidate
+    , Candidate
+    , candidate
+    , cEmail
+    , cPhone
+    , cPhotoUrl
+    , cChannels
+    , cCandidateUrl
+    , cOrderOnBallot
+    , cName
+    , cParty
+
+    -- * Office
+    , Office
+    , office
+    , offDivisionId
+    , offRoles
+    , offOfficialIndices
+    , offSources
+    , offName
+    , offLevels
+
+    -- * Channel
+    , Channel
+    , channel
+    , chaId
+    , chaType
+
+    -- * RepresentativesRepresentativeInfoByAddress'Roles
+    , RepresentativesRepresentativeInfoByAddress'Roles (..)
+
+    -- * Election
+    , Election
+    , election
+    , eOcdDivisionId
+    , eElectionDay
+    , eName
+    , eId
+
+    -- * AdministrationRegion
+    , AdministrationRegion
+    , administrationRegion
+    , arLocalJurisdiction
+    , arSources
+    , arName
+    , arElectionAdministrationBody
+    , arId
     ) where
 
 import           Network.Google.CivicInfo.Types.Product
 import           Network.Google.CivicInfo.Types.Sum
 import           Network.Google.Prelude
+
+-- | URL referring to version 'v2' of the Google Civic Information API.
+civicInfoURL :: BaseUrl
+civicInfoURL
+  = BaseUrl Https
+      "https://www.googleapis.com/civicinfo/v2/"
+      443

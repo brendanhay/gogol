@@ -14,65 +14,18 @@
 --
 module Network.Google.Fitness.Types
     (
+    -- * Service URL
+      fitnessURL
 
-    -- * AggregateBucket
-      AggregateBucket
-    , aggregateBucket
-    , abEndTimeMillis
-    , abDataset
-    , abActivity
-    , abType
-    , abStartTimeMillis
-    , abSession
+    -- * ListSessionsResponse
+    , ListSessionsResponse
+    , listSessionsResponse
+    , lsrNextPageToken
+    , lsrDeletedSession
+    , lsrSession
 
     -- * AggregateBucketType
     , AggregateBucketType (..)
-
-    -- * AggregateBy
-    , AggregateBy
-    , aggregateBy
-    , abDataTypeName
-    , abDataSourceId
-
-    -- * AggregateRequest
-    , AggregateRequest
-    , aggregateRequest
-    , arEndTimeMillis
-    , arAggregateBy
-    , arBucketBySession
-    , arBucketByActivityType
-    , arBucketByTime
-    , arStartTimeMillis
-    , arBucketByActivitySegment
-
-    -- * AggregateResponse
-    , AggregateResponse
-    , aggregateResponse
-    , arBucket
-
-    -- * Application
-    , Application
-    , application
-    , aPackageName
-    , aName
-    , aVersion
-    , aDetailsUrl
-
-    -- * BucketByActivity
-    , BucketByActivity
-    , bucketByActivity
-    , bbaMinDurationMillis
-    , bbaActivityDataSourceId
-
-    -- * BucketBySession
-    , BucketBySession
-    , bucketBySession
-    , bbsMinDurationMillis
-
-    -- * BucketByTime
-    , BucketByTime
-    , bucketByTime
-    , bbtDurationMillis
 
     -- * DataPoint
     , DataPoint
@@ -86,32 +39,31 @@ module Network.Google.Fitness.Types
     , dpModifiedTimeMillis
     , dpStartTimeNanos
 
-    -- * DataSource
-    , DataSource
-    , dataSource
-    , dsApplication
-    , dsDevice
-    , dsName
-    , dsDataType
-    , dsType
-    , dsDataStreamName
-    , dsDataStreamId
+    -- * AggregateBucket
+    , AggregateBucket
+    , aggregateBucket
+    , abEndTimeMillis
+    , abDataset
+    , abActivity
+    , abType
+    , abStartTimeMillis
+    , abSession
 
-    -- * DataSourceType
-    , DataSourceType (..)
+    -- * MapValue
+    , MapValue
+    , mapValue
+    , mvFpVal
 
-    -- * DataType
-    , DataType
-    , dataType
-    , dtField
-    , dtName
+    -- * ListDataSourcesResponse
+    , ListDataSourcesResponse
+    , listDataSourcesResponse
+    , ldsrDataSource
 
-    -- * DataTypeField
-    , DataTypeField
-    , dataTypeField
-    , dtfFormat
-    , dtfName
-    , dtfOptional
+    -- * AggregateBy
+    , AggregateBy
+    , aggregateBy
+    , abDataTypeName
+    , abDataSourceId
 
     -- * DataTypeFieldFormat
     , DataTypeFieldFormat (..)
@@ -125,6 +77,77 @@ module Network.Google.Fitness.Types
     , dMinStartTimeNs
     , dMaxEndTimeNs
 
+    -- * Application
+    , Application
+    , application
+    , aPackageName
+    , aName
+    , aVersion
+    , aDetailsUrl
+
+    -- * Alt
+    , Alt (..)
+
+    -- * AggregateResponse
+    , AggregateResponse
+    , aggregateResponse
+    , arBucket
+
+    -- * DataSource
+    , DataSource
+    , dataSource
+    , dsApplication
+    , dsDevice
+    , dsName
+    , dsDataType
+    , dsType
+    , dsDataStreamName
+    , dsDataStreamId
+
+    -- * DataType
+    , DataType
+    , dataType
+    , dtField
+    , dtName
+
+    -- * BucketByTime
+    , BucketByTime
+    , bucketByTime
+    , bbtDurationMillis
+
+    -- * ValueMapValEntry
+    , ValueMapValEntry
+    , valueMapValEntry
+    , vmveValue
+    , vmveKey
+
+    -- * DeviceType
+    , DeviceType (..)
+
+    -- * DataTypeField
+    , DataTypeField
+    , dataTypeField
+    , dtfFormat
+    , dtfName
+    , dtfOptional
+
+    -- * AggregateRequest
+    , AggregateRequest
+    , aggregateRequest
+    , arEndTimeMillis
+    , arAggregateBy
+    , arBucketBySession
+    , arBucketByActivityType
+    , arBucketByTime
+    , arStartTimeMillis
+    , arBucketByActivitySegment
+
+    -- * BucketByActivity
+    , BucketByActivity
+    , bucketByActivity
+    , bbaMinDurationMillis
+    , bbaActivityDataSourceId
+
     -- * Device
     , Device
     , device
@@ -134,25 +157,18 @@ module Network.Google.Fitness.Types
     , dVersion
     , dType
 
-    -- * DeviceType
-    , DeviceType (..)
+    -- * Value
+    , Value
+    , value
+    , vMapVal
+    , vFpVal
+    , vIntVal
+    , vStringVal
 
-    -- * ListDataSourcesResponse
-    , ListDataSourcesResponse
-    , listDataSourcesResponse
-    , ldsrDataSource
-
-    -- * ListSessionsResponse
-    , ListSessionsResponse
-    , listSessionsResponse
-    , lsrNextPageToken
-    , lsrDeletedSession
-    , lsrSession
-
-    -- * MapValue
-    , MapValue
-    , mapValue
-    , mvFpVal
+    -- * BucketBySession
+    , BucketBySession
+    , bucketBySession
+    , bbsMinDurationMillis
 
     -- * Session
     , Session
@@ -167,21 +183,17 @@ module Network.Google.Fitness.Types
     , sStartTimeMillis
     , sDescription
 
-    -- * Value
-    , Value
-    , value
-    , vMapVal
-    , vFpVal
-    , vIntVal
-    , vStringVal
-
-    -- * ValueMapValEntry
-    , ValueMapValEntry
-    , valueMapValEntry
-    , vmveValue
-    , vmveKey
+    -- * DataSourceType
+    , DataSourceType (..)
     ) where
 
 import           Network.Google.Fitness.Types.Product
 import           Network.Google.Fitness.Types.Sum
 import           Network.Google.Prelude
+
+-- | URL referring to version 'v1' of the Fitness.
+fitnessURL :: BaseUrl
+fitnessURL
+  = BaseUrl Https
+      "https://www.googleapis.com/fitness/v1/users/"
+      443
