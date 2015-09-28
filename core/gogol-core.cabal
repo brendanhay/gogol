@@ -39,6 +39,8 @@ library
           Network.Google.Prelude
 
     other-modules:
+          Network.Google.Data.JSON
+        , Network.Google.Data.Numeric
 
     build-depends:
           aeson      >= 0.8
