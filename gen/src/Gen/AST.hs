@@ -130,7 +130,7 @@ render svc = do
             Sub ms -> traverse (uncurry verb) (Map.toList ms)
 
         verb l m = do
-            let (k, i, ns) = vname (_mId m)
+            let (k, i, ns) = vname (svcAbbrev svc) (_mId m)
             s      <- solve i
             Just d <- typ s
             fmap (k,) $
@@ -204,7 +204,7 @@ flatten svc = do
             Sub ms -> Sub <$> Map.traverseWithKey (verb l) ms
 
         verb p l m = do
-            let (_, i, _) = vname (_mId m)
+            let (_, i, _) = vname (svcAbbrev svc) (_mId m)
             rs <- Map.traverseWithKey (prm i) (_mParameters m)
             _  <- ins i $
                 Obj (Info (_mDescription m) Nothing False Nothing) (Map.map _prmSchema (rs <> qs))

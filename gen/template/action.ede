@@ -12,7 +12,7 @@
 --
 {{ action.type.help }}
 --
--- /See:/ <{{ documentationLink }} {{ title }} Reference> for {{ action.prettyName }}.
+-- /See:/ <{{ documentationLink }} {{ title }} Reference> for @{{ action.prettyName }}@.
 module {{ action.ns }}
     (
     -- * REST Resource

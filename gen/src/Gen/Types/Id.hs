@@ -19,6 +19,7 @@ import           Data.Aeson                   hiding (Bool, String)
 import           Data.Aeson.TH
 import qualified Data.Attoparsec.Text         as A
 import           Data.Bifunctor
+import qualified Data.CaseInsensitive         as CI
 import           Data.Char
 import           Data.Function                (on)
 import           Data.Hashable
@@ -42,12 +43,17 @@ import           Language.Haskell.Exts.Build
 import           Language.Haskell.Exts.Pretty (prettyPrint)
 import           Language.Haskell.Exts.Syntax (Name)
 
-vname :: Text -> (Name, Id, [Text])
-vname n = (dname (g (x <> "API")), g x, ns)
+vname :: Text -> Text -> (Name, Id, [Text])
+vname abrv r = (dname (g (n <> "API")), g (n <> "'"), ns)
   where
-    g  = Free . Global
-    x  = mconcat (drop 1 ns)
-    ns = map (upperAcronym . upperHead) $ Text.split (== '.') n
+    g = Free . Global
+    n = mconcat (drop 1 ns)
+
+    ns | CI.mk e == CI.mk x = e:xs
+       | otherwise          = x:xs
+      where
+        e    = Text.replace "." "" abrv
+        x:xs = map (upperAcronym . upperHead) $ Text.split (== '.') r
 
 dname, cname :: Id -> Name
 dname = name . Text.unpack . upperHead . idToText
