@@ -7,5 +7,10 @@ default:
 sdist:
 	cabal sdist
 
+candidate:
+	curl --proxy localhost:8000 --silent "file=@dist/$(NAME)-$(VERSION).tar.gz" \
+ http://hackage.haskell.org/packages/candidates/
+
 upload:
-	cabal upload dist/$(NAME)-$(VERSION).tar.gz
+	@echo "noop"
+#	cabal upload dist/$(NAME)-$(VERSION).tar.gz
