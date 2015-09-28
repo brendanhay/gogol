@@ -42,13 +42,11 @@ import           Language.Haskell.Exts.Build
 import           Language.Haskell.Exts.Pretty (prettyPrint)
 import           Language.Haskell.Exts.Syntax (Name)
 
-nname :: Local -> Name
-nname = name . Text.unpack . (<> "API") . upperHead . local
-
 vname :: Local -> Local -> (Name, Id)
-vname p l = (dname n, n)
+vname p l = (dname (g (n <> "'")), g n)
   where
-    n = Free (Global (f p <> f l))
+    g = Free . Global
+    n = f p <> f l
     f = upperHead . local
 
 dname, cname :: Id -> Name
@@ -65,6 +63,9 @@ fname, lname, pname :: Pre -> Local -> Name
 fname = pre (Text.cons '_' . renameField)
 lname = pre renameField
 pname = pre (flip Text.snoc '_' . Text.cons 'p' . upperHead . renameField)
+
+apretty :: Local -> Local -> Text
+apretty p l = upperHead (local l) <> " " <> upperHead (local p)
 
 pre :: (Text -> Text) -> Pre -> Local -> Name
 pre f (Pre p) = name . Text.unpack . f . mappend p . upperHead . local

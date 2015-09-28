@@ -11,11 +11,14 @@
 -- /See:/ <{{ documentationLink }} {{ title }} Reference>
 module {{ moduleName }}
     (
-    -- * Resources
+    -- * REST Resources
       {{ api.name }}
-    {% for action in api.actions %}
-    , {{ action.value.name }}
-    {% endfor %}
+    , {{ api.name | lowerHead }}
+  {% for action in api.actions %}
+
+    -- ** {{ action.value.prettyName }}
+    , module {{ action.value.ns }}
+  {% endfor %}
 
     -- * Types
   {% for schema in schemas %}
@@ -48,3 +51,6 @@ TODO
 -}
 
 {{ api.decl }}
+
+{{ api.name | lowerHead }} :: Proxy {{ api.name }}
+{{ api.name | lowerHead }} = Proxy

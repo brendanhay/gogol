@@ -45,6 +45,9 @@ verbAlias s n m = TypeDecl noLoc n [] alias
   where
     alias = foldr' (\l r -> TyInfix l (UnQual (sym ":>")) r) verb (path ++ qry)
 
+    -- FIXME: rather than using 'terminal' to get the terminal type,
+    -- write a custom 'Link' for servant to specify required params.
+
     path :: [Type]
     path = map match
          . filter (not . Text.null)
@@ -59,7 +62,7 @@ verbAlias s n m = TypeDecl noLoc n [] alias
             , _prmLocation k == Path
                         = TyApp (TyApp (tycon "Capture")
                                        (sing (Text.init t)))
-                                (external (_type (_prmSchema k)))
+                                (terminalType (_type (_prmSchema k)))
             | otherwise = sing x
 
     -- FIXME: order by _mParameterOrder
@@ -67,11 +70,12 @@ verbAlias s n m = TypeDecl noLoc n [] alias
     qry = mapMaybe f (Map.toList params)
       where
         f (k, x) =
-           -- FIXME: types, many/repeated
-           let t = external (_type (_prmSchema x))
+           let t = terminalType (_type (_prmSchema x))
                n = sing (local k)
             in case _prmLocation x of
                 Query -> Just $ TyApp (TyApp (tycon "QueryParam") n) t
+                Query | _prmRepeated x
+                      -> Just $ TyApp (TyApp (tycon "QueryParams") n) t
                 Path  -> Nothing
 
     params = _mParameters m
@@ -82,6 +86,35 @@ verbAlias s n m = TypeDecl noLoc n [] alias
         meth = TyCon . unqual . Text.unpack $ Text.toTitle (_mMethod m)
         typ  = tycon "'[JSON]"
         res  = maybe (tycon "()") (tycon . Free) (_mResponse m)
+
+requestDecl :: Id -> Pre -> [Local] -> Maybe Id -> Decl
+requestDecl n p fs r =
+    -- FIXME: associated Rs type
+    InstDecl noLoc Nothing [] [] (unqual "GoogleRequest") [tycon n]
+        [ response
+        , request
+        , requestWithRoute
+        ]
+  where
+    response = InsType noLoc (TyApp (tycon "Rs") (tycon n)) $
+        maybe unit_tycon tycon r
+
+    request = funD "request" $
+        appFun (var "requestWithRoute") [var "defReq", var "serviceURL"]
+
+    requestWithRoute =
+        InsDecl (FunBind [match "requestWithRoute" e])
+      where
+        e = appFun (var "clientWithRoute") $
+            [ ExpTypeSig noLoc (var "Proxy") (TyApp (tycon "Proxy") (tycon n))
+            , var "r"
+            , var "u"
+            ] ++ map (var . fname p) fs
+
+    match f e = Match noLoc (name f) pats Nothing (UnGuardedRhs e) noBinds
+
+    pats = [prec, pvar "r", pvar "u"]
+    prec = PRec (UnQual (dname n)) [PFieldWildcard]
 
 jsonDecls :: Id -> Pre -> Map Local Solved -> [Decl]
 jsonDecls n p (Map.toList -> rs) = [from, to]
@@ -170,8 +203,8 @@ conDecl n p rs = QualConDecl noLoc [] [] body
   where
     body = case Map.toList rs of
         []  -> ConDecl n []
-        [x] -> RecDecl n [field internal x]
-        xs  -> RecDecl n (map (field (strict . internal)) xs)
+        [x] -> RecDecl n [field internalType x]
+        xs  -> RecDecl n (map (field (strict . internalType)) xs)
 
     field f (l, v) = ([fname p l], f (_type v))
 
@@ -206,7 +239,7 @@ fieldUpdate p l s = FieldUpdate (UnQual (fname p l)) rhs
 lensSig :: Id -> Pre -> Local -> Solved -> Decl
 lensSig n p l s = TypeSig noLoc [lname p l] $
     TyApp (TyApp (tycon "Lens'") (tycon n))
-          (external (_type s))
+          (externalType (_type s))
 
 lensDecl :: Pre -> Local -> Solved -> Decl
 lensDecl p l s = sfun noLoc (lname p l) [] (UnGuardedRhs rhs) noBinds
@@ -220,7 +253,7 @@ lensDecl p l s = sfun noLoc (lname p l) [] (UnGuardedRhs rhs) noBinds
                    (RecUpdate (var "s") [FieldUpdate (UnQual f) (var "a")])))
 
 parameters :: [Solved] -> [Type]
-parameters = map (external . _type) . filter (view required)
+parameters = map (externalType . _type) . filter (view required)
 
 def :: Solved -> Maybe Exp
 def s
@@ -236,25 +269,52 @@ def s
 
     lit = var . name . Text.unpack
 
-external, internal :: TType -> Type
-external = internal . \case
-    TMaybe t@TList {} -> t
-    t                 -> t
+terminalType :: TType -> Type
+terminalType = internalType . go
+  where
+    go (TMaybe x) = x
+    go (TList  x) = x
+    go x          = x
 
-internal = \case
+externalType :: TType -> Type
+externalType = \case
+    TType   r          -> tycon r
+    TMaybe  t@TList {} -> externalType t
+    TMaybe  t          -> TyApp (tycon "Maybe") (externalType t)
+    TEither a b        -> TyApp (TyApp (tycon "Either") (externalType a)) (externalType b)
+    TList   t          -> TyList (externalType t)
+    TLit    l          -> externalLit l
+
+internalType :: TType -> Type
+internalType = \case
     TType   r   -> tycon r
-    TMaybe  t   -> TyApp (tycon "Maybe") (internal t)
-    TEither a b -> TyApp (TyApp (tycon "Either") (internal a)) (internal b)
-    TList   t   -> TyList (internal t)
-    TLit    l   -> literal l
+    TMaybe  t   -> TyApp (tycon "Maybe") (internalType t)
+    TEither a b -> TyApp (TyApp (tycon "Either") (internalType a)) (internalType b)
+    TList   t   -> TyList (internalType t)
+    TLit    l   -> internalLit l
 
-literal :: Lit -> Type
-literal = \case
+externalLit :: Lit -> Type
+externalLit = \case
     Text   -> tycon "Text"
     Bool   -> tycon "Bool"
     Time   -> tycon "UTCTime"
     Date   -> tycon "UTCTime"
     Nat    -> tycon "Natural"
+    Float  -> tycon "Float"
+    Double -> tycon "Double"
+    Byte   -> tycon "Word8"
+    UInt32 -> tycon "Word32"
+    UInt64 -> tycon "Word64"
+    Int32  -> tycon "Int32"
+    Int64  -> tycon "Int64"
+
+internalLit :: Lit -> Type
+internalLit = \case
+    Text   -> tycon "Text"
+    Bool   -> tycon "Bool"
+    Time   -> tycon "UTCTime"
+    Date   -> tycon "UTCTime"
+    Nat    -> tycon "Nat"
     Float  -> tycon "Float"
     Double -> tycon "Double"
     Byte   -> tycon "Word8"
@@ -277,6 +337,7 @@ mapping t e = infixE e "." (go t)
 iso :: TType -> Maybe Exp
 iso = \case
     TList {} -> Just (var "_Coerce")
+    TLit Nat -> Just (var "_Nat")
     _        -> Nothing
 
 strict :: Type -> Type

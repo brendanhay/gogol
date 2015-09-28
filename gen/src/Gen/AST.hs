@@ -110,13 +110,20 @@ render svc = do
             s      <- solve i
             Just d <- typ s
             fmap (k,) $
-                Action k (actionNS svc p l) (_mDescription m)
+                Action k (apretty p l) (actionNS svc p l) (_mDescription m)
                     <$> pp Print (verbAlias svc k m)
-                    <*> pure (reset d)
+                    <*> reset m s d
 
-        reset = \case
-            Prod n' h r c ls _ -> Prod n' h r c ls []
-            d                  -> d
+        reset m s = \case
+            d@Sum {}           -> pure d
+            Prod n' h r c ls _ ->
+                Prod n' h r c ls . (:[]) <$> pp Print
+                    (requestDecl (_ident s) (_prefix s) (fields (_schema s))
+                         (fmap Free (_mResponse m)))
+
+        fields  = \case
+            Obj _ rs -> Map.keys rs
+            _        -> mempty
 
 solveAll :: Flattened -> AST Typed
 solveAll svc = do

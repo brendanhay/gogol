@@ -38,7 +38,7 @@ import           Data.Char
 import           Data.Function                (on)
 import qualified Data.HashMap.Strict          as Map
 import qualified Data.HashSet                 as Set
-import           Data.List                    (groupBy, sort)
+import           Data.List                    (groupBy, sort, sortOn)
 import           Data.List.NonEmpty           (NonEmpty (..))
 import qualified Data.List.NonEmpty           as NE
 import           Data.Maybe
@@ -374,20 +374,22 @@ instance ToJSON Data where
             ]
 
 data Action = Action
-    { _actName  :: Name
-    , _actNS    :: NS
-    , _actHelp  :: Maybe Help
-    , _actAlias :: Rendered
-    , _actData  :: Data
+    { _actName       :: Name
+    , _actPrettyName :: Text
+    , _actNS         :: NS
+    , _actHelp       :: Maybe Help
+    , _actAlias      :: Rendered
+    , _actData       :: Data
     }
 
 instance ToJSON Action where
     toJSON Action {..} = object
-        [ "name"  .= Syn _actName
-        , "ns"    .= _actNS
-        , "help"  .= _actHelp
-        , "alias" .= _actAlias
-        , "type"  .= _actData
+        [ "name"       .= Syn _actName
+        , "prettyName" .= _actPrettyName
+        , "ns"         .= _actNS
+        , "help"       .= _actHelp
+        , "alias"      .= _actAlias
+        , "type"       .= _actData
         ]
 
 data API = API
@@ -400,7 +402,7 @@ instance ToJSON API where
     toJSON API {..} = object
          [ "name"    .= Syn _apiName
          , "decl"    .= _apiDecl
-         , "actions" .= Map.elems _apiActions
+         , "actions" .= sortOn _actName (Map.elems _apiActions)
          ]
 
 data Method a = Method

@@ -6,13 +6,28 @@
 
 {% include "_include/license.ede" %}
 --
+{{ action.type.help }}
+--
+-- /See:/ <{{ documentationLink }} {{ title }} Reference> for {{ action.prettyName }}.
 module {{ action.ns }}
     (
-    -- * Resource
+    -- * REST Resource
       {{ action.name }}
 
+    -- * Creating a Request
+    , {{ action.type.ctor.name }}
+    , {{ action.type.name }}
+
+  {% for lens in action.type.lenses %}
+    {% if lens.first %}
+    -- * Request Lenses
+    {% endif %}
+    , {{ lens.value.name }}
+  {% endfor %}
     ) where
 
+-- | A resource alias for {{ action.prettyName }} which the
+-- '{{ action.type.name }}' request conforms to.
 {{ action.alias }}
 
 {% include "_include/prod.ede" with type = action.type %}
