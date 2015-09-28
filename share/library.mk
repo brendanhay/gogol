@@ -8,9 +8,11 @@ sdist:
 	cabal sdist
 
 candidate:
-	curl --proxy localhost:8000 --silent "file=@dist/$(NAME)-$(VERSION).tar.gz" \
+	curl \
+ -i -X POST \
+ -H "Content-Type: multipart/form-data"
+ "file=@dist/$(NAME)-$(VERSION).tar.gz"
  http://hackage.haskell.org/packages/candidates/
 
 upload:
 	@echo "noop"
-#	cabal upload dist/$(NAME)-$(VERSION).tar.gz
