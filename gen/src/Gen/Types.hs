@@ -6,14 +6,15 @@
 {-# LANGUAGE ExtendedDefaultRules       #-}
 {-# LANGUAGE FlexibleContexts           #-}
 {-# LANGUAGE FlexibleInstances          #-}
+{-# LANGUAGE FunctionalDependencies     #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE KindSignatures             #-}
 {-# LANGUAGE LambdaCase                 #-}
+{-# LANGUAGE MultiParamTypeClasses      #-}
 {-# LANGUAGE OverloadedStrings          #-}
+{-# LANGUAGE RankNTypes                 #-}
 {-# LANGUAGE RecordWildCards            #-}
 {-# LANGUAGE TemplateHaskell            #-}
-
-{-# OPTIONS_GHC -fno-warn-type-defaults #-}
 
 -- Module      : Gen.Types
 -- Copyright   : (c) 2015 Brendan Hay
@@ -28,12 +29,19 @@ module Gen.Types
     , module Gen.Types.Id
     , module Gen.Types.Map
     , module Gen.Types.NS
+    , module Gen.Types.Schema
+    , module Gen.Types.Data
     ) where
 
 import           Control.Applicative
 import           Control.Lens                 hiding ((.=))
-import           Data.Aeson                   hiding (Bool, String)
+import           Control.Monad.Except
+import           Control.Monad.State.Strict
+import           Data.Aeson                   hiding (Array, Bool, String)
+import qualified Data.Aeson                   as A
 import           Data.Aeson.TH
+import           Data.CaseInsensitive         (CI)
+import qualified Data.CaseInsensitive         as CI
 import           Data.Char
 import           Data.Function                (on)
 import qualified Data.HashMap.Strict          as Map
@@ -54,37 +62,23 @@ import qualified Filesystem.Path.CurrentOS    as Path
 import           Formatting
 import           Gen.Orphans                  ()
 import           Gen.Text
+import           Gen.TH
+import           Gen.Types.Data
 import           Gen.Types.Help
 import           Gen.Types.Id
 import           Gen.Types.Map
 import           Gen.Types.NS
+import           Gen.Types.Schema
 import           GHC.Generics
 import           GHC.TypeLits
 import           Language.Haskell.Exts        (Name)
 import           Language.Haskell.Exts.Pretty (Pretty, prettyPrint)
+import           Prelude                      hiding (Enum)
 import           Text.EDE                     (Template)
 
-default (Text)
-
-newtype Fix f = Fix (f (Fix f))
-
-type Set      = Set.HashSet
-type Error    = LText.Text
-type Rendered = LText.Text
-type Path     = Path.FilePath
-
-toTextIgnore :: Path -> Text
-toTextIgnore = either id id . Path.toText
-
-data Templates = Templates
-    { cabalTemplate  :: Template
-    , tocTemplate    :: Template
-    , readmeTemplate :: Template
-    , typesTemplate  :: Template
-    , prodTemplate   :: Template
-    , sumTemplate    :: Template
-    , actionTemplate :: Template
-    }
+type Set   = Set.HashSet
+type Error = LText.Text
+type Path  = Path.FilePath
 
 newtype Version (v :: Symbol) = Version Text
     deriving (Eq, Show)
@@ -105,193 +99,118 @@ data Versions = Versions
     , _coreVersion    :: CoreVer
     } deriving (Show)
 
--- FIXME: need a more comprehensive 'vm_alpha' vs 'vm1.1' etc check.
-data Spec = Spec
-    { _specName    :: Text
-    , _specPrefix  :: Text
-    , _specVersion :: Text
-    , _specPath    :: Path
+makeClassy ''Versions
+
+-- FIXME: need a more comprehensive 'vm_alpha' vs 'vm1.1' version check.
+data Model = Model
+    { modelName    :: Text
+    , modelPrefix  :: Text
+    , modelVersion :: Text
+    , modelPath    :: Path
     }
 
-instance Eq Spec where
-    (==) = on (==) _specPrefix
+instance Eq Model where
+    (==) = on (==) modelPrefix
 
-instance Ord Spec where
+instance Ord Model where
     compare a b =
-           on compare _specPrefix a b
-        <> on compare (Down . _specVersion) a b
+           on compare modelPrefix a b
+        <> on compare (Down . modelVersion) a b
 
-specFromPath :: Path -> Spec
-specFromPath x = Spec n p v x
+modelFromPath :: Path -> Model
+modelFromPath x = Model n p v x
   where
-   -- FIXME:
-   n = Text.init
-     . Text.intercalate "/"
-     . drop 1
-     . dropWhile (/= "model")
-     $ Text.split (== '/') p
+    n = Text.init
+      . Text.intercalate "/"
+      . drop 1
+      . dropWhile (/= "model")
+      $ Text.split (== '/') p
 
-   p = toTextIgnore (Path.parent (Path.parent x))
-   v = toTextIgnore (Path.dirname x)
+    p = toTextIgnore (Path.parent (Path.parent x))
+    v = toTextIgnore (Path.dirname x)
 
-data Protocol = REST
-    deriving (Eq, Show)
+data Templates = Templates
+    { cabalTemplate  :: Template
+    , tocTemplate    :: Template
+    , readmeTemplate :: Template
+    , typesTemplate  :: Template
+    , prodTemplate   :: Template
+    , sumTemplate    :: Template
+    , actionTemplate :: Template
+    }
 
-instance FromJSON Protocol where
-    parseJSON = withText "protocol" $ \case
-        "rest" -> pure REST
-        e      -> fail $ "Unable to parse protocol from " ++ Text.unpack e
+tocImports, typeImports, prodImports, sumImports, actionImports
+ :: Service a -> [NS]
+tocImports    _ = [preludeNS]
+typeImports   s = sort [preludeNS, prodNS s, sumNS s]
+prodImports   s = sort [preludeNS, sumNS s]
+sumImports    _ = [preludeNS]
+actionImports s = sort [preludeNS, typesNS s]
 
-instance ToJSON Protocol where
-    toJSON = toJSON . map toLower . show
+tocNS, typesNS, prodNS, sumNS :: Service a -> NS
+tocNS   = mappend "Network.Google" . mkNS . _sCanonicalName
+typesNS = (<> "Types")   . tocNS
+prodNS  = (<> "Product") . typesNS
+sumNS   = (<> "Sum")     . typesNS
 
-data Location
-    = Query
-    | Path
-      deriving (Eq, Show)
+preludeNS :: NS
+preludeNS = "Network.Google.Prelude"
 
-deriveJSON (js "") ''Location
+-- actionNS :: [Text] -> NS
+-- actionNS = mappend (NS ["Network", "Google", "API"]) . NS
 
-data Info = Info
-    { _description :: Maybe Help
-    , _defaulted   :: Maybe Text
-    , _required    :: !Bool
-    , _location    :: Maybe Location
-    } deriving (Eq, Show)
+-- exposedModules :: Service s p API -> [NS]
+-- exposedModules s = sort (tocNS s : typesNS s : map _actNS (svcActions s))
 
-instance FromJSON Info where
-    parseJSON = withObject "info" $ \o -> Info
-        <$> o .:? "description"
-        <*> o .:? "default"
-        <*> o .:? "required" .!= False
-        <*> o .:? "location"
+-- otherModules :: Service s p r -> [NS]
+-- otherModules s = sort [prodNS s, sumNS s]
 
-deriveToJSON (js "_info") ''Info
+toTextIgnore :: Path -> Text
+toTextIgnore = either id id . Path.toText
 
-makeClassy ''Info
+data Library = Library
+    { _lVersions :: Versions
+    , _lService  :: Service Global
+    -- , _lMethods   ::
+    -- , _lResources :: []
+    -- , _lSchemas   :: [Data]
+    }
 
-parameter :: HasInfo a => a -> Bool
-parameter s = s ^. required && isNothing (s ^. defaulted)
+makeLenses ''Library
 
-data Lit
-    = Text
-    | Bool
-    | Float
-    | Double
-    | Byte
-    | UInt32
-    | UInt64
-    | Int32
-    | Int64
-    | Nat
-    | Date
-    | Time
-      deriving (Eq, Show)
+instance HasVersions Library where
+    versions = lVersions
 
-instance FromJSON Lit where
-    parseJSON = withObject "literal" $ \o -> do
-        n <- num =<< (o .:? "minimum" .!= "0")
-        (o .: "format" <|> o .: "type") >>= \case
-            -- Types
-            "string"    -> pure Text
-            "boolean"   -> pure Bool
-            -- Formats
-            "float"     -> pure Float
-            "double"    -> pure Double
-            "byte"      -> pure (nat n Byte)
-            "uint32"    -> pure (nat n UInt32)
-            "uint64"    -> pure (nat n UInt64)
-            "int32"     -> pure (nat n Int32)
-            "int64"     -> pure (nat n Int64)
-            "date"      -> pure Date
-            "date-time" -> pure Time
-            e           -> fail $
-                "Unable to parse Lit from " ++ Text.unpack e
-      where
-        num = either fail (pure . fst) . Read.decimal
+instance HasDescription Library Global where
+    description = lService . description
 
-        nat :: Int -> Lit -> Lit
-        nat n | n > 0     = const Nat
-              | otherwise = id
+instance HasService Library Global where
+    service = lService
 
--- "pattern": "[A-Z]{3}",
--- "pattern": "[0-9a-zA-Z,]+",
--- "pattern": "[a-zA-Z]+==[a-zA-Z0-9_+-]+",
--- "minimum": "1"
--- "format": "date-time", "uint64", "int32",
+instance ToJSON Library where
+    toJSON l = object
+        [ "libraryName"        .= (l ^. sLibrary)
+        , "libraryTitle"       .= (l ^. dTitle)
+        , "libraryDescription" .= Desc 4 (l ^. dDescription)
+        , "libraryVersion"     .= (l ^. libraryVersion)
+        , "coreVersion"        .= (l ^. coreVersion)
+        , "clientVersion"      .= (l ^. clientVersion)
+        --  , "exposedModules"      .= concatMap exposedModules (NE.toList _libServices)
+        -- , "otherModules"        .= concatMap otherModules   (NE.toList _libServices)
+        ]
 
-deriveToJSON (js "") ''Lit
+-- data Service = Service
+--     { _sLibrary       :: Text
+--     , _sCanonicalName :: Text
+--     , _sOwnerName     :: Text
+--     , _sOwnerDomain   :: Text
+--     , _sPackagePath   :: Maybe Text
+--     , _sDescription   :: Description
+--     } deriving (Eq, Show)
 
-data Schema a
-    = Obj  Info (Map Local a)
-    | Arr  Info a
-    | Enum Info [Text] [Help]
-    | Lit  Info Lit
-    | Ref  Info Global
-    | Any  Info -- String or Number
-      deriving (Eq, Show, Functor, Foldable, Traversable)
-
-instance FromJSON (Fix Schema) where
-    parseJSON = withObject "schema" $ \o -> do
-        i <- parseJSON (Object o)
-        Fix <$> (ref i o <|> schema i o)
-      where
-        schema i o = o .: "type" >>= \case
-            "object" -> Obj i <$> o .:? "properties" .!= mempty
-            "array"  -> Arr i <$> o .:  "items"
-            "any"    -> pure (Any i)
-            _        -> enm i o <|> Lit i <$> parseJSON (Object o)
-
-        enm i o = Enum i <$> o .: "enum" <*> o .: "enumDescriptions"
-        ref i o = Ref  i <$> o .: "$ref"
-
-deriveToJSON (js "") ''Schema
-
-instance HasInfo (Schema a) where
-    info = lens f (flip g)
-      where
-        f = \case
-            Obj  i _   -> i
-            Arr  i _   -> i
-            Enum i _ _ -> i
-            Lit  i _   -> i
-            Ref  i _   -> i
-            Any  i     -> i
-
-        g i = \case
-            Obj  _ p   -> Obj  i p
-            Arr  _ e   -> Arr  i e
-            Enum _ v d -> Enum i v d
-            Lit  _ l   -> Lit  i l
-            Ref  _ r   -> Ref  i r
-            Any  {}    -> Any  i
-
-data Param a = Param
-    { _prmLocation :: !Location
-    , _prmRepeated :: !Bool
-    , _prmInfo     :: Info
-    , _prmSchema   :: a
-    } deriving (Show, Functor, Foldable, Traversable)
-
--- paramSchema :: Param -> Fix Schema
--- paramSchema p
---     | _prmRepeated p = Fix $ Arr (_prmInfo p) lit
---     | otherwise      = lit
---   where
---     lit = Fix $ Lit (_prmInfo p) (_prmLiteral p)
-
-instance FromJSON a => FromJSON (Param a) where
-    parseJSON = withObject "parameter" $ \o -> Param
-        <$> o .:  "location"
-        <*> o .:? "repeated" .!= False
-        <*> parseJSON (Object o)
-        <*> parseJSON (Object o)
-
-instance HasInfo (Param a) where
-    info = lens _prmInfo (\s a -> s { _prmInfo = a })
 
 data TType
-    = TType   Id
+    = TType   Global
     | TLit    Lit
     | TMaybe  TType
     | TEither TType TType
@@ -314,9 +233,9 @@ data Derive
       deriving (Eq, Show)
 
 data Solved = Solved
-    { _ident    :: Id
-    , _prefix   :: Pre
-    , _schema   :: Schema Id
+    { _ident    :: Global
+    , _prefix   :: Prefix
+    , _schema   :: Schema Global
     , _type     :: TType
     , _deriving :: [Derive]
     }
@@ -329,254 +248,24 @@ instance HasInfo Solved where
 monoid :: Solved -> Bool
 monoid = elem DMonoid . _deriving
 
-data Syn a = Syn { syntax :: a }
+type Seen = Map (CI Text) {- Prefix -} (Set (CI Text)) {- Inhabitants -}
 
-instance Pretty a => ToJSON (Syn a) where
-    toJSON = toJSON . prettyPrint . syntax
-
-data Fun = Fun' Name (Maybe Help) Rendered Rendered
-
-instance ToJSON Fun where
-    toJSON (Fun' n h s d) = object
-        [ "name" .= Syn n
-        , "help" .= h
-        , "sig"  .= s
-        , "decl" .= d
-        ]
-
-data Branch = Branch Name Text Help
-
-instance ToJSON Branch where
-    toJSON (Branch n v h) = object
-        [ "name"  .= Syn n
-        , "value" .= v
-        , "help"  .= Below 6 h
-        ]
-
-data Data
-    = Sum  Name (Maybe Help) [Branch]
-    | Prod Name (Maybe Help) Rendered Fun [Fun] [Rendered]
-
-instance ToJSON Data where
-    toJSON = \case
-        Sum n h bs -> object
-            [ "name"     .= Syn n
-            , "type"     .= "sum"
-            , "help"     .= h
-            , "branches" .= bs
-            ]
-
-        Prod n h d c ls is -> object
-            [ "name"      .= Syn n
-            , "type"      .= "prod"
-            , "decl"      .= d
-            , "help"      .= h
-            , "ctor"      .= c
-            , "lenses"    .= ls
-            , "instances" .= is
-            ]
-
-dataName :: Data -> Name
-dataName = \case
-    Sum  n _ _       -> n
-    Prod n _ _ _ _ _ -> n
-
-data Action = Action
-    { _actName       :: Name
-    , _actPrettyName :: Text
-    , _actNS         :: NS
-    , _actHelp       :: Maybe Help
-    , _actAlias      :: Rendered
-    , _actData       :: Data
+data Memo = Memo
+    { _context  :: Service (Fix Schema)
+    , _typed    :: Map Global TType
+    , _derived  :: Map Global [Derive]
+    , _schemas  :: Map Global (Schema Global)
+    , _prefixed :: Map Global Prefix
+    , _branches :: Seen
+    , _fields   :: Seen
     }
 
-actionTypeName :: Action -> Name
-actionTypeName = dataName . _actData
+initial :: Service (Fix Schema) -> Memo
+initial s = Memo s mempty mempty mempty mempty mempty mempty
 
-instance ToJSON Action where
-    toJSON Action {..} = object
-        [ "name"       .= Syn _actName
-        , "prettyName" .= _actPrettyName
-        , "ns"         .= _actNS
-        , "help"       .= _actHelp
-        , "alias"      .= _actAlias
-        , "type"       .= _actData
-        ]
+makeLenses ''Memo
 
-data API = API
-    { _apiName    :: Name
-    , _apiDecl    :: Rendered
-    , _apiActions :: Map Name Action
-    , _apiURL     :: Fun
-    }
+instance HasService Memo (Fix Schema) where
+    service = context
 
-instance ToJSON API where
-    toJSON API {..} = object
-         [ "name"    .= Syn _apiName
-         , "decl"    .= _apiDecl
-         , "actions" .= sortOn _actName (Map.elems _apiActions)
-         , "url"     .= _apiURL
-         ]
-
-data Method a = Method
-    { _mId             :: Text
-    , _mPath           :: Text
-    , _mMethod         :: Text
-    , _mDescription    :: Maybe Help
-    , _mParameters     :: Map Local (Param a)
-    , _mParameterOrder :: [Local]
-    , _mScopes         :: [Text]
-    , _mRequest        :: Maybe Global
-    , _mResponse       :: Maybe Global
-    } deriving (Generic, Functor, Foldable, Traversable)
-
-instance FromJSON a => FromJSON (Method a) where
-    parseJSON = withObject "method" $ \o -> Method
-        <$> o .:  "id"
-        <*> o .:  "path"
-        <*> o .:  "httpMethod"
-        <*> o .:? "description"
-        <*> o .:? "parameters"     .!= mempty
-        <*> o .:? "parameterOrder" .!= mempty
-        <*> o .:? "scopes"         .!= mempty
-        <*> ref o "request"
-        <*> ref o "response"
-      where
-        ref o k = Just <$> (o .: k >>= (.: "$ref"))
-              <|> pure Nothing
-
-data Resource a
-    = Top (Map Local (Resource a))
-    | Sub (Map Local (Method   a))
-      deriving (Functor, Foldable, Traversable)
-
-instance FromJSON a => FromJSON (Resource a) where
-    parseJSON = withObject "resource" $ \o ->
-            Top <$> o .: "resources"
-        <|> Sub <$> o .: "methods"
-
-data Service s p r = Service
-    { _svcLibrary           :: Text
-    , _svcTitle             :: Text
-    , _svcName              :: Text
-    , _svcCanonicalName     :: Text
-    , _svcDescription       :: Help
-    , _svcRevision          :: Maybe Text
-    , _svcVersion           :: Text
-    , _svcOwnerName         :: Text
-    , _svcOwnerDomain       :: Text
-    , _svcPackagePath       :: Maybe Text
-    , _svcDocumentationLink :: Text
-    , _svcProtocol          :: Protocol
-    , _svcBaseUrl           :: Text
-    , _svcRootUrl           :: Text
-    , _svcServicePath       :: Text
-    , _svcBatchPath         :: Text
-    , _svcAuth              :: Maybe Object
-    , _svcParameters        :: p
-    , _svcSchemas           :: s
-    , _svcApi               :: r
-    } deriving (Generic)
-
-instance (FromJSON s, FromJSON p, FromJSON r) => FromJSON (Service s p r) where
-    parseJSON = withObject "service" $ \o -> Service
-        <$> o .:  "library"
-        <*> o .:  "title"
-        <*> o .:  "name"
-        <*> o .:  "canonicalName"
-        <*> o .:  "description"
-        <*> o .:? "revision"
-        <*> o .:  "version"
-        <*> o .:  "ownerName"
-        <*> o .:  "ownerDomain"
-        <*> o .:? "packagePath"
-        <*> o .:  "documentationLink"
-        <*> o .:  "protocol"
-        <*> o .:  "baseUrl"
-        <*> o .:  "rootUrl"
-        <*> o .:  "servicePath"
-        <*> o .:  "batchPath"
-        <*> o .:? "auth"
-        <*> o .:  "parameters"
-        <*> o .:  "schemas"
-        <*> parseJSON (Object o)
-
-instance (ToJSON s, ToJSON p) => ToJSON (Service s p API) where
-    toJSON s = Object (x <> y)
-      where
-        Object x = genericToJSON (js "_svc") s
-        Object y = object
-            [ "exposedModules" .= exposedModules s
-            ]
-
-type Parsed    = Service (Map Id    (Fix Schema))
-                         (Map Local (Param (Fix Schema)))
-                         (Resource  (Fix Schema))
-
-type Flattened = Service [Id]     [Param Id]     (Resource Id)
-type Typed     = Service [Solved] [Param Solved] (Resource Solved)
-type Printed   = Service [Data]   ()             API
-
-svcAbbrev, svcURL :: Service s p r -> Text
-svcAbbrev = upperHead . renameAbbrev . _svcCanonicalName
-svcURL    = (<> "URL") . lowerHead . svcAbbrev
-
-svcActions :: Service s p API -> [Action]
-svcActions = Map.elems . _apiActions . _svcApi
-
-tocImports, typeImports, prodImports, sumImports, actionImports
- :: Service s p r -> [NS]
-tocImports    _ = ["Network.Google.Prelude"]
-typeImports   s = sort ["Network.Google.Prelude", prodNS s, sumNS s]
-prodImports   s = sort ["Network.Google.Prelude", sumNS s]
-sumImports    _ = sort ["Network.Google.Prelude"]
-actionImports s = sort ["Network.Google.Prelude", typesNS s]
-
-tocNS, typesNS, prodNS, sumNS :: Service s p r -> NS
-tocNS s = NS $ "Network" : "Google" : Text.split (== '.') (_svcCanonicalName s)
-typesNS = (<> "Types")   . tocNS
-prodNS  = (<> "Product") . typesNS
-sumNS   = (<> "Sum")     . typesNS
-
-actionNS :: [Text] -> NS
-actionNS = mappend (NS ["Network", "Google", "API"]) . NS
-
-exposedModules :: Service s p API -> [NS]
-exposedModules s = sort (tocNS s : typesNS s : map _actNS (svcActions s))
-
-otherModules :: Service s p r -> [NS]
-otherModules s = sort [prodNS s, sumNS s]
-
-data Library = Library
-    { _libName     :: Text
-    , _libTitle    :: Text
-    , _libVersions :: Versions
-    , _libServices :: NonEmpty Printed
-    }
-
-instance ToJSON Library where
-    toJSON Library{..} = object
-        [ "libraryName"         .= _libName
-        , "libraryTitle"        .= _libTitle
-        , "libraryVersion"      .= _libraryVersion _libVersions
-        , "libraryDescriptions" .= map (Desc 4 . _svcDescription) (NE.toList _libServices)
-        , "coreVersion"         .= _coreVersion    _libVersions
-        , "clientVersion"       .= _clientVersion  _libVersions
-        , "exposedModules"      .= concatMap exposedModules (NE.toList _libServices)
-        , "otherModules"        .= concatMap otherModules   (NE.toList _libServices)
-        ]
-
-merge :: Versions -> [Printed] -> [Library]
-merge v = map go . groupBy (on (==) _svcLibrary)
-  where
-    go [x]    = mk x
-    go (x:xs) = (mk x) { _libServices = x :| xs }
-    -- FIXME:
-    go []     = error "Empty merge set!"
-
-    mk x = Library
-        { _libName     = renameLibrary (_svcLibrary x)
-        , _libTitle    = renameTitle   (_svcTitle   x)
-        , _libVersions = v
-        , _libServices = x :| []
-        }
+type AST = ExceptT Error (State Memo)

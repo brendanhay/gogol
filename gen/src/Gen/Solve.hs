@@ -42,28 +42,10 @@ import           Gen.Text
 import           Gen.Types
 import           Prelude                    hiding (sum)
 
-type Seen = Map (CI Text) (Set (CI Text))
-
-data Memo = Memo
-    { _typed    :: Map Id TType
-    , _derived  :: Map Id [Derive]
-    , _prefixed :: Map Id Pre
-    , _branches :: Seen
-    , _fields   :: Seen
-    , _schemas  :: Map Id (Schema Id)
-    }
-
-initial :: Memo
-initial = Memo mempty mempty mempty mempty mempty mempty
-
-makeLenses ''Memo
-
-type AST = ExceptT Error (State Memo)
-
-reserve :: Flattened -> AST ()
-reserve svc = do
-    let bs = Set.fromList $ map (CI.mk . idToText) (_svcSchemas svc)
-    branches %= Map.insert mempty bs
+-- reserve :: Flattened -> AST ()
+-- reserve svc = do
+--     let bs = Set.fromList $ map (CI.mk . idToText) (_svcSchemas svc)
+--     branches %= Map.insert mempty bs
 
 schema :: Id -> AST (Schema Id)
 schema k = do

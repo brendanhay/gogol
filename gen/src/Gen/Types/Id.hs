@@ -11,7 +11,14 @@
 -- Stability   : provisional
 -- Portability : non-portable (GHC extensions)
 
-module Gen.Types.Id where
+module Gen.Types.Id
+    ( Prefix (..)
+    , Global
+    , Local
+    , gid
+    , lid
+    , reference
+    ) where
 
 import           Control.Applicative
 import           Control.Lens                 hiding (pre, (.=))
@@ -36,6 +43,7 @@ import qualified Data.Text.Lazy               as LText
 import qualified Data.Text.Lazy.Builder       as Build
 import           Data.Text.Manipulate
 import           Formatting
+import           Gen.Orphans                  ()
 import           Gen.Text
 import           Gen.Types.Map
 import           GHC.Generics
@@ -43,47 +51,49 @@ import           Language.Haskell.Exts.Build
 import           Language.Haskell.Exts.Pretty (prettyPrint)
 import           Language.Haskell.Exts.Syntax (Name)
 
-vname :: Text -> Text -> (Name, Id, [Text])
-vname abrv r = (dname (g (n <> "API")), g (n <> "'"), ns)
-  where
-    g = Free . Global
-    n = mconcat (drop 1 ns)
+-- vname :: Text -> Text -> (Name, Id, [Text])
+-- vname abrv r = (dname (g (n <> "API")), g (n <> "'"), ns)
+--   where
+--     g = Free . Global
+--     n = mconcat (drop 1 ns)
 
-    ns | CI.mk e == CI.mk x = e:xs
-       | otherwise          = x:xs
-      where
-        e    = Text.replace "." "" abrv
-        x:xs = map (upperAcronym . upperHead) $ Text.split (== '.') r
+--     ns | CI.mk e == CI.mk x = e:xs
+--        | otherwise          = x:xs
+--       where
+--         e    = Text.replace "." "" abrv
+--         x:xs = map (upperAcronym . upperHead) $ Text.split (== '.') r
 
-dname, cname :: Id -> Name
-dname = name . Text.unpack . upperHead . idToText
-cname = name . Text.unpack . renameReserved . lowerHead . idToText
+-- dname, cname :: Id -> Name
+-- dname = name . Text.unpack . upperHead . idToText
+-- cname = name . Text.unpack . renameReserved . lowerHead . idToText
 
-bname :: Pre -> Text -> Name
-bname (Pre p) = name
-    . Text.unpack
-    . mappend (Text.toUpper p)
-    . renameBranch
+-- bname :: Pre -> Text -> Name
+-- bname (Pre p) = name
+--     . Text.unpack
+--     . mappend (Text.toUpper p)
+--     . renameBranch
 
-fname, lname, pname :: Pre -> Local -> Name
-fname = pre (Text.cons '_' . renameField)
-lname = pre renameField
-pname = pre (flip Text.snoc '_' . Text.cons 'p' . upperHead . renameField)
+-- fname, lname, pname :: Pre -> Local -> Name
+-- fname = pre (Text.cons '_' . renameField)
+-- lname = pre renameField
+-- pname = pre (flip Text.snoc '_' . Text.cons 'p' . upperHead . renameField)
 
-apretty :: Local -> Local -> Text
-apretty p l = upperHead (local l) <> " " <> upperHead (local p)
+-- apretty :: Local -> Local -> Text
+-- apretty p l = upperHead (local l) <> " " <> upperHead (local p)
 
-pre :: (Text -> Text) -> Pre -> Local -> Name
-pre f (Pre p) = name . Text.unpack . f . mappend p . upperHead . local
+-- pre :: (Text -> Text) -> Pre -> Local -> Name
+-- pre f (Pre p) = name . Text.unpack . f . mappend p . upperHead . local
+
+newtype Prefix = Prefix Text
+    deriving (Show, Monoid)
+
 
 newtype Global = Global { global :: Text }
     deriving (Eq, Show, Generic, Hashable, FromJSON, ToJSON, IsString)
 
-instance FromJSON a => FromJSON (Map Global a) where
-    parseJSON = fmap (fromMap Global) . parseJSON
-
-instance ToJSON a => ToJSON (Map Global a) where
-    toJSON = toJSON . toMap global
+instance TextKey Global where
+    toKey   = Global
+    fromKey = global
 
 gid :: Format a (Global -> a)
 gid = later (Build.fromText . global)
@@ -91,60 +101,12 @@ gid = later (Build.fromText . global)
 newtype Local = Local { local :: Text }
     deriving (Eq, Show, Generic, Hashable, FromJSON, ToJSON, IsString)
 
-instance FromJSON a => FromJSON (Map Local a) where
-    parseJSON = fmap (fromMap Local) . parseJSON
-
-instance ToJSON a => ToJSON (Map Local a) where
-    toJSON = toJSON . toMap local
+instance TextKey Local where
+    toKey   = Local
+    fromKey = local
 
 lid :: Format a (Local -> a)
 lid = later (Build.fromText . local)
 
-data Id
-    = Free  Global
-    | Bound Global (NonEmpty Local)
-      deriving (Eq, Show, Generic)
-
-instance Hashable Id
-
-instance IsString Id where
-    fromString = Free . Global . fromString
-
-instance FromJSON a => FromJSON (Map Id a) where
-    parseJSON = fmap (fromMap (Free . Global)) . parseJSON
-
-instance ToJSON a => ToJSON (Map Id a) where
-    toJSON = toJSON . toMap idToText
-
-newtype Pre = Pre Text
-    deriving (Show, Monoid)
-
-mkId :: Global -> [Local] -> Id
-mkId g = \case
-    []   -> Free  g
-    x:xs -> Bound g (x :| xs)
-
-mkProp :: Id -> Local -> Id
-mkProp n x =
-    case n of
-        Free  g    -> Bound g (x :| [])
-        Bound g xs -> Bound g (NE.cons x xs)
-
-revProp :: Id -> Local
-revProp = \case
-    Free  g    -> Local (global g)
-    Bound _ xs -> let x :| _ = NE.reverse xs in x
-
-idToText :: Id -> Text
-idToText = renameReserved . upperHead . \case
-    Free  g    -> global g
-    Bound g ls -> mconcat (global g : map (upperHead . local) (NE.toList ls))
-
-fid :: Format a (Id -> a)
-fid = later (Build.fromText . idToText)
-
-fromMap :: (Eq a, Hashable a) => (Text -> a) -> Map Text b -> Map a b
-fromMap f = Map.fromList . map (first f) . Map.toList
-
-toMap :: (a -> Text) -> Map a b -> Map Text b
-toMap f = Map.fromList . map (first f) . Map.toList
+reference :: Global -> Local -> Global
+reference (Global g) (Local l) = Global (g <> "." <> l)

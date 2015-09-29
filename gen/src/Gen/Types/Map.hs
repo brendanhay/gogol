@@ -1,4 +1,7 @@
--- Module      : Gen.Types.Map
+{-# LANGUAGE FlexibleInstances #-}
+
+
+  -- Module      : Gen.Types.Map
 -- Copyright   : (c) 2013-2015 Brendan Hay
 -- License     : This Source Code Form is subject to the terms of
 --               the Mozilla Public License, v. 2.0.
@@ -11,9 +14,14 @@
 module Gen.Types.Map where
 
 import           Control.Lens
+import           Control.Monad
+import           Data.Aeson
+import           Data.Aeson.Types
+import           Data.Bifunctor
 import           Data.Hashable
 import qualified Data.HashMap.Strict as Map
 import           Data.Maybe
+import           Data.Text           (Text)
 
 type Map = Map.HashMap
 
@@ -29,3 +37,14 @@ kvTraverseMaybe :: (Applicative f, Eq k, Hashable k)
                 -> f (Map k b)
 kvTraverseMaybe f = fmap (Map.map fromJust . Map.filter isJust)
     . Map.traverseWithKey f
+
+class (Hashable a, Eq a) => TextKey a where
+    toKey   :: Text -> a
+    fromKey :: a    -> Text
+
+instance (TextKey k, FromJSON v) => FromJSON (Map k v) where
+    parseJSON = fmap (Map.fromList . map (first toKey) . Map.toList)
+        . parseJSON
+
+instance (TextKey k, ToJSON v) => ToJSON (Map k v) where
+    toJSON = toJSON . map (first fromKey) . Map.toList

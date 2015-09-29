@@ -7,7 +7,10 @@
 -- Stability   : provisional
 -- Portability : non-portable (GHC extensions)
 
-module Gen.Types.NS where
+module Gen.Types.NS
+    ( NS
+    , mkNS
+    ) where
 
 import           Data.Aeson
 import           Data.Aeson.Types
@@ -48,19 +51,3 @@ instance FromJSON NS where
 
 instance ToJSON NS where
     toJSON (NS xs) = toJSON (Text.intercalate "." xs)
-
-options :: Options
-options = defaultOptions
-    { constructorTagModifier = map toLower
-    , fieldLabelModifier = \s ->
-        let x:xs = dropWhile (not . isUpper) s in toLower x : xs
-    }
-
--- Wut?
-js :: String -> Options
-js pre = defaultOptions
-    { constructorTagModifier = map toLower
-    , fieldLabelModifier = \s ->
-        let x:xs = drop (length pre) s
-         in toLower x : xs
-    }
