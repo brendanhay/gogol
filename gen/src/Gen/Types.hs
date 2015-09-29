@@ -139,13 +139,22 @@ data Templates = Templates
     , actionTemplate :: Template
     }
 
-tocImports, typeImports, prodImports, sumImports, actionImports
- :: HasService a b => a -> [NS]
-tocImports    _ = [preludeNS]
-typeImports   s = sort [preludeNS, prodNS s, sumNS s]
-prodImports   s = sort [preludeNS, sumNS s]
-sumImports    _ = [preludeNS]
-actionImports s = sort [preludeNS, typesNS s]
+data Imports = Imports
+    { tocImports    :: [NS]
+    , typeImports   :: [NS]
+    , prodImports   :: [NS]
+    , sumImports    :: [NS]
+    , actionImports :: [NS]
+    }
+
+serviceImports :: HasService a b => a -> Imports
+serviceImports s = Imports
+    { tocImports    = [preludeNS]
+    , typeImports   = sort [preludeNS, prodNS s, sumNS s]
+    , prodImports   = sort [preludeNS, sumNS s]
+    , sumImports    = [preludeNS]
+    , actionImports = sort [preludeNS, typesNS s]
+    }
 
 tocNS, typesNS, prodNS, sumNS :: HasService a b => a -> NS
 tocNS   = mappend "Network.Google" . mkNS . view sCanonicalName

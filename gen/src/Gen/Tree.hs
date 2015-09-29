@@ -66,7 +66,7 @@ populate :: Path
          -> Templates
          -> Library
          -> Either Error (AnchoredDirTree Touch)
-populate d Templates{..} l = (encodeString d :/) . dir lib <$> layout
+populate d Templates {..} l = (encodeString d :/) . dir lib <$> layout
   where
     layout :: Either Error [DirTree Touch]
     layout = traverse sequenceA
@@ -78,24 +78,27 @@ populate d Templates{..} l = (encodeString d :/) . dir lib <$> layout
         , file (lib <.> "cabal") cabalTemplate
         , file "README.md" readmeTemplate
 
-        , dir "gen"
-            [ mod' (tocNS   l) (tocImports  l) tocTemplate   (pure env)
-            , mod' (typesNS l) (typeImports l) typesTemplate (pure env)
-            , mod' (prodNS  l) (prodImports l) prodTemplate  (pure env)
-            , mod' (sumNS   l) (sumImports  l) sumTemplate   (pure env)
-            ]
-        ] ++ map resource (_apiResources (l ^. lAPI))
-          ++ map method   (_apiMethods   (l ^. lAPI))
+        , dir "gen" $
+            [ mod' (tocNS   l) tocImports  tocTemplate   (pure env)
+            , mod' (typesNS l) typeImports typesTemplate (pure env)
+            , mod' (prodNS  l) prodImports prodTemplate  (pure env)
+            , mod' (sumNS   l) sumImports  sumTemplate   (pure env)
+            ] ++ map resource (_apiResources (l ^. lAPI))
+              ++ map method   (_apiMethods   (l ^. lAPI))
+        ]
       where
         resource a =
-            mod' (resourceNS a) (actionImports a) actionTemplate (action a)
+            mod' (resourceNS a) actionImports actionTemplate (action a)
+
         method a =
-            mod' (methodNS   a) (actionImports a) actionTemplate (action a)
+            mod' (methodNS   a) actionImports actionTemplate (action a)
 
         action a =
             let Object o = object ["action" .= a]
                 Object e = env
              in pure $ Object (o <> e)
+
+    Imports {..} = serviceImports l
 
     lib = fromText (l ^. sLibrary)
 

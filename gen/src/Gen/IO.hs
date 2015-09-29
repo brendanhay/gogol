@@ -21,7 +21,6 @@ import qualified Data.Text                 as Text
 import qualified Data.Text.Lazy            as LText
 import           Data.Text.Lazy.Builder    (toLazyText)
 import qualified Data.Text.Lazy.IO         as LText
-import           Debug.Trace
 import qualified Filesystem                as FS
 import           Filesystem.Path.CurrentOS
 import           Gen.Formatting
@@ -66,6 +65,9 @@ touchFile f = do
     p <- isFile f
     unless p $
         writeLTFile f mempty
+
+writeOrTouch :: MonadIO m => Path -> Maybe LText.Text -> ExceptT Error m ()
+writeOrTouch x = maybe (touchFile x) (writeLTFile x)
 
 createDir :: MonadIO m => Path -> ExceptT Error m ()
 createDir d = do

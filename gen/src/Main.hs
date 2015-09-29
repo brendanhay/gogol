@@ -122,8 +122,8 @@ main :: IO ()
 main = do
     Opt{..} <- customExecParser (prefs showHelpOnError) options >>= validate
 
-    let ss = nub . sort $ map specFromPath _optModels
-        i  = length ss
+    let ms = nub . sort $ map modelFromPath _optModels
+        i  = length ms
 
     run $ do
         title "Initialising..." <* done
@@ -146,55 +146,42 @@ main = do
         say ("Selected " % int % " newest models.")        i
         done
 
-        counter "model" ss $ \Spec{..} -> do
-            say ("Using version " % stext) _specVersion
+        forM_ (zip [1..] ms) $ \(n, Model{..}) -> do
+            title ("[" % int % "/" % int % "] model:" % stext)
+                  (n :: Int) i modelName
 
-            let anx = _optAnnexes </> fromText _specName <.> "json"
+            say ("Using version " % stext) modelVersion
+
+            let anx = _optAnnexes </> fromText modelName <.> "json"
+
             p <- isFile anx
+
             if not p
-               then do
-                   say ("Skipping '" % stext % "' due to missing annex configuration.")
-                       _specName
-                   done *> return Nothing
+               then say ("Skipping '" % stext % "' due to mimsing annex configuration.")
+                         modelName
                else do
                     s <- sequence
                         [ JS.load anx
-                        , JS.load _specPath
+                        , JS.load modelPath
                         ] >>= hoistEither . JS.parse . JS.merge
 
                     say ("Successfully parsed '" % stext % "' API definition.")
-                        (_svcTitle s)
+                        modelName
 
                     l <- hoistEither (runAST _optVersions s)
 
-                    say ("Creating " % stext % " package.") (_libTitle l)
+                    say ("Creating " % stext % " package.") (l ^. dTitle)
 
                     d <- hoistEither (Tree.populate _optOutput tmpl l)
-                        >>= Tree.fold createDir (\x -> maybe (touchFile x) (writeLTFile x))
+                        >>= Tree.fold createDir writeOrTouch
 
                     say ("Successfully rendered " % stext % "-" % fver % " package")
-                        (_libName l)
-                        (_libraryVersion _optVersions)
+                        (l ^. dName)
+                        (l ^. libraryVersion)
 
                     copyDir _optStatic (Tree.root d)
 
-                    done
+            done
 
         title ("Successfully processed " % int % " models.") i
-        title ("Successfully created " % int % " library packages.") (length libs)
 
-class    HasName a       where getName :: a -> Text
-instance HasName Spec    where getName = _specName
-instance HasName Library where getName = _libName
-
-counter :: (MonadIO m, HasName a)
-        => Text
-        -> [a]
-        -> (a -> ExceptT Error m b)
-        -> ExceptT Error m [b]
-counter k xs f = forM (zip [1..] xs) $ \(n, x) -> do
-    title ("[" % int % "/" % int % "] " % stext % ":" % stext)
-          (n :: Int) i k (getName x)
-    f x
-  where
-    i = length xs

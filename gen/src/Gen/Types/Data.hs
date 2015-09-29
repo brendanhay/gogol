@@ -161,6 +161,6 @@ instance ToJSON API where
 -- apiMethodNames   = map (dataName . _actData) . _apiMethods
 
 resourceNS, methodNS :: Action -> NS
-resourceNS = mappend "Network.Google.Resource" . _actNS
-methodNS   = mappend "Network.Google.Method"   . _actNS
+resourceNS = mappend "Network.Google.Resource" . _actNamespace
+methodNS   = mappend "Network.Google.Method"   . _actNamespace
 
