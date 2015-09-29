@@ -26,6 +26,7 @@ executable gogol-gen
         , Gen.IO
         , Gen.JSON
         , Gen.Orphans
+        , Gen.Schema
         , Gen.Solve
         , Gen.Syntax
         , Gen.Text

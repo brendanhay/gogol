@@ -49,6 +49,13 @@ instance FromJSON NS where
 instance ToJSON NS where
     toJSON (NS xs) = toJSON (Text.intercalate "." xs)
 
+options :: Options
+options = defaultOptions
+    { constructorTagModifier = map toLower
+    , fieldLabelModifier = \s ->
+        let x:xs = dropWhile (not . isUpper) s in toLower x : xs
+    }
+
 -- Wut?
 js :: String -> Options
 js pre = defaultOptions
