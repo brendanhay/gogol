@@ -36,8 +36,6 @@ import qualified Data.Text.Lazy               as LText
 import qualified Data.Text.Lazy.Builder       as Build
 import           Debug.Trace
 import           Gen.Formatting
--- import           Gen.Solve
--- import           Gen.Syntax
 import           Gen.Types
 import           HIndent
 import           Language.Haskell.Exts.Build  (name)
@@ -46,36 +44,35 @@ import           Prelude                      hiding (sum)
 
 flatten :: Service (Fix Schema) -> AST (Service Global)
 flatten s = do
-    _  <- Map.traverseWithKey globalSchema   (s ^. dSchemas)
-    ps <- Map.traverseWithKey globalParam    (s ^. dParameters)
-    rs <- Map.traverseWithKey globalResource (s ^. dResources)
-    ms <- traverse            method         (s ^. dMethods)
-
-    ss <- use schemas
+    ss <- Map.traverseWithKey globalSchema (s ^. dSchemas)
+    ps <- Map.traverseWithKey globalParam  (s ^. dParameters)
+    rs <- Map.traverseWithKey resource     (s ^. dResources)
+    ms <- traverse            method       (s ^. dMethods)
 
     let d = (s ^. sDescription)
           { _dSchemas    = ss
           , _dParameters = ps
-          , _dMethods    = ms
           , _dResources  = rs
+          , _dMethods    = ms
           }
 
     pure $! s { _sDescription = d }
 
-globalSchema :: Global -> Schema (Fix Schema) -> AST Global
+globalSchema :: Global -> Fix Schema -> AST Global
 globalSchema g = schema g Nothing
 
 localSchema :: Global -> Local -> Fix Schema -> AST Global
-localSchema g l (Fix s) = schema g (Just l) s
+localSchema g l = schema g (Just l)
 
-schema :: Global -> Maybe Local -> Schema (Fix Schema) -> AST Global
-schema g ml = go >=> insert this
+schema :: Global -> Maybe Local -> Fix Schema -> AST Global
+schema g ml (Fix f) = go f >>= insert this
   where
     this :: Global
     this = maybe g (reference g) ml
 
     go :: Schema (Fix Schema) -> AST (Schema Global)
     go = \case
+        SAny i a -> pure (SAny i a)
         SRef i r -> pure (SRef i r)
         SLit i l -> pure (SLit i l)
         SEnm i e -> pure (SEnm i e)
@@ -85,8 +82,32 @@ schema g ml = go >=> insert this
     array (Arr e) =
         Arr <$> localSchema this "item" (setRequired e)
 
-    object (Obj ap ps) =
+    object (Obj aps ps) =
         Obj Nothing <$> Map.traverseWithKey (localSchema this) ps
+
+globalParam :: Local -> Param (Fix Schema) -> AST (Param Global)
+globalParam = localParam "param"
+
+localParam :: Global -> Local -> Param (Fix Schema) -> AST (Param Global)
+localParam g l p = do
+    x <- localSchema g l (_pParam p)
+    pure $! p { _pParam = x }
+
+resource :: Global
+         -> Resource (Fix Schema)
+         -> AST (Resource Global)
+resource g r = do
+    rs <- Map.traverseWithKey (\l -> resource (reference g l)) (_rResources r)
+    ms <- traverse method (_rMethods r)
+    pure $! r
+        { _rResources = rs
+        , _rMethods   = ms
+        }
+
+method :: Method (Fix Schema) -> AST (Method Global)
+method m = do
+    ps <- Map.traverseWithKey (localParam (_mId m)) (_mParameters m)
+    pure $! m { _mParameters = ps }
 
 setRequired :: Fix Schema -> Fix Schema
 setRequired (Fix e) = Fix (e & iRequired .~ True)
@@ -105,52 +126,3 @@ insert g s = do
         format ("Schema exists: " % stext % " - " % gid %
                 "\nCurrent: " % shown % "\nTried: " % shown)
                 n g x s
-
-globalParam :: Local -> Param (Fix Schema) -> AST (Param Global)
-globalParam = localParam "param"
-
-localParam :: Global -> Local -> Param (Fix Schema) -> AST (Param Global)
-localParam g l p = do
-    x <- localSchema g l (_pParam p)
-    pure $! p { _pParam = x }
-
-globalResource :: Global
-               -> Resource Global (Fix Schema)
-               -> AST (Resource Global Global)
-globalResource = undefined
-
-localResource :: Global
-              -> Resource Local (Fix Schema)
-              -> AST (Resource Local Global)
-localResource = undefined
-
-method :: Method (Fix Schema) -> AST (Method Global)
-method = undefined
-
---     api :: Map Local (Param Id) -> Resource (Fix Schema) -> AST (Resource Id)
---     api qs = \case
---         Top rs -> Top <$> Map.traverseWithKey sub rs
---         Sub ms -> Sub <$> Map.traverseWithKey (verb "") ms
---       where
---         sub l = \case
---             Top rs -> Top <$> Map.traverseWithKey sub rs
---             Sub ms -> Sub <$> Map.traverseWithKey (verb l) ms
-
---         verb p l m = do
---             let (_, i, _) = vname (svcAbbrev svc) (_mId m)
---             rs <- Map.traverseWithKey (prm i) (_mParameters m)
---             _  <- ins i $
---                 Obj (Info (_mDescription m) Nothing False Nothing) (Map.map _prmSchema (rs <> qs))
---             pure $! m { _mParameters = rs <> qs }
-
---     ins :: Id -> Schema Id -> AST Id
---     ins n x = do
---         ms <- uses schemas (Map.lookup n)
---         case ms of
---             Just y | x /= y -> throwError $
---                 format ("Schema exists: " % stext % " - " % fid %
---                        "\nCurrent: " % shown % "\nTried: " % shown)
---                         (_svcCanonicalName svc) n y x
---             _ -> schemas %= Map.insert n x
-
---         return n

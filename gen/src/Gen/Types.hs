@@ -210,11 +210,10 @@ instance ToJSON Library where
 
 
 data TType
-    = TType   Global
-    | TLit    Lit
-    | TMaybe  TType
-    | TEither TType TType
-    | TList   TType
+    = TType  Global
+    | TLit   Lit
+    | TMaybe TType
+    | TList  TType
 
 data Derive
     = DEq
@@ -233,7 +232,7 @@ data Derive
       deriving (Eq, Show)
 
 data Solved = Solved
-    { _ident    :: Global
+    { _unique   :: Global
     , _prefix   :: Prefix
     , _schema   :: Schema Global
     , _type     :: TType
@@ -262,6 +261,11 @@ data Memo = Memo
 
 initial :: Service (Fix Schema) -> Memo
 initial s = Memo s mempty mempty mempty mempty mempty mempty
+
+-- reserve :: Flattened -> AST ()
+-- reserve svc = do
+--     let bs = Set.fromList $ map (CI.mk . idToText) (_svcSchemas svc)
+--     branches %= Map.insert mempty bs
 
 makeLenses ''Memo
 

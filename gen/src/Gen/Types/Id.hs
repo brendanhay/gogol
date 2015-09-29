@@ -14,7 +14,9 @@
 module Gen.Types.Id
     ( Prefix (..)
     , Global
+    , global
     , Local
+    , local
     , gid
     , lid
     , reference

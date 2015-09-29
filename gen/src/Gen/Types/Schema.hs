@@ -26,10 +26,12 @@ module Gen.Types.Schema where
 
 import           Control.Applicative
 import           Control.Lens                 hiding ((.=))
+import           Control.Monad
 import           Data.Aeson                   hiding (Array, Bool, Object,
                                                String)
 import qualified Data.Aeson                   as A
 import           Data.Aeson.TH
+import           Data.Aeson.Types             (Parser)
 import           Data.Char
 import           Data.Function                (on)
 import           Data.Hashable
@@ -106,8 +108,14 @@ instance FromJSON Info where
         <*> o .:? "repeated"    .!= False
         <*> o .:? "annotations" .!= mempty
 
+defaulted, required, parameter :: HasInfo a => a -> Bool
+defaulted   = isJust . view iDefault
+required    = view iRequired
+parameter s = required s && not (defaulted s)
+
 data Schema a
-    = SRef Info Ref
+    = SAny Info Any
+    | SRef Info Ref
     | SLit Info Lit
     | SEnm Info Enm
     | SArr Info (Arr a)
@@ -118,6 +126,7 @@ instance FromJSON a => FromJSON (Schema a) where
     parseJSON o = do
         i <- parseJSON o
         SRef i <$> parseJSON o
+            <|> SAny i <$> parseJSON o
             <|> SLit i <$> parseJSON o
             <|> SEnm i <$> parseJSON o
             <|> SArr i <$> parseJSON o
@@ -139,6 +148,18 @@ instance HasInfo (Schema a) where
             SEnm _ x -> SEnm i x
             SArr _ x -> SArr i x
             SObj _ x -> SObj i x
+
+checkType :: Text -> A.Object -> Parser ()
+checkType x o = do
+   y <- o .: "type"
+   unless (x == y) . fail . Text.unpack $
+       "Schema type mismatch, expected " <> x <> ", but got " <> y
+
+data Any = Any
+    deriving (Eq, Show)
+
+instance FromJSON Any where
+    parseJSON = withObject "any" (\o -> Any <$ checkType "any" o)
 
 newtype Ref = Ref { ref :: Global }
     deriving (Eq, Show)
@@ -187,6 +208,7 @@ newtype Enm = Enm { _eValues :: [(Text, Help)] }
 
 instance FromJSON Enm where
     parseJSON = withObject "enum" $ \o -> do
+        checkType "string" o
         vs <- o .: "enum"
         ds <- o .: "enumDescriptions"
         pure $! Enm (zip vs (ds ++ repeat mempty))
@@ -195,19 +217,25 @@ newtype Arr a = Arr { _aItem :: a }
     deriving (Eq, Show)
 
 instance FromJSON a => FromJSON (Arr a) where
-    parseJSON = withObject "array" (fmap Arr . (.: "item"))
+    parseJSON = withObject "array" $ \o -> do
+        checkType "array" o
+        Arr <$> o .: "item"
 
 data Obj a = Obj
-    { _oAdditionalProperties :: Maybe a
-    , _oProperties           :: Map Local a
+    { _oAdditional :: Maybe a
+    , _oProperties :: Map Local a
     } deriving (Eq, Show)
 
-deriveFromJSON options ''Obj
+instance FromJSON a => FromJSON (Obj a) where
+    parseJSON = withObject "object" $ \o -> do
+        checkType "object" o
+        Obj <$> o .:? "additionalProperties"
+            <*> o .:? "properties" .!= mempty
 
 data Param a = Param
     { _pLocation :: Location
     , _pParam    :: a
-    } deriving (Eq, Show)
+    } deriving (Eq, Show, Functor, Foldable, Traversable)
 
 makeLenses ''Param
 
@@ -247,7 +275,7 @@ data Method a = Method
     , _mSupportsMediaDownload :: Bool
     , _mMediaUpload           :: Maybe MediaUpload
     , _mSupportsSubscription  :: Bool
-    } deriving (Eq, Show)
+    } deriving (Eq, Show, Functor, Foldable, Traversable)
 
 instance FromJSON a => FromJSON (Method a) where
     parseJSON = withObject "method" $ \o -> Method
@@ -265,12 +293,12 @@ instance FromJSON a => FromJSON (Method a) where
         <*> o .:? "mediaUpload"
         <*> o .:? "supportsSubscription"  .!= False
 
-data Resource a b = Resource
-    { _rResources :: Map a (Resource Local b)
-    , _rMethods   :: [Method b]
-    } deriving (Eq, Show)
+data Resource a = Resource
+    { _rResources :: Map Local (Resource a)
+    , _rMethods   :: [Method a]
+    } deriving (Eq, Show, Functor, Foldable, Traversable)
 
-instance (TextKey a, FromJSON a, FromJSON b) => FromJSON (Resource a b) where
+instance FromJSON a => FromJSON (Resource a) where
     parseJSON = withObject "resource" $ \o -> Resource
          <$>  o .:? "resources" .!= mempty
          <*> (o .:? "methods"   .!= mempty <&> keyless)
@@ -300,11 +328,11 @@ data Description a = Description
     , _dRootUrl           :: Text
     , _dServicePath       :: Text
     , _dBatchPath         :: Text
-    , _dParameters        :: Map Local  (Param a)
+    , _dParameters        :: Map Local (Param a)
     , _dAuth              :: OAuth2
     , _dFeatures          :: [Text]
-    , _dSchemas           :: Map Global (Schema a)
-    , _dResources         :: Map Global (Resource Global a)
+    , _dSchemas           :: Map Global a
+    , _dResources         :: Map Global (Resource a)
     , _dMethods           :: [Method a]
     } deriving (Eq, Show)
 
