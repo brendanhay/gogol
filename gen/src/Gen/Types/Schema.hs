@@ -65,10 +65,10 @@ import           Language.Haskell.Exts.Pretty (Pretty, prettyPrint)
 import           Prelude                      hiding (Enum)
 import           Text.EDE                     (Template)
 
-newtype Fix f = Fix (f (Fix f))
-
 keyless :: Map Text a -> [a]
 keyless = Map.elems
+
+newtype Fix f = Fix (f (Fix f))
 
 data Location
     = Query
@@ -122,15 +122,16 @@ data Schema a
     | SObj Info (Obj a)
       deriving (Eq, Show)
 
-instance FromJSON a => FromJSON (Schema a) where
+instance FromJSON (Fix Schema) where
     parseJSON o = do
         i <- parseJSON o
-        SRef i <$> parseJSON o
+        s <-    SRef i <$> parseJSON o
             <|> SAny i <$> parseJSON o
             <|> SLit i <$> parseJSON o
             <|> SEnm i <$> parseJSON o
             <|> SArr i <$> parseJSON o
             <|> SObj i <$> parseJSON o
+        pure (Fix s)
 
 instance HasInfo (Schema a) where
     info = lens f (flip g)
