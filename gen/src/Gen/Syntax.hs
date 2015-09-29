@@ -25,7 +25,6 @@ import           Data.Text                    (Text)
 import qualified Data.Text                    as Text
 import           Data.Text.Manipulate
 import           Gen.Orphans
-import           Gen.Solve
 import           Gen.Text
 import           Gen.Types
 import           Language.Haskell.Exts.Build
@@ -41,10 +40,10 @@ urlDecl n s u p = sfun noLoc n [] (UnGuardedRhs rhs) noBinds
     rhs = appFun (var "BaseUrl") [var (name s), str u, intE p]
 
  -- type API = :<|> ...
-apiAlias :: Name -> [Name] -> Decl
+apiAlias :: Name -> [Global] -> Decl
 apiAlias n ls = TypeDecl noLoc n [] alias
   where
-    alias = case map (TyCon . UnQual) ls of
+    alias = case map tycon ls of
         []   -> unit_tycon
         x:xs -> foldl' (\l r -> TyInfix l (UnQual (sym ":<|>")) r) x xs
 
@@ -66,11 +65,11 @@ verbAlias n m = TypeDecl noLoc n [] alias
         match x
             | Just (c, t) <- Text.uncons x
             , c == '{'
-            , Just k <- Map.lookup (Local (Text.init t)) params
-            , _prmLocation k == Path
+            , Just k <- Map.lookup (toKey (Text.init t)) params
+            , _pLocation k == Path
                         = TyApp (TyApp (tycon "Capture")
                                        (sing (Text.init t)))
-                                (terminalType (_type (_prmSchema k)))
+                                (terminalType (_type (_pParam k)))
             | otherwise = sing x
 
     -- FIXME: order by _mParameterOrder
@@ -78,11 +77,11 @@ verbAlias n m = TypeDecl noLoc n [] alias
     qry = mapMaybe f (Map.toList params)
       where
         f (k, x) =
-           let t = terminalType (_type (_prmSchema x))
+           let t = terminalType (_type (_pParam x))
                n = sing (local k)
-            in case _prmLocation x of
+            in case _pLocation x of
                 Query -> Just $ TyApp (TyApp (tycon "QueryParam") n) t
-                Query | _prmRepeated x
+                Query | x ^. iRepeated
                       -> Just $ TyApp (TyApp (tycon "QueryParams") n) t
                 Path  -> Nothing
 
@@ -91,11 +90,16 @@ verbAlias n m = TypeDecl noLoc n [] alias
     verb :: Type
     verb = TyApp (TyApp meth typ) res
       where
-        meth = TyCon . unqual . Text.unpack $ Text.toTitle (_mMethod m)
+        meth = TyCon . unqual . Text.unpack $ Text.toTitle (_mHttpMethod m)
         typ  = tycon "'[JSON]"
-        res  = maybe (tycon "()") (tycon . Free) (_mResponse m)
+        res  = maybe (tycon "()") (tycon . ref) (_mResponse m)
 
-requestDecl :: Id -> Pre -> Name -> Name -> [Local] -> Method a -> Decl
+requestDecl :: Global
+            -> Prefix
+            -> Name
+            -> Name
+            -> [Local]
+            -> Method Solved -> Decl
 requestDecl n p api url fs m =
     -- FIXME: associated Rs type
     InstDecl noLoc Nothing [] [] (unqual "GoogleRequest") [tycon n]
@@ -105,7 +109,7 @@ requestDecl n p api url fs m =
         ]
   where
     response = InsType noLoc (TyApp (tycon "Rs") (tycon n)) $
-        maybe unit_tycon tycon (Free <$> _mResponse m)
+        maybe unit_tycon (tycon . ref) (_mResponse m)
 
     request = funD "request" $
         appFun (var "requestWithRoute") [var "defReq", var url]
@@ -127,10 +131,9 @@ requestDecl n p api url fs m =
         rhs = UnGuardedRhs $ appFun (var "go") (map go fs)
           where
             go l | Just p <- Map.lookup l ps
-                 , _prmLocation p == Query
-                 , parameter p || isJust (p ^. defaulted)
-                             = app (var "Just") (v l)
-                 | otherwise = v l
+                 , _pLocation p == Query
+                 , parameter p || defaulted p = app (var "Just") (v l)
+                 | otherwise                  = v l
 
             ps = _mParameters m
             v  = var . fname p
@@ -138,19 +141,19 @@ requestDecl n p api url fs m =
     pats = [pvar "r", pvar "u", prec]
     prec = PRec (UnQual (dname n)) [PFieldWildcard]
 
-jsonDecls :: Id -> Pre -> Map Local Solved -> [Decl]
+jsonDecls :: Global -> Prefix -> Map Local Solved -> [Decl]
 jsonDecls n p (Map.toList -> rs) = [from, to]
   where
     from = InstDecl noLoc Nothing [] [] (unqual "FromJSON") [tycon n]
         [ funD "parseJSON" $
-            app (app (var "withObject") (str (idToText n))) $
+            app (app (var "withObject") (str (fromKey n))) $
                 lamE noLoc [pvar "o"] $
                     ctorE n (map decode rs)
         ]
 
     decode (l, s)
         | Just x <- def s = defJS l x
-        | s ^. required   = reqJS l
+        | required s      = reqJS l
         | monoid s        = defJS l (var "mempty")
         | otherwise       = optJS l
 
@@ -173,7 +176,7 @@ jsonDecls n p (Map.toList -> rs) = [from, to]
         o = var ".="
 
 wildcardD :: String
-          -> Id
+          -> Global
           -> ([Exp] -> Exp)
           -> Exp
           -> [Exp]
@@ -203,14 +206,14 @@ constD :: String -> Exp -> InstDecl
 constD f x = InsDecl $
     sfun noLoc (name f) [] (UnGuardedRhs (app (var "const") x)) noBinds
 
-ctorE :: Id -> [Exp] -> Exp
+ctorE :: Global -> [Exp] -> Exp
 ctorE n = seqE (var (dname n)) . map paren
 
 seqE :: Exp -> [Exp] -> Exp
 seqE l []     = app (var "pure") l
 seqE l (r:rs) = infixApp l "<$>" (infixE r "<*>" rs)
 
-objDecl :: Id -> Pre -> [Derive] -> Map Local Solved -> Decl
+objDecl :: Global -> Prefix -> [Derive] -> Map Local Solved -> Decl
 objDecl n p ds rs = DataDecl noLoc arity [] d [] [conDecl d p rs] (der ds)
   where
     d = dname n
@@ -220,7 +223,7 @@ objDecl n p ds rs = DataDecl noLoc arity [] d [] [conDecl d p rs] (der ds)
 
     der = map ((,[]) . unqual . drop 1 . show)
 
-conDecl :: Name -> Pre -> Map Local Solved -> QualConDecl
+conDecl :: Name -> Prefix -> Map Local Solved -> QualConDecl
 conDecl n p rs = QualConDecl noLoc [] [] body
   where
     body = case Map.toList rs of
@@ -230,13 +233,13 @@ conDecl n p rs = QualConDecl noLoc [] [] body
 
     field f (l, v) = ([fname p l], f (_type v))
 
-ctorSig :: Id -> Map Local Solved -> Decl
+ctorSig :: Global -> Map Local Solved -> Decl
 ctorSig n rs = TypeSig noLoc [cname n] ts
   where
     ts = foldr' TyFun (TyCon (UnQual (dname n))) ps
     ps = parameters (Map.elems rs)
 
-ctorDecl :: Id -> Pre -> Map Local Solved -> Decl
+ctorDecl :: Global -> Prefix -> Map Local Solved -> Decl
 ctorDecl n p rs = sfun noLoc c ps (UnGuardedRhs rhs) noBinds
   where
     c = cname n
@@ -246,24 +249,24 @@ ctorDecl n p rs = sfun noLoc c ps (UnGuardedRhs rhs) noBinds
         | otherwise   = RecConstr (UnQual d) $
             map (uncurry (fieldUpdate p)) (Map.toList rs)
 
-    ps = map (pname p) . Map.keys $ Map.filter (view required) rs
+    ps = map (pname p) . Map.keys $ Map.filter required rs
 
-fieldUpdate :: Pre -> Local -> Solved -> FieldUpdate
+fieldUpdate :: Prefix -> Local -> Solved -> FieldUpdate
 fieldUpdate p l s = FieldUpdate (UnQual (fname p l)) rhs
   where
-    rhs | s ^. required           = v
+    rhs | required s              = v
         | Just x <- def s         = x
         | Just x <- iso (_type s) = infixApp x "#" v
         | otherwise               = var (name "Nothing")
 
     v = var (pname p l)
 
-lensSig :: Id -> Pre -> Local -> Solved -> Decl
+lensSig :: Global -> Prefix -> Local -> Solved -> Decl
 lensSig n p l s = TypeSig noLoc [lname p l] $
     TyApp (TyApp (tycon "Lens'") (tycon n))
           (externalType (_type s))
 
-lensDecl :: Pre -> Local -> Solved -> Decl
+lensDecl :: Prefix -> Local -> Solved -> Decl
 lensDecl p l s = sfun noLoc (lname p l) [] (UnGuardedRhs rhs) noBinds
   where
     f = fname p l
@@ -275,18 +278,18 @@ lensDecl p l s = sfun noLoc (lname p l) [] (UnGuardedRhs rhs) noBinds
                    (RecUpdate (var "s") [FieldUpdate (UnQual f) (var "a")])))
 
 parameters :: [Solved] -> [Type]
-parameters = map (externalType . _type) . filter (view required)
+parameters = map (externalType . _type) . filter required
 
 def :: Solved -> Maybe Exp
 def s
-    | Just x <- s ^. defaulted = Just (go x (_prefix s) (_schema s))
-    | otherwise                = Nothing
+    | Just x <- s ^. iDefault = Just (go x (_prefix s) (_schema s))
+    | otherwise               = Nothing
   where
     go x p = \case
-        Enum {}     -> var (bname p x)
-        Lit  _ Bool -> lit (upperHead x)
-        Lit  _ Text -> str x
-        Lit  {}     -> lit x
+        SEnm {}     -> var (bname p x)
+        SLit _ Bool -> lit (upperHead x)
+        SLit _ Text -> str x
+        SLit {}     -> lit x
         e           -> error $ "Unsupported default value: " ++ show e
 
     lit = var . name . Text.unpack
@@ -303,7 +306,6 @@ externalType = \case
     TType   r          -> tycon r
     TMaybe  t@TList {} -> externalType t
     TMaybe  t          -> TyApp (tycon "Maybe") (externalType t)
-    TEither a b        -> TyApp (TyApp (tycon "Either") (externalType a)) (externalType b)
     TList   t          -> TyList (externalType t)
     TLit    l          -> externalLit l
 
@@ -311,7 +313,6 @@ internalType :: TType -> Type
 internalType = \case
     TType   r   -> tycon r
     TMaybe  t   -> TyApp (tycon "Maybe") (internalType t)
-    TEither a b -> TyApp (TyApp (tycon "Either") (internalType a)) (internalType b)
     TList   t   -> TyList (internalType t)
     TLit    l   -> internalLit l
 
@@ -370,8 +371,8 @@ strict = TyBang BangedTy . \case
 sing :: Text -> Type
 sing = TyCon . unqual . Text.unpack . flip mappend "\"" . mappend "\""
 
-tycon :: Id -> Type
-tycon = TyCon . unqual . Text.unpack . idToText
+tycon :: Global -> Type
+tycon = TyCon . unqual . Text.unpack . fromKey
 
 unqual :: String -> QName
 unqual = UnQual . name

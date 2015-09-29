@@ -146,7 +146,7 @@ main = do
         say ("Selected " % int % " newest models.")        i
         done
 
-        svcs <- counter "model" ss $ \Spec{..} -> do
+        counter "model" ss $ \Spec{..} -> do
             say ("Using version " % stext) _specVersion
 
             let anx = _optAnnexes </> fromText _specName <.> "json"
@@ -165,24 +165,20 @@ main = do
                     say ("Successfully parsed '" % stext % "' API definition.")
                         (_svcTitle s)
 
-                    done *> return (Just s)
+                    l <- hoistEither (runAST _optVersions s)
 
-        libs <- merge _optVersions <$>
-            traverse (hoistEither . runAST) (catMaybes svcs)
+                    say ("Creating " % stext % " package.") (_libTitle l)
 
-        void . counter "library" libs $ \l -> do
-            say ("Creating " % stext % " package.") (_libTitle l)
+                    d <- hoistEither (Tree.populate _optOutput tmpl l)
+                        >>= Tree.fold createDir (\x -> maybe (touchFile x) (writeLTFile x))
 
-            dir <- hoistEither (Tree.populate _optOutput tmpl l)
-                >>= Tree.fold createDir (\x -> maybe (touchFile x) (writeLTFile x))
+                    say ("Successfully rendered " % stext % "-" % fver % " package")
+                        (_libName l)
+                        (_libraryVersion _optVersions)
 
-            say ("Successfully rendered " % stext % "-" % fver % " package")
-                (_libName l)
-                (_libraryVersion _optVersions)
+                    copyDir _optStatic (Tree.root d)
 
-            copyDir _optStatic (Tree.root dir)
-
-            done
+                    done
 
         title ("Successfully processed " % int % " models.") i
         title ("Successfully created " % int % " library packages.") (length libs)

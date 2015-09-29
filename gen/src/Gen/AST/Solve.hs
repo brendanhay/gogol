@@ -20,6 +20,7 @@
 
 module Gen.AST.Solve
     ( solve
+    , getSolved
     ) where
 
 import           Control.Applicative
@@ -89,6 +90,7 @@ getType g = loc "getType" g $ memo typed g go
         case s of
             SAny {}        -> pure (TType "JSON")
             SRef _ r       -> getType (ref r)
+            --- FIXME: add natural/numeric manipulations
             SLit _ l       -> pure (TLit l)
             SEnm {}        -> pure (TType g)
             SArr _ (Arr e) -> TList <$> getType e
@@ -114,6 +116,7 @@ getDerive g = loc "getDerive" g $ memo derived g go
         Bool -> enum
         Time -> base
         Date -> base
+        -- FIXME: Add numeric cases
         _    -> [DNum, DIntegral, DReal] <> enum
 
     props ds x = intersect ds <$> getDerive x

@@ -22,21 +22,24 @@ executable gogol-gen
 
     other-modules:
           Gen.AST
-        -- , Gen.Formatting
-        -- , Gen.IO
-        -- , Gen.JSON
-        -- , Gen.Orphans
-        -- , Gen.Schema
-        -- , Gen.Solve
-        -- , Gen.Syntax
-        -- , Gen.Text
-        -- , Gen.TH
-        -- , Gen.Tree
-        -- , Gen.Types
-        -- , Gen.Types.Help
-        -- , Gen.Types.Id
-        -- , Gen.Types.Map
-        -- , Gen.Types.NS
+        , Gen.AST.Solve
+        , Gen.AST.Flatten
+        , Gen.AST.Render
+        , Gen.Formatting
+        , Gen.IO
+        , Gen.JSON
+        , Gen.Orphans
+        , Gen.Syntax
+        , Gen.TH
+        , Gen.Text
+        , Gen.Tree
+        , Gen.Types
+        , Gen.Types.Data
+        , Gen.Types.Help
+        , Gen.Types.Id
+        , Gen.Types.Map
+        , Gen.Types.NS
+        , Gen.Types.Schema
 
     ghc-options:       -Wall -threaded
 

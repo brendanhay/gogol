@@ -22,6 +22,7 @@ module Gen.Tree
     ) where
 
 import           Control.Error
+import           Control.Lens              ((^.))
 import           Control.Monad
 import           Control.Monad.Except
 import           Data.Aeson                hiding (json)
@@ -74,30 +75,29 @@ populate d Templates{..} l = (encodeString d :/) . dir lib <$> layout
             [ touch ".gitkeep"
             ]
 
-        , dir "gen" . concatMap service . NE.toList $ _libServices l
-
         , file (lib <.> "cabal") cabalTemplate
         , file "README.md" readmeTemplate
-        ]
 
-    service s =
-        [ mod' (tocNS   s) (tocImports  s) tocTemplate (pure svc)
-        , mod' (typesNS s) (typeImports s) typesTemplate (pure svc)
-        , mod' (prodNS  s) (prodImports s) prodTemplate  (pure svc)
-        , mod' (sumNS   s) (sumImports  s) sumTemplate   (pure svc)
-        ] ++ map action (svcActions s)
+        , dir "gen"
+            [ mod' (tocNS   l) (tocImports  l) tocTemplate   (pure env)
+            , mod' (typesNS l) (typeImports l) typesTemplate (pure env)
+            , mod' (prodNS  l) (prodImports l) prodTemplate  (pure env)
+            , mod' (sumNS   l) (sumImports  l) sumTemplate   (pure env)
+            ]
+        ] ++ map resource (_apiResources (l ^. lAPI))
+          ++ map method   (_apiMethods   (l ^. lAPI))
       where
+        resource a =
+            mod' (resourceNS a) (actionImports a) actionTemplate (action a)
+        method a =
+            mod' (methodNS   a) (actionImports a) actionTemplate (action a)
+
         action a =
-            mod' (_actNS a) (actionImports s) actionTemplate
-                . pure . Object $
-                    act <> svc'
-          where
-            Object act  = object [ "action" .= a ]
-            Object svc' = svc
+            let Object o = object ["action" .= a]
+                Object e = env
+             in pure $ Object (o <> e)
 
-        svc = toJSON s
-
-    lib = fromText (_libName l)
+    lib = fromText (l ^. sLibrary)
 
     mod' ns is t = write . module' ns is t
 
@@ -124,7 +124,7 @@ namespaced :: ToJSON a
            -> Template
            -> Either Error a
            -> DirTree (Either Error Rendered)
-namespaced (NS ns) t x =
+namespaced (unNS -> ns) t x =
     case map fromText ns of
         []  -> error "Empty namespace."
         [p] -> f p

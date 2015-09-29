@@ -33,15 +33,23 @@ import qualified Data.Text                    as Text
 import qualified Data.Text.Lazy               as LText
 import qualified Data.Text.Lazy.Builder       as Build
 import           Debug.Trace
+import           Gen.AST.Flatten              (flatten)
+import           Gen.AST.Render               (render)
+import           Gen.AST.Solve                (solve)
 import           Gen.Formatting
-import           Gen.Solve
--- import           Gen.Syntax
-import           Gen.AST.Flatten
 import           Gen.Types
 import           HIndent
 import           Language.Haskell.Exts.Build  (name)
 import           Language.Haskell.Exts.Pretty
 import           Prelude                      hiding (sum)
+
+runAST :: Versions -> Service (Fix Schema) -> Either Error Library
+runAST v s = evalState (runExceptT go) (initial s)
+  where
+    go = do
+        gs        <- flatten s
+        (api, ds) <- render =<< solve gs
+        pure $! Library v gs api ds
 
 -- flatten :: Parsed -> AST Flattened
 -- flatten svc = do
@@ -118,103 +126,6 @@ import           Prelude                      hiding (sum)
 --        x <- flatten svc
 --        reserve x
 --        solveAll x >>= render
-
--- render :: Typed -> AST Printed
--- render svc = do
---     x <- traverse typ (_svcSchemas svc)
---     y <- api (_svcApi svc)
-
---     let as  = map actionTypeName (Map.elems (_apiActions y))
---         f d = elem (dataName d) as
---         z   = trace (show as) $ filter (not . f) (catMaybes x)
-
---     return $! svc { _svcSchemas = z, _svcParameters = (), _svcApi = y }
---   where
---     typ :: Solved -> AST (Maybe Data)
---     typ Solved{..} = case _schema of
---         Arr  {}      -> pure Nothing
---         Ref  {}      -> pure Nothing
---         Any  {}      -> pure Nothing
---         Lit  {}      -> pure Nothing
---         Enum i vs ds -> pure . Just $
---             Sum (dname _ident) (i ^. description) $
---                 zipWith branch vs (ds ++ repeat mempty)
---           where
---             branch v = Branch (bname _prefix v) v
-
---         Obj i rs -> fmap Just $
---             prod _ident _prefix i _deriving
---                 =<< traverse solve rs
-
---     prod :: Id -> Pre -> Info -> [Derive] -> Map Local Solved -> AST Data
---     prod k p i ds ts = Prod (dname k) (i ^. description)
---         <$> pp Indent (objDecl k p ds ts)
---         <*> ctor
---         <*> traverse lens (Map.toList ts)
---         <*> traverse (pp Print) (jsonDecls k p ts)
---       where
---         ctor = Fun' (cname k) (Just help)
---             <$> (pp None   (ctorSig  k   ts) <&> comments ts)
---             <*>  pp Indent (ctorDecl k p ts)
-
---         lens (l, v) = Fun' (lname p l) (v ^. description)
---             <$> pp None  (lensSig k p l v)
---             <*> pp Print (lensDecl  p l v)
-
---         help = rawHelpText $
---             sformat ("Creates a value of '" % fid %
---                      "' with the minimum fields required to make a request.\n")
---                      k
-
---     api :: Resource Solved -> AST API
---     api x = do
---         as <- Map.fromList <$> top x
---         API n <$> pp Print (apiAlias n (Map.keys as))
---               <*> pure as
---               <*> url
---       where
---         n  = name (Text.unpack (svcAbbrev svc))
---         un = name (Text.unpack (svcURL    svc))
-
---         url = Fun' un (Just (rawHelpText h))
---             <$> pp None (urlSig un)
---             <*> pp Print url
---           where
---             url | "http://" `Text.isPrefixOf` u = urlDecl un "Http"  u 80
---                 | otherwise                     = urlDecl un "Https" u 443
-
---             u = _svcBaseUrl svc
-
---             h = sformat ("URL referring to version @" % stext %
---                          "@ of the " % stext % ".")
---                          (_svcVersion svc) (_svcTitle svc)
-
---         top = \case
---            Top rs -> traverse (uncurry sub)  (Map.toList rs) <&> concat
---            Sub ms -> traverse (uncurry verb) (Map.toList ms)
-
---         sub l = \case
---             Top rs -> traverse (uncurry sub)  (Map.toList rs) <&> concat
---             Sub ms -> traverse (uncurry verb) (Map.toList ms)
-
---         verb l m = do
---             let (k, i, ns) = vname (svcAbbrev svc) (_mId m)
---             s      <- solve i
---             Just d <- typ s
---             fmap (k,) $
---                 Action k (_mId m) (actionNS ns) (_mDescription m)
---                     <$> pp Print (verbAlias k m)
---                     <*> reset k m s d
-
---         reset k m s = \case
---             d@Sum {}           -> pure d
---             Prod n' h r c ls _ ->
---                 Prod n' h r c ls . (:[]) <$> pp Print
---                     (requestDecl (_ident s) (_prefix s) k un (fields (_schema s)) m)
-
---         fields  = \case
---             Obj _ rs -> Map.keys rs
---             _        -> mempty
 
 -- solveAll :: Flattened -> AST Typed
 -- solveAll svc = do

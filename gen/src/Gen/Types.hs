@@ -140,15 +140,15 @@ data Templates = Templates
     }
 
 tocImports, typeImports, prodImports, sumImports, actionImports
- :: Service a -> [NS]
+ :: HasService a b => a -> [NS]
 tocImports    _ = [preludeNS]
 typeImports   s = sort [preludeNS, prodNS s, sumNS s]
 prodImports   s = sort [preludeNS, sumNS s]
 sumImports    _ = [preludeNS]
 actionImports s = sort [preludeNS, typesNS s]
 
-tocNS, typesNS, prodNS, sumNS :: Service a -> NS
-tocNS   = mappend "Network.Google" . mkNS . _sCanonicalName
+tocNS, typesNS, prodNS, sumNS :: HasService a b => a -> NS
+tocNS   = mappend "Network.Google" . mkNS . view sCanonicalName
 typesNS = (<> "Types")   . tocNS
 prodNS  = (<> "Product") . typesNS
 sumNS   = (<> "Sum")     . typesNS
@@ -171,9 +171,8 @@ toTextIgnore = either id id . Path.toText
 data Library = Library
     { _lVersions :: Versions
     , _lService  :: Service Global
-    -- , _lMethods   ::
-    -- , _lResources :: []
-    -- , _lSchemas   :: [Data]
+    , _lAPI      :: API
+    , _lSchemas  :: [Data]
     }
 
 makeLenses ''Library
@@ -198,16 +197,6 @@ instance ToJSON Library where
         --  , "exposedModules"      .= concatMap exposedModules (NE.toList _libServices)
         -- , "otherModules"        .= concatMap otherModules   (NE.toList _libServices)
         ]
-
--- data Service = Service
---     { _sLibrary       :: Text
---     , _sCanonicalName :: Text
---     , _sOwnerName     :: Text
---     , _sOwnerDomain   :: Text
---     , _sPackagePath   :: Maybe Text
---     , _sDescription   :: Description
---     } deriving (Eq, Show)
-
 
 data TType
     = TType  Global

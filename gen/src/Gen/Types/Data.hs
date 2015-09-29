@@ -52,6 +52,7 @@ import           Gen.Text
 import           Gen.TH
 import           Gen.Types.Help
 import           Gen.Types.Id
+import           Gen.Types.Map
 import           Gen.Types.NS
 import           GHC.Generics
 import           GHC.TypeLits
@@ -117,12 +118,12 @@ dataName = \case
     Prod n _ _ _ _ _ -> n
 
 data Action = Action
-    { _actName       :: Name
-    , _actPrettyName :: Text
-    , _actNS         :: NS
-    , _actHelp       :: Maybe Help
-    , _actAlias      :: Rendered
-    , _actData       :: Data
+    { _actId        :: Global
+    , _actNamespace :: NS
+    , _actHelp      :: Maybe Help
+    , _actAliasName :: Name
+    , _actAlias     :: Rendered
+    , _actData      :: Data
     }
 
 actionTypeName :: Action -> Name
@@ -130,25 +131,36 @@ actionTypeName = dataName . _actData
 
 instance ToJSON Action where
     toJSON Action {..} = object
-        [ "name"       .= Syn _actName
-        , "prettyName" .= _actPrettyName
-        , "ns"         .= _actNS
-        , "help"       .= _actHelp
-        , "alias"      .= _actAlias
-        , "type"       .= _actData
+        [ "id"        .= _actId
+        , "ns"        .= _actNamespace
+        , "help"      .= _actHelp
+        , "aliasName" .= Syn _actAliasName
+        , "alias"     .= _actAlias
+        , "type"      .= _actData
         ]
 
--- data API = API
---     { _apiName    :: Name
---     , _apiDecl    :: Rendered
---     , _apiActions :: Map Name Action
---     , _apiURL     :: Fun
---     }
+data API = API
+    { _apiAliasName :: Name
+    , _apiAlias     :: Rendered
+    , _apiResources :: [Action]
+    , _apiMethods   :: [Action]
+    , _apiURL       :: Fun
+    }
 
--- instance ToJSON API where
---     toJSON API {..} = object
---          [ "name"    .= Syn _apiName
---          , "decl"    .= _apiDecl
---          , "actions" .= sortOn _actName (Map.elems _apiActions)
---          , "url"     .= _apiURL
---          ]
+instance ToJSON API where
+    toJSON API {..} = object
+         [ "aliasName" .= Syn _apiAliasName
+         , "alias"     .= _apiAlias
+         , "resources" .= sortOn _actId _apiResources
+         , "methods"   .= sortOn _actId _apiMethods
+         , "url"       .= _apiURL
+         ]
+
+-- apiResourceNames, apiMethodNames :: API -> [Name]
+-- apiResourceNames = map (dataName . _actData) . _apiResources
+-- apiMethodNames   = map (dataName . _actData) . _apiMethods
+
+resourceNS, methodNS :: Action -> NS
+resourceNS = mappend "Network.Google.Resource" . _actNS
+methodNS   = mappend "Network.Google.Method"   . _actNS
+

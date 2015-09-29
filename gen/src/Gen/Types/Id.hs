@@ -12,14 +12,31 @@
 -- Portability : non-portable (GHC extensions)
 
 module Gen.Types.Id
-    ( Prefix (..)
+    (
+    -- * Property Prefixes
+      Prefix (..)
+
+    -- * Unique Identifiers
     , Global
-    , global
     , Local
+
+    , global
     , local
+
     , gid
     , lid
+
     , reference
+
+    -- * Naming
+    , aname
+    , mname
+    , dname
+    , cname
+    , bname
+    , fname
+    , lname
+    , pname
     ) where
 
 import           Control.Applicative
@@ -48,10 +65,28 @@ import           Formatting
 import           Gen.Orphans                  ()
 import           Gen.Text
 import           Gen.Types.Map
-import           GHC.Generics
+import           GHC.Generics                 (Generic)
 import           Language.Haskell.Exts.Build
 import           Language.Haskell.Exts.Pretty (prettyPrint)
 import           Language.Haskell.Exts.Syntax (Name)
+
+aname :: Text -> Name
+aname = name . Text.unpack . mappend "API" . upperHead . Text.replace "." ""
+
+mname :: Text -> Global -> (Name, Global, Text)
+mname abrv g =
+    ( name   (Text.unpack n <> "API") -- Action service type alias.
+    , Global (n <> "'")               -- Action data type.
+    , Text.intercalate "." ns         -- Action namespace.
+    )
+  where
+    n = mconcat (drop 1 ns)
+
+    ns | CI.mk e == CI.mk x = e:xs
+       | otherwise          = x:xs
+      where
+        e    = Text.replace "." "" abrv
+        x:xs = map (upperAcronym . upperHead) $ Text.split (== '.') (global g)
 
 -- vname :: Text -> Text -> (Name, Id, [Text])
 -- vname abrv r = (dname (g (n <> "API")), g (n <> "'"), ns)
@@ -65,33 +100,32 @@ import           Language.Haskell.Exts.Syntax (Name)
 --         e    = Text.replace "." "" abrv
 --         x:xs = map (upperAcronym . upperHead) $ Text.split (== '.') r
 
--- dname, cname :: Id -> Name
--- dname = name . Text.unpack . upperHead . idToText
--- cname = name . Text.unpack . renameReserved . lowerHead . idToText
+dname, cname :: Global -> Name
+dname = name . Text.unpack . upperHead . global
+cname = name . Text.unpack . renameReserved . lowerHead . global
 
--- bname :: Pre -> Text -> Name
--- bname (Pre p) = name
---     . Text.unpack
---     . mappend (Text.toUpper p)
---     . renameBranch
+bname :: Prefix -> Text -> Name
+bname (Prefix p) = name
+    . Text.unpack
+    . mappend (Text.toUpper p)
+    . renameBranch
 
--- fname, lname, pname :: Pre -> Local -> Name
--- fname = pre (Text.cons '_' . renameField)
--- lname = pre renameField
--- pname = pre (flip Text.snoc '_' . Text.cons 'p' . upperHead . renameField)
+fname, lname, pname :: Prefix -> Local -> Name
+fname = pre (Text.cons '_' . renameField)
+lname = pre renameField
+pname = pre (flip Text.snoc '_' . Text.cons 'p' . upperHead . renameField)
 
 -- apretty :: Local -> Local -> Text
 -- apretty p l = upperHead (local l) <> " " <> upperHead (local p)
 
--- pre :: (Text -> Text) -> Pre -> Local -> Name
--- pre f (Pre p) = name . Text.unpack . f . mappend p . upperHead . local
+pre :: (Text -> Text) -> Prefix -> Local -> Name
+pre f (Prefix p) = name . Text.unpack . f . mappend p . upperHead . local
 
 newtype Prefix = Prefix Text
     deriving (Show, Monoid)
 
-
 newtype Global = Global { global :: Text }
-    deriving (Eq, Show, Generic, Hashable, FromJSON, ToJSON, IsString)
+    deriving (Eq, Ord, Show, Generic, Hashable, FromJSON, ToJSON, IsString)
 
 instance TextKey Global where
     toKey   = Global
@@ -101,7 +135,7 @@ gid :: Format a (Global -> a)
 gid = later (Build.fromText . global)
 
 newtype Local = Local { local :: Text }
-    deriving (Eq, Show, Generic, Hashable, FromJSON, ToJSON, IsString)
+    deriving (Eq, Ord, Show, Generic, Hashable, FromJSON, ToJSON, IsString)
 
 instance TextKey Local where
     toKey   = Local

@@ -10,6 +10,7 @@
 module Gen.Types.NS
     ( NS
     , mkNS
+    , unNS
     ) where
 
 import           Data.Aeson
@@ -23,7 +24,7 @@ import qualified Data.Text                 as Text
 import qualified Filesystem.Path.CurrentOS as Path
 import           Gen.Text
 
-newtype NS = NS [Text]
+newtype NS = NS { unNS :: [Text] }
     deriving (Eq, Ord, Show)
 
 mkNS :: Text -> NS

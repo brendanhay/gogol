@@ -177,6 +177,7 @@ data Lit
     | UInt64
     | Int32
     | Int64
+    | Nat
     | Date
     | Time
       deriving (Eq, Show)
@@ -265,7 +266,7 @@ data Method a = Method
     { _mId                    :: Global
     , _mPath                  :: Text
     , _mHttpMethod            :: Text
-    , _mDescription           :: Help
+    , _mDescription           :: Maybe Help
     , _mParameters            :: Map Local (Param a)
     , _mParameterOrder        :: [Local]
     , _mRequest               :: Maybe Ref
