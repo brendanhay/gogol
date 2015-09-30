@@ -403,7 +403,7 @@ makeClassy ''Service
 
 instance FromJSON a => FromJSON (Service a) where
     parseJSON = withObject "service" $ \o -> Service
-        <$>  o .:  "library"
+        <$> (o .:  "library"       <&> renameLibrary)
         <*> (o .:  "canonicalName" <&> upperHead . renameAbbrev)
         <*>  o .:  "ownerName"
         <*>  o .:  "ownerDomain"
