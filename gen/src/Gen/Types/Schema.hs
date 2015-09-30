@@ -254,17 +254,17 @@ instance HasInfo a => HasInfo (Param a) where
 
 data MediaUpload = MediaUpload
     { _muAccept        :: [Text]
-    , _muMaxSize       :: Text
+    , _muMaxSize       :: Maybe Text
     , _muResumablePath :: Text
     , _muSimplePath    :: Text
     } deriving (Eq, Show)
 
 instance FromJSON MediaUpload where
     parseJSON = withObject "mediaUpload" $ \o -> MediaUpload
-         <$>  o .: "accept"
-         <*>  o .: "maxSize"
-         <*> (o .: "protocols" >>= (.: "resumable") >>= (.: "path"))
-         <*> (o .: "protocols" >>= (.: "simple")    >>= (.: "path"))
+         <$>  o .:  "accept"
+         <*>  o .:? "maxSize"
+         <*> (o .:  "protocols" >>= (.: "resumable") >>= (.: "path"))
+         <*> (o .:  "protocols" >>= (.: "simple")    >>= (.: "path"))
 
 data Method a = Method
     { _mId                    :: Global
@@ -344,7 +344,7 @@ data Description a = Description
     , _dId                :: Text
     , _dName              :: Text
     , _dVersion           :: Text
-    , _dRevision          :: Text
+    , _dRevision          :: Maybe Text
     , _dTitle             :: Text
     , _dDescription       :: Help
     , _dIcons             :: Map Text Text
@@ -372,7 +372,7 @@ instance FromJSON a => FromJSON (Description a) where
         <*> o .:  "id"
         <*> o .:  "name"
         <*> o .:  "version"
-        <*> o .:  "revision"
+        <*> o .:? "revision"
         <*> o .:  "title"
         <*> o .:  "description"
         <*> o .:  "icons"

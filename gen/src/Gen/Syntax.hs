@@ -80,9 +80,9 @@ verbAlias n m = TypeDecl noLoc n [] alias
            let t = terminalType (_type (_pParam x))
                n = sing (local k)
             in case _pLocation x of
-                Query -> Just $ TyApp (TyApp (tycon "QueryParam") n) t
                 Query | x ^. iRepeated
                       -> Just $ TyApp (TyApp (tycon "QueryParams") n) t
+                Query -> Just $ TyApp (TyApp (tycon "QueryParam")  n) t
                 Path  -> Nothing
 
     params = _mParameters m

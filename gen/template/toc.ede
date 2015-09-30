@@ -11,15 +11,22 @@
 -- /See:/ <{{ documentationLink }} {{ title }} Reference>
 module {{ moduleName }}
     (
-    -- * REST Resources
-
-    -- ** {{ title }}
+    -- * API
       {{ api.aliasName }}
     , {{ api.aliasProxy }}
     , {{ api.url.name }}
+
+    -- * Service Methods
   {% for action in api.methods %}
 
-    -- ** {{ action.value.prettyName }}
+    -- ** {{ action.value.id }}
+    , module {{ action.value.ns }}
+  {% endfor %}
+
+    -- * REST Resources
+  {% for action in api.resources %}
+
+    -- ** {{ action.value.id }}
     , module {{ action.value.ns }}
   {% endfor %}
 
